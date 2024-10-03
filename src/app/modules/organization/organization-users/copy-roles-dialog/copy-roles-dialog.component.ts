@@ -38,7 +38,6 @@ export class CopyRolesDialogComponent {
     this.dispatchAssignUserCopiedRoles('it-system');
     this.dispatchAssignUserCopiedRoles('it-contract');
     this.dispatchAssignUserCopiedRoles('data-processing-registration');
-
   }
 
   private buttonNumberText(): string {

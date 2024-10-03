@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { APIUpdateUserRequestDTO, APIUserResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
@@ -17,6 +17,7 @@ import { StartPreferenceChoice, startPreferenceChoiceOptions } from 'src/app/sha
 import { mapUserRoleChoice, UserRoleChoice, userRoleChoiceOptions } from 'src/app/shared/models/organization/organization-user/user-role.model';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
 import { OrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
+import { CopyRolesDialogComponent } from '../copy-roles-dialog/copy-roles-dialog.component';
 
 @Component({
   selector: 'app-edit-user-dialog',
@@ -60,7 +61,8 @@ export class EditUserDialogComponent extends BaseComponent implements OnInit, Af
   constructor(
     private store: Store,
     private dialogRef: MatDialogRef<EditUserDialogComponent>,
-    private componentStore: CreateUserDialogComponentStore
+    private componentStore: CreateUserDialogComponentStore,
+    private dialog: MatDialog
   ) {
     super();
   }
@@ -130,7 +132,10 @@ export class EditUserDialogComponent extends BaseComponent implements OnInit, Af
     this.selectedRoles = [];
   }
 
-  public onCopyRoles(): void {}
+  public onCopyRoles(): void {
+    const dialogRef = this.dialog.open(CopyRolesDialogComponent, {width: '50%'});
+    dialogRef.componentInstance.user = this.user;
+  }
 
   private hasAnythingChanged(): boolean {
     return (
