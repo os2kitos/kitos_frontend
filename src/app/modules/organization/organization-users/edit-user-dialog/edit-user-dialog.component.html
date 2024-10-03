@@ -119,7 +119,7 @@
         <app-button
           type="submit"
           i18n
-          [disabled]="!isFormValid() || (isLoading$ | async) === true ||  ((alreadyExists$ | async) === true)"
+          [disabled]="!isFormValid() || (isLoading$ | async) === true ||  (alreadyExists$ | async) === true"
           data-cy="save-button"
         >
           Gem ændringer

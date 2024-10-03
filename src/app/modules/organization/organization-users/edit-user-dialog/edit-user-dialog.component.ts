@@ -96,7 +96,7 @@ export class EditUserDialogComponent extends BaseComponent implements OnInit, Af
 
     this.subscriptions.add(
       this.alreadyExists$.subscribe((alreadyExists) => {
-        if (alreadyExists && !this.isOriginalEmail()) {
+        if (alreadyExists) {
           this.getEmailControl()?.setErrors({ alreadyExists: true });
         } else {
           this.getEmailControl()?.setErrors(null);
@@ -143,7 +143,7 @@ export class EditUserDialogComponent extends BaseComponent implements OnInit, Af
 
   private hasAnythingChanged(): boolean {
     return (
-      !this.isOriginalEmail() ||
+      this.user.Email !== this.createForm.value.email ||
       this.user.FirstName !== this.createForm.value.firstName ||
       this.user.LastName !== this.createForm.value.lastName ||
       this.user.PhoneNumber !== this.createForm.value.phoneNumber ||
@@ -163,7 +163,9 @@ export class EditUserDialogComponent extends BaseComponent implements OnInit, Af
       firstName: this.requestValue(user.FirstName, formValue.firstName),
       lastName: this.requestValue(user.LastName, formValue.lastName),
       phoneNumber: this.requestValue(user.PhoneNumber, formValue.phoneNumber),
-      defaultUserStartPreference: this.requestValue(user.DefaultStartPreference, formValue.defaultStartPreference)?.value ?? APIUserResponseDTO.DefaultUserStartPreferenceEnum.StartSite,
+      defaultUserStartPreference:
+        this.requestValue(user.DefaultStartPreference, formValue.defaultStartPreference)?.value ??
+        APIUserResponseDTO.DefaultUserStartPreferenceEnum.StartSite,
       hasApiAccess: this.requestValue(user.HasApiAccess, formValue.hasApiAccess),
       hasStakeHolderAccess: this.requestValue(user.HasStakeHolderAccess, formValue.hasStakeholderAccess),
       roles: this.getRoleRequest(),
@@ -218,10 +220,6 @@ export class EditUserDialogComponent extends BaseComponent implements OnInit, Af
       roles.push(APIUserResponseDTO.RolesEnum.ContractModuleAdmin);
     }
     return roles;
-  }
-
-  public isOriginalEmail(): boolean {
-    return this.user.Email === this.createForm.value.email;
   }
 
   private requestValue<T>(valueBefore: T, formValue: T | undefined | null) {

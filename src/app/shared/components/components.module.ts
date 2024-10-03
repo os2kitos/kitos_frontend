@@ -139,7 +139,6 @@ import { RoleRowComponent } from './role-table/role-row/role-row.component';
 import { RoleTableContainerComponent } from './role-table/role-table-container/role-table-container.component';
 import { SlideToggleComponent } from './slide-toggle/slide-toggle.component';
 import { VerticalContentGridSectionMarginLeftComponent } from './vertical-content-grid-section-margin-left/vertical-content-grid-section-margin-left.component';
-import { DialogFooterComponent } from './dialogs/dialog-footer/dialog-footer.component';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
@@ -251,7 +250,6 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     SlideToggleComponent,
     VerticalContentGridSectionMarginLeftComponent,
     MultiSelectDropdownComponent,
-    DialogFooterComponent,
   ],
   imports: [
     CommonModule,
@@ -376,7 +374,6 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     SlideToggleComponent,
     VerticalContentGridSectionMarginLeftComponent,
     MultiSelectDropdownComponent,
-    DialogFooterComponent,
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },
