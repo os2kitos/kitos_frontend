@@ -1600,9 +1600,6 @@
       <trans-unit id="3258653202717929876" datatype="html">
         <source>Bemærkning</source>
       </trans-unit>
-      <trans-unit id="712277955114054271" datatype="html">
-        <source>Eksporter</source>
-      </trans-unit>
       <trans-unit id="9123057313353242304" datatype="html">
         <source>Aktiv</source>
       </trans-unit>
@@ -2619,14 +2616,8 @@
       <trans-unit id="4855557478475074835" datatype="html">
         <source>IT Systemer i <x id="INTERPOLATION" equiv-text="{{ organizationName$ | async }}"/></source>
       </trans-unit>
-      <trans-unit id="6309617208533698803" datatype="html">
-        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon/&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon/&gt;"/>Eksporter alle kolonner </source>
-      </trans-unit>
-      <trans-unit id="948657358778361709" datatype="html">
-        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon/&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon/&gt;"/>Eksporter viste kolonner </source>
-      </trans-unit>
-      <trans-unit id="8788430039871490844" datatype="html">
-        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon/&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon/&gt;"/>Eksporter GDPR data </source>
+      <trans-unit id="1268401558401369013" datatype="html">
+        <source>IT Systemer Overblik</source>
       </trans-unit>
       <trans-unit id="8601760574751781265" datatype="html">
         <source>Status (Datofelter)</source>
@@ -2645,6 +2636,9 @@
       </trans-unit>
       <trans-unit id="6191476874138349062" datatype="html">
         <source>IT-System (UUID)</source>
+      </trans-unit>
+      <trans-unit id="5054311168168652363" datatype="html">
+        <source>IT-System (Beskrivelse)</source>
       </trans-unit>
       <trans-unit id="838733850708550443" datatype="html">
         <source>IT-System (Externt UUID)</source>
@@ -2709,6 +2703,15 @@
       <trans-unit id="4526685905682532423" datatype="html">
         <source>Du er medlem er flere organisationer. Vælg, hvilken en du vil arbejde i.</source>
       </trans-unit>
+      <trans-unit id="5510228635515896374" datatype="html">
+        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="p-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="Organisation"/>Organisation</source>
+      </trans-unit>
+      <trans-unit id="800014879078475227" datatype="html">
+        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="p-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="Brugere&lt;/app"/>Brugere</source>
+      </trans-unit>
+      <trans-unit id="108387984164408541" datatype="html">
+        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="p-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="Stamdata&lt;/ap"/>Stamdata</source>
+      </trans-unit>
       <trans-unit id="8596039564721896625" datatype="html">
         <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="p-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="IT Systemer&lt;"/>IT Systemer</source>
       </trans-unit>
@@ -2727,6 +2730,302 @@
       <trans-unit id="2143029134840359932" datatype="html">
         <source>Log ud<x id="START_TAG_APP_LOGOUT_ICON" ctype="x-app_logout_icon" equiv-text="&lt;app-logout-icon&gt;"/><x id="CLOSE_TAG_APP_LOGOUT_ICON" ctype="x-app_logout_icon" equiv-text="&lt;/span&gt;"/></source>
       </trans-unit>
+      <trans-unit id="825020981428555403" datatype="html">
+        <source>Opret ny underenhed</source>
+      </trans-unit>
+      <trans-unit id="3383157961918196079" datatype="html">
+        <source>Overordnet enhed</source>
+      </trans-unit>
+      <trans-unit id="9132598244040040719" datatype="html">
+        <source>Enhedens navn</source>
+      </trans-unit>
+      <trans-unit id="320823005115017819" datatype="html">
+        <source>EAN number</source>
+      </trans-unit>
+      <trans-unit id="6606907754743001386" datatype="html">
+        <source>Enhed ID</source>
+      </trans-unit>
+      <trans-unit id="1395476691237055486" datatype="html">
+        <source> Fortryd </source>
+      </trans-unit>
+      <trans-unit id="818077246972230056" datatype="html">
+        <source> Opret ny underenhed </source>
+      </trans-unit>
+      <trans-unit id="3964493774889771792" datatype="html">
+        <source>Information om enhed</source>
+      </trans-unit>
+      <trans-unit id="3387874693611076854" datatype="html">
+        <source>EAN nummer</source>
+      </trans-unit>
+      <trans-unit id="3001899515794448090" datatype="html">
+        <source>Enhedens ID</source>
+      </trans-unit>
+      <trans-unit id="632103606091111231" datatype="html">
+        <source>Registeringer for: <x id="INTERPOLATION" equiv-text="{{ unit.name }}"/></source>
+      </trans-unit>
+      <trans-unit id="3515401894009736780" datatype="html">
+        <source>Overfør til</source>
+      </trans-unit>
+      <trans-unit id="7030018888494298262" datatype="html">
+        <source>Vælg handling for valgte registreringer (<x id="INTERPOLATION" equiv-text="{{ numberOfRegistrations }}"/>)</source>
+      </trans-unit>
+      <trans-unit id="6785063780714540534" datatype="html">
+        <source>Slet</source>
+      </trans-unit>
+      <trans-unit id="2767338986457935740" datatype="html">
+        <source>Overfør</source>
+      </trans-unit>
+      <trans-unit id="7556694929562495921" datatype="html">
+        <source><x id="START_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="p-trashcan-icon&gt;"/><x id="CLOSE_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="Slet enhed&lt;"/> Slet enhed</source>
+      </trans-unit>
+      <trans-unit id="2372596861861123396" datatype="html">
+        <source>Fravælg alle</source>
+      </trans-unit>
+      <trans-unit id="6036315295879423841" datatype="html">
+        <source>Vælg alle</source>
+      </trans-unit>
+      <trans-unit id="3406620436560507395" datatype="html">
+        <source>Du skal vælge en ny organisationsenhed for at kunne overføre</source>
+      </trans-unit>
+      <trans-unit id="1572092797001437754" datatype="html">
+        <source>Ingen overordnet enhed</source>
+      </trans-unit>
+      <trans-unit id="1232472189203379610" datatype="html">
+        <source>Du kan ikke ændre overordnet organisationsenhed for <x id="PH" equiv-text="unitName"/></source>
+      </trans-unit>
+      <trans-unit id="3128755877990643230" datatype="html">
+        <source>Der kan kun vælges blandt de organisationsenheder, som er indenfor samme organisation, og som ikke er en underenhed til <x id="PH" equiv-text="unitName"/>.</source>
+      </trans-unit>
+      <trans-unit id="7438480580830548387" datatype="html">
+        <source>Denne handling kan ikke fortrydes.</source>
+      </trans-unit>
+      <trans-unit id="3553013084786305483" datatype="html">
+        <source>Vil du slette de valgte registreringer?</source>
+      </trans-unit>
+      <trans-unit id="6076065667251368966" datatype="html">
+        <source>Vil du overføre de valgte registreringer?</source>
+      </trans-unit>
+      <trans-unit id="1119180877360349321" datatype="html">
+        <source>Er du sikker på at du vil slette denne enhed?</source>
+      </trans-unit>
+      <trans-unit id="8605390030539679842" datatype="html">
+        <source>Slet enhed</source>
+      </trans-unit>
+      <trans-unit id="8358166767295516793" datatype="html">
+        <source>Roller</source>
+      </trans-unit>
+      <trans-unit id="6256762269565740405" datatype="html">
+        <source>Rolle</source>
+      </trans-unit>
+      <trans-unit id="2304073231957718625" datatype="html">
+        <source>Kontrakter (ansvarlig organisationsenhed)</source>
+      </trans-unit>
+      <trans-unit id="9047662541476263934" datatype="html">
+        <source>Kontraktnavn</source>
+      </trans-unit>
+      <trans-unit id="2039747355681584340" datatype="html">
+        <source>Interne betalinger</source>
+      </trans-unit>
+      <trans-unit id="8883503082474356898" datatype="html">
+        <source>Eksterne betalinger</source>
+      </trans-unit>
+      <trans-unit id="8782857914269438568" datatype="html">
+        <source>System (relevant organisationsenhed)</source>
+      </trans-unit>
+      <trans-unit id="6798278230749864927" datatype="html">
+        <source>System (ansvarlig organisationsenhed)</source>
+      </trans-unit>
+      <trans-unit id="4715041368345276378" datatype="html">
+        <source>Vil du slette denne registrering?</source>
+      </trans-unit>
+      <trans-unit id="6410467948610503551" datatype="html">
+        <source>Index</source>
+      </trans-unit>
+      <trans-unit id="6471553254900199970" datatype="html">
+        <source>Betaling (Anskaffelse, Drift, Andet)</source>
+      </trans-unit>
+      <trans-unit id="3255396157655299314" datatype="html">
+        <source>Bruger</source>
+      </trans-unit>
+      <trans-unit id="7717331771274100514" datatype="html">
+        <source>Organisationslag</source>
+      </trans-unit>
+      <trans-unit id="6424209025137180437" datatype="html">
+        <source><x id="START_TAG_APP_PLUS_ICON_BLUE" ctype="x-app_plus_icon_blue" equiv-text="p-plus-icon-blue&gt;"/><x id="CLOSE_TAG_APP_PLUS_ICON_BLUE" ctype="x-app_plus_icon_blue" equiv-text="Opret ny en"/> Opret ny enhed</source>
+      </trans-unit>
+      <trans-unit id="7936314073802514656" datatype="html">
+        <source><x id="START_TAG_APP_REORDER_ICON" ctype="x-app_reorder_icon" equiv-text="p-reorder-icon&gt;"/><x id="CLOSE_TAG_APP_REORDER_ICON" ctype="x-app_reorder_icon" equiv-text="Omstrukture"/> Omstrukturer</source>
+      </trans-unit>
+      <trans-unit id="5819900845775888830" datatype="html">
+        <source>Færdig</source>
+      </trans-unit>
+      <trans-unit id="1284113808164544433" datatype="html">
+        <source><x id="START_TAG_APP_KITOS_UNIT_COLOR_ICON" ctype="x-app_kitos_unit_color_icon" equiv-text="p-kitos-unit-color-icon&gt;"/><x id="CLOSE_TAG_APP_KITOS_UNIT_COLOR_ICON" ctype="x-app_kitos_unit_color_icon" equiv-text="Enheder opr"/> Enheder oprettet i Kitos</source>
+      </trans-unit>
+      <trans-unit id="1059246033392151913" datatype="html">
+        <source><x id="START_TAG_APP_FK_ORG_COLOR_ICON" ctype="x-app_fk_org_color_icon" equiv-text="p-fk-org-color-icon&gt;"/><x id="CLOSE_TAG_APP_FK_ORG_COLOR_ICON" ctype="x-app_fk_org_color_icon" equiv-text="Enheder syn"/> Enheder synkroniseret fra FK Organisation</source>
+      </trans-unit>
+      <trans-unit id="5737202760044458805" datatype="html">
+        <source> Tilføj brugere fra underenheder </source>
+      </trans-unit>
+      <trans-unit id="1096790971195540722" datatype="html">
+        <source>Rediger enhed</source>
+      </trans-unit>
+      <trans-unit id="827531725377068950" datatype="html">
+        <source>Skriv</source>
+      </trans-unit>
+      <trans-unit id="2386645532307971092" datatype="html">
+        <source>Opret bruger</source>
+      </trans-unit>
+      <trans-unit id="7995739610137168405" datatype="html">
+        <source>Fornavn*</source>
+      </trans-unit>
+      <trans-unit id="5397839397044195784" datatype="html">
+        <source>Efternavn*</source>
+      </trans-unit>
+      <trans-unit id="8965295525971605718" datatype="html">
+        <source>Email*</source>
+      </trans-unit>
+      <trans-unit id="6379496749712928831" datatype="html">
+        <source>Brugeren er allerede tilknyttet.</source>
+      </trans-unit>
+      <trans-unit id="7299188518201836340" datatype="html">
+        <source>Gentag email*</source>
+      </trans-unit>
+      <trans-unit id="858866300592183763" datatype="html">
+        <source>Telefonnumer</source>
+      </trans-unit>
+      <trans-unit id="9193480723158679191" datatype="html">
+        <source>Primær startenhed</source>
+      </trans-unit>
+      <trans-unit id="2223233384489817608" datatype="html">
+        <source>Send advis om oprettelse</source>
+      </trans-unit>
+      <trans-unit id="5147830388862104785" datatype="html">
+        <source>Særlige roller i organisationen</source>
+      </trans-unit>
+      <trans-unit id="6519933616329762674" datatype="html">
+        <source>Rettighedshaveradgang</source>
+      </trans-unit>
+      <trans-unit id="4959897538098495651" datatype="html">
+        <source>Tværgående rettigheder</source>
+      </trans-unit>
+      <trans-unit id="3826131358190061018" datatype="html">
+        <source>API bruger</source>
+      </trans-unit>
+      <trans-unit id="693111060748862878" datatype="html">
+        <source>Interessentadgang</source>
+      </trans-unit>
+      <trans-unit id="4182570784522399250" datatype="html">
+        <source>Rediger</source>
+      </trans-unit>
+      <trans-unit id="813592076804514500" datatype="html">
+        <source>Fornavn</source>
+      </trans-unit>
+      <trans-unit id="2396066533115954409" datatype="html">
+        <source>Efternavn</source>
+      </trans-unit>
+      <trans-unit id="4065907829551272835" datatype="html">
+        <source>Denne email er allerede i brug.</source>
+      </trans-unit>
+      <trans-unit id="681866609203884162" datatype="html">
+        <source>Telefonnummer</source>
+      </trans-unit>
+      <trans-unit id="5394176691433392436" datatype="html">
+        <source>Kopier roller til anden bruger</source>
+      </trans-unit>
+      <trans-unit id="4827595865645899279" datatype="html">
+        <source> Særlige roller i organisationen </source>
+      </trans-unit>
+      <trans-unit id="1908352180996777133" datatype="html">
+        <source> Tværgående rettigheder </source>
+      </trans-unit>
+      <trans-unit id="6095931369142910868" datatype="html">
+        <source>API Bruger</source>
+      </trans-unit>
+      <trans-unit id="2033915976638075036" datatype="html">
+        <source> Aktiverer udstedelse af KITOS Tokens. Bemærk: Adgang til KITOS brugerflade deaktiveres. </source>
+      </trans-unit>
+      <trans-unit id="3274684899429726343" datatype="html">
+        <source>Interressantadgang</source>
+      </trans-unit>
+      <trans-unit id="6162424779800533187" datatype="html">
+        <source> Kopier roller </source>
+      </trans-unit>
+      <trans-unit id="6176961388555628918" datatype="html">
+        <source> Gem ændringer </source>
+      </trans-unit>
+      <trans-unit id="5196182293976445965" datatype="html">
+        <source>Brugere</source>
+      </trans-unit>
+      <trans-unit id="4682105837825490873" datatype="html">
+        <source><x id="START_TAG_APP_PLUS_ICON" ctype="x-app_plus_icon" equiv-text="p-plus-icon&gt;"/><x id="CLOSE_TAG_APP_PLUS_ICON" ctype="x-app_plus_icon" equiv-text="Opret bruge"/> Opret bruger</source>
+      </trans-unit>
+      <trans-unit id="6802157665227007548" datatype="html">
+        <source>Brugere Overblik</source>
+      </trans-unit>
+      <trans-unit id="6290063217884425531" datatype="html">
+        <source>Ingen rettighed tilføjet</source>
+      </trans-unit>
+      <trans-unit id="2953421873937675327" datatype="html">
+        <source>Organisations roller</source>
+      </trans-unit>
+      <trans-unit id="2167168196948390890" datatype="html">
+        <source>Lokal Admin</source>
+      </trans-unit>
+      <trans-unit id="4648679695608556778" datatype="html">
+        <source>Øverste myndighed. SKRIV rettighed til alle moduler, brugerhåndtering, samt adgang til lokal administrator indstillinger</source>
+      </trans-unit>
+      <trans-unit id="553799640321320323" datatype="html">
+        <source>Organisations Admin</source>
+      </trans-unit>
+      <trans-unit id="3763870249224876454" datatype="html">
+        <source>SKRIV rettighed til Organisations modul, mulighed for at oprette/redigere brugere</source>
+      </trans-unit>
+      <trans-unit id="9145160666349260448" datatype="html">
+        <source>System Admin</source>
+      </trans-unit>
+      <trans-unit id="3463602021382749335" datatype="html">
+        <source>SKRIV rettighed til System modul</source>
+      </trans-unit>
+      <trans-unit id="3815749858075599626" datatype="html">
+        <source>Kontrakt Admin</source>
+      </trans-unit>
+      <trans-unit id="7219062676376983479" datatype="html">
+        <source>SKRIV rettighed til Kontrakt og Databehandling modul</source>
+      </trans-unit>
+      <trans-unit id="8094636654399220129" datatype="html">
+        <source> Login oplysninger sidst sendt: </source>
+      </trans-unit>
+      <trans-unit id="7708270344948043036" datatype="html">
+        <source>
+          <x id="INTERPOLATION" equiv-text="{{ user.LastAdvisSent | appDate }}"/>
+        </source>
+      </trans-unit>
+      <trans-unit id="5685427366449665132" datatype="html">
+        <source><x id="START_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="p-trashcan-icon&gt;"/><x id="CLOSE_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="Slet bruger"/> Slet bruger </source>
+      </trans-unit>
+      <trans-unit id="2619139320280854472" datatype="html">
+        <source> Rediger </source>
+      </trans-unit>
+      <trans-unit id="6589173047544794731" datatype="html">
+        <source> Send advis </source>
+      </trans-unit>
+      <trans-unit id="8677610645254621772" datatype="html">
+        <source>Organisationsenhedroller</source>
+      </trans-unit>
+      <trans-unit id="7218639001826490022" datatype="html">
+        <source>It System</source>
+      </trans-unit>
+      <trans-unit id="433062296450216429" datatype="html">
+        <source>It Kontrakt</source>
+      </trans-unit>
+      <trans-unit id="5894198552852518023" datatype="html">
+        <source>Fjern rolle</source>
+      </trans-unit>
+      <trans-unit id="174062379685699877" datatype="html">
+        <source>Er du sikker på, at du vil fjerne rollen?</source>
+      </trans-unit>
       <trans-unit id="467058242778701030" datatype="html">
         <source>Ryd</source>
       </trans-unit>
@@ -2736,15 +3035,28 @@
       <trans-unit id="6601210353490325682" datatype="html">
         <source>Ingen data fundet</source>
       </trans-unit>
+      <trans-unit id="3660653551927486019" datatype="html">
+        <source>Er du sikker på at du vil fjerne tildelingen af rollen &quot;<x id="PH" equiv-text="role.assignment.role.name"/>&quot; til brugeren &quot;<x id="PH_1" equiv-text="role.assignment.user.name"/>&quot;?</source>
+      </trans-unit>
+      <trans-unit id="8852883929710762968" datatype="html">
+        <source>Tilføj <x id="PH" equiv-text="this.entityName.toLocaleLowerCase()"/></source>
+      </trans-unit>
+      <trans-unit id="712277955114054271" datatype="html">
+        <source>Eksporter</source>
+      </trans-unit>
+      <trans-unit id="6309617208533698803" datatype="html">
+        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon/&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon/&gt;"/>Eksporter alle kolonner </source>
+      </trans-unit>
+      <trans-unit id="948657358778361709" datatype="html">
+        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon/&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon/&gt;"/>Eksporter viste kolonner </source>
+      </trans-unit>
+      <trans-unit id="8788430039871490844" datatype="html">
+        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon/&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon/&gt;"/>Eksporter GDPR data </source>
+      </trans-unit>
       <trans-unit id="7150593562313015326" datatype="html">
         <source>
           <x id="START_TAG_NG_CONTENT" ctype="x-ng_content" equiv-text="&lt;ng-content&gt;"/>
           <x id="CLOSE_TAG_NG_CONTENT" ctype="x-ng_content" equiv-text="&lt;/ng-content&gt;"/>
-        </source>
-      </trans-unit>
-      <trans-unit id="7708270344948043036" datatype="html">
-        <source>
-          <x id="INTERPOLATION" equiv-text="{{ user.LastAdvisSent | appDate }}"/>
         </source>
       </trans-unit>
       <trans-unit id="4594819105348556520" datatype="html">
@@ -2819,6 +3131,18 @@
       <trans-unit id="3251550113060613866" datatype="html">
         <source>Er du sikker på at du vil fjerne referencen?</source>
       </trans-unit>
+      <trans-unit id="8829497237648100098" datatype="html">
+        <source>Filter</source>
+      </trans-unit>
+      <trans-unit id="6510461966645751823" datatype="html">
+        <source> Gem </source>
+      </trans-unit>
+      <trans-unit id="5282046193109027726" datatype="html">
+        <source> Anvend </source>
+      </trans-unit>
+      <trans-unit id="5513078980496116959" datatype="html">
+        <source> Slet </source>
+      </trans-unit>
       <trans-unit id="6475857440782400398" datatype="html">
         <source>Filtre og sortering gemt</source>
       </trans-unit>
@@ -2876,11 +3200,23 @@
       <trans-unit id="794998269041924184" datatype="html">
         <source>Søg på <x id="INTERPOLATION" equiv-text="{{ column.title }}"/></source>
       </trans-unit>
-      <trans-unit id="4182570784522399250" datatype="html">
-        <source>Rediger</source>
-      </trans-unit>
       <trans-unit id="7693246133592988372" datatype="html">
         <source> (ugyldigt link) </source>
+      </trans-unit>
+      <trans-unit id="7967107304088297046" datatype="html">
+        <source>Kolonneopsætning for organisation</source>
+      </trans-unit>
+      <trans-unit id="4059930962225165267" datatype="html">
+        <source>Er du sikker på at du vil gemme den nuværende kolonneopsætning af felter som standard til din organisation?</source>
+      </trans-unit>
+      <trans-unit id="7754419869242401597" datatype="html">
+        <source>Kolonneopsætningen er gemt for organisationen</source>
+      </trans-unit>
+      <trans-unit id="304513782193402852" datatype="html">
+        <source>Er du sikker på at du vil slette den nuværende kolonneopsætning af felter som standard for din organisation?</source>
+      </trans-unit>
+      <trans-unit id="381540565861890349" datatype="html">
+        <source>Organisationens kolonneopsætningen er slettet og overblikket er nulstillet</source>
       </trans-unit>
       <trans-unit id="4357958595186457049" datatype="html">
         <source>Til modtagere via email</source>
@@ -2986,17 +3322,17 @@
       <trans-unit id="785705451816912190" datatype="html">
         <source>Indtast et heltal</source>
       </trans-unit>
-      <trans-unit id="827531725377068950" datatype="html">
-        <source>Skriv</source>
+      <trans-unit id="1146742993996326088" datatype="html">
+        <source> Gendan kolonneupsætning </source>
+      </trans-unit>
+      <trans-unit id="7183340572551759368" datatype="html">
+        <source>OBS: Opsætning af overblik afviger fra kommunens standardoverblik. Tryk på &apos;Gendan kolonneopsætning&apos; for at benytte den gældende opsætning.</source>
+      </trans-unit>
+      <trans-unit id="2961782936302807216" datatype="html">
+        <source>Kolonnevisning gendannet til organisationens standardopsætning</source>
       </trans-unit>
       <trans-unit id="6794423025324023456" datatype="html">
         <source>Tilføj rolle</source>
-      </trans-unit>
-      <trans-unit id="8852883929710762968" datatype="html">
-        <source>Tilføj <x id="PH" equiv-text="this.entityName.toLocaleLowerCase()"/></source>
-      </trans-unit>
-      <trans-unit id="3660653551927486019" datatype="html">
-        <source>Er du sikker på at du vil fjerne tildelingen af rollen &quot;<x id="PH" equiv-text="role.assignment.role.name"/>&quot; til brugeren &quot;<x id="PH_1" equiv-text="role.assignment.user.name"/>&quot;?</source>
       </trans-unit>
       <trans-unit id="6957991820194708383" datatype="html">
         <source>Vælg bruger</source>
@@ -3147,6 +3483,24 @@
       </trans-unit>
       <trans-unit id="2633280442095658248" datatype="html">
         <source>Databehandlingsrolle</source>
+      </trans-unit>
+      <trans-unit id="7262263639928024190" datatype="html">
+        <source>Organisationsrolle</source>
+      </trans-unit>
+      <trans-unit id="534383122406365407" datatype="html">
+        <source>Start side</source>
+      </trans-unit>
+      <trans-unit id="8362588373644893871" datatype="html">
+        <source>Lokal admin</source>
+      </trans-unit>
+      <trans-unit id="14554019249576529" datatype="html">
+        <source>Organisations admin</source>
+      </trans-unit>
+      <trans-unit id="7073971840537536193" datatype="html">
+        <source>System admin</source>
+      </trans-unit>
+      <trans-unit id="5114853473211035789" datatype="html">
+        <source>Kontrakt admin</source>
       </trans-unit>
       <trans-unit id="718686126959563536" datatype="html">
         <source>Ingen vejledning</source>
@@ -3325,6 +3679,66 @@
       <trans-unit id="1398187821313708730" datatype="html">
         <source>Databehandlingen kunne ikke slettes</source>
       </trans-unit>
+      <trans-unit id="9205392263338322735" datatype="html">
+        <source>Enheden blev slettet!</source>
+      </trans-unit>
+      <trans-unit id="2387852956002747683" datatype="html">
+        <source>Der skete en fejl under sletning af enheden</source>
+      </trans-unit>
+      <trans-unit id="8970571674382626439" datatype="html">
+        <source><x id="PH" equiv-text="unit.name"/> er gemt</source>
+      </trans-unit>
+      <trans-unit id="3665265801405763848" datatype="html">
+        <source>Fejl! Enheden kunne ikke oprettes!</source>
+      </trans-unit>
+      <trans-unit id="1074222601101160567" datatype="html">
+        <source>Organisationslag blev opdateret</source>
+      </trans-unit>
+      <trans-unit id="3402018037110187095" datatype="html">
+        <source>Organisationslag kunne ikke opdateres</source>
+      </trans-unit>
+      <trans-unit id="7676657755684109339" datatype="html">
+        <source>Registrering blev fjernet</source>
+      </trans-unit>
+      <trans-unit id="811979336794222626" datatype="html">
+        <source>Registrering kunne ikke fjernet</source>
+      </trans-unit>
+      <trans-unit id="3101573563716290294" datatype="html">
+        <source>Registrering blev opdateret</source>
+      </trans-unit>
+      <trans-unit id="2497847384253056415" datatype="html">
+        <source>Registrering kunne ikke opdateres</source>
+      </trans-unit>
+      <trans-unit id="4360783743301420775" datatype="html">
+        <source>Rollen blev tilføjet</source>
+      </trans-unit>
+      <trans-unit id="7261014147720493137" datatype="html">
+        <source>Rollen kunne ikke tilføjes</source>
+      </trans-unit>
+      <trans-unit id="1483357808226202667" datatype="html">
+        <source>Rollen blev fjernet</source>
+      </trans-unit>
+      <trans-unit id="504197391327215324" datatype="html">
+        <source>Rollen kunne ikke fjernes</source>
+      </trans-unit>
+      <trans-unit id="4327551038966013545" datatype="html">
+        <source>Besked sendt</source>
+      </trans-unit>
+      <trans-unit id="840564546130687338" datatype="html">
+        <source>Beskeden kunne ikke sendes</source>
+      </trans-unit>
+      <trans-unit id="4260496326052651673" datatype="html">
+        <source>Brugeren blev opdateret</source>
+      </trans-unit>
+      <trans-unit id="1945093732206878937" datatype="html">
+        <source>Bruger blev oprettet</source>
+      </trans-unit>
+      <trans-unit id="7702390112614253672" datatype="html">
+        <source>Brugeren kunne ikke opdateres</source>
+      </trans-unit>
+      <trans-unit id="755329899946556802" datatype="html">
+        <source>Bruger kunne ikke oprettes</source>
+      </trans-unit>
       <trans-unit id="1985017503817569842" datatype="html">
         <source>Tildelingen blev tilføjet</source>
       </trans-unit>
@@ -3388,377 +3802,8 @@
       <trans-unit id="5352602089856237494" datatype="html">
         <source>Fejl! Feltet kunne ikke ændres da værdien den allerede findes i KITOS!</source>
       </trans-unit>
-      <trans-unit id="5054311168168652363" datatype="html">
-        <source>IT-System (Beskrivelse)</source>
-      </trans-unit>
-      <trans-unit id="108387984164408541" datatype="html">
-        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="p-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="Stamdata&lt;/ap"/>Stamdata</source>
-      </trans-unit>
-      <trans-unit id="5510228635515896374" datatype="html">
-        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="p-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="Organisation"/>Organisation</source>
-      </trans-unit>
-      <trans-unit id="800014879078475227" datatype="html">
-        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="p-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="Brugere&lt;/app"/>Brugere</source>
-      </trans-unit>
-      <trans-unit id="8605390030539679842" datatype="html">
-        <source>Slet enhed</source>
-      </trans-unit>
-      <trans-unit id="6424209025137180437" datatype="html">
-        <source><x id="START_TAG_APP_PLUS_ICON_BLUE" ctype="x-app_plus_icon_blue" equiv-text="p-plus-icon-blue&gt;"/><x id="CLOSE_TAG_APP_PLUS_ICON_BLUE" ctype="x-app_plus_icon_blue" equiv-text="Opret ny en"/> Opret ny enhed</source>
-      </trans-unit>
-      <trans-unit id="7936314073802514656" datatype="html">
-        <source><x id="START_TAG_APP_REORDER_ICON" ctype="x-app_reorder_icon" equiv-text="p-reorder-icon&gt;"/><x id="CLOSE_TAG_APP_REORDER_ICON" ctype="x-app_reorder_icon" equiv-text="Omstrukture"/> Omstrukturer</source>
-      </trans-unit>
-      <trans-unit id="1119180877360349321" datatype="html">
-        <source>Er du sikker på at du vil slette denne enhed?</source>
-      </trans-unit>
-      <trans-unit id="2387852956002747683" datatype="html">
-        <source>Der skete en fejl under sletning af enheden</source>
-      </trans-unit>
-      <trans-unit id="1395476691237055486" datatype="html">
-        <source> Fortryd </source>
-      </trans-unit>
-      <trans-unit id="320823005115017819" datatype="html">
-        <source>EAN number</source>
-      </trans-unit>
-      <trans-unit id="3383157961918196079" datatype="html">
-        <source>Overordnet enhed</source>
-      </trans-unit>
-      <trans-unit id="6606907754743001386" datatype="html">
-        <source>Enhed ID</source>
-      </trans-unit>
-      <trans-unit id="818077246972230056" datatype="html">
-        <source> Opret ny underenhed </source>
-      </trans-unit>
-      <trans-unit id="825020981428555403" datatype="html">
-        <source>Opret ny underenhed</source>
-      </trans-unit>
-      <trans-unit id="9132598244040040719" datatype="html">
-        <source>Enhedens navn</source>
-      </trans-unit>
-      <trans-unit id="1059246033392151913" datatype="html">
-        <source><x id="START_TAG_APP_FK_ORG_COLOR_ICON" ctype="x-app_fk_org_color_icon" equiv-text="p-fk-org-color-icon&gt;"/><x id="CLOSE_TAG_APP_FK_ORG_COLOR_ICON" ctype="x-app_fk_org_color_icon" equiv-text="Enheder syn"/> Enheder synkroniseret fra FK Organisation</source>
-      </trans-unit>
-      <trans-unit id="1284113808164544433" datatype="html">
-        <source><x id="START_TAG_APP_KITOS_UNIT_COLOR_ICON" ctype="x-app_kitos_unit_color_icon" equiv-text="p-kitos-unit-color-icon&gt;"/><x id="CLOSE_TAG_APP_KITOS_UNIT_COLOR_ICON" ctype="x-app_kitos_unit_color_icon" equiv-text="Enheder opr"/> Enheder oprettet i Kitos</source>
-      </trans-unit>
-      <trans-unit id="7717331771274100514" datatype="html">
-        <source>Organisationslag</source>
-      </trans-unit>
-      <trans-unit id="1074222601101160567" datatype="html">
-        <source>Organisationslag blev opdateret</source>
-      </trans-unit>
-      <trans-unit id="3402018037110187095" datatype="html">
-        <source>Organisationslag kunne ikke opdateres</source>
-      </trans-unit>
-      <trans-unit id="1232472189203379610" datatype="html">
-        <source>Du kan ikke ændre overordnet organisationsenhed for <x id="PH" equiv-text="unitName"/></source>
-      </trans-unit>
-      <trans-unit id="1572092797001437754" datatype="html">
-        <source>Ingen overordnet enhed</source>
-      </trans-unit>
-      <trans-unit id="3128755877990643230" datatype="html">
-        <source>Der kan kun vælges blandt de organisationsenheder, som er indenfor samme organisation, og som ikke er en underenhed til <x id="PH" equiv-text="unitName"/>.</source>
-      </trans-unit>
-      <trans-unit id="3387874693611076854" datatype="html">
-        <source>EAN nummer</source>
-      </trans-unit>
-      <trans-unit id="3964493774889771792" datatype="html">
-        <source>Information om enhed</source>
-      </trans-unit>
-      <trans-unit id="1146742993996326088" datatype="html">
-        <source> Gendan kolonneupsætning </source>
-      </trans-unit>
-      <trans-unit id="1268401558401369013" datatype="html">
-        <source>IT Systemer Overblik</source>
-      </trans-unit>
-      <trans-unit id="304513782193402852" datatype="html">
-        <source>Er du sikker på at du vil slette den nuværende kolonneopsætning af felter som standard for din organisation?</source>
-      </trans-unit>
-      <trans-unit id="381540565861890349" datatype="html">
-        <source>Organisationens kolonneopsætningen er slettet og overblikket er nulstillet</source>
-      </trans-unit>
-      <trans-unit id="4059930962225165267" datatype="html">
-        <source>Er du sikker på at du vil gemme den nuværende kolonneopsætning af felter som standard til din organisation?</source>
-      </trans-unit>
-      <trans-unit id="5282046193109027726" datatype="html">
-        <source> Anvend </source>
-      </trans-unit>
-      <trans-unit id="5513078980496116959" datatype="html">
-        <source> Slet </source>
-      </trans-unit>
-      <trans-unit id="6510461966645751823" datatype="html">
-        <source> Gem </source>
-      </trans-unit>
-      <trans-unit id="7183340572551759368" datatype="html">
-        <source>OBS: Opsætning af overblik afviger fra kommunens standardoverblik. Tryk på &apos;Gendan kolonneopsætning&apos; for at benytte den gældende opsætning.</source>
-      </trans-unit>
-      <trans-unit id="7754419869242401597" datatype="html">
-        <source>Kolonneopsætningen er gemt for organisationen</source>
-      </trans-unit>
-      <trans-unit id="7967107304088297046" datatype="html">
-        <source>Kolonneopsætning for organisation</source>
-      </trans-unit>
-      <trans-unit id="2961782936302807216" datatype="html">
-        <source>Kolonnevisning gendannet til organisationens standardopsætning</source>
-      </trans-unit>
-      <trans-unit id="8829497237648100098" datatype="html">
-        <source>Filter</source>
-      </trans-unit>
-      <trans-unit id="3665265801405763848" datatype="html">
-        <source>Fejl! Enheden kunne ikke oprettes!</source>
-      </trans-unit>
-      <trans-unit id="8970571674382626439" datatype="html">
-        <source><x id="PH" equiv-text="unit.name"/> er gemt</source>
-      </trans-unit>
-      <trans-unit id="9205392263338322735" datatype="html">
-        <source>Enheden blev slettet!</source>
-      </trans-unit>
-      <trans-unit id="7262263639928024190" datatype="html">
-        <source>Organisationsrolle</source>
-      </trans-unit>
-      <trans-unit id="1096790971195540722" datatype="html">
-        <source>Rediger enhed</source>
-      </trans-unit>
-      <trans-unit id="2039747355681584340" datatype="html">
-        <source>Interne betalinger</source>
-      </trans-unit>
-      <trans-unit id="2304073231957718625" datatype="html">
-        <source>Kontrakter (ansvarlig organisationsenhed)</source>
-      </trans-unit>
-      <trans-unit id="2372596861861123396" datatype="html">
-        <source>Fravælg alle</source>
-      </trans-unit>
-      <trans-unit id="2497847384253056415" datatype="html">
-        <source>Registrering kunne ikke opdateres</source>
-      </trans-unit>
-      <trans-unit id="2767338986457935740" datatype="html">
-        <source>Overfør</source>
-      </trans-unit>
-      <trans-unit id="3001899515794448090" datatype="html">
-        <source>Enhedens ID</source>
-      </trans-unit>
-      <trans-unit id="3101573563716290294" datatype="html">
-        <source>Registrering blev opdateret</source>
-      </trans-unit>
-      <trans-unit id="3255396157655299314" datatype="html">
-        <source>Bruger</source>
-      </trans-unit>
-      <trans-unit id="3515401894009736780" datatype="html">
-        <source>Overfør til</source>
-      </trans-unit>
-      <trans-unit id="3406620436560507395" datatype="html">
-        <source>Du skal vælge en ny organisationsenhed for at kunne overføre</source>
-      </trans-unit>
-      <trans-unit id="4715041368345276378" datatype="html">
-        <source>Vil du slette denne registrering?</source>
-      </trans-unit>
-      <trans-unit id="6036315295879423841" datatype="html">
-        <source>Vælg alle</source>
-      </trans-unit>
-      <trans-unit id="6256762269565740405" datatype="html">
-        <source>Rolle</source>
-      </trans-unit>
-      <trans-unit id="632103606091111231" datatype="html">
-        <source>Registeringer for: <x id="INTERPOLATION" equiv-text="{{ unit.name }}"/></source>
-      </trans-unit>
-      <trans-unit id="6410467948610503551" datatype="html">
-        <source>Index</source>
-      </trans-unit>
-      <trans-unit id="6471553254900199970" datatype="html">
-        <source>Betaling (Anskaffelse, Drift, Andet)</source>
-      </trans-unit>
-      <trans-unit id="6785063780714540534" datatype="html">
-        <source>Slet</source>
-      </trans-unit>
-      <trans-unit id="6798278230749864927" datatype="html">
-        <source>System (ansvarlig organisationsenhed)</source>
-      </trans-unit>
-      <trans-unit id="7030018888494298262" datatype="html">
-        <source>Vælg handling for valgte registreringer (<x id="INTERPOLATION" equiv-text="{{ numberOfRegistrations }}"/>)</source>
-      </trans-unit>
-      <trans-unit id="7438480580830548387" datatype="html">
-        <source>Denne handling kan ikke fortrydes.</source>
-      </trans-unit>
-      <trans-unit id="7556694929562495921" datatype="html">
-        <source><x id="START_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="p-trashcan-icon&gt;"/><x id="CLOSE_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="Slet enhed&lt;"/> Slet enhed</source>
-      </trans-unit>
-      <trans-unit id="7676657755684109339" datatype="html">
-        <source>Registrering blev fjernet</source>
-      </trans-unit>
-      <trans-unit id="811979336794222626" datatype="html">
-        <source>Registrering kunne ikke fjernet</source>
-      </trans-unit>
-      <trans-unit id="8358166767295516793" datatype="html">
-        <source>Roller</source>
-      </trans-unit>
-      <trans-unit id="8782857914269438568" datatype="html">
-        <source>System (relevant organisationsenhed)</source>
-      </trans-unit>
-      <trans-unit id="8883503082474356898" datatype="html">
-        <source>Eksterne betalinger</source>
-      </trans-unit>
-      <trans-unit id="9047662541476263934" datatype="html">
-        <source>Kontraktnavn</source>
-      </trans-unit>
-      <trans-unit id="3553013084786305483" datatype="html">
-        <source>Vil du slette de valgte registreringer?</source>
-      </trans-unit>
-      <trans-unit id="6076065667251368966" datatype="html">
-        <source>Vil du overføre de valgte registreringer?</source>
-      </trans-unit>
-      <trans-unit id="1483357808226202667" datatype="html">
-        <source>Rollen blev fjernet</source>
-      </trans-unit>
-      <trans-unit id="4360783743301420775" datatype="html">
-        <source>Rollen blev tilføjet</source>
-      </trans-unit>
-      <trans-unit id="504197391327215324" datatype="html">
-        <source>Rollen kunne ikke fjernes</source>
-      </trans-unit>
-      <trans-unit id="7261014147720493137" datatype="html">
-        <source>Rollen kunne ikke tilføjes</source>
-      </trans-unit>
-      <trans-unit id="5737202760044458805" datatype="html">
-        <source> Tilføj brugere fra underenheder </source>
-      </trans-unit>
-      <trans-unit id="5819900845775888830" datatype="html">
-        <source>Færdig</source>
-      </trans-unit>
-      <trans-unit id="2167168196948390890" datatype="html">
-        <source>Lokal Admin</source>
-      </trans-unit>
-      <trans-unit id="3815749858075599626" datatype="html">
-        <source>Kontrakt Admin</source>
-      </trans-unit>
-      <trans-unit id="3826131358190061018" datatype="html">
-        <source>API bruger</source>
-      </trans-unit>
-      <trans-unit id="5196182293976445965" datatype="html">
-        <source>Brugere</source>
-      </trans-unit>
-      <trans-unit id="553799640321320323" datatype="html">
-        <source>Organisations Admin</source>
-      </trans-unit>
-      <trans-unit id="6519933616329762674" datatype="html">
-        <source>Rettighedshaveradgang</source>
-      </trans-unit>
-      <trans-unit id="693111060748862878" datatype="html">
-        <source>Interessentadgang</source>
-      </trans-unit>
-      <trans-unit id="9145160666349260448" datatype="html">
-        <source>System Admin</source>
-      </trans-unit>
-      <trans-unit id="3463602021382749335" datatype="html">
-        <source>SKRIV rettighed til System modul</source>
-      </trans-unit>
-      <trans-unit id="3763870249224876454" datatype="html">
-        <source>SKRIV rettighed til Organisations modul, mulighed for at oprette/redigere brugere</source>
-      </trans-unit>
-      <trans-unit id="4648679695608556778" datatype="html">
-        <source>Øverste myndighed. SKRIV rettighed til alle moduler, brugerhåndtering, samt adgang til lokal administrator indstillinger</source>
-      </trans-unit>
-      <trans-unit id="6290063217884425531" datatype="html">
-        <source>Ingen rettighed tilføjet</source>
-      </trans-unit>
-      <trans-unit id="7219062676376983479" datatype="html">
-        <source>SKRIV rettighed til Kontrakt og Databehandling modul</source>
-      </trans-unit>
-      <trans-unit id="2953421873937675327" datatype="html">
-        <source>Organisations roller</source>
-      </trans-unit>
-      <trans-unit id="6802157665227007548" datatype="html">
-        <source>Brugere Overblik</source>
-      </trans-unit>
-      <trans-unit id="2619139320280854472" datatype="html">
-        <source> Rediger </source>
-      </trans-unit>
-      <trans-unit id="5685427366449665132" datatype="html">
-        <source><x id="START_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="p-trashcan-icon&gt;"/><x id="CLOSE_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="Slet bruger"/> Slet bruger </source>
-      </trans-unit>
-      <trans-unit id="6589173047544794731" datatype="html">
-        <source> Send advis </source>
-      </trans-unit>
-      <trans-unit id="8094636654399220129" datatype="html">
-        <source> Login oplysninger sidst sendt: </source>
-      </trans-unit>
-      <trans-unit id="4327551038966013545" datatype="html">
-        <source>Besked sendt</source>
-      </trans-unit>
-      <trans-unit id="433062296450216429" datatype="html">
-        <source>It Kontrakt</source>
-      </trans-unit>
-      <trans-unit id="7218639001826490022" datatype="html">
-        <source>It System</source>
-      </trans-unit>
-      <trans-unit id="840564546130687338" datatype="html">
-        <source>Beskeden kunne ikke sendes</source>
-      </trans-unit>
-      <trans-unit id="8677610645254621772" datatype="html">
-        <source>Organisationsenhedroller</source>
-      </trans-unit>
-      <trans-unit id="174062379685699877" datatype="html">
-        <source>Er du sikker på, at du vil fjerne rollen?</source>
-      </trans-unit>
-      <trans-unit id="5894198552852518023" datatype="html">
-        <source>Fjern rolle</source>
-      </trans-unit>
-      <trans-unit id="2386645532307971092" datatype="html">
-        <source>Opret bruger</source>
-      </trans-unit>
-      <trans-unit id="4682105837825490873" datatype="html">
-        <source><x id="START_TAG_APP_PLUS_ICON" ctype="x-app_plus_icon" equiv-text="p-plus-icon&gt;"/><x id="CLOSE_TAG_APP_PLUS_ICON" ctype="x-app_plus_icon" equiv-text="Opret bruge"/> Opret bruger</source>
-      </trans-unit>
-      <trans-unit id="4959897538098495651" datatype="html">
-        <source>Tværgående rettigheder</source>
-      </trans-unit>
-      <trans-unit id="5147830388862104785" datatype="html">
-        <source>Særlige roller i organisationen</source>
-      </trans-unit>
-      <trans-unit id="534383122406365407" datatype="html">
-        <source>Start side</source>
-      </trans-unit>
-      <trans-unit id="5397839397044195784" datatype="html">
-        <source>Efternavn*</source>
-      </trans-unit>
-      <trans-unit id="6379496749712928831" datatype="html">
-        <source>Brugeren er allerede tilknyttet.</source>
-      </trans-unit>
-      <trans-unit id="7299188518201836340" datatype="html">
-        <source>Gentag email*</source>
-      </trans-unit>
-      <trans-unit id="7995739610137168405" datatype="html">
-        <source>Fornavn*</source>
-      </trans-unit>
-      <trans-unit id="858866300592183763" datatype="html">
-        <source>Telefonnumer</source>
-      </trans-unit>
-      <trans-unit id="8965295525971605718" datatype="html">
-        <source>Email*</source>
-      </trans-unit>
-      <trans-unit id="9193480723158679191" datatype="html">
-        <source>Primær startenhed</source>
-      </trans-unit>
-      <trans-unit id="14554019249576529" datatype="html">
-        <source>Organisations admin</source>
-      </trans-unit>
-      <trans-unit id="1945093732206878937" datatype="html">
-        <source>Bruger blev oprettet</source>
-      </trans-unit>
-      <trans-unit id="2223233384489817608" datatype="html">
-        <source>Send advis om oprettelse</source>
-      </trans-unit>
-      <trans-unit id="5114853473211035789" datatype="html">
-        <source>Kontrakt admin</source>
-      </trans-unit>
-      <trans-unit id="7073971840537536193" datatype="html">
-        <source>System admin</source>
-      </trans-unit>
-      <trans-unit id="755329899946556802" datatype="html">
-        <source>Bruger kunne ikke oprettes</source>
-      </trans-unit>
-      <trans-unit id="8362588373644893871" datatype="html">
-        <source>Lokal admin</source>
+      <trans-unit id="9034694311930313078" datatype="html">
+        <source>Send advis om ændringer</source>
       </trans-unit>
       <trans-unit id="1920124659830189543" datatype="html">
         <source>Kopier roller</source>

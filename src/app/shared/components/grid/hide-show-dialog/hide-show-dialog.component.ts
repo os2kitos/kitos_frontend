@@ -25,7 +25,9 @@ export class HideShowDialogComponent implements OnInit {
   constructor(private store: Store, private dialogRef: MatDialogRef<HideShowDialogComponent>) {}
 
   ngOnInit() {
-    this.columnsCopy = this.columns.filter((column) => column.style !== 'excel-only').map((column) => ({ ...column }));
+    this.columnsCopy = this.columns
+      .filter((column) => column.style !== 'excel-only' && column.style !== 'action-buttons')
+      .map((column) => ({ ...column }));
     this.uniqueSections = Array.from(new Set(this.columns.map((column) => column.section)));
   }
 

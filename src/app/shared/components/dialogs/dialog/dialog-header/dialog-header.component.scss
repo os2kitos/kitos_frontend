@@ -1,4 +1,4 @@
-@import "theme";
+@import 'theme';
 
 .close-button {
   position: absolute;
@@ -8,14 +8,31 @@
 
 .header {
   display: flex;
-  gap: $padding-small;
   align-items: center;
+  gap: $padding-small;
   border-bottom: 1px solid $color-neutral-20;
   padding: $padding-medium;
   padding-left: $padding-large;
   color: $color-neutral-dark;
 
   h3 {
-    margin: 12px 60px 12px 0;
+    margin: 12px 4px 12px 0;
+  }
+
+  &.nested {
+    justify-content: center;
+    position: relative;
+
+    h3 {
+      flex-grow: 1;
+      text-align: center;
+    }
+
+    .arrow-button {
+      position: absolute;
+      left: $padding-medium;
+      margin-right: 0;
+    }
   }
 }
+

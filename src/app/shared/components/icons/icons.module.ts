@@ -48,6 +48,7 @@ import { TrashcanIconComponent } from './trashcan-icon.component';
 import { WarningIconComponent } from './warning-icon.component';
 import { WhiteCircleIconComponent } from './white-circle-icon.component';
 import { XIconComponent } from './x-icon.component';
+import { ArrowLeftIconComponent } from './arrow-left-icon.component';
 
 @NgModule({
   imports: [],
@@ -101,6 +102,7 @@ import { XIconComponent } from './x-icon.component';
     ExpandIconComponent,
     CheckPositiveGreenIconComponent,
     CheckNegativeGrayIconComponent,
+    ArrowLeftIconComponent,
   ],
   declarations: [
     ChevronDownIconComponent,
@@ -152,6 +154,7 @@ import { XIconComponent } from './x-icon.component';
     ExpandIconComponent,
     CheckNegativeGrayIconComponent,
     CheckPositiveGreenIconComponent,
+    ArrowLeftIconComponent,
   ],
   providers: [],
 })

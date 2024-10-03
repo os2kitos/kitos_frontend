@@ -16,6 +16,7 @@ export class DialogComponent {
   @Input() public backgroundColor: 'white' | 'grey' = 'white';
   @Input() public noPadding = false;
   @Input() public helpText?: string;
+  @Input() public nested = false;
 
   constructor(protected dialog: MatDialogRef<DialogComponent>) {}
 

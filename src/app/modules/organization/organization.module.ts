@@ -12,6 +12,7 @@ import { CreateUserDialogComponent } from './organization-users/create-user-dial
 import { OrganizationUsersComponent } from './organization-users/organization-users.component';
 import { UserInfoDialogComponent } from './organization-users/user-info-dialog/user-info-dialog.component';
 import { UserRoleTableComponent } from './organization-users/user-role-table/user-role-table.component';
+import { EditUserDialogComponent } from './organization-users/edit-user-dialog/edit-user-dialog.component';
 import { OrganizationComponent } from './organization.component';
 import { OrganizationRouterModule } from './organization.routes';
 import { CopyRolesDialogComponent } from './organization-users/copy-roles-dialog/copy-roles-dialog.component';
@@ -30,6 +31,7 @@ import { CopyRoleTableComponent } from './organization-users/copy-roles-dialog/c
     UserInfoDialogComponent,
     UserRoleTableComponent,
     OrganizationUnitRoleTableComponent,
+    EditUserDialogComponent,
     CreateUserDialogComponent,
     CopyRolesDialogComponent,
     CopyRoleTableComponent,
