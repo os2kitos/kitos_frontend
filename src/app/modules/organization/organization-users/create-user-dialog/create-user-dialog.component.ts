@@ -27,6 +27,7 @@ import { CreateUserDialogComponentStore } from './create-user-dialog.component-s
 export class CreateUserDialogComponent extends BaseComponent implements OnInit {
   public readonly isLoadingAlreadyExists$ = this.componentStore.isLoading$;
   public readonly alreadyExists$ = this.componentStore.alreadyExists$;
+  public readonly noExistingUser$ = this.componentStore.noUserInOtherOrgs$;
   public readonly isLoading$ = this.store.select(selectOrganizationUserIsCreateLoading);
   public readonly isGlobalAdmin$ = this.store.select(selectUserIsGlobalAdmin);
 
@@ -59,7 +60,6 @@ export class CreateUserDialogComponent extends BaseComponent implements OnInit {
 
   private selectedRoles: APIUserResponseDTO.RolesEnum[] = [];
 
-
   constructor(
     private readonly store: Store,
     private readonly actions$: Actions,
@@ -82,7 +82,7 @@ export class CreateUserDialogComponent extends BaseComponent implements OnInit {
         .subscribe((value) => {
           if (!value) return;
 
-          this.componentStore.checkEmailAvailability(value);
+          this.componentStore.getUserWithEmail(value);
         })
     );
 

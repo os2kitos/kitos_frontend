@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
+import { debounceTime } from 'rxjs';
 import { APIUpdateUserRequestDTO, APIUserResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { OrganizationUser } from 'src/app/shared/models/organization-user/organization-user.model';
@@ -9,15 +10,13 @@ import {
   StartPreferenceChoice,
   startPreferenceChoiceOptions,
 } from 'src/app/shared/models/organization-user/start-preference.model';
+import { UserRoleChoice } from 'src/app/shared/models/organization-user/user-role.model';
+import { phoneNumberLengthValidator } from 'src/app/shared/validators/phone-number-length.validator';
+import { requiredIfDirtyValidator } from 'src/app/shared/validators/required-if-dirty.validator';
 import { OrganizationUserActions } from 'src/app/store/organization-user/actions';
+import { selectOrganizationUserIsCreateLoading } from 'src/app/store/organization-user/selectors';
 import { selectUserIsGlobalAdmin } from 'src/app/store/user-store/selectors';
 import { CreateUserDialogComponentStore } from '../create-user-dialog/create-user-dialog.component-store';
-import { selectOrganizationUserIsCreateLoading } from 'src/app/store/organization-user/selectors';
-import { debounceTime } from 'rxjs';
-import { requiredIfDirtyValidator } from 'src/app/shared/validators/required-if-dirty.validator';
-import { phoneNumberLengthValidator } from 'src/app/shared/validators/phone-number-length.validator';
-import { mapUserRoleChoice, UserRoleChoice } from 'src/app/shared/models/organization-user/user-role.model';
-import { map } from 'lodash';
 
 @Component({
   selector: 'app-edit-user-dialog',
@@ -80,7 +79,7 @@ export class EditUserDialogComponent extends BaseComponent implements OnInit {
         .subscribe((value) => {
           if (!value) return;
 
-          this.componentStore.checkEmailAvailability(value);
+          this.componentStore.getUserWithEmail(value);
         })
     );
 
@@ -155,7 +154,9 @@ export class EditUserDialogComponent extends BaseComponent implements OnInit {
     const formRoles = new Set(this.getFormRoles());
     console.log('Previous Roles: ', previousRoles);
     console.log('Form Roles: ', formRoles);
-    const areTheyTheSame = [...previousRoles].every((role) => formRoles.has(role)) && [...formRoles].every((role) => previousRoles.has(role));
+    const areTheyTheSame =
+      [...previousRoles].every((role) => formRoles.has(role)) &&
+      [...formRoles].every((role) => previousRoles.has(role));
     if (areTheyTheSame) return undefined;
     return [...formRoles];
   }

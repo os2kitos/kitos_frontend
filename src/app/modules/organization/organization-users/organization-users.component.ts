@@ -173,7 +173,10 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
 
     this.subscriptions.add(
       this.actions$
-        .pipe(ofType(OrganizationUserActions.createUserSuccess, OrganizationUserActions.updateUserSuccess), combineLatestWith(this.gridState$))
+        .pipe(
+          ofType(OrganizationUserActions.createUserSuccess, OrganizationUserActions.updateUserSuccess),
+          combineLatestWith(this.gridState$)
+        )
         .subscribe(([_, gridState]) => {
           this.stateChange(gridState);
         })
@@ -203,4 +206,3 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
     dialogRef.componentInstance.hasModificationPermission$ = this.hasModificationPermission$;
   }
 }
-
