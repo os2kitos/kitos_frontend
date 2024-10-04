@@ -7,42 +7,55 @@
           >Brugeren er allerede tilknyttet.</app-paragraph
         >
       </div>
-      <app-textbox
-        text="Gentag email*"
-        i18n-text
-        [formGroup]="createForm"
-        formName="repeatEmail"
-        data-cy="repeat-email"
-      ></app-textbox>
-      <app-textbox
-        text="Fornavn*"
-        i18n-text
-        [formGroup]="createForm"
-        formName="firstName"
-        data-cy="first-name"
-      ></app-textbox>
-      <app-textbox
-        text="Efternavn*"
-        i18n-text
-        [formGroup]="createForm"
-        formName="lastName"
-        data-cy="last-name"
-      ></app-textbox>
-      <app-numeric-input
-        text="Telefonnumer"
-        i18n-text
-        [formGroup]="createForm"
-        formName="phoneNumber"
-        data-cy="phone-number"
-      ></app-numeric-input>
-      <app-dropdown
-        text="Primær startenhed"
-        i18n-text
-        [formGroup]="createForm"
-        formName="startPreference"
-        [data]="startPreferenceOptions"
-        data-cy="start-preference"
-      ></app-dropdown>
+      <app-tooltip [text]="(userInOtherOrgHelptext$ | async) ?? ''" [tooltipDelay]="500">
+        <app-textbox
+          text="Gentag email*"
+          i18n-text
+          [formGroup]="createForm"
+          formName="repeatEmail"
+          data-cy="repeat-email"
+        ></app-textbox>
+      </app-tooltip>
+      <app-tooltip [text]="(userInOtherOrgHelptext$ | async) ?? ''" [tooltipDelay]="500">
+        <app-textbox
+          text="Fornavn*"
+          i18n-text
+          [formGroup]="createForm"
+          formName="firstName"
+          data-cy="first-name"
+        ></app-textbox>
+      </app-tooltip>
+
+      <app-tooltip [text]="(userInOtherOrgHelptext$ | async) ?? ''" [tooltipDelay]="500">
+        <app-textbox
+          text="Efternavn*"
+          i18n-text
+          [formGroup]="createForm"
+          formName="lastName"
+          data-cy="last-name"
+        ></app-textbox>
+      </app-tooltip>
+
+      <app-tooltip [text]="(userInOtherOrgHelptext$ | async) ?? ''" [tooltipDelay]="500">
+        <app-numeric-input
+          text="Telefonnumer"
+          i18n-text
+          [formGroup]="createForm"
+          formName="phoneNumber"
+          data-cy="phone-number"
+        ></app-numeric-input>
+      </app-tooltip>
+
+      <app-tooltip [text]="(userInOtherOrgHelptext$ | async) ?? ''" [tooltipDelay]="500">
+        <app-dropdown
+          text="Primær startenhed"
+          i18n-text
+          [formGroup]="createForm"
+          formName="startPreference"
+          [data]="startPreferenceOptions"
+          data-cy="start-preference"
+        ></app-dropdown>
+      </app-tooltip>
       <app-multi-select-dropdown
         text="Roller"
         i18n-text
@@ -52,15 +65,18 @@
         (selectedEvent)="rolesChanged($event)"
         (cleared)="rolesCleared()"
       ></app-multi-select-dropdown>
-      <app-checkbox
-        text="Send advis om oprettelse"
-        i18n-text
-        [formGroup]="createForm"
-        labelPosition="after"
-        formName="sendNotificationOnCreation"
-        data-cy="send-on-creation"
-      >
-      </app-checkbox>
+
+      <app-tooltip [text]="(userInOtherOrgHelptext$ | async) ?? ''" [tooltipDelay]="500">
+        <app-checkbox
+          text="Send advis om oprettelse"
+          i18n-text
+          [formGroup]="createForm"
+          labelPosition="after"
+          formName="sendNotificationOnCreation"
+          data-cy="send-on-creation"
+        >
+        </app-checkbox>
+      </app-tooltip>
       <ng-container *ngIf="(isGlobalAdmin$ | async) === true">
         <app-divider></app-divider>
         <div>
@@ -81,22 +97,27 @@
           <app-vertical-content-grid-section-margin-left>
             <app-paragraph i18n [bold]="true">Tværgående rettigheder</app-paragraph>
           </app-vertical-content-grid-section-margin-left>
-          <app-checkbox
-            text="API bruger"
-            i18n-text
-            [formGroup]="createForm"
-            labelPosition="after"
-            formName="apiUser"
-            data-cy="api-user"
-          ></app-checkbox>
-          <app-checkbox
-            text="Interessentadgang"
-            i18n-text
-            [formGroup]="createForm"
-            labelPosition="after"
-            formName="stakeholderAccess"
-            data-cy="stake-holder-access"
-          ></app-checkbox>
+
+          <app-tooltip [text]="(userInOtherOrgHelptext$ | async) ?? ''" [tooltipDelay]="500">
+            <app-checkbox
+              text="API bruger"
+              i18n-text
+              [formGroup]="createForm"
+              labelPosition="after"
+              formName="apiUser"
+              data-cy="api-user"
+            ></app-checkbox>
+          </app-tooltip>
+          <app-tooltip [text]="(userInOtherOrgHelptext$ | async) ?? ''" [tooltipDelay]="500">
+            <app-checkbox
+              text="Interessentadgang"
+              i18n-text
+              [formGroup]="createForm"
+              labelPosition="after"
+              formName="stakeholderAccess"
+              data-cy="stake-holder-access"
+            ></app-checkbox>
+          </app-tooltip>
         </div>
       </ng-container>
       <app-dialog-actions class="dialog-footer">

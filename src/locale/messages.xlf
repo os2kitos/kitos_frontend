@@ -3835,6 +3835,9 @@
       <trans-unit id="7986347391181913104" datatype="html">
         <source>Databeskyttelsesrådgiver</source>
       </trans-unit>
+      <trans-unit id="5412714650100464515" datatype="html">
+        <source>Denne bruger findes allerede i en anden organisation. Du kan kun redigere brugerens roller.</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

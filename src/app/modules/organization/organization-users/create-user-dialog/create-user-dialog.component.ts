@@ -55,8 +55,12 @@ export class CreateUserDialogComponent extends BaseComponent implements OnInit {
     stakeholderAccess: new FormControl<boolean>(false),
   });
 
-  public startPreferenceOptions = startPreferenceChoiceOptions;
+  public readonly userInOtherOrgHelptext$ = this.noExistingUser$.pipe(
+    map((noExistingUser) => (noExistingUser ? '' : this.userInOtherOrgHelptext))
+  );
+  private readonly userInOtherOrgHelptext = $localize`Denne bruger findes allerede i en anden organisation. Du kan kun redigere brugerens roller.`;
 
+  public startPreferenceOptions = startPreferenceChoiceOptions;
   public roleOptions = userRoleChoiceOptions;
 
   private selectedRoles: APIUserResponseDTO.RolesEnum[] = [];
