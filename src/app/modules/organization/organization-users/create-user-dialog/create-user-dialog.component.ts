@@ -3,19 +3,14 @@ import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators }
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { combineLatest, debounceTime, map } from 'rxjs';
+import { combineLatest, debounceTime, first, map } from 'rxjs';
 import { APICreateUserRequestDTO, APIUserResponseDTO } from 'src/app/api/v2';
-import { BaseComponent } from 'src/app/shared/base/base.component';
-import {
-  StartPreferenceChoice,
-  startPreferenceChoiceOptions,
-} from 'src/app/shared/models/organization/organization-user/start-preference.model';
-import { userRoleChoiceOptions } from 'src/app/shared/models/organization/organization-user/user-role.model';
+import { StartPreferenceChoice } from 'src/app/shared/models/organization/organization-user/start-preference.model';
 import { phoneNumberLengthValidator } from 'src/app/shared/validators/phone-number-length.validator';
 import { requiredIfDirtyValidator } from 'src/app/shared/validators/required-if-dirty.validator';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
 import { selectOrganizationUserIsCreateLoading } from 'src/app/store/organization/organization-user/selectors';
-import { selectUserIsGlobalAdmin } from 'src/app/store/user-store/selectors';
+import { BaseUserDialogComponent } from '../base-user-dialog.component';
 import { CreateUserDialogComponentStore } from './create-user-dialog.component-store';
 
 @Component({
@@ -24,11 +19,9 @@ import { CreateUserDialogComponentStore } from './create-user-dialog.component-s
   styleUrl: './create-user-dialog.component.scss',
   providers: [CreateUserDialogComponentStore],
 })
-export class CreateUserDialogComponent extends BaseComponent implements OnInit {
-  public readonly isLoadingAlreadyExists$ = this.componentStore.isLoading$;
-  public readonly alreadyExists$ = this.componentStore.alreadyExists$;
-  public readonly isLoading$ = this.store.select(selectOrganizationUserIsCreateLoading);
-  public readonly isGlobalAdmin$ = this.store.select(selectUserIsGlobalAdmin);
+export class CreateUserDialogComponent extends BaseUserDialogComponent implements OnInit {
+  public readonly noExistingUser$ = this.componentStore.noUserInOtherOrgs$;
+  public readonly existingUserUuid$ = this.componentStore.existingUserUuid$;
 
   public readonly isLoadingCombined$ = combineLatest([
     this.isLoadingAlreadyExists$,
@@ -53,27 +46,28 @@ export class CreateUserDialogComponent extends BaseComponent implements OnInit {
     stakeholderAccess: new FormControl<boolean>(false),
   });
 
-  public startPreferenceOptions = startPreferenceChoiceOptions;
-
-  public roleOptions = userRoleChoiceOptions;
-
+  public readonly userInOtherOrgHelptext$ = this.noExistingUser$.pipe(
+    map((noExistingUser) => (noExistingUser ? '' : this.userInOtherOrgHelptext))
+  );
+  private readonly userInOtherOrgHelptext = $localize`Denne bruger findes allerede i en anden organisation. Du kan kun redigere brugerens roller.`;
   private selectedRoles: APIUserResponseDTO.RolesEnum[] = [];
 
-
   constructor(
-    private readonly store: Store,
     private readonly actions$: Actions,
     private readonly dialog: MatDialogRef<CreateUserDialogComponent>,
-    private readonly componentStore: CreateUserDialogComponentStore
+    store: Store,
+    componentStore: CreateUserDialogComponentStore
   ) {
-    super();
+    super(store, componentStore);
   }
 
   ngOnInit(): void {
     this.subscriptions.add(
-      this.actions$.pipe(ofType(OrganizationUserActions.createUserSuccess)).subscribe(() => {
-        this.onCancel();
-      })
+      this.actions$
+        .pipe(ofType(OrganizationUserActions.createUserSuccess, OrganizationUserActions.updateUserSuccess))
+        .subscribe(() => {
+          this.onCancel();
+        })
     );
 
     this.subscriptions.add(
@@ -82,7 +76,7 @@ export class CreateUserDialogComponent extends BaseComponent implements OnInit {
         .subscribe((value) => {
           if (!value) return;
 
-          this.componentStore.checkEmailAvailability(value);
+          this.componentStore.getUserWithEmail(value);
         })
     );
 
@@ -95,13 +89,60 @@ export class CreateUserDialogComponent extends BaseComponent implements OnInit {
         }
       })
     );
+
+    this.subscriptions.add(
+      this.noExistingUser$.subscribe((noExistingUser) => {
+        if (noExistingUser === false) {
+          this.createForm.disable();
+          this.createForm.controls.email.enable();
+          this.createForm.controls.rightsHolderAccess.enable();
+        } else {
+          this.createForm.enable();
+        }
+      })
+    );
   }
 
   public onCancel(): void {
     this.dialog.close();
   }
 
-  public sendCreateUserRequest() {
+  public sendCreateUserRequest(): void {
+    const roles = this.selectedRoles;
+    roles.push(APICreateUserRequestDTO.RolesEnum.User);
+    const rightsHolderAccess = this.createForm.controls.rightsHolderAccess.value;
+    if (rightsHolderAccess) {
+      roles.push(APICreateUserRequestDTO.RolesEnum.RightsHolderAccess);
+    }
+
+    this.existingUserUuid$.pipe(first()).subscribe((existingUserUuid) => {
+      if (existingUserUuid) {
+        this.updateExistingUser(existingUserUuid, roles);
+      } else {
+        this.createUser(roles);
+      }
+    });
+  }
+
+  public rolesChanged(roles: APIUserResponseDTO.RolesEnum[]): void {
+    this.selectedRoles = roles;
+  }
+
+  public rolesCleared(): void {
+    this.selectedRoles = [];
+  }
+
+  public isFormValid(noExistingUser: boolean | null): boolean {
+    return noExistingUser
+      ? this.createForm.valid &&
+          this.createForm.controls.email.dirty &&
+          this.createForm.controls.repeatEmail.dirty &&
+          this.createForm.controls.firstName.dirty &&
+          this.createForm.controls.lastName.dirty
+      : this.createForm.controls.email.valid;
+  }
+
+  private createUser(roles: APICreateUserRequestDTO.RolesEnum[]): void {
     const firstName = this.createForm.controls.firstName.value;
     const lastName = this.createForm.controls.lastName.value;
     const email = this.createForm.controls.email.value;
@@ -112,14 +153,8 @@ export class CreateUserDialogComponent extends BaseComponent implements OnInit {
     const phoneNumber = this.createForm.controls.phoneNumber.value;
     const startPreference = this.createForm.controls.startPreference.value;
     const sendNotificationOnCreation = this.createForm.controls.sendNotificationOnCreation.value;
-    const rightsHolderAccess = this.createForm.controls.rightsHolderAccess.value;
     const apiUser = this.createForm.controls.apiUser.value;
     const stakeholderAccess = this.createForm.controls.stakeholderAccess.value;
-    const roles = this.selectedRoles;
-    roles.push(APICreateUserRequestDTO.RolesEnum.User);
-    if (rightsHolderAccess) {
-      roles.push(APICreateUserRequestDTO.RolesEnum.RightsHolderAccess);
-    }
 
     const user: APICreateUserRequestDTO = {
       firstName,
@@ -136,22 +171,8 @@ export class CreateUserDialogComponent extends BaseComponent implements OnInit {
     this.store.dispatch(OrganizationUserActions.createUser(user));
   }
 
-  public rolesChanged(roles: APIUserResponseDTO.RolesEnum[]): void {
-    this.selectedRoles = roles;
-  }
-
-  public rolesCleared(): void {
-    this.selectedRoles = [];
-  }
-
-  public isFormValid(): boolean {
-    return (
-      this.createForm.valid &&
-      this.createForm.controls.email.dirty &&
-      this.createForm.controls.repeatEmail.dirty &&
-      this.createForm.controls.firstName.dirty &&
-      this.createForm.controls.lastName.dirty
-    );
+  private updateExistingUser(existingUserUuid: string, roles: APICreateUserRequestDTO.RolesEnum[]): void {
+    this.store.dispatch(OrganizationUserActions.updateUser(existingUserUuid, { roles }));
   }
 
   private emailMatchValidator(control: AbstractControl): ValidationErrors | null {
@@ -166,6 +187,6 @@ export class CreateUserDialogComponent extends BaseComponent implements OnInit {
   }
 
   private getEmailControl(): AbstractControl {
-    return this.createForm.get('email')!;
+    return this.createForm.controls.email!;
   }
 }
