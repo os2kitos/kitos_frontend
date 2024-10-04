@@ -161,5 +161,6 @@ export * from './updateOrganizationUnitRequestDTO';
 export * from './updateScheduledNotificationWriteRequestDTO';
 export * from './updateUserRequestDTO';
 export * from './userCollectionPermissionsResponseDTO';
+export * from './userIsPartOfCurrentOrgResponseDTO';
 export * from './userReferenceResponseDTO';
 export * from './userResponseDTO';

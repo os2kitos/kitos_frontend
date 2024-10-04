@@ -221,6 +221,7 @@ model/updateOrganizationUnitRequestDTO.ts
 model/updateScheduledNotificationWriteRequestDTO.ts
 model/updateUserRequestDTO.ts
 model/userCollectionPermissionsResponseDTO.ts
+model/userIsPartOfCurrentOrgResponseDTO.ts
 model/userReferenceResponseDTO.ts
 model/userResponseDTO.ts
 param.ts

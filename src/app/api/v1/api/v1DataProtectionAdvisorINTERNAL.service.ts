@@ -37,7 +37,7 @@ export interface GetSingleDataProtectionAdvisorGetAllRequestParams {
     descending?: boolean;
 }
 
-export interface GetSingleDataProtectionAdvisorGetSingleRequestParams {
+export interface GetSingleDataProtectionAdvisorGetSingleByIdRequestParams {
     id: number;
 }
 
@@ -47,7 +47,7 @@ export interface GetSingleDataProtectionAdvisorGetSingleRequestParams {
 })
 export class APIV1DataProtectionAdvisorINTERNALService {
 
-    protected basePath = 'https://kitos-dev.strongminds.dk';
+    protected basePath = 'https://localhost:44300';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
@@ -189,13 +189,13 @@ export class APIV1DataProtectionAdvisorINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleDataProtectionAdvisorGetSingle(requestParameters: GetSingleDataProtectionAdvisorGetSingleRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIDataProtectionAdvisorDTOApiReturnDTO>;
-    public getSingleDataProtectionAdvisorGetSingle(requestParameters: GetSingleDataProtectionAdvisorGetSingleRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIDataProtectionAdvisorDTOApiReturnDTO>>;
-    public getSingleDataProtectionAdvisorGetSingle(requestParameters: GetSingleDataProtectionAdvisorGetSingleRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIDataProtectionAdvisorDTOApiReturnDTO>>;
-    public getSingleDataProtectionAdvisorGetSingle(requestParameters: GetSingleDataProtectionAdvisorGetSingleRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleDataProtectionAdvisorGetSingleById(requestParameters: GetSingleDataProtectionAdvisorGetSingleByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIDataProtectionAdvisorDTOApiReturnDTO>;
+    public getSingleDataProtectionAdvisorGetSingleById(requestParameters: GetSingleDataProtectionAdvisorGetSingleByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIDataProtectionAdvisorDTOApiReturnDTO>>;
+    public getSingleDataProtectionAdvisorGetSingleById(requestParameters: GetSingleDataProtectionAdvisorGetSingleByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIDataProtectionAdvisorDTOApiReturnDTO>>;
+    public getSingleDataProtectionAdvisorGetSingleById(requestParameters: GetSingleDataProtectionAdvisorGetSingleByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling getSingleDataProtectionAdvisorGetSingle.');
+            throw new Error('Required parameter id was null or undefined when calling getSingleDataProtectionAdvisorGetSingleById.');
         }
 
         let localVarHeaders = this.defaultHeaders;

@@ -24,7 +24,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GetSingleTaskRefGetChildrenRequestParams {
+export interface GetSingleTaskRefGetChildrenByIdRequestParams {
     id: number;
     children: boolean;
     /** Størrelse på resultatsættet.  Standardværdien er \&#39;100\&#39; */
@@ -55,7 +55,7 @@ export interface GetSingleTaskRefGetRootsRequestParams {
 })
 export class APIV1TaskRefINTERNALService {
 
-    protected basePath = 'https://kitos-dev.strongminds.dk';
+    protected basePath = 'https://localhost:44300';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
@@ -119,17 +119,17 @@ export class APIV1TaskRefINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleTaskRefGetChildren(requestParameters: GetSingleTaskRefGetChildrenRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public getSingleTaskRefGetChildren(requestParameters: GetSingleTaskRefGetChildrenRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public getSingleTaskRefGetChildren(requestParameters: GetSingleTaskRefGetChildrenRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public getSingleTaskRefGetChildren(requestParameters: GetSingleTaskRefGetChildrenRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleTaskRefGetChildrenById(requestParameters: GetSingleTaskRefGetChildrenByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public getSingleTaskRefGetChildrenById(requestParameters: GetSingleTaskRefGetChildrenByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleTaskRefGetChildrenById(requestParameters: GetSingleTaskRefGetChildrenByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleTaskRefGetChildrenById(requestParameters: GetSingleTaskRefGetChildrenByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling getSingleTaskRefGetChildren.');
+            throw new Error('Required parameter id was null or undefined when calling getSingleTaskRefGetChildrenById.');
         }
         const children = requestParameters.children;
         if (children === null || children === undefined) {
-            throw new Error('Required parameter children was null or undefined when calling getSingleTaskRefGetChildren.');
+            throw new Error('Required parameter children was null or undefined when calling getSingleTaskRefGetChildrenById.');
         }
         const take = requestParameters.take;
         const skip = requestParameters.skip;
