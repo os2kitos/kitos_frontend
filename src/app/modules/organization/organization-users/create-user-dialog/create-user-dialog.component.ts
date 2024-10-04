@@ -17,6 +17,7 @@ import { CreateUserDialogComponentStore } from './create-user-dialog.component-s
   selector: 'app-create-user-dialog',
   templateUrl: './create-user-dialog.component.html',
   styleUrl: './create-user-dialog.component.scss',
+  providers: [CreateUserDialogComponentStore],
 })
 export class CreateUserDialogComponent extends BaseUserDialogComponent implements OnInit {
   public readonly noExistingUser$ = this.componentStore.noUserInOtherOrgs$;

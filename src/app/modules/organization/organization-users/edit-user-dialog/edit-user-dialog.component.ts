@@ -22,6 +22,7 @@ import { BaseUserDialogComponent } from '../base-user-dialog.component';
   selector: 'app-edit-user-dialog',
   templateUrl: './edit-user-dialog.component.html',
   styleUrl: './edit-user-dialog.component.scss',
+  providers: [CreateUserDialogComponentStore],
 })
 export class EditUserDialogComponent extends BaseUserDialogComponent implements OnInit, AfterViewInit {
   @Input() public user!: OrganizationUser;

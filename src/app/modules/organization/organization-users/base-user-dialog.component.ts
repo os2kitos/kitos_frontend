@@ -9,7 +9,6 @@ import { CreateUserDialogComponentStore } from './create-user-dialog/create-user
 
 @Component({
   template: '',
-  providers: [CreateUserDialogComponentStore],
 })
 export class BaseUserDialogComponent extends BaseComponent {
   public startPreferenceOptions = startPreferenceChoiceOptions;
