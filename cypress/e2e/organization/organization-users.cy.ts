@@ -90,7 +90,7 @@ describe('organization-users', () => {
   });
 
   it('Can create user', () => {
-    cy.intercept('api/v2/organizations/*/users*', { body: {} });
+    cy.intercept('api/v2/internal/organization/*/users/*', { body: null });
 
     cy.getByDataCy('create-button').click();
 
@@ -112,7 +112,7 @@ describe('organization-users', () => {
   });
 
   it('Cannot create user if emails differ', () => {
-    cy.intercept('api/v2/organizations/*/users*', { body: {} });
+    cy.intercept('api/v2/internal/organization/*/users/*', { body: null });
 
     cy.getByDataCy('create-button').click();
 
@@ -123,7 +123,7 @@ describe('organization-users', () => {
   });
 
   it('Can edit user', () => {
-    cy.intercept('api/v2/organizations/*/users*', { body: {} });
+    cy.intercept('api/v2/internal/organization/*/users/*', { body: null });
 
     cy.contains('local-regular-user@kitos.dk').click();
     cy.contains('Rediger').click().wait(500);
