@@ -5,31 +5,21 @@ import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { combineLatest, debounceTime, first, map } from 'rxjs';
 import { APICreateUserRequestDTO, APIUserResponseDTO } from 'src/app/api/v2';
-import { BaseComponent } from 'src/app/shared/base/base.component';
-import {
-  StartPreferenceChoice,
-  startPreferenceChoiceOptions,
-} from 'src/app/shared/models/organization/organization-user/start-preference.model';
-import { userRoleChoiceOptions } from 'src/app/shared/models/organization/organization-user/user-role.model';
+import { StartPreferenceChoice } from 'src/app/shared/models/organization/organization-user/start-preference.model';
 import { phoneNumberLengthValidator } from 'src/app/shared/validators/phone-number-length.validator';
 import { requiredIfDirtyValidator } from 'src/app/shared/validators/required-if-dirty.validator';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
 import { selectOrganizationUserIsCreateLoading } from 'src/app/store/organization/organization-user/selectors';
-import { selectUserIsGlobalAdmin } from 'src/app/store/user-store/selectors';
+import { BaseUserDialogComponent } from '../base-user-dialog.component';
 import { CreateUserDialogComponentStore } from './create-user-dialog.component-store';
 
 @Component({
   selector: 'app-create-user-dialog',
   templateUrl: './create-user-dialog.component.html',
   styleUrl: './create-user-dialog.component.scss',
-  providers: [CreateUserDialogComponentStore],
 })
-export class CreateUserDialogComponent extends BaseComponent implements OnInit {
-  public readonly isLoadingAlreadyExists$ = this.componentStore.isLoading$;
-  public readonly alreadyExists$ = this.componentStore.alreadyExists$;
+export class CreateUserDialogComponent extends BaseUserDialogComponent implements OnInit {
   public readonly noExistingUser$ = this.componentStore.noUserInOtherOrgs$;
-  public readonly isLoading$ = this.store.select(selectOrganizationUserIsCreateLoading);
-  public readonly isGlobalAdmin$ = this.store.select(selectUserIsGlobalAdmin);
   public readonly existingUserUuid$ = this.componentStore.existingUserUuid$;
 
   public readonly isLoadingCombined$ = combineLatest([
@@ -59,19 +49,15 @@ export class CreateUserDialogComponent extends BaseComponent implements OnInit {
     map((noExistingUser) => (noExistingUser ? '' : this.userInOtherOrgHelptext))
   );
   private readonly userInOtherOrgHelptext = $localize`Denne bruger findes allerede i en anden organisation. Du kan kun redigere brugerens roller.`;
-
-  public startPreferenceOptions = startPreferenceChoiceOptions;
-  public roleOptions = userRoleChoiceOptions;
-
   private selectedRoles: APIUserResponseDTO.RolesEnum[] = [];
 
   constructor(
-    private readonly store: Store,
     private readonly actions$: Actions,
     private readonly dialog: MatDialogRef<CreateUserDialogComponent>,
-    private readonly componentStore: CreateUserDialogComponentStore
+    store: Store,
+    componentStore: CreateUserDialogComponentStore
   ) {
-    super();
+    super(store, componentStore);
   }
 
   ngOnInit(): void {
@@ -130,7 +116,7 @@ export class CreateUserDialogComponent extends BaseComponent implements OnInit {
 
     this.existingUserUuid$.pipe(first()).subscribe((existingUserUuid) => {
       if (existingUserUuid) {
-        this.updateExistingUserUuid(existingUserUuid, roles);
+        this.updateExistingUser(existingUserUuid, roles);
       } else {
         this.createUser(roles);
       }
@@ -184,7 +170,7 @@ export class CreateUserDialogComponent extends BaseComponent implements OnInit {
     this.store.dispatch(OrganizationUserActions.createUser(user));
   }
 
-  private updateExistingUserUuid(existingUserUuid: string, roles: APICreateUserRequestDTO.RolesEnum[]): void {
+  private updateExistingUser(existingUserUuid: string, roles: APICreateUserRequestDTO.RolesEnum[]): void {
     this.store.dispatch(OrganizationUserActions.updateUser(existingUserUuid, { roles }));
   }
 
@@ -200,6 +186,6 @@ export class CreateUserDialogComponent extends BaseComponent implements OnInit {
   }
 
   private getEmailControl(): AbstractControl {
-    return this.createForm.get('email')!;
+    return this.createForm.controls.email!;
   }
 }
