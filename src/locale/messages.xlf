@@ -3850,6 +3850,9 @@
       <trans-unit id="8526724513361212996" datatype="html">
         <source>Roller kopieret</source>
       </trans-unit>
+      <trans-unit id="5412714650100464515" datatype="html">
+        <source>Denne bruger findes allerede i en anden organisation. Du kan kun redigere brugerens roller.</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

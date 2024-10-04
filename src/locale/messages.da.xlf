@@ -5023,6 +5023,10 @@
         <source>Kunne ikke kopiere roller</source>
         <target state="new">Kunne ikke kopiere roller</target>
       </trans-unit>
+      <trans-unit id="5412714650100464515" datatype="html">
+        <source>Denne bruger findes allerede i en anden organisation. Du kan kun redigere brugerens roller.</source>
+        <target state="new">Denne bruger findes allerede i en anden organisation. Du kan kun redigere brugerens roller.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

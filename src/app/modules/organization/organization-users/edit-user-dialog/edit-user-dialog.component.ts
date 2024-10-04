@@ -2,22 +2,22 @@ import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/cor
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { APIUpdateUserRequestDTO, APIUserResponseDTO } from 'src/app/api/v2';
-import { BaseComponent } from 'src/app/shared/base/base.component';
-
-import { selectUserIsGlobalAdmin } from 'src/app/store/user-store/selectors';
-import { CreateUserDialogComponentStore } from '../create-user-dialog/create-user-dialog.component-store';
 import { debounceTime } from 'rxjs';
-import { requiredIfDirtyValidator } from 'src/app/shared/validators/required-if-dirty.validator';
+import { APIUpdateUserRequestDTO, APIUserResponseDTO } from 'src/app/api/v2';
 import { phoneNumberLengthValidator } from 'src/app/shared/validators/phone-number-length.validator';
+import { requiredIfDirtyValidator } from 'src/app/shared/validators/required-if-dirty.validator';
+import { CreateUserDialogComponentStore } from '../create-user-dialog/create-user-dialog.component-store';
 
 import { MultiSelectDropdownComponent } from 'src/app/shared/components/dropdowns/multi-select-dropdown/multi-select-dropdown.component';
-import { selectOrganizationUserIsCreateLoading } from 'src/app/store/organization/organization-user/selectors';
-import { StartPreferenceChoice, startPreferenceChoiceOptions } from 'src/app/shared/models/organization/organization-user/start-preference.model';
-import { mapUserRoleChoice, UserRoleChoice, userRoleChoiceOptions } from 'src/app/shared/models/organization/organization-user/user-role.model';
-import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
 import { OrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
 import { CopyRolesDialogComponent } from '../copy-roles-dialog/copy-roles-dialog.component';
+import { StartPreferenceChoice } from 'src/app/shared/models/organization/organization-user/start-preference.model';
+import {
+  mapUserRoleChoice,
+  UserRoleChoice,
+} from 'src/app/shared/models/organization/organization-user/user-role.model';
+import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
+import { BaseUserDialogComponent } from '../base-user-dialog.component';
 
 @Component({
   selector: 'app-edit-user-dialog',
@@ -25,7 +25,7 @@ import { CopyRolesDialogComponent } from '../copy-roles-dialog/copy-roles-dialog
   styleUrl: './edit-user-dialog.component.scss',
   providers: [CreateUserDialogComponentStore],
 })
-export class EditUserDialogComponent extends BaseComponent implements OnInit, AfterViewInit {
+export class EditUserDialogComponent extends BaseUserDialogComponent implements OnInit, AfterViewInit {
   @Input() public user!: OrganizationUser;
   @Input() public isNested!: boolean;
   @ViewChild(MultiSelectDropdownComponent)
@@ -48,23 +48,15 @@ export class EditUserDialogComponent extends BaseComponent implements OnInit, Af
     sendAdvis: new FormControl<boolean | undefined>(undefined),
   });
 
-  public startPreferenceOptions = startPreferenceChoiceOptions;
-  public roleOptions = userRoleChoiceOptions;
-  public readonly isGlobalAdmin$ = this.store.select(selectUserIsGlobalAdmin);
-
-  public readonly isLoadingAlreadyExists$ = this.componentStore.isLoading$;
-  public readonly alreadyExists$ = this.componentStore.alreadyExists$;
-  public readonly isLoading$ = this.store.select(selectOrganizationUserIsCreateLoading);
-
   private selectedRoles: APIUserResponseDTO.RolesEnum[] = [];
 
   constructor(
-    private store: Store,
     private dialogRef: MatDialogRef<EditUserDialogComponent>,
     private componentStore: CreateUserDialogComponentStore,
     private dialog: MatDialog
+    store: Store,
   ) {
-    super();
+    super(store, componentStore);
   }
 
   public ngOnInit(): void {
@@ -87,7 +79,8 @@ export class EditUserDialogComponent extends BaseComponent implements OnInit, Af
         ?.valueChanges.pipe(debounceTime(500))
         .subscribe((value) => {
           if (!value) return;
-          this.componentStore.checkEmailAvailability(value);
+
+          this.componentStore.getUserWithEmail(value);
         })
     );
 
