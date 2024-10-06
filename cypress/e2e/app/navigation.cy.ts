@@ -81,7 +81,7 @@ describe('navigation', () => {
   });
 
   it('can see local admin menu item if local admin', () => {
-      cy.getByDataCy("profile-menu").click();
-      cy.getByDataCy("local-admin-menu-item").should('exist');
-  })
+    cy.hoverByDataCy('profile-menu');
+    cy.getByDataCy('local-admin-menu-item').should('exist');
+  });
 });

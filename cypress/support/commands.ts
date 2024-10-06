@@ -336,7 +336,11 @@ Cypress.Commands.add('confirmTextboxStateByDataCy', (dataCySelector, shouldBeEna
   const inputElement = cy.getByDataCy(dataCySelector).get('input');
   if (shouldBeEnabled) inputElement.should('be.enabled');
   else inputElement.should('be.disabled');
-})
+});
+
+Cypress.Commands.add('hoverByDataCy', (dataCySelector) => {
+  cy.getByDataCy(dataCySelector).trigger('mouseenter');
+});
 
 function getElementParentWithSelector(elementName: string, selector: string) {
   return cy.contains(elementName).parentsUntil(selector).parent();
