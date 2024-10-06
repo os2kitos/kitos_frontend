@@ -79,4 +79,9 @@ describe('navigation', () => {
     cy.get('app-nav-bar').get('img').first().click();
     cy.contains('Kitos - Kommunernes IT OverbliksSystem');
   });
+
+  it('can see local admin menu item if local admin', () => {
+      cy.getByDataCy("profile-menu").click();
+      cy.getByDataCy("local-admin-menu-item").should('exist');
+  })
 });
