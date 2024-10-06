@@ -29,6 +29,8 @@ export * from './contractTerminationTermsRequestDTO';
 export * from './contractTerminationTermsResponseDTO';
 export * from './contractValidityResponseDTO';
 export * from './contractValidityWriteRequestDTO';
+export * from './copyRightRequestDTO';
+export * from './copyUserRightsRequestDTO';
 export * from './createDataProcessingRegistrationRequestDTO';
 export * from './createItInterfaceRequestDTO';
 export * from './createItSystemRequestDTO';

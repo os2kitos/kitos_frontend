@@ -65,7 +65,7 @@ export interface GetSingleArchivePeriodsGetV1ByIdRequestParams {
 })
 export class APIV1ODATAArchivePeriodsINTERNALService {
 
-    protected basePath = 'https://localhost:44300';
+    protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
