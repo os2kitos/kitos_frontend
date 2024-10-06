@@ -23,9 +23,9 @@ Cypress.Commands.add('setup', (authenticate?: boolean, path?: string) => {
   }
 });
 
-Cypress.Commands.add('login', () => {
+Cypress.Commands.add('login', (authorizeFixturePath = './shared/authorize.json') => {
   cy.intercept('/api/authorize/antiforgery', '"ABC"');
-  cy.intercept('/api/Authorize', { fixture: './shared/authorize.json' }).as('authorize');
+  cy.intercept('/api/Authorize', { fixture: authorizeFixturePath }).as('authorize');
 
   cy.contains('Email').parent().find('input').type('test@test.com');
   cy.contains('Password').parent().find('input').type('123456');
