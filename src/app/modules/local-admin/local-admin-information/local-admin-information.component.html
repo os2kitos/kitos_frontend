@@ -1,5 +1,12 @@
-<app-card *ngIf="organizationName$ | async as organizationName">
-  <app-card-header title="Information om {{organizationName}}" helpTextKey="local-admin.information" i18n-title>
-  </app-card-header>
 
+  <app-standard-vertical-content-grid>
+    <app-card *ngIf="organizationName$ | async as organizationName">
+      <app-card-header title="Information om {{organizationName}}" i18n-title>
+      </app-card-header>
+      <app-form-grid [formGroup]="form">
+          <app-textbox text="Navn" i18n-text [formGroup]="form" formName="nameControl"></app-textbox>
+    <app-numeric-input text="CVR-nummer" i18n-text [formGroup]="form" formName="cvrControl"></app-numeric-input>
+    <app-textbox text="Type" i18n-text [disabled]="true" i18n-text [formGroup]="form" formName="typeControl"></app-textbox>
+      </app-form-grid>
   </app-card>
+  </app-standard-vertical-content-grid>
