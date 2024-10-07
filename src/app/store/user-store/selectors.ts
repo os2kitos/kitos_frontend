@@ -14,6 +14,8 @@ const { selectUserState } = userFeature;
 
 export const selectOrganizationName = createSelector(selectOrganization, (organization) => organization?.name);
 export const selectOrganizationUuid = createSelector(selectOrganization, (organization) => organization?.uuid);
+export const selectOrganizationCvr = createSelector(selectOrganization, (organization) => organization?.cvr);
+export const selectOrganizationType = createSelector(selectOrganization, (organization) => organization?.organizationType);
 
 export const selectUserIsGlobalAdmin = createSelector(selectUser, (user) => user?.isGlobalAdmin ?? false);
 
