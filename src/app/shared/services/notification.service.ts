@@ -537,6 +537,7 @@ export class NotificationService implements OnDestroy {
     this.subscribeToExternalReferenceManagementEvents();
     this.subscribeToRoleNotifications();
   }
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public subscribeToActionAsDefault(actionType: any, msg: string) {
     this.subscribeToActionWithMessage(actionType, msg, PopupMessageType.default);
@@ -548,7 +549,7 @@ export class NotificationService implements OnDestroy {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  private subscribeToActionWithMessage(actionType: any, msg: string, type: PopupMessageType) {
+  public subscribeToActionWithMessage(actionType: any, msg: string, type: PopupMessageType) {
     this.subscriptions.add(this.actions$.pipe(ofType(actionType)).subscribe(() => this.show(msg, type)));
   }
 

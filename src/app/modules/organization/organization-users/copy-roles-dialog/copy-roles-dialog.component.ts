@@ -21,6 +21,8 @@ export class CopyRolesDialogComponent extends BaseComponent implements OnInit {
   @Input() user!: OrganizationUser;
   @ViewChild(DropdownComponent) dropdownComponent!: DropdownComponent<OrganizationUser>;
 
+  public isLoading = false;
+
   constructor(private store: Store, private selectionService: RoleSelectionService, private actions$: Actions) {
     super();
   }
@@ -30,8 +32,15 @@ export class CopyRolesDialogComponent extends BaseComponent implements OnInit {
       this.actions$.pipe(ofType(OrganizationUserActions.copyRolesSuccess)).subscribe(() => {
         this.selectionService.deselectAll();
         this.dropdownComponent.clear();
+        this.selectedUser = undefined;
       })
     );
+
+    this.actions$
+      .pipe(ofType(OrganizationUserActions.copyRolesError, OrganizationUserActions.copyRolesSuccess))
+      .subscribe(() => {
+        this.isLoading = false;
+      });
   }
 
   public users: Observable<OrganizationUser[]> = this.store.select(selectAll);
@@ -53,6 +62,7 @@ export class CopyRolesDialogComponent extends BaseComponent implements OnInit {
     const selectedUser = this.selectedUser;
     if (!selectedUser) return;
     const request = this.getRequest();
+    this.isLoading = true;
     this.store.dispatch(OrganizationUserActions.copyRoles(this.user.Uuid, selectedUser.Uuid, request));
   }
 

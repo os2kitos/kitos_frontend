@@ -1,41 +1,45 @@
 <app-scrollbar-dialog title="Kopier roller" i18n-title [nested]="true">
   <app-standard-vertical-content-grid>
-    <app-dropdown
-      (valueChange)="selectedUserChanged($event)"
-      [data]="users | async"
-      textField="Name"
-      text="Kopier roller til"
-      i18n-text
-    >
-    </app-dropdown>
+    <ng-container *ngIf="!isLoading">
+      <app-dropdown
+        (valueChange)="selectedUserChanged($event)"
+        [data]="users | async"
+        textField="Name"
+        text="Kopier roller til"
+        i18n-text
+      >
+      </app-dropdown>
 
-    <app-copy-role-table
-      *ngIf="user.OrganizationUnitRights.length > 0"
-      [user]="user"
-      entityType="organization-unit"
-    ></app-copy-role-table>
+      <app-copy-role-table
+        *ngIf="user.OrganizationUnitRights.length > 0"
+        [user]="user"
+        entityType="organization-unit"
+      ></app-copy-role-table>
 
-    <app-copy-role-table
-      *ngIf="user.ItSystemRights.length > 0"
-      [user]="user"
-      entityType="it-system"
-    ></app-copy-role-table>
+      <app-copy-role-table
+        *ngIf="user.ItSystemRights.length > 0"
+        [user]="user"
+        entityType="it-system"
+      ></app-copy-role-table>
 
-    <app-copy-role-table
-      *ngIf="user.ItContractRights.length > 0"
-      [user]="user"
-      entityType="it-contract"
-    ></app-copy-role-table>
+      <app-copy-role-table
+        *ngIf="user.ItContractRights.length > 0"
+        [user]="user"
+        entityType="it-contract"
+      ></app-copy-role-table>
 
-    <app-copy-role-table
-      *ngIf="user.DataProcessingRegistrationRights.length > 0"
-      [user]="user"
-      entityType="data-processing-registration"
-    ></app-copy-role-table>
+      <app-copy-role-table
+        *ngIf="user.DataProcessingRegistrationRights.length > 0"
+        [user]="user"
+        entityType="data-processing-registration"
+      ></app-copy-role-table>
+    </ng-container>
+
+    <app-loading *ngIf="isLoading"></app-loading>
 
     <app-dialog-actions>
       <app-button
-        [disabled]="getSelectedUserRights().length === 0 || !selectedUser"
+        [disabled]="getSelectedUserRights().length === 0 || !selectedUser || !this.dropdownComponent.value"
         buttonStyle="primary"
         (buttonClick)="onCopyRoles()"
       >
