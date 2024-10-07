@@ -10,7 +10,7 @@ declare namespace Cypress {
     /**
      * Login using form.
      */
-    login(): void;
+    login(authorizeFixturePath: string): void;
 
     /**
      * Require all api request to be intercepted.
@@ -189,11 +189,17 @@ declare namespace Cypress {
      */
     replaceTextByDataCy(dataCySelector: string, newContent: string): Chainable<Subject>;
 
-     /**
+    /**
      * Check if the input inside a textbox is enabled/disabled
      * @param dataCySelector: selector for target element
      * @param shouldBeEnabled: true if input is expected to be enabled, false otherwise
      */
-    confirmTextboxStateByDataCy(dataCySelector: string, shouldBeEnabled: boolean) : Chainable<Subject>;
+    confirmTextboxStateByDataCy(dataCySelector: string, shouldBeEnabled: boolean): Chainable<Subject>;
+
+    /**
+     * Hover on an element
+     * @param dataCySelector: selector for target element
+     */
+    hoverByDataCy(dataCySelector: string): Chainable<Subject>;
   }
 }

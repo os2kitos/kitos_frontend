@@ -42,12 +42,17 @@
 
       <span class="separator"></span>
 
-      <app-menu [path]="AppPath.profile" i18n-title>
+      <app-menu [path]="AppPath.profile" i18n-title data-cy="profile-menu">
         <span title class="user-menu">
           <p>{{ (user$ | async)?.fullName }}</p>
           <p>{{ organizationName$ | async }}</p>
         </span>
         <app-menu-item [path]="AppPath.profile" i18n>Min profil</app-menu-item>
+        <app-menu-item
+        [path]="AppPath.localAdmin"
+        i18n
+        *ngIf="user.isLocalAdmin"
+        data-cy="local-admin-menu-item">Lokal admin</app-menu-item>
         <app-menu-item *ngIf="hasMultipleOrganizations$ | async" (itemClick)="showOrganizationDialog()" i18n
           >Skift organisation</app-menu-item
         >

@@ -30,6 +30,7 @@ export enum AppPath {
   profile = 'profile',
 
   globalAdmin = 'global-admin',
+  localAdmin = 'local-admin',
   helpTexts = 'help-texts',
 
   roles = 'roles',
