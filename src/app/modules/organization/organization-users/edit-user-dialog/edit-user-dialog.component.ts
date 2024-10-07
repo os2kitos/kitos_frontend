@@ -52,8 +52,8 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
 
   constructor(
     private dialogRef: MatDialogRef<EditUserDialogComponent>,
-    private componentStore: CreateUserDialogComponentStore,
-    private dialog: MatDialog
+    componentStore: CreateUserDialogComponentStore,
+    private dialog: MatDialog,
     store: Store,
   ) {
     super(store, componentStore);
