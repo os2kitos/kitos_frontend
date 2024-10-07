@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { APICopyRightRequestDTO, APICopyUserRightsRequestDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { DropdownComponent } from 'src/app/shared/components/dropdowns/dropdown/dropdown.component';
@@ -43,7 +43,7 @@ export class CopyRolesDialogComponent extends BaseComponent implements OnInit {
       });
   }
 
-  public users: Observable<OrganizationUser[]> = this.store.select(selectAll);
+  public users: Observable<OrganizationUser[]> = this.store.select(selectAll).pipe(map((users) => users.filter((user) => user.Uuid !== this.user.Uuid)));
   public selectedUser: OrganizationUser | undefined = undefined;
 
   public selectedUserChanged(user: OrganizationUser): void {
