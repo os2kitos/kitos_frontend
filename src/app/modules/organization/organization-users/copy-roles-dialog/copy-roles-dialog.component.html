@@ -51,7 +51,7 @@
 
     <app-loading *ngIf="isLoading"></app-loading>
   </app-standard-vertical-content-grid>
-  <app-dialog-actions class="dialog-footer">
+  <app-dialog-actions>
     <app-button [disabled]="!isAnySelected()" buttonStyle="secondary" color="accent" (buttonClick)="deselectAll()" i18n>
       Fravælg alle
     </app-button>
