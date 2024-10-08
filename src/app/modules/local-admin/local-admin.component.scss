@@ -2,10 +2,18 @@
 @import 'mixins';
 
 :host {
-  @include overview-flex-column-layout
+  display: flex;
+  flex-direction: column;
+  padding: $padding-large;
 }
 
 .content {
   display: flex;
   gap: $padding-medium;
+  margin-top: 20px;
+}
+
+.title-margin {
+  margin-top: 25px;
+  margin-left: 10px;
 }
