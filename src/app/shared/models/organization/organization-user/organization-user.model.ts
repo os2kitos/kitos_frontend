@@ -38,7 +38,7 @@ export const adaptOrganizationUser = (value: any): OrganizationUser | undefined 
   const roles = value.OrganizationUnitRights.map((right: { Role: { Name: string } }) => right.Role?.Name)
     .filter((name: string) => name) // Filter out undefined or null names
     .join(', ');
-
+    
   const adaptedUser = {
     id: value.Uuid,
     Uuid: value.Uuid,

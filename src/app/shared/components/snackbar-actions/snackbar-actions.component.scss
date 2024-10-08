@@ -1,0 +1,15 @@
+@import 'theme';
+
+.snackbar {
+  background-color: $color-primary-darker;
+  color: $color-white;
+  padding: $padding-medium;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  position: sticky;
+  z-index: 1000;
+}

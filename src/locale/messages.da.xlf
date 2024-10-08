@@ -5027,6 +5027,14 @@
         <source>Denne bruger findes allerede i en anden organisation. Du kan kun redigere brugerens roller.</source>
         <target state="new">Denne bruger findes allerede i en anden organisation. Du kan kun redigere brugerens roller.</target>
       </trans-unit>
+      <trans-unit id="4901548796888618173" datatype="html">
+        <source> Fravælg alle </source>
+        <target state="new"> Fravælg alle </target>
+      </trans-unit>
+      <trans-unit id="8453891047051546327" datatype="html">
+        <source> Vælg alle </source>
+        <target state="new"> Vælg alle </target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

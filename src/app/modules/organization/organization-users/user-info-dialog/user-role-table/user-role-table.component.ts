@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { getRights, getRoleTypeNameByEntityType } from 'src/app/shared/helpers/user-role.helpers';
+import { getRights, getRoleTypeNameByEntityType, getTypeTitleNameByType } from 'src/app/shared/helpers/user-role.helpers';
 import { OrganizationUser, Right } from 'src/app/shared/models/organization/organization-user/organization-user.model';
 
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
@@ -28,18 +28,7 @@ export class UserRoleTableComponent {
   }
 
   public getTitle(): string {
-    switch (this.entityType) {
-      case 'organization-unit':
-        return $localize`Organisationsenhedroller`;
-      case 'it-system':
-        return $localize`Systemroller`;
-      case 'it-contract':
-        return $localize`Kontraktroller`;
-      case 'data-processing-registration':
-        return $localize`Databehandlingsroller`;
-      default:
-        throw new Error(`This component does not support entity type: ${this.entityType}`);
-    }
+    return getTypeTitleNameByType(this.entityType);
   }
 
   public getRoleTypeName(): string {

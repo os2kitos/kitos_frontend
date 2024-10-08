@@ -3853,6 +3853,12 @@
       <trans-unit id="5412714650100464515" datatype="html">
         <source>Denne bruger findes allerede i en anden organisation. Du kan kun redigere brugerens roller.</source>
       </trans-unit>
+      <trans-unit id="4901548796888618173" datatype="html">
+        <source> Fravælg alle </source>
+      </trans-unit>
+      <trans-unit id="8453891047051546327" datatype="html">
+        <source> Vælg alle </source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

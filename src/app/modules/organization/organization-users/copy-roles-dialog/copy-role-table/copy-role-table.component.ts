@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { getRights, getRoleTypeNameByEntityType } from 'src/app/shared/helpers/user-role.helpers';
+import { getRights, getRoleTypeNameByEntityType, getTypeTitleNameByType } from 'src/app/shared/helpers/user-role.helpers';
 import { OrganizationUser, Right } from 'src/app/shared/models/organization/organization-user/organization-user.model';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
 import { RoleSelectionService } from 'src/app/shared/services/role-selector-service';
@@ -49,5 +49,9 @@ export class CopyRoleTableComponent {
 
   public isAllSelected(): boolean {
     return this.selectionService.isAllOfTypeSelected(this.entityType, this.getUserRights());
+  }
+
+  public getTitle(): string {
+    return getTypeTitleNameByType(this.entityType);
   }
 }

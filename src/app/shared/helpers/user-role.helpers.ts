@@ -30,3 +30,18 @@ export function getRoleTypeNameByEntityType(entityType: RegistrationEntityTypes)
       throw new Error(`This component does not support entity type: ${entityType}`);
   }
 }
+
+export function getTypeTitleNameByType(entityType: RegistrationEntityTypes): string {
+  switch (entityType) {
+    case 'organization-unit':
+      return $localize`Organisationsenhedroller`;
+    case 'it-system':
+      return $localize`Systemroller`;
+    case 'it-contract':
+      return $localize`Kontraktroller`;
+    case 'data-processing-registration':
+      return $localize`Databehandlingsroller`;
+    default:
+      throw new Error(`This component does not support entity type: ${entityType}`);
+  }
+}

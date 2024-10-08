@@ -35,16 +35,34 @@
       ></app-copy-role-table>
     </ng-container>
 
-    <app-loading *ngIf="isLoading"></app-loading>
+    <app-snackbar-actions *ngIf="getSelectedUserRights().length > 0 && !isLoading">
+      <app-paragraph color="white" paragraphSize="medium" [dimmed]="true" i18n>{{ getSnackbarText() }}</app-paragraph>
 
-    <app-dialog-actions>
       <app-button
-        [disabled]="getSelectedUserRights().length === 0 || !selectedUser || !this.dropdownComponent.value"
-        buttonStyle="primary"
+        color="secondary"
+        buttonStyle="secondary"
         (buttonClick)="onCopyRoles()"
+        [disabled]="!selectedUser || !this.dropdownComponent.value"
+        i18n
       >
-        {{ getButtonText() }}
+        Kopier roller
       </app-button>
-    </app-dialog-actions>
+    </app-snackbar-actions>
+
+    <app-loading *ngIf="isLoading"></app-loading>
   </app-standard-vertical-content-grid>
+  <app-dialog-actions class="dialog-footer">
+    <app-button
+      [disabled]="getSelectedUserRights().length === 0"
+      buttonStyle="secondary"
+      color="accent"
+      (buttonClick)="deselectAll()"
+      i18n
+    >
+      Fravælg alle
+    </app-button>
+    <app-button [disabled]="isAllSelected()" buttonStyle="secondary" color="accent" (buttonClick)="selectAll()" i18n>
+      Vælg alle
+    </app-button>
+  </app-dialog-actions>
 </app-scrollbar-dialog>

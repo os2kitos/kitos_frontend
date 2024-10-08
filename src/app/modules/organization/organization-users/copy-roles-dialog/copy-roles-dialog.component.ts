@@ -43,7 +43,9 @@ export class CopyRolesDialogComponent extends BaseComponent implements OnInit {
       });
   }
 
-  public users: Observable<OrganizationUser[]> = this.store.select(selectAll).pipe(map((users) => users.filter((user) => user.Uuid !== this.user.Uuid)));
+  public readonly users: Observable<OrganizationUser[]> = this.store
+    .select(selectAll)
+    .pipe(map((users) => users.filter((user) => user.Uuid !== this.user.Uuid)));
   public selectedUser: OrganizationUser | undefined = undefined;
 
   public selectedUserChanged(user: OrganizationUser): void {
@@ -54,8 +56,8 @@ export class CopyRolesDialogComponent extends BaseComponent implements OnInit {
     return this.selectionService.getSelectedItems();
   }
 
-  public getButtonText(): string {
-    return $localize`Kopier valgte roller ${this.buttonNumberText()}`;
+  public getSnackbarText(): string {
+    return $localize`Vælg handling for valgte roller ${this.buttonNumberText()}`;
   }
 
   public onCopyRoles(): void {
@@ -64,6 +66,18 @@ export class CopyRolesDialogComponent extends BaseComponent implements OnInit {
     const request = this.getRequest();
     this.isLoading = true;
     this.store.dispatch(OrganizationUserActions.copyRoles(this.user.Uuid, selectedUser.Uuid, request));
+  }
+
+  public selectAll(): void {
+    this.selectionService.selectAll(this.user);
+  }
+
+  public deselectAll(): void {
+    this.selectionService.deselectAll();
+  }
+
+  public isAllSelected(): boolean {
+    return this.selectionService.isAllSelected(this.user);
   }
 
   private getRequest(): APICopyUserRightsRequestDTO {

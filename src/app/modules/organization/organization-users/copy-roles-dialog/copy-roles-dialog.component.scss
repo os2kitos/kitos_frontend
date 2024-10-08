@@ -1,5 +1,20 @@
 @import 'theme';
 
-app-copy-role-table {
-  padding: $padding-medium;
+:host ::ng-deep {
+  .content {
+    padding-bottom: 0 !important;
+  }
+}
+
+.dialog-footer {
+  background-color: $color-white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+  padding-bottom: $padding-large;
 }
