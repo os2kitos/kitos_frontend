@@ -80,6 +80,18 @@ export class CopyRolesDialogComponent extends BaseComponent implements OnInit {
     return this.selectionService.isAllSelected(this.user);
   }
 
+  public isAnySelected(): boolean {
+    return this.getSelectedUserRights().length > 0;
+  }
+
+  public isUserSelected(): boolean {
+    return (
+      this.selectedUser !== undefined &&
+      this.dropdownComponent.value !== null &&
+      this.dropdownComponent.value !== undefined
+    );
+  }
+
   private getRequest(): APICopyUserRightsRequestDTO {
     const request = {
       unitRights: this.getRequestForType('organization-unit'),

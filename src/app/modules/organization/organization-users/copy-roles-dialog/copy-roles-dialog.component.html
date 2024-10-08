@@ -35,14 +35,14 @@
       ></app-copy-role-table>
     </ng-container>
 
-    <app-snackbar-actions *ngIf="getSelectedUserRights().length > 0 && !isLoading">
+    <app-snackbar-actions *ngIf="isAnySelected() && !isLoading">
       <app-paragraph color="white" paragraphSize="medium" [dimmed]="true" i18n>{{ getSnackbarText() }}</app-paragraph>
 
       <app-button
         color="secondary"
         buttonStyle="secondary"
         (buttonClick)="onCopyRoles()"
-        [disabled]="!selectedUser || !this.dropdownComponent.value"
+        [disabled]="!isUserSelected()"
         i18n
       >
         Kopier roller
@@ -52,13 +52,7 @@
     <app-loading *ngIf="isLoading"></app-loading>
   </app-standard-vertical-content-grid>
   <app-dialog-actions class="dialog-footer">
-    <app-button
-      [disabled]="getSelectedUserRights().length === 0"
-      buttonStyle="secondary"
-      color="accent"
-      (buttonClick)="deselectAll()"
-      i18n
-    >
+    <app-button [disabled]="!isAnySelected()" buttonStyle="secondary" color="accent" (buttonClick)="deselectAll()" i18n>
       Fravælg alle
     </app-button>
     <app-button [disabled]="isAllSelected()" buttonStyle="secondary" color="accent" (buttonClick)="selectAll()" i18n>
