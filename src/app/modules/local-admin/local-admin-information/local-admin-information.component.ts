@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
-import { APIOrganizationResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { mapOrganizationType } from 'src/app/shared/helpers/organization-type.helpers';
 import { OrganizationMasterDataActions } from 'src/app/store/organization/organization-master-data/actions';
 import { selectOrganizationHasModifyCvrPermission } from 'src/app/store/organization/organization-master-data/selectors';
 import {
@@ -42,7 +42,7 @@ export class LocalAdminInformationComponent extends BaseComponent implements OnI
           this.form.patchValue({
             nameControl: name,
             cvrControl: Number.parseInt(cvr!),
-            typeControl: this.mapOrganizationType(type),
+            typeControl: mapOrganizationType(type),
           });
         }
       )
@@ -51,24 +51,5 @@ export class LocalAdminInformationComponent extends BaseComponent implements OnI
     this.hasModifyCvrPermission$.subscribe((hasModifyCvrPermission) => {
       if (!hasModifyCvrPermission) this.form.controls.cvrControl.disable();
     });
-  }
-
-  private mapOrganizationType(source: APIOrganizationResponseDTO.OrganizationTypeEnum | undefined): string | undefined {
-    switch (source) {
-      case APIOrganizationResponseDTO.OrganizationTypeEnum.Municipality: {
-        return $localize`Kommune`;
-      }
-      case APIOrganizationResponseDTO.OrganizationTypeEnum.CommunityOfInterest: {
-        return $localize`Interessefællesskab`;
-      }
-      case APIOrganizationResponseDTO.OrganizationTypeEnum.Company: {
-        return $localize`Virksomhed`;
-      }
-      case APIOrganizationResponseDTO.OrganizationTypeEnum.OtherPublicAuthority: {
-        return $localize`Anden offentlig myndighed`;
-      }
-      default:
-        return undefined;
-    }
   }
 }
