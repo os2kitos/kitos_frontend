@@ -3,7 +3,7 @@
     <mat-expansion-panel-header>
       <mat-panel-title>
           <app-paragraph [bold]="true">{{ title }}</app-paragraph>
-          <ng-content select="app-accordion-header"></ng-content>
+          <ng-content class="accordion-header" select="app-accordion-header"></ng-content>
       </mat-panel-title>
     </mat-expansion-panel-header>
     <ng-content></ng-content>

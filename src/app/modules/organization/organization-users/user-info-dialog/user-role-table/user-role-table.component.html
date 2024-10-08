@@ -1,9 +1,9 @@
 <app-accordion [disabled]="getUserRights().length === 0">
   <app-accordion-header>
-    <app-details-header class="header">
+    <app-content-space-between class="accordion-header">
       <app-paragraph [bold]="true" paragraphSize="large"> {{ getTitle() }} </app-paragraph>
       <app-number-circle [number]="getUserRights().length"></app-number-circle>
-    </app-details-header>
+    </app-content-space-between>
   </app-accordion-header>
   <ng-container *ngIf="getUserRights().length > 0">
     <app-native-table tableLayout="fixed">

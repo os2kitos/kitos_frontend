@@ -1,17 +1,10 @@
 @import "theme";
 
-.container {
-  border: solid $color-neutral-20 1px !important;
-  border-radius: $radius-large !important;
-  overflow: auto;
-  padding-top: $padding-medium;
-}
-
-.header {
-  float: left
-}
-
 td {
   color : $color-neutral-dark;
   word-wrap: break-word;
+}
+
+.accordion-header * {
+  padding: $padding-smaller;
 }
