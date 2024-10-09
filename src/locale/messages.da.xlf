@@ -5007,9 +5007,9 @@
         <source>Kunne ikke hente organisationsrettigheder.</source>
         <target state="new">Kunne ikke hente organisationsrettigheder.</target>
       </trans-unit>
-      <trans-unit id="5765294615070316548" datatype="html">
-        <source>Kopier valgte roller <x id="PH" equiv-text="this.buttonNumberText()"/></source>
-        <target state="new">Kopier valgte roller <x id="PH" equiv-text="this.buttonNumberText()"/></target>
+      <trans-unit id="7680003617143986371" datatype="html">
+        <source>Vælg handling for valgte roller <x id="PH" equiv-text="this.buttonNumberText()"/></source>
+        <target state="new">Vælg handling for valgte roller <x id="PH" equiv-text="this.buttonNumberText()"/></target>
       </trans-unit>
       <trans-unit id="9034694311930313078" datatype="html">
         <source>Send advis om ændringer</source>

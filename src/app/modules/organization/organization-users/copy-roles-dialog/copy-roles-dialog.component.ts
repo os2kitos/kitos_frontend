@@ -48,8 +48,8 @@ export class CopyRolesDialogComponent extends BaseComponent implements OnInit {
     .pipe(map((users) => users.filter((user) => user.Uuid !== this.user.Uuid)));
   public selectedUser: OrganizationUser | undefined = undefined;
 
-  public selectedUserChanged(user: OrganizationUser): void {
-    this.selectedUser = user;
+  public selectedUserChanged(user: OrganizationUser | undefined | null): void {
+    this.selectedUser = user ?? undefined;
   }
 
   public getSelectedUserRights(): Right[] {
@@ -90,6 +90,10 @@ export class CopyRolesDialogComponent extends BaseComponent implements OnInit {
       this.dropdownComponent.value !== null &&
       this.dropdownComponent.value !== undefined
     );
+  }
+
+  public searchFn(search: string, user: OrganizationUser): boolean {
+    return user.Name.toLowerCase().includes(search.toLowerCase());
   }
 
   private getRequest(): APICopyUserRightsRequestDTO {

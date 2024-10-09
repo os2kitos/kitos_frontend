@@ -3844,8 +3844,8 @@
       <trans-unit id="3048587120469429420" datatype="html">
         <source>Kunne ikke kopiere roller</source>
       </trans-unit>
-      <trans-unit id="5765294615070316548" datatype="html">
-        <source>Kopier valgte roller <x id="PH" equiv-text="this.buttonNumberText()"/></source>
+      <trans-unit id="7680003617143986371" datatype="html">
+        <source>Vælg handling for valgte roller <x id="PH" equiv-text="this.buttonNumberText()"/></source>
       </trans-unit>
       <trans-unit id="8526724513361212996" datatype="html">
         <source>Roller kopieret</source>

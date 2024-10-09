@@ -38,7 +38,7 @@ export const adaptOrganizationUser = (value: any): OrganizationUser | undefined 
   const roles = value.OrganizationUnitRights.map((right: { Role: { Name: string } }) => right.Role?.Name)
     .filter((name: string) => name) // Filter out undefined or null names
     .join(', ');
-    
+
   const adaptedUser = {
     id: value.Uuid,
     Uuid: value.Uuid,
@@ -75,7 +75,7 @@ function checkIfUserHasRole(roleName: string, userRights: any[]): boolean {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function adaptEntityRights(right: any): Right {
   return {
-    role: { name: right.Role.Name, uuid: right.Role.Uuid, id: right.RoleId },
+    role: { name: right.Role.Name, uuid: right.Role.Uuid, id: right.Id },
     entity: { name: right.Object.Name, uuid: right.Object.Uuid },
     writeAccess: right.Role.HasWriteAccess,
   };
@@ -84,7 +84,7 @@ function adaptEntityRights(right: any): Right {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function adaptItSystemRights(rights: any): Right {
   return {
-    role: { name: rights.Role.Name, uuid: rights.Role.Uuid, id: rights.RoleId },
+    role: { name: rights.Role.Name, uuid: rights.Role.Uuid, id: rights.Id },
     entity: { name: rights.Object.ItSystem.Name, uuid: rights.Object.Uuid },
     writeAccess: rights.Role.HasWriteAccess,
   };
