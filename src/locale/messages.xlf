@@ -3802,6 +3802,12 @@
       <trans-unit id="9034694311930313078" datatype="html">
         <source>Send advis om ændringer</source>
       </trans-unit>
+      <trans-unit id="1920124659830189543" datatype="html">
+        <source>Kopier roller</source>
+      </trans-unit>
+      <trans-unit id="2581887775164854038" datatype="html">
+        <source>Kopier roller til</source>
+      </trans-unit>
       <trans-unit id="1761334666261692236" datatype="html">
         <source>Kunne ikke hente organisationsrettigheder.</source>
       </trans-unit>
@@ -3835,8 +3841,23 @@
       <trans-unit id="7986347391181913104" datatype="html">
         <source>Databeskyttelsesrådgiver</source>
       </trans-unit>
+      <trans-unit id="3048587120469429420" datatype="html">
+        <source>Kunne ikke kopiere roller</source>
+      </trans-unit>
+      <trans-unit id="7680003617143986371" datatype="html">
+        <source>Vælg handling for valgte roller <x id="PH" equiv-text="this.buttonNumberText()"/></source>
+      </trans-unit>
+      <trans-unit id="8526724513361212996" datatype="html">
+        <source>Roller kopieret</source>
+      </trans-unit>
       <trans-unit id="5412714650100464515" datatype="html">
         <source>Denne bruger findes allerede i en anden organisation. Du kan kun redigere brugerens roller.</source>
+      </trans-unit>
+      <trans-unit id="4901548796888618173" datatype="html">
+        <source> Fravælg alle </source>
+      </trans-unit>
+      <trans-unit id="8453891047051546327" datatype="html">
+        <source> Vælg alle </source>
       </trans-unit>
       <trans-unit id="2429179520054687064" datatype="html">
         <source>Masseopret</source>

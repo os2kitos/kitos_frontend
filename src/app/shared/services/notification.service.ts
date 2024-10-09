@@ -531,8 +531,26 @@ export class NotificationService implements OnDestroy {
         .subscribe(() => this.showError($localize`Kunne ikke hente organisationsrettigheder.`))
     );
 
+    this.subscribeToActionAsDefault(OrganizationUserActions.copyRolesSuccess, $localize`Roller kopieret`);
+    this.subscribeToActionAsError(OrganizationUserActions.copyRolesError, $localize`Kunne ikke kopiere roller`);
+
     this.subscribeToExternalReferenceManagementEvents();
     this.subscribeToRoleNotifications();
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  public subscribeToActionAsDefault(actionType: any, msg: string) {
+    this.subscribeToActionWithMessage(actionType, msg, PopupMessageType.default);
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  public subscribeToActionAsError(actionType: any, msg: string) {
+    this.subscribeToActionWithMessage(actionType, msg, PopupMessageType.error);
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  public subscribeToActionWithMessage(actionType: any, msg: string, type: PopupMessageType) {
+    this.subscriptions.add(this.actions$.pipe(ofType(actionType)).subscribe(() => this.show(msg, type)));
   }
 
   /**
