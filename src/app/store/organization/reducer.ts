@@ -1,7 +1,7 @@
 import { createEntityAdapter } from '@ngrx/entity';
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { OrganizationMasterData } from 'src/app/shared/models/organization/organization-master-data/organization-master-data.model';
-import { OrganizationActions } from '../actions';
+import { OrganizationActions } from './actions';
 import { OrganizationState } from './state';
 
 export const organizationAdapter = createEntityAdapter<OrganizationMasterData>();

@@ -1,6 +1,6 @@
 import { createSelector } from '@ngrx/store';
-import { organizationFeature } from '../reducer';
 import { OrganizationState } from './state';
+import { organizationFeature } from './reducer';
 
 export const { selectOrganizationState } = organizationFeature;
 

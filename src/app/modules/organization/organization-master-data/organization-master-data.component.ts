@@ -13,13 +13,13 @@ import { IdentityNamePair } from 'src/app/shared/models/identity-name-pair.model
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { NotificationService } from 'src/app/shared/services/notification.service';
-import { OrganizationActions } from 'src/app/store/organization/organization-master-data/actions';
+import { OrganizationActions } from 'src/app/store/organization/actions';
 import {
   selectOrganizationHasModifyCvrPermission,
   selectOrganizationHasModifyPermission,
   selectOrganizationMasterData,
   selectOrganizationMasterDataRoles,
-} from 'src/app/store/organization/organization-master-data/selectors';
+} from 'src/app/store/organization/selectors';
 import { selectOrganizationName, selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 import { OrganizationMasterDataComponentStore } from './organization-master-data.component-store';
 

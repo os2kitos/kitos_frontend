@@ -7,8 +7,8 @@ import { adaptOrganizationMasterDataRoles } from 'src/app/shared/models/organiza
 import { adaptOrganizationMasterData } from 'src/app/shared/models/organization/organization-master-data/organization-master-data.model';
 import { adaptOrganizationPermissions } from 'src/app/shared/models/organization/organization-permissions.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
-import { selectOrganizationUuid } from '../../user-store/selectors';
-import { OrganizationActions } from '../actions';
+import { selectOrganizationUuid } from '../user-store/selectors';
+import { OrganizationActions } from './actions';
 
 @Injectable()
 export class OrganizationEffects {
