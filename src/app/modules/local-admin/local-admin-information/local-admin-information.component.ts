@@ -6,6 +6,7 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
 import { mapOrganizationType } from 'src/app/shared/helpers/organization-type.helpers';
 import { OrganizationActions } from 'src/app/store/organization/actions';
 import { selectOrganizationHasModifyCvrPermission } from 'src/app/store/organization/selectors';
+import { UserActions } from 'src/app/store/user-store/actions';
 import {
   selectOrganizationCvr,
   selectOrganizationName,
@@ -55,10 +56,11 @@ export class LocalAdminInformationComponent extends BaseComponent implements OnI
 
 
   public patchOrganizationName(newName: string | undefined) {
-    this.store.dispatch(OrganizationActions.patchOrganization({ name: newName }));
+    console.log('patching ' + newName)
+    this.store.dispatch(UserActions.patchOrganization( {request: { name: newName }}));
   }
 
   public patchOrganizationCvr(newCvr: number | undefined) {
-    this.store.dispatch(OrganizationActions.patchOrganization({ cvr: newCvr?.toString() }));
+    this.store.dispatch(UserActions.patchOrganization({ request: { cvr: newCvr?.toString() }}));
   }
 }
