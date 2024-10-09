@@ -25,8 +25,8 @@ import {
   selectOrganizationUserModifyPermissions,
 } from 'src/app/store/organization/organization-user/selectors';
 import { CreateUserDialogComponent } from './create-user-dialog/create-user-dialog.component';
-import { EditUserDialogComponent } from './edit-user-dialog/edit-user-dialog.component';
 import { UserInfoDialogComponent } from './user-info-dialog/user-info-dialog.component';
+import { DialogOpenerService } from 'src/app/shared/services/dialog-opener-service.service';
 
 @Component({
   selector: 'app-organization-users',
@@ -169,7 +169,8 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
     store: Store,
     private statePersistingService: StatePersistingService,
     private actions$: Actions,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private dialogOpenerService: DialogOpenerService
   ) {
     super(store, 'organization-user');
   }
@@ -219,12 +220,12 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public onEditUser(user: any): void {
-    const dialogRef = this.dialog.open(EditUserDialogComponent, {
-      height: '95%',
-      maxHeight: '750px',
-    });
-    dialogRef.componentInstance.user = user;
-    dialogRef.componentInstance.isNested = false;
+    this.dialogOpenerService.openEditUserDialog(user, false);
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  public onDeleteUser(user: any): void {
+    this.dialogOpenerService.openDeleteUserDialog(user, false);
   }
 
   override rowIdSelect(event: CellClickEvent) {
