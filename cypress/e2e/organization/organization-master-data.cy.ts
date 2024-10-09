@@ -10,7 +10,7 @@ describe('organization-master-data', () => {
     });
     cy.intercept('/api/v2/organizations/*/users', { fixture: './organizations/organization-users.json' });
     cy.intercept('/api/v2/internal/organizations/*/permissions', {
-      fixture: './organizations/organization-permissions.json',
+      fixture: './organizations/organization-permissions-global-admin.json',
     });
 
     cy.setup(true, 'organization/master-data');
