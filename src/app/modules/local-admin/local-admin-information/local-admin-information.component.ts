@@ -21,14 +21,14 @@ import {
 })
 export class LocalAdminInformationComponent extends BaseComponent implements OnInit {
   public readonly organizationName$ = this.store.select(selectOrganizationName);
-  public readonly hasModifyCvrPermission$ = this.store.select(selectOrganizationHasModifyCvrPermission);
   public readonly organizationCvr$ = this.store.select(selectOrganizationCvr);
   public readonly organizationType$ = this.store.select(selectOrganizationType);
+  public readonly hasModifyCvrPermission$ = this.store.select(selectOrganizationHasModifyCvrPermission);
 
   public readonly form = new FormGroup({
     nameControl: new FormControl<string | undefined>(undefined),
     cvrControl: new FormControl<number | undefined>(undefined),
-    typeControl: new FormControl<string | undefined>({ value: '', disabled: true }),
+    typeControl: new FormControl<string | undefined>({ value: undefined, disabled: true }),
   });
 
   constructor(private readonly store: Store) {
@@ -37,7 +37,10 @@ export class LocalAdminInformationComponent extends BaseComponent implements OnI
 
   ngOnInit(): void {
     this.store.dispatch(OrganizationActions.getOrganizationPermissions());
+    this.SetupFormWithPermissions();
+  }
 
+  public SetupFormWithPermissions() {
     this.subscriptions.add(
       combineLatest([this.organizationName$, this.organizationCvr$, this.organizationType$]).subscribe(
         ([name, cvr, type]) => {
@@ -50,15 +53,12 @@ export class LocalAdminInformationComponent extends BaseComponent implements OnI
       )
     );
 
-    this.hasModifyCvrPermission$
-      .pipe(filterNullish())
-      .subscribe((hasModifyCvrPermission) => {
-        if (!hasModifyCvrPermission) this.form.controls.cvrControl.disable();
-      });
+    this.hasModifyCvrPermission$.pipe(filterNullish()).subscribe((hasModifyCvrPermission) => {
+      if (!hasModifyCvrPermission) this.form.controls.cvrControl.disable();
+    });
   }
 
   public patchOrganizationName(newName: string | undefined) {
-    console.log('patching ' + newName);
     this.store.dispatch(UserActions.patchOrganization({ request: { name: newName } }));
   }
 
