@@ -111,6 +111,7 @@ export * from './organizationRegistrationUnitResponseDTO';
 export * from './organizationResponseDTO';
 export * from './organizationUnitResponseDTO';
 export * from './organizationUnitRolesResponseDTO';
+export * from './organizationUpdateRequestDTO';
 export * from './organizationUsageResponseDTO';
 export * from './organizationUsageWriteRequestDTO';
 export * from './organizationUserResponseDTO';

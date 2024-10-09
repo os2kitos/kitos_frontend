@@ -28,6 +28,10 @@ import { APIOrganizationMasterDataRolesRequestDTO } from '../model/aPIOrganizati
 import { APIOrganizationMasterDataRolesResponseDTO } from '../model/aPIOrganizationMasterDataRolesResponseDTO';
 // @ts-ignore
 import { APIOrganizationPermissionsResponseDTO } from '../model/aPIOrganizationPermissionsResponseDTO';
+// @ts-ignore
+import { APIOrganizationResponseDTO } from '../model/aPIOrganizationResponseDTO';
+// @ts-ignore
+import { APIOrganizationUpdateRequestDTO } from '../model/aPIOrganizationUpdateRequestDTO';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -44,6 +48,11 @@ export interface GetSingleOrganizationsInternalV2GetOrganizationMasterDataRolesR
 
 export interface GetSingleOrganizationsInternalV2GetPermissionsRequestParams {
     organizationUuid: string;
+}
+
+export interface PatchSingleOrganizationsInternalV2UpdateOrganizationRequestParams {
+    organizationUuid: string;
+    requestDto: APIOrganizationUpdateRequestDTO;
 }
 
 export interface PatchSingleOrganizationsInternalV2UpdateOrganizationMasterDataRequestParams {
@@ -286,6 +295,79 @@ export class APIV2OrganizationsInternalINTERNALService {
         return this.httpClient.request<APIOrganizationPermissionsResponseDTO>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * @param requestParameters
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public patchSingleOrganizationsInternalV2UpdateOrganization(requestParameters: PatchSingleOrganizationsInternalV2UpdateOrganizationRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIOrganizationResponseDTO>;
+    public patchSingleOrganizationsInternalV2UpdateOrganization(requestParameters: PatchSingleOrganizationsInternalV2UpdateOrganizationRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIOrganizationResponseDTO>>;
+    public patchSingleOrganizationsInternalV2UpdateOrganization(requestParameters: PatchSingleOrganizationsInternalV2UpdateOrganizationRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIOrganizationResponseDTO>>;
+    public patchSingleOrganizationsInternalV2UpdateOrganization(requestParameters: PatchSingleOrganizationsInternalV2UpdateOrganizationRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        const organizationUuid = requestParameters.organizationUuid;
+        if (organizationUuid === null || organizationUuid === undefined) {
+            throw new Error('Required parameter organizationUuid was null or undefined when calling patchSingleOrganizationsInternalV2UpdateOrganization.');
+        }
+        const requestDto = requestParameters.requestDto;
+        if (requestDto === null || requestDto === undefined) {
+            throw new Error('Required parameter requestDto was null or undefined when calling patchSingleOrganizationsInternalV2UpdateOrganization.');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/merge-patch+json',
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Content-Type', httpContentTypeSelected);
+        }
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/v2/internal/organizations/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/patch`;
+        return this.httpClient.request<APIOrganizationResponseDTO>('patch', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                body: requestDto,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

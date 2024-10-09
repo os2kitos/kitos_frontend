@@ -171,6 +171,7 @@ model/organizationRegistrationUnitResponseDTO.ts
 model/organizationResponseDTO.ts
 model/organizationUnitResponseDTO.ts
 model/organizationUnitRolesResponseDTO.ts
+model/organizationUpdateRequestDTO.ts
 model/organizationUsageResponseDTO.ts
 model/organizationUsageWriteRequestDTO.ts
 model/organizationUserResponseDTO.ts
