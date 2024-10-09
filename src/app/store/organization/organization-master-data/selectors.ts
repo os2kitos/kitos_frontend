@@ -1,30 +1,24 @@
 import { createSelector } from '@ngrx/store';
-import { organizationMasterDataFeature } from './reducer';
-import { OrganizationMasterDataState } from './state';
+import { organizationFeature } from './reducer';
+import { OrganizationState } from './state';
 
-export const { selectOrganizationMasterDataState } = organizationMasterDataFeature;
+export const { selectOrganizationMasterDataState: selectOrganizationState } = organizationFeature;
 
-export const selectOrganizationMasterData = createSelector(
-  selectOrganizationMasterDataState,
-  (state: OrganizationMasterDataState) => {
-    return state?.organizationMasterData ?? { uuid: '', name: '' };
-  }
-);
+export const selectOrganizationMasterData = createSelector(selectOrganizationState, (state: OrganizationState) => {
+  return state?.organizationMasterData ?? { uuid: '', name: '' };
+});
 
-export const selectOrganizationMasterDataRoles = createSelector(
-  selectOrganizationMasterDataState,
-  (state: OrganizationMasterDataState) => {
-    return state?.organizationMasterDataRoles ?? masterDataRolesEmptyState;
-  }
-);
+export const selectOrganizationMasterDataRoles = createSelector(selectOrganizationState, (state: OrganizationState) => {
+  return state?.organizationMasterDataRoles ?? masterDataRolesEmptyState;
+});
 
 export const selectOrganizationHasModifyPermission = createSelector(
-  selectOrganizationMasterDataState,
+  selectOrganizationState,
   (state) => state.permissions?.modify
 );
 
 export const selectOrganizationHasModifyCvrPermission = createSelector(
-  selectOrganizationMasterDataState,
+  selectOrganizationState,
   (state) => state.permissions?.modifyCvr
 );
 

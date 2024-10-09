@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { mapOrganizationType } from 'src/app/shared/helpers/organization-type.helpers';
-import { OrganizationMasterDataActions } from 'src/app/store/organization/organization-master-data/actions';
+import { OrganizationActions } from 'src/app/store/organization/organization-master-data/actions';
 import { selectOrganizationHasModifyCvrPermission } from 'src/app/store/organization/organization-master-data/selectors';
 import {
   selectOrganizationCvr,
@@ -34,7 +34,7 @@ export class LocalAdminInformationComponent extends BaseComponent implements OnI
   }
 
   ngOnInit(): void {
-    this.store.dispatch(OrganizationMasterDataActions.getOrganizationPermissions());
+    this.store.dispatch(OrganizationActions.getOrganizationPermissions());
 
     this.subscriptions.add(
       combineLatest([this.organizationName$, this.organizationCvr$, this.organizationType$]).subscribe(

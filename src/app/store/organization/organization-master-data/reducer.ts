@@ -1,65 +1,58 @@
 import { createEntityAdapter } from '@ngrx/entity';
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { OrganizationMasterData } from 'src/app/shared/models/organization/organization-master-data/organization-master-data.model';
-import { OrganizationMasterDataActions } from './actions';
-import { OrganizationMasterDataState } from './state';
+import { OrganizationActions } from './actions';
+import { OrganizationState } from './state';
 
-export const organizationMasterDataAdapter = createEntityAdapter<OrganizationMasterData>();
+export const organizationAdapter = createEntityAdapter<OrganizationMasterData>();
 
-export const organizationMasterDataInitialState: OrganizationMasterDataState =
-  organizationMasterDataAdapter.getInitialState({
-    organizationMasterData: null,
-    organizationMasterDataRoles: null,
-    permissions: null,
-  });
+export const organizationInitialState: OrganizationState = organizationAdapter.getInitialState({
+  organizationMasterData: null,
+  organizationMasterDataRoles: null,
+  permissions: null,
+});
 
-export const organizationMasterDataFeature = createFeature({
-  name: 'OrganizationMasterData',
+export const organizationFeature = createFeature({
+  name: 'Organization',
   reducer: createReducer(
-    organizationMasterDataInitialState,
-    on(OrganizationMasterDataActions.getMasterData, (state): OrganizationMasterDataState => state),
+    organizationInitialState,
+    on(OrganizationActions.getMasterData, (state): OrganizationState => state),
     on(
-      OrganizationMasterDataActions.getMasterDataSuccess,
-      (state, organizationMasterData): OrganizationMasterDataState => ({ ...state, organizationMasterData })
+      OrganizationActions.getMasterDataSuccess,
+      (state, organizationMasterData): OrganizationState => ({ ...state, organizationMasterData })
     ),
     on(
-      OrganizationMasterDataActions.getMasterDataError,
-      (state): OrganizationMasterDataState => ({ ...state, organizationMasterData: null })
+      OrganizationActions.getMasterDataError,
+      (state): OrganizationState => ({ ...state, organizationMasterData: null })
     ),
     on(
-      OrganizationMasterDataActions.patchMasterDataSuccess,
-      (state, organizationMasterData): OrganizationMasterDataState => ({ ...state, organizationMasterData })
+      OrganizationActions.patchMasterDataSuccess,
+      (state, organizationMasterData): OrganizationState => ({ ...state, organizationMasterData })
     ),
+    on(OrganizationActions.patchMasterDataError, (state): OrganizationState => ({ ...state })),
     on(
-      OrganizationMasterDataActions.patchMasterDataError,
-      (state): OrganizationMasterDataState => ({ ...state })
-    ),
-    on(
-      OrganizationMasterDataActions.getMasterDataRolesSuccess,
-      (state, organizationMasterDataRoles): OrganizationMasterDataState => ({
+      OrganizationActions.getMasterDataRolesSuccess,
+      (state, organizationMasterDataRoles): OrganizationState => ({
         ...state,
         organizationMasterDataRoles,
       })
     ),
     on(
-      OrganizationMasterDataActions.getMasterDataRolesError,
-      (state): OrganizationMasterDataState => ({ ...state, organizationMasterDataRoles: null })
+      OrganizationActions.getMasterDataRolesError,
+      (state): OrganizationState => ({ ...state, organizationMasterDataRoles: null })
     ),
     on(
-      OrganizationMasterDataActions.patchMasterDataRolesSuccess,
-      (state, organizationMasterDataRoles): OrganizationMasterDataState => ({ ...state, organizationMasterDataRoles })
+      OrganizationActions.patchMasterDataRolesSuccess,
+      (state, organizationMasterDataRoles): OrganizationState => ({ ...state, organizationMasterDataRoles })
+    ),
+    on(OrganizationActions.patchMasterDataRolesError, (state): OrganizationState => ({ ...state })),
+    on(
+      OrganizationActions.getOrganizationPermissionsSuccess,
+      (state, permissions): OrganizationState => ({ ...state, permissions })
     ),
     on(
-      OrganizationMasterDataActions.patchMasterDataRolesError,
-      (state): OrganizationMasterDataState => ({ ...state })
-    ),
-    on(
-      OrganizationMasterDataActions.getOrganizationPermissionsSuccess,
-      (state, permissions): OrganizationMasterDataState => ({ ...state, permissions })
-    ),
-    on(
-      OrganizationMasterDataActions.getOrganizationPermissionsError,
-      (state): OrganizationMasterDataState => ({ ...state, permissions: null })
-    ),
+      OrganizationActions.getOrganizationPermissionsError,
+      (state): OrganizationState => ({ ...state, permissions: null })
+    )
   ),
 });

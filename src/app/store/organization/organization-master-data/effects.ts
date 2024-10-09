@@ -8,10 +8,10 @@ import { adaptOrganizationMasterData } from 'src/app/shared/models/organization/
 import { adaptOrganizationPermissions } from 'src/app/shared/models/organization/organization-permissions.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectOrganizationUuid } from '../../user-store/selectors';
-import { OrganizationMasterDataActions } from './actions';
+import { OrganizationActions } from './actions';
 
 @Injectable()
-export class OrganizationMasterDataEffects {
+export class OrganizationEffects {
   constructor(
     @Inject(APIV2OrganizationsInternalINTERNALService)
     private organizationInternalService: APIV2OrganizationsInternalINTERNALService,
@@ -21,7 +21,7 @@ export class OrganizationMasterDataEffects {
 
   getOrganizationMasterData$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(OrganizationMasterDataActions.getMasterData),
+      ofType(OrganizationActions.getMasterData),
       combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       switchMap(([, organizationUuid]) =>
         this.organizationInternalService
@@ -29,11 +29,10 @@ export class OrganizationMasterDataEffects {
           .pipe(
             map((organizationMasterDataDto) => {
               const organizationMasterData = adaptOrganizationMasterData(organizationMasterDataDto);
-              if (organizationMasterData)
-                return OrganizationMasterDataActions.getMasterDataSuccess(organizationMasterData);
-              else return OrganizationMasterDataActions.getMasterDataError();
+              if (organizationMasterData) return OrganizationActions.getMasterDataSuccess(organizationMasterData);
+              else return OrganizationActions.getMasterDataError();
             }),
-            catchError(() => of(OrganizationMasterDataActions.getMasterDataError()))
+            catchError(() => of(OrganizationActions.getMasterDataError()))
           )
       )
     );
@@ -41,7 +40,7 @@ export class OrganizationMasterDataEffects {
 
   patchOrganizationMasterData$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(OrganizationMasterDataActions.patchMasterData),
+      ofType(OrganizationActions.patchMasterData),
       combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       switchMap(([{ request }, organizationUuid]) =>
         this.organizationInternalService
@@ -50,10 +49,10 @@ export class OrganizationMasterDataEffects {
             map((organizationMasterDataDto) => {
               const organizationMasterData = adaptOrganizationMasterData(organizationMasterDataDto);
               return organizationMasterData
-                ? OrganizationMasterDataActions.patchMasterDataSuccess(organizationMasterData)
-                : OrganizationMasterDataActions.getMasterDataError();
+                ? OrganizationActions.patchMasterDataSuccess(organizationMasterData)
+                : OrganizationActions.getMasterDataError();
             }),
-            catchError(() => of(OrganizationMasterDataActions.patchMasterDataError()))
+            catchError(() => of(OrganizationActions.patchMasterDataError()))
           )
       )
     );
@@ -61,7 +60,7 @@ export class OrganizationMasterDataEffects {
 
   getOrganizationMasterDataRoles$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(OrganizationMasterDataActions.getMasterDataRoles),
+      ofType(OrganizationActions.getMasterDataRoles),
       combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       switchMap(([, organizationUuid]) =>
         this.organizationInternalService
@@ -70,10 +69,10 @@ export class OrganizationMasterDataEffects {
             map((organizationMasterDataRolesDto) => {
               const organizationMasterDataRoles = adaptOrganizationMasterDataRoles(organizationMasterDataRolesDto);
               return organizationMasterDataRoles
-                ? OrganizationMasterDataActions.getMasterDataRolesSuccess(organizationMasterDataRoles)
-                : OrganizationMasterDataActions.getMasterDataRolesError();
+                ? OrganizationActions.getMasterDataRolesSuccess(organizationMasterDataRoles)
+                : OrganizationActions.getMasterDataRolesError();
             }),
-            catchError(() => of(OrganizationMasterDataActions.getMasterDataRolesError()))
+            catchError(() => of(OrganizationActions.getMasterDataRolesError()))
           )
       )
     );
@@ -81,7 +80,7 @@ export class OrganizationMasterDataEffects {
 
   patchOrganizationMasterDataRoles$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(OrganizationMasterDataActions.patchMasterDataRoles),
+      ofType(OrganizationActions.patchMasterDataRoles),
       combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       switchMap(([{ request }, organizationUuid]) =>
         this.organizationInternalService
@@ -93,10 +92,10 @@ export class OrganizationMasterDataEffects {
             map((organizationMasterDataRolesDto) => {
               const organizationMasterDataRoles = adaptOrganizationMasterDataRoles(organizationMasterDataRolesDto);
               return organizationMasterDataRoles
-                ? OrganizationMasterDataActions.patchMasterDataRolesSuccess(organizationMasterDataRoles)
-                : OrganizationMasterDataActions.patchMasterDataRolesError();
+                ? OrganizationActions.patchMasterDataRolesSuccess(organizationMasterDataRoles)
+                : OrganizationActions.patchMasterDataRolesError();
             }),
-            catchError(() => of(OrganizationMasterDataActions.patchMasterDataRolesError()))
+            catchError(() => of(OrganizationActions.patchMasterDataRolesError()))
           )
       )
     );
@@ -104,16 +103,16 @@ export class OrganizationMasterDataEffects {
 
   getOrganizationPermissions$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(OrganizationMasterDataActions.getOrganizationPermissions),
+      ofType(OrganizationActions.getOrganizationPermissions),
       combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       switchMap(([, organizationUuid]) =>
         this.organizationInternalService.getSingleOrganizationsInternalV2GetPermissions({ organizationUuid }).pipe(
           map((permissionsDto) => {
             const permissions = adaptOrganizationPermissions(permissionsDto);
-            if (permissions) return OrganizationMasterDataActions.getOrganizationPermissionsSuccess(permissions);
-            else return OrganizationMasterDataActions.getOrganizationPermissionsError();
+            if (permissions) return OrganizationActions.getOrganizationPermissionsSuccess(permissions);
+            else return OrganizationActions.getOrganizationPermissionsError();
           }),
-          catchError(() => of(OrganizationMasterDataActions.getOrganizationPermissionsError()))
+          catchError(() => of(OrganizationActions.getOrganizationPermissionsError()))
         )
       )
     );
