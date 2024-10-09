@@ -3865,6 +3865,24 @@
       <trans-unit id="5621443521686858170" datatype="html">
         <source>IT kontrakt</source>
       </trans-unit>
+      <trans-unit id="12801649558012035" datatype="html">
+        <source>Tilgængelig</source>
+      </trans-unit>
+      <trans-unit id="1932682501978400963" datatype="html">
+        <source>Inaktiv</source>
+      </trans-unit>
+      <trans-unit id="2132355553430813586" datatype="html">
+        <source>Ikke tilgængelig</source>
+      </trans-unit>
+      <trans-unit id="5007829064962714817" datatype="html">
+        <source>Sandt</source>
+      </trans-unit>
+      <trans-unit id="5605050838129145775" datatype="html">
+        <source>Falsk</source>
+      </trans-unit>
+      <trans-unit id="8572497829221531435" datatype="html">
+        <source>Ugyldig</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
