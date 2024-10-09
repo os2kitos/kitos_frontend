@@ -45,3 +45,10 @@ export function getTypeTitleNameByType(entityType: RegistrationEntityTypes): str
       throw new Error(`This component does not support entity type: ${entityType}`);
   }
 }
+
+export function userHasAnyRights(user: OrganizationUser): boolean {
+  return user.OrganizationUnitRights.length > 0 ||
+    user.ItSystemRights.length > 0 ||
+    user.ItContractRights.length > 0 ||
+    user.DataProcessingRegistrationRights.length > 0;
+}

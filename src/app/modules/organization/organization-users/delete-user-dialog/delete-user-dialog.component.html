@@ -1,14 +1,44 @@
 <app-scrollbar-dialog title="Slet bruger" i18n-title [nested]="nested">
-  <app-paragraph i18n>
-    Er du sikker på at du vil fjerne <strong>{{ getUserName() }}</strong> fra
-    <strong>{{ organizationName$ | async }}</strong
-    >?
+  <app-standard-vertical-content-grid>
+    <app-paragraph i18n>
+      Er du sikker på at du vil fjerne <strong>{{ getUserName() }}</strong> fra
+      <strong>{{ organizationName$ | async }}</strong
+      >?
 
-    <ng-container *ngIf="hasRoles()"> Brugeren har disse roller, som kan tildeles en anden. Det er valgfrit om du vil slette brugeren uden at tildele rollerne. </ng-container>
+      <ng-container *ngIf="hasRoles()">
+        Brugeren har disse roller, som kan tildeles en anden. Det er valgfrit om du vil slette brugeren uden at tildele
+        rollerne.
+      </ng-container>
 
-    <ng-container *ngIf="!hasRoles()"> Denne handling kan ikke fortrydes. </ng-container>
-  </app-paragraph>
+      <ng-container *ngIf="!hasRoles()"> Denne handling kan ikke fortrydes. </ng-container>
+    </app-paragraph>
 
+    <ng-container *ngIf="hasRoles()">
+      <app-copy-role-table
+        *ngIf="user.OrganizationUnitRights.length > 0"
+        [user]="user"
+        entityType="organization-unit"
+      ></app-copy-role-table>
+
+      <app-copy-role-table
+        *ngIf="user.ItSystemRights.length > 0"
+        [user]="user"
+        entityType="it-system"
+      ></app-copy-role-table>
+
+      <app-copy-role-table
+        *ngIf="user.ItContractRights.length > 0"
+        [user]="user"
+        entityType="it-contract"
+      ></app-copy-role-table>
+
+      <app-copy-role-table
+        *ngIf="user.DataProcessingRegistrationRights.length > 0"
+        [user]="user"
+        entityType="data-processing-registration"
+      ></app-copy-role-table>
+    </ng-container>
+  </app-standard-vertical-content-grid>
   <app-dialog-actions>
     <app-button *ngIf="hasRoles()" buttonStyle="secondary" color="warn" (buttonClick)="onTransferRoles()" i18n>
       Tildel valgte roller
