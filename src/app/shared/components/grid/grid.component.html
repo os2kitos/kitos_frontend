@@ -127,6 +127,7 @@
           <app-status-chip
             [type]="column.entityType"
             [value]="searchProperty(dataItem, column.field)"
+            [valueDisplayType]="column.booleanValueDisplay"
           ></app-status-chip>
         </div>
       </ng-template>

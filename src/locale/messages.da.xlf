@@ -5015,6 +5015,30 @@
         <source>Masseopret</source>
         <target state="new">Masseopret</target>
       </trans-unit>
+      <trans-unit id="5007829064962714817" datatype="html">
+        <source>Sandt</source>
+        <target state="new">Sandt</target>
+      </trans-unit>
+      <trans-unit id="5605050838129145775" datatype="html">
+        <source>Falsk</source>
+        <target state="new">Falsk</target>
+      </trans-unit>
+      <trans-unit id="1932682501978400963" datatype="html">
+        <source>Inaktiv</source>
+        <target state="new">Inaktiv</target>
+      </trans-unit>
+      <trans-unit id="8572497829221531435" datatype="html">
+        <source>Ugyldig</source>
+        <target state="new">Ugyldig</target>
+      </trans-unit>
+      <trans-unit id="12801649558012035" datatype="html">
+        <source>Tilgængelig</source>
+        <target state="new">Tilgængelig</target>
+      </trans-unit>
+      <trans-unit id="2132355553430813586" datatype="html">
+        <source>Ikke tilgængelig</source>
+        <target state="new">Ikke tilgængelig</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
