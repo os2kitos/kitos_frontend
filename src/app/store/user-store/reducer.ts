@@ -60,7 +60,8 @@ export const userFeature = createFeature({
 
     on(
       UserActions.getUserGridPermissionsSuccess,
-      (state, {response}): UserState => ({ ...state, gridPermissions: response })
-    )
+      (state, { response }): UserState => ({ ...state, gridPermissions: response })
+    ),
+    on(UserActions.patchOrganizationSuccess, (state, organization): UserState => ({ ...state, organization }))
   ),
 });

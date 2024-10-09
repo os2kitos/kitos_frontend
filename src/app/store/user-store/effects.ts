@@ -4,11 +4,12 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { CookieService } from 'ngx-cookie';
-import { catchError, map, mergeMap, of, switchMap, tap } from 'rxjs';
+import { catchError, combineLatestWith, map, mergeMap, of, switchMap, tap } from 'rxjs';
 import { APIUserDTOApiReturnDTO, APIV1AuthorizeINTERNALService } from 'src/app/api/v1';
 import {
   APIOrganizationGridPermissionsResponseDTO,
   APIV2OrganizationGridInternalINTERNALService,
+  APIV2OrganizationsInternalINTERNALService,
 } from 'src/app/api/v2';
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { adaptUser } from 'src/app/shared/models/user.model';
@@ -27,7 +28,8 @@ export class UserEffects {
     private router: Router,
     private cookieService: CookieService,
     @Inject(APIV2OrganizationGridInternalINTERNALService)
-    private organizationGridService: APIV2OrganizationGridInternalINTERNALService
+    private organizationGridService: APIV2OrganizationGridInternalINTERNALService,
+    private organizationInternalService: APIV2OrganizationsInternalINTERNALService
   ) {}
 
   login$ = createEffect(() => {
@@ -117,6 +119,21 @@ export class UserEffects {
               UserActions.getUserGridPermissionsSuccess(response)
             ),
             catchError(() => of(UserActions.getUserGridPermissionsError()))
+          )
+      )
+    );
+  });
+
+  patchOrganization$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(UserActions.patchOrganization),
+      combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+      switchMap(([{ request }, organizationUuid]) =>
+        this.organizationInternalService
+          .patchSingleOrganizationsInternalV2UpdateOrganization({ organizationUuid, requestDto: request })
+          .pipe(
+            map((organizationResponseDto) => UserActions.patchOrganizationSuccess(organizationResponseDto)),
+            catchError(() => of(UserActions.patchOrganizationError()))
           )
       )
     );

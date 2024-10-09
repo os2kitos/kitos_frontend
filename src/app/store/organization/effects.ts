@@ -50,7 +50,7 @@ export class OrganizationEffects {
               const organizationMasterData = adaptOrganizationMasterData(organizationMasterDataDto);
               return organizationMasterData
                 ? OrganizationActions.patchMasterDataSuccess(organizationMasterData)
-                : OrganizationActions.getMasterDataError();
+                : OrganizationActions.patchMasterDataError();
             }),
             catchError(() => of(OrganizationActions.patchMasterDataError()))
           )
