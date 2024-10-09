@@ -32,8 +32,6 @@ describe('organization-users', () => {
   it('Can delete organization unit role', () => {
     cy.contains('local-api-global-admin-user@kitos.dk').click();
 
-    cy.contains('Organisationsenhedroller').click();
-
     cy.get('[data-cy="delete-role-button-Chef"]').click();
     cy.contains('Ja').click();
 
@@ -48,8 +46,6 @@ describe('organization-users', () => {
 
   it('Can delete it system role', () => {
     cy.contains('local-api-global-admin-user@kitos.dk').click();
-
-    cy.contains('Systemroller').click();
 
     cy.get('[data-cy="delete-role-button-Changemanager"]').click();
     cy.contains('Ja').click();
@@ -66,8 +62,6 @@ describe('organization-users', () => {
   it('Can delete it contract role', () => {
     cy.contains('local-api-global-admin-user@kitos.dk').click();
 
-    cy.contains('Kontraktroller').click();
-
     cy.get('[data-cy="delete-role-button-Budgetansvarlig"]').click();
     cy.contains('Ja').click();
 
@@ -82,8 +76,6 @@ describe('organization-users', () => {
 
   it('Can delete data processing role', () => {
     cy.contains('local-api-global-admin-user@kitos.dk').click();
-
-    cy.contains('Databehandlingsroller').click();
 
     cy.get('[data-cy="delete-role-button-Standard Læserolle"]').click();
     cy.contains('Ja').click();

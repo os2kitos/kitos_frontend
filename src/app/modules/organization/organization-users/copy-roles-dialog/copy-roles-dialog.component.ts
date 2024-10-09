@@ -5,6 +5,7 @@ import { map, Observable } from 'rxjs';
 import { APIMutateRightRequestDTO, APIMutateUserRightsRequestDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { DropdownComponent } from 'src/app/shared/components/dropdowns/dropdown/dropdown.component';
+import { userHasAnyRights } from 'src/app/shared/helpers/user-role.helpers';
 import { OrganizationUser, Right } from 'src/app/shared/models/organization/organization-user/organization-user.model';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
 import { RoleSelectionService } from 'src/app/shared/services/role-selector-service';
@@ -94,6 +95,10 @@ export class CopyRolesDialogComponent extends BaseComponent implements OnInit {
 
   public searchFn(search: string, user: OrganizationUser): boolean {
     return user.Name.toLowerCase().includes(search.toLowerCase());
+  }
+
+  public userHasAnyRight(): boolean {
+    return userHasAnyRights(this.user);
   }
 
   private getRequest(): APIMutateUserRightsRequestDTO {

@@ -1,4 +1,4 @@
-<app-scrollbar-dialog title="Kopier roller" i18n-title [nested]="true">
+<app-scrollbar-dialog title="Kopier roller" i18n-title [nested]="true" [ngClass]="{'some-class': isAnySelected()}">
   <ng-container *ngIf="!isLoading">
     <app-standard-vertical-content-grid>
       <app-dropdown
@@ -34,6 +34,13 @@
         [user]="user"
         entityType="data-processing-registration"
       ></app-copy-role-table>
+
+      <app-empty-state
+        text="Brugeren har ingen roller"
+        context="emptyTable"
+        *ngIf="!userHasAnyRight()"
+        i18n-text
+      ></app-empty-state>
     </app-standard-vertical-content-grid>
   </ng-container>
   <app-dialog-actions *ngIf="!isLoading">
