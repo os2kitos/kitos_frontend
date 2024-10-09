@@ -2,8 +2,10 @@ import { NgModule } from '@angular/core';
 import { AddProgramIconComponent } from './add-program-icon.component';
 import { ArchiveIconComponent } from './archive-icon.component';
 import { ArrowDownIconComponent } from './arrow-down-icon.component';
+import { ArrowLeftIconComponent } from './arrow-left-icon.component';
 import { ArrowUpIconComponent } from './arrow-up-icon.component';
 import { BookmarkIconComponent } from './bookmark.component';
+import { BulkCreateIconComponent } from './bulk-create-icon.component';
 import { CheckNegativeGrayIconComponent } from './check-negative-gray.component';
 import { CheckPositiveGreenIconComponent } from './check-positive-green.component';
 import { ChevronDownIconComponent } from './chevron-down-icon.component';
@@ -48,7 +50,6 @@ import { TrashcanIconComponent } from './trashcan-icon.component';
 import { WarningIconComponent } from './warning-icon.component';
 import { WhiteCircleIconComponent } from './white-circle-icon.component';
 import { XIconComponent } from './x-icon.component';
-import { ArrowLeftIconComponent } from './arrow-left-icon.component';
 
 @NgModule({
   imports: [],
@@ -103,6 +104,7 @@ import { ArrowLeftIconComponent } from './arrow-left-icon.component';
     CheckPositiveGreenIconComponent,
     CheckNegativeGrayIconComponent,
     ArrowLeftIconComponent,
+    BulkCreateIconComponent,
   ],
   declarations: [
     ChevronDownIconComponent,
@@ -155,6 +157,7 @@ import { ArrowLeftIconComponent } from './arrow-left-icon.component';
     CheckNegativeGrayIconComponent,
     CheckPositiveGreenIconComponent,
     ArrowLeftIconComponent,
+    BulkCreateIconComponent,
   ],
   providers: [],
 })

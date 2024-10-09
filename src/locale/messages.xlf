@@ -3859,6 +3859,12 @@
       <trans-unit id="8453891047051546327" datatype="html">
         <source> Vælg alle </source>
       </trans-unit>
+      <trans-unit id="2429179520054687064" datatype="html">
+        <source>Masseopret</source>
+      </trans-unit>
+      <trans-unit id="5621443521686858170" datatype="html">
+        <source>IT kontrakt</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

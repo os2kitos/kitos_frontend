@@ -23,9 +23,9 @@ Cypress.Commands.add('setup', (authenticate?: boolean, path?: string) => {
   }
 });
 
-Cypress.Commands.add('login', () => {
+Cypress.Commands.add('login', (authorizeFixturePath = './shared/authorize.json') => {
   cy.intercept('/api/authorize/antiforgery', '"ABC"');
-  cy.intercept('/api/Authorize', { fixture: './shared/authorize.json' }).as('authorize');
+  cy.intercept('/api/Authorize', { fixture: authorizeFixturePath }).as('authorize');
 
   cy.contains('Email').parent().find('input').type('test@test.com');
   cy.contains('Password').parent().find('input').type('123456');
@@ -336,7 +336,11 @@ Cypress.Commands.add('confirmTextboxStateByDataCy', (dataCySelector, shouldBeEna
   const inputElement = cy.getByDataCy(dataCySelector).get('input');
   if (shouldBeEnabled) inputElement.should('be.enabled');
   else inputElement.should('be.disabled');
-})
+});
+
+Cypress.Commands.add('hoverByDataCy', (dataCySelector) => {
+  cy.getByDataCy(dataCySelector).trigger('mouseenter');
+});
 
 function getElementParentWithSelector(elementName: string, selector: string) {
   return cy.contains(elementName).parentsUntil(selector).parent();

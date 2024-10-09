@@ -44,11 +44,11 @@ describe('navigation', () => {
     cy.intercept('/api/v2/it-contract-price-regulation-types*', {
       fixture: './it-contracts/choice-types/price-regulation-types.json',
     });
-    cy.intercept('/api/v2/internal/organizations/*/grid/permissions', {statusCode: 404, body: {}});
-    cy.intercept('/api/v2/internal/organizations/*/grid/*/*', {statusCode: 404, body: {}});
+    cy.intercept('/api/v2/internal/organizations/*/grid/permissions', { statusCode: 404, body: {} });
+    cy.intercept('/api/v2/internal/organizations/*/grid/*/*', { statusCode: 404, body: {} });
 
-    cy.intercept('api/v2/organization-unit-role-types*', {statusCode: 404, body: {}});
-    cy.intercept('api/v2/internal/organizations/*/organization-units/*/roles', {statusCode: 404, body: {}});
+    cy.intercept('api/v2/organization-unit-role-types*', { statusCode: 404, body: {} });
+    cy.intercept('api/v2/internal/organizations/*/organization-units/*/roles', { statusCode: 404, body: {} });
     cy.setup(true);
   });
 
@@ -78,5 +78,18 @@ describe('navigation', () => {
 
     cy.get('app-nav-bar').get('img').first().click();
     cy.contains('Kitos - Kommunernes IT OverbliksSystem');
+  });
+
+  it('can see local admin menu item if local admin', () => {
+    cy.hoverByDataCy('profile-menu');
+    cy.getByDataCy('local-admin-menu-item').should('exist');
+  });
+
+  it('cannot see local admin menu item if not local admin', () => {
+    cy.setup(false);
+    cy.login('./shared/authorize-no-rights.json');
+  
+    cy.hoverByDataCy('profile-menu');
+    cy.getByDataCy('local-admin-menu-item').should('not.exist');
   });
 });

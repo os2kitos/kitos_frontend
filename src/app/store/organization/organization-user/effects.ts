@@ -94,7 +94,7 @@ export class OrganizationUserEffects {
       ofType(OrganizationUserActions.createUser),
       combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       switchMap(([{ request }, organizationUuid]) =>
-        this.apiService.postSingleUsersInternalV2CreateUnit({ parameters: request, organizationUuid }).pipe(
+        this.apiService.postSingleUsersInternalV2CreateUser({ parameters: request, organizationUuid }).pipe(
           map((user) => OrganizationUserActions.createUserSuccess(user as APIOrganizationUserResponseDTO)),
           catchError(() => of(OrganizationUserActions.createUserError()))
         )
@@ -126,7 +126,7 @@ export class OrganizationUserEffects {
       concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       switchMap(([{ userUuid, request }, organizationUuid]) =>
         this.apiService
-          .patchSingleUsersInternalV2PatchUnit({
+          .patchSingleUsersInternalV2PatchUser({
             userUuid: userUuid,
             organizationUuid,
             parameters: request,
