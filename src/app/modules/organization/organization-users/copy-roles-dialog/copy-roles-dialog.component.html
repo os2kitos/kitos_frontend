@@ -1,4 +1,4 @@
-<app-scrollbar-dialog title="Kopier roller" i18n-title [nested]="true">
+<app-scrollbar-dialog title="Kopier roller" i18n-title [nested]="true" [ngClass]="{'some-class': isAnySelected()}">
   <ng-container *ngIf="!isLoading">
     <app-standard-vertical-content-grid>
       <app-dropdown
