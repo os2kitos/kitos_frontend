@@ -3844,6 +3844,21 @@
       <trans-unit id="5621443521686858170" datatype="html">
         <source>IT kontrakt</source>
       </trans-unit>
+      <trans-unit id="2261286606404354843" datatype="html">
+        <source>Anden offentlig myndighed</source>
+      </trans-unit>
+      <trans-unit id="4335783776773944989" datatype="html">
+        <source>Kommune</source>
+      </trans-unit>
+      <trans-unit id="6156945730689256248" datatype="html">
+        <source>Virksomhed</source>
+      </trans-unit>
+      <trans-unit id="7661266723054940833" datatype="html">
+        <source>Information om <x id="INTERPOLATION" equiv-text="{{organizationName}}"/></source>
+      </trans-unit>
+      <trans-unit id="9090249672465718263" datatype="html">
+        <source>Interessefællesskab</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
