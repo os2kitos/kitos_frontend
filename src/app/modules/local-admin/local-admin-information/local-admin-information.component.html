@@ -1,7 +1,7 @@
 
   <app-standard-vertical-content-grid>
     <app-card *ngIf="organizationName$ | async as organizationName">
-      <app-card-header title="Information om {{organizationName}}" i18n-title>
+      <app-card-header title="Information om {{organizationName}}" i18n-title data-cy="info-title">
       </app-card-header>
       <app-form-grid [formGroup]="form">
           <app-textbox text="Navn" i18n-text [formGroup]="form" formName="nameControl" (valueChange)="patchOrganizationName($event)" data-cy="name-input"></app-textbox>
