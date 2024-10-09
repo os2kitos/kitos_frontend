@@ -9,7 +9,7 @@
     "defaultUserStartPreference": "it-system.overview",
     "defaultOrganizationUnitId": null,
     "defaultOrganizationUnitName": null,
-    "isGlobalAdmin": false,
+    "isGlobalAdmin": true,
     "organizationRights": [
       {
         "organizationId": 400,
