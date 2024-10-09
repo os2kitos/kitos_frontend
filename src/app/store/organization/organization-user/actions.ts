@@ -1,7 +1,7 @@
 import { createActionGroup, emptyProps } from '@ngrx/store';
-import { APICopyUserRightsRequestDTO } from 'src/app/api/v2';
 import {
   APICreateUserRequestDTO,
+  APIMutateUserRightsRequestDTO,
   APIOrganizationUserResponseDTO,
   APIUpdateUserRequestDTO,
   APIUserCollectionPermissionsResponseDTO,
@@ -50,8 +50,16 @@ export const OrganizationUserActions = createActionGroup({
     'Update User Success': (user: APIUserResponseDTO) => ({ user }),
     'Update User Error': emptyProps(),
 
-    'Copy roles': (fromUserUuid: string, toUserUuid: string, request: APICopyUserRightsRequestDTO) => ({ fromUserUuid, toUserUuid, request }),
+    'Copy roles': (fromUserUuid: string, toUserUuid: string, request: APIMutateUserRightsRequestDTO) => ({ fromUserUuid, toUserUuid, request }),
     'Copy roles success': emptyProps(),
     'Copy roles error': emptyProps(),
+
+    'Delete User': (userUuid: string) => ({ userUuid }),
+    'Delete User Success': (userUuid: string) => ({ userUuid }),
+    'Delete User Error': emptyProps(),
+
+    'Transfer roles': (fromUserUuid: string, toUserUuid: string, request: APIMutateUserRightsRequestDTO) => ({ fromUserUuid, toUserUuid, request }),
+    'Transfer roles success': emptyProps(),
+    'Transfer roles error': emptyProps(),
   },
 });

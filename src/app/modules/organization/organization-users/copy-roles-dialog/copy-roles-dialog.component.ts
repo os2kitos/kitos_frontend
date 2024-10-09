@@ -2,7 +2,7 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { map, Observable } from 'rxjs';
-import { APICopyRightRequestDTO, APICopyUserRightsRequestDTO } from 'src/app/api/v2';
+import { APIMutateRightRequestDTO, APIMutateUserRightsRequestDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { DropdownComponent } from 'src/app/shared/components/dropdowns/dropdown/dropdown.component';
 import { OrganizationUser, Right } from 'src/app/shared/models/organization/organization-user/organization-user.model';
@@ -96,7 +96,7 @@ export class CopyRolesDialogComponent extends BaseComponent implements OnInit {
     return user.Name.toLowerCase().includes(search.toLowerCase());
   }
 
-  private getRequest(): APICopyUserRightsRequestDTO {
+  private getRequest(): APIMutateUserRightsRequestDTO {
     const request = {
       unitRights: this.getRequestForType('organization-unit'),
       systemRights: this.getRequestForType('it-system'),
@@ -111,13 +111,13 @@ export class CopyRolesDialogComponent extends BaseComponent implements OnInit {
     return noOfSelectedRights > 0 ? `(${noOfSelectedRights})` : '';
   }
 
-  private getRequestForType(entityType: RegistrationEntityTypes): APICopyRightRequestDTO[] {
+  private getRequestForType(entityType: RegistrationEntityTypes): APIMutateRightRequestDTO[] {
     return this.selectionService
       .getSelectedItemsOfType(entityType)
       .map((right) => this.roleToCopyRoleRequestDTO(right));
   }
 
-  private roleToCopyRoleRequestDTO(role: Right): APICopyRightRequestDTO {
+  private roleToCopyRoleRequestDTO(role: Right): APIMutateRightRequestDTO {
     return { userUuid: this.user.Uuid, roleId: role.role.id, entityUuid: role.entity.uuid };
   }
 }

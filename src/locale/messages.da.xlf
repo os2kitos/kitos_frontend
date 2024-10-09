@@ -5055,6 +5055,18 @@
         <source> Tildel valgte roller </source>
         <target state="new"> Tildel valgte roller </target>
       </trans-unit>
+      <trans-unit id="3076742637867366279" datatype="html">
+        <source>Er du sikker på, at du vil slette brugeren &apos;<x id="PH" equiv-text="this.getUserName()"/>&apos;?</source>
+        <target state="new">Er du sikker på, at du vil slette brugeren &apos;<x id="PH" equiv-text="this.getUserName()"/>&apos;?</target>
+      </trans-unit>
+      <trans-unit id="4741242196851213916" datatype="html">
+        <source>Brugeren blev slettet</source>
+        <target state="new">Brugeren blev slettet</target>
+      </trans-unit>
+      <trans-unit id="4208978631605576763" datatype="html">
+        <source>Kunne ikke slette brugeren</source>
+        <target state="new">Kunne ikke slette brugeren</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

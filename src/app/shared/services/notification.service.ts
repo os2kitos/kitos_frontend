@@ -534,6 +534,9 @@ export class NotificationService implements OnDestroy {
     this.subscribeToActionAsDefault(OrganizationUserActions.copyRolesSuccess, $localize`Roller kopieret`);
     this.subscribeToActionAsError(OrganizationUserActions.copyRolesError, $localize`Kunne ikke kopiere roller`);
 
+    this.subscribeToActionAsDefault(OrganizationUserActions.deleteUserSuccess, $localize`Brugeren blev slettet`);
+    this.subscribeToActionAsError(OrganizationUserActions.deleteUserError, $localize`Kunne ikke slette brugeren`);
+
     this.subscribeToExternalReferenceManagementEvents();
     this.subscribeToRoleNotifications();
   }
