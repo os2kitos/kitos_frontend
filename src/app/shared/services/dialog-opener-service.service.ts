@@ -7,6 +7,8 @@ import { DeleteUserDialogComponent } from 'src/app/modules/organization/organiza
 @Injectable({
   providedIn: 'root',
 })
+
+// This service is useful if you need to open the same or similar dialogs multiple places, which need setup/configuration.
 export class DialogOpenerService {
   constructor(private dialog: MatDialog) {}
 

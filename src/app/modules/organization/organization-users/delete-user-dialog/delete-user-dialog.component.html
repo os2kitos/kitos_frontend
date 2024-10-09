@@ -1,3 +1,18 @@
-<app-scrollbar-dialog title="Kopier roller" i18n-title [nested]="nested">
+<app-scrollbar-dialog title="Slet bruger" i18n-title [nested]="nested">
+  <app-paragraph i18n>
+    Er du sikker på at du vil fjerne <strong>{{ getUserName() }}</strong> fra
+    <strong>{{ organizationName$ | async }}</strong
+    >?
 
+    <ng-container *ngIf="hasRoles()"> Brugeren har disse roller, som kan tildeles en anden. Det er valgfrit om du vil slette brugeren uden at tildele rollerne. </ng-container>
+
+    <ng-container *ngIf="!hasRoles()"> Denne handling kan ikke fortrydes. </ng-container>
+  </app-paragraph>
+
+  <app-dialog-actions>
+    <app-button *ngIf="hasRoles()" buttonStyle="secondary" color="warn" (buttonClick)="onTransferRoles()" i18n>
+      Tildel valgte roller
+    </app-button>
+    <app-button buttonStyle="primary" color="warn" (buttonClick)="onDeleteUser()"> Slet bruger </app-button>
+  </app-dialog-actions>
 </app-scrollbar-dialog>

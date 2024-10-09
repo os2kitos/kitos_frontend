@@ -3865,6 +3865,15 @@
       <trans-unit id="5621443521686858170" datatype="html">
         <source>IT kontrakt</source>
       </trans-unit>
+      <trans-unit id="1467323000161302264" datatype="html">
+        <source>Slet bruger</source>
+      </trans-unit>
+      <trans-unit id="1827402117610901290" datatype="html">
+        <source> Tildel valgte roller </source>
+      </trans-unit>
+      <trans-unit id="3129699240351431056" datatype="html">
+        <source> Er du sikker på at du vil fjerne <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION" equiv-text="&lt;/"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="?"/> fra <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION_1" equiv-text="| async }}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="?"/>? <x id="START_TAG_NG_CONTAINER" ctype="x-ng_container" equiv-text="&lt;ng-container *ngIf=&quot;hasRoles()&quot;&gt;"/> Brugeren har disse roller, som kan tildeles en anden. Det er valgfrit om du vil slette brugeren uden at tildele rollerne. <x id="CLOSE_TAG_NG_CONTAINER" ctype="x-ng_container" equiv-text="&lt;/ng-container&gt;"/><x id="START_TAG_NG_CONTAINER_1" ctype="x-ng_container_1" equiv-text="&lt;ng-container *ngIf=&quot;!hasRoles()&quot;&gt;"/> Denne handling kan ikke fortrydes. <x id="CLOSE_TAG_NG_CONTAINER" ctype="x-ng_container" equiv-text="&lt;/ng-container&gt;"/></source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
