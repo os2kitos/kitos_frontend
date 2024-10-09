@@ -12,4 +12,5 @@
   box-sizing: border-box;
   position: sticky;
   z-index: 1000;
+  top: 0; /* Stick the snackbar to the top of the scrollable area */
 }
