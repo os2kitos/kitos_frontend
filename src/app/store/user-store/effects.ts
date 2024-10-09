@@ -90,7 +90,7 @@ export class UserEffects {
 
   resetOnOrganizationUpdate$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(UserActions.updateOrganization),
+      ofType(UserActions.resetOnOrganizationUpdate),
       map(() => resetOrganizationStateAction())
     );
   });

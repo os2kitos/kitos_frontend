@@ -21,11 +21,11 @@ export const UserActions = createActionGroup({
     'Update XSRF Token': (xsrfToken: string) => ({ xsrfToken }),
 
     'Get organizations for user': emptyProps(),
-    'Update organization': (organization?: APIOrganizationResponseDTO) => ({ organization }),
+    'Reset on organization update': (organization?: APIOrganizationResponseDTO) => ({ organization }),
     'Update has multiple organizations': (hasMultipleOrganizations: boolean) => ({ hasMultipleOrganizations }),
 
     'Get User Grid Permissions': emptyProps(),
-    'Get User Grid Permissions Success': (response: APIOrganizationGridPermissionsResponseDTO) =>  ({response}),
+    'Get User Grid Permissions Success': (response: APIOrganizationGridPermissionsResponseDTO) => ({ response }),
     'Get User Grid Permissions Error': emptyProps(),
   },
 });

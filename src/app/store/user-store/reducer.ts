@@ -52,7 +52,7 @@ export const userFeature = createFeature({
 
     on(UserActions.updateXSRFToken, (state, { xsrfToken }): UserState => ({ ...state, xsrfToken })),
 
-    on(UserActions.updateOrganization, (state, { organization }): UserState => ({ ...state, organization })),
+    on(UserActions.resetOnOrganizationUpdate, (state, { organization }): UserState => ({ ...state, organization })),
     on(
       UserActions.updateHasMultipleOrganizations,
       (state, { hasMultipleOrganizations }): UserState => ({ ...state, hasMultipleOrganizations })
