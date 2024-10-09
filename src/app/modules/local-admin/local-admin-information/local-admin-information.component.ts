@@ -42,7 +42,7 @@ export class LocalAdminInformationComponent extends BaseComponent implements OnI
         ([name, cvr, type]) => {
           this.form.patchValue({
             nameControl: name,
-            cvrControl: Number.parseInt(cvr!),
+            cvrControl: this.GetCvrAsNumber(cvr),
             typeControl: mapOrganizationType(type),
           });
         }
@@ -54,13 +54,16 @@ export class LocalAdminInformationComponent extends BaseComponent implements OnI
     });
   }
 
-
   public patchOrganizationName(newName: string | undefined) {
-    console.log('patching ' + newName)
-    this.store.dispatch(UserActions.patchOrganization( {request: { name: newName }}));
+    console.log('patching ' + newName);
+    this.store.dispatch(UserActions.patchOrganization({ request: { name: newName } }));
   }
 
   public patchOrganizationCvr(newCvr: number | undefined) {
-    this.store.dispatch(UserActions.patchOrganization({ request: { cvr: newCvr?.toString() }}));
+    this.store.dispatch(UserActions.patchOrganization({ request: { cvr: newCvr?.toString() } }));
+  }
+
+  private GetCvrAsNumber(dtoCvr: string | undefined) {
+    return dtoCvr ? Number.parseInt(dtoCvr) : undefined;
   }
 }
