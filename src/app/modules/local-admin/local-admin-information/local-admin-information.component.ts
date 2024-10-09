@@ -4,8 +4,8 @@ import { Store } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { mapOrganizationType } from 'src/app/shared/helpers/organization-type.helpers';
-import { OrganizationActions } from 'src/app/store/organization/organization-master-data/actions';
-import { selectOrganizationHasModifyCvrPermission } from 'src/app/store/organization/organization-master-data/selectors';
+import { OrganizationActions } from 'src/app/store/organization/actions';
+import { selectOrganizationHasModifyCvrPermission } from 'src/app/store/organization/selectors';
 import {
   selectOrganizationCvr,
   selectOrganizationName,
@@ -51,5 +51,14 @@ export class LocalAdminInformationComponent extends BaseComponent implements OnI
     this.hasModifyCvrPermission$.subscribe((hasModifyCvrPermission) => {
       if (!hasModifyCvrPermission) this.form.controls.cvrControl.disable();
     });
+  }
+
+
+  public patchOrganizationName(newName: string | undefined) {
+    this.store.dispatch(OrganizationActions.patchOrganization({ name: newName }));
+  }
+
+  public patchOrganizationCvr(newCvr: number | undefined) {
+    this.store.dispatch(OrganizationActions.patchOrganization({ cvr: newCvr?.toString() }));
   }
 }
