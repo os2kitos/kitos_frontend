@@ -1,0 +1,13 @@
+@import 'theme';
+
+app-standard-vertical-content-grid {
+  width: 100%;
+}
+
+.copy-roles-button {
+  flex: none;
+}
+
+.action-buttons * {
+  padding: $padding-small;
+}
