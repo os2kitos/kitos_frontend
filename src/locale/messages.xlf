@@ -3859,6 +3859,12 @@
       <trans-unit id="9090249672465718263" datatype="html">
         <source>Interessefællesskab</source>
       </trans-unit>
+      <trans-unit id="3700126250923289975" datatype="html">
+        <source>Kunne ikke opdatere organisation.</source>
+      </trans-unit>
+      <trans-unit id="6280985686321240164" datatype="html">
+        <source>Organisationen blev opdateret.</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

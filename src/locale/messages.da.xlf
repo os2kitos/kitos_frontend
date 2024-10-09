@@ -5035,6 +5035,14 @@
         <source>Anden offentlig myndighed</source>
         <target state="new">Anden offentlig myndighed</target>
       </trans-unit>
+      <trans-unit id="3700126250923289975" datatype="html">
+        <source>Kunne ikke opdatere organisation.</source>
+        <target state="new">Kunne ikke opdatere organisation.</target>
+      </trans-unit>
+      <trans-unit id="6280985686321240164" datatype="html">
+        <source>Organisationen blev opdateret.</source>
+        <target state="new">Organisationen blev opdateret.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
