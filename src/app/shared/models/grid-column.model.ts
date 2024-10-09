@@ -1,3 +1,4 @@
+import { BooleanValueDisplayType } from '../components/status-chip/status-chip.component';
 import { RegistrationEntityTypes } from './registrations/registration-entity-categories.model';
 
 export interface GridColumn {
@@ -42,4 +43,5 @@ export interface GridColumn {
   tooltipPositiveText?: string;
   tooltipNegativeText?: string;
   isSticky?: boolean;
+  booleanValueDisplay?: BooleanValueDisplayType; // Defines how boolean values should be displayed. If not set, RegistrationEntityTypes will be used to derive the display type
 }

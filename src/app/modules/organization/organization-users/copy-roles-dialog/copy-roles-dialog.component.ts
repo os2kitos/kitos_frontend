@@ -96,6 +96,13 @@ export class CopyRolesDialogComponent extends BaseComponent implements OnInit {
     return user.Name.toLowerCase().includes(search.toLowerCase());
   }
 
+  public userHasAnyRight(): boolean {
+    return this.user.DataProcessingRegistrationRights.length > 0
+      || this.user.ItContractRights.length > 0
+      || this.user.ItSystemRights.length > 0
+      || this.user.OrganizationUnitRights.length > 0;
+  }
+
   private getRequest(): APICopyUserRightsRequestDTO {
     const request = {
       unitRights: this.getRequestForType('organization-unit'),

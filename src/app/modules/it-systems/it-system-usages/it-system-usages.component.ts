@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { CellClickEvent } from '@progress/kendo-angular-grid';
 import { combineLatestWith, first } from 'rxjs';
 import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
+import { BooleanValueDisplayType } from 'src/app/shared/components/status-chip/status-chip.component';
 import { getColumnsToShow } from 'src/app/shared/helpers/grid-config-helper';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
@@ -353,6 +354,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       style: 'chip',
       hidden: false,
       persistId: 'Registertype',
+      booleanValueDisplay: BooleanValueDisplayType.YesNo,
     },
     {
       field: 'ActiveArchivePeriodEndDate',
