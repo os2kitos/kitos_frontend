@@ -227,7 +227,7 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public onDeleteUser(user: any): void {
-    this.dialogOpenerService.openDeleteUserDialog(user, false);
+    this.dialogOpenerService.openDeleteUserDialog(user, false); //TODO: Does not work cause it's not an observable
   }
 
   override rowIdSelect(event: CellClickEvent) {
