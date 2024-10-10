@@ -16,6 +16,7 @@ import { StatePersistingService } from 'src/app/shared/services/state-persisting
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
 import {
   selectOrganizationUserByIndex,
+  selectOrganizationUserByUuid,
   selectOrganizationUserCreatePermissions,
   selectOrganizationUserDeletePermissions,
   selectOrganizationUserGridColumns,
@@ -27,6 +28,8 @@ import {
 import { CreateUserDialogComponent } from './create-user-dialog/create-user-dialog.component';
 import { UserInfoDialogComponent } from './user-info-dialog/user-info-dialog.component';
 import { DialogOpenerService } from 'src/app/shared/services/dialog-opener-service.service';
+import { OrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
+import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 
 @Component({
   selector: 'app-organization-users',
@@ -220,14 +223,13 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
     this.dialog.open(CreateUserDialogComponent, { height: '95%', maxHeight: '750px' });
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  public onEditUser(user: any): void {
+  public onEditUser(user: OrganizationUser): void {
     this.dialogOpenerService.openEditUserDialog(user, false);
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  public onDeleteUser(user: any): void {
-    this.dialogOpenerService.openDeleteUserDialog(user, false); //TODO: Does not work cause it's not an observable
+  public onDeleteUser(user: OrganizationUser): void {
+    const user$ = this.store.select(selectOrganizationUserByUuid(user.Uuid)).pipe(filterNullish());
+    this.dialogOpenerService.openDeleteUserDialog(user$, false); //TODO: Does not work cause it's not an observable
   }
 
   override rowIdSelect(event: CellClickEvent) {
@@ -241,9 +243,9 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
   }
 
   private openUserInfoDialog(index: number) {
-    const user = this.store.select(selectOrganizationUserByIndex(index));
+    const user$ = this.store.select(selectOrganizationUserByIndex(index));
     const dialogRef = this.dialog.open(UserInfoDialogComponent, { minWidth: '800px', width: '25%' });
-    dialogRef.componentInstance.user$ = user;
+    dialogRef.componentInstance.user$ = user$;
     dialogRef.componentInstance.hasModificationPermission$ = this.hasModificationPermission$;
   }
 }

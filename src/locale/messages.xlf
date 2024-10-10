@@ -3919,6 +3919,9 @@
       <trans-unit id="918092702169632987" datatype="html">
         <source>Databehandlingen blev opdateret</source>
       </trans-unit>
+      <trans-unit id="4588541809159773720" datatype="html">
+        <source>Overfør roller til</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

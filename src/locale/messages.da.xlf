@@ -5115,6 +5115,10 @@
         <source>Databehandlingen kunne ikke opdateres</source>
         <target state="new">Databehandlingen kunne ikke opdateres</target>
       </trans-unit>
+      <trans-unit id="4588541809159773720" datatype="html">
+        <source>Overfør roller til</source>
+        <target state="new">Overfør roller til</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
