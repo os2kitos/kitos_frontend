@@ -349,103 +349,65 @@ export class NotificationService implements OnDestroy {
    * Consolidates notifications related to the generic term "external references" which is ealized in multiple different modules
    */
   private subscribeToExternalReferenceManagementEvents() {
-    this.subscriptions.add(
-      this.actions$
-        .pipe(
-          ofType(
-            ITSystemUsageActions.addExternalReferenceSuccess,
-            ITSystemActions.addExternalReferenceSuccess,
-            ITContractActions.addExternalReferenceSuccess,
-            DataProcessingActions.addExternalReferenceSuccess
-          )
-        )
-        .subscribe(() => this.showReferenceAdded())
+    this.subscribeMultipleDefault(
+      [
+        ITSystemUsageActions.addExternalReferenceSuccess,
+        ITSystemActions.addExternalReferenceSuccess,
+        ITContractActions.addExternalReferenceSuccess,
+        DataProcessingActions.addExternalReferenceSuccess,
+      ],
+      $localize`Referencen blev oprettet`
     );
 
-    this.subscriptions.add(
-      this.actions$
-        .pipe(
-          ofType(
-            ITSystemUsageActions.addExternalReferenceError,
-            ITSystemActions.addExternalReferenceError,
-            ITContractActions.addExternalReferenceError,
-            DataProcessingActions.addExternalReferenceError
-          )
-        )
-        .subscribe(() => this.showReferenceAddedFailure())
+    this.subscribeMultipleError(
+      [
+        ITSystemUsageActions.addExternalReferenceError,
+        ITSystemActions.addExternalReferenceError,
+        ITContractActions.addExternalReferenceError,
+        DataProcessingActions.addExternalReferenceError,
+      ],
+      $localize`Referencen kunne ikke oprettes`
     );
-    this.subscriptions.add(
-      this.actions$
-        .pipe(
-          ofType(
-            ITSystemUsageActions.editExternalReferenceSuccess,
-            ITSystemActions.editExternalReferenceSuccess,
-            ITContractActions.editExternalReferenceSuccess,
-            DataProcessingActions.editExternalReferenceSuccess
-          )
-        )
-        .subscribe(() => this.showReferenceEdited())
+
+    this.subscribeMultipleDefault(
+      [
+        ITSystemUsageActions.editExternalReferenceSuccess,
+        ITSystemActions.editExternalReferenceSuccess,
+        ITContractActions.editExternalReferenceSuccess,
+        DataProcessingActions.editExternalReferenceSuccess,
+      ],
+      $localize`Referencen blev ændret`
     );
-    this.subscriptions.add(
-      this.actions$
-        .pipe(
-          ofType(
-            ITSystemUsageActions.editExternalReferenceError,
-            ITSystemActions.editExternalReferenceError,
-            ITContractActions.editExternalReferenceError,
-            DataProcessingActions.editExternalReferenceError
-          )
-        )
-        .subscribe(() => this.showReferenceEditFailure())
+
+    this.subscribeMultipleError(
+      [
+        ITSystemUsageActions.editExternalReferenceError,
+        ITSystemActions.editExternalReferenceError,
+        ITContractActions.editExternalReferenceError,
+        DataProcessingActions.editExternalReferenceError,
+      ],
+      $localize`Referencen kunne ikke ændres`
     );
-    this.subscriptions.add(
-      this.actions$
-        .pipe(
-          ofType(
-            ITSystemUsageActions.removeExternalReferenceSuccess,
-            ITSystemActions.removeExternalReferenceSuccess,
-            ITContractActions.removeExternalReferenceSuccess,
-            DataProcessingActions.removeExternalReferenceSuccess
-          )
-        )
-        .subscribe(() => this.showReferenceDeleted())
+
+    this.subscribeMultipleDefault(
+      [
+        ITSystemUsageActions.removeExternalReferenceSuccess,
+        ITSystemActions.removeExternalReferenceSuccess,
+        ITContractActions.removeExternalReferenceSuccess,
+        DataProcessingActions.removeExternalReferenceSuccess,
+      ],
+      $localize`Referencen blev slettet`
     );
-    this.subscriptions.add(
-      this.actions$
-        .pipe(
-          ofType(
-            ITSystemUsageActions.removeExternalReferenceError,
-            ITSystemActions.removeExternalReferenceError,
-            ITContractActions.removeExternalReferenceError,
-            DataProcessingActions.removeExternalReferenceError
-          )
-        )
-        .subscribe(() => this.showReferenceDeleteFailure())
+
+    this.subscribeMultipleError(
+      [
+        ITSystemUsageActions.removeExternalReferenceError,
+        ITSystemActions.removeExternalReferenceError,
+        ITContractActions.removeExternalReferenceError,
+        DataProcessingActions.removeExternalReferenceError,
+      ],
+      $localize`Referencen kunne ikke slettes`
     );
-  }
-
-  private showReferenceAddedFailure(): void {
-    return this.showError($localize`Referencen kunne ikke oprettes`);
-  }
-
-  private showReferenceAdded(): void {
-    return this.showDefault($localize`Referencen blev oprettet`);
-  }
-
-  private showReferenceEditFailure(): void {
-    return this.showError($localize`Referencen kunne ikke ændres`);
-  }
-
-  private showReferenceEdited(): void {
-    return this.showDefault($localize`Referencen blev ændret`);
-  }
-
-  private showReferenceDeleteFailure(): void {
-    return this.showError($localize`Referencen kunne ikke slettes`);
-  }
-
-  private showReferenceDeleted(): void {
-    return this.showDefault($localize`Referencen blev slettet`);
   }
 
   public show(text: string, type: PopupMessageType) {
