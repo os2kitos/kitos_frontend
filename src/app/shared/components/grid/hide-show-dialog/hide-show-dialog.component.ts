@@ -35,25 +35,34 @@ export class HideShowDialogComponent implements OnInit {
     column.hidden = !column.hidden;
   }
 
+  mergeColumnChanges(): GridColumn[] {
+    return this.columns.map((originalColumn) => {
+      const updatedColumn = this.columnsCopy.find(c => c.field === originalColumn.field);
+      return updatedColumn ? {...originalColumn, hidden: updatedColumn.hidden} : originalColumn;
+    });
+  }
+
   save() {
+    const updatedColumns = this.mergeColumnChanges();
+
     switch (this.entityType) {
       case 'it-system-usage':
-        this.store.dispatch(ITSystemUsageActions.updateGridColumns(this.columnsCopy));
+        this.store.dispatch(ITSystemUsageActions.updateGridColumns(updatedColumns));
         break;
       case 'it-system':
-        this.store.dispatch(ITSystemActions.updateGridColumns(this.columnsCopy));
+        this.store.dispatch(ITSystemActions.updateGridColumns(updatedColumns));
         break;
       case 'it-interface':
-        this.store.dispatch(ITInterfaceActions.updateGridColumns(this.columnsCopy));
+        this.store.dispatch(ITInterfaceActions.updateGridColumns(updatedColumns));
         break;
       case 'data-processing-registration':
-        this.store.dispatch(DataProcessingActions.updateGridColumns(this.columnsCopy));
+        this.store.dispatch(DataProcessingActions.updateGridColumns(updatedColumns));
         break;
       case 'it-contract':
-        this.store.dispatch(ITContractActions.updateGridColumns(this.columnsCopy));
+        this.store.dispatch(ITContractActions.updateGridColumns(updatedColumns));
         break;
       case 'organization-user':
-        this.store.dispatch(OrganizationUserActions.updateGridColumns(this.columnsCopy));
+        this.store.dispatch(OrganizationUserActions.updateGridColumns(updatedColumns));
         break;
       default:
         throw `HideShowDialogComponent: ${this.entityType} not implemented`;
