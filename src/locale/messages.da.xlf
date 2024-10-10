@@ -1679,10 +1679,6 @@
         <source>Du er nu logget ind</source>
         <target state="new">Du er nu logget ind</target>
       </trans-unit>
-      <trans-unit id="3724120708730120916" datatype="html">
-        <source>Kunne ikke logge ind</source>
-        <target state="new">Kunne ikke logge ind</target>
-      </trans-unit>
       <trans-unit id="6265150592191526828" datatype="html">
         <source>Du er nu logget ud</source>
         <target state="new">Du er nu logget ud</target>
@@ -1690,14 +1686,6 @@
       <trans-unit id="1174320715386565846" datatype="html">
         <source>Kunne ikke logge ud</source>
         <target state="new">Kunne ikke logge ud</target>
-      </trans-unit>
-      <trans-unit id="248156203023560452" datatype="html">
-        <source>Feltet er opdateret.</source>
-        <target state="new">Feltet er opdateret.</target>
-      </trans-unit>
-      <trans-unit id="1533849682778732403" datatype="html">
-        <source>Feltet kunne ikke opdateres.</source>
-        <target state="new">Feltet kunne ikke opdateres.</target>
       </trans-unit>
       <trans-unit id="1985017503817569842" datatype="html">
         <source>Tildelingen blev tilføjet</source>
@@ -2166,14 +2154,6 @@
       <trans-unit id="5416665814749973828" datatype="html">
         <source>Tilføj land</source>
         <target state="new">Tilføj land</target>
-      </trans-unit>
-      <trans-unit id="918092702169632987" datatype="html">
-        <source>Databehandlingen blev opdateret</source>
-        <target state="new">Databehandlingen blev opdateret</target>
-      </trans-unit>
-      <trans-unit id="2333094306124327600" datatype="html">
-        <source>Databehandlingen kunne ikke opdateres</source>
-        <target state="new">Databehandlingen kunne ikke opdateres</target>
       </trans-unit>
       <trans-unit id="774790916410966814" datatype="html">
         <source>Databehandlingen blev slettet</source>
@@ -5048,8 +5028,8 @@
         <target state="new">Slet bruger</target>
       </trans-unit>
       <trans-unit id="3129699240351431056" datatype="html">
-        <source> Er du sikker på at du vil fjerne <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION" equiv-text="&lt;/"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="?"/> fra <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION_1" equiv-text="| async }}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="?"/>? <x id="START_TAG_NG_CONTAINER" ctype="x-ng_container" equiv-text="&lt;ng-container *ngIf=&quot;hasRoles()&quot;&gt;"/> Brugeren har disse roller, som kan tildeles en anden. Det er valgfrit om du vil slette brugeren uden at tildele rollerne. <x id="CLOSE_TAG_NG_CONTAINER" ctype="x-ng_container" equiv-text="&lt;/ng-container&gt;"/><x id="START_TAG_NG_CONTAINER_1" ctype="x-ng_container_1" equiv-text="&lt;ng-container *ngIf=&quot;!hasRoles()&quot;&gt;"/> Denne handling kan ikke fortrydes. <x id="CLOSE_TAG_NG_CONTAINER" ctype="x-ng_container" equiv-text="&lt;/ng-container&gt;"/></source>
-        <target state="new"> Er du sikker på at du vil fjerne <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION" equiv-text="&lt;/"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="?"/> fra <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION_1" equiv-text="| async }}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="?"/>? <x id="START_TAG_NG_CONTAINER" ctype="x-ng_container" equiv-text="&lt;ng-container *ngIf=&quot;hasRoles()&quot;&gt;"/> Brugeren har disse roller, som kan tildeles en anden. Det er valgfrit om du vil slette brugeren uden at tildele rollerne. <x id="CLOSE_TAG_NG_CONTAINER" ctype="x-ng_container" equiv-text="&lt;/ng-container&gt;"/><x id="START_TAG_NG_CONTAINER_1" ctype="x-ng_container_1" equiv-text="&lt;ng-container *ngIf=&quot;!hasRoles()&quot;&gt;"/> Denne handling kan ikke fortrydes. <x id="CLOSE_TAG_NG_CONTAINER" ctype="x-ng_container" equiv-text="&lt;/ng-container&gt;"/></target>
+        <source> Er du sikker på at du vil fjerne <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION" equiv-text="}}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="?"/> fra <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION_1" equiv-text="| async }}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="?"/>? <x id="START_TAG_NG_CONTAINER" ctype="x-ng_container" equiv-text="&lt;ng-container *ngIf=&quot;hasRoles(user)&quot;&gt;"/> Brugeren har disse roller, som kan tildeles en anden. Det er valgfrit om du vil slette brugeren uden at tildele rollerne. <x id="CLOSE_TAG_NG_CONTAINER" ctype="x-ng_container" equiv-text="&lt;/ng-container&gt;"/><x id="START_TAG_NG_CONTAINER_1" ctype="x-ng_container_1" equiv-text="&lt;ng-container *ngIf=&quot;!hasRoles(user)&quot;&gt;"/> Denne handling kan ikke fortrydes. <x id="CLOSE_TAG_NG_CONTAINER" ctype="x-ng_container" equiv-text="&lt;/ng-container&gt;"/></source>
+        <target state="new"> Er du sikker på at du vil fjerne <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION" equiv-text="}}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="?"/> fra <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION_1" equiv-text="| async }}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="?"/>? <x id="START_TAG_NG_CONTAINER" ctype="x-ng_container" equiv-text="&lt;ng-container *ngIf=&quot;hasRoles(user)&quot;&gt;"/> Brugeren har disse roller, som kan tildeles en anden. Det er valgfrit om du vil slette brugeren uden at tildele rollerne. <x id="CLOSE_TAG_NG_CONTAINER" ctype="x-ng_container" equiv-text="&lt;/ng-container&gt;"/><x id="START_TAG_NG_CONTAINER_1" ctype="x-ng_container_1" equiv-text="&lt;ng-container *ngIf=&quot;!hasRoles(user)&quot;&gt;"/> Denne handling kan ikke fortrydes. <x id="CLOSE_TAG_NG_CONTAINER" ctype="x-ng_container" equiv-text="&lt;/ng-container&gt;"/></target>
       </trans-unit>
       <trans-unit id="1827402117610901290" datatype="html">
         <source> Tildel valgte roller </source>
@@ -5080,8 +5060,8 @@
         <target state="new">Ikke tilgængelig</target>
       </trans-unit>
       <trans-unit id="3076742637867366279" datatype="html">
-        <source>Er du sikker på, at du vil slette brugeren &apos;<x id="PH" equiv-text="this.getUserName()"/>&apos;?</source>
-        <target state="new">Er du sikker på, at du vil slette brugeren &apos;<x id="PH" equiv-text="this.getUserName()"/>&apos;?</target>
+        <source>Er du sikker på, at du vil slette brugeren &apos;<x id="PH" equiv-text="this.getUserName(user)"/>&apos;?</source>
+        <target state="new">Er du sikker på, at du vil slette brugeren &apos;<x id="PH" equiv-text="this.getUserName(user)"/>&apos;?</target>
       </trans-unit>
       <trans-unit id="4741242196851213916" datatype="html">
         <source>Brugeren blev slettet</source>
@@ -5098,6 +5078,14 @@
       <trans-unit id="7224605356565787228" datatype="html">
         <source>Er du sikker på, at du vil overføre rollerne?</source>
         <target state="new">Er du sikker på, at du vil overføre rollerne?</target>
+      </trans-unit>
+      <trans-unit id="1669829107156320635" datatype="html">
+        <source>Roller overført</source>
+        <target state="new">Roller overført</target>
+      </trans-unit>
+      <trans-unit id="3114960259256343871" datatype="html">
+        <source>Kunne ikke overføre roller</source>
+        <target state="new">Kunne ikke overføre roller</target>
       </trans-unit>
     </body>
   </file>

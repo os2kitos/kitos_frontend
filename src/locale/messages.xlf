@@ -3511,20 +3511,11 @@
       <trans-unit id="432960441136632632" datatype="html">
         <source>Du er nu logget ind</source>
       </trans-unit>
-      <trans-unit id="3724120708730120916" datatype="html">
-        <source>Kunne ikke logge ind</source>
-      </trans-unit>
       <trans-unit id="6265150592191526828" datatype="html">
         <source>Du er nu logget ud</source>
       </trans-unit>
       <trans-unit id="1174320715386565846" datatype="html">
         <source>Kunne ikke logge ud</source>
-      </trans-unit>
-      <trans-unit id="248156203023560452" datatype="html">
-        <source>Feltet er opdateret.</source>
-      </trans-unit>
-      <trans-unit id="1533849682778732403" datatype="html">
-        <source>Feltet kunne ikke opdateres.</source>
       </trans-unit>
       <trans-unit id="2375273103955977651" datatype="html">
         <source>Relation tilføjet</source>
@@ -3663,12 +3654,6 @@
       </trans-unit>
       <trans-unit id="3809394857008906478" datatype="html">
         <source>Betalingen kunne ikke slettes</source>
-      </trans-unit>
-      <trans-unit id="918092702169632987" datatype="html">
-        <source>Databehandlingen blev opdateret</source>
-      </trans-unit>
-      <trans-unit id="2333094306124327600" datatype="html">
-        <source>Databehandlingen kunne ikke opdateres</source>
       </trans-unit>
       <trans-unit id="774790916410966814" datatype="html">
         <source>Databehandlingen blev slettet</source>
@@ -3872,7 +3857,7 @@
         <source> Tildel valgte roller </source>
       </trans-unit>
       <trans-unit id="3129699240351431056" datatype="html">
-        <source> Er du sikker på at du vil fjerne <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION" equiv-text="&lt;/"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="?"/> fra <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION_1" equiv-text="| async }}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="?"/>? <x id="START_TAG_NG_CONTAINER" ctype="x-ng_container" equiv-text="&lt;ng-container *ngIf=&quot;hasRoles()&quot;&gt;"/> Brugeren har disse roller, som kan tildeles en anden. Det er valgfrit om du vil slette brugeren uden at tildele rollerne. <x id="CLOSE_TAG_NG_CONTAINER" ctype="x-ng_container" equiv-text="&lt;/ng-container&gt;"/><x id="START_TAG_NG_CONTAINER_1" ctype="x-ng_container_1" equiv-text="&lt;ng-container *ngIf=&quot;!hasRoles()&quot;&gt;"/> Denne handling kan ikke fortrydes. <x id="CLOSE_TAG_NG_CONTAINER" ctype="x-ng_container" equiv-text="&lt;/ng-container&gt;"/></source>
+        <source> Er du sikker på at du vil fjerne <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION" equiv-text="}}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="?"/> fra <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION_1" equiv-text="| async }}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="?"/>? <x id="START_TAG_NG_CONTAINER" ctype="x-ng_container" equiv-text="&lt;ng-container *ngIf=&quot;hasRoles(user)&quot;&gt;"/> Brugeren har disse roller, som kan tildeles en anden. Det er valgfrit om du vil slette brugeren uden at tildele rollerne. <x id="CLOSE_TAG_NG_CONTAINER" ctype="x-ng_container" equiv-text="&lt;/ng-container&gt;"/><x id="START_TAG_NG_CONTAINER_1" ctype="x-ng_container_1" equiv-text="&lt;ng-container *ngIf=&quot;!hasRoles(user)&quot;&gt;"/> Denne handling kan ikke fortrydes. <x id="CLOSE_TAG_NG_CONTAINER" ctype="x-ng_container" equiv-text="&lt;/ng-container&gt;"/></source>
       </trans-unit>
       <trans-unit id="12801649558012035" datatype="html">
         <source>Tilgængelig</source>
@@ -3893,7 +3878,7 @@
         <source>Ugyldig</source>
       </trans-unit>
       <trans-unit id="3076742637867366279" datatype="html">
-        <source>Er du sikker på, at du vil slette brugeren &apos;<x id="PH" equiv-text="this.getUserName()"/>&apos;?</source>
+        <source>Er du sikker på, at du vil slette brugeren &apos;<x id="PH" equiv-text="this.getUserName(user)"/>&apos;?</source>
       </trans-unit>
       <trans-unit id="4208978631605576763" datatype="html">
         <source>Kunne ikke slette brugeren</source>
@@ -3906,6 +3891,12 @@
       </trans-unit>
       <trans-unit id="8007594754054323000" datatype="html">
         <source>Brugeren har ingen roller</source>
+      </trans-unit>
+      <trans-unit id="1669829107156320635" datatype="html">
+        <source>Roller overført</source>
+      </trans-unit>
+      <trans-unit id="3114960259256343871" datatype="html">
+        <source>Kunne ikke overføre roller</source>
       </trans-unit>
     </body>
   </file>

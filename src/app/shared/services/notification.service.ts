@@ -407,7 +407,7 @@ export class NotificationService implements OnDestroy {
     this.subscribeToMultiple(actionTypes, msg, PopupMessageType.error);
   }
 
-  //actionTypes should be "ofType(actionType1, actionType2, actionType3, ...)"
+  //actionTypes should be" ofType(actionType1, actionType2, actionType3, ...)"
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private subscribeToMultiple(actionTypes: any, msg: string, type: PopupMessageType) {
     this.subscriptions.add(this.actions$.pipe(actionTypes).subscribe(() => this.show(msg, type)));

@@ -23,8 +23,11 @@ export class DialogOpenerService {
     return dialogRef;
   }
 
-  public openDeleteUserDialog(user$: Observable<OrganizationUser>, nested: boolean): MatDialogRef<DeleteUserDialogComponent> {
-    const dialogRef = this.dialog.open(DeleteUserDialogComponent);
+  public openDeleteUserDialog(
+    user$: Observable<OrganizationUser>,
+    nested: boolean
+  ): MatDialogRef<DeleteUserDialogComponent> {
+    const dialogRef = this.dialog.open(DeleteUserDialogComponent, { width: '50%', height: 'auto', maxHeight: '90vh%' });
     dialogRef.componentInstance.user$ = user$;
     dialogRef.componentInstance.nested = nested;
     return dialogRef;
