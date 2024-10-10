@@ -1,8 +1,9 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
+import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { RoleSelectionBaseComponent } from 'src/app/shared/base/base-role-selection.component';
 import { DropdownComponent } from 'src/app/shared/components/dropdowns/dropdown/dropdown.component';
 import { userHasAnyRights } from 'src/app/shared/helpers/user-role.helpers';
@@ -40,7 +41,10 @@ export class DeleteUserDialogComponent extends RoleSelectionBaseComponent implem
 
   public readonly organizationName$: Observable<string | undefined> = this.store.select(selectOrganizationName);
 
-  public readonly users$: Observable<OrganizationUser[]> = this.store.select(selectAll);
+  public readonly users$: Observable<OrganizationUser[]> = this.store.select(selectAll).pipe(
+    concatLatestFrom(() => this.user$),
+    map(([users, user]) => users.filter((u) => u.Uuid !== user.Uuid))
+  );
   public selectedUser: OrganizationUser | undefined = undefined;
 
   ngOnInit(): void {

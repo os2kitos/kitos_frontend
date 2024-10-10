@@ -21,7 +21,11 @@ export class CopyRolesDialogComponent extends RoleSelectionBaseComponent impleme
   @ViewChild(DropdownComponent) dropdownComponent!: DropdownComponent<OrganizationUser>;
 
   constructor(private store: Store, selectionService: RoleSelectionService, actions$: Actions) {
-    super(selectionService, actions$, ofType(OrganizationUserActions.copyRolesError, OrganizationUserActions.copyRolesSuccess));
+    super(
+      selectionService,
+      actions$,
+      ofType(OrganizationUserActions.copyRolesError, OrganizationUserActions.copyRolesSuccess)
+    );
   }
 
   ngOnInit(): void {
