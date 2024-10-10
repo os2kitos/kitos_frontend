@@ -4943,6 +4943,14 @@
         <source>Bruger kunne ikke oprettes</source>
         <target state="new">Bruger kunne ikke oprettes</target>
       </trans-unit>
+      <trans-unit id="1920124659830189543" datatype="html">
+        <source>Kopier roller</source>
+        <target state="new">Kopier roller</target>
+      </trans-unit>
+      <trans-unit id="2581887775164854038" datatype="html">
+        <source>Kopier roller til</source>
+        <target state="new">Kopier roller til</target>
+      </trans-unit>
       <trans-unit id="4057866856667052314" datatype="html">
         <source>Stamdata for <x id="INTERPOLATION" equiv-text="{{ organizationName }}"/></source>
         <target state="new">Stamdata for <x id="INTERPOLATION" equiv-text="{{ organizationName }}"/></target>
@@ -4999,13 +5007,33 @@
         <source>Kunne ikke hente organisationsrettigheder.</source>
         <target state="new">Kunne ikke hente organisationsrettigheder.</target>
       </trans-unit>
+      <trans-unit id="7680003617143986371" datatype="html">
+        <source>Vælg handling for valgte roller <x id="PH" equiv-text="this.buttonNumberText()"/></source>
+        <target state="new">Vælg handling for valgte roller <x id="PH" equiv-text="this.buttonNumberText()"/></target>
+      </trans-unit>
       <trans-unit id="9034694311930313078" datatype="html">
         <source>Send advis om ændringer</source>
         <target state="new">Send advis om ændringer</target>
       </trans-unit>
+      <trans-unit id="8526724513361212996" datatype="html">
+        <source>Roller kopieret</source>
+        <target state="new">Roller kopieret</target>
+      </trans-unit>
+      <trans-unit id="3048587120469429420" datatype="html">
+        <source>Kunne ikke kopiere roller</source>
+        <target state="new">Kunne ikke kopiere roller</target>
+      </trans-unit>
       <trans-unit id="5412714650100464515" datatype="html">
         <source>Denne bruger findes allerede i en anden organisation. Du kan kun redigere brugerens roller.</source>
         <target state="new">Denne bruger findes allerede i en anden organisation. Du kan kun redigere brugerens roller.</target>
+      </trans-unit>
+      <trans-unit id="4901548796888618173" datatype="html">
+        <source> Fravælg alle </source>
+        <target state="new"> Fravælg alle </target>
+      </trans-unit>
+      <trans-unit id="8453891047051546327" datatype="html">
+        <source> Vælg alle </source>
+        <target state="new"> Vælg alle </target>
       </trans-unit>
       <trans-unit id="5621443521686858170" datatype="html">
         <source>IT kontrakt</source>
@@ -5042,6 +5070,34 @@
       <trans-unit id="6280985686321240164" datatype="html">
         <source>Organisationen blev opdateret.</source>
         <target state="new">Organisationen blev opdateret.</target>
+      </trans-unit>
+      <trans-unit id="5007829064962714817" datatype="html">
+        <source>Sandt</source>
+        <target state="new">Sandt</target>
+      </trans-unit>
+      <trans-unit id="5605050838129145775" datatype="html">
+        <source>Falsk</source>
+        <target state="new">Falsk</target>
+      </trans-unit>
+      <trans-unit id="1932682501978400963" datatype="html">
+        <source>Inaktiv</source>
+        <target state="new">Inaktiv</target>
+      </trans-unit>
+      <trans-unit id="8572497829221531435" datatype="html">
+        <source>Ugyldig</source>
+        <target state="new">Ugyldig</target>
+      </trans-unit>
+      <trans-unit id="12801649558012035" datatype="html">
+        <source>Tilgængelig</source>
+        <target state="new">Tilgængelig</target>
+      </trans-unit>
+      <trans-unit id="2132355553430813586" datatype="html">
+        <source>Ikke tilgængelig</source>
+        <target state="new">Ikke tilgængelig</target>
+      </trans-unit>
+      <trans-unit id="8007594754054323000" datatype="html">
+        <source>Brugeren har ingen roller</source>
+        <target state="new">Brugeren har ingen roller</target>
       </trans-unit>
     </body>
   </file>

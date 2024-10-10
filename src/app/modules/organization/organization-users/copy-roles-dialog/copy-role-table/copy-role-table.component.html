@@ -1,0 +1,25 @@
+<app-accordion [isExpandedByDefault]="true" [title]="getTitle()">
+  <app-native-table tableLayout="fixed">
+    <thead>
+      <tr>
+        <th width="5%">
+          <app-checkbox [value]="isAllSelected()" (valueChange)="allRoleSelectedChanged($event)"></app-checkbox>
+        </th>
+        <th>{{ getRoleTypeName() }}</th>
+        <th i18n>Rolle</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let right of getUserRights()">
+        <td>
+          <app-checkbox
+            [value]="isRightSelected(right)"
+            (valueChange)="roleSelectionChanged(right, $event)"
+          ></app-checkbox>
+        </td>
+        <td>{{ right.entity.name }}</td>
+        <td>{{ right.role.name }}</td>
+      </tr>
+    </tbody>
+  </app-native-table>
+</app-accordion>

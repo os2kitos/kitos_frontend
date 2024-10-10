@@ -1,8 +1,9 @@
 <mat-accordion>
-  <mat-expansion-panel [expanded]="isExpandedByDefault">
+  <mat-expansion-panel [disabled]="disabled" [expanded]="isExpandedByDefault">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        <app-paragraph [bold]="true">{{ title }}</app-paragraph>
+          <app-paragraph [bold]="true">{{ title }}</app-paragraph>
+          <ng-content class="accordion-header" select="app-accordion-header"></ng-content>
       </mat-panel-title>
     </mat-expansion-panel-header>
     <ng-content></ng-content>

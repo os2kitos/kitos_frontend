@@ -146,12 +146,11 @@
               i18n
             ></app-empty-state>
           </ng-container>
-
           <!-- Loading state -->
           <app-loading *ngIf="(isLoading$ | async) !== false" class="vertical-center-container"></app-loading>
           <!-- Snackbar -->
           <ng-container *ngIf="selectedRegistrationsCount$ | async as numberOfRegistrations">
-            <div class="snackbar" *ngIf="numberOfRegistrations > 0" data-cy="actions-snackbar">
+            <app-snackbar-actions *ngIf="numberOfRegistrations > 0" data-cy="actions-snackbar">
               <app-paragraph color="white" paragraphSize="medium" [dimmed]="true" i18n
                 >Vælg handling for valgte registreringer ({{ numberOfRegistrations }})</app-paragraph
               >
@@ -177,7 +176,7 @@
                   >Overfør</app-button
                 >
               </div>
-            </div>
+            </app-snackbar-actions>
           </ng-container>
         </div>
       </div>

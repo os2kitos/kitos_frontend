@@ -8,4 +8,5 @@ import { Component, Input } from '@angular/core';
 export class AccordionComponent {
   @Input() title: string | undefined;
   @Input() isExpandedByDefault = false;
+  @Input() disabled = false;
 }

@@ -3,8 +3,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { EditUserDialogComponent } from '../edit-user-dialog/edit-user-dialog.component';
-import { OrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
+import { OrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
+
 
 
 @Component({
