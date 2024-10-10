@@ -2892,9 +2892,6 @@
       <trans-unit id="7299188518201836340" datatype="html">
         <source>Gentag email*</source>
       </trans-unit>
-      <trans-unit id="858866300592183763" datatype="html">
-        <source>Telefonnumer</source>
-      </trans-unit>
       <trans-unit id="9193480723158679191" datatype="html">
         <source>Primær startenhed</source>
       </trans-unit>
@@ -3802,6 +3799,12 @@
       <trans-unit id="9034694311930313078" datatype="html">
         <source>Send advis om ændringer</source>
       </trans-unit>
+      <trans-unit id="1920124659830189543" datatype="html">
+        <source>Kopier roller</source>
+      </trans-unit>
+      <trans-unit id="2581887775164854038" datatype="html">
+        <source>Kopier roller til</source>
+      </trans-unit>
       <trans-unit id="1761334666261692236" datatype="html">
         <source>Kunne ikke hente organisationsrettigheder.</source>
       </trans-unit>
@@ -3835,8 +3838,23 @@
       <trans-unit id="7986347391181913104" datatype="html">
         <source>Databeskyttelsesrådgiver</source>
       </trans-unit>
+      <trans-unit id="3048587120469429420" datatype="html">
+        <source>Kunne ikke kopiere roller</source>
+      </trans-unit>
+      <trans-unit id="7680003617143986371" datatype="html">
+        <source>Vælg handling for valgte roller <x id="PH" equiv-text="this.buttonNumberText()"/></source>
+      </trans-unit>
+      <trans-unit id="8526724513361212996" datatype="html">
+        <source>Roller kopieret</source>
+      </trans-unit>
       <trans-unit id="5412714650100464515" datatype="html">
         <source>Denne bruger findes allerede i en anden organisation. Du kan kun redigere brugerens roller.</source>
+      </trans-unit>
+      <trans-unit id="4901548796888618173" datatype="html">
+        <source> Fravælg alle </source>
+      </trans-unit>
+      <trans-unit id="8453891047051546327" datatype="html">
+        <source> Vælg alle </source>
       </trans-unit>
       <trans-unit id="2429179520054687064" datatype="html">
         <source>Masseopret</source>
@@ -3844,26 +3862,26 @@
       <trans-unit id="5621443521686858170" datatype="html">
         <source>IT kontrakt</source>
       </trans-unit>
-      <trans-unit id="2261286606404354843" datatype="html">
-        <source>Anden offentlig myndighed</source>
+      <trans-unit id="12801649558012035" datatype="html">
+        <source>Tilgængelig</source>
       </trans-unit>
-      <trans-unit id="4335783776773944989" datatype="html">
-        <source>Kommune</source>
+      <trans-unit id="1932682501978400963" datatype="html">
+        <source>Inaktiv</source>
       </trans-unit>
-      <trans-unit id="6156945730689256248" datatype="html">
-        <source>Virksomhed</source>
+      <trans-unit id="2132355553430813586" datatype="html">
+        <source>Ikke tilgængelig</source>
       </trans-unit>
-      <trans-unit id="7661266723054940833" datatype="html">
-        <source>Information om <x id="INTERPOLATION" equiv-text="{{organizationName}}"/></source>
+      <trans-unit id="5007829064962714817" datatype="html">
+        <source>Sandt</source>
       </trans-unit>
-      <trans-unit id="9090249672465718263" datatype="html">
-        <source>Interessefællesskab</source>
+      <trans-unit id="5605050838129145775" datatype="html">
+        <source>Falsk</source>
       </trans-unit>
-      <trans-unit id="3700126250923289975" datatype="html">
-        <source>Kunne ikke opdatere organisation.</source>
+      <trans-unit id="8572497829221531435" datatype="html">
+        <source>Ugyldig</source>
       </trans-unit>
-      <trans-unit id="6280985686321240164" datatype="html">
-        <source>Organisationen blev opdateret.</source>
+      <trans-unit id="8007594754054323000" datatype="html">
+        <source>Brugeren har ingen roller</source>
       </trans-unit>
     </body>
   </file>

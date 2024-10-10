@@ -1,0 +1,85 @@
+<app-scrollbar-dialog title="Kopier roller" i18n-title [nested]="true" [ngClass]="{'some-class': isAnySelected()}">
+  <ng-container *ngIf="!isLoading">
+    <app-standard-vertical-content-grid>
+      <app-dropdown
+        (valueChange)="selectedUserChanged($event)"
+        [data]="users | async"
+        textField="Name"
+        text="Kopier roller til"
+        i18n-text
+        [searchFn]="searchFn"
+      >
+      </app-dropdown>
+
+      <app-copy-role-table
+        *ngIf="user.OrganizationUnitRights.length > 0"
+        [user]="user"
+        entityType="organization-unit"
+      ></app-copy-role-table>
+
+      <app-copy-role-table
+        *ngIf="user.ItSystemRights.length > 0"
+        [user]="user"
+        entityType="it-system"
+      ></app-copy-role-table>
+
+      <app-copy-role-table
+        *ngIf="user.ItContractRights.length > 0"
+        [user]="user"
+        entityType="it-contract"
+      ></app-copy-role-table>
+
+      <app-copy-role-table
+        *ngIf="user.DataProcessingRegistrationRights.length > 0"
+        [user]="user"
+        entityType="data-processing-registration"
+      ></app-copy-role-table>
+
+      <app-empty-state
+        text="Brugeren har ingen roller"
+        context="emptyTable"
+        *ngIf="!userHasAnyRight()"
+        i18n-text
+      ></app-empty-state>
+    </app-standard-vertical-content-grid>
+  </ng-container>
+  <app-dialog-actions *ngIf="!isLoading">
+    <app-standard-vertical-content-grid>
+      <app-snackbar-actions *ngIf="isAnySelected()">
+        <app-paragraph color="white" paragraphSize="medium" [dimmed]="true" i18n>{{ getSnackbarText() }}</app-paragraph>
+
+        <app-button
+          color="secondary"
+          buttonStyle="secondary"
+          (buttonClick)="onCopyRoles()"
+          [disabled]="!isUserSelected()"
+          i18n
+          class="copy-roles-button"
+        >
+          Kopier roller
+        </app-button>
+      </app-snackbar-actions>
+      <app-content-space-between class="action-buttons">
+        <app-button
+          [disabled]="!isAnySelected()"
+          buttonStyle="secondary"
+          color="accent"
+          (buttonClick)="deselectAll()"
+          i18n
+        >
+          Fravælg alle
+        </app-button>
+        <app-button
+          [disabled]="isAllSelected()"
+          buttonStyle="secondary"
+          color="accent"
+          (buttonClick)="selectAll()"
+          i18n
+        >
+          Vælg alle
+        </app-button>
+      </app-content-space-between>
+    </app-standard-vertical-content-grid>
+  </app-dialog-actions>
+  <app-loading *ngIf="isLoading"></app-loading>
+</app-scrollbar-dialog>

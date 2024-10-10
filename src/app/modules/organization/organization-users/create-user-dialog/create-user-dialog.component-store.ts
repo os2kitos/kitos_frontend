@@ -56,7 +56,7 @@ export class CreateUserDialogComponentStore extends ComponentStore<State> {
           })
           .pipe(
             tapResponse(
-              (user) => this.setUser(user),
+              (user) => this.setUser(email !== this.orginalEmail ? user : undefined),
               (e) => console.error(e),
               () => this.setLoading(false)
             )

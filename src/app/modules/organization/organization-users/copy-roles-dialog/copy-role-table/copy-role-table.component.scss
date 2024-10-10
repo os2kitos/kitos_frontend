@@ -1,14 +1,10 @@
-@import "theme";
+@import 'theme';
 
 .container {
-  border: solid $color-neutral-20 1px !important;
+  border: solid $color-primary-60 1px !important;
   border-radius: $radius-large !important;
   overflow: auto;
   padding-top: $padding-medium;
-}
-
-.header {
-  float: left
 }
 
 td {

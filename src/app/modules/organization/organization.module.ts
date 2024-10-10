@@ -11,10 +11,12 @@ import { OrganizationUnitRoleTableComponent } from './organization-structure/org
 import { CreateUserDialogComponent } from './organization-users/create-user-dialog/create-user-dialog.component';
 import { OrganizationUsersComponent } from './organization-users/organization-users.component';
 import { UserInfoDialogComponent } from './organization-users/user-info-dialog/user-info-dialog.component';
-import { UserRoleTableComponent } from './organization-users/user-role-table/user-role-table.component';
 import { EditUserDialogComponent } from './organization-users/edit-user-dialog/edit-user-dialog.component';
 import { OrganizationComponent } from './organization.component';
 import { OrganizationRouterModule } from './organization.routes';
+import { CopyRolesDialogComponent } from './organization-users/copy-roles-dialog/copy-roles-dialog.component';
+import { CopyRoleTableComponent } from './organization-users/copy-roles-dialog/copy-role-table/copy-role-table.component';
+import { UserRoleTableComponent } from './organization-users/user-info-dialog/user-role-table/user-role-table.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,8 @@ import { OrganizationRouterModule } from './organization.routes';
     OrganizationUnitRoleTableComponent,
     EditUserDialogComponent,
     CreateUserDialogComponent,
+    CopyRolesDialogComponent,
+    CopyRoleTableComponent,
   ],
 
   imports: [OrganizationRouterModule, SharedModule, ComponentsModule],

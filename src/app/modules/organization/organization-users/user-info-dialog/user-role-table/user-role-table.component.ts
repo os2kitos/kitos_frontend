@@ -1,7 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { getRights, getRoleTypeNameByEntityType, getTypeTitleNameByType } from 'src/app/shared/helpers/user-role.helpers';
 import { OrganizationUser, Right } from 'src/app/shared/models/organization/organization-user/organization-user.model';
+
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
 import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
@@ -21,49 +23,16 @@ export class UserRoleTableComponent {
 
   constructor(private store: Store, private confirmService: ConfirmActionService) {}
 
-  public getRights(): Right[] {
-    switch (this.entityType) {
-      case 'organization-unit':
-        return this.user.OrganizationUnitRights;
-      case 'it-system':
-        return this.user.ItSystemRights;
-      case 'it-contract':
-        return this.user.ItContractRights;
-      case 'data-processing-registration':
-        return this.user.DataProcessingRegistrationRights;
-      default:
-        throw new Error(`This component does not support entity type: ${this.entityType}`);
-    }
+  public getUserRights(): Right[] {
+    return getRights(this.user, this.entityType);
   }
 
   public getTitle(): string {
-    switch (this.entityType) {
-      case 'organization-unit':
-        return $localize`Organisationsenhedroller`;
-      case 'it-system':
-        return $localize`Systemroller`;
-      case 'it-contract':
-        return $localize`Kontraktroller`;
-      case 'data-processing-registration':
-        return $localize`Databehandlingsroller`;
-      default:
-        throw new Error(`This component does not support entity type: ${this.entityType}`);
-    }
+    return getTypeTitleNameByType(this.entityType);
   }
 
   public getRoleTypeName(): string {
-    switch (this.entityType) {
-      case 'organization-unit':
-        return $localize`Organisationsenhed`;
-      case 'it-system':
-        return $localize`It System`;
-      case 'it-contract':
-        return $localize`It Kontrakt`;
-      case 'data-processing-registration':
-        return $localize`Databehandling`;
-      default:
-        throw new Error(`This component does not support entity type: ${this.entityType}`);
-    }
+    return getRoleTypeNameByEntityType(this.entityType);
   }
 
   public onRemove(right: Right): void {
@@ -96,3 +65,4 @@ export class UserRoleTableComponent {
     }
   }
 }
+

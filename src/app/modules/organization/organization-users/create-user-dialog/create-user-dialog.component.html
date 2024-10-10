@@ -37,13 +37,15 @@
       </app-tooltip>
 
       <app-tooltip [text]="(userInOtherOrgHelptext$ | async) ?? ''" [tooltipDelay]="500">
-        <app-numeric-input
-          text="Telefonnumer"
+        <app-textbox
+          text="Telefonnummer"
+          type="tel"
+          pattern="^\+?[0-9]*$"
           i18n-text
           [formGroup]="createForm"
           formName="phoneNumber"
           data-cy="phone-number"
-        ></app-numeric-input>
+        ></app-textbox>
       </app-tooltip>
 
       <app-tooltip [text]="(userInOtherOrgHelptext$ | async) ?? ''" [tooltipDelay]="500">

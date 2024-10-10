@@ -6,9 +6,14 @@ import { Store } from '@ngrx/store';
 import { toODataString } from '@progress/kendo-data-query';
 import { compact } from 'lodash';
 import { catchError, combineLatestWith, map, of, switchMap } from 'rxjs';
-import { APIOrganizationUserResponseDTO, APIV2UsersInternalINTERNALService } from 'src/app/api/v2';
+import {
+  APIOrganizationUserResponseDTO,
+  APIV2UsersInternalINTERNALService,
+} from 'src/app/api/v2';
 import { OData } from 'src/app/shared/models/odata.model';
-import { adaptOrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
+import {
+  adaptOrganizationUser,
+} from 'src/app/shared/models/organization/organization-user/organization-user.model';
 import { ORGANIZATION_USER_COLUMNS_ID } from 'src/app/shared/persistent-state-constants';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
@@ -130,6 +135,25 @@ export class OrganizationUserEffects {
             map((user) => OrganizationUserActions.updateUserSuccess(user)),
             catchError(() => of(OrganizationUserActions.updateUserError()))
           )
+      )
+    );
+  });
+
+  copyRoles$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(OrganizationUserActions.copyRoles),
+      concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+      switchMap(([{ fromUserUuid, toUserUuid, request }, organizationUuid]) =>
+        this.apiService.postSingleUsersInternalV2CopyRoles({
+          fromUserUuid,
+          toUserUuid,
+          organizationUuid,
+          request,
+        })
+        .pipe(
+          map(() => OrganizationUserActions.copyRolesSuccess()),
+          catchError(() => of(OrganizationUserActions.copyRolesError()))
+        )
       )
     );
   });

@@ -7,7 +7,7 @@ import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
-import { OrganizationActions } from 'src/app/store/organization/actions';
+import { OrganizationMasterDataActions } from 'src/app/store/organization/organization-master-data/actions';
 import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
 import { PopupMessageActions } from 'src/app/store/popup-messages/actions';
@@ -491,60 +491,66 @@ export class NotificationService implements OnDestroy {
 
     this.subscriptions.add(
       this.actions$
-        .pipe(ofType(OrganizationActions.getMasterDataError))
+        .pipe(ofType(OrganizationMasterDataActions.getMasterDataError))
         .subscribe(() => this.showError(this.getMasterDataError))
     );
 
     this.subscriptions.add(
       this.actions$
-        .pipe(ofType(OrganizationActions.patchMasterDataSuccess))
+        .pipe(ofType(OrganizationMasterDataActions.patchMasterDataSuccess))
         .subscribe(() => this.showDefault(this.patchMasterDataSuccess))
     );
 
     this.subscriptions.add(
       this.actions$
-        .pipe(ofType(OrganizationActions.patchMasterDataError))
+        .pipe(ofType(OrganizationMasterDataActions.patchMasterDataError))
         .subscribe(() => this.showError(this.patchMasterDataError))
     );
 
     this.subscriptions.add(
       this.actions$
-        .pipe(ofType(OrganizationActions.getMasterDataRolesError))
+        .pipe(ofType(OrganizationMasterDataActions.getMasterDataRolesError))
         .subscribe(() => this.showError(this.getMasterDataError))
     );
 
     this.subscriptions.add(
       this.actions$
-        .pipe(ofType(OrganizationActions.patchMasterDataRolesSuccess))
+        .pipe(ofType(OrganizationMasterDataActions.patchMasterDataRolesSuccess))
         .subscribe(() => this.showDefault(this.patchMasterDataSuccess))
     );
 
     this.subscriptions.add(
       this.actions$
-        .pipe(ofType(OrganizationActions.patchMasterDataRolesError))
+        .pipe(ofType(OrganizationMasterDataActions.patchMasterDataRolesError))
         .subscribe(() => this.showError(this.patchMasterDataError))
     );
 
     this.subscriptions.add(
       this.actions$
-        .pipe(ofType(OrganizationActions.getOrganizationPermissionsError))
+        .pipe(ofType(OrganizationMasterDataActions.getOrganizationPermissionsError))
         .subscribe(() => this.showError($localize`Kunne ikke hente organisationsrettigheder.`))
     );
 
-    this.subscriptions.add(
-      this.actions$
-        .pipe(ofType(UserActions.patchOrganizationError))
-        .subscribe(() => this.showError($localize`Kunne ikke opdatere organisation.`))
-    );
-
-    this.subscriptions.add(
-      this.actions$
-        .pipe(ofType(UserActions.patchOrganizationSuccess))
-        .subscribe(() => this.showError($localize`Organisationen blev opdateret.`))
-    );
+    this.subscribeToActionAsDefault(OrganizationUserActions.copyRolesSuccess, $localize`Roller kopieret`);
+    this.subscribeToActionAsError(OrganizationUserActions.copyRolesError, $localize`Kunne ikke kopiere roller`);
 
     this.subscribeToExternalReferenceManagementEvents();
     this.subscribeToRoleNotifications();
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  public subscribeToActionAsDefault(actionType: any, msg: string) {
+    this.subscribeToActionWithMessage(actionType, msg, PopupMessageType.default);
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  public subscribeToActionAsError(actionType: any, msg: string) {
+    this.subscribeToActionWithMessage(actionType, msg, PopupMessageType.error);
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  public subscribeToActionWithMessage(actionType: any, msg: string, type: PopupMessageType) {
+    this.subscriptions.add(this.actions$.pipe(ofType(actionType)).subscribe(() => this.show(msg, type)));
   }
 
   /**
