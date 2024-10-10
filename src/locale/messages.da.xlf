@@ -4839,10 +4839,6 @@
         <source>Gentag email*</source>
         <target state="new">Gentag email*</target>
       </trans-unit>
-      <trans-unit id="858866300592183763" datatype="html">
-        <source>Telefonnumer</source>
-        <target state="new">Telefonnumer</target>
-      </trans-unit>
       <trans-unit id="9193480723158679191" datatype="html">
         <source>Primær startenhed</source>
         <target state="new">Primær startenhed</target>
@@ -5066,6 +5062,10 @@
       <trans-unit id="2132355553430813586" datatype="html">
         <source>Ikke tilgængelig</source>
         <target state="new">Ikke tilgængelig</target>
+      </trans-unit>
+      <trans-unit id="8007594754054323000" datatype="html">
+        <source>Brugeren har ingen roller</source>
+        <target state="new">Brugeren har ingen roller</target>
       </trans-unit>
     </body>
   </file>
