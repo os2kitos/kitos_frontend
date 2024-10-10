@@ -291,35 +291,6 @@ export class NotificationService implements OnDestroy {
       $localize`Databehandlingen kunne ikke slettes`
     );
   }
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  private subscribeAsDefault(actionType: any, msg: string) {
-    this.subscribeToActionWithMessage(actionType, msg, PopupMessageType.default);
-  }
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  private subscribeAsError(actionType: any, msg: string) {
-    this.subscribeToActionWithMessage(actionType, msg, PopupMessageType.error);
-  }
-
-  //actionType can either be a single action or a an array of actions
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  private subscribeToActionWithMessage(actionType: any, msg: string, type: PopupMessageType) {
-    this.subscribeToMultiple(ofType(actionType), msg, type);
-  }
-
-  private subscribeMultipleDefault(actionTypes: any, msg: string) {
-    this.subscribeToMultiple(actionTypes, msg, PopupMessageType.default);
-  }
-
-  private subscribeMultipleError(actionTypes: any, msg: string) {
-    this.subscribeToMultiple(actionTypes, msg, PopupMessageType.error);
-  }
-
-  private subscribeToMultiple(actionTypes: any, msg: string, type: PopupMessageType) {
-    this.subscriptions.add(this.actions$.pipe(actionTypes).subscribe(() => this.show(msg, type)));
-  }
-
   /**
    * Consolidates notifications related to the "roles" which is used in multiple different modules
    */
@@ -350,64 +321,96 @@ export class NotificationService implements OnDestroy {
    */
   private subscribeToExternalReferenceManagementEvents() {
     this.subscribeMultipleDefault(
-      [
+      ofType(
         ITSystemUsageActions.addExternalReferenceSuccess,
         ITSystemActions.addExternalReferenceSuccess,
         ITContractActions.addExternalReferenceSuccess,
-        DataProcessingActions.addExternalReferenceSuccess,
-      ],
+        DataProcessingActions.addExternalReferenceSuccess
+      ),
       $localize`Referencen blev oprettet`
     );
 
     this.subscribeMultipleError(
-      [
+      ofType(
         ITSystemUsageActions.addExternalReferenceError,
         ITSystemActions.addExternalReferenceError,
         ITContractActions.addExternalReferenceError,
-        DataProcessingActions.addExternalReferenceError,
-      ],
+        DataProcessingActions.addExternalReferenceError
+      ),
       $localize`Referencen kunne ikke oprettes`
     );
 
     this.subscribeMultipleDefault(
-      [
+      ofType(
         ITSystemUsageActions.editExternalReferenceSuccess,
         ITSystemActions.editExternalReferenceSuccess,
         ITContractActions.editExternalReferenceSuccess,
-        DataProcessingActions.editExternalReferenceSuccess,
-      ],
+        DataProcessingActions.editExternalReferenceSuccess
+      ),
       $localize`Referencen blev ændret`
     );
 
     this.subscribeMultipleError(
-      [
+      ofType(
         ITSystemUsageActions.editExternalReferenceError,
         ITSystemActions.editExternalReferenceError,
         ITContractActions.editExternalReferenceError,
-        DataProcessingActions.editExternalReferenceError,
-      ],
+        DataProcessingActions.editExternalReferenceError
+      ),
       $localize`Referencen kunne ikke ændres`
     );
 
     this.subscribeMultipleDefault(
-      [
+      ofType(
         ITSystemUsageActions.removeExternalReferenceSuccess,
         ITSystemActions.removeExternalReferenceSuccess,
         ITContractActions.removeExternalReferenceSuccess,
-        DataProcessingActions.removeExternalReferenceSuccess,
-      ],
+        DataProcessingActions.removeExternalReferenceSuccess
+      ),
       $localize`Referencen blev slettet`
     );
 
     this.subscribeMultipleError(
-      [
+      ofType(
         ITSystemUsageActions.removeExternalReferenceError,
         ITSystemActions.removeExternalReferenceError,
         ITContractActions.removeExternalReferenceError,
-        DataProcessingActions.removeExternalReferenceError,
-      ],
+        DataProcessingActions.removeExternalReferenceError
+      ),
       $localize`Referencen kunne ikke slettes`
     );
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private subscribeAsDefault(actionType: any, msg: string) {
+    this.subscribeToActionWithMessage(actionType, msg, PopupMessageType.default);
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private subscribeAsError(actionType: any, msg: string) {
+    this.subscribeToActionWithMessage(actionType, msg, PopupMessageType.error);
+  }
+
+  //Call this with single actionType
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private subscribeToActionWithMessage(actionType: any, msg: string, type: PopupMessageType) {
+    this.subscribeToMultiple(ofType(actionType), msg, type);
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private subscribeMultipleDefault(actionTypes: any, msg: string) {
+    this.subscribeToMultiple(actionTypes, msg, PopupMessageType.default);
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private subscribeMultipleError(actionTypes: any, msg: string) {
+    this.subscribeToMultiple(actionTypes, msg, PopupMessageType.error);
+  }
+
+  //actionTypes should be "ofType(actionType1, actionType2, actionType3, ...)"
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private subscribeToMultiple(actionTypes: any, msg: string, type: PopupMessageType) {
+    this.subscriptions.add(this.actions$.pipe(actionTypes).subscribe(() => this.show(msg, type)));
   }
 
   public show(text: string, type: PopupMessageType) {
