@@ -195,8 +195,17 @@ export class NotificationService implements OnDestroy {
       $localize`Oprettelse af anvendelse mislykkedes`
     );
 
-    this.subscribeAsDefault(ITSystemActions.patchITSystemSuccess, $localize`Feltet er opdateret`);
-    this.subscribeAsError(ITSystemActions.patchITSystemError, $localize`Feltet kunne ikke opdateres`);
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITSystemActions.patchITSystemSuccess))
+        .subscribe((params) => this.showDefault(params.customSuccessText ?? $localize`Feltet er opdateret`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITSystemActions.patchITSystemError))
+        .subscribe((params) => this.showError(params.customErrorText ?? $localize`Feltet kunne ikke opdateres`))
+    );
 
     this.subscribeAsDefault(ITInterfaceActions.deleteITInterfaceSuccess, $localize`Snitflade blev slettet`);
     this.subscribeAsError(ITInterfaceActions.deleteITInterfaceError, $localize`Snitflade kunne ikke slettes`);
