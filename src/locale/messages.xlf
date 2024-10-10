@@ -3907,6 +3907,12 @@
       <trans-unit id="8007594754054323000" datatype="html">
         <source>Brugeren har ingen roller</source>
       </trans-unit>
+      <trans-unit id="2961498540444259062" datatype="html">
+        <source>Udenlandsk virksomhed</source>
+      </trans-unit>
+      <trans-unit id="616679104901444882" datatype="html">
+        <source>Organisationer</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

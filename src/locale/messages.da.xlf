@@ -5099,6 +5099,14 @@
         <source>Brugeren har ingen roller</source>
         <target state="new">Brugeren har ingen roller</target>
       </trans-unit>
+      <trans-unit id="616679104901444882" datatype="html">
+        <source>Organisationer</source>
+        <target state="new">Organisationer</target>
+      </trans-unit>
+      <trans-unit id="2961498540444259062" datatype="html">
+        <source>Udenlandsk virksomhed</source>
+        <target state="new">Udenlandsk virksomhed</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
