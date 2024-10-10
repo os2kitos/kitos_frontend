@@ -4819,10 +4819,6 @@
         <source>Gentag email*</source>
         <target state="new">Gentag email*</target>
       </trans-unit>
-      <trans-unit id="858866300592183763" datatype="html">
-        <source>Telefonnumer</source>
-        <target state="new">Telefonnumer</target>
-      </trans-unit>
       <trans-unit id="9193480723158679191" datatype="html">
         <source>Primær startenhed</source>
         <target state="new">Primær startenhed</target>
