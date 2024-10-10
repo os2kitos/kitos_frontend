@@ -1,9 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { RoleSelectionBaseComponent } from 'src/app/shared/base/base-role-selection.component';
+import { DropdownComponent } from 'src/app/shared/components/dropdowns/dropdown/dropdown.component';
 import { userHasAnyRights } from 'src/app/shared/helpers/user-role.helpers';
 import { OrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
 import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
@@ -18,9 +19,10 @@ import { selectOrganizationName } from 'src/app/store/user-store/selectors';
   styleUrl: './delete-user-dialog.component.scss',
   providers: [RoleSelectionService],
 })
-export class DeleteUserDialogComponent extends RoleSelectionBaseComponent {
+export class DeleteUserDialogComponent extends RoleSelectionBaseComponent implements OnInit {
   @Input() user$!: Observable<OrganizationUser>;
   @Input() nested: boolean = false;
+  @ViewChild(DropdownComponent) dropdownComponent!: DropdownComponent<OrganizationUser>;
 
   constructor(
     private store: Store,
@@ -40,6 +42,16 @@ export class DeleteUserDialogComponent extends RoleSelectionBaseComponent {
 
   public readonly users$: Observable<OrganizationUser[]> = this.store.select(selectAll);
   public selectedUser: OrganizationUser | undefined = undefined;
+
+  ngOnInit(): void {
+    this.subscriptions.add(
+      this.actions$.pipe(ofType(OrganizationUserActions.copyRolesSuccess)).subscribe(() => {
+        this.selectionService.deselectAll();
+        this.dropdownComponent.clear();
+        this.selectedUser = undefined;
+      })
+    );
+  }
 
   public selectedUserChanged(user: OrganizationUser | undefined | null): void {
     this.selectedUser = user ?? undefined;
@@ -72,6 +84,14 @@ export class DeleteUserDialogComponent extends RoleSelectionBaseComponent {
       onConfirm: () => this.transferRoles(user),
       message: $localize`Er du sikker på, at du vil overføre rollerne?`,
     });
+  }
+
+  public isUserSelected(): boolean {
+    return (
+      this.selectedUser !== undefined &&
+      this.dropdownComponent.value !== null &&
+      this.dropdownComponent.value !== undefined
+    );
   }
 
   private transferRoles(user: OrganizationUser): void {

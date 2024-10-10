@@ -56,7 +56,7 @@
         buttonStyle="secondary"
         color="warn"
         (buttonClick)="onTransferRoles(user)"
-        [disabled]="!isAnySelected()"
+        [disabled]="!isAnySelected() || !isUserSelected()"
         i18n
       >
         Tildel valgte roller
