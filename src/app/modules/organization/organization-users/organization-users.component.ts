@@ -229,7 +229,7 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
 
   public onDeleteUser(user: OrganizationUser): void {
     const user$ = this.store.select(selectOrganizationUserByUuid(user.Uuid)).pipe(filterNullish());
-    this.dialogOpenerService.openDeleteUserDialog(user$, false); //TODO: Does not work cause it's not an observable
+    this.dialogOpenerService.openDeleteUserDialog(user$, false);
   }
 
   override rowIdSelect(event: CellClickEvent) {
