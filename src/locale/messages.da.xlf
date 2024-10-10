@@ -5067,6 +5067,10 @@
         <source>Ikke tilgængelig</source>
         <target state="new">Ikke tilgængelig</target>
       </trans-unit>
+      <trans-unit id="8007594754054323000" datatype="html">
+        <source>Brugeren har ingen roller</source>
+        <target state="new">Brugeren har ingen roller</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
