@@ -96,9 +96,9 @@ export class NotificationService implements OnDestroy {
     this.subscribeAsError(OrganizationUserActions.sendNotificationError, $localize`Beskeden kunne ikke sendes`);
 
     this.subscribeAsDefault(OrganizationUserActions.updateUserSuccess, $localize`Brugeren blev opdateret`);
-    this.subscribeAsDefault(OrganizationUserActions.createUserSuccess, $localize`Bruger blev oprettet`);
-
     this.subscribeAsError(OrganizationUserActions.updateUserError, $localize`Brugeren kunne ikke opdateres`);
+
+    this.subscribeAsDefault(OrganizationUserActions.createUserSuccess, $localize`Bruger blev oprettet`);
     this.subscribeAsError(OrganizationUserActions.createUserError, $localize`Bruger kunne ikke oprettes`);
 
     this.subscribeAsError(OrganizationMasterDataActions.getMasterDataError, this.getMasterDataError);
@@ -124,8 +124,16 @@ export class NotificationService implements OnDestroy {
   }
 
   private subscribeToItSystemEvents() {
-    this.subscribeAsDefault(ITSystemUsageActions.patchITSystemUsageSuccess, $localize`Feltet er opdateret`);
-    this.subscribeAsError(ITSystemUsageActions.patchITSystemUsageError, $localize`Feltet kunne ikke opdateres`);
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITSystemUsageActions.patchITSystemUsageSuccess))
+        .subscribe((params) => this.showDefault(params.customSuccessText ?? $localize`Feltet er opdateret.`))
+    );
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITSystemUsageActions.patchITSystemUsageError))
+        .subscribe((params) => this.showError(params.customErrorText ?? $localize`Feltet kunne ikke opdateres.`))
+    );
 
     this.subscribeAsDefault(ITSystemUsageActions.addItSystemUsageRelationSuccess, $localize`Relation tilføjet`);
     this.subscribeAsError(
@@ -282,12 +290,23 @@ export class NotificationService implements OnDestroy {
   }
 
   private subscribeToDprEvents() {
+    this.subscribeAsDefault(
+      DataProcessingActions.createDataProcessingSuccess,
+      $localize`Databehandlingen blev oprettet`
+    );
+    this.subscribeAsError(
+      DataProcessingActions.createDataProcessingError,
+      $localize`Databehandlingen kunne ikke oprettes`
+    );
 
-    this.subscribeAsDefault(DataProcessingActions.createDataProcessingSuccess, $localize`Databehandlingen blev oprettet`);
-    this.subscribeAsError(DataProcessingActions.createDataProcessingError, $localize`Databehandlingen kunne ikke oprettes`);
-
-    this.subscribeAsDefault(DataProcessingActions.patchDataProcessingSuccess, $localize`Databehandlingen blev opdateret`);
-    this.subscribeAsError(DataProcessingActions.patchDataProcessingError, $localize`Databehandlingen kunne ikke opdateres`);
+    this.subscribeAsDefault(
+      DataProcessingActions.patchDataProcessingSuccess,
+      $localize`Databehandlingen blev opdateret`
+    );
+    this.subscribeAsError(
+      DataProcessingActions.patchDataProcessingError,
+      $localize`Databehandlingen kunne ikke opdateres`
+    );
 
     this.subscribeAsDefault(
       DataProcessingActions.deleteDataProcessingSuccess,
