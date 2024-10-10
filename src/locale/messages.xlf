@@ -3898,6 +3898,27 @@
       <trans-unit id="3114960259256343871" datatype="html">
         <source>Kunne ikke overføre roller</source>
       </trans-unit>
+      <trans-unit id="1533849682778732403" datatype="html">
+        <source>Feltet kunne ikke opdateres.</source>
+      </trans-unit>
+      <trans-unit id="18671366809101071" datatype="html">
+        <source>Databehandlingen blev oprettet</source>
+      </trans-unit>
+      <trans-unit id="2333094306124327600" datatype="html">
+        <source>Databehandlingen kunne ikke opdateres</source>
+      </trans-unit>
+      <trans-unit id="248156203023560452" datatype="html">
+        <source>Feltet er opdateret.</source>
+      </trans-unit>
+      <trans-unit id="2999147351548527059" datatype="html">
+        <source>Databehandlingen kunne ikke oprettes</source>
+      </trans-unit>
+      <trans-unit id="3724120708730120916" datatype="html">
+        <source>Kunne ikke logge ind</source>
+      </trans-unit>
+      <trans-unit id="918092702169632987" datatype="html">
+        <source>Databehandlingen blev opdateret</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

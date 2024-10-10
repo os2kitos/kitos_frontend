@@ -20,13 +20,11 @@ export class CopyRolesDialogComponent extends RoleSelectionBaseComponent impleme
   @Input() user!: OrganizationUser;
   @ViewChild(DropdownComponent) dropdownComponent!: DropdownComponent<OrganizationUser>;
 
-  public isLoading = false;
-
-  constructor(private store: Store, selectionService: RoleSelectionService, private actions$: Actions) {
-    super(selectionService);
+  constructor(private store: Store, selectionService: RoleSelectionService, actions$: Actions) {
+    super(selectionService, actions$, ofType(OrganizationUserActions.copyRolesError, OrganizationUserActions.copyRolesSuccess));
   }
 
-  public ngOnInit(): void {
+  ngOnInit(): void {
     this.subscriptions.add(
       this.actions$.pipe(ofType(OrganizationUserActions.copyRolesSuccess)).subscribe(() => {
         this.selectionService.deselectAll();
@@ -34,12 +32,6 @@ export class CopyRolesDialogComponent extends RoleSelectionBaseComponent impleme
         this.selectedUser = undefined;
       })
     );
-
-    this.actions$
-      .pipe(ofType(OrganizationUserActions.copyRolesError, OrganizationUserActions.copyRolesSuccess))
-      .subscribe(() => {
-        this.isLoading = false;
-      });
   }
 
   public readonly users$: Observable<OrganizationUser[]> = this.store

@@ -27,9 +27,13 @@ export class DeleteUserDialogComponent extends RoleSelectionBaseComponent {
     selectionService: RoleSelectionService,
     private confirmActionService: ConfirmActionService,
     private dialogRef: MatDialogRef<DeleteUserDialogComponent>,
-    private actions$: Actions
+    actions$: Actions
   ) {
-    super(selectionService);
+    super(
+      selectionService,
+      actions$,
+      ofType(OrganizationUserActions.transferRolesError, OrganizationUserActions.transferRolesSuccess)
+    );
   }
 
   public readonly organizationName$: Observable<string | undefined> = this.store.select(selectOrganizationName);
@@ -74,10 +78,15 @@ export class DeleteUserDialogComponent extends RoleSelectionBaseComponent {
     const selectedUser = this.selectedUser;
     if (!selectedUser) return;
     const request = this.getRequest(user);
+    this.isLoading = true;
     this.store.dispatch(OrganizationUserActions.transferRoles(user.Uuid, selectedUser.Uuid, request));
   }
 
   public getUserName(user: OrganizationUser): string {
     return `${user.FirstName} ${user.LastName}`;
+  }
+
+  public shouldShowContent(user: OrganizationUser): boolean {
+    return this.hasRoles(user) && !this.isLoading;
   }
 }

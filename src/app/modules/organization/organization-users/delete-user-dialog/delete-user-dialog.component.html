@@ -1,6 +1,6 @@
 <ng-container *ngIf="user$ | async as user">
   <app-scrollbar-dialog title="Slet bruger" i18n-title [nested]="nested">
-    <app-standard-vertical-content-grid>
+    <app-standard-vertical-content-grid *ngIf="!isLoading">
       <app-paragraph i18n>
         Er du sikker på at du vil fjerne <strong>{{ getUserName(user) }}</strong> fra
         <strong>{{ organizationName$ | async }}</strong
@@ -19,7 +19,7 @@
           (valueChange)="selectedUserChanged($event)"
           [data]="users$ | async"
           textField="Name"
-          text="Kopier roller til"
+          text="Overfør roller til"
           i18n-text
           [searchFn]="searchFn"
         >
@@ -50,7 +50,7 @@
         ></app-copy-role-table>
       </ng-container>
     </app-standard-vertical-content-grid>
-    <app-dialog-actions>
+    <app-dialog-actions *ngIf="!isLoading">
       <app-button
         *ngIf="hasRoles(user)"
         buttonStyle="secondary"
@@ -61,7 +61,9 @@
       >
         Tildel valgte roller
       </app-button>
-      <app-button buttonStyle="primary" color="warn" (buttonClick)="onDeleteUser(user)"> Slet bruger </app-button>
+      <app-button buttonStyle="primary" color="warn" (buttonClick)="onDeleteUser(user)" data-cy="delete-button"> Slet bruger </app-button>
     </app-dialog-actions>
+
+    <app-loading *ngIf="isLoading"></app-loading>
   </app-scrollbar-dialog>
 </ng-container>

@@ -4,11 +4,21 @@ import { roleToCopyRoleRequestDTO } from '../helpers/user-role.helpers';
 import { OrganizationUser, Right } from '../models/organization/organization-user/organization-user.model';
 import { RegistrationEntityTypes } from '../models/registrations/registration-entity-categories.model';
 import { BaseComponent } from './base.component';
+import { Actions } from '@ngrx/effects';
 
 export abstract class RoleSelectionBaseComponent extends BaseComponent {
+  protected isLoading = false;
 
-  constructor(protected selectionService: RoleSelectionService) {
+  constructor(
+    protected selectionService: RoleSelectionService,
+    protected actions$: Actions,
+    //eslint-disable-next-line @typescript-eslint/no-explicit-any
+    private loadingDoneActions: any
+  ) {
     super();
+    this.actions$.pipe(this.loadingDoneActions).subscribe(() => {
+      this.isLoading = false;
+    });
   }
 
   public getSelectedUserRights(): Right[] {
