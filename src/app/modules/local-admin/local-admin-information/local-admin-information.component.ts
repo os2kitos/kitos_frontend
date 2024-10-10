@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
+import { APIOrganizationUpdateRequestDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { mapOrganizationType } from 'src/app/shared/helpers/organization-type.helpers';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
@@ -59,11 +60,15 @@ export class LocalAdminInformationComponent extends BaseComponent implements OnI
   }
 
   public patchOrganizationName(newName: string | undefined) {
-    this.store.dispatch(UserActions.patchOrganization({ request: { name: newName } }));
+    if (newName !== undefined) this.patchOrganization({ name: newName });
   }
 
   public patchOrganizationCvr(newCvr: number | undefined) {
-    this.store.dispatch(UserActions.patchOrganization({ request: { cvr: newCvr?.toString() } }));
+    if (newCvr !== undefined) this.patchOrganization({ cvr: newCvr?.toString() });
+  }
+
+  private patchOrganization(request: APIOrganizationUpdateRequestDTO) {
+    this.store.dispatch(UserActions.patchOrganization({ request }));
   }
 
   private GetCvrAsNumber(dtoCvr: string | undefined) {
