@@ -3883,6 +3883,9 @@
       <trans-unit id="8572497829221531435" datatype="html">
         <source>Ugyldig</source>
       </trans-unit>
+      <trans-unit id="8007594754054323000" datatype="html">
+        <source>Brugeren har ingen roller</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
