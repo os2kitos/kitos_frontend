@@ -282,6 +282,13 @@ export class NotificationService implements OnDestroy {
   }
 
   private subscribeToDprEvents() {
+
+    this.subscribeAsDefault(DataProcessingActions.createDataProcessingSuccess, $localize`Databehandlingen blev oprettet`);
+    this.subscribeAsError(DataProcessingActions.createDataProcessingError, $localize`Databehandlingen kunne ikke oprettes`);
+
+    this.subscribeAsDefault(DataProcessingActions.patchDataProcessingSuccess, $localize`Databehandlingen blev opdateret`);
+    this.subscribeAsError(DataProcessingActions.patchDataProcessingError, $localize`Databehandlingen kunne ikke opdateres`);
+
     this.subscribeAsDefault(
       DataProcessingActions.deleteDataProcessingSuccess,
       $localize`Databehandlingen blev slettet`
