@@ -31,7 +31,7 @@ export class NotificationService implements OnDestroy {
 
   public subscribeOnActions() {
     this.subscribeAsDefault(UserActions.loginSuccess, $localize`Du er nu logget ind`);
-    this.subscribeAsError(UserActions.loginError, $localize`Kunne ikke logge ud`);
+    this.subscribeAsError(UserActions.loginError, $localize`Kunne ikke logge ind`);
 
     this.subscribeAsDefault(UserActions.logoutSuccess, $localize`Du er nu logget ud`);
     this.subscribeAsError(UserActions.logoutError, $localize`Kunne ikke logge ud`);
