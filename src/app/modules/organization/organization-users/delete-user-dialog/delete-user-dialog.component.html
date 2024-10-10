@@ -1,48 +1,67 @@
-<app-scrollbar-dialog title="Slet bruger" i18n-title [nested]="nested">
-  <app-standard-vertical-content-grid>
-    <app-paragraph i18n>
-      Er du sikker på at du vil fjerne <strong>{{ getUserName() }}</strong> fra
-      <strong>{{ organizationName$ | async }}</strong
-      >?
+<ng-container *ngIf="user$ | async as user">
+  <app-scrollbar-dialog title="Slet bruger" i18n-title [nested]="nested">
+    <app-standard-vertical-content-grid>
+      <app-paragraph i18n>
+        Er du sikker på at du vil fjerne <strong>{{ getUserName(user) }}</strong> fra
+        <strong>{{ organizationName$ | async }}</strong
+        >?
 
-      <ng-container *ngIf="hasRoles()">
-        Brugeren har disse roller, som kan tildeles en anden. Det er valgfrit om du vil slette brugeren uden at tildele
-        rollerne.
+        <ng-container *ngIf="hasRoles(user)">
+          Brugeren har disse roller, som kan tildeles en anden. Det er valgfrit om du vil slette brugeren uden at
+          tildele rollerne.
+        </ng-container>
+
+        <ng-container *ngIf="!hasRoles(user)"> Denne handling kan ikke fortrydes. </ng-container>
+      </app-paragraph>
+
+      <ng-container *ngIf="hasRoles(user)">
+        <app-dropdown
+          (valueChange)="selectedUserChanged($event)"
+          [data]="users$ | async"
+          textField="Name"
+          text="Kopier roller til"
+          i18n-text
+          [searchFn]="searchFn"
+        >
+        </app-dropdown>
+
+        <app-copy-role-table
+          *ngIf="user.OrganizationUnitRights.length > 0"
+          [user]="user"
+          entityType="organization-unit"
+        ></app-copy-role-table>
+
+        <app-copy-role-table
+          *ngIf="user.ItSystemRights.length > 0"
+          [user]="user"
+          entityType="it-system"
+        ></app-copy-role-table>
+
+        <app-copy-role-table
+          *ngIf="user.ItContractRights.length > 0"
+          [user]="user"
+          entityType="it-contract"
+        ></app-copy-role-table>
+
+        <app-copy-role-table
+          *ngIf="user.DataProcessingRegistrationRights.length > 0"
+          [user]="user"
+          entityType="data-processing-registration"
+        ></app-copy-role-table>
       </ng-container>
-
-      <ng-container *ngIf="!hasRoles()"> Denne handling kan ikke fortrydes. </ng-container>
-    </app-paragraph>
-
-    <ng-container *ngIf="hasRoles()">
-      <app-copy-role-table
-        *ngIf="user.OrganizationUnitRights.length > 0"
-        [user]="user"
-        entityType="organization-unit"
-      ></app-copy-role-table>
-
-      <app-copy-role-table
-        *ngIf="user.ItSystemRights.length > 0"
-        [user]="user"
-        entityType="it-system"
-      ></app-copy-role-table>
-
-      <app-copy-role-table
-        *ngIf="user.ItContractRights.length > 0"
-        [user]="user"
-        entityType="it-contract"
-      ></app-copy-role-table>
-
-      <app-copy-role-table
-        *ngIf="user.DataProcessingRegistrationRights.length > 0"
-        [user]="user"
-        entityType="data-processing-registration"
-      ></app-copy-role-table>
-    </ng-container>
-  </app-standard-vertical-content-grid>
-  <app-dialog-actions>
-    <app-button *ngIf="hasRoles()" buttonStyle="secondary" color="warn" (buttonClick)="onTransferRoles()" i18n>
-      Tildel valgte roller
-    </app-button>
-    <app-button buttonStyle="primary" color="warn" (buttonClick)="onDeleteUser()"> Slet bruger </app-button>
-  </app-dialog-actions>
-</app-scrollbar-dialog>
+    </app-standard-vertical-content-grid>
+    <app-dialog-actions>
+      <app-button
+        *ngIf="hasRoles(user)"
+        buttonStyle="secondary"
+        color="warn"
+        (buttonClick)="onTransferRoles(user)"
+        [disabled]="!isAnySelected()"
+        i18n
+      >
+        Tildel valgte roller
+      </app-button>
+      <app-button buttonStyle="primary" color="warn" (buttonClick)="onDeleteUser(user)"> Slet bruger </app-button>
+    </app-dialog-actions>
+  </app-scrollbar-dialog>
+</ng-container>

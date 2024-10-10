@@ -26,14 +26,14 @@ export class UserInfoDialogComponent extends BaseComponent {
     super();
   }
 
-  public onDeleteUser(user: OrganizationUser): void {
+  public onDeleteUser(): void {
     this.subscriptions.add(
       this.actions$.pipe(ofType(OrganizationUserActions.deleteUserSuccess)).subscribe(() => {
         this.dialogRef.close();
       })
     );
 
-    this.dialogOpenerService.openDeleteUserDialog(user, true);
+    this.dialogOpenerService.openDeleteUserDialog(this.user$, true);
   }
 
   public onEditUser(user: OrganizationUser): void {

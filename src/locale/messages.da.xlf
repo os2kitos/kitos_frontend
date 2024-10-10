@@ -5054,7 +5054,7 @@
       <trans-unit id="1827402117610901290" datatype="html">
         <source> Tildel valgte roller </source>
         <target state="new"> Tildel valgte roller </target>
-       </trans-unit>
+      </trans-unit>
       <trans-unit id="5007829064962714817" datatype="html">
         <source>Sandt</source>
         <target state="new">Sandt</target>
@@ -5090,6 +5090,14 @@
       <trans-unit id="4208978631605576763" datatype="html">
         <source>Kunne ikke slette brugeren</source>
         <target state="new">Kunne ikke slette brugeren</target>
+      </trans-unit>
+      <trans-unit id="8007594754054323000" datatype="html">
+        <source>Brugeren har ingen roller</source>
+        <target state="new">Brugeren har ingen roller</target>
+      </trans-unit>
+      <trans-unit id="7224605356565787228" datatype="html">
+        <source>Er du sikker på, at du vil overføre rollerne?</source>
+        <target state="new">Er du sikker på, at du vil overføre rollerne?</target>
       </trans-unit>
     </body>
   </file>

@@ -134,6 +134,24 @@ export class OrganizationUserEffects {
     );
   });
 
+  deleteUser$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(OrganizationUserActions.deleteUser),
+      concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+      switchMap(([{ userUuid }, organizationUuid]) =>
+        this.apiService
+          .deleteSingleUsersInternalV2DeleteUser({
+            userUuid,
+            organizationUuid,
+          })
+          .pipe(
+            map(() => OrganizationUserActions.deleteUserSuccess(userUuid)),
+            catchError(() => of(OrganizationUserActions.deleteUserError()))
+          )
+      )
+    );
+  });
+
   copyRoles$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(OrganizationUserActions.copyRoles),
@@ -154,19 +172,21 @@ export class OrganizationUserEffects {
     );
   });
 
-  deleteUser$ = createEffect(() => {
+  transferRoles$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(OrganizationUserActions.deleteUser),
+      ofType(OrganizationUserActions.transferRoles),
       concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
-      switchMap(([{ userUuid }, organizationUuid]) =>
+      switchMap(([{ fromUserUuid, toUserUuid, request }, organizationUuid]) =>
         this.apiService
-          .deleteSingleUsersInternalV2DeleteUser({
-            userUuid,
+          .postSingleUsersInternalV2TransferRoles({
+            fromUserUuid,
+            toUserUuid,
             organizationUuid,
+            request,
           })
           .pipe(
-            map(() => OrganizationUserActions.deleteUserSuccess(userUuid)),
-            catchError(() => of(OrganizationUserActions.deleteUserError()))
+            map(() => OrganizationUserActions.transferRolesSuccess()),
+            catchError(() => of(OrganizationUserActions.transferRolesError()))
           )
       )
     );

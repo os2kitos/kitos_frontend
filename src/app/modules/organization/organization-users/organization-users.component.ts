@@ -200,8 +200,9 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
           ofType(
             OrganizationUserActions.createUserSuccess,
             OrganizationUserActions.updateUserSuccess,
+            OrganizationUserActions.deleteUserSuccess,
             OrganizationUserActions.copyRolesSuccess,
-            OrganizationUserActions.deleteUserSuccess
+            OrganizationUserActions.transferRolesSuccess
           ),
           combineLatestWith(this.gridState$)
         )

@@ -10,7 +10,6 @@ import { CreateUserDialogComponentStore } from '../create-user-dialog/create-use
 
 import { MultiSelectDropdownComponent } from 'src/app/shared/components/dropdowns/multi-select-dropdown/multi-select-dropdown.component';
 import { OrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
-import { CopyRolesDialogComponent } from '../copy-roles-dialog/copy-roles-dialog.component';
 import { StartPreferenceChoice } from 'src/app/shared/models/organization/organization-user/start-preference.model';
 import {
   mapUserRoleChoice,
@@ -18,6 +17,7 @@ import {
 } from 'src/app/shared/models/organization/organization-user/user-role.model';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
 import { BaseUserDialogComponent } from '../base-user-dialog.component';
+import { CopyRolesDialogComponent } from '../copy-roles-dialog/copy-roles-dialog.component';
 
 @Component({
   selector: 'app-edit-user-dialog',
@@ -54,7 +54,7 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
     private dialogRef: MatDialogRef<EditUserDialogComponent>,
     componentStore: CreateUserDialogComponentStore,
     private dialog: MatDialog,
-    store: Store,
+    store: Store
   ) {
     super(store, componentStore);
   }
@@ -126,7 +126,7 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
   }
 
   public onCopyRoles(): void {
-    const dialogRef = this.dialog.open(CopyRolesDialogComponent, {width: '50%', height: 'auto', maxHeight: '90vh%'});
+    const dialogRef = this.dialog.open(CopyRolesDialogComponent, { width: '50%', height: 'auto', maxHeight: '90vh%' });
     dialogRef.componentInstance.user = this.user;
   }
 
