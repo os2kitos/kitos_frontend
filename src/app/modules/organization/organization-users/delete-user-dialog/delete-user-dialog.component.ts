@@ -51,7 +51,9 @@ export class DeleteUserDialogComponent extends RoleSelectionBaseComponent implem
     this.subscriptions.add(
       this.actions$.pipe(ofType(OrganizationUserActions.copyRolesSuccess)).subscribe(() => {
         this.selectionService.deselectAll();
-        this.dropdownComponent.clear();
+        if (this.dropdownComponent) {
+          this.dropdownComponent.clear();
+        }
         this.selectedUser = undefined;
       })
     );
@@ -93,8 +95,8 @@ export class DeleteUserDialogComponent extends RoleSelectionBaseComponent implem
   public isUserSelected(): boolean {
     return (
       this.selectedUser !== undefined &&
-      this.dropdownComponent.value !== null &&
-      this.dropdownComponent.value !== undefined
+      this.dropdownComponent?.value !== null &&
+      this.dropdownComponent?.value !== undefined
     );
   }
 

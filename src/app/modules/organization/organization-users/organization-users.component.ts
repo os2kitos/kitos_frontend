@@ -8,10 +8,13 @@ import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.compone
 import { GridActionColumn } from 'src/app/shared/models/grid-action-column.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
+import { OrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
 import {
   ORGANIZATION_USER_COLUMNS_ID,
   ORGANIZATION_USER_SECTION_NAME,
 } from 'src/app/shared/persistent-state-constants';
+import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
+import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.service';
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
 import {
@@ -27,9 +30,6 @@ import {
 } from 'src/app/store/organization/organization-user/selectors';
 import { CreateUserDialogComponent } from './create-user-dialog/create-user-dialog.component';
 import { UserInfoDialogComponent } from './user-info-dialog/user-info-dialog.component';
-import { DialogOpenerService } from 'src/app/shared/services/dialog-opener-service.service';
-import { OrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
-import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 
 @Component({
   selector: 'app-organization-users',

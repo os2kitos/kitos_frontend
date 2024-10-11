@@ -32,7 +32,9 @@ export class CopyRolesDialogComponent extends RoleSelectionBaseComponent impleme
     this.subscriptions.add(
       this.actions$.pipe(ofType(OrganizationUserActions.copyRolesSuccess)).subscribe(() => {
         this.selectionService.deselectAll();
-        this.dropdownComponent.clear();
+        if (this.dropdownComponent) {
+          this.dropdownComponent.clear();
+        }
         this.selectedUser = undefined;
       })
     );

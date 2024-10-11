@@ -1,12 +1,12 @@
 import { Component, Input } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
+import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
-import { OrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
-import { DialogOpenerService } from 'src/app/shared/services/dialog-opener-service.service';
-import { MatDialogRef } from '@angular/material/dialog';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import { Actions, ofType } from '@ngrx/effects';
+import { OrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
+import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.service';
+import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
 
 @Component({
   selector: 'app-user-info-dialog',

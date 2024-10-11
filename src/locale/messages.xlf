@@ -3922,6 +3922,9 @@
       <trans-unit id="4588541809159773720" datatype="html">
         <source>Overfør roller til</source>
       </trans-unit>
+      <trans-unit id="7801698138566302162" datatype="html">
+        <source> Slet bruger </source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

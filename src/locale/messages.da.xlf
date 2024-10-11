@@ -5119,6 +5119,10 @@
         <source>Overfør roller til</source>
         <target state="new">Overfør roller til</target>
       </trans-unit>
+      <trans-unit id="7801698138566302162" datatype="html">
+        <source> Slet bruger </source>
+        <target state="new"> Slet bruger </target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

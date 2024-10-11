@@ -11,29 +11,29 @@
       >
       </app-dropdown>
 
-      <app-copy-role-table
+      <app-manage-user-role-table
         *ngIf="user.OrganizationUnitRights.length > 0"
         [user]="user"
         entityType="organization-unit"
-      ></app-copy-role-table>
+      ></app-manage-user-role-table>
 
-      <app-copy-role-table
+      <app-manage-user-role-table
         *ngIf="user.ItSystemRights.length > 0"
         [user]="user"
         entityType="it-system"
-      ></app-copy-role-table>
+      ></app-manage-user-role-table>
 
-      <app-copy-role-table
+      <app-manage-user-role-table
         *ngIf="user.ItContractRights.length > 0"
         [user]="user"
         entityType="it-contract"
-      ></app-copy-role-table>
+      ></app-manage-user-role-table>
 
-      <app-copy-role-table
+      <app-manage-user-role-table
         *ngIf="user.DataProcessingRegistrationRights.length > 0"
         [user]="user"
         entityType="data-processing-registration"
-      ></app-copy-role-table>
+      ></app-manage-user-role-table>
 
       <app-empty-state
         text="Brugeren har ingen roller"
