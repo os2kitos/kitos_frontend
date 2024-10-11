@@ -11,6 +11,8 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
 })
 export class ConnectedDropdownComponent<T> extends BaseComponent implements OnInit {
   @Input() public text!: string;
+  @Input() public textField: string = 'name';
+  @Input() public itemDescriptionField: string = 'description';
   @Input() public valueField!: string;
   @Input() public data$?: Observable<T[]>;
   @Input() public isLoading$?: Observable<boolean>;
