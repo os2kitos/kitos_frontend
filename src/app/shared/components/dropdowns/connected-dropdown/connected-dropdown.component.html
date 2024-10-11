@@ -1,5 +1,6 @@
 <app-dropdown
   [text]="text"
+  [textField]="textField"
   [valueField]="valueField"
   [data]="data$ | async"
   [loading]="isLoading$ | async"
@@ -13,5 +14,6 @@
   [formGroup]="formGroup"
   [formName]="formName"
   [includeItemDescription]="includeItemDescription"
+  [itemDescriptionField]="itemDescriptionField"
   [considerCurrentValueObsoleteIfNotPresentInData]="false"
 ></app-dropdown>
