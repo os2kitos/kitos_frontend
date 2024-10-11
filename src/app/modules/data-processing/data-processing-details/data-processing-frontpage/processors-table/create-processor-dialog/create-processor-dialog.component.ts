@@ -11,10 +11,6 @@ import { selectDataProcessingProcessors } from 'src/app/store/data-processing/se
 import { CountryCreateDialogComponent } from '../../third-countries-table/country-create-dialog/country-create-dialog.component';
 import { CreateProcessorDialogComponentStore } from './create-processor-dialog.component-store';
 
-export interface OrganizationWithDescription extends APIIdentityNamePairResponseDTO {
-  description?: string;
-}
-
 @Component({
   selector: 'app-create-processor-dialog',
   templateUrl: './create-processor-dialog.component.html',
@@ -23,7 +19,6 @@ export interface OrganizationWithDescription extends APIIdentityNamePairResponse
 })
 export class CreateProcessorDialogComponent extends BaseComponent implements OnInit {
   public readonly organizations$ = this.componentStore.organizations$;
-  public readonly includeItemDescription = true;
 
   public readonly processorsFormGroup = new FormGroup({
     processor: new FormControl<APIIdentityNamePairResponseDTO | undefined>(undefined, [Validators.required]),
