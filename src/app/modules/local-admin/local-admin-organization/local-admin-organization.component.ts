@@ -4,6 +4,7 @@ import { first, of } from 'rxjs';
 import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
+import { organizationTypeOptions } from 'src/app/shared/models/organization/organization.model';
 import { ORGANIZATION_SECTION_NAME } from 'src/app/shared/persistent-state-constants';
 import { OrganizationActions } from 'src/app/store/organization/actions';
 import { selectOrganizationGridData, selectOrganizationGridLoading, selectOrganizationGridState } from 'src/app/store/organization/selectors';
@@ -42,10 +43,12 @@ export class LocalAdminOrganizationComponent extends BaseOverviewComponent imple
       hidden: false,
     },
     {
-      field: 'OrganizationType',
+      field: 'TypeId',
       title: $localize`Type`,
       section: this.sectionName,
-      hidden: false,
+      extraFilter: 'enum',
+      extraData: organizationTypeOptions,
+      hidden: false
     },
     {
       field: 'ForeignBusiness',

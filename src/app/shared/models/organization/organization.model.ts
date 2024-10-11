@@ -1,46 +1,45 @@
-import { APIOrganizationResponseDTO } from 'src/app/api/v2';
 
 export interface Organization {
   id: string;
   Uuid: string;
   Name: string;
   Cvr: string;
-  OrganizationType: string;
+  TypeId: OrganizationType;
   ForeignBusiness: string;
 }
 
 export interface OrganizationType {
   name: string;
-  value: APIOrganizationResponseDTO.OrganizationTypeEnum;
+  value:  number;
 }
 
-export const OrganizationTypes: OrganizationType[] = [
+export const organizationTypeOptions: OrganizationType[] = [
   {
     name: 'Kommune',
-    value: APIOrganizationResponseDTO.OrganizationTypeEnum.Municipality,
+    value: 1,
   },
   {
     name: 'Interessefællesskab',
-    value: APIOrganizationResponseDTO.OrganizationTypeEnum.CommunityOfInterest,
+    value: 2,
   },
   {
     name: 'Virksomhed',
-    value: APIOrganizationResponseDTO.OrganizationTypeEnum.Company,
+    value: 3,
   },
   {
     name: 'Anden offentlig myndighed',
-    value: APIOrganizationResponseDTO.OrganizationTypeEnum.OtherPublicAuthority,
+    value: 4,
   },
 ];
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const adaptOrganization = (value: any): Organization | undefined => {
-  const adapted = {
+  const adapted: Organization = {
     id: value.Uuid,
     Uuid: value.Uuid,
     Name: value.Name,
     Cvr: value.Cvr,
-    OrganizationType: adaptOrganizationType(value.TypeId).name,
+    TypeId: adaptOrganizationType(value.TypeId),
     ForeignBusiness: value.ForeignCvr,
   };
   console.log(adapted);
@@ -48,5 +47,5 @@ export const adaptOrganization = (value: any): Organization | undefined => {
 };
 
 function adaptOrganizationType(typeId: number): OrganizationType {
-  return OrganizationTypes[typeId - 1];
+  return organizationTypeOptions[typeId - 1];
 }
