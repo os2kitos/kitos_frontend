@@ -3,7 +3,7 @@
     <app-standard-vertical-content-grid>
       <app-dropdown
         (valueChange)="selectedUserChanged($event)"
-        [data]="users | async"
+        [data]="users$ | async"
         textField="Name"
         text="Kopier roller til"
         i18n-text
@@ -11,29 +11,29 @@
       >
       </app-dropdown>
 
-      <app-copy-role-table
+      <app-manage-user-role-table
         *ngIf="user.OrganizationUnitRights.length > 0"
         [user]="user"
         entityType="organization-unit"
-      ></app-copy-role-table>
+      ></app-manage-user-role-table>
 
-      <app-copy-role-table
+      <app-manage-user-role-table
         *ngIf="user.ItSystemRights.length > 0"
         [user]="user"
         entityType="it-system"
-      ></app-copy-role-table>
+      ></app-manage-user-role-table>
 
-      <app-copy-role-table
+      <app-manage-user-role-table
         *ngIf="user.ItContractRights.length > 0"
         [user]="user"
         entityType="it-contract"
-      ></app-copy-role-table>
+      ></app-manage-user-role-table>
 
-      <app-copy-role-table
+      <app-manage-user-role-table
         *ngIf="user.DataProcessingRegistrationRights.length > 0"
         [user]="user"
         entityType="data-processing-registration"
-      ></app-copy-role-table>
+      ></app-manage-user-role-table>
 
       <app-empty-state
         text="Brugeren har ingen roller"
@@ -70,10 +70,10 @@
           Fravælg alle
         </app-button>
         <app-button
-          [disabled]="isAllSelected()"
+          [disabled]="isAllSelected(user)"
           buttonStyle="secondary"
           color="accent"
-          (buttonClick)="selectAll()"
+          (buttonClick)="selectAll(user)"
           i18n
         >
           Vælg alle

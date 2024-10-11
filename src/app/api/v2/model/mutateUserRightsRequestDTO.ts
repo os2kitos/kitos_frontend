@@ -9,11 +9,13 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIMutateRightRequestDTO } from './mutateRightRequestDTO';
 
 
-export interface APICopyRightRequestDTO { 
-    userUuid?: string;
-    roleId?: number;
-    entityUuid?: string;
+export interface APIMutateUserRightsRequestDTO { 
+    unitRights?: Array<APIMutateRightRequestDTO>;
+    systemRights?: Array<APIMutateRightRequestDTO>;
+    contractRights?: Array<APIMutateRightRequestDTO>;
+    dataProcessingRights?: Array<APIMutateRightRequestDTO>;
 }
 
