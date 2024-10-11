@@ -20,14 +20,14 @@
     (blur)="onBlur()"
   >
     <ng-template ng-option-tmp let-item="item">
-      <ng-container *ngIf="!includeItemDescription || !item.description">
-        {{ item[textField] }}
+      <ng-container *ngIf="!includeItemDescription || !item.cvr">
+        {{ item[textField] }} {{ subTextField ? item[subTextField] : '' }}
       </ng-container>
-      <div *ngIf="item.description && includeItemDescription" class="description">
+      <div *ngIf="item.cvr && includeItemDescription" class="description">
         {{ item[textField] }}
-        <app-paragraph *ngIf="item.description && includeItemDescription" paragraphSize="small">{{
-          item.description
-        }}</app-paragraph>
+        <app-paragraph *ngIf="item.cvr && includeItemDescription" paragraphSize="small">{{
+          item.cvr
+        }} really</app-paragraph>
       </div>
     </ng-template>
     <ng-template *ngIf="showSearchHelpText && !!!(filter$ | async)" ng-footer-tmp>

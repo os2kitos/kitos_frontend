@@ -10,6 +10,8 @@ import { BaseFormComponent } from './base-form.component';
 export class BaseDropdownComponent<T> extends BaseFormComponent<T | null> implements OnInit, OnChanges {
   @Input() public data?: T[] | null;
   @Input() public textField = 'name';
+  @Input() public subTextField?: string;
+  @Input() public descriptionField = 'description';
   @Input() public valueField = 'value';
   @Input() public loading: boolean | null = false;
   @Input() public showDescription = false;
@@ -58,7 +60,7 @@ export class BaseDropdownComponent<T> extends BaseFormComponent<T | null> implem
             data?.find((data: any) => !!value && data[this.valueField] === (value as any)[this.valueField])
           )
         )
-        .subscribe((value: any) => (this.description = value?.description))
+        .subscribe((value: any) => (this.description = value[this.descriptionField] ?? ''))
     );
   }
 

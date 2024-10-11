@@ -1,6 +1,10 @@
 <app-dropdown
   [text]="text"
+  [textField]="textField"
   [valueField]="valueField"
+  [subTextField]="subTextField"
+  [showDescription]="includeItemDescription"
+  [descriptionField]="descriptionField"
   [data]="data$ | async"
   [loading]="isLoading$ | async"
   [showSearchHelpText]="showSearchHelpText$ | async"
