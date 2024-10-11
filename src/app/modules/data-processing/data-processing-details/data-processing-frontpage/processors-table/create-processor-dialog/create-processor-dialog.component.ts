@@ -23,8 +23,7 @@ export interface OrganizationWithDescription extends APIIdentityNamePairResponse
 })
 export class CreateProcessorDialogComponent extends BaseComponent implements OnInit {
   public readonly organizations$ = this.componentStore.organizations$;
-  public readonly includeDescription = true;
-  public organizationsWithDescription$ : OrganizationWithDescription[] = [];
+  public readonly includeItemDescription = true;
 
   public readonly processorsFormGroup = new FormGroup({
     processor: new FormControl<APIIdentityNamePairResponseDTO | undefined>(undefined, [Validators.required]),
@@ -42,15 +41,6 @@ export class CreateProcessorDialogComponent extends BaseComponent implements OnI
   public isBusy = false;
 
   ngOnInit(): void {
-    // Add organization CVR to organization name if it exists
-    this.subscriptions.add(
-      this.organizations$.subscribe((organizations) => {
-        organizations.forEach((organization) => {
-          organization.name = organization.name + (organization.cvr ? ` (CVR: ${organization.cvr})` : '');
-        });
-      })
-    );
-
     this.subscriptions.add(
       this.actions$.pipe(ofType(DataProcessingActions.patchDataProcessingSuccess)).subscribe(() => {
         this.onClose();

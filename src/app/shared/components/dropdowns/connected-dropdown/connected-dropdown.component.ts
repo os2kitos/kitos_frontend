@@ -13,7 +13,7 @@ export class ConnectedDropdownComponent<T> extends BaseComponent implements OnIn
   @Input() public text!: string;
   @Input() public textField: string = 'name';
   @Input() public subTextField?: string;
-  @Input() public descriptionField: string = 'description';
+  @Input() public itemDescriptionField: string = 'description';
   @Input() public valueField!: string;
   @Input() public data$?: Observable<T[]>;
   @Input() public isLoading$?: Observable<boolean>;

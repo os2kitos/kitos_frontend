@@ -10,9 +10,8 @@
         valueField="uuid"
         [data$]="organizations$"
         textField="name"
-        subTextField="cvr"
-        descriptionField="cvr"
-        [includeItemDescription]="includeDescription"
+        itemDescriptionField="cvr"
+        [includeItemDescription]="includeItemDescription"
         (filterChange)="searchOrganizations($event)"
       ></app-connected-dropdown>
       <app-dialog-actions>
