@@ -37,6 +37,7 @@
         [formGroup]="generalInformationForm"
         formName="remarks"
         data-cy="data-processing-oversight-remarks"
+        (valueChange)="patchOversight({ oversightOptionsRemark: $event })"
         i18n-text
       ></app-textarea>
     </app-standard-vertical-content-grid>
