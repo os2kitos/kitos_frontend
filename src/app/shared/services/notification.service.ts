@@ -101,15 +101,15 @@ export class NotificationService implements OnDestroy {
     this.subscribeAsDefault(OrganizationUserActions.createUserSuccess, $localize`Bruger blev oprettet`);
     this.subscribeAsError(OrganizationUserActions.createUserError, $localize`Bruger kunne ikke oprettes`);
 
-    this.subscribeAsError(OrganizationMasterDataActions.getMasterDataError, this.getMasterDataError);
-    this.subscribeAsDefault(OrganizationMasterDataActions.patchMasterDataSuccess, this.patchMasterDataSuccess);
-    this.subscribeAsError(OrganizationMasterDataActions.patchMasterDataError, this.patchMasterDataError);
-    this.subscribeAsError(OrganizationMasterDataActions.getMasterDataRolesError, this.getMasterDataError);
-    this.subscribeAsDefault(OrganizationMasterDataActions.patchMasterDataRolesSuccess, this.patchMasterDataSuccess);
-    this.subscribeAsError(OrganizationMasterDataActions.patchMasterDataRolesError, this.patchMasterDataError);
+    this.subscribeAsError(OrganizationActions.getMasterDataError, this.getMasterDataError);
+    this.subscribeAsDefault(OrganizationActions.patchMasterDataSuccess, this.patchMasterDataSuccess);
+    this.subscribeAsError(OrganizationActions.patchMasterDataError, this.patchMasterDataError);
+    this.subscribeAsError(OrganizationActions.getMasterDataRolesError, this.getMasterDataError);
+    this.subscribeAsDefault(OrganizationActions.patchMasterDataRolesSuccess, this.patchMasterDataSuccess);
+    this.subscribeAsError(OrganizationActions.patchMasterDataRolesError, this.patchMasterDataError);
 
     this.subscribeAsError(
-      OrganizationMasterDataActions.getOrganizationPermissionsError,
+      OrganizationActions.getOrganizationPermissionsError,
       $localize`Kunne ikke hente organisationsrettigheder.`
     );
 
@@ -358,8 +358,8 @@ export class NotificationService implements OnDestroy {
         .subscribe(() => this.showError($localize`Organisationen blev opdateret.`))
     );
 
-    this.subscribeToActionAsDefault(OrganizationUserActions.copyRolesSuccess, $localize`Roller kopieret`);
-    this.subscribeToActionAsError(OrganizationUserActions.copyRolesError, $localize`Kunne ikke kopiere roller`);
+    this.subscribeAsDefault(OrganizationUserActions.copyRolesSuccess, $localize`Roller kopieret`);
+    this.subscribeAsError(OrganizationUserActions.copyRolesError, $localize`Kunne ikke kopiere roller`);
 
 
     this.subscribeToExternalReferenceManagementEvents();
