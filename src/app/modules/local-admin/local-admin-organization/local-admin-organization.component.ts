@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { of } from 'rxjs';
+import { first, of } from 'rxjs';
 import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
@@ -13,7 +13,7 @@ import { selectOrganizationGridData, selectOrganizationGridLoading, selectOrgani
   templateUrl: './local-admin-organization.component.html',
   styleUrl: './local-admin-organization.component.scss',
 })
-export class LocalAdminOrganizationComponent extends BaseOverviewComponent {
+export class LocalAdminOrganizationComponent extends BaseOverviewComponent implements OnInit {
   private readonly sectionName: string = ORGANIZATION_SECTION_NAME;
 
   public readonly isLoading$ = this.store.select(selectOrganizationGridLoading);
@@ -22,6 +22,10 @@ export class LocalAdminOrganizationComponent extends BaseOverviewComponent {
 
   constructor(store: Store) {
     super(store, 'local-admin-organization');
+  }
+
+  ngOnInit() {
+    this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState));
   }
 
   public readonly gridColumns: GridColumn[] = [
@@ -38,13 +42,13 @@ export class LocalAdminOrganizationComponent extends BaseOverviewComponent {
       hidden: false,
     },
     {
-      field: 'TypeId',
+      field: 'OrganizationType',
       title: $localize`Type`,
       section: this.sectionName,
       hidden: false,
     },
     {
-      field: 'ForeignCvr',
+      field: 'ForeignBusiness',
       title: $localize`Udenlandsk virksomhed`,
       section: this.sectionName,
       hidden: false,

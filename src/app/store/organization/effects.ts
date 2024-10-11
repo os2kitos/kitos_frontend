@@ -31,7 +31,7 @@ export class OrganizationEffects {
       switchMap(({ odataString }) => {
         const fixedOdataString = applyQueryFixes(odataString);
 
-        return this.httpClient.get<OData>(`/odata/Organizations?${fixedOdataString}`).pipe(
+        return this.httpClient.get<OData>(`/odata/Organizations?${fixedOdataString}&$count=true`).pipe(
           map((data) =>
             OrganizationActions.getOrganizationsSuccess(
               compact(data.value.map(adaptOrganization)),
