@@ -9,6 +9,11 @@ import { adaptOrganizationPermissions } from 'src/app/shared/models/organization
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { OrganizationActions } from './actions';
+import { HttpClient } from '@angular/common/http';
+import { adaptOrganization } from 'src/app/shared/models/organization/organization.model';
+import { OData } from 'src/app/shared/models/odata.model';
+import { compact } from 'lodash';
+import { toODataString } from '@progress/kendo-data-query';
 
 @Injectable()
 export class OrganizationEffects {
@@ -16,8 +21,38 @@ export class OrganizationEffects {
     @Inject(APIV2OrganizationsInternalINTERNALService)
     private organizationInternalService: APIV2OrganizationsInternalINTERNALService,
     private actions$: Actions,
-    private store: Store
+    private store: Store,
+    private httpClient: HttpClient
   ) {}
+
+  getOrganizations$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(OrganizationActions.getOrganizations),
+      switchMap(({ odataString }) => {
+        const fixedOdataString = applyQueryFixes(odataString);
+
+        return this.httpClient.get<OData>(`/odata/Organizations?${fixedOdataString}`).pipe(
+          map((data) =>
+            OrganizationActions.getOrganizationsSuccess(
+              compact(data.value.map(adaptOrganization)),
+              data['@odata.count']
+            )
+          ),
+          catchError(() => of(OrganizationActions.getOrganizationsError()))
+        );
+      })
+    );
+  });
+
+  updateGridState$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(OrganizationActions.updateGridState),
+      map(({ gridState }) => {
+        console.log('gridState', gridState);
+        return OrganizationActions.getOrganizations(toODataString(gridState));
+      })
+    );
+  });
 
   getOrganizationMasterData$ = createEffect(() => {
     return this.actions$.pipe(
@@ -117,4 +152,7 @@ export class OrganizationEffects {
       )
     );
   });
+}
+function applyQueryFixes(odataString: string) {
+  return odataString;
 }

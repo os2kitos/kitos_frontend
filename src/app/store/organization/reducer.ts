@@ -1,12 +1,18 @@
 import { createEntityAdapter } from '@ngrx/entity';
 import { createFeature, createReducer, on } from '@ngrx/store';
-import { OrganizationMasterData } from 'src/app/shared/models/organization/organization-master-data/organization-master-data.model';
 import { OrganizationActions } from './actions';
 import { OrganizationState } from './state';
+import { Organization } from 'src/app/shared/models/organization/organization.model';
+import { defaultGridState } from 'src/app/shared/models/grid-state.model';
 
-export const organizationAdapter = createEntityAdapter<OrganizationMasterData>();
+export const organizationAdapter = createEntityAdapter<Organization>();
 
 export const organizationInitialState: OrganizationState = organizationAdapter.getInitialState({
+  total: 0,
+  isLoadingUsersQuery: false,
+  gridState: defaultGridState,
+  gridColumns: [],
+
   organizationMasterData: null,
   organizationMasterDataRoles: null,
   permissions: null,
@@ -53,6 +59,30 @@ export const organizationFeature = createFeature({
     on(
       OrganizationActions.getOrganizationPermissionsError,
       (state): OrganizationState => ({ ...state, permissions: null })
-    )
+    ),
+    on(
+      OrganizationActions.getOrganizations,
+      (state): OrganizationState => ({ ...state, isLoadingUsersQuery: true })
+    ),
+    on(
+      OrganizationActions.getOrganizationsSuccess,
+      (state, { organizations, total }): OrganizationState => ({
+        ...organizationAdapter.setAll(organizations, state),
+        total,
+        isLoadingUsersQuery: false,
+      })
+    ),
+    on(
+      OrganizationActions.getOrganizationsError,
+      (state): OrganizationState => ({ ...state, isLoadingUsersQuery: false })
+    ),
+    on(
+      OrganizationActions.updateGridState,
+      (state, { gridState }): OrganizationState => ({
+        ...state,
+        isLoadingUsersQuery: true,
+        gridState,
+      })
+    ),
   ),
 });

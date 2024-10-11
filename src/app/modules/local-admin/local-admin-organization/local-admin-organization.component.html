@@ -1,8 +1,11 @@
 <app-grid
+[data$]="gridData$"
 [columns$]="gridColumns$"
 exportToExcelName="Organisationer Overblik"
 i18n-exportToExcelName
-[loading]="false"
+[loading]="isLoading$ | async"
+[state]="gridState$ | async"
 entityType="local-admin-organization"
+(stateChange)="stateChange($event)"
 (modifyEvent)="onEditClick()"
 (deleteEvent)="onDeleteClick()"> </app-grid>

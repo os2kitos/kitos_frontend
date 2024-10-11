@@ -1,6 +1,6 @@
 import { createSelector } from '@ngrx/store';
 import { OrganizationState } from './state';
-import { organizationFeature } from './reducer';
+import { organizationAdapter, organizationFeature } from './reducer';
 
 export const { selectOrganizationState } = organizationFeature;
 
@@ -28,3 +28,16 @@ const masterDataRolesEmptyState = {
   DataResponsible: { cvr: '', phone: '', address: '', name: '', email: '', id: null },
   DataProtectionAdvisor: { cvr: '', phone: '', address: '', name: '', email: '', id: null },
 };
+
+export const selectAll = createSelector(selectOrganizationState, organizationAdapter.getSelectors().selectAll);
+export const selectTotal = createSelector(selectOrganizationState, (state) => state.total);
+export const selectOrganizationGridLoading = createSelector(
+  selectOrganizationState,
+  (state) => state.isLoadingUsersQuery
+);
+export const selectOrganizationGridState = createSelector(selectOrganizationState, (state) => state.gridState);
+export const selectOrganizationGridData = createSelector(selectAll, selectTotal, (data, total) => ({
+  data,
+  total,
+}));
+export const selectOrganizationGridColumns = createSelector(selectOrganizationState, (state) => state.gridColumns);
