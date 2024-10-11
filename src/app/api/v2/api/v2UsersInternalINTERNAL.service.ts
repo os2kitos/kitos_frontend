@@ -19,9 +19,9 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
-import { APICopyUserRightsRequestDTO } from '../model/aPICopyUserRightsRequestDTO';
-// @ts-ignore
 import { APICreateUserRequestDTO } from '../model/aPICreateUserRequestDTO';
+// @ts-ignore
+import { APIMutateUserRightsRequestDTO } from '../model/aPIMutateUserRightsRequestDTO';
 // @ts-ignore
 import { APIUpdateUserRequestDTO } from '../model/aPIUpdateUserRequestDTO';
 // @ts-ignore
@@ -36,12 +36,12 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface DeleteSingleUsersInternalV2DeleteUserRequestParams {
+export interface DeleteSingleUsersInternalV2DeleteUserByOrganizationuuidAndUseruuidRequestParams {
     organizationUuid: string;
     userUuid: string;
 }
 
-export interface GetSingleUsersInternalV2GetCollectionPermissionsRequestParams {
+export interface GetSingleUsersInternalV2GetCollectionPermissionsByOrganizationuuidRequestParams {
     organizationUuid: string;
 }
 
@@ -50,27 +50,34 @@ export interface GetSingleUsersInternalV2GetUsersByEmailInOtherOrganizationsRequ
     email: string;
 }
 
-export interface PatchSingleUsersInternalV2PatchUserRequestParams {
+export interface PatchSingleUsersInternalV2PatchUserByOrganizationuuidAndUseruuidRequestParams {
     organizationUuid: string;
     userUuid: string;
     parameters: APIUpdateUserRequestDTO;
 }
 
-export interface PostSingleUsersInternalV2CopyRolesRequestParams {
+export interface PostSingleUsersInternalV2CopyRolesByOrganizationuuidAndFromuseruuidAndTouseruuidRequestParams {
     organizationUuid: string;
     fromUserUuid: string;
     toUserUuid: string;
-    request: APICopyUserRightsRequestDTO;
+    request: APIMutateUserRightsRequestDTO;
 }
 
-export interface PostSingleUsersInternalV2CreateUserRequestParams {
+export interface PostSingleUsersInternalV2CreateUserByOrganizationuuidRequestParams {
     organizationUuid: string;
     parameters: APICreateUserRequestDTO;
 }
 
-export interface PostSingleUsersInternalV2SendNotificationRequestParams {
+export interface PostSingleUsersInternalV2SendNotificationByOrganizationuuidAndUseruuidRequestParams {
     organizationUuid: string;
     userUuid: string;
+}
+
+export interface PostSingleUsersInternalV2TransferRolesByOrganizationuuidAndFromuseruuidAndTouseruuidRequestParams {
+    organizationUuid: string;
+    fromUserUuid: string;
+    toUserUuid: string;
+    request: APIMutateUserRightsRequestDTO;
 }
 
 
@@ -79,7 +86,7 @@ export interface PostSingleUsersInternalV2SendNotificationRequestParams {
 })
 export class APIV2UsersInternalINTERNALService {
 
-    protected basePath = 'https://localhost:44300';
+    protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
@@ -143,17 +150,17 @@ export class APIV2UsersInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public deleteSingleUsersInternalV2DeleteUser(requestParameters: DeleteSingleUsersInternalV2DeleteUserRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public deleteSingleUsersInternalV2DeleteUser(requestParameters: DeleteSingleUsersInternalV2DeleteUserRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public deleteSingleUsersInternalV2DeleteUser(requestParameters: DeleteSingleUsersInternalV2DeleteUserRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public deleteSingleUsersInternalV2DeleteUser(requestParameters: DeleteSingleUsersInternalV2DeleteUserRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public deleteSingleUsersInternalV2DeleteUserByOrganizationuuidAndUseruuid(requestParameters: DeleteSingleUsersInternalV2DeleteUserByOrganizationuuidAndUseruuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public deleteSingleUsersInternalV2DeleteUserByOrganizationuuidAndUseruuid(requestParameters: DeleteSingleUsersInternalV2DeleteUserByOrganizationuuidAndUseruuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public deleteSingleUsersInternalV2DeleteUserByOrganizationuuidAndUseruuid(requestParameters: DeleteSingleUsersInternalV2DeleteUserByOrganizationuuidAndUseruuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public deleteSingleUsersInternalV2DeleteUserByOrganizationuuidAndUseruuid(requestParameters: DeleteSingleUsersInternalV2DeleteUserByOrganizationuuidAndUseruuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling deleteSingleUsersInternalV2DeleteUser.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling deleteSingleUsersInternalV2DeleteUserByOrganizationuuidAndUseruuid.');
         }
         const userUuid = requestParameters.userUuid;
         if (userUuid === null || userUuid === undefined) {
-            throw new Error('Required parameter userUuid was null or undefined when calling deleteSingleUsersInternalV2DeleteUser.');
+            throw new Error('Required parameter userUuid was null or undefined when calling deleteSingleUsersInternalV2DeleteUserByOrganizationuuidAndUseruuid.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -204,13 +211,13 @@ export class APIV2UsersInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleUsersInternalV2GetCollectionPermissions(requestParameters: GetSingleUsersInternalV2GetCollectionPermissionsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIUserCollectionPermissionsResponseDTO>;
-    public getSingleUsersInternalV2GetCollectionPermissions(requestParameters: GetSingleUsersInternalV2GetCollectionPermissionsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIUserCollectionPermissionsResponseDTO>>;
-    public getSingleUsersInternalV2GetCollectionPermissions(requestParameters: GetSingleUsersInternalV2GetCollectionPermissionsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIUserCollectionPermissionsResponseDTO>>;
-    public getSingleUsersInternalV2GetCollectionPermissions(requestParameters: GetSingleUsersInternalV2GetCollectionPermissionsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleUsersInternalV2GetCollectionPermissionsByOrganizationuuid(requestParameters: GetSingleUsersInternalV2GetCollectionPermissionsByOrganizationuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIUserCollectionPermissionsResponseDTO>;
+    public getSingleUsersInternalV2GetCollectionPermissionsByOrganizationuuid(requestParameters: GetSingleUsersInternalV2GetCollectionPermissionsByOrganizationuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIUserCollectionPermissionsResponseDTO>>;
+    public getSingleUsersInternalV2GetCollectionPermissionsByOrganizationuuid(requestParameters: GetSingleUsersInternalV2GetCollectionPermissionsByOrganizationuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIUserCollectionPermissionsResponseDTO>>;
+    public getSingleUsersInternalV2GetCollectionPermissionsByOrganizationuuid(requestParameters: GetSingleUsersInternalV2GetCollectionPermissionsByOrganizationuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleUsersInternalV2GetCollectionPermissions.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleUsersInternalV2GetCollectionPermissionsByOrganizationuuid.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -331,21 +338,21 @@ export class APIV2UsersInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleUsersInternalV2PatchUser(requestParameters: PatchSingleUsersInternalV2PatchUserRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIUserResponseDTO>;
-    public patchSingleUsersInternalV2PatchUser(requestParameters: PatchSingleUsersInternalV2PatchUserRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIUserResponseDTO>>;
-    public patchSingleUsersInternalV2PatchUser(requestParameters: PatchSingleUsersInternalV2PatchUserRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIUserResponseDTO>>;
-    public patchSingleUsersInternalV2PatchUser(requestParameters: PatchSingleUsersInternalV2PatchUserRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public patchSingleUsersInternalV2PatchUserByOrganizationuuidAndUseruuid(requestParameters: PatchSingleUsersInternalV2PatchUserByOrganizationuuidAndUseruuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIUserResponseDTO>;
+    public patchSingleUsersInternalV2PatchUserByOrganizationuuidAndUseruuid(requestParameters: PatchSingleUsersInternalV2PatchUserByOrganizationuuidAndUseruuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIUserResponseDTO>>;
+    public patchSingleUsersInternalV2PatchUserByOrganizationuuidAndUseruuid(requestParameters: PatchSingleUsersInternalV2PatchUserByOrganizationuuidAndUseruuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIUserResponseDTO>>;
+    public patchSingleUsersInternalV2PatchUserByOrganizationuuidAndUseruuid(requestParameters: PatchSingleUsersInternalV2PatchUserByOrganizationuuidAndUseruuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling patchSingleUsersInternalV2PatchUser.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling patchSingleUsersInternalV2PatchUserByOrganizationuuidAndUseruuid.');
         }
         const userUuid = requestParameters.userUuid;
         if (userUuid === null || userUuid === undefined) {
-            throw new Error('Required parameter userUuid was null or undefined when calling patchSingleUsersInternalV2PatchUser.');
+            throw new Error('Required parameter userUuid was null or undefined when calling patchSingleUsersInternalV2PatchUserByOrganizationuuidAndUseruuid.');
         }
         const parameters = requestParameters.parameters;
         if (parameters === null || parameters === undefined) {
-            throw new Error('Required parameter parameters was null or undefined when calling patchSingleUsersInternalV2PatchUser.');
+            throw new Error('Required parameter parameters was null or undefined when calling patchSingleUsersInternalV2PatchUserByOrganizationuuidAndUseruuid.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -408,25 +415,25 @@ export class APIV2UsersInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleUsersInternalV2CopyRoles(requestParameters: PostSingleUsersInternalV2CopyRolesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public postSingleUsersInternalV2CopyRoles(requestParameters: PostSingleUsersInternalV2CopyRolesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public postSingleUsersInternalV2CopyRoles(requestParameters: PostSingleUsersInternalV2CopyRolesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public postSingleUsersInternalV2CopyRoles(requestParameters: PostSingleUsersInternalV2CopyRolesRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public postSingleUsersInternalV2CopyRolesByOrganizationuuidAndFromuseruuidAndTouseruuid(requestParameters: PostSingleUsersInternalV2CopyRolesByOrganizationuuidAndFromuseruuidAndTouseruuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public postSingleUsersInternalV2CopyRolesByOrganizationuuidAndFromuseruuidAndTouseruuid(requestParameters: PostSingleUsersInternalV2CopyRolesByOrganizationuuidAndFromuseruuidAndTouseruuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public postSingleUsersInternalV2CopyRolesByOrganizationuuidAndFromuseruuidAndTouseruuid(requestParameters: PostSingleUsersInternalV2CopyRolesByOrganizationuuidAndFromuseruuidAndTouseruuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public postSingleUsersInternalV2CopyRolesByOrganizationuuidAndFromuseruuidAndTouseruuid(requestParameters: PostSingleUsersInternalV2CopyRolesByOrganizationuuidAndFromuseruuidAndTouseruuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling postSingleUsersInternalV2CopyRoles.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling postSingleUsersInternalV2CopyRolesByOrganizationuuidAndFromuseruuidAndTouseruuid.');
         }
         const fromUserUuid = requestParameters.fromUserUuid;
         if (fromUserUuid === null || fromUserUuid === undefined) {
-            throw new Error('Required parameter fromUserUuid was null or undefined when calling postSingleUsersInternalV2CopyRoles.');
+            throw new Error('Required parameter fromUserUuid was null or undefined when calling postSingleUsersInternalV2CopyRolesByOrganizationuuidAndFromuseruuidAndTouseruuid.');
         }
         const toUserUuid = requestParameters.toUserUuid;
         if (toUserUuid === null || toUserUuid === undefined) {
-            throw new Error('Required parameter toUserUuid was null or undefined when calling postSingleUsersInternalV2CopyRoles.');
+            throw new Error('Required parameter toUserUuid was null or undefined when calling postSingleUsersInternalV2CopyRolesByOrganizationuuidAndFromuseruuidAndTouseruuid.');
         }
         const request = requestParameters.request;
         if (request === null || request === undefined) {
-            throw new Error('Required parameter request was null or undefined when calling postSingleUsersInternalV2CopyRoles.');
+            throw new Error('Required parameter request was null or undefined when calling postSingleUsersInternalV2CopyRolesByOrganizationuuidAndFromuseruuidAndTouseruuid.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -487,17 +494,17 @@ export class APIV2UsersInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleUsersInternalV2CreateUser(requestParameters: PostSingleUsersInternalV2CreateUserRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
-    public postSingleUsersInternalV2CreateUser(requestParameters: PostSingleUsersInternalV2CreateUserRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public postSingleUsersInternalV2CreateUser(requestParameters: PostSingleUsersInternalV2CreateUserRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public postSingleUsersInternalV2CreateUser(requestParameters: PostSingleUsersInternalV2CreateUserRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public postSingleUsersInternalV2CreateUserByOrganizationuuid(requestParameters: PostSingleUsersInternalV2CreateUserByOrganizationuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
+    public postSingleUsersInternalV2CreateUserByOrganizationuuid(requestParameters: PostSingleUsersInternalV2CreateUserByOrganizationuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public postSingleUsersInternalV2CreateUserByOrganizationuuid(requestParameters: PostSingleUsersInternalV2CreateUserByOrganizationuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public postSingleUsersInternalV2CreateUserByOrganizationuuid(requestParameters: PostSingleUsersInternalV2CreateUserByOrganizationuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling postSingleUsersInternalV2CreateUser.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling postSingleUsersInternalV2CreateUserByOrganizationuuid.');
         }
         const parameters = requestParameters.parameters;
         if (parameters === null || parameters === undefined) {
-            throw new Error('Required parameter parameters was null or undefined when calling postSingleUsersInternalV2CreateUser.');
+            throw new Error('Required parameter parameters was null or undefined when calling postSingleUsersInternalV2CreateUserByOrganizationuuid.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -559,17 +566,17 @@ export class APIV2UsersInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleUsersInternalV2SendNotification(requestParameters: PostSingleUsersInternalV2SendNotificationRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public postSingleUsersInternalV2SendNotification(requestParameters: PostSingleUsersInternalV2SendNotificationRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public postSingleUsersInternalV2SendNotification(requestParameters: PostSingleUsersInternalV2SendNotificationRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public postSingleUsersInternalV2SendNotification(requestParameters: PostSingleUsersInternalV2SendNotificationRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public postSingleUsersInternalV2SendNotificationByOrganizationuuidAndUseruuid(requestParameters: PostSingleUsersInternalV2SendNotificationByOrganizationuuidAndUseruuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public postSingleUsersInternalV2SendNotificationByOrganizationuuidAndUseruuid(requestParameters: PostSingleUsersInternalV2SendNotificationByOrganizationuuidAndUseruuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public postSingleUsersInternalV2SendNotificationByOrganizationuuidAndUseruuid(requestParameters: PostSingleUsersInternalV2SendNotificationByOrganizationuuidAndUseruuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public postSingleUsersInternalV2SendNotificationByOrganizationuuidAndUseruuid(requestParameters: PostSingleUsersInternalV2SendNotificationByOrganizationuuidAndUseruuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling postSingleUsersInternalV2SendNotification.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling postSingleUsersInternalV2SendNotificationByOrganizationuuidAndUseruuid.');
         }
         const userUuid = requestParameters.userUuid;
         if (userUuid === null || userUuid === undefined) {
-            throw new Error('Required parameter userUuid was null or undefined when calling postSingleUsersInternalV2SendNotification.');
+            throw new Error('Required parameter userUuid was null or undefined when calling postSingleUsersInternalV2SendNotificationByOrganizationuuidAndUseruuid.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -606,6 +613,85 @@ export class APIV2UsersInternalINTERNALService {
         return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * @param requestParameters
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public postSingleUsersInternalV2TransferRolesByOrganizationuuidAndFromuseruuidAndTouseruuid(requestParameters: PostSingleUsersInternalV2TransferRolesByOrganizationuuidAndFromuseruuidAndTouseruuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public postSingleUsersInternalV2TransferRolesByOrganizationuuidAndFromuseruuidAndTouseruuid(requestParameters: PostSingleUsersInternalV2TransferRolesByOrganizationuuidAndFromuseruuidAndTouseruuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public postSingleUsersInternalV2TransferRolesByOrganizationuuidAndFromuseruuidAndTouseruuid(requestParameters: PostSingleUsersInternalV2TransferRolesByOrganizationuuidAndFromuseruuidAndTouseruuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public postSingleUsersInternalV2TransferRolesByOrganizationuuidAndFromuseruuidAndTouseruuid(requestParameters: PostSingleUsersInternalV2TransferRolesByOrganizationuuidAndFromuseruuidAndTouseruuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+        const organizationUuid = requestParameters.organizationUuid;
+        if (organizationUuid === null || organizationUuid === undefined) {
+            throw new Error('Required parameter organizationUuid was null or undefined when calling postSingleUsersInternalV2TransferRolesByOrganizationuuidAndFromuseruuidAndTouseruuid.');
+        }
+        const fromUserUuid = requestParameters.fromUserUuid;
+        if (fromUserUuid === null || fromUserUuid === undefined) {
+            throw new Error('Required parameter fromUserUuid was null or undefined when calling postSingleUsersInternalV2TransferRolesByOrganizationuuidAndFromuseruuidAndTouseruuid.');
+        }
+        const toUserUuid = requestParameters.toUserUuid;
+        if (toUserUuid === null || toUserUuid === undefined) {
+            throw new Error('Required parameter toUserUuid was null or undefined when calling postSingleUsersInternalV2TransferRolesByOrganizationuuidAndFromuseruuidAndTouseruuid.');
+        }
+        const request = requestParameters.request;
+        if (request === null || request === undefined) {
+            throw new Error('Required parameter request was null or undefined when calling postSingleUsersInternalV2TransferRolesByOrganizationuuidAndFromuseruuidAndTouseruuid.');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Content-Type', httpContentTypeSelected);
+        }
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/v2/internal/organization/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/users/${this.configuration.encodeParam({name: "fromUserUuid", value: fromUserUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/transfer-roles/${this.configuration.encodeParam({name: "toUserUuid", value: toUserUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
+        return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                body: request,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

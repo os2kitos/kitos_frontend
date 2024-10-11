@@ -36,7 +36,7 @@ export interface GetManyOrganizationUnitRoleTypeV2GetRequestParams {
     pageSize?: number;
 }
 
-export interface GetSingleOrganizationUnitRoleTypeV2GetV1RequestParams {
+export interface GetSingleOrganizationUnitRoleTypeV2GetV1ByOrganizationunitroletypeuuidRequestParams {
     organizationUnitRoleTypeUuid: string;
     organizationUuid: string;
 }
@@ -47,7 +47,7 @@ export interface GetSingleOrganizationUnitRoleTypeV2GetV1RequestParams {
 })
 export class APIV2OrganizationUnitRoleTypeService {
 
-    protected basePath = 'https://localhost:44300';
+    protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
@@ -186,17 +186,17 @@ export class APIV2OrganizationUnitRoleTypeService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleOrganizationUnitRoleTypeV2GetV1(requestParameters: GetSingleOrganizationUnitRoleTypeV2GetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRoleOptionExtendedResponseDTO>;
-    public getSingleOrganizationUnitRoleTypeV2GetV1(requestParameters: GetSingleOrganizationUnitRoleTypeV2GetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRoleOptionExtendedResponseDTO>>;
-    public getSingleOrganizationUnitRoleTypeV2GetV1(requestParameters: GetSingleOrganizationUnitRoleTypeV2GetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRoleOptionExtendedResponseDTO>>;
-    public getSingleOrganizationUnitRoleTypeV2GetV1(requestParameters: GetSingleOrganizationUnitRoleTypeV2GetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleOrganizationUnitRoleTypeV2GetV1ByOrganizationunitroletypeuuid(requestParameters: GetSingleOrganizationUnitRoleTypeV2GetV1ByOrganizationunitroletypeuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRoleOptionExtendedResponseDTO>;
+    public getSingleOrganizationUnitRoleTypeV2GetV1ByOrganizationunitroletypeuuid(requestParameters: GetSingleOrganizationUnitRoleTypeV2GetV1ByOrganizationunitroletypeuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRoleOptionExtendedResponseDTO>>;
+    public getSingleOrganizationUnitRoleTypeV2GetV1ByOrganizationunitroletypeuuid(requestParameters: GetSingleOrganizationUnitRoleTypeV2GetV1ByOrganizationunitroletypeuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRoleOptionExtendedResponseDTO>>;
+    public getSingleOrganizationUnitRoleTypeV2GetV1ByOrganizationunitroletypeuuid(requestParameters: GetSingleOrganizationUnitRoleTypeV2GetV1ByOrganizationunitroletypeuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUnitRoleTypeUuid = requestParameters.organizationUnitRoleTypeUuid;
         if (organizationUnitRoleTypeUuid === null || organizationUnitRoleTypeUuid === undefined) {
-            throw new Error('Required parameter organizationUnitRoleTypeUuid was null or undefined when calling getSingleOrganizationUnitRoleTypeV2GetV1.');
+            throw new Error('Required parameter organizationUnitRoleTypeUuid was null or undefined when calling getSingleOrganizationUnitRoleTypeV2GetV1ByOrganizationunitroletypeuuid.');
         }
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleOrganizationUnitRoleTypeV2GetV1.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleOrganizationUnitRoleTypeV2GetV1ByOrganizationunitroletypeuuid.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});

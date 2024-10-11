@@ -88,8 +88,6 @@ model/contractTerminationTermsRequestDTO.ts
 model/contractTerminationTermsResponseDTO.ts
 model/contractValidityResponseDTO.ts
 model/contractValidityWriteRequestDTO.ts
-model/copyRightRequestDTO.ts
-model/copyUserRightsRequestDTO.ts
 model/createDataProcessingRegistrationRequestDTO.ts
 model/createItInterfaceRequestDTO.ts
 model/createItSystemRequestDTO.ts
@@ -154,6 +152,8 @@ model/kLEDetailsDTOVersionedKLEResponseDTO.ts
 model/localKLEDeviationsRequestDTO.ts
 model/localKLEDeviationsResponseDTO.ts
 model/models.ts
+model/mutateRightRequestDTO.ts
+model/mutateUserRightsRequestDTO.ts
 model/namedEntityV2DTO.ts
 model/namedEntityWithEnabledStatusV2DTO.ts
 model/namedEntityWithUserFullNameV2DTO.ts
@@ -171,7 +171,6 @@ model/organizationRegistrationUnitResponseDTO.ts
 model/organizationResponseDTO.ts
 model/organizationUnitResponseDTO.ts
 model/organizationUnitRolesResponseDTO.ts
-model/organizationUpdateRequestDTO.ts
 model/organizationUsageResponseDTO.ts
 model/organizationUsageWriteRequestDTO.ts
 model/organizationUserResponseDTO.ts

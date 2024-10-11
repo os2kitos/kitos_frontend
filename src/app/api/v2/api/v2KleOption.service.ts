@@ -43,7 +43,7 @@ export interface GetSingleKleOptionV2GetRequestParams {
     pageSize?: number;
 }
 
-export interface GetSingleKleOptionV2GetV1RequestParams {
+export interface GetSingleKleOptionV2GetV1ByKleuuidRequestParams {
     /** UUID of the KLE number */
     kleUuid: string;
 }
@@ -54,7 +54,7 @@ export interface GetSingleKleOptionV2GetV1RequestParams {
 })
 export class APIV2KleOptionService {
 
-    protected basePath = 'https://localhost:44300';
+    protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
@@ -207,13 +207,13 @@ export class APIV2KleOptionService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleKleOptionV2GetV1(requestParameters: GetSingleKleOptionV2GetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIKLEDetailsDTOVersionedKLEResponseDTO>;
-    public getSingleKleOptionV2GetV1(requestParameters: GetSingleKleOptionV2GetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIKLEDetailsDTOVersionedKLEResponseDTO>>;
-    public getSingleKleOptionV2GetV1(requestParameters: GetSingleKleOptionV2GetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIKLEDetailsDTOVersionedKLEResponseDTO>>;
-    public getSingleKleOptionV2GetV1(requestParameters: GetSingleKleOptionV2GetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleKleOptionV2GetV1ByKleuuid(requestParameters: GetSingleKleOptionV2GetV1ByKleuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIKLEDetailsDTOVersionedKLEResponseDTO>;
+    public getSingleKleOptionV2GetV1ByKleuuid(requestParameters: GetSingleKleOptionV2GetV1ByKleuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIKLEDetailsDTOVersionedKLEResponseDTO>>;
+    public getSingleKleOptionV2GetV1ByKleuuid(requestParameters: GetSingleKleOptionV2GetV1ByKleuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIKLEDetailsDTOVersionedKLEResponseDTO>>;
+    public getSingleKleOptionV2GetV1ByKleuuid(requestParameters: GetSingleKleOptionV2GetV1ByKleuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const kleUuid = requestParameters.kleUuid;
         if (kleUuid === null || kleUuid === undefined) {
-            throw new Error('Required parameter kleUuid was null or undefined when calling getSingleKleOptionV2GetV1.');
+            throw new Error('Required parameter kleUuid was null or undefined when calling getSingleKleOptionV2GetV1ByKleuuid.');
         }
 
         let localVarHeaders = this.defaultHeaders;

@@ -37,7 +37,7 @@ export interface GetManyItContractProcurementStrategyV2GetRequestParams {
     pageSize?: number;
 }
 
-export interface GetSingleItContractProcurementStrategyV2GetV1RequestParams {
+export interface GetSingleItContractProcurementStrategyV2GetV1ByProcurementstrategytypeuuidRequestParams {
     /** procurement strategy type identifier */
     procurementStrategyTypeUuid: string;
     /** organization context for the procurement strategy type availability */
@@ -50,7 +50,7 @@ export interface GetSingleItContractProcurementStrategyV2GetV1RequestParams {
 })
 export class APIV2ItContractProcurementStrategyService {
 
-    protected basePath = 'https://localhost:44300';
+    protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
@@ -191,17 +191,17 @@ export class APIV2ItContractProcurementStrategyService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItContractProcurementStrategyV2GetV1(requestParameters: GetSingleItContractProcurementStrategyV2GetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
-    public getSingleItContractProcurementStrategyV2GetV1(requestParameters: GetSingleItContractProcurementStrategyV2GetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
-    public getSingleItContractProcurementStrategyV2GetV1(requestParameters: GetSingleItContractProcurementStrategyV2GetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
-    public getSingleItContractProcurementStrategyV2GetV1(requestParameters: GetSingleItContractProcurementStrategyV2GetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleItContractProcurementStrategyV2GetV1ByProcurementstrategytypeuuid(requestParameters: GetSingleItContractProcurementStrategyV2GetV1ByProcurementstrategytypeuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
+    public getSingleItContractProcurementStrategyV2GetV1ByProcurementstrategytypeuuid(requestParameters: GetSingleItContractProcurementStrategyV2GetV1ByProcurementstrategytypeuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
+    public getSingleItContractProcurementStrategyV2GetV1ByProcurementstrategytypeuuid(requestParameters: GetSingleItContractProcurementStrategyV2GetV1ByProcurementstrategytypeuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
+    public getSingleItContractProcurementStrategyV2GetV1ByProcurementstrategytypeuuid(requestParameters: GetSingleItContractProcurementStrategyV2GetV1ByProcurementstrategytypeuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const procurementStrategyTypeUuid = requestParameters.procurementStrategyTypeUuid;
         if (procurementStrategyTypeUuid === null || procurementStrategyTypeUuid === undefined) {
-            throw new Error('Required parameter procurementStrategyTypeUuid was null or undefined when calling getSingleItContractProcurementStrategyV2GetV1.');
+            throw new Error('Required parameter procurementStrategyTypeUuid was null or undefined when calling getSingleItContractProcurementStrategyV2GetV1ByProcurementstrategytypeuuid.');
         }
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleItContractProcurementStrategyV2GetV1.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleItContractProcurementStrategyV2GetV1ByProcurementstrategytypeuuid.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});

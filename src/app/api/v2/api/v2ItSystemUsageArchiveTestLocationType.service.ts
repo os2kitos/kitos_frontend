@@ -37,7 +37,7 @@ export interface GetManyItSystemUsageArchiveTestLocationTypeV2GetRequestParams {
     pageSize?: number;
 }
 
-export interface GetSingleItSystemUsageArchiveTestLocationTypeV2GetV1RequestParams {
+export interface GetSingleItSystemUsageArchiveTestLocationTypeV2GetV1ByArchivetestlocationuuidRequestParams {
     /** archive test location identifier */
     archiveTestLocationUuid: string;
     /** organization context for the archive test location availability */
@@ -50,7 +50,7 @@ export interface GetSingleItSystemUsageArchiveTestLocationTypeV2GetV1RequestPara
 })
 export class APIV2ItSystemUsageArchiveTestLocationTypeService {
 
-    protected basePath = 'https://localhost:44300';
+    protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
@@ -191,17 +191,17 @@ export class APIV2ItSystemUsageArchiveTestLocationTypeService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItSystemUsageArchiveTestLocationTypeV2GetV1(requestParameters: GetSingleItSystemUsageArchiveTestLocationTypeV2GetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
-    public getSingleItSystemUsageArchiveTestLocationTypeV2GetV1(requestParameters: GetSingleItSystemUsageArchiveTestLocationTypeV2GetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
-    public getSingleItSystemUsageArchiveTestLocationTypeV2GetV1(requestParameters: GetSingleItSystemUsageArchiveTestLocationTypeV2GetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
-    public getSingleItSystemUsageArchiveTestLocationTypeV2GetV1(requestParameters: GetSingleItSystemUsageArchiveTestLocationTypeV2GetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleItSystemUsageArchiveTestLocationTypeV2GetV1ByArchivetestlocationuuid(requestParameters: GetSingleItSystemUsageArchiveTestLocationTypeV2GetV1ByArchivetestlocationuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
+    public getSingleItSystemUsageArchiveTestLocationTypeV2GetV1ByArchivetestlocationuuid(requestParameters: GetSingleItSystemUsageArchiveTestLocationTypeV2GetV1ByArchivetestlocationuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
+    public getSingleItSystemUsageArchiveTestLocationTypeV2GetV1ByArchivetestlocationuuid(requestParameters: GetSingleItSystemUsageArchiveTestLocationTypeV2GetV1ByArchivetestlocationuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
+    public getSingleItSystemUsageArchiveTestLocationTypeV2GetV1ByArchivetestlocationuuid(requestParameters: GetSingleItSystemUsageArchiveTestLocationTypeV2GetV1ByArchivetestlocationuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const archiveTestLocationUuid = requestParameters.archiveTestLocationUuid;
         if (archiveTestLocationUuid === null || archiveTestLocationUuid === undefined) {
-            throw new Error('Required parameter archiveTestLocationUuid was null or undefined when calling getSingleItSystemUsageArchiveTestLocationTypeV2GetV1.');
+            throw new Error('Required parameter archiveTestLocationUuid was null or undefined when calling getSingleItSystemUsageArchiveTestLocationTypeV2GetV1ByArchivetestlocationuuid.');
         }
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleItSystemUsageArchiveTestLocationTypeV2GetV1.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleItSystemUsageArchiveTestLocationTypeV2GetV1ByArchivetestlocationuuid.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});

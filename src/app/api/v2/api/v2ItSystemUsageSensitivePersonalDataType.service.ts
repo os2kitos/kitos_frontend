@@ -37,7 +37,7 @@ export interface GetManyItSystemUsageSensitivePersonalDataTypeV2GetRequestParams
     pageSize?: number;
 }
 
-export interface GetSingleItSystemUsageSensitivePersonalDataTypeV2GetV1RequestParams {
+export interface GetSingleItSystemUsageSensitivePersonalDataTypeV2GetV1BySensitivepersonaldatatypeuuidRequestParams {
     /** sensitive personal data type identifier */
     sensitivePersonalDataTypeUuid: string;
     /** organization context for the sensitive personal data type availability */
@@ -50,7 +50,7 @@ export interface GetSingleItSystemUsageSensitivePersonalDataTypeV2GetV1RequestPa
 })
 export class APIV2ItSystemUsageSensitivePersonalDataTypeService {
 
-    protected basePath = 'https://localhost:44300';
+    protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
@@ -191,17 +191,17 @@ export class APIV2ItSystemUsageSensitivePersonalDataTypeService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItSystemUsageSensitivePersonalDataTypeV2GetV1(requestParameters: GetSingleItSystemUsageSensitivePersonalDataTypeV2GetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
-    public getSingleItSystemUsageSensitivePersonalDataTypeV2GetV1(requestParameters: GetSingleItSystemUsageSensitivePersonalDataTypeV2GetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
-    public getSingleItSystemUsageSensitivePersonalDataTypeV2GetV1(requestParameters: GetSingleItSystemUsageSensitivePersonalDataTypeV2GetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
-    public getSingleItSystemUsageSensitivePersonalDataTypeV2GetV1(requestParameters: GetSingleItSystemUsageSensitivePersonalDataTypeV2GetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleItSystemUsageSensitivePersonalDataTypeV2GetV1BySensitivepersonaldatatypeuuid(requestParameters: GetSingleItSystemUsageSensitivePersonalDataTypeV2GetV1BySensitivepersonaldatatypeuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
+    public getSingleItSystemUsageSensitivePersonalDataTypeV2GetV1BySensitivepersonaldatatypeuuid(requestParameters: GetSingleItSystemUsageSensitivePersonalDataTypeV2GetV1BySensitivepersonaldatatypeuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
+    public getSingleItSystemUsageSensitivePersonalDataTypeV2GetV1BySensitivepersonaldatatypeuuid(requestParameters: GetSingleItSystemUsageSensitivePersonalDataTypeV2GetV1BySensitivepersonaldatatypeuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
+    public getSingleItSystemUsageSensitivePersonalDataTypeV2GetV1BySensitivepersonaldatatypeuuid(requestParameters: GetSingleItSystemUsageSensitivePersonalDataTypeV2GetV1BySensitivepersonaldatatypeuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const sensitivePersonalDataTypeUuid = requestParameters.sensitivePersonalDataTypeUuid;
         if (sensitivePersonalDataTypeUuid === null || sensitivePersonalDataTypeUuid === undefined) {
-            throw new Error('Required parameter sensitivePersonalDataTypeUuid was null or undefined when calling getSingleItSystemUsageSensitivePersonalDataTypeV2GetV1.');
+            throw new Error('Required parameter sensitivePersonalDataTypeUuid was null or undefined when calling getSingleItSystemUsageSensitivePersonalDataTypeV2GetV1BySensitivepersonaldatatypeuuid.');
         }
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleItSystemUsageSensitivePersonalDataTypeV2GetV1.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleItSystemUsageSensitivePersonalDataTypeV2GetV1BySensitivepersonaldatatypeuuid.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});

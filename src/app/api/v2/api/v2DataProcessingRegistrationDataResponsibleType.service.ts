@@ -37,7 +37,7 @@ export interface GetManyDataProcessingRegistrationDataResponsibleTypeV2GetReques
     pageSize?: number;
 }
 
-export interface GetSingleDataProcessingRegistrationDataResponsibleTypeV2GetV1RequestParams {
+export interface GetSingleDataProcessingRegistrationDataResponsibleTypeV2GetV1ByDataresponsibleuuidRequestParams {
     /** data responsible identifier */
     dataResponsibleUuid: string;
     /** organization context for the data responsible availability */
@@ -50,7 +50,7 @@ export interface GetSingleDataProcessingRegistrationDataResponsibleTypeV2GetV1Re
 })
 export class APIV2DataProcessingRegistrationDataResponsibleTypeService {
 
-    protected basePath = 'https://localhost:44300';
+    protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
@@ -191,17 +191,17 @@ export class APIV2DataProcessingRegistrationDataResponsibleTypeService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleDataProcessingRegistrationDataResponsibleTypeV2GetV1(requestParameters: GetSingleDataProcessingRegistrationDataResponsibleTypeV2GetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
-    public getSingleDataProcessingRegistrationDataResponsibleTypeV2GetV1(requestParameters: GetSingleDataProcessingRegistrationDataResponsibleTypeV2GetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
-    public getSingleDataProcessingRegistrationDataResponsibleTypeV2GetV1(requestParameters: GetSingleDataProcessingRegistrationDataResponsibleTypeV2GetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
-    public getSingleDataProcessingRegistrationDataResponsibleTypeV2GetV1(requestParameters: GetSingleDataProcessingRegistrationDataResponsibleTypeV2GetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleDataProcessingRegistrationDataResponsibleTypeV2GetV1ByDataresponsibleuuid(requestParameters: GetSingleDataProcessingRegistrationDataResponsibleTypeV2GetV1ByDataresponsibleuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
+    public getSingleDataProcessingRegistrationDataResponsibleTypeV2GetV1ByDataresponsibleuuid(requestParameters: GetSingleDataProcessingRegistrationDataResponsibleTypeV2GetV1ByDataresponsibleuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
+    public getSingleDataProcessingRegistrationDataResponsibleTypeV2GetV1ByDataresponsibleuuid(requestParameters: GetSingleDataProcessingRegistrationDataResponsibleTypeV2GetV1ByDataresponsibleuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
+    public getSingleDataProcessingRegistrationDataResponsibleTypeV2GetV1ByDataresponsibleuuid(requestParameters: GetSingleDataProcessingRegistrationDataResponsibleTypeV2GetV1ByDataresponsibleuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const dataResponsibleUuid = requestParameters.dataResponsibleUuid;
         if (dataResponsibleUuid === null || dataResponsibleUuid === undefined) {
-            throw new Error('Required parameter dataResponsibleUuid was null or undefined when calling getSingleDataProcessingRegistrationDataResponsibleTypeV2GetV1.');
+            throw new Error('Required parameter dataResponsibleUuid was null or undefined when calling getSingleDataProcessingRegistrationDataResponsibleTypeV2GetV1ByDataresponsibleuuid.');
         }
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleDataProcessingRegistrationDataResponsibleTypeV2GetV1.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleDataProcessingRegistrationDataResponsibleTypeV2GetV1ByDataresponsibleuuid.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});

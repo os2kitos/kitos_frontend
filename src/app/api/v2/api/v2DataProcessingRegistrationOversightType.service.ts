@@ -37,7 +37,7 @@ export interface GetManyDataProcessingRegistrationOversightTypeV2GetRequestParam
     pageSize?: number;
 }
 
-export interface GetSingleDataProcessingRegistrationOversightTypeV2GetV1RequestParams {
+export interface GetSingleDataProcessingRegistrationOversightTypeV2GetV1ByOversightuuidRequestParams {
     /** oversight identifier */
     oversightUuid: string;
     /** organization context for the oversight availability */
@@ -50,7 +50,7 @@ export interface GetSingleDataProcessingRegistrationOversightTypeV2GetV1RequestP
 })
 export class APIV2DataProcessingRegistrationOversightTypeService {
 
-    protected basePath = 'https://localhost:44300';
+    protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
@@ -191,17 +191,17 @@ export class APIV2DataProcessingRegistrationOversightTypeService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleDataProcessingRegistrationOversightTypeV2GetV1(requestParameters: GetSingleDataProcessingRegistrationOversightTypeV2GetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
-    public getSingleDataProcessingRegistrationOversightTypeV2GetV1(requestParameters: GetSingleDataProcessingRegistrationOversightTypeV2GetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
-    public getSingleDataProcessingRegistrationOversightTypeV2GetV1(requestParameters: GetSingleDataProcessingRegistrationOversightTypeV2GetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
-    public getSingleDataProcessingRegistrationOversightTypeV2GetV1(requestParameters: GetSingleDataProcessingRegistrationOversightTypeV2GetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleDataProcessingRegistrationOversightTypeV2GetV1ByOversightuuid(requestParameters: GetSingleDataProcessingRegistrationOversightTypeV2GetV1ByOversightuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
+    public getSingleDataProcessingRegistrationOversightTypeV2GetV1ByOversightuuid(requestParameters: GetSingleDataProcessingRegistrationOversightTypeV2GetV1ByOversightuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
+    public getSingleDataProcessingRegistrationOversightTypeV2GetV1ByOversightuuid(requestParameters: GetSingleDataProcessingRegistrationOversightTypeV2GetV1ByOversightuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
+    public getSingleDataProcessingRegistrationOversightTypeV2GetV1ByOversightuuid(requestParameters: GetSingleDataProcessingRegistrationOversightTypeV2GetV1ByOversightuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const oversightUuid = requestParameters.oversightUuid;
         if (oversightUuid === null || oversightUuid === undefined) {
-            throw new Error('Required parameter oversightUuid was null or undefined when calling getSingleDataProcessingRegistrationOversightTypeV2GetV1.');
+            throw new Error('Required parameter oversightUuid was null or undefined when calling getSingleDataProcessingRegistrationOversightTypeV2GetV1ByOversightuuid.');
         }
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleDataProcessingRegistrationOversightTypeV2GetV1.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleDataProcessingRegistrationOversightTypeV2GetV1ByOversightuuid.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});

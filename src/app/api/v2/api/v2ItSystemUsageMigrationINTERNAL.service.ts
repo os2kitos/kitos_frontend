@@ -36,14 +36,14 @@ export interface GetManyItSystemUsageMigrationV2GetUnusedItSystemsBySearchAndOrg
     nameContent?: string;
 }
 
-export interface GetSingleItSystemUsageMigrationV2GetRequestParams {
+export interface GetSingleItSystemUsageMigrationV2GetByUsageuuidRequestParams {
     /** uuid of system usage being migrated */
     usageUuid: string;
     /** uuid of the master it-system to migrate to */
     toSystemUuid: string;
 }
 
-export interface PostSingleItSystemUsageMigrationV2ExecuteMigrationRequestParams {
+export interface PostSingleItSystemUsageMigrationV2ExecuteMigrationByUsageuuidRequestParams {
     usageUuid: string;
     toSystemUuid: string;
 }
@@ -54,7 +54,7 @@ export interface PostSingleItSystemUsageMigrationV2ExecuteMigrationRequestParams
 })
 export class APIV2ItSystemUsageMigrationINTERNALService {
 
-    protected basePath = 'https://localhost:44300';
+    protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
@@ -198,17 +198,17 @@ export class APIV2ItSystemUsageMigrationINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItSystemUsageMigrationV2Get(requestParameters: GetSingleItSystemUsageMigrationV2GetRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIItSystemUsageMigrationV2ResponseDTO>;
-    public getSingleItSystemUsageMigrationV2Get(requestParameters: GetSingleItSystemUsageMigrationV2GetRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIItSystemUsageMigrationV2ResponseDTO>>;
-    public getSingleItSystemUsageMigrationV2Get(requestParameters: GetSingleItSystemUsageMigrationV2GetRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIItSystemUsageMigrationV2ResponseDTO>>;
-    public getSingleItSystemUsageMigrationV2Get(requestParameters: GetSingleItSystemUsageMigrationV2GetRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleItSystemUsageMigrationV2GetByUsageuuid(requestParameters: GetSingleItSystemUsageMigrationV2GetByUsageuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIItSystemUsageMigrationV2ResponseDTO>;
+    public getSingleItSystemUsageMigrationV2GetByUsageuuid(requestParameters: GetSingleItSystemUsageMigrationV2GetByUsageuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIItSystemUsageMigrationV2ResponseDTO>>;
+    public getSingleItSystemUsageMigrationV2GetByUsageuuid(requestParameters: GetSingleItSystemUsageMigrationV2GetByUsageuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIItSystemUsageMigrationV2ResponseDTO>>;
+    public getSingleItSystemUsageMigrationV2GetByUsageuuid(requestParameters: GetSingleItSystemUsageMigrationV2GetByUsageuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const usageUuid = requestParameters.usageUuid;
         if (usageUuid === null || usageUuid === undefined) {
-            throw new Error('Required parameter usageUuid was null or undefined when calling getSingleItSystemUsageMigrationV2Get.');
+            throw new Error('Required parameter usageUuid was null or undefined when calling getSingleItSystemUsageMigrationV2GetByUsageuuid.');
         }
         const toSystemUuid = requestParameters.toSystemUuid;
         if (toSystemUuid === null || toSystemUuid === undefined) {
-            throw new Error('Required parameter toSystemUuid was null or undefined when calling getSingleItSystemUsageMigrationV2Get.');
+            throw new Error('Required parameter toSystemUuid was null or undefined when calling getSingleItSystemUsageMigrationV2GetByUsageuuid.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -322,17 +322,17 @@ export class APIV2ItSystemUsageMigrationINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleItSystemUsageMigrationV2ExecuteMigration(requestParameters: PostSingleItSystemUsageMigrationV2ExecuteMigrationRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public postSingleItSystemUsageMigrationV2ExecuteMigration(requestParameters: PostSingleItSystemUsageMigrationV2ExecuteMigrationRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public postSingleItSystemUsageMigrationV2ExecuteMigration(requestParameters: PostSingleItSystemUsageMigrationV2ExecuteMigrationRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public postSingleItSystemUsageMigrationV2ExecuteMigration(requestParameters: PostSingleItSystemUsageMigrationV2ExecuteMigrationRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public postSingleItSystemUsageMigrationV2ExecuteMigrationByUsageuuid(requestParameters: PostSingleItSystemUsageMigrationV2ExecuteMigrationByUsageuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public postSingleItSystemUsageMigrationV2ExecuteMigrationByUsageuuid(requestParameters: PostSingleItSystemUsageMigrationV2ExecuteMigrationByUsageuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public postSingleItSystemUsageMigrationV2ExecuteMigrationByUsageuuid(requestParameters: PostSingleItSystemUsageMigrationV2ExecuteMigrationByUsageuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public postSingleItSystemUsageMigrationV2ExecuteMigrationByUsageuuid(requestParameters: PostSingleItSystemUsageMigrationV2ExecuteMigrationByUsageuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         const usageUuid = requestParameters.usageUuid;
         if (usageUuid === null || usageUuid === undefined) {
-            throw new Error('Required parameter usageUuid was null or undefined when calling postSingleItSystemUsageMigrationV2ExecuteMigration.');
+            throw new Error('Required parameter usageUuid was null or undefined when calling postSingleItSystemUsageMigrationV2ExecuteMigrationByUsageuuid.');
         }
         const toSystemUuid = requestParameters.toSystemUuid;
         if (toSystemUuid === null || toSystemUuid === undefined) {
-            throw new Error('Required parameter toSystemUuid was null or undefined when calling postSingleItSystemUsageMigrationV2ExecuteMigration.');
+            throw new Error('Required parameter toSystemUuid was null or undefined when calling postSingleItSystemUsageMigrationV2ExecuteMigrationByUsageuuid.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
