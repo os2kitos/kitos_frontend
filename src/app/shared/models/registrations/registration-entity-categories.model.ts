@@ -6,4 +6,6 @@ export type RegistrationEntityTypes =
   | 'it-interface'
   | 'organization'
   | 'organization-unit'
-  | 'organization-user';
+  | 'organization-user'
+  | 'local-admin-organization'
+  ;

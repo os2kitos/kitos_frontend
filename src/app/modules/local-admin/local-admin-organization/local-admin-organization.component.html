@@ -1,4 +1,8 @@
-<app-card>
-  <app-card-header title="Organisationer" i18n-title> </app-card-header>
-  <app-grid> </app-grid>
-</app-card>
+<app-grid
+[columns$]="gridColumns$"
+exportToExcelName="Organisationer Overblik"
+i18n-exportToExcelName
+[loading]="false"
+entityType="local-admin-organization"
+(modifyEvent)="onEditClick()"
+(deleteEvent)="onDeleteClick()"> </app-grid>

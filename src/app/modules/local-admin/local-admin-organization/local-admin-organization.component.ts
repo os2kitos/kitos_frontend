@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { of } from 'rxjs';
+import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { ORGANIZATION_SECTION_NAME } from 'src/app/shared/persistent-state-constants';
 
@@ -7,8 +10,12 @@ import { ORGANIZATION_SECTION_NAME } from 'src/app/shared/persistent-state-const
   templateUrl: './local-admin-organization.component.html',
   styleUrl: './local-admin-organization.component.scss',
 })
-export class LocalAdminOrganizationComponent {
+export class LocalAdminOrganizationComponent extends BaseOverviewComponent {
   private readonly sectionName: string = ORGANIZATION_SECTION_NAME;
+
+  constructor(store: Store) {
+    super(store, 'local-admin-organization');
+  }
 
   public readonly gridColumns: GridColumn[] = [
     {
@@ -36,4 +43,10 @@ export class LocalAdminOrganizationComponent {
       hidden: false,
     },
   ];
+
+  public readonly gridColumns$ = of(this.gridColumns);
+
+  public onEditClick(): void {}
+
+  public onDeleteClick(): void {}
 }

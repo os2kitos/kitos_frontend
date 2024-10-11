@@ -39,6 +39,10 @@ export class EntityStatusTextsService {
       trueString: $localize`Aktiv`,
       falseString: $localize`Ikke aktiv`,
     },
+    'local-admin-organization': {
+      trueString: $localize`Aktiv`,
+      falseString: $localize`Ikke aktiv`,
+    },
   };
 
   public map(category: RegistrationEntityTypes): EntityStatusTexts {
