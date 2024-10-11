@@ -1,3 +1,4 @@
+import { APIMutateRightRequestDTO } from "src/app/api/v2";
 import { OrganizationUser, Right } from "../models/organization/organization-user/organization-user.model";
 import { RegistrationEntityTypes } from "../models/registrations/registration-entity-categories.model";
 
@@ -44,4 +45,15 @@ export function getTypeTitleNameByType(entityType: RegistrationEntityTypes): str
     default:
       throw new Error(`This component does not support entity type: ${entityType}`);
   }
+}
+
+export function userHasAnyRights(user: OrganizationUser): boolean {
+  return user.OrganizationUnitRights.length > 0 ||
+    user.ItSystemRights.length > 0 ||
+    user.ItContractRights.length > 0 ||
+    user.DataProcessingRegistrationRights.length > 0;
+}
+
+export function roleToCopyRoleRequestDTO(user: OrganizationUser, role: Right): APIMutateRightRequestDTO {
+  return { userUuid: user.Uuid, roleId: role.role.id, entityUuid: role.entity.uuid };
 }

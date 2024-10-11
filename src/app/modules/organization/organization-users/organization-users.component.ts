@@ -8,14 +8,18 @@ import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.compone
 import { GridActionColumn } from 'src/app/shared/models/grid-action-column.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
+import { OrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
 import {
   ORGANIZATION_USER_COLUMNS_ID,
   ORGANIZATION_USER_SECTION_NAME,
 } from 'src/app/shared/persistent-state-constants';
+import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
+import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.service';
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
 import {
   selectOrganizationUserByIndex,
+  selectOrganizationUserByUuid,
   selectOrganizationUserCreatePermissions,
   selectOrganizationUserDeletePermissions,
   selectOrganizationUserGridColumns,
@@ -25,7 +29,6 @@ import {
   selectOrganizationUserModifyPermissions,
 } from 'src/app/store/organization/organization-user/selectors';
 import { CreateUserDialogComponent } from './create-user-dialog/create-user-dialog.component';
-import { EditUserDialogComponent } from './edit-user-dialog/edit-user-dialog.component';
 import { UserInfoDialogComponent } from './user-info-dialog/user-info-dialog.component';
 
 @Component({
@@ -170,7 +173,8 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
     store: Store,
     private statePersistingService: StatePersistingService,
     private actions$: Actions,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private dialogOpenerService: DialogOpenerService
   ) {
     super(store, 'organization-user');
   }
@@ -200,7 +204,9 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
           ofType(
             OrganizationUserActions.createUserSuccess,
             OrganizationUserActions.updateUserSuccess,
-            OrganizationUserActions.copyRolesSuccess
+            OrganizationUserActions.deleteUserSuccess,
+            OrganizationUserActions.copyRolesSuccess,
+            OrganizationUserActions.transferRolesSuccess
           ),
           combineLatestWith(this.gridState$)
         )
@@ -218,14 +224,13 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
     this.dialog.open(CreateUserDialogComponent, { height: '95%', maxHeight: '750px' });
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  public onEditUser(user: any): void {
-    const dialogRef = this.dialog.open(EditUserDialogComponent, {
-      height: '95%',
-      maxHeight: '750px',
-    });
-    dialogRef.componentInstance.user = user;
-    dialogRef.componentInstance.isNested = false;
+  public onEditUser(user: OrganizationUser): void {
+    this.dialogOpenerService.openEditUserDialog(user, false);
+  }
+
+  public onDeleteUser(user: OrganizationUser): void {
+    const user$ = this.store.select(selectOrganizationUserByUuid(user.Uuid)).pipe(filterNullish());
+    this.dialogOpenerService.openDeleteUserDialog(user$, false);
   }
 
   override rowIdSelect(event: CellClickEvent) {
@@ -239,9 +244,9 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
   }
 
   private openUserInfoDialog(index: number) {
-    const user = this.store.select(selectOrganizationUserByIndex(index));
+    const user$ = this.store.select(selectOrganizationUserByIndex(index));
     const dialogRef = this.dialog.open(UserInfoDialogComponent, { minWidth: '800px', width: '25%' });
-    dialogRef.componentInstance.user$ = user;
+    dialogRef.componentInstance.user$ = user$;
     dialogRef.componentInstance.hasModificationPermission$ = this.hasModificationPermission$;
   }
 }

@@ -9,6 +9,8 @@
         data-cy="processor-dropdown"
         valueField="uuid"
         [data$]="organizations$"
+        itemDescriptionField="cvr"
+        [includeItemDescription]="true"
         (filterChange)="searchOrganizations($event)"
       ></app-connected-dropdown>
       <app-dialog-actions>

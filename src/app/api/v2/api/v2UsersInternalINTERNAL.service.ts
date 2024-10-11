@@ -19,9 +19,9 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
-import { APICopyUserRightsRequestDTO } from '../model/aPICopyUserRightsRequestDTO';
-// @ts-ignore
 import { APICreateUserRequestDTO } from '../model/aPICreateUserRequestDTO';
+// @ts-ignore
+import { APIMutateUserRightsRequestDTO } from '../model/aPIMutateUserRightsRequestDTO';
 // @ts-ignore
 import { APIUpdateUserRequestDTO } from '../model/aPIUpdateUserRequestDTO';
 // @ts-ignore
@@ -60,7 +60,7 @@ export interface PostSingleUsersInternalV2CopyRolesRequestParams {
     organizationUuid: string;
     fromUserUuid: string;
     toUserUuid: string;
-    request: APICopyUserRightsRequestDTO;
+    request: APIMutateUserRightsRequestDTO;
 }
 
 export interface PostSingleUsersInternalV2CreateUserRequestParams {
@@ -71,6 +71,13 @@ export interface PostSingleUsersInternalV2CreateUserRequestParams {
 export interface PostSingleUsersInternalV2SendNotificationRequestParams {
     organizationUuid: string;
     userUuid: string;
+}
+
+export interface PostSingleUsersInternalV2TransferRolesRequestParams {
+    organizationUuid: string;
+    fromUserUuid: string;
+    toUserUuid: string;
+    request: APIMutateUserRightsRequestDTO;
 }
 
 
@@ -606,6 +613,85 @@ export class APIV2UsersInternalINTERNALService {
         return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * @param requestParameters
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public postSingleUsersInternalV2TransferRoles(requestParameters: PostSingleUsersInternalV2TransferRolesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public postSingleUsersInternalV2TransferRoles(requestParameters: PostSingleUsersInternalV2TransferRolesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public postSingleUsersInternalV2TransferRoles(requestParameters: PostSingleUsersInternalV2TransferRolesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public postSingleUsersInternalV2TransferRoles(requestParameters: PostSingleUsersInternalV2TransferRolesRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+        const organizationUuid = requestParameters.organizationUuid;
+        if (organizationUuid === null || organizationUuid === undefined) {
+            throw new Error('Required parameter organizationUuid was null or undefined when calling postSingleUsersInternalV2TransferRoles.');
+        }
+        const fromUserUuid = requestParameters.fromUserUuid;
+        if (fromUserUuid === null || fromUserUuid === undefined) {
+            throw new Error('Required parameter fromUserUuid was null or undefined when calling postSingleUsersInternalV2TransferRoles.');
+        }
+        const toUserUuid = requestParameters.toUserUuid;
+        if (toUserUuid === null || toUserUuid === undefined) {
+            throw new Error('Required parameter toUserUuid was null or undefined when calling postSingleUsersInternalV2TransferRoles.');
+        }
+        const request = requestParameters.request;
+        if (request === null || request === undefined) {
+            throw new Error('Required parameter request was null or undefined when calling postSingleUsersInternalV2TransferRoles.');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Content-Type', httpContentTypeSelected);
+        }
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/v2/internal/organization/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/users/${this.configuration.encodeParam({name: "fromUserUuid", value: fromUserUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/transfer-roles/${this.configuration.encodeParam({name: "toUserUuid", value: toUserUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
+        return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                body: request,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
