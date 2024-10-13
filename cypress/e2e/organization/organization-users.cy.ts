@@ -153,4 +153,19 @@ describe('organization-users', () => {
     cy.wait('@patchRequest');
     cy.get('app-popup-message').should('exist');
   });
+
+  it('Can delete user', () => {
+    cy.intercept('api/v2/internal/organization/*/users/*', { body: null });
+
+    cy.intercept('DELETE', 'api/v2/internal/organization/*/users/*', { body: {} }).as('deleteUser');
+
+    cy.contains('local-regular-user@kitos.dk').click();
+    cy.contains('Slet bruger').click();
+
+    cy.getByDataCy('delete-button').click();
+    cy.contains('Ja').click();
+
+    cy.wait('@deleteUser');
+  });
+
 });

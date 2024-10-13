@@ -73,7 +73,7 @@ export interface PostSingleUsersInternalV2SendNotificationByOrganizationuuidAndU
     userUuid: string;
 }
 
-export interface PostSingleUsersInternalV2TransferRolesByOrganizationuuidAndFromuseruuidAndTouseruuidRequestParams {
+export interface PostSingleUsersInternalV2TransferRolesRequestParams {
     organizationUuid: string;
     fromUserUuid: string;
     toUserUuid: string;
@@ -627,25 +627,25 @@ export class APIV2UsersInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleUsersInternalV2TransferRolesByOrganizationuuidAndFromuseruuidAndTouseruuid(requestParameters: PostSingleUsersInternalV2TransferRolesByOrganizationuuidAndFromuseruuidAndTouseruuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public postSingleUsersInternalV2TransferRolesByOrganizationuuidAndFromuseruuidAndTouseruuid(requestParameters: PostSingleUsersInternalV2TransferRolesByOrganizationuuidAndFromuseruuidAndTouseruuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public postSingleUsersInternalV2TransferRolesByOrganizationuuidAndFromuseruuidAndTouseruuid(requestParameters: PostSingleUsersInternalV2TransferRolesByOrganizationuuidAndFromuseruuidAndTouseruuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public postSingleUsersInternalV2TransferRolesByOrganizationuuidAndFromuseruuidAndTouseruuid(requestParameters: PostSingleUsersInternalV2TransferRolesByOrganizationuuidAndFromuseruuidAndTouseruuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public postSingleUsersInternalV2TransferRoles(requestParameters: PostSingleUsersInternalV2TransferRolesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public postSingleUsersInternalV2TransferRoles(requestParameters: PostSingleUsersInternalV2TransferRolesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public postSingleUsersInternalV2TransferRoles(requestParameters: PostSingleUsersInternalV2TransferRolesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public postSingleUsersInternalV2TransferRoles(requestParameters: PostSingleUsersInternalV2TransferRolesRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling postSingleUsersInternalV2TransferRolesByOrganizationuuidAndFromuseruuidAndTouseruuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling postSingleUsersInternalV2TransferRoles.');
         }
         const fromUserUuid = requestParameters.fromUserUuid;
         if (fromUserUuid === null || fromUserUuid === undefined) {
-            throw new Error('Required parameter fromUserUuid was null or undefined when calling postSingleUsersInternalV2TransferRolesByOrganizationuuidAndFromuseruuidAndTouseruuid.');
+            throw new Error('Required parameter fromUserUuid was null or undefined when calling postSingleUsersInternalV2TransferRoles.');
         }
         const toUserUuid = requestParameters.toUserUuid;
         if (toUserUuid === null || toUserUuid === undefined) {
-            throw new Error('Required parameter toUserUuid was null or undefined when calling postSingleUsersInternalV2TransferRolesByOrganizationuuidAndFromuseruuidAndTouseruuid.');
+            throw new Error('Required parameter toUserUuid was null or undefined when calling postSingleUsersInternalV2TransferRoles.');
         }
         const request = requestParameters.request;
         if (request === null || request === undefined) {
-            throw new Error('Required parameter request was null or undefined when calling postSingleUsersInternalV2TransferRolesByOrganizationuuidAndFromuseruuidAndTouseruuid.');
+            throw new Error('Required parameter request was null or undefined when calling postSingleUsersInternalV2TransferRoles.');
         }
 
         let localVarHeaders = this.defaultHeaders;
