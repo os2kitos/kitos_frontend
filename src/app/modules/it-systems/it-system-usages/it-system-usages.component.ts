@@ -196,8 +196,9 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     {
       field: 'RelevantOrganizationUnitNamesAsCsv',
       title: $localize`Relevante organisationsenheder`,
-      section: ORGANIZATION_SECTION_NAME,
-      width: 350,
+      section: ORGANISATION_SECTION_NAME,
+      extraFilter: 'organization-unit',
+      width: 400,
       hidden: false,
       persistId: 'relevantOrgunits',
     },
