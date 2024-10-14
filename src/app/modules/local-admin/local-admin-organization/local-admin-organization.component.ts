@@ -84,10 +84,6 @@ export class LocalAdminOrganizationComponent extends BaseOverviewComponent imple
     this.store.dispatch(OrganizationActions.updateGridState(gridState));
   }
 
-  public onEditClick(): void {}
-
-  public onDeleteClick(): void {}
-
   public getGridTitle(): string {
     switch (this.selected) {
       case LocalAdminOrganizationOption.Organizations:

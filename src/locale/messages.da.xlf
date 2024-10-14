@@ -5163,14 +5163,6 @@
         <source>Roller i din organisation</source>
         <target state="new">Roller i din organisation</target>
       </trans-unit>
-      <trans-unit id="466492426610382126" datatype="html">
-        <source>
-          <x id="INTERPOLATION" equiv-text="{{getGridTitle()}}"/>
-        </source>
-        <target state="new">
-          <x id="INTERPOLATION" equiv-text="{{getGridTitle()}}"/>
-        </target>
-      </trans-unit>
       <trans-unit id="616679104901444882" datatype="html">
         <source>Organisationer</source>
         <target state="new">Organisationer</target>

@@ -3955,11 +3955,6 @@
       <trans-unit id="4778572585249502542" datatype="html">
         <source>Organisationer i Kitos</source>
       </trans-unit>
-      <trans-unit id="466492426610382126" datatype="html">
-        <source>
-          <x id="INTERPOLATION" equiv-text="{{getGridTitle()}}"/>
-        </source>
-      </trans-unit>
       <trans-unit id="616679104901444882" datatype="html">
         <source>Organisationer</source>
       </trans-unit>
