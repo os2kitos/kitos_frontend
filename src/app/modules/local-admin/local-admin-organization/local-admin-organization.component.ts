@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { first, of } from 'rxjs';
 import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
@@ -14,7 +14,7 @@ import {
   selectOrganizationGridState,
 } from 'src/app/store/organization/selectors';
 
-export enum LocalAdminOrganizationOption {
+enum LocalAdminOrganizationOption {
   Organizations = 'Organizations',
   Roles = 'Roles',
 }
@@ -25,13 +25,16 @@ export enum LocalAdminOrganizationOption {
   styleUrl: './local-admin-organization.component.scss',
 })
 export class LocalAdminOrganizationComponent extends BaseOverviewComponent implements OnInit {
-  public readonly SegmentOptionType = LocalAdminOrganizationOption;
+  public readonly LocalAdminOrganizationOption = LocalAdminOrganizationOption;
+
+  public selected: LocalAdminOrganizationOption = LocalAdminOrganizationOption.Organizations;
 
   private readonly sectionName: string = ORGANIZATION_SECTION_NAME;
 
   public readonly isLoading$ = this.store.select(selectOrganizationGridLoading);
   public readonly gridData$ = this.store.select(selectOrganizationGridData);
   public readonly gridState$ = this.store.select(selectOrganizationGridState);
+
 
   constructor(store: Store) {
     super(store, 'local-admin-organization');
@@ -73,11 +76,9 @@ export class LocalAdminOrganizationComponent extends BaseOverviewComponent imple
   public readonly gridColumns$ = of(this.gridColumns);
 
   public readonly segmentOptions: SegmentButtonOption<LocalAdminOrganizationOption>[] = [
-    { text: $localize`Organisationer i kitos`, value: LocalAdminOrganizationOption.Organizations },
-    { text: $localize`Roller i din organisation`, value: LocalAdminOrganizationOption.Roles },
+    { text: $localize`Organisationer`, value: LocalAdminOrganizationOption.Organizations },
+    { text: $localize`Roller`, value: LocalAdminOrganizationOption.Roles },
   ];
-
-  @Input() public selected: LocalAdminOrganizationOption = LocalAdminOrganizationOption.Organizations;
 
   public stateChange(gridState: GridState) {
     this.store.dispatch(OrganizationActions.updateGridState(gridState));
@@ -86,4 +87,13 @@ export class LocalAdminOrganizationComponent extends BaseOverviewComponent imple
   public onEditClick(): void {}
 
   public onDeleteClick(): void {}
+
+  public getGridTitle(): string {
+    switch (this.selected) {
+      case LocalAdminOrganizationOption.Organizations:
+        return $localize`Organisationer i Kitos`;
+      case LocalAdminOrganizationOption.Roles:
+        return $localize`Roller i din organisation`;
+    }
+  }
 }

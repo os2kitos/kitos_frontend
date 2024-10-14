@@ -1,16 +1,26 @@
 <app-segment [buttons]="segmentOptions" [(selected)]="selected"> </app-segment>
 
-<app-grid
-  *ngIf="selected === SegmentOptionType.Organizations"
-  [data$]="gridData$"
-  [columns$]="gridColumns$"
-  exportToExcelName="Organisationer Overblik"
-  i18n-exportToExcelName
-  [loading]="isLoading$ | async"
-  [state]="gridState$ | async"
-  entityType="local-admin-organization"
-  (stateChange)="stateChange($event)"
-  (modifyEvent)="onEditClick()"
-  (deleteEvent)="onDeleteClick()"
->
-</app-grid>
+<app-card>
+  <app-overview-header>
+    <h3>{{ getGridTitle() }}</h3>
+    <app-filter-options-button entityType="local-admin-organization"></app-filter-options-button>
+    <app-export-menu-button [exportMethod]="onExcelExport"></app-export-menu-button>
+  </app-overview-header>
+
+  <app-grid
+    *ngIf="selected === LocalAdminOrganizationOption.Organizations"
+    [data$]="gridData$"
+    [columns$]="gridColumns$"
+    exportToExcelName="Organisationer Overblik"
+    i18n-exportToExcelName
+    [loading]="isLoading$ | async"
+    [state]="gridState$ | async"
+    entityType="local-admin-organization"
+    (stateChange)="stateChange($event)"
+    (modifyEvent)="onEditClick()"
+    (deleteEvent)="onDeleteClick()"
+  >
+  </app-grid>
+
+  <app-paragraph *ngIf="selected === LocalAdminOrganizationOption.Roles"> PLACEHOLDER </app-paragraph>
+</app-card>

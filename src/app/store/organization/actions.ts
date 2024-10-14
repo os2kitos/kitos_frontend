@@ -1,6 +1,7 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
 import { APIOrganizationMasterDataRequestDTO, APIOrganizationMasterDataRolesRequestDTO } from 'src/app/api/v2';
 import { GridState } from 'src/app/shared/models/grid-state.model';
+import { SavedFilterState } from 'src/app/shared/models/grid/saved-filter-state.model';
 import { OrganizationMasterDataRoles } from 'src/app/shared/models/organization/organization-master-data/organization-master-data-roles.model';
 import { OrganizationMasterData } from 'src/app/shared/models/organization/organization-master-data/organization-master-data.model';
 import { OrganizationPermissions } from 'src/app/shared/models/organization/organization-permissions.model';
@@ -36,5 +37,8 @@ export const OrganizationActions = createActionGroup({
     'Get Organizations Error': emptyProps(),
 
     'Update Grid State': (gridState: GridState) => ({ gridState }),
+
+    'Save Organizations Filter': (localStoreKey: string) => ({ localStoreKey }),
+    'Apply Organizations Filter': (state: SavedFilterState) => ({ state }),
   },
 });
