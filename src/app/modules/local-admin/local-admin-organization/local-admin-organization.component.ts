@@ -1,13 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { first, of } from 'rxjs';
 import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
+import { SegmentButtonOption } from 'src/app/shared/components/segment/segment.component';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { organizationTypeOptions } from 'src/app/shared/models/organization/organization.model';
 import { ORGANIZATION_SECTION_NAME } from 'src/app/shared/persistent-state-constants';
 import { OrganizationActions } from 'src/app/store/organization/actions';
-import { selectOrganizationGridData, selectOrganizationGridLoading, selectOrganizationGridState } from 'src/app/store/organization/selectors';
+import {
+  selectOrganizationGridData,
+  selectOrganizationGridLoading,
+  selectOrganizationGridState,
+} from 'src/app/store/organization/selectors';
+
+export enum LocalAdminOrganizationOption {
+  Organizations = 'Organizations',
+  Roles = 'Roles',
+}
 
 @Component({
   selector: 'app-local-admin-organization',
@@ -15,6 +25,8 @@ import { selectOrganizationGridData, selectOrganizationGridLoading, selectOrgani
   styleUrl: './local-admin-organization.component.scss',
 })
 export class LocalAdminOrganizationComponent extends BaseOverviewComponent implements OnInit {
+  public readonly SegmentOptionType = LocalAdminOrganizationOption;
+
   private readonly sectionName: string = ORGANIZATION_SECTION_NAME;
 
   public readonly isLoading$ = this.store.select(selectOrganizationGridLoading);
@@ -48,7 +60,7 @@ export class LocalAdminOrganizationComponent extends BaseOverviewComponent imple
       section: this.sectionName,
       extraFilter: 'enum',
       extraData: organizationTypeOptions,
-      hidden: false
+      hidden: false,
     },
     {
       field: 'ForeignBusiness',
@@ -59,6 +71,13 @@ export class LocalAdminOrganizationComponent extends BaseOverviewComponent imple
   ];
 
   public readonly gridColumns$ = of(this.gridColumns);
+
+  public readonly segmentOptions: SegmentButtonOption<LocalAdminOrganizationOption>[] = [
+    { text: $localize`Organisationer i kitos`, value: LocalAdminOrganizationOption.Organizations },
+    { text: $localize`Roller i din organisation`, value: LocalAdminOrganizationOption.Roles },
+  ];
+
+  @Input() public selected: LocalAdminOrganizationOption = LocalAdminOrganizationOption.Organizations;
 
   public stateChange(gridState: GridState) {
     this.store.dispatch(OrganizationActions.updateGridState(gridState));

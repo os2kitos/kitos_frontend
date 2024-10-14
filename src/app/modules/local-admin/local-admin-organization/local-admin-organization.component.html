@@ -1,11 +1,16 @@
+<app-segment [buttons]="segmentOptions" [(selected)]="selected"> </app-segment>
+
 <app-grid
-[data$]="gridData$"
-[columns$]="gridColumns$"
-exportToExcelName="Organisationer Overblik"
-i18n-exportToExcelName
-[loading]="isLoading$ | async"
-[state]="gridState$ | async"
-entityType="local-admin-organization"
-(stateChange)="stateChange($event)"
-(modifyEvent)="onEditClick()"
-(deleteEvent)="onDeleteClick()"> </app-grid>
+  *ngIf="selected === SegmentOptionType.Organizations"
+  [data$]="gridData$"
+  [columns$]="gridColumns$"
+  exportToExcelName="Organisationer Overblik"
+  i18n-exportToExcelName
+  [loading]="isLoading$ | async"
+  [state]="gridState$ | async"
+  entityType="local-admin-organization"
+  (stateChange)="stateChange($event)"
+  (modifyEvent)="onEditClick()"
+  (deleteEvent)="onDeleteClick()"
+>
+</app-grid>

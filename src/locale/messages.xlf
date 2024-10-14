@@ -3949,6 +3949,12 @@
       <trans-unit id="7801698138566302162" datatype="html">
         <source> Slet bruger </source>
       </trans-unit>
+      <trans-unit id="4279755849391914558" datatype="html">
+        <source>Roller i din organisation</source>
+      </trans-unit>
+      <trans-unit id="8425850459266995237" datatype="html">
+        <source>Organisationer i kitos</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

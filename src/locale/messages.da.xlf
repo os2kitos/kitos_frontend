@@ -5019,7 +5019,6 @@
         <source>Masseopret</source>
         <target state="new">Masseopret</target>
       </trans-unit>
-
       <trans-unit id="7661266723054940833" datatype="html">
         <source>Information om <x id="INTERPOLATION" equiv-text="{{organizationName}}"/></source>
         <target state="new">Information om <x id="INTERPOLATION" equiv-text="{{organizationName}}"/></target>
@@ -5155,6 +5154,14 @@
       <trans-unit id="7801698138566302162" datatype="html">
         <source> Slet bruger </source>
         <target state="new"> Slet bruger </target>
+      </trans-unit>
+      <trans-unit id="8425850459266995237" datatype="html">
+        <source>Organisationer i kitos</source>
+        <target state="new">Organisationer i kitos</target>
+      </trans-unit>
+      <trans-unit id="4279755849391914558" datatype="html">
+        <source>Roller i din organisation</source>
+        <target state="new">Roller i din organisation</target>
       </trans-unit>
     </body>
   </file>
