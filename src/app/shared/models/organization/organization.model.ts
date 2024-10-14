@@ -1,16 +1,15 @@
-
 export interface Organization {
   id: string;
   Uuid: string;
   Name: string;
   Cvr: string;
-  TypeId: OrganizationType;
+  OrganizationType: string;
   ForeignBusiness: string;
 }
 
 export interface OrganizationType {
   name: string;
-  value:  number;
+  value: number;
 }
 
 export const organizationTypeOptions: OrganizationType[] = [
@@ -39,10 +38,9 @@ export const adaptOrganization = (value: any): Organization | undefined => {
     Uuid: value.Uuid,
     Name: value.Name,
     Cvr: value.Cvr,
-    TypeId: adaptOrganizationType(value.TypeId),
+    OrganizationType: adaptOrganizationType(value.TypeId).name,
     ForeignBusiness: value.ForeignCvr,
   };
-  console.log(adapted);
   return adapted;
 };
 

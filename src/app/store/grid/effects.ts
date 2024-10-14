@@ -24,7 +24,6 @@ export class GridExportEffects {
           mergeMap((action) => {
             const gridState = action.gridState;
             const odataString = toODataString(gridState);
-            console.log('Exporting data with grid state:', gridState);
             switch (action.entityType) {
               case 'it-system-usage':
                 return of(ITSystemUsageActions.getITSystemUsages(odataString));

@@ -48,7 +48,6 @@ export class OrganizationEffects {
     return this.actions$.pipe(
       ofType(OrganizationActions.updateGridState),
       map(({ gridState }) => {
-        console.log('gridState', gridState);
         return OrganizationActions.getOrganizations(toODataString(gridState));
       })
     );
@@ -154,5 +153,5 @@ export class OrganizationEffects {
   });
 }
 function applyQueryFixes(odataString: string) {
-  return odataString;
+  return odataString.replace('ForeignBusiness', 'ForeignCvr').replace('OrganizationType', 'TypeId');
 }

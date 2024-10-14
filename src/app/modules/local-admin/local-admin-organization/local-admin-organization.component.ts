@@ -58,7 +58,7 @@ export class LocalAdminOrganizationComponent extends BaseOverviewComponent imple
       hidden: false,
     },
     {
-      field: 'TypeId',
+      field: 'OrganizationType',
       title: $localize`Type`,
       section: this.sectionName,
       extraFilter: 'enum',
