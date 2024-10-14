@@ -1,33 +1,35 @@
-<app-accordion [title]="title" [disabled]="disableAccordion" [isExpandedByDefault]="expandedByDefault">
-  <app-native-table tableLayout="fixed">
-    <thead>
-      <tr>
-        <th i18n>Aktiv</th>
-        <th i18n>Navn</th>
-        <th *ngIf="showWriteAccess" i18n>Skriv</th>
-        <th *ngIf="showDescription" i18n>Beskrivelse</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let role of roles">
-        <td>
-          <app-boolean-circle [value]="role.active"></app-boolean-circle>
-        </td>
-        <td>{{ role.name }}</td>
-        <td *ngIf="showWriteAccess">
-          <app-boolean-circle [value]="role.writeAccess"></app-boolean-circle>
-        </td>
-        <td>
-          <app-content-space-between>
-            <app-paragraph *ngIf="showDescription" i18n> {{ role.description }} </app-paragraph>
-            <app-table-row-actions *ngIf="showEditButton">
-              <app-icon-button (buttonClick)="onEdit(role)">
-                <app-pencil-icon></app-pencil-icon>
-              </app-icon-button>
-            </app-table-row-actions>
-          </app-content-space-between>
-        </td>
-      </tr>
-    </tbody>
-  </app-native-table>
-</app-accordion>
+<ng-container *ngIf="choiceTypeItems$ | async as choiceTypeItems">
+  <app-accordion [title]="title" [disabled]="disableAccordion" [isExpandedByDefault]="expandedByDefault">
+    <app-native-table tableLayout="fixed">
+      <thead>
+        <tr>
+          <th i18n>Aktiv</th>
+          <th i18n>Navn</th>
+          <th *ngIf="showWriteAccess" i18n>Skriv</th>
+          <th *ngIf="showDescription" i18n>Beskrivelse</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let role of choiceTypeItems">
+          <td>
+            <app-boolean-circle [value]="role.active"></app-boolean-circle>
+          </td>
+          <td>{{ role.name }}</td>
+          <td *ngIf="showWriteAccess">
+            <app-boolean-circle [value]="role.writeAccess"></app-boolean-circle>
+          </td>
+          <td>
+            <app-content-space-between>
+              <app-paragraph *ngIf="showDescription" i18n> {{ role.description }} </app-paragraph>
+              <app-table-row-actions *ngIf="showEditButton">
+                <app-icon-button (buttonClick)="onEdit(role)">
+                  <app-pencil-icon></app-pencil-icon>
+                </app-icon-button>
+              </app-table-row-actions>
+            </app-content-space-between>
+          </td>
+        </tr>
+      </tbody>
+    </app-native-table>
+  </app-accordion>
+</ng-container>

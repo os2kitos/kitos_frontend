@@ -142,6 +142,7 @@ import { VerticalContentGridSectionMarginLeftComponent } from './vertical-conten
 import { SnackbarActionsComponent } from './snackbar-actions/snackbar-actions.component';
 import { AccordionHeaderComponent } from './accordion-header/accordion-header.component';
 import { ChoiceTypeTableComponent } from './choice-type-table/choice-type-table.component';
+import { EditChoiceTypeDialogComponent } from './choice-type-table/edit-choice-type-dialog/edit-choice-type-dialog.component';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
@@ -256,6 +257,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     SnackbarActionsComponent,
     AccordionHeaderComponent,
     ChoiceTypeTableComponent,
+    EditChoiceTypeDialogComponent,
   ],
   imports: [
     CommonModule,

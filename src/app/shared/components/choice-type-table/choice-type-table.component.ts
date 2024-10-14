@@ -1,55 +1,38 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { RegularOptionType } from '../../models/options/regular-option-types.model';
 import { RoleOptionTypes } from '../../models/options/role-option-types.model';
+import { ChoiceTypeTableComponentStore } from './choice-type-table.component-store';
+import { of } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { EditChoiceTypeDialogComponent } from './edit-choice-type-dialog/edit-choice-type-dialog.component';
 
 @Component({
   selector: 'app-choice-type-table',
   templateUrl: './choice-type-table.component.html',
   styleUrl: './choice-type-table.component.scss',
+  providers: [ChoiceTypeTableComponentStore],
 })
-export class ChoiceTypeTableComponent {
+export class ChoiceTypeTableComponent implements OnInit {
   @Input() type!: RegularOptionType | RoleOptionTypes;
   @Input() expandedByDefault: boolean = false;
   @Input() title: string = '';
   @Input() disableAccordion: boolean = false;
-  @Input() roles: ChoiceTypeTableItem[] = [
-    {
-      active: true,
-      name: 'En rolle',
-      writeAccess: false,
-      description: 'Dette er en rolle',
-      id: 0,
-      uuid: 'uuid1',
-      obligatory: true,
-    },
-    {
-      active: false,
-      name: 'En anden rolle',
-      writeAccess: true,
-      description: 'Dette er en anden rolle',
-      id: 1,
-      uuid: 'uuid2',
-      obligatory: true,
-    },
-    {
-      active: true,
-      name: 'Et meget meget meget meget meget meget meget langt navn',
-      writeAccess: true,
-      description: 'Dette er en meget meget meget meget meget meget meget lang beskrivelse',
-      id: 2,
-      uuid: 'uuid3',
-      obligatory: true,
-    },
-  ];
 
   @Input() showWriteAccess: boolean = true;
   @Input() showDescription: boolean = true;
   @Input() showEditButton: boolean = true;
 
-  @Output() editClicked = new EventEmitter<ChoiceTypeTableItem>();
+  constructor(private componentStore: ChoiceTypeTableComponentStore, private dialog: MatDialog) {}
+
+  public readonly choiceTypeItems$ = this.componentStore.choiceTypeItems$;
+
+  public ngOnInit(): void {
+    this.componentStore.getChoiceTypeItems(of(this.type));
+  }
 
   public onEdit(role: ChoiceTypeTableItem): void {
-    this.editClicked.emit(role);
+    const dialogRef = this.dialog.open(EditChoiceTypeDialogComponent);
+    dialogRef.componentInstance.choiceTypeItem = role;
   }
 }
 
