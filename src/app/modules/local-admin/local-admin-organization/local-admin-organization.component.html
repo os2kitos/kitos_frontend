@@ -4,7 +4,7 @@
   <app-overview-header>
     <h3>{{ getGridTitle() }}</h3>
     <app-filter-options-button entityType="local-admin-organization"></app-filter-options-button>
-    <app-export-menu-button [exportMethod]="onExcelExport"></app-export-menu-button>
+    <app-export-menu-button [showColumnsOnlyOption]="false" [exportMethod]="onExcelExport"></app-export-menu-button>
   </app-overview-header>
 
   <app-grid
