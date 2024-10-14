@@ -5,9 +5,8 @@ import { ChoiceTypeTableComponentStore } from './choice-type-table.component-sto
 import { MatDialog } from '@angular/material/dialog';
 import { EditChoiceTypeDialogComponent } from './edit-choice-type-dialog/edit-choice-type-dialog.component';
 import { BaseComponent } from '../../base/base.component';
-import { Actions, ofType } from '@ngrx/effects';
+import { Actions } from '@ngrx/effects';
 import { ChoiceTypeService } from '../../services/choice-type.service';
-import { first } from 'rxjs';
 
 @Component({
   selector: 'app-choice-type-table',
@@ -45,20 +44,17 @@ export class ChoiceTypeTableComponent extends BaseComponent implements OnInit {
     const dialogRef = this.dialog.open(EditChoiceTypeDialogComponent);
     dialogRef.componentInstance.choiceTypeItem = choiceType;
     dialogRef.componentInstance.type = this.type;
-    this.actions$.pipe(ofType(this.choiceTypeService.getItemsSuccessAction(this.type)), first()).subscribe(() => {
-      this.componentStore.getChoiceTypeItems();
-    });
   }
 }
 
 export interface ChoiceTypeTableItem {
   id: number;
   uuid: string;
-  active: boolean;
+  active: boolean; //TODO: Maybe should be allowed to be undefined
   name: string;
   writeAccess: boolean;
   description: string | undefined;
-  obligatory: boolean;
+  obligatory: boolean; //TODO: Same as active
 }
 
 export type ChoiceTypeTableOption = RegularOptionType | RoleOptionTypes;
