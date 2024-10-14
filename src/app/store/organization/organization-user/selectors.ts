@@ -22,6 +22,9 @@ export const selectOrganizationUserGridColumns = createSelector(
 export const selectOrganizationUserByIndex = (index: number) =>
   createSelector(selectAll, (organizationUsers) => organizationUsers[index]);
 
+export const selectOrganizationUserByUuid = (uuid: string) =>
+  createSelector(selectAll, (organizationUsers) => organizationUsers.find((user) => user.Uuid === uuid));
+
 export const selectOrganizationUserCreatePermissions = createSelector(
   selectOrganizationUserState,
   (state) => state.permissions?.create

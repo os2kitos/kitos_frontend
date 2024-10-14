@@ -15,8 +15,9 @@ import { EditUserDialogComponent } from './organization-users/edit-user-dialog/e
 import { OrganizationComponent } from './organization.component';
 import { OrganizationRouterModule } from './organization.routes';
 import { CopyRolesDialogComponent } from './organization-users/copy-roles-dialog/copy-roles-dialog.component';
-import { CopyRoleTableComponent } from './organization-users/copy-roles-dialog/copy-role-table/copy-role-table.component';
+import { ManageUserRoleTableComponent } from './organization-users/copy-roles-dialog/manage-user-role-table/manage-user-role-table.component';
 import { UserRoleTableComponent } from './organization-users/user-info-dialog/user-role-table/user-role-table.component';
+import { DeleteUserDialogComponent } from './organization-users/delete-user-dialog/delete-user-dialog.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { UserRoleTableComponent } from './organization-users/user-info-dialog/us
     EditUserDialogComponent,
     CreateUserDialogComponent,
     CopyRolesDialogComponent,
-    CopyRoleTableComponent,
+    ManageUserRoleTableComponent,
+    DeleteUserDialogComponent,
   ],
 
   imports: [OrganizationRouterModule, SharedModule, ComponentsModule],

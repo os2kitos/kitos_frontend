@@ -5,11 +5,11 @@ import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/reg
 import { RoleSelectionService } from 'src/app/shared/services/role-selector-service';
 
 @Component({
-  selector: 'app-copy-role-table',
-  templateUrl: './copy-role-table.component.html',
-  styleUrl: './copy-role-table.component.scss',
+  selector: 'app-manage-user-role-table',
+  templateUrl: './manage-user-role-table.component.html',
+  styleUrl: './manage-user-role-table.component.scss',
 })
-export class CopyRoleTableComponent {
+export class ManageUserRoleTableComponent {
   @Input() user!: OrganizationUser;
   @Input() entityType!: RegistrationEntityTypes;
 
