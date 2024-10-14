@@ -3,8 +3,10 @@
 <app-card>
   <app-overview-header>
     <h3>{{ getGridTitle() }}</h3>
-    <app-filter-options-button entityType="local-admin-organization"></app-filter-options-button>
-    <app-export-menu-button [showColumnsOnlyOption]="false" [exportMethod]="onExcelExport"></app-export-menu-button>
+    <ng-container *ngIf="selected === LocalAdminOrganizationOption.Organizations">
+      <app-filter-options-button entityType="local-admin-organization"></app-filter-options-button>
+      <app-export-menu-button [showColumnsOnlyOption]="false" [exportMethod]="onExcelExport"></app-export-menu-button>
+    </ng-container>
   </app-overview-header>
 
   <app-grid
@@ -20,5 +22,12 @@
   >
   </app-grid>
 
-  <app-paragraph *ngIf="selected === LocalAdminOrganizationOption.Roles"> PLACEHOLDER </app-paragraph>
+  <app-choice-type-table
+    *ngIf="selected === LocalAdminOrganizationOption.Roles"
+    title="Roller"
+    i18n-title
+    [disableAccordion]="true"
+    [expandedByDefault]="true"
+  >
+  </app-choice-type-table>
 </app-card>
