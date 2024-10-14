@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ChoiceTypeTableItem } from '../choice-type-table.component';
+import { ChoiceTypeTableItem, ChoiceTypeTableOption } from '../choice-type-table.component';
 import { MatDialogRef } from '@angular/material/dialog';
 import { FormControl, FormGroup } from '@angular/forms';
+import { ChoiceTypeService } from 'src/app/shared/services/choice-type.service';
 
 @Component({
   selector: 'app-edit-choice-type-dialog',
@@ -10,12 +11,16 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class EditChoiceTypeDialogComponent implements OnInit {
   @Input() choiceTypeItem!: ChoiceTypeTableItem;
+  @Input() type!: ChoiceTypeTableOption;
 
   public form = new FormGroup({
     description: new FormControl<string>(''),
   });
 
-  constructor(private dialogRef: MatDialogRef<EditChoiceTypeDialogComponent>) {}
+  constructor(
+    private dialogRef: MatDialogRef<EditChoiceTypeDialogComponent>,
+    private choiceTypeService: ChoiceTypeService
+  ) {}
 
   public ngOnInit(): void {
     this.form.patchValue({
@@ -23,7 +28,12 @@ export class EditChoiceTypeDialogComponent implements OnInit {
     });
   }
 
-  public onSave(): void {}
+  public onSave(): void {
+    const newDescription = this.form.value.description ?? undefined;
+    const newChoiceTypeItem: ChoiceTypeTableItem = { ...this.choiceTypeItem, description: newDescription };
+    this.choiceTypeService.updateChoiceType(newChoiceTypeItem, this.type);
+    this.dialogRef.close();
+  }
 
   public onCancel(): void {
     this.dialogRef.close();

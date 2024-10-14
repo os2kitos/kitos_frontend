@@ -10,19 +10,19 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let role of choiceTypeItems">
+        <tr *ngFor="let choiceType of choiceTypeItems">
           <td>
-            <app-boolean-circle [value]="role.active"></app-boolean-circle>
+            <app-boolean-circle [value]="choiceType.active"></app-boolean-circle>
           </td>
-          <td>{{ role.name }}</td>
+          <td>{{ choiceType.name }}</td>
           <td *ngIf="showWriteAccess">
-            <app-boolean-circle [value]="role.writeAccess"></app-boolean-circle>
+            <app-boolean-circle [value]="choiceType.writeAccess"></app-boolean-circle>
           </td>
           <td>
             <app-content-space-between>
-              <app-paragraph *ngIf="showDescription" i18n> {{ role.description }} </app-paragraph>
-              <app-table-row-actions *ngIf="showEditButton">
-                <app-icon-button (buttonClick)="onEdit(role)">
+              <app-paragraph *ngIf="showDescription" i18n> {{ choiceType.description }} </app-paragraph>
+              <app-table-row-actions *ngIf="showEditButton && !choiceType.obligatory">
+                <app-icon-button (buttonClick)="onEdit(choiceType)">
                   <app-pencil-icon></app-pencil-icon>
                 </app-icon-button>
               </app-table-row-actions>
