@@ -1,5 +1,5 @@
-import { createActionGroup, emptyProps } from '@ngrx/store';
-import { APIOrganizationGridPermissionsResponseDTO, APIOrganizationResponseDTO } from 'src/app/api/v2';
+import { createActionGroup, emptyProps, props } from '@ngrx/store';
+import { APIOrganizationGridPermissionsResponseDTO, APIOrganizationResponseDTO, APIOrganizationUpdateRequestDTO } from 'src/app/api/v2';
 import { Login } from 'src/app/shared/models/login.model';
 import { User } from 'src/app/shared/models/user.model';
 
@@ -21,11 +21,15 @@ export const UserActions = createActionGroup({
     'Update XSRF Token': (xsrfToken: string) => ({ xsrfToken }),
 
     'Get organizations for user': emptyProps(),
-    'Update organization': (organization?: APIOrganizationResponseDTO) => ({ organization }),
+    'Reset on organization update': (organization?: APIOrganizationResponseDTO) => ({ organization }),
     'Update has multiple organizations': (hasMultipleOrganizations: boolean) => ({ hasMultipleOrganizations }),
 
     'Get User Grid Permissions': emptyProps(),
-    'Get User Grid Permissions Success': (response: APIOrganizationGridPermissionsResponseDTO) =>  ({response}),
+    'Get User Grid Permissions Success': (response: APIOrganizationGridPermissionsResponseDTO) => ({ response }),
     'Get User Grid Permissions Error': emptyProps(),
+
+    'Patch organization': props<{ request: APIOrganizationUpdateRequestDTO }>(),
+    'Patch organization success': (organization: APIOrganizationResponseDTO) => organization,
+    'Patch organization error': emptyProps(),
   },
 });

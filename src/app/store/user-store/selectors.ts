@@ -14,6 +14,11 @@ const { selectUserState } = userFeature;
 
 export const selectOrganizationName = createSelector(selectOrganization, (organization) => organization?.name);
 export const selectOrganizationUuid = createSelector(selectOrganization, (organization) => organization?.uuid);
+export const selectOrganizationCvr = createSelector(selectOrganization, (organization) => organization?.cvr);
+export const selectOrganizationType = createSelector(
+  selectOrganization,
+  (organization) => organization?.organizationType
+);
 
 export const selectUserIsGlobalAdmin = createSelector(selectUser, (user) => user?.isGlobalAdmin ?? false);
 
@@ -27,4 +32,7 @@ export const selectHasCheckedUserAndOrganization = createSelector(
 
 export const selectGridPermissions = createSelector(selectUserState, (state) => state.gridPermissions);
 
-export const selectGridConfigModificationPermission = createSelector(selectGridPermissions, (permissions) => permissions?.hasConfigModificationPermissions);
+export const selectGridConfigModificationPermission = createSelector(
+  selectGridPermissions,
+  (permissions) => permissions?.hasConfigModificationPermissions
+);

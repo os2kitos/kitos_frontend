@@ -2,15 +2,15 @@
 
 describe('organization-master-data', () => {
   beforeEach(() => {
-    cy.intercept('/api/v2/internal/organizations/*/masterData', {
+    cy.intercept('api/v2/internal/organizations/*/master-data', {
       fixture: './organizations/organization-master-data.json',
     });
-    cy.intercept('/api/v2/internal/organizations/*/masterData/roles', {
+    cy.intercept('api/v2/internal/organizations/*/master-data/roles', {
       fixture: './organizations/organization-master-data-roles.json',
     });
-    cy.intercept('/api/v2/organizations/*/users', { fixture: './organizations/organization-users.json' });
-    cy.intercept('/api/v2/internal/organizations/*/permissions', {
-      fixture: './organizations/organization-permissions.json',
+    cy.intercept('api/v2/organizations/*/users', { fixture: './organizations/organization-users.json' });
+    cy.intercept('api/v2/internal/organizations/*/permissions', {
+      fixture: './organizations/organization-permissions-global-admin.json',
     });
 
     cy.setup(true, 'organization/master-data');
@@ -18,7 +18,7 @@ describe('organization-master-data', () => {
 
   it('Can edit organization master data', () => {
     const newPhone = '12345678';
-    cy.intercept('/api/v2/internal/organizations/*/masterData').as('patch');
+    cy.intercept('api/v2/internal/organizations/*/master-data/roles').as('patch');
 
     cy.getByDataCy('master-data-phone-input').type('{selectall}{backspace}').type(newPhone);
     cy.getByDataCy('master-data-headline').click();
@@ -30,7 +30,7 @@ describe('organization-master-data', () => {
 
   it('Can edit data responsible role master data', () => {
     const newCvr = '12345678';
-    cy.intercept('/api/v2/internal/organizations/*/masterData/roles').as('patch');
+    cy.intercept('api/v2/internal/organizations/*/master-data/roles').as('patch');
 
     cy.getByDataCy('data-responsible-cvr-input').type('{selectall}{backspace}').type(newCvr);
     cy.wait(500);

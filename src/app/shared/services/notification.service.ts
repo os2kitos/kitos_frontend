@@ -7,7 +7,7 @@ import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
-import { OrganizationMasterDataActions } from 'src/app/store/organization/organization-master-data/actions';
+import { OrganizationActions } from 'src/app/store/organization/actions';
 import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
 import { PopupMessageActions } from 'src/app/store/popup-messages/actions';
@@ -101,15 +101,18 @@ export class NotificationService implements OnDestroy {
     this.subscribeAsDefault(OrganizationUserActions.createUserSuccess, $localize`Bruger blev oprettet`);
     this.subscribeAsError(OrganizationUserActions.createUserError, $localize`Bruger kunne ikke oprettes`);
 
-    this.subscribeAsError(OrganizationMasterDataActions.getMasterDataError, this.getMasterDataError);
-    this.subscribeAsDefault(OrganizationMasterDataActions.patchMasterDataSuccess, this.patchMasterDataSuccess);
-    this.subscribeAsError(OrganizationMasterDataActions.patchMasterDataError, this.patchMasterDataError);
-    this.subscribeAsError(OrganizationMasterDataActions.getMasterDataRolesError, this.getMasterDataError);
-    this.subscribeAsDefault(OrganizationMasterDataActions.patchMasterDataRolesSuccess, this.patchMasterDataSuccess);
-    this.subscribeAsError(OrganizationMasterDataActions.patchMasterDataRolesError, this.patchMasterDataError);
+    this.subscribeAsError(OrganizationActions.getMasterDataError, this.getMasterDataError);
+    this.subscribeAsDefault(OrganizationActions.patchMasterDataSuccess, this.patchMasterDataSuccess);
+    this.subscribeAsError(OrganizationActions.patchMasterDataError, this.patchMasterDataError);
+    this.subscribeAsError(OrganizationActions.getMasterDataRolesError, this.getMasterDataError);
+    this.subscribeAsDefault(OrganizationActions.patchMasterDataRolesSuccess, this.patchMasterDataSuccess);
+    this.subscribeAsError(OrganizationActions.patchMasterDataRolesError, this.patchMasterDataError);
+
+    this.subscribeAsDefault(UserActions.patchOrganizationSuccess, $localize`Organisationen blev opdateret.`);
+    this.subscribeAsError(UserActions.patchOrganizationError, $localize`Kunne ikke opdatere organisation.`);
 
     this.subscribeAsError(
-      OrganizationMasterDataActions.getOrganizationPermissionsError,
+      OrganizationActions.getOrganizationPermissionsError,
       $localize`Kunne ikke hente organisationsrettigheder.`
     );
 

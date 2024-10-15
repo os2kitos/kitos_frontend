@@ -52,7 +52,7 @@ export const userFeature = createFeature({
 
     on(UserActions.updateXSRFToken, (state, { xsrfToken }): UserState => ({ ...state, xsrfToken })),
 
-    on(UserActions.updateOrganization, (state, { organization }): UserState => ({ ...state, organization })),
+    on(UserActions.resetOnOrganizationUpdate, (state, { organization }): UserState => ({ ...state, organization })),
     on(
       UserActions.updateHasMultipleOrganizations,
       (state, { hasMultipleOrganizations }): UserState => ({ ...state, hasMultipleOrganizations })
@@ -60,7 +60,8 @@ export const userFeature = createFeature({
 
     on(
       UserActions.getUserGridPermissionsSuccess,
-      (state, {response}): UserState => ({ ...state, gridPermissions: response })
-    )
+      (state, { response }): UserState => ({ ...state, gridPermissions: response })
+    ),
+    on(UserActions.patchOrganizationSuccess, (state, organization): UserState => ({ ...state, organization }))
   ),
 });

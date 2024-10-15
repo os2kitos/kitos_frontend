@@ -48,7 +48,7 @@ export class AppComponent extends BaseComponent implements OnInit {
         }
         // Automatically choose organization if user is only part of one or persisted organization exists
         else if (organization || organizations.length === 1) {
-          this.store.dispatch(UserActions.updateOrganization(organization ?? organizations[0]));
+          this.store.dispatch(UserActions.resetOnOrganizationUpdate(organization ?? organizations[0]));
         }
         // Force the user to choose on organization if user has not selected an organization or organization
         // selected does not exist anymore.
