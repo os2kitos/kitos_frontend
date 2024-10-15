@@ -50,7 +50,7 @@ export interface GetSingleItSystemUsageDataClassificationTypeV2GetV1RequestParam
 })
 export class APIV2ItSystemUsageDataClassificationTypeService {
 
-    protected basePath = 'https://localhost:44300';
+    protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;

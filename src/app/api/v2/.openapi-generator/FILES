@@ -52,6 +52,7 @@ api/v2OrganizationUnitRoleType.service.ts
 api/v2OrganizationUnitsInternalINTERNAL.service.ts
 api/v2OrganizationsInternalINTERNAL.service.ts
 api/v2PublicMessagesINTERNAL.service.ts
+api/v2StsOrganizationSynchronizationInternalINTERNAL.service.ts
 api/v2UsersInternalINTERNAL.service.ts
 configuration.ts
 encoder.ts
@@ -66,6 +67,7 @@ model/changePaymentRegistrationV2RequestDTO.ts
 model/columnConfigurationRequestDTO.ts
 model/columnConfigurationResponseDTO.ts
 model/commandPermissionResponseDTO.ts
+model/connectToStsOrganizationRequestDTO.ts
 model/contactPersonRequestDTO.ts
 model/contactPersonResponseDTO.ts
 model/contractAgreementPeriodDataResponseDTO.ts
@@ -96,6 +98,8 @@ model/createNewContractRequestDTO.ts
 model/createOrganizationUnitRequestDTO.ts
 model/createOrganizationUnitRoleAssignmentRequestDTO.ts
 model/createUserRequestDTO.ts
+model/customizedUINodeRequestDTO.ts
+model/customizedUINodeResponseDTO.ts
 model/dataProcessingRegistrationGeneralDataResponseDTO.ts
 model/dataProcessingRegistrationGeneralDataWriteRequestDTO.ts
 model/dataProcessingRegistrationOversightResponseDTO.ts
@@ -110,6 +114,7 @@ model/dataResponsibleRequestDTO.ts
 model/dataResponsibleResponseDTO.ts
 model/deactivationReasonRequestDTO.ts
 model/deleteOrganizationUnitRoleAssignmentRequestDTO.ts
+model/disconnectFromStsOrganizationRequestDTO.ts
 model/emailRecipientResponseDTO.ts
 model/emailRecipientWriteRequestDTO.ts
 model/expectedUsersIntervalDTO.ts
@@ -212,6 +217,8 @@ model/simpleLinkDTO.ts
 model/systemRelationWriteRequestDTO.ts
 model/trackingEventResponseDTO.ts
 model/transferOrganizationUnitRegistrationV2RequestDTO.ts
+model/uIModuleCustomizationRequestDTO.ts
+model/uIModuleCustomizationResponseDTO.ts
 model/unitAccessRightsResponseDTO.ts
 model/unitAccessRightsWithUnitDataResponseDTO.ts
 model/updateContractRequestDTO.ts
