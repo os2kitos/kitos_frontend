@@ -29,7 +29,7 @@ export class UserEffects {
     private cookieService: CookieService,
     @Inject(APIV2OrganizationGridInternalINTERNALService)
     private organizationGridService: APIV2OrganizationGridInternalINTERNALService,
-    private organizationInternalService: APIV2OrganizationsInternalINTERNALService
+    @Inject(APIV2OrganizationsInternalINTERNALService)private organizationInternalService: APIV2OrganizationsInternalINTERNALService
   ) {}
 
   login$ = createEffect(() => {
@@ -130,7 +130,7 @@ export class UserEffects {
       combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       switchMap(([{ request }, organizationUuid]) =>
         this.organizationInternalService
-          .patchSingleOrganizationsInternalV2UpdateOrganization({ organizationUuid, requestDto: request })
+          .patchSingleOrganizationsInternalV2PatchOrganization({ organizationUuid, requestDto: request })
           .pipe(
             map((organizationResponseDto) => UserActions.patchOrganizationSuccess(organizationResponseDto)),
             catchError(() => of(UserActions.patchOrganizationError()))

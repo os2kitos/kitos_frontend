@@ -1,26 +1,9 @@
-<app-segment [buttons]="segmentOptions" [(selected)]="selected"> </app-segment>
+<app-segment [buttons]="segmentOptions" [(selected)]="selectedSegment"> </app-segment>
 
 <app-card>
-  <app-overview-header>
-    <h3>{{ getGridTitle() }}</h3>
-    <ng-container *ngIf="selected === LocalAdminOrganizationOption.Organizations">
-      <app-filter-options-button entityType="local-admin-organization"></app-filter-options-button>
-      <app-export-menu-button [showColumnsOnlyOption]="false" [exportMethod]="onExcelExport"></app-export-menu-button>
-    </ng-container>
-  </app-overview-header>
 
-  <app-grid
-    *ngIf="selected === LocalAdminOrganizationOption.Organizations"
-    [data$]="gridData$"
-    [columns$]="gridColumns$"
-    exportToExcelName="Organisationer Overblik"
-    i18n-exportToExcelName
-    [loading]="isLoading$ | async"
-    [state]="gridState$ | async"
-    entityType="local-admin-organization"
-    (stateChange)="stateChange($event)"
-  >
-  </app-grid>
+  <app-organizations-grid *ngIf="selectedSegment === LocalAdminOrganizationSegmentOption.Organizations">
+  </app-organizations-grid>
 
   <app-choice-type-table
     type="organization-unit"
@@ -31,4 +14,5 @@
     [expandedByDefault]="true"
   >
   </app-choice-type-table>
+
 </app-card>

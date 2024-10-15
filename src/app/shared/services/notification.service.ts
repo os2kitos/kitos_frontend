@@ -111,6 +111,9 @@ export class NotificationService implements OnDestroy {
     this.subscribeAsDefault(OrganizationActions.patchMasterDataRolesSuccess, this.patchMasterDataSuccess);
     this.subscribeAsError(OrganizationActions.patchMasterDataRolesError, this.patchMasterDataError);
 
+    this.subscribeAsDefault(UserActions.patchOrganizationSuccess, $localize`Organisationen blev opdateret.`);
+    this.subscribeAsError(UserActions.patchOrganizationError, $localize`Kunne ikke opdatere organisation.`);
+
     this.subscribeAsError(
       OrganizationActions.getOrganizationPermissionsError,
       $localize`Kunne ikke hente organisationsrettigheder.`
@@ -307,66 +310,6 @@ export class NotificationService implements OnDestroy {
       $localize`Databehandlingen blev oprettet`
     );
 
-    this.subscriptions.add(
-      this.actions$
-        .pipe(ofType(OrganizationActions.getMasterDataError))
-        .subscribe(() => this.showError(this.getMasterDataError))
-    );
-
-    this.subscriptions.add(
-      this.actions$
-        .pipe(ofType(OrganizationActions.patchMasterDataSuccess))
-        .subscribe(() => this.showDefault(this.patchMasterDataSuccess))
-    );
-
-    this.subscriptions.add(
-      this.actions$
-        .pipe(ofType(OrganizationActions.patchMasterDataError))
-        .subscribe(() => this.showError(this.patchMasterDataError))
-    );
-
-    this.subscriptions.add(
-      this.actions$
-        .pipe(ofType(OrganizationActions.getMasterDataRolesError))
-        .subscribe(() => this.showError(this.getMasterDataError))
-    );
-
-    this.subscriptions.add(
-      this.actions$
-        .pipe(ofType(OrganizationActions.patchMasterDataRolesSuccess))
-        .subscribe(() => this.showDefault(this.patchMasterDataSuccess))
-    );
-
-    this.subscriptions.add(
-      this.actions$
-        .pipe(ofType(OrganizationActions.patchMasterDataRolesError))
-        .subscribe(() => this.showError(this.patchMasterDataError))
-    );
-
-    this.subscriptions.add(
-      this.actions$
-        .pipe(ofType(OrganizationActions.getOrganizationPermissionsError))
-        .subscribe(() => this.showError($localize`Kunne ikke hente organisationsrettigheder.`))
-    );
-
-    this.subscriptions.add(
-      this.actions$
-        .pipe(ofType(UserActions.patchOrganizationError))
-        .subscribe(() => this.showError($localize`Kunne ikke opdatere organisation.`))
-    );
-
-    this.subscriptions.add(
-      this.actions$
-        .pipe(ofType(UserActions.patchOrganizationSuccess))
-        .subscribe(() => this.showError($localize`Organisationen blev opdateret.`))
-    );
-
-    this.subscribeAsDefault(OrganizationUserActions.copyRolesSuccess, $localize`Roller kopieret`);
-    this.subscribeAsError(OrganizationUserActions.copyRolesError, $localize`Kunne ikke kopiere roller`);
-
-    this.subscribeToExternalReferenceManagementEvents();
-    this.subscribeToRoleNotifications();
-
     this.subscribeAsError(
       DataProcessingActions.createDataProcessingError,
       $localize`Databehandlingen kunne ikke oprettes`
@@ -389,11 +332,6 @@ export class NotificationService implements OnDestroy {
       DataProcessingActions.patchDataProcessingError,
       $localize`Databehandlingen kunne ikke slettes`
     );
-  }
-
-  private subscribeToLocalAdminNotifications(): void {
-    this.subscribeAsDefault(ChoiceTypeActions.updateChoiceTypeSuccess, $localize`Enhed opdateret`);
-    this.subscribeAsError(ChoiceTypeActions.updateChoiceTypeError, $localize`Enhed kunne ikke opdateres`);
   }
   /**
    * Consolidates notifications related to the "roles" which is used in multiple different modules

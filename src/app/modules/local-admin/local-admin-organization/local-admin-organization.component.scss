@@ -1,9 +1,8 @@
 @import 'theme';
+@import "mixins.scss";
 
 :host {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
+  @include page-flex-layout-max-width;
 }
 
 app-segment {

@@ -128,7 +128,6 @@ import { APIV1OrganizationUnitRegistrationINTERNALService } from './api/v1Organi
 import { APIV1OrganizationUnitRightINTERNALService } from './api/v1OrganizationUnitRightINTERNAL.service';
 import { APIV1PasswordResetRequestINTERNALService } from './api/v1PasswordResetRequestINTERNAL.service';
 import { APIV1ReferenceINTERNALService } from './api/v1ReferenceINTERNAL.service';
-import { APIV1StsOrganizationSynchronizationINTERNALService } from './api/v1StsOrganizationSynchronizationINTERNAL.service';
 import { APIV1SystemRelationINTERNALService } from './api/v1SystemRelationINTERNAL.service';
 import { APIV1TaskRefINTERNALService } from './api/v1TaskRefINTERNAL.service';
 import { APIV1TextINTERNALService } from './api/v1TextINTERNAL.service';
