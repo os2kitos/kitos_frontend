@@ -307,9 +307,6 @@ export class NotificationService implements OnDestroy {
       $localize`Databehandlingen blev oprettet`
     );
 
-    this.subscribeToExternalReferenceManagementEvents();
-    this.subscribeToRoleNotifications();
-
     this.subscribeAsError(
       DataProcessingActions.createDataProcessingError,
       $localize`Databehandlingen kunne ikke oprettes`
