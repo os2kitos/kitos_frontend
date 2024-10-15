@@ -48,6 +48,11 @@ export class NotificationService implements OnDestroy {
     this.subscribeToRoleNotifications();
   }
 
+  private subscribeToLocalAdminNotifications() {
+    this.subscribeAsDefault(ChoiceTypeActions.updateChoiceTypeSuccess, $localize`Enheden blev opdateret`);
+    this.subscribeAsError(ChoiceTypeActions.updateChoiceTypeError, $localize`Enheden kunne ikke opdateres`);
+  }
+
   private subscribeToOrganizationEvents() {
     this.subscribeAsDefault(OrganizationUnitActions.deleteOrganizationUnitSuccess, $localize`Enheden blev slettet!`);
     this.subscribeAsError(
