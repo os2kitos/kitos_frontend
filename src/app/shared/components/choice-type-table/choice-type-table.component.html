@@ -1,6 +1,7 @@
 <ng-container *ngIf="choiceTypeItems$ | async as choiceTypeItems">
   <app-accordion [title]="title" [disabled]="disableAccordion" [isExpandedByDefault]="expandedByDefault">
-    <app-native-table tableLayout="fixed">
+    <app-loading *ngIf="isLoading$ | async"></app-loading>
+    <app-native-table *ngIf="(isLoading$ | async) === false" tableLayout="fixed">
       <thead>
         <tr>
           <th i18n>Aktiv</th>

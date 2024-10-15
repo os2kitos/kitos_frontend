@@ -3,9 +3,6 @@ import { ComponentStore } from '@ngrx/component-store';
 import { concatLatestFrom, tapResponse } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { map, Observable, switchMap, tap } from 'rxjs';
-import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
-import { filterNullish } from '../../pipes/filter-nullish';
-import { ChoiceTypeTableItem, ChoiceTypeTableOption } from './choice-type-table.component';
 import {
   APIRoleOptionResponseDTO,
   APIV2DataProcessingRegistrationRoleTypeService,
@@ -13,9 +10,12 @@ import {
   APIV2ItSystemUsageRoleTypeService,
   APIV2OrganizationUnitRoleTypeService,
 } from 'src/app/api/v2';
+import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
+import { filterNullish } from '../../pipes/filter-nullish';
+import { ChoiceTypeTableItem, ChoiceTypeTableOption } from './choice-type-table.component';
 
 interface State {
-  loading: boolean;
+  isLoading: boolean;
   choiceTypeItems: ChoiceTypeTableItem[];
   type: ChoiceTypeTableOption;
 }
@@ -24,7 +24,7 @@ interface State {
 export class ChoiceTypeTableComponentStore extends ComponentStore<State> {
   public readonly choiceTypeItems$ = this.select((state) => state.choiceTypeItems);
   public readonly type$ = this.select((state) => state.type);
-  public readonly loading$ = this.select((state) => state.loading);
+  public readonly isLoading$ = this.select((state) => state.isLoading);
 
   constructor(
     private readonly store: Store,
@@ -46,50 +46,9 @@ export class ChoiceTypeTableComponentStore extends ComponentStore<State> {
   private updateIsLoading = this.updater(
     (state: State, loading: boolean): State => ({
       ...state,
-      loading,
+      isLoading: loading,
     })
   );
-
-  private mockData(): ChoiceTypeTableItem[] {
-    return [
-      {
-        active: true,
-        name: 'En rolle',
-        writeAccess: false,
-        description: 'Dette er en beskrivelse',
-        id: 0,
-        uuid: 'uuid1',
-        obligatory: false,
-      },
-      {
-        active: false,
-        name: 'En anden rolle',
-        writeAccess: true,
-        description: 'Dette er en anden beskrivelse',
-        id: 1,
-        uuid: 'uuid2',
-        obligatory: false,
-      },
-      {
-        active: true,
-        name: 'Et meget meget meget meget meget meget meget langt navn for en rolle',
-        writeAccess: true,
-        description: 'Dette er en meget meget meget meget meget meget meget lang beskrivelse',
-        id: 2,
-        uuid: 'uuid3',
-        obligatory: false,
-      },
-      {
-        active: true,
-        name: 'En obligatorisk rolle',
-        writeAccess: true,
-        description: 'Denne rolle er obligatorisk',
-        id: 3,
-        uuid: 'uuid4',
-        obligatory: true,
-      },
-    ];
-  }
 
   private getApiCallByType(
     type: ChoiceTypeTableOption,
@@ -123,7 +82,6 @@ export class ChoiceTypeTableComponentStore extends ComponentStore<State> {
       name: dto.name,
       writeAccess: dto.writeAccess ?? false,
       description: dto.description,
-      id: 0, //TODO: Should ID be removed from the interface?
       uuid: dto.uuid,
       obligatory: false,
     };
@@ -137,9 +95,14 @@ export class ChoiceTypeTableComponentStore extends ComponentStore<State> {
         this.getChoiceItemsObservable().pipe(
           map((items) => items.map(this.mapDtoToChoiceType)),
           tapResponse(
-            (mappedItems) => this.updateItems(mappedItems),
-            (error) => console.error(error),
-            () => this.updateIsLoading(false)
+            (mappedItems) => {
+              this.updateItems(mappedItems);
+              this.updateIsLoading(false);
+            },
+            (error) => {
+              console.error(error);
+              this.updateIsLoading(false);
+            }
           )
         )
       )
