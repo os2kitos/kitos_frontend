@@ -8,6 +8,7 @@ import { compact } from 'lodash';
 import { catchError, combineLatestWith, map, mergeMap, of, switchMap } from 'rxjs';
 import { APIBusinessRoleDTO, APIV1DataProcessingRegistrationINTERNALService } from 'src/app/api/v1';
 import {
+  APIDataProcessingRegistrationGeneralDataWriteRequestDTO,
   APIDataProcessingRegistrationOversightWriteRequestDTO,
   APIDataProcessingRegistrationResponseDTO,
   APIDataProcessorRegistrationSubDataProcessorResponseDTO,
@@ -216,9 +217,11 @@ export class DataProcessingEffects {
         const countries = existingCountries ? [...existingCountries] : [];
         countries.push(country);
         const countryUuids = countries.map((country) => country.uuid);
+        const transferToInsecureThirdCountries =
+          APIDataProcessingRegistrationGeneralDataWriteRequestDTO.TransferToInsecureThirdCountriesEnum.Yes;
         return of(
           DataProcessingActions.patchDataProcessing({
-            general: { insecureCountriesSubjectToDataTransferUuids: countryUuids },
+            general: { transferToInsecureThirdCountries, insecureCountriesSubjectToDataTransferUuids: countryUuids },
           })
         );
       })
@@ -233,9 +236,10 @@ export class DataProcessingEffects {
         const listWithoutCountry = countries
           .filter((country) => country.uuid !== countryUuid)
           .map((country) => country.uuid);
+        const transferToInsecureThirdCountries = listWithoutCountry.length > 0 ? 'Yes' : 'No' as APIDataProcessingRegistrationGeneralDataWriteRequestDTO.TransferToInsecureThirdCountriesEnum;
         return of(
           DataProcessingActions.patchDataProcessing({
-            general: { insecureCountriesSubjectToDataTransferUuids: listWithoutCountry },
+            general: { transferToInsecureThirdCountries, insecureCountriesSubjectToDataTransferUuids: listWithoutCountry },
           })
         );
       })
@@ -359,7 +363,9 @@ export class DataProcessingEffects {
             request: { userUuid: userUuid, roleUuid: roleUuid },
           })
           .pipe(
-            map((usage) => DataProcessingActions.removeDataProcessingRoleSuccess(usage, userUuid, roleUuid, dataProcessingUuid)),
+            map((usage) =>
+              DataProcessingActions.removeDataProcessingRoleSuccess(usage, userUuid, roleUuid, dataProcessingUuid)
+            ),
             catchError(() => of(DataProcessingActions.removeDataProcessingRoleError()))
           )
       )

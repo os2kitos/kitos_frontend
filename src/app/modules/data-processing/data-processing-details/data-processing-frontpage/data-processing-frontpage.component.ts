@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, combineLatestWith, first, map } from 'rxjs';
+import { BehaviorSubject, combineLatestWith, map } from 'rxjs';
 import { APIIdentityNamePairResponseDTO, APIUpdateDataProcessingRegistrationRequestDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { optionalNewDate } from 'src/app/shared/helpers/date.helpers';
@@ -19,7 +19,6 @@ import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import {
   selectDataProcessing,
   selectDataProcessingHasModifyPermissions,
-  selectDataProcessingTransferToCountries,
 } from 'src/app/store/data-processing/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
@@ -141,20 +140,6 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
     );
   }
 
-  public deleteTest() {
-    this.subscriptions.add(
-      this.store
-        .select(selectDataProcessingTransferToCountries)
-        .pipe(filterNullish(), first())
-        .subscribe((countries) => {
-          this.store.dispatch(
-            DataProcessingActions.patchDataProcessing({
-              general: { insecureCountriesSubjectToDataTransferUuids: [] },
-            })
-          );
-        })
-    );
-  }
   public patchFrontPage(
     frontpage: APIUpdateDataProcessingRegistrationRequestDTO,
     valueChange?: ValidatedValueChange<unknown>
@@ -177,11 +162,6 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
   public patchAgreementConcluded(value: YesNoIrrelevantEnum | undefined) {
     this.agreementConcludedValue$.next(value);
     this.patchFrontPage({ general: { isAgreementConcluded: value } });
-  }
-
-  public patchTransferTo3rdCountryValue(value: YesNoEnum | undefined) {
-    this.transferTo3rdCountryValue$.next(value);
-    this.patchFrontPage({ general: { transferToInsecureThirdCountries: value } });
   }
 
   public patchHasSubprocessorsValue(value: YesNoEnum | undefined) {
