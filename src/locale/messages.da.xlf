@@ -5163,21 +5163,17 @@
         <source>Organisationer i Kitos</source>
         <target state="new">Organisationer i Kitos</target>
       </trans-unit>
-      <trans-unit id="4279755849391914558" datatype="html">
-        <source>Roller i din organisation</source>
-        <target state="new">Roller i din organisation</target>
-      </trans-unit>
       <trans-unit id="616679104901444882" datatype="html">
         <source>Organisationer</source>
         <target state="new">Organisationer</target>
       </trans-unit>
-      <trans-unit id="5324312334991907732" datatype="html">
-        <source>Enhed opdateret</source>
-        <target state="new">Enhed opdateret</target>
+      <trans-unit id="1318146097476362841" datatype="html">
+        <source>Enheden kunne ikke opdateres</source>
+        <target state="new">Enheden kunne ikke opdateres</target>
       </trans-unit>
-      <trans-unit id="540558451093277721" datatype="html">
-        <source>Enhed kunne ikke opdateres</source>
-        <target state="new">Enhed kunne ikke opdateres</target>
+      <trans-unit id="5097144162233589680" datatype="html">
+        <source>Enheden blev opdateret</source>
+        <target state="new">Enheden blev opdateret</target>
       </trans-unit>
     </body>
   </file>
