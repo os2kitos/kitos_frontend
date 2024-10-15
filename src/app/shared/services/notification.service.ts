@@ -307,60 +307,6 @@ export class NotificationService implements OnDestroy {
       $localize`Databehandlingen blev oprettet`
     );
 
-    this.subscriptions.add(
-      this.actions$
-        .pipe(ofType(OrganizationActions.getMasterDataError))
-        .subscribe(() => this.showError(this.getMasterDataError))
-    );
-
-    this.subscriptions.add(
-      this.actions$
-        .pipe(ofType(OrganizationActions.patchMasterDataSuccess))
-        .subscribe(() => this.showDefault(this.patchMasterDataSuccess))
-    );
-
-    this.subscriptions.add(
-      this.actions$
-        .pipe(ofType(OrganizationActions.patchMasterDataError))
-        .subscribe(() => this.showError(this.patchMasterDataError))
-    );
-
-    this.subscriptions.add(
-      this.actions$
-        .pipe(ofType(OrganizationActions.getMasterDataRolesError))
-        .subscribe(() => this.showError(this.getMasterDataError))
-    );
-
-    this.subscriptions.add(
-      this.actions$
-        .pipe(ofType(OrganizationActions.patchMasterDataRolesSuccess))
-        .subscribe(() => this.showDefault(this.patchMasterDataSuccess))
-    );
-
-    this.subscriptions.add(
-      this.actions$
-        .pipe(ofType(OrganizationActions.patchMasterDataRolesError))
-        .subscribe(() => this.showError(this.patchMasterDataError))
-    );
-
-    this.subscriptions.add(
-      this.actions$
-        .pipe(ofType(OrganizationActions.getOrganizationPermissionsError))
-        .subscribe(() => this.showError($localize`Kunne ikke hente organisationsrettigheder.`))
-    );
-
-    this.subscriptions.add(
-      this.actions$
-        .pipe(ofType(UserActions.patchOrganizationError))
-        .subscribe(() => this.showError($localize`Kunne ikke opdatere organisation.`))
-    );
-
-    this.subscriptions.add(
-      this.actions$
-        .pipe(ofType(UserActions.patchOrganizationSuccess))
-        .subscribe(() => this.showError($localize`Organisationen blev opdateret.`))
-    );
-
     this.subscribeAsDefault(OrganizationUserActions.copyRolesSuccess, $localize`Roller kopieret`);
     this.subscribeAsError(OrganizationUserActions.copyRolesError, $localize`Kunne ikke kopiere roller`);
 
