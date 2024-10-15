@@ -1,24 +1,8 @@
-<app-segment [buttons]="segmentOptions" [(selected)]="selected"> </app-segment>
+<app-segment [buttons]="segmentOptions" [(selected)]="selectedSegment"> </app-segment>
 
 <app-card>
-  <app-overview-header>
-    <h3>{{ getGridTitle() }}</h3>
-    <app-filter-options-button entityType="local-admin-organization"></app-filter-options-button>
-    <app-export-menu-button [showColumnsOnlyOption]="false" [exportMethod]="onExcelExport"></app-export-menu-button>
-  </app-overview-header>
+  <app-organizations-grid *ngIf="selectedSegment === LocalAdminOrganizationSegmentOption.Organizations">
+  </app-organizations-grid>
 
-  <app-grid
-    *ngIf="selected === LocalAdminOrganizationOption.Organizations"
-    [data$]="gridData$"
-    [columns$]="gridColumns$"
-    exportToExcelName="Organisationer Overblik"
-    i18n-exportToExcelName
-    [loading]="isLoading$ | async"
-    [state]="gridState$ | async"
-    entityType="local-admin-organization"
-    (stateChange)="stateChange($event)"
-  >
-  </app-grid>
-
-  <app-paragraph *ngIf="selected === LocalAdminOrganizationOption.Roles"> PLACEHOLDER </app-paragraph>
+  <app-paragraph *ngIf="selectedSegment === LocalAdminOrganizationSegmentOption.Roles"> PLACEHOLDER </app-paragraph>
 </app-card>

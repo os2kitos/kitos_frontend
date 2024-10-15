@@ -9,25 +9,32 @@ export interface Organization {
 
 export interface OrganizationType {
   name: string;
-  value: number;
+  value: OrganizationTypeEnum;
+}
+
+export enum OrganizationTypeEnum {
+  Municipality = 1,
+  CommunityOfInterest = 2,
+  Company = 3,
+  OtherPublicAuthority = 4,
 }
 
 export const organizationTypeOptions: OrganizationType[] = [
   {
-    name: 'Kommune',
-    value: 1,
+    name: $localize`Kommune`,
+    value: OrganizationTypeEnum.Municipality,
   },
   {
-    name: 'Interessefællesskab',
-    value: 2,
+    name: $localize`Interessefællesskab`,
+    value: OrganizationTypeEnum.CommunityOfInterest,
   },
   {
-    name: 'Virksomhed',
-    value: 3,
+    name: $localize`Virksomhed`,
+    value: OrganizationTypeEnum.Company,
   },
   {
-    name: 'Anden offentlig myndighed',
-    value: 4,
+    name: $localize`Anden offentlig myndighed`,
+    value: OrganizationTypeEnum.OtherPublicAuthority,
   },
 ];
 

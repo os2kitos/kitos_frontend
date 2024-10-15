@@ -153,5 +153,5 @@ export class OrganizationEffects {
   });
 }
 function applyQueryFixes(odataString: string) {
-  return odataString.replace('ForeignBusiness', 'ForeignCvr').replace('OrganizationType', 'TypeId');
+  return odataString.replaceAll('ForeignBusiness', 'ForeignCvr').replaceAll('OrganizationType', 'TypeId');
 }
