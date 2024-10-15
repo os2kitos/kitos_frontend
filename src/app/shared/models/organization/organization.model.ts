@@ -14,19 +14,19 @@ export interface OrganizationType {
 
 export const organizationTypeOptions: OrganizationType[] = [
   {
-    name: 'Kommune',
+    name: $localize`Kommune`,
     value: 1,
   },
   {
-    name: 'Interessefællesskab',
+    name: $localize`Interessefællesskab`,
     value: 2,
   },
   {
-    name: 'Virksomhed',
+    name: $localize`Virksomhed`,
     value: 3,
   },
   {
-    name: 'Anden offentlig myndighed',
+    name: $localize`Anden offentlig myndighed`,
     value: 4,
   },
 ];
