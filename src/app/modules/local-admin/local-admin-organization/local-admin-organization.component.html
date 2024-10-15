@@ -1,18 +1,16 @@
 <app-segment [buttons]="segmentOptions" [(selected)]="selectedSegment"> </app-segment>
 
 <app-card>
-
   <app-organizations-grid *ngIf="selectedSegment === LocalAdminOrganizationSegmentOption.Organizations">
   </app-organizations-grid>
 
   <app-choice-type-table
     type="organization-unit"
-    *ngIf="selected === LocalAdminOrganizationOption.Roles"
+    *ngIf="selectedSegment === LocalAdminOrganizationSegmentOption.Roles"
     title="Roller"
     i18n-title
     [disableAccordion]="true"
     [expandedByDefault]="true"
   >
   </app-choice-type-table>
-
 </app-card>
