@@ -5128,8 +5128,8 @@
         <target state="new"> Slet bruger </target>
       </trans-unit>
       <trans-unit id="7661266723054940833" datatype="html">
-        <source>Information om <x id="INTERPOLATION" equiv-text="{{organizationName}}"/></source>
-        <target state="new">Information om <x id="INTERPOLATION" equiv-text="{{organizationName}}"/></target>
+        <source>Information om <x id="INTERPOLATION" equiv-text="{{ organizationName }}"/></source>
+        <target state="new">Information om <x id="INTERPOLATION" equiv-text="{{ organizationName }}"/></target>
       </trans-unit>
       <trans-unit id="4335783776773944989" datatype="html">
         <source>Kommune</source>
@@ -5154,6 +5154,18 @@
       <trans-unit id="3700126250923289975" datatype="html">
         <source>Kunne ikke opdatere organisation.</source>
         <target state="new">Kunne ikke opdatere organisation.</target>
+      </trans-unit>
+      <trans-unit id="616679104901444882" datatype="html">
+        <source>Organisationer</source>
+        <target state="new">Organisationer</target>
+      </trans-unit>
+      <trans-unit id="4778572585249502542" datatype="html">
+        <source>Organisationer i Kitos</source>
+        <target state="new">Organisationer i Kitos</target>
+      </trans-unit>
+      <trans-unit id="4279755849391914558" datatype="html">
+        <source>Roller i din organisation</source>
+        <target state="new">Roller i din organisation</target>
       </trans-unit>
     </body>
   </file>
