@@ -3958,6 +3958,12 @@
       <trans-unit id="616679104901444882" datatype="html">
         <source>Organisationer</source>
       </trans-unit>
+      <trans-unit id="5324312334991907732" datatype="html">
+        <source>Enhed opdateret</source>
+      </trans-unit>
+      <trans-unit id="540558451093277721" datatype="html">
+        <source>Enhed kunne ikke opdateres</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

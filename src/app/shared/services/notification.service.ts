@@ -14,6 +14,7 @@ import { PopupMessageActions } from 'src/app/store/popup-messages/actions';
 import { UserActions } from 'src/app/store/user-store/actions';
 import { PopupMessageType } from '../enums/popup-message-type';
 import { createPopupMessage } from '../models/popup-messages/popup-message.model';
+import { ChoiceTypeActions } from 'src/app/store/choice-types/actions';
 
 @Injectable({ providedIn: 'root' })
 export class NotificationService implements OnDestroy {
@@ -40,6 +41,8 @@ export class NotificationService implements OnDestroy {
     this.subscribeToItSystemEvents();
     this.subscribeToItContractEvents();
     this.subscribeToDprEvents();
+
+    this.subscribeToLocalAdminNotifications();
 
     this.subscribeToExternalReferenceManagementEvents();
     this.subscribeToRoleNotifications();
@@ -361,7 +364,6 @@ export class NotificationService implements OnDestroy {
     this.subscribeAsDefault(OrganizationUserActions.copyRolesSuccess, $localize`Roller kopieret`);
     this.subscribeAsError(OrganizationUserActions.copyRolesError, $localize`Kunne ikke kopiere roller`);
 
-
     this.subscribeToExternalReferenceManagementEvents();
     this.subscribeToRoleNotifications();
 
@@ -387,7 +389,11 @@ export class NotificationService implements OnDestroy {
       DataProcessingActions.patchDataProcessingError,
       $localize`Databehandlingen kunne ikke slettes`
     );
+  }
 
+  private subscribeToLocalAdminNotifications(): void {
+    this.subscribeAsDefault(ChoiceTypeActions.updateChoiceTypeSuccess, $localize`Enhed opdateret`);
+    this.subscribeAsError(ChoiceTypeActions.updateChoiceTypeError, $localize`Enhed kunne ikke opdateres`);
   }
   /**
    * Consolidates notifications related to the "roles" which is used in multiple different modules

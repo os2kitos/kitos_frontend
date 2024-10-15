@@ -5,8 +5,9 @@ import { ChoiceTypeTableComponentStore } from './choice-type-table.component-sto
 import { MatDialog } from '@angular/material/dialog';
 import { EditChoiceTypeDialogComponent } from './edit-choice-type-dialog/edit-choice-type-dialog.component';
 import { BaseComponent } from '../../base/base.component';
-import { Actions } from '@ngrx/effects';
+import { Actions, ofType } from '@ngrx/effects';
 import { ChoiceTypeService } from '../../services/choice-type.service';
+import { ChoiceTypeActions } from 'src/app/store/choice-types/actions';
 
 @Component({
   selector: 'app-choice-type-table',
@@ -38,6 +39,12 @@ export class ChoiceTypeTableComponent extends BaseComponent implements OnInit {
   public ngOnInit(): void {
     this.componentStore.setState({ loading: false, choiceTypeItems: [], type: this.type });
     this.componentStore.getChoiceTypeItems();
+
+    this.subscriptions.add(
+      this.actions$.pipe(ofType(ChoiceTypeActions.updateChoiceTypeSuccess)).subscribe(() => {
+        this.componentStore.getChoiceTypeItems();
+      })
+    );
   }
 
   public onEdit(choiceType: ChoiceTypeTableItem): void {

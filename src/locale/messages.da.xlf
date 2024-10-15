@@ -5167,6 +5167,14 @@
         <source>Organisationer</source>
         <target state="new">Organisationer</target>
       </trans-unit>
+      <trans-unit id="5324312334991907732" datatype="html">
+        <source>Enhed opdateret</source>
+        <target state="new">Enhed opdateret</target>
+      </trans-unit>
+      <trans-unit id="540558451093277721" datatype="html">
+        <source>Enhed kunne ikke opdateres</source>
+        <target state="new">Enhed kunne ikke opdateres</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
