@@ -1,13 +1,19 @@
 @import "theme";
+@import 'mixins';
 
 :host {
   display: flex;
   flex-direction: column;
-  max-width: $content-width-max;
-  margin: $padding-large;
+  padding: $padding-large;
 }
 
 .content {
   display: flex;
   gap: $padding-medium;
+  margin-top: 20px;
+}
+
+.title-margin {
+  margin-top: 25px;
+  margin-left: 10px;
 }

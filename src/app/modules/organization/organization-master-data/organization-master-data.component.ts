@@ -13,13 +13,13 @@ import { IdentityNamePair } from 'src/app/shared/models/identity-name-pair.model
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { NotificationService } from 'src/app/shared/services/notification.service';
-import { OrganizationMasterDataActions } from 'src/app/store/organization/organization-master-data/actions';
+import { OrganizationActions } from 'src/app/store/organization/actions';
 import {
   selectOrganizationHasModifyCvrPermission,
   selectOrganizationHasModifyPermission,
   selectOrganizationMasterData,
   selectOrganizationMasterDataRoles,
-} from 'src/app/store/organization/organization-master-data/selectors';
+} from 'src/app/store/organization/selectors';
 import { selectOrganizationName, selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 import { OrganizationMasterDataComponentStore } from './organization-master-data.component-store';
 
@@ -74,19 +74,17 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
   }
 
   ngOnInit(): void {
-    this.store.dispatch(OrganizationMasterDataActions.getMasterData());
-    this.store.dispatch(OrganizationMasterDataActions.getMasterDataRoles());
-    this.store.dispatch(OrganizationMasterDataActions.getOrganizationPermissions());
+    this.store.dispatch(OrganizationActions.getMasterData());
+    this.store.dispatch(OrganizationActions.getMasterDataRoles());
+    this.store.dispatch(OrganizationActions.getOrganizationPermissions());
 
     this.setupFormData();
     this.setupAccessControl();
   }
 
-  private setupAccessControl(){
+  private setupAccessControl() {
     this.subscriptions.add(
-      this.hasOrganizationCvrModifyPermission$
-      .pipe(filterNullish())
-      .subscribe((hasOrganizationCvrModifyPermission) => {
+      this.hasOrganizationCvrModifyPermission$.pipe(filterNullish()).subscribe((hasOrganizationCvrModifyPermission) => {
         if (!hasOrganizationCvrModifyPermission) this.masterDataForm.controls.cvrControl.disable();
       })
     );
@@ -171,7 +169,7 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
     if (valueChange && !valueChange.valid) {
       this.notificationService.showError($localize`"${valueChange.text}" er ugyldig`);
     } else {
-      this.store.dispatch(OrganizationMasterDataActions.patchMasterData({ request: masterData }));
+      this.store.dispatch(OrganizationActions.patchMasterData({ request: masterData }));
     }
   }
 
@@ -185,7 +183,7 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
       dataResponsible.name = controls.nameControl.value ?? undefined;
       dataResponsible.phone = controls.phoneControl.value ?? undefined;
 
-      this.store.dispatch(OrganizationMasterDataActions.patchMasterDataRoles({ request: { dataResponsible } }));
+      this.store.dispatch(OrganizationActions.patchMasterDataRoles({ request: { dataResponsible } }));
     }
   }
 
@@ -200,7 +198,7 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
       dataProtectionAdvisor.phone = controls.phoneControl.value ?? undefined;
 
       this.store.dispatch(
-        OrganizationMasterDataActions.patchMasterDataRoles({
+        OrganizationActions.patchMasterDataRoles({
           request: { dataProtectionAdvisor },
         })
       );
@@ -225,7 +223,7 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
       contactPerson.phoneNumber = controls.phoneControl.value ?? undefined;
 
       this.store.dispatch(
-        OrganizationMasterDataActions.patchMasterDataRoles({
+        OrganizationActions.patchMasterDataRoles({
           request: { contactPerson },
         })
       );

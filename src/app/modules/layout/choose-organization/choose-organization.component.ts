@@ -43,7 +43,7 @@ export class ChooseOrganizationComponent implements OnInit {
       .pipe(first())
       .subscribe((organizationUuid) => {
         if (organization.uuid !== organizationUuid) {
-          this.store.dispatch(UserActions.updateOrganization(organization));
+          this.store.dispatch(UserActions.resetOnOrganizationUpdate(organization));
         }
         this.dialog.close();
       });

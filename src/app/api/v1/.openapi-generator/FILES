@@ -129,7 +129,6 @@ api/v1OrganizationUnitRegistrationINTERNAL.service.ts
 api/v1OrganizationUnitRightINTERNAL.service.ts
 api/v1PasswordResetRequestINTERNAL.service.ts
 api/v1ReferenceINTERNAL.service.ts
-api/v1StsOrganizationSynchronizationINTERNAL.service.ts
 api/v1SystemRelationINTERNAL.service.ts
 api/v1TaskRefINTERNAL.service.ts
 api/v1TextINTERNAL.service.ts

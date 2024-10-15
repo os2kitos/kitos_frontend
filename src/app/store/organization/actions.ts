@@ -4,8 +4,8 @@ import { OrganizationMasterDataRoles } from 'src/app/shared/models/organization/
 import { OrganizationMasterData } from 'src/app/shared/models/organization/organization-master-data/organization-master-data.model';
 import { OrganizationPermissions } from 'src/app/shared/models/organization/organization-permissions.model';
 
-export const OrganizationMasterDataActions = createActionGroup({
-  source: 'OrganizationMasterData',
+export const OrganizationActions = createActionGroup({
+  source: 'Organization',
   events: {
     'Get master data': emptyProps(),
     'Get master data success': (organizationMasterData: OrganizationMasterData) => organizationMasterData,
@@ -27,7 +27,6 @@ export const OrganizationMasterDataActions = createActionGroup({
 
     'Get Organization Permissions': emptyProps(),
     'Get Organization Permissions Success ': (permissions: OrganizationPermissions) => permissions,
-
     'Get Organization Permissions Error': emptyProps(),
   },
 });

@@ -22,6 +22,12 @@
   padding: $padding-large $padding-medium 0 $padding-medium;
 }
 
+@mixin page-flex-layout-max-width {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
 @mixin mat-input-adjustment {
   --mdc-typography-subtitle1-font-size: var(--font-size);
   --mdc-typography-body1-font-size: var(--font-size);
