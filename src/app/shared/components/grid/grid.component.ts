@@ -99,11 +99,15 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
 
     this.initializeFilterSubscriptions();
 
-    this.subscriptions.add(
-      this.actions$.pipe(ofType(this.getResetGridConfigAction())).subscribe(() => {
-        this.store.dispatch(getApplyFilterAction(this.entityType)({ filter: undefined, sort: undefined }));
-      })
-    );
+    const resetGridAction = this.getResetGridConfigAction();
+
+    if (resetGridAction) {
+      this.subscriptions.add(
+        this.actions$.pipe(ofType(resetGridAction)).subscribe(() => {
+          this.store.dispatch(getApplyFilterAction(this.entityType)({ filter: undefined, sort: undefined }));
+        })
+      );
+    }
 
     const sort: SortDescriptor[] = this.getLocalStorageSort();
     if (!sort) return;
@@ -405,7 +409,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
       case 'organization-user':
         return OrganizationUserActions.resetGridConfiguration;
       default:
-        throw new Error(`No reset action defined for entity type: ${this.entityType}`);
+        return undefined;
     }
   }
 }

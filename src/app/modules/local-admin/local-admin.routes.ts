@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { LocalAdminInformationComponent } from './local-admin-information/local-admin-information.component';
 import { LocalAdminComponent } from './local-admin.component';
+import { LocalAdminOrganizationComponent } from './local-admin-organization/local-admin-organization.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,10 @@ const routes: Routes = [
       {
         path: AppPath.information,
         component: LocalAdminInformationComponent,
+      },
+      {
+        path: AppPath.organization,
+        component: LocalAdminOrganizationComponent,
       },
     ],
   },

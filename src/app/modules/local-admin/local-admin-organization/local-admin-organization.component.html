@@ -1,0 +1,8 @@
+<app-segment [buttons]="segmentOptions" [(selected)]="selectedSegment"> </app-segment>
+
+<app-card>
+  <app-organizations-grid *ngIf="selectedSegment === LocalAdminOrganizationSegmentOption.Organizations">
+  </app-organizations-grid>
+
+  <app-paragraph *ngIf="selectedSegment === LocalAdminOrganizationSegmentOption.Roles"> PLACEHOLDER </app-paragraph>
+</app-card>

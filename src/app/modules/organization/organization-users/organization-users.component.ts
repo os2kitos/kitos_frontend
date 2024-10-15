@@ -36,6 +36,7 @@ import { UserInfoDialogComponent } from './user-info-dialog/user-info-dialog.com
   templateUrl: './organization-users.component.html',
   styleUrl: './organization-users.component.scss',
 })
+
 export class OrganizationUsersComponent extends BaseOverviewComponent implements OnInit {
   public readonly isLoading$ = this.store.select(selectOrganizationUserGridLoading);
   public readonly gridData$ = this.store.select(selectOrganizationUserGridData);

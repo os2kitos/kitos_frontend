@@ -3889,6 +3889,12 @@
       <trans-unit id="8007594754054323000" datatype="html">
         <source>Brugeren har ingen roller</source>
       </trans-unit>
+      <trans-unit id="2961498540444259062" datatype="html">
+        <source>Udenlandsk virksomhed</source>
+      </trans-unit>
+      <trans-unit id="4621931238368826704" datatype="html">
+        <source>Organisationer Overblik</source>
+      </trans-unit>
       <trans-unit id="1669829107156320635" datatype="html">
         <source>Roller overført</source>
       </trans-unit>
@@ -3938,10 +3944,19 @@
         <source>Organisationen blev opdateret.</source>
       </trans-unit>
       <trans-unit id="7661266723054940833" datatype="html">
-        <source>Information om <x id="INTERPOLATION" equiv-text="{{organizationName}}"/></source>
+        <source>Information om <x id="INTERPOLATION" equiv-text="{{ organizationName }}"/></source>
       </trans-unit>
       <trans-unit id="9090249672465718263" datatype="html">
         <source>Interessefællesskab</source>
+      </trans-unit>
+      <trans-unit id="4279755849391914558" datatype="html">
+        <source>Roller i din organisation</source>
+      </trans-unit>
+      <trans-unit id="4778572585249502542" datatype="html">
+        <source>Organisationer i Kitos</source>
+      </trans-unit>
+      <trans-unit id="616679104901444882" datatype="html">
+        <source>Organisationer</source>
       </trans-unit>
     </body>
   </file>

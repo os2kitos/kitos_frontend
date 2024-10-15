@@ -1,0 +1,10 @@
+@import 'theme';
+@import "mixins.scss";
+
+:host {
+  @include page-flex-layout-max-width;
+}
+
+app-segment {
+  margin-bottom: $padding-medium-large;
+}

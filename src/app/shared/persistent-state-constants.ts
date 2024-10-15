@@ -17,7 +17,7 @@ export const CONTRACT_ROLES_SECTION_NAME = $localize`Kontraktroller`;
 export const DATA_PROCESSING_ROLES_SECTION_NAME = $localize`Databehandlingsroller`;
 
 export const GDPR_SECTION_NAME = $localize`GDPR`;
-export const ORGANISATION_SECTION_NAME = $localize`Organisation`;
+export const ORGANIZATION_SECTION_NAME = $localize`Organisation`;
 export const RELATIONS_SECTION_NAME = $localize`Relationer`;
 export const ARCHIVE_SECTION_NAME = $localize`Arkivering`;
 export const LOCAL_REFERENCES_SECTION_NAME = $localize`Lokale referencer`;
