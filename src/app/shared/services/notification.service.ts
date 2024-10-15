@@ -307,10 +307,6 @@ export class NotificationService implements OnDestroy {
       $localize`Databehandlingen blev oprettet`
     );
 
-    this.subscribeAsDefault(OrganizationUserActions.copyRolesSuccess, $localize`Roller kopieret`);
-    this.subscribeAsError(OrganizationUserActions.copyRolesError, $localize`Kunne ikke kopiere roller`);
-
-
     this.subscribeToExternalReferenceManagementEvents();
     this.subscribeToRoleNotifications();
 
@@ -336,7 +332,6 @@ export class NotificationService implements OnDestroy {
       DataProcessingActions.patchDataProcessingError,
       $localize`Databehandlingen kunne ikke slettes`
     );
-
   }
   /**
    * Consolidates notifications related to the "roles" which is used in multiple different modules
