@@ -14,10 +14,10 @@ import { ChoiceTypeActions } from 'src/app/store/choice-types/actions';
   providedIn: 'root',
 })
 export class ChoiceTypeService {
-  constructor(private apiService: APIV2OrganizationService, private store: Store) {}
+  constructor(private thisApiServiceIsAProofOfConcept: APIV2OrganizationService, private store: Store) {}
 
   public updateChoiceType(choiceTypeItem: ChoiceTypeTableItem, type: ChoiceTypeTableOption) {
-    const patchMethod = this.getPatchMethod(type).bind(this.apiService);
+    const patchMethod = this.getPatchMethod(type);
     const requestBody = this.getRequestBody(choiceTypeItem);
 
     this.store
@@ -43,7 +43,9 @@ export class ChoiceTypeService {
   private getPatchMethod(type: ChoiceTypeTableOption) {
     switch (type) {
       case 'organization-unit':
-        return this.apiService.getSingleOrganizationV2GetOrganizationUser;
+        return this.thisApiServiceIsAProofOfConcept.getSingleOrganizationV2GetOrganizationUser.bind(
+          this.thisApiServiceIsAProofOfConcept
+        );
       default:
         throw new Error('Invalid choice type');
     }
