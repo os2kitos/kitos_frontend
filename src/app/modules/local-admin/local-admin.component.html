@@ -1,5 +1,5 @@
 <h4 i18n class="title-margin">Lokal admin</h4>
-  <div class="content">
+<div class="content">
   <app-navigation-drawer>
     <app-button
       buttonStyle="tertiary"
@@ -10,35 +10,19 @@
       ><app-document-icon></app-document-icon>
       <ng-container i18n>Information</ng-container>
     </app-button>
-    <app-button
-      buttonStyle="tertiary"
-      color="accent"
-      size="large"
-      routerLinkActive="active"
+    <app-button buttonStyle="tertiary" color="accent" size="large" routerLinkActive="active"
       ><app-organization-icon></app-organization-icon>
       <ng-container i18n>Organisation</ng-container>
     </app-button>
-    <app-button
-      buttonStyle="tertiary"
-      color="accent"
-      size="large"
-      routerLinkActive="active"
+    <app-button buttonStyle="tertiary" color="accent" size="large" routerLinkActive="active"
       ><app-systems-icon></app-systems-icon>
       <ng-container i18n>IT System</ng-container>
     </app-button>
-    <app-button
-      buttonStyle="tertiary"
-      color="accent"
-      size="large"
-      routerLinkActive="active"
+    <app-button buttonStyle="tertiary" color="accent" size="large" routerLinkActive="active"
       ><app-clipboard-icon></app-clipboard-icon>
       <ng-container i18n>IT kontrakt</ng-container>
     </app-button>
-    <app-button
-      buttonStyle="tertiary"
-      color="accent"
-      size="large"
-      routerLinkActive="active"
+    <app-button buttonStyle="tertiary" color="accent" size="large" routerLinkActive="active"
       ><app-folder-important-icon></app-folder-important-icon>
       <ng-container i18n>Databehandling</ng-container>
     </app-button>
@@ -47,10 +31,11 @@
       color="accent"
       size="large"
       routerLinkActive="active"
+      [routerLink]="[AppPath.import]"
       ><app-bulk-create-icon></app-bulk-create-icon>
       <ng-container i18n>Masseopret</ng-container>
     </app-button>
   </app-navigation-drawer>
 
-    <router-outlet></router-outlet>
-  </div>
+  <router-outlet></router-outlet>
+</div>

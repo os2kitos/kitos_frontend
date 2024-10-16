@@ -12,4 +12,5 @@
   }"
 >
   <ng-content></ng-content>
+  <app-help-button *ngIf="helpTextKey" [helpTextKey]="helpTextKey"></app-help-button>
 </p>

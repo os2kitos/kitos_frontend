@@ -3,6 +3,9 @@
   line-height: 150%;
   margin: 0px;
   color: $color-neutral-dark;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .white-color {
@@ -65,4 +68,8 @@
 
 .bold-font {
   font-weight: bold;
+}
+
+p app-help-icon {
+  margin-left: 8px;
 }
