@@ -132,17 +132,6 @@
   ></app-card-header>
 
   <app-standard-vertical-content-grid>
-    <app-form-grid [formGroup]="subprocessorsFormGroup">
-      <app-radio-buttons
-        class="field-all-grid-length"
-        i18n-text
-        data-cy="dpr-subprocessors-yes-no"
-        [formGroup]="subprocessorsFormGroup"
-        formName="hasSubDataProcessors"
-        [options]="yesNoOptions"
-        (valueChange)="patchHasSubprocessorsValue($event)"
-      ></app-radio-buttons>
-    </app-form-grid>
-    <app-sub-processors-table *ngIf="(isHasSubprocessorsTrue$ | async) === true"></app-sub-processors-table>
+    <app-sub-processors-table></app-sub-processors-table>
   </app-standard-vertical-content-grid>
 </app-card>

@@ -12,7 +12,7 @@ import {
   mapToYesNoIrrelevantEnum,
   yesNoIrrelevantOptions,
 } from 'src/app/shared/models/yes-no-irrelevant.model';
-import { YesNoEnum, mapToYesNoEnum, yesNoOptions } from 'src/app/shared/models/yes-no.model';
+import { YesNoEnum, yesNoOptions } from 'src/app/shared/models/yes-no.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
@@ -42,9 +42,6 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
   public readonly agreementConcludedValue$ = new BehaviorSubject<YesNoIrrelevantEnum | undefined>(undefined);
   public readonly isAgreementConcluded$ = this.agreementConcludedValue$.pipe(map((value) => value === 'Yes'));
 
-  public readonly transferTo3rdCountryValue$ = new BehaviorSubject<YesNoEnum | undefined>(undefined);
-  public readonly isTransferTo3rdCountryTrue$ = this.transferTo3rdCountryValue$.pipe(map((value) => value === 'Yes'));
-
   public readonly hasSubprocessorsValue$ = new BehaviorSubject<YesNoEnum | undefined>(undefined);
   public readonly isHasSubprocessorsTrue$ = this.hasSubprocessorsValue$.pipe(map((value) => value === 'Yes'));
 
@@ -62,14 +59,6 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
 
   public readonly transferBasisFormGroup = new FormGroup({
     transferBasis: new FormControl<APIIdentityNamePairResponseDTO | undefined>({ value: undefined, disabled: true }),
-    transferTo3rdCountry: new FormControl<YesNoEnum | undefined>({
-      value: undefined,
-      disabled: true,
-    }),
-  });
-
-  public readonly subprocessorsFormGroup = new FormGroup({
-    hasSubDataProcessors: new FormControl<YesNoEnum | undefined>({ value: undefined, disabled: true }),
   });
 
   constructor(private store: Store, private notificationService: NotificationService) {
@@ -86,8 +75,6 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
         .pipe(filterNullish(), combineLatestWith(this.store.select(selectDataProcessingHasModifyPermissions)))
         .subscribe(([dpr, hasModifyPermission]) => {
           const agreementConcludedValue = mapToYesNoIrrelevantEnum(dpr.general.isAgreementConcluded);
-          const transferTo3rdCountryValue = mapToYesNoEnum(dpr.general.transferToInsecureThirdCountries);
-          const hasSubDataProcessorsValue = mapToYesNoEnum(dpr.general.hasSubDataProcessors);
           this.frontpageFormGroup.patchValue({
             name: dpr.name,
             status: dpr.general.valid ? `Aktiv` : `Inaktiv`,
@@ -102,26 +89,16 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
 
           this.transferBasisFormGroup.patchValue({
             transferBasis: dpr.general.basisForTransfer,
-            transferTo3rdCountry: transferTo3rdCountryValue?.value as YesNoEnum,
-          });
-
-          this.subprocessorsFormGroup.patchValue({
-            hasSubDataProcessors: hasSubDataProcessorsValue?.value as YesNoEnum,
           });
 
           if (hasModifyPermission) {
             this.frontpageFormGroup.enable();
             this.transferBasisFormGroup.enable();
-            this.subprocessorsFormGroup.enable();
             this.agreementConcludedValue$.next(agreementConcludedValue?.value as YesNoIrrelevantEnum);
           } else {
             this.frontpageFormGroup.disable();
             this.transferBasisFormGroup.disable();
-            this.subprocessorsFormGroup.disable();
           }
-
-          this.transferTo3rdCountryValue$.next(transferTo3rdCountryValue?.value as YesNoEnum);
-          this.hasSubprocessorsValue$.next(hasSubDataProcessorsValue?.value as YesNoEnum);
 
           this.frontpageFormGroup.controls.status.disable();
           this.frontpageFormGroup.controls.lastChangedAt.disable();

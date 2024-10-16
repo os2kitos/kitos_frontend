@@ -236,10 +236,16 @@ export class DataProcessingEffects {
         const listWithoutCountry = countries
           .filter((country) => country.uuid !== countryUuid)
           .map((country) => country.uuid);
-        const transferToInsecureThirdCountries = listWithoutCountry.length > 0 ? 'Yes' : 'No' as APIDataProcessingRegistrationGeneralDataWriteRequestDTO.TransferToInsecureThirdCountriesEnum;
+        const transferToInsecureThirdCountries =
+          listWithoutCountry.length > 0
+            ? 'Yes'
+            : ('No' as APIDataProcessingRegistrationGeneralDataWriteRequestDTO.TransferToInsecureThirdCountriesEnum);
         return of(
           DataProcessingActions.patchDataProcessing({
-            general: { transferToInsecureThirdCountries, insecureCountriesSubjectToDataTransferUuids: listWithoutCountry },
+            general: {
+              transferToInsecureThirdCountries,
+              insecureCountriesSubjectToDataTransferUuids: listWithoutCountry,
+            },
           })
         );
       })
@@ -277,8 +283,14 @@ export class DataProcessingEffects {
       switchMap(({ subprocessor, existingSubProcessors }) => {
         const subProcessors = existingSubProcessors ? [...existingSubProcessors] : [];
         const mappedSubProcessors = mapSubDataProcessors(subProcessors);
+        const hasSubDataProcessors =
+          APIDataProcessingRegistrationGeneralDataWriteRequestDTO.HasSubDataProcessorsEnum.Yes;
         mappedSubProcessors.push(subprocessor);
-        return of(DataProcessingActions.patchDataProcessing({ general: { subDataProcessors: mappedSubProcessors } }));
+        return of(
+          DataProcessingActions.patchDataProcessing({
+            general: { hasSubDataProcessors, subDataProcessors: mappedSubProcessors },
+          })
+        );
       })
     );
   });
@@ -292,7 +304,15 @@ export class DataProcessingEffects {
           (subprocessor) => subprocessor.dataProcessorOrganization.uuid !== subProcessorUuid
         );
         const mappedSubProcessors = mapSubDataProcessors(listWithoutSubProcessor);
-        return of(DataProcessingActions.patchDataProcessing({ general: { subDataProcessors: mappedSubProcessors } }));
+        const hasSubDataProcessors =
+          mappedSubProcessors.length > 0
+            ? 'Yes'
+            : ('No' as APIDataProcessingRegistrationGeneralDataWriteRequestDTO.HasSubDataProcessorsEnum);
+        return of(
+          DataProcessingActions.patchDataProcessing({
+            general: { hasSubDataProcessors, subDataProcessors: mappedSubProcessors },
+          })
+        );
       })
     );
   });
