@@ -5,14 +5,14 @@ import { Store } from '@ngrx/store';
 import { map, Observable, switchMap, tap } from 'rxjs';
 import {
   APIRoleOptionResponseDTO,
-  APIV2DataProcessingRegistrationRoleTypeService,
-  APIV2ItContractRoleTypeService,
-  APIV2ItSystemUsageRoleTypeService,
-  APIV2OrganizationUnitRoleTypeService,
 } from 'src/app/api/v2';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 import { filterNullish } from '../../pipes/filter-nullish';
 import { ChoiceTypeTableItem, ChoiceTypeTableOption } from './choice-type-table.component';
+import { RoleOptionTypeService } from '../../services/role-option-type.service';
+import { RegularOptionTypeServiceService } from '../../services/regular-option-type-service.service';
+import { RoleOptionTypes } from '../../models/options/role-option-types.model';
+import { RegularOptionType } from '../../models/options/regular-option-types.model';
 
 interface State {
   isLoading: boolean;
@@ -28,10 +28,8 @@ export class ChoiceTypeTableComponentStore extends ComponentStore<State> {
 
   constructor(
     private readonly store: Store,
-    private organizationUnitRolesService: APIV2OrganizationUnitRoleTypeService,
-    private systemUsageRoleService: APIV2ItSystemUsageRoleTypeService,
-    private contractRolesService: APIV2ItContractRoleTypeService,
-    private dataprocessingRolesService: APIV2DataProcessingRegistrationRoleTypeService
+    private roleOptionTypeService: RoleOptionTypeService,
+    private optionTypeService: RegularOptionTypeServiceService
   ) {
     super();
   }
@@ -50,29 +48,17 @@ export class ChoiceTypeTableComponentStore extends ComponentStore<State> {
     })
   );
 
-  private getApiCallByType(
-    type: ChoiceTypeTableOption,
-    organizationUuid: string
-  ): Observable<APIRoleOptionResponseDTO[]> {
-    switch (type) {
-      case 'it-system-usage':
-        return this.systemUsageRoleService.getManyItSystemUsageRoleTypeV2Get({ organizationUuid });
-      case 'it-contract':
-        return this.contractRolesService.getManyItContractRoleTypeV2Get({ organizationUuid });
-      case 'data-processing':
-        return this.dataprocessingRolesService.getManyDataProcessingRegistrationRoleTypeV2Get({ organizationUuid });
-      case 'organization-unit':
-        return this.organizationUnitRolesService.getManyOrganizationUnitRoleTypeV2Get({ organizationUuid });
-      default:
-        throw new Error(`This component does not support entity type: ${type}`);
-    }
-  }
-
   private getChoiceItemsObservable(): Observable<APIRoleOptionResponseDTO[]> {
     return this.store.select(selectOrganizationUuid).pipe(
       filterNullish(),
       concatLatestFrom(() => this.type$),
-      switchMap(([organizationUuid, type]) => this.getApiCallByType(type, organizationUuid))
+      switchMap(([organizationUuid, type]) => {
+        if (this.isRoleOptionType(type)) {
+          return this.roleOptionTypeService.getAvailableOptions(organizationUuid, type as RoleOptionTypes);
+        } else {
+          return this.optionTypeService.getAvailableOptions(organizationUuid, type as RegularOptionType);
+        }
+      })
     );
   }
 
@@ -86,6 +72,12 @@ export class ChoiceTypeTableComponentStore extends ComponentStore<State> {
       obligatory: false,
     };
     return item;
+  }
+
+  private isRoleOptionType(type: ChoiceTypeTableOption): boolean {
+    return (
+      type === 'organization-unit' || type === 'it-system-usage' || type === 'it-contract' || type === 'data-processing'
+    );
   }
 
   public getChoiceTypeItems = this.effect<void>((trigger$) =>
