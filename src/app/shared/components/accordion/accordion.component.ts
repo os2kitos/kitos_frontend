@@ -9,4 +9,5 @@ export class AccordionComponent {
   @Input() title: string | undefined;
   @Input() isExpandedByDefault = false;
   @Input() disabled = false;
+  @Input() checkboxInTitle = false;
 }

@@ -1,0 +1,14 @@
+@import 'theme';
+@import "mixins.scss";
+
+:host {
+  @include page-flex-layout-max-width;
+}
+
+app-segment {
+  margin-bottom: $padding-medium-large;
+}
+
+.checkbox-info-align-left {
+  margin-left: 12px
+}

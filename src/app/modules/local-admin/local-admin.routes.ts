@@ -2,8 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { LocalAdminInformationComponent } from './local-admin-information/local-admin-information.component';
-import { LocalAdminComponent } from './local-admin.component';
+import { LocalAdminItSystemUsagesComponent } from './local-admin-it-system-usages/local-admin-it-system-usages.component';
 import { LocalAdminOrganizationComponent } from './local-admin-organization/local-admin-organization.component';
+import { LocalAdminComponent } from './local-admin.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,10 @@ const routes: Routes = [
       {
         path: AppPath.organization,
         component: LocalAdminOrganizationComponent,
+      },
+      {
+        path: AppPath.localAdminSystemUsages,
+        component: LocalAdminItSystemUsagesComponent,
       },
     ],
   },

@@ -1,0 +1,31 @@
+<app-segment [buttons]="segmentOptions" [(selected)]="selectedSegment"> </app-segment>
+
+<app-card>
+  <ng-container *ngIf="selectedSegment === LocalAdminSystemUsagesSegmentOptions.UiCustomization">
+      <app-accordion title="Systemforside" [isExpandedByDefault]="true">
+        <app-form-grid>
+          <div>
+            <app-checkbox
+              i18n-text
+              labelPosition="after"
+              text="Datofelter">
+            </app-checkbox>
+            <app-textbox-info class="checkbox-info-align-left">
+            <app-paragraph paragraphSize="x-small" i18n> Dækker felterne “Ibrugtagningsdato” og “Slutdato for anvendelse” </app-paragraph>
+          </app-textbox-info>
+          </div>
+
+            <app-checkbox
+              i18n-text
+              labelPosition="after"
+              text="Livscyklus">
+            </app-checkbox>
+        </app-form-grid>
+</app-accordion>
+  </ng-container>
+
+  <ng-container *ngIf="selectedSegment === LocalAdminSystemUsagesSegmentOptions.OptionTypes">
+  </ng-container>
+</app-card>
+
+

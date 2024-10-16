@@ -33,6 +33,7 @@ export enum AppPath {
   localAdmin = 'local-admin',
   information = 'information',
   helpTexts = 'help-texts',
+  localAdminSystemUsages = 'system',
 
   roles = 'roles',
 
