@@ -99,7 +99,7 @@
     <app-form-grid [formGroup]="transferBasisFormGroup">
       <app-dropdown
         text="Overførselsgrundlag"
-        class="input-two-thirds-column-width"
+        class="input-one-third-column-width"
         valueField="uuid"
         i18n-text
         data-cy="dpr-transfer-basis"
@@ -109,17 +109,8 @@
         (valueChange)="patchFrontPage({ general: { basisForTransferUuid: $event } })"
       >
       </app-dropdown>
-      <app-radio-buttons
-        text="Overførsel til usikkert 3. land"
-        i18n-text
-        data-cy="dpr-tranfer-to-3rd-country"
-        [formGroup]="transferBasisFormGroup"
-        formName="transferTo3rdCountry"
-        [options]="yesNoOptions"
-        (valueChange)="patchTransferTo3rdCountryValue($event)"
-      ></app-radio-buttons>
     </app-form-grid>
-    <app-third-countries-table *ngIf="(isTransferTo3rdCountryTrue$ | async) === true"></app-third-countries-table>
+    <app-third-countries-table></app-third-countries-table>
   </app-standard-vertical-content-grid>
 </app-card>
 
@@ -141,17 +132,6 @@
   ></app-card-header>
 
   <app-standard-vertical-content-grid>
-    <app-form-grid [formGroup]="subprocessorsFormGroup">
-      <app-radio-buttons
-        class="field-all-grid-length"
-        i18n-text
-        data-cy="dpr-subprocessors-yes-no"
-        [formGroup]="subprocessorsFormGroup"
-        formName="hasSubDataProcessors"
-        [options]="yesNoOptions"
-        (valueChange)="patchHasSubprocessorsValue($event)"
-      ></app-radio-buttons>
-    </app-form-grid>
-    <app-sub-processors-table *ngIf="(isHasSubprocessorsTrue$ | async) === true"></app-sub-processors-table>
+    <app-sub-processors-table></app-sub-processors-table>
   </app-standard-vertical-content-grid>
 </app-card>
