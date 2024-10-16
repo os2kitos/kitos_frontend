@@ -5,6 +5,8 @@ import { OptionTypeTableItem, OptionTypeTableOption } from '../option-type-table
 import { isRoleOptionType } from 'src/app/shared/helpers/option-type-helpers';
 import { RoleOptionTypeService } from 'src/app/shared/services/role-option-type.service';
 import { RegularOptionTypeService } from 'src/app/shared/services/regular-option-type.service';
+import { RegularOptionType } from 'src/app/shared/models/options/regular-option-types.model';
+import { APILocalRegularOptionUpdateRequestDTO } from 'src/app/api/v2';
 
 @Component({
   selector: 'app-edit-option-type-dialog',
@@ -37,7 +39,12 @@ export class EditOptionTypeDialogComponent implements OnInit {
     if (isRoleOptionType(this.optionType)) {
       // do one thing
     } else {
-      // do another thing
+      console.log('patchLocalOption');
+      this.regularOptionTypeService.patchLocalOption(
+        this.optionType as RegularOptionType,
+        newChoiceTypeItem.uuid,
+        this.mapToUpdateOptionDTO(newChoiceTypeItem)
+      );
     }
     this.dialogRef.close();
   }
@@ -48,5 +55,11 @@ export class EditOptionTypeDialogComponent implements OnInit {
 
   public disableSaveButton(): boolean {
     return !this.form.valid || this.form.value.description === this.optionTypeItem.description;
+  }
+
+  private mapToUpdateOptionDTO(optionTypeItem: OptionTypeTableItem): APILocalRegularOptionUpdateRequestDTO {
+    return {
+      description: optionTypeItem.description,
+    };
   }
 }

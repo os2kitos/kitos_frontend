@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Inject, Injectable } from '@angular/core';
+import { catchError, first, Observable, switchMap, tap, throwError } from 'rxjs';
 import {
+  APILocalRegularOptionUpdateRequestDTO,
   APIRegularOptionResponseDTO,
   APIV2DataProcessingRegistrationBasisForTransferTypeService,
   APIV2DataProcessingRegistrationCountryTypeService,
@@ -20,6 +21,7 @@ import {
   APIV2ItInterfaceInterfaceDataTypeService,
   APIV2ItInterfaceInterfaceTypeService,
   APIV2ItSystemBusinessTypeService,
+  APIV2ItSystemLocalOptionTypesInternalINTERNALService,
   APIV2ItSystemUsageArchiveLocationTypeService,
   APIV2ItSystemUsageArchiveTestLocationTypeService,
   APIV2ItSystemUsageArchiveTypeService,
@@ -30,38 +32,71 @@ import {
   APIV2ItSystemUsageSensitivePersonalDataTypeService,
 } from 'src/app/api/v2';
 import { RegularOptionType } from '../models/options/regular-option-types.model';
+import { Store } from '@ngrx/store';
+import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
+import { filterNullish } from '../pipes/filter-nullish';
+import { OptionTypeActions } from 'src/app/store/option-types/actions';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RegularOptionTypeService {
   constructor(
+    @Inject(APIV2ItSystemBusinessTypeService)
     private readonly businessTypesService: APIV2ItSystemBusinessTypeService,
+    @Inject(APIV2ItContractContractTypeService)
     private readonly contractTypesService: APIV2ItContractContractTypeService,
+    @Inject(APIV2ItInterfaceInterfaceTypeService)
     private readonly interfaceTypesService: APIV2ItInterfaceInterfaceTypeService,
+    @Inject(APIV2ItSystemUsageDataClassificationTypeService)
     private readonly dataClassificationTypesService: APIV2ItSystemUsageDataClassificationTypeService,
+    @Inject(APIV2ItSystemUsageRelationFrequencyTypeService)
     private readonly relationFrequencyTypesService: APIV2ItSystemUsageRelationFrequencyTypeService,
+    @Inject(APIV2ItSystemUsageSensitivePersonalDataTypeService)
     private readonly sensitivePersonalDataTypesService: APIV2ItSystemUsageSensitivePersonalDataTypeService,
+    @Inject(APIV2ItSystemUsageArchiveTypeService)
     private readonly itSystemUsageArchiveTypesService: APIV2ItSystemUsageArchiveTypeService,
+    @Inject(APIV2ItSystemUsageArchiveLocationTypeService)
     private readonly itSystemUsageArchiveLocationTypesService: APIV2ItSystemUsageArchiveLocationTypeService,
+    @Inject(APIV2ItSystemUsageArchiveTestLocationTypeService)
     private readonly itSystemUsageArchiveLocationTestTypesService: APIV2ItSystemUsageArchiveTestLocationTypeService,
+    @Inject(APIV2ItSystemUsageRegisteredDataCategoryTypeService)
     private readonly itSystemUsageRegisteredDataCategoryTypeService: APIV2ItSystemUsageRegisteredDataCategoryTypeService,
+    @Inject(APIV2ItSystemUsageRoleTypeService)
     private readonly itSystemUsageRoleTypeService: APIV2ItSystemUsageRoleTypeService,
+    @Inject(APIV2ItInterfaceInterfaceDataTypeService)
     private readonly itInterfaceDataTypesService: APIV2ItInterfaceInterfaceDataTypeService,
+    @Inject(APIV2ItContractContractTemplateTypeService)
     private readonly contractTemplateService: APIV2ItContractContractTemplateTypeService,
+    @Inject(APIV2ItContractCriticalityTypeService)
     private readonly contractCriticalityService: APIV2ItContractCriticalityTypeService,
+    @Inject(APIV2ItContractProcurementStrategyService)
     private readonly contractProcurementStrategyService: APIV2ItContractProcurementStrategyService,
+    @Inject(APIV2ItContractPurchaseTypeService)
     private readonly contractPurchaseFormService: APIV2ItContractPurchaseTypeService,
+    @Inject(APIV2ItContractAgreementElementTypeService)
     private readonly contractAgreementElementsService: APIV2ItContractAgreementElementTypeService,
+    @Inject(APIV2ItContractAgreementExtensionOptionTypeService)
     private readonly contractExtendTypesService: APIV2ItContractAgreementExtensionOptionTypeService,
+    @Inject(APIV2ItContractNoticePeriodMonthTypeService)
     private readonly contractTerminationPeriodTypesService: APIV2ItContractNoticePeriodMonthTypeService,
+    @Inject(APIV2ItContractPaymentFrequencyTypeService)
     private readonly contractPaymentFrequencyTypesService: APIV2ItContractPaymentFrequencyTypeService,
+    @Inject(APIV2ItContractPaymentModelTypeService)
     private readonly contractPaymentModelTypesService: APIV2ItContractPaymentModelTypeService,
+    @Inject(APIV2ItContractPriceRegulationTypeService)
     private readonly contractPriceRegulationTypesService: APIV2ItContractPriceRegulationTypeService,
+    @Inject(APIV2DataProcessingRegistrationDataResponsibleTypeService)
     private readonly dataProcessingDataResponsibleTypesService: APIV2DataProcessingRegistrationDataResponsibleTypeService,
+    @Inject(APIV2DataProcessingRegistrationBasisForTransferTypeService)
     private readonly dataProcessingBasisForTransferTypesService: APIV2DataProcessingRegistrationBasisForTransferTypeService,
+    @Inject(APIV2DataProcessingRegistrationCountryTypeService)
     private readonly dataProcessingCountryTypesService: APIV2DataProcessingRegistrationCountryTypeService,
-    private readonly dataProcessingOversightOptionsService: APIV2DataProcessingRegistrationOversightTypeService
+    @Inject(APIV2DataProcessingRegistrationOversightTypeService)
+    private readonly dataProcessingOversightOptionsService: APIV2DataProcessingRegistrationOversightTypeService,
+    @Inject(APIV2ItSystemLocalOptionTypesInternalINTERNALService)
+    private readonly itSystemLocalOptionTypesService: APIV2ItSystemLocalOptionTypesInternalINTERNALService,
+    private readonly store: Store
   ) {}
 
   private resolveLocalOptionsEndpoint(
@@ -200,5 +235,45 @@ export class RegularOptionTypeService {
     optionType: RegularOptionType
   ): Observable<Array<APIRegularOptionResponseDTO>> {
     return this.resolveLocalOptionsEndpoint(optionType)(organizationUuid);
+  }
+
+  private resolvePatchLocalOptionsEndpoint(optionType: RegularOptionType) {
+    switch (optionType) {
+      case 'it-system_business-type':
+        return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
+          this.itSystemLocalOptionTypesService.patchSingleItSystemLocalOptionTypesInternalV2PatchLocalBusinessType({
+            organizationUuid,
+            optionUuid,
+            dto: request,
+          });
+      default:
+        throw new Error(`Patch operation is not supported for ${optionType}`);
+    }
+  }
+
+  public patchLocalOption(
+    optionType: RegularOptionType,
+    optionUuid: string,
+    request: APILocalRegularOptionUpdateRequestDTO
+  ) {
+    this.store
+      .select(selectOrganizationUuid)
+      .pipe(
+        first(),
+        filterNullish(),
+        switchMap((organizationUuid) =>
+          this.resolvePatchLocalOptionsEndpoint(optionType)(organizationUuid, optionUuid, request)
+        )
+      )
+      .pipe(
+        tap(() => {
+          this.store.dispatch(OptionTypeActions.updateOptionTypeSuccess());
+        }),
+        catchError(() => {
+          this.store.dispatch(OptionTypeActions.updateOptionTypeError());
+          return throwError(() => 'Failed to update option');
+        })
+      )
+      .subscribe();
   }
 }
