@@ -4,7 +4,7 @@
   <app-organizations-grid *ngIf="selectedSegment === LocalAdminOrganizationSegmentOption.Organizations">
   </app-organizations-grid>
 
-  <app-choice-type-table
+  <app-option-type-table
     *ngIf="selectedSegment === LocalAdminOrganizationSegmentOption.Roles"
     type="organization-unit"
     title="Roller"
@@ -12,5 +12,5 @@
     [disableAccordion]="true"
     [expandedByDefault]="true"
   >
-  </app-choice-type-table>
+  </app-option-type-table>
 </app-card>

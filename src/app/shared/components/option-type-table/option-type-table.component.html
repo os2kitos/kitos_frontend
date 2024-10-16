@@ -1,4 +1,4 @@
-<ng-container *ngIf="choiceTypeItems$ | async as choiceTypeItems">
+<ng-container *ngIf="optionTypeItems$ | async as optionTypeItems">
   <app-accordion [title]="title" [disabled]="disableAccordion" [isExpandedByDefault]="expandedByDefault">
     <app-loading *ngIf="isLoading$ | async"></app-loading>
     <app-native-table *ngIf="(isLoading$ | async) === false" tableLayout="fixed">
@@ -11,19 +11,19 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let choiceType of choiceTypeItems">
+        <tr *ngFor="let optionType of optionTypeItems">
           <td>
-            <app-boolean-circle [value]="choiceType.active"></app-boolean-circle>
+            <app-boolean-circle [value]="optionType.active"></app-boolean-circle>
           </td>
-          <td>{{ choiceType.name }}</td>
+          <td>{{ optionType.name }}</td>
           <td *ngIf="showWriteAccess">
-            <app-boolean-circle [value]="choiceType.writeAccess"></app-boolean-circle>
+            <app-boolean-circle [value]="optionType.writeAccess"></app-boolean-circle>
           </td>
           <td>
             <app-content-space-between>
-              <app-paragraph *ngIf="showDescription" i18n> {{ choiceType.description }} </app-paragraph>
-              <app-table-row-actions *ngIf="showEditButton && !choiceType.obligatory">
-                <app-icon-button (buttonClick)="onEdit(choiceType)">
+              <app-paragraph *ngIf="showDescription" i18n> {{ optionType.description }} </app-paragraph>
+              <app-table-row-actions *ngIf="showEditButton && !optionType.obligatory">
+                <app-icon-button (buttonClick)="onEdit(optionType)">
                   <app-pencil-icon></app-pencil-icon>
                 </app-icon-button>
               </app-table-row-actions>

@@ -7,6 +7,7 @@ import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
+import { OptionTypeActions } from 'src/app/store/option-types/actions';
 import { OrganizationActions } from 'src/app/store/organization/actions';
 import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
@@ -14,7 +15,6 @@ import { PopupMessageActions } from 'src/app/store/popup-messages/actions';
 import { UserActions } from 'src/app/store/user-store/actions';
 import { PopupMessageType } from '../enums/popup-message-type';
 import { createPopupMessage } from '../models/popup-messages/popup-message.model';
-import { ChoiceTypeActions } from 'src/app/store/choice-types/actions';
 
 @Injectable({ providedIn: 'root' })
 export class NotificationService implements OnDestroy {
@@ -49,8 +49,8 @@ export class NotificationService implements OnDestroy {
   }
 
   private subscribeToLocalAdminNotifications() {
-    this.subscribeAsDefault(ChoiceTypeActions.updateChoiceTypeSuccess, $localize`Enheden blev opdateret`);
-    this.subscribeAsError(ChoiceTypeActions.updateChoiceTypeError, $localize`Enheden kunne ikke opdateres`);
+    this.subscribeAsDefault(OptionTypeActions.updateOptionTypeSuccess, $localize`Enheden blev opdateret`);
+    this.subscribeAsError(OptionTypeActions.updateOptionTypeError, $localize`Enheden kunne ikke opdateres`);
   }
 
   private subscribeToOrganizationEvents() {
