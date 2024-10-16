@@ -2,8 +2,8 @@
   <mat-expansion-panel [disabled]="disabled" [expanded]="isExpandedByDefault">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        <app-checkbox *ngIf="checkboxInTitle"></app-checkbox>
-          <app-paragraph [bold]="true">{{ title }}</app-paragraph>
+        <app-checkbox *ngIf="checkboxInTitle" [disabled]="checkboxDisabled" [value]="checkboxValue" (valueChange)="onCheckboxToggled($event)"></app-checkbox>
+          <app-paragraph [bold]="true" paragraphSize="large">{{ title }}</app-paragraph>
           <ng-content class="accordion-header" select="app-accordion-header"></ng-content>
       </mat-panel-title>
     </mat-expansion-panel-header>

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-accordion',
@@ -10,4 +10,11 @@ export class AccordionComponent {
   @Input() isExpandedByDefault = false;
   @Input() disabled = false;
   @Input() checkboxInTitle = false;
+  @Input() checkboxDisabled = false;
+  @Input() checkboxValue = false;
+  @Output() checkboxToggled = new EventEmitter<boolean>();
+
+  public onCheckboxToggled($event: boolean | undefined){
+    this.checkboxToggled.emit($event);
+  }
 }
