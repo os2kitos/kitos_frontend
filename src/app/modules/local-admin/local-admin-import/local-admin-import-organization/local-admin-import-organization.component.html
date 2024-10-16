@@ -5,5 +5,19 @@
 
 <app-card i18n-title>
   <app-card-header title="Via FK Organisation"></app-card-header>
-  <app-paragraph helpTextKey="local-config-fk-org-status.label">Some test</app-paragraph>
+  <app-standard-vertical-content-grid>
+    <div>
+      <app-paragraph helpTextKey="local-config-fk-org-status.label" [bold]="true" i18n>Adgang</app-paragraph>
+      <app-paragraph i18n>KITOS har adgang til organisationens data via FK Organisation</app-paragraph>
+    </div>
+    <div>
+      <app-paragraph helpTextKey="local-config-fk-org-sync-status.label" [bold]="true" i18n
+        >Synkronisering</app-paragraph
+      >
+      <app-paragraph i18n>Organisationen er <b>ikke</b> forbundet til FK Organisation</app-paragraph>
+    </div>
+    <div>
+      <app-button class="no-stretch" (buttonClick)="openImportDialog()" i18n>Forbind</app-button>
+    </div>
+  </app-standard-vertical-content-grid>
 </app-card>

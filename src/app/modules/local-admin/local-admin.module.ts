@@ -7,9 +7,10 @@ import { LocalAdminInformationComponent } from './local-admin-information/local-
 import { LocalAdminComponent } from './local-admin.component';
 import { LocalAdminRouterModule } from './local-admin.routes';
 import { LocalAdminImportOrganizationComponent } from './local-admin-import/local-admin-import-organization/local-admin-import-organization.component';
+import { FkOrgWriteDialogComponent } from './local-admin-import/local-admin-import-organization/fk-org-write-dialog/fk-org-write-dialog.component';
 
 @NgModule({
-  declarations: [LocalAdminComponent, LocalAdminInformationComponent, LocalAdminImportComponent, LocalAdminImportOrganizationComponent],
+  declarations: [LocalAdminComponent, LocalAdminInformationComponent, LocalAdminImportComponent, LocalAdminImportOrganizationComponent, FkOrgWriteDialogComponent],
   imports: [CommonModule, ComponentsModule, SharedModule, LocalAdminRouterModule],
 })
 export class LocalAdminModule {}

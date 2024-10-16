@@ -3,3 +3,8 @@
 :host {
   @include page-flex-layout-max-width;
 }
+
+.no-stretch {
+  width: auto;
+  display: inline-block;
+}
