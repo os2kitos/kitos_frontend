@@ -228,7 +228,7 @@ export class RoleOptionTypeService implements OnDestroy {
     const requestBody = this.getRequestBody(entity);
     const patchMethod = this.getPatchMethod(optionType);
 
-    this.store
+    /* this.store
       .select(selectOrganizationUuid)
       .pipe(
         first(),
@@ -245,13 +245,11 @@ export class RoleOptionTypeService implements OnDestroy {
         error: () => {
           this.store.dispatch(OptionTypeActions.updateOptionTypeError());
         },
-      });
+      }); */
   }
 
   private getPatchMethod(type: OptionTypeTableOption) {
     switch (type) {
-      case 'organization-unit':
-        return this.organizationUnitInternalService.patchSingleOrganizationUnitsInternalV2PatchUnit
       default:
         throw new Error('Invalid option type');
     }
