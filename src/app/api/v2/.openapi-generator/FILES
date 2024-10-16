@@ -32,6 +32,7 @@ api/v2ItInterfaceInterfaceType.service.ts
 api/v2ItSystem.service.ts
 api/v2ItSystemBusinessType.service.ts
 api/v2ItSystemInternalINTERNAL.service.ts
+api/v2ItSystemLocalOptionTypesInternalINTERNAL.service.ts
 api/v2ItSystemUsage.service.ts
 api/v2ItSystemUsageArchiveLocationType.service.ts
 api/v2ItSystemUsageArchiveTestLocationType.service.ts
@@ -156,6 +157,9 @@ model/kLEDetailsDTOIEnumerableVersionedKLEResponseDTO.ts
 model/kLEDetailsDTOVersionedKLEResponseDTO.ts
 model/localKLEDeviationsRequestDTO.ts
 model/localKLEDeviationsResponseDTO.ts
+model/localRegularOptionCreateRequestDTO.ts
+model/localRegularOptionResponseDTO.ts
+model/localRegularOptionUpdateRequestDTO.ts
 model/models.ts
 model/mutateRightRequestDTO.ts
 model/mutateUserRightsRequestDTO.ts

@@ -31,6 +31,7 @@ import { APIV2ItInterfaceInterfaceTypeService } from './api/v2ItInterfaceInterfa
 import { APIV2ItSystemService } from './api/v2ItSystem.service';
 import { APIV2ItSystemBusinessTypeService } from './api/v2ItSystemBusinessType.service';
 import { APIV2ItSystemInternalINTERNALService } from './api/v2ItSystemInternalINTERNAL.service';
+import { APIV2ItSystemLocalOptionTypesInternalINTERNALService } from './api/v2ItSystemLocalOptionTypesInternalINTERNAL.service';
 import { APIV2ItSystemUsageService } from './api/v2ItSystemUsage.service';
 import { APIV2ItSystemUsageArchiveLocationTypeService } from './api/v2ItSystemUsageArchiveLocationType.service';
 import { APIV2ItSystemUsageArchiveTestLocationTypeService } from './api/v2ItSystemUsageArchiveTestLocationType.service';

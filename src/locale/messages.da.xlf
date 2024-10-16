@@ -5175,6 +5175,10 @@
         <source>Enheden blev opdateret</source>
         <target state="new">Enheden blev opdateret</target>
       </trans-unit>
+      <trans-unit id="2551379805539527405" datatype="html">
+        <source>Roller i din orginsation</source>
+        <target state="new">Roller i din orginsation</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
