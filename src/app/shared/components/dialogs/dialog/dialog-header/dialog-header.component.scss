@@ -1,4 +1,4 @@
-@import 'theme';
+@import "theme";
 
 .close-button {
   position: absolute;
@@ -36,3 +36,13 @@
   }
 }
 
+.title-align-bottom {
+  display: flex;
+  align-items: center;
+}
+
+.title-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}

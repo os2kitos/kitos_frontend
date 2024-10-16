@@ -12,5 +12,7 @@
   }"
 >
   <ng-content></ng-content>
-  <app-help-button *ngIf="helpTextKey" [helpTextKey]="helpTextKey"></app-help-button>
+  <app-icon-button *ngIf="helpTextKey" (buttonClick)="openHelpTextDialog()">
+    <app-help-icon></app-help-icon>
+  </app-icon-button>
 </p>
