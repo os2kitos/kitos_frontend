@@ -1,4 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { catchError, first, Observable, switchMap, tap, throwError } from 'rxjs';
 import {
   APILocalRegularOptionUpdateRequestDTO,
@@ -31,11 +32,10 @@ import {
   APIV2ItSystemUsageRoleTypeService,
   APIV2ItSystemUsageSensitivePersonalDataTypeService,
 } from 'src/app/api/v2';
-import { RegularOptionType } from '../models/options/regular-option-types.model';
-import { Store } from '@ngrx/store';
-import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
-import { filterNullish } from '../pipes/filter-nullish';
 import { OptionTypeActions } from 'src/app/store/option-types/actions';
+import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
+import { RegularOptionType } from '../models/options/regular-option-types.model';
+import { filterNullish } from '../pipes/filter-nullish';
 
 @Injectable({
   providedIn: 'root',

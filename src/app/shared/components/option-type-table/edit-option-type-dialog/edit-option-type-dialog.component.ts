@@ -1,12 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { OptionTypeTableItem, OptionTypeTableOption } from '../option-type-table.component';
 import { isRoleOptionType } from 'src/app/shared/helpers/option-type-helpers';
-import { RoleOptionTypeService } from 'src/app/shared/services/role-option-type.service';
-import { RegularOptionTypeService } from 'src/app/shared/services/regular-option-type.service';
 import { RegularOptionType } from 'src/app/shared/models/options/regular-option-types.model';
-import { APILocalRegularOptionUpdateRequestDTO } from 'src/app/api/v2';
+import { RoleOptionTypes } from 'src/app/shared/models/options/role-option-types.model';
+import { RegularOptionTypeService } from 'src/app/shared/services/regular-option-type.service';
+import { RoleOptionTypeService } from 'src/app/shared/services/role-option-type.service';
+import { OptionTypeTableItem, OptionTypeTableOption } from '../option-type-table.component';
 
 @Component({
   selector: 'app-edit-option-type-dialog',
@@ -35,16 +35,13 @@ export class EditOptionTypeDialogComponent implements OnInit {
 
   public onSave(): void {
     const newDescription = this.form.value.description ?? undefined;
-    const newChoiceTypeItem: OptionTypeTableItem = { ...this.optionTypeItem, description: newDescription };
+    if (!newDescription) return;
+    const optionUuid = this.optionTypeItem.uuid;
+    const request = { description: newDescription };
     if (isRoleOptionType(this.optionType)) {
-      // do one thing
+      this.roleOptionTypeService.patchLocalRoleOption(this.optionType as RoleOptionTypes, optionUuid, request);
     } else {
-      console.log('patchLocalOption');
-      this.regularOptionTypeService.patchLocalOption(
-        this.optionType as RegularOptionType,
-        newChoiceTypeItem.uuid,
-        this.mapToUpdateOptionDTO(newChoiceTypeItem)
-      );
+      this.regularOptionTypeService.patchLocalOption(this.optionType as RegularOptionType, optionUuid, request);
     }
     this.dialogRef.close();
   }
@@ -55,11 +52,5 @@ export class EditOptionTypeDialogComponent implements OnInit {
 
   public disableSaveButton(): boolean {
     return !this.form.valid || this.form.value.description === this.optionTypeItem.description;
-  }
-
-  private mapToUpdateOptionDTO(optionTypeItem: OptionTypeTableItem): APILocalRegularOptionUpdateRequestDTO {
-    return {
-      description: optionTypeItem.description,
-    };
   }
 }

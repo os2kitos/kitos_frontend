@@ -1,7 +1,7 @@
 import { Inject, Injectable, OnDestroy } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { first, map, Observable, Subscription, switchMap } from 'rxjs';
+import { catchError, first, map, Observable, of, Subscription, switchMap, tap, throwError } from 'rxjs';
 import {
   APIExtendedRoleAssignmentResponseDTO,
   APIOrganizationUnitRolesResponseDTO,
@@ -224,40 +224,34 @@ export class RoleOptionTypeService implements OnDestroy {
     }
   }
 
-  public updateEntityOptionType(entity: OptionTypeTableItem, optionType: RoleOptionTypes) {
-    const requestBody = this.getRequestBody(entity);
-    const patchMethod = this.getPatchMethod(optionType);
+  private resolvePatchLocalRoleOptionEndpoint(optionType: RoleOptionTypes) {
+    switch (optionType) {
+      case 'it-contract':
+        return (organizationUuid: string, optionUuid: string, request: object) => of({});
+      default:
+        throw new Error(`Patch operation is not supported for ${optionType}`);
+    }
+  }
 
-    /* this.store
+  public patchLocalRoleOption(optionType: RoleOptionTypes, optionUuid: string, request: object) {
+    this.store
       .select(selectOrganizationUuid)
       .pipe(
         first(),
         filterNullish(),
-        switchMap((organizationUuid) => {
-          const request = { organizationUuid, userUuid: entity.uuid, requestBody };
-          return patchMethod(request);
+        switchMap((organizationUuid) =>
+          this.resolvePatchLocalRoleOptionEndpoint(optionType)(organizationUuid, optionUuid, request)
+        )
+      )
+      .pipe(
+        tap(() => {
+          this.store.dispatch(OptionTypeActions.updateOptionTypeSuccess());
+        }),
+        catchError(() => {
+          this.store.dispatch(OptionTypeActions.updateOptionTypeError());
+          return throwError(() => 'Failed to update option');
         })
       )
-      .subscribe({
-        next: () => {
-          this.store.dispatch(OptionTypeActions.updateOptionTypeSuccess());
-        },
-        error: () => {
-          this.store.dispatch(OptionTypeActions.updateOptionTypeError());
-        },
-      }); */
-  }
-
-  private getPatchMethod(type: OptionTypeTableOption) {
-    switch (type) {
-      default:
-        throw new Error('Invalid option type');
-    }
-  }
-
-  private getRequestBody(optionTypeItem: OptionTypeTableItem) {
-    return {
-      description: optionTypeItem.description,
-    };
+      .subscribe();
   }
 }
