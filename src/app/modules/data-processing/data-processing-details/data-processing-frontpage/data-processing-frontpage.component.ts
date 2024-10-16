@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, combineLatestWith, first, map } from 'rxjs';
+import { BehaviorSubject, combineLatestWith, map } from 'rxjs';
 import { APIIdentityNamePairResponseDTO, APIUpdateDataProcessingRegistrationRequestDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { optionalNewDate } from 'src/app/shared/helpers/date.helpers';
@@ -12,14 +12,13 @@ import {
   mapToYesNoIrrelevantEnum,
   yesNoIrrelevantOptions,
 } from 'src/app/shared/models/yes-no-irrelevant.model';
-import { YesNoEnum, mapToYesNoEnum, yesNoOptions } from 'src/app/shared/models/yes-no.model';
+import { YesNoEnum, yesNoOptions } from 'src/app/shared/models/yes-no.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import {
   selectDataProcessing,
   selectDataProcessingHasModifyPermissions,
-  selectDataProcessingTransferToCountries,
 } from 'src/app/store/data-processing/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
@@ -43,9 +42,6 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
   public readonly agreementConcludedValue$ = new BehaviorSubject<YesNoIrrelevantEnum | undefined>(undefined);
   public readonly isAgreementConcluded$ = this.agreementConcludedValue$.pipe(map((value) => value === 'Yes'));
 
-  public readonly transferTo3rdCountryValue$ = new BehaviorSubject<YesNoEnum | undefined>(undefined);
-  public readonly isTransferTo3rdCountryTrue$ = this.transferTo3rdCountryValue$.pipe(map((value) => value === 'Yes'));
-
   public readonly hasSubprocessorsValue$ = new BehaviorSubject<YesNoEnum | undefined>(undefined);
   public readonly isHasSubprocessorsTrue$ = this.hasSubprocessorsValue$.pipe(map((value) => value === 'Yes'));
 
@@ -63,14 +59,6 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
 
   public readonly transferBasisFormGroup = new FormGroup({
     transferBasis: new FormControl<APIIdentityNamePairResponseDTO | undefined>({ value: undefined, disabled: true }),
-    transferTo3rdCountry: new FormControl<YesNoEnum | undefined>({
-      value: undefined,
-      disabled: true,
-    }),
-  });
-
-  public readonly subprocessorsFormGroup = new FormGroup({
-    hasSubDataProcessors: new FormControl<YesNoEnum | undefined>({ value: undefined, disabled: true }),
   });
 
   constructor(private store: Store, private notificationService: NotificationService) {
@@ -87,8 +75,6 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
         .pipe(filterNullish(), combineLatestWith(this.store.select(selectDataProcessingHasModifyPermissions)))
         .subscribe(([dpr, hasModifyPermission]) => {
           const agreementConcludedValue = mapToYesNoIrrelevantEnum(dpr.general.isAgreementConcluded);
-          const transferTo3rdCountryValue = mapToYesNoEnum(dpr.general.transferToInsecureThirdCountries);
-          const hasSubDataProcessorsValue = mapToYesNoEnum(dpr.general.hasSubDataProcessors);
           this.frontpageFormGroup.patchValue({
             name: dpr.name,
             status: dpr.general.valid ? `Aktiv` : `Inaktiv`,
@@ -103,26 +89,16 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
 
           this.transferBasisFormGroup.patchValue({
             transferBasis: dpr.general.basisForTransfer,
-            transferTo3rdCountry: transferTo3rdCountryValue?.value as YesNoEnum,
-          });
-
-          this.subprocessorsFormGroup.patchValue({
-            hasSubDataProcessors: hasSubDataProcessorsValue?.value as YesNoEnum,
           });
 
           if (hasModifyPermission) {
             this.frontpageFormGroup.enable();
             this.transferBasisFormGroup.enable();
-            this.subprocessorsFormGroup.enable();
             this.agreementConcludedValue$.next(agreementConcludedValue?.value as YesNoIrrelevantEnum);
           } else {
             this.frontpageFormGroup.disable();
             this.transferBasisFormGroup.disable();
-            this.subprocessorsFormGroup.disable();
           }
-
-          this.transferTo3rdCountryValue$.next(transferTo3rdCountryValue?.value as YesNoEnum);
-          this.hasSubprocessorsValue$.next(hasSubDataProcessorsValue?.value as YesNoEnum);
 
           this.frontpageFormGroup.controls.status.disable();
           this.frontpageFormGroup.controls.lastChangedAt.disable();
@@ -141,20 +117,6 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
     );
   }
 
-  public deleteTest() {
-    this.subscriptions.add(
-      this.store
-        .select(selectDataProcessingTransferToCountries)
-        .pipe(filterNullish(), first())
-        .subscribe((countries) => {
-          this.store.dispatch(
-            DataProcessingActions.patchDataProcessing({
-              general: { insecureCountriesSubjectToDataTransferUuids: [] },
-            })
-          );
-        })
-    );
-  }
   public patchFrontPage(
     frontpage: APIUpdateDataProcessingRegistrationRequestDTO,
     valueChange?: ValidatedValueChange<unknown>
@@ -177,15 +139,5 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
   public patchAgreementConcluded(value: YesNoIrrelevantEnum | undefined) {
     this.agreementConcludedValue$.next(value);
     this.patchFrontPage({ general: { isAgreementConcluded: value } });
-  }
-
-  public patchTransferTo3rdCountryValue(value: YesNoEnum | undefined) {
-    this.transferTo3rdCountryValue$.next(value);
-    this.patchFrontPage({ general: { transferToInsecureThirdCountries: value } });
-  }
-
-  public patchHasSubprocessorsValue(value: YesNoEnum | undefined) {
-    this.hasSubprocessorsValue$.next(value);
-    this.patchFrontPage({ general: { hasSubDataProcessors: value } });
   }
 }
