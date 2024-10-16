@@ -2,7 +2,7 @@
 
 <app-card>
   <ng-container *ngIf="selectedSegment === LocalAdminSystemUsagesSegmentOptions.UiCustomization">
-      <app-accordion title="Systemforside" [isExpandedByDefault]="true">
+      <app-accordion title="Systemforside" [isExpandedByDefault]="true" [checkboxInTitle]="true">
         <app-form-grid>
           <div>
             <app-checkbox
