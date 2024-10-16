@@ -15,7 +15,7 @@ import { EditOptionTypeDialogComponent } from './edit-option-type-dialog/edit-op
   providers: [OptionTypeTableComponentStore],
 })
 export class OptionTypeTableComponent extends BaseComponent implements OnInit {
-  @Input() type!: OptionTypeTableOption;
+  @Input() optionType!: OptionTypeTableOption;
   @Input() expandedByDefault: boolean = false;
   @Input() title: string = '';
   @Input() disableAccordion: boolean = false;
@@ -36,7 +36,7 @@ export class OptionTypeTableComponent extends BaseComponent implements OnInit {
   public readonly isLoading$ = this.componentStore.isLoading$;
 
   public ngOnInit(): void {
-    this.componentStore.setState({ isLoading: false, optionTypeItems: [], type: this.type });
+    this.componentStore.setState({ isLoading: false, optionTypeItems: [], type: this.optionType });
     this.componentStore.getOptionTypeItems();
 
     this.subscriptions.add(
@@ -49,7 +49,7 @@ export class OptionTypeTableComponent extends BaseComponent implements OnInit {
   public onEdit(optionType: OptionTypeTableItem): void {
     const dialogRef = this.dialog.open(EditOptionTypeDialogComponent);
     dialogRef.componentInstance.optionTypeItem = optionType;
-    dialogRef.componentInstance.optionType = this.type;
+    dialogRef.componentInstance.optionType = this.optionType;
   }
 }
 

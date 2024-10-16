@@ -21,7 +21,7 @@ interface State {
 @Injectable()
 export class OptionTypeTableComponentStore extends ComponentStore<State> {
   public readonly optionTypeItems$ = this.select((state) => state.optionTypeItems);
-  public readonly type$ = this.select((state) => state.type);
+  public readonly optionType$ = this.select((state) => state.type);
   public readonly isLoading$ = this.select((state) => state.isLoading);
 
   constructor(
@@ -49,7 +49,7 @@ export class OptionTypeTableComponentStore extends ComponentStore<State> {
   private getOptionItemsObservable(): Observable<APIRoleOptionResponseDTO[]> {
     return this.store.select(selectOrganizationUuid).pipe(
       filterNullish(),
-      concatLatestFrom(() => this.type$),
+      concatLatestFrom(() => this.optionType$),
       switchMap(([organizationUuid, type]) => {
         if (this.isRoleOptionType(type)) {
           return this.roleOptionTypeService.getAvailableOptions(organizationUuid, type as RoleOptionTypes);
