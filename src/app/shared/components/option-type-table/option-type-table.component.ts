@@ -55,11 +55,11 @@ export class OptionTypeTableComponent extends BaseComponent implements OnInit {
 
 export interface OptionTypeTableItem {
   uuid: string;
-  active: boolean; //TODO: Maybe should be allowed to be undefined
+  active: boolean;
   name: string;
-  writeAccess: boolean;
+  writeAccess: boolean | undefined;
   description: string | undefined;
-  obligatory: boolean; //TODO: Same as active
+  obligatory: boolean;
 }
 
 export type OptionTypeTableOption = RegularOptionType | RoleOptionTypes;
