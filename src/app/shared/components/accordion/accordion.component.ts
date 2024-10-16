@@ -12,9 +12,10 @@ export class AccordionComponent {
   @Input() checkboxInTitle = false;
   @Input() checkboxDisabled = false;
   @Input() checkboxValue = false;
+  @Input() checkboxTooltipText: string = '';
   @Output() checkboxToggled = new EventEmitter<boolean>();
 
-  public onCheckboxToggled($event: boolean | undefined){
+  public onCheckboxToggled($event: boolean | undefined) {
     this.checkboxToggled.emit($event);
   }
 }

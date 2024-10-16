@@ -1,9 +1,9 @@
 import { createSelector } from '@ngrx/store';
 import { ItSystemUsages as ItSystemUsagesModuleKey } from 'src/app/shared/ui-module-customization-keys.constants';
-import { uiModuleCustomizationFeature } from './reducer';
+import { organizationUIModuleCustomizationFeature } from './reducer';
 import { UIModuleCustomizationState } from './state';
 
-export const { selectUIModuleCustomizationState } = uiModuleCustomizationFeature;
+export const { selectUIModuleCustomizationState } = organizationUIModuleCustomizationFeature;
 
 export const selectUIModuleCustomizations = createSelector(
   selectUIModuleCustomizationState,

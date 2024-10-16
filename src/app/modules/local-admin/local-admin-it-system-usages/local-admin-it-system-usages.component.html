@@ -3,7 +3,7 @@
 <app-card>
   <ng-container *ngIf="selectedSegment === LocalAdminSystemUsagesSegmentOptions.UiCustomization">
       <app-accordion title="Systemforside" [isExpandedByDefault]="true" [checkboxInTitle]="true">
-        <app-form-grid>
+        <app-form-grid [formGroup]="itSystemUsageUIModuleCustomizationForm">
           <div>
             <app-checkbox
               i18n-text

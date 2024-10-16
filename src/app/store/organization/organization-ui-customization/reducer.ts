@@ -6,15 +6,15 @@ import { UIModuleCustomizationState } from './state';
 
 export const uiModuleCustomizationAdapter = createEntityAdapter<UIModuleCustomization>();
 
-export const uiModuleCustomizationInitialState: UIModuleCustomizationState =
+export const organizationUIModuleCustomizationInitialState: UIModuleCustomizationState =
   uiModuleCustomizationAdapter.getInitialState({
     uiModuleCustomizations: [],
   });
 
-export const uiModuleCustomizationFeature = createFeature({
+export const organizationUIModuleCustomizationFeature = createFeature({
   name: 'UIModuleCustomization',
   reducer: createReducer(
-    uiModuleCustomizationInitialState,
+    organizationUIModuleCustomizationInitialState,
     on(
       OrganizationUiModuleCustomizationActions.getUIModuleCustomizationSuccess,
       (state, uiModuleCustomization): UIModuleCustomizationState => ({
