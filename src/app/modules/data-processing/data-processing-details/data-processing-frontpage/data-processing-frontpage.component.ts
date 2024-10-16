@@ -140,9 +140,4 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
     this.agreementConcludedValue$.next(value);
     this.patchFrontPage({ general: { isAgreementConcluded: value } });
   }
-
-  public patchHasSubprocessorsValue(value: YesNoEnum | undefined) {
-    this.hasSubprocessorsValue$.next(value);
-    this.patchFrontPage({ general: { hasSubDataProcessors: value } });
-  }
 }
