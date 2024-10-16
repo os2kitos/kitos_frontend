@@ -1,8 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { OptionTypeService } from 'src/app/shared/services/option-type.service';
 import { OptionTypeTableItem, OptionTypeTableOption } from '../option-type-table.component';
+import { isRoleOptionType } from 'src/app/shared/helpers/option-type-helpers';
+import { RoleOptionTypeService } from 'src/app/shared/services/role-option-type.service';
+import { RegularOptionTypeService } from 'src/app/shared/services/regular-option-type.service';
 
 @Component({
   selector: 'app-edit-option-type-dialog',
@@ -19,7 +21,8 @@ export class EditOptionTypeDialogComponent implements OnInit {
 
   constructor(
     private dialogRef: MatDialogRef<EditOptionTypeDialogComponent>,
-    private optionTypeService: OptionTypeService
+    private roleOptionTypeService: RoleOptionTypeService,
+    private regularOptionTypeService: RegularOptionTypeService
   ) {}
 
   public ngOnInit(): void {
@@ -31,7 +34,11 @@ export class EditOptionTypeDialogComponent implements OnInit {
   public onSave(): void {
     const newDescription = this.form.value.description ?? undefined;
     const newChoiceTypeItem: OptionTypeTableItem = { ...this.optionTypeItem, description: newDescription };
-    this.optionTypeService.updateOptionType(newChoiceTypeItem, this.optionType);
+    if (isRoleOptionType(this.optionType)) {
+      // do one thing
+    } else {
+      // do another thing
+    }
     this.dialogRef.close();
   }
 

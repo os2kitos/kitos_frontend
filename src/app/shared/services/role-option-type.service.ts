@@ -1,7 +1,7 @@
 import { Inject, Injectable, OnDestroy } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { first, map, Observable, Subscription } from 'rxjs';
+import { first, map, Observable, Subscription, switchMap } from 'rxjs';
 import {
   APIExtendedRoleAssignmentResponseDTO,
   APIOrganizationUnitRolesResponseDTO,
@@ -26,6 +26,12 @@ import { filterNullish } from '../pipes/filter-nullish';
 import { selectItContractUuid } from 'src/app/store/it-contract/selectors';
 import { selectDataProcessingUuid } from 'src/app/store/data-processing/selectors';
 import { RoleOptionTypes } from '../models/options/role-option-types.model';
+import {
+  OptionTypeTableItem,
+  OptionTypeTableOption,
+} from '../components/option-type-table/option-type-table.component';
+import { OptionTypeActions } from 'src/app/store/option-types/actions';
+import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 
 @Injectable({
   providedIn: 'root',
@@ -216,5 +222,44 @@ export class RoleOptionTypeService implements OnDestroy {
         this.store.dispatch(OrganizationUnitActions.deleteOrganizationUnitRole(userUuid, roleUuid, role.unitUuid));
         break;
     }
+  }
+
+  public updateEntityOptionType(entity: OptionTypeTableItem, optionType: RoleOptionTypes) {
+    const requestBody = this.getRequestBody(entity);
+    const patchMethod = this.getPatchMethod(optionType);
+
+    this.store
+      .select(selectOrganizationUuid)
+      .pipe(
+        first(),
+        filterNullish(),
+        switchMap((organizationUuid) => {
+          const request = { organizationUuid, userUuid: entity.uuid, requestBody };
+          return patchMethod(request);
+        })
+      )
+      .subscribe({
+        next: () => {
+          this.store.dispatch(OptionTypeActions.updateOptionTypeSuccess());
+        },
+        error: () => {
+          this.store.dispatch(OptionTypeActions.updateOptionTypeError());
+        },
+      });
+  }
+
+  private getPatchMethod(type: OptionTypeTableOption) {
+    switch (type) {
+      case 'organization-unit':
+        return this.organizationUnitInternalService.patchSingleOrganizationUnitsInternalV2PatchUnit
+      default:
+        throw new Error('Invalid option type');
+    }
+  }
+
+  private getRequestBody(optionTypeItem: OptionTypeTableItem) {
+    return {
+      description: optionTypeItem.description,
+    };
   }
 }
