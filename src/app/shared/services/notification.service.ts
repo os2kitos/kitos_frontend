@@ -8,6 +8,7 @@ import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
 import { OrganizationActions } from 'src/app/store/organization/actions';
+import { OrganizationUiModuleCustomizationActions } from 'src/app/store/organization/organization-ui-customization/actions';
 import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
 import { PopupMessageActions } from 'src/app/store/popup-messages/actions';
@@ -352,6 +353,21 @@ export class NotificationService implements OnDestroy {
     this.subscribeMultipleError(
       ofType(ITSystemUsageActions.removeItSystemUsageRoleError, ITContractActions.removeItContractRoleError),
       $localize`Kunne ikke fjerne tildelingen`
+    );
+
+    this.subscribeAsError(
+      ofType(OrganizationUiModuleCustomizationActions.getUIModuleCustomizationError),
+      $localize`Kunne ikke hente lokal tilpasning af brugerfladen`
+    );
+
+    this.subscribeAsError(
+      ofType(OrganizationUiModuleCustomizationActions.putUIModuleCustomizationError),
+      $localize`Kunne ikke opdatere lokal tilpasning af brugerfladen`
+    );
+
+    this.subscribeAsError(
+      ofType(OrganizationUiModuleCustomizationActions.putUIModuleCustomizationSuccess),
+      $localize`Lokal tilpasning af brugerfladen blev opdateret`
     );
   }
 
