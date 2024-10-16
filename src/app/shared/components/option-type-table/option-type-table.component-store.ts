@@ -8,7 +8,7 @@ import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 import { RegularOptionType } from '../../models/options/regular-option-types.model';
 import { RoleOptionTypes } from '../../models/options/role-option-types.model';
 import { filterNullish } from '../../pipes/filter-nullish';
-import { RegularOptionTypeServiceService } from '../../services/regular-option-type-service.service';
+import { RegularOptionTypeService } from '../../services/regular-option-type.service';
 import { RoleOptionTypeService } from '../../services/role-option-type.service';
 import { OptionTypeTableItem, OptionTypeTableOption } from './option-type-table.component';
 
@@ -27,7 +27,7 @@ export class OptionTypeTableComponentStore extends ComponentStore<State> {
   constructor(
     private readonly store: Store,
     private roleOptionTypeService: RoleOptionTypeService,
-    private regularOptionTypeService: RegularOptionTypeServiceService
+    private regularOptionTypeService: RegularOptionTypeService
   ) {
     super();
   }
