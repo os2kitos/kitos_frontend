@@ -34,6 +34,8 @@ import { RoleOptionTypeEffects } from './roles-option-type-store/effects';
 import { roleOptionTypeFeature } from './roles-option-type-store/reducer';
 import { UserEffects } from './user-store/effects';
 import { userFeature } from './user-store/reducer';
+import { OrganizationUIModuleCustomizationEffects } from './organization/organization-ui-customization/effects';
+import { organizationUIModuleCustomizationFeature } from './organization/organization-ui-customization/reducer';
 
 @NgModule({
   imports: [
@@ -62,6 +64,7 @@ import { userFeature } from './user-store/reducer';
     StoreModule.forFeature(exportFeature),
     StoreModule.forFeature(organizationUserFeature),
     StoreModule.forFeature(organizationFeature),
+    StoreModule.forFeature(organizationUIModuleCustomizationFeature),
     EffectsModule.forRoot([]),
     EffectsModule.forFeature([
       UserEffects,
@@ -77,6 +80,7 @@ import { userFeature } from './user-store/reducer';
       GridExportEffects,
       OrganizationUserEffects,
       OrganizationEffects,
+      OrganizationUIModuleCustomizationEffects,
     ]),
     RouterModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),
