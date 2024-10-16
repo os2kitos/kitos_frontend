@@ -11,6 +11,7 @@ import { filterNullish } from '../../pipes/filter-nullish';
 import { RegularOptionTypeService } from '../../services/regular-option-type.service';
 import { RoleOptionTypeService } from '../../services/role-option-type.service';
 import { OptionTypeTableItem, OptionTypeTableOption } from './option-type-table.component';
+import { isRoleOptionType } from '../../helpers/option-type-helpers';
 
 interface State {
   isLoading: boolean;
@@ -51,7 +52,7 @@ export class OptionTypeTableComponentStore extends ComponentStore<State> {
       filterNullish(),
       concatLatestFrom(() => this.optionType$),
       switchMap(([organizationUuid, type]) => {
-        if (this.isRoleOptionType(type)) {
+        if (isRoleOptionType(type)) {
           return this.roleOptionTypeService.getAvailableOptions(organizationUuid, type as RoleOptionTypes);
         } else {
           return this.regularOptionTypeService.getAvailableOptions(organizationUuid, type as RegularOptionType);
@@ -70,12 +71,6 @@ export class OptionTypeTableComponentStore extends ComponentStore<State> {
       obligatory: false,
     };
     return item;
-  }
-
-  private isRoleOptionType(type: OptionTypeTableOption): boolean {
-    return (
-      type === 'organization-unit' || type === 'it-system-usage' || type === 'it-contract' || type === 'data-processing'
-    );
   }
 
   public getOptionTypeItems = this.effect<void>((trigger$) =>
