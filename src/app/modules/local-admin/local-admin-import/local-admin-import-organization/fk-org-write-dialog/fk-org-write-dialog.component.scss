@@ -1,0 +1,14 @@
+@import "theme";
+
+.content {
+  max-height: 100%;
+  overflow: hidden;
+  display: block;
+  flex-direction: column;
+}
+
+.scrollable-container {
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 90%;
+}

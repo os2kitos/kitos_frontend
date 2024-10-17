@@ -1,24 +1,35 @@
 import { Component, OnInit } from '@angular/core';
-import { FkOrgComponentStore } from './fk-org.component-store';
+import { MatDialog } from '@angular/material/dialog';
+import { Store } from '@ngrx/store';
+import { FkOrgActions } from 'src/app/store/local-admin/fk-org/actions';
+import {
+  selectAccessError,
+  selectAccessGranted,
+  selectIsConnected,
+  selectIsLoadingConnectionStatus,
+  selectSynchronizationStatus,
+} from 'src/app/store/local-admin/fk-org/selectors';
+import { FkOrgWriteDialogComponent } from './fk-org-write-dialog/fk-org-write-dialog.component';
 
 @Component({
   selector: 'app-local-admin-import-organization',
   templateUrl: './local-admin-import-organization.component.html',
   styleUrl: './local-admin-import-organization.component.scss',
-  providers: [FkOrgComponentStore],
 })
 export class LocalAdminImportOrganizationComponent implements OnInit {
-  public readonly synchronizationStatus$ = this.componentStore.synchronizationStatus$;
-  public readonly isLoadingConnectionStatus$ = this.componentStore.isLoadingConnectionStatus$;
-  public readonly accessGranted$ = this.componentStore.accessGranted$;
-  public readonly accessError$ = this.componentStore.accessError$;
-  public readonly isConnected$ = this.componentStore.isConnected$;
+  public readonly synchronizationStatus$ = this.store.select(selectSynchronizationStatus);
+  public readonly isLoadingConnectionStatus$ = this.store.select(selectIsLoadingConnectionStatus);
+  public readonly accessGranted$ = this.store.select(selectAccessGranted);
+  public readonly accessError$ = this.store.select(selectAccessError);
+  public readonly isConnected$ = this.store.select(selectIsConnected);
 
-  constructor(private componentStore: FkOrgComponentStore) {}
+  constructor(private store: Store, private matDialog: MatDialog) {}
 
   ngOnInit(): void {
-    this.componentStore.getSynchronizationStatus();
+    this.store.dispatch(FkOrgActions.getSynchronizationStatus());
   }
 
-  public openImportDialog() {}
+  public openImportDialog() {
+    this.matDialog.open(FkOrgWriteDialogComponent, { height: '95%', maxHeight: '95%' });
+  }
 }

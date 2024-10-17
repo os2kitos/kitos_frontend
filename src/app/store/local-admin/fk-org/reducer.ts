@@ -7,6 +7,10 @@ export const fkOrgInitialState: FkOrgState = {
   synchronizationStatus: undefined,
   accessError: undefined,
   isLoadingConnectionStatus: false,
+
+  snapshot: undefined,
+  isLoadingSnapshot: false,
+  hasSnapshotFailed: false,
 };
 
 export const fkOrgFeature = createFeature({
@@ -36,6 +40,19 @@ export const fkOrgFeature = createFeature({
         ...state,
         accessError: handleAccessError('Unknown'),
       })
+    ),
+
+    on(
+      FkOrgActions.getSnapshot,
+      (state): FkOrgState => ({ ...state, snapshot: undefined, isLoadingSnapshot: true, hasSnapshotFailed: false })
+    ),
+    on(
+      FkOrgActions.getSnapshotSuccess,
+      (state, { snapshot }): FkOrgState => ({ ...state, snapshot, isLoadingSnapshot: false })
+    ),
+    on(
+      FkOrgActions.getSnapshotError,
+      (state): FkOrgState => ({ ...state, isLoadingSnapshot: false, hasSnapshotFailed: true })
     )
   ),
 });

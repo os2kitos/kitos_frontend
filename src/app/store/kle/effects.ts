@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';import { concatLatestFrom } from '@ngrx/operators';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { concatLatestFrom } from '@ngrx/operators';
 
 import { Store } from '@ngrx/store';
 import { catchError, filter, map, of, switchMap } from 'rxjs';
@@ -17,7 +18,7 @@ export class KLEEffects {
       concatLatestFrom(() => this.store.select(selectHasValidCache)),
       filter(([_, validCache]) => !validCache),
       switchMap(() =>
-        this.apiKleOptionService.getSingleKleOptionV2Get({}).pipe(
+        this.apiKleOptionService.getSingleKleOptionV2GetV1({}).pipe(
           map((response) => KLEActions.getKLEsSuccess(response.payload)),
           catchError(() => of(KLEActions.getKLEsError()))
         )

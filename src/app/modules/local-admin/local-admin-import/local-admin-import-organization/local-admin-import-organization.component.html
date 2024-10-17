@@ -19,7 +19,28 @@
       <app-paragraph helpTextKey="local-config-fk-org-sync-status.label" [bold]="true" i18n
         >Synkronisering</app-paragraph
       >
-      <div *ngIf="isConnected$ | async">YOU ARE CONNECTED</div>
+      <ng-container *ngIf="synchronizationStatus$ | async as synchronizationStatus">
+        <app-native-table *ngIf="isConnected$ | async">
+          <thead>
+            <th width="33%" i18n>Niveauer der synkroniseres</th>
+            <th width="33%" i18n>Tjekker automatisk (hver mandag nat) efter ventende opdateringer</th>
+            <th width="33%" i18n>Dato for seneste automatiske tjek</th>
+          </thead>
+          <tbody>
+            <tr>
+              <td i18n>
+                {{
+                  synchronizationStatus.synchronizationDepth === null
+                    ? "Alle"
+                    : synchronizationStatus.synchronizationDepth
+                }}
+              </td>
+              <td i18n>{{ synchronizationStatus.subscribesToUpdates ? "Ja" : "Nej" }}</td>
+              <td>{{ synchronizationStatus.dateOfLatestCheckBySubscription }}</td>
+            </tr>
+          </tbody>
+        </app-native-table>
+      </ng-container>
       <app-paragraph i18n *ngIf="(isConnected$ | async) === false"
         >Organisationen er <strong>ikke</strong> forbundet til FK Organisation</app-paragraph
       >

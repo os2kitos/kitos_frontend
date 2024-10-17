@@ -1,1 +1,24 @@
-<app-dialog [title]=""> </app-dialog>
+<app-dialog overflow="none">
+  <app-dialog-header [title]="title"> </app-dialog-header>
+
+  <div class="content">
+    <app-standard-vertical-content-grid class="scrollable-container">
+      <ng-container *ngIf="(isLoading$ | async) !== true">
+        <app-entity-tree
+          *ngIf="snapshot$ | async as snapshot"
+          itemType="organization"
+          [currentNodeUuid]="snapshot.uuid"
+          [nodes]="(snapshotTree$ | async) ?? []"
+        ></app-entity-tree>
+      </ng-container>
+      <!-- <app-drag-and-drop-tree
+
+      itemType="organization"
+      [currentNodeUuid]="snapshot.uuid"
+      [nodes]="(snapshotTree$ | async) ?? []"
+      [disableDrag]="true"
+    ></app-drag-and-drop-tree> -->
+      <app-loading *ngIf="isLoading$ | async"></app-loading>
+    </app-standard-vertical-content-grid>
+  </div>
+</app-dialog>

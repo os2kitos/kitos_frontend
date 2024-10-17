@@ -18,6 +18,8 @@ import { ITSystemEffects } from './it-system/effects';
 import { itSystemFeature } from './it-system/reducer';
 import { KLEEffects } from './kle/effects';
 import { kleFeature } from './kle/reducer';
+import { FkOrgEffects } from './local-admin/fk-org/effects';
+import { fkOrgFeature } from './local-admin/fk-org/reducer';
 import { exportReadyMetaReducer } from './meta/grid-export.reducer';
 import { localStorageSyncReducer } from './meta/local-storage-sync.reducer';
 import { resetReducer } from './meta/reset.reducer';
@@ -62,6 +64,7 @@ import { userFeature } from './user-store/reducer';
     StoreModule.forFeature(exportFeature),
     StoreModule.forFeature(organizationUserFeature),
     StoreModule.forFeature(organizationFeature),
+    StoreModule.forFeature(fkOrgFeature),
     EffectsModule.forRoot([]),
     EffectsModule.forFeature([
       UserEffects,
@@ -77,6 +80,7 @@ import { userFeature } from './user-store/reducer';
       GridExportEffects,
       OrganizationUserEffects,
       OrganizationEffects,
+      FkOrgEffects,
     ]),
     RouterModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),

@@ -1,5 +1,5 @@
 import { createActionGroup, emptyProps } from '@ngrx/store';
-import { APIStsOrganizationSynchronizationDetailsResponseDTO } from 'src/app/api/v2';
+import { APIStsOrganizationOrgUnitDTO, APIStsOrganizationSynchronizationDetailsResponseDTO } from 'src/app/api/v2';
 
 export const FkOrgActions = createActionGroup({
   source: 'FkOrg',
@@ -9,5 +9,9 @@ export const FkOrgActions = createActionGroup({
       synchronizationStatus: APIStsOrganizationSynchronizationDetailsResponseDTO
     ) => ({ synchronizationStatus }),
     'Get Synchronization Status Error': emptyProps(),
+
+    'Get Snapshot': emptyProps(),
+    'Get Snapshot Success': (snapshot: APIStsOrganizationOrgUnitDTO) => ({ snapshot }),
+    'Get Snapshot Error': emptyProps(),
   },
 });
