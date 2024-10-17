@@ -1,5 +1,5 @@
 import { createSelector } from '@ngrx/store';
-import { ItSystemUsages as ItSystemUsagesModuleKey } from 'src/app/shared/ui-module-customization-keys.constants';
+import { UIModuleCustomizationKey } from 'src/app/shared/enums/ui-module-customization-key';
 import { organizationUIModuleCustomizationFeature } from './reducer';
 import { UIModuleCustomizationState } from './state';
 
@@ -15,6 +15,6 @@ export const selectUIModuleCustomizations = createSelector(
 export const selectITSystemUsagesUIModuleCustomization = createSelector(
   selectUIModuleCustomizationState,
   (state: UIModuleCustomizationState) => {
-    return state.uiModuleCustomizations.find((c) => c.module == ItSystemUsagesModuleKey);
+    return state.uiModuleCustomizations.find((c) => c.module == UIModuleCustomizationKey.ItSystemUsage);
   }
 );
