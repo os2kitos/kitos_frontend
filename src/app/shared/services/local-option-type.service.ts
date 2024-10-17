@@ -118,6 +118,58 @@ export class LocalOptionTypeService {
           this.businessTypeService.getManyItSystemLocalBusinessTypesInternalV2GetLocalBusinessTypes({
             organizationUuid,
           });
+      case 'it-system_usage-archive-type':
+        return (organizationUuid) =>
+          this.archiveTypeService.getManyItSystemLocalArchiveTypesInternalV2GetLocalArchiveTypes({
+            organizationUuid,
+          });
+      case 'it-system_usage-archive-location-type':
+        return (organizationUuid) =>
+          this.archiveLocationService.getManyItSystemLocalArchiveLocationTypesInternalV2GetLocalArchiveLocationTypes({
+            organizationUuid,
+          });
+      case 'it-system_usage-archive-location-test-type':
+        return (organizationUuid) =>
+          this.archiveTestLocationService.getManyItSystemLocalArchiveTestLocationTypesInternalV2GetLocalArchiveTestLocationTypes(
+            {
+              organizationUuid,
+            }
+          );
+      case 'it-interface_data-type':
+        return (organizationUuid) =>
+          this.dataTypeService.getManyItSystemLocalDataTypesInternalV2GetLocalDataTypes({
+            organizationUuid,
+          });
+      case 'it-system_usage-relation-frequency-type':
+        return (organizationUuid) =>
+          this.frequencyTypeService.getManyItSystemLocalFrequencyTypesInternalV2GetLocalRelationFrequencyTypes({
+            organizationUuid,
+          });
+      case 'it-interface_interface-type':
+        return (organizationUuid) =>
+          this.interfaceTypeService.getManyItSystemLocalInterfaceTypesInternalV2GetLocalInterfaceTypes({
+            organizationUuid,
+          });
+      case 'it_system_usage-gdpr-sensitive-data-type':
+        return (organizationUuid) =>
+          this.sensitivePersonalDataTypeService.getManyItSystemLocalSensitivePersonalDataTypesInternalV2GetLocalSensitivePersonalDataTypes(
+            {
+              organizationUuid,
+            }
+          );
+      case 'it-system_usage-data-classification-type':
+        return (organizationUuid) =>
+          this.itSystemCategoryService.getManyItSystemLocalItSystemCategoriesTypesInternalV2GetLocalItSystemCategoryTypes(
+            {
+              organizationUuid,
+            }
+          );
+      case 'it_system_usage-gdpr-registered-data-category-type':
+        return (organizationUuid) =>
+          this.registerTypeService.getManyItSystemLocalRegisterTypesInternalV2GetLocalRegisterTypes({
+            organizationUuid,
+          });
+
       case 'organization-unit':
         return (organizationUuid) =>
           this.organiztionUnitRoleService.getManyOrganizationUnitLocalRoleOptionTypesInternalV2GetLocalOrganizationUnitRoles(
