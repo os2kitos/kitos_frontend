@@ -3,7 +3,7 @@ import { first, switchMap, tap, catchError, throwError, Observable } from 'rxjs'
 import {
   APILocalRegularOptionResponseDTO,
   APILocalRegularOptionUpdateRequestDTO,
-  APIV2ItSystemLocalOptionTypesInternalINTERNALService,
+  APIV2ItSystemLocalRegularOptionTypesInternalINTERNALService,
 } from 'src/app/api/v2';
 import { OptionTypeActions } from 'src/app/store/option-types/actions';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
@@ -17,7 +17,7 @@ import { Store } from '@ngrx/store';
 export class LocalRegularOptionTypeService {
   constructor(
     private store: Store,
-    private itSystemLocalOptionTypesService: APIV2ItSystemLocalOptionTypesInternalINTERNALService
+    private itSystemLocalOptionTypesService: APIV2ItSystemLocalRegularOptionTypesInternalINTERNALService
   ) {}
 
   public getLocalOptions(
@@ -85,7 +85,7 @@ export class LocalRegularOptionTypeService {
     switch (optionType) {
       case 'it-system_business-type':
         return (organizationUuid) =>
-          this.itSystemLocalOptionTypesService.getManyItSystemLocalOptionTypesInternalV2GetLocalBusinessTypes({
+          this.itSystemLocalOptionTypesService.getManyItSystemLocalRegularOptionTypesInternalV2GetLocalBusinessTypes({
             organizationUuid,
           });
       default:
@@ -97,11 +97,13 @@ export class LocalRegularOptionTypeService {
     switch (optionType) {
       case 'it-system_business-type':
         return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
-          this.itSystemLocalOptionTypesService.patchSingleItSystemLocalOptionTypesInternalV2PatchLocalBusinessType({
-            organizationUuid,
-            optionUuid,
-            dto: request,
-          });
+          this.itSystemLocalOptionTypesService.patchSingleItSystemLocalRegularOptionTypesInternalV2PatchLocalBusinessType(
+            {
+              organizationUuid,
+              optionUuid,
+              dto: request,
+            }
+          );
       default:
         throw new Error(`Patch operation is not supported for ${optionType}`);
     }
@@ -113,10 +115,12 @@ export class LocalRegularOptionTypeService {
     switch (optionType) {
       case 'it-system_business-type':
         return (organizationUuid, optionUuid) =>
-          this.itSystemLocalOptionTypesService.postSingleItSystemLocalOptionTypesInternalV2CreateLocalBusinessType({
-            organizationUuid,
-            dto: { uuid: optionUuid },
-          });
+          this.itSystemLocalOptionTypesService.postSingleItSystemLocalRegularOptionTypesInternalV2CreateLocalBusinessType(
+            {
+              organizationUuid,
+              dto: { optionUuid },
+            }
+          );
       default:
         throw new Error(`Create operation is not supported for ${optionType}`);
     }
@@ -128,10 +132,12 @@ export class LocalRegularOptionTypeService {
     switch (optionType) {
       case 'it-system_business-type':
         return (organizationUuid, optionUuid) =>
-          this.itSystemLocalOptionTypesService.deleteSingleItSystemLocalOptionTypesInternalV2DeleteLocalBusinessType({
-            organizationUuid,
-            optionUuid,
-          });
+          this.itSystemLocalOptionTypesService.deleteSingleItSystemLocalRegularOptionTypesInternalV2DeleteLocalBusinessType(
+            {
+              organizationUuid,
+              optionUuid,
+            }
+          );
       default:
         throw new Error(`Create operation is not supported for ${optionType}`);
     }

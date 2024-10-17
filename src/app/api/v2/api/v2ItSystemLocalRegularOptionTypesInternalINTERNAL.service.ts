@@ -19,7 +19,7 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
-import { APILocalRegularOptionCreateRequestDTO } from '../model/aPILocalRegularOptionCreateRequestDTO';
+import { APILocalOptionCreateRequestDTO } from '../model/aPILocalOptionCreateRequestDTO';
 // @ts-ignore
 import { APILocalRegularOptionResponseDTO } from '../model/aPILocalRegularOptionResponseDTO';
 // @ts-ignore
@@ -30,36 +30,36 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface DeleteSingleItSystemLocalOptionTypesInternalV2DeleteLocalBusinessTypeRequestParams {
+export interface DeleteSingleItSystemLocalRegularOptionTypesInternalV2DeleteLocalBusinessTypeRequestParams {
     organizationUuid: string;
     optionUuid: string;
 }
 
-export interface GetManyItSystemLocalOptionTypesInternalV2GetLocalBusinessTypesRequestParams {
+export interface GetManyItSystemLocalRegularOptionTypesInternalV2GetLocalBusinessTypesRequestParams {
     organizationUuid: string;
 }
 
-export interface GetSingleItSystemLocalOptionTypesInternalV2GetLocalBusinessTypeByOptionIdRequestParams {
+export interface GetSingleItSystemLocalRegularOptionTypesInternalV2GetLocalBusinessTypeByOptionIdRequestParams {
     organizationUuid: string;
     optionUuid: string;
 }
 
-export interface PatchSingleItSystemLocalOptionTypesInternalV2PatchLocalBusinessTypeRequestParams {
+export interface PatchSingleItSystemLocalRegularOptionTypesInternalV2PatchLocalBusinessTypeRequestParams {
     organizationUuid: string;
     optionUuid: string;
     dto: APILocalRegularOptionUpdateRequestDTO;
 }
 
-export interface PostSingleItSystemLocalOptionTypesInternalV2CreateLocalBusinessTypeRequestParams {
+export interface PostSingleItSystemLocalRegularOptionTypesInternalV2CreateLocalBusinessTypeRequestParams {
     organizationUuid: string;
-    dto: APILocalRegularOptionCreateRequestDTO;
+    dto: APILocalOptionCreateRequestDTO;
 }
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class APIV2ItSystemLocalOptionTypesInternalINTERNALService {
+export class APIV2ItSystemLocalRegularOptionTypesInternalINTERNALService {
 
     protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();
@@ -125,17 +125,17 @@ export class APIV2ItSystemLocalOptionTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public deleteSingleItSystemLocalOptionTypesInternalV2DeleteLocalBusinessType(requestParameters: DeleteSingleItSystemLocalOptionTypesInternalV2DeleteLocalBusinessTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
-    public deleteSingleItSystemLocalOptionTypesInternalV2DeleteLocalBusinessType(requestParameters: DeleteSingleItSystemLocalOptionTypesInternalV2DeleteLocalBusinessTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
-    public deleteSingleItSystemLocalOptionTypesInternalV2DeleteLocalBusinessType(requestParameters: DeleteSingleItSystemLocalOptionTypesInternalV2DeleteLocalBusinessTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
-    public deleteSingleItSystemLocalOptionTypesInternalV2DeleteLocalBusinessType(requestParameters: DeleteSingleItSystemLocalOptionTypesInternalV2DeleteLocalBusinessTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
+    public deleteSingleItSystemLocalRegularOptionTypesInternalV2DeleteLocalBusinessType(requestParameters: DeleteSingleItSystemLocalRegularOptionTypesInternalV2DeleteLocalBusinessTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
+    public deleteSingleItSystemLocalRegularOptionTypesInternalV2DeleteLocalBusinessType(requestParameters: DeleteSingleItSystemLocalRegularOptionTypesInternalV2DeleteLocalBusinessTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
+    public deleteSingleItSystemLocalRegularOptionTypesInternalV2DeleteLocalBusinessType(requestParameters: DeleteSingleItSystemLocalRegularOptionTypesInternalV2DeleteLocalBusinessTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
+    public deleteSingleItSystemLocalRegularOptionTypesInternalV2DeleteLocalBusinessType(requestParameters: DeleteSingleItSystemLocalRegularOptionTypesInternalV2DeleteLocalBusinessTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling deleteSingleItSystemLocalOptionTypesInternalV2DeleteLocalBusinessType.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling deleteSingleItSystemLocalRegularOptionTypesInternalV2DeleteLocalBusinessType.');
         }
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
-            throw new Error('Required parameter optionUuid was null or undefined when calling deleteSingleItSystemLocalOptionTypesInternalV2DeleteLocalBusinessType.');
+            throw new Error('Required parameter optionUuid was null or undefined when calling deleteSingleItSystemLocalRegularOptionTypesInternalV2DeleteLocalBusinessType.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -187,13 +187,13 @@ export class APIV2ItSystemLocalOptionTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getManyItSystemLocalOptionTypesInternalV2GetLocalBusinessTypes(requestParameters: GetManyItSystemLocalOptionTypesInternalV2GetLocalBusinessTypesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APILocalRegularOptionResponseDTO>>;
-    public getManyItSystemLocalOptionTypesInternalV2GetLocalBusinessTypes(requestParameters: GetManyItSystemLocalOptionTypesInternalV2GetLocalBusinessTypesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APILocalRegularOptionResponseDTO>>>;
-    public getManyItSystemLocalOptionTypesInternalV2GetLocalBusinessTypes(requestParameters: GetManyItSystemLocalOptionTypesInternalV2GetLocalBusinessTypesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APILocalRegularOptionResponseDTO>>>;
-    public getManyItSystemLocalOptionTypesInternalV2GetLocalBusinessTypes(requestParameters: GetManyItSystemLocalOptionTypesInternalV2GetLocalBusinessTypesRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyItSystemLocalRegularOptionTypesInternalV2GetLocalBusinessTypes(requestParameters: GetManyItSystemLocalRegularOptionTypesInternalV2GetLocalBusinessTypesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APILocalRegularOptionResponseDTO>>;
+    public getManyItSystemLocalRegularOptionTypesInternalV2GetLocalBusinessTypes(requestParameters: GetManyItSystemLocalRegularOptionTypesInternalV2GetLocalBusinessTypesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APILocalRegularOptionResponseDTO>>>;
+    public getManyItSystemLocalRegularOptionTypesInternalV2GetLocalBusinessTypes(requestParameters: GetManyItSystemLocalRegularOptionTypesInternalV2GetLocalBusinessTypesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APILocalRegularOptionResponseDTO>>>;
+    public getManyItSystemLocalRegularOptionTypesInternalV2GetLocalBusinessTypes(requestParameters: GetManyItSystemLocalRegularOptionTypesInternalV2GetLocalBusinessTypesRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyItSystemLocalOptionTypesInternalV2GetLocalBusinessTypes.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyItSystemLocalRegularOptionTypesInternalV2GetLocalBusinessTypes.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -245,17 +245,17 @@ export class APIV2ItSystemLocalOptionTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItSystemLocalOptionTypesInternalV2GetLocalBusinessTypeByOptionId(requestParameters: GetSingleItSystemLocalOptionTypesInternalV2GetLocalBusinessTypeByOptionIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
-    public getSingleItSystemLocalOptionTypesInternalV2GetLocalBusinessTypeByOptionId(requestParameters: GetSingleItSystemLocalOptionTypesInternalV2GetLocalBusinessTypeByOptionIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
-    public getSingleItSystemLocalOptionTypesInternalV2GetLocalBusinessTypeByOptionId(requestParameters: GetSingleItSystemLocalOptionTypesInternalV2GetLocalBusinessTypeByOptionIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
-    public getSingleItSystemLocalOptionTypesInternalV2GetLocalBusinessTypeByOptionId(requestParameters: GetSingleItSystemLocalOptionTypesInternalV2GetLocalBusinessTypeByOptionIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleItSystemLocalRegularOptionTypesInternalV2GetLocalBusinessTypeByOptionId(requestParameters: GetSingleItSystemLocalRegularOptionTypesInternalV2GetLocalBusinessTypeByOptionIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
+    public getSingleItSystemLocalRegularOptionTypesInternalV2GetLocalBusinessTypeByOptionId(requestParameters: GetSingleItSystemLocalRegularOptionTypesInternalV2GetLocalBusinessTypeByOptionIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
+    public getSingleItSystemLocalRegularOptionTypesInternalV2GetLocalBusinessTypeByOptionId(requestParameters: GetSingleItSystemLocalRegularOptionTypesInternalV2GetLocalBusinessTypeByOptionIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
+    public getSingleItSystemLocalRegularOptionTypesInternalV2GetLocalBusinessTypeByOptionId(requestParameters: GetSingleItSystemLocalRegularOptionTypesInternalV2GetLocalBusinessTypeByOptionIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleItSystemLocalOptionTypesInternalV2GetLocalBusinessTypeByOptionId.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleItSystemLocalRegularOptionTypesInternalV2GetLocalBusinessTypeByOptionId.');
         }
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
-            throw new Error('Required parameter optionUuid was null or undefined when calling getSingleItSystemLocalOptionTypesInternalV2GetLocalBusinessTypeByOptionId.');
+            throw new Error('Required parameter optionUuid was null or undefined when calling getSingleItSystemLocalRegularOptionTypesInternalV2GetLocalBusinessTypeByOptionId.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -307,21 +307,21 @@ export class APIV2ItSystemLocalOptionTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleItSystemLocalOptionTypesInternalV2PatchLocalBusinessType(requestParameters: PatchSingleItSystemLocalOptionTypesInternalV2PatchLocalBusinessTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
-    public patchSingleItSystemLocalOptionTypesInternalV2PatchLocalBusinessType(requestParameters: PatchSingleItSystemLocalOptionTypesInternalV2PatchLocalBusinessTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
-    public patchSingleItSystemLocalOptionTypesInternalV2PatchLocalBusinessType(requestParameters: PatchSingleItSystemLocalOptionTypesInternalV2PatchLocalBusinessTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
-    public patchSingleItSystemLocalOptionTypesInternalV2PatchLocalBusinessType(requestParameters: PatchSingleItSystemLocalOptionTypesInternalV2PatchLocalBusinessTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public patchSingleItSystemLocalRegularOptionTypesInternalV2PatchLocalBusinessType(requestParameters: PatchSingleItSystemLocalRegularOptionTypesInternalV2PatchLocalBusinessTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
+    public patchSingleItSystemLocalRegularOptionTypesInternalV2PatchLocalBusinessType(requestParameters: PatchSingleItSystemLocalRegularOptionTypesInternalV2PatchLocalBusinessTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
+    public patchSingleItSystemLocalRegularOptionTypesInternalV2PatchLocalBusinessType(requestParameters: PatchSingleItSystemLocalRegularOptionTypesInternalV2PatchLocalBusinessTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
+    public patchSingleItSystemLocalRegularOptionTypesInternalV2PatchLocalBusinessType(requestParameters: PatchSingleItSystemLocalRegularOptionTypesInternalV2PatchLocalBusinessTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling patchSingleItSystemLocalOptionTypesInternalV2PatchLocalBusinessType.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling patchSingleItSystemLocalRegularOptionTypesInternalV2PatchLocalBusinessType.');
         }
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
-            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItSystemLocalOptionTypesInternalV2PatchLocalBusinessType.');
+            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItSystemLocalRegularOptionTypesInternalV2PatchLocalBusinessType.');
         }
         const dto = requestParameters.dto;
         if (dto === null || dto === undefined) {
-            throw new Error('Required parameter dto was null or undefined when calling patchSingleItSystemLocalOptionTypesInternalV2PatchLocalBusinessType.');
+            throw new Error('Required parameter dto was null or undefined when calling patchSingleItSystemLocalRegularOptionTypesInternalV2PatchLocalBusinessType.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -384,17 +384,17 @@ export class APIV2ItSystemLocalOptionTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleItSystemLocalOptionTypesInternalV2CreateLocalBusinessType(requestParameters: PostSingleItSystemLocalOptionTypesInternalV2CreateLocalBusinessTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
-    public postSingleItSystemLocalOptionTypesInternalV2CreateLocalBusinessType(requestParameters: PostSingleItSystemLocalOptionTypesInternalV2CreateLocalBusinessTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
-    public postSingleItSystemLocalOptionTypesInternalV2CreateLocalBusinessType(requestParameters: PostSingleItSystemLocalOptionTypesInternalV2CreateLocalBusinessTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
-    public postSingleItSystemLocalOptionTypesInternalV2CreateLocalBusinessType(requestParameters: PostSingleItSystemLocalOptionTypesInternalV2CreateLocalBusinessTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public postSingleItSystemLocalRegularOptionTypesInternalV2CreateLocalBusinessType(requestParameters: PostSingleItSystemLocalRegularOptionTypesInternalV2CreateLocalBusinessTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
+    public postSingleItSystemLocalRegularOptionTypesInternalV2CreateLocalBusinessType(requestParameters: PostSingleItSystemLocalRegularOptionTypesInternalV2CreateLocalBusinessTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
+    public postSingleItSystemLocalRegularOptionTypesInternalV2CreateLocalBusinessType(requestParameters: PostSingleItSystemLocalRegularOptionTypesInternalV2CreateLocalBusinessTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
+    public postSingleItSystemLocalRegularOptionTypesInternalV2CreateLocalBusinessType(requestParameters: PostSingleItSystemLocalRegularOptionTypesInternalV2CreateLocalBusinessTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling postSingleItSystemLocalOptionTypesInternalV2CreateLocalBusinessType.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling postSingleItSystemLocalRegularOptionTypesInternalV2CreateLocalBusinessType.');
         }
         const dto = requestParameters.dto;
         if (dto === null || dto === undefined) {
-            throw new Error('Required parameter dto was null or undefined when calling postSingleItSystemLocalOptionTypesInternalV2CreateLocalBusinessType.');
+            throw new Error('Required parameter dto was null or undefined when calling postSingleItSystemLocalRegularOptionTypesInternalV2CreateLocalBusinessType.');
         }
 
         let localVarHeaders = this.defaultHeaders;

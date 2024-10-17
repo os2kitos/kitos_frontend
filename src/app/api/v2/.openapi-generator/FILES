@@ -32,7 +32,7 @@ api/v2ItInterfaceInterfaceType.service.ts
 api/v2ItSystem.service.ts
 api/v2ItSystemBusinessType.service.ts
 api/v2ItSystemInternalINTERNAL.service.ts
-api/v2ItSystemLocalOptionTypesInternalINTERNAL.service.ts
+api/v2ItSystemLocalRegularOptionTypesInternalINTERNAL.service.ts
 api/v2ItSystemUsage.service.ts
 api/v2ItSystemUsageArchiveLocationType.service.ts
 api/v2ItSystemUsageArchiveTestLocationType.service.ts
@@ -48,6 +48,7 @@ api/v2KleOption.service.ts
 api/v2NotificationINTERNAL.service.ts
 api/v2Organization.service.ts
 api/v2OrganizationGridInternalINTERNAL.service.ts
+api/v2OrganizationUnitLocalRoleOptionTypesInternalINTERNAL.service.ts
 api/v2OrganizationUnitRegistrationInternalINTERNAL.service.ts
 api/v2OrganizationUnitRoleType.service.ts
 api/v2OrganizationUnitsInternalINTERNAL.service.ts
@@ -69,6 +70,8 @@ model/columnConfigurationRequestDTO.ts
 model/columnConfigurationResponseDTO.ts
 model/commandPermissionResponseDTO.ts
 model/connectToStsOrganizationRequestDTO.ts
+model/connectionUpdateConsequencesResponseDTO.ts
+model/connectionUpdateOrganizationUnitConsequenceDTO.ts
 model/contactPersonRequestDTO.ts
 model/contactPersonResponseDTO.ts
 model/contractAgreementPeriodDataResponseDTO.ts
@@ -157,9 +160,10 @@ model/kLEDetailsDTOIEnumerableVersionedKLEResponseDTO.ts
 model/kLEDetailsDTOVersionedKLEResponseDTO.ts
 model/localKLEDeviationsRequestDTO.ts
 model/localKLEDeviationsResponseDTO.ts
-model/localRegularOptionCreateRequestDTO.ts
+model/localOptionCreateRequestDTO.ts
 model/localRegularOptionResponseDTO.ts
 model/localRegularOptionUpdateRequestDTO.ts
+model/localRoleOptionResponseDTO.ts
 model/models.ts
 model/mutateRightRequestDTO.ts
 model/mutateUserRightsRequestDTO.ts
@@ -218,6 +222,10 @@ model/scheduledNotificationWriteRequestDTO.ts
 model/sentNotificationResponseDTO.ts
 model/shallowOrganizationResponseDTO.ts
 model/simpleLinkDTO.ts
+model/stsOrganizationAccessStatusResponseDTO.ts
+model/stsOrganizationChangeLogResponseDTO.ts
+model/stsOrganizationOrgUnitDTO.ts
+model/stsOrganizationSynchronizationDetailsResponseDTO.ts
 model/systemRelationWriteRequestDTO.ts
 model/trackingEventResponseDTO.ts
 model/transferOrganizationUnitRegistrationV2RequestDTO.ts
