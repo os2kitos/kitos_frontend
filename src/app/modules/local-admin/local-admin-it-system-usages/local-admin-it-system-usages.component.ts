@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { SegmentButtonOption } from 'src/app/shared/components/segment/segment.component';
-import { ItSystemUsages } from 'src/app/shared/ui-module-customization-keys.constants';
+import { UIModuleCustomizationKey } from 'src/app/shared/enums/ui-module-customization-key';
 import { OrganizationUiModuleCustomizationActions } from 'src/app/store/organization/organization-ui-customization/actions';
 import { selectITSystemUsagesUIModuleCustomization } from 'src/app/store/organization/organization-ui-customization/selectors';
 
@@ -31,7 +31,9 @@ export class LocalAdminItSystemUsagesComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(
-      OrganizationUiModuleCustomizationActions.getUIModuleCustomization({ moduleName: ItSystemUsages })
+      OrganizationUiModuleCustomizationActions.getUIModuleCustomization({
+        moduleName: UIModuleCustomizationKey.ItSystemUsage,
+      })
     );
 
     this.itSystemUsageUIModuleCustomization$.subscribe((u) => console.log(JSON.stringify(u)));
