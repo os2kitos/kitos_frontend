@@ -5,13 +5,13 @@ import { Store } from '@ngrx/store';
 import { map, Observable, switchMap, tap } from 'rxjs';
 import { APILocalRegularOptionResponseDTO } from 'src/app/api/v2';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
+import { isRoleOptionType } from '../../helpers/option-type-helpers';
 import { RegularOptionType } from '../../models/options/regular-option-types.model';
 import { RoleOptionTypes } from '../../models/options/role-option-types.model';
 import { filterNullish } from '../../pipes/filter-nullish';
+import { LocalOptionTypeService } from '../../services/local-option-type.service';
 import { RoleOptionTypeService } from '../../services/role-option-type.service';
 import { OptionTypeTableItem, OptionTypeTableOption } from './option-type-table.component';
-import { isRoleOptionType } from '../../helpers/option-type-helpers';
-import { LocalRegularOptionTypeService } from '../../services/local-regular-option-type.service';
 
 interface State {
   isLoading: boolean;
@@ -28,7 +28,7 @@ export class OptionTypeTableComponentStore extends ComponentStore<State> {
   constructor(
     private readonly store: Store,
     private localRoleOptionService: RoleOptionTypeService,
-    private localRegularOptionService: LocalRegularOptionTypeService
+    private localRegularOptionService: LocalOptionTypeService
   ) {
     super();
   }
