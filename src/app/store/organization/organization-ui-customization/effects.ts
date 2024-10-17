@@ -28,7 +28,7 @@ export class OrganizationUIModuleCustomizationEffects {
             map((uiModuleCustomizationDto) => {
               const uiModuleCustomization = adaptUIModuleCustomization(uiModuleCustomizationDto);
               if (uiModuleCustomization)
-                return OrganizationUiModuleCustomizationActions.getUIModuleCustomizationSuccess(uiModuleCustomization);
+                return OrganizationUiModuleCustomizationActions.getUIModuleCustomizationSuccess({ uiModuleCustomization });
               else return OrganizationUiModuleCustomizationActions.getUIModuleCustomizationError();
             }),
             catchError(() => of(OrganizationUiModuleCustomizationActions.getUIModuleCustomizationError()))
@@ -52,7 +52,7 @@ export class OrganizationUIModuleCustomizationEffects {
             map((uiModuleCustomizationDto) => {
               const uiModuleCustomization = adaptUIModuleCustomization(uiModuleCustomizationDto);
               if (uiModuleCustomization)
-                return OrganizationUiModuleCustomizationActions.getUIModuleCustomizationSuccess(uiModuleCustomization);
+                return OrganizationUiModuleCustomizationActions.getUIModuleCustomizationSuccess({ uiModuleCustomization });
               else return OrganizationUiModuleCustomizationActions.getUIModuleCustomizationError();
             }),
             catchError(() => of(OrganizationUiModuleCustomizationActions.getUIModuleCustomizationError()))

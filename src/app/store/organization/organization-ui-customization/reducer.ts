@@ -17,13 +17,13 @@ export const organizationUIModuleCustomizationFeature = createFeature({
     organizationUIModuleCustomizationInitialState,
     on(
       OrganizationUiModuleCustomizationActions.getUIModuleCustomizationSuccess,
-      (state, uiModuleCustomization): UIModuleCustomizationState => ({
+      (state, { uiModuleCustomization }): UIModuleCustomizationState => ({
         uiModuleCustomizations: [...state.uiModuleCustomizations, uiModuleCustomization],
       })
     ),
     on(
       OrganizationUiModuleCustomizationActions.putUIModuleCustomizationSuccess,
-      (state, uiModuleCustomization): UIModuleCustomizationState => ({
+      (state, { uiModuleCustomization }): UIModuleCustomizationState => ({
         uiModuleCustomizations: [...state.uiModuleCustomizations, uiModuleCustomization],
       })
     )
