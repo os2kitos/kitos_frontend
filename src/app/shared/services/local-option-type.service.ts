@@ -16,7 +16,6 @@ import {
   APIV2ItSystemLocalRegisterTypesInternalINTERNALService,
   APIV2ItSystemLocalRoleOptionTypesInternalINTERNALService,
   APIV2ItSystemLocalSensitivePersonalDataTypesInternalINTERNALService,
-  APIV2ItSystemUsageArchiveTypeService,
   APIV2OrganizationUnitLocalRoleOptionTypesInternalINTERNALService,
 } from 'src/app/api/v2';
 import { OptionTypeActions } from 'src/app/store/option-types/actions';
