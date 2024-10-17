@@ -2,7 +2,7 @@
 
 <app-card>
   <ng-container *ngIf="selectedSegment === LocalAdminItSystemSegmentOption.RegularOptionTypes">
-    <app-option-type-table optionType="it-system_business-type" title="Forretningstyper" i18n-title>
+    <app-option-type-table optionType="it-system_business-type" title="Forretningstyper" [showWriteAccess]="false" i18n-title>
     </app-option-type-table>
   </ng-container>
 
