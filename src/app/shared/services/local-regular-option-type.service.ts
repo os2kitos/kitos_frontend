@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { first, switchMap, tap, catchError, throwError } from 'rxjs';
+import { first, switchMap, tap, catchError, throwError, Observable } from 'rxjs';
 import {
+  APILocalRegularOptionResponseDTO,
   APILocalRegularOptionUpdateRequestDTO,
   APIV2ItSystemLocalOptionTypesInternalINTERNALService,
 } from 'src/app/api/v2';
@@ -19,18 +20,11 @@ export class LocalRegularOptionTypeService {
     private itSystemLocalOptionTypesService: APIV2ItSystemLocalOptionTypesInternalINTERNALService
   ) {}
 
-  private resolvePatchLocalOptionsEndpoint(optionType: RegularOptionType) {
-    switch (optionType) {
-      case 'it-system_business-type':
-        return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
-          this.itSystemLocalOptionTypesService.patchSingleItSystemLocalOptionTypesInternalV2PatchLocalBusinessType({
-            organizationUuid,
-            optionUuid,
-            dto: request,
-          });
-      default:
-        throw new Error(`Patch operation is not supported for ${optionType}`);
-    }
+  public getLocalOptions(
+    organizationUuid: string,
+    optionType: RegularOptionType
+  ): Observable<Array<APILocalRegularOptionResponseDTO>> {
+    return this.resolveLocalOptionsEndpoint(optionType)(organizationUuid);
   }
 
   public patchLocalOption(
@@ -61,5 +55,33 @@ export class LocalRegularOptionTypeService {
 
   public patchIsActive(optionType: RegularOptionType, optionUuid: string, isActive: boolean): void {
     this;
+  }
+
+  private resolveLocalOptionsEndpoint(
+    optionType: RegularOptionType
+  ): (organizationUuid: string) => Observable<Array<APILocalRegularOptionResponseDTO>> {
+    switch (optionType) {
+      case 'it-system_business-type':
+        return (organizationUuid) =>
+          this.itSystemLocalOptionTypesService.getManyItSystemLocalOptionTypesInternalV2GetLocalBusinessTypes({
+            organizationUuid,
+          });
+      default:
+        throw new Error(`Get operation is not supported for ${optionType}`);
+    }
+  }
+
+  private resolvePatchLocalOptionsEndpoint(optionType: RegularOptionType) {
+    switch (optionType) {
+      case 'it-system_business-type':
+        return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
+          this.itSystemLocalOptionTypesService.patchSingleItSystemLocalOptionTypesInternalV2PatchLocalBusinessType({
+            organizationUuid,
+            optionUuid,
+            dto: request,
+          });
+      default:
+        throw new Error(`Patch operation is not supported for ${optionType}`);
+    }
   }
 }

@@ -22,7 +22,7 @@
           <td>
             <app-content-space-between>
               <app-paragraph *ngIf="showDescription" i18n> {{ optionTypeItem.description }} </app-paragraph>
-              <app-table-row-actions *ngIf="showEditButton && !optionTypeItem.obligatory">
+              <app-table-row-actions *ngIf="showEditButton">
                 <app-icon-button (buttonClick)="onEdit(optionTypeItem)">
                   <app-pencil-icon></app-pencil-icon>
                 </app-icon-button>

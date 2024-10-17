@@ -3,15 +3,15 @@ import { ComponentStore } from '@ngrx/component-store';
 import { concatLatestFrom, tapResponse } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { map, Observable, switchMap, tap } from 'rxjs';
-import { APIRoleOptionResponseDTO } from 'src/app/api/v2';
+import { APILocalRegularOptionResponseDTO } from 'src/app/api/v2';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 import { RegularOptionType } from '../../models/options/regular-option-types.model';
 import { RoleOptionTypes } from '../../models/options/role-option-types.model';
 import { filterNullish } from '../../pipes/filter-nullish';
-import { RegularOptionTypeService } from '../../services/regular-option-type.service';
 import { RoleOptionTypeService } from '../../services/role-option-type.service';
 import { OptionTypeTableItem, OptionTypeTableOption } from './option-type-table.component';
 import { isRoleOptionType } from '../../helpers/option-type-helpers';
+import { LocalRegularOptionTypeService } from '../../services/local-regular-option-type.service';
 
 interface State {
   isLoading: boolean;
@@ -27,8 +27,8 @@ export class OptionTypeTableComponentStore extends ComponentStore<State> {
 
   constructor(
     private readonly store: Store,
-    private roleOptionTypeService: RoleOptionTypeService,
-    private regularOptionTypeService: RegularOptionTypeService
+    private localRoleOptionService: RoleOptionTypeService,
+    private localRegularOptionService: LocalRegularOptionTypeService
   ) {
     super();
   }
@@ -47,28 +47,28 @@ export class OptionTypeTableComponentStore extends ComponentStore<State> {
     })
   );
 
-  private getOptionItemsObservable(): Observable<APIRoleOptionResponseDTO[]> {
+  private getOptionItemsObservable(): Observable<APILocalRegularOptionResponseDTO[]> {
     return this.store.select(selectOrganizationUuid).pipe(
       filterNullish(),
       concatLatestFrom(() => this.optionType$),
       switchMap(([organizationUuid, type]) => {
         if (isRoleOptionType(type)) {
-          return this.roleOptionTypeService.getAvailableOptions(organizationUuid, type as RoleOptionTypes);
+          return this.localRoleOptionService.getAvailableOptions(organizationUuid, type as RoleOptionTypes);
         } else {
-          return this.regularOptionTypeService.getAvailableOptions(organizationUuid, type as RegularOptionType);
+          return this.localRegularOptionService.getLocalOptions(organizationUuid, type as RegularOptionType);
         }
       })
     );
   }
 
-  private mapDtoToOptionType(dto: APIRoleOptionResponseDTO): OptionTypeTableItem {
+  private mapDtoToOptionType(dto: APILocalRegularOptionResponseDTO): OptionTypeTableItem {
     const item: OptionTypeTableItem = {
-      active: true,
+      active: dto.isActive ?? false,
       name: dto.name,
-      writeAccess: dto.writeAccess ?? false,
+      writeAccess: false,
       description: dto.description,
       uuid: dto.uuid,
-      obligatory: false,
+      obligatory: dto.isObligatory ?? false,
     };
     return item;
   }
