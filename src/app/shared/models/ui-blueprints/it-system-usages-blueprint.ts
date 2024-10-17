@@ -26,16 +26,24 @@ function setupUIBlueprintKeys(currentLevelKey: string, currentNode: UINodeBluepr
   }
 }
 
+const helpTexts = {
+  cannotChangeTab: 'Det er ikke muligt at slå dette faneblad fra',
+  cannotChangeTabOnlyThroughModuleConfig: $localize`Det er kun muligt at fjerne dette faneblad ved at slå det relaterede modul fra`,
+  generalUiCustomizationHelpText: $localize`Bemærk: Skjules faneblad/felt fjernes relaterede felt(er) også fra overbliksbillederne`,
+  subtreeIsCompleteHelpText:
+    'Fanebladdet slås fra hvis alle felter/grupper fjernes, da siden ellers vil være uden indhold.',
+};
+
 const ItSystemUsageUiBluePrint = {
   module: UIModuleCustomizationKey.ItSystemUsage,
   isObligatory: false,
-  helpText: $localize`Bemærk: Skjules faneblad/felt fjernes relaterede felt(er) også fra overbliksbillederne`,
+  helpText: helpTexts.generalUiCustomizationHelpText,
   text: $localize`IT-Systemer i anvendelse`,
   children: {
     frontPage: {
       text: $localize`Systemforside`,
       isObligatory: true,
-      helpText: $localize`Det er kun muligt at fjerne dette faneblad ved at slå det relaterede modul fra`,
+      helpText: helpTexts.cannotChangeTabOnlyThroughModuleConfig,
       children: {
         usagePeriod: {
           text: $localize`Datofelter`,
@@ -49,7 +57,7 @@ const ItSystemUsageUiBluePrint = {
     contracts: {
       text: $localize`Kontrakter`,
       isObligatory: true,
-      helpText: $localize`Det er kun muligt at fjerne dette faneblad ved at slå det relaterede modul fra`,
+      helpText: helpTexts.cannotChangeTabOnlyThroughModuleConfig,
       children: {
         selectContractToDetermineIfItSystemIsActive: {
           text: $localize`Hvilken kontrakt skal afgøre om IT systemet er aktivt`,
