@@ -4,9 +4,9 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { isRoleOptionType } from 'src/app/shared/helpers/option-type-helpers';
 import { RegularOptionType } from 'src/app/shared/models/options/regular-option-types.model';
 import { RoleOptionTypes } from 'src/app/shared/models/options/role-option-types.model';
-import { RegularOptionTypeService } from 'src/app/shared/services/regular-option-type.service';
-import { RoleOptionTypeService } from 'src/app/shared/services/role-option-type.service';
 import { OptionTypeTableItem, OptionTypeTableOption } from '../option-type-table.component';
+import { LocalRoleOptionTypeService } from 'src/app/shared/services/local-role-option-type.service';
+import { LocalRegularOptionTypeService } from 'src/app/shared/services/local-regular-option-type.service';
 
 @Component({
   selector: 'app-edit-option-type-dialog',
@@ -19,17 +19,19 @@ export class EditOptionTypeDialogComponent implements OnInit {
 
   public form = new FormGroup({
     description: new FormControl<string>(''),
+    active: new FormControl<boolean>(false),
   });
 
   constructor(
     private dialogRef: MatDialogRef<EditOptionTypeDialogComponent>,
-    private roleOptionTypeService: RoleOptionTypeService,
-    private regularOptionTypeService: RegularOptionTypeService
+    private localRoleOptionService: LocalRoleOptionTypeService,
+    private localRegularOptionService: LocalRegularOptionTypeService
   ) {}
 
   public ngOnInit(): void {
     this.form.patchValue({
       description: this.optionTypeItem.description,
+      active: this.optionTypeItem.active,
     });
   }
 
@@ -39,9 +41,9 @@ export class EditOptionTypeDialogComponent implements OnInit {
     const optionUuid = this.optionTypeItem.uuid;
     const request = { description: newDescription };
     if (isRoleOptionType(this.optionType)) {
-      this.roleOptionTypeService.patchLocalRoleOption(this.optionType as RoleOptionTypes, optionUuid, request);
+      this.localRoleOptionService.patchLocalRoleOption(this.optionType as RoleOptionTypes, optionUuid, request);
     } else {
-      this.regularOptionTypeService.patchLocalOption(this.optionType as RegularOptionType, optionUuid, request);
+      this.localRegularOptionService.patchLocalOption(this.optionType as RegularOptionType, optionUuid, request);
     }
     this.dialogRef.close();
   }
@@ -51,6 +53,12 @@ export class EditOptionTypeDialogComponent implements OnInit {
   }
 
   public disableSaveButton(): boolean {
-    return !this.form.valid || this.form.value.description === this.optionTypeItem.description;
+    return !this.form.valid || !this.hasValuesChanged();
+  }
+
+  private hasValuesChanged(): boolean {
+    const formValue = this.form.value;
+    const option = this.optionTypeItem;
+    return formValue.description !== option.description || formValue.active !== option.active;
   }
 }

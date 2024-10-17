@@ -1,8 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { catchError, first, Observable, switchMap, tap, throwError } from 'rxjs';
+import { Observable } from 'rxjs';
 import {
-  APILocalRegularOptionUpdateRequestDTO,
   APIRegularOptionResponseDTO,
   APIV2DataProcessingRegistrationBasisForTransferTypeService,
   APIV2DataProcessingRegistrationCountryTypeService,
@@ -22,7 +20,6 @@ import {
   APIV2ItInterfaceInterfaceDataTypeService,
   APIV2ItInterfaceInterfaceTypeService,
   APIV2ItSystemBusinessTypeService,
-  APIV2ItSystemLocalOptionTypesInternalINTERNALService,
   APIV2ItSystemUsageArchiveLocationTypeService,
   APIV2ItSystemUsageArchiveTestLocationTypeService,
   APIV2ItSystemUsageArchiveTypeService,
@@ -32,10 +29,7 @@ import {
   APIV2ItSystemUsageRoleTypeService,
   APIV2ItSystemUsageSensitivePersonalDataTypeService,
 } from 'src/app/api/v2';
-import { OptionTypeActions } from 'src/app/store/option-types/actions';
-import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 import { RegularOptionType } from '../models/options/regular-option-types.model';
-import { filterNullish } from '../pipes/filter-nullish';
 
 @Injectable({
   providedIn: 'root',
@@ -93,10 +87,7 @@ export class RegularOptionTypeService {
     @Inject(APIV2DataProcessingRegistrationCountryTypeService)
     private readonly dataProcessingCountryTypesService: APIV2DataProcessingRegistrationCountryTypeService,
     @Inject(APIV2DataProcessingRegistrationOversightTypeService)
-    private readonly dataProcessingOversightOptionsService: APIV2DataProcessingRegistrationOversightTypeService,
-    @Inject(APIV2ItSystemLocalOptionTypesInternalINTERNALService)
-    private readonly itSystemLocalOptionTypesService: APIV2ItSystemLocalOptionTypesInternalINTERNALService,
-    private readonly store: Store
+    private readonly dataProcessingOversightOptionsService: APIV2DataProcessingRegistrationOversightTypeService
   ) {}
 
   private resolveLocalOptionsEndpoint(
@@ -235,45 +226,5 @@ export class RegularOptionTypeService {
     optionType: RegularOptionType
   ): Observable<Array<APIRegularOptionResponseDTO>> {
     return this.resolveLocalOptionsEndpoint(optionType)(organizationUuid);
-  }
-
-  private resolvePatchLocalOptionsEndpoint(optionType: RegularOptionType) {
-    switch (optionType) {
-      case 'it-system_business-type':
-        return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
-          this.itSystemLocalOptionTypesService.patchSingleItSystemLocalOptionTypesInternalV2PatchLocalBusinessType({
-            organizationUuid,
-            optionUuid,
-            dto: request,
-          });
-      default:
-        throw new Error(`Patch operation is not supported for ${optionType}`);
-    }
-  }
-
-  public patchLocalOption(
-    optionType: RegularOptionType,
-    optionUuid: string,
-    request: APILocalRegularOptionUpdateRequestDTO
-  ) {
-    this.store
-      .select(selectOrganizationUuid)
-      .pipe(
-        first(),
-        filterNullish(),
-        switchMap((organizationUuid) =>
-          this.resolvePatchLocalOptionsEndpoint(optionType)(organizationUuid, optionUuid, request)
-        )
-      )
-      .pipe(
-        tap(() => {
-          this.store.dispatch(OptionTypeActions.updateOptionTypeSuccess());
-        }),
-        catchError(() => {
-          this.store.dispatch(OptionTypeActions.updateOptionTypeError());
-          return throwError(() => 'Failed to update option');
-        })
-      )
-      .subscribe();
   }
 }

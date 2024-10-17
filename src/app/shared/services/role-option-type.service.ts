@@ -1,7 +1,7 @@
 import { Inject, Injectable, OnDestroy } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { catchError, first, map, Observable, of, Subscription, switchMap, tap, throwError } from 'rxjs';
+import { first, map, Observable, Subscription } from 'rxjs';
 import {
   APIExtendedRoleAssignmentResponseDTO,
   APIOrganizationUnitRolesResponseDTO,
@@ -26,12 +26,6 @@ import { filterNullish } from '../pipes/filter-nullish';
 import { selectItContractUuid } from 'src/app/store/it-contract/selectors';
 import { selectDataProcessingUuid } from 'src/app/store/data-processing/selectors';
 import { RoleOptionTypes } from '../models/options/role-option-types.model';
-import {
-  OptionTypeTableItem,
-  OptionTypeTableOption,
-} from '../components/option-type-table/option-type-table.component';
-import { OptionTypeActions } from 'src/app/store/option-types/actions';
-import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 
 @Injectable({
   providedIn: 'root',
@@ -222,36 +216,5 @@ export class RoleOptionTypeService implements OnDestroy {
         this.store.dispatch(OrganizationUnitActions.deleteOrganizationUnitRole(userUuid, roleUuid, role.unitUuid));
         break;
     }
-  }
-
-  private resolvePatchLocalRoleOptionEndpoint(optionType: RoleOptionTypes) {
-    switch (optionType) {
-      case 'it-contract':
-        return (organizationUuid: string, optionUuid: string, request: object) => of({});
-      default:
-        throw new Error(`Patch operation is not supported for ${optionType}`);
-    }
-  }
-
-  public patchLocalRoleOption(optionType: RoleOptionTypes, optionUuid: string, request: object) {
-    this.store
-      .select(selectOrganizationUuid)
-      .pipe(
-        first(),
-        filterNullish(),
-        switchMap((organizationUuid) =>
-          this.resolvePatchLocalRoleOptionEndpoint(optionType)(organizationUuid, optionUuid, request)
-        )
-      )
-      .pipe(
-        tap(() => {
-          this.store.dispatch(OptionTypeActions.updateOptionTypeSuccess());
-        }),
-        catchError(() => {
-          this.store.dispatch(OptionTypeActions.updateOptionTypeError());
-          return throwError(() => 'Failed to update option');
-        })
-      )
-      .subscribe();
   }
 }

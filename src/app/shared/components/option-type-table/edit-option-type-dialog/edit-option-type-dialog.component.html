@@ -2,6 +2,16 @@
   <app-standard-vertical-content-grid>
     <form [formGroup]="form">
       <app-textbox [disabled]="true" text="Navn" i18n-text [value]="optionTypeItem.name"></app-textbox>
+      <app-checkbox
+        *ngIf="!optionTypeItem.obligatory"
+        [formGroup]="form"
+        formName="active"
+        [value]="form.value.active ?? false"
+        labelPosition="after"
+        text="Aktiv"
+        i18n-text
+      >
+      </app-checkbox>
       <app-textarea
         text="Beskrivelse"
         i18n-text
