@@ -5,8 +5,18 @@ import {
   APILocalRegularOptionResponseDTO,
   APILocalRegularOptionUpdateRequestDTO,
   APILocalRoleOptionResponseDTO,
+  APIV2ItSystemLocalArchiveLocationTypesInternalINTERNALService,
+  APIV2ItSystemLocalArchiveTestLocationTypesInternalINTERNALService,
+  APIV2ItSystemLocalArchiveTypesInternalINTERNALService,
   APIV2ItSystemLocalBusinessTypesInternalINTERNALService,
+  APIV2ItSystemLocalDataTypesInternalINTERNALService,
+  APIV2ItSystemLocalFrequencyTypesInternalINTERNALService,
+  APIV2ItSystemLocalInterfaceTypesInternalINTERNALService,
+  APIV2ItSystemLocalItSystemCategoriesTypesInternalINTERNALService,
+  APIV2ItSystemLocalRegisterTypesInternalINTERNALService,
   APIV2ItSystemLocalRoleOptionTypesInternalINTERNALService,
+  APIV2ItSystemLocalSensitivePersonalDataTypesInternalINTERNALService,
+  APIV2ItSystemUsageArchiveTypeService,
   APIV2OrganizationUnitLocalRoleOptionTypesInternalINTERNALService,
 } from 'src/app/api/v2';
 import { OptionTypeActions } from 'src/app/store/option-types/actions';
@@ -22,6 +32,24 @@ export class LocalOptionTypeService {
     private store: Store,
     @Inject(APIV2ItSystemLocalBusinessTypesInternalINTERNALService)
     private businessTypeService: APIV2ItSystemLocalBusinessTypesInternalINTERNALService,
+    @Inject(APIV2ItSystemLocalArchiveTypesInternalINTERNALService)
+    private archiveTypeService: APIV2ItSystemLocalArchiveTypesInternalINTERNALService,
+    @Inject(APIV2ItSystemLocalArchiveLocationTypesInternalINTERNALService)
+    private archiveLocationService: APIV2ItSystemLocalArchiveLocationTypesInternalINTERNALService,
+    @Inject(APIV2ItSystemLocalArchiveTestLocationTypesInternalINTERNALService)
+    private archiveTestLocationService: APIV2ItSystemLocalArchiveTestLocationTypesInternalINTERNALService,
+    @Inject(APIV2ItSystemLocalDataTypesInternalINTERNALService)
+    private dataTypeService: APIV2ItSystemLocalDataTypesInternalINTERNALService,
+    @Inject(APIV2ItSystemLocalFrequencyTypesInternalINTERNALService)
+    private frequencyTypeService: APIV2ItSystemLocalFrequencyTypesInternalINTERNALService,
+    @Inject(APIV2ItSystemLocalInterfaceTypesInternalINTERNALService)
+    private interfaceTypeService: APIV2ItSystemLocalInterfaceTypesInternalINTERNALService,
+    @Inject(APIV2ItSystemLocalSensitivePersonalDataTypesInternalINTERNALService)
+    private sensitivePersonalDataTypeService: APIV2ItSystemLocalSensitivePersonalDataTypesInternalINTERNALService,
+    @Inject(APIV2ItSystemLocalItSystemCategoriesTypesInternalINTERNALService)
+    private itSystemCategoryService: APIV2ItSystemLocalItSystemCategoriesTypesInternalINTERNALService,
+    @Inject(APIV2ItSystemLocalRegisterTypesInternalINTERNALService)
+    private registerTypeService: APIV2ItSystemLocalRegisterTypesInternalINTERNALService,
     @Inject(APIV2OrganizationUnitLocalRoleOptionTypesInternalINTERNALService)
     private organiztionUnitRoleService: APIV2OrganizationUnitLocalRoleOptionTypesInternalINTERNALService,
     @Inject(APIV2ItSystemLocalRoleOptionTypesInternalINTERNALService)
