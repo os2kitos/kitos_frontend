@@ -19,8 +19,8 @@ import { OptionTypeTableOption } from '../components/option-type-table/option-ty
 export class LocalOptionTypeService {
   constructor(
     private store: Store,
-    private itSystemLocalOptionTypesApiService: APIV2ItSystemLocalRegularOptionTypesInternalINTERNALService,
-    private organizationUnitLocalOptionTypesApiService: APIV2OrganizationUnitLocalRoleOptionTypesInternalINTERNALService
+    private itSystemService: APIV2ItSystemLocalRegularOptionTypesInternalINTERNALService,
+    private organiztionUnitService: APIV2OrganizationUnitLocalRoleOptionTypesInternalINTERNALService
   ) {}
 
   public getLocalOptions(
@@ -83,14 +83,12 @@ export class LocalOptionTypeService {
     switch (optionType) {
       case 'it-system_business-type':
         return (organizationUuid) =>
-          this.itSystemLocalOptionTypesApiService.getManyItSystemLocalRegularOptionTypesInternalV2GetLocalBusinessTypes(
-            {
-              organizationUuid,
-            }
-          );
+          this.itSystemService.getManyItSystemLocalRegularOptionTypesInternalV2GetLocalBusinessTypes({
+            organizationUuid,
+          });
       case 'organization-unit':
         return (organizationUuid) =>
-          this.organizationUnitLocalOptionTypesApiService.getManyOrganizationUnitLocalRoleOptionTypesInternalV2GetLocalOrganizationUnitRoles(
+          this.organiztionUnitService.getManyOrganizationUnitLocalRoleOptionTypesInternalV2GetLocalOrganizationUnitRoles(
             {
               organizationUuid,
             }
@@ -104,16 +102,14 @@ export class LocalOptionTypeService {
     switch (optionType) {
       case 'it-system_business-type':
         return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
-          this.itSystemLocalOptionTypesApiService.patchSingleItSystemLocalRegularOptionTypesInternalV2PatchLocalBusinessType(
-            {
-              organizationUuid,
-              optionUuid,
-              dto: request,
-            }
-          );
+          this.itSystemService.patchSingleItSystemLocalRegularOptionTypesInternalV2PatchLocalBusinessType({
+            organizationUuid,
+            optionUuid,
+            dto: request,
+          });
       case 'organization-unit':
         return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
-          this.organizationUnitLocalOptionTypesApiService.patchSingleOrganizationUnitLocalRoleOptionTypesInternalV2PatchLocalOrganizationUnitRole(
+          this.organiztionUnitService.patchSingleOrganizationUnitLocalRoleOptionTypesInternalV2PatchLocalOrganizationUnitRole(
             {
               organizationUuid,
               optionUuid,
@@ -131,15 +127,13 @@ export class LocalOptionTypeService {
     switch (optionType) {
       case 'it-system_business-type':
         return (organizationUuid, optionUuid) =>
-          this.itSystemLocalOptionTypesApiService.postSingleItSystemLocalRegularOptionTypesInternalV2CreateLocalBusinessType(
-            {
-              organizationUuid,
-              dto: { optionUuid },
-            }
-          );
+          this.itSystemService.postSingleItSystemLocalRegularOptionTypesInternalV2CreateLocalBusinessType({
+            organizationUuid,
+            dto: { optionUuid },
+          });
       case 'organization-unit':
         return (organizationUuid, optionUuid) =>
-          this.organizationUnitLocalOptionTypesApiService.postSingleOrganizationUnitLocalRoleOptionTypesInternalV2CreateLocalOrganizationUnitRole(
+          this.organiztionUnitService.postSingleOrganizationUnitLocalRoleOptionTypesInternalV2CreateLocalOrganizationUnitRole(
             {
               organizationUuid,
               dto: { optionUuid },
@@ -156,15 +150,13 @@ export class LocalOptionTypeService {
     switch (optionType) {
       case 'it-system_business-type':
         return (organizationUuid, optionUuid) =>
-          this.itSystemLocalOptionTypesApiService.deleteSingleItSystemLocalRegularOptionTypesInternalV2DeleteLocalBusinessType(
-            {
-              organizationUuid,
-              optionUuid,
-            }
-          );
+          this.itSystemService.deleteSingleItSystemLocalRegularOptionTypesInternalV2DeleteLocalBusinessType({
+            organizationUuid,
+            optionUuid,
+          });
       case 'organization-unit':
         return (organizationUuid, optionUuid) =>
-          this.organizationUnitLocalOptionTypesApiService.deleteSingleOrganizationUnitLocalRoleOptionTypesInternalV2DeleteLocalOrganizationUnitRole(
+          this.organiztionUnitService.deleteSingleOrganizationUnitLocalRoleOptionTypesInternalV2DeleteLocalOrganizationUnitRole(
             {
               organizationUuid,
               optionUuid,

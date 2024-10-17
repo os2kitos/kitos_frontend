@@ -2,6 +2,13 @@
   <app-standard-vertical-content-grid>
     <form [formGroup]="form">
       <app-textbox [disabled]="true" text="Navn" i18n-text [value]="optionTypeItem.name"></app-textbox>
+      <app-textarea
+        text="Beskrivelse"
+        i18n-text
+        [formGroup]="form"
+        formName="description"
+        [value]="form.value.description ?? ''"
+      ></app-textarea>
       <app-checkbox
         *ngIf="!optionTypeItem.obligatory"
         [formGroup]="form"
@@ -12,13 +19,6 @@
         i18n-text
       >
       </app-checkbox>
-      <app-textarea
-        text="Beskrivelse"
-        i18n-text
-        [formGroup]="form"
-        formName="description"
-        [value]="form.value.description ?? ''"
-      ></app-textarea>
     </form>
   </app-standard-vertical-content-grid>
   <app-dialog-actions>
