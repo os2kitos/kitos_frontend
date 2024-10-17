@@ -12,15 +12,6 @@ import { filterNullish } from '../pipes/filter-nullish';
 export class LocalRoleOptionTypeService {
   constructor(private store: Store) {}
 
-  private resolvePatchLocalRoleOptionEndpoint(optionType: RoleOptionTypes) {
-    switch (optionType) {
-      case 'it-contract':
-        return (organizationUuid: string, optionUuid: string, request: object) => of({});
-      default:
-        throw new Error(`Patch operation is not supported for ${optionType}`);
-    }
-  }
-
   public patchLocalRoleOption(optionType: RoleOptionTypes, optionUuid: string, request: object) {
     this.store
       .select(selectOrganizationUuid)
@@ -41,5 +32,18 @@ export class LocalRoleOptionTypeService {
         })
       )
       .subscribe();
+  }
+
+  public patchIsActive(optionType: RoleOptionTypes, optionUuid: string, isActive: boolean) {
+
+  }
+
+  private resolvePatchLocalRoleOptionEndpoint(optionType: RoleOptionTypes) {
+    switch (optionType) {
+      case 'it-contract':
+        return (organizationUuid: string, optionUuid: string, request: object) => of({});
+      default:
+        throw new Error(`Patch operation is not supported for ${optionType}`);
+    }
   }
 }

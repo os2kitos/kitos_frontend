@@ -24,7 +24,7 @@ export class LocalRegularOptionTypeService {
     organizationUuid: string,
     optionType: RegularOptionType
   ): Observable<Array<APILocalRegularOptionResponseDTO>> {
-    return this.resolveLocalOptionsEndpoint(optionType)(organizationUuid);
+    return this.resolveGetLocalOptionsEndpoint(optionType)(organizationUuid);
   }
 
   public patchLocalOption(
@@ -54,10 +54,32 @@ export class LocalRegularOptionTypeService {
   }
 
   public patchIsActive(optionType: RegularOptionType, optionUuid: string, isActive: boolean): void {
-    this;
+    this.store
+      .select(selectOrganizationUuid)
+      .pipe(
+        first(),
+        filterNullish(),
+        switchMap((organizationUuid) => {
+          if (isActive) {
+            return this.resolveCreateLocalOptionsEndpoint(optionType)(organizationUuid, optionUuid);
+          } else {
+            return this.resolveDeleteLocalOptionsEndpoint(optionType)(organizationUuid, optionUuid);
+          }
+        })
+      )
+      .pipe(
+        tap(() => {
+          this.store.dispatch(OptionTypeActions.updateOptionTypeSuccess());
+        }),
+        catchError(() => {
+          this.store.dispatch(OptionTypeActions.updateOptionTypeError());
+          return throwError(() => 'Failed to update option');
+        })
+      )
+      .subscribe();
   }
 
-  private resolveLocalOptionsEndpoint(
+  private resolveGetLocalOptionsEndpoint(
     optionType: RegularOptionType
   ): (organizationUuid: string) => Observable<Array<APILocalRegularOptionResponseDTO>> {
     switch (optionType) {
@@ -82,6 +104,36 @@ export class LocalRegularOptionTypeService {
           });
       default:
         throw new Error(`Patch operation is not supported for ${optionType}`);
+    }
+  }
+
+  private resolveCreateLocalOptionsEndpoint(
+    optionType: RegularOptionType
+  ): (organizationUuid: string, optionUuid: string) => Observable<APILocalRegularOptionResponseDTO> {
+    switch (optionType) {
+      case 'it-system_business-type':
+        return (organizationUuid, optionUuid) =>
+          this.itSystemLocalOptionTypesService.postSingleItSystemLocalOptionTypesInternalV2CreateLocalBusinessType({
+            organizationUuid,
+            dto: { uuid: optionUuid },
+          });
+      default:
+        throw new Error(`Create operation is not supported for ${optionType}`);
+    }
+  }
+
+  private resolveDeleteLocalOptionsEndpoint(
+    optionType: RegularOptionType
+  ): (organizationUuid: string, optionUuid: string) => Observable<APILocalRegularOptionResponseDTO> {
+    switch (optionType) {
+      case 'it-system_business-type':
+        return (organizationUuid, optionUuid) =>
+          this.itSystemLocalOptionTypesService.deleteSingleItSystemLocalOptionTypesInternalV2DeleteLocalBusinessType({
+            organizationUuid,
+            optionUuid,
+          });
+      default:
+        throw new Error(`Create operation is not supported for ${optionType}`);
     }
   }
 }
