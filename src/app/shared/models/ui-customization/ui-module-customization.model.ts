@@ -9,6 +9,7 @@ export interface UIModuleCustomization {
 export function adaptUIModuleCustomization(
   source: APIUIModuleCustomizationResponseDTO
 ): UIModuleCustomization | undefined {
+  console.log(JSON.stringify(source) + '    is source')
   if (!source.module) return;
 
   return {
