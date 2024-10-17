@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { catchError, first, Observable, OperatorFunction, pipe, switchMap, tap, throwError } from 'rxjs';
 import {
   APILocalRegularOptionResponseDTO,
   APILocalRegularOptionUpdateRequestDTO,
   APILocalRoleOptionResponseDTO,
-  APIV2ItSystemLocalRegularOptionTypesInternalINTERNALService,
+  APIV2ItSystemLocalBusinessTypesInternalINTERNALService,
   APIV2OrganizationUnitLocalRoleOptionTypesInternalINTERNALService,
 } from 'src/app/api/v2';
 import { OptionTypeActions } from 'src/app/store/option-types/actions';
@@ -19,7 +19,9 @@ import { OptionTypeTableOption } from '../components/option-type-table/option-ty
 export class LocalOptionTypeService {
   constructor(
     private store: Store,
-    private itSystemService: APIV2ItSystemLocalRegularOptionTypesInternalINTERNALService,
+    @Inject(APIV2ItSystemLocalBusinessTypesInternalINTERNALService)
+    private businessTypeService: APIV2ItSystemLocalBusinessTypesInternalINTERNALService,
+    @Inject(APIV2OrganizationUnitLocalRoleOptionTypesInternalINTERNALService)
     private organiztionUnitService: APIV2OrganizationUnitLocalRoleOptionTypesInternalINTERNALService
   ) {}
 
@@ -83,9 +85,7 @@ export class LocalOptionTypeService {
     switch (optionType) {
       case 'it-system_business-type':
         return (organizationUuid) =>
-          this.itSystemService.getManyItSystemLocalRegularOptionTypesInternalV2GetLocalBusinessTypes({
-            organizationUuid,
-          });
+          this.businessTypeService.getManyItSystemLocalBusinessTypesInternalV2GetLocalBusinessTypes({organizationUuid});
       case 'organization-unit':
         return (organizationUuid) =>
           this.organiztionUnitService.getManyOrganizationUnitLocalRoleOptionTypesInternalV2GetLocalOrganizationUnitRoles(
@@ -102,7 +102,7 @@ export class LocalOptionTypeService {
     switch (optionType) {
       case 'it-system_business-type':
         return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
-          this.itSystemService.patchSingleItSystemLocalRegularOptionTypesInternalV2PatchLocalBusinessType({
+          this.businessTypeService.patchSingleItSystemLocalBusinessTypesInternalV2PatchLocalBusinessType({
             organizationUuid,
             optionUuid,
             dto: request,
@@ -127,7 +127,7 @@ export class LocalOptionTypeService {
     switch (optionType) {
       case 'it-system_business-type':
         return (organizationUuid, optionUuid) =>
-          this.itSystemService.postSingleItSystemLocalRegularOptionTypesInternalV2CreateLocalBusinessType({
+          this.businessTypeService.postSingleItSystemLocalBusinessTypesInternalV2CreateLocalBusinessType({
             organizationUuid,
             dto: { optionUuid },
           });
@@ -150,7 +150,7 @@ export class LocalOptionTypeService {
     switch (optionType) {
       case 'it-system_business-type':
         return (organizationUuid, optionUuid) =>
-          this.itSystemService.deleteSingleItSystemLocalRegularOptionTypesInternalV2DeleteLocalBusinessType({
+          this.businessTypeService.deleteSingleItSystemLocalBusinessTypesInternalV2DeleteLocalBusinessType({
             organizationUuid,
             optionUuid,
           });
