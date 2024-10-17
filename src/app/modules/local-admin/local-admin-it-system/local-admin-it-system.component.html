@@ -7,6 +7,6 @@
   </ng-container>
 
   <ng-container *ngIf="selectedSegment === LocalAdminItSystemSegmentOption.RoleOptionTypes">
-    
+    <app-option-type-table optionType="it-system-usage" [disableAccordion]="true" [expandedByDefault]="true"></app-option-type-table>
   </ng-container>
 </app-card>

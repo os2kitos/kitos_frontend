@@ -6,6 +6,7 @@ import {
   APILocalRegularOptionUpdateRequestDTO,
   APILocalRoleOptionResponseDTO,
   APIV2ItSystemLocalBusinessTypesInternalINTERNALService,
+  APIV2ItSystemLocalRoleOptionTypesInternalINTERNALService,
   APIV2OrganizationUnitLocalRoleOptionTypesInternalINTERNALService,
 } from 'src/app/api/v2';
 import { OptionTypeActions } from 'src/app/store/option-types/actions';
@@ -22,7 +23,9 @@ export class LocalOptionTypeService {
     @Inject(APIV2ItSystemLocalBusinessTypesInternalINTERNALService)
     private businessTypeService: APIV2ItSystemLocalBusinessTypesInternalINTERNALService,
     @Inject(APIV2OrganizationUnitLocalRoleOptionTypesInternalINTERNALService)
-    private organiztionUnitService: APIV2OrganizationUnitLocalRoleOptionTypesInternalINTERNALService
+    private organiztionUnitRoleService: APIV2OrganizationUnitLocalRoleOptionTypesInternalINTERNALService,
+    @Inject(APIV2ItSystemLocalRoleOptionTypesInternalINTERNALService)
+    private itSystemRoleService: APIV2ItSystemLocalRoleOptionTypesInternalINTERNALService
   ) {}
 
   public getLocalOptions(
@@ -85,14 +88,21 @@ export class LocalOptionTypeService {
     switch (optionType) {
       case 'it-system_business-type':
         return (organizationUuid) =>
-          this.businessTypeService.getManyItSystemLocalBusinessTypesInternalV2GetLocalBusinessTypes({organizationUuid});
+          this.businessTypeService.getManyItSystemLocalBusinessTypesInternalV2GetLocalBusinessTypes({
+            organizationUuid,
+          });
       case 'organization-unit':
         return (organizationUuid) =>
-          this.organiztionUnitService.getManyOrganizationUnitLocalRoleOptionTypesInternalV2GetLocalOrganizationUnitRoles(
+          this.organiztionUnitRoleService.getManyOrganizationUnitLocalRoleOptionTypesInternalV2GetLocalOrganizationUnitRoles(
             {
               organizationUuid,
             }
           );
+      case 'it-system-usage':
+        return (organizationUuid) =>
+          this.itSystemRoleService.getManyItSystemLocalRoleOptionTypesInternalV2GetLocalOrganizationUnitRoles({
+            organizationUuid,
+          });
       default:
         throw new Error(`Get operation is not supported for ${optionType}`);
     }
@@ -109,13 +119,20 @@ export class LocalOptionTypeService {
           });
       case 'organization-unit':
         return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
-          this.organiztionUnitService.patchSingleOrganizationUnitLocalRoleOptionTypesInternalV2PatchLocalOrganizationUnitRole(
+          this.organiztionUnitRoleService.patchSingleOrganizationUnitLocalRoleOptionTypesInternalV2PatchLocalOrganizationUnitRole(
             {
               organizationUuid,
               optionUuid,
               dto: request,
             }
           );
+      case 'it-system-usage':
+        return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
+          this.itSystemRoleService.patchSingleItSystemLocalRoleOptionTypesInternalV2PatchLocalItSystemRole({
+            organizationUuid,
+            optionUuid,
+            dto: request,
+          });
       default:
         throw new Error(`Patch operation is not supported for ${optionType}`);
     }
@@ -133,12 +150,18 @@ export class LocalOptionTypeService {
           });
       case 'organization-unit':
         return (organizationUuid, optionUuid) =>
-          this.organiztionUnitService.postSingleOrganizationUnitLocalRoleOptionTypesInternalV2CreateLocalOrganizationUnitRole(
+          this.organiztionUnitRoleService.postSingleOrganizationUnitLocalRoleOptionTypesInternalV2CreateLocalOrganizationUnitRole(
             {
               organizationUuid,
               dto: { optionUuid },
             }
           );
+      case 'it-system-usage':
+        return (organizationUuid, optionUuid) =>
+          this.itSystemRoleService.postSingleItSystemLocalRoleOptionTypesInternalV2CreateLocalItSystemRole({
+            organizationUuid,
+            dto: { optionUuid },
+          });
       default:
         throw new Error(`Create operation is not supported for ${optionType}`);
     }
@@ -156,12 +179,18 @@ export class LocalOptionTypeService {
           });
       case 'organization-unit':
         return (organizationUuid, optionUuid) =>
-          this.organiztionUnitService.deleteSingleOrganizationUnitLocalRoleOptionTypesInternalV2DeleteLocalOrganizationUnitRole(
+          this.organiztionUnitRoleService.deleteSingleOrganizationUnitLocalRoleOptionTypesInternalV2DeleteLocalOrganizationUnitRole(
             {
               organizationUuid,
               optionUuid,
             }
           );
+      case 'it-system-usage':
+        return (organizationUuid, optionUuid) =>
+          this.itSystemRoleService.deleteSingleItSystemLocalRoleOptionTypesInternalV2DeleteLocalItSystemRole({
+            organizationUuid,
+            optionUuid,
+          });
       default:
         throw new Error(`Delete operation is not supported for ${optionType}`);
     }
