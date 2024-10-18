@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { SegmentButtonOption } from 'src/app/shared/components/segment/segment.component';
 import { UIModuleCustomizationKey } from 'src/app/shared/enums/ui-module-customization-key';
-import { collectUIConfigNodeViewModels, getItSystemUsageUiBluePrint } from 'src/app/shared/models/helpers/ui-config-helpers';
+import {
+  collectUIConfigNodeViewModels,
+  getItSystemUsageUiBluePrint,
+} from 'src/app/shared/models/helpers/ui-config-helpers';
 import { UIConfigNodeViewModel } from 'src/app/shared/models/ui-config/ui-config-node-view-model.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { OrganizationUiModuleCustomizationActions } from 'src/app/store/organization/organization-ui-customization/actions';
@@ -28,11 +31,14 @@ export class LocalAdminItSystemUsagesComponent implements OnInit {
     { text: $localize`Udfaldsrum`, value: LocalAdminSystemUsagesSegmentOptions.OptionTypes },
   ];
   public readonly itSystemUsageUIModuleCustomization$ = this.store.select(selectITSystemUsagesUIModuleCustomization);
-  public uiConfigNodeViewModels$: Observable<UIConfigNodeViewModel[] | undefined> = of(undefined);
+  public uiConfigNodeViewModels$: BehaviorSubject<UIConfigNodeViewModel[]> = new BehaviorSubject<
+    UIConfigNodeViewModel[]
+  >([]);
 
   public readonly itSystemUsageUIModuleCustomizationForm = new FormGroup({});
 
   constructor(private readonly store: Store) {}
+
 
   ngOnInit(): void {
     this.store.dispatch(
@@ -42,18 +48,18 @@ export class LocalAdminItSystemUsagesComponent implements OnInit {
     );
     this.setupUIConfig();
 
-    this.uiConfigNodeViewModels$.pipe(filterNullish()).subscribe(u => console.log(JSON.stringify(u) + '     is viewmodels'))
+    this.uiConfigNodeViewModels$
+      .pipe(filterNullish())
+      .subscribe((u) => console.log(JSON.stringify(u) + '     is viewmodels'));
   }
 
   private setupUIConfig() {
-    this.itSystemUsageUIModuleCustomization$
-      .pipe(filterNullish())
-      .subscribe((moduleCustomization) => {
-        const blueprint = getItSystemUsageUiBluePrint();
+    this.itSystemUsageUIModuleCustomization$.pipe(filterNullish()).subscribe((moduleCustomization) => {
+      const blueprint = getItSystemUsageUiBluePrint();
 
-        const moduleCustomizationNodes = moduleCustomization?.nodes ?? [];
-        const viewModels = collectUIConfigNodeViewModels(blueprint, moduleCustomizationNodes);
-        this.uiConfigNodeViewModels$ = of(viewModels);
-      });
+      const moduleCustomizationNodes = moduleCustomization?.nodes ?? [];
+      const viewModels = collectUIConfigNodeViewModels(blueprint, moduleCustomizationNodes);
+      this.uiConfigNodeViewModels$.next(viewModels);
+    });
   }
 }
