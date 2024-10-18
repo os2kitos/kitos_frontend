@@ -6,6 +6,7 @@ import { LocalOptionType, LocalOptionTypeItem } from '../../models/options/local
 import { EditOptionTypeDialogComponent } from './edit-option-type-dialog/edit-option-type-dialog.component';
 import { OptionTypeTableComponentStore } from './option-type-table.component-store';
 import { LocalOptionTypeActions } from 'src/app/store/local-option-types/actions';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-option-type-table',
@@ -42,7 +43,7 @@ export class OptionTypeTableComponent extends BaseComponent implements OnInit {
       this.actions$
         .pipe(
           ofType(LocalOptionTypeActions.updateOptionTypeSuccess),
-          //filter(({ optionType }) => optionType === this.optionType) //TODO
+          filter(({ optionType }) => optionType === this.optionType)
         )
         .subscribe(() => {
           this.componentStore.getOptionTypeItems();
