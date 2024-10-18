@@ -2,7 +2,7 @@ import { UIModuleCustomizationKey } from '../../enums/ui-module-customization-ke
 
 export interface UINodeBlueprint {
   text: string;
-  readOnly?: boolean;
+  isObligatory?: boolean;
   children?: Record<string, UINodeBlueprint>;
   fullKey?: string;
   helpText?: string;
@@ -11,17 +11,18 @@ export interface UINodeBlueprint {
 
 export function getItSystemUsageUiBluePrint(): UINodeBlueprint {
   const blueprint = ItSystemUsageUiBluePrint;
-  setupUIBlueprintKeys(UIModuleCustomizationKey.ItSystemUsage, blueprint, []);
+  setupUIBlueprintFullKeys(UIModuleCustomizationKey.ItSystemUsage, blueprint, []);
+  console.log(JSON.stringify(blueprint) + '  is blueprint')
   return blueprint;
 }
 
-function setupUIBlueprintKeys(currentLevelKey: string, currentNode: UINodeBlueprint, ancestorKeys: string[]) {
+function setupUIBlueprintFullKeys(currentLevelKey: string, currentNode: UINodeBlueprint, ancestorKeys: string[]) {
   const keyPath = [...ancestorKeys, currentLevelKey];
   currentNode.fullKey = keyPath.join('.');
 
   if (currentNode.children) {
     Object.keys(currentNode.children).forEach((key) => {
-      if (currentNode.children) setupUIBlueprintKeys(key, currentNode.children[key], keyPath);
+      if (currentNode.children) setupUIBlueprintFullKeys(key, currentNode.children[key], keyPath);
     });
   }
 }

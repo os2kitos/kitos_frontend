@@ -9,7 +9,6 @@ export interface UIModuleCustomization {
 export function adaptUIModuleCustomization(
   source: APIUIModuleCustomizationResponseDTO
 ): UIModuleCustomization | undefined {
-  console.log(JSON.stringify(source) + '    is source')
   if (!source.module) return;
 
   return {
@@ -20,6 +19,6 @@ export function adaptUIModuleCustomization(
 
 function adaptCustomizedUINodes(sourceNodes: APICustomizedUINodeResponseDTO[]) {
   return sourceNodes.map((node) => {
-    return { key: node.key, enabled: node.enabled };
+    return { fullKey: node.key, enabled: node.enabled };
   });
 }

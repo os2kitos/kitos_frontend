@@ -1,4 +1,4 @@
 export interface CustomizedUINode {
-  key: string;
+  fullKey: string;
   enabled?: boolean;
 }
