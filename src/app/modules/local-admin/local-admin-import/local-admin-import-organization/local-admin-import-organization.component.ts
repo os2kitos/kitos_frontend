@@ -30,6 +30,11 @@ export class LocalAdminImportOrganizationComponent implements OnInit {
   }
 
   public openImportDialog() {
-    this.matDialog.open(FkOrgWriteDialogComponent, { height: '95%', maxHeight: '95%' });
+    this.matDialog.open(FkOrgWriteDialogComponent, {
+      height: 'auto',
+      maxHeight: '95%',
+      width: 'auto',
+      minWidth: '600px',
+    });
   }
 }

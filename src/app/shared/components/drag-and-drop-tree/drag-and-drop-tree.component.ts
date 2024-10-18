@@ -20,6 +20,7 @@ export class DragAndDropTreeComponent<T> implements OnInit {
   @Input() public currentNodeUuid?: string;
   @Input() public nodes!: EntityTreeNode<T>[];
   @Input() public disableDrag = true;
+  @Input() public maxLevel?: number = undefined;
 
   @Output() public readonly nodeMoved = new EventEmitter<EntityTreeNodeMoveResult>();
   @Output() public readonly nodeExpandClick = new EventEmitter<EntityTreeNode<T>>();

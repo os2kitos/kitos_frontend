@@ -1,9 +1,10 @@
 @import "theme";
 
-:host {
-  display: flex;
-  flex: 1;
-}
+// :host {
+//   display: flex;
+//   flex: 1;
+//   flex-direction: row;
+// }
 
 .mat-button-toggle-group {
   display: flex;

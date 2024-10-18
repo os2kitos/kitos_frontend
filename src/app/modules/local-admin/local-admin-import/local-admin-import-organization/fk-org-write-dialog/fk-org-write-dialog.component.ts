@@ -1,8 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { map } from 'rxjs';
+import { APIStsOrganizationOrgUnitDTO } from 'src/app/api/v2';
 import { ItSystemHierarchyTableComponentStore } from 'src/app/modules/it-systems/shared/it-system-hierarchy-table/it-system-hierarchy-table.component-store';
 import { mapFkOrgSnapshotUnits } from 'src/app/shared/helpers/hierarchy.helpers';
+import { EntityTreeNode } from 'src/app/shared/models/structure/entity-tree-node.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { FkOrgActions } from 'src/app/store/local-admin/fk-org/actions';
 import {
@@ -34,5 +36,13 @@ export class FkOrgWriteDialogComponent implements OnInit {
     this.title = this.isEdit
       ? $localize`Redigér forbindelsen til FK Organisation`
       : $localize`Opret forbindelse til FK Organisation`;
+  }
+
+  nodeExpandClick(node: EntityTreeNode<APIStsOrganizationOrgUnitDTO>): void {
+    console.log('node before');
+    console.log(node.isExpanded);
+    node.isExpanded = !node.isExpanded;
+    console.log('node after');
+    console.log(node.isExpanded);
   }
 }
