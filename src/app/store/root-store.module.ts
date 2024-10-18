@@ -34,6 +34,7 @@ import { RoleOptionTypeEffects } from './roles-option-type-store/effects';
 import { roleOptionTypeFeature } from './roles-option-type-store/reducer';
 import { UserEffects } from './user-store/effects';
 import { userFeature } from './user-store/reducer';
+import { LocalOptionTypeEffects } from './local-option-types/effects';
 
 @NgModule({
   imports: [
@@ -77,6 +78,7 @@ import { userFeature } from './user-store/reducer';
       GridExportEffects,
       OrganizationUserEffects,
       OrganizationEffects,
+      LocalOptionTypeEffects,
     ]),
     RouterModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),
