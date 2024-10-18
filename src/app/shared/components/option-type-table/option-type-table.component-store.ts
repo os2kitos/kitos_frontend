@@ -5,14 +5,14 @@ import { Store } from '@ngrx/store';
 import { map, Observable, switchMap, tap } from 'rxjs';
 import { APILocalRoleOptionResponseDTO } from 'src/app/api/v2';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
+import { LocalOptionType, LocalOptionTypeItem } from '../../models/options/local-option-type.model';
 import { filterNullish } from '../../pipes/filter-nullish';
 import { LocalOptionTypeService } from '../../services/local-option-type.service';
-import { OptionTypeTableItem, OptionTypeTableOption } from './option-type-table.component';
 
 interface State {
   isLoading: boolean;
-  optionTypeItems: OptionTypeTableItem[];
-  type: OptionTypeTableOption;
+  optionTypeItems: LocalOptionTypeItem[];
+  type: LocalOptionType;
 }
 
 @Injectable()
@@ -26,7 +26,7 @@ export class OptionTypeTableComponentStore extends ComponentStore<State> {
   }
 
   private updateItems = this.updater(
-    (state: State, optionTypeItems: OptionTypeTableItem[]): State => ({
+    (state: State, optionTypeItems: LocalOptionTypeItem[]): State => ({
       ...state,
       optionTypeItems: optionTypeItems,
     })
@@ -47,8 +47,8 @@ export class OptionTypeTableComponentStore extends ComponentStore<State> {
     );
   }
 
-  private mapDtoToOptionType(dto: APILocalRoleOptionResponseDTO): OptionTypeTableItem {
-    const item: OptionTypeTableItem = {
+  private mapDtoToOptionType(dto: APILocalRoleOptionResponseDTO): LocalOptionTypeItem {
+    const item: LocalOptionTypeItem = {
       active: dto.isActive ?? false,
       name: dto.name,
       writeAccess: dto.writeAccess,

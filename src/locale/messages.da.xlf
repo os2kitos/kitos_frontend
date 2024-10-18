@@ -5175,9 +5175,9 @@
         <source>Enheden blev opdateret</source>
         <target state="new">Enheden blev opdateret</target>
       </trans-unit>
-      <trans-unit id="2551379805539527405" datatype="html">
-        <source>Roller i din orginsation</source>
-        <target state="new">Roller i din orginsation</target>
+      <trans-unit id="4100126813016547603" datatype="html">
+        <source>Organisationsroller i din orginsation</source>
+        <target state="new">Organisationsroller i din orginsation</target>
       </trans-unit>
       <trans-unit id="1665695847626369659" datatype="html">
         <source>Forretningstyper</source>

@@ -1,6 +1,6 @@
-import { Inject, Injectable } from '@angular/core';
+import { Inject, Injectable, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { catchError, first, Observable, OperatorFunction, pipe, switchMap, tap, throwError } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import {
   APILocalRegularOptionResponseDTO,
   APILocalRegularOptionUpdateRequestDTO,
@@ -18,15 +18,14 @@ import {
   APIV2ItSystemLocalSensitivePersonalDataTypesInternalINTERNALService,
   APIV2OrganizationUnitLocalRoleOptionTypesInternalINTERNALService,
 } from 'src/app/api/v2';
-import { OptionTypeActions } from 'src/app/store/option-types/actions';
-import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
-import { filterNullish } from '../pipes/filter-nullish';
-import { OptionTypeTableOption } from '../components/option-type-table/option-type-table.component';
+import { LocalOptionType } from '../models/options/local-option-type.model';
 
 @Injectable({
   providedIn: 'root',
 })
-export class LocalOptionTypeService {
+export class LocalOptionTypeService implements OnDestroy {
+  public subscriptions = new Subscription();
+
   constructor(
     private store: Store,
     @Inject(APIV2ItSystemLocalBusinessTypesInternalINTERNALService)
@@ -55,62 +54,36 @@ export class LocalOptionTypeService {
     private itSystemRoleService: APIV2ItSystemLocalRoleOptionTypesInternalINTERNALService
   ) {}
 
+  public ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
+  }
+
   public getLocalOptions(
     organizationUuid: string,
-    optionType: OptionTypeTableOption
+    optionType: LocalOptionType
   ): Observable<Array<APILocalRegularOptionResponseDTO>> {
     return this.resolveGetLocalOptionsEndpoint(optionType)(organizationUuid);
   }
 
   public patchLocalOption(
-    optionType: OptionTypeTableOption,
+    optionType: LocalOptionType,
+    organizationUuid: string,
     optionUuid: string,
     request: APILocalRegularOptionUpdateRequestDTO
-  ): void {
-    this.getOrganizationUuid()
-      .pipe(
-        switchMap((organizationUuid) =>
-          this.resolvePatchLocalOptionsEndpoint(optionType)(organizationUuid, optionUuid, request)
-        ),
-        this.handleResponse(optionType)
-      )
-
-      .subscribe();
+  ) {
+    return this.resolvePatchLocalOptionsEndpoint(optionType)(organizationUuid, optionUuid, request);
   }
 
-  public patchIsActive(optionType: OptionTypeTableOption, optionUuid: string, isActive: boolean): void {
-    this.getOrganizationUuid()
-      .pipe(
-        switchMap((organizationUuid) => {
-          if (isActive) {
-            return this.resolveCreateLocalOptionsEndpoint(optionType)(organizationUuid, optionUuid);
-          } else {
-            return this.resolveDeleteLocalOptionsEndpoint(optionType)(organizationUuid, optionUuid);
-          }
-        })
-      )
-      .pipe(this.handleResponse(optionType))
-      .subscribe();
+  public patchIsActive(optionType: LocalOptionType, organizationUuid: string, optionUuid: string, isActive: boolean) {
+    if (isActive) {
+      return this.resolveCreateLocalOptionsEndpoint(optionType)(organizationUuid, optionUuid);
+    } else {
+      return this.resolveDeleteLocalOptionsEndpoint(optionType)(organizationUuid, optionUuid);
+    }
   }
-
-  private handleResponse<T>(optionType: OptionTypeTableOption): OperatorFunction<T, T> {
-    return pipe(
-      tap(() => {
-        this.store.dispatch(OptionTypeActions.updateOptionTypeSuccess(optionType));
-      }),
-      catchError((error) => {
-        this.store.dispatch(OptionTypeActions.updateOptionTypeError());
-        return throwError(() => new Error(`Failed to update option: ${error.message}`));
-      })
-    );
-  }
-
-  private getOrganizationUuid(): Observable<string> {
-    return this.store.select(selectOrganizationUuid).pipe(first(), filterNullish());
-  }
-
+  
   private resolveGetLocalOptionsEndpoint(
-    optionType: OptionTypeTableOption
+    optionType: LocalOptionType
   ): (organizationUuid: string) => Observable<Array<APILocalRoleOptionResponseDTO>> {
     switch (optionType) {
       //It system regular option types
@@ -189,7 +162,7 @@ export class LocalOptionTypeService {
     }
   }
 
-  private resolvePatchLocalOptionsEndpoint(optionType: OptionTypeTableOption) {
+  private resolvePatchLocalOptionsEndpoint(optionType: LocalOptionType) {
     switch (optionType) {
       //It system regular option types
       case 'it-system_business-type':
@@ -291,7 +264,7 @@ export class LocalOptionTypeService {
   }
 
   private resolveCreateLocalOptionsEndpoint(
-    optionType: OptionTypeTableOption
+    optionType: LocalOptionType
   ): (organizationUuid: string, optionUuid: string) => Observable<APILocalRoleOptionResponseDTO> {
     switch (optionType) {
       //It system regular option types
@@ -382,7 +355,7 @@ export class LocalOptionTypeService {
   }
 
   private resolveDeleteLocalOptionsEndpoint(
-    optionType: OptionTypeTableOption
+    optionType: LocalOptionType
   ): (organizationUuid: string, optionUuid: string) => Observable<APILocalRoleOptionResponseDTO> {
     switch (optionType) {
       //It system regular option types
