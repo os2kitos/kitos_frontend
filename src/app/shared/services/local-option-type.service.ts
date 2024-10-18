@@ -191,6 +191,7 @@ export class LocalOptionTypeService {
 
   private resolvePatchLocalOptionsEndpoint(optionType: OptionTypeTableOption) {
     switch (optionType) {
+      //It system regular option types
       case 'it-system_business-type':
         return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
           this.businessTypeService.patchSingleItSystemLocalBusinessTypesInternalV2PatchLocalBusinessType({
@@ -198,6 +199,76 @@ export class LocalOptionTypeService {
             optionUuid,
             dto: request,
           });
+      case 'it-system_usage-archive-type':
+        return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
+          this.archiveTypeService.patchSingleItSystemLocalArchiveTypesInternalV2PatchLocalArchiveType({
+            organizationUuid,
+            optionUuid,
+            dto: request,
+          });
+      case 'it-system_usage-archive-location-type':
+        return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
+          this.archiveLocationService.patchSingleItSystemLocalArchiveLocationTypesInternalV2PatchArchiveLocationType({
+            organizationUuid,
+            optionUuid,
+            dto: request,
+          });
+      case 'it-system_usage-archive-location-test-type':
+        return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
+          this.archiveTestLocationService.patchSingleItSystemLocalArchiveTestLocationTypesInternalV2PatchLocalArchiveTestLocationType(
+            {
+              organizationUuid,
+              optionUuid,
+              dto: request,
+            }
+          );
+      case 'it-interface_data-type':
+        return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
+          this.dataTypeService.patchSingleItSystemLocalDataTypesInternalV2PatchLocalDataType({
+            organizationUuid,
+            optionUuid,
+            dto: request,
+          });
+      case 'it-system_usage-relation-frequency-type':
+        return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
+          this.frequencyTypeService.patchSingleItSystemLocalFrequencyTypesInternalV2PatchLocalRelationFrequencyType({
+            organizationUuid,
+            optionUuid,
+            dto: request,
+          });
+      case 'it-interface_interface-type':
+        return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
+          this.interfaceTypeService.patchSingleItSystemLocalInterfaceTypesInternalV2PatchLocalInterfaceType({
+            organizationUuid,
+            optionUuid,
+            dto: request,
+          });
+      case 'it_system_usage-gdpr-sensitive-data-type':
+        return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
+          this.sensitivePersonalDataTypeService.patchSingleItSystemLocalSensitivePersonalDataTypesInternalV2PatchLocalSensitivePersonalDataType(
+            {
+              organizationUuid,
+              optionUuid,
+              dto: request,
+            }
+          );
+      case 'it-system_usage-data-classification-type':
+        return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
+          this.itSystemCategoryService.patchSingleItSystemLocalItSystemCategoriesTypesInternalV2PatchLocalItSystemCategoryType(
+            {
+              organizationUuid,
+              optionUuid,
+              dto: request,
+            }
+          );
+      case 'it_system_usage-gdpr-registered-data-category-type':
+        return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
+          this.registerTypeService.patchSingleItSystemLocalRegisterTypesInternalV2PatchLocalRegisterType({
+            organizationUuid,
+            optionUuid,
+            dto: request,
+          });
+      //Role option types
       case 'organization-unit':
         return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
           this.organiztionUnitRoleService.patchSingleOrganizationUnitLocalRoleOptionTypesInternalV2PatchLocalOrganizationUnitRole(
@@ -223,12 +294,74 @@ export class LocalOptionTypeService {
     optionType: OptionTypeTableOption
   ): (organizationUuid: string, optionUuid: string) => Observable<APILocalRoleOptionResponseDTO> {
     switch (optionType) {
+      //It system regular option types
       case 'it-system_business-type':
         return (organizationUuid, optionUuid) =>
           this.businessTypeService.postSingleItSystemLocalBusinessTypesInternalV2CreateLocalBusinessType({
             organizationUuid,
             dto: { optionUuid },
           });
+      case 'it-system_usage-archive-type':
+        return (organizationUuid, optionUuid) =>
+          this.archiveTypeService.postSingleItSystemLocalArchiveTypesInternalV2CreateLocalArchiveType({
+            organizationUuid,
+            dto: { optionUuid },
+          });
+      case 'it-system_usage-archive-location-type':
+        return (organizationUuid, optionUuid) =>
+          this.archiveLocationService.postSingleItSystemLocalArchiveLocationTypesInternalV2CreateArchiveLocationType({
+            organizationUuid,
+            dto: { optionUuid },
+          });
+      case 'it-system_usage-archive-location-test-type':
+        return (organizationUuid, optionUuid) =>
+          this.archiveTestLocationService.postSingleItSystemLocalArchiveTestLocationTypesInternalV2CreateLocalArchiveTestLocationType(
+            {
+              organizationUuid,
+              dto: { optionUuid },
+            }
+          );
+      case 'it-interface_data-type':
+        return (organizationUuid, optionUuid) =>
+          this.dataTypeService.postSingleItSystemLocalDataTypesInternalV2CreateLocalDataType({
+            organizationUuid,
+            dto: { optionUuid },
+          });
+      case 'it-system_usage-relation-frequency-type':
+        return (organizationUuid, optionUuid) =>
+          this.frequencyTypeService.postSingleItSystemLocalFrequencyTypesInternalV2CreateLocalRelationFrequencyType({
+            organizationUuid,
+            dto: { optionUuid },
+          });
+      case 'it-interface_interface-type':
+        return (organizationUuid, optionUuid) =>
+          this.interfaceTypeService.postSingleItSystemLocalInterfaceTypesInternalV2CreateLocalInterfaceType({
+            organizationUuid,
+            dto: { optionUuid },
+          });
+      case 'it_system_usage-gdpr-sensitive-data-type':
+        return (organizationUuid, optionUuid) =>
+          this.sensitivePersonalDataTypeService.postSingleItSystemLocalSensitivePersonalDataTypesInternalV2CreateLocalSensitivePersonalDataType(
+            {
+              organizationUuid,
+              dto: { optionUuid },
+            }
+          );
+      case 'it-system_usage-data-classification-type':
+        return (organizationUuid, optionUuid) =>
+          this.itSystemCategoryService.postSingleItSystemLocalItSystemCategoriesTypesInternalV2CreateLocalItSystemCategoryType(
+            {
+              organizationUuid,
+              dto: { optionUuid },
+            }
+          );
+      case 'it_system_usage-gdpr-registered-data-category-type':
+        return (organizationUuid, optionUuid) =>
+          this.registerTypeService.postSingleItSystemLocalRegisterTypesInternalV2CreateLocalRegisterType({
+            organizationUuid,
+            dto: { optionUuid },
+          });
+      //Role option types
       case 'organization-unit':
         return (organizationUuid, optionUuid) =>
           this.organiztionUnitRoleService.postSingleOrganizationUnitLocalRoleOptionTypesInternalV2CreateLocalOrganizationUnitRole(
@@ -252,12 +385,75 @@ export class LocalOptionTypeService {
     optionType: OptionTypeTableOption
   ): (organizationUuid: string, optionUuid: string) => Observable<APILocalRoleOptionResponseDTO> {
     switch (optionType) {
+      //It system regular option types
       case 'it-system_business-type':
         return (organizationUuid, optionUuid) =>
           this.businessTypeService.deleteSingleItSystemLocalBusinessTypesInternalV2DeleteLocalBusinessType({
             organizationUuid,
             optionUuid,
           });
+      case 'it-system_usage-archive-type':
+        return (organizationUuid, optionUuid) =>
+          this.archiveTypeService.deleteSingleItSystemLocalArchiveTypesInternalV2DeleteLocalArchiveType({
+            organizationUuid,
+            optionUuid,
+          });
+      case 'it-system_usage-archive-location-type':
+        return (organizationUuid, optionUuid) =>
+          this.archiveLocationService.deleteSingleItSystemLocalArchiveLocationTypesInternalV2DeleteArchiveLocationType({
+            organizationUuid,
+            optionUuid,
+          });
+      case 'it-system_usage-archive-location-test-type':
+        return (organizationUuid, optionUuid) =>
+          this.archiveTestLocationService.deleteSingleItSystemLocalArchiveTestLocationTypesInternalV2DeleteLocalArchiveTestLocationType(
+            {
+              organizationUuid,
+              optionUuid,
+            }
+          );
+      case 'it-interface_data-type':
+        return (organizationUuid, optionUuid) =>
+          this.dataTypeService.deleteSingleItSystemLocalDataTypesInternalV2DeleteLocalDataType({
+            organizationUuid,
+            optionUuid,
+          });
+      case 'it-system_usage-relation-frequency-type':
+        return (organizationUuid, optionUuid) =>
+          this.frequencyTypeService.deleteSingleItSystemLocalFrequencyTypesInternalV2DeleteLocalRelationFrequencyType({
+            organizationUuid,
+            optionUuid,
+          });
+      case 'it-interface_interface-type':
+        return (organizationUuid, optionUuid) =>
+          this.interfaceTypeService.deleteSingleItSystemLocalInterfaceTypesInternalV2DeleteLocalInterfaceType({
+            organizationUuid,
+            optionUuid,
+          });
+      case 'it_system_usage-gdpr-sensitive-data-type':
+        return (organizationUuid, optionUuid) =>
+          this.sensitivePersonalDataTypeService.deleteSingleItSystemLocalSensitivePersonalDataTypesInternalV2DeleteLocalSensitivePersonalDataType(
+            {
+              organizationUuid,
+              optionUuid,
+            }
+          );
+      case 'it-system_usage-data-classification-type':
+        return (organizationUuid, optionUuid) =>
+          this.itSystemCategoryService.deleteSingleItSystemLocalItSystemCategoriesTypesInternalV2DeleteLocalItSystemCategoryType(
+            {
+              organizationUuid,
+              optionUuid,
+            }
+          );
+      case 'it_system_usage-gdpr-registered-data-category-type':
+        return (organizationUuid, optionUuid) =>
+          this.registerTypeService.deleteSingleItSystemLocalRegisterTypesInternalV2DeleteLocalRegisterType({
+            organizationUuid,
+            optionUuid,
+          });
+
+      //Role option types
       case 'organization-unit':
         return (organizationUuid, optionUuid) =>
           this.organiztionUnitRoleService.deleteSingleOrganizationUnitLocalRoleOptionTypesInternalV2DeleteLocalOrganizationUnitRole(
