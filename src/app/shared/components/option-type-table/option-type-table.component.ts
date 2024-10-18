@@ -7,6 +7,7 @@ import { RegularOptionType } from '../../models/options/regular-option-types.mod
 import { RoleOptionTypes } from '../../models/options/role-option-types.model';
 import { OptionTypeTableComponentStore } from './option-type-table.component-store';
 import { EditOptionTypeDialogComponent } from './edit-option-type-dialog/edit-option-type-dialog.component';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-option-type-table',
@@ -40,9 +41,14 @@ export class OptionTypeTableComponent extends BaseComponent implements OnInit {
     this.componentStore.getOptionTypeItems();
 
     this.subscriptions.add(
-      this.actions$.pipe(ofType(OptionTypeActions.updateOptionTypeSuccess)).subscribe(() => {
-        this.componentStore.getOptionTypeItems();
-      })
+      this.actions$
+        .pipe(
+          ofType(OptionTypeActions.updateOptionTypeSuccess),
+          filter(({ optionType }) => optionType === this.optionType)
+        )
+        .subscribe(() => {
+          this.componentStore.getOptionTypeItems();
+        })
     );
   }
 

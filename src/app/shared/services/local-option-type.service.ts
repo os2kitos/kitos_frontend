@@ -72,7 +72,7 @@ export class LocalOptionTypeService {
         switchMap((organizationUuid) =>
           this.resolvePatchLocalOptionsEndpoint(optionType)(organizationUuid, optionUuid, request)
         ),
-        this.handleResponse()
+        this.handleResponse(optionType)
       )
 
       .subscribe();
@@ -89,14 +89,14 @@ export class LocalOptionTypeService {
           }
         })
       )
-      .pipe(this.handleResponse())
+      .pipe(this.handleResponse(optionType))
       .subscribe();
   }
 
-  private handleResponse<T>(): OperatorFunction<T, T> {
+  private handleResponse<T>(optionType: OptionTypeTableOption): OperatorFunction<T, T> {
     return pipe(
       tap(() => {
-        this.store.dispatch(OptionTypeActions.updateOptionTypeSuccess());
+        this.store.dispatch(OptionTypeActions.updateOptionTypeSuccess(optionType));
       }),
       catchError((error) => {
         this.store.dispatch(OptionTypeActions.updateOptionTypeError());
