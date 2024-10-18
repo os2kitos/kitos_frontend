@@ -1,6 +1,6 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { catchError, first, Observable, OperatorFunction, pipe, Subscription, tap, throwError } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import {
   APILocalRegularOptionResponseDTO,
   APILocalRegularOptionUpdateRequestDTO,
@@ -8,10 +8,7 @@ import {
   APIV2ItSystemLocalRegularOptionTypesInternalINTERNALService,
   APIV2OrganizationUnitLocalRoleOptionTypesInternalINTERNALService,
 } from 'src/app/api/v2';
-import { LocalOptionTypeActions } from 'src/app/store/local-option-types/actions';
-import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 import { LocalOptionType } from '../models/options/local-option-type.model';
-import { filterNullish } from '../pipes/filter-nullish';
 
 @Injectable({
   providedIn: 'root',
@@ -51,22 +48,6 @@ export class LocalOptionTypeService implements OnDestroy {
     } else {
       return this.resolveDeleteLocalOptionsEndpoint(optionType)(organizationUuid, optionUuid);
     }
-  }
-
-  private handleResponse<T>(): OperatorFunction<T, T> {
-    return pipe(
-      tap(() => {
-        this.store.dispatch(LocalOptionTypeActions.updateOptionTypeSuccess());
-      }),
-      catchError((error) => {
-        this.store.dispatch(LocalOptionTypeActions.updateOptionTypeError());
-        return throwError(() => new Error(`Failed to update option: ${error.message}`));
-      })
-    );
-  }
-
-  private getOrganizationUuid(): Observable<string> {
-    return this.store.select(selectOrganizationUuid).pipe(first(), filterNullish());
   }
 
   private resolveGetLocalOptionsEndpoint(
