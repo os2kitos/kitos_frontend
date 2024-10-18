@@ -141,6 +141,8 @@ import { SlideToggleComponent } from './slide-toggle/slide-toggle.component';
 import { VerticalContentGridSectionMarginLeftComponent } from './vertical-content-grid-section-margin-left/vertical-content-grid-section-margin-left.component';
 import { SnackbarActionsComponent } from './snackbar-actions/snackbar-actions.component';
 import { AccordionHeaderComponent } from './accordion-header/accordion-header.component';
+import { OptionTypeTableComponent } from './option-type-table/option-type-table.component';
+import { EditOptionTypeDialogComponent } from './option-type-table/edit-option-type-dialog/edit-option-type-dialog.component';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
@@ -254,6 +256,8 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     MultiSelectDropdownComponent,
     SnackbarActionsComponent,
     AccordionHeaderComponent,
+    OptionTypeTableComponent,
+    EditOptionTypeDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -380,6 +384,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     MultiSelectDropdownComponent,
     SnackbarActionsComponent,
     AccordionHeaderComponent,
+    OptionTypeTableComponent,
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },
