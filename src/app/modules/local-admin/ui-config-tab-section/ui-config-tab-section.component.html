@@ -1,0 +1,20 @@
+<app-accordion [title]="tabViewModel.text" [isExpandedByDefault]="true" [checkboxInTitle]="true">
+  <app-form-grid [formGroup]="formGroup">
+    <div>
+      <app-checkbox
+        i18n-text
+        labelPosition="after"
+        text="Datofelter">
+      </app-checkbox>
+      <app-textbox-info class="checkbox-info-align-left">
+      <app-paragraph paragraphSize="x-small" i18n> Dækker felterne “Ibrugtagningsdato” og “Slutdato for anvendelse” </app-paragraph>
+    </app-textbox-info>
+    </div>
+
+      <app-checkbox
+        i18n-text
+        labelPosition="after"
+        text="Livscyklus">
+      </app-checkbox>
+  </app-form-grid>
+</app-accordion>

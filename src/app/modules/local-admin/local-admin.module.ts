@@ -8,15 +8,10 @@ import { LocalAdminOrganizationComponent } from './local-admin-organization/loca
 import { OrganizationsGridComponent } from './local-admin-organization/organizations-grid/organizations-grid.component';
 import { LocalAdminComponent } from './local-admin.component';
 import { LocalAdminRouterModule } from './local-admin.routes';
+import { UiConfigTabSectionComponent } from './ui-config-tab-section/ui-config-tab-section.component';
 
 @NgModule({
-  declarations: [
-    LocalAdminComponent,
-    LocalAdminInformationComponent,
-    LocalAdminOrganizationComponent,
-    OrganizationsGridComponent,
-    LocalAdminItSystemUsagesComponent,
-  ],
+  declarations: [LocalAdminComponent, LocalAdminInformationComponent, LocalAdminOrganizationComponent, OrganizationsGridComponent, LocalAdminItSystemUsagesComponent, UiConfigTabSectionComponent],
   imports: [CommonModule, ComponentsModule, SharedModule, LocalAdminRouterModule],
 })
 export class LocalAdminModule {}

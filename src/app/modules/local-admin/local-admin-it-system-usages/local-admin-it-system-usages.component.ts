@@ -35,10 +35,9 @@ export class LocalAdminItSystemUsagesComponent implements OnInit {
     UIConfigNodeViewModel[]
   >([]);
 
-  public readonly itSystemUsageUIModuleCustomizationForm = new FormGroup({});
+  public readonly itSystemUsageFrontpageForm = new FormGroup({});
 
   constructor(private readonly store: Store) {}
-
 
   ngOnInit(): void {
     this.store.dispatch(
