@@ -1,18 +1,52 @@
-<app-scrollbar-dialog [title]="title">
-  <app-standard-vertical-content-grid>
-    <ng-container *ngIf="(isLoading$ | async) !== true">
-      <app-drag-and-drop-tree
-        *ngIf="snapshot$ | async as snapshot"
-        itemType="organization"
-        [currentNodeUuid]="snapshot.uuid"
-        [nodes]="(snapshotTree$ | async) ?? []"
-        [disableDrag]="true"
-        (nodeExpandClick)="nodeExpandClick($event)"
-        [maxLevel]="0"
-      ></app-drag-and-drop-tree>
-    </ng-container>
-    <app-loading *ngIf="isLoading$ | async"></app-loading>
-  </app-standard-vertical-content-grid>
+<app-scrollbar-dialog [title]="title" backgroundColor="grey">
+  <form [formGroup]="fkOrgFormGroup">
+    <app-standard-vertical-content-grid>
+      <ng-container *ngIf="(isLoading$ | async) !== true">
+        <div>
+          <app-numeric-input
+            text="Niveauer"
+            i18n-text
+            [formGroup]="fkOrgFormGroup"
+            formName="levels"
+          ></app-numeric-input>
+          <app-paragraph paragraphSize="x-small" [dimmed]="true" i18n
+            >KITOS synkroniserer 2 niveauer fra organisationshierarkiet i FK Organisation. Slet indtastningen for at
+            synkronisere det fulde organisationshierarki.
+          </app-paragraph>
+        </div>
+        <div>
+          <app-checkbox
+            text="Tjek automatisk efter ventende opdateringer*"
+            i18n-text
+            labelPosition="after"
+            [formGroup]="fkOrgFormGroup"
+            formName="automaticUpdates"
+          ></app-checkbox>
+          <app-paragraph paragraphSize="x-small" [dimmed]="true" i18n
+            >* Foretager automatisk tjek hver mandag nat og sender en email med oversigt over ventende opdateringer til
+            brugere i kommunen med rollen "Lokal Administrator"</app-paragraph
+          >
+        </div>
+        <app-card>
+          <app-card-header
+            title="Forhåndsvisning"
+            i18n-title
+            helpTextKey="local-config-fk-org-import-modal.units"
+          ></app-card-header>
+          <app-drag-and-drop-tree
+            *ngIf="snapshot$ | async as snapshot"
+            itemType="organization"
+            [currentNodeUuid]="snapshot.uuid"
+            [nodes]="(snapshotTree$ | async) ?? []"
+            [disableDrag]="true"
+            (nodeExpandClick)="nodeExpandClick($event)"
+            [maxLevel]="undefined"
+          ></app-drag-and-drop-tree>
+        </app-card>
+      </ng-container>
+      <app-loading *ngIf="isLoading$ | async"></app-loading>
+    </app-standard-vertical-content-grid>
+  </form>
   <app-dialog-actions>
     <app-button>Gennemfør synkronisering</app-button>
     <app-button color="warn">Annuler</app-button>

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { map } from 'rxjs';
 import { APIStsOrganizationOrgUnitDTO } from 'src/app/api/v2';
@@ -26,6 +27,11 @@ export class FkOrgWriteDialogComponent implements OnInit {
   public readonly snapshotTree$ = this.snapshot$.pipe(map((snapshot) => mapFkOrgSnapshotUnits([snapshot])));
   public readonly isLoading$ = this.store.select(selectIsLoadingSnapshot);
   public readonly hasFailed$ = this.store.select(selectHasSnapshotFailed);
+
+  public readonly fkOrgFormGroup = new FormGroup({
+    levels: new FormControl<number | undefined>(undefined),
+    automaticUpdates: new FormControl<boolean>(false),
+  });
 
   constructor(private readonly store: Store) {}
 
