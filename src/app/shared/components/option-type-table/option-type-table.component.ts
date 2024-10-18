@@ -1,11 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
-import { OptionTypeActions } from 'src/app/store/local-option-types/actions';
 import { BaseComponent } from '../../base/base.component';
 import { LocalOptionType, LocalOptionTypeItem } from '../../models/options/local-option-type.model';
 import { EditOptionTypeDialogComponent } from './edit-option-type-dialog/edit-option-type-dialog.component';
 import { OptionTypeTableComponentStore } from './option-type-table.component-store';
+import { LocalOptionTypeActions } from 'src/app/store/local-option-types/actions';
 
 @Component({
   selector: 'app-option-type-table',
@@ -39,7 +39,7 @@ export class OptionTypeTableComponent extends BaseComponent implements OnInit {
     this.componentStore.getOptionTypeItems();
 
     this.subscriptions.add(
-      this.actions$.pipe(ofType(OptionTypeActions.updateOptionTypeSuccess)).subscribe(() => {
+      this.actions$.pipe(ofType(LocalOptionTypeActions.updateOptionTypeSuccess)).subscribe(() => {
         this.componentStore.getOptionTypeItems();
       })
     );
