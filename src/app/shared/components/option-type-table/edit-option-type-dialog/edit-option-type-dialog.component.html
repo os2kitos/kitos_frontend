@@ -8,6 +8,7 @@
         [formGroup]="form"
         formName="description"
         [value]="form.value.description ?? ''"
+        data-cy="description-text-area"
       ></app-textarea>
       <app-checkbox
         *ngIf="!optionTypeItem.obligatory"
@@ -17,6 +18,7 @@
         labelPosition="after"
         text="Aktiv"
         i18n-text
+        data-cy="active-checkbox"
       >
       </app-checkbox>
     </form>
