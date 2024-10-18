@@ -3,7 +3,8 @@
 [checkboxInTitle]="true"
 [checkboxValue]="tabViewModel.isEnabled ?? false"
 [checkboxDisabled]="tabViewModel.isObligatory ?? false"
-(checkboxChanged)="onCheckboxChanged({ enabled: $event, fullKey: tabViewModel.fullKey })">
+(checkboxChanged)="onCheckboxChanged({ enabled: $event, fullKey: tabViewModel.fullKey })"
+[checkboxTooltipText]="tabViewModel.helpText">
   <app-divider></app-divider>
 
   <div class="form-section-top-padding">
