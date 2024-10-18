@@ -3,7 +3,6 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { LocalOptionType, LocalOptionTypeItem } from 'src/app/shared/models/options/local-option-type.model';
-import { LocalOptionTypeService } from 'src/app/shared/services/local-option-type.service';
 import { LocalOptionTypeActions } from 'src/app/store/local-option-types/actions';
 
 @Component({
@@ -22,7 +21,6 @@ export class EditOptionTypeDialogComponent implements OnInit {
 
   constructor(
     private dialogRef: MatDialogRef<EditOptionTypeDialogComponent>,
-    private localOptionTypeService: LocalOptionTypeService,
     private store: Store
   ) {}
 
