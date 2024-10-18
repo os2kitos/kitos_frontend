@@ -1,4 +1,5 @@
 import { UIModuleCustomizationKey } from '../../enums/ui-module-customization-key';
+import { uiConfigHelpTexts } from './ui-config-helptexts';
 
 export interface UINodeBlueprint {
   text: string;
@@ -9,42 +10,16 @@ export interface UINodeBlueprint {
   subtreeIsComplete?: boolean;
 }
 
-export function getItSystemUsageUiBluePrint(): UINodeBlueprint {
-  const blueprint = ItSystemUsageUiBluePrint;
-  setupUIBlueprintFullKeys(UIModuleCustomizationKey.ItSystemUsage, blueprint, []);
-  console.log(JSON.stringify(blueprint) + '  is blueprint')
-  return blueprint;
-}
-
-function setupUIBlueprintFullKeys(currentLevelKey: string, currentNode: UINodeBlueprint, ancestorKeys: string[]) {
-  const keyPath = [...ancestorKeys, currentLevelKey];
-  currentNode.fullKey = keyPath.join('.');
-
-  if (currentNode.children) {
-    Object.keys(currentNode.children).forEach((key) => {
-      if (currentNode.children) setupUIBlueprintFullKeys(key, currentNode.children[key], keyPath);
-    });
-  }
-}
-
-const helpTexts = {
-  cannotChangeTab: 'Det er ikke muligt at slå dette faneblad fra',
-  cannotChangeTabOnlyThroughModuleConfig: $localize`Det er kun muligt at fjerne dette faneblad ved at slå det relaterede modul fra`,
-  generalUiCustomizationHelpText: $localize`Bemærk: Skjules faneblad/felt fjernes relaterede felt(er) også fra overbliksbillederne`,
-  subtreeIsCompleteHelpText:
-    'Fanebladdet slås fra hvis alle felter/grupper fjernes, da siden ellers vil være uden indhold.',
-};
-
-const ItSystemUsageUiBluePrint = {
+export const ItSystemUsageUiBluePrint = {
   module: UIModuleCustomizationKey.ItSystemUsage,
   isObligatory: false,
-  helpText: helpTexts.generalUiCustomizationHelpText,
+  helpText: uiConfigHelpTexts.generalUiCustomizationHelpText,
   text: $localize`IT-Systemer i anvendelse`,
   children: {
     frontPage: {
       text: $localize`Systemforside`,
       isObligatory: true,
-      helpText: helpTexts.cannotChangeTabOnlyThroughModuleConfig,
+      helpText: uiConfigHelpTexts.cannotChangeTabOnlyThroughModuleConfig,
       children: {
         usagePeriod: {
           text: $localize`Datofelter`,
@@ -58,7 +33,7 @@ const ItSystemUsageUiBluePrint = {
     contracts: {
       text: $localize`Kontrakter`,
       isObligatory: true,
-      helpText: helpTexts.cannotChangeTabOnlyThroughModuleConfig,
+      helpText: uiConfigHelpTexts.cannotChangeTabOnlyThroughModuleConfig,
       children: {
         selectContractToDetermineIfItSystemIsActive: {
           text: $localize`Hvilken kontrakt skal afgøre om IT systemet er aktivt`,

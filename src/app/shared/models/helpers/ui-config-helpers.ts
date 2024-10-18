@@ -1,5 +1,6 @@
+import { UIModuleCustomizationKey } from "../../enums/ui-module-customization-key";
 import { CustomizedUINode } from "../ui-config/customized-ui-node.model";
-import { UINodeBlueprint } from "../ui-config/it-system-usages-blueprint";
+import { ItSystemUsageUiBluePrint, UINodeBlueprint } from "../ui-config/it-system-usages-blueprint";
 import { UIConfigNodeViewModel } from "../ui-config/ui-config-node-view-model.model";
 
 export function collectUIConfigNodeViewModels(
@@ -39,6 +40,23 @@ function buildUIConfigNodeViewModels(
   if (node.children) {
     Object.keys(node.children).forEach((childKey) => {
       buildUIConfigNodeViewModels(node.children![childKey], uiConfigNodeViewModels, customizationList);
+    });
+  }
+}
+
+export function getItSystemUsageUiBluePrint(): UINodeBlueprint {
+  const blueprint = ItSystemUsageUiBluePrint;
+  setupUIBlueprintFullKeys(UIModuleCustomizationKey.ItSystemUsage, blueprint, []);
+  return blueprint;
+}
+
+function setupUIBlueprintFullKeys(currentLevelKey: string, currentNode: UINodeBlueprint, ancestorKeys: string[]) {
+  const keyPath = [...ancestorKeys, currentLevelKey];
+  currentNode.fullKey = keyPath.join('.');
+
+  if (currentNode.children) {
+    Object.keys(currentNode.children).forEach((key) => {
+      if (currentNode.children) setupUIBlueprintFullKeys(key, currentNode.children[key], keyPath);
     });
   }
 }
