@@ -5,8 +5,10 @@
         <app-checkbox *ngIf="checkboxInTitle" [disabled]="checkboxDisabled" [value]="checkboxValue" (valueChange)="onCheckboxToggled($event)"></app-checkbox>
           <app-paragraph [bold]="true" paragraphSize="large">{{ title }}</app-paragraph>
           <ng-container *ngIf="checkboxInTitle && checkboxDisabled">
-            <app-tooltip *ngIf="checkboxTooltipText" [text]="checkboxTooltipText" [tooltipDelay]="500"></app-tooltip>
-          </ng-container>
+            <app-textbox-info *ngIf="checkboxTooltipText !== undefined">
+              <app-paragraph paragraphSize="x-small" i18n> {{ checkboxTooltipText }} </app-paragraph>
+            </app-textbox-info>
+           </ng-container>
           <ng-content class="accordion-header" select="app-accordion-header"></ng-content>
       </mat-panel-title>
     </mat-expansion-panel-header>
