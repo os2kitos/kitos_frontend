@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { OptionTypeTableItem, OptionTypeTableOption } from 'src/app/shared/models/options/local-option-type.model';
+import { LocalOptionType, LocalOptionTypeItem } from 'src/app/shared/models/options/local-option-type.model';
 import { LocalOptionTypeService } from 'src/app/shared/services/local-option-type.service';
 
 @Component({
@@ -10,8 +10,8 @@ import { LocalOptionTypeService } from 'src/app/shared/services/local-option-typ
   styleUrl: './edit-option-type-dialog.component.scss',
 })
 export class EditOptionTypeDialogComponent implements OnInit {
-  @Input() optionTypeItem!: OptionTypeTableItem;
-  @Input() optionType!: OptionTypeTableOption;
+  @Input() optionTypeItem!: LocalOptionTypeItem;
+  @Input() optionType!: LocalOptionType;
 
   public form = new FormGroup({
     description: new FormControl<string | undefined>(undefined),

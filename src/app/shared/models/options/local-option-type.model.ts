@@ -1,7 +1,7 @@
-import { RegularOptionType } from "./regular-option-types.model";
-import { RoleOptionTypes } from "./role-option-types.model";
+import { RegularOptionType } from './regular-option-types.model';
+import { RoleOptionTypes } from './role-option-types.model';
 
-export interface OptionTypeTableItem {
+export interface LocalOptionTypeItem {
   uuid: string;
   active: boolean;
   name: string;
@@ -10,4 +10,4 @@ export interface OptionTypeTableItem {
   obligatory: boolean;
 }
 
-export type OptionTypeTableOption = RegularOptionType | RoleOptionTypes;
+export type LocalOptionType = RegularOptionType | RoleOptionTypes;
