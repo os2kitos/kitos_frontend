@@ -31,6 +31,7 @@ import { APIV2ItInterfaceInterfaceTypeService } from './api/v2ItInterfaceInterfa
 import { APIV2ItSystemService } from './api/v2ItSystem.service';
 import { APIV2ItSystemBusinessTypeService } from './api/v2ItSystemBusinessType.service';
 import { APIV2ItSystemInternalINTERNALService } from './api/v2ItSystemInternalINTERNAL.service';
+import { APIV2ItSystemLocalRegularOptionTypesInternalINTERNALService } from './api/v2ItSystemLocalRegularOptionTypesInternalINTERNAL.service';
 import { APIV2ItSystemUsageService } from './api/v2ItSystemUsage.service';
 import { APIV2ItSystemUsageArchiveLocationTypeService } from './api/v2ItSystemUsageArchiveLocationType.service';
 import { APIV2ItSystemUsageArchiveTestLocationTypeService } from './api/v2ItSystemUsageArchiveTestLocationType.service';
@@ -46,6 +47,7 @@ import { APIV2KleOptionService } from './api/v2KleOption.service';
 import { APIV2NotificationINTERNALService } from './api/v2NotificationINTERNAL.service';
 import { APIV2OrganizationService } from './api/v2Organization.service';
 import { APIV2OrganizationGridInternalINTERNALService } from './api/v2OrganizationGridInternalINTERNAL.service';
+import { APIV2OrganizationUnitLocalRoleOptionTypesInternalINTERNALService } from './api/v2OrganizationUnitLocalRoleOptionTypesInternalINTERNAL.service';
 import { APIV2OrganizationUnitRegistrationInternalINTERNALService } from './api/v2OrganizationUnitRegistrationInternalINTERNAL.service';
 import { APIV2OrganizationUnitRoleTypeService } from './api/v2OrganizationUnitRoleType.service';
 import { APIV2OrganizationUnitsInternalINTERNALService } from './api/v2OrganizationUnitsInternalINTERNAL.service';

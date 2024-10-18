@@ -26,8 +26,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GetSingleItSystemsGetItSystemsByOrgkeyRequestParams {
-    orgKey: number;
+export interface GetSingleItSystemsGetRequestParams {
     /** Expands related entities inline. */
     $expand?: string;
     /** Filters the results, based on a Boolean condition. */
@@ -44,7 +43,8 @@ export interface GetSingleItSystemsGetItSystemsByOrgkeyRequestParams {
     $count?: boolean;
 }
 
-export interface GetSingleItSystemsGetV1RequestParams {
+export interface GetSingleItSystemsGetItSystemsByOrgkeyRequestParams {
+    orgKey: number;
     /** Expands related entities inline. */
     $expand?: string;
     /** Filters the results, based on a Boolean condition. */
@@ -76,7 +76,7 @@ export interface GetSingleItSystemsGetV1ByIdRequestParams {
 })
 export class APIV1ODATAItSystemsINTERNALService {
 
-    protected basePath = 'https://kitos-dev.strongminds.dk';
+    protected basePath = 'https://localhost:44300';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
@@ -133,6 +133,99 @@ export class APIV1ODATAItSystemsINTERNALService {
             throw Error("key may not be null if value is not object or array");
         }
         return httpParams;
+    }
+
+    /**
+     * Returns the EntitySet ItSystems
+     * @param requestParameters
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getSingleItSystemsGet(requestParameters: GetSingleItSystemsGetRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<APIItSystemIEnumerableODataResponse>;
+    public getSingleItSystemsGet(requestParameters: GetSingleItSystemsGetRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<APIItSystemIEnumerableODataResponse>>;
+    public getSingleItSystemsGet(requestParameters: GetSingleItSystemsGetRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<APIItSystemIEnumerableODataResponse>>;
+    public getSingleItSystemsGet(requestParameters: GetSingleItSystemsGetRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
+        const $expand = requestParameters.$expand;
+        const $filter = requestParameters.$filter;
+        const $select = requestParameters.$select;
+        const $orderby = requestParameters.$orderby;
+        const $top = requestParameters.$top;
+        const $skip = requestParameters.$skip;
+        const $count = requestParameters.$count;
+
+        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
+        if ($expand !== undefined && $expand !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>$expand, '$expand');
+        }
+        if ($filter !== undefined && $filter !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>$filter, '$filter');
+        }
+        if ($select !== undefined && $select !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>$select, '$select');
+        }
+        if ($orderby !== undefined && $orderby !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>$orderby, '$orderby');
+        }
+        if ($top !== undefined && $top !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>$top, '$top');
+        }
+        if ($skip !== undefined && $skip !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>$skip, '$skip');
+        }
+        if ($count !== undefined && $count !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>$count, '$count');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                '*/*'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/odata/ItSystems`;
+        return this.httpClient.request<APIItSystemIEnumerableODataResponse>('get', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                params: localVarQueryParameters,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
     }
 
     /**
@@ -219,99 +312,6 @@ export class APIV1ODATAItSystemsINTERNALService {
         }
 
         let localVarPath = `/odata/Organizations(${this.configuration.encodeParam({name: "orgKey", value: orgKey, in: "path", style: "simple", explode: false, dataType: "number", dataFormat: "int32"})})/ItSystems`;
-        return this.httpClient.request<APIItSystemIEnumerableODataResponse>('get', `${this.configuration.basePath}${localVarPath}`,
-            {
-                context: localVarHttpContext,
-                params: localVarQueryParameters,
-                responseType: <any>responseType_,
-                withCredentials: this.configuration.withCredentials,
-                headers: localVarHeaders,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * Returns the EntitySet ItSystems
-     * @param requestParameters
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public getSingleItSystemsGetV1(requestParameters: GetSingleItSystemsGetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<APIItSystemIEnumerableODataResponse>;
-    public getSingleItSystemsGetV1(requestParameters: GetSingleItSystemsGetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<APIItSystemIEnumerableODataResponse>>;
-    public getSingleItSystemsGetV1(requestParameters: GetSingleItSystemsGetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<APIItSystemIEnumerableODataResponse>>;
-    public getSingleItSystemsGetV1(requestParameters: GetSingleItSystemsGetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
-        const $expand = requestParameters.$expand;
-        const $filter = requestParameters.$filter;
-        const $select = requestParameters.$select;
-        const $orderby = requestParameters.$orderby;
-        const $top = requestParameters.$top;
-        const $skip = requestParameters.$skip;
-        const $count = requestParameters.$count;
-
-        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
-        if ($expand !== undefined && $expand !== null) {
-          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
-            <any>$expand, '$expand');
-        }
-        if ($filter !== undefined && $filter !== null) {
-          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
-            <any>$filter, '$filter');
-        }
-        if ($select !== undefined && $select !== null) {
-          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
-            <any>$select, '$select');
-        }
-        if ($orderby !== undefined && $orderby !== null) {
-          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
-            <any>$orderby, '$orderby');
-        }
-        if ($top !== undefined && $top !== null) {
-          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
-            <any>$top, '$top');
-        }
-        if ($skip !== undefined && $skip !== null) {
-          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
-            <any>$skip, '$skip');
-        }
-        if ($count !== undefined && $count !== null) {
-          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
-            <any>$count, '$count');
-        }
-
-        let localVarHeaders = this.defaultHeaders;
-
-        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
-        if (localVarHttpHeaderAcceptSelected === undefined) {
-            // to determine the Accept header
-            const httpHeaderAccepts: string[] = [
-                '*/*'
-            ];
-            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        }
-        if (localVarHttpHeaderAcceptSelected !== undefined) {
-            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
-        }
-
-        let localVarHttpContext: HttpContext | undefined = options && options.context;
-        if (localVarHttpContext === undefined) {
-            localVarHttpContext = new HttpContext();
-        }
-
-
-        let responseType_: 'text' | 'json' | 'blob' = 'json';
-        if (localVarHttpHeaderAcceptSelected) {
-            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
-                responseType_ = 'text';
-            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
-                responseType_ = 'json';
-            } else {
-                responseType_ = 'blob';
-            }
-        }
-
-        let localVarPath = `/odata/ItSystems`;
         return this.httpClient.request<APIItSystemIEnumerableODataResponse>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,

@@ -29,6 +29,11 @@ import { Configuration }                                     from '../configurat
 
 
 export interface GetSingleKleOptionV2GetRequestParams {
+    /** UUID of the KLE number */
+    kleUuid: string;
+}
+
+export interface GetSingleKleOptionV2GetV1RequestParams {
     /** Query by parent KLE uuid */
     parentKleUuid?: string;
     /** Query by parent KLE number (exact match) */
@@ -43,18 +48,13 @@ export interface GetSingleKleOptionV2GetRequestParams {
     pageSize?: number;
 }
 
-export interface GetSingleKleOptionV2GetV1RequestParams {
-    /** UUID of the KLE number */
-    kleUuid: string;
-}
-
 
 @Injectable({
   providedIn: 'root'
 })
 export class APIV2KleOptionService {
 
-    protected basePath = 'https://kitos-dev.strongminds.dk';
+    protected basePath = 'https://localhost:44300';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
@@ -114,15 +114,74 @@ export class APIV2KleOptionService {
     }
 
     /**
+     * Returns the details of a single KLE
+     * @param requestParameters
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getSingleKleOptionV2Get(requestParameters: GetSingleKleOptionV2GetRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIKLEDetailsDTOVersionedKLEResponseDTO>;
+    public getSingleKleOptionV2Get(requestParameters: GetSingleKleOptionV2GetRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIKLEDetailsDTOVersionedKLEResponseDTO>>;
+    public getSingleKleOptionV2Get(requestParameters: GetSingleKleOptionV2GetRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIKLEDetailsDTOVersionedKLEResponseDTO>>;
+    public getSingleKleOptionV2Get(requestParameters: GetSingleKleOptionV2GetRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        const kleUuid = requestParameters.kleUuid;
+        if (kleUuid === null || kleUuid === undefined) {
+            throw new Error('Required parameter kleUuid was null or undefined when calling getSingleKleOptionV2Get.');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/v2/kle-options/${this.configuration.encodeParam({name: "kleUuid", value: kleUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
+        return this.httpClient.request<APIKLEDetailsDTOVersionedKLEResponseDTO>('get', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * Returns the KLE reference used by KITOS
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleKleOptionV2Get(requestParameters: GetSingleKleOptionV2GetRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIKLEDetailsDTOIEnumerableVersionedKLEResponseDTO>;
-    public getSingleKleOptionV2Get(requestParameters: GetSingleKleOptionV2GetRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIKLEDetailsDTOIEnumerableVersionedKLEResponseDTO>>;
-    public getSingleKleOptionV2Get(requestParameters: GetSingleKleOptionV2GetRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIKLEDetailsDTOIEnumerableVersionedKLEResponseDTO>>;
-    public getSingleKleOptionV2Get(requestParameters: GetSingleKleOptionV2GetRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleKleOptionV2GetV1(requestParameters: GetSingleKleOptionV2GetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIKLEDetailsDTOIEnumerableVersionedKLEResponseDTO>;
+    public getSingleKleOptionV2GetV1(requestParameters: GetSingleKleOptionV2GetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIKLEDetailsDTOIEnumerableVersionedKLEResponseDTO>>;
+    public getSingleKleOptionV2GetV1(requestParameters: GetSingleKleOptionV2GetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIKLEDetailsDTOIEnumerableVersionedKLEResponseDTO>>;
+    public getSingleKleOptionV2GetV1(requestParameters: GetSingleKleOptionV2GetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const parentKleUuid = requestParameters.parentKleUuid;
         const parentKleNumber = requestParameters.parentKleNumber;
         const kleNumberPrefix = requestParameters.kleNumberPrefix;
@@ -192,65 +251,6 @@ export class APIV2KleOptionService {
             {
                 context: localVarHttpContext,
                 params: localVarQueryParameters,
-                responseType: <any>responseType_,
-                withCredentials: this.configuration.withCredentials,
-                headers: localVarHeaders,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * Returns the details of a single KLE
-     * @param requestParameters
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public getSingleKleOptionV2GetV1(requestParameters: GetSingleKleOptionV2GetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIKLEDetailsDTOVersionedKLEResponseDTO>;
-    public getSingleKleOptionV2GetV1(requestParameters: GetSingleKleOptionV2GetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIKLEDetailsDTOVersionedKLEResponseDTO>>;
-    public getSingleKleOptionV2GetV1(requestParameters: GetSingleKleOptionV2GetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIKLEDetailsDTOVersionedKLEResponseDTO>>;
-    public getSingleKleOptionV2GetV1(requestParameters: GetSingleKleOptionV2GetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
-        const kleUuid = requestParameters.kleUuid;
-        if (kleUuid === null || kleUuid === undefined) {
-            throw new Error('Required parameter kleUuid was null or undefined when calling getSingleKleOptionV2GetV1.');
-        }
-
-        let localVarHeaders = this.defaultHeaders;
-
-        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
-        if (localVarHttpHeaderAcceptSelected === undefined) {
-            // to determine the Accept header
-            const httpHeaderAccepts: string[] = [
-                'application/json'
-            ];
-            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        }
-        if (localVarHttpHeaderAcceptSelected !== undefined) {
-            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
-        }
-
-        let localVarHttpContext: HttpContext | undefined = options && options.context;
-        if (localVarHttpContext === undefined) {
-            localVarHttpContext = new HttpContext();
-        }
-
-
-        let responseType_: 'text' | 'json' | 'blob' = 'json';
-        if (localVarHttpHeaderAcceptSelected) {
-            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
-                responseType_ = 'text';
-            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
-                responseType_ = 'json';
-            } else {
-                responseType_ = 'blob';
-            }
-        }
-
-        let localVarPath = `/api/v2/kle-options/${this.configuration.encodeParam({name: "kleUuid", value: kleUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
-        return this.httpClient.request<APIKLEDetailsDTOVersionedKLEResponseDTO>('get', `${this.configuration.basePath}${localVarPath}`,
-            {
-                context: localVarHttpContext,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
