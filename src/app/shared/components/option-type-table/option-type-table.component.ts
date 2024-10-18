@@ -3,10 +3,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { OptionTypeActions } from 'src/app/store/option-types/actions';
 import { BaseComponent } from '../../base/base.component';
-import { RegularOptionType } from '../../models/options/regular-option-types.model';
-import { RoleOptionTypes } from '../../models/options/role-option-types.model';
 import { OptionTypeTableComponentStore } from './option-type-table.component-store';
 import { EditOptionTypeDialogComponent } from './edit-option-type-dialog/edit-option-type-dialog.component';
+import { OptionTypeTableItem, OptionTypeTableOption } from '../../models/options/local-option-type.model';
 
 @Component({
   selector: 'app-option-type-table',
@@ -52,14 +51,3 @@ export class OptionTypeTableComponent extends BaseComponent implements OnInit {
     dialogRef.componentInstance.optionType = this.optionType;
   }
 }
-
-export interface OptionTypeTableItem {
-  uuid: string;
-  active: boolean;
-  name: string;
-  writeAccess: boolean | undefined;
-  description: string | undefined;
-  obligatory: boolean;
-}
-
-export type OptionTypeTableOption = RegularOptionType | RoleOptionTypes;

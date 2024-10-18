@@ -7,7 +7,7 @@ import { APILocalRoleOptionResponseDTO } from 'src/app/api/v2';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 import { filterNullish } from '../../pipes/filter-nullish';
 import { LocalOptionTypeService } from '../../services/local-option-type.service';
-import { OptionTypeTableItem, OptionTypeTableOption } from './option-type-table.component';
+import { OptionTypeTableItem, OptionTypeTableOption } from '../../models/options/local-option-type.model';
 
 interface State {
   isLoading: boolean;

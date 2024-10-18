@@ -11,7 +11,7 @@ import {
 import { OptionTypeActions } from 'src/app/store/option-types/actions';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 import { filterNullish } from '../pipes/filter-nullish';
-import { OptionTypeTableOption } from '../components/option-type-table/option-type-table.component';
+import { OptionTypeTableOption } from '../models/options/local-option-type.model';
 
 @Injectable({
   providedIn: 'root',

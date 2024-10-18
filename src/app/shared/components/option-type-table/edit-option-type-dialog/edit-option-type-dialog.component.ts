@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { OptionTypeTableItem, OptionTypeTableOption } from 'src/app/shared/models/options/local-option-type.model';
 import { LocalOptionTypeService } from 'src/app/shared/services/local-option-type.service';
-import { OptionTypeTableItem, OptionTypeTableOption } from '../option-type-table.component';
 
 @Component({
   selector: 'app-edit-option-type-dialog',
