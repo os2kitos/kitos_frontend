@@ -7,7 +7,8 @@
       <ng-container *ngIf="uiConfigNodeViewModels$ | async as uiConfigNodeViewModels">
       <app-ui-config-tab-section *ngFor="let tabViewModel of uiConfigNodeViewModels[0].children"
         [tabViewModel]="tabViewModel"
-        [formGroup]="itSystemUsageFrontpageForm">
+        [formGroup]="itSystemUsageFrontpageForm"
+        (checkboxChanged)="onCheckboxChange($event)">
       </app-ui-config-tab-section>
     </ng-container>
     </app-standard-vertical-content-grid>

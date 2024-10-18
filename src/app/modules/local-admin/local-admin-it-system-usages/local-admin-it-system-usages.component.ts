@@ -12,6 +12,7 @@ import { UIConfigNodeViewModel } from 'src/app/shared/models/ui-config/ui-config
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { OrganizationUiModuleCustomizationActions } from 'src/app/store/organization/organization-ui-customization/actions';
 import { selectITSystemUsagesUIModuleCustomization } from 'src/app/store/organization/organization-ui-customization/selectors';
+import { UiModuleConfigCheckboxChangedEvent } from '../ui-config-tab-section/ui-config-tab-section.component';
 
 enum LocalAdminSystemUsagesSegmentOptions {
   UiCustomization = 'UiCustomization',
@@ -46,10 +47,6 @@ export class LocalAdminItSystemUsagesComponent implements OnInit {
       })
     );
     this.setupUIConfig();
-
-    this.uiConfigNodeViewModels$
-      .pipe(filterNullish())
-      .subscribe((u) => console.log(JSON.stringify(u) + '     is viewmodels'));
   }
 
   private setupUIConfig() {
@@ -60,5 +57,9 @@ export class LocalAdminItSystemUsagesComponent implements OnInit {
       const viewModels = collectUIConfigNodeViewModels(blueprint, moduleCustomizationNodes);
       this.uiConfigNodeViewModels$.next(viewModels);
     });
+  }
+
+  public onCheckboxChange($event: UiModuleConfigCheckboxChangedEvent) {
+    //todo handle event with put call to update config in store
   }
 }

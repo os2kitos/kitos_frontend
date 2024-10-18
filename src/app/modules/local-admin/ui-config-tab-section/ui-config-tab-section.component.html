@@ -21,7 +21,8 @@
         i18n-text
         labelPosition="after"
         [value]="fieldViewModel.isEnabled ?? false"
-        [disabled]="fieldViewModel.isObligatory ?? false">
+        [disabled]="fieldViewModel.isObligatory ?? false"
+        (valueChange)="onCheckboxChanged({ value: $event, fullKey: fieldViewModel.fullKey })">
         <app-paragraph>
           {{ fieldViewModel.text }}
         </app-paragraph>
