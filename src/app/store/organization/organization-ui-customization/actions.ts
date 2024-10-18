@@ -1,6 +1,6 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
 import { APIUIModuleCustomizationRequestDTO } from 'src/app/api/v2';
-import { UIModuleCustomization } from 'src/app/shared/models/ui-customization/ui-module-customization.model';
+import { UIModuleCustomization } from 'src/app/shared/models/ui-config/ui-module-customization.model';
 
 export const OrganizationUiModuleCustomizationActions = createActionGroup({
   source: 'Organization UI Customization',

@@ -6,10 +6,11 @@ import { UIModuleCustomizationKey } from 'src/app/shared/enums/ui-module-customi
 import {
   getItSystemUsageUiBluePrint,
   UINodeBlueprint,
-} from 'src/app/shared/models/ui-blueprints/it-system-usages-blueprint';
-import { CustomizedUINode } from 'src/app/shared/models/ui-customization/customized-ui-node.model';
+} from 'src/app/shared/models/ui-config/it-system-usages-blueprint';
+import { CustomizedUINode } from 'src/app/shared/models/ui-config/customized-ui-node.model';
 import { OrganizationUiModuleCustomizationActions } from 'src/app/store/organization/organization-ui-customization/actions';
 import { selectITSystemUsagesUIModuleCustomization } from 'src/app/store/organization/organization-ui-customization/selectors';
+import { collectUIConfigNodeViewModels } from 'src/app/shared/models/helpers/ui-config-helpers';
 
 enum LocalAdminSystemUsagesSegmentOptions {
   UiCustomization = 'UiCustomization',
@@ -47,63 +48,12 @@ export class LocalAdminItSystemUsagesComponent implements OnInit {
     this.itSystemUsageUIModuleCustomization$.subscribe((moduleCustomization) => {
       const blueprint = getItSystemUsageUiBluePrint();
 
-      const moduleCustomizationNodes = moduleCustomization?.nodes;
-
-      if (moduleCustomizationNodes) {
-        const viewModels = collectUIConfigNodeViewModels(blueprint, moduleCustomizationNodes);
-      } else {
-        const viewModels = collectUIConfigNodeViewModels(blueprint, []);
-      }
+      const moduleCustomizationNodes = moduleCustomization?.nodes ?? [];
+      const viewModels = collectUIConfigNodeViewModels(blueprint, moduleCustomizationNodes);
     });
   }
 }
 
-export interface UIConfigNodeViewModel {
-  text: string;
-  helpText?: string;
-  fullKey: string;
-  isObligatory?: boolean;
-  isEnabled?: boolean;
-}
 
-function collectUIConfigNodeViewModels(
-  tree: UINodeBlueprint,
-  uiModuleCustomizations: CustomizedUINode[]
-): UIConfigNodeViewModel[] {
-  const uiConfigNodeViewModels: UIConfigNodeViewModel[] = [];
-  traverseTree(tree, uiConfigNodeViewModels, uiModuleCustomizations);
-  return uiConfigNodeViewModels;
-}
 
-function findCustomizedUINode(customizationList: CustomizedUINode[], fullKey: string): CustomizedUINode | null {
-  return customizationList.find((elem) => elem.fullKey === fullKey) || null;
-}
 
-function traverseTree(
-  node: UINodeBlueprint,
-  uiConfigNodeViewModels: UIConfigNodeViewModel[],
-  customizationList: CustomizedUINode[]
-): void {
-  if (node.fullKey) {
-    console.log(node.fullKey + '  ' + node.isObligatory);
-    const nodeViewModel: UIConfigNodeViewModel = {
-      text: node.text,
-      helpText: node.helpText,
-      fullKey: node.fullKey,
-      isObligatory: node.isObligatory ?? false,
-      isEnabled: true,
-    };
-
-    const nodeCustomization = findCustomizedUINode(customizationList, node.fullKey);
-    if (nodeCustomization) {
-      nodeViewModel.isEnabled = nodeCustomization.enabled;
-    }
-    uiConfigNodeViewModels.push(nodeViewModel);
-  }
-
-  if (node.children) {
-    Object.keys(node.children).forEach((childKey) => {
-      traverseTree(node.children![childKey], uiConfigNodeViewModels, customizationList);
-    });
-  }
-}

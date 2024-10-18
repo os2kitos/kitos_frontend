@@ -1,6 +1,6 @@
 import { createEntityAdapter } from '@ngrx/entity';
 import { createFeature, createReducer, on } from '@ngrx/store';
-import { UIModuleCustomization } from 'src/app/shared/models/ui-customization/ui-module-customization.model';
+import { UIModuleCustomization } from 'src/app/shared/models/ui-config/ui-module-customization.model';
 import { OrganizationUiModuleCustomizationActions } from './actions';
 import { UIModuleCustomizationState } from './state';
 

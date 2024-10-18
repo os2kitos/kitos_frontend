@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { catchError, combineLatestWith, map, of, switchMap } from 'rxjs';
 import { APIV2OrganizationsInternalINTERNALService } from 'src/app/api/v2';
-import { adaptUIModuleCustomization } from 'src/app/shared/models/ui-customization/ui-module-customization.model';
+import { adaptUIModuleCustomization } from 'src/app/shared/models/ui-config/ui-module-customization.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectOrganizationUuid } from '../../user-store/selectors';
 import { OrganizationUiModuleCustomizationActions } from './actions';
@@ -28,7 +28,9 @@ export class OrganizationUIModuleCustomizationEffects {
             map((uiModuleCustomizationDto) => {
               const uiModuleCustomization = adaptUIModuleCustomization(uiModuleCustomizationDto);
               if (uiModuleCustomization)
-                return OrganizationUiModuleCustomizationActions.getUIModuleCustomizationSuccess({ uiModuleCustomization });
+                return OrganizationUiModuleCustomizationActions.getUIModuleCustomizationSuccess({
+                  uiModuleCustomization,
+                });
               else return OrganizationUiModuleCustomizationActions.getUIModuleCustomizationError();
             }),
             catchError(() => of(OrganizationUiModuleCustomizationActions.getUIModuleCustomizationError()))
@@ -52,7 +54,9 @@ export class OrganizationUIModuleCustomizationEffects {
             map((uiModuleCustomizationDto) => {
               const uiModuleCustomization = adaptUIModuleCustomization(uiModuleCustomizationDto);
               if (uiModuleCustomization)
-                return OrganizationUiModuleCustomizationActions.getUIModuleCustomizationSuccess({ uiModuleCustomization });
+                return OrganizationUiModuleCustomizationActions.getUIModuleCustomizationSuccess({
+                  uiModuleCustomization,
+                });
               else return OrganizationUiModuleCustomizationActions.getUIModuleCustomizationError();
             }),
             catchError(() => of(OrganizationUiModuleCustomizationActions.getUIModuleCustomizationError()))
