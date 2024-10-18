@@ -17,13 +17,15 @@
     <app-form-grid [formGroup]="formGroup">
     <ng-container *ngFor="let fieldViewModel of tabViewModel.children">
       <div>
-      <app-checkbox
+        <app-checkbox-button
         i18n-text
         labelPosition="after"
-        [text]="fieldViewModel.text"
-        [value]="fieldViewModel.isEnabled"
+        [value]="fieldViewModel.isEnabled ?? false"
         [disabled]="fieldViewModel.isObligatory ?? false">
-      </app-checkbox>
+        <app-paragraph>
+          {{ fieldViewModel.text }}
+        </app-paragraph>
+        </app-checkbox-button>
       <app-textbox-info *ngIf="fieldViewModel.helpText !== undefined">
       <app-paragraph paragraphSize="x-small" i18n> {{ fieldViewModel.helpText }} </app-paragraph>
     </app-textbox-info>
