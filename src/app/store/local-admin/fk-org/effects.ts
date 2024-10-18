@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { catchError, combineLatestWith, map, mergeMap, of } from 'rxjs';
+import { catchError, combineLatestWith, map, mergeMap, of, switchMap } from 'rxjs';
 import { APIV2StsOrganizationSynchronizationInternalINTERNALService } from 'src/app/api/v2';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectOrganizationUuid } from '../../user-store/selectors';
@@ -41,6 +41,21 @@ export class FkOrgEffects {
           .pipe(
             map((snapshot) => FkOrgActions.getSnapshotSuccess(snapshot)),
             catchError(() => of(FkOrgActions.getSnapshotError()))
+          )
+      )
+    );
+  });
+
+  createConnection$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(FkOrgActions.createConnection),
+      combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+      switchMap(([{ request }, organizationUuid]) =>
+        this.apiService
+          .postSingleStsOrganizationSynchronizationInternalV2CreateConnection({ organizationUuid, request })
+          .pipe(
+            map(() => FkOrgActions.createConnectionSuccess()),
+            catchError(() => of(FkOrgActions.createConnectionError()))
           )
       )
     );

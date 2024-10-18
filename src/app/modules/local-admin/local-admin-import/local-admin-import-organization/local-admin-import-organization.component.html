@@ -20,7 +20,7 @@
         >Synkronisering</app-paragraph
       >
       <ng-container *ngIf="synchronizationStatus$ | async as synchronizationStatus">
-        <app-native-table *ngIf="isConnected$ | async">
+        <app-native-table *ngIf="isConnected$ | async" [withOutline]="true">
           <thead>
             <th width="33%" i18n>Niveauer der synkroniseres</th>
             <th width="33%" i18n>Tjekker automatisk (hver mandag nat) efter ventende opdateringer</th>
@@ -28,15 +28,40 @@
           </thead>
           <tbody>
             <tr>
-              <td i18n>
-                {{
-                  synchronizationStatus.synchronizationDepth === null
-                    ? "Alle"
-                    : synchronizationStatus.synchronizationDepth
-                }}
+              <td>
+                <app-paragraph paragraphSize="small">
+                  <ng-container *ngIf="synchronizationStatus.synchronizationDepth === null" i18n> Alle </ng-container>
+                  <ng-container *ngIf="synchronizationStatus.synchronizationDepth !== null">
+                    {{ synchronizationStatus.synchronizationDepth }}
+                  </ng-container>
+                </app-paragraph>
               </td>
-              <td i18n>{{ synchronizationStatus.subscribesToUpdates ? "Ja" : "Nej" }}</td>
-              <td>{{ synchronizationStatus.dateOfLatestCheckBySubscription }}</td>
+              <td>
+                <app-paragraph paragraphSize="small">
+                  <ng-container *ngIf="synchronizationStatus.subscribesToUpdates === true" i18n> Ja </ng-container>
+                  <ng-container *ngIf="synchronizationStatus.subscribesToUpdates !== true" i18n> Nej </ng-container>
+                </app-paragraph>
+              </td>
+              <td>
+                <app-paragraph
+                  paragraphSize="small"
+                  *ngIf="synchronizationStatus.dateOfLatestCheckBySubscription !== null"
+                >
+                  {{ synchronizationStatus.dateOfLatestCheckBySubscription | appDate }}
+                </app-paragraph>
+
+                <app-paragraph
+                  paragraphSize="small"
+                  *ngIf="synchronizationStatus.dateOfLatestCheckBySubscription === null"
+                >
+                  <ng-container *ngIf="synchronizationStatus.subscribesToUpdates === true" i18n>
+                    Ikke tilgængeligt
+                  </ng-container>
+                  <ng-container *ngIf="synchronizationStatus.subscribesToUpdates !== true" i18n>
+                    Ikke relevant
+                  </ng-container>
+                </app-paragraph>
+              </td>
             </tr>
           </tbody>
         </app-native-table>

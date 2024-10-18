@@ -2,31 +2,41 @@
   <form [formGroup]="fkOrgFormGroup">
     <app-standard-vertical-content-grid>
       <ng-container *ngIf="(isLoading$ | async) !== true">
-        <div>
-          <app-numeric-input
-            text="Niveauer"
-            i18n-text
-            [formGroup]="fkOrgFormGroup"
-            formName="levels"
-          ></app-numeric-input>
-          <app-paragraph paragraphSize="x-small" [dimmed]="true" i18n
-            >KITOS synkroniserer 2 niveauer fra organisationshierarkiet i FK Organisation. Slet indtastningen for at
-            synkronisere det fulde organisationshierarki.
-          </app-paragraph>
-        </div>
-        <div>
-          <app-checkbox
-            text="Tjek automatisk efter ventende opdateringer*"
-            i18n-text
-            labelPosition="after"
-            [formGroup]="fkOrgFormGroup"
-            formName="automaticUpdates"
-          ></app-checkbox>
-          <app-paragraph paragraphSize="x-small" [dimmed]="true" i18n
-            >* Foretager automatisk tjek hver mandag nat og sender en email med oversigt over ventende opdateringer til
-            brugere i kommunen med rollen "Lokal Administrator"</app-paragraph
-          >
-        </div>
+        <app-card class="configuration-margin-bottom">
+          <app-card-header
+            title="Konfiguration"
+            helpTextKey="local-config-fk-org-import-modal.configuration"
+          ></app-card-header>
+          <app-standard-vertical-content-grid>
+            <div>
+              <app-numeric-input
+                text="Niveauer"
+                class="levels-margin-bottom"
+                i18n-text
+                [formGroup]="fkOrgFormGroup"
+                formName="levels"
+                (valueChange)="levelChange($event)"
+              ></app-numeric-input>
+              <app-paragraph paragraphSize="x-small" [dimmed]="true" i18n
+                >KITOS synkroniserer 2 niveauer fra organisationshierarkiet i FK Organisation. Slet indtastningen for at
+                synkronisere det fulde organisationshierarki.
+              </app-paragraph>
+            </div>
+            <div>
+              <app-checkbox
+                text="Tjek automatisk efter ventende opdateringer*"
+                i18n-text
+                labelPosition="after"
+                [formGroup]="fkOrgFormGroup"
+                formName="subscribeToUpdates"
+              ></app-checkbox>
+              <app-paragraph paragraphSize="x-small" [dimmed]="true" i18n
+                >* Foretager automatisk tjek hver mandag nat og sender en email med oversigt over ventende opdateringer
+                til brugere i kommunen med rollen "Lokal Administrator"</app-paragraph
+              >
+            </div>
+          </app-standard-vertical-content-grid>
+        </app-card>
         <app-card>
           <app-card-header
             title="Forhåndsvisning"
@@ -40,7 +50,7 @@
             [nodes]="(snapshotTree$ | async) ?? []"
             [disableDrag]="true"
             (nodeExpandClick)="nodeExpandClick($event)"
-            [maxLevel]="undefined"
+            [maxLevel]="(levelsSubject$ | async) ?? undefined"
           ></app-drag-and-drop-tree>
         </app-card>
       </ng-container>
@@ -48,7 +58,9 @@
     </app-standard-vertical-content-grid>
   </form>
   <app-dialog-actions>
-    <app-button>Gennemfør synkronisering</app-button>
-    <app-button color="warn">Annuler</app-button>
+    <app-button (buttonClick)="synchronize()" [disabled]="(isLoading$ | async) ?? false"
+      >Gennemfør synkronisering</app-button
+    >
+    <app-button color="warn" (buttonClick)="cancel()" [disabled]="(isLoading$ | async) ?? false">Annuler</app-button>
   </app-dialog-actions>
 </app-scrollbar-dialog>

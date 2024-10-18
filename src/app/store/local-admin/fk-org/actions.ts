@@ -1,5 +1,9 @@
 import { createActionGroup, emptyProps } from '@ngrx/store';
-import { APIStsOrganizationOrgUnitDTO, APIStsOrganizationSynchronizationDetailsResponseDTO } from 'src/app/api/v2';
+import {
+  APIConnectToStsOrganizationRequestDTO,
+  APIStsOrganizationOrgUnitDTO,
+  APIStsOrganizationSynchronizationDetailsResponseDTO,
+} from 'src/app/api/v2';
 
 export const FkOrgActions = createActionGroup({
   source: 'FkOrg',
@@ -13,5 +17,9 @@ export const FkOrgActions = createActionGroup({
     'Get Snapshot': emptyProps(),
     'Get Snapshot Success': (snapshot: APIStsOrganizationOrgUnitDTO) => ({ snapshot }),
     'Get Snapshot Error': emptyProps(),
+
+    'Create Connection': (request: APIConnectToStsOrganizationRequestDTO) => ({ request }),
+    'Create Connection Success': emptyProps(),
+    'Create Connection Error': emptyProps(),
   },
 });

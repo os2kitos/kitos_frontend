@@ -6,6 +6,6 @@ export interface FkOrgState {
   isLoadingConnectionStatus: boolean;
 
   snapshot: APIStsOrganizationOrgUnitDTO | undefined;
-  isLoadingSnapshot: boolean;
+  isSynchronizationDialogLoading: boolean;
   hasSnapshotFailed: boolean;
 }

@@ -16,5 +16,8 @@ export const selectIsLoadingConnectionStatus = createSelector(
 );
 
 export const selectSnapshot = createSelector(selectFkOrgState, (state) => state.snapshot);
-export const selectIsLoadingSnapshot = createSelector(selectFkOrgState, (state) => state.isLoadingSnapshot);
+export const selectIsSynchronizationDialogLoading = createSelector(
+  selectFkOrgState,
+  (state) => state.isSynchronizationDialogLoading
+);
 export const selectHasSnapshotFailed = createSelector(selectFkOrgState, (state) => state.hasSnapshotFailed);
