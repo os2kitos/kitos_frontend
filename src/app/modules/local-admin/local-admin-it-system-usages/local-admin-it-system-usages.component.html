@@ -3,12 +3,15 @@
 <app-card>
   <ng-container *ngIf="selectedSegment === LocalAdminSystemUsagesSegmentOptions.UiCustomization">
 
-    <ng-container *ngIf="uiConfigNodeViewModels$ | async as uiConfigNodeViewModels">
+    <app-standard-vertical-content-grid>
+      <ng-container *ngIf="uiConfigNodeViewModels$ | async as uiConfigNodeViewModels">
       <app-ui-config-tab-section *ngFor="let tabViewModel of uiConfigNodeViewModels[0].children"
         [tabViewModel]="tabViewModel"
         [formGroup]="itSystemUsageFrontpageForm">
       </app-ui-config-tab-section>
     </ng-container>
+    </app-standard-vertical-content-grid>
+
   </ng-container>
 
   <ng-container *ngIf="selectedSegment === LocalAdminSystemUsagesSegmentOptions.OptionTypes">

@@ -10,4 +10,8 @@ import { UIConfigNodeViewModel } from 'src/app/shared/models/ui-config/ui-config
 export class UiConfigTabSectionComponent {
   @Input() tabViewModel!: UIConfigNodeViewModel;
   @Input() formGroup!: FormGroup;
+
+  public tabViewModelHasChildren(): boolean{
+    return this.tabViewModel.children !== undefined && this.tabViewModel.children.length > 0;
+  }
 }
