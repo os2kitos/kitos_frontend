@@ -113,6 +113,7 @@ export class LocalOptionTypeService {
     optionType: OptionTypeTableOption
   ): (organizationUuid: string) => Observable<Array<APILocalRoleOptionResponseDTO>> {
     switch (optionType) {
+      //It system regular option types
       case 'it-system_business-type':
         return (organizationUuid) =>
           this.businessTypeService.getManyItSystemLocalBusinessTypesInternalV2GetLocalBusinessTypes({
@@ -170,6 +171,7 @@ export class LocalOptionTypeService {
             organizationUuid,
           });
 
+      //Role option types
       case 'organization-unit':
         return (organizationUuid) =>
           this.organiztionUnitRoleService.getManyOrganizationUnitLocalRoleOptionTypesInternalV2GetLocalOrganizationUnitRoles(
