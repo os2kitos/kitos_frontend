@@ -2,84 +2,86 @@
 
 <app-card>
   <ng-container *ngIf="selectedSegment === LocalAdminItSystemSegmentOption.RegularOptionTypes">
-    <app-option-type-table
-      optionType="it-system_business-type"
-      title="Forretningstyper"
-      [showWriteAccess]="false"
-      i18n-title
-    >
-    </app-option-type-table>
+    <app-standard-vertical-content-grid>
+      <app-option-type-table
+        optionType="it-system_business-type"
+        title="Forretningstyper"
+        [showWriteAccess]="false"
+        i18n-title
+      >
+      </app-option-type-table>
 
-    <app-option-type-table
-      optionType="it-system_usage-archive-type"
-      title="Arkiveringstyper"
-      [showWriteAccess]="false"
-      i18n-title
-    >
-    </app-option-type-table>
+      <app-option-type-table
+        optionType="it-system_usage-archive-type"
+        title="Arkiveringstyper"
+        [showWriteAccess]="false"
+        i18n-title
+      >
+      </app-option-type-table>
 
-    <app-option-type-table
-      optionType="it-system_usage-archive-location-type"
-      title="Arkiveringssted"
-      [showWriteAccess]="false"
-      i18n-title
-    >
-    </app-option-type-table>
+      <app-option-type-table
+        optionType="it-system_usage-archive-location-type"
+        title="Arkiveringssted"
+        [showWriteAccess]="false"
+        i18n-title
+      >
+      </app-option-type-table>
 
-    <app-option-type-table
-      optionType="it-system_usage-archive-location-test-type"
-      title="Arkiveringsteststed"
-      [showWriteAccess]="false"
-      i18n-title
-    >
-    </app-option-type-table>
+      <app-option-type-table
+        optionType="it-system_usage-archive-location-test-type"
+        title="Arkiveringsteststed"
+        [showWriteAccess]="false"
+        i18n-title
+      >
+      </app-option-type-table>
 
-    <app-option-type-table optionType="it-interface_data-type" title="Datatyper" [showWriteAccess]="false" i18n-title>
-    </app-option-type-table>
+      <app-option-type-table optionType="it-interface_data-type" title="Datatyper" [showWriteAccess]="false" i18n-title>
+      </app-option-type-table>
 
-    <app-option-type-table
-      optionType="it-system_usage-relation-frequency-type"
-      title="Frekvenser"
-      [showWriteAccess]="false"
-      i18n-title
-    >
-    </app-option-type-table>
+      <app-option-type-table
+        optionType="it-system_usage-relation-frequency-type"
+        title="Frekvenser"
+        [showWriteAccess]="false"
+        i18n-title
+      >
+      </app-option-type-table>
 
-    <app-option-type-table
-      optionType="it-interface_interface-type"
-      title="Grænseflader"
-      [showWriteAccess]="false"
-      i18n-title
-    >
-    </app-option-type-table>
+      <app-option-type-table
+        optionType="it-interface_interface-type"
+        title="Grænseflader"
+        [showWriteAccess]="false"
+        i18n-title
+      >
+      </app-option-type-table>
 
-    <app-option-type-table
-      optionType="it_system_usage-gdpr-sensitive-data-type"
-      title="Følsomme persondata"
-      [showDescription]="false"
-      [showEditButton]="false"
-      [showWriteAccess]="false"
-      i18n-title
-    >
-    </app-option-type-table>
+      <app-option-type-table
+        optionType="it_system_usage-gdpr-sensitive-data-type"
+        title="Følsomme persondata"
+        [showDescription]="false"
+        [showEditButton]="false"
+        [showWriteAccess]="false"
+        i18n-title
+      >
+      </app-option-type-table>
 
-    <app-option-type-table
-      optionType="it-system_usage-data-classification-type"
-      title="Klassifikation af data i systemet"
-      [showWriteAccess]="false"
-      i18n-title
-    >
-    </app-option-type-table>
+      <app-option-type-table
+        optionType="it-system_usage-data-classification-type"
+        title="Klassifikation af data i systemet"
+        [showWriteAccess]="false"
+        i18n-title
+      >
+      </app-option-type-table>
 
-    <app-option-type-table
-      optionType="it_system_usage-gdpr-registered-data-category-type"
-      title="Klassifikation af data i systemet"
-      [showDescription]="false"
-      [showEditButton]="false"
-      [showWriteAccess]="false"
-      i18n-title
-    >
-    </app-option-type-table>
+      <app-option-type-table
+        optionType="it_system_usage-gdpr-registered-data-category-type"
+        title="Kategorier af registrerede i databehandlingen"
+        [showDescription]="false"
+        [showEditButton]="false"
+        [showWriteAccess]="false"
+        i18n-title
+      >
+      </app-option-type-table>
+    </app-standard-vertical-content-grid>
   </ng-container>
 
   <ng-container *ngIf="selectedSegment === LocalAdminItSystemSegmentOption.RoleOptionTypes">
