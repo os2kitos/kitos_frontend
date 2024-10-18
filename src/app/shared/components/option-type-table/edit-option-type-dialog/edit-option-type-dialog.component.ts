@@ -1,8 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { Store } from '@ngrx/store';
 import { LocalOptionType, LocalOptionTypeItem } from 'src/app/shared/models/options/local-option-type.model';
 import { LocalOptionTypeService } from 'src/app/shared/services/local-option-type.service';
+import { LocalOptionTypeActions } from 'src/app/store/local-option-types/actions';
 
 @Component({
   selector: 'app-edit-option-type-dialog',
@@ -20,7 +22,8 @@ export class EditOptionTypeDialogComponent implements OnInit {
 
   constructor(
     private dialogRef: MatDialogRef<EditOptionTypeDialogComponent>,
-    private localOptionTypeService: LocalOptionTypeService
+    private localOptionTypeService: LocalOptionTypeService,
+    private store: Store
   ) {}
 
   public ngOnInit(): void {
@@ -36,10 +39,10 @@ export class EditOptionTypeDialogComponent implements OnInit {
     const optionUuid = this.optionTypeItem.uuid;
     const request = { description: newDescription };
     if (this.hasDescriptionChanged()) {
-      this.localOptionTypeService.patchLocalOption(this.optionType, optionUuid, request);
+      this.store.dispatch(LocalOptionTypeActions.uppdateOptionType(this.optionType, optionUuid, request));
     }
     if (newActive !== undefined && this.hasActiveChanged()) {
-      this.localOptionTypeService.patchIsActive(this.optionType, optionUuid, newActive);
+      this.store.dispatch(LocalOptionTypeActions.updateOptionTypeActiveStatus(this.optionType, optionUuid, newActive));
     }
     this.dialogRef.close();
   }

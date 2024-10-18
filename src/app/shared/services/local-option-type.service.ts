@@ -1,6 +1,6 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { catchError, first, Observable, OperatorFunction, pipe, Subscription, switchMap, tap, throwError } from 'rxjs';
+import { catchError, first, Observable, OperatorFunction, pipe, Subscription, tap, throwError } from 'rxjs';
 import {
   APILocalRegularOptionResponseDTO,
   APILocalRegularOptionUpdateRequestDTO,
@@ -38,32 +38,19 @@ export class LocalOptionTypeService implements OnDestroy {
 
   public patchLocalOption(
     optionType: LocalOptionType,
+    organizationUuid: string,
     optionUuid: string,
     request: APILocalRegularOptionUpdateRequestDTO
-  ): void {
-    this.getOrganizationUuid()
-      .pipe(
-        switchMap((organizationUuid) =>
-          this.resolvePatchLocalOptionsEndpoint(optionType)(organizationUuid, optionUuid, request)
-        ),
-        this.handleResponse()
-      )
-      .subscribe();
+  ) {
+    return this.resolvePatchLocalOptionsEndpoint(optionType)(organizationUuid, optionUuid, request);
   }
 
-  public patchIsActive(optionType: LocalOptionType, optionUuid: string, isActive: boolean): void {
-    this.getOrganizationUuid()
-      .pipe(
-        switchMap((organizationUuid) => {
-          if (isActive) {
-            return this.resolveCreateLocalOptionsEndpoint(optionType)(organizationUuid, optionUuid);
-          } else {
-            return this.resolveDeleteLocalOptionsEndpoint(optionType)(organizationUuid, optionUuid);
-          }
-        })
-      )
-      .pipe(this.handleResponse())
-      .subscribe();
+  public patchIsActive(optionType: LocalOptionType, organizationUuid: string, optionUuid: string, isActive: boolean) {
+    if (isActive) {
+      return this.resolveCreateLocalOptionsEndpoint(optionType)(organizationUuid, optionUuid);
+    } else {
+      return this.resolveDeleteLocalOptionsEndpoint(optionType)(organizationUuid, optionUuid);
+    }
   }
 
   private handleResponse<T>(): OperatorFunction<T, T> {
