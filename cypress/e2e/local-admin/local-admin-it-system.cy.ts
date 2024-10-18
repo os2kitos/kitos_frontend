@@ -50,7 +50,7 @@ describe('local-admin', () => {
     cy.contains('button', 'Gem').click();
   });
 
-  it('Can activate active status of it system option type if obligatory', () => {
+  it('Can activate active status of it system option type if not obligatory', () => {
     cy.getByDataCy('local-admin-it-system-button').click();
     cy.contains('Forretningstyper').click();
     cy.intercept('POST', 'api/v2/internal/it-systems/*/local-option-types/business-types', {});
