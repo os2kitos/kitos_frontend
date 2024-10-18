@@ -8,7 +8,7 @@ import {
   APIV2ItSystemLocalRegularOptionTypesInternalINTERNALService,
   APIV2OrganizationUnitLocalRoleOptionTypesInternalINTERNALService,
 } from 'src/app/api/v2';
-import { OptionTypeActions } from 'src/app/store/local-option-types/actions';
+import { LocalOptionTypeActions } from 'src/app/store/local-option-types/actions';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 import { LocalOptionType } from '../models/options/local-option-type.model';
 import { filterNullish } from '../pipes/filter-nullish';
@@ -69,10 +69,10 @@ export class LocalOptionTypeService implements OnDestroy {
   private handleResponse<T>(): OperatorFunction<T, T> {
     return pipe(
       tap(() => {
-        this.store.dispatch(OptionTypeActions.updateOptionTypeSuccess());
+        this.store.dispatch(LocalOptionTypeActions.updateOptionTypeSuccess());
       }),
       catchError((error) => {
-        this.store.dispatch(OptionTypeActions.updateOptionTypeError());
+        this.store.dispatch(LocalOptionTypeActions.updateOptionTypeError());
         return throwError(() => new Error(`Failed to update option: ${error.message}`));
       })
     );
