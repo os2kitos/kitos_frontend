@@ -1,4 +1,8 @@
-<app-accordion [title]="tabViewModel.text" [isExpandedByDefault]="tabViewModelHasChildren()" [checkboxInTitle]="true">
+<app-accordion [title]="tabViewModel.text"
+[isExpandedByDefault]="tabViewModelHasChildren()"
+[checkboxInTitle]="true"
+[checkboxValue]="tabViewModel.isEnabled ?? false"
+[checkboxDisabled]="tabViewModel.isObligatory ?? false">
   <app-divider></app-divider>
 
   <div class="form-section-top-padding">
@@ -16,7 +20,9 @@
       <app-checkbox
         i18n-text
         labelPosition="after"
-        [text]="fieldViewModel.text">
+        [text]="fieldViewModel.text"
+        [value]="fieldViewModel.isEnabled"
+        [disabled]="fieldViewModel.isObligatory ?? false">
       </app-checkbox>
       <app-textbox-info *ngIf="fieldViewModel.helpText !== undefined">
       <app-paragraph paragraphSize="x-small" i18n> {{ fieldViewModel.helpText }} </app-paragraph>
