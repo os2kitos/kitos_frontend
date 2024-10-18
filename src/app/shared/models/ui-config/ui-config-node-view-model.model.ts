@@ -4,6 +4,7 @@ export interface UIConfigNodeViewModel {
   fullKey: string;
   isObligatory?: boolean;
   isEnabled?: boolean;
+  children?: UIConfigNodeViewModel[];
 }
 
 

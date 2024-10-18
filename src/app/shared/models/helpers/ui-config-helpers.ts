@@ -1,47 +1,59 @@
-import { UIModuleCustomizationKey } from "../../enums/ui-module-customization-key";
-import { CustomizedUINode } from "../ui-config/customized-ui-node.model";
-import { ItSystemUsageUiBluePrint, UINodeBlueprint } from "../ui-config/it-system-usages-blueprint";
-import { UIConfigNodeViewModel } from "../ui-config/ui-config-node-view-model.model";
+import { UIModuleCustomizationKey } from '../../enums/ui-module-customization-key';
+import { CustomizedUINode as UINodeCustomization } from '../ui-config/customized-ui-node.model';
+import { ItSystemUsageUiBluePrint, UINodeBlueprint } from '../ui-config/it-system-usages-blueprint';
+import { UIConfigNodeViewModel } from '../ui-config/ui-config-node-view-model.model';
 
 export function collectUIConfigNodeViewModels(
   tree: UINodeBlueprint,
-  uiModuleCustomizations: CustomizedUINode[]
+  uiModuleCustomizations: UINodeCustomization[]
 ): UIConfigNodeViewModel[] {
-  const uiConfigNodeViewModels: UIConfigNodeViewModel[] = [];
-  buildUIConfigNodeViewModels(tree, uiConfigNodeViewModels, uiModuleCustomizations);
+  const uiConfigNodeViewModels: UIConfigNodeViewModel[] = buildUIConfigNodeViewModels(tree, uiModuleCustomizations);
   return uiConfigNodeViewModels;
 }
 
-function findCustomizedUINode(customizationList: CustomizedUINode[], fullKey: string): CustomizedUINode | null {
+function findCustomizedUINode(customizationList: UINodeCustomization[], fullKey: string): UINodeCustomization | null {
   return customizationList.find((elem) => elem.fullKey === fullKey) || null;
+}
+
+function buildBasicNodeViewModel(
+  node: UINodeBlueprint,
+  uiNodeCustomizations: UINodeCustomization[],
+  nodeFullKey: string
+) {
+  const nodeViewModel: UIConfigNodeViewModel = {
+    text: node.text,
+    helpText: node.helpText,
+    fullKey: nodeFullKey,
+    isObligatory: node.isObligatory ?? false,
+    isEnabled: true,
+  };
+
+  const nodeCustomization = findCustomizedUINode(uiNodeCustomizations, nodeFullKey);
+  if (nodeCustomization) {
+    nodeViewModel.isEnabled = nodeCustomization.enabled;
+  }
+  return nodeViewModel;
 }
 
 function buildUIConfigNodeViewModels(
   node: UINodeBlueprint,
-  uiConfigNodeViewModels: UIConfigNodeViewModel[],
-  customizationList: CustomizedUINode[]
-): void {
+  uiNodeCustomizations: UINodeCustomization[]
+): UIConfigNodeViewModel[] {
+  const nodeViewModels: UIConfigNodeViewModel[] = [];
+
   if (node.fullKey) {
-    const nodeViewModel: UIConfigNodeViewModel = {
-      text: node.text,
-      helpText: node.helpText,
-      fullKey: node.fullKey,
-      isObligatory: node.isObligatory ?? false,
-      isEnabled: true,
-    };
+    const nodeViewModel = buildBasicNodeViewModel(node, uiNodeCustomizations, node.fullKey);
 
-    const nodeCustomization = findCustomizedUINode(customizationList, node.fullKey);
-    if (nodeCustomization) {
-      nodeViewModel.isEnabled = nodeCustomization.enabled;
+    if (node.children) {
+      nodeViewModel.children = Object.keys(node.children).map(
+        (childKey) => buildUIConfigNodeViewModels(node.children![childKey], uiNodeCustomizations)[0]
+      );
     }
-    uiConfigNodeViewModels.push(nodeViewModel);
+
+    nodeViewModels.push(nodeViewModel);
   }
 
-  if (node.children) {
-    Object.keys(node.children).forEach((childKey) => {
-      buildUIConfigNodeViewModels(node.children![childKey], uiConfigNodeViewModels, customizationList);
-    });
-  }
+  return nodeViewModels;
 }
 
 export function getItSystemUsageUiBluePrint(): UINodeBlueprint {
