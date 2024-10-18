@@ -8,7 +8,7 @@ import {
   APIV2ItSystemLocalRegularOptionTypesInternalINTERNALService,
   APIV2OrganizationUnitLocalRoleOptionTypesInternalINTERNALService,
 } from 'src/app/api/v2';
-import { OptionTypeActions } from 'src/app/store/option-types/actions';
+import { OptionTypeActions } from 'src/app/store/local-option-types/actions';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 import { LocalOptionType } from '../models/options/local-option-type.model';
 import { filterNullish } from '../pipes/filter-nullish';

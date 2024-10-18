@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
-import { OptionTypeActions } from 'src/app/store/option-types/actions';
+import { OptionTypeActions } from 'src/app/store/local-option-types/actions';
 import { BaseComponent } from '../../base/base.component';
 import { LocalOptionType, LocalOptionTypeItem } from '../../models/options/local-option-type.model';
 import { EditOptionTypeDialogComponent } from './edit-option-type-dialog/edit-option-type-dialog.component';
