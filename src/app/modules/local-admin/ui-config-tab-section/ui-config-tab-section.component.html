@@ -1,20 +1,16 @@
 <app-accordion [title]="tabViewModel.text" [isExpandedByDefault]="true" [checkboxInTitle]="true">
   <app-form-grid [formGroup]="formGroup">
-    <div>
+    <ng-container *ngFor="let fieldViewModel of tabViewModel.children">
+      <div>
       <app-checkbox
         i18n-text
         labelPosition="after"
-        text="Datofelter">
+        [text]="fieldViewModel.text">
       </app-checkbox>
-      <app-textbox-info class="checkbox-info-align-left">
-      <app-paragraph paragraphSize="x-small" i18n> Dækker felterne “Ibrugtagningsdato” og “Slutdato for anvendelse” </app-paragraph>
+      <app-textbox-info *ngIf="fieldViewModel.helpText !== undefined" class="checkbox-info-align-left">
+      <app-paragraph paragraphSize="x-small" i18n> {{ fieldViewModel.helpText }} </app-paragraph>
     </app-textbox-info>
     </div>
-
-      <app-checkbox
-        i18n-text
-        labelPosition="after"
-        text="Livscyklus">
-      </app-checkbox>
+    </ng-container>
   </app-form-grid>
 </app-accordion>
