@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { catchError, first, Observable, OperatorFunction, pipe, switchMap, tap, throwError } from 'rxjs';
+import { catchError, first, Observable, OperatorFunction, pipe, Subscription, switchMap, tap, throwError } from 'rxjs';
 import {
   APILocalRegularOptionResponseDTO,
   APILocalRegularOptionUpdateRequestDTO,
@@ -16,12 +16,18 @@ import { filterNullish } from '../pipes/filter-nullish';
 @Injectable({
   providedIn: 'root',
 })
-export class LocalOptionTypeService {
+export class LocalOptionTypeService implements OnDestroy {
+  public subscriptions = new Subscription();
+
   constructor(
     private store: Store,
     private itSystemService: APIV2ItSystemLocalRegularOptionTypesInternalINTERNALService,
     private organiztionUnitService: APIV2OrganizationUnitLocalRoleOptionTypesInternalINTERNALService
   ) {}
+
+  public ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
+  }
 
   public getLocalOptions(
     organizationUuid: string,
@@ -42,7 +48,6 @@ export class LocalOptionTypeService {
         ),
         this.handleResponse()
       )
-
       .subscribe();
   }
 

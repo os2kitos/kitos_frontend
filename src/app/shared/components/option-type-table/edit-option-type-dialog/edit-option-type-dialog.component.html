@@ -1,14 +1,7 @@
 <app-dialog title="Rediger" i18n-title>
-  <app-standard-vertical-content-grid>
-    <form [formGroup]="form">
+  <form [formGroup]="form">
+    <app-standard-vertical-content-grid>
       <app-textbox [disabled]="true" text="Navn" i18n-text [value]="optionTypeItem.name"></app-textbox>
-      <app-textarea
-        text="Beskrivelse"
-        i18n-text
-        [formGroup]="form"
-        formName="description"
-        [value]="form.value.description ?? ''"
-      ></app-textarea>
       <app-checkbox
         *ngIf="!optionTypeItem.obligatory"
         [formGroup]="form"
@@ -19,8 +12,16 @@
         i18n-text
       >
       </app-checkbox>
-    </form>
-  </app-standard-vertical-content-grid>
+      <app-textarea
+        text="Beskrivelse"
+        i18n-text
+        [formGroup]="form"
+        formName="description"
+        [value]="form.value.description ?? ''"
+        class="text-area-margin-bottom"
+      ></app-textarea>
+    </app-standard-vertical-content-grid>
+  </form>
   <app-dialog-actions>
     <app-button (buttonClick)="onSave()" [disabled]="disableSaveButton()"> Gem </app-button>
     <app-button buttonStyle="secondary" (buttonClick)="onCancel()"> Annuller </app-button>
