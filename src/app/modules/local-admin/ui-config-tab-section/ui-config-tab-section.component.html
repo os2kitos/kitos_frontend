@@ -2,7 +2,8 @@
 [isExpandedByDefault]="tabViewModelHasChildren()"
 [checkboxInTitle]="true"
 [checkboxValue]="tabViewModel.isEnabled ?? false"
-[checkboxDisabled]="tabViewModel.isObligatory ?? false">
+[checkboxDisabled]="tabViewModel.isObligatory ?? false"
+(checkboxChanged)="onCheckboxChanged({ value: $event, fullKey: tabViewModel.fullKey })">
   <app-divider></app-divider>
 
   <div class="form-section-top-padding">

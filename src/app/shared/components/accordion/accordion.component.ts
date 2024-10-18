@@ -13,9 +13,9 @@ export class AccordionComponent {
   @Input() checkboxDisabled = false;
   @Input() checkboxValue = false;
   @Input() checkboxTooltipText: string = '';
-  @Output() checkboxToggled = new EventEmitter<boolean>();
+  @Output() checkboxChanged = new EventEmitter<boolean>();
 
   public onCheckboxToggled($event: boolean | undefined) {
-    this.checkboxToggled.emit($event);
+    this.checkboxChanged.emit($event ?? false);
   }
 }

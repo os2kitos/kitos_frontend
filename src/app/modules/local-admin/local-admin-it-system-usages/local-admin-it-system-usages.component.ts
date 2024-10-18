@@ -12,7 +12,7 @@ import { UIConfigNodeViewModel } from 'src/app/shared/models/ui-config/ui-config
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { OrganizationUiModuleCustomizationActions } from 'src/app/store/organization/organization-ui-customization/actions';
 import { selectITSystemUsagesUIModuleCustomization } from 'src/app/store/organization/organization-ui-customization/selectors';
-import { UiModuleConfigCheckboxChangedEvent } from '../ui-config-tab-section/ui-config-tab-section.component';
+import { UiModuleConfigCheckboxChangedEvent as UIModuleConfigCheckboxChangedEvent } from '../ui-config-tab-section/ui-config-tab-section.component';
 
 enum LocalAdminSystemUsagesSegmentOptions {
   UiCustomization = 'UiCustomization',
@@ -59,7 +59,7 @@ export class LocalAdminItSystemUsagesComponent implements OnInit {
     });
   }
 
-  public onCheckboxChange($event: UiModuleConfigCheckboxChangedEvent) {
+  public onCheckboxChange($event: UIModuleConfigCheckboxChangedEvent) {
     //todo handle event with put call to update config in store
   }
 }
