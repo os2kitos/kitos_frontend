@@ -1,3 +1,9 @@
-.checkbox-info-align-left {
-  margin-left: 12px
+@import "theme.scss";
+
+.align-left-with-headline {
+  margin-left: 12px;
+}
+
+.form-section-top-padding {
+  padding-top: $padding-medium;
 }

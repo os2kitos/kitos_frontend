@@ -1,5 +1,15 @@
 <app-accordion [title]="tabViewModel.text" [isExpandedByDefault]="true" [checkboxInTitle]="true">
-  <app-form-grid [formGroup]="formGroup">
+  <app-divider></app-divider>
+
+  <app-paragraph
+  class="align-left-with-headline"
+   i18n
+    *ngIf="!tabViewModel.children || tabViewModel.children.length === 0">
+    Tilpasning på feltniveau er endnu ikke muligt for dette faneblad.
+  </app-paragraph>
+
+  <div class="form-section-top-padding">
+    <app-form-grid [formGroup]="formGroup">
     <ng-container *ngFor="let fieldViewModel of tabViewModel.children">
       <div>
       <app-checkbox
@@ -7,10 +17,11 @@
         labelPosition="after"
         [text]="fieldViewModel.text">
       </app-checkbox>
-      <app-textbox-info *ngIf="fieldViewModel.helpText !== undefined" class="checkbox-info-align-left">
+      <app-textbox-info *ngIf="fieldViewModel.helpText !== undefined" class="align-left-with-headline">
       <app-paragraph paragraphSize="x-small" i18n> {{ fieldViewModel.helpText }} </app-paragraph>
     </app-textbox-info>
     </div>
     </ng-container>
   </app-form-grid>
+  </div>
 </app-accordion>
