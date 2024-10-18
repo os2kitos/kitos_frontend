@@ -3,7 +3,7 @@
 [checkboxInTitle]="true"
 [checkboxValue]="tabViewModel.isEnabled ?? false"
 [checkboxDisabled]="tabViewModel.isObligatory ?? false"
-(checkboxChanged)="onCheckboxChanged({ value: $event, fullKey: tabViewModel.fullKey })">
+(checkboxChanged)="onCheckboxChanged({ enabled: $event, fullKey: tabViewModel.fullKey })">
   <app-divider></app-divider>
 
   <div class="form-section-top-padding">
@@ -23,7 +23,7 @@
         labelPosition="after"
         [value]="fieldViewModel.isEnabled ?? false"
         [disabled]="fieldViewModel.isObligatory ?? false"
-        (valueChange)="onCheckboxChanged({ value: $event, fullKey: fieldViewModel.fullKey })">
+        (valueChange)="onCheckboxChanged({ enabled: $event, fullKey: fieldViewModel.fullKey })">
         <app-paragraph>
           {{ fieldViewModel.text }}
         </app-paragraph>

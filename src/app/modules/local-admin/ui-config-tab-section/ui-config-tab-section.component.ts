@@ -1,11 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { CustomizedUINode } from 'src/app/shared/models/ui-config/customized-ui-node.model';
 import { UIConfigNodeViewModel } from 'src/app/shared/models/ui-config/ui-config-node-view-model.model';
-
-export interface UiModuleConfigCheckboxChangedEvent {
-  value: boolean;
-  fullKey?: string;
-}
 
 @Component({
   selector: 'app-ui-config-tab-section',
@@ -15,14 +11,13 @@ export interface UiModuleConfigCheckboxChangedEvent {
 export class UiConfigTabSectionComponent {
   @Input() tabViewModel!: UIConfigNodeViewModel;
   @Input() formGroup!: FormGroup;
-  @Output() checkboxChanged = new EventEmitter<UiModuleConfigCheckboxChangedEvent>();
+  @Output() checkboxChanged = new EventEmitter<CustomizedUINode>();
 
   public tabViewModelHasChildren(): boolean {
     return this.tabViewModel.children !== undefined && this.tabViewModel.children.length > 0;
   }
 
-  public onCheckboxChanged($event: UiModuleConfigCheckboxChangedEvent) {
-    console.log('changed checkbox' + JSON.stringify($event));
+  public onCheckboxChanged($event: CustomizedUINode) {
     this.checkboxChanged.emit($event);
   }
 }

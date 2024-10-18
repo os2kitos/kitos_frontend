@@ -8,11 +8,11 @@ import {
   collectUIConfigNodeViewModels,
   getItSystemUsageUiBluePrint,
 } from 'src/app/shared/models/helpers/ui-config-helpers';
+import { CustomizedUINode } from 'src/app/shared/models/ui-config/customized-ui-node.model';
 import { UIConfigNodeViewModel } from 'src/app/shared/models/ui-config/ui-config-node-view-model.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { OrganizationUiModuleCustomizationActions } from 'src/app/store/organization/organization-ui-customization/actions';
 import { selectITSystemUsagesUIModuleCustomization } from 'src/app/store/organization/organization-ui-customization/selectors';
-import { UiModuleConfigCheckboxChangedEvent as UIModuleConfigCheckboxChangedEvent } from '../ui-config-tab-section/ui-config-tab-section.component';
 
 enum LocalAdminSystemUsagesSegmentOptions {
   UiCustomization = 'UiCustomization',
@@ -59,7 +59,7 @@ export class LocalAdminItSystemUsagesComponent implements OnInit {
     });
   }
 
-  public onCheckboxChange($event: UIModuleConfigCheckboxChangedEvent) {
-    //todo handle event with put call to update config in store
+  public onCheckboxChange($event: CustomizedUINode) {
+    //todo call put on store
   }
 }
