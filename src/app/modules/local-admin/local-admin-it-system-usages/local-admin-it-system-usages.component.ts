@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { SegmentButtonOption } from 'src/app/shared/components/segment/segment.component';
-import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-customization-key';
+import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
 import { CustomizedUINode } from 'src/app/shared/models/ui-config/customized-ui-node.model';
 import { UIModuleConfigActions } from 'src/app/store/organization/ui-module-customization/actions';
 import { selectITSystemUsagesUIModuleConfig } from 'src/app/store/organization/ui-module-customization/selectors';

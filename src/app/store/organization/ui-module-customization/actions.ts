@@ -1,6 +1,6 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
 import { APIUIModuleCustomizationRequestDTO } from 'src/app/api/v2';
-import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-customization-key';
+import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
 import { UIModuleConfig } from 'src/app/shared/models/ui-config/ui-module-config.model';
 
 export const UIModuleConfigActions = createActionGroup({

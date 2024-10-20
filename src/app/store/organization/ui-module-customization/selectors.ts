@@ -1,5 +1,5 @@
 import { createSelector } from '@ngrx/store';
-import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-customization-key';
+import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
 import { uiModuleConfigFeature } from './reducer';
 import { UIModuleConfigState } from './state';
 

@@ -1,4 +1,4 @@
-import { UIModuleConfigKey } from '../../enums/ui-module-customization-key';
+import { UIModuleConfigKey } from '../../enums/ui-module-config-key';
 import { CustomizedUINode as UINodeCustomization } from '../ui-config/customized-ui-node.model';
 import { ItSystemUsageUiBluePrint, UINodeBlueprint } from '../ui-config/it-system-usages-blueprint';
 import { UIConfigNodeViewModel } from '../ui-config/ui-config-node-view-model.model';
@@ -56,6 +56,15 @@ function buildUIConfigNodeViewModels(
   }
 
   return nodeViewModels;
+}
+
+export function resolveUIBlueprint(module: UIModuleConfigKey): UINodeBlueprint {
+  switch (module) {
+    case UIModuleConfigKey.ItSystemUsage:
+      return getItSystemUsageUiBluePrint();
+    default:
+      return getItSystemUsageUiBluePrint();
+  }
 }
 
 export function getItSystemUsageUiBluePrint(): UINodeBlueprint {

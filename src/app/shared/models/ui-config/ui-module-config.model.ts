@@ -1,4 +1,4 @@
-import { UIModuleConfigKey } from '../../enums/ui-module-customization-key';
+import { UIModuleConfigKey } from '../../enums/ui-module-config-key';
 import { UIConfigNodeViewModel } from './ui-config-node-view-model.model';
 
 export interface UIModuleConfig {
