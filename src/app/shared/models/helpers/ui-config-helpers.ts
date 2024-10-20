@@ -1,14 +1,16 @@
-import { UIModuleCustomizationKey } from '../../enums/ui-module-customization-key';
+import { UIModuleConfigKey } from '../../enums/ui-module-customization-key';
 import { CustomizedUINode as UINodeCustomization } from '../ui-config/customized-ui-node.model';
 import { ItSystemUsageUiBluePrint, UINodeBlueprint } from '../ui-config/it-system-usages-blueprint';
 import { UIConfigNodeViewModel } from '../ui-config/ui-config-node-view-model.model';
+import { UIModuleConfig } from '../ui-config/ui-module-config.model';
 
 export function collectUIConfigNodeViewModels(
   tree: UINodeBlueprint,
-  uiModuleCustomizations: UINodeCustomization[]
-): UIConfigNodeViewModel[] {
-  const uiConfigNodeViewModels: UIConfigNodeViewModel[] = buildUIConfigNodeViewModels(tree, uiModuleCustomizations);
-  return uiConfigNodeViewModels;
+  uiModuleCustomizations: UINodeCustomization[],
+  module: UIModuleConfigKey
+): UIModuleConfig {
+  const uiModuleConfigViewModels: UIConfigNodeViewModel[] = buildUIConfigNodeViewModels(tree, uiModuleCustomizations);
+  return { module, configViewModels: uiModuleConfigViewModels };
 }
 
 function findCustomizedUINode(customizationList: UINodeCustomization[], fullKey: string): UINodeCustomization | null {
@@ -58,7 +60,7 @@ function buildUIConfigNodeViewModels(
 
 export function getItSystemUsageUiBluePrint(): UINodeBlueprint {
   const blueprint = ItSystemUsageUiBluePrint;
-  setupUIBlueprintFullKeys(UIModuleCustomizationKey.ItSystemUsage, blueprint, []);
+  setupUIBlueprintFullKeys(UIModuleConfigKey.ItSystemUsage, blueprint, []);
   return blueprint;
 }
 

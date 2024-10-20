@@ -28,7 +28,7 @@ import { OrganizationUserEffects } from './organization/organization-user/effect
 import { organizationUserFeature } from './organization/organization-user/reducer';
 import { organizationFeature } from './organization/reducer';
 import { UIModuleCustomizationEffects } from './organization/ui-module-customization/effects';
-import { organizationUIModuleCustomizationFeature } from './organization/ui-module-customization/reducer';
+import { uiModuleConfigFeature } from './organization/ui-module-customization/reducer';
 import { popupMessagesFeature } from './popup-messages/reducer';
 import { RegularOptionTypeEffects } from './regular-option-type-store/effects';
 import { regularOptionTypeFeature } from './regular-option-type-store/reducer';
@@ -64,7 +64,7 @@ import { userFeature } from './user-store/reducer';
     StoreModule.forFeature(exportFeature),
     StoreModule.forFeature(organizationUserFeature),
     StoreModule.forFeature(organizationFeature),
-    StoreModule.forFeature(organizationUIModuleCustomizationFeature),
+    StoreModule.forFeature(uiModuleConfigFeature),
     EffectsModule.forRoot([]),
     EffectsModule.forFeature([
       UserEffects,

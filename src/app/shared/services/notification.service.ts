@@ -10,7 +10,7 @@ import { ITSystemActions } from 'src/app/store/it-system/actions';
 import { OrganizationActions } from 'src/app/store/organization/actions';
 import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
-import { UIModuleCustomizationActions } from 'src/app/store/organization/ui-module-customization/actions';
+import { UIModuleConfigActions } from 'src/app/store/organization/ui-module-customization/actions';
 import { PopupMessageActions } from 'src/app/store/popup-messages/actions';
 import { UserActions } from 'src/app/store/user-store/actions';
 import { PopupMessageType } from '../enums/popup-message-type';
@@ -356,17 +356,17 @@ export class NotificationService implements OnDestroy {
     );
 
     this.subscribeAsError(
-      ofType(UIModuleCustomizationActions.getUIModuleCustomizationError),
+      ofType(UIModuleConfigActions.getUIModuleCustomizationError),
       $localize`Kunne ikke hente lokal tilpasning af brugerfladen`
     );
 
     this.subscribeAsError(
-      ofType(UIModuleCustomizationActions.putUIModuleCustomizationError),
+      ofType(UIModuleConfigActions.putUIModuleCustomizationError),
       $localize`Kunne ikke opdatere lokal tilpasning af brugerfladen`
     );
 
     this.subscribeAsError(
-      ofType(UIModuleCustomizationActions.putUIModuleCustomizationSuccess),
+      ofType(UIModuleConfigActions.putUIModuleCustomizationSuccess),
       $localize`Lokal tilpasning af brugerfladen blev opdateret`
     );
   }

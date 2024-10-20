@@ -1,4 +1,5 @@
 export interface UIConfigNodeViewModel {
+  module?: string;
   text: string;
   helpText?: string;
   fullKey: string;
@@ -6,5 +7,3 @@ export interface UIConfigNodeViewModel {
   isEnabled?: boolean;
   children?: UIConfigNodeViewModel[];
 }
-
-

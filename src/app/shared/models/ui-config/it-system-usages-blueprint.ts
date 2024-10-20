@@ -1,4 +1,4 @@
-import { UIModuleCustomizationKey } from '../../enums/ui-module-customization-key';
+import { UIModuleConfigKey } from '../../enums/ui-module-customization-key';
 import { uiConfigHelpTexts } from './ui-config-helptexts';
 
 export interface UINodeBlueprint {
@@ -11,7 +11,7 @@ export interface UINodeBlueprint {
 }
 
 export const ItSystemUsageUiBluePrint = {
-  module: UIModuleCustomizationKey.ItSystemUsage,
+  module: UIModuleConfigKey.ItSystemUsage,
   isObligatory: false,
   helpText: uiConfigHelpTexts.generalUiCustomizationHelpText,
   text: $localize`IT-Systemer i anvendelse`,

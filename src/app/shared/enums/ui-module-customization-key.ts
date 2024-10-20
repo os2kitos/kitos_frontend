@@ -1,4 +1,4 @@
-export enum UIModuleCustomizationKey {
+export enum UIModuleConfigKey {
   ItSystemUsage = 'ItSystemUsages',
   ItContract = 'ItContracts',
   DataProcessingRegistrations = 'DataProcessingRegistrations',

@@ -4,8 +4,8 @@
   <ng-container *ngIf="selectedSegment === LocalAdminSystemUsagesSegmentOptions.UiCustomization">
 
     <app-standard-vertical-content-grid>
-      <ng-container *ngIf="uiConfigNodeViewModels$ | async as uiConfigNodeViewModels">
-      <app-ui-config-tab-section *ngFor="let tabViewModel of uiConfigNodeViewModels[0].children"
+      <ng-container *ngIf="itSystemUsageUIModuleConfig$ | async as uiModuleConfig">
+      <app-ui-config-tab-section *ngFor="let tabViewModel of uiModuleConfig.configViewModels[0].children"
         [tabViewModel]="tabViewModel"
         [formGroup]="itSystemUsageFrontpageForm"
         (checkboxChanged)="onCheckboxChange($event)">
