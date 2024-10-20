@@ -27,6 +27,8 @@ import { organizationUnitFeature } from './organization/organization-unit/reduce
 import { OrganizationUserEffects } from './organization/organization-user/effects';
 import { organizationUserFeature } from './organization/organization-user/reducer';
 import { organizationFeature } from './organization/reducer';
+import { UIModuleCustomizationEffects } from './organization/ui-module-customization/effects';
+import { organizationUIModuleCustomizationFeature } from './organization/ui-module-customization/reducer';
 import { popupMessagesFeature } from './popup-messages/reducer';
 import { RegularOptionTypeEffects } from './regular-option-type-store/effects';
 import { regularOptionTypeFeature } from './regular-option-type-store/reducer';
@@ -34,8 +36,6 @@ import { RoleOptionTypeEffects } from './roles-option-type-store/effects';
 import { roleOptionTypeFeature } from './roles-option-type-store/reducer';
 import { UserEffects } from './user-store/effects';
 import { userFeature } from './user-store/reducer';
-import { OrganizationUIModuleCustomizationEffects } from './organization/organization-ui-customization/effects';
-import { organizationUIModuleCustomizationFeature } from './organization/organization-ui-customization/reducer';
 
 @NgModule({
   imports: [
@@ -80,7 +80,7 @@ import { organizationUIModuleCustomizationFeature } from './organization/organiz
       GridExportEffects,
       OrganizationUserEffects,
       OrganizationEffects,
-      OrganizationUIModuleCustomizationEffects,
+      UIModuleCustomizationEffects,
     ]),
     RouterModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),

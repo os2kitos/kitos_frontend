@@ -11,8 +11,8 @@ import {
 import { CustomizedUINode } from 'src/app/shared/models/ui-config/customized-ui-node.model';
 import { UIConfigNodeViewModel } from 'src/app/shared/models/ui-config/ui-config-node-view-model.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
-import { OrganizationUiModuleCustomizationActions } from 'src/app/store/organization/organization-ui-customization/actions';
-import { selectITSystemUsagesUIModuleCustomization } from 'src/app/store/organization/organization-ui-customization/selectors';
+import { UIModuleCustomizationActions } from 'src/app/store/organization/ui-module-customization/actions';
+import { selectITSystemUsagesUIModuleCustomization } from 'src/app/store/organization/ui-module-customization/selectors';
 
 enum LocalAdminSystemUsagesSegmentOptions {
   UiCustomization = 'UiCustomization',
@@ -42,7 +42,7 @@ export class LocalAdminItSystemUsagesComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(
-      OrganizationUiModuleCustomizationActions.getUIModuleCustomization({
+      UIModuleCustomizationActions.getUIModuleCustomization({
         moduleName: UIModuleCustomizationKey.ItSystemUsage,
       })
     );

@@ -8,9 +8,9 @@ import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
 import { OrganizationActions } from 'src/app/store/organization/actions';
-import { OrganizationUiModuleCustomizationActions } from 'src/app/store/organization/organization-ui-customization/actions';
 import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
+import { UIModuleCustomizationActions } from 'src/app/store/organization/ui-module-customization/actions';
 import { PopupMessageActions } from 'src/app/store/popup-messages/actions';
 import { UserActions } from 'src/app/store/user-store/actions';
 import { PopupMessageType } from '../enums/popup-message-type';
@@ -356,17 +356,17 @@ export class NotificationService implements OnDestroy {
     );
 
     this.subscribeAsError(
-      ofType(OrganizationUiModuleCustomizationActions.getUIModuleCustomizationError),
+      ofType(UIModuleCustomizationActions.getUIModuleCustomizationError),
       $localize`Kunne ikke hente lokal tilpasning af brugerfladen`
     );
 
     this.subscribeAsError(
-      ofType(OrganizationUiModuleCustomizationActions.putUIModuleCustomizationError),
+      ofType(UIModuleCustomizationActions.putUIModuleCustomizationError),
       $localize`Kunne ikke opdatere lokal tilpasning af brugerfladen`
     );
 
     this.subscribeAsError(
-      ofType(OrganizationUiModuleCustomizationActions.putUIModuleCustomizationSuccess),
+      ofType(UIModuleCustomizationActions.putUIModuleCustomizationSuccess),
       $localize`Lokal tilpasning af brugerfladen blev opdateret`
     );
   }
