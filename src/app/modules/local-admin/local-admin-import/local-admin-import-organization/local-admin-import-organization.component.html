@@ -1,5 +1,5 @@
 <app-card i18n-title>
-  <app-card-header title="Via Excel"></app-card-header>
+  <app-card-header title="Via Excel" helpTextKey="local-config.import.organization"></app-card-header>
   TO IMPLEMENT
 </app-card>
 
@@ -14,13 +14,14 @@
       <app-paragraph i18n *ngIf="(accessGranted$ | async) === false"
         >KITOS har <strong>ikke</strong> adgang til organisationens data via FK Organisation</app-paragraph
       >
+      <app-paragraph *ngIf="accessError$ | async as accessError" color="error">{{ accessError }}</app-paragraph>
     </div>
     <div>
       <app-paragraph helpTextKey="local-config-fk-org-sync-status.label" [bold]="true" i18n
         >Synkronisering</app-paragraph
       >
       <ng-container *ngIf="synchronizationStatus$ | async as synchronizationStatus">
-        <app-native-table *ngIf="isConnected$ | async" [withOutline]="true">
+        <app-native-table *ngIf="isConnected$ | async" [withOutline]="true" class="table-margin">
           <thead>
             <th width="33%" i18n>Niveauer der synkroniseres</th>
             <th width="33%" i18n>Tjekker automatisk (hver mandag nat) efter ventende opdateringer</th>
@@ -71,7 +72,14 @@
       >
     </div>
     <div>
-      <app-button class="no-stretch" (buttonClick)="openImportDialog()" i18n>Forbind</app-button>
+      <app-button
+        class="no-stretch"
+        (buttonClick)="openImportDialog()"
+        *ngIf="(isConnected$ | async) === false"
+        i18n
+        [disabled]="(accessError$ | async) !== undefined"
+        >Forbind</app-button
+      >
     </div>
   </app-standard-vertical-content-grid>
   <app-loading *ngIf="isLoadingConnectionStatus$ | async"></app-loading>

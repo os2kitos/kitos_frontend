@@ -62,6 +62,6 @@
   [cdkDropListDisabled]="disableDrag"
 >
   <div *ngFor="let node of nodes" cdkDrag [cdkDragData]="node.uuid" (cdkDragMoved)="dragMoved($event)">
-    <ng-container *ngTemplateOutlet="tmplNode; context: { node: node, childOfRoot: false, level: 0 }"></ng-container>
+    <ng-container *ngTemplateOutlet="tmplNode; context: { node: node, childOfRoot: false, level: 1 }"></ng-container>
   </div>
 </div>

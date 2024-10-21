@@ -15,6 +15,7 @@
                 i18n-text
                 [formGroup]="fkOrgFormGroup"
                 formName="levels"
+                [minLength]="1"
                 (valueChange)="levelChange($event)"
               ></app-numeric-input>
               <app-paragraph paragraphSize="x-small" [dimmed]="true" i18n
