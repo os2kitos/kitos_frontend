@@ -1,9 +1,9 @@
 import { APICustomizedUINodeResponseDTO, APIUIModuleCustomizationResponseDTO } from 'src/app/api/v2';
-import { CustomizedUINode } from './customized-ui-node.model';
+import { UINodeCustomization } from './ui-node-customization';
 
 export interface UIModuleCustomization {
   module: string;
-  nodes: CustomizedUINode[];
+  nodes: UINodeCustomization[];
 }
 
 export function adaptUIModuleCustomization(

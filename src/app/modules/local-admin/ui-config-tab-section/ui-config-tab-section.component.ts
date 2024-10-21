@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { CustomizedUINode } from 'src/app/shared/models/ui-config/customized-ui-node.model';
 import { UIConfigNodeViewModel } from 'src/app/shared/models/ui-config/ui-config-node-view-model.model';
+import { UINodeCustomization } from 'src/app/shared/models/ui-config/ui-node-customization';
 
 @Component({
   selector: 'app-ui-config-tab-section',
@@ -11,13 +11,13 @@ import { UIConfigNodeViewModel } from 'src/app/shared/models/ui-config/ui-config
 export class UiConfigTabSectionComponent {
   @Input() tabViewModel!: UIConfigNodeViewModel;
   @Input() formGroup!: FormGroup;
-  @Output() checkboxChanged = new EventEmitter<CustomizedUINode>();
+  @Output() checkboxChanged = new EventEmitter<UINodeCustomization>();
 
   public tabViewModelHasChildren(): boolean {
     return this.tabViewModel.children !== undefined && this.tabViewModel.children.length > 0;
   }
 
-  public onCheckboxChanged($event: CustomizedUINode) {
+  public onCheckboxChanged($event: UINodeCustomization) {
     this.checkboxChanged.emit($event);
   }
 }
