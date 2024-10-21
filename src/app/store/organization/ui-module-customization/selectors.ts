@@ -26,3 +26,4 @@ export const selectITSystemUsageUIModuleConfigEnableTabGdpr = createSelector(
     return tabIsEnabled(moduleConfig, 'ItSystemUsages.gdpr');
   }
 );
+
