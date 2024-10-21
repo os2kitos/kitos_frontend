@@ -92,3 +92,8 @@ function setupUIBlueprintFullKeys(currentLevelKey: string, currentNode: UINodeBl
     });
   }
 }
+
+export function tabIsEnabled(uiConfigViewModels: UIConfigNodeViewModel[], tabFullkey: string){
+  const tab = uiConfigViewModels.find((vm) => vm.fullKey === tabFullkey);
+  return tab?.isEnabled ?? true;
+}

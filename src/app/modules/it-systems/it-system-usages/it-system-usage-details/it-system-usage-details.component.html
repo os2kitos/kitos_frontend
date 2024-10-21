@@ -47,7 +47,8 @@
         size="large"
         [routerLink]="[AppPath.gdpr]"
         routerLinkActive="active"
-        ><app-lock-icon></app-lock-icon>
+        *ngIf="!enableGdprTab()">
+        <app-lock-icon></app-lock-icon>
         <ng-container i18n>GDPR</ng-container>
       </app-button>
       <app-button

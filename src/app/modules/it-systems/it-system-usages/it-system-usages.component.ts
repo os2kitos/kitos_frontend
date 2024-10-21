@@ -6,6 +6,7 @@ import { CellClickEvent } from '@progress/kendo-angular-grid';
 import { combineLatestWith, first } from 'rxjs';
 import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
 import { BooleanValueDisplayType } from 'src/app/shared/components/status-chip/status-chip.component';
+import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
 import { getColumnsToShow } from 'src/app/shared/helpers/grid-config-helper';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
@@ -36,6 +37,7 @@ import {
   selectItSystemUsageLastSeenGridConfig,
   selectUsageGridColumns,
 } from 'src/app/store/it-system-usage/selectors';
+import { UIModuleConfigActions } from 'src/app/store/organization/ui-module-customization/actions';
 import { selectGridConfigModificationPermission, selectOrganizationName } from 'src/app/store/user-store/selectors';
 
 @Component({
@@ -504,6 +506,8 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
   }
 
   ngOnInit() {
+    this.store.dispatch(UIModuleConfigActions.getUIModuleConfig({ module: UIModuleConfigKey.ItSystemUsage }));
+
     const existingColumns = this.statePersistingService.get<GridColumn[]>(USAGE_COLUMNS_ID);
     this.store.dispatch(ITSystemUsageActions.getItSystemUsageOverviewRoles());
     if (existingColumns) {
