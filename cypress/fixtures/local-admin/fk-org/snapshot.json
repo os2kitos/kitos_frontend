@@ -1,0 +1,42 @@
+{
+  "uuid": "a7c3d2b8-4f7d-4730-9b4a-e1a29c8b2345",
+  "name": "Test Kommune Root",
+  "children": [
+    {
+      "uuid": "3c1a6d4e-8f9b-4d20-a3c9-d2f847d2a456",
+      "name": "Test child 1",
+      "children": [
+        {
+          "uuid": "b8e3f1c2-1d2e-46f9-a5f7-c7b1a6e1f987",
+          "name": "Test grandchild",
+          "children": []
+        }
+      ]
+    },
+    {
+      "uuid": "d2b4f7c6-5f8a-4b70-8a1e-b6c23a7e3451",
+      "name": "Test child 2",
+      "children": []
+    },
+    {
+      "uuid": "9a3b6c7d-2f9e-4c10-8a8d-d1f4e2b3a678",
+      "name": "Test child 3",
+      "children": []
+    },
+    {
+      "uuid": "4e1d3b5c-7a8f-4872-b2f0-e4d3c2f1b249",
+      "name": "Test child 4",
+      "children": []
+    },
+    {
+      "uuid": "c9b5a2e4-6d7f-4901-b1c5-a3e4d9c8e156",
+      "name": "Test child 5",
+      "children": []
+    },
+    {
+      "uuid": "2f4d1b6c-9e7a-4c80-8b2f-d5e3c1a2f987",
+      "name": "Test child 6",
+      "children": []
+    }
+  ]
+}

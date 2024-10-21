@@ -1,0 +1,13 @@
+{
+  "accessStatus": {
+    "accessGranted": true,
+    "error": null
+  },
+  "connected": false,
+  "subscribesToUpdates": false,
+  "dateOfLatestCheckBySubscription": null,
+  "synchronizationDepth": null,
+  "canCreateConnection": true,
+  "canUpdateConnection": false,
+  "canDeleteConnection": false
+}

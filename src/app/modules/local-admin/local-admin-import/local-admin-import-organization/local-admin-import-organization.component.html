@@ -74,10 +74,11 @@
     <div>
       <app-button
         class="no-stretch"
-        (buttonClick)="openImportDialog()"
         *ngIf="(isConnected$ | async) === false"
-        i18n
+        (buttonClick)="openImportDialog()"
         [disabled]="(accessError$ | async) !== undefined"
+        i18n
+        data-cy="create-sts-connection"
         >Forbind</app-button
       >
     </div>

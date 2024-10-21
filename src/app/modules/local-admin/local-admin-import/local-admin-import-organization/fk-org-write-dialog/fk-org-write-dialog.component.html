@@ -16,6 +16,7 @@
                 [formGroup]="fkOrgFormGroup"
                 formName="levels"
                 [minLength]="1"
+                data-cy="levels-input"
                 (valueChange)="levelChange($event)"
               ></app-numeric-input>
               <app-paragraph paragraphSize="x-small" [dimmed]="true" i18n
@@ -30,6 +31,7 @@
                 labelPosition="after"
                 [formGroup]="fkOrgFormGroup"
                 formName="subscribeToUpdates"
+                data-cy="auto-updates-checkbox"
               ></app-checkbox>
               <app-paragraph paragraphSize="x-small" [dimmed]="true" i18n
                 >* Foretager automatisk tjek hver mandag nat og sender en email med oversigt over ventende opdateringer
