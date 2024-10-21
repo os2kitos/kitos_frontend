@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { APICustomizedUINodeDTO } from 'src/app/api/v1';
 import { SegmentButtonOption } from 'src/app/shared/components/segment/segment.component';
 import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
 import { CustomizedUINode } from 'src/app/shared/models/ui-config/customized-ui-node.model';
@@ -25,7 +26,7 @@ export class LocalAdminItSystemUsagesComponent implements OnInit {
     { text: $localize`Lokal tilpasning af udfaldsrum`, value: LocalAdminSystemUsagesSegmentOptions.OptionTypes },
   ];
   public readonly itSystemUsageUIModuleConfig$ = this.store.select(selectITSystemUsagesUIModuleConfig);
-
+  private readonly itSystemUsageModuleKey = UIModuleConfigKey.ItSystemUsage;
   public readonly itSystemUsageFrontpageForm = new FormGroup({});
 
   constructor(private readonly store: Store) {}
@@ -33,12 +34,15 @@ export class LocalAdminItSystemUsagesComponent implements OnInit {
   ngOnInit(): void {
     this.store.dispatch(
       UIModuleConfigActions.getUIModuleCustomization({
-        module: UIModuleConfigKey.ItSystemUsage,
+        module: this.itSystemUsageModuleKey,
       })
     );
   }
 
   public onCheckboxChange($event: CustomizedUINode) {
-    //todo call put on store
+    const dto: APICustomizedUINodeDTO = { enabled: $event.enabled, key: $event.fullKey };
+    this.store.dispatch(
+      UIModuleConfigActions.putUIModuleCustomization({ module: this.itSystemUsageModuleKey, updatedNodeRequest: dto })
+    );
   }
 }

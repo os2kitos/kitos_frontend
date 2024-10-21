@@ -4,12 +4,12 @@ import { ItSystemUsageUiBluePrint, UINodeBlueprint } from '../ui-config/it-syste
 import { UIConfigNodeViewModel } from '../ui-config/ui-config-node-view-model.model';
 import { UIModuleConfig } from '../ui-config/ui-module-config.model';
 
-export function collectUIConfigNodeViewModels(
-  tree: UINodeBlueprint,
+export function buildUIModuleConfig(
+  blueprint: UINodeBlueprint,
   uiModuleCustomizations: UINodeCustomization[],
   module: UIModuleConfigKey
 ): UIModuleConfig {
-  const uiModuleConfigViewModels: UIConfigNodeViewModel[] = buildUIConfigNodeViewModels(tree, uiModuleCustomizations);
+  const uiModuleConfigViewModels: UIConfigNodeViewModel[] = buildUIConfigNodeViewModels(blueprint, uiModuleCustomizations);
   return { module, configViewModels: uiModuleConfigViewModels };
 }
 
@@ -31,7 +31,7 @@ function buildBasicNodeViewModel(
   };
 
   const nodeCustomization = findCustomizedUINode(uiNodeCustomizations, nodeFullKey);
-  if (nodeCustomization) {
+  if (nodeCustomization && nodeCustomization.enabled !== undefined) {
     nodeViewModel.isEnabled = nodeCustomization.enabled;
   }
   return nodeViewModel;
