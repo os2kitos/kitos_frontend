@@ -9,9 +9,18 @@ export const selectUIModuleConfig = createSelector(selectUIModuleCustomizationSt
   return state.uiModuleConfigs;
 });
 
-export const selectITSystemUsagesUIModuleConfig = createSelector(
+export const selectITSystemUsageUIModuleConfig = createSelector(
   selectUIModuleCustomizationState,
   (state: UIModuleConfigState) => {
     return state.uiModuleConfigs.find((c) => c.module == UIModuleConfigKey.ItSystemUsage);
   }
 );
+
+export const selectUINodeConfig = (module: UIModuleConfigKey, fullKey: string) =>
+  createSelector(selectUIModuleCustomizationState, (state: UIModuleConfigState) => {
+    const module = state.uiModuleConfigs.find((c) => c.module == UIModuleConfigKey.ItSystemUsage);
+    if (module) {
+      return module.configViewModels.find((vm) => vm.fullKey === fullKey);
+    }
+    return undefined;
+  });

@@ -15,7 +15,7 @@ export const uiModuleConfigFeature = createFeature({
   reducer: createReducer(
     UIModuleConfigInitialState,
     on(
-      UIModuleConfigActions.getUIModuleCustomizationSuccess,
+      UIModuleConfigActions.getUIModuleConfigSuccess,
       (state, { uiModuleConfig }): UIModuleConfigState => ({
         uiModuleConfigs: [...state.uiModuleConfigs, uiModuleConfig],
       })

@@ -6,7 +6,7 @@ import { SegmentButtonOption } from 'src/app/shared/components/segment/segment.c
 import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
 import { CustomizedUINode } from 'src/app/shared/models/ui-config/customized-ui-node.model';
 import { UIModuleConfigActions } from 'src/app/store/organization/ui-module-customization/actions';
-import { selectITSystemUsagesUIModuleConfig } from 'src/app/store/organization/ui-module-customization/selectors';
+import { selectITSystemUsageUIModuleConfig } from 'src/app/store/organization/ui-module-customization/selectors';
 
 enum LocalAdminSystemUsagesSegmentOptions {
   UiCustomization = 'UiCustomization',
@@ -25,7 +25,7 @@ export class LocalAdminItSystemUsagesComponent implements OnInit {
     { text: $localize`Lokal tilpasning af brugerfladen`, value: LocalAdminSystemUsagesSegmentOptions.UiCustomization },
     { text: $localize`Lokal tilpasning af udfaldsrum`, value: LocalAdminSystemUsagesSegmentOptions.OptionTypes },
   ];
-  public readonly itSystemUsageUIModuleConfig$ = this.store.select(selectITSystemUsagesUIModuleConfig);
+  public readonly itSystemUsageUIModuleConfig$ = this.store.select(selectITSystemUsageUIModuleConfig);
   private readonly itSystemUsageModuleKey = UIModuleConfigKey.ItSystemUsage;
   public readonly itSystemUsageFrontpageForm = new FormGroup({});
 

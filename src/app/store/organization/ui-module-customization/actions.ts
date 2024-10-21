@@ -4,11 +4,11 @@ import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
 import { UIModuleConfig } from 'src/app/shared/models/ui-config/ui-module-config.model';
 
 export const UIModuleConfigActions = createActionGroup({
-  source: 'UI Module Customization',
+  source: 'UI Module Config',
   events: {
-    'Get UI Module Customization': props<{ module: UIModuleConfigKey }>(),
-    'Get UI Module Customization success': props<{ uiModuleConfig: UIModuleConfig }>(),
-    'Get UI Module Customization error': emptyProps(),
+    'Get UI Module Config': props<{ module: UIModuleConfigKey }>(),
+    'Get UI Module Config success': props<{ uiModuleConfig: UIModuleConfig }>(),
+    'Get UI Module Config error': emptyProps(),
 
     'Put UI Module Customization': props<{
       module: UIModuleConfigKey;

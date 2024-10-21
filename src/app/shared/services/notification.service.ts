@@ -356,7 +356,7 @@ export class NotificationService implements OnDestroy {
     );
 
     this.subscribeAsError(
-      ofType(UIModuleConfigActions.getUIModuleCustomizationError),
+      ofType(UIModuleConfigActions.getUIModuleConfigError),
       $localize`Kunne ikke hente lokal tilpasning af brugerfladen`
     );
 
