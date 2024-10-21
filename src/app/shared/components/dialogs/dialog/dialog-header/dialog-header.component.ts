@@ -12,7 +12,7 @@ export class DialogHeaderComponent {
   @Input() public icon?: 'help';
   @Input() public dialog!: MatDialogRef<DialogComponent>;
   @Input() public closable = true;
-  @Input() public helpText?: string;
+  @Input() public helpText?: string = undefined;
   @Input() public nested = false;
 
   public close() {

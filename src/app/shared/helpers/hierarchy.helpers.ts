@@ -3,9 +3,10 @@ import {
   APIItContractResponseDTO,
   APIOrganizationUnitResponseDTO,
   APIRegistrationHierarchyNodeWithActivationStatusResponseDTO,
+  APIStsOrganizationOrgUnitDTO,
 } from 'src/app/api/v2';
-import { EntityTreeNode, HierachyNodeWithParentUuid } from '../models/structure/entity-tree-node.model';
 import { IdentityNamePair } from '../models/identity-name-pair.model';
+import { EntityTreeNode, HierachyNodeWithParentUuid } from '../models/structure/entity-tree-node.model';
 
 export const mapToTree = (hierarchy: APIRegistrationHierarchyNodeWithActivationStatusResponseDTO[]) => {
   const mappedHierarchy = hierarchy.map<HierachyNodeWithParentUuid>((node) => ({
@@ -36,6 +37,22 @@ export const mapUnitsToTree = (units: APIOrganizationUnitResponseDTO[], expanded
   }));
 
   return mapArrayToTree(mappedHierarchy);
+};
+
+export const mapFkOrgSnapshotUnits = (
+  units: APIStsOrganizationOrgUnitDTO[],
+  parentUnit?: APIStsOrganizationOrgUnitDTO
+): EntityTreeNode<APIStsOrganizationOrgUnitDTO>[] => {
+  return units.map<EntityTreeNode<APIStsOrganizationOrgUnitDTO>>((unit) => ({
+    uuid: unit.uuid ?? '',
+    name: unit.name ?? '',
+    isRoot: parentUnit === undefined ? true : false,
+    status: true,
+    parentUuid: parentUnit?.uuid,
+    children: unit.children ? mapFkOrgSnapshotUnits(unit.children, unit) : [],
+    color: 'green',
+    isExpanded: true,
+  }));
 };
 
 export const mapContractsToTree = (contracts: APIItContractResponseDTO[]) => {

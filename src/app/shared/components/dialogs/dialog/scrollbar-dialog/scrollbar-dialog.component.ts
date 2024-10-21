@@ -14,6 +14,7 @@ export class ScrollbarDialogComponent {
   @Input() public closable = true;
   @Input() public overflow: 'auto' | 'none' = 'auto';
   @Input() public nested: boolean = false;
+  @Input() public backgroundColor: 'white' | 'grey' = 'white';
 
   constructor(protected dialog: MatDialogRef<DialogComponent>) {}
 

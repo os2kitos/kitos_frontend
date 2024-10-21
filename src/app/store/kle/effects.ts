@@ -10,9 +10,12 @@ import { selectHasValidCache } from './selectors';
 
 @Injectable()
 export class KLEEffects {
-  constructor(private actions$: Actions, private store: Store,
+  constructor(
+    private actions$: Actions,
+    private store: Store,
     @Inject(APIV2KleOptionService)
-    private apiKleOptionService: APIV2KleOptionService) {}
+    private apiKleOptionService: APIV2KleOptionService
+  ) {}
 
   getKles$ = createEffect(() => {
     return this.actions$.pipe(

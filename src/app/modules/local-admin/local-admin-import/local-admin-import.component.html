@@ -1,1 +1,2 @@
-<p>local-admin-import works!</p>
+<app-segment [buttons]="showingOptions" [(selected)]="selected"></app-segment>
+<app-local-admin-import-organization *ngIf="selected === 'organization'"></app-local-admin-import-organization>

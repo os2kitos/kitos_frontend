@@ -15,6 +15,8 @@ export class DetailsPageLinkComponent implements OnInit {
   @Input() public linkFontSize: LinkFontSizes = 'medium';
   @Input() public itemType: RegistrationEntityTypes | undefined;
   @Input() public subpagePath?: string;
+  @Input() public disableRedirect = false;
+
   private setDetailsPagePath(resourceUrlSegment: string) {
     let path = `/${resourceUrlSegment}/${this.itemUuid}`;
     if (this.subpagePath) {

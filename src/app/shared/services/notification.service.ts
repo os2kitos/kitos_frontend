@@ -7,6 +7,7 @@ import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
+import { FkOrgActions } from 'src/app/store/local-admin/fk-org/actions';
 import { OrganizationActions } from 'src/app/store/organization/actions';
 import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
@@ -46,6 +47,7 @@ export class NotificationService implements OnDestroy {
 
     this.subscribeToExternalReferenceManagementEvents();
     this.subscribeToRoleNotifications();
+    this.subscribeToFkOrganizationEvents();
   }
 
   private subscribeToLocalAdminNotifications() {
@@ -360,6 +362,21 @@ export class NotificationService implements OnDestroy {
     this.subscribeMultipleError(
       ofType(ITSystemUsageActions.removeItSystemUsageRoleError, ITContractActions.removeItContractRoleError),
       $localize`Kunne ikke fjerne tildelingen`
+    );
+  }
+
+  /**
+   * Consolidates notifications related to the "Fk Organization" integration
+   */
+  private subscribeToFkOrganizationEvents() {
+    this.subscribeAsDefault(
+      FkOrgActions.createConnectionSuccess,
+      $localize`Forbindelse til FK Organisation blev oprettet`
+    );
+
+    this.subscribeAsError(
+      FkOrgActions.createConnectionError,
+      $localize`Kunne ikke oprette en forbindelse til Fk Organisation`
     );
   }
 

@@ -18,6 +18,9 @@ import { ITSystemEffects } from './it-system/effects';
 import { itSystemFeature } from './it-system/reducer';
 import { KLEEffects } from './kle/effects';
 import { kleFeature } from './kle/reducer';
+import { FkOrgEffects } from './local-admin/fk-org/effects';
+import { fkOrgFeature } from './local-admin/fk-org/reducer';
+import { LocalOptionTypeEffects } from './local-option-types/effects';
 import { exportReadyMetaReducer } from './meta/grid-export.reducer';
 import { localStorageSyncReducer } from './meta/local-storage-sync.reducer';
 import { resetReducer } from './meta/reset.reducer';
@@ -34,7 +37,6 @@ import { RoleOptionTypeEffects } from './roles-option-type-store/effects';
 import { roleOptionTypeFeature } from './roles-option-type-store/reducer';
 import { UserEffects } from './user-store/effects';
 import { userFeature } from './user-store/reducer';
-import { LocalOptionTypeEffects } from './local-option-types/effects';
 
 @NgModule({
   imports: [
@@ -63,6 +65,7 @@ import { LocalOptionTypeEffects } from './local-option-types/effects';
     StoreModule.forFeature(exportFeature),
     StoreModule.forFeature(organizationUserFeature),
     StoreModule.forFeature(organizationFeature),
+    StoreModule.forFeature(fkOrgFeature),
     EffectsModule.forRoot([]),
     EffectsModule.forFeature([
       UserEffects,
@@ -79,6 +82,7 @@ import { LocalOptionTypeEffects } from './local-option-types/effects';
       OrganizationUserEffects,
       OrganizationEffects,
       LocalOptionTypeEffects,
+      FkOrgEffects,
     ]),
     RouterModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),

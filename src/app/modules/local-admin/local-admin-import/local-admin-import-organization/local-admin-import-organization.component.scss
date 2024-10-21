@@ -1,0 +1,15 @@
+@import "mixins";
+@import "theme";
+
+:host {
+  @include page-flex-layout-max-width;
+}
+
+.no-stretch {
+  width: auto;
+  display: inline-block;
+}
+
+.table-margin {
+  margin-top: $padding-small;
+}
