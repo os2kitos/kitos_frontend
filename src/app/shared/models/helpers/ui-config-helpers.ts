@@ -62,12 +62,12 @@ function buildUIConfigNodeViewModels(
 }
 
 export function getUIBlueprint(module: UIModuleConfigKey): UINodeBlueprint {
-  const blueprint = resolveUIBlueprint(module);
+  const blueprint = resolveUIModuleBlueprint(module);
   setupUIBlueprintFullKeys(module, blueprint, []);
   return blueprint;
 }
 
-function resolveUIBlueprint(module: UIModuleConfigKey): UINodeBlueprint {
+function resolveUIModuleBlueprint(module: UIModuleConfigKey): UINodeBlueprint {
   switch (module) {
     case UIModuleConfigKey.ItSystemUsage:
       return ItSystemUsageUiBluePrint;

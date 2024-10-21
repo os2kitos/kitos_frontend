@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { catchError, combineLatestWith, map, of, switchMap, tap } from 'rxjs';
+import { catchError, combineLatestWith, map, of, switchMap } from 'rxjs';
 import {
   APICustomizedUINodeRequestDTO,
   APICustomizedUINodeResponseDTO,
@@ -13,6 +13,7 @@ import { adaptUIModuleCustomization } from 'src/app/shared/models/ui-config/ui-m
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectOrganizationUuid } from '../../user-store/selectors';
 import { UIModuleConfigActions } from './actions';
+import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
 
 @Injectable()
 export class UIModuleCustomizationEffects {
@@ -50,11 +51,11 @@ export class UIModuleCustomizationEffects {
     return this.actions$.pipe(
       ofType(UIModuleConfigActions.putUIModuleCustomization),
       combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
-      switchMap(([{ module: moduleName, }, organizationUuid]) =>
+      switchMap(([{ module: moduleName, updatedNodeRequest }, organizationUuid]) =>
         this.organizationInternalService
           .getSingleOrganizationsInternalV2GetUIModuleCustomization({ moduleName, organizationUuid })
           .pipe(
-            switchMap(([{ module: moduleName, updatedNodeRequest }, organizationUuid, existingUICustomization]) => {
+            switchMap((existingUICustomization) => {
               const requestDto = this.applyUIModuleCustomizationUpdateToRequestDto(
                 existingUICustomization.nodes,
                 updatedNodeRequest
@@ -80,9 +81,10 @@ export class UIModuleCustomizationEffects {
                       uiModuleConfig: itSystemUsagesUIModuleConfig,
                     });
                   }),
-                  catchError(() => of(UIModuleConfigActions.getUIModuleCustomizationError()))
+                  catchError(() => of(UIModuleConfigActions.putUIModuleCustomizationError()))
                 );
-            })
+            }),
+            catchError(() => of(UIModuleConfigActions.getUIModuleCustomizationError()))
           )
       )
     );
