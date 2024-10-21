@@ -24,7 +24,12 @@
         <app-chevron-down-icon class="chevron-icon" *ngIf="node.isExpanded"></app-chevron-down-icon>
         <app-chevron-right-icon class="chevron-icon" *ngIf="!node.isExpanded"></app-chevron-right-icon>
       </ng-container>
-      <app-details-page-link [itemType]="itemType" linkFontSize="small" [itemUuid]="node.uuid">
+      <app-details-page-link
+        [itemType]="itemType"
+        linkFontSize="small"
+        [itemUuid]="node.uuid"
+        [disableRedirect]="disableRedirect"
+      >
         {{ node.name }}
       </app-details-page-link>
       <app-drag-icon *ngIf="!disableDrag && !node.isRoot" cdkDragHandle data-cy="drag-icon"></app-drag-icon>

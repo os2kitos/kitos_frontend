@@ -52,6 +52,7 @@
             [currentNodeUuid]="snapshot.uuid"
             [nodes]="(snapshotTree$ | async) ?? []"
             [disableDrag]="true"
+            [disableRedirect]="true"
             (nodeExpandClick)="nodeExpandClick($event)"
             [maxLevel]="(levelsSubject$ | async) ?? undefined"
           ></app-drag-and-drop-tree>
@@ -65,7 +66,7 @@
       >Gennemfør synkronisering</app-button
     >
     <app-button color="warn" (buttonClick)="cancel()" [disabled]="(isLoading$ | async) ?? false" i18n
-      >Annuler</app-button
+      >Annuller</app-button
     >
   </app-dialog-actions>
 </app-scrollbar-dialog>

@@ -43,8 +43,6 @@ export class LocalAdminImportOrganizationComponent extends BaseComponent impleme
     this.matDialog.open(FkOrgWriteDialogComponent, {
       height: 'auto',
       maxHeight: '95%',
-      width: 'auto',
-      minWidth: '600px',
     });
   }
 
