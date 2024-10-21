@@ -4,7 +4,6 @@ import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
 import { APIGDPRRegistrationsResponseDTO, APIGDPRWriteRequestDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import { fieldOrGroupIsEnabled } from 'src/app/shared/models/helpers/ui-config-helpers';
 import {
   RiskAssessmentResultOptions,
   mapRiskAssessmentEnum,
@@ -91,13 +90,5 @@ export class GdprRiskAssessmentSectionComponent extends BaseComponent implements
     if (valueChange && !valueChange.valid) return;
 
     this.store.dispatch(ITSystemUsageActions.patchITSystemUsage({ gdpr }));
-  }
-
-  public enableGdprPlannedRiskAssessmentDate() {
-    return this.itSystemUsagesUIModuleConfig$.pipe(filterNullish()).subscribe((config) => {
-      return config?.configViewModels
-        ? fieldOrGroupIsEnabled(config?.configViewModels, 'ItSystemUsages.gdpr', 'plannedRiskAssessmentDate')
-        : true;
-    });
   }
 }
