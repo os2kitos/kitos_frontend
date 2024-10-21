@@ -37,7 +37,6 @@ import {
   selectItSystemUsageLastSeenGridConfig,
   selectUsageGridColumns,
 } from 'src/app/store/it-system-usage/selectors';
-import { UIModuleConfigActions } from 'src/app/store/organization/ui-module-customization/actions';
 import { selectGridConfigModificationPermission, selectOrganizationName } from 'src/app/store/user-store/selectors';
 
 @Component({
@@ -506,8 +505,6 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
   }
 
   ngOnInit() {
-    this.store.dispatch(UIModuleConfigActions.getUIModuleConfig({ module: UIModuleConfigKey.ItSystemUsage }));
-
     const existingColumns = this.statePersistingService.get<GridColumn[]>(USAGE_COLUMNS_ID);
     this.store.dispatch(ITSystemUsageActions.getItSystemUsageOverviewRoles());
     if (existingColumns) {

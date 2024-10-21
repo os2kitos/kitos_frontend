@@ -6,8 +6,8 @@ import { Store } from '@ngrx/store';
 import { combineLatest, distinctUntilChanged, filter, map } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
+import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
 import { BreadCrumb } from 'src/app/shared/models/breadcrumbs/breadcrumb.model';
-import { tabIsEnabled } from 'src/app/shared/models/helpers/ui-config-helpers';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
@@ -20,11 +20,10 @@ import {
   selectItSystemUsageUuid,
 } from 'src/app/store/it-system-usage/selectors';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
+import { UIModuleConfigActions } from 'src/app/store/organization/ui-module-customization/actions';
 import { selectITSystemUsageUIModuleConfigEnableTabGdpr } from 'src/app/store/organization/ui-module-customization/selectors';
 import { selectOrganizationName } from 'src/app/store/user-store/selectors';
 import { ITSystemUsageRemoveComponent } from './it-system-usage-remove/it-system-usage-remove.component';
-import { UIModuleConfigActions } from 'src/app/store/organization/ui-module-customization/actions';
-import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
 
 @Component({
   templateUrl: 'it-system-usage-details.component.html',
@@ -38,7 +37,9 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
   public readonly itSystemUsageName$ = this.store.select(selectItSystemUsageName).pipe(filterNullish());
   public readonly itSystemUsageUuid$ = this.store.select(selectItSystemUsageUuid).pipe(filterNullish());
   public readonly hasDeletePermissions$ = this.store.select(selectITSystemUsageHasDeletePermission);
-  public readonly enableGdprTab$ = this.store.select(selectITSystemUsageUIModuleConfigEnableTabGdpr);
+  public readonly enableGdprTab$ = this.store
+    .select(selectITSystemUsageUIModuleConfigEnableTabGdpr)
+    .pipe(filterNullish());
 
   public readonly breadCrumbs$ = combineLatest([
     this.organizationName$,
