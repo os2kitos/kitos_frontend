@@ -12,6 +12,7 @@ api/v1DataProcessingRegistrationValidationINTERNAL.service.ts
 api/v1DataProtectionAdvisorINTERNAL.service.ts
 api/v1DataResponsibleINTERNAL.service.ts
 api/v1DataRowINTERNAL.service.ts
+api/v1DprLocalRoleOptionTypesInternalV2INTERNAL.service.ts
 api/v1EconomyStreamINTERNAL.service.ts
 api/v1ExcelINTERNAL.service.ts
 api/v1ExhibitINTERNAL.service.ts
