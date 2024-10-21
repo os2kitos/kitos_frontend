@@ -3,7 +3,13 @@
     <mat-expansion-panel-header>
       <mat-panel-title>
 
-        <app-checkbox *ngIf="checkboxInTitle" [disabled]="checkboxDisabled" [value]="checkboxValue" (valueChange)="onCheckboxToggled($event)"></app-checkbox>
+        <app-checkbox
+        *ngIf="checkboxInTitle"
+        [disabled]="checkboxDisabled"
+        [value]="checkboxValue"
+        (valueChange)="onCheckboxToggled($event)"
+        (click)="$event.stopPropagation()">
+          </app-checkbox>
           <app-paragraph [bold]="true" paragraphSize="large">{{ title }}</app-paragraph>
           <ng-container *ngIf="checkboxInTitle && checkboxDisabled">
             <app-textbox-info *ngIf="checkboxTooltipText !== undefined" class="textbox-info-left-margin">
