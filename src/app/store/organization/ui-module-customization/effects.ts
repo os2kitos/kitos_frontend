@@ -15,7 +15,6 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectOrganizationUuid } from '../../user-store/selectors';
 import { UIModuleConfigActions } from './actions';
 import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
-import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable()
 export class UIModuleCustomizationEffects {

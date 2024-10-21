@@ -17,23 +17,29 @@ export const uiModuleConfigFeature = createFeature({
     UIModuleConfigInitialState,
     on(
       UIModuleConfigActions.getUIModuleConfigSuccess,
-      (state, { uiModuleConfig }): UIModuleConfigState => updateUIModuleConfigState(state, uiModuleConfig)
+      (state, { uiModuleConfig }): UIModuleConfigState => ({ ...state, uiModuleConfigs: updateUIModuleConfigs(state, uiModuleConfig) })
     ),
     on(
       UIModuleConfigActions.putUIModuleCustomizationSuccess,
-      (state, { uiModuleConfig }): UIModuleConfigState => updateUIModuleConfigState(state, uiModuleConfig)
+      (state, { uiModuleConfig }): UIModuleConfigState => ({ ...state, uiModuleConfigs: updateUIModuleConfigs(state, uiModuleConfig) })
     )
   ),
 });
 
-function updateUIModuleConfigState(state: UIModuleConfigState, newUIModuleConfig: UIModuleConfig): UIModuleConfigState {
-  const uiModuleConfigs = state.uiModuleConfigs;
-  const existingConfigIndex = uiModuleConfigs.findIndex((c) => c.module === newUIModuleConfig.module);
-  const updatedUIModuleConfigs = [...uiModuleConfigs];
+function updateUIModuleConfigs(state: UIModuleConfigState, newUIModuleConfig: UIModuleConfig): UIModuleConfig[] {
+  const existingUIModuleConfigs = state.uiModuleConfigs;
+  const existingConfigIndex = existingUIModuleConfigs.findIndex((c) => c.module === newUIModuleConfig.module);
+  const updatedUIModuleConfigs = [...existingUIModuleConfigs];
+
   if (existingConfigIndex === -1) {
     updatedUIModuleConfigs.push(newUIModuleConfig);
   } else {
-    updatedUIModuleConfigs[existingConfigIndex].configViewModels = newUIModuleConfig.configViewModels;
+    const existingConfig = updatedUIModuleConfigs[existingConfigIndex];
+    updatedUIModuleConfigs[existingConfigIndex] = {
+      ...existingConfig,
+      configViewModels: newUIModuleConfig.configViewModels,
+    };
   }
-  return { ...state, uiModuleConfigs: updatedUIModuleConfigs };
+  
+  return updatedUIModuleConfigs;
 }
