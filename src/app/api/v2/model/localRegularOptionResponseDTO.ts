@@ -14,6 +14,7 @@
 export interface APILocalRegularOptionResponseDTO { 
     isActive?: boolean;
     isObligatory?: boolean;
+    isLocallyAvailable?: boolean;
     /**
      * Extended description of the choice
      */

@@ -3991,6 +3991,36 @@
       <trans-unit id="8977823802262029818" datatype="html">
         <source>Følsomme persondata</source>
       </trans-unit>
+      <trans-unit id="1866414868800228214" datatype="html">
+        <source>It kontrakt roller</source>
+      </trans-unit>
+      <trans-unit id="3002243841820420770" datatype="html">
+        <source>It kontrakt udfaldsrum</source>
+      </trans-unit>
+      <trans-unit id="1476830282360846322" datatype="html">
+        <source>Opsigelsesfrister</source>
+      </trans-unit>
+      <trans-unit id="2856429460614878961" datatype="html">
+        <source>Pris reguleringer</source>
+      </trans-unit>
+      <trans-unit id="3528465926860037088" datatype="html">
+        <source>Betalingsfrekvenser</source>
+      </trans-unit>
+      <trans-unit id="4831733483690855814" datatype="html">
+        <source>Kontrakttyper</source>
+      </trans-unit>
+      <trans-unit id="7280622341182001048" datatype="html">
+        <source>Genanskaffelsesstrategier</source>
+      </trans-unit>
+      <trans-unit id="7318872809958060040" datatype="html">
+        <source>Betalingsmodeller</source>
+      </trans-unit>
+      <trans-unit id="781230654751231655" datatype="html">
+        <source>Kontraktskabeloner</source>
+      </trans-unit>
+      <trans-unit id="7925424443502844356" datatype="html">
+        <source>Indkøbsformer</source>
+      </trans-unit>
       <trans-unit id="1079562510399620869" datatype="html">
         <source>Niveauer der synkroniseres</source>
       </trans-unit>

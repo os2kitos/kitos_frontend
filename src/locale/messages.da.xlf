@@ -5215,6 +5215,46 @@
         <source>It system roller</source>
         <target state="new">It system roller</target>
       </trans-unit>
+      <trans-unit id="3002243841820420770" datatype="html">
+        <source>It kontrakt udfaldsrum</source>
+        <target state="new">It kontrakt udfaldsrum</target>
+      </trans-unit>
+      <trans-unit id="1866414868800228214" datatype="html">
+        <source>It kontrakt roller</source>
+        <target state="new">It kontrakt roller</target>
+      </trans-unit>
+      <trans-unit id="4831733483690855814" datatype="html">
+        <source>Kontrakttyper</source>
+        <target state="new">Kontrakttyper</target>
+      </trans-unit>
+      <trans-unit id="781230654751231655" datatype="html">
+        <source>Kontraktskabeloner</source>
+        <target state="new">Kontraktskabeloner</target>
+      </trans-unit>
+      <trans-unit id="7925424443502844356" datatype="html">
+        <source>Indkøbsformer</source>
+        <target state="new">Indkøbsformer</target>
+      </trans-unit>
+      <trans-unit id="7318872809958060040" datatype="html">
+        <source>Betalingsmodeller</source>
+        <target state="new">Betalingsmodeller</target>
+      </trans-unit>
+      <trans-unit id="3528465926860037088" datatype="html">
+        <source>Betalingsfrekvenser</source>
+        <target state="new">Betalingsfrekvenser</target>
+      </trans-unit>
+      <trans-unit id="2856429460614878961" datatype="html">
+        <source>Pris reguleringer</source>
+        <target state="new">Pris reguleringer</target>
+      </trans-unit>
+      <trans-unit id="7280622341182001048" datatype="html">
+        <source>Genanskaffelsesstrategier</source>
+        <target state="new">Genanskaffelsesstrategier</target>
+      </trans-unit>
+      <trans-unit id="1476830282360846322" datatype="html">
+        <source>Opsigelsesfrister</source>
+        <target state="new">Opsigelsesfrister</target>
+      </trans-unit>
       <trans-unit id="7314347350185597624" datatype="html">
         <source>Niveauer</source>
         <target state="new">Niveauer</target>

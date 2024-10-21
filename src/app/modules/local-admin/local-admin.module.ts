@@ -9,6 +9,7 @@ import { LocalAdminInformationComponent } from './local-admin-information/local-
 import { LocalAdminItSystemComponent } from './local-admin-it-system/local-admin-it-system.component';
 import { LocalAdminOrganizationComponent } from './local-admin-organization/local-admin-organization.component';
 import { OrganizationsGridComponent } from './local-admin-organization/organizations-grid/organizations-grid.component';
+import { LocalAdminItContractComponent } from './local-admin-it-contract/local-admin-it-contract.component';
 import { LocalAdminComponent } from './local-admin.component';
 import { LocalAdminRouterModule } from './local-admin.routes';
 
@@ -19,6 +20,7 @@ import { LocalAdminRouterModule } from './local-admin.routes';
     LocalAdminOrganizationComponent,
     OrganizationsGridComponent,
     LocalAdminItSystemComponent,
+    LocalAdminItContractComponent,
     LocalAdminImportComponent,
     LocalAdminImportOrganizationComponent,
     FkOrgWriteDialogComponent,
