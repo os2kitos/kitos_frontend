@@ -57,6 +57,7 @@
         size="large"
         [routerLink]="[AppPath.roles]"
         routerLinkActive="active"
+        *ngIf="(enableSystemRolesTab$ | async) !== false"
         ><app-roles-icon></app-roles-icon>
         <ng-container i18n>Systemroller</ng-container>
       </app-button>
@@ -66,6 +67,7 @@
         size="large"
         [routerLink]="[AppPath.organization]"
         routerLinkActive="active"
+        *ngIf="(enableOrganizationTab$ | async) !== false"
         ><app-organization-icon></app-organization-icon>
         <ng-container i18n>Organisation</ng-container>
       </app-button>
@@ -75,6 +77,7 @@
         size="large"
         [routerLink]="[AppPath.relations]"
         routerLinkActive="active"
+        *ngIf="(enableSystemRelationsTab$ | async) !== false"
         ><app-intersect-icon></app-intersect-icon>
         <ng-container i18n>Relationer</ng-container>
       </app-button>
@@ -84,6 +87,7 @@
         size="large"
         [routerLink]="[AppPath.itInterfaces]"
         routerLinkActive="active"
+        *ngIf="(enableInterfacesTab$ | async) !== false"
         ><app-systems-icon></app-systems-icon>
         <ng-container i18n>Udstillede snitflader</ng-container>
       </app-button>
@@ -93,6 +97,7 @@
         size="large"
         [routerLink]="[AppPath.archiving]"
         routerLinkActive="active"
+        *ngIf="(enableArchivingTab$ | async) !== false"
         ><app-archive-icon></app-archive-icon>
         <ng-container i18n>Arkivering</ng-container>
       </app-button>
@@ -102,6 +107,7 @@
         size="large"
         [routerLink]="[AppPath.hierarchy]"
         routerLinkActive="active"
+        *ngIf="(enableHierarchyTab$ | async) !== false"
         ><app-hierarchy-icon></app-hierarchy-icon>
         <ng-container i18n>Hierarki</ng-container>
       </app-button>
@@ -111,6 +117,7 @@
         size="large"
         [routerLink]="[AppPath.kle]"
         routerLinkActive="active"
+        *ngIf="(enableLocalKleTab$ | async) !== false"
         ><app-table-icon></app-table-icon>
         <ng-container i18n>Lokale KLE</ng-container>
       </app-button>
@@ -120,6 +127,7 @@
         size="large"
         [routerLink]="[AppPath.notifications]"
         routerLinkActive="active"
+        *ngIf="(enableNotificationsTab$ | async) !== false"
         ><app-notification-icon></app-notification-icon>
         <ng-container i18n>Advis</ng-container>
       </app-button>
@@ -129,6 +137,7 @@
         size="large"
         [routerLink]="[AppPath.externalReferences]"
         routerLinkActive="active"
+        *ngIf="(enableLocalReferencesTab$ | async) !== false"
         ><app-bookmark-icon></app-bookmark-icon>
         <ng-container i18n>Lokale referencer</ng-container>
       </app-button>

@@ -21,7 +21,18 @@ import {
 } from 'src/app/store/it-system-usage/selectors';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
 import { UIModuleConfigActions } from 'src/app/store/organization/ui-module-customization/actions';
-import { selectITSystemUsageUIModuleConfigEnabledTabGdpr } from 'src/app/store/organization/ui-module-customization/selectors';
+import {
+  selectITSystemUsageUIModuleConfigEnabledTabArchiving,
+  selectITSystemUsageUIModuleConfigEnabledTabGdpr,
+  selectITSystemUsageUIModuleConfigEnabledTabHierarchy,
+  selectITSystemUsageUIModuleConfigEnabledTabInterfaces,
+  selectITSystemUsageUIModuleConfigEnabledTabLocalKle,
+  selectITSystemUsageUIModuleConfigEnabledTabLocalReferences,
+  selectITSystemUsageUIModuleConfigEnabledTabNotifications,
+  selectITSystemUsageUIModuleConfigEnabledTabOrganization,
+  selectITSystemUsageUIModuleConfigEnabledTabSystemRelations,
+  selectITSystemUsageUIModuleConfigEnabledTabSystemRoles,
+} from 'src/app/store/organization/ui-module-customization/selectors';
 import { selectOrganizationName } from 'src/app/store/user-store/selectors';
 import { ITSystemUsageRemoveComponent } from './it-system-usage-remove/it-system-usage-remove.component';
 
@@ -37,8 +48,45 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
   public readonly itSystemUsageName$ = this.store.select(selectItSystemUsageName).pipe(filterNullish());
   public readonly itSystemUsageUuid$ = this.store.select(selectItSystemUsageUuid).pipe(filterNullish());
   public readonly hasDeletePermissions$ = this.store.select(selectITSystemUsageHasDeletePermission);
+
   public readonly enableGdprTab$ = this.store
     .select(selectITSystemUsageUIModuleConfigEnabledTabGdpr)
+    .pipe(filterNullish());
+
+  public readonly enableSystemRolesTab$ = this.store
+    .select(selectITSystemUsageUIModuleConfigEnabledTabSystemRoles)
+    .pipe(filterNullish());
+
+  public readonly enableOrganizationTab$ = this.store
+    .select(selectITSystemUsageUIModuleConfigEnabledTabOrganization)
+    .pipe(filterNullish());
+
+  public readonly enableSystemRelationsTab$ = this.store
+    .select(selectITSystemUsageUIModuleConfigEnabledTabSystemRelations)
+    .pipe(filterNullish());
+
+  public readonly enableInterfacesTab$ = this.store
+    .select(selectITSystemUsageUIModuleConfigEnabledTabInterfaces)
+    .pipe(filterNullish());
+
+  public readonly enableArchivingTab$ = this.store
+    .select(selectITSystemUsageUIModuleConfigEnabledTabArchiving)
+    .pipe(filterNullish());
+
+  public readonly enableHierarchyTab$ = this.store
+    .select(selectITSystemUsageUIModuleConfigEnabledTabHierarchy)
+    .pipe(filterNullish());
+
+  public readonly enableLocalKleTab$ = this.store
+    .select(selectITSystemUsageUIModuleConfigEnabledTabLocalKle)
+    .pipe(filterNullish());
+
+  public readonly enableNotificationsTab$ = this.store
+    .select(selectITSystemUsageUIModuleConfigEnabledTabNotifications)
+    .pipe(filterNullish());
+
+  public readonly enableLocalReferencesTab$ = this.store
+    .select(selectITSystemUsageUIModuleConfigEnabledTabLocalReferences)
     .pipe(filterNullish());
 
   public readonly breadCrumbs$ = combineLatest([
