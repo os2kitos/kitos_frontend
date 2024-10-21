@@ -99,29 +99,4 @@ export class UIConfigService {
       });
     }
   }
-
-  public tabIsEnabled(uiConfigViewModels: UIConfigNodeViewModel[], tabFullKey: string): boolean {
-    const tabViewModel = this.getTabViewModelFromModule(uiConfigViewModels, tabFullKey);
-    return tabViewModel?.isEnabled ?? true;
-  }
-
-  public fieldOrGroupIsEnabled(
-    uiConfigViewModels: UIConfigNodeViewModel[],
-    tabFullKey: string,
-    fieldKey: string
-  ): boolean {
-    const tabViewModel = this.getTabViewModelFromModule(uiConfigViewModels, tabFullKey);
-    const tabViewModelChildren = tabViewModel?.children;
-    if (!tabViewModelChildren) return true;
-
-    const fieldFullKey = tabFullKey.concat('.').concat(fieldKey);
-    const fieldViewModel = tabViewModelChildren.find((vm) => vm.fullKey === fieldFullKey);
-    return fieldViewModel?.isEnabled ?? true;
-  }
-
-  private getTabViewModelFromModule(uiConfigViewModels: UIConfigNodeViewModel[], tabFullKey: string): UIConfigNodeViewModel | undefined {
-    const moduleConfigChildren = uiConfigViewModels[0].children;
-    if (!moduleConfigChildren) return undefined;
-    return moduleConfigChildren.find((vm) => vm.fullKey === tabFullKey);
-  }
 }

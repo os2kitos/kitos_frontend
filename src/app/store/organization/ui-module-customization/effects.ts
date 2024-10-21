@@ -9,7 +9,6 @@ import {
   APIUIModuleCustomizationResponseDTO,
   APIV2OrganizationsInternalINTERNALService,
 } from 'src/app/api/v2';
-import { buildUIModuleConfig, getUIBlueprint } from 'src/app/shared/models/helpers/ui-config-helpers';
 import { adaptUIModuleCustomization } from 'src/app/shared/models/ui-config/ui-module-customization.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectOrganizationUuid } from '../../user-store/selectors';
