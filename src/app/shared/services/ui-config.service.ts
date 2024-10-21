@@ -1,21 +1,20 @@
 import { Injectable } from '@angular/core';
-import { ItSystemUsageUiBluePrint } from '../models/ui-config/it-system-usages-blueprint';
-import { UINodeBlueprint } from '../models/ui-config/ui-node-blueprint.model';
 import { UIModuleConfigKey } from '../enums/ui-module-config-key';
-import { UIModuleConfig } from '../models/ui-config/ui-module-config.model';
+import { ItSystemUsageUiBluePrint } from '../models/ui-config/it-system-usages-blueprint';
 import { UIConfigNodeViewModel } from '../models/ui-config/ui-config-node-view-model.model';
+import { UIModuleConfig } from '../models/ui-config/ui-module-config.model';
+import { UINodeBlueprint } from '../models/ui-config/ui-node-blueprint.model';
 import { UINodeCustomization } from '../models/ui-config/ui-node-customization';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UIConfigService {
-
   public buildUIModuleConfig(
-    blueprint: UINodeBlueprint,
     uiModuleCustomizations: UINodeCustomization[],
     module: UIModuleConfigKey
   ): UIModuleConfig {
+    const blueprint = this.getUIBlueprintWithFullKeys(module);
     const uiModuleConfigViewModels: UIConfigNodeViewModel[] = this.buildUIConfigNodeViewModels(
       blueprint,
       uiModuleCustomizations
@@ -69,7 +68,7 @@ export class UIConfigService {
     return nodeViewModels;
   }
 
-  public getUIBlueprint(module: UIModuleConfigKey): UINodeBlueprint {
+  private getUIBlueprintWithFullKeys(module: UIModuleConfigKey): UINodeBlueprint {
     const blueprint = this.resolveUIModuleBlueprint(module);
     this.setupUIBlueprintFullKeys(module, blueprint, []);
     return blueprint;
