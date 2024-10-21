@@ -8,6 +8,7 @@ import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
 import { RegistrationEntityTypes } from '../models/registrations/registration-entity-categories.model';
+import { OrganizationActions } from 'src/app/store/organization/actions';
 
 export function getSaveFilterAction(entityType: RegistrationEntityTypes) {
   switch (entityType) {
@@ -23,6 +24,8 @@ export function getSaveFilterAction(entityType: RegistrationEntityTypes) {
       return DataProcessingActions.saveDataProcessingFilter;
     case 'organization-user':
       return OrganizationUserActions.saveOrganizationUsersFilter;
+    case 'local-admin-organization':
+      return OrganizationActions.saveOrganizationsFilter;
     default:
       throw `Save filter action for entity type ${entityType} not implemented`;
   }
@@ -42,6 +45,8 @@ export function getApplyFilterAction(entityType: RegistrationEntityTypes) {
       return DataProcessingActions.applyDataProcessingFilter;
     case 'organization-user':
       return OrganizationUserActions.applyOrganizationUsersFilter;
+    case 'local-admin-organization':
+      return OrganizationActions.applyOrganizationsFilter;
     default:
       throw `Apply filter action for entity type ${entityType} not implemented`;
   }

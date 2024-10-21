@@ -20,7 +20,7 @@ import {
   DATA_PROCESSING_SECTION_NAME,
   GDPR_SECTION_NAME,
   LOCAL_REFERENCES_SECTION_NAME,
-  ORGANISATION_SECTION_NAME,
+  ORGANIZATION_SECTION_NAME,
   RELATIONS_SECTION_NAME,
   USAGE_COLUMNS_ID,
   USAGE_SECTION_NAME,
@@ -187,7 +187,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     {
       field: 'ResponsibleOrganizationUnitName',
       title: $localize`Ansv. organisationsenhed`,
-      section: ORGANISATION_SECTION_NAME,
+      section: ORGANIZATION_SECTION_NAME,
       extraFilter: 'organization-unit',
       width: 350,
       hidden: false,
@@ -196,7 +196,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     {
       field: 'RelevantOrganizationUnitNamesAsCsv',
       title: $localize`Relevante organisationsenheder`,
-      section: ORGANISATION_SECTION_NAME,
+      section: ORGANIZATION_SECTION_NAME,
       extraFilter: 'organization-unit',
       width: 400,
       hidden: false,
@@ -221,7 +221,13 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       hidden: false,
       persistId: 'busitype',
     },
-    { field: 'ItSystemKLEIdsAsCsv', title: $localize`KLE ID`, section: this.systemSectionName, hidden: true, persistId: 'taskkey' },
+    {
+      field: 'ItSystemKLEIdsAsCsv',
+      title: $localize`KLE ID`,
+      section: this.systemSectionName,
+      hidden: true,
+      persistId: 'taskkey',
+    },
     {
       field: 'ItSystemKLENamesAsCsv',
       title: $localize`KLE navn`,

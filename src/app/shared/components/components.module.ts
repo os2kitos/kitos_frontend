@@ -135,6 +135,8 @@ import { CheckboxButtonComponent } from './buttons/checkbox-button/checkbox-butt
 import { MultiSelectDropdownComponent } from './dropdowns/multi-select-dropdown/multi-select-dropdown.component';
 import { LocalAdminColumnConfigButtonComponent } from './local-admin-column-config-button/local-admin-column-config-button.component';
 import { NumberCircleComponent } from './number-circle/number-circle.component';
+import { EditOptionTypeDialogComponent } from './option-type-table/edit-option-type-dialog/edit-option-type-dialog.component';
+import { OptionTypeTableComponent } from './option-type-table/option-type-table.component';
 import { ResetToOrgColumnsConfigButtonComponent } from './reset-to-org-columns-config-button/reset-to-org-columns-config-button.component';
 import { RoleRowComponent } from './role-table/role-row/role-row.component';
 import { RoleTableContainerComponent } from './role-table/role-table-container/role-table-container.component';
@@ -254,6 +256,8 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     MultiSelectDropdownComponent,
     SnackbarActionsComponent,
     AccordionHeaderComponent,
+    OptionTypeTableComponent,
+    EditOptionTypeDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -380,6 +384,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     MultiSelectDropdownComponent,
     SnackbarActionsComponent,
     AccordionHeaderComponent,
+    OptionTypeTableComponent,
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },

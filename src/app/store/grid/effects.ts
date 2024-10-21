@@ -10,6 +10,7 @@ import { ITSystemUsageActions } from '../it-system-usage/actions';
 import { ITSystemActions } from '../it-system/actions';
 import { OrganizationUserActions } from '../organization/organization-user/actions';
 import { GridExportActions } from './actions';
+import { OrganizationActions } from '../organization/actions';
 
 @Injectable()
 export class GridExportEffects {
@@ -22,19 +23,22 @@ export class GridExportEffects {
         return of(action).pipe(
           mergeMap((action) => {
             const gridState = action.gridState;
+            const odataString = toODataString(gridState);
             switch (action.entityType) {
               case 'it-system-usage':
-                return of(ITSystemUsageActions.getITSystemUsages(toODataString(gridState)));
+                return of(ITSystemUsageActions.getITSystemUsages(odataString));
               case 'it-system':
-                return of(ITSystemActions.getITSystems(toODataString(gridState)));
+                return of(ITSystemActions.getITSystems(odataString));
               case 'it-contract':
-                return of(ITContractActions.getITContracts(toODataString(gridState)));
+                return of(ITContractActions.getITContracts(odataString));
               case 'data-processing-registration':
-                return of(DataProcessingActions.getDataProcessings(toODataString(gridState)));
+                return of(DataProcessingActions.getDataProcessings(odataString));
               case 'it-interface':
-                return of(ITInterfaceActions.getITInterfaces(toODataString(gridState)));
+                return of(ITInterfaceActions.getITInterfaces(odataString));
               case 'organization-user':
-                return of(OrganizationUserActions.getOrganizationUsers(toODataString(gridState)));
+                return of(OrganizationUserActions.getOrganizationUsers(odataString));
+              case 'local-admin-organization':
+                return of(OrganizationActions.getOrganizations(odataString));
               default:
                 throw 'Grid Effects Excel export not implemented for entity type: ' + action.entityType;
             }

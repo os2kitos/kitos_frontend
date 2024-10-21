@@ -5071,6 +5071,14 @@
         <source>Brugeren har ingen roller</source>
         <target state="new">Brugeren har ingen roller</target>
       </trans-unit>
+      <trans-unit id="2961498540444259062" datatype="html">
+        <source>Udenlandsk virksomhed</source>
+        <target state="new">Udenlandsk virksomhed</target>
+      </trans-unit>
+      <trans-unit id="4621931238368826704" datatype="html">
+        <source>Organisationer Overblik</source>
+        <target state="new">Organisationer Overblik</target>
+      </trans-unit>
       <trans-unit id="7224605356565787228" datatype="html">
         <source>Er du sikker på, at du vil overføre rollerne?</source>
         <target state="new">Er du sikker på, at du vil overføre rollerne?</target>
@@ -5120,8 +5128,8 @@
         <target state="new"> Slet bruger </target>
       </trans-unit>
       <trans-unit id="7661266723054940833" datatype="html">
-        <source>Information om <x id="INTERPOLATION" equiv-text="{{organizationName}}"/></source>
-        <target state="new">Information om <x id="INTERPOLATION" equiv-text="{{organizationName}}"/></target>
+        <source>Information om <x id="INTERPOLATION" equiv-text="{{ organizationName }}"/></source>
+        <target state="new">Information om <x id="INTERPOLATION" equiv-text="{{ organizationName }}"/></target>
       </trans-unit>
       <trans-unit id="4335783776773944989" datatype="html">
         <source>Kommune</source>
@@ -5147,105 +5155,29 @@
         <source>Kunne ikke opdatere organisation.</source>
         <target state="new">Kunne ikke opdatere organisation.</target>
       </trans-unit>
-      <trans-unit id="7314347350185597624" datatype="html">
-        <source>Niveauer</source>
-        <target state="new">Niveauer</target>
+      <trans-unit id="616679104901444882" datatype="html">
+        <source>Organisationer</source>
+        <target state="new">Organisationer</target>
       </trans-unit>
-      <trans-unit id="7807872089748525152" datatype="html">
-        <source>KITOS synkroniserer 2 niveauer fra organisationshierarkiet i FK Organisation. Slet indtastningen for at synkronisere det fulde organisationshierarki. </source>
-        <target state="new">KITOS synkroniserer 2 niveauer fra organisationshierarkiet i FK Organisation. Slet indtastningen for at synkronisere det fulde organisationshierarki. </target>
+      <trans-unit id="4778572585249502542" datatype="html">
+        <source>Organisationer i Kitos</source>
+        <target state="new">Organisationer i Kitos</target>
       </trans-unit>
-      <trans-unit id="4970524737932979706" datatype="html">
-        <source>Tjek automatisk efter ventende opdateringer*</source>
-        <target state="new">Tjek automatisk efter ventende opdateringer*</target>
+      <trans-unit id="616679104901444882" datatype="html">
+        <source>Organisationer</source>
+        <target state="new">Organisationer</target>
       </trans-unit>
-      <trans-unit id="7564129223460699441" datatype="html">
-        <source>* Foretager automatisk tjek hver mandag nat og sender en email med oversigt over ventende opdateringer til brugere i kommunen med rollen &quot;Lokal Administrator&quot;</source>
-        <target state="new">* Foretager automatisk tjek hver mandag nat og sender en email med oversigt over ventende opdateringer til brugere i kommunen med rollen &quot;Lokal Administrator&quot;</target>
+      <trans-unit id="1318146097476362841" datatype="html">
+        <source>Enheden kunne ikke opdateres</source>
+        <target state="new">Enheden kunne ikke opdateres</target>
       </trans-unit>
-      <trans-unit id="6838054133734350258" datatype="html">
-        <source>Forhåndsvisning</source>
-        <target state="new">Forhåndsvisning</target>
+      <trans-unit id="5097144162233589680" datatype="html">
+        <source>Enheden blev opdateret</source>
+        <target state="new">Enheden blev opdateret</target>
       </trans-unit>
-      <trans-unit id="1778917295361559747" datatype="html">
-        <source>Redigér forbindelsen til FK Organisation</source>
-        <target state="new">Redigér forbindelsen til FK Organisation</target>
-      </trans-unit>
-      <trans-unit id="266398842197719025" datatype="html">
-        <source>Opret forbindelse til FK Organisation</source>
-        <target state="new">Opret forbindelse til FK Organisation</target>
-      </trans-unit>
-      <trans-unit id="3613884517590485356" datatype="html">
-        <source>Adgang</source>
-        <target state="new">Adgang</target>
-      </trans-unit>
-      <trans-unit id="7185813373512757352" datatype="html">
-        <source>KITOS har adgang til organisationens data via FK Organisation</source>
-        <target state="new">KITOS har adgang til organisationens data via FK Organisation</target>
-      </trans-unit>
-      <trans-unit id="8520370683434491577" datatype="html">
-        <source>KITOS har <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>ikke<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> adgang til organisationens data via FK Organisation</source>
-        <target state="new">KITOS har <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>ikke<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> adgang til organisationens data via FK Organisation</target>
-      </trans-unit>
-      <trans-unit id="8625215033104476377" datatype="html">
-        <source>Synkronisering</source>
-        <target state="new">Synkronisering</target>
-      </trans-unit>
-      <trans-unit id="1079562510399620869" datatype="html">
-        <source>Niveauer der synkroniseres</source>
-        <target state="new">Niveauer der synkroniseres</target>
-      </trans-unit>
-      <trans-unit id="6844561891401320247" datatype="html">
-        <source>Tjekker automatisk (hver mandag nat) efter ventende opdateringer</source>
-        <target state="new">Tjekker automatisk (hver mandag nat) efter ventende opdateringer</target>
-      </trans-unit>
-      <trans-unit id="583139169074298236" datatype="html">
-        <source>Dato for seneste automatiske tjek</source>
-        <target state="new">Dato for seneste automatiske tjek</target>
-      </trans-unit>
-      <trans-unit id="3038305000121963915" datatype="html">
-        <source> Alle </source>
-        <target state="new"> Alle </target>
-      </trans-unit>
-      <trans-unit id="4785447215656230108" datatype="html">
-        <source> Ikke tilgængeligt </source>
-        <target state="new"> Ikke tilgængeligt </target>
-      </trans-unit>
-      <trans-unit id="1338623449492001002" datatype="html">
-        <source> Ikke relevant </source>
-        <target state="new"> Ikke relevant </target>
-      </trans-unit>
-      <trans-unit id="6948703614322883076" datatype="html">
-        <source>Organisationen er <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>ikke<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> forbundet til FK Organisation</source>
-        <target state="new">Organisationen er <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>ikke<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> forbundet til FK Organisation</target>
-      </trans-unit>
-      <trans-unit id="961883493480058344" datatype="html">
-        <source>Forbind</source>
-        <target state="new">Forbind</target>
-      </trans-unit>
-      <trans-unit id="2278946622206095287" datatype="html">
-        <source>Der er problemer med den eksisterende serviceaftale, der giver KITOS adgang til data fra din kommune i FK Organisatoin. Kontakt venligst den KITOS ansvarlige i din kommune for hjælp.</source>
-        <target state="new">Der er problemer med den eksisterende serviceaftale, der giver KITOS adgang til data fra din kommune i FK Organisatoin. Kontakt venligst den KITOS ansvarlige i din kommune for hjælp.</target>
-      </trans-unit>
-      <trans-unit id="600640392094807591" datatype="html">
-        <source>Der enten mangler eller er registreret et ugyldigt CVR nummer på din kommune i KITOS.</source>
-        <target state="new">Der enten mangler eller er registreret et ugyldigt CVR nummer på din kommune i KITOS.</target>
-      </trans-unit>
-      <trans-unit id="2012701206354685680" datatype="html">
-        <source>Din organisation mangler en gyldig serviceaftale der giver KITOS adgang til data fra din kommune i FK Organisation. Kontakt venligst den KITOS ansvarlige i din kommune for hjælp.</source>
-        <target state="new">Din organisation mangler en gyldig serviceaftale der giver KITOS adgang til data fra din kommune i FK Organisation. Kontakt venligst den KITOS ansvarlige i din kommune for hjælp.</target>
-      </trans-unit>
-      <trans-unit id="6017792095370304684" datatype="html">
-        <source>Der skete en fejl ifm. tjek for forbindelsen til FK Organisation. Genindlæs venligst siden for at prøve igen.</source>
-        <target state="new">Der skete en fejl ifm. tjek for forbindelsen til FK Organisation. Genindlæs venligst siden for at prøve igen.</target>
-      </trans-unit>
-      <trans-unit id="41369724053306167" datatype="html">
-        <source>Forbindelse til FK Organisation blev oprettet</source>
-        <target state="new">Forbindelse til FK Organisation blev oprettet</target>
-      </trans-unit>
-      <trans-unit id="6478902607086410146" datatype="html">
-        <source>Kunne ikke oprette en forbindelse til Fk Organisation</source>
-        <target state="new">Kunne ikke oprette en forbindelse til Fk Organisation</target>
+      <trans-unit id="4100126813016547603" datatype="html">
+        <source>Organisationsroller i din orginsation</source>
+        <target state="new">Organisationsroller i din orginsation</target>
       </trans-unit>
     </body>
   </file>

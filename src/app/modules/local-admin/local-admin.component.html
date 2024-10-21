@@ -10,7 +10,12 @@
       ><app-document-icon></app-document-icon>
       <ng-container i18n>Information</ng-container>
     </app-button>
-    <app-button buttonStyle="tertiary" color="accent" size="large" routerLinkActive="active"
+    <app-button
+      buttonStyle="tertiary"
+      color="accent"
+      size="large"
+      routerLinkActive="active"
+      [routerLink]="[AppPath.organization]"
       ><app-organization-icon></app-organization-icon>
       <ng-container i18n>Organisation</ng-container>
     </app-button>

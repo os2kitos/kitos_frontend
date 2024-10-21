@@ -7,6 +7,7 @@ import { Component, Input } from '@angular/core';
 })
 export class ExportMenuButtonComponent {
   @Input() exportMethod!: (exportAllColumns: boolean) => void;
+  @Input() showColumnsOnlyOption = true;
 
   triggerMethod(exportAllColumns: boolean): void {
     if (this.exportMethod) {

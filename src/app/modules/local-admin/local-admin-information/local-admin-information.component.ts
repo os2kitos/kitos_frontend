@@ -54,9 +54,11 @@ export class LocalAdminInformationComponent extends BaseComponent implements OnI
       )
     );
 
-    this.hasModifyCvrPermission$.pipe(filterNullish()).subscribe((hasModifyCvrPermission) => {
-      if (!hasModifyCvrPermission) this.form.controls.cvrControl.disable();
-    });
+    this.subscriptions.add(
+      this.hasModifyCvrPermission$.pipe(filterNullish()).subscribe((hasModifyCvrPermission) => {
+        if (!hasModifyCvrPermission) this.form.controls.cvrControl.disable();
+      })
+    );
   }
 
   public patchOrganizationName(newName: string | undefined) {
