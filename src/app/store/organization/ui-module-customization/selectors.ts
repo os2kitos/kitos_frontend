@@ -19,6 +19,15 @@ const createTabEnabledSelector = (tabFullKey: string) =>
     return tabIsEnabled(moduleConfigViewModels, tabFullKey);
   });
 
+  // eslint-disable-next-line @ngrx/prefix-selectors-with-select
+  const createFieldOrGroupEnabledSelector = (tabFullKey: string, fieldKey: string) =>
+    createSelector(selectITSystemUsageUIModuleConfig, (itSystemUsageModuleConfig) => {
+      const moduleConfigViewModels = itSystemUsageModuleConfig?.configViewModels;
+      if (!moduleConfigViewModels) return true;
+
+      return fieldOrGroupIsEnabled(moduleConfigViewModels, 'ItSystemUsages.gdpr', 'plannedRiskAssessmentDate');
+    })
+
 export const selectITSystemUsageUIModuleConfig = createSelector(
   selectUIModuleCustomizationState,
   (state: UIModuleConfigState) => {
@@ -28,12 +37,4 @@ export const selectITSystemUsageUIModuleConfig = createSelector(
 
 export const selectITSystemUsageUIModuleConfigEnabledTabGdpr = createTabEnabledSelector('ItSystemUsages.gdpr');
 
-export const selectITSystemUsageUIModuleConfigEnabledFieldGdprPlannedRiskAssessmentDate = createSelector(
-  selectITSystemUsageUIModuleConfig,
-  (itSystemUsageModuleConfig) => {
-    const moduleConfigViewModels = itSystemUsageModuleConfig?.configViewModels;
-    if (!moduleConfigViewModels) return true;
-
-    return fieldOrGroupIsEnabled(moduleConfigViewModels, 'ItSystemUsages.gdpr', 'plannedRiskAssessmentDate');
-  }
-);
+export const selectITSystemUsageUIModuleConfigEnabledFieldGdprPlannedRiskAssessmentDate = createFieldOrGroupEnabledSelector('ItSystemUsages.gdpr', 'plannedRiskAssessmentDate');
