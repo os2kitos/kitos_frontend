@@ -33,7 +33,7 @@ export class LocalAdminItSystemUsagesComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(
-      UIModuleConfigActions.getUIModuleCustomization({
+      UIModuleConfigActions.getUIModuleConfig({
         module: this.itSystemUsageModuleKey,
       })
     );
