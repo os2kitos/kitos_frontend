@@ -3,11 +3,9 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { catchError, combineLatestWith, map, of, switchMap } from 'rxjs';
 import { APIV2OrganizationsInternalINTERNALService } from 'src/app/api/v2';
-import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
 import {
   collectUIConfigNodeViewModels as buildUIModuleConfig,
-  getItSystemUsageUiBluePrint,
-  resolveUIBlueprint,
+  getUIBlueprint,
 } from 'src/app/shared/models/helpers/ui-config-helpers';
 import { adaptUIModuleCustomization } from 'src/app/shared/models/ui-config/ui-module-customization.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
@@ -34,7 +32,7 @@ export class UIModuleCustomizationEffects {
             map((uiModuleCustomizationDto) => {
               const uiModuleCustomization = adaptUIModuleCustomization(uiModuleCustomizationDto);
               const moduleCustomizationNodes = uiModuleCustomization?.nodes ?? [];
-              const blueprint = resolveUIBlueprint(moduleName)
+              const blueprint = getUIBlueprint(moduleName);
               const itSystemUsagesUIModuleConfig = buildUIModuleConfig(blueprint, moduleCustomizationNodes, moduleName);
               return UIModuleConfigActions.getUIModuleCustomizationSuccess({
                 uiModuleConfig: itSystemUsagesUIModuleConfig,
@@ -61,7 +59,7 @@ export class UIModuleCustomizationEffects {
             map((uiModuleCustomizationDto) => {
               const uiModuleCustomization = adaptUIModuleCustomization(uiModuleCustomizationDto);
               const moduleCustomizationNodes = uiModuleCustomization?.nodes ?? [];
-              const blueprint = resolveUIBlueprint(moduleName);
+              const blueprint = getUIBlueprint(moduleName);
               const itSystemUsagesUIModuleConfig = buildUIModuleConfig(blueprint, moduleCustomizationNodes, moduleName);
               return UIModuleConfigActions.getUIModuleCustomizationSuccess({
                 uiModuleConfig: itSystemUsagesUIModuleConfig,

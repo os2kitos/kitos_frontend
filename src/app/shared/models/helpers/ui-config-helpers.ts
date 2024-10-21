@@ -58,19 +58,19 @@ function buildUIConfigNodeViewModels(
   return nodeViewModels;
 }
 
-export function resolveUIBlueprint(module: UIModuleConfigKey): UINodeBlueprint {
-  switch (module) {
-    case UIModuleConfigKey.ItSystemUsage:
-      return getItSystemUsageUiBluePrint();
-    default:
-      return getItSystemUsageUiBluePrint();
-  }
+export function getUIBlueprint(module: UIModuleConfigKey): UINodeBlueprint {
+  const blueprint = resolveUIBlueprint(module);
+  setupUIBlueprintFullKeys(module, blueprint, []);
+  return blueprint;
 }
 
-export function getItSystemUsageUiBluePrint(): UINodeBlueprint {
-  const blueprint = ItSystemUsageUiBluePrint;
-  setupUIBlueprintFullKeys(UIModuleConfigKey.ItSystemUsage, blueprint, []);
-  return blueprint;
+function resolveUIBlueprint(module: UIModuleConfigKey): UINodeBlueprint {
+  switch (module) {
+    case UIModuleConfigKey.ItSystemUsage:
+      return ItSystemUsageUiBluePrint;
+    default:
+      return ItSystemUsageUiBluePrint;
+  }
 }
 
 function setupUIBlueprintFullKeys(currentLevelKey: string, currentNode: UINodeBlueprint, ancestorKeys: string[]) {
