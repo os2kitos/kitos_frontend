@@ -97,3 +97,12 @@ export function tabIsEnabled(uiConfigViewModels: UIConfigNodeViewModel[], tabFul
   const tab = uiConfigViewModels.find((vm) => vm.fullKey === tabFullkey);
   return tab?.isEnabled ?? true;
 }
+
+export function fieldOrGroupIsEnabled(uiConfigViewModels: UIConfigNodeViewModel[], tabFullKey: string, fieldKey: string){
+  const tab = uiConfigViewModels.find((vm) => vm.fullKey === tabFullKey);
+  if (!tab) return true;
+
+  const fieldFullKey = tabFullKey.concat('.').concat(fieldKey);
+  const fieldViewModel = tab.children?.find((vm) => vm.fullKey === fieldFullKey);
+  return fieldViewModel?.isEnabled ?? true;
+}
