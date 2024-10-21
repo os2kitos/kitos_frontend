@@ -59,9 +59,11 @@
     </app-standard-vertical-content-grid>
   </form>
   <app-dialog-actions>
-    <app-button (buttonClick)="synchronize()" [disabled]="(isLoading$ | async) ?? false"
+    <app-button (buttonClick)="synchronize()" [disabled]="(isLoading$ | async) ?? false" i18n
       >Gennemfør synkronisering</app-button
     >
-    <app-button color="warn" (buttonClick)="cancel()" [disabled]="(isLoading$ | async) ?? false">Annuler</app-button>
+    <app-button color="warn" (buttonClick)="cancel()" [disabled]="(isLoading$ | async) ?? false" i18n
+      >Annuler</app-button
+    >
   </app-dialog-actions>
 </app-scrollbar-dialog>
