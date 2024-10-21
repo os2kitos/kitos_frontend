@@ -10,6 +10,7 @@
         [formGroup]="itSystemUsageFrontpageForm"
         (checkboxChanged)="onCheckboxChange($event)">
       </app-ui-config-tab-section>
+      <app-loading *ngIf="uiModuleConfig === undefined"></app-loading>
     </ng-container>
     </app-standard-vertical-content-grid>
 

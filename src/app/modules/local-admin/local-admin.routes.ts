@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { LocalAdminInformationComponent } from './local-admin-information/local-admin-information.component';
-import { LocalAdminItSystemUsagesComponent } from './local-admin-it-system-usages/local-admin-it-system-usages.component';
+import { LocalAdminItSystemUsageComponent } from './local-admin-it-system-usage/local-admin-it-system-usage.component';
 import { LocalAdminOrganizationComponent } from './local-admin-organization/local-admin-organization.component';
 import { LocalAdminComponent } from './local-admin.component';
 
@@ -26,7 +26,7 @@ const routes: Routes = [
       },
       {
         path: AppPath.localAdminSystemUsages,
-        component: LocalAdminItSystemUsagesComponent,
+        component: LocalAdminItSystemUsageComponent,
       },
     ],
   },

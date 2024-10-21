@@ -14,11 +14,11 @@ enum LocalAdminSystemUsagesSegmentOptions {
 }
 
 @Component({
-  selector: 'app-local-admin-it-system-usages',
-  templateUrl: './local-admin-it-system-usages.component.html',
-  styleUrl: './local-admin-it-system-usages.component.scss',
+  selector: 'app-local-admin-it-system-usage',
+  templateUrl: './local-admin-it-system-usage.component.html',
+  styleUrl: './local-admin-it-system-usage.component.scss',
 })
-export class LocalAdminItSystemUsagesComponent implements OnInit {
+export class LocalAdminItSystemUsageComponent implements OnInit {
   public readonly LocalAdminSystemUsagesSegmentOptions = LocalAdminSystemUsagesSegmentOptions;
   public selectedSegment: LocalAdminSystemUsagesSegmentOptions = LocalAdminSystemUsagesSegmentOptions.UiCustomization;
   public readonly segmentOptions: SegmentButtonOption<LocalAdminSystemUsagesSegmentOptions>[] = [
