@@ -3262,7 +3262,7 @@
       </trans-unit>
       <trans-unit id="8323422358213440128" datatype="html">
         <source>
-          <x id="INTERPOLATION" equiv-text="{{ confirmText }}"/>
+          <x id="INTERPOLATION" equiv-text="levelsText$ | async }}"/>
         </source>
       </trans-unit>
       <trans-unit id="5000452989422387216" datatype="html">
@@ -4021,8 +4021,8 @@
       <trans-unit id="7564129223460699441" datatype="html">
         <source>* Foretager automatisk tjek hver mandag nat og sender en email med oversigt over ventende opdateringer til brugere i kommunen med rollen &quot;Lokal Administrator&quot;</source>
       </trans-unit>
-      <trans-unit id="7807872089748525152" datatype="html">
-        <source>KITOS synkroniserer 2 niveauer fra organisationshierarkiet i FK Organisation. Slet indtastningen for at synkronisere det fulde organisationshierarki. </source>
+      <trans-unit id="2371882177585997842" datatype="html">
+        <source>KITOS synkroniserer <x id="PH" equiv-text="level"/> niveauer fra organisationshierarkiet i FK Organisation. Slet indtastningen for at synkronisere det fulde organisationshierarki.</source>
       </trans-unit>
       <trans-unit id="8520370683434491577" datatype="html">
         <source>KITOS har <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>ikke<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> adgang til organisationens data via FK Organisation</source>
@@ -4038,6 +4038,12 @@
       </trans-unit>
       <trans-unit id="6478902607086410146" datatype="html">
         <source>Kunne ikke oprette en forbindelse til Fk Organisation</source>
+      </trans-unit>
+      <trans-unit id="1830028398153172429" datatype="html">
+        <source>Alle niveauer i organisationen synkroniseres fra FK Organisation. Angiv antal niveauer for at begrænse hierarkiet.</source>
+      </trans-unit>
+      <trans-unit id="5461027777351760672" datatype="html">
+        <source>Gennemfør synkronisering</source>
       </trans-unit>
     </body>
   </file>

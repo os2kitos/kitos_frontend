@@ -12,7 +12,7 @@
   >
     <div
       [class]="'drag-container node-wrapper node-' + node.color"
-      [style.--dynamic-width.px]="16 * level"
+      [style.--dynamic-width.px]="15 * (level - 1)"
       [ngClass]="{
         'root-node-wrapper': node.isRoot === true,
         'current-node-blue': node.uuid === currentNodeUuid && node.color === 'blue',

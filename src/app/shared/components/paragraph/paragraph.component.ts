@@ -21,6 +21,6 @@ export class ParagraphComponent {
 
   public openHelpTextDialog() {
     const dialogRef = this.dialog.open(HelpDialogComponent);
-    (dialogRef.componentInstance as HelpDialogComponent).helpTextKey = this.helpTextKey;
+    dialogRef.componentInstance.helpTextKey = this.helpTextKey;
   }
 }

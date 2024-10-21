@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, ElementRef, EventEmitter, Inject, Input, OnInit, Output, Renderer2 } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
 import { EntityTreeNode, EntityTreeNodeMoveResult } from '../../models/structure/entity-tree-node.model';
 
@@ -31,7 +31,7 @@ export class DragAndDropTreeComponent<T> implements OnInit {
   nodeLookup: { [key: string]: EntityTreeNode<T> } = {};
   dropActionTodo: DropInfo | null = null;
 
-  constructor(@Inject(DOCUMENT) private document: Document, private renderer: Renderer2, private el: ElementRef) {}
+  constructor(@Inject(DOCUMENT) private document: Document) {}
 
   ngOnInit(): void {
     this.prepareDragDrop(this.nodes);

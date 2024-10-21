@@ -37,6 +37,14 @@ export class FkOrgWriteDialogComponent extends BaseComponent implements OnInit {
   });
 
   public readonly levelsSubject$ = new BehaviorSubject<number | undefined>(undefined);
+  public readonly levelsText$ = this.levelsSubject$.pipe(
+    map((level) => {
+      if (level === undefined)
+        return $localize`Alle niveauer i organisationen synkroniseres fra FK Organisation. Angiv antal niveauer for at begrænse hierarkiet.`;
+
+      return $localize`KITOS synkroniserer ${level} niveauer fra organisationshierarkiet i FK Organisation. Slet indtastningen for at synkronisere det fulde organisationshierarki.`;
+    })
+  );
 
   constructor(
     private readonly store: Store,
@@ -64,7 +72,13 @@ export class FkOrgWriteDialogComponent extends BaseComponent implements OnInit {
   }
 
   levelChange(level: number | undefined) {
-    this.levelsSubject$.next(level);
+    let nextLevel = undefined;
+    if (level === 0) {
+      nextLevel = 1;
+    } else if (level !== undefined && level > 0) {
+      nextLevel = level;
+    }
+    this.levelsSubject$.next(nextLevel);
   }
 
   synchronize() {

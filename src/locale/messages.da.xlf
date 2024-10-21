@@ -1397,10 +1397,10 @@
       </trans-unit>
       <trans-unit id="8323422358213440128" datatype="html">
         <source>
-          <x id="INTERPOLATION" equiv-text="{{ confirmText }}"/>
+          <x id="INTERPOLATION" equiv-text="levelsText$ | async }}"/>
         </source>
         <target state="new">
-          <x id="INTERPOLATION" equiv-text="{{ confirmText }}"/>
+          <x id="INTERPOLATION" equiv-text="levelsText$ | async }}"/>
         </target>
       </trans-unit>
       <trans-unit id="7174046917866635501" datatype="html">
@@ -5183,9 +5183,9 @@
         <source>Niveauer</source>
         <target state="new">Niveauer</target>
       </trans-unit>
-      <trans-unit id="7807872089748525152" datatype="html">
-        <source>KITOS synkroniserer 2 niveauer fra organisationshierarkiet i FK Organisation. Slet indtastningen for at synkronisere det fulde organisationshierarki. </source>
-        <target state="new">KITOS synkroniserer 2 niveauer fra organisationshierarkiet i FK Organisation. Slet indtastningen for at synkronisere det fulde organisationshierarki. </target>
+      <trans-unit id="2371882177585997842" datatype="html">
+        <source>KITOS synkroniserer <x id="PH" equiv-text="level"/> niveauer fra organisationshierarkiet i FK Organisation. Slet indtastningen for at synkronisere det fulde organisationshierarki.</source>
+        <target state="new">KITOS synkroniserer <x id="PH" equiv-text="level"/> niveauer fra organisationshierarkiet i FK Organisation. Slet indtastningen for at synkronisere det fulde organisationshierarki.</target>
       </trans-unit>
       <trans-unit id="4970524737932979706" datatype="html">
         <source>Tjek automatisk efter ventende opdateringer*</source>
@@ -5278,6 +5278,14 @@
       <trans-unit id="6017792095370304684" datatype="html">
         <source>Der skete en fejl ifm. tjek for forbindelsen til FK Organisation. Genindlæs venligst siden for at prøve igen.</source>
         <target state="new">Der skete en fejl ifm. tjek for forbindelsen til FK Organisation. Genindlæs venligst siden for at prøve igen.</target>
+      </trans-unit>
+      <trans-unit id="5461027777351760672" datatype="html">
+        <source>Gennemfør synkronisering</source>
+        <target state="new">Gennemfør synkronisering</target>
+      </trans-unit>
+      <trans-unit id="1830028398153172429" datatype="html">
+        <source>Alle niveauer i organisationen synkroniseres fra FK Organisation. Angiv antal niveauer for at begrænse hierarkiet.</source>
+        <target state="new">Alle niveauer i organisationen synkroniseres fra FK Organisation. Angiv antal niveauer for at begrænse hierarkiet.</target>
       </trans-unit>
     </body>
   </file>

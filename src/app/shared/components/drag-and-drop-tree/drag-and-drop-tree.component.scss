@@ -150,8 +150,12 @@ app-details-page-link {
 .root-node .child-of-root::before {
   top: -40px;
   width: 1px;
-  height: calc(100% + 17px); //calc(var(--spacing) + 1px);
+  height: calc(100% + 17px);
   border-left: 2px solid $color-primary-20;
+}
+
+.root-node .child-of-root:last-child::before {
+  top: -43px;
 }
 
 //Place line left of each node
