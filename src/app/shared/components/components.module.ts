@@ -146,6 +146,7 @@ import { RoleTableContainerComponent } from './role-table/role-table-container/r
 import { SlideToggleComponent } from './slide-toggle/slide-toggle.component';
 import { SnackbarActionsComponent } from './snackbar-actions/snackbar-actions.component';
 import { VerticalContentGridSectionMarginLeftComponent } from './vertical-content-grid-section-margin-left/vertical-content-grid-section-margin-left.component';
+import { CollapsibleNavigationDrawerComponent } from './collapsible-navigation-drawer/collapsible-navigation-drawer.component';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
@@ -261,6 +262,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     AccordionHeaderComponent,
     OptionTypeTableComponent,
     EditOptionTypeDialogComponent,
+    CollapsibleNavigationDrawerComponent,
   ],
   imports: [
     CommonModule,
@@ -391,6 +393,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     SnackbarActionsComponent,
     AccordionHeaderComponent,
     OptionTypeTableComponent,
+    CollapsibleNavigationDrawerComponent,
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },
