@@ -6,6 +6,7 @@ import {
   APICustomizedUINodeRequestDTO,
   APICustomizedUINodeResponseDTO,
   APIUIModuleCustomizationRequestDTO,
+  APIUIModuleCustomizationResponseDTO,
   APIV2OrganizationsInternalINTERNALService,
 } from 'src/app/api/v2';
 import { buildUIModuleConfig, getUIBlueprint } from 'src/app/shared/models/helpers/ui-config-helpers';
@@ -14,6 +15,7 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectOrganizationUuid } from '../../user-store/selectors';
 import { UIModuleConfigActions } from './actions';
 import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
+import { UINodeBlueprint } from 'src/app/shared/models/ui-config/it-system-usages-blueprint';
 
 @Injectable()
 export class UIModuleCustomizationEffects {
@@ -32,15 +34,7 @@ export class UIModuleCustomizationEffects {
         this.organizationInternalService
           .getSingleOrganizationsInternalV2GetUIModuleCustomization({ moduleName, organizationUuid })
           .pipe(
-            map((uiModuleCustomizationDto) => {
-              const uiModuleCustomization = adaptUIModuleCustomization(uiModuleCustomizationDto);
-              const moduleCustomizationNodes = uiModuleCustomization?.nodes ?? [];
-              const blueprint = getUIBlueprint(moduleName);
-              const uiModuleConfig = buildUIModuleConfig(blueprint, moduleCustomizationNodes, moduleName);
-              return UIModuleConfigActions.getUIModuleCustomizationSuccess({
-                uiModuleConfig: uiModuleConfig,
-              });
-            }),
+            map((uiModuleCustomizationDto) => this.combineCombineBlueprintWithCustomization(uiModuleCustomizationDto, moduleName)),
             catchError(() => of(UIModuleConfigActions.getUIModuleCustomizationError()))
           )
       )
@@ -68,19 +62,7 @@ export class UIModuleCustomizationEffects {
                   dto: requestDto,
                 })
                 .pipe(
-                  map((uiModuleCustomizationDto) => {
-                    const uiModuleCustomization = adaptUIModuleCustomization(uiModuleCustomizationDto);
-                    const moduleCustomizationNodes = uiModuleCustomization?.nodes ?? [];
-                    const blueprint = getUIBlueprint(moduleName);
-                    const itSystemUsagesUIModuleConfig = buildUIModuleConfig(
-                      blueprint,
-                      moduleCustomizationNodes,
-                      moduleName
-                    );
-                    return UIModuleConfigActions.getUIModuleCustomizationSuccess({
-                      uiModuleConfig: itSystemUsagesUIModuleConfig,
-                    });
-                  }),
+                  map((uiModuleCustomizationDto) => this.combineCombineBlueprintWithCustomization(uiModuleCustomizationDto, moduleName)),
                   catchError(() => of(UIModuleConfigActions.putUIModuleCustomizationError()))
                 );
             }),
@@ -89,6 +71,16 @@ export class UIModuleCustomizationEffects {
       )
     );
   });
+
+  private combineCombineBlueprintWithCustomization(uiModuleCustomizationDto: APIUIModuleCustomizationResponseDTO, module: UIModuleConfigKey){
+    const uiModuleCustomization = adaptUIModuleCustomization(uiModuleCustomizationDto);
+    const moduleCustomizationNodes = uiModuleCustomization?.nodes ?? [];
+    const blueprint = getUIBlueprint(module);
+    const uiModuleConfig = buildUIModuleConfig(blueprint, moduleCustomizationNodes, module);
+    return UIModuleConfigActions.getUIModuleCustomizationSuccess({
+      uiModuleConfig: uiModuleConfig,
+    });
+  }
 
   private applyUIModuleCustomizationUpdateToRequestDto(
     existingNodes: APICustomizedUINodeResponseDTO[],
