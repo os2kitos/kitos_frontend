@@ -1,10 +1,4 @@
-<ng-container *ngIf="value">
-  <app-tooltip [text]="positiveTooltipText" [tooltipDelay]="500">
-    <app-check-positive-green-icon></app-check-positive-green-icon>
-  </app-tooltip>
-</ng-container>
-<ng-container *ngIf="!value">
-  <app-tooltip [text]="negativeTooltipText" [tooltipDelay]="500">
-    <app-check-negative-gray-icon></app-check-negative-gray-icon>
-  </app-tooltip>
-</ng-container>
+<app-tooltip [text]="value ? positiveTooltipText : negativeTooltipText" [tooltipDelay]="500">
+  <app-check-positive-green-icon *ngIf="value"></app-check-positive-green-icon>
+  <app-check-negative-gray-icon *ngIf="!value"></app-check-negative-gray-icon>
+</app-tooltip>

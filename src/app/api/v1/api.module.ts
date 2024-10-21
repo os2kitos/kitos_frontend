@@ -22,6 +22,7 @@ import { APIV1ItContractItSystemUsageINTERNALService } from './api/v1ItContractI
 import { APIV1ItContractRightINTERNALService } from './api/v1ItContractRightINTERNAL.service';
 import { APIV1ItInterfaceINTERNALService } from './api/v1ItInterfaceINTERNAL.service';
 import { APIV1ItSystemINTERNALService } from './api/v1ItSystemINTERNAL.service';
+import { APIV1ItSystemLocalRoleOptionTypesInternalV2INTERNALService } from './api/v1ItSystemLocalRoleOptionTypesInternalV2INTERNAL.service';
 import { APIV1ItSystemUsageDataSensitivityLevelINTERNALService } from './api/v1ItSystemUsageDataSensitivityLevelINTERNAL.service';
 import { APIV1ItSystemUsageINTERNALService } from './api/v1ItSystemUsageINTERNAL.service';
 import { APIV1ItSystemUsageOptionsINTERNALService } from './api/v1ItSystemUsageOptionsINTERNAL.service';

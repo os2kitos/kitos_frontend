@@ -19,7 +19,13 @@
       ><app-organization-icon></app-organization-icon>
       <ng-container i18n>Organisation</ng-container>
     </app-button>
-    <app-button buttonStyle="tertiary" color="accent" size="large" routerLinkActive="active"
+    <app-button
+      buttonStyle="tertiary"
+      color="accent"
+      size="large"
+      routerLinkActive="active"
+      data-cy="local-admin-it-system-button"
+      [routerLink]="[AppPath.itSystems]"
       ><app-systems-icon></app-systems-icon>
       <ng-container i18n>IT System</ng-container>
     </app-button>

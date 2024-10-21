@@ -3964,6 +3964,33 @@
       <trans-unit id="4100126813016547603" datatype="html">
         <source>Organisationsroller i din orginsation</source>
       </trans-unit>
+      <trans-unit id="1665695847626369659" datatype="html">
+        <source>Forretningstyper</source>
+      </trans-unit>
+      <trans-unit id="2389901481128357361" datatype="html">
+        <source>It system udfaldsrum</source>
+      </trans-unit>
+      <trans-unit id="2554180997191376694" datatype="html">
+        <source>Arkiveringstyper</source>
+      </trans-unit>
+      <trans-unit id="3400894940431073121" datatype="html">
+        <source>Frekvenser</source>
+      </trans-unit>
+      <trans-unit id="4186278720309841624" datatype="html">
+        <source>Grænseflader</source>
+      </trans-unit>
+      <trans-unit id="4314900003118162253" datatype="html">
+        <source>Kategorier af registrerede i databehandlingen</source>
+      </trans-unit>
+      <trans-unit id="7533326215200012439" datatype="html">
+        <source>It system roller</source>
+      </trans-unit>
+      <trans-unit id="7973375106384608446" datatype="html">
+        <source>Datatyper</source>
+      </trans-unit>
+      <trans-unit id="8977823802262029818" datatype="html">
+        <source>Følsomme persondata</source>
+      </trans-unit>
       <trans-unit id="1079562510399620869" datatype="html">
         <source>Niveauer der synkroniseres</source>
       </trans-unit>
@@ -3973,11 +4000,17 @@
       <trans-unit id="1778917295361559747" datatype="html">
         <source>Redigér forbindelsen til FK Organisation</source>
       </trans-unit>
+      <trans-unit id="1830028398153172429" datatype="html">
+        <source>Alle niveauer i organisationen synkroniseres fra FK Organisation. Angiv antal niveauer for at begrænse hierarkiet.</source>
+      </trans-unit>
       <trans-unit id="2012701206354685680" datatype="html">
         <source>Din organisation mangler en gyldig serviceaftale der giver KITOS adgang til data fra din kommune i FK Organisation. Kontakt venligst den KITOS ansvarlige i din kommune for hjælp.</source>
       </trans-unit>
       <trans-unit id="2278946622206095287" datatype="html">
         <source>Der er problemer med den eksisterende serviceaftale, der giver KITOS adgang til data fra din kommune i FK Organisatoin. Kontakt venligst den KITOS ansvarlige i din kommune for hjælp.</source>
+      </trans-unit>
+      <trans-unit id="2371882177585997842" datatype="html">
+        <source>KITOS synkroniserer <x id="PH" equiv-text="level"/> niveauer fra organisationshierarkiet i FK Organisation. Slet indtastningen for at synkronisere det fulde organisationshierarki.</source>
       </trans-unit>
       <trans-unit id="266398842197719025" datatype="html">
         <source>Opret forbindelse til FK Organisation</source>
@@ -3988,11 +4021,17 @@
       <trans-unit id="3613884517590485356" datatype="html">
         <source>Adgang</source>
       </trans-unit>
+      <trans-unit id="41369724053306167" datatype="html">
+        <source>Forbindelse til FK Organisation blev oprettet</source>
+      </trans-unit>
       <trans-unit id="4785447215656230108" datatype="html">
         <source> Ikke tilgængeligt </source>
       </trans-unit>
       <trans-unit id="4970524737932979706" datatype="html">
         <source>Tjek automatisk efter ventende opdateringer*</source>
+      </trans-unit>
+      <trans-unit id="5461027777351760672" datatype="html">
+        <source>Gennemfør synkronisering</source>
       </trans-unit>
       <trans-unit id="583139169074298236" datatype="html">
         <source>Dato for seneste automatiske tjek</source>
@@ -4002,6 +4041,9 @@
       </trans-unit>
       <trans-unit id="6017792095370304684" datatype="html">
         <source>Der skete en fejl ifm. tjek for forbindelsen til FK Organisation. Genindlæs venligst siden for at prøve igen.</source>
+      </trans-unit>
+      <trans-unit id="6478902607086410146" datatype="html">
+        <source>Kunne ikke oprette en forbindelse til Fk Organisation</source>
       </trans-unit>
       <trans-unit id="6838054133734350258" datatype="html">
         <source>Forhåndsvisning</source>
@@ -4021,9 +4063,6 @@
       <trans-unit id="7564129223460699441" datatype="html">
         <source>* Foretager automatisk tjek hver mandag nat og sender en email med oversigt over ventende opdateringer til brugere i kommunen med rollen &quot;Lokal Administrator&quot;</source>
       </trans-unit>
-      <trans-unit id="2371882177585997842" datatype="html">
-        <source>KITOS synkroniserer <x id="PH" equiv-text="level"/> niveauer fra organisationshierarkiet i FK Organisation. Slet indtastningen for at synkronisere det fulde organisationshierarki.</source>
-      </trans-unit>
       <trans-unit id="8520370683434491577" datatype="html">
         <source>KITOS har <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>ikke<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> adgang til organisationens data via FK Organisation</source>
       </trans-unit>
@@ -4032,18 +4071,6 @@
       </trans-unit>
       <trans-unit id="961883493480058344" datatype="html">
         <source>Forbind</source>
-      </trans-unit>
-      <trans-unit id="41369724053306167" datatype="html">
-        <source>Forbindelse til FK Organisation blev oprettet</source>
-      </trans-unit>
-      <trans-unit id="6478902607086410146" datatype="html">
-        <source>Kunne ikke oprette en forbindelse til Fk Organisation</source>
-      </trans-unit>
-      <trans-unit id="1830028398153172429" datatype="html">
-        <source>Alle niveauer i organisationen synkroniseres fra FK Organisation. Angiv antal niveauer for at begrænse hierarkiet.</source>
-      </trans-unit>
-      <trans-unit id="5461027777351760672" datatype="html">
-        <source>Gennemfør synkronisering</source>
       </trans-unit>
     </body>
   </file>

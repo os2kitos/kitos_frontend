@@ -5179,13 +5179,45 @@
         <source>Organisationsroller i din orginsation</source>
         <target state="new">Organisationsroller i din orginsation</target>
       </trans-unit>
+      <trans-unit id="1665695847626369659" datatype="html">
+        <source>Forretningstyper</source>
+        <target state="new">Forretningstyper</target>
+      </trans-unit>
+      <trans-unit id="2554180997191376694" datatype="html">
+        <source>Arkiveringstyper</source>
+        <target state="new">Arkiveringstyper</target>
+      </trans-unit>
+      <trans-unit id="7973375106384608446" datatype="html">
+        <source>Datatyper</source>
+        <target state="new">Datatyper</target>
+      </trans-unit>
+      <trans-unit id="3400894940431073121" datatype="html">
+        <source>Frekvenser</source>
+        <target state="new">Frekvenser</target>
+      </trans-unit>
+      <trans-unit id="4186278720309841624" datatype="html">
+        <source>Grænseflader</source>
+        <target state="new">Grænseflader</target>
+      </trans-unit>
+      <trans-unit id="8977823802262029818" datatype="html">
+        <source>Følsomme persondata</source>
+        <target state="new">Følsomme persondata</target>
+      </trans-unit>
+      <trans-unit id="4314900003118162253" datatype="html">
+        <source>Kategorier af registrerede i databehandlingen</source>
+        <target state="new">Kategorier af registrerede i databehandlingen</target>
+      </trans-unit>
+      <trans-unit id="2389901481128357361" datatype="html">
+        <source>It system udfaldsrum</source>
+        <target state="new">It system udfaldsrum</target>
+      </trans-unit>
+      <trans-unit id="7533326215200012439" datatype="html">
+        <source>It system roller</source>
+        <target state="new">It system roller</target>
+      </trans-unit>
       <trans-unit id="7314347350185597624" datatype="html">
         <source>Niveauer</source>
         <target state="new">Niveauer</target>
-      </trans-unit>
-      <trans-unit id="2371882177585997842" datatype="html">
-        <source>KITOS synkroniserer <x id="PH" equiv-text="level"/> niveauer fra organisationshierarkiet i FK Organisation. Slet indtastningen for at synkronisere det fulde organisationshierarki.</source>
-        <target state="new">KITOS synkroniserer <x id="PH" equiv-text="level"/> niveauer fra organisationshierarkiet i FK Organisation. Slet indtastningen for at synkronisere det fulde organisationshierarki.</target>
       </trans-unit>
       <trans-unit id="4970524737932979706" datatype="html">
         <source>Tjek automatisk efter ventende opdateringer*</source>
@@ -5198,6 +5230,18 @@
       <trans-unit id="6838054133734350258" datatype="html">
         <source>Forhåndsvisning</source>
         <target state="new">Forhåndsvisning</target>
+      </trans-unit>
+      <trans-unit id="5461027777351760672" datatype="html">
+        <source>Gennemfør synkronisering</source>
+        <target state="new">Gennemfør synkronisering</target>
+      </trans-unit>
+      <trans-unit id="1830028398153172429" datatype="html">
+        <source>Alle niveauer i organisationen synkroniseres fra FK Organisation. Angiv antal niveauer for at begrænse hierarkiet.</source>
+        <target state="new">Alle niveauer i organisationen synkroniseres fra FK Organisation. Angiv antal niveauer for at begrænse hierarkiet.</target>
+      </trans-unit>
+      <trans-unit id="2371882177585997842" datatype="html">
+        <source>KITOS synkroniserer <x id="PH" equiv-text="level"/> niveauer fra organisationshierarkiet i FK Organisation. Slet indtastningen for at synkronisere det fulde organisationshierarki.</source>
+        <target state="new">KITOS synkroniserer <x id="PH" equiv-text="level"/> niveauer fra organisationshierarkiet i FK Organisation. Slet indtastningen for at synkronisere det fulde organisationshierarki.</target>
       </trans-unit>
       <trans-unit id="1778917295361559747" datatype="html">
         <source>Redigér forbindelsen til FK Organisation</source>
@@ -5278,14 +5322,6 @@
       <trans-unit id="6017792095370304684" datatype="html">
         <source>Der skete en fejl ifm. tjek for forbindelsen til FK Organisation. Genindlæs venligst siden for at prøve igen.</source>
         <target state="new">Der skete en fejl ifm. tjek for forbindelsen til FK Organisation. Genindlæs venligst siden for at prøve igen.</target>
-      </trans-unit>
-      <trans-unit id="5461027777351760672" datatype="html">
-        <source>Gennemfør synkronisering</source>
-        <target state="new">Gennemfør synkronisering</target>
-      </trans-unit>
-      <trans-unit id="1830028398153172429" datatype="html">
-        <source>Alle niveauer i organisationen synkroniseres fra FK Organisation. Angiv antal niveauer for at begrænse hierarkiet.</source>
-        <target state="new">Alle niveauer i organisationen synkroniseres fra FK Organisation. Angiv antal niveauer for at begrænse hierarkiet.</target>
       </trans-unit>
     </body>
   </file>

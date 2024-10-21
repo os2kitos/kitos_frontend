@@ -5,9 +5,17 @@ import { LocalOptionType } from 'src/app/shared/models/options/local-option-type
 export const LocalOptionTypeActions = createActionGroup({
   source: 'ChoiceType',
   events: {
-    'Uppdate Option Type': (optionType: LocalOptionType, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) => ({ optionType, optionUuid, request }),
-    'Update Option Type Active Status': (optionType: LocalOptionType, optionUuid: string, isActive: boolean) => ({ optionType, optionUuid, isActive }),
-    'Update Option Type Success': () => emptyProps(),
+    'Uppdate Option Type': (
+      optionType: LocalOptionType,
+      optionUuid: string,
+      request: APILocalRegularOptionUpdateRequestDTO
+    ) => ({ optionType, optionUuid, request }),
+    'Update Option Type Active Status': (optionType: LocalOptionType, optionUuid: string, isActive: boolean) => ({
+      optionType,
+      optionUuid,
+      isActive,
+    }),
+    'Update Option Type Success': (optionType: LocalOptionType) => ({ optionType }),
     'Update Option Type Error': () => emptyProps(),
   },
 });

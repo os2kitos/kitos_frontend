@@ -10,6 +10,7 @@
         labelPosition="after"
         text="Aktiv"
         i18n-text
+        data-cy="active-checkbox"
       >
       </app-checkbox>
       <app-textarea
@@ -19,6 +20,7 @@
         formName="description"
         [value]="form.value.description ?? ''"
         class="text-area-margin-bottom"
+        data-cy="description-text-area"
       ></app-textarea>
     </app-standard-vertical-content-grid>
   </form>
