@@ -9,7 +9,10 @@ export function buildUIModuleConfig(
   uiModuleCustomizations: UINodeCustomization[],
   module: UIModuleConfigKey
 ): UIModuleConfig {
-  const uiModuleConfigViewModels: UIConfigNodeViewModel[] = buildUIConfigNodeViewModels(blueprint, uiModuleCustomizations);
+  const uiModuleConfigViewModels: UIConfigNodeViewModel[] = buildUIConfigNodeViewModels(
+    blueprint,
+    uiModuleCustomizations
+  );
   return { module, configViewModels: uiModuleConfigViewModels };
 }
 
@@ -68,10 +71,16 @@ function resolveUIBlueprint(module: UIModuleConfigKey): UINodeBlueprint {
   switch (module) {
     case UIModuleConfigKey.ItSystemUsage:
       return ItSystemUsageUiBluePrint;
-    default:
-      return ItSystemUsageUiBluePrint;
+    case UIModuleConfigKey.ItContract:
+      return emptyBlueprint;
+    case UIModuleConfigKey.DataProcessingRegistrations:
+      return emptyBlueprint;
   }
 }
+
+const emptyBlueprint = {
+  text: '',
+};
 
 function setupUIBlueprintFullKeys(currentLevelKey: string, currentNode: UINodeBlueprint, ancestorKeys: string[]) {
   const keyPath = [...ancestorKeys, currentLevelKey];
