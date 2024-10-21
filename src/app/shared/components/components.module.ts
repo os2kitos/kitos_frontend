@@ -127,6 +127,9 @@ import { TextBoxComponent } from './textbox/textbox.component';
 import { TooltipComponent } from './tooltip/tooltip.component';
 import { EntityTreeComponent } from './tree/entity-tree.component';
 import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatListModule } from '@angular/material/list';
 
 import '@progress/kendo-angular-intl/locales/da/all';
 import { AccordionHeaderComponent } from './accordion-header/accordion-header.component';
@@ -292,6 +295,9 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     MatMenuModule,
     DragDropModule,
     MatSlideToggleModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatListModule,
   ],
   exports: [
     CommonModule,
