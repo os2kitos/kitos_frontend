@@ -94,20 +94,22 @@ function setupUIBlueprintFullKeys(currentLevelKey: string, currentNode: UINodeBl
 }
 
 export function tabIsEnabled(uiConfigViewModels: UIConfigNodeViewModel[], tabFullKey: string) {
-  const moduleConfigChildren = uiConfigViewModels[0].children;
-  if (!moduleConfigChildren) return true;
-  const tab = moduleConfigChildren.find((vm) => vm.fullKey === tabFullKey);
-  return tab?.isEnabled ?? true;
+  const tabViewModel = getTabViewModelFromModule(uiConfigViewModels, tabFullKey);
+  return tabViewModel?.isEnabled ?? true;
 }
 
 export function fieldOrGroupIsEnabled(uiConfigViewModels: UIConfigNodeViewModel[], tabFullKey: string, fieldKey: string) {
-  const moduleConfigChildren = uiConfigViewModels[0].children;
-  if (!moduleConfigChildren) return true;
-  const tabViewModel = moduleConfigChildren.find((vm) => vm.fullKey === tabFullKey);
+  const tabViewModel = getTabViewModelFromModule(uiConfigViewModels, tabFullKey);
   const tabViewModelChildren = tabViewModel?.children;
   if (!tabViewModelChildren) return true;
 
   const fieldFullKey = tabFullKey.concat('.').concat(fieldKey);
   const fieldViewModel = tabViewModelChildren.find((vm) => vm.fullKey === fieldFullKey);
   return fieldViewModel?.isEnabled ?? true;
+}
+
+function getTabViewModelFromModule(uiConfigViewModels: UIConfigNodeViewModel[], tabFullKey: string){
+  const moduleConfigChildren = uiConfigViewModels[0].children;
+  if (!moduleConfigChildren) return undefined;
+  return moduleConfigChildren.find((vm) => vm.fullKey === tabFullKey);
 }
