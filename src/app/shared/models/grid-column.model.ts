@@ -2,9 +2,17 @@ import { BooleanValueDisplayType } from '../components/status-chip/status-chip.c
 import { RegistrationEntityTypes } from './registrations/registration-entity-categories.model';
 
 export interface GridColumn {
+  /*********************/
+  //Required properties
+  /*********************/
   field: string; //The field from the API
   title: string; //UI title
   section: string; //Root section for the field to be displayed in, in the Column hiding/showing dialog
+  hidden: boolean; //If the column is hidden by default
+
+  /*********************/
+  //Optional
+  /*********************/
   filter?: 'text' | 'numeric' | 'boolean' | 'date'; //Base kendo filter type
   extraFilter?: 'enum' | 'organization-unit' | 'choice-type' | 'dropdown-from-column-data' | 'choice-type-by-name'; //Filters other than the base kendo filters
   noFilter?: boolean; //If true hides the filter for the column
@@ -34,8 +42,6 @@ export interface GridColumn {
     | 'action-buttons'; //Style of the column
   width?: number;
   minResizableWidth?: number;
-  //If the column is hidden by default
-  hidden: boolean;
   //Can column be hidden
   required?: boolean;
   // Field name from the old UI. Used for saving organizational column configuration

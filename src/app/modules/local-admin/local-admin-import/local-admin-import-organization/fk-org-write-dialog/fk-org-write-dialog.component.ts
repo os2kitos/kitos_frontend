@@ -3,11 +3,12 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, map } from 'rxjs';
+import { BehaviorSubject, map, Observable, of } from 'rxjs';
 import { APIStsOrganizationOrgUnitDTO } from 'src/app/api/v2';
 import { ItSystemHierarchyTableComponentStore } from 'src/app/modules/it-systems/shared/it-system-hierarchy-table/it-system-hierarchy-table.component-store';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { mapFkOrgSnapshotUnits } from 'src/app/shared/helpers/hierarchy.helpers';
+import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { EntityTreeNode } from 'src/app/shared/models/structure/entity-tree-node.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { FkOrgActions } from 'src/app/store/local-admin/fk-org/actions';
@@ -15,6 +16,7 @@ import {
   selectHasSnapshotFailed,
   selectIsSynchronizationDialogLoading,
   selectSnapshot,
+  selectUpdateConsequences,
 } from 'src/app/store/local-admin/fk-org/selectors';
 
 @Component({
@@ -30,6 +32,7 @@ export class FkOrgWriteDialogComponent extends BaseComponent implements OnInit {
   public readonly snapshotTree$ = this.snapshot$.pipe(map((snapshot) => mapFkOrgSnapshotUnits([snapshot])));
   public readonly isLoading$ = this.store.select(selectIsSynchronizationDialogLoading);
   public readonly hasFailed$ = this.store.select(selectHasSnapshotFailed);
+  public readonly updateConsequences$ = this.store.select(selectUpdateConsequences).pipe(filterNullish());
 
   public readonly fkOrgFormGroup = new FormGroup({
     levels: new FormControl<number | undefined>(undefined),
@@ -46,6 +49,15 @@ export class FkOrgWriteDialogComponent extends BaseComponent implements OnInit {
     })
   );
 
+  public readonly gridColumns$: Observable<GridColumn[]> = of([
+    {
+      field: 'name',
+      title: $localize`Organisationsenhed`,
+      section: '',
+      hidden: false,
+    },
+  ]);
+
   constructor(
     private readonly store: Store,
     private readonly actions$: Actions,
@@ -56,6 +68,7 @@ export class FkOrgWriteDialogComponent extends BaseComponent implements OnInit {
 
   public title = '';
   ngOnInit(): void {
+    this.store.dispatch(FkOrgActions.previewConnectionUpdate(6));
     this.store.dispatch(FkOrgActions.getSnapshot());
 
     this.title = this.isEdit
@@ -64,6 +77,16 @@ export class FkOrgWriteDialogComponent extends BaseComponent implements OnInit {
 
     this.subscriptions.add(
       this.actions$.pipe(ofType(FkOrgActions.createConnectionSuccess)).subscribe(() => this.cancel())
+    );
+
+    this.subscriptions.add(
+      this.updateConsequences$.subscribe((consequences) => {
+        if (consequences === undefined) {
+          this.fkOrgFormGroup.controls.levels.enable();
+        } else {
+          this.fkOrgFormGroup.controls.levels.disable();
+        }
+      })
     );
   }
 
@@ -82,8 +105,13 @@ export class FkOrgWriteDialogComponent extends BaseComponent implements OnInit {
   }
 
   synchronize() {
+    const synchronizationDepth = this.fkOrgFormGroup.controls.levels.value ?? undefined;
+    if (this.isEdit) {
+      this.store.dispatch(FkOrgActions.previewConnectionUpdate(synchronizationDepth));
+      return;
+    }
     const request = {
-      synchronizationDepth: this.fkOrgFormGroup.controls.levels.value ?? undefined,
+      synchronizationDepth: synchronizationDepth,
       subscribeToUpdates: this.fkOrgFormGroup.controls.subscribeToUpdates.value ?? false,
     };
     this.store.dispatch(FkOrgActions.createConnection(request));
@@ -93,4 +121,3 @@ export class FkOrgWriteDialogComponent extends BaseComponent implements OnInit {
     this.dialog.close();
   }
 }
-MOCK CHANGE

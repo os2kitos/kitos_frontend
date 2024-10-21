@@ -9,6 +9,7 @@ export const fkOrgInitialState: FkOrgState = {
   isLoadingConnectionStatus: false,
 
   snapshot: undefined,
+  updateConsequences: undefined,
   isSynchronizationDialogLoading: false,
   hasSnapshotFailed: false,
 };
@@ -49,6 +50,7 @@ export const fkOrgFeature = createFeature({
         snapshot: undefined,
         isSynchronizationDialogLoading: true,
         hasSnapshotFailed: false,
+        updateConsequences: undefined, //reset update consequences when snapshot is requested
       })
     ),
     on(
@@ -65,7 +67,33 @@ export const fkOrgFeature = createFeature({
       FkOrgActions.createConnectionSuccess,
       (state): FkOrgState => ({ ...state, isSynchronizationDialogLoading: false })
     ),
-    on(FkOrgActions.createConnectionError, (state): FkOrgState => ({ ...state, isSynchronizationDialogLoading: false }))
+    on(
+      FkOrgActions.createConnectionError,
+      (state): FkOrgState => ({ ...state, isSynchronizationDialogLoading: false })
+    ),
+    on(
+      FkOrgActions.previewConnectionUpdate,
+      (state): FkOrgState => ({ ...state, isSynchronizationDialogLoading: true })
+    ),
+    on(
+      FkOrgActions.previewConnectionUpdateSuccess,
+      (state, { response }): FkOrgState => ({
+        ...state,
+        updateConsequences: { data: response.consequences ?? [], total: response.consequences?.length ?? 0 },
+        isSynchronizationDialogLoading: false,
+      })
+    ),
+    on(
+      FkOrgActions.previewConnectionUpdateError,
+      FkOrgActions.updateConnectionError,
+      (state): FkOrgState => ({ ...state, isSynchronizationDialogLoading: false, hasSnapshotFailed: true })
+    ),
+
+    on(FkOrgActions.updateConnection, (state): FkOrgState => ({ ...state, isSynchronizationDialogLoading: true })),
+    on(
+      FkOrgActions.updateConnectionSuccess,
+      (state): FkOrgState => ({ ...state, isSynchronizationDialogLoading: false })
+    )
   ),
 });
 

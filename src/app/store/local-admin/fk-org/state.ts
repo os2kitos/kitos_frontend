@@ -1,3 +1,4 @@
+import { GridDataResult } from '@progress/kendo-angular-grid';
 import { APIStsOrganizationOrgUnitDTO, APIStsOrganizationSynchronizationDetailsResponseDTO } from 'src/app/api/v2';
 
 export interface FkOrgState {
@@ -6,6 +7,7 @@ export interface FkOrgState {
   isLoadingConnectionStatus: boolean;
 
   snapshot: APIStsOrganizationOrgUnitDTO | undefined;
+  updateConsequences: GridDataResult | undefined;
   isSynchronizationDialogLoading: boolean;
   hasSnapshotFailed: boolean;
 }

@@ -60,4 +60,37 @@ export class FkOrgEffects {
       )
     );
   });
+
+  previewConnectionUpdate$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(FkOrgActions.previewConnectionUpdate),
+      combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+      switchMap(([{ synchronizationDepth }, organizationUuid]) =>
+        this.apiService
+          .getSingleStsOrganizationSynchronizationInternalV2GetUpdateConsequences({
+            organizationUuid,
+            synchronizationDepth,
+          })
+          .pipe(
+            map((snapshot) => FkOrgActions.previewConnectionUpdateSuccess(snapshot)),
+            catchError(() => of(FkOrgActions.previewConnectionUpdateError()))
+          )
+      )
+    );
+  });
+
+  updateConnection$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(FkOrgActions.updateConnection),
+      combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+      switchMap(([{ request }, organizationUuid]) =>
+        this.apiService
+          .putSingleStsOrganizationSynchronizationInternalV2UpdateConnection({ organizationUuid, request })
+          .pipe(
+            map(() => FkOrgActions.updateConnectionSuccess()),
+            catchError(() => of(FkOrgActions.updateConnectionError()))
+          )
+      )
+    );
+  });
 }

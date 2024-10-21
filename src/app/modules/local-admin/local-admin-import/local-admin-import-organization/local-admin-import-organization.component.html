@@ -72,9 +72,9 @@
       >
     </div>
     <div>
+      <!-- *ngIf="(isConnected$ | async) === false" -->
       <app-button
         class="no-stretch"
-        *ngIf="(isConnected$ | async) === false"
         (buttonClick)="openImportDialog()"
         [disabled]="(accessError$ | async) !== undefined"
         i18n

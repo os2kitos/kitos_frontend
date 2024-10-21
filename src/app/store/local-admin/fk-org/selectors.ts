@@ -21,3 +21,5 @@ export const selectIsSynchronizationDialogLoading = createSelector(
   (state) => state.isSynchronizationDialogLoading
 );
 export const selectHasSnapshotFailed = createSelector(selectFkOrgState, (state) => state.hasSnapshotFailed);
+
+export const selectUpdateConsequences = createSelector(selectFkOrgState, (state) => state.updateConsequences);
