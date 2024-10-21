@@ -22,7 +22,7 @@ export class LocalOptionTypeEffects {
       concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       switchMap(([{ optionType, optionUuid, request }, organizationUuid]) => {
         return this.localOptionTypeService.patchLocalOption(optionType, organizationUuid, optionUuid, request).pipe(
-          map(() => LocalOptionTypeActions.updateOptionTypeSuccess()),
+          map(() => LocalOptionTypeActions.updateOptionTypeSuccess(optionType)),
           catchError(() => of(LocalOptionTypeActions.updateOptionTypeError()))
         );
       })
@@ -35,7 +35,7 @@ export class LocalOptionTypeEffects {
       concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       switchMap(([{ optionType, optionUuid, isActive }, organizationUuid]) => {
         return this.localOptionTypeService.patchIsActive(optionType, organizationUuid, optionUuid, isActive).pipe(
-          map(() => LocalOptionTypeActions.updateOptionTypeSuccess()),
+          map(() => LocalOptionTypeActions.updateOptionTypeSuccess(optionType)),
           catchError(() => of(LocalOptionTypeActions.updateOptionTypeError()))
         );
       })

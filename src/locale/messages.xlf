@@ -3964,6 +3964,33 @@
       <trans-unit id="4100126813016547603" datatype="html">
         <source>Organisationsroller i din orginsation</source>
       </trans-unit>
+      <trans-unit id="1665695847626369659" datatype="html">
+        <source>Forretningstyper</source>
+      </trans-unit>
+      <trans-unit id="2389901481128357361" datatype="html">
+        <source>It system udfaldsrum</source>
+      </trans-unit>
+      <trans-unit id="2554180997191376694" datatype="html">
+        <source>Arkiveringstyper</source>
+      </trans-unit>
+      <trans-unit id="3400894940431073121" datatype="html">
+        <source>Frekvenser</source>
+      </trans-unit>
+      <trans-unit id="4186278720309841624" datatype="html">
+        <source>Grænseflader</source>
+      </trans-unit>
+      <trans-unit id="4314900003118162253" datatype="html">
+        <source>Kategorier af registrerede i databehandlingen</source>
+      </trans-unit>
+      <trans-unit id="7533326215200012439" datatype="html">
+        <source>It system roller</source>
+      </trans-unit>
+      <trans-unit id="7973375106384608446" datatype="html">
+        <source>Datatyper</source>
+      </trans-unit>
+      <trans-unit id="8977823802262029818" datatype="html">
+        <source>Følsomme persondata</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

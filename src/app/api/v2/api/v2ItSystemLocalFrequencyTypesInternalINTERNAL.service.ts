@@ -30,27 +30,27 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface DeleteSingleItSystemLocalRegularOptionTypesInternalV2DeleteLocalBusinessTypeRequestParams {
+export interface DeleteSingleItSystemLocalFrequencyTypesInternalV2DeleteLocalRelationFrequencyTypeRequestParams {
     organizationUuid: string;
     optionUuid: string;
 }
 
-export interface GetManyItSystemLocalRegularOptionTypesInternalV2GetLocalBusinessTypesRequestParams {
+export interface GetManyItSystemLocalFrequencyTypesInternalV2GetLocalRelationFrequencyTypesRequestParams {
     organizationUuid: string;
 }
 
-export interface GetSingleItSystemLocalRegularOptionTypesInternalV2GetLocalBusinessTypeByOptionIdRequestParams {
+export interface GetSingleItSystemLocalFrequencyTypesInternalV2GetLocalRelationFrequencyTypeByOptionIdRequestParams {
     organizationUuid: string;
     optionUuid: string;
 }
 
-export interface PatchSingleItSystemLocalRegularOptionTypesInternalV2PatchLocalBusinessTypeRequestParams {
+export interface PatchSingleItSystemLocalFrequencyTypesInternalV2PatchLocalRelationFrequencyTypeRequestParams {
     organizationUuid: string;
     optionUuid: string;
     dto: APILocalRegularOptionUpdateRequestDTO;
 }
 
-export interface PostSingleItSystemLocalRegularOptionTypesInternalV2CreateLocalBusinessTypeRequestParams {
+export interface PostSingleItSystemLocalFrequencyTypesInternalV2CreateLocalRelationFrequencyTypeRequestParams {
     organizationUuid: string;
     dto: APILocalOptionCreateRequestDTO;
 }
@@ -59,7 +59,7 @@ export interface PostSingleItSystemLocalRegularOptionTypesInternalV2CreateLocalB
 @Injectable({
   providedIn: 'root'
 })
-export class APIV2ItSystemLocalRegularOptionTypesInternalINTERNALService {
+export class APIV2ItSystemLocalFrequencyTypesInternalINTERNALService {
 
     protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();
@@ -125,17 +125,17 @@ export class APIV2ItSystemLocalRegularOptionTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public deleteSingleItSystemLocalRegularOptionTypesInternalV2DeleteLocalBusinessType(requestParameters: DeleteSingleItSystemLocalRegularOptionTypesInternalV2DeleteLocalBusinessTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
-    public deleteSingleItSystemLocalRegularOptionTypesInternalV2DeleteLocalBusinessType(requestParameters: DeleteSingleItSystemLocalRegularOptionTypesInternalV2DeleteLocalBusinessTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
-    public deleteSingleItSystemLocalRegularOptionTypesInternalV2DeleteLocalBusinessType(requestParameters: DeleteSingleItSystemLocalRegularOptionTypesInternalV2DeleteLocalBusinessTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
-    public deleteSingleItSystemLocalRegularOptionTypesInternalV2DeleteLocalBusinessType(requestParameters: DeleteSingleItSystemLocalRegularOptionTypesInternalV2DeleteLocalBusinessTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
+    public deleteSingleItSystemLocalFrequencyTypesInternalV2DeleteLocalRelationFrequencyType(requestParameters: DeleteSingleItSystemLocalFrequencyTypesInternalV2DeleteLocalRelationFrequencyTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
+    public deleteSingleItSystemLocalFrequencyTypesInternalV2DeleteLocalRelationFrequencyType(requestParameters: DeleteSingleItSystemLocalFrequencyTypesInternalV2DeleteLocalRelationFrequencyTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
+    public deleteSingleItSystemLocalFrequencyTypesInternalV2DeleteLocalRelationFrequencyType(requestParameters: DeleteSingleItSystemLocalFrequencyTypesInternalV2DeleteLocalRelationFrequencyTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
+    public deleteSingleItSystemLocalFrequencyTypesInternalV2DeleteLocalRelationFrequencyType(requestParameters: DeleteSingleItSystemLocalFrequencyTypesInternalV2DeleteLocalRelationFrequencyTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling deleteSingleItSystemLocalRegularOptionTypesInternalV2DeleteLocalBusinessType.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling deleteSingleItSystemLocalFrequencyTypesInternalV2DeleteLocalRelationFrequencyType.');
         }
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
-            throw new Error('Required parameter optionUuid was null or undefined when calling deleteSingleItSystemLocalRegularOptionTypesInternalV2DeleteLocalBusinessType.');
+            throw new Error('Required parameter optionUuid was null or undefined when calling deleteSingleItSystemLocalFrequencyTypesInternalV2DeleteLocalRelationFrequencyType.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -169,7 +169,7 @@ export class APIV2ItSystemLocalRegularOptionTypesInternalINTERNALService {
             }
         }
 
-        let localVarPath = `/api/v2/internal/it-systems/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/local-option-types/business-types/${this.configuration.encodeParam({name: "optionUuid", value: optionUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
+        let localVarPath = `/api/v2/internal/it-systems/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/local-option-types/frequency-relation-types/${this.configuration.encodeParam({name: "optionUuid", value: optionUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
         return this.httpClient.request<APILocalRegularOptionResponseDTO>('delete', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -187,13 +187,13 @@ export class APIV2ItSystemLocalRegularOptionTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getManyItSystemLocalRegularOptionTypesInternalV2GetLocalBusinessTypes(requestParameters: GetManyItSystemLocalRegularOptionTypesInternalV2GetLocalBusinessTypesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APILocalRegularOptionResponseDTO>>;
-    public getManyItSystemLocalRegularOptionTypesInternalV2GetLocalBusinessTypes(requestParameters: GetManyItSystemLocalRegularOptionTypesInternalV2GetLocalBusinessTypesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APILocalRegularOptionResponseDTO>>>;
-    public getManyItSystemLocalRegularOptionTypesInternalV2GetLocalBusinessTypes(requestParameters: GetManyItSystemLocalRegularOptionTypesInternalV2GetLocalBusinessTypesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APILocalRegularOptionResponseDTO>>>;
-    public getManyItSystemLocalRegularOptionTypesInternalV2GetLocalBusinessTypes(requestParameters: GetManyItSystemLocalRegularOptionTypesInternalV2GetLocalBusinessTypesRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyItSystemLocalFrequencyTypesInternalV2GetLocalRelationFrequencyTypes(requestParameters: GetManyItSystemLocalFrequencyTypesInternalV2GetLocalRelationFrequencyTypesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APILocalRegularOptionResponseDTO>>;
+    public getManyItSystemLocalFrequencyTypesInternalV2GetLocalRelationFrequencyTypes(requestParameters: GetManyItSystemLocalFrequencyTypesInternalV2GetLocalRelationFrequencyTypesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APILocalRegularOptionResponseDTO>>>;
+    public getManyItSystemLocalFrequencyTypesInternalV2GetLocalRelationFrequencyTypes(requestParameters: GetManyItSystemLocalFrequencyTypesInternalV2GetLocalRelationFrequencyTypesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APILocalRegularOptionResponseDTO>>>;
+    public getManyItSystemLocalFrequencyTypesInternalV2GetLocalRelationFrequencyTypes(requestParameters: GetManyItSystemLocalFrequencyTypesInternalV2GetLocalRelationFrequencyTypesRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyItSystemLocalRegularOptionTypesInternalV2GetLocalBusinessTypes.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyItSystemLocalFrequencyTypesInternalV2GetLocalRelationFrequencyTypes.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -227,7 +227,7 @@ export class APIV2ItSystemLocalRegularOptionTypesInternalINTERNALService {
             }
         }
 
-        let localVarPath = `/api/v2/internal/it-systems/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/local-option-types/business-types`;
+        let localVarPath = `/api/v2/internal/it-systems/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/local-option-types/frequency-relation-types`;
         return this.httpClient.request<Array<APILocalRegularOptionResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -245,17 +245,17 @@ export class APIV2ItSystemLocalRegularOptionTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItSystemLocalRegularOptionTypesInternalV2GetLocalBusinessTypeByOptionId(requestParameters: GetSingleItSystemLocalRegularOptionTypesInternalV2GetLocalBusinessTypeByOptionIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
-    public getSingleItSystemLocalRegularOptionTypesInternalV2GetLocalBusinessTypeByOptionId(requestParameters: GetSingleItSystemLocalRegularOptionTypesInternalV2GetLocalBusinessTypeByOptionIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
-    public getSingleItSystemLocalRegularOptionTypesInternalV2GetLocalBusinessTypeByOptionId(requestParameters: GetSingleItSystemLocalRegularOptionTypesInternalV2GetLocalBusinessTypeByOptionIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
-    public getSingleItSystemLocalRegularOptionTypesInternalV2GetLocalBusinessTypeByOptionId(requestParameters: GetSingleItSystemLocalRegularOptionTypesInternalV2GetLocalBusinessTypeByOptionIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleItSystemLocalFrequencyTypesInternalV2GetLocalRelationFrequencyTypeByOptionId(requestParameters: GetSingleItSystemLocalFrequencyTypesInternalV2GetLocalRelationFrequencyTypeByOptionIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
+    public getSingleItSystemLocalFrequencyTypesInternalV2GetLocalRelationFrequencyTypeByOptionId(requestParameters: GetSingleItSystemLocalFrequencyTypesInternalV2GetLocalRelationFrequencyTypeByOptionIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
+    public getSingleItSystemLocalFrequencyTypesInternalV2GetLocalRelationFrequencyTypeByOptionId(requestParameters: GetSingleItSystemLocalFrequencyTypesInternalV2GetLocalRelationFrequencyTypeByOptionIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
+    public getSingleItSystemLocalFrequencyTypesInternalV2GetLocalRelationFrequencyTypeByOptionId(requestParameters: GetSingleItSystemLocalFrequencyTypesInternalV2GetLocalRelationFrequencyTypeByOptionIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleItSystemLocalRegularOptionTypesInternalV2GetLocalBusinessTypeByOptionId.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleItSystemLocalFrequencyTypesInternalV2GetLocalRelationFrequencyTypeByOptionId.');
         }
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
-            throw new Error('Required parameter optionUuid was null or undefined when calling getSingleItSystemLocalRegularOptionTypesInternalV2GetLocalBusinessTypeByOptionId.');
+            throw new Error('Required parameter optionUuid was null or undefined when calling getSingleItSystemLocalFrequencyTypesInternalV2GetLocalRelationFrequencyTypeByOptionId.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -289,7 +289,7 @@ export class APIV2ItSystemLocalRegularOptionTypesInternalINTERNALService {
             }
         }
 
-        let localVarPath = `/api/v2/internal/it-systems/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/local-option-types/business-types/${this.configuration.encodeParam({name: "optionUuid", value: optionUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
+        let localVarPath = `/api/v2/internal/it-systems/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/local-option-types/frequency-relation-types/${this.configuration.encodeParam({name: "optionUuid", value: optionUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
         return this.httpClient.request<APILocalRegularOptionResponseDTO>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -307,21 +307,21 @@ export class APIV2ItSystemLocalRegularOptionTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleItSystemLocalRegularOptionTypesInternalV2PatchLocalBusinessType(requestParameters: PatchSingleItSystemLocalRegularOptionTypesInternalV2PatchLocalBusinessTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
-    public patchSingleItSystemLocalRegularOptionTypesInternalV2PatchLocalBusinessType(requestParameters: PatchSingleItSystemLocalRegularOptionTypesInternalV2PatchLocalBusinessTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
-    public patchSingleItSystemLocalRegularOptionTypesInternalV2PatchLocalBusinessType(requestParameters: PatchSingleItSystemLocalRegularOptionTypesInternalV2PatchLocalBusinessTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
-    public patchSingleItSystemLocalRegularOptionTypesInternalV2PatchLocalBusinessType(requestParameters: PatchSingleItSystemLocalRegularOptionTypesInternalV2PatchLocalBusinessTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public patchSingleItSystemLocalFrequencyTypesInternalV2PatchLocalRelationFrequencyType(requestParameters: PatchSingleItSystemLocalFrequencyTypesInternalV2PatchLocalRelationFrequencyTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
+    public patchSingleItSystemLocalFrequencyTypesInternalV2PatchLocalRelationFrequencyType(requestParameters: PatchSingleItSystemLocalFrequencyTypesInternalV2PatchLocalRelationFrequencyTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
+    public patchSingleItSystemLocalFrequencyTypesInternalV2PatchLocalRelationFrequencyType(requestParameters: PatchSingleItSystemLocalFrequencyTypesInternalV2PatchLocalRelationFrequencyTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
+    public patchSingleItSystemLocalFrequencyTypesInternalV2PatchLocalRelationFrequencyType(requestParameters: PatchSingleItSystemLocalFrequencyTypesInternalV2PatchLocalRelationFrequencyTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling patchSingleItSystemLocalRegularOptionTypesInternalV2PatchLocalBusinessType.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling patchSingleItSystemLocalFrequencyTypesInternalV2PatchLocalRelationFrequencyType.');
         }
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
-            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItSystemLocalRegularOptionTypesInternalV2PatchLocalBusinessType.');
+            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItSystemLocalFrequencyTypesInternalV2PatchLocalRelationFrequencyType.');
         }
         const dto = requestParameters.dto;
         if (dto === null || dto === undefined) {
-            throw new Error('Required parameter dto was null or undefined when calling patchSingleItSystemLocalRegularOptionTypesInternalV2PatchLocalBusinessType.');
+            throw new Error('Required parameter dto was null or undefined when calling patchSingleItSystemLocalFrequencyTypesInternalV2PatchLocalRelationFrequencyType.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -365,7 +365,7 @@ export class APIV2ItSystemLocalRegularOptionTypesInternalINTERNALService {
             }
         }
 
-        let localVarPath = `/api/v2/internal/it-systems/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/local-option-types/business-types/${this.configuration.encodeParam({name: "optionUuid", value: optionUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
+        let localVarPath = `/api/v2/internal/it-systems/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/local-option-types/frequency-relation-types/${this.configuration.encodeParam({name: "optionUuid", value: optionUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
         return this.httpClient.request<APILocalRegularOptionResponseDTO>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -384,17 +384,17 @@ export class APIV2ItSystemLocalRegularOptionTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleItSystemLocalRegularOptionTypesInternalV2CreateLocalBusinessType(requestParameters: PostSingleItSystemLocalRegularOptionTypesInternalV2CreateLocalBusinessTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
-    public postSingleItSystemLocalRegularOptionTypesInternalV2CreateLocalBusinessType(requestParameters: PostSingleItSystemLocalRegularOptionTypesInternalV2CreateLocalBusinessTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
-    public postSingleItSystemLocalRegularOptionTypesInternalV2CreateLocalBusinessType(requestParameters: PostSingleItSystemLocalRegularOptionTypesInternalV2CreateLocalBusinessTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
-    public postSingleItSystemLocalRegularOptionTypesInternalV2CreateLocalBusinessType(requestParameters: PostSingleItSystemLocalRegularOptionTypesInternalV2CreateLocalBusinessTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public postSingleItSystemLocalFrequencyTypesInternalV2CreateLocalRelationFrequencyType(requestParameters: PostSingleItSystemLocalFrequencyTypesInternalV2CreateLocalRelationFrequencyTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
+    public postSingleItSystemLocalFrequencyTypesInternalV2CreateLocalRelationFrequencyType(requestParameters: PostSingleItSystemLocalFrequencyTypesInternalV2CreateLocalRelationFrequencyTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
+    public postSingleItSystemLocalFrequencyTypesInternalV2CreateLocalRelationFrequencyType(requestParameters: PostSingleItSystemLocalFrequencyTypesInternalV2CreateLocalRelationFrequencyTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
+    public postSingleItSystemLocalFrequencyTypesInternalV2CreateLocalRelationFrequencyType(requestParameters: PostSingleItSystemLocalFrequencyTypesInternalV2CreateLocalRelationFrequencyTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling postSingleItSystemLocalRegularOptionTypesInternalV2CreateLocalBusinessType.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling postSingleItSystemLocalFrequencyTypesInternalV2CreateLocalRelationFrequencyType.');
         }
         const dto = requestParameters.dto;
         if (dto === null || dto === undefined) {
-            throw new Error('Required parameter dto was null or undefined when calling postSingleItSystemLocalRegularOptionTypesInternalV2CreateLocalBusinessType.');
+            throw new Error('Required parameter dto was null or undefined when calling postSingleItSystemLocalFrequencyTypesInternalV2CreateLocalRelationFrequencyType.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -437,7 +437,7 @@ export class APIV2ItSystemLocalRegularOptionTypesInternalINTERNALService {
             }
         }
 
-        let localVarPath = `/api/v2/internal/it-systems/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/local-option-types/business-types`;
+        let localVarPath = `/api/v2/internal/it-systems/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/local-option-types/frequency-relation-types`;
         return this.httpClient.request<APILocalRegularOptionResponseDTO>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,

@@ -5179,6 +5179,42 @@
         <source>Organisationsroller i din orginsation</source>
         <target state="new">Organisationsroller i din orginsation</target>
       </trans-unit>
+      <trans-unit id="1665695847626369659" datatype="html">
+        <source>Forretningstyper</source>
+        <target state="new">Forretningstyper</target>
+      </trans-unit>
+      <trans-unit id="2554180997191376694" datatype="html">
+        <source>Arkiveringstyper</source>
+        <target state="new">Arkiveringstyper</target>
+      </trans-unit>
+      <trans-unit id="7973375106384608446" datatype="html">
+        <source>Datatyper</source>
+        <target state="new">Datatyper</target>
+      </trans-unit>
+      <trans-unit id="3400894940431073121" datatype="html">
+        <source>Frekvenser</source>
+        <target state="new">Frekvenser</target>
+      </trans-unit>
+      <trans-unit id="4186278720309841624" datatype="html">
+        <source>Grænseflader</source>
+        <target state="new">Grænseflader</target>
+      </trans-unit>
+      <trans-unit id="8977823802262029818" datatype="html">
+        <source>Følsomme persondata</source>
+        <target state="new">Følsomme persondata</target>
+      </trans-unit>
+      <trans-unit id="4314900003118162253" datatype="html">
+        <source>Kategorier af registrerede i databehandlingen</source>
+        <target state="new">Kategorier af registrerede i databehandlingen</target>
+      </trans-unit>
+      <trans-unit id="2389901481128357361" datatype="html">
+        <source>It system udfaldsrum</source>
+        <target state="new">It system udfaldsrum</target>
+      </trans-unit>
+      <trans-unit id="7533326215200012439" datatype="html">
+        <source>It system roller</source>
+        <target state="new">It system roller</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
