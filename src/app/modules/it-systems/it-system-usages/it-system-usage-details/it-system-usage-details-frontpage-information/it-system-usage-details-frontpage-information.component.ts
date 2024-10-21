@@ -30,6 +30,7 @@ import {
   selectItSystemUsageGeneral,
   selectItSystemUsageValid,
 } from 'src/app/store/it-system-usage/selectors';
+import { selectITSystemUsageUIModuleConfigEnabledFieldFrontPageLifeCycleStatus, selectITSystemUsageUIModuleConfigEnabledFieldFrontPageUsagePeriod } from 'src/app/store/organization/ui-module-customization/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 @Component({
@@ -49,6 +50,9 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
     },
     { updateOn: 'blur' }
   );
+
+  public readonly lifeCycleStatusEnabled$ = this.store.select(selectITSystemUsageUIModuleConfigEnabledFieldFrontPageLifeCycleStatus);
+  public readonly usagePeriodEnabled$ = this.store.select(selectITSystemUsageUIModuleConfigEnabledFieldFrontPageUsagePeriod);
 
   public readonly itSystemApplicationForm = new FormGroup(
     {
