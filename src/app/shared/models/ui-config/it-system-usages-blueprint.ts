@@ -1,15 +1,6 @@
 import { UIModuleConfigKey } from '../../enums/ui-module-config-key';
 import { uiConfigHelpTexts } from './ui-config-helptexts';
 
-export interface UINodeBlueprint {
-  text: string;
-  isObligatory?: boolean;
-  children?: Record<string, UINodeBlueprint>;
-  fullKey?: string;
-  helpText?: string;
-  subtreeIsComplete?: boolean;
-}
-
 export const ItSystemUsageUiBluePrint = {
   module: UIModuleConfigKey.ItSystemUsage,
   isObligatory: false,

@@ -1,8 +1,9 @@
 import { UIModuleConfigKey } from '../../enums/ui-module-config-key';
 import { CustomizedUINode as UINodeCustomization } from '../ui-config/customized-ui-node.model';
-import { ItSystemUsageUiBluePrint, UINodeBlueprint } from '../ui-config/it-system-usages-blueprint';
+import { ItSystemUsageUiBluePrint } from '../ui-config/it-system-usages-blueprint';
 import { UIConfigNodeViewModel } from '../ui-config/ui-config-node-view-model.model';
 import { UIModuleConfig } from '../ui-config/ui-module-config.model';
+import { UINodeBlueprint } from '../ui-config/ui-node-blueprint.model';
 
 export function buildUIModuleConfig(
   blueprint: UINodeBlueprint,
@@ -31,6 +32,7 @@ function buildBasicNodeViewModel(
     fullKey: nodeFullKey,
     isObligatory: node.isObligatory ?? false,
     isEnabled: true,
+    disableIfSubtreeDisabled: node.disableIfSubtreeDisabled,
   };
 
   const nodeCustomization = findCustomizedUINode(uiNodeCustomizations, nodeFullKey);
@@ -72,13 +74,13 @@ function resolveUIModuleBlueprint(module: UIModuleConfigKey): UINodeBlueprint {
     case UIModuleConfigKey.ItSystemUsage:
       return ItSystemUsageUiBluePrint;
     case UIModuleConfigKey.ItContract:
-      return emptyBlueprint;
+      return emptyPlaceholderBlueprint;
     case UIModuleConfigKey.DataProcessingRegistrations:
-      return emptyBlueprint;
+      return emptyPlaceholderBlueprint;
   }
 }
 
-const emptyBlueprint = {
+const emptyPlaceholderBlueprint = {
   text: '',
 };
 
@@ -98,7 +100,11 @@ export function tabIsEnabled(uiConfigViewModels: UIConfigNodeViewModel[], tabFul
   return tabViewModel?.isEnabled ?? true;
 }
 
-export function fieldOrGroupIsEnabled(uiConfigViewModels: UIConfigNodeViewModel[], tabFullKey: string, fieldKey: string) {
+export function fieldOrGroupIsEnabled(
+  uiConfigViewModels: UIConfigNodeViewModel[],
+  tabFullKey: string,
+  fieldKey: string
+) {
   const tabViewModel = getTabViewModelFromModule(uiConfigViewModels, tabFullKey);
   const tabViewModelChildren = tabViewModel?.children;
   if (!tabViewModelChildren) return true;
@@ -108,7 +114,7 @@ export function fieldOrGroupIsEnabled(uiConfigViewModels: UIConfigNodeViewModel[
   return fieldViewModel?.isEnabled ?? true;
 }
 
-function getTabViewModelFromModule(uiConfigViewModels: UIConfigNodeViewModel[], tabFullKey: string){
+function getTabViewModelFromModule(uiConfigViewModels: UIConfigNodeViewModel[], tabFullKey: string) {
   const moduleConfigChildren = uiConfigViewModels[0].children;
   if (!moduleConfigChildren) return undefined;
   return moduleConfigChildren.find((vm) => vm.fullKey === tabFullKey);
