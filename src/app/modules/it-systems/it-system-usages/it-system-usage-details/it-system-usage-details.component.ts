@@ -20,9 +20,11 @@ import {
   selectItSystemUsageUuid,
 } from 'src/app/store/it-system-usage/selectors';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
-import { selectITSystemUsageUIModuleConfig } from 'src/app/store/organization/ui-module-customization/selectors';
+import { selectITSystemUsageUIModuleConfigEnableTabGdpr } from 'src/app/store/organization/ui-module-customization/selectors';
 import { selectOrganizationName } from 'src/app/store/user-store/selectors';
 import { ITSystemUsageRemoveComponent } from './it-system-usage-remove/it-system-usage-remove.component';
+import { UIModuleConfigActions } from 'src/app/store/organization/ui-module-customization/actions';
+import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
 
 @Component({
   templateUrl: 'it-system-usage-details.component.html',
@@ -36,7 +38,7 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
   public readonly itSystemUsageName$ = this.store.select(selectItSystemUsageName).pipe(filterNullish());
   public readonly itSystemUsageUuid$ = this.store.select(selectItSystemUsageUuid).pipe(filterNullish());
   public readonly hasDeletePermissions$ = this.store.select(selectITSystemUsageHasDeletePermission);
-  public readonly itSystemUsagesUIModuleConfig$ = this.store.select(selectITSystemUsageUIModuleConfig);
+  public readonly enableGdprTab$ = this.store.select(selectITSystemUsageUIModuleConfigEnableTabGdpr);
 
   public readonly breadCrumbs$ = combineLatest([
     this.organizationName$,
@@ -68,7 +70,7 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
   }
 
   ngOnInit() {
-    this.itSystemUsagesUIModuleConfig$.subscribe((u) => console.log(JSON.stringify(u) + '   is config in view'));
+    this.store.dispatch(UIModuleConfigActions.getUIModuleConfig({ module: UIModuleConfigKey.ItSystemUsage }));
     this.subscriptions.add(
       this.route.params
         .pipe(
@@ -118,11 +120,5 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
 
   public showRemoveDialog() {
     this.dialog.open(ITSystemUsageRemoveComponent);
-  }
-
-  public enableGdprTab() {
-    return this.itSystemUsagesUIModuleConfig$.pipe(filterNullish()).subscribe((config) => {
-      return config?.configViewModels ? tabIsEnabled(config?.configViewModels, 'ItSystemUsages.gdpr') : true;
-    });
   }
 }

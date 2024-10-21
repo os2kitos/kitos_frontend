@@ -1,5 +1,6 @@
 import { createSelector } from '@ngrx/store';
 import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
+import { tabIsEnabled } from 'src/app/shared/models/helpers/ui-config-helpers';
 import { uiModuleConfigFeature } from './reducer';
 import { UIModuleConfigState } from './state';
 
@@ -16,11 +17,12 @@ export const selectITSystemUsageUIModuleConfig = createSelector(
   }
 );
 
-export const selectUINodeConfig = (module: UIModuleConfigKey, fullKey: string) =>
-  createSelector(selectUIModuleCustomizationState, (state: UIModuleConfigState) => {
-    const module = state.uiModuleConfigs.find((c) => c.module == UIModuleConfigKey.ItSystemUsage);
-    if (module) {
-      return module.configViewModels.find((vm) => vm.fullKey === fullKey);
-    }
-    return undefined;
-  });
+export const selectITSystemUsageUIModuleConfigEnableTabGdpr = createSelector(
+  selectITSystemUsageUIModuleConfig,
+  (itSystemUsageModuleConfig) => {
+    const moduleConfig = itSystemUsageModuleConfig?.configViewModels;
+    if (!moduleConfig) return true;
+
+    return tabIsEnabled(moduleConfig, 'ItSystemUsages.gdpr');
+  }
+);

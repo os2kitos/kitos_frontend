@@ -38,7 +38,6 @@ export class GdprRiskAssessmentSectionComponent extends BaseComponent implements
   public disableDirectoryDocumentationControl = false;
   public readonly itSystemUsagesUIModuleConfig$ = this.store.select(selectITSystemUsageUIModuleConfig);
 
-
   public readonly yesNoDontKnowOptions = yesNoDontKnowOptions;
   public readonly riskAssessmentResultOptions = riskAssessmentResultOptions;
 
@@ -94,9 +93,11 @@ export class GdprRiskAssessmentSectionComponent extends BaseComponent implements
     this.store.dispatch(ITSystemUsageActions.patchITSystemUsage({ gdpr }));
   }
 
-  public enableGdprPlannedRiskAssessmentDate(){
+  public enableGdprPlannedRiskAssessmentDate() {
     return this.itSystemUsagesUIModuleConfig$.pipe(filterNullish()).subscribe((config) => {
-      return config?.configViewModels ? fieldOrGroupIsEnabled(config?.configViewModels, 'ItSystemUsages.gdpr', 'plannedRiskAssessmentDate') : true;
+      return config?.configViewModels
+        ? fieldOrGroupIsEnabled(config?.configViewModels, 'ItSystemUsages.gdpr', 'plannedRiskAssessmentDate')
+        : true;
     });
   }
 }
