@@ -21,7 +21,7 @@ import {
 } from 'src/app/store/it-system-usage/selectors';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
 import { UIModuleConfigActions } from 'src/app/store/organization/ui-module-customization/actions';
-import { selectITSystemUsageUIModuleConfigEnableTabGdpr } from 'src/app/store/organization/ui-module-customization/selectors';
+import { selectITSystemUsageUIModuleConfigEnabledTabGdpr } from 'src/app/store/organization/ui-module-customization/selectors';
 import { selectOrganizationName } from 'src/app/store/user-store/selectors';
 import { ITSystemUsageRemoveComponent } from './it-system-usage-remove/it-system-usage-remove.component';
 
@@ -38,7 +38,7 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
   public readonly itSystemUsageUuid$ = this.store.select(selectItSystemUsageUuid).pipe(filterNullish());
   public readonly hasDeletePermissions$ = this.store.select(selectITSystemUsageHasDeletePermission);
   public readonly enableGdprTab$ = this.store
-    .select(selectITSystemUsageUIModuleConfigEnableTabGdpr)
+    .select(selectITSystemUsageUIModuleConfigEnabledTabGdpr)
     .pipe(filterNullish());
 
   public readonly breadCrumbs$ = combineLatest([
