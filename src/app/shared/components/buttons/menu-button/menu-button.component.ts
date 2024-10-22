@@ -1,7 +1,7 @@
 import { Component, Input, ViewChild } from '@angular/core';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { ButtonStyle } from 'src/app/shared/models/buttons/button-style.model';
-import { IconType } from 'src/app/shared/models/buttons/icon-type';
+import { IconType } from 'src/app/shared/models/icon-type';
 
 @Component({
   selector: 'app-menu-button',

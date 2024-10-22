@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { IconType } from '../icon/icon.component';
+import { IconType } from '../../models/icon-type';
 
 @Component({
   selector: 'app-collapsible-navigation-drawer',

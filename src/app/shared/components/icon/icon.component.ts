@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { IconType } from '../../models/icon-type';
 
 @Component({
   selector: 'app-icon',
@@ -8,5 +9,3 @@ import { Component, Input } from '@angular/core';
 export class IconComponent {
   @Input() iconType!: IconType;
 }
-
-export type IconType = 'document' | 'organization' | 'systems' | 'clipboard' | 'folder-important' | 'bulk-create';
