@@ -51,6 +51,8 @@ import { WarningIconComponent } from './warning-icon.component';
 import { WhiteCircleIconComponent } from './white-circle-icon.component';
 import { XIconComponent } from './x-icon.component';
 import { ChevronLeftIconComponent } from './chevron-left-icon.component';
+import { ExpandCircleIconComponent } from './expand-circle-icon.component';
+import { CollapseCircleIconComponent } from './collapse-circle-icon.component';
 
 @NgModule({
   imports: [],
@@ -107,6 +109,8 @@ import { ChevronLeftIconComponent } from './chevron-left-icon.component';
     ArrowLeftIconComponent,
     BulkCreateIconComponent,
     ChevronLeftIconComponent,
+    ExpandCircleIconComponent,
+    CollapseCircleIconComponent,
   ],
   declarations: [
     ChevronDownIconComponent,
@@ -161,6 +165,8 @@ import { ChevronLeftIconComponent } from './chevron-left-icon.component';
     ArrowLeftIconComponent,
     BulkCreateIconComponent,
     ChevronLeftIconComponent,
+    ExpandCircleIconComponent,
+    CollapseCircleIconComponent,
   ],
   providers: [],
 })

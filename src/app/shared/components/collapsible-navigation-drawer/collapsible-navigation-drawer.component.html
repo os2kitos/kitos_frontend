@@ -23,7 +23,7 @@
     [ngClass]="{ 'chevron-left': !isExpanded, 'chevron-right': isExpanded }"
     class="chevron-container"
   >
-    <app-chevron-left-icon *ngIf="isExpanded"></app-chevron-left-icon>
-    <app-chevron-right-icon *ngIf="!isExpanded"></app-chevron-right-icon>
+    <app-collapse-circle-icon *ngIf="isExpanded" class="someIcon"></app-collapse-circle-icon>
+    <app-expand-circle-icon *ngIf="!isExpanded"></app-expand-circle-icon>
   </app-button>
 </app-card>
