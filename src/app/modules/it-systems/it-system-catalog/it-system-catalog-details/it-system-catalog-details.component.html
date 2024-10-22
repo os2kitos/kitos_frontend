@@ -62,44 +62,7 @@
   </app-details-header>
 
   <div class="content">
-    <app-navigation-drawer>
-      <app-button
-        buttonStyle="tertiary"
-        color="accent"
-        size="large"
-        [routerLink]="[AppPath.frontpage]"
-        routerLinkActive="active"
-        ><app-document-icon></app-document-icon>
-        <ng-container i18n>Systemforside</ng-container>
-      </app-button>
-      <app-button
-        buttonStyle="tertiary"
-        color="accent"
-        size="large"
-        [routerLink]="[AppPath.itInterfaces]"
-        routerLinkActive="active"
-        ><app-systems-icon></app-systems-icon>
-        <ng-container i18n>Udstillede snitflader</ng-container>
-      </app-button>
-      <app-button
-        buttonStyle="tertiary"
-        color="accent"
-        size="large"
-        [routerLink]="[AppPath.kle]"
-        routerLinkActive="active"
-        ><app-table-icon></app-table-icon>
-        <ng-container i18n>KLE</ng-container>
-      </app-button>
-      <app-button
-        buttonStyle="tertiary"
-        color="accent"
-        size="large"
-        [routerLink]="[AppPath.externalReferences]"
-        routerLinkActive="active"
-        ><app-bookmark-icon></app-bookmark-icon>
-        <ng-container i18n>Referencer</ng-container>
-      </app-button>
-    </app-navigation-drawer>
+    <app-collapsible-navigation-drawer [items]="navigationItems"> </app-collapsible-navigation-drawer>
 
     <router-outlet></router-outlet>
   </div>

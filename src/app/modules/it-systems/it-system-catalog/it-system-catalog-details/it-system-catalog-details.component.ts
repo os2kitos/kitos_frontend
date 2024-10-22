@@ -27,6 +27,7 @@ import {
   selectItSystemUuid,
 } from 'src/app/store/it-system/selectors';
 import { ITSystemCatalogDetailsComponentStore } from './it-system-catalog-details.component-store';
+import { NavigationDrawerItem } from 'src/app/shared/components/collapsible-navigation-drawer/collapsible-navigation-drawer.component';
 
 @Component({
   templateUrl: './it-system-catalog-details.component.html',
@@ -62,6 +63,30 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
     ]),
     filterNullish()
   );
+
+  public readonly navigationItems: NavigationDrawerItem[] = [
+    {
+      label: $localize`Systemforside`,
+      iconType: 'document',
+      route: AppPath.frontpage,
+    },
+    {
+      label: $localize`Udstillede snitflader`,
+      iconType: 'systems',
+      route: AppPath.itInterfaces,
+    },
+    {
+      label: $localize`KLE`,
+      iconType: 'table',
+      route: AppPath.kle,
+    },
+    {
+      label: $localize`Referencer`,
+      iconType: 'bookmark',
+      route: AppPath.externalReferences,
+    },
+  ];
+
 
   constructor(
     private store: Store,

@@ -10,4 +10,10 @@ export type IconType =
   | 'roles'
   | 'notification'
   | 'bookmark'
+  | 'money'
+  | 'table'
+  | 'lock'
+  | 'intersect'
+  | 'archive'
+  | 'hierarchy'
   | undefined;

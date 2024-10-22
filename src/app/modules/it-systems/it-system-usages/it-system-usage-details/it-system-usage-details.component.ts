@@ -21,6 +21,7 @@ import {
 import { ITSystemActions } from 'src/app/store/it-system/actions';
 import { selectOrganizationName } from 'src/app/store/user-store/selectors';
 import { ITSystemUsageRemoveComponent } from './it-system-usage-remove/it-system-usage-remove.component';
+import { NavigationDrawerItem } from 'src/app/shared/components/collapsible-navigation-drawer/collapsible-navigation-drawer.component';
 
 @Component({
   templateUrl: 'it-system-usage-details.component.html',
@@ -52,6 +53,75 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
     ]),
     filterNullish()
   );
+
+  public readonly navigationItems: NavigationDrawerItem[] = [
+    {
+      label: $localize`Systemforside`,
+      iconType: 'document',
+      route: AppPath.frontpage,
+    },
+    {
+      label: $localize`Kontrakter`,
+      iconType: 'clipboard',
+      route: AppPath.contracts,
+    },
+    {
+      label: $localize`Databehandling`,
+      iconType: 'folder-important',
+      route: AppPath.dataProcessing,
+    },
+    {
+      label: $localize`GDPR`,
+      iconType: 'lock',
+      route: AppPath.gdpr,
+    },
+    {
+      label: $localize`Systemroller`,
+      iconType: 'roles',
+      route: AppPath.roles,
+    },
+    {
+      label: $localize`Organisation`,
+      iconType: 'organization',
+      route: AppPath.organization,
+    },
+    {
+      label: $localize`Relationer`,
+      iconType: 'intersect',
+      route: AppPath.relations,
+    },
+    {
+      label: $localize`Udstillede snitflader`,
+      iconType: 'systems',
+      route: AppPath.itInterfaces,
+    },
+    {
+      label: $localize`Arkivering`,
+      iconType: 'archive',
+      route: AppPath.archiving,
+    },
+    {
+      label: $localize`Hierarki`,
+      iconType: 'hierarchy',
+      route: AppPath.hierarchy,
+    },
+    {
+      label: $localize`Lokale KLE`,
+      iconType: 'table',
+      route: AppPath.kle,
+    },
+    {
+      label: $localize`Advis`,
+      iconType: 'notification',
+      route: AppPath.notifications,
+    },
+    {
+      label: $localize`Lokale referencer`,
+      iconType: 'bookmark',
+      route: AppPath.externalReferences,
+    },
+  ];
+
 
   constructor(
     private route: ActivatedRoute,
