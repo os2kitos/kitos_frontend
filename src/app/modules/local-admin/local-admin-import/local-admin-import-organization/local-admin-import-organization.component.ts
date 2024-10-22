@@ -9,6 +9,9 @@ import { FkOrgActions } from 'src/app/store/local-admin/fk-org/actions';
 import {
   selectAccessError,
   selectAccessGranted,
+  selectCanCreateConnection,
+  selectCanDeleteConnection,
+  selectCanModifyConnection,
   selectIsConnected,
   selectIsLoadingConnectionStatus,
   selectSynchronizationStatus,
@@ -27,6 +30,10 @@ export class LocalAdminImportOrganizationComponent extends BaseComponent impleme
   public readonly accessError$ = this.store.select(selectAccessError);
   public readonly isConnected$ = this.store.select(selectIsConnected);
   public readonly hasAutoUpdates$ = this.synchronizationStatus$.pipe(map((status) => status?.subscribesToUpdates));
+
+  public readonly canCreateConnection$ = this.store.select(selectCanCreateConnection);
+  public readonly canModifyConnection$ = this.store.select(selectCanModifyConnection);
+  public readonly canDeleteConnection$ = this.store.select(selectCanDeleteConnection);
 
   constructor(
     private store: Store,

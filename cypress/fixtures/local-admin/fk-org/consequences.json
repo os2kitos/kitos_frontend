@@ -1,0 +1,10 @@
+{
+  "consequences": [
+    {
+      "uuid": "b1e97a2f-6c78-42de-b8b8-19f73c4e7d82",
+      "name": "Unit 1",
+      "category": "Added",
+      "description": "Some description"
+    }
+  ]
+}

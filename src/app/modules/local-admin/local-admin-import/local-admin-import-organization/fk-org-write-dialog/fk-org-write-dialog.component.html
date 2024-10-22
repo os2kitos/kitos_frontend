@@ -93,6 +93,7 @@
       (buttonClick)="proceedSynchronization()"
       [disabled]="(isLoading$ | async) ?? false"
       i18n
+      data-cy="proceed-button"
       >{{ proceedText }}</app-button
     >
     <app-button
@@ -102,6 +103,7 @@
       buttonStyle="secondary"
       color="warn"
       i18n
+      data-cy="cancel-button"
       >Afvis ændringer
     </app-button>
     <app-button
@@ -109,6 +111,7 @@
       (buttonClick)="updateSynchronization()"
       [disabled]="(isLoading$ | async) ?? false"
       i18n
+      data-cy="save-button"
       >Godkend ændringer</app-button
     >
   </app-dialog-actions>

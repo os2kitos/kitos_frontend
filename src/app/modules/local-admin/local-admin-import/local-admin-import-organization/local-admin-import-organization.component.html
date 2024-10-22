@@ -73,7 +73,7 @@
     </div>
     <div class="action-buttons">
       <app-button
-        *ngIf="(isConnected$ | async) === false"
+        *ngIf="(canCreateConnection$ | async) === true"
         (buttonClick)="openImportDialog(false)"
         [disabled]="(accessError$ | async) !== undefined"
         i18n
@@ -81,7 +81,7 @@
         >Forbind</app-button
       >
       <app-button
-        *ngIf="(isConnected$ | async) === true"
+        *ngIf="(canModifyConnection$ | async) === true"
         (buttonClick)="openImportDialog(true)"
         [disabled]="(accessError$ | async) !== undefined"
         i18n
@@ -93,6 +93,7 @@
         (buttonClick)="deleteAutoUpdate()"
         i18n
         data-cy="delete-sts-auto-update"
+        [disabled]="(accessError$ | async) !== undefined"
         buttonStyle="secondary"
         color="warn"
         >Afbryd automatisk tjek for opdateringer
