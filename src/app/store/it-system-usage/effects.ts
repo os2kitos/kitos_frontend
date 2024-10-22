@@ -94,7 +94,7 @@ export class ITSystemUsageEffects {
       combineLatestWith(this.store.select(selectITSystemUsageUIModuleConfigEnabledFieldFrontPageLifeCycleStatus)),
       map(([{ gridColumns }, enableLifeCycleStatus]) => {
         if (!enableLifeCycleStatus) {
-          gridColumns = gridColumns.filter((column) => column.field !== 'LifeCycleStatus');
+          gridColumns = gridColumns.filter((column) => !['LifeCycleStatus', 'ActiveAccordingToLifeCycle'].includes(column.field));
         }
         this.statePersistingService.set(USAGE_COLUMNS_ID, gridColumns);
         return ITSystemUsageActions.updateGridColumnsSuccess(gridColumns);
