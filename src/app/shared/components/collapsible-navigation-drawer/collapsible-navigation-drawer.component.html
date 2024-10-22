@@ -15,10 +15,10 @@
   <app-divider></app-divider>
 
   <app-button
-  buttonStyle="tertiary"
-  [tooltip]="isExpanded ? 'Minimer' : 'Udvid'"
-  color="accent"
-  size="large"
+    buttonStyle="tertiary"
+    [tooltip]="isExpanded ? 'Minimer' : 'Udvid'"
+    color="accent"
+    size="large"
     (buttonClick)="toggleExpanded()"
     [ngClass]="{ 'chevron-left': !isExpanded, 'chevron-right': isExpanded }"
     class="chevron-container"
