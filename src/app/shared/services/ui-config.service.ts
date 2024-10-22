@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
+import { UIConfigGridApplication } from 'src/app/modules/it-systems/it-system-usages/it-system-usages.component';
 import { UIModuleConfigKey } from '../enums/ui-module-config-key';
+import { GridColumn } from '../models/grid-column.model';
 import { ItSystemUsageUiBluePrint } from '../models/ui-config/it-system-usages-blueprint';
 import { UIConfigNodeViewModel } from '../models/ui-config/ui-config-node-view-model.model';
 import { UIModuleConfig } from '../models/ui-config/ui-module-config.model';
 import { UINodeBlueprint } from '../models/ui-config/ui-node-blueprint.model';
 import { UINodeCustomization } from '../models/ui-config/ui-node-customization';
-import { UIConfigGridApplication } from 'src/app/modules/it-systems/it-system-usages/it-system-usages.component';
-import { GridColumn } from '../models/grid-column.model';
+import { map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -55,9 +56,9 @@ export class UIConfigService {
     const nodeViewModel = this.buildBasicNodeViewModel(node, uiNodeCustomizations, node.fullKey);
 
     if (node.children) {
-      nodeViewModel.children = Object.keys(node.children).map(
-        (childKey) => this.buildUIConfigNodeViewModels(node.children![childKey], uiNodeCustomizations)
-      ).filter((child) => child !== undefined);
+      nodeViewModel.children = Object.keys(node.children)
+        .map((childKey) => this.buildUIConfigNodeViewModels(node.children![childKey], uiNodeCustomizations))
+        .filter((child) => child !== undefined);
     }
     return nodeViewModel;
   }
@@ -109,6 +110,19 @@ export class UIConfigService {
     return (key.match(/\./g) || []).length;
   }
 
+  public filterColumnsByUIConfig(columns: GridColumn[] | null): GridColumn[] | null {
+    if (!columns) {
+      return null;
+    }
+    return columns.filter(column => !column.disabledByUIConfig);
+  }
+
+  public filterGridColumnsByUIConfig(): (source: Observable<GridColumn[] | null>) => Observable<GridColumn[]> {
+    return (source: Observable<GridColumn[] | null>) => source.pipe(
+      map(columns => this.filterColumnsByUIConfig(columns) || [])
+    );
+  }
+
   public applyAllUIConfigToGridColumns(applications: UIConfigGridApplication[], columns: GridColumn[]) {
     applications.forEach((application) => (columns = this.applyUIConfigToGridColumns(application, columns)));
     return columns;
@@ -119,7 +133,7 @@ export class UIConfigService {
       if (application.columnNamesToExclude.includes(column.field)) {
         return {
           ...column,
-          disabledByUIConfig: !application.shouldEnable
+          disabledByUIConfig: !application.shouldEnable,
         };
       }
       return column;

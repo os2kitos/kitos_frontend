@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { CellClickEvent } from '@progress/kendo-angular-grid';
-import { combineLatestWith, first, map, Observable } from 'rxjs';
+import { combineLatestWith, first, Observable } from 'rxjs';
 import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
 import { BooleanValueDisplayType } from 'src/app/shared/components/status-chip/status-chip.component';
 import { getColumnsToShow } from 'src/app/shared/helpers/grid-config-helper';
@@ -37,7 +37,10 @@ import {
   selectUsageGridColumns,
   selectUsageGridRoleColumns,
 } from 'src/app/store/it-system-usage/selectors';
-import { selectITSystemUsageUIModuleConfigEnabledFieldContractsSelectContractToDetermineIfItSystemIsActive, selectITSystemUsageUIModuleConfigEnabledFieldFrontPageLifeCycleStatus, selectITSystemUsageUIModuleConfigEnabledFieldFrontPageUsagePeriod } from 'src/app/store/organization/ui-module-customization/selectors';
+import {
+  selectITSystemUsageUIModuleConfigEnabledFieldFrontPageLifeCycleStatus,
+  selectITSystemUsageUIModuleConfigEnabledFieldFrontPageUsagePeriod,
+} from 'src/app/store/organization/ui-module-customization/selectors';
 import { selectGridConfigModificationPermission, selectOrganizationName } from 'src/app/store/user-store/selectors';
 
 export interface UIConfigGridApplication {
@@ -53,14 +56,8 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
   public readonly isLoading$ = this.store.select(selectIsLoading);
   public readonly gridData$ = this.store.select(selectGridData);
   public readonly gridState$ = this.store.select(selectGridState);
-  public readonly gridColumns$: Observable<GridColumn[]> = this.store.select(selectUsageGridColumns).pipe(
-    map(columns => {
-      if (!columns) {
-        return [];
-      }
-      return columns.filter(column => !column.disabledByUIConfig);
-    })
-  );
+  public readonly gridColumns$: Observable<GridColumn[]>;
+
   public readonly organizationName$ = this.store.select(selectOrganizationName);
   public readonly hasCreatePermission$ = this.store.select(selectITSystemUsageHasCreateCollectionPermission);
 
@@ -505,8 +502,12 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     { field: 'Note', title: $localize`Note`, section: this.systemSectionName, hidden: false, persistId: 'note' },
   ];
 
-  public readonly enableLifeCycleStatus$ = this.store.select(selectITSystemUsageUIModuleConfigEnabledFieldFrontPageLifeCycleStatus);
-  public readonly enableUsagePeriod$ = this.store.select(selectITSystemUsageUIModuleConfigEnabledFieldFrontPageUsagePeriod);
+  public readonly enableLifeCycleStatus$ = this.store.select(
+    selectITSystemUsageUIModuleConfigEnabledFieldFrontPageLifeCycleStatus
+  );
+  public readonly enableUsagePeriod$ = this.store.select(
+    selectITSystemUsageUIModuleConfigEnabledFieldFrontPageUsagePeriod
+  );
 
   constructor(
     store: Store,
@@ -514,8 +515,12 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     private route: ActivatedRoute,
     private statePersistingService: StatePersistingService,
     private actions$: Actions,
-    ){
+    private uiConfigService: UIConfigService
+  ) {
     super(store, 'it-system-usage');
+    this.gridColumns$ = this.store
+      .select(selectUsageGridColumns)
+      .pipe(this.uiConfigService.filterGridColumnsByUIConfig());
   }
 
   ngOnInit() {
