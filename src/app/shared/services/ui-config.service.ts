@@ -99,4 +99,16 @@ export class UIConfigService {
   private toUIConfigFullKey(segments: string[]) {
     return segments.join('.');
   }
+
+  public isChildOfTab(tabFullKey: string, fieldKey: string){
+    return fieldKey.startsWith(tabFullKey + '.');
+  }
+
+  public isTab(key: string): boolean {
+    return this.countDots(key) === 1;
+  }
+
+  private countDots(key: string): number {
+    return (key.match(/\./g) || []).length;
+  }
 }

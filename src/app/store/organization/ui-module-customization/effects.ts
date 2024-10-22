@@ -52,7 +52,7 @@ export class UIModuleCustomizationEffects {
           .getSingleOrganizationsInternalV2GetUIModuleCustomization({ moduleName, organizationUuid })
           .pipe(
             switchMap((existingUICustomization) => {
-              const requestDto = this.applyUIModuleCustomizationUpdateToRequestDto(
+              const requestDto = this.getUIModuleCustomizationUpdateRequestDto(
                 existingUICustomization.nodes,
                 updatedNodeRequest
               );
@@ -88,14 +88,23 @@ export class UIModuleCustomizationEffects {
     });
   }
 
-  private applyUIModuleCustomizationUpdateToRequestDto(
+  private getUIModuleCustomizationUpdateRequestDto(
     existingNodes: APICustomizedUINodeResponseDTO[],
     updatedNode: APICustomizedUINodeRequestDTO
   ): APIUIModuleCustomizationRequestDTO {
-    const toUpdate = existingNodes?.find((node) => node.key === updatedNode.key);
-    if (toUpdate) {
-      toUpdate.enabled = updatedNode.enabled;
+    const rootToUpdate = existingNodes?.find((node) => node.key === updatedNode.key);
+    if (rootToUpdate) {
+      rootToUpdate.enabled = updatedNode.enabled;
     }
+
+    const rootToUpdateKey = rootToUpdate?.key;
+    if (rootToUpdateKey && this.uiConfigService.isTab(rootToUpdateKey)) {
+      const childrenToUpdate = existingNodes.filter((node) =>
+        this.uiConfigService.isChildOfTab(rootToUpdateKey, node.key)
+      );
+      childrenToUpdate.forEach((c) => (c.enabled = updatedNode.enabled));
+    }
+
     return {
       nodes: existingNodes as APICustomizedUINodeRequestDTO[],
     };
