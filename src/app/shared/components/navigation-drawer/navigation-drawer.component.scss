@@ -28,11 +28,12 @@
   min-width: 240px;
 }
 
-app-divider {
-  margin: $padding-smaller;
+app-card {
+  padding-bottom: $padding-small;
 }
 
 .chevron-container {
+  padding-top: $padding-small;
   display: flex;
 }
 
