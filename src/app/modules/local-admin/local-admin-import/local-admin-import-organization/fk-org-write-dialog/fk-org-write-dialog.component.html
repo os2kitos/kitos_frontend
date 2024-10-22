@@ -65,7 +65,7 @@
           </ng-container>
           <ng-container *ngIf="(updateConsequencesLength$ | async) !== 0">
             <app-content-space-between class="consequences-header-container">
-              <app-paragraph paragraphSize="small" [dimmed]="true"
+              <app-paragraph paragraphSize="small" [dimmed]="true" i18n
                 >Viser konsekvenser <strong>({{ updateConsequencesLength$ | async }})</strong> af opdateringen for
                 organisationshierarkiet i KITOS</app-paragraph
               >

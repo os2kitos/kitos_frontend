@@ -83,12 +83,7 @@ export class LocalGridComponent<T> extends BaseComponent implements OnInit {
       return { data: [] };
     }
     const processedData = process(this.data, { ...this.state, skip: 0, take: this.data.length });
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const formattedData = processedData.data.map((item: any) => {
-      const transformedItem = { ...item };
-      return transformedItem;
-    });
 
-    return { data: formattedData };
+    return { data: processedData.data };
   }
 }

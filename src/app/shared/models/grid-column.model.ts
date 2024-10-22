@@ -11,7 +11,7 @@ export interface GridColumn {
   hidden: boolean; //If the column is hidden by default
 
   /*********************/
-  //Optional
+  //Optional properties
   /*********************/
   filter?: 'text' | 'numeric' | 'boolean' | 'date'; //Base kendo filter type
   extraFilter?: 'enum' | 'organization-unit' | 'choice-type' | 'dropdown-from-column-data' | 'choice-type-by-name'; //Filters other than the base kendo filters
