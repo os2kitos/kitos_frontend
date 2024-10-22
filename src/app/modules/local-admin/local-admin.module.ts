@@ -12,6 +12,7 @@ import { OrganizationsGridComponent } from './local-admin-organization/organizat
 import { LocalAdminItContractComponent } from './local-admin-it-contract/local-admin-it-contract.component';
 import { LocalAdminComponent } from './local-admin.component';
 import { LocalAdminRouterModule } from './local-admin.routes';
+import { LocalAdminDprComponent } from './local-admin-dpr/local-admin-dpr.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,7 @@ import { LocalAdminRouterModule } from './local-admin.routes';
     LocalAdminInformationComponent,
     LocalAdminOrganizationComponent,
     OrganizationsGridComponent,
-    LocalAdminItSystemComponent,
+    LocalAdminItSystemComponent, LocalAdminDprComponent,
     LocalAdminItContractComponent,
     LocalAdminImportComponent,
     LocalAdminImportOrganizationComponent,

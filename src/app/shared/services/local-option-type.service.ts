@@ -16,6 +16,11 @@ import {
   APIV2ItContractLocalRoleOptionTypesInternalINTERNALService,
   APIV2ItContractLocalTemplateTypesInternalINTERNALService,
   APIV2ItContractLocalTerminationDeadlineTypesInternalINTERNALService,
+  APIV2DprLocalBasisForTransferTypesInternalINTERNALService,
+  APIV2DprLocalCountryOptionTypesInternalINTERNALService,
+  APIV2DprLocalDataResponsibleTypesInternalINTERNALService,
+  APIV2DprLocalOversightOptionTypesInternalINTERNALService,
+  APIV2DprLocalRoleOptionTypesInternalINTERNALService,
   APIV2ItSystemLocalArchiveLocationTypesInternalINTERNALService,
   APIV2ItSystemLocalArchiveTestLocationTypesInternalINTERNALService,
   APIV2ItSystemLocalArchiveTypesInternalINTERNALService,
@@ -60,6 +65,7 @@ export class LocalOptionTypeService implements OnDestroy {
     @Inject(APIV2ItSystemLocalRegisterTypesInternalINTERNALService)
     private registerTypeService: APIV2ItSystemLocalRegisterTypesInternalINTERNALService,
     @Inject(APIV2OrganizationUnitLocalRoleOptionTypesInternalINTERNALService)
+    
     //It contract regular option services
     @Inject(APIV2ItContractLocalContractTypesInternalINTERNALService)
     private contractTypeService: APIV2ItContractLocalContractTypesInternalINTERNALService,
@@ -84,12 +90,25 @@ export class LocalOptionTypeService implements OnDestroy {
     @Inject(APIV2ItContractLocalCriticalityTypesInternalINTERNALService)
     private criticalityTypeService: APIV2ItContractLocalCriticalityTypesInternalINTERNALService,
 
+    //Data processing regular option type services
+    @Inject(APIV2DprLocalBasisForTransferTypesInternalINTERNALService)
+    private basisForTransferService: APIV2DprLocalBasisForTransferTypesInternalINTERNALService,
+    @Inject(APIV2DprLocalOversightOptionTypesInternalINTERNALService)
+    private oversightOptionService: APIV2DprLocalOversightOptionTypesInternalINTERNALService,
+    @Inject(APIV2DprLocalDataResponsibleTypesInternalINTERNALService)
+    private dataResponsibleService: APIV2DprLocalDataResponsibleTypesInternalINTERNALService,
+    @Inject(APIV2DprLocalCountryOptionTypesInternalINTERNALService)
+    private countryService: APIV2DprLocalCountryOptionTypesInternalINTERNALService,
+
     //Role option type services
+    @Inject(APIV2OrganizationUnitLocalRoleOptionTypesInternalINTERNALService)
     private organiztionUnitRoleService: APIV2OrganizationUnitLocalRoleOptionTypesInternalINTERNALService,
     @Inject(APIV2ItSystemLocalRoleOptionTypesInternalINTERNALService)
     private itSystemRoleService: APIV2ItSystemLocalRoleOptionTypesInternalINTERNALService,
     @Inject(APIV2ItContractLocalRoleOptionTypesInternalINTERNALService)
-    private itContractRoleService: APIV2ItContractLocalRoleOptionTypesInternalINTERNALService
+    private itContractRoleService: APIV2ItContractLocalRoleOptionTypesInternalINTERNALService,
+    @Inject(APIV2DprLocalRoleOptionTypesInternalINTERNALService)
+    private dprRoleService: APIV2DprLocalRoleOptionTypesInternalINTERNALService
   ) {}
 
   public ngOnDestroy(): void {
@@ -181,6 +200,29 @@ export class LocalOptionTypeService implements OnDestroy {
           this.registerTypeService.getManyItSystemLocalRegisterTypesInternalV2GetLocalRegisterTypes({
             organizationUuid,
           });
+
+      //Data processing regular option types
+      case 'data-processing-basis-for-transfer-types':
+        return (organizationUuid) =>
+          this.basisForTransferService.getManyDprLocalBasisForTransferTypesInternalV2GetLocalBasisForTransferTypes({
+            organizationUuid,
+          });
+      case 'data-processing-oversight-option-types':
+        return (organizationUuid) =>
+          this.oversightOptionService.getManyDprLocalOversightOptionTypesInternalV2GetLocalOversightOptionTypes({
+            organizationUuid,
+          });
+      case 'data-processing-data-responsible-types':
+        return (organizationUuid) =>
+          this.dataResponsibleService.getManyDprLocalDataResponsibleTypesInternalV2GetLocalDataResponsibleTypes({
+            organizationUuid,
+          });
+      case 'data-processing-country-types':
+        return (organizationUuid) =>
+          this.countryService.getManyDprLocalCountryOptionTypesInternalV2GetLocalCountryOptionTypes({
+            organizationUuid,
+          });
+
       //It contract regular option types
       case 'it-contract_contract-type':
         return (organizationUuid) =>
@@ -263,6 +305,11 @@ export class LocalOptionTypeService implements OnDestroy {
       case 'it-contract':
         return (organizationUuid) =>
           this.itContractRoleService.getManyItContractLocalRoleOptionTypesInternalV2GetLocalItContractRoles({
+            organizationUuid,
+          });
+      case 'data-processing':
+        return (organizationUuid) =>
+          this.dprRoleService.getManyDprLocalRoleOptionTypesInternalV2GetLocalDprRoles({
             organizationUuid,
           });
       default:
@@ -349,6 +396,39 @@ export class LocalOptionTypeService implements OnDestroy {
             optionUuid,
             dto: request,
           });
+
+      //Data processing regular option types
+      case 'data-processing-basis-for-transfer-types':
+        return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
+          this.basisForTransferService.patchSingleDprLocalBasisForTransferTypesInternalV2PatchLocalBasisForTransferType(
+            {
+              organizationUuid,
+              optionUuid,
+              dto: request,
+            }
+          );
+      case 'data-processing-oversight-option-types':
+        return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
+          this.oversightOptionService.patchSingleDprLocalOversightOptionTypesInternalV2PatchLocalOversightOptionType({
+            organizationUuid,
+            optionUuid,
+            dto: request,
+          });
+      case 'data-processing-data-responsible-types':
+        return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
+          this.dataResponsibleService.patchSingleDprLocalDataResponsibleTypesInternalV2PatchLocalDataResponsibleType({
+            organizationUuid,
+            optionUuid,
+            dto: request,
+          });
+      case 'data-processing-country-types':
+        return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
+          this.countryService.patchSingleDprLocalCountryOptionTypesInternalV2PatchLocalCountryOptionType({
+            organizationUuid,
+            optionUuid,
+            dto: request,
+          });
+
       //It contract regular option types
       case 'it-contract_contract-type':
         return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
@@ -455,6 +535,15 @@ export class LocalOptionTypeService implements OnDestroy {
             optionUuid,
             dto: request,
           });
+
+      case 'data-processing':
+        return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
+          this.dprRoleService.patchSingleDprLocalRoleOptionTypesInternalV2PatchLocalDprRole({
+            organizationUuid,
+            optionUuid,
+            dto: request,
+          });
+
       case 'it-contract':
         return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
           this.itContractRoleService.patchSingleItContractLocalRoleOptionTypesInternalV2PatchLocalItContractRole({
@@ -538,6 +627,35 @@ export class LocalOptionTypeService implements OnDestroy {
             organizationUuid,
             dto: { optionUuid },
           });
+
+      //Data processing regular option types
+      case 'data-processing-basis-for-transfer-types':
+        return (organizationUuid, optionUuid) =>
+          this.basisForTransferService.postSingleDprLocalBasisForTransferTypesInternalV2CreateLocalBasisForTransferType(
+            {
+              organizationUuid,
+              dto: { optionUuid },
+            }
+          );
+      case 'data-processing-oversight-option-types':
+        return (organizationUuid, optionUuid) =>
+          this.oversightOptionService.postSingleDprLocalOversightOptionTypesInternalV2CreateLocalOversightOptionType({
+            organizationUuid,
+            dto: { optionUuid },
+          });
+      case 'data-processing-data-responsible-types':
+        return (organizationUuid, optionUuid) =>
+          this.dataResponsibleService.postSingleDprLocalDataResponsibleTypesInternalV2CreateLocalDataResponsibleType({
+            organizationUuid,
+            dto: { optionUuid },
+          });
+      case 'data-processing-country-types':
+        return (organizationUuid, optionUuid) =>
+          this.countryService.postSingleDprLocalCountryOptionTypesInternalV2CreateLocalCountryOptionType({
+            organizationUuid,
+            dto: { optionUuid },
+          });
+
       //It contract regular option types
       case 'it-contract_contract-type':
         return (organizationUuid, optionUuid) =>
@@ -632,6 +750,14 @@ export class LocalOptionTypeService implements OnDestroy {
             organizationUuid,
             dto: { optionUuid },
           });
+
+      case 'data-processing':
+        return (organizationUuid, optionUuid) =>
+          this.dprRoleService.postSingleDprLocalRoleOptionTypesInternalV2CreateLocalDprRole({
+            organizationUuid,
+            dto: { optionUuid },
+          });
+
       case 'it-contract':
         return (organizationUuid, optionUuid) =>
           this.itContractRoleService.postSingleItContractLocalRoleOptionTypesInternalV2CreateLocalItContractRole({
@@ -714,6 +840,35 @@ export class LocalOptionTypeService implements OnDestroy {
             organizationUuid,
             optionUuid,
           });
+
+      //Data processing regular option types
+      case 'data-processing-basis-for-transfer-types':
+        return (organizationUuid, optionUuid) =>
+          this.basisForTransferService.deleteSingleDprLocalBasisForTransferTypesInternalV2DeleteLocalBasisForTransferType(
+            {
+              organizationUuid,
+              optionUuid,
+            }
+          );
+      case 'data-processing-oversight-option-types':
+        return (organizationUuid, optionUuid) =>
+          this.oversightOptionService.deleteSingleDprLocalOversightOptionTypesInternalV2DeleteLocalOversightOptionType({
+            organizationUuid,
+            optionUuid,
+          });
+      case 'data-processing-data-responsible-types':
+        return (organizationUuid, optionUuid) =>
+          this.dataResponsibleService.deleteSingleDprLocalDataResponsibleTypesInternalV2DeleteLocalDataResponsibleType({
+            organizationUuid,
+            optionUuid,
+          });
+      case 'data-processing-country-types':
+        return (organizationUuid, optionUuid) =>
+          this.countryService.deleteSingleDprLocalCountryOptionTypesInternalV2DeleteLocalCountryOptionType({
+            organizationUuid,
+            optionUuid,
+          });
+
       //It contract regular option types
       case 'it-contract_contract-type':
         return (organizationUuid, optionUuid) =>
@@ -813,6 +968,14 @@ export class LocalOptionTypeService implements OnDestroy {
             organizationUuid,
             optionUuid,
           });
+
+      case 'data-processing':
+        return (organizationUuid, optionUuid) =>
+          this.dprRoleService.deleteSingleDprLocalRoleOptionTypesInternalV2DeleteLocalDprRole({
+            organizationUuid,
+            optionUuid,
+          });
+
       case 'it-contract':
         return (organizationUuid, optionUuid) =>
           this.itContractRoleService.deleteSingleItContractLocalRoleOptionTypesInternalV2DeleteLocalItContractRole({

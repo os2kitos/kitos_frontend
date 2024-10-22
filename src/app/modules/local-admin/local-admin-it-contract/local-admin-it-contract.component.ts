@@ -17,7 +17,7 @@ export class LocalAdminItContractComponent {
   public selectedSegment: LocalAdminItContractsSegmentOption = LocalAdminItContractsSegmentOption.RegularOptionTypes;
 
   public readonly segmentOptions: SegmentButtonOption<LocalAdminItContractsSegmentOption>[] = [
-    { text: $localize`It kontrakt udfaldsrum`, value: LocalAdminItContractsSegmentOption.RegularOptionTypes },
-    { text: $localize`It kontrakt roller`, value: LocalAdminItContractsSegmentOption.RoleOptionTypes },
+    { text: $localize`Udfaldsrum`, value: LocalAdminItContractsSegmentOption.RegularOptionTypes },
+    { text: $localize`Roller`, value: LocalAdminItContractsSegmentOption.RoleOptionTypes },
   ];
 }
