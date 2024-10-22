@@ -13,6 +13,7 @@ import {
   APIV2ItSystemUsageService,
   APIV2OrganizationGridInternalINTERNALService,
 } from 'src/app/api/v2';
+import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { convertDataSensitivityLevelStringToNumberMap } from 'src/app/shared/models/it-system-usage/gdpr/data-sensitivity-level.model';
 import { adaptITSystemUsage } from 'src/app/shared/models/it-system-usage/it-system-usage.model';
@@ -23,7 +24,12 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ExternalReferencesApiService } from 'src/app/shared/services/external-references-api-service.service';
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
 import { getNewGridColumnsBasedOnConfig } from '../helpers/grid-config-helper';
-import { selectITSystemUsageUIModuleConfigEnabledFieldFrontPageLifeCycleStatus, selectITSystemUsageUIModuleConfigEnabledFieldFrontPageUsagePeriod } from '../organization/ui-module-customization/selectors';
+import {
+  selectITSystemUsageUIModuleConfigEnabledFieldContractsSelectContractToDetermineIfItSystemIsActive,
+  selectITSystemUsageUIModuleConfigEnabledFieldFrontPageLifeCycleStatus,
+  selectITSystemUsageUIModuleConfigEnabledFieldFrontPageUsagePeriod,
+  selectITSystemUsageUIModuleConfigEnabledTabOrganization,
+} from '../organization/ui-module-customization/selectors';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { ITSystemUsageActions } from './actions';
 import {
@@ -36,7 +42,6 @@ import {
   selectOverviewSystemRoles,
   selectUsageGridColumns,
 } from './selectors';
-import { GridColumn } from 'src/app/shared/models/grid-column.model';
 
 @Injectable()
 export class ITSystemUsageEffects {
@@ -92,20 +97,56 @@ export class ITSystemUsageEffects {
   updateGridColumns$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.updateGridColumns),
-      combineLatestWith(this.store.select(selectITSystemUsageUIModuleConfigEnabledFieldFrontPageLifeCycleStatus),
-      this.store.select(selectITSystemUsageUIModuleConfigEnabledFieldFrontPageUsagePeriod)),
-      map(([{ gridColumns }, enableLifeCycleStatus, enableUsagePeriod]) => {
-        gridColumns = this.applyUIConfigToGridColumns(enableLifeCycleStatus, ['LifeCycleStatus', 'ActiveAccordingToLifeCycle'], gridColumns);
-        gridColumns = this.applyUIConfigToGridColumns(enableUsagePeriod, ['ExpirationDate', 'Concluded'], gridColumns);
+      combineLatestWith(
+        this.store.select(selectITSystemUsageUIModuleConfigEnabledFieldFrontPageLifeCycleStatus),
+        this.store.select(selectITSystemUsageUIModuleConfigEnabledFieldFrontPageUsagePeriod),
+        this.store.select(
+          selectITSystemUsageUIModuleConfigEnabledFieldContractsSelectContractToDetermineIfItSystemIsActive
+        ),
+        this.store.select(selectITSystemUsageUIModuleConfigEnabledTabOrganization)
+      ),
+      map(
+        ([
+          { gridColumns },
+          enableLifeCycleStatus,
+          enableUsagePeriod,
+          enableSelectContractToDetermineIfItSystemIsActive,
+          enableOrganization,
+        ]) => {
+          const uiConfigApplications: UIConfigGridApplication[] = [
+            {
+              shouldEnable: enableLifeCycleStatus,
+              columnNamesToExclude: ['LifeCycleStatus', 'ActiveAccordingToLifeCycle']
+            },
+            {
+              shouldEnable: enableUsagePeriod,
+              columnNamesToExclude: ['ExpirationDate', 'Concluded', 'ActiveAccordingToValidityPeriod']
+            },
+            {
+              shouldEnable: enableSelectContractToDetermineIfItSystemIsActive,
+              columnNamesToExclude: ['MainContractIsActive']
+            },
+            {
+              shouldEnable: enableOrganization,
+              columnNamesToExclude: ['ResponsibleOrganizationUnitName']
+            }
+          ];
+          gridColumns = this.applyAllUIConfigToGridColumns(uiConfigApplications, gridColumns);
 
-        this.statePersistingService.set(USAGE_COLUMNS_ID, gridColumns);
-        return ITSystemUsageActions.updateGridColumnsSuccess(gridColumns);
-      })
+          this.statePersistingService.set(USAGE_COLUMNS_ID, gridColumns);
+          return ITSystemUsageActions.updateGridColumnsSuccess(gridColumns);
+        }
+      )
     );
   });
 
-  private applyUIConfigToGridColumns(shouldEnable: boolean, columnNamesToExclude: string[], columns: GridColumn[]){
-    if (!shouldEnable) columns = columns.filter((column) => !columnNamesToExclude.includes(column.field));
+  private applyAllUIConfigToGridColumns(applications: UIConfigGridApplication[], columns: GridColumn[]){
+    applications.forEach((application) => columns = this.applyUIConfigToGridColumns(application, columns));
+    return columns;
+  }
+
+  private applyUIConfigToGridColumns(application: UIConfigGridApplication, columns: GridColumn[]) {
+    if (!application.shouldEnable) columns = columns.filter((column) => !application.columnNamesToExclude.includes(column.field));
     return columns;
   }
 
@@ -258,7 +299,9 @@ export class ITSystemUsageEffects {
             request: { userUuid: userUuid, roleUuid: roleUuid },
           })
           .pipe(
-            map((usage) => ITSystemUsageActions.removeItSystemUsageRoleSuccess(usage, userUuid, roleUuid, itSystemUsageUuid)),
+            map((usage) =>
+              ITSystemUsageActions.removeItSystemUsageRoleSuccess(usage, userUuid, roleUuid, itSystemUsageUuid)
+            ),
             catchError(() => of(ITSystemUsageActions.removeItSystemUsageRoleError()))
           )
       )
@@ -684,6 +727,11 @@ export class ITSystemUsageEffects {
       )
     );
   });
+}
+
+interface UIConfigGridApplication {
+  shouldEnable: boolean;
+  columnNamesToExclude: string[];
 }
 
 function applyQueryFixes(odataString: string, systemRoles: APIBusinessRoleDTO[] | undefined) {
