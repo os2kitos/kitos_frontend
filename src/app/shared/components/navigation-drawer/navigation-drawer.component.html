@@ -9,7 +9,7 @@
       [routerLink]="[item.route]"
     >
       <app-icon [iconType]="item.iconType"></app-icon>
-      <span class="label" [ngClass]="{ 'visible': isExpanded }">{{ item.label }}</span>
+      <span class="label" [ngClass]="{ visible: isExpanded }">{{ item.label }}</span>
     </app-button>
   </div>
   <app-divider></app-divider>
