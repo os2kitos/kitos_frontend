@@ -116,20 +116,20 @@ export class ITSystemUsageEffects {
           const uiConfigApplications: UIConfigGridApplication[] = [
             {
               shouldEnable: enableLifeCycleStatus,
-              columnNamesToExclude: ['LifeCycleStatus', 'ActiveAccordingToLifeCycle']
+              columnNamesToExclude: ['LifeCycleStatus', 'ActiveAccordingToLifeCycle'],
             },
             {
               shouldEnable: enableUsagePeriod,
-              columnNamesToExclude: ['ExpirationDate', 'Concluded', 'ActiveAccordingToValidityPeriod']
+              columnNamesToExclude: ['ExpirationDate', 'Concluded', 'ActiveAccordingToValidityPeriod'],
             },
             {
               shouldEnable: enableSelectContractToDetermineIfItSystemIsActive,
-              columnNamesToExclude: ['MainContractIsActive']
+              columnNamesToExclude: ['MainContractIsActive'],
             },
             {
               shouldEnable: enableOrganization,
-              columnNamesToExclude: ['ResponsibleOrganizationUnitName']
-            }
+              columnNamesToExclude: ['ResponsibleOrganizationUnitName'],
+            },
           ];
           gridColumns = this.applyAllUIConfigToGridColumns(uiConfigApplications, gridColumns);
 
@@ -139,16 +139,6 @@ export class ITSystemUsageEffects {
       )
     );
   });
-
-  private applyAllUIConfigToGridColumns(applications: UIConfigGridApplication[], columns: GridColumn[]){
-    applications.forEach((application) => columns = this.applyUIConfigToGridColumns(application, columns));
-    return columns;
-  }
-
-  private applyUIConfigToGridColumns(application: UIConfigGridApplication, columns: GridColumn[]) {
-    if (!application.shouldEnable) columns = columns.filter((column) => !application.columnNamesToExclude.includes(column.field));
-    return columns;
-  }
 
   updateGridColumnsAndRoleColumns$ = createEffect(() => {
     return this.actions$.pipe(
@@ -161,39 +151,59 @@ export class ITSystemUsageEffects {
         ),
         this.store.select(selectITSystemUsageUIModuleConfigEnabledTabOrganization)
       ),
-      map(([
-        { gridColumns, gridRoleColumns },
-        enableLifeCycleStatus,
-        enableUsagePeriod,
-        enableSelectContractToDetermineIfItSystemIsActive,
-        enableOrganization,
-      ]) => {
-        const columns = gridColumns.concat(gridRoleColumns);
-        const uiConfigApplications: UIConfigGridApplication[] = [
-          {
-            shouldEnable: enableLifeCycleStatus,
-            columnNamesToExclude: ['LifeCycleStatus', 'ActiveAccordingToLifeCycle']
-          },
-          {
-            shouldEnable: enableUsagePeriod,
-            columnNamesToExclude: ['ExpirationDate', 'Concluded', 'ActiveAccordingToValidityPeriod']
-          },
-          {
-            shouldEnable: enableSelectContractToDetermineIfItSystemIsActive,
-            columnNamesToExclude: ['MainContractIsActive']
-          },
-          {
-            shouldEnable: enableOrganization,
-            columnNamesToExclude: ['ResponsibleOrganizationUnitName']
-          }
-        ];
-        gridColumns = this.applyAllUIConfigToGridColumns(uiConfigApplications, gridColumns);
-        
-        this.statePersistingService.set(USAGE_COLUMNS_ID, columns);
-        return ITSystemUsageActions.updateGridColumnsAndRoleColumnsSuccess(columns);
-      })
+      map(
+        ([
+          { gridColumns, gridRoleColumns },
+          enableLifeCycleStatus,
+          enableUsagePeriod,
+          enableSelectContractToDetermineIfItSystemIsActive,
+          enableOrganization,
+        ]) => {
+          const uiConfigApplications: UIConfigGridApplication[] = [
+            {
+              shouldEnable: enableLifeCycleStatus,
+              columnNamesToExclude: ['LifeCycleStatus', 'ActiveAccordingToLifeCycle'],
+            },
+            {
+              shouldEnable: enableUsagePeriod,
+              columnNamesToExclude: ['ExpirationDate', 'Concluded', 'ActiveAccordingToValidityPeriod'],
+            },
+            {
+              shouldEnable: enableSelectContractToDetermineIfItSystemIsActive,
+              columnNamesToExclude: ['MainContractIsActive'],
+            },
+            {
+              shouldEnable: enableOrganization,
+              columnNamesToExclude: ['ResponsibleOrganizationUnitName'],
+            },
+          ];
+          const columns = this.applyAllUIConfigToGridColumns(uiConfigApplications, gridColumns.concat(gridRoleColumns));
+
+          this.statePersistingService.set(USAGE_COLUMNS_ID, columns);
+          return ITSystemUsageActions.updateGridColumnsAndRoleColumnsSuccess(columns);
+        }
+      )
     );
   });
+
+  private applyAllUIConfigToGridColumns(applications: UIConfigGridApplication[], columns: GridColumn[]) {
+    applications.forEach((application) => (columns = this.applyUIConfigToGridColumns(application, columns)));
+    return columns;
+  }
+
+  private applyUIConfigToGridColumns(application: UIConfigGridApplication, columns: GridColumn[]) {
+    const updatedColumns = columns.map((column) => {
+      if (application.columnNamesToExclude.includes(column.field)) {
+        return {
+          ...column,
+          disabledByUIConfig: !application.shouldEnable
+        };
+      }
+      return column;
+    });
+
+    return updatedColumns;
+  }
 
   getItSystemUsageOverviewRoles = createEffect(() => {
     return this.actions$.pipe(
