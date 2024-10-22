@@ -5,6 +5,7 @@ import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { combineLatest, distinctUntilChanged, filter, first, map } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { NavigationDrawerItem } from 'src/app/shared/components/collapsible-navigation-drawer/collapsible-navigation-drawer.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { BreadCrumb } from 'src/app/shared/models/breadcrumbs/breadcrumb.model';
@@ -46,6 +47,44 @@ export class DataProcessingDetailsComponent extends BaseComponent implements OnI
     ]),
     filterNullish()
   );
+
+  public readonly navigationItems: NavigationDrawerItem[] = [
+    {
+      label: $localize`Forside`,
+      iconType: 'document',
+      route: AppPath.frontpage,
+    },
+    {
+      label: $localize`IT systemer`,
+      iconType: 'systems',
+      route: AppPath.itSystems,
+    },
+    {
+      label: $localize`IT Kontrakter`,
+      iconType: 'folder-important',
+      route: AppPath.itContracts,
+    },
+    {
+      label: $localize`Tilsyn`,
+      iconType: 'clipboard',
+      route: AppPath.oversight,
+    },
+    {
+      label: $localize`Databehandlingsroller`,
+      iconType: 'roles',
+      route: AppPath.roles
+    },
+    {
+      label: $localize`advis`,
+      iconType: 'notification',
+      route: AppPath.notifications
+    },
+    {
+      label: $localize`Referencer`,
+      iconType: 'bookmark',
+      route: AppPath.externalReferences
+    }
+  ];
 
   constructor(
     private store: Store,
