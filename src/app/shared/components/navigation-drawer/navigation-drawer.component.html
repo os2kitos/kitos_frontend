@@ -20,7 +20,6 @@
     color="accent"
     size="large"
     (buttonClick)="toggleExpanded()"
-    [ngClass]="{ 'chevron-left': !isExpanded, 'chevron-right': isExpanded }"
     class="chevron-container"
   >
     <app-collapse-circle-icon *ngIf="isExpanded"></app-collapse-circle-icon>
