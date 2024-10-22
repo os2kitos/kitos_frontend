@@ -153,8 +153,42 @@ export class ITSystemUsageEffects {
   updateGridColumnsAndRoleColumns$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.updateGridColumnsAndRoleColumns),
-      map(({ gridColumns, gridRoleColumns }) => {
+      combineLatestWith(
+        this.store.select(selectITSystemUsageUIModuleConfigEnabledFieldFrontPageLifeCycleStatus),
+        this.store.select(selectITSystemUsageUIModuleConfigEnabledFieldFrontPageUsagePeriod),
+        this.store.select(
+          selectITSystemUsageUIModuleConfigEnabledFieldContractsSelectContractToDetermineIfItSystemIsActive
+        ),
+        this.store.select(selectITSystemUsageUIModuleConfigEnabledTabOrganization)
+      ),
+      map(([
+        { gridColumns, gridRoleColumns },
+        enableLifeCycleStatus,
+        enableUsagePeriod,
+        enableSelectContractToDetermineIfItSystemIsActive,
+        enableOrganization,
+      ]) => {
         const columns = gridColumns.concat(gridRoleColumns);
+        const uiConfigApplications: UIConfigGridApplication[] = [
+          {
+            shouldEnable: enableLifeCycleStatus,
+            columnNamesToExclude: ['LifeCycleStatus', 'ActiveAccordingToLifeCycle']
+          },
+          {
+            shouldEnable: enableUsagePeriod,
+            columnNamesToExclude: ['ExpirationDate', 'Concluded', 'ActiveAccordingToValidityPeriod']
+          },
+          {
+            shouldEnable: enableSelectContractToDetermineIfItSystemIsActive,
+            columnNamesToExclude: ['MainContractIsActive']
+          },
+          {
+            shouldEnable: enableOrganization,
+            columnNamesToExclude: ['ResponsibleOrganizationUnitName']
+          }
+        ];
+        gridColumns = this.applyAllUIConfigToGridColumns(uiConfigApplications, gridColumns);
+        
         this.statePersistingService.set(USAGE_COLUMNS_ID, columns);
         return ITSystemUsageActions.updateGridColumnsAndRoleColumnsSuccess(columns);
       })
