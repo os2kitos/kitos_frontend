@@ -2,6 +2,7 @@
   <div *ngFor="let item of items">
     <app-button
       buttonStyle="tertiary"
+      [tooltip]="isExpanded ? '' : item.label"
       color="accent"
       size="large"
       routerLinkActive="active"
@@ -15,6 +16,7 @@
 
   <app-button
   buttonStyle="tertiary"
+  [tooltip]="isExpanded ? 'Minimer' : 'Udvid'"
   color="accent"
   size="large"
     (buttonClick)="toggleExpanded()"
