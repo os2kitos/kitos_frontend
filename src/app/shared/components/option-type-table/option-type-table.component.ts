@@ -20,7 +20,7 @@ export class OptionTypeTableComponent extends BaseComponent implements OnInit {
   @Input() title: string = '';
   @Input() disableAccordion: boolean = false;
 
-  @Input() showWriteAccess: boolean = true;
+  @Input() showWriteAccess: boolean = false;
   @Input() showDescription: boolean = true;
   @Input() showEditButton: boolean = true;
 

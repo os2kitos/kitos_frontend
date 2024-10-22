@@ -5207,13 +5207,45 @@
         <source>Kategorier af registrerede i databehandlingen</source>
         <target state="new">Kategorier af registrerede i databehandlingen</target>
       </trans-unit>
-      <trans-unit id="2389901481128357361" datatype="html">
-        <source>It system udfaldsrum</source>
-        <target state="new">It system udfaldsrum</target>
+      <trans-unit id="8040369184915149511" datatype="html">
+        <source>Dataansvarlige</source>
+        <target state="new">Dataansvarlige</target>
       </trans-unit>
-      <trans-unit id="7533326215200012439" datatype="html">
-        <source>It system roller</source>
-        <target state="new">It system roller</target>
+      <trans-unit id="2516892896296403323" datatype="html">
+        <source>Lande</source>
+        <target state="new">Lande</target>
+      </trans-unit>
+      <trans-unit id="4831733483690855814" datatype="html">
+        <source>Kontrakttyper</source>
+        <target state="new">Kontrakttyper</target>
+      </trans-unit>
+      <trans-unit id="781230654751231655" datatype="html">
+        <source>Kontraktskabeloner</source>
+        <target state="new">Kontraktskabeloner</target>
+      </trans-unit>
+      <trans-unit id="7925424443502844356" datatype="html">
+        <source>Indkøbsformer</source>
+        <target state="new">Indkøbsformer</target>
+      </trans-unit>
+      <trans-unit id="7318872809958060040" datatype="html">
+        <source>Betalingsmodeller</source>
+        <target state="new">Betalingsmodeller</target>
+      </trans-unit>
+      <trans-unit id="3528465926860037088" datatype="html">
+        <source>Betalingsfrekvenser</source>
+        <target state="new">Betalingsfrekvenser</target>
+      </trans-unit>
+      <trans-unit id="2856429460614878961" datatype="html">
+        <source>Pris reguleringer</source>
+        <target state="new">Pris reguleringer</target>
+      </trans-unit>
+      <trans-unit id="7280622341182001048" datatype="html">
+        <source>Genanskaffelsesstrategier</source>
+        <target state="new">Genanskaffelsesstrategier</target>
+      </trans-unit>
+      <trans-unit id="1476830282360846322" datatype="html">
+        <source>Opsigelsesfrister</source>
+        <target state="new">Opsigelsesfrister</target>
       </trans-unit>
       <trans-unit id="7314347350185597624" datatype="html">
         <source>Niveauer</source>
@@ -5295,6 +5327,38 @@
         <source>Forbind</source>
         <target state="new">Forbind</target>
       </trans-unit>
+      <trans-unit id="4831733483690855814" datatype="html">
+        <source>Kontrakttyper</source>
+        <target state="new">Kontrakttyper</target>
+      </trans-unit>
+      <trans-unit id="781230654751231655" datatype="html">
+        <source>Kontraktskabeloner</source>
+        <target state="new">Kontraktskabeloner</target>
+      </trans-unit>
+      <trans-unit id="7925424443502844356" datatype="html">
+        <source>Indkøbsformer</source>
+        <target state="new">Indkøbsformer</target>
+      </trans-unit>
+      <trans-unit id="7318872809958060040" datatype="html">
+        <source>Betalingsmodeller</source>
+        <target state="new">Betalingsmodeller</target>
+      </trans-unit>
+      <trans-unit id="3528465926860037088" datatype="html">
+        <source>Betalingsfrekvenser</source>
+        <target state="new">Betalingsfrekvenser</target>
+      </trans-unit>
+      <trans-unit id="2856429460614878961" datatype="html">
+        <source>Pris reguleringer</source>
+        <target state="new">Pris reguleringer</target>
+      </trans-unit>
+      <trans-unit id="7280622341182001048" datatype="html">
+        <source>Genanskaffelsesstrategier</source>
+        <target state="new">Genanskaffelsesstrategier</target>
+      </trans-unit>
+      <trans-unit id="1476830282360846322" datatype="html">
+        <source>Opsigelsesfrister</source>
+        <target state="new">Opsigelsesfrister</target>
+      </trans-unit>
       <trans-unit id="41369724053306167" datatype="html">
         <source>Forbindelse til FK Organisation blev oprettet</source>
         <target state="new">Forbindelse til FK Organisation blev oprettet</target>
@@ -5319,73 +5383,9 @@
         <source>Der skete en fejl ifm. tjek for forbindelsen til FK Organisation. Genindlæs venligst siden for at prøve igen.</source>
         <target state="new">Der skete en fejl ifm. tjek for forbindelsen til FK Organisation. Genindlæs venligst siden for at prøve igen.</target>
       </trans-unit>
-      <trans-unit id="2876645566668979898" datatype="html">
-        <source>Ændringer</source>
-        <target state="new">Ændringer</target>
-      </trans-unit>
-      <trans-unit id="6162528529889600567" datatype="html">
-        <source>Ingen ændringer registreret </source>
-        <target state="new">Ingen ændringer registreret </target>
-      </trans-unit>
-      <trans-unit id="4691966835263640588" datatype="html">
-        <source>FK Organisation - Konsekvenser ved opdatering</source>
-        <target state="new">FK Organisation - Konsekvenser ved opdatering</target>
-      </trans-unit>
-      <trans-unit id="4758373128600154246" datatype="html">
-        <source>Afvis ændringer </source>
-        <target state="new">Afvis ændringer </target>
-      </trans-unit>
-      <trans-unit id="4000594411970974316" datatype="html">
-        <source>Godkend ændringer</source>
-        <target state="new">Godkend ændringer</target>
-      </trans-unit>
-      <trans-unit id="3873010813144015439" datatype="html">
-        <source>Ændring</source>
-        <target state="new">Ændring</target>
-      </trans-unit>
-      <trans-unit id="1311000638658798380" datatype="html">
-        <source>Vis konsekvenser</source>
-        <target state="new">Vis konsekvenser</target>
-      </trans-unit>
-      <trans-unit id="415054412324435093" datatype="html">
-        <source>Opret forbindelse</source>
-        <target state="new">Opret forbindelse</target>
-      </trans-unit>
-      <trans-unit id="8993720741305943646" datatype="html">
-        <source>Afbryd automatisk tjek for opdateringer </source>
-        <target state="new">Afbryd automatisk tjek for opdateringer </target>
-      </trans-unit>
-      <trans-unit id="8054139440076531453" datatype="html">
-        <source>Afbryd automatisk opdateringer</source>
-        <target state="new">Afbryd automatisk opdateringer</target>
-      </trans-unit>
-      <trans-unit id="2290037395284696543" datatype="html">
-        <source>Afbryd automatisk tjek for ventende opdateringer fra FK Organistion?</source>
-        <target state="new">Afbryd automatisk tjek for ventende opdateringer fra FK Organistion?</target>
-      </trans-unit>
-      <trans-unit id="922220242325292085" datatype="html">
-        <source>Tilføjet</source>
-        <target state="new">Tilføjet</target>
-      </trans-unit>
-      <trans-unit id="2535776056176637949" datatype="html">
-        <source>Omdøbt</source>
-        <target state="new">Omdøbt</target>
-      </trans-unit>
-      <trans-unit id="1413059181141174378" datatype="html">
-        <source>Flyttet</source>
-        <target state="new">Flyttet</target>
-      </trans-unit>
-      <trans-unit id="414773334721698956" datatype="html">
-        <source>Konverteret</source>
-        <target state="new">Konverteret</target>
-      </trans-unit>
-      <trans-unit id="2721875101249823212" datatype="html">
-        <source>Slettet</source>
-        <target state="new">Slettet</target>
-      </trans-unit>
-      <trans-unit id="3207091467505348477" datatype="html">
-        <source>Organisationsrod erstattet</source>
-        <target state="new">Organisationsrod erstattet</target>
+      <trans-unit id="5851418291332190792" datatype="html">
+        <source>Udfaldsrum</source>
+        <target state="new">Udfaldsrum</target>
       </trans-unit>
     </body>
   </file>

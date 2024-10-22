@@ -11,6 +11,7 @@ import { APIV1DataProcessingRegistrationValidationINTERNALService } from './api/
 import { APIV1DataProtectionAdvisorINTERNALService } from './api/v1DataProtectionAdvisorINTERNAL.service';
 import { APIV1DataResponsibleINTERNALService } from './api/v1DataResponsibleINTERNAL.service';
 import { APIV1DataRowINTERNALService } from './api/v1DataRowINTERNAL.service';
+import { APIV1DprLocalRoleOptionTypesInternalV2INTERNALService } from './api/v1DprLocalRoleOptionTypesInternalV2INTERNAL.service';
 import { APIV1EconomyStreamINTERNALService } from './api/v1EconomyStreamINTERNAL.service';
 import { APIV1ExcelINTERNALService } from './api/v1ExcelINTERNAL.service';
 import { APIV1ExhibitINTERNALService } from './api/v1ExhibitINTERNAL.service';
@@ -19,6 +20,7 @@ import { APIV1GlobalAdminINTERNALService } from './api/v1GlobalAdminINTERNAL.ser
 import { APIV1HealthCheckINTERNALService } from './api/v1HealthCheckINTERNAL.service';
 import { APIV1ItContractINTERNALService } from './api/v1ItContractINTERNAL.service';
 import { APIV1ItContractItSystemUsageINTERNALService } from './api/v1ItContractItSystemUsageINTERNAL.service';
+import { APIV1ItContractLocalRoleOptionTypesInternalV2INTERNALService } from './api/v1ItContractLocalRoleOptionTypesInternalV2INTERNAL.service';
 import { APIV1ItContractRightINTERNALService } from './api/v1ItContractRightINTERNAL.service';
 import { APIV1ItInterfaceINTERNALService } from './api/v1ItInterfaceINTERNAL.service';
 import { APIV1ItSystemINTERNALService } from './api/v1ItSystemINTERNAL.service';

@@ -3967,9 +3967,6 @@
       <trans-unit id="1665695847626369659" datatype="html">
         <source>Forretningstyper</source>
       </trans-unit>
-      <trans-unit id="2389901481128357361" datatype="html">
-        <source>It system udfaldsrum</source>
-      </trans-unit>
       <trans-unit id="2554180997191376694" datatype="html">
         <source>Arkiveringstyper</source>
       </trans-unit>
@@ -3982,14 +3979,41 @@
       <trans-unit id="4314900003118162253" datatype="html">
         <source>Kategorier af registrerede i databehandlingen</source>
       </trans-unit>
-      <trans-unit id="7533326215200012439" datatype="html">
-        <source>It system roller</source>
-      </trans-unit>
       <trans-unit id="7973375106384608446" datatype="html">
         <source>Datatyper</source>
       </trans-unit>
       <trans-unit id="8977823802262029818" datatype="html">
         <source>Følsomme persondata</source>
+      </trans-unit>
+      <trans-unit id="2516892896296403323" datatype="html">
+        <source>Lande</source>
+      </trans-unit>
+      <trans-unit id="8040369184915149511" datatype="html">
+        <source>Dataansvarlige</source>
+      </trans-unit>
+      <trans-unit id="1476830282360846322" datatype="html">
+        <source>Opsigelsesfrister</source>
+      </trans-unit>
+      <trans-unit id="2856429460614878961" datatype="html">
+        <source>Pris reguleringer</source>
+      </trans-unit>
+      <trans-unit id="3528465926860037088" datatype="html">
+        <source>Betalingsfrekvenser</source>
+      </trans-unit>
+      <trans-unit id="4831733483690855814" datatype="html">
+        <source>Kontrakttyper</source>
+      </trans-unit>
+      <trans-unit id="7280622341182001048" datatype="html">
+        <source>Genanskaffelsesstrategier</source>
+      </trans-unit>
+      <trans-unit id="7318872809958060040" datatype="html">
+        <source>Betalingsmodeller</source>
+      </trans-unit>
+      <trans-unit id="781230654751231655" datatype="html">
+        <source>Kontraktskabeloner</source>
+      </trans-unit>
+      <trans-unit id="7925424443502844356" datatype="html">
+        <source>Indkøbsformer</source>
       </trans-unit>
       <trans-unit id="1079562510399620869" datatype="html">
         <source>Niveauer der synkroniseres</source>
@@ -4069,56 +4093,8 @@
       <trans-unit id="961883493480058344" datatype="html">
         <source>Forbind</source>
       </trans-unit>
-      <trans-unit id="1311000638658798380" datatype="html">
-        <source>Vis konsekvenser</source>
-      </trans-unit>
-      <trans-unit id="1413059181141174378" datatype="html">
-        <source>Flyttet</source>
-      </trans-unit>
-      <trans-unit id="2290037395284696543" datatype="html">
-        <source>Afbryd automatisk tjek for ventende opdateringer fra FK Organistion?</source>
-      </trans-unit>
-      <trans-unit id="2535776056176637949" datatype="html">
-        <source>Omdøbt</source>
-      </trans-unit>
-      <trans-unit id="2721875101249823212" datatype="html">
-        <source>Slettet</source>
-      </trans-unit>
-      <trans-unit id="2876645566668979898" datatype="html">
-        <source>Ændringer</source>
-      </trans-unit>
-      <trans-unit id="3207091467505348477" datatype="html">
-        <source>Organisationsrod erstattet</source>
-      </trans-unit>
-      <trans-unit id="3873010813144015439" datatype="html">
-        <source>Ændring</source>
-      </trans-unit>
-      <trans-unit id="4000594411970974316" datatype="html">
-        <source>Godkend ændringer</source>
-      </trans-unit>
-      <trans-unit id="414773334721698956" datatype="html">
-        <source>Konverteret</source>
-      </trans-unit>
-      <trans-unit id="415054412324435093" datatype="html">
-        <source>Opret forbindelse</source>
-      </trans-unit>
-      <trans-unit id="4691966835263640588" datatype="html">
-        <source>FK Organisation - Konsekvenser ved opdatering</source>
-      </trans-unit>
-      <trans-unit id="4758373128600154246" datatype="html">
-        <source>Afvis ændringer </source>
-      </trans-unit>
-      <trans-unit id="6162528529889600567" datatype="html">
-        <source>Ingen ændringer registreret </source>
-      </trans-unit>
-      <trans-unit id="8054139440076531453" datatype="html">
-        <source>Afbryd automatisk opdateringer</source>
-      </trans-unit>
-      <trans-unit id="8993720741305943646" datatype="html">
-        <source>Afbryd automatisk tjek for opdateringer </source>
-      </trans-unit>
-      <trans-unit id="922220242325292085" datatype="html">
-        <source>Tilføjet</source>
+      <trans-unit id="5851418291332190792" datatype="html">
+        <source>Udfaldsrum</source>
       </trans-unit>
     </body>
   </file>

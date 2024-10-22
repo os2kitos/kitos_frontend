@@ -21,36 +21,36 @@ import { Observable }                                        from 'rxjs';
 // @ts-ignore
 import { APILocalOptionCreateRequestDTO } from '../model/aPILocalOptionCreateRequestDTO';
 // @ts-ignore
-import { APILocalRegularOptionUpdateRequestDTO } from '../model/aPILocalRegularOptionUpdateRequestDTO';
+import { APILocalRegularOptionResponseDTO } from '../model/aPILocalRegularOptionResponseDTO';
 // @ts-ignore
-import { APILocalRoleOptionResponseDTO } from '../model/aPILocalRoleOptionResponseDTO';
+import { APILocalRegularOptionUpdateRequestDTO } from '../model/aPILocalRegularOptionUpdateRequestDTO';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
 
 
-export interface DeleteSingleItSystemLocalRoleOptionTypesInternalV2DeleteLocalItSystemRoleRequestParams {
+export interface DeleteSingleItContractLocalTemplateTypesInternalV2DeleteLocalTemplateTypeRequestParams {
     organizationUuid: string;
     optionUuid: string;
 }
 
-export interface GetManyItSystemLocalRoleOptionTypesInternalV2GetLocalItSystemRolesRequestParams {
+export interface GetManyItContractLocalTemplateTypesInternalV2GetLocalTemplateTypesRequestParams {
     organizationUuid: string;
 }
 
-export interface GetSingleItSystemLocalRoleOptionTypesInternalV2GetLocalItSystemRoleRequestParams {
+export interface GetSingleItContractLocalTemplateTypesInternalV2GetLocalTemplateTypeByOptionIdRequestParams {
     organizationUuid: string;
     optionUuid: string;
 }
 
-export interface PatchSingleItSystemLocalRoleOptionTypesInternalV2PatchLocalItSystemRoleRequestParams {
+export interface PatchSingleItContractLocalTemplateTypesInternalV2PatchLocalTemplateTypeRequestParams {
     organizationUuid: string;
     optionUuid: string;
     dto: APILocalRegularOptionUpdateRequestDTO;
 }
 
-export interface PostSingleItSystemLocalRoleOptionTypesInternalV2CreateLocalItSystemRoleRequestParams {
+export interface PostSingleItContractLocalTemplateTypesInternalV2CreateLocalTemplateTypeRequestParams {
     organizationUuid: string;
     dto: APILocalOptionCreateRequestDTO;
 }
@@ -59,7 +59,7 @@ export interface PostSingleItSystemLocalRoleOptionTypesInternalV2CreateLocalItSy
 @Injectable({
   providedIn: 'root'
 })
-export class APIV2ItSystemLocalRoleOptionTypesInternalINTERNALService {
+export class APIV2ItContractLocalTemplateTypesInternalINTERNALService {
 
     protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();
@@ -125,17 +125,17 @@ export class APIV2ItSystemLocalRoleOptionTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public deleteSingleItSystemLocalRoleOptionTypesInternalV2DeleteLocalItSystemRole(requestParameters: DeleteSingleItSystemLocalRoleOptionTypesInternalV2DeleteLocalItSystemRoleRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<APILocalRoleOptionResponseDTO>;
-    public deleteSingleItSystemLocalRoleOptionTypesInternalV2DeleteLocalItSystemRole(requestParameters: DeleteSingleItSystemLocalRoleOptionTypesInternalV2DeleteLocalItSystemRoleRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<APILocalRoleOptionResponseDTO>>;
-    public deleteSingleItSystemLocalRoleOptionTypesInternalV2DeleteLocalItSystemRole(requestParameters: DeleteSingleItSystemLocalRoleOptionTypesInternalV2DeleteLocalItSystemRoleRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<APILocalRoleOptionResponseDTO>>;
-    public deleteSingleItSystemLocalRoleOptionTypesInternalV2DeleteLocalItSystemRole(requestParameters: DeleteSingleItSystemLocalRoleOptionTypesInternalV2DeleteLocalItSystemRoleRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
+    public deleteSingleItContractLocalTemplateTypesInternalV2DeleteLocalTemplateType(requestParameters: DeleteSingleItContractLocalTemplateTypesInternalV2DeleteLocalTemplateTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
+    public deleteSingleItContractLocalTemplateTypesInternalV2DeleteLocalTemplateType(requestParameters: DeleteSingleItContractLocalTemplateTypesInternalV2DeleteLocalTemplateTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
+    public deleteSingleItContractLocalTemplateTypesInternalV2DeleteLocalTemplateType(requestParameters: DeleteSingleItContractLocalTemplateTypesInternalV2DeleteLocalTemplateTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
+    public deleteSingleItContractLocalTemplateTypesInternalV2DeleteLocalTemplateType(requestParameters: DeleteSingleItContractLocalTemplateTypesInternalV2DeleteLocalTemplateTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling deleteSingleItSystemLocalRoleOptionTypesInternalV2DeleteLocalItSystemRole.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling deleteSingleItContractLocalTemplateTypesInternalV2DeleteLocalTemplateType.');
         }
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
-            throw new Error('Required parameter optionUuid was null or undefined when calling deleteSingleItSystemLocalRoleOptionTypesInternalV2DeleteLocalItSystemRole.');
+            throw new Error('Required parameter optionUuid was null or undefined when calling deleteSingleItContractLocalTemplateTypesInternalV2DeleteLocalTemplateType.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -169,8 +169,8 @@ export class APIV2ItSystemLocalRoleOptionTypesInternalINTERNALService {
             }
         }
 
-        let localVarPath = `/api/v2/internal/it-systems/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/local-option-types/it-systems-roles/${this.configuration.encodeParam({name: "optionUuid", value: optionUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
-        return this.httpClient.request<APILocalRoleOptionResponseDTO>('delete', `${this.configuration.basePath}${localVarPath}`,
+        let localVarPath = `/api/v2/internal/it-contracts/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/local-option-types/template-types/${this.configuration.encodeParam({name: "optionUuid", value: optionUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
+        return this.httpClient.request<APILocalRegularOptionResponseDTO>('delete', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -187,13 +187,13 @@ export class APIV2ItSystemLocalRoleOptionTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getManyItSystemLocalRoleOptionTypesInternalV2GetLocalItSystemRoles(requestParameters: GetManyItSystemLocalRoleOptionTypesInternalV2GetLocalItSystemRolesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APILocalRoleOptionResponseDTO>>;
-    public getManyItSystemLocalRoleOptionTypesInternalV2GetLocalItSystemRoles(requestParameters: GetManyItSystemLocalRoleOptionTypesInternalV2GetLocalItSystemRolesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APILocalRoleOptionResponseDTO>>>;
-    public getManyItSystemLocalRoleOptionTypesInternalV2GetLocalItSystemRoles(requestParameters: GetManyItSystemLocalRoleOptionTypesInternalV2GetLocalItSystemRolesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APILocalRoleOptionResponseDTO>>>;
-    public getManyItSystemLocalRoleOptionTypesInternalV2GetLocalItSystemRoles(requestParameters: GetManyItSystemLocalRoleOptionTypesInternalV2GetLocalItSystemRolesRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyItContractLocalTemplateTypesInternalV2GetLocalTemplateTypes(requestParameters: GetManyItContractLocalTemplateTypesInternalV2GetLocalTemplateTypesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APILocalRegularOptionResponseDTO>>;
+    public getManyItContractLocalTemplateTypesInternalV2GetLocalTemplateTypes(requestParameters: GetManyItContractLocalTemplateTypesInternalV2GetLocalTemplateTypesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APILocalRegularOptionResponseDTO>>>;
+    public getManyItContractLocalTemplateTypesInternalV2GetLocalTemplateTypes(requestParameters: GetManyItContractLocalTemplateTypesInternalV2GetLocalTemplateTypesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APILocalRegularOptionResponseDTO>>>;
+    public getManyItContractLocalTemplateTypesInternalV2GetLocalTemplateTypes(requestParameters: GetManyItContractLocalTemplateTypesInternalV2GetLocalTemplateTypesRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyItSystemLocalRoleOptionTypesInternalV2GetLocalItSystemRoles.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyItContractLocalTemplateTypesInternalV2GetLocalTemplateTypes.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -227,8 +227,8 @@ export class APIV2ItSystemLocalRoleOptionTypesInternalINTERNALService {
             }
         }
 
-        let localVarPath = `/api/v2/internal/it-systems/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/local-option-types/it-systems-roles`;
-        return this.httpClient.request<Array<APILocalRoleOptionResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
+        let localVarPath = `/api/v2/internal/it-contracts/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/local-option-types/template-types`;
+        return this.httpClient.request<Array<APILocalRegularOptionResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -245,17 +245,17 @@ export class APIV2ItSystemLocalRoleOptionTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItSystemLocalRoleOptionTypesInternalV2GetLocalItSystemRole(requestParameters: GetSingleItSystemLocalRoleOptionTypesInternalV2GetLocalItSystemRoleRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRoleOptionResponseDTO>;
-    public getSingleItSystemLocalRoleOptionTypesInternalV2GetLocalItSystemRole(requestParameters: GetSingleItSystemLocalRoleOptionTypesInternalV2GetLocalItSystemRoleRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRoleOptionResponseDTO>>;
-    public getSingleItSystemLocalRoleOptionTypesInternalV2GetLocalItSystemRole(requestParameters: GetSingleItSystemLocalRoleOptionTypesInternalV2GetLocalItSystemRoleRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRoleOptionResponseDTO>>;
-    public getSingleItSystemLocalRoleOptionTypesInternalV2GetLocalItSystemRole(requestParameters: GetSingleItSystemLocalRoleOptionTypesInternalV2GetLocalItSystemRoleRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleItContractLocalTemplateTypesInternalV2GetLocalTemplateTypeByOptionId(requestParameters: GetSingleItContractLocalTemplateTypesInternalV2GetLocalTemplateTypeByOptionIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
+    public getSingleItContractLocalTemplateTypesInternalV2GetLocalTemplateTypeByOptionId(requestParameters: GetSingleItContractLocalTemplateTypesInternalV2GetLocalTemplateTypeByOptionIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
+    public getSingleItContractLocalTemplateTypesInternalV2GetLocalTemplateTypeByOptionId(requestParameters: GetSingleItContractLocalTemplateTypesInternalV2GetLocalTemplateTypeByOptionIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
+    public getSingleItContractLocalTemplateTypesInternalV2GetLocalTemplateTypeByOptionId(requestParameters: GetSingleItContractLocalTemplateTypesInternalV2GetLocalTemplateTypeByOptionIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleItSystemLocalRoleOptionTypesInternalV2GetLocalItSystemRole.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleItContractLocalTemplateTypesInternalV2GetLocalTemplateTypeByOptionId.');
         }
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
-            throw new Error('Required parameter optionUuid was null or undefined when calling getSingleItSystemLocalRoleOptionTypesInternalV2GetLocalItSystemRole.');
+            throw new Error('Required parameter optionUuid was null or undefined when calling getSingleItContractLocalTemplateTypesInternalV2GetLocalTemplateTypeByOptionId.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -289,8 +289,8 @@ export class APIV2ItSystemLocalRoleOptionTypesInternalINTERNALService {
             }
         }
 
-        let localVarPath = `/api/v2/internal/it-systems/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/local-option-types/it-systems-roles/${this.configuration.encodeParam({name: "optionUuid", value: optionUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
-        return this.httpClient.request<APILocalRoleOptionResponseDTO>('get', `${this.configuration.basePath}${localVarPath}`,
+        let localVarPath = `/api/v2/internal/it-contracts/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/local-option-types/template-types/${this.configuration.encodeParam({name: "optionUuid", value: optionUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
+        return this.httpClient.request<APILocalRegularOptionResponseDTO>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -307,21 +307,21 @@ export class APIV2ItSystemLocalRoleOptionTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleItSystemLocalRoleOptionTypesInternalV2PatchLocalItSystemRole(requestParameters: PatchSingleItSystemLocalRoleOptionTypesInternalV2PatchLocalItSystemRoleRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRoleOptionResponseDTO>;
-    public patchSingleItSystemLocalRoleOptionTypesInternalV2PatchLocalItSystemRole(requestParameters: PatchSingleItSystemLocalRoleOptionTypesInternalV2PatchLocalItSystemRoleRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRoleOptionResponseDTO>>;
-    public patchSingleItSystemLocalRoleOptionTypesInternalV2PatchLocalItSystemRole(requestParameters: PatchSingleItSystemLocalRoleOptionTypesInternalV2PatchLocalItSystemRoleRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRoleOptionResponseDTO>>;
-    public patchSingleItSystemLocalRoleOptionTypesInternalV2PatchLocalItSystemRole(requestParameters: PatchSingleItSystemLocalRoleOptionTypesInternalV2PatchLocalItSystemRoleRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public patchSingleItContractLocalTemplateTypesInternalV2PatchLocalTemplateType(requestParameters: PatchSingleItContractLocalTemplateTypesInternalV2PatchLocalTemplateTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
+    public patchSingleItContractLocalTemplateTypesInternalV2PatchLocalTemplateType(requestParameters: PatchSingleItContractLocalTemplateTypesInternalV2PatchLocalTemplateTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
+    public patchSingleItContractLocalTemplateTypesInternalV2PatchLocalTemplateType(requestParameters: PatchSingleItContractLocalTemplateTypesInternalV2PatchLocalTemplateTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
+    public patchSingleItContractLocalTemplateTypesInternalV2PatchLocalTemplateType(requestParameters: PatchSingleItContractLocalTemplateTypesInternalV2PatchLocalTemplateTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling patchSingleItSystemLocalRoleOptionTypesInternalV2PatchLocalItSystemRole.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling patchSingleItContractLocalTemplateTypesInternalV2PatchLocalTemplateType.');
         }
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
-            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItSystemLocalRoleOptionTypesInternalV2PatchLocalItSystemRole.');
+            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItContractLocalTemplateTypesInternalV2PatchLocalTemplateType.');
         }
         const dto = requestParameters.dto;
         if (dto === null || dto === undefined) {
-            throw new Error('Required parameter dto was null or undefined when calling patchSingleItSystemLocalRoleOptionTypesInternalV2PatchLocalItSystemRole.');
+            throw new Error('Required parameter dto was null or undefined when calling patchSingleItContractLocalTemplateTypesInternalV2PatchLocalTemplateType.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -365,8 +365,8 @@ export class APIV2ItSystemLocalRoleOptionTypesInternalINTERNALService {
             }
         }
 
-        let localVarPath = `/api/v2/internal/it-systems/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/local-option-types/it-systems-roles/${this.configuration.encodeParam({name: "optionUuid", value: optionUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
-        return this.httpClient.request<APILocalRoleOptionResponseDTO>('patch', `${this.configuration.basePath}${localVarPath}`,
+        let localVarPath = `/api/v2/internal/it-contracts/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/local-option-types/template-types/${this.configuration.encodeParam({name: "optionUuid", value: optionUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
+        return this.httpClient.request<APILocalRegularOptionResponseDTO>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: dto,
@@ -384,17 +384,17 @@ export class APIV2ItSystemLocalRoleOptionTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleItSystemLocalRoleOptionTypesInternalV2CreateLocalItSystemRole(requestParameters: PostSingleItSystemLocalRoleOptionTypesInternalV2CreateLocalItSystemRoleRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRoleOptionResponseDTO>;
-    public postSingleItSystemLocalRoleOptionTypesInternalV2CreateLocalItSystemRole(requestParameters: PostSingleItSystemLocalRoleOptionTypesInternalV2CreateLocalItSystemRoleRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRoleOptionResponseDTO>>;
-    public postSingleItSystemLocalRoleOptionTypesInternalV2CreateLocalItSystemRole(requestParameters: PostSingleItSystemLocalRoleOptionTypesInternalV2CreateLocalItSystemRoleRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRoleOptionResponseDTO>>;
-    public postSingleItSystemLocalRoleOptionTypesInternalV2CreateLocalItSystemRole(requestParameters: PostSingleItSystemLocalRoleOptionTypesInternalV2CreateLocalItSystemRoleRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public postSingleItContractLocalTemplateTypesInternalV2CreateLocalTemplateType(requestParameters: PostSingleItContractLocalTemplateTypesInternalV2CreateLocalTemplateTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
+    public postSingleItContractLocalTemplateTypesInternalV2CreateLocalTemplateType(requestParameters: PostSingleItContractLocalTemplateTypesInternalV2CreateLocalTemplateTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
+    public postSingleItContractLocalTemplateTypesInternalV2CreateLocalTemplateType(requestParameters: PostSingleItContractLocalTemplateTypesInternalV2CreateLocalTemplateTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
+    public postSingleItContractLocalTemplateTypesInternalV2CreateLocalTemplateType(requestParameters: PostSingleItContractLocalTemplateTypesInternalV2CreateLocalTemplateTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling postSingleItSystemLocalRoleOptionTypesInternalV2CreateLocalItSystemRole.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling postSingleItContractLocalTemplateTypesInternalV2CreateLocalTemplateType.');
         }
         const dto = requestParameters.dto;
         if (dto === null || dto === undefined) {
-            throw new Error('Required parameter dto was null or undefined when calling postSingleItSystemLocalRoleOptionTypesInternalV2CreateLocalItSystemRole.');
+            throw new Error('Required parameter dto was null or undefined when calling postSingleItContractLocalTemplateTypesInternalV2CreateLocalTemplateType.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -437,8 +437,8 @@ export class APIV2ItSystemLocalRoleOptionTypesInternalINTERNALService {
             }
         }
 
-        let localVarPath = `/api/v2/internal/it-systems/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/local-option-types/it-systems-roles`;
-        return this.httpClient.request<APILocalRoleOptionResponseDTO>('post', `${this.configuration.basePath}${localVarPath}`,
+        let localVarPath = `/api/v2/internal/it-contracts/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/local-option-types/template-types`;
+        return this.httpClient.request<APILocalRegularOptionResponseDTO>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: dto,
