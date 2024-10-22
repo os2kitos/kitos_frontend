@@ -93,20 +93,25 @@ export class UIModuleCustomizationEffects {
     updatedNode: APICustomizedUINodeRequestDTO
   ): APIUIModuleCustomizationRequestDTO {
     const rootToUpdate = existingNodes?.find((node) => node.key === updatedNode.key);
+    const newEnabledState = updatedNode.enabled;
     if (rootToUpdate) {
-      rootToUpdate.enabled = updatedNode.enabled;
+      rootToUpdate.enabled = newEnabledState;
     }
 
     const rootToUpdateKey = rootToUpdate?.key;
-    if (rootToUpdateKey && this.uiConfigService.isTab(rootToUpdateKey)) {
+    if (this.shouldUpdateChildren(rootToUpdateKey, newEnabledState)) {
       const childrenToUpdate = existingNodes.filter((node) =>
-        this.uiConfigService.isChildOfTab(rootToUpdateKey, node.key)
+        this.uiConfigService.isChildOfTab(rootToUpdateKey!, node.key)
       );
-      childrenToUpdate.forEach((c) => (c.enabled = updatedNode.enabled));
+      childrenToUpdate.forEach((c) => (c.enabled = newEnabledState));
     }
 
     return {
       nodes: existingNodes as APICustomizedUINodeRequestDTO[],
     };
+  }
+
+  private shouldUpdateChildren(rootKey: string | undefined, isEnabling: boolean | undefined){
+    return !isEnabling && rootKey && this.uiConfigService.isTab(rootKey);
   }
 }
