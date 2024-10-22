@@ -36,6 +36,7 @@ import {
   selectOverviewSystemRoles,
   selectUsageGridColumns,
 } from './selectors';
+import { GridColumn } from 'src/app/shared/models/grid-column.model';
 
 @Injectable()
 export class ITSystemUsageEffects {
@@ -94,17 +95,19 @@ export class ITSystemUsageEffects {
       combineLatestWith(this.store.select(selectITSystemUsageUIModuleConfigEnabledFieldFrontPageLifeCycleStatus),
       this.store.select(selectITSystemUsageUIModuleConfigEnabledFieldFrontPageUsagePeriod)),
       map(([{ gridColumns }, enableLifeCycleStatus, enableUsagePeriod]) => {
-        if (!enableLifeCycleStatus) {
-          gridColumns = gridColumns.filter((column) => !['LifeCycleStatus', 'ActiveAccordingToLifeCycle'].includes(column.field));
-        }
-        if (!enableUsagePeriod){
-          gridColumns = gridColumns.filter((column) => !['ExpirationDate', 'Concluded'].includes(column.field));
-        }
+        gridColumns = this.applyUIConfigToGridColumns(enableLifeCycleStatus, ['LifeCycleStatus', 'ActiveAccordingToLifeCycle'], gridColumns);
+        gridColumns = this.applyUIConfigToGridColumns(enableUsagePeriod, ['ExpirationDate', 'Concluded'], gridColumns);
+
         this.statePersistingService.set(USAGE_COLUMNS_ID, gridColumns);
         return ITSystemUsageActions.updateGridColumnsSuccess(gridColumns);
       })
     );
   });
+
+  private applyUIConfigToGridColumns(shouldEnable: boolean, columnNamesToExclude: string[], columns: GridColumn[]){
+    if (!shouldEnable) columns = columns.filter((column) => !columnNamesToExclude.includes(column.field));
+    return columns;
+  }
 
   updateGridColumnsAndRoleColumns$ = createEffect(() => {
     return this.actions$.pipe(
