@@ -2,11 +2,11 @@ import { Component, Input } from '@angular/core';
 import { IconType } from '../../models/icon-type';
 
 @Component({
-  selector: 'app-collapsible-navigation-drawer',
-  templateUrl: './collapsible-navigation-drawer.component.html',
-  styleUrl: './collapsible-navigation-drawer.component.scss',
+  selector: 'app-navigation-drawer',
+  templateUrl: './navigation-drawer.component.html',
+  styleUrl: './navigation-drawer.component.scss',
 })
-export class CollapsibleNavigationDrawerComponent {
+export class NavigationDrawerComponent {
   @Input() items: NavigationDrawerItem[] = [];
 
   public isExpanded = true;
