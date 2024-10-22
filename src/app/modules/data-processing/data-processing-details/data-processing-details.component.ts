@@ -55,7 +55,7 @@ export class DataProcessingDetailsComponent extends BaseComponent implements OnI
       route: AppPath.frontpage,
     },
     {
-      label: $localize`IT systemer`,
+      label: $localize`IT Systemer`,
       iconType: 'systems',
       route: AppPath.itSystems,
     },
