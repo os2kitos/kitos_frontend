@@ -38,8 +38,8 @@
 
   .label.visible {
     opacity: 1;
-    max-width: 200px; // Adjust based on expected label length
-    margin-left: 8px; // Apply margin when visible
+    max-width: 200px;
+    margin-left: 8px;
   }
 
 }
@@ -50,20 +50,13 @@
 
 app-card {
   padding-bottom: $padding-small;
-  min-width: 60px; // Define the closed state width
-  transition: min-width 0.3s ease; // Smooth transition for width changes
-  overflow: hidden; // Ensure content doesn't overflow during transition
+  min-width: 60px;
+  transition: min-width 0.3s ease;
+  overflow: hidden;
 }
 
 .chevron-container {
   padding-top: $padding-small;
   display: flex;
-}
-
-.chevron-left {
-  justify-content: flex-start;
-}
-
-.chevron-right {
   justify-content: flex-end;
 }
