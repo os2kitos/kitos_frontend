@@ -13,12 +13,15 @@
   </div>
   <app-divider></app-divider>
 
-  <app-icon-button
+  <app-button
+  buttonStyle="tertiary"
+  color="accent"
+  size="large"
     (buttonClick)="toggleExpanded()"
     [ngClass]="{ 'chevron-left': !isExpanded, 'chevron-right': isExpanded }"
     class="chevron-container"
   >
     <app-chevron-left-icon *ngIf="isExpanded"></app-chevron-left-icon>
     <app-chevron-right-icon *ngIf="!isExpanded"></app-chevron-right-icon>
-  </app-icon-button>
+  </app-button>
 </app-card>

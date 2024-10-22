@@ -2,7 +2,6 @@
 
 :host {
   display: flex;
-  flex: 0 0 $navigation-drawer-width;
 }
 
 // Customization of button in navigation context
@@ -38,9 +37,9 @@ app-divider {
 }
 
 .chevron-left {
-  justify-content: flex-start; /* Aligns content to the left */
+  justify-content: flex-start;
 }
 
 .chevron-right {
-  justify-content: flex-end;   /* Aligns content to the right */
+  justify-content: flex-end;
 }
