@@ -38,7 +38,12 @@
       ><app-clipboard-icon></app-clipboard-icon>
       <ng-container i18n>IT kontrakt</ng-container>
     </app-button>
-    <app-button buttonStyle="tertiary" color="accent" size="large" routerLinkActive="active"
+    <app-button
+      buttonStyle="tertiary"
+      color="accent"
+      size="large"
+      routerLinkActive="active"
+      [routerLink]="[AppPath.dataProcessing]"
       ><app-folder-important-icon></app-folder-important-icon>
       <ng-container i18n>Databehandling</ng-container>
     </app-button>

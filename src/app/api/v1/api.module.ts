@@ -11,6 +11,7 @@ import { APIV1DataProcessingRegistrationValidationINTERNALService } from './api/
 import { APIV1DataProtectionAdvisorINTERNALService } from './api/v1DataProtectionAdvisorINTERNAL.service';
 import { APIV1DataResponsibleINTERNALService } from './api/v1DataResponsibleINTERNAL.service';
 import { APIV1DataRowINTERNALService } from './api/v1DataRowINTERNAL.service';
+import { APIV1DprLocalRoleOptionTypesInternalV2INTERNALService } from './api/v1DprLocalRoleOptionTypesInternalV2INTERNAL.service';
 import { APIV1EconomyStreamINTERNALService } from './api/v1EconomyStreamINTERNAL.service';
 import { APIV1ExcelINTERNALService } from './api/v1ExcelINTERNAL.service';
 import { APIV1ExhibitINTERNALService } from './api/v1ExhibitINTERNAL.service';
