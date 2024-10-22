@@ -10,10 +10,7 @@ import { UINodeCustomization } from '../models/ui-config/ui-node-customization';
   providedIn: 'root',
 })
 export class UIConfigService {
-  public buildUIModuleConfig(
-    uiModuleCustomizations: UINodeCustomization[],
-    module: UIModuleConfigKey
-  ): UIModuleConfig {
+  public buildUIModuleConfig(uiModuleCustomizations: UINodeCustomization[], module: UIModuleConfigKey): UIModuleConfig {
     const blueprint = this.getUIBlueprintWithFullKeys(module);
     const uiModuleConfigViewModels: UIConfigNodeViewModel[] = this.buildUIConfigNodeViewModels(
       blueprint,
@@ -90,12 +87,16 @@ export class UIConfigService {
 
   private setupUIBlueprintFullKeys(currentLevelKey: string, currentNode: UINodeBlueprint, ancestorKeys: string[]) {
     const keyPath = [...ancestorKeys, currentLevelKey];
-    currentNode.fullKey = keyPath.join('.');
+    currentNode.fullKey = this.toUIConfigFullKey(keyPath);
 
     if (currentNode.children) {
       Object.keys(currentNode.children).forEach((key) => {
         if (currentNode.children) this.setupUIBlueprintFullKeys(key, currentNode.children[key], keyPath);
       });
     }
+  }
+
+  private toUIConfigFullKey(segments: string[]) {
+    return segments.join('.');
   }
 }

@@ -1,8 +1,8 @@
 import { createSelector } from '@ngrx/store';
 import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
+import { UIConfigNodeViewModel } from 'src/app/shared/models/ui-config/ui-config-node-view-model.model';
 import { uiModuleConfigFeature } from './reducer';
 import { UIModuleConfigState } from './state';
-import { UIConfigNodeViewModel } from 'src/app/shared/models/ui-config/ui-config-node-view-model.model';
 
 export const { selectUIModuleCustomizationState } = uiModuleConfigFeature;
 
@@ -86,12 +86,15 @@ function fieldOrGroupIsEnabled(
   const tabViewModelChildren = tabViewModel?.children;
   if (!tabViewModelChildren) return true;
 
-  const fieldFullKey = tabFullKey.concat('.').concat(fieldKey);
+  const fieldFullKey = [tabFullKey, fieldKey].join('.');
   const fieldViewModel = tabViewModelChildren.find((vm) => vm.fullKey === fieldFullKey);
   return fieldViewModel?.isEnabled ?? true;
 }
 
-function getTabViewModelFromModule(uiConfigViewModels: UIConfigNodeViewModel[], tabFullKey: string): UIConfigNodeViewModel | undefined {
+function getTabViewModelFromModule(
+  uiConfigViewModels: UIConfigNodeViewModel[],
+  tabFullKey: string
+): UIConfigNodeViewModel | undefined {
   const moduleConfigChildren = uiConfigViewModels[0].children;
   if (!moduleConfigChildren) return undefined;
   return moduleConfigChildren.find((vm) => vm.fullKey === tabFullKey);
