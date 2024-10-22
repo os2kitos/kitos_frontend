@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-collapsible-navigation-drawer',
@@ -6,5 +6,13 @@ import { Component } from '@angular/core';
   styleUrl: './collapsible-navigation-drawer.component.scss'
 })
 export class CollapsibleNavigationDrawerComponent {
+  @Input() items: NavigationDrawerItem[] = [];
 
+  public isExpanded = false;
+}
+
+export interface NavigationDrawerItem {
+  label: string;
+  icon: string;
+  route: string;
 }

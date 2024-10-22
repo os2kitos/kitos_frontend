@@ -1,0 +1,30 @@
+@import "theme";
+
+:host {
+  display: flex;
+  flex: 0 0 $navigation-drawer-width;
+}
+
+// Customization of button in navigation context
+:host ::ng-deep {
+  button {
+    font-size: 14px;
+    font-weight: normal;
+    justify-content: flex-start;
+  }
+
+  .active button {
+    font-weight: bold;
+    background: $color-primary-10 !important;
+  }
+
+  //Resize the svg to spec
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+app-card {
+  min-width: 240px;
+}
