@@ -5,6 +5,8 @@ import { UIConfigNodeViewModel } from '../models/ui-config/ui-config-node-view-m
 import { UIModuleConfig } from '../models/ui-config/ui-module-config.model';
 import { UINodeBlueprint } from '../models/ui-config/ui-node-blueprint.model';
 import { UINodeCustomization } from '../models/ui-config/ui-node-customization';
+import { UIConfigGridApplication } from 'src/app/modules/it-systems/it-system-usages/it-system-usages.component';
+import { GridColumn } from '../models/grid-column.model';
 
 @Injectable({
   providedIn: 'root',
@@ -105,5 +107,24 @@ export class UIConfigService {
 
   private countDots(key: string): number {
     return (key.match(/\./g) || []).length;
+  }
+
+  public applyAllUIConfigToGridColumns(applications: UIConfigGridApplication[], columns: GridColumn[]) {
+    applications.forEach((application) => (columns = this.applyUIConfigToGridColumns(application, columns)));
+    return columns;
+  }
+
+  private applyUIConfigToGridColumns(application: UIConfigGridApplication, columns: GridColumn[]) {
+    const updatedColumns = columns.map((column) => {
+      if (application.columnNamesToExclude.includes(column.field)) {
+        return {
+          ...column,
+          disabledByUIConfig: !application.shouldEnable
+        };
+      }
+      return column;
+    });
+
+    return updatedColumns;
   }
 }

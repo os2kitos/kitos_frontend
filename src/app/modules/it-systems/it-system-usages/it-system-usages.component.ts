@@ -26,6 +26,7 @@ import {
   USAGE_SECTION_NAME,
 } from 'src/app/shared/persistent-state-constants';
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
+import { UIConfigService } from 'src/app/shared/services/ui-config.service';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import {
   selectGridData,
@@ -36,7 +37,13 @@ import {
   selectUsageGridColumns,
   selectUsageGridRoleColumns,
 } from 'src/app/store/it-system-usage/selectors';
+import { selectITSystemUsageUIModuleConfigEnabledFieldContractsSelectContractToDetermineIfItSystemIsActive, selectITSystemUsageUIModuleConfigEnabledFieldFrontPageLifeCycleStatus, selectITSystemUsageUIModuleConfigEnabledFieldFrontPageUsagePeriod } from 'src/app/store/organization/ui-module-customization/selectors';
 import { selectGridConfigModificationPermission, selectOrganizationName } from 'src/app/store/user-store/selectors';
+
+export interface UIConfigGridApplication {
+  shouldEnable: boolean;
+  columnNamesToExclude: string[];
+}
 
 @Component({
   templateUrl: 'it-system-usages.component.html',
@@ -493,13 +500,16 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     { field: 'Note', title: $localize`Note`, section: this.systemSectionName, hidden: false, persistId: 'note' },
   ];
 
+  public readonly enableLifeCycleStatus$ = this.store.select(selectITSystemUsageUIModuleConfigEnabledFieldFrontPageLifeCycleStatus);
+  public readonly enableUsagePeriod$ = this.store.select(selectITSystemUsageUIModuleConfigEnabledFieldFrontPageUsagePeriod);
+
   constructor(
     store: Store,
     private router: Router,
     private route: ActivatedRoute,
     private statePersistingService: StatePersistingService,
-    private actions$: Actions
-  ) {
+    private actions$: Actions,
+    ){
     super(store, 'it-system-usage');
   }
 

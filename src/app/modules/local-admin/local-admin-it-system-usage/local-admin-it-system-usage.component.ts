@@ -18,7 +18,7 @@ enum LocalAdminSystemUsagesSegmentOptions {
   templateUrl: './local-admin-it-system-usage.component.html',
   styleUrl: './local-admin-it-system-usage.component.scss',
 })
-export class LocalAdminItSystemUsageComponent implements OnInit {
+export class LocalAdminItSystemUsageComponent {
   public readonly LocalAdminSystemUsagesSegmentOptions = LocalAdminSystemUsagesSegmentOptions;
   public selectedSegment: LocalAdminSystemUsagesSegmentOptions = LocalAdminSystemUsagesSegmentOptions.UiCustomization;
   public readonly segmentOptions: SegmentButtonOption<LocalAdminSystemUsagesSegmentOptions>[] = [
@@ -30,14 +30,6 @@ export class LocalAdminItSystemUsageComponent implements OnInit {
   public readonly itSystemUsageFrontpageForm = new FormGroup({});
 
   constructor(private readonly store: Store) {}
-
-  ngOnInit(): void {
-    this.store.dispatch(
-      UIModuleConfigActions.getUIModuleConfig({
-        module: this.itSystemUsageModuleKey,
-      })
-    );
-  }
 
   public onCheckboxChange($event: UINodeCustomization) {
     const dto: APICustomizedUINodeDTO = { enabled: $event.enabled, key: $event.fullKey };

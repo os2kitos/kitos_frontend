@@ -10,6 +10,8 @@ import { OrganizationService } from './shared/services/organization.service';
 import { RoleOptionTypeService } from './shared/services/role-option-type.service';
 import { UserActions } from './store/user-store/actions';
 import { selectIsAuthenticating } from './store/user-store/selectors';
+import { UIModuleConfigActions } from './store/organization/ui-module-customization/actions';
+import { UIModuleConfigKey } from './shared/enums/ui-module-config-key';
 
 @Component({
   selector: 'app-root',
@@ -37,6 +39,11 @@ export class AppComponent extends BaseComponent implements OnInit {
     this.notificationService.subscribeOnActions();
     this.roleOptionTypeService.subscribeOnActions();
     this.externalReferencesService.subscribeOnActions();
+    this.store.dispatch(
+      UIModuleConfigActions.getUIModuleConfig({
+        module: UIModuleConfigKey.ItSystemUsage,
+      })
+    );
   }
 
   private ensureUserIsPartOfAnOrganization() {
