@@ -17,7 +17,7 @@ export class LocalAdminItSystemComponent {
   public selectedSegment: LocalAdminItSystemSegmentOption = LocalAdminItSystemSegmentOption.RegularOptionTypes;
 
   public readonly segmentOptions: SegmentButtonOption<LocalAdminItSystemSegmentOption>[] = [
-    { text: $localize`It system udfaldsrum`, value: LocalAdminItSystemSegmentOption.RegularOptionTypes },
-    { text: $localize`It system roller`, value: LocalAdminItSystemSegmentOption.RoleOptionTypes },
+    { text: $localize`Udfaldsrum`, value: LocalAdminItSystemSegmentOption.RegularOptionTypes },
+    { text: $localize`Roller`, value: LocalAdminItSystemSegmentOption.RoleOptionTypes },
   ];
 }
