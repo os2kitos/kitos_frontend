@@ -30,7 +30,10 @@
 
 app-card {
   padding-bottom: $padding-small;
+  min-width: 60px; // Define the closed state width
+  transition: min-width 0.3s ease; // Smooth transition for width changes
 }
+
 
 .chevron-container {
   padding-top: $padding-small;
@@ -44,4 +47,3 @@ app-card {
 .chevron-right {
   justify-content: flex-end;
 }
-
