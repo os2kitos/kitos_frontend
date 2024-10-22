@@ -13,7 +13,7 @@ export const selectUIModuleConfig = createSelector(selectUIModuleCustomizationSt
 // eslint-disable-next-line @ngrx/prefix-selectors-with-select
 const createTabEnabledSelector = (tabFullKey: string) =>
   createSelector(selectITSystemUsageUIModuleConfig, (itSystemUsageModuleConfig) => {
-    const moduleConfigViewModels = itSystemUsageModuleConfig?.configViewModels;
+    const moduleConfigViewModels = itSystemUsageModuleConfig?.moduleConfigViewModel;
     if (!moduleConfigViewModels) return true;
 
     return tabIsEnabled(moduleConfigViewModels, tabFullKey);
@@ -22,7 +22,7 @@ const createTabEnabledSelector = (tabFullKey: string) =>
 // eslint-disable-next-line @ngrx/prefix-selectors-with-select
 const createFieldOrGroupEnabledSelector = (tabFullKey: string, fieldKey: string) =>
   createSelector(selectITSystemUsageUIModuleConfig, (itSystemUsageModuleConfig) => {
-    const moduleConfigViewModels = itSystemUsageModuleConfig?.configViewModels;
+    const moduleConfigViewModels = itSystemUsageModuleConfig?.moduleConfigViewModel;
     if (!moduleConfigViewModels) return true;
 
     return fieldOrGroupIsEnabled(moduleConfigViewModels, tabFullKey, fieldKey);
@@ -72,13 +72,13 @@ export const selectITSystemUsageUIModuleConfigEnabledFieldContractsSelectContrac
 export const selectITSystemUsageUIModuleConfigEnabledFieldGdprPlannedRiskAssessmentDate =
   createFieldOrGroupEnabledSelector('ItSystemUsages.gdpr', 'plannedRiskAssessmentDate');
 
-function tabIsEnabled(uiConfigViewModels: UIConfigNodeViewModel[], tabFullKey: string): boolean {
+function tabIsEnabled(uiConfigViewModels: UIConfigNodeViewModel, tabFullKey: string): boolean {
   const tabViewModel = getTabViewModelFromModule(uiConfigViewModels, tabFullKey);
   return tabViewModel?.isEnabled ?? true;
 }
 
 function fieldOrGroupIsEnabled(
-  uiConfigViewModels: UIConfigNodeViewModel[],
+  uiConfigViewModels: UIConfigNodeViewModel,
   tabFullKey: string,
   fieldKey: string
 ): boolean {
@@ -92,10 +92,10 @@ function fieldOrGroupIsEnabled(
 }
 
 function getTabViewModelFromModule(
-  uiConfigViewModels: UIConfigNodeViewModel[],
+  uiConfigViewModels: UIConfigNodeViewModel,
   tabFullKey: string
 ): UIConfigNodeViewModel | undefined {
-  const moduleConfigChildren = uiConfigViewModels[0].children;
+  const moduleConfigChildren = uiConfigViewModels.children;
   if (!moduleConfigChildren) return undefined;
   return moduleConfigChildren.find((vm) => vm.fullKey === tabFullKey);
 }

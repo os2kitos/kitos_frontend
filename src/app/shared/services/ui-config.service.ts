@@ -12,11 +12,11 @@ import { UINodeCustomization } from '../models/ui-config/ui-node-customization';
 export class UIConfigService {
   public buildUIModuleConfig(uiModuleCustomizations: UINodeCustomization[], module: UIModuleConfigKey): UIModuleConfig {
     const blueprint = this.getUIBlueprintWithFullKeys(module);
-    const uiModuleConfigViewModels: UIConfigNodeViewModel[] = this.buildUIConfigNodeViewModels(
+    const moduleConfigViewModel: UIConfigNodeViewModel | undefined = this.buildUIConfigNodeViewModels(
       blueprint,
       uiModuleCustomizations
     );
-    return { module, configViewModels: uiModuleConfigViewModels };
+    return { module, moduleConfigViewModel };
   }
 
   private findCustomizedUINode(customizationList: UINodeCustomization[], fullKey: string): UINodeCustomization | null {
@@ -47,22 +47,17 @@ export class UIConfigService {
   private buildUIConfigNodeViewModels(
     node: UINodeBlueprint,
     uiNodeCustomizations: UINodeCustomization[]
-  ): UIConfigNodeViewModel[] {
-    const nodeViewModels: UIConfigNodeViewModel[] = [];
+  ): UIConfigNodeViewModel | undefined {
+    if (!node.fullKey) return undefined;
 
-    if (node.fullKey) {
-      const nodeViewModel = this.buildBasicNodeViewModel(node, uiNodeCustomizations, node.fullKey);
+    const nodeViewModel = this.buildBasicNodeViewModel(node, uiNodeCustomizations, node.fullKey);
 
-      if (node.children) {
-        nodeViewModel.children = Object.keys(node.children).map(
-          (childKey) => this.buildUIConfigNodeViewModels(node.children![childKey], uiNodeCustomizations)[0]
-        );
-      }
-
-      nodeViewModels.push(nodeViewModel);
+    if (node.children) {
+      nodeViewModel.children = Object.keys(node.children).map(
+        (childKey) => this.buildUIConfigNodeViewModels(node.children![childKey], uiNodeCustomizations)
+      ).filter((child) => child !== undefined);
     }
-
-    return nodeViewModels;
+    return nodeViewModel;
   }
 
   private getUIBlueprintWithFullKeys(module: UIModuleConfigKey): UINodeBlueprint {
@@ -100,7 +95,7 @@ export class UIConfigService {
     return segments.join('.');
   }
 
-  public isChildOfTab(tabFullKey: string, fieldKey: string){
+  public isChildOfTab(tabFullKey: string, fieldKey: string) {
     return fieldKey.startsWith(tabFullKey + '.');
   }
 

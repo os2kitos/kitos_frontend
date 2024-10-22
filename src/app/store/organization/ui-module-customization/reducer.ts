@@ -17,11 +17,17 @@ export const uiModuleConfigFeature = createFeature({
     UIModuleConfigInitialState,
     on(
       UIModuleConfigActions.getUIModuleConfigSuccess,
-      (state, { uiModuleConfig }): UIModuleConfigState => ({ ...state, uiModuleConfigs: updateUIModuleConfigs(state, uiModuleConfig) })
+      (state, { uiModuleConfig }): UIModuleConfigState => ({
+        ...state,
+        uiModuleConfigs: updateUIModuleConfigs(state, uiModuleConfig),
+      })
     ),
     on(
       UIModuleConfigActions.putUIModuleCustomizationSuccess,
-      (state, { uiModuleConfig }): UIModuleConfigState => ({ ...state, uiModuleConfigs: updateUIModuleConfigs(state, uiModuleConfig) })
+      (state, { uiModuleConfig }): UIModuleConfigState => ({
+        ...state,
+        uiModuleConfigs: updateUIModuleConfigs(state, uiModuleConfig),
+      })
     )
   ),
 });
@@ -37,9 +43,9 @@ function updateUIModuleConfigs(state: UIModuleConfigState, newUIModuleConfig: UI
     const existingConfig = updatedUIModuleConfigs[existingConfigIndex];
     updatedUIModuleConfigs[existingConfigIndex] = {
       ...existingConfig,
-      configViewModels: newUIModuleConfig.configViewModels,
+      moduleConfigViewModel: newUIModuleConfig.moduleConfigViewModel,
     };
   }
-  
+
   return updatedUIModuleConfigs;
 }
