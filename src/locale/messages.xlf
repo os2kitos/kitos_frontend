@@ -4096,6 +4096,57 @@
       <trans-unit id="5851418291332190792" datatype="html">
         <source>Udfaldsrum</source>
       </trans-unit>
+      <trans-unit id="1311000638658798380" datatype="html">
+        <source>Vis konsekvenser</source>
+      </trans-unit>
+      <trans-unit id="1413059181141174378" datatype="html">
+        <source>Flyttet</source>
+      </trans-unit>
+      <trans-unit id="2290037395284696543" datatype="html">
+        <source>Afbryd automatisk tjek for ventende opdateringer fra FK Organistion?</source>
+      </trans-unit>
+      <trans-unit id="2535776056176637949" datatype="html">
+        <source>Omdøbt</source>
+      </trans-unit>
+      <trans-unit id="2721875101249823212" datatype="html">
+        <source>Slettet</source>
+      </trans-unit>
+      <trans-unit id="2876645566668979898" datatype="html">
+        <source>Ændringer</source>
+      </trans-unit>
+      <trans-unit id="3207091467505348477" datatype="html">
+        <source>Organisationsrod erstattet</source>
+      </trans-unit>
+      <trans-unit id="3873010813144015439" datatype="html">
+        <source>Ændring</source>
+      </trans-unit>
+      <trans-unit id="4000594411970974316" datatype="html">
+        <source>Godkend ændringer</source>
+      </trans-unit>
+      <trans-unit id="414773334721698956" datatype="html">
+        <source>Konverteret</source>
+      </trans-unit>
+      <trans-unit id="415054412324435093" datatype="html">
+        <source>Opret forbindelse</source>
+      </trans-unit>
+      <trans-unit id="4691966835263640588" datatype="html">
+        <source>FK Organisation - Konsekvenser ved opdatering</source>
+      </trans-unit>
+      <trans-unit id="4758373128600154246" datatype="html">
+        <source>Afvis ændringer </source>
+      </trans-unit>
+      <trans-unit id="6162528529889600567" datatype="html">
+        <source>Ingen ændringer registreret </source>
+      </trans-unit>
+      <trans-unit id="8054139440076531453" datatype="html">
+        <source>Afbryd automatisk opdateringer</source>
+      </trans-unit>
+      <trans-unit id="8993720741305943646" datatype="html">
+        <source>Afbryd automatisk tjek for opdateringer </source>
+      </trans-unit>
+      <trans-unit id="922220242325292085" datatype="html">
+        <source>Tilføjet</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
