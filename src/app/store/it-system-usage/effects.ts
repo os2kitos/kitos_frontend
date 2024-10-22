@@ -23,6 +23,7 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ExternalReferencesApiService } from 'src/app/shared/services/external-references-api-service.service';
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
 import { getNewGridColumnsBasedOnConfig } from '../helpers/grid-config-helper';
+import { selectITSystemUsageUIModuleConfigEnabledFieldFrontPageLifeCycleStatus } from '../organization/ui-module-customization/selectors';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { ITSystemUsageActions } from './actions';
 import {
@@ -90,7 +91,11 @@ export class ITSystemUsageEffects {
   updateGridColumns$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.updateGridColumns),
-      map(({ gridColumns }) => {
+      combineLatestWith(this.store.select(selectITSystemUsageUIModuleConfigEnabledFieldFrontPageLifeCycleStatus)),
+      map(([{ gridColumns }, enableLifeCycleStatus]) => {
+        if (!enableLifeCycleStatus) {
+          gridColumns = gridColumns.filter((column) => column.field !== 'LifeCycleStatus');
+        }
         this.statePersistingService.set(USAGE_COLUMNS_ID, gridColumns);
         return ITSystemUsageActions.updateGridColumnsSuccess(gridColumns);
       })
