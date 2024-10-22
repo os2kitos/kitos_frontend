@@ -1,5 +1,6 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { APIStsOrganizationAccessStatusResponseDTO } from 'src/app/api/v2';
+import { adaptFkOrganizationUnit } from 'src/app/shared/models/local-admin/fk-org-consequence.model';
 import { FkOrgActions } from './actions';
 import { FkOrgState } from './state';
 
@@ -79,20 +80,37 @@ export const fkOrgFeature = createFeature({
       FkOrgActions.previewConnectionUpdateSuccess,
       (state, { response }): FkOrgState => ({
         ...state,
-        updateConsequences: { data: response.consequences ?? [], total: response.consequences?.length ?? 0 },
+        updateConsequences: response.consequences?.map((unit) => adaptFkOrganizationUnit(unit)) ?? [],
         isSynchronizationDialogLoading: false,
       })
     ),
     on(
       FkOrgActions.previewConnectionUpdateError,
-      FkOrgActions.updateConnectionError,
       (state): FkOrgState => ({ ...state, isSynchronizationDialogLoading: false, hasSnapshotFailed: true })
     ),
+    on(FkOrgActions.cancelUpdate, (state): FkOrgState => ({ ...state, updateConsequences: undefined })),
 
     on(FkOrgActions.updateConnection, (state): FkOrgState => ({ ...state, isSynchronizationDialogLoading: true })),
     on(
       FkOrgActions.updateConnectionSuccess,
       (state): FkOrgState => ({ ...state, isSynchronizationDialogLoading: false })
+    ),
+    on(
+      FkOrgActions.updateConnectionError,
+      (state): FkOrgState => ({ ...state, isSynchronizationDialogLoading: false })
+    ),
+
+    on(
+      FkOrgActions.deleteAutomaticUpdateSubscription,
+      (state): FkOrgState => ({ ...state, isLoadingConnectionStatus: true })
+    ),
+    on(
+      FkOrgActions.deleteAutomaticUpdateSubscriptionSuccess,
+      (state): FkOrgState => ({ ...state, isLoadingConnectionStatus: false })
+    ),
+    on(
+      FkOrgActions.deleteAutomaticUpdateSubscriptionError,
+      (state): FkOrgState => ({ ...state, isLoadingConnectionStatus: false })
     )
   ),
 });

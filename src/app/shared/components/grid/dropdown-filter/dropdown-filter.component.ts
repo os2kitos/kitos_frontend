@@ -1,10 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Actions } from '@ngrx/effects';
 import { ColumnComponent, FilterService } from '@progress/kendo-angular-grid';
 import { CompositeFilterDescriptor, FilterDescriptor } from '@progress/kendo-data-query';
-import { AppBaseFilterCellComponent } from '../app-base-filter-cell.component';
-import { Actions } from '@ngrx/effects';
-import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
 import { initializeApplyFilterSubscription } from 'src/app/shared/helpers/grid-filter.helpers';
+import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
+import { AppBaseFilterCellComponent } from '../app-base-filter-cell.component';
 
 export interface DropdownOption {
   name: string;
@@ -23,6 +23,7 @@ export class DropdownFilterComponent extends AppBaseFilterCellComponent implemen
   @Input() public entityType!: RegistrationEntityTypes;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   @Input() options!: DropdownOption[];
+  @Input() searchByNames = false;
 
   public chosenOption?: DropdownOption;
 
@@ -40,7 +41,9 @@ export class DropdownFilterComponent extends AppBaseFilterCellComponent implemen
       this.chosenOption = newOption;
     };
 
-    initializeApplyFilterSubscription(this.actions$, this.entityType, this.column.field, updateMethod);
+    if (this.entityType) {
+      initializeApplyFilterSubscription(this.actions$, this.entityType, this.column.field, updateMethod);
+    }
   }
 
   public didChange(option?: DropdownOption | null): void {
@@ -50,7 +53,7 @@ export class DropdownFilterComponent extends AppBaseFilterCellComponent implemen
         : this.updateFilter({
             field: this.column.field,
             operator: 'eq',
-            value: option.value as number,
+            value: this.searchByNames === false ? (option.value as number) : option.name,
           })
     );
   }

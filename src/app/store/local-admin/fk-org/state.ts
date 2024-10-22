@@ -1,5 +1,5 @@
-import { GridDataResult } from '@progress/kendo-angular-grid';
 import { APIStsOrganizationOrgUnitDTO, APIStsOrganizationSynchronizationDetailsResponseDTO } from 'src/app/api/v2';
+import { FkOrganizationUnit } from 'src/app/shared/models/local-admin/fk-org-consequence.model';
 
 export interface FkOrgState {
   synchronizationStatus: APIStsOrganizationSynchronizationDetailsResponseDTO | undefined;
@@ -7,7 +7,7 @@ export interface FkOrgState {
   isLoadingConnectionStatus: boolean;
 
   snapshot: APIStsOrganizationOrgUnitDTO | undefined;
-  updateConsequences: GridDataResult | undefined;
+  updateConsequences: FkOrganizationUnit[] | undefined;
   isSynchronizationDialogLoading: boolean;
   hasSnapshotFailed: boolean;
 }

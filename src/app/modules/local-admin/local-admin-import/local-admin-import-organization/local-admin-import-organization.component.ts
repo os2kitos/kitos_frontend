@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
+import { map } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
 import { FkOrgActions } from 'src/app/store/local-admin/fk-org/actions';
 import {
   selectAccessError,
@@ -24,8 +26,14 @@ export class LocalAdminImportOrganizationComponent extends BaseComponent impleme
   public readonly accessGranted$ = this.store.select(selectAccessGranted);
   public readonly accessError$ = this.store.select(selectAccessError);
   public readonly isConnected$ = this.store.select(selectIsConnected);
+  public readonly hasAutoUpdates$ = this.synchronizationStatus$.pipe(map((status) => status?.subscribesToUpdates));
 
-  constructor(private store: Store, private actions$: Actions, private matDialog: MatDialog) {
+  constructor(
+    private store: Store,
+    private actions$: Actions,
+    private matDialog: MatDialog,
+    private confirmActionService: ConfirmActionService
+  ) {
     super();
   }
 
@@ -34,17 +42,35 @@ export class LocalAdminImportOrganizationComponent extends BaseComponent impleme
 
     this.subscriptions.add(
       this.actions$
-        .pipe(ofType(FkOrgActions.createConnectionSuccess))
+        .pipe(
+          ofType(
+            FkOrgActions.createConnectionSuccess,
+            FkOrgActions.updateConnectionSuccess,
+            FkOrgActions.deleteAutomaticUpdateSubscriptionSuccess
+          )
+        )
         .subscribe(() => this.dispatchGetSynchronizationStatus())
     );
   }
 
-  public openImportDialog() {
-    this.matDialog.open(FkOrgWriteDialogComponent, {
+  public openImportDialog(isEdit: boolean) {
+    const dialogRef = this.matDialog.open(FkOrgWriteDialogComponent, {
       height: 'auto',
       maxHeight: '95%',
       width: 'auto',
       minWidth: '900px',
+    });
+
+    const instance = dialogRef.componentInstance as FkOrgWriteDialogComponent;
+    instance.isEdit = isEdit;
+  }
+
+  public deleteAutoUpdate() {
+    this.confirmActionService.confirmAction({
+      category: ConfirmActionCategory.Warning,
+      onConfirm: () => this.store.dispatch(FkOrgActions.deleteAutomaticUpdateSubscription()),
+      title: $localize`Afbryd automatisk opdateringer`,
+      message: $localize`Afbryd automatisk tjek for ventende opdateringer fra FK Organistion?`,
     });
   }
 

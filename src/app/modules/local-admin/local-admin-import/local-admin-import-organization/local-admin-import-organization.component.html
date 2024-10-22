@@ -71,16 +71,32 @@
         >Organisationen er <strong>ikke</strong> forbundet til FK Organisation</app-paragraph
       >
     </div>
-    <div>
-      <!-- *ngIf="(isConnected$ | async) === false" -->
+    <div class="action-buttons">
       <app-button
-        class="no-stretch"
-        (buttonClick)="openImportDialog()"
+        *ngIf="(isConnected$ | async) === false"
+        (buttonClick)="openImportDialog(false)"
         [disabled]="(accessError$ | async) !== undefined"
         i18n
         data-cy="create-sts-connection"
         >Forbind</app-button
       >
+      <app-button
+        *ngIf="(isConnected$ | async) === true"
+        (buttonClick)="openImportDialog(true)"
+        [disabled]="(accessError$ | async) !== undefined"
+        i18n
+        data-cy="edit-sts-connection"
+        >Rediger</app-button
+      >
+      <app-button
+        *ngIf="hasAutoUpdates$ | async"
+        (buttonClick)="deleteAutoUpdate()"
+        i18n
+        data-cy="delete-sts-auto-update"
+        buttonStyle="secondary"
+        color="warn"
+        >Afbryd automatisk tjek for opdateringer
+      </app-button>
     </div>
   </app-standard-vertical-content-grid>
   <app-loading *ngIf="isLoadingConnectionStatus$ | async"></app-loading>

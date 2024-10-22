@@ -54,19 +54,62 @@
             [maxLevel]="(levelsSubject$ | async) ?? undefined"
           ></app-drag-and-drop-tree>
         </app-card>
-        <app-card *ngIf="updateConsequences$ | async">
-          <app-grid [data$]="updateConsequences$" [columns$]="gridColumns$"></app-grid>
-        </app-card>
+        <app-accordion
+          title="Ændringer"
+          [isExpandedByDefault]="true"
+          i18n-title
+          *ngIf="updateConsequences$ | async as updateConsequences"
+        >
+          <ng-container *ngIf="(updateConsequencesLength$ | async) === 0">
+            <app-paragraph i18n>Ingen ændringer registreret </app-paragraph>
+          </ng-container>
+          <ng-container *ngIf="(updateConsequencesLength$ | async) !== 0">
+            <app-content-space-between class="consequences-header-container">
+              <app-paragraph paragraphSize="small" [dimmed]="true"
+                >Viser konsekvenser <strong>({{ updateConsequencesLength$ | async }})</strong> af opdateringen for
+                organisationshierarkiet i KITOS</app-paragraph
+              >
+              <app-button (buttonClick)="exportToExcel()" i18n>Eksporter</app-button>
+            </app-content-space-between>
+            <app-local-grid
+              [data]="updateConsequences"
+              [columns]="gridColumns"
+              [withOutline]="true"
+              exportToExcelName="FK Organisation - Konsekvenser ved opdatering"
+              i18n-exportToExcelName
+            ></app-local-grid>
+          </ng-container>
+        </app-accordion>
       </ng-container>
       <app-loading *ngIf="isLoading$ | async"></app-loading>
     </app-standard-vertical-content-grid>
   </form>
   <app-dialog-actions>
-    <app-button (buttonClick)="synchronize()" [disabled]="(isLoading$ | async) ?? false" i18n
-      >Gennemfør synkronisering</app-button
-    >
     <app-button color="warn" (buttonClick)="cancel()" [disabled]="(isLoading$ | async) ?? false" i18n
       >Annuller</app-button
+    >
+    <app-button
+      *ngIf="(updateConsequences$ | async) === undefined"
+      (buttonClick)="proceedSynchronization()"
+      [disabled]="(isLoading$ | async) ?? false"
+      i18n
+      >{{ proceedText }}</app-button
+    >
+    <app-button
+      *ngIf="updateConsequences$ | async"
+      (buttonClick)="cancelUpdate()"
+      [disabled]="(isLoading$ | async) ?? false"
+      buttonStyle="secondary"
+      color="warn"
+      i18n
+      >Afvis ændringer
+    </app-button>
+    <app-button
+      *ngIf="updateConsequences$ | async"
+      (buttonClick)="updateSynchronization()"
+      [disabled]="(isLoading$ | async) ?? false"
+      i18n
+      >Godkend ændringer</app-button
     >
   </app-dialog-actions>
 </app-scrollbar-dialog>

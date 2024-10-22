@@ -28,9 +28,14 @@ export const FkOrgActions = createActionGroup({
       response,
     }),
     'Preview Connection Update Error': emptyProps(),
+    'Cancel Update': emptyProps(),
 
     'Update Connection': (request: APIConnectToStsOrganizationRequestDTO) => ({ request }),
     'Update Connection Success': emptyProps(),
     'Update Connection Error': emptyProps(),
+
+    'Delete Automatic Update Subscription': emptyProps(),
+    'Delete Automatic Update Subscription Success': emptyProps(),
+    'Delete Automatic Update Subscription Error': emptyProps(),
   },
 });

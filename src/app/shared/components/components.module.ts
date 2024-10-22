@@ -134,6 +134,7 @@ import { BooleanCircleComponent } from './boolean-circle/boolean-circle.componen
 import { CheckboxButtonComponent } from './buttons/checkbox-button/checkbox-button.component';
 import { MultiSelectDropdownComponent } from './dropdowns/multi-select-dropdown/multi-select-dropdown.component';
 import { LocalAdminColumnConfigButtonComponent } from './local-admin-column-config-button/local-admin-column-config-button.component';
+import { LocalGridComponent } from './local-grid/local-grid.component';
 import { NumberCircleComponent } from './number-circle/number-circle.component';
 import { EditOptionTypeDialogComponent } from './option-type-table/edit-option-type-dialog/edit-option-type-dialog.component';
 import { OptionTypeTableComponent } from './option-type-table/option-type-table.component';
@@ -258,6 +259,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     AccordionHeaderComponent,
     OptionTypeTableComponent,
     EditOptionTypeDialogComponent,
+    LocalGridComponent,
   ],
   imports: [
     CommonModule,
@@ -385,6 +387,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     SnackbarActionsComponent,
     AccordionHeaderComponent,
     OptionTypeTableComponent,
+    LocalGridComponent,
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },

@@ -93,4 +93,19 @@ export class FkOrgEffects {
       )
     );
   });
+
+  deleteAutomaticUpdateSubscription$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(FkOrgActions.deleteAutomaticUpdateSubscription),
+      combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+      switchMap(([_, organizationUuid]) =>
+        this.apiService
+          .deleteSingleStsOrganizationSynchronizationInternalV2DeleteSubscription({ organizationUuid })
+          .pipe(
+            map(() => FkOrgActions.deleteAutomaticUpdateSubscriptionSuccess()),
+            catchError(() => of(FkOrgActions.deleteAutomaticUpdateSubscriptionError()))
+          )
+      )
+    );
+  });
 }
