@@ -6,7 +6,6 @@ import { CellClickEvent } from '@progress/kendo-angular-grid';
 import { combineLatestWith, first } from 'rxjs';
 import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
 import { BooleanValueDisplayType } from 'src/app/shared/components/status-chip/status-chip.component';
-import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
 import { getColumnsToShow } from 'src/app/shared/helpers/grid-config-helper';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
@@ -30,12 +29,12 @@ import { StatePersistingService } from 'src/app/shared/services/state-persisting
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import {
   selectGridData,
-  selectGridRoleColumns,
   selectGridState,
   selectIsLoading,
   selectITSystemUsageHasCreateCollectionPermission,
   selectItSystemUsageLastSeenGridConfig,
   selectUsageGridColumns,
+  selectUsageGridRoleColumns,
 } from 'src/app/store/it-system-usage/selectors';
 import { selectGridConfigModificationPermission, selectOrganizationName } from 'src/app/store/user-store/selectors';
 
@@ -514,7 +513,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
         this.actions$
           .pipe(
             ofType(ITSystemUsageActions.getItSystemUsageOverviewRolesSuccess),
-            combineLatestWith(this.store.select(selectGridRoleColumns)),
+            combineLatestWith(this.store.select(selectUsageGridRoleColumns)),
             first()
           )
           .subscribe(([_, gridRoleColumns]) => {
