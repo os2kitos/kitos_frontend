@@ -10,6 +10,8 @@
     font-size: 14px;
     font-weight: normal;
     justify-content: flex-start;
+    display: flex;
+    align-items: center;
   }
 
   .active button {
@@ -17,11 +19,29 @@
     background: $color-primary-10 !important;
   }
 
-  //Resize the svg to spec
+  // Resize the svg to spec
   svg {
     width: 20px;
     height: 20px;
   }
+
+  .label {
+    margin: 0;
+    padding: 0;
+    opacity: 0;
+    max-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    transition: opacity 0.3s ease, max-width 0.3s ease, margin-left 0.3s ease;
+    display: inline-block;
+  }
+
+  .label.visible {
+    opacity: 1;
+    max-width: 200px; // Adjust based on expected label length
+    margin-left: 8px; // Apply margin when visible
+  }
+
 }
 
 .expanded {
@@ -32,8 +52,8 @@ app-card {
   padding-bottom: $padding-small;
   min-width: 60px; // Define the closed state width
   transition: min-width 0.3s ease; // Smooth transition for width changes
+  overflow: hidden; // Ensure content doesn't overflow during transition
 }
-
 
 .chevron-container {
   padding-top: $padding-small;
