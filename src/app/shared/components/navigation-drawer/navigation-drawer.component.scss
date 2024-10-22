@@ -26,7 +26,6 @@
   .label {
     opacity: 0;
     max-width: 0;
-    overflow: hidden;
     transition: opacity 0.3s ease, max-width 0.3s ease, margin-left 0.3s ease;
     display: inline-block;
   }
