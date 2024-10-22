@@ -68,7 +68,6 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   public exportAllColumns$ = this.store.select(selectExportAllColumns);
   public displayedColumns?: string[];
   public dataSource = new MatTableDataSource<T>();
-  public columnsFilteredByUIConfig$!: Observable<GridColumn[] | null>;
 
   public readonly defaultColumnWidth = 270;
   public readonly defaultMinimumColumnWidth = 50;
@@ -95,15 +94,6 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     this.subscriptions.add(
       this.data$.subscribe((data) => {
         this.data = data;
-      })
-    );
-    this.columnsFilteredByUIConfig$ = this.columns$.pipe(
-      map(columns => {
-        if (!columns) {
-          return null;
-        }
-        const debug = columns.filter(column => !column.disabledByUIConfig);
-        return debug;
       })
     );
 

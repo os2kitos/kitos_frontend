@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { CellClickEvent } from '@progress/kendo-angular-grid';
-import { combineLatestWith, first } from 'rxjs';
+import { combineLatestWith, first, map, Observable } from 'rxjs';
 import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
 import { BooleanValueDisplayType } from 'src/app/shared/components/status-chip/status-chip.component';
 import { getColumnsToShow } from 'src/app/shared/helpers/grid-config-helper';
@@ -53,8 +53,14 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
   public readonly isLoading$ = this.store.select(selectIsLoading);
   public readonly gridData$ = this.store.select(selectGridData);
   public readonly gridState$ = this.store.select(selectGridState);
-  public readonly gridColumns$ = this.store.select(selectUsageGridColumns);
-
+  public readonly gridColumns$: Observable<GridColumn[]> = this.store.select(selectUsageGridColumns).pipe(
+    map(columns => {
+      if (!columns) {
+        return [];
+      }
+      return columns.filter(column => !column.disabledByUIConfig);
+    })
+  );
   public readonly organizationName$ = this.store.select(selectOrganizationName);
   public readonly hasCreatePermission$ = this.store.select(selectITSystemUsageHasCreateCollectionPermission);
 
@@ -63,7 +69,6 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
   public readonly hasConfigModificationPermissions$ = this.store.select(selectGridConfigModificationPermission);
   public readonly lastSeenGridConfig$ = this.store.select(selectItSystemUsageLastSeenGridConfig);
 
-  //mock subscription, remove once working on the Usage overview task
   public readonly defaultGridColumns: GridColumn[] = [
     {
       field: 'ActiveAccordingToValidityPeriod',

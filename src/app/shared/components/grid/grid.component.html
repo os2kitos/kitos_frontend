@@ -18,7 +18,7 @@
   (columnResize)="onResizeChange($event, columns)"
   (excelExport)="onExcelExport($event)"
   style="width: 100%"
-  *ngIf="columnsFilteredByUIConfig$ | async as columns"
+  *ngIf="columns$ | async as columns"
 >
   <ng-container *ngFor="let column of columns">
     <kendo-grid-column
