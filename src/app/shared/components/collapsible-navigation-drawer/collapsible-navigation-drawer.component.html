@@ -8,7 +8,7 @@
       routerLinkActive="active"
       [routerLink]="[item.route]"
     >
-      <app-pencil-icon></app-pencil-icon>
+      <app-icon [iconType]="item.iconType"></app-icon>
       <ng-container *ngIf="isExpanded">{{ item.label }} </ng-container>
     </app-button>
   </div>

@@ -12,14 +12,33 @@ export class LocalAdminComponent {
 
   public readonly items: NavigationDrawerItem[] = [
     {
-      label: 'Information',
-      icon: 'document',
+      label: $localize`Information`,
+      iconType: 'document',
       route: AppPath.information,
     },
     {
-      label: 'Organisation',
-      icon: 'organization',
+      label: $localize`Organisation`,
+      iconType: 'organization',
       route: AppPath.organization,
-    }
+    },
+    {
+      label: $localize`IT System`,
+      iconType: 'systems',
+      route: AppPath.itSystems,
+    },{
+      label: $localize`IT Kontrakt`,
+      iconType: 'clipboard',
+      route: AppPath.itContracts,
+    },
+    {
+      label: $localize`Databehandling`,
+      iconType: 'folder-important',
+      route: AppPath.dataProcessing,
+    },
+    {
+      label: $localize`Masseopret`,
+      iconType: 'bulk-create',
+      route: AppPath.import,
+    },
   ];
 }
