@@ -6,7 +6,6 @@ import { Store } from '@ngrx/store';
 import { combineLatest, distinctUntilChanged, filter, map } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
-import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
 import { BreadCrumb } from 'src/app/shared/models/breadcrumbs/breadcrumb.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { NotificationService } from 'src/app/shared/services/notification.service';
@@ -20,7 +19,6 @@ import {
   selectItSystemUsageUuid,
 } from 'src/app/store/it-system-usage/selectors';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
-import { UIModuleConfigActions } from 'src/app/store/organization/ui-module-customization/actions';
 import {
   selectITSystemUsageUIModuleConfigEnabledTabArchiving,
   selectITSystemUsageUIModuleConfigEnabledTabGdpr,
@@ -119,7 +117,6 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
   }
 
   ngOnInit() {
-    this.store.dispatch(UIModuleConfigActions.getUIModuleConfig({ module: UIModuleConfigKey.ItSystemUsage }));
     this.subscriptions.add(
       this.route.params
         .pipe(
