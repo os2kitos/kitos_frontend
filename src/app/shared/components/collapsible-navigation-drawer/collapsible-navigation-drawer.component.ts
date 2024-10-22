@@ -8,7 +8,11 @@ import { Component, Input } from '@angular/core';
 export class CollapsibleNavigationDrawerComponent {
   @Input() items: NavigationDrawerItem[] = [];
 
-  public isExpanded = false;
+  public isExpanded = true;
+
+  public toggleExpanded(): void {
+    this.isExpanded = !this.isExpanded;
+  }
 }
 
 export interface NavigationDrawerItem {

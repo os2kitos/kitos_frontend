@@ -25,6 +25,22 @@
   }
 }
 
-app-card {
+.expanded {
   min-width: 240px;
+}
+
+app-divider {
+  margin: $padding-smaller;
+}
+
+.chevron-container {
+  display: flex;
+}
+
+.chevron-left {
+  justify-content: flex-start; /* Aligns content to the left */
+}
+
+.chevron-right {
+  justify-content: flex-end;   /* Aligns content to the right */
 }

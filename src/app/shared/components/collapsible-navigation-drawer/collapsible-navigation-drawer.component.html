@@ -1,1 +1,24 @@
-<app-card> </app-card>
+<app-card [ngClass]="{ expanded: isExpanded }">
+  <div *ngFor="let item of items">
+    <app-button
+      buttonStyle="tertiary"
+      color="accent"
+      size="large"
+      routerLinkActive="active"
+      [routerLink]="[item.route]"
+    >
+      <app-pencil-icon></app-pencil-icon>
+      <ng-container *ngIf="isExpanded">{{ item.label }} </ng-container>
+    </app-button>
+  </div>
+  <app-divider></app-divider>
+
+  <app-icon-button
+    (buttonClick)="toggleExpanded()"
+    [ngClass]="{ 'chevron-left': !isExpanded, 'chevron-right': isExpanded }"
+    class="chevron-container"
+  >
+    <app-chevron-left-icon *ngIf="isExpanded"></app-chevron-left-icon>
+    <app-chevron-right-icon *ngIf="!isExpanded"></app-chevron-right-icon>
+  </app-icon-button>
+</app-card>
