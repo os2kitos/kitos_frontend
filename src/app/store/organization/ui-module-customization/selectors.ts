@@ -35,6 +35,13 @@ export const selectITSystemUsageUIModuleConfig = createSelector(
   }
 );
 
+export const selectDataProcessingUIModuleConfig = createSelector(
+  selectUIModuleCustomizationState,
+  (state: UIModuleConfigState) => {
+    return state.uiModuleConfigs.find((c) => c.module == UIModuleConfigKey.DataProcessingRegistrations);
+  }
+);
+
 //IT system usage
 //Tab selectors
 export const selectITSystemUsageUIModuleConfigEnabledTabGdpr = createTabEnabledSelector('ItSystemUsages.gdpr');
