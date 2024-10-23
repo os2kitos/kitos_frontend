@@ -8,6 +8,7 @@ import { combineLatest, distinctUntilChanged, filter, first, map } from 'rxjs';
 import { APIItInterfacePermissionsResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
+import { NavigationDrawerItem } from 'src/app/shared/components/navigation-drawer/navigation-drawer.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { BreadCrumb } from 'src/app/shared/models/breadcrumbs/breadcrumb.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
@@ -42,6 +43,14 @@ export class ItSystemInterfacesDetailsComponent extends BaseComponent implements
   public readonly isLoading$ = this.store.select(selectIsInterfaceLoading);
 
   private subscribedToInterfaceUpdateResults = false;
+
+  public readonly navigationItems: NavigationDrawerItem[] = [
+    {
+      label: $localize`Snitflade detaljer`,
+      iconType: 'document',
+      route: AppPath.frontpage
+    },
+  ];
 
   constructor(
     private readonly store: Store,

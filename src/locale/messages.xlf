@@ -3844,9 +3844,6 @@
       <trans-unit id="2429179520054687064" datatype="html">
         <source>Masseopret</source>
       </trans-unit>
-      <trans-unit id="5621443521686858170" datatype="html">
-        <source>IT kontrakt</source>
-      </trans-unit>
       <trans-unit id="1467323000161302264" datatype="html">
         <source>Slet bruger</source>
       </trans-unit>
@@ -4098,6 +4095,9 @@
       </trans-unit>
       <trans-unit id="5851418291332190792" datatype="html">
         <source>Udfaldsrum</source>
+      </trans-unit>
+      <trans-unit id="9168663958915586248" datatype="html">
+        <source>IT systemer</source>
       </trans-unit>
     </body>
   </file>

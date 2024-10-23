@@ -101,7 +101,6 @@ import { IconsModule } from './icons/icons.module';
 import { LinkTextboxComponent } from './link-textbox/link-textbox.component';
 import { LoadingComponent } from './loading/loading.component';
 import { NativeTableComponent } from './native-table/native-table.component';
-import { NavigationDrawerComponent } from './navigation-drawer/navigation-drawer.component';
 import { NotificationsTableDialogComponent } from './notifications-table/notifications-table-dialog/notifications-table-dialog.component';
 import { NotificationsTableSentDialogComponent } from './notifications-table/notifications-table-sent-dialog/notifications-table-sent-dialog.component';
 import { NotificationsTableComponent } from './notifications-table/notifications-table.component';
@@ -143,6 +142,8 @@ import { RoleTableContainerComponent } from './role-table/role-table-container/r
 import { SlideToggleComponent } from './slide-toggle/slide-toggle.component';
 import { SnackbarActionsComponent } from './snackbar-actions/snackbar-actions.component';
 import { VerticalContentGridSectionMarginLeftComponent } from './vertical-content-grid-section-margin-left/vertical-content-grid-section-margin-left.component';
+import { NavigationDrawerComponent } from './navigation-drawer/navigation-drawer.component';
+import { IconComponent } from './icon/icon.component';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
@@ -159,7 +160,6 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     TextAreaComponent,
     DropdownComponent,
     DatePickerComponent,
-    NavigationDrawerComponent,
     CheckboxComponent,
     BreadcrumbsComponent,
     ChipComponent,
@@ -258,6 +258,8 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     AccordionHeaderComponent,
     OptionTypeTableComponent,
     EditOptionTypeDialogComponent,
+    NavigationDrawerComponent,
+    IconComponent,
   ],
   imports: [
     CommonModule,
@@ -305,7 +307,6 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     TextAreaComponent,
     DropdownComponent,
     DatePickerComponent,
-    NavigationDrawerComponent,
     TextBoxComponent,
     BreadcrumbsComponent,
     ChipComponent,
@@ -385,6 +386,8 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     SnackbarActionsComponent,
     AccordionHeaderComponent,
     OptionTypeTableComponent,
+    NavigationDrawerComponent,
+    IconComponent,
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },
