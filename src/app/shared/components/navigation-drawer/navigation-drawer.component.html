@@ -9,7 +9,7 @@
       [routerLink]="[item.route]"
       [attr.data-cy]="item.dataCy"
     >
-      <app-icon [iconType]="item.iconType"></app-icon>
+      <app-icon [iconType]="item.iconType" class="icon-padding"></app-icon>
       <span class="label" [ngClass]="{ visible: isExpanded }">{{ item.label }}</span>
     </app-button>
   </div>
