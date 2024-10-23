@@ -79,6 +79,40 @@ export const selectITSystemUsageUIModuleConfigEnabledFieldContractsSelectContrac
 export const selectITSystemUsageUIModuleConfigEnabledFieldGdprPlannedRiskAssessmentDate =
   createFieldOrGroupEnabledSelector('ItSystemUsages.gdpr', 'plannedRiskAssessmentDate');
 
+//Data processing
+//Tab selectors
+export const selectDataProcessingUIModuleConfigEnabledTabFrontpage = createTabEnabledSelector(
+  'DataProcessingRegistrations.frontPage'
+);
+export const selectDataProcessingUIModuleConfigEnabledTabItSystems = createTabEnabledSelector(
+  'DataProcessingRegistrations.itSystems'
+);
+export const selectDataProcessingUIModuleConfigEnabledTabItContracts = createTabEnabledSelector(
+  'DataProcessingRegistrations.itContracts'
+);
+export const selectDataProcessingUIModuleConfigEnabledTabOversight = createTabEnabledSelector(
+  'DataProcessingRegistrations.oversight'
+);
+export const selectDataProcessingUIModuleConfigEnabledTabRoles = createTabEnabledSelector(
+  'DataProcessingRegistrations.roles'
+);
+export const selectDataProcessingUIModuleConfigEnabledTabNotifications = createTabEnabledSelector(
+  'DataProcessingRegistrations.notifications'
+);
+export const selectDataProcessingUIModuleConfigEnabledTabReferences = createTabEnabledSelector(
+  'DataProcessingRegistrations.references'
+);
+
+//Field selectors
+export const selectDataProcessingUIModuleConfigEnabledFieldMainContract = createFieldOrGroupEnabledSelector(
+  'DataProcessingRegistrations.itContracts',
+  'mainContract'
+);
+export const selectDataProcessingUIModuleConfigEnabledFieldScheduledInspectionDate = createFieldOrGroupEnabledSelector(
+  'DataProcessingRegistrations.oversight',
+  'scheduledInspectionDate'
+);
+
 function tabIsEnabled(uiConfigViewModels: UIConfigNodeViewModel, tabFullKey: string): boolean {
   const tabViewModel = getTabViewModelFromModule(uiConfigViewModels, tabFullKey);
   return tabViewModel?.isEnabled ?? true;
