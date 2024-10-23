@@ -242,7 +242,7 @@ export class ITSystemUsageEffects {
           },
         ]
       )
-    ) as Observable<UIConfigGridApplication[]>;
+    );
   }
 
   getItSystemUsageOverviewRoles = createEffect(() => {

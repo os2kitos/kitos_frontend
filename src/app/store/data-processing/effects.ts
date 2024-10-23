@@ -5,7 +5,7 @@ import { concatLatestFrom } from '@ngrx/operators';
 
 import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
-import { catchError, combineLatestWith, map, mergeMap, of, switchMap } from 'rxjs';
+import { catchError, combineLatest, combineLatestWith, map, mergeMap, Observable, of, switchMap } from 'rxjs';
 import { APIBusinessRoleDTO, APIV1DataProcessingRegistrationINTERNALService } from 'src/app/api/v1';
 import {
   APIDataProcessingRegistrationGeneralDataWriteRequestDTO,
@@ -33,6 +33,19 @@ import {
   selectDataProcessingUuid,
   selectOverviewRoles,
 } from './selectors';
+import { UIConfigService } from 'src/app/shared/services/ui-config.service';
+import { UIConfigGridApplication } from 'src/app/shared/models/ui-config/ui-config-grid-application';
+import {
+  selectDataProcessingUIModuleConfigEnabledFieldMainContract,
+  selectDataProcessingUIModuleConfigEnabledFieldScheduledInspectionDate,
+  selectDataProcessingUIModuleConfigEnabledTabFrontpage,
+  selectDataProcessingUIModuleConfigEnabledTabItContracts,
+  selectDataProcessingUIModuleConfigEnabledTabItSystems,
+  selectDataProcessingUIModuleConfigEnabledTabNotifications,
+  selectDataProcessingUIModuleConfigEnabledTabOversight,
+  selectDataProcessingUIModuleConfigEnabledTabReferences,
+  selectDataProcessingUIModuleConfigEnabledTabRoles,
+} from '../organization/ui-module-customization/selectors';
 
 @Injectable()
 export class DataProcessingEffects {
@@ -49,7 +62,8 @@ export class DataProcessingEffects {
     @Inject(APIV1DataProcessingRegistrationINTERNALService)
     private apiv1DataProcessingService: APIV1DataProcessingRegistrationINTERNALService,
     @Inject(APIV2OrganizationGridInternalINTERNALService)
-    private apiV2organizationalGridInternalService: APIV2OrganizationGridInternalINTERNALService
+    private apiV2organizationalGridInternalService: APIV2OrganizationGridInternalINTERNALService,
+    private uiConfigService: UIConfigService
   ) {}
 
   getDataProcessing$ = createEffect(() => {
@@ -641,6 +655,32 @@ export class DataProcessingEffects {
       )
     );
   });
+
+  private getUIConfigApplications(): Observable<UIConfigGridApplication[]> {
+    const frontpage$ = this.store.select(selectDataProcessingUIModuleConfigEnabledTabFrontpage);
+    const itSystems$ = this.store.select(selectDataProcessingUIModuleConfigEnabledTabItSystems);
+    const itContracts$ = this.store.select(selectDataProcessingUIModuleConfigEnabledTabItContracts);
+    const oversight$ = this.store.select(selectDataProcessingUIModuleConfigEnabledTabOversight);
+    const roles$ = this.store.select(selectDataProcessingUIModuleConfigEnabledTabRoles);
+    const notifications$ = this.store.select(selectDataProcessingUIModuleConfigEnabledTabNotifications);
+    const references$ = this.store.select(selectDataProcessingUIModuleConfigEnabledTabReferences);
+
+    const mainContract$ = this.store.select(selectDataProcessingUIModuleConfigEnabledFieldMainContract);
+    const scheduledInspectionDate$ = this.store.select(
+      selectDataProcessingUIModuleConfigEnabledFieldScheduledInspectionDate
+    );
+
+    return combineLatest([mainContract$]).pipe(
+      map(([mainContractEnabled]): UIConfigGridApplication[] => {
+        return [
+          {
+            shouldEnable: mainContractEnabled,
+            columnNamesToConfigure: ['placeholder'],
+          },
+        ];
+      })
+    );
+  }
 }
 
 function mapSubDataProcessors(
