@@ -1,4 +1,5 @@
 export interface UIConfigGridApplication {
   shouldEnable: boolean;
-  columnNamesToExclude: string[];
+  columnNamesToConfigure: string[];
+  columnNameSubstringsToConfigure?: string[];
 }
