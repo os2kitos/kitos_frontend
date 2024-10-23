@@ -89,8 +89,8 @@ describe('local-admin', () => {
 
     cy.intercept('PUT', 'api/v2/internal/organizations/*/ui-customization/ItSystemUsages').as('put');
 
-    const targetTabCheckboxButtonText = 'Hvilken kontrakt skal afgøre';
-    cy.contains(targetTabCheckboxButtonText).click();
+    const targetFieldCheckboxButtonText = 'Hvilken kontrakt skal afgøre';
+    cy.contains(targetFieldCheckboxButtonText).click();
     cy.wait('@put').then((interception) => {
       const nodes = interception.request.body.nodes;
       const gdprNode = nodes.find(
@@ -99,6 +99,17 @@ describe('local-admin', () => {
       expect(gdprNode.enabled).to.equal(false);
     });
 
-    cy.contains(targetTabCheckboxButtonText).getByDataCy('button-checkbox').should('have.value', '');
+
+    cy.contains(targetFieldCheckboxButtonText)
+    .getByDataCy('button-checkbox')
+    .getByDataCy('checkbox-input')
+    .should('not.be.checked');
   });
-});
+
+//   it('Cannot toggle obligatory field', () => {
+//     const targetTabCheckboxButtonText = 'Systemforside';
+//     cy.contains(targetTabCheckboxButtonText).parent().getByDataCy('accordion-checkbox').click();
+
+//     cy.contains(targetTabCheckboxButtonText).getByDataCy('accordion-checkbox').should('be.checked');
+//   });
+ });

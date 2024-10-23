@@ -8,7 +8,9 @@
         [disabled]="checkboxDisabled"
         [value]="checkboxValue"
         (valueChange)="onCheckboxToggled($event)"
-        (click)="$event.stopPropagation()">
+        (click)="$event.stopPropagation()"
+        data-cy="accordion-checkbox"
+        >
           </app-checkbox>
           <app-paragraph [bold]="true" paragraphSize="large">{{ title }}</app-paragraph>
           <ng-container *ngIf="checkboxInTitle && checkboxDisabled">
