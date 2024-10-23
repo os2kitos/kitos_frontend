@@ -13,7 +13,7 @@ import {
   REFERENCE_SECTION_NAME,
   SUPERVISION_SECTION_NAME,
 } from 'src/app/shared/constants/persistent-state-constants';
-import { getColumnsToShow } from 'src/app/shared/helpers/grid-config-helper';
+import { filterGridColumnsByUIConfig, getColumnsToShow } from 'src/app/shared/helpers/grid-config-helper';
 import { isAgreementConcludedOptions } from 'src/app/shared/models/data-processing/is-agreement-concluded.model';
 import { isOversightCompletedOptions } from 'src/app/shared/models/data-processing/is-oversight-completed.model';
 import { transferToInsecureThirdCountriesOptions } from 'src/app/shared/models/data-processing/transfer-to-insecure-third-countries.model';
@@ -43,7 +43,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
   public readonly isLoading$ = this.store.select(selectDataProcessingGridLoading);
   public readonly gridData$ = this.store.select(selectDataProcessingGridData);
   public readonly gridState$ = this.store.select(selectDataProcessingGridState);
-  public readonly gridColumns$ = this.store.select(selectDataProcessingGridColumns);
+  public readonly gridColumns$ = this.store.select(selectDataProcessingGridColumns).pipe(filterGridColumnsByUIConfig());
 
   public readonly hasConfigModificationPermissions$: Observable<boolean | undefined> = this.store.select(
     selectGridConfigModificationPermission
