@@ -42,10 +42,15 @@ export class AppComponent extends BaseComponent implements OnInit {
     this.getUIModuleConfig();
   }
 
-  private getUIModuleConfig(){
+  private getUIModuleConfig() {
     this.store.dispatch(
       UIModuleConfigActions.getUIModuleConfig({
         module: UIModuleConfigKey.ItSystemUsage,
+      })
+    );
+    this.store.dispatch(
+      UIModuleConfigActions.getUIModuleConfig({
+        module: UIModuleConfigKey.DataProcessingRegistrations,
       })
     );
   }
