@@ -101,7 +101,6 @@ import { IconsModule } from './icons/icons.module';
 import { LinkTextboxComponent } from './link-textbox/link-textbox.component';
 import { LoadingComponent } from './loading/loading.component';
 import { NativeTableComponent } from './native-table/native-table.component';
-import { NavigationDrawerComponent } from './navigation-drawer/navigation-drawer.component';
 import { NotificationsTableDialogComponent } from './notifications-table/notifications-table-dialog/notifications-table-dialog.component';
 import { NotificationsTableSentDialogComponent } from './notifications-table/notifications-table-sent-dialog/notifications-table-sent-dialog.component';
 import { NotificationsTableComponent } from './notifications-table/notifications-table.component';
@@ -133,8 +132,10 @@ import { AccordionHeaderComponent } from './accordion-header/accordion-header.co
 import { BooleanCircleComponent } from './boolean-circle/boolean-circle.component';
 import { CheckboxButtonComponent } from './buttons/checkbox-button/checkbox-button.component';
 import { MultiSelectDropdownComponent } from './dropdowns/multi-select-dropdown/multi-select-dropdown.component';
+import { IconComponent } from './icon/icon.component';
 import { LocalAdminColumnConfigButtonComponent } from './local-admin-column-config-button/local-admin-column-config-button.component';
 import { LocalGridComponent } from './local-grid/local-grid.component';
+import { NavigationDrawerComponent } from './navigation-drawer/navigation-drawer.component';
 import { NumberCircleComponent } from './number-circle/number-circle.component';
 import { EditOptionTypeDialogComponent } from './option-type-table/edit-option-type-dialog/edit-option-type-dialog.component';
 import { OptionTypeTableComponent } from './option-type-table/option-type-table.component';
@@ -160,7 +161,6 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     TextAreaComponent,
     DropdownComponent,
     DatePickerComponent,
-    NavigationDrawerComponent,
     CheckboxComponent,
     BreadcrumbsComponent,
     ChipComponent,
@@ -259,6 +259,8 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     AccordionHeaderComponent,
     OptionTypeTableComponent,
     EditOptionTypeDialogComponent,
+    NavigationDrawerComponent,
+    IconComponent,
     LocalGridComponent,
   ],
   imports: [
@@ -307,7 +309,6 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     TextAreaComponent,
     DropdownComponent,
     DatePickerComponent,
-    NavigationDrawerComponent,
     TextBoxComponent,
     BreadcrumbsComponent,
     ChipComponent,
@@ -387,6 +388,8 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     SnackbarActionsComponent,
     AccordionHeaderComponent,
     OptionTypeTableComponent,
+    NavigationDrawerComponent,
+    IconComponent,
     LocalGridComponent,
   ],
   providers: [

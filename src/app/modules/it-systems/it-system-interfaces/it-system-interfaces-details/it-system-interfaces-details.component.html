@@ -41,16 +41,7 @@
       </ng-container>
     </app-details-header>
   <div class="content">
-    <app-navigation-drawer>
-      <app-button
-        buttonStyle="tertiary"
-        color="accent"
-        size="large"
-        [routerLink]="[AppPath.frontpage]"
-        routerLinkActive="active"
-        ><app-document-icon></app-document-icon><ng-container i18n>Snitflade detaljer</ng-container></app-button
-      >
-    </app-navigation-drawer>
+    <app-navigation-drawer [items]="navigationItems"> </app-navigation-drawer>
 
     <router-outlet></router-outlet>
   </div>

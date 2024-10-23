@@ -1,3 +1,31 @@
-<app-card>
-  <ng-content></ng-content>
+<app-card [ngClass]="{ expanded: isExpanded }">
+  <div *ngFor="let item of items">
+    <app-button
+      buttonStyle="tertiary"
+      [tooltip]="isExpanded ? '' : item.label"
+      color="accent"
+      size="large"
+      routerLinkActive="active"
+      [routerLink]="[item.route]"
+      [attr.data-cy]="item.dataCy"
+    >
+      <app-icon [iconType]="item.iconType"></app-icon>
+      <span class="label" [ngClass]="{ visible: isExpanded }">{{ item.label }}</span>
+    </app-button>
+  </div>
+
+  <div class="divider-margin">
+    <app-divider ></app-divider>
+  </div>
+  <app-button
+    buttonStyle="tertiary"
+    [tooltip]="isExpanded ? 'Minimer' : 'Udvid'"
+    color="accent"
+    size="large"
+    (buttonClick)="toggleExpanded()"
+    class="chevron-container"
+  >
+    <app-collapse-circle-icon *ngIf="isExpanded"></app-collapse-circle-icon>
+    <app-expand-circle-icon *ngIf="!isExpanded"></app-expand-circle-icon>
+  </app-button>
 </app-card>
