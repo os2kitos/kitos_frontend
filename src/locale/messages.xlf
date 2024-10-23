@@ -4147,6 +4147,21 @@
       <trans-unit id="922220242325292085" datatype="html">
         <source>Tilføjet</source>
       </trans-unit>
+      <trans-unit id="3738955992352077566" datatype="html">
+        <source>Viser konsekvenser <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>(<x id="INTERPOLATION" equiv-text="{{ updateConsequencesLength$ | async }}"/>)<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> af opdateringen for organisationshierarkiet i KITOS</source>
+      </trans-unit>
+      <trans-unit id="4069224266193233013" datatype="html">
+        <source>Forbindelse til FK Organisation er opdateret</source>
+      </trans-unit>
+      <trans-unit id="4282005774565130852" datatype="html">
+        <source>Kunne ikke opdatere automatisk import af opdateringer</source>
+      </trans-unit>
+      <trans-unit id="7445480746813632840" datatype="html">
+        <source>Automatisk import af opdateringer er opdateret</source>
+      </trans-unit>
+      <trans-unit id="828534712862450122" datatype="html">
+        <source>Kunne ikke opdatere en forbindelse til Fk Organisation</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
