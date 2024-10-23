@@ -1,5 +1,7 @@
 /// <reference types="Cypress" />
 
+const regularOptionTypesSegment = 'Lokal tilpasning af udfaldsrum';
+
 describe('local-admin', () => {
   beforeEach(() => {
     cy.requireIntercept();
@@ -23,7 +25,7 @@ describe('local-admin', () => {
   });
 
   it('Can edit description of it system option type', () => {
-    cy.contains('Lokal tilpasning af udfaldsrum').click();
+    cy.contains(regularOptionTypesSegment).click();
 
     cy.contains('Forretningstyper').click();
     cy.intercept('PATCH', 'api/v2/internal/it-systems/*/local-option-types/business-types/*', {});
@@ -38,7 +40,7 @@ describe('local-admin', () => {
   });
 
   it('Can deactivate active status of it system option type if not obligatory', () => {
-    cy.contains('Lokal tilpasning af udfaldsrum').click();
+    cy.contains(regularOptionTypesSegment).click();
 
     cy.contains('Forretningstyper').click();
     cy.intercept('DELETE', 'api/v2/internal/it-systems/*/local-option-types/business-types/*', {});
@@ -68,7 +70,7 @@ describe('local-admin', () => {
   });
 
   it('Can not edit active status of option type if obligatory', () => {
-    cy.contains('Lokal tilpasning af udfaldsrum').click();
+    cy.contains(regularOptionTypesSegment).click();
 
     cy.contains('Forretningstyper').click();
 
@@ -78,5 +80,25 @@ describe('local-admin', () => {
         cy.get('app-icon-button').click();
       });
     cy.getByDataCy('active-checkbox').should('not.exist');
+  });
+
+  it('Can toggle non-obligatory field', () => {
+    cy.intercept('api/v2/internal/organizations/*/ui-customization/ItSystemUsages', {
+      fixture: './shared/it-system-usage-ui-customization-updated.json',
+    });
+
+    cy.intercept('PUT', 'api/v2/internal/organizations/*/ui-customization/ItSystemUsages').as('put');
+
+    const targetTabCheckboxButtonText = 'Hvilken kontrakt skal afgøre';
+    cy.contains(targetTabCheckboxButtonText).click();
+    cy.wait('@put').then((interception) => {
+      const nodes = interception.request.body.nodes;
+      const gdprNode = nodes.find(
+        (node: { key: string; enabled: boolean }) => node.key === 'ItSystemUsages.gdpr.plannedRiskAssessmentDate'
+      );
+      expect(gdprNode.enabled).to.equal(false);
+    });
+
+    cy.contains(targetTabCheckboxButtonText).getByDataCy('button-checkbox').should('have.value', '');
   });
 });

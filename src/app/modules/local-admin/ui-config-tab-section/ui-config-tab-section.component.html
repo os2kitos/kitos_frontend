@@ -24,7 +24,9 @@
         labelPosition="after"
         [value]="fieldViewModel.isEnabled ?? false"
         [disabled]="fieldViewModel.isObligatory || !tabViewModel.isEnabled"
-        (valueChange)="onCheckboxChanged({ enabled: $event, fullKey: fieldViewModel.fullKey })">
+        (valueChange)="onCheckboxChanged({ enabled: $event, fullKey: fieldViewModel.fullKey })"
+        data-cy="field-checkbox"
+        >
         <app-paragraph>
           {{ fieldViewModel.text }}
         </app-paragraph>
