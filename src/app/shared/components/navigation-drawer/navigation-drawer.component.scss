@@ -52,7 +52,11 @@ app-card {
 }
 
 .chevron-container {
-  padding-top: $padding-small;
   display: flex;
   justify-content: flex-end;
+}
+
+.divider-margin {
+  margin-top: $padding-small;
+  margin-bottom: $padding-small;
 }

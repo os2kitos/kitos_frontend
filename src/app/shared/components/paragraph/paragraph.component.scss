@@ -3,9 +3,12 @@
   line-height: 150%;
   margin: 0px;
   color: $color-neutral-dark;
-  display: flex;
   align-items: center;
   gap: 4px;
+}
+
+.display-flex {
+  display: flex;
 }
 
 .white-color {

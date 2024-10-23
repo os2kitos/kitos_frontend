@@ -259,6 +259,8 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     AccordionHeaderComponent,
     OptionTypeTableComponent,
     EditOptionTypeDialogComponent,
+    NavigationDrawerComponent,
+    IconComponent,
     LocalGridComponent,
     NavigationDrawerComponent,
     IconComponent,

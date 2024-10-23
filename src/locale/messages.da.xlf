@@ -5391,6 +5391,14 @@
         <source>Ingen ændringer registreret </source>
         <target state="new">Ingen ændringer registreret </target>
       </trans-unit>
+      <trans-unit id="3738955992352077566" datatype="html">
+        <source>Viser konsekvenser <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>(<x id="INTERPOLATION" equiv-text="{{ updateConsequencesLength$ | async }}"/>)<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> af opdateringen for organisationshierarkiet i KITOS</source>
+        <target state="new">Viser konsekvenser <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>(<x id="INTERPOLATION" equiv-text="{{ updateConsequencesLength$ | async }}"/>)<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> af opdateringen for organisationshierarkiet i KITOS</target>
+      </trans-unit>
+      <trans-unit id="6021905614502626006" datatype="html">
+        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&gt;"/>Eksporter</source>
+        <target state="new"><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&gt;"/>Eksporter</target>
+      </trans-unit>
       <trans-unit id="4691966835263640588" datatype="html">
         <source>FK Organisation - Konsekvenser ved opdatering</source>
         <target state="new">FK Organisation - Konsekvenser ved opdatering</target>
@@ -5439,21 +5447,17 @@
         <source>Flyttet</source>
         <target state="new">Flyttet</target>
       </trans-unit>
-      <trans-unit id="414773334721698956" datatype="html">
-        <source>Konverteret</source>
-        <target state="new">Konverteret</target>
-      </trans-unit>
       <trans-unit id="2721875101249823212" datatype="html">
         <source>Slettet</source>
         <target state="new">Slettet</target>
       </trans-unit>
+      <trans-unit id="414773334721698956" datatype="html">
+        <source>Konverteret</source>
+        <target state="new">Konverteret</target>
+      </trans-unit>
       <trans-unit id="3207091467505348477" datatype="html">
         <source>Organisationsrod erstattet</source>
         <target state="new">Organisationsrod erstattet</target>
-      </trans-unit>
-      <trans-unit id="3738955992352077566" datatype="html">
-        <source>Viser konsekvenser <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>(<x id="INTERPOLATION" equiv-text="{{ updateConsequencesLength$ | async }}"/>)<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> af opdateringen for organisationshierarkiet i KITOS</source>
-        <target state="new">Viser konsekvenser <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>(<x id="INTERPOLATION" equiv-text="{{ updateConsequencesLength$ | async }}"/>)<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> af opdateringen for organisationshierarkiet i KITOS</target>
       </trans-unit>
       <trans-unit id="4069224266193233013" datatype="html">
         <source>Forbindelse til FK Organisation er opdateret</source>
@@ -5470,10 +5474,6 @@
       <trans-unit id="4282005774565130852" datatype="html">
         <source>Kunne ikke opdatere automatisk import af opdateringer</source>
         <target state="new">Kunne ikke opdatere automatisk import af opdateringer</target>
-      </trans-unit>
-      <trans-unit id="6021905614502626006" datatype="html">
-        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&gt;"/>Eksporter</source>
-        <target state="new"><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&gt;"/>Eksporter</target>
       </trans-unit>
     </body>
   </file>

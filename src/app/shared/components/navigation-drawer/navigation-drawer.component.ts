@@ -20,4 +20,5 @@ export interface NavigationDrawerItem {
   label: string;
   iconType: IconType;
   route: string;
+  dataCy?: string;
 }
