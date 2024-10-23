@@ -5467,13 +5467,9 @@
         <source>Kunne ikke opdatere forbindelsen til Fk Organisation</source>
         <target state="new">Kunne ikke opdatere forbindelsen til Fk Organisation</target>
       </trans-unit>
-      <trans-unit id="7445480746813632840" datatype="html">
-        <source>Automatisk import af opdateringer er opdateret</source>
-        <target state="new">Automatisk import af opdateringer er opdateret</target>
-      </trans-unit>
-      <trans-unit id="4282005774565130852" datatype="html">
-        <source>Kunne ikke opdatere automatisk import af opdateringer</source>
-        <target state="new">Kunne ikke opdatere automatisk import af opdateringer</target>
+      <trans-unit id="5062533283098208010" datatype="html">
+        <source>Automatisk import af opdateringer blev deaktiveret</source>
+        <target state="new">Automatisk import af opdateringer blev deaktiveret</target>
       </trans-unit>
       <trans-unit id="1274790689655565947" datatype="html">
         <source>Bryd forbindelsen til FK Organisation</source>
@@ -5518,6 +5514,10 @@
       <trans-unit id="4666153646055232970" datatype="html">
         <source>Kunne ikke slette forbindelsen til Fk Organisation</source>
         <target state="new">Kunne ikke slette forbindelsen til Fk Organisation</target>
+      </trans-unit>
+      <trans-unit id="1662852159171017043" datatype="html">
+        <source>Automatisk import af opdateringer kunne ikke deaktiveres</source>
+        <target state="new">Automatisk import af opdateringer kunne ikke deaktiveres</target>
       </trans-unit>
     </body>
   </file>

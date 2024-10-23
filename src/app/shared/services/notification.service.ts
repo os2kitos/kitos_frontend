@@ -399,7 +399,7 @@ export class NotificationService implements OnDestroy {
 
     this.subscribeAsDefault(
       FkOrgActions.deleteConnectionSuccess,
-      $localize`Forbindelse til FK Organisation blev fjernet`
+      $localize`Forbindelsen til FK Organisation blev fjernet`
     );
     this.subscribeAsError(
       FkOrgActions.deleteConnectionError,
