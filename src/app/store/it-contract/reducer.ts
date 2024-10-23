@@ -1,9 +1,9 @@
 import { createEntityAdapter } from '@ngrx/entity';
 import { createFeature, createReducer, on } from '@ngrx/store';
+import { CONTRACT_ROLES_SECTION_NAME } from 'src/app/shared/constants/persistent-state-constants';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { defaultGridState } from 'src/app/shared/models/grid-state.model';
 import { ITContract } from 'src/app/shared/models/it-contract/it-contract.model';
-import { CONTRACT_ROLES_SECTION_NAME } from 'src/app/shared/persistent-state-constants';
 import { roleDtoToRoleGridColumns } from '../helpers/role-column-helpers';
 import { ITContractActions } from './actions';
 import { ITContractState } from './state';

@@ -16,7 +16,7 @@ import {
 import { RoleOptionTypeActions } from 'src/app/store/roles-option-type-store/actions';
 import { selectRoleOptionTypes } from 'src/app/store/roles-option-type-store/selectors';
 import { BaseComponent } from '../../base/base.component';
-import { NOTIFICATIONS_DIALOG_DEFAULT_HEIGHT, NOTIFICATIONS_DIALOG_DEFAULT_WIDTH } from '../../constants';
+import { NOTIFICATIONS_DIALOG_DEFAULT_HEIGHT, NOTIFICATIONS_DIALOG_DEFAULT_WIDTH } from '../../constants/constants';
 import { NotificationEntityType, NotificationEntityTypeEnum } from '../../models/notification-entity-types';
 import { notificationRepetitionFrequencyOptions } from '../../models/notification-repetition-frequency.model';
 import { notificationTypeOptions } from '../../models/notification-type.model';

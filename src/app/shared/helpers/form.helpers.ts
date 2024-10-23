@@ -1,6 +1,6 @@
 import { AbstractControl, FormArray, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
 import * as moment from 'moment';
-import { MAX_DATE } from '../constants';
+import { MAX_DATE } from '../constants/constants';
 
 interface OnInvalid {
   [key: string]: boolean;
