@@ -1,5 +1,5 @@
 import { uniqueId } from 'lodash';
-import { DEFAULT_NOTIFICATION_DURATION } from '../../constants/constants';
+import { DEFAULT_NOTIFICATION_DURATION } from '../../constants';
 import { PopupMessageType } from '../../enums/popup-message-type';
 import { PopupMessageData } from './popup-message-data.model';
 

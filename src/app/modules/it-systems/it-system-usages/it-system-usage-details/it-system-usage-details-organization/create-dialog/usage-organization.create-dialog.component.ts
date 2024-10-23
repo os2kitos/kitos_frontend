@@ -4,7 +4,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { first, map } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import { ORG_UNIT_DIALOG_DEFAULT_WIDTH } from 'src/app/shared/constants/constants';
+import { ORG_UNIT_DIALOG_DEFAULT_WIDTH } from 'src/app/shared/constants';
 import { TreeNodeModel } from 'src/app/shared/models/tree-node.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';

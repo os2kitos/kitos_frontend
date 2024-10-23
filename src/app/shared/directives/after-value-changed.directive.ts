@@ -1,7 +1,7 @@
 import { Directive, EventEmitter, HostListener, Input, OnDestroy, Output } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-import { DEFAULT_INPUT_DEBOUNCE_TIME } from '../constants/constants';
+import { DEFAULT_INPUT_DEBOUNCE_TIME } from '../constants';
 
 @Directive({
   selector: '[appAfterValueChanged]',

@@ -1,9 +1,9 @@
 import { createEntityAdapter } from '@ngrx/entity';
 import { createFeature, createReducer, on } from '@ngrx/store';
-import { SYSTEMS_ROLES_SECTION_NAME } from 'src/app/shared/constants/persistent-state-constants';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { defaultGridState } from 'src/app/shared/models/grid-state.model';
 import { ITSystemUsage } from 'src/app/shared/models/it-system-usage/it-system-usage.model';
+import { SYSTEMS_ROLES_SECTION_NAME } from 'src/app/shared/persistent-state-constants';
 import { roleDtoToRoleGridColumns } from '../helpers/role-column-helpers';
 import { ITSystemUsageActions } from './actions';
 import { ITSystemUsageState } from './state';
@@ -42,20 +42,13 @@ export const itSystemUsageFeature = createFeature({
       })
     ),
     on(
-      ITSystemUsageActions.getITSystemUsagesError,
-      (state): ITSystemUsageState => ({
-        ...state,
-        isLoadingSystemUsagesQuery: false,
+      ITSystemUsageActions.getITSystemUsagesError, (state): ITSystemUsageState => ({
+        ...state, isLoadingSystemUsagesQuery: false
       })
     ),
-    on(
-      ITSystemUsageActions.updateGridState,
-      (state, { gridState }): ITSystemUsageState => ({
-        ...state,
-        isLoadingSystemUsagesQuery: true,
-        gridState,
-      })
-    ),
+    on(ITSystemUsageActions.updateGridState, (state, { gridState }): ITSystemUsageState => ({
+      ...state, isLoadingSystemUsagesQuery: true, gridState
+    })),
     on(
       ITSystemUsageActions.getITSystemUsage,
       (state): ITSystemUsageState => ({ ...state, itSystemUsage: undefined, itSystemUsageLoading: true })
@@ -135,7 +128,7 @@ export const itSystemUsageFeature = createFeature({
     on(ITSystemUsageActions.updateGridColumnsAndRoleColumnsSuccess, (state, { gridColumns }): ITSystemUsageState => {
       return {
         ...state,
-        gridColumns,
+        gridColumns
       };
     }),
 
@@ -150,15 +143,13 @@ export const itSystemUsageFeature = createFeature({
       return { ...state, gridRoleColumns: roleColumns, systemRoles: roles };
     }),
 
-    on(
-      ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationSuccess,
-      (state, { response }): ITSystemUsageState => {
-        return {
-          ...state,
-          lastSeenGridConfig: response,
-        };
-      }
-    ),
+
+    on(ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationSuccess, (state, {response}): ITSystemUsageState => {
+      return {
+        ...state,
+        lastSeenGridConfig: response,
+      };
+    }),
 
     on(ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationError, (state): ITSystemUsageState => {
       return {
@@ -167,18 +158,15 @@ export const itSystemUsageFeature = createFeature({
       };
     }),
 
-    on(
-      ITSystemUsageActions.initializeITSystemUsageLastSeenGridConfigurationSuccess,
-      (state, { response }): ITSystemUsageState => {
-        return {
-          ...state,
-          lastSeenGridConfig: response,
-        };
-      }
-    ),
+    on(ITSystemUsageActions.initializeITSystemUsageLastSeenGridConfigurationSuccess, (state, { response }): ITSystemUsageState => {
+      return {
+        ...state,
+        lastSeenGridConfig: response,
+      };
+    }),
 
     on(ITSystemUsageActions.getItSystemUsageOverviewRolesError, (state): ITSystemUsageState => {
       return { ...state, gridRoleColumns: [], systemRoles: [] };
-    })
+    }),
   ),
 });

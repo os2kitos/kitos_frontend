@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { BaseComponent } from '../../../base/base.component';
-import { CONFIRM_TEXT, DECLINE_TEXT, NO_TEXT, YES_TEXT } from '../../../constants/constants';
+import { CONFIRM_TEXT, DECLINE_TEXT, NO_TEXT, YES_TEXT } from '../../../constants';
 import { ConfirmationStyle } from '../../../models/confirmation/confirmation-style.model';
 
 @Component({

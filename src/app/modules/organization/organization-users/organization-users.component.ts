@@ -5,14 +5,14 @@ import { Store } from '@ngrx/store';
 import { CellClickEvent } from '@progress/kendo-angular-grid';
 import { combineLatestWith, first } from 'rxjs/operators';
 import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
-import {
-  ORGANIZATION_USER_COLUMNS_ID,
-  ORGANIZATION_USER_SECTION_NAME,
-} from 'src/app/shared/constants/persistent-state-constants';
 import { GridActionColumn } from 'src/app/shared/models/grid-action-column.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { OrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
+import {
+  ORGANIZATION_USER_COLUMNS_ID,
+  ORGANIZATION_USER_SECTION_NAME,
+} from 'src/app/shared/persistent-state-constants';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.service';
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
@@ -36,6 +36,7 @@ import { UserInfoDialogComponent } from './user-info-dialog/user-info-dialog.com
   templateUrl: './organization-users.component.html',
   styleUrl: './organization-users.component.scss',
 })
+
 export class OrganizationUsersComponent extends BaseOverviewComponent implements OnInit {
   public readonly isLoading$ = this.store.select(selectOrganizationUserGridLoading);
   public readonly gridData$ = this.store.select(selectOrganizationUserGridData);

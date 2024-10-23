@@ -12,7 +12,7 @@ import {
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { RadioButtonOption } from 'src/app/shared/components/radio-buttons/radio-buttons.component';
-import { ARCHIVE_TEXT } from 'src/app/shared/constants/constants';
+import { ARCHIVE_TEXT } from 'src/app/shared/constants';
 import {
   ArchiveDutyChoice,
   archiveDutyChoiceOptions,
@@ -52,10 +52,7 @@ export class ItSystemUsageDetailsArchivingComponent extends BaseComponent implem
       active: new FormControl<boolean | undefined>(undefined),
       testLocation: new FormControl<APIIdentityNamePairResponseDTO | undefined>(undefined),
       notes: new FormControl<string | undefined>(undefined),
-      frequencyInMonths: new FormControl<number | undefined>(
-        undefined,
-        Validators.max(this.journalFrequencyInputUpperLimit)
-      ),
+      frequencyInMonths: new FormControl<number | undefined>(undefined, Validators.max(this.journalFrequencyInputUpperLimit)),
       documentBearing: new FormControl<boolean | undefined>(undefined),
     },
     { updateOn: 'blur' }
@@ -250,7 +247,7 @@ export class ItSystemUsageDetailsArchivingComponent extends BaseComponent implem
     );
   }
 
-  public journalFrequencyPlaceholder() {
-    return $localize`Indtast et heltal mellem 0 og ${this.journalFrequencyInputUpperLimit}`;
+  public journalFrequencyPlaceholder(){
+    return $localize`Indtast et heltal mellem 0 og ${this.journalFrequencyInputUpperLimit}`
   }
 }

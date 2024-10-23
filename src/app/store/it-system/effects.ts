@@ -6,10 +6,10 @@ import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
 import { catchError, combineLatestWith, map, mergeMap, of, switchMap } from 'rxjs';
 import { APIItSystemResponseDTO, APIV2ItSystemService } from 'src/app/api/v2';
-import { CATALOG_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-constants';
 import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { adaptITSystem } from 'src/app/shared/models/it-system/it-system.model';
 import { OData } from 'src/app/shared/models/odata.model';
+import { CATALOG_COLUMNS_ID } from 'src/app/shared/persistent-state-constants';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ExternalReferencesApiService } from 'src/app/shared/services/external-references-api-service.service';
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
@@ -26,7 +26,7 @@ export class ITSystemEffects {
     private httpClient: HttpClient,
     private externalReferenceApiService: ExternalReferencesApiService,
     private statePersistingService: StatePersistingService
-  ) {}
+  ) { }
 
   getItSystem$ = createEffect(() => {
     return this.actions$.pipe(

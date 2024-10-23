@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2 } from '@angular/core';
 import { debounceTime, filter, map, Subject } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import { DEFAULT_INPUT_DEBOUNCE_TIME } from 'src/app/shared/constants/constants';
+import { DEFAULT_INPUT_DEBOUNCE_TIME } from 'src/app/shared/constants';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 
 export interface MultiSelectDropdownItem<T> {

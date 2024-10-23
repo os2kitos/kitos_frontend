@@ -8,7 +8,7 @@ import {
   selectOrganizationUnits,
 } from 'src/app/store/organization/organization-unit/selectors';
 import { BaseComponent } from '../../base/base.component';
-import { BOUNDED_PAGINATION_QUERY_MAX_SIZE } from '../../constants/constants';
+import { BOUNDED_PAGINATION_QUERY_MAX_SIZE } from '../../constants';
 import { createNode, TreeNodeModel } from '../../models/tree-node.model';
 
 @Component({
