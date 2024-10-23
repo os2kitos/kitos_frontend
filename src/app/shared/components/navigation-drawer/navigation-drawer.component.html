@@ -8,6 +8,7 @@
       routerLinkActive="active"
       [routerLink]="[item.route]"
       [attr.data-cy]="item.dataCy"
+      *ngIf="item.enabled === undefined || (item.enabled | async) === true"
     >
       <app-icon [iconType]="item.iconType"></app-icon>
       <span class="label" [ngClass]="{ visible: isExpanded }">{{ item.label }}</span>
