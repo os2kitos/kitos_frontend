@@ -29,7 +29,7 @@ export interface GetSingleUserNotificationGetAccessRightsRequestParams {
     organizationId: number;
 }
 
-export interface GetSingleUserNotificationGetAccessRightsForEntityRequestParams {
+export interface GetSingleUserNotificationGetAccessRightsForEntityByIdRequestParams {
     id: number;
     getEntityAccessRights: boolean;
 }
@@ -40,7 +40,7 @@ export interface GetSingleUserNotificationGetByOrganizationAndUserRequestParams 
     relatedEntityType: 'itContract' | 'itSystemUsage' | 'dataProcessingRegistration';
 }
 
-export interface GetSingleUserNotificationGetNumberOfUnresolvedNotificationsRequestParams {
+export interface GetSingleUserNotificationGetNumberOfUnresolvedNotificationsByOrganizationidAndUseridAndRelatedentitytypeRequestParams {
     organizationId: number;
     userId: number;
     relatedEntityType: 'itContract' | 'itSystemUsage' | 'dataProcessingRegistration';
@@ -190,17 +190,17 @@ export class APIV1UserNotificationINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleUserNotificationGetAccessRightsForEntity(requestParameters: GetSingleUserNotificationGetAccessRightsForEntityRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public getSingleUserNotificationGetAccessRightsForEntity(requestParameters: GetSingleUserNotificationGetAccessRightsForEntityRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public getSingleUserNotificationGetAccessRightsForEntity(requestParameters: GetSingleUserNotificationGetAccessRightsForEntityRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public getSingleUserNotificationGetAccessRightsForEntity(requestParameters: GetSingleUserNotificationGetAccessRightsForEntityRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleUserNotificationGetAccessRightsForEntityById(requestParameters: GetSingleUserNotificationGetAccessRightsForEntityByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public getSingleUserNotificationGetAccessRightsForEntityById(requestParameters: GetSingleUserNotificationGetAccessRightsForEntityByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleUserNotificationGetAccessRightsForEntityById(requestParameters: GetSingleUserNotificationGetAccessRightsForEntityByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleUserNotificationGetAccessRightsForEntityById(requestParameters: GetSingleUserNotificationGetAccessRightsForEntityByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling getSingleUserNotificationGetAccessRightsForEntity.');
+            throw new Error('Required parameter id was null or undefined when calling getSingleUserNotificationGetAccessRightsForEntityById.');
         }
         const getEntityAccessRights = requestParameters.getEntityAccessRights;
         if (getEntityAccessRights === null || getEntityAccessRights === undefined) {
-            throw new Error('Required parameter getEntityAccessRights was null or undefined when calling getSingleUserNotificationGetAccessRightsForEntity.');
+            throw new Error('Required parameter getEntityAccessRights was null or undefined when calling getSingleUserNotificationGetAccessRightsForEntityById.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -325,21 +325,21 @@ export class APIV1UserNotificationINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleUserNotificationGetNumberOfUnresolvedNotifications(requestParameters: GetSingleUserNotificationGetNumberOfUnresolvedNotificationsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public getSingleUserNotificationGetNumberOfUnresolvedNotifications(requestParameters: GetSingleUserNotificationGetNumberOfUnresolvedNotificationsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleUserNotificationGetNumberOfUnresolvedNotifications(requestParameters: GetSingleUserNotificationGetNumberOfUnresolvedNotificationsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleUserNotificationGetNumberOfUnresolvedNotifications(requestParameters: GetSingleUserNotificationGetNumberOfUnresolvedNotificationsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public getSingleUserNotificationGetNumberOfUnresolvedNotificationsByOrganizationidAndUseridAndRelatedentitytype(requestParameters: GetSingleUserNotificationGetNumberOfUnresolvedNotificationsByOrganizationidAndUseridAndRelatedentitytypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public getSingleUserNotificationGetNumberOfUnresolvedNotificationsByOrganizationidAndUseridAndRelatedentitytype(requestParameters: GetSingleUserNotificationGetNumberOfUnresolvedNotificationsByOrganizationidAndUseridAndRelatedentitytypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public getSingleUserNotificationGetNumberOfUnresolvedNotificationsByOrganizationidAndUseridAndRelatedentitytype(requestParameters: GetSingleUserNotificationGetNumberOfUnresolvedNotificationsByOrganizationidAndUseridAndRelatedentitytypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public getSingleUserNotificationGetNumberOfUnresolvedNotificationsByOrganizationidAndUseridAndRelatedentitytype(requestParameters: GetSingleUserNotificationGetNumberOfUnresolvedNotificationsByOrganizationidAndUseridAndRelatedentitytypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         const organizationId = requestParameters.organizationId;
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling getSingleUserNotificationGetNumberOfUnresolvedNotifications.');
+            throw new Error('Required parameter organizationId was null or undefined when calling getSingleUserNotificationGetNumberOfUnresolvedNotificationsByOrganizationidAndUseridAndRelatedentitytype.');
         }
         const userId = requestParameters.userId;
         if (userId === null || userId === undefined) {
-            throw new Error('Required parameter userId was null or undefined when calling getSingleUserNotificationGetNumberOfUnresolvedNotifications.');
+            throw new Error('Required parameter userId was null or undefined when calling getSingleUserNotificationGetNumberOfUnresolvedNotificationsByOrganizationidAndUseridAndRelatedentitytype.');
         }
         const relatedEntityType = requestParameters.relatedEntityType;
         if (relatedEntityType === null || relatedEntityType === undefined) {
-            throw new Error('Required parameter relatedEntityType was null or undefined when calling getSingleUserNotificationGetNumberOfUnresolvedNotifications.');
+            throw new Error('Required parameter relatedEntityType was null or undefined when calling getSingleUserNotificationGetNumberOfUnresolvedNotificationsByOrganizationidAndUseridAndRelatedentitytype.');
         }
 
         let localVarHeaders = this.defaultHeaders;

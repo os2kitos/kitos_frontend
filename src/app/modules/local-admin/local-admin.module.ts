@@ -11,7 +11,16 @@ import { LocalAdminRouterModule } from './local-admin.routes';
 import { UiConfigTabSectionComponent } from './ui-config-tab-section/ui-config-tab-section.component';
 
 @NgModule({
-  declarations: [LocalAdminComponent, LocalAdminInformationComponent, LocalAdminOrganizationComponent, OrganizationsGridComponent, LocalAdminItSystemUsageComponent, UiConfigTabSectionComponent],
+  declarations: [ LocalAdminComponent,
+    LocalAdminInformationComponent,
+    LocalAdminOrganizationComponent,
+    OrganizationsGridComponent,
+    LocalAdminItSystemComponent, LocalAdminDprComponent,
+    LocalAdminItContractComponent,
+    LocalAdminImportComponent,
+    LocalAdminImportOrganizationComponent,
+    FkOrgWriteDialogComponent,
+    LocalAdminItSystemUsageComponent, UiConfigTabSectionComponent],
   imports: [CommonModule, ComponentsModule, SharedModule, LocalAdminRouterModule],
 })
 export class LocalAdminModule {}

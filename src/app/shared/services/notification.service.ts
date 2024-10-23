@@ -7,6 +7,8 @@ import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
+import { FkOrgActions } from 'src/app/store/local-admin/fk-org/actions';
+import { LocalOptionTypeActions } from 'src/app/store/local-option-types/actions';
 import { OrganizationActions } from 'src/app/store/organization/actions';
 import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
@@ -42,8 +44,16 @@ export class NotificationService implements OnDestroy {
     this.subscribeToItContractEvents();
     this.subscribeToDprEvents();
 
+    this.subscribeToLocalAdminNotifications();
+
     this.subscribeToExternalReferenceManagementEvents();
     this.subscribeToRoleNotifications();
+    this.subscribeToFkOrganizationEvents();
+  }
+
+  private subscribeToLocalAdminNotifications() {
+    this.subscribeAsDefault(LocalOptionTypeActions.updateOptionTypeSuccess, $localize`Enheden blev opdateret`);
+    this.subscribeAsError(LocalOptionTypeActions.updateOptionTypeError, $localize`Enheden kunne ikke opdateres`);
   }
 
   private subscribeToOrganizationEvents() {
@@ -368,6 +378,39 @@ export class NotificationService implements OnDestroy {
     this.subscribeAsError(
       ofType(UIModuleConfigActions.putUIModuleCustomizationSuccess),
       $localize`Lokal tilpasning af brugerfladen blev opdateret`
+    );
+  }
+
+  /**
+   * Consolidates notifications related to the "Fk Organization" integration
+   */
+  private subscribeToFkOrganizationEvents() {
+    this.subscribeAsDefault(
+      FkOrgActions.createConnectionSuccess,
+      $localize`Forbindelse til FK Organisation blev oprettet`
+    );
+
+    this.subscribeAsError(
+      FkOrgActions.createConnectionError,
+      $localize`Kunne ikke oprette en forbindelse til Fk Organisation`
+    );
+
+    this.subscribeAsDefault(
+      FkOrgActions.updateConnectionSuccess,
+      $localize`Forbindelse til FK Organisation er opdateret`
+    );
+    this.subscribeAsError(
+      FkOrgActions.updateConnectionError,
+      $localize`Kunne ikke opdatere forbindelsen til Fk Organisation`
+    );
+
+    this.subscribeAsDefault(
+      FkOrgActions.deleteAutomaticUpdateSubscriptionSuccess,
+      $localize`Automatisk import af opdateringer er opdateret`
+    );
+    this.subscribeAsError(
+      FkOrgActions.deleteAutomaticUpdateSubscriptionSuccess,
+      $localize`Kunne ikke opdatere automatisk import af opdateringer`
     );
   }
 

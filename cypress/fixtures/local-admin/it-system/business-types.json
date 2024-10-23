@@ -1,0 +1,128 @@
+[
+  {
+      "isActive": true,
+      "isObligatory": false,
+      "description": "...s",
+      "uuid": "1c3fb372-dc70-450f-a51f-ba393e9c6206",
+      "name": "Desing, visualisering og grafik"
+  },
+  {
+      "isActive": false,
+      "isObligatory": false,
+      "description": "...",
+      "uuid": "ec444285-1537-4a80-a41a-85ea840271cf",
+      "name": "Kommunikation"
+  },
+  {
+      "isActive": true,
+      "isObligatory": true,
+      "description": "...d",
+      "uuid": "50518232-6a7a-4d90-ad2d-b7f7170cddef",
+      "name": "Hjemmesider og portaler"
+  },
+  {
+      "isActive": true,
+      "isObligatory": true,
+      "description": "...asd",
+      "uuid": "e14f0f93-fbac-4eb5-a04f-f2975dd04c3a",
+      "name": "Selvbetjening og indberetning"
+  },
+  {
+      "isActive": true,
+      "isObligatory": true,
+      "description": "...",
+      "uuid": "0f8ce298-2d86-4cf7-8e56-d6847485d922",
+      "name": "E-læring"
+  },
+  {
+      "isActive": true,
+      "isObligatory": true,
+      "description": "...",
+      "uuid": "a5e2c991-3dd7-4538-8e53-fb651e8c62c8",
+      "name": "ESDH og Journalisering"
+  },
+  {
+      "isActive": true,
+      "isObligatory": true,
+      "description": "...",
+      "uuid": "643d7518-409b-42bd-ada1-743bc9cf065d",
+      "name": "Specialsystemer"
+  },
+  {
+      "isActive": true,
+      "isObligatory": true,
+      "description": "...",
+      "uuid": "3d0c642d-dcb7-4d0d-ab2f-4e412693f599",
+      "name": "Processtyring"
+  },
+  {
+      "isActive": true,
+      "isObligatory": true,
+      "description": "...",
+      "uuid": "17d0baba-3c9c-462b-9256-6fc2c1cff07d",
+      "name": "IT management"
+  },
+  {
+      "isActive": true,
+      "isObligatory": true,
+      "description": "...",
+      "uuid": "84178728-fa7f-4f61-a188-eb6607dea36a",
+      "name": "Økonomi og betaling"
+  },
+  {
+      "isActive": true,
+      "isObligatory": true,
+      "description": "...",
+      "uuid": "9ea6a66a-1fcd-431b-b14c-34cfd8cf2357",
+      "name": "Løn, personale og HR"
+  },
+  {
+      "isActive": true,
+      "isObligatory": true,
+      "description": "...d",
+      "uuid": "cb71e67e-39a6-450f-a7c7-c5ae2b153a42",
+      "name": "BI og ledelsesinformation"
+  },
+  {
+      "isActive": true,
+      "isObligatory": true,
+      "description": "...",
+      "uuid": "9f0c3e07-e991-4788-a736-04fb31c637f9",
+      "name": "Master data og registre"
+  },
+  {
+      "isActive": true,
+      "isObligatory": true,
+      "description": "...",
+      "uuid": "ccdd06a2-7a09-4b0a-9612-3576b72abbe7",
+      "name": "GIS"
+  },
+  {
+      "isActive": true,
+      "isObligatory": true,
+      "description": "...",
+      "uuid": "090b9918-28fe-42b2-a960-b554600b5bd2",
+      "name": "Bruger- og rettighedsstyring"
+  },
+  {
+      "isActive": true,
+      "isObligatory": true,
+      "description": "...",
+      "uuid": "544843d3-82a3-4a73-9c62-a3622846b7e9",
+      "name": "Sikkerhed og overvågning"
+  },
+  {
+      "isActive": true,
+      "isObligatory": true,
+      "description": "...",
+      "uuid": "035757d1-1911-430c-b2e9-2a5d0bb4ea44",
+      "name": "Sagsbærende"
+  },
+  {
+      "isActive": true,
+      "isObligatory": true,
+      "description": "...",
+      "uuid": "41fd5a34-53dd-4081-b22d-5497885bbf99",
+      "name": "Administrativt"
+  }
+]

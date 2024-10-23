@@ -201,7 +201,8 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
       this.patchFrontPage({ procurement: { procurementPlan: { quarterOfYear, year } } }, valueChange);
       return;
     }
-    this.patchFrontPage({ procurement: { procurementPlan: undefined } }, valueChange);
+    //eslint-disable-next-line @typescript-eslint/no-explicit-any
+    this.patchFrontPage({ procurement: { procurementPlan: null as any } }, valueChange);
   }
 
   public searchUsers(search?: string) {
@@ -238,12 +239,12 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
         .select(selectContract)
         .pipe(filterNullish(), combineLatestWith(this.store.select(selectItContractHasModifyPermissions)))
         .subscribe(([contract, hasModifyPermission]) => {
-          this.initializeFormGroups(contract, hasModifyPermission);
+          this.updateFormGroups(contract, hasModifyPermission);
         })
     );
   }
 
-  private initializeFormGroups(contract: APIItContractResponseDTO, hasModifyPermission?: boolean) {
+  private updateFormGroups(contract: APIItContractResponseDTO, hasModifyPermission?: boolean) {
     this.patchFrontPageFormGroup(contract);
     this.patchParentContractFormGroup(contract);
     this.patchResponsibleFormGroup(contract);

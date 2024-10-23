@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import { combineLatest, distinctUntilChanged, filter, first, map } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
+import { NavigationDrawerItem } from 'src/app/shared/components/navigation-drawer/navigation-drawer.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { BreadCrumb } from 'src/app/shared/models/breadcrumbs/breadcrumb.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
@@ -46,6 +47,55 @@ export class ItContractDetailsComponent extends BaseComponent implements OnInit,
     ]),
     filterNullish()
   );
+
+  public readonly navigationItems: NavigationDrawerItem[] = [
+    {
+      label: $localize`Kontraktforside`,
+      iconType: 'document',
+      route: AppPath.frontpage,
+    },
+    {
+      label: $localize`IT Systemer`,
+      iconType: 'systems',
+      route: AppPath.itSystems,
+    },
+    {
+      label: $localize`Databehandling`,
+      iconType: 'folder-important',
+      route: AppPath.dataProcessing,
+    },
+    {
+      label: $localize`Aftalefrister`,
+      iconType: 'clipboard',
+      route: AppPath.agreementDeadlines,
+    },
+    {
+      label: $localize`Økonomi`,
+      iconType: 'money',
+      route: AppPath.economy,
+    },
+    {
+      label: $localize`Kontraktroller`,
+      iconType: 'roles',
+      route: AppPath.roles,
+    },
+    {
+      label: $localize`Hierarki`,
+      iconType: 'organization',
+      route: AppPath.hierarchy,
+    },
+    {
+      label: $localize`Advis`,
+      iconType: 'notification',
+      route: AppPath.notifications,
+    },
+    {
+      label: $localize`Referencer`,
+      iconType: 'bookmark',
+      route: AppPath.externalReferences,
+    },
+  ];
+
 
   constructor(
     private store: Store,

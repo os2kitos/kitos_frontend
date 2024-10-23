@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { ComponentStore } from '@ngrx/component-store';import { tapResponse, concatLatestFrom } from '@ngrx/operators';
-
+import { Inject, Injectable } from '@angular/core';
+import { ComponentStore } from '@ngrx/component-store';
+import { concatLatestFrom, tapResponse } from '@ngrx/operators';
 
 import { Store } from '@ngrx/store';
 import { Observable, mergeMap } from 'rxjs';
@@ -31,8 +31,9 @@ export class ITSystemCatalogDetailsFrontpageComponentStore extends ComponentStor
   public readonly isLoadingOrganizations$ = this.select((state) => state.isLoadingOrganizations);
 
   constructor(
-    private apiItSystemService: APIV2ItSystemService,
-    private apiOrganizationService: APIV2OrganizationService,
+    @Inject(APIV2ItSystemService) private apiItSystemService: APIV2ItSystemService,
+    @Inject(APIV2OrganizationService) private apiOrganizationService: APIV2OrganizationService,
+    @Inject(APIV2ItSystemInternalINTERNALService)
     private apiItSystemInternalService: APIV2ItSystemInternalINTERNALService,
     private store: Store
   ) {

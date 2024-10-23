@@ -1,1 +1,8 @@
 @import "theme";
+.help-icon-size {
+  display: inline-block;
+  transform: scale(1.5);
+  width: 1em;
+  height: 1em;
+  margin-bottom: 0.1em; /* Without margin the icon is slightly misaligned */
+}

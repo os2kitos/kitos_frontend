@@ -1,0 +1,84 @@
+<app-segment [buttons]="segmentOptions" [(selected)]="selectedSegment"></app-segment>
+
+<app-card>
+  <ng-container *ngIf="selectedSegment === LocalAdminItContractsSegmentOption.RegularOptionTypes">
+    <app-standard-vertical-content-grid>
+      <app-option-type-table
+        optionType="it-contract_contract-type"
+        title="Kontrakttyper"
+        i18n-title
+      ></app-option-type-table>
+
+      <app-option-type-table
+        optionType="it-contract_contract-template-type"
+        title="Kontraktskabeloner"
+        i18n-title
+      ></app-option-type-table>
+
+      <app-option-type-table
+        optionType="it-contract_purchase-form-type"
+        title="Indkøbsformer"
+        i18n-title
+      ></app-option-type-table>
+
+      <app-option-type-table
+        optionType="it-contract-payment-model-types"
+        title="Betalingsmodeller"
+        i18n-title
+      ></app-option-type-table>
+
+      <app-option-type-table
+        optionType="it-contract-agreement-element-types"
+        title="Aftaleelementer"
+        i18n-title
+        [showDescription]="false"
+        [showEditButton]="false"
+      ></app-option-type-table>
+
+      <app-option-type-table
+        optionType="it-contract-extend-types"
+        title="Option forlæng"
+        i18n-title
+      ></app-option-type-table>
+
+      <app-option-type-table
+        optionType="it-contract-payment-frequency-types"
+        title="Betalingsfrekvenser"
+        i18n-title
+      ></app-option-type-table>
+
+      <app-option-type-table
+        optionType="it-contract-price-regulation-types"
+        title="Pris reguleringer"
+        i18n-title
+      ></app-option-type-table>
+
+      <app-option-type-table
+        optionType="it-contract_procurement-strategy-type"
+        title="Genanskaffelsesstrategier"
+        i18n-title
+      ></app-option-type-table>
+
+      <app-option-type-table
+        optionType="it-contract-termination-period-types"
+        title="Opsigelsesfrister"
+        i18n-title
+      ></app-option-type-table>
+
+      <app-option-type-table
+        optionType="it-contract_criticality-type"
+        title="Kritikalitet"
+        i18n-title
+      ></app-option-type-table>
+    </app-standard-vertical-content-grid>
+  </ng-container>
+
+  <app-option-type-table
+    *ngIf="selectedSegment === LocalAdminItContractsSegmentOption.RoleOptionTypes"
+    optionType="it-contract"
+    [expandedByDefault]="true"
+    [disableAccordion]="true"
+    [showWriteAccess]="true"
+  >
+  </app-option-type-table>
+</app-card>
