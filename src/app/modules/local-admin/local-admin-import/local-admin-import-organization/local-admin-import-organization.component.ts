@@ -70,7 +70,7 @@ export class LocalAdminImportOrganizationComponent extends BaseComponent impleme
       maxWidth: '1200px',
     });
 
-    const instance = dialogRef.componentInstance as FkOrgWriteDialogComponent;
+    const instance = dialogRef.componentInstance;
     instance.isEdit = isEdit;
   }
 

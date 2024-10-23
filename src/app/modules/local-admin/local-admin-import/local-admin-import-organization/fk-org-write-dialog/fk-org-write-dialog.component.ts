@@ -63,13 +63,11 @@ export class FkOrgWriteDialogComponent extends BaseComponent implements OnInit {
     {
       field: 'name',
       title: $localize`Organisationsenhed`,
-      section: '',
       hidden: false,
     },
     {
       field: 'category',
       title: $localize`Ændring`,
-      section: '',
       hidden: false,
       extraFilter: 'enum',
       extraData: fkOrgConnectionChangeTypeChoiceOptions,
@@ -77,7 +75,6 @@ export class FkOrgWriteDialogComponent extends BaseComponent implements OnInit {
     {
       field: 'description',
       title: $localize`Beskrivelse`,
-      section: '',
       hidden: false,
     },
   ];

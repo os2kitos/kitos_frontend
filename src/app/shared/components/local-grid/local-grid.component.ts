@@ -1,6 +1,5 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
-import { Store } from '@ngrx/store';
 import { ExcelExportData } from '@progress/kendo-angular-excel-export';
 import { ExcelExportEvent, GridComponent as KendoGridComponent, PageChangeEvent } from '@progress/kendo-angular-grid';
 import { CompositeFilterDescriptor, SortDescriptor, process } from '@progress/kendo-data-query';
@@ -30,7 +29,7 @@ export class LocalGridComponent<T> extends BaseComponent implements OnInit {
   public readonly defaultMinimumColumnWidth = 50;
   public readonly defaultDateColumnWidth = 350;
 
-  constructor(private store: Store, private actions$: Actions) {
+  constructor(private actions$: Actions) {
     super();
     this.allData = this.allData.bind(this);
   }

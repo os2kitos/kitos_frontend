@@ -19,11 +19,11 @@ export const fkOrgConnectionChangeTypeChoiceOptions: FkOrgConnectionChangeTypeCh
     value: APIConnectionUpdateOrganizationUnitConsequenceDTO.CategoryEnum.Moved,
   },
   {
-    name: $localize`Konverteret`,
+    name: $localize`Slettet`,
     value: APIConnectionUpdateOrganizationUnitConsequenceDTO.CategoryEnum.Deleted,
   },
   {
-    name: $localize`Slettet`,
+    name: $localize`Konverteret`,
     value: APIConnectionUpdateOrganizationUnitConsequenceDTO.CategoryEnum.Converted,
   },
   {

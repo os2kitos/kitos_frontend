@@ -28,7 +28,7 @@ export class HideShowDialogComponent implements OnInit {
     this.columnsCopy = this.columns
       .filter((column) => column.style !== 'excel-only' && column.style !== 'action-buttons')
       .map((column) => ({ ...column }));
-    this.uniqueSections = Array.from(new Set(this.columns.map((column) => column.section)));
+    this.uniqueSections = Array.from(new Set(this.columns.map((column) => column.section!)));
   }
 
   changeVisibility(column: GridColumn) {
@@ -37,8 +37,8 @@ export class HideShowDialogComponent implements OnInit {
 
   mergeColumnChanges(): GridColumn[] {
     return this.columns.map((originalColumn) => {
-      const updatedColumn = this.columnsCopy.find(c => c.field === originalColumn.field);
-      return updatedColumn ? {...originalColumn, hidden: updatedColumn.hidden} : originalColumn;
+      const updatedColumn = this.columnsCopy.find((c) => c.field === originalColumn.field);
+      return updatedColumn ? { ...originalColumn, hidden: updatedColumn.hidden } : originalColumn;
     });
   }
 
