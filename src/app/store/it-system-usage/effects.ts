@@ -49,6 +49,7 @@ import {
   selectOverviewSystemRoles,
   selectUsageGridColumns,
 } from './selectors';
+import { UIConfigService } from 'src/app/shared/services/ui-config.service';
 
 @Injectable()
 export class ITSystemUsageEffects {
@@ -67,7 +68,8 @@ export class ITSystemUsageEffects {
     @Inject(APIV1ItSystemUsageOptionsINTERNALService)
     private apiItSystemUsageOptionsService: APIV1ItSystemUsageOptionsINTERNALService,
     @Inject(APIV2OrganizationGridInternalINTERNALService)
-    private apiV2organizationalGridInternalService: APIV2OrganizationGridInternalINTERNALService
+    private apiV2organizationalGridInternalService: APIV2OrganizationGridInternalINTERNALService,
+    private uiConfigService: UIConfigService
   ) {}
 
   getItSystemUsages$ = createEffect(() => {
@@ -110,7 +112,7 @@ export class ITSystemUsageEffects {
         this.getUIConfigApplications().pipe(
           map((uiConfigApplications) => {
             let { gridColumns } = action;
-            gridColumns = this.applyAllUIConfigToGridColumns(uiConfigApplications, gridColumns);
+            gridColumns = this.uiConfigService.applyAllUIConfigToGridColumns(uiConfigApplications, gridColumns);
 
             this.statePersistingService.set(USAGE_COLUMNS_ID, gridColumns);
             return ITSystemUsageActions.updateGridColumnsSuccess(gridColumns);
@@ -128,7 +130,7 @@ export class ITSystemUsageEffects {
           map((uiConfigApplications) => {
             const { gridColumns, gridRoleColumns } = action;
             let allColumns = gridColumns.concat(gridRoleColumns);
-            allColumns = this.applyAllUIConfigToGridColumns(uiConfigApplications, allColumns);
+            allColumns = this.uiConfigService.applyAllUIConfigToGridColumns(uiConfigApplications, allColumns);
 
             this.statePersistingService.set(USAGE_COLUMNS_ID, allColumns);
             return ITSystemUsageActions.updateGridColumnsSuccess(allColumns);
@@ -242,35 +244,6 @@ export class ITSystemUsageEffects {
         ]
       )
     ) as Observable<UIConfigGridApplication[]>;
-  }
-
-  private applyAllUIConfigToGridColumns(applications: UIConfigGridApplication[], columns: GridColumn[]) {
-    applications.forEach((application) => (columns = this.applyUIConfigToGridColumns(application, columns)));
-    return columns;
-  }
-
-  private applyUIConfigToGridColumns(application: UIConfigGridApplication, columns: GridColumn[]) {
-    const updatedColumns = columns.map((column) => {
-      if (application.columnNamesToConfigure.includes(column.field)) {
-        return {
-          ...column,
-          disabledByUIConfig: !application.shouldEnable,
-        };
-      }
-
-      let updatedColumn = column;
-      application.columnNameSubstringsToConfigure?.forEach((substring) => {
-        if (column.field.includes(substring)) {
-          updatedColumn = {
-            ...column,
-            disabledByUIConfig: !application.shouldEnable,
-          };
-        }
-      });
-      return updatedColumn;
-    });
-
-    return updatedColumns;
   }
 
   getItSystemUsageOverviewRoles = createEffect(() => {
