@@ -30,7 +30,7 @@ import { ExcelModule, GridModule } from '@progress/kendo-angular-grid';
 import '@progress/kendo-angular-intl/locales/da/all';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { CreateSubunitDialogComponent } from '../../modules/organization/organization-structure/create-subunit-dialog/create-subunit-dialog.component';
-import { DIALOG_DEFAULT_WIDTH } from '../constants';
+import { DIALOG_DEFAULT_WIDTH } from '../constants/constants';
 import { DirectivesModule } from '../directives/directives.module';
 import { OnInvalidErrorStateMatcher } from '../helpers/on-invalid-error-state-matcher';
 import { PipesModule } from '../pipes/pipes.module';
@@ -129,6 +129,7 @@ import { EntityTreeComponent } from './tree/entity-tree.component';
 import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
 
 import '@progress/kendo-angular-intl/locales/da/all';
+import { AccordionHeaderComponent } from './accordion-header/accordion-header.component';
 import { BooleanCircleComponent } from './boolean-circle/boolean-circle.component';
 import { CheckboxButtonComponent } from './buttons/checkbox-button/checkbox-button.component';
 import { MultiSelectDropdownComponent } from './dropdowns/multi-select-dropdown/multi-select-dropdown.component';
@@ -138,9 +139,8 @@ import { ResetToOrgColumnsConfigButtonComponent } from './reset-to-org-columns-c
 import { RoleRowComponent } from './role-table/role-row/role-row.component';
 import { RoleTableContainerComponent } from './role-table/role-table-container/role-table-container.component';
 import { SlideToggleComponent } from './slide-toggle/slide-toggle.component';
-import { VerticalContentGridSectionMarginLeftComponent } from './vertical-content-grid-section-margin-left/vertical-content-grid-section-margin-left.component';
 import { SnackbarActionsComponent } from './snackbar-actions/snackbar-actions.component';
-import { AccordionHeaderComponent } from './accordion-header/accordion-header.component';
+import { VerticalContentGridSectionMarginLeftComponent } from './vertical-content-grid-section-margin-left/vertical-content-grid-section-margin-left.component';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();

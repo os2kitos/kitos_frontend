@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Pipe, PipeTransform } from '@angular/core';
-import { DEFAULT_DATE_FORMAT } from '../constants';
+import { DEFAULT_DATE_FORMAT } from '../constants/constants';
 
 @Pipe({
   name: 'appDate',

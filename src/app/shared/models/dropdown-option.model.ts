@@ -1,5 +1,5 @@
 import { APIOrganizationUserResponseDTO, APIRoleOptionResponseDTO } from 'src/app/api/v2';
-import { NO_TEXT, YES_TEXT } from '../constants';
+import { NO_TEXT, YES_TEXT } from '../constants/constants';
 
 export interface DropdownOption {
   uuid: string;

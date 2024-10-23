@@ -11,7 +11,7 @@ import {
   APIUpdateItSystemRequestDTO,
 } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import { ARCHIVE_TEXT } from 'src/app/shared/constants';
+import { ARCHIVE_TEXT } from 'src/app/shared/constants/constants';
 import {
   ArchiveDutyRecommendationChoice,
   archiveDutyRecommendationChoiceOptions,
