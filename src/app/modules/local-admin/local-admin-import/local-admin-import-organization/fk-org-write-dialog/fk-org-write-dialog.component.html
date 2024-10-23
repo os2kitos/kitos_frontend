@@ -69,7 +69,9 @@
                 >Viser konsekvenser <strong>({{ updateConsequencesLength$ | async }})</strong> af opdateringen for
                 organisationshierarkiet i KITOS</app-paragraph
               >
-              <app-button (buttonClick)="exportToExcel()" i18n>Eksporter</app-button>
+              <app-button (buttonClick)="exportToExcel()" i18n buttonStyle="secondary"
+                ><app-export-icon />Eksporter</app-button
+              >
             </app-content-space-between>
             <app-local-grid
               [data]="updateConsequences"

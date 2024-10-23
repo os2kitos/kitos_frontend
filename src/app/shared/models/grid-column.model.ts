@@ -7,12 +7,12 @@ export interface GridColumn {
   /*********************/
   field: string; //The field from the API
   title: string; //UI title
-  section: string; //Root section for the field to be displayed in, in the Column hiding/showing dialog
   hidden: boolean; //If the column is hidden by default
 
   /*********************/
   //Optional properties
   /*********************/
+  section?: string; //Root section for the field to be displayed in, in the Column hiding/showing dialog
   filter?: 'text' | 'numeric' | 'boolean' | 'date'; //Base kendo filter type
   extraFilter?: 'enum' | 'organization-unit' | 'choice-type' | 'dropdown-from-column-data' | 'choice-type-by-name'; //Filters other than the base kendo filters
   noFilter?: boolean; //If true hides the filter for the column

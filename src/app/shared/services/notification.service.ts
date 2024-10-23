@@ -383,9 +383,9 @@ export class NotificationService implements OnDestroy {
       FkOrgActions.updateConnectionSuccess,
       $localize`Forbindelse til FK Organisation er opdateret`
     );
-    this.subscribeAsDefault(
+    this.subscribeAsError(
       FkOrgActions.updateConnectionError,
-      $localize`Kunne ikke opdatere en forbindelse til Fk Organisation`
+      $localize`Kunne ikke opdatere forbindelsen til Fk Organisation`
     );
 
     this.subscribeAsDefault(

@@ -68,7 +68,7 @@ export class LocalAdminImportOrganizationComponent extends BaseComponent impleme
       minWidth: '900px',
     });
 
-    const instance = dialogRef.componentInstance as FkOrgWriteDialogComponent;
+    const instance = dialogRef.componentInstance;
     instance.isEdit = isEdit;
   }
 
