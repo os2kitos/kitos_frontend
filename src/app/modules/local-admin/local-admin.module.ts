@@ -9,7 +9,6 @@ import { OrganizationsGridComponent } from './local-admin-organization/organizat
 import { LocalAdminComponent } from './local-admin.component';
 import { LocalAdminRouterModule } from './local-admin.routes';
 import { UiConfigTabSectionComponent } from './ui-config-tab-section/ui-config-tab-section.component';
-import { LocalAdminItSystemComponent } from './local-admin-it-system/local-admin-it-system.component';
 import { LocalAdminItContractComponent } from './local-admin-it-contract/local-admin-it-contract.component';
 import { LocalAdminDprComponent } from './local-admin-dpr/local-admin-dpr.component';
 import { LocalAdminImportComponent } from './local-admin-import/local-admin-import.component';
@@ -21,7 +20,6 @@ import { FkOrgWriteDialogComponent } from './local-admin-import/local-admin-impo
     LocalAdminInformationComponent,
     LocalAdminOrganizationComponent,
     OrganizationsGridComponent,
-    LocalAdminItSystemComponent,
     LocalAdminItContractComponent,
     LocalAdminDprComponent,
     LocalAdminImportComponent,
