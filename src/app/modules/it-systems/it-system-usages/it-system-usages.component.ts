@@ -42,11 +42,6 @@ import {
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { selectGridConfigModificationPermission, selectOrganizationName } from 'src/app/store/user-store/selectors';
 
-export interface UIConfigGridApplication {
-  shouldEnable: boolean;
-  columnNamesToExclude: string[];
-}
-
 @Component({
   templateUrl: 'it-system-usages.component.html',
   styleUrls: ['it-system-usages.component.scss'],

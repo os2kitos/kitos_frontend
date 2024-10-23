@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { UIConfigGridApplication } from 'src/app/modules/it-systems/it-system-usages/it-system-usages.component';
 import { UIModuleConfigKey } from '../enums/ui-module-config-key';
 import { GridColumn } from '../models/grid-column.model';
 import { ItSystemUsageUiBluePrint } from '../models/ui-config/it-system-usages-blueprint';
@@ -7,7 +6,7 @@ import { UIConfigNodeViewModel } from '../models/ui-config/ui-config-node-view-m
 import { UIModuleConfig } from '../models/ui-config/ui-module-config.model';
 import { UINodeBlueprint } from '../models/ui-config/ui-node-blueprint.model';
 import { UINodeCustomization } from '../models/ui-config/ui-node-customization';
-import { map, Observable } from 'rxjs';
+import { UIConfigGridApplication } from '../models/ui-config/ui-config-grid-application';
 
 @Injectable({
   providedIn: 'root',

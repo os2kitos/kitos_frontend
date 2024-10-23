@@ -42,6 +42,7 @@ import {
   selectOverviewSystemRoles,
   selectUsageGridColumns,
 } from './selectors';
+import { UIConfigGridApplication } from 'src/app/shared/models/ui-config/ui-config-grid-application';
 
 @Injectable()
 export class ITSystemUsageEffects {
@@ -749,11 +750,6 @@ export class ITSystemUsageEffects {
       )
     );
   });
-}
-
-interface UIConfigGridApplication {
-  shouldEnable: boolean;
-  columnNamesToExclude: string[];
 }
 
 function applyQueryFixes(odataString: string, systemRoles: APIBusinessRoleDTO[] | undefined) {
