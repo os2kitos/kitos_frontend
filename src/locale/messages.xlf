@@ -4174,6 +4174,27 @@
       <trans-unit id="8637911288264886213" datatype="html">
         <source>Forbindelse til FK Organisation blev fjernet</source>
       </trans-unit>
+      <trans-unit id="1401253679062667183" datatype="html">
+        <source>Oprettes forbindelsen igen efterfølgende, vil der altså kunne optræde enheder med samme navn men med forskelligt &quot;ophav&quot;. </source>
+      </trans-unit>
+      <trans-unit id="1677749166597841894" datatype="html">
+        <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Bevar organisationshierarkiet:<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> Vælges denne mulighed konverteres alle organisationsenheder fra FK Organisation til KITOS enheder. </source>
+      </trans-unit>
+      <trans-unit id="2874747510585928254" datatype="html">
+        <source>Slet ubrugte organisationseneheder</source>
+      </trans-unit>
+      <trans-unit id="6927627553018075470" datatype="html">
+        <source>Bevar organisationshierarkiet</source>
+      </trans-unit>
+      <trans-unit id="7703947809259663046" datatype="html">
+        <source>Brydes forbindelsen til FK Organisation vil alle organisationsenheder, som er importeret fra FK Organisation, blive konverteret til KITOS enheder.</source>
+      </trans-unit>
+      <trans-unit id="7974948161058774051" datatype="html">
+        <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Slet ubrugte organisationseneheder:<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> Vælges denne mulighed slettes alle organisationseneheder (fra FK Organisation), hvortil der ikke er knyttet en registrering. De resterende konverteres til KITOS enheder. </source>
+      </trans-unit>
+      <trans-unit id="8397116804743809977" datatype="html">
+        <source> For at lette den administrative byrde har du derfor følgende muligheder: </source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
