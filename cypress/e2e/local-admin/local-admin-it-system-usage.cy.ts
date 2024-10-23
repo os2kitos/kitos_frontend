@@ -19,11 +19,10 @@ describe('local-admin', () => {
     cy.intercept('/api/v2/internal/organizations/*/permissions', {
       fixture: './organizations/organization-permissions-local-admin.json',
     });
-    cy.setup(true, 'local-admin');
+    cy.setup(true, 'local-admin/system');
   });
 
   it('Can edit description of it system option type', () => {
-    cy.getByDataCy('local-admin-it-system-button').click();
     cy.contains('Lokal tilpasning af udfaldsrum').click();
 
     cy.contains('Forretningstyper').click();
@@ -39,7 +38,6 @@ describe('local-admin', () => {
   });
 
   it('Can deactivate active status of it system option type if not obligatory', () => {
-    cy.getByDataCy('local-admin-it-system-button').click();
     cy.contains('Lokal tilpasning af udfaldsrum').click();
 
     cy.contains('Forretningstyper').click();
@@ -55,7 +53,6 @@ describe('local-admin', () => {
   });
 
   it('Can activate active status of it system option type if not obligatory', () => {
-    cy.getByDataCy('local-admin-it-system-button').click();
     cy.contains('Lokal tilpasning af udfaldsrum').click();
 
     cy.contains('Forretningstyper').click();
@@ -71,7 +68,6 @@ describe('local-admin', () => {
   });
 
   it('Can not edit active status of option type if obligatory', () => {
-    cy.getByDataCy('local-admin-it-system-button').click();
     cy.contains('Lokal tilpasning af udfaldsrum').click();
 
     cy.contains('Forretningstyper').click();
