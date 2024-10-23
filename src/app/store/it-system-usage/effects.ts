@@ -29,7 +29,11 @@ import {
   selectITSystemUsageUIModuleConfigEnabledFieldContractsSelectContractToDetermineIfItSystemIsActive,
   selectITSystemUsageUIModuleConfigEnabledFieldFrontPageLifeCycleStatus,
   selectITSystemUsageUIModuleConfigEnabledFieldFrontPageUsagePeriod,
+  selectITSystemUsageUIModuleConfigEnabledTabArchiving,
+  selectITSystemUsageUIModuleConfigEnabledTabGdpr,
+  selectITSystemUsageUIModuleConfigEnabledTabLocalReferences,
   selectITSystemUsageUIModuleConfigEnabledTabOrganization,
+  selectITSystemUsageUIModuleConfigEnabledTabSystemRelations,
   selectITSystemUsageUIModuleConfigEnabledTabSystemRoles,
 } from '../organization/ui-module-customization/selectors';
 import { selectOrganizationUuid } from '../user-store/selectors';
@@ -141,6 +145,11 @@ export class ITSystemUsageEffects {
     );
     const enableOrganization$ = this.store.select(selectITSystemUsageUIModuleConfigEnabledTabOrganization);
     const enableSystemRoles$ = this.store.select(selectITSystemUsageUIModuleConfigEnabledTabSystemRoles);
+    const enableReferences$ = this.store.select(selectITSystemUsageUIModuleConfigEnabledTabLocalReferences);
+    const enableGdpr$ = this.store.select(selectITSystemUsageUIModuleConfigEnabledTabGdpr);
+    const enableArchiving$ = this.store.select(selectITSystemUsageUIModuleConfigEnabledTabArchiving);
+    const enableSystemRelations$ = this.store.select(selectITSystemUsageUIModuleConfigEnabledTabSystemRelations);
+
 
     return combineLatest([
       enableLifeCycleStatus$,
@@ -148,6 +157,10 @@ export class ITSystemUsageEffects {
       enableSelectContractToDetermineIfItSystemIsActive$,
       enableOrganization$,
       enableSystemRoles$,
+      enableReferences$,
+      enableGdpr$,
+      enableArchiving$,
+      enableSystemRelations$
     ]).pipe(
       map(
         ([
@@ -156,6 +169,10 @@ export class ITSystemUsageEffects {
           enableSelectContractToDetermineIfItSystemIsActive,
           enableOrganization,
           enableSystemRoles,
+          enableReferences,
+          enableGdpr,
+          enableArchiving,
+          enableSystemRelations,
         ]): UIConfigGridApplication[] => [
           {
             shouldEnable: enableLifeCycleStatus,
@@ -167,7 +184,7 @@ export class ITSystemUsageEffects {
           },
           {
             shouldEnable: enableSelectContractToDetermineIfItSystemIsActive,
-            columnNamesToConfigure: ['MainContractIsActive'],
+            columnNamesToConfigure: ['MainContractIsActive', 'MainContractSupplierName'],
           },
           {
             shouldEnable: enableOrganization,
@@ -177,6 +194,28 @@ export class ITSystemUsageEffects {
             shouldEnable: enableSystemRoles,
             columnNamesToConfigure: [],
             columnNameSubstringsToConfigure: ['Roles.Role'],
+          },
+          {
+            shouldEnable: enableReferences,
+            columnNamesToConfigure: ['LocalReferenceTitle', 'LocalReferenceDocumentId'],
+          },
+          {
+            shouldEnable: enableGdpr,
+            columnNamesToConfigure: ['SensitiveDataLevelsAsCsv', 'LocalReferenceDocumentId',
+              'RiskSupervisionDocumentationName', 'LinkToDirectoryName',
+              'HostedAt', 'GeneralPurpose',
+            'DataProcessingRegistrationsConcludedAsCsv', 'DataProcessingRegistrationNamesAsCsv',
+          'RiskAssessmentDate', 'PlannedRiskAssessmentDate'],
+          },
+          {
+            shouldEnable: enableArchiving,
+            columnNamesToConfigure: ['ArchiveDuty', 'IsHoldingDocument', 'ActiveArchivePeriodEndDate'],
+          },
+          {
+            shouldEnable: enableSystemRelations,
+            columnNamesToConfigure: ['OutgoingRelatedItSystemUsagesNamesAsCsv', 'DependsOnInterfacesNamesAsCsv',
+              'IncomingRelatedItSystemUsagesNamesAsCsv',
+            ],
           },
         ]
       )
