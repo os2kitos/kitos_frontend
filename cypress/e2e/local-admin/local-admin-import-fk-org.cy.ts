@@ -56,6 +56,7 @@ describe('local-admin.fk-org', () => {
     goToImport();
 
     cy.getByDataCy('edit-sts-connection').click();
+    cy.getByDataCy('delete-connection').should('exist');
     cy.getByDataCy('proceed-button').click();
 
     cy.inputByCy('levels-input').should('be.disabled');

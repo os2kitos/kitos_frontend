@@ -1,15 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { Actions } from '@ngrx/effects';
+import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { FkOrgActions } from 'src/app/store/local-admin/fk-org/actions';
 
 @Component({
   selector: 'app-fk-org-delete-dialog',
   templateUrl: './fk-org-delete-dialog.component.html',
   styleUrl: './fk-org-delete-dialog.component.scss',
 })
-export class FkOrgDeleteDialogComponent extends BaseComponent {
+export class FkOrgDeleteDialogComponent extends BaseComponent implements OnInit {
   constructor(
     private readonly store: Store,
     private readonly actions$: Actions,
@@ -18,11 +19,19 @@ export class FkOrgDeleteDialogComponent extends BaseComponent {
     super();
   }
 
-  public OkResult() {
-    this.dialog.close(true);
+  ngOnInit(): void {
+    this.subscriptions.add(
+      this.actions$.pipe(ofType(FkOrgActions.deleteConnectionSuccess)).subscribe(() => {
+        this.cancel();
+      })
+    );
   }
 
-  public CancelResult() {
+  public deleteConnection(purgeUnusedExternalUnits: boolean) {
+    this.store.dispatch(FkOrgActions.deleteConnection(purgeUnusedExternalUnits));
+  }
+
+  public cancel() {
     this.dialog.close(false);
   }
 }

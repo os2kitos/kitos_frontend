@@ -5471,6 +5471,22 @@
         <source>Kunne ikke opdatere automatisk import af opdateringer</source>
         <target state="new">Kunne ikke opdatere automatisk import af opdateringer</target>
       </trans-unit>
+      <trans-unit id="1274790689655565947" datatype="html">
+        <source>Bryd forbindelsen til FK Organisation</source>
+        <target state="new">Bryd forbindelsen til FK Organisation</target>
+      </trans-unit>
+      <trans-unit id="6597569055545801356" datatype="html">
+        <source>Bryd forbindelsen til FK Organisation </source>
+        <target state="new">Bryd forbindelsen til FK Organisation </target>
+      </trans-unit>
+      <trans-unit id="8637911288264886213" datatype="html">
+        <source>Forbindelse til FK Organisation blev fjernet</source>
+        <target state="new">Forbindelse til FK Organisation blev fjernet</target>
+      </trans-unit>
+      <trans-unit id="4666153646055232970" datatype="html">
+        <source>Kunne ikke slette forbindelsen til Fk Organisation</source>
+        <target state="new">Kunne ikke slette forbindelsen til Fk Organisation</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -4159,6 +4159,18 @@
       <trans-unit id="828534712862450122" datatype="html">
         <source>Kunne ikke opdatere en forbindelse til Fk Organisation</source>
       </trans-unit>
+      <trans-unit id="1274790689655565947" datatype="html">
+        <source>Bryd forbindelsen til FK Organisation</source>
+      </trans-unit>
+      <trans-unit id="4666153646055232970" datatype="html">
+        <source>Kunne ikke slette forbindelsen til Fk Organisation</source>
+      </trans-unit>
+      <trans-unit id="6597569055545801356" datatype="html">
+        <source>Bryd forbindelsen til FK Organisation </source>
+      </trans-unit>
+      <trans-unit id="8637911288264886213" datatype="html">
+        <source>Forbindelse til FK Organisation blev fjernet</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
