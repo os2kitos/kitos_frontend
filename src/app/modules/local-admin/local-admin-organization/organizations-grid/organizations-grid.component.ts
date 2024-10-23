@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { first, of } from 'rxjs';
 import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
-import { ORGANIZATION_SECTION_NAME } from 'src/app/shared/constants/persistent-state-constants';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { organizationTypeOptions } from 'src/app/shared/models/organization/organization.model';
+import { ORGANIZATION_SECTION_NAME } from 'src/app/shared/persistent-state-constants';
 import { OrganizationActions } from 'src/app/store/organization/actions';
 import {
   selectOrganizationGridData,

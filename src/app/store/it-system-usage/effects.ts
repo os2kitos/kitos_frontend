@@ -13,8 +13,6 @@ import {
   APIV2ItSystemUsageService,
   APIV2OrganizationGridInternalINTERNALService,
 } from 'src/app/api/v2';
-import * as GridFields from 'src/app/shared/constants/it-system-usage-grid-column-constants';
-import { USAGE_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-constants';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { convertDataSensitivityLevelStringToNumberMap } from 'src/app/shared/models/it-system-usage/gdpr/data-sensitivity-level.model';
@@ -22,6 +20,7 @@ import { adaptITSystemUsage } from 'src/app/shared/models/it-system-usage/it-sys
 import { OData } from 'src/app/shared/models/odata.model';
 import { UIConfigGridApplication } from 'src/app/shared/models/ui-config/ui-config-grid-application';
 import { YesNoIrrelevantEnum } from 'src/app/shared/models/yes-no-irrelevant.model';
+import { USAGE_COLUMNS_ID } from 'src/app/shared/persistent-state-constants';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ExternalReferencesApiService } from 'src/app/shared/services/external-references-api-service.service';
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
@@ -52,8 +51,6 @@ import {
 
 @Injectable()
 export class ITSystemUsageEffects {
-  private readonly RoleColumnsPrefix = 'Roles.Role';
-
   constructor(
     private actions$: Actions,
     private store: Store,
@@ -153,6 +150,7 @@ export class ITSystemUsageEffects {
     const enableArchiving$ = this.store.select(selectITSystemUsageUIModuleConfigEnabledTabArchiving);
     const enableSystemRelations$ = this.store.select(selectITSystemUsageUIModuleConfigEnabledTabSystemRelations);
 
+
     return combineLatest([
       enableLifeCycleStatus$,
       enableUsagePeriod$,
@@ -162,7 +160,7 @@ export class ITSystemUsageEffects {
       enableReferences$,
       enableGdpr$,
       enableArchiving$,
-      enableSystemRelations$,
+      enableSystemRelations$
     ]).pipe(
       map(
         ([
@@ -178,65 +176,45 @@ export class ITSystemUsageEffects {
         ]): UIConfigGridApplication[] => [
           {
             shouldEnable: enableLifeCycleStatus,
-            columnNamesToConfigure: [GridFields.LifeCycleStatus, GridFields.ActiveAccordingToLifeCycle],
+            columnNamesToConfigure: ['LifeCycleStatus', 'ActiveAccordingToLifeCycle'],
           },
           {
             shouldEnable: enableUsagePeriod,
-            columnNamesToConfigure: [
-              GridFields.ExpirationDate,
-              GridFields.Concluded,
-              GridFields.ActiveAccordingToValidityPeriod,
-            ],
+            columnNamesToConfigure: ['ExpirationDate', 'Concluded', 'ActiveAccordingToValidityPeriod'],
           },
           {
             shouldEnable: enableSelectContractToDetermineIfItSystemIsActive,
-            columnNamesToConfigure: [GridFields.MainContractIsActive, GridFields.MainContractSupplierName],
+            columnNamesToConfigure: ['MainContractIsActive', 'MainContractSupplierName'],
           },
           {
             shouldEnable: enableOrganization,
-            columnNamesToConfigure: [
-              GridFields.ResponsibleOrganizationUnitName,
-              GridFields.RelevantOrganizationUnitNamesAsCsv,
-            ],
+            columnNamesToConfigure: ['ResponsibleOrganizationUnitName', 'RelevantOrganizationUnitNamesAsCsv'],
           },
           {
             shouldEnable: enableSystemRoles,
             columnNamesToConfigure: [],
-            columnNameSubstringsToConfigure: [this.RoleColumnsPrefix],
+            columnNameSubstringsToConfigure: ['Roles.Role'],
           },
           {
             shouldEnable: enableReferences,
-            columnNamesToConfigure: [GridFields.LocalReferenceTitle, GridFields.LocalReferenceDocumentId],
+            columnNamesToConfigure: ['LocalReferenceTitle', 'LocalReferenceDocumentId'],
           },
           {
             shouldEnable: enableGdpr,
-            columnNamesToConfigure: [
-              GridFields.SensitiveDataLevelsAsCsv,
-              GridFields.LocalReferenceDocumentId,
-              GridFields.RiskSupervisionDocumentationName,
-              GridFields.LinkToDirectoryName,
-              GridFields.HostedAt,
-              GridFields.GeneralPurpose,
-              GridFields.DataProcessingRegistrationsConcludedAsCsv,
-              GridFields.DataProcessingRegistrationNamesAsCsv,
-              GridFields.RiskAssessmentDate,
-              GridFields.PlannedRiskAssessmentDate,
-            ],
+            columnNamesToConfigure: ['SensitiveDataLevelsAsCsv', 'LocalReferenceDocumentId',
+              'RiskSupervisionDocumentationName', 'LinkToDirectoryName',
+              'HostedAt', 'GeneralPurpose',
+            'DataProcessingRegistrationsConcludedAsCsv', 'DataProcessingRegistrationNamesAsCsv',
+          'RiskAssessmentDate', 'PlannedRiskAssessmentDate'],
           },
           {
             shouldEnable: enableArchiving,
-            columnNamesToConfigure: [
-              GridFields.ArchiveDuty,
-              GridFields.IsHoldingDocument,
-              GridFields.ActiveArchivePeriodEndDate,
-            ],
+            columnNamesToConfigure: ['ArchiveDuty', 'IsHoldingDocument', 'ActiveArchivePeriodEndDate'],
           },
           {
             shouldEnable: enableSystemRelations,
-            columnNamesToConfigure: [
-              GridFields.OutgoingRelatedItSystemUsagesNamesAsCsv,
-              GridFields.DependsOnInterfacesNamesAsCsv,
-              GridFields.IncomingRelatedItSystemUsagesNamesAsCsv,
+            columnNamesToConfigure: ['OutgoingRelatedItSystemUsagesNamesAsCsv', 'DependsOnInterfacesNamesAsCsv',
+              'IncomingRelatedItSystemUsagesNamesAsCsv',
             ],
           },
         ]
