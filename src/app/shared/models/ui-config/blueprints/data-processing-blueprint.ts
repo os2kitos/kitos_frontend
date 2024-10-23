@@ -1,7 +1,7 @@
 import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
 import { uiConfigHelpTexts } from '../ui-config-helptexts';
 
-export const DataProcessingUiCustomizationBluePrint = {
+export const DataProcessingUiBluePrint = {
   module: UIModuleConfigKey.DataProcessingRegistrations,
   isObligatory: false,
   helpText: uiConfigHelpTexts.generalUiCustomizationHelpText,

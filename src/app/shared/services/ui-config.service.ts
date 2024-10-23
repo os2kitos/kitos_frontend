@@ -7,6 +7,7 @@ import { UIConfigNodeViewModel } from '../models/ui-config/ui-config-node-view-m
 import { UIModuleConfig } from '../models/ui-config/ui-module-config.model';
 import { UINodeBlueprint } from '../models/ui-config/ui-node-blueprint.model';
 import { UINodeCustomization } from '../models/ui-config/ui-node-customization';
+import { DataProcessingUiBluePrint } from '../models/ui-config/blueprints/data-processing-blueprint';
 
 @Injectable({
   providedIn: 'root',
@@ -74,7 +75,7 @@ export class UIConfigService {
         return ItSystemUsageUiBluePrint;
       case UIModuleConfigKey.ItContract:
       case UIModuleConfigKey.DataProcessingRegistrations:
-        return this.emptyPlaceholderBlueprint;
+        return DataProcessingUiBluePrint;
     }
   }
 
