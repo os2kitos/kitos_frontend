@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { CellClickEvent } from '@progress/kendo-angular-grid';
-import { combineLatestWith, first, Observable } from 'rxjs';
+import { combineLatestWith, first } from 'rxjs';
 import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
 import { BooleanValueDisplayType } from 'src/app/shared/components/status-chip/status-chip.component';
 import { filterGridColumnsByUIConfig, getColumnsToShow } from 'src/app/shared/helpers/grid-config-helper';
@@ -26,7 +26,6 @@ import {
   USAGE_SECTION_NAME,
 } from 'src/app/shared/persistent-state-constants';
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
-import { UIConfigService } from 'src/app/shared/services/ui-config.service';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import {
   selectGridData,
@@ -514,7 +513,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     private router: Router,
     private route: ActivatedRoute,
     private statePersistingService: StatePersistingService,
-    private actions$: Actions,
+    private actions$: Actions
   ) {
     super(store, 'it-system-usage');
   }

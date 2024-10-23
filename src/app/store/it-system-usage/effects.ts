@@ -4,7 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { compact, uniq } from 'lodash';
-import { catchError, combineLatestWith, map, mergeMap, of, switchMap } from 'rxjs';
+import { catchError, combineLatest, combineLatestWith, map, mergeMap, Observable, of, switchMap } from 'rxjs';
 import { APIBusinessRoleDTO, APIV1ItSystemUsageOptionsINTERNALService } from 'src/app/api/v1';
 import {
   APIItSystemUsageResponseDTO,
@@ -97,45 +97,17 @@ export class ITSystemUsageEffects {
   updateGridColumns$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.updateGridColumns),
-      combineLatestWith(
-        this.store.select(selectITSystemUsageUIModuleConfigEnabledFieldFrontPageLifeCycleStatus),
-        this.store.select(selectITSystemUsageUIModuleConfigEnabledFieldFrontPageUsagePeriod),
-        this.store.select(
-          selectITSystemUsageUIModuleConfigEnabledFieldContractsSelectContractToDetermineIfItSystemIsActive
-        ),
-        this.store.select(selectITSystemUsageUIModuleConfigEnabledTabOrganization)
-      ),
-      map(
-        ([
-          { gridColumns },
-          enableLifeCycleStatus,
-          enableUsagePeriod,
-          enableSelectContractToDetermineIfItSystemIsActive,
-          enableOrganization,
-        ]) => {
-          const uiConfigApplications: UIConfigGridApplication[] = [
-            {
-              shouldEnable: enableLifeCycleStatus,
-              columnNamesToExclude: ['LifeCycleStatus', 'ActiveAccordingToLifeCycle'],
-            },
-            {
-              shouldEnable: enableUsagePeriod,
-              columnNamesToExclude: ['ExpirationDate', 'Concluded', 'ActiveAccordingToValidityPeriod'],
-            },
-            {
-              shouldEnable: enableSelectContractToDetermineIfItSystemIsActive,
-              columnNamesToExclude: ['MainContractIsActive'],
-            },
-            {
-              shouldEnable: enableOrganization,
-              columnNamesToExclude: ['ResponsibleOrganizationUnitName'],
-            },
-          ];
+      switchMap((action) =>
+        this.getUIConfigApplications().pipe(
+          map(uiConfigApplications => {
+          let { gridColumns } = action;
           gridColumns = this.applyAllUIConfigToGridColumns(uiConfigApplications, gridColumns);
 
           this.statePersistingService.set(USAGE_COLUMNS_ID, gridColumns);
           return ITSystemUsageActions.updateGridColumnsSuccess(gridColumns);
         }
+      )
+        )
       )
     );
   });
@@ -143,48 +115,54 @@ export class ITSystemUsageEffects {
   updateGridColumnsAndRoleColumns$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.updateGridColumnsAndRoleColumns),
-      combineLatestWith(
-        this.store.select(selectITSystemUsageUIModuleConfigEnabledFieldFrontPageLifeCycleStatus),
-        this.store.select(selectITSystemUsageUIModuleConfigEnabledFieldFrontPageUsagePeriod),
-        this.store.select(
-          selectITSystemUsageUIModuleConfigEnabledFieldContractsSelectContractToDetermineIfItSystemIsActive
-        ),
-        this.store.select(selectITSystemUsageUIModuleConfigEnabledTabOrganization)
-      ),
-      map(
-        ([
-          { gridColumns, gridRoleColumns },
-          enableLifeCycleStatus,
-          enableUsagePeriod,
-          enableSelectContractToDetermineIfItSystemIsActive,
-          enableOrganization,
-        ]) => {
-          const uiConfigApplications: UIConfigGridApplication[] = [
-            {
-              shouldEnable: enableLifeCycleStatus,
-              columnNamesToExclude: ['LifeCycleStatus', 'ActiveAccordingToLifeCycle'],
-            },
-            {
-              shouldEnable: enableUsagePeriod,
-              columnNamesToExclude: ['ExpirationDate', 'Concluded', 'ActiveAccordingToValidityPeriod'],
-            },
-            {
-              shouldEnable: enableSelectContractToDetermineIfItSystemIsActive,
-              columnNamesToExclude: ['MainContractIsActive'],
-            },
-            {
-              shouldEnable: enableOrganization,
-              columnNamesToExclude: ['ResponsibleOrganizationUnitName'],
-            },
-          ];
-          const columns = this.applyAllUIConfigToGridColumns(uiConfigApplications, gridColumns.concat(gridRoleColumns));
+      switchMap((action) =>
+        this.getUIConfigApplications().pipe(
+          map(uiConfigApplications => {
+          const { gridColumns, gridRoleColumns } = action;
+          let allColumns = gridColumns.concat(gridRoleColumns);
+          allColumns = this.applyAllUIConfigToGridColumns(uiConfigApplications, allColumns);
 
-          this.statePersistingService.set(USAGE_COLUMNS_ID, columns);
-          return ITSystemUsageActions.updateGridColumnsAndRoleColumnsSuccess(columns);
+          this.statePersistingService.set(USAGE_COLUMNS_ID, allColumns);
+          return ITSystemUsageActions.updateGridColumnsSuccess(allColumns);
         }
+      )
+        )
       )
     );
   });
+
+  private getUIConfigApplications(): Observable<UIConfigGridApplication[]> {
+    const enableLifeCycleStatus$ = this.store.select(selectITSystemUsageUIModuleConfigEnabledFieldFrontPageLifeCycleStatus);
+    const enableUsagePeriod$ = this.store.select(selectITSystemUsageUIModuleConfigEnabledFieldFrontPageUsagePeriod);
+    const enableSelectContractToDetermineIfItSystemIsActive$ = this.store.select(selectITSystemUsageUIModuleConfigEnabledFieldContractsSelectContractToDetermineIfItSystemIsActive);
+    const enableOrganization$ = this.store.select(selectITSystemUsageUIModuleConfigEnabledTabOrganization);
+
+    return combineLatest([
+      enableLifeCycleStatus$,
+      enableUsagePeriod$,
+      enableSelectContractToDetermineIfItSystemIsActive$,
+      enableOrganization$
+    ]).pipe(
+      map(([enableLifeCycleStatus, enableUsagePeriod, enableSelectContractToDetermineIfItSystemIsActive, enableOrganization]): UIConfigGridApplication[] => [
+        {
+          shouldEnable: enableLifeCycleStatus,
+          columnNamesToExclude: ['LifeCycleStatus', 'ActiveAccordingToLifeCycle'],
+        },
+        {
+          shouldEnable: enableUsagePeriod,
+          columnNamesToExclude: ['ExpirationDate', 'Concluded', 'ActiveAccordingToValidityPeriod'],
+        },
+        {
+          shouldEnable: enableSelectContractToDetermineIfItSystemIsActive,
+          columnNamesToExclude: ['MainContractIsActive'],
+        },
+        {
+          shouldEnable: enableOrganization,
+          columnNamesToExclude: ['ResponsibleOrganizationUnitName'],
+        },
+      ])
+    ) as Observable<UIConfigGridApplication[]>;
+  }
 
   private applyAllUIConfigToGridColumns(applications: UIConfigGridApplication[], columns: GridColumn[]) {
     applications.forEach((application) => (columns = this.applyUIConfigToGridColumns(application, columns)));
