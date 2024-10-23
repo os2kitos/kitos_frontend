@@ -24,6 +24,8 @@ describe('local-admin', () => {
 
   it('Can edit description of it system option type', () => {
     cy.getByDataCy('local-admin-it-system-button').click();
+    cy.contains('Lokal tilpasning af udfaldsrum').click();
+
     cy.contains('Forretningstyper').click();
     cy.intercept('PATCH', 'api/v2/internal/it-systems/*/local-option-types/business-types/*', {});
 
@@ -38,6 +40,8 @@ describe('local-admin', () => {
 
   it('Can deactivate active status of it system option type if not obligatory', () => {
     cy.getByDataCy('local-admin-it-system-button').click();
+    cy.contains('Lokal tilpasning af udfaldsrum').click();
+
     cy.contains('Forretningstyper').click();
     cy.intercept('DELETE', 'api/v2/internal/it-systems/*/local-option-types/business-types/*', {});
 
@@ -52,6 +56,8 @@ describe('local-admin', () => {
 
   it('Can activate active status of it system option type if not obligatory', () => {
     cy.getByDataCy('local-admin-it-system-button').click();
+    cy.contains('Lokal tilpasning af udfaldsrum').click();
+
     cy.contains('Forretningstyper').click();
     cy.intercept('POST', 'api/v2/internal/it-systems/*/local-option-types/business-types', {});
 
@@ -66,6 +72,8 @@ describe('local-admin', () => {
 
   it('Can not edit active status of option type if obligatory', () => {
     cy.getByDataCy('local-admin-it-system-button').click();
+    cy.contains('Lokal tilpasning af udfaldsrum').click();
+
     cy.contains('Forretningstyper').click();
 
     cy.contains('td', 'Hjemmesider og portaler') // obligatory in response
