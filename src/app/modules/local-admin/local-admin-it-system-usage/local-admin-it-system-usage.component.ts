@@ -27,7 +27,6 @@ export class LocalAdminItSystemUsageComponent {
   ];
   public readonly itSystemUsageUIModuleConfig$ = this.store.select(selectITSystemUsageUIModuleConfig);
   private readonly itSystemUsageModuleKey = UIModuleConfigKey.ItSystemUsage;
-  public readonly itSystemUsageFrontpageForm = new FormGroup({});
 
   constructor(private readonly store: Store) {}
 

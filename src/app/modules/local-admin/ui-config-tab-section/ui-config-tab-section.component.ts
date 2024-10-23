@@ -10,7 +10,6 @@ import { UINodeCustomization } from 'src/app/shared/models/ui-config/ui-node-cus
 })
 export class UiConfigTabSectionComponent {
   @Input() tabViewModel!: UIConfigNodeViewModel;
-  @Input() formGroup!: FormGroup;
   @Output() checkboxChanged = new EventEmitter<UINodeCustomization>();
 
   public tabViewModelHasChildren(): boolean {
