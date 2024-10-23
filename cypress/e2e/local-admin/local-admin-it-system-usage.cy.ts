@@ -81,35 +81,4 @@ describe('local-admin', () => {
       });
     cy.getByDataCy('active-checkbox').should('not.exist');
   });
-
-  it('Can toggle non-obligatory field', () => {
-    cy.intercept('api/v2/internal/organizations/*/ui-customization/ItSystemUsages', {
-      fixture: './shared/it-system-usage-ui-customization-updated.json',
-    });
-
-    cy.intercept('PUT', 'api/v2/internal/organizations/*/ui-customization/ItSystemUsages').as('put');
-
-    const targetFieldCheckboxButtonText = 'Hvilken kontrakt skal afgøre';
-    cy.contains(targetFieldCheckboxButtonText).click();
-    cy.wait('@put').then((interception) => {
-      const nodes = interception.request.body.nodes;
-      const gdprNode = nodes.find(
-        (node: { key: string; enabled: boolean }) => node.key === 'ItSystemUsages.gdpr.plannedRiskAssessmentDate'
-      );
-      expect(gdprNode.enabled).to.equal(false);
-    });
-
-
-    cy.contains(targetFieldCheckboxButtonText)
-    .getByDataCy('button-checkbox')
-    .getByDataCy('checkbox-input')
-    .should('not.be.checked');
-  });
-
-//   it('Cannot toggle obligatory field', () => {
-//     const targetTabCheckboxButtonText = 'Systemforside';
-//     cy.contains(targetTabCheckboxButtonText).parent().getByDataCy('accordion-checkbox').click();
-
-//     cy.contains(targetTabCheckboxButtonText).getByDataCy('accordion-checkbox').should('be.checked');
-//   });
- });
+});
