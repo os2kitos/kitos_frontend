@@ -393,7 +393,7 @@ export class NotificationService implements OnDestroy {
       $localize`Automatisk import af opdateringer er opdateret`
     );
     this.subscribeAsError(
-      FkOrgActions.deleteAutomaticUpdateSubscriptionSuccess,
+      FkOrgActions.deleteAutomaticUpdateSubscriptionError,
       $localize`Kunne ikke opdatere automatisk import af opdateringer`
     );
 
