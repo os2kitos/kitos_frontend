@@ -24,6 +24,16 @@ describe('local-admin', () => {
     cy.setup(true, 'local-admin/system');
   });
 
+  it('Cannot toggle obligatory ui customization field', () => {
+    const targetTabCheckboxButtonText = 'Systemforside';
+    cy.contains(targetTabCheckboxButtonText)
+      .parents('[data-cy="accordion-header"]')
+      .first()
+      .getByDataCy('button-checkbox')
+      .get('mat-checkbox input')
+      .first()
+      .should('be.checked');
+  });
   it('Can edit description of it system option type', () => {
     cy.contains(regularOptionTypesSegment).click();
 
