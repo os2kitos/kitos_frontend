@@ -1,5 +1,5 @@
-import { UIModuleConfigKey } from '../../enums/ui-module-config-key';
-import { uiConfigHelpTexts } from './ui-config-helptexts';
+import { UIModuleConfigKey } from '../../../enums/ui-module-config-key';
+import { uiConfigHelpTexts } from '../ui-config-helptexts';
 
 export const ItSystemUsageUiBluePrint = {
   module: UIModuleConfigKey.ItSystemUsage,
