@@ -1,5 +1,6 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { APIStsOrganizationAccessStatusResponseDTO } from 'src/app/api/v2';
+import { adaptFkOrganizationUnit } from 'src/app/shared/models/local-admin/fk-org-consequence.model';
 import { FkOrgActions } from './actions';
 import { FkOrgState } from './state';
 
@@ -9,6 +10,7 @@ export const fkOrgInitialState: FkOrgState = {
   isLoadingConnectionStatus: false,
 
   snapshot: undefined,
+  updateConsequences: undefined,
   isSynchronizationDialogLoading: false,
   hasSnapshotFailed: false,
 };
@@ -49,6 +51,7 @@ export const fkOrgFeature = createFeature({
         snapshot: undefined,
         isSynchronizationDialogLoading: true,
         hasSnapshotFailed: false,
+        updateConsequences: undefined, //reset update consequences when snapshot is requested
       })
     ),
     on(
@@ -65,7 +68,50 @@ export const fkOrgFeature = createFeature({
       FkOrgActions.createConnectionSuccess,
       (state): FkOrgState => ({ ...state, isSynchronizationDialogLoading: false })
     ),
-    on(FkOrgActions.createConnectionError, (state): FkOrgState => ({ ...state, isSynchronizationDialogLoading: false }))
+    on(
+      FkOrgActions.createConnectionError,
+      (state): FkOrgState => ({ ...state, isSynchronizationDialogLoading: false })
+    ),
+    on(
+      FkOrgActions.previewConnectionUpdate,
+      (state): FkOrgState => ({ ...state, isSynchronizationDialogLoading: true })
+    ),
+    on(
+      FkOrgActions.previewConnectionUpdateSuccess,
+      (state, { response }): FkOrgState => ({
+        ...state,
+        updateConsequences: response.consequences?.map((unit) => adaptFkOrganizationUnit(unit)) ?? [],
+        isSynchronizationDialogLoading: false,
+      })
+    ),
+    on(
+      FkOrgActions.previewConnectionUpdateError,
+      (state): FkOrgState => ({ ...state, isSynchronizationDialogLoading: false, hasSnapshotFailed: true })
+    ),
+    on(FkOrgActions.cancelUpdate, (state): FkOrgState => ({ ...state, updateConsequences: undefined })),
+
+    on(FkOrgActions.updateConnection, (state): FkOrgState => ({ ...state, isSynchronizationDialogLoading: true })),
+    on(
+      FkOrgActions.updateConnectionSuccess,
+      (state): FkOrgState => ({ ...state, isSynchronizationDialogLoading: false })
+    ),
+    on(
+      FkOrgActions.updateConnectionError,
+      (state): FkOrgState => ({ ...state, isSynchronizationDialogLoading: false })
+    ),
+
+    on(
+      FkOrgActions.deleteAutomaticUpdateSubscription,
+      (state): FkOrgState => ({ ...state, isLoadingConnectionStatus: true })
+    ),
+    on(
+      FkOrgActions.deleteAutomaticUpdateSubscriptionSuccess,
+      (state): FkOrgState => ({ ...state, isLoadingConnectionStatus: false })
+    ),
+    on(
+      FkOrgActions.deleteAutomaticUpdateSubscriptionError,
+      (state): FkOrgState => ({ ...state, isLoadingConnectionStatus: false })
+    )
   ),
 });
 

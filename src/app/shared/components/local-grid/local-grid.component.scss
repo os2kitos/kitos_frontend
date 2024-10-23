@@ -1,0 +1,11 @@
+@import "theme";
+@import "mixins";
+
+@include grid-style;
+
+.grid-outline {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: $padding-small;
+  padding-top: 0;
+}

@@ -5,7 +5,12 @@
   @include page-flex-layout-max-width;
 }
 
-.no-stretch {
+.action-buttons {
+  display: flex;
+  gap: $padding-medium;
+}
+
+app-button {
   width: auto;
   display: inline-block;
 }

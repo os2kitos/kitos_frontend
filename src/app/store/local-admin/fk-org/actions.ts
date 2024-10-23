@@ -1,5 +1,6 @@
 import { createActionGroup, emptyProps } from '@ngrx/store';
 import {
+  APIConnectionUpdateConsequencesResponseDTO,
   APIConnectToStsOrganizationRequestDTO,
   APIStsOrganizationOrgUnitDTO,
   APIStsOrganizationSynchronizationDetailsResponseDTO,
@@ -21,5 +22,20 @@ export const FkOrgActions = createActionGroup({
     'Create Connection': (request: APIConnectToStsOrganizationRequestDTO) => ({ request }),
     'Create Connection Success': emptyProps(),
     'Create Connection Error': emptyProps(),
+
+    'Preview Connection Update': (synchronizationDepth: number | undefined) => ({ synchronizationDepth }),
+    'Preview Connection Update Success': (response: APIConnectionUpdateConsequencesResponseDTO) => ({
+      response,
+    }),
+    'Preview Connection Update Error': emptyProps(),
+    'Cancel Update': emptyProps(),
+
+    'Update Connection': (request: APIConnectToStsOrganizationRequestDTO) => ({ request }),
+    'Update Connection Success': emptyProps(),
+    'Update Connection Error': emptyProps(),
+
+    'Delete Automatic Update Subscription': emptyProps(),
+    'Delete Automatic Update Subscription Success': emptyProps(),
+    'Delete Automatic Update Subscription Error': emptyProps(),
   },
 });

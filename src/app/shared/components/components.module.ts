@@ -132,7 +132,10 @@ import { AccordionHeaderComponent } from './accordion-header/accordion-header.co
 import { BooleanCircleComponent } from './boolean-circle/boolean-circle.component';
 import { CheckboxButtonComponent } from './buttons/checkbox-button/checkbox-button.component';
 import { MultiSelectDropdownComponent } from './dropdowns/multi-select-dropdown/multi-select-dropdown.component';
+import { IconComponent } from './icon/icon.component';
 import { LocalAdminColumnConfigButtonComponent } from './local-admin-column-config-button/local-admin-column-config-button.component';
+import { LocalGridComponent } from './local-grid/local-grid.component';
+import { NavigationDrawerComponent } from './navigation-drawer/navigation-drawer.component';
 import { NumberCircleComponent } from './number-circle/number-circle.component';
 import { EditOptionTypeDialogComponent } from './option-type-table/edit-option-type-dialog/edit-option-type-dialog.component';
 import { OptionTypeTableComponent } from './option-type-table/option-type-table.component';
@@ -142,8 +145,6 @@ import { RoleTableContainerComponent } from './role-table/role-table-container/r
 import { SlideToggleComponent } from './slide-toggle/slide-toggle.component';
 import { SnackbarActionsComponent } from './snackbar-actions/snackbar-actions.component';
 import { VerticalContentGridSectionMarginLeftComponent } from './vertical-content-grid-section-margin-left/vertical-content-grid-section-margin-left.component';
-import { NavigationDrawerComponent } from './navigation-drawer/navigation-drawer.component';
-import { IconComponent } from './icon/icon.component';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
@@ -260,6 +261,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     EditOptionTypeDialogComponent,
     NavigationDrawerComponent,
     IconComponent,
+    LocalGridComponent,
   ],
   imports: [
     CommonModule,
@@ -388,6 +390,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     OptionTypeTableComponent,
     NavigationDrawerComponent,
     IconComponent,
+    LocalGridComponent,
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },
