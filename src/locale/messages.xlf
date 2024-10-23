@@ -4159,8 +4159,11 @@
       <trans-unit id="7445480746813632840" datatype="html">
         <source>Automatisk import af opdateringer er opdateret</source>
       </trans-unit>
-      <trans-unit id="828534712862450122" datatype="html">
-        <source>Kunne ikke opdatere en forbindelse til Fk Organisation</source>
+      <trans-unit id="9189736403265181922" datatype="html">
+        <source>Kunne ikke opdatere forbindelsen til Fk Organisation</source>
+      </trans-unit>
+      <trans-unit id="6021905614502626006" datatype="html">
+        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&gt;"/>Eksporter</source>
       </trans-unit>
     </body>
   </file>
