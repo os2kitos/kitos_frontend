@@ -110,19 +110,6 @@ export class UIConfigService {
     return (key.match(/\./g) || []).length;
   }
 
-  public filterColumnsByUIConfig(columns: GridColumn[] | null): GridColumn[] | null {
-    if (!columns) {
-      return null;
-    }
-    return columns.filter(column => !column.disabledByUIConfig);
-  }
-
-  public filterGridColumnsByUIConfig(): (source: Observable<GridColumn[] | null>) => Observable<GridColumn[]> {
-    return (source: Observable<GridColumn[] | null>) => source.pipe(
-      map(columns => this.filterColumnsByUIConfig(columns) || [])
-    );
-  }
-
   public applyAllUIConfigToGridColumns(applications: UIConfigGridApplication[], columns: GridColumn[]) {
     applications.forEach((application) => (columns = this.applyUIConfigToGridColumns(application, columns)));
     return columns;

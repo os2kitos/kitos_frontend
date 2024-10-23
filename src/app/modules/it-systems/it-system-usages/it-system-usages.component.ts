@@ -6,7 +6,7 @@ import { CellClickEvent } from '@progress/kendo-angular-grid';
 import { combineLatestWith, first, Observable } from 'rxjs';
 import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
 import { BooleanValueDisplayType } from 'src/app/shared/components/status-chip/status-chip.component';
-import { getColumnsToShow } from 'src/app/shared/helpers/grid-config-helper';
+import { filterGridColumnsByUIConfig, getColumnsToShow } from 'src/app/shared/helpers/grid-config-helper';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { archiveDutyChoiceOptions } from 'src/app/shared/models/it-system-usage/archive-duty-choice.model';
@@ -56,7 +56,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
   public readonly isLoading$ = this.store.select(selectIsLoading);
   public readonly gridData$ = this.store.select(selectGridData);
   public readonly gridState$ = this.store.select(selectGridState);
-  public readonly gridColumns$: Observable<GridColumn[]>;
+  public readonly gridColumns$ = this.store.select(selectUsageGridColumns).pipe(filterGridColumnsByUIConfig());
 
   public readonly organizationName$ = this.store.select(selectOrganizationName);
   public readonly hasCreatePermission$ = this.store.select(selectITSystemUsageHasCreateCollectionPermission);
@@ -515,12 +515,8 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     private route: ActivatedRoute,
     private statePersistingService: StatePersistingService,
     private actions$: Actions,
-    private uiConfigService: UIConfigService
   ) {
     super(store, 'it-system-usage');
-    this.gridColumns$ = this.store
-      .select(selectUsageGridColumns)
-      .pipe(this.uiConfigService.filterGridColumnsByUIConfig());
   }
 
   ngOnInit() {
