@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { catchError, combineLatestWith, map, of, switchMap } from 'rxjs';
+import { catchError, combineLatestWith, concatMap, map, of, switchMap } from 'rxjs';
 import {
   APICustomizedUINodeRequestDTO,
   APICustomizedUINodeResponseDTO,
@@ -30,7 +30,7 @@ export class UIModuleCustomizationEffects {
     return this.actions$.pipe(
       ofType(UIModuleConfigActions.getUIModuleConfig),
       combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
-      switchMap(([{ module: moduleName }, organizationUuid]) =>
+      concatMap(([{ module: moduleName }, organizationUuid]) =>
         this.organizationInternalService
           .getSingleOrganizationsInternalV2GetUIModuleCustomization({ moduleName, organizationUuid })
           .pipe(
@@ -47,7 +47,7 @@ export class UIModuleCustomizationEffects {
     return this.actions$.pipe(
       ofType(UIModuleConfigActions.putUIModuleCustomization),
       combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
-      switchMap(([{ module: moduleName, updatedNodeRequest }, organizationUuid]) =>
+      concatMap(([{ module: moduleName, updatedNodeRequest }, organizationUuid]) =>
         this.organizationInternalService
           .getSingleOrganizationsInternalV2GetUIModuleCustomization({ moduleName, organizationUuid })
           .pipe(
@@ -111,7 +111,7 @@ export class UIModuleCustomizationEffects {
     };
   }
 
-  private shouldUpdateChildren(rootKey: string | undefined, isEnabling: boolean | undefined){
+  private shouldUpdateChildren(rootKey: string | undefined, isEnabling: boolean | undefined) {
     return !isEnabling && rootKey && this.uiConfigService.isTab(rootKey);
   }
 }
