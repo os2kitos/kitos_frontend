@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { APICustomizedUINodeDTO } from 'src/app/api/v1';
 import { SegmentButtonOption } from 'src/app/shared/components/segment/segment.component';
@@ -8,9 +7,10 @@ import { UINodeCustomization } from 'src/app/shared/models/ui-config/ui-node-cus
 import { UIModuleConfigActions } from 'src/app/store/organization/ui-module-customization/actions';
 import { selectITSystemUsageUIModuleConfig } from 'src/app/store/organization/ui-module-customization/selectors';
 
-enum LocalAdminSystemUsagesSegmentOptions {
+enum LocalAdminSystemUsageSegmentOptions {
   UiCustomization = 'UiCustomization',
-  OptionTypes = 'OptionTypes',
+  RegularOptionTypes = 'RegularOptionTypes',
+  RoleOptionTypes = 'RoleOptionTypes',
 }
 
 @Component({
@@ -19,11 +19,12 @@ enum LocalAdminSystemUsagesSegmentOptions {
   styleUrl: './local-admin-it-system-usage.component.scss',
 })
 export class LocalAdminItSystemUsageComponent {
-  public readonly LocalAdminSystemUsagesSegmentOptions = LocalAdminSystemUsagesSegmentOptions;
-  public selectedSegment: LocalAdminSystemUsagesSegmentOptions = LocalAdminSystemUsagesSegmentOptions.UiCustomization;
-  public readonly segmentOptions: SegmentButtonOption<LocalAdminSystemUsagesSegmentOptions>[] = [
-    { text: $localize`Lokal tilpasning af brugerfladen`, value: LocalAdminSystemUsagesSegmentOptions.UiCustomization },
-    { text: $localize`Lokal tilpasning af udfaldsrum`, value: LocalAdminSystemUsagesSegmentOptions.OptionTypes },
+  public readonly LocalAdminSystemUsageSegmentOptions = LocalAdminSystemUsageSegmentOptions;
+  public selectedSegment: LocalAdminSystemUsageSegmentOptions = LocalAdminSystemUsageSegmentOptions.UiCustomization;
+  public readonly segmentOptions: SegmentButtonOption<LocalAdminSystemUsageSegmentOptions>[] = [
+    { text: $localize`Lokal tilpasning af brugerfladen`, value: LocalAdminSystemUsageSegmentOptions.UiCustomization },
+    { text: $localize`Lokal tilpasning af udfaldsrum`, value: LocalAdminSystemUsageSegmentOptions.RegularOptionTypes },
+    { text: $localize`Lokal tilpasning af roller`, value: LocalAdminSystemUsageSegmentOptions.RoleOptionTypes },
   ];
   public readonly itSystemUsageUIModuleConfig$ = this.store.select(selectITSystemUsageUIModuleConfig);
   private readonly itSystemUsageModuleKey = UIModuleConfigKey.ItSystemUsage;

@@ -32,9 +32,6 @@ const routes: Routes = [
         path: AppPath.localAdminSystemUsages,
         component: LocalAdminItSystemUsageComponent,
       },
-        path: AppPath.itSystems,
-        component: LocalAdminItSystemComponent,
-      },
       {
         path: AppPath.dataProcessing,
         component: LocalAdminDprComponent
