@@ -1,0 +1,115 @@
+<kendo-grid
+  [kendoGridBinding]="data"
+  [pageSize]="state.take ?? 100"
+  [skip]="state.skip ?? 0"
+  [loading]="loading || false"
+  [pageable]="true"
+  [sortable]="true"
+  [filterable]="true"
+  [reorderable]="true"
+  [resizable]="true"
+  (filterChange)="onFilterChange($event)"
+  (sortChange)="onSortChange($event)"
+  (pageChange)="onPageChange($event)"
+  style="width: 100%"
+  [ngClass]="{ 'grid-outline': withOutline }"
+>
+  <ng-container *ngFor="let column of columns">
+    <kendo-grid-column
+      *ngIf="!column.hidden"
+      [field]="column.field"
+      [title]="column.title"
+      [filter]="column.filter ?? 'text'"
+      [minResizableWidth]="
+        column.minResizableWidth !== undefined
+          ? column.minResizableWidth
+          : column.filter === 'date'
+          ? defaultDateColumnWidth
+          : defaultMinimumColumnWidth
+      "
+      headerClass="mygrid-header-cell"
+    >
+      <ng-template kendoGridHeaderTemplate let-column let-columnIndex="columnIndex">
+        <app-paragraph [bold]="true" color="primary-dark">{{ column.title }}</app-paragraph>
+
+        <ng-container *ngIf="state?.sort as sortItem">
+          <ng-container *ngIf="sortItem[0].field === column.field">
+            <app-paragraph *ngIf="sortItem[0].dir === 'asc'" [bold]="true" color="primary-dark" class="sort-icon">
+              <app-arrow-up-icon></app-arrow-up-icon>
+            </app-paragraph>
+            <app-paragraph *ngIf="sortItem[0].dir === 'desc'" [bold]="true" color="primary-dark" class="sort-icon">
+              <app-arrow-down-icon></app-arrow-down-icon>
+            </app-paragraph>
+          </ng-container>
+        </ng-container>
+      </ng-template>
+
+      <ng-template kendoGridFilterCellTemplate let-filter let-columnFilter="column">
+        <ng-container *ngIf="!column.noFilter">
+          <app-string-filter
+            [column]="columnFilter"
+            [filter]="filter"
+            *ngIf="columnFilter.filter === 'text' && !column.extraFilter"
+          ></app-string-filter>
+          <app-dropdown-filter
+            [column]="columnFilter"
+            [filter]="filter"
+            [options]="column.extraData"
+            [searchByNames]="true"
+            *ngIf="
+              columnFilter.filter === 'boolean' || (columnFilter.filter === 'text' && column.extraFilter === 'enum')
+            "
+          ></app-dropdown-filter>
+        </ng-container>
+      </ng-template>
+
+      <ng-template *ngIf="column.style === 'default' || column.style === undefined" kendoGridCellTemplate let-dataItem>
+        <app-paragraph [cropOnOverflow]="true">{{ searchProperty(dataItem, column.field) }}</app-paragraph>
+      </ng-template>
+      <ng-template *ngIf="column.style === 'primary'" kendoGridCellTemplate let-dataItem>
+        <div class="paragraph might-overflow bold-font">{{ searchProperty(dataItem, column.field) }}</div>
+      </ng-template>
+
+      <ng-template *ngIf="column.style === 'enum'" kendoGridCellTemplate let-dataItem>
+        <app-paragraph>{{ searchProperty(dataItem, column.field)?.name }}</app-paragraph>
+      </ng-template>
+    </kendo-grid-column>
+  </ng-container>
+
+  <ng-template kendoPagerTemplate>
+    <app-grid-paginator
+      style="width: 100%"
+      [state]="state"
+      (pageSizeChange)="onPageSizeChange($event)"
+    ></app-grid-paginator>
+  </ng-template>
+  <kendo-grid-messages
+    pagerPage="Side"
+    pagerOf="af"
+    pagerItems="resultater"
+    i18n-pagerPage
+    i18n-pagerOf
+    i18n-pagerItems
+  ></kendo-grid-messages>
+
+  <ng-template kendoGridLoadingTemplate>
+    <div class="loading-container">
+      <app-loading></app-loading>
+    </div>
+  </ng-template>
+  <ng-template kendoGridNoRecordsTemplate>
+    <img src="assets/img/empty-system.svg" />
+    <p i18n>Din søgning gav intet resultat</p>
+  </ng-template>
+
+  <kendo-grid-excel [fileName]="getExportName()" [fetchData]="allData" [filterable]="true">
+    <ng-container *ngFor="let column of columns">
+      <ng-container *ngIf="column.style === 'excel-only'; else notExcelOnly">
+        <kendo-excelexport-column [title]="column.title" [field]="column.title"></kendo-excelexport-column>
+      </ng-container>
+      <ng-template #notExcelOnly>
+        <kendo-excelexport-column [title]="column.title" [field]="column.field"></kendo-excelexport-column>
+      </ng-template>
+    </ng-container>
+  </kendo-grid-excel>
+</kendo-grid>

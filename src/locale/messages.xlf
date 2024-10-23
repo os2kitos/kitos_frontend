@@ -4051,9 +4051,6 @@
       <trans-unit id="4970524737932979706" datatype="html">
         <source>Tjek automatisk efter ventende opdateringer*</source>
       </trans-unit>
-      <trans-unit id="5461027777351760672" datatype="html">
-        <source>Gennemfør synkronisering</source>
-      </trans-unit>
       <trans-unit id="583139169074298236" datatype="html">
         <source>Dato for seneste automatiske tjek</source>
       </trans-unit>
@@ -4096,8 +4093,71 @@
       <trans-unit id="5851418291332190792" datatype="html">
         <source>Udfaldsrum</source>
       </trans-unit>
-      <trans-unit id="9168663958915586248" datatype="html">
-        <source>IT systemer</source>
+      <trans-unit id="1311000638658798380" datatype="html">
+        <source>Vis konsekvenser</source>
+      </trans-unit>
+      <trans-unit id="1413059181141174378" datatype="html">
+        <source>Flyttet</source>
+      </trans-unit>
+      <trans-unit id="2290037395284696543" datatype="html">
+        <source>Afbryd automatisk tjek for ventende opdateringer fra FK Organistion?</source>
+      </trans-unit>
+      <trans-unit id="2535776056176637949" datatype="html">
+        <source>Omdøbt</source>
+      </trans-unit>
+      <trans-unit id="2721875101249823212" datatype="html">
+        <source>Slettet</source>
+      </trans-unit>
+      <trans-unit id="2876645566668979898" datatype="html">
+        <source>Ændringer</source>
+      </trans-unit>
+      <trans-unit id="3207091467505348477" datatype="html">
+        <source>Organisationsrod erstattet</source>
+      </trans-unit>
+      <trans-unit id="3873010813144015439" datatype="html">
+        <source>Ændring</source>
+      </trans-unit>
+      <trans-unit id="4000594411970974316" datatype="html">
+        <source>Godkend ændringer</source>
+      </trans-unit>
+      <trans-unit id="414773334721698956" datatype="html">
+        <source>Konverteret</source>
+      </trans-unit>
+      <trans-unit id="415054412324435093" datatype="html">
+        <source>Opret forbindelse</source>
+      </trans-unit>
+      <trans-unit id="4691966835263640588" datatype="html">
+        <source>FK Organisation - Konsekvenser ved opdatering</source>
+      </trans-unit>
+      <trans-unit id="4758373128600154246" datatype="html">
+        <source>Afvis ændringer </source>
+      </trans-unit>
+      <trans-unit id="6162528529889600567" datatype="html">
+        <source>Ingen ændringer registreret </source>
+      </trans-unit>
+      <trans-unit id="8054139440076531453" datatype="html">
+        <source>Afbryd automatisk opdateringer</source>
+      </trans-unit>
+      <trans-unit id="8993720741305943646" datatype="html">
+        <source>Afbryd automatisk tjek for opdateringer </source>
+      </trans-unit>
+      <trans-unit id="922220242325292085" datatype="html">
+        <source>Tilføjet</source>
+      </trans-unit>
+      <trans-unit id="3738955992352077566" datatype="html">
+        <source>Viser konsekvenser <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>(<x id="INTERPOLATION" equiv-text="{{ updateConsequencesLength$ | async }}"/>)<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> af opdateringen for organisationshierarkiet i KITOS</source>
+      </trans-unit>
+      <trans-unit id="4069224266193233013" datatype="html">
+        <source>Forbindelse til FK Organisation er opdateret</source>
+      </trans-unit>
+      <trans-unit id="4282005774565130852" datatype="html">
+        <source>Kunne ikke opdatere automatisk import af opdateringer</source>
+      </trans-unit>
+      <trans-unit id="7445480746813632840" datatype="html">
+        <source>Automatisk import af opdateringer er opdateret</source>
+      </trans-unit>
+      <trans-unit id="828534712862450122" datatype="html">
+        <source>Kunne ikke opdatere en forbindelse til Fk Organisation</source>
       </trans-unit>
     </body>
   </file>
