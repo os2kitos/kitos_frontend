@@ -36,9 +36,7 @@ const selectModuleConfig = (module: UIModuleConfigKey) =>
 
 export const selectITSystemUsageUIModuleConfig = selectModuleConfig(UIModuleConfigKey.ItSystemUsage);
 
-export const selectDataProcessingUIModuleConfig = selectModuleConfig(
-  UIModuleConfigKey.DataProcessingRegistrations
-);
+export const selectDataProcessingUIModuleConfig = selectModuleConfig(UIModuleConfigKey.DataProcessingRegistrations);
 
 //IT system usage
 //Tab selectors
