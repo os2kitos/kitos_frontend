@@ -1,6 +1,6 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
-import * as moment from 'moment';
 import { APIStsOrganizationAccessStatusResponseDTO } from 'src/app/api/v2';
+import { mapDateToString } from 'src/app/shared/helpers/date.helpers';
 import { DropdownOption } from 'src/app/shared/models/dropdown-option.model';
 import { FkOrgChangeLogDictionary } from 'src/app/shared/models/local-admin/fk-org-change-log.dictionary';
 import { adaptFkOrganizationUnit } from 'src/app/shared/models/local-admin/fk-org-consequence.model';
@@ -132,10 +132,9 @@ export const fkOrgFeature = createFeature({
           };
           changelogDictionary[changelog.logTime] = mappedChangelog;
 
-          const changelogDate = moment(changelog.logTime);
           availableChangeLogs.push({
             value: changelog.logTime,
-            name: new Date(changelogDate.year(), changelogDate.month(), changelogDate.date(), 0, 0, 0) as string,
+            name: mapDateToString(changelog.logTime),
             description: getResponsibleEntityTextBasedOnOrigin(changelog),
           });
         }

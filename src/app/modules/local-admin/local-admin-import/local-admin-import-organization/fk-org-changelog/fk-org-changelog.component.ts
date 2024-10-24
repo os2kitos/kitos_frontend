@@ -45,6 +45,6 @@ export class FkOrgChangelogComponent implements OnInit {
   }
 
   public getResponsibleEntityText(changelog: FkOrgChangeLogModel) {
-    getResponsibleEntityTextBasedOnOrigin(changelog);
+    return getResponsibleEntityTextBasedOnOrigin(changelog);
   }
 }

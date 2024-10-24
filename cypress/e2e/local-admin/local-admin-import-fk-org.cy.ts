@@ -102,7 +102,7 @@ describe('local-admin.fk-org', () => {
 
     cy.getByDataCy('changelog-accordion').click();
 
-    cy.dropdownByCy('select-changelog-dropdown', '24/10/2024');
+    cy.dropdownByCy('select-changelog-dropdown', '24-10-2024', true);
 
     cy.contains('Automatisk oprettet testbruger (GlobalAdmin)');
     cy.contains('test@kitos.dk');
