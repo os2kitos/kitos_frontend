@@ -39,7 +39,6 @@ export class FkOrgChangelogComponent implements OnInit {
     this.store.dispatch(FkOrgActions.getChangelog(this.changelogSize));
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public onChangelogSelected(option: DropdownOption<string>) {
     this.selectedChangelogDate$.next(option ? option.value : undefined);
   }
