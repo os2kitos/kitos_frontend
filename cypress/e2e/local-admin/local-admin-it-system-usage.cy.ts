@@ -37,7 +37,7 @@ describe('local-admin it system usage', () => {
 
   it('Can toggle non-obligatory ui customization field', () => {
     cy.intercept('api/v2/internal/organizations/*/ui-customization/ItSystemUsages', {
-      fixture: './shared/it-system-usage-ui-customization-no-gdpr.json',
+      fixture: './shared/it-system-usage-ui-customization-no-gdpr-and-lifecycle.json',
     });
 
     cy.intercept('PUT', 'api/v2/internal/organizations/*/ui-customization/ItSystemUsages').as('put');

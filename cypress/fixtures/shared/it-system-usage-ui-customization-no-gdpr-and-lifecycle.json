@@ -63,7 +63,7 @@
       },
       {
           "key": "ItSystemUsages.frontPage.lifeCycleStatus",
-          "enabled": true
+          "enabled": false
       },
       {
           "key": "ItSystemUsages.gdpr.plannedRiskAssessmentDate",

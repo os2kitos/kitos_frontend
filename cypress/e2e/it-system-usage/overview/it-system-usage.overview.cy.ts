@@ -21,7 +21,7 @@ describe('it-system-usage', () => {
   });
 
   it('does not show gdpr columns hidden by local ui config', () => {
-    cy.setup(true, 'it-systems/it-system-usages', './shared/it-system-usage-ui-customization-no-gdpr.json');
+    cy.setup(true, 'it-systems/it-system-usages', './shared/it-system-usage-ui-customization-no-gdpr-and-lifecycle.json');
     cy.get('h3').should('have.text', 'IT Systemer i Fælles Kommune');
 
     const gpdrColumnNames = [
