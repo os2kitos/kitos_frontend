@@ -2321,10 +2321,10 @@
       </trans-unit>
       <trans-unit id="7708270344948043036" datatype="html">
         <source>
-          <x id="INTERPOLATION" equiv-text="{{ user.LastAdvisSent | appDate }}"/>
+          <x id="INTERPOLATION" equiv-text="{{ fieldViewModel.helpText }}"/>
         </source>
         <target state="new">
-          <x id="INTERPOLATION" equiv-text="{{ user.LastAdvisSent | appDate }}"/>
+          <x id="INTERPOLATION" equiv-text="{{ fieldViewModel.helpText }}"/>
         </target>
       </trans-unit>
       <trans-unit id="6561297272812700053" datatype="html">
@@ -5474,6 +5474,58 @@
       <trans-unit id="4282005774565130852" datatype="html">
         <source>Kunne ikke opdatere automatisk import af opdateringer</source>
         <target state="new">Kunne ikke opdatere automatisk import af opdateringer</target>
+      </trans-unit>
+      <trans-unit id="5646892360164613168" datatype="html">
+        <source>Lokal tilpasning af brugerfladen</source>
+        <target state="new">Lokal tilpasning af brugerfladen</target>
+      </trans-unit>
+      <trans-unit id="9001961829556113608" datatype="html">
+        <source>Lokal tilpasning af udfaldsrum</source>
+        <target state="new">Lokal tilpasning af udfaldsrum</target>
+      </trans-unit>
+      <trans-unit id="438015479771712298" datatype="html">
+        <source>Lokal tilpasning af roller</source>
+        <target state="new">Lokal tilpasning af roller</target>
+      </trans-unit>
+      <trans-unit id="8276868235175330138" datatype="html">
+        <source> Tilpasning på feltniveau er endnu ikke muligt for dette faneblad. </source>
+        <target state="new"> Tilpasning på feltniveau er endnu ikke muligt for dette faneblad. </target>
+      </trans-unit>
+      <trans-unit id="2457952418192472950" datatype="html">
+        <source>IT-Systemer i anvendelse</source>
+        <target state="new">IT-Systemer i anvendelse</target>
+      </trans-unit>
+      <trans-unit id="1990674573455542624" datatype="html">
+        <source>Datofelter</source>
+        <target state="new">Datofelter</target>
+      </trans-unit>
+      <trans-unit id="5449684192775013381" datatype="html">
+        <source>Dækker felterne “Ibrugtagningsdato” og “Slutdato for anvendelse”</source>
+        <target state="new">Dækker felterne “Ibrugtagningsdato” og “Slutdato for anvendelse”</target>
+      </trans-unit>
+      <trans-unit id="8965344190722476861" datatype="html">
+        <source>Hvilken kontrakt skal afgøre om IT systemet er aktivt</source>
+        <target state="new">Hvilken kontrakt skal afgøre om IT systemet er aktivt</target>
+      </trans-unit>
+      <trans-unit id="4077872505678928787" datatype="html">
+        <source>Det er kun muligt at fjerne dette faneblad ved at slå det relaterede modul fra</source>
+        <target state="new">Det er kun muligt at fjerne dette faneblad ved at slå det relaterede modul fra</target>
+      </trans-unit>
+      <trans-unit id="512261614990923185" datatype="html">
+        <source>Bemærk: Skjules faneblad/felt fjernes relaterede felt(er) også fra overbliksbillederne</source>
+        <target state="new">Bemærk: Skjules faneblad/felt fjernes relaterede felt(er) også fra overbliksbillederne</target>
+      </trans-unit>
+      <trans-unit id="3995718542795029514" datatype="html">
+        <source>Kunne ikke hente lokal tilpasning af brugerfladen</source>
+        <target state="new">Kunne ikke hente lokal tilpasning af brugerfladen</target>
+      </trans-unit>
+      <trans-unit id="3883293175168907224" datatype="html">
+        <source>Kunne ikke opdatere lokal tilpasning af brugerfladen</source>
+        <target state="new">Kunne ikke opdatere lokal tilpasning af brugerfladen</target>
+      </trans-unit>
+      <trans-unit id="4888833496127267341" datatype="html">
+        <source>Lokal tilpasning af brugerfladen blev opdateret</source>
+        <target state="new">Lokal tilpasning af brugerfladen blev opdateret</target>
       </trans-unit>
     </body>
   </file>
