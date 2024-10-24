@@ -35,9 +35,7 @@ import {
 } from './selectors';
 import { UIConfigService } from 'src/app/shared/services/ui-config.service';
 import { UIConfigGridApplication } from 'src/app/shared/models/ui-config/ui-config-grid-application';
-import {
-  selectDataProcessingUIModuleConfigEnabledFieldMainContract,
-} from '../organization/ui-module-customization/selectors';
+import { selectDataProcessingUIModuleConfigEnabledFieldMainContract } from '../organization/ui-module-customization/selectors';
 import * as GridFields from 'src/app/shared/constants/data-processing-grid-column-constants';
 
 @Injectable()

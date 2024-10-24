@@ -4,7 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
-import { catchError, combineLatestWith, map, mergeMap, of, switchMap } from 'rxjs';
+import { catchError, combineLatestWith, map, mergeMap, Observable, of, switchMap } from 'rxjs';
 import {
   APIContractPaymentsDataResponseDTO,
   APIItContractResponseDTO,
@@ -36,6 +36,8 @@ import {
   selectItContractUuid,
   selectOverviewContractRoles,
 } from './selectors';
+import { UIConfigService } from 'src/app/shared/services/ui-config.service';
+import { UIConfigGridApplication } from 'src/app/shared/models/ui-config/ui-config-grid-application';
 
 @Injectable()
 export class ITContractEffects {
@@ -52,7 +54,8 @@ export class ITContractEffects {
     @Inject(APIV2GridLocalItContractRolesINTERNALService)
     private apiRoleService: APIV2GridLocalItContractRolesINTERNALService,
     @Inject(APIV2OrganizationGridInternalINTERNALService)
-    private apiV2organizationalGridInternalService: APIV2OrganizationGridInternalINTERNALService
+    private apiV2organizationalGridInternalService: APIV2OrganizationGridInternalINTERNALService,
+    private uiConfigService: UIConfigService
   ) {}
 
   getItContract$ = createEffect(() => {
@@ -102,7 +105,9 @@ export class ITContractEffects {
   updateGridColumns$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITContractActions.updateGridColumns),
-      map(({ gridColumns }) => {
+      concatLatestFrom(() => this.getUIConfigApplications()),
+      map(([{ gridColumns }, uiConfigApplications]) => {
+        gridColumns = this.uiConfigService.applyAllUIConfigToGridColumns(uiConfigApplications, gridColumns);
         this.statePersistingService.set(CONTRACT_COLUMNS_ID, gridColumns);
         return ITContractActions.updateGridColumnsSuccess(gridColumns);
       })
@@ -614,6 +619,10 @@ export class ITContractEffects {
       )
     );
   });
+
+  private getUIConfigApplications(): Observable<UIConfigGridApplication[]> {
+    return of([]);
+  }
 }
 
 function getPaymentRequest(payments: APIContractPaymentsDataResponseDTO | undefined) {
