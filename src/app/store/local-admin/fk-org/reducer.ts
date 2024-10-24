@@ -125,7 +125,11 @@ export const fkOrgFeature = createFeature({
       const availableChangeLogs: DropdownOption<string>[] = [];
       changelogs.forEach((changelog) => {
         if (changelog.logTime) {
-          changelogDictionary[changelog.logTime] = changelog;
+          const mappedChangelog = {
+            ...changelog,
+            consequences: changelog.consequences?.map((unit) => adaptFkOrganizationUnit(unit)) ?? [],
+          };
+          changelogDictionary[changelog.logTime] = mappedChangelog;
 
           if (changelog.user) {
             const userName = `${changelog.user.name} (${changelog.user.email})`;
