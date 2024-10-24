@@ -4,6 +4,7 @@ import { APICustomizedUINodeDTO } from 'src/app/api/v1';
 import { SegmentButtonOption } from 'src/app/shared/components/segment/segment.component';
 import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
 import { UINodeCustomization } from 'src/app/shared/models/ui-config/ui-node-customization';
+import { NotificationService } from 'src/app/shared/services/notification.service';
 import { UIModuleConfigActions } from 'src/app/store/organization/ui-module-customization/actions';
 import { selectITSystemUsageUIModuleConfig } from 'src/app/store/organization/ui-module-customization/selectors';
 
@@ -29,7 +30,7 @@ export class LocalAdminItSystemUsageComponent {
   public readonly itSystemUsageUIModuleConfig$ = this.store.select(selectITSystemUsageUIModuleConfig);
   private readonly itSystemUsageModuleKey = UIModuleConfigKey.ItSystemUsage;
 
-  constructor(private readonly store: Store) {}
+  constructor(private readonly store: Store, private readonly notificationService: NotificationService) {}
 
   public onCheckboxChange($event: UINodeCustomization) {
     const dto: APICustomizedUINodeDTO = { enabled: $event.enabled, key: $event.fullKey };
