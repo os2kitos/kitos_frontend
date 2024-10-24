@@ -75,7 +75,7 @@ export class UIConfigService {
       case UIModuleConfigKey.ItSystemUsage:
         return ItSystemUsageUiBluePrint;
       case UIModuleConfigKey.ItContract:
-        throw ItContractsUiBluePrint;
+        return ItContractsUiBluePrint;
       case UIModuleConfigKey.DataProcessingRegistrations:
         return DataProcessingUiBluePrint;
     }

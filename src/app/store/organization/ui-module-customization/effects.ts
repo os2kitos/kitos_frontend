@@ -35,14 +35,13 @@ export class UIModuleCustomizationEffects {
         this.organizationInternalService
           .getSingleOrganizationsInternalV2GetUIModuleCustomization({ moduleName, organizationUuid })
           .pipe(
-            map((uiModuleCustomizationDto) => {
-              console.log(moduleName);
-              return this.combineBlueprintWithCustomizationDto(
+            map((uiModuleCustomizationDto) =>
+              this.combineBlueprintWithCustomizationDto(
                 uiModuleCustomizationDto,
                 moduleName,
                 UIModuleConfigActions.getUIModuleConfigSuccess
-              );
-            }),
+              )
+            ),
             catchError(() => of(UIModuleConfigActions.getUIModuleConfigError()))
           )
       )
@@ -91,13 +90,9 @@ export class UIModuleCustomizationEffects {
     module: UIModuleConfigKey,
     successAction: ActionCreator<string, (props: { uiModuleConfig: UIModuleConfig }) => T>
   ) {
-    console.log(uiModuleCustomizationDto);
     const uiModuleCustomization = adaptUIModuleCustomization(uiModuleCustomizationDto);
-    console.log('ui ', uiModuleCustomization);
     const moduleCustomizationNodes = uiModuleCustomization?.nodes ?? [];
-    console.log('module ', moduleCustomizationNodes);
     const uiModuleConfig = this.uiConfigService.buildUIModuleConfig(moduleCustomizationNodes, module);
-    console.log('config', uiModuleConfig);
     return successAction({
       uiModuleConfig: uiModuleConfig,
     });
