@@ -5507,9 +5507,9 @@
         <source>Bryd forbindelsen til FK Organisation </source>
         <target state="new">Bryd forbindelsen til FK Organisation </target>
       </trans-unit>
-      <trans-unit id="8637911288264886213" datatype="html">
-        <source>Forbindelse til FK Organisation blev fjernet</source>
-        <target state="new">Forbindelse til FK Organisation blev fjernet</target>
+      <trans-unit id="8687060481958208529" datatype="html">
+        <source>Forbindelsen til FK Organisation blev fjernet</source>
+        <target state="new">Forbindelsen til FK Organisation blev fjernet</target>
       </trans-unit>
       <trans-unit id="4666153646055232970" datatype="html">
         <source>Kunne ikke slette forbindelsen til Fk Organisation</source>
