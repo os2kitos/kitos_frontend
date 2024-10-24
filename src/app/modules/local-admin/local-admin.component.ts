@@ -53,5 +53,6 @@ export class LocalAdminComponent implements OnInit {
     this.store.dispatch(
       UIModuleConfigActions.getUIModuleConfig({ module: UIModuleConfigKey.DataProcessingRegistrations })
     );
+    this.store.dispatch(UIModuleConfigActions.getUIModuleConfig({ module: UIModuleConfigKey.ItContract }));
   }
 }
