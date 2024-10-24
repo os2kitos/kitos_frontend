@@ -16,7 +16,7 @@
   </app-paragraph>
 
 
-    <app-form-grid>
+    <app-standard-vertical-content-grid [numColumns]="3">
     <ng-container *ngFor="let fieldViewModel of tabViewModel.children">
       <div>
         <app-checkbox-button
@@ -41,6 +41,6 @@
         </app-checkbox-button>
     </div>
     </ng-container>
-  </app-form-grid>
+  </app-standard-vertical-content-grid>
   </div>
 </app-accordion>
