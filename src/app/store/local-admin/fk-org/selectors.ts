@@ -35,3 +35,6 @@ export const selectIsSynchronizationDialogLoading = createSelector(
 export const selectHasSnapshotFailed = createSelector(selectFkOrgState, (state) => state.hasSnapshotFailed);
 
 export const selectUpdateConsequences = createSelector(selectFkOrgState, (state) => state.updateConsequences);
+
+export const selectAvailableChangeLogs = createSelector(selectFkOrgState, (state) => state.availableChangeLogs);
+export const selectChangelogDictionary = createSelector(selectFkOrgState, (state) => state.changelogDictionary);

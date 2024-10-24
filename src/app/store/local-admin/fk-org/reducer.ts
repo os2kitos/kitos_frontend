@@ -1,5 +1,7 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { APIStsOrganizationAccessStatusResponseDTO } from 'src/app/api/v2';
+import { DropdownOption } from 'src/app/shared/models/dropdown-option.model';
+import { FkOrgChangeLogDictionary } from 'src/app/shared/models/local-admin/fk-org-change-log.dictionary';
 import { adaptFkOrganizationUnit } from 'src/app/shared/models/local-admin/fk-org-consequence.model';
 import { FkOrgActions } from './actions';
 import { FkOrgState } from './state';
@@ -13,6 +15,9 @@ export const fkOrgInitialState: FkOrgState = {
   updateConsequences: undefined,
   isSynchronizationDialogLoading: false,
   hasSnapshotFailed: false,
+
+  availableChangeLogs: undefined,
+  changelogDictionary: undefined,
 };
 
 export const fkOrgFeature = createFeature({
@@ -111,7 +116,23 @@ export const fkOrgFeature = createFeature({
     on(
       FkOrgActions.deleteAutomaticUpdateSubscriptionError,
       (state): FkOrgState => ({ ...state, isLoadingConnectionStatus: false })
-    )
+    ),
+
+    on(FkOrgActions.getChangelogSuccess, (state, { changelogs }): FkOrgState => {
+      const changelogDictionary: FkOrgChangeLogDictionary = {};
+      const availableChangeLogs: DropdownOption<string>[] = [];
+      changelogs.forEach((changelog) => {
+        if (changelog.logTime) {
+          changelogDictionary[changelog.logTime] = changelog;
+
+          if (changelog.user) {
+            const userName = `${changelog.user.name} (${changelog.user.email})`;
+            availableChangeLogs.push({ value: changelog.logTime, name: changelog.logTime, description: userName });
+          }
+        }
+      });
+      return { ...state, changelogDictionary, availableChangeLogs };
+    })
   ),
 });
 

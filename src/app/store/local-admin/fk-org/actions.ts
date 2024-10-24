@@ -43,8 +43,8 @@ export const FkOrgActions = createActionGroup({
     'Delete Connection Success': emptyProps(),
     'Delete Connection Error': emptyProps(),
 
-    'Get Changelog': (changeLogDepth: number) => ({ changeLogDepth }),
-    'Get Changelog Success': (changelog: APIStsOrganizationChangeLogResponseDTO) => ({ changelog }),
+    'Get Changelog': (numberOfChangeLogs: number) => ({ numberOfChangeLogs }),
+    'Get Changelog Success': (changelogs: APIStsOrganizationChangeLogResponseDTO[]) => ({ changelogs }),
     'Get Changelog Error': emptyProps(),
   },
 });
