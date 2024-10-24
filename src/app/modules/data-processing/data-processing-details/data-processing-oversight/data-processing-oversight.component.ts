@@ -28,6 +28,7 @@ import {
   selectDataProcessingHasModifyPermissions,
   selectDataProcessingOversightOptions,
 } from 'src/app/store/data-processing/selectors';
+import { selectDataProcessingUIModuleConfigEnabledFieldScheduledInspectionDate } from 'src/app/store/organization/ui-module-customization/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 
@@ -71,6 +72,8 @@ export class DataProcessingOversightComponent extends BaseComponent implements O
     },
     { updateOn: 'blur' }
   );
+
+  public readonly nextOversightEnabled$ = this.store.select(selectDataProcessingUIModuleConfigEnabledFieldScheduledInspectionDate)
 
   constructor(private store: Store, private notificationService: NotificationService, private dialog: MatDialog) {
     super();
