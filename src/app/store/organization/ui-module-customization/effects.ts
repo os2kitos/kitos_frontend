@@ -35,9 +35,14 @@ export class UIModuleCustomizationEffects {
         this.organizationInternalService
           .getSingleOrganizationsInternalV2GetUIModuleCustomization({ moduleName, organizationUuid })
           .pipe(
-            map((uiModuleCustomizationDto) =>
-              this.combineBlueprintWithCustomizationDto(uiModuleCustomizationDto, moduleName, UIModuleConfigActions.getUIModuleConfigSuccess)
-            ),
+            map((uiModuleCustomizationDto) => {
+              console.log(moduleName);
+              return this.combineBlueprintWithCustomizationDto(
+                uiModuleCustomizationDto,
+                moduleName,
+                UIModuleConfigActions.getUIModuleConfigSuccess
+              );
+            }),
             catchError(() => of(UIModuleConfigActions.getUIModuleConfigError()))
           )
       )
@@ -66,7 +71,11 @@ export class UIModuleCustomizationEffects {
                 })
                 .pipe(
                   map((uiModuleCustomizationDto) =>
-                    this.combineBlueprintWithCustomizationDto(uiModuleCustomizationDto, moduleName, UIModuleConfigActions.putUIModuleCustomizationSuccess)
+                    this.combineBlueprintWithCustomizationDto(
+                      uiModuleCustomizationDto,
+                      moduleName,
+                      UIModuleConfigActions.putUIModuleCustomizationSuccess
+                    )
                   ),
                   catchError(() => of(UIModuleConfigActions.putUIModuleCustomizationError()))
                 );
@@ -104,24 +113,28 @@ export class UIModuleCustomizationEffects {
     return this.updateUIModuleCustomizationInRequestDto(existingNodes, updatedNode, rootToUpdate);
   }
 
-  private updateUIModuleCustomizationInRequestDto(existingNodes: APICustomizedUINodeResponseDTO[], updatedNode: APICustomizedUINodeRequestDTO, rootToUpdate: APICustomizedUINodeResponseDTO): APIUIModuleCustomizationRequestDTO{
-      const newEnabledState = updatedNode.enabled;
-      if (rootToUpdate) {
-        rootToUpdate.enabled = newEnabledState;
-      }
-
-      const rootToUpdateKey = rootToUpdate?.key;
-      if (this.shouldUpdateChildren(rootToUpdateKey, newEnabledState)) {
-        const childrenToUpdate = existingNodes.filter((node) =>
-          this.uiConfigService.isChildOfTab(rootToUpdateKey!, node.key)
-        );
-        childrenToUpdate.forEach((c) => (c.enabled = newEnabledState));
-      }
-
-      return {
-        nodes: existingNodes as APICustomizedUINodeRequestDTO[],
-      };
+  private updateUIModuleCustomizationInRequestDto(
+    existingNodes: APICustomizedUINodeResponseDTO[],
+    updatedNode: APICustomizedUINodeRequestDTO,
+    rootToUpdate: APICustomizedUINodeResponseDTO
+  ): APIUIModuleCustomizationRequestDTO {
+    const newEnabledState = updatedNode.enabled;
+    if (rootToUpdate) {
+      rootToUpdate.enabled = newEnabledState;
     }
+
+    const rootToUpdateKey = rootToUpdate?.key;
+    if (this.shouldUpdateChildren(rootToUpdateKey, newEnabledState)) {
+      const childrenToUpdate = existingNodes.filter((node) =>
+        this.uiConfigService.isChildOfTab(rootToUpdateKey!, node.key)
+      );
+      childrenToUpdate.forEach((c) => (c.enabled = newEnabledState));
+    }
+
+    return {
+      nodes: existingNodes as APICustomizedUINodeRequestDTO[],
+    };
+  }
 
   private shouldUpdateChildren(rootKey: string | undefined, isEnabling: boolean | undefined) {
     return !isEnabling && rootKey && this.uiConfigService.isTab(rootKey);

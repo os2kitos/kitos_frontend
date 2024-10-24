@@ -1,7 +1,11 @@
 import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { SegmentButtonOption } from 'src/app/shared/components/segment/segment.component';
+import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
+import { selectItContractUIModuleConfig } from 'src/app/store/organization/ui-module-customization/selectors';
 
 enum LocalAdminItContractsSegmentOption {
+  UiCustomization = 'UiCustomization',
   RegularOptionTypes = 'RegularOptionTypes',
   RoleOptionTypes = 'RoleOptionTypes',
 }
@@ -14,10 +18,16 @@ enum LocalAdminItContractsSegmentOption {
 export class LocalAdminItContractComponent {
   public readonly LocalAdminItContractsSegmentOption = LocalAdminItContractsSegmentOption;
 
-  public selectedSegment: LocalAdminItContractsSegmentOption = LocalAdminItContractsSegmentOption.RegularOptionTypes;
+  public selectedSegment: LocalAdminItContractsSegmentOption = LocalAdminItContractsSegmentOption.UiCustomization;
 
   public readonly segmentOptions: SegmentButtonOption<LocalAdminItContractsSegmentOption>[] = [
+    { text: $localize`Lokal tilpasning af brugerfladen`, value: LocalAdminItContractsSegmentOption.UiCustomization },
     { text: $localize`Udfaldsrum`, value: LocalAdminItContractsSegmentOption.RegularOptionTypes },
     { text: $localize`Roller`, value: LocalAdminItContractsSegmentOption.RoleOptionTypes },
   ];
+
+  public readonly itContractsUIModuleConfig$ = this.store.select(selectItContractUIModuleConfig);
+  public readonly itContractsModuleKey = UIModuleConfigKey.ItContract;
+
+  constructor(private store: Store) {}
 }

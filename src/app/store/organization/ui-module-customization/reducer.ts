@@ -17,10 +17,13 @@ export const uiModuleConfigFeature = createFeature({
     UIModuleConfigInitialState,
     on(
       UIModuleConfigActions.getUIModuleConfigSuccess,
-      (state, { uiModuleConfig }): UIModuleConfigState => ({
+      (state, { uiModuleConfig }): UIModuleConfigState => {
+        console.log(uiModuleConfig);
+        return ({
         ...state,
         uiModuleConfigs: updateUIModuleConfigs(state, uiModuleConfig),
       })
+    }
     ),
     on(
       UIModuleConfigActions.putUIModuleCustomizationSuccess,
