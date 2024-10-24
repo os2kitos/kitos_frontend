@@ -2,7 +2,7 @@
 
 const regularOptionTypesSegment = 'Lokal tilpasning af udfaldsrum';
 
-describe('local-admin', () => {
+describe('local-admin it system usage', () => {
   beforeEach(() => {
     cy.requireIntercept();
 
@@ -37,7 +37,7 @@ describe('local-admin', () => {
 
   it('Can toggle non-obligatory ui customization field', () => {
     cy.intercept('api/v2/internal/organizations/*/ui-customization/ItSystemUsages', {
-      fixture: './shared/it-system-usage-ui-customization-updated.json',
+      fixture: './shared/it-system-usage-ui-customization-no-gdpr.json',
     });
 
     cy.intercept('PUT', 'api/v2/internal/organizations/*/ui-customization/ItSystemUsages').as('put');
@@ -52,15 +52,10 @@ describe('local-admin', () => {
       expect(gdprNode.enabled).to.equal(false);
     });
 
-    cy.contains(targetFieldCheckboxButtonText)
-    .within(() => {
-      cy.getByDataCy('button-checkbox')
-      .get('mat-checkbox input')
-      .first()
-      .should('not.be.checked');
-
+    cy.contains(targetFieldCheckboxButtonText).within(() => {
+      cy.getByDataCy('button-checkbox').get('mat-checkbox input').first().should('not.be.checked');
+    });
   });
-})
 
   it('Can edit description of it system option type', () => {
     cy.contains(regularOptionTypesSegment).click();

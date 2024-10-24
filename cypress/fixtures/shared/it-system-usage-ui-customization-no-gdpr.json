@@ -71,7 +71,7 @@
       },
       {
           "key": "ItSystemUsages.gdpr",
-          "enabled": true
+          "enabled": false
       }
   ]
 }

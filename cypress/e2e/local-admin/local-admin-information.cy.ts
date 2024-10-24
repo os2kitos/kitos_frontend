@@ -1,6 +1,6 @@
 /// <reference types="Cypress" />
 
-describe('local-admin', () => {
+describe('local-admin information', () => {
   beforeEach(() => {
     cy.requireIntercept();
     cy.setup(true);
