@@ -37,5 +37,9 @@ export const FkOrgActions = createActionGroup({
     'Delete Automatic Update Subscription': emptyProps(),
     'Delete Automatic Update Subscription Success': emptyProps(),
     'Delete Automatic Update Subscription Error': emptyProps(),
+
+    'Delete Connection': (purgeUnusedExternalUnits: boolean) => ({ purgeUnusedExternalUnits }),
+    'Delete Connection Success': emptyProps(),
+    'Delete Connection Error': emptyProps(),
   },
 });

@@ -16,6 +16,7 @@ import {
   selectIsLoadingConnectionStatus,
   selectSynchronizationStatus,
 } from 'src/app/store/local-admin/fk-org/selectors';
+import { FkOrgDeleteDialogComponent } from './fk-org-delete-dialog/fk-org-delete-dialog.component';
 import { FkOrgWriteDialogComponent } from './fk-org-write-dialog/fk-org-write-dialog.component';
 
 @Component({
@@ -53,7 +54,8 @@ export class LocalAdminImportOrganizationComponent extends BaseComponent impleme
           ofType(
             FkOrgActions.createConnectionSuccess,
             FkOrgActions.updateConnectionSuccess,
-            FkOrgActions.deleteAutomaticUpdateSubscriptionSuccess
+            FkOrgActions.deleteAutomaticUpdateSubscriptionSuccess,
+            FkOrgActions.deleteConnectionSuccess
           )
         )
         .subscribe(() => this.dispatchGetSynchronizationStatus())
@@ -65,7 +67,7 @@ export class LocalAdminImportOrganizationComponent extends BaseComponent impleme
       height: 'auto',
       maxHeight: '95%',
       width: 'auto',
-      minWidth: '900px',
+      maxWidth: '1200px',
     });
 
     const instance = dialogRef.componentInstance;
@@ -79,6 +81,10 @@ export class LocalAdminImportOrganizationComponent extends BaseComponent impleme
       title: $localize`Afbryd automatisk opdateringer`,
       message: $localize`Afbryd automatisk tjek for ventende opdateringer fra FK Organistion?`,
     });
+  }
+
+  public openDeleteConnectionDialog() {
+    this.matDialog.open(FkOrgDeleteDialogComponent, { width: '800px' });
   }
 
   private dispatchGetSynchronizationStatus() {

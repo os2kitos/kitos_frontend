@@ -390,11 +390,20 @@ export class NotificationService implements OnDestroy {
 
     this.subscribeAsDefault(
       FkOrgActions.deleteAutomaticUpdateSubscriptionSuccess,
-      $localize`Automatisk import af opdateringer er opdateret`
+      $localize`Automatisk import af opdateringer blev deaktiveret`
     );
     this.subscribeAsError(
-      FkOrgActions.deleteAutomaticUpdateSubscriptionSuccess,
-      $localize`Kunne ikke opdatere automatisk import af opdateringer`
+      FkOrgActions.deleteAutomaticUpdateSubscriptionError,
+      $localize`Automatisk import af opdateringer kunne ikke deaktiveres`
+    );
+
+    this.subscribeAsDefault(
+      FkOrgActions.deleteConnectionSuccess,
+      $localize`Forbindelsen til FK Organisation blev fjernet`
+    );
+    this.subscribeAsError(
+      FkOrgActions.deleteConnectionError,
+      $localize`Kunne ikke slette forbindelsen til Fk Organisation`
     );
   }
 

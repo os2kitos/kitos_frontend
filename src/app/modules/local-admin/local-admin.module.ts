@@ -13,6 +13,7 @@ import { LocalAdminItContractComponent } from './local-admin-it-contract/local-a
 import { LocalAdminComponent } from './local-admin.component';
 import { LocalAdminRouterModule } from './local-admin.routes';
 import { LocalAdminDprComponent } from './local-admin-dpr/local-admin-dpr.component';
+import { FkOrgDeleteDialogComponent } from './local-admin-import/local-admin-import-organization/fk-org-delete-dialog/fk-org-delete-dialog.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { LocalAdminDprComponent } from './local-admin-dpr/local-admin-dpr.compon
     LocalAdminImportComponent,
     LocalAdminImportOrganizationComponent,
     FkOrgWriteDialogComponent,
+    FkOrgDeleteDialogComponent,
   ],
   imports: [CommonModule, ComponentsModule, SharedModule, LocalAdminRouterModule],
 })
