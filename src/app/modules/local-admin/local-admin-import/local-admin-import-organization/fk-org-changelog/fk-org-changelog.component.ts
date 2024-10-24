@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, combineLatestWith, map } from 'rxjs';
 import { DropdownOption } from 'src/app/shared/models/dropdown-option.model';
+import { FkOrgChangeLogModel } from 'src/app/shared/models/local-admin/fk-org-change-log.dictionary';
 import { fkOrgChangelogGridColumns } from 'src/app/shared/models/local-admin/fk-org-changelog-columns';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
+import { getResponsibleEntityTextBasedOnOrigin } from 'src/app/store/helpers/fk-org-helper';
 import { FkOrgActions } from 'src/app/store/local-admin/fk-org/actions';
 import {
   selectAvailableChangeLogs,
@@ -40,5 +42,9 @@ export class FkOrgChangelogComponent implements OnInit {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public onChangelogSelected(option: DropdownOption<string>) {
     this.selectedChangelogDate$.next(option ? option.value : undefined);
+  }
+
+  public getResponsibleEntityText(changelog: FkOrgChangeLogModel) {
+    getResponsibleEntityTextBasedOnOrigin(changelog);
   }
 }

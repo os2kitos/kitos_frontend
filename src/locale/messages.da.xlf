@@ -5488,12 +5488,12 @@
         <target state="new"> For at lette den administrative byrde har du derfor følgende muligheder: </target>
       </trans-unit>
       <trans-unit id="7974948161058774051" datatype="html">
-        <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Slet ubrugte organisationseneheder:<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> Vælges denne mulighed slettes alle organisationseneheder (fra FK Organisation), hvortil der ikke er knyttet en registrering. De resterende konverteres til KITOS enheder. </source>
-        <target state="new"><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Slet ubrugte organisationseneheder:<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> Vælges denne mulighed slettes alle organisationseneheder (fra FK Organisation), hvortil der ikke er knyttet en registrering. De resterende konverteres til KITOS enheder. </target>
+        <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="rong&gt;"/>Slet ubrugte organisationseneheder:<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> Vælges denne mulighed slettes alle organisationseneheder (fra FK Organisation), hvortil der ikke er knyttet en registrering. De resterende konverteres til KITOS enheder. </source>
+        <target state="new"><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="rong&gt;"/>Slet ubrugte organisationseneheder:<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> Vælges denne mulighed slettes alle organisationseneheder (fra FK Organisation), hvortil der ikke er knyttet en registrering. De resterende konverteres til KITOS enheder. </target>
       </trans-unit>
       <trans-unit id="1677749166597841894" datatype="html">
-        <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Bevar organisationshierarkiet:<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> Vælges denne mulighed konverteres alle organisationsenheder fra FK Organisation til KITOS enheder. </source>
-        <target state="new"><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Bevar organisationshierarkiet:<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> Vælges denne mulighed konverteres alle organisationsenheder fra FK Organisation til KITOS enheder. </target>
+        <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="rong&gt;"/>Bevar organisationshierarkiet:<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> Vælges denne mulighed konverteres alle organisationsenheder fra FK Organisation til KITOS enheder. </source>
+        <target state="new"><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="rong&gt;"/>Bevar organisationshierarkiet:<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> Vælges denne mulighed konverteres alle organisationsenheder fra FK Organisation til KITOS enheder. </target>
       </trans-unit>
       <trans-unit id="2874747510585928254" datatype="html">
         <source>Slet ubrugte organisationseneheder</source>
@@ -5530,6 +5530,10 @@
       <trans-unit id="722963325915684738" datatype="html">
         <source>Antal opdateringer</source>
         <target state="new">Antal opdateringer</target>
+      </trans-unit>
+      <trans-unit id="5306417827115981705" datatype="html">
+        <source>Fk Organisation</source>
+        <target state="new">Fk Organisation</target>
       </trans-unit>
     </body>
   </file>

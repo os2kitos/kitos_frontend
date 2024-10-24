@@ -1,4 +1,4 @@
-<app-accordion title="Ændringslog">
+<app-accordion title="Ændringslog" i18n-title data-cy="changelog-accordion">
   <app-standard-vertical-content-grid>
     <app-dropdown
       text="Vælg"
@@ -20,7 +20,7 @@
             <tr>
               <td>
                 <app-paragraph paragraphSize="small">
-                  {{ selectedChangelog.user?.name }} ({{ selectedChangelog.user?.email }})
+                  {{ getResponsibleEntityText(selectedChangelog) }}
                 </app-paragraph>
               </td>
               <td>

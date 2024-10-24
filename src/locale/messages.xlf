@@ -4175,7 +4175,7 @@
         <source>Oprettes forbindelsen igen efterfølgende, vil der altså kunne optræde enheder med samme navn men med forskelligt &quot;ophav&quot;. </source>
       </trans-unit>
       <trans-unit id="1677749166597841894" datatype="html">
-        <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Bevar organisationshierarkiet:<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> Vælges denne mulighed konverteres alle organisationsenheder fra FK Organisation til KITOS enheder. </source>
+        <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="rong&gt;"/>Bevar organisationshierarkiet:<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> Vælges denne mulighed konverteres alle organisationsenheder fra FK Organisation til KITOS enheder. </source>
       </trans-unit>
       <trans-unit id="2874747510585928254" datatype="html">
         <source>Slet ubrugte organisationseneheder</source>
@@ -4187,7 +4187,7 @@
         <source>Brydes forbindelsen til FK Organisation vil alle organisationsenheder, som er importeret fra FK Organisation, blive konverteret til KITOS enheder.</source>
       </trans-unit>
       <trans-unit id="7974948161058774051" datatype="html">
-        <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Slet ubrugte organisationseneheder:<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> Vælges denne mulighed slettes alle organisationseneheder (fra FK Organisation), hvortil der ikke er knyttet en registrering. De resterende konverteres til KITOS enheder. </source>
+        <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="rong&gt;"/>Slet ubrugte organisationseneheder:<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> Vælges denne mulighed slettes alle organisationseneheder (fra FK Organisation), hvortil der ikke er knyttet en registrering. De resterende konverteres til KITOS enheder. </source>
       </trans-unit>
       <trans-unit id="8397116804743809977" datatype="html">
         <source> For at lette den administrative byrde har du derfor følgende muligheder: </source>
@@ -4203,6 +4203,9 @@
       </trans-unit>
       <trans-unit id="7573538989231182498" datatype="html">
         <source>Ansvarlig</source>
+      </trans-unit>
+      <trans-unit id="5306417827115981705" datatype="html">
+        <source>Fk Organisation</source>
       </trans-unit>
     </body>
   </file>
