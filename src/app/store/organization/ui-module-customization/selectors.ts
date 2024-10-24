@@ -146,6 +146,156 @@ export const selectDataProcessingUIModuleConfigEnabledFieldScheduledInspectionDa
   'scheduledInspectionDate'
 );
 
+//IT contracts
+//Tab selectors
+export const selectItContractUIModuleConfigEnabledTabFrontpage = createTabEnabledSelector(
+  UIModuleConfigKey.ItContract,
+  'frontPage'
+);
+
+export const selectItContractUIModuleConfigEnabledTabItSystems = createTabEnabledSelector(
+  UIModuleConfigKey.ItContract,
+  'itSystems'
+);
+
+export const selectItContractUIModuleConfigEnabledTabDataProcessing = createTabEnabledSelector(
+  UIModuleConfigKey.ItContract,
+  'dataProcessing'
+);
+
+export const selectItContractUIModuleConfigEnabledTabDeadlines = createTabEnabledSelector(
+  UIModuleConfigKey.ItContract,
+  'deadlines'
+);
+
+export const selectItContractUIModuleConfigEnabledTabEconomy = createTabEnabledSelector(
+  UIModuleConfigKey.ItContract,
+  'economy'
+);
+
+export const selectItContractUIModuleConfigEnabledTabContractRoles = createTabEnabledSelector(
+  UIModuleConfigKey.ItContract,
+  'contractRoles'
+);
+
+export const selectItContractUIModuleConfigEnabledTabHierarchy = createTabEnabledSelector(
+  UIModuleConfigKey.ItContract,
+  'hierarchy'
+);
+
+export const selectItContractUIModuleConfigEnabledTabAdvis = createTabEnabledSelector(
+  UIModuleConfigKey.ItContract,
+  'advice'
+);
+
+export const selectItContractUIModuleConfigEnabledTabReferences = createTabEnabledSelector(
+  UIModuleConfigKey.ItContract,
+  'references'
+);
+
+//Field selectors
+export const selectDataProcessingUIModuleConfigEnabledFieldContractId = createFieldOrGroupEnabledSelector(
+  UIModuleConfigKey.ItContract,
+  'frontPage',
+  'contractId'
+);
+
+export const selectDataProcessingUIModuleConfigEnabledFieldContractType = createFieldOrGroupEnabledSelector(
+  UIModuleConfigKey.ItContract,
+  'frontPage',
+  'contractType'
+);
+
+export const selectDataProcessingUIModuleConfigEnabledFieldTemplate = createFieldOrGroupEnabledSelector(
+  UIModuleConfigKey.ItContract,
+  'frontPage',
+  'template'
+);
+
+export const selectDataProcessingUIModuleConfigEnabledFieldCriticality = createFieldOrGroupEnabledSelector(
+  UIModuleConfigKey.ItContract,
+  'frontPage',
+  'criticality'
+);
+
+export const selectDataProcessingUIModuleConfigEnabledFieldPurchaseForm = createFieldOrGroupEnabledSelector(
+  UIModuleConfigKey.ItContract,
+  'frontPage',
+  'purchaseForm'
+);
+
+export const selectDataProcessingUIModuleConfigEnabledFieldProcurementStrategy = createFieldOrGroupEnabledSelector(
+  UIModuleConfigKey.ItContract,
+  'frontPage',
+  'procurementStrategy'
+);
+
+export const selectDataProcessingUIModuleConfigEnabledFieldProcurementPlan = createFieldOrGroupEnabledSelector(
+  UIModuleConfigKey.ItContract,
+  'frontPage',
+  'procurementPlan'
+);
+
+export const selectDataProcessingUIModuleConfigEnabledFieldProcurementInitiated = createFieldOrGroupEnabledSelector(
+  UIModuleConfigKey.ItContract,
+  'frontPage',
+  'procurementInitiated'
+);
+
+export const selectDataProcessingUIModuleConfigEnabledFieldExternalSigner = createFieldOrGroupEnabledSelector(
+  UIModuleConfigKey.ItContract,
+  'frontPage',
+  'externalSigner'
+);
+
+export const selectDataProcessingUIModuleConfigEnabledFieldInternalSigner = createFieldOrGroupEnabledSelector(
+  UIModuleConfigKey.ItContract,
+  'frontPage',
+  'internalSigner'
+);
+
+export const selectDataProcessingUIModuleConfigEnabledFieldAgreementPeriod = createFieldOrGroupEnabledSelector(
+  UIModuleConfigKey.ItContract,
+  'frontPage',
+  'agreementPeriod'
+);
+
+export const selectDataProcessingUIModuleConfigEnabledFieldIsActive = createFieldOrGroupEnabledSelector(
+  UIModuleConfigKey.ItContract,
+  'frontPage',
+  'isActive'
+);
+
+export const selectDataProcessingUIModuleConfigEnabledFieldAgreementDeadlines = createFieldOrGroupEnabledSelector(
+  UIModuleConfigKey.ItContract,
+  'deadlines',
+  'agreementDeadlines'
+);
+
+export const selectDataProcessingUIModuleConfigEnabledFieldTermination = createFieldOrGroupEnabledSelector(
+  UIModuleConfigKey.ItContract,
+  'deadlines',
+  'termination'
+);
+
+export const selectDataProcessingUIModuleConfigEnabledFieldPaymentModel = createFieldOrGroupEnabledSelector(
+  UIModuleConfigKey.ItContract,
+  'economy',
+  'paymentModel'
+);
+
+export const selectDataProcessingUIModuleConfigEnabledFieldExtPayment = createFieldOrGroupEnabledSelector(
+  UIModuleConfigKey.ItContract,
+  'economy',
+  'extPayment'
+);
+
+export const selectDataProcessingUIModuleConfigEnabledFieldIntPayment = createFieldOrGroupEnabledSelector(
+  UIModuleConfigKey.ItContract,
+  'economy',
+  'intPayment'
+);
+
 function tabIsEnabled(uiConfigViewModels: UIConfigNodeViewModel, tabFullKey: string): boolean {
   const tabViewModel = getTabViewModelFromModule(uiConfigViewModels, tabFullKey);
   return tabViewModel?.isEnabled ?? true;
