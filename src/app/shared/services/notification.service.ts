@@ -375,7 +375,7 @@ export class NotificationService implements OnDestroy {
       $localize`Kunne ikke opdatere lokal tilpasning af brugerfladen`
     );
 
-    this.subscribeAsError(
+    this.subscribeAsDefault(
       ofType(UIModuleConfigActions.putUIModuleCustomizationSuccess),
       $localize`Lokal tilpasning af brugerfladen blev opdateret`
     );
