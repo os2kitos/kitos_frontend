@@ -1,1 +1,49 @@
-<app-accordion></app-accordion>
+<app-accordion title="Ændringslog">
+  <app-standard-vertical-content-grid>
+    <app-dropdown
+      text="Vælg"
+      i18n-text
+      data-cy="select-changelog-dropdown"
+      [data]="changelogOptions$ | async"
+      [showDescription]="true"
+      (valueChange)="onChangelogSelected($event)"
+    ></app-dropdown>
+    <ng-container *ngIf="selectedChangelog$ | async as selectedChangelog">
+      <ng-container *ngIf="selectedChangelog?.consequences !== undefined">
+        <app-native-table [withOutline]="true">
+          <thead>
+            <th width="33%" i18n>Ansvarlig</th>
+            <th width="33%" i18n>Antal opdateringer</th>
+            <th width="33%" i18n>Dato</th>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <app-paragraph paragraphSize="small">
+                  {{ selectedChangelog.user?.name }} ({{ selectedChangelog.user?.email }})
+                </app-paragraph>
+              </td>
+              <td>
+                <app-paragraph paragraphSize="small">
+                  {{ selectedChangelog.consequences?.length }}
+                </app-paragraph>
+              </td>
+              <td>
+                <app-paragraph paragraphSize="small">
+                  {{ selectedChangelog.logTime | appDate }}
+                </app-paragraph>
+              </td>
+            </tr>
+          </tbody>
+        </app-native-table>
+        <app-local-grid
+          [data]="selectedChangelog.consequences!"
+          [columns]="gridColumns"
+          [withOutline]="true"
+          exportToExcelName="FK Organisation - Konsekvenser ved opdatering"
+          i18n-exportToExcelName
+        ></app-local-grid>
+      </ng-container>
+    </ng-container>
+  </app-standard-vertical-content-grid>
+</app-accordion>

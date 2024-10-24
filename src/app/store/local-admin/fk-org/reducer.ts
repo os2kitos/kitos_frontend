@@ -16,7 +16,8 @@ export const fkOrgInitialState: FkOrgState = {
   isSynchronizationDialogLoading: false,
   hasSnapshotFailed: false,
 
-  availableChangeLogs: undefined,
+  isLoadingChangelogs: false,
+  availableChangelogs: undefined,
   changelogDictionary: undefined,
 };
 
@@ -118,6 +119,7 @@ export const fkOrgFeature = createFeature({
       (state): FkOrgState => ({ ...state, isLoadingConnectionStatus: false })
     ),
 
+    on(FkOrgActions.getChangelog, (state): FkOrgState => ({ ...state, isLoadingChangelogs: true })),
     on(FkOrgActions.getChangelogSuccess, (state, { changelogs }): FkOrgState => {
       const changelogDictionary: FkOrgChangeLogDictionary = {};
       const availableChangeLogs: DropdownOption<string>[] = [];
@@ -127,12 +129,18 @@ export const fkOrgFeature = createFeature({
 
           if (changelog.user) {
             const userName = `${changelog.user.name} (${changelog.user.email})`;
-            availableChangeLogs.push({ value: changelog.logTime, name: changelog.logTime, description: userName });
+            availableChangeLogs.push({
+              value: changelog.logTime,
+              name: new Date(changelog.logTime).toLocaleDateString(),
+              description: userName,
+            });
           }
         }
       });
-      return { ...state, changelogDictionary, availableChangeLogs };
-    })
+
+      return { ...state, changelogDictionary, availableChangelogs: availableChangeLogs, isLoadingChangelogs: false };
+    }),
+    on(FkOrgActions.getChangelogError, (state): FkOrgState => ({ ...state, isLoadingChangelogs: false }))
   ),
 });
 

@@ -13,6 +13,7 @@ export interface FkOrgState {
   isSynchronizationDialogLoading: boolean;
   hasSnapshotFailed: boolean;
 
-  availableChangeLogs: DropdownOption<string>[] | undefined;
+  isLoadingChangelogs: boolean;
+  availableChangelogs: DropdownOption<string>[] | undefined;
   changelogDictionary: FkOrgChangeLogDictionary | undefined;
 }
