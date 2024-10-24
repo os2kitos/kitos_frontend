@@ -5,6 +5,7 @@ import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { combineLatest, distinctUntilChanged, filter, map } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { NavigationDrawerItem } from 'src/app/shared/components/navigation-drawer/navigation-drawer.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { BreadCrumb } from 'src/app/shared/models/breadcrumbs/breadcrumb.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
@@ -33,7 +34,6 @@ import {
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { selectOrganizationName } from 'src/app/store/user-store/selectors';
 import { ITSystemUsageRemoveComponent } from './it-system-usage-remove/it-system-usage-remove.component';
-import { NavigationDrawerItem } from 'src/app/shared/components/navigation-drawer/navigation-drawer.component';
 
 @Component({
   templateUrl: 'it-system-usage-details.component.html',
@@ -126,64 +126,63 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
       label: $localize`GDPR`,
       iconType: 'lock',
       route: AppPath.gdpr,
-      enabled: this.enableGdprTab$,
+      enabled$: this.enableGdprTab$,
     },
     {
       label: $localize`Systemroller`,
       iconType: 'roles',
       route: AppPath.roles,
-      enabled: this.enableSystemRolesTab$,
+      enabled$: this.enableSystemRolesTab$,
     },
     {
       label: $localize`Organisation`,
       iconType: 'organization',
       route: AppPath.organization,
-      enabled: this.enableOrganizationTab$,
+      enabled$: this.enableOrganizationTab$,
     },
     {
       label: $localize`Relationer`,
       iconType: 'intersect',
       route: AppPath.relations,
-      enabled: this.enableSystemRelationsTab$,
+      enabled$: this.enableSystemRelationsTab$,
     },
     {
       label: $localize`Udstillede snitflader`,
       iconType: 'systems',
       route: AppPath.itInterfaces,
-      enabled: this.enableInterfacesTab$,
+      enabled$: this.enableInterfacesTab$,
     },
     {
       label: $localize`Arkivering`,
       iconType: 'archive',
       route: AppPath.archiving,
-      enabled: this.enableArchivingTab$,
+      enabled$: this.enableArchivingTab$,
     },
     {
       label: $localize`Hierarki`,
       iconType: 'hierarchy',
       route: AppPath.hierarchy,
-      enabled: this.enableHierarchyTab$,
+      enabled$: this.enableHierarchyTab$,
     },
     {
       label: $localize`Lokale KLE`,
       iconType: 'table',
       route: AppPath.kle,
-      enabled: this.enableLocalKleTab$,
+      enabled$: this.enableLocalKleTab$,
     },
     {
       label: $localize`Advis`,
       iconType: 'notification',
       route: AppPath.notifications,
-      enabled: this.enableNotificationsTab$
+      enabled$: this.enableNotificationsTab$,
     },
     {
       label: $localize`Lokale referencer`,
       iconType: 'bookmark',
       route: AppPath.externalReferences,
-      enabled: this.enableLocalReferencesTab$,
+      enabled$: this.enableLocalReferencesTab$,
     },
   ];
-
 
   constructor(
     private route: ActivatedRoute,
