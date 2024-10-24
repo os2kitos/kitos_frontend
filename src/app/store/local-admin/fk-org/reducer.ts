@@ -11,6 +11,8 @@ export const fkOrgInitialState: FkOrgState = {
   accessError: undefined,
   isLoadingConnectionStatus: false,
 
+  isDeleteLoading: false,
+
   snapshot: undefined,
   updateConsequences: undefined,
   isSynchronizationDialogLoading: false,
@@ -106,17 +108,14 @@ export const fkOrgFeature = createFeature({
       (state): FkOrgState => ({ ...state, isSynchronizationDialogLoading: false })
     ),
 
-    on(
-      FkOrgActions.deleteAutomaticUpdateSubscription,
-      (state): FkOrgState => ({ ...state, isLoadingConnectionStatus: true })
-    ),
+    on(FkOrgActions.deleteAutomaticUpdateSubscription, (state): FkOrgState => ({ ...state, isDeleteLoading: true })),
     on(
       FkOrgActions.deleteAutomaticUpdateSubscriptionSuccess,
-      (state): FkOrgState => ({ ...state, isLoadingConnectionStatus: false })
+      (state): FkOrgState => ({ ...state, isDeleteLoading: false })
     ),
     on(
       FkOrgActions.deleteAutomaticUpdateSubscriptionError,
-      (state): FkOrgState => ({ ...state, isLoadingConnectionStatus: false })
+      (state): FkOrgState => ({ ...state, isDeleteLoading: false })
     ),
 
     on(FkOrgActions.getChangelog, (state): FkOrgState => ({ ...state, isLoadingChangelogs: true })),

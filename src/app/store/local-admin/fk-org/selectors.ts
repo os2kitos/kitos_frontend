@@ -27,6 +27,8 @@ export const selectIsLoadingConnectionStatus = createSelector(
   (state) => state.isLoadingConnectionStatus
 );
 
+export const selectIsDeleteLoading = createSelector(selectFkOrgState, (state) => state.isDeleteLoading);
+
 export const selectSnapshot = createSelector(selectFkOrgState, (state) => state.snapshot);
 export const selectIsSynchronizationDialogLoading = createSelector(
   selectFkOrgState,

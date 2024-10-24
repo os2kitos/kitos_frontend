@@ -8,6 +8,8 @@ export interface FkOrgState {
   accessError: string | undefined;
   isLoadingConnectionStatus: boolean;
 
+  isDeleteLoading: boolean;
+
   snapshot: APIStsOrganizationOrgUnitDTO | undefined;
   updateConsequences: FkOrganizationUnit[] | undefined;
   isSynchronizationDialogLoading: boolean;

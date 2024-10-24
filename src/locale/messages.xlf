@@ -4168,8 +4168,8 @@
       <trans-unit id="6597569055545801356" datatype="html">
         <source>Bryd forbindelsen til FK Organisation </source>
       </trans-unit>
-      <trans-unit id="8637911288264886213" datatype="html">
-        <source>Forbindelse til FK Organisation blev fjernet</source>
+      <trans-unit id="8687060481958208529" datatype="html">
+        <source>Forbindelsen til FK Organisation blev fjernet</source>
       </trans-unit>
       <trans-unit id="1401253679062667183" datatype="html">
         <source>Oprettes forbindelsen igen efterfølgende, vil der altså kunne optræde enheder med samme navn men med forskelligt &quot;ophav&quot;. </source>
@@ -4194,6 +4194,15 @@
       </trans-unit>
       <trans-unit id="1662852159171017043" datatype="html">
         <source>Automatisk import af opdateringer kunne ikke deaktiveres</source>
+      </trans-unit>
+      <trans-unit id="3370220902364794755" datatype="html">
+        <source>Vælg</source>
+      </trans-unit>
+      <trans-unit id="722963325915684738" datatype="html">
+        <source>Antal opdateringer</source>
+      </trans-unit>
+      <trans-unit id="7573538989231182498" datatype="html">
+        <source>Ansvarlig</source>
       </trans-unit>
     </body>
   </file>
