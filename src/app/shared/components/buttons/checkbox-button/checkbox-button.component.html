@@ -1,8 +1,13 @@
-<app-button class="button-display-flex" (buttonClick)="onButtonClick()" buttonStyle="secondary" [disabled]="disabled">
+<app-button
+  class="button-alignment"
+  (buttonClick)="onButtonClick()"
+  buttonStyle="secondary"
+  [disabled]="disabled"
+  [alignStart]="true"
+>
   <app-checkbox [value]="value" [disabled]="disabled" data-cy="button-checkbox"> </app-checkbox>
 
   <div class="align-text-left">
-  <ng-content></ng-content>
+    <ng-content></ng-content>
   </div>
-
 </app-button>
