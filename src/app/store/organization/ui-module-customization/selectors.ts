@@ -284,13 +284,13 @@ export const selectDataProcessingUIModuleConfigEnabledFieldPaymentModel = create
   'paymentModel'
 );
 
-export const selectDataProcessingUIModuleConfigEnabledFieldExtPayment = createFieldOrGroupEnabledSelector(
+export const selectDataProcessingUIModuleConfigEnabledFieldExternalPayment = createFieldOrGroupEnabledSelector(
   UIModuleConfigKey.ItContract,
   'economy',
   'extPayment'
 );
 
-export const selectDataProcessingUIModuleConfigEnabledFieldIntPayment = createFieldOrGroupEnabledSelector(
+export const selectDataProcessingUIModuleConfigEnabledFieldInternalPayment = createFieldOrGroupEnabledSelector(
   UIModuleConfigKey.ItContract,
   'economy',
   'intPayment'
