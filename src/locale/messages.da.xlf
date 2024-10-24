@@ -5467,13 +5467,57 @@
         <source>Kunne ikke opdatere forbindelsen til Fk Organisation</source>
         <target state="new">Kunne ikke opdatere forbindelsen til Fk Organisation</target>
       </trans-unit>
-      <trans-unit id="7445480746813632840" datatype="html">
-        <source>Automatisk import af opdateringer er opdateret</source>
-        <target state="new">Automatisk import af opdateringer er opdateret</target>
+      <trans-unit id="5062533283098208010" datatype="html">
+        <source>Automatisk import af opdateringer blev deaktiveret</source>
+        <target state="new">Automatisk import af opdateringer blev deaktiveret</target>
       </trans-unit>
-      <trans-unit id="4282005774565130852" datatype="html">
-        <source>Kunne ikke opdatere automatisk import af opdateringer</source>
-        <target state="new">Kunne ikke opdatere automatisk import af opdateringer</target>
+      <trans-unit id="1274790689655565947" datatype="html">
+        <source>Bryd forbindelsen til FK Organisation</source>
+        <target state="new">Bryd forbindelsen til FK Organisation</target>
+      </trans-unit>
+      <trans-unit id="7703947809259663046" datatype="html">
+        <source>Brydes forbindelsen til FK Organisation vil alle organisationsenheder, som er importeret fra FK Organisation, blive konverteret til KITOS enheder.</source>
+        <target state="new">Brydes forbindelsen til FK Organisation vil alle organisationsenheder, som er importeret fra FK Organisation, blive konverteret til KITOS enheder.</target>
+      </trans-unit>
+      <trans-unit id="1401253679062667183" datatype="html">
+        <source>Oprettes forbindelsen igen efterfølgende, vil der altså kunne optræde enheder med samme navn men med forskelligt &quot;ophav&quot;. </source>
+        <target state="new">Oprettes forbindelsen igen efterfølgende, vil der altså kunne optræde enheder med samme navn men med forskelligt &quot;ophav&quot;. </target>
+      </trans-unit>
+      <trans-unit id="8397116804743809977" datatype="html">
+        <source> For at lette den administrative byrde har du derfor følgende muligheder: </source>
+        <target state="new"> For at lette den administrative byrde har du derfor følgende muligheder: </target>
+      </trans-unit>
+      <trans-unit id="7974948161058774051" datatype="html">
+        <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Slet ubrugte organisationseneheder:<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> Vælges denne mulighed slettes alle organisationseneheder (fra FK Organisation), hvortil der ikke er knyttet en registrering. De resterende konverteres til KITOS enheder. </source>
+        <target state="new"><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Slet ubrugte organisationseneheder:<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> Vælges denne mulighed slettes alle organisationseneheder (fra FK Organisation), hvortil der ikke er knyttet en registrering. De resterende konverteres til KITOS enheder. </target>
+      </trans-unit>
+      <trans-unit id="1677749166597841894" datatype="html">
+        <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Bevar organisationshierarkiet:<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> Vælges denne mulighed konverteres alle organisationsenheder fra FK Organisation til KITOS enheder. </source>
+        <target state="new"><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Bevar organisationshierarkiet:<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> Vælges denne mulighed konverteres alle organisationsenheder fra FK Organisation til KITOS enheder. </target>
+      </trans-unit>
+      <trans-unit id="2874747510585928254" datatype="html">
+        <source>Slet ubrugte organisationseneheder</source>
+        <target state="new">Slet ubrugte organisationseneheder</target>
+      </trans-unit>
+      <trans-unit id="6927627553018075470" datatype="html">
+        <source>Bevar organisationshierarkiet</source>
+        <target state="new">Bevar organisationshierarkiet</target>
+      </trans-unit>
+      <trans-unit id="6597569055545801356" datatype="html">
+        <source>Bryd forbindelsen til FK Organisation </source>
+        <target state="new">Bryd forbindelsen til FK Organisation </target>
+      </trans-unit>
+      <trans-unit id="8637911288264886213" datatype="html">
+        <source>Forbindelse til FK Organisation blev fjernet</source>
+        <target state="new">Forbindelse til FK Organisation blev fjernet</target>
+      </trans-unit>
+      <trans-unit id="4666153646055232970" datatype="html">
+        <source>Kunne ikke slette forbindelsen til Fk Organisation</source>
+        <target state="new">Kunne ikke slette forbindelsen til Fk Organisation</target>
+      </trans-unit>
+      <trans-unit id="1662852159171017043" datatype="html">
+        <source>Automatisk import af opdateringer kunne ikke deaktiveres</source>
+        <target state="new">Automatisk import af opdateringer kunne ikke deaktiveres</target>
       </trans-unit>
       <trans-unit id="5646892360164613168" datatype="html">
         <source>Lokal tilpasning af brugerfladen</source>

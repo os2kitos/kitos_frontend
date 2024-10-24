@@ -108,4 +108,22 @@ export class FkOrgEffects {
       )
     );
   });
+
+  deleteConnection$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(FkOrgActions.deleteConnection),
+      combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+      switchMap(([{ purgeUnusedExternalUnits }, organizationUuid]) =>
+        this.apiService
+          .deleteSingleStsOrganizationSynchronizationInternalV2Disconnect({
+            organizationUuid,
+            request: { purgeUnusedExternalUnits },
+          })
+          .pipe(
+            map(() => FkOrgActions.deleteConnectionSuccess()),
+            catchError(() => of(FkOrgActions.deleteConnectionError()))
+          )
+      )
+    );
+  });
 }

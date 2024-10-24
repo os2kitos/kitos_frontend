@@ -24,6 +24,7 @@
   }
 
   .label {
+    margin-left: -8px;
     opacity: 0;
     max-width: 0;
     transition: opacity 0.3s ease, max-width 0.3s ease, margin-left 0.3s ease;
@@ -59,4 +60,8 @@ app-card {
 .divider-margin {
   margin-top: $padding-small;
   margin-bottom: $padding-small;
+}
+
+.icon-padding {
+  padding-left: 2px;
 }

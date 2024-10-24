@@ -262,6 +262,8 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     NavigationDrawerComponent,
     IconComponent,
     LocalGridComponent,
+    NavigationDrawerComponent,
+    IconComponent,
   ],
   imports: [
     CommonModule,
