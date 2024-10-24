@@ -30,6 +30,7 @@ import {
   selectItContractLastSeenGridConfig,
 } from 'src/app/store/it-contract/selectors';
 import { selectGridConfigModificationPermission } from 'src/app/store/user-store/selectors';
+import * as GridFields from 'src/app/shared/constants/it-contracts-grid-column-constants';
 
 @Component({
   templateUrl: 'it-contracts.component.html',
@@ -60,7 +61,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
 
   private readonly defaultGridColumns: GridColumn[] = [
     {
-      field: 'IsActive',
+      field: GridFields.IsActive,
       title: $localize`Gyldig/Ikke Gyldig`,
       section: this.contractSection,
       filter: 'boolean',
@@ -80,14 +81,14 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       persistId: 'isActive',
     },
     {
-      field: 'ContractId',
+      field: GridFields.ContractId,
       title: $localize`Kontrakt ID`,
       section: this.contractSection,
       hidden: false,
       persistId: 'contractId',
     },
     {
-      field: 'ParentContractName',
+      field: GridFields.ParentContractName,
       title: $localize`Overordnet kontrakt`,
       section: this.contractSection,
       style: 'page-link',
@@ -98,7 +99,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       persistId: 'parentName',
     },
     {
-      field: 'Name',
+      field: GridFields.Name,
       title: $localize`IT Kontrakt`,
       section: this.contractSection,
       hidden: false,
@@ -106,7 +107,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       persistId: 'contractName',
     },
     {
-      field: 'Concluded',
+      field: GridFields.Concluded,
       title: $localize`Gyldig fra`,
       section: this.contractSection,
       filter: 'date',
@@ -116,7 +117,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       persistId: 'concluded',
     },
     {
-      field: 'ExpirationDate',
+      field: GridFields.ExpirationDate,
       title: $localize`Gyldig til`,
       section: this.contractSection,
       filter: 'date',
@@ -126,7 +127,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       persistId: 'expirationDate',
     },
     {
-      field: 'CriticalityUuid',
+      field: GridFields.CriticalityUuid,
       dataField: 'CriticalityName',
       title: $localize`Kritikalitet`,
       section: this.contractSection,
@@ -137,7 +138,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       persistId: 'criticality',
     },
     {
-      field: 'ResponsibleOrgUnitName',
+      field: GridFields.ResponsibleOrgUnitName,
       title: $localize`Ansvarlig org. enhed`,
       section: this.contractSection,
       width: 320,
@@ -145,14 +146,14 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       persistId: 'responsibleOrganizationUnitName',
     },
     {
-      field: 'SupplierName',
+      field: GridFields.SupplierName,
       title: $localize`Leverandør`,
       section: this.contractSection,
       hidden: false,
       persistId: 'supplierName',
     },
     {
-      field: 'ContractSigner',
+      field: GridFields.ContractSigner,
       title: $localize`Kontraktunderskriver`,
       section: this.contractSection,
       width: 320,
@@ -160,7 +161,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       persistId: 'contractSigner',
     },
     {
-      field: 'ContractTypeUuid',
+      field: GridFields.ContractTypeUuid,
       dataField: 'ContractTypeName',
       title: $localize`Kontrakttype`,
       section: this.contractSection,
@@ -171,7 +172,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       persistId: 'contractType',
     },
     {
-      field: 'ContractTemplateUuid',
+      field: GridFields.ContractTemplateUuid,
       dataField: 'ContractTemplateName',
       title: $localize`Kontraktskabelon`,
       section: this.contractSection,
@@ -182,7 +183,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       persistId: 'contractTemplate',
     },
     {
-      field: 'PurchaseFormUuid',
+      field: GridFields.PurchaseFormUuid,
       dataField: 'PurchaseFormName',
       title: $localize`Indkøbsform`,
       section: this.contractSection,
@@ -193,7 +194,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       persistId: 'purchaseForm',
     },
     {
-      field: 'ProcurementStrategyUuid',
+      field: GridFields.ProcurementStrategyUuid,
       dataField: 'ProcurementStrategyName',
       title: $localize`Genanskaffelsesstrategi`,
       section: this.contractSection,
@@ -205,7 +206,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       persistId: 'procurementStrategy',
     },
     {
-      field: 'ProcurementPlanYear',
+      field: GridFields.ProcurementPlanYear,
       title: $localize`Genanskaffelsesplan`,
       section: this.contractSection,
       extraFilter: 'dropdown-from-column-data',
@@ -214,7 +215,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       persistId: 'procurementPlanYear',
     },
     {
-      field: 'ProcurementInitiated',
+      field: GridFields.ProcurementInitiated,
       title: $localize`Genanskaffelse igangsat`,
       section: this.contractSection,
       extraFilter: 'enum',
@@ -224,7 +225,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       persistId: 'procurementInitiated',
     },
     {
-      field: 'DataProcessingAgreements',
+      field: GridFields.DataProcessingAgreements,
       title: $localize`Databehandleraftaler`,
       style: 'page-link-array',
       dataField: 'DataProcessingAgreements',
@@ -235,7 +236,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       persistId: 'dataProcessingRegistrations',
     },
     {
-      field: 'ItSystemUsages',
+      field: GridFields.ItSystemUsages,
       title: $localize`IT Systemer`,
       style: 'page-link-array',
       dataField: 'ItSystemUsages',
@@ -245,7 +246,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       persistId: 'associatedSystemUsages',
     },
     {
-      field: 'SourceEntityUuid',
+      field: GridFields.SourceEntityUuid,
       title: $localize`IT Systemer (UUID)`,
       section: CATALOG_SECTION_NAME,
       width: 320,
@@ -253,7 +254,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       persistId: 'itSystemUuid',
     },
     {
-      field: 'NumberOfAssociatedSystemRelations',
+      field: GridFields.NumberOfAssociatedSystemRelations,
       title: $localize`Antal relationer`,
       section: CATALOG_SECTION_NAME,
       filter: 'numeric',
@@ -261,7 +262,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       persistId: 'relationCount',
     },
     {
-      field: 'ActiveReferenceTitle',
+      field: GridFields.ActiveReferenceTitle,
       title: $localize`Reference`,
       section: REFERENCE_SECTION_NAME,
       style: 'title-link',
@@ -270,14 +271,14 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       persistId: 'referenceTitle',
     },
     {
-      field: 'ActiveReferenceExternalReferenceId',
+      field: GridFields.ActiveReferenceExternalReferenceId,
       title: $localize`Dokument ID/Sagsnr.`,
       section: REFERENCE_SECTION_NAME,
       hidden: false,
       persistId: 'referenceExternalReferenceId',
     },
     {
-      field: 'AccumulatedAcquisitionCost',
+      field: GridFields.AccumulatedAcquisitionCost,
       title: $localize`Anskaffelse.`,
       section: ECONOMY_SECTION_NAME,
       filter: 'numeric',
@@ -285,7 +286,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       persistId: 'acquisition',
     },
     {
-      field: 'AccumulatedOperationCost',
+      field: GridFields.AccumulatedOperationCost,
       title: $localize`Drift/år`,
       section: ECONOMY_SECTION_NAME,
       filter: 'numeric',
@@ -293,7 +294,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       persistId: 'operation',
     },
     {
-      field: 'AccumulatedOtherCost',
+      field: GridFields.AccumulatedOtherCost,
       title: $localize`Andet`,
       section: ECONOMY_SECTION_NAME,
       filter: 'numeric',
@@ -301,7 +302,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       persistId: 'other',
     },
     {
-      field: 'OperationRemunerationBegunDate',
+      field: GridFields.OperationRemunerationBegunDate,
       title: $localize`Driftsvederlag begyndt`,
       section: ECONOMY_SECTION_NAME,
       filter: 'date',
@@ -311,7 +312,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       persistId: 'operationRemunerationBegun',
     },
     {
-      field: 'PaymentModelUuid',
+      field: GridFields.PaymentModelUuid,
       dataField: 'PaymentModelName',
       title: $localize`Betalingsmodel`,
       section: ECONOMY_SECTION_NAME,
@@ -322,7 +323,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       persistId: 'paymentModel',
     },
     {
-      field: 'PaymentFrequencyUuid',
+      field: GridFields.PaymentFrequencyUuid,
       dataField: 'PaymentFrequencyName',
       title: $localize`Betalingsfrekvens`,
       section: ECONOMY_SECTION_NAME,
@@ -333,7 +334,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       persistId: 'paymentFrequency',
     },
     {
-      field: 'LatestAuditDate',
+      field: GridFields.LatestAuditDate,
       title: $localize`Audit dato`,
       section: ECONOMY_SECTION_NAME,
       filter: 'date',
@@ -343,7 +344,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       persistId: 'auditDate',
     },
     {
-      field: 'AuditStatusGreen',
+      field: GridFields.AuditStatusGreen,
       title: $localize`Audit status: grøn`,
       section: ECONOMY_SECTION_NAME,
       noFilter: true,
@@ -351,7 +352,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       persistId: 'auditStatus', //These colors also differ from the old UI as they are 4 seperate columns. Need to be handled later
     },
     {
-      field: 'AuditStatusRed',
+      field: GridFields.AuditStatusRed,
       title: $localize`Audit status: rød`,
       section: ECONOMY_SECTION_NAME,
       noFilter: true,
@@ -359,7 +360,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       persistId: 'auditStatusRed',
     },
     {
-      field: 'AuditStatusYellow',
+      field: GridFields.AuditStatusYellow,
       title: $localize`Audit status: gul`,
       section: ECONOMY_SECTION_NAME,
       noFilter: true,
@@ -367,7 +368,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       persistId: 'auditStatusYellow',
     },
     {
-      field: 'AuditStatusWhite',
+      field: GridFields.AuditStatusWhite,
       title: $localize`Audit status: hvid`,
       section: ECONOMY_SECTION_NAME,
       noFilter: true,
@@ -375,14 +376,14 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       persistId: 'auditStatusWhite',
     },
     {
-      field: 'Duration',
+      field: GridFields.Duration,
       title: $localize`Varighed`,
       section: AGREEMENT_DEADLINES_SECTION_NAME,
       hidden: false,
       persistId: 'duration',
     },
     {
-      field: 'OptionExtendUuid',
+      field: GridFields.OptionExtendUuid,
       dataField: 'OptionExtendName',
       title: $localize`Option`,
       section: AGREEMENT_DEADLINES_SECTION_NAME,
@@ -393,7 +394,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       persistId: 'optionExtend',
     },
     {
-      field: 'TerminationDeadlineUuid',
+      field: GridFields.TerminationDeadlineUuid,
       dataField: 'TerminationDeadlineName',
       title: $localize`Opsigelse (måneder)`,
       section: AGREEMENT_DEADLINES_SECTION_NAME,
@@ -405,7 +406,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       persistId: 'terminationDeadline',
     },
     {
-      field: 'IrrevocableTo',
+      field: GridFields.IrrevocableTo,
       title: $localize`Uopsigelig til`,
       section: AGREEMENT_DEADLINES_SECTION_NAME,
       filter: 'date',
@@ -415,7 +416,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       persistId: 'irrevocableTo',
     },
     {
-      field: 'TerminatedAt',
+      field: GridFields.TerminatedAt,
       title: $localize`Opsagt`,
       section: AGREEMENT_DEADLINES_SECTION_NAME,
       filter: 'date',
@@ -425,7 +426,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       persistId: 'terminated',
     },
     {
-      field: 'LastEditedByUserName',
+      field: GridFields.LastEditedByUserName,
       title: $localize`Sidst redigeret: Bruger`,
       section: this.contractSection,
       filter: 'numeric',
@@ -434,7 +435,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       persistId: 'lastChangedByUser',
     },
     {
-      field: 'LastEditedAtDate',
+      field: GridFields.LastEditedAtDate,
       title: $localize`Sidst redigeret: Dato`,
       section: this.contractSection,
       filter: 'date',
