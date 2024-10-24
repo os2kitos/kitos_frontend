@@ -20,7 +20,7 @@ describe('it-system-usage', () => {
     cy.contains('System 3');
   });
 
-  it('does not show gdpr columns hidden by local ui config', () => {
+  it('does not show gdpr and lifecycle columns hidden by local ui config', () => {
     cy.setup(true, 'it-systems/it-system-usages', './shared/it-system-usage-ui-customization-no-gdpr-and-lifecycle.json');
     cy.get('h3').should('have.text', 'IT Systemer i Fælles Kommune');
 
@@ -32,8 +32,10 @@ describe('it-system-usage', () => {
       'Dato for seneste risikovurdering',
       'Dato for seneste risikovurdering',
     ];
+    const lifeCycleColumnNames = ['ActiveAccordingToLifeCycle', 'LifeCycleStatus']
+    const disabledColumns = gpdrColumnNames.concat(lifeCycleColumnNames);
 
-    gpdrColumnNames.forEach((columnName) => {
+    disabledColumns.forEach((columnName) => {
       cy.contains(columnName).should('not.exist');
     });
   });
