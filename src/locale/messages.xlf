@@ -4195,6 +4195,48 @@
       <trans-unit id="9001961829556113608" datatype="html">
         <source>Lokal tilpasning af udfaldsrum</source>
       </trans-unit>
+      <trans-unit id="1274790689655565947" datatype="html">
+        <source>Bryd forbindelsen til FK Organisation</source>
+      </trans-unit>
+      <trans-unit id="1401253679062667183" datatype="html">
+        <source>Oprettes forbindelsen igen efterfølgende, vil der altså kunne optræde enheder med samme navn men med forskelligt &quot;ophav&quot;. </source>
+      </trans-unit>
+      <trans-unit id="1662852159171017043" datatype="html">
+        <source>Automatisk import af opdateringer kunne ikke deaktiveres</source>
+      </trans-unit>
+      <trans-unit id="1677749166597841894" datatype="html">
+        <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Bevar organisationshierarkiet:<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> Vælges denne mulighed konverteres alle organisationsenheder fra FK Organisation til KITOS enheder. </source>
+      </trans-unit>
+      <trans-unit id="2874747510585928254" datatype="html">
+        <source>Slet ubrugte organisationseneheder</source>
+      </trans-unit>
+      <trans-unit id="4599362408449001670" datatype="html">
+        <source>Hvilken kontrakt skal angive om databehandlingen er aktiv</source>
+      </trans-unit>
+      <trans-unit id="4666153646055232970" datatype="html">
+        <source>Kunne ikke slette forbindelsen til Fk Organisation</source>
+      </trans-unit>
+      <trans-unit id="5062533283098208010" datatype="html">
+        <source>Automatisk import af opdateringer blev deaktiveret</source>
+      </trans-unit>
+      <trans-unit id="6597569055545801356" datatype="html">
+        <source>Bryd forbindelsen til FK Organisation </source>
+      </trans-unit>
+      <trans-unit id="6927627553018075470" datatype="html">
+        <source>Bevar organisationshierarkiet</source>
+      </trans-unit>
+      <trans-unit id="7703947809259663046" datatype="html">
+        <source>Brydes forbindelsen til FK Organisation vil alle organisationsenheder, som er importeret fra FK Organisation, blive konverteret til KITOS enheder.</source>
+      </trans-unit>
+      <trans-unit id="7974948161058774051" datatype="html">
+        <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Slet ubrugte organisationseneheder:<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> Vælges denne mulighed slettes alle organisationseneheder (fra FK Organisation), hvortil der ikke er knyttet en registrering. De resterende konverteres til KITOS enheder. </source>
+      </trans-unit>
+      <trans-unit id="8397116804743809977" datatype="html">
+        <source> For at lette den administrative byrde har du derfor følgende muligheder: </source>
+      </trans-unit>
+      <trans-unit id="8687060481958208529" datatype="html">
+        <source>Forbindelsen til FK Organisation blev fjernet</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

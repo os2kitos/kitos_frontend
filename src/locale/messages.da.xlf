@@ -2321,10 +2321,10 @@
       </trans-unit>
       <trans-unit id="7708270344948043036" datatype="html">
         <source>
-          <x id="INTERPOLATION" equiv-text="{{ fieldViewModel.helpText }}"/>
+          <x id="INTERPOLATION" equiv-text="{{ user.LastAdvisSent | appDate }}"/>
         </source>
         <target state="new">
-          <x id="INTERPOLATION" equiv-text="{{ fieldViewModel.helpText }}"/>
+          <x id="INTERPOLATION" equiv-text="{{ user.LastAdvisSent | appDate }}"/>
         </target>
       </trans-unit>
       <trans-unit id="6561297272812700053" datatype="html">
@@ -5622,6 +5622,10 @@
       <trans-unit id="4888833496127267341" datatype="html">
         <source>Lokal tilpasning af brugerfladen blev opdateret</source>
         <target state="new">Lokal tilpasning af brugerfladen blev opdateret</target>
+      </trans-unit>
+      <trans-unit id="4599362408449001670" datatype="html">
+        <source>Hvilken kontrakt skal angive om databehandlingen er aktiv</source>
+        <target state="new">Hvilken kontrakt skal angive om databehandlingen er aktiv</target>
       </trans-unit>
     </body>
   </file>
