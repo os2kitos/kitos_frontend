@@ -38,6 +38,8 @@ export const selectITSystemUsageUIModuleConfig = selectModuleConfig(UIModuleConf
 
 export const selectDataProcessingUIModuleConfig = selectModuleConfig(UIModuleConfigKey.DataProcessingRegistrations);
 
+export const selectItContractUIModuleConfig = selectModuleConfig(UIModuleConfigKey.ItContract);
+
 //IT system usage
 //Tab selectors
 export const selectITSystemUsageUIModuleConfigEnabledTabGdpr = createTabEnabledSelector(
