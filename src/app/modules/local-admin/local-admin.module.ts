@@ -11,6 +11,7 @@ import { LocalAdminRouterModule } from './local-admin.routes';
 import { UiConfigTabSectionComponent } from './ui-config-tab-section/ui-config-tab-section.component';
 import { LocalAdminItContractComponent } from './local-admin-it-contract/local-admin-it-contract.component';
 import { LocalAdminDprComponent } from './local-admin-dpr/local-admin-dpr.component';
+import { FkOrgDeleteDialogComponent } from './local-admin-import/local-admin-import-organization/fk-org-delete-dialog/fk-org-delete-dialog.component';
 import { LocalAdminImportComponent } from './local-admin-import/local-admin-import.component';
 import { LocalAdminImportOrganizationComponent } from './local-admin-import/local-admin-import-organization/local-admin-import-organization.component';
 import { FkOrgWriteDialogComponent } from './local-admin-import/local-admin-import-organization/fk-org-write-dialog/fk-org-write-dialog.component';
@@ -26,7 +27,9 @@ import { FkOrgWriteDialogComponent } from './local-admin-import/local-admin-impo
     LocalAdminImportOrganizationComponent,
     FkOrgWriteDialogComponent,
     LocalAdminItSystemUsageComponent,
-    UiConfigTabSectionComponent],
+    UiConfigTabSectionComponent,
+    FkOrgDeleteDialogComponent,
+  ],
   imports: [CommonModule, ComponentsModule, SharedModule, LocalAdminRouterModule],
 })
 export class LocalAdminModule {}

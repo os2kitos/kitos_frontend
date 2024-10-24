@@ -1,0 +1,45 @@
+{
+  "module": "DataProcessingRegistrations",
+  "nodes": [
+      {
+          "key": "DataProcessingRegistrations",
+          "enabled": true
+      },
+      {
+          "key": "DataProcessingRegistrations.frontPage",
+          "enabled": true
+      },
+      {
+          "key": "DataProcessingRegistrations.itSystems",
+          "enabled": true
+      },
+      {
+          "key": "DataProcessingRegistrations.itContracts",
+          "enabled": true
+      },
+      {
+          "key": "DataProcessingRegistrations.oversight",
+          "enabled": true
+      },
+      {
+          "key": "DataProcessingRegistrations.roles",
+          "enabled": true
+      },
+      {
+          "key": "DataProcessingRegistrations.references",
+          "enabled": true
+      },
+      {
+          "key": "DataProcessingRegistrations.notifications",
+          "enabled": true
+      },
+      {
+          "key": "DataProcessingRegistrations.itContracts.mainContract",
+          "enabled": true
+      },
+      {
+          "key": "DataProcessingRegistrations.oversight.scheduledInspectionDate",
+          "enabled": true
+      }
+  ]
+}

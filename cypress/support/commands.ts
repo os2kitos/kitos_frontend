@@ -1,7 +1,7 @@
 import { verifyArrayContainsObject } from 'cypress/support/request-verification';
 import { Method, RouteMatcher } from 'Cypress/types/net-stubbing';
 
-Cypress.Commands.add('setup', (authenticate?: boolean, path?: string) => {
+Cypress.Commands.add('setup', (authenticate?: boolean, urlPath?: string, uiCustomizationFixturePath?: string) => {
   cy.intercept('/api/authorize/antiforgery', { fixture: './shared/antiforgery.json' });
   cy.intercept('/api/v2/**/permissions?organizationUuid*', { fixture: 'shared/create-permissions.json' });
 
@@ -14,7 +14,15 @@ Cypress.Commands.add('setup', (authenticate?: boolean, path?: string) => {
   cy.intercept('/api/v2/internal/public-messages', { fixture: './shared/public-messages.json' });
   cy.intercept('/api/v2/organizations*', { fixture: './organizations/organizations.json' }).as('organizations');
 
-  cy.visit(path || '/');
+  cy.intercept('http://localhost:4200/api/v2/internal/organizations/*/ui-customization/ItSystemUsages', {
+    fixture: uiCustomizationFixturePath ?? './shared/it-system-usage-ui-customization.json' }
+  )
+
+  cy.intercept('http://localhost:4200/api/v2/internal/organizations/*/ui-customization/DataProcessingRegistrations', {
+    fixture: uiCustomizationFixturePath ?? './shared/data-processing-ui-customization.json' }
+  )
+
+  cy.visit(urlPath || '/');
 
   if (authenticate) {
     cy.wait('@organizations');

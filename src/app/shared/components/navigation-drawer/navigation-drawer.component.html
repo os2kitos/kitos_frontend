@@ -1,4 +1,4 @@
-<app-card [ngClass]="{ expanded: isExpanded }">
+<app-card [ngClass]="{ expanded: isExpanded }" data-cy="navigation-drawer">
   <div *ngFor="let item of items">
     <app-button
       buttonStyle="tertiary"
@@ -10,13 +10,13 @@
       [attr.data-cy]="item.dataCy"
       *ngIf="item.enabled === undefined || (item.enabled | async) === true"
     >
-      <app-icon [iconType]="item.iconType"></app-icon>
+      <app-icon [iconType]="item.iconType" class="icon-padding"></app-icon>
       <span class="label" [ngClass]="{ visible: isExpanded }">{{ item.label }}</span>
     </app-button>
   </div>
 
   <div class="divider-margin">
-    <app-divider ></app-divider>
+    <app-divider></app-divider>
   </div>
   <app-button
     buttonStyle="tertiary"

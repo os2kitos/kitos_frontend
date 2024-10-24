@@ -2993,7 +2993,7 @@
       </trans-unit>
       <trans-unit id="7708270344948043036" datatype="html">
         <source>
-          <x id="INTERPOLATION" equiv-text="{{ fieldViewModel.helpText }}"/>
+          <x id="INTERPOLATION" equiv-text="{{ user.LastAdvisSent | appDate }}"/>
         </source>
       </trans-unit>
       <trans-unit id="5685427366449665132" datatype="html">
@@ -4132,9 +4132,6 @@
       <trans-unit id="415054412324435093" datatype="html">
         <source>Opret forbindelse</source>
       </trans-unit>
-      <trans-unit id="4282005774565130852" datatype="html">
-        <source>Kunne ikke opdatere automatisk import af opdateringer</source>
-      </trans-unit>
       <trans-unit id="4691966835263640588" datatype="html">
         <source>FK Organisation - Konsekvenser ved opdatering</source>
       </trans-unit>
@@ -4146,9 +4143,6 @@
       </trans-unit>
       <trans-unit id="6162528529889600567" datatype="html">
         <source>Ingen ændringer registreret </source>
-      </trans-unit>
-      <trans-unit id="7445480746813632840" datatype="html">
-        <source>Automatisk import af opdateringer er opdateret</source>
       </trans-unit>
       <trans-unit id="8054139440076531453" datatype="html">
         <source>Afbryd automatisk opdateringer</source>

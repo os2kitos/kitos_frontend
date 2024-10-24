@@ -98,6 +98,15 @@
         color="warn"
         >Afbryd automatisk tjek for opdateringer
       </app-button>
+      <app-button
+        *ngIf="canDeleteConnection$ | async"
+        (buttonClick)="openDeleteConnectionDialog()"
+        i18n
+        data-cy="delete-connection"
+        [disabled]="(accessError$ | async) !== undefined"
+        color="warn"
+        >Bryd forbindelsen til FK Organisation
+      </app-button>
     </div>
   </app-standard-vertical-content-grid>
   <app-loading *ngIf="isLoadingConnectionStatus$ | async"></app-loading>

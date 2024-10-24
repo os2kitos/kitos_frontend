@@ -5467,13 +5467,109 @@
         <source>Kunne ikke opdatere forbindelsen til Fk Organisation</source>
         <target state="new">Kunne ikke opdatere forbindelsen til Fk Organisation</target>
       </trans-unit>
-      <trans-unit id="7445480746813632840" datatype="html">
-        <source>Automatisk import af opdateringer er opdateret</source>
-        <target state="new">Automatisk import af opdateringer er opdateret</target>
+      <trans-unit id="5062533283098208010" datatype="html">
+        <source>Automatisk import af opdateringer blev deaktiveret</source>
+        <target state="new">Automatisk import af opdateringer blev deaktiveret</target>
       </trans-unit>
-      <trans-unit id="4282005774565130852" datatype="html">
-        <source>Kunne ikke opdatere automatisk import af opdateringer</source>
-        <target state="new">Kunne ikke opdatere automatisk import af opdateringer</target>
+      <trans-unit id="1274790689655565947" datatype="html">
+        <source>Bryd forbindelsen til FK Organisation</source>
+        <target state="new">Bryd forbindelsen til FK Organisation</target>
+      </trans-unit>
+      <trans-unit id="7703947809259663046" datatype="html">
+        <source>Brydes forbindelsen til FK Organisation vil alle organisationsenheder, som er importeret fra FK Organisation, blive konverteret til KITOS enheder.</source>
+        <target state="new">Brydes forbindelsen til FK Organisation vil alle organisationsenheder, som er importeret fra FK Organisation, blive konverteret til KITOS enheder.</target>
+      </trans-unit>
+      <trans-unit id="1401253679062667183" datatype="html">
+        <source>Oprettes forbindelsen igen efterfølgende, vil der altså kunne optræde enheder med samme navn men med forskelligt &quot;ophav&quot;. </source>
+        <target state="new">Oprettes forbindelsen igen efterfølgende, vil der altså kunne optræde enheder med samme navn men med forskelligt &quot;ophav&quot;. </target>
+      </trans-unit>
+      <trans-unit id="8397116804743809977" datatype="html">
+        <source> For at lette den administrative byrde har du derfor følgende muligheder: </source>
+        <target state="new"> For at lette den administrative byrde har du derfor følgende muligheder: </target>
+      </trans-unit>
+      <trans-unit id="7974948161058774051" datatype="html">
+        <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Slet ubrugte organisationseneheder:<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> Vælges denne mulighed slettes alle organisationseneheder (fra FK Organisation), hvortil der ikke er knyttet en registrering. De resterende konverteres til KITOS enheder. </source>
+        <target state="new"><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Slet ubrugte organisationseneheder:<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> Vælges denne mulighed slettes alle organisationseneheder (fra FK Organisation), hvortil der ikke er knyttet en registrering. De resterende konverteres til KITOS enheder. </target>
+      </trans-unit>
+      <trans-unit id="1677749166597841894" datatype="html">
+        <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Bevar organisationshierarkiet:<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> Vælges denne mulighed konverteres alle organisationsenheder fra FK Organisation til KITOS enheder. </source>
+        <target state="new"><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Bevar organisationshierarkiet:<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> Vælges denne mulighed konverteres alle organisationsenheder fra FK Organisation til KITOS enheder. </target>
+      </trans-unit>
+      <trans-unit id="2874747510585928254" datatype="html">
+        <source>Slet ubrugte organisationseneheder</source>
+        <target state="new">Slet ubrugte organisationseneheder</target>
+      </trans-unit>
+      <trans-unit id="6927627553018075470" datatype="html">
+        <source>Bevar organisationshierarkiet</source>
+        <target state="new">Bevar organisationshierarkiet</target>
+      </trans-unit>
+      <trans-unit id="6597569055545801356" datatype="html">
+        <source>Bryd forbindelsen til FK Organisation </source>
+        <target state="new">Bryd forbindelsen til FK Organisation </target>
+      </trans-unit>
+      <trans-unit id="8687060481958208529" datatype="html">
+        <source>Forbindelsen til FK Organisation blev fjernet</source>
+        <target state="new">Forbindelsen til FK Organisation blev fjernet</target>
+      </trans-unit>
+      <trans-unit id="4666153646055232970" datatype="html">
+        <source>Kunne ikke slette forbindelsen til Fk Organisation</source>
+        <target state="new">Kunne ikke slette forbindelsen til Fk Organisation</target>
+      </trans-unit>
+      <trans-unit id="1662852159171017043" datatype="html">
+        <source>Automatisk import af opdateringer kunne ikke deaktiveres</source>
+        <target state="new">Automatisk import af opdateringer kunne ikke deaktiveres</target>
+      </trans-unit>
+      <trans-unit id="5646892360164613168" datatype="html">
+        <source>Lokal tilpasning af brugerfladen</source>
+        <target state="new">Lokal tilpasning af brugerfladen</target>
+      </trans-unit>
+      <trans-unit id="9001961829556113608" datatype="html">
+        <source>Lokal tilpasning af udfaldsrum</source>
+        <target state="new">Lokal tilpasning af udfaldsrum</target>
+      </trans-unit>
+      <trans-unit id="438015479771712298" datatype="html">
+        <source>Lokal tilpasning af roller</source>
+        <target state="new">Lokal tilpasning af roller</target>
+      </trans-unit>
+      <trans-unit id="8276868235175330138" datatype="html">
+        <source> Tilpasning på feltniveau er endnu ikke muligt for dette faneblad. </source>
+        <target state="new"> Tilpasning på feltniveau er endnu ikke muligt for dette faneblad. </target>
+      </trans-unit>
+      <trans-unit id="2457952418192472950" datatype="html">
+        <source>IT-Systemer i anvendelse</source>
+        <target state="new">IT-Systemer i anvendelse</target>
+      </trans-unit>
+      <trans-unit id="1990674573455542624" datatype="html">
+        <source>Datofelter</source>
+        <target state="new">Datofelter</target>
+      </trans-unit>
+      <trans-unit id="5449684192775013381" datatype="html">
+        <source>Dækker felterne “Ibrugtagningsdato” og “Slutdato for anvendelse”</source>
+        <target state="new">Dækker felterne “Ibrugtagningsdato” og “Slutdato for anvendelse”</target>
+      </trans-unit>
+      <trans-unit id="8965344190722476861" datatype="html">
+        <source>Hvilken kontrakt skal afgøre om IT systemet er aktivt</source>
+        <target state="new">Hvilken kontrakt skal afgøre om IT systemet er aktivt</target>
+      </trans-unit>
+      <trans-unit id="4077872505678928787" datatype="html">
+        <source>Det er kun muligt at fjerne dette faneblad ved at slå det relaterede modul fra</source>
+        <target state="new">Det er kun muligt at fjerne dette faneblad ved at slå det relaterede modul fra</target>
+      </trans-unit>
+      <trans-unit id="512261614990923185" datatype="html">
+        <source>Bemærk: Skjules faneblad/felt fjernes relaterede felt(er) også fra overbliksbillederne</source>
+        <target state="new">Bemærk: Skjules faneblad/felt fjernes relaterede felt(er) også fra overbliksbillederne</target>
+      </trans-unit>
+      <trans-unit id="3995718542795029514" datatype="html">
+        <source>Kunne ikke hente lokal tilpasning af brugerfladen</source>
+        <target state="new">Kunne ikke hente lokal tilpasning af brugerfladen</target>
+      </trans-unit>
+      <trans-unit id="3883293175168907224" datatype="html">
+        <source>Kunne ikke opdatere lokal tilpasning af brugerfladen</source>
+        <target state="new">Kunne ikke opdatere lokal tilpasning af brugerfladen</target>
+      </trans-unit>
+      <trans-unit id="4888833496127267341" datatype="html">
+        <source>Lokal tilpasning af brugerfladen blev opdateret</source>
+        <target state="new">Lokal tilpasning af brugerfladen blev opdateret</target>
       </trans-unit>
       <trans-unit id="5646892360164613168" datatype="html">
         <source>Lokal tilpasning af brugerfladen</source>

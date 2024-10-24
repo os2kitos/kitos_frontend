@@ -486,7 +486,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     },
     {
       field: GridFields.PlannedRiskAssessmentDate,
-      title: $localize`Dato for planlagt risikovurdering`,
+      title: $localize`Dato for seneste risikovurdering`,
       section: GDPR_SECTION_NAME,
       style: 'date',
       filter: 'date',
@@ -502,7 +502,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       persistId: 'note',
     },
   ];
-  
+
   public readonly enableLifeCycleStatus$ = this.store.select(
     selectITSystemUsageUIModuleConfigEnabledFieldFrontPageLifeCycleStatus
   );

@@ -26,7 +26,8 @@ export class LocalAdminComponent {
       iconType: 'systems',
       route: AppPath.localAdminSystemUsages,
       dataCy: 'local-admin-it-system-button',
-    },{
+    },
+    {
       label: $localize`IT Kontrakt`,
       iconType: 'clipboard',
       route: AppPath.itContracts,
