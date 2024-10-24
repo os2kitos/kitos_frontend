@@ -12,7 +12,7 @@ export const selectUIModuleConfig = createSelector(selectUIModuleCustomizationSt
 
 // eslint-disable-next-line @ngrx/prefix-selectors-with-select
 const createTabEnabledSelector = (module: UIModuleConfigKey, tabKey: string) =>
-  createSelector(createModuleConfigSelector(module), (itSystemUsageModuleConfig) => {
+  createSelector(selectModuleConfig(module), (itSystemUsageModuleConfig) => {
     const moduleConfigViewModels = itSystemUsageModuleConfig?.moduleConfigViewModel;
     if (!moduleConfigViewModels) return true;
     const fullKey = [module, tabKey].join('.');
@@ -21,7 +21,7 @@ const createTabEnabledSelector = (module: UIModuleConfigKey, tabKey: string) =>
 
 // eslint-disable-next-line @ngrx/prefix-selectors-with-select
 const createFieldOrGroupEnabledSelector = (module: UIModuleConfigKey, tabKey: string, fieldKey: string) =>
-  createSelector(createModuleConfigSelector(module), (itSystemUsageModuleConfig) => {
+  createSelector(selectModuleConfig(module), (itSystemUsageModuleConfig) => {
     const moduleConfigViewModels = itSystemUsageModuleConfig?.moduleConfigViewModel;
     if (!moduleConfigViewModels) return true;
 
@@ -29,15 +29,14 @@ const createFieldOrGroupEnabledSelector = (module: UIModuleConfigKey, tabKey: st
     return fieldOrGroupIsEnabled(moduleConfigViewModels, fullKey, fieldKey);
   });
 
-// eslint-disable-next-line @ngrx/prefix-selectors-with-select
-const createModuleConfigSelector = (module: UIModuleConfigKey) =>
+const selectModuleConfig = (module: UIModuleConfigKey) =>
   createSelector(selectUIModuleCustomizationState, (state: UIModuleConfigState) => {
     return state.uiModuleConfigs.find((c) => c.module == module);
   });
 
-export const selectITSystemUsageUIModuleConfig = createModuleConfigSelector(UIModuleConfigKey.ItSystemUsage);
+export const selectITSystemUsageUIModuleConfig = selectModuleConfig(UIModuleConfigKey.ItSystemUsage);
 
-export const selectDataProcessingUIModuleConfig = createModuleConfigSelector(
+export const selectDataProcessingUIModuleConfig = selectModuleConfig(
   UIModuleConfigKey.DataProcessingRegistrations
 );
 
