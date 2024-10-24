@@ -45,7 +45,7 @@ export interface DeleteSingleStsOrganizationSynchronizationInternalV2DisconnectR
     request: APIDisconnectFromStsOrganizationRequestDTO;
 }
 
-export interface GetSingleStsOrganizationSynchronizationInternalV2GetChangeLogsRequestParams {
+export interface GetManyStsOrganizationSynchronizationInternalV2GetChangeLogsRequestParams {
     organizationUuid: string;
     numberOfChangeLogs: number;
 }
@@ -271,17 +271,17 @@ export class APIV2StsOrganizationSynchronizationInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleStsOrganizationSynchronizationInternalV2GetChangeLogs(requestParameters: GetSingleStsOrganizationSynchronizationInternalV2GetChangeLogsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIStsOrganizationChangeLogResponseDTO>;
-    public getSingleStsOrganizationSynchronizationInternalV2GetChangeLogs(requestParameters: GetSingleStsOrganizationSynchronizationInternalV2GetChangeLogsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIStsOrganizationChangeLogResponseDTO>>;
-    public getSingleStsOrganizationSynchronizationInternalV2GetChangeLogs(requestParameters: GetSingleStsOrganizationSynchronizationInternalV2GetChangeLogsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIStsOrganizationChangeLogResponseDTO>>;
-    public getSingleStsOrganizationSynchronizationInternalV2GetChangeLogs(requestParameters: GetSingleStsOrganizationSynchronizationInternalV2GetChangeLogsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyStsOrganizationSynchronizationInternalV2GetChangeLogs(requestParameters: GetManyStsOrganizationSynchronizationInternalV2GetChangeLogsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIStsOrganizationChangeLogResponseDTO>>;
+    public getManyStsOrganizationSynchronizationInternalV2GetChangeLogs(requestParameters: GetManyStsOrganizationSynchronizationInternalV2GetChangeLogsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIStsOrganizationChangeLogResponseDTO>>>;
+    public getManyStsOrganizationSynchronizationInternalV2GetChangeLogs(requestParameters: GetManyStsOrganizationSynchronizationInternalV2GetChangeLogsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIStsOrganizationChangeLogResponseDTO>>>;
+    public getManyStsOrganizationSynchronizationInternalV2GetChangeLogs(requestParameters: GetManyStsOrganizationSynchronizationInternalV2GetChangeLogsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleStsOrganizationSynchronizationInternalV2GetChangeLogs.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyStsOrganizationSynchronizationInternalV2GetChangeLogs.');
         }
         const numberOfChangeLogs = requestParameters.numberOfChangeLogs;
         if (numberOfChangeLogs === null || numberOfChangeLogs === undefined) {
-            throw new Error('Required parameter numberOfChangeLogs was null or undefined when calling getSingleStsOrganizationSynchronizationInternalV2GetChangeLogs.');
+            throw new Error('Required parameter numberOfChangeLogs was null or undefined when calling getManyStsOrganizationSynchronizationInternalV2GetChangeLogs.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -322,7 +322,7 @@ export class APIV2StsOrganizationSynchronizationInternalINTERNALService {
         }
 
         let localVarPath = `/api/v2/internal/organizations/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/sts-organization-synchronization/connection/change-log`;
-        return this.httpClient.request<APIStsOrganizationChangeLogResponseDTO>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<Array<APIStsOrganizationChangeLogResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 params: localVarQueryParameters,
