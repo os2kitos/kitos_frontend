@@ -14,7 +14,7 @@ import {
   ECONOMY_SECTION_NAME,
   REFERENCE_SECTION_NAME,
 } from 'src/app/shared/constants/persistent-state-constants';
-import { getColumnsToShow } from 'src/app/shared/helpers/grid-config-helper';
+import { filterGridColumnsByUIConfig, getColumnsToShow } from 'src/app/shared/helpers/grid-config-helper';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { yesNoOptions } from 'src/app/shared/models/yes-no.model';
@@ -39,7 +39,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
   public readonly isLoading$ = this.store.select(selectContractGridLoading);
   public readonly gridData$ = this.store.select(selectContractGridData);
   public readonly gridState$ = this.store.select(selectContractGridState);
-  public readonly gridColumns$ = this.store.select(selectContractGridColumns);
+  public readonly gridColumns$ = this.store.select(selectContractGridColumns).pipe(filterGridColumnsByUIConfig());
 
   public readonly hasCreatePermission$ = this.store.select(selectItContractHasCollectionCreatePermissions);
 
