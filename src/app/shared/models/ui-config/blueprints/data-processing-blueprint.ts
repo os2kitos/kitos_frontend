@@ -5,46 +5,46 @@ export const DataProcessingUiBluePrint = {
   module: UIModuleConfigKey.DataProcessingRegistrations,
   isObligatory: false,
   helpText: uiConfigHelpTexts.generalUiCustomizationHelpText,
-  text: 'Databehandling',
+  text: $localize`Databehandling`,
   children: {
     frontPage: {
-      text: 'Forside',
+      text: $localize`Forside`,
       isObligatory: true,
       helpText: uiConfigHelpTexts.cannotChangeTab,
     },
     itSystems: {
-      text: 'IT Systemer',
+      text: $localize`IT Systemer`,
       helpText: uiConfigHelpTexts.cannotChangeTabOnlyThroughModuleConfig,
       isObligatory: true,
     },
     itContracts: {
-      text: 'IT Kontrakter',
+      text: $localize`IT Kontrakter`,
       helpText: uiConfigHelpTexts.cannotChangeTabOnlyThroughModuleConfig,
       isObligatory: true,
       children: {
         mainContract: {
-          text: 'Hvilken kontrakt skal angive om databehandlingen er aktiv',
+          text: $localize`Hvilken kontrakt skal angive om databehandlingen er aktiv`,
         },
       },
     },
     oversight: {
-      text: 'Tilsyn',
+      text: $localize`Tilsyn`,
       helpText: uiConfigHelpTexts.cannotChangeTabOnlyThroughModuleConfig,
       isObligatory: true,
       children: {
         scheduledInspectionDate: {
-          text: 'Kommende planlagt tilsyn',
+          text: $localize`Kommende planlagt tilsyn`,
         },
       },
     },
     roles: {
-      text: 'Databehandlingsroller',
+      text: $localize`Databehandlingsroller`,
     },
     notifications: {
-      text: 'Advis',
+      text: $localize`Advis`,
     },
     references: {
-      text: 'Referencer',
+      text: $localize`Referencer`,
     },
   },
 };
