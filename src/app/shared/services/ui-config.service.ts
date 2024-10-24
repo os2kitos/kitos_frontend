@@ -81,10 +81,6 @@ export class UIConfigService {
     }
   }
 
-  private emptyPlaceholderBlueprint = {
-    text: '',
-  };
-
   private setupUIBlueprintFullKeys(currentLevelKey: string, currentNode: UINodeBlueprint, ancestorKeys: string[]) {
     const keyPath = [...ancestorKeys, currentLevelKey];
     currentNode.fullKey = this.toUIConfigFullKey(keyPath);
