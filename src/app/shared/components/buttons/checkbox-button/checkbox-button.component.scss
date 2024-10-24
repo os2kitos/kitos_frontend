@@ -2,6 +2,9 @@
   justify-content: flex-start;
 }
 
-.align-text-left {
-  text-align: left;
+.align-text {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }

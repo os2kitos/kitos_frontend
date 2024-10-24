@@ -25,16 +25,14 @@
           (valueChange)="onCheckboxChanged({ enabled: $event, fullKey: fieldViewModel.fullKey })"
           data-cy="field-checkbox"
         >
-          <div class="checkbox-button-content-flex">
-            <app-paragraph>
-              {{ fieldViewModel.text }}
-            </app-paragraph>
-            <ng-container *ngIf="fieldViewModel.helpText !== undefined">
-              <app-tooltip [text]="fieldViewModel.helpText" class="tooltip-margin">
-                <app-info-icon></app-info-icon>
-              </app-tooltip>
-            </ng-container>
-          </div>
+          <app-paragraph>
+            {{ fieldViewModel.text }}
+          </app-paragraph>
+          <ng-container *ngIf="fieldViewModel.helpText !== undefined">
+            <app-tooltip [text]="fieldViewModel.helpText" class="tooltip-margin">
+              <app-info-icon></app-info-icon>
+            </app-tooltip>
+          </ng-container>
         </app-checkbox-button>
       </ng-container>
     </app-standard-vertical-content-grid>
