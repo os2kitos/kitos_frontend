@@ -19,6 +19,7 @@ import {
   selectDataProcessingName,
   selectDataProcessingUuid,
 } from 'src/app/store/data-processing/selectors';
+import { selectDataProcessingUIModuleConfigEnabledTabRoles } from 'src/app/store/organization/ui-module-customization/selectors';
 
 @Component({
   selector: 'app-data-processing-details',
@@ -33,6 +34,8 @@ export class DataProcessingDetailsComponent extends BaseComponent implements OnI
   public readonly dprUuid$ = this.store.select(selectDataProcessingUuid).pipe(filterNullish());
 
   public readonly hasDeletePermission$ = this.store.select(selectDataProcessingHasDeletePermissions);
+
+  public readonly dprRolesEnabled$ = this.store.select(selectDataProcessingUIModuleConfigEnabledTabRoles);
 
   public readonly breadCrumbs$ = combineLatest([this.dprName$, this.dprUuid$]).pipe(
     map(([dprName, dprUuid]): BreadCrumb[] => [
@@ -73,6 +76,7 @@ export class DataProcessingDetailsComponent extends BaseComponent implements OnI
       label: $localize`Databehandlingsroller`,
       iconType: 'roles',
       route: AppPath.roles,
+      enabled: this.dprRolesEnabled$,
     },
     {
       label: $localize`Advis`,

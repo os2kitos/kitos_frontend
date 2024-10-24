@@ -28,19 +28,15 @@ const createFieldOrGroupEnabledSelector = (tabFullKey: string, fieldKey: string)
     return fieldOrGroupIsEnabled(moduleConfigViewModels, tabFullKey, fieldKey);
   });
 
-export const selectITSystemUsageUIModuleConfig = createSelector(
-  selectUIModuleCustomizationState,
-  (state: UIModuleConfigState) => {
-    return state.uiModuleConfigs.find((c) => c.module == UIModuleConfigKey.ItSystemUsage);
-  }
-);
+// eslint-disable-next-line @ngrx/prefix-selectors-with-select
+const createModuleConfigSelector = (module: UIModuleConfigKey) =>
+  createSelector(selectUIModuleCustomizationState, (state: UIModuleConfigState) => {
+    return state.uiModuleConfigs.find((c) => c.module == module);
+  });
 
-export const selectDataProcessingUIModuleConfig = createSelector(
-  selectUIModuleCustomizationState,
-  (state: UIModuleConfigState) => {
-    return state.uiModuleConfigs.find((c) => c.module == UIModuleConfigKey.DataProcessingRegistrations);
-  }
-);
+export const selectITSystemUsageUIModuleConfig = createModuleConfigSelector(UIModuleConfigKey.ItSystemUsage);
+
+export const selectDataProcessingUIModuleConfig = createModuleConfigSelector(UIModuleConfigKey.DataProcessingRegistrations);
 
 //IT system usage
 //Tab selectors
