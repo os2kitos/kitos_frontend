@@ -8,6 +8,7 @@ import { UIModuleConfig } from '../models/ui-config/ui-module-config.model';
 import { UINodeBlueprint } from '../models/ui-config/ui-node-blueprint.model';
 import { UINodeCustomization } from '../models/ui-config/ui-node-customization';
 import { DataProcessingUiBluePrint } from '../models/ui-config/blueprints/data-processing-blueprint';
+import { ItContractsUiBluePrint } from '../models/ui-config/blueprints/it-contracts-blueprint';
 
 @Injectable({
   providedIn: 'root',
@@ -74,7 +75,7 @@ export class UIConfigService {
       case UIModuleConfigKey.ItSystemUsage:
         return ItSystemUsageUiBluePrint;
       case UIModuleConfigKey.ItContract:
-        throw new Error('Not implemented yet');
+        throw ItContractsUiBluePrint;
       case UIModuleConfigKey.DataProcessingRegistrations:
         return DataProcessingUiBluePrint;
     }
