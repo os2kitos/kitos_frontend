@@ -4237,6 +4237,15 @@
       <trans-unit id="8687060481958208529" datatype="html">
         <source>Forbindelsen til FK Organisation blev fjernet</source>
       </trans-unit>
+      <trans-unit id="1991864228783701466" datatype="html">
+        <source>KontraktID</source>
+      </trans-unit>
+      <trans-unit id="3252648604690804231" datatype="html">
+        <source>Leverandørs underskrift</source>
+      </trans-unit>
+      <trans-unit id="5311870289458484364" datatype="html">
+        <source>Gyldig fra/til</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
