@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Observable } from 'rxjs';
 import { UIConfigNodeViewModel } from 'src/app/shared/models/ui-config/ui-config-node-view-model.model';
 import { UINodeCustomization } from 'src/app/shared/models/ui-config/ui-node-customization';
 
@@ -9,6 +10,7 @@ import { UINodeCustomization } from 'src/app/shared/models/ui-config/ui-node-cus
 })
 export class UiConfigTabSectionComponent {
   @Input() tabViewModel!: UIConfigNodeViewModel;
+  @Input() moduleEnabled!: Observable<boolean | undefined>;
   @Output() checkboxChanged = new EventEmitter<UINodeCustomization>();
 
   public tabViewModelHasChildren(): boolean {

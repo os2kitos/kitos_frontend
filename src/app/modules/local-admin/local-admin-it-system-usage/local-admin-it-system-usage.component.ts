@@ -6,6 +6,7 @@ import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
 import { UINodeCustomization } from 'src/app/shared/models/ui-config/ui-node-customization';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { OrganizationActions } from 'src/app/store/organization/actions';
+import { selectShowItSystemModule } from 'src/app/store/organization/selectors';
 import { UIModuleConfigActions } from 'src/app/store/organization/ui-module-customization/actions';
 import { selectITSystemUsageUIModuleConfig } from 'src/app/store/organization/ui-module-customization/selectors';
 
@@ -29,9 +30,12 @@ export class LocalAdminItSystemUsageComponent {
     { text: $localize`Lokal tilpasning af roller`, value: LocalAdminSystemUsageSegmentOptions.RoleOptionTypes },
   ];
   public readonly itSystemUsageUIModuleConfig$ = this.store.select(selectITSystemUsageUIModuleConfig);
+  public readonly showItSystemModule$ = this.store.select(selectShowItSystemModule);
   private readonly itSystemUsageModuleKey = UIModuleConfigKey.ItSystemUsage;
 
-  constructor(private readonly store: Store, private readonly notificationService: NotificationService) {}
+  constructor(private readonly store: Store, private readonly notificationService: NotificationService) {
+    this.showItSystemModule$.subscribe((showItSystemModule) => { console.log(showItSystemModule + '   is show val'); });
+  }
 
   public onCheckboxChange($event: UINodeCustomization) {
     const dto: APICustomizedUINodeDTO = { enabled: $event.enabled, key: $event.fullKey };
@@ -40,7 +44,7 @@ export class LocalAdminItSystemUsageComponent {
     );
   }
 
-  public patchUIRootConfig($event: boolean){
-    this.store.dispatch(OrganizationActions.patchUIRootConfig({ dto: { showItSystemModule: $event }}));
+  public patchUIRootConfig($event: boolean) {
+    this.store.dispatch(OrganizationActions.patchUIRootConfig({ dto: { showItSystemModule: $event } }));
   }
 }
