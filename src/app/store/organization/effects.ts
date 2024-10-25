@@ -175,7 +175,7 @@ export class OrganizationEffects {
     return this.actions$.pipe(
       ofType(OrganizationActions.patchUIRootConfig),
       combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
-      switchMap(([dto, organizationUuid]) =>
+      switchMap(([{ dto }, organizationUuid]) =>
         this.organizationInternalService
           .patchSingleOrganizationsInternalV2PatchUIRootConfig({ dto, organizationUuid })
           .pipe(
