@@ -1,5 +1,13 @@
 <app-segment [buttons]="segmentOptions" [(selected)]="selectedSegment"> </app-segment>
 
+<app-card *ngIf="selectedSegment === LocalAdminSystemUsageSegmentOptions.UiCustomization">
+  <app-standard-vertical-content-grid>
+      <app-checkbox-button i18n
+      class="one-column-width"
+      >Inkluder modul</app-checkbox-button>
+  </app-standard-vertical-content-grid>
+
+</app-card>
 <app-card>
   <ng-container *ngIf="selectedSegment === LocalAdminSystemUsageSegmentOptions.UiCustomization">
 
