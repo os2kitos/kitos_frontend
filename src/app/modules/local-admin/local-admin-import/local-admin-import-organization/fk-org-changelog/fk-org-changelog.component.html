@@ -1,5 +1,8 @@
 <app-accordion title="Ændringslog" i18n-title data-cy="changelog-accordion">
   <app-standard-vertical-content-grid>
+    <app-paragraph paragraphSize="small" [dimmed]="true" i18n
+      >Ændringer ifm. de seneste fem import operationer der indeholdte ændringer</app-paragraph
+    >
     <app-dropdown
       text="Vælg"
       i18n-text
@@ -36,13 +39,20 @@
             </tr>
           </tbody>
         </app-native-table>
-        <app-local-grid
-          [data]="selectedChangelog.consequences!"
-          [columns]="gridColumns"
-          [withOutline]="true"
-          exportToExcelName="FK Organisation - Konsekvenser ved opdatering"
-          i18n-exportToExcelName
-        ></app-local-grid>
+        <div>
+          <div class="changelog-header-container">
+            <app-button (buttonClick)="exportToExcel()" i18n buttonStyle="secondary"
+              ><app-export-icon />Eksporter</app-button
+            >
+          </div>
+          <app-local-grid
+            [data]="selectedChangelog.consequences!"
+            [columns]="gridColumns"
+            [withOutline]="true"
+            exportToExcelName="FK Organisation - Konsekvenser ved opdatering"
+            i18n-exportToExcelName
+          ></app-local-grid>
+        </div>
       </ng-container>
     </ng-container>
   </app-standard-vertical-content-grid>

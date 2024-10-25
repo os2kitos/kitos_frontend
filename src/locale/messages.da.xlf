@@ -5535,6 +5535,14 @@
         <source>Fk Organisation</source>
         <target state="new">Fk Organisation</target>
       </trans-unit>
+      <trans-unit id="366548457191932489" datatype="html">
+        <source>Ændringslog</source>
+        <target state="new">Ændringslog</target>
+      </trans-unit>
+      <trans-unit id="4163400354274832244" datatype="html">
+        <source>Ændringer ifm. de seneste fem import operationer der indeholdte ændringer</source>
+        <target state="new">Ændringer ifm. de seneste fem import operationer der indeholdte ændringer</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

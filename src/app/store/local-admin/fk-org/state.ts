@@ -16,6 +16,6 @@ export interface FkOrgState {
   hasSnapshotFailed: boolean;
 
   isLoadingChangelogs: boolean;
-  availableChangelogs: DropdownOption<string>[] | undefined;
+  availableChangelogOptions: DropdownOption<string>[] | undefined;
   changelogDictionary: FkOrgChangeLogDictionary | undefined;
 }

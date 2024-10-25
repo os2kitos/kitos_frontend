@@ -1,14 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, combineLatestWith, map } from 'rxjs';
+import { DEFAULT_CHANGELOG_SIZE } from 'src/app/shared/constants';
 import { DropdownOption } from 'src/app/shared/models/dropdown-option.model';
 import { FkOrgChangeLogModel } from 'src/app/shared/models/local-admin/fk-org-change-log.dictionary';
 import { fkOrgChangelogGridColumns } from 'src/app/shared/models/local-admin/fk-org-changelog-columns';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
+import { GridExportActions } from 'src/app/store/grid/actions';
 import { getResponsibleEntityTextBasedOnOrigin } from 'src/app/store/helpers/fk-org-helper';
 import { FkOrgActions } from 'src/app/store/local-admin/fk-org/actions';
 import {
-  selectAvailableChangeLogs,
+  selectAvailableChangeLogs as selectAvailableChangeLogOptions,
   selectChangelogDictionary,
   selectIsLoadingChangelogs,
 } from 'src/app/store/local-admin/fk-org/selectors';
@@ -20,7 +22,7 @@ import {
 })
 export class FkOrgChangelogComponent implements OnInit {
   public readonly isLoadingChangelogs$ = this.store.select(selectIsLoadingChangelogs);
-  public readonly changelogOptions$ = this.store.select(selectAvailableChangeLogs);
+  public readonly changelogOptions$ = this.store.select(selectAvailableChangeLogOptions);
   public readonly changelogDictionary$ = this.store.select(selectChangelogDictionary).pipe(filterNullish());
 
   public readonly selectedChangelogDate$ = new BehaviorSubject<string | undefined>(undefined);
@@ -33,7 +35,7 @@ export class FkOrgChangelogComponent implements OnInit {
 
   public readonly gridColumns = fkOrgChangelogGridColumns;
 
-  private readonly changelogSize = 5; //(as per old UI) the size of the changelog should always be 5, this could change in the future
+  private readonly changelogSize = DEFAULT_CHANGELOG_SIZE;
 
   ngOnInit() {
     this.store.dispatch(FkOrgActions.getChangelog(this.changelogSize));
@@ -45,5 +47,9 @@ export class FkOrgChangelogComponent implements OnInit {
 
   public getResponsibleEntityText(changelog: FkOrgChangeLogModel) {
     return getResponsibleEntityTextBasedOnOrigin(changelog);
+  }
+
+  public exportToExcel() {
+    this.store.dispatch(GridExportActions.exportLocalData());
   }
 }

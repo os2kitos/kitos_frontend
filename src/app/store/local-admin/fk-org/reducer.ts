@@ -1,8 +1,11 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
-import { APIStsOrganizationAccessStatusResponseDTO } from 'src/app/api/v2';
+import { APIStsOrganizationAccessStatusResponseDTO, APIStsOrganizationChangeLogResponseDTO } from 'src/app/api/v2';
 import { mapDateToString } from 'src/app/shared/helpers/date.helpers';
 import { DropdownOption } from 'src/app/shared/models/dropdown-option.model';
-import { FkOrgChangeLogDictionary } from 'src/app/shared/models/local-admin/fk-org-change-log.dictionary';
+import {
+  FkOrgChangeLogDictionary,
+  FkOrgChangeLogModel,
+} from 'src/app/shared/models/local-admin/fk-org-change-log.dictionary';
 import { adaptFkOrganizationUnit } from 'src/app/shared/models/local-admin/fk-org-consequence.model';
 import { getResponsibleEntityTextBasedOnOrigin } from '../../helpers/fk-org-helper';
 import { FkOrgActions } from './actions';
@@ -21,7 +24,7 @@ export const fkOrgInitialState: FkOrgState = {
   hasSnapshotFailed: false,
 
   isLoadingChangelogs: false,
-  availableChangelogs: undefined,
+  availableChangelogOptions: undefined,
   changelogDictionary: undefined,
 };
 
@@ -126,21 +129,18 @@ export const fkOrgFeature = createFeature({
       const availableChangeLogs: DropdownOption<string>[] = [];
       changelogs.forEach((changelog) => {
         if (changelog.logTime) {
-          const mappedChangelog = {
-            ...changelog,
-            consequences: changelog.consequences?.map((unit) => adaptFkOrganizationUnit(unit)) ?? [],
-          };
-          changelogDictionary[changelog.logTime] = mappedChangelog;
+          changelogDictionary[changelog.logTime] = mapChangelogModel(changelog);
 
-          availableChangeLogs.push({
-            value: changelog.logTime,
-            name: mapDateToString(changelog.logTime),
-            description: getResponsibleEntityTextBasedOnOrigin(changelog),
-          });
+          availableChangeLogs.push(mapChangelogToChangelogOption(changelog));
         }
       });
 
-      return { ...state, changelogDictionary, availableChangelogs: availableChangeLogs, isLoadingChangelogs: false };
+      return {
+        ...state,
+        changelogDictionary,
+        availableChangelogOptions: availableChangeLogs,
+        isLoadingChangelogs: false,
+      };
     }),
     on(FkOrgActions.getChangelogError, (state): FkOrgState => ({ ...state, isLoadingChangelogs: false }))
   ),
@@ -159,4 +159,19 @@ function handleAccessError(error: APIStsOrganizationAccessStatusResponseDTO.Erro
     default:
       return $localize`Der skete en fejl ifm. tjek for forbindelsen til FK Organisation. Genindlæs venligst siden for at prøve igen.`;
   }
+}
+
+function mapChangelogModel(changelog: APIStsOrganizationChangeLogResponseDTO): FkOrgChangeLogModel {
+  return {
+    ...changelog,
+    consequences: changelog.consequences?.map((unit) => adaptFkOrganizationUnit(unit)) ?? [],
+  };
+}
+
+function mapChangelogToChangelogOption(changelog: APIStsOrganizationChangeLogResponseDTO): DropdownOption<string> {
+  return {
+    value: changelog.logTime!,
+    name: mapDateToString(changelog.logTime!),
+    description: getResponsibleEntityTextBasedOnOrigin(changelog),
+  };
 }

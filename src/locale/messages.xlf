@@ -4207,6 +4207,12 @@
       <trans-unit id="5306417827115981705" datatype="html">
         <source>Fk Organisation</source>
       </trans-unit>
+      <trans-unit id="366548457191932489" datatype="html">
+        <source>Ændringslog</source>
+      </trans-unit>
+      <trans-unit id="4163400354274832244" datatype="html">
+        <source>Ændringer ifm. de seneste fem import operationer der indeholdte ændringer</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -39,5 +39,5 @@ export const selectHasSnapshotFailed = createSelector(selectFkOrgState, (state) 
 export const selectUpdateConsequences = createSelector(selectFkOrgState, (state) => state.updateConsequences);
 
 export const selectIsLoadingChangelogs = createSelector(selectFkOrgState, (state) => state.isLoadingChangelogs);
-export const selectAvailableChangeLogs = createSelector(selectFkOrgState, (state) => state.availableChangelogs);
+export const selectAvailableChangeLogs = createSelector(selectFkOrgState, (state) => state.availableChangelogOptions);
 export const selectChangelogDictionary = createSelector(selectFkOrgState, (state) => state.changelogDictionary);
