@@ -1,5 +1,3 @@
-import { APIUIRootConfigResponseDTO } from "src/app/api/v2";
-
 export interface UIRootConfig {
   showItContractModule?: boolean;
   showDataProcessing?: boolean;

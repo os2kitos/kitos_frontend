@@ -5,6 +5,7 @@ import { UserActions } from 'src/app/store/user-store/actions';
 import { selectHasMultipleOrganizations, selectOrganizationName, selectUser } from 'src/app/store/user-store/selectors';
 import { AppPath } from '../../../shared/enums/app-path';
 import { ChooseOrganizationComponent } from '../choose-organization/choose-organization.component';
+import { selectUIRootConfig } from 'src/app/store/organization/selectors';
 
 @Component({
   selector: 'app-nav-bar',
@@ -17,6 +18,7 @@ export class NavBarComponent {
   public readonly user$ = this.store.select(selectUser);
   public readonly organizationName$ = this.store.select(selectOrganizationName);
   public readonly hasMultipleOrganizations$ = this.store.select(selectHasMultipleOrganizations);
+  public readonly uiRootConfig$ = this.store.select(selectUIRootConfig);
 
   constructor(private store: Store, private dialog: MatDialog) {}
 

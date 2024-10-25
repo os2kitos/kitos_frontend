@@ -12,6 +12,7 @@ import { RoleOptionTypeService } from './shared/services/role-option-type.servic
 import { UIModuleConfigActions } from './store/organization/ui-module-customization/actions';
 import { UserActions } from './store/user-store/actions';
 import { selectIsAuthenticating } from './store/user-store/selectors';
+import { OrganizationActions } from './store/organization/actions';
 
 @Component({
   selector: 'app-root',
@@ -39,6 +40,7 @@ export class AppComponent extends BaseComponent implements OnInit {
     this.notificationService.subscribeOnActions();
     this.roleOptionTypeService.subscribeOnActions();
     this.externalReferencesService.subscribeOnActions();
+    this.store.dispatch(OrganizationActions.getUIRootConfig());
     this.getUIModuleConfig();
   }
 
