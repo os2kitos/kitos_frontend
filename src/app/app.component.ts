@@ -3,11 +3,13 @@ import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { ChooseOrganizationComponent } from './modules/layout/choose-organization/choose-organization.component';
 import { BaseComponent } from './shared/base/base.component';
+import { UIModuleConfigKey } from './shared/enums/ui-module-config-key';
 import { ExternalReferencesStoreAdapterService } from './shared/services/external-references-store-adapter.service';
 import { MaterialIconsConfigService } from './shared/services/material-icons-config.service';
 import { NotificationService } from './shared/services/notification.service';
 import { OrganizationService } from './shared/services/organization.service';
 import { RoleOptionTypeService } from './shared/services/role-option-type.service';
+import { UIModuleConfigActions } from './store/organization/ui-module-customization/actions';
 import { UserActions } from './store/user-store/actions';
 import { selectIsAuthenticating } from './store/user-store/selectors';
 
@@ -37,6 +39,15 @@ export class AppComponent extends BaseComponent implements OnInit {
     this.notificationService.subscribeOnActions();
     this.roleOptionTypeService.subscribeOnActions();
     this.externalReferencesService.subscribeOnActions();
+    this.getUIModuleConfig();
+  }
+
+  private getUIModuleConfig(){
+    this.store.dispatch(
+      UIModuleConfigActions.getUIModuleConfig({
+        module: UIModuleConfigKey.ItSystemUsage,
+      })
+    );
   }
 
   private ensureUserIsPartOfAnOrganization() {

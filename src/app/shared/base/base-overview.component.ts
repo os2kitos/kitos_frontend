@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { CellClickEvent } from '@progress/kendo-angular-grid';
 import { GridExportActions } from 'src/app/store/grid/actions';
 import { UserActions } from 'src/app/store/user-store/actions';
-import { DEFAULT_UNCLICKABLE_GRID_COLUMN_STYLES } from '../constants';
+import { DEFAULT_UNCLICKABLE_GRID_COLUMN_STYLES } from '../constants/constants';
 import { GridColumn } from '../models/grid-column.model';
 import { RegistrationEntityTypes } from '../models/registrations/registration-entity-categories.model';
 import { BaseComponent } from './base.component';

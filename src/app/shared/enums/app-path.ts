@@ -34,6 +34,7 @@ export enum AppPath {
   information = 'information',
   import = 'import',
   helpTexts = 'help-texts',
+  localAdminSystemUsages = 'system',
 
   roles = 'roles',
 

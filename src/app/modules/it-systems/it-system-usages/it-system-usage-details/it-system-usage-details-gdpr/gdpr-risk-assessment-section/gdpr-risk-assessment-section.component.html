@@ -8,6 +8,7 @@
         formName="plannedDateControl"
         (valueChange)="patchGdpr({ plannedRiskAssessmentDate: $event?.toDateString() })"
         data-cy="planned-date-datepicker"
+        *ngIf="(enablePlannedRiskAssessmentDateField$ | async) !== false"
       >
       </app-datepicker>
       <app-dropdown

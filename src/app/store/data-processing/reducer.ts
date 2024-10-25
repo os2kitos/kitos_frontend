@@ -1,9 +1,9 @@
 import { createEntityAdapter } from '@ngrx/entity';
 import { createFeature, createReducer, on } from '@ngrx/store';
+import { DATA_PROCESSING_ROLES_SECTION_NAME } from 'src/app/shared/constants/persistent-state-constants';
 import { DataProcessingRegistration } from 'src/app/shared/models/data-processing/data-processing.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { defaultGridState } from 'src/app/shared/models/grid-state.model';
-import { DATA_PROCESSING_ROLES_SECTION_NAME } from 'src/app/shared/persistent-state-constants';
 import { roleDtoToRoleGridColumns } from '../helpers/role-column-helpers';
 import { DataProcessingActions } from './actions';
 import { DataProcessingState } from './state';
@@ -117,33 +117,46 @@ export const dataProcessingFeature = createFeature({
     on(DataProcessingActions.getDataProcessingOverviewRolesSuccess, (state, { roles }): DataProcessingState => {
       const roleColumns: GridColumn[] = [];
       roles?.forEach((role) => {
-        const roleGridColumns = roleDtoToRoleGridColumns(role, DATA_PROCESSING_ROLES_SECTION_NAME, 'data-processing-registration');
+        const roleGridColumns = roleDtoToRoleGridColumns(
+          role,
+          DATA_PROCESSING_ROLES_SECTION_NAME,
+          'data-processing-registration'
+        );
         roleGridColumns.forEach((column) => {
           roleColumns.push(column);
         });
       });
       return { ...state, gridRoleColumns: roleColumns, overviewRoles: roles };
     }),
-    
-    on(DataProcessingActions.resetToOrganizationDataProcessingColumnConfigurationSuccess, (state, {response}): DataProcessingState => {
-      return {
-        ...state,
-        lastSeenGridConfig: response,
-      };
-    }),
 
-    on(DataProcessingActions.resetToOrganizationDataProcessingColumnConfigurationError, (state): DataProcessingState => {
-      return {
-        ...state,
-        lastSeenGridConfig: undefined,
-      };
-    }),
+    on(
+      DataProcessingActions.resetToOrganizationDataProcessingColumnConfigurationSuccess,
+      (state, { response }): DataProcessingState => {
+        return {
+          ...state,
+          lastSeenGridConfig: response,
+        };
+      }
+    ),
 
-    on(DataProcessingActions.initializeDataProcessingLastSeenGridConfigurationSuccess, (state, { response }): DataProcessingState => {
-      return {
-        ...state,
-        lastSeenGridConfig: response,
-      };
-    })
+    on(
+      DataProcessingActions.resetToOrganizationDataProcessingColumnConfigurationError,
+      (state): DataProcessingState => {
+        return {
+          ...state,
+          lastSeenGridConfig: undefined,
+        };
+      }
+    ),
+
+    on(
+      DataProcessingActions.initializeDataProcessingLastSeenGridConfigurationSuccess,
+      (state, { response }): DataProcessingState => {
+        return {
+          ...state,
+          lastSeenGridConfig: response,
+        };
+      }
+    )
   ),
 });

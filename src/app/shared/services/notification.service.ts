@@ -12,6 +12,7 @@ import { LocalOptionTypeActions } from 'src/app/store/local-admin/local-option-t
 import { OrganizationActions } from 'src/app/store/organization/actions';
 import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
+import { UIModuleConfigActions } from 'src/app/store/organization/ui-module-customization/actions';
 import { PopupMessageActions } from 'src/app/store/popup-messages/actions';
 import { UserActions } from 'src/app/store/user-store/actions';
 import { PopupMessageType } from '../enums/popup-message-type';
@@ -362,6 +363,21 @@ export class NotificationService implements OnDestroy {
     this.subscribeMultipleError(
       ofType(ITSystemUsageActions.removeItSystemUsageRoleError, ITContractActions.removeItContractRoleError),
       $localize`Kunne ikke fjerne tildelingen`
+    );
+
+    this.subscribeAsError(
+      ofType(UIModuleConfigActions.getUIModuleConfigError),
+      $localize`Kunne ikke hente lokal tilpasning af brugerfladen`
+    );
+
+    this.subscribeAsError(
+      ofType(UIModuleConfigActions.putUIModuleCustomizationError),
+      $localize`Kunne ikke opdatere lokal tilpasning af brugerfladen`
+    );
+
+    this.subscribeAsDefault(
+      ofType(UIModuleConfigActions.putUIModuleCustomizationSuccess),
+      $localize`Lokal tilpasning af brugerfladen blev opdateret`
     );
   }
 

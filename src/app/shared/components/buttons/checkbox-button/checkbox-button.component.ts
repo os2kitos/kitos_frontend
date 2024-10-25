@@ -3,10 +3,11 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 @Component({
   selector: 'app-checkbox-button',
   templateUrl: './checkbox-button.component.html',
-  styleUrl: './checkbox-button.component.scss'
+  styleUrl: './checkbox-button.component.scss',
 })
 export class CheckboxButtonComponent {
-  value: boolean = false;
+  @Input() value: boolean = false;
+  @Input() disabled: boolean = false;
 
   @Output() valueChange = new EventEmitter<boolean>();
 
@@ -18,5 +19,4 @@ export class CheckboxButtonComponent {
   private emitValue(): void {
     this.valueChange.emit(this.value);
   }
-
 }

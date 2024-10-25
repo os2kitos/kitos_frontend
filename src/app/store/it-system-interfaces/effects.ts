@@ -6,10 +6,10 @@ import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
 import { catchError, combineLatestWith, map, of, switchMap } from 'rxjs';
 import { APIV2ItInterfaceService } from 'src/app/api/v2';
+import { INTERFACE_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-constants';
 import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { adaptITInterface } from 'src/app/shared/models/it-interface/it-interface.model';
 import { OData } from 'src/app/shared/models/odata.model';
-import { INTERFACE_COLUMNS_ID } from 'src/app/shared/persistent-state-constants';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
 import { selectOrganizationUuid } from '../user-store/selectors';
@@ -24,7 +24,7 @@ export class ITInterfaceEffects {
     private httpClient: HttpClient,
     private apiService: APIV2ItInterfaceService,
     private statePersistingService: StatePersistingService
-  ) { }
+  ) {}
 
   getItInterfaces$ = createEffect(() => {
     return this.actions$.pipe(
@@ -129,8 +129,13 @@ export class ITInterfaceEffects {
         return this.apiService.patchSingleItInterfaceV2Patch({ uuid: interfaceUuid, request: itInterface }).pipe(
           map((itInterface) => ITInterfaceActions.updateITInterfaceSuccess(itInterface)),
           catchError((err: HttpErrorResponse) => {
-            if (err.status === 409) { //Name conflict
-              return of(ITInterfaceActions.updateITInterfaceError($localize`Fejl! Feltet kunne ikke ændres da værdien allerede findes i KITOS!`));
+            if (err.status === 409) {
+              //Name conflict
+              return of(
+                ITInterfaceActions.updateITInterfaceError(
+                  $localize`Fejl! Feltet kunne ikke ændres da værdien allerede findes i KITOS!`
+                )
+              );
             } else {
               return of(ITInterfaceActions.updateITInterfaceError()); //Uses default error message
             }

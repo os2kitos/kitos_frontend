@@ -43,7 +43,7 @@ export interface GetManyDeltaFeedV2GetDeletedObjectsRequestParams {
 })
 export class APIV2DeltaFeedService {
 
-    protected basePath = 'https://kitos-dev.strongminds.dk';
+    protected basePath = 'https://localhost:44300';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;

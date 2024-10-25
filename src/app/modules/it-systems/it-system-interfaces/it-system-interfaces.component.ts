@@ -6,10 +6,10 @@ import { Store } from '@ngrx/store';
 import { CellClickEvent } from '@progress/kendo-angular-grid';
 import { combineLatestWith, first } from 'rxjs';
 import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
+import { INTERFACE_COLUMNS_ID, INTERFACE_SECTION_NAME } from 'src/app/shared/constants/persistent-state-constants';
 import { accessModifierOptions } from 'src/app/shared/models/access-modifier.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
-import { INTERFACE_COLUMNS_ID, INTERFACE_SECTION_NAME } from 'src/app/shared/persistent-state-constants';
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import {
@@ -146,7 +146,8 @@ export class ItSystemInterfacesComponent extends BaseOverviewComponent implement
     },
   ];
 
-  constructor(store: Store,
+  constructor(
+    store: Store,
     private router: Router,
     private route: ActivatedRoute,
     private dialog: MatDialog,

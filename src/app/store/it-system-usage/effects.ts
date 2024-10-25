@@ -4,7 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { compact, uniq } from 'lodash';
-import { catchError, combineLatestWith, map, mergeMap, of, switchMap } from 'rxjs';
+import { catchError, combineLatest, combineLatestWith, map, mergeMap, Observable, of, switchMap } from 'rxjs';
 import { APIBusinessRoleDTO, APIV1ItSystemUsageOptionsINTERNALService } from 'src/app/api/v1';
 import {
   APIItSystemUsageResponseDTO,
@@ -13,16 +13,30 @@ import {
   APIV2ItSystemUsageService,
   APIV2OrganizationGridInternalINTERNALService,
 } from 'src/app/api/v2';
+import * as GridFields from 'src/app/shared/constants/it-system-usage-grid-column-constants';
+import { USAGE_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-constants';
 import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { convertDataSensitivityLevelStringToNumberMap } from 'src/app/shared/models/it-system-usage/gdpr/data-sensitivity-level.model';
 import { adaptITSystemUsage } from 'src/app/shared/models/it-system-usage/it-system-usage.model';
 import { OData } from 'src/app/shared/models/odata.model';
+import { UIConfigGridApplication } from 'src/app/shared/models/ui-config/ui-config-grid-application';
 import { YesNoIrrelevantEnum } from 'src/app/shared/models/yes-no-irrelevant.model';
-import { USAGE_COLUMNS_ID } from 'src/app/shared/persistent-state-constants';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ExternalReferencesApiService } from 'src/app/shared/services/external-references-api-service.service';
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
+import { UIConfigService } from 'src/app/shared/services/ui-config.service';
 import { getNewGridColumnsBasedOnConfig } from '../helpers/grid-config-helper';
+import {
+  selectITSystemUsageEnableFrontPageUsagePeriod,
+  selectITSystemUsageEnableGdpr,
+  selectITSystemUsageEnableLifeCycleStatus,
+  selectITSystemUsageEnableLocalReferences,
+  selectITSystemUsageEnableSelectContractToDetermineIfItSystemIsActive,
+  selectITSystemUsageEnableSystemRelations,
+  selectITSystemUsageEnableTabArchiving,
+  selectITSystemUsageEnableTabOrganization,
+  selectITSystemUsageEnableTabSystemRoles,
+} from '../organization/ui-module-customization/selectors';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { ITSystemUsageActions } from './actions';
 import {
@@ -38,6 +52,8 @@ import {
 
 @Injectable()
 export class ITSystemUsageEffects {
+  private readonly RoleColumnsPrefix = 'Roles.Role';
+
   constructor(
     private actions$: Actions,
     private store: Store,
@@ -51,7 +67,8 @@ export class ITSystemUsageEffects {
     @Inject(APIV1ItSystemUsageOptionsINTERNALService)
     private apiItSystemUsageOptionsService: APIV1ItSystemUsageOptionsINTERNALService,
     @Inject(APIV2OrganizationGridInternalINTERNALService)
-    private apiV2organizationalGridInternalService: APIV2OrganizationGridInternalINTERNALService
+    private apiV2organizationalGridInternalService: APIV2OrganizationGridInternalINTERNALService,
+    private uiConfigService: UIConfigService
   ) {}
 
   getItSystemUsages$ = createEffect(() => {
@@ -90,23 +107,141 @@ export class ITSystemUsageEffects {
   updateGridColumns$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.updateGridColumns),
-      map(({ gridColumns }) => {
-        this.statePersistingService.set(USAGE_COLUMNS_ID, gridColumns);
-        return ITSystemUsageActions.updateGridColumnsSuccess(gridColumns);
-      })
+      switchMap((action) =>
+        this.getUIConfigApplications().pipe(
+          map((uiConfigApplications) => {
+            let { gridColumns } = action;
+            gridColumns = this.uiConfigService.applyAllUIConfigToGridColumns(uiConfigApplications, gridColumns);
+
+            this.statePersistingService.set(USAGE_COLUMNS_ID, gridColumns);
+            return ITSystemUsageActions.updateGridColumnsSuccess(gridColumns);
+          })
+        )
+      )
     );
   });
 
   updateGridColumnsAndRoleColumns$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.updateGridColumnsAndRoleColumns),
-      map(({ gridColumns, gridRoleColumns }) => {
-        const columns = gridColumns.concat(gridRoleColumns);
-        this.statePersistingService.set(USAGE_COLUMNS_ID, columns);
-        return ITSystemUsageActions.updateGridColumnsAndRoleColumnsSuccess(columns);
-      })
+      switchMap((action) =>
+        this.getUIConfigApplications().pipe(
+          map((uiConfigApplications) => {
+            const { gridColumns, gridRoleColumns } = action;
+            let allColumns = gridColumns.concat(gridRoleColumns);
+            allColumns = this.uiConfigService.applyAllUIConfigToGridColumns(uiConfigApplications, allColumns);
+
+            this.statePersistingService.set(USAGE_COLUMNS_ID, allColumns);
+            return ITSystemUsageActions.updateGridColumnsSuccess(allColumns);
+          })
+        )
+      )
     );
   });
+
+  private getUIConfigApplications(): Observable<UIConfigGridApplication[]> {
+    const enableLifeCycleStatus$ = this.store.select(selectITSystemUsageEnableLifeCycleStatus);
+    const enableUsagePeriod$ = this.store.select(selectITSystemUsageEnableFrontPageUsagePeriod);
+    const enableSelectContractToDetermineIfItSystemIsActive$ = this.store.select(
+      selectITSystemUsageEnableSelectContractToDetermineIfItSystemIsActive
+    );
+    const enableOrganization$ = this.store.select(selectITSystemUsageEnableTabOrganization);
+    const enableSystemRoles$ = this.store.select(selectITSystemUsageEnableTabSystemRoles);
+    const enableReferences$ = this.store.select(selectITSystemUsageEnableLocalReferences);
+    const enableGdpr$ = this.store.select(selectITSystemUsageEnableGdpr);
+    const enableArchiving$ = this.store.select(selectITSystemUsageEnableTabArchiving);
+    const enableSystemRelations$ = this.store.select(selectITSystemUsageEnableSystemRelations);
+
+    return combineLatest([
+      enableLifeCycleStatus$,
+      enableUsagePeriod$,
+      enableSelectContractToDetermineIfItSystemIsActive$,
+      enableOrganization$,
+      enableSystemRoles$,
+      enableReferences$,
+      enableGdpr$,
+      enableArchiving$,
+      enableSystemRelations$,
+    ]).pipe(
+      map(
+        ([
+          enableLifeCycleStatus,
+          enableUsagePeriod,
+          enableSelectContractToDetermineIfItSystemIsActive,
+          enableOrganization,
+          enableSystemRoles,
+          enableReferences,
+          enableGdpr,
+          enableArchiving,
+          enableSystemRelations,
+        ]): UIConfigGridApplication[] => [
+          {
+            shouldEnable: enableLifeCycleStatus,
+            columnNamesToConfigure: [GridFields.LifeCycleStatus, GridFields.ActiveAccordingToLifeCycle],
+          },
+          {
+            shouldEnable: enableUsagePeriod,
+            columnNamesToConfigure: [
+              GridFields.ExpirationDate,
+              GridFields.Concluded,
+              GridFields.ActiveAccordingToValidityPeriod,
+            ],
+          },
+          {
+            shouldEnable: enableSelectContractToDetermineIfItSystemIsActive,
+            columnNamesToConfigure: [GridFields.MainContractIsActive, GridFields.MainContractSupplierName],
+          },
+          {
+            shouldEnable: enableOrganization,
+            columnNamesToConfigure: [
+              GridFields.ResponsibleOrganizationUnitName,
+              GridFields.RelevantOrganizationUnitNamesAsCsv,
+            ],
+          },
+          {
+            shouldEnable: enableSystemRoles,
+            columnNamesToConfigure: [],
+            columnNameSubstringsToConfigure: [this.RoleColumnsPrefix],
+          },
+          {
+            shouldEnable: enableReferences,
+            columnNamesToConfigure: [GridFields.LocalReferenceTitle, GridFields.LocalReferenceDocumentId],
+          },
+          {
+            shouldEnable: enableGdpr,
+            columnNamesToConfigure: [
+              GridFields.SensitiveDataLevelsAsCsv,
+              GridFields.LocalReferenceDocumentId,
+              GridFields.RiskSupervisionDocumentationName,
+              GridFields.LinkToDirectoryName,
+              GridFields.HostedAt,
+              GridFields.GeneralPurpose,
+              GridFields.DataProcessingRegistrationsConcludedAsCsv,
+              GridFields.DataProcessingRegistrationNamesAsCsv,
+              GridFields.RiskAssessmentDate,
+              GridFields.PlannedRiskAssessmentDate,
+            ],
+          },
+          {
+            shouldEnable: enableArchiving,
+            columnNamesToConfigure: [
+              GridFields.ArchiveDuty,
+              GridFields.IsHoldingDocument,
+              GridFields.ActiveArchivePeriodEndDate,
+            ],
+          },
+          {
+            shouldEnable: enableSystemRelations,
+            columnNamesToConfigure: [
+              GridFields.OutgoingRelatedItSystemUsagesNamesAsCsv,
+              GridFields.DependsOnInterfacesNamesAsCsv,
+              GridFields.IncomingRelatedItSystemUsagesNamesAsCsv,
+            ],
+          },
+        ]
+      )
+    ) as Observable<UIConfigGridApplication[]>;
+  }
 
   getItSystemUsageOverviewRoles = createEffect(() => {
     return this.actions$.pipe(
@@ -246,7 +381,9 @@ export class ITSystemUsageEffects {
             request: { userUuid: userUuid, roleUuid: roleUuid },
           })
           .pipe(
-            map((usage) => ITSystemUsageActions.removeItSystemUsageRoleSuccess(usage, userUuid, roleUuid, itSystemUsageUuid)),
+            map((usage) =>
+              ITSystemUsageActions.removeItSystemUsageRoleSuccess(usage, userUuid, roleUuid, itSystemUsageUuid)
+            ),
             catchError(() => of(ITSystemUsageActions.removeItSystemUsageRoleError()))
           )
       )

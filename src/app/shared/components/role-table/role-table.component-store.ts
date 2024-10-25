@@ -1,19 +1,16 @@
 import { Inject, Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
-import { tapResponse, concatLatestFrom } from '@ngrx/operators';
+import { concatLatestFrom, tapResponse } from '@ngrx/operators';
 
 import { Store } from '@ngrx/store';
 import { Observable, combineLatestWith, map, mergeMap, tap } from 'rxjs';
-import {
-  APIOrganizationUserResponseDTO,
-  APIV2OrganizationService,
-} from 'src/app/api/v2';
+import { APIOrganizationUserResponseDTO, APIV2OrganizationService } from 'src/app/api/v2';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
-import { BOUNDED_PAGINATION_QUERY_MAX_SIZE } from '../../constants';
+import { BOUNDED_PAGINATION_QUERY_MAX_SIZE } from '../../constants/constants';
+import { IRoleAssignment } from '../../models/helpers/read-model-role-assignments';
 import { RoleOptionTypes } from '../../models/options/role-option-types.model';
 import { filterNullish } from '../../pipes/filter-nullish';
 import { RoleOptionTypeService } from '../../services/role-option-type.service';
-import { IRoleAssignment } from '../../models/helpers/read-model-role-assignments';
 
 interface State {
   rolesLoading: boolean;
@@ -82,10 +79,7 @@ export class RoleTableComponentStore extends ComponentStore<State> {
           this.updateRolesIsLoading(true);
           return this.roleOptionTypeService.getEntityRoles(params.entityUuid, params.entityType, orgUuid).pipe(
             tapResponse(
-              (roles) =>
-                this.updateRoles(
-                  roles
-                ),
+              (roles) => this.updateRoles(roles),
               (e) => console.error(e),
               () => this.updateRolesIsLoading(false)
             )

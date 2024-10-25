@@ -5,6 +5,14 @@ import { Store } from '@ngrx/store';
 import { CellClickEvent } from '@progress/kendo-angular-grid';
 import { combineLatestWith, first, Observable } from 'rxjs';
 import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
+import {
+  CATALOG_SECTION_NAME,
+  CONTRACT_SECTION_NAME,
+  DATA_PROCESSING_COLUMNS_ID,
+  DATA_PROCESSING_SECTION_NAME,
+  REFERENCE_SECTION_NAME,
+  SUPERVISION_SECTION_NAME,
+} from 'src/app/shared/constants/persistent-state-constants';
 import { getColumnsToShow } from 'src/app/shared/helpers/grid-config-helper';
 import { isAgreementConcludedOptions } from 'src/app/shared/models/data-processing/is-agreement-concluded.model';
 import { isOversightCompletedOptions } from 'src/app/shared/models/data-processing/is-oversight-completed.model';
@@ -12,7 +20,6 @@ import { transferToInsecureThirdCountriesOptions } from 'src/app/shared/models/d
 import { yearMonthIntervalOptions } from 'src/app/shared/models/data-processing/year-month-interval.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
-import { CATALOG_SECTION_NAME, CONTRACT_SECTION_NAME, DATA_PROCESSING_COLUMNS_ID, DATA_PROCESSING_SECTION_NAME, REFERENCE_SECTION_NAME, SUPERVISION_SECTION_NAME } from 'src/app/shared/persistent-state-constants';
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import {
@@ -90,7 +97,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       title: $localize`IT Systemer`,
       section: CATALOG_SECTION_NAME,
       hidden: false,
-      persistId: 'dpSystemNamesAsCsv'
+      persistId: 'dpSystemNamesAsCsv',
     },
     {
       field: 'MainReferenceUserAssignedId',
@@ -118,7 +125,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       section: DATA_PROCESSING_SECTION_NAME,
       filter: 'numeric',
       hidden: true,
-      persistId: 'dpLastChangedById',//This aswell
+      persistId: 'dpLastChangedById', //This aswell
     },
     {
       field: 'LastChangedAt',
@@ -128,7 +135,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       style: 'date',
       width: 350,
       hidden: true,
-      persistId: 'changed'
+      persistId: 'changed',
     },
     {
       field: 'ContractNamesAsCsv',
@@ -150,7 +157,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       section: CATALOG_SECTION_NAME,
       width: 300,
       hidden: true,
-      persistId: 'itSystemUuid'
+      persistId: 'itSystemUuid',
     },
     {
       field: 'SubDataProcessorNamesAsCsv',
@@ -180,7 +187,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       extraData: 'data-processing-basis-for-transfer-types',
       hidden: true,
       style: 'uuid-to-name',
-      persistId: 'dpBasisForTransfer'
+      persistId: 'dpBasisForTransfer',
     },
     {
       field: 'DataResponsibleUuid',
@@ -191,7 +198,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       extraData: 'data-processing-data-responsible-types',
       hidden: true,
       style: 'uuid-to-name',
-      persistId: 'dpDataResponsible'
+      persistId: 'dpDataResponsible',
     },
     {
       field: 'IsAgreementConcluded',
@@ -201,7 +208,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       extraFilter: 'enum',
       extraData: isAgreementConcludedOptions,
       hidden: true,
-      persistId: 'agreementConcluded'
+      persistId: 'agreementConcluded',
     },
     {
       field: 'AgreementConcludedAt',
@@ -211,7 +218,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       style: 'date',
       width: 350,
       hidden: true,
-      persistId: 'agreementConcludedAt'
+      persistId: 'agreementConcludedAt',
     },
     {
       field: 'OversightInterval',
@@ -221,7 +228,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       extraFilter: 'enum',
       style: 'enum',
       extraData: yearMonthIntervalOptions,
-      persistId: 'oversightInterval'
+      persistId: 'oversightInterval',
     },
     {
       field: 'OversightOptionNamesAsCsv',
@@ -230,7 +237,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       hidden: true,
       extraFilter: 'choice-type-by-name',
       extraData: 'data-processing-oversight-option-types',
-      persistId: 'dpOversightOptionNamesAsCsv'
+      persistId: 'dpOversightOptionNamesAsCsv',
     },
     {
       field: 'IsOversightCompleted',
@@ -240,7 +247,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       extraFilter: 'enum',
       style: 'enum',
       extraData: isOversightCompletedOptions,
-      persistId: 'isOversightCompleted'
+      persistId: 'isOversightCompleted',
     },
     {
       field: 'OversightScheduledInspectionDate',
@@ -250,7 +257,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       filter: 'date',
       style: 'date',
       width: 350,
-      persistId: 'scheduledInspectionDate'
+      persistId: 'scheduledInspectionDate',
     },
     {
       field: 'LatestOversightDate',
@@ -260,7 +267,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       filter: 'date',
       style: 'date',
       width: 350,
-      persistId: 'latestOversightDate'
+      persistId: 'latestOversightDate',
     },
     {
       field: 'LastChangedByName',
@@ -268,7 +275,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       section: DATA_PROCESSING_SECTION_NAME,
       width: 300,
       hidden: true,
-      persistId: 'lastchangedname'
+      persistId: 'lastchangedname',
     },
   ];
 
