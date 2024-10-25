@@ -151,7 +151,7 @@
       formName="responsibleEntityOrganizationUnit"
       (valueChange)="patchFrontPage({ responsible: { organizationUnitUuid: $event } })"
     ></app-org-unit-select>
-    <ng-container *ngIf="contractInternalSignerEnabled$">
+    <ng-container *ngIf="contractInternalSignerEnabled$ | async">
       <app-connected-dropdown
         text="Kontraktunderskriver"
         i18n-text

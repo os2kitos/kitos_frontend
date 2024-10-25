@@ -12,8 +12,8 @@ export const selectUIModuleConfig = createSelector(selectUIModuleCustomizationSt
 
 // eslint-disable-next-line @ngrx/prefix-selectors-with-select
 const createTabEnabledSelector = (module: UIModuleConfigKey, tabKey: string) =>
-  createSelector(selectModuleConfig(module), (itSystemUsageModuleConfig) => {
-    const moduleConfigViewModels = itSystemUsageModuleConfig?.moduleConfigViewModel;
+  createSelector(selectModuleConfig(module), (moduleConfig) => {
+    const moduleConfigViewModels = moduleConfig?.moduleConfigViewModel;
     if (!moduleConfigViewModels) return true;
     const fullKey = [module, tabKey].join('.');
     return tabIsEnabled(moduleConfigViewModels, fullKey);
@@ -21,11 +21,13 @@ const createTabEnabledSelector = (module: UIModuleConfigKey, tabKey: string) =>
 
 // eslint-disable-next-line @ngrx/prefix-selectors-with-select
 const createFieldOrGroupEnabledSelector = (module: UIModuleConfigKey, tabKey: string, fieldKey: string) =>
-  createSelector(selectModuleConfig(module), (itSystemUsageModuleConfig) => {
-    const moduleConfigViewModels = itSystemUsageModuleConfig?.moduleConfigViewModel;
+  createSelector(selectModuleConfig(module), (moduleConfig) => {
+    const moduleConfigViewModels = moduleConfig?.moduleConfigViewModel;
+    console.log('fieldKey', fieldKey);
     if (!moduleConfigViewModels) return true;
 
     const fullKey = [module, tabKey].join('.');
+    console.log('fieldKey', fieldKey);
     return fieldOrGroupIsEnabled(moduleConfigViewModels, fullKey, fieldKey);
   });
 
