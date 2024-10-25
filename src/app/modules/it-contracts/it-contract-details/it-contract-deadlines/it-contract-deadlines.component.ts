@@ -21,7 +21,10 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { selectContract, selectItContractHasModifyPermissions } from 'src/app/store/it-contract/selectors';
-import { selectDataProcessingUIModuleConfigEnabledFieldAgreementDeadlines, selectDataProcessingUIModuleConfigEnabledFieldTermination } from 'src/app/store/organization/ui-module-customization/selectors';
+import {
+  selectItContractsUIModuleConfigEnabledFieldAgreementDeadlines,
+  selectItContractsUIModuleConfigEnabledFieldTermination,
+} from 'src/app/store/organization/ui-module-customization/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 
@@ -64,8 +67,10 @@ export class ItContractDeadlinesComponent extends BaseComponent implements OnIni
     noticeByEndOf: new FormControl<YearSegmentChoice | undefined>({ value: undefined, disabled: true }),
   });
 
-  public readonly agreementDeadlinesEnabled$ = this.store.select(selectDataProcessingUIModuleConfigEnabledFieldAgreementDeadlines);
-  public readonly terminationEnabled$ = this.store.select(selectDataProcessingUIModuleConfigEnabledFieldTermination);
+  public readonly agreementDeadlinesEnabled$ = this.store.select(
+    selectItContractsUIModuleConfigEnabledFieldAgreementDeadlines
+  );
+  public readonly terminationEnabled$ = this.store.select(selectItContractsUIModuleConfigEnabledFieldTermination);
 
   constructor(private readonly store: Store, private readonly notificationService: NotificationService) {
     super();

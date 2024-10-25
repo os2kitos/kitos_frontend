@@ -15,15 +15,34 @@ import {
   APIV2ItContractService,
   APIV2OrganizationGridInternalINTERNALService,
 } from 'src/app/api/v2';
+import * as GridFields from 'src/app/shared/constants/it-contracts-grid-column-constants';
 import { CONTRACT_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-constants';
 import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { adaptITContract } from 'src/app/shared/models/it-contract/it-contract.model';
 import { PaymentTypes } from 'src/app/shared/models/it-contract/payment-types.model';
 import { OData } from 'src/app/shared/models/odata.model';
+import { UIConfigGridApplication } from 'src/app/shared/models/ui-config/ui-config-grid-application';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ExternalReferencesApiService } from 'src/app/shared/services/external-references-api-service.service';
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
+import { UIConfigService } from 'src/app/shared/services/ui-config.service';
 import { getNewGridColumnsBasedOnConfig } from '../helpers/grid-config-helper';
+import {
+  selectItContractsUIModuleConfigEnabledFieldAgreementDeadlines,
+  selectItContractsUIModuleConfigEnabledFieldAgreementPeriod,
+  selectItContractsUIModuleConfigEnabledFieldContractId,
+  selectItContractsUIModuleConfigEnabledFieldContractType,
+  selectItContractsUIModuleConfigEnabledFieldCriticality,
+  selectItContractsUIModuleConfigEnabledFieldExternalPayment,
+  selectItContractsUIModuleConfigEnabledFieldInternalSigner,
+  selectItContractsUIModuleConfigEnabledFieldPaymentModel,
+  selectItContractsUIModuleConfigEnabledFieldProcurementInitiated,
+  selectItContractsUIModuleConfigEnabledFieldProcurementPlan,
+  selectItContractsUIModuleConfigEnabledFieldProcurementStrategy,
+  selectItContractsUIModuleConfigEnabledFieldPurchaseForm,
+  selectItContractsUIModuleConfigEnabledFieldTemplate,
+  selectItContractsUIModuleConfigEnabledFieldTermination,
+} from '../organization/ui-module-customization/selectors';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { ITContractActions } from './actions';
 import {
@@ -36,25 +55,6 @@ import {
   selectItContractUuid,
   selectOverviewContractRoles,
 } from './selectors';
-import { UIConfigService } from 'src/app/shared/services/ui-config.service';
-import { UIConfigGridApplication } from 'src/app/shared/models/ui-config/ui-config-grid-application';
-import {
-  selectDataProcessingUIModuleConfigEnabledFieldAgreementDeadlines,
-  selectDataProcessingUIModuleConfigEnabledFieldAgreementPeriod,
-  selectDataProcessingUIModuleConfigEnabledFieldContractId,
-  selectDataProcessingUIModuleConfigEnabledFieldContractType,
-  selectDataProcessingUIModuleConfigEnabledFieldCriticality,
-  selectDataProcessingUIModuleConfigEnabledFieldExternalPayment,
-  selectDataProcessingUIModuleConfigEnabledFieldInternalSigner,
-  selectDataProcessingUIModuleConfigEnabledFieldPaymentModel,
-  selectDataProcessingUIModuleConfigEnabledFieldProcurementInitiated,
-  selectDataProcessingUIModuleConfigEnabledFieldProcurementPlan,
-  selectDataProcessingUIModuleConfigEnabledFieldProcurementStrategy,
-  selectDataProcessingUIModuleConfigEnabledFieldPurchaseForm,
-  selectDataProcessingUIModuleConfigEnabledFieldTemplate,
-  selectDataProcessingUIModuleConfigEnabledFieldTermination,
-} from '../organization/ui-module-customization/selectors';
-import * as GridFields from 'src/app/shared/constants/it-contracts-grid-column-constants';
 
 @Injectable()
 export class ITContractEffects {
@@ -125,6 +125,7 @@ export class ITContractEffects {
       concatLatestFrom(() => this.getUIConfigApplications()),
       map(([{ gridColumns }, uiConfigApplications]) => {
         gridColumns = this.uiConfigService.applyAllUIConfigToGridColumns(uiConfigApplications, gridColumns);
+
         this.statePersistingService.set(CONTRACT_COLUMNS_ID, gridColumns);
         return ITContractActions.updateGridColumnsSuccess(gridColumns);
       })
@@ -638,26 +639,24 @@ export class ITContractEffects {
   });
 
   private getUIConfigApplications(): Observable<UIConfigGridApplication[]> {
-    const enabledContractId$ = this.store.select(selectDataProcessingUIModuleConfigEnabledFieldContractId);
-    const enabledAgreementPeriod$ = this.store.select(selectDataProcessingUIModuleConfigEnabledFieldAgreementPeriod);
-    const enabledCriticality$ = this.store.select(selectDataProcessingUIModuleConfigEnabledFieldCriticality);
-    const enabledInternalSigner$ = this.store.select(selectDataProcessingUIModuleConfigEnabledFieldInternalSigner);
-    const enabledContractType$ = this.store.select(selectDataProcessingUIModuleConfigEnabledFieldContractType);
-    const enabledContractTemplate$ = this.store.select(selectDataProcessingUIModuleConfigEnabledFieldTemplate);
-    const enabledPurchaseForm$ = this.store.select(selectDataProcessingUIModuleConfigEnabledFieldPurchaseForm);
+    const enabledContractId$ = this.store.select(selectItContractsUIModuleConfigEnabledFieldContractId);
+    const enabledAgreementPeriod$ = this.store.select(selectItContractsUIModuleConfigEnabledFieldAgreementPeriod);
+    const enabledCriticality$ = this.store.select(selectItContractsUIModuleConfigEnabledFieldCriticality);
+    const enabledInternalSigner$ = this.store.select(selectItContractsUIModuleConfigEnabledFieldInternalSigner);
+    const enabledContractType$ = this.store.select(selectItContractsUIModuleConfigEnabledFieldContractType);
+    const enabledContractTemplate$ = this.store.select(selectItContractsUIModuleConfigEnabledFieldTemplate);
+    const enabledPurchaseForm$ = this.store.select(selectItContractsUIModuleConfigEnabledFieldPurchaseForm);
     const enabledProcurementStrategy$ = this.store.select(
-      selectDataProcessingUIModuleConfigEnabledFieldProcurementStrategy
+      selectItContractsUIModuleConfigEnabledFieldProcurementStrategy
     );
-    const enabledProcurementPlan$ = this.store.select(selectDataProcessingUIModuleConfigEnabledFieldProcurementPlan);
+    const enabledProcurementPlan$ = this.store.select(selectItContractsUIModuleConfigEnabledFieldProcurementPlan);
     const enabledProcurementInitiated$ = this.store.select(
-      selectDataProcessingUIModuleConfigEnabledFieldProcurementInitiated
+      selectItContractsUIModuleConfigEnabledFieldProcurementInitiated
     );
-    const enabledExternalPayment$ = this.store.select(selectDataProcessingUIModuleConfigEnabledFieldExternalPayment);
-    const enabledPaymentModel$ = this.store.select(selectDataProcessingUIModuleConfigEnabledFieldPaymentModel);
-    const enabledAgreementDeadlines$ = this.store.select(
-      selectDataProcessingUIModuleConfigEnabledFieldAgreementDeadlines
-    );
-    const enabledTermination$ = this.store.select(selectDataProcessingUIModuleConfigEnabledFieldTermination);
+    const enabledExternalPayment$ = this.store.select(selectItContractsUIModuleConfigEnabledFieldExternalPayment);
+    const enabledPaymentModel$ = this.store.select(selectItContractsUIModuleConfigEnabledFieldPaymentModel);
+    const enabledAgreementDeadlines$ = this.store.select(selectItContractsUIModuleConfigEnabledFieldAgreementDeadlines);
+    const enabledTermination$ = this.store.select(selectItContractsUIModuleConfigEnabledFieldTermination);
 
     return combineLatest([
       enabledContractId$,

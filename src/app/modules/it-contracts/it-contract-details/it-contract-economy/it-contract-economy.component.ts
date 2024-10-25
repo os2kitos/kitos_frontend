@@ -16,7 +16,11 @@ import {
   selectItContractInternalPayments,
   selectItContractPaymentModel,
 } from 'src/app/store/it-contract/selectors';
-import { selectDataProcessingUIModuleConfigEnabledFieldExternalPayment, selectDataProcessingUIModuleConfigEnabledFieldInternalPayment, selectDataProcessingUIModuleConfigEnabledFieldPaymentModel } from 'src/app/store/organization/ui-module-customization/selectors';
+import {
+  selectItContractsUIModuleConfigEnabledFieldExternalPayment,
+  selectItContractsUIModuleConfigEnabledFieldInternalPayment,
+  selectItContractsUIModuleConfigEnabledFieldPaymentModel,
+} from 'src/app/store/organization/ui-module-customization/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 
@@ -47,9 +51,13 @@ export class ItContractEconomyComponent extends BaseComponent implements OnInit 
     priceRegulation: new FormControl<APIIdentityNamePairResponseDTO | undefined>({ value: undefined, disabled: true }),
   });
 
-  public readonly paymentModelEnabled$ = this.store.select(selectDataProcessingUIModuleConfigEnabledFieldPaymentModel);
-  public readonly externalPaymentEnabled$ = this.store.select(selectDataProcessingUIModuleConfigEnabledFieldExternalPayment);
-  public readonly internalPaymentEnabled$ = this.store.select(selectDataProcessingUIModuleConfigEnabledFieldInternalPayment);
+  public readonly paymentModelEnabled$ = this.store.select(selectItContractsUIModuleConfigEnabledFieldPaymentModel);
+  public readonly externalPaymentEnabled$ = this.store.select(
+    selectItContractsUIModuleConfigEnabledFieldExternalPayment
+  );
+  public readonly internalPaymentEnabled$ = this.store.select(
+    selectItContractsUIModuleConfigEnabledFieldInternalPayment
+  );
 
   constructor(private store: Store, private notificationService: NotificationService) {
     super();
