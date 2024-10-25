@@ -116,78 +116,34 @@ export const selectItContractUIModuleConfigEnabledTabAdvis = createItContractsTa
 export const selectItContractUIModuleConfigEnabledTabReferences = createItContractsTabEnabledSelector('references');
 
 //Field selectors
-export const selectItContractsUIModuleConfigEnabledFieldContractId = createFieldOrGroupEnabledSelector(
-  UIModuleConfigKey.ItContract,
-  'frontPage',
-  'contractId'
-);
+const createItContractFrontpageFieldSelector = (fieldKey: string) =>
+  createFieldOrGroupEnabledSelector(UIModuleConfigKey.ItContract, 'frontPage', fieldKey);
 
-export const selectItContractsUIModuleConfigEnabledFieldContractType = createFieldOrGroupEnabledSelector(
-  UIModuleConfigKey.ItContract,
-  'frontPage',
-  'contractType'
-);
+//Frontpage fields
+export const selectItContractsUIModuleConfigEnabledFieldContractId =
+  createItContractFrontpageFieldSelector('contractId');
+export const selectItContractsUIModuleConfigEnabledFieldContractType =
+  createItContractFrontpageFieldSelector('contractType');
+export const selectItContractsUIModuleConfigEnabledFieldTemplate = createItContractFrontpageFieldSelector('template');
+export const selectItContractsUIModuleConfigEnabledFieldCriticality =
+  createItContractFrontpageFieldSelector('criticality');
+export const selectItContractsUIModuleConfigEnabledFieldPurchaseForm =
+  createItContractFrontpageFieldSelector('purchaseForm');
+export const selectItContractsUIModuleConfigEnabledFieldProcurementStrategy =
+  createItContractFrontpageFieldSelector('procurementStrategy');
+export const selectItContractsUIModuleConfigEnabledFieldProcurementPlan =
+  createItContractFrontpageFieldSelector('procurementPlan');
+export const selectItContractsUIModuleConfigEnabledFieldProcurementInitiated =
+  createItContractFrontpageFieldSelector('procurementInitiated');
+export const selectItContractsUIModuleConfigEnabledFieldExternalSigner =
+  createItContractFrontpageFieldSelector('externalSigner');
+export const selectItContractsUIModuleConfigEnabledFieldInternalSigner =
+  createItContractFrontpageFieldSelector('internalSigner');
+export const selectItContractsUIModuleConfigEnabledFieldAgreementPeriod =
+  createItContractFrontpageFieldSelector('agreementPeriod');
+export const selectItContractsUIModuleConfigEnabledFieldIsActive = createItContractFrontpageFieldSelector('isActive');
 
-export const selectItContractsUIModuleConfigEnabledFieldTemplate = createFieldOrGroupEnabledSelector(
-  UIModuleConfigKey.ItContract,
-  'frontPage',
-  'template'
-);
-
-export const selectItContractsUIModuleConfigEnabledFieldCriticality = createFieldOrGroupEnabledSelector(
-  UIModuleConfigKey.ItContract,
-  'frontPage',
-  'criticality'
-);
-
-export const selectItContractsUIModuleConfigEnabledFieldPurchaseForm = createFieldOrGroupEnabledSelector(
-  UIModuleConfigKey.ItContract,
-  'frontPage',
-  'purchaseForm'
-);
-
-export const selectItContractsUIModuleConfigEnabledFieldProcurementStrategy = createFieldOrGroupEnabledSelector(
-  UIModuleConfigKey.ItContract,
-  'frontPage',
-  'procurementStrategy'
-);
-
-export const selectItContractsUIModuleConfigEnabledFieldProcurementPlan = createFieldOrGroupEnabledSelector(
-  UIModuleConfigKey.ItContract,
-  'frontPage',
-  'procurementPlan'
-);
-
-export const selectItContractsUIModuleConfigEnabledFieldProcurementInitiated = createFieldOrGroupEnabledSelector(
-  UIModuleConfigKey.ItContract,
-  'frontPage',
-  'procurementInitiated'
-);
-
-export const selectItContractsUIModuleConfigEnabledFieldExternalSigner = createFieldOrGroupEnabledSelector(
-  UIModuleConfigKey.ItContract,
-  'frontPage',
-  'externalSigner'
-);
-
-export const selectItContractsUIModuleConfigEnabledFieldInternalSigner = createFieldOrGroupEnabledSelector(
-  UIModuleConfigKey.ItContract,
-  'frontPage',
-  'internalSigner'
-);
-
-export const selectItContractsUIModuleConfigEnabledFieldAgreementPeriod = createFieldOrGroupEnabledSelector(
-  UIModuleConfigKey.ItContract,
-  'frontPage',
-  'agreementPeriod'
-);
-
-export const selectItContractsUIModuleConfigEnabledFieldIsActive = createFieldOrGroupEnabledSelector(
-  UIModuleConfigKey.ItContract,
-  'frontPage',
-  'isActive'
-);
-
+//Other fields
 export const selectItContractsUIModuleConfigEnabledFieldAgreementDeadlines = createFieldOrGroupEnabledSelector(
   UIModuleConfigKey.ItContract,
   'deadlines',
