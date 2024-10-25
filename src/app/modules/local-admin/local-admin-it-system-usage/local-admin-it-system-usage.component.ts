@@ -5,6 +5,7 @@ import { SegmentButtonOption } from 'src/app/shared/components/segment/segment.c
 import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
 import { UINodeCustomization } from 'src/app/shared/models/ui-config/ui-node-customization';
 import { NotificationService } from 'src/app/shared/services/notification.service';
+import { OrganizationActions } from 'src/app/store/organization/actions';
 import { UIModuleConfigActions } from 'src/app/store/organization/ui-module-customization/actions';
 import { selectITSystemUsageUIModuleConfig } from 'src/app/store/organization/ui-module-customization/selectors';
 
@@ -37,5 +38,9 @@ export class LocalAdminItSystemUsageComponent {
     this.store.dispatch(
       UIModuleConfigActions.putUIModuleCustomization({ module: this.itSystemUsageModuleKey, updatedNodeRequest: dto })
     );
+  }
+
+  public patchUIRootConfig($event: boolean){
+    this.store.dispatch(OrganizationActions.patchUIRootConfig({ dto: { showItSystemModule: $event }}));
   }
 }
