@@ -14,7 +14,6 @@ import { adaptOrganization } from 'src/app/shared/models/organization/organizati
 import { OData } from 'src/app/shared/models/odata.model';
 import { compact } from 'lodash';
 import { toODataString } from '@progress/kendo-data-query';
-import { UIRootConfigActions } from './ui-root-config/actions';
 import { mapUIRootConfig } from 'src/app/shared/models/ui-config/ui-root-config.model';
 
 @Injectable()
@@ -156,7 +155,7 @@ export class OrganizationEffects {
 
   getUIRootConfig$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(UIRootConfigActions.getUIRootConfig),
+      ofType(OrganizationActions.getUIRootConfig),
       combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       switchMap(([, organizationUuid]) =>
         this.organizationInternalService
@@ -164,9 +163,9 @@ export class OrganizationEffects {
           .pipe(
             map((responseDto) => {
               const uiRootConfig = mapUIRootConfig(responseDto);
-              return UIRootConfigActions.getUIRootConfigSuccess({ uiRootConfig });
+              return OrganizationActions.getUIRootConfigSuccess({ uiRootConfig });
             }),
-            catchError(() => of(UIRootConfigActions.getUIRootConfigError()))
+            catchError(() => of(OrganizationActions.getUIRootConfigError()))
           )
       )
     );
@@ -174,7 +173,7 @@ export class OrganizationEffects {
 
   putUIRootConfig$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(UIRootConfigActions.patchUIRootConfig),
+      ofType(OrganizationActions.patchUIRootConfig),
       combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       switchMap(([dto, organizationUuid]) =>
         this.organizationInternalService
@@ -182,9 +181,9 @@ export class OrganizationEffects {
           .pipe(
             map((responseDto) => {
               const uiRootConfig = mapUIRootConfig(responseDto);
-              return UIRootConfigActions.patchUIRootConfigSuccess({ uiRootConfig });
+              return OrganizationActions.patchUIRootConfigSuccess({ uiRootConfig });
             }),
-            catchError(() => of(UIRootConfigActions.patchUIRootConfigError()))
+            catchError(() => of(OrganizationActions.patchUIRootConfigError()))
           )
       )
     );
