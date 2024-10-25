@@ -1,14 +1,15 @@
-import { Injectable } from '@angular/core';
-import { UIModuleConfigKey } from '../enums/ui-module-config-key';
-import { GridColumn } from '../models/grid-column.model';
-import { ItSystemUsageUiBluePrint } from '../models/ui-config/blueprints/it-system-usages-blueprint';
-import { UIConfigGridApplication } from '../models/ui-config/ui-config-grid-application';
-import { UIConfigNodeViewModel } from '../models/ui-config/ui-config-node-view-model.model';
-import { UIModuleConfig } from '../models/ui-config/ui-module-config.model';
-import { UINodeBlueprint } from '../models/ui-config/ui-node-blueprint.model';
-import { UINodeCustomization } from '../models/ui-config/ui-node-customization';
-import { DataProcessingUiBluePrint } from '../models/ui-config/blueprints/data-processing-blueprint';
-import { ItContractsUiBluePrint } from '../models/ui-config/blueprints/it-contracts-blueprint';
+import { Injectable } from "@angular/core";
+import { UIModuleConfigKey } from "../../enums/ui-module-config-key";
+import { GridColumn } from "../../models/grid-column.model";
+import { DataProcessingUiBluePrint } from "../../models/ui-config/blueprints/data-processing-blueprint";
+import { ItContractsUiBluePrint } from "../../models/ui-config/blueprints/it-contracts-blueprint";
+import { ItSystemUsageUiBluePrint } from "../../models/ui-config/blueprints/it-system-usages-blueprint";
+import { UIConfigGridApplication } from "../../models/ui-config/ui-config-grid-application";
+import { UIConfigNodeViewModel } from "../../models/ui-config/ui-config-node-view-model.model";
+import { UIModuleConfig } from "../../models/ui-config/ui-module-config.model";
+import { UINodeBlueprint } from "../../models/ui-config/ui-node-blueprint.model";
+import { UINodeCustomization } from "../../models/ui-config/ui-node-customization";
+
 
 @Injectable({
   providedIn: 'root',

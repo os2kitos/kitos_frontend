@@ -48,7 +48,7 @@ import {
   selectItContractsEnableTemplate,
   selectItContractsEnableTermination,
 } from 'src/app/store/organization/ui-module-customization/selectors';
-import { UIConfigService } from 'src/app/shared/services/ui-config.service';
+import { UIConfigService } from 'src/app/shared/services/ui-config-services/ui-config.service';
 
 @Component({
   templateUrl: 'it-contracts.component.html',

@@ -24,7 +24,7 @@ import { YesNoIrrelevantEnum } from 'src/app/shared/models/yes-no-irrelevant.mod
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ExternalReferencesApiService } from 'src/app/shared/services/external-references-api-service.service';
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
-import { UIConfigService } from 'src/app/shared/services/ui-config.service';
+import { UIConfigService } from 'src/app/shared/services/ui-config-services/ui-config.service';
 import { getNewGridColumnsBasedOnConfig } from '../helpers/grid-config-helper';
 import {
   selectITSystemUsageEnableFrontPageUsagePeriod,
