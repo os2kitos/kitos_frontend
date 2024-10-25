@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, combineLatestWith, map } from 'rxjs';
-import { DEFAULT_CHANGELOG_SIZE } from 'src/app/shared/constants';
+import { DEFAULT_CHANGELOG_SIZE } from 'src/app/shared/constants/constants';
 import { DropdownOption } from 'src/app/shared/models/dropdown-option.model';
 import { FkOrgChangeLogModel } from 'src/app/shared/models/local-admin/fk-org-change-log.dictionary';
 import { fkOrgChangelogGridColumns } from 'src/app/shared/models/local-admin/fk-org-changelog-columns';
