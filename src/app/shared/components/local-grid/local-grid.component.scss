@@ -9,3 +9,9 @@
   padding: $padding-small;
   padding-top: 0;
 }
+
+:host ::ng-deep {
+  tr {
+    cursor: default !important;
+  }
+}

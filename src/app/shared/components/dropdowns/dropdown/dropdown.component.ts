@@ -10,7 +10,6 @@ import { BaseDropdownComponent } from '../../../base/base-dropdown.component';
   styleUrls: ['dropdown.component.scss'],
 })
 export class DropdownComponent<T> extends BaseDropdownComponent<T | null> implements OnInit, OnChanges {
-  @Input() public includeItemDescription = false;
   @Input() public considerCurrentValueObsoleteIfNotPresentInData = true;
   @Input() public appendTo: string = '';
   @Input() public clearable: boolean = true;
@@ -55,7 +54,7 @@ export class DropdownComponent<T> extends BaseDropdownComponent<T | null> implem
     this.cleared.emit();
   }
 
-  public onBlur(){
+  public onBlur() {
     this.blurEvent.emit();
   }
 

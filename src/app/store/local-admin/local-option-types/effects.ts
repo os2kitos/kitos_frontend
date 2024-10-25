@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { LocalOptionTypeActions } from './actions';
-import { selectOrganizationUuid } from '../user-store/selectors';
-import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { catchError, concatMap, first, groupBy, map, mergeMap, of, switchMap } from 'rxjs';
+import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { LocalOptionTypeService } from 'src/app/shared/services/local-option-type.service';
+import { selectOrganizationUuid } from '../../user-store/selectors';
+import { LocalOptionTypeActions } from './actions';
 
 @Injectable()
 export class LocalOptionTypeEffects {

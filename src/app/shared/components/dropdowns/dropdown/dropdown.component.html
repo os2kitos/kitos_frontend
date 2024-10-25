@@ -20,12 +20,12 @@
     (blur)="onBlur()"
   >
     <ng-template ng-option-tmp let-item="item">
-      <ng-container *ngIf="!includeItemDescription || !item[itemDescriptionField]">
+      <ng-container *ngIf="!showDescription || !item[itemDescriptionField]">
         {{ item[textField] }}
       </ng-container>
-      <div *ngIf="item[itemDescriptionField] && includeItemDescription" class="description">
+      <div *ngIf="item[itemDescriptionField] && showDescription" class="description">
         {{ item[textField] }}
-        <app-paragraph *ngIf="item[itemDescriptionField] && includeItemDescription" paragraphSize="small">{{
+        <app-paragraph *ngIf="item[itemDescriptionField] && showDescription" paragraphSize="small">{{
           item[itemDescriptionField]
         }}</app-paragraph>
       </div>
@@ -55,12 +55,12 @@
   (clear)="onClear()"
 >
   <ng-template ng-option-tmp let-item="item">
-    <ng-container *ngIf="!includeItemDescription || !item[itemDescriptionField]">
+    <ng-container *ngIf="!showDescription || !item[itemDescriptionField]">
       {{ item[textField] }}
     </ng-container>
-    <div *ngIf="item[itemDescriptionField] && includeItemDescription" class="description">
+    <div *ngIf="item[itemDescriptionField] && showDescription" class="description">
       {{ item[textField] }}
-      <app-paragraph *ngIf="item[itemDescriptionField] && includeItemDescription" paragraphSize="small">{{
+      <app-paragraph *ngIf="item[itemDescriptionField] && showDescription" paragraphSize="small">{{
         item[itemDescriptionField]
       }}</app-paragraph>
     </div>

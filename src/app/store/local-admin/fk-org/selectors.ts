@@ -27,6 +27,8 @@ export const selectIsLoadingConnectionStatus = createSelector(
   (state) => state.isLoadingConnectionStatus
 );
 
+export const selectIsDeleteLoading = createSelector(selectFkOrgState, (state) => state.isDeleteLoading);
+
 export const selectSnapshot = createSelector(selectFkOrgState, (state) => state.snapshot);
 export const selectIsSynchronizationDialogLoading = createSelector(
   selectFkOrgState,
@@ -35,3 +37,7 @@ export const selectIsSynchronizationDialogLoading = createSelector(
 export const selectHasSnapshotFailed = createSelector(selectFkOrgState, (state) => state.hasSnapshotFailed);
 
 export const selectUpdateConsequences = createSelector(selectFkOrgState, (state) => state.updateConsequences);
+
+export const selectIsLoadingChangelogs = createSelector(selectFkOrgState, (state) => state.isLoadingChangelogs);
+export const selectAvailableChangeLogs = createSelector(selectFkOrgState, (state) => state.availableChangelogOptions);
+export const selectChangelogDictionary = createSelector(selectFkOrgState, (state) => state.changelogDictionary);
