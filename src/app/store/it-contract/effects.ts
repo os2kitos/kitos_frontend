@@ -4,7 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
-import { catchError, combineLatestWith, map, mergeMap, Observable, of, switchMap } from 'rxjs';
+import { catchError, combineLatest, combineLatestWith, map, mergeMap, Observable, of, switchMap } from 'rxjs';
 import {
   APIContractPaymentsDataResponseDTO,
   APIItContractResponseDTO,
@@ -38,6 +38,23 @@ import {
 } from './selectors';
 import { UIConfigService } from 'src/app/shared/services/ui-config.service';
 import { UIConfigGridApplication } from 'src/app/shared/models/ui-config/ui-config-grid-application';
+import {
+  selectDataProcessingUIModuleConfigEnabledFieldAgreementDeadlines,
+  selectDataProcessingUIModuleConfigEnabledFieldAgreementPeriod,
+  selectDataProcessingUIModuleConfigEnabledFieldContractId,
+  selectDataProcessingUIModuleConfigEnabledFieldContractType,
+  selectDataProcessingUIModuleConfigEnabledFieldCriticality,
+  selectDataProcessingUIModuleConfigEnabledFieldExternalPayment,
+  selectDataProcessingUIModuleConfigEnabledFieldInternalSigner,
+  selectDataProcessingUIModuleConfigEnabledFieldPaymentModel,
+  selectDataProcessingUIModuleConfigEnabledFieldProcurementInitiated,
+  selectDataProcessingUIModuleConfigEnabledFieldProcurementPlan,
+  selectDataProcessingUIModuleConfigEnabledFieldProcurementStrategy,
+  selectDataProcessingUIModuleConfigEnabledFieldPurchaseForm,
+  selectDataProcessingUIModuleConfigEnabledFieldTemplate,
+  selectDataProcessingUIModuleConfigEnabledFieldTermination,
+} from '../organization/ui-module-customization/selectors';
+import * as GridFields from 'src/app/shared/constants/it-contracts-grid-column-constants';
 
 @Injectable()
 export class ITContractEffects {
@@ -621,7 +638,130 @@ export class ITContractEffects {
   });
 
   private getUIConfigApplications(): Observable<UIConfigGridApplication[]> {
-    return of([]);
+    const enabledContractId$ = this.store.select(selectDataProcessingUIModuleConfigEnabledFieldContractId);
+    const enabledAgreementPeriod$ = this.store.select(selectDataProcessingUIModuleConfigEnabledFieldAgreementPeriod);
+    const enabledCriticality$ = this.store.select(selectDataProcessingUIModuleConfigEnabledFieldCriticality);
+    const enabledInternalSigner$ = this.store.select(selectDataProcessingUIModuleConfigEnabledFieldInternalSigner);
+    const enabledContractType$ = this.store.select(selectDataProcessingUIModuleConfigEnabledFieldContractType);
+    const enabledContractTemplate$ = this.store.select(selectDataProcessingUIModuleConfigEnabledFieldTemplate);
+    const enabledPurchaseForm$ = this.store.select(selectDataProcessingUIModuleConfigEnabledFieldPurchaseForm);
+    const enabledProcurementStrategy$ = this.store.select(
+      selectDataProcessingUIModuleConfigEnabledFieldProcurementStrategy
+    );
+    const enabledProcurementPlan$ = this.store.select(selectDataProcessingUIModuleConfigEnabledFieldProcurementPlan);
+    const enabledProcurementInitiated$ = this.store.select(
+      selectDataProcessingUIModuleConfigEnabledFieldProcurementInitiated
+    );
+    const enabledExternalPayment$ = this.store.select(selectDataProcessingUIModuleConfigEnabledFieldExternalPayment);
+    const enabledPaymentModel$ = this.store.select(selectDataProcessingUIModuleConfigEnabledFieldPaymentModel);
+    const enabledAgreementDeadlines$ = this.store.select(selectDataProcessingUIModuleConfigEnabledFieldAgreementDeadlines);
+    const enabledTermination$ = this.store.select(selectDataProcessingUIModuleConfigEnabledFieldTermination);
+
+    return combineLatest([
+      enabledContractId$,
+      enabledAgreementPeriod$,
+      enabledCriticality$,
+      enabledInternalSigner$,
+      enabledContractType$,
+      enabledContractTemplate$,
+      enabledPurchaseForm$,
+      enabledProcurementStrategy$,
+      enabledProcurementPlan$,
+      enabledProcurementInitiated$,
+      enabledExternalPayment$,
+      enabledPaymentModel$,
+      enabledAgreementDeadlines$,
+      enabledTermination$,
+    ]).pipe(
+      map(
+        ([
+          enabledContractId,
+          enabledAgreementPeriod,
+          enabledCriticality,
+          enabledInternalSigner,
+          enabledContractType,
+          enabledContractTemplate,
+          enabledPurchaseForm,
+          enabledProcurementStrategy,
+          enabledProcurementPlan,
+          enabledProcurementInitiated,
+          enabledExternalPayment,
+          enabledPaymentModel,
+          enabledAgreementDeadlines,
+          enabledTermination,
+        ]): UIConfigGridApplication[] => [
+          {
+            shouldEnable: enabledContractId,
+            columnNamesToConfigure: [GridFields.ContractId],
+          },
+          {
+            shouldEnable: enabledAgreementPeriod,
+            columnNamesToConfigure: [GridFields.Concluded, GridFields.ExpirationDate],
+          },
+          {
+            shouldEnable: enabledCriticality,
+            columnNamesToConfigure: [GridFields.CriticalityUuid],
+          },
+          {
+            shouldEnable: enabledInternalSigner,
+            columnNamesToConfigure: [GridFields.ContractSigner],
+          },
+          {
+            shouldEnable: enabledContractType,
+            columnNamesToConfigure: [GridFields.ContractTypeUuid],
+          },
+          {
+            shouldEnable: enabledContractTemplate,
+            columnNamesToConfigure: [GridFields.ContractTemplateUuid],
+          },
+          {
+            shouldEnable: enabledPurchaseForm,
+            columnNamesToConfigure: [GridFields.PurchaseFormUuid],
+          },
+          {
+            shouldEnable: enabledProcurementStrategy,
+            columnNamesToConfigure: [GridFields.ProcurementStrategyUuid],
+          },
+          {
+            shouldEnable: enabledProcurementPlan,
+            columnNamesToConfigure: [GridFields.ProcurementPlanYear],
+          },
+          {
+            shouldEnable: enabledProcurementInitiated,
+            columnNamesToConfigure: [GridFields.ProcurementInitiated],
+          },
+          {
+            shouldEnable: enabledExternalPayment,
+            columnNamesToConfigure: [
+              GridFields.AccumulatedAcquisitionCost,
+              GridFields.AccumulatedOperationCost,
+              GridFields.AccumulatedOtherCost,
+              GridFields.LatestAuditDate,
+              GridFields.AuditStatusWhite,
+              GridFields.AuditStatusYellow,
+              GridFields.AuditStatusRed,
+              GridFields.AuditStatusGreen,
+            ],
+          },
+          {
+            shouldEnable: enabledPaymentModel,
+            columnNamesToConfigure: [
+              GridFields.OperationRemunerationBegunDate,
+              GridFields.PaymentModelUuid,
+              GridFields.PaymentFrequencyUuid,
+            ],
+          },
+          {
+            shouldEnable: enabledAgreementDeadlines,
+            columnNamesToConfigure: [GridFields.Duration, GridFields.OptionExtendUuid, GridFields.IrrevocableTo],
+          },
+          {
+            shouldEnable: enabledTermination,
+            columnNamesToConfigure: [GridFields.TerminationDeadlineUuid, GridFields.TerminatedAt],
+          }
+        ]
+      )
+    );
   }
 }
 
