@@ -28,20 +28,20 @@ import { StatePersistingService } from 'src/app/shared/services/state-persisting
 import { UIConfigService } from 'src/app/shared/services/ui-config.service';
 import { getNewGridColumnsBasedOnConfig } from '../helpers/grid-config-helper';
 import {
-  selectItContractsUIModuleConfigEnabledFieldAgreementDeadlines,
-  selectItContractsUIModuleConfigEnabledFieldAgreementPeriod,
-  selectItContractsUIModuleConfigEnabledFieldContractId,
-  selectItContractsUIModuleConfigEnabledFieldContractType,
-  selectItContractsUIModuleConfigEnabledFieldCriticality,
-  selectItContractsUIModuleConfigEnabledFieldExternalPayment,
-  selectItContractsUIModuleConfigEnabledFieldInternalSigner,
-  selectItContractsUIModuleConfigEnabledFieldPaymentModel,
-  selectItContractsUIModuleConfigEnabledFieldProcurementInitiated,
-  selectItContractsUIModuleConfigEnabledFieldProcurementPlan,
-  selectItContractsUIModuleConfigEnabledFieldProcurementStrategy,
-  selectItContractsUIModuleConfigEnabledFieldPurchaseForm,
-  selectItContractsUIModuleConfigEnabledFieldTemplate,
-  selectItContractsUIModuleConfigEnabledFieldTermination,
+  selectItContractEnableContractId,
+  selectItContractsEnableAgreementDeadlines,
+  selectItContractsEnableAgreementPeriod,
+  selectItContractsEnableContractType,
+  selectItContractsEnableCriticality,
+  selectItContractsEnableExternalPayment,
+  selectItContractsEnableInternalSigner,
+  selectItContractsEnablePaymentModel,
+  selectItContractsEnableProcurementInitiated,
+  selectItContractsEnableProcurementPlan,
+  selectItContractsEnableProcurementStrategy,
+  selectItContractsEnablePurchaseForm,
+  selectItContractsEnableTemplate,
+  selectItContractsEnableTermination,
 } from '../organization/ui-module-customization/selectors';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { ITContractActions } from './actions';
@@ -639,24 +639,20 @@ export class ITContractEffects {
   });
 
   private getUIConfigApplications(): Observable<UIConfigGridApplication[]> {
-    const enabledContractId$ = this.store.select(selectItContractsUIModuleConfigEnabledFieldContractId);
-    const enabledAgreementPeriod$ = this.store.select(selectItContractsUIModuleConfigEnabledFieldAgreementPeriod);
-    const enabledCriticality$ = this.store.select(selectItContractsUIModuleConfigEnabledFieldCriticality);
-    const enabledInternalSigner$ = this.store.select(selectItContractsUIModuleConfigEnabledFieldInternalSigner);
-    const enabledContractType$ = this.store.select(selectItContractsUIModuleConfigEnabledFieldContractType);
-    const enabledContractTemplate$ = this.store.select(selectItContractsUIModuleConfigEnabledFieldTemplate);
-    const enabledPurchaseForm$ = this.store.select(selectItContractsUIModuleConfigEnabledFieldPurchaseForm);
-    const enabledProcurementStrategy$ = this.store.select(
-      selectItContractsUIModuleConfigEnabledFieldProcurementStrategy
-    );
-    const enabledProcurementPlan$ = this.store.select(selectItContractsUIModuleConfigEnabledFieldProcurementPlan);
-    const enabledProcurementInitiated$ = this.store.select(
-      selectItContractsUIModuleConfigEnabledFieldProcurementInitiated
-    );
-    const enabledExternalPayment$ = this.store.select(selectItContractsUIModuleConfigEnabledFieldExternalPayment);
-    const enabledPaymentModel$ = this.store.select(selectItContractsUIModuleConfigEnabledFieldPaymentModel);
-    const enabledAgreementDeadlines$ = this.store.select(selectItContractsUIModuleConfigEnabledFieldAgreementDeadlines);
-    const enabledTermination$ = this.store.select(selectItContractsUIModuleConfigEnabledFieldTermination);
+    const enabledContractId$ = this.store.select(selectItContractEnableContractId);
+    const enabledAgreementPeriod$ = this.store.select(selectItContractsEnableAgreementPeriod);
+    const enabledCriticality$ = this.store.select(selectItContractsEnableCriticality);
+    const enabledInternalSigner$ = this.store.select(selectItContractsEnableInternalSigner);
+    const enabledContractType$ = this.store.select(selectItContractsEnableContractType);
+    const enabledContractTemplate$ = this.store.select(selectItContractsEnableTemplate);
+    const enabledPurchaseForm$ = this.store.select(selectItContractsEnablePurchaseForm);
+    const enabledProcurementStrategy$ = this.store.select(selectItContractsEnableProcurementStrategy);
+    const enabledProcurementPlan$ = this.store.select(selectItContractsEnableProcurementPlan);
+    const enabledProcurementInitiated$ = this.store.select(selectItContractsEnableProcurementInitiated);
+    const enabledExternalPayment$ = this.store.select(selectItContractsEnableExternalPayment);
+    const enabledPaymentModel$ = this.store.select(selectItContractsEnablePaymentModel);
+    const enabledAgreementDeadlines$ = this.store.select(selectItContractsEnableAgreementDeadlines);
+    const enabledTermination$ = this.store.select(selectItContractsEnableTermination);
 
     return combineLatest([
       enabledContractId$,

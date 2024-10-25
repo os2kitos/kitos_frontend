@@ -22,8 +22,8 @@ import { NotificationService } from 'src/app/shared/services/notification.servic
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { selectContract, selectItContractHasModifyPermissions } from 'src/app/store/it-contract/selectors';
 import {
-  selectItContractsUIModuleConfigEnabledFieldAgreementDeadlines,
-  selectItContractsUIModuleConfigEnabledFieldTermination,
+  selectItContractsEnableAgreementDeadlines,
+  selectItContractsEnableTermination,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
@@ -67,10 +67,8 @@ export class ItContractDeadlinesComponent extends BaseComponent implements OnIni
     noticeByEndOf: new FormControl<YearSegmentChoice | undefined>({ value: undefined, disabled: true }),
   });
 
-  public readonly agreementDeadlinesEnabled$ = this.store.select(
-    selectItContractsUIModuleConfigEnabledFieldAgreementDeadlines
-  );
-  public readonly terminationEnabled$ = this.store.select(selectItContractsUIModuleConfigEnabledFieldTermination);
+  public readonly agreementDeadlinesEnabled$ = this.store.select(selectItContractsEnableAgreementDeadlines);
+  public readonly terminationEnabled$ = this.store.select(selectItContractsEnableTermination);
 
   constructor(private readonly store: Store, private readonly notificationService: NotificationService) {
     super();

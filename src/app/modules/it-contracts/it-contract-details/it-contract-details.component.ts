@@ -20,10 +20,10 @@ import {
   selectItContractUuid,
 } from 'src/app/store/it-contract/selectors';
 import {
-  selectItContractUIModuleConfigEnabledTabAdvis,
-  selectItContractUIModuleConfigEnabledTabContractRoles,
-  selectItContractUIModuleConfigEnabledTabDeadlines,
-  selectItContractUIModuleConfigEnabledTabEconomy,
+  selectItContractEnableAdvis,
+  selectItContractEnableContractRoles,
+  selectItContractEnableDeadlines,
+  selectItContractEnableEconomy,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 
 @Component({
@@ -54,10 +54,10 @@ export class ItContractDetailsComponent extends BaseComponent implements OnInit,
     filterNullish()
   );
 
-  public readonly agreementDeadlinesTabEnabled$ = this.store.select(selectItContractUIModuleConfigEnabledTabDeadlines);
-  public readonly economyTabEnabled$ = this.store.select(selectItContractUIModuleConfigEnabledTabEconomy);
-  public readonly contractRolesTabEnabled$ = this.store.select(selectItContractUIModuleConfigEnabledTabContractRoles);
-  public readonly notificationsTabEnabled$ = this.store.select(selectItContractUIModuleConfigEnabledTabAdvis);
+  public readonly agreementDeadlinesTabEnabled$ = this.store.select(selectItContractEnableDeadlines);
+  public readonly economyTabEnabled$ = this.store.select(selectItContractEnableEconomy);
+  public readonly contractRolesTabEnabled$ = this.store.select(selectItContractEnableContractRoles);
+  public readonly notificationsTabEnabled$ = this.store.select(selectItContractEnableAdvis);
 
   public readonly navigationItems: NavigationDrawerItem[] = [
     {

@@ -23,18 +23,18 @@ import {
   selectItContractValidity,
 } from 'src/app/store/it-contract/selectors';
 import {
-  selectItContractsUIModuleConfigEnabledFieldAgreementPeriod,
-  selectItContractsUIModuleConfigEnabledFieldContractId,
-  selectItContractsUIModuleConfigEnabledFieldContractType,
-  selectItContractsUIModuleConfigEnabledFieldCriticality,
-  selectItContractsUIModuleConfigEnabledFieldExternalSigner,
-  selectItContractsUIModuleConfigEnabledFieldInternalSigner,
-  selectItContractsUIModuleConfigEnabledFieldIsActive,
-  selectItContractsUIModuleConfigEnabledFieldProcurementInitiated,
-  selectItContractsUIModuleConfigEnabledFieldProcurementPlan,
-  selectItContractsUIModuleConfigEnabledFieldProcurementStrategy,
-  selectItContractsUIModuleConfigEnabledFieldPurchaseForm,
-  selectItContractsUIModuleConfigEnabledFieldTemplate,
+  selectItContractEnableContractId,
+  selectItContractsEnableAgreementPeriod,
+  selectItContractsEnableContractType,
+  selectItContractsEnableCriticality,
+  selectItContractsEnableExternalSigner,
+  selectItContractsEnableInternalSigner,
+  selectItContractsEnableIsActive,
+  selectItContractsEnableProcurementInitiated,
+  selectItContractsEnableProcurementPlan,
+  selectItContractsEnableProcurementStrategy,
+  selectItContractsEnablePurchaseForm,
+  selectItContractsEnableTemplate,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
@@ -173,43 +173,27 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
     { id: APIContractProcurementDataResponseDTO.ProcurementInitiatedEnum.No, label: 'Nej' },
   ];
 
-  public readonly contractIdEnabled$ = this.store.select(selectItContractsUIModuleConfigEnabledFieldContractId);
-  public readonly contractTypeEnabled$ = this.store.select(selectItContractsUIModuleConfigEnabledFieldContractType);
+  public readonly contractIdEnabled$ = this.store.select(selectItContractEnableContractId);
+  public readonly contractTypeEnabled$ = this.store.select(selectItContractsEnableContractType);
 
-  public readonly contractTemplateEnabled$ = this.store.select(selectItContractsUIModuleConfigEnabledFieldTemplate);
-  public readonly contractCriticalityEnabled$ = this.store.select(
-    selectItContractsUIModuleConfigEnabledFieldCriticality
-  );
-  public readonly contractPurchaseFormEnabled$ = this.store.select(
-    selectItContractsUIModuleConfigEnabledFieldPurchaseForm
-  );
+  public readonly contractTemplateEnabled$ = this.store.select(selectItContractsEnableTemplate);
+  public readonly contractCriticalityEnabled$ = this.store.select(selectItContractsEnableCriticality);
+  public readonly contractPurchaseFormEnabled$ = this.store.select(selectItContractsEnablePurchaseForm);
 
-  public readonly contractProcurementStrategyEnabled$ = this.store.select(
-    selectItContractsUIModuleConfigEnabledFieldProcurementStrategy
-  );
-  public readonly contractProcurementPlanEnabled$ = this.store.select(
-    selectItContractsUIModuleConfigEnabledFieldProcurementPlan
-  );
-  public readonly contractProcurementInitiatedEnabled$ = this.store.select(
-    selectItContractsUIModuleConfigEnabledFieldProcurementInitiated
-  );
+  public readonly contractProcurementStrategyEnabled$ = this.store.select(selectItContractsEnableProcurementStrategy);
+  public readonly contractProcurementPlanEnabled$ = this.store.select(selectItContractsEnableProcurementPlan);
+  public readonly contractProcurementInitiatedEnabled$ = this.store.select(selectItContractsEnableProcurementInitiated);
   public readonly showProcurementCard$ = combineLatest([
     this.contractProcurementStrategyEnabled$,
     this.contractProcurementPlanEnabled$,
     this.contractProcurementInitiatedEnabled$,
   ]).pipe(map(([strategy, plan, initiated]) => strategy || plan || initiated));
 
-  public readonly contractExternalSignerEnabled$ = this.store.select(
-    selectItContractsUIModuleConfigEnabledFieldExternalSigner
-  );
-  public readonly contractInternalSignerEnabled$ = this.store.select(
-    selectItContractsUIModuleConfigEnabledFieldInternalSigner
-  );
+  public readonly contractExternalSignerEnabled$ = this.store.select(selectItContractsEnableExternalSigner);
+  public readonly contractInternalSignerEnabled$ = this.store.select(selectItContractsEnableInternalSigner);
 
-  public readonly contractAgreementPeriodEnabled$ = this.store.select(
-    selectItContractsUIModuleConfigEnabledFieldAgreementPeriod
-  );
-  public readonly contractIsActiveEnabled$ = this.store.select(selectItContractsUIModuleConfigEnabledFieldIsActive);
+  public readonly contractAgreementPeriodEnabled$ = this.store.select(selectItContractsEnableAgreementPeriod);
+  public readonly contractIsActiveEnabled$ = this.store.select(selectItContractsEnableIsActive);
 
   constructor(
     private readonly store: Store,
