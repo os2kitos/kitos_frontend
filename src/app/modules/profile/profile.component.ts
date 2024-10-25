@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { OrganizationActions } from 'src/app/store/organization/actions';
+import { BaseModuleComponent } from 'src/app/shared/base/base-module-component';
 
 @Component({
   templateUrl: 'profile.component.html',
   styleUrls: ['profile.component.scss'],
 })
-export class ProfileComponent {
-  constructor(private store: Store) {
-    this.store.dispatch(OrganizationActions.getUIRootConfig());
+export class ProfileComponent extends BaseModuleComponent {
+  constructor(store: Store) {
+    super(store);
   }
 }

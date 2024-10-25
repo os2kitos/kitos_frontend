@@ -1,19 +1,19 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { BaseModuleComponent } from 'src/app/shared/base/base-module-component';
 import { NavigationDrawerItem } from 'src/app/shared/components/navigation-drawer/navigation-drawer.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
-import { OrganizationActions } from 'src/app/store/organization/actions';
 
 @Component({
   selector: 'app-local-admin',
   templateUrl: './local-admin.component.html',
   styleUrl: './local-admin.component.scss',
 })
-export class LocalAdminComponent {
+export class LocalAdminComponent extends BaseModuleComponent {
   public readonly AppPath = AppPath;
 
-  constructor(private store: Store) {
-    this.store.dispatch(OrganizationActions.getUIRootConfig());
+  constructor(store: Store) {
+    super(store);
   }
 
   public readonly items: NavigationDrawerItem[] = [
