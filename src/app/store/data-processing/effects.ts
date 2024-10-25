@@ -28,7 +28,7 @@ import { ExternalReferencesApiService } from 'src/app/shared/services/external-r
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
 import { UIConfigService } from 'src/app/shared/services/ui-config.service';
 import { getNewGridColumnsBasedOnConfig } from '../helpers/grid-config-helper';
-import { selectDprEnableMainContract } from '../organization/ui-module-customization/selectors';
+import { selectDprEnableMainContract, selectDprEnableRoles } from '../organization/ui-module-customization/selectors';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { DataProcessingActions } from './actions';
 import {
@@ -652,14 +652,20 @@ export class DataProcessingEffects {
 
   private getUIConfigApplications(): Observable<UIConfigGridApplication[]> {
     const mainContract$ = this.store.select(selectDprEnableMainContract);
+    const dprRolesEnabled$ = this.store.select(selectDprEnableRoles);
 
-    return combineLatest([mainContract$]).pipe(
-      map(([mainContractEnabled]): UIConfigGridApplication[] => {
+    return combineLatest([mainContract$, dprRolesEnabled$]).pipe(
+      map(([mainContractEnabled, dprRolesEnabled]): UIConfigGridApplication[] => {
         return [
           {
             shouldEnable: mainContractEnabled,
             columnNamesToConfigure: [GridFields.ActiveAccordingToMainContract],
           },
+          {
+            shouldEnable: dprRolesEnabled,
+            columnNamesToConfigure: [],
+            columnNameSubstringsToConfigure: ['Roles.Role']
+          }
         ];
       })
     );
