@@ -6,7 +6,7 @@ import { initializeApplyFilterSubscription } from 'src/app/shared/helpers/grid-f
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
 import { AppBaseFilterCellComponent } from '../app-base-filter-cell.component';
 
-export interface DropdownOption {
+export interface FilterDropdownOption {
   name: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   value: any;
@@ -22,10 +22,10 @@ export class DropdownFilterComponent extends AppBaseFilterCellComponent implemen
   @Input() override column!: ColumnComponent;
   @Input() public entityType!: RegistrationEntityTypes;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  @Input() options!: DropdownOption[];
+  @Input() options!: FilterDropdownOption[];
   @Input() searchByNames = false;
 
-  public chosenOption?: DropdownOption;
+  public chosenOption?: FilterDropdownOption;
 
   constructor(filterService: FilterService, private actions$: Actions) {
     super(filterService);
@@ -46,7 +46,7 @@ export class DropdownFilterComponent extends AppBaseFilterCellComponent implemen
     }
   }
 
-  public didChange(option?: DropdownOption | null): void {
+  public didChange(option?: FilterDropdownOption | null): void {
     this.applyFilter(
       option === undefined || option === null
         ? this.removeFilter(this.column.field)

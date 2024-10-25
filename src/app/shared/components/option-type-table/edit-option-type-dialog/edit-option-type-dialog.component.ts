@@ -3,7 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { LocalOptionType, LocalOptionTypeItem } from 'src/app/shared/models/options/local-option-type.model';
-import { LocalOptionTypeActions } from 'src/app/store/local-option-types/actions';
+import { LocalOptionTypeActions } from 'src/app/store/local-admin/local-option-types/actions';
 
 @Component({
   selector: 'app-edit-option-type-dialog',
@@ -19,10 +19,7 @@ export class EditOptionTypeDialogComponent implements OnInit {
     active: new FormControl<boolean | undefined>(undefined),
   });
 
-  constructor(
-    private dialogRef: MatDialogRef<EditOptionTypeDialogComponent>,
-    private store: Store
-  ) {}
+  constructor(private dialogRef: MatDialogRef<EditOptionTypeDialogComponent>, private store: Store) {}
 
   public ngOnInit(): void {
     this.form.patchValue({

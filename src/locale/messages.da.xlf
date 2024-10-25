@@ -5488,12 +5488,12 @@
         <target state="new"> For at lette den administrative byrde har du derfor følgende muligheder: </target>
       </trans-unit>
       <trans-unit id="7974948161058774051" datatype="html">
-        <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Slet ubrugte organisationseneheder:<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> Vælges denne mulighed slettes alle organisationseneheder (fra FK Organisation), hvortil der ikke er knyttet en registrering. De resterende konverteres til KITOS enheder. </source>
-        <target state="new"><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Slet ubrugte organisationseneheder:<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> Vælges denne mulighed slettes alle organisationseneheder (fra FK Organisation), hvortil der ikke er knyttet en registrering. De resterende konverteres til KITOS enheder. </target>
+        <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="rong&gt;"/>Slet ubrugte organisationseneheder:<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> Vælges denne mulighed slettes alle organisationseneheder (fra FK Organisation), hvortil der ikke er knyttet en registrering. De resterende konverteres til KITOS enheder. </source>
+        <target state="new"><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="rong&gt;"/>Slet ubrugte organisationseneheder:<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> Vælges denne mulighed slettes alle organisationseneheder (fra FK Organisation), hvortil der ikke er knyttet en registrering. De resterende konverteres til KITOS enheder. </target>
       </trans-unit>
       <trans-unit id="1677749166597841894" datatype="html">
-        <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Bevar organisationshierarkiet:<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> Vælges denne mulighed konverteres alle organisationsenheder fra FK Organisation til KITOS enheder. </source>
-        <target state="new"><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Bevar organisationshierarkiet:<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> Vælges denne mulighed konverteres alle organisationsenheder fra FK Organisation til KITOS enheder. </target>
+        <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="rong&gt;"/>Bevar organisationshierarkiet:<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> Vælges denne mulighed konverteres alle organisationsenheder fra FK Organisation til KITOS enheder. </source>
+        <target state="new"><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="rong&gt;"/>Bevar organisationshierarkiet:<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> Vælges denne mulighed konverteres alle organisationsenheder fra FK Organisation til KITOS enheder. </target>
       </trans-unit>
       <trans-unit id="2874747510585928254" datatype="html">
         <source>Slet ubrugte organisationseneheder</source>
@@ -5507,9 +5507,9 @@
         <source>Bryd forbindelsen til FK Organisation </source>
         <target state="new">Bryd forbindelsen til FK Organisation </target>
       </trans-unit>
-      <trans-unit id="8637911288264886213" datatype="html">
-        <source>Forbindelse til FK Organisation blev fjernet</source>
-        <target state="new">Forbindelse til FK Organisation blev fjernet</target>
+      <trans-unit id="8687060481958208529" datatype="html">
+        <source>Forbindelsen til FK Organisation blev fjernet</source>
+        <target state="new">Forbindelsen til FK Organisation blev fjernet</target>
       </trans-unit>
       <trans-unit id="4666153646055232970" datatype="html">
         <source>Kunne ikke slette forbindelsen til Fk Organisation</source>
@@ -5518,6 +5518,30 @@
       <trans-unit id="1662852159171017043" datatype="html">
         <source>Automatisk import af opdateringer kunne ikke deaktiveres</source>
         <target state="new">Automatisk import af opdateringer kunne ikke deaktiveres</target>
+      </trans-unit>
+      <trans-unit id="3370220902364794755" datatype="html">
+        <source>Vælg</source>
+        <target state="new">Vælg</target>
+      </trans-unit>
+      <trans-unit id="7573538989231182498" datatype="html">
+        <source>Ansvarlig</source>
+        <target state="new">Ansvarlig</target>
+      </trans-unit>
+      <trans-unit id="722963325915684738" datatype="html">
+        <source>Antal opdateringer</source>
+        <target state="new">Antal opdateringer</target>
+      </trans-unit>
+      <trans-unit id="5306417827115981705" datatype="html">
+        <source>Fk Organisation</source>
+        <target state="new">Fk Organisation</target>
+      </trans-unit>
+      <trans-unit id="366548457191932489" datatype="html">
+        <source>Ændringslog</source>
+        <target state="new">Ændringslog</target>
+      </trans-unit>
+      <trans-unit id="4163400354274832244" datatype="html">
+        <source>Ændringer ifm. de seneste fem import operationer der indeholdte ændringer</source>
+        <target state="new">Ændringer ifm. de seneste fem import operationer der indeholdte ændringer</target>
       </trans-unit>
     </body>
   </file>

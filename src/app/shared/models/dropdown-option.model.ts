@@ -1,13 +1,19 @@
 import { APIOrganizationUserResponseDTO, APIRoleOptionResponseDTO } from 'src/app/api/v2';
 import { NO_TEXT, YES_TEXT } from '../constants';
 
-export interface DropdownOption {
+export interface DropdownOption<T> {
+  value: T;
+  name: string;
+  description?: string;
+}
+
+export interface RoleDropdownOption {
   uuid: string;
   name: string;
   description?: string;
 }
 
-export const mapUserToOption = (user: APIOrganizationUserResponseDTO): DropdownOption => {
+export const mapUserToOption = (user: APIOrganizationUserResponseDTO): RoleDropdownOption => {
   return {
     uuid: user.uuid,
     name: user.name,
@@ -15,7 +21,7 @@ export const mapUserToOption = (user: APIOrganizationUserResponseDTO): DropdownO
   };
 };
 
-export const mapRoleToDropdownOptions = (role: APIRoleOptionResponseDTO): DropdownOption => {
+export const mapRoleToDropdownOptions = (role: APIRoleOptionResponseDTO): RoleDropdownOption => {
   return {
     uuid: role.uuid,
     name: role.name,

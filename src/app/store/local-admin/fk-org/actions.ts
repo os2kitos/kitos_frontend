@@ -2,6 +2,7 @@ import { createActionGroup, emptyProps } from '@ngrx/store';
 import {
   APIConnectionUpdateConsequencesResponseDTO,
   APIConnectToStsOrganizationRequestDTO,
+  APIStsOrganizationChangeLogResponseDTO,
   APIStsOrganizationOrgUnitDTO,
   APIStsOrganizationSynchronizationDetailsResponseDTO,
 } from 'src/app/api/v2';
@@ -41,5 +42,9 @@ export const FkOrgActions = createActionGroup({
     'Delete Connection': (purgeUnusedExternalUnits: boolean) => ({ purgeUnusedExternalUnits }),
     'Delete Connection Success': emptyProps(),
     'Delete Connection Error': emptyProps(),
+
+    'Get Changelog': (numberOfChangeLogs: number) => ({ numberOfChangeLogs }),
+    'Get Changelog Success': (changelogs: APIStsOrganizationChangeLogResponseDTO[]) => ({ changelogs }),
+    'Get Changelog Error': emptyProps(),
   },
 });

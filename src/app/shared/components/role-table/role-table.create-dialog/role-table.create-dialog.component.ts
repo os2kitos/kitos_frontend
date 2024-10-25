@@ -8,7 +8,11 @@ import { Store } from '@ngrx/store';
 import { Subject, map } from 'rxjs';
 import { APIOrganizationUserResponseDTO, APIRoleOptionResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import { DropdownOption, mapRoleToDropdownOptions, mapUserToOption } from 'src/app/shared/models/dropdown-option.model';
+import {
+  RoleDropdownOption,
+  mapRoleToDropdownOptions,
+  mapUserToOption,
+} from 'src/app/shared/models/dropdown-option.model';
 import { IRoleAssignment } from 'src/app/shared/models/helpers/read-model-role-assignments';
 import { RoleOptionTypes } from 'src/app/shared/models/options/role-option-types.model';
 import { Dictionary } from 'src/app/shared/models/primitives/dictionary.model';
@@ -50,7 +54,7 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
   );
   public readonly isLoading$ = this.componentStore.usersIsLoading$;
 
-  public roles$ = new Subject<Array<DropdownOption>>();
+  public roles$ = new Subject<Array<RoleDropdownOption>>();
   public selectedUserUuid$ = new Subject<string>();
 
   public readonly selectUserResultIsLimited$ = this.componentStore.selectUserResultIsLimited$;

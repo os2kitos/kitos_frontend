@@ -1,16 +1,16 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Actions } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { ColumnComponent, FilterService } from '@progress/kendo-angular-grid';
 import { CompositeFilterDescriptor, FilterDescriptor } from '@progress/kendo-data-query';
 import { first, map, Observable } from 'rxjs';
+import { initializeApplyFilterSubscription } from 'src/app/shared/helpers/grid-filter.helpers';
 import { RegularOptionType } from 'src/app/shared/models/options/regular-option-types.model';
+import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 import { AppBaseFilterCellComponent } from '../app-base-filter-cell.component';
-import { DropdownOption } from '../dropdown-filter/dropdown-filter.component';
-import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
-import { Actions } from '@ngrx/effects';
-import { initializeApplyFilterSubscription } from 'src/app/shared/helpers/grid-filter.helpers';
+import { FilterDropdownOption } from '../dropdown-filter/dropdown-filter.component';
 
 @Component({
   selector: 'app-choice-type-dropdown-filter',
@@ -25,9 +25,9 @@ export class ChoiceTypeDropdownFilterComponent extends AppBaseFilterCellComponen
   @Input() sortOptions?: boolean;
   @Input() entityType!: RegistrationEntityTypes;
 
-  public options$: Observable<DropdownOption[]> | undefined;
+  public options$: Observable<FilterDropdownOption[]> | undefined;
 
-  public chosenOption?: DropdownOption;
+  public chosenOption?: FilterDropdownOption;
 
   constructor(filterService: FilterService, private store: Store, private actions$: Actions) {
     super(filterService);
@@ -54,7 +54,7 @@ export class ChoiceTypeDropdownFilterComponent extends AppBaseFilterCellComponen
     initializeApplyFilterSubscription(this.actions$, this.entityType, this.column.field, updateMethod);
   }
 
-  private applySorting(options: DropdownOption[], sortOptions: boolean | undefined): DropdownOption[] {
+  private applySorting(options: FilterDropdownOption[], sortOptions: boolean | undefined): FilterDropdownOption[] {
     if (!sortOptions) {
       return options;
     }
@@ -80,7 +80,7 @@ export class ChoiceTypeDropdownFilterComponent extends AppBaseFilterCellComponen
     });
   }
 
-  public didChange(option?: DropdownOption | null): void {
+  public didChange(option?: FilterDropdownOption | null): void {
     const filterValue = this.shouldFilterByChoiceTypeName ? option?.name : option?.value;
     this.applyFilter(
       option === undefined || option === null

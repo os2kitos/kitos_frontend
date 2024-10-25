@@ -5,11 +5,9 @@ import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, first, map } from 'rxjs';
 import { APIStsOrganizationOrgUnitDTO } from 'src/app/api/v2';
-import { ItSystemHierarchyTableComponentStore } from 'src/app/modules/it-systems/shared/it-system-hierarchy-table/it-system-hierarchy-table.component-store';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { mapFkOrgSnapshotUnits } from 'src/app/shared/helpers/hierarchy.helpers';
-import { GridColumn } from 'src/app/shared/models/grid-column.model';
-import { fkOrgConnectionChangeTypeChoiceOptions } from 'src/app/shared/models/local-admin/connection-change-type.model';
+import { fkOrgChangelogGridColumns } from 'src/app/shared/models/local-admin/fk-org-changelog-columns';
 import { EntityTreeNode } from 'src/app/shared/models/structure/entity-tree-node.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { GridExportActions } from 'src/app/store/grid/actions';
@@ -26,7 +24,6 @@ import {
   selector: 'app-fk-org-write-dialog',
   templateUrl: './fk-org-write-dialog.component.html',
   styleUrl: './fk-org-write-dialog.component.scss',
-  providers: [ItSystemHierarchyTableComponentStore],
 })
 export class FkOrgWriteDialogComponent extends BaseComponent implements OnInit {
   @Input() isEdit: boolean = false;
@@ -59,25 +56,7 @@ export class FkOrgWriteDialogComponent extends BaseComponent implements OnInit {
     })
   );
 
-  public readonly gridColumns: GridColumn[] = [
-    {
-      field: 'name',
-      title: $localize`Organisationsenhed`,
-      hidden: false,
-    },
-    {
-      field: 'category',
-      title: $localize`Ændring`,
-      hidden: false,
-      extraFilter: 'enum',
-      extraData: fkOrgConnectionChangeTypeChoiceOptions,
-    },
-    {
-      field: 'description',
-      title: $localize`Beskrivelse`,
-      hidden: false,
-    },
-  ];
+  public readonly gridColumns = fkOrgChangelogGridColumns;
 
   constructor(
     private readonly store: Store,
