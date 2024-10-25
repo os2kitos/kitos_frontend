@@ -5,6 +5,7 @@ import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { combineLatest, distinctUntilChanged, filter, map } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { NavigationDrawerItem } from 'src/app/shared/components/navigation-drawer/navigation-drawer.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { BreadCrumb } from 'src/app/shared/models/breadcrumbs/breadcrumb.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
@@ -20,20 +21,19 @@ import {
 } from 'src/app/store/it-system-usage/selectors';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
 import {
-  selectITSystemUsageUIModuleConfigEnabledTabArchiving,
-  selectITSystemUsageUIModuleConfigEnabledTabGdpr,
-  selectITSystemUsageUIModuleConfigEnabledTabHierarchy,
-  selectITSystemUsageUIModuleConfigEnabledTabInterfaces,
-  selectITSystemUsageUIModuleConfigEnabledTabLocalKle,
-  selectITSystemUsageUIModuleConfigEnabledTabLocalReferences,
-  selectITSystemUsageUIModuleConfigEnabledTabNotifications,
-  selectITSystemUsageUIModuleConfigEnabledTabOrganization,
-  selectITSystemUsageUIModuleConfigEnabledTabSystemRelations,
-  selectITSystemUsageUIModuleConfigEnabledTabSystemRoles,
+  selectITSystemUsageEnableGdpr,
+  selectITSystemUsageEnableLocalReferences,
+  selectITSystemUsageEnableSystemRelations,
+  selectITSystemUsageEnableTabArchiving,
+  selectITSystemUsageEnableTabHierarchy,
+  selectITSystemUsageEnableTabInterfaces,
+  selectITSystemUsageEnableTabLocalKle,
+  selectITSystemUsageEnableTabNotifications,
+  selectITSystemUsageEnableTabOrganization,
+  selectITSystemUsageEnableTabSystemRoles,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { selectOrganizationName } from 'src/app/store/user-store/selectors';
 import { ITSystemUsageRemoveComponent } from './it-system-usage-remove/it-system-usage-remove.component';
-import { NavigationDrawerItem } from 'src/app/shared/components/navigation-drawer/navigation-drawer.component';
 
 @Component({
   templateUrl: 'it-system-usage-details.component.html',
@@ -48,44 +48,36 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
   public readonly itSystemUsageUuid$ = this.store.select(selectItSystemUsageUuid).pipe(filterNullish());
   public readonly hasDeletePermissions$ = this.store.select(selectITSystemUsageHasDeletePermission);
 
-  public readonly enableGdprTab$ = this.store
-    .select(selectITSystemUsageUIModuleConfigEnabledTabGdpr)
-    .pipe(filterNullish());
+  public readonly enableGdprTab$ = this.store.select(selectITSystemUsageEnableGdpr).pipe(filterNullish());
 
   public readonly enableSystemRolesTab$ = this.store
-    .select(selectITSystemUsageUIModuleConfigEnabledTabSystemRoles)
+    .select(selectITSystemUsageEnableTabSystemRoles)
     .pipe(filterNullish());
 
   public readonly enableOrganizationTab$ = this.store
-    .select(selectITSystemUsageUIModuleConfigEnabledTabOrganization)
+    .select(selectITSystemUsageEnableTabOrganization)
     .pipe(filterNullish());
 
   public readonly enableSystemRelationsTab$ = this.store
-    .select(selectITSystemUsageUIModuleConfigEnabledTabSystemRelations)
+    .select(selectITSystemUsageEnableSystemRelations)
     .pipe(filterNullish());
 
   public readonly enableInterfacesTab$ = this.store
-    .select(selectITSystemUsageUIModuleConfigEnabledTabInterfaces)
+    .select(selectITSystemUsageEnableTabInterfaces)
     .pipe(filterNullish());
 
-  public readonly enableArchivingTab$ = this.store
-    .select(selectITSystemUsageUIModuleConfigEnabledTabArchiving)
-    .pipe(filterNullish());
+  public readonly enableArchivingTab$ = this.store.select(selectITSystemUsageEnableTabArchiving).pipe(filterNullish());
 
-  public readonly enableHierarchyTab$ = this.store
-    .select(selectITSystemUsageUIModuleConfigEnabledTabHierarchy)
-    .pipe(filterNullish());
+  public readonly enableHierarchyTab$ = this.store.select(selectITSystemUsageEnableTabHierarchy).pipe(filterNullish());
 
-  public readonly enableLocalKleTab$ = this.store
-    .select(selectITSystemUsageUIModuleConfigEnabledTabLocalKle)
-    .pipe(filterNullish());
+  public readonly enableLocalKleTab$ = this.store.select(selectITSystemUsageEnableTabLocalKle).pipe(filterNullish());
 
   public readonly enableNotificationsTab$ = this.store
-    .select(selectITSystemUsageUIModuleConfigEnabledTabNotifications)
+    .select(selectITSystemUsageEnableTabNotifications)
     .pipe(filterNullish());
 
   public readonly enableLocalReferencesTab$ = this.store
-    .select(selectITSystemUsageUIModuleConfigEnabledTabLocalReferences)
+    .select(selectITSystemUsageEnableLocalReferences)
     .pipe(filterNullish());
 
   public readonly breadCrumbs$ = combineLatest([
@@ -174,7 +166,7 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
       label: $localize`Advis`,
       iconType: 'notification',
       route: AppPath.notifications,
-      enabled: this.enableNotificationsTab$
+      enabled: this.enableNotificationsTab$,
     },
     {
       label: $localize`Lokale referencer`,
@@ -183,7 +175,6 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
       enabled: this.enableLocalReferencesTab$,
     },
   ];
-
 
   constructor(
     private route: ActivatedRoute,

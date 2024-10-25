@@ -15,7 +15,6 @@ import {
 } from 'src/app/api/v2';
 import * as GridFields from 'src/app/shared/constants/it-system-usage-grid-column-constants';
 import { USAGE_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-constants';
-import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { convertDataSensitivityLevelStringToNumberMap } from 'src/app/shared/models/it-system-usage/gdpr/data-sensitivity-level.model';
 import { adaptITSystemUsage } from 'src/app/shared/models/it-system-usage/it-system-usage.model';
@@ -25,17 +24,18 @@ import { YesNoIrrelevantEnum } from 'src/app/shared/models/yes-no-irrelevant.mod
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ExternalReferencesApiService } from 'src/app/shared/services/external-references-api-service.service';
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
+import { UIConfigService } from 'src/app/shared/services/ui-config.service';
 import { getNewGridColumnsBasedOnConfig } from '../helpers/grid-config-helper';
 import {
-  selectITSystemUsageUIModuleConfigEnabledFieldContractsSelectContractToDetermineIfItSystemIsActive,
-  selectITSystemUsageUIModuleConfigEnabledFieldFrontPageLifeCycleStatus,
-  selectITSystemUsageUIModuleConfigEnabledFieldFrontPageUsagePeriod,
-  selectITSystemUsageUIModuleConfigEnabledTabArchiving,
-  selectITSystemUsageUIModuleConfigEnabledTabGdpr,
-  selectITSystemUsageUIModuleConfigEnabledTabLocalReferences,
-  selectITSystemUsageUIModuleConfigEnabledTabOrganization,
-  selectITSystemUsageUIModuleConfigEnabledTabSystemRelations,
-  selectITSystemUsageUIModuleConfigEnabledTabSystemRoles,
+  selectITSystemUsageEnableFrontPageUsagePeriod,
+  selectITSystemUsageEnableGdpr,
+  selectITSystemUsageEnableLifeCycleStatus,
+  selectITSystemUsageEnableLocalReferences,
+  selectITSystemUsageEnableSelectContractToDetermineIfItSystemIsActive,
+  selectITSystemUsageEnableSystemRelations,
+  selectITSystemUsageEnableTabArchiving,
+  selectITSystemUsageEnableTabOrganization,
+  selectITSystemUsageEnableTabSystemRoles,
 } from '../organization/ui-module-customization/selectors';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { ITSystemUsageActions } from './actions';
@@ -49,7 +49,6 @@ import {
   selectOverviewSystemRoles,
   selectUsageGridColumns,
 } from './selectors';
-import { UIConfigService } from 'src/app/shared/services/ui-config.service';
 
 @Injectable()
 export class ITSystemUsageEffects {
@@ -141,19 +140,17 @@ export class ITSystemUsageEffects {
   });
 
   private getUIConfigApplications(): Observable<UIConfigGridApplication[]> {
-    const enableLifeCycleStatus$ = this.store.select(
-      selectITSystemUsageUIModuleConfigEnabledFieldFrontPageLifeCycleStatus
-    );
-    const enableUsagePeriod$ = this.store.select(selectITSystemUsageUIModuleConfigEnabledFieldFrontPageUsagePeriod);
+    const enableLifeCycleStatus$ = this.store.select(selectITSystemUsageEnableLifeCycleStatus);
+    const enableUsagePeriod$ = this.store.select(selectITSystemUsageEnableFrontPageUsagePeriod);
     const enableSelectContractToDetermineIfItSystemIsActive$ = this.store.select(
-      selectITSystemUsageUIModuleConfigEnabledFieldContractsSelectContractToDetermineIfItSystemIsActive
+      selectITSystemUsageEnableSelectContractToDetermineIfItSystemIsActive
     );
-    const enableOrganization$ = this.store.select(selectITSystemUsageUIModuleConfigEnabledTabOrganization);
-    const enableSystemRoles$ = this.store.select(selectITSystemUsageUIModuleConfigEnabledTabSystemRoles);
-    const enableReferences$ = this.store.select(selectITSystemUsageUIModuleConfigEnabledTabLocalReferences);
-    const enableGdpr$ = this.store.select(selectITSystemUsageUIModuleConfigEnabledTabGdpr);
-    const enableArchiving$ = this.store.select(selectITSystemUsageUIModuleConfigEnabledTabArchiving);
-    const enableSystemRelations$ = this.store.select(selectITSystemUsageUIModuleConfigEnabledTabSystemRelations);
+    const enableOrganization$ = this.store.select(selectITSystemUsageEnableTabOrganization);
+    const enableSystemRoles$ = this.store.select(selectITSystemUsageEnableTabSystemRoles);
+    const enableReferences$ = this.store.select(selectITSystemUsageEnableLocalReferences);
+    const enableGdpr$ = this.store.select(selectITSystemUsageEnableGdpr);
+    const enableArchiving$ = this.store.select(selectITSystemUsageEnableTabArchiving);
+    const enableSystemRelations$ = this.store.select(selectITSystemUsageEnableSystemRelations);
 
     return combineLatest([
       enableLifeCycleStatus$,

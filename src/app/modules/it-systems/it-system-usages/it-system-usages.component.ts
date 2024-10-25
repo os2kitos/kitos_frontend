@@ -6,6 +6,7 @@ import { CellClickEvent } from '@progress/kendo-angular-grid';
 import { combineLatestWith, first } from 'rxjs';
 import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
 import { BooleanValueDisplayType } from 'src/app/shared/components/status-chip/status-chip.component';
+import * as GridFields from 'src/app/shared/constants/it-system-usage-grid-column-constants';
 import {
   ARCHIVE_SECTION_NAME,
   CONTRACT_SECTION_NAME,
@@ -37,11 +38,10 @@ import {
   selectUsageGridRoleColumns,
 } from 'src/app/store/it-system-usage/selectors';
 import {
-  selectITSystemUsageUIModuleConfigEnabledFieldFrontPageLifeCycleStatus,
-  selectITSystemUsageUIModuleConfigEnabledFieldFrontPageUsagePeriod,
+  selectITSystemUsageEnableFrontPageUsagePeriod,
+  selectITSystemUsageEnableLifeCycleStatus,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { selectGridConfigModificationPermission, selectOrganizationName } from 'src/app/store/user-store/selectors';
-import * as GridFields from 'src/app/shared/constants/it-system-usage-grid-column-constants';
 
 @Component({
   templateUrl: 'it-system-usages.component.html',
@@ -503,12 +503,8 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     },
   ];
 
-  public readonly enableLifeCycleStatus$ = this.store.select(
-    selectITSystemUsageUIModuleConfigEnabledFieldFrontPageLifeCycleStatus
-  );
-  public readonly enableUsagePeriod$ = this.store.select(
-    selectITSystemUsageUIModuleConfigEnabledFieldFrontPageUsagePeriod
-  );
+  public readonly enableLifeCycleStatus$ = this.store.select(selectITSystemUsageEnableLifeCycleStatus);
+  public readonly enableUsagePeriod$ = this.store.select(selectITSystemUsageEnableFrontPageUsagePeriod);
 
   constructor(
     store: Store,
