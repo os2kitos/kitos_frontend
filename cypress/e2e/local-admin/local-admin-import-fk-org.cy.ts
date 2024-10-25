@@ -11,6 +11,11 @@ describe('local-admin.fk-org', () => {
     cy.intercept('api/v2/internal/organizations/*/sts-organization-synchronization/snapshot', {
       fixture: './local-admin/fk-org/snapshot.json',
     });
+    cy.intercept(
+      'api/v2/internal/organizations/*/sts-organization-synchronization/connection/change-log?numberOfChangeLogs=*',
+      { fixture: './local-admin/fk-org/changelog.json' }
+    );
+
     cy.setup(true);
   });
 
@@ -86,6 +91,24 @@ describe('local-admin.fk-org', () => {
     cy.getByDataCy('confirm-button').click();
 
     cy.getByDataCy('delete-sts-auto-update').should('not.exist');
+  });
+
+  it('can view changelog', () => {
+    cy.intercept('api/v2/internal/organizations/*/sts-organization-synchronization/connection-status', {
+      fixture: './local-admin/fk-org/existing-connection-status.json',
+    });
+
+    goToImport();
+
+    cy.getByDataCy('changelog-accordion').click();
+
+    cy.dropdownByCy('select-changelog-dropdown', '24-10-2024', true);
+
+    cy.contains('Automatisk oprettet testbruger (GlobalAdmin)');
+    cy.contains('test@kitos.dk');
+
+    cy.get('app-local-grid').should('exist');
+    cy.contains('Unit 1');
   });
 });
 

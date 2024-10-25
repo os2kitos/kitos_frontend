@@ -1,5 +1,5 @@
 <app-dialog title="Bryd forbindelsen til FK Organisation" i18n-title data-cy="confirm-dialog">
-  <app-standard-vertical-content-grid class="confirmation-container">
+  <app-standard-vertical-content-grid class="confirmation-container" *ngIf="(isDeleteLoading$ | async) === false">
     <app-paragraph paragraphSize="medium" i18n
       >Brydes forbindelsen til FK Organisation vil alle organisationsenheder, som er importeret fra FK Organisation,
       blive konverteret til KITOS enheder.</app-paragraph
@@ -28,17 +28,26 @@
       </app-paragraph>
     </div>
   </app-standard-vertical-content-grid>
+  <app-loading *ngIf="(isDeleteLoading$ | async) === true"></app-loading>
   <app-dialog-actions>
-    <app-button buttonStyle="secondary" (buttonClick)="cancel()">Annuller</app-button>
+    <app-button buttonStyle="secondary" (buttonClick)="cancel()" i18n [disabled]="(isDeleteLoading$ | async) === true"
+      >Annuller</app-button
+    >
     <app-button
       color="warn"
       buttonStyle="secondary"
       (buttonClick)="deleteConnection(true)"
       data-cy="remove-connection-with-units-button"
       i18n
+      [disabled]="(isDeleteLoading$ | async) === true"
       >Slet ubrugte organisationseneheder</app-button
     >
-    <app-button color="warn" (buttonClick)="deleteConnection(false)" data-cy="remove-connection-button" i18n
+    <app-button
+      color="warn"
+      (buttonClick)="deleteConnection(false)"
+      data-cy="remove-connection-button"
+      i18n
+      [disabled]="(isDeleteLoading$ | async) === true"
       >Bevar organisationshierarkiet</app-button
     >
   </app-dialog-actions>

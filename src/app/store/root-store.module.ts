@@ -20,7 +20,7 @@ import { KLEEffects } from './kle/effects';
 import { kleFeature } from './kle/reducer';
 import { FkOrgEffects } from './local-admin/fk-org/effects';
 import { fkOrgFeature } from './local-admin/fk-org/reducer';
-import { LocalOptionTypeEffects } from './local-option-types/effects';
+import { LocalOptionTypeEffects } from './local-admin/local-option-types/effects';
 import { exportReadyMetaReducer } from './meta/grid-export.reducer';
 import { localStorageSyncReducer } from './meta/local-storage-sync.reducer';
 import { resetReducer } from './meta/reset.reducer';

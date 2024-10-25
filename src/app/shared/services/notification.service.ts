@@ -8,7 +8,7 @@ import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
 import { FkOrgActions } from 'src/app/store/local-admin/fk-org/actions';
-import { LocalOptionTypeActions } from 'src/app/store/local-option-types/actions';
+import { LocalOptionTypeActions } from 'src/app/store/local-admin/local-option-types/actions';
 import { OrganizationActions } from 'src/app/store/organization/actions';
 import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
@@ -375,7 +375,7 @@ export class NotificationService implements OnDestroy {
       $localize`Kunne ikke opdatere lokal tilpasning af brugerfladen`
     );
 
-    this.subscribeAsError(
+    this.subscribeAsDefault(
       ofType(UIModuleConfigActions.putUIModuleCustomizationSuccess),
       $localize`Lokal tilpasning af brugerfladen blev opdateret`
     );

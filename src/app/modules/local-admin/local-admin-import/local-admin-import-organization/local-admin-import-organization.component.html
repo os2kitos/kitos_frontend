@@ -20,8 +20,12 @@
       <app-paragraph helpTextKey="local-config-fk-org-sync-status.label" [bold]="true" i18n
         >Synkronisering</app-paragraph
       >
-      <ng-container *ngIf="synchronizationStatus$ | async as synchronizationStatus">
-        <app-native-table *ngIf="isConnected$ | async" [withOutline]="true" class="table-margin">
+      <app-standard-vertical-content-grid *ngIf="isConnected$ | async">
+        <app-native-table
+          *ngIf="synchronizationStatus$ | async as synchronizationStatus"
+          [withOutline]="true"
+          class="table-margin"
+        >
           <thead>
             <th width="33%" i18n>Niveauer der synkroniseres</th>
             <th width="33%" i18n>Tjekker automatisk (hver mandag nat) efter ventende opdateringer</th>
@@ -66,7 +70,8 @@
             </tr>
           </tbody>
         </app-native-table>
-      </ng-container>
+        <app-fk-org-changelog></app-fk-org-changelog>
+      </app-standard-vertical-content-grid>
       <app-paragraph i18n *ngIf="(isConnected$ | async) === false"
         >Organisationen er <strong>ikke</strong> forbundet til FK Organisation</app-paragraph
       >

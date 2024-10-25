@@ -1,12 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
+import { filter } from 'rxjs';
+import { LocalOptionTypeActions } from 'src/app/store/local-admin/local-option-types/actions';
 import { BaseComponent } from '../../base/base.component';
 import { LocalOptionType, LocalOptionTypeItem } from '../../models/options/local-option-type.model';
 import { EditOptionTypeDialogComponent } from './edit-option-type-dialog/edit-option-type-dialog.component';
 import { OptionTypeTableComponentStore } from './option-type-table.component-store';
-import { LocalOptionTypeActions } from 'src/app/store/local-option-types/actions';
-import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-option-type-table',
