@@ -100,51 +100,20 @@ export const selectITSystemUsageEnableGdprPlannedRiskAssessmentDate = createFiel
 );
 
 //IT contracts
+const createItContractsTabEnabledSelector = (tabKey: string) =>
+  createTabEnabledSelector(UIModuleConfigKey.ItContract, tabKey);
 //Tab selectors
-export const selectItContractUIModuleConfigEnabledTabFrontpage = createTabEnabledSelector(
-  UIModuleConfigKey.ItContract,
-  'frontPage'
-);
-
-export const selectItContractUIModuleConfigEnabledTabItSystems = createTabEnabledSelector(
-  UIModuleConfigKey.ItContract,
-  'itSystems'
-);
-
-export const selectItContractUIModuleConfigEnabledTabDataProcessing = createTabEnabledSelector(
-  UIModuleConfigKey.ItContract,
-  'dataProcessing'
-);
-
-export const selectItContractUIModuleConfigEnabledTabDeadlines = createTabEnabledSelector(
-  UIModuleConfigKey.ItContract,
-  'deadlines'
-);
-
-export const selectItContractUIModuleConfigEnabledTabEconomy = createTabEnabledSelector(
-  UIModuleConfigKey.ItContract,
-  'economy'
-);
-
-export const selectItContractUIModuleConfigEnabledTabContractRoles = createTabEnabledSelector(
-  UIModuleConfigKey.ItContract,
-  'contractRoles'
-);
-
-export const selectItContractUIModuleConfigEnabledTabHierarchy = createTabEnabledSelector(
-  UIModuleConfigKey.ItContract,
-  'hierarchy'
-);
-
-export const selectItContractUIModuleConfigEnabledTabAdvis = createTabEnabledSelector(
-  UIModuleConfigKey.ItContract,
-  'advice'
-);
-
-export const selectItContractUIModuleConfigEnabledTabReferences = createTabEnabledSelector(
-  UIModuleConfigKey.ItContract,
-  'references'
-);
+export const selectItContractUIModuleConfigEnabledTabFrontpage = createItContractsTabEnabledSelector('frontPage');
+export const selectItContractUIModuleConfigEnabledTabItSystems = createItContractsTabEnabledSelector('itSystems');
+export const selectItContractUIModuleConfigEnabledTabDataProcessing =
+  createItContractsTabEnabledSelector('dataProcessing');
+export const selectItContractUIModuleConfigEnabledTabDeadlines = createItContractsTabEnabledSelector('deadlines');
+export const selectItContractUIModuleConfigEnabledTabEconomy = createItContractsTabEnabledSelector('economy');
+export const selectItContractUIModuleConfigEnabledTabContractRoles =
+  createItContractsTabEnabledSelector('contractRoles');
+export const selectItContractUIModuleConfigEnabledTabHierarchy = createItContractsTabEnabledSelector('hierarchy');
+export const selectItContractUIModuleConfigEnabledTabAdvis = createItContractsTabEnabledSelector('advice');
+export const selectItContractUIModuleConfigEnabledTabReferences = createItContractsTabEnabledSelector('references');
 
 //Field selectors
 export const selectItContractsUIModuleConfigEnabledFieldContractId = createFieldOrGroupEnabledSelector(
