@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { CellClickEvent } from '@progress/kendo-angular-grid';
-import { combineLatest, combineLatestWith, first, map, Observable } from 'rxjs';
+import { combineLatestWith, first } from 'rxjs';
 import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
 import {
   AGREEMENT_DEADLINES_SECTION_NAME,
@@ -14,7 +14,7 @@ import {
   ECONOMY_SECTION_NAME,
   REFERENCE_SECTION_NAME,
 } from 'src/app/shared/constants/persistent-state-constants';
-import { filterGridColumnsByUIConfig, getColumnsToShow } from 'src/app/shared/helpers/grid-config-helper';
+import { getColumnsToShow } from 'src/app/shared/helpers/grid-config-helper';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { yesNoOptions } from 'src/app/shared/models/yes-no.model';
@@ -31,24 +31,7 @@ import {
 } from 'src/app/store/it-contract/selectors';
 import { selectGridConfigModificationPermission } from 'src/app/store/user-store/selectors';
 import * as GridFields from 'src/app/shared/constants/it-contracts-grid-column-constants';
-import { UIConfigGridApplication } from 'src/app/shared/models/ui-config/ui-config-grid-application';
-import {
-  selectItContractEnableContractId,
-  selectItContractsEnableAgreementDeadlines,
-  selectItContractsEnableAgreementPeriod,
-  selectItContractsEnableContractType,
-  selectItContractsEnableCriticality,
-  selectItContractsEnableExternalPayment,
-  selectItContractsEnableInternalSigner,
-  selectItContractsEnablePaymentModel,
-  selectItContractsEnableProcurementInitiated,
-  selectItContractsEnableProcurementPlan,
-  selectItContractsEnableProcurementStrategy,
-  selectItContractsEnablePurchaseForm,
-  selectItContractsEnableTemplate,
-  selectItContractsEnableTermination,
-} from 'src/app/store/organization/ui-module-customization/selectors';
-import { UIConfigService } from 'src/app/shared/services/ui-config-services/ui-config.service';
+import { ItContractUIConfigService } from 'src/app/shared/services/ui-config-services/it-contract-ui-config.service';
 
 @Component({
   templateUrl: 'it-contracts.component.html',
@@ -58,11 +41,9 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
   public readonly isLoading$ = this.store.select(selectContractGridLoading);
   public readonly gridData$ = this.store.select(selectContractGridData);
   public readonly gridState$ = this.store.select(selectContractGridState);
-  public readonly gridColumns$ = this.store.select(selectContractGridColumns).pipe(
-    combineLatestWith(this.getUIConfigApplications()),
-    map(([gridColumns, uiConfig]) => this.uiConfigService.applyAllUIConfigToGridColumns(uiConfig, gridColumns)),
-    filterGridColumnsByUIConfig()
-  );
+  public readonly gridColumns$ = this.store
+    .select(selectContractGridColumns)
+    .pipe(this.itContractUiService.ApplyItContractConfigToGridColumns());
   public readonly hasCreatePermission$ = this.store.select(selectItContractHasCollectionCreatePermissions);
 
   public readonly hasConfigModificationPermissions$ = this.store.select(selectGridConfigModificationPermission);
@@ -74,7 +55,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
     private route: ActivatedRoute,
     private actions$: Actions,
     private statePersistingService: StatePersistingService,
-    private uiConfigService: UIConfigService
+    private itContractUiService: ItContractUIConfigService
   ) {
     super(store, 'it-contract');
   }
@@ -520,128 +501,5 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
   }
   override rowIdSelect(event: CellClickEvent) {
     super.rowIdSelect(event, this.router, this.route);
-  }
-
-  private getUIConfigApplications(): Observable<UIConfigGridApplication[]> {
-    const enabledContractId$ = this.store.select(selectItContractEnableContractId);
-    const enabledAgreementPeriod$ = this.store.select(selectItContractsEnableAgreementPeriod);
-    const enabledCriticality$ = this.store.select(selectItContractsEnableCriticality);
-    const enabledInternalSigner$ = this.store.select(selectItContractsEnableInternalSigner);
-    const enabledContractType$ = this.store.select(selectItContractsEnableContractType);
-    const enabledContractTemplate$ = this.store.select(selectItContractsEnableTemplate);
-    const enabledPurchaseForm$ = this.store.select(selectItContractsEnablePurchaseForm);
-    const enabledProcurementStrategy$ = this.store.select(selectItContractsEnableProcurementStrategy);
-    const enabledProcurementPlan$ = this.store.select(selectItContractsEnableProcurementPlan);
-    const enabledProcurementInitiated$ = this.store.select(selectItContractsEnableProcurementInitiated);
-    const enabledExternalPayment$ = this.store.select(selectItContractsEnableExternalPayment);
-    const enabledPaymentModel$ = this.store.select(selectItContractsEnablePaymentModel);
-    const enabledAgreementDeadlines$ = this.store.select(selectItContractsEnableAgreementDeadlines);
-    const enabledTermination$ = this.store.select(selectItContractsEnableTermination);
-
-    return combineLatest([
-      enabledContractId$,
-      enabledAgreementPeriod$,
-      enabledCriticality$,
-      enabledInternalSigner$,
-      enabledContractType$,
-      enabledContractTemplate$,
-      enabledPurchaseForm$,
-      enabledProcurementStrategy$,
-      enabledProcurementPlan$,
-      enabledProcurementInitiated$,
-      enabledExternalPayment$,
-      enabledPaymentModel$,
-      enabledAgreementDeadlines$,
-      enabledTermination$,
-    ]).pipe(
-      map(
-        ([
-          enabledContractId,
-          enabledAgreementPeriod,
-          enabledCriticality,
-          enabledInternalSigner,
-          enabledContractType,
-          enabledContractTemplate,
-          enabledPurchaseForm,
-          enabledProcurementStrategy,
-          enabledProcurementPlan,
-          enabledProcurementInitiated,
-          enabledExternalPayment,
-          enabledPaymentModel,
-          enabledAgreementDeadlines,
-          enabledTermination,
-        ]): UIConfigGridApplication[] => [
-          {
-            shouldEnable: enabledContractId,
-            columnNamesToConfigure: [GridFields.ContractId],
-          },
-          {
-            shouldEnable: enabledAgreementPeriod,
-            columnNamesToConfigure: [GridFields.Concluded, GridFields.ExpirationDate],
-          },
-          {
-            shouldEnable: enabledCriticality,
-            columnNamesToConfigure: [GridFields.CriticalityUuid],
-          },
-          {
-            shouldEnable: enabledInternalSigner,
-            columnNamesToConfigure: [GridFields.ContractSigner],
-          },
-          {
-            shouldEnable: enabledContractType,
-            columnNamesToConfigure: [GridFields.ContractTypeUuid],
-          },
-          {
-            shouldEnable: enabledContractTemplate,
-            columnNamesToConfigure: [GridFields.ContractTemplateUuid],
-          },
-          {
-            shouldEnable: enabledPurchaseForm,
-            columnNamesToConfigure: [GridFields.PurchaseFormUuid],
-          },
-          {
-            shouldEnable: enabledProcurementStrategy,
-            columnNamesToConfigure: [GridFields.ProcurementStrategyUuid],
-          },
-          {
-            shouldEnable: enabledProcurementPlan,
-            columnNamesToConfigure: [GridFields.ProcurementPlanYear],
-          },
-          {
-            shouldEnable: enabledProcurementInitiated,
-            columnNamesToConfigure: [GridFields.ProcurementInitiated],
-          },
-          {
-            shouldEnable: enabledExternalPayment,
-            columnNamesToConfigure: [
-              GridFields.AccumulatedAcquisitionCost,
-              GridFields.AccumulatedOperationCost,
-              GridFields.AccumulatedOtherCost,
-              GridFields.LatestAuditDate,
-              GridFields.AuditStatusWhite,
-              GridFields.AuditStatusYellow,
-              GridFields.AuditStatusRed,
-              GridFields.AuditStatusGreen,
-            ],
-          },
-          {
-            shouldEnable: enabledPaymentModel,
-            columnNamesToConfigure: [
-              GridFields.OperationRemunerationBegunDate,
-              GridFields.PaymentModelUuid,
-              GridFields.PaymentFrequencyUuid,
-            ],
-          },
-          {
-            shouldEnable: enabledAgreementDeadlines,
-            columnNamesToConfigure: [GridFields.Duration, GridFields.OptionExtendUuid, GridFields.IrrevocableTo],
-          },
-          {
-            shouldEnable: enabledTermination,
-            columnNamesToConfigure: [GridFields.TerminationDeadlineUuid, GridFields.TerminatedAt],
-          },
-        ]
-      )
-    );
   }
 }
