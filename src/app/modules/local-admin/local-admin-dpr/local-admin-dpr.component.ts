@@ -18,7 +18,7 @@ enum LocalAdminDprSegmentOption {
 export class LocalAdminDprComponent {
   public readonly LocalAdminDprSegmentOption = LocalAdminDprSegmentOption;
 
-  public selectedSegment: LocalAdminDprSegmentOption = LocalAdminDprSegmentOption.RegularOptionTypes;
+  public selectedSegment: LocalAdminDprSegmentOption = LocalAdminDprSegmentOption.UiCustomization;
 
   public readonly segmentOptions: SegmentButtonOption<LocalAdminDprSegmentOption>[] = [
     { text: $localize`Lokal tilpasning af brugerfladen`, value: LocalAdminDprSegmentOption.UiCustomization },
