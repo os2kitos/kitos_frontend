@@ -22,7 +22,6 @@ const createFieldOrGroupEnabledSelector = (module: UIModuleConfigKey, tabKey: st
     if (!moduleConfigViewModels) return true;
 
     const fullKey = [module, tabKey].join('.');
-    console.log('fieldKey', fieldKey);
     return fieldOrGroupIsEnabled(moduleConfigViewModels, fullKey, fieldKey);
   });
 
