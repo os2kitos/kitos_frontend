@@ -5,6 +5,7 @@ import { OrganizationMasterDataRoles } from 'src/app/shared/models/organization/
 import { OrganizationMasterData } from 'src/app/shared/models/organization/organization-master-data/organization-master-data.model';
 import { OrganizationPermissions } from 'src/app/shared/models/organization/organization-permissions.model';
 import { Organization } from 'src/app/shared/models/organization/organization.model';
+import { UIRootConfig } from 'src/app/shared/models/ui-config/ui-root-config.model';
 
 export interface OrganizationState extends EntityState<Organization> {
   total: number;
@@ -15,4 +16,6 @@ export interface OrganizationState extends EntityState<Organization> {
   organizationMasterData: OrganizationMasterData | null;
   organizationMasterDataRoles: OrganizationMasterDataRoles | null;
   permissions: OrganizationPermissions | null | undefined;
+
+  uiRootConfig: UIRootConfig | null;
 }

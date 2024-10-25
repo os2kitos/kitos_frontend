@@ -14,6 +14,8 @@ import { adaptOrganization } from 'src/app/shared/models/organization/organizati
 import { OData } from 'src/app/shared/models/odata.model';
 import { compact } from 'lodash';
 import { toODataString } from '@progress/kendo-data-query';
+import { UIRootConfigActions } from './ui-root-config/actions';
+import { mapUIRootConfig } from 'src/app/shared/models/ui-config/ui-root-config.model';
 
 @Injectable()
 export class OrganizationEffects {
@@ -151,7 +153,44 @@ export class OrganizationEffects {
       )
     );
   });
+
+  getUIRootConfig$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(UIRootConfigActions.getUIRootConfig),
+      combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+      switchMap(([, organizationUuid]) =>
+        this.organizationInternalService
+          .getSingleOrganizationsInternalV2GetUIRootConfig({ organizationUuid })
+          .pipe(
+            map((responseDto) => {
+              const uiRootConfig = mapUIRootConfig(responseDto);
+              return UIRootConfigActions.getUIRootConfigSuccess({ uiRootConfig });
+            }),
+            catchError(() => of(UIRootConfigActions.getUIRootConfigError()))
+          )
+      )
+    );
+  });
+
+  putUIRootConfig$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(UIRootConfigActions.patchUIRootConfig),
+      combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+      switchMap(([dto, organizationUuid]) =>
+        this.organizationInternalService
+          .patchSingleOrganizationsInternalV2PatchUIRootConfig({ dto, organizationUuid })
+          .pipe(
+            map((responseDto) => {
+              const uiRootConfig = mapUIRootConfig(responseDto);
+              return UIRootConfigActions.patchUIRootConfigSuccess({ uiRootConfig });
+            }),
+            catchError(() => of(UIRootConfigActions.patchUIRootConfigError()))
+          )
+      )
+    );
+  });
 }
+
 function applyQueryFixes(odataString: string) {
   return odataString.replaceAll('ForeignBusiness', 'ForeignCvr').replaceAll('OrganizationType', 'TypeId');
 }
