@@ -654,7 +654,9 @@ export class ITContractEffects {
     );
     const enabledExternalPayment$ = this.store.select(selectDataProcessingUIModuleConfigEnabledFieldExternalPayment);
     const enabledPaymentModel$ = this.store.select(selectDataProcessingUIModuleConfigEnabledFieldPaymentModel);
-    const enabledAgreementDeadlines$ = this.store.select(selectDataProcessingUIModuleConfigEnabledFieldAgreementDeadlines);
+    const enabledAgreementDeadlines$ = this.store.select(
+      selectDataProcessingUIModuleConfigEnabledFieldAgreementDeadlines
+    );
     const enabledTermination$ = this.store.select(selectDataProcessingUIModuleConfigEnabledFieldTermination);
 
     return combineLatest([
@@ -758,7 +760,7 @@ export class ITContractEffects {
           {
             shouldEnable: enabledTermination,
             columnNamesToConfigure: [GridFields.TerminationDeadlineUuid, GridFields.TerminatedAt],
-          }
+          },
         ]
       )
     );
