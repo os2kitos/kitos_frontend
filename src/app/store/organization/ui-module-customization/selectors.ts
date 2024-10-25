@@ -39,32 +39,16 @@ export const selectITSystemUsageUIModuleConfig = selectModuleConfig(UIModuleConf
 export const selectDataProcessingUIModuleConfig = selectModuleConfig(UIModuleConfigKey.DataProcessingRegistrations);
 
 //Data processing
+const createDprTabEnabledSelector = (tabKey: string) =>
+  createTabEnabledSelector(UIModuleConfigKey.DataProcessingRegistrations, tabKey);
 //Tab selectors
-export const selectDprEnableFrontPage = createTabEnabledSelector(
-  UIModuleConfigKey.DataProcessingRegistrations,
-  'frontPage'
-);
-export const selectDprEnableItSystems = createTabEnabledSelector(
-  UIModuleConfigKey.DataProcessingRegistrations,
-  'itSystems'
-);
-export const selectDprEnableItContracts = createTabEnabledSelector(
-  UIModuleConfigKey.DataProcessingRegistrations,
-  'itContracts'
-);
-export const selectDprEnableOversight = createTabEnabledSelector(
-  UIModuleConfigKey.DataProcessingRegistrations,
-  'oversight'
-);
-export const selectDprEnableRoles = createTabEnabledSelector(UIModuleConfigKey.DataProcessingRegistrations, 'roles');
-export const selectDprEnableNotifications = createTabEnabledSelector(
-  UIModuleConfigKey.DataProcessingRegistrations,
-  'notifications'
-);
-export const selectDprEnableReferences = createTabEnabledSelector(
-  UIModuleConfigKey.DataProcessingRegistrations,
-  'references'
-);
+export const selectDprEnableFrontPage = createDprTabEnabledSelector('frontPage');
+export const selectDprEnableItSystems = createDprTabEnabledSelector('itSystems');
+export const selectDprEnableItContracts = createDprTabEnabledSelector('itContracts');
+export const selectDprEnableOversight = createDprTabEnabledSelector('oversight');
+export const selectDprEnableRoles = createDprTabEnabledSelector('roles');
+export const selectDprEnableNotifications = createDprTabEnabledSelector('notifications');
+export const selectDprEnableReferences = createDprTabEnabledSelector('references');
 
 //Data processing
 //Field selectors
@@ -80,44 +64,19 @@ export const selectDprEnableScheduledInspectionDate = createFieldOrGroupEnabledS
 );
 
 //IT system usage
+const createItSystemUsageTabEnabledSelector = (tabKey: string) =>
+  createTabEnabledSelector(UIModuleConfigKey.ItSystemUsage, tabKey);
 //Tab selectors
-export const selectITSystemUsageEnableGdpr = createTabEnabledSelector(UIModuleConfigKey.ItSystemUsage, 'gdpr');
-export const selectITSystemUsageEnableTabSystemRoles = createTabEnabledSelector(
-  UIModuleConfigKey.ItSystemUsage,
-  'systemRoles'
-);
-export const selectITSystemUsageEnableTabOrganization = createTabEnabledSelector(
-  UIModuleConfigKey.ItSystemUsage,
-  'organization'
-);
-export const selectITSystemUsageEnableSystemRelations = createTabEnabledSelector(
-  UIModuleConfigKey.ItSystemUsage,
-  'systemRelations'
-);
-export const selectITSystemUsageEnableTabInterfaces = createTabEnabledSelector(
-  UIModuleConfigKey.ItSystemUsage,
-  'interfaces'
-);
-export const selectITSystemUsageEnableTabArchiving = createTabEnabledSelector(
-  UIModuleConfigKey.ItSystemUsage,
-  'archiving'
-);
-export const selectITSystemUsageEnableTabHierarchy = createTabEnabledSelector(
-  UIModuleConfigKey.ItSystemUsage,
-  'hierarchy'
-);
-export const selectITSystemUsageEnableTabLocalKle = createTabEnabledSelector(
-  UIModuleConfigKey.ItSystemUsage,
-  'localKle'
-);
-export const selectITSystemUsageEnableTabNotifications = createTabEnabledSelector(
-  UIModuleConfigKey.ItSystemUsage,
-  'advice'
-);
-export const selectITSystemUsageEnableLocalReferences = createTabEnabledSelector(
-  UIModuleConfigKey.ItSystemUsage,
-  'localReferences'
-);
+export const selectITSystemUsageEnableGdpr = createItSystemUsageTabEnabledSelector('gdpr');
+export const selectITSystemUsageEnableTabSystemRoles = createItSystemUsageTabEnabledSelector('systemRoles');
+export const selectITSystemUsageEnableTabOrganization = createItSystemUsageTabEnabledSelector('organization');
+export const selectITSystemUsageEnableSystemRelations = createItSystemUsageTabEnabledSelector('systemRelations');
+export const selectITSystemUsageEnableTabInterfaces = createItSystemUsageTabEnabledSelector('interfaces');
+export const selectITSystemUsageEnableTabArchiving = createItSystemUsageTabEnabledSelector('archiving');
+export const selectITSystemUsageEnableTabHierarchy = createItSystemUsageTabEnabledSelector('hierarchy');
+export const selectITSystemUsageEnableTabLocalKle = createItSystemUsageTabEnabledSelector('localKle');
+export const selectITSystemUsageEnableTabNotifications = createItSystemUsageTabEnabledSelector('advice');
+export const selectITSystemUsageEnableLocalReferences = createItSystemUsageTabEnabledSelector('localReferences');
 
 //Field selectors
 export const selectITSystemUsageEnableFrontPageUsagePeriod = createFieldOrGroupEnabledSelector(
