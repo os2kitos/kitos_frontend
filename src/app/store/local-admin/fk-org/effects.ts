@@ -126,4 +126,22 @@ export class FkOrgEffects {
       )
     );
   });
+
+  getChangelog$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(FkOrgActions.getChangelog),
+      combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+      mergeMap(([{ numberOfChangeLogs }, organizationUuid]) =>
+        this.apiService
+          .getManyStsOrganizationSynchronizationInternalV2GetChangeLogs({
+            organizationUuid,
+            numberOfChangeLogs,
+          })
+          .pipe(
+            map((response) => FkOrgActions.getChangelogSuccess(response)),
+            catchError(() => of(FkOrgActions.getChangelogError()))
+          )
+      )
+    );
+  });
 }

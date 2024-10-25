@@ -20,9 +20,9 @@ import {
   selectDataProcessingUuid,
 } from 'src/app/store/data-processing/selectors';
 import {
-  selectDataProcessingUIModuleConfigEnabledTabNotifications,
-  selectDataProcessingUIModuleConfigEnabledTabReferences,
-  selectDataProcessingUIModuleConfigEnabledTabRoles,
+  selectDprEnableNotifications,
+  selectDprEnableReferences,
+  selectDprEnableRoles,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 
 @Component({
@@ -39,11 +39,9 @@ export class DataProcessingDetailsComponent extends BaseComponent implements OnI
 
   public readonly hasDeletePermission$ = this.store.select(selectDataProcessingHasDeletePermissions);
 
-  public readonly dprRolesEnabled$ = this.store.select(selectDataProcessingUIModuleConfigEnabledTabRoles);
-  public readonly dprNotificationsEnabled$ = this.store.select(
-    selectDataProcessingUIModuleConfigEnabledTabNotifications
-  );
-  public readonly dprReferencesEnabled$ = this.store.select(selectDataProcessingUIModuleConfigEnabledTabReferences);
+  public readonly dprRolesEnabled$ = this.store.select(selectDprEnableRoles);
+  public readonly dprNotificationsEnabled$ = this.store.select(selectDprEnableNotifications);
+  public readonly dprReferencesEnabled$ = this.store.select(selectDprEnableReferences);
 
   public readonly breadCrumbs$ = combineLatest([this.dprName$, this.dprUuid$]).pipe(
     map(([dprName, dprUuid]): BreadCrumb[] => [

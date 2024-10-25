@@ -13,7 +13,7 @@ import {
   selectDataProcessingIsValid,
   selectDataProcessingMainContract,
 } from 'src/app/store/data-processing/selectors';
-import { selectDataProcessingUIModuleConfigEnabledFieldMainContract } from 'src/app/store/organization/ui-module-customization/selectors';
+import { selectDprEnableMainContract } from 'src/app/store/organization/ui-module-customization/selectors';
 
 @Component({
   selector: 'app-data-processing-it-contracts',
@@ -32,7 +32,7 @@ export class DataProcessingItContractsComponent extends BaseComponent implements
     mainContract: new FormControl<APIIdentityNamePairResponseDTO | undefined>({ value: undefined, disabled: true }),
   });
 
-  public readonly mainContractEnabled$ = this.store.select(selectDataProcessingUIModuleConfigEnabledFieldMainContract);
+  public readonly mainContractEnabled$ = this.store.select(selectDprEnableMainContract);
 
   constructor(private store: Store) {
     super();

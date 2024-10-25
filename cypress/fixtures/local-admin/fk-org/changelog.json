@@ -1,0 +1,36 @@
+[
+  {
+    "origin": "User",
+    "user": {
+      "email": "test@kitos.dk",
+      "uuid": "b2e97a2f-6c78-42de-b8b8-19f73c4e7d82",
+      "name": "Automatisk oprettet testbruger (GlobalAdmin)"
+    },
+    "logTime": "2024-10-24T08:50:16.2600137Z",
+    "consequences": [
+      {
+        "uuid": "b1e97a2f-6c78-42de-b8b8-19f73c4e7d82",
+        "name": "Unit 1",
+        "category": "Added",
+        "description": "Some description"
+      }
+    ]
+  },
+  {
+    "origin": "User",
+    "user": {
+      "email": "test@kitos.dk",
+      "uuid": "b2e97a2f-6c78-42de-b8b8-19f73c4e7d82",
+      "name": "Automatisk oprettet testbruger (GlobalAdmin)"
+    },
+    "logTime": "2024-10-25T06:52:05.0849391Z",
+    "consequences": [
+      {
+        "uuid": "b1e97a2f-6c78-42de-b8b8-19f73c4e7d82",
+        "name": "Unit 1",
+        "category": "Added",
+        "description": "Some description"
+      }
+    ]
+  }
+]
