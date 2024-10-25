@@ -6,7 +6,11 @@
       class="one-column-width"
       (valueChange)="patchUIRootConfig($event)"
       [value]="!showItSystemModule"
-      >Inkluder modul</app-checkbox-button>
+      >
+    <app-paragraph [bold]="true" paragraphSize="medium">
+      Inkluder modul
+    </app-paragraph>
+    </app-checkbox-button>
   </app-standard-vertical-content-grid>
   </ng-container>
 </app-card>
