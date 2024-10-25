@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { filter, pairwise } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
+import { OrganizationActions } from 'src/app/store/organization/actions';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 
 @Component({
@@ -14,6 +15,7 @@ import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 export class OrganizationComponent extends BaseComponent implements OnInit {
   constructor(private store: Store, private router: Router) {
     super();
+    this.store.dispatch(OrganizationActions.getUIRootConfig());
   }
 
   ngOnInit(): void {

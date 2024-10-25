@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { NavigationDrawerItem } from 'src/app/shared/components/navigation-drawer/navigation-drawer.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
+import { OrganizationActions } from 'src/app/store/organization/actions';
 
 @Component({
   selector: 'app-local-admin',
@@ -9,6 +11,10 @@ import { AppPath } from 'src/app/shared/enums/app-path';
 })
 export class LocalAdminComponent {
   public readonly AppPath = AppPath;
+
+  constructor(private store: Store) {
+    this.store.dispatch(OrganizationActions.getUIRootConfig());
+  }
 
   public readonly items: NavigationDrawerItem[] = [
     {
