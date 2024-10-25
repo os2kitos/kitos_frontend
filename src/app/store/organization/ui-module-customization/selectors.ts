@@ -38,9 +38,6 @@ export const selectITSystemUsageUIModuleConfig = selectModuleConfig(UIModuleConf
 
 export const selectDataProcessingUIModuleConfig = selectModuleConfig(UIModuleConfigKey.DataProcessingRegistrations);
 
-//IT system usage
-//Tab selectors
-
 //Data processing
 //Tab selectors
 export const selectDataProcessingUIModuleConfigEnabledTabFrontpage = createTabEnabledSelector(
@@ -72,6 +69,7 @@ export const selectDataProcessingUIModuleConfigEnabledTabReferences = createTabE
   'references'
 );
 
+//IT system usage
 //Field selectors
 export const selectDataProcessingUIModuleConfigEnabledFieldMainContract = createFieldOrGroupEnabledSelector(
   UIModuleConfigKey.DataProcessingRegistrations,
@@ -99,27 +97,27 @@ export const selectITSystemUsageEnableSystemRelations = createTabEnabledSelector
 );
 export const selectITSystemUsageEnableTabInterfaces = createTabEnabledSelector(
   UIModuleConfigKey.ItSystemUsage,
-  'ItSystemUsages.interfaces'
+  'interfaces'
 );
 export const selectITSystemUsageEnableTabArchiving = createTabEnabledSelector(
   UIModuleConfigKey.ItSystemUsage,
-  'ItSystemUsages.archiving'
+  'archiving'
 );
 export const selectITSystemUsageEnableTabHierarchy = createTabEnabledSelector(
   UIModuleConfigKey.ItSystemUsage,
-  'ItSystemUsages.hierarchy'
+  'hierarchy'
 );
 export const selectITSystemUsageEnableTabLocalKle = createTabEnabledSelector(
   UIModuleConfigKey.ItSystemUsage,
-  'ItSystemUsages.localKle'
+  'localKle'
 );
 export const selectITSystemUsageEnableTabNotifications = createTabEnabledSelector(
   UIModuleConfigKey.ItSystemUsage,
-  'ItSystemUsages.advice'
+  'advice'
 );
 export const selectITSystemUsageEnableLocalReferences = createTabEnabledSelector(
   UIModuleConfigKey.ItSystemUsage,
-  'ItSystemUsages.localReferences'
+  'localReferences'
 );
 
 //Field selectors
