@@ -12,8 +12,8 @@ export const selectUIModuleConfig = createSelector(selectUIModuleCustomizationSt
 
 // eslint-disable-next-line @ngrx/prefix-selectors-with-select
 const createTabEnabledSelector = (module: UIModuleConfigKey, tabKey: string) =>
-  createSelector(selectModuleConfig(module), (itSystemUsageModuleConfig) => {
-    const moduleConfigViewModels = itSystemUsageModuleConfig?.moduleConfigViewModel;
+  createSelector(selectModuleConfig(module), (moduleConfig) => {
+    const moduleConfigViewModels = moduleConfig?.moduleConfigViewModel;
     if (!moduleConfigViewModels) return true;
     const fullKey = [module, tabKey].join('.');
     return tabIsEnabled(moduleConfigViewModels, fullKey);
@@ -21,8 +21,8 @@ const createTabEnabledSelector = (module: UIModuleConfigKey, tabKey: string) =>
 
 // eslint-disable-next-line @ngrx/prefix-selectors-with-select
 const createFieldOrGroupEnabledSelector = (module: UIModuleConfigKey, tabKey: string, fieldKey: string) =>
-  createSelector(selectModuleConfig(module), (itSystemUsageModuleConfig) => {
-    const moduleConfigViewModels = itSystemUsageModuleConfig?.moduleConfigViewModel;
+  createSelector(selectModuleConfig(module), (moduleConfig) => {
+    const moduleConfigViewModels = moduleConfig?.moduleConfigViewModel;
     if (!moduleConfigViewModels) return true;
 
     const fullKey = [module, tabKey].join('.');
@@ -40,48 +40,47 @@ export const selectDataProcessingUIModuleConfig = selectModuleConfig(UIModuleCon
 
 //Data processing
 //Tab selectors
-export const selectDataProcessingUIModuleConfigEnabledTabFrontpage = createTabEnabledSelector(
+export const selectDprEnableFrontPage = createTabEnabledSelector(
   UIModuleConfigKey.DataProcessingRegistrations,
   'frontPage'
 );
-export const selectDataProcessingUIModuleConfigEnabledTabItSystems = createTabEnabledSelector(
+export const selectDprEnableItSystems = createTabEnabledSelector(
   UIModuleConfigKey.DataProcessingRegistrations,
   'itSystems'
 );
-export const selectDataProcessingUIModuleConfigEnabledTabItContracts = createTabEnabledSelector(
+export const selectDprEnableItContracts = createTabEnabledSelector(
   UIModuleConfigKey.DataProcessingRegistrations,
   'itContracts'
 );
-export const selectDataProcessingUIModuleConfigEnabledTabOversight = createTabEnabledSelector(
+export const selectDprEnableOversight = createTabEnabledSelector(
   UIModuleConfigKey.DataProcessingRegistrations,
   'oversight'
 );
-export const selectDataProcessingUIModuleConfigEnabledTabRoles = createTabEnabledSelector(
-  UIModuleConfigKey.DataProcessingRegistrations,
-  'roles'
-);
-export const selectDataProcessingUIModuleConfigEnabledTabNotifications = createTabEnabledSelector(
+export const selectDprEnableRoles = createTabEnabledSelector(UIModuleConfigKey.DataProcessingRegistrations, 'roles');
+export const selectDprEnableNotifications = createTabEnabledSelector(
   UIModuleConfigKey.DataProcessingRegistrations,
   'notifications'
 );
-export const selectDataProcessingUIModuleConfigEnabledTabReferences = createTabEnabledSelector(
+export const selectDprEnableReferences = createTabEnabledSelector(
   UIModuleConfigKey.DataProcessingRegistrations,
   'references'
 );
 
-//IT system usage
+//Data processing
 //Field selectors
-export const selectDataProcessingUIModuleConfigEnabledFieldMainContract = createFieldOrGroupEnabledSelector(
+export const selectDprEnableMainContract = createFieldOrGroupEnabledSelector(
   UIModuleConfigKey.DataProcessingRegistrations,
   'itContracts',
   'mainContract'
 );
-export const selectDataProcessingUIModuleConfigEnabledFieldScheduledInspectionDate = createFieldOrGroupEnabledSelector(
+export const selectDprEnableScheduledInspectionDate = createFieldOrGroupEnabledSelector(
   UIModuleConfigKey.DataProcessingRegistrations,
   'oversight',
   'scheduledInspectionDate'
 );
 
+//IT system usage
+//Tab selectors
 export const selectITSystemUsageEnableGdpr = createTabEnabledSelector(UIModuleConfigKey.ItSystemUsage, 'gdpr');
 export const selectITSystemUsageEnableTabSystemRoles = createTabEnabledSelector(
   UIModuleConfigKey.ItSystemUsage,
