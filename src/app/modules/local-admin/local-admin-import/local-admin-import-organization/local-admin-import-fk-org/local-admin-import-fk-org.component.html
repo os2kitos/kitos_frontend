@@ -1,0 +1,113 @@
+<app-card i18n-title>
+  <app-card-header title="Via FK Organisation"></app-card-header>
+  <app-standard-vertical-content-grid *ngIf="(isLoadingConnectionStatus$ | async) === false">
+    <div>
+      <app-paragraph helpTextKey="local-config-fk-org-status.label" [bold]="true" i18n>Adgang</app-paragraph>
+      <app-paragraph i18n *ngIf="accessGranted$ | async"
+        >KITOS har adgang til organisationens data via FK Organisation</app-paragraph
+      >
+      <app-paragraph i18n *ngIf="(accessGranted$ | async) === false"
+        >KITOS har <strong>ikke</strong> adgang til organisationens data via FK Organisation</app-paragraph
+      >
+      <app-paragraph *ngIf="accessError$ | async as accessError" color="error">{{ accessError }}</app-paragraph>
+    </div>
+    <div>
+      <app-paragraph helpTextKey="local-config-fk-org-sync-status.label" [bold]="true" i18n
+        >Synkronisering</app-paragraph
+      >
+      <app-standard-vertical-content-grid *ngIf="isConnected$ | async">
+        <app-native-table
+          *ngIf="synchronizationStatus$ | async as synchronizationStatus"
+          [withOutline]="true"
+          class="table-margin"
+        >
+          <thead>
+            <th width="33%" i18n>Niveauer der synkroniseres</th>
+            <th width="33%" i18n>Tjekker automatisk (hver mandag nat) efter ventende opdateringer</th>
+            <th width="33%" i18n>Dato for seneste automatiske tjek</th>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <app-paragraph paragraphSize="small">
+                  <ng-container *ngIf="synchronizationStatus.synchronizationDepth === null" i18n> Alle </ng-container>
+                  <ng-container *ngIf="synchronizationStatus.synchronizationDepth !== null">
+                    {{ synchronizationStatus.synchronizationDepth }}
+                  </ng-container>
+                </app-paragraph>
+              </td>
+              <td>
+                <app-paragraph paragraphSize="small">
+                  <ng-container *ngIf="synchronizationStatus.subscribesToUpdates === true" i18n> Ja </ng-container>
+                  <ng-container *ngIf="synchronizationStatus.subscribesToUpdates !== true" i18n> Nej </ng-container>
+                </app-paragraph>
+              </td>
+              <td>
+                <app-paragraph
+                  paragraphSize="small"
+                  *ngIf="synchronizationStatus.dateOfLatestCheckBySubscription !== null"
+                >
+                  {{ synchronizationStatus.dateOfLatestCheckBySubscription | appDate }}
+                </app-paragraph>
+
+                <app-paragraph
+                  paragraphSize="small"
+                  *ngIf="synchronizationStatus.dateOfLatestCheckBySubscription === null"
+                >
+                  <ng-container *ngIf="synchronizationStatus.subscribesToUpdates === true" i18n>
+                    Ikke tilgængeligt
+                  </ng-container>
+                  <ng-container *ngIf="synchronizationStatus.subscribesToUpdates !== true" i18n>
+                    Ikke relevant
+                  </ng-container>
+                </app-paragraph>
+              </td>
+            </tr>
+          </tbody>
+        </app-native-table>
+        <app-fk-org-changelog></app-fk-org-changelog>
+      </app-standard-vertical-content-grid>
+      <app-paragraph i18n *ngIf="(isConnected$ | async) === false"
+        >Organisationen er <strong>ikke</strong> forbundet til FK Organisation</app-paragraph
+      >
+    </div>
+    <div class="action-buttons">
+      <app-button
+        *ngIf="(canCreateConnection$ | async) === true"
+        (buttonClick)="openImportDialog(false)"
+        [disabled]="(accessError$ | async) !== undefined"
+        i18n
+        data-cy="create-sts-connection"
+        >Forbind</app-button
+      >
+      <app-button
+        *ngIf="(canModifyConnection$ | async) === true"
+        (buttonClick)="openImportDialog(true)"
+        [disabled]="(accessError$ | async) !== undefined"
+        i18n
+        data-cy="edit-sts-connection"
+        >Rediger</app-button
+      >
+      <app-button
+        *ngIf="hasAutoUpdates$ | async"
+        (buttonClick)="deleteAutoUpdate()"
+        i18n
+        data-cy="delete-sts-auto-update"
+        [disabled]="(accessError$ | async) !== undefined"
+        buttonStyle="secondary"
+        color="warn"
+        >Afbryd automatisk tjek for opdateringer
+      </app-button>
+      <app-button
+        *ngIf="canDeleteConnection$ | async"
+        (buttonClick)="openDeleteConnectionDialog()"
+        i18n
+        data-cy="delete-connection"
+        [disabled]="(accessError$ | async) !== undefined"
+        color="warn"
+        >Bryd forbindelsen til FK Organisation
+      </app-button>
+    </div>
+  </app-standard-vertical-content-grid>
+  <app-loading *ngIf="isLoadingConnectionStatus$ | async"></app-loading>
+</app-card>
