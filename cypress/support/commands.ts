@@ -14,9 +14,13 @@ Cypress.Commands.add('setup', (authenticate?: boolean, urlPath?: string, uiCusto
   cy.intercept('/api/v2/internal/public-messages', { fixture: './shared/public-messages.json' });
   cy.intercept('/api/v2/organizations*', { fixture: './organizations/organizations.json' }).as('organizations');
 
-  cy.intercept('http://localhost:4200/api/v2/internal/organizations/*/ui-customization/ItSystemUsages', {
-    fixture: uiCustomizationFixturePath ?? './shared/it-system-usage-ui-customization.json' }
-  )
+  cy.intercept('api/v2/internal/organizations/*/ui-customization/ItSystemUsages', {
+    fixture: uiCustomizationFixturePath ?? './shared/it-system-usage-ui-customization.json',
+  });
+
+  cy.intercept('api/v2/internal/organizations/*/ui-root-config', {
+    fixture: './shared/ui-root-config.json',
+  });
 
   cy.visit(urlPath || '/');
 
