@@ -11,6 +11,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --host=127.0.0.1",
+    "start:local": "sh -c 'vim -c \"%s/kitos-dev\\.strongminds\\.dk/localhost:44300/g\" -c \"wq\" \"$(git rev-parse --show-toplevel)/src/proxy.conf.json\"' && yarn start",
     "build": "node --max_old_space_size=5048 ./node_modules/@angular/cli/bin/ng build",
     "watch": "ng build --watch",
     "lint": "ng lint",
