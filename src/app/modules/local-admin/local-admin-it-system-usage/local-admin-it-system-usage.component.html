@@ -1,11 +1,13 @@
 <app-segment [buttons]="segmentOptions" [(selected)]="selectedSegment"> </app-segment>
 
 <app-card *ngIf="selectedSegment === LocalAdminSystemUsageSegmentOptions.UiCustomization">
-  <ng-container *ngIf="(showItSystemModule$ | async) !== null && (showItSystemModule$ | async) !== undefined as showItSystemModule">    <app-standard-vertical-content-grid>
+
+  <ng-container *ngIf="true">
+    <app-standard-vertical-content-grid>
       <app-checkbox-button i18n
       class="one-column-width"
       (valueChange)="patchUIRootConfig($event)"
-      [value]="showItSystemModule"
+      [value]="(showItSystemModule$ | async) ?? false"
       >
     <app-paragraph [bold]="true" paragraphSize="medium">
       Inkluder modul
