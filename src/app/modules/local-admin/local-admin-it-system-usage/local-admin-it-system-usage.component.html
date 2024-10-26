@@ -8,6 +8,7 @@
       class="one-column-width"
       (valueChange)="patchUIRootConfig($event)"
       [value]="(showItSystemModule$ | async) ?? false"
+      data-cy="toggle-it-system-module-button"
       >
     <app-paragraph [bold]="true" paragraphSize="medium">
       Inkluder modul

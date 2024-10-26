@@ -18,7 +18,7 @@
           ><app-table-icon></app-table-icon>Stamdata</app-menu-item
         >
       </app-menu>
-      <app-menu title="IT Systemer" [path]="AppPath.itSystems" i18n-title *ngIf="uiRootConfig.showItSystemModule">
+      <app-menu title="IT Systemer" [path]="AppPath.itSystems" i18n-title *ngIf="uiRootConfig.showItSystemModule" data-cy="it-system-nav-bar-item">
         <app-menu-item [path]="AppPath.itSystemUsages" [parentPath]="AppPath.itSystems" i18n
           ><app-table-icon></app-table-icon>IT Systemer</app-menu-item
         >
