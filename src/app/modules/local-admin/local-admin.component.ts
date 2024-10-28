@@ -14,6 +14,12 @@ import {
 } from 'src/app/store/organization/selectors';
 import { UIModuleConfigActions } from 'src/app/store/organization/ui-module-customization/actions';
 
+interface ModuleTabInfo {
+  text: string;
+  enabled: Observable<boolean | undefined>;
+  dtoFieldName: string;
+}
+
 @Component({
   selector: 'app-local-admin',
   templateUrl: './local-admin.component.html',
@@ -96,48 +102,48 @@ export class LocalAdminComponent extends BaseComponent implements OnInit {
   public patchUIRootConfig($event: boolean) {
     this.subscriptions.add(
       this.currentTabModuleKey$.subscribe((moduleKey) => {
-        const dtoFieldName = this.getDtoFieldName(moduleKey);
-        this.store.dispatch(OrganizationActions.patchUIRootConfig({ dto: { [dtoFieldName]: $event } }));
+        const moduleTabInfo = this.getModuleTabInfo(moduleKey);
+        this.store.dispatch(OrganizationActions.patchUIRootConfig({ dto: { [moduleTabInfo.dtoFieldName]: $event } }));
       })
     );
   }
 
-  getModuleTogglingButtonValue(moduleKey: UIModuleConfigKey | undefined): Observable<boolean | undefined> {
-    switch (moduleKey) {
-      case UIModuleConfigKey.ItSystemUsage:
-        return this.showItSystemModule$;
-      case UIModuleConfigKey.ItContract:
-        return this.showItContractModule$;
-      case UIModuleConfigKey.DataProcessingRegistrations:
-        return this.showDataProcessingRegistrations$;
-      default:
-        return of(false);
-    }
+  getModuleEnabled(moduleKey: UIModuleConfigKey | undefined): Observable<boolean | undefined> {
+    const moduleTabInfo = this.getModuleTabInfo(moduleKey);
+    return moduleTabInfo.enabled;
   }
 
-  getModuleKeyDescription(moduleKey: UIModuleConfigKey | undefined): string {
-    switch (moduleKey) {
-      case UIModuleConfigKey.ItSystemUsage:
-        return $localize`IT Systemer`;
-      case UIModuleConfigKey.DataProcessingRegistrations:
-        return $localize`Databehandling`;
-      case UIModuleConfigKey.ItContract:
-        return $localize`IT Kontrakter`;
-      default:
-        return $localize`Ukendt modul`;
-    }
+  getModuleText(moduleKey: UIModuleConfigKey | undefined): string {
+    const moduleTabInfo = this.getModuleTabInfo(moduleKey);
+    return moduleTabInfo.text;
   }
 
-  getDtoFieldName(moduleKey: UIModuleConfigKey | undefined): string {
+  private getModuleTabInfo(moduleKey: UIModuleConfigKey | undefined): ModuleTabInfo {
     switch (moduleKey) {
       case UIModuleConfigKey.ItSystemUsage:
-        return 'showItSystemModule';
+        return {
+          text: $localize`IT Systemer`,
+          enabled: this.showItSystemModule$,
+          dtoFieldName: 'showItSystemModule',
+        }
       case UIModuleConfigKey.DataProcessingRegistrations:
-        return 'showDataProcessing';
+        return {
+          text: $localize`Databehandling`,
+          enabled: this.showDataProcessingRegistrations$,
+          dtoFieldName: 'showDataProcessing',
+        }
       case UIModuleConfigKey.ItContract:
-        return 'showItContractModule';
+        return {
+          text: $localize`IT Kontrakter`,
+          enabled: this.showItContractModule$,
+          dtoFieldName: 'showItContractModule',
+        };
       default:
-        return $localize`Ukendt modul`;
+        return {
+          text: $localize`Ukendt modul`,
+          enabled: of(false),
+          dtoFieldName: '',
+        };
     }
   }
 
