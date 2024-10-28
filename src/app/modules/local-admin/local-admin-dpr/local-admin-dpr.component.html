@@ -16,6 +16,7 @@
           *ngFor="let tabViewModel of uiModuleConfig.moduleConfigViewModel?.children"
           [moduleKey]="dataProcessingModuleKey"
           [tabViewModel]="tabViewModel"
+          [moduleEnabled]="showDataProcessingModule$"
         >
         </app-ui-config-tab-section>
         <app-loading *ngIf="uiModuleConfig === undefined"></app-loading>
