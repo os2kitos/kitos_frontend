@@ -73,6 +73,13 @@ export class LocalAdminComponent extends BaseModuleComponent implements OnInit {
     },
   ];
 
+  constructor(private store: Store) {}
+  public ngOnInit(): void {
+    this.store.dispatch(UIModuleConfigActions.getUIModuleConfig({ module: UIModuleConfigKey.ItSystemUsage }));
+    this.store.dispatch(
+      UIModuleConfigActions.getUIModuleConfig({ module: UIModuleConfigKey.DataProcessingRegistrations })
+    );
+  }
   public readonly showItSystemModule$ = this.store.select(selectShowItSystemModule);
   public readonly showItContractModule$ = this.store.select(selectShowItContractModule);
   public readonly showDataProcessingRegistrations$ = this.store.select(selectShowDataProcessingRegistrations);

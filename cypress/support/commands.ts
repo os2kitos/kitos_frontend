@@ -15,8 +15,12 @@ Cypress.Commands.add('setup', (authenticate?: boolean, urlPath?: string, uiCusto
   cy.intercept('/api/v2/organizations*', { fixture: './organizations/organizations.json' }).as('organizations');
 
   cy.intercept('api/v2/internal/organizations/*/ui-customization/ItSystemUsages', {
-    fixture: uiCustomizationFixturePath ?? './shared/it-system-usage-ui-customization.json',
-  });
+    fixture: uiCustomizationFixturePath ?? './shared/it-system-usage-ui-customization.json' }
+  ).as('it-system-usage-ui-customization');
+
+  cy.intercept('api/v2/internal/organizations/*/ui-customization/DataProcessingRegistrations', {
+    fixture: uiCustomizationFixturePath ?? './shared/data-processing-ui-customization.json' }
+  ).as('data-processing-ui-customization');
 
   cy.intercept('api/v2/internal/organizations/*/ui-root-config', {
     fixture: './shared/ui-root-config.json',

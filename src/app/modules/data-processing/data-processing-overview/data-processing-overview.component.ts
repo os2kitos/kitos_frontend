@@ -13,7 +13,7 @@ import {
   REFERENCE_SECTION_NAME,
   SUPERVISION_SECTION_NAME,
 } from 'src/app/shared/constants/persistent-state-constants';
-import { getColumnsToShow } from 'src/app/shared/helpers/grid-config-helper';
+import { filterGridColumnsByUIConfig, getColumnsToShow } from 'src/app/shared/helpers/grid-config-helper';
 import { isAgreementConcludedOptions } from 'src/app/shared/models/data-processing/is-agreement-concluded.model';
 import { isOversightCompletedOptions } from 'src/app/shared/models/data-processing/is-oversight-completed.model';
 import { transferToInsecureThirdCountriesOptions } from 'src/app/shared/models/data-processing/transfer-to-insecure-third-countries.model';
@@ -32,6 +32,7 @@ import {
   selectDataProcessingRoleColumns,
 } from 'src/app/store/data-processing/selectors';
 import { selectGridConfigModificationPermission } from 'src/app/store/user-store/selectors';
+import * as GridFields from 'src/app/shared/constants/data-processing-grid-column-constants';
 
 @Component({
   selector: 'app-data-processing-overview',
@@ -42,7 +43,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
   public readonly isLoading$ = this.store.select(selectDataProcessingGridLoading);
   public readonly gridData$ = this.store.select(selectDataProcessingGridData);
   public readonly gridState$ = this.store.select(selectDataProcessingGridState);
-  public readonly gridColumns$ = this.store.select(selectDataProcessingGridColumns);
+  public readonly gridColumns$ = this.store.select(selectDataProcessingGridColumns).pipe(filterGridColumnsByUIConfig());
 
   public readonly hasConfigModificationPermissions$: Observable<boolean | undefined> = this.store.select(
     selectGridConfigModificationPermission
@@ -63,7 +64,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
 
   public readonly defaultGridColumns: GridColumn[] = [
     {
-      field: 'Name',
+      field: GridFields.Name,
       title: $localize`Databehandling`,
       section: DATA_PROCESSING_SECTION_NAME,
       required: true,
@@ -72,7 +73,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       persistId: 'dpaName',
     },
     {
-      field: 'ActiveAccordingToMainContract',
+      field: GridFields.ActiveAccordingToMainContract,
       title: $localize`Status (Markeret kontrakt)`,
       section: DATA_PROCESSING_SECTION_NAME,
       filter: 'boolean',
@@ -84,7 +85,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       persistId: 'mainContract',
     },
     {
-      field: 'MainReferenceTitle',
+      field: GridFields.MainReferenceTitle,
       title: $localize`Reference`,
       style: 'title-link',
       idField: 'MainReferenceUrl',
@@ -93,14 +94,14 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       persistId: 'dpReferenceId',
     },
     {
-      field: 'SystemNamesAsCsv',
+      field: GridFields.SystemNamesAsCsv,
       title: $localize`IT Systemer`,
       section: CATALOG_SECTION_NAME,
       hidden: false,
       persistId: 'dpSystemNamesAsCsv',
     },
     {
-      field: 'MainReferenceUserAssignedId',
+      field: GridFields.MainReferenceUserAssignedId,
       title: $localize`Dokument ID / Sagsnr.`,
       section: REFERENCE_SECTION_NAME,
       width: 320,
@@ -108,7 +109,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       persistId: 'dpReferenceUserAssignedId',
     },
     {
-      field: 'IsActive',
+      field: GridFields.IsActive,
       title: $localize`Databehandling status`,
       section: DATA_PROCESSING_SECTION_NAME,
       filter: 'boolean',
@@ -120,7 +121,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       persistId: 'dpIsActive', //Does not seem to be in the old UI
     },
     {
-      field: 'LastChangedById',
+      field: GridFields.LastChangedById,
       title: $localize`Sidst ændret ID`,
       section: DATA_PROCESSING_SECTION_NAME,
       filter: 'numeric',
@@ -128,7 +129,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       persistId: 'dpLastChangedById', //This aswell
     },
     {
-      field: 'LastChangedAt',
+      field: GridFields.LastChangedAt,
       title: $localize`Sidst ændret dato`,
       section: DATA_PROCESSING_SECTION_NAME,
       filter: 'date',
@@ -138,21 +139,21 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       persistId: 'changed',
     },
     {
-      field: 'ContractNamesAsCsv',
+      field: GridFields.ContractNamesAsCsv,
       title: $localize`IT Kontrakter`,
       section: CONTRACT_SECTION_NAME,
       hidden: false,
       persistId: 'dpContractNamesAsCsv',
     },
     {
-      field: 'DataProcessorNamesAsCsv',
+      field: GridFields.DataProcessorNamesAsCsv,
       title: $localize`Databehandlere`,
       section: DATA_PROCESSING_SECTION_NAME,
       hidden: false,
       persistId: 'dpDataProcessorNamesAsCsv',
     },
     {
-      field: 'SystemUuidsAsCsv',
+      field: GridFields.SystemUuidsAsCsv,
       title: $localize`IT Systemer (UUID)`,
       section: CATALOG_SECTION_NAME,
       width: 300,
@@ -160,7 +161,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       persistId: 'itSystemUuid',
     },
     {
-      field: 'SubDataProcessorNamesAsCsv',
+      field: GridFields.SubDataProcessorNamesAsCsv,
       title: $localize`Underdatabehandlere`,
       width: 300,
       section: DATA_PROCESSING_SECTION_NAME,
@@ -168,7 +169,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       persistId: 'dpSubDataProcessorNamesAsCsv',
     },
     {
-      field: 'TransferToInsecureThirdCountries',
+      field: GridFields.TransferToInsecureThirdCountries,
       title: $localize`Overførsel til usikkert 3. land`,
       section: DATA_PROCESSING_SECTION_NAME,
       hidden: true,
@@ -179,7 +180,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       persistId: 'dpTransferToInsecureThirdCountries',
     },
     {
-      field: 'BasisForTransferUuid',
+      field: GridFields.BasisForTransferUuid,
       dataField: 'BasisForTransfer',
       title: $localize`Overførselsgrundlag`,
       section: DATA_PROCESSING_SECTION_NAME,
@@ -190,7 +191,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       persistId: 'dpBasisForTransfer',
     },
     {
-      field: 'DataResponsibleUuid',
+      field: GridFields.DataResponsibleUuid,
       dataField: 'DataResponsible',
       title: $localize`Dataansvarlig`,
       section: DATA_PROCESSING_SECTION_NAME,
@@ -201,7 +202,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       persistId: 'dpDataResponsible',
     },
     {
-      field: 'IsAgreementConcluded',
+      field: GridFields.IsAgreementConcluded,
       title: $localize`Databehandleraftale er indgået`,
       section: DATA_PROCESSING_SECTION_NAME,
       style: 'enum',
@@ -211,7 +212,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       persistId: 'agreementConcluded',
     },
     {
-      field: 'AgreementConcludedAt',
+      field: GridFields.AgreementConcludedAt,
       title: $localize`Dato for indgåelse af databehandleraftale`,
       section: DATA_PROCESSING_SECTION_NAME,
       filter: 'date',
@@ -221,7 +222,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       persistId: 'agreementConcludedAt',
     },
     {
-      field: 'OversightInterval',
+      field: GridFields.OversightInterval,
       title: $localize`Tilsynsinterval`,
       section: SUPERVISION_SECTION_NAME,
       hidden: true,
@@ -231,7 +232,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       persistId: 'oversightInterval',
     },
     {
-      field: 'OversightOptionNamesAsCsv',
+      field: GridFields.OversightOptionNamesAsCsv,
       title: $localize`Tilsynsmuligheder`,
       section: SUPERVISION_SECTION_NAME,
       hidden: true,
@@ -240,7 +241,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       persistId: 'dpOversightOptionNamesAsCsv',
     },
     {
-      field: 'IsOversightCompleted',
+      field: GridFields.IsOversightCompleted,
       title: $localize`Gennemført tilsyn`,
       section: SUPERVISION_SECTION_NAME,
       hidden: true,
@@ -250,7 +251,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       persistId: 'isOversightCompleted',
     },
     {
-      field: 'OversightScheduledInspectionDate',
+      field: GridFields.OversightScheduledInspectionDate,
       title: $localize`Kommende planlagt tilsyn`,
       section: SUPERVISION_SECTION_NAME,
       hidden: true,
@@ -260,7 +261,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       persistId: 'scheduledInspectionDate',
     },
     {
-      field: 'LatestOversightDate',
+      field: GridFields.LatestOversightDate,
       title: $localize`Seneste tilsyn`,
       section: SUPERVISION_SECTION_NAME,
       hidden: true,
@@ -270,7 +271,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       persistId: 'latestOversightDate',
     },
     {
-      field: 'LastChangedByName',
+      field: GridFields.LastChangedByName,
       title: $localize`Sidst ændret bruger`,
       section: DATA_PROCESSING_SECTION_NAME,
       width: 300,
