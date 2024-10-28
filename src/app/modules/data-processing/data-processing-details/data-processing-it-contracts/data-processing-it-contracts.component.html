@@ -1,4 +1,4 @@
-<app-card>
+<app-card *ngIf="mainContractEnabled$ | async">
   <app-card-header
     title="Kontrakt der gør databehandlingen aktiv"
     i18n-title

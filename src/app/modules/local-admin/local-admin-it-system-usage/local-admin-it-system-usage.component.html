@@ -21,6 +21,7 @@
     <app-standard-vertical-content-grid>
       <ng-container *ngIf="itSystemUsageUIModuleConfig$ | async as uiModuleConfig">
       <app-ui-config-tab-section *ngFor="let tabViewModel of uiModuleConfig.moduleConfigViewModel?.children"
+        [moduleKey]="itSystemUsageModuleKey"
         [tabViewModel]="tabViewModel"
         [moduleEnabled]="showItSystemModule$"
         (checkboxChanged)="onCheckboxChange($event)"

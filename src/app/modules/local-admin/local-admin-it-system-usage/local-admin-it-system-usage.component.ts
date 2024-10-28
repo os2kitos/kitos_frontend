@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { APICustomizedUINodeDTO } from 'src/app/api/v1';
 import { SegmentButtonOption } from 'src/app/shared/components/segment/segment.component';
 import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
 import { UINodeCustomization } from 'src/app/shared/models/ui-config/ui-node-customization';
@@ -31,7 +30,7 @@ export class LocalAdminItSystemUsageComponent {
   ];
   public readonly itSystemUsageUIModuleConfig$ = this.store.select(selectITSystemUsageUIModuleConfig);
   public readonly showItSystemModule$ = this.store.select(selectShowItSystemModule);
-  private readonly itSystemUsageModuleKey = UIModuleConfigKey.ItSystemUsage;
+  public readonly itSystemUsageModuleKey = UIModuleConfigKey.ItSystemUsage;
 
   constructor(private readonly store: Store, private readonly notificationService: NotificationService) {
   }
