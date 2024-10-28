@@ -4262,13 +4262,13 @@
         <source>Kunne ikke hente lokal tilpasning af moduler.</source>
       </trans-unit>
       <trans-unit id="3104778415715365281" datatype="html">
-        <source> Inkluder modulet <x id="INTERPOLATION" equiv-text="{{ getModuleKeyDescription(moduleKey) }}"/> </source>
+        <source> Inkluder modulet <x id="INTERPOLATION" equiv-text="{{ getModuleText(moduleKey) }}"/> </source>
       </trans-unit>
       <trans-unit id="8666131066916332987" datatype="html">
         <source>Ukendt modul</source>
       </trans-unit>
-      <trans-unit id="9168663958915586248" datatype="html">
-        <source>IT systemer</source>
+      <trans-unit id="4599362408449001670" datatype="html">
+        <source>Hvilken kontrakt skal angive om databehandlingen er aktiv</source>
       </trans-unit>
     </body>
   </file>
