@@ -4,6 +4,7 @@
   buttonStyle="secondary"
   [disabled]="disabled"
   [alignStart]="true"
+  [ngClass]="{'custom-checkbox-button': !value}"
 >
   <app-checkbox [value]="value" [disabled]="disabled" data-cy="button-checkbox"> </app-checkbox>
 

@@ -1,3 +1,5 @@
+@import 'theme';
+
 .button-alignment {
   justify-content: flex-start;
 }
@@ -8,3 +10,8 @@
   align-items: center;
   width: 100%;
 }
+
+::ng-deep .custom-checkbox-button button {
+  border-color: $color-primary-40 !important;
+}
+
