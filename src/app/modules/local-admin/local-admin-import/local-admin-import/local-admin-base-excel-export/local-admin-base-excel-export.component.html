@@ -1,14 +1,24 @@
 <app-card i18n-title>
   <app-card-header title="Via Excel" helpTextKey="local-config.import.organization"></app-card-header>
 
-  <app-paragraph> Step 1 - Hent og udfyld ark</app-paragraph>
-  <a
-    href="https://localhost:44300/api/v2/internal/organizations/35ba3e46-1894-4304-9e0a-41029252b3a0/local-admin/excel/units?exportOrgUnits=true"
-    target="_blank"
-    >Get the excel</a
-  >
   <form [formGroup]="excelForm" (ngSubmit)="onSubmit()">
-    <input type="file" accept=".xlsx" (change)="fileImported($event)" />
-    <button type="submit" [disabled]="!excelForm.valid">Upload</button>
+    <app-standard-vertical-content-grid>
+      <div>
+        <app-button type="submit" [disabled]="!excelForm.valid" class="inline-block-button" i18n>Upload</app-button>
+        <app-paragraph [bold]="true" i18n> Step 1 - Hent og udfyld ark</app-paragraph>
+        <a
+          href="https://localhost:44300/api/v2/internal/organizations/35ba3e46-1894-4304-9e0a-41029252b3a0/local-admin/excel/units?exportOrgUnits=true"
+          target="_blank"
+          >Get the excel</a
+        >
+      </div>
+      <div>
+        <app-paragraph [bold]="true" i18n> Step 2 - Upload udfyldt ark</app-paragraph>
+        <app-file-input (fileImported)="fileImported($event)"></app-file-input>
+      </div>
+      <div>
+        <app-button type="submit" [disabled]="!excelForm.valid" class="inline-block-button" i18n>Upload</app-button>
+      </div>
+    </app-standard-vertical-content-grid>
   </form>
 </app-card>

@@ -132,6 +132,7 @@ import { AccordionHeaderComponent } from './accordion-header/accordion-header.co
 import { BooleanCircleComponent } from './boolean-circle/boolean-circle.component';
 import { CheckboxButtonComponent } from './buttons/checkbox-button/checkbox-button.component';
 import { MultiSelectDropdownComponent } from './dropdowns/multi-select-dropdown/multi-select-dropdown.component';
+import { FileInputComponent } from './file-input/file-input.component';
 import { IconComponent } from './icon/icon.component';
 import { LocalAdminColumnConfigButtonComponent } from './local-admin-column-config-button/local-admin-column-config-button.component';
 import { LocalGridComponent } from './local-grid/local-grid.component';
@@ -264,6 +265,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     LocalGridComponent,
     NavigationDrawerComponent,
     IconComponent,
+    FileInputComponent,
   ],
   imports: [
     CommonModule,
@@ -393,6 +395,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     NavigationDrawerComponent,
     IconComponent,
     LocalGridComponent,
+    FileInputComponent,
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },
