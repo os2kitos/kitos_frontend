@@ -6,6 +6,9 @@ import * as UsageFields from 'src/app/shared/constants/it-system-usage-grid-colu
 import * as DprFields from 'src/app/shared/constants/data-processing-grid-column-constants';
 import {
   selectDprEnableMainContract,
+  selectDprEnableReferences,
+  selectDprEnableRoles,
+  selectDprEnableScheduledInspectionDate,
   selectItContractEnableContractId,
   selectItContractEnableContractRoles,
   selectItContractsEnableAgreementDeadlines,
@@ -290,14 +293,30 @@ export class GridUIConfigService {
 
   private getDataProcessingGridConfig(): Observable<UIConfigGridApplication[]> {
     const mainContract$ = this.store.select(selectDprEnableMainContract);
+    const dprRolesEnabled$ = this.store.select(selectDprEnableRoles);
+    const referenceEnabled$ = this.store.select(selectDprEnableReferences);
+    const scheduledInspectionDateEnabled$= this.store.select(selectDprEnableScheduledInspectionDate);
 
-    return combineLatest([mainContract$]).pipe(
-      map(([mainContractEnabled]): UIConfigGridApplication[] => {
+    return combineLatest([mainContract$, dprRolesEnabled$, referenceEnabled$, scheduledInspectionDateEnabled$]).pipe(
+      map(([mainContractEnabled, dprRolesEnabled, referenceEnabled, scheduledInspectionDate]): UIConfigGridApplication[] => {
         return [
           {
             shouldEnable: mainContractEnabled,
             columnNamesToConfigure: [DprFields.ActiveAccordingToMainContract],
           },
+          {
+            shouldEnable: dprRolesEnabled,
+            columnNamesToConfigure: [],
+            columnNameSubstringsToConfigure: ['Roles.Role']
+          },
+          {
+            shouldEnable: referenceEnabled,
+            columnNamesToConfigure: [DprFields.MainReferenceTitle, DprFields.MainReferenceUserAssignedId],
+          },
+          {
+            shouldEnable: scheduledInspectionDate,
+            columnNamesToConfigure: [DprFields.OversightScheduledInspectionDate],
+          }
         ];
       })
     );
