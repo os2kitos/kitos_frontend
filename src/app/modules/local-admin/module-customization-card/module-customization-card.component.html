@@ -1,0 +1,12 @@
+<app-standard-vertical-content-grid>
+    <app-checkbox-button i18n
+    class="one-column-width"
+    (valueChange)="onCheckboxChange($event)"
+    [value]="(showModule$ | async) ?? false"
+    data-cy="toggle-module-button"
+    >
+  <app-paragraph [bold]="true" paragraphSize="medium">
+    Inkluder modul
+  </app-paragraph>
+  </app-checkbox-button>
+</app-standard-vertical-content-grid>
