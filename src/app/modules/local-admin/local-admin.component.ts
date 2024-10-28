@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { distinctUntilChanged, filter, map, Observable, of, startWith } from 'rxjs';
-import { BaseModuleComponent } from 'src/app/shared/base/base-module-component';
+import { BaseComponent } from 'src/app/shared/base/base.component';
 import { NavigationDrawerItem } from 'src/app/shared/components/navigation-drawer/navigation-drawer.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
@@ -19,13 +19,13 @@ import { UIModuleConfigActions } from 'src/app/store/organization/ui-module-cust
   templateUrl: './local-admin.component.html',
   styleUrl: './local-admin.component.scss',
 })
-export class LocalAdminComponent extends BaseModuleComponent implements OnInit {
+export class LocalAdminComponent extends BaseComponent implements OnInit {
   public readonly AppPath = AppPath;
   public currentTabPathSegment$: Observable<string> = of('');
   public currentTabModuleKey$: Observable<UIModuleConfigKey | undefined> = of(undefined);
 
-  constructor(store: Store, private router: Router) {
-    super(store);
+  constructor(private store: Store, private router: Router) {
+    super();
   }
 
   ngOnInit(): void {
