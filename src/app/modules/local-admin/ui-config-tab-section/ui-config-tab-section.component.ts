@@ -1,4 +1,3 @@
-import { Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { APICustomizedUINodeDTO } from 'src/app/api/v1';
 import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
