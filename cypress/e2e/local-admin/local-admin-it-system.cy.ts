@@ -30,14 +30,14 @@ describe('local-admin it system usage', () => {
       fixture: './local-admin/it-system/ui-root-config-no-system-module.json',
     }).as('patch');
 
-    cy.getByDataCy('toggle-it-system-module-button').click();
+    cy.getByDataCy('it-system-nav-bar-item').click();
 
     cy.wait('@patch').then((interception) => {
       const newValue = interception.request.body.showItSystemModule;
       expect(newValue).to.equal(false);
     });
     cy.getByDataCy('it-system-nav-bar-item').should('not.exist');
-  })
+  });
 
   it('Cannot toggle obligatory ui customization field', () => {
     const targetTabCheckboxButtonText = 'Systemforside';
