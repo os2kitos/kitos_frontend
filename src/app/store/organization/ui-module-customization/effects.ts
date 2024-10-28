@@ -105,7 +105,7 @@ export class UIModuleCustomizationEffects {
     const rootToUpdate = existingNodes?.find((node) => node.key === updatedNode.key);
     if (!rootToUpdate) {
       return {
-        nodes: [updatedNode],
+        nodes: [...existingNodes, updatedNode],
       };
     }
 
