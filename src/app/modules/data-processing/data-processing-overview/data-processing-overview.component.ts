@@ -13,7 +13,7 @@ import {
   REFERENCE_SECTION_NAME,
   SUPERVISION_SECTION_NAME,
 } from 'src/app/shared/constants/persistent-state-constants';
-import { getColumnsToShow } from 'src/app/shared/helpers/grid-config-helper';
+import { filterGridColumnsByUIConfig, getColumnsToShow } from 'src/app/shared/helpers/grid-config-helper';
 import { isAgreementConcludedOptions } from 'src/app/shared/models/data-processing/is-agreement-concluded.model';
 import { isOversightCompletedOptions } from 'src/app/shared/models/data-processing/is-oversight-completed.model';
 import { transferToInsecureThirdCountriesOptions } from 'src/app/shared/models/data-processing/transfer-to-insecure-third-countries.model';
