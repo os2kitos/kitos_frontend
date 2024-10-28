@@ -5607,6 +5607,10 @@
         <source><x id="START_TAG_APP_PARAGRAPH" ctype="x-app_paragraph" equiv-text="p-paragraph [bold]=&quot;true&quot; paragraphSize=&quot;medium&quot;&gt;"/> Inkluder modul <x id="CLOSE_TAG_APP_PARAGRAPH" ctype="x-app_paragraph" equiv-text="&lt;/app-paragraph&gt;"/></source>
         <target state="new"><x id="START_TAG_APP_PARAGRAPH" ctype="x-app_paragraph" equiv-text="p-paragraph [bold]=&quot;true&quot; paragraphSize=&quot;medium&quot;&gt;"/> Inkluder modul <x id="CLOSE_TAG_APP_PARAGRAPH" ctype="x-app_paragraph" equiv-text="&lt;/app-paragraph&gt;"/></target>
       </trans-unit>
+      <trans-unit id="1265710071714281214" datatype="html">
+        <source>Kunne ikke hente lokal tilpasning af moduler.</source>
+        <target state="new">Kunne ikke hente lokal tilpasning af moduler.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
