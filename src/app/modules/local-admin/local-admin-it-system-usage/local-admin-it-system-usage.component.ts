@@ -34,7 +34,6 @@ export class LocalAdminItSystemUsageComponent {
   private readonly itSystemUsageModuleKey = UIModuleConfigKey.ItSystemUsage;
 
   constructor(private readonly store: Store, private readonly notificationService: NotificationService) {
-    this.showItSystemModule$.subscribe((showItSystemModule) => { console.log(showItSystemModule + '   is show val'); });
   }
 
   public onCheckboxChange($event: UINodeCustomization) {
