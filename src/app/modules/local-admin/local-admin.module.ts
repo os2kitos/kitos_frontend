@@ -8,7 +8,7 @@ import { LocalAdminOrganizationComponent } from './local-admin-organization/loca
 import { OrganizationsGridComponent } from './local-admin-organization/organizations-grid/organizations-grid.component';
 import { LocalAdminComponent } from './local-admin.component';
 import { LocalAdminRouterModule } from './local-admin.routes';
-import { UiConfigTabSectionComponent } from './ui-config-tab-section/ui-config-tab-section.component';
+import { UiConfigTabSectionComponent } from './ui-config/ui-config-tab-section/ui-config-tab-section.component';
 import { LocalAdminItContractComponent } from './local-admin-it-contract/local-admin-it-contract.component';
 import { LocalAdminDprComponent } from './local-admin-dpr/local-admin-dpr.component';
 import { FkOrgDeleteDialogComponent } from './local-admin-import/local-admin-import-organization/fk-org-delete-dialog/fk-org-delete-dialog.component';
