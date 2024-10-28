@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { SegmentButtonOption } from 'src/app/shared/components/segment/segment.component';
-import { selectDataProcessingUIModuleConfig } from 'src/app/store/organization/ui-module-customization/selectors';
-import { Store } from '@ngrx/store';
 import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
 
 enum LocalAdminDprSegmentOption {
@@ -26,8 +24,6 @@ export class LocalAdminDprComponent {
     { text: $localize`Roller`, value: LocalAdminDprSegmentOption.RoleOptionTypes },
   ];
 
-  public readonly dataProcessingUIModuleConfig$ = this.store.select(selectDataProcessingUIModuleConfig);
   public readonly dataProcessingModuleKey = UIModuleConfigKey.DataProcessingRegistrations;
 
-  constructor(private store: Store) {}
 }
