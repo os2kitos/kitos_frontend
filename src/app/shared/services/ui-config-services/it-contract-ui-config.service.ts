@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { combineLatest, map, Observable } from 'rxjs';
-import { GridColumn } from '../../models/grid-column.model';
 import * as GridFields from 'src/app/shared/constants/it-contracts-grid-column-constants';
 import {
   selectItContractEnableContractId,
@@ -19,8 +19,8 @@ import {
   selectItContractsEnableTemplate,
   selectItContractsEnableTermination,
 } from 'src/app/store/organization/ui-module-customization/selectors';
+import { GridColumn } from '../../models/grid-column.model';
 import { UIConfigGridApplication } from '../../models/ui-config/ui-config-grid-application';
-import { Store } from '@ngrx/store';
 import { UIConfigService } from './ui-config.service';
 
 @Injectable({
@@ -30,7 +30,7 @@ export class ItContractUIConfigService {
   constructor(private uiConfigService: UIConfigService, private store: Store) {}
 
   public ApplyItContractConfigToGridColumns(): (source: Observable<GridColumn[]>) => Observable<GridColumn[]> {
-    return this.uiConfigService.ApplyConfigToGridColumns(this.getUIConfigApplications());
+    return this.uiConfigService.applyConfigToGridColumns(this.getUIConfigApplications());
   }
 
   private getUIConfigApplications(): Observable<UIConfigGridApplication[]> {
@@ -157,8 +157,8 @@ export class ItContractUIConfigService {
           {
             shouldEnable: enabledContractRoles,
             columnNamesToConfigure: [],
-            columnNameSubstringsToConfigure: ['Roles.Role']
-          }
+            columnNameSubstringsToConfigure: ['Roles.Role'],
+          },
         ]
       )
     );

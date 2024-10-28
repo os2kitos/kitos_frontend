@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
+import { combineLatestWith, map, Observable } from 'rxjs';
 import { UIModuleConfigKey } from '../../enums/ui-module-config-key';
+import { filterGridColumnsByUIConfig } from '../../helpers/grid-config-helper';
 import { GridColumn } from '../../models/grid-column.model';
 import { DataProcessingUiBluePrint } from '../../models/ui-config/blueprints/data-processing-blueprint';
 import { ItContractsUiBluePrint } from '../../models/ui-config/blueprints/it-contracts-blueprint';
@@ -9,8 +11,6 @@ import { UIConfigNodeViewModel } from '../../models/ui-config/ui-config-node-vie
 import { UIModuleConfig } from '../../models/ui-config/ui-module-config.model';
 import { UINodeBlueprint } from '../../models/ui-config/ui-node-blueprint.model';
 import { UINodeCustomization } from '../../models/ui-config/ui-node-customization';
-import { combineLatestWith, map, Observable } from 'rxjs';
-import { filterGridColumnsByUIConfig } from '../../helpers/grid-config-helper';
 
 @Injectable({
   providedIn: 'root',
@@ -29,7 +29,7 @@ export class UIConfigService {
     return customizationList.find((elem) => elem.fullKey === fullKey) || null;
   }
 
-  public ApplyConfigToGridColumns(
+  public applyConfigToGridColumns(
     uiConfig: Observable<UIConfigGridApplication[]>
   ): (source: Observable<GridColumn[]>) => Observable<GridColumn[]> {
     return (source: Observable<GridColumn[]>) => {
