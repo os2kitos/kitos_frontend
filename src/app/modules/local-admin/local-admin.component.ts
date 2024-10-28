@@ -24,19 +24,16 @@ export class LocalAdminComponent extends BaseModuleComponent implements OnInit {
     super(store);
     this.currentTabPathSegment$ = this.router.events.pipe(
       filter(event => event instanceof NavigationEnd),
-      map((event: NavigationEnd) => {
-        const urlSegments = event.urlAfterRedirects.split('/');
-        return urlSegments[urlSegments.length - 1];
-      }),
+      map(this.extractLastUrlSegment),
       distinctUntilChanged()
     );
   }
+
   ngOnInit(): void {
-    this.currentTabPathSegment$.subscribe(url => {
-      this.currentTabModuleKey$ = this.getCurrentTabModuleKey(url);
+    this.currentTabPathSegment$.subscribe(segment => {
+      this.currentTabModuleKey$ = this.getCurrentTabModuleKey(segment);
     });
   }
-
 
   public readonly items: NavigationDrawerItem[] = [
     {
@@ -76,8 +73,8 @@ export class LocalAdminComponent extends BaseModuleComponent implements OnInit {
   public readonly showItContractModule$ = this.store.select(selectShowItContractModule);
   public readonly showDataProcessingRegistrations$ = this.store.select(selectShowDataProcessingRegistrations);
 
-  public getCurrentTabModuleKey(segment: string){
-    switch (segment) {
+  public getCurrentTabModuleKey(urlSegment: string){
+    switch (urlSegment) {
       case AppPath.localAdminSystemUsages:
         return of(UIModuleConfigKey.ItSystemUsage);
       case AppPath.itContracts:
@@ -135,5 +132,10 @@ export class LocalAdminComponent extends BaseModuleComponent implements OnInit {
       default:
         return $localize`Ukendt modul`;
     }
+  }
+
+  private extractLastUrlSegment(event: NavigationEnd): string {
+    const urlSegments = event.urlAfterRedirects.split('/');
+    return urlSegments[urlSegments.length - 1];
   }
 }
