@@ -1,12 +1,6 @@
 import { Component } from '@angular/core';
-import { SegmentButtonOption } from 'src/app/shared/components/segment/segment.component';
+import { LocalAdminModuleSegmentOptions, LocalAdminModuleSegmentOptionType } from 'src/app/shared/constants/local-admin-module-segment-constants';
 import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
-
-enum LocalAdminSystemUsageSegmentOptions {
-  UiCustomization = 'UiCustomization',
-  RegularOptionTypes = 'RegularOptionTypes',
-  RoleOptionTypes = 'RoleOptionTypes',
-}
 
 @Component({
   selector: 'app-local-admin-it-system-usage',
@@ -14,13 +8,9 @@ enum LocalAdminSystemUsageSegmentOptions {
   styleUrl: './local-admin-it-system-usage.component.scss',
 })
 export class LocalAdminItSystemUsageComponent {
-  public readonly LocalAdminSystemUsageSegmentOptions = LocalAdminSystemUsageSegmentOptions;
-  public selectedSegment: LocalAdminSystemUsageSegmentOptions = LocalAdminSystemUsageSegmentOptions.UiCustomization;
-  public readonly segmentOptions: SegmentButtonOption<LocalAdminSystemUsageSegmentOptions>[] = [
-    { text: $localize`Lokal tilpasning af brugerfladen`, value: LocalAdminSystemUsageSegmentOptions.UiCustomization },
-    { text: $localize`Lokal tilpasning af udfaldsrum`, value: LocalAdminSystemUsageSegmentOptions.RegularOptionTypes },
-    { text: $localize`Lokal tilpasning af roller`, value: LocalAdminSystemUsageSegmentOptions.RoleOptionTypes },
-  ];
-
+  public readonly LocalAdminModuleSegmentOptionType = LocalAdminModuleSegmentOptionType;
+  public readonly segmentOptions = LocalAdminModuleSegmentOptions;
   public readonly itSystemUsageModuleKey = UIModuleConfigKey.ItSystemUsage;
+
+  public selectedSegment = LocalAdminModuleSegmentOptionType.UiCustomization;
 }

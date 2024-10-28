@@ -1,13 +1,13 @@
 <app-segment [buttons]="segmentOptions" [(selected)]="selectedSegment"> </app-segment>
 
 <app-card>
-  <ng-container *ngIf="selectedSegment === LocalAdminSystemUsageSegmentOptions.UiCustomization">
+  <ng-container *ngIf="selectedSegment === LocalAdminModuleSegmentOptionType.UiCustomization">
 
     <app-ui-config [moduleKey]="itSystemUsageModuleKey"></app-ui-config>
 
   </ng-container>
 
-  <ng-container *ngIf="selectedSegment === LocalAdminSystemUsageSegmentOptions.RegularOptionTypes">
+  <ng-container *ngIf="selectedSegment === LocalAdminModuleSegmentOptionType.RegularOptionTypes">
     <app-standard-vertical-content-grid>
       <app-option-type-table optionType="it-system_business-type" title="Forretningstyper" i18n-title>
       </app-option-type-table>
@@ -60,7 +60,7 @@
     </app-standard-vertical-content-grid>
   </ng-container>
 
-  <ng-container *ngIf="selectedSegment === LocalAdminSystemUsageSegmentOptions.RoleOptionTypes">
+  <ng-container *ngIf="selectedSegment === LocalAdminModuleSegmentOptionType.RoleOptionTypes">
     <app-option-type-table
       optionType="it-system-usage"
       [disableAccordion]="true"
