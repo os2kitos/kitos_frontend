@@ -7,22 +7,17 @@ import { UserActions } from 'src/app/store/user-store/actions';
 import { DEFAULT_UNCLICKABLE_GRID_COLUMN_STYLES } from '../constants/constants';
 import { GridColumn } from '../models/grid-column.model';
 import { RegistrationEntityTypes } from '../models/registrations/registration-entity-categories.model';
-import { OrganizationActions } from 'src/app/store/organization/actions';
-import { BaseModuleComponent } from './base-module-component';
+import { BaseComponent } from './base.component';
 
 @Component({
   template: '',
 })
-export class BaseOverviewComponent extends BaseModuleComponent {
+export class BaseOverviewComponent extends BaseComponent {
   protected unclickableColumnFields: string[] = [];
 
-  constructor(
-    store: Store,
-    @Inject('RegistrationEntityTypes') protected entityType: RegistrationEntityTypes
-  ) {
-    super(store);
+  constructor(protected store: Store, @Inject('RegistrationEntityTypes') protected entityType: RegistrationEntityTypes) {
+    super();
     this.store.dispatch(UserActions.getUserGridPermissions());
-    this.store.dispatch(OrganizationActions.getUIRootConfig());
   }
 
   protected updateUnclickableColumns(currentColumns: GridColumn[]) {

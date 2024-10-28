@@ -1,21 +1,55 @@
 import { Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { BaseModuleComponent } from 'src/app/shared/base/base-module-component';
+import { distinctUntilChanged, filter, map, Observable, of, startWith } from 'rxjs';
+import { BaseComponent } from 'src/app/shared/base/base.component';
 import { NavigationDrawerItem } from 'src/app/shared/components/navigation-drawer/navigation-drawer.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
 import { UIModuleConfigActions } from 'src/app/store/organization/ui-module-customization/actions';
+import { OrganizationActions } from 'src/app/store/organization/actions';
+import {
+  selectShowDataProcessingRegistrations,
+  selectShowItContractModule,
+  selectShowItSystemModule,
+} from 'src/app/store/organization/selectors';
+import { UIModuleConfigActions } from 'src/app/store/organization/ui-module-customization/actions';
+
+interface ModuleTabInfo {
+  text: string;
+  enabled: Observable<boolean | undefined>;
+  dtoFieldName: string;
+}
 
 @Component({
   selector: 'app-local-admin',
   templateUrl: './local-admin.component.html',
   styleUrl: './local-admin.component.scss',
 })
-export class LocalAdminComponent extends BaseModuleComponent implements OnInit {
+export class LocalAdminComponent extends BaseComponent implements OnInit {
   public readonly AppPath = AppPath;
+  public currentTabPathSegment$: Observable<string> = of('');
+  public currentTabModuleKey$: Observable<UIModuleConfigKey | undefined> = of(undefined);
 
-  constructor(store: Store) {
-    super(store);
+  constructor(private store: Store, private router: Router) {
+    super();
+  }
+
+  ngOnInit(): void {
+    this.store.dispatch(UIModuleConfigActions.getUIModuleConfig({ module: UIModuleConfigKey.ItSystemUsage }));
+    this.store.dispatch(
+      UIModuleConfigActions.getUIModuleConfig({ module: UIModuleConfigKey.DataProcessingRegistrations })
+    );
+
+    this.currentTabPathSegment$ = this.router.events.pipe(
+      filter((event) => event instanceof NavigationEnd),
+      map((navigationEnd) => this.extractLastUrlSegment(navigationEnd.urlAfterRedirects)),
+      startWith(this.extractLastUrlSegment(this.router.url)),
+      distinctUntilChanged()
+    );
+    this.currentTabPathSegment$.subscribe((segment) => {
+      this.currentTabModuleKey$ = this.getCurrentTabModuleKey(segment);
+    });
   }
 
   public readonly items: NavigationDrawerItem[] = [
@@ -52,10 +86,73 @@ export class LocalAdminComponent extends BaseModuleComponent implements OnInit {
     },
   ];
 
-  public ngOnInit(): void {
-    this.store.dispatch(UIModuleConfigActions.getUIModuleConfig({ module: UIModuleConfigKey.ItSystemUsage }));
-    this.store.dispatch(
-      UIModuleConfigActions.getUIModuleConfig({ module: UIModuleConfigKey.DataProcessingRegistrations })
+  public readonly showItSystemModule$ = this.store.select(selectShowItSystemModule);
+  public readonly showItContractModule$ = this.store.select(selectShowItContractModule);
+  public readonly showDataProcessingRegistrations$ = this.store.select(selectShowDataProcessingRegistrations);
+
+  public getCurrentTabModuleKey(urlSegment: string) {
+    switch (urlSegment) {
+      case AppPath.localAdminSystemUsages:
+        return of(UIModuleConfigKey.ItSystemUsage);
+      case AppPath.itContracts:
+        return of(UIModuleConfigKey.ItContract);
+      case AppPath.dataProcessing:
+        return of(UIModuleConfigKey.DataProcessingRegistrations);
+      default:
+        return of(undefined);
+    }
+  }
+
+  public patchUIRootConfig($event: boolean) {
+    this.subscriptions.add(
+      this.currentTabModuleKey$.subscribe((moduleKey) => {
+        const moduleTabInfo = this.getModuleTabInfo(moduleKey);
+        this.store.dispatch(OrganizationActions.patchUIRootConfig({ dto: { [moduleTabInfo.dtoFieldName]: $event } }));
+      })
     );
+  }
+
+  getModuleEnabled(moduleKey: UIModuleConfigKey | undefined): Observable<boolean | undefined> {
+    const moduleTabInfo = this.getModuleTabInfo(moduleKey);
+    return moduleTabInfo.enabled;
+  }
+
+  getModuleText(moduleKey: UIModuleConfigKey | undefined): string {
+    const moduleTabInfo = this.getModuleTabInfo(moduleKey);
+    return moduleTabInfo.text;
+  }
+
+  private getModuleTabInfo(moduleKey: UIModuleConfigKey | undefined): ModuleTabInfo {
+    switch (moduleKey) {
+      case UIModuleConfigKey.ItSystemUsage:
+        return {
+          text: $localize`IT Systemer`,
+          enabled: this.showItSystemModule$,
+          dtoFieldName: 'showItSystemModule',
+        }
+      case UIModuleConfigKey.DataProcessingRegistrations:
+        return {
+          text: $localize`Databehandling`,
+          enabled: this.showDataProcessingRegistrations$,
+          dtoFieldName: 'showDataProcessing',
+        }
+      case UIModuleConfigKey.ItContract:
+        return {
+          text: $localize`IT Kontrakter`,
+          enabled: this.showItContractModule$,
+          dtoFieldName: 'showItContractModule',
+        };
+      default:
+        return {
+          text: $localize`Ukendt modul`,
+          enabled: of(false),
+          dtoFieldName: '',
+        };
+    }
+  }
+
+  private extractLastUrlSegment(url: string): string {
+    const urlSegments = url.split('/');
+    return urlSegments[urlSegments.length - 1];
   }
 }

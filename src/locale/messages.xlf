@@ -4258,11 +4258,17 @@
       <trans-unit id="9001961829556113608" datatype="html">
         <source>Lokal tilpasning af udfaldsrum</source>
       </trans-unit>
-      <trans-unit id="7334983470112776460" datatype="html">
-        <source><x id="START_TAG_APP_PARAGRAPH" ctype="x-app_paragraph" equiv-text="p-paragraph [bold]=&quot;true&quot; paragraphSize=&quot;medium&quot;&gt;"/> Inkluder modul <x id="CLOSE_TAG_APP_PARAGRAPH" ctype="x-app_paragraph" equiv-text="&lt;/app-paragraph&gt;"/></source>
-      </trans-unit>
       <trans-unit id="1265710071714281214" datatype="html">
         <source>Kunne ikke hente lokal tilpasning af moduler.</source>
+      </trans-unit>
+      <trans-unit id="3104778415715365281" datatype="html">
+        <source> Inkluder modulet <x id="INTERPOLATION" equiv-text="{{ getModuleText(moduleKey) }}"/> </source>
+      </trans-unit>
+      <trans-unit id="8666131066916332987" datatype="html">
+        <source>Ukendt modul</source>
+      </trans-unit>
+      <trans-unit id="4599362408449001670" datatype="html">
+        <source>Hvilken kontrakt skal angive om databehandlingen er aktiv</source>
       </trans-unit>
     </body>
   </file>

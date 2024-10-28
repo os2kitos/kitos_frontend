@@ -29,6 +29,7 @@ import { StatePersistingService } from 'src/app/shared/services/state-persisting
 import { UIConfigService } from 'src/app/shared/services/ui-config.service';
 import { getNewGridColumnsBasedOnConfig } from '../helpers/grid-config-helper';
 import { selectDprEnableMainContract } from '../organization/ui-module-customization/selectors';
+import { selectDprEnableMainContract, selectDprEnableReferences, selectDprEnableRoles, selectDprEnableScheduledInspectionDate } from '../organization/ui-module-customization/selectors';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { DataProcessingActions } from './actions';
 import {
@@ -652,14 +653,30 @@ export class DataProcessingEffects {
 
   private getUIConfigApplications(): Observable<UIConfigGridApplication[]> {
     const mainContract$ = this.store.select(selectDprEnableMainContract);
+    const dprRolesEnabled$ = this.store.select(selectDprEnableRoles);
+    const referenceEnabled$ = this.store.select(selectDprEnableReferences);
+    const scheduledInspectionDateEnabled$= this.store.select(selectDprEnableScheduledInspectionDate);
 
-    return combineLatest([mainContract$]).pipe(
-      map(([mainContractEnabled]): UIConfigGridApplication[] => {
+    return combineLatest([mainContract$, dprRolesEnabled$, referenceEnabled$, scheduledInspectionDateEnabled$]).pipe(
+      map(([mainContractEnabled, dprRolesEnabled, referenceEnabled, scheduledInspectionDate]): UIConfigGridApplication[] => {
         return [
           {
             shouldEnable: mainContractEnabled,
             columnNamesToConfigure: [GridFields.ActiveAccordingToMainContract],
           },
+          {
+            shouldEnable: dprRolesEnabled,
+            columnNamesToConfigure: [],
+            columnNameSubstringsToConfigure: ['Roles.Role']
+          },
+          {
+            shouldEnable: referenceEnabled,
+            columnNamesToConfigure: [GridFields.MainReferenceTitle, GridFields.MainReferenceUserAssignedId],
+          },
+          {
+            shouldEnable: scheduledInspectionDate,
+            columnNamesToConfigure: [GridFields.OversightScheduledInspectionDate],
+          }
         ];
       })
     );

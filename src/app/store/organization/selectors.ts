@@ -47,7 +47,12 @@ export const selectShowItSystemModule = createSelector(
   selectOrganizationState,
   (state) => state.uiRootConfig?.showItSystemModule
 );
-export const selectShowDataProcessingModule = createSelector(
+export const selectShowItContractModule = createSelector(
+  selectOrganizationState,
+  (state) => state.uiRootConfig?.showItContractModule
+);
+
+export const selectShowDataProcessingRegistrations = createSelector(
   selectOrganizationState,
   (state) => state.uiRootConfig?.showDataProcessing
 );

@@ -1,13 +1,5 @@
 <app-segment [buttons]="segmentOptions" [(selected)]="selectedSegment"> </app-segment>
 
-<app-card *ngIf="selectedSegment === LocalAdminSystemUsageSegmentOptions.UiCustomization">
-    <app-module-customization-card
-    [showModule$]="showItSystemModule$"
-    dtoFieldName="showItSystemModule"
-    (checkboxToggled)="patchUIRootConfig($event)">
-    </app-module-customization-card>
-</app-card>
-
 <app-card>
   <ng-container *ngIf="selectedSegment === LocalAdminSystemUsageSegmentOptions.UiCustomization">
 

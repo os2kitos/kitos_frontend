@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component,  } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { SegmentButtonOption } from 'src/app/shared/components/segment/segment.component';
 
 enum LocalAdminItContractsSegmentOption {
@@ -20,4 +21,5 @@ export class LocalAdminItContractComponent {
     { text: $localize`Udfaldsrum`, value: LocalAdminItContractsSegmentOption.RegularOptionTypes },
     { text: $localize`Roller`, value: LocalAdminItContractsSegmentOption.RoleOptionTypes },
   ];
+
 }

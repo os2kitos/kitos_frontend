@@ -118,7 +118,10 @@ export class UIConfigService {
 
   private applyUIConfigToGridColumns(application: UIConfigGridApplication, columns: GridColumn[]) {
     const updatedColumns = columns.map((column) => {
-      if (application.columnNamesToConfigure.includes(column.field)) {
+      if (
+        application.columnNamesToConfigure.includes(column.field) ||
+        application.columnNameSubstringsToConfigure?.some((substring) => column.field.includes(substring))
+      ) {
         return {
           ...column,
           disabledByUIConfig: !application.shouldEnable,

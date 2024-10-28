@@ -8,6 +8,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class CheckboxButtonComponent {
   @Input() value: boolean = false;
   @Input() disabled: boolean = false;
+  @Input() backgroundWhite: boolean = false;
 
   @Output() valueChange = new EventEmitter<boolean>();
 
