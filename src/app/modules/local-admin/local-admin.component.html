@@ -6,7 +6,7 @@
       (valueChange)="patchUIRootConfig($event)"
       [value]="(getModuleTogglingButtonValue(moduleKey) | async) ?? false"
       data-cy="toggle-module-button"
-
+      [backgroundWhite]="true"
       >
     <app-paragraph [bold]="true" paragraphSize="medium" i18n>
       Inkluder modulet {{ getModuleKeyDescription(moduleKey) }}
