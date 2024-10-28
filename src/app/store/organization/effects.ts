@@ -171,7 +171,7 @@ export class OrganizationEffects {
     );
   });
 
-  putUIRootConfig$ = createEffect(() => {
+  patchUIRootConfig$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(OrganizationActions.patchUIRootConfig),
       combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
