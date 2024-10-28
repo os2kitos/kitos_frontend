@@ -58,7 +58,12 @@ export class LocalAdminComponent extends BaseModuleComponent {
   public readonly currentTabModuleKey$ = this.store.select(selectCurrentTabModuleKey);
 
   public patchUIRootConfig($event: boolean) {
-    this.store.dispatch(OrganizationActions.patchUIRootConfig({ dto: { showItSystemModule: $event } }));
+    this.subscriptions.add(
+      this.currentTabModuleKey$.subscribe((moduleKey) => {
+        const dtoFieldName = this.getDtoFieldName(moduleKey);
+        this.store.dispatch(OrganizationActions.patchUIRootConfig({ dto: { [dtoFieldName]: $event } }));
+      })
+    );
   }
 
   getModuleKeyDescription(moduleKey: UIModuleConfigKey | undefined): string {
@@ -69,7 +74,20 @@ export class LocalAdminComponent extends BaseModuleComponent {
         return $localize`Databehandling`;
       case UIModuleConfigKey.ItContract:
         return $localize`IT Kontrakter`;
-        default:
+      default:
+        return $localize`Ukendt modul`;
+    }
+  }
+
+  getDtoFieldName(moduleKey: UIModuleConfigKey | undefined): string {
+    switch (moduleKey) {
+      case UIModuleConfigKey.ItSystemUsage:
+        return 'showItSystemModule';
+      case UIModuleConfigKey.DataProcessingRegistrations:
+        return 'showDataProcessing';
+      case UIModuleConfigKey.ItContract:
+        return 'showItContractModule';
+      default:
         return $localize`Ukendt modul`;
     }
   }
