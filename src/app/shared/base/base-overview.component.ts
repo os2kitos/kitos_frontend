@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { CellClickEvent } from '@progress/kendo-angular-grid';
@@ -12,16 +12,11 @@ import { BaseModuleComponent } from './base-module-component';
 @Component({
   template: '',
 })
-export class BaseOverviewComponent extends BaseModuleComponent implements OnInit{
+export class BaseOverviewComponent extends BaseModuleComponent {
   protected unclickableColumnFields: string[] = [];
 
-  constructor(
-    store: Store,
-    @Inject('RegistrationEntityTypes') protected entityType: RegistrationEntityTypes
-  ) {
+  constructor(store: Store, @Inject('RegistrationEntityTypes') protected entityType: RegistrationEntityTypes) {
     super(store);
-  }
-  ngOnInit(): void {
     this.store.dispatch(UserActions.getUserGridPermissions());
   }
 
