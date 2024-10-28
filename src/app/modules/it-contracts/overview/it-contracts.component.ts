@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { CellClickEvent } from '@progress/kendo-angular-grid';
 import { combineLatestWith, first } from 'rxjs';
 import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
+import * as GridFields from 'src/app/shared/constants/it-contracts-grid-column-constants';
 import {
   AGREEMENT_DEADLINES_SECTION_NAME,
   CATALOG_SECTION_NAME,
@@ -19,6 +20,7 @@ import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { yesNoOptions } from 'src/app/shared/models/yes-no.model';
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
+import { ItContractUIConfigService } from 'src/app/shared/services/ui-config-services/it-contract-ui-config.service';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import {
   selectContractGridColumns,
@@ -30,8 +32,6 @@ import {
   selectItContractLastSeenGridConfig,
 } from 'src/app/store/it-contract/selectors';
 import { selectGridConfigModificationPermission } from 'src/app/store/user-store/selectors';
-import * as GridFields from 'src/app/shared/constants/it-contracts-grid-column-constants';
-import { ItContractUIConfigService } from 'src/app/shared/services/ui-config-services/it-contract-ui-config.service';
 
 @Component({
   templateUrl: 'it-contracts.component.html',
@@ -43,7 +43,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
   public readonly gridState$ = this.store.select(selectContractGridState);
   public readonly gridColumns$ = this.store
     .select(selectContractGridColumns)
-    .pipe(this.itContractUiService.ApplyItContractConfigToGridColumns());
+    .pipe(this.itContractUiService.applyItContractConfigToGridColumns());
   public readonly hasCreatePermission$ = this.store.select(selectItContractHasCollectionCreatePermissions);
 
   public readonly hasConfigModificationPermissions$ = this.store.select(selectGridConfigModificationPermission);

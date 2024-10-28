@@ -29,7 +29,7 @@ import { UIConfigService } from './ui-config.service';
 export class ItContractUIConfigService {
   constructor(private uiConfigService: UIConfigService, private store: Store) {}
 
-  public ApplyItContractConfigToGridColumns(): (source: Observable<GridColumn[]>) => Observable<GridColumn[]> {
+  public applyItContractConfigToGridColumns(): (source: Observable<GridColumn[]>) => Observable<GridColumn[]> {
     return this.uiConfigService.applyConfigToGridColumns(this.getUIConfigApplications());
   }
 
