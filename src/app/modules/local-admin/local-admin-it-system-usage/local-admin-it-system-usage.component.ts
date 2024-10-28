@@ -33,7 +33,7 @@ export class LocalAdminItSystemUsageComponent implements OnInit {
   public readonly itSystemUsageUIModuleConfig$ = this.store.select(selectITSystemUsageUIModuleConfig);
   public readonly showItSystemModule$ = this.store.select(selectShowItSystemModule);
   private readonly itSystemUsageModuleKey = UIModuleConfigKey.ItSystemUsage;
-    public readonly currentTabModuleKey$ = this.store.select(selectCurrentTabModuleKey);
+  public readonly currentTabModuleKey$ = this.store.select(selectCurrentTabModuleKey);
 
 
   constructor(private readonly store: Store, private readonly notificationService: NotificationService) {

@@ -5,10 +5,10 @@
     (valueChange)="patchUIRootConfig($event)"
     [value]="(showItSystemModule$ | async) ?? false"
     data-cy="toggle-module-button"
-    *ngIf="currentTabModuleKey$ | async"
+    *ngIf="currentTabModuleKey$ | async as moduleKey"
     >
   <app-paragraph [bold]="true" paragraphSize="medium">
-    Inkluder modulet ""
+    Inkluder modulet {{ getModuleKeyDescription(moduleKey) }}
   </app-paragraph>
   </app-checkbox-button>
 </div>

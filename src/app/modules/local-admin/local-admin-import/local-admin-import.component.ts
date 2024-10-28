@@ -31,6 +31,4 @@ export class LocalAdminImportComponent implements OnInit {
     { text: $localize`Brugere`, value: LocalAdminImportTabOptions.users },
     { text: $localize`IT Kontrakter`, value: LocalAdminImportTabOptions.contracts },
   ];
-
-
 }

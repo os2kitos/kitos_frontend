@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { BaseModuleComponent } from 'src/app/shared/base/base-module-component';
 import { NavigationDrawerItem } from 'src/app/shared/components/navigation-drawer/navigation-drawer.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
+import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
 import { selectCurrentTabModuleKey } from 'src/app/store/local-admin/ui-root-config/selectors';
 import { OrganizationActions } from 'src/app/store/organization/actions';
 import { selectShowItSystemModule } from 'src/app/store/organization/selectors';
@@ -58,5 +59,18 @@ export class LocalAdminComponent extends BaseModuleComponent {
 
   public patchUIRootConfig($event: boolean) {
     this.store.dispatch(OrganizationActions.patchUIRootConfig({ dto: { showItSystemModule: $event } }));
+  }
+
+  getModuleKeyDescription(moduleKey: UIModuleConfigKey | undefined): string {
+    switch (moduleKey) {
+      case UIModuleConfigKey.ItSystemUsage:
+        return $localize`IT systemer`;
+      case UIModuleConfigKey.DataProcessingRegistrations:
+        return $localize`Databehandling`;
+      case UIModuleConfigKey.ItContract:
+        return $localize`IT Kontrakter`;
+        default:
+        return $localize`Ukendt modul`;
+    }
   }
 }
