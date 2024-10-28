@@ -15,12 +15,13 @@ import {
   ECONOMY_SECTION_NAME,
   REFERENCE_SECTION_NAME,
 } from 'src/app/shared/constants/persistent-state-constants';
+import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
 import { getColumnsToShow } from 'src/app/shared/helpers/grid-config-helper';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { yesNoOptions } from 'src/app/shared/models/yes-no.model';
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
-import { ItContractUIConfigService } from 'src/app/shared/services/ui-config-services/it-contract-ui-config.service';
+import { UIConfigService } from 'src/app/shared/services/ui-config-services/ui-config.service';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import {
   selectContractGridColumns,
@@ -43,7 +44,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
   public readonly gridState$ = this.store.select(selectContractGridState);
   public readonly gridColumns$ = this.store
     .select(selectContractGridColumns)
-    .pipe(this.itContractUiService.applyItContractConfigToGridColumns());
+    .pipe(this.configService.filterGridColumnsByUIConfig(UIModuleConfigKey.ItContract));
   public readonly hasCreatePermission$ = this.store.select(selectItContractHasCollectionCreatePermissions);
 
   public readonly hasConfigModificationPermissions$ = this.store.select(selectGridConfigModificationPermission);
@@ -55,7 +56,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
     private route: ActivatedRoute,
     private actions$: Actions,
     private statePersistingService: StatePersistingService,
-    private itContractUiService: ItContractUIConfigService
+    private configService: UIConfigService
   ) {
     super(store, 'it-contract');
   }

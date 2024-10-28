@@ -11,11 +11,14 @@ import { UIConfigNodeViewModel } from '../../models/ui-config/ui-config-node-vie
 import { UIModuleConfig } from '../../models/ui-config/ui-module-config.model';
 import { UINodeBlueprint } from '../../models/ui-config/ui-node-blueprint.model';
 import { UINodeCustomization } from '../../models/ui-config/ui-node-customization';
+import { GridUIConfigService } from './grid-ui-config.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UIConfigService {
+  constructor(private gridConfigService: GridUIConfigService) {}
+
   public buildUIModuleConfig(uiModuleCustomizations: UINodeCustomization[], module: UIModuleConfigKey): UIModuleConfig {
     const blueprint = this.getUIBlueprintWithFullKeys(module);
     const moduleConfigViewModel: UIConfigNodeViewModel | undefined = this.buildUIConfigNodeViewModels(
@@ -27,6 +30,12 @@ export class UIConfigService {
 
   private findCustomizedUINode(customizationList: UINodeCustomization[], fullKey: string): UINodeCustomization | null {
     return customizationList.find((elem) => elem.fullKey === fullKey) || null;
+  }
+
+  public filterGridColumnsByUIConfig(
+    moduleKey: UIModuleConfigKey
+  ): (source: Observable<GridColumn[]>) => Observable<GridColumn[]> {
+    return this.applyConfigToGridColumns(this.gridConfigService.getUIConfigApplications(moduleKey));
   }
 
   public applyConfigToGridColumns(
