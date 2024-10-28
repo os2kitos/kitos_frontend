@@ -7,7 +7,11 @@ import { NavigationDrawerItem } from 'src/app/shared/components/navigation-drawe
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
 import { OrganizationActions } from 'src/app/store/organization/actions';
-import { selectShowDataProcessingRegistrations, selectShowItContractModule, selectShowItSystemModule } from 'src/app/store/organization/selectors';
+import {
+  selectShowDataProcessingRegistrations,
+  selectShowItContractModule,
+  selectShowItSystemModule,
+} from 'src/app/store/organization/selectors';
 
 @Component({
   selector: 'app-local-admin',
@@ -16,22 +20,21 @@ import { selectShowDataProcessingRegistrations, selectShowItContractModule, sele
 })
 export class LocalAdminComponent extends BaseModuleComponent implements OnInit {
   public readonly AppPath = AppPath;
-  public currentTabPathSegment$: Observable<string>;
+  public currentTabPathSegment$: Observable<string> = of('');
   public currentTabModuleKey$: Observable<UIModuleConfigKey | undefined> = of(undefined);
 
-  constructor(store: Store, private router: Router,
-  ) {
+  constructor(store: Store, private router: Router) {
     super(store);
-    this.currentTabPathSegment$ = this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd),
-      map(event => this.extractLastUrlSegment(event.urlAfterRedirects)),
-      startWith(this.extractLastUrlSegment(this.router.url)),
-      distinctUntilChanged()
-    );
   }
 
   ngOnInit(): void {
-    this.currentTabPathSegment$.subscribe(segment => {
+    this.currentTabPathSegment$ = this.router.events.pipe(
+      filter((event) => event instanceof NavigationEnd),
+      map((navigationEnd) => this.extractLastUrlSegment(navigationEnd.urlAfterRedirects)),
+      startWith(this.extractLastUrlSegment(this.router.url)),
+      distinctUntilChanged()
+    );
+    this.currentTabPathSegment$.subscribe((segment) => {
       this.currentTabModuleKey$ = this.getCurrentTabModuleKey(segment);
     });
   }
@@ -74,7 +77,7 @@ export class LocalAdminComponent extends BaseModuleComponent implements OnInit {
   public readonly showItContractModule$ = this.store.select(selectShowItContractModule);
   public readonly showDataProcessingRegistrations$ = this.store.select(selectShowDataProcessingRegistrations);
 
-  public getCurrentTabModuleKey(urlSegment: string){
+  public getCurrentTabModuleKey(urlSegment: string) {
     switch (urlSegment) {
       case AppPath.localAdminSystemUsages:
         return of(UIModuleConfigKey.ItSystemUsage);
@@ -84,8 +87,8 @@ export class LocalAdminComponent extends BaseModuleComponent implements OnInit {
         return of(UIModuleConfigKey.DataProcessingRegistrations);
       default:
         return of(undefined);
+    }
   }
-}
 
   public patchUIRootConfig($event: boolean) {
     this.subscriptions.add(
@@ -112,7 +115,7 @@ export class LocalAdminComponent extends BaseModuleComponent implements OnInit {
   getModuleKeyDescription(moduleKey: UIModuleConfigKey | undefined): string {
     switch (moduleKey) {
       case UIModuleConfigKey.ItSystemUsage:
-        return $localize`IT systemer`;
+        return $localize`IT Systemer`;
       case UIModuleConfigKey.DataProcessingRegistrations:
         return $localize`Databehandling`;
       case UIModuleConfigKey.ItContract:
