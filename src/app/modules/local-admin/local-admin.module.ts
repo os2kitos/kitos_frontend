@@ -16,7 +16,6 @@ import { FkOrgChangelogComponent } from './local-admin-import/local-admin-import
 import { LocalAdminImportComponent } from './local-admin-import/local-admin-import.component';
 import { LocalAdminImportOrganizationComponent } from './local-admin-import/local-admin-import-organization/local-admin-import-organization.component';
 import { FkOrgWriteDialogComponent } from './local-admin-import/local-admin-import-organization/fk-org-write-dialog/fk-org-write-dialog.component';
-import { ModuleCustomizationCardComponent } from './module-customization-card/module-customization-card.component';
 
 @NgModule({
   declarations: [ LocalAdminComponent,
@@ -32,7 +31,6 @@ import { ModuleCustomizationCardComponent } from './module-customization-card/mo
     UiConfigTabSectionComponent,
     FkOrgDeleteDialogComponent,
     FkOrgChangelogComponent,
-    ModuleCustomizationCardComponent
   ],
   imports: [CommonModule, ComponentsModule, SharedModule, LocalAdminRouterModule],
 })

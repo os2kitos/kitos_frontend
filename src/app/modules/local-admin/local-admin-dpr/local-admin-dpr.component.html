@@ -1,13 +1,5 @@
 <app-segment [buttons]="segmentOptions" [(selected)]="selectedSegment"></app-segment>
 
-<app-card *ngIf="selectedSegment === LocalAdminDprSegmentOption.UiCustomization">
-  <app-module-customization-card
-    [showModule$]="showDataProcessingModule$"
-    dtoFieldName="showDataProcessing"
-    (checkboxToggled)="patchUIRootConfig($event)">
-    </app-module-customization-card>
-</app-card>
-
 <app-card>
   <ng-container *ngIf="selectedSegment === LocalAdminDprSegmentOption.UiCustomization">
     <app-standard-vertical-content-grid>
