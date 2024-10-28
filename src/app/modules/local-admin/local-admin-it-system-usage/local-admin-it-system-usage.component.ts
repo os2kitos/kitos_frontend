@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { APICustomizedUINodeRequestDTO } from 'src/app/api/v2';
 import { SegmentButtonOption } from 'src/app/shared/components/segment/segment.component';
 import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
 import { UINodeCustomization } from 'src/app/shared/models/ui-config/ui-node-customization';
@@ -29,13 +30,13 @@ export class LocalAdminItSystemUsageComponent {
   ];
   public readonly itSystemUsageUIModuleConfig$ = this.store.select(selectITSystemUsageUIModuleConfig);
   public readonly showItSystemModule$ = this.store.select(selectShowItSystemModule);
-  private readonly itSystemUsageModuleKey = UIModuleConfigKey.ItSystemUsage;
+  public readonly itSystemUsageModuleKey = UIModuleConfigKey.ItSystemUsage;
 
   constructor(private readonly store: Store, private readonly notificationService: NotificationService) {
   }
 
   public onCheckboxChange($event: UINodeCustomization) {
-    const dto: APICustomizedUINodeDTO = { enabled: $event.enabled, key: $event.fullKey };
+    const dto: APICustomizedUINodeRequestDTO = { enabled: $event.enabled, key: $event.fullKey };
     this.store.dispatch(
       UIModuleConfigActions.putUIModuleCustomization({ module: this.itSystemUsageModuleKey, updatedNodeRequest: dto })
     );

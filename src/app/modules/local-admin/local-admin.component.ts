@@ -12,6 +12,7 @@ import {
   selectShowItContractModule,
   selectShowItSystemModule,
 } from 'src/app/store/organization/selectors';
+import { UIModuleConfigActions } from 'src/app/store/organization/ui-module-customization/actions';
 
 @Component({
   selector: 'app-local-admin',
@@ -28,6 +29,8 @@ export class LocalAdminComponent extends BaseModuleComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.store.dispatch(UIModuleConfigActions.getUIModuleConfig({ module: UIModuleConfigKey.ItSystemUsage }));
+
     this.currentTabPathSegment$ = this.router.events.pipe(
       filter((event) => event instanceof NavigationEnd),
       map((navigationEnd) => this.extractLastUrlSegment(navigationEnd.urlAfterRedirects)),
@@ -73,13 +76,6 @@ export class LocalAdminComponent extends BaseModuleComponent implements OnInit {
     },
   ];
 
-  constructor(private store: Store) {}
-  public ngOnInit(): void {
-    this.store.dispatch(UIModuleConfigActions.getUIModuleConfig({ module: UIModuleConfigKey.ItSystemUsage }));
-    this.store.dispatch(
-      UIModuleConfigActions.getUIModuleConfig({ module: UIModuleConfigKey.DataProcessingRegistrations })
-    );
-  }
   public readonly showItSystemModule$ = this.store.select(selectShowItSystemModule);
   public readonly showItContractModule$ = this.store.select(selectShowItContractModule);
   public readonly showDataProcessingRegistrations$ = this.store.select(selectShowDataProcessingRegistrations);

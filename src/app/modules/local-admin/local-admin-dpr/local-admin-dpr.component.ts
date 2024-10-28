@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Store } from '@ngrx/store';
 import { SegmentButtonOption } from 'src/app/shared/components/segment/segment.component';
 import { selectDataProcessingUIModuleConfig } from 'src/app/store/organization/ui-module-customization/selectors';
 import { Store } from '@ngrx/store';
