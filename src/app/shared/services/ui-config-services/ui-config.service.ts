@@ -131,9 +131,9 @@ export class UIConfigService {
     return (key.match(/\./g) || []).length;
   }
 
-  public applyAllUIConfigToGridColumns(applications: UIConfigGridApplication[], columns: GridColumn[]) {
+  private applyAllUIConfigToGridColumns(applications: UIConfigGridApplication[], columns: GridColumn[]) {
     applications.forEach((application) => (columns = this.applyUIConfigToGridColumns(application, columns)));
-    return columns; //TODO: Make this private when done refactoring
+    return columns;
   }
 
   private applyUIConfigToGridColumns(application: UIConfigGridApplication, columns: GridColumn[]) {
