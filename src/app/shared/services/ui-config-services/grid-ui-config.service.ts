@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { combineLatest, map, Observable } from 'rxjs';
-import * as DprFields from 'src/app/shared/constants/it-contracts-grid-column-constants';
+import * as ContractFields from 'src/app/shared/constants/it-contracts-grid-column-constants';
 import * as UsageFields from 'src/app/shared/constants/it-system-usage-grid-column-constants';
+import * as DprFields from 'src/app/shared/constants/data-processing-grid-column-constants';
 import {
+  selectDprEnableMainContract,
   selectItContractEnableContractId,
   selectItContractEnableContractRoles,
   selectItContractsEnableAgreementDeadlines,
@@ -44,6 +46,8 @@ export class GridUIConfigService {
         return this.getItContractGridConfig();
       case UIModuleConfigKey.ItSystemUsage:
         return this.getItSystemUsageGridConfig();
+      case UIModuleConfigKey.DataProcessingRegistrations:
+        return this.getDataProcessingGridConfig();
       default:
         throw new Error(`Module key ${moduleKey} is not supported`);
     }
@@ -103,72 +107,72 @@ export class GridUIConfigService {
         ]): UIConfigGridApplication[] => [
           {
             shouldEnable: enabledContractId,
-            columnNamesToConfigure: [DprFields.ContractId],
+            columnNamesToConfigure: [ContractFields.ContractId],
           },
           {
             shouldEnable: enabledAgreementPeriod,
-            columnNamesToConfigure: [DprFields.Concluded, DprFields.ExpirationDate],
+            columnNamesToConfigure: [ContractFields.Concluded, ContractFields.ExpirationDate],
           },
           {
             shouldEnable: enabledCriticality,
-            columnNamesToConfigure: [DprFields.CriticalityUuid],
+            columnNamesToConfigure: [ContractFields.CriticalityUuid],
           },
           {
             shouldEnable: enabledInternalSigner,
-            columnNamesToConfigure: [DprFields.ContractSigner],
+            columnNamesToConfigure: [ContractFields.ContractSigner],
           },
           {
             shouldEnable: enabledContractType,
-            columnNamesToConfigure: [DprFields.ContractTypeUuid],
+            columnNamesToConfigure: [ContractFields.ContractTypeUuid],
           },
           {
             shouldEnable: enabledContractTemplate,
-            columnNamesToConfigure: [DprFields.ContractTemplateUuid],
+            columnNamesToConfigure: [ContractFields.ContractTemplateUuid],
           },
           {
             shouldEnable: enabledPurchaseForm,
-            columnNamesToConfigure: [DprFields.PurchaseFormUuid],
+            columnNamesToConfigure: [ContractFields.PurchaseFormUuid],
           },
           {
             shouldEnable: enabledProcurementStrategy,
-            columnNamesToConfigure: [DprFields.ProcurementStrategyUuid],
+            columnNamesToConfigure: [ContractFields.ProcurementStrategyUuid],
           },
           {
             shouldEnable: enabledProcurementPlan,
-            columnNamesToConfigure: [DprFields.ProcurementPlanYear],
+            columnNamesToConfigure: [ContractFields.ProcurementPlanYear],
           },
           {
             shouldEnable: enabledProcurementInitiated,
-            columnNamesToConfigure: [DprFields.ProcurementInitiated],
+            columnNamesToConfigure: [ContractFields.ProcurementInitiated],
           },
           {
             shouldEnable: enabledExternalPayment,
             columnNamesToConfigure: [
-              DprFields.AccumulatedAcquisitionCost,
-              DprFields.AccumulatedOperationCost,
-              DprFields.AccumulatedOtherCost,
-              DprFields.LatestAuditDate,
-              DprFields.AuditStatusWhite,
-              DprFields.AuditStatusYellow,
-              DprFields.AuditStatusRed,
-              DprFields.AuditStatusGreen,
+              ContractFields.AccumulatedAcquisitionCost,
+              ContractFields.AccumulatedOperationCost,
+              ContractFields.AccumulatedOtherCost,
+              ContractFields.LatestAuditDate,
+              ContractFields.AuditStatusWhite,
+              ContractFields.AuditStatusYellow,
+              ContractFields.AuditStatusRed,
+              ContractFields.AuditStatusGreen,
             ],
           },
           {
             shouldEnable: enabledPaymentModel,
             columnNamesToConfigure: [
-              DprFields.OperationRemunerationBegunDate,
-              DprFields.PaymentModelUuid,
-              DprFields.PaymentFrequencyUuid,
+              ContractFields.OperationRemunerationBegunDate,
+              ContractFields.PaymentModelUuid,
+              ContractFields.PaymentFrequencyUuid,
             ],
           },
           {
             shouldEnable: enabledAgreementDeadlines,
-            columnNamesToConfigure: [DprFields.Duration, DprFields.OptionExtendUuid, DprFields.IrrevocableTo],
+            columnNamesToConfigure: [ContractFields.Duration, ContractFields.OptionExtendUuid, ContractFields.IrrevocableTo],
           },
           {
             shouldEnable: enabledTermination,
-            columnNamesToConfigure: [DprFields.TerminationDeadlineUuid, DprFields.TerminatedAt],
+            columnNamesToConfigure: [ContractFields.TerminationDeadlineUuid, ContractFields.TerminatedAt],
           },
           {
             shouldEnable: enabledContractRoles,
@@ -281,6 +285,21 @@ export class GridUIConfigService {
           },
         ]
       )
+    );
+  }
+
+  private getDataProcessingGridConfig(): Observable<UIConfigGridApplication[]> {
+    const mainContract$ = this.store.select(selectDprEnableMainContract);
+
+    return combineLatest([mainContract$]).pipe(
+      map(([mainContractEnabled]): UIConfigGridApplication[] => {
+        return [
+          {
+            shouldEnable: mainContractEnabled,
+            columnNamesToConfigure: [DprFields.ActiveAccordingToMainContract],
+          },
+        ];
+      })
     );
   }
 
