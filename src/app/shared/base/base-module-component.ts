@@ -9,6 +9,6 @@ import { OrganizationActions } from "src/app/store/organization/actions";
 export class BaseModuleComponent extends BaseComponent {
   constructor(protected store: Store) {
     super();
-    this.store.dispatch(OrganizationActions.getUIRootConfig());
+    //this.store.dispatch(OrganizationActions.getUIRootConfig());
   }
 }
