@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
-import { Store } from '@ngrx/store';
 import { SegmentButtonOption } from 'src/app/shared/components/segment/segment.component';
 import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
-import { selectItContractsUIModuleConfig } from 'src/app/store/organization/ui-module-customization/selectors';
 
 enum LocalAdminItContractsSegmentOption {
   UiCustomization = 'UiCustomization',
@@ -26,8 +24,5 @@ export class LocalAdminItContractComponent {
     { text: $localize`Roller`, value: LocalAdminItContractsSegmentOption.RoleOptionTypes },
   ];
 
-  public readonly itContractsUIModuleConfig$ = this.store.select(selectItContractsUIModuleConfig);
   public readonly itContractsModuleKey = UIModuleConfigKey.ItContract;
-
-  constructor(private store: Store) {}
 }

@@ -2,17 +2,7 @@
 
 <app-card>
   <ng-container *ngIf="selectedSegment === LocalAdminItContractsSegmentOption.UiCustomization">
-    <app-standard-vertical-content-grid>
-      <ng-container *ngIf="itContractsUIModuleConfig$ | async as uiModuleConfig">
-        <app-ui-config-tab-section
-          *ngFor="let tabViewModel of uiModuleConfig.moduleConfigViewModel?.children"
-          [moduleKey]="itContractsModuleKey"
-          [tabViewModel]="tabViewModel"
-        >
-        </app-ui-config-tab-section>
-        <app-loading *ngIf="uiModuleConfig === undefined"></app-loading>
-      </ng-container>
-    </app-standard-vertical-content-grid>
+    <app-ui-config [moduleKey]="itContractsModuleKey"></app-ui-config>
   </ng-container>
 
   <ng-container *ngIf="selectedSegment === LocalAdminItContractsSegmentOption.RegularOptionTypes">
