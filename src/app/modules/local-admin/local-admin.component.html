@@ -2,13 +2,13 @@
 >
   <h4 i18n class="title-margin">Lokal admin</h4>
   <ng-container *ngIf="currentTabModuleKey$ | async as moduleKey">
-    <app-checkbox-button i18n
+    <app-checkbox-button
       (valueChange)="patchUIRootConfig($event)"
       [value]="(getModuleTogglingButtonValue(moduleKey) | async) ?? false"
       data-cy="toggle-module-button"
 
       >
-    <app-paragraph [bold]="true" paragraphSize="medium">
+    <app-paragraph [bold]="true" paragraphSize="medium" i18n>
       Inkluder modulet {{ getModuleKeyDescription(moduleKey) }}
     </app-paragraph>
     </app-checkbox-button>

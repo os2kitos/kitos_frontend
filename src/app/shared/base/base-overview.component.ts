@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { CellClickEvent } from '@progress/kendo-angular-grid';
@@ -7,13 +7,12 @@ import { UserActions } from 'src/app/store/user-store/actions';
 import { DEFAULT_UNCLICKABLE_GRID_COLUMN_STYLES } from '../constants/constants';
 import { GridColumn } from '../models/grid-column.model';
 import { RegistrationEntityTypes } from '../models/registrations/registration-entity-categories.model';
-import { OrganizationActions } from 'src/app/store/organization/actions';
 import { BaseModuleComponent } from './base-module-component';
 
 @Component({
   template: '',
 })
-export class BaseOverviewComponent extends BaseModuleComponent {
+export class BaseOverviewComponent extends BaseModuleComponent implements OnInit{
   protected unclickableColumnFields: string[] = [];
 
   constructor(
@@ -21,8 +20,9 @@ export class BaseOverviewComponent extends BaseModuleComponent {
     @Inject('RegistrationEntityTypes') protected entityType: RegistrationEntityTypes
   ) {
     super(store);
+  }
+  ngOnInit(): void {
     this.store.dispatch(UserActions.getUserGridPermissions());
-    this.store.dispatch(OrganizationActions.getUIRootConfig());
   }
 
   protected updateUnclickableColumns(currentColumns: GridColumn[]) {
