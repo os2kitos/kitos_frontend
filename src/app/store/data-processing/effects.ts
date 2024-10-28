@@ -28,7 +28,6 @@ import { ExternalReferencesApiService } from 'src/app/shared/services/external-r
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
 import { UIConfigService } from 'src/app/shared/services/ui-config.service';
 import { getNewGridColumnsBasedOnConfig } from '../helpers/grid-config-helper';
-import { selectDprEnableMainContract } from '../organization/ui-module-customization/selectors';
 import { selectDprEnableMainContract, selectDprEnableReferences, selectDprEnableRoles, selectDprEnableScheduledInspectionDate } from '../organization/ui-module-customization/selectors';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { DataProcessingActions } from './actions';

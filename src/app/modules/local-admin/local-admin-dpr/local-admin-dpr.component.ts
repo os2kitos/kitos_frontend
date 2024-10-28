@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { SegmentButtonOption } from 'src/app/shared/components/segment/segment.component';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { OrganizationActions } from 'src/app/store/organization/actions';
-import { selectShowDataProcessingModule } from 'src/app/store/organization/selectors';
+import { selectShowDataProcessingRegistrations } from 'src/app/store/organization/selectors';
 import { selectDataProcessingUIModuleConfig } from 'src/app/store/organization/ui-module-customization/selectors';
 import { Store } from '@ngrx/store';
 import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
@@ -29,7 +29,7 @@ export class LocalAdminDprComponent {
     { text: $localize`Lokal tilpasning af roller`, value: LocalAdminDprSegmentOption.RoleOptionTypes },
   ];
 
-  public readonly showDataProcessingModule$ = this.store.select(selectShowDataProcessingModule);
+  public readonly showDataProcessingModule$ = this.store.select(selectShowDataProcessingRegistrations);
   public readonly dataProcessingUIModuleConfig$ = this.store.select(selectDataProcessingUIModuleConfig);
   public readonly dataProcessingModuleKey = UIModuleConfigKey.DataProcessingRegistrations;
 

@@ -6,7 +6,6 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
 import { NavigationDrawerItem } from 'src/app/shared/components/navigation-drawer/navigation-drawer.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
-import { UIModuleConfigActions } from 'src/app/store/organization/ui-module-customization/actions';
 import { OrganizationActions } from 'src/app/store/organization/actions';
 import {
   selectShowDataProcessingRegistrations,
