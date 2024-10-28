@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { distinctUntilChanged, filter, map, Observable, of } from 'rxjs';
+import { distinctUntilChanged, filter, map, Observable, of, startWith } from 'rxjs';
 import { BaseModuleComponent } from 'src/app/shared/base/base-module-component';
 import { NavigationDrawerItem } from 'src/app/shared/components/navigation-drawer/navigation-drawer.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
@@ -19,12 +19,13 @@ export class LocalAdminComponent extends BaseModuleComponent implements OnInit {
   public currentTabPathSegment$: Observable<string>;
   public currentTabModuleKey$: Observable<UIModuleConfigKey | undefined> = of(undefined);
 
-  constructor(store: Store,     private router: Router,
+  constructor(store: Store, private router: Router,
   ) {
     super(store);
     this.currentTabPathSegment$ = this.router.events.pipe(
       filter(event => event instanceof NavigationEnd),
-      map(this.extractLastUrlSegment),
+      map(event => this.extractLastUrlSegment(event.urlAfterRedirects)),
+      startWith(this.extractLastUrlSegment(this.router.url)),
       distinctUntilChanged()
     );
   }
@@ -134,8 +135,8 @@ export class LocalAdminComponent extends BaseModuleComponent implements OnInit {
     }
   }
 
-  private extractLastUrlSegment(event: NavigationEnd): string {
-    const urlSegments = event.urlAfterRedirects.split('/');
+  private extractLastUrlSegment(url: string): string {
+    const urlSegments = url.split('/');
     return urlSegments[urlSegments.length - 1];
   }
 }
