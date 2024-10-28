@@ -1,5 +1,20 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-/*
+import {
+  HttpClient,
+  HttpContext,
+  HttpEvent,
+  HttpHeaders,
+  HttpParameterCodec,
+  HttpParams,
+  HttpResponse,
+} from '@angular/common/http';
+import { Inject, Injectable, Optional } from '@angular/core';
+import { Observable } from 'rxjs';
+import { BASE_PATH, Configuration } from 'src/app/api/v1';
+import { CustomHttpParameterCodec } from 'src/app/api/v1/encoder';
+import { PostSingleExcelInternalV2PostOrgUnitsRequestParams } from 'src/app/api/v2';
+import { environment } from 'src/environments/environment';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -162,4 +177,3 @@ export class APIExcelService {
     });
   }
 }
- */

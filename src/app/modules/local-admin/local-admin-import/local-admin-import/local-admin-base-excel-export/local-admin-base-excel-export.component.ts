@@ -8,6 +8,7 @@ import { first } from 'rxjs';
 import { CustomHttpParameterCodec } from 'src/app/api/v1/encoder';
 import { APIV2ExcelInternalINTERNALService, Configuration } from 'src/app/api/v2';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
+import { APIExcelService } from 'src/app/shared/services/excel.service';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 
 @Component({
@@ -29,8 +30,8 @@ export class LocalAdminBaseExcelExportComponent {
     private actions$: Actions,
     private httpClient: HttpClient,
     @Inject(APIV2ExcelInternalINTERNALService) private apiService: APIV2ExcelInternalINTERNALService,
-    @Optional() configuration: Configuration
-    //@Inject(APIExcelService) private excelService: APIExcelService
+    @Optional() configuration: Configuration,
+    @Inject(APIExcelService) private excelService: APIExcelService
   ) {
     this.excelForm = this.fb.group({
       file: [null, Validators.required],
@@ -60,6 +61,10 @@ export class LocalAdminBaseExcelExportComponent {
       formData.append('file', this.excelForm.get('file')?.value);
 
       this.organizationUuid$.pipe(first()).subscribe((orgUuid) => {
+        this.apiService.postSingleExcelInternalV2PostOrgUnits(
+          { organizationUuid: orgUuid, importOrgUnits: true },
+          formData
+        );
         //this.excelService.postSingleExcelInternalV2PostOrgUnits({ organizationUuid: orgUuid, importOrgUnits: true });
       });
       // Handle the form submission, e.g., send the form data to the server
