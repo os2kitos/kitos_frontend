@@ -16,6 +16,7 @@ api/v2DprLocalCountryOptionTypesInternalINTERNAL.service.ts
 api/v2DprLocalDataResponsibleTypesInternalINTERNAL.service.ts
 api/v2DprLocalOversightOptionTypesInternalINTERNAL.service.ts
 api/v2DprLocalRoleOptionTypesInternalINTERNAL.service.ts
+api/v2ExcelInternalINTERNAL.service.ts
 api/v2GridLocalItContractRolesINTERNAL.service.ts
 api/v2ItContract.service.ts
 api/v2ItContractAgreementElementType.service.ts
@@ -258,6 +259,8 @@ model/trackingEventResponseDTO.ts
 model/transferOrganizationUnitRegistrationV2RequestDTO.ts
 model/uIModuleCustomizationRequestDTO.ts
 model/uIModuleCustomizationResponseDTO.ts
+model/uIRootConfigResponseDTO.ts
+model/uIRootConfigUpdateRequestDTO.ts
 model/unitAccessRightsResponseDTO.ts
 model/unitAccessRightsWithUnitDataResponseDTO.ts
 model/updateContractRequestDTO.ts

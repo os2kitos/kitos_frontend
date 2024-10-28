@@ -5543,6 +5543,18 @@
         <source>Ændringer ifm. de seneste fem import operationer der indeholdte ændringer</source>
         <target state="new">Ændringer ifm. de seneste fem import operationer der indeholdte ændringer</target>
       </trans-unit>
+      <trans-unit id="6932865105766151309" datatype="html">
+        <source>Upload</source>
+        <target state="new">Upload</target>
+      </trans-unit>
+      <trans-unit id="5380143205636199847" datatype="html">
+        <source> Step 1 - Hent og udfyld ark</source>
+        <target state="new"> Step 1 - Hent og udfyld ark</target>
+      </trans-unit>
+      <trans-unit id="3331880204730817629" datatype="html">
+        <source> Step 2 - Upload udfyldt ark</source>
+        <target state="new"> Step 2 - Upload udfyldt ark</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
