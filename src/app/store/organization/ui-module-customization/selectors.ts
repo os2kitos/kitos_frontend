@@ -30,12 +30,6 @@ export const selectModuleConfig = (module: UIModuleConfigKey) =>
     return state.uiModuleConfigs.find((c) => c.module == module);
   });
 
-export const selectITSystemUsageUIModuleConfig = selectModuleConfig(UIModuleConfigKey.ItSystemUsage);
-
-export const selectDataProcessingUIModuleConfig = selectModuleConfig(UIModuleConfigKey.DataProcessingRegistrations);
-
-export const selectItContractsUIModuleConfig = selectModuleConfig(UIModuleConfigKey.ItContract);
-
 //Data processing
 const createDprTabEnabledSelector = (tabKey: string) =>
   createTabEnabledSelector(UIModuleConfigKey.DataProcessingRegistrations, tabKey);
