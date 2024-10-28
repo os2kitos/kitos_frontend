@@ -1,7 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Component } from '@angular/core';
 import { SegmentButtonOption } from 'src/app/shared/components/segment/segment.component';
-import { UIRootConfigActions } from 'src/app/store/local-admin/ui-root-config/actions';
 
 enum LocalAdminOrganizationSegmentOption {
   Organizations = 'Organizations',
@@ -13,7 +11,7 @@ enum LocalAdminOrganizationSegmentOption {
   templateUrl: './local-admin-organization.component.html',
   styleUrl: './local-admin-organization.component.scss',
 })
-export class LocalAdminOrganizationComponent implements OnInit {
+export class LocalAdminOrganizationComponent {
   public readonly LocalAdminOrganizationSegmentOption = LocalAdminOrganizationSegmentOption;
 
   public selectedSegment: LocalAdminOrganizationSegmentOption = LocalAdminOrganizationSegmentOption.Organizations;
@@ -23,11 +21,6 @@ export class LocalAdminOrganizationComponent implements OnInit {
     { text: $localize`Roller`, value: LocalAdminOrganizationSegmentOption.Roles },
   ];
 
-  constructor(private readonly store: Store){}
-  ngOnInit(): void {
-    this.store.dispatch(UIRootConfigActions.setCurrentTabModuleKey({ moduleKey: undefined }));
-
-  }
 
 
 }

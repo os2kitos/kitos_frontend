@@ -1,8 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { SegmentButtonOption } from 'src/app/shared/components/segment/segment.component';
-import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
-import { UIRootConfigActions } from 'src/app/store/local-admin/ui-root-config/actions';
 
 enum LocalAdminDprSegmentOption {
   RegularOptionTypes = 'RegularOptionTypes',
@@ -15,7 +13,7 @@ enum LocalAdminDprSegmentOption {
   styleUrl: './local-admin-dpr.component.scss'
 })
 
-export class LocalAdminDprComponent implements OnInit{
+export class LocalAdminDprComponent {
   public readonly LocalAdminDprSegmentOption = LocalAdminDprSegmentOption;
 
   public selectedSegment: LocalAdminDprSegmentOption = LocalAdminDprSegmentOption.RegularOptionTypes;
@@ -24,10 +22,4 @@ export class LocalAdminDprComponent implements OnInit{
     { text: $localize`Udfaldsrum`, value: LocalAdminDprSegmentOption.RegularOptionTypes },
     { text: $localize`Roller`, value: LocalAdminDprSegmentOption.RoleOptionTypes },
   ];
-
-  constructor(private readonly store: Store){}
-
-  ngOnInit(): void {
-    this.store.dispatch(UIRootConfigActions.setCurrentTabModuleKey({ moduleKey: UIModuleConfigKey.DataProcessingRegistrations }));
-  }
 }
