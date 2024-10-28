@@ -7,6 +7,7 @@ import { UIConfigNodeViewModel } from '../models/ui-config/ui-config-node-view-m
 import { UIModuleConfig } from '../models/ui-config/ui-module-config.model';
 import { UINodeBlueprint } from '../models/ui-config/ui-node-blueprint.model';
 import { UINodeCustomization } from '../models/ui-config/ui-node-customization';
+import { DataProcessingUiBluePrint } from '../models/ui-config/blueprints/data-processing-blueprint';
 
 @Injectable({
   providedIn: 'root',
@@ -73,8 +74,9 @@ export class UIConfigService {
       case UIModuleConfigKey.ItSystemUsage:
         return ItSystemUsageUiBluePrint;
       case UIModuleConfigKey.ItContract:
+        throw new Error('Not implemented yet');
       case UIModuleConfigKey.DataProcessingRegistrations:
-        return this.emptyPlaceholderBlueprint;
+        return DataProcessingUiBluePrint;
     }
   }
 
@@ -116,7 +118,10 @@ export class UIConfigService {
 
   private applyUIConfigToGridColumns(application: UIConfigGridApplication, columns: GridColumn[]) {
     const updatedColumns = columns.map((column) => {
-      if (application.columnNamesToConfigure.includes(column.field)) {
+      if (
+        application.columnNamesToConfigure.includes(column.field) ||
+        application.columnNameSubstringsToConfigure?.some((substring) => column.field.includes(substring))
+      ) {
         return {
           ...column,
           disabledByUIConfig: !application.shouldEnable,

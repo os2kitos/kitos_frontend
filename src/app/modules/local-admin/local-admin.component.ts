@@ -1,13 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { NavigationDrawerItem } from 'src/app/shared/components/navigation-drawer/navigation-drawer.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
+import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
+import { UIModuleConfigActions } from 'src/app/store/organization/ui-module-customization/actions';
 
 @Component({
   selector: 'app-local-admin',
   templateUrl: './local-admin.component.html',
   styleUrl: './local-admin.component.scss',
 })
-export class LocalAdminComponent {
+export class LocalAdminComponent implements OnInit {
   public readonly AppPath = AppPath;
 
   public readonly items: NavigationDrawerItem[] = [
@@ -43,4 +46,12 @@ export class LocalAdminComponent {
       route: AppPath.import,
     },
   ];
+
+  constructor(private store: Store) {}
+  public ngOnInit(): void {
+    this.store.dispatch(UIModuleConfigActions.getUIModuleConfig({ module: UIModuleConfigKey.ItSystemUsage }));
+    this.store.dispatch(
+      UIModuleConfigActions.getUIModuleConfig({ module: UIModuleConfigKey.DataProcessingRegistrations })
+    );
+  }
 }
