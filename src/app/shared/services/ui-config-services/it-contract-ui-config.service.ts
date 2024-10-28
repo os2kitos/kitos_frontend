@@ -4,6 +4,7 @@ import { GridColumn } from '../../models/grid-column.model';
 import * as GridFields from 'src/app/shared/constants/it-contracts-grid-column-constants';
 import {
   selectItContractEnableContractId,
+  selectItContractEnableContractRoles,
   selectItContractsEnableAgreementDeadlines,
   selectItContractsEnableAgreementPeriod,
   selectItContractsEnableContractType,
@@ -47,6 +48,7 @@ export class ItContractUIConfigService {
     const enabledPaymentModel$ = this.store.select(selectItContractsEnablePaymentModel);
     const enabledAgreementDeadlines$ = this.store.select(selectItContractsEnableAgreementDeadlines);
     const enabledTermination$ = this.store.select(selectItContractsEnableTermination);
+    const enabledContractRoles$ = this.store.select(selectItContractEnableContractRoles);
 
     return combineLatest([
       enabledContractId$,
@@ -63,6 +65,7 @@ export class ItContractUIConfigService {
       enabledPaymentModel$,
       enabledAgreementDeadlines$,
       enabledTermination$,
+      enabledContractRoles$,
     ]).pipe(
       map(
         ([
@@ -80,6 +83,7 @@ export class ItContractUIConfigService {
           enabledPaymentModel,
           enabledAgreementDeadlines,
           enabledTermination,
+          enabledContractRoles,
         ]): UIConfigGridApplication[] => [
           {
             shouldEnable: enabledContractId,
@@ -150,6 +154,11 @@ export class ItContractUIConfigService {
             shouldEnable: enabledTermination,
             columnNamesToConfigure: [GridFields.TerminationDeadlineUuid, GridFields.TerminatedAt],
           },
+          {
+            shouldEnable: enabledContractRoles,
+            columnNamesToConfigure: [],
+            columnNameSubstringsToConfigure: ['Roles.Role']
+          }
         ]
       )
     );
