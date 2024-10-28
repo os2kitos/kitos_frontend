@@ -38,7 +38,7 @@ export class UIConfigService {
     return this.applyConfigToGridColumns(this.gridConfigService.getUIConfigApplications(moduleKey));
   }
 
-  public applyConfigToGridColumns(
+  private applyConfigToGridColumns(
     uiConfig: Observable<UIConfigGridApplication[]>
   ): (source: Observable<GridColumn[]>) => Observable<GridColumn[]> {
     return (source: Observable<GridColumn[]>) => {
