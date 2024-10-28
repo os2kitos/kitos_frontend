@@ -1,4 +1,18 @@
-<h4 i18n class="title-margin">Lokal admin</h4>
+<div class="header"
+>
+  <h4 i18n class="title-margin">Lokal admin</h4>
+<app-checkbox-button i18n
+    (valueChange)="patchUIRootConfig($event)"
+    [value]="(showItSystemModule$ | async) ?? false"
+    data-cy="toggle-module-button"
+    >
+  <app-paragraph [bold]="true" paragraphSize="medium">
+    Inkluder modulet "IT Systemer"
+  </app-paragraph>
+  </app-checkbox-button>
+</div>
+
+
 <div class="content">
   <app-navigation-drawer [items]="items"> </app-navigation-drawer>
 

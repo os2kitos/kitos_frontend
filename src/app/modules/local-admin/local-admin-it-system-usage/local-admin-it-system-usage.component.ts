@@ -43,7 +43,5 @@ export class LocalAdminItSystemUsageComponent {
     );
   }
 
-  public patchUIRootConfig($event: boolean) {
-    this.store.dispatch(OrganizationActions.patchUIRootConfig({ dto: { showItSystemModule: $event } }));
-  }
+
 }

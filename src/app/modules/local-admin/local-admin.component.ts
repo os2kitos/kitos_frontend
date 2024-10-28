@@ -3,6 +3,8 @@ import { Store } from '@ngrx/store';
 import { BaseModuleComponent } from 'src/app/shared/base/base-module-component';
 import { NavigationDrawerItem } from 'src/app/shared/components/navigation-drawer/navigation-drawer.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
+import { OrganizationActions } from 'src/app/store/organization/actions';
+import { selectShowItSystemModule } from 'src/app/store/organization/selectors';
 
 @Component({
   selector: 'app-local-admin',
@@ -49,4 +51,10 @@ export class LocalAdminComponent extends BaseModuleComponent {
       route: AppPath.import,
     },
   ];
+
+  public readonly showItSystemModule$ = this.store.select(selectShowItSystemModule);
+
+  public patchUIRootConfig($event: boolean) {
+    this.store.dispatch(OrganizationActions.patchUIRootConfig({ dto: { showItSystemModule: $event } }));
+  }
 }

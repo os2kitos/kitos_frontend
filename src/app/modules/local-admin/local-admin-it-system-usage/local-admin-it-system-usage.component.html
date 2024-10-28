@@ -1,20 +1,5 @@
 <app-segment [buttons]="segmentOptions" [(selected)]="selectedSegment"> </app-segment>
 
-<app-card *ngIf="selectedSegment === LocalAdminSystemUsageSegmentOptions.UiCustomization">
-
-    <app-standard-vertical-content-grid>
-      <app-checkbox-button i18n
-      class="one-column-width"
-      (valueChange)="patchUIRootConfig($event)"
-      [value]="(showItSystemModule$ | async) ?? false"
-      data-cy="toggle-it-system-module-button"
-      >
-    <app-paragraph [bold]="true" paragraphSize="medium">
-      Inkluder modul
-    </app-paragraph>
-    </app-checkbox-button>
-  </app-standard-vertical-content-grid>
-</app-card>
 <app-card>
   <ng-container *ngIf="selectedSegment === LocalAdminSystemUsageSegmentOptions.UiCustomization">
 
