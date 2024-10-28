@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { combineLatest, Observable, of } from 'rxjs';
+import { distinctUntilChanged, filter, map, Observable, of } from 'rxjs';
 import { BaseModuleComponent } from 'src/app/shared/base/base-module-component';
 import { NavigationDrawerItem } from 'src/app/shared/components/navigation-drawer/navigation-drawer.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
-import { selectCurrentTabModuleKey } from 'src/app/store/local-admin/ui-root-config/selectors';
 import { OrganizationActions } from 'src/app/store/organization/actions';
 import { selectShowDataProcessingRegistrations, selectShowItContractModule, selectShowItSystemModule } from 'src/app/store/organization/selectors';
 
@@ -14,12 +14,29 @@ import { selectShowDataProcessingRegistrations, selectShowItContractModule, sele
   templateUrl: './local-admin.component.html',
   styleUrl: './local-admin.component.scss',
 })
-export class LocalAdminComponent extends BaseModuleComponent {
+export class LocalAdminComponent extends BaseModuleComponent implements OnInit {
   public readonly AppPath = AppPath;
+  public currentTabPathSegment$: Observable<string>;
+  public currentTabModuleKey$: Observable<UIModuleConfigKey | undefined> = of(undefined);
 
-  constructor(store: Store) {
+  constructor(store: Store,     private router: Router,
+  ) {
     super(store);
+    this.currentTabPathSegment$ = this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd),
+      map((event: NavigationEnd) => {
+        const urlSegments = event.urlAfterRedirects.split('/');
+        return urlSegments[urlSegments.length - 1];
+      }),
+      distinctUntilChanged()
+    );
   }
+  ngOnInit(): void {
+    this.currentTabPathSegment$.subscribe(url => {
+      this.currentTabModuleKey$ = this.getCurrentTabModuleKey(url);
+    });
+  }
+
 
   public readonly items: NavigationDrawerItem[] = [
     {
@@ -58,7 +75,19 @@ export class LocalAdminComponent extends BaseModuleComponent {
   public readonly showItSystemModule$ = this.store.select(selectShowItSystemModule);
   public readonly showItContractModule$ = this.store.select(selectShowItContractModule);
   public readonly showDataProcessingRegistrations$ = this.store.select(selectShowDataProcessingRegistrations);
-  public readonly currentTabModuleKey$ = this.store.select(selectCurrentTabModuleKey);
+
+  public getCurrentTabModuleKey(segment: string){
+    switch (segment) {
+      case AppPath.localAdminSystemUsages:
+        return of(UIModuleConfigKey.ItSystemUsage);
+      case AppPath.itContracts:
+        return of(UIModuleConfigKey.ItContract);
+      case AppPath.dataProcessing:
+        return of(UIModuleConfigKey.DataProcessingRegistrations);
+      default:
+        return of(undefined);
+  }
+}
 
   public patchUIRootConfig($event: boolean) {
     this.subscriptions.add(
