@@ -1,16 +1,19 @@
 <div class="header"
 >
   <h4 i18n class="title-margin">Lokal admin</h4>
-<app-checkbox-button i18n
-    (valueChange)="patchUIRootConfig($event)"
-    [value]="(showItSystemModule$ | async) ?? false"
-    data-cy="toggle-module-button"
-    *ngIf="currentTabModuleKey$ | async as moduleKey"
-    >
-  <app-paragraph [bold]="true" paragraphSize="medium">
-    Inkluder modulet {{ getModuleKeyDescription(moduleKey) }}
-  </app-paragraph>
-  </app-checkbox-button>
+  <ng-container *ngIf="currentTabModuleKey$ | async as moduleKey">
+    <app-checkbox-button i18n
+      (valueChange)="patchUIRootConfig($event)"
+      [value]="(getModuleTogglingButtonValue(moduleKey) | async) ?? false"
+      data-cy="toggle-module-button"
+
+      >
+    <app-paragraph [bold]="true" paragraphSize="medium">
+      Inkluder modulet {{ getModuleKeyDescription(moduleKey) }}
+    </app-paragraph>
+    </app-checkbox-button>
+  </ng-container>
+
 </div>
 
 

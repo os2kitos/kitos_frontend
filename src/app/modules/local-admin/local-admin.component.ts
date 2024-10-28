@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { combineLatest, Observable, of } from 'rxjs';
 import { BaseModuleComponent } from 'src/app/shared/base/base-module-component';
 import { NavigationDrawerItem } from 'src/app/shared/components/navigation-drawer/navigation-drawer.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
 import { selectCurrentTabModuleKey } from 'src/app/store/local-admin/ui-root-config/selectors';
 import { OrganizationActions } from 'src/app/store/organization/actions';
-import { selectShowItSystemModule } from 'src/app/store/organization/selectors';
+import { selectShowDataProcessingRegistrations, selectShowItContractModule, selectShowItSystemModule } from 'src/app/store/organization/selectors';
 
 @Component({
   selector: 'app-local-admin',
@@ -55,6 +56,8 @@ export class LocalAdminComponent extends BaseModuleComponent {
   ];
 
   public readonly showItSystemModule$ = this.store.select(selectShowItSystemModule);
+  public readonly showItContractModule$ = this.store.select(selectShowItContractModule);
+  public readonly showDataProcessingRegistrations$ = this.store.select(selectShowDataProcessingRegistrations);
   public readonly currentTabModuleKey$ = this.store.select(selectCurrentTabModuleKey);
 
   public patchUIRootConfig($event: boolean) {
@@ -64,6 +67,19 @@ export class LocalAdminComponent extends BaseModuleComponent {
         this.store.dispatch(OrganizationActions.patchUIRootConfig({ dto: { [dtoFieldName]: $event } }));
       })
     );
+  }
+
+  getModuleTogglingButtonValue(moduleKey: UIModuleConfigKey | undefined): Observable<boolean | undefined> {
+    switch (moduleKey) {
+      case UIModuleConfigKey.ItSystemUsage:
+        return this.showItSystemModule$;
+      case UIModuleConfigKey.ItContract:
+        return this.showItContractModule$;
+      case UIModuleConfigKey.DataProcessingRegistrations:
+        return this.showDataProcessingRegistrations$;
+      default:
+        return of(false);
+    }
   }
 
   getModuleKeyDescription(moduleKey: UIModuleConfigKey | undefined): string {
