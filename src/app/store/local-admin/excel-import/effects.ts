@@ -6,6 +6,20 @@ import { Store } from '@ngrx/store';
 export class FkOrgEffects {
   constructor(private actions$: Actions, private store: Store) {}
 
+  /* excelImport$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ExcelImportActions.excelImport),
+      combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+      mergeMap(([action, organizationUuid]) =>
+        this.apiService
+          .postSingleStsOrganizationSynchronizationInternalV2ExcelImport({ organizationUuid, file: action.file })
+          .pipe(
+            map(() => FkOrgActions.excelImportSuccess()),
+            catchError(() => of(FkOrgActions.excelImportError()))
+          )
+      )
+    );
+  }); */
   /* getSynchronizationStatus$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ExcelImportActions.excelImport),
