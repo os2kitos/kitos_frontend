@@ -25,7 +25,7 @@ const createFieldOrGroupEnabledSelector = (module: UIModuleConfigKey, tabKey: st
     return fieldOrGroupIsEnabled(moduleConfigViewModels, fullKey, fieldKey);
   });
 
-const selectModuleConfig = (module: UIModuleConfigKey) =>
+export const selectModuleConfig = (module: UIModuleConfigKey) =>
   createSelector(selectUIModuleCustomizationState, (state: UIModuleConfigState) => {
     return state.uiModuleConfigs.find((c) => c.module == module);
   });
