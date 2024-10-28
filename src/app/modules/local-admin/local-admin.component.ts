@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { BaseModuleComponent } from 'src/app/shared/base/base-module-component';
 import { NavigationDrawerItem } from 'src/app/shared/components/navigation-drawer/navigation-drawer.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
+import { selectCurrentTabModuleKey } from 'src/app/store/local-admin/ui-root-config/selectors';
 import { OrganizationActions } from 'src/app/store/organization/actions';
 import { selectShowItSystemModule } from 'src/app/store/organization/selectors';
 
@@ -53,6 +54,7 @@ export class LocalAdminComponent extends BaseModuleComponent {
   ];
 
   public readonly showItSystemModule$ = this.store.select(selectShowItSystemModule);
+  public readonly currentTabModuleKey$ = this.store.select(selectCurrentTabModuleKey);
 
   public patchUIRootConfig($event: boolean) {
     this.store.dispatch(OrganizationActions.patchUIRootConfig({ dto: { showItSystemModule: $event } }));

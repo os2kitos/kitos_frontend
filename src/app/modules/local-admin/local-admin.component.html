@@ -5,9 +5,10 @@
     (valueChange)="patchUIRootConfig($event)"
     [value]="(showItSystemModule$ | async) ?? false"
     data-cy="toggle-module-button"
+    *ngIf="currentTabModuleKey$ | async"
     >
   <app-paragraph [bold]="true" paragraphSize="medium">
-    Inkluder modulet "IT Systemer"
+    Inkluder modulet ""
   </app-paragraph>
   </app-checkbox-button>
 </div>

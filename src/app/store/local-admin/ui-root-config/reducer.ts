@@ -1,16 +1,16 @@
-import { createFeature, createReducer, on } from "@ngrx/store";
-import { UIRootConfigState } from "./state";
-import { UIRootConfigActions } from "./actions";
+import { createFeature, createReducer, on } from '@ngrx/store';
+import { UIRootConfigActions } from './actions';
+import { UIRootConfigState } from './state';
 
 export const uiRootConfigInitialState: UIRootConfigState = {
-  currentTabModuleKey: undefined
+  currentTabModuleKey: undefined,
 };
 
-export const UIRootConfigFeature = createFeature({
+export const uiRootConfigFeature = createFeature({
   name: 'UIRootConfig',
   reducer: createReducer(
     uiRootConfigInitialState,
-    on(UIRootConfigActions.setCurrentTabModuleKey, (state, { moduleKey }): UIRootConfigState => {
+    on(UIRootConfigActions.setCurrentTabModuleKeySuccess, (state, { moduleKey }): UIRootConfigState => {
       return {
         ...state,
         currentTabModuleKey: moduleKey,

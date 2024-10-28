@@ -6,6 +6,7 @@ import { APIOrganizationUpdateRequestDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { mapOrganizationType } from 'src/app/shared/helpers/organization-type.helpers';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
+import { UIRootConfigActions } from 'src/app/store/local-admin/ui-root-config/actions';
 import { OrganizationActions } from 'src/app/store/organization/actions';
 import { selectOrganizationHasModifyCvrPermission } from 'src/app/store/organization/selectors';
 import { UserActions } from 'src/app/store/user-store/actions';
@@ -39,6 +40,7 @@ export class LocalAdminInformationComponent extends BaseComponent implements OnI
   ngOnInit(): void {
     this.store.dispatch(OrganizationActions.getOrganizationPermissions());
     this.SetupFormWithPermissions();
+    this.store.dispatch(UIRootConfigActions.setCurrentTabModuleKey({ moduleKey: undefined }));
   }
 
   public SetupFormWithPermissions() {

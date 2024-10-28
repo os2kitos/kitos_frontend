@@ -39,6 +39,8 @@ import { RoleOptionTypeEffects } from './roles-option-type-store/effects';
 import { roleOptionTypeFeature } from './roles-option-type-store/reducer';
 import { UserEffects } from './user-store/effects';
 import { userFeature } from './user-store/reducer';
+import { uiRootConfigFeature } from './local-admin/ui-root-config/reducer';
+import { UIRootConfigEffects } from './local-admin/ui-root-config/effects';
 
 @NgModule({
   imports: [
@@ -69,6 +71,7 @@ import { userFeature } from './user-store/reducer';
     StoreModule.forFeature(organizationFeature),
     StoreModule.forFeature(uiModuleConfigFeature),
     StoreModule.forFeature(fkOrgFeature),
+    StoreModule.forFeature(uiRootConfigFeature),
     EffectsModule.forRoot([]),
     EffectsModule.forFeature([
       UserEffects,
@@ -87,6 +90,7 @@ import { userFeature } from './user-store/reducer';
       UIModuleCustomizationEffects,
       LocalOptionTypeEffects,
       FkOrgEffects,
+      UIRootConfigEffects
     ]),
     RouterModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),
