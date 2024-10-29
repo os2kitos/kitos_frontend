@@ -1,6 +1,6 @@
 /// <reference types="Cypress" />
 
-describe('local-admin it system usage', () => {
+describe('local-admin dpr', () => {
   beforeEach(() => {
     cy.requireIntercept();
     cy.intercept('/api/v2/internal/organizations/*/permissions', {
