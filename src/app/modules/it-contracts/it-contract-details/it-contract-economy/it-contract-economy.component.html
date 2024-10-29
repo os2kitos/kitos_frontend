@@ -1,4 +1,4 @@
-<app-card *ngIf="paymentModelEnabled$ | async">
+<app-card>
   <app-card-header title="Betalingsmodel" i18n-title helpTextKey="it-contract.edit.economy"></app-card-header>
 
   <app-form-grid [formGroup]="economyFormGroup">
@@ -46,7 +46,6 @@
   </app-form-grid>
 </app-card>
 <app-payment-table
-  *ngIf="externalPaymentEnabled$ | async"
   title="Ekstern betaling"
   helpTextKey="it-contract.edit.external-payments"
   [payments$]="externalPayments$"
@@ -54,7 +53,6 @@
   paymentType="external"
 ></app-payment-table>
 <app-payment-table
-  *ngIf="internalPaymentEnabled$ | async"
   title="Intern betaling"
   helpTextKey="it-contract.edit.internal-payments"
   [payments$]="internalPayments$"

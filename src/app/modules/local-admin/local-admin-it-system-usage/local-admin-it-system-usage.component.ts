@@ -1,10 +1,16 @@
 import { Component } from '@angular/core';
-import { LocalAdminModuleSegmentOptions, LocalAdminModuleSegmentOptionType } from 'src/app/shared/constants/local-admin-module-segment-constants';
+import { Store } from '@ngrx/store';
+import { SegmentButtonOption } from 'src/app/shared/components/segment/segment.component';
 import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { selectShowItSystemModule } from 'src/app/store/organization/selectors';
 import { selectITSystemUsageUIModuleConfig } from 'src/app/store/organization/ui-module-customization/selectors';
 
+enum LocalAdminSystemUsageSegmentOptions {
+  UiCustomization = 'UiCustomization',
+  RegularOptionTypes = 'RegularOptionTypes',
+  RoleOptionTypes = 'RoleOptionTypes',
+}
 
 @Component({
   selector: 'app-local-admin-it-system-usage',
@@ -12,11 +18,17 @@ import { selectITSystemUsageUIModuleConfig } from 'src/app/store/organization/ui
   styleUrl: './local-admin-it-system-usage.component.scss',
 })
 export class LocalAdminItSystemUsageComponent {
-  public readonly LocalAdminModuleSegmentOptionType = LocalAdminModuleSegmentOptionType;
-  public readonly segmentOptions = LocalAdminModuleSegmentOptions;
-  public readonly itSystemUsageModuleKey = UIModuleConfigKey.ItSystemUsage;    public readonly showItSystemModule$ = this.store.select(selectShowItSystemModule);
+  public readonly LocalAdminSystemUsageSegmentOptions = LocalAdminSystemUsageSegmentOptions;
+  public selectedSegment: LocalAdminSystemUsageSegmentOptions = LocalAdminSystemUsageSegmentOptions.UiCustomization;
+  public readonly segmentOptions: SegmentButtonOption<LocalAdminSystemUsageSegmentOptions>[] = [
+    { text: $localize`Lokal tilpasning af brugerfladen`, value: LocalAdminSystemUsageSegmentOptions.UiCustomization },
+    { text: $localize`Lokal tilpasning af udfaldsrum`, value: LocalAdminSystemUsageSegmentOptions.RegularOptionTypes },
+    { text: $localize`Lokal tilpasning af roller`, value: LocalAdminSystemUsageSegmentOptions.RoleOptionTypes },
+  ];
+  public readonly itSystemUsageUIModuleConfig$ = this.store.select(selectITSystemUsageUIModuleConfig);
+  public readonly showItSystemModule$ = this.store.select(selectShowItSystemModule);
+  public readonly itSystemUsageModuleKey = UIModuleConfigKey.ItSystemUsage;
 
-  public selectedSegment = LocalAdminModuleSegmentOptionType.UiCustomization;
   constructor(private readonly store: Store, private readonly notificationService: NotificationService) {
   }
 }

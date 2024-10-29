@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { combineLatest, combineLatestWith, map } from 'rxjs';
+import { combineLatestWith, map } from 'rxjs';
 import {
   APIContractProcurementDataResponseDTO,
   APIIdentityNamePairResponseDTO,
@@ -22,20 +22,6 @@ import {
   selectItContractIsValid,
   selectItContractValidity,
 } from 'src/app/store/it-contract/selectors';
-import {
-  selectItContractEnableContractId,
-  selectItContractsEnableAgreementPeriod,
-  selectItContractsEnableContractType,
-  selectItContractsEnableCriticality,
-  selectItContractsEnableExternalSigner,
-  selectItContractsEnableInternalSigner,
-  selectItContractsEnableIsActive,
-  selectItContractsEnableProcurementInitiated,
-  selectItContractsEnableProcurementPlan,
-  selectItContractsEnableProcurementStrategy,
-  selectItContractsEnablePurchaseForm,
-  selectItContractsEnableTemplate,
-} from 'src/app/store/organization/ui-module-customization/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 import { ItContractFrontpageComponentStore } from './it-contract-frontpage.component-store';
@@ -172,28 +158,6 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
     { id: APIContractProcurementDataResponseDTO.ProcurementInitiatedEnum.Yes, label: 'Ja' },
     { id: APIContractProcurementDataResponseDTO.ProcurementInitiatedEnum.No, label: 'Nej' },
   ];
-
-  public readonly contractIdEnabled$ = this.store.select(selectItContractEnableContractId);
-  public readonly contractTypeEnabled$ = this.store.select(selectItContractsEnableContractType);
-
-  public readonly contractTemplateEnabled$ = this.store.select(selectItContractsEnableTemplate);
-  public readonly contractCriticalityEnabled$ = this.store.select(selectItContractsEnableCriticality);
-  public readonly contractPurchaseFormEnabled$ = this.store.select(selectItContractsEnablePurchaseForm);
-
-  public readonly contractProcurementStrategyEnabled$ = this.store.select(selectItContractsEnableProcurementStrategy);
-  public readonly contractProcurementPlanEnabled$ = this.store.select(selectItContractsEnableProcurementPlan);
-  public readonly contractProcurementInitiatedEnabled$ = this.store.select(selectItContractsEnableProcurementInitiated);
-  public readonly showProcurementCard$ = combineLatest([
-    this.contractProcurementStrategyEnabled$,
-    this.contractProcurementPlanEnabled$,
-    this.contractProcurementInitiatedEnabled$,
-  ]).pipe(map(([strategy, plan, initiated]) => strategy || plan || initiated));
-
-  public readonly contractExternalSignerEnabled$ = this.store.select(selectItContractsEnableExternalSigner);
-  public readonly contractInternalSignerEnabled$ = this.store.select(selectItContractsEnableInternalSigner);
-
-  public readonly contractAgreementPeriodEnabled$ = this.store.select(selectItContractsEnableAgreementPeriod);
-  public readonly contractIsActiveEnabled$ = this.store.select(selectItContractsEnableIsActive);
 
   constructor(
     private readonly store: Store,

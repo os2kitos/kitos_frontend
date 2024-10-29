@@ -1,11 +1,7 @@
 <app-segment [buttons]="segmentOptions" [(selected)]="selectedSegment"></app-segment>
 
 <app-card>
-  <ng-container *ngIf="selectedSegment === LocalAdminModuleSegmentOptionType.UiCustomization">
-    <app-ui-config [moduleKey]="itContractsModuleKey"></app-ui-config>
-  </ng-container>
-
-  <ng-container *ngIf="selectedSegment === LocalAdminModuleSegmentOptionType.RegularOptionTypes">
+  <ng-container *ngIf="selectedSegment === LocalAdminItContractsSegmentOption.RegularOptionTypes">
     <app-standard-vertical-content-grid>
       <app-option-type-table
         optionType="it-contract_contract-type"
@@ -78,7 +74,7 @@
   </ng-container>
 
   <app-option-type-table
-    *ngIf="selectedSegment === LocalAdminModuleSegmentOptionType.RoleOptionTypes"
+    *ngIf="selectedSegment === LocalAdminItContractsSegmentOption.RoleOptionTypes"
     optionType="it-contract"
     [expandedByDefault]="true"
     [disableAccordion]="true"

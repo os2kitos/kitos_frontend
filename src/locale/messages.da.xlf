@@ -5619,18 +5619,6 @@
         <source>Hvilken kontrakt skal angive om databehandlingen er aktiv</source>
         <target state="new">Hvilken kontrakt skal angive om databehandlingen er aktiv</target>
       </trans-unit>
-      <trans-unit id="1991864228783701466" datatype="html">
-        <source>KontraktID</source>
-        <target state="new">KontraktID</target>
-      </trans-unit>
-      <trans-unit id="3252648604690804231" datatype="html">
-        <source>Leverandørs underskrift</source>
-        <target state="new">Leverandørs underskrift</target>
-      </trans-unit>
-      <trans-unit id="5311870289458484364" datatype="html">
-        <source>Gyldig fra/til</source>
-        <target state="new">Gyldig fra/til</target>
-      </trans-unit>
     </body>
   </file>
 </xliff>

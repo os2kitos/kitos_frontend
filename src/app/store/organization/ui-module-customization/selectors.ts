@@ -6,6 +6,10 @@ import { UIModuleConfigState } from './state';
 
 export const { selectUIModuleCustomizationState } = uiModuleConfigFeature;
 
+export const selectUIModuleConfig = createSelector(selectUIModuleCustomizationState, (state: UIModuleConfigState) => {
+  return state.uiModuleConfigs;
+});
+
 // eslint-disable-next-line @ngrx/prefix-selectors-with-select
 const createTabEnabledSelector = (module: UIModuleConfigKey, tabKey: string) =>
   createSelector(selectModuleConfig(module), (moduleConfig) => {
@@ -25,10 +29,14 @@ const createFieldOrGroupEnabledSelector = (module: UIModuleConfigKey, tabKey: st
     return fieldOrGroupIsEnabled(moduleConfigViewModels, fullKey, fieldKey);
   });
 
-export const selectModuleConfig = (module: UIModuleConfigKey) =>
+const selectModuleConfig = (module: UIModuleConfigKey) =>
   createSelector(selectUIModuleCustomizationState, (state: UIModuleConfigState) => {
     return state.uiModuleConfigs.find((c) => c.module == module);
   });
+
+export const selectITSystemUsageUIModuleConfig = selectModuleConfig(UIModuleConfigKey.ItSystemUsage);
+
+export const selectDataProcessingUIModuleConfig = selectModuleConfig(UIModuleConfigKey.DataProcessingRegistrations);
 
 //Data processing
 const createDprTabEnabledSelector = (tabKey: string) =>
@@ -41,6 +49,8 @@ export const selectDprEnableOversight = createDprTabEnabledSelector('oversight')
 export const selectDprEnableRoles = createDprTabEnabledSelector('roles');
 export const selectDprEnableNotifications = createDprTabEnabledSelector('notifications');
 export const selectDprEnableReferences = createDprTabEnabledSelector('references');
+
+//Data processing
 //Field selectors
 export const selectDprEnableMainContract = createFieldOrGroupEnabledSelector(
   UIModuleConfigKey.DataProcessingRegistrations,
@@ -67,6 +77,7 @@ export const selectITSystemUsageEnableTabHierarchy = createItSystemUsageTabEnabl
 export const selectITSystemUsageEnableTabLocalKle = createItSystemUsageTabEnabledSelector('localKle');
 export const selectITSystemUsageEnableTabNotifications = createItSystemUsageTabEnabledSelector('advice');
 export const selectITSystemUsageEnableLocalReferences = createItSystemUsageTabEnabledSelector('localReferences');
+
 //Field selectors
 export const selectITSystemUsageEnableFrontPageUsagePeriod = createFieldOrGroupEnabledSelector(
   UIModuleConfigKey.ItSystemUsage,
@@ -87,67 +98,6 @@ export const selectITSystemUsageEnableGdprPlannedRiskAssessmentDate = createFiel
   UIModuleConfigKey.ItSystemUsage,
   'gdpr',
   'plannedRiskAssessmentDate'
-);
-
-//IT contracts
-const createItContractsTabEnabledSelector = (tabKey: string) =>
-  createTabEnabledSelector(UIModuleConfigKey.ItContract, tabKey);
-//Tab selectors
-export const selectItContractEnableFrontpage = createItContractsTabEnabledSelector('frontPage');
-export const selectItContractEnableItSystems = createItContractsTabEnabledSelector('itSystems');
-export const selectItContractEnableDataProcessing = createItContractsTabEnabledSelector('dataProcessing');
-export const selectItContractEnableDeadlines = createItContractsTabEnabledSelector('deadlines');
-export const selectItContractEnableEconomy = createItContractsTabEnabledSelector('economy');
-export const selectItContractEnableContractRoles = createItContractsTabEnabledSelector('contractRoles');
-export const selectItContractEnableHierarchy = createItContractsTabEnabledSelector('hierarchy');
-export const selectItContractEnableAdvis = createItContractsTabEnabledSelector('advice');
-export const selectItContractEnableReferences = createItContractsTabEnabledSelector('references');
-//Field selectors
-const createItContractFrontpageFieldSelector = (fieldKey: string) =>
-  createFieldOrGroupEnabledSelector(UIModuleConfigKey.ItContract, 'frontPage', fieldKey);
-//Frontpage fields
-export const selectItContractEnableContractId = createItContractFrontpageFieldSelector('contractId');
-export const selectItContractsEnableContractType = createItContractFrontpageFieldSelector('contractType');
-export const selectItContractsEnableTemplate = createItContractFrontpageFieldSelector('template');
-export const selectItContractsEnableCriticality = createItContractFrontpageFieldSelector('criticality');
-export const selectItContractsEnablePurchaseForm = createItContractFrontpageFieldSelector('purchaseForm');
-export const selectItContractsEnableProcurementStrategy = createItContractFrontpageFieldSelector('procurementStrategy');
-export const selectItContractsEnableProcurementPlan = createItContractFrontpageFieldSelector('procurementPlan');
-export const selectItContractsEnableProcurementInitiated =
-  createItContractFrontpageFieldSelector('procurementInitiated');
-export const selectItContractsEnableExternalSigner = createItContractFrontpageFieldSelector('externalSigner');
-export const selectItContractsEnableInternalSigner = createItContractFrontpageFieldSelector('internalSigner');
-export const selectItContractsEnableAgreementPeriod = createItContractFrontpageFieldSelector('agreementPeriod');
-export const selectItContractsEnableIsActive = createItContractFrontpageFieldSelector('isActive');
-//Other fields
-export const selectItContractsEnableAgreementDeadlines = createFieldOrGroupEnabledSelector(
-  UIModuleConfigKey.ItContract,
-  'deadlines',
-  'agreementDeadlines'
-);
-
-export const selectItContractsEnableTermination = createFieldOrGroupEnabledSelector(
-  UIModuleConfigKey.ItContract,
-  'deadlines',
-  'termination'
-);
-
-export const selectItContractsEnablePaymentModel = createFieldOrGroupEnabledSelector(
-  UIModuleConfigKey.ItContract,
-  'economy',
-  'paymentModel'
-);
-
-export const selectItContractsEnableExternalPayment = createFieldOrGroupEnabledSelector(
-  UIModuleConfigKey.ItContract,
-  'economy',
-  'extPayment'
-);
-
-export const selectItContractsEnableInternalPayment = createFieldOrGroupEnabledSelector(
-  UIModuleConfigKey.ItContract,
-  'economy',
-  'intPayment'
 );
 
 function tabIsEnabled(uiConfigViewModels: UIConfigNodeViewModel, tabFullKey: string): boolean {

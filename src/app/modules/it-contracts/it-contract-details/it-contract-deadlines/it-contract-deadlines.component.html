@@ -1,4 +1,4 @@
-<app-card *ngIf="agreementDeadlinesEnabled$ | async">
+<app-card>
   <app-card-header title="Aftalefrister" i18n-title helpTextKey="it-contract.edit.deadlines"></app-card-header>
   <app-form-grid [formGroup]="deadlinesFormGroup">
     <app-numeric-input
@@ -59,7 +59,7 @@
   </app-form-grid>
 </app-card>
 
-<app-card *ngIf="terminationEnabled$ | async">
+<app-card>
   <app-card-header title="Opsigelse" i18n-title helpTextKey="it-contract.edit.termination"></app-card-header>
 
   <app-form-grid [formGroup]="terminationsFormGroup">

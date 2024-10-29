@@ -12,7 +12,7 @@ import {
 import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
 import { adaptUIModuleCustomization } from 'src/app/shared/models/ui-config/ui-module-customization.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
-import { UIConfigService } from 'src/app/shared/services/ui-config-services/ui-config.service';
+import { UIConfigService } from 'src/app/shared/services/ui-config.service';
 import { selectOrganizationUuid } from '../../user-store/selectors';
 import { UIModuleConfigActions } from './actions';
 import { UIModuleConfig } from 'src/app/shared/models/ui-config/ui-module-config.model';
@@ -36,11 +36,7 @@ export class UIModuleCustomizationEffects {
           .getSingleOrganizationsInternalV2GetUIModuleCustomization({ moduleName, organizationUuid })
           .pipe(
             map((uiModuleCustomizationDto) =>
-              this.combineBlueprintWithCustomizationDto(
-                uiModuleCustomizationDto,
-                moduleName,
-                UIModuleConfigActions.getUIModuleConfigSuccess
-              )
+              this.combineBlueprintWithCustomizationDto(uiModuleCustomizationDto, moduleName, UIModuleConfigActions.getUIModuleConfigSuccess)
             ),
             catchError(() => of(UIModuleConfigActions.getUIModuleConfigError()))
           )
@@ -70,11 +66,7 @@ export class UIModuleCustomizationEffects {
                 })
                 .pipe(
                   map((uiModuleCustomizationDto) =>
-                    this.combineBlueprintWithCustomizationDto(
-                      uiModuleCustomizationDto,
-                      moduleName,
-                      UIModuleConfigActions.putUIModuleCustomizationSuccess
-                    )
+                    this.combineBlueprintWithCustomizationDto(uiModuleCustomizationDto, moduleName, UIModuleConfigActions.putUIModuleCustomizationSuccess)
                   ),
                   catchError(() => of(UIModuleConfigActions.putUIModuleCustomizationError()))
                 );
@@ -112,28 +104,24 @@ export class UIModuleCustomizationEffects {
     return this.updateUIModuleCustomizationInRequestDto(existingNodes, updatedNode, rootToUpdate);
   }
 
-  private updateUIModuleCustomizationInRequestDto(
-    existingNodes: APICustomizedUINodeResponseDTO[],
-    updatedNode: APICustomizedUINodeRequestDTO,
-    rootToUpdate: APICustomizedUINodeResponseDTO
-  ): APIUIModuleCustomizationRequestDTO {
-    const newEnabledState = updatedNode.enabled;
-    if (rootToUpdate) {
-      rootToUpdate.enabled = newEnabledState;
-    }
+  private updateUIModuleCustomizationInRequestDto(existingNodes: APICustomizedUINodeResponseDTO[], updatedNode: APICustomizedUINodeRequestDTO, rootToUpdate: APICustomizedUINodeResponseDTO): APIUIModuleCustomizationRequestDTO{
+      const newEnabledState = updatedNode.enabled;
+      if (rootToUpdate) {
+        rootToUpdate.enabled = newEnabledState;
+      }
 
-    const rootToUpdateKey = rootToUpdate?.key;
-    if (this.shouldUpdateChildren(rootToUpdateKey, newEnabledState)) {
-      const childrenToUpdate = existingNodes.filter((node) =>
-        this.uiConfigService.isChildOfTab(rootToUpdateKey!, node.key)
-      );
-      childrenToUpdate.forEach((c) => (c.enabled = newEnabledState));
-    }
+      const rootToUpdateKey = rootToUpdate?.key;
+      if (this.shouldUpdateChildren(rootToUpdateKey, newEnabledState)) {
+        const childrenToUpdate = existingNodes.filter((node) =>
+          this.uiConfigService.isChildOfTab(rootToUpdateKey!, node.key)
+        );
+        childrenToUpdate.forEach((c) => (c.enabled = newEnabledState));
+      }
 
-    return {
-      nodes: existingNodes as APICustomizedUINodeRequestDTO[],
-    };
-  }
+      return {
+        nodes: existingNodes as APICustomizedUINodeRequestDTO[],
+      };
+    }
 
   private shouldUpdateChildren(rootKey: string | undefined, isEnabling: boolean | undefined) {
     return !isEnabling && rootKey && this.uiConfigService.isTab(rootKey);

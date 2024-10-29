@@ -4,8 +4,6 @@ import { Store } from '@ngrx/store';
 import { filter, pairwise } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
-import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
-import { UIModuleConfigActions } from 'src/app/store/organization/ui-module-customization/actions';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 
 @Component({
@@ -33,7 +31,5 @@ export class ItContractsRootComponent extends BaseComponent implements OnInit {
             .then(() => this.router.navigate([AppPath.itContracts]))
         )
     );
-
-    this.store.dispatch(UIModuleConfigActions.getUIModuleConfig({ module: UIModuleConfigKey.ItContract }));
   }
 }
