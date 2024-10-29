@@ -9,7 +9,6 @@
         [moduleKey]="itSystemUsageModuleKey"
         [tabViewModel]="tabViewModel"
         [moduleEnabled]="showItSystemModule$"
-        (checkboxChanged)="onCheckboxChange($event)"
         >
       </app-ui-config-tab-section>
       <app-loading *ngIf="uiModuleConfig === undefined"></app-loading>

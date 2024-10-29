@@ -34,11 +34,4 @@ export class LocalAdminItSystemUsageComponent {
 
   constructor(private readonly store: Store, private readonly notificationService: NotificationService) {
   }
-
-  public onCheckboxChange($event: UINodeCustomization) {
-    const dto: APICustomizedUINodeRequestDTO = { enabled: $event.enabled, key: $event.fullKey };
-    this.store.dispatch(
-      UIModuleConfigActions.putUIModuleCustomization({ module: this.itSystemUsageModuleKey, updatedNodeRequest: dto })
-    );
-  }
 }

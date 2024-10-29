@@ -15,7 +15,6 @@ import { UIModuleConfigActions } from 'src/app/store/organization/ui-module-cust
 export class UiConfigTabSectionComponent {
   @Input() tabViewModel!: UIConfigNodeViewModel;
   @Input() moduleEnabled!: Observable<boolean | undefined>;
-  @Output() checkboxChanged = new EventEmitter<UINodeCustomization>();
   @Input() moduleKey!: UIModuleConfigKey;
 
   constructor(private store: Store) {}
