@@ -30,7 +30,7 @@ describe('local-admin it system usage', () => {
       fixture: './local-admin/it-system/ui-root-config-no-system-module.json',
     }).as('patch');
 
-    cy.getByDataCy('it-system-nav-bar-item').click();
+    cy.getByDataCy('toggle-module-button').click();
 
     cy.wait('@patch').then((interception) => {
       const newValue = interception.request.body.showItSystemModule;
