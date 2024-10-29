@@ -37,7 +37,7 @@ describe('local-admin it system usage', () => {
       expect(newValue).to.equal(false);
     });
     cy.getByDataCy('it-system-nav-bar-item').should('not.exist');
-  })
+  });
 
   it('Cannot toggle obligatory ui customization field', () => {
     const targetTabCheckboxButtonText = 'Systemforside';
