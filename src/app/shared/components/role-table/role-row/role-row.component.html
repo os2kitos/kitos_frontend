@@ -3,7 +3,11 @@
 <td>
   <app-paragraph paragraphSize="small">
     <app-content-with-tooltip [description]="rolesDictionary[role.assignment.role.uuid]?.description">
-      <app-selected-option-type-text [availableOptions]="rolesDictionary" [selectedOption]="role.assignment.role">
+      <app-selected-option-type-text
+        [availableOptions]="rolesDictionary"
+        [selectedOption]="role.assignment.role"
+        class="align-icon-right"
+      >
       </app-selected-option-type-text>
     </app-content-with-tooltip>
   </app-paragraph>
