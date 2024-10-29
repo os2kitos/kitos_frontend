@@ -82,19 +82,19 @@ export class DataProcessingDetailsComponent extends BaseComponent implements OnI
       label: $localize`Databehandlingsroller`,
       iconType: 'roles',
       route: AppPath.roles,
-      enabled: this.dprRolesEnabled$,
+      enabled$: this.dprRolesEnabled$,
     },
     {
       label: $localize`Advis`,
       iconType: 'notification',
       route: AppPath.notifications,
-      enabled: this.dprNotificationsEnabled$,
+      enabled$: this.dprNotificationsEnabled$,
     },
     {
       label: $localize`Referencer`,
       iconType: 'bookmark',
       route: AppPath.externalReferences,
-      enabled: this.dprReferencesEnabled$,
+      enabled$: this.dprReferencesEnabled$,
     },
   ];
 

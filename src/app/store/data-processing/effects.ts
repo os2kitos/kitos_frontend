@@ -5,7 +5,7 @@ import { concatLatestFrom } from '@ngrx/operators';
 
 import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
-import { catchError, combineLatest, combineLatestWith, map, mergeMap, Observable, of, switchMap } from 'rxjs';
+import { catchError, combineLatestWith, map, mergeMap, of, switchMap } from 'rxjs';
 import { APIBusinessRoleDTO, APIV1DataProcessingRegistrationINTERNALService } from 'src/app/api/v1';
 import {
   APIDataProcessingRegistrationGeneralDataWriteRequestDTO,
@@ -17,16 +17,14 @@ import {
   APIV2DataProcessingRegistrationService,
   APIV2OrganizationGridInternalINTERNALService,
 } from 'src/app/api/v2';
-import * as GridFields from 'src/app/shared/constants/data-processing-grid-column-constants';
 import { DATA_PROCESSING_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-constants';
 import { adaptDataProcessingRegistration } from 'src/app/shared/models/data-processing/data-processing.model';
 import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { OData } from 'src/app/shared/models/odata.model';
-import { UIConfigGridApplication } from 'src/app/shared/models/ui-config/ui-config-grid-application';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ExternalReferencesApiService } from 'src/app/shared/services/external-references-api-service.service';
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
-import { UIConfigService } from 'src/app/shared/services/ui-config.service';
+import { UIConfigService } from 'src/app/shared/services/ui-config-services/ui-config.service';
 import { getNewGridColumnsBasedOnConfig } from '../helpers/grid-config-helper';
 import { selectDprEnableMainContract, selectDprEnableReferences, selectDprEnableRoles, selectDprEnableScheduledInspectionDate } from '../organization/ui-module-customization/selectors';
 import { selectOrganizationUuid } from '../user-store/selectors';
@@ -119,10 +117,7 @@ export class DataProcessingEffects {
   updateGridColumns$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(DataProcessingActions.updateGridColumns),
-      concatLatestFrom(() => this.getUIConfigApplications()),
-      map(([{ gridColumns }, uiConfigApplications]) => {
-        gridColumns = this.uiConfigService.applyAllUIConfigToGridColumns(uiConfigApplications, gridColumns);
-
+      map(({ gridColumns }) => {
         this.statePersistingService.set(DATA_PROCESSING_COLUMNS_ID, gridColumns);
         return DataProcessingActions.updateGridColumnsSuccess(gridColumns);
       })
@@ -650,36 +645,6 @@ export class DataProcessingEffects {
     );
   });
 
-  private getUIConfigApplications(): Observable<UIConfigGridApplication[]> {
-    const mainContract$ = this.store.select(selectDprEnableMainContract);
-    const dprRolesEnabled$ = this.store.select(selectDprEnableRoles);
-    const referenceEnabled$ = this.store.select(selectDprEnableReferences);
-    const scheduledInspectionDateEnabled$= this.store.select(selectDprEnableScheduledInspectionDate);
-
-    return combineLatest([mainContract$, dprRolesEnabled$, referenceEnabled$, scheduledInspectionDateEnabled$]).pipe(
-      map(([mainContractEnabled, dprRolesEnabled, referenceEnabled, scheduledInspectionDate]): UIConfigGridApplication[] => {
-        return [
-          {
-            shouldEnable: mainContractEnabled,
-            columnNamesToConfigure: [GridFields.ActiveAccordingToMainContract],
-          },
-          {
-            shouldEnable: dprRolesEnabled,
-            columnNamesToConfigure: [],
-            columnNameSubstringsToConfigure: ['Roles.Role']
-          },
-          {
-            shouldEnable: referenceEnabled,
-            columnNamesToConfigure: [GridFields.MainReferenceTitle, GridFields.MainReferenceUserAssignedId],
-          },
-          {
-            shouldEnable: scheduledInspectionDate,
-            columnNamesToConfigure: [GridFields.OversightScheduledInspectionDate],
-          }
-        ];
-      })
-    );
-  }
 }
 
 function mapSubDataProcessors(

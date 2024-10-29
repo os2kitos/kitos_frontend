@@ -118,6 +118,7 @@ export class LocalAdminComponent extends BaseComponent implements OnInit {
         this.store.dispatch(OrganizationActions.patchUIRootConfig({ dto: { [moduleTabInfo.dtoFieldName]: $event } }));
       })
     );
+    this.store.dispatch(UIModuleConfigActions.getUIModuleConfig({ module: UIModuleConfigKey.ItContract }));
   }
 
   getModuleEnabled(moduleKey: UIModuleConfigKey | undefined): Observable<boolean | undefined> {
