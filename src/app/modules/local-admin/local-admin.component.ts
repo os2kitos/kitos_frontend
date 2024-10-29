@@ -43,9 +43,12 @@ export class LocalAdminComponent extends BaseComponent implements OnInit {
       startWith(this.extractLastUrlSegment(this.router.url)),
       distinctUntilChanged()
     );
-    this.currentTabPathSegment$.subscribe((segment) => {
-      this.currentTabModuleKey$ = this.getCurrentTabModuleKey(segment);
-    });
+    this.subscriptions.add(
+      this.currentTabPathSegment$.subscribe((segment) => {
+        this.currentTabModuleKey$ = this.getCurrentTabModuleKey(segment);
+    })
+    );
+
   }
 
   public readonly items: NavigationDrawerItem[] = [
