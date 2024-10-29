@@ -11,14 +11,15 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --host=127.0.0.1",
-    "start:local": "sh -c '$(git rev-parse --show-toplevel)/src/run-with-local-proxy.sh'",
+    "start:local": "sh -c '$(git rev-parse --show-toplevel)/src/use-local-proxy.sh start'",
     "build": "node --max_old_space_size=5048 ./node_modules/@angular/cli/bin/ng build",
     "watch": "ng build --watch",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "e2e:ci": "ng e2e --configuration ci",
     "i18n": "ng extract-i18n",
-    "swagger": "rimraf src/app/api/*/ && openapi-generator-cli generate"
+    "swagger": "rimraf src/app/api/*/ && openapi-generator-cli generate",
+    "swagger:local": "sh -c '$(git rev-parse --show-toplevel)/src/use-local-proxy.sh swagger'"
   },
   "private": true,
   "dependencies": {
