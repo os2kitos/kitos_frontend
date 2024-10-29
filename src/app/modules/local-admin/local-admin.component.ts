@@ -35,11 +35,18 @@ export class LocalAdminComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getUIModuleConfig();
+    this.updateTabModuleKeyOnRouting();
+  }
+
+  private getUIModuleConfig(){
     this.store.dispatch(UIModuleConfigActions.getUIModuleConfig({ module: UIModuleConfigKey.ItSystemUsage }));
     this.store.dispatch(
       UIModuleConfigActions.getUIModuleConfig({ module: UIModuleConfigKey.DataProcessingRegistrations })
     );
+  }
 
+  private updateTabModuleKeyOnRouting(){
     this.currentTabPathSegment$ = this.router.events.pipe(
       filter((event) => event instanceof NavigationEnd),
       map((navigationEnd) => this.extractLastUrlSegment(navigationEnd.urlAfterRedirects)),
@@ -51,7 +58,6 @@ export class LocalAdminComponent extends BaseComponent implements OnInit {
         this.currentTabModuleKey$ = this.getCurrentTabModuleKey(segment);
     })
     );
-
   }
 
   public readonly items: NavigationDrawerItem[] = [
