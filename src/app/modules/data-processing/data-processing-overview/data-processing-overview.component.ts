@@ -13,7 +13,7 @@ import {
   REFERENCE_SECTION_NAME,
   SUPERVISION_SECTION_NAME,
 } from 'src/app/shared/constants/persistent-state-constants';
-import { filterGridColumnsByUIConfig, getColumnsToShow } from 'src/app/shared/helpers/grid-config-helper';
+import { getColumnsToShow } from 'src/app/shared/helpers/grid-config-helper';
 import { isAgreementConcludedOptions } from 'src/app/shared/models/data-processing/is-agreement-concluded.model';
 import { isOversightCompletedOptions } from 'src/app/shared/models/data-processing/is-oversight-completed.model';
 import { transferToInsecureThirdCountriesOptions } from 'src/app/shared/models/data-processing/transfer-to-insecure-third-countries.model';
@@ -33,6 +33,8 @@ import {
 } from 'src/app/store/data-processing/selectors';
 import { selectGridConfigModificationPermission } from 'src/app/store/user-store/selectors';
 import * as GridFields from 'src/app/shared/constants/data-processing-grid-column-constants';
+import { UIConfigService } from 'src/app/shared/services/ui-config-services/ui-config.service';
+import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
 
 @Component({
   selector: 'app-data-processing-overview',
@@ -43,7 +45,9 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
   public readonly isLoading$ = this.store.select(selectDataProcessingGridLoading);
   public readonly gridData$ = this.store.select(selectDataProcessingGridData);
   public readonly gridState$ = this.store.select(selectDataProcessingGridState);
-  public readonly gridColumns$ = this.store.select(selectDataProcessingGridColumns).pipe(filterGridColumnsByUIConfig());
+  public readonly gridColumns$ = this.store
+    .select(selectDataProcessingGridColumns)
+    .pipe(this.uiConfigService.filterGridColumnsByUIConfig(UIModuleConfigKey.DataProcessingRegistrations));
 
   public readonly hasConfigModificationPermissions$: Observable<boolean | undefined> = this.store.select(
     selectGridConfigModificationPermission
@@ -285,7 +289,8 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
     private router: Router,
     private route: ActivatedRoute,
     private actions$: Actions,
-    private statePersistingService: StatePersistingService
+    private statePersistingService: StatePersistingService,
+    private uiConfigService: UIConfigService
   ) {
     super(store, 'data-processing-registration');
   }

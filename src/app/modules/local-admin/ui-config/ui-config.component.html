@@ -1,0 +1,12 @@
+<app-standard-vertical-content-grid>
+  <ng-container *ngIf="uiConfig$ | async as uiModuleConfig">
+    <app-ui-config-tab-section
+      *ngFor="let tabViewModel of uiModuleConfig.moduleConfigViewModel?.children"
+      [moduleKey]="moduleKey"
+      [tabViewModel]="tabViewModel"
+      [moduleEnabled]="moduleEnabled$"
+    >
+    </app-ui-config-tab-section>
+    <app-loading *ngIf="uiModuleConfig === undefined"></app-loading>
+  </ng-container>
+</app-standard-vertical-content-grid>
