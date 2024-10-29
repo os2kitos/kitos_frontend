@@ -19,6 +19,7 @@ import {
   selectItContractName,
   selectItContractUuid,
 } from 'src/app/store/it-contract/selectors';
+import { selectShowDataProcessingRegistrations, selectShowItSystemModule } from 'src/app/store/organization/selectors';
 import {
   selectItContractEnableAdvis,
   selectItContractEnableContractRoles,
@@ -58,6 +59,8 @@ export class ItContractDetailsComponent extends BaseComponent implements OnInit,
   public readonly economyTabEnabled$ = this.store.select(selectItContractEnableEconomy);
   public readonly contractRolesTabEnabled$ = this.store.select(selectItContractEnableContractRoles);
   public readonly notificationsTabEnabled$ = this.store.select(selectItContractEnableAdvis);
+  public readonly dataProcessingModuleEnabled$ = this.store.select(selectShowDataProcessingRegistrations);
+  public readonly itSystemsModuleEnabled$ = this.store.select(selectShowItSystemModule);
 
   public readonly navigationItems: NavigationDrawerItem[] = [
     {
@@ -69,11 +72,13 @@ export class ItContractDetailsComponent extends BaseComponent implements OnInit,
       label: $localize`IT Systemer`,
       iconType: 'systems',
       route: AppPath.itSystems,
+      enabled$: this.itSystemsModuleEnabled$,
     },
     {
       label: $localize`Databehandling`,
       iconType: 'folder-important',
       route: AppPath.dataProcessing,
+      enabled$: this.dataProcessingModuleEnabled$,
     },
     {
       label: $localize`Aftalefrister`,
