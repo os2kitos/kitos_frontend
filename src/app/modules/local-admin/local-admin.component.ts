@@ -6,6 +6,7 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
 import { NavigationDrawerItem } from 'src/app/shared/components/navigation-drawer/navigation-drawer.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
+import { NotificationService } from 'src/app/shared/services/notification.service';
 import { OrganizationActions } from 'src/app/store/organization/actions';
 import {
   selectShowDataProcessingRegistrations,
@@ -30,7 +31,7 @@ export class LocalAdminComponent extends BaseComponent implements OnInit {
   public currentTabPathSegment$: Observable<string> = of('');
   public currentTabModuleKey$: Observable<UIModuleConfigKey | undefined> = of(undefined);
 
-  constructor(private store: Store, private router: Router) {
+  constructor(private store: Store, private router: Router, private notificationService: NotificationService) {
     super();
   }
 
