@@ -5603,6 +5603,22 @@
         <source>Lokal tilpasning af brugerfladen blev opdateret</source>
         <target state="new">Lokal tilpasning af brugerfladen blev opdateret</target>
       </trans-unit>
+      <trans-unit id="1265710071714281214" datatype="html">
+        <source>Kunne ikke hente lokal tilpasning af moduler.</source>
+        <target state="new">Kunne ikke hente lokal tilpasning af moduler.</target>
+      </trans-unit>
+      <trans-unit id="3104778415715365281" datatype="html">
+        <source> Inkluder modulet <x id="INTERPOLATION" equiv-text="{{ getModuleText(moduleKey) }}"/> </source>
+        <target state="new"> Inkluder modulet <x id="INTERPOLATION" equiv-text="{{ getModuleText(moduleKey) }}"/> </target>
+      </trans-unit>
+      <trans-unit id="8666131066916332987" datatype="html">
+        <source>Ukendt modul</source>
+        <target state="new">Ukendt modul</target>
+      </trans-unit>
+      <trans-unit id="4599362408449001670" datatype="html">
+        <source>Hvilken kontrakt skal angive om databehandlingen er aktiv</source>
+        <target state="new">Hvilken kontrakt skal angive om databehandlingen er aktiv</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

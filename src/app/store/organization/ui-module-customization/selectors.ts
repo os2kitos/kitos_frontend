@@ -11,58 +11,92 @@ export const selectUIModuleConfig = createSelector(selectUIModuleCustomizationSt
 });
 
 // eslint-disable-next-line @ngrx/prefix-selectors-with-select
-const createTabEnabledSelector = (tabFullKey: string) =>
-  createSelector(selectITSystemUsageUIModuleConfig, (itSystemUsageModuleConfig) => {
-    const moduleConfigViewModels = itSystemUsageModuleConfig?.moduleConfigViewModel;
+const createTabEnabledSelector = (module: UIModuleConfigKey, tabKey: string) =>
+  createSelector(selectModuleConfig(module), (moduleConfig) => {
+    const moduleConfigViewModels = moduleConfig?.moduleConfigViewModel;
     if (!moduleConfigViewModels) return true;
-
-    return tabIsEnabled(moduleConfigViewModels, tabFullKey);
+    const fullKey = [module, tabKey].join('.');
+    return tabIsEnabled(moduleConfigViewModels, fullKey);
   });
 
 // eslint-disable-next-line @ngrx/prefix-selectors-with-select
-const createFieldOrGroupEnabledSelector = (tabFullKey: string, fieldKey: string) =>
-  createSelector(selectITSystemUsageUIModuleConfig, (itSystemUsageModuleConfig) => {
-    const moduleConfigViewModels = itSystemUsageModuleConfig?.moduleConfigViewModel;
+const createFieldOrGroupEnabledSelector = (module: UIModuleConfigKey, tabKey: string, fieldKey: string) =>
+  createSelector(selectModuleConfig(module), (moduleConfig) => {
+    const moduleConfigViewModels = moduleConfig?.moduleConfigViewModel;
     if (!moduleConfigViewModels) return true;
 
-    return fieldOrGroupIsEnabled(moduleConfigViewModels, tabFullKey, fieldKey);
+    const fullKey = [module, tabKey].join('.');
+    return fieldOrGroupIsEnabled(moduleConfigViewModels, fullKey, fieldKey);
   });
 
-export const selectITSystemUsageUIModuleConfig = createSelector(
-  selectUIModuleCustomizationState,
-  (state: UIModuleConfigState) => {
-    return state.uiModuleConfigs.find((c) => c.module == UIModuleConfigKey.ItSystemUsage);
-  }
+const selectModuleConfig = (module: UIModuleConfigKey) =>
+  createSelector(selectUIModuleCustomizationState, (state: UIModuleConfigState) => {
+    return state.uiModuleConfigs.find((c) => c.module == module);
+  });
+
+export const selectITSystemUsageUIModuleConfig = selectModuleConfig(UIModuleConfigKey.ItSystemUsage);
+
+export const selectDataProcessingUIModuleConfig = selectModuleConfig(UIModuleConfigKey.DataProcessingRegistrations);
+
+//Data processing
+const createDprTabEnabledSelector = (tabKey: string) =>
+  createTabEnabledSelector(UIModuleConfigKey.DataProcessingRegistrations, tabKey);
+//Tab selectors
+export const selectDprEnableFrontPage = createDprTabEnabledSelector('frontPage');
+export const selectDprEnableItSystems = createDprTabEnabledSelector('itSystems');
+export const selectDprEnableItContracts = createDprTabEnabledSelector('itContracts');
+export const selectDprEnableOversight = createDprTabEnabledSelector('oversight');
+export const selectDprEnableRoles = createDprTabEnabledSelector('roles');
+export const selectDprEnableNotifications = createDprTabEnabledSelector('notifications');
+export const selectDprEnableReferences = createDprTabEnabledSelector('references');
+
+//Data processing
+//Field selectors
+export const selectDprEnableMainContract = createFieldOrGroupEnabledSelector(
+  UIModuleConfigKey.DataProcessingRegistrations,
+  'itContracts',
+  'mainContract'
+);
+export const selectDprEnableScheduledInspectionDate = createFieldOrGroupEnabledSelector(
+  UIModuleConfigKey.DataProcessingRegistrations,
+  'oversight',
+  'scheduledInspectionDate'
 );
 
 //IT system usage
+const createItSystemUsageTabEnabledSelector = (tabKey: string) =>
+  createTabEnabledSelector(UIModuleConfigKey.ItSystemUsage, tabKey);
 //Tab selectors
-export const selectITSystemUsageEnableGdpr = createTabEnabledSelector('ItSystemUsages.gdpr');
-export const selectITSystemUsageEnableTabSystemRoles = createTabEnabledSelector('ItSystemUsages.systemRoles');
-export const selectITSystemUsageEnableTabOrganization = createTabEnabledSelector('ItSystemUsages.organization');
-export const selectITSystemUsageEnableSystemRelations = createTabEnabledSelector('ItSystemUsages.systemRelations');
-export const selectITSystemUsageEnableTabInterfaces = createTabEnabledSelector('ItSystemUsages.interfaces');
-export const selectITSystemUsageEnableTabArchiving = createTabEnabledSelector('ItSystemUsages.archiving');
-export const selectITSystemUsageEnableTabHierarchy = createTabEnabledSelector('ItSystemUsages.hierarchy');
-export const selectITSystemUsageEnableTabLocalKle = createTabEnabledSelector('ItSystemUsages.localKle');
-export const selectITSystemUsageEnableTabNotifications = createTabEnabledSelector('ItSystemUsages.advice');
-export const selectITSystemUsageEnableLocalReferences = createTabEnabledSelector('ItSystemUsages.localReferences');
+export const selectITSystemUsageEnableGdpr = createItSystemUsageTabEnabledSelector('gdpr');
+export const selectITSystemUsageEnableTabSystemRoles = createItSystemUsageTabEnabledSelector('systemRoles');
+export const selectITSystemUsageEnableTabOrganization = createItSystemUsageTabEnabledSelector('organization');
+export const selectITSystemUsageEnableSystemRelations = createItSystemUsageTabEnabledSelector('systemRelations');
+export const selectITSystemUsageEnableTabInterfaces = createItSystemUsageTabEnabledSelector('interfaces');
+export const selectITSystemUsageEnableTabArchiving = createItSystemUsageTabEnabledSelector('archiving');
+export const selectITSystemUsageEnableTabHierarchy = createItSystemUsageTabEnabledSelector('hierarchy');
+export const selectITSystemUsageEnableTabLocalKle = createItSystemUsageTabEnabledSelector('localKle');
+export const selectITSystemUsageEnableTabNotifications = createItSystemUsageTabEnabledSelector('advice');
+export const selectITSystemUsageEnableLocalReferences = createItSystemUsageTabEnabledSelector('localReferences');
 
 //Field selectors
 export const selectITSystemUsageEnableFrontPageUsagePeriod = createFieldOrGroupEnabledSelector(
-  'ItSystemUsages.frontPage',
+  UIModuleConfigKey.ItSystemUsage,
+  'frontPage',
   'usagePeriod'
 );
 export const selectITSystemUsageEnableLifeCycleStatus = createFieldOrGroupEnabledSelector(
-  'ItSystemUsages.frontPage',
+  UIModuleConfigKey.ItSystemUsage,
+  'frontPage',
   'lifeCycleStatus'
 );
 export const selectITSystemUsageEnableSelectContractToDetermineIfItSystemIsActive = createFieldOrGroupEnabledSelector(
-  'ItSystemUsages.contracts',
+  UIModuleConfigKey.ItSystemUsage,
+  'contracts',
   'selectContractToDetermineIfItSystemIsActive'
 );
 export const selectITSystemUsageEnableGdprPlannedRiskAssessmentDate = createFieldOrGroupEnabledSelector(
-  'ItSystemUsages.gdpr',
+  UIModuleConfigKey.ItSystemUsage,
+  'gdpr',
   'plannedRiskAssessmentDate'
 );
 

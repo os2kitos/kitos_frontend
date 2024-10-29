@@ -1,6 +1,6 @@
 import { createSelector } from '@ngrx/store';
-import { OrganizationState } from './state';
 import { organizationAdapter, organizationFeature } from './reducer';
+import { OrganizationState } from './state';
 
 export const { selectOrganizationState } = organizationFeature;
 
@@ -41,3 +41,18 @@ export const selectOrganizationGridData = createSelector(selectAll, selectTotal,
   total,
 }));
 export const selectOrganizationGridColumns = createSelector(selectOrganizationState, (state) => state.gridColumns);
+
+export const selectUIRootConfig = createSelector(selectOrganizationState, (state) => state.uiRootConfig);
+export const selectShowItSystemModule = createSelector(
+  selectOrganizationState,
+  (state) => state.uiRootConfig?.showItSystemModule
+);
+export const selectShowItContractModule = createSelector(
+  selectOrganizationState,
+  (state) => state.uiRootConfig?.showItContractModule
+);
+
+export const selectShowDataProcessingRegistrations = createSelector(
+  selectOrganizationState,
+  (state) => state.uiRootConfig?.showDataProcessing
+);

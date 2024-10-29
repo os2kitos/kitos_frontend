@@ -1,9 +1,9 @@
 import { createEntityAdapter } from '@ngrx/entity';
 import { createFeature, createReducer, on } from '@ngrx/store';
+import { defaultGridState } from 'src/app/shared/models/grid-state.model';
+import { Organization } from 'src/app/shared/models/organization/organization.model';
 import { OrganizationActions } from './actions';
 import { OrganizationState } from './state';
-import { Organization } from 'src/app/shared/models/organization/organization.model';
-import { defaultGridState } from 'src/app/shared/models/grid-state.model';
 
 export const organizationAdapter = createEntityAdapter<Organization>();
 
@@ -16,6 +16,7 @@ export const organizationInitialState: OrganizationState = organizationAdapter.g
   organizationMasterData: null,
   organizationMasterDataRoles: null,
   permissions: null,
+  uiRootConfig: null,
 });
 
 export const organizationFeature = createFeature({
@@ -60,10 +61,7 @@ export const organizationFeature = createFeature({
       OrganizationActions.getOrganizationPermissionsError,
       (state): OrganizationState => ({ ...state, permissions: null })
     ),
-    on(
-      OrganizationActions.getOrganizations,
-      (state): OrganizationState => ({ ...state, isLoadingUsersQuery: true })
-    ),
+    on(OrganizationActions.getOrganizations, (state): OrganizationState => ({ ...state, isLoadingUsersQuery: true })),
     on(
       OrganizationActions.getOrganizationsSuccess,
       (state, { organizations, total }): OrganizationState => ({
@@ -84,5 +82,13 @@ export const organizationFeature = createFeature({
         gridState,
       })
     ),
+    on(
+      OrganizationActions.getUIRootConfigSuccess,
+      (state, { uiRootConfig }): OrganizationState => ({ ...state, uiRootConfig })
+    ),
+    on(
+      OrganizationActions.patchUIRootConfigSuccess,
+      (state, { uiRootConfig }): OrganizationState => ({ ...state, uiRootConfig })
+    )
   ),
 });

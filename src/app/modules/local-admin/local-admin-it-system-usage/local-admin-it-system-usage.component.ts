@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { APICustomizedUINodeDTO } from 'src/app/api/v1';
+import { APICustomizedUINodeRequestDTO } from 'src/app/api/v2';
 import { SegmentButtonOption } from 'src/app/shared/components/segment/segment.component';
 import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
 import { UINodeCustomization } from 'src/app/shared/models/ui-config/ui-node-customization';
 import { NotificationService } from 'src/app/shared/services/notification.service';
+import { selectShowItSystemModule } from 'src/app/store/organization/selectors';
 import { UIModuleConfigActions } from 'src/app/store/organization/ui-module-customization/actions';
 import { selectITSystemUsageUIModuleConfig } from 'src/app/store/organization/ui-module-customization/selectors';
 
@@ -28,14 +29,9 @@ export class LocalAdminItSystemUsageComponent {
     { text: $localize`Lokal tilpasning af roller`, value: LocalAdminSystemUsageSegmentOptions.RoleOptionTypes },
   ];
   public readonly itSystemUsageUIModuleConfig$ = this.store.select(selectITSystemUsageUIModuleConfig);
-  private readonly itSystemUsageModuleKey = UIModuleConfigKey.ItSystemUsage;
+  public readonly showItSystemModule$ = this.store.select(selectShowItSystemModule);
+  public readonly itSystemUsageModuleKey = UIModuleConfigKey.ItSystemUsage;
 
-  constructor(private readonly store: Store, private readonly notificationService: NotificationService) {}
-
-  public onCheckboxChange($event: UINodeCustomization) {
-    const dto: APICustomizedUINodeDTO = { enabled: $event.enabled, key: $event.fullKey };
-    this.store.dispatch(
-      UIModuleConfigActions.putUIModuleCustomization({ module: this.itSystemUsageModuleKey, updatedNodeRequest: dto })
-    );
+  constructor(private readonly store: Store, private readonly notificationService: NotificationService) {
   }
 }

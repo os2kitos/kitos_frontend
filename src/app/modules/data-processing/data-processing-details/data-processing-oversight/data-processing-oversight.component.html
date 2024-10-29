@@ -25,6 +25,7 @@
         (valueChange)="patchOversight({ oversightIntervalRemark: $event })"
       ></app-textarea>
       <app-datepicker
+        *ngIf="nextOversightEnabled$ | async"
         text="Kommende planlagt tilsyn"
         [formGroup]="generalInformationForm"
         formName="completedAt"

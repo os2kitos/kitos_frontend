@@ -24,6 +24,21 @@ describe('local-admin it system usage', () => {
     cy.setup(true, 'local-admin/system');
   });
 
+  it('Can hide it system module', () => {
+    cy.getByDataCy('it-system-nav-bar-item').should('exist');
+    cy.intercept('PATCH', 'api/v2/internal/organizations/*/ui-root-config', {
+      fixture: './local-admin/it-system/ui-root-config-no-system-module.json',
+    }).as('patch');
+
+    cy.getByDataCy('toggle-module-button').click();
+
+    cy.wait('@patch').then((interception) => {
+      const newValue = interception.request.body.showItSystemModule;
+      expect(newValue).to.equal(false);
+    });
+    cy.getByDataCy('it-system-nav-bar-item').should('not.exist');
+  });
+
   it('Cannot toggle obligatory ui customization field', () => {
     const targetTabCheckboxButtonText = 'Systemforside';
     cy.contains(targetTabCheckboxButtonText)
