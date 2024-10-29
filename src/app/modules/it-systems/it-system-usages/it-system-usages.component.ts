@@ -18,7 +18,8 @@ import {
   USAGE_COLUMNS_ID,
   USAGE_SECTION_NAME,
 } from 'src/app/shared/constants/persistent-state-constants';
-import { filterGridColumnsByUIConfig, getColumnsToShow } from 'src/app/shared/helpers/grid-config-helper';
+import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
+import { getColumnsToShow } from 'src/app/shared/helpers/grid-config-helper';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { archiveDutyChoiceOptions } from 'src/app/shared/models/it-system-usage/archive-duty-choice.model';
@@ -27,6 +28,7 @@ import { hostedAtOptionsGrid } from 'src/app/shared/models/it-system-usage/gdpr/
 import { lifeCycleStatusOptions } from 'src/app/shared/models/life-cycle-status.model';
 import { yesNoIrrelevantOptionsGrid } from 'src/app/shared/models/yes-no-irrelevant.model';
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
+import { UIConfigService } from 'src/app/shared/services/ui-config-services/ui-config.service';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import {
   selectGridData,
@@ -51,7 +53,9 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
   public readonly isLoading$ = this.store.select(selectIsLoading);
   public readonly gridData$ = this.store.select(selectGridData);
   public readonly gridState$ = this.store.select(selectGridState);
-  public readonly gridColumns$ = this.store.select(selectUsageGridColumns).pipe(filterGridColumnsByUIConfig());
+  public readonly gridColumns$ = this.store
+    .select(selectUsageGridColumns)
+    .pipe(this.uiConfigService.filterGridColumnsByUIConfig(UIModuleConfigKey.ItSystemUsage));
 
   public readonly organizationName$ = this.store.select(selectOrganizationName);
   public readonly hasCreatePermission$ = this.store.select(selectITSystemUsageHasCreateCollectionPermission);
@@ -511,7 +515,8 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     private router: Router,
     private route: ActivatedRoute,
     private statePersistingService: StatePersistingService,
-    private actions$: Actions
+    private actions$: Actions,
+    private uiConfigService: UIConfigService
   ) {
     super(store, 'it-system-usage');
   }

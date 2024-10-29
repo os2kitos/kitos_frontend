@@ -39,14 +39,15 @@ export class LocalAdminComponent extends BaseComponent implements OnInit {
     this.updateTabModuleKeyOnRouting();
   }
 
-  private getUIModuleConfig(){
+  private getUIModuleConfig() {
     this.store.dispatch(UIModuleConfigActions.getUIModuleConfig({ module: UIModuleConfigKey.ItSystemUsage }));
+    this.store.dispatch(UIModuleConfigActions.getUIModuleConfig({ module: UIModuleConfigKey.ItContract }));
     this.store.dispatch(
       UIModuleConfigActions.getUIModuleConfig({ module: UIModuleConfigKey.DataProcessingRegistrations })
     );
   }
 
-  private updateTabModuleKeyOnRouting(){
+  private updateTabModuleKeyOnRouting() {
     this.currentTabPathSegment$ = this.router.events.pipe(
       filter((event) => event instanceof NavigationEnd),
       map((navigationEnd) => this.extractLastUrlSegment(navigationEnd.urlAfterRedirects)),
@@ -56,7 +57,7 @@ export class LocalAdminComponent extends BaseComponent implements OnInit {
     this.subscriptions.add(
       this.currentTabPathSegment$.subscribe((segment) => {
         this.currentTabModuleKey$ = this.getCurrentTabModuleKey(segment);
-    })
+      })
     );
   }
 
@@ -137,13 +138,13 @@ export class LocalAdminComponent extends BaseComponent implements OnInit {
           text: $localize`IT Systemer`,
           enabled: this.showItSystemModule$,
           dtoFieldName: 'showItSystemModule',
-        }
+        };
       case UIModuleConfigKey.DataProcessingRegistrations:
         return {
           text: $localize`Databehandling`,
           enabled: this.showDataProcessingRegistrations$,
           dtoFieldName: 'showDataProcessing',
-        }
+        };
       case UIModuleConfigKey.ItContract:
         return {
           text: $localize`IT Kontrakter`,

@@ -29,7 +29,7 @@ export const adaptITInterface = (value: any): ITInterface | undefined => {
   return {
     id: value.Uuid,
     Uuid: value.Uuid,
-    ItInterfaceId: value.itInterfaceId ?? '',
+    ItInterfaceId: value.ItInterfaceId ?? '',
     Name: value.Name ?? '',
     AccessModifier: mapAccessModifierEnumToAccessModifierChoice(value.AccessModifier),
     Version: value.Version,
