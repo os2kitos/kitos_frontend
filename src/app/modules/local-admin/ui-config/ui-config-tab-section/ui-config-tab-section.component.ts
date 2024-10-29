@@ -14,7 +14,7 @@ import { UIModuleConfigActions } from 'src/app/store/organization/ui-module-cust
 })
 export class UiConfigTabSectionComponent {
   @Input() tabViewModel!: UIConfigNodeViewModel;
-  @Input() moduleEnabled!: Observable<boolean | undefined>;
+  @Input() moduleEnabled$!: Observable<boolean | undefined>;
   @Input() moduleKey!: UIModuleConfigKey;
 
   constructor(private store: Store) {}

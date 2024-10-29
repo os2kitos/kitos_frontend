@@ -35,10 +35,19 @@ export class LocalAdminComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getUIModuleConfig();
+    this.updateTabModuleKeyOnRouting();
+  }
+
+  private getUIModuleConfig() {
     this.store.dispatch(UIModuleConfigActions.getUIModuleConfig({ module: UIModuleConfigKey.ItSystemUsage }));
     this.store.dispatch(UIModuleConfigActions.getUIModuleConfig({ module: UIModuleConfigKey.ItContract }));
-    this.store.dispatch(UIModuleConfigActions.getUIModuleConfig({ module: UIModuleConfigKey.DataProcessingRegistrations }));
+    this.store.dispatch(
+      UIModuleConfigActions.getUIModuleConfig({ module: UIModuleConfigKey.DataProcessingRegistrations })
+    );
+  }
 
+  private updateTabModuleKeyOnRouting() {
     this.currentTabPathSegment$ = this.router.events.pipe(
       filter((event) => event instanceof NavigationEnd),
       map((navigationEnd) => this.extractLastUrlSegment(navigationEnd.urlAfterRedirects)),
