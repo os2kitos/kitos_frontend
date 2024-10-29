@@ -1,7 +1,7 @@
 import { Store } from '@ngrx/store';
 import { APICustomizedUINodeDTO } from 'src/app/api/v1';
 import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { UIConfigNodeViewModel } from 'src/app/shared/models/ui-config/ui-config-node-view-model.model';
 import { UINodeCustomization } from 'src/app/shared/models/ui-config/ui-node-customization';

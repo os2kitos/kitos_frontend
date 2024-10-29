@@ -1,11 +1,6 @@
-import { Component,  } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { SegmentButtonOption } from 'src/app/shared/components/segment/segment.component';
-
-enum LocalAdminItContractsSegmentOption {
-  RegularOptionTypes = 'RegularOptionTypes',
-  RoleOptionTypes = 'RoleOptionTypes',
-}
+import { Component } from '@angular/core';
+import { LocalAdminModuleSegmentOptions, LocalAdminModuleSegmentOptionType } from 'src/app/shared/constants/local-admin-module-segment-constants';
+import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
 
 @Component({
   selector: 'app-local-admin-it-contract',
@@ -13,13 +8,9 @@ enum LocalAdminItContractsSegmentOption {
   styleUrl: './local-admin-it-contract.component.scss',
 })
 export class LocalAdminItContractComponent {
-  public readonly LocalAdminItContractsSegmentOption = LocalAdminItContractsSegmentOption;
+  public readonly LocalAdminModuleSegmentOptionType = LocalAdminModuleSegmentOptionType;
+  public readonly segmentOptions = LocalAdminModuleSegmentOptions;
+  public readonly itContractsModuleKey = UIModuleConfigKey.ItContract;
 
-  public selectedSegment: LocalAdminItContractsSegmentOption = LocalAdminItContractsSegmentOption.RegularOptionTypes;
-
-  public readonly segmentOptions: SegmentButtonOption<LocalAdminItContractsSegmentOption>[] = [
-    { text: $localize`Udfaldsrum`, value: LocalAdminItContractsSegmentOption.RegularOptionTypes },
-    { text: $localize`Roller`, value: LocalAdminItContractsSegmentOption.RoleOptionTypes },
-  ];
-
+  public selectedSegment = LocalAdminModuleSegmentOptionType.UiCustomization;
 }

@@ -2,21 +2,11 @@
 
 <app-card>
 
-  <ng-container *ngIf="selectedSegment === LocalAdminDprSegmentOption.UiCustomization">
-    <app-standard-vertical-content-grid>
-      <ng-container *ngIf="dataProcessingUIModuleConfig$ | async as uiModuleConfig">
-        <app-ui-config-tab-section
-          *ngFor="let tabViewModel of uiModuleConfig.moduleConfigViewModel?.children"
-          [moduleKey]="dataProcessingModuleKey"
-          [tabViewModel]="tabViewModel"
-        >
-        </app-ui-config-tab-section>
-        <app-loading *ngIf="uiModuleConfig === undefined"></app-loading>
-      </ng-container>
-    </app-standard-vertical-content-grid>
+  <ng-container *ngIf="selectedSegment === LocalAdminModuleSegmentOptionType.UiCustomization">
+    <app-ui-config [moduleKey]="dataProcessingModuleKey"> </app-ui-config>
   </ng-container>
 
-  <ng-container *ngIf="selectedSegment === LocalAdminDprSegmentOption.RegularOptionTypes">
+  <ng-container *ngIf="selectedSegment === LocalAdminModuleSegmentOptionType.RegularOptionTypes">
     <app-standard-vertical-content-grid>
       <app-option-type-table
         optionType="data-processing-basis-for-transfer-types"
@@ -36,11 +26,7 @@
       >
       </app-option-type-table>
 
-      <app-option-type-table
-        optionType="data-processing-data-responsible-types"
-        title="Dataansvarlige"
-        i18n-title
-      >
+      <app-option-type-table optionType="data-processing-data-responsible-types" title="Dataansvarlige" i18n-title>
       </app-option-type-table>
 
       <app-option-type-table
@@ -55,7 +41,7 @@
   </ng-container>
 
   <app-option-type-table
-    *ngIf="selectedSegment === LocalAdminDprSegmentOption.RoleOptionTypes"
+    *ngIf="selectedSegment === LocalAdminModuleSegmentOptionType.RoleOptionTypes"
     optionType="data-processing"
     [disableAccordion]="true"
     [expandedByDefault]="true"
