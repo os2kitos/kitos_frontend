@@ -4,7 +4,9 @@ replace_proxy() {
   local search=$1
   local replace=$2
   local file_path=$3
-  vim -c "%s/$search/$replace/g" -c "wq" "$(git rev-parse --show-toplevel)/$file_path"
+  local temp_file=$(mktemp)
+  sed "s/$search/$replace/g" "$(git rev-parse --show-toplevel)/$file_path" > "$temp_file"
+  mv "$temp_file" "$(git rev-parse --show-toplevel)/$file_path"
 }
 
 cleanup_start() {
