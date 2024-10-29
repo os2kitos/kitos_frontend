@@ -18,6 +18,7 @@ import { ITSystemEffects } from './it-system/effects';
 import { itSystemFeature } from './it-system/reducer';
 import { KLEEffects } from './kle/effects';
 import { kleFeature } from './kle/reducer';
+import { ExcelImportEffects } from './local-admin/excel-import/effects';
 import { FkOrgEffects } from './local-admin/fk-org/effects';
 import { fkOrgFeature } from './local-admin/fk-org/reducer';
 import { LocalOptionTypeEffects } from './local-admin/local-option-types/effects';
@@ -83,6 +84,7 @@ import { userFeature } from './user-store/reducer';
       OrganizationEffects,
       LocalOptionTypeEffects,
       FkOrgEffects,
+      ExcelImportEffects,
     ]),
     RouterModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),

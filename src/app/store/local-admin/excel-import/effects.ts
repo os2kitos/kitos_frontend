@@ -1,21 +1,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { HttpClient, HttpContext, HttpHeaders, HttpParameterCodec, HttpParams } from '@angular/common/http';
 import { Inject, Injectable, Optional } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Actions } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { catchError, combineLatestWith, map, mergeMap, Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { CustomHttpParameterCodec } from 'src/app/api/v1/encoder';
 import {
   APIV2ExcelInternalINTERNALService,
   Configuration,
   PostSingleExcelInternalV2PostContractsRequestParams,
 } from 'src/app/api/v2';
-import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
-import { selectOrganizationUuid } from '../../user-store/selectors';
-import { ExcelImportActions } from './actions';
 
 @Injectable()
-export class FkOrgEffects {
+export class ExcelImportEffects {
   public defaultHeaders = new HttpHeaders();
   public encoder: HttpParameterCodec;
 
@@ -28,34 +25,40 @@ export class FkOrgEffects {
   ) {
     this.encoder = this.configuration.encoder || new CustomHttpParameterCodec();
   }
-
+  /*
   excelImport$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ExcelImportActions.excelImport),
       combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
-      mergeMap(([{ file, importType }, organizationUuid]) => {
+      mergeMap(([{ file,  importType }, organizationUuid]) => {
         switch (importType) {
           case 'Contracts':
-            return this.postSingleExcelInternalV2PostContracts({ organizationUuid, importContracts: true }, file).pipe(
-              map(() => ExcelImportActions.excelImportSuccess()),
-              catchError(() => of(ExcelImportActions.excelImportError()))
-            );
+            return this.apiService
+              .postSingleExcelInternalV2PostOrgUnits({ organizationUuid, importOrgUnits: true })
+              .pipe(
+                map(() => ExcelImportActions.excelImportSuccess()),
+                catchError(() => of(ExcelImportActions.excelImportError()))
+              );
           case 'OrganizationUnits':
-            return this.postSingleExcelInternalV2PostContracts({ organizationUuid, importContracts: true }, file).pipe(
-              map(() => ExcelImportActions.excelImportSuccess()),
-              catchError(() => of(ExcelImportActions.excelImportError()))
-            );
+            return this.apiService
+              .postSingleExcelInternalV2PostOrgUnits({ organizationUuid, importOrgUnits: true })
+              .pipe(
+                map(() => ExcelImportActions.excelImportSuccess()),
+                catchError(() => of(ExcelImportActions.excelImportError()))
+              );
           case 'Users':
-            return this.postSingleExcelInternalV2PostContracts({ organizationUuid, importContracts: true }, file).pipe(
-              map(() => ExcelImportActions.excelImportSuccess()),
-              catchError(() => of(ExcelImportActions.excelImportError()))
-            );
+            return this.apiService
+              .postSingleExcelInternalV2PostOrgUnits({ organizationUuid, importOrgUnits: true })
+              .pipe(
+                map(() => ExcelImportActions.excelImportSuccess()),
+                catchError(() => of(ExcelImportActions.excelImportError()))
+              );
           default:
             throw 'Invalid excel import type';
         }
       })
     );
-  });
+  }); */
   /* getSynchronizationStatus$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ExcelImportActions.excelImport),
