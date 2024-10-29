@@ -1,39 +1,39 @@
 <ng-content *ngIf="organizationName$ | async as organizationName">
-  <h4 i18n class="title-margin" data-cy="master-data-headline">Stamdata for {{ organizationName }}</h4>
-<app-card class="card-top-margin">
-  <app-card-header [title]="organizationName"></app-card-header>
-  <app-form-grid [formGroup]="masterDataForm">
-    <app-numeric-input
-      i18n-text
-      text="CVR-nummer"
-      [formGroup]="masterDataForm"
-      formName="cvrControl"
-      (valueChange)="patchMasterData({ cvr: $event?.toString() })"
-    ></app-numeric-input>
-    <app-textbox
-      i18n-text
-      text="Telefonnummer"
-      [formGroup]="masterDataForm"
-      formName="phoneControl"
-      (valueChange)="patchMasterData({ phone: $event })"
-      data-cy='master-data-phone-input'
-    ></app-textbox>
-    <app-textbox
-      i18n-text
-      text="Email"
-      [formGroup]="masterDataForm"
-      formName="emailControl"
-      (valueChange)="patchMasterData({ email: $event })"
-    ></app-textbox>
-    <app-textbox
-      i18n-text
-      text="Adresse"
-      [formGroup]="masterDataForm"
-      formName="addressControl"
-      (valueChange)="patchMasterData({ address: $event })"
-    ></app-textbox>
-  </app-form-grid>
-</app-card>
+  <h3 i18n class="title-margin" data-cy="master-data-headline">Stamdata for {{ organizationName }}</h3>
+  <app-card class="card-top-margin">
+    <app-card-header [title]="organizationName"></app-card-header>
+    <app-form-grid [formGroup]="masterDataForm">
+      <app-numeric-input
+        i18n-text
+        text="CVR-nummer"
+        [formGroup]="masterDataForm"
+        formName="cvrControl"
+        (valueChange)="patchMasterData({ cvr: $event?.toString() })"
+      ></app-numeric-input>
+      <app-textbox
+        i18n-text
+        text="Telefonnummer"
+        [formGroup]="masterDataForm"
+        formName="phoneControl"
+        (valueChange)="patchMasterData({ phone: $event })"
+        data-cy="master-data-phone-input"
+      ></app-textbox>
+      <app-textbox
+        i18n-text
+        text="Email"
+        [formGroup]="masterDataForm"
+        formName="emailControl"
+        (valueChange)="patchMasterData({ email: $event })"
+      ></app-textbox>
+      <app-textbox
+        i18n-text
+        text="Adresse"
+        [formGroup]="masterDataForm"
+        formName="addressControl"
+        (valueChange)="patchMasterData({ address: $event })"
+      ></app-textbox>
+    </app-form-grid>
+  </app-card>
 </ng-content>
 
 <app-card>
@@ -147,13 +147,13 @@
       data-cy="contact-person-phone-control"
     ></app-textbox>
     <app-textbox
-    i18n-text
-    text="Email (fritekst)"
-    [formGroup]="contactPersonForm"
-    formName="emailControl"
-    (valueChange)="updateMasterDataRolesContactPersonEmailFreeText()"
+      i18n-text
+      text="Email (fritekst)"
+      [formGroup]="contactPersonForm"
+      formName="emailControl"
+      (valueChange)="updateMasterDataRolesContactPersonEmailFreeText()"
     >
-  </app-textbox>
+    </app-textbox>
     <app-connected-dropdown
       i18n-text
       text="Email (fremsøg eksisterende bruger)"
