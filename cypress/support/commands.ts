@@ -22,6 +22,10 @@ Cypress.Commands.add('setup', (authenticate?: boolean, urlPath?: string, uiCusto
     fixture: uiCustomizationFixturePath ?? './shared/data-processing-ui-customization.json' }
   ).as('data-processing-ui-customization');
 
+  cy.intercept('api/v2/internal/organizations/*/ui-root-config', {
+    fixture: './shared/ui-root-config.json',
+  });
+
   cy.visit(urlPath || '/');
 
   if (authenticate) {

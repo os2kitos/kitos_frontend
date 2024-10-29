@@ -1,4 +1,22 @@
-<h4 i18n class="title-margin">Lokal admin</h4>
+<div class="header"
+>
+  <h4 i18n class="title-margin">Lokal admin</h4>
+  <ng-container *ngIf="currentTabModuleKey$ | async as moduleKey">
+    <app-checkbox-button
+      (valueChange)="patchUIRootConfig($event)"
+      [value]="(getModuleEnabled(moduleKey) | async) ?? false"
+      data-cy="toggle-module-button"
+      [backgroundWhite]="true"
+      >
+    <app-paragraph [bold]="true" paragraphSize="medium" i18n>
+      Inkluder modulet {{ getModuleText(moduleKey) }}
+    </app-paragraph>
+    </app-checkbox-button>
+  </ng-container>
+
+</div>
+
+
 <div class="content">
   <app-navigation-drawer [items]="items"> </app-navigation-drawer>
 

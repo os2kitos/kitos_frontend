@@ -168,6 +168,8 @@ export * from './trackingEventResponseDTO';
 export * from './transferOrganizationUnitRegistrationV2RequestDTO';
 export * from './uIModuleCustomizationRequestDTO';
 export * from './uIModuleCustomizationResponseDTO';
+export * from './uIRootConfigResponseDTO';
+export * from './uIRootConfigUpdateRequestDTO';
 export * from './unitAccessRightsResponseDTO';
 export * from './unitAccessRightsWithUnitDataResponseDTO';
 export * from './updateContractRequestDTO';

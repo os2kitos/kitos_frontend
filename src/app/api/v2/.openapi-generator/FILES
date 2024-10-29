@@ -258,6 +258,8 @@ model/trackingEventResponseDTO.ts
 model/transferOrganizationUnitRegistrationV2RequestDTO.ts
 model/uIModuleCustomizationRequestDTO.ts
 model/uIModuleCustomizationResponseDTO.ts
+model/uIRootConfigResponseDTO.ts
+model/uIRootConfigUpdateRequestDTO.ts
 model/unitAccessRightsResponseDTO.ts
 model/unitAccessRightsWithUnitDataResponseDTO.ts
 model/updateContractRequestDTO.ts

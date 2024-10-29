@@ -127,6 +127,11 @@ export class NotificationService implements OnDestroy {
       $localize`Kunne ikke hente organisationsrettigheder.`
     );
 
+    this.subscribeAsError(
+      OrganizationActions.getUIRootConfigError,
+      $localize`Kunne ikke hente lokal tilpasning af moduler.`
+    )
+
     this.subscribeAsDefault(OrganizationUserActions.copyRolesSuccess, $localize`Roller kopieret`);
     this.subscribeAsError(OrganizationUserActions.copyRolesError, $localize`Kunne ikke kopiere roller`);
 
