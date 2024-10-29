@@ -1,12 +1,9 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { APICustomizedUINodeRequestDTO } from 'src/app/api/v2';
 import { SegmentButtonOption } from 'src/app/shared/components/segment/segment.component';
 import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
-import { UINodeCustomization } from 'src/app/shared/models/ui-config/ui-node-customization';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { selectShowItSystemModule } from 'src/app/store/organization/selectors';
-import { UIModuleConfigActions } from 'src/app/store/organization/ui-module-customization/actions';
 import { selectITSystemUsageUIModuleConfig } from 'src/app/store/organization/ui-module-customization/selectors';
 
 enum LocalAdminSystemUsageSegmentOptions {
