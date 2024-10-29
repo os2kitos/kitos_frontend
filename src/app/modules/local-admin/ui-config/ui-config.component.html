@@ -4,7 +4,7 @@
       *ngFor="let tabViewModel of uiModuleConfig.moduleConfigViewModel?.children"
       [moduleKey]="moduleKey"
       [tabViewModel]="tabViewModel"
-      [moduleEnabled]="moduleEnabled$"
+      [moduleEnabled$]="moduleEnabled$"
     >
     </app-ui-config-tab-section>
     <app-loading *ngIf="uiModuleConfig === undefined"></app-loading>
