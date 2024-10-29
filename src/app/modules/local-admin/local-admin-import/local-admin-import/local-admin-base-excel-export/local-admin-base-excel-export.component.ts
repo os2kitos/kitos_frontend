@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { HttpClient, HttpContext, HttpContextToken } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Actions } from '@ngrx/effects';
@@ -47,24 +47,21 @@ export class LocalAdminBaseExcelExportComponent {
       formData.append('file', this.excelForm.get('file')?.value);
 
       //this.store.dispatch(ExcelImportActions.excelImport('OrganizationUnits'));
-      const context = new HttpContext();
-      const CONTENT_TYPE = new HttpContextToken<string>(() => 'Content-Type');
-      context.set(CONTENT_TYPE, 'multipart/form-data');
       this.organizationUuid$
         .pipe(
           first(),
           mergeMap((orgUuid) => {
-            return this.apiService
-              .postSingleExcelInternalV2PostOrgUnits(
-                { organizationUuid: orgUuid, importOrgUnits: true, body: formData },
-                undefined,
-                undefined,
-                { httpHeaderAccept: 'multipart/form-data' as any, context: context }
-              )
-              .pipe(
-                map(() => ExcelImportActions.excelImportSuccess()),
-                catchError(() => of(ExcelImportActions.excelImportError()))
-              );
+            const serviceCall = this.apiService.postSingleExcelInternalV2PostOrgUnits(
+              { organizationUuid: orgUuid, importOrgUnits: true, body: formData },
+              undefined,
+              undefined,
+              { httpHeaderAccept: 'multipart/form-data' as any, context: undefined }
+            );
+
+            return serviceCall.pipe(
+              map(() => ExcelImportActions.excelImportSuccess()),
+              catchError(() => of(ExcelImportActions.excelImportError()))
+            );
           })
         )
         .subscribe();
