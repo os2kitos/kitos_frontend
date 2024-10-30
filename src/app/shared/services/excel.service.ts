@@ -24,7 +24,7 @@ export class APIExcelService {
 
   public getExcel(organizationUuid: string, type: LocalAdminImportTabOptions): Observable<Blob> {
     const entityName = this.getEntityName(type);
-    return this.getSingleExcelInternalV2GetContracts(organizationUuid, entityName);
+    return this.getSingleExcelInternalV2GetByEntityName(organizationUuid, entityName);
   }
 
   public postExcelWithFormData(
@@ -32,10 +32,10 @@ export class APIExcelService {
     type: LocalAdminImportTabOptions
   ): Observable<any> {
     const entityName = this.getEntityName(type);
-    return this.postSingleExcelInternalV2PostOrgUnits(requestParameters, entityName);
+    return this.postSingleExcelInternalV2PostByEntityName(requestParameters, entityName);
   }
 
-  private getSingleExcelInternalV2GetContracts(organizationUuid: string, entityName: string): Observable<any> {
+  private getSingleExcelInternalV2GetByEntityName(organizationUuid: string, entityName: string): Observable<any> {
     let localVarHeaders = this.defaultHeaders;
 
     const httpHeaderAccepts: string[] = [];
@@ -65,7 +65,7 @@ export class APIExcelService {
     });
   }
 
-  private postSingleExcelInternalV2PostOrgUnits(
+  private postSingleExcelInternalV2PostByEntityName(
     requestParameters: PostSingleExcelInternalV2PostOrgUnitsRequestParams,
     entityName: string
   ): Observable<any> {

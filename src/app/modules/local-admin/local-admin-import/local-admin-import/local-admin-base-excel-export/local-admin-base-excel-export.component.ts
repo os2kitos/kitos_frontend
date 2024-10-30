@@ -5,11 +5,11 @@ import { Store } from '@ngrx/store';
 import { saveAs } from 'file-saver';
 import { catchError, first, map, mergeMap, of } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { LocalAdminImportEntityType } from 'src/app/shared/enums/local-admin-import-entity-type';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { APIExcelService } from 'src/app/shared/services/excel.service';
 import { ExcelImportActions } from 'src/app/store/local-admin/excel-import/actions';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
-import { LocalAdminImportTabOptions } from '../../local-admin-import.component';
 
 @Component({
   selector: 'app-local-admin-base-excel-export',
@@ -17,7 +17,7 @@ import { LocalAdminImportTabOptions } from '../../local-admin-import.component';
   styleUrl: './local-admin-base-excel-export.component.scss',
 })
 export class LocalAdminBaseExcelExportComponent extends BaseComponent {
-  @Input() public type!: LocalAdminImportTabOptions;
+  @Input() public type!: LocalAdminImportEntityType;
   @Input() public helpTextKey!: string;
 
   public readonly excelForm: FormGroup;
@@ -75,22 +75,23 @@ export class LocalAdminBaseExcelExportComponent extends BaseComponent {
       formData.append(this.fileControl, this.excelForm.get(this.fileControl)?.value);
       this.subscriptions.add(
         this.organizationUuid$
-        .pipe(
-          first(),
-          mergeMap((orgUuid) => {
-            const requestParameters = {
-              organizationUuid: orgUuid,
-              importOrgUnits: true,
-              body: formData,
-            };
+          .pipe(
+            first(),
+            mergeMap((orgUuid) => {
+              const requestParameters = {
+                organizationUuid: orgUuid,
+                importOrgUnits: true,
+                body: formData,
+              };
 
-            return this.excelService.postExcelWithFormData(requestParameters, this.type).pipe(
-              map(() => this.store.dispatch(ExcelImportActions.excelImportSuccess())),
-              catchError(() => this.handleExcelImportError())
-            );
-          })
-        )
-        .subscribe());
+              return this.excelService.postExcelWithFormData(requestParameters, this.type).pipe(
+                map(() => this.store.dispatch(ExcelImportActions.excelImportSuccess())),
+                catchError(() => this.handleExcelImportError())
+              );
+            })
+          )
+          .subscribe()
+      );
     }
   }
 }
