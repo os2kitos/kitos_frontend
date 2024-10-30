@@ -43,12 +43,16 @@ export class LocalAdminBaseExcelExportComponent extends BaseComponent {
             map((blob) => {
               saveAs(blob); //include file names
             }),
-            catchError(() => of(ExcelImportActions.excelImportError())
-            )
+            catchError(() => this.handleExcelImportError())
           );
         })
       )
       .subscribe();
+  }
+
+  private handleExcelImportError() {
+    this.store.dispatch(ExcelImportActions.excelImportError());
+    return of(ExcelImportActions.excelImportError());
   }
 
   public fileImported(event: Event): void {
@@ -79,10 +83,7 @@ export class LocalAdminBaseExcelExportComponent extends BaseComponent {
 
             return this.excelService.postExcelWithFormData(requestParameters, this.type).pipe(
               map(() => this.store.dispatch(ExcelImportActions.excelImportSuccess())),
-              catchError(() => {
-                this.store.dispatch(ExcelImportActions.excelImportError());
-                return of(ExcelImportActions.excelImportError());
-              })
+              catchError(() => this.handleExcelImportError())
             );
           })
         )
