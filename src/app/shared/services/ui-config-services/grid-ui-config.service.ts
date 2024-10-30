@@ -1,9 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { combineLatest, map, Observable } from 'rxjs';
+import * as DprFields from 'src/app/shared/constants/data-processing-grid-column-constants';
 import * as ContractFields from 'src/app/shared/constants/it-contracts-grid-column-constants';
 import * as UsageFields from 'src/app/shared/constants/it-system-usage-grid-column-constants';
-import * as DprFields from 'src/app/shared/constants/data-processing-grid-column-constants';
+import {
+  selectShowDataProcessingRegistrations,
+  selectShowItContractModule,
+  selectShowItSystemModule,
+} from 'src/app/store/organization/selectors';
 import {
   selectDprEnableMainContract,
   selectDprEnableReferences,
@@ -34,9 +39,8 @@ import {
   selectITSystemUsageEnableTabOrganization,
   selectITSystemUsageEnableTabSystemRoles,
 } from 'src/app/store/organization/ui-module-customization/selectors';
-import { UIConfigGridApplication } from '../../models/ui-config/ui-config-grid-application';
 import { UIModuleConfigKey } from '../../enums/ui-module-config-key';
-import { selectShowDataProcessingRegistrations, selectShowItContractModule, selectShowItSystemModule } from 'src/app/store/organization/selectors';
+import { UIConfigGridApplication } from '../../models/ui-config/ui-config-grid-application';
 
 @Injectable({
   providedIn: 'root',
@@ -93,7 +97,7 @@ export class GridUIConfigService {
       enabledTermination$,
       enabledContractRoles$,
       itSystemModuleEnabled$,
-      dataProcessingModuleEnabled$
+      dataProcessingModuleEnabled$,
     ]).pipe(
       map(
         ([
@@ -113,15 +117,19 @@ export class GridUIConfigService {
           enabledTermination,
           enabledContractRoles,
           itSystemModuleEnabled,
-          dataProcessingModuleEnabled
+          dataProcessingModuleEnabled,
         ]): UIConfigGridApplication[] => [
           {
             shouldEnable: itSystemModuleEnabled,
-            columnNamesToConfigure: [ContractFields.ItSystemUsages, ContractFields.NumberOfAssociatedSystemRelations, ContractFields.SourceEntityUuid]
+            columnNamesToConfigure: [
+              ContractFields.ItSystemUsages,
+              ContractFields.NumberOfAssociatedSystemRelations,
+              ContractFields.SourceEntityUuid,
+            ],
           },
           {
             shouldEnable: dataProcessingModuleEnabled,
-            columnNamesToConfigure: [ContractFields.DataProcessingAgreements]
+            columnNamesToConfigure: [ContractFields.DataProcessingAgreements],
           },
           {
             shouldEnable: enabledContractId,
@@ -186,7 +194,11 @@ export class GridUIConfigService {
           },
           {
             shouldEnable: enabledAgreementDeadlines,
-            columnNamesToConfigure: [ContractFields.Duration, ContractFields.OptionExtendUuid, ContractFields.IrrevocableTo],
+            columnNamesToConfigure: [
+              ContractFields.Duration,
+              ContractFields.OptionExtendUuid,
+              ContractFields.IrrevocableTo,
+            ],
           },
           {
             shouldEnable: enabledTermination,
@@ -217,7 +229,6 @@ export class GridUIConfigService {
     const itContractsModuleEnabled$ = this.store.select(selectShowItContractModule);
     const dataProcessingModuleEnabled$ = this.store.select(selectShowDataProcessingRegistrations);
 
-
     return combineLatest([
       enableLifeCycleStatus$,
       enableUsagePeriod$,
@@ -229,7 +240,7 @@ export class GridUIConfigService {
       enableArchiving$,
       enableSystemRelations$,
       itContractsModuleEnabled$,
-      dataProcessingModuleEnabled$
+      dataProcessingModuleEnabled$,
     ]).pipe(
       map(
         ([
@@ -246,12 +257,19 @@ export class GridUIConfigService {
           dataProcessingModuleEnabled,
         ]): UIConfigGridApplication[] => [
           {
-            shouldEnable: itContractsModuleEnabled,
-            columnNamesToConfigure: [UsageFields.MainContractIsActive, UsageFields.MainContractSupplierName, UsageFields.AssociatedContractsNamesCsv],
+            shouldEnable: itContractsModuleEnabled && enableSelectContractToDetermineIfItSystemIsActive,
+            columnNamesToConfigure: [UsageFields.MainContractIsActive],
           },
           {
-            shouldEnable: dataProcessingModuleEnabled,
-            columnNamesToConfigure: [UsageFields.DataProcessingRegistrationsConcludedAsCsv, UsageFields.DataProcessingRegistrationNamesAsCsv],
+            shouldEnable: itContractsModuleEnabled,
+            columnNamesToConfigure: [UsageFields.MainContractSupplierName, UsageFields.AssociatedContractsNamesCsv],
+          },
+          {
+            shouldEnable: dataProcessingModuleEnabled && enableGdpr,
+            columnNamesToConfigure: [
+              UsageFields.DataProcessingRegistrationsConcludedAsCsv,
+              UsageFields.DataProcessingRegistrationNamesAsCsv,
+            ],
           },
           {
             shouldEnable: enableLifeCycleStatus,
@@ -267,7 +285,7 @@ export class GridUIConfigService {
           },
           {
             shouldEnable: enableSelectContractToDetermineIfItSystemIsActive,
-            columnNamesToConfigure: [UsageFields.MainContractIsActive, UsageFields.MainContractSupplierName],
+            columnNamesToConfigure: [UsageFields.MainContractSupplierName],
           },
           {
             shouldEnable: enableOrganization,
@@ -287,15 +305,13 @@ export class GridUIConfigService {
           },
           {
             shouldEnable: enableGdpr,
-              columnNamesToConfigure: [
+            columnNamesToConfigure: [
               UsageFields.SensitiveDataLevelsAsCsv,
               UsageFields.LocalReferenceDocumentId,
               UsageFields.RiskSupervisionDocumentationName,
               UsageFields.LinkToDirectoryName,
               UsageFields.HostedAt,
               UsageFields.GeneralPurpose,
-              UsageFields.DataProcessingRegistrationsConcludedAsCsv,
-              UsageFields.DataProcessingRegistrationNamesAsCsv,
               UsageFields.RiskAssessmentDate,
               UsageFields.PlannedRiskAssessmentDate,
             ],
@@ -325,41 +341,56 @@ export class GridUIConfigService {
     const mainContract$ = this.store.select(selectDprEnableMainContract);
     const dprRolesEnabled$ = this.store.select(selectDprEnableRoles);
     const referenceEnabled$ = this.store.select(selectDprEnableReferences);
-    const scheduledInspectionDateEnabled$= this.store.select(selectDprEnableScheduledInspectionDate);
+    const scheduledInspectionDateEnabled$ = this.store.select(selectDprEnableScheduledInspectionDate);
     const itSystemModuleEnabled$ = this.store.select(selectShowItSystemModule);
     const itContractsModuleEnabled$ = this.store.select(selectShowItContractModule);
 
-    return combineLatest([mainContract$, dprRolesEnabled$, referenceEnabled$, scheduledInspectionDateEnabled$, itSystemModuleEnabled$, itContractsModuleEnabled$]).pipe(
-      map(([mainContractEnabled, dprRolesEnabled, referenceEnabled, scheduledInspectionDate, itSystemModuleEnabled, itContractsModuleEnabled]): UIConfigGridApplication[] => {
-        return [
-          {
-            shouldEnable: itSystemModuleEnabled,
-            columnNamesToConfigure: [DprFields.SystemNamesAsCsv, DprFields.SystemUuidsAsCsv],
-          },
-          {
-            shouldEnable: itContractsModuleEnabled,
-            columnNamesToConfigure: [DprFields.ContractNamesAsCsv, DprFields.ActiveAccordingToMainContract],
-          },
-          {
-            shouldEnable: mainContractEnabled,
-            columnNamesToConfigure: [DprFields.ActiveAccordingToMainContract],
-          },
-          {
-            shouldEnable: dprRolesEnabled,
-            columnNamesToConfigure: [],
-            columnNameSubstringsToConfigure: ['Roles.Role']
-          },
-          {
-            shouldEnable: referenceEnabled,
-            columnNamesToConfigure: [DprFields.MainReferenceTitle, DprFields.MainReferenceUserAssignedId],
-          },
-          {
-            shouldEnable: scheduledInspectionDate,
-            columnNamesToConfigure: [DprFields.OversightScheduledInspectionDate],
-          }
-        ];
-      })
+    return combineLatest([
+      mainContract$,
+      dprRolesEnabled$,
+      referenceEnabled$,
+      scheduledInspectionDateEnabled$,
+      itSystemModuleEnabled$,
+      itContractsModuleEnabled$,
+    ]).pipe(
+      map(
+        ([
+          mainContractEnabled,
+          dprRolesEnabled,
+          referenceEnabled,
+          scheduledInspectionDate,
+          itSystemModuleEnabled,
+          itContractsModuleEnabled,
+        ]): UIConfigGridApplication[] => {
+          return [
+            {
+              shouldEnable: itSystemModuleEnabled,
+              columnNamesToConfigure: [DprFields.SystemNamesAsCsv, DprFields.SystemUuidsAsCsv],
+            },
+            {
+              shouldEnable: itContractsModuleEnabled,
+              columnNamesToConfigure: [DprFields.ContractNamesAsCsv, DprFields.ActiveAccordingToMainContract],
+            },
+            {
+              shouldEnable: mainContractEnabled,
+              columnNamesToConfigure: [DprFields.ActiveAccordingToMainContract],
+            },
+            {
+              shouldEnable: dprRolesEnabled,
+              columnNamesToConfigure: [],
+              columnNameSubstringsToConfigure: ['Roles.Role'],
+            },
+            {
+              shouldEnable: referenceEnabled,
+              columnNamesToConfigure: [DprFields.MainReferenceTitle, DprFields.MainReferenceUserAssignedId],
+            },
+            {
+              shouldEnable: scheduledInspectionDate,
+              columnNamesToConfigure: [DprFields.OversightScheduledInspectionDate],
+            },
+          ];
+        }
+      )
     );
   }
-
 }
