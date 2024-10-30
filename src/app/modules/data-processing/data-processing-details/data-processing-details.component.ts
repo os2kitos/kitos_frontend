@@ -19,6 +19,7 @@ import {
   selectDataProcessingName,
   selectDataProcessingUuid,
 } from 'src/app/store/data-processing/selectors';
+import { selectShowItContractModule, selectShowItSystemModule } from 'src/app/store/organization/selectors';
 import {
   selectDprEnableNotifications,
   selectDprEnableReferences,
@@ -42,6 +43,8 @@ export class DataProcessingDetailsComponent extends BaseComponent implements OnI
   public readonly dprRolesEnabled$ = this.store.select(selectDprEnableRoles);
   public readonly dprNotificationsEnabled$ = this.store.select(selectDprEnableNotifications);
   public readonly dprReferencesEnabled$ = this.store.select(selectDprEnableReferences);
+  public readonly itSystemsModuleEnabled$ = this.store.select(selectShowItSystemModule);
+  public readonly itContractsModuleEnabled$ = this.store.select(selectShowItContractModule);
 
   public readonly breadCrumbs$ = combineLatest([this.dprName$, this.dprUuid$]).pipe(
     map(([dprName, dprUuid]): BreadCrumb[] => [
@@ -67,11 +70,13 @@ export class DataProcessingDetailsComponent extends BaseComponent implements OnI
       label: $localize`IT Systemer`,
       iconType: 'systems',
       route: AppPath.itSystems,
+      enabled$: this.itSystemsModuleEnabled$,
     },
     {
       label: $localize`IT Kontrakter`,
       iconType: 'folder-important',
       route: AppPath.itContracts,
+      enabled$: this.itContractsModuleEnabled$,
     },
     {
       label: $localize`Tilsyn`,

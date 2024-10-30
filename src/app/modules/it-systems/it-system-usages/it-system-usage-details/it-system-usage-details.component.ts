@@ -21,6 +21,10 @@ import {
 } from 'src/app/store/it-system-usage/selectors';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
 import {
+  selectShowDataProcessingRegistrations,
+  selectShowItContractModule,
+} from 'src/app/store/organization/selectors';
+import {
   selectITSystemUsageEnableGdpr,
   selectITSystemUsageEnableLocalReferences,
   selectITSystemUsageEnableSystemRelations,
@@ -67,15 +71,14 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
     .pipe(filterNullish());
 
   public readonly enableArchivingTab$ = this.store.select(selectITSystemUsageEnableTabArchiving).pipe(filterNullish());
-
   public readonly enableHierarchyTab$ = this.store.select(selectITSystemUsageEnableTabHierarchy).pipe(filterNullish());
-
   public readonly enableLocalKleTab$ = this.store.select(selectITSystemUsageEnableTabLocalKle).pipe(filterNullish());
+  public readonly itContractsModuleEnabled$ = this.store.select(selectShowItContractModule);
+  public readonly dataProcessingModuleEnabled$ = this.store.select(selectShowDataProcessingRegistrations);
 
   public readonly enableNotificationsTab$ = this.store
     .select(selectITSystemUsageEnableTabNotifications)
     .pipe(filterNullish());
-
   public readonly enableLocalReferencesTab$ = this.store
     .select(selectITSystemUsageEnableLocalReferences)
     .pipe(filterNullish());
@@ -108,11 +111,13 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
       label: $localize`Kontrakter`,
       iconType: 'clipboard',
       route: AppPath.contracts,
+      enabled$: this.itContractsModuleEnabled$,
     },
     {
       label: $localize`Databehandling`,
       iconType: 'folder-important',
       route: AppPath.dataProcessing,
+      enabled$: this.dataProcessingModuleEnabled$,
     },
     {
       label: $localize`GDPR`,

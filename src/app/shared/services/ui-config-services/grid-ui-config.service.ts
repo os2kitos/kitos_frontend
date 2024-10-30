@@ -36,6 +36,7 @@ import {
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { UIConfigGridApplication } from '../../models/ui-config/ui-config-grid-application';
 import { UIModuleConfigKey } from '../../enums/ui-module-config-key';
+import { selectShowDataProcessingRegistrations, selectShowItContractModule } from 'src/app/store/organization/selectors';
 
 @Injectable({
   providedIn: 'root',
@@ -199,6 +200,9 @@ export class GridUIConfigService {
     const enableGdpr$ = this.store.select(selectITSystemUsageEnableGdpr);
     const enableArchiving$ = this.store.select(selectITSystemUsageEnableTabArchiving);
     const enableSystemRelations$ = this.store.select(selectITSystemUsageEnableSystemRelations);
+    const itContractsModuleEnabled$ = this.store.select(selectShowItContractModule);
+    const dataProcessingModuleEnabled$ = this.store.select(selectShowDataProcessingRegistrations);
+
 
     return combineLatest([
       enableLifeCycleStatus$,
@@ -210,6 +214,8 @@ export class GridUIConfigService {
       enableGdpr$,
       enableArchiving$,
       enableSystemRelations$,
+      itContractsModuleEnabled$,
+      dataProcessingModuleEnabled$
     ]).pipe(
       map(
         ([
@@ -222,7 +228,17 @@ export class GridUIConfigService {
           enableGdpr,
           enableArchiving,
           enableSystemRelations,
+          itContractsModuleEnabled,
+          dataProcessingModuleEnabled,
         ]): UIConfigGridApplication[] => [
+          {
+            shouldEnable: itContractsModuleEnabled,
+            columnNamesToConfigure: [UsageFields.MainContractIsActive, UsageFields.MainContractSupplierName, UsageFields.AssociatedContractsNamesCsv],
+          },
+          {
+            shouldEnable: dataProcessingModuleEnabled,
+            columnNamesToConfigure: [UsageFields.DataProcessingRegistrationsConcludedAsCsv, UsageFields.DataProcessingRegistrationNamesAsCsv],
+          },
           {
             shouldEnable: enableLifeCycleStatus,
             columnNamesToConfigure: [UsageFields.LifeCycleStatus, UsageFields.ActiveAccordingToLifeCycle],
