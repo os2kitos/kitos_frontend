@@ -73,6 +73,8 @@ export class GridUIConfigService {
     const enabledAgreementDeadlines$ = this.store.select(selectItContractsEnableAgreementDeadlines);
     const enabledTermination$ = this.store.select(selectItContractsEnableTermination);
     const enabledContractRoles$ = this.store.select(selectItContractEnableContractRoles);
+    const itSystemModuleEnabled$ = this.store.select(selectShowItSystemModule);
+    const dataProcessingModuleEnabled$ = this.store.select(selectShowDataProcessingRegistrations);
 
     return combineLatest([
       enabledContractId$,
@@ -90,6 +92,8 @@ export class GridUIConfigService {
       enabledAgreementDeadlines$,
       enabledTermination$,
       enabledContractRoles$,
+      itSystemModuleEnabled$,
+      dataProcessingModuleEnabled$
     ]).pipe(
       map(
         ([
@@ -108,7 +112,17 @@ export class GridUIConfigService {
           enabledAgreementDeadlines,
           enabledTermination,
           enabledContractRoles,
+          itSystemModuleEnabled,
+          dataProcessingModuleEnabled
         ]): UIConfigGridApplication[] => [
+          {
+            shouldEnable: itSystemModuleEnabled,
+            columnNamesToConfigure: [ContractFields.ItSystemUsages, ContractFields.NumberOfAssociatedSystemRelations, ContractFields.SourceEntityUuid]
+          },
+          {
+            shouldEnable: dataProcessingModuleEnabled,
+            columnNamesToConfigure: [ContractFields.DataProcessingAgreements]
+          },
           {
             shouldEnable: enabledContractId,
             columnNamesToConfigure: [ContractFields.ContractId],
