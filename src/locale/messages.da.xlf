@@ -5379,10 +5379,6 @@
         <source>Der skete en fejl ifm. tjek for forbindelsen til FK Organisation. Genindlæs venligst siden for at prøve igen.</source>
         <target state="new">Der skete en fejl ifm. tjek for forbindelsen til FK Organisation. Genindlæs venligst siden for at prøve igen.</target>
       </trans-unit>
-      <trans-unit id="5851418291332190792" datatype="html">
-        <source>Udfaldsrum</source>
-        <target state="new">Udfaldsrum</target>
-      </trans-unit>
       <trans-unit id="2876645566668979898" datatype="html">
         <source>Ændringer</source>
         <target state="new">Ændringer</target>
@@ -5630,6 +5626,14 @@
       <trans-unit id="5311870289458484364" datatype="html">
         <source>Gyldig fra/til</source>
         <target state="new">Gyldig fra/til</target>
+      </trans-unit>
+      <trans-unit id="749658656182538362" datatype="html">
+        <source>Lokal tilpasning af moduler blev opdateret.</source>
+        <target state="new">Lokal tilpasning af moduler blev opdateret.</target>
+      </trans-unit>
+      <trans-unit id="1398970779136530497" datatype="html">
+        <source>Kunne ikke opdatere lokal tilpasning af moduler.</source>
+        <target state="new">Kunne ikke opdatere lokal tilpasning af moduler.</target>
       </trans-unit>
     </body>
   </file>

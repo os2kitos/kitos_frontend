@@ -60,14 +60,14 @@ export const selectModuleVisibility = (configKey: UIModuleConfigKey) => {
 
 export const selectShowItSystemModule = createSelector(
   selectOrganizationState,
-  (state) => state.uiRootConfig?.showItSystemModule
+  (state) => state.uiRootConfig?.showItSystemModule ?? false
 );
 export const selectShowItContractModule = createSelector(
   selectOrganizationState,
-  (state) => state.uiRootConfig?.showItContractModule
+  (state) => state.uiRootConfig?.showItContractModule ?? false
 );
 
 export const selectShowDataProcessingRegistrations = createSelector(
   selectOrganizationState,
-  (state) => state.uiRootConfig?.showDataProcessing
+  (state) => state.uiRootConfig?.showDataProcessing ?? false
 );

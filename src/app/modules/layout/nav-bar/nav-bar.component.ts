@@ -7,7 +7,7 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
 import { OrganizationActions } from 'src/app/store/organization/actions';
 import { selectUIRootConfig } from 'src/app/store/organization/selectors';
 import { UserActions } from 'src/app/store/user-store/actions';
-import { selectHasMultipleOrganizations, selectHasTriedAuthenticating, selectIsAuthenticating, selectOrganizationName, selectUser } from 'src/app/store/user-store/selectors';
+import { selectHasMultipleOrganizations, selectHasTriedAuthenticating, selectOrganizationName, selectUser } from 'src/app/store/user-store/selectors';
 import { AppPath } from '../../../shared/enums/app-path';
 import { ChooseOrganizationComponent } from '../choose-organization/choose-organization.component';
 

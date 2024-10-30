@@ -121,7 +121,6 @@ export class NotificationService implements OnDestroy {
 
     this.subscribeAsDefault(UserActions.patchOrganizationSuccess, $localize`Organisationen blev opdateret.`);
     this.subscribeAsError(UserActions.patchOrganizationError, $localize`Kunne ikke opdatere organisation.`);
-
     this.subscribeAsError(
       OrganizationActions.getOrganizationPermissionsError,
       $localize`Kunne ikke hente organisationsrettigheder.`
@@ -130,7 +129,15 @@ export class NotificationService implements OnDestroy {
     this.subscribeAsError(
       OrganizationActions.getUIRootConfigError,
       $localize`Kunne ikke hente lokal tilpasning af moduler.`
-    )
+    );
+    this.subscribeAsDefault(
+      OrganizationActions.patchUIRootConfigSuccess,
+      $localize`Lokal tilpasning af moduler blev opdateret.`
+    );
+    this.subscribeAsError(
+      OrganizationActions.patchUIRootConfigError,
+      $localize`Kunne ikke opdatere lokal tilpasning af moduler.`
+    );
 
     this.subscribeAsDefault(OrganizationUserActions.copyRolesSuccess, $localize`Roller kopieret`);
     this.subscribeAsError(OrganizationUserActions.copyRolesError, $localize`Kunne ikke kopiere roller`);
