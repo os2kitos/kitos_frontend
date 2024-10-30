@@ -1,5 +1,5 @@
-<app-card i18n-title>
-  <app-card-header title="Via Excel" helpTextKey="local-config.import.organization"></app-card-header>
+<app-card>
+  <app-card-header i18n-title title="Via Excel" helpTextKey="local-config.import.organization"></app-card-header>
 
   <form [formGroup]="excelForm" (ngSubmit)="onSubmit()">
     <app-standard-vertical-content-grid>
