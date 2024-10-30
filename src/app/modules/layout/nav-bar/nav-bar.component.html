@@ -4,8 +4,8 @@
   </a>
 
   <ng-container *ngIf="user$ | async as user">
-    <app-spacer></app-spacer>
-
+    <ng-container *ngIf="uiRootConfig$ | async as uiRootConfig">
+      <app-spacer></app-spacer>
     <span>
       <app-menu title="Organisation" [path]="AppPath.organization" i18n-title>
         <app-menu-item [path]="AppPath.structure" [parentPath]="AppPath.organization" i18n
@@ -18,7 +18,7 @@
           ><app-table-icon></app-table-icon>Stamdata</app-menu-item
         >
       </app-menu>
-      <app-menu title="IT Systemer" [path]="AppPath.itSystems" i18n-title>
+      <app-menu title="IT Systemer" [path]="AppPath.itSystems" i18n-title *ngIf="uiRootConfig.showItSystemModule" data-cy="it-system-nav-bar-item">
         <app-menu-item [path]="AppPath.itSystemUsages" [parentPath]="AppPath.itSystems" i18n
           ><app-table-icon></app-table-icon>IT Systemer</app-menu-item
         >
@@ -29,10 +29,10 @@
           ><app-table-icon></app-table-icon>Snitfladekatalog</app-menu-item
         >
       </app-menu>
-      <app-menu title="IT Kontrakter" [path]="AppPath.itContracts" i18n-title> </app-menu>
-      <app-menu title="Databehandling" [path]="AppPath.dataProcessing" i18n-title> </app-menu>
+      <app-menu title="IT Kontrakter" [path]="AppPath.itContracts" i18n-title *ngIf="uiRootConfig.showItContractModule"> </app-menu>
+      <app-menu title="Databehandling" [path]="AppPath.dataProcessing" i18n-title *ngIf="uiRootConfig.showDataProcessing" data-cy="dpr-nav-bar-item"> </app-menu>
     </span>
-
+  </ng-container>
     <app-spacer></app-spacer>
 
     <span>

@@ -12,6 +12,7 @@ import { LocalOptionTypeActions } from 'src/app/store/local-admin/local-option-t
 import { OrganizationActions } from 'src/app/store/organization/actions';
 import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
+import { UIModuleConfigActions } from 'src/app/store/organization/ui-module-customization/actions';
 import { PopupMessageActions } from 'src/app/store/popup-messages/actions';
 import { UserActions } from 'src/app/store/user-store/actions';
 import { PopupMessageType } from '../enums/popup-message-type';
@@ -127,10 +128,22 @@ export class NotificationService implements OnDestroy {
 
     this.subscribeAsDefault(UserActions.patchOrganizationSuccess, $localize`Organisationen blev opdateret.`);
     this.subscribeAsError(UserActions.patchOrganizationError, $localize`Kunne ikke opdatere organisation.`);
-
     this.subscribeAsError(
       OrganizationActions.getOrganizationPermissionsError,
       $localize`Kunne ikke hente organisationsrettigheder.`
+    );
+
+    this.subscribeAsError(
+      OrganizationActions.getUIRootConfigError,
+      $localize`Kunne ikke hente lokal tilpasning af moduler.`
+    );
+    this.subscribeAsDefault(
+      OrganizationActions.patchUIRootConfigSuccess,
+      $localize`Lokal tilpasning af moduler blev opdateret.`
+    );
+    this.subscribeAsError(
+      OrganizationActions.patchUIRootConfigError,
+      $localize`Kunne ikke opdatere lokal tilpasning af moduler.`
     );
 
     this.subscribeAsDefault(OrganizationUserActions.copyRolesSuccess, $localize`Roller kopieret`);
@@ -369,6 +382,21 @@ export class NotificationService implements OnDestroy {
     this.subscribeMultipleError(
       ofType(ITSystemUsageActions.removeItSystemUsageRoleError, ITContractActions.removeItContractRoleError),
       $localize`Kunne ikke fjerne tildelingen`
+    );
+
+    this.subscribeAsError(
+      UIModuleConfigActions.getUIModuleConfigError,
+      $localize`Kunne ikke hente lokal tilpasning af brugerfladen`
+    );
+
+    this.subscribeAsError(
+      UIModuleConfigActions.putUIModuleCustomizationError,
+      $localize`Kunne ikke opdatere lokal tilpasning af brugerfladen`
+    );
+
+    this.subscribeAsDefault(
+      UIModuleConfigActions.putUIModuleCustomizationSuccess,
+      $localize`Lokal tilpasning af brugerfladen blev opdateret`
     );
   }
 

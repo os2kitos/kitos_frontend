@@ -1,6 +1,7 @@
 import { createSelector } from '@ngrx/store';
-import { OrganizationState } from './state';
 import { organizationAdapter, organizationFeature } from './reducer';
+import { OrganizationState } from './state';
+import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
 
 export const { selectOrganizationState } = organizationFeature;
 
@@ -41,3 +42,32 @@ export const selectOrganizationGridData = createSelector(selectAll, selectTotal,
   total,
 }));
 export const selectOrganizationGridColumns = createSelector(selectOrganizationState, (state) => state.gridColumns);
+
+export const selectUIRootConfig = createSelector(selectOrganizationState, (state) => state.uiRootConfig);
+
+export const selectModuleVisibility = (configKey: UIModuleConfigKey) => {
+  switch (configKey) {
+    case UIModuleConfigKey.ItSystemUsage:
+      return selectShowItSystemModule;
+    case UIModuleConfigKey.ItContract:
+      return selectShowItContractModule;
+    case UIModuleConfigKey.DataProcessingRegistrations:
+      return selectShowDataProcessingRegistrations;
+    default:
+      throw new Error(`Unknown config key: ${configKey}`);
+  }
+};
+
+export const selectShowItSystemModule = createSelector(
+  selectOrganizationState,
+  (state) => state.uiRootConfig?.showItSystemModule ?? false
+);
+export const selectShowItContractModule = createSelector(
+  selectOrganizationState,
+  (state) => state.uiRootConfig?.showItContractModule ?? false
+);
+
+export const selectShowDataProcessingRegistrations = createSelector(
+  selectOrganizationState,
+  (state) => state.uiRootConfig?.showDataProcessing ?? false
+);

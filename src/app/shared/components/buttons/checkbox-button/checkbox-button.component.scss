@@ -1,0 +1,17 @@
+@import 'theme';
+
+.button-alignment {
+  justify-content: flex-start;
+}
+
+.align-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+::ng-deep .disabled-border-color button {
+  border-color: $color-primary-40 !important;
+}
+

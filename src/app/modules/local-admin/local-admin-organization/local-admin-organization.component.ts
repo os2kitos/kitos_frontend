@@ -20,4 +20,7 @@ export class LocalAdminOrganizationComponent {
     { text: $localize`Organisationer`, value: LocalAdminOrganizationSegmentOption.Organizations },
     { text: $localize`Roller`, value: LocalAdminOrganizationSegmentOption.Roles },
   ];
+
+
+
 }

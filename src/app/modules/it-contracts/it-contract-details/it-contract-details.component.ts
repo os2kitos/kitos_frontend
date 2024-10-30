@@ -19,6 +19,13 @@ import {
   selectItContractName,
   selectItContractUuid,
 } from 'src/app/store/it-contract/selectors';
+import { selectShowDataProcessingRegistrations, selectShowItSystemModule } from 'src/app/store/organization/selectors';
+import {
+  selectItContractEnableAdvis,
+  selectItContractEnableContractRoles,
+  selectItContractEnableDeadlines,
+  selectItContractEnableEconomy,
+} from 'src/app/store/organization/ui-module-customization/selectors';
 
 @Component({
   selector: 'app-it-contract-details',
@@ -48,6 +55,13 @@ export class ItContractDetailsComponent extends BaseComponent implements OnInit,
     filterNullish()
   );
 
+  public readonly agreementDeadlinesTabEnabled$ = this.store.select(selectItContractEnableDeadlines);
+  public readonly economyTabEnabled$ = this.store.select(selectItContractEnableEconomy);
+  public readonly contractRolesTabEnabled$ = this.store.select(selectItContractEnableContractRoles);
+  public readonly notificationsTabEnabled$ = this.store.select(selectItContractEnableAdvis);
+  public readonly dataProcessingModuleEnabled$ = this.store.select(selectShowDataProcessingRegistrations);
+  public readonly itSystemsModuleEnabled$ = this.store.select(selectShowItSystemModule);
+
   public readonly navigationItems: NavigationDrawerItem[] = [
     {
       label: $localize`Kontraktforside`,
@@ -58,26 +72,31 @@ export class ItContractDetailsComponent extends BaseComponent implements OnInit,
       label: $localize`IT Systemer`,
       iconType: 'systems',
       route: AppPath.itSystems,
+      enabled$: this.itSystemsModuleEnabled$,
     },
     {
       label: $localize`Databehandling`,
       iconType: 'folder-important',
       route: AppPath.dataProcessing,
+      enabled$: this.dataProcessingModuleEnabled$,
     },
     {
       label: $localize`Aftalefrister`,
       iconType: 'clipboard',
       route: AppPath.agreementDeadlines,
+      enabled$: this.agreementDeadlinesTabEnabled$,
     },
     {
       label: $localize`Økonomi`,
       iconType: 'money',
       route: AppPath.economy,
+      enabled$: this.economyTabEnabled$,
     },
     {
       label: $localize`Kontraktroller`,
       iconType: 'roles',
       route: AppPath.roles,
+      enabled$: this.contractRolesTabEnabled$,
     },
     {
       label: $localize`Hierarki`,
@@ -88,6 +107,7 @@ export class ItContractDetailsComponent extends BaseComponent implements OnInit,
       label: $localize`Advis`,
       iconType: 'notification',
       route: AppPath.notifications,
+      enabled$: this.notificationsTabEnabled$,
     },
     {
       label: $localize`Referencer`,
@@ -95,7 +115,6 @@ export class ItContractDetailsComponent extends BaseComponent implements OnInit,
       route: AppPath.externalReferences,
     },
   ];
-
 
   constructor(
     private store: Store,

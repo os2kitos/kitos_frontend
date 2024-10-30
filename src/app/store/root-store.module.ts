@@ -31,6 +31,8 @@ import { organizationUnitFeature } from './organization/organization-unit/reduce
 import { OrganizationUserEffects } from './organization/organization-user/effects';
 import { organizationUserFeature } from './organization/organization-user/reducer';
 import { organizationFeature } from './organization/reducer';
+import { UIModuleCustomizationEffects } from './organization/ui-module-customization/effects';
+import { uiModuleConfigFeature } from './organization/ui-module-customization/reducer';
 import { popupMessagesFeature } from './popup-messages/reducer';
 import { RegularOptionTypeEffects } from './regular-option-type-store/effects';
 import { regularOptionTypeFeature } from './regular-option-type-store/reducer';
@@ -66,6 +68,7 @@ import { userFeature } from './user-store/reducer';
     StoreModule.forFeature(exportFeature),
     StoreModule.forFeature(organizationUserFeature),
     StoreModule.forFeature(organizationFeature),
+    StoreModule.forFeature(uiModuleConfigFeature),
     StoreModule.forFeature(fkOrgFeature),
     EffectsModule.forRoot([]),
     EffectsModule.forFeature([
@@ -82,6 +85,7 @@ import { userFeature } from './user-store/reducer';
       GridExportEffects,
       OrganizationUserEffects,
       OrganizationEffects,
+      UIModuleCustomizationEffects,
       LocalOptionTypeEffects,
       FkOrgEffects,
       ExcelImportEffects,

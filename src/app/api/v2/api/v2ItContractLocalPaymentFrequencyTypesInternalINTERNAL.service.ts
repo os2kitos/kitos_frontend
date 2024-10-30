@@ -61,7 +61,7 @@ export interface PostSingleItContractLocalPaymentFrequencyTypesInternalV2CreateL
 })
 export class APIV2ItContractLocalPaymentFrequencyTypesInternalINTERNALService {
 
-    protected basePath = 'https://kitos-dev.strongminds.dk';
+    protected basePath = 'https://localhost:44300';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;

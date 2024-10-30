@@ -14,6 +14,7 @@ import { adaptOrganization } from 'src/app/shared/models/organization/organizati
 import { OData } from 'src/app/shared/models/odata.model';
 import { compact } from 'lodash';
 import { toODataString } from '@progress/kendo-data-query';
+import { mapUIRootConfig } from 'src/app/shared/models/ui-config/ui-root-config.model';
 
 @Injectable()
 export class OrganizationEffects {
@@ -78,7 +79,7 @@ export class OrganizationEffects {
       combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       switchMap(([{ request }, organizationUuid]) =>
         this.organizationInternalService
-          .patchSingleOrganizationsInternalV2UpsertOrganizationMasterDataRoles({ organizationUuid, requestDto: request })
+          .patchSingleOrganizationsInternalV2PatchOrganizationMasterData({ organizationUuid, requestDto: request })
           .pipe(
             map((organizationMasterDataDto) => {
               const organizationMasterData = adaptOrganizationMasterData(organizationMasterDataDto);
@@ -151,7 +152,44 @@ export class OrganizationEffects {
       )
     );
   });
+
+  getUIRootConfig$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(OrganizationActions.getUIRootConfig),
+      combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+      switchMap(([, organizationUuid]) =>
+        this.organizationInternalService
+          .getSingleOrganizationsInternalV2GetUIRootConfig({ organizationUuid })
+          .pipe(
+            map((responseDto) => {
+              const uiRootConfig = mapUIRootConfig(responseDto);
+              return OrganizationActions.getUIRootConfigSuccess({ uiRootConfig });
+            }),
+            catchError(() => of(OrganizationActions.getUIRootConfigError()))
+          )
+      )
+    );
+  });
+
+  patchUIRootConfig$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(OrganizationActions.patchUIRootConfig),
+      combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+      switchMap(([{ dto }, organizationUuid]) =>
+        this.organizationInternalService
+          .patchSingleOrganizationsInternalV2PatchUIRootConfig({ dto, organizationUuid })
+          .pipe(
+            map((responseDto) => {
+              const uiRootConfig = mapUIRootConfig(responseDto);
+              return OrganizationActions.patchUIRootConfigSuccess({ uiRootConfig });
+            }),
+            catchError(() => of(OrganizationActions.patchUIRootConfigError()))
+          )
+      )
+    );
+  });
 }
+
 function applyQueryFixes(odataString: string) {
   return odataString.replaceAll('ForeignBusiness', 'ForeignCvr').replaceAll('OrganizationType', 'TypeId');
 }

@@ -156,6 +156,9 @@ describe('organization-users', () => {
 
   it('Can delete user', () => {
     cy.intercept('api/v2/internal/organization/*/users/*', { body: null });
+    cy.intercept('api/v2/internal/organizations/*/ui-root-config', {
+      fixture: './shared/ui-root-config.json',
+    });
 
     cy.intercept('DELETE', 'api/v2/internal/organization/*/users/*', { body: {} }).as('deleteUser');
 

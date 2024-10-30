@@ -16,6 +16,11 @@ import {
   selectItContractInternalPayments,
   selectItContractPaymentModel,
 } from 'src/app/store/it-contract/selectors';
+import {
+  selectItContractsEnableExternalPayment,
+  selectItContractsEnableInternalPayment,
+  selectItContractsEnablePaymentModel,
+} from 'src/app/store/organization/ui-module-customization/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 
@@ -45,6 +50,10 @@ export class ItContractEconomyComponent extends BaseComponent implements OnInit 
     paymentModel: new FormControl<APIIdentityNamePairResponseDTO | undefined>({ value: undefined, disabled: true }),
     priceRegulation: new FormControl<APIIdentityNamePairResponseDTO | undefined>({ value: undefined, disabled: true }),
   });
+
+  public readonly paymentModelEnabled$ = this.store.select(selectItContractsEnablePaymentModel);
+  public readonly externalPaymentEnabled$ = this.store.select(selectItContractsEnableExternalPayment);
+  public readonly internalPaymentEnabled$ = this.store.select(selectItContractsEnableInternalPayment);
 
   constructor(private store: Store, private notificationService: NotificationService) {
     super();

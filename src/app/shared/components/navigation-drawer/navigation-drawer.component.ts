@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Observable } from 'rxjs';
 import { IconType } from '../../models/icon-type';
 
 @Component({
@@ -21,4 +22,5 @@ export interface NavigationDrawerItem {
   iconType: IconType;
   route: string;
   dataCy?: string;
+  enabled$?: Observable<boolean>;
 }

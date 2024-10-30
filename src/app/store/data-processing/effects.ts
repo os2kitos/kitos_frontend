@@ -17,13 +17,14 @@ import {
   APIV2DataProcessingRegistrationService,
   APIV2OrganizationGridInternalINTERNALService,
 } from 'src/app/api/v2';
+import { DATA_PROCESSING_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-constants';
 import { adaptDataProcessingRegistration } from 'src/app/shared/models/data-processing/data-processing.model';
 import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { OData } from 'src/app/shared/models/odata.model';
-import { DATA_PROCESSING_COLUMNS_ID } from 'src/app/shared/persistent-state-constants';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ExternalReferencesApiService } from 'src/app/shared/services/external-references-api-service.service';
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
+import { UIConfigService } from 'src/app/shared/services/ui-config-services/ui-config.service';
 import { getNewGridColumnsBasedOnConfig } from '../helpers/grid-config-helper';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { DataProcessingActions } from './actions';
@@ -49,7 +50,8 @@ export class DataProcessingEffects {
     @Inject(APIV1DataProcessingRegistrationINTERNALService)
     private apiv1DataProcessingService: APIV1DataProcessingRegistrationINTERNALService,
     @Inject(APIV2OrganizationGridInternalINTERNALService)
-    private apiV2organizationalGridInternalService: APIV2OrganizationGridInternalINTERNALService
+    private apiV2organizationalGridInternalService: APIV2OrganizationGridInternalINTERNALService,
+    private uiConfigService: UIConfigService
   ) {}
 
   getDataProcessing$ = createEffect(() => {
@@ -641,6 +643,7 @@ export class DataProcessingEffects {
       )
     );
   });
+
 }
 
 function mapSubDataProcessors(

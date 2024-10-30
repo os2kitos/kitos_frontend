@@ -1,11 +1,12 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
-import { APIOrganizationMasterDataRequestDTO, APIOrganizationMasterDataRolesRequestDTO } from 'src/app/api/v2';
+import { APIOrganizationMasterDataRequestDTO, APIOrganizationMasterDataRolesRequestDTO, APIUIRootConfigUpdateRequestDTO } from 'src/app/api/v2';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { SavedFilterState } from 'src/app/shared/models/grid/saved-filter-state.model';
 import { OrganizationMasterDataRoles } from 'src/app/shared/models/organization/organization-master-data/organization-master-data-roles.model';
 import { OrganizationMasterData } from 'src/app/shared/models/organization/organization-master-data/organization-master-data.model';
 import { OrganizationPermissions } from 'src/app/shared/models/organization/organization-permissions.model';
 import { Organization } from 'src/app/shared/models/organization/organization.model';
+import { UIRootConfig } from 'src/app/shared/models/ui-config/ui-root-config.model';
 
 export const OrganizationActions = createActionGroup({
   source: 'Organization',
@@ -40,5 +41,15 @@ export const OrganizationActions = createActionGroup({
 
     'Save Organizations Filter': (localStoreKey: string) => ({ localStoreKey }),
     'Apply Organizations Filter': (state: SavedFilterState) => ({ state }),
+
+    'Get UI Root Config': emptyProps(),
+    'Get UI Root Config success': props<{ uiRootConfig: UIRootConfig }>(),
+    'Get UI Root Config error': emptyProps(),
+
+    'Patch UI Root Config': props<{
+      dto: APIUIRootConfigUpdateRequestDTO;
+    }>(),
+    'Patch UI Root Config success': props<{ uiRootConfig: UIRootConfig }>(),
+    'Patch UI Root Config error': emptyProps(),
   },
 });

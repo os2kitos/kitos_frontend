@@ -34,7 +34,7 @@ export interface GetSingleDprLocalRoleOptionTypesInternalV2GetAllRequestParams {
 })
 export class APIV1DprLocalRoleOptionTypesInternalV2INTERNALService {
 
-    protected basePath = 'https://kitos-dev.strongminds.dk';
+    protected basePath = 'https://localhost:44300';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;

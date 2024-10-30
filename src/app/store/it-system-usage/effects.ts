@@ -13,15 +13,16 @@ import {
   APIV2ItSystemUsageService,
   APIV2OrganizationGridInternalINTERNALService,
 } from 'src/app/api/v2';
+import { USAGE_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-constants';
 import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { convertDataSensitivityLevelStringToNumberMap } from 'src/app/shared/models/it-system-usage/gdpr/data-sensitivity-level.model';
 import { adaptITSystemUsage } from 'src/app/shared/models/it-system-usage/it-system-usage.model';
 import { OData } from 'src/app/shared/models/odata.model';
 import { YesNoIrrelevantEnum } from 'src/app/shared/models/yes-no-irrelevant.model';
-import { USAGE_COLUMNS_ID } from 'src/app/shared/persistent-state-constants';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ExternalReferencesApiService } from 'src/app/shared/services/external-references-api-service.service';
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
+import { UIConfigService } from 'src/app/shared/services/ui-config-services/ui-config.service';
 import { getNewGridColumnsBasedOnConfig } from '../helpers/grid-config-helper';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { ITSystemUsageActions } from './actions';
@@ -38,6 +39,8 @@ import {
 
 @Injectable()
 export class ITSystemUsageEffects {
+  private readonly RoleColumnsPrefix = 'Roles.Role';
+
   constructor(
     private actions$: Actions,
     private store: Store,
@@ -51,7 +54,8 @@ export class ITSystemUsageEffects {
     @Inject(APIV1ItSystemUsageOptionsINTERNALService)
     private apiItSystemUsageOptionsService: APIV1ItSystemUsageOptionsINTERNALService,
     @Inject(APIV2OrganizationGridInternalINTERNALService)
-    private apiV2organizationalGridInternalService: APIV2OrganizationGridInternalINTERNALService
+    private apiV2organizationalGridInternalService: APIV2OrganizationGridInternalINTERNALService,
+    private uiConfigService: UIConfigService
   ) {}
 
   getItSystemUsages$ = createEffect(() => {
@@ -101,9 +105,9 @@ export class ITSystemUsageEffects {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.updateGridColumnsAndRoleColumns),
       map(({ gridColumns, gridRoleColumns }) => {
-        const columns = gridColumns.concat(gridRoleColumns);
-        this.statePersistingService.set(USAGE_COLUMNS_ID, columns);
-        return ITSystemUsageActions.updateGridColumnsAndRoleColumnsSuccess(columns);
+        const allColumns = gridColumns.concat(gridRoleColumns);
+        this.statePersistingService.set(USAGE_COLUMNS_ID, allColumns);
+        return ITSystemUsageActions.updateGridColumnsSuccess(allColumns);
       })
     );
   });
@@ -246,7 +250,9 @@ export class ITSystemUsageEffects {
             request: { userUuid: userUuid, roleUuid: roleUuid },
           })
           .pipe(
-            map((usage) => ITSystemUsageActions.removeItSystemUsageRoleSuccess(usage, userUuid, roleUuid, itSystemUsageUuid)),
+            map((usage) =>
+              ITSystemUsageActions.removeItSystemUsageRoleSuccess(usage, userUuid, roleUuid, itSystemUsageUuid)
+            ),
             catchError(() => of(ITSystemUsageActions.removeItSystemUsageRoleError()))
           )
       )

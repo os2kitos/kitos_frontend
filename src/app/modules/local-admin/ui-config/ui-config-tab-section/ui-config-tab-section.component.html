@@ -1,0 +1,40 @@
+<app-accordion
+  [title]="tabViewModel.text"
+  [isExpandedByDefault]="tabViewModelHasChildren()"
+  [checkboxInTitle]="true"
+  [checkboxValue]="tabViewModel.isEnabled ?? false"
+  [checkboxDisabled]="(tabViewModel.isObligatory ?? false) || (moduleEnabled$ | async) === false"
+  (checkboxChanged)="onCheckboxChanged({ enabled: $event, fullKey: tabViewModel.fullKey })"
+  [checkboxTooltipText]="tabViewModel.helpText"
+>
+  <app-divider></app-divider>
+
+  <div class="form-section-top-padding">
+    <app-paragraph class="center-no-fields-text" i18n *ngIf="!tabViewModelHasChildren()">
+      Tilpasning på feltniveau er endnu ikke muligt for dette faneblad.
+    </app-paragraph>
+
+    <app-standard-vertical-content-grid [numColumns]="3">
+      <ng-container *ngFor="let fieldViewModel of tabViewModel.children">
+        <app-checkbox-button
+          i18n-text
+          labelPosition="after"
+          class="button-flex"
+          [value]="fieldViewModel.isEnabled ?? false"
+          [disabled]="fieldViewModel.isObligatory || !tabViewModel.isEnabled || (moduleEnabled$ | async) === false"
+          (valueChange)="onCheckboxChanged({ enabled: $event, fullKey: fieldViewModel.fullKey })"
+          data-cy="field-checkbox"
+        >
+          <app-paragraph>
+            {{ fieldViewModel.text }}
+          </app-paragraph>
+          <ng-container *ngIf="fieldViewModel.helpText !== undefined">
+            <app-tooltip [text]="fieldViewModel.helpText" class="tooltip-margin">
+              <app-info-icon></app-info-icon>
+            </app-tooltip>
+          </ng-container>
+        </app-checkbox-button>
+      </ng-container>
+    </app-standard-vertical-content-grid>
+  </div>
+</app-accordion>

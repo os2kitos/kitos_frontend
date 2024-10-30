@@ -19,6 +19,12 @@ import {
   selectDataProcessingName,
   selectDataProcessingUuid,
 } from 'src/app/store/data-processing/selectors';
+import { selectShowItContractModule, selectShowItSystemModule } from 'src/app/store/organization/selectors';
+import {
+  selectDprEnableNotifications,
+  selectDprEnableReferences,
+  selectDprEnableRoles,
+} from 'src/app/store/organization/ui-module-customization/selectors';
 
 @Component({
   selector: 'app-data-processing-details',
@@ -33,6 +39,12 @@ export class DataProcessingDetailsComponent extends BaseComponent implements OnI
   public readonly dprUuid$ = this.store.select(selectDataProcessingUuid).pipe(filterNullish());
 
   public readonly hasDeletePermission$ = this.store.select(selectDataProcessingHasDeletePermissions);
+
+  public readonly dprRolesEnabled$ = this.store.select(selectDprEnableRoles);
+  public readonly dprNotificationsEnabled$ = this.store.select(selectDprEnableNotifications);
+  public readonly dprReferencesEnabled$ = this.store.select(selectDprEnableReferences);
+  public readonly itSystemsModuleEnabled$ = this.store.select(selectShowItSystemModule);
+  public readonly itContractsModuleEnabled$ = this.store.select(selectShowItContractModule);
 
   public readonly breadCrumbs$ = combineLatest([this.dprName$, this.dprUuid$]).pipe(
     map(([dprName, dprUuid]): BreadCrumb[] => [
@@ -58,11 +70,13 @@ export class DataProcessingDetailsComponent extends BaseComponent implements OnI
       label: $localize`IT Systemer`,
       iconType: 'systems',
       route: AppPath.itSystems,
+      enabled$: this.itSystemsModuleEnabled$,
     },
     {
       label: $localize`IT Kontrakter`,
       iconType: 'folder-important',
       route: AppPath.itContracts,
+      enabled$: this.itContractsModuleEnabled$,
     },
     {
       label: $localize`Tilsyn`,
@@ -73,16 +87,19 @@ export class DataProcessingDetailsComponent extends BaseComponent implements OnI
       label: $localize`Databehandlingsroller`,
       iconType: 'roles',
       route: AppPath.roles,
+      enabled$: this.dprRolesEnabled$,
     },
     {
       label: $localize`Advis`,
       iconType: 'notification',
       route: AppPath.notifications,
+      enabled$: this.dprNotificationsEnabled$,
     },
     {
       label: $localize`Referencer`,
       iconType: 'bookmark',
       route: AppPath.externalReferences,
+      enabled$: this.dprReferencesEnabled$,
     },
   ];
 

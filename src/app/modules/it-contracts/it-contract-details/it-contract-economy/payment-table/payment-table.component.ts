@@ -5,7 +5,7 @@ import { Observable, first } from 'rxjs';
 import { APIPaymentResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
-import { NULL_PLACEHOLDER } from 'src/app/shared/constants';
+import { NULL_PLACEHOLDER } from 'src/app/shared/constants/constants';
 import { PaymentTypes } from 'src/app/shared/models/it-contract/payment-types.model';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { selectItContractHasModifyPermissions } from 'src/app/store/it-contract/selectors';

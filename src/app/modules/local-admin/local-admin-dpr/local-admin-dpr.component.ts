@@ -1,24 +1,17 @@
 import { Component } from '@angular/core';
-import { SegmentButtonOption } from 'src/app/shared/components/segment/segment.component';
-
-enum LocalAdminDprSegmentOption {
-  RegularOptionTypes = 'RegularOptionTypes',
-  RoleOptionTypes = 'RoleOptionTypes',
-}
+import { LocalAdminModuleSegmentOptions, LocalAdminModuleSegmentOptionType } from 'src/app/shared/constants/local-admin-module-segment-constants';
+import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
 
 @Component({
   selector: 'app-local-admin-dpr',
   templateUrl: './local-admin-dpr.component.html',
-  styleUrl: './local-admin-dpr.component.scss'
+  styleUrl: './local-admin-dpr.component.scss',
 })
-
 export class LocalAdminDprComponent {
-  public readonly LocalAdminDprSegmentOption = LocalAdminDprSegmentOption;
+  public readonly LocalAdminModuleSegmentOptionType = LocalAdminModuleSegmentOptionType;
+  public readonly segmentOptions = LocalAdminModuleSegmentOptions;
+  public readonly dataProcessingModuleKey = UIModuleConfigKey.DataProcessingRegistrations;
 
-  public selectedSegment: LocalAdminDprSegmentOption = LocalAdminDprSegmentOption.RegularOptionTypes;
+  public selectedSegment = LocalAdminModuleSegmentOptionType.UiCustomization;
 
-  public readonly segmentOptions: SegmentButtonOption<LocalAdminDprSegmentOption>[] = [
-    { text: $localize`Udfaldsrum`, value: LocalAdminDprSegmentOption.RegularOptionTypes },
-    { text: $localize`Roller`, value: LocalAdminDprSegmentOption.RoleOptionTypes },
-  ];
 }

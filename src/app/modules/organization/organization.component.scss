@@ -1,7 +1,5 @@
-@import "theme";
+@import 'mixins';
 
 :host {
-  display: flex;
-  flex-direction: column;
-  padding: $padding-large;
+  @include overview-flex-column-layout
 }

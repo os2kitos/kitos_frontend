@@ -1,0 +1,21 @@
+@import "theme.scss";
+
+.form-section-top-padding {
+  padding-top: $padding-medium;
+}
+
+.center-no-fields-text {
+  text-align: center;
+}
+
+.tooltip-margin {
+  margin-left: $padding-small;
+  margin-top: $padding-small;
+}
+
+:host ::ng-deep {
+  .mdc-button__label {
+    display: flex;
+    flex-grow: 1;
+  }
+}

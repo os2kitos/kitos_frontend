@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 
@@ -10,12 +10,7 @@ import { selectHasValidCache } from './selectors';
 
 @Injectable()
 export class KLEEffects {
-  constructor(
-    private actions$: Actions,
-    private store: Store,
-    @Inject(APIV2KleOptionService)
-    private apiKleOptionService: APIV2KleOptionService
-  ) {}
+  constructor(private actions$: Actions, private store: Store, private apiKleOptionService: APIV2KleOptionService) {}
 
   getKles$ = createEffect(() => {
     return this.actions$.pipe(
@@ -23,7 +18,7 @@ export class KLEEffects {
       concatLatestFrom(() => this.store.select(selectHasValidCache)),
       filter(([_, validCache]) => !validCache),
       switchMap(() =>
-        this.apiKleOptionService.getSingleKleOptionV2GetV1({}).pipe(
+        this.apiKleOptionService.getSingleKleOptionV2Get({ kleUuid: ''}).pipe(
           map((response) => KLEActions.getKLEsSuccess(response.payload)),
           catchError(() => of(KLEActions.getKLEsError()))
         )

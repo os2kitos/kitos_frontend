@@ -17,6 +17,8 @@ export class ButtonComponent {
   @Input() public loading: boolean | null = false;
   @Input() public type: 'button' | 'submit' = 'button';
   @Input() public tooltip?: string | null;
+  @Input() public alignStart = false;
+  @Input() public backgroundWhite = false;
 
   @Output() buttonClick = new EventEmitter();
 

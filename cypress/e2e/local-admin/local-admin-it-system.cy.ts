@@ -1,6 +1,8 @@
 /// <reference types="Cypress" />
 
-describe('local-admin', () => {
+const regularOptionTypesSegment = 'Lokal tilpasning af udfaldsrum';
+
+describe('local-admin it system usage', () => {
   beforeEach(() => {
     cy.requireIntercept();
 
@@ -19,11 +21,60 @@ describe('local-admin', () => {
     cy.intercept('/api/v2/internal/organizations/*/permissions', {
       fixture: './organizations/organization-permissions-local-admin.json',
     });
-    cy.setup(true, 'local-admin');
+    cy.setup(true, 'local-admin/system');
+  });
+
+  it('Can hide it system module', () => {
+    cy.getByDataCy('it-system-nav-bar-item').should('exist');
+    cy.intercept('PATCH', 'api/v2/internal/organizations/*/ui-root-config', {
+      fixture: './local-admin/it-system/ui-root-config-no-system-module.json',
+    }).as('patch');
+
+    cy.getByDataCy('toggle-module-button').click();
+
+    cy.wait('@patch').then((interception) => {
+      const newValue = interception.request.body.showItSystemModule;
+      expect(newValue).to.equal(false);
+    });
+    cy.getByDataCy('it-system-nav-bar-item').should('not.exist');
+  });
+
+  it('Cannot toggle obligatory ui customization field', () => {
+    const targetTabCheckboxButtonText = 'Systemforside';
+    cy.contains(targetTabCheckboxButtonText)
+      .parents('[data-cy="accordion-header"]')
+      .first()
+      .getByDataCy('button-checkbox')
+      .get('mat-checkbox input')
+      .first()
+      .should('be.checked');
+  });
+
+  it('Can toggle non-obligatory ui customization field', () => {
+    cy.intercept('api/v2/internal/organizations/*/ui-customization/ItSystemUsages', {
+      fixture: './shared/it-system-usage-ui-customization-no-gdpr-and-lifecycle.json',
+    });
+
+    cy.intercept('PUT', 'api/v2/internal/organizations/*/ui-customization/ItSystemUsages').as('put');
+
+    const targetFieldCheckboxButtonText = 'Dato for planlagt risikovurdering';
+    cy.contains(targetFieldCheckboxButtonText).click();
+    cy.wait('@put').then((interception) => {
+      const nodes = interception.request.body.nodes;
+      const gdprNode = nodes.find(
+        (node: { key: string; enabled: boolean }) => node.key === 'ItSystemUsages.gdpr.plannedRiskAssessmentDate'
+      );
+      expect(gdprNode.enabled).to.equal(false);
+    });
+
+    cy.contains(targetFieldCheckboxButtonText).within(() => {
+      cy.getByDataCy('button-checkbox').get('mat-checkbox input').first().should('not.be.checked');
+    });
   });
 
   it('Can edit description of it system option type', () => {
-    cy.getByDataCy('local-admin-it-system-button').click();
+    cy.contains(regularOptionTypesSegment).click();
+
     cy.contains('Forretningstyper').click();
     cy.intercept('PATCH', 'api/v2/internal/it-systems/*/local-option-types/business-types/*', {});
 
@@ -37,7 +88,8 @@ describe('local-admin', () => {
   });
 
   it('Can deactivate active status of it system option type if not obligatory', () => {
-    cy.getByDataCy('local-admin-it-system-button').click();
+    cy.contains(regularOptionTypesSegment).click();
+
     cy.contains('Forretningstyper').click();
     cy.intercept('DELETE', 'api/v2/internal/it-systems/*/local-option-types/business-types/*', {});
 
@@ -51,7 +103,8 @@ describe('local-admin', () => {
   });
 
   it('Can activate active status of it system option type if not obligatory', () => {
-    cy.getByDataCy('local-admin-it-system-button').click();
+    cy.contains('Lokal tilpasning af udfaldsrum').click();
+
     cy.contains('Forretningstyper').click();
     cy.intercept('POST', 'api/v2/internal/it-systems/*/local-option-types/business-types', {});
 
@@ -65,7 +118,8 @@ describe('local-admin', () => {
   });
 
   it('Can not edit active status of option type if obligatory', () => {
-    cy.getByDataCy('local-admin-it-system-button').click();
+    cy.contains(regularOptionTypesSegment).click();
+
     cy.contains('Forretningstyper').click();
 
     cy.contains('td', 'Hjemmesider og portaler') // obligatory in response
