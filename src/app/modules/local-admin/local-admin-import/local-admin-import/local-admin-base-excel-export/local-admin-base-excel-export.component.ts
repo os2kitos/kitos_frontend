@@ -1,36 +1,72 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { HttpClient } from '@angular/common/http';
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Actions } from '@ngrx/effects';
+import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
+import { saveAs } from 'file-saver';
 import { catchError, first, map, mergeMap, of } from 'rxjs';
-import { APIV2ExcelInternalINTERNALService } from 'src/app/api/v2';
+import { BaseComponent } from 'src/app/shared/base/base.component';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
+import { APIExcelService } from 'src/app/shared/services/excel.service';
 import { ExcelImportActions } from 'src/app/store/local-admin/excel-import/actions';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
+import { LocalAdminImportTabOptions } from '../../local-admin-import.component';
 
 @Component({
   selector: 'app-local-admin-base-excel-export',
   templateUrl: './local-admin-base-excel-export.component.html',
   styleUrl: './local-admin-base-excel-export.component.scss',
 })
-export class LocalAdminBaseExcelExportComponent {
+export class LocalAdminBaseExcelExportComponent extends BaseComponent implements OnInit {
+  @Input() public type!: LocalAdminImportTabOptions;
+
   public readonly excelForm: FormGroup;
   public readonly organizationUuid$ = this.store.select(selectOrganizationUuid).pipe(filterNullish());
   constructor(
     private fb: FormBuilder,
     private store: Store,
     private actions$: Actions,
-    private httpClient: HttpClient,
-    @Inject(APIV2ExcelInternalINTERNALService) private apiService: APIV2ExcelInternalINTERNALService //@Inject(APIExcelService) private excelService: APIExcelService
+    @Inject(APIExcelService) private excelService: APIExcelService
   ) {
+    super();
     this.excelForm = this.fb.group({
       file: [null, Validators.required],
     });
   }
 
-  fileImported(event: Event): void {
+  ngOnInit(): void {
+    this.subscriptions.add(
+      this.actions$.pipe(ofType(ExcelImportActions.excelImportSuccess)).subscribe(() => {
+        console.log('Excel import success');
+      })
+    );
+    this.subscriptions.add(
+      this.actions$.pipe(ofType(ExcelImportActions.excelImportError)).subscribe(() => {
+        console.log('Excel import error');
+      })
+    );
+  }
+
+  public getEntityExcel() {
+    this.organizationUuid$
+      .pipe(
+        first(),
+        mergeMap((orgUuid) => {
+          return this.excelService.getExcel(orgUuid, this.type).pipe(
+            map((blob) => {
+              saveAs(blob);
+            }),
+            catchError(() => {
+              console.log('Excel export error');
+              return of();
+            })
+          );
+        })
+      )
+      .subscribe();
+  }
+
+  public fileImported(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       const file = input.files[0];
@@ -41,40 +77,31 @@ export class LocalAdminBaseExcelExportComponent {
     }
   }
 
-  onSubmit(): void {
+  public onSubmit(): void {
     if (this.excelForm.valid) {
       const formData = new FormData();
       formData.append('file', this.excelForm.get('file')?.value);
 
-      //this.store.dispatch(ExcelImportActions.excelImport('OrganizationUnits'));
       this.organizationUuid$
         .pipe(
           first(),
           mergeMap((orgUuid) => {
-            const serviceCall = this.apiService.postSingleExcelInternalV2PostOrgUnits(
-              { organizationUuid: orgUuid, importOrgUnits: true, body: formData },
-              undefined,
-              undefined,
-              { httpHeaderAccept: 'multipart/form-data' as any, context: undefined }
-            );
+            const requestParameters = {
+              organizationUuid: orgUuid,
+              importOrgUnits: true,
+              body: formData,
+            };
 
-            return serviceCall.pipe(
-              map(() => ExcelImportActions.excelImportSuccess()),
-              catchError(() => of(ExcelImportActions.excelImportError()))
+            return this.excelService.postExcelWithFormData(requestParameters, this.type).pipe(
+              map(() => this.store.dispatch(ExcelImportActions.excelImportSuccess())),
+              catchError(() => {
+                this.store.dispatch(ExcelImportActions.excelImportError());
+                return of(ExcelImportActions.excelImportError());
+              })
             );
           })
         )
         .subscribe();
-      /* () => {
-        // this.store.dispatch(ExcelImportActions.excelImport('OrganizationUnits'));
-
-        //this.excelService.postSingleExcelInternalV2PostOrgUnits({ organizationUuid: orgUuid, importOrgUnits: true });
-      } */
-      // Handle the form submission, e.g., send the form data to the server
-      // You can use a service to send the form data to the server
-      // this.yourService.uploadFile(formData).subscribe(response => {
-      //   console.log('Upload successful', response);
-      // });
     }
   }
 }

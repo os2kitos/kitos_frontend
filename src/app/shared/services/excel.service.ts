@@ -1,114 +1,72 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {
-  HttpClient,
-  HttpContext,
-  HttpEvent,
-  HttpHeaders,
-  HttpParameterCodec,
-  HttpParams,
-  HttpResponse,
-} from '@angular/common/http';
-import { Inject, Injectable, Optional } from '@angular/core';
+import { HttpClient, HttpContext, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { BASE_PATH, Configuration } from 'src/app/api/v1';
-import { CustomHttpParameterCodec } from 'src/app/api/v1/encoder';
-import { PostSingleExcelInternalV2PostOrgUnitsRequestParams } from 'src/app/api/v2';
-import { environment } from 'src/environments/environment';
+import { APIV2ExcelInternalINTERNALService, PostSingleExcelInternalV2PostOrgUnitsRequestParams } from 'src/app/api/v2';
+import { LocalAdminImportTabOptions } from 'src/app/modules/local-admin/local-admin-import/local-admin-import.component';
 
 @Injectable({
   providedIn: 'root',
 })
 export class APIExcelService {
-  protected basePath = 'https://kitos-dev.strongminds.dk';
-  public defaultHeaders = new HttpHeaders();
-  public configuration = new Configuration();
-  public encoder: HttpParameterCodec;
+  private basePath: string;
+  private defaultHeaders: HttpHeaders;
+  private encoder: any;
+  private configuration: any;
 
-  constructor(
-    protected httpClient: HttpClient,
-    @Optional() @Inject(BASE_PATH) basePath: string | string[],
-    @Optional() configuration: Configuration
-  ) {
-    if (configuration) {
-      this.configuration = configuration;
-    }
-    if (typeof this.configuration.basePath !== 'string') {
-      if (Array.isArray(basePath) && basePath.length > 0) {
-        basePath = basePath[0];
-      }
-
-      if (typeof basePath !== 'string') {
-        basePath = this.basePath;
-      }
-      this.configuration.basePath = basePath;
-    }
-    if (this.configuration.basePath === '') {
-      this.configuration.basePath = this.basePath;
-    }
-    this.encoder = this.configuration.encoder || new CustomHttpParameterCodec();
+  constructor(private httpClient: HttpClient, private apiService: APIV2ExcelInternalINTERNALService) {
+    this.basePath = this.apiService['configuration'].basePath ?? '';
+    this.defaultHeaders = this.apiService['defaultHeaders'];
+    this.encoder = this.apiService['encoder'];
+    this.configuration = this.apiService['configuration'];
   }
 
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  private addToHttpParams(httpParams: HttpParams, value: any, key?: string): HttpParams {
-    if (typeof value === 'object' && value instanceof Date === false) {
-      httpParams = this.addToHttpParamsRecursive(httpParams, value);
-    } else {
-      httpParams = this.addToHttpParamsRecursive(httpParams, value, key);
-    }
-    return httpParams;
+  public getExcel(organizationUuid: string, type: LocalAdminImportTabOptions): Observable<Blob> {
+    const entityName = this.getEntityName(type);
+    return this.getSingleExcelInternalV2GetContracts(organizationUuid, entityName);
   }
 
-  private addToHttpParamsRecursive(httpParams: HttpParams, value?: any, key?: string): HttpParams {
-    if (value == null) {
-      return httpParams;
+  public postExcelWithFormData(
+    requestParameters: PostSingleExcelInternalV2PostOrgUnitsRequestParams,
+    type: LocalAdminImportTabOptions
+  ): Observable<any> {
+    const entityName = this.getEntityName(type);
+    return this.postSingleExcelInternalV2PostOrgUnits(requestParameters, entityName);
+  }
+
+  private getSingleExcelInternalV2GetContracts(organizationUuid: string, entityName: string): Observable<any> {
+    let localVarHeaders = this.defaultHeaders;
+
+    const httpHeaderAccepts: string[] = [];
+    const localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+    if (localVarHttpHeaderAcceptSelected !== undefined) {
+      localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
     }
 
-    if (typeof value === 'object') {
-      if (Array.isArray(value)) {
-        (value as any[]).forEach((elem) => (httpParams = this.addToHttpParamsRecursive(httpParams, elem, key)));
-      } else if (value instanceof Date) {
-        if (key != null) {
-          httpParams = httpParams.append(key, (value as Date).toISOString().substr(0, 10));
-        } else {
-          throw Error('key may not be null if value is Date');
-        }
-      } else {
-        Object.keys(value).forEach(
-          (k) => (httpParams = this.addToHttpParamsRecursive(httpParams, value[k], key != null ? `${key}.${k}` : k))
-        );
+    const responseType_ = 'blob';
+
+    const localVarPath = `/api/local-admin/excel/${entityName}-by-uuid?organizationUuid=${this.configuration.encodeParam(
+      {
+        name: 'organizationUuid',
+        value: organizationUuid,
+        in: 'path',
+        style: 'simple',
+        explode: false,
+        dataType: 'string',
+        dataFormat: 'uuid',
       }
-    } else if (key != null) {
-      httpParams = httpParams.append(key, value);
-    } else {
-      throw Error('key may not be null if value is not object or array');
-    }
-    return httpParams;
+    )}`;
+    return this.httpClient.request<Blob>('get', `${this.configuration.basePath}${localVarPath}`, {
+      context: new HttpContext(),
+      responseType: <any>responseType_,
+      withCredentials: this.configuration.withCredentials,
+      headers: localVarHeaders,
+    });
   }
 
-  public postSingleExcelInternalV2PostOrgUnits(
+  private postSingleExcelInternalV2PostOrgUnits(
     requestParameters: PostSingleExcelInternalV2PostOrgUnitsRequestParams,
-    observe?: 'body',
-    reportProgress?: boolean,
-    options?: { httpHeaderAccept?: undefined; context?: HttpContext }
-  ): Observable<any>;
-  public postSingleExcelInternalV2PostOrgUnits(
-    requestParameters: PostSingleExcelInternalV2PostOrgUnitsRequestParams,
-    observe?: 'response',
-    reportProgress?: boolean,
-    options?: { httpHeaderAccept?: undefined; context?: HttpContext }
-  ): Observable<HttpResponse<any>>;
-  public postSingleExcelInternalV2PostOrgUnits(
-    requestParameters: PostSingleExcelInternalV2PostOrgUnitsRequestParams,
-    observe?: 'events',
-    reportProgress?: boolean,
-    options?: { httpHeaderAccept?: undefined; context?: HttpContext }
-  ): Observable<HttpEvent<any>>;
-  public postSingleExcelInternalV2PostOrgUnits(
-    requestParameters: PostSingleExcelInternalV2PostOrgUnitsRequestParams,
-    observe: any = 'body',
-    reportProgress: boolean = false,
-    options?: { httpHeaderAccept?: undefined; context?: HttpContext }
+    entityName: string
   ): Observable<any> {
     const organizationUuid = requestParameters.organizationUuid;
     if (organizationUuid === null || organizationUuid === undefined) {
@@ -122,6 +80,12 @@ export class APIExcelService {
         'Required parameter importOrgUnits was null or undefined when calling postSingleExcelInternalV2PostOrgUnits.'
       );
     }
+    const body = requestParameters.body;
+    if (body === null || body === undefined) {
+      throw new Error(
+        'Required parameter body was null or undefined when calling postSingleExcelInternalV2PostOrgUnits.'
+      );
+    }
 
     let localVarQueryParameters = new HttpParams({ encoder: this.encoder });
     if (importOrgUnits !== undefined && importOrgUnits !== null) {
@@ -130,19 +94,10 @@ export class APIExcelService {
 
     let localVarHeaders = this.defaultHeaders;
 
-    let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
-    if (localVarHttpHeaderAcceptSelected === undefined) {
-      // to determine the Accept header
-      const httpHeaderAccepts: string[] = [];
-      localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-    }
+    const httpHeaderAccepts: string[] = [];
+    const localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
     if (localVarHttpHeaderAcceptSelected !== undefined) {
       localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
-    }
-
-    let localVarHttpContext: HttpContext | undefined = options && options.context;
-    if (localVarHttpContext === undefined) {
-      localVarHttpContext = new HttpContext();
     }
 
     let responseType_: 'text' | 'json' | 'blob' = 'json';
@@ -155,25 +110,62 @@ export class APIExcelService {
         responseType_ = 'blob';
       }
     }
-    console.log(environment);
 
-    const localVarPath = `/api/v2/internal/organizations/${this.configuration.encodeParam({
-      name: 'organizationUuid',
-      value: organizationUuid,
-      in: 'path',
-      style: 'simple',
-      explode: false,
-      dataType: 'string',
-      dataFormat: 'uuid',
-    })}/local-admin/excel/units`;
-    return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`, {
-      context: localVarHttpContext,
+    const localVarPath = `/api/local-admin/excel/${entityName}-by-uuid?organizationUuid=${this.configuration.encodeParam(
+      {
+        name: 'organizationUuid',
+        value: organizationUuid,
+        in: 'path',
+        style: 'simple',
+        explode: false,
+        dataType: 'string',
+        dataFormat: 'uuid',
+      }
+    )}`;
+    return this.httpClient.request<any>('post', `${this.basePath}${localVarPath}`, {
+      context: new HttpContext(),
+      body: body,
       params: localVarQueryParameters,
       responseType: <any>responseType_,
       withCredentials: this.configuration.withCredentials,
       headers: localVarHeaders,
-      observe: observe,
-      reportProgress: reportProgress,
     });
+  }
+
+  private addToHttpParams(httpParams: HttpParams, value: any, key: string): HttpParams {
+    if (value instanceof Array) {
+      value.forEach((elem) => {
+        httpParams = this.addToHttpParamsRecursive(httpParams, elem, key);
+      });
+    } else {
+      httpParams = this.addToHttpParamsRecursive(httpParams, value, key);
+    }
+    return httpParams;
+  }
+
+  private addToHttpParamsRecursive(httpParams: HttpParams, value: any, key: string): HttpParams {
+    if (value instanceof Date) {
+      httpParams = httpParams.append(key, (value as Date).toISOString());
+    } else if (value instanceof Object) {
+      Object.keys(value).forEach((k) => {
+        httpParams = this.addToHttpParamsRecursive(httpParams, value[k], `${key}.${k}`);
+      });
+    } else {
+      httpParams = httpParams.append(key, value);
+    }
+    return httpParams;
+  }
+
+  private getEntityName(type: LocalAdminImportTabOptions): string {
+    switch (type) {
+      case LocalAdminImportTabOptions.organization:
+        return 'units';
+      case LocalAdminImportTabOptions.users:
+        return 'users';
+      case LocalAdminImportTabOptions.contracts:
+        return 'contracts';
+      default:
+        throw new Error('Invalid type');
+    }
   }
 }

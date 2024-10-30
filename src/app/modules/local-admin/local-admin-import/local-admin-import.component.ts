@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { SegmentButtonOption } from 'src/app/shared/components/segment/segment.component';
 
-enum LocalAdminImportTabOptions {
+export enum LocalAdminImportTabOptions {
   organization = 'organization',
   users = 'users',
   contracts = 'contracts',
@@ -13,6 +13,8 @@ enum LocalAdminImportTabOptions {
   styleUrl: './local-admin-import.component.scss',
 })
 export class LocalAdminImportComponent {
+  public readonly contractsType = LocalAdminImportTabOptions.contracts;
+  public readonly usersType = LocalAdminImportTabOptions.users;
   public readonly ImportSelectOption = LocalAdminImportTabOptions;
 
   @Input() public selected = LocalAdminImportTabOptions.organization;
