@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { APIV2ExcelInternalINTERNALService, PostSingleExcelInternalV2PostOrgUnitsRequestParams } from 'src/app/api/v2';
 import { LocalAdminImportTabOptions } from 'src/app/modules/local-admin/local-admin-import/local-admin-import.component';
 
+// 30/10/24 This class is a wrapper for the auto-generated excel API service, and manually switches to using the V1 controller whose post endpoints could not be recognized by swaggerGen.
 @Injectable({
   providedIn: 'root',
 })

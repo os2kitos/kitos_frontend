@@ -26,6 +26,7 @@ export class LocalAdminBaseExcelExportComponent extends BaseComponent implements
     private fb: FormBuilder,
     private store: Store,
     private actions$: Actions,
+    //30/10/14 This is injected in the component because the files could not be passed to effects with actions in a regular store-based setup.
     @Inject(APIExcelService) private excelService: APIExcelService
   ) {
     super();
