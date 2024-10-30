@@ -16,6 +16,7 @@ export class LocalAdminImportComponent {
   public readonly contractsType = LocalAdminImportTabOptions.contracts;
   public readonly usersType = LocalAdminImportTabOptions.users;
   public readonly ImportSelectOption = LocalAdminImportTabOptions;
+  public readonly helpTextKey = 'local-config.import.organization';
 
   @Input() public selected = LocalAdminImportTabOptions.organization;
 

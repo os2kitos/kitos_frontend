@@ -1,7 +1,8 @@
 <app-segment [buttons]="showingOptions" [(selected)]="selected"></app-segment>
 <app-local-admin-import-organization *ngIf="selected === 'organization'"></app-local-admin-import-organization>
-<app-local-admin-base-excel-export *ngIf="selected === 'users'" [type]="usersType"></app-local-admin-base-excel-export>
+<app-local-admin-base-excel-export *ngIf="selected === 'users'" [type]="usersType" [helpTextKey]="helpTextKey"></app-local-admin-base-excel-export>
 <app-local-admin-base-excel-export
   *ngIf="selected === 'contracts'"
   [type]="contractsType"
+  [helpTextKey]="helpTextKey"
 ></app-local-admin-base-excel-export>

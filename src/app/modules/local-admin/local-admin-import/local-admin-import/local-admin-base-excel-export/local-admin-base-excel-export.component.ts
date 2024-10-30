@@ -19,6 +19,7 @@ import { LocalAdminImportTabOptions } from '../../local-admin-import.component';
 })
 export class LocalAdminBaseExcelExportComponent extends BaseComponent implements OnInit {
   @Input() public type!: LocalAdminImportTabOptions;
+  @Input() public helpTextKey!: string;
 
   public readonly excelForm: FormGroup;
   public readonly organizationUuid$ = this.store.select(selectOrganizationUuid).pipe(filterNullish());
