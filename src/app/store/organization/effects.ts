@@ -79,7 +79,7 @@ export class OrganizationEffects {
       combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       switchMap(([{ request }, organizationUuid]) =>
         this.organizationInternalService
-          .patchSingleOrganizationsInternalV2UpsertOrganizationMasterDataRoles({ organizationUuid, requestDto: request })
+          .patchSingleOrganizationsInternalV2PatchOrganizationMasterData({ organizationUuid, requestDto: request })
           .pipe(
             map((organizationMasterDataDto) => {
               const organizationMasterData = adaptOrganizationMasterData(organizationMasterDataDto);
