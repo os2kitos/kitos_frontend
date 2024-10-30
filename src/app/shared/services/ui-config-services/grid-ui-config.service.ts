@@ -36,7 +36,7 @@ import {
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { UIConfigGridApplication } from '../../models/ui-config/ui-config-grid-application';
 import { UIModuleConfigKey } from '../../enums/ui-module-config-key';
-import { selectShowDataProcessingRegistrations, selectShowItContractModule } from 'src/app/store/organization/selectors';
+import { selectShowDataProcessingRegistrations, selectShowItContractModule, selectShowItSystemModule } from 'src/app/store/organization/selectors';
 
 @Injectable({
   providedIn: 'root',
@@ -312,10 +312,20 @@ export class GridUIConfigService {
     const dprRolesEnabled$ = this.store.select(selectDprEnableRoles);
     const referenceEnabled$ = this.store.select(selectDprEnableReferences);
     const scheduledInspectionDateEnabled$= this.store.select(selectDprEnableScheduledInspectionDate);
+    const itSystemModuleEnabled$ = this.store.select(selectShowItSystemModule);
+    const itContractsModuleEnabled$ = this.store.select(selectShowItContractModule);
 
-    return combineLatest([mainContract$, dprRolesEnabled$, referenceEnabled$, scheduledInspectionDateEnabled$]).pipe(
-      map(([mainContractEnabled, dprRolesEnabled, referenceEnabled, scheduledInspectionDate]): UIConfigGridApplication[] => {
+    return combineLatest([mainContract$, dprRolesEnabled$, referenceEnabled$, scheduledInspectionDateEnabled$, itSystemModuleEnabled$, itContractsModuleEnabled$]).pipe(
+      map(([mainContractEnabled, dprRolesEnabled, referenceEnabled, scheduledInspectionDate, itSystemModuleEnabled, itContractsModuleEnabled]): UIConfigGridApplication[] => {
         return [
+          {
+            shouldEnable: itSystemModuleEnabled,
+            columnNamesToConfigure: [DprFields.SystemNamesAsCsv, DprFields.SystemUuidsAsCsv],
+          },
+          {
+            shouldEnable: itContractsModuleEnabled,
+            columnNamesToConfigure: [DprFields.ContractNamesAsCsv, DprFields.ActiveAccordingToMainContract],
+          },
           {
             shouldEnable: mainContractEnabled,
             columnNamesToConfigure: [DprFields.ActiveAccordingToMainContract],
