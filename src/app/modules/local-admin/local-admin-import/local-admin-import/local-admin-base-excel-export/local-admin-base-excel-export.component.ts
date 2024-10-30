@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Component, Inject, Input, OnInit } from '@angular/core';
+import { Component, Inject, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { saveAs } from 'file-saver';
 import { catchError, first, map, mergeMap, of } from 'rxjs';
@@ -17,7 +16,7 @@ import { LocalAdminImportTabOptions } from '../../local-admin-import.component';
   templateUrl: './local-admin-base-excel-export.component.html',
   styleUrl: './local-admin-base-excel-export.component.scss',
 })
-export class LocalAdminBaseExcelExportComponent extends BaseComponent implements OnInit {
+export class LocalAdminBaseExcelExportComponent extends BaseComponent {
   @Input() public type!: LocalAdminImportTabOptions;
   @Input() public helpTextKey!: string;
 
@@ -26,7 +25,6 @@ export class LocalAdminBaseExcelExportComponent extends BaseComponent implements
   constructor(
     private fb: FormBuilder,
     private store: Store,
-    private actions$: Actions,
     //30/10/14 This is injected in the component because the files could not be passed to effects with actions in a regular store-based setup.
     @Inject(APIExcelService) private excelService: APIExcelService
   ) {
@@ -34,19 +32,6 @@ export class LocalAdminBaseExcelExportComponent extends BaseComponent implements
     this.excelForm = this.fb.group({
       file: [null, Validators.required],
     });
-  }
-
-  ngOnInit(): void {
-    this.subscriptions.add(
-      this.actions$.pipe(ofType(ExcelImportActions.excelImportSuccess)).subscribe(() => {
-        console.log('Excel import success');
-      })
-    );
-    this.subscriptions.add(
-      this.actions$.pipe(ofType(ExcelImportActions.excelImportError)).subscribe(() => {
-        console.log('Excel import error');
-      })
-    );
   }
 
   public getEntityExcel() {
@@ -58,10 +43,8 @@ export class LocalAdminBaseExcelExportComponent extends BaseComponent implements
             map((blob) => {
               saveAs(blob); //include file names
             }),
-            catchError(() => {
-              console.log('Excel export error');
-              return of();
-            })
+            catchError(() => of(ExcelImportActions.excelImportError())
+            )
           );
         })
       )

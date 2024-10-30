@@ -4228,6 +4228,12 @@
       <trans-unit id="801536030105611507" datatype="html">
         <source>Via Excel</source>
       </trans-unit>
+      <trans-unit id="7843941680333517057" datatype="html">
+        <source>Kunne ikke importere Excelarket</source>
+      </trans-unit>
+      <trans-unit id="8707180639932445169" datatype="html">
+        <source>Excelarket blev importeret</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -5563,6 +5563,14 @@
         <source>Probably shouldn&apos;t be a button</source>
         <target state="new">Probably shouldn&apos;t be a button</target>
       </trans-unit>
+      <trans-unit id="8707180639932445169" datatype="html">
+        <source>Excelarket blev importeret</source>
+        <target state="new">Excelarket blev importeret</target>
+      </trans-unit>
+      <trans-unit id="7843941680333517057" datatype="html">
+        <source>Kunne ikke importere Excelarket</source>
+        <target state="new">Kunne ikke importere Excelarket</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
