@@ -35,19 +35,21 @@ export class LocalAdminBaseExcelExportComponent extends BaseComponent {
   }
 
   public getEntityExcel() {
-    this.organizationUuid$
-      .pipe(
-        first(),
-        mergeMap((orgUuid) => {
-          return this.excelService.getExcel(orgUuid, this.type).pipe(
-            map((blob) => {
-              saveAs(blob); //include file names
-            }),
-            catchError(() => this.handleExcelImportError())
-          );
-        })
-      )
-      .subscribe();
+    this.subscriptions.add(
+      this.organizationUuid$
+        .pipe(
+          first(),
+          mergeMap((orgUuid) => {
+            return this.excelService.getExcel(orgUuid, this.type).pipe(
+              map((blob) => {
+                saveAs(blob); //include file names
+              }),
+              catchError(() => this.handleExcelImportError())
+            );
+          })
+        )
+        .subscribe()
+    );
   }
 
   private handleExcelImportError() {
@@ -70,8 +72,8 @@ export class LocalAdminBaseExcelExportComponent extends BaseComponent {
     if (this.excelForm.valid) {
       const formData = new FormData();
       formData.append('file', this.excelForm.get('file')?.value);
-
-      this.organizationUuid$
+      this.subscriptions.add(
+        this.organizationUuid$
         .pipe(
           first(),
           mergeMap((orgUuid) => {
@@ -87,7 +89,7 @@ export class LocalAdminBaseExcelExportComponent extends BaseComponent {
             );
           })
         )
-        .subscribe();
+        .subscribe());
     }
   }
 }
