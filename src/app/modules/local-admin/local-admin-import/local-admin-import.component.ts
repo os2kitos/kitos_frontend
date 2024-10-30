@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { Store } from '@ngrx/store';
 import { SegmentButtonOption } from 'src/app/shared/components/segment/segment.component';
 import { LocalAdminImportEntityType } from 'src/app/shared/enums/local-admin-import-entity-type';
 

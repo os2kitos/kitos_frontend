@@ -5379,10 +5379,6 @@
         <source>Der skete en fejl ifm. tjek for forbindelsen til FK Organisation. Genindlæs venligst siden for at prøve igen.</source>
         <target state="new">Der skete en fejl ifm. tjek for forbindelsen til FK Organisation. Genindlæs venligst siden for at prøve igen.</target>
       </trans-unit>
-      <trans-unit id="5851418291332190792" datatype="html">
-        <source>Udfaldsrum</source>
-        <target state="new">Udfaldsrum</target>
-      </trans-unit>
       <trans-unit id="2876645566668979898" datatype="html">
         <source>Ændringer</source>
         <target state="new">Ændringer</target>
@@ -5570,6 +5566,102 @@
       <trans-unit id="7843941680333517057" datatype="html">
         <source>Kunne ikke importere Excelarket</source>
         <target state="new">Kunne ikke importere Excelarket</target>
+      </trans-unit>
+      <trans-unit id="3104778415715365281" datatype="html">
+        <source> Inkluder modulet <x id="INTERPOLATION" equiv-text="{{ getModuleText(moduleKey) }}"/> </source>
+        <target state="new"> Inkluder modulet <x id="INTERPOLATION" equiv-text="{{ getModuleText(moduleKey) }}"/> </target>
+      </trans-unit>
+      <trans-unit id="8666131066916332987" datatype="html">
+        <source>Ukendt modul</source>
+        <target state="new">Ukendt modul</target>
+      </trans-unit>
+      <trans-unit id="8276868235175330138" datatype="html">
+        <source> Tilpasning på feltniveau er endnu ikke muligt for dette faneblad. </source>
+        <target state="new"> Tilpasning på feltniveau er endnu ikke muligt for dette faneblad. </target>
+      </trans-unit>
+      <trans-unit id="5646892360164613168" datatype="html">
+        <source>Lokal tilpasning af brugerfladen</source>
+        <target state="new">Lokal tilpasning af brugerfladen</target>
+      </trans-unit>
+      <trans-unit id="9001961829556113608" datatype="html">
+        <source>Lokal tilpasning af udfaldsrum</source>
+        <target state="new">Lokal tilpasning af udfaldsrum</target>
+      </trans-unit>
+      <trans-unit id="438015479771712298" datatype="html">
+        <source>Lokal tilpasning af roller</source>
+        <target state="new">Lokal tilpasning af roller</target>
+      </trans-unit>
+      <trans-unit id="4599362408449001670" datatype="html">
+        <source>Hvilken kontrakt skal angive om databehandlingen er aktiv</source>
+        <target state="new">Hvilken kontrakt skal angive om databehandlingen er aktiv</target>
+      </trans-unit>
+      <trans-unit id="1991864228783701466" datatype="html">
+        <source>KontraktID</source>
+        <target state="new">KontraktID</target>
+      </trans-unit>
+      <trans-unit id="3252648604690804231" datatype="html">
+        <source>Leverandørs underskrift</source>
+        <target state="new">Leverandørs underskrift</target>
+      </trans-unit>
+      <trans-unit id="5311870289458484364" datatype="html">
+        <source>Gyldig fra/til</source>
+        <target state="new">Gyldig fra/til</target>
+      </trans-unit>
+      <trans-unit id="2457952418192472950" datatype="html">
+        <source>IT-Systemer i anvendelse</source>
+        <target state="new">IT-Systemer i anvendelse</target>
+      </trans-unit>
+      <trans-unit id="1990674573455542624" datatype="html">
+        <source>Datofelter</source>
+        <target state="new">Datofelter</target>
+      </trans-unit>
+      <trans-unit id="5449684192775013381" datatype="html">
+        <source>Dækker felterne “Ibrugtagningsdato” og “Slutdato for anvendelse”</source>
+        <target state="new">Dækker felterne “Ibrugtagningsdato” og “Slutdato for anvendelse”</target>
+      </trans-unit>
+      <trans-unit id="8965344190722476861" datatype="html">
+        <source>Hvilken kontrakt skal afgøre om IT systemet er aktivt</source>
+        <target state="new">Hvilken kontrakt skal afgøre om IT systemet er aktivt</target>
+      </trans-unit>
+      <trans-unit id="4077872505678928787" datatype="html">
+        <source>Det er kun muligt at fjerne dette faneblad ved at slå det relaterede modul fra</source>
+        <target state="new">Det er kun muligt at fjerne dette faneblad ved at slå det relaterede modul fra</target>
+      </trans-unit>
+      <trans-unit id="8235579082825223124" datatype="html">
+        <source>Det er ikke muligt at slå dette faneblad fra</source>
+        <target state="new">Det er ikke muligt at slå dette faneblad fra</target>
+      </trans-unit>
+      <trans-unit id="512261614990923185" datatype="html">
+        <source>Bemærk: Skjules faneblad/felt fjernes relaterede felt(er) også fra overbliksbillederne</source>
+        <target state="new">Bemærk: Skjules faneblad/felt fjernes relaterede felt(er) også fra overbliksbillederne</target>
+      </trans-unit>
+      <trans-unit id="1677570825330559345" datatype="html">
+        <source>Fanebladdet slås fra hvis alle felter/grupper fjernes, da siden ellers vil være uden indhold.</source>
+        <target state="new">Fanebladdet slås fra hvis alle felter/grupper fjernes, da siden ellers vil være uden indhold.</target>
+      </trans-unit>
+      <trans-unit id="1265710071714281214" datatype="html">
+        <source>Kunne ikke hente lokal tilpasning af moduler.</source>
+        <target state="new">Kunne ikke hente lokal tilpasning af moduler.</target>
+      </trans-unit>
+      <trans-unit id="749658656182538362" datatype="html">
+        <source>Lokal tilpasning af moduler blev opdateret.</source>
+        <target state="new">Lokal tilpasning af moduler blev opdateret.</target>
+      </trans-unit>
+      <trans-unit id="1398970779136530497" datatype="html">
+        <source>Kunne ikke opdatere lokal tilpasning af moduler.</source>
+        <target state="new">Kunne ikke opdatere lokal tilpasning af moduler.</target>
+      </trans-unit>
+      <trans-unit id="3995718542795029514" datatype="html">
+        <source>Kunne ikke hente lokal tilpasning af brugerfladen</source>
+        <target state="new">Kunne ikke hente lokal tilpasning af brugerfladen</target>
+      </trans-unit>
+      <trans-unit id="3883293175168907224" datatype="html">
+        <source>Kunne ikke opdatere lokal tilpasning af brugerfladen</source>
+        <target state="new">Kunne ikke opdatere lokal tilpasning af brugerfladen</target>
+      </trans-unit>
+      <trans-unit id="4888833496127267341" datatype="html">
+        <source>Lokal tilpasning af brugerfladen blev opdateret</source>
+        <target state="new">Lokal tilpasning af brugerfladen blev opdateret</target>
       </trans-unit>
     </body>
   </file>

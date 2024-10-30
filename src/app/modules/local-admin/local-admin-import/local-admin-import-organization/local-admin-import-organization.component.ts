@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LocalAdminImportTabOptions } from '../local-admin-import.component';
+import { LocalAdminImportEntityType } from 'src/app/shared/enums/local-admin-import-entity-type';
 
 @Component({
   selector: 'app-local-admin-import-organization',
@@ -7,5 +7,5 @@ import { LocalAdminImportTabOptions } from '../local-admin-import.component';
   styleUrl: './local-admin-import-organization.component.scss',
 })
 export class LocalAdminImportOrganizationComponent {
-  public readonly organizationOptions = LocalAdminImportTabOptions.organization;
+  public readonly organizationOptions = LocalAdminImportEntityType.organization;
 }

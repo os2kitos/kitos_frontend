@@ -3,7 +3,7 @@ import { HttpClient, HttpContext, HttpHeaders, HttpParams } from '@angular/commo
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { APIV2ExcelInternalINTERNALService, PostSingleExcelInternalV2PostOrgUnitsRequestParams } from 'src/app/api/v2';
-import { LocalAdminImportTabOptions } from 'src/app/modules/local-admin/local-admin-import/local-admin-import.component';
+import { LocalAdminImportEntityType } from '../enums/local-admin-import-entity-type';
 
 // 30/10/24 This class is a wrapper for the auto-generated excel API service, and manually switches to using the V1 controller whose post endpoints could not be recognized by swaggerGen.
 @Injectable({
@@ -22,14 +22,14 @@ export class APIExcelService {
     this.configuration = this.apiService['configuration'];
   }
 
-  public getExcel(organizationUuid: string, type: LocalAdminImportTabOptions): Observable<Blob> {
+  public getExcel(organizationUuid: string, type: LocalAdminImportEntityType): Observable<Blob> {
     const entityName = this.getEntityName(type);
     return this.getSingleExcelInternalV2GetByEntityName(organizationUuid, entityName);
   }
 
   public postExcelWithFormData(
     requestParameters: PostSingleExcelInternalV2PostOrgUnitsRequestParams,
-    type: LocalAdminImportTabOptions
+    type: LocalAdminImportEntityType
   ): Observable<any> {
     const entityName = this.getEntityName(type);
     return this.postSingleExcelInternalV2PostByEntityName(requestParameters, entityName);
@@ -157,13 +157,13 @@ export class APIExcelService {
     return httpParams;
   }
 
-  private getEntityName(type: LocalAdminImportTabOptions): string {
+  private getEntityName(type: LocalAdminImportEntityType): string {
     switch (type) {
-      case LocalAdminImportTabOptions.organization:
+      case LocalAdminImportEntityType.organization:
         return 'units';
-      case LocalAdminImportTabOptions.users:
+      case LocalAdminImportEntityType.users:
         return 'users';
-      case LocalAdminImportTabOptions.contracts:
+      case LocalAdminImportEntityType.contracts:
         return 'contracts';
       default:
         throw new Error('Invalid type');
