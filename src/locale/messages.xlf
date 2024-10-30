@@ -4213,14 +4213,20 @@
       <trans-unit id="4163400354274832244" datatype="html">
         <source>Ændringer ifm. de seneste fem import operationer der indeholdte ændringer</source>
       </trans-unit>
-      <trans-unit id="3331880204730817629" datatype="html">
-        <source> Step 2 - Upload udfyldt ark</source>
+      <trans-unit id="6260424752629409127" datatype="html">
+        <source> Trin 2 - Upload udfyldt ark</source>
       </trans-unit>
-      <trans-unit id="5380143205636199847" datatype="html">
-        <source> Step 1 - Hent og udfyld ark</source>
+      <trans-unit id="9140168255051013410" datatype="html">
+        <source> Trin 1 - Hent og udfyld ark</source>
       </trans-unit>
       <trans-unit id="6932865105766151309" datatype="html">
         <source>Upload</source>
+      </trans-unit>
+      <trans-unit id="711516023435481653" datatype="html">
+        <source>Probably shouldn&apos;t be a button</source>
+      </trans-unit>
+      <trans-unit id="801536030105611507" datatype="html">
+        <source>Via Excel</source>
       </trans-unit>
     </body>
   </file>

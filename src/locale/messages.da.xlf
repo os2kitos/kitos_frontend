@@ -5547,13 +5547,21 @@
         <source>Upload</source>
         <target state="new">Upload</target>
       </trans-unit>
-      <trans-unit id="5380143205636199847" datatype="html">
-        <source> Step 1 - Hent og udfyld ark</source>
-        <target state="new"> Step 1 - Hent og udfyld ark</target>
+      <trans-unit id="9140168255051013410" datatype="html">
+        <source> Trin 1 - Hent og udfyld ark</source>
+        <target state="new"> Trin 1 - Hent og udfyld ark</target>
       </trans-unit>
-      <trans-unit id="3331880204730817629" datatype="html">
-        <source> Step 2 - Upload udfyldt ark</source>
-        <target state="new"> Step 2 - Upload udfyldt ark</target>
+      <trans-unit id="6260424752629409127" datatype="html">
+        <source> Trin 2 - Upload udfyldt ark</source>
+        <target state="new"> Trin 2 - Upload udfyldt ark</target>
+      </trans-unit>
+      <trans-unit id="801536030105611507" datatype="html">
+        <source>Via Excel</source>
+        <target state="new">Via Excel</target>
+      </trans-unit>
+      <trans-unit id="711516023435481653" datatype="html">
+        <source>Probably shouldn&apos;t be a button</source>
+        <target state="new">Probably shouldn&apos;t be a button</target>
       </trans-unit>
     </body>
   </file>

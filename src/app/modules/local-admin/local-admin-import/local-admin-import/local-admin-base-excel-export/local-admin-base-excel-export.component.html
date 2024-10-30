@@ -4,7 +4,7 @@
   <form [formGroup]="excelForm" (ngSubmit)="onSubmit()">
     <app-standard-vertical-content-grid>
       <div>
-        <app-paragraph [bold]="true" i18n> Step 1 - Hent og udfyld ark</app-paragraph>
+        <app-paragraph [bold]="true" i18n> Trin 1 - Hent og udfyld ark</app-paragraph>
         <app-button
           type="submit"
           buttonStyle="secondary"
@@ -13,16 +13,9 @@
           i18n
           >Probably shouldn't be a button</app-button
         >
-        <!--  <a
-          href="https://kitos-dev.strongminds.dk/api/v2/internal/organizations/{{
-            organizationUuid$ | async
-          }}/local-admin/excel/units?exportOrgUnits=true"
-          target="_blank"
-          >Get the excel</a
-        > -->
       </div>
       <div>
-        <app-paragraph [bold]="true" i18n> Step 2 - Upload udfyldt ark</app-paragraph>
+        <app-paragraph [bold]="true" i18n> Trin 2 - Upload udfyldt ark</app-paragraph>
         <app-file-input (fileImported)="fileImported($event)"></app-file-input>
       </div>
       <div>
