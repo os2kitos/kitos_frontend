@@ -18,7 +18,7 @@ describe('organization-master-data', () => {
 
   it('Can edit organization master data', () => {
     const newPhone = '12345678';
-    cy.intercept('api/v2/internal/organizations/*/master-data/roles').as('patch');
+    cy.intercept('api/v2/internal/organizations/*/master-data').as('patch');
 
     cy.getByDataCy('master-data-phone-input').type('{selectall}{backspace}').type(newPhone);
     cy.getByDataCy('master-data-headline').click();
