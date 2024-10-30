@@ -21,6 +21,7 @@ export class LocalAdminBaseExcelExportComponent extends BaseComponent {
   @Input() public helpTextKey!: string;
 
   public readonly excelForm: FormGroup;
+  private readonly fileControl = 'file';
   public readonly organizationUuid$ = this.store.select(selectOrganizationUuid).pipe(filterNullish());
   constructor(
     private fb: FormBuilder,
@@ -64,14 +65,14 @@ export class LocalAdminBaseExcelExportComponent extends BaseComponent {
       this.excelForm.patchValue({
         file: file,
       });
-      this.excelForm.get('file')?.updateValueAndValidity();
+      this.excelForm.get(this.fileControl)?.updateValueAndValidity();
     }
   }
 
   public onSubmit(): void {
     if (this.excelForm.valid) {
       const formData = new FormData();
-      formData.append('file', this.excelForm.get('file')?.value);
+      formData.append(this.fileControl, this.excelForm.get(this.fileControl)?.value);
       this.subscriptions.add(
         this.organizationUuid$
         .pipe(
