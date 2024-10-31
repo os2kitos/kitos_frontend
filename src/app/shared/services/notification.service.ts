@@ -54,8 +54,8 @@ export class NotificationService implements OnDestroy {
     this.subscribeToFkOrganizationEvents();
   }
   subscribeToExcelImportActions() {
-    this.subscribeAsDefault(ExcelImportActions.excelImportSuccess, $localize`Excelarket blev importeret`);
-    this.subscribeAsError(ExcelImportActions.excelImportError, $localize`Kunne ikke importere Excelarket`);
+    this.subscribeAsDefault(ExcelImportActions.excelImportSuccess, $localize`Excel-arket blev importeret`);
+    this.subscribeAsError(ExcelImportActions.excelImportError, $localize`Kunne ikke importere excel-arket`);
   }
 
   private subscribeToLocalAdminNotifications() {
