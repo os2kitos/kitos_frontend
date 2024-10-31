@@ -17,6 +17,7 @@ import { PopupMessageActions } from 'src/app/store/popup-messages/actions';
 import { UserActions } from 'src/app/store/user-store/actions';
 import { PopupMessageType } from '../enums/popup-message-type';
 import { createPopupMessage } from '../models/popup-messages/popup-message.model';
+import { ExcelImportActions } from 'src/app/store/local-admin/excel-import/actions';
 
 @Injectable({ providedIn: 'root' })
 export class NotificationService implements OnDestroy {
@@ -39,6 +40,8 @@ export class NotificationService implements OnDestroy {
     this.subscribeAsDefault(UserActions.logoutSuccess, $localize`Du er nu logget ud`);
     this.subscribeAsError(UserActions.logoutError, $localize`Kunne ikke logge ud`);
 
+    this.subscribeToExcelImportActions();
+
     this.subscribeToOrganizationEvents();
     this.subscribeToItSystemEvents();
     this.subscribeToItContractEvents();
@@ -49,6 +52,10 @@ export class NotificationService implements OnDestroy {
     this.subscribeToExternalReferenceManagementEvents();
     this.subscribeToRoleNotifications();
     this.subscribeToFkOrganizationEvents();
+  }
+  subscribeToExcelImportActions() {
+    this.subscribeAsDefault(ExcelImportActions.excelImportSuccess, $localize`Excel-arket blev importeret`);
+    this.subscribeAsError(ExcelImportActions.excelImportError, $localize`Kunne ikke importere excel-arket`);
   }
 
   private subscribeToLocalAdminNotifications() {

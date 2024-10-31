@@ -4,17 +4,3 @@
 :host {
   @include page-flex-layout-max-width;
 }
-
-.action-buttons {
-  display: flex;
-  gap: $padding-medium;
-}
-
-app-button {
-  width: auto;
-  display: inline-block;
-}
-
-.table-margin {
-  margin-top: $padding-small;
-}

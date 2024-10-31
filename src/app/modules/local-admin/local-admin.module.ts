@@ -2,7 +2,8 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ComponentsModule } from 'src/app/shared/components/components.module';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { LocalAdminInformationComponent } from './local-admin-information/local-admin-information.component';
+import { LocalAdminImportFkOrgComponent } from './local-admin-import/local-admin-import-organization/local-admin-import-fk-org/local-admin-import-fk-org.component';
+import { LocalAdminBaseExcelExportComponent } from './local-admin-import/local-admin-import/local-admin-base-excel-export/local-admin-base-excel-export.component';
 import { LocalAdminItSystemUsageComponent } from './local-admin-it-system-usage/local-admin-it-system-usage.component';
 import { LocalAdminOrganizationComponent } from './local-admin-organization/local-admin-organization.component';
 import { OrganizationsGridComponent } from './local-admin-organization/organizations-grid/organizations-grid.component';
@@ -17,12 +18,14 @@ import { LocalAdminImportComponent } from './local-admin-import/local-admin-impo
 import { LocalAdminImportOrganizationComponent } from './local-admin-import/local-admin-import-organization/local-admin-import-organization.component';
 import { FkOrgWriteDialogComponent } from './local-admin-import/local-admin-import-organization/fk-org-write-dialog/fk-org-write-dialog.component';
 import { UiConfigComponent } from './ui-config/ui-config.component';
+import { LocalAdminInformationComponent } from './local-admin-information/local-admin-information.component';
 
 @NgModule({
   declarations: [ LocalAdminComponent,
     LocalAdminInformationComponent,
     LocalAdminOrganizationComponent,
     OrganizationsGridComponent,
+    LocalAdminDprComponent,
     LocalAdminItContractComponent,
     LocalAdminDprComponent,
     LocalAdminImportComponent,
@@ -32,6 +35,8 @@ import { UiConfigComponent } from './ui-config/ui-config.component';
     UiConfigTabSectionComponent,
     FkOrgDeleteDialogComponent,
     FkOrgChangelogComponent,
+    LocalAdminImportFkOrgComponent,
+    LocalAdminBaseExcelExportComponent,
     UiConfigComponent
   ],
   imports: [CommonModule, ComponentsModule, SharedModule, LocalAdminRouterModule],

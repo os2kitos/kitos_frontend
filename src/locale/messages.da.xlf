@@ -5655,6 +5655,50 @@
         <source>Hjælpetekster</source>
         <target state="new">Hjælpetekster</target>
       </trans-unit>
+      <trans-unit id="801536030105611507" datatype="html">
+        <source>Via Excel</source>
+        <target state="new">Via Excel</target>
+      </trans-unit>
+      <trans-unit id="9140168255051013410" datatype="html">
+        <source> Trin 1 - Hent og udfyld ark</source>
+        <target state="new"> Trin 1 - Hent og udfyld ark</target>
+      </trans-unit>
+      <trans-unit id="848535043670651688" datatype="html">
+        <source>Excelark til import af <x id="INTERPOLATION" equiv-text="{{ getEntityName() }}"/></source>
+        <target state="new">Excelark til import af <x id="INTERPOLATION" equiv-text="{{ getEntityName() }}"/></target>
+      </trans-unit>
+      <trans-unit id="6260424752629409127" datatype="html">
+        <source> Trin 2 - Upload udfyldt ark</source>
+        <target state="new"> Trin 2 - Upload udfyldt ark</target>
+      </trans-unit>
+      <trans-unit id="6932865105766151309" datatype="html">
+        <source>Upload</source>
+        <target state="new">Upload</target>
+      </trans-unit>
+      <trans-unit id="7673345037765032816" datatype="html">
+        <source>organisationsenheder</source>
+        <target state="new">organisationsenheder</target>
+      </trans-unit>
+      <trans-unit id="9155574452722521742" datatype="html">
+        <source>brugere</source>
+        <target state="new">brugere</target>
+      </trans-unit>
+      <trans-unit id="6814281110164273179" datatype="html">
+        <source>IT kontrakter</source>
+        <target state="new">IT kontrakter</target>
+      </trans-unit>
+      <trans-unit id="4937157118885922622" datatype="html">
+        <source>Organisationsenheder</source>
+        <target state="new">Organisationsenheder</target>
+      </trans-unit>
+      <trans-unit id="8707180639932445169" datatype="html">
+        <source>Excelarket blev importeret</source>
+        <target state="new">Excelarket blev importeret</target>
+      </trans-unit>
+      <trans-unit id="7843941680333517057" datatype="html">
+        <source>Kunne ikke importere Excelarket</source>
+        <target state="new">Kunne ikke importere Excelarket</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
