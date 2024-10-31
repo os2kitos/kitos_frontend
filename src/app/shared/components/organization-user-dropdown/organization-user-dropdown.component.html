@@ -1,7 +1,8 @@
 <app-dropdown
   [text]="text ? text : 'Vælg bruger'"
   i18n-text
-  valueField="name"
+  valueField="fullName"
+  textField="fullName"
   [(value)]="value"
   [data]="users$ | async"
   [loading]="usersIsLoading$ | async"
