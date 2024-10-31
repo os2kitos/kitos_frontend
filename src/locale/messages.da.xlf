@@ -5635,6 +5635,22 @@
         <source>Kunne ikke opdatere lokal tilpasning af moduler.</source>
         <target state="new">Kunne ikke opdatere lokal tilpasning af moduler.</target>
       </trans-unit>
+      <trans-unit id="7887399807417246084" datatype="html">
+        <source>Global admin</source>
+        <target state="new">Global admin</target>
+      </trans-unit>
+      <trans-unit id="8164320094956220546" datatype="html">
+        <source>Globale administratorer</source>
+        <target state="new">Globale administratorer</target>
+      </trans-unit>
+      <trans-unit id="4007785449881706156" datatype="html">
+        <source>Lokale administratorer</source>
+        <target state="new">Lokale administratorer</target>
+      </trans-unit>
+      <trans-unit id="3949986260767737219" datatype="html">
+        <source>Hjælpetekster</source>
+        <target state="new">Hjælpetekster</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

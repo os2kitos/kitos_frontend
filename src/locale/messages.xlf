@@ -4282,6 +4282,18 @@
       <trans-unit id="8666131066916332987" datatype="html">
         <source>Ukendt modul</source>
       </trans-unit>
+      <trans-unit id="3949986260767737219" datatype="html">
+        <source>Hjælpetekster</source>
+      </trans-unit>
+      <trans-unit id="4007785449881706156" datatype="html">
+        <source>Lokale administratorer</source>
+      </trans-unit>
+      <trans-unit id="7887399807417246084" datatype="html">
+        <source>Global admin</source>
+      </trans-unit>
+      <trans-unit id="8164320094956220546" datatype="html">
+        <source>Globale administratorer</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -4,6 +4,7 @@ export enum AppPath {
   uuid = ':uuid',
 
   organization = 'organization',
+  organizations = 'organizations',
 
   itSystems = 'it-systems',
   itSystemUsages = 'it-system-usages',
@@ -31,10 +32,13 @@ export enum AppPath {
 
   globalAdmin = 'global-admin',
   localAdmin = 'local-admin',
+  localAdmins = 'local-admins',
+  globalAdmins = 'global-admins',
   information = 'information',
   import = 'import',
   helpTexts = 'help-texts',
   localAdminSystemUsages = 'system',
+  other = 'other',
 
   roles = 'roles',
 

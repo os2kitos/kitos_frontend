@@ -9,12 +9,15 @@ import { BulkCreateIconComponent } from './bulk-create-icon.component';
 import { CheckNegativeGrayIconComponent } from './check-negative-gray.component';
 import { CheckPositiveGreenIconComponent } from './check-positive-green.component';
 import { ChevronDownIconComponent } from './chevron-down-icon.component';
+import { ChevronLeftIconComponent } from './chevron-left-icon.component';
 import { ChevronRightIconComponent } from './chevron-right-icon.component';
 import { ClipboardIconComponent } from './clipboard-icon.component';
+import { CollapseCircleIconComponent } from './collapse-circle-icon.component';
 import { CollapseIconComponent } from './collapse-icon.component';
 import { DocumentIconComponent } from './document-icon.component';
 import { DragIconComponent } from './drag-icon.component';
 import { EmptySearchIconComponent } from './empty-search-icon.component';
+import { ExpandCircleIconComponent } from './expand-circle-icon.component';
 import { ExpandIconComponent } from './expand-icon.component';
 import { ExportIconComponent } from './export-icon.component';
 import { EyeIconComponent } from './eye-icon.component';
@@ -43,6 +46,7 @@ import { RedCircleIconComponent } from './red-circle-icon.component';
 import { ReorderIconComponent } from './reorder-icon.component';
 import { RolesIconComponent } from './roles-icon.component';
 import { SearchIconComponent } from './search-icon.component';
+import { SettingsIconComponent } from './settings-icon.component';
 import { SystemsIconComponent } from './systems-icon.component';
 import { TableIconComponent } from './table-icon.component';
 import { TakeIntoUseIconComponent } from './take-into-use-icon.component';
@@ -50,9 +54,7 @@ import { TrashcanIconComponent } from './trashcan-icon.component';
 import { WarningIconComponent } from './warning-icon.component';
 import { WhiteCircleIconComponent } from './white-circle-icon.component';
 import { XIconComponent } from './x-icon.component';
-import { ChevronLeftIconComponent } from './chevron-left-icon.component';
-import { ExpandCircleIconComponent } from './expand-circle-icon.component';
-import { CollapseCircleIconComponent } from './collapse-circle-icon.component';
+import { MultipleUsersIconComponent } from './multiple-users-icon.component';
 
 @NgModule({
   imports: [],
@@ -111,6 +113,8 @@ import { CollapseCircleIconComponent } from './collapse-circle-icon.component';
     ChevronLeftIconComponent,
     ExpandCircleIconComponent,
     CollapseCircleIconComponent,
+    SettingsIconComponent,
+    MultipleUsersIconComponent,
   ],
   declarations: [
     ChevronDownIconComponent,
@@ -167,6 +171,8 @@ import { CollapseCircleIconComponent } from './collapse-circle-icon.component';
     ChevronLeftIconComponent,
     ExpandCircleIconComponent,
     CollapseCircleIconComponent,
+    SettingsIconComponent,
+    MultipleUsersIconComponent,
   ],
   providers: [],
 })
