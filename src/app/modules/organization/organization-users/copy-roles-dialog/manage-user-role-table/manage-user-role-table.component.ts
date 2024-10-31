@@ -1,6 +1,13 @@
 import { Component, Input } from '@angular/core';
-import { getRights, getRoleTypeNameByEntityType, getTypeTitleNameByType } from 'src/app/shared/helpers/user-role.helpers';
-import { OrganizationUser, Right } from 'src/app/shared/models/organization/organization-user/organization-user.model';
+import {
+  getRights,
+  getRoleTypeNameByEntityType,
+  getTypeTitleNameByType,
+} from 'src/app/shared/helpers/user-role.helpers';
+import {
+  ODataOrganizationUser,
+  Right,
+} from 'src/app/shared/models/organization/organization-user/organization-user.model';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
 import { RoleSelectionService } from 'src/app/shared/services/role-selector-service';
 
@@ -10,7 +17,7 @@ import { RoleSelectionService } from 'src/app/shared/services/role-selector-serv
   styleUrl: './manage-user-role-table.component.scss',
 })
 export class ManageUserRoleTableComponent {
-  @Input() user!: OrganizationUser;
+  @Input() user!: ODataOrganizationUser;
   @Input() entityType!: RegistrationEntityTypes;
 
   constructor(private selectionService: RoleSelectionService) {}

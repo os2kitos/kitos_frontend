@@ -4,7 +4,7 @@ import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import { OrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
+import { ODataOrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
 import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.service';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
 
@@ -14,7 +14,7 @@ import { OrganizationUserActions } from 'src/app/store/organization/organization
   styleUrl: './user-info-dialog.component.scss',
 })
 export class UserInfoDialogComponent extends BaseComponent {
-  @Input() user$!: Observable<OrganizationUser>;
+  @Input() user$!: Observable<ODataOrganizationUser>;
   @Input() hasModificationPermission$!: Observable<boolean | undefined>;
 
   constructor(
@@ -36,15 +36,15 @@ export class UserInfoDialogComponent extends BaseComponent {
     this.dialogOpenerService.openDeleteUserDialog(this.user$, true);
   }
 
-  public onEditUser(user: OrganizationUser): void {
+  public onEditUser(user: ODataOrganizationUser): void {
     this.dialogOpenerService.openEditUserDialog(user, true);
   }
 
-  public onSendAdvis(user: OrganizationUser): void {
+  public onSendAdvis(user: ODataOrganizationUser): void {
     this.store.dispatch(OrganizationUserActions.sendNotification(user.Uuid));
   }
 
-  public getFullName(user: OrganizationUser): string {
+  public getFullName(user: ODataOrganizationUser): string {
     return `${user.FirstName} ${user.LastName}`;
   }
 }

@@ -1,7 +1,7 @@
 import { createEntityAdapter, Update } from '@ngrx/entity';
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { defaultGridState } from 'src/app/shared/models/grid-state.model';
-import { OrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
+import { ODataOrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
 import { DataProcessingActions } from '../../data-processing/actions';
 import { filterRightFromRights, updateStateOfUserRights } from '../../helpers/right-helper';
 import { ITContractActions } from '../../it-contract/actions';
@@ -10,7 +10,7 @@ import { OrganizationUnitActions } from '../organization-unit/actions';
 import { OrganizationUserActions } from './actions';
 import { OrganizationUserState } from './state';
 
-export const organizationUserAdapter = createEntityAdapter<OrganizationUser>({
+export const organizationUserAdapter = createEntityAdapter<ODataOrganizationUser>({
   selectId: (user) => user.Uuid,
 });
 
@@ -74,7 +74,7 @@ export const organizationUserFeature = createFeature({
     on(
       OrganizationUnitActions.deleteOrganizationUnitRoleSuccess,
       (state, { userUuid, roleUuid, unitUuid }): OrganizationUserState => {
-        const partialUpdateFunction = (previousState: OrganizationUser) => ({
+        const partialUpdateFunction = (previousState: ODataOrganizationUser) => ({
           OrganizationUnitRights: filterRightFromRights(previousState.OrganizationUnitRights, roleUuid, unitUuid),
         });
         return updateStateOfUserRights(state, userUuid, partialUpdateFunction);
@@ -84,7 +84,7 @@ export const organizationUserFeature = createFeature({
     on(
       ITSystemUsageActions.removeItSystemUsageRoleSuccess,
       (state, { userUuid, roleUuid, itSystemUsageUuid }): OrganizationUserState => {
-        const partialUpdateFunction = (previousState: OrganizationUser) => ({
+        const partialUpdateFunction = (previousState: ODataOrganizationUser) => ({
           ItSystemRights: filterRightFromRights(previousState.ItSystemRights, roleUuid, itSystemUsageUuid),
         });
         return updateStateOfUserRights(state, userUuid, partialUpdateFunction);
@@ -94,7 +94,7 @@ export const organizationUserFeature = createFeature({
     on(
       ITContractActions.removeItContractRoleSuccess,
       (state, { userUuid, roleUuid, contractUuid }): OrganizationUserState => {
-        const partialUpdateFunction = (previousState: OrganizationUser) => ({
+        const partialUpdateFunction = (previousState: ODataOrganizationUser) => ({
           ItContractRights: filterRightFromRights(previousState.ItContractRights, roleUuid, contractUuid),
         });
         return updateStateOfUserRights(state, userUuid, partialUpdateFunction);
@@ -104,7 +104,7 @@ export const organizationUserFeature = createFeature({
     on(
       DataProcessingActions.removeDataProcessingRoleSuccess,
       (state, { userUuid, roleUuid, dataProcessingUuid }): OrganizationUserState => {
-        const partialUpdateFunction = (previousState: OrganizationUser) => ({
+        const partialUpdateFunction = (previousState: ODataOrganizationUser) => ({
           DataProcessingRegistrationRights: filterRightFromRights(
             previousState.DataProcessingRegistrationRights,
             roleUuid,
@@ -124,7 +124,10 @@ export const organizationUserFeature = createFeature({
 
     on(OrganizationUserActions.sendNotificationSuccess, (state, { userUuid }): OrganizationUserState => {
       const todaysDate = new Date();
-      const changes: Update<OrganizationUser> = { id: userUuid, changes: { LastAdvisSent: todaysDate.toISOString() } };
+      const changes: Update<ODataOrganizationUser> = {
+        id: userUuid,
+        changes: { LastAdvisSent: todaysDate.toISOString() },
+      };
       return organizationUserAdapter.updateOne(changes, state);
     })
   ),

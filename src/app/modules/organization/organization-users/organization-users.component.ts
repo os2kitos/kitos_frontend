@@ -12,7 +12,7 @@ import {
 import { GridActionColumn } from 'src/app/shared/models/grid-action-column.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
-import { OrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
+import { ODataOrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.service';
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
@@ -223,11 +223,11 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
     this.dialog.open(CreateUserDialogComponent, { height: '95%', maxHeight: '750px' });
   }
 
-  public onEditUser(user: OrganizationUser): void {
+  public onEditUser(user: ODataOrganizationUser): void {
     this.dialogOpenerService.openEditUserDialog(user, false);
   }
 
-  public onDeleteUser(user: OrganizationUser): void {
+  public onDeleteUser(user: ODataOrganizationUser): void {
     const user$ = this.store.select(selectOrganizationUserByUuid(user.Uuid)).pipe(filterNullish());
     this.dialogOpenerService.openDeleteUserDialog(user$, false);
   }
