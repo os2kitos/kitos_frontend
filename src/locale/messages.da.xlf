@@ -5635,6 +5635,10 @@
         <source>Kunne ikke opdatere lokal tilpasning af moduler.</source>
         <target state="new">Kunne ikke opdatere lokal tilpasning af moduler.</target>
       </trans-unit>
+      <trans-unit id="4816237048891772520" datatype="html">
+        <source>Kunne ikke hente organisations brugere</source>
+        <target state="new">Kunne ikke hente organisations brugere</target>
+      </trans-unit>
       <trans-unit id="7887399807417246084" datatype="html">
         <source>Global admin</source>
         <target state="new">Global admin</target>

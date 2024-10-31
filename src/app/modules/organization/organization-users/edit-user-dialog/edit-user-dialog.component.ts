@@ -9,7 +9,7 @@ import { requiredIfDirtyValidator } from 'src/app/shared/validators/required-if-
 import { CreateUserDialogComponentStore } from '../create-user-dialog/create-user-dialog.component-store';
 
 import { MultiSelectDropdownComponent } from 'src/app/shared/components/dropdowns/multi-select-dropdown/multi-select-dropdown.component';
-import { OrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
+import { ODataOrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
 import { StartPreferenceChoice } from 'src/app/shared/models/organization/organization-user/start-preference.model';
 import {
   mapUserRoleChoice,
@@ -26,7 +26,7 @@ import { CopyRolesDialogComponent } from '../copy-roles-dialog/copy-roles-dialog
   providers: [CreateUserDialogComponentStore],
 })
 export class EditUserDialogComponent extends BaseUserDialogComponent implements OnInit, AfterViewInit {
-  @Input() public user!: OrganizationUser;
+  @Input() public user!: ODataOrganizationUser;
   @Input() public isNested!: boolean;
   @ViewChild(MultiSelectDropdownComponent)
   public multiSelectDropdown!: MultiSelectDropdownComponent<APIUserResponseDTO.RolesEnum>;

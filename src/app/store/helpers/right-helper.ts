@@ -1,4 +1,7 @@
-import { OrganizationUser, Right } from 'src/app/shared/models/organization/organization-user/organization-user.model';
+import {
+  ODataOrganizationUser,
+  Right,
+} from 'src/app/shared/models/organization/organization-user/organization-user.model';
 import { organizationUserAdapter } from '../organization/organization-user/reducer';
 import { OrganizationUserState } from '../organization/organization-user/state';
 
@@ -9,7 +12,7 @@ export function filterRightFromRights(rights: Right[], roleUuid: string, entityU
 export function updateStateOfUserRights(
   state: OrganizationUserState,
   userUuid: string,
-  updateFunction: (previousState: OrganizationUser) => Partial<OrganizationUser>
+  updateFunction: (previousState: ODataOrganizationUser) => Partial<ODataOrganizationUser>
 ): OrganizationUserState {
   const previousValue = state.entities[userUuid];
   if (!previousValue) return state;

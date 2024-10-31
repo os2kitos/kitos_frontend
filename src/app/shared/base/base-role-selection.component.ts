@@ -1,10 +1,10 @@
+import { Actions } from '@ngrx/effects';
 import { APIMutateRightRequestDTO, APIMutateUserRightsRequestDTO } from 'src/app/api/v2';
 import { RoleSelectionService } from 'src/app/shared/services/role-selector-service';
 import { roleToCopyRoleRequestDTO } from '../helpers/user-role.helpers';
-import { OrganizationUser, Right } from '../models/organization/organization-user/organization-user.model';
+import { ODataOrganizationUser, Right } from '../models/organization/organization-user/organization-user.model';
 import { RegistrationEntityTypes } from '../models/registrations/registration-entity-categories.model';
 import { BaseComponent } from './base.component';
-import { Actions } from '@ngrx/effects';
 
 export abstract class RoleSelectionBaseComponent extends BaseComponent {
   protected isLoading = false;
@@ -25,7 +25,7 @@ export abstract class RoleSelectionBaseComponent extends BaseComponent {
     return this.selectionService.getSelectedItems();
   }
 
-  public selectAll(user: OrganizationUser): void {
+  public selectAll(user: ODataOrganizationUser): void {
     this.selectionService.selectAll(user);
   }
 
@@ -33,7 +33,7 @@ export abstract class RoleSelectionBaseComponent extends BaseComponent {
     this.selectionService.deselectAll();
   }
 
-  public isAllSelected(user: OrganizationUser): boolean {
+  public isAllSelected(user: ODataOrganizationUser): boolean {
     return this.selectionService.isAllSelected(user);
   }
 
@@ -41,11 +41,7 @@ export abstract class RoleSelectionBaseComponent extends BaseComponent {
     return this.getSelectedUserRights().length > 0;
   }
 
-  public searchFn(search: string, user: OrganizationUser): boolean {
-    return user.Name.toLowerCase().includes(search.toLowerCase());
-  }
-
-  protected getRequest(user: OrganizationUser): APIMutateUserRightsRequestDTO {
+  protected getRequest(user: ODataOrganizationUser): APIMutateUserRightsRequestDTO {
     const request = {
       unitRights: this.getRequestForType(user, 'organization-unit'),
       systemRights: this.getRequestForType(user, 'it-system'),
@@ -55,7 +51,10 @@ export abstract class RoleSelectionBaseComponent extends BaseComponent {
     return request;
   }
 
-  private getRequestForType(user: OrganizationUser, entityType: RegistrationEntityTypes): APIMutateRightRequestDTO[] {
+  private getRequestForType(
+    user: ODataOrganizationUser,
+    entityType: RegistrationEntityTypes
+  ): APIMutateRightRequestDTO[] {
     return this.selectionService
       .getSelectedItemsOfType(entityType)
       .map((right) => roleToCopyRoleRequestDTO(user, right));

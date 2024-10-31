@@ -1,8 +1,8 @@
-import { APIMutateRightRequestDTO } from "src/app/api/v2";
-import { OrganizationUser, Right } from "../models/organization/organization-user/organization-user.model";
-import { RegistrationEntityTypes } from "../models/registrations/registration-entity-categories.model";
+import { APIMutateRightRequestDTO } from 'src/app/api/v2';
+import { ODataOrganizationUser, Right } from '../models/organization/organization-user/organization-user.model';
+import { RegistrationEntityTypes } from '../models/registrations/registration-entity-categories.model';
 
-export function getRights(user: OrganizationUser, entityType: RegistrationEntityTypes): Right[] {
+export function getRights(user: ODataOrganizationUser, entityType: RegistrationEntityTypes): Right[] {
   switch (entityType) {
     case 'organization-unit':
       return user.OrganizationUnitRights;
@@ -47,13 +47,15 @@ export function getTypeTitleNameByType(entityType: RegistrationEntityTypes): str
   }
 }
 
-export function userHasAnyRights(user: OrganizationUser): boolean {
-  return user.OrganizationUnitRights.length > 0 ||
+export function userHasAnyRights(user: ODataOrganizationUser): boolean {
+  return (
+    user.OrganizationUnitRights.length > 0 ||
     user.ItSystemRights.length > 0 ||
     user.ItContractRights.length > 0 ||
-    user.DataProcessingRegistrationRights.length > 0;
+    user.DataProcessingRegistrationRights.length > 0
+  );
 }
 
-export function roleToCopyRoleRequestDTO(user: OrganizationUser, role: Right): APIMutateRightRequestDTO {
+export function roleToCopyRoleRequestDTO(user: ODataOrganizationUser, role: Right): APIMutateRightRequestDTO {
   return { userUuid: user.Uuid, roleId: role.role.id, entityUuid: role.entity.uuid };
 }

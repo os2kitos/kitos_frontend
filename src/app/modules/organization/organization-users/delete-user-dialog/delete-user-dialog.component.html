@@ -15,15 +15,13 @@
       </app-paragraph>
 
       <ng-container *ngIf="hasRoles(user)">
-        <app-dropdown
-          (valueChange)="selectedUserChanged($event)"
-          [data]="users$ | async"
-          textField="Name"
+        <app-organization-user-dropdown
+          (userChange)="selectedUserChanged($event)"
+          [disabledUuids]="(disabledUuids$ | async) ?? []"
           text="Overfør roller til"
           i18n-text
-          [searchFn]="searchFn"
         >
-        </app-dropdown>
+        </app-organization-user-dropdown>
 
         <app-manage-user-role-table
           *ngIf="user.OrganizationUnitRights.length > 0"
@@ -56,12 +54,14 @@
         buttonStyle="secondary"
         color="warn"
         (buttonClick)="onTransferRoles(user)"
-        [disabled]="!isAnySelected() || !isUserSelected()"
+        [disabled]="!isAnySelected() || (isUserSelected() | async) !== true"
         i18n
       >
         Tildel valgte roller
       </app-button>
-      <app-button buttonStyle="primary" color="warn" (buttonClick)="onDeleteUser(user)" data-cy="delete-button" i18n> Slet bruger </app-button>
+      <app-button buttonStyle="primary" color="warn" (buttonClick)="onDeleteUser(user)" data-cy="delete-button" i18n>
+        Slet bruger
+      </app-button>
     </app-dialog-actions>
 
     <app-loading *ngIf="isLoading"></app-loading>

@@ -10,13 +10,13 @@ import {
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { SavedFilterState } from 'src/app/shared/models/grid/saved-filter-state.model';
-import { OrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
+import { ODataOrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
 
 export const OrganizationUserActions = createActionGroup({
   source: 'OrganizationUser',
   events: {
     'Get Organization Users': (odataString: string) => ({ odataString }),
-    'Get Organization Users Success ': (users: OrganizationUser[], total: number) => ({ users, total }),
+    'Get Organization Users Success ': (users: ODataOrganizationUser[], total: number) => ({ users, total }),
     'Get Organization Users Error': emptyProps(),
 
     'Update Grid State': (gridState: GridState) => ({ gridState }),
@@ -50,7 +50,11 @@ export const OrganizationUserActions = createActionGroup({
     'Update User Success': (user: APIUserResponseDTO) => ({ user }),
     'Update User Error': emptyProps(),
 
-    'Copy roles': (fromUserUuid: string, toUserUuid: string, request: APIMutateUserRightsRequestDTO) => ({ fromUserUuid, toUserUuid, request }),
+    'Copy roles': (fromUserUuid: string, toUserUuid: string, request: APIMutateUserRightsRequestDTO) => ({
+      fromUserUuid,
+      toUserUuid,
+      request,
+    }),
     'Copy roles success': emptyProps(),
     'Copy roles error': emptyProps(),
 
@@ -58,7 +62,11 @@ export const OrganizationUserActions = createActionGroup({
     'Delete User Success': (userUuid: string) => ({ userUuid }),
     'Delete User Error': emptyProps(),
 
-    'Transfer roles': (fromUserUuid: string, toUserUuid: string, request: APIMutateUserRightsRequestDTO) => ({ fromUserUuid, toUserUuid, request }),
+    'Transfer roles': (fromUserUuid: string, toUserUuid: string, request: APIMutateUserRightsRequestDTO) => ({
+      fromUserUuid,
+      toUserUuid,
+      request,
+    }),
     'Transfer roles success': emptyProps(),
     'Transfer roles error': emptyProps(),
   },
