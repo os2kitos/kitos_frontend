@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component, Inject, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { tapResponse } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { saveAs } from 'file-saver';
-import { catchError, first, map, mergeMap, of } from 'rxjs';
+import { catchError, finalize, first, map, mergeMap, of } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { LocalAdminImportEntityType } from 'src/app/shared/enums/local-admin-import-entity-type';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
@@ -23,6 +24,8 @@ export class LocalAdminBaseExcelExportComponent extends BaseComponent {
   public readonly excelForm: FormGroup;
   private readonly fileControl = 'file';
   public readonly organizationUuid$ = this.store.select(selectOrganizationUuid).pipe(filterNullish());
+  public isImporting = false;
+  
   constructor(
     private fb: FormBuilder,
     private store: Store,
@@ -83,10 +86,15 @@ export class LocalAdminBaseExcelExportComponent extends BaseComponent {
                 importOrgUnits: true,
                 body: formData,
               };
-
+              this.isImporting = true
               return this.excelService.postExcelWithFormData(requestParameters, this.type).pipe(
-                map(() => this.store.dispatch(ExcelImportActions.excelImportSuccess())),
-                catchError(() => this.handleExcelImportError())
+                tapResponse(
+                  () => this.store.dispatch(ExcelImportActions.excelImportSuccess()),
+                  () => this.handleExcelImportError()
+                ),
+                finalize(() => {
+                  this.isImporting = false;
+                })
               );
             })
           )
