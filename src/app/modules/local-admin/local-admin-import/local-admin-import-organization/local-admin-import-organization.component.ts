@@ -7,6 +7,6 @@ import { LocalAdminImportEntityType } from 'src/app/shared/enums/local-admin-imp
   styleUrl: './local-admin-import-organization.component.scss',
 })
 export class LocalAdminImportOrganizationComponent {
-  @Input() public baseHelpTextKey!: string;
+  @Input() public helpTextKey!: string;
   public readonly organizationOptions = LocalAdminImportEntityType.organization;
 }
