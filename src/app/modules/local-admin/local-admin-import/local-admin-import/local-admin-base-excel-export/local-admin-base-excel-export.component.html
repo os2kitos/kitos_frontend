@@ -4,18 +4,18 @@
   <form [formGroup]="excelForm" (ngSubmit)="onSubmit()">
     <app-standard-vertical-content-grid>
       <div>
-        <app-paragraph [bold]="true" i18n> Trin 1 - Hent og udfyld ark</app-paragraph>
+        <app-paragraph [bold]="true" i18n paragraphSize="medium"> Trin 1 - Hent og udfyld ark</app-paragraph>
         <app-button
           type="submit"
           buttonStyle="secondary"
           class="inline-block-button"
           (buttonClick)="getEntityExcel()"
           i18n
-          >Probably shouldn't be a button</app-button
+          >Excelark til import af {{ getEntityName() }}</app-button
         >
       </div>
       <div>
-        <app-paragraph [bold]="true" i18n> Trin 2 - Upload udfyldt ark</app-paragraph>
+        <app-paragraph [bold]="true" i18n paragraphSize="medium"> Trin 2 - Upload udfyldt ark</app-paragraph>
         <app-file-input (fileImported)="fileImported($event)"></app-file-input>
       </div>
       <div>

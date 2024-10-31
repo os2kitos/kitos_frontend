@@ -3,9 +3,13 @@
 .file-input-style {
   border: 1px solid $color-neutral-40;
   background-color: white;
-  padding-top: $padding-small;
-  padding-bottom: $padding-small;
+  padding-top: $padding-small + $padding-smaller;
+  padding-bottom: $padding-small + $padding-smaller;
   padding-left: $padding-medium;
   padding-right: $padding-medium;
   border-radius: 10px;
+  border-color: $color-primary;
+  width: 32.5%;
+  color: $color-primary;
+  font-weight: bold;
 }

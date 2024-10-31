@@ -94,4 +94,17 @@ export class LocalAdminBaseExcelExportComponent extends BaseComponent {
       );
     }
   }
+
+  public getEntityName(): string {
+    switch (this.type) {
+      case LocalAdminImportEntityType.organization:
+        return $localize`organisationsenheder`;
+      case LocalAdminImportEntityType.users:
+        return $localize`brugere`;
+      case LocalAdminImportEntityType.contracts:
+        return $localize`IT kontrakter`;
+      default:
+        throw new Error('Invalid type');
+  }
+  }
 }
