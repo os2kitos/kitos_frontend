@@ -4294,6 +4294,39 @@
       <trans-unit id="8164320094956220546" datatype="html">
         <source>Globale administratorer</source>
       </trans-unit>
+      <trans-unit id="4937157118885922622" datatype="html">
+        <source>Organisationsenheder</source>
+      </trans-unit>
+      <trans-unit id="6260424752629409127" datatype="html">
+        <source> Trin 2 - Upload udfyldt ark</source>
+      </trans-unit>
+      <trans-unit id="6814281110164273179" datatype="html">
+        <source>IT kontrakter</source>
+      </trans-unit>
+      <trans-unit id="6932865105766151309" datatype="html">
+        <source>Upload</source>
+      </trans-unit>
+      <trans-unit id="7673345037765032816" datatype="html">
+        <source>organisationsenheder</source>
+      </trans-unit>
+      <trans-unit id="7843941680333517057" datatype="html">
+        <source>Kunne ikke importere Excelarket</source>
+      </trans-unit>
+      <trans-unit id="801536030105611507" datatype="html">
+        <source>Via Excel</source>
+      </trans-unit>
+      <trans-unit id="848535043670651688" datatype="html">
+        <source>Excelark til import af <x id="INTERPOLATION" equiv-text="{{ getEntityName() }}"/></source>
+      </trans-unit>
+      <trans-unit id="8707180639932445169" datatype="html">
+        <source>Excelarket blev importeret</source>
+      </trans-unit>
+      <trans-unit id="9140168255051013410" datatype="html">
+        <source> Trin 1 - Hent og udfyld ark</source>
+      </trans-unit>
+      <trans-unit id="9155574452722521742" datatype="html">
+        <source>brugere</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
