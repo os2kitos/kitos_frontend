@@ -1,9 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { HttpClient, HttpContext, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { APIV2ExcelInternalINTERNALService, PostSingleExcelInternalV2PostOrgUnitsRequestParams } from 'src/app/api/v2';
 import { LocalAdminImportEntityType } from '../enums/local-admin-import-entity-type';
+
+export interface ExcelFile {
+  data: Blob;
+  fileName: string;
+}
 
 // 30/10/24 This class is a wrapper for the auto-generated excel API service, and manually switches to using the V1 controller whose post endpoints could not be recognized by swaggerGen.
 @Injectable({
@@ -14,6 +19,7 @@ export class APIExcelService {
   private defaultHeaders: HttpHeaders;
   private encoder: any;
   private configuration: any;
+  private fileNamePrefix = 'OS2KITOS';
 
   constructor(private httpClient: HttpClient, private apiService: APIV2ExcelInternalINTERNALService) {
     this.basePath = this.apiService['configuration'].basePath ?? '';
@@ -22,9 +28,34 @@ export class APIExcelService {
     this.configuration = this.apiService['configuration'];
   }
 
-  public getExcel(organizationUuid: string, type: LocalAdminImportEntityType): Observable<Blob> {
+  public getExcel(organizationUuid: string, type: LocalAdminImportEntityType): Observable<ExcelFile> {
     const entityName = this.getEntityName(type);
-    return this.getSingleExcelInternalV2GetByEntityName(organizationUuid, entityName);
+    const excelBlob$ = this.getSingleExcelInternalV2GetByEntityName(organizationUuid, entityName);
+    const entityFileName = this.getExcelFileName(type);
+    return excelBlob$.pipe(
+      map((blob) => ({
+        data: blob,
+        fileName: entityFileName,
+      }))
+    );
+  }
+
+  private getExcelFileName(entityType: LocalAdminImportEntityType) {
+    const entityFileName = this.getEntityFileName(entityType);
+    return `${this.fileNamePrefix} ${entityFileName}`;
+  }
+
+  private getEntityFileName(entityType: LocalAdminImportEntityType) {
+    switch (entityType) {
+      case LocalAdminImportEntityType.organization:
+        return $localize`Organisationsenheder`;
+      case LocalAdminImportEntityType.users:
+        return $localize`Brugere`;
+      case LocalAdminImportEntityType.contracts:
+        return $localize`IT Kontrakter`;
+      default:
+        throw new Error('Invalid type');
+    }
   }
 
   public postExcelWithFormData(

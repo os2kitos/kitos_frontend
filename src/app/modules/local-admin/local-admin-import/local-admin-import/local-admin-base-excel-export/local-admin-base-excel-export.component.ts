@@ -42,8 +42,8 @@ export class LocalAdminBaseExcelExportComponent extends BaseComponent {
           first(),
           mergeMap((orgUuid) => {
             return this.excelService.getExcel(orgUuid, this.type).pipe(
-              map((blob) => {
-                saveAs(blob); //include file names
+              map((excelFile) => {
+                saveAs(excelFile.data, excelFile.fileName);
               }),
               catchError(() => this.handleExcelImportError())
             );
