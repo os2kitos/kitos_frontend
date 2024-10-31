@@ -109,3 +109,28 @@ function removeNodeAndChildrenHelper(
 
   return node;
 }
+
+export function getUuidsOfEntityTreeNodeAndhildren(node: EntityTreeNode<never>): string[] {
+  let uuids: string[] = [node.uuid];
+
+  node.children.forEach((child) => {
+    uuids = uuids.concat(getUuidsOfEntityTreeNodeAndhildren(child));
+  });
+
+  return uuids;
+}
+
+export function findNodeByUuid(node: EntityTreeNode<never>, uuid: string): EntityTreeNode<never> | undefined {
+  if (node.uuid === uuid) {
+    return node;
+  }
+
+  for (const child of node.children) {
+    const foundNode = findNodeByUuid(child, uuid);
+    if (foundNode) {
+      return foundNode;
+    }
+  }
+
+  return undefined;
+}

@@ -9,9 +9,9 @@ import { APIOrganizationUnitResponseDTO } from 'src/app/api/v2';
 import { CreateSubunitDialogComponent } from 'src/app/modules/organization/organization-structure/create-subunit-dialog/create-subunit-dialog.component';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import {
-  mapTreeToIdentityNamePairs,
+  findNodeByUuid,
+  getUuidsOfEntityTreeNodeAndhildren,
   mapUnitsToTree,
-  removeNodeAndChildren,
 } from 'src/app/shared/helpers/hierarchy.helpers';
 import { EntityTreeNode, EntityTreeNodeMoveResult } from 'src/app/shared/models/structure/entity-tree-node.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
@@ -50,6 +50,18 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     map(([units, expandedNodeUuids]) => mapUnitsToTree(units, expandedNodeUuids))
   );
 
+  public readonly disabledUnitsUuids$ = this.unitTree$.pipe(
+    combineLatestWith(this.store.select(selectCurrentUnitUuid)),
+    map(([organizationUnits, currentUuid]) => {
+      if (organizationUnits.length === 0) throw new Error('No units found');
+      return findNodeByUuid(organizationUnits[0], currentUuid);
+    }),
+    map((node) => {
+      if (!node) throw new Error('Node not found');
+      return getUuidsOfEntityTreeNodeAndhildren(node);
+    })
+  );
+
   public readonly currentOrganizationUnit$ = this.organizationUnits$.pipe(
     combineLatestWith(this.currentUnitUuid$),
     map(([organizationUnits, currentUuid]) => {
@@ -69,14 +81,6 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
   public readonly isRootUnitSelected$ = this.currentUnitUuid$.pipe(
     combineLatestWith(this.rootUnitUuid$),
     map(([uuid, rootUuid]) => uuid === rootUuid)
-  );
-
-  public readonly validParentOrganizationUnits$ = this.unitTree$.pipe(
-    combineLatestWith(this.currentUnitUuid$),
-    map(([unitTree, currentUnitUuid]) => {
-      const filteredUnitTree = removeNodeAndChildren(unitTree, currentUnitUuid);
-      return mapTreeToIdentityNamePairs(filteredUnitTree);
-    })
   );
 
   private dragDisabledSubject: BehaviorSubject<boolean> = new BehaviorSubject(true);
@@ -178,6 +182,6 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     const dialogInstance = dialogRef.componentInstance;
     dialogInstance.unit$ = this.currentOrganizationUnit$;
     dialogInstance.rootUnitUuid$ = this.rootUnitUuid$;
-    dialogInstance.validParentOrganizationUnits$ = this.validParentOrganizationUnits$;
+    dialogInstance.disabledUnitsUuids$ = this.disabledUnitsUuids$;
   }
 }

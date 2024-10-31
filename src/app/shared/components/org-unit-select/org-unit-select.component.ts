@@ -20,6 +20,7 @@ export class OrgUnitSelectComponent extends BaseComponent implements OnInit {
   @Input() public disabledUnitsUuids?: string[] = [];
   @Input() public text = '';
   @Input() public showDescription = false;
+  @Input() public clearable = true;
 
   @Input() public formGroup?: FormGroup;
   @Input() public formName?: string;

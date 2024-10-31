@@ -11,6 +11,7 @@
       [appendTo]="appendTo"
       (filterChange)="(filterChange)"
       (valueChange)="onSelectionChange($event)"
+      [clearable]="clearable"
     >
     </app-tree-node-dropdown>
     <app-tree-node-dropdown
@@ -22,6 +23,7 @@
       [value]="value"
       (filterChange)="(filterChange)"
       (valueChange)="onSelectionChange($event)"
+      [clearable]="clearable"
     >
     </app-tree-node-dropdown>
   </ng-container>

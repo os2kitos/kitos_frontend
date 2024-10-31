@@ -2,6 +2,7 @@
   <ng-container *ngIf="formGroup" [formGroup]="formGroup">
     <ng-select
       class="{{ size }}"
+      [clearable]="clearable"
       [formControlName]="formName"
       [placeholder]="text"
       [items]="sortedData"
@@ -42,6 +43,7 @@
   <ng-select
     *ngIf="!formGroup"
     class="{{ size }}"
+    [clearable]="clearable"
     [placeholder]="text"
     [items]="sortedData"
     [bindLabel]="textField"
