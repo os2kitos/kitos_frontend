@@ -44,6 +44,11 @@ const routes: Routes = [
         loadChildren: () => import('./modules/local-admin/local-admin.module').then((m) => m.LocalAdminModule),
         canActivate: [AuthGuardService],
       },
+      {
+        path: AppPath.globalAdmin,
+        loadChildren: () => import('./modules/global-admin/global-admin.module').then((m) => m.GlobalAdminModule),
+        canActivate: [AuthGuardService],
+      }
     ],
   },
 ];

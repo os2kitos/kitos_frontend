@@ -5539,46 +5539,6 @@
         <source>Ændringer ifm. de seneste fem import operationer der indeholdte ændringer</source>
         <target state="new">Ændringer ifm. de seneste fem import operationer der indeholdte ændringer</target>
       </trans-unit>
-      <trans-unit id="6932865105766151309" datatype="html">
-        <source>Upload</source>
-        <target state="new">Upload</target>
-      </trans-unit>
-      <trans-unit id="9140168255051013410" datatype="html">
-        <source> Trin 1 - Hent og udfyld ark</source>
-        <target state="new"> Trin 1 - Hent og udfyld ark</target>
-      </trans-unit>
-      <trans-unit id="6260424752629409127" datatype="html">
-        <source> Trin 2 - Upload udfyldt ark</source>
-        <target state="new"> Trin 2 - Upload udfyldt ark</target>
-      </trans-unit>
-      <trans-unit id="801536030105611507" datatype="html">
-        <source>Via Excel</source>
-        <target state="new">Via Excel</target>
-      </trans-unit>
-      <trans-unit id="711516023435481653" datatype="html">
-        <source>Probably shouldn&apos;t be a button</source>
-        <target state="new">Probably shouldn&apos;t be a button</target>
-      </trans-unit>
-      <trans-unit id="8707180639932445169" datatype="html">
-        <source>Excelarket blev importeret</source>
-        <target state="new">Excelarket blev importeret</target>
-      </trans-unit>
-      <trans-unit id="7843941680333517057" datatype="html">
-        <source>Kunne ikke importere Excelarket</source>
-        <target state="new">Kunne ikke importere Excelarket</target>
-      </trans-unit>
-      <trans-unit id="3104778415715365281" datatype="html">
-        <source> Inkluder modulet <x id="INTERPOLATION" equiv-text="{{ getModuleText(moduleKey) }}"/> </source>
-        <target state="new"> Inkluder modulet <x id="INTERPOLATION" equiv-text="{{ getModuleText(moduleKey) }}"/> </target>
-      </trans-unit>
-      <trans-unit id="8666131066916332987" datatype="html">
-        <source>Ukendt modul</source>
-        <target state="new">Ukendt modul</target>
-      </trans-unit>
-      <trans-unit id="8276868235175330138" datatype="html">
-        <source> Tilpasning på feltniveau er endnu ikke muligt for dette faneblad. </source>
-        <target state="new"> Tilpasning på feltniveau er endnu ikke muligt for dette faneblad. </target>
-      </trans-unit>
       <trans-unit id="5646892360164613168" datatype="html">
         <source>Lokal tilpasning af brugerfladen</source>
         <target state="new">Lokal tilpasning af brugerfladen</target>
@@ -5591,21 +5551,9 @@
         <source>Lokal tilpasning af roller</source>
         <target state="new">Lokal tilpasning af roller</target>
       </trans-unit>
-      <trans-unit id="4599362408449001670" datatype="html">
-        <source>Hvilken kontrakt skal angive om databehandlingen er aktiv</source>
-        <target state="new">Hvilken kontrakt skal angive om databehandlingen er aktiv</target>
-      </trans-unit>
-      <trans-unit id="1991864228783701466" datatype="html">
-        <source>KontraktID</source>
-        <target state="new">KontraktID</target>
-      </trans-unit>
-      <trans-unit id="3252648604690804231" datatype="html">
-        <source>Leverandørs underskrift</source>
-        <target state="new">Leverandørs underskrift</target>
-      </trans-unit>
-      <trans-unit id="5311870289458484364" datatype="html">
-        <source>Gyldig fra/til</source>
-        <target state="new">Gyldig fra/til</target>
+      <trans-unit id="8276868235175330138" datatype="html">
+        <source> Tilpasning på feltniveau er endnu ikke muligt for dette faneblad. </source>
+        <target state="new"> Tilpasning på feltniveau er endnu ikke muligt for dette faneblad. </target>
       </trans-unit>
       <trans-unit id="2457952418192472950" datatype="html">
         <source>IT-Systemer i anvendelse</source>
@@ -5639,18 +5587,6 @@
         <source>Fanebladdet slås fra hvis alle felter/grupper fjernes, da siden ellers vil være uden indhold.</source>
         <target state="new">Fanebladdet slås fra hvis alle felter/grupper fjernes, da siden ellers vil være uden indhold.</target>
       </trans-unit>
-      <trans-unit id="1265710071714281214" datatype="html">
-        <source>Kunne ikke hente lokal tilpasning af moduler.</source>
-        <target state="new">Kunne ikke hente lokal tilpasning af moduler.</target>
-      </trans-unit>
-      <trans-unit id="749658656182538362" datatype="html">
-        <source>Lokal tilpasning af moduler blev opdateret.</source>
-        <target state="new">Lokal tilpasning af moduler blev opdateret.</target>
-      </trans-unit>
-      <trans-unit id="1398970779136530497" datatype="html">
-        <source>Kunne ikke opdatere lokal tilpasning af moduler.</source>
-        <target state="new">Kunne ikke opdatere lokal tilpasning af moduler.</target>
-      </trans-unit>
       <trans-unit id="3995718542795029514" datatype="html">
         <source>Kunne ikke hente lokal tilpasning af brugerfladen</source>
         <target state="new">Kunne ikke hente lokal tilpasning af brugerfladen</target>
@@ -5662,6 +5598,58 @@
       <trans-unit id="4888833496127267341" datatype="html">
         <source>Lokal tilpasning af brugerfladen blev opdateret</source>
         <target state="new">Lokal tilpasning af brugerfladen blev opdateret</target>
+      </trans-unit>
+      <trans-unit id="1265710071714281214" datatype="html">
+        <source>Kunne ikke hente lokal tilpasning af moduler.</source>
+        <target state="new">Kunne ikke hente lokal tilpasning af moduler.</target>
+      </trans-unit>
+      <trans-unit id="3104778415715365281" datatype="html">
+        <source> Inkluder modulet <x id="INTERPOLATION" equiv-text="{{ getModuleText(moduleKey) }}"/> </source>
+        <target state="new"> Inkluder modulet <x id="INTERPOLATION" equiv-text="{{ getModuleText(moduleKey) }}"/> </target>
+      </trans-unit>
+      <trans-unit id="8666131066916332987" datatype="html">
+        <source>Ukendt modul</source>
+        <target state="new">Ukendt modul</target>
+      </trans-unit>
+      <trans-unit id="4599362408449001670" datatype="html">
+        <source>Hvilken kontrakt skal angive om databehandlingen er aktiv</source>
+        <target state="new">Hvilken kontrakt skal angive om databehandlingen er aktiv</target>
+      </trans-unit>
+      <trans-unit id="1991864228783701466" datatype="html">
+        <source>KontraktID</source>
+        <target state="new">KontraktID</target>
+      </trans-unit>
+      <trans-unit id="3252648604690804231" datatype="html">
+        <source>Leverandørs underskrift</source>
+        <target state="new">Leverandørs underskrift</target>
+      </trans-unit>
+      <trans-unit id="5311870289458484364" datatype="html">
+        <source>Gyldig fra/til</source>
+        <target state="new">Gyldig fra/til</target>
+      </trans-unit>
+      <trans-unit id="749658656182538362" datatype="html">
+        <source>Lokal tilpasning af moduler blev opdateret.</source>
+        <target state="new">Lokal tilpasning af moduler blev opdateret.</target>
+      </trans-unit>
+      <trans-unit id="1398970779136530497" datatype="html">
+        <source>Kunne ikke opdatere lokal tilpasning af moduler.</source>
+        <target state="new">Kunne ikke opdatere lokal tilpasning af moduler.</target>
+      </trans-unit>
+      <trans-unit id="7887399807417246084" datatype="html">
+        <source>Global admin</source>
+        <target state="new">Global admin</target>
+      </trans-unit>
+      <trans-unit id="8164320094956220546" datatype="html">
+        <source>Globale administratorer</source>
+        <target state="new">Globale administratorer</target>
+      </trans-unit>
+      <trans-unit id="4007785449881706156" datatype="html">
+        <source>Lokale administratorer</source>
+        <target state="new">Lokale administratorer</target>
+      </trans-unit>
+      <trans-unit id="3949986260767737219" datatype="html">
+        <source>Hjælpetekster</source>
+        <target state="new">Hjælpetekster</target>
       </trans-unit>
     </body>
   </file>

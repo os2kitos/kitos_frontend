@@ -11,15 +11,14 @@
         <app-standard-vertical-content-grid class="basic-information-section">
           <app-paragraph paragraphSize="large" [bold]="true" i18n>Information om enhed</app-paragraph>
           <div>
-            <app-dropdown
-              [text]="(getParentUnitDropdownText() | async) ?? ''"
-              i18n-text
-              valueField="uuid"
-              [data]="validParentOrganizationUnits$ | async"
-              [formGroup]="baseInfoForm"
-              formName="parentUnitControl"
-              (blurEvent)="onParentUnitControlBlur()"
-            ></app-dropdown>
+            <app-org-unit-select
+            [text]="(getParentUnitDropdownText() | async) ?? ''"
+            i18n-text
+            [disabledUnitsUuids]="(disabledUnitsUuids$ | async) ?? []"
+            [clearable]="false"
+            [formGroup]="baseInfoForm"
+            formName="parentUnitControl"
+            ></app-org-unit-select>
             <app-textbox-info i18n>{{ getParentUnitHelpText() | async }}</app-textbox-info>
           </div>
 

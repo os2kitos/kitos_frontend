@@ -88,8 +88,21 @@ describe('navigation', () => {
   it('cannot see local admin menu item if not local admin', () => {
     cy.setup(false);
     cy.login('./shared/authorize-no-rights.json');
-  
+
     cy.hoverByDataCy('profile-menu');
     cy.getByDataCy('local-admin-menu-item').should('not.exist');
+  });
+
+  it('Can see global admin menu item if global admin', () => {
+    cy.hoverByDataCy('profile-menu');
+    cy.getByDataCy('global-admin-menu-item').should('exist');
+  });
+
+  it('Cannot see global admin menu item if not global admin', () => {
+    cy.setup(false);
+    cy.login('./shared/authorize-no-rights.json');
+
+    cy.hoverByDataCy('profile-menu');
+    cy.getByDataCy('global-admin-menu-item').should('not.exist');
   });
 });

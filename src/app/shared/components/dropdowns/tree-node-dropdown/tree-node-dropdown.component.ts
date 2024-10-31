@@ -10,6 +10,7 @@ import { TreeNodeModel } from '../../../models/tree-node.model';
 })
 export class TreeNodeDropdownComponent extends BaseDropdownComponent<TreeNodeModel> implements OnInit {
   @Input() public appendTo: string = '';
+  @Input() public clearable: boolean = true;
 
   constructor() {
     super();
