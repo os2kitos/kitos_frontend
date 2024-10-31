@@ -101,6 +101,10 @@ export class CreateUserDialogComponent extends BaseUserDialogComponent implement
         }
       })
     );
+
+    this.createForm.get('email')?.valueChanges.subscribe(() => {
+      this.createForm.get('repeatEmail')?.updateValueAndValidity();
+    });
   }
 
   public onCancel(): void {
