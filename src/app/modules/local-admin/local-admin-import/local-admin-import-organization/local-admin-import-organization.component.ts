@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { LocalAdminImportEntityType } from 'src/app/shared/enums/local-admin-import-entity-type';
 
 @Component({
@@ -7,5 +7,6 @@ import { LocalAdminImportEntityType } from 'src/app/shared/enums/local-admin-imp
   styleUrl: './local-admin-import-organization.component.scss',
 })
 export class LocalAdminImportOrganizationComponent {
+  @Input() public baseHelpTextKey!: string;
   public readonly organizationOptions = LocalAdminImportEntityType.organization;
 }
