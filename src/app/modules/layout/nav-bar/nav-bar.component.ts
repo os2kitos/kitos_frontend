@@ -20,7 +20,6 @@ export class NavBarComponent extends BaseComponent implements OnInit {
   public readonly AppPath = AppPath;
 
   public readonly user$ = this.store.select(selectUser);
-  public readonly userHasTriedAuthenticating$ = this.store.select(selectHasTriedAuthenticating);
   public readonly organizationName$ = this.store.select(selectOrganizationName);
   public readonly hasMultipleOrganizations$ = this.store.select(selectHasMultipleOrganizations);
   public readonly uiRootConfig$ = this.store.select(selectUIRootConfig);
@@ -30,9 +29,10 @@ export class NavBarComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.store.dispatch(OrganizationActions.getUIRootConfig())
     this.subscriptions.add(
-      combineLatest([this.userHasTriedAuthenticating$, this.router.events]).pipe(
-        filter(([userHasTriedAuthenticating, event]) => userHasTriedAuthenticating && event instanceof NavigationEnd),
+      combineLatest([this.user$, this.router.events]).pipe(
+        filter(([user, event]) => user !== undefined && event instanceof NavigationEnd),
         tap(() => this.store.dispatch(OrganizationActions.getUIRootConfig()))
       ).subscribe());
   }
