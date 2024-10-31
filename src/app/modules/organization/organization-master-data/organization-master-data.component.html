@@ -63,11 +63,23 @@
     ></app-textbox>
     <app-textbox
       i18n-text
-      text="Email"
+      text="Email (fritekst)"
       [formGroup]="dataResponsibleForm"
       formName="emailControl"
-      (valueChange)="patchMasterDataRolesDataResponsible()"
-    ></app-textbox>
+      (valueChange)="updateMasterDataRolesDataResponsibleEmailFreeText()"
+    >
+    </app-textbox>
+    <app-connected-dropdown
+      i18n-text
+      text="Email (fremsøg eksisterende bruger)"
+      [formGroup]="dataResponsibleForm"
+      formName="emailControlDropdown"
+      valueField="uuid"
+      [data$]="organizationUserIdentityNamePairs$"
+      [isLoading$]="organizationUsersLoading$"
+      (filterChange)="searchOrganizationUsers($event)"
+      (valueChange)="selectDataResponsibleFromOrganizationUsers($event)"
+    ></app-connected-dropdown>
     <app-textbox
       i18n-text
       text="Adresse"
