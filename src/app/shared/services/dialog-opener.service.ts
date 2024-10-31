@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Observable } from 'rxjs';
 import { DeleteUserDialogComponent } from 'src/app/modules/organization/organization-users/delete-user-dialog/delete-user-dialog.component';
 import { EditUserDialogComponent } from 'src/app/modules/organization/organization-users/edit-user-dialog/edit-user-dialog.component';
-import { OrganizationUser } from '../models/organization/organization-user/organization-user.model';
-import { Observable } from 'rxjs';
+import { ODataOrganizationUser } from '../models/organization/organization-user/organization-user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +13,7 @@ import { Observable } from 'rxjs';
 export class DialogOpenerService {
   constructor(private dialog: MatDialog) {}
 
-  public openEditUserDialog(user: OrganizationUser, nested: boolean): MatDialogRef<EditUserDialogComponent> {
+  public openEditUserDialog(user: ODataOrganizationUser, nested: boolean): MatDialogRef<EditUserDialogComponent> {
     const dialogRef = this.dialog.open(EditUserDialogComponent, {
       height: '95%',
       maxHeight: '750px',
@@ -24,10 +24,15 @@ export class DialogOpenerService {
   }
 
   public openDeleteUserDialog(
-    user$: Observable<OrganizationUser>,
+    user$: Observable<ODataOrganizationUser>,
     nested: boolean
   ): MatDialogRef<DeleteUserDialogComponent> {
-    const dialogRef = this.dialog.open(DeleteUserDialogComponent, { width: '50%', minWidth: '600px', height: 'auto', maxHeight: '90vh%' });
+    const dialogRef = this.dialog.open(DeleteUserDialogComponent, {
+      width: '50%',
+      minWidth: '600px',
+      height: 'auto',
+      maxHeight: '90vh%',
+    });
     dialogRef.componentInstance.user$ = user$;
     dialogRef.componentInstance.nested = nested;
     return dialogRef;

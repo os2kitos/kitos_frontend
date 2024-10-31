@@ -1,6 +1,6 @@
 import { mapStartPreferenceChoiceRaw, StartPreferenceChoice } from './start-preference.model';
 
-export interface OrganizationUser {
+export interface ODataOrganizationUser {
   id: string;
   Uuid: string;
   Name: string;
@@ -26,13 +26,13 @@ export interface OrganizationUser {
 }
 
 export interface Right {
-  role: { name: string; uuid: string, id: number };
+  role: { name: string; uuid: string; id: number };
   entity: { name: string; uuid: string };
   writeAccess: boolean;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const adaptOrganizationUser = (value: any): OrganizationUser | undefined => {
+export const adaptOrganizationUser = (value: any): ODataOrganizationUser | undefined => {
   if (!value.Uuid) return;
 
   const roles = value.OrganizationUnitRights.map((right: { Role: { Name: string } }) => right.Role?.Name)

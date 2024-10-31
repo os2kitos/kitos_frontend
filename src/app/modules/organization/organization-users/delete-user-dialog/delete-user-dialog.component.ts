@@ -1,17 +1,15 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
-import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
-import { map, Observable } from 'rxjs';
+import { BehaviorSubject, first, map, Observable } from 'rxjs';
 import { RoleSelectionBaseComponent } from 'src/app/shared/base/base-role-selection.component';
-import { DropdownComponent } from 'src/app/shared/components/dropdowns/dropdown/dropdown.component';
 import { userHasAnyRights } from 'src/app/shared/helpers/user-role.helpers';
-import { OrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
+import { OrganizationUserV2 } from 'src/app/shared/models/organization/organization-user/organization-user-v2.model';
+import { ODataOrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
 import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
 import { RoleSelectionService } from 'src/app/shared/services/role-selector-service';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
-import { selectAll } from 'src/app/store/organization/organization-user/selectors';
 import { selectOrganizationName } from 'src/app/store/user-store/selectors';
 
 @Component({
@@ -21,9 +19,8 @@ import { selectOrganizationName } from 'src/app/store/user-store/selectors';
   providers: [RoleSelectionService],
 })
 export class DeleteUserDialogComponent extends RoleSelectionBaseComponent implements OnInit {
-  @Input() user$!: Observable<OrganizationUser>;
+  @Input() user$!: Observable<ODataOrganizationUser>;
   @Input() nested: boolean = false;
-  @ViewChild(DropdownComponent) dropdownComponent!: DropdownComponent<OrganizationUser>;
 
   constructor(
     private store: Store,
@@ -41,33 +38,32 @@ export class DeleteUserDialogComponent extends RoleSelectionBaseComponent implem
 
   public readonly organizationName$: Observable<string | undefined> = this.store.select(selectOrganizationName);
 
-  public readonly users$: Observable<OrganizationUser[]> = this.store.select(selectAll).pipe(
-    concatLatestFrom(() => this.user$),
-    map(([users, user]) => users.filter((u) => u.Uuid !== user.Uuid))
-  );
-  public selectedUser: OrganizationUser | undefined = undefined;
+  public disabledUuids$!: Observable<string[]>;
+
+  public selectedUser$: BehaviorSubject<OrganizationUserV2 | undefined> = new BehaviorSubject<
+    OrganizationUserV2 | undefined
+  >(undefined);
 
   ngOnInit(): void {
     this.subscriptions.add(
-      this.actions$.pipe(ofType(OrganizationUserActions.copyRolesSuccess)).subscribe(() => {
+      this.actions$.pipe(ofType(OrganizationUserActions.transferRolesSuccess)).subscribe(() => {
         this.selectionService.deselectAll();
-        if (this.dropdownComponent) {
-          this.dropdownComponent.clear();
-        }
-        this.selectedUser = undefined;
+        this.selectedUser$.next(undefined);
       })
     );
+
+    this.disabledUuids$ = this.user$.pipe(map((user) => [user.Uuid]));
   }
 
-  public selectedUserChanged(user: OrganizationUser | undefined | null): void {
-    this.selectedUser = user ?? undefined;
+  public selectedUserChanged(user: OrganizationUserV2 | undefined | null): void {
+    this.selectedUser$.next(user ?? undefined);
   }
 
-  public hasRoles(user: OrganizationUser): boolean {
+  public hasRoles(user: ODataOrganizationUser): boolean {
     return userHasAnyRights(user);
   }
 
-  public onDeleteUser(user: OrganizationUser): void {
+  public onDeleteUser(user: ODataOrganizationUser): void {
     this.confirmActionService.confirmAction({
       category: ConfirmActionCategory.Warning,
       onConfirm: () => this.deleteUser(user),
@@ -75,7 +71,7 @@ export class DeleteUserDialogComponent extends RoleSelectionBaseComponent implem
     });
   }
 
-  private deleteUser(user: OrganizationUser): void {
+  private deleteUser(user: ODataOrganizationUser): void {
     this.subscriptions.add(
       this.actions$.pipe(ofType(OrganizationUserActions.deleteUserSuccess)).subscribe(() => {
         this.dialogRef.close();
@@ -84,7 +80,7 @@ export class DeleteUserDialogComponent extends RoleSelectionBaseComponent implem
     this.store.dispatch(OrganizationUserActions.deleteUser(user.Uuid));
   }
 
-  public onTransferRoles(user: OrganizationUser): void {
+  public onTransferRoles(user: ODataOrganizationUser): void {
     this.confirmActionService.confirmAction({
       category: ConfirmActionCategory.Warning,
       onConfirm: () => this.transferRoles(user),
@@ -92,27 +88,24 @@ export class DeleteUserDialogComponent extends RoleSelectionBaseComponent implem
     });
   }
 
-  public isUserSelected(): boolean {
-    return (
-      this.selectedUser !== undefined &&
-      this.dropdownComponent?.value !== null &&
-      this.dropdownComponent?.value !== undefined
-    );
+  public isUserSelected(): Observable<boolean> {
+    return this.selectedUser$.pipe(map((user) => user !== undefined));
   }
 
-  private transferRoles(user: OrganizationUser): void {
-    const selectedUser = this.selectedUser;
-    if (!selectedUser) return;
-    const request = this.getRequest(user);
-    this.isLoading = true;
-    this.store.dispatch(OrganizationUserActions.transferRoles(user.Uuid, selectedUser.Uuid, request));
+  private transferRoles(user: ODataOrganizationUser): void {
+    this.selectedUser$.pipe(first()).subscribe((selectedUser) => {
+      if (!selectedUser) return;
+      const request = this.getRequest(user);
+      this.isLoading = true;
+      this.store.dispatch(OrganizationUserActions.transferRoles(user.Uuid, selectedUser.uuid, request));
+    });
   }
 
-  public getUserName(user: OrganizationUser): string {
+  public getUserName(user: ODataOrganizationUser): string {
     return `${user.FirstName} ${user.LastName}`;
   }
 
-  public shouldShowContent(user: OrganizationUser): boolean {
+  public shouldShowContent(user: ODataOrganizationUser): boolean {
     return this.hasRoles(user) && !this.isLoading;
   }
 }

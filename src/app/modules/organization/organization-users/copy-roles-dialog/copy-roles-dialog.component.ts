@@ -1,14 +1,13 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { map, Observable } from 'rxjs';
+import { BehaviorSubject, first, map, Observable } from 'rxjs';
 import { RoleSelectionBaseComponent } from 'src/app/shared/base/base-role-selection.component';
-import { DropdownComponent } from 'src/app/shared/components/dropdowns/dropdown/dropdown.component';
 import { userHasAnyRights } from 'src/app/shared/helpers/user-role.helpers';
-import { OrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
+import { OrganizationUserV2 } from 'src/app/shared/models/organization/organization-user/organization-user-v2.model';
+import { ODataOrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
 import { RoleSelectionService } from 'src/app/shared/services/role-selector-service';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
-import { selectAll } from 'src/app/store/organization/organization-user/selectors';
 
 @Component({
   selector: 'app-copy-roles-dialog',
@@ -17,8 +16,7 @@ import { selectAll } from 'src/app/store/organization/organization-user/selector
   providers: [RoleSelectionService],
 })
 export class CopyRolesDialogComponent extends RoleSelectionBaseComponent implements OnInit {
-  @Input() user!: OrganizationUser;
-  @ViewChild(DropdownComponent) dropdownComponent!: DropdownComponent<OrganizationUser>;
+  @Input() user!: ODataOrganizationUser;
 
   constructor(private store: Store, selectionService: RoleSelectionService, actions$: Actions) {
     super(
@@ -32,21 +30,20 @@ export class CopyRolesDialogComponent extends RoleSelectionBaseComponent impleme
     this.subscriptions.add(
       this.actions$.pipe(ofType(OrganizationUserActions.copyRolesSuccess)).subscribe(() => {
         this.selectionService.deselectAll();
-        if (this.dropdownComponent) {
-          this.dropdownComponent.clear();
-        }
-        this.selectedUser = undefined;
+        this.selectedUser$.next(undefined);
       })
     );
+    this.disabledUuids = [this.user.Uuid];
   }
 
-  public readonly users$: Observable<OrganizationUser[]> = this.store
-    .select(selectAll)
-    .pipe(map((users) => users.filter((user) => user.Uuid !== this.user.Uuid)));
-  public selectedUser: OrganizationUser | undefined = undefined;
+  public disabledUuids!: string[];
 
-  public selectedUserChanged(user: OrganizationUser | undefined | null): void {
-    this.selectedUser = user ?? undefined;
+  public selectedUser$: BehaviorSubject<OrganizationUserV2 | undefined> = new BehaviorSubject<
+    OrganizationUserV2 | undefined
+  >(undefined);
+
+  public selectedUserChanged(user: OrganizationUserV2 | undefined | null): void {
+    this.selectedUser$.next(user ?? undefined);
   }
 
   public getSnackbarText(): string {
@@ -54,19 +51,16 @@ export class CopyRolesDialogComponent extends RoleSelectionBaseComponent impleme
   }
 
   public onCopyRoles(): void {
-    const selectedUser = this.selectedUser;
-    if (!selectedUser) return;
-    const request = this.getRequest(this.user);
-    this.isLoading = true;
-    this.store.dispatch(OrganizationUserActions.copyRoles(this.user.Uuid, selectedUser.Uuid, request));
+    this.selectedUser$.pipe(first()).subscribe((selectedUser) => {
+      if (!selectedUser) return;
+      const request = this.getRequest(this.user);
+      this.isLoading = true;
+      this.store.dispatch(OrganizationUserActions.copyRoles(this.user.Uuid, selectedUser.uuid, request));
+    });
   }
 
-  public isUserSelected(): boolean {
-    return (
-      this.selectedUser !== undefined &&
-      this.dropdownComponent.value !== null &&
-      this.dropdownComponent.value !== undefined
-    );
+  public isUserSelected(): Observable<boolean> {
+    return this.selectedUser$.pipe(map((user) => user !== undefined));
   }
 
   public userHasAnyRight(): boolean {
