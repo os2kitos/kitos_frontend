@@ -50,7 +50,6 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
     ...this.commonNameControls(),
     ...this.commonOrganizationControls(),
     ...this.commonContactControls(),
-    emailControlDropdown: new FormControl<IdentityNamePair | undefined>(undefined),
   });
 
   public readonly dataProtectionAdvisorForm = new FormGroup({
@@ -174,6 +173,20 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
     }
   }
 
+  public patchMasterDataRolesDataResponsible() {
+    if (this.dataResponsibleForm.valid) {
+      const dataResponsible: APIDataResponsibleRequestDTO = {};
+      const controls = this.dataResponsibleForm.controls;
+      dataResponsible.address = controls.addressControl.value ?? undefined;
+      dataResponsible.cvr = controls.cvrControl.value ?? undefined;
+      dataResponsible.email = controls.emailControl.value ?? undefined;
+      dataResponsible.name = controls.nameControl.value ?? undefined;
+      dataResponsible.phone = controls.phoneControl.value ?? undefined;
+
+      this.store.dispatch(OrganizationActions.patchMasterDataRoles({ request: { dataResponsible } }));
+    }
+  }
+
   public patchMasterDataRolesDataProtectionAdvisor() {
     if (this.dataProtectionAdvisorForm.valid) {
       const dataProtectionAdvisor: APIDataProtectionAdvisorRequestDTO = {};
@@ -197,28 +210,6 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
     controls.emailControlDropdown.patchValue(undefined);
     this.toggleContactPersonNonEmailControls(true);
     this.patchMasterDataRolesContactPerson();
-  }
-
-  public updateMasterDataRolesDataResponsibleEmailFreeText() {
-    const controls = this.dataResponsibleForm.controls;
-    controls.emailControlDropdown.patchValue(undefined);
-    this.toggleDataResponsibleNonEmailControls(true);
-    this.patchMasterDataRolesDataResponsible();
-  }
-
-  public patchMasterDataRolesDataResponsible(useEmailFromDropdown: boolean = false) {
-    if (this.dataResponsibleForm.valid) {
-      const dataResponsible: APIDataResponsibleRequestDTO = {};
-      const controls = this.dataResponsibleForm.controls;
-      const email = useEmailFromDropdown ? controls.emailControlDropdown.value?.name : controls.emailControl.value;
-      dataResponsible.address = controls.addressControl.value ?? undefined;
-      dataResponsible.cvr = controls.cvrControl.value ?? undefined;
-      dataResponsible.email = email ?? undefined;
-      dataResponsible.name = controls.nameControl.value ?? undefined;
-      dataResponsible.phone = controls.phoneControl.value ?? undefined;
-
-      this.store.dispatch(OrganizationActions.patchMasterDataRoles({ request: { dataResponsible } }));
-    }
   }
 
   public patchMasterDataRolesContactPerson(useEmailFromDropdown: boolean = false) {
@@ -259,31 +250,6 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
           }
 
           if (organizationUuid) {
-            this.patchMasterDataRolesDataResponsible(true);
-          }
-        })
-    );
-  }
-
-  public selectDataResponsibleFromOrganizationUsers(selectedUserUuid?: string) {
-    this.subscriptions.add(
-      combineLatest([this.organizationUuid$, this.organizationUsers$])
-        .pipe(first())
-        .subscribe(([organizationUuid, organizationUsers]) => {
-          if (selectedUserUuid) {
-            const selectedUser = organizationUsers.find((u) => u.uuid === selectedUserUuid);
-
-            this.dataResponsibleForm.patchValue({
-              nameControl: selectedUser?.firstName,
-              phoneControl: selectedUser?.phone,
-            });
-
-            this.toggleDataResponsibleNonEmailControls(false);
-          } else {
-            this.toggleDataResponsibleNonEmailControls(true);
-          }
-
-          if (organizationUuid) {
             this.patchMasterDataRolesContactPerson(true);
           }
         })
@@ -292,17 +258,6 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
 
   public searchOrganizationUsers(search?: string) {
     this.componentStore.searchOrganizationUsers(search);
-  }
-
-  private toggleDataResponsibleNonEmailControls(enable: boolean){
-    const controls = this.dataResponsibleForm.controls;
-    if (enable) {
-      controls.nameControl.enable();
-      controls.phoneControl.enable();
-    } else {
-      controls.nameControl.disable();
-      controls.phoneControl.disable();
-    }
   }
 
   private toggleContactPersonNonEmailControls(enable: boolean) {
