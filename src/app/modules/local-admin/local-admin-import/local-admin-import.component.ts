@@ -1,12 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { Store } from '@ngrx/store';
 import { SegmentButtonOption } from 'src/app/shared/components/segment/segment.component';
-
-enum LocalAdminImportTabOptions {
-  organization = 'organization',
-  users = 'users',
-  contracts = 'contracts',
-}
+import { LocalAdminImportEntityType } from 'src/app/shared/enums/local-admin-import-entity-type';
 
 @Component({
   selector: 'app-local-admin-import',
@@ -14,14 +8,16 @@ enum LocalAdminImportTabOptions {
   styleUrl: './local-admin-import.component.scss',
 })
 export class LocalAdminImportComponent {
+  public readonly contractsType = LocalAdminImportEntityType.contracts;
+  public readonly usersType = LocalAdminImportEntityType.users;
+  public readonly ImportSelectOption = LocalAdminImportEntityType;
+  public readonly baseHelpTextKey = 'local-config.import';
 
-  public readonly ImportSelectOption = LocalAdminImportTabOptions;
+  @Input() public selected = LocalAdminImportEntityType.organization;
 
-  @Input() public selected = LocalAdminImportTabOptions.organization;
-
-  public showingOptions: SegmentButtonOption<LocalAdminImportTabOptions>[] = [
-    { text: $localize`Organisation`, value: LocalAdminImportTabOptions.organization },
-    { text: $localize`Brugere`, value: LocalAdminImportTabOptions.users },
-    { text: $localize`IT Kontrakter`, value: LocalAdminImportTabOptions.contracts },
+  public showingOptions: SegmentButtonOption<LocalAdminImportEntityType>[] = [
+    { text: $localize`Organisation`, value: LocalAdminImportEntityType.organization },
+    { text: $localize`Brugere`, value: LocalAdminImportEntityType.users },
+    { text: $localize`IT Kontrakter`, value: LocalAdminImportEntityType.contracts },
   ];
 }
