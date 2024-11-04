@@ -50,6 +50,7 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
     ...this.commonNameControls(),
     ...this.commonOrganizationControls(),
     ...this.commonContactControls(),
+    emailControlDropdown: new FormControl<IdentityNamePair | undefined>(undefined),
   });
 
   public readonly dataProtectionAdvisorForm = new FormGroup({
@@ -123,19 +124,38 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
           cvrControl: dataResponsible.cvr,
           addressControl: dataResponsible.address,
         });
-
-        const dataProtectionAdvisor = masterDataRoles.DataProtectionAdvisor;
-        this.dataProtectionAdvisorForm.patchValue({
-          nameControl: dataProtectionAdvisor.name,
-          emailControl: dataProtectionAdvisor.email,
-          phoneControl: dataProtectionAdvisor.phone,
-          cvrControl: dataProtectionAdvisor.cvr,
-          addressControl: dataProtectionAdvisor.address,
-        });
       })
     );
 
     this.setupContactPersonFields();
+    this.setupDataResponsibleFields();
+  }
+
+  private setupDataResponsibleFields() {
+    this.subscriptions.add(
+      combineLatest([this.organizationUserIdentityNamePairs$, this.organizationMasterDataRoles$]).subscribe(
+        ([organizationUserIdentityNamePairs, organizationMasterDataRoles]) => {
+          const dataResponsible = organizationMasterDataRoles.DataResponsible;
+          this.dataResponsibleForm.patchValue({
+            nameControl: dataResponsible.name,
+            phoneControl: dataResponsible.phone,
+          });
+
+          const dataResponsibleFromOrganizationUsers = organizationUserIdentityNamePairs.find(
+            (user) => user.name === dataResponsible.email
+          );
+
+          if (dataResponsibleFromOrganizationUsers) {
+            this.toggleDataResponsibleNonEmailControls(false);
+            this.dataResponsibleForm.patchValue({
+              emailControl: undefined,
+              emailControlDropdown: dataResponsibleFromOrganizationUsers,
+            });
+          }
+          else this.dataResponsibleForm.controls.emailControl.patchValue(dataResponsible.email);
+        }
+      )
+    );
   }
 
   private setupContactPersonFields() {
@@ -159,7 +179,8 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
               emailControl: undefined,
               emailControlDropdown: contactPersonFromOrganizationUsers,
             });
-          } else this.contactPersonForm.controls.emailControl.patchValue(contactPerson.email);
+          }
+          else this.contactPersonForm.controls.emailControl.patchValue(contactPerson.email);
         }
       )
     );
@@ -173,17 +194,36 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
     }
   }
 
-  public patchMasterDataRolesDataResponsible() {
+  public patchMasterDataRolesDataResponsible(useEmailFromDropdown: boolean = false) {
     if (this.dataResponsibleForm.valid) {
       const dataResponsible: APIDataResponsibleRequestDTO = {};
       const controls = this.dataResponsibleForm.controls;
+      const email = useEmailFromDropdown ? controls.emailControlDropdown.value?.name : controls.emailControl.value;
       dataResponsible.address = controls.addressControl.value ?? undefined;
       dataResponsible.cvr = controls.cvrControl.value ?? undefined;
-      dataResponsible.email = controls.emailControl.value ?? undefined;
+      dataResponsible.email = email ?? undefined;
       dataResponsible.name = controls.nameControl.value ?? undefined;
       dataResponsible.phone = controls.phoneControl.value ?? undefined;
 
       this.store.dispatch(OrganizationActions.patchMasterDataRoles({ request: { dataResponsible } }));
+    }
+  }
+
+  public patchMasterDataRolesContactPerson(useEmailFromDropdown: boolean = false) {
+    if (this.contactPersonForm.valid) {
+      const contactPerson: APIContactPersonRequestDTO = {};
+      const controls = this.contactPersonForm.controls;
+      const email = useEmailFromDropdown ? controls.emailControlDropdown.value?.name : controls.emailControl.value;
+      contactPerson.lastName = controls.lastNameControl.value ?? undefined;
+      contactPerson.email = email ?? undefined;
+      contactPerson.name = controls.nameControl.value ?? undefined;
+      contactPerson.phoneNumber = controls.phoneControl.value ?? undefined;
+
+      this.store.dispatch(
+        OrganizationActions.patchMasterDataRoles({
+          request: { contactPerson },
+        })
+      );
     }
   }
 
@@ -212,22 +252,36 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
     this.patchMasterDataRolesContactPerson();
   }
 
-  public patchMasterDataRolesContactPerson(useEmailFromDropdown: boolean = false) {
-    if (this.contactPersonForm.valid) {
-      const contactPerson: APIContactPersonRequestDTO = {};
-      const controls = this.contactPersonForm.controls;
-      const email = useEmailFromDropdown ? controls.emailControlDropdown.value?.name : controls.emailControl.value;
-      contactPerson.lastName = controls.lastNameControl.value ?? undefined;
-      contactPerson.email = email ?? undefined;
-      contactPerson.name = controls.nameControl.value ?? undefined;
-      contactPerson.phoneNumber = controls.phoneControl.value ?? undefined;
+  public updateMasterDataRolesDataResponsibleEmailFreeText() {
+    const controls = this.dataResponsibleForm.controls;
+    controls.emailControlDropdown.patchValue(undefined);
+    this.toggleDataResponsibleNonEmailControls(true);
+    this.patchMasterDataRolesDataResponsible();
+  }
 
-      this.store.dispatch(
-        OrganizationActions.patchMasterDataRoles({
-          request: { contactPerson },
+  public selectDataResponsibleFromOrganizationUsers(selectedUserUuid?: string) {
+    this.subscriptions.add(
+      combineLatest([this.organizationUuid$, this.organizationUsers$])
+        .pipe(first())
+        .subscribe(([organizationUuid, organizationUsers]) => {
+          if (selectedUserUuid) {
+            const selectedUser = organizationUsers.find((u) => u.uuid === selectedUserUuid);
+
+            this.dataResponsibleForm.patchValue({
+              nameControl: selectedUser?.firstName,
+              phoneControl: selectedUser?.phone,
+            });
+
+            this.toggleDataResponsibleNonEmailControls(false);
+          } else {
+            this.toggleDataResponsibleNonEmailControls(true);
+          }
+
+          if (organizationUuid) {
+            this.patchMasterDataRolesDataResponsible(true);
+          }
         })
-      );
-    }
+    );
   }
 
   public selectContactPersonFromOrganizationUsers(selectedUserUuid?: string) {
@@ -269,6 +323,17 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
     } else {
       controls.nameControl.disable();
       controls.lastNameControl.disable();
+      controls.phoneControl.disable();
+    }
+  }
+
+  private toggleDataResponsibleNonEmailControls(enable: boolean) {
+    const controls = this.dataResponsibleForm.controls;
+    if (enable) {
+      controls.nameControl.enable();
+      controls.phoneControl.enable();
+    } else {
+      controls.nameControl.disable();
       controls.phoneControl.disable();
     }
   }
