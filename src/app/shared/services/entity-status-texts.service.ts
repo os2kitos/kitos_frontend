@@ -47,6 +47,10 @@ export class EntityStatusTextsService {
       trueString: this.ACTIVE_TEXT,
       falseString: this.INACTIVE_TEXT,
     },
+    'global-admin-organization': {
+      trueString: this.ACTIVE_TEXT,
+      falseString: this.INACTIVE_TEXT,
+    },
   };
 
   public map(category: RegistrationEntityTypes): EntityStatusTexts {

@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppPath } from './shared/enums/app-path';
 import { AuthGuardService } from './shared/guards/auth-guard.service';
 import { StartupGuardService } from './shared/guards/startup-guard.service';
+import { LocalAdminGuardService } from './shared/guards/local-admin-guard.service';
+import { GlobalAdminGuardService } from './shared/guards/global-admin-guard.service';
 
 const routes: Routes = [
   {
@@ -42,12 +44,12 @@ const routes: Routes = [
       {
         path: AppPath.localAdmin,
         loadChildren: () => import('./modules/local-admin/local-admin.module').then((m) => m.LocalAdminModule),
-        canActivate: [AuthGuardService],
+        canActivate: [LocalAdminGuardService],
       },
       {
         path: AppPath.globalAdmin,
         loadChildren: () => import('./modules/global-admin/global-admin.module').then((m) => m.GlobalAdminModule),
-        canActivate: [AuthGuardService],
+        canActivate: [GlobalAdminGuardService],
       }
     ],
   },

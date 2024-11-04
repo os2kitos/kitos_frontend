@@ -39,8 +39,11 @@ export const OrganizationActions = createActionGroup({
 
     'Update Grid State': (gridState: GridState) => ({ gridState }),
 
-    'Save Organizations Filter': (localStoreKey: string) => ({ localStoreKey }),
-    'Apply Organizations Filter': (state: SavedFilterState) => ({ state }),
+    'Save Local Admin Organizations Filter': (localStoreKey: string) => ({ localStoreKey }),
+    'Apply Local Admin Organizations Filter': (state: SavedFilterState) => ({ state }),
+
+    'Save Global Admin Organizations Filter': (localStoreKey: string) => ({ localStoreKey }),
+    'Apply Global Admin Organizations Filter': (state: SavedFilterState) => ({ state }),
 
     'Get UI Root Config': emptyProps(),
     'Get UI Root Config success': props<{ uiRootConfig: UIRootConfig }>(),

@@ -8,9 +8,9 @@ import { ITContractActions } from '../it-contract/actions';
 import { ITInterfaceActions } from '../it-system-interfaces/actions';
 import { ITSystemUsageActions } from '../it-system-usage/actions';
 import { ITSystemActions } from '../it-system/actions';
+import { OrganizationActions } from '../organization/actions';
 import { OrganizationUserActions } from '../organization/organization-user/actions';
 import { GridExportActions } from './actions';
-import { OrganizationActions } from '../organization/actions';
 
 @Injectable()
 export class GridExportEffects {
@@ -38,6 +38,7 @@ export class GridExportEffects {
               case 'organization-user':
                 return of(OrganizationUserActions.getOrganizationUsers(odataString));
               case 'local-admin-organization':
+              case 'global-admin-organization':
                 return of(OrganizationActions.getOrganizations(odataString));
               default:
                 throw 'Grid Effects Excel export not implemented for entity type: ' + action.entityType;

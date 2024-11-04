@@ -13,6 +13,7 @@ import { GlobalAdminItContractComponent } from './global-admin-it-contract/globa
 import { GlobalAdminDataProcessingComponent } from './global-admin-data-processing/global-admin-data-processing.component';
 import { GlobalAdminOtherComponent } from './global-admin-other/global-admin-other.component';
 import { GlobalAdminHelpTextsComponent } from './global-admin-help-texts/global-admin-help-texts.component';
+import { GlobalAdminOrganizationsGridComponent } from './global-admin-organizations/global-admin-organizations-grid/global-admin-organizations-grid.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { GlobalAdminHelpTextsComponent } from './global-admin-help-texts/global-
     GlobalAdminDataProcessingComponent,
     GlobalAdminOtherComponent,
     GlobalAdminHelpTextsComponent,
+    GlobalAdminOrganizationsGridComponent,
   ],
   imports: [CommonModule, ComponentsModule, SharedModule, GlobalAdminRouterModule],
 })
