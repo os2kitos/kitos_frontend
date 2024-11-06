@@ -14,6 +14,7 @@ import { GlobalAdminDataProcessingComponent } from './global-admin-data-processi
 import { GlobalAdminOtherComponent } from './global-admin-other/global-admin-other.component';
 import { GlobalAdminHelpTextsComponent } from './global-admin-help-texts/global-admin-help-texts.component';
 import { GlobalAdminOrganizationsGridComponent } from './global-admin-organizations/global-admin-organizations-grid/global-admin-organizations-grid.component';
+import { GlobalAdminOtherKleComponent } from './global-admin-other/global-admin-other-kle/global-admin-other-kle.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { GlobalAdminOrganizationsGridComponent } from './global-admin-organizati
     GlobalAdminOtherComponent,
     GlobalAdminHelpTextsComponent,
     GlobalAdminOrganizationsGridComponent,
+    GlobalAdminOtherKleComponent,
   ],
   imports: [CommonModule, ComponentsModule, SharedModule, GlobalAdminRouterModule],
 })
