@@ -129,6 +129,7 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
     const dialogRef = this.dialog.open(CopyRolesDialogComponent, {
       width: '50%',
       minWidth: '600px',
+      maxWidth: '800px',
       height: 'auto',
       maxHeight: '90vh%',
     });
