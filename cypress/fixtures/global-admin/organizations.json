@@ -1,0 +1,40 @@
+{
+  "@odata.context": "https://kitos-dev.strongminds.dk/odata/$metadata#Organizations",
+  "@odata.count": 2,
+  "value": [
+      {
+          "Id": 1,
+          "Uuid": "d1258884-520f-4d1a-93f2-90ac431e6928",
+          "Name": "F\u00e6lles kommune",
+          "Phone": null,
+          "Adress": null,
+          "Email": null,
+          "TypeId": 1,
+          "Cvr": "",
+          "ForeignCvr": "",
+          "AccessModifier": "Public",
+          "ContactPersonId": null,
+          "ObjectOwnerId": 1,
+          "LastChanged": "2024-11-05T15:04:24.7587856Z",
+          "LastChangedByUserId": 2,
+          "SubDataProcessorRegistrations": []
+      },
+      {
+          "Id": 2,
+          "Uuid": "b80b7f65-f59c-4ae2-b98b-54867437be22",
+          "Name": "Test organisation to",
+          "Phone": null,
+          "Adress": null,
+          "Email": null,
+          "TypeId": 1,
+          "Cvr": "",
+          "ForeignCvr": "",
+          "AccessModifier": "Public",
+          "ContactPersonId": null,
+          "ObjectOwnerId": 1,
+          "LastChanged": "2024-11-05T15:22:09.7884426Z",
+          "LastChangedByUserId": 2,
+          "SubDataProcessorRegistrations": []
+      }
+  ]
+}

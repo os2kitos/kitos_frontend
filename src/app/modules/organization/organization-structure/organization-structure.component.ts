@@ -27,7 +27,7 @@ import {
   selectUnitPermissions,
 } from 'src/app/store/organization/organization-unit/selectors';
 
-import { EditOrganizationDialogComponent } from './edit-organization-dialog/edit-organization-dialog.component';
+import { EditOrganizationUnitDialogComponent } from './edit-organization-unit-dialog/edit-organization-unit-dialog.component';
 
 @Component({
   selector: 'app-organization-structure',
@@ -178,7 +178,7 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
   }
 
   private setupEditDialog() {
-    const dialogRef = this.matDialog.open(EditOrganizationDialogComponent, { height: '95%', width: '95%' });
+    const dialogRef = this.matDialog.open(EditOrganizationUnitDialogComponent, { height: '95%', width: '95%' });
     const dialogInstance = dialogRef.componentInstance;
     dialogInstance.unit$ = this.currentOrganizationUnit$;
     dialogInstance.rootUnitUuid$ = this.rootUnitUuid$;

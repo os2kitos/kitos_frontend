@@ -16,7 +16,6 @@ api/v2DprLocalCountryOptionTypesInternalINTERNAL.service.ts
 api/v2DprLocalDataResponsibleTypesInternalINTERNAL.service.ts
 api/v2DprLocalOversightOptionTypesInternalINTERNAL.service.ts
 api/v2DprLocalRoleOptionTypesInternalINTERNAL.service.ts
-api/v2ExcelInternalINTERNAL.service.ts
 api/v2GridLocalItContractRolesINTERNAL.service.ts
 api/v2ItContract.service.ts
 api/v2ItContractAgreementElementType.service.ts
@@ -200,6 +199,7 @@ model/namedEntityWithEnabledStatusV2DTO.ts
 model/namedEntityWithUserFullNameV2DTO.ts
 model/notificationResourcePermissionsDTO.ts
 model/notificationResponseDTO.ts
+model/organizationCreateRequestDTO.ts
 model/organizationGridConfigurationRequestDTO.ts
 model/organizationGridConfigurationResponseDTO.ts
 model/organizationGridPermissionsResponseDTO.ts

@@ -38,7 +38,7 @@ export interface PostSingleTokenAuthenticationGetTokenRequestParams {
 })
 export class APIV1TokenAuthenticationService {
 
-    protected basePath = 'https://localhost:44300';
+    protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
@@ -135,7 +135,9 @@ export class APIV1TokenAuthenticationService {
 
         // to determine the Content-Type header
         const consumes: string[] = [
-            'application/json'
+            'application/json',
+            'text/json',
+            'application/x-www-form-urlencoded'
         ];
         const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
         if (httpContentTypeSelected !== undefined) {

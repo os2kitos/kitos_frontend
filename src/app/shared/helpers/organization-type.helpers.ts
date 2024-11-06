@@ -1,4 +1,5 @@
 import { APIOrganizationResponseDTO } from 'src/app/api/v2';
+import { OrganizationTypeEnum } from '../models/organization/organization.model';
 
 export function mapOrganizationType(
   source: APIOrganizationResponseDTO.OrganizationTypeEnum | undefined
@@ -18,5 +19,18 @@ export function mapOrganizationType(
     }
     default:
       return undefined;
+  }
+}
+
+export function mapOrgTypeToDtoType(type: OrganizationTypeEnum): APIOrganizationResponseDTO.OrganizationTypeEnum {
+  switch (type) {
+    case OrganizationTypeEnum.Municipality:
+      return APIOrganizationResponseDTO.OrganizationTypeEnum.Municipality;
+    case OrganizationTypeEnum.CommunityOfInterest:
+      return APIOrganizationResponseDTO.OrganizationTypeEnum.CommunityOfInterest;
+    case OrganizationTypeEnum.Company:
+      return APIOrganizationResponseDTO.OrganizationTypeEnum.Company;
+    case OrganizationTypeEnum.OtherPublicAuthority:
+      return APIOrganizationResponseDTO.OrganizationTypeEnum.OtherPublicAuthority;
   }
 }

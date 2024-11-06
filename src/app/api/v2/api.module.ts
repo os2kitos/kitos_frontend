@@ -15,7 +15,6 @@ import { APIV2DprLocalCountryOptionTypesInternalINTERNALService } from './api/v2
 import { APIV2DprLocalDataResponsibleTypesInternalINTERNALService } from './api/v2DprLocalDataResponsibleTypesInternalINTERNAL.service';
 import { APIV2DprLocalOversightOptionTypesInternalINTERNALService } from './api/v2DprLocalOversightOptionTypesInternalINTERNAL.service';
 import { APIV2DprLocalRoleOptionTypesInternalINTERNALService } from './api/v2DprLocalRoleOptionTypesInternalINTERNAL.service';
-import { APIV2ExcelInternalINTERNALService } from './api/v2ExcelInternalINTERNAL.service';
 import { APIV2GridLocalItContractRolesINTERNALService } from './api/v2GridLocalItContractRolesINTERNAL.service';
 import { APIV2ItContractService } from './api/v2ItContract.service';
 import { APIV2ItContractAgreementElementTypeService } from './api/v2ItContractAgreementElementType.service';

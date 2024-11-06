@@ -48,6 +48,7 @@ export class NotificationService implements OnDestroy {
     this.subscribeToDprEvents();
 
     this.subscribeToLocalAdminNotifications();
+    this.subscribeToGlobalAdminNotifications();
 
     this.subscribeToExternalReferenceManagementEvents();
     this.subscribeToRoleNotifications();
@@ -61,6 +62,14 @@ export class NotificationService implements OnDestroy {
   private subscribeToLocalAdminNotifications() {
     this.subscribeAsDefault(LocalOptionTypeActions.updateOptionTypeSuccess, $localize`Enheden blev opdateret`);
     this.subscribeAsError(LocalOptionTypeActions.updateOptionTypeError, $localize`Enheden kunne ikke opdateres`);
+  }
+
+  private subscribeToGlobalAdminNotifications() {
+    this.subscribeAsDefault(OrganizationActions.createOrganizationSuccess, $localize`Organisationen blev oprettet`);
+    this.subscribeAsError(OrganizationActions.createOrganizationError, $localize`Organisationen kunne ikke oprettes`);
+
+    this.subscribeAsDefault(OrganizationActions.patchOrganizationSuccess, $localize`Organisationen blev opdateret`);
+    this.subscribeAsError(OrganizationActions.patchOrganizationError, $localize`Organisationen kunne ikke opdateres`);
   }
 
   private subscribeToOrganizationEvents() {

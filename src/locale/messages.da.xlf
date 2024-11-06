@@ -5171,9 +5171,9 @@
         <source>Enheden blev opdateret</source>
         <target state="new">Enheden blev opdateret</target>
       </trans-unit>
-      <trans-unit id="4100126813016547603" datatype="html">
-        <source>Organisationsroller i din orginsation</source>
-        <target state="new">Organisationsroller i din orginsation</target>
+      <trans-unit id="303541399201403734" datatype="html">
+        <source>Organisationsroller i din organisation</source>
+        <target state="new">Organisationsroller i din organisation</target>
       </trans-unit>
       <trans-unit id="1665695847626369659" datatype="html">
         <source>Forretningstyper</source>
@@ -5655,6 +5655,22 @@
         <source>Hjælpetekster</source>
         <target state="new">Hjælpetekster</target>
       </trans-unit>
+      <trans-unit id="6235190197968215704" datatype="html">
+        <source>Opret organisation</source>
+        <target state="new">Opret organisation</target>
+      </trans-unit>
+      <trans-unit id="2726957628797106493" datatype="html">
+        <source>Organisationens navn</source>
+        <target state="new">Organisationens navn</target>
+      </trans-unit>
+      <trans-unit id="1726345256529026369" datatype="html">
+        <source>CVR nummer</source>
+        <target state="new">CVR nummer</target>
+      </trans-unit>
+      <trans-unit id="3812837223427328214" datatype="html">
+        <source>Rediger organisation</source>
+        <target state="new">Rediger organisation</target>
+      </trans-unit>
       <trans-unit id="801536030105611507" datatype="html">
         <source>Via Excel</source>
         <target state="new">Via Excel</target>
@@ -5691,13 +5707,29 @@
         <source>Organisationsenheder</source>
         <target state="new">Organisationsenheder</target>
       </trans-unit>
-      <trans-unit id="8707180639932445169" datatype="html">
-        <source>Excelarket blev importeret</source>
-        <target state="new">Excelarket blev importeret</target>
+      <trans-unit id="1392114045066794470" datatype="html">
+        <source>Excel-arket blev importeret</source>
+        <target state="new">Excel-arket blev importeret</target>
       </trans-unit>
-      <trans-unit id="7843941680333517057" datatype="html">
-        <source>Kunne ikke importere Excelarket</source>
-        <target state="new">Kunne ikke importere Excelarket</target>
+      <trans-unit id="7432199270217434187" datatype="html">
+        <source>Kunne ikke importere excel-arket</source>
+        <target state="new">Kunne ikke importere excel-arket</target>
+      </trans-unit>
+      <trans-unit id="4203897629734325156" datatype="html">
+        <source>Organisationen blev oprettet</source>
+        <target state="new">Organisationen blev oprettet</target>
+      </trans-unit>
+      <trans-unit id="5749107076110806005" datatype="html">
+        <source>Organisationen kunne ikke oprettes</source>
+        <target state="new">Organisationen kunne ikke oprettes</target>
+      </trans-unit>
+      <trans-unit id="4392124826360106905" datatype="html">
+        <source>Organisationen blev opdateret</source>
+        <target state="new">Organisationen blev opdateret</target>
+      </trans-unit>
+      <trans-unit id="2166079637941616742" datatype="html">
+        <source>Organisationen kunne ikke opdateres</source>
+        <target state="new">Organisationen kunne ikke opdateres</target>
       </trans-unit>
     </body>
   </file>

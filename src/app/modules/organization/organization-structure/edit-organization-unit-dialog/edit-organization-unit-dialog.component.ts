@@ -34,11 +34,11 @@ import {
 } from 'src/app/store/organization/organization-unit/selectors';
 
 @Component({
-  selector: 'app-edit-organization-dialog',
-  templateUrl: './edit-organization-dialog.component.html',
-  styleUrl: './edit-organization-dialog.component.scss',
+  selector: 'app-edit-organization-unit-dialog',
+  templateUrl: './edit-organization-unit-dialog.component.html',
+  styleUrl: './edit-organization-unit-dialog.component.scss',
 })
-export class EditOrganizationDialogComponent extends BaseComponent implements OnInit {
+export class EditOrganizationUnitDialogComponent extends BaseComponent implements OnInit {
   @Input() public unit$!: Observable<APIOrganizationUnitResponseDTO>;
   @Input() public rootUnitUuid$!: Observable<string>;
   @Input() public disabledUnitsUuids$!: Observable<string[]>;

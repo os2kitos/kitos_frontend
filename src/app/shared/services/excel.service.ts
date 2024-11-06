@@ -2,8 +2,8 @@
 import { HttpClient, HttpContext, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { APIV2ExcelInternalINTERNALService, PostSingleExcelInternalV2PostOrgUnitsRequestParams } from 'src/app/api/v2';
 import { LocalAdminImportEntityType } from '../enums/local-admin-import-entity-type';
+import { APIV1ExcelINTERNALService } from 'src/app/api/v1';
 
 export interface ExcelFile {
   data: Blob;
@@ -21,7 +21,7 @@ export class APIExcelService {
   private configuration: any;
   private fileNamePrefix = 'OS2KITOS';
 
-  constructor(private httpClient: HttpClient, private apiService: APIV2ExcelInternalINTERNALService) {
+  constructor(private httpClient: HttpClient, private apiService: APIV1ExcelINTERNALService) {
     this.basePath = this.apiService['configuration'].basePath ?? '';
     this.defaultHeaders = this.apiService['defaultHeaders'];
     this.encoder = this.apiService['encoder'];
@@ -59,7 +59,7 @@ export class APIExcelService {
   }
 
   public postExcelWithFormData(
-    requestParameters: PostSingleExcelInternalV2PostOrgUnitsRequestParams,
+    requestParameters: PostSingleExcelOrgUnitsRequestParameters,
     type: LocalAdminImportEntityType
   ): Observable<any> {
     const entityName = this.getEntityName(type);
@@ -97,7 +97,7 @@ export class APIExcelService {
   }
 
   private postSingleExcelInternalV2PostByEntityName(
-    requestParameters: PostSingleExcelInternalV2PostOrgUnitsRequestParams,
+    requestParameters: PostSingleExcelOrgUnitsRequestParameters,
     entityName: string
   ): Observable<any> {
     const organizationUuid = requestParameters.organizationUuid;
@@ -200,4 +200,10 @@ export class APIExcelService {
         throw new Error('Invalid type');
     }
   }
+}
+
+export interface PostSingleExcelOrgUnitsRequestParameters {
+  organizationUuid: string;
+  importOrgUnits: boolean;
+  body: FormData;
 }
