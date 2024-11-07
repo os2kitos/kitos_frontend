@@ -13,14 +13,29 @@ describe('global-admin other', () => {
     cy.setup(true, 'global-admin/other');
   });
 
-  it('Can download kle changes', () => {
+  it('can perform kle update', () => {
+    cy.intercept('api/v2/internal/kle/status', { fixture: './global-admin/kle-status-not-up-to-date.json' });
+
     cy.intercept('api/v2/internal/kle/changes', {
       fixture: './global-admin/kle-changes.csv',
+    });
+    cy.intercept('api/v2/internal/kle/update', {
+      body: {},
     });
 
     cy.hoverByDataCy('profile-menu');
     cy.getByDataCy('global-admin-menu-item').should('exist').click();
 
     cy.navigateToDetailsSubPage('Andet');
+
+    cy.getByDataCy('update-kle-button').get('button').should('be.disabled');
+    cy.getByDataCy('get-kle-changes-button').click();
+    cy.getByDataCy('get-kle-changes-button').get('button').should('be.disabled');
+
+    cy.intercept('api/v2/internal/kle/status', { fixture: './global-admin/kle-status-up-to-date.json' });
+    cy.getByDataCy('update-kle-button').click();
+
+    cy.getByDataCy('update-kle-button').get('button').should('be.disabled');
+    cy.getByDataCy('get-kle-changes-button').get('button').should('be.disabled');
   });
 });
