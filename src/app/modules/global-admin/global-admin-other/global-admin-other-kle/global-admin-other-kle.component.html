@@ -1,1 +1,6 @@
-<p>global-admin-other-kle works!</p>
+<app-card i18n-title>
+  <app-card-header title="KLE"></app-card-header>
+  <app-standard-vertical-content-grid *ngIf="(isLoadingConnectionStatus$ | async) === false">
+  </app-standard-vertical-content-grid>
+  <app-loading *ngIf="isLoadingConnectionStatus$ | async"></app-loading>
+</app-card>
