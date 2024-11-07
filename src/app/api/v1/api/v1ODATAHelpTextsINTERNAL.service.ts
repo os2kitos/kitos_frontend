@@ -56,7 +56,7 @@ export interface GetSingleHelpTextsGetV1ByIdRequestParams {
 })
 export class APIV1ODATAHelpTextsINTERNALService {
 
-    protected basePath = 'https://localhost:44300';
+    protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;

@@ -32,7 +32,7 @@ export interface GetSinglePasswordResetRequestGetRequestParams {
     requestId: string;
 }
 
-export interface GetSinglePasswordResetRequestGetAccessRightsForEntityRequestParams {
+export interface GetSinglePasswordResetRequestGetAccessRightsForEntityByIdRequestParams {
     id: number;
     getEntityAccessRights: boolean;
 }
@@ -47,7 +47,7 @@ export interface PostSinglePasswordResetRequestPostRequestParams {
 })
 export class APIV1PasswordResetRequestINTERNALService {
 
-    protected basePath = 'https://localhost:44300';
+    protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
@@ -177,17 +177,17 @@ export class APIV1PasswordResetRequestINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSinglePasswordResetRequestGetAccessRightsForEntity(requestParameters: GetSinglePasswordResetRequestGetAccessRightsForEntityRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public getSinglePasswordResetRequestGetAccessRightsForEntity(requestParameters: GetSinglePasswordResetRequestGetAccessRightsForEntityRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public getSinglePasswordResetRequestGetAccessRightsForEntity(requestParameters: GetSinglePasswordResetRequestGetAccessRightsForEntityRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public getSinglePasswordResetRequestGetAccessRightsForEntity(requestParameters: GetSinglePasswordResetRequestGetAccessRightsForEntityRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSinglePasswordResetRequestGetAccessRightsForEntityById(requestParameters: GetSinglePasswordResetRequestGetAccessRightsForEntityByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public getSinglePasswordResetRequestGetAccessRightsForEntityById(requestParameters: GetSinglePasswordResetRequestGetAccessRightsForEntityByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSinglePasswordResetRequestGetAccessRightsForEntityById(requestParameters: GetSinglePasswordResetRequestGetAccessRightsForEntityByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSinglePasswordResetRequestGetAccessRightsForEntityById(requestParameters: GetSinglePasswordResetRequestGetAccessRightsForEntityByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling getSinglePasswordResetRequestGetAccessRightsForEntity.');
+            throw new Error('Required parameter id was null or undefined when calling getSinglePasswordResetRequestGetAccessRightsForEntityById.');
         }
         const getEntityAccessRights = requestParameters.getEntityAccessRights;
         if (getEntityAccessRights === null || getEntityAccessRights === undefined) {
-            throw new Error('Required parameter getEntityAccessRights was null or undefined when calling getSinglePasswordResetRequestGetAccessRightsForEntity.');
+            throw new Error('Required parameter getEntityAccessRights was null or undefined when calling getSinglePasswordResetRequestGetAccessRightsForEntityById.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -279,7 +279,9 @@ export class APIV1PasswordResetRequestINTERNALService {
 
         // to determine the Content-Type header
         const consumes: string[] = [
-            'application/json'
+            'application/json',
+            'text/json',
+            'application/x-www-form-urlencoded'
         ];
         const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
         if (httpContentTypeSelected !== undefined) {

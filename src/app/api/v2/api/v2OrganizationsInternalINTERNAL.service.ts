@@ -19,6 +19,10 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
+import { APIIdentityNamePairResponseDTO } from '../model/aPIIdentityNamePairResponseDTO';
+// @ts-ignore
+import { APIOrganizationCreateRequestDTO } from '../model/aPIOrganizationCreateRequestDTO';
+// @ts-ignore
 import { APIOrganizationMasterDataRequestDTO } from '../model/aPIOrganizationMasterDataRequestDTO';
 // @ts-ignore
 import { APIOrganizationMasterDataResponseDTO } from '../model/aPIOrganizationMasterDataResponseDTO';
@@ -87,6 +91,10 @@ export interface PatchSingleOrganizationsInternalV2UpsertOrganizationMasterDataR
     requestDto: APIOrganizationMasterDataRolesRequestDTO;
 }
 
+export interface PostSingleOrganizationsInternalV2CreateOrganizationRequestParams {
+    request: APIOrganizationCreateRequestDTO;
+}
+
 export interface PutSingleOrganizationsInternalV2PutUIModuleCustomizationRequestParams {
     organizationUuid: string;
     moduleName: string;
@@ -99,7 +107,7 @@ export interface PutSingleOrganizationsInternalV2PutUIModuleCustomizationRequest
 })
 export class APIV2OrganizationsInternalINTERNALService {
 
-    protected basePath = 'https://localhost:44300';
+    protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
@@ -735,6 +743,74 @@ export class APIV2OrganizationsInternalINTERNALService {
             {
                 context: localVarHttpContext,
                 body: requestDto,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * @param requestParameters
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public postSingleOrganizationsInternalV2CreateOrganization(requestParameters: PostSingleOrganizationsInternalV2CreateOrganizationRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
+    public postSingleOrganizationsInternalV2CreateOrganization(requestParameters: PostSingleOrganizationsInternalV2CreateOrganizationRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public postSingleOrganizationsInternalV2CreateOrganization(requestParameters: PostSingleOrganizationsInternalV2CreateOrganizationRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public postSingleOrganizationsInternalV2CreateOrganization(requestParameters: PostSingleOrganizationsInternalV2CreateOrganizationRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        const request = requestParameters.request;
+        if (request === null || request === undefined) {
+            throw new Error('Required parameter request was null or undefined when calling postSingleOrganizationsInternalV2CreateOrganization.');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Content-Type', httpContentTypeSelected);
+        }
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/v2/internal/organizations/create`;
+        return this.httpClient.request<object>('post', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                body: request,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
