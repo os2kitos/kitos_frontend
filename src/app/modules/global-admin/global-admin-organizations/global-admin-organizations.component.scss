@@ -2,4 +2,5 @@
 
 :host {
   @include page-flex-layout-max-width;
+  overflow: hidden;
 }

@@ -12,3 +12,10 @@ export const selectHasValidCache = createSelector(
   () => new Date(),
   (cacheTime, time) => hasValidCache(cacheTime, time)
 );
+
+export const selectAdminKleStatus = createSelector(selectKLEState, (state) => state.adminKleStatus);
+export const selectAdminKleIsLoading = createSelector(selectKLEState, (state) => state.adminKleIsLoading);
+export const selectAdminKleChangesDownloaded = createSelector(
+  selectKLEState,
+  (state) => state.adminKleChangesDownloaded
+);
