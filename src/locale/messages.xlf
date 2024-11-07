@@ -4354,6 +4354,30 @@
       <trans-unit id="5749107076110806005" datatype="html">
         <source>Organisationen kunne ikke oprettes</source>
       </trans-unit>
+      <trans-unit id="1770635212176214201" datatype="html">
+        <source> KITOS baserer sig på den seneste KLE version, udgivet <x id="INTERPOLATION" equiv-text="{{ kleStatus.version | appDate }}"/> </source>
+      </trans-unit>
+      <trans-unit id="1966027923886127029" datatype="html">
+        <source>KLE kunne ikke opdateres</source>
+      </trans-unit>
+      <trans-unit id="2129888068593549782" datatype="html">
+        <source>KLE blev opdateret</source>
+      </trans-unit>
+      <trans-unit id="2143756458536709824" datatype="html">
+        <source> Der er en ny version af KLE, udgivet <x id="INTERPOLATION" equiv-text="{{ kleStatus.version | appDate }}"/> </source>
+      </trans-unit>
+      <trans-unit id="2243281531109901222" datatype="html">
+        <source>Kunne ikke få KLE ændringer</source>
+      </trans-unit>
+      <trans-unit id="2400861585794872427" datatype="html">
+        <source>Opdater KLE</source>
+      </trans-unit>
+      <trans-unit id="3533017009925459199" datatype="html">
+        <source>Vis ændringer i KLE</source>
+      </trans-unit>
+      <trans-unit id="5375811527537295210" datatype="html">
+        <source>KLE-Changes.csv</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
