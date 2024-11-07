@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { first, of } from 'rxjs';
+import { combineLatestWith, first, of } from 'rxjs';
 import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
 import { ORGANIZATION_SECTION_NAME } from 'src/app/shared/constants/persistent-state-constants';
 import { GridActionColumn } from 'src/app/shared/models/grid-action-column.model';
@@ -14,6 +15,9 @@ import {
   selectOrganizationGridLoading,
   selectOrganizationGridState,
 } from 'src/app/store/organization/selectors';
+import { CreateOrganizationDialogComponent } from '../create-organization-dialog/create-organization-dialog.component';
+import { EditOrganizationDialogComponent } from '../edit-organization-dialog/edit-organization-dialog.component';
+import { Actions, ofType } from '@ngrx/effects';
 
 @Component({
   selector: 'app-global-admin-organizations-grid',
@@ -69,11 +73,22 @@ export class GlobalAdminOrganizationsGridComponent extends BaseOverviewComponent
 
   public readonly gridColumns$ = of(this.gridColumns);
 
-  constructor(store: Store) {
+  constructor(store: Store, private dialog: MatDialog, private actions$: Actions) {
     super(store, 'global-admin-organization');
   }
   ngOnInit() {
     this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState));
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(
+          ofType(OrganizationActions.createOrganizationSuccess, OrganizationActions.patchOrganizationSuccess),
+          combineLatestWith(this.gridState$)
+        )
+        .subscribe(([_, gridState]) => {
+          this.stateChange(gridState);
+        })
+    );
   }
 
   public stateChange(gridState: GridState) {
@@ -81,10 +96,13 @@ export class GlobalAdminOrganizationsGridComponent extends BaseOverviewComponent
   }
 
   public onEditOrganization(organization: Organization) {
-    
+    const dialogRef = this.dialog.open(EditOrganizationDialogComponent);
+    dialogRef.componentInstance.organization = organization;
   }
 
-  public onDeleteOrganization(organization: Organization) {
+  public onDeleteOrganization(_: Organization) {}
 
+  public onCreateOrganization() {
+    this.dialog.open(CreateOrganizationDialogComponent);
   }
 }

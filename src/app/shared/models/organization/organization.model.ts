@@ -2,9 +2,9 @@ export interface Organization {
   id: string;
   Uuid: string;
   Name: string;
-  Cvr: string;
+  Cvr: string | undefined;
   OrganizationType: string;
-  ForeignBusiness: string;
+  ForeignBusiness: string | undefined;
 }
 
 export interface OrganizationType {
@@ -38,18 +38,24 @@ export const organizationTypeOptions: OrganizationType[] = [
   },
 ];
 
+export const defaultOrganizationType = organizationTypeOptions[0];
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const adaptOrganization = (value: any): Organization | undefined => {
   const adapted: Organization = {
     id: value.Uuid,
     Uuid: value.Uuid,
     Name: value.Name,
-    Cvr: value.Cvr,
+    Cvr: value.Cvr ?? '',
     OrganizationType: adaptOrganizationType(value.TypeId).name,
-    ForeignBusiness: value.ForeignCvr,
+    ForeignBusiness: value.ForeignCvr ?? '',
   };
   return adapted;
 };
+
+export function getOrganizationType(name: string): OrganizationType | undefined {
+  return organizationTypeOptions.find((type) => type.name === name);
+}
 
 function adaptOrganizationType(typeId: number): OrganizationType {
   return organizationTypeOptions[typeId - 1];

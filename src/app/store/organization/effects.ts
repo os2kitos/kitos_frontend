@@ -158,15 +158,13 @@ export class OrganizationEffects {
       ofType(OrganizationActions.getUIRootConfig),
       combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       switchMap(([, organizationUuid]) =>
-        this.organizationInternalService
-          .getSingleOrganizationsInternalV2GetUIRootConfig({ organizationUuid })
-          .pipe(
-            map((responseDto) => {
-              const uiRootConfig = mapUIRootConfig(responseDto);
-              return OrganizationActions.getUIRootConfigSuccess({ uiRootConfig });
-            }),
-            catchError(() => of(OrganizationActions.getUIRootConfigError()))
-          )
+        this.organizationInternalService.getSingleOrganizationsInternalV2GetUIRootConfig({ organizationUuid }).pipe(
+          map((responseDto) => {
+            const uiRootConfig = mapUIRootConfig(responseDto);
+            return OrganizationActions.getUIRootConfigSuccess({ uiRootConfig });
+          }),
+          catchError(() => of(OrganizationActions.getUIRootConfigError()))
+        )
       )
     );
   });
@@ -185,6 +183,32 @@ export class OrganizationEffects {
             }),
             catchError(() => of(OrganizationActions.patchUIRootConfigError()))
           )
+      )
+    );
+  });
+
+  patchOrganization$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(OrganizationActions.patchOrganization),
+      switchMap(({ request, organizationUuid }) =>
+        this.organizationInternalService
+          .patchSingleOrganizationsInternalV2PatchOrganization({ requestDto: request, organizationUuid })
+          .pipe(
+            map(() => OrganizationActions.patchOrganizationSuccess()),
+            catchError(() => of(OrganizationActions.patchOrganizationError()))
+          )
+      )
+    );
+  });
+
+  createOrganization$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(OrganizationActions.createOrganization),
+      switchMap(({ request }) =>
+        this.organizationInternalService.postSingleOrganizationsInternalV2CreateOrganization({ request }).pipe(
+          map(() => OrganizationActions.createOrganizationSuccess()),
+          catchError(() => of(OrganizationActions.createOrganizationError()))
+        )
       )
     );
   });

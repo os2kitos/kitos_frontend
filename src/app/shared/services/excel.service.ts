@@ -58,7 +58,10 @@ export class APIExcelService {
     }
   }
 
-  public postExcelWithFormData(requestParameters: any, type: LocalAdminImportEntityType): Observable<any> {
+  public postExcelWithFormData(
+    requestParameters: PostSingleExcelOrgUnitsRequestParameters,
+    type: LocalAdminImportEntityType
+  ): Observable<any> {
     const entityName = this.getEntityName(type);
     return this.postSingleExcelInternalV2PostByEntityName(requestParameters, entityName);
   }
@@ -93,7 +96,10 @@ export class APIExcelService {
     });
   }
 
-  private postSingleExcelInternalV2PostByEntityName(requestParameters: any, entityName: string): Observable<any> {
+  private postSingleExcelInternalV2PostByEntityName(
+    requestParameters: PostSingleExcelOrgUnitsRequestParameters,
+    entityName: string
+  ): Observable<any> {
     const organizationUuid = requestParameters.organizationUuid;
     if (organizationUuid === null || organizationUuid === undefined) {
       throw new Error(
@@ -194,4 +200,10 @@ export class APIExcelService {
         throw new Error('Invalid type');
     }
   }
+}
+
+export interface PostSingleExcelOrgUnitsRequestParameters {
+  organizationUuid: string;
+  importOrgUnits: boolean;
+  body: FormData;
 }

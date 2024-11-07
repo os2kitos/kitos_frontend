@@ -1,0 +1,39 @@
+<app-dialog title="Rediger organisation" i18n-title>
+  <app-loading *ngIf="isLoading$ | async"></app-loading>
+  <ng-container *ngIf="(isLoading$ | async) === false">
+    <app-standard-vertical-content-grid>
+      <app-textbox
+        text="Organisationens navn"
+        i18n-text
+        [formGroup]="formGroup"
+        formName="name"
+        data-cy="org-name"
+      ></app-textbox>
+      <app-dropdown
+        text="Type"
+        i18n-text
+        [data]="organizationTypeOptions"
+        [clearable]="false"
+        [formGroup]="formGroup"
+        formName="organizationType"
+        data-cy="org-type"
+      ></app-dropdown>
+      <app-textbox text="CVR nummer" i18n-text [formGroup]="formGroup" formName="cvr" data-cy="org-cvr"></app-textbox>
+      <app-textbox
+        text="Udenlandsk virksomhed"
+        i18n-text
+        [formGroup]="formGroup"
+        formName="foreignCvr"
+        data-cy="org-foreign-cvr"
+      >
+      </app-textbox>
+    </app-standard-vertical-content-grid>
+
+    <app-dialog-actions>
+      <app-button (buttonClick)="onEditOrganization()" [disabled]="!canSubmit()" i18n data-cy="edit-org-dialog-button"
+        >Gem</app-button
+      >
+      <app-button buttonStyle="secondary" (buttonClick)="onCancel()" i18n>Annuller</app-button>
+    </app-dialog-actions>
+  </ng-container>
+</app-dialog>
