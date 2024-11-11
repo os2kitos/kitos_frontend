@@ -15,6 +15,7 @@ import { APIV2DprLocalCountryOptionTypesInternalINTERNALService } from './api/v2
 import { APIV2DprLocalDataResponsibleTypesInternalINTERNALService } from './api/v2DprLocalDataResponsibleTypesInternalINTERNAL.service';
 import { APIV2DprLocalOversightOptionTypesInternalINTERNALService } from './api/v2DprLocalOversightOptionTypesInternalINTERNAL.service';
 import { APIV2DprLocalRoleOptionTypesInternalINTERNALService } from './api/v2DprLocalRoleOptionTypesInternalINTERNAL.service';
+import { APIV2GlobalUserInternalINTERNALService } from './api/v2GlobalUserInternalINTERNAL.service';
 import { APIV2GridLocalItContractRolesINTERNALService } from './api/v2GridLocalItContractRolesINTERNAL.service';
 import { APIV2ItContractService } from './api/v2ItContract.service';
 import { APIV2ItContractAgreementElementTypeService } from './api/v2ItContractAgreementElementType.service';
@@ -47,8 +48,17 @@ import { APIV2ItInterfaceInterfaceDataTypeService } from './api/v2ItInterfaceInt
 import { APIV2ItInterfaceInterfaceTypeService } from './api/v2ItInterfaceInterfaceType.service';
 import { APIV2ItSystemService } from './api/v2ItSystem.service';
 import { APIV2ItSystemBusinessTypeService } from './api/v2ItSystemBusinessType.service';
+import { APIV2ItSystemGlobalArchiveLocationsInternalINTERNALService } from './api/v2ItSystemGlobalArchiveLocationsInternalINTERNAL.service';
+import { APIV2ItSystemGlobalArchiveTestLocationsInternalINTERNALService } from './api/v2ItSystemGlobalArchiveTestLocationsInternalINTERNAL.service';
+import { APIV2ItSystemGlobalArchiveTypesInternalINTERNALService } from './api/v2ItSystemGlobalArchiveTypesInternalINTERNAL.service';
 import { APIV2ItSystemGlobalBusinessTypesInternalINTERNALService } from './api/v2ItSystemGlobalBusinessTypesInternalINTERNAL.service';
+import { APIV2ItSystemGlobalDataTypesInternalINTERNALService } from './api/v2ItSystemGlobalDataTypesInternalINTERNAL.service';
+import { APIV2ItSystemGlobalFrequencyTypesInternalINTERNALService } from './api/v2ItSystemGlobalFrequencyTypesInternalINTERNAL.service';
+import { APIV2ItSystemGlobalInterfaceTypesInternalINTERNALService } from './api/v2ItSystemGlobalInterfaceTypesInternalINTERNAL.service';
+import { APIV2ItSystemGlobalItSystemCategoriesInternalINTERNALService } from './api/v2ItSystemGlobalItSystemCategoriesInternalINTERNAL.service';
+import { APIV2ItSystemGlobalRegisterTypesInternalINTERNALService } from './api/v2ItSystemGlobalRegisterTypesInternalINTERNAL.service';
 import { APIV2ItSystemGlobalRoleOptionTypesInternalINTERNALService } from './api/v2ItSystemGlobalRoleOptionTypesInternalINTERNAL.service';
+import { APIV2ItSystemGlobalSensitivePersonalDataTypesInternalINTERNALService } from './api/v2ItSystemGlobalSensitivePersonalDataTypesInternalINTERNAL.service';
 import { APIV2ItSystemInternalINTERNALService } from './api/v2ItSystemInternalINTERNAL.service';
 import { APIV2ItSystemLocalArchiveLocationTypesInternalINTERNALService } from './api/v2ItSystemLocalArchiveLocationTypesInternalINTERNAL.service';
 import { APIV2ItSystemLocalArchiveTestLocationTypesInternalINTERNALService } from './api/v2ItSystemLocalArchiveTestLocationTypesInternalINTERNAL.service';

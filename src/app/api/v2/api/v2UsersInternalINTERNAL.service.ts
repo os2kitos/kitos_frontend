@@ -36,7 +36,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface DeleteSingleUsersInternalV2DeleteUserRequestParams {
+export interface DeleteSingleUsersInternalV2DeleteUserInOrganizationRequestParams {
     organizationUuid: string;
     userUuid: string;
 }
@@ -150,17 +150,17 @@ export class APIV2UsersInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public deleteSingleUsersInternalV2DeleteUser(requestParameters: DeleteSingleUsersInternalV2DeleteUserRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public deleteSingleUsersInternalV2DeleteUser(requestParameters: DeleteSingleUsersInternalV2DeleteUserRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public deleteSingleUsersInternalV2DeleteUser(requestParameters: DeleteSingleUsersInternalV2DeleteUserRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public deleteSingleUsersInternalV2DeleteUser(requestParameters: DeleteSingleUsersInternalV2DeleteUserRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public deleteSingleUsersInternalV2DeleteUserInOrganization(requestParameters: DeleteSingleUsersInternalV2DeleteUserInOrganizationRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public deleteSingleUsersInternalV2DeleteUserInOrganization(requestParameters: DeleteSingleUsersInternalV2DeleteUserInOrganizationRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public deleteSingleUsersInternalV2DeleteUserInOrganization(requestParameters: DeleteSingleUsersInternalV2DeleteUserInOrganizationRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public deleteSingleUsersInternalV2DeleteUserInOrganization(requestParameters: DeleteSingleUsersInternalV2DeleteUserInOrganizationRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling deleteSingleUsersInternalV2DeleteUser.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling deleteSingleUsersInternalV2DeleteUserInOrganization.');
         }
         const userUuid = requestParameters.userUuid;
         if (userUuid === null || userUuid === undefined) {
-            throw new Error('Required parameter userUuid was null or undefined when calling deleteSingleUsersInternalV2DeleteUser.');
+            throw new Error('Required parameter userUuid was null or undefined when calling deleteSingleUsersInternalV2DeleteUserInOrganization.');
         }
 
         let localVarHeaders = this.defaultHeaders;
