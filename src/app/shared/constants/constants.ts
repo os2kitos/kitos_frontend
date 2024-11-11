@@ -31,3 +31,5 @@ export const MAX_DATE = 8640000000000000;
 
 export const DEFAULT_UNCLICKABLE_GRID_COLUMN_STYLES = ['link', 'page-link', 'title-link', 'usages', 'action-buttons'];
 export const DEFAULT_CHANGELOG_SIZE = 5; //(as per old UI) the size of the changelog should always be 5, this could change in the future
+
+export const KLE_FILE_NAME = $localize`KLE-Changes.csv`;

@@ -4,3 +4,8 @@
 :host {
   @include page-flex-layout-max-width;
 }
+
+.action-buttons {
+  display: flex;
+  gap: $padding-medium;
+}

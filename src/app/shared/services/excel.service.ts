@@ -2,8 +2,8 @@
 import { HttpClient, HttpContext, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { LocalAdminImportEntityType } from '../enums/local-admin-import-entity-type';
 import { APIV1ExcelINTERNALService } from 'src/app/api/v1';
+import { LocalAdminImportEntityType } from '../enums/local-admin-import-entity-type';
 
 export interface ExcelFile {
   data: Blob;

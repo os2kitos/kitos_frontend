@@ -48,6 +48,8 @@ api/v2ItInterfaceInterfaceDataType.service.ts
 api/v2ItInterfaceInterfaceType.service.ts
 api/v2ItSystem.service.ts
 api/v2ItSystemBusinessType.service.ts
+api/v2ItSystemGlobalBusinessTypesInternalINTERNAL.service.ts
+api/v2ItSystemGlobalRoleOptionTypesInternalINTERNAL.service.ts
 api/v2ItSystemInternalINTERNAL.service.ts
 api/v2ItSystemLocalArchiveLocationTypesInternalINTERNAL.service.ts
 api/v2ItSystemLocalArchiveTestLocationTypesInternalINTERNAL.service.ts
@@ -71,6 +73,7 @@ api/v2ItSystemUsageRegisteredDataCategoryType.service.ts
 api/v2ItSystemUsageRelationFrequencyType.service.ts
 api/v2ItSystemUsageRoleType.service.ts
 api/v2ItSystemUsageSensitivePersonalDataType.service.ts
+api/v2KLEInternalINTERNAL.service.ts
 api/v2KleOption.service.ts
 api/v2NotificationINTERNAL.service.ts
 api/v2Organization.service.ts
@@ -158,6 +161,12 @@ model/generalDataResponseDTO.ts
 model/generalDataUpdateRequestDTO.ts
 model/generalDataWriteRequestDTO.ts
 model/generalSystemRelationResponseDTO.ts
+model/globalRegularOptionCreateRequestDTO.ts
+model/globalRegularOptionResponseDTO.ts
+model/globalRegularOptionUpdateRequestDTO.ts
+model/globalRoleOptionCreateRequestDTO.ts
+model/globalRoleOptionResponseDTO.ts
+model/globalRoleOptionUpdateRequestDTO.ts
 model/identityNamePairResponseDTO.ts
 model/identityNamePairWithDeactivatedStatusDTO.ts
 model/immediateNotificationWriteRequestDTO.ts
@@ -185,6 +194,7 @@ model/journalPeriodUpdateRequestDTO.ts
 model/kLEDetailsDTO.ts
 model/kLEDetailsDTOIEnumerableVersionedKLEResponseDTO.ts
 model/kLEDetailsDTOVersionedKLEResponseDTO.ts
+model/kLEStatusResponseDTO.ts
 model/localKLEDeviationsRequestDTO.ts
 model/localKLEDeviationsResponseDTO.ts
 model/localOptionCreateRequestDTO.ts
