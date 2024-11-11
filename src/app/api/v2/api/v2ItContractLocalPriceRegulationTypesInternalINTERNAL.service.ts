@@ -30,12 +30,12 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface DeleteSingleItContractLocalPriceRegulationTypesInternalV2DeleteLocalPriceRegulationTypeByOrganizationuuidAndOptionuuidRequestParams {
+export interface DeleteSingleItContractLocalPriceRegulationTypesInternalV2DeleteLocalPriceRegulationTypeRequestParams {
     organizationUuid: string;
     optionUuid: string;
 }
 
-export interface GetManyItContractLocalPriceRegulationTypesInternalV2GetLocalPriceRegulationTypesByOrganizationuuidRequestParams {
+export interface GetManyItContractLocalPriceRegulationTypesInternalV2GetLocalPriceRegulationTypesRequestParams {
     organizationUuid: string;
 }
 
@@ -44,13 +44,13 @@ export interface GetSingleItContractLocalPriceRegulationTypesInternalV2GetLocalP
     optionUuid: string;
 }
 
-export interface PatchSingleItContractLocalPriceRegulationTypesInternalV2PatchLocalPriceRegulationTypeByOrganizationuuidAndOptionuuidRequestParams {
+export interface PatchSingleItContractLocalPriceRegulationTypesInternalV2PatchLocalPriceRegulationTypeRequestParams {
     organizationUuid: string;
     optionUuid: string;
     dto: APILocalRegularOptionUpdateRequestDTO;
 }
 
-export interface PostSingleItContractLocalPriceRegulationTypesInternalV2CreateLocalPriceRegulationTypeByOrganizationuuidRequestParams {
+export interface PostSingleItContractLocalPriceRegulationTypesInternalV2CreateLocalPriceRegulationTypeRequestParams {
     organizationUuid: string;
     dto: APILocalOptionCreateRequestDTO;
 }
@@ -125,17 +125,17 @@ export class APIV2ItContractLocalPriceRegulationTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public deleteSingleItContractLocalPriceRegulationTypesInternalV2DeleteLocalPriceRegulationTypeByOrganizationuuidAndOptionuuid(requestParameters: DeleteSingleItContractLocalPriceRegulationTypesInternalV2DeleteLocalPriceRegulationTypeByOrganizationuuidAndOptionuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
-    public deleteSingleItContractLocalPriceRegulationTypesInternalV2DeleteLocalPriceRegulationTypeByOrganizationuuidAndOptionuuid(requestParameters: DeleteSingleItContractLocalPriceRegulationTypesInternalV2DeleteLocalPriceRegulationTypeByOrganizationuuidAndOptionuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
-    public deleteSingleItContractLocalPriceRegulationTypesInternalV2DeleteLocalPriceRegulationTypeByOrganizationuuidAndOptionuuid(requestParameters: DeleteSingleItContractLocalPriceRegulationTypesInternalV2DeleteLocalPriceRegulationTypeByOrganizationuuidAndOptionuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
-    public deleteSingleItContractLocalPriceRegulationTypesInternalV2DeleteLocalPriceRegulationTypeByOrganizationuuidAndOptionuuid(requestParameters: DeleteSingleItContractLocalPriceRegulationTypesInternalV2DeleteLocalPriceRegulationTypeByOrganizationuuidAndOptionuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
+    public deleteSingleItContractLocalPriceRegulationTypesInternalV2DeleteLocalPriceRegulationType(requestParameters: DeleteSingleItContractLocalPriceRegulationTypesInternalV2DeleteLocalPriceRegulationTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
+    public deleteSingleItContractLocalPriceRegulationTypesInternalV2DeleteLocalPriceRegulationType(requestParameters: DeleteSingleItContractLocalPriceRegulationTypesInternalV2DeleteLocalPriceRegulationTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
+    public deleteSingleItContractLocalPriceRegulationTypesInternalV2DeleteLocalPriceRegulationType(requestParameters: DeleteSingleItContractLocalPriceRegulationTypesInternalV2DeleteLocalPriceRegulationTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
+    public deleteSingleItContractLocalPriceRegulationTypesInternalV2DeleteLocalPriceRegulationType(requestParameters: DeleteSingleItContractLocalPriceRegulationTypesInternalV2DeleteLocalPriceRegulationTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling deleteSingleItContractLocalPriceRegulationTypesInternalV2DeleteLocalPriceRegulationTypeByOrganizationuuidAndOptionuuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling deleteSingleItContractLocalPriceRegulationTypesInternalV2DeleteLocalPriceRegulationType.');
         }
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
-            throw new Error('Required parameter optionUuid was null or undefined when calling deleteSingleItContractLocalPriceRegulationTypesInternalV2DeleteLocalPriceRegulationTypeByOrganizationuuidAndOptionuuid.');
+            throw new Error('Required parameter optionUuid was null or undefined when calling deleteSingleItContractLocalPriceRegulationTypesInternalV2DeleteLocalPriceRegulationType.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -187,13 +187,13 @@ export class APIV2ItContractLocalPriceRegulationTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getManyItContractLocalPriceRegulationTypesInternalV2GetLocalPriceRegulationTypesByOrganizationuuid(requestParameters: GetManyItContractLocalPriceRegulationTypesInternalV2GetLocalPriceRegulationTypesByOrganizationuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APILocalRegularOptionResponseDTO>>;
-    public getManyItContractLocalPriceRegulationTypesInternalV2GetLocalPriceRegulationTypesByOrganizationuuid(requestParameters: GetManyItContractLocalPriceRegulationTypesInternalV2GetLocalPriceRegulationTypesByOrganizationuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APILocalRegularOptionResponseDTO>>>;
-    public getManyItContractLocalPriceRegulationTypesInternalV2GetLocalPriceRegulationTypesByOrganizationuuid(requestParameters: GetManyItContractLocalPriceRegulationTypesInternalV2GetLocalPriceRegulationTypesByOrganizationuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APILocalRegularOptionResponseDTO>>>;
-    public getManyItContractLocalPriceRegulationTypesInternalV2GetLocalPriceRegulationTypesByOrganizationuuid(requestParameters: GetManyItContractLocalPriceRegulationTypesInternalV2GetLocalPriceRegulationTypesByOrganizationuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyItContractLocalPriceRegulationTypesInternalV2GetLocalPriceRegulationTypes(requestParameters: GetManyItContractLocalPriceRegulationTypesInternalV2GetLocalPriceRegulationTypesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APILocalRegularOptionResponseDTO>>;
+    public getManyItContractLocalPriceRegulationTypesInternalV2GetLocalPriceRegulationTypes(requestParameters: GetManyItContractLocalPriceRegulationTypesInternalV2GetLocalPriceRegulationTypesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APILocalRegularOptionResponseDTO>>>;
+    public getManyItContractLocalPriceRegulationTypesInternalV2GetLocalPriceRegulationTypes(requestParameters: GetManyItContractLocalPriceRegulationTypesInternalV2GetLocalPriceRegulationTypesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APILocalRegularOptionResponseDTO>>>;
+    public getManyItContractLocalPriceRegulationTypesInternalV2GetLocalPriceRegulationTypes(requestParameters: GetManyItContractLocalPriceRegulationTypesInternalV2GetLocalPriceRegulationTypesRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyItContractLocalPriceRegulationTypesInternalV2GetLocalPriceRegulationTypesByOrganizationuuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyItContractLocalPriceRegulationTypesInternalV2GetLocalPriceRegulationTypes.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -307,21 +307,21 @@ export class APIV2ItContractLocalPriceRegulationTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleItContractLocalPriceRegulationTypesInternalV2PatchLocalPriceRegulationTypeByOrganizationuuidAndOptionuuid(requestParameters: PatchSingleItContractLocalPriceRegulationTypesInternalV2PatchLocalPriceRegulationTypeByOrganizationuuidAndOptionuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
-    public patchSingleItContractLocalPriceRegulationTypesInternalV2PatchLocalPriceRegulationTypeByOrganizationuuidAndOptionuuid(requestParameters: PatchSingleItContractLocalPriceRegulationTypesInternalV2PatchLocalPriceRegulationTypeByOrganizationuuidAndOptionuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
-    public patchSingleItContractLocalPriceRegulationTypesInternalV2PatchLocalPriceRegulationTypeByOrganizationuuidAndOptionuuid(requestParameters: PatchSingleItContractLocalPriceRegulationTypesInternalV2PatchLocalPriceRegulationTypeByOrganizationuuidAndOptionuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
-    public patchSingleItContractLocalPriceRegulationTypesInternalV2PatchLocalPriceRegulationTypeByOrganizationuuidAndOptionuuid(requestParameters: PatchSingleItContractLocalPriceRegulationTypesInternalV2PatchLocalPriceRegulationTypeByOrganizationuuidAndOptionuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public patchSingleItContractLocalPriceRegulationTypesInternalV2PatchLocalPriceRegulationType(requestParameters: PatchSingleItContractLocalPriceRegulationTypesInternalV2PatchLocalPriceRegulationTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
+    public patchSingleItContractLocalPriceRegulationTypesInternalV2PatchLocalPriceRegulationType(requestParameters: PatchSingleItContractLocalPriceRegulationTypesInternalV2PatchLocalPriceRegulationTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
+    public patchSingleItContractLocalPriceRegulationTypesInternalV2PatchLocalPriceRegulationType(requestParameters: PatchSingleItContractLocalPriceRegulationTypesInternalV2PatchLocalPriceRegulationTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
+    public patchSingleItContractLocalPriceRegulationTypesInternalV2PatchLocalPriceRegulationType(requestParameters: PatchSingleItContractLocalPriceRegulationTypesInternalV2PatchLocalPriceRegulationTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling patchSingleItContractLocalPriceRegulationTypesInternalV2PatchLocalPriceRegulationTypeByOrganizationuuidAndOptionuuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling patchSingleItContractLocalPriceRegulationTypesInternalV2PatchLocalPriceRegulationType.');
         }
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
-            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItContractLocalPriceRegulationTypesInternalV2PatchLocalPriceRegulationTypeByOrganizationuuidAndOptionuuid.');
+            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItContractLocalPriceRegulationTypesInternalV2PatchLocalPriceRegulationType.');
         }
         const dto = requestParameters.dto;
         if (dto === null || dto === undefined) {
-            throw new Error('Required parameter dto was null or undefined when calling patchSingleItContractLocalPriceRegulationTypesInternalV2PatchLocalPriceRegulationTypeByOrganizationuuidAndOptionuuid.');
+            throw new Error('Required parameter dto was null or undefined when calling patchSingleItContractLocalPriceRegulationTypesInternalV2PatchLocalPriceRegulationType.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -384,17 +384,17 @@ export class APIV2ItContractLocalPriceRegulationTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleItContractLocalPriceRegulationTypesInternalV2CreateLocalPriceRegulationTypeByOrganizationuuid(requestParameters: PostSingleItContractLocalPriceRegulationTypesInternalV2CreateLocalPriceRegulationTypeByOrganizationuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
-    public postSingleItContractLocalPriceRegulationTypesInternalV2CreateLocalPriceRegulationTypeByOrganizationuuid(requestParameters: PostSingleItContractLocalPriceRegulationTypesInternalV2CreateLocalPriceRegulationTypeByOrganizationuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
-    public postSingleItContractLocalPriceRegulationTypesInternalV2CreateLocalPriceRegulationTypeByOrganizationuuid(requestParameters: PostSingleItContractLocalPriceRegulationTypesInternalV2CreateLocalPriceRegulationTypeByOrganizationuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
-    public postSingleItContractLocalPriceRegulationTypesInternalV2CreateLocalPriceRegulationTypeByOrganizationuuid(requestParameters: PostSingleItContractLocalPriceRegulationTypesInternalV2CreateLocalPriceRegulationTypeByOrganizationuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public postSingleItContractLocalPriceRegulationTypesInternalV2CreateLocalPriceRegulationType(requestParameters: PostSingleItContractLocalPriceRegulationTypesInternalV2CreateLocalPriceRegulationTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
+    public postSingleItContractLocalPriceRegulationTypesInternalV2CreateLocalPriceRegulationType(requestParameters: PostSingleItContractLocalPriceRegulationTypesInternalV2CreateLocalPriceRegulationTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
+    public postSingleItContractLocalPriceRegulationTypesInternalV2CreateLocalPriceRegulationType(requestParameters: PostSingleItContractLocalPriceRegulationTypesInternalV2CreateLocalPriceRegulationTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
+    public postSingleItContractLocalPriceRegulationTypesInternalV2CreateLocalPriceRegulationType(requestParameters: PostSingleItContractLocalPriceRegulationTypesInternalV2CreateLocalPriceRegulationTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling postSingleItContractLocalPriceRegulationTypesInternalV2CreateLocalPriceRegulationTypeByOrganizationuuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling postSingleItContractLocalPriceRegulationTypesInternalV2CreateLocalPriceRegulationType.');
         }
         const dto = requestParameters.dto;
         if (dto === null || dto === undefined) {
-            throw new Error('Required parameter dto was null or undefined when calling postSingleItContractLocalPriceRegulationTypesInternalV2CreateLocalPriceRegulationTypeByOrganizationuuid.');
+            throw new Error('Required parameter dto was null or undefined when calling postSingleItContractLocalPriceRegulationTypesInternalV2CreateLocalPriceRegulationType.');
         }
 
         let localVarHeaders = this.defaultHeaders;

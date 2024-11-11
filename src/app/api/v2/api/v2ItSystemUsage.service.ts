@@ -50,26 +50,26 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface DeleteSingleItSystemUsageV2DeleteExternalReferenceBySystemusageuuidAndExternalreferenceuuidRequestParams {
+export interface DeleteSingleItSystemUsageV2DeleteExternalReferenceRequestParams {
     systemUsageUuid: string;
     externalReferenceUuid: string;
 }
 
-export interface DeleteSingleItSystemUsageV2DeleteItSystemUsageBySystemusageuuidRequestParams {
+export interface DeleteSingleItSystemUsageV2DeleteItSystemUsageRequestParams {
     systemUsageUuid: string;
 }
 
-export interface DeleteSingleItSystemUsageV2DeleteJournalPeriodBySystemusageuuidAndJournalperioduuidRequestParams {
+export interface DeleteSingleItSystemUsageV2DeleteJournalPeriodRequestParams {
     systemUsageUuid: string;
     journalPeriodUuid: string;
 }
 
-export interface DeleteSingleItSystemUsageV2DeleteSystemUsageRelationBySystemusageuuidAndSystemrelationuuidRequestParams {
+export interface DeleteSingleItSystemUsageV2DeleteSystemUsageRelationRequestParams {
     systemUsageUuid: string;
     systemRelationUuid: string;
 }
 
-export interface GetManyItSystemUsageV2GetIncomingSystemRelationsBySystemusageuuidRequestParams {
+export interface GetManyItSystemUsageV2GetIncomingSystemRelationsRequestParams {
     systemUsageUuid: string;
 }
 
@@ -96,7 +96,7 @@ export interface GetManyItSystemUsageV2GetItSystemUsagesRequestParams {
     pageSize?: number;
 }
 
-export interface GetSingleItSystemUsageV2GetItSystemUsageBySystemusageuuidRequestParams {
+export interface GetSingleItSystemUsageV2GetItSystemUsageRequestParams {
     /** UUID of the system usage entity */
     systemUsageUuid: string;
 }
@@ -106,37 +106,37 @@ export interface GetSingleItSystemUsageV2GetItSystemUsageCollectionPermissionsRe
     organizationUuid: string;
 }
 
-export interface GetSingleItSystemUsageV2GetItSystemUsagePermissionsBySystemusageuuidRequestParams {
+export interface GetSingleItSystemUsageV2GetItSystemUsagePermissionsRequestParams {
     /** UUID of the system usage entity */
     systemUsageUuid: string;
 }
 
-export interface GetSingleItSystemUsageV2GetJournalPeriodBySystemusageuuidAndJournalperioduuidRequestParams {
+export interface GetSingleItSystemUsageV2GetJournalPeriodRequestParams {
     systemUsageUuid: string;
     journalPeriodUuid: string;
 }
 
-export interface GetSingleItSystemUsageV2GetSystemUsageRelationBySystemusageuuidAndSystemrelationuuidRequestParams {
+export interface GetSingleItSystemUsageV2GetSystemUsageRelationRequestParams {
     systemUsageUuid: string;
     systemRelationUuid: string;
 }
 
-export interface PatchSingleItSystemUsageV2PatchAddRoleAssignmentBySystemusageuuidRequestParams {
+export interface PatchSingleItSystemUsageV2PatchAddRoleAssignmentRequestParams {
     systemUsageUuid: string;
     request: APIRoleAssignmentRequestDTO;
 }
 
-export interface PatchSingleItSystemUsageV2PatchRemoveRoleAssignmentBySystemusageuuidRequestParams {
+export interface PatchSingleItSystemUsageV2PatchRemoveRoleAssignmentRequestParams {
     systemUsageUuid: string;
     request: APIRoleAssignmentRequestDTO;
 }
 
-export interface PatchSingleItSystemUsageV2PatchSystemUsageBySystemusageuuidRequestParams {
+export interface PatchSingleItSystemUsageV2PatchSystemUsageRequestParams {
     systemUsageUuid: string;
     request: APIUpdateItSystemUsageRequestDTO;
 }
 
-export interface PostSingleItSystemUsageV2PostExternalReferenceBySystemusageuuidRequestParams {
+export interface PostSingleItSystemUsageV2PostExternalReferenceRequestParams {
     systemUsageUuid: string;
     dto: APIExternalReferenceDataWriteRequestDTO;
 }
@@ -145,34 +145,34 @@ export interface PostSingleItSystemUsageV2PostItSystemUsageRequestParams {
     request: APICreateItSystemUsageRequestDTO;
 }
 
-export interface PostSingleItSystemUsageV2PostJournalPeriodBySystemusageuuidRequestParams {
+export interface PostSingleItSystemUsageV2PostJournalPeriodRequestParams {
     systemUsageUuid: string;
     request: APIJournalPeriodDTO;
 }
 
-export interface PostSingleItSystemUsageV2PostSystemUsageRelationBySystemusageuuidRequestParams {
+export interface PostSingleItSystemUsageV2PostSystemUsageRelationRequestParams {
     systemUsageUuid: string;
     request: APISystemRelationWriteRequestDTO;
 }
 
-export interface PutSingleItSystemUsageV2PutExternalReferenceBySystemusageuuidAndExternalreferenceuuidRequestParams {
+export interface PutSingleItSystemUsageV2PutExternalReferenceRequestParams {
     systemUsageUuid: string;
     externalReferenceUuid: string;
     dto: APIExternalReferenceDataWriteRequestDTO;
 }
 
-export interface PutSingleItSystemUsageV2PutJournalPeriodBySystemusageuuidAndJournalperioduuidRequestParams {
+export interface PutSingleItSystemUsageV2PutJournalPeriodRequestParams {
     systemUsageUuid: string;
     journalPeriodUuid: string;
     request: APIJournalPeriodDTO;
 }
 
-export interface PutSingleItSystemUsageV2PutSystemUsageBySystemusageuuidRequestParams {
+export interface PutSingleItSystemUsageV2PutSystemUsageRequestParams {
     systemUsageUuid: string;
     request: APIUpdateItSystemUsageRequestDTO;
 }
 
-export interface PutSingleItSystemUsageV2PutSystemUsageRelationBySystemusageuuidAndSystemrelationuuidRequestParams {
+export interface PutSingleItSystemUsageV2PutSystemUsageRelationRequestParams {
     systemUsageUuid: string;
     systemRelationUuid: string;
     request: APISystemRelationWriteRequestDTO;
@@ -249,17 +249,17 @@ export class APIV2ItSystemUsageService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public deleteSingleItSystemUsageV2DeleteExternalReferenceBySystemusageuuidAndExternalreferenceuuid(requestParameters: DeleteSingleItSystemUsageV2DeleteExternalReferenceBySystemusageuuidAndExternalreferenceuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<object>;
-    public deleteSingleItSystemUsageV2DeleteExternalReferenceBySystemusageuuidAndExternalreferenceuuid(requestParameters: DeleteSingleItSystemUsageV2DeleteExternalReferenceBySystemusageuuidAndExternalreferenceuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public deleteSingleItSystemUsageV2DeleteExternalReferenceBySystemusageuuidAndExternalreferenceuuid(requestParameters: DeleteSingleItSystemUsageV2DeleteExternalReferenceBySystemusageuuidAndExternalreferenceuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public deleteSingleItSystemUsageV2DeleteExternalReferenceBySystemusageuuidAndExternalreferenceuuid(requestParameters: DeleteSingleItSystemUsageV2DeleteExternalReferenceBySystemusageuuidAndExternalreferenceuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
+    public deleteSingleItSystemUsageV2DeleteExternalReference(requestParameters: DeleteSingleItSystemUsageV2DeleteExternalReferenceRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<object>;
+    public deleteSingleItSystemUsageV2DeleteExternalReference(requestParameters: DeleteSingleItSystemUsageV2DeleteExternalReferenceRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public deleteSingleItSystemUsageV2DeleteExternalReference(requestParameters: DeleteSingleItSystemUsageV2DeleteExternalReferenceRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public deleteSingleItSystemUsageV2DeleteExternalReference(requestParameters: DeleteSingleItSystemUsageV2DeleteExternalReferenceRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
         const systemUsageUuid = requestParameters.systemUsageUuid;
         if (systemUsageUuid === null || systemUsageUuid === undefined) {
-            throw new Error('Required parameter systemUsageUuid was null or undefined when calling deleteSingleItSystemUsageV2DeleteExternalReferenceBySystemusageuuidAndExternalreferenceuuid.');
+            throw new Error('Required parameter systemUsageUuid was null or undefined when calling deleteSingleItSystemUsageV2DeleteExternalReference.');
         }
         const externalReferenceUuid = requestParameters.externalReferenceUuid;
         if (externalReferenceUuid === null || externalReferenceUuid === undefined) {
-            throw new Error('Required parameter externalReferenceUuid was null or undefined when calling deleteSingleItSystemUsageV2DeleteExternalReferenceBySystemusageuuidAndExternalreferenceuuid.');
+            throw new Error('Required parameter externalReferenceUuid was null or undefined when calling deleteSingleItSystemUsageV2DeleteExternalReference.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -312,13 +312,13 @@ export class APIV2ItSystemUsageService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public deleteSingleItSystemUsageV2DeleteItSystemUsageBySystemusageuuid(requestParameters: DeleteSingleItSystemUsageV2DeleteItSystemUsageBySystemusageuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<object>;
-    public deleteSingleItSystemUsageV2DeleteItSystemUsageBySystemusageuuid(requestParameters: DeleteSingleItSystemUsageV2DeleteItSystemUsageBySystemusageuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public deleteSingleItSystemUsageV2DeleteItSystemUsageBySystemusageuuid(requestParameters: DeleteSingleItSystemUsageV2DeleteItSystemUsageBySystemusageuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public deleteSingleItSystemUsageV2DeleteItSystemUsageBySystemusageuuid(requestParameters: DeleteSingleItSystemUsageV2DeleteItSystemUsageBySystemusageuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
+    public deleteSingleItSystemUsageV2DeleteItSystemUsage(requestParameters: DeleteSingleItSystemUsageV2DeleteItSystemUsageRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<object>;
+    public deleteSingleItSystemUsageV2DeleteItSystemUsage(requestParameters: DeleteSingleItSystemUsageV2DeleteItSystemUsageRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public deleteSingleItSystemUsageV2DeleteItSystemUsage(requestParameters: DeleteSingleItSystemUsageV2DeleteItSystemUsageRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public deleteSingleItSystemUsageV2DeleteItSystemUsage(requestParameters: DeleteSingleItSystemUsageV2DeleteItSystemUsageRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
         const systemUsageUuid = requestParameters.systemUsageUuid;
         if (systemUsageUuid === null || systemUsageUuid === undefined) {
-            throw new Error('Required parameter systemUsageUuid was null or undefined when calling deleteSingleItSystemUsageV2DeleteItSystemUsageBySystemusageuuid.');
+            throw new Error('Required parameter systemUsageUuid was null or undefined when calling deleteSingleItSystemUsageV2DeleteItSystemUsage.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -371,17 +371,17 @@ export class APIV2ItSystemUsageService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public deleteSingleItSystemUsageV2DeleteJournalPeriodBySystemusageuuidAndJournalperioduuid(requestParameters: DeleteSingleItSystemUsageV2DeleteJournalPeriodBySystemusageuuidAndJournalperioduuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<object>;
-    public deleteSingleItSystemUsageV2DeleteJournalPeriodBySystemusageuuidAndJournalperioduuid(requestParameters: DeleteSingleItSystemUsageV2DeleteJournalPeriodBySystemusageuuidAndJournalperioduuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public deleteSingleItSystemUsageV2DeleteJournalPeriodBySystemusageuuidAndJournalperioduuid(requestParameters: DeleteSingleItSystemUsageV2DeleteJournalPeriodBySystemusageuuidAndJournalperioduuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public deleteSingleItSystemUsageV2DeleteJournalPeriodBySystemusageuuidAndJournalperioduuid(requestParameters: DeleteSingleItSystemUsageV2DeleteJournalPeriodBySystemusageuuidAndJournalperioduuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
+    public deleteSingleItSystemUsageV2DeleteJournalPeriod(requestParameters: DeleteSingleItSystemUsageV2DeleteJournalPeriodRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<object>;
+    public deleteSingleItSystemUsageV2DeleteJournalPeriod(requestParameters: DeleteSingleItSystemUsageV2DeleteJournalPeriodRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public deleteSingleItSystemUsageV2DeleteJournalPeriod(requestParameters: DeleteSingleItSystemUsageV2DeleteJournalPeriodRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public deleteSingleItSystemUsageV2DeleteJournalPeriod(requestParameters: DeleteSingleItSystemUsageV2DeleteJournalPeriodRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
         const systemUsageUuid = requestParameters.systemUsageUuid;
         if (systemUsageUuid === null || systemUsageUuid === undefined) {
-            throw new Error('Required parameter systemUsageUuid was null or undefined when calling deleteSingleItSystemUsageV2DeleteJournalPeriodBySystemusageuuidAndJournalperioduuid.');
+            throw new Error('Required parameter systemUsageUuid was null or undefined when calling deleteSingleItSystemUsageV2DeleteJournalPeriod.');
         }
         const journalPeriodUuid = requestParameters.journalPeriodUuid;
         if (journalPeriodUuid === null || journalPeriodUuid === undefined) {
-            throw new Error('Required parameter journalPeriodUuid was null or undefined when calling deleteSingleItSystemUsageV2DeleteJournalPeriodBySystemusageuuidAndJournalperioduuid.');
+            throw new Error('Required parameter journalPeriodUuid was null or undefined when calling deleteSingleItSystemUsageV2DeleteJournalPeriod.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -434,17 +434,17 @@ export class APIV2ItSystemUsageService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public deleteSingleItSystemUsageV2DeleteSystemUsageRelationBySystemusageuuidAndSystemrelationuuid(requestParameters: DeleteSingleItSystemUsageV2DeleteSystemUsageRelationBySystemusageuuidAndSystemrelationuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<object>;
-    public deleteSingleItSystemUsageV2DeleteSystemUsageRelationBySystemusageuuidAndSystemrelationuuid(requestParameters: DeleteSingleItSystemUsageV2DeleteSystemUsageRelationBySystemusageuuidAndSystemrelationuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public deleteSingleItSystemUsageV2DeleteSystemUsageRelationBySystemusageuuidAndSystemrelationuuid(requestParameters: DeleteSingleItSystemUsageV2DeleteSystemUsageRelationBySystemusageuuidAndSystemrelationuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public deleteSingleItSystemUsageV2DeleteSystemUsageRelationBySystemusageuuidAndSystemrelationuuid(requestParameters: DeleteSingleItSystemUsageV2DeleteSystemUsageRelationBySystemusageuuidAndSystemrelationuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
+    public deleteSingleItSystemUsageV2DeleteSystemUsageRelation(requestParameters: DeleteSingleItSystemUsageV2DeleteSystemUsageRelationRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<object>;
+    public deleteSingleItSystemUsageV2DeleteSystemUsageRelation(requestParameters: DeleteSingleItSystemUsageV2DeleteSystemUsageRelationRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public deleteSingleItSystemUsageV2DeleteSystemUsageRelation(requestParameters: DeleteSingleItSystemUsageV2DeleteSystemUsageRelationRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public deleteSingleItSystemUsageV2DeleteSystemUsageRelation(requestParameters: DeleteSingleItSystemUsageV2DeleteSystemUsageRelationRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
         const systemUsageUuid = requestParameters.systemUsageUuid;
         if (systemUsageUuid === null || systemUsageUuid === undefined) {
-            throw new Error('Required parameter systemUsageUuid was null or undefined when calling deleteSingleItSystemUsageV2DeleteSystemUsageRelationBySystemusageuuidAndSystemrelationuuid.');
+            throw new Error('Required parameter systemUsageUuid was null or undefined when calling deleteSingleItSystemUsageV2DeleteSystemUsageRelation.');
         }
         const systemRelationUuid = requestParameters.systemRelationUuid;
         if (systemRelationUuid === null || systemRelationUuid === undefined) {
-            throw new Error('Required parameter systemRelationUuid was null or undefined when calling deleteSingleItSystemUsageV2DeleteSystemUsageRelationBySystemusageuuidAndSystemrelationuuid.');
+            throw new Error('Required parameter systemRelationUuid was null or undefined when calling deleteSingleItSystemUsageV2DeleteSystemUsageRelation.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -497,13 +497,13 @@ export class APIV2ItSystemUsageService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getManyItSystemUsageV2GetIncomingSystemRelationsBySystemusageuuid(requestParameters: GetManyItSystemUsageV2GetIncomingSystemRelationsBySystemusageuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIIncomingSystemRelationResponseDTO>>;
-    public getManyItSystemUsageV2GetIncomingSystemRelationsBySystemusageuuid(requestParameters: GetManyItSystemUsageV2GetIncomingSystemRelationsBySystemusageuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIIncomingSystemRelationResponseDTO>>>;
-    public getManyItSystemUsageV2GetIncomingSystemRelationsBySystemusageuuid(requestParameters: GetManyItSystemUsageV2GetIncomingSystemRelationsBySystemusageuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIIncomingSystemRelationResponseDTO>>>;
-    public getManyItSystemUsageV2GetIncomingSystemRelationsBySystemusageuuid(requestParameters: GetManyItSystemUsageV2GetIncomingSystemRelationsBySystemusageuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyItSystemUsageV2GetIncomingSystemRelations(requestParameters: GetManyItSystemUsageV2GetIncomingSystemRelationsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIIncomingSystemRelationResponseDTO>>;
+    public getManyItSystemUsageV2GetIncomingSystemRelations(requestParameters: GetManyItSystemUsageV2GetIncomingSystemRelationsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIIncomingSystemRelationResponseDTO>>>;
+    public getManyItSystemUsageV2GetIncomingSystemRelations(requestParameters: GetManyItSystemUsageV2GetIncomingSystemRelationsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIIncomingSystemRelationResponseDTO>>>;
+    public getManyItSystemUsageV2GetIncomingSystemRelations(requestParameters: GetManyItSystemUsageV2GetIncomingSystemRelationsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const systemUsageUuid = requestParameters.systemUsageUuid;
         if (systemUsageUuid === null || systemUsageUuid === undefined) {
-            throw new Error('Required parameter systemUsageUuid was null or undefined when calling getManyItSystemUsageV2GetIncomingSystemRelationsBySystemusageuuid.');
+            throw new Error('Required parameter systemUsageUuid was null or undefined when calling getManyItSystemUsageV2GetIncomingSystemRelations.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -664,13 +664,13 @@ export class APIV2ItSystemUsageService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItSystemUsageV2GetItSystemUsageBySystemusageuuid(requestParameters: GetSingleItSystemUsageV2GetItSystemUsageBySystemusageuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIItSystemUsageResponseDTO>;
-    public getSingleItSystemUsageV2GetItSystemUsageBySystemusageuuid(requestParameters: GetSingleItSystemUsageV2GetItSystemUsageBySystemusageuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIItSystemUsageResponseDTO>>;
-    public getSingleItSystemUsageV2GetItSystemUsageBySystemusageuuid(requestParameters: GetSingleItSystemUsageV2GetItSystemUsageBySystemusageuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIItSystemUsageResponseDTO>>;
-    public getSingleItSystemUsageV2GetItSystemUsageBySystemusageuuid(requestParameters: GetSingleItSystemUsageV2GetItSystemUsageBySystemusageuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleItSystemUsageV2GetItSystemUsage(requestParameters: GetSingleItSystemUsageV2GetItSystemUsageRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIItSystemUsageResponseDTO>;
+    public getSingleItSystemUsageV2GetItSystemUsage(requestParameters: GetSingleItSystemUsageV2GetItSystemUsageRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIItSystemUsageResponseDTO>>;
+    public getSingleItSystemUsageV2GetItSystemUsage(requestParameters: GetSingleItSystemUsageV2GetItSystemUsageRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIItSystemUsageResponseDTO>>;
+    public getSingleItSystemUsageV2GetItSystemUsage(requestParameters: GetSingleItSystemUsageV2GetItSystemUsageRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const systemUsageUuid = requestParameters.systemUsageUuid;
         if (systemUsageUuid === null || systemUsageUuid === undefined) {
-            throw new Error('Required parameter systemUsageUuid was null or undefined when calling getSingleItSystemUsageV2GetItSystemUsageBySystemusageuuid.');
+            throw new Error('Required parameter systemUsageUuid was null or undefined when calling getSingleItSystemUsageV2GetItSystemUsage.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -789,13 +789,13 @@ export class APIV2ItSystemUsageService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItSystemUsageV2GetItSystemUsagePermissionsBySystemusageuuid(requestParameters: GetSingleItSystemUsageV2GetItSystemUsagePermissionsBySystemusageuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIResourcePermissionsResponseDTO>;
-    public getSingleItSystemUsageV2GetItSystemUsagePermissionsBySystemusageuuid(requestParameters: GetSingleItSystemUsageV2GetItSystemUsagePermissionsBySystemusageuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIResourcePermissionsResponseDTO>>;
-    public getSingleItSystemUsageV2GetItSystemUsagePermissionsBySystemusageuuid(requestParameters: GetSingleItSystemUsageV2GetItSystemUsagePermissionsBySystemusageuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIResourcePermissionsResponseDTO>>;
-    public getSingleItSystemUsageV2GetItSystemUsagePermissionsBySystemusageuuid(requestParameters: GetSingleItSystemUsageV2GetItSystemUsagePermissionsBySystemusageuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleItSystemUsageV2GetItSystemUsagePermissions(requestParameters: GetSingleItSystemUsageV2GetItSystemUsagePermissionsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIResourcePermissionsResponseDTO>;
+    public getSingleItSystemUsageV2GetItSystemUsagePermissions(requestParameters: GetSingleItSystemUsageV2GetItSystemUsagePermissionsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIResourcePermissionsResponseDTO>>;
+    public getSingleItSystemUsageV2GetItSystemUsagePermissions(requestParameters: GetSingleItSystemUsageV2GetItSystemUsagePermissionsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIResourcePermissionsResponseDTO>>;
+    public getSingleItSystemUsageV2GetItSystemUsagePermissions(requestParameters: GetSingleItSystemUsageV2GetItSystemUsagePermissionsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const systemUsageUuid = requestParameters.systemUsageUuid;
         if (systemUsageUuid === null || systemUsageUuid === undefined) {
-            throw new Error('Required parameter systemUsageUuid was null or undefined when calling getSingleItSystemUsageV2GetItSystemUsagePermissionsBySystemusageuuid.');
+            throw new Error('Required parameter systemUsageUuid was null or undefined when calling getSingleItSystemUsageV2GetItSystemUsagePermissions.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -848,17 +848,17 @@ export class APIV2ItSystemUsageService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItSystemUsageV2GetJournalPeriodBySystemusageuuidAndJournalperioduuid(requestParameters: GetSingleItSystemUsageV2GetJournalPeriodBySystemusageuuidAndJournalperioduuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIJournalPeriodResponseDTO>;
-    public getSingleItSystemUsageV2GetJournalPeriodBySystemusageuuidAndJournalperioduuid(requestParameters: GetSingleItSystemUsageV2GetJournalPeriodBySystemusageuuidAndJournalperioduuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIJournalPeriodResponseDTO>>;
-    public getSingleItSystemUsageV2GetJournalPeriodBySystemusageuuidAndJournalperioduuid(requestParameters: GetSingleItSystemUsageV2GetJournalPeriodBySystemusageuuidAndJournalperioduuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIJournalPeriodResponseDTO>>;
-    public getSingleItSystemUsageV2GetJournalPeriodBySystemusageuuidAndJournalperioduuid(requestParameters: GetSingleItSystemUsageV2GetJournalPeriodBySystemusageuuidAndJournalperioduuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleItSystemUsageV2GetJournalPeriod(requestParameters: GetSingleItSystemUsageV2GetJournalPeriodRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIJournalPeriodResponseDTO>;
+    public getSingleItSystemUsageV2GetJournalPeriod(requestParameters: GetSingleItSystemUsageV2GetJournalPeriodRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIJournalPeriodResponseDTO>>;
+    public getSingleItSystemUsageV2GetJournalPeriod(requestParameters: GetSingleItSystemUsageV2GetJournalPeriodRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIJournalPeriodResponseDTO>>;
+    public getSingleItSystemUsageV2GetJournalPeriod(requestParameters: GetSingleItSystemUsageV2GetJournalPeriodRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const systemUsageUuid = requestParameters.systemUsageUuid;
         if (systemUsageUuid === null || systemUsageUuid === undefined) {
-            throw new Error('Required parameter systemUsageUuid was null or undefined when calling getSingleItSystemUsageV2GetJournalPeriodBySystemusageuuidAndJournalperioduuid.');
+            throw new Error('Required parameter systemUsageUuid was null or undefined when calling getSingleItSystemUsageV2GetJournalPeriod.');
         }
         const journalPeriodUuid = requestParameters.journalPeriodUuid;
         if (journalPeriodUuid === null || journalPeriodUuid === undefined) {
-            throw new Error('Required parameter journalPeriodUuid was null or undefined when calling getSingleItSystemUsageV2GetJournalPeriodBySystemusageuuidAndJournalperioduuid.');
+            throw new Error('Required parameter journalPeriodUuid was null or undefined when calling getSingleItSystemUsageV2GetJournalPeriod.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -911,17 +911,17 @@ export class APIV2ItSystemUsageService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItSystemUsageV2GetSystemUsageRelationBySystemusageuuidAndSystemrelationuuid(requestParameters: GetSingleItSystemUsageV2GetSystemUsageRelationBySystemusageuuidAndSystemrelationuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIOutgoingSystemRelationResponseDTO>;
-    public getSingleItSystemUsageV2GetSystemUsageRelationBySystemusageuuidAndSystemrelationuuid(requestParameters: GetSingleItSystemUsageV2GetSystemUsageRelationBySystemusageuuidAndSystemrelationuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIOutgoingSystemRelationResponseDTO>>;
-    public getSingleItSystemUsageV2GetSystemUsageRelationBySystemusageuuidAndSystemrelationuuid(requestParameters: GetSingleItSystemUsageV2GetSystemUsageRelationBySystemusageuuidAndSystemrelationuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIOutgoingSystemRelationResponseDTO>>;
-    public getSingleItSystemUsageV2GetSystemUsageRelationBySystemusageuuidAndSystemrelationuuid(requestParameters: GetSingleItSystemUsageV2GetSystemUsageRelationBySystemusageuuidAndSystemrelationuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleItSystemUsageV2GetSystemUsageRelation(requestParameters: GetSingleItSystemUsageV2GetSystemUsageRelationRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIOutgoingSystemRelationResponseDTO>;
+    public getSingleItSystemUsageV2GetSystemUsageRelation(requestParameters: GetSingleItSystemUsageV2GetSystemUsageRelationRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIOutgoingSystemRelationResponseDTO>>;
+    public getSingleItSystemUsageV2GetSystemUsageRelation(requestParameters: GetSingleItSystemUsageV2GetSystemUsageRelationRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIOutgoingSystemRelationResponseDTO>>;
+    public getSingleItSystemUsageV2GetSystemUsageRelation(requestParameters: GetSingleItSystemUsageV2GetSystemUsageRelationRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const systemUsageUuid = requestParameters.systemUsageUuid;
         if (systemUsageUuid === null || systemUsageUuid === undefined) {
-            throw new Error('Required parameter systemUsageUuid was null or undefined when calling getSingleItSystemUsageV2GetSystemUsageRelationBySystemusageuuidAndSystemrelationuuid.');
+            throw new Error('Required parameter systemUsageUuid was null or undefined when calling getSingleItSystemUsageV2GetSystemUsageRelation.');
         }
         const systemRelationUuid = requestParameters.systemRelationUuid;
         if (systemRelationUuid === null || systemRelationUuid === undefined) {
-            throw new Error('Required parameter systemRelationUuid was null or undefined when calling getSingleItSystemUsageV2GetSystemUsageRelationBySystemusageuuidAndSystemrelationuuid.');
+            throw new Error('Required parameter systemRelationUuid was null or undefined when calling getSingleItSystemUsageV2GetSystemUsageRelation.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -973,17 +973,17 @@ export class APIV2ItSystemUsageService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleItSystemUsageV2PatchAddRoleAssignmentBySystemusageuuid(requestParameters: PatchSingleItSystemUsageV2PatchAddRoleAssignmentBySystemusageuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIItSystemUsageResponseDTO>;
-    public patchSingleItSystemUsageV2PatchAddRoleAssignmentBySystemusageuuid(requestParameters: PatchSingleItSystemUsageV2PatchAddRoleAssignmentBySystemusageuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIItSystemUsageResponseDTO>>;
-    public patchSingleItSystemUsageV2PatchAddRoleAssignmentBySystemusageuuid(requestParameters: PatchSingleItSystemUsageV2PatchAddRoleAssignmentBySystemusageuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIItSystemUsageResponseDTO>>;
-    public patchSingleItSystemUsageV2PatchAddRoleAssignmentBySystemusageuuid(requestParameters: PatchSingleItSystemUsageV2PatchAddRoleAssignmentBySystemusageuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public patchSingleItSystemUsageV2PatchAddRoleAssignment(requestParameters: PatchSingleItSystemUsageV2PatchAddRoleAssignmentRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIItSystemUsageResponseDTO>;
+    public patchSingleItSystemUsageV2PatchAddRoleAssignment(requestParameters: PatchSingleItSystemUsageV2PatchAddRoleAssignmentRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIItSystemUsageResponseDTO>>;
+    public patchSingleItSystemUsageV2PatchAddRoleAssignment(requestParameters: PatchSingleItSystemUsageV2PatchAddRoleAssignmentRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIItSystemUsageResponseDTO>>;
+    public patchSingleItSystemUsageV2PatchAddRoleAssignment(requestParameters: PatchSingleItSystemUsageV2PatchAddRoleAssignmentRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const systemUsageUuid = requestParameters.systemUsageUuid;
         if (systemUsageUuid === null || systemUsageUuid === undefined) {
-            throw new Error('Required parameter systemUsageUuid was null or undefined when calling patchSingleItSystemUsageV2PatchAddRoleAssignmentBySystemusageuuid.');
+            throw new Error('Required parameter systemUsageUuid was null or undefined when calling patchSingleItSystemUsageV2PatchAddRoleAssignment.');
         }
         const request = requestParameters.request;
         if (request === null || request === undefined) {
-            throw new Error('Required parameter request was null or undefined when calling patchSingleItSystemUsageV2PatchAddRoleAssignmentBySystemusageuuid.');
+            throw new Error('Required parameter request was null or undefined when calling patchSingleItSystemUsageV2PatchAddRoleAssignment.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -1047,17 +1047,17 @@ export class APIV2ItSystemUsageService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleItSystemUsageV2PatchRemoveRoleAssignmentBySystemusageuuid(requestParameters: PatchSingleItSystemUsageV2PatchRemoveRoleAssignmentBySystemusageuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIItSystemUsageResponseDTO>;
-    public patchSingleItSystemUsageV2PatchRemoveRoleAssignmentBySystemusageuuid(requestParameters: PatchSingleItSystemUsageV2PatchRemoveRoleAssignmentBySystemusageuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIItSystemUsageResponseDTO>>;
-    public patchSingleItSystemUsageV2PatchRemoveRoleAssignmentBySystemusageuuid(requestParameters: PatchSingleItSystemUsageV2PatchRemoveRoleAssignmentBySystemusageuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIItSystemUsageResponseDTO>>;
-    public patchSingleItSystemUsageV2PatchRemoveRoleAssignmentBySystemusageuuid(requestParameters: PatchSingleItSystemUsageV2PatchRemoveRoleAssignmentBySystemusageuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public patchSingleItSystemUsageV2PatchRemoveRoleAssignment(requestParameters: PatchSingleItSystemUsageV2PatchRemoveRoleAssignmentRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIItSystemUsageResponseDTO>;
+    public patchSingleItSystemUsageV2PatchRemoveRoleAssignment(requestParameters: PatchSingleItSystemUsageV2PatchRemoveRoleAssignmentRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIItSystemUsageResponseDTO>>;
+    public patchSingleItSystemUsageV2PatchRemoveRoleAssignment(requestParameters: PatchSingleItSystemUsageV2PatchRemoveRoleAssignmentRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIItSystemUsageResponseDTO>>;
+    public patchSingleItSystemUsageV2PatchRemoveRoleAssignment(requestParameters: PatchSingleItSystemUsageV2PatchRemoveRoleAssignmentRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const systemUsageUuid = requestParameters.systemUsageUuid;
         if (systemUsageUuid === null || systemUsageUuid === undefined) {
-            throw new Error('Required parameter systemUsageUuid was null or undefined when calling patchSingleItSystemUsageV2PatchRemoveRoleAssignmentBySystemusageuuid.');
+            throw new Error('Required parameter systemUsageUuid was null or undefined when calling patchSingleItSystemUsageV2PatchRemoveRoleAssignment.');
         }
         const request = requestParameters.request;
         if (request === null || request === undefined) {
-            throw new Error('Required parameter request was null or undefined when calling patchSingleItSystemUsageV2PatchRemoveRoleAssignmentBySystemusageuuid.');
+            throw new Error('Required parameter request was null or undefined when calling patchSingleItSystemUsageV2PatchRemoveRoleAssignment.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -1121,17 +1121,17 @@ export class APIV2ItSystemUsageService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleItSystemUsageV2PatchSystemUsageBySystemusageuuid(requestParameters: PatchSingleItSystemUsageV2PatchSystemUsageBySystemusageuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIItSystemUsageResponseDTO>;
-    public patchSingleItSystemUsageV2PatchSystemUsageBySystemusageuuid(requestParameters: PatchSingleItSystemUsageV2PatchSystemUsageBySystemusageuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIItSystemUsageResponseDTO>>;
-    public patchSingleItSystemUsageV2PatchSystemUsageBySystemusageuuid(requestParameters: PatchSingleItSystemUsageV2PatchSystemUsageBySystemusageuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIItSystemUsageResponseDTO>>;
-    public patchSingleItSystemUsageV2PatchSystemUsageBySystemusageuuid(requestParameters: PatchSingleItSystemUsageV2PatchSystemUsageBySystemusageuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public patchSingleItSystemUsageV2PatchSystemUsage(requestParameters: PatchSingleItSystemUsageV2PatchSystemUsageRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIItSystemUsageResponseDTO>;
+    public patchSingleItSystemUsageV2PatchSystemUsage(requestParameters: PatchSingleItSystemUsageV2PatchSystemUsageRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIItSystemUsageResponseDTO>>;
+    public patchSingleItSystemUsageV2PatchSystemUsage(requestParameters: PatchSingleItSystemUsageV2PatchSystemUsageRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIItSystemUsageResponseDTO>>;
+    public patchSingleItSystemUsageV2PatchSystemUsage(requestParameters: PatchSingleItSystemUsageV2PatchSystemUsageRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const systemUsageUuid = requestParameters.systemUsageUuid;
         if (systemUsageUuid === null || systemUsageUuid === undefined) {
-            throw new Error('Required parameter systemUsageUuid was null or undefined when calling patchSingleItSystemUsageV2PatchSystemUsageBySystemusageuuid.');
+            throw new Error('Required parameter systemUsageUuid was null or undefined when calling patchSingleItSystemUsageV2PatchSystemUsage.');
         }
         const request = requestParameters.request;
         if (request === null || request === undefined) {
-            throw new Error('Required parameter request was null or undefined when calling patchSingleItSystemUsageV2PatchSystemUsageBySystemusageuuid.');
+            throw new Error('Required parameter request was null or undefined when calling patchSingleItSystemUsageV2PatchSystemUsage.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -1195,17 +1195,17 @@ export class APIV2ItSystemUsageService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleItSystemUsageV2PostExternalReferenceBySystemusageuuid(requestParameters: PostSingleItSystemUsageV2PostExternalReferenceBySystemusageuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIExternalReferenceDataResponseDTO>;
-    public postSingleItSystemUsageV2PostExternalReferenceBySystemusageuuid(requestParameters: PostSingleItSystemUsageV2PostExternalReferenceBySystemusageuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIExternalReferenceDataResponseDTO>>;
-    public postSingleItSystemUsageV2PostExternalReferenceBySystemusageuuid(requestParameters: PostSingleItSystemUsageV2PostExternalReferenceBySystemusageuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIExternalReferenceDataResponseDTO>>;
-    public postSingleItSystemUsageV2PostExternalReferenceBySystemusageuuid(requestParameters: PostSingleItSystemUsageV2PostExternalReferenceBySystemusageuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public postSingleItSystemUsageV2PostExternalReference(requestParameters: PostSingleItSystemUsageV2PostExternalReferenceRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIExternalReferenceDataResponseDTO>;
+    public postSingleItSystemUsageV2PostExternalReference(requestParameters: PostSingleItSystemUsageV2PostExternalReferenceRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIExternalReferenceDataResponseDTO>>;
+    public postSingleItSystemUsageV2PostExternalReference(requestParameters: PostSingleItSystemUsageV2PostExternalReferenceRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIExternalReferenceDataResponseDTO>>;
+    public postSingleItSystemUsageV2PostExternalReference(requestParameters: PostSingleItSystemUsageV2PostExternalReferenceRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const systemUsageUuid = requestParameters.systemUsageUuid;
         if (systemUsageUuid === null || systemUsageUuid === undefined) {
-            throw new Error('Required parameter systemUsageUuid was null or undefined when calling postSingleItSystemUsageV2PostExternalReferenceBySystemusageuuid.');
+            throw new Error('Required parameter systemUsageUuid was null or undefined when calling postSingleItSystemUsageV2PostExternalReference.');
         }
         const dto = requestParameters.dto;
         if (dto === null || dto === undefined) {
-            throw new Error('Required parameter dto was null or undefined when calling postSingleItSystemUsageV2PostExternalReferenceBySystemusageuuid.');
+            throw new Error('Required parameter dto was null or undefined when calling postSingleItSystemUsageV2PostExternalReference.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -1337,17 +1337,17 @@ export class APIV2ItSystemUsageService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleItSystemUsageV2PostJournalPeriodBySystemusageuuid(requestParameters: PostSingleItSystemUsageV2PostJournalPeriodBySystemusageuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIJournalPeriodResponseDTO>;
-    public postSingleItSystemUsageV2PostJournalPeriodBySystemusageuuid(requestParameters: PostSingleItSystemUsageV2PostJournalPeriodBySystemusageuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIJournalPeriodResponseDTO>>;
-    public postSingleItSystemUsageV2PostJournalPeriodBySystemusageuuid(requestParameters: PostSingleItSystemUsageV2PostJournalPeriodBySystemusageuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIJournalPeriodResponseDTO>>;
-    public postSingleItSystemUsageV2PostJournalPeriodBySystemusageuuid(requestParameters: PostSingleItSystemUsageV2PostJournalPeriodBySystemusageuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public postSingleItSystemUsageV2PostJournalPeriod(requestParameters: PostSingleItSystemUsageV2PostJournalPeriodRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIJournalPeriodResponseDTO>;
+    public postSingleItSystemUsageV2PostJournalPeriod(requestParameters: PostSingleItSystemUsageV2PostJournalPeriodRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIJournalPeriodResponseDTO>>;
+    public postSingleItSystemUsageV2PostJournalPeriod(requestParameters: PostSingleItSystemUsageV2PostJournalPeriodRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIJournalPeriodResponseDTO>>;
+    public postSingleItSystemUsageV2PostJournalPeriod(requestParameters: PostSingleItSystemUsageV2PostJournalPeriodRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const systemUsageUuid = requestParameters.systemUsageUuid;
         if (systemUsageUuid === null || systemUsageUuid === undefined) {
-            throw new Error('Required parameter systemUsageUuid was null or undefined when calling postSingleItSystemUsageV2PostJournalPeriodBySystemusageuuid.');
+            throw new Error('Required parameter systemUsageUuid was null or undefined when calling postSingleItSystemUsageV2PostJournalPeriod.');
         }
         const request = requestParameters.request;
         if (request === null || request === undefined) {
-            throw new Error('Required parameter request was null or undefined when calling postSingleItSystemUsageV2PostJournalPeriodBySystemusageuuid.');
+            throw new Error('Required parameter request was null or undefined when calling postSingleItSystemUsageV2PostJournalPeriod.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -1410,17 +1410,17 @@ export class APIV2ItSystemUsageService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleItSystemUsageV2PostSystemUsageRelationBySystemusageuuid(requestParameters: PostSingleItSystemUsageV2PostSystemUsageRelationBySystemusageuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIOutgoingSystemRelationResponseDTO>;
-    public postSingleItSystemUsageV2PostSystemUsageRelationBySystemusageuuid(requestParameters: PostSingleItSystemUsageV2PostSystemUsageRelationBySystemusageuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIOutgoingSystemRelationResponseDTO>>;
-    public postSingleItSystemUsageV2PostSystemUsageRelationBySystemusageuuid(requestParameters: PostSingleItSystemUsageV2PostSystemUsageRelationBySystemusageuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIOutgoingSystemRelationResponseDTO>>;
-    public postSingleItSystemUsageV2PostSystemUsageRelationBySystemusageuuid(requestParameters: PostSingleItSystemUsageV2PostSystemUsageRelationBySystemusageuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public postSingleItSystemUsageV2PostSystemUsageRelation(requestParameters: PostSingleItSystemUsageV2PostSystemUsageRelationRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIOutgoingSystemRelationResponseDTO>;
+    public postSingleItSystemUsageV2PostSystemUsageRelation(requestParameters: PostSingleItSystemUsageV2PostSystemUsageRelationRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIOutgoingSystemRelationResponseDTO>>;
+    public postSingleItSystemUsageV2PostSystemUsageRelation(requestParameters: PostSingleItSystemUsageV2PostSystemUsageRelationRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIOutgoingSystemRelationResponseDTO>>;
+    public postSingleItSystemUsageV2PostSystemUsageRelation(requestParameters: PostSingleItSystemUsageV2PostSystemUsageRelationRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const systemUsageUuid = requestParameters.systemUsageUuid;
         if (systemUsageUuid === null || systemUsageUuid === undefined) {
-            throw new Error('Required parameter systemUsageUuid was null or undefined when calling postSingleItSystemUsageV2PostSystemUsageRelationBySystemusageuuid.');
+            throw new Error('Required parameter systemUsageUuid was null or undefined when calling postSingleItSystemUsageV2PostSystemUsageRelation.');
         }
         const request = requestParameters.request;
         if (request === null || request === undefined) {
-            throw new Error('Required parameter request was null or undefined when calling postSingleItSystemUsageV2PostSystemUsageRelationBySystemusageuuid.');
+            throw new Error('Required parameter request was null or undefined when calling postSingleItSystemUsageV2PostSystemUsageRelation.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -1483,21 +1483,21 @@ export class APIV2ItSystemUsageService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public putSingleItSystemUsageV2PutExternalReferenceBySystemusageuuidAndExternalreferenceuuid(requestParameters: PutSingleItSystemUsageV2PutExternalReferenceBySystemusageuuidAndExternalreferenceuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIExternalReferenceDataResponseDTO>;
-    public putSingleItSystemUsageV2PutExternalReferenceBySystemusageuuidAndExternalreferenceuuid(requestParameters: PutSingleItSystemUsageV2PutExternalReferenceBySystemusageuuidAndExternalreferenceuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIExternalReferenceDataResponseDTO>>;
-    public putSingleItSystemUsageV2PutExternalReferenceBySystemusageuuidAndExternalreferenceuuid(requestParameters: PutSingleItSystemUsageV2PutExternalReferenceBySystemusageuuidAndExternalreferenceuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIExternalReferenceDataResponseDTO>>;
-    public putSingleItSystemUsageV2PutExternalReferenceBySystemusageuuidAndExternalreferenceuuid(requestParameters: PutSingleItSystemUsageV2PutExternalReferenceBySystemusageuuidAndExternalreferenceuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public putSingleItSystemUsageV2PutExternalReference(requestParameters: PutSingleItSystemUsageV2PutExternalReferenceRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIExternalReferenceDataResponseDTO>;
+    public putSingleItSystemUsageV2PutExternalReference(requestParameters: PutSingleItSystemUsageV2PutExternalReferenceRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIExternalReferenceDataResponseDTO>>;
+    public putSingleItSystemUsageV2PutExternalReference(requestParameters: PutSingleItSystemUsageV2PutExternalReferenceRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIExternalReferenceDataResponseDTO>>;
+    public putSingleItSystemUsageV2PutExternalReference(requestParameters: PutSingleItSystemUsageV2PutExternalReferenceRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const systemUsageUuid = requestParameters.systemUsageUuid;
         if (systemUsageUuid === null || systemUsageUuid === undefined) {
-            throw new Error('Required parameter systemUsageUuid was null or undefined when calling putSingleItSystemUsageV2PutExternalReferenceBySystemusageuuidAndExternalreferenceuuid.');
+            throw new Error('Required parameter systemUsageUuid was null or undefined when calling putSingleItSystemUsageV2PutExternalReference.');
         }
         const externalReferenceUuid = requestParameters.externalReferenceUuid;
         if (externalReferenceUuid === null || externalReferenceUuid === undefined) {
-            throw new Error('Required parameter externalReferenceUuid was null or undefined when calling putSingleItSystemUsageV2PutExternalReferenceBySystemusageuuidAndExternalreferenceuuid.');
+            throw new Error('Required parameter externalReferenceUuid was null or undefined when calling putSingleItSystemUsageV2PutExternalReference.');
         }
         const dto = requestParameters.dto;
         if (dto === null || dto === undefined) {
-            throw new Error('Required parameter dto was null or undefined when calling putSingleItSystemUsageV2PutExternalReferenceBySystemusageuuidAndExternalreferenceuuid.');
+            throw new Error('Required parameter dto was null or undefined when calling putSingleItSystemUsageV2PutExternalReference.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -1560,21 +1560,21 @@ export class APIV2ItSystemUsageService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public putSingleItSystemUsageV2PutJournalPeriodBySystemusageuuidAndJournalperioduuid(requestParameters: PutSingleItSystemUsageV2PutJournalPeriodBySystemusageuuidAndJournalperioduuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIJournalPeriodResponseDTO>;
-    public putSingleItSystemUsageV2PutJournalPeriodBySystemusageuuidAndJournalperioduuid(requestParameters: PutSingleItSystemUsageV2PutJournalPeriodBySystemusageuuidAndJournalperioduuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIJournalPeriodResponseDTO>>;
-    public putSingleItSystemUsageV2PutJournalPeriodBySystemusageuuidAndJournalperioduuid(requestParameters: PutSingleItSystemUsageV2PutJournalPeriodBySystemusageuuidAndJournalperioduuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIJournalPeriodResponseDTO>>;
-    public putSingleItSystemUsageV2PutJournalPeriodBySystemusageuuidAndJournalperioduuid(requestParameters: PutSingleItSystemUsageV2PutJournalPeriodBySystemusageuuidAndJournalperioduuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public putSingleItSystemUsageV2PutJournalPeriod(requestParameters: PutSingleItSystemUsageV2PutJournalPeriodRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIJournalPeriodResponseDTO>;
+    public putSingleItSystemUsageV2PutJournalPeriod(requestParameters: PutSingleItSystemUsageV2PutJournalPeriodRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIJournalPeriodResponseDTO>>;
+    public putSingleItSystemUsageV2PutJournalPeriod(requestParameters: PutSingleItSystemUsageV2PutJournalPeriodRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIJournalPeriodResponseDTO>>;
+    public putSingleItSystemUsageV2PutJournalPeriod(requestParameters: PutSingleItSystemUsageV2PutJournalPeriodRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const systemUsageUuid = requestParameters.systemUsageUuid;
         if (systemUsageUuid === null || systemUsageUuid === undefined) {
-            throw new Error('Required parameter systemUsageUuid was null or undefined when calling putSingleItSystemUsageV2PutJournalPeriodBySystemusageuuidAndJournalperioduuid.');
+            throw new Error('Required parameter systemUsageUuid was null or undefined when calling putSingleItSystemUsageV2PutJournalPeriod.');
         }
         const journalPeriodUuid = requestParameters.journalPeriodUuid;
         if (journalPeriodUuid === null || journalPeriodUuid === undefined) {
-            throw new Error('Required parameter journalPeriodUuid was null or undefined when calling putSingleItSystemUsageV2PutJournalPeriodBySystemusageuuidAndJournalperioduuid.');
+            throw new Error('Required parameter journalPeriodUuid was null or undefined when calling putSingleItSystemUsageV2PutJournalPeriod.');
         }
         const request = requestParameters.request;
         if (request === null || request === undefined) {
-            throw new Error('Required parameter request was null or undefined when calling putSingleItSystemUsageV2PutJournalPeriodBySystemusageuuidAndJournalperioduuid.');
+            throw new Error('Required parameter request was null or undefined when calling putSingleItSystemUsageV2PutJournalPeriod.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -1637,17 +1637,17 @@ export class APIV2ItSystemUsageService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public putSingleItSystemUsageV2PutSystemUsageBySystemusageuuid(requestParameters: PutSingleItSystemUsageV2PutSystemUsageBySystemusageuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIItSystemUsageResponseDTO>;
-    public putSingleItSystemUsageV2PutSystemUsageBySystemusageuuid(requestParameters: PutSingleItSystemUsageV2PutSystemUsageBySystemusageuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIItSystemUsageResponseDTO>>;
-    public putSingleItSystemUsageV2PutSystemUsageBySystemusageuuid(requestParameters: PutSingleItSystemUsageV2PutSystemUsageBySystemusageuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIItSystemUsageResponseDTO>>;
-    public putSingleItSystemUsageV2PutSystemUsageBySystemusageuuid(requestParameters: PutSingleItSystemUsageV2PutSystemUsageBySystemusageuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public putSingleItSystemUsageV2PutSystemUsage(requestParameters: PutSingleItSystemUsageV2PutSystemUsageRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIItSystemUsageResponseDTO>;
+    public putSingleItSystemUsageV2PutSystemUsage(requestParameters: PutSingleItSystemUsageV2PutSystemUsageRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIItSystemUsageResponseDTO>>;
+    public putSingleItSystemUsageV2PutSystemUsage(requestParameters: PutSingleItSystemUsageV2PutSystemUsageRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIItSystemUsageResponseDTO>>;
+    public putSingleItSystemUsageV2PutSystemUsage(requestParameters: PutSingleItSystemUsageV2PutSystemUsageRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const systemUsageUuid = requestParameters.systemUsageUuid;
         if (systemUsageUuid === null || systemUsageUuid === undefined) {
-            throw new Error('Required parameter systemUsageUuid was null or undefined when calling putSingleItSystemUsageV2PutSystemUsageBySystemusageuuid.');
+            throw new Error('Required parameter systemUsageUuid was null or undefined when calling putSingleItSystemUsageV2PutSystemUsage.');
         }
         const request = requestParameters.request;
         if (request === null || request === undefined) {
-            throw new Error('Required parameter request was null or undefined when calling putSingleItSystemUsageV2PutSystemUsageBySystemusageuuid.');
+            throw new Error('Required parameter request was null or undefined when calling putSingleItSystemUsageV2PutSystemUsage.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -1710,21 +1710,21 @@ export class APIV2ItSystemUsageService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public putSingleItSystemUsageV2PutSystemUsageRelationBySystemusageuuidAndSystemrelationuuid(requestParameters: PutSingleItSystemUsageV2PutSystemUsageRelationBySystemusageuuidAndSystemrelationuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIOutgoingSystemRelationResponseDTO>;
-    public putSingleItSystemUsageV2PutSystemUsageRelationBySystemusageuuidAndSystemrelationuuid(requestParameters: PutSingleItSystemUsageV2PutSystemUsageRelationBySystemusageuuidAndSystemrelationuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIOutgoingSystemRelationResponseDTO>>;
-    public putSingleItSystemUsageV2PutSystemUsageRelationBySystemusageuuidAndSystemrelationuuid(requestParameters: PutSingleItSystemUsageV2PutSystemUsageRelationBySystemusageuuidAndSystemrelationuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIOutgoingSystemRelationResponseDTO>>;
-    public putSingleItSystemUsageV2PutSystemUsageRelationBySystemusageuuidAndSystemrelationuuid(requestParameters: PutSingleItSystemUsageV2PutSystemUsageRelationBySystemusageuuidAndSystemrelationuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public putSingleItSystemUsageV2PutSystemUsageRelation(requestParameters: PutSingleItSystemUsageV2PutSystemUsageRelationRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIOutgoingSystemRelationResponseDTO>;
+    public putSingleItSystemUsageV2PutSystemUsageRelation(requestParameters: PutSingleItSystemUsageV2PutSystemUsageRelationRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIOutgoingSystemRelationResponseDTO>>;
+    public putSingleItSystemUsageV2PutSystemUsageRelation(requestParameters: PutSingleItSystemUsageV2PutSystemUsageRelationRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIOutgoingSystemRelationResponseDTO>>;
+    public putSingleItSystemUsageV2PutSystemUsageRelation(requestParameters: PutSingleItSystemUsageV2PutSystemUsageRelationRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const systemUsageUuid = requestParameters.systemUsageUuid;
         if (systemUsageUuid === null || systemUsageUuid === undefined) {
-            throw new Error('Required parameter systemUsageUuid was null or undefined when calling putSingleItSystemUsageV2PutSystemUsageRelationBySystemusageuuidAndSystemrelationuuid.');
+            throw new Error('Required parameter systemUsageUuid was null or undefined when calling putSingleItSystemUsageV2PutSystemUsageRelation.');
         }
         const systemRelationUuid = requestParameters.systemRelationUuid;
         if (systemRelationUuid === null || systemRelationUuid === undefined) {
-            throw new Error('Required parameter systemRelationUuid was null or undefined when calling putSingleItSystemUsageV2PutSystemUsageRelationBySystemusageuuidAndSystemrelationuuid.');
+            throw new Error('Required parameter systemRelationUuid was null or undefined when calling putSingleItSystemUsageV2PutSystemUsageRelation.');
         }
         const request = requestParameters.request;
         if (request === null || request === undefined) {
-            throw new Error('Required parameter request was null or undefined when calling putSingleItSystemUsageV2PutSystemUsageRelationBySystemusageuuidAndSystemrelationuuid.');
+            throw new Error('Required parameter request was null or undefined when calling putSingleItSystemUsageV2PutSystemUsageRelation.');
         }
 
         let localVarHeaders = this.defaultHeaders;

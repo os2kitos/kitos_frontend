@@ -30,27 +30,27 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface DeleteSingleOrganizationUnitLocalRoleOptionTypesInternalV2DeleteLocalOrganizationUnitRoleByOrganizationuuidAndOptionuuidRequestParams {
+export interface DeleteSingleOrganizationUnitLocalRoleOptionTypesInternalV2DeleteLocalOrganizationUnitRoleRequestParams {
     organizationUuid: string;
     optionUuid: string;
 }
 
-export interface GetManyOrganizationUnitLocalRoleOptionTypesInternalV2GetLocalOrganizationUnitRolesByOrganizationuuidRequestParams {
+export interface GetManyOrganizationUnitLocalRoleOptionTypesInternalV2GetLocalOrganizationUnitRolesRequestParams {
     organizationUuid: string;
 }
 
-export interface GetSingleOrganizationUnitLocalRoleOptionTypesInternalV2GetLocalOrganizationUnitRoleByOrganizationuuidAndOptionuuidRequestParams {
+export interface GetSingleOrganizationUnitLocalRoleOptionTypesInternalV2GetLocalOrganizationUnitRoleRequestParams {
     organizationUuid: string;
     optionUuid: string;
 }
 
-export interface PatchSingleOrganizationUnitLocalRoleOptionTypesInternalV2PatchLocalOrganizationUnitRoleByOrganizationuuidAndOptionuuidRequestParams {
+export interface PatchSingleOrganizationUnitLocalRoleOptionTypesInternalV2PatchLocalOrganizationUnitRoleRequestParams {
     organizationUuid: string;
     optionUuid: string;
     dto: APILocalRegularOptionUpdateRequestDTO;
 }
 
-export interface PostSingleOrganizationUnitLocalRoleOptionTypesInternalV2CreateLocalOrganizationUnitRoleByOrganizationuuidRequestParams {
+export interface PostSingleOrganizationUnitLocalRoleOptionTypesInternalV2CreateLocalOrganizationUnitRoleRequestParams {
     organizationUuid: string;
     dto: APILocalOptionCreateRequestDTO;
 }
@@ -125,17 +125,17 @@ export class APIV2OrganizationUnitLocalRoleOptionTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public deleteSingleOrganizationUnitLocalRoleOptionTypesInternalV2DeleteLocalOrganizationUnitRoleByOrganizationuuidAndOptionuuid(requestParameters: DeleteSingleOrganizationUnitLocalRoleOptionTypesInternalV2DeleteLocalOrganizationUnitRoleByOrganizationuuidAndOptionuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<APILocalRoleOptionResponseDTO>;
-    public deleteSingleOrganizationUnitLocalRoleOptionTypesInternalV2DeleteLocalOrganizationUnitRoleByOrganizationuuidAndOptionuuid(requestParameters: DeleteSingleOrganizationUnitLocalRoleOptionTypesInternalV2DeleteLocalOrganizationUnitRoleByOrganizationuuidAndOptionuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<APILocalRoleOptionResponseDTO>>;
-    public deleteSingleOrganizationUnitLocalRoleOptionTypesInternalV2DeleteLocalOrganizationUnitRoleByOrganizationuuidAndOptionuuid(requestParameters: DeleteSingleOrganizationUnitLocalRoleOptionTypesInternalV2DeleteLocalOrganizationUnitRoleByOrganizationuuidAndOptionuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<APILocalRoleOptionResponseDTO>>;
-    public deleteSingleOrganizationUnitLocalRoleOptionTypesInternalV2DeleteLocalOrganizationUnitRoleByOrganizationuuidAndOptionuuid(requestParameters: DeleteSingleOrganizationUnitLocalRoleOptionTypesInternalV2DeleteLocalOrganizationUnitRoleByOrganizationuuidAndOptionuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
+    public deleteSingleOrganizationUnitLocalRoleOptionTypesInternalV2DeleteLocalOrganizationUnitRole(requestParameters: DeleteSingleOrganizationUnitLocalRoleOptionTypesInternalV2DeleteLocalOrganizationUnitRoleRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<APILocalRoleOptionResponseDTO>;
+    public deleteSingleOrganizationUnitLocalRoleOptionTypesInternalV2DeleteLocalOrganizationUnitRole(requestParameters: DeleteSingleOrganizationUnitLocalRoleOptionTypesInternalV2DeleteLocalOrganizationUnitRoleRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<APILocalRoleOptionResponseDTO>>;
+    public deleteSingleOrganizationUnitLocalRoleOptionTypesInternalV2DeleteLocalOrganizationUnitRole(requestParameters: DeleteSingleOrganizationUnitLocalRoleOptionTypesInternalV2DeleteLocalOrganizationUnitRoleRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<APILocalRoleOptionResponseDTO>>;
+    public deleteSingleOrganizationUnitLocalRoleOptionTypesInternalV2DeleteLocalOrganizationUnitRole(requestParameters: DeleteSingleOrganizationUnitLocalRoleOptionTypesInternalV2DeleteLocalOrganizationUnitRoleRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling deleteSingleOrganizationUnitLocalRoleOptionTypesInternalV2DeleteLocalOrganizationUnitRoleByOrganizationuuidAndOptionuuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling deleteSingleOrganizationUnitLocalRoleOptionTypesInternalV2DeleteLocalOrganizationUnitRole.');
         }
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
-            throw new Error('Required parameter optionUuid was null or undefined when calling deleteSingleOrganizationUnitLocalRoleOptionTypesInternalV2DeleteLocalOrganizationUnitRoleByOrganizationuuidAndOptionuuid.');
+            throw new Error('Required parameter optionUuid was null or undefined when calling deleteSingleOrganizationUnitLocalRoleOptionTypesInternalV2DeleteLocalOrganizationUnitRole.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -187,13 +187,13 @@ export class APIV2OrganizationUnitLocalRoleOptionTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getManyOrganizationUnitLocalRoleOptionTypesInternalV2GetLocalOrganizationUnitRolesByOrganizationuuid(requestParameters: GetManyOrganizationUnitLocalRoleOptionTypesInternalV2GetLocalOrganizationUnitRolesByOrganizationuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APILocalRoleOptionResponseDTO>>;
-    public getManyOrganizationUnitLocalRoleOptionTypesInternalV2GetLocalOrganizationUnitRolesByOrganizationuuid(requestParameters: GetManyOrganizationUnitLocalRoleOptionTypesInternalV2GetLocalOrganizationUnitRolesByOrganizationuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APILocalRoleOptionResponseDTO>>>;
-    public getManyOrganizationUnitLocalRoleOptionTypesInternalV2GetLocalOrganizationUnitRolesByOrganizationuuid(requestParameters: GetManyOrganizationUnitLocalRoleOptionTypesInternalV2GetLocalOrganizationUnitRolesByOrganizationuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APILocalRoleOptionResponseDTO>>>;
-    public getManyOrganizationUnitLocalRoleOptionTypesInternalV2GetLocalOrganizationUnitRolesByOrganizationuuid(requestParameters: GetManyOrganizationUnitLocalRoleOptionTypesInternalV2GetLocalOrganizationUnitRolesByOrganizationuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyOrganizationUnitLocalRoleOptionTypesInternalV2GetLocalOrganizationUnitRoles(requestParameters: GetManyOrganizationUnitLocalRoleOptionTypesInternalV2GetLocalOrganizationUnitRolesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APILocalRoleOptionResponseDTO>>;
+    public getManyOrganizationUnitLocalRoleOptionTypesInternalV2GetLocalOrganizationUnitRoles(requestParameters: GetManyOrganizationUnitLocalRoleOptionTypesInternalV2GetLocalOrganizationUnitRolesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APILocalRoleOptionResponseDTO>>>;
+    public getManyOrganizationUnitLocalRoleOptionTypesInternalV2GetLocalOrganizationUnitRoles(requestParameters: GetManyOrganizationUnitLocalRoleOptionTypesInternalV2GetLocalOrganizationUnitRolesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APILocalRoleOptionResponseDTO>>>;
+    public getManyOrganizationUnitLocalRoleOptionTypesInternalV2GetLocalOrganizationUnitRoles(requestParameters: GetManyOrganizationUnitLocalRoleOptionTypesInternalV2GetLocalOrganizationUnitRolesRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyOrganizationUnitLocalRoleOptionTypesInternalV2GetLocalOrganizationUnitRolesByOrganizationuuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyOrganizationUnitLocalRoleOptionTypesInternalV2GetLocalOrganizationUnitRoles.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -245,17 +245,17 @@ export class APIV2OrganizationUnitLocalRoleOptionTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleOrganizationUnitLocalRoleOptionTypesInternalV2GetLocalOrganizationUnitRoleByOrganizationuuidAndOptionuuid(requestParameters: GetSingleOrganizationUnitLocalRoleOptionTypesInternalV2GetLocalOrganizationUnitRoleByOrganizationuuidAndOptionuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRoleOptionResponseDTO>;
-    public getSingleOrganizationUnitLocalRoleOptionTypesInternalV2GetLocalOrganizationUnitRoleByOrganizationuuidAndOptionuuid(requestParameters: GetSingleOrganizationUnitLocalRoleOptionTypesInternalV2GetLocalOrganizationUnitRoleByOrganizationuuidAndOptionuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRoleOptionResponseDTO>>;
-    public getSingleOrganizationUnitLocalRoleOptionTypesInternalV2GetLocalOrganizationUnitRoleByOrganizationuuidAndOptionuuid(requestParameters: GetSingleOrganizationUnitLocalRoleOptionTypesInternalV2GetLocalOrganizationUnitRoleByOrganizationuuidAndOptionuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRoleOptionResponseDTO>>;
-    public getSingleOrganizationUnitLocalRoleOptionTypesInternalV2GetLocalOrganizationUnitRoleByOrganizationuuidAndOptionuuid(requestParameters: GetSingleOrganizationUnitLocalRoleOptionTypesInternalV2GetLocalOrganizationUnitRoleByOrganizationuuidAndOptionuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleOrganizationUnitLocalRoleOptionTypesInternalV2GetLocalOrganizationUnitRole(requestParameters: GetSingleOrganizationUnitLocalRoleOptionTypesInternalV2GetLocalOrganizationUnitRoleRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRoleOptionResponseDTO>;
+    public getSingleOrganizationUnitLocalRoleOptionTypesInternalV2GetLocalOrganizationUnitRole(requestParameters: GetSingleOrganizationUnitLocalRoleOptionTypesInternalV2GetLocalOrganizationUnitRoleRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRoleOptionResponseDTO>>;
+    public getSingleOrganizationUnitLocalRoleOptionTypesInternalV2GetLocalOrganizationUnitRole(requestParameters: GetSingleOrganizationUnitLocalRoleOptionTypesInternalV2GetLocalOrganizationUnitRoleRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRoleOptionResponseDTO>>;
+    public getSingleOrganizationUnitLocalRoleOptionTypesInternalV2GetLocalOrganizationUnitRole(requestParameters: GetSingleOrganizationUnitLocalRoleOptionTypesInternalV2GetLocalOrganizationUnitRoleRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleOrganizationUnitLocalRoleOptionTypesInternalV2GetLocalOrganizationUnitRoleByOrganizationuuidAndOptionuuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleOrganizationUnitLocalRoleOptionTypesInternalV2GetLocalOrganizationUnitRole.');
         }
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
-            throw new Error('Required parameter optionUuid was null or undefined when calling getSingleOrganizationUnitLocalRoleOptionTypesInternalV2GetLocalOrganizationUnitRoleByOrganizationuuidAndOptionuuid.');
+            throw new Error('Required parameter optionUuid was null or undefined when calling getSingleOrganizationUnitLocalRoleOptionTypesInternalV2GetLocalOrganizationUnitRole.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -307,21 +307,21 @@ export class APIV2OrganizationUnitLocalRoleOptionTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleOrganizationUnitLocalRoleOptionTypesInternalV2PatchLocalOrganizationUnitRoleByOrganizationuuidAndOptionuuid(requestParameters: PatchSingleOrganizationUnitLocalRoleOptionTypesInternalV2PatchLocalOrganizationUnitRoleByOrganizationuuidAndOptionuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRoleOptionResponseDTO>;
-    public patchSingleOrganizationUnitLocalRoleOptionTypesInternalV2PatchLocalOrganizationUnitRoleByOrganizationuuidAndOptionuuid(requestParameters: PatchSingleOrganizationUnitLocalRoleOptionTypesInternalV2PatchLocalOrganizationUnitRoleByOrganizationuuidAndOptionuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRoleOptionResponseDTO>>;
-    public patchSingleOrganizationUnitLocalRoleOptionTypesInternalV2PatchLocalOrganizationUnitRoleByOrganizationuuidAndOptionuuid(requestParameters: PatchSingleOrganizationUnitLocalRoleOptionTypesInternalV2PatchLocalOrganizationUnitRoleByOrganizationuuidAndOptionuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRoleOptionResponseDTO>>;
-    public patchSingleOrganizationUnitLocalRoleOptionTypesInternalV2PatchLocalOrganizationUnitRoleByOrganizationuuidAndOptionuuid(requestParameters: PatchSingleOrganizationUnitLocalRoleOptionTypesInternalV2PatchLocalOrganizationUnitRoleByOrganizationuuidAndOptionuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public patchSingleOrganizationUnitLocalRoleOptionTypesInternalV2PatchLocalOrganizationUnitRole(requestParameters: PatchSingleOrganizationUnitLocalRoleOptionTypesInternalV2PatchLocalOrganizationUnitRoleRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRoleOptionResponseDTO>;
+    public patchSingleOrganizationUnitLocalRoleOptionTypesInternalV2PatchLocalOrganizationUnitRole(requestParameters: PatchSingleOrganizationUnitLocalRoleOptionTypesInternalV2PatchLocalOrganizationUnitRoleRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRoleOptionResponseDTO>>;
+    public patchSingleOrganizationUnitLocalRoleOptionTypesInternalV2PatchLocalOrganizationUnitRole(requestParameters: PatchSingleOrganizationUnitLocalRoleOptionTypesInternalV2PatchLocalOrganizationUnitRoleRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRoleOptionResponseDTO>>;
+    public patchSingleOrganizationUnitLocalRoleOptionTypesInternalV2PatchLocalOrganizationUnitRole(requestParameters: PatchSingleOrganizationUnitLocalRoleOptionTypesInternalV2PatchLocalOrganizationUnitRoleRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling patchSingleOrganizationUnitLocalRoleOptionTypesInternalV2PatchLocalOrganizationUnitRoleByOrganizationuuidAndOptionuuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling patchSingleOrganizationUnitLocalRoleOptionTypesInternalV2PatchLocalOrganizationUnitRole.');
         }
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
-            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleOrganizationUnitLocalRoleOptionTypesInternalV2PatchLocalOrganizationUnitRoleByOrganizationuuidAndOptionuuid.');
+            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleOrganizationUnitLocalRoleOptionTypesInternalV2PatchLocalOrganizationUnitRole.');
         }
         const dto = requestParameters.dto;
         if (dto === null || dto === undefined) {
-            throw new Error('Required parameter dto was null or undefined when calling patchSingleOrganizationUnitLocalRoleOptionTypesInternalV2PatchLocalOrganizationUnitRoleByOrganizationuuidAndOptionuuid.');
+            throw new Error('Required parameter dto was null or undefined when calling patchSingleOrganizationUnitLocalRoleOptionTypesInternalV2PatchLocalOrganizationUnitRole.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -384,17 +384,17 @@ export class APIV2OrganizationUnitLocalRoleOptionTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleOrganizationUnitLocalRoleOptionTypesInternalV2CreateLocalOrganizationUnitRoleByOrganizationuuid(requestParameters: PostSingleOrganizationUnitLocalRoleOptionTypesInternalV2CreateLocalOrganizationUnitRoleByOrganizationuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRoleOptionResponseDTO>;
-    public postSingleOrganizationUnitLocalRoleOptionTypesInternalV2CreateLocalOrganizationUnitRoleByOrganizationuuid(requestParameters: PostSingleOrganizationUnitLocalRoleOptionTypesInternalV2CreateLocalOrganizationUnitRoleByOrganizationuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRoleOptionResponseDTO>>;
-    public postSingleOrganizationUnitLocalRoleOptionTypesInternalV2CreateLocalOrganizationUnitRoleByOrganizationuuid(requestParameters: PostSingleOrganizationUnitLocalRoleOptionTypesInternalV2CreateLocalOrganizationUnitRoleByOrganizationuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRoleOptionResponseDTO>>;
-    public postSingleOrganizationUnitLocalRoleOptionTypesInternalV2CreateLocalOrganizationUnitRoleByOrganizationuuid(requestParameters: PostSingleOrganizationUnitLocalRoleOptionTypesInternalV2CreateLocalOrganizationUnitRoleByOrganizationuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public postSingleOrganizationUnitLocalRoleOptionTypesInternalV2CreateLocalOrganizationUnitRole(requestParameters: PostSingleOrganizationUnitLocalRoleOptionTypesInternalV2CreateLocalOrganizationUnitRoleRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRoleOptionResponseDTO>;
+    public postSingleOrganizationUnitLocalRoleOptionTypesInternalV2CreateLocalOrganizationUnitRole(requestParameters: PostSingleOrganizationUnitLocalRoleOptionTypesInternalV2CreateLocalOrganizationUnitRoleRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRoleOptionResponseDTO>>;
+    public postSingleOrganizationUnitLocalRoleOptionTypesInternalV2CreateLocalOrganizationUnitRole(requestParameters: PostSingleOrganizationUnitLocalRoleOptionTypesInternalV2CreateLocalOrganizationUnitRoleRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRoleOptionResponseDTO>>;
+    public postSingleOrganizationUnitLocalRoleOptionTypesInternalV2CreateLocalOrganizationUnitRole(requestParameters: PostSingleOrganizationUnitLocalRoleOptionTypesInternalV2CreateLocalOrganizationUnitRoleRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling postSingleOrganizationUnitLocalRoleOptionTypesInternalV2CreateLocalOrganizationUnitRoleByOrganizationuuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling postSingleOrganizationUnitLocalRoleOptionTypesInternalV2CreateLocalOrganizationUnitRole.');
         }
         const dto = requestParameters.dto;
         if (dto === null || dto === undefined) {
-            throw new Error('Required parameter dto was null or undefined when calling postSingleOrganizationUnitLocalRoleOptionTypesInternalV2CreateLocalOrganizationUnitRoleByOrganizationuuid.');
+            throw new Error('Required parameter dto was null or undefined when calling postSingleOrganizationUnitLocalRoleOptionTypesInternalV2CreateLocalOrganizationUnitRole.');
         }
 
         let localVarHeaders = this.defaultHeaders;

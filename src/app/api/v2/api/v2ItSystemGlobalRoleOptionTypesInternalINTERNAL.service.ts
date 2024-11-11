@@ -30,7 +30,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface PatchSingleItSystemGlobalRoleOptionTypesInternalV2PatchGlobalBItSystemRoleByOptionuuidRequestParams {
+export interface PatchSingleItSystemGlobalRoleOptionTypesInternalV2PatchGlobalBItSystemRoleRequestParams {
     optionUuid: string;
     dto: APIGlobalRoleOptionUpdateRequestDTO;
 }
@@ -162,17 +162,17 @@ export class APIV2ItSystemGlobalRoleOptionTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleItSystemGlobalRoleOptionTypesInternalV2PatchGlobalBItSystemRoleByOptionuuid(requestParameters: PatchSingleItSystemGlobalRoleOptionTypesInternalV2PatchGlobalBItSystemRoleByOptionuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRoleOptionResponseDTO>;
-    public patchSingleItSystemGlobalRoleOptionTypesInternalV2PatchGlobalBItSystemRoleByOptionuuid(requestParameters: PatchSingleItSystemGlobalRoleOptionTypesInternalV2PatchGlobalBItSystemRoleByOptionuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRoleOptionResponseDTO>>;
-    public patchSingleItSystemGlobalRoleOptionTypesInternalV2PatchGlobalBItSystemRoleByOptionuuid(requestParameters: PatchSingleItSystemGlobalRoleOptionTypesInternalV2PatchGlobalBItSystemRoleByOptionuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRoleOptionResponseDTO>>;
-    public patchSingleItSystemGlobalRoleOptionTypesInternalV2PatchGlobalBItSystemRoleByOptionuuid(requestParameters: PatchSingleItSystemGlobalRoleOptionTypesInternalV2PatchGlobalBItSystemRoleByOptionuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public patchSingleItSystemGlobalRoleOptionTypesInternalV2PatchGlobalBItSystemRole(requestParameters: PatchSingleItSystemGlobalRoleOptionTypesInternalV2PatchGlobalBItSystemRoleRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRoleOptionResponseDTO>;
+    public patchSingleItSystemGlobalRoleOptionTypesInternalV2PatchGlobalBItSystemRole(requestParameters: PatchSingleItSystemGlobalRoleOptionTypesInternalV2PatchGlobalBItSystemRoleRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRoleOptionResponseDTO>>;
+    public patchSingleItSystemGlobalRoleOptionTypesInternalV2PatchGlobalBItSystemRole(requestParameters: PatchSingleItSystemGlobalRoleOptionTypesInternalV2PatchGlobalBItSystemRoleRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRoleOptionResponseDTO>>;
+    public patchSingleItSystemGlobalRoleOptionTypesInternalV2PatchGlobalBItSystemRole(requestParameters: PatchSingleItSystemGlobalRoleOptionTypesInternalV2PatchGlobalBItSystemRoleRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
-            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItSystemGlobalRoleOptionTypesInternalV2PatchGlobalBItSystemRoleByOptionuuid.');
+            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItSystemGlobalRoleOptionTypesInternalV2PatchGlobalBItSystemRole.');
         }
         const dto = requestParameters.dto;
         if (dto === null || dto === undefined) {
-            throw new Error('Required parameter dto was null or undefined when calling patchSingleItSystemGlobalRoleOptionTypesInternalV2PatchGlobalBItSystemRoleByOptionuuid.');
+            throw new Error('Required parameter dto was null or undefined when calling patchSingleItSystemGlobalRoleOptionTypesInternalV2PatchGlobalBItSystemRole.');
         }
 
         let localVarHeaders = this.defaultHeaders;

@@ -30,7 +30,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface PatchSingleItSystemGlobalArchiveLocationsInternalV2PatchGlobalArchiveLocationByOptionuuidRequestParams {
+export interface PatchSingleItSystemGlobalArchiveLocationsInternalV2PatchGlobalArchiveLocationRequestParams {
     optionUuid: string;
     dto: APIGlobalRegularOptionUpdateRequestDTO;
 }
@@ -162,17 +162,17 @@ export class APIV2ItSystemGlobalArchiveLocationsInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleItSystemGlobalArchiveLocationsInternalV2PatchGlobalArchiveLocationByOptionuuid(requestParameters: PatchSingleItSystemGlobalArchiveLocationsInternalV2PatchGlobalArchiveLocationByOptionuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRegularOptionResponseDTO>;
-    public patchSingleItSystemGlobalArchiveLocationsInternalV2PatchGlobalArchiveLocationByOptionuuid(requestParameters: PatchSingleItSystemGlobalArchiveLocationsInternalV2PatchGlobalArchiveLocationByOptionuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRegularOptionResponseDTO>>;
-    public patchSingleItSystemGlobalArchiveLocationsInternalV2PatchGlobalArchiveLocationByOptionuuid(requestParameters: PatchSingleItSystemGlobalArchiveLocationsInternalV2PatchGlobalArchiveLocationByOptionuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRegularOptionResponseDTO>>;
-    public patchSingleItSystemGlobalArchiveLocationsInternalV2PatchGlobalArchiveLocationByOptionuuid(requestParameters: PatchSingleItSystemGlobalArchiveLocationsInternalV2PatchGlobalArchiveLocationByOptionuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public patchSingleItSystemGlobalArchiveLocationsInternalV2PatchGlobalArchiveLocation(requestParameters: PatchSingleItSystemGlobalArchiveLocationsInternalV2PatchGlobalArchiveLocationRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRegularOptionResponseDTO>;
+    public patchSingleItSystemGlobalArchiveLocationsInternalV2PatchGlobalArchiveLocation(requestParameters: PatchSingleItSystemGlobalArchiveLocationsInternalV2PatchGlobalArchiveLocationRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRegularOptionResponseDTO>>;
+    public patchSingleItSystemGlobalArchiveLocationsInternalV2PatchGlobalArchiveLocation(requestParameters: PatchSingleItSystemGlobalArchiveLocationsInternalV2PatchGlobalArchiveLocationRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRegularOptionResponseDTO>>;
+    public patchSingleItSystemGlobalArchiveLocationsInternalV2PatchGlobalArchiveLocation(requestParameters: PatchSingleItSystemGlobalArchiveLocationsInternalV2PatchGlobalArchiveLocationRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
-            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItSystemGlobalArchiveLocationsInternalV2PatchGlobalArchiveLocationByOptionuuid.');
+            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItSystemGlobalArchiveLocationsInternalV2PatchGlobalArchiveLocation.');
         }
         const dto = requestParameters.dto;
         if (dto === null || dto === undefined) {
-            throw new Error('Required parameter dto was null or undefined when calling patchSingleItSystemGlobalArchiveLocationsInternalV2PatchGlobalArchiveLocationByOptionuuid.');
+            throw new Error('Required parameter dto was null or undefined when calling patchSingleItSystemGlobalArchiveLocationsInternalV2PatchGlobalArchiveLocation.');
         }
 
         let localVarHeaders = this.defaultHeaders;

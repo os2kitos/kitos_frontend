@@ -30,12 +30,12 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface DeleteSingleItSystemLocalItSystemCategoriesTypesInternalV2DeleteLocalItSystemCategoryTypeByOrganizationuuidAndOptionuuidRequestParams {
+export interface DeleteSingleItSystemLocalItSystemCategoriesTypesInternalV2DeleteLocalItSystemCategoryTypeRequestParams {
     organizationUuid: string;
     optionUuid: string;
 }
 
-export interface GetManyItSystemLocalItSystemCategoriesTypesInternalV2GetLocalItSystemCategoryTypesByOrganizationuuidRequestParams {
+export interface GetManyItSystemLocalItSystemCategoriesTypesInternalV2GetLocalItSystemCategoryTypesRequestParams {
     organizationUuid: string;
 }
 
@@ -44,13 +44,13 @@ export interface GetSingleItSystemLocalItSystemCategoriesTypesInternalV2GetLocal
     optionUuid: string;
 }
 
-export interface PatchSingleItSystemLocalItSystemCategoriesTypesInternalV2PatchLocalItSystemCategoryTypeByOrganizationuuidAndOptionuuidRequestParams {
+export interface PatchSingleItSystemLocalItSystemCategoriesTypesInternalV2PatchLocalItSystemCategoryTypeRequestParams {
     organizationUuid: string;
     optionUuid: string;
     dto: APILocalRegularOptionUpdateRequestDTO;
 }
 
-export interface PostSingleItSystemLocalItSystemCategoriesTypesInternalV2CreateLocalItSystemCategoryTypeByOrganizationuuidRequestParams {
+export interface PostSingleItSystemLocalItSystemCategoriesTypesInternalV2CreateLocalItSystemCategoryTypeRequestParams {
     organizationUuid: string;
     dto: APILocalOptionCreateRequestDTO;
 }
@@ -125,17 +125,17 @@ export class APIV2ItSystemLocalItSystemCategoriesTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public deleteSingleItSystemLocalItSystemCategoriesTypesInternalV2DeleteLocalItSystemCategoryTypeByOrganizationuuidAndOptionuuid(requestParameters: DeleteSingleItSystemLocalItSystemCategoriesTypesInternalV2DeleteLocalItSystemCategoryTypeByOrganizationuuidAndOptionuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
-    public deleteSingleItSystemLocalItSystemCategoriesTypesInternalV2DeleteLocalItSystemCategoryTypeByOrganizationuuidAndOptionuuid(requestParameters: DeleteSingleItSystemLocalItSystemCategoriesTypesInternalV2DeleteLocalItSystemCategoryTypeByOrganizationuuidAndOptionuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
-    public deleteSingleItSystemLocalItSystemCategoriesTypesInternalV2DeleteLocalItSystemCategoryTypeByOrganizationuuidAndOptionuuid(requestParameters: DeleteSingleItSystemLocalItSystemCategoriesTypesInternalV2DeleteLocalItSystemCategoryTypeByOrganizationuuidAndOptionuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
-    public deleteSingleItSystemLocalItSystemCategoriesTypesInternalV2DeleteLocalItSystemCategoryTypeByOrganizationuuidAndOptionuuid(requestParameters: DeleteSingleItSystemLocalItSystemCategoriesTypesInternalV2DeleteLocalItSystemCategoryTypeByOrganizationuuidAndOptionuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
+    public deleteSingleItSystemLocalItSystemCategoriesTypesInternalV2DeleteLocalItSystemCategoryType(requestParameters: DeleteSingleItSystemLocalItSystemCategoriesTypesInternalV2DeleteLocalItSystemCategoryTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
+    public deleteSingleItSystemLocalItSystemCategoriesTypesInternalV2DeleteLocalItSystemCategoryType(requestParameters: DeleteSingleItSystemLocalItSystemCategoriesTypesInternalV2DeleteLocalItSystemCategoryTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
+    public deleteSingleItSystemLocalItSystemCategoriesTypesInternalV2DeleteLocalItSystemCategoryType(requestParameters: DeleteSingleItSystemLocalItSystemCategoriesTypesInternalV2DeleteLocalItSystemCategoryTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
+    public deleteSingleItSystemLocalItSystemCategoriesTypesInternalV2DeleteLocalItSystemCategoryType(requestParameters: DeleteSingleItSystemLocalItSystemCategoriesTypesInternalV2DeleteLocalItSystemCategoryTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling deleteSingleItSystemLocalItSystemCategoriesTypesInternalV2DeleteLocalItSystemCategoryTypeByOrganizationuuidAndOptionuuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling deleteSingleItSystemLocalItSystemCategoriesTypesInternalV2DeleteLocalItSystemCategoryType.');
         }
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
-            throw new Error('Required parameter optionUuid was null or undefined when calling deleteSingleItSystemLocalItSystemCategoriesTypesInternalV2DeleteLocalItSystemCategoryTypeByOrganizationuuidAndOptionuuid.');
+            throw new Error('Required parameter optionUuid was null or undefined when calling deleteSingleItSystemLocalItSystemCategoriesTypesInternalV2DeleteLocalItSystemCategoryType.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -187,13 +187,13 @@ export class APIV2ItSystemLocalItSystemCategoriesTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getManyItSystemLocalItSystemCategoriesTypesInternalV2GetLocalItSystemCategoryTypesByOrganizationuuid(requestParameters: GetManyItSystemLocalItSystemCategoriesTypesInternalV2GetLocalItSystemCategoryTypesByOrganizationuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APILocalRegularOptionResponseDTO>>;
-    public getManyItSystemLocalItSystemCategoriesTypesInternalV2GetLocalItSystemCategoryTypesByOrganizationuuid(requestParameters: GetManyItSystemLocalItSystemCategoriesTypesInternalV2GetLocalItSystemCategoryTypesByOrganizationuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APILocalRegularOptionResponseDTO>>>;
-    public getManyItSystemLocalItSystemCategoriesTypesInternalV2GetLocalItSystemCategoryTypesByOrganizationuuid(requestParameters: GetManyItSystemLocalItSystemCategoriesTypesInternalV2GetLocalItSystemCategoryTypesByOrganizationuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APILocalRegularOptionResponseDTO>>>;
-    public getManyItSystemLocalItSystemCategoriesTypesInternalV2GetLocalItSystemCategoryTypesByOrganizationuuid(requestParameters: GetManyItSystemLocalItSystemCategoriesTypesInternalV2GetLocalItSystemCategoryTypesByOrganizationuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyItSystemLocalItSystemCategoriesTypesInternalV2GetLocalItSystemCategoryTypes(requestParameters: GetManyItSystemLocalItSystemCategoriesTypesInternalV2GetLocalItSystemCategoryTypesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APILocalRegularOptionResponseDTO>>;
+    public getManyItSystemLocalItSystemCategoriesTypesInternalV2GetLocalItSystemCategoryTypes(requestParameters: GetManyItSystemLocalItSystemCategoriesTypesInternalV2GetLocalItSystemCategoryTypesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APILocalRegularOptionResponseDTO>>>;
+    public getManyItSystemLocalItSystemCategoriesTypesInternalV2GetLocalItSystemCategoryTypes(requestParameters: GetManyItSystemLocalItSystemCategoriesTypesInternalV2GetLocalItSystemCategoryTypesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APILocalRegularOptionResponseDTO>>>;
+    public getManyItSystemLocalItSystemCategoriesTypesInternalV2GetLocalItSystemCategoryTypes(requestParameters: GetManyItSystemLocalItSystemCategoriesTypesInternalV2GetLocalItSystemCategoryTypesRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyItSystemLocalItSystemCategoriesTypesInternalV2GetLocalItSystemCategoryTypesByOrganizationuuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyItSystemLocalItSystemCategoriesTypesInternalV2GetLocalItSystemCategoryTypes.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -307,21 +307,21 @@ export class APIV2ItSystemLocalItSystemCategoriesTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleItSystemLocalItSystemCategoriesTypesInternalV2PatchLocalItSystemCategoryTypeByOrganizationuuidAndOptionuuid(requestParameters: PatchSingleItSystemLocalItSystemCategoriesTypesInternalV2PatchLocalItSystemCategoryTypeByOrganizationuuidAndOptionuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
-    public patchSingleItSystemLocalItSystemCategoriesTypesInternalV2PatchLocalItSystemCategoryTypeByOrganizationuuidAndOptionuuid(requestParameters: PatchSingleItSystemLocalItSystemCategoriesTypesInternalV2PatchLocalItSystemCategoryTypeByOrganizationuuidAndOptionuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
-    public patchSingleItSystemLocalItSystemCategoriesTypesInternalV2PatchLocalItSystemCategoryTypeByOrganizationuuidAndOptionuuid(requestParameters: PatchSingleItSystemLocalItSystemCategoriesTypesInternalV2PatchLocalItSystemCategoryTypeByOrganizationuuidAndOptionuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
-    public patchSingleItSystemLocalItSystemCategoriesTypesInternalV2PatchLocalItSystemCategoryTypeByOrganizationuuidAndOptionuuid(requestParameters: PatchSingleItSystemLocalItSystemCategoriesTypesInternalV2PatchLocalItSystemCategoryTypeByOrganizationuuidAndOptionuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public patchSingleItSystemLocalItSystemCategoriesTypesInternalV2PatchLocalItSystemCategoryType(requestParameters: PatchSingleItSystemLocalItSystemCategoriesTypesInternalV2PatchLocalItSystemCategoryTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
+    public patchSingleItSystemLocalItSystemCategoriesTypesInternalV2PatchLocalItSystemCategoryType(requestParameters: PatchSingleItSystemLocalItSystemCategoriesTypesInternalV2PatchLocalItSystemCategoryTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
+    public patchSingleItSystemLocalItSystemCategoriesTypesInternalV2PatchLocalItSystemCategoryType(requestParameters: PatchSingleItSystemLocalItSystemCategoriesTypesInternalV2PatchLocalItSystemCategoryTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
+    public patchSingleItSystemLocalItSystemCategoriesTypesInternalV2PatchLocalItSystemCategoryType(requestParameters: PatchSingleItSystemLocalItSystemCategoriesTypesInternalV2PatchLocalItSystemCategoryTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling patchSingleItSystemLocalItSystemCategoriesTypesInternalV2PatchLocalItSystemCategoryTypeByOrganizationuuidAndOptionuuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling patchSingleItSystemLocalItSystemCategoriesTypesInternalV2PatchLocalItSystemCategoryType.');
         }
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
-            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItSystemLocalItSystemCategoriesTypesInternalV2PatchLocalItSystemCategoryTypeByOrganizationuuidAndOptionuuid.');
+            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItSystemLocalItSystemCategoriesTypesInternalV2PatchLocalItSystemCategoryType.');
         }
         const dto = requestParameters.dto;
         if (dto === null || dto === undefined) {
-            throw new Error('Required parameter dto was null or undefined when calling patchSingleItSystemLocalItSystemCategoriesTypesInternalV2PatchLocalItSystemCategoryTypeByOrganizationuuidAndOptionuuid.');
+            throw new Error('Required parameter dto was null or undefined when calling patchSingleItSystemLocalItSystemCategoriesTypesInternalV2PatchLocalItSystemCategoryType.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -384,17 +384,17 @@ export class APIV2ItSystemLocalItSystemCategoriesTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleItSystemLocalItSystemCategoriesTypesInternalV2CreateLocalItSystemCategoryTypeByOrganizationuuid(requestParameters: PostSingleItSystemLocalItSystemCategoriesTypesInternalV2CreateLocalItSystemCategoryTypeByOrganizationuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
-    public postSingleItSystemLocalItSystemCategoriesTypesInternalV2CreateLocalItSystemCategoryTypeByOrganizationuuid(requestParameters: PostSingleItSystemLocalItSystemCategoriesTypesInternalV2CreateLocalItSystemCategoryTypeByOrganizationuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
-    public postSingleItSystemLocalItSystemCategoriesTypesInternalV2CreateLocalItSystemCategoryTypeByOrganizationuuid(requestParameters: PostSingleItSystemLocalItSystemCategoriesTypesInternalV2CreateLocalItSystemCategoryTypeByOrganizationuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
-    public postSingleItSystemLocalItSystemCategoriesTypesInternalV2CreateLocalItSystemCategoryTypeByOrganizationuuid(requestParameters: PostSingleItSystemLocalItSystemCategoriesTypesInternalV2CreateLocalItSystemCategoryTypeByOrganizationuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public postSingleItSystemLocalItSystemCategoriesTypesInternalV2CreateLocalItSystemCategoryType(requestParameters: PostSingleItSystemLocalItSystemCategoriesTypesInternalV2CreateLocalItSystemCategoryTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
+    public postSingleItSystemLocalItSystemCategoriesTypesInternalV2CreateLocalItSystemCategoryType(requestParameters: PostSingleItSystemLocalItSystemCategoriesTypesInternalV2CreateLocalItSystemCategoryTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
+    public postSingleItSystemLocalItSystemCategoriesTypesInternalV2CreateLocalItSystemCategoryType(requestParameters: PostSingleItSystemLocalItSystemCategoriesTypesInternalV2CreateLocalItSystemCategoryTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
+    public postSingleItSystemLocalItSystemCategoriesTypesInternalV2CreateLocalItSystemCategoryType(requestParameters: PostSingleItSystemLocalItSystemCategoriesTypesInternalV2CreateLocalItSystemCategoryTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling postSingleItSystemLocalItSystemCategoriesTypesInternalV2CreateLocalItSystemCategoryTypeByOrganizationuuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling postSingleItSystemLocalItSystemCategoriesTypesInternalV2CreateLocalItSystemCategoryType.');
         }
         const dto = requestParameters.dto;
         if (dto === null || dto === undefined) {
-            throw new Error('Required parameter dto was null or undefined when calling postSingleItSystemLocalItSystemCategoriesTypesInternalV2CreateLocalItSystemCategoryTypeByOrganizationuuid.');
+            throw new Error('Required parameter dto was null or undefined when calling postSingleItSystemLocalItSystemCategoriesTypesInternalV2CreateLocalItSystemCategoryType.');
         }
 
         let localVarHeaders = this.defaultHeaders;

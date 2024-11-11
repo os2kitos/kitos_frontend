@@ -30,12 +30,12 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface DeleteSingleItContractLocalTerminationDeadlineTypesInternalV2DeleteLocalTerminationDeadlineTypeByOrganizationuuidAndOptionuuidRequestParams {
+export interface DeleteSingleItContractLocalTerminationDeadlineTypesInternalV2DeleteLocalTerminationDeadlineTypeRequestParams {
     organizationUuid: string;
     optionUuid: string;
 }
 
-export interface GetManyItContractLocalTerminationDeadlineTypesInternalV2GetLocalTerminationDeadlineTypesByOrganizationuuidRequestParams {
+export interface GetManyItContractLocalTerminationDeadlineTypesInternalV2GetLocalTerminationDeadlineTypesRequestParams {
     organizationUuid: string;
 }
 
@@ -44,13 +44,13 @@ export interface GetSingleItContractLocalTerminationDeadlineTypesInternalV2GetLo
     optionUuid: string;
 }
 
-export interface PatchSingleItContractLocalTerminationDeadlineTypesInternalV2PatchLocalTerminationDeadlineTypeByOrganizationuuidAndOptionuuidRequestParams {
+export interface PatchSingleItContractLocalTerminationDeadlineTypesInternalV2PatchLocalTerminationDeadlineTypeRequestParams {
     organizationUuid: string;
     optionUuid: string;
     dto: APILocalRegularOptionUpdateRequestDTO;
 }
 
-export interface PostSingleItContractLocalTerminationDeadlineTypesInternalV2CreateLocalTerminationDeadlineTypeByOrganizationuuidRequestParams {
+export interface PostSingleItContractLocalTerminationDeadlineTypesInternalV2CreateLocalTerminationDeadlineTypeRequestParams {
     organizationUuid: string;
     dto: APILocalOptionCreateRequestDTO;
 }
@@ -125,17 +125,17 @@ export class APIV2ItContractLocalTerminationDeadlineTypesInternalINTERNALService
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public deleteSingleItContractLocalTerminationDeadlineTypesInternalV2DeleteLocalTerminationDeadlineTypeByOrganizationuuidAndOptionuuid(requestParameters: DeleteSingleItContractLocalTerminationDeadlineTypesInternalV2DeleteLocalTerminationDeadlineTypeByOrganizationuuidAndOptionuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
-    public deleteSingleItContractLocalTerminationDeadlineTypesInternalV2DeleteLocalTerminationDeadlineTypeByOrganizationuuidAndOptionuuid(requestParameters: DeleteSingleItContractLocalTerminationDeadlineTypesInternalV2DeleteLocalTerminationDeadlineTypeByOrganizationuuidAndOptionuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
-    public deleteSingleItContractLocalTerminationDeadlineTypesInternalV2DeleteLocalTerminationDeadlineTypeByOrganizationuuidAndOptionuuid(requestParameters: DeleteSingleItContractLocalTerminationDeadlineTypesInternalV2DeleteLocalTerminationDeadlineTypeByOrganizationuuidAndOptionuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
-    public deleteSingleItContractLocalTerminationDeadlineTypesInternalV2DeleteLocalTerminationDeadlineTypeByOrganizationuuidAndOptionuuid(requestParameters: DeleteSingleItContractLocalTerminationDeadlineTypesInternalV2DeleteLocalTerminationDeadlineTypeByOrganizationuuidAndOptionuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
+    public deleteSingleItContractLocalTerminationDeadlineTypesInternalV2DeleteLocalTerminationDeadlineType(requestParameters: DeleteSingleItContractLocalTerminationDeadlineTypesInternalV2DeleteLocalTerminationDeadlineTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
+    public deleteSingleItContractLocalTerminationDeadlineTypesInternalV2DeleteLocalTerminationDeadlineType(requestParameters: DeleteSingleItContractLocalTerminationDeadlineTypesInternalV2DeleteLocalTerminationDeadlineTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
+    public deleteSingleItContractLocalTerminationDeadlineTypesInternalV2DeleteLocalTerminationDeadlineType(requestParameters: DeleteSingleItContractLocalTerminationDeadlineTypesInternalV2DeleteLocalTerminationDeadlineTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
+    public deleteSingleItContractLocalTerminationDeadlineTypesInternalV2DeleteLocalTerminationDeadlineType(requestParameters: DeleteSingleItContractLocalTerminationDeadlineTypesInternalV2DeleteLocalTerminationDeadlineTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling deleteSingleItContractLocalTerminationDeadlineTypesInternalV2DeleteLocalTerminationDeadlineTypeByOrganizationuuidAndOptionuuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling deleteSingleItContractLocalTerminationDeadlineTypesInternalV2DeleteLocalTerminationDeadlineType.');
         }
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
-            throw new Error('Required parameter optionUuid was null or undefined when calling deleteSingleItContractLocalTerminationDeadlineTypesInternalV2DeleteLocalTerminationDeadlineTypeByOrganizationuuidAndOptionuuid.');
+            throw new Error('Required parameter optionUuid was null or undefined when calling deleteSingleItContractLocalTerminationDeadlineTypesInternalV2DeleteLocalTerminationDeadlineType.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -187,13 +187,13 @@ export class APIV2ItContractLocalTerminationDeadlineTypesInternalINTERNALService
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getManyItContractLocalTerminationDeadlineTypesInternalV2GetLocalTerminationDeadlineTypesByOrganizationuuid(requestParameters: GetManyItContractLocalTerminationDeadlineTypesInternalV2GetLocalTerminationDeadlineTypesByOrganizationuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APILocalRegularOptionResponseDTO>>;
-    public getManyItContractLocalTerminationDeadlineTypesInternalV2GetLocalTerminationDeadlineTypesByOrganizationuuid(requestParameters: GetManyItContractLocalTerminationDeadlineTypesInternalV2GetLocalTerminationDeadlineTypesByOrganizationuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APILocalRegularOptionResponseDTO>>>;
-    public getManyItContractLocalTerminationDeadlineTypesInternalV2GetLocalTerminationDeadlineTypesByOrganizationuuid(requestParameters: GetManyItContractLocalTerminationDeadlineTypesInternalV2GetLocalTerminationDeadlineTypesByOrganizationuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APILocalRegularOptionResponseDTO>>>;
-    public getManyItContractLocalTerminationDeadlineTypesInternalV2GetLocalTerminationDeadlineTypesByOrganizationuuid(requestParameters: GetManyItContractLocalTerminationDeadlineTypesInternalV2GetLocalTerminationDeadlineTypesByOrganizationuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyItContractLocalTerminationDeadlineTypesInternalV2GetLocalTerminationDeadlineTypes(requestParameters: GetManyItContractLocalTerminationDeadlineTypesInternalV2GetLocalTerminationDeadlineTypesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APILocalRegularOptionResponseDTO>>;
+    public getManyItContractLocalTerminationDeadlineTypesInternalV2GetLocalTerminationDeadlineTypes(requestParameters: GetManyItContractLocalTerminationDeadlineTypesInternalV2GetLocalTerminationDeadlineTypesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APILocalRegularOptionResponseDTO>>>;
+    public getManyItContractLocalTerminationDeadlineTypesInternalV2GetLocalTerminationDeadlineTypes(requestParameters: GetManyItContractLocalTerminationDeadlineTypesInternalV2GetLocalTerminationDeadlineTypesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APILocalRegularOptionResponseDTO>>>;
+    public getManyItContractLocalTerminationDeadlineTypesInternalV2GetLocalTerminationDeadlineTypes(requestParameters: GetManyItContractLocalTerminationDeadlineTypesInternalV2GetLocalTerminationDeadlineTypesRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyItContractLocalTerminationDeadlineTypesInternalV2GetLocalTerminationDeadlineTypesByOrganizationuuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyItContractLocalTerminationDeadlineTypesInternalV2GetLocalTerminationDeadlineTypes.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -307,21 +307,21 @@ export class APIV2ItContractLocalTerminationDeadlineTypesInternalINTERNALService
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleItContractLocalTerminationDeadlineTypesInternalV2PatchLocalTerminationDeadlineTypeByOrganizationuuidAndOptionuuid(requestParameters: PatchSingleItContractLocalTerminationDeadlineTypesInternalV2PatchLocalTerminationDeadlineTypeByOrganizationuuidAndOptionuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
-    public patchSingleItContractLocalTerminationDeadlineTypesInternalV2PatchLocalTerminationDeadlineTypeByOrganizationuuidAndOptionuuid(requestParameters: PatchSingleItContractLocalTerminationDeadlineTypesInternalV2PatchLocalTerminationDeadlineTypeByOrganizationuuidAndOptionuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
-    public patchSingleItContractLocalTerminationDeadlineTypesInternalV2PatchLocalTerminationDeadlineTypeByOrganizationuuidAndOptionuuid(requestParameters: PatchSingleItContractLocalTerminationDeadlineTypesInternalV2PatchLocalTerminationDeadlineTypeByOrganizationuuidAndOptionuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
-    public patchSingleItContractLocalTerminationDeadlineTypesInternalV2PatchLocalTerminationDeadlineTypeByOrganizationuuidAndOptionuuid(requestParameters: PatchSingleItContractLocalTerminationDeadlineTypesInternalV2PatchLocalTerminationDeadlineTypeByOrganizationuuidAndOptionuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public patchSingleItContractLocalTerminationDeadlineTypesInternalV2PatchLocalTerminationDeadlineType(requestParameters: PatchSingleItContractLocalTerminationDeadlineTypesInternalV2PatchLocalTerminationDeadlineTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
+    public patchSingleItContractLocalTerminationDeadlineTypesInternalV2PatchLocalTerminationDeadlineType(requestParameters: PatchSingleItContractLocalTerminationDeadlineTypesInternalV2PatchLocalTerminationDeadlineTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
+    public patchSingleItContractLocalTerminationDeadlineTypesInternalV2PatchLocalTerminationDeadlineType(requestParameters: PatchSingleItContractLocalTerminationDeadlineTypesInternalV2PatchLocalTerminationDeadlineTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
+    public patchSingleItContractLocalTerminationDeadlineTypesInternalV2PatchLocalTerminationDeadlineType(requestParameters: PatchSingleItContractLocalTerminationDeadlineTypesInternalV2PatchLocalTerminationDeadlineTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling patchSingleItContractLocalTerminationDeadlineTypesInternalV2PatchLocalTerminationDeadlineTypeByOrganizationuuidAndOptionuuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling patchSingleItContractLocalTerminationDeadlineTypesInternalV2PatchLocalTerminationDeadlineType.');
         }
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
-            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItContractLocalTerminationDeadlineTypesInternalV2PatchLocalTerminationDeadlineTypeByOrganizationuuidAndOptionuuid.');
+            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItContractLocalTerminationDeadlineTypesInternalV2PatchLocalTerminationDeadlineType.');
         }
         const dto = requestParameters.dto;
         if (dto === null || dto === undefined) {
-            throw new Error('Required parameter dto was null or undefined when calling patchSingleItContractLocalTerminationDeadlineTypesInternalV2PatchLocalTerminationDeadlineTypeByOrganizationuuidAndOptionuuid.');
+            throw new Error('Required parameter dto was null or undefined when calling patchSingleItContractLocalTerminationDeadlineTypesInternalV2PatchLocalTerminationDeadlineType.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -384,17 +384,17 @@ export class APIV2ItContractLocalTerminationDeadlineTypesInternalINTERNALService
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleItContractLocalTerminationDeadlineTypesInternalV2CreateLocalTerminationDeadlineTypeByOrganizationuuid(requestParameters: PostSingleItContractLocalTerminationDeadlineTypesInternalV2CreateLocalTerminationDeadlineTypeByOrganizationuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
-    public postSingleItContractLocalTerminationDeadlineTypesInternalV2CreateLocalTerminationDeadlineTypeByOrganizationuuid(requestParameters: PostSingleItContractLocalTerminationDeadlineTypesInternalV2CreateLocalTerminationDeadlineTypeByOrganizationuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
-    public postSingleItContractLocalTerminationDeadlineTypesInternalV2CreateLocalTerminationDeadlineTypeByOrganizationuuid(requestParameters: PostSingleItContractLocalTerminationDeadlineTypesInternalV2CreateLocalTerminationDeadlineTypeByOrganizationuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
-    public postSingleItContractLocalTerminationDeadlineTypesInternalV2CreateLocalTerminationDeadlineTypeByOrganizationuuid(requestParameters: PostSingleItContractLocalTerminationDeadlineTypesInternalV2CreateLocalTerminationDeadlineTypeByOrganizationuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public postSingleItContractLocalTerminationDeadlineTypesInternalV2CreateLocalTerminationDeadlineType(requestParameters: PostSingleItContractLocalTerminationDeadlineTypesInternalV2CreateLocalTerminationDeadlineTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
+    public postSingleItContractLocalTerminationDeadlineTypesInternalV2CreateLocalTerminationDeadlineType(requestParameters: PostSingleItContractLocalTerminationDeadlineTypesInternalV2CreateLocalTerminationDeadlineTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
+    public postSingleItContractLocalTerminationDeadlineTypesInternalV2CreateLocalTerminationDeadlineType(requestParameters: PostSingleItContractLocalTerminationDeadlineTypesInternalV2CreateLocalTerminationDeadlineTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
+    public postSingleItContractLocalTerminationDeadlineTypesInternalV2CreateLocalTerminationDeadlineType(requestParameters: PostSingleItContractLocalTerminationDeadlineTypesInternalV2CreateLocalTerminationDeadlineTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling postSingleItContractLocalTerminationDeadlineTypesInternalV2CreateLocalTerminationDeadlineTypeByOrganizationuuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling postSingleItContractLocalTerminationDeadlineTypesInternalV2CreateLocalTerminationDeadlineType.');
         }
         const dto = requestParameters.dto;
         if (dto === null || dto === undefined) {
-            throw new Error('Required parameter dto was null or undefined when calling postSingleItContractLocalTerminationDeadlineTypesInternalV2CreateLocalTerminationDeadlineTypeByOrganizationuuid.');
+            throw new Error('Required parameter dto was null or undefined when calling postSingleItContractLocalTerminationDeadlineTypesInternalV2CreateLocalTerminationDeadlineType.');
         }
 
         let localVarHeaders = this.defaultHeaders;

@@ -28,11 +28,11 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface DeleteSingleGlobalUserInternalV2DeleteUserByUseruuidRequestParams {
+export interface DeleteSingleGlobalUserInternalV2DeleteUserRequestParams {
     userUuid: string;
 }
 
-export interface GetManyGlobalUserInternalV2GetUserOrganizationsRequestParams {
+export interface GetManyGlobalUserInternalV2GetOrganizationsByUserUuidRequestParams {
     userUuid: string;
 }
 
@@ -116,13 +116,13 @@ export class APIV2GlobalUserInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public deleteSingleGlobalUserInternalV2DeleteUserByUseruuid(requestParameters: DeleteSingleGlobalUserInternalV2DeleteUserByUseruuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public deleteSingleGlobalUserInternalV2DeleteUserByUseruuid(requestParameters: DeleteSingleGlobalUserInternalV2DeleteUserByUseruuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public deleteSingleGlobalUserInternalV2DeleteUserByUseruuid(requestParameters: DeleteSingleGlobalUserInternalV2DeleteUserByUseruuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public deleteSingleGlobalUserInternalV2DeleteUserByUseruuid(requestParameters: DeleteSingleGlobalUserInternalV2DeleteUserByUseruuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public deleteSingleGlobalUserInternalV2DeleteUser(requestParameters: DeleteSingleGlobalUserInternalV2DeleteUserRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public deleteSingleGlobalUserInternalV2DeleteUser(requestParameters: DeleteSingleGlobalUserInternalV2DeleteUserRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public deleteSingleGlobalUserInternalV2DeleteUser(requestParameters: DeleteSingleGlobalUserInternalV2DeleteUserRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public deleteSingleGlobalUserInternalV2DeleteUser(requestParameters: DeleteSingleGlobalUserInternalV2DeleteUserRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         const userUuid = requestParameters.userUuid;
         if (userUuid === null || userUuid === undefined) {
-            throw new Error('Required parameter userUuid was null or undefined when calling deleteSingleGlobalUserInternalV2DeleteUserByUseruuid.');
+            throw new Error('Required parameter userUuid was null or undefined when calling deleteSingleGlobalUserInternalV2DeleteUser.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -173,13 +173,13 @@ export class APIV2GlobalUserInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getManyGlobalUserInternalV2GetUserOrganizations(requestParameters: GetManyGlobalUserInternalV2GetUserOrganizationsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIOrganizationResponseDTO>>;
-    public getManyGlobalUserInternalV2GetUserOrganizations(requestParameters: GetManyGlobalUserInternalV2GetUserOrganizationsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIOrganizationResponseDTO>>>;
-    public getManyGlobalUserInternalV2GetUserOrganizations(requestParameters: GetManyGlobalUserInternalV2GetUserOrganizationsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIOrganizationResponseDTO>>>;
-    public getManyGlobalUserInternalV2GetUserOrganizations(requestParameters: GetManyGlobalUserInternalV2GetUserOrganizationsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyGlobalUserInternalV2GetOrganizationsByUserUuid(requestParameters: GetManyGlobalUserInternalV2GetOrganizationsByUserUuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIOrganizationResponseDTO>>;
+    public getManyGlobalUserInternalV2GetOrganizationsByUserUuid(requestParameters: GetManyGlobalUserInternalV2GetOrganizationsByUserUuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIOrganizationResponseDTO>>>;
+    public getManyGlobalUserInternalV2GetOrganizationsByUserUuid(requestParameters: GetManyGlobalUserInternalV2GetOrganizationsByUserUuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIOrganizationResponseDTO>>>;
+    public getManyGlobalUserInternalV2GetOrganizationsByUserUuid(requestParameters: GetManyGlobalUserInternalV2GetOrganizationsByUserUuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const userUuid = requestParameters.userUuid;
         if (userUuid === null || userUuid === undefined) {
-            throw new Error('Required parameter userUuid was null or undefined when calling getManyGlobalUserInternalV2GetUserOrganizations.');
+            throw new Error('Required parameter userUuid was null or undefined when calling getManyGlobalUserInternalV2GetOrganizationsByUserUuid.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});

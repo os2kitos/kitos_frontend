@@ -30,12 +30,12 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface DeleteSingleDprLocalCountryOptionTypesInternalV2DeleteLocalCountryOptionTypeByOrganizationuuidAndOptionuuidRequestParams {
+export interface DeleteSingleDprLocalCountryOptionTypesInternalV2DeleteLocalCountryOptionTypeRequestParams {
     organizationUuid: string;
     optionUuid: string;
 }
 
-export interface GetManyDprLocalCountryOptionTypesInternalV2GetLocalCountryOptionTypesByOrganizationuuidRequestParams {
+export interface GetManyDprLocalCountryOptionTypesInternalV2GetLocalCountryOptionTypesRequestParams {
     organizationUuid: string;
 }
 
@@ -44,13 +44,13 @@ export interface GetSingleDprLocalCountryOptionTypesInternalV2GetLocalCountryOpt
     optionUuid: string;
 }
 
-export interface PatchSingleDprLocalCountryOptionTypesInternalV2PatchLocalCountryOptionTypeByOrganizationuuidAndOptionuuidRequestParams {
+export interface PatchSingleDprLocalCountryOptionTypesInternalV2PatchLocalCountryOptionTypeRequestParams {
     organizationUuid: string;
     optionUuid: string;
     dto: APILocalRegularOptionUpdateRequestDTO;
 }
 
-export interface PostSingleDprLocalCountryOptionTypesInternalV2CreateLocalCountryOptionTypeByOrganizationuuidRequestParams {
+export interface PostSingleDprLocalCountryOptionTypesInternalV2CreateLocalCountryOptionTypeRequestParams {
     organizationUuid: string;
     dto: APILocalOptionCreateRequestDTO;
 }
@@ -125,17 +125,17 @@ export class APIV2DprLocalCountryOptionTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public deleteSingleDprLocalCountryOptionTypesInternalV2DeleteLocalCountryOptionTypeByOrganizationuuidAndOptionuuid(requestParameters: DeleteSingleDprLocalCountryOptionTypesInternalV2DeleteLocalCountryOptionTypeByOrganizationuuidAndOptionuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
-    public deleteSingleDprLocalCountryOptionTypesInternalV2DeleteLocalCountryOptionTypeByOrganizationuuidAndOptionuuid(requestParameters: DeleteSingleDprLocalCountryOptionTypesInternalV2DeleteLocalCountryOptionTypeByOrganizationuuidAndOptionuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
-    public deleteSingleDprLocalCountryOptionTypesInternalV2DeleteLocalCountryOptionTypeByOrganizationuuidAndOptionuuid(requestParameters: DeleteSingleDprLocalCountryOptionTypesInternalV2DeleteLocalCountryOptionTypeByOrganizationuuidAndOptionuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
-    public deleteSingleDprLocalCountryOptionTypesInternalV2DeleteLocalCountryOptionTypeByOrganizationuuidAndOptionuuid(requestParameters: DeleteSingleDprLocalCountryOptionTypesInternalV2DeleteLocalCountryOptionTypeByOrganizationuuidAndOptionuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
+    public deleteSingleDprLocalCountryOptionTypesInternalV2DeleteLocalCountryOptionType(requestParameters: DeleteSingleDprLocalCountryOptionTypesInternalV2DeleteLocalCountryOptionTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
+    public deleteSingleDprLocalCountryOptionTypesInternalV2DeleteLocalCountryOptionType(requestParameters: DeleteSingleDprLocalCountryOptionTypesInternalV2DeleteLocalCountryOptionTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
+    public deleteSingleDprLocalCountryOptionTypesInternalV2DeleteLocalCountryOptionType(requestParameters: DeleteSingleDprLocalCountryOptionTypesInternalV2DeleteLocalCountryOptionTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
+    public deleteSingleDprLocalCountryOptionTypesInternalV2DeleteLocalCountryOptionType(requestParameters: DeleteSingleDprLocalCountryOptionTypesInternalV2DeleteLocalCountryOptionTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling deleteSingleDprLocalCountryOptionTypesInternalV2DeleteLocalCountryOptionTypeByOrganizationuuidAndOptionuuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling deleteSingleDprLocalCountryOptionTypesInternalV2DeleteLocalCountryOptionType.');
         }
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
-            throw new Error('Required parameter optionUuid was null or undefined when calling deleteSingleDprLocalCountryOptionTypesInternalV2DeleteLocalCountryOptionTypeByOrganizationuuidAndOptionuuid.');
+            throw new Error('Required parameter optionUuid was null or undefined when calling deleteSingleDprLocalCountryOptionTypesInternalV2DeleteLocalCountryOptionType.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -187,13 +187,13 @@ export class APIV2DprLocalCountryOptionTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getManyDprLocalCountryOptionTypesInternalV2GetLocalCountryOptionTypesByOrganizationuuid(requestParameters: GetManyDprLocalCountryOptionTypesInternalV2GetLocalCountryOptionTypesByOrganizationuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APILocalRegularOptionResponseDTO>>;
-    public getManyDprLocalCountryOptionTypesInternalV2GetLocalCountryOptionTypesByOrganizationuuid(requestParameters: GetManyDprLocalCountryOptionTypesInternalV2GetLocalCountryOptionTypesByOrganizationuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APILocalRegularOptionResponseDTO>>>;
-    public getManyDprLocalCountryOptionTypesInternalV2GetLocalCountryOptionTypesByOrganizationuuid(requestParameters: GetManyDprLocalCountryOptionTypesInternalV2GetLocalCountryOptionTypesByOrganizationuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APILocalRegularOptionResponseDTO>>>;
-    public getManyDprLocalCountryOptionTypesInternalV2GetLocalCountryOptionTypesByOrganizationuuid(requestParameters: GetManyDprLocalCountryOptionTypesInternalV2GetLocalCountryOptionTypesByOrganizationuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyDprLocalCountryOptionTypesInternalV2GetLocalCountryOptionTypes(requestParameters: GetManyDprLocalCountryOptionTypesInternalV2GetLocalCountryOptionTypesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APILocalRegularOptionResponseDTO>>;
+    public getManyDprLocalCountryOptionTypesInternalV2GetLocalCountryOptionTypes(requestParameters: GetManyDprLocalCountryOptionTypesInternalV2GetLocalCountryOptionTypesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APILocalRegularOptionResponseDTO>>>;
+    public getManyDprLocalCountryOptionTypesInternalV2GetLocalCountryOptionTypes(requestParameters: GetManyDprLocalCountryOptionTypesInternalV2GetLocalCountryOptionTypesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APILocalRegularOptionResponseDTO>>>;
+    public getManyDprLocalCountryOptionTypesInternalV2GetLocalCountryOptionTypes(requestParameters: GetManyDprLocalCountryOptionTypesInternalV2GetLocalCountryOptionTypesRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyDprLocalCountryOptionTypesInternalV2GetLocalCountryOptionTypesByOrganizationuuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyDprLocalCountryOptionTypesInternalV2GetLocalCountryOptionTypes.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -307,21 +307,21 @@ export class APIV2DprLocalCountryOptionTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleDprLocalCountryOptionTypesInternalV2PatchLocalCountryOptionTypeByOrganizationuuidAndOptionuuid(requestParameters: PatchSingleDprLocalCountryOptionTypesInternalV2PatchLocalCountryOptionTypeByOrganizationuuidAndOptionuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
-    public patchSingleDprLocalCountryOptionTypesInternalV2PatchLocalCountryOptionTypeByOrganizationuuidAndOptionuuid(requestParameters: PatchSingleDprLocalCountryOptionTypesInternalV2PatchLocalCountryOptionTypeByOrganizationuuidAndOptionuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
-    public patchSingleDprLocalCountryOptionTypesInternalV2PatchLocalCountryOptionTypeByOrganizationuuidAndOptionuuid(requestParameters: PatchSingleDprLocalCountryOptionTypesInternalV2PatchLocalCountryOptionTypeByOrganizationuuidAndOptionuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
-    public patchSingleDprLocalCountryOptionTypesInternalV2PatchLocalCountryOptionTypeByOrganizationuuidAndOptionuuid(requestParameters: PatchSingleDprLocalCountryOptionTypesInternalV2PatchLocalCountryOptionTypeByOrganizationuuidAndOptionuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public patchSingleDprLocalCountryOptionTypesInternalV2PatchLocalCountryOptionType(requestParameters: PatchSingleDprLocalCountryOptionTypesInternalV2PatchLocalCountryOptionTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
+    public patchSingleDprLocalCountryOptionTypesInternalV2PatchLocalCountryOptionType(requestParameters: PatchSingleDprLocalCountryOptionTypesInternalV2PatchLocalCountryOptionTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
+    public patchSingleDprLocalCountryOptionTypesInternalV2PatchLocalCountryOptionType(requestParameters: PatchSingleDprLocalCountryOptionTypesInternalV2PatchLocalCountryOptionTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
+    public patchSingleDprLocalCountryOptionTypesInternalV2PatchLocalCountryOptionType(requestParameters: PatchSingleDprLocalCountryOptionTypesInternalV2PatchLocalCountryOptionTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling patchSingleDprLocalCountryOptionTypesInternalV2PatchLocalCountryOptionTypeByOrganizationuuidAndOptionuuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling patchSingleDprLocalCountryOptionTypesInternalV2PatchLocalCountryOptionType.');
         }
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
-            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleDprLocalCountryOptionTypesInternalV2PatchLocalCountryOptionTypeByOrganizationuuidAndOptionuuid.');
+            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleDprLocalCountryOptionTypesInternalV2PatchLocalCountryOptionType.');
         }
         const dto = requestParameters.dto;
         if (dto === null || dto === undefined) {
-            throw new Error('Required parameter dto was null or undefined when calling patchSingleDprLocalCountryOptionTypesInternalV2PatchLocalCountryOptionTypeByOrganizationuuidAndOptionuuid.');
+            throw new Error('Required parameter dto was null or undefined when calling patchSingleDprLocalCountryOptionTypesInternalV2PatchLocalCountryOptionType.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -384,17 +384,17 @@ export class APIV2DprLocalCountryOptionTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleDprLocalCountryOptionTypesInternalV2CreateLocalCountryOptionTypeByOrganizationuuid(requestParameters: PostSingleDprLocalCountryOptionTypesInternalV2CreateLocalCountryOptionTypeByOrganizationuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
-    public postSingleDprLocalCountryOptionTypesInternalV2CreateLocalCountryOptionTypeByOrganizationuuid(requestParameters: PostSingleDprLocalCountryOptionTypesInternalV2CreateLocalCountryOptionTypeByOrganizationuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
-    public postSingleDprLocalCountryOptionTypesInternalV2CreateLocalCountryOptionTypeByOrganizationuuid(requestParameters: PostSingleDprLocalCountryOptionTypesInternalV2CreateLocalCountryOptionTypeByOrganizationuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
-    public postSingleDprLocalCountryOptionTypesInternalV2CreateLocalCountryOptionTypeByOrganizationuuid(requestParameters: PostSingleDprLocalCountryOptionTypesInternalV2CreateLocalCountryOptionTypeByOrganizationuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public postSingleDprLocalCountryOptionTypesInternalV2CreateLocalCountryOptionType(requestParameters: PostSingleDprLocalCountryOptionTypesInternalV2CreateLocalCountryOptionTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
+    public postSingleDprLocalCountryOptionTypesInternalV2CreateLocalCountryOptionType(requestParameters: PostSingleDprLocalCountryOptionTypesInternalV2CreateLocalCountryOptionTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
+    public postSingleDprLocalCountryOptionTypesInternalV2CreateLocalCountryOptionType(requestParameters: PostSingleDprLocalCountryOptionTypesInternalV2CreateLocalCountryOptionTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
+    public postSingleDprLocalCountryOptionTypesInternalV2CreateLocalCountryOptionType(requestParameters: PostSingleDprLocalCountryOptionTypesInternalV2CreateLocalCountryOptionTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling postSingleDprLocalCountryOptionTypesInternalV2CreateLocalCountryOptionTypeByOrganizationuuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling postSingleDprLocalCountryOptionTypesInternalV2CreateLocalCountryOptionType.');
         }
         const dto = requestParameters.dto;
         if (dto === null || dto === undefined) {
-            throw new Error('Required parameter dto was null or undefined when calling postSingleDprLocalCountryOptionTypesInternalV2CreateLocalCountryOptionTypeByOrganizationuuid.');
+            throw new Error('Required parameter dto was null or undefined when calling postSingleDprLocalCountryOptionTypesInternalV2CreateLocalCountryOptionType.');
         }
 
         let localVarHeaders = this.defaultHeaders;

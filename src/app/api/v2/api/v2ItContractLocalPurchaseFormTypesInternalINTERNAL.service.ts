@@ -30,12 +30,12 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface DeleteSingleItContractLocalPurchaseFormTypesInternalV2DeleteLocalPurchaseFormTypeByOrganizationuuidAndOptionuuidRequestParams {
+export interface DeleteSingleItContractLocalPurchaseFormTypesInternalV2DeleteLocalPurchaseFormTypeRequestParams {
     organizationUuid: string;
     optionUuid: string;
 }
 
-export interface GetManyItContractLocalPurchaseFormTypesInternalV2GetLocalPurchaseFormTypesByOrganizationuuidRequestParams {
+export interface GetManyItContractLocalPurchaseFormTypesInternalV2GetLocalPurchaseFormTypesRequestParams {
     organizationUuid: string;
 }
 
@@ -44,13 +44,13 @@ export interface GetSingleItContractLocalPurchaseFormTypesInternalV2GetLocalPurc
     optionUuid: string;
 }
 
-export interface PatchSingleItContractLocalPurchaseFormTypesInternalV2PatchLocalPurchaseFormTypeByOrganizationuuidAndOptionuuidRequestParams {
+export interface PatchSingleItContractLocalPurchaseFormTypesInternalV2PatchLocalPurchaseFormTypeRequestParams {
     organizationUuid: string;
     optionUuid: string;
     dto: APILocalRegularOptionUpdateRequestDTO;
 }
 
-export interface PostSingleItContractLocalPurchaseFormTypesInternalV2CreateLocalResultPurchaseFormTypeByOrganizationuuidRequestParams {
+export interface PostSingleItContractLocalPurchaseFormTypesInternalV2CreateLocalResultPurchaseFormTypeRequestParams {
     organizationUuid: string;
     dto: APILocalOptionCreateRequestDTO;
 }
@@ -125,17 +125,17 @@ export class APIV2ItContractLocalPurchaseFormTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public deleteSingleItContractLocalPurchaseFormTypesInternalV2DeleteLocalPurchaseFormTypeByOrganizationuuidAndOptionuuid(requestParameters: DeleteSingleItContractLocalPurchaseFormTypesInternalV2DeleteLocalPurchaseFormTypeByOrganizationuuidAndOptionuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
-    public deleteSingleItContractLocalPurchaseFormTypesInternalV2DeleteLocalPurchaseFormTypeByOrganizationuuidAndOptionuuid(requestParameters: DeleteSingleItContractLocalPurchaseFormTypesInternalV2DeleteLocalPurchaseFormTypeByOrganizationuuidAndOptionuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
-    public deleteSingleItContractLocalPurchaseFormTypesInternalV2DeleteLocalPurchaseFormTypeByOrganizationuuidAndOptionuuid(requestParameters: DeleteSingleItContractLocalPurchaseFormTypesInternalV2DeleteLocalPurchaseFormTypeByOrganizationuuidAndOptionuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
-    public deleteSingleItContractLocalPurchaseFormTypesInternalV2DeleteLocalPurchaseFormTypeByOrganizationuuidAndOptionuuid(requestParameters: DeleteSingleItContractLocalPurchaseFormTypesInternalV2DeleteLocalPurchaseFormTypeByOrganizationuuidAndOptionuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
+    public deleteSingleItContractLocalPurchaseFormTypesInternalV2DeleteLocalPurchaseFormType(requestParameters: DeleteSingleItContractLocalPurchaseFormTypesInternalV2DeleteLocalPurchaseFormTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
+    public deleteSingleItContractLocalPurchaseFormTypesInternalV2DeleteLocalPurchaseFormType(requestParameters: DeleteSingleItContractLocalPurchaseFormTypesInternalV2DeleteLocalPurchaseFormTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
+    public deleteSingleItContractLocalPurchaseFormTypesInternalV2DeleteLocalPurchaseFormType(requestParameters: DeleteSingleItContractLocalPurchaseFormTypesInternalV2DeleteLocalPurchaseFormTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
+    public deleteSingleItContractLocalPurchaseFormTypesInternalV2DeleteLocalPurchaseFormType(requestParameters: DeleteSingleItContractLocalPurchaseFormTypesInternalV2DeleteLocalPurchaseFormTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling deleteSingleItContractLocalPurchaseFormTypesInternalV2DeleteLocalPurchaseFormTypeByOrganizationuuidAndOptionuuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling deleteSingleItContractLocalPurchaseFormTypesInternalV2DeleteLocalPurchaseFormType.');
         }
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
-            throw new Error('Required parameter optionUuid was null or undefined when calling deleteSingleItContractLocalPurchaseFormTypesInternalV2DeleteLocalPurchaseFormTypeByOrganizationuuidAndOptionuuid.');
+            throw new Error('Required parameter optionUuid was null or undefined when calling deleteSingleItContractLocalPurchaseFormTypesInternalV2DeleteLocalPurchaseFormType.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -187,13 +187,13 @@ export class APIV2ItContractLocalPurchaseFormTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getManyItContractLocalPurchaseFormTypesInternalV2GetLocalPurchaseFormTypesByOrganizationuuid(requestParameters: GetManyItContractLocalPurchaseFormTypesInternalV2GetLocalPurchaseFormTypesByOrganizationuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APILocalRegularOptionResponseDTO>>;
-    public getManyItContractLocalPurchaseFormTypesInternalV2GetLocalPurchaseFormTypesByOrganizationuuid(requestParameters: GetManyItContractLocalPurchaseFormTypesInternalV2GetLocalPurchaseFormTypesByOrganizationuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APILocalRegularOptionResponseDTO>>>;
-    public getManyItContractLocalPurchaseFormTypesInternalV2GetLocalPurchaseFormTypesByOrganizationuuid(requestParameters: GetManyItContractLocalPurchaseFormTypesInternalV2GetLocalPurchaseFormTypesByOrganizationuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APILocalRegularOptionResponseDTO>>>;
-    public getManyItContractLocalPurchaseFormTypesInternalV2GetLocalPurchaseFormTypesByOrganizationuuid(requestParameters: GetManyItContractLocalPurchaseFormTypesInternalV2GetLocalPurchaseFormTypesByOrganizationuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyItContractLocalPurchaseFormTypesInternalV2GetLocalPurchaseFormTypes(requestParameters: GetManyItContractLocalPurchaseFormTypesInternalV2GetLocalPurchaseFormTypesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APILocalRegularOptionResponseDTO>>;
+    public getManyItContractLocalPurchaseFormTypesInternalV2GetLocalPurchaseFormTypes(requestParameters: GetManyItContractLocalPurchaseFormTypesInternalV2GetLocalPurchaseFormTypesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APILocalRegularOptionResponseDTO>>>;
+    public getManyItContractLocalPurchaseFormTypesInternalV2GetLocalPurchaseFormTypes(requestParameters: GetManyItContractLocalPurchaseFormTypesInternalV2GetLocalPurchaseFormTypesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APILocalRegularOptionResponseDTO>>>;
+    public getManyItContractLocalPurchaseFormTypesInternalV2GetLocalPurchaseFormTypes(requestParameters: GetManyItContractLocalPurchaseFormTypesInternalV2GetLocalPurchaseFormTypesRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyItContractLocalPurchaseFormTypesInternalV2GetLocalPurchaseFormTypesByOrganizationuuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyItContractLocalPurchaseFormTypesInternalV2GetLocalPurchaseFormTypes.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -307,21 +307,21 @@ export class APIV2ItContractLocalPurchaseFormTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleItContractLocalPurchaseFormTypesInternalV2PatchLocalPurchaseFormTypeByOrganizationuuidAndOptionuuid(requestParameters: PatchSingleItContractLocalPurchaseFormTypesInternalV2PatchLocalPurchaseFormTypeByOrganizationuuidAndOptionuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
-    public patchSingleItContractLocalPurchaseFormTypesInternalV2PatchLocalPurchaseFormTypeByOrganizationuuidAndOptionuuid(requestParameters: PatchSingleItContractLocalPurchaseFormTypesInternalV2PatchLocalPurchaseFormTypeByOrganizationuuidAndOptionuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
-    public patchSingleItContractLocalPurchaseFormTypesInternalV2PatchLocalPurchaseFormTypeByOrganizationuuidAndOptionuuid(requestParameters: PatchSingleItContractLocalPurchaseFormTypesInternalV2PatchLocalPurchaseFormTypeByOrganizationuuidAndOptionuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
-    public patchSingleItContractLocalPurchaseFormTypesInternalV2PatchLocalPurchaseFormTypeByOrganizationuuidAndOptionuuid(requestParameters: PatchSingleItContractLocalPurchaseFormTypesInternalV2PatchLocalPurchaseFormTypeByOrganizationuuidAndOptionuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public patchSingleItContractLocalPurchaseFormTypesInternalV2PatchLocalPurchaseFormType(requestParameters: PatchSingleItContractLocalPurchaseFormTypesInternalV2PatchLocalPurchaseFormTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
+    public patchSingleItContractLocalPurchaseFormTypesInternalV2PatchLocalPurchaseFormType(requestParameters: PatchSingleItContractLocalPurchaseFormTypesInternalV2PatchLocalPurchaseFormTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
+    public patchSingleItContractLocalPurchaseFormTypesInternalV2PatchLocalPurchaseFormType(requestParameters: PatchSingleItContractLocalPurchaseFormTypesInternalV2PatchLocalPurchaseFormTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
+    public patchSingleItContractLocalPurchaseFormTypesInternalV2PatchLocalPurchaseFormType(requestParameters: PatchSingleItContractLocalPurchaseFormTypesInternalV2PatchLocalPurchaseFormTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling patchSingleItContractLocalPurchaseFormTypesInternalV2PatchLocalPurchaseFormTypeByOrganizationuuidAndOptionuuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling patchSingleItContractLocalPurchaseFormTypesInternalV2PatchLocalPurchaseFormType.');
         }
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
-            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItContractLocalPurchaseFormTypesInternalV2PatchLocalPurchaseFormTypeByOrganizationuuidAndOptionuuid.');
+            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItContractLocalPurchaseFormTypesInternalV2PatchLocalPurchaseFormType.');
         }
         const dto = requestParameters.dto;
         if (dto === null || dto === undefined) {
-            throw new Error('Required parameter dto was null or undefined when calling patchSingleItContractLocalPurchaseFormTypesInternalV2PatchLocalPurchaseFormTypeByOrganizationuuidAndOptionuuid.');
+            throw new Error('Required parameter dto was null or undefined when calling patchSingleItContractLocalPurchaseFormTypesInternalV2PatchLocalPurchaseFormType.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -384,17 +384,17 @@ export class APIV2ItContractLocalPurchaseFormTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleItContractLocalPurchaseFormTypesInternalV2CreateLocalResultPurchaseFormTypeByOrganizationuuid(requestParameters: PostSingleItContractLocalPurchaseFormTypesInternalV2CreateLocalResultPurchaseFormTypeByOrganizationuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
-    public postSingleItContractLocalPurchaseFormTypesInternalV2CreateLocalResultPurchaseFormTypeByOrganizationuuid(requestParameters: PostSingleItContractLocalPurchaseFormTypesInternalV2CreateLocalResultPurchaseFormTypeByOrganizationuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
-    public postSingleItContractLocalPurchaseFormTypesInternalV2CreateLocalResultPurchaseFormTypeByOrganizationuuid(requestParameters: PostSingleItContractLocalPurchaseFormTypesInternalV2CreateLocalResultPurchaseFormTypeByOrganizationuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
-    public postSingleItContractLocalPurchaseFormTypesInternalV2CreateLocalResultPurchaseFormTypeByOrganizationuuid(requestParameters: PostSingleItContractLocalPurchaseFormTypesInternalV2CreateLocalResultPurchaseFormTypeByOrganizationuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public postSingleItContractLocalPurchaseFormTypesInternalV2CreateLocalResultPurchaseFormType(requestParameters: PostSingleItContractLocalPurchaseFormTypesInternalV2CreateLocalResultPurchaseFormTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
+    public postSingleItContractLocalPurchaseFormTypesInternalV2CreateLocalResultPurchaseFormType(requestParameters: PostSingleItContractLocalPurchaseFormTypesInternalV2CreateLocalResultPurchaseFormTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
+    public postSingleItContractLocalPurchaseFormTypesInternalV2CreateLocalResultPurchaseFormType(requestParameters: PostSingleItContractLocalPurchaseFormTypesInternalV2CreateLocalResultPurchaseFormTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
+    public postSingleItContractLocalPurchaseFormTypesInternalV2CreateLocalResultPurchaseFormType(requestParameters: PostSingleItContractLocalPurchaseFormTypesInternalV2CreateLocalResultPurchaseFormTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling postSingleItContractLocalPurchaseFormTypesInternalV2CreateLocalResultPurchaseFormTypeByOrganizationuuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling postSingleItContractLocalPurchaseFormTypesInternalV2CreateLocalResultPurchaseFormType.');
         }
         const dto = requestParameters.dto;
         if (dto === null || dto === undefined) {
-            throw new Error('Required parameter dto was null or undefined when calling postSingleItContractLocalPurchaseFormTypesInternalV2CreateLocalResultPurchaseFormTypeByOrganizationuuid.');
+            throw new Error('Required parameter dto was null or undefined when calling postSingleItContractLocalPurchaseFormTypesInternalV2CreateLocalResultPurchaseFormType.');
         }
 
         let localVarHeaders = this.defaultHeaders;

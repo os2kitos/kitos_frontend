@@ -30,12 +30,12 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface DeleteSingleItContractLocalPaymentModelTypesInternalV2DeleteLocalPaymentModelTypeByOrganizationuuidAndOptionuuidRequestParams {
+export interface DeleteSingleItContractLocalPaymentModelTypesInternalV2DeleteLocalPaymentModelTypeRequestParams {
     organizationUuid: string;
     optionUuid: string;
 }
 
-export interface GetManyItContractLocalPaymentModelTypesInternalV2GetLocalPaymentModelTypesByOrganizationuuidRequestParams {
+export interface GetManyItContractLocalPaymentModelTypesInternalV2GetLocalPaymentModelTypesRequestParams {
     organizationUuid: string;
 }
 
@@ -44,13 +44,13 @@ export interface GetSingleItContractLocalPaymentModelTypesInternalV2GetLocalTPay
     optionUuid: string;
 }
 
-export interface PatchSingleItContractLocalPaymentModelTypesInternalV2PatchLocalPaymentModelTypeByOrganizationuuidAndOptionuuidRequestParams {
+export interface PatchSingleItContractLocalPaymentModelTypesInternalV2PatchLocalPaymentModelTypeRequestParams {
     organizationUuid: string;
     optionUuid: string;
     dto: APILocalRegularOptionUpdateRequestDTO;
 }
 
-export interface PostSingleItContractLocalPaymentModelTypesInternalV2CreateLocalPaymentModelTypeByOrganizationuuidRequestParams {
+export interface PostSingleItContractLocalPaymentModelTypesInternalV2CreateLocalPaymentModelTypeRequestParams {
     organizationUuid: string;
     dto: APILocalOptionCreateRequestDTO;
 }
@@ -125,17 +125,17 @@ export class APIV2ItContractLocalPaymentModelTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public deleteSingleItContractLocalPaymentModelTypesInternalV2DeleteLocalPaymentModelTypeByOrganizationuuidAndOptionuuid(requestParameters: DeleteSingleItContractLocalPaymentModelTypesInternalV2DeleteLocalPaymentModelTypeByOrganizationuuidAndOptionuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
-    public deleteSingleItContractLocalPaymentModelTypesInternalV2DeleteLocalPaymentModelTypeByOrganizationuuidAndOptionuuid(requestParameters: DeleteSingleItContractLocalPaymentModelTypesInternalV2DeleteLocalPaymentModelTypeByOrganizationuuidAndOptionuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
-    public deleteSingleItContractLocalPaymentModelTypesInternalV2DeleteLocalPaymentModelTypeByOrganizationuuidAndOptionuuid(requestParameters: DeleteSingleItContractLocalPaymentModelTypesInternalV2DeleteLocalPaymentModelTypeByOrganizationuuidAndOptionuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
-    public deleteSingleItContractLocalPaymentModelTypesInternalV2DeleteLocalPaymentModelTypeByOrganizationuuidAndOptionuuid(requestParameters: DeleteSingleItContractLocalPaymentModelTypesInternalV2DeleteLocalPaymentModelTypeByOrganizationuuidAndOptionuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
+    public deleteSingleItContractLocalPaymentModelTypesInternalV2DeleteLocalPaymentModelType(requestParameters: DeleteSingleItContractLocalPaymentModelTypesInternalV2DeleteLocalPaymentModelTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
+    public deleteSingleItContractLocalPaymentModelTypesInternalV2DeleteLocalPaymentModelType(requestParameters: DeleteSingleItContractLocalPaymentModelTypesInternalV2DeleteLocalPaymentModelTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
+    public deleteSingleItContractLocalPaymentModelTypesInternalV2DeleteLocalPaymentModelType(requestParameters: DeleteSingleItContractLocalPaymentModelTypesInternalV2DeleteLocalPaymentModelTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
+    public deleteSingleItContractLocalPaymentModelTypesInternalV2DeleteLocalPaymentModelType(requestParameters: DeleteSingleItContractLocalPaymentModelTypesInternalV2DeleteLocalPaymentModelTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling deleteSingleItContractLocalPaymentModelTypesInternalV2DeleteLocalPaymentModelTypeByOrganizationuuidAndOptionuuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling deleteSingleItContractLocalPaymentModelTypesInternalV2DeleteLocalPaymentModelType.');
         }
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
-            throw new Error('Required parameter optionUuid was null or undefined when calling deleteSingleItContractLocalPaymentModelTypesInternalV2DeleteLocalPaymentModelTypeByOrganizationuuidAndOptionuuid.');
+            throw new Error('Required parameter optionUuid was null or undefined when calling deleteSingleItContractLocalPaymentModelTypesInternalV2DeleteLocalPaymentModelType.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -187,13 +187,13 @@ export class APIV2ItContractLocalPaymentModelTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getManyItContractLocalPaymentModelTypesInternalV2GetLocalPaymentModelTypesByOrganizationuuid(requestParameters: GetManyItContractLocalPaymentModelTypesInternalV2GetLocalPaymentModelTypesByOrganizationuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APILocalRegularOptionResponseDTO>>;
-    public getManyItContractLocalPaymentModelTypesInternalV2GetLocalPaymentModelTypesByOrganizationuuid(requestParameters: GetManyItContractLocalPaymentModelTypesInternalV2GetLocalPaymentModelTypesByOrganizationuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APILocalRegularOptionResponseDTO>>>;
-    public getManyItContractLocalPaymentModelTypesInternalV2GetLocalPaymentModelTypesByOrganizationuuid(requestParameters: GetManyItContractLocalPaymentModelTypesInternalV2GetLocalPaymentModelTypesByOrganizationuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APILocalRegularOptionResponseDTO>>>;
-    public getManyItContractLocalPaymentModelTypesInternalV2GetLocalPaymentModelTypesByOrganizationuuid(requestParameters: GetManyItContractLocalPaymentModelTypesInternalV2GetLocalPaymentModelTypesByOrganizationuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyItContractLocalPaymentModelTypesInternalV2GetLocalPaymentModelTypes(requestParameters: GetManyItContractLocalPaymentModelTypesInternalV2GetLocalPaymentModelTypesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APILocalRegularOptionResponseDTO>>;
+    public getManyItContractLocalPaymentModelTypesInternalV2GetLocalPaymentModelTypes(requestParameters: GetManyItContractLocalPaymentModelTypesInternalV2GetLocalPaymentModelTypesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APILocalRegularOptionResponseDTO>>>;
+    public getManyItContractLocalPaymentModelTypesInternalV2GetLocalPaymentModelTypes(requestParameters: GetManyItContractLocalPaymentModelTypesInternalV2GetLocalPaymentModelTypesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APILocalRegularOptionResponseDTO>>>;
+    public getManyItContractLocalPaymentModelTypesInternalV2GetLocalPaymentModelTypes(requestParameters: GetManyItContractLocalPaymentModelTypesInternalV2GetLocalPaymentModelTypesRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyItContractLocalPaymentModelTypesInternalV2GetLocalPaymentModelTypesByOrganizationuuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyItContractLocalPaymentModelTypesInternalV2GetLocalPaymentModelTypes.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -307,21 +307,21 @@ export class APIV2ItContractLocalPaymentModelTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleItContractLocalPaymentModelTypesInternalV2PatchLocalPaymentModelTypeByOrganizationuuidAndOptionuuid(requestParameters: PatchSingleItContractLocalPaymentModelTypesInternalV2PatchLocalPaymentModelTypeByOrganizationuuidAndOptionuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
-    public patchSingleItContractLocalPaymentModelTypesInternalV2PatchLocalPaymentModelTypeByOrganizationuuidAndOptionuuid(requestParameters: PatchSingleItContractLocalPaymentModelTypesInternalV2PatchLocalPaymentModelTypeByOrganizationuuidAndOptionuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
-    public patchSingleItContractLocalPaymentModelTypesInternalV2PatchLocalPaymentModelTypeByOrganizationuuidAndOptionuuid(requestParameters: PatchSingleItContractLocalPaymentModelTypesInternalV2PatchLocalPaymentModelTypeByOrganizationuuidAndOptionuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
-    public patchSingleItContractLocalPaymentModelTypesInternalV2PatchLocalPaymentModelTypeByOrganizationuuidAndOptionuuid(requestParameters: PatchSingleItContractLocalPaymentModelTypesInternalV2PatchLocalPaymentModelTypeByOrganizationuuidAndOptionuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public patchSingleItContractLocalPaymentModelTypesInternalV2PatchLocalPaymentModelType(requestParameters: PatchSingleItContractLocalPaymentModelTypesInternalV2PatchLocalPaymentModelTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
+    public patchSingleItContractLocalPaymentModelTypesInternalV2PatchLocalPaymentModelType(requestParameters: PatchSingleItContractLocalPaymentModelTypesInternalV2PatchLocalPaymentModelTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
+    public patchSingleItContractLocalPaymentModelTypesInternalV2PatchLocalPaymentModelType(requestParameters: PatchSingleItContractLocalPaymentModelTypesInternalV2PatchLocalPaymentModelTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
+    public patchSingleItContractLocalPaymentModelTypesInternalV2PatchLocalPaymentModelType(requestParameters: PatchSingleItContractLocalPaymentModelTypesInternalV2PatchLocalPaymentModelTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling patchSingleItContractLocalPaymentModelTypesInternalV2PatchLocalPaymentModelTypeByOrganizationuuidAndOptionuuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling patchSingleItContractLocalPaymentModelTypesInternalV2PatchLocalPaymentModelType.');
         }
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
-            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItContractLocalPaymentModelTypesInternalV2PatchLocalPaymentModelTypeByOrganizationuuidAndOptionuuid.');
+            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItContractLocalPaymentModelTypesInternalV2PatchLocalPaymentModelType.');
         }
         const dto = requestParameters.dto;
         if (dto === null || dto === undefined) {
-            throw new Error('Required parameter dto was null or undefined when calling patchSingleItContractLocalPaymentModelTypesInternalV2PatchLocalPaymentModelTypeByOrganizationuuidAndOptionuuid.');
+            throw new Error('Required parameter dto was null or undefined when calling patchSingleItContractLocalPaymentModelTypesInternalV2PatchLocalPaymentModelType.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -384,17 +384,17 @@ export class APIV2ItContractLocalPaymentModelTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleItContractLocalPaymentModelTypesInternalV2CreateLocalPaymentModelTypeByOrganizationuuid(requestParameters: PostSingleItContractLocalPaymentModelTypesInternalV2CreateLocalPaymentModelTypeByOrganizationuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
-    public postSingleItContractLocalPaymentModelTypesInternalV2CreateLocalPaymentModelTypeByOrganizationuuid(requestParameters: PostSingleItContractLocalPaymentModelTypesInternalV2CreateLocalPaymentModelTypeByOrganizationuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
-    public postSingleItContractLocalPaymentModelTypesInternalV2CreateLocalPaymentModelTypeByOrganizationuuid(requestParameters: PostSingleItContractLocalPaymentModelTypesInternalV2CreateLocalPaymentModelTypeByOrganizationuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
-    public postSingleItContractLocalPaymentModelTypesInternalV2CreateLocalPaymentModelTypeByOrganizationuuid(requestParameters: PostSingleItContractLocalPaymentModelTypesInternalV2CreateLocalPaymentModelTypeByOrganizationuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public postSingleItContractLocalPaymentModelTypesInternalV2CreateLocalPaymentModelType(requestParameters: PostSingleItContractLocalPaymentModelTypesInternalV2CreateLocalPaymentModelTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
+    public postSingleItContractLocalPaymentModelTypesInternalV2CreateLocalPaymentModelType(requestParameters: PostSingleItContractLocalPaymentModelTypesInternalV2CreateLocalPaymentModelTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
+    public postSingleItContractLocalPaymentModelTypesInternalV2CreateLocalPaymentModelType(requestParameters: PostSingleItContractLocalPaymentModelTypesInternalV2CreateLocalPaymentModelTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
+    public postSingleItContractLocalPaymentModelTypesInternalV2CreateLocalPaymentModelType(requestParameters: PostSingleItContractLocalPaymentModelTypesInternalV2CreateLocalPaymentModelTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling postSingleItContractLocalPaymentModelTypesInternalV2CreateLocalPaymentModelTypeByOrganizationuuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling postSingleItContractLocalPaymentModelTypesInternalV2CreateLocalPaymentModelType.');
         }
         const dto = requestParameters.dto;
         if (dto === null || dto === undefined) {
-            throw new Error('Required parameter dto was null or undefined when calling postSingleItContractLocalPaymentModelTypesInternalV2CreateLocalPaymentModelTypeByOrganizationuuid.');
+            throw new Error('Required parameter dto was null or undefined when calling postSingleItContractLocalPaymentModelTypesInternalV2CreateLocalPaymentModelType.');
         }
 
         let localVarHeaders = this.defaultHeaders;

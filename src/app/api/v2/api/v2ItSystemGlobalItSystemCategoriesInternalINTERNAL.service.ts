@@ -30,7 +30,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface PatchSingleItSystemGlobalItSystemCategoriesInternalV2PatchGlobalItSystemCategoriesByOptionuuidRequestParams {
+export interface PatchSingleItSystemGlobalItSystemCategoriesInternalV2PatchGlobalItSystemCategoriesRequestParams {
     optionUuid: string;
     dto: APIGlobalRegularOptionUpdateRequestDTO;
 }
@@ -162,17 +162,17 @@ export class APIV2ItSystemGlobalItSystemCategoriesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleItSystemGlobalItSystemCategoriesInternalV2PatchGlobalItSystemCategoriesByOptionuuid(requestParameters: PatchSingleItSystemGlobalItSystemCategoriesInternalV2PatchGlobalItSystemCategoriesByOptionuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRegularOptionResponseDTO>;
-    public patchSingleItSystemGlobalItSystemCategoriesInternalV2PatchGlobalItSystemCategoriesByOptionuuid(requestParameters: PatchSingleItSystemGlobalItSystemCategoriesInternalV2PatchGlobalItSystemCategoriesByOptionuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRegularOptionResponseDTO>>;
-    public patchSingleItSystemGlobalItSystemCategoriesInternalV2PatchGlobalItSystemCategoriesByOptionuuid(requestParameters: PatchSingleItSystemGlobalItSystemCategoriesInternalV2PatchGlobalItSystemCategoriesByOptionuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRegularOptionResponseDTO>>;
-    public patchSingleItSystemGlobalItSystemCategoriesInternalV2PatchGlobalItSystemCategoriesByOptionuuid(requestParameters: PatchSingleItSystemGlobalItSystemCategoriesInternalV2PatchGlobalItSystemCategoriesByOptionuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public patchSingleItSystemGlobalItSystemCategoriesInternalV2PatchGlobalItSystemCategories(requestParameters: PatchSingleItSystemGlobalItSystemCategoriesInternalV2PatchGlobalItSystemCategoriesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRegularOptionResponseDTO>;
+    public patchSingleItSystemGlobalItSystemCategoriesInternalV2PatchGlobalItSystemCategories(requestParameters: PatchSingleItSystemGlobalItSystemCategoriesInternalV2PatchGlobalItSystemCategoriesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRegularOptionResponseDTO>>;
+    public patchSingleItSystemGlobalItSystemCategoriesInternalV2PatchGlobalItSystemCategories(requestParameters: PatchSingleItSystemGlobalItSystemCategoriesInternalV2PatchGlobalItSystemCategoriesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRegularOptionResponseDTO>>;
+    public patchSingleItSystemGlobalItSystemCategoriesInternalV2PatchGlobalItSystemCategories(requestParameters: PatchSingleItSystemGlobalItSystemCategoriesInternalV2PatchGlobalItSystemCategoriesRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
-            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItSystemGlobalItSystemCategoriesInternalV2PatchGlobalItSystemCategoriesByOptionuuid.');
+            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItSystemGlobalItSystemCategoriesInternalV2PatchGlobalItSystemCategories.');
         }
         const dto = requestParameters.dto;
         if (dto === null || dto === undefined) {
-            throw new Error('Required parameter dto was null or undefined when calling patchSingleItSystemGlobalItSystemCategoriesInternalV2PatchGlobalItSystemCategoriesByOptionuuid.');
+            throw new Error('Required parameter dto was null or undefined when calling patchSingleItSystemGlobalItSystemCategoriesInternalV2PatchGlobalItSystemCategories.');
         }
 
         let localVarHeaders = this.defaultHeaders;

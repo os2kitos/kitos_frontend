@@ -37,7 +37,7 @@ export interface GetManyItContractPaymentFrequencyTypeV2GetRequestParams {
     pageSize?: number;
 }
 
-export interface GetSingleItContractPaymentFrequencyTypeV2GetV1ByPaymentfrequencytypeuuidRequestParams {
+export interface GetSingleItContractPaymentFrequencyTypeV2GetV1RequestParams {
     /** payment frequency type identifier */
     paymentFrequencyTypeUuid: string;
     /** organization context for the payment frequency type availability */
@@ -191,17 +191,17 @@ export class APIV2ItContractPaymentFrequencyTypeService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItContractPaymentFrequencyTypeV2GetV1ByPaymentfrequencytypeuuid(requestParameters: GetSingleItContractPaymentFrequencyTypeV2GetV1ByPaymentfrequencytypeuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
-    public getSingleItContractPaymentFrequencyTypeV2GetV1ByPaymentfrequencytypeuuid(requestParameters: GetSingleItContractPaymentFrequencyTypeV2GetV1ByPaymentfrequencytypeuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
-    public getSingleItContractPaymentFrequencyTypeV2GetV1ByPaymentfrequencytypeuuid(requestParameters: GetSingleItContractPaymentFrequencyTypeV2GetV1ByPaymentfrequencytypeuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
-    public getSingleItContractPaymentFrequencyTypeV2GetV1ByPaymentfrequencytypeuuid(requestParameters: GetSingleItContractPaymentFrequencyTypeV2GetV1ByPaymentfrequencytypeuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleItContractPaymentFrequencyTypeV2GetV1(requestParameters: GetSingleItContractPaymentFrequencyTypeV2GetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
+    public getSingleItContractPaymentFrequencyTypeV2GetV1(requestParameters: GetSingleItContractPaymentFrequencyTypeV2GetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
+    public getSingleItContractPaymentFrequencyTypeV2GetV1(requestParameters: GetSingleItContractPaymentFrequencyTypeV2GetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
+    public getSingleItContractPaymentFrequencyTypeV2GetV1(requestParameters: GetSingleItContractPaymentFrequencyTypeV2GetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const paymentFrequencyTypeUuid = requestParameters.paymentFrequencyTypeUuid;
         if (paymentFrequencyTypeUuid === null || paymentFrequencyTypeUuid === undefined) {
-            throw new Error('Required parameter paymentFrequencyTypeUuid was null or undefined when calling getSingleItContractPaymentFrequencyTypeV2GetV1ByPaymentfrequencytypeuuid.');
+            throw new Error('Required parameter paymentFrequencyTypeUuid was null or undefined when calling getSingleItContractPaymentFrequencyTypeV2GetV1.');
         }
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleItContractPaymentFrequencyTypeV2GetV1ByPaymentfrequencytypeuuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleItContractPaymentFrequencyTypeV2GetV1.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});

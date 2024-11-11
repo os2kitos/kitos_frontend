@@ -30,12 +30,12 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface DeleteSingleItContractLocalCriticalityTypesInternalV2DeleteLocalCriticalityTypeByOrganizationuuidAndOptionuuidRequestParams {
+export interface DeleteSingleItContractLocalCriticalityTypesInternalV2DeleteLocalCriticalityTypeRequestParams {
     organizationUuid: string;
     optionUuid: string;
 }
 
-export interface GetManyItContractLocalCriticalityTypesInternalV2GetLocalCriticalityTypesByOrganizationuuidRequestParams {
+export interface GetManyItContractLocalCriticalityTypesInternalV2GetLocalCriticalityTypesRequestParams {
     organizationUuid: string;
 }
 
@@ -44,13 +44,13 @@ export interface GetSingleItContractLocalCriticalityTypesInternalV2GetLocalCriti
     optionUuid: string;
 }
 
-export interface PatchSingleItContractLocalCriticalityTypesInternalV2PatchLocalCriticalityTypeByOrganizationuuidAndOptionuuidRequestParams {
+export interface PatchSingleItContractLocalCriticalityTypesInternalV2PatchLocalCriticalityTypeRequestParams {
     organizationUuid: string;
     optionUuid: string;
     dto: APILocalRegularOptionUpdateRequestDTO;
 }
 
-export interface PostSingleItContractLocalCriticalityTypesInternalV2CreateLocalCriticalityTypeByOrganizationuuidRequestParams {
+export interface PostSingleItContractLocalCriticalityTypesInternalV2CreateLocalCriticalityTypeRequestParams {
     organizationUuid: string;
     dto: APILocalOptionCreateRequestDTO;
 }
@@ -125,17 +125,17 @@ export class APIV2ItContractLocalCriticalityTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public deleteSingleItContractLocalCriticalityTypesInternalV2DeleteLocalCriticalityTypeByOrganizationuuidAndOptionuuid(requestParameters: DeleteSingleItContractLocalCriticalityTypesInternalV2DeleteLocalCriticalityTypeByOrganizationuuidAndOptionuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
-    public deleteSingleItContractLocalCriticalityTypesInternalV2DeleteLocalCriticalityTypeByOrganizationuuidAndOptionuuid(requestParameters: DeleteSingleItContractLocalCriticalityTypesInternalV2DeleteLocalCriticalityTypeByOrganizationuuidAndOptionuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
-    public deleteSingleItContractLocalCriticalityTypesInternalV2DeleteLocalCriticalityTypeByOrganizationuuidAndOptionuuid(requestParameters: DeleteSingleItContractLocalCriticalityTypesInternalV2DeleteLocalCriticalityTypeByOrganizationuuidAndOptionuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
-    public deleteSingleItContractLocalCriticalityTypesInternalV2DeleteLocalCriticalityTypeByOrganizationuuidAndOptionuuid(requestParameters: DeleteSingleItContractLocalCriticalityTypesInternalV2DeleteLocalCriticalityTypeByOrganizationuuidAndOptionuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
+    public deleteSingleItContractLocalCriticalityTypesInternalV2DeleteLocalCriticalityType(requestParameters: DeleteSingleItContractLocalCriticalityTypesInternalV2DeleteLocalCriticalityTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
+    public deleteSingleItContractLocalCriticalityTypesInternalV2DeleteLocalCriticalityType(requestParameters: DeleteSingleItContractLocalCriticalityTypesInternalV2DeleteLocalCriticalityTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
+    public deleteSingleItContractLocalCriticalityTypesInternalV2DeleteLocalCriticalityType(requestParameters: DeleteSingleItContractLocalCriticalityTypesInternalV2DeleteLocalCriticalityTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
+    public deleteSingleItContractLocalCriticalityTypesInternalV2DeleteLocalCriticalityType(requestParameters: DeleteSingleItContractLocalCriticalityTypesInternalV2DeleteLocalCriticalityTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling deleteSingleItContractLocalCriticalityTypesInternalV2DeleteLocalCriticalityTypeByOrganizationuuidAndOptionuuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling deleteSingleItContractLocalCriticalityTypesInternalV2DeleteLocalCriticalityType.');
         }
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
-            throw new Error('Required parameter optionUuid was null or undefined when calling deleteSingleItContractLocalCriticalityTypesInternalV2DeleteLocalCriticalityTypeByOrganizationuuidAndOptionuuid.');
+            throw new Error('Required parameter optionUuid was null or undefined when calling deleteSingleItContractLocalCriticalityTypesInternalV2DeleteLocalCriticalityType.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -187,13 +187,13 @@ export class APIV2ItContractLocalCriticalityTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getManyItContractLocalCriticalityTypesInternalV2GetLocalCriticalityTypesByOrganizationuuid(requestParameters: GetManyItContractLocalCriticalityTypesInternalV2GetLocalCriticalityTypesByOrganizationuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APILocalRegularOptionResponseDTO>>;
-    public getManyItContractLocalCriticalityTypesInternalV2GetLocalCriticalityTypesByOrganizationuuid(requestParameters: GetManyItContractLocalCriticalityTypesInternalV2GetLocalCriticalityTypesByOrganizationuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APILocalRegularOptionResponseDTO>>>;
-    public getManyItContractLocalCriticalityTypesInternalV2GetLocalCriticalityTypesByOrganizationuuid(requestParameters: GetManyItContractLocalCriticalityTypesInternalV2GetLocalCriticalityTypesByOrganizationuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APILocalRegularOptionResponseDTO>>>;
-    public getManyItContractLocalCriticalityTypesInternalV2GetLocalCriticalityTypesByOrganizationuuid(requestParameters: GetManyItContractLocalCriticalityTypesInternalV2GetLocalCriticalityTypesByOrganizationuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyItContractLocalCriticalityTypesInternalV2GetLocalCriticalityTypes(requestParameters: GetManyItContractLocalCriticalityTypesInternalV2GetLocalCriticalityTypesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APILocalRegularOptionResponseDTO>>;
+    public getManyItContractLocalCriticalityTypesInternalV2GetLocalCriticalityTypes(requestParameters: GetManyItContractLocalCriticalityTypesInternalV2GetLocalCriticalityTypesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APILocalRegularOptionResponseDTO>>>;
+    public getManyItContractLocalCriticalityTypesInternalV2GetLocalCriticalityTypes(requestParameters: GetManyItContractLocalCriticalityTypesInternalV2GetLocalCriticalityTypesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APILocalRegularOptionResponseDTO>>>;
+    public getManyItContractLocalCriticalityTypesInternalV2GetLocalCriticalityTypes(requestParameters: GetManyItContractLocalCriticalityTypesInternalV2GetLocalCriticalityTypesRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyItContractLocalCriticalityTypesInternalV2GetLocalCriticalityTypesByOrganizationuuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyItContractLocalCriticalityTypesInternalV2GetLocalCriticalityTypes.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -307,21 +307,21 @@ export class APIV2ItContractLocalCriticalityTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleItContractLocalCriticalityTypesInternalV2PatchLocalCriticalityTypeByOrganizationuuidAndOptionuuid(requestParameters: PatchSingleItContractLocalCriticalityTypesInternalV2PatchLocalCriticalityTypeByOrganizationuuidAndOptionuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
-    public patchSingleItContractLocalCriticalityTypesInternalV2PatchLocalCriticalityTypeByOrganizationuuidAndOptionuuid(requestParameters: PatchSingleItContractLocalCriticalityTypesInternalV2PatchLocalCriticalityTypeByOrganizationuuidAndOptionuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
-    public patchSingleItContractLocalCriticalityTypesInternalV2PatchLocalCriticalityTypeByOrganizationuuidAndOptionuuid(requestParameters: PatchSingleItContractLocalCriticalityTypesInternalV2PatchLocalCriticalityTypeByOrganizationuuidAndOptionuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
-    public patchSingleItContractLocalCriticalityTypesInternalV2PatchLocalCriticalityTypeByOrganizationuuidAndOptionuuid(requestParameters: PatchSingleItContractLocalCriticalityTypesInternalV2PatchLocalCriticalityTypeByOrganizationuuidAndOptionuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public patchSingleItContractLocalCriticalityTypesInternalV2PatchLocalCriticalityType(requestParameters: PatchSingleItContractLocalCriticalityTypesInternalV2PatchLocalCriticalityTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
+    public patchSingleItContractLocalCriticalityTypesInternalV2PatchLocalCriticalityType(requestParameters: PatchSingleItContractLocalCriticalityTypesInternalV2PatchLocalCriticalityTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
+    public patchSingleItContractLocalCriticalityTypesInternalV2PatchLocalCriticalityType(requestParameters: PatchSingleItContractLocalCriticalityTypesInternalV2PatchLocalCriticalityTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
+    public patchSingleItContractLocalCriticalityTypesInternalV2PatchLocalCriticalityType(requestParameters: PatchSingleItContractLocalCriticalityTypesInternalV2PatchLocalCriticalityTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling patchSingleItContractLocalCriticalityTypesInternalV2PatchLocalCriticalityTypeByOrganizationuuidAndOptionuuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling patchSingleItContractLocalCriticalityTypesInternalV2PatchLocalCriticalityType.');
         }
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
-            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItContractLocalCriticalityTypesInternalV2PatchLocalCriticalityTypeByOrganizationuuidAndOptionuuid.');
+            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItContractLocalCriticalityTypesInternalV2PatchLocalCriticalityType.');
         }
         const dto = requestParameters.dto;
         if (dto === null || dto === undefined) {
-            throw new Error('Required parameter dto was null or undefined when calling patchSingleItContractLocalCriticalityTypesInternalV2PatchLocalCriticalityTypeByOrganizationuuidAndOptionuuid.');
+            throw new Error('Required parameter dto was null or undefined when calling patchSingleItContractLocalCriticalityTypesInternalV2PatchLocalCriticalityType.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -384,17 +384,17 @@ export class APIV2ItContractLocalCriticalityTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleItContractLocalCriticalityTypesInternalV2CreateLocalCriticalityTypeByOrganizationuuid(requestParameters: PostSingleItContractLocalCriticalityTypesInternalV2CreateLocalCriticalityTypeByOrganizationuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
-    public postSingleItContractLocalCriticalityTypesInternalV2CreateLocalCriticalityTypeByOrganizationuuid(requestParameters: PostSingleItContractLocalCriticalityTypesInternalV2CreateLocalCriticalityTypeByOrganizationuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
-    public postSingleItContractLocalCriticalityTypesInternalV2CreateLocalCriticalityTypeByOrganizationuuid(requestParameters: PostSingleItContractLocalCriticalityTypesInternalV2CreateLocalCriticalityTypeByOrganizationuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
-    public postSingleItContractLocalCriticalityTypesInternalV2CreateLocalCriticalityTypeByOrganizationuuid(requestParameters: PostSingleItContractLocalCriticalityTypesInternalV2CreateLocalCriticalityTypeByOrganizationuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public postSingleItContractLocalCriticalityTypesInternalV2CreateLocalCriticalityType(requestParameters: PostSingleItContractLocalCriticalityTypesInternalV2CreateLocalCriticalityTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
+    public postSingleItContractLocalCriticalityTypesInternalV2CreateLocalCriticalityType(requestParameters: PostSingleItContractLocalCriticalityTypesInternalV2CreateLocalCriticalityTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
+    public postSingleItContractLocalCriticalityTypesInternalV2CreateLocalCriticalityType(requestParameters: PostSingleItContractLocalCriticalityTypesInternalV2CreateLocalCriticalityTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
+    public postSingleItContractLocalCriticalityTypesInternalV2CreateLocalCriticalityType(requestParameters: PostSingleItContractLocalCriticalityTypesInternalV2CreateLocalCriticalityTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling postSingleItContractLocalCriticalityTypesInternalV2CreateLocalCriticalityTypeByOrganizationuuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling postSingleItContractLocalCriticalityTypesInternalV2CreateLocalCriticalityType.');
         }
         const dto = requestParameters.dto;
         if (dto === null || dto === undefined) {
-            throw new Error('Required parameter dto was null or undefined when calling postSingleItContractLocalCriticalityTypesInternalV2CreateLocalCriticalityTypeByOrganizationuuid.');
+            throw new Error('Required parameter dto was null or undefined when calling postSingleItContractLocalCriticalityTypesInternalV2CreateLocalCriticalityType.');
         }
 
         let localVarHeaders = this.defaultHeaders;

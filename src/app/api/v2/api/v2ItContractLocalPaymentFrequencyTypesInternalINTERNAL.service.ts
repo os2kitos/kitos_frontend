@@ -30,12 +30,12 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface DeleteSingleItContractLocalPaymentFrequencyTypesInternalV2DeleteLocalPaymentFrequencyTypeByOrganizationuuidAndOptionuuidRequestParams {
+export interface DeleteSingleItContractLocalPaymentFrequencyTypesInternalV2DeleteLocalPaymentFrequencyTypeRequestParams {
     organizationUuid: string;
     optionUuid: string;
 }
 
-export interface GetManyItContractLocalPaymentFrequencyTypesInternalV2GetLocalPaymentFrequencyTypesByOrganizationuuidRequestParams {
+export interface GetManyItContractLocalPaymentFrequencyTypesInternalV2GetLocalPaymentFrequencyTypesRequestParams {
     organizationUuid: string;
 }
 
@@ -44,13 +44,13 @@ export interface GetSingleItContractLocalPaymentFrequencyTypesInternalV2GetLocal
     optionUuid: string;
 }
 
-export interface PatchSingleItContractLocalPaymentFrequencyTypesInternalV2PatchLocalPaymentFrequencyTypeByOrganizationuuidAndOptionuuidRequestParams {
+export interface PatchSingleItContractLocalPaymentFrequencyTypesInternalV2PatchLocalPaymentFrequencyTypeRequestParams {
     organizationUuid: string;
     optionUuid: string;
     dto: APILocalRegularOptionUpdateRequestDTO;
 }
 
-export interface PostSingleItContractLocalPaymentFrequencyTypesInternalV2CreateLocalPaymentFrequencyTypeByOrganizationuuidRequestParams {
+export interface PostSingleItContractLocalPaymentFrequencyTypesInternalV2CreateLocalPaymentFrequencyTypeRequestParams {
     organizationUuid: string;
     dto: APILocalOptionCreateRequestDTO;
 }
@@ -125,17 +125,17 @@ export class APIV2ItContractLocalPaymentFrequencyTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public deleteSingleItContractLocalPaymentFrequencyTypesInternalV2DeleteLocalPaymentFrequencyTypeByOrganizationuuidAndOptionuuid(requestParameters: DeleteSingleItContractLocalPaymentFrequencyTypesInternalV2DeleteLocalPaymentFrequencyTypeByOrganizationuuidAndOptionuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
-    public deleteSingleItContractLocalPaymentFrequencyTypesInternalV2DeleteLocalPaymentFrequencyTypeByOrganizationuuidAndOptionuuid(requestParameters: DeleteSingleItContractLocalPaymentFrequencyTypesInternalV2DeleteLocalPaymentFrequencyTypeByOrganizationuuidAndOptionuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
-    public deleteSingleItContractLocalPaymentFrequencyTypesInternalV2DeleteLocalPaymentFrequencyTypeByOrganizationuuidAndOptionuuid(requestParameters: DeleteSingleItContractLocalPaymentFrequencyTypesInternalV2DeleteLocalPaymentFrequencyTypeByOrganizationuuidAndOptionuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
-    public deleteSingleItContractLocalPaymentFrequencyTypesInternalV2DeleteLocalPaymentFrequencyTypeByOrganizationuuidAndOptionuuid(requestParameters: DeleteSingleItContractLocalPaymentFrequencyTypesInternalV2DeleteLocalPaymentFrequencyTypeByOrganizationuuidAndOptionuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
+    public deleteSingleItContractLocalPaymentFrequencyTypesInternalV2DeleteLocalPaymentFrequencyType(requestParameters: DeleteSingleItContractLocalPaymentFrequencyTypesInternalV2DeleteLocalPaymentFrequencyTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
+    public deleteSingleItContractLocalPaymentFrequencyTypesInternalV2DeleteLocalPaymentFrequencyType(requestParameters: DeleteSingleItContractLocalPaymentFrequencyTypesInternalV2DeleteLocalPaymentFrequencyTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
+    public deleteSingleItContractLocalPaymentFrequencyTypesInternalV2DeleteLocalPaymentFrequencyType(requestParameters: DeleteSingleItContractLocalPaymentFrequencyTypesInternalV2DeleteLocalPaymentFrequencyTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
+    public deleteSingleItContractLocalPaymentFrequencyTypesInternalV2DeleteLocalPaymentFrequencyType(requestParameters: DeleteSingleItContractLocalPaymentFrequencyTypesInternalV2DeleteLocalPaymentFrequencyTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling deleteSingleItContractLocalPaymentFrequencyTypesInternalV2DeleteLocalPaymentFrequencyTypeByOrganizationuuidAndOptionuuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling deleteSingleItContractLocalPaymentFrequencyTypesInternalV2DeleteLocalPaymentFrequencyType.');
         }
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
-            throw new Error('Required parameter optionUuid was null or undefined when calling deleteSingleItContractLocalPaymentFrequencyTypesInternalV2DeleteLocalPaymentFrequencyTypeByOrganizationuuidAndOptionuuid.');
+            throw new Error('Required parameter optionUuid was null or undefined when calling deleteSingleItContractLocalPaymentFrequencyTypesInternalV2DeleteLocalPaymentFrequencyType.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -187,13 +187,13 @@ export class APIV2ItContractLocalPaymentFrequencyTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getManyItContractLocalPaymentFrequencyTypesInternalV2GetLocalPaymentFrequencyTypesByOrganizationuuid(requestParameters: GetManyItContractLocalPaymentFrequencyTypesInternalV2GetLocalPaymentFrequencyTypesByOrganizationuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APILocalRegularOptionResponseDTO>>;
-    public getManyItContractLocalPaymentFrequencyTypesInternalV2GetLocalPaymentFrequencyTypesByOrganizationuuid(requestParameters: GetManyItContractLocalPaymentFrequencyTypesInternalV2GetLocalPaymentFrequencyTypesByOrganizationuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APILocalRegularOptionResponseDTO>>>;
-    public getManyItContractLocalPaymentFrequencyTypesInternalV2GetLocalPaymentFrequencyTypesByOrganizationuuid(requestParameters: GetManyItContractLocalPaymentFrequencyTypesInternalV2GetLocalPaymentFrequencyTypesByOrganizationuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APILocalRegularOptionResponseDTO>>>;
-    public getManyItContractLocalPaymentFrequencyTypesInternalV2GetLocalPaymentFrequencyTypesByOrganizationuuid(requestParameters: GetManyItContractLocalPaymentFrequencyTypesInternalV2GetLocalPaymentFrequencyTypesByOrganizationuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyItContractLocalPaymentFrequencyTypesInternalV2GetLocalPaymentFrequencyTypes(requestParameters: GetManyItContractLocalPaymentFrequencyTypesInternalV2GetLocalPaymentFrequencyTypesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APILocalRegularOptionResponseDTO>>;
+    public getManyItContractLocalPaymentFrequencyTypesInternalV2GetLocalPaymentFrequencyTypes(requestParameters: GetManyItContractLocalPaymentFrequencyTypesInternalV2GetLocalPaymentFrequencyTypesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APILocalRegularOptionResponseDTO>>>;
+    public getManyItContractLocalPaymentFrequencyTypesInternalV2GetLocalPaymentFrequencyTypes(requestParameters: GetManyItContractLocalPaymentFrequencyTypesInternalV2GetLocalPaymentFrequencyTypesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APILocalRegularOptionResponseDTO>>>;
+    public getManyItContractLocalPaymentFrequencyTypesInternalV2GetLocalPaymentFrequencyTypes(requestParameters: GetManyItContractLocalPaymentFrequencyTypesInternalV2GetLocalPaymentFrequencyTypesRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyItContractLocalPaymentFrequencyTypesInternalV2GetLocalPaymentFrequencyTypesByOrganizationuuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyItContractLocalPaymentFrequencyTypesInternalV2GetLocalPaymentFrequencyTypes.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -307,21 +307,21 @@ export class APIV2ItContractLocalPaymentFrequencyTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleItContractLocalPaymentFrequencyTypesInternalV2PatchLocalPaymentFrequencyTypeByOrganizationuuidAndOptionuuid(requestParameters: PatchSingleItContractLocalPaymentFrequencyTypesInternalV2PatchLocalPaymentFrequencyTypeByOrganizationuuidAndOptionuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
-    public patchSingleItContractLocalPaymentFrequencyTypesInternalV2PatchLocalPaymentFrequencyTypeByOrganizationuuidAndOptionuuid(requestParameters: PatchSingleItContractLocalPaymentFrequencyTypesInternalV2PatchLocalPaymentFrequencyTypeByOrganizationuuidAndOptionuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
-    public patchSingleItContractLocalPaymentFrequencyTypesInternalV2PatchLocalPaymentFrequencyTypeByOrganizationuuidAndOptionuuid(requestParameters: PatchSingleItContractLocalPaymentFrequencyTypesInternalV2PatchLocalPaymentFrequencyTypeByOrganizationuuidAndOptionuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
-    public patchSingleItContractLocalPaymentFrequencyTypesInternalV2PatchLocalPaymentFrequencyTypeByOrganizationuuidAndOptionuuid(requestParameters: PatchSingleItContractLocalPaymentFrequencyTypesInternalV2PatchLocalPaymentFrequencyTypeByOrganizationuuidAndOptionuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public patchSingleItContractLocalPaymentFrequencyTypesInternalV2PatchLocalPaymentFrequencyType(requestParameters: PatchSingleItContractLocalPaymentFrequencyTypesInternalV2PatchLocalPaymentFrequencyTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
+    public patchSingleItContractLocalPaymentFrequencyTypesInternalV2PatchLocalPaymentFrequencyType(requestParameters: PatchSingleItContractLocalPaymentFrequencyTypesInternalV2PatchLocalPaymentFrequencyTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
+    public patchSingleItContractLocalPaymentFrequencyTypesInternalV2PatchLocalPaymentFrequencyType(requestParameters: PatchSingleItContractLocalPaymentFrequencyTypesInternalV2PatchLocalPaymentFrequencyTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
+    public patchSingleItContractLocalPaymentFrequencyTypesInternalV2PatchLocalPaymentFrequencyType(requestParameters: PatchSingleItContractLocalPaymentFrequencyTypesInternalV2PatchLocalPaymentFrequencyTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling patchSingleItContractLocalPaymentFrequencyTypesInternalV2PatchLocalPaymentFrequencyTypeByOrganizationuuidAndOptionuuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling patchSingleItContractLocalPaymentFrequencyTypesInternalV2PatchLocalPaymentFrequencyType.');
         }
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
-            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItContractLocalPaymentFrequencyTypesInternalV2PatchLocalPaymentFrequencyTypeByOrganizationuuidAndOptionuuid.');
+            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItContractLocalPaymentFrequencyTypesInternalV2PatchLocalPaymentFrequencyType.');
         }
         const dto = requestParameters.dto;
         if (dto === null || dto === undefined) {
-            throw new Error('Required parameter dto was null or undefined when calling patchSingleItContractLocalPaymentFrequencyTypesInternalV2PatchLocalPaymentFrequencyTypeByOrganizationuuidAndOptionuuid.');
+            throw new Error('Required parameter dto was null or undefined when calling patchSingleItContractLocalPaymentFrequencyTypesInternalV2PatchLocalPaymentFrequencyType.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -384,17 +384,17 @@ export class APIV2ItContractLocalPaymentFrequencyTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleItContractLocalPaymentFrequencyTypesInternalV2CreateLocalPaymentFrequencyTypeByOrganizationuuid(requestParameters: PostSingleItContractLocalPaymentFrequencyTypesInternalV2CreateLocalPaymentFrequencyTypeByOrganizationuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
-    public postSingleItContractLocalPaymentFrequencyTypesInternalV2CreateLocalPaymentFrequencyTypeByOrganizationuuid(requestParameters: PostSingleItContractLocalPaymentFrequencyTypesInternalV2CreateLocalPaymentFrequencyTypeByOrganizationuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
-    public postSingleItContractLocalPaymentFrequencyTypesInternalV2CreateLocalPaymentFrequencyTypeByOrganizationuuid(requestParameters: PostSingleItContractLocalPaymentFrequencyTypesInternalV2CreateLocalPaymentFrequencyTypeByOrganizationuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
-    public postSingleItContractLocalPaymentFrequencyTypesInternalV2CreateLocalPaymentFrequencyTypeByOrganizationuuid(requestParameters: PostSingleItContractLocalPaymentFrequencyTypesInternalV2CreateLocalPaymentFrequencyTypeByOrganizationuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public postSingleItContractLocalPaymentFrequencyTypesInternalV2CreateLocalPaymentFrequencyType(requestParameters: PostSingleItContractLocalPaymentFrequencyTypesInternalV2CreateLocalPaymentFrequencyTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
+    public postSingleItContractLocalPaymentFrequencyTypesInternalV2CreateLocalPaymentFrequencyType(requestParameters: PostSingleItContractLocalPaymentFrequencyTypesInternalV2CreateLocalPaymentFrequencyTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
+    public postSingleItContractLocalPaymentFrequencyTypesInternalV2CreateLocalPaymentFrequencyType(requestParameters: PostSingleItContractLocalPaymentFrequencyTypesInternalV2CreateLocalPaymentFrequencyTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
+    public postSingleItContractLocalPaymentFrequencyTypesInternalV2CreateLocalPaymentFrequencyType(requestParameters: PostSingleItContractLocalPaymentFrequencyTypesInternalV2CreateLocalPaymentFrequencyTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling postSingleItContractLocalPaymentFrequencyTypesInternalV2CreateLocalPaymentFrequencyTypeByOrganizationuuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling postSingleItContractLocalPaymentFrequencyTypesInternalV2CreateLocalPaymentFrequencyType.');
         }
         const dto = requestParameters.dto;
         if (dto === null || dto === undefined) {
-            throw new Error('Required parameter dto was null or undefined when calling postSingleItContractLocalPaymentFrequencyTypesInternalV2CreateLocalPaymentFrequencyTypeByOrganizationuuid.');
+            throw new Error('Required parameter dto was null or undefined when calling postSingleItContractLocalPaymentFrequencyTypesInternalV2CreateLocalPaymentFrequencyType.');
         }
 
         let localVarHeaders = this.defaultHeaders;

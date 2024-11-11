@@ -37,7 +37,7 @@ export interface GetManyItContractPurchaseTypeV2GetRequestParams {
     pageSize?: number;
 }
 
-export interface GetSingleItContractPurchaseTypeV2GetV1ByPurchasetypeuuidRequestParams {
+export interface GetSingleItContractPurchaseTypeV2GetV1RequestParams {
     /** purchase type identifier */
     purchaseTypeUuid: string;
     /** organization context for the purchase type availability */
@@ -191,17 +191,17 @@ export class APIV2ItContractPurchaseTypeService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItContractPurchaseTypeV2GetV1ByPurchasetypeuuid(requestParameters: GetSingleItContractPurchaseTypeV2GetV1ByPurchasetypeuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
-    public getSingleItContractPurchaseTypeV2GetV1ByPurchasetypeuuid(requestParameters: GetSingleItContractPurchaseTypeV2GetV1ByPurchasetypeuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
-    public getSingleItContractPurchaseTypeV2GetV1ByPurchasetypeuuid(requestParameters: GetSingleItContractPurchaseTypeV2GetV1ByPurchasetypeuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
-    public getSingleItContractPurchaseTypeV2GetV1ByPurchasetypeuuid(requestParameters: GetSingleItContractPurchaseTypeV2GetV1ByPurchasetypeuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleItContractPurchaseTypeV2GetV1(requestParameters: GetSingleItContractPurchaseTypeV2GetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
+    public getSingleItContractPurchaseTypeV2GetV1(requestParameters: GetSingleItContractPurchaseTypeV2GetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
+    public getSingleItContractPurchaseTypeV2GetV1(requestParameters: GetSingleItContractPurchaseTypeV2GetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
+    public getSingleItContractPurchaseTypeV2GetV1(requestParameters: GetSingleItContractPurchaseTypeV2GetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const purchaseTypeUuid = requestParameters.purchaseTypeUuid;
         if (purchaseTypeUuid === null || purchaseTypeUuid === undefined) {
-            throw new Error('Required parameter purchaseTypeUuid was null or undefined when calling getSingleItContractPurchaseTypeV2GetV1ByPurchasetypeuuid.');
+            throw new Error('Required parameter purchaseTypeUuid was null or undefined when calling getSingleItContractPurchaseTypeV2GetV1.');
         }
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleItContractPurchaseTypeV2GetV1ByPurchasetypeuuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleItContractPurchaseTypeV2GetV1.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
