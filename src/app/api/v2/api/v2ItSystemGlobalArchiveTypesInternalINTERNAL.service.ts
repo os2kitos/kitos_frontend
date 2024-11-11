@@ -30,7 +30,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface PatchSingleItSystemGlobalArchiveTypesInternalV2PatchGlobalArchiveTypeRequestParams {
+export interface PatchSingleItSystemGlobalArchiveTypesInternalV2PatchGlobalArchiveTypeByOptionuuidRequestParams {
     optionUuid: string;
     dto: APIGlobalRegularOptionUpdateRequestDTO;
 }
@@ -162,17 +162,17 @@ export class APIV2ItSystemGlobalArchiveTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleItSystemGlobalArchiveTypesInternalV2PatchGlobalArchiveType(requestParameters: PatchSingleItSystemGlobalArchiveTypesInternalV2PatchGlobalArchiveTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRegularOptionResponseDTO>;
-    public patchSingleItSystemGlobalArchiveTypesInternalV2PatchGlobalArchiveType(requestParameters: PatchSingleItSystemGlobalArchiveTypesInternalV2PatchGlobalArchiveTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRegularOptionResponseDTO>>;
-    public patchSingleItSystemGlobalArchiveTypesInternalV2PatchGlobalArchiveType(requestParameters: PatchSingleItSystemGlobalArchiveTypesInternalV2PatchGlobalArchiveTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRegularOptionResponseDTO>>;
-    public patchSingleItSystemGlobalArchiveTypesInternalV2PatchGlobalArchiveType(requestParameters: PatchSingleItSystemGlobalArchiveTypesInternalV2PatchGlobalArchiveTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public patchSingleItSystemGlobalArchiveTypesInternalV2PatchGlobalArchiveTypeByOptionuuid(requestParameters: PatchSingleItSystemGlobalArchiveTypesInternalV2PatchGlobalArchiveTypeByOptionuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRegularOptionResponseDTO>;
+    public patchSingleItSystemGlobalArchiveTypesInternalV2PatchGlobalArchiveTypeByOptionuuid(requestParameters: PatchSingleItSystemGlobalArchiveTypesInternalV2PatchGlobalArchiveTypeByOptionuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRegularOptionResponseDTO>>;
+    public patchSingleItSystemGlobalArchiveTypesInternalV2PatchGlobalArchiveTypeByOptionuuid(requestParameters: PatchSingleItSystemGlobalArchiveTypesInternalV2PatchGlobalArchiveTypeByOptionuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRegularOptionResponseDTO>>;
+    public patchSingleItSystemGlobalArchiveTypesInternalV2PatchGlobalArchiveTypeByOptionuuid(requestParameters: PatchSingleItSystemGlobalArchiveTypesInternalV2PatchGlobalArchiveTypeByOptionuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
-            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItSystemGlobalArchiveTypesInternalV2PatchGlobalArchiveType.');
+            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItSystemGlobalArchiveTypesInternalV2PatchGlobalArchiveTypeByOptionuuid.');
         }
         const dto = requestParameters.dto;
         if (dto === null || dto === undefined) {
-            throw new Error('Required parameter dto was null or undefined when calling patchSingleItSystemGlobalArchiveTypesInternalV2PatchGlobalArchiveType.');
+            throw new Error('Required parameter dto was null or undefined when calling patchSingleItSystemGlobalArchiveTypesInternalV2PatchGlobalArchiveTypeByOptionuuid.');
         }
 
         let localVarHeaders = this.defaultHeaders;

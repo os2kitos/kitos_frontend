@@ -30,12 +30,12 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface DeleteSingleDprLocalDataResponsibleTypesInternalV2DeleteLocalDataResponsibleTypeRequestParams {
+export interface DeleteSingleDprLocalDataResponsibleTypesInternalV2DeleteLocalDataResponsibleTypeByOrganizationuuidAndOptionuuidRequestParams {
     organizationUuid: string;
     optionUuid: string;
 }
 
-export interface GetManyDprLocalDataResponsibleTypesInternalV2GetLocalDataResponsibleTypesRequestParams {
+export interface GetManyDprLocalDataResponsibleTypesInternalV2GetLocalDataResponsibleTypesByOrganizationuuidRequestParams {
     organizationUuid: string;
 }
 
@@ -44,13 +44,13 @@ export interface GetSingleDprLocalDataResponsibleTypesInternalV2GetLocalDataResp
     optionUuid: string;
 }
 
-export interface PatchSingleDprLocalDataResponsibleTypesInternalV2PatchLocalDataResponsibleTypeRequestParams {
+export interface PatchSingleDprLocalDataResponsibleTypesInternalV2PatchLocalDataResponsibleTypeByOrganizationuuidAndOptionuuidRequestParams {
     organizationUuid: string;
     optionUuid: string;
     dto: APILocalRegularOptionUpdateRequestDTO;
 }
 
-export interface PostSingleDprLocalDataResponsibleTypesInternalV2CreateLocalDataResponsibleTypeRequestParams {
+export interface PostSingleDprLocalDataResponsibleTypesInternalV2CreateLocalDataResponsibleTypeByOrganizationuuidRequestParams {
     organizationUuid: string;
     dto: APILocalOptionCreateRequestDTO;
 }
@@ -125,17 +125,17 @@ export class APIV2DprLocalDataResponsibleTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public deleteSingleDprLocalDataResponsibleTypesInternalV2DeleteLocalDataResponsibleType(requestParameters: DeleteSingleDprLocalDataResponsibleTypesInternalV2DeleteLocalDataResponsibleTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
-    public deleteSingleDprLocalDataResponsibleTypesInternalV2DeleteLocalDataResponsibleType(requestParameters: DeleteSingleDprLocalDataResponsibleTypesInternalV2DeleteLocalDataResponsibleTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
-    public deleteSingleDprLocalDataResponsibleTypesInternalV2DeleteLocalDataResponsibleType(requestParameters: DeleteSingleDprLocalDataResponsibleTypesInternalV2DeleteLocalDataResponsibleTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
-    public deleteSingleDprLocalDataResponsibleTypesInternalV2DeleteLocalDataResponsibleType(requestParameters: DeleteSingleDprLocalDataResponsibleTypesInternalV2DeleteLocalDataResponsibleTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
+    public deleteSingleDprLocalDataResponsibleTypesInternalV2DeleteLocalDataResponsibleTypeByOrganizationuuidAndOptionuuid(requestParameters: DeleteSingleDprLocalDataResponsibleTypesInternalV2DeleteLocalDataResponsibleTypeByOrganizationuuidAndOptionuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
+    public deleteSingleDprLocalDataResponsibleTypesInternalV2DeleteLocalDataResponsibleTypeByOrganizationuuidAndOptionuuid(requestParameters: DeleteSingleDprLocalDataResponsibleTypesInternalV2DeleteLocalDataResponsibleTypeByOrganizationuuidAndOptionuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
+    public deleteSingleDprLocalDataResponsibleTypesInternalV2DeleteLocalDataResponsibleTypeByOrganizationuuidAndOptionuuid(requestParameters: DeleteSingleDprLocalDataResponsibleTypesInternalV2DeleteLocalDataResponsibleTypeByOrganizationuuidAndOptionuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
+    public deleteSingleDprLocalDataResponsibleTypesInternalV2DeleteLocalDataResponsibleTypeByOrganizationuuidAndOptionuuid(requestParameters: DeleteSingleDprLocalDataResponsibleTypesInternalV2DeleteLocalDataResponsibleTypeByOrganizationuuidAndOptionuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling deleteSingleDprLocalDataResponsibleTypesInternalV2DeleteLocalDataResponsibleType.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling deleteSingleDprLocalDataResponsibleTypesInternalV2DeleteLocalDataResponsibleTypeByOrganizationuuidAndOptionuuid.');
         }
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
-            throw new Error('Required parameter optionUuid was null or undefined when calling deleteSingleDprLocalDataResponsibleTypesInternalV2DeleteLocalDataResponsibleType.');
+            throw new Error('Required parameter optionUuid was null or undefined when calling deleteSingleDprLocalDataResponsibleTypesInternalV2DeleteLocalDataResponsibleTypeByOrganizationuuidAndOptionuuid.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -187,13 +187,13 @@ export class APIV2DprLocalDataResponsibleTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getManyDprLocalDataResponsibleTypesInternalV2GetLocalDataResponsibleTypes(requestParameters: GetManyDprLocalDataResponsibleTypesInternalV2GetLocalDataResponsibleTypesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APILocalRegularOptionResponseDTO>>;
-    public getManyDprLocalDataResponsibleTypesInternalV2GetLocalDataResponsibleTypes(requestParameters: GetManyDprLocalDataResponsibleTypesInternalV2GetLocalDataResponsibleTypesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APILocalRegularOptionResponseDTO>>>;
-    public getManyDprLocalDataResponsibleTypesInternalV2GetLocalDataResponsibleTypes(requestParameters: GetManyDprLocalDataResponsibleTypesInternalV2GetLocalDataResponsibleTypesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APILocalRegularOptionResponseDTO>>>;
-    public getManyDprLocalDataResponsibleTypesInternalV2GetLocalDataResponsibleTypes(requestParameters: GetManyDprLocalDataResponsibleTypesInternalV2GetLocalDataResponsibleTypesRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyDprLocalDataResponsibleTypesInternalV2GetLocalDataResponsibleTypesByOrganizationuuid(requestParameters: GetManyDprLocalDataResponsibleTypesInternalV2GetLocalDataResponsibleTypesByOrganizationuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APILocalRegularOptionResponseDTO>>;
+    public getManyDprLocalDataResponsibleTypesInternalV2GetLocalDataResponsibleTypesByOrganizationuuid(requestParameters: GetManyDprLocalDataResponsibleTypesInternalV2GetLocalDataResponsibleTypesByOrganizationuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APILocalRegularOptionResponseDTO>>>;
+    public getManyDprLocalDataResponsibleTypesInternalV2GetLocalDataResponsibleTypesByOrganizationuuid(requestParameters: GetManyDprLocalDataResponsibleTypesInternalV2GetLocalDataResponsibleTypesByOrganizationuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APILocalRegularOptionResponseDTO>>>;
+    public getManyDprLocalDataResponsibleTypesInternalV2GetLocalDataResponsibleTypesByOrganizationuuid(requestParameters: GetManyDprLocalDataResponsibleTypesInternalV2GetLocalDataResponsibleTypesByOrganizationuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyDprLocalDataResponsibleTypesInternalV2GetLocalDataResponsibleTypes.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyDprLocalDataResponsibleTypesInternalV2GetLocalDataResponsibleTypesByOrganizationuuid.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -307,21 +307,21 @@ export class APIV2DprLocalDataResponsibleTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleDprLocalDataResponsibleTypesInternalV2PatchLocalDataResponsibleType(requestParameters: PatchSingleDprLocalDataResponsibleTypesInternalV2PatchLocalDataResponsibleTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
-    public patchSingleDprLocalDataResponsibleTypesInternalV2PatchLocalDataResponsibleType(requestParameters: PatchSingleDprLocalDataResponsibleTypesInternalV2PatchLocalDataResponsibleTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
-    public patchSingleDprLocalDataResponsibleTypesInternalV2PatchLocalDataResponsibleType(requestParameters: PatchSingleDprLocalDataResponsibleTypesInternalV2PatchLocalDataResponsibleTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
-    public patchSingleDprLocalDataResponsibleTypesInternalV2PatchLocalDataResponsibleType(requestParameters: PatchSingleDprLocalDataResponsibleTypesInternalV2PatchLocalDataResponsibleTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public patchSingleDprLocalDataResponsibleTypesInternalV2PatchLocalDataResponsibleTypeByOrganizationuuidAndOptionuuid(requestParameters: PatchSingleDprLocalDataResponsibleTypesInternalV2PatchLocalDataResponsibleTypeByOrganizationuuidAndOptionuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
+    public patchSingleDprLocalDataResponsibleTypesInternalV2PatchLocalDataResponsibleTypeByOrganizationuuidAndOptionuuid(requestParameters: PatchSingleDprLocalDataResponsibleTypesInternalV2PatchLocalDataResponsibleTypeByOrganizationuuidAndOptionuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
+    public patchSingleDprLocalDataResponsibleTypesInternalV2PatchLocalDataResponsibleTypeByOrganizationuuidAndOptionuuid(requestParameters: PatchSingleDprLocalDataResponsibleTypesInternalV2PatchLocalDataResponsibleTypeByOrganizationuuidAndOptionuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
+    public patchSingleDprLocalDataResponsibleTypesInternalV2PatchLocalDataResponsibleTypeByOrganizationuuidAndOptionuuid(requestParameters: PatchSingleDprLocalDataResponsibleTypesInternalV2PatchLocalDataResponsibleTypeByOrganizationuuidAndOptionuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling patchSingleDprLocalDataResponsibleTypesInternalV2PatchLocalDataResponsibleType.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling patchSingleDprLocalDataResponsibleTypesInternalV2PatchLocalDataResponsibleTypeByOrganizationuuidAndOptionuuid.');
         }
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
-            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleDprLocalDataResponsibleTypesInternalV2PatchLocalDataResponsibleType.');
+            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleDprLocalDataResponsibleTypesInternalV2PatchLocalDataResponsibleTypeByOrganizationuuidAndOptionuuid.');
         }
         const dto = requestParameters.dto;
         if (dto === null || dto === undefined) {
-            throw new Error('Required parameter dto was null or undefined when calling patchSingleDprLocalDataResponsibleTypesInternalV2PatchLocalDataResponsibleType.');
+            throw new Error('Required parameter dto was null or undefined when calling patchSingleDprLocalDataResponsibleTypesInternalV2PatchLocalDataResponsibleTypeByOrganizationuuidAndOptionuuid.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -384,17 +384,17 @@ export class APIV2DprLocalDataResponsibleTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleDprLocalDataResponsibleTypesInternalV2CreateLocalDataResponsibleType(requestParameters: PostSingleDprLocalDataResponsibleTypesInternalV2CreateLocalDataResponsibleTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
-    public postSingleDprLocalDataResponsibleTypesInternalV2CreateLocalDataResponsibleType(requestParameters: PostSingleDprLocalDataResponsibleTypesInternalV2CreateLocalDataResponsibleTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
-    public postSingleDprLocalDataResponsibleTypesInternalV2CreateLocalDataResponsibleType(requestParameters: PostSingleDprLocalDataResponsibleTypesInternalV2CreateLocalDataResponsibleTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
-    public postSingleDprLocalDataResponsibleTypesInternalV2CreateLocalDataResponsibleType(requestParameters: PostSingleDprLocalDataResponsibleTypesInternalV2CreateLocalDataResponsibleTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public postSingleDprLocalDataResponsibleTypesInternalV2CreateLocalDataResponsibleTypeByOrganizationuuid(requestParameters: PostSingleDprLocalDataResponsibleTypesInternalV2CreateLocalDataResponsibleTypeByOrganizationuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
+    public postSingleDprLocalDataResponsibleTypesInternalV2CreateLocalDataResponsibleTypeByOrganizationuuid(requestParameters: PostSingleDprLocalDataResponsibleTypesInternalV2CreateLocalDataResponsibleTypeByOrganizationuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
+    public postSingleDprLocalDataResponsibleTypesInternalV2CreateLocalDataResponsibleTypeByOrganizationuuid(requestParameters: PostSingleDprLocalDataResponsibleTypesInternalV2CreateLocalDataResponsibleTypeByOrganizationuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
+    public postSingleDprLocalDataResponsibleTypesInternalV2CreateLocalDataResponsibleTypeByOrganizationuuid(requestParameters: PostSingleDprLocalDataResponsibleTypesInternalV2CreateLocalDataResponsibleTypeByOrganizationuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling postSingleDprLocalDataResponsibleTypesInternalV2CreateLocalDataResponsibleType.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling postSingleDprLocalDataResponsibleTypesInternalV2CreateLocalDataResponsibleTypeByOrganizationuuid.');
         }
         const dto = requestParameters.dto;
         if (dto === null || dto === undefined) {
-            throw new Error('Required parameter dto was null or undefined when calling postSingleDprLocalDataResponsibleTypesInternalV2CreateLocalDataResponsibleType.');
+            throw new Error('Required parameter dto was null or undefined when calling postSingleDprLocalDataResponsibleTypesInternalV2CreateLocalDataResponsibleTypeByOrganizationuuid.');
         }
 
         let localVarHeaders = this.defaultHeaders;

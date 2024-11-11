@@ -19,6 +19,8 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
+import { APIOrganizationResponseDTO } from '../model/aPIOrganizationResponseDTO';
+// @ts-ignore
 import { APIUserReferenceResponseDTO } from '../model/aPIUserReferenceResponseDTO';
 
 // @ts-ignore
@@ -26,7 +28,11 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface DeleteSingleGlobalUserInternalV2DeleteUserRequestParams {
+export interface DeleteSingleGlobalUserInternalV2DeleteUserByUseruuidRequestParams {
+    userUuid: string;
+}
+
+export interface GetManyGlobalUserInternalV2GetUserOrganizationsRequestParams {
     userUuid: string;
 }
 
@@ -110,13 +116,13 @@ export class APIV2GlobalUserInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public deleteSingleGlobalUserInternalV2DeleteUser(requestParameters: DeleteSingleGlobalUserInternalV2DeleteUserRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public deleteSingleGlobalUserInternalV2DeleteUser(requestParameters: DeleteSingleGlobalUserInternalV2DeleteUserRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public deleteSingleGlobalUserInternalV2DeleteUser(requestParameters: DeleteSingleGlobalUserInternalV2DeleteUserRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public deleteSingleGlobalUserInternalV2DeleteUser(requestParameters: DeleteSingleGlobalUserInternalV2DeleteUserRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public deleteSingleGlobalUserInternalV2DeleteUserByUseruuid(requestParameters: DeleteSingleGlobalUserInternalV2DeleteUserByUseruuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public deleteSingleGlobalUserInternalV2DeleteUserByUseruuid(requestParameters: DeleteSingleGlobalUserInternalV2DeleteUserByUseruuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public deleteSingleGlobalUserInternalV2DeleteUserByUseruuid(requestParameters: DeleteSingleGlobalUserInternalV2DeleteUserByUseruuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public deleteSingleGlobalUserInternalV2DeleteUserByUseruuid(requestParameters: DeleteSingleGlobalUserInternalV2DeleteUserByUseruuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         const userUuid = requestParameters.userUuid;
         if (userUuid === null || userUuid === undefined) {
-            throw new Error('Required parameter userUuid was null or undefined when calling deleteSingleGlobalUserInternalV2DeleteUser.');
+            throw new Error('Required parameter userUuid was null or undefined when calling deleteSingleGlobalUserInternalV2DeleteUserByUseruuid.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -153,6 +159,71 @@ export class APIV2GlobalUserInternalINTERNALService {
         return this.httpClient.request<any>('delete', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * @param requestParameters
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getManyGlobalUserInternalV2GetUserOrganizations(requestParameters: GetManyGlobalUserInternalV2GetUserOrganizationsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIOrganizationResponseDTO>>;
+    public getManyGlobalUserInternalV2GetUserOrganizations(requestParameters: GetManyGlobalUserInternalV2GetUserOrganizationsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIOrganizationResponseDTO>>>;
+    public getManyGlobalUserInternalV2GetUserOrganizations(requestParameters: GetManyGlobalUserInternalV2GetUserOrganizationsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIOrganizationResponseDTO>>>;
+    public getManyGlobalUserInternalV2GetUserOrganizations(requestParameters: GetManyGlobalUserInternalV2GetUserOrganizationsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        const userUuid = requestParameters.userUuid;
+        if (userUuid === null || userUuid === undefined) {
+            throw new Error('Required parameter userUuid was null or undefined when calling getManyGlobalUserInternalV2GetUserOrganizations.');
+        }
+
+        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
+        if (userUuid !== undefined && userUuid !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>userUuid, 'userUuid');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/v2/internal/users/organizations`;
+        return this.httpClient.request<Array<APIOrganizationResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                params: localVarQueryParameters,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

@@ -30,18 +30,18 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface DeleteSingleOrganizationUnitRegistrationInternalV2RemoveRegistrationsRequestParams {
+export interface DeleteSingleOrganizationUnitRegistrationInternalV2RemoveRegistrationsByOrganizationuuidAndUnituuidRequestParams {
     organizationUuid: string;
     unitUuid: string;
     requestDto: APIChangeOrganizationUnitRegistrationV2RequestDTO;
 }
 
-export interface GetSingleOrganizationUnitRegistrationInternalV2GetRegistrationsRequestParams {
+export interface GetSingleOrganizationUnitRegistrationInternalV2GetRegistrationsByOrganizationuuidAndUnituuidRequestParams {
     organizationUuid: string;
     unitUuid: string;
 }
 
-export interface PutSingleOrganizationUnitRegistrationInternalV2TransferRegistrationsRequestParams {
+export interface PutSingleOrganizationUnitRegistrationInternalV2TransferRegistrationsByOrganizationuuidAndUnituuidRequestParams {
     organizationUuid: string;
     unitUuid: string;
     requestDto: APITransferOrganizationUnitRegistrationV2RequestDTO;
@@ -117,21 +117,21 @@ export class APIV2OrganizationUnitRegistrationInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public deleteSingleOrganizationUnitRegistrationInternalV2RemoveRegistrations(requestParameters: DeleteSingleOrganizationUnitRegistrationInternalV2RemoveRegistrationsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public deleteSingleOrganizationUnitRegistrationInternalV2RemoveRegistrations(requestParameters: DeleteSingleOrganizationUnitRegistrationInternalV2RemoveRegistrationsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public deleteSingleOrganizationUnitRegistrationInternalV2RemoveRegistrations(requestParameters: DeleteSingleOrganizationUnitRegistrationInternalV2RemoveRegistrationsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public deleteSingleOrganizationUnitRegistrationInternalV2RemoveRegistrations(requestParameters: DeleteSingleOrganizationUnitRegistrationInternalV2RemoveRegistrationsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public deleteSingleOrganizationUnitRegistrationInternalV2RemoveRegistrationsByOrganizationuuidAndUnituuid(requestParameters: DeleteSingleOrganizationUnitRegistrationInternalV2RemoveRegistrationsByOrganizationuuidAndUnituuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public deleteSingleOrganizationUnitRegistrationInternalV2RemoveRegistrationsByOrganizationuuidAndUnituuid(requestParameters: DeleteSingleOrganizationUnitRegistrationInternalV2RemoveRegistrationsByOrganizationuuidAndUnituuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public deleteSingleOrganizationUnitRegistrationInternalV2RemoveRegistrationsByOrganizationuuidAndUnituuid(requestParameters: DeleteSingleOrganizationUnitRegistrationInternalV2RemoveRegistrationsByOrganizationuuidAndUnituuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public deleteSingleOrganizationUnitRegistrationInternalV2RemoveRegistrationsByOrganizationuuidAndUnituuid(requestParameters: DeleteSingleOrganizationUnitRegistrationInternalV2RemoveRegistrationsByOrganizationuuidAndUnituuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling deleteSingleOrganizationUnitRegistrationInternalV2RemoveRegistrations.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling deleteSingleOrganizationUnitRegistrationInternalV2RemoveRegistrationsByOrganizationuuidAndUnituuid.');
         }
         const unitUuid = requestParameters.unitUuid;
         if (unitUuid === null || unitUuid === undefined) {
-            throw new Error('Required parameter unitUuid was null or undefined when calling deleteSingleOrganizationUnitRegistrationInternalV2RemoveRegistrations.');
+            throw new Error('Required parameter unitUuid was null or undefined when calling deleteSingleOrganizationUnitRegistrationInternalV2RemoveRegistrationsByOrganizationuuidAndUnituuid.');
         }
         const requestDto = requestParameters.requestDto;
         if (requestDto === null || requestDto === undefined) {
-            throw new Error('Required parameter requestDto was null or undefined when calling deleteSingleOrganizationUnitRegistrationInternalV2RemoveRegistrations.');
+            throw new Error('Required parameter requestDto was null or undefined when calling deleteSingleOrganizationUnitRegistrationInternalV2RemoveRegistrationsByOrganizationuuidAndUnituuid.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -191,17 +191,17 @@ export class APIV2OrganizationUnitRegistrationInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleOrganizationUnitRegistrationInternalV2GetRegistrations(requestParameters: GetSingleOrganizationUnitRegistrationInternalV2GetRegistrationsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIOrganizationRegistrationUnitResponseDTO>;
-    public getSingleOrganizationUnitRegistrationInternalV2GetRegistrations(requestParameters: GetSingleOrganizationUnitRegistrationInternalV2GetRegistrationsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIOrganizationRegistrationUnitResponseDTO>>;
-    public getSingleOrganizationUnitRegistrationInternalV2GetRegistrations(requestParameters: GetSingleOrganizationUnitRegistrationInternalV2GetRegistrationsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIOrganizationRegistrationUnitResponseDTO>>;
-    public getSingleOrganizationUnitRegistrationInternalV2GetRegistrations(requestParameters: GetSingleOrganizationUnitRegistrationInternalV2GetRegistrationsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleOrganizationUnitRegistrationInternalV2GetRegistrationsByOrganizationuuidAndUnituuid(requestParameters: GetSingleOrganizationUnitRegistrationInternalV2GetRegistrationsByOrganizationuuidAndUnituuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIOrganizationRegistrationUnitResponseDTO>;
+    public getSingleOrganizationUnitRegistrationInternalV2GetRegistrationsByOrganizationuuidAndUnituuid(requestParameters: GetSingleOrganizationUnitRegistrationInternalV2GetRegistrationsByOrganizationuuidAndUnituuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIOrganizationRegistrationUnitResponseDTO>>;
+    public getSingleOrganizationUnitRegistrationInternalV2GetRegistrationsByOrganizationuuidAndUnituuid(requestParameters: GetSingleOrganizationUnitRegistrationInternalV2GetRegistrationsByOrganizationuuidAndUnituuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIOrganizationRegistrationUnitResponseDTO>>;
+    public getSingleOrganizationUnitRegistrationInternalV2GetRegistrationsByOrganizationuuidAndUnituuid(requestParameters: GetSingleOrganizationUnitRegistrationInternalV2GetRegistrationsByOrganizationuuidAndUnituuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleOrganizationUnitRegistrationInternalV2GetRegistrations.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleOrganizationUnitRegistrationInternalV2GetRegistrationsByOrganizationuuidAndUnituuid.');
         }
         const unitUuid = requestParameters.unitUuid;
         if (unitUuid === null || unitUuid === undefined) {
-            throw new Error('Required parameter unitUuid was null or undefined when calling getSingleOrganizationUnitRegistrationInternalV2GetRegistrations.');
+            throw new Error('Required parameter unitUuid was null or undefined when calling getSingleOrganizationUnitRegistrationInternalV2GetRegistrationsByOrganizationuuidAndUnituuid.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -253,21 +253,21 @@ export class APIV2OrganizationUnitRegistrationInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public putSingleOrganizationUnitRegistrationInternalV2TransferRegistrations(requestParameters: PutSingleOrganizationUnitRegistrationInternalV2TransferRegistrationsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public putSingleOrganizationUnitRegistrationInternalV2TransferRegistrations(requestParameters: PutSingleOrganizationUnitRegistrationInternalV2TransferRegistrationsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public putSingleOrganizationUnitRegistrationInternalV2TransferRegistrations(requestParameters: PutSingleOrganizationUnitRegistrationInternalV2TransferRegistrationsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public putSingleOrganizationUnitRegistrationInternalV2TransferRegistrations(requestParameters: PutSingleOrganizationUnitRegistrationInternalV2TransferRegistrationsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public putSingleOrganizationUnitRegistrationInternalV2TransferRegistrationsByOrganizationuuidAndUnituuid(requestParameters: PutSingleOrganizationUnitRegistrationInternalV2TransferRegistrationsByOrganizationuuidAndUnituuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public putSingleOrganizationUnitRegistrationInternalV2TransferRegistrationsByOrganizationuuidAndUnituuid(requestParameters: PutSingleOrganizationUnitRegistrationInternalV2TransferRegistrationsByOrganizationuuidAndUnituuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public putSingleOrganizationUnitRegistrationInternalV2TransferRegistrationsByOrganizationuuidAndUnituuid(requestParameters: PutSingleOrganizationUnitRegistrationInternalV2TransferRegistrationsByOrganizationuuidAndUnituuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public putSingleOrganizationUnitRegistrationInternalV2TransferRegistrationsByOrganizationuuidAndUnituuid(requestParameters: PutSingleOrganizationUnitRegistrationInternalV2TransferRegistrationsByOrganizationuuidAndUnituuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling putSingleOrganizationUnitRegistrationInternalV2TransferRegistrations.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling putSingleOrganizationUnitRegistrationInternalV2TransferRegistrationsByOrganizationuuidAndUnituuid.');
         }
         const unitUuid = requestParameters.unitUuid;
         if (unitUuid === null || unitUuid === undefined) {
-            throw new Error('Required parameter unitUuid was null or undefined when calling putSingleOrganizationUnitRegistrationInternalV2TransferRegistrations.');
+            throw new Error('Required parameter unitUuid was null or undefined when calling putSingleOrganizationUnitRegistrationInternalV2TransferRegistrationsByOrganizationuuidAndUnituuid.');
         }
         const requestDto = requestParameters.requestDto;
         if (requestDto === null || requestDto === undefined) {
-            throw new Error('Required parameter requestDto was null or undefined when calling putSingleOrganizationUnitRegistrationInternalV2TransferRegistrations.');
+            throw new Error('Required parameter requestDto was null or undefined when calling putSingleOrganizationUnitRegistrationInternalV2TransferRegistrationsByOrganizationuuidAndUnituuid.');
         }
 
         let localVarHeaders = this.defaultHeaders;

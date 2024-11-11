@@ -34,26 +34,26 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GetManyItContractInternalV2GetAddRoleAssignmentsRequestParams {
+export interface GetManyItContractInternalV2GetAddRoleAssignmentsByContractuuidRequestParams {
     contractUuid: string;
 }
 
-export interface GetManyItContractInternalV2GetDataProcessingRegistrationsRequestParams {
+export interface GetManyItContractInternalV2GetDataProcessingRegistrationsByContractuuidRequestParams {
     contractUuid: string;
     nameQuery?: string;
     pageSize?: number;
 }
 
-export interface GetManyItContractInternalV2GetHierarchyRequestParams {
+export interface GetManyItContractInternalV2GetHierarchyByContractuuidRequestParams {
     contractUuid: string;
 }
 
-export interface PatchSingleItContractInternalV2PatchAddRoleAssignmentRequestParams {
+export interface PatchSingleItContractInternalV2PatchAddRoleAssignmentByContractuuidRequestParams {
     contractUuid: string;
     request: APIRoleAssignmentRequestDTO;
 }
 
-export interface PatchSingleItContractInternalV2PatchRemoveRoleAssignmentRequestParams {
+export interface PatchSingleItContractInternalV2PatchRemoveRoleAssignmentByContractuuidRequestParams {
     contractUuid: string;
     request: APIRoleAssignmentRequestDTO;
 }
@@ -129,13 +129,13 @@ export class APIV2ItContractInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getManyItContractInternalV2GetAddRoleAssignments(requestParameters: GetManyItContractInternalV2GetAddRoleAssignmentsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIExtendedRoleAssignmentResponseDTO>>;
-    public getManyItContractInternalV2GetAddRoleAssignments(requestParameters: GetManyItContractInternalV2GetAddRoleAssignmentsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIExtendedRoleAssignmentResponseDTO>>>;
-    public getManyItContractInternalV2GetAddRoleAssignments(requestParameters: GetManyItContractInternalV2GetAddRoleAssignmentsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIExtendedRoleAssignmentResponseDTO>>>;
-    public getManyItContractInternalV2GetAddRoleAssignments(requestParameters: GetManyItContractInternalV2GetAddRoleAssignmentsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyItContractInternalV2GetAddRoleAssignmentsByContractuuid(requestParameters: GetManyItContractInternalV2GetAddRoleAssignmentsByContractuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIExtendedRoleAssignmentResponseDTO>>;
+    public getManyItContractInternalV2GetAddRoleAssignmentsByContractuuid(requestParameters: GetManyItContractInternalV2GetAddRoleAssignmentsByContractuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIExtendedRoleAssignmentResponseDTO>>>;
+    public getManyItContractInternalV2GetAddRoleAssignmentsByContractuuid(requestParameters: GetManyItContractInternalV2GetAddRoleAssignmentsByContractuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIExtendedRoleAssignmentResponseDTO>>>;
+    public getManyItContractInternalV2GetAddRoleAssignmentsByContractuuid(requestParameters: GetManyItContractInternalV2GetAddRoleAssignmentsByContractuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const contractUuid = requestParameters.contractUuid;
         if (contractUuid === null || contractUuid === undefined) {
-            throw new Error('Required parameter contractUuid was null or undefined when calling getManyItContractInternalV2GetAddRoleAssignments.');
+            throw new Error('Required parameter contractUuid was null or undefined when calling getManyItContractInternalV2GetAddRoleAssignmentsByContractuuid.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -187,13 +187,13 @@ export class APIV2ItContractInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getManyItContractInternalV2GetDataProcessingRegistrations(requestParameters: GetManyItContractInternalV2GetDataProcessingRegistrationsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIIdentityNamePairResponseDTO>>;
-    public getManyItContractInternalV2GetDataProcessingRegistrations(requestParameters: GetManyItContractInternalV2GetDataProcessingRegistrationsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIIdentityNamePairResponseDTO>>>;
-    public getManyItContractInternalV2GetDataProcessingRegistrations(requestParameters: GetManyItContractInternalV2GetDataProcessingRegistrationsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIIdentityNamePairResponseDTO>>>;
-    public getManyItContractInternalV2GetDataProcessingRegistrations(requestParameters: GetManyItContractInternalV2GetDataProcessingRegistrationsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyItContractInternalV2GetDataProcessingRegistrationsByContractuuid(requestParameters: GetManyItContractInternalV2GetDataProcessingRegistrationsByContractuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIIdentityNamePairResponseDTO>>;
+    public getManyItContractInternalV2GetDataProcessingRegistrationsByContractuuid(requestParameters: GetManyItContractInternalV2GetDataProcessingRegistrationsByContractuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIIdentityNamePairResponseDTO>>>;
+    public getManyItContractInternalV2GetDataProcessingRegistrationsByContractuuid(requestParameters: GetManyItContractInternalV2GetDataProcessingRegistrationsByContractuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIIdentityNamePairResponseDTO>>>;
+    public getManyItContractInternalV2GetDataProcessingRegistrationsByContractuuid(requestParameters: GetManyItContractInternalV2GetDataProcessingRegistrationsByContractuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const contractUuid = requestParameters.contractUuid;
         if (contractUuid === null || contractUuid === undefined) {
-            throw new Error('Required parameter contractUuid was null or undefined when calling getManyItContractInternalV2GetDataProcessingRegistrations.');
+            throw new Error('Required parameter contractUuid was null or undefined when calling getManyItContractInternalV2GetDataProcessingRegistrationsByContractuuid.');
         }
         const nameQuery = requestParameters.nameQuery;
         const pageSize = requestParameters.pageSize;
@@ -258,13 +258,13 @@ export class APIV2ItContractInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getManyItContractInternalV2GetHierarchy(requestParameters: GetManyItContractInternalV2GetHierarchyRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIRegistrationHierarchyNodeWithActivationStatusResponseDTO>>;
-    public getManyItContractInternalV2GetHierarchy(requestParameters: GetManyItContractInternalV2GetHierarchyRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIRegistrationHierarchyNodeWithActivationStatusResponseDTO>>>;
-    public getManyItContractInternalV2GetHierarchy(requestParameters: GetManyItContractInternalV2GetHierarchyRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIRegistrationHierarchyNodeWithActivationStatusResponseDTO>>>;
-    public getManyItContractInternalV2GetHierarchy(requestParameters: GetManyItContractInternalV2GetHierarchyRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyItContractInternalV2GetHierarchyByContractuuid(requestParameters: GetManyItContractInternalV2GetHierarchyByContractuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIRegistrationHierarchyNodeWithActivationStatusResponseDTO>>;
+    public getManyItContractInternalV2GetHierarchyByContractuuid(requestParameters: GetManyItContractInternalV2GetHierarchyByContractuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIRegistrationHierarchyNodeWithActivationStatusResponseDTO>>>;
+    public getManyItContractInternalV2GetHierarchyByContractuuid(requestParameters: GetManyItContractInternalV2GetHierarchyByContractuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIRegistrationHierarchyNodeWithActivationStatusResponseDTO>>>;
+    public getManyItContractInternalV2GetHierarchyByContractuuid(requestParameters: GetManyItContractInternalV2GetHierarchyByContractuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const contractUuid = requestParameters.contractUuid;
         if (contractUuid === null || contractUuid === undefined) {
-            throw new Error('Required parameter contractUuid was null or undefined when calling getManyItContractInternalV2GetHierarchy.');
+            throw new Error('Required parameter contractUuid was null or undefined when calling getManyItContractInternalV2GetHierarchyByContractuuid.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -316,17 +316,17 @@ export class APIV2ItContractInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleItContractInternalV2PatchAddRoleAssignment(requestParameters: PatchSingleItContractInternalV2PatchAddRoleAssignmentRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIItContractResponseDTO>;
-    public patchSingleItContractInternalV2PatchAddRoleAssignment(requestParameters: PatchSingleItContractInternalV2PatchAddRoleAssignmentRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIItContractResponseDTO>>;
-    public patchSingleItContractInternalV2PatchAddRoleAssignment(requestParameters: PatchSingleItContractInternalV2PatchAddRoleAssignmentRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIItContractResponseDTO>>;
-    public patchSingleItContractInternalV2PatchAddRoleAssignment(requestParameters: PatchSingleItContractInternalV2PatchAddRoleAssignmentRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public patchSingleItContractInternalV2PatchAddRoleAssignmentByContractuuid(requestParameters: PatchSingleItContractInternalV2PatchAddRoleAssignmentByContractuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIItContractResponseDTO>;
+    public patchSingleItContractInternalV2PatchAddRoleAssignmentByContractuuid(requestParameters: PatchSingleItContractInternalV2PatchAddRoleAssignmentByContractuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIItContractResponseDTO>>;
+    public patchSingleItContractInternalV2PatchAddRoleAssignmentByContractuuid(requestParameters: PatchSingleItContractInternalV2PatchAddRoleAssignmentByContractuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIItContractResponseDTO>>;
+    public patchSingleItContractInternalV2PatchAddRoleAssignmentByContractuuid(requestParameters: PatchSingleItContractInternalV2PatchAddRoleAssignmentByContractuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const contractUuid = requestParameters.contractUuid;
         if (contractUuid === null || contractUuid === undefined) {
-            throw new Error('Required parameter contractUuid was null or undefined when calling patchSingleItContractInternalV2PatchAddRoleAssignment.');
+            throw new Error('Required parameter contractUuid was null or undefined when calling patchSingleItContractInternalV2PatchAddRoleAssignmentByContractuuid.');
         }
         const request = requestParameters.request;
         if (request === null || request === undefined) {
-            throw new Error('Required parameter request was null or undefined when calling patchSingleItContractInternalV2PatchAddRoleAssignment.');
+            throw new Error('Required parameter request was null or undefined when calling patchSingleItContractInternalV2PatchAddRoleAssignmentByContractuuid.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -390,17 +390,17 @@ export class APIV2ItContractInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleItContractInternalV2PatchRemoveRoleAssignment(requestParameters: PatchSingleItContractInternalV2PatchRemoveRoleAssignmentRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIItContractResponseDTO>;
-    public patchSingleItContractInternalV2PatchRemoveRoleAssignment(requestParameters: PatchSingleItContractInternalV2PatchRemoveRoleAssignmentRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIItContractResponseDTO>>;
-    public patchSingleItContractInternalV2PatchRemoveRoleAssignment(requestParameters: PatchSingleItContractInternalV2PatchRemoveRoleAssignmentRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIItContractResponseDTO>>;
-    public patchSingleItContractInternalV2PatchRemoveRoleAssignment(requestParameters: PatchSingleItContractInternalV2PatchRemoveRoleAssignmentRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public patchSingleItContractInternalV2PatchRemoveRoleAssignmentByContractuuid(requestParameters: PatchSingleItContractInternalV2PatchRemoveRoleAssignmentByContractuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIItContractResponseDTO>;
+    public patchSingleItContractInternalV2PatchRemoveRoleAssignmentByContractuuid(requestParameters: PatchSingleItContractInternalV2PatchRemoveRoleAssignmentByContractuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIItContractResponseDTO>>;
+    public patchSingleItContractInternalV2PatchRemoveRoleAssignmentByContractuuid(requestParameters: PatchSingleItContractInternalV2PatchRemoveRoleAssignmentByContractuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIItContractResponseDTO>>;
+    public patchSingleItContractInternalV2PatchRemoveRoleAssignmentByContractuuid(requestParameters: PatchSingleItContractInternalV2PatchRemoveRoleAssignmentByContractuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const contractUuid = requestParameters.contractUuid;
         if (contractUuid === null || contractUuid === undefined) {
-            throw new Error('Required parameter contractUuid was null or undefined when calling patchSingleItContractInternalV2PatchRemoveRoleAssignment.');
+            throw new Error('Required parameter contractUuid was null or undefined when calling patchSingleItContractInternalV2PatchRemoveRoleAssignmentByContractuuid.');
         }
         const request = requestParameters.request;
         if (request === null || request === undefined) {
-            throw new Error('Required parameter request was null or undefined when calling patchSingleItContractInternalV2PatchRemoveRoleAssignment.');
+            throw new Error('Required parameter request was null or undefined when calling patchSingleItContractInternalV2PatchRemoveRoleAssignmentByContractuuid.');
         }
 
         let localVarHeaders = this.defaultHeaders;

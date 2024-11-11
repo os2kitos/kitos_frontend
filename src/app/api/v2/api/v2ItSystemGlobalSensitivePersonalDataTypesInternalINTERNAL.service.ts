@@ -30,7 +30,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface PatchSingleItSystemGlobalSensitivePersonalDataTypesInternalV2PatchGlobalSensitivePersonalDataRequestParams {
+export interface PatchSingleItSystemGlobalSensitivePersonalDataTypesInternalV2PatchGlobalSensitivePersonalDataByOptionuuidRequestParams {
     optionUuid: string;
     dto: APIGlobalRegularOptionUpdateRequestDTO;
 }
@@ -162,17 +162,17 @@ export class APIV2ItSystemGlobalSensitivePersonalDataTypesInternalINTERNALServic
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleItSystemGlobalSensitivePersonalDataTypesInternalV2PatchGlobalSensitivePersonalData(requestParameters: PatchSingleItSystemGlobalSensitivePersonalDataTypesInternalV2PatchGlobalSensitivePersonalDataRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRegularOptionResponseDTO>;
-    public patchSingleItSystemGlobalSensitivePersonalDataTypesInternalV2PatchGlobalSensitivePersonalData(requestParameters: PatchSingleItSystemGlobalSensitivePersonalDataTypesInternalV2PatchGlobalSensitivePersonalDataRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRegularOptionResponseDTO>>;
-    public patchSingleItSystemGlobalSensitivePersonalDataTypesInternalV2PatchGlobalSensitivePersonalData(requestParameters: PatchSingleItSystemGlobalSensitivePersonalDataTypesInternalV2PatchGlobalSensitivePersonalDataRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRegularOptionResponseDTO>>;
-    public patchSingleItSystemGlobalSensitivePersonalDataTypesInternalV2PatchGlobalSensitivePersonalData(requestParameters: PatchSingleItSystemGlobalSensitivePersonalDataTypesInternalV2PatchGlobalSensitivePersonalDataRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public patchSingleItSystemGlobalSensitivePersonalDataTypesInternalV2PatchGlobalSensitivePersonalDataByOptionuuid(requestParameters: PatchSingleItSystemGlobalSensitivePersonalDataTypesInternalV2PatchGlobalSensitivePersonalDataByOptionuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRegularOptionResponseDTO>;
+    public patchSingleItSystemGlobalSensitivePersonalDataTypesInternalV2PatchGlobalSensitivePersonalDataByOptionuuid(requestParameters: PatchSingleItSystemGlobalSensitivePersonalDataTypesInternalV2PatchGlobalSensitivePersonalDataByOptionuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRegularOptionResponseDTO>>;
+    public patchSingleItSystemGlobalSensitivePersonalDataTypesInternalV2PatchGlobalSensitivePersonalDataByOptionuuid(requestParameters: PatchSingleItSystemGlobalSensitivePersonalDataTypesInternalV2PatchGlobalSensitivePersonalDataByOptionuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRegularOptionResponseDTO>>;
+    public patchSingleItSystemGlobalSensitivePersonalDataTypesInternalV2PatchGlobalSensitivePersonalDataByOptionuuid(requestParameters: PatchSingleItSystemGlobalSensitivePersonalDataTypesInternalV2PatchGlobalSensitivePersonalDataByOptionuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
-            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItSystemGlobalSensitivePersonalDataTypesInternalV2PatchGlobalSensitivePersonalData.');
+            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItSystemGlobalSensitivePersonalDataTypesInternalV2PatchGlobalSensitivePersonalDataByOptionuuid.');
         }
         const dto = requestParameters.dto;
         if (dto === null || dto === undefined) {
-            throw new Error('Required parameter dto was null or undefined when calling patchSingleItSystemGlobalSensitivePersonalDataTypesInternalV2PatchGlobalSensitivePersonalData.');
+            throw new Error('Required parameter dto was null or undefined when calling patchSingleItSystemGlobalSensitivePersonalDataTypesInternalV2PatchGlobalSensitivePersonalDataByOptionuuid.');
         }
 
         let localVarHeaders = this.defaultHeaders;

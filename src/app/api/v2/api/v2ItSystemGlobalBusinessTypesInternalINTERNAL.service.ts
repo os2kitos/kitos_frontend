@@ -30,7 +30,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface PatchSingleItSystemGlobalBusinessTypesInternalV2PatchGlobalBusinessTypeRequestParams {
+export interface PatchSingleItSystemGlobalBusinessTypesInternalV2PatchGlobalBusinessTypeByOptionuuidRequestParams {
     optionUuid: string;
     dto: APIGlobalRegularOptionUpdateRequestDTO;
 }
@@ -162,17 +162,17 @@ export class APIV2ItSystemGlobalBusinessTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleItSystemGlobalBusinessTypesInternalV2PatchGlobalBusinessType(requestParameters: PatchSingleItSystemGlobalBusinessTypesInternalV2PatchGlobalBusinessTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRegularOptionResponseDTO>;
-    public patchSingleItSystemGlobalBusinessTypesInternalV2PatchGlobalBusinessType(requestParameters: PatchSingleItSystemGlobalBusinessTypesInternalV2PatchGlobalBusinessTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRegularOptionResponseDTO>>;
-    public patchSingleItSystemGlobalBusinessTypesInternalV2PatchGlobalBusinessType(requestParameters: PatchSingleItSystemGlobalBusinessTypesInternalV2PatchGlobalBusinessTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRegularOptionResponseDTO>>;
-    public patchSingleItSystemGlobalBusinessTypesInternalV2PatchGlobalBusinessType(requestParameters: PatchSingleItSystemGlobalBusinessTypesInternalV2PatchGlobalBusinessTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public patchSingleItSystemGlobalBusinessTypesInternalV2PatchGlobalBusinessTypeByOptionuuid(requestParameters: PatchSingleItSystemGlobalBusinessTypesInternalV2PatchGlobalBusinessTypeByOptionuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRegularOptionResponseDTO>;
+    public patchSingleItSystemGlobalBusinessTypesInternalV2PatchGlobalBusinessTypeByOptionuuid(requestParameters: PatchSingleItSystemGlobalBusinessTypesInternalV2PatchGlobalBusinessTypeByOptionuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRegularOptionResponseDTO>>;
+    public patchSingleItSystemGlobalBusinessTypesInternalV2PatchGlobalBusinessTypeByOptionuuid(requestParameters: PatchSingleItSystemGlobalBusinessTypesInternalV2PatchGlobalBusinessTypeByOptionuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRegularOptionResponseDTO>>;
+    public patchSingleItSystemGlobalBusinessTypesInternalV2PatchGlobalBusinessTypeByOptionuuid(requestParameters: PatchSingleItSystemGlobalBusinessTypesInternalV2PatchGlobalBusinessTypeByOptionuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
-            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItSystemGlobalBusinessTypesInternalV2PatchGlobalBusinessType.');
+            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItSystemGlobalBusinessTypesInternalV2PatchGlobalBusinessTypeByOptionuuid.');
         }
         const dto = requestParameters.dto;
         if (dto === null || dto === undefined) {
-            throw new Error('Required parameter dto was null or undefined when calling patchSingleItSystemGlobalBusinessTypesInternalV2PatchGlobalBusinessType.');
+            throw new Error('Required parameter dto was null or undefined when calling patchSingleItSystemGlobalBusinessTypesInternalV2PatchGlobalBusinessTypeByOptionuuid.');
         }
 
         let localVarHeaders = this.defaultHeaders;

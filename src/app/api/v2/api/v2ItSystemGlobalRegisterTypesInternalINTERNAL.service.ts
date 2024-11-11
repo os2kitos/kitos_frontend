@@ -30,7 +30,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface PatchSingleItSystemGlobalRegisterTypesInternalV2PatchGlobalRegisterTypeRequestParams {
+export interface PatchSingleItSystemGlobalRegisterTypesInternalV2PatchGlobalRegisterTypeByOptionuuidRequestParams {
     optionUuid: string;
     dto: APIGlobalRegularOptionUpdateRequestDTO;
 }
@@ -162,17 +162,17 @@ export class APIV2ItSystemGlobalRegisterTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleItSystemGlobalRegisterTypesInternalV2PatchGlobalRegisterType(requestParameters: PatchSingleItSystemGlobalRegisterTypesInternalV2PatchGlobalRegisterTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRegularOptionResponseDTO>;
-    public patchSingleItSystemGlobalRegisterTypesInternalV2PatchGlobalRegisterType(requestParameters: PatchSingleItSystemGlobalRegisterTypesInternalV2PatchGlobalRegisterTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRegularOptionResponseDTO>>;
-    public patchSingleItSystemGlobalRegisterTypesInternalV2PatchGlobalRegisterType(requestParameters: PatchSingleItSystemGlobalRegisterTypesInternalV2PatchGlobalRegisterTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRegularOptionResponseDTO>>;
-    public patchSingleItSystemGlobalRegisterTypesInternalV2PatchGlobalRegisterType(requestParameters: PatchSingleItSystemGlobalRegisterTypesInternalV2PatchGlobalRegisterTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public patchSingleItSystemGlobalRegisterTypesInternalV2PatchGlobalRegisterTypeByOptionuuid(requestParameters: PatchSingleItSystemGlobalRegisterTypesInternalV2PatchGlobalRegisterTypeByOptionuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRegularOptionResponseDTO>;
+    public patchSingleItSystemGlobalRegisterTypesInternalV2PatchGlobalRegisterTypeByOptionuuid(requestParameters: PatchSingleItSystemGlobalRegisterTypesInternalV2PatchGlobalRegisterTypeByOptionuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRegularOptionResponseDTO>>;
+    public patchSingleItSystemGlobalRegisterTypesInternalV2PatchGlobalRegisterTypeByOptionuuid(requestParameters: PatchSingleItSystemGlobalRegisterTypesInternalV2PatchGlobalRegisterTypeByOptionuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRegularOptionResponseDTO>>;
+    public patchSingleItSystemGlobalRegisterTypesInternalV2PatchGlobalRegisterTypeByOptionuuid(requestParameters: PatchSingleItSystemGlobalRegisterTypesInternalV2PatchGlobalRegisterTypeByOptionuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
-            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItSystemGlobalRegisterTypesInternalV2PatchGlobalRegisterType.');
+            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItSystemGlobalRegisterTypesInternalV2PatchGlobalRegisterTypeByOptionuuid.');
         }
         const dto = requestParameters.dto;
         if (dto === null || dto === undefined) {
-            throw new Error('Required parameter dto was null or undefined when calling patchSingleItSystemGlobalRegisterTypesInternalV2PatchGlobalRegisterType.');
+            throw new Error('Required parameter dto was null or undefined when calling patchSingleItSystemGlobalRegisterTypesInternalV2PatchGlobalRegisterTypeByOptionuuid.');
         }
 
         let localVarHeaders = this.defaultHeaders;

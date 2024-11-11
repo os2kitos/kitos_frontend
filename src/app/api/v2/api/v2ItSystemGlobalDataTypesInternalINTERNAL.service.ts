@@ -30,7 +30,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface PatchSingleItSystemGlobalDataTypesInternalV2PatchGlobalDataTypeRequestParams {
+export interface PatchSingleItSystemGlobalDataTypesInternalV2PatchGlobalDataTypeByOptionuuidRequestParams {
     optionUuid: string;
     dto: APIGlobalRegularOptionUpdateRequestDTO;
 }
@@ -162,17 +162,17 @@ export class APIV2ItSystemGlobalDataTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleItSystemGlobalDataTypesInternalV2PatchGlobalDataType(requestParameters: PatchSingleItSystemGlobalDataTypesInternalV2PatchGlobalDataTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRegularOptionResponseDTO>;
-    public patchSingleItSystemGlobalDataTypesInternalV2PatchGlobalDataType(requestParameters: PatchSingleItSystemGlobalDataTypesInternalV2PatchGlobalDataTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRegularOptionResponseDTO>>;
-    public patchSingleItSystemGlobalDataTypesInternalV2PatchGlobalDataType(requestParameters: PatchSingleItSystemGlobalDataTypesInternalV2PatchGlobalDataTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRegularOptionResponseDTO>>;
-    public patchSingleItSystemGlobalDataTypesInternalV2PatchGlobalDataType(requestParameters: PatchSingleItSystemGlobalDataTypesInternalV2PatchGlobalDataTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public patchSingleItSystemGlobalDataTypesInternalV2PatchGlobalDataTypeByOptionuuid(requestParameters: PatchSingleItSystemGlobalDataTypesInternalV2PatchGlobalDataTypeByOptionuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRegularOptionResponseDTO>;
+    public patchSingleItSystemGlobalDataTypesInternalV2PatchGlobalDataTypeByOptionuuid(requestParameters: PatchSingleItSystemGlobalDataTypesInternalV2PatchGlobalDataTypeByOptionuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRegularOptionResponseDTO>>;
+    public patchSingleItSystemGlobalDataTypesInternalV2PatchGlobalDataTypeByOptionuuid(requestParameters: PatchSingleItSystemGlobalDataTypesInternalV2PatchGlobalDataTypeByOptionuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRegularOptionResponseDTO>>;
+    public patchSingleItSystemGlobalDataTypesInternalV2PatchGlobalDataTypeByOptionuuid(requestParameters: PatchSingleItSystemGlobalDataTypesInternalV2PatchGlobalDataTypeByOptionuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
-            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItSystemGlobalDataTypesInternalV2PatchGlobalDataType.');
+            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItSystemGlobalDataTypesInternalV2PatchGlobalDataTypeByOptionuuid.');
         }
         const dto = requestParameters.dto;
         if (dto === null || dto === undefined) {
-            throw new Error('Required parameter dto was null or undefined when calling patchSingleItSystemGlobalDataTypesInternalV2PatchGlobalDataType.');
+            throw new Error('Required parameter dto was null or undefined when calling patchSingleItSystemGlobalDataTypesInternalV2PatchGlobalDataTypeByOptionuuid.');
         }
 
         let localVarHeaders = this.defaultHeaders;

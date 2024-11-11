@@ -30,12 +30,12 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface DeleteSingleDprLocalBasisForTransferTypesInternalV2DeleteLocalBasisForTransferTypeRequestParams {
+export interface DeleteSingleDprLocalBasisForTransferTypesInternalV2DeleteLocalBasisForTransferTypeByOrganizationuuidAndOptionuuidRequestParams {
     organizationUuid: string;
     optionUuid: string;
 }
 
-export interface GetManyDprLocalBasisForTransferTypesInternalV2GetLocalBasisForTransferTypesRequestParams {
+export interface GetManyDprLocalBasisForTransferTypesInternalV2GetLocalBasisForTransferTypesByOrganizationuuidRequestParams {
     organizationUuid: string;
 }
 
@@ -44,13 +44,13 @@ export interface GetSingleDprLocalBasisForTransferTypesInternalV2GetLocalBasisFo
     optionUuid: string;
 }
 
-export interface PatchSingleDprLocalBasisForTransferTypesInternalV2PatchLocalBasisForTransferTypeRequestParams {
+export interface PatchSingleDprLocalBasisForTransferTypesInternalV2PatchLocalBasisForTransferTypeByOrganizationuuidAndOptionuuidRequestParams {
     organizationUuid: string;
     optionUuid: string;
     dto: APILocalRegularOptionUpdateRequestDTO;
 }
 
-export interface PostSingleDprLocalBasisForTransferTypesInternalV2CreateLocalBasisForTransferTypeRequestParams {
+export interface PostSingleDprLocalBasisForTransferTypesInternalV2CreateLocalBasisForTransferTypeByOrganizationuuidRequestParams {
     organizationUuid: string;
     dto: APILocalOptionCreateRequestDTO;
 }
@@ -125,17 +125,17 @@ export class APIV2DprLocalBasisForTransferTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public deleteSingleDprLocalBasisForTransferTypesInternalV2DeleteLocalBasisForTransferType(requestParameters: DeleteSingleDprLocalBasisForTransferTypesInternalV2DeleteLocalBasisForTransferTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
-    public deleteSingleDprLocalBasisForTransferTypesInternalV2DeleteLocalBasisForTransferType(requestParameters: DeleteSingleDprLocalBasisForTransferTypesInternalV2DeleteLocalBasisForTransferTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
-    public deleteSingleDprLocalBasisForTransferTypesInternalV2DeleteLocalBasisForTransferType(requestParameters: DeleteSingleDprLocalBasisForTransferTypesInternalV2DeleteLocalBasisForTransferTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
-    public deleteSingleDprLocalBasisForTransferTypesInternalV2DeleteLocalBasisForTransferType(requestParameters: DeleteSingleDprLocalBasisForTransferTypesInternalV2DeleteLocalBasisForTransferTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
+    public deleteSingleDprLocalBasisForTransferTypesInternalV2DeleteLocalBasisForTransferTypeByOrganizationuuidAndOptionuuid(requestParameters: DeleteSingleDprLocalBasisForTransferTypesInternalV2DeleteLocalBasisForTransferTypeByOrganizationuuidAndOptionuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
+    public deleteSingleDprLocalBasisForTransferTypesInternalV2DeleteLocalBasisForTransferTypeByOrganizationuuidAndOptionuuid(requestParameters: DeleteSingleDprLocalBasisForTransferTypesInternalV2DeleteLocalBasisForTransferTypeByOrganizationuuidAndOptionuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
+    public deleteSingleDprLocalBasisForTransferTypesInternalV2DeleteLocalBasisForTransferTypeByOrganizationuuidAndOptionuuid(requestParameters: DeleteSingleDprLocalBasisForTransferTypesInternalV2DeleteLocalBasisForTransferTypeByOrganizationuuidAndOptionuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
+    public deleteSingleDprLocalBasisForTransferTypesInternalV2DeleteLocalBasisForTransferTypeByOrganizationuuidAndOptionuuid(requestParameters: DeleteSingleDprLocalBasisForTransferTypesInternalV2DeleteLocalBasisForTransferTypeByOrganizationuuidAndOptionuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling deleteSingleDprLocalBasisForTransferTypesInternalV2DeleteLocalBasisForTransferType.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling deleteSingleDprLocalBasisForTransferTypesInternalV2DeleteLocalBasisForTransferTypeByOrganizationuuidAndOptionuuid.');
         }
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
-            throw new Error('Required parameter optionUuid was null or undefined when calling deleteSingleDprLocalBasisForTransferTypesInternalV2DeleteLocalBasisForTransferType.');
+            throw new Error('Required parameter optionUuid was null or undefined when calling deleteSingleDprLocalBasisForTransferTypesInternalV2DeleteLocalBasisForTransferTypeByOrganizationuuidAndOptionuuid.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -187,13 +187,13 @@ export class APIV2DprLocalBasisForTransferTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getManyDprLocalBasisForTransferTypesInternalV2GetLocalBasisForTransferTypes(requestParameters: GetManyDprLocalBasisForTransferTypesInternalV2GetLocalBasisForTransferTypesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APILocalRegularOptionResponseDTO>>;
-    public getManyDprLocalBasisForTransferTypesInternalV2GetLocalBasisForTransferTypes(requestParameters: GetManyDprLocalBasisForTransferTypesInternalV2GetLocalBasisForTransferTypesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APILocalRegularOptionResponseDTO>>>;
-    public getManyDprLocalBasisForTransferTypesInternalV2GetLocalBasisForTransferTypes(requestParameters: GetManyDprLocalBasisForTransferTypesInternalV2GetLocalBasisForTransferTypesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APILocalRegularOptionResponseDTO>>>;
-    public getManyDprLocalBasisForTransferTypesInternalV2GetLocalBasisForTransferTypes(requestParameters: GetManyDprLocalBasisForTransferTypesInternalV2GetLocalBasisForTransferTypesRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyDprLocalBasisForTransferTypesInternalV2GetLocalBasisForTransferTypesByOrganizationuuid(requestParameters: GetManyDprLocalBasisForTransferTypesInternalV2GetLocalBasisForTransferTypesByOrganizationuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APILocalRegularOptionResponseDTO>>;
+    public getManyDprLocalBasisForTransferTypesInternalV2GetLocalBasisForTransferTypesByOrganizationuuid(requestParameters: GetManyDprLocalBasisForTransferTypesInternalV2GetLocalBasisForTransferTypesByOrganizationuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APILocalRegularOptionResponseDTO>>>;
+    public getManyDprLocalBasisForTransferTypesInternalV2GetLocalBasisForTransferTypesByOrganizationuuid(requestParameters: GetManyDprLocalBasisForTransferTypesInternalV2GetLocalBasisForTransferTypesByOrganizationuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APILocalRegularOptionResponseDTO>>>;
+    public getManyDprLocalBasisForTransferTypesInternalV2GetLocalBasisForTransferTypesByOrganizationuuid(requestParameters: GetManyDprLocalBasisForTransferTypesInternalV2GetLocalBasisForTransferTypesByOrganizationuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyDprLocalBasisForTransferTypesInternalV2GetLocalBasisForTransferTypes.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyDprLocalBasisForTransferTypesInternalV2GetLocalBasisForTransferTypesByOrganizationuuid.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -307,21 +307,21 @@ export class APIV2DprLocalBasisForTransferTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleDprLocalBasisForTransferTypesInternalV2PatchLocalBasisForTransferType(requestParameters: PatchSingleDprLocalBasisForTransferTypesInternalV2PatchLocalBasisForTransferTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
-    public patchSingleDprLocalBasisForTransferTypesInternalV2PatchLocalBasisForTransferType(requestParameters: PatchSingleDprLocalBasisForTransferTypesInternalV2PatchLocalBasisForTransferTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
-    public patchSingleDprLocalBasisForTransferTypesInternalV2PatchLocalBasisForTransferType(requestParameters: PatchSingleDprLocalBasisForTransferTypesInternalV2PatchLocalBasisForTransferTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
-    public patchSingleDprLocalBasisForTransferTypesInternalV2PatchLocalBasisForTransferType(requestParameters: PatchSingleDprLocalBasisForTransferTypesInternalV2PatchLocalBasisForTransferTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public patchSingleDprLocalBasisForTransferTypesInternalV2PatchLocalBasisForTransferTypeByOrganizationuuidAndOptionuuid(requestParameters: PatchSingleDprLocalBasisForTransferTypesInternalV2PatchLocalBasisForTransferTypeByOrganizationuuidAndOptionuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
+    public patchSingleDprLocalBasisForTransferTypesInternalV2PatchLocalBasisForTransferTypeByOrganizationuuidAndOptionuuid(requestParameters: PatchSingleDprLocalBasisForTransferTypesInternalV2PatchLocalBasisForTransferTypeByOrganizationuuidAndOptionuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
+    public patchSingleDprLocalBasisForTransferTypesInternalV2PatchLocalBasisForTransferTypeByOrganizationuuidAndOptionuuid(requestParameters: PatchSingleDprLocalBasisForTransferTypesInternalV2PatchLocalBasisForTransferTypeByOrganizationuuidAndOptionuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
+    public patchSingleDprLocalBasisForTransferTypesInternalV2PatchLocalBasisForTransferTypeByOrganizationuuidAndOptionuuid(requestParameters: PatchSingleDprLocalBasisForTransferTypesInternalV2PatchLocalBasisForTransferTypeByOrganizationuuidAndOptionuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling patchSingleDprLocalBasisForTransferTypesInternalV2PatchLocalBasisForTransferType.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling patchSingleDprLocalBasisForTransferTypesInternalV2PatchLocalBasisForTransferTypeByOrganizationuuidAndOptionuuid.');
         }
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
-            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleDprLocalBasisForTransferTypesInternalV2PatchLocalBasisForTransferType.');
+            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleDprLocalBasisForTransferTypesInternalV2PatchLocalBasisForTransferTypeByOrganizationuuidAndOptionuuid.');
         }
         const dto = requestParameters.dto;
         if (dto === null || dto === undefined) {
-            throw new Error('Required parameter dto was null or undefined when calling patchSingleDprLocalBasisForTransferTypesInternalV2PatchLocalBasisForTransferType.');
+            throw new Error('Required parameter dto was null or undefined when calling patchSingleDprLocalBasisForTransferTypesInternalV2PatchLocalBasisForTransferTypeByOrganizationuuidAndOptionuuid.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -384,17 +384,17 @@ export class APIV2DprLocalBasisForTransferTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleDprLocalBasisForTransferTypesInternalV2CreateLocalBasisForTransferType(requestParameters: PostSingleDprLocalBasisForTransferTypesInternalV2CreateLocalBasisForTransferTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
-    public postSingleDprLocalBasisForTransferTypesInternalV2CreateLocalBasisForTransferType(requestParameters: PostSingleDprLocalBasisForTransferTypesInternalV2CreateLocalBasisForTransferTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
-    public postSingleDprLocalBasisForTransferTypesInternalV2CreateLocalBasisForTransferType(requestParameters: PostSingleDprLocalBasisForTransferTypesInternalV2CreateLocalBasisForTransferTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
-    public postSingleDprLocalBasisForTransferTypesInternalV2CreateLocalBasisForTransferType(requestParameters: PostSingleDprLocalBasisForTransferTypesInternalV2CreateLocalBasisForTransferTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public postSingleDprLocalBasisForTransferTypesInternalV2CreateLocalBasisForTransferTypeByOrganizationuuid(requestParameters: PostSingleDprLocalBasisForTransferTypesInternalV2CreateLocalBasisForTransferTypeByOrganizationuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
+    public postSingleDprLocalBasisForTransferTypesInternalV2CreateLocalBasisForTransferTypeByOrganizationuuid(requestParameters: PostSingleDprLocalBasisForTransferTypesInternalV2CreateLocalBasisForTransferTypeByOrganizationuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
+    public postSingleDprLocalBasisForTransferTypesInternalV2CreateLocalBasisForTransferTypeByOrganizationuuid(requestParameters: PostSingleDprLocalBasisForTransferTypesInternalV2CreateLocalBasisForTransferTypeByOrganizationuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
+    public postSingleDprLocalBasisForTransferTypesInternalV2CreateLocalBasisForTransferTypeByOrganizationuuid(requestParameters: PostSingleDprLocalBasisForTransferTypesInternalV2CreateLocalBasisForTransferTypeByOrganizationuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling postSingleDprLocalBasisForTransferTypesInternalV2CreateLocalBasisForTransferType.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling postSingleDprLocalBasisForTransferTypesInternalV2CreateLocalBasisForTransferTypeByOrganizationuuid.');
         }
         const dto = requestParameters.dto;
         if (dto === null || dto === undefined) {
-            throw new Error('Required parameter dto was null or undefined when calling postSingleDprLocalBasisForTransferTypesInternalV2CreateLocalBasisForTransferType.');
+            throw new Error('Required parameter dto was null or undefined when calling postSingleDprLocalBasisForTransferTypesInternalV2CreateLocalBasisForTransferTypeByOrganizationuuid.');
         }
 
         let localVarHeaders = this.defaultHeaders;
