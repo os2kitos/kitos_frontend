@@ -24,11 +24,11 @@ export class GlobalAdminOtherKleComponent extends BaseComponent implements OnIni
   }
 
   ngOnInit(): void {
-    this.store.dispatch(KLEActions.getAdminKLEStatus());
+    this.dispatchGetKleStatus();
 
     this.subscriptions.add(
       this.actions$.pipe(ofType(KLEActions.updateAdminKLESuccess)).subscribe(() => {
-        this.store.dispatch(KLEActions.getAdminKLEStatus());
+        this.dispatchGetKleStatus();
       })
     );
   }
@@ -39,5 +39,9 @@ export class GlobalAdminOtherKleComponent extends BaseComponent implements OnIni
 
   public downloadKleChanges() {
     this.store.dispatch(KLEActions.getAdminKLEFile());
+  }
+
+  private dispatchGetKleStatus() {
+    this.store.dispatch(KLEActions.getAdminKLEStatus());
   }
 }

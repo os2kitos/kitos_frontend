@@ -72,7 +72,7 @@ export class NotificationService implements OnDestroy {
     this.subscribeAsDefault(OrganizationActions.patchOrganizationSuccess, $localize`Organisationen blev opdateret`);
     this.subscribeAsError(OrganizationActions.patchOrganizationError, $localize`Organisationen kunne ikke opdateres`);
 
-    this.subscribeAsError(KLEActions.getAdminKLEFileError, $localize`Kunne ikke få KLE ændringer`);
+    this.subscribeAsError(KLEActions.getAdminKLEFileError, $localize`Kunne ikke hente KLE ændringer`);
 
     this.subscribeAsDefault(KLEActions.updateAdminKLESuccess, $localize`KLE blev opdateret`);
     this.subscribeAsError(KLEActions.updateAdminKLEError, $localize`KLE kunne ikke opdateres`);
