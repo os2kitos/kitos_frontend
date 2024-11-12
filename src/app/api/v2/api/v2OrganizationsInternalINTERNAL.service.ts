@@ -33,6 +33,8 @@ import { APIOrganizationMasterDataRolesResponseDTO } from '../model/aPIOrganizat
 // @ts-ignore
 import { APIOrganizationPermissionsResponseDTO } from '../model/aPIOrganizationPermissionsResponseDTO';
 // @ts-ignore
+import { APIOrganizationRemovalConflictsResponseDTO } from '../model/aPIOrganizationRemovalConflictsResponseDTO';
+// @ts-ignore
 import { APIOrganizationResponseDTO } from '../model/aPIOrganizationResponseDTO';
 // @ts-ignore
 import { APIOrganizationUpdateRequestDTO } from '../model/aPIOrganizationUpdateRequestDTO';
@@ -49,6 +51,15 @@ import { APIUIRootConfigUpdateRequestDTO } from '../model/aPIUIRootConfigUpdateR
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
 
+
+export interface DeleteSingleOrganizationsInternalV2DeleteOrganizationRequestParams {
+    organizationUuid: string;
+    enforceDeletion: boolean;
+}
+
+export interface GetSingleOrganizationsInternalV2GetConflictsRequestParams {
+    organizationUuid: string;
+}
 
 export interface GetSingleOrganizationsInternalV2GetOrganizationMasterDataRequestParams {
     organizationUuid: string;
@@ -164,6 +175,133 @@ export class APIV2OrganizationsInternalINTERNALService {
             throw Error("key may not be null if value is not object or array");
         }
         return httpParams;
+    }
+
+    /**
+     * @param requestParameters
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public deleteSingleOrganizationsInternalV2DeleteOrganization(requestParameters: DeleteSingleOrganizationsInternalV2DeleteOrganizationRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<object>;
+    public deleteSingleOrganizationsInternalV2DeleteOrganization(requestParameters: DeleteSingleOrganizationsInternalV2DeleteOrganizationRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public deleteSingleOrganizationsInternalV2DeleteOrganization(requestParameters: DeleteSingleOrganizationsInternalV2DeleteOrganizationRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public deleteSingleOrganizationsInternalV2DeleteOrganization(requestParameters: DeleteSingleOrganizationsInternalV2DeleteOrganizationRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
+        const organizationUuid = requestParameters.organizationUuid;
+        if (organizationUuid === null || organizationUuid === undefined) {
+            throw new Error('Required parameter organizationUuid was null or undefined when calling deleteSingleOrganizationsInternalV2DeleteOrganization.');
+        }
+        const enforceDeletion = requestParameters.enforceDeletion;
+        if (enforceDeletion === null || enforceDeletion === undefined) {
+            throw new Error('Required parameter enforceDeletion was null or undefined when calling deleteSingleOrganizationsInternalV2DeleteOrganization.');
+        }
+
+        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
+        if (enforceDeletion !== undefined && enforceDeletion !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>enforceDeletion, 'enforceDeletion');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                '*/*'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/v2/internal/organizations/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/delete`;
+        return this.httpClient.request<object>('delete', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                params: localVarQueryParameters,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * @param requestParameters
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getSingleOrganizationsInternalV2GetConflicts(requestParameters: GetSingleOrganizationsInternalV2GetConflictsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIOrganizationRemovalConflictsResponseDTO>;
+    public getSingleOrganizationsInternalV2GetConflicts(requestParameters: GetSingleOrganizationsInternalV2GetConflictsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIOrganizationRemovalConflictsResponseDTO>>;
+    public getSingleOrganizationsInternalV2GetConflicts(requestParameters: GetSingleOrganizationsInternalV2GetConflictsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIOrganizationRemovalConflictsResponseDTO>>;
+    public getSingleOrganizationsInternalV2GetConflicts(requestParameters: GetSingleOrganizationsInternalV2GetConflictsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        const organizationUuid = requestParameters.organizationUuid;
+        if (organizationUuid === null || organizationUuid === undefined) {
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleOrganizationsInternalV2GetConflicts.');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/v2/internal/organizations/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/conflicts`;
+        return this.httpClient.request<APIOrganizationRemovalConflictsResponseDTO>('get', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
     }
 
     /**

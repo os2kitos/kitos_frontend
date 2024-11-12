@@ -16,6 +16,7 @@ api/v2DprLocalCountryOptionTypesInternalINTERNAL.service.ts
 api/v2DprLocalDataResponsibleTypesInternalINTERNAL.service.ts
 api/v2DprLocalOversightOptionTypesInternalINTERNAL.service.ts
 api/v2DprLocalRoleOptionTypesInternalINTERNAL.service.ts
+api/v2GlobalUserInternalINTERNAL.service.ts
 api/v2GridLocalItContractRolesINTERNAL.service.ts
 api/v2ItContract.service.ts
 api/v2ItContractAgreementElementType.service.ts
@@ -48,8 +49,17 @@ api/v2ItInterfaceInterfaceDataType.service.ts
 api/v2ItInterfaceInterfaceType.service.ts
 api/v2ItSystem.service.ts
 api/v2ItSystemBusinessType.service.ts
+api/v2ItSystemGlobalArchiveLocationsInternalINTERNAL.service.ts
+api/v2ItSystemGlobalArchiveTestLocationsInternalINTERNAL.service.ts
+api/v2ItSystemGlobalArchiveTypesInternalINTERNAL.service.ts
 api/v2ItSystemGlobalBusinessTypesInternalINTERNAL.service.ts
+api/v2ItSystemGlobalDataTypesInternalINTERNAL.service.ts
+api/v2ItSystemGlobalFrequencyTypesInternalINTERNAL.service.ts
+api/v2ItSystemGlobalInterfaceTypesInternalINTERNAL.service.ts
+api/v2ItSystemGlobalItSystemCategoriesInternalINTERNAL.service.ts
+api/v2ItSystemGlobalRegisterTypesInternalINTERNAL.service.ts
 api/v2ItSystemGlobalRoleOptionTypesInternalINTERNAL.service.ts
+api/v2ItSystemGlobalSensitivePersonalDataTypesInternalINTERNAL.service.ts
 api/v2ItSystemInternalINTERNAL.service.ts
 api/v2ItSystemLocalArchiveLocationTypesInternalINTERNAL.service.ts
 api/v2ItSystemLocalArchiveTestLocationTypesInternalINTERNAL.service.ts
@@ -171,6 +181,7 @@ model/identityNamePairResponseDTO.ts
 model/identityNamePairWithDeactivatedStatusDTO.ts
 model/immediateNotificationWriteRequestDTO.ts
 model/incomingSystemRelationResponseDTO.ts
+model/interfacesExposedOutsideTheOrganizationResponseDTO.ts
 model/itContractPermissionsResponseDTO.ts
 model/itContractResponseDTO.ts
 model/itInterfaceDataRequestDTO.ts
@@ -202,6 +213,7 @@ model/localRegularOptionResponseDTO.ts
 model/localRegularOptionUpdateRequestDTO.ts
 model/localRoleOptionResponseDTO.ts
 model/models.ts
+model/multipleConflictsResponseDTO.ts
 model/mutateRightRequestDTO.ts
 model/mutateUserRightsRequestDTO.ts
 model/namedEntityV2DTO.ts
@@ -219,6 +231,7 @@ model/organizationMasterDataRolesRequestDTO.ts
 model/organizationMasterDataRolesResponseDTO.ts
 model/organizationPermissionsResponseDTO.ts
 model/organizationRegistrationUnitResponseDTO.ts
+model/organizationRemovalConflictsResponseDTO.ts
 model/organizationResponseDTO.ts
 model/organizationUnitResponseDTO.ts
 model/organizationUnitRolesResponseDTO.ts
@@ -259,12 +272,14 @@ model/roleRecipientWriteRequestDTO.ts
 model/scheduledNotificationWriteRequestDTO.ts
 model/sentNotificationResponseDTO.ts
 model/shallowOrganizationResponseDTO.ts
+model/simpleConflictResponseDTO.ts
 model/simpleLinkDTO.ts
 model/stsOrganizationAccessStatusResponseDTO.ts
 model/stsOrganizationChangeLogResponseDTO.ts
 model/stsOrganizationOrgUnitDTO.ts
 model/stsOrganizationSynchronizationDetailsResponseDTO.ts
 model/systemRelationWriteRequestDTO.ts
+model/systemWithUsageOutsideOrganizationConflictResponseDTO.ts
 model/trackingEventResponseDTO.ts
 model/transferOrganizationUnitRegistrationV2RequestDTO.ts
 model/uIModuleCustomizationRequestDTO.ts

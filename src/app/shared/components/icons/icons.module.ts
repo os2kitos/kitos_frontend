@@ -6,6 +6,7 @@ import { ArrowLeftIconComponent } from './arrow-left-icon.component';
 import { ArrowUpIconComponent } from './arrow-up-icon.component';
 import { BookmarkIconComponent } from './bookmark.component';
 import { BulkCreateIconComponent } from './bulk-create-icon.component';
+import { CheckIconComponent } from './check-icon.component';
 import { CheckNegativeGrayIconComponent } from './check-negative-gray.component';
 import { CheckPositiveGreenIconComponent } from './check-positive-green.component';
 import { ChevronDownIconComponent } from './chevron-down-icon.component';
@@ -35,6 +36,7 @@ import { LockIconComponent } from './lock-icon.component';
 import { LogoutIconComponent } from './logout-icon.component';
 import { MoneyIconComponent } from './money-icon.component';
 import { MoreHorizontalIconComponent } from './more-horizontal-icon.component';
+import { MultipleUsersIconComponent } from './multiple-users-icon.component';
 import { NotInUseIconComponent } from './not-in-use-icon.component';
 import { NotificationIconComponent } from './notification-icon.component';
 import { OrangeCircleIconComponent } from './orange-circle-icon.component';
@@ -54,7 +56,6 @@ import { TrashcanIconComponent } from './trashcan-icon.component';
 import { WarningIconComponent } from './warning-icon.component';
 import { WhiteCircleIconComponent } from './white-circle-icon.component';
 import { XIconComponent } from './x-icon.component';
-import { MultipleUsersIconComponent } from './multiple-users-icon.component';
 import { WhiteXIconComponent } from './white-x-icon.component';
 
 @NgModule({
@@ -116,6 +117,7 @@ import { WhiteXIconComponent } from './white-x-icon.component';
     CollapseCircleIconComponent,
     SettingsIconComponent,
     MultipleUsersIconComponent,
+    CheckIconComponent,
     WhiteXIconComponent,
   ],
   declarations: [
@@ -175,6 +177,7 @@ import { WhiteXIconComponent } from './white-x-icon.component';
     CollapseCircleIconComponent,
     SettingsIconComponent,
     MultipleUsersIconComponent,
+    CheckIconComponent,
     WhiteXIconComponent,
   ],
   providers: [],
