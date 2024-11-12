@@ -10,6 +10,15 @@ describe('global-admin other', () => {
     cy.intercept('/odata/Organizations?$skip=0&$top=100&$count=true', { fixture: './global-admin/organizations.json' });
 
     cy.intercept('api/v2/internal/kle/status', { fixture: './global-admin/kle-status-not-up-to-date.json' });
+
+    cy.intercept('api/v2/internal/users/search', { fixture: './shared/users.json' });
+    cy.intercept('api/v2/internal/users/*/organizations', { fixture: './organizations/organizations.json' });
+
+    cy.intercept('api/v2/internal/organizations/*/ui-root-config', { body: {} });
+
+    cy.intercept('api/v2/internal/organizations/*/grid/permissions', { statusCode: 404, body: {} });
+
+    cy.intercept('/odata/Organizations?$skip=0&$top=100&$count=true', { fixture: './global-admin/organizations.json' });
     cy.setup(true, 'global-admin/other');
   });
 
@@ -23,11 +32,6 @@ describe('global-admin other', () => {
       body: {},
     });
 
-    cy.hoverByDataCy('profile-menu');
-    cy.getByDataCy('global-admin-menu-item').should('exist').click();
-
-    cy.navigateToDetailsSubPage('Andet');
-
     cy.getByDataCy('update-kle-button').get('button').should('be.disabled');
     cy.getByDataCy('get-kle-changes-button').click();
     cy.getByDataCy('get-kle-changes-button').get('button').should('be.disabled');
@@ -37,5 +41,15 @@ describe('global-admin other', () => {
 
     cy.getByDataCy('update-kle-button').get('button').should('be.disabled');
     cy.getByDataCy('get-kle-changes-button').get('button').should('be.disabled');
+  });
+
+  it('can shutdown user', () => {
+    cy.intercept('DELETE', 'api/v2/internal/users/*', { body: {} });
+    cy.dropdownByCy('remove-user-dropdown', 'test', true);
+
+    cy.getByDataCy('delete-user-button').click();
+    cy.getByDataCy('confirm-button').click();
+
+    cy.get('app-popup-message').should('exist');
   });
 });

@@ -1,0 +1,38 @@
+<app-card>
+  <app-card-header title="Nedlæg bruger" i18n-title></app-card-header>
+  <form [formGroup]="formGroup" (submit)="deleteUser()">
+    <app-standard-vertical-content-grid>
+      <div class="form-row">
+        <app-connected-dropdown
+          text="Nedlæg bruger"
+          i18n-text
+          data-cy="remove-user-dropdown"
+          valueField="uuid"
+          [formGroup]="formGroup"
+          formName="user"
+          [data$]="users$"
+          [isLoading$]="isLoading$"
+          (filterChange)="searchUsers($event)"
+          (valueChange)="getUserOrganizations($event)"
+        ></app-connected-dropdown>
+        <app-button type="submit" [disabled]="formGroup.invalid" color="warn" data-cy="delete-user-button" i18n
+          >Slet</app-button
+        >
+      </div>
+      <ng-container *ngIf="userOrganizations$ | async as userOrganizations">
+        <app-native-table *ngIf="userOrganizations.length > 0">
+          <thead>
+            <th i18n>Brugeren er stadig medlem af følgende organisationer</th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let userOrganization of userOrganizations">
+              <td>
+                <app-paragraph paragraphSize="medium">{{ userOrganization.name }}</app-paragraph>
+              </td>
+            </tr>
+          </tbody>
+        </app-native-table>
+      </ng-container>
+    </app-standard-vertical-content-grid>
+  </form>
+</app-card>

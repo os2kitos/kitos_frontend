@@ -1,0 +1,26 @@
+@import "mixins";
+@import "theme";
+
+:host {
+  @include page-flex-layout-max-width;
+}
+
+.action-buttons {
+  display: flex;
+  gap: $padding-medium;
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem; /* Adjust the gap as needed */
+}
+
+app-connected-dropdown {
+  flex: 1; /* Make the dropdown stretch to fill the available space */
+}
+
+app-button {
+  width: auto; /* Ensure the button fits its content */
+  display: inline-block;
+}

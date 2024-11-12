@@ -5739,10 +5739,6 @@
         <source> Der er en ny version af KLE, udgivet <x id="INTERPOLATION" equiv-text="{{ kleStatus.version | appDate }}"/> </source>
         <target state="new"> Der er en ny version af KLE, udgivet <x id="INTERPOLATION" equiv-text="{{ kleStatus.version | appDate }}"/> </target>
       </trans-unit>
-      <trans-unit id="3533017009925459199" datatype="html">
-        <source>Vis ændringer i KLE</source>
-        <target state="new">Vis ændringer i KLE</target>
-      </trans-unit>
       <trans-unit id="2400861585794872427" datatype="html">
         <source>Opdater KLE</source>
         <target state="new">Opdater KLE</target>
@@ -5751,9 +5747,9 @@
         <source>KLE-Changes.csv</source>
         <target state="new">KLE-Changes.csv</target>
       </trans-unit>
-      <trans-unit id="2243281531109901222" datatype="html">
-        <source>Kunne ikke få KLE ændringer</source>
-        <target state="new">Kunne ikke få KLE ændringer</target>
+      <trans-unit id="5683318511092429260" datatype="html">
+        <source>Kunne ikke hente KLE ændringer</source>
+        <target state="new">Kunne ikke hente KLE ændringer</target>
       </trans-unit>
       <trans-unit id="2129888068593549782" datatype="html">
         <source>KLE blev opdateret</source>
@@ -5762,6 +5758,22 @@
       <trans-unit id="1966027923886127029" datatype="html">
         <source>KLE kunne ikke opdateres</source>
         <target state="new">KLE kunne ikke opdateres</target>
+      </trans-unit>
+      <trans-unit id="838512276710673497" datatype="html">
+        <source>Hent ændringer i KLE</source>
+        <target state="new">Hent ændringer i KLE</target>
+      </trans-unit>
+      <trans-unit id="3832754660132486318" datatype="html">
+        <source>Nedlæg bruger</source>
+        <target state="new">Nedlæg bruger</target>
+      </trans-unit>
+      <trans-unit id="2209587204514076464" datatype="html">
+        <source>Brugeren er stadig medlem af følgende organisationer</source>
+        <target state="new">Brugeren er stadig medlem af følgende organisationer</target>
+      </trans-unit>
+      <trans-unit id="2689106911404743344" datatype="html">
+        <source>Noter</source>
+        <target state="new">Noter</target>
       </trans-unit>
     </body>
   </file>

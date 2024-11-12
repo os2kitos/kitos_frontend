@@ -140,7 +140,7 @@ export class OrganizationUserEffects {
       concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       switchMap(([{ userUuid }, organizationUuid]) =>
         this.apiService
-          .deleteSingleUsersInternalV2DeleteUser({
+          .deleteSingleUsersInternalV2DeleteUserInOrganization({
             userUuid,
             organizationUuid,
           })
