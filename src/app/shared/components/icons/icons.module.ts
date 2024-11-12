@@ -55,6 +55,7 @@ import { WarningIconComponent } from './warning-icon.component';
 import { WhiteCircleIconComponent } from './white-circle-icon.component';
 import { XIconComponent } from './x-icon.component';
 import { MultipleUsersIconComponent } from './multiple-users-icon.component';
+import { WhiteXIconComponent } from './white-x-icon.component';
 
 @NgModule({
   imports: [],
@@ -115,6 +116,7 @@ import { MultipleUsersIconComponent } from './multiple-users-icon.component';
     CollapseCircleIconComponent,
     SettingsIconComponent,
     MultipleUsersIconComponent,
+    WhiteXIconComponent,
   ],
   declarations: [
     ChevronDownIconComponent,
@@ -173,6 +175,7 @@ import { MultipleUsersIconComponent } from './multiple-users-icon.component';
     CollapseCircleIconComponent,
     SettingsIconComponent,
     MultipleUsersIconComponent,
+    WhiteXIconComponent,
   ],
   providers: [],
 })
