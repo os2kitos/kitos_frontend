@@ -4387,6 +4387,9 @@
       <trans-unit id="2689106911404743344" datatype="html">
         <source>Noter</source>
       </trans-unit>
+      <trans-unit id="6141368513787138223" datatype="html">
+        <source>Er du sikker på at du vil fjerne denne bruger?</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

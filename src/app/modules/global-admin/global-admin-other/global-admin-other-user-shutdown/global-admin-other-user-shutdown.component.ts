@@ -46,7 +46,7 @@ export class GlobalAdminOtherUserShutdownComponent extends BaseComponent {
     }
     this.confirmationService.confirmAction({
       category: ConfirmActionCategory.Warning,
-      message: 'Are you sure you want to delete this user?',
+      message: $localize`Er du sikker på at du vil fjerne denne bruger?`,
       onConfirm: () => {
         this.componentStore.deleteUser(user.uuid);
         this.resetShutdown();
