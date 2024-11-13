@@ -182,12 +182,6 @@ export class APIV2GlobalUserInternalINTERNALService {
             throw new Error('Required parameter userUuid was null or undefined when calling getManyGlobalUserInternalV2GetOrganizationsByUserUuid.');
         }
 
-        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
-        if (userUuid !== undefined && userUuid !== null) {
-          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
-            <any>userUuid, 'userUuid');
-        }
-
         let localVarHeaders = this.defaultHeaders;
 
         let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
@@ -219,11 +213,10 @@ export class APIV2GlobalUserInternalINTERNALService {
             }
         }
 
-        let localVarPath = `/api/v2/internal/users/organizations`;
+        let localVarPath = `/api/v2/internal/users/${this.configuration.encodeParam({name: "userUuid", value: userUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/organizations`;
         return this.httpClient.request<Array<APIOrganizationResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                params: localVarQueryParameters,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -301,7 +294,7 @@ export class APIV2GlobalUserInternalINTERNALService {
             }
         }
 
-        let localVarPath = `/api/v2/internal/users`;
+        let localVarPath = `/api/v2/internal/users/search`;
         return this.httpClient.request<Array<APIUserReferenceResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,

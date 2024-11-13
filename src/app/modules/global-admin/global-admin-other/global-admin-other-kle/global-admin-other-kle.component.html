@@ -1,5 +1,5 @@
-<app-card i18n-title>
-  <app-card-header title="KLE"></app-card-header>
+<app-card>
+  <app-card-header title="KLE" i18n-title></app-card-header>
   <app-standard-vertical-content-grid *ngIf="(isLoading$ | async) === false">
     <ng-container *ngIf="kleStatus$ | async as kleStatus">
       <app-paragraph [bold]="true">

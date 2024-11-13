@@ -5827,6 +5827,26 @@
         <source>KLE kunne ikke opdateres</source>
         <target state="new">KLE kunne ikke opdateres</target>
       </trans-unit>
+      <trans-unit id="838512276710673497" datatype="html">
+        <source>Hent ændringer i KLE</source>
+        <target state="new">Hent ændringer i KLE</target>
+      </trans-unit>
+      <trans-unit id="3832754660132486318" datatype="html">
+        <source>Nedlæg bruger</source>
+        <target state="new">Nedlæg bruger</target>
+      </trans-unit>
+      <trans-unit id="2209587204514076464" datatype="html">
+        <source>Brugeren er stadig medlem af følgende organisationer</source>
+        <target state="new">Brugeren er stadig medlem af følgende organisationer</target>
+      </trans-unit>
+      <trans-unit id="2689106911404743344" datatype="html">
+        <source>Noter</source>
+        <target state="new">Noter</target>
+      </trans-unit>
+      <trans-unit id="6141368513787138223" datatype="html">
+        <source>Er du sikker på at du vil fjerne denne bruger?</source>
+        <target state="new">Er du sikker på at du vil fjerne denne bruger?</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
