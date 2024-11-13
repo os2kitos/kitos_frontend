@@ -500,7 +500,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     },
     {
       field: GridFields.Note,
-      title: $localize`Note`,
+      title: $localize`Noter`,
       section: this.systemSectionName,
       hidden: false,
       persistId: 'note',

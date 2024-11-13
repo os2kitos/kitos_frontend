@@ -13,11 +13,12 @@ import { CreateOrganizationDialogComponent } from './global-admin-organizations/
 import { EditOrganizationDialogComponent } from './global-admin-organizations/edit-organization-dialog/edit-organization-dialog.component';
 import { GlobalAdminOrganizationsGridComponent } from './global-admin-organizations/global-admin-organizations-grid/global-admin-organizations-grid.component';
 import { GlobalAdminOrganizationsComponent } from './global-admin-organizations/global-admin-organizations.component';
+import { GlobalAdminOtherBrokenLinksComponent } from './global-admin-other/global-admin-other-broken-links/global-admin-other-broken-links.component';
 import { GlobalAdminOtherKleComponent } from './global-admin-other/global-admin-other-kle/global-admin-other-kle.component';
+import { GlobalAdminOtherUserShutdownComponent } from './global-admin-other/global-admin-other-user-shutdown/global-admin-other-user-shutdown.component';
 import { GlobalAdminOtherComponent } from './global-admin-other/global-admin-other.component';
 import { GlobalAdminComponent } from './global-admin.component';
 import { GlobalAdminRouterModule } from './global-admin.routes';
-import { GlobalAdminOtherBrokenLinksComponent } from './global-admin-other/global-admin-other-broken-links/global-admin-other-broken-links.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { GlobalAdminOtherBrokenLinksComponent } from './global-admin-other/globa
     CreateOrganizationDialogComponent,
     EditOrganizationDialogComponent,
     GlobalAdminOtherKleComponent,
+    GlobalAdminOtherUserShutdownComponent,
     GlobalAdminOtherBrokenLinksComponent,
   ],
   imports: [CommonModule, ComponentsModule, SharedModule, GlobalAdminRouterModule],

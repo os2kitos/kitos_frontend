@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { verifyArrayContainsObject } from 'cypress/support/request-verification';
 import { Method, RouteMatcher } from 'Cypress/types/net-stubbing';
 
@@ -15,18 +16,18 @@ Cypress.Commands.add('setup', (authenticate?: boolean, urlPath?: string, uiCusto
   cy.intercept('/api/v2/organizations*', { fixture: './organizations/organizations.json' }).as('organizations');
 
   cy.intercept('api/v2/internal/organizations/*/ui-customization/ItSystemUsages', {
-    fixture: uiCustomizationFixturePath ?? './shared/it-system-usage-ui-customization.json' }
-  );
+    fixture: uiCustomizationFixturePath ?? './shared/it-system-usage-ui-customization.json',
+  });
 
   cy.intercept('api/v2/internal/organizations/*/ui-customization/DataProcessingRegistrations', {
-    fixture: uiCustomizationFixturePath ?? './shared/data-processing-ui-customization.json' }
-  );
+    fixture: uiCustomizationFixturePath ?? './shared/data-processing-ui-customization.json',
+  });
 
   cy.intercept('api/v2/internal/organizations/*/ui-customization/ItContracts', {
-    fixture: uiCustomizationFixturePath ?? './shared/it-contracts-ui-customization.json' }
-  );
+    fixture: uiCustomizationFixturePath ?? './shared/it-contracts-ui-customization.json',
+  });
 
-    cy.intercept('api/v2/internal/organizations/*/ui-root-config', {
+  cy.intercept('api/v2/internal/organizations/*/ui-root-config', {
     fixture: './shared/ui-root-config.json',
   });
 
