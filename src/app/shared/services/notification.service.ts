@@ -3,6 +3,7 @@ import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
+import { GlobalOptionTypeActions } from 'src/app/store/global-admin/actions';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
@@ -374,6 +375,11 @@ export class NotificationService implements OnDestroy {
       DataProcessingActions.patchDataProcessingError,
       $localize`Databehandlingen kunne ikke slettes`
     );
+
+    this.subscribeAsDefault(GlobalOptionTypeActions.createOptionTypeSuccess, $localize`Typen blev oprettet`);
+    this.subscribeAsDefault(GlobalOptionTypeActions.createOptionTypeError, $localize`Typen kunne ikke oprettes`);
+    this.subscribeAsDefault(GlobalOptionTypeActions.updateOptionTypeSuccess, $localize`Typen blev opdateret`);
+    this.subscribeAsDefault(GlobalOptionTypeActions.updateOptionTypeError, $localize`Typen kunne ikke opdateres`);
   }
   /**
    * Consolidates notifications related to the "roles" which is used in multiple different modules

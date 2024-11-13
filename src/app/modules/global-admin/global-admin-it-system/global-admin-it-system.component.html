@@ -1,1 +1,66 @@
-<p>global-admin-it-system works!</p>
+<app-segment [buttons]="segmentOptions" [(selected)]="selectedSegment"> </app-segment>
+
+<app-card>
+  <ng-container *ngIf="selectedSegment === GlobalAdminModuleSegmentOptionType.RegularOptionTypes">
+    <app-standard-vertical-content-grid>
+      <app-global-option-type-table optionType="it-system_business-type" title="Forretningstyper" i18n-title></app-global-option-type-table>
+
+      <app-global-option-type-table optionType="it-system_usage-archive-type" title="Arkiveringstyper" i18n-title></app-global-option-type-table>
+
+      <app-global-option-type-table optionType="it-system_usage-archive-location-type" title="Arkiveringssted" i18n-title>
+      </app-global-option-type-table>
+
+      <app-global-option-type-table
+        optionType="it-system_usage-archive-location-test-type"
+        title="Arkiveringsteststed"
+        i18n-title
+      >
+      </app-global-option-type-table>
+
+      <app-global-option-type-table optionType="it-interface_data-type" title="Datatyper" i18n-title>
+      </app-global-option-type-table>
+
+      <app-global-option-type-table optionType="it-system_usage-relation-frequency-type" title="Frekvenser" i18n-title>
+      </app-global-option-type-table>
+
+      <app-global-option-type-table optionType="it-interface_interface-type" title="Grænseflader" i18n-title>
+      </app-global-option-type-table>
+
+      <app-global-option-type-table
+        optionType="it_system_usage-gdpr-sensitive-data-type"
+        title="Følsomme persondata"
+        [showDescription]="false"
+        i18n-title
+      >
+      </app-global-option-type-table>
+
+      <app-global-option-type-table
+        optionType="it_system_usage-gdpr-registered-data-category-type"
+        title="Kategorier af registrerede i databehandlingen"
+        [showDescription]="false"
+        i18n-title
+      >
+      </app-global-option-type-table>
+      
+      <app-global-option-type-table
+        optionType="it-system_usage-data-classification-type"
+        title="Klassifikation af data i systemet"
+        i18n-title
+      >
+      </app-global-option-type-table>
+    </app-standard-vertical-content-grid>
+  </ng-container>
+
+  <ng-container *ngIf="selectedSegment === GlobalAdminModuleSegmentOptionType.RoleOptionTypes">
+    <app-standard-vertical-content-grid>
+      <app-global-option-type-table optionType="it-system-usage"
+      title="IT System roller"
+      i18n-title
+      [disableAccordion]="true"
+      [expandedByDefault]="true"
+      [showWriteAccess]="true"
+      >
+      </app-global-option-type-table>
+    </app-standard-vertical-content-grid>
+  </ng-container>
+</app-card>

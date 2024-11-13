@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { catchError, concatMap, first, groupBy, map, mergeMap, of, switchMap } from 'rxjs';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
-import { LocalOptionTypeService } from 'src/app/shared/services/local-option-type.service';
+import { LocalAdminOptionTypeService } from 'src/app/shared/services/local-admin-option-type.service';
 import { selectOrganizationUuid } from '../../user-store/selectors';
 import { LocalOptionTypeActions } from './actions';
 
@@ -12,7 +12,7 @@ export class LocalOptionTypeEffects {
   constructor(
     private store: Store,
     private actions$: Actions,
-    private localOptionTypeService: LocalOptionTypeService
+    private localOptionTypeService: LocalAdminOptionTypeService
   ) {}
 
   patchOptionType$ = createEffect(() => {

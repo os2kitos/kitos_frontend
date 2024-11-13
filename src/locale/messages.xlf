@@ -4354,6 +4354,54 @@
       <trans-unit id="5749107076110806005" datatype="html">
         <source>Organisationen kunne ikke oprettes</source>
       </trans-unit>
+      <trans-unit id="1201617254218760459" datatype="html">
+        <source>Skriverettighed</source>
+      </trans-unit>
+      <trans-unit id="1660336744314523430" datatype="html">
+        <source>Databehandling roller</source>
+      </trans-unit>
+      <trans-unit id="3660553565172585093" datatype="html">
+        <source> Opret <x id="INTERPOLATION" equiv-text="{{ getCreateButtonType() }}"/></source>
+      </trans-unit>
+      <trans-unit id="3787788223432952789" datatype="html">
+        <source>Obligatorisk</source>
+      </trans-unit>
+      <trans-unit id="4070352210782579608" datatype="html">
+        <source>Typen blev oprettet</source>
+      </trans-unit>
+      <trans-unit id="4124839911243587483" datatype="html">
+        <source> Annuller </source>
+      </trans-unit>
+      <trans-unit id="4521405643639937683" datatype="html">
+        <source>Typen blev opdateret</source>
+      </trans-unit>
+      <trans-unit id="5340208750899970512" datatype="html">
+        <source>IT System roller</source>
+      </trans-unit>
+      <trans-unit id="5917198681445260585" datatype="html">
+        <source>Prioritet</source>
+      </trans-unit>
+      <trans-unit id="6537904131139019667" datatype="html">
+        <source>type</source>
+      </trans-unit>
+      <trans-unit id="6832425200429095714" datatype="html">
+        <source>IT Kontrakt roller</source>
+      </trans-unit>
+      <trans-unit id="6912683886432863090" datatype="html">
+        <source>Typen kunne ikke opdateres</source>
+      </trans-unit>
+      <trans-unit id="7088112807376332567" datatype="html">
+        <source>Tilpasning af udfaldsrum</source>
+      </trans-unit>
+      <trans-unit id="8541542384368535954" datatype="html">
+        <source>Typen kunne ikke oprettes</source>
+      </trans-unit>
+      <trans-unit id="859814391749202360" datatype="html">
+        <source>rolle</source>
+      </trans-unit>
+      <trans-unit id="8761226489073637285" datatype="html">
+        <source>Tilpasning af roller</source>
+      </trans-unit>
       <trans-unit id="1770635212176214201" datatype="html">
         <source> KITOS baserer sig på den seneste KLE version, udgivet <x id="INTERPOLATION" equiv-text="{{ kleStatus.version | appDate }}"/> </source>
       </trans-unit>
@@ -4366,29 +4414,17 @@
       <trans-unit id="2143756458536709824" datatype="html">
         <source> Der er en ny version af KLE, udgivet <x id="INTERPOLATION" equiv-text="{{ kleStatus.version | appDate }}"/> </source>
       </trans-unit>
-      <trans-unit id="5683318511092429260" datatype="html">
-        <source>Kunne ikke hente KLE ændringer</source>
-      </trans-unit>
       <trans-unit id="2400861585794872427" datatype="html">
         <source>Opdater KLE</source>
       </trans-unit>
       <trans-unit id="5375811527537295210" datatype="html">
         <source>KLE-Changes.csv</source>
       </trans-unit>
-      <trans-unit id="3832754660132486318" datatype="html">
-        <source>Nedlæg bruger</source>
+      <trans-unit id="5683318511092429260" datatype="html">
+        <source>Kunne ikke hente KLE ændringer</source>
       </trans-unit>
       <trans-unit id="838512276710673497" datatype="html">
         <source>Hent ændringer i KLE</source>
-      </trans-unit>
-      <trans-unit id="2209587204514076464" datatype="html">
-        <source>Brugeren er stadig medlem af følgende organisationer</source>
-      </trans-unit>
-      <trans-unit id="2689106911404743344" datatype="html">
-        <source>Noter</source>
-      </trans-unit>
-      <trans-unit id="6141368513787138223" datatype="html">
-        <source>Er du sikker på at du vil fjerne denne bruger?</source>
       </trans-unit>
     </body>
   </file>

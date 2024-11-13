@@ -138,15 +138,17 @@ import { LocalAdminColumnConfigButtonComponent } from './local-admin-column-conf
 import { LocalGridComponent } from './local-grid/local-grid.component';
 import { NavigationDrawerComponent } from './navigation-drawer/navigation-drawer.component';
 import { NumberCircleComponent } from './number-circle/number-circle.component';
-import { EditOptionTypeDialogComponent } from './option-type-table/edit-option-type-dialog/edit-option-type-dialog.component';
-import { OptionTypeTableComponent } from './option-type-table/option-type-table.component';
+import { EditLocalOptionTypeDialogComponent } from './local-option-type-table/edit-local-option-type-dialog/edit-local-option-type-dialog.component';
+import { LocalOptionTypeTableComponent } from './local-option-type-table/local-option-type-table.component';
+import { OrganizationUserDropdownComponent } from './organization-user-dropdown/organization-user-dropdown.component';
 import { ResetToOrgColumnsConfigButtonComponent } from './reset-to-org-columns-config-button/reset-to-org-columns-config-button.component';
 import { RoleRowComponent } from './role-table/role-row/role-row.component';
 import { RoleTableContainerComponent } from './role-table/role-table-container/role-table-container.component';
 import { SlideToggleComponent } from './slide-toggle/slide-toggle.component';
 import { SnackbarActionsComponent } from './snackbar-actions/snackbar-actions.component';
 import { VerticalContentGridSectionMarginLeftComponent } from './vertical-content-grid-section-margin-left/vertical-content-grid-section-margin-left.component';
-import { OrganizationUserDropdownComponent } from './organization-user-dropdown/organization-user-dropdown.component';
+import { GlobalOptionTypeTableComponent } from './global-option-type-table/global-option-type-table.component';
+import { GlobalOptionTypeDialogComponent } from './global-option-type-table/global-option-type-dialog/global-option-type-dialog.component';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
@@ -259,8 +261,8 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     MultiSelectDropdownComponent,
     SnackbarActionsComponent,
     AccordionHeaderComponent,
-    OptionTypeTableComponent,
-    EditOptionTypeDialogComponent,
+    LocalOptionTypeTableComponent,
+    EditLocalOptionTypeDialogComponent,
     NavigationDrawerComponent,
     IconComponent,
     LocalGridComponent,
@@ -268,6 +270,8 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     IconComponent,
     OrganizationUserDropdownComponent,
     FileInputComponent,
+    GlobalOptionTypeTableComponent,
+    GlobalOptionTypeDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -393,12 +397,14 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     MultiSelectDropdownComponent,
     SnackbarActionsComponent,
     AccordionHeaderComponent,
-    OptionTypeTableComponent,
+    LocalOptionTypeTableComponent,
     NavigationDrawerComponent,
     IconComponent,
     LocalGridComponent,
     OrganizationUserDropdownComponent,
     FileInputComponent,
+    GlobalOptionTypeTableComponent,
+    GlobalOptionTypeDialogComponent,
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },

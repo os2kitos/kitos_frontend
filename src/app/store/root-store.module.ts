@@ -39,6 +39,7 @@ import { RoleOptionTypeEffects } from './roles-option-type-store/effects';
 import { roleOptionTypeFeature } from './roles-option-type-store/reducer';
 import { UserEffects } from './user-store/effects';
 import { userFeature } from './user-store/reducer';
+import { GlobalAdminOptionTypeEffects } from './global-admin/effects';
 
 @NgModule({
   imports: [
@@ -87,6 +88,7 @@ import { userFeature } from './user-store/reducer';
       UIModuleCustomizationEffects,
       LocalOptionTypeEffects,
       FkOrgEffects,
+      GlobalAdminOptionTypeEffects,
     ]),
     RouterModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),

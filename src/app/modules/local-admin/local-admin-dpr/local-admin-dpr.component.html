@@ -8,44 +8,46 @@
 
   <ng-container *ngIf="selectedSegment === LocalAdminModuleSegmentOptionType.RegularOptionTypes">
     <app-standard-vertical-content-grid>
-      <app-option-type-table
+      <app-local-option-type-table
         optionType="data-processing-basis-for-transfer-types"
         title="Overførselsgrundlag"
         i18n-title
         [showDescription]="false"
         [showEditButton]="false"
       >
-      </app-option-type-table>
+      </app-local-option-type-table>
 
-      <app-option-type-table
+      <app-local-option-type-table
         optionType="data-processing-oversight-option-types"
         title="Tilsynsmuligheder"
         i18n-title
         [showDescription]="false"
         [showEditButton]="false"
       >
-      </app-option-type-table>
+      </app-local-option-type-table>
 
-      <app-option-type-table optionType="data-processing-data-responsible-types" title="Dataansvarlige" i18n-title>
-      </app-option-type-table>
+      <app-local-option-type-table optionType="data-processing-data-responsible-types" title="Dataansvarlige" i18n-title>
+      </app-local-option-type-table>
 
-      <app-option-type-table
+      <app-local-option-type-table
         optionType="data-processing-country-types"
         title="Lande"
         i18n-title
         [showDescription]="false"
         [showEditButton]="false"
       >
-      </app-option-type-table>
+      </app-local-option-type-table>
     </app-standard-vertical-content-grid>
   </ng-container>
 
-  <app-option-type-table
+  <app-local-option-type-table
+    title="Databehandling roller"
+    i18n-title
     *ngIf="selectedSegment === LocalAdminModuleSegmentOptionType.RoleOptionTypes"
     optionType="data-processing"
     [disableAccordion]="true"
     [expandedByDefault]="true"
     [showWriteAccess]="true"
   >
-  </app-option-type-table>
+  </app-local-option-type-table>
 </app-card>

@@ -4,6 +4,11 @@ import {
   APILocalRegularOptionResponseDTO,
   APILocalRegularOptionUpdateRequestDTO,
   APILocalRoleOptionResponseDTO,
+  APIV2DprLocalBasisForTransferTypesInternalINTERNALService,
+  APIV2DprLocalCountryOptionTypesInternalINTERNALService,
+  APIV2DprLocalDataResponsibleTypesInternalINTERNALService,
+  APIV2DprLocalOversightOptionTypesInternalINTERNALService,
+  APIV2DprLocalRoleOptionTypesInternalINTERNALService,
   APIV2ItContractLocalAgreementElementTypesInternalINTERNALService,
   APIV2ItContractLocalContractTypesInternalINTERNALService,
   APIV2ItContractLocalCriticalityTypesInternalINTERNALService,
@@ -16,11 +21,6 @@ import {
   APIV2ItContractLocalRoleOptionTypesInternalINTERNALService,
   APIV2ItContractLocalTemplateTypesInternalINTERNALService,
   APIV2ItContractLocalTerminationDeadlineTypesInternalINTERNALService,
-  APIV2DprLocalBasisForTransferTypesInternalINTERNALService,
-  APIV2DprLocalCountryOptionTypesInternalINTERNALService,
-  APIV2DprLocalDataResponsibleTypesInternalINTERNALService,
-  APIV2DprLocalOversightOptionTypesInternalINTERNALService,
-  APIV2DprLocalRoleOptionTypesInternalINTERNALService,
   APIV2ItSystemLocalArchiveLocationTypesInternalINTERNALService,
   APIV2ItSystemLocalArchiveTestLocationTypesInternalINTERNALService,
   APIV2ItSystemLocalArchiveTypesInternalINTERNALService,
@@ -34,12 +34,12 @@ import {
   APIV2ItSystemLocalSensitivePersonalDataTypesInternalINTERNALService,
   APIV2OrganizationUnitLocalRoleOptionTypesInternalINTERNALService,
 } from 'src/app/api/v2';
-import { LocalOptionType } from '../models/options/local-option-type.model';
+import { LocalAdminOptionType } from '../models/options/local-admin-option-type.model';
 
 @Injectable({
   providedIn: 'root',
 })
-export class LocalOptionTypeService implements OnDestroy {
+export class LocalAdminOptionTypeService implements OnDestroy {
   public subscriptions = new Subscription();
 
   constructor(
@@ -65,7 +65,6 @@ export class LocalOptionTypeService implements OnDestroy {
     @Inject(APIV2ItSystemLocalRegisterTypesInternalINTERNALService)
     private registerTypeService: APIV2ItSystemLocalRegisterTypesInternalINTERNALService,
     @Inject(APIV2OrganizationUnitLocalRoleOptionTypesInternalINTERNALService)
-    
     //It contract regular option services
     @Inject(APIV2ItContractLocalContractTypesInternalINTERNALService)
     private contractTypeService: APIV2ItContractLocalContractTypesInternalINTERNALService,
@@ -117,13 +116,13 @@ export class LocalOptionTypeService implements OnDestroy {
 
   public getLocalOptions(
     organizationUuid: string,
-    optionType: LocalOptionType
+    optionType: LocalAdminOptionType
   ): Observable<Array<APILocalRegularOptionResponseDTO>> {
     return this.resolveGetLocalOptionsEndpoint(optionType)(organizationUuid);
   }
 
   public patchLocalOption(
-    optionType: LocalOptionType,
+    optionType: LocalAdminOptionType,
     organizationUuid: string,
     optionUuid: string,
     request: APILocalRegularOptionUpdateRequestDTO
@@ -131,7 +130,12 @@ export class LocalOptionTypeService implements OnDestroy {
     return this.resolvePatchLocalOptionsEndpoint(optionType)(organizationUuid, optionUuid, request);
   }
 
-  public patchIsActive(optionType: LocalOptionType, organizationUuid: string, optionUuid: string, isActive: boolean) {
+  public patchIsActive(
+    optionType: LocalAdminOptionType,
+    organizationUuid: string,
+    optionUuid: string,
+    isActive: boolean
+  ) {
     if (isActive) {
       return this.resolveCreateLocalOptionsEndpoint(optionType)(organizationUuid, optionUuid);
     } else {
@@ -140,7 +144,7 @@ export class LocalOptionTypeService implements OnDestroy {
   }
 
   private resolveGetLocalOptionsEndpoint(
-    optionType: LocalOptionType
+    optionType: LocalAdminOptionType
   ): (organizationUuid: string) => Observable<Array<APILocalRoleOptionResponseDTO>> {
     switch (optionType) {
       //It system regular option types
@@ -317,7 +321,7 @@ export class LocalOptionTypeService implements OnDestroy {
     }
   }
 
-  private resolvePatchLocalOptionsEndpoint(optionType: LocalOptionType) {
+  private resolvePatchLocalOptionsEndpoint(optionType: LocalAdminOptionType) {
     switch (optionType) {
       //It system regular option types
       case 'it-system_business-type':
@@ -557,7 +561,7 @@ export class LocalOptionTypeService implements OnDestroy {
   }
 
   private resolveCreateLocalOptionsEndpoint(
-    optionType: LocalOptionType
+    optionType: LocalAdminOptionType
   ): (organizationUuid: string, optionUuid: string) => Observable<APILocalRoleOptionResponseDTO> {
     switch (optionType) {
       //It system regular option types
@@ -770,7 +774,7 @@ export class LocalOptionTypeService implements OnDestroy {
   }
 
   private resolveDeleteLocalOptionsEndpoint(
-    optionType: LocalOptionType
+    optionType: LocalAdminOptionType
   ): (organizationUuid: string, optionUuid: string) => Observable<APILocalRoleOptionResponseDTO> {
     switch (optionType) {
       //It system regular option types

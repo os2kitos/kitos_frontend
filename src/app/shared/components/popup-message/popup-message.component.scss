@@ -7,9 +7,8 @@ $animationSpeed: 250ms;
   align-items: center;
   padding: $padding-medium;
   border-radius: $radius-small;
-  border-left: 4px solid $color-primary-base;
-  background-color: $color-white;
-  color: $color-neutral;
+  background-color: $color-primary-darker;
+  color: $color-white;
   margin-top: $padding-medium;
   @include elevation(4, $color-neutral-80);
   visibility: hidden;
@@ -48,7 +47,7 @@ $animationSpeed: 250ms;
 }
 
 .popup-message-type-error {
-  border-color: $color-negative;
+  background-color: $color-negative-base;
 }
 
 p {

@@ -7,63 +7,65 @@
 
   <ng-container *ngIf="selectedSegment === LocalAdminModuleSegmentOptionType.RegularOptionTypes">
     <app-standard-vertical-content-grid>
-      <app-option-type-table optionType="it-system_business-type" title="Forretningstyper" i18n-title>
-      </app-option-type-table>
+      <app-local-option-type-table optionType="it-system_business-type" title="Forretningstyper" i18n-title>
+      </app-local-option-type-table>
 
-      <app-option-type-table optionType="it-system_usage-archive-type" title="Arkiveringstyper" i18n-title>
-      </app-option-type-table>
+      <app-local-option-type-table optionType="it-system_usage-archive-type" title="Arkiveringstyper" i18n-title>
+      </app-local-option-type-table>
 
-      <app-option-type-table optionType="it-system_usage-archive-location-type" title="Arkiveringssted" i18n-title>
-      </app-option-type-table>
+      <app-local-option-type-table optionType="it-system_usage-archive-location-type" title="Arkiveringssted" i18n-title>
+      </app-local-option-type-table>
 
-      <app-option-type-table
+      <app-local-option-type-table
         optionType="it-system_usage-archive-location-test-type"
         title="Arkiveringsteststed"
         i18n-title
       >
-      </app-option-type-table>
+      </app-local-option-type-table>
 
-      <app-option-type-table optionType="it-interface_data-type" title="Datatyper" i18n-title> </app-option-type-table>
+      <app-local-option-type-table optionType="it-interface_data-type" title="Datatyper" i18n-title> </app-local-option-type-table>
 
-      <app-option-type-table optionType="it-system_usage-relation-frequency-type" title="Frekvenser" i18n-title>
-      </app-option-type-table>
+      <app-local-option-type-table optionType="it-system_usage-relation-frequency-type" title="Frekvenser" i18n-title>
+      </app-local-option-type-table>
 
-      <app-option-type-table optionType="it-interface_interface-type" title="Grænseflader" i18n-title>
-      </app-option-type-table>
+      <app-local-option-type-table optionType="it-interface_interface-type" title="Grænseflader" i18n-title>
+      </app-local-option-type-table>
 
-      <app-option-type-table
+      <app-local-option-type-table
         optionType="it_system_usage-gdpr-sensitive-data-type"
         title="Følsomme persondata"
         [showDescription]="false"
         [showEditButton]="false"
         i18n-title
       >
-      </app-option-type-table>
+      </app-local-option-type-table>
 
-      <app-option-type-table
-        optionType="it-system_usage-data-classification-type"
-        title="Klassifikation af data i systemet"
-        i18n-title
-      >
-      </app-option-type-table>
-
-      <app-option-type-table
+      <app-local-option-type-table
         optionType="it_system_usage-gdpr-registered-data-category-type"
         title="Kategorier af registrerede i databehandlingen"
         [showDescription]="false"
         [showEditButton]="false"
         i18n-title
       >
-      </app-option-type-table>
+      </app-local-option-type-table>
+
+      <app-local-option-type-table
+        optionType="it-system_usage-data-classification-type"
+        title="Klassifikation af data i systemet"
+        i18n-title
+      >
+      </app-local-option-type-table>
     </app-standard-vertical-content-grid>
   </ng-container>
 
   <ng-container *ngIf="selectedSegment === LocalAdminModuleSegmentOptionType.RoleOptionTypes">
-    <app-option-type-table
+    <app-local-option-type-table
+      title="IT System roller"
+      i18n-title
       optionType="it-system-usage"
       [disableAccordion]="true"
       [expandedByDefault]="true"
       [showWriteAccess]="true"
-    ></app-option-type-table>
+    ></app-local-option-type-table>
   </ng-container>
 </app-card>

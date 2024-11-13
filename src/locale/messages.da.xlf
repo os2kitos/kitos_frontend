@@ -5731,6 +5731,70 @@
         <source>Organisationen kunne ikke opdateres</source>
         <target state="new">Organisationen kunne ikke opdateres</target>
       </trans-unit>
+      <trans-unit id="5340208750899970512" datatype="html">
+        <source>IT System roller</source>
+        <target state="new">IT System roller</target>
+      </trans-unit>
+      <trans-unit id="1660336744314523430" datatype="html">
+        <source>Databehandling roller</source>
+        <target state="new">Databehandling roller</target>
+      </trans-unit>
+      <trans-unit id="6832425200429095714" datatype="html">
+        <source>IT Kontrakt roller</source>
+        <target state="new">IT Kontrakt roller</target>
+      </trans-unit>
+      <trans-unit id="3787788223432952789" datatype="html">
+        <source>Obligatorisk</source>
+        <target state="new">Obligatorisk</target>
+      </trans-unit>
+      <trans-unit id="1201617254218760459" datatype="html">
+        <source>Skriverettighed</source>
+        <target state="new">Skriverettighed</target>
+      </trans-unit>
+      <trans-unit id="4124839911243587483" datatype="html">
+        <source> Annuller </source>
+        <target state="new"> Annuller </target>
+      </trans-unit>
+      <trans-unit id="3660553565172585093" datatype="html">
+        <source> Opret <x id="INTERPOLATION" equiv-text="{{ getCreateButtonType() }}"/></source>
+        <target state="new"> Opret <x id="INTERPOLATION" equiv-text="{{ getCreateButtonType() }}"/></target>
+      </trans-unit>
+      <trans-unit id="5917198681445260585" datatype="html">
+        <source>Prioritet</source>
+        <target state="new">Prioritet</target>
+      </trans-unit>
+      <trans-unit id="859814391749202360" datatype="html">
+        <source>rolle</source>
+        <target state="new">rolle</target>
+      </trans-unit>
+      <trans-unit id="6537904131139019667" datatype="html">
+        <source>type</source>
+        <target state="new">type</target>
+      </trans-unit>
+      <trans-unit id="7088112807376332567" datatype="html">
+        <source>Tilpasning af udfaldsrum</source>
+        <target state="new">Tilpasning af udfaldsrum</target>
+      </trans-unit>
+      <trans-unit id="8761226489073637285" datatype="html">
+        <source>Tilpasning af roller</source>
+        <target state="new">Tilpasning af roller</target>
+      </trans-unit>
+      <trans-unit id="4070352210782579608" datatype="html">
+        <source>Typen blev oprettet</source>
+        <target state="new">Typen blev oprettet</target>
+      </trans-unit>
+      <trans-unit id="8541542384368535954" datatype="html">
+        <source>Typen kunne ikke oprettes</source>
+        <target state="new">Typen kunne ikke oprettes</target>
+      </trans-unit>
+      <trans-unit id="4521405643639937683" datatype="html">
+        <source>Typen blev opdateret</source>
+        <target state="new">Typen blev opdateret</target>
+      </trans-unit>
+      <trans-unit id="6912683886432863090" datatype="html">
+        <source>Typen kunne ikke opdateres</source>
+        <target state="new">Typen kunne ikke opdateres</target>
+      </trans-unit>
       <trans-unit id="1770635212176214201" datatype="html">
         <source> KITOS baserer sig på den seneste KLE version, udgivet <x id="INTERPOLATION" equiv-text="{{ kleStatus.version | appDate }}"/> </source>
         <target state="new"> KITOS baserer sig på den seneste KLE version, udgivet <x id="INTERPOLATION" equiv-text="{{ kleStatus.version | appDate }}"/> </target>
@@ -5738,6 +5802,10 @@
       <trans-unit id="2143756458536709824" datatype="html">
         <source> Der er en ny version af KLE, udgivet <x id="INTERPOLATION" equiv-text="{{ kleStatus.version | appDate }}"/> </source>
         <target state="new"> Der er en ny version af KLE, udgivet <x id="INTERPOLATION" equiv-text="{{ kleStatus.version | appDate }}"/> </target>
+      </trans-unit>
+      <trans-unit id="838512276710673497" datatype="html">
+        <source>Hent ændringer i KLE</source>
+        <target state="new">Hent ændringer i KLE</target>
       </trans-unit>
       <trans-unit id="2400861585794872427" datatype="html">
         <source>Opdater KLE</source>

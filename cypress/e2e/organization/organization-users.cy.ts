@@ -114,7 +114,7 @@ describe('organization-users', () => {
   it('Cannot create user if emails differ', () => {
     cy.intercept('api/v2/internal/organization/*/users/*', { body: null });
 
-    cy.getByDataCy('create-button').click();
+    cy.getByDataCy('create-button').click({scrollBehavior: 'center'});
 
     cy.inputByCy('email').type('test@email.com');
     cy.inputByCy('repeat-email').type('test2@email.com');
@@ -148,7 +148,7 @@ describe('organization-users', () => {
 
       req.reply({ statusCode: 200, body: {} });
     }).as('patchRequest');
-    cy.getByDataCy('save-button').click();
+    cy.getByDataCy('save-button').click({scrollBehavior: 'center'});
 
     cy.wait('@patchRequest');
     cy.get('app-popup-message').should('exist');
@@ -163,7 +163,7 @@ describe('organization-users', () => {
     cy.intercept('DELETE', 'api/v2/internal/organization/*/users/*', { body: {} }).as('deleteUser');
 
     cy.contains('local-regular-user@kitos.dk').click();
-    cy.contains('Slet bruger').click();
+    cy.contains('Slet bruger').click({scrollBehavior: 'center'});
 
     cy.getByDataCy('delete-button').click();
     cy.contains('Ja').click();
