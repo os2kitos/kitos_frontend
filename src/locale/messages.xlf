@@ -4426,6 +4426,18 @@
       <trans-unit id="838512276710673497" datatype="html">
         <source>Hent ændringer i KLE</source>
       </trans-unit>
+      <trans-unit id="2209587204514076464" datatype="html">
+        <source>Brugeren er stadig medlem af følgende organisationer</source>
+      </trans-unit>
+      <trans-unit id="2689106911404743344" datatype="html">
+        <source>Noter</source>
+      </trans-unit>
+      <trans-unit id="3832754660132486318" datatype="html">
+        <source>Nedlæg bruger</source>
+      </trans-unit>
+      <trans-unit id="6141368513787138223" datatype="html">
+        <source>Er du sikker på at du vil fjerne denne bruger?</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
