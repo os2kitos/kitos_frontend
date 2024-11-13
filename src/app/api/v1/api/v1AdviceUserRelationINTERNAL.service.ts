@@ -29,7 +29,7 @@ export interface GetSingleAdviceUserRelationGetAccessRightsRequestParams {
     organizationId: number;
 }
 
-export interface GetSingleAdviceUserRelationGetAccessRightsForEntityRequestParams {
+export interface GetSingleAdviceUserRelationGetAccessRightsForEntityByIdRequestParams {
     id: number;
     getEntityAccessRights: boolean;
 }
@@ -178,17 +178,17 @@ export class APIV1AdviceUserRelationINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleAdviceUserRelationGetAccessRightsForEntity(requestParameters: GetSingleAdviceUserRelationGetAccessRightsForEntityRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public getSingleAdviceUserRelationGetAccessRightsForEntity(requestParameters: GetSingleAdviceUserRelationGetAccessRightsForEntityRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public getSingleAdviceUserRelationGetAccessRightsForEntity(requestParameters: GetSingleAdviceUserRelationGetAccessRightsForEntityRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public getSingleAdviceUserRelationGetAccessRightsForEntity(requestParameters: GetSingleAdviceUserRelationGetAccessRightsForEntityRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleAdviceUserRelationGetAccessRightsForEntityById(requestParameters: GetSingleAdviceUserRelationGetAccessRightsForEntityByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public getSingleAdviceUserRelationGetAccessRightsForEntityById(requestParameters: GetSingleAdviceUserRelationGetAccessRightsForEntityByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleAdviceUserRelationGetAccessRightsForEntityById(requestParameters: GetSingleAdviceUserRelationGetAccessRightsForEntityByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleAdviceUserRelationGetAccessRightsForEntityById(requestParameters: GetSingleAdviceUserRelationGetAccessRightsForEntityByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling getSingleAdviceUserRelationGetAccessRightsForEntity.');
+            throw new Error('Required parameter id was null or undefined when calling getSingleAdviceUserRelationGetAccessRightsForEntityById.');
         }
         const getEntityAccessRights = requestParameters.getEntityAccessRights;
         if (getEntityAccessRights === null || getEntityAccessRights === undefined) {
-            throw new Error('Required parameter getEntityAccessRights was null or undefined when calling getSingleAdviceUserRelationGetAccessRightsForEntity.');
+            throw new Error('Required parameter getEntityAccessRights was null or undefined when calling getSingleAdviceUserRelationGetAccessRightsForEntityById.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});

@@ -4,7 +4,6 @@ import { HttpClient } from '@angular/common/http';
 
 import { APIV1AdviceUserRelationINTERNALService } from './api/v1AdviceUserRelationINTERNAL.service';
 import { APIV1AuthorizeINTERNALService } from './api/v1AuthorizeINTERNAL.service';
-import { APIV1BrokenExternalReferencesReportINTERNALService } from './api/v1BrokenExternalReferencesReportINTERNAL.service';
 import { APIV1ContactpersonINTERNALService } from './api/v1ContactpersonINTERNAL.service';
 import { APIV1DataProcessingRegistrationINTERNALService } from './api/v1DataProcessingRegistrationINTERNAL.service';
 import { APIV1DataProcessingRegistrationValidationINTERNALService } from './api/v1DataProcessingRegistrationValidationINTERNAL.service';
