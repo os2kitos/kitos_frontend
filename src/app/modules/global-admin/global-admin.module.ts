@@ -3,7 +3,10 @@ import { NgModule } from '@angular/core';
 import { ComponentsModule } from 'src/app/shared/components/components.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { GlobalAdminDataProcessingComponent } from './global-admin-data-processing/global-admin-data-processing.component';
+import { CreateGlobalAdminDialogComponent } from './global-admin-global-admins/create-global-admin-dialog/create-global-admin-dialog.component';
 import { GlobalAdminGlobalAdminsComponent } from './global-admin-global-admins/global-admin-global-admins.component';
+import { GlobalAdminsTableComponent } from './global-admin-global-admins/global-admins-table/global-admins-table.component';
+import { CreateHelpTextDialogComponent } from './global-admin-help-texts/create-help-text-dialog/create-help-text-dialog.component';
 import { GlobalAdminHelpTextsComponent } from './global-admin-help-texts/global-admin-help-texts.component';
 import { GlobalAdminItContractComponent } from './global-admin-it-contract/global-admin-it-contract.component';
 import { GlobalAdminItSystemComponent } from './global-admin-it-system/global-admin-it-system.component';
@@ -42,7 +45,10 @@ import { GlobalAdminRouterModule } from './global-admin.routes';
     RemovalConflictTableComponent,
     InnerConflictTableComponent,
     GlobalAdminOtherKleComponent,
+    GlobalAdminsTableComponent,
+    CreateGlobalAdminDialogComponent,
     GlobalAdminOtherUserShutdownComponent,
+    CreateHelpTextDialogComponent,
     GlobalAdminOtherBrokenLinksComponent,
   ],
   imports: [CommonModule, ComponentsModule, SharedModule, GlobalAdminRouterModule],

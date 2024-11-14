@@ -1,39 +1,51 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, concatMap, groupBy, map, mergeMap, of, switchMap } from 'rxjs';
-import { GlobalAdminOptionTypeService } from 'src/app/shared/services/global-admin-option-type.service';
-import { GlobalOptionTypeActions } from './actions';
+import { catchError, map, of, switchMap } from 'rxjs';
+import { APIV2GlobalUserInternalINTERNALService } from 'src/app/api/v2';
+import { adaptGlobalAdminUser } from 'src/app/shared/models/global-admin/global-admin-user.model';
+import { GlobalAdminActions } from './actions';
 
 @Injectable()
-export class GlobalAdminOptionTypeEffects {
-  constructor(private actions$: Actions, private globalOptionTypeService: GlobalAdminOptionTypeService) {}
+export class GlobalAdminEffects {
+  constructor(
+    private actions$: Actions,
+    @Inject(APIV2GlobalUserInternalINTERNALService)
+    private globalUserService: APIV2GlobalUserInternalINTERNALService
+  ) {}
 
-  patchGlobalOptionType$ = createEffect(() => {
+  getGlobalAdmins$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(GlobalOptionTypeActions.updateOptionType),
-      groupBy((action) => action.optionUuid),
-      mergeMap((group$) =>
-        group$.pipe(
-          concatMap((action) => {
-            return this.globalOptionTypeService
-              .patchGlobalOption(action.optionType, action.optionUuid, action.request)
-              .pipe(
-                map(() => GlobalOptionTypeActions.updateOptionTypeSuccess(action.optionType)),
-                catchError(() => of(GlobalOptionTypeActions.updateOptionTypeError()))
-              );
-          })
-        )
-      )
+      ofType(GlobalAdminActions.getGlobalAdmins),
+      switchMap(() => {
+        return this.globalUserService.getManyGlobalUserInternalV2GetGlobalAdmins().pipe(
+          map((adminsDto) => adminsDto.map((userDto) => adaptGlobalAdminUser(userDto))),
+          map((admins) => GlobalAdminActions.getGlobalAdminsSuccess(admins)),
+          catchError(() => of(GlobalAdminActions.getGlobalAdminsError()))
+        );
+      })
     );
   });
 
-  createGlobalOptionType$ = createEffect(() => {
+  addGlobalAdmin$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(GlobalOptionTypeActions.createOptionType),
-      switchMap((action) => {
-        return this.globalOptionTypeService.createGlobalOption(action.optionType, action.request).pipe(
-          map(() => GlobalOptionTypeActions.createOptionTypeSuccess(action.optionType)),
-          catchError(() => of(GlobalOptionTypeActions.createOptionTypeError()))
+      ofType(GlobalAdminActions.addGlobalAdmin),
+      switchMap(({ userUuid }) => {
+        return this.globalUserService.postSingleGlobalUserInternalV2AddGlobalAdmin({ userUuid }).pipe(
+          map((userDto) => adaptGlobalAdminUser(userDto)),
+          map((user) => GlobalAdminActions.addGlobalAdminSuccess(user)),
+          catchError(() => of(GlobalAdminActions.addGlobalAdminError()))
+        );
+      })
+    );
+  });
+
+  removeGlobalAdmin$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(GlobalAdminActions.removeGlobalAdmin),
+      switchMap(({ userUuid }) => {
+        return this.globalUserService.deleteSingleGlobalUserInternalV2RemoveGlobalAdmin({ userUuid }).pipe(
+          map(() => GlobalAdminActions.removeGlobalAdminSuccess(userUuid)),
+          catchError(() => of(GlobalAdminActions.removeGlobalAdminError()))
         );
       })
     );

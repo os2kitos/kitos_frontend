@@ -3,6 +3,7 @@ import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
+import { GlobalAdminActions } from 'src/app/store/global-admin/actions';
 import { GlobalOptionTypeActions } from 'src/app/store/global-admin/global-option-types/actions';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
@@ -20,6 +21,7 @@ import { PopupMessageActions } from 'src/app/store/popup-messages/actions';
 import { UserActions } from 'src/app/store/user-store/actions';
 import { PopupMessageType } from '../enums/popup-message-type';
 import { createPopupMessage } from '../models/popup-messages/popup-message.model';
+import { HelpTextActions } from 'src/app/store/global-admin/help-texts/actions';
 
 @Injectable({ providedIn: 'root' })
 export class NotificationService implements OnDestroy {
@@ -55,10 +57,16 @@ export class NotificationService implements OnDestroy {
     this.subscribeToExternalReferenceManagementEvents();
     this.subscribeToRoleNotifications();
     this.subscribeToFkOrganizationEvents();
+    this.subscriptToHelpTextNotifications();
   }
   subscribeToExcelImportActions() {
     this.subscribeAsDefault(ExcelImportActions.excelImportSuccess, $localize`Excel-arket blev importeret`);
     this.subscribeAsError(ExcelImportActions.excelImportError, $localize`Kunne ikke importere excel-arket`);
+  }
+
+  private subscriptToHelpTextNotifications(){
+    this.subscribeAsDefault(HelpTextActions.createHelpTextSuccess, $localize`Hjælpeteksten blev oprettet`);
+    this.subscribeAsError(HelpTextActions.createHelpTextError, $localize`Kunne ikke oprette hjælpeteksten`);
   }
 
   private subscribeToLocalAdminNotifications() {
@@ -81,6 +89,24 @@ export class NotificationService implements OnDestroy {
 
     this.subscribeAsDefault(KLEActions.updateAdminKLESuccess, $localize`KLE blev opdateret`);
     this.subscribeAsError(KLEActions.updateAdminKLEError, $localize`KLE kunne ikke opdateres`);
+
+    this.subscribeAsDefault(
+      GlobalAdminActions.addGlobalAdminSuccess,
+      $localize`Bruger tilføjet som global administrator`
+    );
+    this.subscribeAsError(
+      GlobalAdminActions.addGlobalAdminError,
+      $localize`Bruger kunne ikke tilføjes som global administrator`
+    );
+
+    this.subscribeAsDefault(
+      GlobalAdminActions.removeGlobalAdminSuccess,
+      $localize`Bruger fjernet som global administrator`
+    );
+    this.subscribeAsError(
+      GlobalAdminActions.removeGlobalAdminError,
+      $localize`Bruger kunne ikke fjernes som global administrator`
+    );
   }
 
   private subscribeToOrganizationEvents() {
