@@ -1,1 +1,17 @@
-<p>global-admin-help-texts works!</p>
+<app-card>
+  <app-overview-header>
+    <h3 i18n>
+    Hjælpetekster
+  </h3>
+  </app-overview-header>
+  <ng-container *ngIf="helpTexts$ | async as helpTexts">
+    <app-local-grid
+      [data]="helpTexts"
+      [columns]="columns"
+      [modifyPermission]="true"
+      [deletePermission]="true"
+    >
+    </app-local-grid>
+  </ng-container>
+</app-card>
+

@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { filter, map } from 'rxjs';
-import { GlobalOptionTypeActions } from 'src/app/store/global-admin/actions';
+import { GlobalOptionTypeActions } from 'src/app/store/global-admin/global-option-types/actions';
 import { BaseComponent } from '../../base/base.component';
 import { GlobalAdminOptionType, GlobalAdminOptionTypeItem } from '../../models/options/global-admin-option-type.model';
 import { isRoleOptionType } from '../../models/options/role-option-types.model';

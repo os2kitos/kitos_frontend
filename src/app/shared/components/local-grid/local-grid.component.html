@@ -20,6 +20,7 @@
       [field]="column.field"
       [title]="column.title"
       [filter]="column.filter ?? 'text'"
+      [width]="column.width ?? defaultColumnWidth"
       [minResizableWidth]="
         column.minResizableWidth !== undefined
           ? column.minResizableWidth
@@ -72,6 +73,23 @@
 
       <ng-template *ngIf="column.style === 'enum'" kendoGridCellTemplate let-dataItem>
         <app-paragraph>{{ searchProperty(dataItem, column.field)?.name }}</app-paragraph>
+      </ng-template>
+
+      <ng-template
+        *ngIf="column.style === 'action-buttons'"
+        kendoGridCellTemplate
+        let-dataItem
+      >
+        <div class="action-buttons-container">
+          <ng-container *ngFor="let button of column.extraData">
+            <app-icon-button *ngIf="button.type === 'edit' && modifyPermission" (click)="onModifyClick(dataItem)">
+              <app-pencil-icon></app-pencil-icon>
+            </app-icon-button>
+            <app-icon-button *ngIf="button.type === 'delete' && deletePermission" (click)="onDeleteClick(dataItem)">
+              <app-trashcan-icon></app-trashcan-icon>
+            </app-icon-button>
+          </ng-container>
+        </div>
       </ng-template>
     </kendo-grid-column>
   </ng-container>

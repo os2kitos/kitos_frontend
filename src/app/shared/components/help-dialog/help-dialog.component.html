@@ -1,4 +1,4 @@
-<app-dialog [title]="(helpText$ | async)?.Title" icon="help" [loading]="(helpText$ | async) === undefined">
+<app-dialog [title]="(helpText$ | async)?.Title" [loading]="(helpText$ | async) === undefined">
   <div class="help-text-container" [innerHTML]="(helpText$ | async)?.Description"></div>
 
   <app-dialog-actions *ngIf="isGlobalAdmin$ | async">

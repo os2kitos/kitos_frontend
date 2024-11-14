@@ -17,13 +17,13 @@ describe('it-system-usage', () => {
     });
     cy.intercept('/api/v2/it-system-usages/*/permissions', { fixture: './shared/permissions.json' });
     cy.intercept('/api/v2/it-systems/*', { fixture: 'it-system.json' }); //gets the base system
-    cy.intercept('/api/v2/internal/organizations/*/grid/permissions', {statusCode: 404, body: {}});
-    cy.intercept('/api/v2/internal/organizations/*/grid/*/*', {statusCode: 404, body: {}});
+    cy.intercept('/api/v2/internal/organizations/*/grid/permissions', { statusCode: 404, body: {} });
+    cy.intercept('/api/v2/internal/organizations/*/grid/*/*', { statusCode: 404, body: {} });
     cy.setup(true, 'it-systems/it-system-usages');
   });
 
   it('shows help text dialog', () => {
-    cy.intercept('/odata/HelpTexts*', { fixture: './shared/help-text.json' });
+    cy.intercept('api/v2/internal/help-texts/*', { fixture: './shared/help-text.json' });
 
     cy.contains('System 3').click();
 
@@ -31,7 +31,7 @@ describe('it-system-usage', () => {
     cy.contains('IT-systemforsiden finder du');
     cy.get('.close-button').click();
 
-    cy.intercept('/odata/HelpTexts*', { value: [] });
+    cy.intercept('api/v2/internal/help-texts/*', { value: [] });
 
     cy.get('[data-cy="help-button"]').first().click();
     cy.contains('Ingen hjælpetekst defineret');
