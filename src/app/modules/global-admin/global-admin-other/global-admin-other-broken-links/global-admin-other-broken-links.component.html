@@ -1,1 +1,20 @@
-<p>global-admin-other-broken-links works!</p>
+<app-card>
+  <app-card-header title="Rapport over brudte links" i18n-title></app-card-header>
+  <app-standard-vertical-content-grid *ngIf="(isLoading$ | async) === false">
+    <ng-container *ngIf="status$ | async as status">
+      <ng-container *ngIf="status.available">
+        <app-paragraph> <strong i18n>Oprettet: </strong>{{ status.createdDate | appDate }} </app-paragraph>
+        <app-paragraph> <strong i18n>Antal registrerede fejl: </strong>{{ status.brokenLinksCount }} </app-paragraph>
+        <div class="action-buttons">
+          <app-button (buttonClick)="downloadReport()" i18n data-cy="get-broken-links-button"
+            >Hent rapporten</app-button
+          >
+        </div>
+      </ng-container>
+      <app-paragraph i18n *ngIf="status.available === false"
+        >Rapporten over brudte links er endnu ikke tilgængelig. Forventet tilgængelighed er "Mandag i næste uge".
+      </app-paragraph>
+    </ng-container>
+  </app-standard-vertical-content-grid>
+  <app-loading *ngIf="isLoading$ | async"></app-loading>
+</app-card>
