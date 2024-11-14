@@ -2,6 +2,7 @@ import { NgModule, ModuleWithProviders, SkipSelf, Optional } from '@angular/core
 import { Configuration } from './configuration';
 import { HttpClient } from '@angular/common/http';
 
+import { APIV2BrokenExternalReferencesReportInternalINTERNALService } from './api/v2BrokenExternalReferencesReportInternalINTERNAL.service';
 import { APIV2DataProcessingRegistrationService } from './api/v2DataProcessingRegistration.service';
 import { APIV2DataProcessingRegistrationBasisForTransferTypeService } from './api/v2DataProcessingRegistrationBasisForTransferType.service';
 import { APIV2DataProcessingRegistrationCountryTypeService } from './api/v2DataProcessingRegistrationCountryType.service';

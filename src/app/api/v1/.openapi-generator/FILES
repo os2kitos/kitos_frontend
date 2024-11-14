@@ -5,7 +5,6 @@ api.module.ts
 api/api.ts
 api/v1AdviceUserRelationINTERNAL.service.ts
 api/v1AuthorizeINTERNAL.service.ts
-api/v1BrokenExternalReferencesReportINTERNAL.service.ts
 api/v1ContactpersonINTERNAL.service.ts
 api/v1DataProcessingRegistrationINTERNAL.service.ts
 api/v1DataProcessingRegistrationValidationINTERNAL.service.ts

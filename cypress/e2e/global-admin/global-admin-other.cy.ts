@@ -17,6 +17,9 @@ describe('global-admin other', () => {
     cy.intercept('api/v2/internal/organizations/*/ui-root-config', { body: {} });
 
     cy.intercept('api/v2/internal/organizations/*/grid/permissions', { statusCode: 404, body: {} });
+    cy.intercept('api/v2/internal/broken-external-references-report/status', {
+      fixture: './global-admin/broken-links-report',
+    });
 
     cy.intercept('/odata/Organizations?$skip=0&$top=100&$count=true', { fixture: './global-admin/organizations.json' });
     cy.setup(true, 'global-admin/other');
@@ -51,5 +54,17 @@ describe('global-admin other', () => {
     cy.getByDataCy('confirm-button').click();
 
     cy.get('app-popup-message').should('exist');
+  });
+
+  it('can get broken links report', () => {
+    cy.intercept('api/v2/internal/broken-external-references-report/current/csv', {
+      fixture: './global-admin/external-report.csv',
+    });
+
+    cy.contains('Rapport over brudte links');
+    cy.contains('Oprettet: 14-11-2024');
+    cy.contains('Antal registrerede fejl: 1');
+
+    cy.getByDataCy('get-broken-links-button').click();
   });
 });

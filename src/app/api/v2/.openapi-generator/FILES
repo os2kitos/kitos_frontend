@@ -3,6 +3,7 @@
 README.md
 api.module.ts
 api/api.ts
+api/v2BrokenExternalReferencesReportInternalINTERNAL.service.ts
 api/v2DataProcessingRegistration.service.ts
 api/v2DataProcessingRegistrationBasisForTransferType.service.ts
 api/v2DataProcessingRegistrationCountryType.service.ts
@@ -104,6 +105,7 @@ model/archivingCreationRequestDTO.ts
 model/archivingRegistrationsResponseDTO.ts
 model/archivingUpdateRequestDTO.ts
 model/baseNotificationPropertiesWriteRequestDTO.ts
+model/brokenExternalReferencesReportStatusResponseDTO.ts
 model/changeOrganizationUnitRegistrationV2RequestDTO.ts
 model/changePaymentRegistrationV2RequestDTO.ts
 model/columnConfigurationRequestDTO.ts
