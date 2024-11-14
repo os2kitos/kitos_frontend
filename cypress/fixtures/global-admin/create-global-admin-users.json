@@ -1,0 +1,32 @@
+[
+  {
+      "email": "support@kitos.dk",
+      "uuid": "b27ec151-b2a7-4f9f-8827-5fc10e47acc6",
+      "name": "Global admin"
+  },
+  {
+      "email": "local-global-admin-user@kitos.dk",
+      "uuid": "f748fc68-2355-4423-bde7-78d4a68f2a80",
+      "name": "Automatisk oprettet testbruger (GlobalAdmin)"
+  },
+  {
+      "email": "local-local-admin-user@kitos.dk",
+      "uuid": "6d7b8232-ea3b-491c-a8a9-463c726ecd05",
+      "name": "Automatisk oprettet testbruger (LocalAdmin)"
+  },
+  {
+      "email": "local-regular-user@kitos.dk",
+      "uuid": "313790e3-ef0d-44ed-93e5-1bbe1afa3217",
+      "name": "Automatisk oprettet testbruger (User)"
+  },
+  {
+      "email": "local-api-user@kitos.dk",
+      "uuid": "47a6972c-7cee-4560-a5b2-6d3803966208",
+      "name": "Automatisk oprettet testbruger (Api User)"
+  },
+  {
+      "email": "local-api-global-admin-user@kitos.dk",
+      "uuid": "820d1a01-46db-48ae-896c-a551752062b4",
+      "name": "Automatisk oprettet testbruger (Api GlobalAdmin)"
+  }
+]

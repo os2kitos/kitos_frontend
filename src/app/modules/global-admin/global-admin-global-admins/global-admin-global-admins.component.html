@@ -1,1 +1,9 @@
-<p>global-admin-global-admins works!</p>
+<app-card>
+  <app-overview-header>
+    <h3 i18n>Globale administratorer</h3>
+    <app-button (buttonClick)="addGlobalAdmin()" data-cy="add-global-admin-button" i18n>
+      Tilføj Global Admin</app-button
+    >
+  </app-overview-header>
+  <app-global-admins-table></app-global-admins-table>
+</app-card>

@@ -3,6 +3,7 @@ import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
+import { GlobalAdminActions } from 'src/app/store/global-admin/actions';
 import { GlobalOptionTypeActions } from 'src/app/store/global-admin/global-option-types/actions';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
@@ -81,6 +82,24 @@ export class NotificationService implements OnDestroy {
 
     this.subscribeAsDefault(KLEActions.updateAdminKLESuccess, $localize`KLE blev opdateret`);
     this.subscribeAsError(KLEActions.updateAdminKLEError, $localize`KLE kunne ikke opdateres`);
+
+    this.subscribeAsDefault(
+      GlobalAdminActions.addGlobalAdminSuccess,
+      $localize`Bruger tilføjet som global administrator`
+    );
+    this.subscribeAsError(
+      GlobalAdminActions.addGlobalAdminError,
+      $localize`Bruger kunne ikke tilføjes som global administrator`
+    );
+
+    this.subscribeAsDefault(
+      GlobalAdminActions.removeGlobalAdminSuccess,
+      $localize`Bruger fjernet som global administrator`
+    );
+    this.subscribeAsError(
+      GlobalAdminActions.removeGlobalAdminError,
+      $localize`Bruger kunne ikke fjernes som global administrator`
+    );
   }
 
   private subscribeToOrganizationEvents() {

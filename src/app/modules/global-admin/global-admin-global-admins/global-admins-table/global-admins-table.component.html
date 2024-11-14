@@ -1,0 +1,29 @@
+<ng-container *ngIf="globalAdmins$ | async as globalAdmins">
+  <app-loading *ngIf="globalAdminsIsLoading$ | async"> </app-loading>
+  <app-native-table tableLayout="fixed" *ngIf="(globalAdminsIsLoading$ | async) === false">
+    <thead>
+      <tr>
+        <th i18n>Navn</th>
+        <th i18n>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let globalAdmin of globalAdmins">
+        <td>{{ globalAdmin.name }}</td>
+
+        <td>
+          <app-content-space-between>
+            <app-paragraph>
+              {{ globalAdmin.email }}
+            </app-paragraph>
+            <app-table-row-actions>
+              <app-icon-button (buttonClick)="removeGlobalAdmin(globalAdmin)" data-cy="remove-global-admin-button">
+                <app-trashcan-icon></app-trashcan-icon>
+              </app-icon-button>
+            </app-table-row-actions>
+          </app-content-space-between>
+        </td>
+      </tr>
+    </tbody>
+  </app-native-table>
+</ng-container>

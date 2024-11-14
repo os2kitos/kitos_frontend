@@ -1,0 +1,17 @@
+[
+  {
+      "email": "support@kitos.dk",
+      "uuid": "b27ec151-b2a7-4f9f-8827-5fc10e47acc6",
+      "name": "Global admin"
+  },
+  {
+      "email": "local-global-admin-user@kitos.dk",
+      "uuid": "f748fc68-2355-4423-bde7-78d4a68f2a80",
+      "name": "Automatisk oprettet testbruger (GlobalAdmin)"
+  },
+  {
+      "email": "local-api-global-admin-user@kitos.dk",
+      "uuid": "820d1a01-46db-48ae-896c-a551752062b4",
+      "name": "Automatisk oprettet testbruger (Api GlobalAdmin)"
+  }
+]
