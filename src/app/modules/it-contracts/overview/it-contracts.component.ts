@@ -20,7 +20,7 @@ import { getColumnsToShow } from 'src/app/shared/helpers/grid-config-helper';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { yesNoOptions } from 'src/app/shared/models/yes-no.model';
-import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
+import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 import { UIConfigService } from 'src/app/shared/services/ui-config-services/ui-config.service';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import {
@@ -55,7 +55,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
     private router: Router,
     private route: ActivatedRoute,
     private actions$: Actions,
-    private statePersistingService: StatePersistingService,
+    private gridColumnStorageService: GridColumnStorageService,
     private configService: UIConfigService
   ) {
     super(store, 'it-contract');
@@ -451,7 +451,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
   ];
 
   ngOnInit(): void {
-    const existingColumns = this.statePersistingService.get<GridColumn[]>(CONTRACT_COLUMNS_ID);
+    const existingColumns = this.gridColumnStorageService.getColumns(CONTRACT_COLUMNS_ID, this.defaultGridColumns);
 
     this.store.dispatch(ITContractActions.getITContractCollectionPermissions());
 

@@ -12,10 +12,10 @@ import { adaptITSystem } from 'src/app/shared/models/it-system/it-system.model';
 import { OData } from 'src/app/shared/models/odata.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ExternalReferencesApiService } from 'src/app/shared/services/external-references-api-service.service';
-import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { ITSystemActions } from './actions';
 import { selectItSystemExternalReferences, selectItSystemUuid } from './selectors';
+import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 
 @Injectable()
 export class ITSystemEffects {
@@ -25,7 +25,7 @@ export class ITSystemEffects {
     @Inject(APIV2ItSystemService) private apiItSystemService: APIV2ItSystemService,
     private httpClient: HttpClient,
     private externalReferenceApiService: ExternalReferencesApiService,
-    private statePersistingService: StatePersistingService
+    private gridColumnStorageService: GridColumnStorageService
   ) {}
 
   getItSystem$ = createEffect(() => {
@@ -83,7 +83,7 @@ export class ITSystemEffects {
     return this.actions$.pipe(
       ofType(ITSystemActions.updateGridColumns),
       map(({ gridColumns }) => {
-        this.statePersistingService.set(CATALOG_COLUMNS_ID, gridColumns);
+        this.gridColumnStorageService.setColumns(CATALOG_COLUMNS_ID, gridColumns);
         return ITSystemActions.updateGridColumnsSuccess(gridColumns);
       })
     );

@@ -27,7 +27,7 @@ import { dataSensitivityLevelOptions } from 'src/app/shared/models/it-system-usa
 import { hostedAtOptionsGrid } from 'src/app/shared/models/it-system-usage/gdpr/hosted-at.model';
 import { lifeCycleStatusOptions } from 'src/app/shared/models/life-cycle-status.model';
 import { yesNoIrrelevantOptionsGrid } from 'src/app/shared/models/yes-no-irrelevant.model';
-import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
+import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 import { UIConfigService } from 'src/app/shared/services/ui-config-services/ui-config.service';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import {
@@ -514,7 +514,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     store: Store,
     private router: Router,
     private route: ActivatedRoute,
-    private statePersistingService: StatePersistingService,
+    private gridColumnStorageService: GridColumnStorageService,
     private actions$: Actions,
     private uiConfigService: UIConfigService
   ) {
@@ -522,7 +522,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
   }
 
   ngOnInit() {
-    const existingColumns = this.statePersistingService.get<GridColumn[]>(USAGE_COLUMNS_ID);
+    const existingColumns = this.gridColumnStorageService.getColumns(USAGE_COLUMNS_ID, this.defaultGridColumns);
     this.store.dispatch(ITSystemUsageActions.getItSystemUsageOverviewRoles());
     if (existingColumns) {
       this.store.dispatch(ITSystemUsageActions.updateGridColumns(existingColumns));

@@ -22,7 +22,6 @@ import { PaymentTypes } from 'src/app/shared/models/it-contract/payment-types.mo
 import { OData } from 'src/app/shared/models/odata.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ExternalReferencesApiService } from 'src/app/shared/services/external-references-api-service.service';
-import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
 import { getNewGridColumnsBasedOnConfig } from '../helpers/grid-config-helper';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { ITContractActions } from './actions';
@@ -36,6 +35,7 @@ import {
   selectItContractUuid,
   selectOverviewContractRoles,
 } from './selectors';
+import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 
 @Injectable()
 export class ITContractEffects {
@@ -48,11 +48,11 @@ export class ITContractEffects {
     private apiInternalItContractService: APIV2ItContractInternalINTERNALService,
     private httpClient: HttpClient,
     private externalReferencesApiService: ExternalReferencesApiService,
-    private statePersistingService: StatePersistingService,
     @Inject(APIV2GridLocalItContractRolesINTERNALService)
     private apiRoleService: APIV2GridLocalItContractRolesINTERNALService,
     @Inject(APIV2OrganizationGridInternalINTERNALService)
-    private apiV2organizationalGridInternalService: APIV2OrganizationGridInternalINTERNALService
+    private apiV2organizationalGridInternalService: APIV2OrganizationGridInternalINTERNALService,
+    private gridColumnStorageService: GridColumnStorageService
   ) {}
 
   getItContract$ = createEffect(() => {
@@ -103,7 +103,7 @@ export class ITContractEffects {
     return this.actions$.pipe(
       ofType(ITContractActions.updateGridColumns),
       map(({ gridColumns }) => {
-        this.statePersistingService.set(CONTRACT_COLUMNS_ID, gridColumns);
+        this.gridColumnStorageService.setColumns(CONTRACT_COLUMNS_ID, gridColumns);
         return ITContractActions.updateGridColumnsSuccess(gridColumns);
       })
     );
@@ -114,7 +114,7 @@ export class ITContractEffects {
       ofType(ITContractActions.updateGridColumnsAndRoleColumns),
       map(({ gridColumns, gridRoleColumns }) => {
         const columns = gridColumns.concat(gridRoleColumns);
-        this.statePersistingService.set(CONTRACT_COLUMNS_ID, columns);
+        this.gridColumnStorageService.setColumns(CONTRACT_COLUMNS_ID, columns);
         return ITContractActions.updateGridColumnsAndRoleColumnsSuccess(columns);
       })
     );

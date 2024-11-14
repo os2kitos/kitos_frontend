@@ -20,7 +20,6 @@ import { transferToInsecureThirdCountriesOptions } from 'src/app/shared/models/d
 import { yearMonthIntervalOptions } from 'src/app/shared/models/data-processing/year-month-interval.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
-import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import {
   selectDataProcessingGridColumns,
@@ -35,6 +34,7 @@ import { selectGridConfigModificationPermission } from 'src/app/store/user-store
 import * as GridFields from 'src/app/shared/constants/data-processing-grid-column-constants';
 import { UIConfigService } from 'src/app/shared/services/ui-config-services/ui-config.service';
 import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
+import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 
 @Component({
   selector: 'app-data-processing-overview',
@@ -281,7 +281,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       width: 300,
       hidden: true,
       persistId: 'lastchangedname',
-    },
+    }
   ];
 
   constructor(
@@ -289,8 +289,8 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
     private router: Router,
     private route: ActivatedRoute,
     private actions$: Actions,
-    private statePersistingService: StatePersistingService,
-    private uiConfigService: UIConfigService
+    private uiConfigService: UIConfigService,
+    private gridColumnStorageService: GridColumnStorageService
   ) {
     super(store, 'data-processing-registration');
   }
@@ -299,9 +299,9 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
     this.store.dispatch(DataProcessingActions.getDataProcessingCollectionPermissions());
     this.store.dispatch(DataProcessingActions.getDataProcessingOverviewRoles());
 
-    const localCacheColumns = this.statePersistingService.get<GridColumn[]>(DATA_PROCESSING_COLUMNS_ID);
-    if (localCacheColumns) {
-      this.store.dispatch(DataProcessingActions.updateGridColumns(localCacheColumns));
+    const existingColumns = this.gridColumnStorageService.getColumns(DATA_PROCESSING_COLUMNS_ID, this.defaultGridColumns);
+    if (existingColumns) {
+      this.store.dispatch(DataProcessingActions.updateGridColumns(existingColumns));
     } else {
       this.subscriptions.add(
         this.actions$

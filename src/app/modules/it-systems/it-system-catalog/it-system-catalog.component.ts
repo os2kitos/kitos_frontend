@@ -16,7 +16,7 @@ import { accessModifierOptions } from 'src/app/shared/models/access-modifier.mod
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { archiveDutyRecommendationChoiceOptions } from 'src/app/shared/models/it-system/archive-duty-recommendation-choice.model';
-import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
+import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
 import {
   selectITSystemHasCreateCollectionPermission,
@@ -181,7 +181,7 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
     private router: Router,
     private route: ActivatedRoute,
     private actions$: Actions,
-    private statePersistingService: StatePersistingService
+    private gridColumnStorageService: GridColumnStorageService
   ) {
     super(store, 'it-system');
   }
@@ -189,7 +189,7 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
   ngOnInit(): void {
     this.store.dispatch(ITSystemActions.getITSystemCollectionPermissions());
 
-    const existingColumns = this.statePersistingService.get<GridColumn[]>(CATALOG_COLUMNS_ID);
+    const existingColumns = this.gridColumnStorageService.getColumns(CATALOG_COLUMNS_ID, this.defaultGridColumns);
     if (existingColumns) {
       this.store.dispatch(ITSystemActions.updateGridColumns(existingColumns));
     } else {

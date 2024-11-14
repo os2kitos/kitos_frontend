@@ -10,7 +10,6 @@ import { INTERFACE_COLUMNS_ID, INTERFACE_SECTION_NAME } from 'src/app/shared/con
 import { accessModifierOptions } from 'src/app/shared/models/access-modifier.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
-import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import {
   selectInterfaceGridColumns,
@@ -20,6 +19,7 @@ import {
   selectInterfaceHasCreateCollectionPermission,
 } from 'src/app/store/it-system-interfaces/selectors';
 import { CreateInterfaceDialogComponent } from './create-interface-dialog/create-interface-dialog.component';
+import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 
 @Component({
   selector: 'app-it-system-interfaces',
@@ -152,14 +152,14 @@ export class ItSystemInterfacesComponent extends BaseOverviewComponent implement
     private route: ActivatedRoute,
     private dialog: MatDialog,
     private actions$: Actions,
-    private statePersistingService: StatePersistingService
+    private gridColumnStorageService: GridColumnStorageService
   ) {
     super(store, 'it-interface');
   }
 
   ngOnInit(): void {
     this.store.dispatch(ITInterfaceActions.getITInterfaceCollectionPermissions());
-    const existingColumns = this.statePersistingService.get<GridColumn[]>(INTERFACE_COLUMNS_ID);
+    const existingColumns = this.gridColumnStorageService.getColumns(INTERFACE_COLUMNS_ID, this.defaultGridColumns);
     if (existingColumns) {
       this.store.dispatch(ITInterfaceActions.updateGridColumns(existingColumns));
     } else {

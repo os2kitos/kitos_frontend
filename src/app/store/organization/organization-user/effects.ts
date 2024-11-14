@@ -11,9 +11,9 @@ import { ORGANIZATION_USER_COLUMNS_ID } from 'src/app/shared/constants/persisten
 import { OData } from 'src/app/shared/models/odata.model';
 import { adaptOrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
-import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
 import { selectOrganizationUuid } from '../../user-store/selectors';
 import { OrganizationUserActions } from './actions';
+import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 
 @Injectable()
 export class OrganizationUserEffects {
@@ -22,7 +22,7 @@ export class OrganizationUserEffects {
     private store: Store,
     private httpClient: HttpClient,
     @Inject(APIV2UsersInternalINTERNALService) private apiService: APIV2UsersInternalINTERNALService,
-    private statePersistingService: StatePersistingService
+    private gridColumnStorageService: GridColumnStorageService
   ) {}
 
   getOrganizationUsers$ = createEffect(() => {
@@ -65,7 +65,7 @@ export class OrganizationUserEffects {
     return this.actions$.pipe(
       ofType(OrganizationUserActions.updateGridColumns),
       map(({ gridColumns }) => {
-        this.statePersistingService.set(ORGANIZATION_USER_COLUMNS_ID, gridColumns);
+        this.gridColumnStorageService.setColumns(ORGANIZATION_USER_COLUMNS_ID, gridColumns);
         return OrganizationUserActions.updateGridColumnsSuccess(gridColumns);
       })
     );

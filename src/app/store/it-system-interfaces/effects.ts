@@ -11,10 +11,10 @@ import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { adaptITInterface } from 'src/app/shared/models/it-interface/it-interface.model';
 import { OData } from 'src/app/shared/models/odata.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
-import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { ITInterfaceActions } from './actions';
 import { selectInterfaceUuid } from './selectors';
+import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 
 @Injectable()
 export class ITInterfaceEffects {
@@ -23,7 +23,7 @@ export class ITInterfaceEffects {
     private store: Store,
     private httpClient: HttpClient,
     private apiService: APIV2ItInterfaceService,
-    private statePersistingService: StatePersistingService
+    private gridColumnStorageService: GridColumnStorageService
   ) {}
 
   getItInterfaces$ = createEffect(() => {
@@ -59,7 +59,7 @@ export class ITInterfaceEffects {
     return this.actions$.pipe(
       ofType(ITInterfaceActions.updateGridColumns),
       map(({ gridColumns }) => {
-        this.statePersistingService.set(INTERFACE_COLUMNS_ID, gridColumns);
+        this.gridColumnStorageService.setColumns(INTERFACE_COLUMNS_ID, gridColumns);
         return ITInterfaceActions.updateGridColumnsSuccess(gridColumns);
       })
     );
