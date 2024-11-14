@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { ComponentStore } from '@ngrx/component-store';import { tapResponse } from '@ngrx/operators';
+import { ComponentStore } from '@ngrx/component-store';
+import { tapResponse } from '@ngrx/operators';
 
 import { mergeMap, Observable } from 'rxjs';
-import { APIV1ODATAHelpTextsINTERNALService } from 'src/app/api/v1';
-import { defaultHelpText, HelpText } from '../../models/help-text.model';
-import { OData } from '../../models/odata.model';
+import { APIV2HelpTextsInternalINTERNALService } from 'src/app/api/v2/api/v2HelpTextsInternalINTERNAL.service';
+import { adaptHelpText, defaultHelpText, HelpText } from '../../models/help-text.model';
 
 interface State {
   helpText?: HelpText;
@@ -14,7 +14,7 @@ interface State {
 export class HelpDialogComponentStore extends ComponentStore<State> {
   public readonly helpText$ = this.select((state) => state.helpText);
 
-  constructor(private apiOdataHelpTextsService: APIV1ODATAHelpTextsINTERNALService) {
+  constructor(private helpTextsService: APIV2HelpTextsInternalINTERNALService) {
     super({});
   }
 
@@ -27,18 +27,29 @@ export class HelpDialogComponentStore extends ComponentStore<State> {
 
   public getHelpText = this.effect((helpTextKey$: Observable<string>) =>
     helpTextKey$.pipe(
-      mergeMap((helpTextKey) =>
-        this.apiOdataHelpTextsService
-          .getSingleHelpTextsGetV1({
-            $filter: `Key eq '${helpTextKey}'`,
+      mergeMap((key) =>
+        this.helpTextsService
+          .getSingleHelpTextsInternalV2GetSingle({
+            key,
           })
           .pipe(
             tapResponse(
-              (response) => this.updateHelpText((response as OData).value.pop() || defaultHelpText),
-              (e) => console.error(e)
+              (response) => {
+                try {
+                  this.updateHelpText(adaptHelpText(response));
+                } catch (e) {
+                  this.handleError(e);
+                }
+              },
+              (e) => this.handleError(e)
             )
           )
       )
     )
   );
+
+  private handleError(e: unknown){
+    console.error(e);
+    this.updateHelpText(defaultHelpText);
+  }
 }

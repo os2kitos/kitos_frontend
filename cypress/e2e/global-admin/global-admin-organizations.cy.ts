@@ -19,7 +19,7 @@ describe('global-admin-organizations', () => {
       req.reply({ statusCode: 200, body: {} });
     }).as('createOrganization');
 
-    cy.getByDataCy('create-organization-button').should('be.visible').click({scrollBehavior: 'center'});
+    cy.getByDataCy('create-organization-button').should('be.visible').click({ scrollBehavior: 'center' });
     cy.getByDataCy('org-name').type('Test Organization');
     cy.dropdownByCy('org-type', 'Virksomhed', true);
     cy.getByDataCy('org-cvr').type('12345678');
@@ -48,6 +48,59 @@ describe('global-admin-organizations', () => {
     cy.getByDataCy('edit-org-dialog-button').click();
 
     cy.wait('@editOrganization');
+    cy.get('app-popup-message').should('exist');
+  });
+
+  it('Can delete organization with no conflicts', () => {
+    cy.intercept('GET', 'api/v2/internal/organizations/*/conflicts', {
+      statusCode: 200,
+      fixture: './global-admin/no-conflicts.json',
+    });
+
+    cy.getByDataCy('grid-delete-button').first().click();
+
+    cy.intercept('DELETE', 'api/v2/internal/organizations/*/delete*', { statusCode: 204, body: {} }).as(
+      'deleteOrganization'
+    );
+
+    cy.getByDataCy('delete-org-dialog-button').click();
+    cy.getByDataCy('confirm-button').click();
+
+    cy.wait('@deleteOrganization');
+
+    cy.get('app-popup-message').should('exist');
+  });
+
+  it('Can not delete organization with conflicts, if checkbox is not checked', () => {
+    cy.intercept('GET', 'api/v2/internal/organizations/*/conflicts', {
+      statusCode: 200,
+      fixture: './global-admin/with-conflicts.json',
+    });
+
+    cy.getByDataCy('grid-delete-button').first().click();
+
+    cy.getByDataCy('delete-org-dialog-button').click();
+    cy.getByDataCy('confirm-button').should('not.exist');
+  });
+
+  it('Can delete organization with conflicts, if checkbox is checked', () => {
+    cy.intercept('GET', 'api/v2/internal/organizations/*/conflicts', {
+      statusCode: 200,
+      fixture: './global-admin/with-conflicts.json',
+    }).as;
+
+    cy.getByDataCy('grid-delete-button').first().click();
+
+    cy.intercept('DELETE', 'api/v2/internal/organizations/*/delete*', { statusCode: 204, body: {} }).as(
+      'deleteOrganization'
+    );
+
+    cy.getByDataCy('consequence-checkbox').click();
+    cy.getByDataCy('delete-org-dialog-button').click();
+    cy.getByDataCy('confirm-button').click();
+
+    cy.wait('@deleteOrganization');
+
     cy.get('app-popup-message').should('exist');
   });
 });

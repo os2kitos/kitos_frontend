@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
 import { ExcelExportData } from '@progress/kendo-angular-excel-export';
 import { ExcelExportEvent, GridComponent as KendoGridComponent, PageChangeEvent } from '@progress/kendo-angular-grid';
@@ -20,8 +20,12 @@ export class LocalGridComponent<T> extends BaseComponent implements OnInit {
   @Input() columns!: GridColumn[];
   @Input() loading: boolean | null = false;
   @Input() exportToExcelName?: string | null;
-
+  @Input() modifyPermission?: boolean | null;
+  @Input() deletePermission?: boolean | null;
   @Input() withOutline: boolean = false;
+
+  @Output() deleteEvent = new EventEmitter<T>();
+  @Output() modifyEvent = new EventEmitter<T>();
 
   public state = defaultGridState;
 
@@ -35,6 +39,14 @@ export class LocalGridComponent<T> extends BaseComponent implements OnInit {
   }
   ngOnInit(): void {
     this.actions$.pipe(ofType(GridExportActions.exportLocalData)).subscribe(() => this.excelExport());
+  }
+
+  public onModifyClick(item: T) {
+    this.modifyEvent.emit(item);
+  }
+
+  public onDeleteClick(item: T) {
+    this.deleteEvent.emit(item);
   }
 
   public onStateChange(state: GridState) {

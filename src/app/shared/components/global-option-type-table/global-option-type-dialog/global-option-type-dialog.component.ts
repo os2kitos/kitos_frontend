@@ -8,7 +8,7 @@ import {
   GlobalAdminOptionTypeItem,
 } from 'src/app/shared/models/options/global-admin-option-type.model';
 import { isRoleOptionType } from 'src/app/shared/models/options/role-option-types.model';
-import { GlobalOptionTypeActions } from 'src/app/store/global-admin/actions';
+import { GlobalOptionTypeActions } from 'src/app/store/global-admin/global-option-types/actions';
 
 @Component({
   selector: 'app-global-option-type-dialog',
@@ -97,9 +97,7 @@ export class GlobalOptionTypeDialogComponent implements OnInit {
   }
 
   private hasWriteAccessChanged() {
-    return this.isRoleOption()
-      ? this.form.value.writeAccess !== this.optionTypeItem.writeAccess
-      : false;
+    return this.isRoleOption() ? this.form.value.writeAccess !== this.optionTypeItem.writeAccess : false;
   }
 
   private hasDescriptionChanged(): boolean {

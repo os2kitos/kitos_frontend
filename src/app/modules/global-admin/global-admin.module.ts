@@ -10,6 +10,9 @@ import { GlobalAdminItSystemComponent } from './global-admin-it-system/global-ad
 import { GlobalAdminLocalAdminsComponent } from './global-admin-local-admins/global-admin-local-admins.component';
 import { GlobalAdminOrganizationComponent } from './global-admin-organization/global-admin-organization.component';
 import { CreateOrganizationDialogComponent } from './global-admin-organizations/create-organization-dialog/create-organization-dialog.component';
+import { DeleteOrganizationDialogComponent } from './global-admin-organizations/delete-organization-dialog/delete-organization-dialog.component';
+import { InnerConflictTableComponent } from './global-admin-organizations/delete-organization-dialog/removal-conflict-table/inner-conflict-table/inner-conflict-table.component';
+import { RemovalConflictTableComponent } from './global-admin-organizations/delete-organization-dialog/removal-conflict-table/removal-conflict-table.component';
 import { EditOrganizationDialogComponent } from './global-admin-organizations/edit-organization-dialog/edit-organization-dialog.component';
 import { GlobalAdminOrganizationsGridComponent } from './global-admin-organizations/global-admin-organizations-grid/global-admin-organizations-grid.component';
 import { GlobalAdminOrganizationsComponent } from './global-admin-organizations/global-admin-organizations.component';
@@ -35,6 +38,9 @@ import { GlobalAdminRouterModule } from './global-admin.routes';
     GlobalAdminOrganizationsGridComponent,
     CreateOrganizationDialogComponent,
     EditOrganizationDialogComponent,
+    DeleteOrganizationDialogComponent,
+    RemovalConflictTableComponent,
+    InnerConflictTableComponent,
     GlobalAdminOtherKleComponent,
     GlobalAdminOtherUserShutdownComponent,
     GlobalAdminOtherBrokenLinksComponent,

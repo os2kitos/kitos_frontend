@@ -5731,6 +5731,110 @@
         <source>Organisationen kunne ikke opdateres</source>
         <target state="new">Organisationen kunne ikke opdateres</target>
       </trans-unit>
+      <trans-unit id="8445117964597330148" datatype="html">
+        <source>Jeg forstår og accepterer ovenstående konsekvenser</source>
+        <target state="new">Jeg forstår og accepterer ovenstående konsekvenser</target>
+      </trans-unit>
+      <trans-unit id="6240133530435057991" datatype="html">
+        <source> Organisationen kan slettes uden tværgående konsekvenser. </source>
+        <target state="new"> Organisationen kan slettes uden tværgående konsekvenser. </target>
+      </trans-unit>
+      <trans-unit id="2586834185822046353" datatype="html">
+        <source> Opsummering af konsekvenser ifm. sletning af organisationer i Kitos </source>
+        <target state="new"> Opsummering af konsekvenser ifm. sletning af organisationer i Kitos </target>
+      </trans-unit>
+      <trans-unit id="8003706289136962438" datatype="html">
+        <source> For at sikre datakvaliteten i Kitos har Global admin mulighed for at slette en organisation (leverandør/databehandler/underdatabehandler) på trods af, at der måtte være kontrakter eller databehandler registreringer knyttet op på denne. </source>
+        <target state="new"> For at sikre datakvaliteten i Kitos har Global admin mulighed for at slette en organisation (leverandør/databehandler/underdatabehandler) på trods af, at der måtte være kontrakter eller databehandler registreringer knyttet op på denne. </target>
+      </trans-unit>
+      <trans-unit id="1954712393506662000" datatype="html">
+        <source>Oprettet i (organisation)</source>
+        <target state="new">Oprettet i (organisation)</target>
+      </trans-unit>
+      <trans-unit id="7430680931123683253" datatype="html">
+        <source>Overordnet system for (IT-System)</source>
+        <target state="new">Overordnet system for (IT-System)</target>
+      </trans-unit>
+      <trans-unit id="2357939140042593831" datatype="html">
+        <source>IT-System (i kataloget)</source>
+        <target state="new">IT-System (i kataloget)</target>
+      </trans-unit>
+      <trans-unit id="3195171954163370415" datatype="html">
+        <source>Kontrakter hvor organisationen &quot;<x id="PH" equiv-text="this.organizationName"/>&quot; er sat som &quot;Leverandør&quot;, og hvor feltet dermed nulstilles</source>
+        <target state="new">Kontrakter hvor organisationen &quot;<x id="PH" equiv-text="this.organizationName"/>&quot; er sat som &quot;Leverandør&quot;, og hvor feltet dermed nulstilles</target>
+      </trans-unit>
+      <trans-unit id="866308271318113691" datatype="html">
+        <source>IT-Systemer hvor organisationen &quot;<x id="PH" equiv-text="this.organizationName"/>&quot; er sat som &quot;Arkiveringsleverandør&quot;, og hvor feltet dermed nulstilles</source>
+        <target state="new">IT-Systemer hvor organisationen &quot;<x id="PH" equiv-text="this.organizationName"/>&quot; er sat som &quot;Arkiveringsleverandør&quot;, og hvor feltet dermed nulstilles</target>
+      </trans-unit>
+      <trans-unit id="4553464318568465760" datatype="html">
+        <source>IT-Systemer som flyttes til &quot;<x id="PH" equiv-text="this.defaultOrganizationName"/>&quot;, da de er sat som &quot;Overordnet IT-System&quot; på systemer oprettet i andre organisationer</source>
+        <target state="new">IT-Systemer som flyttes til &quot;<x id="PH" equiv-text="this.defaultOrganizationName"/>&quot;, da de er sat som &quot;Overordnet IT-System&quot; på systemer oprettet i andre organisationer</target>
+      </trans-unit>
+      <trans-unit id="6997221441584171221" datatype="html">
+        <source> Øvrige konsekvenser som information til Global Admin: </source>
+        <target state="new"> Øvrige konsekvenser som information til Global Admin: </target>
+      </trans-unit>
+      <trans-unit id="5430862413664095087" datatype="html">
+        <source>Udstillet på i (IT-System)</source>
+        <target state="new">Udstillet på i (IT-System)</target>
+      </trans-unit>
+      <trans-unit id="2134282235965326870" datatype="html">
+        <source>Udstillet snitflade</source>
+        <target state="new">Udstillet snitflade</target>
+      </trans-unit>
+      <trans-unit id="1224534879071004589" datatype="html">
+        <source>IT-System (i anvendelse)</source>
+        <target state="new">IT-System (i anvendelse)</target>
+      </trans-unit>
+      <trans-unit id="5869578793568351760" datatype="html">
+        <source>Anvendt i (organisation)</source>
+        <target state="new">Anvendt i (organisation)</target>
+      </trans-unit>
+      <trans-unit id="9218801740475510905" datatype="html">
+        <source>Registreringer i modulet &quot;Databehandling&quot;, hvor organisationen &quot;<x id="PH" equiv-text="this.organizationName"/>&quot; fjernes som databehandler</source>
+        <target state="new">Registreringer i modulet &quot;Databehandling&quot;, hvor organisationen &quot;<x id="PH" equiv-text="this.organizationName"/>&quot; fjernes som databehandler</target>
+      </trans-unit>
+      <trans-unit id="30584444309169152" datatype="html">
+        <source>Registreringer i modulet &quot;Databehandling&quot;, hvor organisationen &quot;<x id="PH" equiv-text="this.organizationName"/>&quot; fjernes som underdatabehandler</source>
+        <target state="new">Registreringer i modulet &quot;Databehandling&quot;, hvor organisationen &quot;<x id="PH" equiv-text="this.organizationName"/>&quot; fjernes som underdatabehandler</target>
+      </trans-unit>
+      <trans-unit id="3148154602984403047" datatype="html">
+        <source>Snitflader som flyttes til &quot;<x id="PH" equiv-text="this.defaultOrganizationName"/>&quot;, da de er udstillet på IT-Systemer oprettet i andre organisationer</source>
+        <target state="new">Snitflader som flyttes til &quot;<x id="PH" equiv-text="this.defaultOrganizationName"/>&quot;, da de er udstillet på IT-Systemer oprettet i andre organisationer</target>
+      </trans-unit>
+      <trans-unit id="3608143546388019832" datatype="html">
+        <source>IT-Systemer som flyttes til &quot;<x id="PH" equiv-text="this.defaultOrganizationName"/>&quot;, da de udstiller Snitflader oprettet i andre organisationer</source>
+        <target state="new">IT-Systemer som flyttes til &quot;<x id="PH" equiv-text="this.defaultOrganizationName"/>&quot;, da de udstiller Snitflader oprettet i andre organisationer</target>
+      </trans-unit>
+      <trans-unit id="8042864210468886273" datatype="html">
+        <source>IT-Systemer i kataloget, hvor &quot;<x id="PH" equiv-text="this.organizationName"/>&quot; er sat som &quot;Rettighedshaver&quot;, og hvor feltet dermed nulstilles</source>
+        <target state="new">IT-Systemer i kataloget, hvor &quot;<x id="PH" equiv-text="this.organizationName"/>&quot; er sat som &quot;Rettighedshaver&quot;, og hvor feltet dermed nulstilles</target>
+      </trans-unit>
+      <trans-unit id="3594606235641428019" datatype="html">
+        <source>IT-Systemer som flyttes til &quot;<x id="PH" equiv-text="this.defaultOrganizationName"/>&quot;, da de stadig er er i anvendelse i andre organisationer</source>
+        <target state="new">IT-Systemer som flyttes til &quot;<x id="PH" equiv-text="this.defaultOrganizationName"/>&quot;, da de stadig er er i anvendelse i andre organisationer</target>
+      </trans-unit>
+      <trans-unit id="6680617402965012335" datatype="html">
+        <source>Er du sikker på at du vil slette &quot;<x id="PH" equiv-text="this.organization.Name"/>&quot;?</source>
+        <target state="new">Er du sikker på at du vil slette &quot;<x id="PH" equiv-text="this.organization.Name"/>&quot;?</target>
+      </trans-unit>
+      <trans-unit id="1330694831677403620" datatype="html">
+        <source>Organisationen blev slettet</source>
+        <target state="new">Organisationen blev slettet</target>
+      </trans-unit>
+      <trans-unit id="2520535144385263260" datatype="html">
+        <source>Organisationen kunne ikke slettes</source>
+        <target state="new">Organisationen kunne ikke slettes</target>
+      </trans-unit>
+      <trans-unit id="3842095164142576189" datatype="html">
+        <source> Global admin har nu slettet organisationen &quot;Fælles Kommune&quot;, hvorfor feltet på nedenstående kontrakter og/eller databehandlerregistreringer dermed nulstilles (blankes ud): </source>
+        <target state="new"> Global admin har nu slettet organisationen &quot;Fælles Kommune&quot;, hvorfor feltet på nedenstående kontrakter og/eller databehandlerregistreringer dermed nulstilles (blankes ud): </target>
+      </trans-unit>
+      <trans-unit id="2908740750884322981" datatype="html">
+        <source>Konsekvenserne er kopieret til udklipsholderen</source>
+        <target state="new">Konsekvenserne er kopieret til udklipsholderen</target>
+      </trans-unit>
       <trans-unit id="5340208750899970512" datatype="html">
         <source>IT System roller</source>
         <target state="new">IT System roller</target>
@@ -5827,25 +5931,25 @@
         <source>KLE kunne ikke opdateres</source>
         <target state="new">KLE kunne ikke opdateres</target>
       </trans-unit>
+      <trans-unit id="734879993390629495" datatype="html">
+        <source>Slet &quot;<x id="PH" equiv-text="this.organization.Name"/>&quot;</source>
+        <target state="new">Slet &quot;<x id="PH" equiv-text="this.organization.Name"/>&quot;</target>
+      </trans-unit>
       <trans-unit id="838512276710673497" datatype="html">
         <source>Hent ændringer i KLE</source>
         <target state="new">Hent ændringer i KLE</target>
       </trans-unit>
-      <trans-unit id="3832754660132486318" datatype="html">
-        <source>Nedlæg bruger</source>
-        <target state="new">Nedlæg bruger</target>
+      <trans-unit id="8669528431522521621" datatype="html">
+        <source> Kopier til klipholder</source>
+        <target state="new"> Kopier til klipholder</target>
       </trans-unit>
-      <trans-unit id="2209587204514076464" datatype="html">
-        <source>Brugeren er stadig medlem af følgende organisationer</source>
-        <target state="new">Brugeren er stadig medlem af følgende organisationer</target>
+      <trans-unit id="3879129476245182465" datatype="html">
+        <source> Hjælpetekster </source>
+        <target state="new"> Hjælpetekster </target>
       </trans-unit>
-      <trans-unit id="2689106911404743344" datatype="html">
-        <source>Noter</source>
-        <target state="new">Noter</target>
-      </trans-unit>
-      <trans-unit id="6141368513787138223" datatype="html">
-        <source>Er du sikker på at du vil fjerne denne bruger?</source>
-        <target state="new">Er du sikker på at du vil fjerne denne bruger?</target>
+      <trans-unit id="2311412587966355874" datatype="html">
+        <source>Nøgle</source>
+        <target state="new">Nøgle</target>
       </trans-unit>
     </body>
   </file>

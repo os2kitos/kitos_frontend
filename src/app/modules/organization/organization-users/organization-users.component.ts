@@ -15,7 +15,6 @@ import { GridState } from 'src/app/shared/models/grid-state.model';
 import { ODataOrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.service';
-import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
 import {
   selectOrganizationUserByIndex,
@@ -30,6 +29,7 @@ import {
 } from 'src/app/store/organization/organization-user/selectors';
 import { CreateUserDialogComponent } from './create-user-dialog/create-user-dialog.component';
 import { UserInfoDialogComponent } from './user-info-dialog/user-info-dialog.component';
+import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 
 @Component({
   selector: 'app-organization-users',
@@ -170,7 +170,7 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
 
   constructor(
     store: Store,
-    private statePersistingService: StatePersistingService,
+    private gridColumnStorageService: GridColumnStorageService,
     private actions$: Actions,
     private dialog: MatDialog,
     private dialogOpenerService: DialogOpenerService
@@ -180,7 +180,7 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
 
   ngOnInit(): void {
     this.store.dispatch(OrganizationUserActions.getOrganizationUserPermissions());
-    const existingColumns = this.statePersistingService.get<GridColumn[]>(ORGANIZATION_USER_COLUMNS_ID);
+    const existingColumns = this.gridColumnStorageService.getColumns(ORGANIZATION_USER_COLUMNS_ID, this.defaultGridColumns);
     if (existingColumns) {
       this.store.dispatch(OrganizationUserActions.updateGridColumns(existingColumns));
     } else {

@@ -3,7 +3,7 @@ import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
-import { GlobalOptionTypeActions } from 'src/app/store/global-admin/actions';
+import { GlobalOptionTypeActions } from 'src/app/store/global-admin/global-option-types/actions';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
@@ -72,6 +72,10 @@ export class NotificationService implements OnDestroy {
 
     this.subscribeAsDefault(OrganizationActions.patchOrganizationSuccess, $localize`Organisationen blev opdateret`);
     this.subscribeAsError(OrganizationActions.patchOrganizationError, $localize`Organisationen kunne ikke opdateres`);
+
+
+    this.subscribeAsDefault(OrganizationActions.deleteOrganizationSuccess, $localize`Organisationen blev slettet`);
+    this.subscribeAsError(OrganizationActions.deleteOrganizationError, $localize`Organisationen kunne ikke slettes`);
 
     this.subscribeAsError(KLEActions.getAdminKLEFileError, $localize`Kunne ikke hente KLE ændringer`);
 
