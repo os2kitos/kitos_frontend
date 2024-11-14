@@ -11,13 +11,17 @@ import { GlobalAdminLocalAdminsComponent } from './global-admin-local-admins/glo
 import { GlobalAdminOrganizationComponent } from './global-admin-organization/global-admin-organization.component';
 import { CreateOrganizationDialogComponent } from './global-admin-organizations/create-organization-dialog/create-organization-dialog.component';
 import { EditOrganizationDialogComponent } from './global-admin-organizations/edit-organization-dialog/edit-organization-dialog.component';
-import { GlobalAdminOrganizationsGridComponent } from './global-admin-organizations/global-admin-organizations-grid/global-admin-organizations-grid.component';
-import { GlobalAdminOrganizationsComponent } from './global-admin-organizations/global-admin-organizations.component';
+import { DeleteOrganizationDialogComponent } from './global-admin-organizations/delete-organization-dialog/delete-organization-dialog.component';
+import { RemovalConflictTableComponent } from './global-admin-organizations/delete-organization-dialog/removal-conflict-table/removal-conflict-table.component';
+import { InnerConflictTableComponent } from './global-admin-organizations/delete-organization-dialog/removal-conflict-table/inner-conflict-table/inner-conflict-table.component';
 import { GlobalAdminOtherKleComponent } from './global-admin-other/global-admin-other-kle/global-admin-other-kle.component';
-import { GlobalAdminOtherComponent } from './global-admin-other/global-admin-other.component';
 import { GlobalAdminComponent } from './global-admin.component';
+import { GlobalAdminOrganizationsComponent } from './global-admin-organizations/global-admin-organizations.component';
+import { GlobalAdminOtherComponent } from './global-admin-other/global-admin-other.component';
+import { GlobalAdminOrganizationsGridComponent } from './global-admin-organizations/global-admin-organizations-grid/global-admin-organizations-grid.component';
 import { GlobalAdminRouterModule } from './global-admin.routes';
 import { GlobalAdminOtherUserShutdownComponent } from './global-admin-other/global-admin-other-user-shutdown/global-admin-other-user-shutdown.component';
+
 
 @NgModule({
   declarations: [
@@ -34,6 +38,9 @@ import { GlobalAdminOtherUserShutdownComponent } from './global-admin-other/glob
     GlobalAdminOrganizationsGridComponent,
     CreateOrganizationDialogComponent,
     EditOrganizationDialogComponent,
+    DeleteOrganizationDialogComponent,
+    RemovalConflictTableComponent,
+    InnerConflictTableComponent,
     GlobalAdminOtherKleComponent,
     GlobalAdminOtherUserShutdownComponent,
   ],

@@ -1,0 +1,67 @@
+{
+  "systemsWithUsagesOutsideTheOrganization": [
+    {
+      "systemName": "fælles kommune system",
+      "organizationNames": ["Test organisation to"]
+    }
+  ],
+  "interfacesExposedOnSystemsOutsideTheOrganization": [
+    {
+      "exposedInterfaceName": "snitflade",
+      "exposingSystemName": "testsystem",
+      "organizationName": "Test organisation to"
+    }
+  ],
+  "systemsExposingInterfacesDefinedInOtherOrganizations": [
+    {
+      "mainEntityName": "DefaultTestItSystem",
+      "conflicts": [
+        {
+          "entityName": "org2 snitflade",
+          "organizationName": "Test organisation to"
+        }
+      ]
+    }
+  ],
+  "systemsSetAsParentSystemToSystemsInOtherOrganizations": [
+    {
+      "mainEntityName": "DefaultTestItSystem",
+      "conflicts": [
+        {
+          "entityName": "SecondOrganizationDefaultTestItSystem",
+          "organizationName": "Test organisation to"
+        }
+      ]
+    }
+  ],
+  "dprInOtherOrganizationsWhereOrgIsDataProcessor": [
+    {
+      "entityName": "asd",
+      "organizationName": "Test organisation to"
+    }
+  ],
+  "dprInOtherOrganizationsWhereOrgIsSubDataProcessor": [
+    {
+      "entityName": "asd",
+      "organizationName": "Test organisation to"
+    }
+  ],
+  "contractsInOtherOrganizationsWhereOrgIsSupplier": [
+    {
+      "entityName": "ad",
+      "organizationName": "Test organisation to"
+    }
+  ],
+  "systemsInOtherOrganizationsWhereOrgIsRightsHolder": [
+    {
+      "entityName": "testsystem",
+      "organizationName": "Test organisation to"
+    }
+  ],
+  "systemsWhereOrgIsArchiveSupplier": [
+    {
+      "entityName": "testsystem",
+      "organizationName": "Test organisation to"
+    }
+  ]
+}

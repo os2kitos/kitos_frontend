@@ -4354,6 +4354,84 @@
       <trans-unit id="5749107076110806005" datatype="html">
         <source>Organisationen kunne ikke oprettes</source>
       </trans-unit>
+      <trans-unit id="6240133530435057991" datatype="html">
+        <source> Organisationen kan slettes uden tværgående konsekvenser. </source>
+      </trans-unit>
+      <trans-unit id="8445117964597330148" datatype="html">
+        <source>Jeg forstår og accepterer ovenstående konsekvenser</source>
+      </trans-unit>
+      <trans-unit id="1954712393506662000" datatype="html">
+        <source>Oprettet i (organisation)</source>
+      </trans-unit>
+      <trans-unit id="2357939140042593831" datatype="html">
+        <source>IT-System (i kataloget)</source>
+      </trans-unit>
+      <trans-unit id="2586834185822046353" datatype="html">
+        <source> Opsummering af konsekvenser ifm. sletning af organisationer i Kitos </source>
+      </trans-unit>
+      <trans-unit id="3195171954163370415" datatype="html">
+        <source>Kontrakter hvor organisationen &quot;<x id="PH" equiv-text="this.organizationName"/>&quot; er sat som &quot;Leverandør&quot;, og hvor feltet dermed nulstilles</source>
+      </trans-unit>
+      <trans-unit id="4553464318568465760" datatype="html">
+        <source>IT-Systemer som flyttes til &quot;<x id="PH" equiv-text="this.defaultOrganizationName"/>&quot;, da de er sat som &quot;Overordnet IT-System&quot; på systemer oprettet i andre organisationer</source>
+      </trans-unit>
+      <trans-unit id="866308271318113691" datatype="html">
+        <source>IT-Systemer hvor organisationen &quot;<x id="PH" equiv-text="this.organizationName"/>&quot; er sat som &quot;Arkiveringsleverandør&quot;, og hvor feltet dermed nulstilles</source>
+      </trans-unit>
+      <trans-unit id="7430680931123683253" datatype="html">
+        <source>Overordnet system for (IT-System)</source>
+      </trans-unit>
+      <trans-unit id="8003706289136962438" datatype="html">
+        <source> For at sikre datakvaliteten i Kitos har Global admin mulighed for at slette en organisation (leverandør/databehandler/underdatabehandler) på trods af, at der måtte være kontrakter eller databehandler registreringer knyttet op på denne. </source>
+      </trans-unit>
+      <trans-unit id="1224534879071004589" datatype="html">
+        <source>IT-System (i anvendelse)</source>
+      </trans-unit>
+      <trans-unit id="2134282235965326870" datatype="html">
+        <source>Udstillet snitflade</source>
+      </trans-unit>
+      <trans-unit id="30584444309169152" datatype="html">
+        <source>Registreringer i modulet &quot;Databehandling&quot;, hvor organisationen &quot;<x id="PH" equiv-text="this.organizationName"/>&quot; fjernes som underdatabehandler</source>
+      </trans-unit>
+      <trans-unit id="3148154602984403047" datatype="html">
+        <source>Snitflader som flyttes til &quot;<x id="PH" equiv-text="this.defaultOrganizationName"/>&quot;, da de er udstillet på IT-Systemer oprettet i andre organisationer</source>
+      </trans-unit>
+      <trans-unit id="3594606235641428019" datatype="html">
+        <source>IT-Systemer som flyttes til &quot;<x id="PH" equiv-text="this.defaultOrganizationName"/>&quot;, da de stadig er er i anvendelse i andre organisationer</source>
+      </trans-unit>
+      <trans-unit id="3608143546388019832" datatype="html">
+        <source>IT-Systemer som flyttes til &quot;<x id="PH" equiv-text="this.defaultOrganizationName"/>&quot;, da de udstiller Snitflader oprettet i andre organisationer</source>
+      </trans-unit>
+      <trans-unit id="5430862413664095087" datatype="html">
+        <source>Udstillet på i (IT-System)</source>
+      </trans-unit>
+      <trans-unit id="5869578793568351760" datatype="html">
+        <source>Anvendt i (organisation)</source>
+      </trans-unit>
+      <trans-unit id="6997221441584171221" datatype="html">
+        <source> Øvrige konsekvenser som information til Global Admin: </source>
+      </trans-unit>
+      <trans-unit id="8042864210468886273" datatype="html">
+        <source>IT-Systemer i kataloget, hvor &quot;<x id="PH" equiv-text="this.organizationName"/>&quot; er sat som &quot;Rettighedshaver&quot;, og hvor feltet dermed nulstilles</source>
+      </trans-unit>
+      <trans-unit id="9218801740475510905" datatype="html">
+        <source>Registreringer i modulet &quot;Databehandling&quot;, hvor organisationen &quot;<x id="PH" equiv-text="this.organizationName"/>&quot; fjernes som databehandler</source>
+      </trans-unit>
+      <trans-unit id="1330694831677403620" datatype="html">
+        <source>Organisationen blev slettet</source>
+      </trans-unit>
+      <trans-unit id="2520535144385263260" datatype="html">
+        <source>Organisationen kunne ikke slettes</source>
+      </trans-unit>
+      <trans-unit id="6680617402965012335" datatype="html">
+        <source>Er du sikker på at du vil slette &quot;<x id="PH" equiv-text="this.organization.Name"/>&quot;?</source>
+      </trans-unit>
+      <trans-unit id="2908740750884322981" datatype="html">
+        <source>Konsekvenserne er kopieret til udklipsholderen</source>
+      </trans-unit>
+      <trans-unit id="3842095164142576189" datatype="html">
+        <source> Global admin har nu slettet organisationen &quot;Fælles Kommune&quot;, hvorfor feltet på nedenstående kontrakter og/eller databehandlerregistreringer dermed nulstilles (blankes ud): </source>
+      </trans-unit>
       <trans-unit id="1201617254218760459" datatype="html">
         <source>Skriverettighed</source>
       </trans-unit>
@@ -4414,17 +4492,25 @@
       <trans-unit id="2143756458536709824" datatype="html">
         <source> Der er en ny version af KLE, udgivet <x id="INTERPOLATION" equiv-text="{{ kleStatus.version | appDate }}"/> </source>
       </trans-unit>
+      <trans-unit id="5683318511092429260" datatype="html">
+        <source>Kunne ikke hente KLE ændringer</source>
+      </trans-unit>
       <trans-unit id="2400861585794872427" datatype="html">
         <source>Opdater KLE</source>
       </trans-unit>
       <trans-unit id="5375811527537295210" datatype="html">
         <source>KLE-Changes.csv</source>
       </trans-unit>
+      <trans-unit id="734879993390629495" datatype="html">
+        <source>Slet &quot;<x id="PH" equiv-text="this.organization.Name"/>&quot;</source>
       <trans-unit id="5683318511092429260" datatype="html">
         <source>Kunne ikke hente KLE ændringer</source>
       </trans-unit>
       <trans-unit id="838512276710673497" datatype="html">
         <source>Hent ændringer i KLE</source>
+      </trans-unit>
+      <trans-unit id="8669528431522521621" datatype="html">
+        <source> Kopier til klipholder</source>
       </trans-unit>
       <trans-unit id="2311412587966355874" datatype="html">
         <source>Nøgle</source>

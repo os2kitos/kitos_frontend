@@ -212,6 +212,20 @@ export class OrganizationEffects {
       )
     );
   });
+
+  deleteOrganization$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(OrganizationActions.deleteOrganization),
+      switchMap(({ organizationUuid }) =>
+        this.organizationInternalService
+          .deleteSingleOrganizationsInternalV2DeleteOrganization({ organizationUuid, enforceDeletion: true })
+          .pipe(
+            map(() => OrganizationActions.deleteOrganizationSuccess()),
+            catchError(() => of(OrganizationActions.deleteOrganizationError()))
+          )
+      )
+    );
+  });
 }
 
 function applyQueryFixes(odataString: string) {

@@ -1,5 +1,11 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
-import { APIOrganizationCreateRequestDTO, APIOrganizationMasterDataRequestDTO, APIOrganizationMasterDataRolesRequestDTO, APIOrganizationUpdateRequestDTO, APIUIRootConfigUpdateRequestDTO } from 'src/app/api/v2';
+import {
+  APIOrganizationCreateRequestDTO,
+  APIOrganizationMasterDataRequestDTO,
+  APIOrganizationMasterDataRolesRequestDTO,
+  APIOrganizationUpdateRequestDTO,
+  APIUIRootConfigUpdateRequestDTO,
+} from 'src/app/api/v2';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { SavedFilterState } from 'src/app/shared/models/grid/saved-filter-state.model';
 import { OrganizationMasterDataRoles } from 'src/app/shared/models/organization/organization-master-data/organization-master-data-roles.model';
@@ -55,12 +61,19 @@ export const OrganizationActions = createActionGroup({
     'Patch UI Root Config success': props<{ uiRootConfig: UIRootConfig }>(),
     'Patch UI Root Config error': emptyProps(),
 
-    'Patch Organization': (request: APIOrganizationUpdateRequestDTO, organizationUuid: string) => ({ request, organizationUuid }),
+    'Patch Organization': (request: APIOrganizationUpdateRequestDTO, organizationUuid: string) => ({
+      request,
+      organizationUuid,
+    }),
     'Patch Organization Success': emptyProps(),
     'Patch Organization Error': emptyProps(),
 
     'Create Organization': (request: APIOrganizationCreateRequestDTO) => ({ request }),
     'Create Organization Success': emptyProps(),
     'Create Organization Error': emptyProps(),
+
+    'Delete Organization': (organizationUuid: string) => ({ organizationUuid }),
+    'Delete Organization Success': emptyProps(),
+    'Delete Organization Error': emptyProps(),
   },
 });
