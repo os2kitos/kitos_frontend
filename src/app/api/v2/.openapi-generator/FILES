@@ -105,6 +105,7 @@ model/archivingCreationRequestDTO.ts
 model/archivingRegistrationsResponseDTO.ts
 model/archivingUpdateRequestDTO.ts
 model/baseNotificationPropertiesWriteRequestDTO.ts
+model/brokenExternalReferencesReportStatusResponseDTO.ts
 model/changeOrganizationUnitRegistrationV2RequestDTO.ts
 model/changePaymentRegistrationV2RequestDTO.ts
 model/columnConfigurationRequestDTO.ts

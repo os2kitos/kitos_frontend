@@ -2,6 +2,7 @@ export * from './archivingCreationRequestDTO';
 export * from './archivingRegistrationsResponseDTO';
 export * from './archivingUpdateRequestDTO';
 export * from './baseNotificationPropertiesWriteRequestDTO';
+export * from './brokenExternalReferencesReportStatusResponseDTO';
 export * from './changeOrganizationUnitRegistrationV2RequestDTO';
 export * from './changePaymentRegistrationV2RequestDTO';
 export * from './columnConfigurationRequestDTO';
