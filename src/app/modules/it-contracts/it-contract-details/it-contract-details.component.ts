@@ -142,7 +142,7 @@ export class ItContractDetailsComponent extends BaseComponent implements OnInit,
   public showDeleteDialog(): void {
     const confirmationDialogRef = this.dialog.open(ConfirmationDialogComponent);
     const confirmationDialogInstance = confirmationDialogRef.componentInstance as ConfirmationDialogComponent;
-    confirmationDialogInstance.bodyText = $localize`Er du sikker på du vil slette kontrakten?`;
+    confirmationDialogInstance.bodyText = $localize`Er du sikker på, at du vil slette kontrakten?`;
     confirmationDialogInstance.confirmColor = 'warn';
 
     this.subscriptions.add(

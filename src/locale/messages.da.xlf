@@ -109,9 +109,9 @@
         <source>IT Kontrakt</source>
         <target state="new">IT Kontrakt</target>
       </trans-unit>
-      <trans-unit id="6895996887378460452" datatype="html">
-        <source>Er du sikker på du vil slette kontrakten?</source>
-        <target state="new">Er du sikker på du vil slette kontrakten?</target>
+      <trans-unit id="8313256569564022932" datatype="html">
+        <source>Er du sikker på, at du vil slette kontrakten?</source>
+        <target state="new">Er du sikker på, at du vil slette kontrakten?</target>
       </trans-unit>
       <trans-unit id="1424307253752651732" datatype="html">
         <source>Du har ikke læseadgang til denne IT Kontrakt</source>
@@ -6010,6 +6010,34 @@
       <trans-unit id="8112199302256827297" datatype="html">
         <source>Bruger kunne ikke fjernes som global administrator</source>
         <target state="new">Bruger kunne ikke fjernes som global administrator</target>
+      </trans-unit>
+      <trans-unit id="1038847714505632756" datatype="html">
+        <source>Er du sikker på, at du vil slette hjælpeteksten?</source>
+        <target state="new">Er du sikker på, at du vil slette hjælpeteksten?</target>
+      </trans-unit>
+      <trans-unit id="8506151302006485659" datatype="html">
+        <source>Rediger hjælpetekst</source>
+        <target state="new">Rediger hjælpetekst</target>
+      </trans-unit>
+      <trans-unit id="8088939226652124211" datatype="html">
+        <source>Hjælpeteksten blev slettet</source>
+        <target state="new">Hjælpeteksten blev slettet</target>
+      </trans-unit>
+      <trans-unit id="4996432270457904345" datatype="html">
+        <source>Kunne ikke slette hjælpeteksten</source>
+        <target state="new">Kunne ikke slette hjælpeteksten</target>
+      </trans-unit>
+      <trans-unit id="5370515321480787498" datatype="html">
+        <source>Hjælpeteksten blev opdateret</source>
+        <target state="new">Hjælpeteksten blev opdateret</target>
+      </trans-unit>
+      <trans-unit id="1399821402682266572" datatype="html">
+        <source>Kunne ikke opdatere hjælpeteksten</source>
+        <target state="new">Kunne ikke opdatere hjælpeteksten</target>
+      </trans-unit>
+      <trans-unit id="8709332301710466840" datatype="html">
+        <source>Kunne ikke hente hjælpetekster</source>
+        <target state="new">Kunne ikke hente hjælpetekster</target>
       </trans-unit>
       <trans-unit id="4517621680352863474" datatype="html">
         <source>Kunne ikke hente rapporten</source>

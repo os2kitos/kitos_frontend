@@ -76,6 +76,7 @@ import { GlobalAdminEffects } from './global-admin/effects';
     StoreModule.forFeature(fkOrgFeature),
     StoreModule.forFeature(globalAdminFeature),
     StoreModule.forFeature(helpTextFeature),
+    StoreModule.forFeature(globalAdminFeature),
     EffectsModule.forRoot([]),
     EffectsModule.forFeature([
       UserEffects,

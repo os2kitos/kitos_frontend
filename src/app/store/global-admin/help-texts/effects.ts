@@ -2,8 +2,9 @@ import { Inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, of, switchMap } from 'rxjs';
 import { APIV2HelpTextsInternalINTERNALService } from 'src/app/api/v2/api/v2HelpTextsInternalINTERNAL.service';
-import { adaptHelpText } from 'src/app/shared/models/help-text.model';
+import { adaptHelpText, HelpText } from 'src/app/shared/models/help-text.model';
 import { HelpTextActions } from './actions';
+import { APIHelpTextResponseDTO } from 'src/app/api/v2/model/helpTextResponseDTO';
 
 @Injectable()
 export class GlobalAdminHelpTextsEffects {
@@ -15,17 +16,25 @@ export class GlobalAdminHelpTextsEffects {
 
   getHelpTexts$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(HelpTextActions.getHelpTexts, HelpTextActions.deleteHelpTextSuccess),
+      ofType(
+        HelpTextActions.getHelpTexts,
+        HelpTextActions.deleteHelpTextSuccess,
+        HelpTextActions.updateHelpTextSuccess
+      ),
       switchMap(() => {
         return this.helpTextsInternalService.getManyHelpTextsInternalV2GetAll().pipe(
           map((helptextDtos) =>
-            HelpTextActions.getHelpTextsSuccess(helptextDtos.map((helptextDto) => adaptHelpText(helptextDto)))
+            HelpTextActions.getHelpTextsSuccess(this.adaptAndSortHelpTexts(helptextDtos))
           ),
           catchError(() => of(HelpTextActions.getHelpTextsError()))
         );
       })
     );
   });
+
+  private adaptAndSortHelpTexts(dtos: APIHelpTextResponseDTO[]): HelpText[]{
+    return dtos.map((dto) => adaptHelpText(dto)).sort((a, b) => a.Key.localeCompare(b.Key));
+  }
 
   createHelpText$ = createEffect(() => {
     return this.actions$.pipe(

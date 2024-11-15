@@ -21,10 +21,6 @@ export const helpTextFeature = createFeature({
     on(HelpTextActions.createHelpTextSuccess, (state, { helpText }): HelpTextsState => ({
       ...state,
       helpTexts: [...state.helpTexts, helpText]
-    })),
-    on(HelpTextActions.updateHelpTextSuccess, (state, { helpText }): HelpTextsState => ({
-      ...state,
-      helpTexts: [...state.helpTexts, helpText]
     }))
   )
 });

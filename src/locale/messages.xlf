@@ -1705,8 +1705,8 @@
       <trans-unit id="4407000927000478818" datatype="html">
         <source>IT Kontrakt</source>
       </trans-unit>
-      <trans-unit id="6895996887378460452" datatype="html">
-        <source>Er du sikker på du vil slette kontrakten?</source>
+      <trans-unit id="8313256569564022932" datatype="html">
+        <source>Er du sikker på, at du vil slette kontrakten?</source>
       </trans-unit>
       <trans-unit id="1424307253752651732" datatype="html">
         <source>Du har ikke læseadgang til denne IT Kontrakt</source>
@@ -4566,6 +4566,27 @@
       </trans-unit>
       <trans-unit id="9218801740475510905" datatype="html">
         <source>Registreringer i modulet &quot;Databehandling&quot;, hvor organisationen &quot;<x id="PH" equiv-text="this.organizationName"/>&quot; fjernes som databehandler</source>
+      </trans-unit>
+      <trans-unit id="1038847714505632756" datatype="html">
+        <source>Er du sikker på, at du vil slette hjælpeteksten?</source>
+      </trans-unit>
+      <trans-unit id="1399821402682266572" datatype="html">
+        <source>Kunne ikke opdatere hjælpeteksten</source>
+      </trans-unit>
+      <trans-unit id="4996432270457904345" datatype="html">
+        <source>Kunne ikke slette hjælpeteksten</source>
+      </trans-unit>
+      <trans-unit id="5370515321480787498" datatype="html">
+        <source>Hjælpeteksten blev opdateret</source>
+      </trans-unit>
+      <trans-unit id="8088939226652124211" datatype="html">
+        <source>Hjælpeteksten blev slettet</source>
+      </trans-unit>
+      <trans-unit id="8506151302006485659" datatype="html">
+        <source>Rediger hjælpetekst</source>
+      </trans-unit>
+      <trans-unit id="8709332301710466840" datatype="html">
+        <source>Kunne ikke hente hjælpetekster</source>
       </trans-unit>
       <trans-unit id="1301527534507006288" datatype="html">
         <source>Hent rapporten</source>

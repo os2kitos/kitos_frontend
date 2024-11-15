@@ -12,10 +12,13 @@
     <app-local-grid
       [data]="helpTexts"
       [columns]="columns"
+      (modifyEvent)="openEditDialog($event)"
+      (deleteEvent)="openDeleteDialog($event)"
       [modifyPermission]="true"
       [deletePermission]="true"
     >
     </app-local-grid>
+    <app-loading *ngIf="(helpTexts$ | async) === undefined"></app-loading>
   </ng-container>
 </app-card>
 

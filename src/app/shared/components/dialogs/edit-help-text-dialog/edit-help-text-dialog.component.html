@@ -1,0 +1,43 @@
+<app-dialog
+title="Rediger hjælpetekst"
+i18n-title>
+<app-standard-vertical-content-grid>
+  <app-textbox
+  [formGroup]="formGroup"
+  formName="key"
+  text="Nøgle"
+  i18n-text
+  [disabled]="true"
+  >
+  </app-textbox>
+
+  <app-textbox
+  [formGroup]="formGroup"
+  formName="title"
+  text="Titel"
+  i18n-text
+  data-cy="title-input"
+  >
+  </app-textbox>
+
+  <app-textbox
+  [formGroup]="formGroup"
+  formName="description"
+  text="Beskrivelse"
+  i18n-text
+  data-cy="description-input"
+  >
+  </app-textbox>
+</app-standard-vertical-content-grid>
+
+<app-dialog-actions data-cy="dialog-actions">
+  <app-button
+    (buttonClick)="onEditHelpText()"
+    [disabled]="!formGroup.valid"
+    i18n
+    data-cy="save-button"
+    >Gem</app-button
+  >
+  <app-button buttonStyle="secondary" (buttonClick)="onCancel()" i18n>Annuller</app-button>
+</app-dialog-actions>
+</app-dialog>

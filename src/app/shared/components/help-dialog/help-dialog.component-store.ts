@@ -8,20 +8,23 @@ import { adaptHelpText, defaultHelpText, HelpText } from '../../models/help-text
 
 interface State {
   helpText?: HelpText;
+  isEditable: boolean | undefined;
 }
 
 @Injectable()
 export class HelpDialogComponentStore extends ComponentStore<State> {
   public readonly helpText$ = this.select((state) => state.helpText);
+  public readonly isEditable$ = this.select((state) => state.isEditable);
 
   constructor(private helpTextsService: APIV2HelpTextsInternalINTERNALService) {
-    super({});
+    super({ isEditable: false });
   }
 
   private updateHelpText = this.updater(
-    (state, helpText: HelpText): State => ({
+    (state, update: { helpText: HelpText, isEditable: boolean }): State => ({
       ...state,
-      helpText,
+      helpText: update.helpText,
+      isEditable: update.isEditable,
     })
   );
 
@@ -36,7 +39,7 @@ export class HelpDialogComponentStore extends ComponentStore<State> {
             tapResponse(
               (response) => {
                 try {
-                  this.updateHelpText(adaptHelpText(response));
+                  this.updateHelpText({ helpText: adaptHelpText(response), isEditable: true });
                 } catch (e) {
                   this.handleError(e);
                 }
@@ -50,6 +53,6 @@ export class HelpDialogComponentStore extends ComponentStore<State> {
 
   private handleError(e: unknown){
     console.error(e);
-    this.updateHelpText(defaultHelpText);
+    this.updateHelpText({ helpText: defaultHelpText, isEditable: false });
   }
 }

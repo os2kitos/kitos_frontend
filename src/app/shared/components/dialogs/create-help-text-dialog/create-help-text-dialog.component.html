@@ -1,0 +1,52 @@
+<app-dialog
+  title="Opret hjælpetekst"
+  i18n-title
+>
+<app-standard-vertical-content-grid>
+  <div>
+    <app-textbox
+    [formGroup]="formGroup"
+    formName="key"
+    text="Nøgle"
+    i18n-text
+    data-cy="key-input"
+    >
+    </app-textbox>
+    <div class="error-paragraph-align" *ngIf="keyExists$ | async">
+      <app-paragraph color="error" i18n
+        >Denne nøgle er allerede i brug</app-paragraph
+      >
+    </div>
+  </div>
+
+  <app-divider></app-divider>
+  <app-textbox
+  [formGroup]="formGroup"
+  formName="title"
+  text="Titel"
+  i18n-text
+  data-cy="title-input"
+  >
+  </app-textbox>
+
+  <app-textbox
+  [formGroup]="formGroup"
+  formName="description"
+  text="Beskrivelse"
+  i18n-text
+  data-cy="description-input"
+  >
+  </app-textbox>
+</app-standard-vertical-content-grid>
+
+<app-dialog-actions data-cy="dialog-actions">
+  <app-button
+    (buttonClick)="onCreateHelpText()"
+    [disabled]="!formGroup.valid || (keyExists$ | async) === true || (isLoading$ | async) === true"
+    i18n
+    data-cy="save-button"
+    >Opret</app-button
+  >
+  <app-button buttonStyle="secondary" (buttonClick)="onCancel()" i18n>Annuller</app-button>
+</app-dialog-actions>
+</app-dialog>

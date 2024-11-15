@@ -35,5 +35,11 @@ describe('it-system-usage', () => {
 
     cy.get('[data-cy="help-button"]').first().click();
     cy.contains('Ingen hjælpetekst defineret');
+    cy.get('.close-button').click();
+
+    cy.intercept('api/v2/internal/help-texts/*', { statusCode: 404 });
+
+    cy.get('[data-cy="help-button"]').first().click();
+    cy.contains('Ingen hjælpetekst defineret');
   });
 });

@@ -20,7 +20,6 @@ export const helpTextColumns: GridColumn[] = [
     noFilter: true,
     isSticky: true,
     width: 50,
-
     extraData: [{ type: 'edit' }, { type: 'delete' }] as GridActionColumn[],
   },
 ];
