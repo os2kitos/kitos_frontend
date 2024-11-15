@@ -5231,9 +5231,9 @@
         <source>Betalingsfrekvenser</source>
         <target state="new">Betalingsfrekvenser</target>
       </trans-unit>
-      <trans-unit id="2856429460614878961" datatype="html">
-        <source>Pris reguleringer</source>
-        <target state="new">Pris reguleringer</target>
+      <trans-unit id="2761703062912761325" datatype="html">
+        <source>Prisreguleringer</source>
+        <target state="new">Prisreguleringer</target>
       </trans-unit>
       <trans-unit id="7280622341182001048" datatype="html">
         <source>Genanskaffelsesstrategier</source>
@@ -5342,10 +5342,6 @@
       <trans-unit id="3528465926860037088" datatype="html">
         <source>Betalingsfrekvenser</source>
         <target state="new">Betalingsfrekvenser</target>
-      </trans-unit>
-      <trans-unit id="2856429460614878961" datatype="html">
-        <source>Pris reguleringer</source>
-        <target state="new">Pris reguleringer</target>
       </trans-unit>
       <trans-unit id="7280622341182001048" datatype="html">
         <source>Genanskaffelsesstrategier</source>
@@ -6014,6 +6010,30 @@
       <trans-unit id="8112199302256827297" datatype="html">
         <source>Bruger kunne ikke fjernes som global administrator</source>
         <target state="new">Bruger kunne ikke fjernes som global administrator</target>
+      </trans-unit>
+      <trans-unit id="4517621680352863474" datatype="html">
+        <source>Kunne ikke hente rapporten</source>
+        <target state="new">Kunne ikke hente rapporten</target>
+      </trans-unit>
+      <trans-unit id="4903493627209683494" datatype="html">
+        <source>Rapport over brudte links</source>
+        <target state="new">Rapport over brudte links</target>
+      </trans-unit>
+      <trans-unit id="6628997356080192116" datatype="html">
+        <source>Oprettet: </source>
+        <target state="new">Oprettet: </target>
+      </trans-unit>
+      <trans-unit id="2328763528324617615" datatype="html">
+        <source>Antal registrerede fejl: </source>
+        <target state="new">Antal registrerede fejl: </target>
+      </trans-unit>
+      <trans-unit id="1301527534507006288" datatype="html">
+        <source>Hent rapporten</source>
+        <target state="new">Hent rapporten</target>
+      </trans-unit>
+      <trans-unit id="7714872354769489847" datatype="html">
+        <source>Rapporten over brudte links er endnu ikke tilgængelig. Forventet tilgængelighed er &quot;Mandag i næste uge&quot;. </source>
+        <target state="new">Rapporten over brudte links er endnu ikke tilgængelig. Forventet tilgængelighed er &quot;Mandag i næste uge&quot;. </target>
       </trans-unit>
     </body>
   </file>

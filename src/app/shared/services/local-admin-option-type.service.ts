@@ -739,6 +739,7 @@ export class LocalAdminOptionTypeService implements OnDestroy {
             organizationUuid,
             dto: { optionUuid },
           });
+          
       //Role option types
       case 'organization-unit':
         return (organizationUuid, optionUuid) =>
