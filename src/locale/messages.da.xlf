@@ -6063,6 +6063,30 @@
         <source>Rapporten over brudte links er endnu ikke tilgængelig. Forventet tilgængelighed er &quot;Mandag i næste uge&quot;. </source>
         <target state="new">Rapporten over brudte links er endnu ikke tilgængelig. Forventet tilgængelighed er &quot;Mandag i næste uge&quot;. </target>
       </trans-unit>
+      <trans-unit id="7347397543550454568" datatype="html">
+        <source>Organisationer hvor brugeren har roller</source>
+        <target state="new">Organisationer hvor brugeren har roller</target>
+      </trans-unit>
+      <trans-unit id="5416208601184646179" datatype="html">
+        <source>Brugere med rettighedshaveradgang</source>
+        <target state="new">Brugere med rettighedshaveradgang</target>
+      </trans-unit>
+      <trans-unit id="1820535627250426225" datatype="html">
+        <source>Ingen brugere med rettighedshaveradgang fundet</source>
+        <target state="new">Ingen brugere med rettighedshaveradgang fundet</target>
+      </trans-unit>
+      <trans-unit id="4758871021670746906" datatype="html">
+        <source>Brugere med tværgående rettigheder</source>
+        <target state="new">Brugere med tværgående rettigheder</target>
+      </trans-unit>
+      <trans-unit id="35531008245230309" datatype="html">
+        <source>Se organisationer</source>
+        <target state="new">Se organisationer</target>
+      </trans-unit>
+      <trans-unit id="6481760042736907455" datatype="html">
+        <source>Ingen brugere med tværgående rettigheder fundet</source>
+        <target state="new">Ingen brugere med tværgående rettigheder fundet</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -20,6 +20,12 @@ describe('global-admin other', () => {
     cy.intercept('api/v2/internal/broken-external-references-report/status', {
       fixture: './global-admin/broken-links-report',
     });
+    cy.intercept('api/v2/internal/users/with-rightsholder-access', {
+      fixture: './global-admin/rightsholders.json',
+    });
+    cy.intercept('api/v2/internal/users/with-cross-organization-permissions', {
+      fixture: './global-admin/cross-org-users.json',
+    });
 
     cy.intercept('/odata/Organizations?$skip=0&$top=100&$count=true', { fixture: './global-admin/organizations.json' });
     cy.setup(true, 'global-admin/other');
@@ -66,5 +72,13 @@ describe('global-admin other', () => {
     cy.contains('Antal registrerede fejl: 1');
 
     cy.getByDataCy('get-broken-links-button').click();
+  });
+
+  it('can get Api user organizations', () => {
+    cy.getByDataCy('show-organizations-button').first().click();
+
+    cy.getByDataCy('organizations-dialog').within(() => {
+      cy.contains('Fælles Kommune');
+    });
   });
 });

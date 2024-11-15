@@ -45,7 +45,7 @@ export interface PostSingleItContractGlobalAgreementElementTypesInternalV2Create
 })
 export class APIV2ItContractGlobalAgreementElementTypesInternalINTERNALService {
 
-    protected basePath = 'https://localhost:44300';
+    protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;

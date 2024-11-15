@@ -6,11 +6,9 @@ import { Store } from '@ngrx/store';
 import { CookieService } from 'ngx-cookie';
 import { catchError, combineLatestWith, map, mergeMap, of, switchMap, tap } from 'rxjs';
 import { APIUserDTOApiReturnDTO, APIV1AuthorizeINTERNALService } from 'src/app/api/v1';
-import {
-  APIOrganizationGridPermissionsResponseDTO,
-  APIV2OrganizationGridInternalINTERNALService,
-  APIV2OrganizationsInternalINTERNALService,
-} from 'src/app/api/v2';
+import { APIOrganizationGridPermissionsResponseDTO } from 'src/app/api/v2';
+import { APIV2OrganizationGridInternalINTERNALService } from 'src/app/api/v2/api/v2OrganizationGridInternalINTERNAL.service';
+import { APIV2OrganizationsInternalINTERNALService } from 'src/app/api/v2/api/v2OrganizationsInternalINTERNAL.service';
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { adaptUser } from 'src/app/shared/models/user.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
@@ -29,7 +27,8 @@ export class UserEffects {
     private cookieService: CookieService,
     @Inject(APIV2OrganizationGridInternalINTERNALService)
     private organizationGridService: APIV2OrganizationGridInternalINTERNALService,
-    @Inject(APIV2OrganizationsInternalINTERNALService)private organizationInternalService: APIV2OrganizationsInternalINTERNALService
+    @Inject(APIV2OrganizationsInternalINTERNALService)
+    private organizationInternalService: APIV2OrganizationsInternalINTERNALService
   ) {}
 
   login$ = createEffect(() => {

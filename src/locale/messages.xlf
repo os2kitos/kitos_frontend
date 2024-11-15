@@ -4606,6 +4606,24 @@
       <trans-unit id="7714872354769489847" datatype="html">
         <source>Rapporten over brudte links er endnu ikke tilgængelig. Forventet tilgængelighed er &quot;Mandag i næste uge&quot;. </source>
       </trans-unit>
+      <trans-unit id="1820535627250426225" datatype="html">
+        <source>Ingen brugere med rettighedshaveradgang fundet</source>
+      </trans-unit>
+      <trans-unit id="35531008245230309" datatype="html">
+        <source>Se organisationer</source>
+      </trans-unit>
+      <trans-unit id="4758871021670746906" datatype="html">
+        <source>Brugere med tværgående rettigheder</source>
+      </trans-unit>
+      <trans-unit id="5416208601184646179" datatype="html">
+        <source>Brugere med rettighedshaveradgang</source>
+      </trans-unit>
+      <trans-unit id="6481760042736907455" datatype="html">
+        <source>Ingen brugere med tværgående rettigheder fundet</source>
+      </trans-unit>
+      <trans-unit id="7347397543550454568" datatype="html">
+        <source>Organisationer hvor brugeren har roller</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

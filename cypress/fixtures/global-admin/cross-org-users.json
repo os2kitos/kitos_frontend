@@ -1,0 +1,26 @@
+[
+  {
+    "stakeholderAccess": false,
+    "organizationsWhereActive": ["Fælles Kommune"],
+    "apiAccess": true,
+    "email": "local-global-admin-user@kitos.dk",
+    "uuid": "4f0a09ff-e74d-4ed8-897e-9cc06d486609",
+    "name": "Automatisk oprettet testbruger (GlobalAdmin)"
+  },
+  {
+    "stakeholderAccess": true,
+    "organizationsWhereActive": ["Fælles Kommune"],
+    "apiAccess": true,
+    "email": "local-api-user@kitos.dk",
+    "uuid": "dab5b330-5181-4c17-918d-d0d1d852d7bb",
+    "name": "Automatisk oprettet testbruger (Api User)"
+  },
+  {
+    "stakeholderAccess": false,
+    "organizationsWhereActive": ["Fælles Kommune", "Test organisation to"],
+    "apiAccess": true,
+    "email": "local-api-global-admin-user@kitos.dk",
+    "uuid": "6df8ddbb-1ccb-4781-ada3-26367ebd5cd6",
+    "name": "Automatisk oprettet testbruger (Api GlobalAdmin)"
+  }
+]

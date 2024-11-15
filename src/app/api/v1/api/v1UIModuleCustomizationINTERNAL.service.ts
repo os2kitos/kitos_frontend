@@ -26,19 +26,19 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GetSingleUIModuleCustomizationGetRequestParams {
-    organizationId: number;
-    module: string;
-}
-
 export interface GetSingleUIModuleCustomizationGetAccessRightsRequestParams {
     getEntitiesAccessRights: boolean;
     organizationId: number;
 }
 
-export interface GetSingleUIModuleCustomizationGetAccessRightsForEntityRequestParams {
+export interface GetSingleUIModuleCustomizationGetAccessRightsForEntityByIdRequestParams {
     id: number;
     getEntityAccessRights: boolean;
+}
+
+export interface GetSingleUIModuleCustomizationGetByOrganizationidAndModuleRequestParams {
+    organizationId: number;
+    module: string;
 }
 
 
@@ -47,7 +47,7 @@ export interface GetSingleUIModuleCustomizationGetAccessRightsForEntityRequestPa
 })
 export class APIV1UIModuleCustomizationINTERNALService {
 
-    protected basePath = 'https://localhost:44300';
+    protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
@@ -104,69 +104,6 @@ export class APIV1UIModuleCustomizationINTERNALService {
             throw Error("key may not be null if value is not object or array");
         }
         return httpParams;
-    }
-
-    /**
-     * @param requestParameters
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public getSingleUIModuleCustomizationGet(requestParameters: GetSingleUIModuleCustomizationGetRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIUIModuleCustomizationDTOApiReturnDTO>;
-    public getSingleUIModuleCustomizationGet(requestParameters: GetSingleUIModuleCustomizationGetRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIUIModuleCustomizationDTOApiReturnDTO>>;
-    public getSingleUIModuleCustomizationGet(requestParameters: GetSingleUIModuleCustomizationGetRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIUIModuleCustomizationDTOApiReturnDTO>>;
-    public getSingleUIModuleCustomizationGet(requestParameters: GetSingleUIModuleCustomizationGetRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
-        const organizationId = requestParameters.organizationId;
-        if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling getSingleUIModuleCustomizationGet.');
-        }
-        const module = requestParameters.module;
-        if (module === null || module === undefined) {
-            throw new Error('Required parameter module was null or undefined when calling getSingleUIModuleCustomizationGet.');
-        }
-
-        let localVarHeaders = this.defaultHeaders;
-
-        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
-        if (localVarHttpHeaderAcceptSelected === undefined) {
-            // to determine the Accept header
-            const httpHeaderAccepts: string[] = [
-                'application/json',
-                'text/json'
-            ];
-            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        }
-        if (localVarHttpHeaderAcceptSelected !== undefined) {
-            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
-        }
-
-        let localVarHttpContext: HttpContext | undefined = options && options.context;
-        if (localVarHttpContext === undefined) {
-            localVarHttpContext = new HttpContext();
-        }
-
-
-        let responseType_: 'text' | 'json' | 'blob' = 'json';
-        if (localVarHttpHeaderAcceptSelected) {
-            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
-                responseType_ = 'text';
-            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
-                responseType_ = 'json';
-            } else {
-                responseType_ = 'blob';
-            }
-        }
-
-        let localVarPath = `/api/v1/organizations/${this.configuration.encodeParam({name: "organizationId", value: organizationId, in: "path", style: "simple", explode: false, dataType: "number", dataFormat: "int32"})}/ui-config/modules/${this.configuration.encodeParam({name: "module", value: module, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
-        return this.httpClient.request<APIUIModuleCustomizationDTOApiReturnDTO>('get', `${this.configuration.basePath}${localVarPath}`,
-            {
-                context: localVarHttpContext,
-                responseType: <any>responseType_,
-                withCredentials: this.configuration.withCredentials,
-                headers: localVarHeaders,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
     }
 
     /**
@@ -248,17 +185,17 @@ export class APIV1UIModuleCustomizationINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleUIModuleCustomizationGetAccessRightsForEntity(requestParameters: GetSingleUIModuleCustomizationGetAccessRightsForEntityRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public getSingleUIModuleCustomizationGetAccessRightsForEntity(requestParameters: GetSingleUIModuleCustomizationGetAccessRightsForEntityRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public getSingleUIModuleCustomizationGetAccessRightsForEntity(requestParameters: GetSingleUIModuleCustomizationGetAccessRightsForEntityRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public getSingleUIModuleCustomizationGetAccessRightsForEntity(requestParameters: GetSingleUIModuleCustomizationGetAccessRightsForEntityRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleUIModuleCustomizationGetAccessRightsForEntityById(requestParameters: GetSingleUIModuleCustomizationGetAccessRightsForEntityByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public getSingleUIModuleCustomizationGetAccessRightsForEntityById(requestParameters: GetSingleUIModuleCustomizationGetAccessRightsForEntityByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleUIModuleCustomizationGetAccessRightsForEntityById(requestParameters: GetSingleUIModuleCustomizationGetAccessRightsForEntityByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleUIModuleCustomizationGetAccessRightsForEntityById(requestParameters: GetSingleUIModuleCustomizationGetAccessRightsForEntityByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling getSingleUIModuleCustomizationGetAccessRightsForEntity.');
+            throw new Error('Required parameter id was null or undefined when calling getSingleUIModuleCustomizationGetAccessRightsForEntityById.');
         }
         const getEntityAccessRights = requestParameters.getEntityAccessRights;
         if (getEntityAccessRights === null || getEntityAccessRights === undefined) {
-            throw new Error('Required parameter getEntityAccessRights was null or undefined when calling getSingleUIModuleCustomizationGetAccessRightsForEntity.');
+            throw new Error('Required parameter getEntityAccessRights was null or undefined when calling getSingleUIModuleCustomizationGetAccessRightsForEntityById.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -304,6 +241,69 @@ export class APIV1UIModuleCustomizationINTERNALService {
             {
                 context: localVarHttpContext,
                 params: localVarQueryParameters,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * @param requestParameters
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getSingleUIModuleCustomizationGetByOrganizationidAndModule(requestParameters: GetSingleUIModuleCustomizationGetByOrganizationidAndModuleRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIUIModuleCustomizationDTOApiReturnDTO>;
+    public getSingleUIModuleCustomizationGetByOrganizationidAndModule(requestParameters: GetSingleUIModuleCustomizationGetByOrganizationidAndModuleRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIUIModuleCustomizationDTOApiReturnDTO>>;
+    public getSingleUIModuleCustomizationGetByOrganizationidAndModule(requestParameters: GetSingleUIModuleCustomizationGetByOrganizationidAndModuleRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIUIModuleCustomizationDTOApiReturnDTO>>;
+    public getSingleUIModuleCustomizationGetByOrganizationidAndModule(requestParameters: GetSingleUIModuleCustomizationGetByOrganizationidAndModuleRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+        const organizationId = requestParameters.organizationId;
+        if (organizationId === null || organizationId === undefined) {
+            throw new Error('Required parameter organizationId was null or undefined when calling getSingleUIModuleCustomizationGetByOrganizationidAndModule.');
+        }
+        const module = requestParameters.module;
+        if (module === null || module === undefined) {
+            throw new Error('Required parameter module was null or undefined when calling getSingleUIModuleCustomizationGetByOrganizationidAndModule.');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json',
+                'text/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/v1/organizations/${this.configuration.encodeParam({name: "organizationId", value: organizationId, in: "path", style: "simple", explode: false, dataType: "number", dataFormat: "int32"})}/ui-config/modules/${this.configuration.encodeParam({name: "module", value: module, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
+        return this.httpClient.request<APIUIModuleCustomizationDTOApiReturnDTO>('get', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

@@ -11,6 +11,7 @@ export class IconButtonComponent {
   @Input() public loading: boolean | null = false;
   @Input() public type: 'button' | 'submit' = 'button';
   @Input() public buttonStyle: ButtonStyle = 'tertiary';
+  @Input() public tooltipText?: string;
 
   @Output() buttonClick = new EventEmitter();
 

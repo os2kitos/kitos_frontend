@@ -29,12 +29,12 @@ export interface GetSingleItSystemUsageValidationGetAccessRightsRequestParams {
     organizationId: number;
 }
 
-export interface GetSingleItSystemUsageValidationGetAccessRightsForEntityRequestParams {
+export interface GetSingleItSystemUsageValidationGetAccessRightsForEntityByIdRequestParams {
     id: number;
     getEntityAccessRights: boolean;
 }
 
-export interface GetSingleItSystemUsageValidationGetValidationStatusRequestParams {
+export interface GetSingleItSystemUsageValidationGetValidationStatusByUsageidRequestParams {
     usageId: number;
 }
 
@@ -44,7 +44,7 @@ export interface GetSingleItSystemUsageValidationGetValidationStatusRequestParam
 })
 export class APIV1ItSystemUsageValidationINTERNALService {
 
-    protected basePath = 'https://localhost:44300';
+    protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
@@ -182,17 +182,17 @@ export class APIV1ItSystemUsageValidationINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItSystemUsageValidationGetAccessRightsForEntity(requestParameters: GetSingleItSystemUsageValidationGetAccessRightsForEntityRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public getSingleItSystemUsageValidationGetAccessRightsForEntity(requestParameters: GetSingleItSystemUsageValidationGetAccessRightsForEntityRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public getSingleItSystemUsageValidationGetAccessRightsForEntity(requestParameters: GetSingleItSystemUsageValidationGetAccessRightsForEntityRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public getSingleItSystemUsageValidationGetAccessRightsForEntity(requestParameters: GetSingleItSystemUsageValidationGetAccessRightsForEntityRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleItSystemUsageValidationGetAccessRightsForEntityById(requestParameters: GetSingleItSystemUsageValidationGetAccessRightsForEntityByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public getSingleItSystemUsageValidationGetAccessRightsForEntityById(requestParameters: GetSingleItSystemUsageValidationGetAccessRightsForEntityByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleItSystemUsageValidationGetAccessRightsForEntityById(requestParameters: GetSingleItSystemUsageValidationGetAccessRightsForEntityByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleItSystemUsageValidationGetAccessRightsForEntityById(requestParameters: GetSingleItSystemUsageValidationGetAccessRightsForEntityByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling getSingleItSystemUsageValidationGetAccessRightsForEntity.');
+            throw new Error('Required parameter id was null or undefined when calling getSingleItSystemUsageValidationGetAccessRightsForEntityById.');
         }
         const getEntityAccessRights = requestParameters.getEntityAccessRights;
         if (getEntityAccessRights === null || getEntityAccessRights === undefined) {
-            throw new Error('Required parameter getEntityAccessRights was null or undefined when calling getSingleItSystemUsageValidationGetAccessRightsForEntity.');
+            throw new Error('Required parameter getEntityAccessRights was null or undefined when calling getSingleItSystemUsageValidationGetAccessRightsForEntityById.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -252,13 +252,13 @@ export class APIV1ItSystemUsageValidationINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItSystemUsageValidationGetValidationStatus(requestParameters: GetSingleItSystemUsageValidationGetValidationStatusRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public getSingleItSystemUsageValidationGetValidationStatus(requestParameters: GetSingleItSystemUsageValidationGetValidationStatusRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleItSystemUsageValidationGetValidationStatus(requestParameters: GetSingleItSystemUsageValidationGetValidationStatusRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleItSystemUsageValidationGetValidationStatus(requestParameters: GetSingleItSystemUsageValidationGetValidationStatusRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public getSingleItSystemUsageValidationGetValidationStatusByUsageid(requestParameters: GetSingleItSystemUsageValidationGetValidationStatusByUsageidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public getSingleItSystemUsageValidationGetValidationStatusByUsageid(requestParameters: GetSingleItSystemUsageValidationGetValidationStatusByUsageidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public getSingleItSystemUsageValidationGetValidationStatusByUsageid(requestParameters: GetSingleItSystemUsageValidationGetValidationStatusByUsageidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public getSingleItSystemUsageValidationGetValidationStatusByUsageid(requestParameters: GetSingleItSystemUsageValidationGetValidationStatusByUsageidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         const usageId = requestParameters.usageId;
         if (usageId === null || usageId === undefined) {
-            throw new Error('Required parameter usageId was null or undefined when calling getSingleItSystemUsageValidationGetValidationStatus.');
+            throw new Error('Required parameter usageId was null or undefined when calling getSingleItSystemUsageValidationGetValidationStatusByUsageid.');
         }
 
         let localVarHeaders = this.defaultHeaders;

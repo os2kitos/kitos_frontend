@@ -37,7 +37,7 @@ export interface GetSingleDataResponsibleGetAllRequestParams {
     descending?: boolean;
 }
 
-export interface GetSingleDataResponsibleGetSingleRequestParams {
+export interface GetSingleDataResponsibleGetSingleByIdRequestParams {
     id: number;
 }
 
@@ -47,7 +47,7 @@ export interface GetSingleDataResponsibleGetSingleRequestParams {
 })
 export class APIV1DataResponsibleINTERNALService {
 
-    protected basePath = 'https://localhost:44300';
+    protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
@@ -189,13 +189,13 @@ export class APIV1DataResponsibleINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleDataResponsibleGetSingle(requestParameters: GetSingleDataResponsibleGetSingleRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIDataResponsibleDTOApiReturnDTO>;
-    public getSingleDataResponsibleGetSingle(requestParameters: GetSingleDataResponsibleGetSingleRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIDataResponsibleDTOApiReturnDTO>>;
-    public getSingleDataResponsibleGetSingle(requestParameters: GetSingleDataResponsibleGetSingleRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIDataResponsibleDTOApiReturnDTO>>;
-    public getSingleDataResponsibleGetSingle(requestParameters: GetSingleDataResponsibleGetSingleRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleDataResponsibleGetSingleById(requestParameters: GetSingleDataResponsibleGetSingleByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIDataResponsibleDTOApiReturnDTO>;
+    public getSingleDataResponsibleGetSingleById(requestParameters: GetSingleDataResponsibleGetSingleByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIDataResponsibleDTOApiReturnDTO>>;
+    public getSingleDataResponsibleGetSingleById(requestParameters: GetSingleDataResponsibleGetSingleByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIDataResponsibleDTOApiReturnDTO>>;
+    public getSingleDataResponsibleGetSingleById(requestParameters: GetSingleDataResponsibleGetSingleByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling getSingleDataResponsibleGetSingle.');
+            throw new Error('Required parameter id was null or undefined when calling getSingleDataResponsibleGetSingleById.');
         }
 
         let localVarHeaders = this.defaultHeaders;
