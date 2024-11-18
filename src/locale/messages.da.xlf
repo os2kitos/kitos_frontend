@@ -5163,14 +5163,6 @@
         <source>Organisationer</source>
         <target state="new">Organisationer</target>
       </trans-unit>
-      <trans-unit id="1318146097476362841" datatype="html">
-        <source>Enheden kunne ikke opdateres</source>
-        <target state="new">Enheden kunne ikke opdateres</target>
-      </trans-unit>
-      <trans-unit id="5097144162233589680" datatype="html">
-        <source>Enheden blev opdateret</source>
-        <target state="new">Enheden blev opdateret</target>
-      </trans-unit>
       <trans-unit id="303541399201403734" datatype="html">
         <source>Organisationsroller i din organisation</source>
         <target state="new">Organisationsroller i din organisation</target>
