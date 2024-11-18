@@ -318,6 +318,7 @@ model/updateUserRequestDTO.ts
 model/userCollectionPermissionsResponseDTO.ts
 model/userIsPartOfCurrentOrgResponseDTO.ts
 model/userReferenceResponseDTO.ts
+model/userReferenceWithOrganizationResponseDTO.ts
 model/userResponseDTO.ts
 model/userWithCrossOrganizationalRightsResponseDTO.ts
 model/userWithOrganizationResponseDTO.ts

@@ -1,11 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { tapResponse } from '@ngrx/operators';
-import { Store } from '@ngrx/store';
-import { map, mergeMap, Observable, tap, withLatestFrom } from 'rxjs';
+import { mergeMap, Observable, tap } from 'rxjs';
 import { APIUserReferenceResponseDTO, APIV2GlobalUserInternalINTERNALService } from 'src/app/api/v2';
-import { GlobalAdminUser } from 'src/app/shared/models/global-admin/global-admin-user.model';
-import { selectAllGlobalAdmins } from 'src/app/store/global-admin/selectors';
 
 interface State {
   users: APIUserReferenceResponseDTO[];
@@ -13,13 +10,11 @@ interface State {
 }
 
 @Injectable()
-export class CreateGlobalAdminComponentStore extends ComponentStore<State> {
+export class UserDropdownComponentStore extends ComponentStore<State> {
   public readonly users$ = this.select((state) => state.users);
   public readonly loading$ = this.select((state) => state.loading);
 
-  private readonly globalAdmins$ = this.store.select(selectAllGlobalAdmins);
-
-  constructor(private userService: APIV2GlobalUserInternalINTERNALService, private store: Store) {
+  constructor(private userService: APIV2GlobalUserInternalINTERNALService) {
     super({ users: [], loading: false });
   }
 
@@ -46,8 +41,6 @@ export class CreateGlobalAdminComponentStore extends ComponentStore<State> {
             nameOrEmailQuery: search,
           })
           .pipe(
-            withLatestFrom(this.globalAdmins$),
-            map(([users, globalAdmins]) => this.getNonGlobalAdminUsers(users, globalAdmins)),
             tapResponse(
               (filteredUsers) => this.setUsers(filteredUsers),
               (error) => console.error(error),
@@ -57,13 +50,4 @@ export class CreateGlobalAdminComponentStore extends ComponentStore<State> {
       })
     )
   );
-
-  private getNonGlobalAdminUsers(
-    users: APIUserReferenceResponseDTO[],
-    globalAdmins: GlobalAdminUser[]
-  ): APIUserReferenceResponseDTO[] {
-    const globalAdminUUIDs = new Set(globalAdmins.map((admin) => admin.uuid));
-    const filteredUsers = users.filter((user) => !globalAdminUUIDs.has(user.uuid));
-    return filteredUsers;
-  }
 }

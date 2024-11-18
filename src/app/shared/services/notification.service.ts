@@ -22,6 +22,7 @@ import { PopupMessageActions } from 'src/app/store/popup-messages/actions';
 import { UserActions } from 'src/app/store/user-store/actions';
 import { PopupMessageType } from '../enums/popup-message-type';
 import { createPopupMessage } from '../models/popup-messages/popup-message.model';
+import { LocalAdminUserActions } from 'src/app/store/global-admin/local-admins/actions';
 
 @Injectable({ providedIn: 'root' })
 export class NotificationService implements OnDestroy {
@@ -110,6 +111,15 @@ export class NotificationService implements OnDestroy {
     this.subscribeAsError(
       GlobalAdminActions.removeGlobalAdminError,
       $localize`Bruger kunne ikke fjernes som global administrator`
+    );
+
+    this.subscribeAsDefault(LocalAdminUserActions.addLocalAdminSuccess, $localize`Lokal administrator blev tilføjet`);
+    this.subscribeAsError(LocalAdminUserActions.addLocalAdminError, $localize`Lokal administrator kunne ikke tilføjes`);
+
+    this.subscribeAsDefault(LocalAdminUserActions.removeLocalAdminSuccess, $localize`Lokal administrator blev fjernet`);
+    this.subscribeAsError(
+      LocalAdminUserActions.removeLocalAdminError,
+      $localize`Lokal administrator kunne ikke fjernes`
     );
   }
 

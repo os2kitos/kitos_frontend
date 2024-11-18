@@ -8,6 +8,7 @@ import { GridExportActions } from 'src/app/store/grid/actions';
 import { BaseComponent } from '../../base/base.component';
 import { GridColumn } from '../../models/grid-column.model';
 import { GridState, defaultGridState } from '../../models/grid-state.model';
+import { includedColumnInExport } from '../../helpers/grid-export.helper';
 
 @Component({
   selector: 'app-local-grid',
@@ -87,6 +88,10 @@ export class LocalGridComponent<T> extends BaseComponent implements OnInit {
     if (this.grid) {
       this.grid.saveAsExcel();
     }
+  }
+
+  public getColumnsForExport(): GridColumn[] {
+    return this.columns.filter(includedColumnInExport);
   }
 
   public allData(): ExcelExportData {

@@ -180,7 +180,10 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
 
   ngOnInit(): void {
     this.store.dispatch(OrganizationUserActions.getOrganizationUserPermissions());
-    const existingColumns = this.gridColumnStorageService.getColumns(ORGANIZATION_USER_COLUMNS_ID, this.defaultGridColumns);
+    const existingColumns = this.gridColumnStorageService.getColumns(
+      ORGANIZATION_USER_COLUMNS_ID,
+      this.defaultGridColumns
+    );
     if (existingColumns) {
       this.store.dispatch(OrganizationUserActions.updateGridColumns(existingColumns));
     } else {

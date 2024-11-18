@@ -6003,6 +6003,14 @@
         <source>Bruger kunne ikke fjernes som global administrator</source>
         <target state="new">Bruger kunne ikke fjernes som global administrator</target>
       </trans-unit>
+      <trans-unit id="2049000672480510409" datatype="html">
+        <source>Tilføj lokal administrator</source>
+        <target state="new">Tilføj lokal administrator</target>
+      </trans-unit>
+      <trans-unit id="8412338502516415100" datatype="html">
+        <source> Opret lokal administrator </source>
+        <target state="new"> Opret lokal administrator </target>
+      </trans-unit>
       <trans-unit id="1038847714505632756" datatype="html">
         <source>Er du sikker på, at du vil slette hjælpeteksten?</source>
         <target state="new">Er du sikker på, at du vil slette hjælpeteksten?</target>
@@ -6054,6 +6062,34 @@
       <trans-unit id="7714872354769489847" datatype="html">
         <source>Rapporten over brudte links er endnu ikke tilgængelig. Forventet tilgængelighed er &quot;Mandag i næste uge&quot;. </source>
         <target state="new">Rapporten over brudte links er endnu ikke tilgængelig. Forventet tilgængelighed er &quot;Mandag i næste uge&quot;. </target>
+      </trans-unit>
+      <trans-unit id="187743127804056939" datatype="html">
+        <source> Opret </source>
+        <target state="new"> Opret </target>
+      </trans-unit>
+      <trans-unit id="5140604660915253982" datatype="html">
+        <source>Slet lokal administrator</source>
+        <target state="new">Slet lokal administrator</target>
+      </trans-unit>
+      <trans-unit id="546121265860028609" datatype="html">
+        <source>Er du sikker på at du vil slette &quot;<x id="PH" equiv-text="localAdmin.user.name"/>&quot; som lokal administrator for organisationen &quot;<x id="PH_1" equiv-text="localAdmin.organization.name"/>&quot;?</source>
+        <target state="new">Er du sikker på at du vil slette &quot;<x id="PH" equiv-text="localAdmin.user.name"/>&quot; som lokal administrator for organisationen &quot;<x id="PH_1" equiv-text="localAdmin.organization.name"/>&quot;?</target>
+      </trans-unit>
+      <trans-unit id="5664653680883726761" datatype="html">
+        <source>Lokal administrator blev tilføjet</source>
+        <target state="new">Lokal administrator blev tilføjet</target>
+      </trans-unit>
+      <trans-unit id="1026171426291646130" datatype="html">
+        <source>Lokal administrator kunne ikke tilføjes</source>
+        <target state="new">Lokal administrator kunne ikke tilføjes</target>
+      </trans-unit>
+      <trans-unit id="1733517763806424769" datatype="html">
+        <source>Lokal administrator blev fjernet</source>
+        <target state="new">Lokal administrator blev fjernet</target>
+      </trans-unit>
+      <trans-unit id="3973434874051012023" datatype="html">
+        <source>Lokal administrator kunne ikke fjernes</source>
+        <target state="new">Lokal administrator kunne ikke fjernes</target>
       </trans-unit>
       <trans-unit id="7347397543550454568" datatype="html">
         <source>Organisationer hvor brugeren har roller</source>

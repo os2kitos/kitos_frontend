@@ -9,9 +9,7 @@ describe('global-admin-global-admins', () => {
   });
 
   it('Can add global admin', () => {
-    cy.intercept('api/v2/internal/users/search', { fixture: './global-admin/create-global-admin-users.json' }).as(
-      'search'
-    );
+    cy.intercept('api/v2/internal/users/search', { fixture: './global-admin/users.json' }).as('search');
 
     cy.getByDataCy('add-global-admin-button').click();
     cy.dropdownByCy('add-global-admin-dropdown', 'Api User', true);

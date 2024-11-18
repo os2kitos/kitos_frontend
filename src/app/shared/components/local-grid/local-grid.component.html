@@ -75,17 +75,21 @@
         <app-paragraph>{{ searchProperty(dataItem, column.field)?.name }}</app-paragraph>
       </ng-template>
 
-      <ng-template
-        *ngIf="column.style === 'action-buttons'"
-        kendoGridCellTemplate
-        let-dataItem
-      >
+      <ng-template *ngIf="column.style === 'action-buttons'" kendoGridCellTemplate let-dataItem>
         <div class="action-buttons-container">
           <ng-container *ngFor="let button of column.extraData">
-            <app-icon-button *ngIf="button.type === 'edit' && modifyPermission" (click)="onModifyClick(dataItem)" data-cy="grid-edit-button">
+            <app-icon-button
+              *ngIf="button.type === 'edit' && modifyPermission"
+              (click)="onModifyClick(dataItem)"
+              data-cy="grid-edit-button"
+            >
               <app-pencil-icon></app-pencil-icon>
             </app-icon-button>
-            <app-icon-button *ngIf="button.type === 'delete' && deletePermission" (click)="onDeleteClick(dataItem)" data-cy="grid-delete-button">
+            <app-icon-button
+              *ngIf="button.type === 'delete' && deletePermission"
+              (click)="onDeleteClick(dataItem)"
+              data-cy="grid-delete-button"
+            >
               <app-trashcan-icon></app-trashcan-icon>
             </app-icon-button>
           </ng-container>
@@ -121,7 +125,7 @@
   </ng-template>
 
   <kendo-grid-excel [fileName]="getExportName()" [fetchData]="allData" [filterable]="true">
-    <ng-container *ngFor="let column of columns">
+    <ng-container *ngFor="let column of getColumnsForExport()">
       <ng-container *ngIf="column.style === 'excel-only'; else notExcelOnly">
         <kendo-excelexport-column [title]="column.title" [field]="column.title"></kendo-excelexport-column>
       </ng-container>

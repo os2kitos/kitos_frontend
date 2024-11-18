@@ -201,6 +201,7 @@ export * from './updateUserRequestDTO';
 export * from './userCollectionPermissionsResponseDTO';
 export * from './userIsPartOfCurrentOrgResponseDTO';
 export * from './userReferenceResponseDTO';
+export * from './userReferenceWithOrganizationResponseDTO';
 export * from './userResponseDTO';
 export * from './userWithCrossOrganizationalRightsResponseDTO';
 export * from './userWithOrganizationResponseDTO';

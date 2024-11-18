@@ -44,6 +44,8 @@ import { globalAdminFeature } from './global-admin/reducers';
 import { helpTextFeature } from './global-admin/help-texts/reducer';
 import { GlobalAdminHelpTextsEffects } from './global-admin/help-texts/effects';
 import { GlobalAdminEffects } from './global-admin/effects';
+import { localAdminUsersFeature } from './global-admin/local-admins/reducers';
+import { LocalAdminUserEffects } from './global-admin/local-admins/effects';
 
 @NgModule({
   imports: [
@@ -76,7 +78,7 @@ import { GlobalAdminEffects } from './global-admin/effects';
     StoreModule.forFeature(fkOrgFeature),
     StoreModule.forFeature(globalAdminFeature),
     StoreModule.forFeature(helpTextFeature),
-    StoreModule.forFeature(globalAdminFeature),
+    StoreModule.forFeature(localAdminUsersFeature),
     EffectsModule.forRoot([]),
     EffectsModule.forFeature([
       UserEffects,
@@ -98,6 +100,7 @@ import { GlobalAdminEffects } from './global-admin/effects';
       GlobalAdminOptionTypeEffects,
       GlobalAdminHelpTextsEffects,
       GlobalAdminEffects,
+      LocalAdminUserEffects,
     ]),
     RouterModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),

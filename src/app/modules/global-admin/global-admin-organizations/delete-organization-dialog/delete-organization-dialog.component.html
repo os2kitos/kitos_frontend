@@ -1,7 +1,7 @@
 <app-scrollbar-dialog [title]="getTitle()" i18n-title>
   <app-loading *ngIf="(deletingOrganization$ | async) === true"></app-loading>
   <ng-container *ngIf="(deletingOrganization$ | async) === false">
-    <ng-container *ngIf="(isLoading$ | async)">
+    <ng-container *ngIf="isLoading$ | async">
       <app-loading></app-loading>
     </ng-container>
     <ng-container *ngIf="(hasAnyRemovalConflict() | async) === true">

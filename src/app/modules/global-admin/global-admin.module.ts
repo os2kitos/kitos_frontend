@@ -23,10 +23,11 @@ import { GlobalAdminOtherBrokenLinksComponent } from './global-admin-other/globa
 import { GlobalAdminOtherKleComponent } from './global-admin-other/global-admin-other-kle/global-admin-other-kle.component';
 import { GlobalAdminOtherComponent } from './global-admin-other/global-admin-other.component';
 import { GlobalAdminRouterModule } from './global-admin.routes';
+import { GlobalAdminLocalAdminsGridComponent } from './global-admin-local-admins/global-admin-local-admins-grid/global-admin-local-admins-grid.component';
+import { CreateLocalAdminDialogComponent } from './global-admin-local-admins/create-local-admin-dialog/create-local-admin-dialog.component';
 import { GlobalAdminsTableComponent } from './global-admin-global-admins/global-admins-table/global-admins-table.component';
 import { GlobalAdminOtherUserShutdownComponent } from './global-admin-other/global-admin-other-user-shutdown/global-admin-other-user-shutdown.component';
 import { GlobalAdminComponent } from './global-admin.component';
-
 
 @NgModule({
   declarations: [
@@ -51,6 +52,8 @@ import { GlobalAdminComponent } from './global-admin.component';
     GlobalAdminOtherUserShutdownComponent,
     CreateGlobalAdminDialogComponent,
     GlobalAdminOtherBrokenLinksComponent,
+    GlobalAdminLocalAdminsGridComponent,
+    CreateLocalAdminDialogComponent,
     GlobalAdminOtherApiUsersComponent,
     ApiUsersOrganizationsDialogComponent,
   ],

@@ -38,6 +38,7 @@ import { SavedFilterState } from '../../models/grid/saved-filter-state.model';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
 import { StatePersistingService } from '../../services/state-persisting.service';
 import { ConfirmationDialogComponent } from '../dialogs/confirmation-dialog/confirmation-dialog.component';
+import { includedColumnInExport } from '../../helpers/grid-export.helper';
 
 @Component({
   selector: 'app-grid',
@@ -301,8 +302,10 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     return combineLatest([this.columns$, this.exportAllColumns$]).pipe(
       map(([columns, exportAllColumns]) => {
         return columns
-          ? columns.filter(
-              (column) => exportAllColumns || (!column.hidden && (!this.isExcelOnlyColumn(column) || exportAllColumns))
+          ? columns
+          .filter(includedColumnInExport)
+          .filter(
+              (column) => (exportAllColumns || (!column.hidden && (!this.isExcelOnlyColumn(column) || exportAllColumns)))
             )
           : [];
       })
