@@ -19,33 +19,33 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
-import { APIGlobalRoleOptionCreateRequestDTO } from '../model/aPIGlobalRoleOptionCreateRequestDTO';
+import { APIGlobalRegularOptionCreateRequestDTO } from '../model/aPIGlobalRegularOptionCreateRequestDTO';
 // @ts-ignore
-import { APIGlobalRoleOptionResponseDTO } from '../model/aPIGlobalRoleOptionResponseDTO';
+import { APIGlobalRegularOptionResponseDTO } from '../model/aPIGlobalRegularOptionResponseDTO';
 // @ts-ignore
-import { APIGlobalRoleOptionUpdateRequestDTO } from '../model/aPIGlobalRoleOptionUpdateRequestDTO';
+import { APIGlobalRegularOptionUpdateRequestDTO } from '../model/aPIGlobalRegularOptionUpdateRequestDTO';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
 
 
-export interface PatchSingleItContractGlobalItContractRoleTypesInternalV2PatchGlobalItContractRoleTypeRequestParams {
+export interface PatchSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2PatchGlobalDataProcessingBasisForTransferOptionRequestParams {
     optionUuid: string;
-    dto: APIGlobalRoleOptionUpdateRequestDTO;
+    dto: APIGlobalRegularOptionUpdateRequestDTO;
 }
 
-export interface PostSingleItContractGlobalItContractRoleTypesInternalV2CreateGlobalItContractRoleTypeRequestParams {
-    dto: APIGlobalRoleOptionCreateRequestDTO;
+export interface PostSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2CreateGlobalDataProcessingBasisForTransferOptionRequestParams {
+    dto: APIGlobalRegularOptionCreateRequestDTO;
 }
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class APIV2ItContractGlobalItContractRoleTypesInternalINTERNALService {
+export class APIV2DprGlobalDataProcessingBasisForTransferOptionsInternalINTERNALService {
 
-    protected basePath = 'https://kitos-dev.strongminds.dk';
+    protected basePath = 'https://localhost:44300';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
@@ -108,10 +108,10 @@ export class APIV2ItContractGlobalItContractRoleTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getManyItContractGlobalItContractRoleTypesInternalV2GetGlobalItContractRoleTypes(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIGlobalRoleOptionResponseDTO>>;
-    public getManyItContractGlobalItContractRoleTypesInternalV2GetGlobalItContractRoleTypes(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIGlobalRoleOptionResponseDTO>>>;
-    public getManyItContractGlobalItContractRoleTypesInternalV2GetGlobalItContractRoleTypes(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIGlobalRoleOptionResponseDTO>>>;
-    public getManyItContractGlobalItContractRoleTypesInternalV2GetGlobalItContractRoleTypes(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyDprGlobalDataProcessingBasisForTransferOptionsInternalV2GetGlobalDataProcessingBasisForTransferOptions(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIGlobalRegularOptionResponseDTO>>;
+    public getManyDprGlobalDataProcessingBasisForTransferOptionsInternalV2GetGlobalDataProcessingBasisForTransferOptions(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIGlobalRegularOptionResponseDTO>>>;
+    public getManyDprGlobalDataProcessingBasisForTransferOptionsInternalV2GetGlobalDataProcessingBasisForTransferOptions(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIGlobalRegularOptionResponseDTO>>>;
+    public getManyDprGlobalDataProcessingBasisForTransferOptionsInternalV2GetGlobalDataProcessingBasisForTransferOptions(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -144,8 +144,8 @@ export class APIV2ItContractGlobalItContractRoleTypesInternalINTERNALService {
             }
         }
 
-        let localVarPath = `/api/v2/internal/it-contract/global-option-types/it-contract-roles`;
-        return this.httpClient.request<Array<APIGlobalRoleOptionResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
+        let localVarPath = `/api/v2/internal/dpr/global-option-types/data-processing-basis-for-transfer-options`;
+        return this.httpClient.request<Array<APIGlobalRegularOptionResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -162,17 +162,17 @@ export class APIV2ItContractGlobalItContractRoleTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleItContractGlobalItContractRoleTypesInternalV2PatchGlobalItContractRoleType(requestParameters: PatchSingleItContractGlobalItContractRoleTypesInternalV2PatchGlobalItContractRoleTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRoleOptionResponseDTO>;
-    public patchSingleItContractGlobalItContractRoleTypesInternalV2PatchGlobalItContractRoleType(requestParameters: PatchSingleItContractGlobalItContractRoleTypesInternalV2PatchGlobalItContractRoleTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRoleOptionResponseDTO>>;
-    public patchSingleItContractGlobalItContractRoleTypesInternalV2PatchGlobalItContractRoleType(requestParameters: PatchSingleItContractGlobalItContractRoleTypesInternalV2PatchGlobalItContractRoleTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRoleOptionResponseDTO>>;
-    public patchSingleItContractGlobalItContractRoleTypesInternalV2PatchGlobalItContractRoleType(requestParameters: PatchSingleItContractGlobalItContractRoleTypesInternalV2PatchGlobalItContractRoleTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public patchSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2PatchGlobalDataProcessingBasisForTransferOption(requestParameters: PatchSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2PatchGlobalDataProcessingBasisForTransferOptionRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRegularOptionResponseDTO>;
+    public patchSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2PatchGlobalDataProcessingBasisForTransferOption(requestParameters: PatchSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2PatchGlobalDataProcessingBasisForTransferOptionRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRegularOptionResponseDTO>>;
+    public patchSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2PatchGlobalDataProcessingBasisForTransferOption(requestParameters: PatchSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2PatchGlobalDataProcessingBasisForTransferOptionRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRegularOptionResponseDTO>>;
+    public patchSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2PatchGlobalDataProcessingBasisForTransferOption(requestParameters: PatchSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2PatchGlobalDataProcessingBasisForTransferOptionRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
-            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItContractGlobalItContractRoleTypesInternalV2PatchGlobalItContractRoleType.');
+            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2PatchGlobalDataProcessingBasisForTransferOption.');
         }
         const dto = requestParameters.dto;
         if (dto === null || dto === undefined) {
-            throw new Error('Required parameter dto was null or undefined when calling patchSingleItContractGlobalItContractRoleTypesInternalV2PatchGlobalItContractRoleType.');
+            throw new Error('Required parameter dto was null or undefined when calling patchSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2PatchGlobalDataProcessingBasisForTransferOption.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -216,8 +216,8 @@ export class APIV2ItContractGlobalItContractRoleTypesInternalINTERNALService {
             }
         }
 
-        let localVarPath = `/api/v2/internal/it-contract/global-option-types/it-contract-roles/${this.configuration.encodeParam({name: "optionUuid", value: optionUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
-        return this.httpClient.request<APIGlobalRoleOptionResponseDTO>('patch', `${this.configuration.basePath}${localVarPath}`,
+        let localVarPath = `/api/v2/internal/dpr/global-option-types/data-processing-basis-for-transfer-options/${this.configuration.encodeParam({name: "optionUuid", value: optionUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
+        return this.httpClient.request<APIGlobalRegularOptionResponseDTO>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: dto,
@@ -235,13 +235,13 @@ export class APIV2ItContractGlobalItContractRoleTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleItContractGlobalItContractRoleTypesInternalV2CreateGlobalItContractRoleType(requestParameters: PostSingleItContractGlobalItContractRoleTypesInternalV2CreateGlobalItContractRoleTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRoleOptionResponseDTO>;
-    public postSingleItContractGlobalItContractRoleTypesInternalV2CreateGlobalItContractRoleType(requestParameters: PostSingleItContractGlobalItContractRoleTypesInternalV2CreateGlobalItContractRoleTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRoleOptionResponseDTO>>;
-    public postSingleItContractGlobalItContractRoleTypesInternalV2CreateGlobalItContractRoleType(requestParameters: PostSingleItContractGlobalItContractRoleTypesInternalV2CreateGlobalItContractRoleTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRoleOptionResponseDTO>>;
-    public postSingleItContractGlobalItContractRoleTypesInternalV2CreateGlobalItContractRoleType(requestParameters: PostSingleItContractGlobalItContractRoleTypesInternalV2CreateGlobalItContractRoleTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public postSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2CreateGlobalDataProcessingBasisForTransferOption(requestParameters: PostSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2CreateGlobalDataProcessingBasisForTransferOptionRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRegularOptionResponseDTO>;
+    public postSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2CreateGlobalDataProcessingBasisForTransferOption(requestParameters: PostSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2CreateGlobalDataProcessingBasisForTransferOptionRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRegularOptionResponseDTO>>;
+    public postSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2CreateGlobalDataProcessingBasisForTransferOption(requestParameters: PostSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2CreateGlobalDataProcessingBasisForTransferOptionRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRegularOptionResponseDTO>>;
+    public postSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2CreateGlobalDataProcessingBasisForTransferOption(requestParameters: PostSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2CreateGlobalDataProcessingBasisForTransferOptionRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const dto = requestParameters.dto;
         if (dto === null || dto === undefined) {
-            throw new Error('Required parameter dto was null or undefined when calling postSingleItContractGlobalItContractRoleTypesInternalV2CreateGlobalItContractRoleType.');
+            throw new Error('Required parameter dto was null or undefined when calling postSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2CreateGlobalDataProcessingBasisForTransferOption.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -284,8 +284,8 @@ export class APIV2ItContractGlobalItContractRoleTypesInternalINTERNALService {
             }
         }
 
-        let localVarPath = `/api/v2/internal/it-contract/global-option-types/it-contract-roles`;
-        return this.httpClient.request<APIGlobalRoleOptionResponseDTO>('post', `${this.configuration.basePath}${localVarPath}`,
+        let localVarPath = `/api/v2/internal/dpr/global-option-types/data-processing-basis-for-transfer-options`;
+        return this.httpClient.request<APIGlobalRegularOptionResponseDTO>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: dto,

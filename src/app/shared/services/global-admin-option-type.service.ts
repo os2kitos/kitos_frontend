@@ -5,6 +5,11 @@ import {
   APIGlobalRoleOptionCreateRequestDTO,
   APIGlobalRoleOptionResponseDTO,
   APIGlobalRoleOptionUpdateRequestDTO,
+  APIV2DprGlobalDataProcessingBasisForTransferOptionsInternalINTERNALService,
+  APIV2DprGlobalDataProcessingCountryOptionsInternalINTERNALService,
+  APIV2DprGlobalDataProcessingDataResponsibleOptionsInternalINTERNALService,
+  APIV2DprGlobalDataProcessingOversightOptionsInternalINTERNALService,
+  APIV2DprGlobalRoleOptionTypesInternalINTERNALService,
   APIV2ItContractGlobalAgreementElementTypesInternalINTERNALService,
   APIV2ItContractGlobalCriticalityTypesInternalINTERNALService,
   APIV2ItContractGlobalItContractRoleTypesInternalINTERNALService,
@@ -82,18 +87,33 @@ export class GlobalAdminOptionTypeService {
     @Inject(APIV2ItContractGlobalCriticalityTypesInternalINTERNALService)
     private criticalityTypeService: APIV2ItContractGlobalCriticalityTypesInternalINTERNALService,
 
+    //Data processing regular option type services
+    @Inject(APIV2DprGlobalDataProcessingBasisForTransferOptionsInternalINTERNALService)
+    private basisForTransferService: APIV2DprGlobalDataProcessingBasisForTransferOptionsInternalINTERNALService,
+    @Inject(APIV2DprGlobalDataProcessingOversightOptionsInternalINTERNALService)
+    private oversightOptionService: APIV2DprGlobalDataProcessingOversightOptionsInternalINTERNALService,
+    @Inject(APIV2DprGlobalDataProcessingDataResponsibleOptionsInternalINTERNALService)
+    private dataResponsibleService: APIV2DprGlobalDataProcessingDataResponsibleOptionsInternalINTERNALService,
+    @Inject(APIV2DprGlobalDataProcessingCountryOptionsInternalINTERNALService)
+    private countryService: APIV2DprGlobalDataProcessingCountryOptionsInternalINTERNALService,
+
     //Role types
     @Inject(APIV2ItSystemGlobalRoleOptionTypesInternalINTERNALService)
     private itSystemRoleService: APIV2ItSystemGlobalRoleOptionTypesInternalINTERNALService,
     @Inject(APIV2ItContractGlobalItContractRoleTypesInternalINTERNALService)
-    private itContractRoleService: APIV2ItContractGlobalItContractRoleTypesInternalINTERNALService
+    private itContractRoleService: APIV2ItContractGlobalItContractRoleTypesInternalINTERNALService,
+    @Inject(APIV2DprGlobalRoleOptionTypesInternalINTERNALService)
+    private dprRoleService: APIV2DprGlobalRoleOptionTypesInternalINTERNALService
   ) {}
 
   public getGlobalOptions(optionType: GlobalAdminOptionType): Observable<Array<APIGlobalRoleOptionResponseDTO>> {
     return this.resolveGetGlobalOptionsEndpoint(optionType)();
   }
 
-  public createGlobalOption(optionType: GlobalAdminOptionType, request: APIGlobalRoleOptionCreateRequestDTO): Observable<APIGlobalRoleOptionResponseDTO> {
+  public createGlobalOption(
+    optionType: GlobalAdminOptionType,
+    request: APIGlobalRoleOptionCreateRequestDTO
+  ): Observable<APIGlobalRoleOptionResponseDTO> {
     return this.resolveCreateGlobalOptionEndpoint(optionType)(request);
   }
 
@@ -134,40 +154,64 @@ export class GlobalAdminOptionTypeService {
       case 'it_system_usage-gdpr-registered-data-category-type':
         return () => this.registerTypeService.getManyItSystemGlobalRegisterTypesInternalV2GetGlobalRegisterTypes();
 
-
       //It Contract regular types
       case 'it-contract_contract-type':
-        return () => this.contractTypeService.getManyItContractGlobalItContractTypesInternalV2GetGlobalItContractTypes();
+        return () =>
+          this.contractTypeService.getManyItContractGlobalItContractTypesInternalV2GetGlobalItContractTypes();
 
       case 'it-contract_contract-template-type':
-        return () => this.templateTypeService.getManyItContractGlobalItContractTemplateTypesInternalV2GetGlobalItContractTemplateTypes();
+        return () =>
+          this.templateTypeService.getManyItContractGlobalItContractTemplateTypesInternalV2GetGlobalItContractTemplateTypes();
 
       case 'it-contract_purchase-form-type':
-        return () => this.purchaseFormTypeService.getManyItContractGlobalPurchaseFormTypesInternalV2GetGlobalPurchaseFormTypes();
+        return () =>
+          this.purchaseFormTypeService.getManyItContractGlobalPurchaseFormTypesInternalV2GetGlobalPurchaseFormTypes();
 
       case 'it-contract-payment-model-types':
-        return () => this.paymentModelTypeService.getManyItContractGlobalPaymentModelTypesInternalV2GetGlobalPaymentModelTypes();
+        return () =>
+          this.paymentModelTypeService.getManyItContractGlobalPaymentModelTypesInternalV2GetGlobalPaymentModelTypes();
 
       case 'it-contract-agreement-element-types':
-        return () => this.agreementElementTypeService.getManyItContractGlobalAgreementElementTypesInternalV2GetGlobalAgreementElementTypes();
+        return () =>
+          this.agreementElementTypeService.getManyItContractGlobalAgreementElementTypesInternalV2GetGlobalAgreementElementTypes();
 
       case 'it-contract-extend-types':
-        return () => this.optionExtendTypeService.getManyItContractGlobalOptionExtendTypesInternalV2GetGlobalOptionExtendTypes();
+        return () =>
+          this.optionExtendTypeService.getManyItContractGlobalOptionExtendTypesInternalV2GetGlobalOptionExtendTypes();
 
       case 'it-contract-payment-frequency-types':
-        return () => this.paymentFrequencyTypeService.getManyItContractGlobalPaymentFrequencyTypesInternalV2GetGlobalPaymentFreqencyTypes();
+        return () =>
+          this.paymentFrequencyTypeService.getManyItContractGlobalPaymentFrequencyTypesInternalV2GetGlobalPaymentFreqencyTypes();
 
       case 'it-contract-price-regulation-types':
-        return () => this.priceRegulationTypeService.getManyItContractGlobalPriceRegulationTypesInternalV2GetGlobalPriceRegulationTypes();
+        return () =>
+          this.priceRegulationTypeService.getManyItContractGlobalPriceRegulationTypesInternalV2GetGlobalPriceRegulationTypes();
 
       case 'it-contract_procurement-strategy-type':
-        return () => this.procurementStrategyTypeService.getManyItContractGlobalProcurementStrategyTypesInternalV2GetGlobalProcurementStrategyTypes();
+        return () =>
+          this.procurementStrategyTypeService.getManyItContractGlobalProcurementStrategyTypesInternalV2GetGlobalProcurementStrategyTypes();
 
       case 'it-contract-termination-period-types':
-        return () => this.terminationDeadlineTypeService.getManyItContractGlobalTerminationDeadlineTypesInternalV2GetGlobalTerminationDeadlineTypes();
+        return () =>
+          this.terminationDeadlineTypeService.getManyItContractGlobalTerminationDeadlineTypesInternalV2GetGlobalTerminationDeadlineTypes();
 
       case 'it-contract_criticality-type':
-        return () => this.criticalityTypeService.getManyItContractGlobalCriticalityTypesInternalV2GetGlobalCriticalityTypes();
+        return () =>
+          this.criticalityTypeService.getManyItContractGlobalCriticalityTypesInternalV2GetGlobalCriticalityTypes();
+
+      //Data processing regular types
+      case 'data-processing-basis-for-transfer-types':
+        return () =>
+          this.basisForTransferService.getManyDprGlobalDataProcessingBasisForTransferOptionsInternalV2GetGlobalDataProcessingBasisForTransferOptions();
+      case 'data-processing-oversight-option-types':
+        return () =>
+          this.oversightOptionService.getManyDprGlobalDataProcessingOversightOptionsInternalV2GetGlobalDataProcessingOversightOptions();
+      case 'data-processing-data-responsible-types':
+        return () =>
+          this.dataResponsibleService.getManyDprGlobalDataProcessingDataResponsibleOptionsInternalV2GetGlobalDataProcessingDataResponsibleOptions();
+      case 'data-processing-country-types':
+        return () =>
+          this.countryService.getManyDprGlobalDataProcessingCountryOptionsInternalV2GetGlobalDataProcessingCountryOptions();
 
       //Role types
       case 'it-system-usage':
@@ -175,6 +219,8 @@ export class GlobalAdminOptionTypeService {
       case 'it-contract':
         return () =>
           this.itContractRoleService.getManyItContractGlobalItContractRoleTypesInternalV2GetGlobalItContractRoleTypes();
+      case 'data-processing':
+        return () => this.dprRoleService.getManyDprGlobalRoleOptionTypesInternalV2GetDprRoles();
       default:
         throw new Error(`Get operation is not supported for ${optionType}`);
     }
@@ -250,88 +296,135 @@ export class GlobalAdminOptionTypeService {
             dto,
           });
 
-
       //IT contract regular types
       case 'it-contract_contract-type':
-    return (optionUuid: string, request: APIGlobalRegularOptionUpdateRequestDTO) =>
-      this.contractTypeService.patchSingleItContractGlobalItContractTypesInternalV2PatchGlobalItContractType({
-        optionUuid,
-        dto: request,
-      });
+        return (optionUuid: string, request: APIGlobalRegularOptionUpdateRequestDTO) =>
+          this.contractTypeService.patchSingleItContractGlobalItContractTypesInternalV2PatchGlobalItContractType({
+            optionUuid,
+            dto: request,
+          });
 
-  case 'it-contract_contract-template-type':
-    return (optionUuid: string, request: APIGlobalRegularOptionUpdateRequestDTO) =>
-      this.templateTypeService.patchSingleItContractGlobalItContractTemplateTypesInternalV2PatchGlobalItContractTemplateType({
-        optionUuid,
-        dto: request,
-      });
+      case 'it-contract_contract-template-type':
+        return (optionUuid: string, request: APIGlobalRegularOptionUpdateRequestDTO) =>
+          this.templateTypeService.patchSingleItContractGlobalItContractTemplateTypesInternalV2PatchGlobalItContractTemplateType(
+            {
+              optionUuid,
+              dto: request,
+            }
+          );
 
-  case 'it-contract_purchase-form-type':
-    return (optionUuid: string, request: APIGlobalRegularOptionUpdateRequestDTO) =>
-      this.purchaseFormTypeService.patchSingleItContractGlobalPurchaseFormTypesInternalV2PatchGlobalPurchaseFormType({
-        optionUuid,
-        dto: request,
-      });
+      case 'it-contract_purchase-form-type':
+        return (optionUuid: string, request: APIGlobalRegularOptionUpdateRequestDTO) =>
+          this.purchaseFormTypeService.patchSingleItContractGlobalPurchaseFormTypesInternalV2PatchGlobalPurchaseFormType(
+            {
+              optionUuid,
+              dto: request,
+            }
+          );
 
-  case 'it-contract-payment-model-types':
-    return (optionUuid: string, request: APIGlobalRegularOptionUpdateRequestDTO) =>
-      this.paymentModelTypeService.patchSingleItContractGlobalPaymentModelTypesInternalV2PatchGlobalPaymentModelType({
-        optionUuid,
-        dto: request,
-      });
+      case 'it-contract-payment-model-types':
+        return (optionUuid: string, request: APIGlobalRegularOptionUpdateRequestDTO) =>
+          this.paymentModelTypeService.patchSingleItContractGlobalPaymentModelTypesInternalV2PatchGlobalPaymentModelType(
+            {
+              optionUuid,
+              dto: request,
+            }
+          );
 
-  case 'it-contract-agreement-element-types':
-    return (optionUuid: string, request: APIGlobalRegularOptionUpdateRequestDTO) =>
-      this.agreementElementTypeService.patchSingleItContractGlobalAgreementElementTypesInternalV2PatchGlobalAgreementElementType({
-        optionUuid,
-        dto: request,
-      });
+      case 'it-contract-agreement-element-types':
+        return (optionUuid: string, request: APIGlobalRegularOptionUpdateRequestDTO) =>
+          this.agreementElementTypeService.patchSingleItContractGlobalAgreementElementTypesInternalV2PatchGlobalAgreementElementType(
+            {
+              optionUuid,
+              dto: request,
+            }
+          );
 
-  case 'it-contract-extend-types':
-    return (optionUuid: string, request: APIGlobalRegularOptionUpdateRequestDTO) =>
-      this.optionExtendTypeService.patchSingleItContractGlobalOptionExtendTypesInternalV2PatchGlobalOptionExtendType({
-        optionUuid,
-        dto: request,
-      });
+      case 'it-contract-extend-types':
+        return (optionUuid: string, request: APIGlobalRegularOptionUpdateRequestDTO) =>
+          this.optionExtendTypeService.patchSingleItContractGlobalOptionExtendTypesInternalV2PatchGlobalOptionExtendType(
+            {
+              optionUuid,
+              dto: request,
+            }
+          );
 
-  case 'it-contract-payment-frequency-types':
-    return (optionUuid: string, request: APIGlobalRegularOptionUpdateRequestDTO) =>
-      this.paymentFrequencyTypeService.patchSingleItContractGlobalPaymentFrequencyTypesInternalV2PatchGlobalPaymentFreqencyType({
-        optionUuid,
-        dto: request,
-      });
+      case 'it-contract-payment-frequency-types':
+        return (optionUuid: string, request: APIGlobalRegularOptionUpdateRequestDTO) =>
+          this.paymentFrequencyTypeService.patchSingleItContractGlobalPaymentFrequencyTypesInternalV2PatchGlobalPaymentFreqencyType(
+            {
+              optionUuid,
+              dto: request,
+            }
+          );
 
-  case 'it-contract-price-regulation-types':
-    return (optionUuid: string, request: APIGlobalRegularOptionUpdateRequestDTO) =>
-      this.priceRegulationTypeService.patchSingleItContractGlobalPriceRegulationTypesInternalV2PatchGlobalPriceRegulationType({
-        optionUuid,
-        dto: request,
-      });
+      case 'it-contract-price-regulation-types':
+        return (optionUuid: string, request: APIGlobalRegularOptionUpdateRequestDTO) =>
+          this.priceRegulationTypeService.patchSingleItContractGlobalPriceRegulationTypesInternalV2PatchGlobalPriceRegulationType(
+            {
+              optionUuid,
+              dto: request,
+            }
+          );
 
-  case 'it-contract_procurement-strategy-type':
-    return (optionUuid: string, request: APIGlobalRegularOptionUpdateRequestDTO) =>
-      this.procurementStrategyTypeService.patchSingleItContractGlobalProcurementStrategyTypesInternalV2PatchGlobalProcurementStrategyType({
-        optionUuid,
-        dto: request,
-      });
+      case 'it-contract_procurement-strategy-type':
+        return (optionUuid: string, request: APIGlobalRegularOptionUpdateRequestDTO) =>
+          this.procurementStrategyTypeService.patchSingleItContractGlobalProcurementStrategyTypesInternalV2PatchGlobalProcurementStrategyType(
+            {
+              optionUuid,
+              dto: request,
+            }
+          );
 
-  case 'it-contract-termination-period-types':
-    return (optionUuid: string, request: APIGlobalRegularOptionUpdateRequestDTO) =>
-      this.terminationDeadlineTypeService.patchSingleItContractGlobalTerminationDeadlineTypesInternalV2PatchGlobalTerminationDeadlineType({
-        optionUuid,
-        dto: request,
-      });
+      case 'it-contract-termination-period-types':
+        return (optionUuid: string, request: APIGlobalRegularOptionUpdateRequestDTO) =>
+          this.terminationDeadlineTypeService.patchSingleItContractGlobalTerminationDeadlineTypesInternalV2PatchGlobalTerminationDeadlineType(
+            {
+              optionUuid,
+              dto: request,
+            }
+          );
 
-  case 'it-contract_criticality-type':
-    return (optionUuid: string, request: APIGlobalRegularOptionUpdateRequestDTO) =>
-      this.criticalityTypeService.patchSingleItContractGlobalCriticalityTypesInternalV2PatchGlobalCriticalityType({
-        optionUuid,
-        dto: request,
-      });
+      case 'it-contract_criticality-type':
+        return (optionUuid: string, request: APIGlobalRegularOptionUpdateRequestDTO) =>
+          this.criticalityTypeService.patchSingleItContractGlobalCriticalityTypesInternalV2PatchGlobalCriticalityType({
+            optionUuid,
+            dto: request,
+          });
+
+
+      // Data processing regular option types
+      case 'data-processing-basis-for-transfer-types':
+        return (optionUuid: string, request: APIGlobalRegularOptionUpdateRequestDTO) =>
+          this.basisForTransferService.patchSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2PatchGlobalDataProcessingBasisForTransferOption({
+            optionUuid,
+            dto: request,
+          });
+
+      case 'data-processing-oversight-option-types':
+        return (optionUuid: string, request: APIGlobalRegularOptionUpdateRequestDTO) =>
+          this.oversightOptionService.patchSingleDprGlobalDataProcessingOversightOptionsInternalV2PatchGlobalDataProcessingOversightOption({
+            optionUuid,
+            dto: request,
+          });
+
+      case 'data-processing-data-responsible-types':
+        return (optionUuid: string, request: APIGlobalRegularOptionUpdateRequestDTO) =>
+          this.dataResponsibleService.patchSingleDprGlobalDataProcessingDataResponsibleOptionsInternalV2PatchGlobalDataProcessingDataResponsibleOption({
+            optionUuid,
+            dto: request,
+          });
+
+      case 'data-processing-country-types':
+        return (optionUuid: string, request: APIGlobalRegularOptionUpdateRequestDTO) =>
+          this.countryService.patchSingleDprGlobalDataProcessingCountryOptionsInternalV2PatchGlobalDataProcessingCountryOption({
+            optionUuid,
+            dto: request,
+          });
 
       //Role types
       case 'it-system-usage':
-        return (optionUuid: string, dto: APIGlobalRoleOptionUpdateRequestDTO) =>
+        return (optionUuid: string, dto: APIGlobalRegularOptionUpdateRequestDTO) =>
           this.itSystemRoleService.patchSingleItSystemGlobalRoleOptionTypesInternalV2PatchGlobalBItSystemRole({
             optionUuid,
             dto,
@@ -344,6 +437,12 @@ export class GlobalAdminOptionTypeService {
               dto,
             }
           );
+      case 'data-processing':
+        return (optionUuid: string, dto: APIGlobalRoleOptionUpdateRequestDTO) =>
+          this.dprRoleService.patchSingleDprGlobalRoleOptionTypesInternalV2PatchDprRole({
+            optionUuid,
+            dto,
+          });
       default:
         throw new Error(`Patch operation is not supported for ${optionType}`);
     }
@@ -418,57 +517,75 @@ export class GlobalAdminOptionTypeService {
 
       case 'it-contract_contract-template-type':
         return (request: APIGlobalRoleOptionCreateRequestDTO) =>
-          this.templateTypeService.postSingleItContractGlobalItContractTemplateTypesInternalV2CreateGlobalItContractTemplateType({
-            dto: request,
-          });
+          this.templateTypeService.postSingleItContractGlobalItContractTemplateTypesInternalV2CreateGlobalItContractTemplateType(
+            {
+              dto: request,
+            }
+          );
 
       case 'it-contract_purchase-form-type':
         return (request: APIGlobalRoleOptionCreateRequestDTO) =>
-          this.purchaseFormTypeService.postSingleItContractGlobalPurchaseFormTypesInternalV2CreateGlobalPurchaseFormType({
-            dto: request,
-          });
+          this.purchaseFormTypeService.postSingleItContractGlobalPurchaseFormTypesInternalV2CreateGlobalPurchaseFormType(
+            {
+              dto: request,
+            }
+          );
 
       case 'it-contract-payment-model-types':
         return (request: APIGlobalRoleOptionCreateRequestDTO) =>
-          this.paymentModelTypeService.postSingleItContractGlobalPaymentModelTypesInternalV2CreateGlobalPaymentModelType({
-            dto: request,
-          });
+          this.paymentModelTypeService.postSingleItContractGlobalPaymentModelTypesInternalV2CreateGlobalPaymentModelType(
+            {
+              dto: request,
+            }
+          );
 
       case 'it-contract-agreement-element-types':
         return (request: APIGlobalRoleOptionCreateRequestDTO) =>
-          this.agreementElementTypeService.postSingleItContractGlobalAgreementElementTypesInternalV2CreateGlobalAgreementElementType({
-            dto: request,
-          });
+          this.agreementElementTypeService.postSingleItContractGlobalAgreementElementTypesInternalV2CreateGlobalAgreementElementType(
+            {
+              dto: request,
+            }
+          );
 
       case 'it-contract-extend-types':
         return (request: APIGlobalRoleOptionCreateRequestDTO) =>
-          this.optionExtendTypeService.postSingleItContractGlobalOptionExtendTypesInternalV2CreateGlobalOptionExtendType({
-            dto: request,
-          });
+          this.optionExtendTypeService.postSingleItContractGlobalOptionExtendTypesInternalV2CreateGlobalOptionExtendType(
+            {
+              dto: request,
+            }
+          );
 
       case 'it-contract-payment-frequency-types':
         return (request: APIGlobalRoleOptionCreateRequestDTO) =>
-          this.paymentFrequencyTypeService.postSingleItContractGlobalPaymentFrequencyTypesInternalV2CreateGlobalPaymentFreqencyType({
-            dto: request,
-          });
+          this.paymentFrequencyTypeService.postSingleItContractGlobalPaymentFrequencyTypesInternalV2CreateGlobalPaymentFreqencyType(
+            {
+              dto: request,
+            }
+          );
 
       case 'it-contract-price-regulation-types':
         return (request: APIGlobalRoleOptionCreateRequestDTO) =>
-          this.priceRegulationTypeService.postSingleItContractGlobalPriceRegulationTypesInternalV2CreateGlobalPriceRegulationType({
-            dto: request,
-          });
+          this.priceRegulationTypeService.postSingleItContractGlobalPriceRegulationTypesInternalV2CreateGlobalPriceRegulationType(
+            {
+              dto: request,
+            }
+          );
 
       case 'it-contract_procurement-strategy-type':
         return (request: APIGlobalRoleOptionCreateRequestDTO) =>
-          this.procurementStrategyTypeService.postSingleItContractGlobalProcurementStrategyTypesInternalV2CreateGlobalProcurementStrategyType({
-            dto: request,
-          });
+          this.procurementStrategyTypeService.postSingleItContractGlobalProcurementStrategyTypesInternalV2CreateGlobalProcurementStrategyType(
+            {
+              dto: request,
+            }
+          );
 
       case 'it-contract-termination-period-types':
         return (request: APIGlobalRoleOptionCreateRequestDTO) =>
-          this.terminationDeadlineTypeService.postSingleItContractGlobalTerminationDeadlineTypesInternalV2CreateGlobalTerminationDeadlineType({
-            dto: request,
-          });
+          this.terminationDeadlineTypeService.postSingleItContractGlobalTerminationDeadlineTypesInternalV2CreateGlobalTerminationDeadlineType(
+            {
+              dto: request,
+            }
+          );
 
       case 'it-contract_criticality-type':
         return (request: APIGlobalRoleOptionCreateRequestDTO) =>
@@ -476,6 +593,30 @@ export class GlobalAdminOptionTypeService {
             dto: request,
           });
 
+      // Data processing regular option types
+      case 'data-processing-basis-for-transfer-types':
+        return (dto: APIGlobalRoleOptionCreateRequestDTO) =>
+          this.basisForTransferService.postSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2CreateGlobalDataProcessingBasisForTransferOption({
+            dto: dto,
+          });
+
+      case 'data-processing-oversight-option-types':
+        return (dto: APIGlobalRoleOptionCreateRequestDTO) =>
+          this.oversightOptionService.postSingleDprGlobalDataProcessingOversightOptionsInternalV2CreateGlobalDataProcessingOversightOption({
+            dto: dto,
+          });
+
+      case 'data-processing-data-responsible-types':
+        return (dto: APIGlobalRoleOptionCreateRequestDTO) =>
+          this.dataResponsibleService.postSingleDprGlobalDataProcessingDataResponsibleOptionsInternalV2CreateGlobalDataProcessingDataResponsibleOption({
+            dto: dto,
+          });
+
+      case 'data-processing-country-types':
+        return (dto: APIGlobalRoleOptionCreateRequestDTO) =>
+          this.countryService.postSingleDprGlobalDataProcessingCountryOptionsInternalV2CreateGlobalDataProcessingCountryOption({
+            dto: dto,
+          });
 
       //Role types
       case 'it-system-usage':
@@ -490,6 +631,11 @@ export class GlobalAdminOptionTypeService {
               dto,
             }
           );
+      case 'data-processing':
+        return (dto: APIGlobalRoleOptionCreateRequestDTO) =>
+          this.dprRoleService.postSingleDprGlobalRoleOptionTypesInternalV2CreateDprRole({
+            dto,
+          });
       default:
         throw new Error(`Create operation is not supported for ${optionType}`);
     }

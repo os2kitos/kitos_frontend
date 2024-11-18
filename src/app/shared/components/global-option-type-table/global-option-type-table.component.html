@@ -53,6 +53,8 @@
           <td>
             <app-content-space-between>
               <app-paragraph *ngIf="showDescription" i18n class="description-overflow"> {{ optionTypeItem.description }} </app-paragraph>
+              <!-- 18/11/24 This empty paragraph is required to maintain action column alignment if the description column is hidden. -->
+              <app-paragraph *ngIf="!showDescription"></app-paragraph>
               <app-table-row-actions>
                 <app-icon-button (buttonClick)="onEdit(optionTypeItem)" data-cy="edit-button">
                   <app-pencil-icon></app-pencil-icon>

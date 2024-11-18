@@ -11,6 +11,11 @@ import { APIV2DataProcessingRegistrationInternalINTERNALService } from './api/v2
 import { APIV2DataProcessingRegistrationOversightTypeService } from './api/v2DataProcessingRegistrationOversightType.service';
 import { APIV2DataProcessingRegistrationRoleTypeService } from './api/v2DataProcessingRegistrationRoleType.service';
 import { APIV2DeltaFeedService } from './api/v2DeltaFeed.service';
+import { APIV2DprGlobalDataProcessingBasisForTransferOptionsInternalINTERNALService } from './api/v2DprGlobalDataProcessingBasisForTransferOptionsInternalINTERNAL.service';
+import { APIV2DprGlobalDataProcessingCountryOptionsInternalINTERNALService } from './api/v2DprGlobalDataProcessingCountryOptionsInternalINTERNAL.service';
+import { APIV2DprGlobalDataProcessingDataResponsibleOptionsInternalINTERNALService } from './api/v2DprGlobalDataProcessingDataResponsibleOptionsInternalINTERNAL.service';
+import { APIV2DprGlobalDataProcessingOversightOptionsInternalINTERNALService } from './api/v2DprGlobalDataProcessingOversightOptionsInternalINTERNAL.service';
+import { APIV2DprGlobalRoleOptionTypesInternalINTERNALService } from './api/v2DprGlobalRoleOptionTypesInternalINTERNAL.service';
 import { APIV2DprLocalBasisForTransferTypesInternalINTERNALService } from './api/v2DprLocalBasisForTransferTypesInternalINTERNAL.service';
 import { APIV2DprLocalCountryOptionTypesInternalINTERNALService } from './api/v2DprLocalCountryOptionTypesInternalINTERNAL.service';
 import { APIV2DprLocalDataResponsibleTypesInternalINTERNALService } from './api/v2DprLocalDataResponsibleTypesInternalINTERNAL.service';
