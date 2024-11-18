@@ -71,7 +71,7 @@ export class GlobalOptionTypeTableComponent extends BaseComponent implements OnI
   ) {
     return this.optionTypeItems$.pipe(
       map((optionTypeItems) => {
-        const boundary = optionTypeItems.reduce(comparator, 0);
+        const boundary = optionTypeItems.reduce(comparator, 1);
         return option.priority === boundary;
       })
     );
