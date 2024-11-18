@@ -10,6 +10,8 @@ Make sure you have installed [Node.js](https://nodejs.org/en/) (preferable using
 
 `yarn start` for a development server. Navigate to `http://localhost:4200/` or `http://127.0.0.1:4200/`. The app will automatically reload if you change any of the source files.
 
+`yarn start:local` runs the development server with a local backend, by changing the values in `src/proxy.conf.json`. This requires a local backend running on `https://localhost:44300`. After terminating, the proxy settings return to the default.
+
 `yarn build` to build the project. The built web app will be placed in the `dist/` directory. `yarn build` defaults to build for development. `yarn build --configuration dev` builds for the dev environment. `yarn build --configuration production` builds for the production environment.
 
 `yarn e2e` to serve the Angular app and afterwards start Cypress E2E testing.
@@ -19,6 +21,8 @@ Make sure you have installed [Node.js](https://nodejs.org/en/) (preferable using
 `yarn i18n` extract all tagged texts to `src/locale/messages.xlf` for internationalization.
 
 `yarn swagger` to generate the API abstraction in `src/app/api/` using the `openapitools.json`.
+
+`yarn swagger:local` generates the API abstraction using a local backend running on `https://localhost:44300`, by changing the values in `openapitools.json`.
 
 See `package.json` for how these scripts run and `angular.json` for serve/build configurations.
 
@@ -96,6 +100,10 @@ In Visual Studio Code this is easiest done using the `EditorConfig.editorconfig`
 ### This site can't provide a secure connection
 
 If you run `yarn start`, visit http://localhost:4200 in Chrome and see "This site can't provide a secure connection". It might be because Chrome has cached a permanent redirect from http://localhost to https://localhost. Fix it by going to [chrome://net-internals/#hsts](chrome://net-internals/#hsts) , find the "Delete domain security policies" section, type in `localhost` and click "Delete".
+
+### `:local` development scripts
+
+`yarn start:local` and `yarn swagger:local` use the script in `src/use-local-proxy.sh`. If the scripts return a "sh command was not recognized" error, you either have to use `Git Bash` to run the command, or add Git to the (Path Environment Variable)[https://www.eukhost.com/kb/how-to-add-to-the-path-on-windows-10-and-windows-11/]. This is the default installation folder for git: `C:\Program Files\Git\bin`
 
 ## Developer Guide
 
