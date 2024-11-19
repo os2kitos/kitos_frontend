@@ -103,10 +103,10 @@ describe('it-system-usage', () => {
         cy.getByDataCy('email-recipient-accordion').click().getByDataCy('email-recipient-textbox').type(recipient);
         cy.dropdownByCy('notification-type-dropdown', 'Straks', true);
         cy.getByDataCy('subject-textbox').type('testSubject');
-        cy.setTinyMceContent('body-editor', 'testBody');
+        cy.setTinyMceContent('rich-text-editor', 'testBody');
         cy.getIframe().click({ force: true });
         //Clicks twice to first defocus body editor and update form value, then save the notification.
-        //This is required because the Cypress interacts with the editor by "setting" content rather than typing.
+        //This is required because Cypress interacts with the editor by "setting" content rather than typing.
         cy.getByDataCy('confirm-button').click();
 
         cy.intercept(

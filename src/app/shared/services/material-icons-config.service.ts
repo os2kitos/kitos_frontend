@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
-import { AppRootUrlResolverServiceService } from './app-root-url-resolver-service.service';
+import { AppRootUrlResolverService } from './app-root-url-resolver.service';
 
 @Injectable({ providedIn: 'root' })
 export class MaterialIconsConfigService {
   constructor(
     private readonly iconRegistry: MatIconRegistry,
     private readonly sanitizer: DomSanitizer,
-    private readonly appRootUrlLocationStrategy: AppRootUrlResolverServiceService
+    private readonly appRootUrlLocationStrategy: AppRootUrlResolverService
   ) {}
 
   public configureCustomIcons() {

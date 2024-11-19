@@ -17,19 +17,16 @@ describe('global-admin-help-texts', () => {
 
     const key = 'someKey';
     const title = 'someTitle';
-    const description = 'someDescription';
 
     cy.getByDataCy('create-button').click();
     cy.replaceTextByDataCy('key-input', key);
     cy.replaceTextByDataCy('title-input', title);
-    cy.replaceTextByDataCy('description-input', description);
     cy.getByDataCy('dialog-actions').within(() => {
       cy.getByDataCy('save-button').click();
 
       cy.wait('@post').then((interception) => {
       expect(interception.request.body.key).to.equal(key);
       expect(interception.request.body.title).to.equal(title);
-      expect(interception.request.body.description).to.equal(description);
     });
     });
   });
@@ -56,17 +53,14 @@ describe('global-admin-help-texts', () => {
     }).as('patch');
 
     const title = 'someTitle';
-    const description = 'someDescription';
 
     cy.getByDataCy('grid-edit-button').first().click();
     cy.replaceTextByDataCy('title-input', title);
-    cy.replaceTextByDataCy('description-input', description);
     cy.getByDataCy('dialog-actions').within(() => {
       cy.getByDataCy('save-button').click();
 
       cy.wait('@patch').then((interception) => {
       expect(interception.request.body.title).to.equal(title);
-      expect(interception.request.body.description).to.equal(description);
     });
     });
   });

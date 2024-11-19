@@ -181,16 +181,7 @@
       ></app-textbox>
     </app-standard-vertical-content-grid>
     <app-standard-vertical-content-grid>
-      <editor
-        [init]="{
-          plugins: ['lists', 'link', 'image', 'code'],
-          height: 300,
-          base_url: [rootUrl] + '/tinymce/',
-          suffix: '.min'
-        }"
-        [formControl]="notificationForm.controls.bodyControl"
-        data-cy="body-editor"
-      ></editor>
+      <app-rich-text-editor [formControl]="notificationForm.controls.bodyControl"></app-rich-text-editor>>
 
       <app-dialog-actions>
         <app-button buttonStyle="secondary" size="large" i18n (buttonClick)="onCancel()">Annuller</app-button>

@@ -28,15 +28,9 @@
   data-cy="title-input"
   >
   </app-textbox>
-
-  <app-textbox
-  [formGroup]="formGroup"
-  formName="description"
-  text="Beskrivelse"
-  i18n-text
-  data-cy="description-input"
-  >
-  </app-textbox>
+  <app-rich-text-editor
+  [formControl]="formGroup.controls.description">
+  </app-rich-text-editor>
 </app-standard-vertical-content-grid>
 
 <app-dialog-actions data-cy="dialog-actions">

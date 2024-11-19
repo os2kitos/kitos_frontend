@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { debounceTime } from 'rxjs';
 import { APIHelpTextCreateRequestDTO } from 'src/app/api/v2/model/helpTextCreateRequestDTO';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { AppRootUrlResolverService } from 'src/app/shared/services/app-root-url-resolver.service';
 import { HelpTextActions } from 'src/app/store/global-admin/help-texts/actions';
 import { CreateHelpTextDialogComponentStore } from './create-help-text-dialog.component-store';
 
@@ -25,13 +26,16 @@ export class CreateHelpTextDialogComponent extends BaseComponent implements OnIn
 
   public readonly keyExists$ = this.componentStore.keyExists$;
   public readonly isLoading$ = this.componentStore.isLoading$;
+  public rootUrl: string;
 
   constructor(
     private dialogRef: MatDialogRef<CreateHelpTextDialogComponent>,
     private store: Store,
-    private componentStore: CreateHelpTextDialogComponentStore
+    private componentStore: CreateHelpTextDialogComponentStore,
+    private rootUrlResolver: AppRootUrlResolverService
   ) {
     super();
+    this.rootUrl = this.rootUrlResolver.resolveRootUrl();
   }
 
   ngOnInit(): void {

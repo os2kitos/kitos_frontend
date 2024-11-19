@@ -23,7 +23,7 @@ import {
   notificationTypeOptions,
 } from 'src/app/shared/models/notification-type.model';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
-import { AppRootUrlResolverServiceService } from 'src/app/shared/services/app-root-url-resolver-service.service';
+import { AppRootUrlResolverService } from 'src/app/shared/services/app-root-url-resolver.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { NotificationsTableComponentStore } from '../notifications-table.component-store';
 
@@ -99,7 +99,7 @@ export class NotificationsTableDialogComponent implements OnInit {
   public canEdit = true;
 
   constructor(
-    private readonly appRootUrlResolverService: AppRootUrlResolverServiceService,
+    private readonly appRootUrlResolverService: AppRootUrlResolverService,
     private readonly notificationService: NotificationService,
     private readonly dialogRef: MatDialogRef<NotificationsTableDialogComponent>,
     private readonly componentStore: NotificationsTableComponentStore,

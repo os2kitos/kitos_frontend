@@ -8,7 +8,7 @@ import { trim } from 'lodash';
 /**
  * Service to resolve the true app root regardless of environment
  */
-export class AppRootUrlResolverServiceService {
+export class AppRootUrlResolverService {
   constructor(private readonly pathLocationStrategy: PathLocationStrategy) {}
 
   public resolveRootUrl() {

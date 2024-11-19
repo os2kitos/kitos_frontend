@@ -4,6 +4,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { APIHelpTextUpdateRequestDTO } from 'src/app/api/v2/model/helpTextUpdateRequestDTO';
 import { HelpText } from 'src/app/shared/models/help-text.model';
+import { AppRootUrlResolverService } from 'src/app/shared/services/app-root-url-resolver.service';
 import { HelpTextActions } from 'src/app/store/global-admin/help-texts/actions';
 
 @Component({
@@ -14,6 +15,7 @@ import { HelpTextActions } from 'src/app/store/global-admin/help-texts/actions';
 export class EditHelpTextDialogComponent implements OnInit {
   @Input() helpText!: HelpText;
 
+  public rootUrl: string;
   public readonly formGroup = new FormGroup({
     key: new FormControl<string | undefined>({
       value: undefined,
@@ -23,7 +25,13 @@ export class EditHelpTextDialogComponent implements OnInit {
     description: new FormControl<string | undefined>(undefined),
   });
 
-  constructor(private readonly dialogRef: MatDialogRef<EditHelpTextDialogComponent>, private store: Store) {}
+  constructor(
+    private readonly dialogRef: MatDialogRef<EditHelpTextDialogComponent>,
+    private store: Store,
+    private rootUrlResolver: AppRootUrlResolverService
+  ) {
+    this.rootUrl = this.rootUrlResolver.resolveRootUrl();
+  }
 
   ngOnInit(): void {
     this.formGroup.patchValue({
