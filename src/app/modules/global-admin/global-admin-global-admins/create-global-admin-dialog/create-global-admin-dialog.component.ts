@@ -16,7 +16,7 @@ import { map } from 'rxjs';
 })
 export class CreateGlobalAdminDialogComponent extends BaseComponent implements OnInit {
   public formGroup = new FormGroup({
-    user: new FormControl<APIUserReferenceResponseDTO | undefined>(undefined, Validators.required),
+    user: new FormControl<APIUserReferenceResponseDTO | undefined>(undefined, Validators.required)
   });
 
   constructor(

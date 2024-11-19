@@ -47,9 +47,6 @@ import { ItContractFrontpageComponentStore } from './it-contract-frontpage.compo
   providers: [ItContractFrontpageComponentStore],
 })
 export class ItContractFrontpageComponent extends BaseComponent implements OnInit {
-  public readonly contractTypes$ = this.store
-    .select(selectRegularOptionTypes('it-contract_contract-type'))
-    .pipe(filterNullish());
   public readonly contractTemplates$ = this.store
     .select(selectRegularOptionTypes('it-contract_contract-template-type'))
     .pipe(filterNullish());
@@ -221,6 +218,11 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
     }
   }
 
+  public ignoreNullReturnType<T>(item: T | null | undefined): T | undefined {
+    //eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return item as any as T | undefined;
+  }
+
   public patchName(value: string | undefined, valueChange?: ValidatedValueChange<unknown>) {
     if (!value) {
       return;
@@ -309,6 +311,7 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
       validTo: optionalNewDate(contract.general.validity.validTo),
       enforcedValid: enforcedValid,
       notes: contract.general.notes,
+      contractType: contract.general.contractType,
     });
   }
 

@@ -20,18 +20,14 @@
       formName="contractId"
       (valueChange)="patchFrontPage({ general: { contractId: $event } })"
     ></app-textbox>
-    <app-dropdown
+    <app-option-type-dropdown
       *ngIf="contractTypeEnabled$ | async"
-      text="Kontrakttype"
-      i18n-text
-      data-cy="contract-type"
-      valueField="uuid"
+      optionType="it-contract_contract-type"
       [formGroup]="frontpageFormGroup"
       formName="contractType"
-      [data]="contractTypes$ | async"
-      (valueChange)="patchFrontPage({ general: { contractTypeUuid: $event } })"
+      (valueChange)="patchFrontPage({ general: { contractTypeUuid: ignoreNullReturnType($event) } })"
     >
-    </app-dropdown>
+    </app-option-type-dropdown>
     <app-dropdown
       *ngIf="contractTemplateEnabled$ | async"
       text="Kontraktskabelon"

@@ -14,6 +14,7 @@ export class DropdownComponent<T> extends BaseDropdownComponent<T | null> implem
   @Input() public appendTo: string = '';
   @Input() public clearable: boolean = true;
   @Input() public searchFn?: (search: string, item: T) => boolean;
+  @Input() public showDescriptionLabel: boolean = true;
   @Output() public focusEvent = new EventEmitter();
   @Output() public openDropdown = new EventEmitter();
   @Output() public cleared = new EventEmitter();
@@ -70,7 +71,6 @@ export class DropdownComponent<T> extends BaseDropdownComponent<T | null> implem
 
   private doesDataContainValue(value?: any): boolean {
     if (!this.data || value === undefined || value === null) return false;
-
     return !this.data.some(
       (option: any) => option[this.valueField] !== undefined && option[this.valueField] === value[this.valueField]
     );

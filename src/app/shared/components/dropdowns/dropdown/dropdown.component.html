@@ -52,6 +52,7 @@
   [clearable]="clearable"
   (search)="filter$.next($event.term)"
   (change)="valueChange.emit($event)"
+  [searchFn]="searchFn"
   (clear)="onClear()"
 >
   <ng-template ng-option-tmp let-item="item">
@@ -70,6 +71,6 @@
   </ng-template>
 </ng-select>
 
-<app-textbox-info *ngIf="description">
+<app-textbox-info *ngIf="description && showDescriptionLabel">
   <app-paragraph paragraphSize="x-small">{{ description }}</app-paragraph>
 </app-textbox-info>

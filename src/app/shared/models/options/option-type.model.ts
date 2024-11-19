@@ -5,3 +5,9 @@ export const mapOptionCrossReferenceToOptionDTO = (
 ): APIRegularOptionResponseDTO | undefined => {
   return value ? { uuid: value.uuid, name: value.name, description: '' } : undefined;
 };
+
+export type ShallowOptionType = {
+  uuid: string;
+  name: string;
+  description: string;
+};
