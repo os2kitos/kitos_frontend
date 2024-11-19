@@ -1,5 +1,8 @@
 <ng-content *ngIf="organizationName$ | async as organizationName">
-  <h3 i18n class="title-margin" data-cy="master-data-headline">Stamdata for {{ organizationName }}</h3>
+  <div class="page-title-container">
+    <h3 i18n class="page-title" data-cy="master-data-headline">Stamdata for {{ organizationName }}</h3>
+    <app-help-button helpTextKey="organization.gdpr"></app-help-button>
+  </div>
   <app-card class="card-top-margin">
     <app-card-header [title]="organizationName"></app-card-header>
     <app-form-grid [formGroup]="masterDataForm">

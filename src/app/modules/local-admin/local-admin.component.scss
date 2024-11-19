@@ -1,5 +1,5 @@
 @import "theme";
-@import 'mixins';
+@import "mixins";
 
 :host {
   display: flex;
@@ -18,8 +18,9 @@
   margin-left: 10px;
 }
 
-.header {
+.flex-box-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: $padding-small;
 }

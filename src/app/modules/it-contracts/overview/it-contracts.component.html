@@ -1,8 +1,19 @@
 <app-overview-header>
   <h3 i18n>IT Kontrakter</h3>
+  <app-help-button helpTextKey="it-contract.overview"></app-help-button>
   <app-filter-options-button entityType="it-contract"></app-filter-options-button>
-  <app-reset-to-org-columns-config-button [gridColumns$]="gridColumns$" entityType="it-contract" [lastSeenGridConfig$]="lastSeenGridConfig$"></app-reset-to-org-columns-config-button>
-  <app-local-admin-column-config-button *ngIf="hasConfigModificationPermissions$ | async" [columns$]="gridColumns$" entityType="it-contract" [lastSeenGridConfig$]="lastSeenGridConfig$"> </app-local-admin-column-config-button>
+  <app-reset-to-org-columns-config-button
+    [gridColumns$]="gridColumns$"
+    entityType="it-contract"
+    [lastSeenGridConfig$]="lastSeenGridConfig$"
+  ></app-reset-to-org-columns-config-button>
+  <app-local-admin-column-config-button
+    *ngIf="hasConfigModificationPermissions$ | async"
+    [columns$]="gridColumns$"
+    entityType="it-contract"
+    [lastSeenGridConfig$]="lastSeenGridConfig$"
+  >
+  </app-local-admin-column-config-button>
   <app-export-menu-button [exportMethod]="onExcelExport"></app-export-menu-button>
   <app-hide-show-button [columns]="gridColumns$ | async" entityType="it-contract"></app-hide-show-button>
   <app-create-entity-button
@@ -14,7 +25,8 @@
 <app-grid
   [data$]="gridData$"
   [columns$]="gridColumns$"
-  [exportToExcelName]="'IT Kontrakter Overblik'" i18n-exportToExcelName
+  [exportToExcelName]="'IT Kontrakter Overblik'"
+  i18n-exportToExcelName
   [loading]="isLoading$ | async"
   [state]="gridState$ | async"
   entityType="it-contract"

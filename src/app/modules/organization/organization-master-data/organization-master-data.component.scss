@@ -1,16 +1,22 @@
 @import "mixins";
-@import 'theme';
+@import "theme";
 
 :host {
   @include page-flex-layout-max-width;
 }
 
-.title-margin {
+.page-title-container {
   margin-left: $padding-medium-large;
+  display: flex;
+  justify-content: space-between;
+}
+
+.page-title {
+  margin: 0;
+  display: flex;
+  align-items: center;
 }
 
 .card-top-margin {
   margin-top: 22px;
 }
-
-

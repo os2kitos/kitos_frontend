@@ -1,9 +1,5 @@
 <app-card>
-  <app-card-header
-    title="Ansvarlig organisationsenhed"
-    helpTextKey="it-system.usage.organization-responsible"
-    i18n-title
-  ></app-card-header>
+  <app-card-header title="Ansvarlig organisationsenhed" helpTextKey="it-system.usage.org" i18n-title></app-card-header>
 
   <app-paragraph *ngIf="(anyUsedByUnits$ | async) === false" paragraphSize="medium" i18n
     >Systemet udstiller ingen ansvarlig organisationsenhed</app-paragraph

@@ -27,38 +27,16 @@ interface ModuleTabInfo {
 })
 export class LocalAdminComponent extends BaseComponent implements OnInit {
   public readonly AppPath = AppPath;
+
+  public readonly showItSystemModule$ = this.store.select(selectShowItSystemModule);
+  public readonly showItContractModule$ = this.store.select(selectShowItContractModule);
+  public readonly showDataProcessingRegistrations$ = this.store.select(selectShowDataProcessingRegistrations);
+
   public currentTabPathSegment$: Observable<string> = of('');
   public currentTabModuleKey$: Observable<UIModuleConfigKey | undefined> = of(undefined);
 
   constructor(private store: Store, private router: Router) {
     super();
-  }
-
-  ngOnInit(): void {
-    this.getUIModuleConfig();
-    this.updateTabModuleKeyOnRouting();
-  }
-
-  private getUIModuleConfig() {
-    this.store.dispatch(UIModuleConfigActions.getUIModuleConfig({ module: UIModuleConfigKey.ItSystemUsage }));
-    this.store.dispatch(UIModuleConfigActions.getUIModuleConfig({ module: UIModuleConfigKey.ItContract }));
-    this.store.dispatch(
-      UIModuleConfigActions.getUIModuleConfig({ module: UIModuleConfigKey.DataProcessingRegistrations })
-    );
-  }
-
-  private updateTabModuleKeyOnRouting() {
-    this.currentTabPathSegment$ = this.router.events.pipe(
-      filter((event) => event instanceof NavigationEnd),
-      map((navigationEnd) => this.extractLastUrlSegment(navigationEnd.urlAfterRedirects)),
-      startWith(this.extractLastUrlSegment(this.router.url)),
-      distinctUntilChanged()
-    );
-    this.subscriptions.add(
-      this.currentTabPathSegment$.subscribe((segment) => {
-        this.currentTabModuleKey$ = this.getCurrentTabModuleKey(segment);
-      })
-    );
   }
 
   public readonly items: NavigationDrawerItem[] = [
@@ -95,9 +73,12 @@ export class LocalAdminComponent extends BaseComponent implements OnInit {
     },
   ];
 
-  public readonly showItSystemModule$ = this.store.select(selectShowItSystemModule);
-  public readonly showItContractModule$ = this.store.select(selectShowItContractModule);
-  public readonly showDataProcessingRegistrations$ = this.store.select(selectShowDataProcessingRegistrations);
+  public helpText = '';
+
+  ngOnInit(): void {
+    this.getUIModuleConfig();
+    this.updateTabModuleKeyOnRouting();
+  }
 
   public getCurrentTabModuleKey(urlSegment: string) {
     switch (urlSegment) {
@@ -121,16 +102,57 @@ export class LocalAdminComponent extends BaseComponent implements OnInit {
     );
   }
 
-  getModuleEnabled(moduleKey: UIModuleConfigKey | undefined): Observable<boolean | undefined> {
+  public getModuleEnabled(moduleKey: UIModuleConfigKey | undefined): Observable<boolean | undefined> {
     const moduleTabInfo = this.getModuleTabInfo(moduleKey);
     return moduleTabInfo.enabled;
   }
 
-  getModuleText(moduleKey: UIModuleConfigKey | undefined): string {
+  public getModuleText(moduleKey: UIModuleConfigKey | undefined): string {
     const moduleTabInfo = this.getModuleTabInfo(moduleKey);
     return moduleTabInfo.text;
   }
 
+  private getUIModuleConfig() {
+    this.store.dispatch(UIModuleConfigActions.getUIModuleConfig({ module: UIModuleConfigKey.ItSystemUsage }));
+    this.store.dispatch(UIModuleConfigActions.getUIModuleConfig({ module: UIModuleConfigKey.ItContract }));
+    this.store.dispatch(
+      UIModuleConfigActions.getUIModuleConfig({ module: UIModuleConfigKey.DataProcessingRegistrations })
+    );
+  }
+
+  private updateTabModuleKeyOnRouting() {
+    this.currentTabPathSegment$ = this.router.events.pipe(
+      filter((event) => event instanceof NavigationEnd),
+      map((navigationEnd) => this.extractLastUrlSegment(navigationEnd.urlAfterRedirects)),
+      startWith(this.extractLastUrlSegment(this.router.url)),
+      distinctUntilChanged()
+    );
+    this.subscriptions.add(
+      this.currentTabPathSegment$.subscribe((segment) => {
+        this.currentTabModuleKey$ = this.getCurrentTabModuleKey(segment);
+        this.helpText = this.getCurrentTabHelpText(segment);
+      })
+    );
+  }
+
+  private getCurrentTabHelpText(urlSegment: string): string {
+    switch (urlSegment) {
+      case AppPath.information:
+        return 'current-org';
+      case AppPath.organization:
+        return 'org';
+      case AppPath.localAdminSystemUsages:
+        return 'system';
+      case AppPath.itContracts:
+        return 'contract';
+      case AppPath.dataProcessing:
+        return 'data-processing';
+      case AppPath.import:
+        return 'import.organization';
+      default:
+        return '';
+    }
+  }
   private getModuleTabInfo(moduleKey: UIModuleConfigKey | undefined): ModuleTabInfo {
     switch (moduleKey) {
       case UIModuleConfigKey.ItSystemUsage:
