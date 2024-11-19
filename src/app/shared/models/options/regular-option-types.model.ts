@@ -1,5 +1,5 @@
 /**
- * Naming convention {module-context}{option-type-name}
+ * Naming convention {module-context}_{option-type-name}
  */
 export type RegularOptionType =
   | 'it-interface_interface-type'

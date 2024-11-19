@@ -105,6 +105,7 @@ import { APIV2KLEInternalINTERNALService } from './api/v2KLEInternalINTERNAL.ser
 import { APIV2KleOptionService } from './api/v2KleOption.service';
 import { APIV2NotificationINTERNALService } from './api/v2NotificationINTERNAL.service';
 import { APIV2OrganizationService } from './api/v2Organization.service';
+import { APIV2OrganizationGlobalCountryCodesInternalINTERNALService } from './api/v2OrganizationGlobalCountryCodesInternalINTERNAL.service';
 import { APIV2OrganizationGridInternalINTERNALService } from './api/v2OrganizationGridInternalINTERNAL.service';
 import { APIV2OrganizationUnitLocalRoleOptionTypesInternalINTERNALService } from './api/v2OrganizationUnitLocalRoleOptionTypesInternalINTERNAL.service';
 import { APIV2OrganizationUnitRegistrationInternalINTERNALService } from './api/v2OrganizationUnitRegistrationInternalINTERNAL.service';

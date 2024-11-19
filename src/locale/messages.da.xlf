@@ -5380,8 +5380,8 @@
         <target state="new">Viser konsekvenser <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>(<x id="INTERPOLATION" equiv-text="{{ updateConsequencesLength$ | async }}"/>)<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> af opdateringen for organisationshierarkiet i KITOS</target>
       </trans-unit>
       <trans-unit id="6021905614502626006" datatype="html">
-        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&gt;"/>Eksporter</source>
-        <target state="new"><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&gt;"/>Eksporter</target>
+        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="-button (buttonCl"/>Eksporter</source>
+        <target state="new"><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="-button (buttonCl"/>Eksporter</target>
       </trans-unit>
       <trans-unit id="4691966835263640588" datatype="html">
         <source>FK Organisation - Konsekvenser ved opdatering</source>
@@ -6114,6 +6114,14 @@
       <trans-unit id="6481760042736907455" datatype="html">
         <source>Ingen brugere med tværgående rettigheder fundet</source>
         <target state="new">Ingen brugere med tværgående rettigheder fundet</target>
+      </trans-unit>
+      <trans-unit id="6521854945580923695" datatype="html">
+        <source>Landekoder</source>
+        <target state="new">Landekoder</target>
+      </trans-unit>
+      <trans-unit id="6820190168933872381" datatype="html">
+        <source>Tilpasning af landekoder</source>
+        <target state="new">Tilpasning af landekoder</target>
       </trans-unit>
     </body>
   </file>

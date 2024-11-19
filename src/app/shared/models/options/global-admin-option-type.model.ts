@@ -1,6 +1,7 @@
 import { APIGlobalRoleOptionResponseDTO } from 'src/app/api/v2';
 import { RegularOptionType } from './regular-option-types.model';
 import { RoleOptionTypes } from './role-option-types.model';
+import { GlobalRegularOptionType } from './global-regular-option-types.model';
 
 export interface GlobalAdminOptionTypeItem {
   uuid: string;
@@ -12,7 +13,7 @@ export interface GlobalAdminOptionTypeItem {
   priority: number;
 }
 
-export type GlobalAdminOptionType = RegularOptionType | RoleOptionTypes;
+export type GlobalAdminOptionType = RegularOptionType | RoleOptionTypes | GlobalRegularOptionType;
 
 export function adaptGlobalAdminOptionType(dto: APIGlobalRoleOptionResponseDTO): GlobalAdminOptionTypeItem {
   const item: GlobalAdminOptionTypeItem = {

@@ -106,6 +106,7 @@ api/v2KLEInternalINTERNAL.service.ts
 api/v2KleOption.service.ts
 api/v2NotificationINTERNAL.service.ts
 api/v2Organization.service.ts
+api/v2OrganizationGlobalCountryCodesInternalINTERNAL.service.ts
 api/v2OrganizationGridInternalINTERNAL.service.ts
 api/v2OrganizationUnitLocalRoleOptionTypesInternalINTERNAL.service.ts
 api/v2OrganizationUnitRegistrationInternalINTERNAL.service.ts

@@ -26,6 +26,7 @@ import {
   APIV2ItSystemGlobalItSystemCategoriesInternalINTERNALService,
   APIV2ItSystemGlobalRoleOptionTypesInternalINTERNALService,
   APIV2ItSystemGlobalSensitivePersonalDataTypesInternalINTERNALService,
+  APIV2OrganizationGlobalCountryCodesInternalINTERNALService,
 } from 'src/app/api/v2';
 import { APIV2ItSystemGlobalArchiveLocationsInternalINTERNALService } from 'src/app/api/v2/api/v2ItSystemGlobalArchiveLocationsInternalINTERNAL.service';
 import { APIV2ItSystemGlobalArchiveTestLocationsInternalINTERNALService } from 'src/app/api/v2/api/v2ItSystemGlobalArchiveTestLocationsInternalINTERNAL.service';
@@ -96,6 +97,10 @@ export class GlobalAdminOptionTypeService {
     private dataResponsibleService: APIV2DprGlobalDataProcessingDataResponsibleOptionsInternalINTERNALService,
     @Inject(APIV2DprGlobalDataProcessingCountryOptionsInternalINTERNALService)
     private countryService: APIV2DprGlobalDataProcessingCountryOptionsInternalINTERNALService,
+    
+    //Organization types
+    @Inject(APIV2OrganizationGlobalCountryCodesInternalINTERNALService)
+    private countryCodeService: APIV2OrganizationGlobalCountryCodesInternalINTERNALService,
 
     //Role types
     @Inject(APIV2ItSystemGlobalRoleOptionTypesInternalINTERNALService)
@@ -212,6 +217,10 @@ export class GlobalAdminOptionTypeService {
       case 'data-processing-country-types':
         return () =>
           this.countryService.getManyDprGlobalDataProcessingCountryOptionsInternalV2GetGlobalDataProcessingCountryOptions();
+      
+      //Organization types
+      case 'organization_country-code':
+        return () => this.countryCodeService.getManyOrganizationGlobalCountryCodesInternalV2GetCountryCodes();
 
       //Role types
       case 'it-system-usage':
@@ -422,6 +431,14 @@ export class GlobalAdminOptionTypeService {
             dto: request,
           });
 
+      //Organization types
+      case 'organization_country-code':
+        return (optionUuid: string, request: APIGlobalRegularOptionUpdateRequestDTO) =>
+          this.countryCodeService.patchSingleOrganizationGlobalCountryCodesInternalV2PatchCountryCode({
+            optionUuid,
+            dto: request,
+          });
+
       //Role types
       case 'it-system-usage':
         return (optionUuid: string, dto: APIGlobalRegularOptionUpdateRequestDTO) =>
@@ -616,6 +633,13 @@ export class GlobalAdminOptionTypeService {
         return (dto: APIGlobalRoleOptionCreateRequestDTO) =>
           this.countryService.postSingleDprGlobalDataProcessingCountryOptionsInternalV2CreateGlobalDataProcessingCountryOption({
             dto: dto,
+          });
+
+      //Organization types
+      case 'organization_country-code':
+        return (request: APIGlobalRoleOptionCreateRequestDTO) =>
+          this.countryCodeService.postSingleOrganizationGlobalCountryCodesInternalV2CreateCountryCode({
+            dto: request,
           });
 
       //Role types
