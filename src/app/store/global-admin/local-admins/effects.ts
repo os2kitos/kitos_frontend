@@ -4,6 +4,7 @@ import { catchError, map, of, switchMap } from 'rxjs';
 import { APIV2GlobalUserInternalINTERNALService } from 'src/app/api/v2';
 import { LocalAdminUserActions } from './actions';
 import { adaptLocalAdminUser } from 'src/app/shared/models/local-admin/local-admin-user.model';
+import { UserActions } from '../../user-store/actions';
 
 @Injectable()
 export class LocalAdminUserEffects {
@@ -46,6 +47,13 @@ export class LocalAdminUserEffects {
             catchError(() => of(LocalAdminUserActions.removeLocalAdminError()))
           );
       })
+    );
+  });
+
+  updateUserAuthentication$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(LocalAdminUserActions.addLocalAdminSuccess, LocalAdminUserActions.removeLocalAdminSuccess),
+      map(() => UserActions.authenticate())
     );
   });
 }

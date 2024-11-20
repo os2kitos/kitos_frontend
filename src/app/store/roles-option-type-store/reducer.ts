@@ -4,6 +4,9 @@ import { cloneDeep } from 'lodash';
 import { APIRoleOptionResponseDTO } from 'src/app/api/v2';
 import { RoleOptionTypeActions } from './actions';
 import { RoleOptionTypeState } from './state';
+import { LocalOptionTypeActions } from '../local-admin/local-option-types/actions';
+import { isRoleOptionType } from 'src/app/shared/models/options/role-option-types.model';
+import { GlobalOptionTypeActions } from '../global-admin/global-option-types/actions';
 
 export const roleOptionTypeAdapter = createEntityAdapter<APIRoleOptionResponseDTO>({
   selectId: (optionType) => optionType.uuid,
@@ -40,6 +43,25 @@ export const roleOptionTypeFeature = createFeature({
       };
 
       return nextState;
-    })
+    }),
+    on(
+      LocalOptionTypeActions.updateOptionTypeSuccess,
+      GlobalOptionTypeActions.updateOptionTypeSuccess,
+      (state, { optionType }) => {
+        if (isRoleOptionType(optionType)) {
+          const currentOptionState = state[optionType] ?? createInitialOptionState();
+
+          return {
+            ...state,
+            [optionType]: {
+              ...currentOptionState,
+              cacheTime: undefined,
+            },
+          };
+        } else {
+          return state;
+        }
+      }
+    )
   ),
 });

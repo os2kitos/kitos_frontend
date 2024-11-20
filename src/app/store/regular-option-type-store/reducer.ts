@@ -4,6 +4,9 @@ import { cloneDeep } from 'lodash';
 import { APIRegularOptionResponseDTO } from 'src/app/api/v2';
 import { RegularOptionTypeActions } from './actions';
 import { RegularOptionTypeState } from './state';
+import { isRegularOptionType } from 'src/app/shared/models/options/role-option-types.model';
+import { GlobalOptionTypeActions } from '../global-admin/global-option-types/actions';
+import { LocalOptionTypeActions } from '../local-admin/local-option-types/actions';
 
 export const regularOptionTypeAdapter = createEntityAdapter<APIRegularOptionResponseDTO>({
   selectId: (contractType) => contractType.uuid,
@@ -62,6 +65,25 @@ export const regularOptionTypeFeature = createFeature({
       };
 
       return nextState;
-    })
+    }),
+    on(
+      LocalOptionTypeActions.updateOptionTypeSuccess,
+      GlobalOptionTypeActions.updateOptionTypeSuccess,
+      (state, { optionType }) => {
+        if (isRegularOptionType(optionType)) {
+          const currentOptionState = state[optionType] ?? createInitialOptionState();
+
+          return {
+            ...state,
+            [optionType]: {
+              ...currentOptionState,
+              cacheTime: undefined,
+            },
+          };
+        } else {
+          return state;
+        }
+      }
+    )
   ),
 });
