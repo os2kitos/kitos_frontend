@@ -1,8 +1,13 @@
 <app-dialog title="Tilføj global admin" overflow="none" i18n-title>
   <app-loading *ngIf="globalAdminsLoading$ | async"></app-loading>
   <ng-container *ngIf="(globalAdminsLoading$ | async) !== true">
-
-    <app-user-dropdown [formGroup]="formGroup" formName="user" [disabledUuids$]="globalAdminUuids$" data-cy="add-global-admin-dropdown">
+    <app-user-dropdown
+      [formGroup]="formGroup"
+      formName="user"
+      [disabledUuids$]="globalAdminUuids$"
+      [searchGlobalUsers]="true"
+      data-cy="add-global-admin-dropdown"
+    >
     </app-user-dropdown>
 
     <app-dialog-actions>

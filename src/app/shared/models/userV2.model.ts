@@ -1,4 +1,4 @@
-import { APIUserReferenceResponseDTO } from "src/app/api/v2";
+import { APIUserReferenceResponseDTO } from 'src/app/api/v2';
 
 export interface ShallowUser {
   name: string;
@@ -6,7 +6,7 @@ export interface ShallowUser {
   uuid: string;
 }
 
-export function adaptShallowUser(dto: APIUserReferenceResponseDTO): ShallowUser {
+export function toShallowUser(dto: APIUserReferenceResponseDTO): ShallowUser {
   return {
     name: dto.name,
     email: dto.email,

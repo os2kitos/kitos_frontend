@@ -2,13 +2,22 @@
   <app-loading *ngIf="(loading$ | async) !== false"></app-loading>
   <ng-container *ngIf="(loading$ | async) === false">
     <app-standard-vertical-content-grid>
-      <app-user-dropdown formName="user" [formGroup]="formGroup" data-cy="user-dropdown"> </app-user-dropdown>
-      <app-organization-dropdown formName="organization" [formGroup]="formGroup" data-cy="organization-dropdown"> </app-organization-dropdown>
+      <app-user-dropdown formName="user" [formGroup]="formGroup" [searchGlobalUsers]="true" data-cy="user-dropdown">
+      </app-user-dropdown>
+      <app-organization-dropdown formName="organization" [formGroup]="formGroup" data-cy="organization-dropdown">
+      </app-organization-dropdown>
     </app-standard-vertical-content-grid>
 
     <app-dialog-actions>
       <app-button (buttonClick)="close()" buttonStyle="secondary" i18n> Annuller </app-button>
-      <app-button (buttonClick)="addLocalAdmin()" [disabled]="!formGroup.valid" data-cy="create-local-admin-dialog-button" i18n> Opret </app-button>
+      <app-button
+        (buttonClick)="addLocalAdmin()"
+        [disabled]="!formGroup.valid"
+        data-cy="create-local-admin-dialog-button"
+        i18n
+      >
+        Opret
+      </app-button>
     </app-dialog-actions>
   </ng-container>
 </app-dialog>

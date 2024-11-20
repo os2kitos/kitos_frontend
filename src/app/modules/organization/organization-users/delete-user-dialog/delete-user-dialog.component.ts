@@ -1,12 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, first, map, Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { RoleSelectionBaseComponent } from 'src/app/shared/base/base-role-selection.component';
 import { userHasAnyRights } from 'src/app/shared/helpers/user-role.helpers';
-import { OrganizationUserV2 } from 'src/app/shared/models/organization/organization-user/organization-user-v2.model';
 import { ODataOrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
+import { ShallowUser } from 'src/app/shared/models/userV2.model';
 import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
 import { RoleSelectionService } from 'src/app/shared/services/role-selector-service';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
@@ -36,27 +37,23 @@ export class DeleteUserDialogComponent extends RoleSelectionBaseComponent implem
     );
   }
 
+  public formGroup = new FormGroup({
+    user: new FormControl<ShallowUser | undefined>(undefined, Validators.required),
+  });
+
   public readonly organizationName$: Observable<string | undefined> = this.store.select(selectOrganizationName);
 
   public disabledUuids$!: Observable<string[]>;
-
-  public selectedUser$: BehaviorSubject<OrganizationUserV2 | undefined> = new BehaviorSubject<
-    OrganizationUserV2 | undefined
-  >(undefined);
 
   ngOnInit(): void {
     this.subscriptions.add(
       this.actions$.pipe(ofType(OrganizationUserActions.transferRolesSuccess)).subscribe(() => {
         this.selectionService.deselectAll();
-        this.selectedUser$.next(undefined);
+        this.formGroup.reset();
       })
     );
 
     this.disabledUuids$ = this.user$.pipe(map((user) => [user.Uuid]));
-  }
-
-  public selectedUserChanged(user: OrganizationUserV2 | undefined | null): void {
-    this.selectedUser$.next(user ?? undefined);
   }
 
   public hasRoles(user: ODataOrganizationUser): boolean {
@@ -88,17 +85,12 @@ export class DeleteUserDialogComponent extends RoleSelectionBaseComponent implem
     });
   }
 
-  public isUserSelected(): Observable<boolean> {
-    return this.selectedUser$.pipe(map((user) => user !== undefined));
-  }
-
   private transferRoles(user: ODataOrganizationUser): void {
-    this.selectedUser$.pipe(first()).subscribe((selectedUser) => {
-      if (!selectedUser) return;
-      const request = this.getRequest(user);
-      this.isLoading = true;
-      this.store.dispatch(OrganizationUserActions.transferRoles(user.Uuid, selectedUser.uuid, request));
-    });
+    const selectedUserUuid = this.formGroup.value.user?.uuid;
+    if (!selectedUserUuid) return;
+    const request = this.getRequest(user);
+    this.isLoading = true;
+    this.store.dispatch(OrganizationUserActions.transferRoles(user.Uuid, selectedUserUuid, request));
   }
 
   public getUserName(user: ODataOrganizationUser): string {

@@ -1,13 +1,14 @@
 <app-scrollbar-dialog title="Kopier roller" i18n-title [nested]="true" [ngClass]="{ 'some-class': isAnySelected() }">
   <ng-container *ngIf="!isLoading">
     <app-standard-vertical-content-grid>
-      <app-organization-user-dropdown
+      <app-user-dropdown
+        [disabledUuids$]="disabledUuids$"
         text="Kopier roller til"
-        [disabledUuids]="disabledUuids"
-        i18n-text
-        (userChange)="selectedUserChanged($event)"
+        [formGroup]="formGroup"
+        formName="user"
+        i18-text
       >
-      </app-organization-user-dropdown>
+      </app-user-dropdown>
 
       <app-manage-user-role-table
         *ngIf="user.OrganizationUnitRights.length > 0"
@@ -50,7 +51,7 @@
           color="secondary"
           buttonStyle="secondary"
           (buttonClick)="onCopyRoles()"
-          [disabled]="((isUserSelected() | async) !== true)"
+          [disabled]="!formGroup.valid"
           i18n
           class="copy-roles-button"
         >
