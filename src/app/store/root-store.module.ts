@@ -46,6 +46,7 @@ import { GlobalAdminHelpTextsEffects } from './global-admin/help-texts/effects';
 import { GlobalAdminEffects } from './global-admin/effects';
 import { localAdminUsersFeature } from './global-admin/local-admins/reducers';
 import { LocalAdminUserEffects } from './global-admin/local-admins/effects';
+import { PublicMessageEffects } from './global-admin/public-messages/effects';
 
 @NgModule({
   imports: [
@@ -101,6 +102,7 @@ import { LocalAdminUserEffects } from './global-admin/local-admins/effects';
       GlobalAdminHelpTextsEffects,
       GlobalAdminEffects,
       LocalAdminUserEffects,
+      PublicMessageEffects,
     ]),
     RouterModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),

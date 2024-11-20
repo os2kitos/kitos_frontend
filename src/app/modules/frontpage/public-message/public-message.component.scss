@@ -1,0 +1,13 @@
+@import 'theme';
+
+.card {
+  padding: $padding-medium;
+  border-radius: $radius-large;
+  background: $color-white;
+  margin-bottom: $padding-medium;
+}
+
+app-button {
+  display: inline-block;
+  padding: auto;
+}

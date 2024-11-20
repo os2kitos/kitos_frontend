@@ -1,0 +1,7 @@
+<app-dialog title="Rediger" i18n-title>
+  <app-rich-text-editor [formControl]="formGroup.controls.message"></app-rich-text-editor>
+  <app-dialog-actions>
+    <app-button buttonStyle="secondary" (buttonClick)="close()" i18n> Annuller </app-button>
+    <app-button (buttonClick)="onSave()" data-cy="save-public-message-button" i18n> Gem </app-button>
+  </app-dialog-actions>
+</app-dialog>

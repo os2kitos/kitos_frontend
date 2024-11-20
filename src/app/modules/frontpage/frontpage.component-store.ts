@@ -1,5 +1,6 @@
-import { Injectable } from '@angular/core';
-import { ComponentStore } from '@ngrx/component-store';import { tapResponse } from '@ngrx/operators';
+import { Inject, Injectable } from '@angular/core';
+import { ComponentStore } from '@ngrx/component-store';
+import { tapResponse } from '@ngrx/operators';
 
 import { switchMap, tap } from 'rxjs';
 import { APIPublicMessagesResponseDTO, APIV2PublicMessagesINTERNALService } from 'src/app/api/v2';
@@ -14,7 +15,7 @@ export class FrontpageComponentStore extends ComponentStore<FrontpageComponentSt
   public readonly loading$ = this.select((state) => state.loading);
   public readonly text$ = this.select((state) => state.text);
 
-  constructor(private apiTextService: APIV2PublicMessagesINTERNALService) {
+  constructor(@Inject(APIV2PublicMessagesINTERNALService) private apiTextService: APIV2PublicMessagesINTERNALService) {
     super({
       loading: false,
     });
@@ -44,8 +45,8 @@ export class FrontpageComponentStore extends ComponentStore<FrontpageComponentSt
             (response: APIPublicMessagesResponseDTO) => this.updateText(response),
             (e) => {
               console.error(e);
-              this.updateLoading(false);
-            }
+            },
+            () => this.updateLoading(false)
           )
         )
       )
