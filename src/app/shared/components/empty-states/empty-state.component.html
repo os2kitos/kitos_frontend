@@ -1,5 +1,6 @@
 <div class="center">
   <app-add-program-icon *ngIf="context === 'emptyTable'"></app-add-program-icon>
   <app-empty-search-icon *ngIf="context === 'searchResult'"></app-empty-search-icon>
+  <app-empty-update-icon *ngIf="context === 'emptyUpdate'"></app-empty-update-icon>
   <app-paragraph paragraphSize="medium" [displayFlex]="false" i18n>{{ text }}</app-paragraph>
 </div>

@@ -1,5 +1,10 @@
-<div class="card" *ngIf="content">
-  <p [innerHTML]="content"></p>
-
-  <app-button *ngIf="isUserGlobalAdmin$ | async" (buttonClick)="onEdit()" data-cy="edit-public-message-button" i18n> Rediger </app-button>
+<div class="card">
+  <p *ngIf="content" [innerHTML]="content"></p>
+  <app-empty-state [text]="'Ingen besked at vise'" [context]="'emptyUpdate'" i18n-text *ngIf="!content"></app-empty-state>
+  <div class="divider-margin">
+    <app-divider></app-divider>
+  </div>
+  <app-button *ngIf="isUserGlobalAdmin$ | async" (buttonClick)="onEdit()" data-cy="edit-public-message-button" i18n>
+    Rediger
+  </app-button>
 </div>
