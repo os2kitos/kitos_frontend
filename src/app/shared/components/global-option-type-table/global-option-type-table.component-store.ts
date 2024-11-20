@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { tapResponse } from '@ngrx/operators';
-import { Store } from '@ngrx/store';
 import { map, Observable, switchMap, tap } from 'rxjs';
 import { APIGlobalRoleOptionResponseDTO } from 'src/app/api/v2';
 import {
@@ -23,7 +22,7 @@ export class GlobalOptionTypeTableComponentStore extends ComponentStore<State> {
   public readonly optionType$ = this.select((state) => state.type);
   public readonly isLoading$ = this.select((state) => state.isLoading);
 
-  constructor(private readonly store: Store, private globalOptionTypeService: GlobalAdminOptionTypeService) {
+  constructor(private globalOptionTypeService: GlobalAdminOptionTypeService) {
     super();
   }
 

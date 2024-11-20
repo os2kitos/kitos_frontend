@@ -6123,6 +6123,10 @@
         <source>Tilpasning af landekoder</source>
         <target state="new">Tilpasning af landekoder</target>
       </trans-unit>
+      <trans-unit id="3441632359299611513" datatype="html">
+        <source>Organisationsroller</source>
+        <target state="new">Organisationsroller</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
