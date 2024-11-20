@@ -9,12 +9,12 @@ import { EditLocalOptionTypeDialogComponent } from './edit-local-option-type-dia
 import { LocalOptionTypeTableComponentStore } from './local-option-type-table.component-store';
 
 @Component({
-  selector: 'app-local-option-type-table',
-  templateUrl: './local-option-type-table.component.html',
-  styleUrl: './local-option-type-table.component.scss',
+  selector: 'app-local-option-type-view',
+  templateUrl: './local-option-type-view.component.html',
+  styleUrl: './local-option-type-view.component.scss',
   providers: [LocalOptionTypeTableComponentStore],
 })
-export class LocalOptionTypeTableComponent extends BaseComponent implements OnInit {
+export class LocalOptionTypeViewComponent extends BaseComponent implements OnInit {
   @Input() optionType!: LocalAdminOptionType;
   @Input() expandedByDefault: boolean = false;
   @Input() title: string = '';

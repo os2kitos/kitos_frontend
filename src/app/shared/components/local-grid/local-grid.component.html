@@ -12,7 +12,7 @@
   (sortChange)="onSortChange($event)"
   (pageChange)="onPageChange($event)"
   style="width: 100%"
-  [ngClass]="{ 'grid-outline': withOutline }"
+  [ngClass]="{ 'grid-outline': withOutline, 'fit-size-to-content': fitSizeToContent }"
 >
   <ng-container *ngFor="let column of columns">
     <kendo-grid-column
@@ -73,6 +73,28 @@
 
       <ng-template *ngIf="column.style === 'enum'" kendoGridCellTemplate let-dataItem>
         <app-paragraph>{{ searchProperty(dataItem, column.field)?.name }}</app-paragraph>
+      </ng-template>
+
+      <ng-template *ngIf="column.style === 'boolean'" kendoGridCellTemplate let-dataItem>
+        <div class="items-center-container">
+          <app-boolean-circle
+            [value]="searchProperty(dataItem, column.field) === true"
+            [positiveTooltipText]="column.tooltipPositiveText ?? ''"
+            [negativeTooltipText]="column.tooltipNegativeText ?? ''"
+          >
+          </app-boolean-circle>
+        </div>
+      </ng-template>
+
+      <ng-template *ngIf="column.style === 'checkbox'" kendoGridCellTemplate let-dataItem>
+        <div class="column-center-content">
+          <app-checkbox
+            [value]="searchProperty(dataItem, column.field)"
+            [disabled]="column.permissionsField ? searchProperty(dataItem, column.permissionsField) !== false : true"
+            (valueChange)="onCheckboxChange($event, dataItem)"
+            data-cy="grid-checkbox"
+          ></app-checkbox>
+        </div>
       </ng-template>
 
       <ng-template *ngIf="column.style === 'action-buttons'" kendoGridCellTemplate let-dataItem>

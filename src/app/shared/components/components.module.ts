@@ -138,8 +138,8 @@ import { LocalAdminColumnConfigButtonComponent } from './local-admin-column-conf
 import { LocalGridComponent } from './local-grid/local-grid.component';
 import { NavigationDrawerComponent } from './navigation-drawer/navigation-drawer.component';
 import { NumberCircleComponent } from './number-circle/number-circle.component';
-import { EditLocalOptionTypeDialogComponent } from './local-option-type-table/edit-local-option-type-dialog/edit-local-option-type-dialog.component';
-import { LocalOptionTypeTableComponent } from './local-option-type-table/local-option-type-table.component';
+import { EditLocalOptionTypeDialogComponent } from './local-option-type-view/edit-local-option-type-dialog/edit-local-option-type-dialog.component';
+import { LocalOptionTypeViewComponent } from './local-option-type-view/local-option-type-view.component';
 import { ResetToOrgColumnsConfigButtonComponent } from './reset-to-org-columns-config-button/reset-to-org-columns-config-button.component';
 import { RoleRowComponent } from './role-table/role-row/role-row.component';
 import { RoleTableContainerComponent } from './role-table/role-table-container/role-table-container.component';
@@ -154,6 +154,7 @@ import { EditHelpTextDialogComponent } from './dialogs/edit-help-text-dialog/edi
 import { CreateHelpTextDialogComponent } from './dialogs/create-help-text-dialog/create-help-text-dialog.component';
 import { OptionTypeDropdownComponent } from './dropdowns/option-type-dropdown/option-type-dropdown.component';
 import { RichTextEditorComponent } from './rich-text-editor/rich-text-editor.component';
+import { LocalOptionGridComponent } from './local-option-type-view/local-option-grid/local-option-grid.component';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
@@ -266,7 +267,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     MultiSelectDropdownComponent,
     SnackbarActionsComponent,
     AccordionHeaderComponent,
-    LocalOptionTypeTableComponent,
+    LocalOptionTypeViewComponent,
     EditLocalOptionTypeDialogComponent,
     NavigationDrawerComponent,
     IconComponent,
@@ -282,6 +283,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     CreateHelpTextDialogComponent,
     OptionTypeDropdownComponent,
     RichTextEditorComponent,
+    LocalOptionGridComponent,
   ],
   imports: [
     CommonModule,
@@ -407,7 +409,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     MultiSelectDropdownComponent,
     SnackbarActionsComponent,
     AccordionHeaderComponent,
-    LocalOptionTypeTableComponent,
+    LocalOptionTypeViewComponent,
     NavigationDrawerComponent,
     IconComponent,
     LocalGridComponent,
@@ -420,6 +422,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     CreateHelpTextDialogComponent,
     OptionTypeDropdownComponent,
     RichTextEditorComponent,
+    LocalOptionGridComponent,
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },

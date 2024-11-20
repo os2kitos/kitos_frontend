@@ -4923,10 +4923,6 @@
         <source>Kopier roller</source>
         <target state="new">Kopier roller</target>
       </trans-unit>
-      <trans-unit id="2581887775164854038" datatype="html">
-        <source>Kopier roller til</source>
-        <target state="new">Kopier roller til</target>
-      </trans-unit>
       <trans-unit id="4057866856667052314" datatype="html">
         <source>Stamdata for <x id="INTERPOLATION" equiv-text="{{ organizationName }}"/></source>
         <target state="new">Stamdata for <x id="INTERPOLATION" equiv-text="{{ organizationName }}"/></target>
@@ -5623,10 +5619,6 @@
         <source>Kunne ikke opdatere lokal tilpasning af moduler.</source>
         <target state="new">Kunne ikke opdatere lokal tilpasning af moduler.</target>
       </trans-unit>
-      <trans-unit id="4816237048891772520" datatype="html">
-        <source>Kunne ikke hente organisations brugere</source>
-        <target state="new">Kunne ikke hente organisations brugere</target>
-      </trans-unit>
       <trans-unit id="7887399807417246084" datatype="html">
         <source>Global admin</source>
         <target state="new">Global admin</target>
@@ -6126,6 +6118,14 @@
       <trans-unit id="3441632359299611513" datatype="html">
         <source>Organisationsroller</source>
         <target state="new">Organisationsroller</target>
+      </trans-unit>
+      <trans-unit id="4945999259997160926" datatype="html">
+        <source>Beskeden blev opdateret</source>
+        <target state="new">Beskeden blev opdateret</target>
+      </trans-unit>
+      <trans-unit id="283333195670837592" datatype="html">
+        <source>Beskeden kunne ikke opdateres</source>
+        <target state="new">Beskeden kunne ikke opdateres</target>
       </trans-unit>
     </body>
   </file>

@@ -3787,9 +3787,6 @@
       <trans-unit id="1920124659830189543" datatype="html">
         <source>Kopier roller</source>
       </trans-unit>
-      <trans-unit id="2581887775164854038" datatype="html">
-        <source>Kopier roller til</source>
-      </trans-unit>
       <trans-unit id="1761334666261692236" datatype="html">
         <source>Kunne ikke hente organisationsrettigheder.</source>
       </trans-unit>
@@ -4276,9 +4273,6 @@
       <trans-unit id="8666131066916332987" datatype="html">
         <source>Ukendt modul</source>
       </trans-unit>
-      <trans-unit id="4816237048891772520" datatype="html">
-        <source>Kunne ikke hente organisations brugere</source>
-      </trans-unit>
       <trans-unit id="3949986260767737219" datatype="html">
         <source>Hjælpetekster</source>
       </trans-unit>
@@ -4653,6 +4647,12 @@
       </trans-unit>
       <trans-unit id="3441632359299611513" datatype="html">
         <source>Organisationsroller</source>
+      </trans-unit>
+      <trans-unit id="283333195670837592" datatype="html">
+        <source>Beskeden kunne ikke opdateres</source>
+      </trans-unit>
+      <trans-unit id="4945999259997160926" datatype="html">
+        <source>Beskeden blev opdateret</source>
       </trans-unit>
     </body>
   </file>

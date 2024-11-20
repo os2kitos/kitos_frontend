@@ -8,12 +8,13 @@
     <app-overview-header>
       <h3 i18n>Organisationsroller i din organisation</h3>
     </app-overview-header>
-    <app-local-option-type-table
+    <app-local-option-type-view
       optionType="organization-unit"
       i18n-title
+      [showWriteAccess]="true"
       [disableAccordion]="true"
       [expandedByDefault]="true"
     >
-    </app-local-option-type-table>
+    </app-local-option-type-view>
   </ng-container>
 </app-card>

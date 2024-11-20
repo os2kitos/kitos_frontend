@@ -91,30 +91,26 @@ describe('local-admin it system usage', () => {
     cy.contains(regularOptionTypesSegment).click();
 
     cy.contains('Forretningstyper').click();
-    cy.intercept('DELETE', 'api/v2/internal/it-systems/*/local-option-types/business-types/*', {});
+    cy.intercept('DELETE', 'api/v2/internal/it-systems/*/local-option-types/business-types/*', {}).as('delete');
 
-    cy.contains('td', 'Desing, visualisering og grafik') // non-obligatory and active in response
-      .closest('tr')
-      .within(() => {
-        cy.get('app-icon-button').click();
-      });
-    cy.getByDataCy('active-checkbox').find('input').click();
-    cy.contains('button', 'Gem').click();
+    cy.getByDataCy('grid-checkbox').first().find('input').click();
+
+    cy.wait('@delete');
+
+    cy.get('app-popup-message').should('exist');
   });
 
   it('Can activate active status of it system option type if not obligatory', () => {
     cy.contains('Lokal tilpasning af udfaldsrum').click();
 
     cy.contains('Forretningstyper').click();
-    cy.intercept('POST', 'api/v2/internal/it-systems/*/local-option-types/business-types', {});
+    cy.intercept('POST', 'api/v2/internal/it-systems/*/local-option-types/business-types', {}).as('post');
 
-    cy.contains('td', 'Kommunikation') // non-obligatory and inactive in response
-      .closest('tr')
-      .within(() => {
-        cy.get('app-icon-button').click();
-      });
-    cy.getByDataCy('active-checkbox').find('input').click();
-    cy.contains('button', 'Gem').click();
+    cy.getByDataCy('grid-checkbox').eq(1).find('input').click();
+
+    cy.wait('@post');
+
+    cy.get('app-popup-message').should('exist');
   });
 
   it('Can not edit active status of option type if obligatory', () => {
@@ -122,11 +118,6 @@ describe('local-admin it system usage', () => {
 
     cy.contains('Forretningstyper').click();
 
-    cy.contains('td', 'Hjemmesider og portaler') // obligatory in response
-      .closest('tr')
-      .within(() => {
-        cy.get('app-icon-button').click();
-      });
-    cy.getByDataCy('active-checkbox').should('not.exist');
+    cy.getByDataCy('grid-checkbox').eq(2).find('input').should('be.disabled');
   });
 });

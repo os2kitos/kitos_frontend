@@ -18,29 +18,23 @@ export class EditLocalOptionTypeDialogComponent implements OnInit {
   @Input() optionType!: LocalAdminOptionType;
 
   public form = new FormGroup({
-    description: new FormControl<string | undefined>(undefined),
-    active: new FormControl<boolean | undefined>(undefined),
+    description: new FormControl<string | undefined>(undefined)
   });
 
   constructor(private dialogRef: MatDialogRef<EditLocalOptionTypeDialogComponent>, private store: Store) {}
 
   public ngOnInit(): void {
     this.form.patchValue({
-      description: this.optionTypeItem.description,
-      active: this.optionTypeItem.active,
+      description: this.optionTypeItem.description
     });
   }
 
   public onSave(): void {
     const newDescription = this.form.value.description ?? undefined;
-    const newActive = this.form.value.active ?? undefined;
     const optionUuid = this.optionTypeItem.uuid;
     const request = { description: newDescription };
     if (this.hasDescriptionChanged()) {
       this.store.dispatch(LocalOptionTypeActions.uppdateOptionType(this.optionType, optionUuid, request));
-    }
-    if (newActive !== undefined && this.hasActiveChanged()) {
-      this.store.dispatch(LocalOptionTypeActions.updateOptionTypeActiveStatus(this.optionType, optionUuid, newActive));
     }
     this.dialogRef.close();
   }
@@ -50,18 +44,10 @@ export class EditLocalOptionTypeDialogComponent implements OnInit {
   }
 
   public disableSaveButton(): boolean {
-    return !this.form.valid || !this.haveValuesChanged();
-  }
-
-  private haveValuesChanged(): boolean {
-    return this.hasDescriptionChanged() || this.hasActiveChanged();
+    return !this.form.valid || !this.hasDescriptionChanged();
   }
 
   private hasDescriptionChanged(): boolean {
     return this.form.value.description !== this.optionTypeItem.description;
-  }
-
-  private hasActiveChanged(): boolean {
-    return this.form.value.active !== this.optionTypeItem.active;
   }
 }
