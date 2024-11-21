@@ -1,8 +1,10 @@
-<app-dialog [title]="(helpText$ | async)?.Title" [loading]="(helpText$ | async) === undefined">
+<app-dialog [title]="(helpText$ | async)?.Title" [loading]="(helpText$ | async) === undefined" overflow="none">
   <div class="help-text-container" [innerHTML]="(helpText$ | async)?.Description"></div>
 
-  <app-dialog-actions *ngIf="(isGlobalAdmin$ | async)">
-    <app-button *ngIf="(isEditable$ | async)" buttonStyle="secondary" (buttonClick)="edit()" i18n>Rediger</app-button>
-    <app-button *ngIf="(isEditable$ | async) === false" buttonStyle="secondary" (buttonClick)="create()" i18n>Opret</app-button>
+  <app-dialog-actions *ngIf="isGlobalAdmin$ | async" class="dialog-footer">
+    <app-button *ngIf="isEditable$ | async" buttonStyle="secondary" (buttonClick)="edit()" i18n>Rediger</app-button>
+    <app-button *ngIf="(isEditable$ | async) === false" buttonStyle="secondary" (buttonClick)="create()" i18n
+      >Opret</app-button
+    >
   </app-dialog-actions>
 </app-dialog>

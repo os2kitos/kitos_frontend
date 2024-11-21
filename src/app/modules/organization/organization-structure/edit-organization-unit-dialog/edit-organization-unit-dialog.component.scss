@@ -53,6 +53,7 @@
   height: 100%;
 }
 
+// dialog-footer mixin not used in this context since slightly different styling is needed
 .dialog-footer {
   background-color: $color-white;
   padding: $padding-large;

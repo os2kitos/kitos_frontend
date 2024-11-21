@@ -1,5 +1,10 @@
 @import "theme";
+@import "mixins";
+
+@include dialog-footer;
 
 .help-text-container {
   text-align: start;
+  max-height: 60vh;
+  overflow-y: auto;
 }

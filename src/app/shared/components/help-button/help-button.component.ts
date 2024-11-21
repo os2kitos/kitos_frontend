@@ -13,7 +13,7 @@ export class HelpButtonComponent {
   constructor(private dialog: MatDialog) {}
 
   public openHelpTextDialog() {
-    const dialogRef = this.dialog.open(HelpDialogComponent);
+    const dialogRef = this.dialog.open(HelpDialogComponent, { maxHeight: '90vh', height: 'auto' });
     (dialogRef.componentInstance as HelpDialogComponent).helpTextKey = this.helpTextKey;
   }
 }

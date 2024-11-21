@@ -1,20 +1,14 @@
-@import 'theme';
+@import "theme";
+@import "mixins";
 
-.dialog-footer {
-  background-color: $color-white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  box-sizing: border-box;
-  position: sticky;
-  bottom: 0;
-  z-index: 10;
-  padding-bottom: $padding-large;
-}
+@include dialog-footer;
 
 :host ::ng-deep {
   .content {
     padding-bottom: 0 !important;
   }
+}
+
+.dialog-footer {
+  padding-bottom: $padding-large;
 }
