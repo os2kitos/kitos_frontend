@@ -12,6 +12,7 @@
 
 
 export interface APIUpdateUserRequestDTO { 
+    defaultOrganizationUnitUuid?: string;
     email?: string;
     firstName?: string;
     lastName?: string;

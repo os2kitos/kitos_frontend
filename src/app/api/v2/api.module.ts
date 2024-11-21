@@ -107,6 +107,7 @@ import { APIV2NotificationINTERNALService } from './api/v2NotificationINTERNAL.s
 import { APIV2OrganizationService } from './api/v2Organization.service';
 import { APIV2OrganizationGlobalCountryCodesInternalINTERNALService } from './api/v2OrganizationGlobalCountryCodesInternalINTERNAL.service';
 import { APIV2OrganizationGridInternalINTERNALService } from './api/v2OrganizationGridInternalINTERNAL.service';
+import { APIV2OrganizationUnitGlobalRoleOptionTypesInternalINTERNALService } from './api/v2OrganizationUnitGlobalRoleOptionTypesInternalINTERNAL.service';
 import { APIV2OrganizationUnitLocalRoleOptionTypesInternalINTERNALService } from './api/v2OrganizationUnitLocalRoleOptionTypesInternalINTERNAL.service';
 import { APIV2OrganizationUnitRegistrationInternalINTERNALService } from './api/v2OrganizationUnitRegistrationInternalINTERNAL.service';
 import { APIV2OrganizationUnitRoleTypeService } from './api/v2OrganizationUnitRoleType.service';

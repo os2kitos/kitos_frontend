@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { ComponentStore } from '@ngrx/component-store';import { tapResponse, concatLatestFrom } from '@ngrx/operators';
-
+import { Inject, Injectable } from '@angular/core';
+import { ComponentStore } from '@ngrx/component-store';
+import { concatLatestFrom, tapResponse } from '@ngrx/operators';
 
 import { Store } from '@ngrx/store';
 import { mergeMap } from 'rxjs';
@@ -19,7 +19,10 @@ export class ITSystemCatalogDetailsComponentStore extends ComponentStore<State> 
     .select(selectITSystemUsageHasDeletePermission)
     .pipe(filterNullish());
 
-  constructor(private apiItSystemUsageService: APIV2ItSystemUsageService, private store: Store) {
+  constructor(
+    @Inject(APIV2ItSystemUsageService) private apiItSystemUsageService: APIV2ItSystemUsageService,
+    private store: Store
+  ) {
     super();
   }
 

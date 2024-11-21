@@ -50,6 +50,10 @@ export const OrganizationUserActions = createActionGroup({
     'Update User Success': (user: APIUserResponseDTO) => ({ user }),
     'Update User Error': emptyProps(),
 
+    'Verify User Email': (email: string) => ({ email }),
+    'Verify User Email Success': (email: string) => ({ email }),
+    'Verify User Email Error': emptyProps(),
+
     'Copy roles': (fromUserUuid: string, toUserUuid: string, request: APIMutateUserRightsRequestDTO) => ({
       fromUserUuid,
       toUserUuid,

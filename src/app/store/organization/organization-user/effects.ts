@@ -11,9 +11,9 @@ import { ORGANIZATION_USER_COLUMNS_ID } from 'src/app/shared/constants/persisten
 import { OData } from 'src/app/shared/models/odata.model';
 import { adaptOrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
+import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 import { selectOrganizationUuid } from '../../user-store/selectors';
 import { OrganizationUserActions } from './actions';
-import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 
 @Injectable()
 export class OrganizationUserEffects {
@@ -187,6 +187,31 @@ export class OrganizationUserEffects {
           .pipe(
             map(() => OrganizationUserActions.transferRolesSuccess()),
             catchError(() => of(OrganizationUserActions.transferRolesError()))
+          )
+      )
+    );
+  });
+
+  verifyUserEmail$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(OrganizationUserActions.verifyUserEmail),
+      concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+      switchMap(([{ email }, organizationUuid]) =>
+        this.apiService
+          .getSingleUsersInternalV2GetUsersByEmailInOtherOrganizations({
+            organizationUuid,
+            email,
+          })
+          .pipe(
+            map((response) => {
+              if (response) {
+                return OrganizationUserActions.verifyUserEmailError();
+              } else {
+                return OrganizationUserActions.verifyUserEmailSuccess(email);
+              }
+            }),
+
+            catchError(() => of(OrganizationUserActions.verifyUserEmailError()))
           )
       )
     );

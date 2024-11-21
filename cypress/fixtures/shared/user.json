@@ -1,0 +1,13 @@
+{
+  "uuid": "9ebdc1e3-897f-42c1-a390-bda717d2dc10",
+  "email": "local-global-admin-user@kitos.dk",
+  "firstName": "Automatisk oprettet testbruger",
+  "lastName": "(GlobalAdmin)",
+  "phoneNumber": null,
+  "defaultUserStartPreference": "StartSite",
+  "hasApiAccess": false,
+  "hasStakeHolderAccess": false,
+  "roles": ["User", "LocalAdmin"],
+  "defaultOrganizationUnit": null,
+  "lastSentAdvis": null
+}

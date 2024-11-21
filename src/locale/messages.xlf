@@ -4654,6 +4654,9 @@
       <trans-unit id="4945999259997160926" datatype="html">
         <source>Beskeden blev opdateret</source>
       </trans-unit>
+      <trans-unit id="586395525837431806" datatype="html">
+        <source>Primær organisationsenhed</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

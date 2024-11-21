@@ -1,1 +1,68 @@
 <h3 i18n>Min profil</h3>
+<app-card>
+  <app-form-grid [formGroup]="editForm" *ngIf="(isLoading$ | async) === false">
+    <app-org-unit-select
+      text="Primær organisationsenhed"
+      i18n-text
+      data-cy="default-responsible"
+      [formGroup]="editForm"
+      formName="defaultOrganizationUnit"
+      (valueChange)="onChange({ defaultOrganizationUnitUuid: $event })"
+    ></app-org-unit-select>
+    <div>
+      <app-textbox
+        text="Email"
+        i18n-text
+        [formGroup]="editForm"
+        formName="email"
+        data-cy="email"
+        (validatedValueChange)="validateEmail($event)"
+      >
+      </app-textbox>
+      <app-paragraph *ngIf="alreadyExists$ | async" color="error" i18n data-cy="error-message"
+        >Denne email er allerede i brug.</app-paragraph
+      >
+    </div>
+    <app-textbox
+      text="Fornavn"
+      i18n-text
+      [formGroup]="editForm"
+      formName="firstName"
+      data-cy="firstName"
+      (validatedValueChange)="firstNameChange($event)"
+    >
+    </app-textbox>
+    <app-textbox
+      text="Efternavn"
+      i18n-text
+      [formGroup]="editForm"
+      formName="lastName"
+      data-cy="lastName"
+      (validatedValueChange)="lastNameChange($event)"
+    >
+    </app-textbox>
+    <app-textbox
+      text="Telefonnummer"
+      i18n-text
+      type="tel"
+      pattern="^\+?[0-9]*$"
+      [formGroup]="editForm"
+      formName="phoneNumber"
+      data-cy="phoneNumber"
+      (valueChange)="onChange({ phoneNumber: $event })"
+    >
+    </app-textbox>
+    <app-dropdown
+      text="Primær startenhed"
+      formName="defaultStartPreference"
+      [formGroup]="editForm"
+      [data]="startPreferenceOptions"
+      [clearable]="false"
+      i18n-text
+      data-cy="start-preference"
+      (valueChange)="startPreferenceChange($event)"
+    >
+    </app-dropdown>
+  </app-form-grid>
+  <app-loading *ngIf="(isLoading$ | async) === true"></app-loading>
+</app-card>

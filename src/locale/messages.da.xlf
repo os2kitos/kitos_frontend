@@ -6127,6 +6127,10 @@
         <source>Beskeden kunne ikke opdateres</source>
         <target state="new">Beskeden kunne ikke opdateres</target>
       </trans-unit>
+      <trans-unit id="586395525837431806" datatype="html">
+        <source>Primær organisationsenhed</source>
+        <target state="new">Primær organisationsenhed</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

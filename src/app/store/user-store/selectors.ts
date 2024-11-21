@@ -21,6 +21,7 @@ export const selectOrganizationType = createSelector(
 );
 
 export const selectUserIsGlobalAdmin = createSelector(selectUser, (user) => user?.isGlobalAdmin ?? false);
+export const selectUserUuid = createSelector(selectUser, (user) => user?.uuid);
 
 export const selectHasCheckedUserAndOrganization = createSelector(
   selectUser,

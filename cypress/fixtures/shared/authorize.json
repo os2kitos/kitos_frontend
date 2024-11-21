@@ -2,6 +2,7 @@
   "msg": "",
   "response": {
     "id": 1,
+    "uuid": "9ebdc1e3-897f-42c1-a390-bda717d2dc10",
     "name": "Test",
     "lastName": "User",
     "phoneNumber": "123",

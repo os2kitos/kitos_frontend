@@ -49,6 +49,7 @@ describe('navigation', () => {
 
     cy.intercept('api/v2/organization-unit-role-types*', { statusCode: 404, body: {} });
     cy.intercept('api/v2/internal/organizations/*/organization-units/*/roles', { statusCode: 404, body: {} });
+    cy.intercept('api/v2/internal/organization/*/users/*', { fixture: 'shared/user.json' });
     cy.setup(true);
   });
 

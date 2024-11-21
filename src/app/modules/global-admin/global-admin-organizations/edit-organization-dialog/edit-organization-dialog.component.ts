@@ -4,6 +4,8 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, first } from 'rxjs';
+import { APIOrganizationUpdateRequestDTO } from 'src/app/api/v2';
+import { mapOrgTypeToDtoType } from 'src/app/shared/helpers/organization-type.helpers';
 import {
   defaultOrganizationType,
   getOrganizationType,
@@ -11,11 +13,9 @@ import {
   OrganizationType,
   organizationTypeOptions,
 } from 'src/app/shared/models/organization/organization.model';
+import { cvrValidator } from 'src/app/shared/validators/cvr.validator';
 import { OrganizationActions } from 'src/app/store/organization/actions';
 import { CreateOrganizationDialogComponent } from '../create-organization-dialog/create-organization-dialog.component';
-import { cvrValidator } from 'src/app/shared/validators/cvr.validator';
-import { APIOrganizationUpdateRequestDTO } from 'src/app/api/v2';
-import { mapOrgTypeToDtoType } from 'src/app/shared/helpers/organization-type.helpers';
 
 @Component({
   selector: 'app-edit-organization-unit-dialog',
@@ -79,7 +79,7 @@ export class EditOrganizationDialogComponent implements OnInit {
       name: formValue.name ?? undefined,
       cvr: formValue.cvr ?? undefined,
       type: formValue.organizationType ? mapOrgTypeToDtoType(formValue.organizationType.value) : undefined,
-      foreignCvr: formValue.foreignCvr ?? undefined,
+      foreignCountryCodeUuid: formValue.foreignCvr ?? undefined,
     };
   }
   private hasAnythingChanged(): boolean {

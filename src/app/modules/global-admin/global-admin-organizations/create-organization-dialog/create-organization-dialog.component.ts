@@ -65,7 +65,7 @@ export class CreateOrganizationDialogComponent implements OnInit {
       name: formValue.name ?? '',
       cvr: formValue.cvr ?? undefined,
       type: mapOrgTypeToDtoType(type.value),
-      foreignCvr: formValue.foreignCvr ?? undefined,
+      foreignCountryCodeUuid: formValue.foreignCvr ?? undefined,
     };
   }
 }
