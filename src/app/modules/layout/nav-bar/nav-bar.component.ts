@@ -29,7 +29,6 @@ export class NavBarComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(OrganizationActions.getUIRootConfig())
     this.subscriptions.add(
       combineLatest([this.user$, this.router.events]).pipe(
         filter(([user, event]) => user !== undefined && event instanceof NavigationEnd),
