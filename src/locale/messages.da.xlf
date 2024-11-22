@@ -6131,6 +6131,10 @@
         <source>Primær organisationsenhed</source>
         <target state="new">Primær organisationsenhed</target>
       </trans-unit>
+      <trans-unit id="7225215805628203543" datatype="html">
+        <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="rong&gt;"/>Gamle brugerflade<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></source>
+        <target state="new"><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="rong&gt;"/>Gamle brugerflade<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

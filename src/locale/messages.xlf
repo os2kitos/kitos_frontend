@@ -4657,6 +4657,9 @@
       <trans-unit id="586395525837431806" datatype="html">
         <source>Primær organisationsenhed</source>
       </trans-unit>
+      <trans-unit id="7225215805628203543" datatype="html">
+        <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="rong&gt;"/>Gamle brugerflade<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
