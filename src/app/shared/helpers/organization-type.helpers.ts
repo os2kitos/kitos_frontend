@@ -1,5 +1,5 @@
 import { APIOrganizationResponseDTO } from 'src/app/api/v2';
-import { OrganizationTypeEnum } from '../models/organization/organization.model';
+import { OrganizationTypeEnum } from '../models/organization/organization-odata.model';
 
 export function mapOrganizationType(
   source: APIOrganizationResponseDTO.OrganizationTypeEnum | undefined

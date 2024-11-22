@@ -1,10 +1,10 @@
-export interface Organization {
+export interface OrganizationOData {
   id: string;
   Uuid: string;
   Name: string;
   Cvr: string | undefined;
   OrganizationType: string;
-  ForeignBusiness: string | undefined;
+  ForeignCountryCode: { Name: string; Uuid: string; Description: string };
 }
 
 export interface OrganizationType {
@@ -41,14 +41,14 @@ export const organizationTypeOptions: OrganizationType[] = [
 export const defaultOrganizationType = organizationTypeOptions[0];
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const adaptOrganization = (value: any): Organization | undefined => {
-  const adapted: Organization = {
+export const adaptOrganization = (value: any): OrganizationOData | undefined => {
+  const adapted: OrganizationOData = {
     id: value.Uuid,
     Uuid: value.Uuid,
     Name: value.Name,
     Cvr: value.Cvr ?? '',
     OrganizationType: adaptOrganizationType(value.TypeId).name,
-    ForeignBusiness: value.ForeignCvr ?? '',
+    ForeignCountryCode: value.ForeignCountryCode,
   };
   return adapted;
 };

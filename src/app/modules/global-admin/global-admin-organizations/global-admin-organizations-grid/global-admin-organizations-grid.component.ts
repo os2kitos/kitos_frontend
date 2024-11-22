@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { combineLatestWith, first, of } from 'rxjs';
 import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
@@ -7,7 +8,10 @@ import { ORGANIZATION_SECTION_NAME } from 'src/app/shared/constants/persistent-s
 import { GridActionColumn } from 'src/app/shared/models/grid-action-column.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
-import { Organization, organizationTypeOptions } from 'src/app/shared/models/organization/organization.model';
+import {
+  OrganizationOData,
+  organizationTypeOptions,
+} from 'src/app/shared/models/organization/organization-odata.model';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
 import { OrganizationActions } from 'src/app/store/organization/actions';
 import {
@@ -15,10 +19,9 @@ import {
   selectOrganizationGridLoading,
   selectOrganizationGridState,
 } from 'src/app/store/organization/selectors';
-import { CreateOrganizationDialogComponent } from '../create-organization-dialog/create-organization-dialog.component';
-import { EditOrganizationDialogComponent } from '../edit-organization-dialog/edit-organization-dialog.component';
-import { Actions, ofType } from '@ngrx/effects';
-import { DeleteOrganizationDialogComponent } from '../delete-organization-dialog/delete-organization-dialog.component';
+import { CreateOrganizationDialogComponent } from '../organizations-dialogs/create-organization-dialog/create-organization-dialog.component';
+import { DeleteOrganizationDialogComponent } from '../organizations-dialogs/delete-organization-dialog/delete-organization-dialog.component';
+import { EditOrganizationDialogComponent } from '../organizations-dialogs/edit-organization-dialog/edit-organization-dialog.component';
 
 @Component({
   selector: 'app-global-admin-organizations-grid',
@@ -54,7 +57,7 @@ export class GlobalAdminOrganizationsGridComponent extends BaseOverviewComponent
       hidden: false,
     },
     {
-      field: 'ForeignBusiness',
+      field: 'ForeignCountryCode.Name',
       title: $localize`Udenlandsk virksomhed`,
       section: this.sectionName,
       hidden: false,
@@ -100,12 +103,12 @@ export class GlobalAdminOrganizationsGridComponent extends BaseOverviewComponent
     this.store.dispatch(OrganizationActions.updateGridState(gridState));
   }
 
-  public onEditOrganization(organization: Organization) {
+  public onEditOrganization(organization: OrganizationOData) {
     const dialogRef = this.dialog.open(EditOrganizationDialogComponent);
     dialogRef.componentInstance.organization = organization;
   }
 
-  public onDeleteOrganization(organization: Organization) {
+  public onDeleteOrganization(organization: OrganizationOData) {
     const dialogRef = this.dialog.open(DeleteOrganizationDialogComponent, {
       width: 'auto',
       minWidth: '400px',

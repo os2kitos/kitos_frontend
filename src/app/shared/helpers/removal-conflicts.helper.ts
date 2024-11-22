@@ -5,7 +5,7 @@ import {
   APISimpleConflictResponseDTO,
   APISystemWithUsageOutsideOrganizationConflictResponseDTO,
 } from 'src/app/api/v2';
-import { RemovalConflict } from 'src/app/modules/global-admin/global-admin-organizations/delete-organization-dialog/removal-conflict-table/removal-conflict-table.component';
+import { RemovalConflict } from 'src/app/modules/global-admin/global-admin-organizations/organizations-dialogs/delete-organization-dialog/removal-conflict-table/removal-conflict-table.component';
 import { OrganizationRemovalConflicts } from '../models/global-admin/organization-removal-conflicts.model';
 
 export function mapConflictsDtoToOrganizationRemovalConflicts(

@@ -5,7 +5,7 @@ import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.compone
 import { ORGANIZATION_SECTION_NAME } from 'src/app/shared/constants/persistent-state-constants';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
-import { organizationTypeOptions } from 'src/app/shared/models/organization/organization.model';
+import { organizationTypeOptions } from 'src/app/shared/models/organization/organization-odata.model';
 import { OrganizationActions } from 'src/app/store/organization/actions';
 import {
   selectOrganizationGridData,
@@ -45,8 +45,8 @@ export class OrganizationsGridComponent extends BaseOverviewComponent implements
       extraData: organizationTypeOptions,
       hidden: false,
     },
-      {
-      field: 'ForeignBusiness',
+    {
+      field: 'ForeignCountryCode.Name',
       title: $localize`Udenlandsk virksomhed`,
       section: this.sectionName,
       hidden: false,

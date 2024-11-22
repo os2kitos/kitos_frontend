@@ -26,7 +26,7 @@ export class DropdownComponent<T> extends BaseDropdownComponent<T | null> implem
     // Add obselete value when both value and data are present if data does not contain current form value
     this.subscriptions.add(
       combineLatest([this.formValueSubject$, this.formDataSubject$]).subscribe(([value]) =>
-        this.addObsoleteValueIfMissingToData(value)
+        this.addObsoleteToValueIfMissingInData(value)
       )
     );
 
@@ -59,7 +59,7 @@ export class DropdownComponent<T> extends BaseDropdownComponent<T | null> implem
     this.blurEvent.emit();
   }
 
-  private addObsoleteValueIfMissingToData(value?: any) {
+  private addObsoleteToValueIfMissingInData(value?: any) {
     if (this.considerCurrentValueObsoleteIfNotPresentInData) {
       if (this.data && this.formName && this.doesDataContainValue(value)) {
         // Set generated obselete value on the form control

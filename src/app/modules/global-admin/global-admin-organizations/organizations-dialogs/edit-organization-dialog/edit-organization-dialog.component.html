@@ -1,4 +1,4 @@
-<app-dialog title="Opret organisation" i18n-title>
+<app-dialog title="Rediger organisation" i18n-title overflow="none">
   <app-loading *ngIf="isLoading$ | async"></app-loading>
   <ng-container *ngIf="(isLoading$ | async) === false">
     <app-standard-vertical-content-grid>
@@ -19,25 +19,23 @@
         data-cy="org-type"
       ></app-dropdown>
       <app-textbox text="CVR nummer" i18n-text [formGroup]="formGroup" formName="cvr" data-cy="org-cvr"></app-textbox>
-      <app-textbox
+      <app-dropdown
         text="Udenlandsk virksomhed"
         i18n-text
         [formGroup]="formGroup"
-        formName="foreignCvr"
-        data-cy="org-foreign-cvr"
-      >
-      </app-textbox>
+        valueField="uuid"
+        textField="name"
+        formName="foreignCountryCode"
+        [data]="countryCodes$ | async"
+        data-cy="foreign-country-code"
+      ></app-dropdown>
     </app-standard-vertical-content-grid>
 
     <app-dialog-actions>
-      <app-button
-        (buttonClick)="onCreateOrganization()"
-        [disabled]="!formGroup.valid"
-        i18n
-        data-cy="create-org-dialog-button"
-        >Opret</app-button
-      >
       <app-button buttonStyle="secondary" (buttonClick)="onCancel()" i18n>Annuller</app-button>
+      <app-button (buttonClick)="onEditOrganization()" [disabled]="!canSubmit()" i18n data-cy="edit-org-dialog-button"
+        >Gem</app-button
+      >
     </app-dialog-actions>
   </ng-container>
 </app-dialog>

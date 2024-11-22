@@ -10,22 +10,26 @@ import {
   defaultOrganizationType,
   OrganizationType,
   organizationTypeOptions,
-} from 'src/app/shared/models/organization/organization.model';
+} from 'src/app/shared/models/organization/organization-odata.model';
 import { cvrValidator } from 'src/app/shared/validators/cvr.validator';
 import { OrganizationActions } from 'src/app/store/organization/actions';
+import { OrganizationsDialogComponentStore } from '../organizations-dialog.component-store';
+import { ShallowOptionType } from 'src/app/shared/models/options/option-type.model';
+import { GlobalAdminOrganizationsDialogBaseComponent } from '../global-admin-organizations-dialog-base.component';
 
 @Component({
   selector: 'app-create-organization-dialog',
   templateUrl: './create-organization-dialog.component.html',
   styleUrl: './create-organization-dialog.component.scss',
+  providers: [OrganizationsDialogComponentStore],
 })
-export class CreateOrganizationDialogComponent implements OnInit {
+export class CreateOrganizationDialogComponent extends GlobalAdminOrganizationsDialogBaseComponent implements OnInit {
   public readonly organizationTypeOptions = organizationTypeOptions;
   public formGroup = new FormGroup({
     name: new FormControl<string | undefined>(undefined, Validators.required),
     cvr: new FormControl<string | undefined>(undefined, cvrValidator()),
     organizationType: new FormControl<OrganizationType>(defaultOrganizationType, Validators.required),
-    foreignCvr: new FormControl<string | undefined>(undefined),
+    foreignCountryCode: new FormControl<ShallowOptionType | undefined>(undefined),
   });
 
   public isLoading$ = new BehaviorSubject<boolean>(false);
@@ -33,10 +37,16 @@ export class CreateOrganizationDialogComponent implements OnInit {
   constructor(
     private dialogRef: MatDialogRef<CreateOrganizationDialogComponent>,
     private store: Store,
-    private actions$: Actions
-  ) {}
+    private actions$: Actions,
+    componentStore: OrganizationsDialogComponentStore
+  ) {
+    super(componentStore);
+  }
 
-  public ngOnInit(): void {
+  override ngOnInit(): void {
+    super.ngOnInit();
+    this.componentStore.getCountryCodes();
+
     this.actions$
       .pipe(ofType(OrganizationActions.createOrganizationSuccess, OrganizationActions.createOrganizationError))
       .subscribe(() => {
@@ -65,7 +75,7 @@ export class CreateOrganizationDialogComponent implements OnInit {
       name: formValue.name ?? '',
       cvr: formValue.cvr ?? undefined,
       type: mapOrgTypeToDtoType(type.value),
-      foreignCountryCodeUuid: formValue.foreignCvr ?? undefined,
+      foreignCountryCodeUuid: formValue.foreignCountryCode?.uuid ?? undefined,
     };
   }
 }

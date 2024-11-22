@@ -4645,11 +4645,11 @@
       <trans-unit id="6820190168933872381" datatype="html">
         <source>Tilpasning af landekoder</source>
       </trans-unit>
-      <trans-unit id="3441632359299611513" datatype="html">
-        <source>Organisationsroller</source>
-      </trans-unit>
       <trans-unit id="283333195670837592" datatype="html">
         <source>Beskeden kunne ikke opdateres</source>
+      </trans-unit>
+      <trans-unit id="3441632359299611513" datatype="html">
+        <source>Organisationsroller</source>
       </trans-unit>
       <trans-unit id="4945999259997160926" datatype="html">
         <source>Beskeden blev opdateret</source>

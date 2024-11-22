@@ -12,6 +12,7 @@
 
 
 export interface APIOrganizationUpdateRequestDTO { 
+    updateForeignCountryCode?: boolean;
     name?: string;
     type?: APIOrganizationUpdateRequestDTO.TypeEnum;
     cvr?: string;

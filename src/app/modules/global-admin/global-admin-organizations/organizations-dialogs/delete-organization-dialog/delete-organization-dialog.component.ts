@@ -4,7 +4,7 @@ import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, map, Observable, of } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import { Organization } from 'src/app/shared/models/organization/organization.model';
+import { OrganizationOData } from 'src/app/shared/models/organization/organization-odata.model';
 import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { OrganizationActions } from 'src/app/store/organization/actions';
@@ -18,7 +18,7 @@ import { RemovalConflict, RemovalConflictType } from './removal-conflict-table/r
   providers: [DeleteOrganizationComponentStore],
 })
 export class DeleteOrganizationDialogComponent extends BaseComponent implements OnInit {
-  @Input() public organization!: Organization;
+  @Input() public organization!: OrganizationOData;
 
   public hasAcceptedConsequences: boolean = false;
   public isCopying: boolean = false;

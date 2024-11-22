@@ -17,7 +17,13 @@
           "ObjectOwnerId": 1,
           "LastChanged": "2024-11-05T15:04:24.7587856Z",
           "LastChangedByUserId": 2,
-          "SubDataProcessorRegistrations": []
+          "SubDataProcessorRegistrations": [],
+          "ForeignCountryCode": {
+                "Name": "SE",
+                "Description": "...",
+                "Uuid": "67f8231d-78ee-4016-923f-822652fdacb9"
+            },
+          "ForeignCountryCodeId": 2
       },
       {
           "Id": 2,

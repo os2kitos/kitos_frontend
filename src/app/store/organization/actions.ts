@@ -10,8 +10,8 @@ import { GridState } from 'src/app/shared/models/grid-state.model';
 import { SavedFilterState } from 'src/app/shared/models/grid/saved-filter-state.model';
 import { OrganizationMasterDataRoles } from 'src/app/shared/models/organization/organization-master-data/organization-master-data-roles.model';
 import { OrganizationMasterData } from 'src/app/shared/models/organization/organization-master-data/organization-master-data.model';
+import { OrganizationOData } from 'src/app/shared/models/organization/organization-odata.model';
 import { OrganizationPermissions } from 'src/app/shared/models/organization/organization-permissions.model';
-import { Organization } from 'src/app/shared/models/organization/organization.model';
 import { UIRootConfig } from 'src/app/shared/models/ui-config/ui-root-config.model';
 
 export const OrganizationActions = createActionGroup({
@@ -40,7 +40,7 @@ export const OrganizationActions = createActionGroup({
     'Get Organization Permissions Error': emptyProps(),
 
     'Get Organizations': (odataString: string) => ({ odataString }),
-    'Get Organizations Success': (organizations: Organization[], total: number) => ({ organizations, total }),
+    'Get Organizations Success': (organizations: OrganizationOData[], total: number) => ({ organizations, total }),
     'Get Organizations Error': emptyProps(),
 
     'Update Grid State': (gridState: GridState) => ({ gridState }),
