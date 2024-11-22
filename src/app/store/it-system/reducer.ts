@@ -4,6 +4,7 @@ import { defaultGridState } from 'src/app/shared/models/grid-state.model';
 import { ITSystem } from 'src/app/shared/models/it-system/it-system.model';
 import { ITSystemActions } from './actions';
 import { ITSystemState } from './state';
+import { ITSystemUsageActions } from '../it-system-usage/actions';
 
 export const itSystemAdapter = createEntityAdapter<ITSystem>();
 
@@ -40,9 +41,14 @@ export const itSystemFeature = createFeature({
         isLoadingSystemsQuery: false,
       })
     ),
-    on(ITSystemActions.updateGridState, (state, { gridState }): ITSystemState => ({
-      ...state, isLoadingSystemsQuery: true, gridState
-    })),
+    on(
+      ITSystemActions.updateGridState,
+      (state, { gridState }): ITSystemState => ({
+        ...state,
+        isLoadingSystemsQuery: true,
+        gridState,
+      })
+    ),
     on(ITSystemActions.getITSystemsError, (state): ITSystemState => ({ ...state, isLoadingSystemsQuery: false })),
     on(ITSystemActions.deleteITSystem, (state): ITSystemState => ({ ...state, isRemoving: true })),
     on(ITSystemActions.deleteITSystemSuccess, (state): ITSystemState => ({ ...state, isRemoving: false })),
@@ -70,12 +76,31 @@ export const itSystemFeature = createFeature({
       (state, { itSystem }): ITSystemState => ({ ...state, itSystem })
     ),
 
-
     on(ITSystemActions.updateGridColumnsSuccess, (state, { gridColumns }): ITSystemState => {
       return {
         ...state,
         gridColumns,
       };
-    })
+    }),
+
+    on(ITSystemUsageActions.createItSystemUsageSuccess, (state, { itSystemUuid }): ITSystemState => {
+      const itSystem = state.entities[itSystemUuid];
+      if (!itSystem) {
+        return state;
+      }
+      const newSystem = { ...itSystem, IsInUse: true };
+      return { ...state, entities: { ...state.entities, [itSystemUuid]: newSystem } };
+    }),
+    on(
+      ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganizationSuccess,
+      (state, { itSystemUuid }): ITSystemState => {
+        const itSystem = state.entities[itSystemUuid];
+        if (!itSystem) {
+          return state;
+        }
+        const newSystem = { ...itSystem, IsInUse: false };
+        return { ...state, entities: { ...state.entities, [itSystemUuid]: newSystem } };
+      }
+    )
   ),
 });

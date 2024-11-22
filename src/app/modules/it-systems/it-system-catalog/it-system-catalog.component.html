@@ -17,6 +17,7 @@
   i18n-exportToExcelName
   [loading]="isLoading$ | async"
   [state]="gridState$ | async"
+  [createPermission]="hasCreateUsagePermission$ | async"
   [entityType]="'it-system'"
   (stateChange)="stateChange($event)"
   (rowIdSelect)="rowIdSelect($event)"

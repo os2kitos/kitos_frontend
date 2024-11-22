@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
@@ -37,8 +36,8 @@ import { GridState } from '../../models/grid-state.model';
 import { SavedFilterState } from '../../models/grid/saved-filter-state.model';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
 import { StatePersistingService } from '../../services/state-persisting.service';
-import { ConfirmationDialogComponent } from '../dialogs/confirmation-dialog/confirmation-dialog.component';
 import { includedColumnInExport } from '../../helpers/grid-export.helper';
+import { ConfirmActionCategory, ConfirmActionService } from '../../services/confirm-action.service';
 
 @Component({
   selector: 'app-grid',
@@ -55,6 +54,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   @Input() state?: GridState | null;
   @Input() exportToExcelName?: string | null;
 
+  @Input() createPermission?: boolean | null;
   @Input() modifyPermission?: boolean | null;
   @Input() deletePermission?: boolean | null;
 
@@ -77,8 +77,8 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   constructor(
     private actions$: Actions,
     private store: Store,
-    private dialog: MatDialog,
-    private localStorage: StatePersistingService
+    private localStorage: StatePersistingService,
+    private confirmActionService: ConfirmActionService
   ) {
     super();
     this.allData = this.allData.bind(this);
@@ -206,31 +206,25 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     if (!columnUuid) return;
     if (value === true) {
       switch (this.entityType) {
-        case 'it-system-usage':
+        case 'it-system':
           this.store.dispatch(ITSystemUsageActions.createItSystemUsage(columnUuid));
           break;
         default:
           throw `Checkbox change for entity type ${this.entityType} not implemented: grid.component.ts`;
       }
     } else {
-      const dialogRef = this.dialog.open(ConfirmationDialogComponent);
-      const dialogInstance = dialogRef.componentInstance;
-      dialogInstance.bodyText = $localize`Er du sikker på at du vil fjerne den lokale anvendelse af systemet? Dette sletter ikke systemet, men vil slette alle lokale detaljer vedrørende anvendelsen.`;
-      dialogInstance.confirmColor = 'warn';
-
-      this.subscriptions.add(
-        dialogRef.afterClosed().subscribe((result) => {
-          if (result === true) {
-            switch (this.entityType) {
-              case 'it-system-usage':
-                this.store.dispatch(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganization(columnUuid));
-                break;
-              default:
-                throw `Checkbox change for entity type ${this.entityType} not implemented: grid.component.ts`;
-            }
-          }
-        })
-      );
+      switch (this.entityType) {
+        case 'it-system':
+          this.confirmActionService.confirmAction({
+            category: ConfirmActionCategory.Warning,
+            message: $localize`Er du sikker på at du vil fjerne den lokale anvendelse af systemet? Dette sletter ikke systemet, men vil slette alle lokale detaljer vedrørende anvendelsen.`,
+            onConfirm: () =>
+              this.store.dispatch(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganization(columnUuid)),
+          });
+          break;
+        default:
+          throw `Checkbox change for entity type ${this.entityType} not implemented: grid.component.ts`;
+      }
     }
   }
 
@@ -303,10 +297,11 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
       map(([columns, exportAllColumns]) => {
         return columns
           ? columns
-          .filter(includedColumnInExport)
-          .filter(
-              (column) => (exportAllColumns || (!column.hidden && (!this.isExcelOnlyColumn(column) || exportAllColumns)))
-            )
+              .filter(includedColumnInExport)
+              .filter(
+                (column) =>
+                  exportAllColumns || (!column.hidden && (!this.isExcelOnlyColumn(column) || exportAllColumns))
+              )
           : [];
       })
     );

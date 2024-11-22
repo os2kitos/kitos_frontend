@@ -194,12 +194,25 @@
 
       <ng-template *ngIf="column.style === 'checkbox'" kendoGridCellTemplate let-dataItem>
         <div class="column-center-content">
-          <app-checkbox
-            *ngIf="column.idField"
-            [value]="searchProperty(dataItem, column.field)"
-            [disabled]="column.permissionsField ? searchProperty(dataItem, column.permissionsField) !== true : false"
-            (valueChange)="checkboxChange($event, searchProperty(dataItem, column.idField))"
-          ></app-checkbox>
+          <ng-container *ngIf="column.idField">
+            <app-checkbox
+              *ngIf="entityType !== 'it-system'"
+              [value]="searchProperty(dataItem, column.field)"
+              [disabled]="column.permissionsField ? searchProperty(dataItem, column.permissionsField) !== true : false"
+              (valueChange)="checkboxChange($event, searchProperty(dataItem, column.idField))"
+            ></app-checkbox>
+            <app-usage-proxy-checkbox
+              *ngIf="entityType === 'it-system'"
+              [checked]="searchProperty(dataItem, column.field)"
+              [disabled]="
+                column.permissionsField
+                  ? searchProperty(dataItem, column.permissionsField) !== true || !createPermission
+                  : false
+              "
+              [entityUuid]="searchProperty(dataItem, column.idField)"
+              (attemptChange)="checkboxChange($event, searchProperty(dataItem, column.idField))"
+            ></app-usage-proxy-checkbox>
+          </ng-container>
         </div>
       </ng-template>
 
