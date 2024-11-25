@@ -1,0 +1,4 @@
+<app-icon-button (buttonClick)="onToggle()" data-cy="disable-button">
+  <app-x-icon *ngIf="value"></app-x-icon>
+  <app-check-icon *ngIf="!value"></app-check-icon>
+</app-icon-button>

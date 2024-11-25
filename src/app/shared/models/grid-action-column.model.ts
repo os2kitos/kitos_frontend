@@ -1,3 +1,3 @@
 export interface GridActionColumn {
-  type: 'edit' | 'delete';
+  type: 'edit' | 'delete' | 'toggle';
 }

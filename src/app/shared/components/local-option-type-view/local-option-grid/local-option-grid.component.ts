@@ -1,15 +1,15 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Store } from '@ngrx/store';
 import { GridActionColumn } from 'src/app/shared/models/grid-action-column.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import {
   LocalAdminOptionType,
   LocalAdminOptionTypeItem,
 } from 'src/app/shared/models/options/local-admin-option-type.model';
-import { EditLocalOptionTypeDialogComponent } from '../edit-local-option-type-dialog/edit-local-option-type-dialog.component';
-import { CheckboxEvent } from '../../local-grid/local-grid.component';
-import { Store } from '@ngrx/store';
 import { LocalOptionTypeActions } from 'src/app/store/local-admin/local-option-types/actions';
+import { BooleanChange } from '../../local-grid/local-grid.component';
+import { EditLocalOptionTypeDialogComponent } from '../edit-local-option-type-dialog/edit-local-option-type-dialog.component';
 
 @Component({
   selector: 'app-local-option-grid',
@@ -87,7 +87,7 @@ export class LocalOptionGridComponent implements OnInit {
     dialogRef.componentInstance.optionType = this.optionType;
   }
 
-  public onCheckboxChange(event: CheckboxEvent<LocalAdminOptionTypeItem>): void {
+  public onCheckboxChange(event: BooleanChange<LocalAdminOptionTypeItem>): void {
     const activeStatus = event.value;
     const option = event.item;
     this.store.dispatch(

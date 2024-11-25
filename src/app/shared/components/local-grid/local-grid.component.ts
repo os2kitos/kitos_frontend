@@ -6,9 +6,9 @@ import { CompositeFilterDescriptor, SortDescriptor, process } from '@progress/ke
 import { get } from 'lodash';
 import { GridExportActions } from 'src/app/store/grid/actions';
 import { BaseComponent } from '../../base/base.component';
+import { includedColumnInExport } from '../../helpers/grid-export.helper';
 import { GridColumn } from '../../models/grid-column.model';
 import { GridState, defaultGridState } from '../../models/grid-state.model';
-import { includedColumnInExport } from '../../helpers/grid-export.helper';
 
 @Component({
   selector: 'app-local-grid',
@@ -28,7 +28,8 @@ export class LocalGridComponent<T> extends BaseComponent implements OnInit {
 
   @Output() deleteEvent = new EventEmitter<T>();
   @Output() modifyEvent = new EventEmitter<T>();
-  @Output() checkboxChange = new EventEmitter<CheckboxEvent<T>>();
+  @Output() toggleChange = new EventEmitter<BooleanChange<T>>();
+  @Output() checkboxChange = new EventEmitter<BooleanChange<T>>();
 
   public state = defaultGridState;
 
@@ -96,6 +97,10 @@ export class LocalGridComponent<T> extends BaseComponent implements OnInit {
     return this.columns.filter(includedColumnInExport);
   }
 
+  public onToggleChange(value: boolean, item: T) {
+    this.toggleChange.emit({ value, item });
+  }
+
   public onCheckboxChange(value: boolean | undefined, item: T) {
     if (value === undefined) return;
     this.checkboxChange.emit({ value, item });
@@ -111,7 +116,7 @@ export class LocalGridComponent<T> extends BaseComponent implements OnInit {
   }
 }
 
-export type CheckboxEvent<T> = {
+export type BooleanChange<T> = {
   value: boolean;
   item: T;
 };

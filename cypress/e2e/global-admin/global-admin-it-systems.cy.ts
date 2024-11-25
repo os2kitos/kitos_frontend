@@ -54,7 +54,7 @@ describe('global-admin-organizations', () => {
     const newName = 'someName';
 
     cy.getByDataCy('option-type-accordion').first().click();
-    cy.getByDataCy('edit-button').first().click();
+    cy.getByDataCy('grid-edit-button').first().click();
 
     cy.replaceTextByDataCy('name-textbox', newName);
     cy.getByDataCy('save-button').click();

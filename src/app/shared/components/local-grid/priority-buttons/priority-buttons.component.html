@@ -1,0 +1,12 @@
+<div class="align-priority-div">
+  <app-icon-button (buttonClick)="onIncreasePriority()" [disabled]="isHighestPriority()">
+    <app-arrow-up-icon [ngClass]="{ 'arrow-icon-disabled': isHighestPriority() }"></app-arrow-up-icon>
+  </app-icon-button>
+  <app-icon-button
+    (buttonClick)="onDecreasePriority()"
+    [disabled]="isLowestPriority()"
+    data-cy="decrease-priority-button"
+  >
+    <app-arrow-down-icon [ngClass]="{ 'arrow-icon-disabled': isLowestPriority() }"></app-arrow-down-icon>
+  </app-icon-button>
+</div>

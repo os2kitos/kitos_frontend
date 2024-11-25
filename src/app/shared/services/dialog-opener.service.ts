@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { DeleteUserDialogComponent } from 'src/app/modules/organization/organization-users/delete-user-dialog/delete-user-dialog.component';
 import { EditUserDialogComponent } from 'src/app/modules/organization/organization-users/edit-user-dialog/edit-user-dialog.component';
 import { ODataOrganizationUser } from '../models/organization/organization-user/organization-user.model';
+import { GlobalOptionTypeDialogComponent } from '../components/global-option-type-view/global-option-type-dialog/global-option-type-dialog.component';
+import { GlobalAdminOptionType } from '../models/options/global-admin-option-type.model';
 
 @Injectable({
   providedIn: 'root',
@@ -34,5 +36,12 @@ export class DialogOpenerService {
     dialogRef.componentInstance.user$ = user$;
     dialogRef.componentInstance.nested = nested;
     return dialogRef;
+  }
+
+  public openGlobalOptionTypeDialog(optionType: GlobalAdminOptionType): GlobalOptionTypeDialogComponent {
+    const dialogRef = this.dialog.open(GlobalOptionTypeDialogComponent);
+    const componentInstance = dialogRef.componentInstance;
+    componentInstance.optionType = optionType;
+    return componentInstance;
   }
 }

@@ -1,0 +1,21 @@
+<ng-container *ngIf="optionTypeItems$ | async as optionTypeItems">
+  <app-accordion
+    [title]="title"
+    [disabled]="disableAccordion"
+    [isExpandedByDefault]="expandedByDefault"
+    data-cy="option-type-accordion"
+  >
+    <div class="create-button-container-align-right">
+      <app-button buttonStyle="primary" (buttonClick)="onCreate()" i18n data-cy="create-button">
+        Opret {{ getCreateButtonType() }}</app-button
+      >
+    </div>
+    <app-global-option-type-grid
+      [loading]="(isLoading$ | async) !== false"
+      [optionType]="optionType"
+      [optionTypeItems]="optionTypeItems"
+      [showDescription]="showDescription"
+      [showWriteAccess]="showWriteAccess"
+    ></app-global-option-type-grid>
+  </app-accordion>
+</ng-container>

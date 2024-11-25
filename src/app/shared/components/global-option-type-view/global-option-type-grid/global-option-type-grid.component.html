@@ -1,0 +1,10 @@
+<app-local-grid
+  [loading]="loading"
+  [data]="optionTypeItems"
+  [columns]="filteredGridColumns"
+  [modifyPermission]="true"
+  [deletePermission]="true"
+  [fitSizeToContent]="true"
+  (modifyEvent)="onEdit($event)"
+  (toggleChange)="onToggleChange($event)"
+></app-local-grid>

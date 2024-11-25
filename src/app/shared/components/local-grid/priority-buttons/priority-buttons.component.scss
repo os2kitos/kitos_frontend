@@ -1,0 +1,11 @@
+@import "theme";
+
+.align-priority-div {
+  display: flex;
+  gap: $padding-small;
+  justify-content: center;
+}
+
+.arrow-icon-disabled {
+  --icon-color: #b0b7bf;
+}

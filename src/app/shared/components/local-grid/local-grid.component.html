@@ -19,6 +19,7 @@
       *ngIf="!column.hidden"
       [field]="column.field"
       [title]="column.title"
+      [sortable]="column.sortable ?? true"
       [filter]="column.filter ?? 'text'"
       [width]="column.width ?? defaultColumnWidth"
       [minResizableWidth]="
@@ -97,6 +98,17 @@
         </div>
       </ng-template>
 
+      <ng-template *ngIf="column.style === 'priority-buttons'" kendoGridCellTemplate let-dataItem>
+        <div>
+          <app-priority-buttons
+            [optionTypeItem]="dataItem"
+            [optionType]="column.extraData.optionType"
+            [minPriority]="column.extraData.minPriority"
+            [maxPriority]="column.extraData.maxPriority"
+          ></app-priority-buttons>
+        </div>
+      </ng-template>
+
       <ng-template *ngIf="column.style === 'action-buttons'" kendoGridCellTemplate let-dataItem>
         <div class="action-buttons-container">
           <ng-container *ngFor="let button of column.extraData">
@@ -114,6 +126,12 @@
             >
               <app-trashcan-icon></app-trashcan-icon>
             </app-icon-button>
+            <app-toggle-button
+              *ngIf="button.type === 'toggle'"
+              (valueChange)="onToggleChange($event, dataItem)"
+              [value]="searchProperty(dataItem, column.field)"
+            >
+            </app-toggle-button>
           </ng-container>
         </div>
       </ng-template>
