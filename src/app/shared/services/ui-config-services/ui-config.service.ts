@@ -25,7 +25,7 @@ export class UIConfigService {
       blueprint,
       uiModuleCustomizations
     );
-    return { module, moduleConfigViewModel };
+    return { module, moduleConfigViewModel, cacheTime: undefined };
   }
 
   private findCustomizedUINode(customizationList: UINodeCustomization[], fullKey: string): UINodeCustomization | null {

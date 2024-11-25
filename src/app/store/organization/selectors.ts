@@ -1,7 +1,9 @@
-import { createSelector } from '@ngrx/store';
+import { createSelector, MemoizedSelector } from '@ngrx/store';
+import { memoize } from 'lodash';
+import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
+import { hasValidCache } from 'src/app/shared/helpers/date.helpers';
 import { organizationAdapter, organizationFeature } from './reducer';
 import { OrganizationState } from './state';
-import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
 
 export const { selectOrganizationState } = organizationFeature;
 
@@ -44,6 +46,14 @@ export const selectOrganizationGridData = createSelector(selectAll, selectTotal,
 export const selectOrganizationGridColumns = createSelector(selectOrganizationState, (state) => state.gridColumns);
 
 export const selectUIRootConfig = createSelector(selectOrganizationState, (state) => state.uiRootConfig);
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const selectHasValidUIRootConfigCache: () => MemoizedSelector<any, boolean> = memoize(() =>
+  createSelector(
+    selectOrganizationState,
+    () => new Date(),
+    (state, now) => hasValidCache(state.uiRootConfigCacheTime, now)
+  )
+);
 
 export const selectModuleVisibility = (configKey: UIModuleConfigKey) => {
   switch (configKey) {

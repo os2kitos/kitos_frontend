@@ -17,17 +17,30 @@ export const uiModuleConfigFeature = createFeature({
     UIModuleConfigInitialState,
     on(
       UIModuleConfigActions.getUIModuleConfigSuccess,
-      (state, { uiModuleConfig }): UIModuleConfigState => ({
-        ...state,
-        uiModuleConfigs: updateUIModuleConfigs(state, uiModuleConfig),
-      })
+      (state, { uiModuleConfig: uiModuleConfigBase }): UIModuleConfigState => {
+        const cacheTime = new Date().getTime();
+        const uiModuleConfig: UIModuleConfig = {
+          ...uiModuleConfigBase,
+          cacheTime,
+        };
+        return {
+          ...state,
+          uiModuleConfigs: updateUIModuleConfigs(state, uiModuleConfig),
+        };
+      }
     ),
     on(
       UIModuleConfigActions.putUIModuleCustomizationSuccess,
-      (state, { uiModuleConfig }): UIModuleConfigState => ({
-        ...state,
-        uiModuleConfigs: updateUIModuleConfigs(state, uiModuleConfig),
-      })
+      (state, { uiModuleConfig: uiModuleConfigBase }): UIModuleConfigState => {
+        const uiModuleConfig: UIModuleConfig = {
+          ...uiModuleConfigBase,
+          cacheTime: undefined,
+        };
+        return {
+          ...state,
+          uiModuleConfigs: updateUIModuleConfigs(state, uiModuleConfig),
+        };
+      }
     )
   ),
 });
@@ -44,6 +57,7 @@ function updateUIModuleConfigs(state: UIModuleConfigState, newUIModuleConfig: UI
     updatedUIModuleConfigs[existingConfigIndex] = {
       ...existingConfig,
       moduleConfigViewModel: newUIModuleConfig.moduleConfigViewModel,
+      cacheTime: newUIModuleConfig.cacheTime,
     };
   }
 

@@ -1,7 +1,8 @@
 import { Inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { concatLatestFrom } from '@ngrx/operators';
 import { ActionCreator, Store } from '@ngrx/store';
-import { catchError, combineLatestWith, concatMap, map, of, switchMap } from 'rxjs';
+import { catchError, combineLatestWith, concatMap, filter, map, of, switchMap } from 'rxjs';
 import {
   APICustomizedUINodeRequestDTO,
   APICustomizedUINodeResponseDTO,
@@ -10,12 +11,13 @@ import {
   APIV2OrganizationsInternalINTERNALService,
 } from 'src/app/api/v2';
 import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
+import { UIModuleConfig } from 'src/app/shared/models/ui-config/ui-module-config.model';
 import { adaptUIModuleCustomization } from 'src/app/shared/models/ui-config/ui-module-customization.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { UIConfigService } from 'src/app/shared/services/ui-config-services/ui-config.service';
 import { selectOrganizationUuid } from '../../user-store/selectors';
 import { UIModuleConfigActions } from './actions';
-import { UIModuleConfig } from 'src/app/shared/models/ui-config/ui-module-config.model';
+import { selectHasValidUIModuleConfigCache } from './selectors';
 
 @Injectable()
 export class UIModuleCustomizationEffects {
@@ -30,7 +32,11 @@ export class UIModuleCustomizationEffects {
   getUIModuleConfig$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(UIModuleConfigActions.getUIModuleConfig),
-      combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+      concatLatestFrom(({ module }) => [
+        this.store.select(selectOrganizationUuid).pipe(filterNullish()),
+        this.store.select(selectHasValidUIModuleConfigCache(module)),
+      ]),
+      filter(([_, __, validCache]) => !validCache),
       concatMap(([{ module: moduleName }, organizationUuid]) =>
         this.organizationInternalService
           .getSingleOrganizationsInternalV2GetUIModuleCustomization({ moduleName, organizationUuid })

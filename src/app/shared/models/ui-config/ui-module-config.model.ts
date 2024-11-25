@@ -4,4 +4,5 @@ import { UIConfigNodeViewModel } from './ui-config-node-view-model.model';
 export interface UIModuleConfig {
   module: UIModuleConfigKey;
   moduleConfigViewModel: UIConfigNodeViewModel | undefined;
+  cacheTime: number | undefined;
 }

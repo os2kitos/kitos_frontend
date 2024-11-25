@@ -1,10 +1,23 @@
-import { createSelector } from '@ngrx/store';
+import { createSelector, MemoizedSelector } from '@ngrx/store';
+import { memoize } from 'lodash';
 import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
+import { hasValidCache } from 'src/app/shared/helpers/date.helpers';
 import { UIConfigNodeViewModel } from 'src/app/shared/models/ui-config/ui-config-node-view-model.model';
 import { uiModuleConfigFeature } from './reducer';
 import { UIModuleConfigState } from './state';
 
 export const { selectUIModuleCustomizationState } = uiModuleConfigFeature;
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const selectHasValidUIModuleConfigCache: (module: UIModuleConfigKey) => MemoizedSelector<any, boolean> = memoize(
+  (module: UIModuleConfigKey) =>
+    createSelector(
+      selectUIModuleCustomizationState,
+      () => new Date(),
+      (state, now) =>
+        hasValidCache(state.uiModuleConfigs.find((config) => config.module === module)?.cacheTime, now)
+    )
+);
 
 // eslint-disable-next-line @ngrx/prefix-selectors-with-select
 const createTabEnabledSelector = (module: UIModuleConfigKey, tabKey: string) =>

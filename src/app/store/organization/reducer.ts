@@ -17,6 +17,7 @@ export const organizationInitialState: OrganizationState = organizationAdapter.g
   organizationMasterDataRoles: null,
   permissions: null,
   uiRootConfig: null,
+  uiRootConfigCacheTime: undefined,
 });
 
 export const organizationFeature = createFeature({
@@ -82,13 +83,13 @@ export const organizationFeature = createFeature({
         gridState,
       })
     ),
-    on(
-      OrganizationActions.getUIRootConfigSuccess,
-      (state, { uiRootConfig }): OrganizationState => ({ ...state, uiRootConfig })
-    ),
+    on(OrganizationActions.getUIRootConfigSuccess, (state, { uiRootConfig }): OrganizationState => {
+      const newCacheTime = new Date().getTime();
+      return { ...state, uiRootConfig, uiRootConfigCacheTime: newCacheTime };
+    }),
     on(
       OrganizationActions.patchUIRootConfigSuccess,
-      (state, { uiRootConfig }): OrganizationState => ({ ...state, uiRootConfig })
+      (state, { uiRootConfig }): OrganizationState => ({ ...state, uiRootConfig, uiRootConfigCacheTime: undefined })
     )
   ),
 });

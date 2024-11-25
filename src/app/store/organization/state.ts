@@ -18,4 +18,5 @@ export interface OrganizationState extends EntityState<OrganizationOData> {
   permissions: OrganizationPermissions | null | undefined;
 
   uiRootConfig: UIRootConfig | null;
+  uiRootConfigCacheTime: number | undefined;
 }
