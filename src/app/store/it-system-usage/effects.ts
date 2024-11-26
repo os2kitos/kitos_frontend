@@ -4,7 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { compact, uniq } from 'lodash';
-import { catchError, combineLatestWith, map, mergeMap, of, switchMap } from 'rxjs';
+import { catchError, combineLatestWith, first, map, mergeMap, of, switchMap } from 'rxjs';
 import { APIBusinessRoleDTO, APIV1ItSystemUsageOptionsINTERNALService } from 'src/app/api/v1';
 import {
   APIItSystemUsageResponseDTO,
@@ -571,6 +571,7 @@ export class ITSystemUsageEffects {
   deleteItSystemUsageByItSystemAndOrganization$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganization),
+      first(),
       concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
       switchMap(([{ itSystemUuid }, organizationUuid]) =>
         this.apiV2ItSystemUsageInternalService
