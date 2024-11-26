@@ -14,6 +14,7 @@ import { APIUserDTO } from './userDTO';
 
 export interface APIOrganizationRightDTO { 
     organizationId?: number;
+    organizationUuid?: string;
     organizationName?: string;
     role?: APIOrganizationRightDTO.RoleEnum;
     userId?: number;

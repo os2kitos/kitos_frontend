@@ -39,6 +39,21 @@
         "objectOwnerLastName": "(Lokaladmin)",
         "objectOwnerFullName": "Admin (Lokaladmin)",
         "defaultOrgUnitName": null
+      },
+      {
+        "organizationId": 400,
+        "organizationName": "Fælles kommune",
+        "organizationUuid": "3dc52c64-3706-40f4-bf58-45035bb376da",
+        "role": 1,
+        "userId": 1,
+        "userName": "Test",
+        "userEmail": "test@test.com",
+        "lastChanged": "2022-11-15T10:00:46.1051578Z",
+        "lastChangedByUserId": 2,
+        "objectOwnerName": "Admin",
+        "objectOwnerLastName": "(Lokaladmin)",
+        "objectOwnerFullName": "Admin (Lokaladmin)",
+        "defaultOrgUnitName": null
       }
     ],
     "objectOwnerName": "Admin",

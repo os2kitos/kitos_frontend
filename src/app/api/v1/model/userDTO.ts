@@ -21,6 +21,7 @@ export interface APIUserDTO {
     email?: string;
     defaultUserStartPreference?: string;
     defaultOrganizationUnitId?: number;
+    defaultOrganizationUnitUuid?: string;
     defaultOrganizationUnitName?: string;
     isGlobalAdmin?: boolean;
     organizationRights?: Array<APIOrganizationRightDTO>;

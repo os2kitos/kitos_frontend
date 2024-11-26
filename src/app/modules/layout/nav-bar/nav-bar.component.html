@@ -67,7 +67,11 @@
           <p>{{ organizationName$ | async }}</p>
         </span>
         <app-menu-item [path]="AppPath.profile" i18n>Min profil</app-menu-item>
-        <app-menu-item [path]="AppPath.localAdmin" i18n *ngIf="user.isLocalAdmin" data-cy="local-admin-menu-item"
+        <app-menu-item
+          [path]="AppPath.localAdmin"
+          i18n
+          *ngIf="isUserCurrentyLocalAdmin$ | async"
+          data-cy="local-admin-menu-item"
           >Lokal admin</app-menu-item
         >
         <app-menu-item [path]="AppPath.globalAdmin" *ngIf="user.isGlobalAdmin" data-cy="global-admin-menu-item" i18n
