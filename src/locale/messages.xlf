@@ -4660,6 +4660,54 @@
       <trans-unit id="7225215805628203543" datatype="html">
         <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="rong&gt;"/>Gamle brugerflade<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></source>
       </trans-unit>
+      <trans-unit id="1492491332269133030" datatype="html">
+        <source> Bemærk at linkets gyldighed udløber efter 10 dage. Du skal derfor nå at nulstille dit password inden da. </source>
+      </trans-unit>
+      <trans-unit id="1910138790709309910" datatype="html">
+        <source>kan du anmode om at nulstille det her.</source>
+      </trans-unit>
+      <trans-unit id="3006097408675799565" datatype="html">
+        <source> Send email </source>
+      </trans-unit>
+      <trans-unit id="3732788840591611874" datatype="html">
+        <source>Hvis du har glemt dit password, </source>
+      </trans-unit>
+      <trans-unit id="374396670767482335" datatype="html">
+        <source> Hvis du har glemt passwordet til din KITOS bruger, kan du få tilsendt en email med et link til at nulstille det. </source>
+      </trans-unit>
+      <trans-unit id="5907250541324437176" datatype="html">
+        <source>Der skete en fejl under afsendelse af email</source>
+      </trans-unit>
+      <trans-unit id="6909996073768217346" datatype="html">
+        <source>En email er blevet sent til &apos;<x id="PH" equiv-text="email"/>&apos;</source>
+      </trans-unit>
+      <trans-unit id="8383847967683586849" datatype="html">
+        <source>Glemt password?</source>
+      </trans-unit>
+      <trans-unit id="3158905381455173854" datatype="html">
+        <source>Gentag nyt password</source>
+      </trans-unit>
+      <trans-unit id="3981956765706922150" datatype="html">
+        <source>Nyt password</source>
+      </trans-unit>
+      <trans-unit id="4038512110787602947" datatype="html">
+        <source> Passwordet skal indeholde mindst 6 tegn. </source>
+      </trans-unit>
+      <trans-unit id="5643486459654021107" datatype="html">
+        <source> Din anmodning om at nulstille dit password blev ikke fundet i systemet. Det kan allerede være brugt, eller den kan være udløbet. Gå til <x id="START_LINK" ctype="x-a" equiv-text="&lt;a [routerLink]=&quot;[&apos;/&apos;, routerLink]&quot;&gt;"/>Glemt password?<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> og prøv igen. </source>
+      </trans-unit>
+      <trans-unit id="6360932240236128712" datatype="html">
+        <source> Skift password </source>
+      </trans-unit>
+      <trans-unit id="6473069953333383452" datatype="html">
+        <source>Email adresse</source>
+      </trans-unit>
+      <trans-unit id="640398851777061837" datatype="html">
+        <source>Dit password kunne ikke nulstilles</source>
+      </trans-unit>
+      <trans-unit id="706676642418633166" datatype="html">
+        <source>Dit password er blevet nulstillet</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

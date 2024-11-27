@@ -13,6 +13,10 @@
   <div class="card-column">
     <div class="card" *ngIf="(user$ | async) === undefined && (isAuthenticating$ | async) === false">
       <app-login></app-login>
+      <div class="divider-margin">
+        <app-divider></app-divider>
+      </div>
+      <app-reset-password-text-link></app-reset-password-text-link>
     </div>
 
     <app-public-message type="status-messages" [content]="text.statusMessages"></app-public-message>

@@ -113,6 +113,7 @@ import { APIV2OrganizationUnitRegistrationInternalINTERNALService } from './api/
 import { APIV2OrganizationUnitRoleTypeService } from './api/v2OrganizationUnitRoleType.service';
 import { APIV2OrganizationUnitsInternalINTERNALService } from './api/v2OrganizationUnitsInternalINTERNAL.service';
 import { APIV2OrganizationsInternalINTERNALService } from './api/v2OrganizationsInternalINTERNAL.service';
+import { APIV2PasswordResetInternalINTERNALService } from './api/v2PasswordResetInternalINTERNAL.service';
 import { APIV2PublicMessagesINTERNALService } from './api/v2PublicMessagesINTERNAL.service';
 import { APIV2StsOrganizationSynchronizationInternalINTERNALService } from './api/v2StsOrganizationSynchronizationInternalINTERNAL.service';
 import { APIV2UsersInternalINTERNALService } from './api/v2UsersInternalINTERNAL.service';

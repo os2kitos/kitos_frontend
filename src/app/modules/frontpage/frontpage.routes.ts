@@ -7,7 +7,7 @@ const routes: Routes = [
   {
     path: AppPath.root,
     component: FrontpageComponent,
-  },
+  }
 ];
 
 @NgModule({

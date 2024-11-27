@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 import { CookieService } from 'ngx-cookie';
 import { catchError, combineLatestWith, map, mergeMap, of, switchMap, tap } from 'rxjs';
 import { APIUserDTOApiReturnDTO, APIV1AuthorizeINTERNALService } from 'src/app/api/v1';
-import { APIOrganizationGridPermissionsResponseDTO } from 'src/app/api/v2';
+import { APIOrganizationGridPermissionsResponseDTO, APIV2PasswordResetInternalINTERNALService } from 'src/app/api/v2';
 import { APIV2OrganizationGridInternalINTERNALService } from 'src/app/api/v2/api/v2OrganizationGridInternalINTERNAL.service';
 import { APIV2OrganizationsInternalINTERNALService } from 'src/app/api/v2/api/v2OrganizationsInternalINTERNAL.service';
 import { AppPath } from 'src/app/shared/enums/app-path';
@@ -28,7 +28,8 @@ export class UserEffects {
     @Inject(APIV2OrganizationGridInternalINTERNALService)
     private organizationGridService: APIV2OrganizationGridInternalINTERNALService,
     @Inject(APIV2OrganizationsInternalINTERNALService)
-    private organizationInternalService: APIV2OrganizationsInternalINTERNALService
+    private organizationInternalService: APIV2OrganizationsInternalINTERNALService,
+    private resetPasswordService: APIV2PasswordResetInternalINTERNALService
   ) {}
 
   login$ = createEffect(() => {
@@ -133,6 +134,35 @@ export class UserEffects {
           .pipe(
             map((organizationResponseDto) => UserActions.patchOrganizationSuccess(organizationResponseDto)),
             catchError(() => of(UserActions.patchOrganizationError()))
+          )
+      )
+    );
+  });
+
+  sendResetPasswordRequest$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(UserActions.resetPasswordRequest),
+      switchMap(({ email }) =>
+        this.resetPasswordService.postSinglePasswordResetInternalV2RequestPasswordReset({ request: { email } }).pipe(
+          map(() => UserActions.resetPasswordRequestSuccess(email)),
+          catchError(() => of(UserActions.resetPasswordRequestError()))
+        )
+      )
+    );
+  });
+
+  resetPassword$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(UserActions.resetPassword),
+      switchMap(({ requestId, password }) =>
+        this.resetPasswordService
+          .postSinglePasswordResetInternalV2PostPasswordReset({
+            requestId,
+            request: { password },
+          })
+          .pipe(
+            map(() => UserActions.resetPasswordSuccess()),
+            catchError(() => of(UserActions.resetPasswordError()))
           )
       )
     );
