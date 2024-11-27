@@ -2,12 +2,14 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
+import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
-import { combineLatest, combineLatestWith, distinctUntilChanged, filter, first, map } from 'rxjs';
+import { combineLatest, distinctUntilChanged, filter, first, map } from 'rxjs';
 import { APIItSystemPermissionsResponseDTO } from 'src/app/api/v2/model/itSystemPermissionsResponseDTO';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { IconConfirmationDialogComponent } from 'src/app/shared/components/dialogs/icon-confirmation-dialog/icon-confirmation-dialog.component';
+import { NavigationDrawerItem } from 'src/app/shared/components/navigation-drawer/navigation-drawer.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { BreadCrumb } from 'src/app/shared/models/breadcrumbs/breadcrumb.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
@@ -27,7 +29,6 @@ import {
   selectItSystemUuid,
 } from 'src/app/store/it-system/selectors';
 import { ITSystemCatalogDetailsComponentStore } from './it-system-catalog-details.component-store';
-import { NavigationDrawerItem } from 'src/app/shared/components/navigation-drawer/navigation-drawer.component';
 
 @Component({
   templateUrl: './it-system-catalog-details.component.html',
@@ -87,7 +88,6 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
     },
   ];
 
-
   constructor(
     private store: Store,
     private route: ActivatedRoute,
@@ -132,46 +132,61 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
     );
   }
 
-  public showChangeInUseStateDialog(shouldBeInUse: boolean): void {
+  public showChangeInUseStateDialog(takingIntoUse: boolean): void {
     const confirmationDialogRef = this.dialog.open(IconConfirmationDialogComponent);
     const confirmationDialogInstance = confirmationDialogRef.componentInstance as IconConfirmationDialogComponent;
-    if (shouldBeInUse) {
-      confirmationDialogInstance.title = $localize`Tag system i anvendelse`;
-      confirmationDialogInstance.bodyText = $localize`Hvis du ønsker at tage systemet i anvendelse, skal du bekræfte og udfylde information, som er relevant for din kommune nu eller senere under IT systemer.`;
-      confirmationDialogInstance.icon = 'take-into-use';
-      confirmationDialogInstance.confirmColor = 'primary';
-      confirmationDialogInstance.customConfirmText = $localize`Bekræft og udfyld nu`;
-      confirmationDialogInstance.customDeclineText = $localize`Bekræft og udfyld senere`;
-    } else {
-      confirmationDialogInstance.title = $localize`Er du sikker på, at du vil fjerne anvendelse af systemet?`;
-      confirmationDialogInstance.bodyText = $localize`Du sletter alle lokale detaljer vedrørerende systemet, men det sletter ikke systemet`;
-      confirmationDialogInstance.icon = 'not-in-use';
-      confirmationDialogInstance.confirmColor = 'warn';
-      confirmationDialogInstance.customConfirmText = $localize`Bekræft`;
-      confirmationDialogInstance.customDeclineText = $localize`Fortryd`;
-    }
     confirmationDialogInstance.confirmationType = 'Custom';
+    if (takingIntoUse) {
+      this.setupTakeIntoUseDialog(confirmationDialogInstance);
+    } else {
+      this.setupTakeOutOfUseDialog(confirmationDialogInstance);
+    }
 
     this.subscriptions.add(
       confirmationDialogRef
         .afterClosed()
-        .pipe(first(), combineLatestWith(this.itSystemUuid$))
+        .pipe(concatLatestFrom(() => this.itSystemUuid$))
         .subscribe(([result, systemUuid]) => {
           if (result === undefined) return;
 
-          if (shouldBeInUse) {
-            if (result === true) {
-              this.subscribeToUsageCreatedAction();
-            }
-
-            this.store.dispatch(ITSystemUsageActions.createItSystemUsage(systemUuid));
+          if (takingIntoUse) {
+            this.tryTakeIntoUse(result, systemUuid);
             return;
           }
-          if (result === true) {
-            this.store.dispatch(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganization(systemUuid));
-          }
+          this.tryTakeOutOfUse(result, systemUuid);
         })
     );
+  }
+
+  private tryTakeIntoUse(dialogResult: boolean, systemUuid: string) {
+    if (dialogResult === true) {
+      this.navigateToUsageOnUsageCreatedSuccess();
+    }
+    this.store.dispatch(ITSystemUsageActions.createItSystemUsage(systemUuid));
+  }
+
+  private tryTakeOutOfUse(dialogResult: boolean, systemUuid: string) {
+    if (dialogResult === true) {
+      this.store.dispatch(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganization(systemUuid));
+    }
+  }
+
+  private setupTakeIntoUseDialog(confirmationDialogInstance: IconConfirmationDialogComponent) {
+    confirmationDialogInstance.title = $localize`Tag system i anvendelse`;
+    confirmationDialogInstance.bodyText = $localize`Hvis du ønsker at tage systemet i anvendelse, skal du bekræfte og udfylde information, som er relevant for din kommune nu eller senere under IT systemer.`;
+    confirmationDialogInstance.icon = 'take-into-use';
+    confirmationDialogInstance.confirmColor = 'primary';
+    confirmationDialogInstance.customConfirmText = $localize`Bekræft og udfyld nu`;
+    confirmationDialogInstance.customDeclineText = $localize`Bekræft og udfyld senere`;
+  }
+
+  private setupTakeOutOfUseDialog(confirmationDialogInstance: IconConfirmationDialogComponent) {
+    confirmationDialogInstance.title = $localize`Er du sikker på, at du vil fjerne anvendelse af systemet?`;
+    confirmationDialogInstance.bodyText = $localize`Du sletter alle lokale detaljer vedrørerende systemet, men det sletter ikke systemet`;
+    confirmationDialogInstance.icon = 'not-in-use';
+    confirmationDialogInstance.confirmColor = 'warn';
+    confirmationDialogInstance.customConfirmText = $localize`Bekræft`;
+    confirmationDialogInstance.customDeclineText = $localize`Fortryd`;
   }
 
   private showRemoveConfirmationDialog(): void {
@@ -271,7 +286,7 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
     );
   }
 
-  private subscribeToUsageCreatedAction() {
+  private navigateToUsageOnUsageCreatedSuccess() {
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(ITSystemUsageActions.createItSystemUsageSuccess))

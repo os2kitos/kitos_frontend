@@ -21,6 +21,7 @@ import { OData } from 'src/app/shared/models/odata.model';
 import { YesNoIrrelevantEnum } from 'src/app/shared/models/yes-no-irrelevant.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ExternalReferencesApiService } from 'src/app/shared/services/external-references-api-service.service';
+import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 import { getNewGridColumnsBasedOnConfig } from '../helpers/grid-config-helper';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { ITSystemUsageActions } from './actions';
@@ -34,11 +35,9 @@ import {
   selectOverviewSystemRoles,
   selectUsageGridColumns,
 } from './selectors';
-import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 
 @Injectable()
 export class ITSystemUsageEffects {
-
   constructor(
     private actions$: Actions,
     private store: Store,
