@@ -204,8 +204,10 @@ export class EditOrganizationUnitDialogComponent extends BaseComponent implement
         if (!unit.uuid) return;
         this.store.dispatch(OrganizationUnitActions.getRegistrations(unit.uuid));
 
+        const parentUnitvalue = unit.parentOrganizationUnit;
+        const parentUnitControlvalue = parentUnitvalue ? createNode(parentUnitvalue) : undefined;
         this.baseInfoForm.patchValue({
-          parentUnitControl: createNode(unit.parentOrganizationUnit as APIOrganizationUnitResponseDTO),
+          parentUnitControl: parentUnitControlvalue,
           nameControl: unit.name,
           eanControl: unit.ean,
           idControl: unit.unitId,
