@@ -16,7 +16,12 @@ import { BOUNDED_PAGINATION_QUERY_MAX_SIZE } from 'src/app/shared/constants/cons
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectOrganizationUuid } from '../../user-store/selectors';
 import { OrganizationUnitActions } from './actions';
-import { selectCurrentUnitUuid, selectOrganizationUnitHasValidCache } from './selectors';
+import {
+  selectCurrentUnitUuid,
+  selectOrganizationUnitHasValidCache,
+  selectOrganizationUnits,
+  selectPagedOrganizationUnitHasValidCache,
+} from './selectors';
 
 @Injectable()
 export class OrganizationUnitEffects {
@@ -31,12 +36,37 @@ export class OrganizationUnitEffects {
   ) {}
 
   getOrganizationUnits$ = createEffect(() => {
-    // eslint-disable-next-line @ngrx/avoid-cyclic-effects
     return this.actions$.pipe(
       ofType(OrganizationUnitActions.getOrganizationUnits),
       concatLatestFrom(() => [
         this.store.select(selectOrganizationUuid).pipe(filterNullish()),
         this.store.select(selectOrganizationUnitHasValidCache),
+        this.store.select(selectOrganizationUnits),
+      ]),
+      switchMap(([_, organizationUuid, validCache, units]) => {
+        if (validCache) {
+          return of(OrganizationUnitActions.getOrganizationUnitsSuccess(units));
+        }
+
+        return this.apiOrganizationService
+          .getManyOrganizationV2GetOrganizationUnits({
+            organizationUuid,
+          })
+          .pipe(
+            map((units) => OrganizationUnitActions.getOrganizationUnitsSuccess(units)),
+            catchError(() => of(OrganizationUnitActions.getOrganizationUnitsError()))
+          );
+      })
+    );
+  });
+
+  getOrganizationUnitsPaged$ = createEffect(() => {
+    // eslint-disable-next-line @ngrx/avoid-cyclic-effects
+    return this.actions$.pipe(
+      ofType(OrganizationUnitActions.getOrganizationUnitsPaged),
+      concatLatestFrom(() => [
+        this.store.select(selectOrganizationUuid).pipe(filterNullish()),
+        this.store.select(selectPagedOrganizationUnitHasValidCache),
       ]),
       filter(([_, __, validCache]) => {
         return !validCache;
@@ -53,12 +83,12 @@ export class OrganizationUnitEffects {
               const allUnits = (units ?? []).concat(newUnits);
               const maxPageSize = pageSize ?? BOUNDED_PAGINATION_QUERY_MAX_SIZE;
               if (newUnits.length < maxPageSize) {
-                return OrganizationUnitActions.getOrganizationUnitsSuccess(allUnits);
+                return OrganizationUnitActions.getOrganizationUnitsPagedSuccess(allUnits);
               }
               const nextPage = (currentPage ?? 0) + 1;
-              return OrganizationUnitActions.getOrganizationUnits(maxPageSize, nextPage, allUnits);
+              return OrganizationUnitActions.getOrganizationUnitsPaged(maxPageSize, nextPage, allUnits);
             }),
-            catchError(() => of(OrganizationUnitActions.getOrganizationUnitsError()))
+            catchError(() => of(OrganizationUnitActions.getOrganizationUnitsPagedError()))
           )
       )
     );

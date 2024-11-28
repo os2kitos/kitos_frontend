@@ -9,6 +9,17 @@ export const selectOrganizationUnits = createSelector(
   organizationUnitAdapter.getSelectors().selectAll
 );
 
+export const selectPagedOrganizationUnits = createSelector(selectOrganizationUnitState, (state) => state.pagedUnits);
+export const selectPagedOrganizationUnitsCacheTime = createSelector(
+  selectOrganizationUnitState,
+  (state) => state.pagedUnitsCacheTime
+);
+export const selectPagedOrganizationUnitHasValidCache = createSelector(
+  selectPagedOrganizationUnitsCacheTime,
+  () => new Date(),
+  (cacheTime, time) => hasValidCache(cacheTime, time)
+);
+
 export const selectExpandedNodeUuids = createSelector(selectOrganizationUnitState, (state) => state.expandedNodeUuids);
 
 export const selectOrganizationUnitHasValidCache = createSelector(

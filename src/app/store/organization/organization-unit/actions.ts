@@ -21,15 +21,25 @@ import {
 export const OrganizationUnitActions = createActionGroup({
   source: 'OrganizationUnit',
   events: {
-    'Get organization units': (pageSize?: number, currentPage?: number, units?: APIOrganizationUnitResponseDTO[]) => ({
-      units,
-      currentPage,
-      pageSize,
-    }),
+    'Get organization units': () => emptyProps(),
     'Get organization units Success': (units: APIOrganizationUnitResponseDTO[]) => ({
       units,
     }),
     'Get organization units Error': emptyProps(),
+
+    'Get organization units paged': (
+      pageSize?: number,
+      currentPage?: number,
+      units?: APIOrganizationUnitResponseDTO[]
+    ) => ({
+      units,
+      currentPage,
+      pageSize,
+    }),
+    'Get organization units paged Success': (units: APIOrganizationUnitResponseDTO[]) => ({
+      units,
+    }),
+    'Get organization units paged Error': emptyProps(),
 
     'Update current unit uuid': (uuid: string) => ({ uuid }),
 
@@ -56,15 +66,23 @@ export const OrganizationUnitActions = createActionGroup({
       unit,
       units,
     }),
-    'Add expanded node': (uuid: string) => ({ uuid }),
+    'Add expanded nodes': (uuids: string[]) => ({ uuids }),
     'Remove expanded node': (uuid: string) => ({ uuid }),
 
     'Add organization unit role': (userUuid: string, roleUuid: string) => ({ userUuid, roleUuid }),
     'Add organization unit role Success': emptyProps(),
     'Add organization unit role Error': emptyProps(),
 
-    'Delete organization unit role': (userUuid: string, roleUuid: string, unitUuid: string) => ({ userUuid, roleUuid, unitUuid }),
-    'Delete organization unit role Success': (userUuid: string, roleUuid: string, unitUuid: string) => ({ userUuid, roleUuid, unitUuid }),
+    'Delete organization unit role': (userUuid: string, roleUuid: string, unitUuid: string) => ({
+      userUuid,
+      roleUuid,
+      unitUuid,
+    }),
+    'Delete organization unit role Success': (userUuid: string, roleUuid: string, unitUuid: string) => ({
+      userUuid,
+      roleUuid,
+      unitUuid,
+    }),
     'Delete organization unit role Error': emptyProps(),
 
     'Get registrations': (unitUuid: string) => ({ unitUuid }),

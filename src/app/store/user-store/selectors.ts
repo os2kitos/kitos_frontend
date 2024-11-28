@@ -29,6 +29,8 @@ export const selectUserIsCurrentlyLocalAdmin = createSelector(
   (user, organizationUuid) => rightsIncludesLocalAdminInOrg(user?.organizationRights, organizationUuid)
 );
 
+export const selectUserDefaultUnitUuid = createSelector(selectUser, (user) => user?.defaultUnitUuid);
+
 export const selectHasCheckedUserAndOrganization = createSelector(
   selectUser,
   selectHasTriedAuthenticating,

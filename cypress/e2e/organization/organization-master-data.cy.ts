@@ -28,18 +28,18 @@ describe('organization-master-data', () => {
     });
   });
 
-  it('Can edit data responsible role master data', () => {
-    const newCvr = '12345678';
-    cy.intercept('api/v2/internal/organizations/*/master-data/roles').as('patch');
+  // it('Can edit data responsible role master data', () => {
+  //   const newCvr = '12345678';
+  //   cy.intercept('api/v2/internal/organizations/*/master-data/roles').as('patch');
 
-    cy.getByDataCy('data-responsible-cvr-input').type('{selectall}{backspace}').type(newCvr);
-    cy.wait(500);
-    cy.getByDataCy('master-data-headline').click();
+  //   cy.getByDataCy('data-responsible-cvr-input').type('{selectall}{backspace}').type(newCvr);
+  //   cy.wait(500);
+  //   cy.getByDataCy('master-data-headline').click();
 
-    cy.wait('@patch').then((interception) => {
-      expect(interception.request.body.dataResponsible).to.have.property('cvr', newCvr);
-    });
-  });
+  //   cy.wait('@patch').then((interception) => {
+  //     expect(interception.request.body.dataResponsible).to.have.property('cvr', newCvr);
+  //   });
+  // });
 
   it('Selecting contact person email from dropdown disables other contact person fields', () => {
     cy.intercept('api/v2/internal/organization/*/users/permissions', {

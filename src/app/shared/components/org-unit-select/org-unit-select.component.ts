@@ -4,12 +4,13 @@ import { Store } from '@ngrx/store';
 import { map } from 'rxjs';
 import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
 import {
-  selectOrganizationUnitHasValidCache,
-  selectOrganizationUnits,
+  selectPagedOrganizationUnitHasValidCache,
+  selectPagedOrganizationUnits,
 } from 'src/app/store/organization/organization-unit/selectors';
 import { BaseComponent } from '../../base/base.component';
 import { BOUNDED_PAGINATION_QUERY_MAX_SIZE } from '../../constants/constants';
 import { createNode, TreeNodeModel } from '../../models/tree-node.model';
+import { filterNullish } from '../../pipes/filter-nullish';
 
 @Component({
   selector: 'app-org-unit-select',
@@ -30,17 +31,18 @@ export class OrgUnitSelectComponent extends BaseComponent implements OnInit {
   @Output() public filterChange = new EventEmitter<string | undefined>();
   @Output() public valueChange = new EventEmitter<string | undefined>();
 
-  public readonly nodes$ = this.store
-    .select(selectOrganizationUnits)
-    .pipe(map((organizationUnits) => organizationUnits.map((unit) => createNode(unit, this.disabledUnitsUuids))));
-  public readonly isLoaded$ = this.store.select(selectOrganizationUnitHasValidCache);
+  public readonly nodes$ = this.store.select(selectPagedOrganizationUnits).pipe(
+    filterNullish(),
+    map((organizationUnits) => organizationUnits.map((unit) => createNode(unit, this.disabledUnitsUuids)))
+  );
+  public readonly isLoaded$ = this.store.select(selectPagedOrganizationUnitHasValidCache);
 
   constructor(private readonly store: Store) {
     super();
   }
 
   public ngOnInit(): void {
-    this.store.dispatch(OrganizationUnitActions.getOrganizationUnits(BOUNDED_PAGINATION_QUERY_MAX_SIZE));
+    this.store.dispatch(OrganizationUnitActions.getOrganizationUnitsPaged(BOUNDED_PAGINATION_QUERY_MAX_SIZE));
   }
 
   public onSelectionChange(selectedValue: TreeNodeModel | null | undefined): void {

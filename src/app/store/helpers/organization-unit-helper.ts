@@ -18,5 +18,9 @@ export function removeUnitAndUpdateChildren(
     setChildrensNewParent,
     stateAfterRemovingNode
   );
-  return stateAfterAddingUpdatedChildren;
+
+  return {
+    ...stateAfterAddingUpdatedChildren,
+    pagedUnitsCacheTime: undefined,
+  };
 }

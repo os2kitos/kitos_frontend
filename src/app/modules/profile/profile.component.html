@@ -7,6 +7,7 @@
       data-cy="default-responsible"
       [formGroup]="editForm"
       formName="defaultOrganizationUnit"
+      [clearable]="false"
       (valueChange)="onChange({ defaultOrganizationUnitUuid: $event })"
     ></app-org-unit-select>
     <div>

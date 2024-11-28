@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 
@@ -18,7 +18,7 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 
 import { MatDialog } from '@angular/material/dialog';
 import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
-import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
+import { selectOrganizationUuid, selectUserDefaultUnitUuid } from 'src/app/store/user-store/selectors';
 
 import {
   selectCurrentUnitUuid,
@@ -27,6 +27,7 @@ import {
   selectUnitPermissions,
 } from 'src/app/store/organization/organization-unit/selectors';
 
+import { AppPath } from 'src/app/shared/enums/app-path';
 import { EditOrganizationUnitDialogComponent } from './edit-organization-unit-dialog/edit-organization-unit-dialog.component';
 
 @Component({
@@ -96,17 +97,19 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     private store: Store,
     private route: ActivatedRoute,
     private actions$: Actions,
-    private matDialog: MatDialog
+    private matDialog: MatDialog,
+    private router: Router
   ) {
     super();
   }
 
   ngOnInit(): void {
+    this.subscribeToDefaultOrgUnitRedirect();
     this.store.dispatch(OrganizationUnitActions.getOrganizationUnits());
     this.subscriptions.add(
       this.rootUnitUuid$
         .pipe(first())
-        .subscribe((uuid) => this.store.dispatch(OrganizationUnitActions.addExpandedNode(uuid)))
+        .subscribe((uuid) => this.store.dispatch(OrganizationUnitActions.addExpandedNodes([uuid])))
     );
 
     this.subscriptions.add(
@@ -127,11 +130,11 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     );
   }
 
-  changeDragState(): void {
+  public changeDragState(): void {
     this.dragDisabledSubject.next(!this.dragDisabledSubject.value);
   }
 
-  moveNode(event: EntityTreeNodeMoveResult): void {
+  public moveNode(event: EntityTreeNodeMoveResult): void {
     this.subscriptions.add(
       this.actions$
         .pipe(
@@ -144,6 +147,7 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
           this.store.dispatch(OrganizationUnitActions.updateHierarchy(unit, units));
         })
     );
+
     this.store.dispatch(
       OrganizationUnitActions.patchOrganizationUnit(event.movedNodeUuid, {
         parentUuid: event.targetParentNodeUuid,
@@ -151,11 +155,11 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     );
   }
 
-  nodeExpandClick(node: EntityTreeNode<APIOrganizationUnitResponseDTO>): void {
+  public nodeExpandClick(node: EntityTreeNode<APIOrganizationUnitResponseDTO>): void {
     if (node.isExpanded) {
       this.store.dispatch(OrganizationUnitActions.removeExpandedNode(node.uuid));
     } else {
-      this.store.dispatch(OrganizationUnitActions.addExpandedNode(node.uuid));
+      this.store.dispatch(OrganizationUnitActions.addExpandedNodes([node.uuid]));
     }
   }
 
@@ -166,7 +170,7 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     dialogInstance.parentUnitName$ = this.currentUnitName$;
   }
 
-  onClickEdit() {
+  public onClickEdit() {
     this.setupEditDialog();
   }
 
@@ -183,5 +187,31 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     dialogInstance.unit$ = this.currentOrganizationUnit$;
     dialogInstance.rootUnitUuid$ = this.rootUnitUuid$;
     dialogInstance.disabledUnitsUuids$ = this.disabledUnitsUuids$;
+  }
+
+  private findParentUuids(units: APIOrganizationUnitResponseDTO[], uuid: string): string[] {
+    const unit = units.find((u) => u.uuid === uuid);
+    if (!unit || !unit.parentOrganizationUnit) {
+      return [];
+    }
+
+    const parentUuid = unit.parentOrganizationUnit.uuid;
+    return [parentUuid, ...this.findParentUuids(units, parentUuid)];
+  }
+
+  private subscribeToDefaultOrgUnitRedirect() {
+    this.subscriptions.add(
+      this.actions$.pipe(ofType(OrganizationUnitActions.getOrganizationUnitsSuccess)).subscribe(() => {
+        this.store
+          .select(selectUserDefaultUnitUuid)
+          .pipe(combineLatestWith(this.organizationUnits$), first())
+          .subscribe(([uuid, units]) => {
+            if (uuid) {
+              this.router.navigate([`${AppPath.organization}/${AppPath.structure}/${uuid}`]);
+              this.store.dispatch(OrganizationUnitActions.addExpandedNodes(this.findParentUuids(units, uuid)));
+            }
+          });
+      })
+    );
   }
 }

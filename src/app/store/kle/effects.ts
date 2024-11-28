@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 
 import { Store } from '@ngrx/store';
-import * as saveAs from 'file-saver';
+import { saveAs } from 'file-saver';
 import { catchError, filter, map, of, switchMap } from 'rxjs';
 import { APIV2KLEInternalINTERNALService, APIV2KleOptionService } from 'src/app/api/v2';
 import { KLE_FILE_NAME } from 'src/app/shared/constants/constants';

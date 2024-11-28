@@ -17,6 +17,9 @@ export interface OrganizationUnitState extends EntityState<APIOrganizationUnitRe
   expandedNodeUuids: string[];
   currentUnitUuid: string;
 
+  pagedUnitsCacheTime: number | undefined;
+  pagedUnits: APIOrganizationUnitResponseDTO[] | undefined;
+
   registrations: APIOrganizationRegistrationUnitResponseDTO | undefined;
   isLoadingRegistrations: boolean;
 

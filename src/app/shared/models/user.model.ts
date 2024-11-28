@@ -8,6 +8,7 @@ export interface User {
   fullName: string;
   isGlobalAdmin: boolean;
   organizationRights: OrganizationRight[];
+  defaultUnitUuid?: string;
 }
 
 export const adaptUser = (apiUser?: APIUserDTO): User | undefined => {
@@ -20,5 +21,6 @@ export const adaptUser = (apiUser?: APIUserDTO): User | undefined => {
     fullName: apiUser?.fullName ?? '',
     isGlobalAdmin: apiUser?.isGlobalAdmin ?? false,
     organizationRights: adaptV1OrganizationRights(apiUser?.organizationRights ?? []),
+    defaultUnitUuid: apiUser.defaultOrganizationUnitUuid,
   };
 };
