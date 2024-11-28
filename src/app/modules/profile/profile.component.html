@@ -57,7 +57,7 @@
       text="Primær startenhed"
       formName="defaultStartPreference"
       [formGroup]="editForm"
-      [data]="startPreferenceOptions"
+      [data]="startPreferenceOptions | async"
       [clearable]="false"
       i18n-text
       data-cy="start-preference"

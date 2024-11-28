@@ -48,7 +48,7 @@
         text="Primær startenhed"
         formName="defaultStartPreference"
         [formGroup]="createForm"
-        [data]="startPreferenceOptions"
+        [data]="startPreferenceOptions | async"
         [value]="createForm.value.defaultStartPreference"
         [clearable]="false"
         i18n-text

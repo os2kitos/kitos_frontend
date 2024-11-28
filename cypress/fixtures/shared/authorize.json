@@ -7,7 +7,6 @@
     "lastName": "User",
     "phoneNumber": "123",
     "email": "test@test.com",
-    "defaultUserStartPreference": "it-system.overview",
     "defaultOrganizationUnitId": null,
     "defaultOrganizationUnitName": null,
     "isGlobalAdmin": true,

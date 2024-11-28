@@ -29,7 +29,7 @@ export const startPreferenceChoiceOptions: StartPreferenceChoice[] = [
   {
     name: $localize`Databehandling`,
     value: APIUserResponseDTO.DefaultUserStartPreferenceEnum.DataProcessing,
-    },
+  },
 ];
 
 export const mapStartPreferenceChoice = (
@@ -39,7 +39,7 @@ export const mapStartPreferenceChoice = (
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const mapStartPreferenceChoiceRaw = (value: any): StartPreferenceChoice | undefined => {
+export const mapStartPreferenceChoiceFromV1 = (value: any): StartPreferenceChoice | undefined => {
   switch (value) {
     case 'index':
       return startPreferenceChoiceOptions[0];

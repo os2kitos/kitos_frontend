@@ -1,4 +1,4 @@
-import { mapStartPreferenceChoiceRaw, StartPreferenceChoice } from './start-preference.model';
+import { mapStartPreferenceChoiceFromV1, StartPreferenceChoice } from './start-preference.model';
 
 export interface ODataOrganizationUser {
   id: string;
@@ -51,7 +51,7 @@ export const adaptOrganizationUser = (value: any): ODataOrganizationUser | undef
     ObjectOwner: { Name: value.ObjectOwner ? `${value.ObjectOwner?.Name} ${value.ObjectOwner?.LastName}` : 'Ingen' },
     HasApiAccess: value.HasApiAccess ?? false,
     HasStakeHolderAccess: value.HasStakeHolderAccess ?? false,
-    DefaultStartPreference: mapStartPreferenceChoiceRaw(value.DefaultUserStartPreference),
+    DefaultStartPreference: mapStartPreferenceChoiceFromV1(value.DefaultUserStartPreference),
     HasRightsHolderAccess: checkIfUserHasRole(rightsHolderAccessRole, value.OrganizationRights),
     IsLocalAdmin: checkIfUserHasRole(localAdminRole, value.OrganizationRights),
     IsOrganizationModuleAdmin: checkIfUserHasRole(organizationModuleAdminRole, value.OrganizationRights),

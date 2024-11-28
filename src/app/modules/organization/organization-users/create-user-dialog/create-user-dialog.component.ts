@@ -12,6 +12,7 @@ import { OrganizationUserActions } from 'src/app/store/organization/organization
 import { selectOrganizationUserIsCreateLoading } from 'src/app/store/organization/organization-user/selectors';
 import { BaseUserDialogComponent } from '../base-user-dialog.component';
 import { CreateUserDialogComponentStore } from './create-user-dialog.component-store';
+import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
   selector: 'app-create-user-dialog',
@@ -56,9 +57,10 @@ export class CreateUserDialogComponent extends BaseUserDialogComponent implement
     private readonly actions$: Actions,
     private readonly dialog: MatDialogRef<CreateUserDialogComponent>,
     store: Store,
-    componentStore: CreateUserDialogComponentStore
+    componentStore: CreateUserDialogComponentStore,
+    userService: UserService
   ) {
-    super(store, componentStore);
+    super(store, componentStore, userService);
   }
 
   ngOnInit(): void {

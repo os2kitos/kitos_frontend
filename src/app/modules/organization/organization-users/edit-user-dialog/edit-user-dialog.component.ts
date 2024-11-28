@@ -18,6 +18,7 @@ import {
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
 import { BaseUserDialogComponent } from '../base-user-dialog.component';
 import { CopyRolesDialogComponent } from '../copy-roles-dialog/copy-roles-dialog.component';
+import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
   selector: 'app-edit-user-dialog',
@@ -54,9 +55,10 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
     private dialogRef: MatDialogRef<EditUserDialogComponent>,
     componentStore: CreateUserDialogComponentStore,
     private dialog: MatDialog,
-    store: Store
+    store: Store,
+    userService: UserService
   ) {
-    super(store, componentStore);
+    super(store, componentStore, userService);
   }
 
   public ngOnInit(): void {

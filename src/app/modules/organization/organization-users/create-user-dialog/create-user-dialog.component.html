@@ -54,7 +54,7 @@
           i18n-text
           [formGroup]="createForm"
           formName="startPreference"
-          [data]="startPreferenceOptions"
+          [data]="startPreferenceOptions | async"
           data-cy="start-preference"
         ></app-dropdown>
       </app-tooltip>
