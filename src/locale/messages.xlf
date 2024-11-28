@@ -4708,6 +4708,12 @@
       <trans-unit id="706676642418633166" datatype="html">
         <source>Dit password er blevet nulstillet</source>
       </trans-unit>
+      <trans-unit id="2223640905439252475" datatype="html">
+        <source>Single Sign-On (SSO)</source>
+      </trans-unit>
+      <trans-unit id="530214592421461833" datatype="html">
+        <source>Efter du er logget ind med SSO, bliver du omdirigeret til den gamle brugerflade. Så kan du vende tilbage til den nye brugerflade på https://kitos.dk/ui</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

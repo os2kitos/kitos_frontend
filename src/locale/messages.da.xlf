@@ -6199,6 +6199,14 @@
         <source>Dit password kunne ikke nulstilles</source>
         <target state="new">Dit password kunne ikke nulstilles</target>
       </trans-unit>
+      <trans-unit id="2223640905439252475" datatype="html">
+        <source>Single Sign-On (SSO)</source>
+        <target state="new">Single Sign-On (SSO)</target>
+      </trans-unit>
+      <trans-unit id="530214592421461833" datatype="html">
+        <source>Efter du er logget ind med SSO, bliver du omdirigeret til den gamle brugerflade. Så kan du vende tilbage til den nye brugerflade på https://kitos.dk/ui</source>
+        <target state="new">Efter du er logget ind med SSO, bliver du omdirigeret til den gamle brugerflade. Så kan du vende tilbage til den nye brugerflade på https://kitos.dk/ui</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
