@@ -12,7 +12,7 @@ import {
   APIV2OrganizationUnitRegistrationInternalINTERNALService,
   APIV2OrganizationUnitsInternalINTERNALService,
 } from 'src/app/api/v2';
-import { BOUNDED_PAGINATION_QUERY_MAX_SIZE } from 'src/app/shared/constants/constants';
+import { BOUNDED_PAGINATION_QUERY_MAX_SIZE, MAX_INTEGER } from 'src/app/shared/constants/constants';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectOrganizationUuid } from '../../user-store/selectors';
 import { OrganizationUnitActions } from './actions';
@@ -51,6 +51,7 @@ export class OrganizationUnitEffects {
         return this.apiOrganizationService
           .getManyOrganizationV2GetOrganizationUnits({
             organizationUuid,
+            pageSize: MAX_INTEGER,
           })
           .pipe(
             map((units) => OrganizationUnitActions.getOrganizationUnitsSuccess(units)),
