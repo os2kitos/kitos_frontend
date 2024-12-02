@@ -69,7 +69,6 @@
     "@progress/kendo-svg-icons": "^3.0.0",
     "@progress/kendo-theme-default": "^8.0.1",
     "@tinymce/tinymce-angular": "^7.0.0",
-    "file-saver": "^2.0.5",
     "imask": "^6.6.0-alpha.0",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",

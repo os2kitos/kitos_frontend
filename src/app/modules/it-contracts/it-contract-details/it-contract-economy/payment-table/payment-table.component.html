@@ -1,22 +1,21 @@
 <app-card>
   <app-card-header [title]="title" i18n-title [helpTextKey]="helpTextKey"></app-card-header>
   <app-standard-vertical-content-grid>
-    <app-native-table *ngIf="anyPayments$ | async" tableLayout="fixed">
+    <app-native-table *ngIf="anyPayments$ | async" class="payment-table" [isDisplayBlock]="true">
       <thead>
-        <th i18n width="15%">Organisationsenhed</th>
+        <th i18n class="sticky-column">Organisationsenhed</th>
         <th i18n>EAN</th>
         <th i18n>Anskaffelse</th>
         <th i18n>Drift/år</th>
         <th i18n>Andet</th>
-        <th i18n width="10%">Kontering</th>
+        <th i18n>Kontering</th>
         <th i18n>Dato</th>
-        <th i18n width="20%">Note</th>
+        <th i18n>Note</th>
         <th i18n>Audit</th>
-        <th></th> <!-- Makes sure the buttons doesn't "fall out" when resizing to a small window -->
       </thead>
       <tbody>
         <tr *ngFor="let payment of payments$ | async">
-          <td>
+          <td class="sticky-column">
             <app-paragraph paragraphSize="small">{{ payment.organizationUnit?.name }}</app-paragraph>
           </td>
           <td>
@@ -32,17 +31,13 @@
             <app-paragraph paragraphSize="small">{{ payment.other }}</app-paragraph>
           </td>
           <td>
-            <app-paragraph paragraphSize="small" [cropOnOverflow]="true">{{
-              payment.accountingEntry ?? nullPlaceholder
-            }}</app-paragraph>
+            <app-paragraph paragraphSize="small">{{ payment.accountingEntry ?? nullPlaceholder }}</app-paragraph>
           </td>
           <td>
             <app-paragraph paragraphSize="small">{{ (payment.auditDate | appDate) ?? nullPlaceholder }}</app-paragraph>
           </td>
           <td>
-            <app-paragraph paragraphSize="small" [cropOnOverflow]="true">{{
-              payment.note ?? nullPlaceholder
-            }}</app-paragraph>
+            <app-paragraph paragraphSize="small">{{ payment.note ?? nullPlaceholder }}</app-paragraph>
           </td>
           <td>
             <app-content-space-between>
@@ -63,7 +58,6 @@
               </ng-container>
             </app-content-space-between>
           </td>
-          <td></td> <!-- Makes sure the buttons doesn't "fall out" when resizing to a small window -->
         </tr>
       </tbody>
     </app-native-table>

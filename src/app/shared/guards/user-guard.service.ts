@@ -17,7 +17,7 @@ export class UserGuardService {
           return true;
         } else {
           // Redirect unauthorized users
-          return this.router.parseUrl(AppPath.root);
+          return this.router.parseUrl(AppPath.root + '');
         }
       })
     );

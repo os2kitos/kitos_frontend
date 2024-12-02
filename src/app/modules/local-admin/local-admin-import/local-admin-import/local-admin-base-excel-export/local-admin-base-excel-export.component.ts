@@ -3,7 +3,7 @@ import { Component, Inject, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { tapResponse } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
-import { saveAs } from 'file-saver';
+import { saveAs } from '@progress/kendo-file-saver';
 import { catchError, finalize, first, map, mergeMap, of } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { LocalAdminImportEntityType } from 'src/app/shared/enums/local-admin-import-entity-type';
@@ -25,7 +25,7 @@ export class LocalAdminBaseExcelExportComponent extends BaseComponent {
   private readonly fileControl = 'file';
   public readonly organizationUuid$ = this.store.select(selectOrganizationUuid).pipe(filterNullish());
   public isImporting = false;
-  
+
   constructor(
     private fb: FormBuilder,
     private store: Store,

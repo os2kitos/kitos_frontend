@@ -40,3 +40,9 @@
   padding: $padding-small;
   padding-top: 0;
 }
+
+.table-display-block {
+  display: block;
+  overflow-x: auto;
+  white-space: nowrap;
+}

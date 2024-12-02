@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { tapResponse } from '@ngrx/operators';
-import { saveAs } from 'file-saver';
+import { saveAs } from '@progress/kendo-file-saver';
 import { mergeMap, tap } from 'rxjs';
 import {
   APIBrokenExternalReferencesReportStatusResponseDTO,
