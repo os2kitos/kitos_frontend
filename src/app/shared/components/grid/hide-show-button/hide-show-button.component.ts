@@ -14,7 +14,7 @@ export class HideShowButtonComponent {
   @Input() entityType!: RegistrationEntityTypes;
 
   constructor(private dialog: MatDialog) {}
-
+  
   openHideShowDialog() {
     if (this.columns === null) return;
 

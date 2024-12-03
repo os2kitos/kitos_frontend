@@ -101,6 +101,8 @@ export class UIConfigService {
         return ItContractsUiBluePrint;
       case UIModuleConfigKey.DataProcessingRegistrations:
         return DataProcessingUiBluePrint;
+      default:
+        throw new Error(`No blueprint found for module ${module}`);
     }
   }
 

@@ -54,6 +54,8 @@ import { ItSystemHierarchyTableComponent } from './shared/it-system-hierarchy-ta
 import { ItSystemInterfacesTableComponent } from './shared/it-system-interfaces-table/it-system-interfaces-table.component';
 import { ItSystemKleOverviewComponent } from './shared/it-system-kle-overview/it-system-kle-overview.component';
 import { KleTableComponent } from './shared/kle-table/kle-table.component';
+import { GdprOverviewComponent } from './it-system-usages/gdpr-overview/gdpr-overview.component';
+import { GdprOverviewDialogComponent } from './it-system-usages/gdpr-overview-dialog/gdpr-overview-dialog.component';
 
 @NgModule({
   declarations: [
@@ -109,6 +111,8 @@ import { KleTableComponent } from './shared/kle-table/kle-table.component';
     ItSystemInterfacesDetailsFrontpageComponent,
     InterfaceDataWriteDialogComponent,
     CreateInterfaceDialogComponent,
+    GdprOverviewComponent,
+    GdprOverviewDialogComponent,
   ],
   imports: [CommonModule, SharedModule, ITSystemsRouterModule, MatInputModule],
 })

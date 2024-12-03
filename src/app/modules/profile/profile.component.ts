@@ -8,7 +8,6 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
 import {
   mapStartPreferenceChoice,
   StartPreferenceChoice,
-  startPreferenceChoiceOptions,
 } from 'src/app/shared/models/organization/organization-user/start-preference.model';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';

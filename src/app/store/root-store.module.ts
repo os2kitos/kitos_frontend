@@ -47,6 +47,8 @@ import { GlobalAdminEffects } from './global-admin/effects';
 import { localAdminUsersFeature } from './global-admin/local-admins/reducers';
 import { LocalAdminUserEffects } from './global-admin/local-admins/effects';
 import { PublicMessageEffects } from './global-admin/public-messages/effects';
+import { gdprReportFeature } from './it-system-usage/gdpr-report/reducer';
+import { GdprReportEffects } from './it-system-usage/gdpr-report/effects';
 
 @NgModule({
   imports: [
@@ -80,6 +82,7 @@ import { PublicMessageEffects } from './global-admin/public-messages/effects';
     StoreModule.forFeature(globalAdminFeature),
     StoreModule.forFeature(helpTextFeature),
     StoreModule.forFeature(localAdminUsersFeature),
+    StoreModule.forFeature(gdprReportFeature),
     EffectsModule.forRoot([]),
     EffectsModule.forFeature([
       UserEffects,
@@ -103,6 +106,7 @@ import { PublicMessageEffects } from './global-admin/public-messages/effects';
       GlobalAdminEffects,
       LocalAdminUserEffects,
       PublicMessageEffects,
+      GdprReportEffects,
     ]),
     RouterModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),

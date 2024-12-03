@@ -25,6 +25,7 @@ export class LocalGridComponent<T> extends BaseComponent implements OnInit {
   @Input() deletePermission?: boolean | null;
   @Input() withOutline: boolean = false;
   @Input() fitSizeToContent: boolean = false;
+  @Input() height?: string;
 
   @Output() deleteEvent = new EventEmitter<T>();
   @Output() modifyEvent = new EventEmitter<T>();

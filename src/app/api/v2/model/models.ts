@@ -66,6 +66,7 @@ export * from './externalReferenceDataResponseDTO';
 export * from './externalReferenceDataWriteRequestDTO';
 export * from './gDPRRegistrationsResponseDTO';
 export * from './gDPRWriteRequestDTO';
+export * from './gdprReportResponseDTO';
 export * from './generalDataResponseDTO';
 export * from './generalDataUpdateRequestDTO';
 export * from './generalDataWriteRequestDTO';

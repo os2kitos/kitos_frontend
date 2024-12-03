@@ -12,7 +12,7 @@
   (sortChange)="onSortChange($event)"
   (pageChange)="onPageChange($event)"
   style="width: 100%"
-  [ngClass]="{ 'grid-outline': withOutline, 'fit-size-to-content': fitSizeToContent }"
+  [ngClass]="{ 'grid-outline': withOutline, 'fit-size-to-content': fitSizeToContent}"
 >
   <ng-container *ngFor="let column of columns">
     <kendo-grid-column
@@ -62,6 +62,11 @@
               columnFilter.filter === 'boolean' || (columnFilter.filter === 'text' && column.extraFilter === 'enum')
             "
           ></app-dropdown-filter>
+          <app-date-filter
+            [column]="columnFilter"
+            [filter]="filter"
+            *ngIf="columnFilter.filter === 'date'"
+          ></app-date-filter>
         </ng-container>
       </ng-template>
 
@@ -134,6 +139,10 @@
             </app-toggle-button>
           </ng-container>
         </div>
+      </ng-template>
+
+      <ng-template *ngIf="column.style === 'date'" kendoGridCellTemplate let-dataItem>
+        <app-paragraph>{{ searchProperty(dataItem, column.field) | appDate }}</app-paragraph>
       </ng-template>
     </kendo-grid-column>
   </ng-container>

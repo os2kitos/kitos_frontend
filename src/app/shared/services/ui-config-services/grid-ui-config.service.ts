@@ -4,6 +4,7 @@ import { combineLatest, map, Observable } from 'rxjs';
 import * as DprFields from 'src/app/shared/constants/data-processing-grid-column-constants';
 import * as ContractFields from 'src/app/shared/constants/it-contracts-grid-column-constants';
 import * as UsageFields from 'src/app/shared/constants/it-system-usage-grid-column-constants';
+import * as GdprFields from 'src/app/shared/constants/gdpr-overview-grid-column-constants';
 import {
   selectShowDataProcessingRegistrations,
   selectShowItContractModule,
@@ -31,6 +32,7 @@ import {
   selectItContractsEnableTermination,
   selectITSystemUsageEnableFrontPageUsagePeriod,
   selectITSystemUsageEnableGdpr,
+  selectITSystemUsageEnableGdprPlannedRiskAssessmentDate,
   selectITSystemUsageEnableLifeCycleStatus,
   selectITSystemUsageEnableLocalReferences,
   selectITSystemUsageEnableSelectContractToDetermineIfItSystemIsActive,
@@ -56,6 +58,8 @@ export class GridUIConfigService {
         return this.getItSystemUsageGridConfig();
       case UIModuleConfigKey.DataProcessingRegistrations:
         return this.getDataProcessingGridConfig();
+      case UIModuleConfigKey.Gdpr:
+        return this.getGdprGridConfig();
       default:
         throw new Error(`Module key ${moduleKey} is not supported`);
     }
@@ -391,6 +395,18 @@ export class GridUIConfigService {
           ];
         }
       )
+    );
+  }
+
+  private getGdprGridConfig(): Observable<UIConfigGridApplication[]> {
+    const enabledPlannedRiskAssesmentDate$ = this.store.select(selectITSystemUsageEnableGdprPlannedRiskAssessmentDate);
+    return combineLatest([enabledPlannedRiskAssesmentDate$]).pipe(
+      map(([enabledPlannedRiskAssesmentDate]) => [
+        {
+          shouldEnable: enabledPlannedRiskAssesmentDate,
+          columnNamesToConfigure: [GdprFields.PLANNED_RISK_ASSESSMENT_DATE],
+        },
+      ])
     );
   }
 }

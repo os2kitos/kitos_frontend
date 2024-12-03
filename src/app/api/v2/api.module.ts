@@ -21,6 +21,7 @@ import { APIV2DprLocalCountryOptionTypesInternalINTERNALService } from './api/v2
 import { APIV2DprLocalDataResponsibleTypesInternalINTERNALService } from './api/v2DprLocalDataResponsibleTypesInternalINTERNAL.service';
 import { APIV2DprLocalOversightOptionTypesInternalINTERNALService } from './api/v2DprLocalOversightOptionTypesInternalINTERNAL.service';
 import { APIV2DprLocalRoleOptionTypesInternalINTERNALService } from './api/v2DprLocalRoleOptionTypesInternalINTERNAL.service';
+import { APIV2GdprExportReportInternalINTERNALService } from './api/v2GdprExportReportInternalINTERNAL.service';
 import { APIV2GlobalUserInternalINTERNALService } from './api/v2GlobalUserInternalINTERNAL.service';
 import { APIV2GridLocalItContractRolesINTERNALService } from './api/v2GridLocalItContractRolesINTERNAL.service';
 import { APIV2HelpTextsInternalINTERNALService } from './api/v2HelpTextsInternalINTERNAL.service';

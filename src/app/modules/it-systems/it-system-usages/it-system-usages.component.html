@@ -14,7 +14,10 @@
     [lastSeenGridConfig$]="lastSeenGridConfig$"
   >
   </app-local-admin-column-config-button>
-  <app-export-menu-button [exportMethod]="onExcelExport"></app-export-menu-button>
+  <app-export-menu-button
+    [enabledGdprExport]="(enabledGdpr$ | async) ?? true"
+    [exportMethod]="onExcelExport"
+  ></app-export-menu-button>
   <app-hide-show-button entityType="it-system-usage" [columns]="gridColumns$ | async"></app-hide-show-button>
 </app-overview-header>
 

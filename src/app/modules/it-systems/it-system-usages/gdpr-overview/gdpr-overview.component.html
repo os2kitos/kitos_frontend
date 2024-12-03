@@ -1,0 +1,11 @@
+<ng-container *ngIf="gdprReports$ | async as gdprReports">
+  <ng-container *ngIf="filteredGridColumns$ | async as gridColumns">
+    <app-local-grid
+      [columns]="gridColumns"
+      [data]="gdprReports"
+      [withOutline]="true"
+      [exportToExcelName]="getExportName()"
+      i18n-exportToExcelName
+    ></app-local-grid>
+  </ng-container>
+</ng-container>

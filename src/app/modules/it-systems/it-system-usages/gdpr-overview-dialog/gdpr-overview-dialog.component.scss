@@ -1,0 +1,9 @@
+@import 'theme';
+
+::ng-deep app-dialog .content{
+  padding-top: $padding-medium !important;
+}
+
+app-overview-header {
+  flex-direction: row-reverse;
+}
