@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { FkOrgActions } from 'src/app/store/local-admin/fk-org/actions';
 import { selectIsDeleteLoading } from 'src/app/store/local-admin/fk-org/selectors';
+import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
 
 @Component({
   selector: 'app-fk-org-delete-dialog',
@@ -25,6 +26,7 @@ export class FkOrgDeleteDialogComponent extends BaseComponent implements OnInit 
   ngOnInit(): void {
     this.subscriptions.add(
       this.actions$.pipe(ofType(FkOrgActions.deleteConnectionSuccess)).subscribe(() => {
+        this.store.dispatch(OrganizationUnitActions.getOrganizationUnits());
         this.cancel();
       })
     );

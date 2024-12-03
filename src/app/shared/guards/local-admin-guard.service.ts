@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, UrlTree } from '@angular/router';
-import { Observable, switchMap } from 'rxjs';
-import { UserGuardService } from './user-guard.service';
-import { selectUserIsCurrentlyLocalAdmin } from 'src/app/store/user-store/selectors';
+import { UrlTree } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { Observable, switchMap } from 'rxjs';
+import { selectUserIsCurrentlyLocalAdmin } from 'src/app/store/user-store/selectors';
+import { UserGuardService } from './user-guard.service';
 
 @Injectable({ providedIn: 'root' })
-export class LocalAdminGuardService implements CanActivate {
+export class LocalAdminGuardService {
   constructor(private userGuardService: UserGuardService, private store: Store) {}
 
   canActivate(): Observable<boolean | UrlTree> {

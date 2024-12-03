@@ -76,10 +76,10 @@ export class UserEffects {
       ofType(UserActions.authenticate),
       // Remove possibly invalid XSRF cookie before authenticating
       tap(() => this.cookieService.removeAll()),
-      mergeMap(() =>
+      mergeMap(({ returnUrl }) =>
         this.authorizeService.getSingleAuthorizeGetLogin().pipe(
           map((userDTO) => UserActions.authenticateSuccess(adaptUser(userDTO.response))),
-          catchError(() => of(UserActions.authenticateError()))
+          catchError(() => of(UserActions.authenticateError(returnUrl)))
         )
       )
     );
@@ -182,7 +182,10 @@ export class UserEffects {
     () => {
       return this.actions$.pipe(
         ofType(UserActions.authenticateError),
-        tap(() => this.router.navigate([AppPath.root]))
+        tap(({ returnUrl }) => {
+          const extras = returnUrl ? { queryParams: { returnUrl } } : {};
+          return this.router.navigate([AppPath.root], extras);
+        })
       );
     },
     { dispatch: false }

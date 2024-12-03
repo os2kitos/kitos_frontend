@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ResetPasswordComponent } from './modules/frontpage/reset-password/reset-password.component';
 import { SendPasswordResetRequestComponent } from './modules/frontpage/send-password-reset-request/send-password-reset-request.component';
 import { AppPath } from './shared/enums/app-path';
 import { AuthGuardService } from './shared/guards/auth-guard.service';
 import { GlobalAdminGuardService } from './shared/guards/global-admin-guard.service';
 import { LocalAdminGuardService } from './shared/guards/local-admin-guard.service';
 import { StartupGuardService } from './shared/guards/startup-guard.service';
-import { ResetPasswordComponent } from './modules/frontpage/reset-password/reset-password.component';
 
 const routes: Routes = [
   {
@@ -66,7 +66,8 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  //In order to debug routing set enableTracing to true
+  imports: [RouterModule.forRoot(routes, { enableTracing: false })],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

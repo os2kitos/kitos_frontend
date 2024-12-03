@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NavigationEnd, Router } from '@angular/router';
-import { Actions } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { combineLatest, filter, tap } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
@@ -32,7 +31,7 @@ export class NavBarComponent extends BaseComponent implements OnInit {
   public readonly uiRootConfig$ = this.store.select(selectUIRootConfig).pipe(filterNullish());
   public readonly isUserCurrentyLocalAdmin$ = this.store.select(selectUserIsCurrentlyLocalAdmin);
 
-  constructor(private store: Store, private dialog: MatDialog, private router: Router, private actions$: Actions) {
+  constructor(private store: Store, private dialog: MatDialog, private router: Router) {
     super();
   }
 

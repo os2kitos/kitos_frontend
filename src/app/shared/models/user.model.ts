@@ -1,9 +1,9 @@
 import { APIUserDTO } from 'src/app/api/v1';
+import { adaptV1OrganizationRights, OrganizationRight } from './organization-right.model';
 import {
   mapStartPreferenceChoiceFromV1,
   StartPreferenceChoice,
 } from './organization/organization-user/start-preference.model';
-import { adaptV1OrganizationRights, OrganizationRight } from './organization-right.model';
 
 export interface User {
   id: number;

@@ -19,9 +19,9 @@ export const UserActions = createActionGroup({
     'Logout Success': emptyProps(),
     'Logout Error': emptyProps(),
 
-    'Authenticate ': emptyProps(),
+    'Authenticate ': (returnUrl?: string) => ({ returnUrl }),
     'Authenticate Success ': (user?: User) => ({ user }),
-    'Authenticate Error': emptyProps(),
+    'Authenticate Error': (returnUrl?: string) => ({ returnUrl }),
 
     'Update XSRF Token': (xsrfToken: string) => ({ xsrfToken }),
 

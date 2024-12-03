@@ -19,6 +19,7 @@ import {
   selectSynchronizationStatus,
   selectUpdateConsequences,
 } from 'src/app/store/local-admin/fk-org/selectors';
+import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
 
 @Component({
   selector: 'app-fk-org-write-dialog',
@@ -89,7 +90,10 @@ export class FkOrgWriteDialogComponent extends BaseComponent implements OnInit {
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(FkOrgActions.createConnectionSuccess, FkOrgActions.updateConnectionSuccess))
-        .subscribe(() => this.cancel())
+        .subscribe(() => {
+          this.store.dispatch(OrganizationUnitActions.getOrganizationUnits());
+          this.cancel();
+        })
     );
 
     this.subscriptions.add(
