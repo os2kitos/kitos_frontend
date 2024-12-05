@@ -49,6 +49,7 @@ describe('it-contracts', () => {
     cy.intercept('/api/v2/it-contracts?nameEquals*', {
       fixture: './it-contracts/it-contracts-by-it-system-usage-uuid.json',
     });
+    cy.getByDataCy('grid-options-button').click().click();
     cy.getByDataCy('create-button').click();
     cy.inputByCy('create-name').type('The valid contract');
     // The name field waits for 500ms before calling the backend to verify if the name already exists

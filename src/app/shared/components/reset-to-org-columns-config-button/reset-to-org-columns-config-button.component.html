@@ -1,6 +1,7 @@
-<app-button buttonStyle="secondary" (buttonClick)="resetColumnsConfig()">
-  <div i18n> Gendan kolonneupsætning </div>
+<app-menu-button-item buttonStyle="secondary" (itemClick)="resetColumnsConfig()">
+  <app-reload-icon></app-reload-icon>
+  Gendan
   <app-tooltip [text]="tooltipText">
-    <app-warning-icon *ngIf="hasChanged"> </app-warning-icon>
+    <app-warning-icon *ngIf="hasChanges() | async"> </app-warning-icon>
   </app-tooltip>
-</app-button>
+</app-menu-button-item>

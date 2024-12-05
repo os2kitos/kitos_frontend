@@ -1,23 +1,12 @@
 <app-overview-header>
   <h3 i18n>IT Systemer i {{ organizationName$ | async }}</h3>
-  <app-help-button helpTextKey="it-system.overview"></app-help-button>
-  <app-filter-options-button entityType="it-system-usage"></app-filter-options-button>
-  <app-reset-to-org-columns-config-button
-    [gridColumns$]="gridColumns$"
+
+  <app-grid-options-button
+    [hasResetButton]="true"
+    [hasColumnConfigButtons]="true"
     entityType="it-system-usage"
-    [lastSeenGridConfig$]="lastSeenGridConfig$"
-  ></app-reset-to-org-columns-config-button>
-  <app-local-admin-column-config-button
-    *ngIf="hasConfigModificationPermissions$ | async"
-    [columns$]="gridColumns$"
-    entityType="it-system-usage"
-    [lastSeenGridConfig$]="lastSeenGridConfig$"
-  >
-  </app-local-admin-column-config-button>
-  <app-export-menu-button
-    [enabledGdprExport]="(enabledGdpr$ | async) ?? true"
-    [exportMethod]="onExcelExport"
-  ></app-export-menu-button>
+  ></app-grid-options-button>
+  <app-export-menu-button [enabledGdprExport]="true" [exportMethod]="onExcelExport"></app-export-menu-button>
   <app-hide-show-button entityType="it-system-usage" [columns]="gridColumns$ | async"></app-hide-show-button>
 </app-overview-header>
 

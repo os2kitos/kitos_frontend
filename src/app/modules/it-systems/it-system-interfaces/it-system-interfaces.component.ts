@@ -18,7 +18,6 @@ import {
   selectInterfaceGridState,
   selectInterfaceHasCreateCollectionPermission,
 } from 'src/app/store/it-system-interfaces/selectors';
-import { CreateInterfaceDialogComponent } from './create-interface-dialog/create-interface-dialog.component';
 import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 
 @Component({
@@ -186,9 +185,5 @@ export class ItSystemInterfacesComponent extends BaseOverviewComponent implement
 
   override rowIdSelect(event: CellClickEvent) {
     super.rowIdSelect(event, this.router, this.route);
-  }
-
-  public openCreateDialog() {
-    this.dialog.open(CreateInterfaceDialogComponent);
   }
 }

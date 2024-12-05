@@ -6,7 +6,7 @@ import { IconType } from 'src/app/shared/models/icon-type';
 @Component({
   selector: 'app-menu-button',
   templateUrl: './menu-button.component.html',
-  styleUrls: ['./menu-button.component.scss']
+  styleUrls: ['./menu-button.component.scss'],
 })
 export class MenuButtonComponent {
   @ViewChild(MatMenuTrigger) menuTrigger!: MatMenuTrigger;
@@ -28,6 +28,6 @@ export class MenuButtonComponent {
   onMouseLeave() {
     this.menuTimeout = setTimeout(() => {
       this.menuTrigger.closeMenu();
-    }, 750);
+    }, 250);
   }
 }

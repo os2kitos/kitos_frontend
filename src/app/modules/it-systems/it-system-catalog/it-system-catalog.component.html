@@ -1,13 +1,11 @@
 <app-overview-header>
   <h3 i18n>IT Systemkatalog</h3>
-  <app-help-button helpTextKey="it-system.catalog"></app-help-button>
-  <app-filter-options-button [entityType]="'it-system'"></app-filter-options-button>
+  <app-grid-options-button
+    entityType="it-system"
+    [createPermission$]="hasCreatePermission$"
+  ></app-grid-options-button>
   <app-export-menu-button [exportMethod]="onExcelExport"></app-export-menu-button>
   <app-hide-show-button [columns]="gridColumns$ | async" entityType="it-system"></app-hide-show-button>
-  <app-create-entity-button
-    entityType="it-system"
-    [hasCreatePermission$]="hasCreatePermission$"
-  ></app-create-entity-button>
 </app-overview-header>
 
 <app-grid

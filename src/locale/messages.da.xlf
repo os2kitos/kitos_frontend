@@ -2055,10 +2055,6 @@
         <source>Opret Snitflade</source>
         <target state="new">Opret Snitflade</target>
       </trans-unit>
-      <trans-unit id="4228561755384188385" datatype="html">
-        <source>Opret snitflade</source>
-        <target state="new">Opret snitflade</target>
-      </trans-unit>
       <trans-unit id="7055470758930166695" datatype="html">
         <source>Opret IT Kontrakt</source>
         <target state="new">Opret IT Kontrakt</target>
@@ -4463,17 +4459,9 @@
         <source>IT Systemer Overblik</source>
         <target state="new">IT Systemer Overblik</target>
       </trans-unit>
-      <trans-unit id="8829497237648100098" datatype="html">
-        <source>Filter</source>
-        <target state="new">Filter</target>
-      </trans-unit>
       <trans-unit id="6510461966645751823" datatype="html">
         <source> Gem </source>
         <target state="new"> Gem </target>
-      </trans-unit>
-      <trans-unit id="5282046193109027726" datatype="html">
-        <source> Anvend </source>
-        <target state="new"> Anvend </target>
       </trans-unit>
       <trans-unit id="5513078980496116959" datatype="html">
         <source> Slet </source>
@@ -4487,21 +4475,13 @@
         <source>Er du sikker på at du vil gemme den nuværende kolonneopsætning af felter som standard til din organisation?</source>
         <target state="new">Er du sikker på at du vil gemme den nuværende kolonneopsætning af felter som standard til din organisation?</target>
       </trans-unit>
-      <trans-unit id="7754419869242401597" datatype="html">
-        <source>Kolonneopsætningen er gemt for organisationen</source>
-        <target state="new">Kolonneopsætningen er gemt for organisationen</target>
+      <trans-unit id="6569583422409782700" datatype="html">
+        <source>Kolonneopsætning gemt for organisationen</source>
+        <target state="new">Kolonneopsætning gemt for organisationen</target>
       </trans-unit>
       <trans-unit id="304513782193402852" datatype="html">
         <source>Er du sikker på at du vil slette den nuværende kolonneopsætning af felter som standard for din organisation?</source>
         <target state="new">Er du sikker på at du vil slette den nuværende kolonneopsætning af felter som standard for din organisation?</target>
-      </trans-unit>
-      <trans-unit id="381540565861890349" datatype="html">
-        <source>Organisationens kolonneopsætningen er slettet og overblikket er nulstillet</source>
-        <target state="new">Organisationens kolonneopsætningen er slettet og overblikket er nulstillet</target>
-      </trans-unit>
-      <trans-unit id="1146742993996326088" datatype="html">
-        <source> Gendan kolonneupsætning </source>
-        <target state="new"> Gendan kolonneupsætning </target>
       </trans-unit>
       <trans-unit id="7183340572551759368" datatype="html">
         <source>OBS: Opsætning af overblik afviger fra kommunens standardoverblik. Tryk på &apos;Gendan kolonneopsætning&apos; for at benytte den gældende opsætning.</source>
@@ -4842,10 +4822,6 @@
       <trans-unit id="4959897538098495651" datatype="html">
         <source>Tværgående rettigheder</source>
         <target state="new">Tværgående rettigheder</target>
-      </trans-unit>
-      <trans-unit id="4682105837825490873" datatype="html">
-        <source><x id="START_TAG_APP_PLUS_ICON" ctype="x-app_plus_icon" equiv-text="p-plus-icon&gt;"/><x id="CLOSE_TAG_APP_PLUS_ICON" ctype="x-app_plus_icon" equiv-text="Opret bruge"/> Opret bruger</source>
-        <target state="new"><x id="START_TAG_APP_PLUS_ICON" ctype="x-app_plus_icon" equiv-text="p-plus-icon&gt;"/><x id="CLOSE_TAG_APP_PLUS_ICON" ctype="x-app_plus_icon" equiv-text="Opret bruge"/> Opret bruger</target>
       </trans-unit>
       <trans-unit id="534383122406365407" datatype="html">
         <source>Start side</source>
@@ -6199,6 +6175,46 @@
         <source>Efter du er logget ind med SSO, bliver du omdirigeret til den gamle brugerflade. Så kan du vende tilbage til den nye brugerflade på https://kitos.dk/ui</source>
         <target state="new">Efter du er logget ind med SSO, bliver du omdirigeret til den gamle brugerflade. Så kan du vende tilbage til den nye brugerflade på https://kitos.dk/ui</target>
       </trans-unit>
+      <trans-unit id="303883128089787443" datatype="html">
+        <source>Kolonnevisnining gendannet til standardopsætning</source>
+        <target state="new">Kolonnevisnining gendannet til standardopsætning</target>
+      </trans-unit>
+      <trans-unit id="7580609476449791815" datatype="html">
+        <source>Kolonneopsætning kunne ikke gemmes for organisationen</source>
+        <target state="new">Kolonneopsætning kunne ikke gemmes for organisationen</target>
+      </trans-unit>
+      <trans-unit id="5322012438914144820" datatype="html">
+        <source>Kolonneopsætning slettet for organisationen</source>
+        <target state="new">Kolonneopsætning slettet for organisationen</target>
+      </trans-unit>
+      <trans-unit id="5313837484943849162" datatype="html">
+        <source>Kolonneopsætning kunne ikke slettes for organisationen</source>
+        <target state="new">Kolonneopsætning kunne ikke slettes for organisationen</target>
+      </trans-unit>
+      <trans-unit id="8829497237648100098" datatype="html">
+        <source>Filter</source>
+        <target state="new">Filter</target>
+      </trans-unit>
+      <trans-unit id="3413433407323398362" datatype="html">
+        <source>Opsætning</source>
+        <target state="new">Opsætning</target>
+      </trans-unit>
+      <trans-unit id="750443968962429760" datatype="html">
+        <source>Opret Bruger</source>
+        <target state="new">Opret Bruger</target>
+      </trans-unit>
+      <trans-unit id="1111247473583328296" datatype="html">
+        <source>GDPR Rapporter</source>
+        <target state="new">GDPR Rapporter</target>
+      </trans-unit>
+      <trans-unit id="584908652240507318" datatype="html">
+        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon /&gt;"/> Eksporter</source>
+        <target state="new"><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon /&gt;"/> Eksporter</target>
+      </trans-unit>
+      <trans-unit id="8145441157302108078" datatype="html">
+        <source>System UUID</source>
+        <target state="new">System UUID</target>
+      </trans-unit>
       <trans-unit id="5742019875153950367" datatype="html">
         <source>CPR-nr</source>
         <target state="new">CPR-nr</target>
@@ -6223,21 +6239,33 @@
         <source>IT-Systemet driftes</source>
         <target state="new">IT-Systemet driftes</target>
       </trans-unit>
-      <trans-unit id="1111247473583328296" datatype="html">
-        <source>GDPR Rapporter</source>
-        <target state="new">GDPR Rapporter</target>
-      </trans-unit>
-      <trans-unit id="8145441157302108078" datatype="html">
-        <source>System UUID</source>
-        <target state="new">System UUID</target>
-      </trans-unit>
       <trans-unit id="793272841717310926" datatype="html">
         <source><x id="START_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="&lt;app-lock-icon /&gt;"/><x id="CLOSE_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="&lt;app-lock-icon /&gt;"/> Åben GDPR overblik </source>
         <target state="new"><x id="START_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="&lt;app-lock-icon /&gt;"/><x id="CLOSE_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="&lt;app-lock-icon /&gt;"/> Åben GDPR overblik </target>
       </trans-unit>
-      <trans-unit id="584908652240507318" datatype="html">
-        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon /&gt;"/> Eksporter</source>
-        <target state="new"><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon /&gt;"/> Eksporter</target>
+      <trans-unit id="624474564558550925" datatype="html">
+        <source><x id="START_TAG_APP_PLUS_ICON_BLUE" ctype="x-app_plus_icon_blue" equiv-text="&lt;app-plus-icon-blue&gt;"/><x id="CLOSE_TAG_APP_PLUS_ICON_BLUE" ctype="x-app_plus_icon_blue" equiv-text="&lt;/app-plus-icon-blue&gt;"/> Opret </source>
+        <target state="new"><x id="START_TAG_APP_PLUS_ICON_BLUE" ctype="x-app_plus_icon_blue" equiv-text="&lt;app-plus-icon-blue&gt;"/><x id="CLOSE_TAG_APP_PLUS_ICON_BLUE" ctype="x-app_plus_icon_blue" equiv-text="&lt;/app-plus-icon-blue&gt;"/> Opret </target>
+      </trans-unit>
+      <trans-unit id="844753732077135788" datatype="html">
+        <source><x id="START_TAG_APP_DISK_ICON" ctype="x-app_disk_icon" equiv-text="p-disk-icon&gt;"/><x id="CLOSE_TAG_APP_DISK_ICON" ctype="x-app_disk_icon" equiv-text="Gem &lt;"/> Gem </source>
+        <target state="new"><x id="START_TAG_APP_DISK_ICON" ctype="x-app_disk_icon" equiv-text="p-disk-icon&gt;"/><x id="CLOSE_TAG_APP_DISK_ICON" ctype="x-app_disk_icon" equiv-text="Gem &lt;"/> Gem </target>
+      </trans-unit>
+      <trans-unit id="7413119087194289434" datatype="html">
+        <source><x id="START_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="p-trashcan-icon&gt;"/><x id="CLOSE_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="Slet"/> Slet </source>
+        <target state="new"><x id="START_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="p-trashcan-icon&gt;"/><x id="CLOSE_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="Slet"/> Slet </target>
+      </trans-unit>
+      <trans-unit id="5606291731600881005" datatype="html">
+        <source><x id="START_TAG_APP_FILTER_ICON" ctype="x-app_filter_icon" equiv-text="&lt;app-filter-icon&gt;"/><x id="CLOSE_TAG_APP_FILTER_ICON" ctype="x-app_filter_icon" equiv-text="&lt;/app-filter-icon&gt;"/> Anvend </source>
+        <target state="new"><x id="START_TAG_APP_FILTER_ICON" ctype="x-app_filter_icon" equiv-text="&lt;app-filter-icon&gt;"/><x id="CLOSE_TAG_APP_FILTER_ICON" ctype="x-app_filter_icon" equiv-text="&lt;/app-filter-icon&gt;"/> Anvend </target>
+      </trans-unit>
+      <trans-unit id="6740986467507484529" datatype="html">
+        <source><x id="START_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="&lt;app-trashcan-icon&gt;"/><x id="CLOSE_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="&lt;/app-trashcan-icon&gt;"/> Slet </source>
+        <target state="new"><x id="START_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="&lt;app-trashcan-icon&gt;"/><x id="CLOSE_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="&lt;/app-trashcan-icon&gt;"/> Slet </target>
+      </trans-unit>
+      <trans-unit id="7970981235010102529" datatype="html">
+        <source><x id="START_TAG_APP_HELP_ICON" ctype="x-app_help_icon" equiv-text="p-help-icon&gt;"/><x id="CLOSE_TAG_APP_HELP_ICON" ctype="x-app_help_icon" equiv-text="Hjælp"/> Hjælp </source>
+        <target state="new"><x id="START_TAG_APP_HELP_ICON" ctype="x-app_help_icon" equiv-text="p-help-icon&gt;"/><x id="CLOSE_TAG_APP_HELP_ICON" ctype="x-app_help_icon" equiv-text="Hjælp"/> Hjælp </target>
       </trans-unit>
       <trans-unit id="1162347843657363489" datatype="html">
         <source>Er du sikker på, at du vil slette systemet?</source>

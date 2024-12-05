@@ -59,6 +59,9 @@ import { WarningIconComponent } from './warning-icon.component';
 import { WhiteCircleIconComponent } from './white-circle-icon.component';
 import { WhiteXIconComponent } from './white-x-icon.component';
 import { XIconComponent } from './x-icon.component';
+import { ReloadIconComponent } from './reload-icon.component';
+import { DiskIconComponent } from './disk-icon.component';
+import { MoreHorizontalWarningIconComponent } from './more-horizontal-warning-icon.component';
 
 @NgModule({
   imports: [],
@@ -122,6 +125,9 @@ import { XIconComponent } from './x-icon.component';
     CheckIconComponent,
     WhiteXIconComponent,
     EmptyUpdateIconComponent,
+    ReloadIconComponent,
+    DiskIconComponent,
+    MoreHorizontalWarningIconComponent,
     ArrowRightIconComponent,
   ],
   declarations: [
@@ -184,6 +190,9 @@ import { XIconComponent } from './x-icon.component';
     CheckIconComponent,
     WhiteXIconComponent,
     EmptyUpdateIconComponent,
+    ReloadIconComponent,
+    DiskIconComponent,
+    MoreHorizontalWarningIconComponent,
     ArrowRightIconComponent,
   ],
   providers: [],

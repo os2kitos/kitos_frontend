@@ -21,6 +21,7 @@ describe('it-interfaces', () => {
     cy.intercept('/api/v2/it-interfaces*', {
       fixture: './it-system-catalog/it-systems-v2.json',
     });
+    cy.getByDataCy('grid-options-button').click().click();
     cy.getByDataCy('create-button').click();
     cy.inputByCy('create-name').type('test');
     cy.inputByCy('create-interface-id').type('1');

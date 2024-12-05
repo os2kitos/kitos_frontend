@@ -27,7 +27,6 @@ import {
   selectOrganizationUserGridState,
   selectOrganizationUserModifyPermissions,
 } from 'src/app/store/organization/organization-user/selectors';
-import { CreateUserDialogComponent } from './create-user-dialog/create-user-dialog.component';
 import { UserInfoDialogComponent } from './user-info-dialog/user-info-dialog.component';
 import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 
@@ -220,10 +219,6 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
 
   public stateChange(gridState: GridState) {
     this.store.dispatch(OrganizationUserActions.updateGridState(gridState));
-  }
-
-  public openCreateDialog() {
-    this.dialog.open(CreateUserDialogComponent, { height: '95%', maxHeight: '750px' });
   }
 
   public onEditUser(user: ODataOrganizationUser): void {

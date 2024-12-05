@@ -30,9 +30,7 @@ import {
   selectContractGridRoleColumns,
   selectContractGridState,
   selectItContractHasCollectionCreatePermissions,
-  selectItContractLastSeenGridConfig,
 } from 'src/app/store/it-contract/selectors';
-import { selectGridConfigModificationPermission } from 'src/app/store/user-store/selectors';
 
 @Component({
   templateUrl: 'it-contracts.component.html',
@@ -46,9 +44,6 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
     .select(selectContractGridColumns)
     .pipe(this.configService.filterGridColumnsByUIConfig(UIModuleConfigKey.ItContract));
   public readonly hasCreatePermission$ = this.store.select(selectItContractHasCollectionCreatePermissions);
-
-  public readonly hasConfigModificationPermissions$ = this.store.select(selectGridConfigModificationPermission);
-  public readonly lastSeenGridConfig$ = this.store.select(selectItContractLastSeenGridConfig);
 
   constructor(
     store: Store,

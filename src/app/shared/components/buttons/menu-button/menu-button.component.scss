@@ -21,3 +21,8 @@ app-button {
     padding: $padding-smaller 0;
   }
 }
+
+app-icon {
+  display: inline-flex;
+  align-items: center;
+}

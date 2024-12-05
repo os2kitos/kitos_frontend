@@ -1,28 +1,16 @@
 <app-overview-header>
   <h3 i18n>Databehandling</h3>
-  <app-help-button helpTextKey="data-processing.overview"></app-help-button>
-  <app-filter-options-button entityType="data-processing-registration"></app-filter-options-button>
-  <app-reset-to-org-columns-config-button
-    [gridColumns$]="gridColumns$"
+  <app-grid-options-button
+    [hasResetButton]="true"
+    [hasColumnConfigButtons]="true"
     entityType="data-processing-registration"
-    [lastSeenGridConfig$]="lastSeenGridConfig$"
-  ></app-reset-to-org-columns-config-button>
-  <app-local-admin-column-config-button
-    *ngIf="hasConfigModificationPermissions$ | async"
-    [columns$]="gridColumns$"
-    entityType="data-processing-registration"
-    [lastSeenGridConfig$]="lastSeenGridConfig$"
-  >
-  </app-local-admin-column-config-button>
+    [createPermission$]="hasCreatePermission$"
+  ></app-grid-options-button>
   <app-export-menu-button [exportMethod]="onExcelExport"></app-export-menu-button>
   <app-hide-show-button
     [columns]="gridColumns$ | async"
     entityType="data-processing-registration"
   ></app-hide-show-button>
-  <app-create-entity-button
-    entityType="data-processing-registration"
-    [hasCreatePermission$]="hasCreatePermission$"
-  ></app-create-entity-button>
 </app-overview-header>
 
 <app-grid

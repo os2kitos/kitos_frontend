@@ -1,16 +1,11 @@
 <app-overview-header>
   <h3 i18n>IT Snitfladekatalog</h3>
-  <app-help-button helpTextKey="it-system.interfaceCatalog"></app-help-button>
-  <app-filter-options-button [entityType]="'it-interface'"></app-filter-options-button>
+  <app-grid-options-button
+    entityType="it-interface"
+    [createPermission$]="hasCreatePermission$"
+  ></app-grid-options-button>
   <app-export-menu-button [exportMethod]="onExcelExport"></app-export-menu-button>
   <app-hide-show-button [columns]="gridColumns$ | async" entityType="it-interface"></app-hide-show-button>
-  <app-button
-    *ngIf="(hasCreatePermission$ | async) === true"
-    (buttonClick)="openCreateDialog()"
-    i18n
-    data-cy="create-button"
-    >Opret snitflade</app-button
-  >
 </app-overview-header>
 
 <app-grid

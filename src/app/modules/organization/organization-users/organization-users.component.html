@@ -1,21 +1,12 @@
 <app-overview-header>
   <h3 i18n>Brugere</h3>
-  <app-help-button helpTextKey="organization.user"></app-help-button>
-  <app-filter-options-button entityType="organization-user"></app-filter-options-button>
-  <app-reset-to-org-columns-config-button
-    [gridColumns$]="gridColumns$"
+  <app-grid-options-button
     entityType="organization-user"
-  ></app-reset-to-org-columns-config-button>
+    [hasResetButton]="true"
+    [createPermission$]="hasCreatePermission$"
+  ></app-grid-options-button>
   <app-export-menu-button [exportMethod]="onExcelExport"></app-export-menu-button>
   <app-hide-show-button [columns]="gridColumns$ | async" entityType="organization-user"></app-hide-show-button>
-
-  <app-button
-    *ngIf="(hasCreatePermission$ | async) === true"
-    i18n
-    data-cy="create-button"
-    (buttonClick)="openCreateDialog()"
-    ><app-plus-icon></app-plus-icon> Opret bruger</app-button
-  >
 </app-overview-header>
 
 <app-grid

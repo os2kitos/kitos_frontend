@@ -1,0 +1,7 @@
+<app-menu-button-item i18n [disabled]="!filterExists()" (itemClick)="onApplyFilter()">
+  <app-filter-icon></app-filter-icon> Anvend
+</app-menu-button-item>
+<app-menu-button-item i18n (itemClick)="onSaveFilter()"> <app-disk-icon></app-disk-icon> Gem </app-menu-button-item>
+<app-menu-button-item i18n [disabled]="!filterExists()" (itemClick)="onDeleteFilter()">
+  <app-trashcan-icon></app-trashcan-icon> Slet
+</app-menu-button-item>

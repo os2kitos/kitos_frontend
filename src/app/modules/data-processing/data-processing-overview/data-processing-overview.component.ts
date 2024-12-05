@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { CellClickEvent } from '@progress/kendo-angular-grid';
-import { combineLatestWith, first, Observable } from 'rxjs';
+import { combineLatestWith, first } from 'rxjs';
 import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
 import {
   CATALOG_SECTION_NAME,
@@ -27,10 +27,8 @@ import {
   selectDataProcessingGridLoading,
   selectDataProcessingGridState,
   selectDataProcessingHasCreateCollectionPermissions,
-  selectDataProcessingLastSeenGridConfig,
   selectDataProcessingRoleColumns,
 } from 'src/app/store/data-processing/selectors';
-import { selectGridConfigModificationPermission } from 'src/app/store/user-store/selectors';
 import * as GridFields from 'src/app/shared/constants/data-processing-grid-column-constants';
 import { UIConfigService } from 'src/app/shared/services/ui-config-services/ui-config.service';
 import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
@@ -48,11 +46,6 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
   public readonly gridColumns$ = this.store
     .select(selectDataProcessingGridColumns)
     .pipe(this.uiConfigService.filterGridColumnsByUIConfig(UIModuleConfigKey.DataProcessingRegistrations));
-
-  public readonly hasConfigModificationPermissions$: Observable<boolean | undefined> = this.store.select(
-    selectGridConfigModificationPermission
-  );
-  public readonly lastSeenGridConfig$ = this.store.select(selectDataProcessingLastSeenGridConfig);
 
   public readonly hasCreatePermission$ = this.store.select(selectDataProcessingHasCreateCollectionPermissions);
   private readonly activeOptions = [

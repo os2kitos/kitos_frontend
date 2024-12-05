@@ -92,6 +92,7 @@ describe('organization-users', () => {
   it('Can create user', () => {
     cy.intercept('api/v2/internal/organization/*/users/*', { body: null });
 
+    cy.getByDataCy('grid-options-button').click().click();
     cy.getByDataCy('create-button').click();
 
     cy.inputByCy('first-name').type('Test');
@@ -114,6 +115,7 @@ describe('organization-users', () => {
   it('Cannot create user if emails differ', () => {
     cy.intercept('api/v2/internal/organization/*/users/*', { body: null });
 
+    cy.getByDataCy('grid-options-button').click().click()
     cy.getByDataCy('create-button').click({scrollBehavior: 'center'});
 
     cy.inputByCy('email').type('test@email.com');

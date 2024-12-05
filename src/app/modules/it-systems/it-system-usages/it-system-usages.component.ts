@@ -35,7 +35,6 @@ import {
   selectGridState,
   selectIsLoading,
   selectITSystemUsageHasCreateCollectionPermission,
-  selectItSystemUsageLastSeenGridConfig,
   selectUsageGridColumns,
   selectUsageGridRoleColumns,
 } from 'src/app/store/it-system-usage/selectors';
@@ -44,7 +43,7 @@ import {
   selectITSystemUsageEnableGdpr,
   selectITSystemUsageEnableLifeCycleStatus,
 } from 'src/app/store/organization/ui-module-customization/selectors';
-import { selectGridConfigModificationPermission, selectOrganizationName } from 'src/app/store/user-store/selectors';
+import { selectOrganizationName } from 'src/app/store/user-store/selectors';
 
 @Component({
   templateUrl: 'it-system-usages.component.html',
@@ -62,9 +61,6 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
   public readonly hasCreatePermission$ = this.store.select(selectITSystemUsageHasCreateCollectionPermission);
 
   private readonly systemSectionName = USAGE_SECTION_NAME;
-
-  public readonly hasConfigModificationPermissions$ = this.store.select(selectGridConfigModificationPermission);
-  public readonly lastSeenGridConfig$ = this.store.select(selectItSystemUsageLastSeenGridConfig);
 
   public readonly defaultGridColumns: GridColumn[] = [
     {
