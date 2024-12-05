@@ -245,7 +245,8 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       persistId: 'associatedSystemUsages',
     },
     {
-      field: GridFields.SourceEntityUuid,
+      field: GridFields.ItSystemUsageUuidsAsCsv,
+      dataField: 'ItSystemUsageUuids',
       title: $localize`IT Systemer (UUID)`,
       section: CATALOG_SECTION_NAME,
       width: 320,

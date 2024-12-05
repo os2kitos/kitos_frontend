@@ -21,6 +21,8 @@ export interface ITContract {
   ProcurementInitiated: string;
   DataProcessingAgreements: { id: string; value: string }[];
   ItSystemUsages: { id: string; value: string }[];
+  ItSystemUsageUuids: { value: string }[];
+  ItSystemUsageUuidsAsCsv: string;
   SourceEntityUuid: string;
   NumberOfAssociatedSystemRelations: number;
   ActiveReferenceTitle: string;
@@ -51,7 +53,6 @@ export interface ITContract {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const adaptITContract = (value: any): ITContract | undefined => {
   if (!value.SourceEntityUuid) return;
-
   const procurementPlan =
     value.ProcurementPlanQuarter == null || value.ProcurementPlanYear == null
       ? ''
@@ -81,6 +82,8 @@ export const adaptITContract = (value: any): ITContract | undefined => {
         value: dpa.DataProcessingRegistrationName,
       })
     ),
+    ItSystemUsageUuids: value.ItSystemUsageUuids,
+    ItSystemUsageUuidsAsCsv: value.ItSystemUsagesSystemUuidCsv,
     ItSystemUsages: value.ItSystemUsages.map((usage: { ItSystemUsageUuid: string; ItSystemUsageName: string }) => ({
       id: usage.ItSystemUsageUuid,
       value: usage.ItSystemUsageName,

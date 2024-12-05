@@ -281,6 +281,18 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
               });
               break;
             }
+            case 'page-link-array':
+              {
+                const array = transformedItem[column.dataField as string];
+                const excelValue = array.map((item: { value: string }) => item.value).join(', ');
+                transformedItem[field] = excelValue;
+              }
+              break;
+            case 'usages': {
+              const usages = transformedItem[column.field as string];
+              transformedItem[field] = usages.length;
+            }
+            break;
             default:
               break;
           }
