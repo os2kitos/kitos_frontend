@@ -82,8 +82,6 @@ import { ExternalReferenceDialogComponent } from './external-references-manageme
 import { ExternalReferencesManagementComponent } from './external-references-management/external-references-management.component';
 import { FilterOptionsButtonComponent } from './filter-options-button/filter-options-button.component';
 import { FormGridComponent } from './form-grid/form-grid.component';
-import { UsageLinkComponent } from './grid-usage-link/grid-usage-link.component';
-import { GridUsagesDialogComponent } from './grid-usages-dialog/grid-usages-dialog.component';
 import { ChoiceTypeDropdownFilterComponent } from './grid/choice-type-dropdown-filter/choice-type-dropdown-filter.component';
 import { DateFilterComponent } from './grid/date-filter/date-filter.component';
 import { DropdownColumnDataFilterComponent } from './grid/dropdown-column-data-filter/dropdown-column-data-filter.component';
@@ -92,6 +90,7 @@ import { GridPaginatorComponent } from './grid/grid-paginator/grid-paginator.com
 import { GridComponent } from './grid/grid.component';
 import { HideShowButtonComponent } from './grid/hide-show-button/hide-show-button.component';
 import { HideShowDialogComponent } from './grid/hide-show-dialog/hide-show-dialog.component';
+import { UsageLinkComponent } from './grid/it-system-usage-column/grid-usage-link/grid-usage-link.component';
 import { NumericFilterComponent } from './grid/numeric-filter/numeric-filter.component';
 import { StringFilterComponent } from './grid/string-filter/string-filter.component';
 import { UnitDropdownFilterComponent } from './grid/unit-dropdown-filter/unit-dropdown-filter.component';
@@ -131,34 +130,40 @@ import '@progress/kendo-angular-intl/locales/da/all';
 import { AccordionHeaderComponent } from './accordion-header/accordion-header.component';
 import { BooleanCircleComponent } from './boolean-circle/boolean-circle.component';
 import { CheckboxButtonComponent } from './buttons/checkbox-button/checkbox-button.component';
+import { CreateHelpTextDialogComponent } from './dialogs/create-help-text-dialog/create-help-text-dialog.component';
+import { EditHelpTextDialogComponent } from './dialogs/edit-help-text-dialog/edit-help-text-dialog.component';
 import { MultiSelectDropdownComponent } from './dropdowns/multi-select-dropdown/multi-select-dropdown.component';
+import { OptionTypeDropdownComponent } from './dropdowns/option-type-dropdown/option-type-dropdown.component';
 import { FileInputComponent } from './file-input/file-input.component';
+import { GlobalOptionTypeDialogComponent } from './global-option-type-view/global-option-type-dialog/global-option-type-dialog.component';
+import { GlobalOptionTypeGridComponent } from './global-option-type-view/global-option-type-grid/global-option-type-grid.component';
+import { GlobalOptionTypeViewComponent } from './global-option-type-view/global-option-type-view.component';
+import { GridUsagesConsequencesDialogComponent } from './grid/it-system-usage-column/grid-usages-consequences-dialog/grid-usages-consequences-dialog.component';
+import { UsageMigrationConsequencesTableComponent } from './grid/it-system-usage-column/grid-usages-consequences-dialog/usage-migration-consequences-table/usage-migration-consequences-table.component';
+import { GridUsagesDialogComponent } from './grid/it-system-usage-column/grid-usages-dialog/grid-usages-dialog.component';
+import { GridUsagesDropdownDialogComponent } from './grid/it-system-usage-column/grid-usages-dropdown-dialog/grid-usages-dropdown-dialog.component';
+import { UsageProxyCheckboxComponent } from './grid/usage-proxy-checkbox/usage-proxy-checkbox.component';
 import { IconComponent } from './icon/icon.component';
 import { LocalAdminColumnConfigButtonComponent } from './local-admin-column-config-button/local-admin-column-config-button.component';
 import { LocalGridComponent } from './local-grid/local-grid.component';
+import { PriorityButtonsComponent } from './local-grid/priority-buttons/priority-buttons.component';
+import { ToggleButtonComponent } from './local-grid/toggle-button/toggle-button.component';
+import { EditLocalOptionTypeDialogComponent } from './local-option-type-view/edit-local-option-type-dialog/edit-local-option-type-dialog.component';
+import { LocalOptionGridComponent } from './local-option-type-view/local-option-grid/local-option-grid.component';
+import { LocalOptionTypeViewComponent } from './local-option-type-view/local-option-type-view.component';
 import { NavigationDrawerComponent } from './navigation-drawer/navigation-drawer.component';
 import { NumberCircleComponent } from './number-circle/number-circle.component';
-import { EditLocalOptionTypeDialogComponent } from './local-option-type-view/edit-local-option-type-dialog/edit-local-option-type-dialog.component';
-import { LocalOptionTypeViewComponent } from './local-option-type-view/local-option-type-view.component';
+import { OrganizationDropdownComponent } from './organization-dropdown/organization-dropdown.component';
 import { ResetToOrgColumnsConfigButtonComponent } from './reset-to-org-columns-config-button/reset-to-org-columns-config-button.component';
+import { RichTextEditorComponent } from './rich-text-editor/rich-text-editor.component';
 import { RoleRowComponent } from './role-table/role-row/role-row.component';
 import { RoleTableContainerComponent } from './role-table/role-table-container/role-table-container.component';
 import { SlideToggleComponent } from './slide-toggle/slide-toggle.component';
 import { SnackbarActionsComponent } from './snackbar-actions/snackbar-actions.component';
-import { VerticalContentGridSectionMarginLeftComponent } from './vertical-content-grid-section-margin-left/vertical-content-grid-section-margin-left.component';
-import { GlobalOptionTypeViewComponent } from './global-option-type-view/global-option-type-view.component';
-import { GlobalOptionTypeDialogComponent } from './global-option-type-view/global-option-type-dialog/global-option-type-dialog.component';
 import { UserDropdownComponent } from './user-dropdown/user-dropdown.component';
-import { OrganizationDropdownComponent } from './organization-dropdown/organization-dropdown.component';
-import { EditHelpTextDialogComponent } from './dialogs/edit-help-text-dialog/edit-help-text-dialog.component';
-import { CreateHelpTextDialogComponent } from './dialogs/create-help-text-dialog/create-help-text-dialog.component';
-import { OptionTypeDropdownComponent } from './dropdowns/option-type-dropdown/option-type-dropdown.component';
-import { RichTextEditorComponent } from './rich-text-editor/rich-text-editor.component';
-import { LocalOptionGridComponent } from './local-option-type-view/local-option-grid/local-option-grid.component';
-import { UsageProxyCheckboxComponent } from './usage-proxy-checkbox/usage-proxy-checkbox.component';
-import { GlobalOptionTypeGridComponent } from './global-option-type-view/global-option-type-grid/global-option-type-grid.component';
-import { PriorityButtonsComponent } from './local-grid/priority-buttons/priority-buttons.component';
-import { ToggleButtonComponent } from './local-grid/toggle-button/toggle-button.component';
+import { VerticalContentGridSectionMarginLeftComponent } from './vertical-content-grid-section-margin-left/vertical-content-grid-section-margin-left.component';
+import { UsageMigrationRelationConsequencesTableComponent } from './grid/it-system-usage-column/grid-usages-consequences-dialog/usage-migration-relation-consequences-table/usage-migration-relation-consequences-table.component';
+import { UsageMigrationSystemConsequencesTableComponent } from './grid/it-system-usage-column/grid-usages-consequences-dialog/usage-migration-system-consequences-table/usage-migration-system-consequences-table.component';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
@@ -292,6 +297,11 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     GlobalOptionTypeGridComponent,
     PriorityButtonsComponent,
     ToggleButtonComponent,
+    GridUsagesDropdownDialogComponent,
+    GridUsagesConsequencesDialogComponent,
+    UsageMigrationConsequencesTableComponent,
+    UsageMigrationRelationConsequencesTableComponent,
+    UsageMigrationSystemConsequencesTableComponent,
   ],
   imports: [
     CommonModule,
@@ -434,6 +444,9 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     UsageProxyCheckboxComponent,
     PriorityButtonsComponent,
     ToggleButtonComponent,
+    GridUsagesDropdownDialogComponent,
+    GridUsagesConsequencesDialogComponent,
+    UsageMigrationConsequencesTableComponent,
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },

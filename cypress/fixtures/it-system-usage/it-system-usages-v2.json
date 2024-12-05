@@ -1,0 +1,11 @@
+[
+  {
+      "uuid": "b1be1c90-668f-4369-a5a6-870df0b6bc5e",
+      "valid": true,
+      "systemContext": {
+          "deactivated": false,
+          "uuid": "8d843a6f-2424-43d6-90b8-916a72e615ce",
+          "name": "SecondOrganizationDefaultTestItSystem"
+      }
+  }
+]

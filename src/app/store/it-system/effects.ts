@@ -5,17 +5,21 @@ import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
 import { catchError, combineLatestWith, map, mergeMap, of, switchMap } from 'rxjs';
-import { APIItSystemResponseDTO, APIV2ItSystemService } from 'src/app/api/v2';
+import {
+  APIItSystemResponseDTO,
+  APIV2ItSystemService,
+  APIV2ItSystemUsageMigrationINTERNALService,
+} from 'src/app/api/v2';
 import { CATALOG_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-constants';
 import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { adaptITSystem } from 'src/app/shared/models/it-system/it-system.model';
 import { OData } from 'src/app/shared/models/odata.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ExternalReferencesApiService } from 'src/app/shared/services/external-references-api-service.service';
+import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { ITSystemActions } from './actions';
 import { selectItSystemExternalReferences, selectItSystemUuid } from './selectors';
-import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 
 @Injectable()
 export class ITSystemEffects {
@@ -25,7 +29,9 @@ export class ITSystemEffects {
     @Inject(APIV2ItSystemService) private apiItSystemService: APIV2ItSystemService,
     private httpClient: HttpClient,
     private externalReferenceApiService: ExternalReferencesApiService,
-    private gridColumnStorageService: GridColumnStorageService
+    private gridColumnStorageService: GridColumnStorageService,
+    @Inject(APIV2ItSystemUsageMigrationINTERNALService)
+    private readonly itSystemUsageMigrationService: APIV2ItSystemUsageMigrationINTERNALService
   ) {}
 
   getItSystem$ = createEffect(() => {
@@ -40,7 +46,7 @@ export class ITSystemEffects {
     );
   });
 
-  getitSystems$ = createEffect(() => {
+  getItSystems$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITSystemActions.getITSystems),
       combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
@@ -227,6 +233,23 @@ export class ITSystemEffects {
           catchError(() => of(ITSystemActions.createItSystemError()))
         );
       })
+    );
+  });
+
+  executeMigration$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemActions.executeUsageMigration),
+      switchMap(({ targetItSystemUuid, usageUuid }) =>
+        this.itSystemUsageMigrationService
+          .postSingleItSystemUsageMigrationV2ExecuteMigration({
+            toSystemUuid: targetItSystemUuid,
+            usageUuid,
+          })
+          .pipe(
+            map(() => ITSystemActions.executeUsageMigrationSuccess()),
+            catchError(() => of(ITSystemActions.executeUsageMigrationError()))
+          )
+      )
     );
   });
 }

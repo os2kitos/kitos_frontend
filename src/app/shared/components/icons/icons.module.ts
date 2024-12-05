@@ -3,6 +3,7 @@ import { AddProgramIconComponent } from './add-program-icon.component';
 import { ArchiveIconComponent } from './archive-icon.component';
 import { ArrowDownIconComponent } from './arrow-down-icon.component';
 import { ArrowLeftIconComponent } from './arrow-left-icon.component';
+import { ArrowRightIconComponent } from './arrow-right-icon.component';
 import { ArrowUpIconComponent } from './arrow-up-icon.component';
 import { BookmarkIconComponent } from './bookmark.component';
 import { BulkCreateIconComponent } from './bulk-create-icon.component';
@@ -18,6 +19,7 @@ import { CollapseIconComponent } from './collapse-icon.component';
 import { DocumentIconComponent } from './document-icon.component';
 import { DragIconComponent } from './drag-icon.component';
 import { EmptySearchIconComponent } from './empty-search-icon.component';
+import { EmptyUpdateIconComponent } from './empty-update-icon.component';
 import { ExpandCircleIconComponent } from './expand-circle-icon.component';
 import { ExpandIconComponent } from './expand-icon.component';
 import { ExportIconComponent } from './export-icon.component';
@@ -55,9 +57,8 @@ import { TakeIntoUseIconComponent } from './take-into-use-icon.component';
 import { TrashcanIconComponent } from './trashcan-icon.component';
 import { WarningIconComponent } from './warning-icon.component';
 import { WhiteCircleIconComponent } from './white-circle-icon.component';
-import { XIconComponent } from './x-icon.component';
 import { WhiteXIconComponent } from './white-x-icon.component';
-import { EmptyUpdateIconComponent } from './empty-update-icon.component';
+import { XIconComponent } from './x-icon.component';
 
 @NgModule({
   imports: [],
@@ -121,6 +122,7 @@ import { EmptyUpdateIconComponent } from './empty-update-icon.component';
     CheckIconComponent,
     WhiteXIconComponent,
     EmptyUpdateIconComponent,
+    ArrowRightIconComponent,
   ],
   declarations: [
     ChevronDownIconComponent,
@@ -182,6 +184,7 @@ import { EmptyUpdateIconComponent } from './empty-update-icon.component';
     CheckIconComponent,
     WhiteXIconComponent,
     EmptyUpdateIconComponent,
+    ArrowRightIconComponent,
   ],
   providers: [],
 })

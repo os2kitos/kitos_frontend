@@ -2,3 +2,8 @@ th {
   text-align: left;
   padding-left: 2.5%; //To better align the TH with TR's
 }
+
+.align-content-apart {
+  display: flex;
+  justify-content: space-between;
+}

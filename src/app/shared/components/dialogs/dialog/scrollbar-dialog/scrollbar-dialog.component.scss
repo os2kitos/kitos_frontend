@@ -1,7 +1,7 @@
-@import 'theme';
+@import "theme";
 
 .mat-dialog-content-padding {
-  padding: 0;
+  padding: 0 !important;
 }
 
 .dialog-actions-wrapper {

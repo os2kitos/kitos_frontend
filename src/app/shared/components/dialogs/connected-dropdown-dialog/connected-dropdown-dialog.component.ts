@@ -18,6 +18,10 @@ export class ConnectedDropdownDialogComponent<T> extends BaseComponent implement
   @Input() public isLoading$!: Observable<boolean>;
   @Input() public successActionType!: string;
   @Input() public errorActionType!: string;
+  @Input() public nested: boolean = false;
+  @Input() public confirmButtonText = $localize`Tilføj`
+  @Input() public enableRepeatConfirmWithSameData = false;
+  @Input() public description?: string;
   @Output() public save = new EventEmitter<APIIdentityNamePairResponseDTO>();
   @Output() public filterChange = new EventEmitter<string>();
 
@@ -49,7 +53,7 @@ export class ConnectedDropdownDialogComponent<T> extends BaseComponent implement
 
   public onSave() {
     if (this.dropdownFormGroup.valid) {
-      this.isBusy = true;
+      if (!this.enableRepeatConfirmWithSameData) this.isBusy = true;
       const value = this.dropdownFormGroup.value.dropdownControl;
       if (!value) {
         this.isBusy = false;

@@ -192,7 +192,7 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
   private showRemoveConfirmationDialog(): void {
     const confirmationDialogRef = this.dialog.open(ConfirmationDialogComponent);
     const confirmationDialogInstance = confirmationDialogRef.componentInstance as ConfirmationDialogComponent;
-    confirmationDialogInstance.bodyText = $localize`Er du sikker på du vil slette systemet?`;
+    confirmationDialogInstance.bodyText = $localize`Er du sikker på, at du vil slette systemet?`;
     confirmationDialogInstance.confirmColor = 'warn';
 
     this.subscriptions.add(

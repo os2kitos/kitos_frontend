@@ -15,7 +15,10 @@ import { BaseComponent } from './base.component';
 export class BaseOverviewComponent extends BaseComponent {
   protected unclickableColumnFields: string[] = [];
 
-  constructor(protected store: Store, @Inject('RegistrationEntityTypes') protected entityType: RegistrationEntityTypes) {
+  constructor(
+    protected store: Store,
+    @Inject('RegistrationEntityTypes') protected entityType: RegistrationEntityTypes
+  ) {
     super();
     this.store.dispatch(UserActions.getUserGridPermissions());
   }
@@ -47,6 +50,6 @@ export class BaseOverviewComponent extends BaseComponent {
   };
 
   private cellIsClickableStyleOrEmpty(event: CellClickEvent) {
-    return this.cellIsClickableStyle(event) || event.dataItem[event.column.field];
+    return this.cellIsClickableStyle(event) || !event.dataItem[event.column.field];
   }
 }

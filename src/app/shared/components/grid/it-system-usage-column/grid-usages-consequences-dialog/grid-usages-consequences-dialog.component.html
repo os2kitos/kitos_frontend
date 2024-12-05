@@ -1,0 +1,89 @@
+<app-scrollbar-dialog [title]="title" backgroundColor="grey">
+  <app-paragraph [bold]="true" paragraphSize="x-large" i18n
+    >Opsummering af konsekvenser ved flytning af anvendelse</app-paragraph
+  >
+
+  <app-standard-vertical-content-grid [id]="consequencesContentId">
+    <app-paragraph i18n>
+      For at sikre datakvaliteten i Kitos - og f.eks. komme redundante registreringer til livs - har global admin
+      mulighed for at flytte jeres anvendelse fra et IT-system til et andet. I forbindelse med, at global admin har
+      flyttet jeres system anvendelse fra et IT-system til et andet, kan det oplyses at:
+    </app-paragraph>
+
+    <ng-container *ngIf="(loading$ | async) !== true">
+      <ng-container *ngIf="migration$ | async as migration">
+        <!-- System consequences -->
+        <app-card>
+          <app-usage-migration-system-consequences-table
+            [migration]="migration"
+            [isCopingToClipboard]="isCopingToClipboard"
+          ></app-usage-migration-system-consequences-table>
+        </app-card>
+
+        <!-- Contract consequences -->
+        <app-card *ngIf="hasContractsConsequences() | async">
+          <app-usage-migration-consequences-table
+            title="Følgende registreringer i modulet 'Kontrakter' berøres:"
+            i18n-title
+            [consequences]="migration.affectedContracts ?? []"
+            [isCopingToClipboard]="isCopingToClipboard"
+          >
+          </app-usage-migration-consequences-table>
+        </app-card>
+
+        <!-- Existing usage relation consequences -->
+        <app-card *ngIf="hasRelationsConsequences() | async">
+          <app-usage-migration-relation-consequences-table
+            [migration]="migration"
+            [isCopingToClipboard]="isCopingToClipboard"
+          ></app-usage-migration-relation-consequences-table>
+        </app-card>
+
+        <!-- DPR consequences -->
+        <app-card *ngIf="hasDprConsequences() | async">
+          <app-usage-migration-consequences-table
+            title="Følgende registreringer i modulet 'Databehandling' berøres:"
+            i18n-title
+            [consequences]="migration.affectedDataProcessingRegistrations ?? []"
+            [isCopingToClipboard]="isCopingToClipboard"
+          >
+          </app-usage-migration-consequences-table>
+        </app-card>
+      </ng-container>
+    </ng-container>
+  </app-standard-vertical-content-grid>
+
+  <app-dialog-actions *ngIf="migration$ | async">
+    <app-checkbox
+      [(value)]="hasAcceptedConsequences"
+      labelPosition="after"
+      text="Jeg forstår og accepterer ovenstående konsekvenser"
+      i18n-text
+    >
+    </app-checkbox>
+  </app-dialog-actions>
+  <app-dialog-actions>
+    <app-button
+      *ngIf="migration$ | async"
+      (buttonClick)="copyConsequencesToClipboard()"
+      i18n
+      buttonStyle="secondary"
+      [disabled]="(loading$ | async) === true"
+    >
+      Kopier til klipholder</app-button
+    >
+    <app-button (buttonClick)="onCancel()" i18n buttonStyle="secondary" [disabled]="(loading$ | async) === true">
+      Annuller</app-button
+    >
+    <app-button
+      (buttonClick)="onConfirm()"
+      i18n
+      [disabled]="(isConfirmDisabled() | async) === true || (loading$ | async) === true"
+      color="warn"
+      data-cy="execute-migration-button"
+    >
+      Gennemfør flytning
+    </app-button>
+  </app-dialog-actions>
+  <app-loading *ngIf="(loading$ | async) === true"></app-loading>
+</app-scrollbar-dialog>

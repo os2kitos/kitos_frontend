@@ -1,0 +1,6 @@
+@import "mixins";
+
+:host {
+  @include overview-flex-column-layout;
+  padding: 0;
+}

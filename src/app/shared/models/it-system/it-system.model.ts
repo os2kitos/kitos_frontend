@@ -1,4 +1,5 @@
 import { AccessModifierChoice, mapAccessModifierEnumToAccessModifierChoice } from '../access-modifier.model';
+import { IdentityNamePair } from '../identity-name-pair.model';
 import {
   ArchiveDutyRecommendationChoice,
   mapArchiveDutyRecommendationChoice,
@@ -26,7 +27,7 @@ export interface ITSystem {
   CanChangeUsageStatus: boolean;
   BelongsTo: { Name: string };
   BusinessType: { Name: string };
-  Usages: string[];
+  Usages: IdentityNamePair[];
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -34,8 +35,8 @@ export const adaptITSystem = (value: any, currentOrganizationUuid: string): ITSy
   if (!value.Uuid) return;
   const isDisabled = value.Disabled;
 
-  const mappedUsages: string[] = value.Usages.map((usage: {Organization: {Name: string}}) => {
-    return usage.Organization.Name;
+  const mappedUsages: IdentityNamePair[] = value.Usages.map((usage: {Organization: {Name: string, Uuid: string}}) => {
+    return { name: usage.Organization.Name, uuid: usage.Organization.Uuid };
   });
 
   return {

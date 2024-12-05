@@ -115,6 +115,7 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
     {
       field: 'Usages',
       dataField: 'Name',
+      idField: 'Uuid',
       title: $localize`IT System: Anvendes af`,
       section: this.systemSectionName,
       style: 'usages',
@@ -208,6 +209,12 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
         .subscribe(([_, gridState]) => {
           this.stateChange(gridState);
         })
+    );
+
+    this.subscriptions.add(
+      this.actions$.pipe(ofType(ITSystemActions.executeUsageMigrationSuccess)).subscribe(() => {
+        location.reload();
+      })
     );
 
     this.updateUnclickableColumns(this.defaultGridColumns);

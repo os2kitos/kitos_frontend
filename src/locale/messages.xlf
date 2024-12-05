@@ -4741,6 +4741,93 @@
       <trans-unit id="584908652240507318" datatype="html">
         <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon /&gt;"/> Eksporter</source>
       </trans-unit>
+      <trans-unit id="1162347843657363489" datatype="html">
+        <source>Er du sikker på, at du vil slette systemet?</source>
+      </trans-unit>
+      <trans-unit id="1357587994193107934" datatype="html">
+        <source>Systemanvendelsen kunne ikke flyttes</source>
+      </trans-unit>
+      <trans-unit id="1493057481484834628" datatype="html">
+        <source>Snitflade der fjernes fra relationen</source>
+      </trans-unit>
+      <trans-unit id="1830101552093999120" datatype="html">
+        <source>Flytning af systemanvendelse</source>
+      </trans-unit>
+      <trans-unit id="2302937686366976379" datatype="html">
+        <source>Ingen kontrakt </source>
+      </trans-unit>
+      <trans-unit id="2777061395808179395" datatype="html">
+        <source> Annuller</source>
+      </trans-unit>
+      <trans-unit id="3160778630868662456" datatype="html">
+        <source>Uuid</source>
+      </trans-unit>
+      <trans-unit id="3343781787388417387" datatype="html">
+        <source>Anvendersystem</source>
+      </trans-unit>
+      <trans-unit id="3435289656656147253" datatype="html">
+        <source>Systemanvendelsen blev flyttet</source>
+      </trans-unit>
+      <trans-unit id="3461864776628861706" datatype="html">
+        <source> For at sikre datakvaliteten i Kitos - og f.eks. komme redundante registreringer til livs - har global admin mulighed for at flytte jeres anvendelse fra et IT-system til et andet. I forbindelse med, at global admin har flyttet jeres system anvendelse fra et IT-system til et andet, kan det oplyses at: </source>
+      </trans-unit>
+      <trans-unit id="4119129839407806781" datatype="html">
+        <source>Flyt</source>
+      </trans-unit>
+      <trans-unit id="431839302734597262" datatype="html">
+        <source>Følgende systemrelationer berøres:</source>
+      </trans-unit>
+      <trans-unit id="4608505263107769625" datatype="html">
+        <source>Flytning af IT systemanvendelse</source>
+      </trans-unit>
+      <trans-unit id="5534770235477902796" datatype="html">
+        <source><x id="PH" equiv-text="name"/> (Ikke tilgængeligt)</source>
+      </trans-unit>
+      <trans-unit id="5758088171398911727" datatype="html">
+        <source>Følgende registreringer i modulet &apos;Kontrakter&apos; berøres:</source>
+      </trans-unit>
+      <trans-unit id="5799543738662413355" datatype="html">
+        <source> Navn: <x id="INTERPOLATION" equiv-text="{{ formatSystemName(relation.fromSystem?.name, relation.fromSystem?.deactivated) }}"/> <x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Uuid: <x id="INTERPOLATION_1" equiv-text="{{ relation.fromSystem?.uuid }}"/> </source>
+      </trans-unit>
+      <trans-unit id="6434592926892670358" datatype="html">
+        <source>Følgende registreringer i modulet &apos;Databehandling&apos; berøres:</source>
+      </trans-unit>
+      <trans-unit id="6529158562135711359" datatype="html">
+        <source>Se konsekvenser</source>
+      </trans-unit>
+      <trans-unit id="6612636347127757155" datatype="html">
+        <source>Relationsbeskrivelse</source>
+      </trans-unit>
+      <trans-unit id="675329187201757494" datatype="html">
+        <source>Systemanvendelsen flyttes:</source>
+      </trans-unit>
+      <trans-unit id="6821211359242667019" datatype="html">
+        <source>Opsummering af konsekvenser ved flytning af anvendelse</source>
+      </trans-unit>
+      <trans-unit id="7427455824915144243" datatype="html">
+        <source>Til</source>
+      </trans-unit>
+      <trans-unit id="755423434074400156" datatype="html">
+        <source>Fra</source>
+      </trans-unit>
+      <trans-unit id="8049796118142183556" datatype="html">
+        <source> Gennemfør flytning </source>
+      </trans-unit>
+      <trans-unit id="8142942652373616531" datatype="html">
+        <source>Vælg IT system</source>
+      </trans-unit>
+      <trans-unit id="8861382415598843076" datatype="html">
+        <source>
+          <x id="START_TAG_APP_ARROW_RIGHT_ICON" ctype="x-app_arrow_right_icon" equiv-text="p-arrow-right-icon&gt;"/>
+          <x id="CLOSE_TAG_APP_ARROW_RIGHT_ICON" ctype="x-app_arrow_right_icon" equiv-text="&gt;"/>
+        </source>
+      </trans-unit>
+      <trans-unit id="1960552588321913023" datatype="html">
+        <source> Navn: <x id="INTERPOLATION" equiv-text="{{ formatSystemName(relation.fromSystem?.name, relation.fromSystem?.deactivated) }}"/> Uuid: <x id="INTERPOLATION_1" equiv-text="{{ relation.fromSystem?.uuid }}"/> </source>
+      </trans-unit>
+      <trans-unit id="4030902832094624639" datatype="html">
+        <source>Navn: <x id="INTERPOLATION" equiv-text="{{ relation.interface?.name }}"/> Uuid: <x id="INTERPOLATION_1" equiv-text="{{ relation.interface?.uuid }}"/></source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

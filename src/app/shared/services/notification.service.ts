@@ -6,6 +6,8 @@ import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import { GlobalAdminActions } from 'src/app/store/global-admin/actions';
 import { GlobalOptionTypeActions } from 'src/app/store/global-admin/global-option-types/actions';
 import { HelpTextActions } from 'src/app/store/global-admin/help-texts/actions';
+import { LocalAdminUserActions } from 'src/app/store/global-admin/local-admins/actions';
+import { GlobalAdminPublicMessageActions } from 'src/app/store/global-admin/public-messages/actions';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
@@ -22,8 +24,6 @@ import { PopupMessageActions } from 'src/app/store/popup-messages/actions';
 import { UserActions } from 'src/app/store/user-store/actions';
 import { PopupMessageType } from '../enums/popup-message-type';
 import { createPopupMessage } from '../models/popup-messages/popup-message.model';
-import { LocalAdminUserActions } from 'src/app/store/global-admin/local-admins/actions';
-import { GlobalAdminPublicMessageActions } from 'src/app/store/global-admin/public-messages/actions';
 
 @Injectable({ providedIn: 'root' })
 export class NotificationService implements OnDestroy {
@@ -328,6 +328,9 @@ export class NotificationService implements OnDestroy {
 
     this.subscribeAsDefault(ITInterfaceActions.addITInterfaceDataSuccess, $localize`Snitflade data blev oprettet`);
     this.subscribeAsError(ITInterfaceActions.addITInterfaceDataError, $localize`Snitflade data kunne ikke oprettes`);
+
+    this.subscribeAsDefault(ITSystemActions.executeUsageMigrationSuccess, $localize`Systemanvendelsen blev flyttet`);
+    this.subscribeAsError(ITSystemActions.executeUsageMigrationError, $localize`Systemanvendelsen kunne ikke flyttes`);
   }
 
   private subscribeToItContractEvents() {

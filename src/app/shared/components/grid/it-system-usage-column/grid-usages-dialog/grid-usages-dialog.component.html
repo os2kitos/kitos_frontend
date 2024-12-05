@@ -1,0 +1,25 @@
+<app-scrollbar-dialog [title]="data.title" [closable]="true" overflow="none" i18n-title>
+  <app-native-table>
+    <tbody>
+      <th i18n-title>Organisation</th>
+      <tr *ngFor="let usage of data.usingOrganizations">
+        <td>
+          <app-content-space-between>
+            <app-paragraph [bold]="true">
+              {{ usage.name }}
+            </app-paragraph>
+            <app-icon-button
+              i18n
+              i18n-tooltipText
+              (buttonClick)="clickMigrateUsage(usage)"
+              *ngIf="isItSystemDialog() && (canExecuteMigration$ | async)"
+              tooltipText="Flyt"
+              data-cy="migrate-button"
+              ><app-arrow-right-icon></app-arrow-right-icon
+            ></app-icon-button>
+          </app-content-space-between>
+        </td>
+      </tr>
+    </tbody>
+  </app-native-table>
+</app-scrollbar-dialog>

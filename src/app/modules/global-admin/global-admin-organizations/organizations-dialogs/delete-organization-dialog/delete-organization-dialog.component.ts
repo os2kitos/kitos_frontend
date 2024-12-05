@@ -10,6 +10,7 @@ import { NotificationService } from 'src/app/shared/services/notification.servic
 import { OrganizationActions } from 'src/app/store/organization/actions';
 import { DeleteOrganizationComponentStore } from './delete-organization.component-store';
 import { RemovalConflict, RemovalConflictType } from './removal-conflict-table/removal-conflict-table.component';
+import { ClipboardService } from 'src/app/shared/services/clipboard.service';
 
 @Component({
   selector: 'app-delete-organization-dialog',
@@ -50,7 +51,8 @@ export class DeleteOrganizationDialogComponent extends BaseComponent implements 
     private actions$: Actions,
     private store: Store,
     private cdr: ChangeDetectorRef,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private clipboardService: ClipboardService
   ) {
     super();
   }
@@ -102,7 +104,7 @@ export class DeleteOrganizationDialogComponent extends BaseComponent implements 
   public copyConflictsToClipboard(): void {
     this.isCopying = true;
     this.cdr.detectChanges();
-    this.copyPageContentToClipBoard(this.conflictContentId);
+    this.clipboardService.copyContentToClipBoardById(this.conflictContentId);
     this.isCopying = false;
     this.notificationService.showDefault($localize`Konsekvenserne er kopieret til udklipsholderen`);
   }
@@ -121,13 +123,5 @@ export class DeleteOrganizationDialogComponent extends BaseComponent implements 
 
   public getSpecificConflicts(type: RemovalConflictType): Observable<RemovalConflict[]> {
     return this.componentStore.getSpecificConflicts(type);
-  }
-
-  private copyPageContentToClipBoard(contentRootId: string) {
-    const currentWindow = window.getSelection();
-    if (!currentWindow) return;
-    window.getSelection()?.selectAllChildren(document.getElementById(contentRootId) as Node);
-    document.execCommand('copy');
-    window.getSelection()?.removeAllRanges();
   }
 }

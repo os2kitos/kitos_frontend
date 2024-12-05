@@ -80,8 +80,17 @@ export const ITSystemUsageActions = createActionGroup({
     'Add It System Usage Role Success': (itSystemUsage: APIItSystemUsageResponseDTO) => ({ itSystemUsage }),
     'Add It System Usage Role Error': emptyProps(),
 
-    'Remove It System Usage Role': (userUuid: string, roleUuid: string, itSystemUsageUuid: string) => ({ userUuid, roleUuid, itSystemUsageUuid }),
-    'Remove It System Usage Role Success': (itSystemUsage: APIItSystemUsageResponseDTO, userUuid: string, roleUuid: string, itSystemUsageUuid: string) => ({ itSystemUsage, userUuid, roleUuid, itSystemUsageUuid }),
+    'Remove It System Usage Role': (userUuid: string, roleUuid: string, itSystemUsageUuid: string) => ({
+      userUuid,
+      roleUuid,
+      itSystemUsageUuid,
+    }),
+    'Remove It System Usage Role Success': (
+      itSystemUsage: APIItSystemUsageResponseDTO,
+      userUuid: string,
+      roleUuid: string,
+      itSystemUsageUuid: string
+    ) => ({ itSystemUsage, userUuid, roleUuid, itSystemUsageUuid }),
     'Remove It System Usage Role Error': emptyProps(),
     'Add Local KLE': (kleUuid: string) => ({
       kleUuid,
@@ -153,7 +162,9 @@ export const ITSystemUsageActions = createActionGroup({
     'Save IT System Usage Filter': (localStoreKey: string) => ({ localStoreKey }),
     'Apply IT System Usage Filter': (state: SavedFilterState) => ({ state }),
 
-    'Save Organizational IT System Usage Column Configuration': (columnConfig: APIColumnConfigurationRequestDTO[]) => ({columnConfig}),
+    'Save Organizational IT System Usage Column Configuration': (columnConfig: APIColumnConfigurationRequestDTO[]) => ({
+      columnConfig,
+    }),
     'Save Organizational IT System Usage Column Configuration Success': () => emptyProps(),
     'Save Organizational IT System Usage Column Configuration Error': () => emptyProps(),
 
@@ -162,11 +173,15 @@ export const ITSystemUsageActions = createActionGroup({
     'Delete Organizational IT System Usage Column Configuration Error': () => emptyProps(),
 
     'Reset To Organization IT System Usage Column Configuration': () => emptyProps(),
-    'Reset To Organization IT System Usage Column Configuration Success': (response: APIOrganizationGridConfigurationResponseDTO) => ({response}),
+    'Reset To Organization IT System Usage Column Configuration Success': (
+      response: APIOrganizationGridConfigurationResponseDTO
+    ) => ({ response }),
     'Reset To Organization IT System Usage Column Configuration Error': () => emptyProps(),
 
     'Initialize IT System Usage Last Seen Grid Configuration': () => emptyProps(),
-    'Initialize IT System Usage Last Seen Grid Configuration Success': (response: APIOrganizationGridConfigurationResponseDTO) => ({response}),
+    'Initialize IT System Usage Last Seen Grid Configuration Success': (
+      response: APIOrganizationGridConfigurationResponseDTO
+    ) => ({ response }),
     'Initialize IT System Usage Last Seen Grid Configuration Error': () => emptyProps(),
   },
 });
