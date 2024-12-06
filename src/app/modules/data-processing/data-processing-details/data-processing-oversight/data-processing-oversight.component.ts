@@ -12,6 +12,7 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { DropdownDialogComponent } from 'src/app/shared/components/dialogs/dropdown-dialog/dropdown-dialog.component';
 import { optionalNewDate } from 'src/app/shared/helpers/date.helpers';
+import { combineBooleansWithOr } from 'src/app/shared/helpers/observable-helpers';
 import {
   OversightInterval,
   mapToOversightInterval,
@@ -28,7 +29,12 @@ import {
   selectDataProcessingHasModifyPermissions,
   selectDataProcessingOversightOptions,
 } from 'src/app/store/data-processing/selectors';
-import { selectDprEnableScheduledInspectionDate } from 'src/app/store/organization/ui-module-customization/selectors';
+import {
+  selectDprEnabledOversightInterval,
+  selectDprEnableOversightOptions,
+  selectDprEnableOversights,
+  selectDprEnableScheduledInspectionDate,
+} from 'src/app/store/organization/ui-module-customization/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 
@@ -73,7 +79,16 @@ export class DataProcessingOversightComponent extends BaseComponent implements O
     { updateOn: 'blur' }
   );
 
+  public readonly oversightIntervalEnabled$ = this.store.select(selectDprEnabledOversightInterval);
   public readonly nextOversightEnabled$ = this.store.select(selectDprEnableScheduledInspectionDate);
+  public readonly oversightOptionsEnabled$ = this.store.select(selectDprEnableOversightOptions);
+  public readonly oversightsEnabled$ = this.store.select(selectDprEnableOversights);
+
+  public readonly intervalCardEnabled$ = combineBooleansWithOr([
+    this.oversightIntervalEnabled$,
+    this.nextOversightEnabled$,
+    this.oversightOptionsEnabled$,
+  ]);
 
   constructor(private store: Store, private notificationService: NotificationService, private dialog: MatDialog) {
     super();

@@ -14,28 +14,31 @@
       formName="name"
       (valueChange)="patchName($event)"
     ></app-textbox>
-    <app-dropdown
-      text="Dataansvarlig"
-      i18n-text
-      class="input-two-thirds-column-width"
-      data-cy="dpr-data-responsible"
-      valueField="uuid"
-      [formGroup]="frontpageFormGroup"
-      formName="dataResponsible"
-      [data]="dataResponsibleTypes$ | async"
-      (valueChange)="patchFrontPage({ general: { dataResponsibleUuid: $event } })"
-    >
-    </app-dropdown>
-    <app-textarea
-      text="Dataansvarlig bemærkning"
-      class="field-all-grid-length"
-      i18n-text
-      data-cy="dpr-notes"
-      [formGroup]="frontpageFormGroup"
-      formName="dataResponsibleRemarks"
-      (valueChange)="patchFrontPage({ general: { dataResponsibleRemark: $event } })"
-    ></app-textarea>
+    <ng-container *ngIf="dataResponsibleEnabled$ | async">
+      <app-dropdown
+        text="Dataansvarlig"
+        i18n-text
+        class="input-two-thirds-column-width"
+        data-cy="dpr-data-responsible"
+        valueField="uuid"
+        [formGroup]="frontpageFormGroup"
+        formName="dataResponsible"
+        [data]="dataResponsibleTypes$ | async"
+        (valueChange)="patchFrontPage({ general: { dataResponsibleUuid: $event } })"
+      >
+      </app-dropdown>
+      <app-textarea
+        text="Dataansvarlig bemærkning"
+        class="field-all-grid-length"
+        i18n-text
+        data-cy="dpr-notes"
+        [formGroup]="frontpageFormGroup"
+        formName="dataResponsibleRemarks"
+        (valueChange)="patchFrontPage({ general: { dataResponsibleRemark: $event } })"
+      ></app-textarea>
+    </ng-container>
     <app-textbox
+      *ngIf="statusEnabled$ | async"
       text="Status"
       i18n-text
       data-cy="dpr-status"
@@ -43,6 +46,7 @@
       formName="status"
     ></app-textbox>
     <app-textbox
+      *ngIf="lastChangedByEnabled$ | async"
       text="Sidst redigeret: Bruger"
       i18n-text
       data-cy="dpr-last-changed-by"
@@ -51,6 +55,7 @@
     >
     </app-textbox>
     <app-textbox
+      *ngIf="lastChangedAtEnabled$ | async"
       text="Sidst redigeret: Dato"
       i18n-text
       data-cy="dpr-last-changed-at"
@@ -58,37 +63,39 @@
       formName="lastChangedAt"
     >
     </app-textbox>
-    <app-dropdown
-      text="Databehandleraftale er indgået"
-      i18n-text
-      data-cy="dpr-agreement-concluded"
-      [formGroup]="frontpageFormGroup"
-      formName="agreementConcluded"
-      [data]="yesNoIrrelevantOptions"
-      (valueChange)="patchAgreementConcluded($event)"
-    ></app-dropdown>
-    <app-datepicker
-      text="Dato for indgåelse af databehandleraftale"
-      i18n-text
-      class="input-two-thirds-column-width"
-      data-cy="dpr-agreement-concluded-date"
-      [formGroup]="frontpageFormGroup"
-      formName="agreementConclusionDate"
-      (valueChange)="patchFrontPage({ general: { agreementConcludedAt: $event?.toDateString() } })"
-    ></app-datepicker>
-    <app-textarea
-      text="Databehandleraftale bemærkning"
-      class="field-all-grid-length"
-      i18n-text
-      data-cy="dpr-agreement-concluded-notes"
-      [formGroup]="frontpageFormGroup"
-      formName="agreementRemarks"
-      (valueChange)="patchFrontPage({ general: { isAgreementConcludedRemark: $event } })"
-    ></app-textarea>
+    <ng-container *ngIf="agreementConcludedEnabled$ | async">
+      <app-dropdown
+        text="Databehandleraftale er indgået"
+        i18n-text
+        data-cy="dpr-agreement-concluded"
+        [formGroup]="frontpageFormGroup"
+        formName="agreementConcluded"
+        [data]="yesNoIrrelevantOptions"
+        (valueChange)="patchAgreementConcluded($event)"
+      ></app-dropdown>
+      <app-datepicker
+        text="Dato for indgåelse af databehandleraftale"
+        i18n-text
+        class="input-two-thirds-column-width"
+        data-cy="dpr-agreement-concluded-date"
+        [formGroup]="frontpageFormGroup"
+        formName="agreementConclusionDate"
+        (valueChange)="patchFrontPage({ general: { agreementConcludedAt: $event?.toDateString() } })"
+      ></app-datepicker>
+      <app-textarea
+        text="Databehandleraftale bemærkning"
+        class="field-all-grid-length"
+        i18n-text
+        data-cy="dpr-agreement-concluded-notes"
+        [formGroup]="frontpageFormGroup"
+        formName="agreementRemarks"
+        (valueChange)="patchFrontPage({ general: { isAgreementConcludedRemark: $event } })"
+      ></app-textarea>
+    </ng-container>
   </app-form-grid>
 </app-card>
 
-<app-card>
+<app-card *ngIf="transferBasisEnabled$ | async">
   <app-card-header
     title="Overførselsgrundlag"
     i18n-title
@@ -114,7 +121,7 @@
   </app-standard-vertical-content-grid>
 </app-card>
 
-<app-card>
+<app-card *ngIf="processorsEnabled$ | async">
   <app-card-header
     title="Databehandlere"
     i18n-title
@@ -124,7 +131,7 @@
   <app-processors-table></app-processors-table>
 </app-card>
 
-<app-card>
+<app-card *ngIf="subProcessorsEnabled$ | async">
   <app-card-header
     title="Underdatabehandlere"
     i18n-title

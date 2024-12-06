@@ -11,30 +11,69 @@ export const DataProcessingUiBluePrint = {
       text: $localize`Forside`,
       isObligatory: true,
       helpText: uiConfigHelpTexts.cannotChangeTab,
+      children: {
+        name: {
+          text: $localize`Navn`,
+          isObligatory: true,
+        },
+        dataResponsible: {
+          text: $localize`Dataansvarlig`,
+        },
+        status: {
+          text: $localize`Status`,
+        },
+        lastChangedBy: {
+          text: $localize`Sidst redigeret af bruger`,
+        },
+        lastChangedAt: {
+          text: $localize`Sidst redigeret dato`,
+        },
+        agreementConcluded: {
+          text: $localize`Databehandler afftale indgået`,
+        },
+        transferBasis: {
+          text: $localize`Overførselsgrundlag`,
+        },
+        processors: {
+          text: $localize`Databehandlere`,
+        },
+        subProcessors: {
+          text: $localize`Underdatabehandlere`,
+        },
+      },
     },
     itSystems: {
       text: $localize`IT Systemer`,
       helpText: uiConfigHelpTexts.cannotChangeTabOnlyThroughModuleConfig,
-      isObligatory: true,
     },
     itContracts: {
       text: $localize`IT Kontrakter`,
       helpText: uiConfigHelpTexts.cannotChangeTabOnlyThroughModuleConfig,
-      isObligatory: true,
       children: {
         mainContract: {
           text: $localize`Hvilken kontrakt skal angive om databehandlingen er aktiv`,
+        },
+        associatedContracts: {
+          text: $localize`Tilknyttede kontrakter`,
         },
       },
     },
     oversight: {
       text: $localize`Tilsyn`,
       helpText: uiConfigHelpTexts.cannotChangeTabOnlyThroughModuleConfig,
-      isObligatory: true,
       children: {
+        oversightInterval: {
+          text: $localize`Tilsynsinterval`,
+        },
         scheduledInspectionDate: {
           text: $localize`Kommende planlagt tilsyn`,
         },
+        oversightOptions: {
+          text: $localize`Tilsynsmuligheder`,
+        },
+        oversights: {
+          text: $localize`Gennemførte og kommende tilsyn`,
+        }
       },
     },
     roles: {

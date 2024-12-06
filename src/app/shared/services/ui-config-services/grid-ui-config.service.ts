@@ -11,10 +11,23 @@ import {
   selectShowItSystemModule,
 } from 'src/app/store/organization/selectors';
 import {
+  selectDprEnableAgreementConcluded,
+  selectDprEnableAssociatedContracts,
+  selectDprEnableDataResponsible,
+  selectDprEnabledOversightInterval,
+  selectDprEnableItSystems,
+  selectDprEnableLastChangedAt,
+  selectDprEnableLastChangedBy,
   selectDprEnableMainContract,
+  selectDprEnableOversightOptions,
+  selectDprEnableOversights,
+  selectDprEnableProcessors,
   selectDprEnableReferences,
   selectDprEnableRoles,
   selectDprEnableScheduledInspectionDate,
+  selectDprEnableStatus,
+  selectDprEnableSubProcessors,
+  selectDprEnableTransferBasis,
   selectItContractEnableContractId,
   selectItContractEnableContractRoles,
   selectItContractsEnableAgreementDeadlines,
@@ -342,55 +355,156 @@ export class GridUIConfigService {
   }
 
   private getDataProcessingGridConfig(): Observable<UIConfigGridApplication[]> {
-    const mainContract$ = this.store.select(selectDprEnableMainContract);
+    const itSystemsEnabled$ = this.store.select(selectDprEnableItSystems);
     const dprRolesEnabled$ = this.store.select(selectDprEnableRoles);
+
+    const dataResponsibleEnabled$ = this.store.select(selectDprEnableDataResponsible);
+    const statusEnabled$ = this.store.select(selectDprEnableStatus);
+    const lastChangedByEnabled$ = this.store.select(selectDprEnableLastChangedBy);
+    const lastChangedAtEnabled$ = this.store.select(selectDprEnableLastChangedAt);
+    const agreementConcludedEnabled$ = this.store.select(selectDprEnableAgreementConcluded);
+    const transferBasisEnabled$ = this.store.select(selectDprEnableTransferBasis);
+    const processorsEnabled$ = this.store.select(selectDprEnableProcessors);
+    const subProcessorsEnabled$ = this.store.select(selectDprEnableSubProcessors);
+
+    const mainContract$ = this.store.select(selectDprEnableMainContract);
+    const associatedContractsEnabled$ = this.store.select(selectDprEnableAssociatedContracts);
+
+    const oversightIntervalEnabled$ = this.store.select(selectDprEnabledOversightInterval);
+    const nextOversightEnabled$ = this.store.select(selectDprEnableScheduledInspectionDate);
+    const oversightOptionsEnabled$ = this.store.select(selectDprEnableOversightOptions);
+    const oversightsEnabled$ = this.store.select(selectDprEnableOversights);
+
     const referenceEnabled$ = this.store.select(selectDprEnableReferences);
-    const scheduledInspectionDateEnabled$ = this.store.select(selectDprEnableScheduledInspectionDate);
     const itSystemModuleEnabled$ = this.store.select(selectShowItSystemModule);
     const itContractsModuleEnabled$ = this.store.select(selectShowItContractModule);
 
     return combineLatest([
-      mainContract$,
+      itSystemsEnabled$,
       dprRolesEnabled$,
+
+      dataResponsibleEnabled$,
+      statusEnabled$,
+      lastChangedByEnabled$,
+      lastChangedAtEnabled$,
+      agreementConcludedEnabled$,
+      transferBasisEnabled$,
+      processorsEnabled$,
+      subProcessorsEnabled$,
+
+      mainContract$,
+      associatedContractsEnabled$,
+
+      oversightIntervalEnabled$,
+      nextOversightEnabled$,
+      oversightOptionsEnabled$,
+      oversightsEnabled$,
+
       referenceEnabled$,
-      scheduledInspectionDateEnabled$,
       itSystemModuleEnabled$,
       itContractsModuleEnabled$,
     ]).pipe(
       map(
         ([
-          mainContractEnabled,
+          itSystemsEnabled,
           dprRolesEnabled,
-          referenceEnabled,
+
+          dataResponsibleEnabled,
+          statusEnabled,
+          lastChangedByEnabled,
+          lastChangedAtEnabled,
+          agreementConcludedEnabled,
+          transferBasisEnabled,
+          processorsEnabled,
+          subProcessorsEnabled,
+
+          mainContractEnabled,
+          associatedContractsEnabled,
+
+          oversightIntervalEnabled,
           scheduledInspectionDate,
+          oversightOptionsEnabled,
+          oversightsEnabled,
+
+          referenceEnabled,
           itSystemModuleEnabled,
           itContractsModuleEnabled,
         ]): UIConfigGridApplication[] => {
           return [
+            //Frontpage
             {
-              shouldEnable: itSystemModuleEnabled,
+              shouldEnable: dataResponsibleEnabled,
+              columnNamesToConfigure: [DprFields.DataResponsibleUuid],
+            },
+            {
+              shouldEnable: statusEnabled,
+              columnNamesToConfigure: [DprFields.IsActive],
+            },
+            {
+              shouldEnable: lastChangedByEnabled,
+              columnNamesToConfigure: [DprFields.LastChangedById, DprFields.LastChangedByName],
+            },
+            {
+              shouldEnable: lastChangedAtEnabled,
+              columnNamesToConfigure: [DprFields.LastChangedAt],
+            },
+            {
+              shouldEnable: agreementConcludedEnabled,
+              columnNamesToConfigure: [DprFields.IsAgreementConcluded, DprFields.AgreementConcludedAt],
+            },
+            {
+              shouldEnable: transferBasisEnabled,
+              columnNamesToConfigure: [DprFields.BasisForTransferUuid, DprFields.TransferToInsecureThirdCountries],
+            },
+            {
+              shouldEnable: processorsEnabled,
+              columnNamesToConfigure: [DprFields.DataProcessorNamesAsCsv],
+            },
+            {
+              shouldEnable: subProcessorsEnabled,
+              columnNamesToConfigure: [DprFields.SubDataProcessorNamesAsCsv],
+            },
+            // IT Systems
+            {
+              shouldEnable: itSystemModuleEnabled && itSystemsEnabled,
               columnNamesToConfigure: [DprFields.SystemNamesAsCsv, DprFields.SystemUuidsAsCsv],
             },
-            {
-              shouldEnable: itContractsModuleEnabled,
-              columnNamesToConfigure: [DprFields.ContractNamesAsCsv, DprFields.ActiveAccordingToMainContract],
-            },
+            //Contracts
             {
               shouldEnable: mainContractEnabled,
               columnNamesToConfigure: [DprFields.ActiveAccordingToMainContract],
             },
             {
-              shouldEnable: dprRolesEnabled,
-              columnNamesToConfigure: [],
-              columnNameSubstringsToConfigure: ['Roles.Role'],
+              shouldEnable: itContractsModuleEnabled && associatedContractsEnabled,
+              columnNamesToConfigure: [DprFields.ContractNamesAsCsv],
             },
+            //Oversight
             {
-              shouldEnable: referenceEnabled,
-              columnNamesToConfigure: [DprFields.MainReferenceTitle, DprFields.MainReferenceUserAssignedId],
+              shouldEnable: oversightIntervalEnabled,
+              columnNamesToConfigure: [DprFields.OversightInterval],
             },
             {
               shouldEnable: scheduledInspectionDate,
               columnNamesToConfigure: [DprFields.OversightScheduledInspectionDate],
+            },
+            {
+              shouldEnable: oversightOptionsEnabled,
+              columnNamesToConfigure: [DprFields.OversightOptionNamesAsCsv],
+            },
+            {
+              shouldEnable: oversightsEnabled,
+              columnNamesToConfigure: [DprFields.IsOversightCompleted, DprFields.LatestOversightDate],
+            },
+            //Roles
+            {
+              shouldEnable: dprRolesEnabled,
+              columnNamesToConfigure: [],
+              columnNameSubstringsToConfigure: ['Roles.Role'],
+            },
+            //References
+            {
+              shouldEnable: referenceEnabled,
+              columnNamesToConfigure: [DprFields.MainReferenceTitle, DprFields.MainReferenceUserAssignedId],
             },
           ];
         }

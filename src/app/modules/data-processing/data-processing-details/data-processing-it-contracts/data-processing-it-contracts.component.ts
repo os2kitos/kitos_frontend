@@ -13,7 +13,7 @@ import {
   selectDataProcessingIsValid,
   selectDataProcessingMainContract,
 } from 'src/app/store/data-processing/selectors';
-import { selectDprEnableMainContract } from 'src/app/store/organization/ui-module-customization/selectors';
+import { selectDprEnableAssociatedContracts, selectDprEnableMainContract } from 'src/app/store/organization/ui-module-customization/selectors';
 
 @Component({
   selector: 'app-data-processing-it-contracts',
@@ -33,6 +33,7 @@ export class DataProcessingItContractsComponent extends BaseComponent implements
   });
 
   public readonly mainContractEnabled$ = this.store.select(selectDprEnableMainContract);
+  public readonly associatedContractsEnabled$ = this.store.select(selectDprEnableAssociatedContracts);
 
   constructor(private store: Store) {
     super();

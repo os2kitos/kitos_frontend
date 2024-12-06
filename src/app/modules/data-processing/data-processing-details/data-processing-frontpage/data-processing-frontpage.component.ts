@@ -20,6 +20,16 @@ import {
   selectDataProcessing,
   selectDataProcessingHasModifyPermissions,
 } from 'src/app/store/data-processing/selectors';
+import {
+  selectDprEnableAgreementConcluded,
+  selectDprEnableDataResponsible,
+  selectDprEnableLastChangedAt,
+  selectDprEnableLastChangedBy,
+  selectDprEnableProcessors,
+  selectDprEnableStatus,
+  selectDprEnableSubProcessors,
+  selectDprEnableTransferBasis,
+} from 'src/app/store/organization/ui-module-customization/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 
@@ -60,6 +70,15 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
   public readonly transferBasisFormGroup = new FormGroup({
     transferBasis: new FormControl<APIIdentityNamePairResponseDTO | undefined>({ value: undefined, disabled: true }),
   });
+
+  public readonly dataResponsibleEnabled$ = this.store.select(selectDprEnableDataResponsible);
+  public readonly statusEnabled$ = this.store.select(selectDprEnableStatus);
+  public readonly lastChangedByEnabled$ = this.store.select(selectDprEnableLastChangedBy);
+  public readonly lastChangedAtEnabled$ = this.store.select(selectDprEnableLastChangedAt);
+  public readonly agreementConcludedEnabled$ = this.store.select(selectDprEnableAgreementConcluded);
+  public readonly transferBasisEnabled$ = this.store.select(selectDprEnableTransferBasis);
+  public readonly processorsEnabled$ = this.store.select(selectDprEnableProcessors);
+  public readonly subProcessorsEnabled$ = this.store.select(selectDprEnableSubProcessors);
 
   constructor(private store: Store, private notificationService: NotificationService) {
     super();

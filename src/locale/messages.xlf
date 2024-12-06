@@ -4837,6 +4837,15 @@
       <trans-unit id="4030902832094624639" datatype="html">
         <source>Navn: <x id="INTERPOLATION" equiv-text="{{ relation.interface.name }}"/> Uuid: <x id="INTERPOLATION_1" equiv-text="{{ relation.interface.uuid }}"/></source>
       </trans-unit>
+      <trans-unit id="3604722267089766233" datatype="html">
+        <source>Databehandler afftale indgået</source>
+      </trans-unit>
+      <trans-unit id="4106659631682454209" datatype="html">
+        <source>Sidst redigeret dato</source>
+      </trans-unit>
+      <trans-unit id="5463227515602023886" datatype="html">
+        <source>Sidst redigeret af bruger</source>
+      </trans-unit>
       <trans-unit id="4743129658174909579" datatype="html">
         <source>Søg efter enhed</source>
       </trans-unit>

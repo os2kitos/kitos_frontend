@@ -14,8 +14,7 @@ export const selectHasValidUIModuleConfigCache: (module: UIModuleConfigKey) => M
     createSelector(
       selectUIModuleCustomizationState,
       () => new Date(),
-      (state, now) =>
-        hasValidCache(state.uiModuleConfigs.find((config) => config.module === module)?.cacheTime, now)
+      (state, now) => hasValidCache(state.uiModuleConfigs.find((config) => config.module === module)?.cacheTime, now)
     )
 );
 
@@ -54,17 +53,33 @@ export const selectDprEnableOversight = createDprTabEnabledSelector('oversight')
 export const selectDprEnableRoles = createDprTabEnabledSelector('roles');
 export const selectDprEnableNotifications = createDprTabEnabledSelector('notifications');
 export const selectDprEnableReferences = createDprTabEnabledSelector('references');
-//Field selectors
-export const selectDprEnableMainContract = createFieldOrGroupEnabledSelector(
-  UIModuleConfigKey.DataProcessingRegistrations,
-  'itContracts',
-  'mainContract'
-);
-export const selectDprEnableScheduledInspectionDate = createFieldOrGroupEnabledSelector(
-  UIModuleConfigKey.DataProcessingRegistrations,
-  'oversight',
-  'scheduledInspectionDate'
-);
+
+//DPR > frontpage field selectors
+const createDprFrontPageFieldSelector = (fieldKey: string) =>
+  createFieldOrGroupEnabledSelector(UIModuleConfigKey.DataProcessingRegistrations, 'frontPage', fieldKey);
+export const selectDprEnableName = createDprFrontPageFieldSelector('name');
+export const selectDprEnableDataResponsible = createDprFrontPageFieldSelector('dataResponsible');
+export const selectDprEnableStatus = createDprFrontPageFieldSelector('status');
+export const selectDprEnableLastChangedBy = createDprFrontPageFieldSelector('lastChangedBy');
+export const selectDprEnableLastChangedAt = createDprFrontPageFieldSelector('lastChangedAt');
+export const selectDprEnableAgreementConcluded = createDprFrontPageFieldSelector('agreementConcluded');
+export const selectDprEnableTransferBasis = createDprFrontPageFieldSelector('transferBasis');
+export const selectDprEnableProcessors = createDprFrontPageFieldSelector('processors');
+export const selectDprEnableSubProcessors = createDprFrontPageFieldSelector('subProcessors');
+
+//DPR -> IT Contract field selectors
+const createDprItContractsFieldSelector = (fieldKey: string) =>
+  createFieldOrGroupEnabledSelector(UIModuleConfigKey.DataProcessingRegistrations, 'itContracts', fieldKey);
+export const selectDprEnableMainContract = createDprItContractsFieldSelector('mainContract');
+export const selectDprEnableAssociatedContracts = createDprItContractsFieldSelector('associatedContracts');
+
+//DPR -> Oversight field selectors
+const createDprOversightFieldSelector = (fieldKey: string) =>
+  createFieldOrGroupEnabledSelector(UIModuleConfigKey.DataProcessingRegistrations, 'oversight', fieldKey);
+export const selectDprEnabledOversightInterval = createDprOversightFieldSelector('oversightInterval');
+export const selectDprEnableScheduledInspectionDate = createDprOversightFieldSelector('scheduledInspectionDate');
+export const selectDprEnableOversightOptions = createDprOversightFieldSelector('oversightOptions');
+export const selectDprEnableOversights = createDprOversightFieldSelector('oversights');
 
 //IT system usage
 const createItSystemUsageTabEnabledSelector = (tabKey: string) =>

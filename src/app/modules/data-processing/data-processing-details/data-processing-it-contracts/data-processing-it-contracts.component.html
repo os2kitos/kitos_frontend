@@ -24,7 +24,7 @@
   >
 </app-card>
 
-<app-card>
+<app-card *ngIf="associatedContractsEnabled$ | async">
   <app-card-header
     title="Tilknyttede kontrakter"
     i18n-title
