@@ -1,4 +1,5 @@
 import { AccessModifierChoice, mapAccessModifierEnumToAccessModifierChoice } from '../access-modifier.model';
+import { IdentityNamePair } from '../identity-name-pair.model';
 
 export interface ITInterface {
   id: string;
@@ -17,7 +18,7 @@ export interface ITInterface {
   LastChangedByUser: { Name: string };
   LastChangedByUserId: number;
   LastChanged: string;
-  Usages: string[];
+  Usages: IdentityNamePair[];
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -43,6 +44,6 @@ export const adaptITInterface = (value: any): ITInterface | undefined => {
     LastChangedByUser: { Name: `${lastChangedByUser?.Name} ${lastChangedByUser?.LastName}` },
     LastChangedByUserId: value.LastChangedByUserId,
     LastChanged: value.LastChanged,
-    Usages: value.UsedByOrganizationNames,
+    Usages: value.UsedByOrganizationNames?.map((usage: string) => ({ name: usage })) ?? [],
   };
 };

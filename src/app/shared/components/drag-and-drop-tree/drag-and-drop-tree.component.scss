@@ -73,6 +73,7 @@
 
 .node-wrapper {
   width: fit-content;
+  height: 35px;
   position: relative;
   min-height: unset;
   border-radius: $radius-large;
@@ -184,4 +185,16 @@ div[role="group"] > .mat-tree-node {
 
 .chevron-icon {
   cursor: pointer;
+}
+
+app-details-page-link {
+  cursor: pointer;
+}
+
+.checkbox-color {
+  ::ng-deep {
+    svg {
+      color: $color-white !important;
+    }
+  }
 }

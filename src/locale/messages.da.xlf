@@ -1029,22 +1029,6 @@
         <source>Relevante organisationsenheder</source>
         <target state="new">Relevante organisationsenheder</target>
       </trans-unit>
-      <trans-unit id="4759122958582879581" datatype="html">
-        <source>Ingen relevante organisationsenheder tilføjet endnu</source>
-        <target state="new">Ingen relevante organisationsenheder tilføjet endnu</target>
-      </trans-unit>
-      <trans-unit id="6024626533336941535" datatype="html">
-        <source>Tilføj relevant organisationsenhed</source>
-        <target state="new">Tilføj relevant organisationsenhed</target>
-      </trans-unit>
-      <trans-unit id="6247836422746032352" datatype="html">
-        <source>Er du sikker på at du vil fjerne &quot;<x id="PH" equiv-text="unit.name"/>&quot; fra listen over relevante organisationsenheder?</source>
-        <target state="new">Er du sikker på at du vil fjerne &quot;<x id="PH" equiv-text="unit.name"/>&quot; fra listen over relevante organisationsenheder?</target>
-      </trans-unit>
-      <trans-unit id="2257520994874548249" datatype="html">
-        <source><x id="PH" equiv-text="text"/> Bemærk: Enheden er markeret som ansvarlig organisationsenhed!</source>
-        <target state="new"><x id="PH" equiv-text="text"/> Bemærk: Enheden er markeret som ansvarlig organisationsenhed!</target>
-      </trans-unit>
       <trans-unit id="2021952249252068859" datatype="html">
         <source>Opret relation</source>
         <target state="new">Opret relation</target>
@@ -6382,8 +6366,24 @@
         <target state="new"> Navn: <x id="INTERPOLATION" equiv-text="{{ formatSystemName(relation.fromSystem?.name, relation.fromSystem?.deactivated) }}"/> Uuid: <x id="INTERPOLATION_1" equiv-text="{{ relation.fromSystem?.uuid }}"/> </target>
       </trans-unit>
       <trans-unit id="4030902832094624639" datatype="html">
-        <source>Navn: <x id="INTERPOLATION" equiv-text="{{ relation.interface?.name }}"/> Uuid: <x id="INTERPOLATION_1" equiv-text="{{ relation.interface?.uuid }}"/></source>
-        <target state="new">Navn: <x id="INTERPOLATION" equiv-text="{{ relation.interface?.name }}"/> Uuid: <x id="INTERPOLATION_1" equiv-text="{{ relation.interface?.uuid }}"/></target>
+        <source>Navn: <x id="INTERPOLATION" equiv-text="{{ relation.interface.name }}"/> Uuid: <x id="INTERPOLATION_1" equiv-text="{{ relation.interface.uuid }}"/></source>
+        <target state="new">Navn: <x id="INTERPOLATION" equiv-text="{{ relation.interface.name }}"/> Uuid: <x id="INTERPOLATION_1" equiv-text="{{ relation.interface.uuid }}"/></target>
+      </trans-unit>
+      <trans-unit id="4743129658174909579" datatype="html">
+        <source>Søg efter enhed</source>
+        <target state="new">Søg efter enhed</target>
+      </trans-unit>
+      <trans-unit id="7734486507642287615" datatype="html">
+        <source>Antal niveauer</source>
+        <target state="new">Antal niveauer</target>
+      </trans-unit>
+      <trans-unit id="7864242390343441005" datatype="html">
+        <source> Medtag overordnede enheder </source>
+        <target state="new"> Medtag overordnede enheder </target>
+      </trans-unit>
+      <trans-unit id="1754540017409263785" datatype="html">
+        <source>Når denne er valgt, medtagesenhedens overordnede i hierarkiet</source>
+        <target state="new">Når denne er valgt, medtagesenhedens overordnede i hierarkiet</target>
       </trans-unit>
     </body>
   </file>

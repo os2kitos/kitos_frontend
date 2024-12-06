@@ -13,6 +13,7 @@
       [notFoundText]="notFoundText"
       [searchFn]="searchWithItemParents"
       [appendTo]="appendTo"
+      [readonly]="disabled"
       (search)="filter$.next($event.term)"
       (change)="formSelectionChange($event)"
       (clear)="filter$.next('')"

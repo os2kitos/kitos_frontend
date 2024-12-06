@@ -16,15 +16,32 @@
       [ngClass]="{
         'root-node-wrapper': node.isRoot === true,
         'current-node-blue': node.uuid === currentNodeUuid && node.color === 'blue',
-        'current-node-green': node.uuid === currentNodeUuid && node.color === 'green'
+        'current-node-green': node.uuid === currentNodeUuid && node.color === 'green',
+        'checkbox-color': checkboxNodes === true
       }"
       (click)="expandClick(node)"
+      data-cy="node"
     >
-      <ng-container *ngIf="node.children.length && (maxLevel === undefined || maxLevel > level)">
+      <ng-container
+        *ngIf="checkboxNodes === false && node.children.length && (maxLevel === undefined || maxLevel > level)"
+      >
         <app-chevron-down-icon class="chevron-icon" *ngIf="node.isExpanded"></app-chevron-down-icon>
         <app-chevron-right-icon class="chevron-icon" *ngIf="!node.isExpanded"></app-chevron-right-icon>
       </ng-container>
+      <ng-container *ngIf="checkboxNodes === true">
+        <app-checkbox [(value)]="node.status" [disabled]="disableCheck" (valueChange)="checkNode(node)"></app-checkbox>
+        <app-details-page-link
+          [itemType]="itemType"
+          linkFontSize="small"
+          [itemUuid]="node.uuid"
+          [disableRedirect]="disableRedirect"
+          (click)="checkNodeTextClick(node)"
+        >
+          {{ node.name }}
+        </app-details-page-link>
+      </ng-container>
       <app-details-page-link
+        *ngIf="checkboxNodes === false"
         [itemType]="itemType"
         linkFontSize="small"
         [itemUuid]="node.uuid"

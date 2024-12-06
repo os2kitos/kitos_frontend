@@ -12,3 +12,7 @@
 ng-select {
   font-size: large;
 }
+
+:host ::ng-deep .ng-select-container {
+  background-color: $color-white;
+}

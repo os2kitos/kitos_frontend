@@ -24,39 +24,58 @@
     i18n-title
   ></app-card-header>
   <app-standard-vertical-content-grid>
-    <app-native-table *ngIf="anyUsedByUnits$ | async">
-      <thead>
-        <th i18n>Navn</th>
-      </thead>
-      <tbody>
-        <tr *ngFor="let unit of usedByUnits$ | async">
-          <td>
-            <app-content-space-between>
-              <app-paragraph paragraphSize="small">
-                {{ unit.name }}
-              </app-paragraph>
-              <app-table-row-actions *ngIf="hasModifyPermission$ | async">
-                <app-icon-button (buttonClick)="deleteUsedByUnit(unit)"
-                  ><app-trashcan-icon></app-trashcan-icon
-                ></app-icon-button>
-              </app-table-row-actions>
-            </app-content-space-between>
-          </td>
-        </tr>
-      </tbody>
-    </app-native-table>
-    <app-empty-state
-      *ngIf="(anyUsedByUnits$ | async) === false"
-      text="Ingen relevante organisationsenheder tilføjet endnu"
-      context="emptyTable"
-      i18n-text
-    ></app-empty-state>
-    <app-collection-extension-button
-      *ngIf="hasModifyPermission$ | async"
-      text="Tilføj relevant organisationsenhed"
-      (clicked)="onAddNew()"
-      i18n-text
-    >
-    </app-collection-extension-button>
+    <app-section title="Filtrér i organisationsheder">
+      <form [formGroup]="relevantUnitsForm">
+        <div class="org-unit-select-container">
+          <app-org-unit-select
+            *ngIf="(isPatching$ | async) !== true"
+            text="Søg efter enhed"
+            i18n-text
+            [disabledUnitsUuids]="(usedUnitUuids$ | async) ?? []"
+            [formGroup]="relevantUnitsForm"
+            formName="relevantUnit"
+            [showDescription]="true"
+            data-cy="org-unit-select"
+            (valueChange)="patchRelevantUnits()"
+          ></app-org-unit-select>
+
+          <mat-spinner *ngIf="isPatching$ | async" [diameter]="50" class="centered-spinner"></mat-spinner>
+        </div>
+        <app-numeric-input
+          text="Antal niveauer"
+          i18n-text
+          [minLength]="1"
+          data-cy="levels-input"
+          (valueChange)="levelChange($event)"
+        ></app-numeric-input>
+        <div class="checkbox-container">
+          <app-checkbox-button
+            [(value)]="includeParents"
+            data-cy="toggle-module-button"
+            [backgroundWhite]="true"
+            i18n
+            i18n-tooltip
+            [isLarge]="true"
+            tooltip="Når denne er valgt, medtagesenhedens overordnede i hierarkiet"
+          >
+            Medtag overordnede enheder
+          </app-checkbox-button>
+        </div>
+      </form>
+      <!-- <app-loading *ngIf="(isPatching$ | async) === true"></app-loading> -->
+    </app-section>
+
+    <app-drag-and-drop-tree
+      *ngIf="unitTree$ | async as unitTree"
+      itemType="organization"
+      [currentNodeUuid]="(rootUnitUuid$ | async) ?? ''"
+      [nodes]="unitTree ?? []"
+      [disableDrag]="true"
+      [disableRedirect]="true"
+      [checkboxNodes]="true"
+      [disableCheck]="(hasModifyPermission$ | async) !== true"
+      (nodeChecked)="onUnitChange($event)"
+      [maxLevel]="(numberOfLevels$ | async) ?? undefined"
+    ></app-drag-and-drop-tree>
   </app-standard-vertical-content-grid>
 </app-card>

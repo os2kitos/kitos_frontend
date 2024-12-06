@@ -33,7 +33,25 @@ export const mapUnitsToTree = (units: APIOrganizationUnitResponseDTO[], expanded
     parentUuid: unit.parentOrganizationUnit?.uuid,
     children: [],
     color: unit.origin === 'Kitos' ? 'blue' : 'green',
-    isExpanded: expandedNodeUuids.includes(unit.uuid),
+    isExpanded: expandedNodeUuids !== undefined ? expandedNodeUuids.includes(unit.uuid) : true,
+  }));
+
+  return mapArrayToTree(mappedHierarchy);
+};
+
+export const mapUnitsWithSelectedUnitsToTree = (
+  units: APIOrganizationUnitResponseDTO[],
+  selectedUnitUuids?: string[]
+) => {
+  const mappedHierarchy = units.map<HierachyNodeWithParentUuid>((unit) => ({
+    uuid: unit.uuid,
+    name: unit.name,
+    isRoot: !unit.parentOrganizationUnit,
+    status: selectedUnitUuids?.includes(unit.uuid) ?? false,
+    parentUuid: unit.parentOrganizationUnit?.uuid,
+    children: [],
+    color: unit.origin === 'Kitos' ? 'blue' : 'green',
+    isExpanded: true,
   }));
 
   return mapArrayToTree(mappedHierarchy);

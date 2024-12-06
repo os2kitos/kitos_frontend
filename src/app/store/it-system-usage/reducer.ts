@@ -23,6 +23,7 @@ export const itSystemUsageInitialState: ITSystemUsageState = itSystemUsageAdapte
   collectionPermissions: undefined,
   isRemoving: false,
   lastSeenGridConfig: undefined,
+  isPatching: false,
 });
 
 export const itSystemUsageFeature = createFeature({
@@ -81,10 +82,13 @@ export const itSystemUsageFeature = createFeature({
       (state, { itSystemUsage }): ITSystemUsageState => ({ ...state, itSystemUsage: itSystemUsage })
     ),
 
+    on(ITSystemUsageActions.patchITSystemUsage, (state): ITSystemUsageState => ({ ...state, isPatching: true })),
+
     on(
       ITSystemUsageActions.patchITSystemUsageSuccess,
-      (state, { itSystemUsage }): ITSystemUsageState => ({ ...state, itSystemUsage })
+      (state, { itSystemUsage }): ITSystemUsageState => ({ ...state, itSystemUsage, isPatching: false })
     ),
+    on(ITSystemUsageActions.patchITSystemUsageError, (state): ITSystemUsageState => ({ ...state, isPatching: false })),
 
     on(
       ITSystemUsageActions.getITSystemUsagePermissions,

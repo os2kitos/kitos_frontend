@@ -17,25 +17,12 @@ describe('it-system-usage', () => {
     });
     cy.intercept('/api/v2/it-system-usages/*/permissions', { fixture: './shared/permissions.json' });
     cy.intercept('/api/v2/it-systems/*', { fixture: 'it-system.json' }); //gets the base system
-    cy.intercept('/api/v2/internal/organizations/*/grid/permissions', {statusCode: 404, body: {}});
-    cy.intercept('/api/v2/internal/organizations/*/grid/*/*', {statusCode: 404, body: {}});
+    cy.intercept('/api/v2/internal/organizations/*/grid/permissions', { statusCode: 404, body: {} });
+    cy.intercept('/api/v2/internal/organizations/*/grid/*/*', { statusCode: 404, body: {} });
     cy.setup(true, 'it-systems/it-system-usages');
   });
 
-  it('can show Organizations tab when no used by unit is set', () => {
-    cy.intercept('/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage-no-organization.json' });
-
-    cy.contains('System 3').click();
-
-    cy.navigateToDetailsSubPage('Organisation');
-
-    cy.contains('Systemet udstiller ingen ansvarlig organisationsenhed')
-      .parentsUntil('app-it-system-usage-details-organization')
-      .parent()
-      .contains('Ingen relevante organisationsenheder tilføjet endnu');
-  });
-
-  it('can add Used units', () => {
+  it('can add Used units by search', () => {
     cy.intercept('/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage-no-organization.json' });
 
     cy.contains('System 3').click();
@@ -46,14 +33,25 @@ describe('it-system-usage', () => {
       fixture: './organizations/organization-units-hierarchy.json',
     });
 
-    //open "add new using unit" dialog
-    cy.contains('Tilføj relevant organisationsenhed').click();
+    cy.dropdownByCy('org-unit-select', 'Test - 1', true);
 
-    //select unit from the dropdown
-    cy.dropdown('Vælg relevante organisationsenheder', 'Test - 1', true);
+    cy.get('app-popup-message').should('exist');
+  });
 
-    //validate can click the 'save' button
-    cy.get('app-usage-organization').contains('Tilføj').click();
+  it('can restrict number of levels', () => {
+    cy.intercept('/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage-no-organization.json' });
+
+    cy.contains('System 3').click();
+
+    cy.navigateToDetailsSubPage('Organisation');
+
+    cy.intercept('/api/v2/organizations/*/organization-units*', {
+      fixture: './organizations/organization-units-hierarchy.json',
+    });
+
+    cy.inputByCy('levels-input').type('1');
+
+    cy.contains('Test - 1').should('not.exist');
   });
 
   it('can show Used units', () => {

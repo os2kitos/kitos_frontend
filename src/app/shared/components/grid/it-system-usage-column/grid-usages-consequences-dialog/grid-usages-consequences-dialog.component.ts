@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, Input, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { combineLatest, map, Observable } from 'rxjs';
@@ -31,7 +31,7 @@ export class GridUsagesConsequencesDialogComponent extends BaseComponent impleme
 
   constructor(
     private readonly dialogRef: MatDialogRef<GridUsagesConsequencesDialogComponent>,
-    private readonly componentStore: GridUsagesDialogComponentStore,
+    @Inject(GridUsagesDialogComponentStore) private readonly componentStore: GridUsagesDialogComponentStore,
     private readonly dialog: MatDialog,
     private readonly notificationService: NotificationService,
     private readonly cdr: ChangeDetectorRef,

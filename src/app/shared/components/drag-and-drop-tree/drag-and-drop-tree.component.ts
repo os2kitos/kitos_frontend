@@ -22,9 +22,13 @@ export class DragAndDropTreeComponent<T> implements OnInit {
   @Input() public disableDrag = true;
   @Input() public maxLevel?: number = undefined;
   @Input() public disableRedirect = false;
+  @Input() public checkboxNodes = false;
+  @Input() public disableCheck = false;
 
   @Output() public readonly nodeMoved = new EventEmitter<EntityTreeNodeMoveResult>();
   @Output() public readonly nodeExpandClick = new EventEmitter<EntityTreeNode<T>>();
+
+  @Output() public readonly nodeChecked = new EventEmitter<EntityTreeNode<T>>();
 
   // ids for connected drop lists
   dropTargetIds: string[] = [];
@@ -113,6 +117,15 @@ export class DragAndDropTreeComponent<T> implements OnInit {
 
   public expandClick(node: EntityTreeNode<T>) {
     this.nodeExpandClick.emit(node);
+  }
+
+  public checkNode(node: EntityTreeNode<T>) {
+    this.nodeChecked.emit(node);
+  }
+
+  public checkNodeTextClick(node: EntityTreeNode<T>) {
+    node.status = !node.status;
+    this.checkNode(node);
   }
 
   private getParentNodeId(id: string, nodesToSearch: EntityTreeNode<T>[], parentId: string): string | null {

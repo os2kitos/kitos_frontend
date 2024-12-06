@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ItSystemCatalogDetailsFrontpageComponent } from './it-system-catalog/it-system-catalog-details/it-system-catalog-details-frontpage/it-system-catalog-details-frontpage.component';
 import { ItSystemCatalogDetailsComponent } from './it-system-catalog/it-system-catalog-details/it-system-catalog-details.component';
@@ -13,6 +14,8 @@ import { InterfaceDataWriteDialogComponent } from './it-system-interfaces/it-sys
 import { ItSystemInterfacesDetailsFrontpageComponent } from './it-system-interfaces/it-system-interfaces-details/it-system-interfaces-details-frontpage/it-system-interfaces-details-frontpage.component';
 import { ItSystemInterfacesDetailsComponent } from './it-system-interfaces/it-system-interfaces-details/it-system-interfaces-details.component';
 import { ItSystemInterfacesComponent } from './it-system-interfaces/it-system-interfaces.component';
+import { GdprOverviewDialogComponent } from './it-system-usages/gdpr-overview-dialog/gdpr-overview-dialog.component';
+import { GdprOverviewComponent } from './it-system-usages/gdpr-overview/gdpr-overview.component';
 import { ItSystemUsageDetailsArchivingComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-archiving/it-system-usage-details-archiving.component';
 import { ItSystemUsageDetailsJournalPeriodWriteDialogComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-archiving/write-dialog/it-system-usage-details-journal-period-write-dialog.component';
 import { ITSystemUsageDetailsContractsComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-contracts/it-system-usage-details-contracts.component';
@@ -54,8 +57,6 @@ import { ItSystemHierarchyTableComponent } from './shared/it-system-hierarchy-ta
 import { ItSystemInterfacesTableComponent } from './shared/it-system-interfaces-table/it-system-interfaces-table.component';
 import { ItSystemKleOverviewComponent } from './shared/it-system-kle-overview/it-system-kle-overview.component';
 import { KleTableComponent } from './shared/kle-table/kle-table.component';
-import { GdprOverviewComponent } from './it-system-usages/gdpr-overview/gdpr-overview.component';
-import { GdprOverviewDialogComponent } from './it-system-usages/gdpr-overview-dialog/gdpr-overview-dialog.component';
 
 @NgModule({
   declarations: [
@@ -114,6 +115,6 @@ import { GdprOverviewDialogComponent } from './it-system-usages/gdpr-overview-di
     GdprOverviewComponent,
     GdprOverviewDialogComponent,
   ],
-  imports: [CommonModule, SharedModule, ITSystemsRouterModule, MatInputModule],
+  imports: [CommonModule, SharedModule, ITSystemsRouterModule, MatInputModule, MatProgressSpinnerModule],
 })
 export class ItSystemsModule {}

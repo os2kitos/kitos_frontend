@@ -1,16 +1,17 @@
+<app-tooltip [text]="tooltip ?? ''">
+  <app-button
+    class="button-alignment button-auto-width"
+    (buttonClick)="onButtonClick()"
+    buttonStyle="secondary"
+    [disabled]="disabled"
+    [alignStart]="true"
+    [ngClass]="{ 'disabled-border-color': !value, 'size-large': isLarge }"
+    [backgroundWhite]="backgroundWhite"
+  >
+    <app-checkbox [value]="value" [disabled]="disabled" data-cy="button-checkbox"> </app-checkbox>
 
-<app-button
-  class="button-alignment"
-  (buttonClick)="onButtonClick()"
-  buttonStyle="secondary"
-  [disabled]="disabled"
-  [alignStart]="true"
-  [ngClass]="{'disabled-border-color': !value}"
-  [backgroundWhite]="backgroundWhite"
->
-  <app-checkbox [value]="value" [disabled]="disabled" data-cy="button-checkbox"> </app-checkbox>
-
-  <div class="align-content">
-    <ng-content></ng-content>
-  </div>
-</app-button>
+    <div class="align-content">
+      <ng-content></ng-content>
+    </div>
+  </app-button>
+</app-tooltip>

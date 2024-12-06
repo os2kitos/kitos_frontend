@@ -130,3 +130,5 @@ export const selectItSystemUsageLastSeenGridConfig = createSelector(
   selectITSystemUsageState,
   (state) => state.lastSeenGridConfig
 );
+
+export const selectItSystemUsageIsPatching = createSelector(selectITSystemUsageState, (state) => state.isPatching);

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { map } from 'rxjs';
@@ -37,7 +37,7 @@ export class OrgUnitSelectComponent extends BaseComponent implements OnInit {
   );
   public readonly isLoaded$ = this.store.select(selectPagedOrganizationUnitHasValidCache);
 
-  constructor(private readonly store: Store) {
+  constructor(private readonly store: Store, private cdRef: ChangeDetectorRef) {
     super();
   }
 

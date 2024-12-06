@@ -1,7 +1,11 @@
-@import 'theme';
+@import "theme";
 
 .button-alignment {
   justify-content: flex-start;
+}
+.button-auto-width {
+  width: auto;
+  display: inline-block;
 }
 
 .align-content {
@@ -15,3 +19,12 @@
   border-color: $color-primary-40 !important;
 }
 
+::ng-deep button.mat-mdc-button-base {
+  padding-left: 10px !important;
+}
+
+.size-large {
+  ::ng-deep button.mat-mdc-button-base {
+    height: 56px;
+  }
+}
