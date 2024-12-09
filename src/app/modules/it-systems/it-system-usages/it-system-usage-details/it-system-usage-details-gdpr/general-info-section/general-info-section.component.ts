@@ -71,4 +71,9 @@ export class GeneralInfoSectionComponent extends BaseComponent implements OnInit
   public patchSimpleLink(simpleLink: { url: string; name: string }, valueChange?: ValidatedValueChange<unknown>) {
     this.patchGdpr({ directoryDocumentation: simpleLink }, valueChange);
   }
+
+  public resetSimpleLink() {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    this.patchGdpr({ directoryDocumentation: null as any });
+  }
 }

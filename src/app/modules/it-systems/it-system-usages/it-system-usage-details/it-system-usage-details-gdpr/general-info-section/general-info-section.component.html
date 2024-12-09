@@ -33,6 +33,7 @@
       i18n-title
       data-cy="directory-documentation-link"
       (submitMethod)="patchSimpleLink($event)"
+      (clearClick)="resetSimpleLink()"
       [isDisabled]="disableDirectoryDocumentationControl"
     ></app-edit-url-section>
   </app-form-grid>

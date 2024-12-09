@@ -27,8 +27,9 @@ export class HideShowDialogComponent implements OnInit {
   ngOnInit() {
     this.columnsCopy = this.columns
       .filter((column) => column.style !== 'excel-only' && column.style !== 'action-buttons')
+      .filter((column) => column.disabledByUIConfig !== true)
       .map((column) => ({ ...column }));
-    this.uniqueSections = Array.from(new Set(this.columns.map((column) => column.section!)));
+    this.uniqueSections = Array.from(new Set(this.columnsCopy.map((column) => column.section!)));
   }
 
   changeVisibility(column: GridColumn) {

@@ -16,6 +16,7 @@ export class EditUrlSectionComponent extends BaseComponent {
   @Input() simpleLink$!: Observable<SimpleLink | undefined>;
   @Input() isDisabled = false;
   @Output() submitMethod = new EventEmitter();
+  @Output() clearClick = new EventEmitter<void>();
 
   public doesSimpleLinkExist$ = this.simpleLink$?.pipe(map((simpleLink) => simpleLink !== undefined));
 

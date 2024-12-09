@@ -6,6 +6,7 @@
       [isDisabled]="isDisabled"
       [simpleLink$]="simpleLink$"
       (iconClick)="openDirectoryUrlDialog(simpleLink)"
+      (clearClick)="clearClick.emit()"
     ></app-link-textbox>
   </ng-container>
   <ng-container *ngIf="(simpleLink$ | async) === undefined">

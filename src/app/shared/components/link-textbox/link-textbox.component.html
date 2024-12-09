@@ -13,9 +13,14 @@
             [value]="isLinkOnly ? simpleLink.url : simpleLink.name"
           />
         </div>
-        <app-icon-button *ngIf="!isDisabled" (buttonClick)="onIconClick()" matSuffix data-cy="edit-link-button"
-          ><app-pencil-icon></app-pencil-icon>
-        </app-icon-button>
+
+        <div matSuffix class="suffix-icons" *ngIf="!isDisabled">
+          <span (click)="onClearClick()">x</span>
+
+          <app-icon-button (buttonClick)="onIconClick()" data-cy="edit-link-button"
+            ><app-pencil-icon></app-pencil-icon>
+          </app-icon-button>
+        </div>
       </mat-form-field>
     </ng-container>
 
@@ -28,11 +33,16 @@
           readonly
           [disabled]="isDisabled"
           data-cy="link-textbox-input"
+          d
           [value]="isLinkOnly ? simpleLink.url : simpleLink.name + ': ' + simpleLink.url"
         />
-        <app-icon-button *ngIf="!isDisabled" (buttonClick)="onIconClick()" matSuffix data-cy="edit-link-button"
-          ><app-pencil-icon></app-pencil-icon>
-        </app-icon-button>
+        <div matSuffix class="suffix-icons" *ngIf="!isDisabled">
+          <span (click)="onClearClick()">x</span>
+
+          <app-icon-button (buttonClick)="onIconClick()" data-cy="edit-link-button"
+            ><app-pencil-icon></app-pencil-icon>
+          </app-icon-button>
+        </div>
       </mat-form-field>
     </ng-container>
   </ng-container>
