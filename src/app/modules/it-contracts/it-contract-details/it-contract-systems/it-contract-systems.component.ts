@@ -16,6 +16,7 @@ import {
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { AgreementElementCreateDialogComponent } from './agreement-element-create-dialog/agreement-element-create-dialog.component';
 import { ItContractSystemsComponentStore } from './it-contract-systems.component-store';
+import { selectItContractEnableAgreementElements, selectItContractEnableSystemUsages, selectItContractEnableRelations } from 'src/app/store/organization/ui-module-customization/selectors';
 
 @Component({
   selector: 'app-it-contract-systems',
@@ -34,6 +35,10 @@ export class ItContractSystemsComponent extends BaseComponent implements OnInit 
   public readonly anyRelations$ = this.relations$.pipe(matchNonEmptyArray());
   public readonly relationsIsLoading$ = this.componentStore.systemRelationsIsLoading$;
   public readonly hasModifyPermission$ = this.store.select(selectItContractHasModifyPermissions);
+
+  public readonly agreementElementsEnabled$ = this.store.select(selectItContractEnableAgreementElements);
+  public readonly systemUsagesEnabled$ = this.store.select(selectItContractEnableSystemUsages);
+  public readonly systemRelationsEnabled$ = this.store.select(selectItContractEnableRelations);
 
   constructor(
     private readonly store: Store,

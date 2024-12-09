@@ -21,7 +21,12 @@
           labelPosition="after"
           class="button-flex"
           [value]="fieldViewModel.isEnabled ?? false"
-          [disabled]="fieldViewModel.isObligatory || !tabViewModel.isEnabled || (moduleEnabled$ | async) === false"
+          [disabled]="
+            fieldViewModel.isObligatory ||
+            !tabViewModel.isEnabled ||
+            (moduleEnabled$ | async) === false ||
+            (loading$ | async) === true
+          "
           (valueChange)="onCheckboxChanged({ enabled: $event, fullKey: fieldViewModel.fullKey })"
           data-cy="field-checkbox"
         >

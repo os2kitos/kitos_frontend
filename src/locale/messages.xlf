@@ -4846,6 +4846,9 @@
       <trans-unit id="5463227515602023886" datatype="html">
         <source>Sidst redigeret af bruger</source>
       </trans-unit>
+      <trans-unit id="1754540017409263785" datatype="html">
+        <source>Når denne er valgt, medtagesenhedens overordnede i hierarkiet</source>
+      </trans-unit>
       <trans-unit id="4743129658174909579" datatype="html">
         <source>Søg efter enhed</source>
       </trans-unit>
@@ -4854,9 +4857,6 @@
       </trans-unit>
       <trans-unit id="7864242390343441005" datatype="html">
         <source> Medtag overordnede enheder </source>
-      </trans-unit>
-      <trans-unit id="1754540017409263785" datatype="html">
-        <source>Når denne er valgt, medtagesenhedens overordnede i hierarkiet</source>
       </trans-unit>
     </body>
   </file>

@@ -9,6 +9,7 @@ export const uiModuleConfigAdapter = createEntityAdapter<UIModuleCustomization>(
 
 export const UIModuleConfigInitialState: UIModuleConfigState = uiModuleConfigAdapter.getInitialState({
   uiModuleConfigs: [],
+  loading: false,
 });
 
 export const uiModuleConfigFeature = createFeature({
@@ -39,6 +40,28 @@ export const uiModuleConfigFeature = createFeature({
         return {
           ...state,
           uiModuleConfigs: updateUIModuleConfigs(state, uiModuleConfig),
+        };
+      }
+    ),
+    on(
+      UIModuleConfigActions.getUIModuleConfig,
+      UIModuleConfigActions.putUIModuleCustomization,
+      (state): UIModuleConfigState => {
+        return {
+          ...state,
+          loading: true,
+        };
+      }
+    ),
+    on(
+      UIModuleConfigActions.getUIModuleConfigSuccess,
+      UIModuleConfigActions.getUIModuleConfigError,
+      UIModuleConfigActions.putUIModuleCustomizationSuccess,
+      UIModuleConfigActions.putUIModuleCustomizationError,
+      (state): UIModuleConfigState => {
+        return {
+          ...state,
+          loading: false,
         };
       }
     )

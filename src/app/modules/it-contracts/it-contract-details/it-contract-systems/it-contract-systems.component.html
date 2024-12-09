@@ -1,4 +1,4 @@
-<app-card>
+<app-card *ngIf="agreementElementsEnabled$ | async">
   <app-card-header
     title="IT Kontrakten omfatter flg. aftaleelementer"
     i18n-title
@@ -42,7 +42,7 @@
   </app-standard-vertical-content-grid>
 </app-card>
 
-<app-card>
+<app-card *ngIf="systemUsagesEnabled$ | async">
   <app-card-header
     title="IT Kontrakten gælder flg. IT Systemer"
     i18n-title
@@ -88,7 +88,7 @@
   </app-standard-vertical-content-grid>
 </app-card>
 
-<app-card>
+<app-card *ngIf="systemRelationsEnabled$ | async">
   <app-card-header
     title="IT Kontrakten gælder flg. relationer"
     i18n-title

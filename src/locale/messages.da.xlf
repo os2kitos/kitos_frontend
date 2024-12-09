@@ -6389,13 +6389,13 @@
         <source>Antal niveauer</source>
         <target state="new">Antal niveauer</target>
       </trans-unit>
-      <trans-unit id="7864242390343441005" datatype="html">
-        <source> Medtag overordnede enheder </source>
-        <target state="new"> Medtag overordnede enheder </target>
-      </trans-unit>
       <trans-unit id="1754540017409263785" datatype="html">
         <source>Når denne er valgt, medtagesenhedens overordnede i hierarkiet</source>
         <target state="new">Når denne er valgt, medtagesenhedens overordnede i hierarkiet</target>
+      </trans-unit>
+      <trans-unit id="7864242390343441005" datatype="html">
+        <source> Medtag overordnede enheder </source>
+        <target state="new"> Medtag overordnede enheder </target>
       </trans-unit>
     </body>
   </file>

@@ -42,6 +42,11 @@ export const selectModuleConfig = (module: UIModuleConfigKey) =>
     return state.uiModuleConfigs.find((c) => c.module == module);
   });
 
+export const selectUIConfigLoading = createSelector(
+  selectUIModuleCustomizationState,
+  (state: UIModuleConfigState) => state.loading
+);
+
 //Data processing
 const createDprTabEnabledSelector = (tabKey: string) =>
   createTabEnabledSelector(UIModuleConfigKey.DataProcessingRegistrations, tabKey);
@@ -130,53 +135,53 @@ export const selectItContractEnableContractRoles = createItContractsTabEnabledSe
 export const selectItContractEnableHierarchy = createItContractsTabEnabledSelector('hierarchy');
 export const selectItContractEnableAdvis = createItContractsTabEnabledSelector('advice');
 export const selectItContractEnableReferences = createItContractsTabEnabledSelector('references');
-//Field selectors
+//Contracts > Frontpage
 const createItContractFrontpageFieldSelector = (fieldKey: string) =>
   createFieldOrGroupEnabledSelector(UIModuleConfigKey.ItContract, 'frontPage', fieldKey);
-//Frontpage fields
 export const selectItContractEnableContractId = createItContractFrontpageFieldSelector('contractId');
 export const selectItContractsEnableContractType = createItContractFrontpageFieldSelector('contractType');
 export const selectItContractsEnableTemplate = createItContractFrontpageFieldSelector('template');
 export const selectItContractsEnableCriticality = createItContractFrontpageFieldSelector('criticality');
 export const selectItContractsEnablePurchaseForm = createItContractFrontpageFieldSelector('purchaseForm');
+export const selectItContractsEnableIsActive = createItContractFrontpageFieldSelector('isActive');
+export const selectItContractsEnableAgreementPeriod = createItContractFrontpageFieldSelector('agreementPeriod');
+export const selectItContractsEnableNotes = createItContractFrontpageFieldSelector('notes');
+export const selectItContractsEnableParentContract = createItContractFrontpageFieldSelector('parentContract');
+
+export const selectItContractsEnableResponsibleUnit = createItContractFrontpageFieldSelector('responsibleUnit');
+export const selectItContractsEnableInternalSigner = createItContractFrontpageFieldSelector('internalSigner');
+
+export const selectIContractsEnableSupplier = createItContractFrontpageFieldSelector('supplier');
+export const selectItContractsEnableExternalSigner = createItContractFrontpageFieldSelector('externalSigner');
+
 export const selectItContractsEnableProcurementStrategy = createItContractFrontpageFieldSelector('procurementStrategy');
 export const selectItContractsEnableProcurementPlan = createItContractFrontpageFieldSelector('procurementPlan');
 export const selectItContractsEnableProcurementInitiated =
   createItContractFrontpageFieldSelector('procurementInitiated');
-export const selectItContractsEnableExternalSigner = createItContractFrontpageFieldSelector('externalSigner');
-export const selectItContractsEnableInternalSigner = createItContractFrontpageFieldSelector('internalSigner');
-export const selectItContractsEnableAgreementPeriod = createItContractFrontpageFieldSelector('agreementPeriod');
-export const selectItContractsEnableIsActive = createItContractFrontpageFieldSelector('isActive');
-//Other fields
-export const selectItContractsEnableAgreementDeadlines = createFieldOrGroupEnabledSelector(
-  UIModuleConfigKey.ItContract,
-  'deadlines',
-  'agreementDeadlines'
-);
 
-export const selectItContractsEnableTermination = createFieldOrGroupEnabledSelector(
-  UIModuleConfigKey.ItContract,
-  'deadlines',
-  'termination'
-);
+export const selectItContractsEnabledCreatedBy = createItContractFrontpageFieldSelector('createdBy');
+export const selectItContractsEnabledlastModifedBy = createItContractFrontpageFieldSelector('lastModifiedBy');
+export const selectItContractsEnabledlastModifedDate = createItContractFrontpageFieldSelector('lastModifiedDate');
 
-export const selectItContractsEnablePaymentModel = createFieldOrGroupEnabledSelector(
-  UIModuleConfigKey.ItContract,
-  'economy',
-  'paymentModel'
-);
+// Contracts > IT Systems
+const createItContractsItSystemsFieldSelector = (fieldKey: string) =>
+  createFieldOrGroupEnabledSelector(UIModuleConfigKey.ItContract, 'itSystems', fieldKey);
+export const selectItContractEnableAgreementElements = createItContractsItSystemsFieldSelector('agreementElements');
+export const selectItContractEnableSystemUsages = createItContractsItSystemsFieldSelector('systemUsages');
+export const selectItContractEnableRelations = createItContractsItSystemsFieldSelector('relations');
 
-export const selectItContractsEnableExternalPayment = createFieldOrGroupEnabledSelector(
-  UIModuleConfigKey.ItContract,
-  'economy',
-  'extPayment'
-);
+//Contracts > Deadlines
+const createItContractsDeadlinesFieldSelector = (fieldKey: string) =>
+  createFieldOrGroupEnabledSelector(UIModuleConfigKey.ItContract, 'deadlines', fieldKey);
+export const selectItContractsEnableAgreementDeadlines = createItContractsDeadlinesFieldSelector('agreementDeadlines');
+export const selectItContractsEnableTermination = createItContractsDeadlinesFieldSelector('termination');
 
-export const selectItContractsEnableInternalPayment = createFieldOrGroupEnabledSelector(
-  UIModuleConfigKey.ItContract,
-  'economy',
-  'intPayment'
-);
+//Contracts > Economy
+const createItContractsEconomyFieldSelector = (fieldKey: string) =>
+  createFieldOrGroupEnabledSelector(UIModuleConfigKey.ItContract, 'economy', fieldKey);
+export const selectItContractsEnablePaymentModel = createItContractsEconomyFieldSelector('paymentModel');
+export const selectItContractsEnableExternalPayment = createItContractsEconomyFieldSelector('extPayment');
+export const selectItContractsEnableInternalPayment = createItContractsEconomyFieldSelector('intPayment');
 
 function tabIsEnabled(uiConfigViewModels: UIConfigNodeViewModel, tabFullKey: string): boolean {
   const tabViewModel = getTabViewModelFromModule(uiConfigViewModels, tabFullKey);

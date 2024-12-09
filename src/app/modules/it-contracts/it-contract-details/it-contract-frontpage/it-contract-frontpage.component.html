@@ -1,6 +1,12 @@
 <app-card>
   <app-card-header title="IT kontrakt information" i18n-title helpTextKey="it-contract.edit.main">
-    <app-status-chip type="it-contract" [title]="statusText$ | async" [value]="isValid$ | async"> </app-status-chip>
+    <app-status-chip
+      *ngIf="contractIsActiveEnabled$ | async"
+      type="it-contract"
+      [title]="statusText$ | async"
+      [value]="isValid$ | async"
+    >
+    </app-status-chip>
   </app-card-header>
   <app-form-grid [formGroup]="frontpageFormGroup">
     <app-textbox
@@ -65,6 +71,7 @@
     </app-dropdown>
     <app-standard-vertical-content-grid>
       <app-textbox
+        *ngIf="contractIsActiveEnabled$ | async"
         text="Status"
         i18n-text
         data-cy="contract-valid-status"
@@ -103,6 +110,7 @@
       </app-datepicker>
     </ng-container>
     <app-textarea
+      *ngIf="contractNotesEnabled$ | async"
       text="Bemærkning"
       class="notes"
       i18n-text
@@ -114,7 +122,7 @@
   </app-form-grid>
 </app-card>
 
-<app-card>
+<app-card *ngIf="contractParentContractEnabled$ | async">
   <app-card-header
     title="Overordnet kontrakt"
     helpTextKey="it-contract.edit.parent-contract"
@@ -136,10 +144,11 @@
   </app-connected-dropdown>
 </app-card>
 
-<app-card>
+<app-card *ngIf="showResponsibleCard$ | async">
   <app-card-header title="Ansvarlig enhed" i18n-title helpTextKey="it-contract.edit.responsible"></app-card-header>
   <app-form-grid [formGroup]="responsibleFormGroup">
     <app-org-unit-select
+      *ngIf="contractResponsibleUnitEnabled$ | async"
       text="Ansvarlig enhed"
       i18n-text
       data-cy="contract-responsible"
@@ -183,10 +192,11 @@
   </app-form-grid>
 </app-card>
 
-<app-card>
+<app-card *ngIf="showSupplierCard$ | async">
   <app-card-header title="Leverandør" i18n-title helpTextKey="it-contract.edit.supplier"></app-card-header>
   <app-form-grid [formGroup]="supplierFormGroup">
     <app-connected-dropdown
+      *ngIf="contractSupplierEnabled$ | async"
       text="Leverandør"
       i18n-text
       data-cy="contract-supplier"
@@ -270,10 +280,11 @@
   </app-form-grid>
 </app-card>
 
-<app-card>
+<app-card *ngIf="showHistoryCard$ | async">
   <app-card-header title="Historik" i18n-title helpTextKey="it-contract.edit.history"> </app-card-header>
   <app-form-grid [formGroup]="historyFormGroup">
     <app-textbox
+      *ngIf="contractsCreatedByEnabled$ | async"
       text="Oprettet af"
       i18n-text
       data-cy="contract-created-by"
@@ -281,6 +292,7 @@
       formName="createdBy"
     ></app-textbox>
     <app-textbox
+      *ngIf="contractsLastModifiedByEnabled$ | async"
       text="Sidst redigeret (bruger)"
       i18n-text
       data-cy="contract-modified-by"
@@ -288,6 +300,7 @@
       formName="lastModifiedBy"
     ></app-textbox>
     <app-datepicker
+      *ngIf="contractsLastModifiedDateEnabled$ | async"
       text="Sidst redigeret (dato)"
       i18n-text
       data-cy="contract-modified"

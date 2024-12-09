@@ -8,6 +8,7 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { NavigationDrawerItem } from 'src/app/shared/components/navigation-drawer/navigation-drawer.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
+import { combineBooleansWithAnd } from 'src/app/shared/helpers/observable-helpers';
 import { BreadCrumb } from 'src/app/shared/models/breadcrumbs/breadcrumb.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { NotificationService } from 'src/app/shared/services/notification.service';
@@ -23,8 +24,12 @@ import { selectShowDataProcessingRegistrations, selectShowItSystemModule } from 
 import {
   selectItContractEnableAdvis,
   selectItContractEnableContractRoles,
+  selectItContractEnableDataProcessing,
   selectItContractEnableDeadlines,
   selectItContractEnableEconomy,
+  selectItContractEnableHierarchy,
+  selectItContractEnableItSystems,
+  selectItContractEnableReferences,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 
 @Component({
@@ -54,11 +59,15 @@ export class ItContractDetailsComponent extends BaseComponent implements OnInit,
     ]),
     filterNullish()
   );
-
+  public readonly itSystemsTabEnabled$ = this.store.select(selectItContractEnableItSystems);
+  public readonly dataProcessingTabEnabled$ = this.store.select(selectItContractEnableDataProcessing);
   public readonly agreementDeadlinesTabEnabled$ = this.store.select(selectItContractEnableDeadlines);
   public readonly economyTabEnabled$ = this.store.select(selectItContractEnableEconomy);
   public readonly contractRolesTabEnabled$ = this.store.select(selectItContractEnableContractRoles);
+  public readonly hierarchyTabEnabled$ = this.store.select(selectItContractEnableHierarchy);
   public readonly notificationsTabEnabled$ = this.store.select(selectItContractEnableAdvis);
+  public readonly referenceTabEnabled$ = this.store.select(selectItContractEnableReferences);
+
   public readonly dataProcessingModuleEnabled$ = this.store.select(selectShowDataProcessingRegistrations);
   public readonly itSystemsModuleEnabled$ = this.store.select(selectShowItSystemModule);
 
@@ -72,13 +81,13 @@ export class ItContractDetailsComponent extends BaseComponent implements OnInit,
       label: $localize`IT Systemer`,
       iconType: 'systems',
       route: AppPath.itSystems,
-      enabled$: this.itSystemsModuleEnabled$,
+      enabled$: combineBooleansWithAnd([this.itSystemsModuleEnabled$, this.itSystemsTabEnabled$]),
     },
     {
       label: $localize`Databehandling`,
       iconType: 'folder-important',
       route: AppPath.dataProcessing,
-      enabled$: this.dataProcessingModuleEnabled$,
+      enabled$: combineBooleansWithAnd([this.dataProcessingModuleEnabled$, this.dataProcessingTabEnabled$]),
     },
     {
       label: $localize`Aftalefrister`,
@@ -102,6 +111,7 @@ export class ItContractDetailsComponent extends BaseComponent implements OnInit,
       label: $localize`Hierarki`,
       iconType: 'organization',
       route: AppPath.hierarchy,
+      enabled$: this.hierarchyTabEnabled$,
     },
     {
       label: $localize`Advis`,
@@ -113,6 +123,7 @@ export class ItContractDetailsComponent extends BaseComponent implements OnInit,
       label: $localize`Referencer`,
       iconType: 'bookmark',
       route: AppPath.externalReferences,
+      enabled$: this.referenceTabEnabled$,
     },
   ];
 

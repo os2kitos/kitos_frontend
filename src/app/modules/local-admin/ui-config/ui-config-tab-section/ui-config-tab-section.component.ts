@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { UIConfigNodeViewModel } from 'src/app/shared/models/ui-config/ui-config-node-view-model.model';
 import { UINodeCustomization } from 'src/app/shared/models/ui-config/ui-node-customization';
 import { UIModuleConfigActions } from 'src/app/store/organization/ui-module-customization/actions';
+import { selectUIConfigLoading } from 'src/app/store/organization/ui-module-customization/selectors';
 
 @Component({
   selector: 'app-ui-config-tab-section',
@@ -18,6 +19,8 @@ export class UiConfigTabSectionComponent {
   @Input() moduleKey!: UIModuleConfigKey;
 
   constructor(private store: Store) {}
+
+  public readonly loading$ = this.store.select(selectUIConfigLoading);
 
   public tabViewModelHasChildren(): boolean {
     return this.tabViewModel.children !== undefined && this.tabViewModel.children.length > 0;
