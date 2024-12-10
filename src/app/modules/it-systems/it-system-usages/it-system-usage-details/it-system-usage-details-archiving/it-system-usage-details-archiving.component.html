@@ -26,6 +26,7 @@
       </app-textbox-info>
     </div>
     <app-dropdown
+      *ngIf="archiveTypeEnabled$ | async"
       text="Arkivtype"
       i18n-text
       valueField="uuid"
@@ -36,6 +37,7 @@
       (valueChange)="patchArchiving({ typeUuid: $event })"
     ></app-dropdown>
     <app-dropdown
+      *ngIf="archiveLocationEnabled$ | async"
       text="Arkiveringssted"
       i18n-text
       valueField="uuid"
@@ -46,6 +48,7 @@
       (valueChange)="patchArchiving({ locationUuid: $event })"
     ></app-dropdown>
     <app-connected-dropdown
+      *ngIf="archiveSupplierEnabled$ | async"
       text="Arkiveringsleverandør"
       i18n-text
       valueField="uuid"
@@ -56,6 +59,7 @@
       (valueChange)="patchArchiving({ supplierOrganizationUuid: $event })"
     ></app-connected-dropdown>
     <app-dropdown
+      *ngIf="archiveTestLocationEnabled$ | async"
       text="Arkiveringsteststed"
       i18n-text
       valueField="uuid"
@@ -66,6 +70,7 @@
       (valueChange)="patchArchiving({ testLocationUuid: $event })"
     ></app-dropdown>
     <app-numeric-input
+      *ngIf="archiveFrequencyEnabled$ | async"
       text="Arkiveringsfrekvens (antal år)"
       i18n-text
       [formGroup]="archiveForm"
@@ -73,7 +78,7 @@
       (valueChange)="patchJournalFrequency({ frequencyInMonths: $event })"
       [placeholder]="journalFrequencyPlaceholder()"
     ></app-numeric-input>
-    <app-content-vertical-center>
+    <app-content-vertical-center *ngIf="documentBearingEnabled$ | async">
       <app-checkbox
         text="Dokumentbærende"
         i18n-text
@@ -85,6 +90,7 @@
       </app-checkbox>
     </app-content-vertical-center>
     <app-radio-buttons
+      *ngIf="activeEnabled$ | async"
       text="Er der arkiveret fra systemet?"
       i18n-text
       [formGroup]="archiveForm"
@@ -94,6 +100,7 @@
       (optionChanged)="patchActiveValue($event)"
     ></app-radio-buttons>
     <app-textarea
+      *ngIf="notesEnabled$ | async"
       class="notes-column-span"
       text="Arkiveringsbemærkninger"
       i18n-text
@@ -103,7 +110,7 @@
     ></app-textarea>
   </app-form-grid>
 </app-card>
-<app-card>
+<app-card *ngIf="journalPeriodsEnabled$ | async">
   <app-card-header title="Journalperioder" helpTextKey="it-system.usage.archiving.periods" i18n-title></app-card-header>
   <app-standard-vertical-content-grid>
     <app-native-table *ngIf="anyJournalPeriods$ | async">

@@ -15,6 +15,10 @@ import {
 } from 'src/app/store/it-system-usage/selectors';
 import { selectItSystemKleUuids } from 'src/app/store/it-system/selectors';
 import { KleCommandEventArgs, SelectedKle } from '../../../shared/kle-table/kle-table.component';
+import {
+  selectITSystemUsageEnableInheritedKle,
+  selectITSystemUsageEnableLocalKle,
+} from 'src/app/store/organization/ui-module-customization/selectors';
 
 @Component({
   selector: 'app-it-system-usage-details-kle',
@@ -36,6 +40,9 @@ export class ItSystemUsageDetailsKleComponent extends BaseComponent implements O
   public inheritedKleMarkedAsIrrelevantUuids$ = this.store
     .select(selectItSystemUsageLocallyRemovedKleUuids)
     .pipe(filterNullish());
+
+  public readonly inheritedKleEnabled$ = this.store.select(selectITSystemUsageEnableInheritedKle);
+  public readonly localKleEnabled$ = this.store.select(selectITSystemUsageEnableLocalKle);
 
   constructor(
     private readonly store: Store,

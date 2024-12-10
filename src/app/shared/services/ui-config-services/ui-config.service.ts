@@ -21,6 +21,11 @@ export class UIConfigService {
     return { module, moduleConfigViewModel, cacheTime: undefined };
   }
 
+  public getAllKeysOfBlueprint(moduleKey: UIModuleConfigKey): string[] {
+    const blueprint = this.getUIBlueprintWithFullKeys(moduleKey);
+    return this.flattenUINodeBlueprintKeys(blueprint);
+  }
+
   private findCustomizedUINode(customizationList: UINodeCustomization[], fullKey: string): UINodeCustomization | null {
     return customizationList.find((elem) => elem.fullKey === fullKey) || null;
   }
@@ -97,14 +102,37 @@ export class UIConfigService {
   }
 
   public isChildOfTab(tabFullKey: string, fieldKey: string) {
-    return fieldKey.startsWith(tabFullKey + '.');
+    return this.isTab(tabFullKey) && fieldKey.startsWith(tabFullKey + '.');
   }
 
   public isTab(key: string): boolean {
     return this.countDots(key) === 1;
   }
 
+  public isField(key: string): boolean {
+    return this.countDots(key) === 2;
+  }
+
   private countDots(key: string): number {
     return (key.match(/\./g) || []).length;
+  }
+
+  private flattenUINodeBlueprintKeys(root: UINodeBlueprint): string[] {
+    let result: string[] = [];
+
+    // If the current node has a fullKey, add it to the list.
+    if (root.fullKey !== undefined) {
+      result.push(root.fullKey);
+    }
+
+    // If there are children, recursively flatten them and merge into the result.
+    if (root.children) {
+      for (const key in root.children) {
+        const child = root.children[key];
+        result = result.concat(this.flattenUINodeBlueprintKeys(child));
+      }
+    }
+
+    return result;
   }
 }

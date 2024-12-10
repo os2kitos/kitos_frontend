@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, combineLatestWith, filter, first, map } from 'rxjs';
 import { APIIdentityNamePairResponseDTO, APIOrganizationUnitResponseDTO } from 'src/app/api/v2';
@@ -21,6 +20,10 @@ import {
 } from 'src/app/store/it-system-usage/selectors';
 import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
 import { selectOrganizationUnits } from 'src/app/store/organization/organization-unit/selectors';
+import {
+  selectITSystemUsageEnableRelevantUnits,
+  selectITSystemUsageEnableResponsibleUnit,
+} from 'src/app/store/organization/ui-module-customization/selectors';
 
 @Component({
   selector: 'app-it-system-usage-details-organization',
@@ -65,7 +68,10 @@ export class ItSystemUsageDetailsOrganizationComponent extends BaseComponent imp
   });
   public includeParents = false;
 
-  constructor(private readonly store: Store, private readonly dialog: MatDialog) {
+  public readonly responsibleUnitEnabled$ = this.store.select(selectITSystemUsageEnableResponsibleUnit);
+  public readonly relevantUnitsEnabled$ = this.store.select(selectITSystemUsageEnableRelevantUnits);
+
+  constructor(private readonly store: Store) {
     super();
   }
 

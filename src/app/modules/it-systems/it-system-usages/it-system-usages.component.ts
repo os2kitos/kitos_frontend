@@ -486,7 +486,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     },
     {
       field: GridFields.PlannedRiskAssessmentDate,
-      title: $localize`Dato for seneste risikovurdering`,
+      title: $localize`Dato for planlagt risikovurdering`,
       section: GDPR_SECTION_NAME,
       style: 'date',
       filter: 'date',

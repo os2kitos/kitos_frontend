@@ -1,4 +1,4 @@
-<app-card>
+<app-card *ngIf="outgoingRelationsEnabled$ | async">
   <app-card-header
     title="'{{ usageName$ | async }}' har følgende relationer til andre systemer/snitflader"
     helpTextKey="it-system.usage.relation"
@@ -27,7 +27,7 @@
   <app-loading *ngIf="isUsageLoading$ | async"></app-loading>
 </app-card>
 
-<app-card>
+<app-card *ngIf="incomingRelationsEnabled$ | async">
   <app-card-header
     title="Andre systemer har følgende relationer til '{{ usageName$ | async }}'"
     helpTextKey="it-system.usage.relations-used-by"

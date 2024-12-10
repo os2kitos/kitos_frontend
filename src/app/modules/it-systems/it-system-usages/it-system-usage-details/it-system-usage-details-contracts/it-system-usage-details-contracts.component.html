@@ -1,4 +1,4 @@
-<app-card>
+<app-card *ngIf="associatedContractsEnabled$ | async">
   <app-card-header title="Tilknyttede kontrakter" helpTextKey="it-system.usage.contracts" i18n-title></app-card-header>
   <app-loading *ngIf="isLoading$ | async"></app-loading>
   <ng-container *ngIf="(isLoading$ | async) === false">
@@ -62,7 +62,7 @@
     ></app-empty-state>
   </ng-container>
 </app-card>
-<app-card *ngIf="(isLoading$ | async) === false">
+<app-card *ngIf="(isLoading$ | async) === false && (contractToDetermineIsActiveEnabled$ | async)">
   <app-card-header
     title="Kontrakt der gør systemet aktivt"
     helpTextKey="it-system.usage.contracts.primary"

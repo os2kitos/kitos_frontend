@@ -1,4 +1,4 @@
-<app-card>
+<app-card *ngIf="responsibleUnitEnabled$ | async">
   <app-card-header title="Ansvarlig organisationsenhed" helpTextKey="it-system.usage.org" i18n-title></app-card-header>
 
   <app-paragraph *ngIf="(anyUsedByUnits$ | async) === false" paragraphSize="medium" i18n
@@ -17,7 +17,7 @@
     </app-dropdown>
   </form>
 </app-card>
-<app-card>
+<app-card *ngIf="relevantUnitsEnabled$ | async">
   <app-card-header
     title="Relevante organisationsenheder"
     helpTextKey="it-system.usage.organization-used-by"

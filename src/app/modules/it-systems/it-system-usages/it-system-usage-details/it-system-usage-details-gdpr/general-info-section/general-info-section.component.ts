@@ -15,6 +15,12 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors';
+import {
+  selectITSystemUsageEnableGdprPurpose,
+  selectITSystemUsageEnableGdprBusinessCritical,
+  selectITSystemUsageEnableGdprHostedAt,
+  selectITSystemUsageEnableGdprDocumentation,
+} from 'src/app/store/organization/ui-module-customization/selectors';
 
 @Component({
   selector: 'app-general-info-section',
@@ -38,6 +44,11 @@ export class GeneralInfoSectionComponent extends BaseComponent implements OnInit
     { updateOn: 'blur' }
   );
   public disableDirectoryDocumentationControl = false;
+
+  public readonly purposeEnabled$ = this.store.select(selectITSystemUsageEnableGdprPurpose);
+  public readonly businessCriticalEnabled$ = this.store.select(selectITSystemUsageEnableGdprBusinessCritical);
+  public readonly hostedAtEnabled$ = this.store.select(selectITSystemUsageEnableGdprHostedAt);
+  public readonly documentationEnabled$ = this.store.select(selectITSystemUsageEnableGdprDocumentation);
 
   constructor(private readonly store: Store, private readonly notificationService: NotificationService) {
     super();

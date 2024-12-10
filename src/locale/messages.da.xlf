@@ -6397,6 +6397,34 @@
         <source> Medtag overordnede enheder </source>
         <target state="new"> Medtag overordnede enheder </target>
       </trans-unit>
+      <trans-unit id="8068831618296287831" datatype="html">
+        <source>System ID</source>
+        <target state="new">System ID</target>
+      </trans-unit>
+      <trans-unit id="8677745733624593339" datatype="html">
+        <source>Klassifikation af data</source>
+        <target state="new">Klassifikation af data</target>
+      </trans-unit>
+      <trans-unit id="4444328125924097461" datatype="html">
+        <source>Relevante organisationsenheder </source>
+        <target state="new">Relevante organisationsenheder </target>
+      </trans-unit>
+      <trans-unit id="2526296220627158527" datatype="html">
+        <source>Relationer til andre systemer</source>
+        <target state="new">Relationer til andre systemer</target>
+      </trans-unit>
+      <trans-unit id="5224755622036276546" datatype="html">
+        <source>Relationer fra andre systemer</source>
+        <target state="new">Relationer fra andre systemer</target>
+      </trans-unit>
+      <trans-unit id="2016413730949071333" datatype="html">
+        <source>Arkiveringsfrekvens</source>
+        <target state="new">Arkiveringsfrekvens</target>
+      </trans-unit>
+      <trans-unit id="4491906435283548133" datatype="html">
+        <source>Lokale tilknyttede opgaver</source>
+        <target state="new">Lokale tilknyttede opgaver</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -1,6 +1,7 @@
 <app-card>
   <app-card-header title="Systeminformation" helpTextKey="it-system.usage.main" i18n-title>
     <app-status-chip
+      *ngIf="statusEnabled$ | async"
       type="it-system-usage"
       [value]="itSystemUsageValid$ | async"
       [title]="invalidReason$ | async"
@@ -17,6 +18,7 @@
       (valueChange)="patchGeneral({ localCallName: $event })"
     ></app-textbox>
     <app-textbox
+      *ngIf="systemIdEnabled$ | async"
       text="Systemnavn ID (lokalt)"
       i18n-text
       [formGroup]="itSystemInformationForm"
@@ -25,6 +27,7 @@
       (valueChange)="patchGeneral({ localSystemId: $event })"
     ></app-textbox>
     <app-textbox
+      *ngIf="versionEnabled$ | async"
       text="Version"
       i18n-text
       [formGroup]="itSystemInformationForm"
@@ -33,6 +36,7 @@
       (valueChange)="patchGeneral({ systemVersion: $event })"
     ></app-textbox>
     <app-dropdown
+      *ngIf="amountOfUsersEnabled$ | async"
       text="Antal brugere"
       i18n-text
       [formGroup]="itSystemInformationForm"
@@ -41,6 +45,7 @@
       (valueChange)="patchGeneral({ numberOfExpectedUsers: $event })"
     ></app-dropdown>
     <app-dropdown
+      *ngIf="dataClassificationEnabled$ | async"
       text="Klassifikation af data i systemet"
       i18n-text
       valueField="uuid"
@@ -51,6 +56,7 @@
       (valueChange)="patchGeneral({ dataClassificationUuid: $event })"
     ></app-dropdown>
     <app-textarea
+      *ngIf="descriptionEnabled$ | async"
       class="notes"
       text="Beskrivelse"
       i18n-text
@@ -61,54 +67,58 @@
   </form>
 </app-card>
 
-<app-card data-cy="system-usage-section">
+<app-card *ngIf="showSystemUsageCard$ | async" data-cy="system-usage-section">
   <app-card-header title="Systemanvendelse" helpTextKey="it-system.usage.application" i18n-title></app-card-header>
 
   <form [formGroup]="itSystemApplicationForm">
     <app-textbox
+      *ngIf="takenIntoUsageByEnabled$ | async"
       text="Taget i anvendelse af"
       i18n-text
       [formGroup]="itSystemApplicationForm"
       formName="createdBy"
     ></app-textbox>
     <app-textbox
+      *ngIf="lastEditedByEnabled$ | async"
       text="Sidst redigeret (bruger)"
       i18n-text
       [formGroup]="itSystemApplicationForm"
       formName="lastModifiedBy"
     ></app-textbox>
     <app-datepicker
+      *ngIf="lastEditedAtEnabled$ | async"
       text="Sidst redigeret (dato)"
       i18n-text
       [formGroup]="itSystemApplicationForm"
       formName="lastModified"
     ></app-datepicker>
     <app-dropdown
+      *ngIf="lifeCycleStatusEnabled$ | async"
       text="Livscyklus"
       i18n-text
       [formGroup]="itSystemApplicationForm"
       formName="lifeCycleStatus"
       [data]="lifeCycleStatusOptions"
       (valueChange)="patchGeneral({ validity: { lifeCycleStatus: $event } })"
-      *ngIf="(lifeCycleStatusEnabled$ | async) !== false"
     ></app-dropdown>
     <app-datepicker
+      *ngIf="usagePeriodEnabled$ | async"
       text="Ibrugtagningsdato"
       i18n-text
       [formGroup]="itSystemApplicationForm"
       formName="validFrom"
       (validatedValueChange)="patchGeneral({ validity: { validFrom: $event.value?.toDateString() } }, $event)"
-      *ngIf="(usagePeriodEnabled$ | async) !== false"
-      ></app-datepicker>
+    ></app-datepicker>
     <app-datepicker
+      *ngIf="usagePeriodEnabled$ | async"
       text="Slutdato for anvendelse"
       i18n-text
       [formGroup]="itSystemApplicationForm"
       formName="validTo"
       (validatedValueChange)="patchGeneral({ validity: { validTo: $event.value?.toDateString() } }, $event)"
-      *ngIf="(usagePeriodEnabled$ | async) !== false"
-      ></app-datepicker>
+    ></app-datepicker>
     <app-textbox
+      *ngIf="statusEnabled$ | async"
       text="Status"
       i18n-text
       [formGroup]="itSystemApplicationForm"

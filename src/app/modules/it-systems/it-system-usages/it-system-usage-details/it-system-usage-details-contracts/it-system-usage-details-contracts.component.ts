@@ -17,6 +17,10 @@ import {
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypesDictionary } from 'src/app/store/regular-option-type-store/selectors';
 import { ItSystemUsageDetailsContractsComponentStore } from './it-system-usage-details-contracts.component-store';
+import {
+  selectITSystemUsageEnableAssociatedContracts,
+  selectITSystemUsageEnableSelectContractToDetermineIfItSystemIsActive,
+} from 'src/app/store/organization/ui-module-customization/selectors';
 
 @Component({
   templateUrl: 'it-system-usage-details-contracts.component.html',
@@ -37,6 +41,11 @@ export class ITSystemUsageDetailsContractsComponent extends BaseComponent implem
   public readonly contractSelectionForm = new FormGroup({
     mainContract: new FormControl<APIItContractResponseDTO | undefined>(undefined),
   });
+
+  public readonly associatedContractsEnabled$ = this.store.select(selectITSystemUsageEnableAssociatedContracts);
+  public readonly contractToDetermineIsActiveEnabled$ = this.store.select(
+    selectITSystemUsageEnableSelectContractToDetermineIfItSystemIsActive
+  );
 
   constructor(
     private readonly store: Store,

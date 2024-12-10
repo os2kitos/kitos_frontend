@@ -10,6 +10,7 @@ import {
   dateGreaterThanOrEqualControlValidator,
   dateLessThanControlValidator,
 } from 'src/app/shared/helpers/form.helpers';
+import { combineBooleansWithOr } from 'src/app/shared/helpers/observable-helpers';
 import {
   LifeCycleStatus,
   lifeCycleStatusOptions,
@@ -31,8 +32,18 @@ import {
   selectItSystemUsageValid,
 } from 'src/app/store/it-system-usage/selectors';
 import {
+  selectITSystemUsageEnableAmountOfUsers,
+  selectITSystemUsageEnableDataClassification,
+  selectITSystemUsageEnableDescription,
+  selectITSystemUsageEnabledSystemId,
   selectITSystemUsageEnableFrontPageUsagePeriod,
+  selectITSystemUsageEnableLastEditedAt,
+  selectITSystemUsageEnableLastEditedBy,
   selectITSystemUsageEnableLifeCycleStatus,
+  selectITSystemUsageEnableName,
+  selectITSystemUsageEnableStatus,
+  selectITSystemUsageEnableTakenIntoUsageBy,
+  selectITSystemUsageEnableVersion,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
@@ -54,8 +65,27 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
     { updateOn: 'blur' }
   );
 
+  public readonly nameEnabled$ = this.store.select(selectITSystemUsageEnableName);
+  public readonly systemIdEnabled$ = this.store.select(selectITSystemUsageEnabledSystemId);
+  public readonly versionEnabled$ = this.store.select(selectITSystemUsageEnableVersion);
+  public readonly amountOfUsersEnabled$ = this.store.select(selectITSystemUsageEnableAmountOfUsers);
+  public readonly dataClassificationEnabled$ = this.store.select(selectITSystemUsageEnableDataClassification);
+  public readonly descriptionEnabled$ = this.store.select(selectITSystemUsageEnableDescription);
+  public readonly takenIntoUsageByEnabled$ = this.store.select(selectITSystemUsageEnableTakenIntoUsageBy);
+  public readonly lastEditedByEnabled$ = this.store.select(selectITSystemUsageEnableLastEditedBy);
+  public readonly lastEditedAtEnabled$ = this.store.select(selectITSystemUsageEnableLastEditedAt);
   public readonly lifeCycleStatusEnabled$ = this.store.select(selectITSystemUsageEnableLifeCycleStatus);
   public readonly usagePeriodEnabled$ = this.store.select(selectITSystemUsageEnableFrontPageUsagePeriod);
+  public readonly statusEnabled$ = this.store.select(selectITSystemUsageEnableStatus);
+
+  public readonly showSystemUsageCard$ = combineBooleansWithOr([
+    this.takenIntoUsageByEnabled$,
+    this.lastEditedByEnabled$,
+    this.lastEditedAtEnabled$,
+    this.lifeCycleStatusEnabled$,
+    this.usagePeriodEnabled$,
+    this.statusEnabled$,
+  ]);
 
   public readonly itSystemApplicationForm = new FormGroup(
     {

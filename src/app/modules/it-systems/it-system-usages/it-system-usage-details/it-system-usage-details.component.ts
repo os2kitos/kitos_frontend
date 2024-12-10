@@ -25,6 +25,8 @@ import {
   selectShowItContractModule,
 } from 'src/app/store/organization/selectors';
 import {
+  selectITSystemUsageEnableContracts,
+  selectITSystemUsageEnableDataProcessing,
   selectITSystemUsageEnableGdpr,
   selectITSystemUsageEnableLocalReferences,
   selectITSystemUsageEnableSystemRelations,
@@ -38,6 +40,7 @@ import {
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { selectOrganizationName } from 'src/app/store/user-store/selectors';
 import { ITSystemUsageRemoveComponent } from './it-system-usage-remove/it-system-usage-remove.component';
+import { combineBooleansWithAnd } from 'src/app/shared/helpers/observable-helpers';
 
 @Component({
   templateUrl: 'it-system-usage-details.component.html',
@@ -52,36 +55,21 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
   public readonly itSystemUsageUuid$ = this.store.select(selectItSystemUsageUuid).pipe(filterNullish());
   public readonly hasDeletePermissions$ = this.store.select(selectITSystemUsageHasDeletePermission);
 
-  public readonly enableGdprTab$ = this.store.select(selectITSystemUsageEnableGdpr).pipe(filterNullish());
+  public readonly enabledContractsTab$ = this.store.select(selectITSystemUsageEnableContracts);
+  public readonly enabledDataProcessingTab$ = this.store.select(selectITSystemUsageEnableDataProcessing);
+  public readonly enableGdprTab$ = this.store.select(selectITSystemUsageEnableGdpr);
+  public readonly enableSystemRolesTab$ = this.store.select(selectITSystemUsageEnableTabSystemRoles);
+  public readonly enableOrganizationTab$ = this.store.select(selectITSystemUsageEnableTabOrganization);
+  public readonly enableSystemRelationsTab$ = this.store.select(selectITSystemUsageEnableSystemRelations);
+  public readonly enableInterfacesTab$ = this.store.select(selectITSystemUsageEnableTabInterfaces);
+  public readonly enableArchivingTab$ = this.store.select(selectITSystemUsageEnableTabArchiving);
+  public readonly enableHierarchyTab$ = this.store.select(selectITSystemUsageEnableTabHierarchy);
+  public readonly enableLocalKleTab$ = this.store.select(selectITSystemUsageEnableTabLocalKle);
+  public readonly enableNotificationsTab$ = this.store.select(selectITSystemUsageEnableTabNotifications);
+  public readonly enableLocalReferencesTab$ = this.store.select(selectITSystemUsageEnableLocalReferences);
 
-  public readonly enableSystemRolesTab$ = this.store
-    .select(selectITSystemUsageEnableTabSystemRoles)
-    .pipe(filterNullish());
-
-  public readonly enableOrganizationTab$ = this.store
-    .select(selectITSystemUsageEnableTabOrganization)
-    .pipe(filterNullish());
-
-  public readonly enableSystemRelationsTab$ = this.store
-    .select(selectITSystemUsageEnableSystemRelations)
-    .pipe(filterNullish());
-
-  public readonly enableInterfacesTab$ = this.store
-    .select(selectITSystemUsageEnableTabInterfaces)
-    .pipe(filterNullish());
-
-  public readonly enableArchivingTab$ = this.store.select(selectITSystemUsageEnableTabArchiving).pipe(filterNullish());
-  public readonly enableHierarchyTab$ = this.store.select(selectITSystemUsageEnableTabHierarchy).pipe(filterNullish());
-  public readonly enableLocalKleTab$ = this.store.select(selectITSystemUsageEnableTabLocalKle).pipe(filterNullish());
   public readonly itContractsModuleEnabled$ = this.store.select(selectShowItContractModule);
   public readonly dataProcessingModuleEnabled$ = this.store.select(selectShowDataProcessingRegistrations);
-
-  public readonly enableNotificationsTab$ = this.store
-    .select(selectITSystemUsageEnableTabNotifications)
-    .pipe(filterNullish());
-  public readonly enableLocalReferencesTab$ = this.store
-    .select(selectITSystemUsageEnableLocalReferences)
-    .pipe(filterNullish());
 
   public readonly breadCrumbs$ = combineLatest([
     this.organizationName$,
@@ -111,13 +99,13 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
       label: $localize`Kontrakter`,
       iconType: 'clipboard',
       route: AppPath.contracts,
-      enabled$: this.itContractsModuleEnabled$,
+      enabled$: combineBooleansWithAnd([this.itContractsModuleEnabled$, this.enabledContractsTab$]),
     },
     {
       label: $localize`Databehandling`,
       iconType: 'folder-important',
       route: AppPath.dataProcessing,
-      enabled$: this.dataProcessingModuleEnabled$,
+      enabled$: combineBooleansWithAnd([this.dataProcessingModuleEnabled$, this.enabledDataProcessingTab$]),
     },
     {
       label: $localize`GDPR`,

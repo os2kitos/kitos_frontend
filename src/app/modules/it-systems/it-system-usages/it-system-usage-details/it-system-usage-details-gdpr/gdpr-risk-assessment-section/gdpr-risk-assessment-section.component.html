@@ -11,53 +11,55 @@
         *ngIf="(enablePlannedRiskAssessmentDateField$ | async) !== false"
       >
       </app-datepicker>
-      <app-dropdown
-        text="Foretaget risikovurdering"
-        i18n-text
-        [formGroup]="riskAssessmentFormGroup"
-        formName="yesNoDontKnowControl"
-        [data]="yesNoDontKnowOptions"
-        (valueChange)="patchGdpr({ riskAssessmentConducted: $event })"
-        data-cy="risk-assessment-dropdown"
-      ></app-dropdown>
-      <app-datepicker
-        text="Dato for seneste risikovurdering"
-        i18n-text
-        [disabled]="(isRiskAssessmentFalse$ | async) !== false"
-        [formGroup]="riskAssessmentFormGroup"
-        formName="conductedDateControl"
-        data-cy="conducted-date-datepicker"
-        (valueChange)="patchGdpr({ riskAssessmentConductedDate: $event?.toDateString() })"
-      >
-      </app-datepicker>
-      <app-dropdown
-        text="Hvad viste den seneste risikovurdering?"
-        i18n-text
-        [disabled]="(isRiskAssessmentFalse$ | async) !== false"
-        [formGroup]="riskAssessmentFormGroup"
-        formName="assessmentResultControl"
-        [data]="riskAssessmentResultOptions"
-        data-cy="assessment-result-dropdown"
-        (valueChange)="patchGdpr({ riskAssessmentResult: $event })"
-      ></app-dropdown>
-      <app-edit-url-section
-        title="Link til dokumentation"
-        i18n-title
-        [simpleLink$]="selectRiskDocumentation$"
-        [isDisabled]="(isRiskAssessmentFalse$ | async) !== false"
-        data-cy="risk-documentation-link"
-        (submitMethod)="patchGdpr({ riskAssessmentDocumentation: $event })"
-        [isDisabled]="disableDirectoryDocumentationControl"
-      ></app-edit-url-section>
-      <app-textarea
-        title="Bemærkninger"
-        i18n-title
-        [formGroup]="riskAssessmentFormGroup"
-        formName="notesControl"
-        data-cy="assessment-notes"
-        (valueChange)="patchGdpr({ riskAssessmentNotes: $event })"
-      >
-      </app-textarea>
+      <ng-container *ngIf="conductedRiskAssessmentEnabled$ | async">
+        <app-dropdown
+          text="Foretaget risikovurdering"
+          i18n-text
+          [formGroup]="riskAssessmentFormGroup"
+          formName="yesNoDontKnowControl"
+          [data]="yesNoDontKnowOptions"
+          (valueChange)="patchGdpr({ riskAssessmentConducted: $event })"
+          data-cy="risk-assessment-dropdown"
+        ></app-dropdown>
+        <app-datepicker
+          text="Dato for seneste risikovurdering"
+          i18n-text
+          [disabled]="(isRiskAssessmentFalse$ | async) !== false"
+          [formGroup]="riskAssessmentFormGroup"
+          formName="conductedDateControl"
+          data-cy="conducted-date-datepicker"
+          (valueChange)="patchGdpr({ riskAssessmentConductedDate: $event?.toDateString() })"
+        >
+        </app-datepicker>
+        <app-dropdown
+          text="Hvad viste den seneste risikovurdering?"
+          i18n-text
+          [disabled]="(isRiskAssessmentFalse$ | async) !== false"
+          [formGroup]="riskAssessmentFormGroup"
+          formName="assessmentResultControl"
+          [data]="riskAssessmentResultOptions"
+          data-cy="assessment-result-dropdown"
+          (valueChange)="patchGdpr({ riskAssessmentResult: $event })"
+        ></app-dropdown>
+        <app-edit-url-section
+          title="Link til dokumentation"
+          i18n-title
+          [simpleLink$]="selectRiskDocumentation$"
+          [isDisabled]="(isRiskAssessmentFalse$ | async) !== false"
+          data-cy="risk-documentation-link"
+          (submitMethod)="patchGdpr({ riskAssessmentDocumentation: $event })"
+          [isDisabled]="disableDirectoryDocumentationControl"
+        ></app-edit-url-section>
+        <app-textarea
+          title="Bemærkninger"
+          i18n-title
+          [formGroup]="riskAssessmentFormGroup"
+          formName="notesControl"
+          data-cy="assessment-notes"
+          (valueChange)="patchGdpr({ riskAssessmentNotes: $event })"
+        >
+        </app-textarea>
+      </ng-container>
     </app-standard-vertical-content-grid>
   </form>
 </app-accordion>

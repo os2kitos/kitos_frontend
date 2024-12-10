@@ -9,10 +9,9 @@ import { selectModuleConfig } from 'src/app/store/organization/ui-module-customi
 @Component({
   selector: 'app-ui-config',
   templateUrl: './ui-config.component.html',
-  styleUrl: './ui-config.component.scss'
+  styleUrl: './ui-config.component.scss',
 })
-export class UiConfigComponent implements OnInit{
-
+export class UiConfigComponent implements OnInit {
   constructor(private store: Store) {}
 
   @Input() moduleKey!: UIModuleConfigKey;
@@ -24,5 +23,4 @@ export class UiConfigComponent implements OnInit{
     this.uiConfig$ = this.store.select(selectModuleConfig(this.moduleKey));
     this.moduleEnabled$ = this.store.select(selectModuleVisibility(this.moduleKey));
   }
-
 }

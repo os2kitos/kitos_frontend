@@ -1,4 +1,4 @@
-<app-card>
+<app-card *ngIf="inheritedKleEnabled$ | async">
   <app-card-header
     title="Nedarvede opgaver (Data fra IT Systemkataloget)"
     helpTextKey="it-system.usage.kle"
@@ -11,7 +11,7 @@
     (kleCommandRequested)="onToggleInheritedKle($event)"
   ></app-it-system-kle-overview>
 </app-card>
-<app-card>
+<app-card *ngIf="localKleEnabled$ | async">
   <app-card-header
     title="Lokalt tilknyttede opgaver"
     helpTextKey="it-system.usage.kle.local"

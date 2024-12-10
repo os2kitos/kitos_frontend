@@ -54,6 +54,7 @@ export const uiModuleConfigFeature = createFeature({
       }
     ),
     on(
+      UIModuleConfigActions.resetLoading,
       UIModuleConfigActions.getUIModuleConfigSuccess,
       UIModuleConfigActions.getUIModuleConfigError,
       UIModuleConfigActions.putUIModuleCustomizationSuccess,

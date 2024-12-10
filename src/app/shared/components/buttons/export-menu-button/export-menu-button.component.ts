@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Store } from '@ngrx/store';
 import { GdprOverviewDialogComponent } from 'src/app/modules/it-systems/it-system-usages/gdpr-overview-dialog/gdpr-overview-dialog.component';
+import { selectITSystemUsageEnableGdpr } from 'src/app/store/organization/ui-module-customization/selectors';
 
 @Component({
   selector: 'app-export-menu-button',
@@ -12,7 +14,9 @@ export class ExportMenuButtonComponent {
   @Input() showColumnsOnlyOption = true;
   @Input() enabledGdprExport = false;
 
-  constructor(private dialog: MatDialog) {}
+  constructor(private dialog: MatDialog, private store: Store) {}
+
+  public readonly gdprEnabled$ = this.store.select(selectITSystemUsageEnableGdpr);
 
   triggerMethod(exportAllColumns: boolean): void {
     if (this.exportMethod) {

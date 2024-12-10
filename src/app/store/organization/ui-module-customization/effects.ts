@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { ActionCreator, Store } from '@ngrx/store';
-import { catchError, combineLatestWith, concatMap, filter, map, of, switchMap } from 'rxjs';
+import { catchError, combineLatestWith, concatMap, map, mergeMap, of, switchMap } from 'rxjs';
 import {
   APICustomizedUINodeRequestDTO,
   APICustomizedUINodeResponseDTO,
@@ -36,9 +36,11 @@ export class UIModuleCustomizationEffects {
         this.store.select(selectOrganizationUuid).pipe(filterNullish()),
         this.store.select(selectHasValidUIModuleConfigCache(module)),
       ]),
-      filter(([_, __, validCache]) => !validCache),
-      concatMap(([{ module: moduleName }, organizationUuid]) =>
-        this.organizationInternalService
+      mergeMap(([{ module: moduleName }, organizationUuid, validCache]) => {
+        if (validCache) {
+          return of(UIModuleConfigActions.resetLoading());
+        }
+        return this.organizationInternalService
           .getSingleOrganizationsInternalV2GetUIModuleCustomization({ moduleName, organizationUuid })
           .pipe(
             map((uiModuleCustomizationDto) =>
@@ -49,8 +51,8 @@ export class UIModuleCustomizationEffects {
               )
             ),
             catchError(() => of(UIModuleConfigActions.getUIModuleConfigError()))
-          )
-      )
+          );
+      })
     );
   });
 
@@ -62,9 +64,10 @@ export class UIModuleCustomizationEffects {
         this.organizationInternalService
           .getSingleOrganizationsInternalV2GetUIModuleCustomization({ moduleName, organizationUuid })
           .pipe(
+            map((nodes) => this.addMissingNodes(nodes.nodes, moduleName)),
             switchMap((existingUICustomization) => {
               const requestDto = this.getUIModuleCustomizationUpdateRequestDto(
-                existingUICustomization.nodes,
+                existingUICustomization,
                 updatedNodeRequest
               );
 
@@ -114,7 +117,6 @@ export class UIModuleCustomizationEffects {
         nodes: [...existingNodes, updatedNode],
       };
     }
-
     return this.updateUIModuleCustomizationInRequestDto(existingNodes, updatedNode, rootToUpdate);
   }
 
@@ -129,19 +131,61 @@ export class UIModuleCustomizationEffects {
     }
 
     const rootToUpdateKey = rootToUpdate?.key;
-    if (this.shouldUpdateChildren(rootToUpdateKey, newEnabledState)) {
-      const childrenToUpdate = existingNodes.filter((node) =>
-        this.uiConfigService.isChildOfTab(rootToUpdateKey!, node.key)
-      );
-      childrenToUpdate.forEach((c) => (c.enabled = newEnabledState));
+    if (this.uiConfigService.isTab(rootToUpdateKey)) {
+      return {
+        nodes: this.updateChildrenInRequestDto(rootToUpdateKey, newEnabledState, existingNodes),
+      };
+    } else if (this.uiConfigService.isField(rootToUpdateKey)) {
+      const parent = this.findParentNode(rootToUpdateKey, existingNodes)!;
+      const children = this.getChildrenOfTab(parent.key, existingNodes);
+      if (this.allChildrenHasSameValue(newEnabledState, children)) {
+        parent.enabled = newEnabledState;
+      }
+      return { nodes: existingNodes as APICustomizedUINodeRequestDTO[] };
+    } else {
+      return { nodes: existingNodes as APICustomizedUINodeRequestDTO[] };
     }
-
-    return {
-      nodes: existingNodes as APICustomizedUINodeRequestDTO[],
-    };
   }
 
-  private shouldUpdateChildren(rootKey: string | undefined, isEnabling: boolean | undefined) {
-    return !isEnabling && rootKey && this.uiConfigService.isTab(rootKey);
+  private updateChildrenInRequestDto(
+    rootToUpdateKey: string,
+    newState: boolean | undefined,
+    existingNodes: APICustomizedUINodeResponseDTO[]
+  ): APICustomizedUINodeRequestDTO[] {
+    return existingNodes.map((node) => {
+      if (this.uiConfigService.isChildOfTab(rootToUpdateKey, node.key)) {
+        return { ...node, enabled: newState };
+      }
+      return node;
+    }) as APICustomizedUINodeRequestDTO[];
+  }
+
+  private findParentNode(
+    fieldKey: string,
+    existingNodes: APICustomizedUINodeResponseDTO[]
+  ): APICustomizedUINodeResponseDTO | undefined {
+    return existingNodes.find((node) => this.uiConfigService.isChildOfTab(node.key, fieldKey));
+  }
+
+  private allChildrenHasSameValue(enabled: boolean | undefined, children: APICustomizedUINodeResponseDTO[]): boolean {
+    return children.every((child) => child.enabled === enabled);
+  }
+
+  private getChildrenOfTab(
+    tabKey: string,
+    existingNodes: APICustomizedUINodeResponseDTO[]
+  ): APICustomizedUINodeResponseDTO[] {
+    return existingNodes.filter((node) => this.uiConfigService.isChildOfTab(tabKey, node.key));
+  }
+
+  private addMissingNodes(
+    response: APICustomizedUINodeResponseDTO[],
+    module: UIModuleConfigKey
+  ): APICustomizedUINodeResponseDTO[] {
+    const allKeys = this.uiConfigService.getAllKeysOfBlueprint(module);
+    const existingKeys = new Set(response.map((node) => node.key));
+    const missingKeys = allKeys.filter((key) => !existingKeys.has(key));
+    const nodesToAdd = missingKeys.map((key) => ({ key, enabled: true }));
+    return [...response, ...nodesToAdd];
   }
 }

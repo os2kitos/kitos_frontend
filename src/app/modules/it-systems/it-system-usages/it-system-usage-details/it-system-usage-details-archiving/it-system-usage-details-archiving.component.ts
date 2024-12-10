@@ -33,6 +33,17 @@ import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-stor
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 import { ItSystemUsageDetailsArchivingComponentStore } from './it-system-usage-details-archiving.component-store';
 import { ItSystemUsageDetailsJournalPeriodWriteDialogComponent } from './write-dialog/it-system-usage-details-journal-period-write-dialog.component';
+import {
+  selectITSystemUsageEnableArchiveType,
+  selectITSystemUsageEnableArchiveLocation,
+  selectITSystemUsageEnableArchiveSupplier,
+  selectITSystemUsageEnableArchiveTestLocation,
+  selectITSystemUsageEnableArchiveFrequency,
+  selectITSystemUsageEnableDocumentBearing,
+  selectITSystemUsageEnableActive,
+  selectITSystemUsageEnableNotes,
+  selectITSystemUsageEnableJournalPeriods,
+} from 'src/app/store/organization/ui-module-customization/selectors';
 
 @Component({
   selector: 'app-it-system-usage-details-archiving',
@@ -91,6 +102,16 @@ export class ItSystemUsageDetailsArchivingComponent extends BaseComponent implem
   ];
 
   public readonly nationalArchivesText = ARCHIVE_TEXT;
+
+  public readonly archiveTypeEnabled$ = this.store.select(selectITSystemUsageEnableArchiveType);
+  public readonly archiveLocationEnabled$ = this.store.select(selectITSystemUsageEnableArchiveLocation);
+  public readonly archiveSupplierEnabled$ = this.store.select(selectITSystemUsageEnableArchiveSupplier);
+  public readonly archiveTestLocationEnabled$ = this.store.select(selectITSystemUsageEnableArchiveTestLocation);
+  public readonly archiveFrequencyEnabled$ = this.store.select(selectITSystemUsageEnableArchiveFrequency);
+  public readonly documentBearingEnabled$ = this.store.select(selectITSystemUsageEnableDocumentBearing);
+  public readonly activeEnabled$ = this.store.select(selectITSystemUsageEnableActive);
+  public readonly notesEnabled$ = this.store.select(selectITSystemUsageEnableNotes);
+  public readonly journalPeriodsEnabled$ = this.store.select(selectITSystemUsageEnableJournalPeriods);
 
   constructor(
     private readonly store: Store,

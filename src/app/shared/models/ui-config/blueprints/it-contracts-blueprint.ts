@@ -98,8 +98,6 @@ export const ItContractsUiBluePrint = {
     },
     deadlines: {
       text: $localize`Aftalefrister`,
-      isObligatory: false,
-      disableIfSubtreeDisabled: true,
       children: {
         agreementDeadlines: {
           text: $localize`Aftalefrister`,
@@ -113,8 +111,6 @@ export const ItContractsUiBluePrint = {
     },
     economy: {
       text: $localize`Økonomi`,
-      isObligatory: false,
-      disableIfSubtreeDisabled: true,
       children: {
         paymentModel: {
           text: $localize`Betalingsmodel`,

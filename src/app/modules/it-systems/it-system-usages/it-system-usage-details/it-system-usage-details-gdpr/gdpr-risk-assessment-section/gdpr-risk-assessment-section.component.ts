@@ -19,7 +19,8 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors';
 import {
-  selectITSystemUsageEnableGdprPlannedRiskAssessmentDate
+  selectITSystemUsageEnableGdprConductedRiskAssessment,
+  selectITSystemUsageEnableGdprPlannedRiskAssessmentDate,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 
 @Component({
@@ -37,12 +38,16 @@ export class GdprRiskAssessmentSectionComponent extends BaseComponent implements
   );
   public readonly selectRiskDocumentation$ = this.currentGdpr$.pipe(map((gdpr) => gdpr.riskAssessmentDocumentation));
   public disableDirectoryDocumentationControl = false;
+
   public readonly enablePlannedRiskAssessmentDateField$ = this.store.select(
     selectITSystemUsageEnableGdprPlannedRiskAssessmentDate
   );
+  public readonly conductedRiskAssessmentEnabled$ = this.store.select(
+    selectITSystemUsageEnableGdprConductedRiskAssessment
+  );
+
   public readonly yesNoDontKnowOptions = yesNoDontKnowOptions;
   public readonly riskAssessmentResultOptions = riskAssessmentResultOptions;
-
   public readonly riskAssessmentFormGroup = new FormGroup(
     {
       plannedDateControl: new FormControl<Date | undefined>(undefined),

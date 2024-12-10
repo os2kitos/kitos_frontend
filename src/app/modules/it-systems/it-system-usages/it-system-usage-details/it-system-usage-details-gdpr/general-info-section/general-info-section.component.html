@@ -3,6 +3,7 @@
 
   <app-form-grid [formGroup]="generalInformationForm">
     <app-textbox
+      *ngIf="purposeEnabled$ | async"
       text="Systemets overordnede formål"
       i18n-text
       [formGroup]="generalInformationForm"
@@ -11,6 +12,7 @@
       (valueChange)="patchGdpr({ purpose: $event })"
     ></app-textbox>
     <app-dropdown
+      *ngIf="businessCriticalEnabled$ | async"
       text="Forretningskritisk IT-System"
       i18n-text
       [formGroup]="generalInformationForm"
@@ -19,6 +21,7 @@
       (valueChange)="patchGdpr({ businessCritical: $event })"
     ></app-dropdown>
     <app-dropdown
+      *ngIf="hostedAtEnabled$ | async"
       text="IT-systemet driftes"
       i18n-text
       [formGroup]="generalInformationForm"
@@ -28,6 +31,7 @@
     ></app-dropdown>
 
     <app-edit-url-section
+      *ngIf="documentationEnabled$ | async"
       title="Link til fortegnelse"
       [simpleLink$]="selectDirectoryDocumentation$"
       i18n-title

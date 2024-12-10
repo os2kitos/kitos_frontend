@@ -16,5 +16,7 @@ export const UIModuleConfigActions = createActionGroup({
     }>(),
     'Put UI Module Customization success': props<{ uiModuleConfig: UIModuleConfig }>(),
     'Put UI Module Customization error': emptyProps(),
+
+    'Reset loading': emptyProps(),
   },
 });
