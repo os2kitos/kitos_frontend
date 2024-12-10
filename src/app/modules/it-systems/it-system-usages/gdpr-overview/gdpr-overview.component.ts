@@ -1,17 +1,17 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { of } from 'rxjs';
+import { GDPR_REPORT_FILE_PREEFIX } from 'src/app/shared/constants/constants';
+import * as GdprFields from 'src/app/shared/constants/gdpr-overview-grid-column-constants';
+import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
+import { mapDateToString } from 'src/app/shared/helpers/date.helpers';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { hostedAtOptions } from 'src/app/shared/models/it-system-usage/gdpr/hosted-at.model';
 import { riskAssessmentResultOptions } from 'src/app/shared/models/it-system-usage/gdpr/risk-assessment-result';
 import { yesNoDontKnowOptions } from 'src/app/shared/models/yes-no-dont-know.model';
+import { GridUIConfigService } from 'src/app/shared/services/ui-config-services/grid-ui-config.service';
 import { GdprReportActions } from 'src/app/store/it-system-usage/gdpr-report/actions';
 import { selectGdprReports } from 'src/app/store/it-system-usage/gdpr-report/selectors';
-import * as GdprFields from 'src/app/shared/constants/gdpr-overview-grid-column-constants';
-import { of } from 'rxjs';
-import { UIConfigService } from 'src/app/shared/services/ui-config-services/ui-config.service';
-import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
-import { mapDateToString } from 'src/app/shared/helpers/date.helpers';
-import { GDPR_REPORT_FILE_PREEFIX } from 'src/app/shared/constants/constants';
 
 @Component({
   selector: 'app-gdpr-overview',
@@ -146,7 +146,7 @@ export class GdprOverviewComponent {
 
   public readonly gdprReports$ = this.store.select(selectGdprReports);
 
-  constructor(private store: Store, private uiConfigService: UIConfigService) {
+  constructor(private store: Store, private uiConfigService: GridUIConfigService) {
     this.store.dispatch(GdprReportActions.getGDPRReports());
   }
 

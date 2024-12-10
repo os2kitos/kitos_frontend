@@ -3,6 +3,8 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
+import { UIConfigGridApplication } from 'src/app/shared/models/ui-config/ui-config-grid-application';
+import { GridUIConfigService } from 'src/app/shared/services/ui-config-services/grid-ui-config.service';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
@@ -17,33 +19,31 @@ import { OrganizationUserActions } from 'src/app/store/organization/organization
 })
 export class HideShowDialogComponent implements OnInit {
   @Input() columns!: GridColumn[];
+  @Input() uiConfigApplications?: UIConfigGridApplication[] | null = null;
   @Input() entityType!: RegistrationEntityTypes;
 
   public columnsCopy: GridColumn[] = [];
   public uniqueSections: string[] = [];
 
-  constructor(private store: Store, private dialogRef: MatDialogRef<HideShowDialogComponent>) {}
+  constructor(
+    private store: Store,
+    private dialogRef: MatDialogRef<HideShowDialogComponent>,
+    private gridUIConfigService: GridUIConfigService
+  ) {}
 
   ngOnInit() {
     this.columnsCopy = this.columns
       .filter((column) => column.style !== 'excel-only' && column.style !== 'action-buttons')
-      .filter((column) => column.disabledByUIConfig !== true)
+      .filter((column) => this.isColumnEnabled(column, this.uiConfigApplications))
       .map((column) => ({ ...column }));
     this.uniqueSections = Array.from(new Set(this.columnsCopy.map((column) => column.section!)));
   }
 
-  changeVisibility(column: GridColumn) {
+  public changeVisibility(column: GridColumn) {
     column.hidden = !column.hidden;
   }
 
-  mergeColumnChanges(): GridColumn[] {
-    return this.columns.map((originalColumn) => {
-      const updatedColumn = this.columnsCopy.find((c) => c.field === originalColumn.field);
-      return updatedColumn ? { ...originalColumn, hidden: updatedColumn.hidden } : originalColumn;
-    });
-  }
-
-  save() {
+  public save() {
     const updatedColumns = this.mergeColumnChanges();
 
     switch (this.entityType) {
@@ -71,7 +71,20 @@ export class HideShowDialogComponent implements OnInit {
     this.close();
   }
 
-  close() {
+  public close() {
     this.dialogRef.close();
+  }
+
+  private mergeColumnChanges(): GridColumn[] {
+    return this.columns.map((originalColumn) => {
+      const updatedColumn = this.columnsCopy.find((c) => c.field === originalColumn.field);
+      return updatedColumn ? { ...originalColumn, hidden: updatedColumn.hidden } : originalColumn;
+    });
+  }
+
+  private isColumnEnabled(column: GridColumn, applications?: UIConfigGridApplication[] | null): boolean {
+    if (!applications) return true;
+
+    return this.gridUIConfigService.isColumnEnabled(column, applications);
   }
 }

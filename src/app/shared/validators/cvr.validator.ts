@@ -8,11 +8,13 @@ export function cvrValidator(): ValidatorFn {
       return null;
     }
 
-    if (value.length !== 8 && value.length !== 0) {
+    const valueStr = value.toString();
+
+    if (valueStr.length !== 8 && valueStr.length !== 0) {
       return { cvrLength: true };
     }
     const regex = /^[0-9]+$/;
-    if (!regex.test(value)) {
+    if (!regex.test(valueStr)) {
       return { cvrDigits: true };
     }
     return null;

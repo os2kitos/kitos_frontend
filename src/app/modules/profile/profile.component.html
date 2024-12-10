@@ -2,6 +2,7 @@
 <app-card>
   <app-form-grid [formGroup]="editForm" *ngIf="(isLoading$ | async) === false">
     <app-org-unit-select
+      *ngIf="isUserInPrimaryOrganization$ | async"
       text="Primær organisationsenhed"
       i18n-text
       data-cy="default-responsible"
@@ -10,6 +11,13 @@
       [clearable]="false"
       (valueChange)="onChange({ defaultOrganizationUnitUuid: $event })"
     ></app-org-unit-select>
+    <app-textbox
+      *ngIf="(isUserInPrimaryOrganization$ | async) !== true"
+      text="Primær organisationsenhed"
+      [disabled]="true"
+      i18n-text
+    >
+    </app-textbox>
     <div>
       <app-textbox
         text="Email"

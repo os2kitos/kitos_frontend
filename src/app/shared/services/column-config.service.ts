@@ -1,25 +1,30 @@
 import { Injectable } from '@angular/core';
+import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
-import { GridColumn } from '../models/grid-column.model';
-import { RegistrationEntityTypes } from '../models/registrations/registration-entity-categories.model';
-import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
-import { ITContractActions } from 'src/app/store/it-contract/actions';
-import { DataProcessingActions } from 'src/app/store/data-processing/actions';
-import { APIColumnConfigurationRequestDTO, APIOrganizationGridConfigurationResponseDTO } from 'src/app/api/v2';
 import { map, Observable, of } from 'rxjs';
-import { selectItSystemUsageLastSeenGridConfig, selectUsageGridColumns } from 'src/app/store/it-system-usage/selectors';
-import { selectContractGridColumns, selectItContractLastSeenGridConfig } from 'src/app/store/it-contract/selectors';
+import { APIColumnConfigurationRequestDTO, APIOrganizationGridConfigurationResponseDTO } from 'src/app/api/v2';
+import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import {
   selectDataProcessingGridColumns,
   selectDataProcessingLastSeenGridConfig,
 } from 'src/app/store/data-processing/selectors';
-import { UIConfigService } from './ui-config-services/ui-config.service';
+import { ITContractActions } from 'src/app/store/it-contract/actions';
+import { selectContractGridColumns, selectItContractLastSeenGridConfig } from 'src/app/store/it-contract/selectors';
+import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
+import { selectItSystemUsageLastSeenGridConfig, selectUsageGridColumns } from 'src/app/store/it-system-usage/selectors';
 import { UIModuleConfigKey } from '../enums/ui-module-config-key';
-import { concatLatestFrom } from '@ngrx/operators';
+import { GridColumn } from '../models/grid-column.model';
+import { RegistrationEntityTypes } from '../models/registrations/registration-entity-categories.model';
+import { GridUIConfigService } from './ui-config-services/grid-ui-config.service';
+import { UIConfigService } from './ui-config-services/ui-config.service';
 
 @Injectable({ providedIn: 'root' })
 export class ColumnConfigService {
-  constructor(private store: Store, private uiConfigService: UIConfigService) {}
+  constructor(
+    private store: Store,
+    private uiConfigService: UIConfigService,
+    private gridUiConfigService: GridUIConfigService
+  ) {}
 
   public dispatchSaveAction(entityType: RegistrationEntityTypes, columns: GridColumn[]) {
     const mappedColumns = this.mapColumnsToGridConfigurationRequest(columns);
@@ -109,7 +114,7 @@ export class ColumnConfigService {
 
   public getGridColumns(entityType: RegistrationEntityTypes): Observable<GridColumn[]> {
     return this.getRawGridColumns(entityType).pipe(
-      this.uiConfigService.filterGridColumnsByUIConfig(this.entityTypeToModuleConfigKey(entityType))
+      this.gridUiConfigService.filterGridColumnsByUIConfig(this.entityTypeToModuleConfigKey(entityType))
     );
   }
 

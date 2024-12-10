@@ -10,12 +10,14 @@
   <app-hide-show-button
     [columns]="gridColumns$ | async"
     entityType="data-processing-registration"
+    [uiConfigApplications]="uiConfigApplications$ | async"
   ></app-hide-show-button>
 </app-overview-header>
 
 <app-grid
   [data$]="gridData$"
   [columns$]="gridColumns$"
+  [uiConfigApplications$]="uiConfigApplications$"
   [exportToExcelName]="'Databehandling Overblik'"
   i18n-exportToExcelName
   [loading]="isLoading$ | async"

@@ -13,9 +13,8 @@ describe('local-admin information', () => {
     });
     cy.intercept('PATCH', '/api/v2/internal/organizations/*/patch', {
       statusCode: 200,
-      body: { }
+      body: {},
     }).as('patch');
-
 
     cy.hoverByDataCy('profile-menu');
     cy.getByDataCy('local-admin-menu-item').should('exist').click();
@@ -31,15 +30,14 @@ describe('local-admin information', () => {
   });
 
   it('can edit cvr if global admin', () => {
-    const newCvr = '1234';
+    const newCvr = '12345678';
     cy.intercept('/api/v2/internal/organizations/*/permissions', {
       fixture: './organizations/organization-permissions-global-admin.json',
     });
     cy.intercept('PATCH', '/api/v2/internal/organizations/*/patch', {
       statusCode: 200,
-      body: { }
+      body: {},
     }).as('patch');
-
 
     cy.hoverByDataCy('profile-menu');
     cy.getByDataCy('local-admin-menu-item').should('exist').click();

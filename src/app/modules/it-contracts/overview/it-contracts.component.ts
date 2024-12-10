@@ -21,7 +21,7 @@ import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { yesNoOptions } from 'src/app/shared/models/yes-no.model';
 import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
-import { UIConfigService } from 'src/app/shared/services/ui-config-services/ui-config.service';
+import { GridUIConfigService } from 'src/app/shared/services/ui-config-services/grid-ui-config.service';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import {
   selectContractGridColumns,
@@ -40,10 +40,9 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
   public readonly isLoading$ = this.store.select(selectContractGridLoading);
   public readonly gridData$ = this.store.select(selectContractGridData);
   public readonly gridState$ = this.store.select(selectContractGridState);
-  public readonly gridColumns$ = this.store
-    .select(selectContractGridColumns)
-    .pipe(this.configService.filterGridColumnsByUIConfig(UIModuleConfigKey.ItContract));
+  public readonly gridColumns$ = this.store.select(selectContractGridColumns);
   public readonly hasCreatePermission$ = this.store.select(selectItContractHasCollectionCreatePermissions);
+  public readonly uiConfigApplications$ = this.configService.getUIConfigApplications(UIModuleConfigKey.ItContract);
 
   constructor(
     store: Store,
@@ -51,7 +50,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
     private route: ActivatedRoute,
     private actions$: Actions,
     private gridColumnStorageService: GridColumnStorageService,
-    private configService: UIConfigService
+    private configService: GridUIConfigService
   ) {
     super(store, 'it-contract');
   }

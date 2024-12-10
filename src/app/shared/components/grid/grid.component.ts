@@ -36,8 +36,10 @@ import { GridData } from '../../models/grid-data.model';
 import { GridState } from '../../models/grid-state.model';
 import { SavedFilterState } from '../../models/grid/saved-filter-state.model';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
+import { UIConfigGridApplication } from '../../models/ui-config/ui-config-grid-application';
 import { ConfirmActionCategory, ConfirmActionService } from '../../services/confirm-action.service';
 import { StatePersistingService } from '../../services/state-persisting.service';
+import { GridUIConfigService } from '../../services/ui-config-services/grid-ui-config.service';
 
 @Component({
   selector: 'app-grid',
@@ -48,6 +50,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   @ViewChild(KendoGridComponent) grid?: KendoGridComponent;
   @Input() data$!: Observable<GridData | null>;
   @Input() columns$!: Observable<GridColumn[] | null>;
+  @Input() uiConfigApplications$?: Observable<UIConfigGridApplication[]> | null = null;
   @Input() loading: boolean | null = false;
   @Input() entityType!: RegistrationEntityTypes;
 
@@ -78,7 +81,8 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     private actions$: Actions,
     private store: Store,
     private localStorage: StatePersistingService,
-    private confirmActionService: ConfirmActionService
+    private confirmActionService: ConfirmActionService,
+    private gridUIConfigService: GridUIConfigService
   ) {
     super();
     this.allData = this.allData.bind(this);
@@ -272,13 +276,15 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
               transformedItem[field] = transformedItem[`${column.dataField}`];
               break;
             case 'excel-only': {
-              const roleEmailKeys: string[] = Object.keys(transformedItem.RoleEmails);
-              roleEmailKeys.forEach((key) => {
-                const prefixedKey = `Roles.${key}`;
-                if (prefixedKey === field) {
-                  transformedItem[`${column.title}`] = transformedItem.RoleEmails[key];
-                }
-              });
+              if (transformedItem.RoleEmails) {
+                const roleEmailKeys: string[] = Object.keys(transformedItem.RoleEmails);
+                roleEmailKeys.forEach((key) => {
+                  const prefixedKey = `Roles.${key}`;
+                  if (prefixedKey === field) {
+                    transformedItem[`${column.title}`] = transformedItem.RoleEmails[key];
+                  }
+                });
+              }
               break;
             }
             case 'page-link-array':
@@ -288,11 +294,12 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
                 transformedItem[field] = excelValue;
               }
               break;
-            case 'usages': {
-              const usages = transformedItem[column.field as string];
-              transformedItem[field] = usages.length;
-            }
-            break;
+            case 'usages':
+              {
+                const usages = transformedItem[column.field as string];
+                transformedItem[field] = usages.length;
+              }
+              break;
             default:
               break;
           }
@@ -317,6 +324,12 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
           : [];
       })
     );
+  }
+
+  public isColumnEnabled(applications: true | UIConfigGridApplication[], column: GridColumn): boolean {
+    if (applications === true) return true;
+
+    return this.gridUIConfigService.isColumnEnabled(column, applications);
   }
 
   private isExcelOnlyColumn(column: GridColumn): boolean {

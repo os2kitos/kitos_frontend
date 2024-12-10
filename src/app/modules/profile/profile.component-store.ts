@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { combineLatestWith, mergeMap, Observable, tap } from 'rxjs';
 import { APIUserResponseDTO, APIV2UsersInternalINTERNALService } from 'src/app/api/v2';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
-import { selectOrganizationUuid, selectUserUuid } from 'src/app/store/user-store/selectors';
+import { selectUserOrganizationUuid, selectUserUuid } from 'src/app/store/user-store/selectors';
 
 interface State {
   isLoading: boolean;
@@ -31,7 +31,7 @@ export class ProfileComponentStore extends ComponentStore<State> {
     this.store.select(selectUserUuid).pipe(
       filterNullish(),
       tap(() => this.setLoading(true)),
-      combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+      combineLatestWith(this.store.select(selectUserOrganizationUuid).pipe(filterNullish())),
       mergeMap(([userUuid, organizationUuid]) => {
         return this.userService.getSingleUsersInternalV2GetUserByUuid({ organizationUuid, userUuid }).pipe(
           tapResponse(

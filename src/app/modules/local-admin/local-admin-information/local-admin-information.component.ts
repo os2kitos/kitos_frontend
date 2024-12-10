@@ -6,6 +6,7 @@ import { APIOrganizationUpdateRequestDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { mapOrganizationType } from 'src/app/shared/helpers/organization-type.helpers';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
+import { cvrValidator } from 'src/app/shared/validators/cvr.validator';
 import { OrganizationActions } from 'src/app/store/organization/actions';
 import { selectOrganizationHasModifyCvrPermission } from 'src/app/store/organization/selectors';
 import { UserActions } from 'src/app/store/user-store/actions';
@@ -28,7 +29,7 @@ export class LocalAdminInformationComponent extends BaseComponent implements OnI
 
   public readonly form = new FormGroup({
     nameControl: new FormControl<string | undefined>(undefined),
-    cvrControl: new FormControl<number | undefined>(undefined),
+    cvrControl: new FormControl<number | undefined>(undefined, [cvrValidator()]),
     typeControl: new FormControl<string | undefined>({ value: undefined, disabled: true }),
   });
 
@@ -66,6 +67,8 @@ export class LocalAdminInformationComponent extends BaseComponent implements OnI
   }
 
   public patchOrganizationCvr(newCvr: number | undefined) {
+    if (this.form.controls.cvrControl.invalid) return;
+
     if (newCvr !== undefined) this.patchOrganization({ cvr: newCvr?.toString() });
   }
 

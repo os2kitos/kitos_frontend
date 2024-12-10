@@ -1,4 +1,9 @@
-import { mapRoleAssignmentsToEmails, mapRoleAssignmentsToUserFullNames, RoleAssignmentEmailsMaps, RoleAssignmentsMap } from '../helpers/read-model-role-assignments';
+import {
+  mapRoleAssignmentsToEmails,
+  mapRoleAssignmentsToUserFullNames,
+  RoleAssignmentEmailsMaps,
+  RoleAssignmentsMap,
+} from '../helpers/read-model-role-assignments';
 import { IsAgreementConcluded, mapIsAgreementConcluded } from './is-agreement-concluded.model';
 import { IsOversightCompleted, mapIsOversightCompleted } from './is-oversight-completed.model';
 import {
@@ -35,7 +40,6 @@ export interface DataProcessingRegistration {
   LatestOversightDate: string;
   LastChangedByName: string;
   ContractNamesAsCsv: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   Roles: RoleAssignmentsMap;
   RoleEmails: RoleAssignmentEmailsMaps;
 }

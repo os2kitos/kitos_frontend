@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, combineLatestWith, first } from 'rxjs';
+import { BehaviorSubject, combineLatestWith, first, map } from 'rxjs';
 import { APIIdentityNamePairResponseDTO, APIUpdateUserRequestDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import {
@@ -11,11 +11,12 @@ import {
 } from 'src/app/shared/models/organization/organization-user/start-preference.model';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
+import { UserService } from 'src/app/shared/services/user.service';
 import { phoneNumberLengthValidator } from 'src/app/shared/validators/phone-number-length.validator';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
 import { UserActions } from 'src/app/store/user-store/actions';
+import { selectOrganizationUuid, selectUserOrganizationUuid } from 'src/app/store/user-store/selectors';
 import { ProfileComponentStore } from './profile.component-store';
-import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
   templateUrl: 'profile.component.html',
@@ -26,6 +27,13 @@ export class ProfileComponent extends BaseComponent implements OnInit {
   public startPreferenceOptions = this.userService.getAvailableStartPreferenceOptions();
   public readonly isLoading$ = this.componentStore.isLoading$;
   public readonly user$ = this.componentStore.user$;
+  public readonly isUserInPrimaryOrganization$ = this.store.select(selectUserOrganizationUuid).pipe(
+    filterNullish(),
+    combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+    map(([userOrganizationUuid, organizationUuid]) => {
+      return userOrganizationUuid === organizationUuid;
+    })
+  );
   public readonly alreadyExists$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private readonly currentDefaultUnitUuid$: BehaviorSubject<string | undefined> = new BehaviorSubject<
     string | undefined
@@ -46,7 +54,8 @@ export class ProfileComponent extends BaseComponent implements OnInit {
     private store: Store,
     private componentStore: ProfileComponentStore,
     private actions$: Actions,
-    private userService: UserService) {
+    private userService: UserService
+  ) {
     super();
   }
 

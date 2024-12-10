@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { createSelector, MemoizedSelector } from '@ngrx/store';
 import { memoize } from 'lodash';
 import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
@@ -8,7 +9,6 @@ import { UIModuleConfigState } from './state';
 
 export const { selectUIModuleCustomizationState } = uiModuleConfigFeature;
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const selectHasValidUIModuleConfigCache: (module: UIModuleConfigKey) => MemoizedSelector<any, boolean> = memoize(
   (module: UIModuleConfigKey) =>
     createSelector(
@@ -16,6 +16,16 @@ export const selectHasValidUIModuleConfigCache: (module: UIModuleConfigKey) => M
       () => new Date(),
       (state, now) => hasValidCache(state.uiModuleConfigs.find((config) => config.module === module)?.cacheTime, now)
     )
+);
+
+export const selectModuleConfig = (module: UIModuleConfigKey) =>
+  createSelector(selectUIModuleCustomizationState, (state: UIModuleConfigState) => {
+    return state.uiModuleConfigs.find((c) => c.module == module);
+  });
+
+export const selectUIConfigLoading = createSelector(
+  selectUIModuleCustomizationState,
+  (state: UIModuleConfigState) => state.loading
 );
 
 // eslint-disable-next-line @ngrx/prefix-selectors-with-select
@@ -36,16 +46,6 @@ const createFieldOrGroupEnabledSelector = (module: UIModuleConfigKey, tabKey: st
     const fullKey = [module, tabKey].join('.');
     return fieldOrGroupIsEnabled(moduleConfigViewModels, fullKey, fieldKey);
   });
-
-export const selectModuleConfig = (module: UIModuleConfigKey) =>
-  createSelector(selectUIModuleCustomizationState, (state: UIModuleConfigState) => {
-    return state.uiModuleConfigs.find((c) => c.module == module);
-  });
-
-export const selectUIConfigLoading = createSelector(
-  selectUIModuleCustomizationState,
-  (state: UIModuleConfigState) => state.loading
-);
 
 //Data processing
 const createDprTabEnabledSelector = (tabKey: string) =>

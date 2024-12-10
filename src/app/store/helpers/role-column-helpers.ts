@@ -14,6 +14,7 @@ export function roleDtoToRoleGridColumns(
       section: sectionName,
       style: 'page-link',
       hidden: false,
+      sortable: false,
       entityType: entityType,
       idField: 'id',
       extraData: 'roles',

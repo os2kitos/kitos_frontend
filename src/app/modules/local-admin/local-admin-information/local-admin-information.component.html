@@ -18,13 +18,7 @@
         (valueChange)="patchOrganizationCvr($event)"
         data-cy="cvr-input"
       ></app-numeric-input>
-      <app-textbox
-        text="Type"
-        i18n-text
-        [disabled]="true"
-        [formGroup]="form"
-        formName="typeControl"
-      ></app-textbox>
+      <app-textbox text="Type" i18n-text [disabled]="true" [formGroup]="form" formName="typeControl"></app-textbox>
     </app-form-grid>
   </app-card>
 </app-standard-vertical-content-grid>

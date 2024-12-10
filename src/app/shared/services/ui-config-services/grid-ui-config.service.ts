@@ -1,7 +1,7 @@
 /* eslint-disable @ngrx/avoid-combining-selectors */
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { combineLatest, map, Observable } from 'rxjs';
+import { combineLatest, combineLatestWith, map, Observable } from 'rxjs';
 import * as DprFields from 'src/app/shared/constants/data-processing-grid-column-constants';
 import * as GdprFields from 'src/app/shared/constants/gdpr-overview-grid-column-constants';
 import * as ContractFields from 'src/app/shared/constants/it-contracts-grid-column-constants';
@@ -69,7 +69,9 @@ import {
   selectITSystemUsageEnableTabSystemRoles,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { UIModuleConfigKey } from '../../enums/ui-module-config-key';
+import { filterGridColumnsByUIConfig } from '../../helpers/grid-config-helper';
 import { combineBooleansWithAnd } from '../../helpers/observable-helpers';
+import { GridColumn } from '../../models/grid-column.model';
 import { UIConfigGridApplication } from '../../models/ui-config/ui-config-grid-application';
 
 @Injectable({
@@ -77,6 +79,34 @@ import { UIConfigGridApplication } from '../../models/ui-config/ui-config-grid-a
 })
 export class GridUIConfigService {
   constructor(private store: Store) {}
+
+  public filterGridColumnsByUIConfig(
+    moduleKey: UIModuleConfigKey
+  ): (source: Observable<GridColumn[]>) => Observable<GridColumn[]> {
+    return (source) =>
+      source.pipe(
+        combineLatestWith(this.getUIConfigApplications(moduleKey)),
+        map(([gridColumns, uiConfig]) => {
+          return this.applyAllUIConfigToGridColumns(uiConfig, gridColumns);
+        }),
+        filterGridColumnsByUIConfig()
+      );
+  }
+
+  public isColumnEnabled(column: GridColumn, applications: UIConfigGridApplication[]) {
+    let enabled = true;
+
+    for (const app of applications) {
+      const result = this.verifyColumn(app, column);
+      if (result !== null) {
+        if (result === false) {
+          enabled = false;
+        }
+        break;
+      }
+    }
+    return enabled;
+  }
 
   public getUIConfigApplications(moduleKey: UIModuleConfigKey): Observable<UIConfigGridApplication[]> {
     switch (moduleKey) {
@@ -337,6 +367,46 @@ export class GridUIConfigService {
         .select(selectITSystemUsageEnableGdprPlannedRiskAssessmentDate)
         .pipe(shouldEnable([GdprFields.PLANNED_RISK_ASSESSMENT_DATE])),
     ]);
+  }
+
+  private applyAllUIConfigToGridColumns(applications: UIConfigGridApplication[], columns: GridColumn[]) {
+    let updatedColumns: GridColumn[] = [...columns];
+    applications.forEach(
+      (application) => (updatedColumns = this.applyUIConfigToGridColumns(application, updatedColumns))
+    );
+    return updatedColumns;
+  }
+
+  private applyUIConfigToGridColumns(application: UIConfigGridApplication, columns: GridColumn[]) {
+    const updatedColumns = columns.map((column) => {
+      if (
+        application.columnNamesToConfigure.has(column.field) ||
+        Array.from(application.columnNameSubstringsToConfigure || []).some((substring) =>
+          column.field.includes(substring)
+        )
+      ) {
+        return {
+          ...column,
+          hidden: column.hidden || !application.shouldEnable,
+          disabledByUIConfig: !application.shouldEnable,
+        };
+      }
+      return column;
+    });
+
+    return updatedColumns;
+  }
+
+  private verifyColumn(application: UIConfigGridApplication, column: GridColumn) {
+    if (
+      application.columnNamesToConfigure.has(column.field) ||
+      Array.from(application.columnNameSubstringsToConfigure || []).some((substring) =>
+        column.field.includes(substring)
+      )
+    ) {
+      return application.shouldEnable;
+    }
+    return null;
   }
 }
 

@@ -28,7 +28,7 @@ import { hostedAtOptionsGrid } from 'src/app/shared/models/it-system-usage/gdpr/
 import { lifeCycleStatusOptions } from 'src/app/shared/models/life-cycle-status.model';
 import { yesNoIrrelevantOptionsGrid } from 'src/app/shared/models/yes-no-irrelevant.model';
 import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
-import { UIConfigService } from 'src/app/shared/services/ui-config-services/ui-config.service';
+import { GridUIConfigService } from 'src/app/shared/services/ui-config-services/grid-ui-config.service';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import {
   selectGridData,
@@ -53,9 +53,8 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
   public readonly isLoading$ = this.store.select(selectIsLoading);
   public readonly gridData$ = this.store.select(selectGridData);
   public readonly gridState$ = this.store.select(selectGridState);
-  public readonly gridColumns$ = this.store
-    .select(selectUsageGridColumns)
-    .pipe(this.uiConfigService.filterGridColumnsByUIConfig(UIModuleConfigKey.ItSystemUsage));
+  public readonly gridColumns$ = this.store.select(selectUsageGridColumns);
+  public readonly uiConfigApplications$ = this.uiConfigService.getUIConfigApplications(UIModuleConfigKey.ItSystemUsage);
 
   public readonly organizationName$ = this.store.select(selectOrganizationName);
   public readonly hasCreatePermission$ = this.store.select(selectITSystemUsageHasCreateCollectionPermission);
@@ -514,7 +513,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     private route: ActivatedRoute,
     private gridColumnStorageService: GridColumnStorageService,
     private actions$: Actions,
-    private uiConfigService: UIConfigService
+    private uiConfigService: GridUIConfigService
   ) {
     super(store, 'it-system-usage');
   }

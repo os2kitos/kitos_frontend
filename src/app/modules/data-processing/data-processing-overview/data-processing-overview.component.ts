@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { CellClickEvent } from '@progress/kendo-angular-grid';
 import { combineLatestWith, first } from 'rxjs';
 import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
+import * as GridFields from 'src/app/shared/constants/data-processing-grid-column-constants';
 import {
   CATALOG_SECTION_NAME,
   CONTRACT_SECTION_NAME,
@@ -13,6 +14,7 @@ import {
   REFERENCE_SECTION_NAME,
   SUPERVISION_SECTION_NAME,
 } from 'src/app/shared/constants/persistent-state-constants';
+import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
 import { getColumnsToShow } from 'src/app/shared/helpers/grid-config-helper';
 import { isAgreementConcludedOptions } from 'src/app/shared/models/data-processing/is-agreement-concluded.model';
 import { isOversightCompletedOptions } from 'src/app/shared/models/data-processing/is-oversight-completed.model';
@@ -20,6 +22,8 @@ import { transferToInsecureThirdCountriesOptions } from 'src/app/shared/models/d
 import { yearMonthIntervalOptions } from 'src/app/shared/models/data-processing/year-month-interval.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
+import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
+import { GridUIConfigService } from 'src/app/shared/services/ui-config-services/grid-ui-config.service';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import {
   selectDataProcessingGridColumns,
@@ -29,10 +33,6 @@ import {
   selectDataProcessingHasCreateCollectionPermissions,
   selectDataProcessingRoleColumns,
 } from 'src/app/store/data-processing/selectors';
-import * as GridFields from 'src/app/shared/constants/data-processing-grid-column-constants';
-import { UIConfigService } from 'src/app/shared/services/ui-config-services/ui-config.service';
-import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
-import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 
 @Component({
   selector: 'app-data-processing-overview',
@@ -43,9 +43,10 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
   public readonly isLoading$ = this.store.select(selectDataProcessingGridLoading);
   public readonly gridData$ = this.store.select(selectDataProcessingGridData);
   public readonly gridState$ = this.store.select(selectDataProcessingGridState);
-  public readonly gridColumns$ = this.store
-    .select(selectDataProcessingGridColumns)
-    .pipe(this.uiConfigService.filterGridColumnsByUIConfig(UIModuleConfigKey.DataProcessingRegistrations));
+  public readonly gridColumns$ = this.store.select(selectDataProcessingGridColumns);
+  public readonly uiConfigApplications$ = this.uiConfigService.getUIConfigApplications(
+    UIModuleConfigKey.DataProcessingRegistrations
+  );
 
   public readonly hasCreatePermission$ = this.store.select(selectDataProcessingHasCreateCollectionPermissions);
   private readonly activeOptions = [
@@ -274,7 +275,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       width: 300,
       hidden: true,
       persistId: 'lastchangedname',
-    }
+    },
   ];
 
   constructor(
@@ -282,7 +283,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
     private router: Router,
     private route: ActivatedRoute,
     private actions$: Actions,
-    private uiConfigService: UIConfigService,
+    private uiConfigService: GridUIConfigService,
     private gridColumnStorageService: GridColumnStorageService
   ) {
     super(store, 'data-processing-registration');
@@ -292,7 +293,10 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
     this.store.dispatch(DataProcessingActions.getDataProcessingCollectionPermissions());
     this.store.dispatch(DataProcessingActions.getDataProcessingOverviewRoles());
 
-    const existingColumns = this.gridColumnStorageService.getColumns(DATA_PROCESSING_COLUMNS_ID, this.defaultGridColumns);
+    const existingColumns = this.gridColumnStorageService.getColumns(
+      DATA_PROCESSING_COLUMNS_ID,
+      this.defaultGridColumns
+    );
     if (existingColumns) {
       this.store.dispatch(DataProcessingActions.updateGridColumns(existingColumns));
     } else {

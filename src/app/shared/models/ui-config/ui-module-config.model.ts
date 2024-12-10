@@ -6,3 +6,8 @@ export interface UIModuleConfig {
   moduleConfigViewModel: UIConfigNodeViewModel | undefined;
   cacheTime: number | undefined;
 }
+
+export interface GridUIModuleCache {
+  module: UIModuleConfigKey;
+  cacheTime: number | undefined;
+}
