@@ -113,13 +113,19 @@ export const fkOrgFeature = createFeature({
       (state): FkOrgState => ({ ...state, isSynchronizationDialogLoading: false })
     ),
 
-    on(FkOrgActions.deleteAutomaticUpdateSubscription, (state): FkOrgState => ({ ...state, isDeleteLoading: true })),
+    on(
+      FkOrgActions.deleteAutomaticUpdateSubscription,
+      FkOrgActions.deleteConnection,
+      (state): FkOrgState => ({ ...state, isDeleteLoading: true })
+    ),
     on(
       FkOrgActions.deleteAutomaticUpdateSubscriptionSuccess,
+      FkOrgActions.deleteConnectionSuccess,
       (state): FkOrgState => ({ ...state, isDeleteLoading: false })
     ),
     on(
       FkOrgActions.deleteAutomaticUpdateSubscriptionError,
+      FkOrgActions.deleteConnectionError,
       (state): FkOrgState => ({ ...state, isDeleteLoading: false })
     ),
 

@@ -24,7 +24,7 @@
           <td>
             <app-content-space-between>
               <app-paragraph paragraphSize="small"
-                ><app-yes-no-status [status]="externalReference.masterReference"></app-yes-no-status
+                ><app-boolean-circle [value]="externalReference.masterReference"></app-boolean-circle
               ></app-paragraph>
               <app-table-row-actions *ngIf="externalReference.commands">
                 <app-icon-button

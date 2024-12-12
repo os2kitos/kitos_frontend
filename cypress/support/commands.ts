@@ -244,7 +244,10 @@ Cypress.Commands.add('testCanShowExternalReferences', () => {
   expectedRows.forEach((expectedRow) => {
     const row = () => cy.getRowForElementContent(expectedRow.title);
     row().contains(expectedRow.documentId);
-    row().contains(expectedRow.masterReference ? 'Ja' : 'Nej');
+    row()
+      .get(expectedRow.masterReference ? 'app-check-positive-green-icon' : 'app-check-negative-gray-icon')
+      .should('exist');
+
     if (expectedRow.expectedInvalidUrl) {
       row()
         .first()
@@ -320,7 +323,9 @@ Cypress.Commands.add(
       .first()
       .within(() => {
         cy.contains(newReference.documentId);
-        cy.contains(newReference.masterReference ? 'Ja' : 'Nej');
+        cy.get(newReference.masterReference ? 'app-check-positive-green-icon' : 'app-check-negative-gray-icon').should(
+          'exist'
+        );
         cy.verifyTooltipText('Ugyldigt link: ' + newReference.url);
       });
   }

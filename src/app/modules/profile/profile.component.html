@@ -11,13 +11,14 @@
       [clearable]="false"
       (valueChange)="onChange({ defaultOrganizationUnitUuid: $event })"
     ></app-org-unit-select>
-    <app-textbox
-      *ngIf="(isUserInPrimaryOrganization$ | async) !== true"
-      text="Primær organisationsenhed"
-      [disabled]="true"
-      i18n-text
-    >
-    </app-textbox>
+    <div *ngIf="(isUserInPrimaryOrganization$ | async) !== true">
+      <app-textbox text="Primær organisationsenhed" [disabled]="true" i18n-text> </app-textbox>
+      <app-textbox-info
+        ><app-paragraph paragraphSize="x-small" i18n>
+          For at ændre din primære organisationsenhed, skal du skifte til "{{ userOrganizationName$ | async }}".
+        </app-paragraph>
+      </app-textbox-info>
+    </div>
     <div>
       <app-textbox
         text="Email"

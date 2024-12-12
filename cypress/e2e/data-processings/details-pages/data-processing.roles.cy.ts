@@ -17,8 +17,8 @@ describe('it-contracts', () => {
     cy.intercept('/api/v2/-processing-registration-country-types*', {
       fixture: './dpr/choice-types/country-types.json',
     });
-    cy.intercept('/api/v2/internal/organizations/*/grid/permissions', {statusCode: 404, body: {}});
-    cy.intercept('/api/v2/internal/organizations/*/grid/*/*', {statusCode: 404, body: {}});
+    cy.intercept('/api/v2/internal/organizations/*/grid/permissions', { statusCode: 404, body: {} });
+    cy.intercept('/api/v2/internal/organizations/*/grid/*/*', { statusCode: 404, body: {} });
     cy.setup(true, 'data-processing');
   });
 
@@ -58,7 +58,9 @@ describe('it-contracts', () => {
       const row = () => nameCell.parentsUntil('tr').parent();
       row().contains(expectedRow.user.email);
       row().contains(expectedRow.user.name);
-      row().contains(expectedRow.writeAccess ? 'Ja' : 'Nej');
+      row()
+        .get(expectedRow.writeAccess ? 'app-check-positive-green-icon' : 'app-check-negative-gray-icon')
+        .should('exist');
     }
   });
 });

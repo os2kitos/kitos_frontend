@@ -428,7 +428,6 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       field: GridFields.LastEditedByUserName,
       title: $localize`Sidst redigeret: Bruger`,
       section: this.contractSection,
-      filter: 'numeric',
       width: 320,
       hidden: false,
       persistId: 'lastChangedByUser',

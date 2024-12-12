@@ -24,6 +24,7 @@ export const selectOrganizationType = createSelector(
 export const selectUserIsGlobalAdmin = createSelector(selectUser, (user) => user?.isGlobalAdmin ?? false);
 export const selectUserUuid = createSelector(selectUser, (user) => user?.uuid);
 export const selectUserOrganizationUuid = createSelector(selectUser, (user) => user?.defaultOrganizationUuid);
+export const selectUserOrganizationName = createSelector(selectUser, (user) => user?.defaultOrganizationName);
 export const selectUserIsCurrentlyLocalAdmin = createSelector(
   selectUser,
   selectOrganizationUuid,

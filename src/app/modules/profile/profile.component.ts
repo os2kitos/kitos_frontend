@@ -15,7 +15,11 @@ import { UserService } from 'src/app/shared/services/user.service';
 import { phoneNumberLengthValidator } from 'src/app/shared/validators/phone-number-length.validator';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
 import { UserActions } from 'src/app/store/user-store/actions';
-import { selectOrganizationUuid, selectUserOrganizationUuid } from 'src/app/store/user-store/selectors';
+import {
+  selectOrganizationUuid,
+  selectUserOrganizationName,
+  selectUserOrganizationUuid,
+} from 'src/app/store/user-store/selectors';
 import { ProfileComponentStore } from './profile.component-store';
 
 @Component({
@@ -34,6 +38,8 @@ export class ProfileComponent extends BaseComponent implements OnInit {
       return userOrganizationUuid === organizationUuid;
     })
   );
+  public readonly userOrganizationName$ = this.store.select(selectUserOrganizationName);
+
   public readonly alreadyExists$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private readonly currentDefaultUnitUuid$: BehaviorSubject<string | undefined> = new BehaviorSubject<
     string | undefined

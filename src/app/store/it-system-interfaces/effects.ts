@@ -7,14 +7,15 @@ import { compact } from 'lodash';
 import { catchError, combineLatestWith, map, of, switchMap } from 'rxjs';
 import { APIV2ItInterfaceService } from 'src/app/api/v2';
 import { INTERFACE_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-constants';
+import { replaceQueryByMultiplePropertyContains } from 'src/app/shared/helpers/odata-query.helpers';
 import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { adaptITInterface } from 'src/app/shared/models/it-interface/it-interface.model';
 import { OData } from 'src/app/shared/models/odata.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
+import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { ITInterfaceActions } from './actions';
 import { selectInterfaceUuid } from './selectors';
-import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 
 @Injectable()
 export class ITInterfaceEffects {
@@ -29,22 +30,24 @@ export class ITInterfaceEffects {
   getItInterfaces$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITInterfaceActions.getITInterfaces),
-      switchMap(({ odataString }) =>
-        this.httpClient
+      switchMap(({ odataString }) => {
+        const fixedOdataString = applyQueryFixes(odataString);
+
+        return this.httpClient
           .get<OData>(
             `/odata/ItInterfaces?$expand=Interface($select=Name),
             ObjectOwner($select=Name,LastName),
             Organization($select=Name),
             ExhibitedBy($expand=ItSystem($select=Id,Name,Uuid,Disabled;$expand=BelongsTo($select=Name))),
-            LastChangedByUser($select=Name,LastName),DataRows($expand=DataType($select=Name))&${odataString}&$count=true`
+            LastChangedByUser($select=Name,LastName),DataRows($expand=DataType($select=Name))&${fixedOdataString}&$count=true`
           )
           .pipe(
             map((data) =>
               ITInterfaceActions.getITInterfacesSuccess(compact(data.value.map(adaptITInterface)), data['@odata.count'])
             ),
             catchError(() => of(ITInterfaceActions.getITInterfacesError()))
-          )
-      )
+          );
+      })
     );
   });
 
@@ -211,4 +214,22 @@ export class ITInterfaceEffects {
       )
     );
   });
+}
+
+function applyQueryFixes(odataString: string): string {
+  const lastChangedByUserSearchedProperties = ['Name', 'LastName'];
+  let fixedOdataString = replaceQueryByMultiplePropertyContains(
+    odataString,
+    'LastChangedByUser.Name',
+    'LastChangedByUser',
+    lastChangedByUserSearchedProperties
+  );
+  fixedOdataString = replaceQueryByMultiplePropertyContains(
+    fixedOdataString,
+    'ObjectOwner.Name',
+    'ObjectOwner',
+    lastChangedByUserSearchedProperties
+  );
+
+  return fixedOdataString;
 }

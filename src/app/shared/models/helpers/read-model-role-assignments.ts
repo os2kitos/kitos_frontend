@@ -1,7 +1,4 @@
-import {
-  APIExtendedRoleAssignmentResponseDTO,
-  APIOrganizationUnitRolesResponseDTO,
-} from 'src/app/api/v2';
+import { APIExtendedRoleAssignmentResponseDTO, APIOrganizationUnitRolesResponseDTO } from 'src/app/api/v2';
 
 export type RoleAssignmentsMap = {
   [key: string]: string;
@@ -29,7 +26,7 @@ export function mapRoleAssignmentsToUserFullNames(roleAssignments: any): RoleAss
 export function mapRoleAssignmentsToEmails(roleAssignments: any): RoleAssignmentEmailsMaps {
   const emailsPerRole: RoleAssignmentEmailsMaps = {};
   roleAssignments.forEach((assignment: { RoleId: number; Email: string }) => {
-    const roleKey = `Role${assignment.RoleId}`;
+    const roleKey = `Role${assignment.RoleId}.email`;
     if (!emailsPerRole[roleKey]) {
       emailsPerRole[roleKey] = assignment.Email;
     } else {
@@ -40,7 +37,6 @@ export function mapRoleAssignmentsToEmails(roleAssignments: any): RoleAssignment
 }
 
 export class RegularRoleAssignment implements IRoleAssignment {
-
   public assignment: APIExtendedRoleAssignmentResponseDTO;
 
   constructor(assignment: APIExtendedRoleAssignmentResponseDTO) {
@@ -49,7 +45,6 @@ export class RegularRoleAssignment implements IRoleAssignment {
 }
 
 export class OrganizationUnitRoleAssignment implements IRoleAssignment {
-
   public assignment: APIExtendedRoleAssignmentResponseDTO;
   public unitName: string;
   public unitUuid: string;

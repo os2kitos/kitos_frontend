@@ -199,6 +199,13 @@
         position: absolute;
         bottom: var(--bottom);
         color: $color-neutral;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        .ng-value-label {
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
       }
 
       .ng-input {
@@ -244,6 +251,13 @@
       .ng-input {
         bottom: calc(var(--bottom) - 1px);
       }
+    }
+  }
+
+  //Error state border color
+  &.ng-invalid.ng-touched {
+    .ng-select-container {
+      border-color: $color-negative;
     }
   }
 
@@ -517,9 +531,10 @@
   }
 
   .sort-icon {
-    margin-left: 8px;
-    width: 18px;
-    height: 18px;
+    ::ng-deep svg {
+      width: 18px;
+      height: 18px;
+    }
   }
 
   .paragraph {

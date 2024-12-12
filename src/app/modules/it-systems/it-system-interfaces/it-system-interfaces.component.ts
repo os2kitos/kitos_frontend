@@ -10,6 +10,7 @@ import { INTERFACE_COLUMNS_ID, INTERFACE_SECTION_NAME } from 'src/app/shared/con
 import { accessModifierOptions } from 'src/app/shared/models/access-modifier.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
+import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import {
   selectInterfaceGridColumns,
@@ -18,7 +19,6 @@ import {
   selectInterfaceGridState,
   selectInterfaceHasCreateCollectionPermission,
 } from 'src/app/store/it-system-interfaces/selectors';
-import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 
 @Component({
   selector: 'app-it-system-interfaces',
@@ -100,7 +100,7 @@ export class ItSystemInterfacesComponent extends BaseOverviewComponent implement
     },
     {
       field: 'Organization.Name',
-      title: $localize`Oprettet af: Bruger`,
+      title: $localize`Oprettet af: Organisation`,
       section: this.interfaceSectionName,
       hidden: true,
     },

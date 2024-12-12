@@ -11,6 +11,7 @@ import {
   APIV2ItSystemUsageMigrationINTERNALService,
 } from 'src/app/api/v2';
 import { CATALOG_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-constants';
+import { replaceQueryByMultiplePropertyContains } from 'src/app/shared/helpers/odata-query.helpers';
 import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { adaptITSystem } from 'src/app/shared/models/it-system/it-system.model';
 import { OData } from 'src/app/shared/models/odata.model';
@@ -255,8 +256,17 @@ export class ITSystemEffects {
 }
 
 function applyQueryFixes(odataString: string): string {
-  const fixedOdataString = odataString
+  let fixedOdataString = odataString
     .replace(/(\w+\()KLEIds(.*\))/, 'TaskRefs/any(c: $1c/TaskKey$2)')
     .replace(/(\w+\()KLENames(.*\))/, 'TaskRefs/any(c: $1c/Description$2)');
+
+  const lastChangedByUserSearchedProperties = ['Name', 'LastName'];
+  fixedOdataString = replaceQueryByMultiplePropertyContains(
+    fixedOdataString,
+    'LastChangedByUser.Name',
+    'LastChangedByUser',
+    lastChangedByUserSearchedProperties
+  );
+
   return fixedOdataString;
 }

@@ -17,8 +17,8 @@ describe('it-system-usage', () => {
     });
     cy.intercept('/api/v2/it-system-usages/*/permissions', { fixture: './shared/permissions.json' });
     cy.intercept('/api/v2/it-systems/*', { fixture: 'it-system.json' }); //gets the base system
-    cy.intercept('/api/v2/internal/organizations/*/grid/permissions', {statusCode: 404, body: {}});
-    cy.intercept('/api/v2/internal/organizations/*/grid/*/*', {statusCode: 404, body: {}});
+    cy.intercept('/api/v2/internal/organizations/*/grid/permissions', { statusCode: 404, body: {} });
+    cy.intercept('/api/v2/internal/organizations/*/grid/*/*', { statusCode: 404, body: {} });
     cy.setup(true, 'it-systems/it-system-usages');
   });
 
@@ -73,7 +73,9 @@ describe('it-system-usage', () => {
       for (const expectedRow of expectedRows) {
         const row = () => cy.getRowForElementContent(expectedRow.name);
         row().contains(expectedRow.name);
-        row().contains(expectedRow.operation);
+        row()
+          .get(expectedRow.operation === 'Ja' ? 'app-check-positive-green-icon' : 'app-check-negative-gray-icon')
+          .should('exist');
         row().contains(expectedRow.validFrom);
         row().contains(expectedRow.validTo);
         if (expectedRow.terminated) {

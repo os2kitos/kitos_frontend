@@ -15,8 +15,8 @@ describe('it-system-usage', () => {
     cy.intercept('/api/v2/it-system-usages/*/permissions', { fixture: './shared/permissions.json' });
     cy.intercept('/api/v2/it-systems/*', { fixture: 'it-system.json' }); //gets the base system
     cy.intercept('/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' });
-    cy.intercept('/api/v2/internal/organizations/*/grid/permissions', {statusCode: 404, body: {}});
-    cy.intercept('/api/v2/internal/organizations/*/grid/*/*', {statusCode: 404, body: {}});
+    cy.intercept('/api/v2/internal/organizations/*/grid/permissions', { statusCode: 404, body: {} });
+    cy.intercept('/api/v2/internal/organizations/*/grid/*/*', { statusCode: 404, body: {} });
     cy.setup(true, 'it-systems/it-system-usages');
 
     cy.intercept('/api/v2/internal/notifications/*', {
@@ -46,7 +46,7 @@ describe('it-system-usage', () => {
     cy.getRowForElementContent('test1')
       .first()
       .within(() => {
-        cy.contains('Nej');
+        cy.get('app-check-negative-gray-icon');
         cy.contains('Changemanager');
         cy.contains('Forretningsejer');
       });
@@ -58,7 +58,7 @@ describe('it-system-usage', () => {
     cy.getRowForElementContent('test2')
       .first()
       .within(() => {
-        cy.contains('Ja');
+        cy.get('app-check-positive-green-icon');
         cy.contains('TestName');
         cy.contains(expectedFromDate);
         cy.contains(expectedLastSent);

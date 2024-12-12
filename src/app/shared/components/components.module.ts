@@ -124,7 +124,6 @@ import { TextBoxInfoComponent } from './textbox-info/textbox-info.component';
 import { TextBoxComponent } from './textbox/textbox.component';
 import { TooltipComponent } from './tooltip/tooltip.component';
 import { EntityTreeComponent } from './tree/entity-tree.component';
-import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
 
 import '@progress/kendo-angular-intl/locales/da/all';
 import { AccordionHeaderComponent } from './accordion-header/accordion-header.component';
@@ -200,7 +199,6 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     NativeTableComponent,
     HelpButtonComponent,
     HelpDialogComponent,
-    YesNoStatusComponent,
     SelectedOptionTypeTextComponent,
     ExternalPageLinkComponent,
     SpacerComponent,
@@ -372,7 +370,6 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     DetailsPageLinkComponent,
     NativeTableComponent,
     HelpButtonComponent,
-    YesNoStatusComponent,
     SelectedOptionTypeTextComponent,
     ExternalPageLinkComponent,
     SpacerComponent,

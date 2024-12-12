@@ -3,10 +3,11 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
+import { BehaviorSubject, first, map } from 'rxjs';
 import { APIOrganizationResponseDTO, APIUserReferenceResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { LocalAdminUserActions } from 'src/app/store/global-admin/local-admins/actions';
-import { selectLocalAdminsLoading } from 'src/app/store/global-admin/local-admins/selectors';
+import { selectAllLocalAdmins, selectLocalAdminsLoading } from 'src/app/store/global-admin/local-admins/selectors';
 
 @Component({
   selector: 'app-create-local-admin-dialog',
@@ -14,12 +15,30 @@ import { selectLocalAdminsLoading } from 'src/app/store/global-admin/local-admin
   styleUrl: './create-local-admin-dialog.component.scss',
 })
 export class CreateLocalAdminDialogComponent extends BaseComponent implements OnInit {
+  public readonly localAdminOrganizations$ = this.store.select(selectAllLocalAdmins).pipe(
+    map((localAdmins) => {
+      return localAdmins.reduce((acc: { [key: string]: string[] }, admin) => {
+        const userUuid = admin.user.uuid;
+        const orgUuid = admin.organization.uuid;
+        if (!acc[userUuid]) {
+          acc[userUuid] = [];
+        }
+        acc[userUuid].push(orgUuid);
+        return acc;
+      }, {});
+    })
+  );
+  public readonly loading$ = this.store.select(selectLocalAdminsLoading);
+
+  public readonly disabledOrganizationUuids$ = new BehaviorSubject<string[]>([]);
+
   public formGroup: FormGroup = new FormGroup({
     user: new FormControl<APIUserReferenceResponseDTO | undefined>(undefined, Validators.required),
-    organization: new FormControl<APIOrganizationResponseDTO | undefined>(undefined, Validators.required),
+    organization: new FormControl<APIOrganizationResponseDTO | undefined>(
+      { value: undefined, disabled: true },
+      Validators.required
+    ),
   });
-
-  public readonly loading$ = this.store.select(selectLocalAdminsLoading);
 
   constructor(
     private dialogRef: MatDialogRef<CreateLocalAdminDialogComponent>,
@@ -46,5 +65,20 @@ export class CreateLocalAdminDialogComponent extends BaseComponent implements On
     const userUuid = formValue.user.uuid;
     const organizationUuid = formValue.organization.uuid;
     this.store.dispatch(LocalAdminUserActions.addLocalAdmin(organizationUuid, userUuid));
+  }
+
+  public updateDisabledOrganizationUuids(): void {
+    const userUuid = this.formGroup.get('user')?.value?.uuid;
+    const organizationControl = this.formGroup.get('organization');
+    if (!userUuid) {
+      this.disabledOrganizationUuids$.next([]);
+      organizationControl?.disable();
+      return;
+    }
+    this.localAdminOrganizations$.pipe(first()).subscribe((localAdminOrganizations) => {
+      const disabledOrganizationUuids = localAdminOrganizations[userUuid] || [];
+      this.disabledOrganizationUuids$.next(disabledOrganizationUuids);
+      organizationControl?.enable();
+    });
   }
 }

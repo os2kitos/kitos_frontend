@@ -44,8 +44,8 @@ describe('it-contracts', () => {
     cy.intercept('api/v2/it-contracts?organizationUuid*', {
       fixture: './it-contracts/it-contracts-by-it-system-usage-uuid.json',
     });
-    cy.intercept('/api/v2/internal/organizations/*/grid/permissions', {statusCode: 404, body: {}});
-    cy.intercept('/api/v2/internal/organizations/*/grid/*/*', {statusCode: 404, body: {}});
+    cy.intercept('/api/v2/internal/organizations/*/grid/permissions', { statusCode: 404, body: {} });
+    cy.intercept('/api/v2/internal/organizations/*/grid/*/*', { statusCode: 404, body: {} });
     cy.setup(true, 'it-contracts');
   });
 
@@ -94,7 +94,9 @@ describe('it-contracts', () => {
       const row = () => nameCell.parentsUntil('tr').parent();
       row().contains(expectedRow.user.email);
       row().contains(expectedRow.user.name);
-      row().contains(expectedRow.writeAccess ? 'Ja' : 'Nej');
+      row()
+        .get(expectedRow.writeAccess ? 'app-check-positive-green-icon' : 'app-check-negative-gray-icon')
+        .should('exist');
 
       if (expectedRow.description) {
         row()

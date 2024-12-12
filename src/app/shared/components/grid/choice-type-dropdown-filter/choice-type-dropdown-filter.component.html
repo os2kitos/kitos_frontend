@@ -1,6 +1,6 @@
 <app-dropdown
   *ngIf="options$"
-  text="Vælg {{ column.title }}"
+  text="Vælg..."
   [data]="(options$ | async) ?? []"
   [(value)]="chosenOption"
   (valueChange)="didChange($event)"

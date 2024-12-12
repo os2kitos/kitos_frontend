@@ -24,7 +24,7 @@
             *ngIf="
               subprocessor.transferToInsecureThirdCountry && subprocessor.transferToInsecureThirdCountry !== 'Undecided'
             "
-            ><app-yes-no-status [status]="subprocessor.transferToInsecureThirdCountry === 'Yes'"></app-yes-no-status
+            ><app-boolean-circle [value]="subprocessor.transferToInsecureThirdCountry === 'Yes'"></app-boolean-circle
           ></app-paragraph>
         </td>
         <td>

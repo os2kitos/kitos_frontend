@@ -2,9 +2,20 @@
   <app-loading *ngIf="(loading$ | async) !== false"></app-loading>
   <ng-container *ngIf="(loading$ | async) === false">
     <app-standard-vertical-content-grid>
-      <app-user-dropdown formName="user" [formGroup]="formGroup" [searchGlobalUsers]="true" data-cy="user-dropdown">
+      <app-user-dropdown
+        formName="user"
+        [formGroup]="formGroup"
+        [searchGlobalUsers]="true"
+        (userChange)="updateDisabledOrganizationUuids()"
+        data-cy="user-dropdown"
+      >
       </app-user-dropdown>
-      <app-organization-dropdown formName="organization" [formGroup]="formGroup" data-cy="organization-dropdown">
+      <app-organization-dropdown
+        formName="organization"
+        [formGroup]="formGroup"
+        [disabledOrganizationUuids$]="disabledOrganizationUuids$"
+        data-cy="organization-dropdown"
+      >
       </app-organization-dropdown>
     </app-standard-vertical-content-grid>
 

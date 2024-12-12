@@ -16,12 +16,14 @@ import {
   APIV2OrganizationGridInternalINTERNALService,
 } from 'src/app/api/v2';
 import { CONTRACT_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-constants';
+import { replaceQueryByMultiplePropertyContains } from 'src/app/shared/helpers/odata-query.helpers';
 import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { adaptITContract } from 'src/app/shared/models/it-contract/it-contract.model';
 import { PaymentTypes } from 'src/app/shared/models/it-contract/payment-types.model';
 import { OData } from 'src/app/shared/models/odata.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ExternalReferencesApiService } from 'src/app/shared/services/external-references-api-service.service';
+import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 import { getNewGridColumnsBasedOnConfig } from '../helpers/grid-config-helper';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { ITContractActions } from './actions';
@@ -35,7 +37,6 @@ import {
   selectItContractUuid,
   selectOverviewContractRoles,
 } from './selectors';
-import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 
 @Injectable()
 export class ITContractEffects {
@@ -670,6 +671,14 @@ function applyQueryFixes(odataString: string, roles: { id: number; name: string 
       `RoleAssignments/any(c: $1c/UserFullName$2 and c/RoleId eq ${role.id})`
     );
   });
+
+  const lastChangedByUserSearchedProperties = ['Name', 'LastName'];
+  convertedString = replaceQueryByMultiplePropertyContains(
+    convertedString,
+    'ObjectOwner.Name',
+    'ObjectOwner',
+    lastChangedByUserSearchedProperties
+  );
 
   return convertedString;
 }

@@ -14,7 +14,8 @@
 </td>
 <td>
   <app-paragraph>
-    <app-yes-no-status [status]="rolesDictionary[role.assignment.role.uuid]?.writeAccess || false"> </app-yes-no-status>
+    <app-boolean-circle [value]="rolesDictionary[role.assignment.role.uuid]?.writeAccess || false">
+    </app-boolean-circle>
   </app-paragraph>
 </td>
 <td>

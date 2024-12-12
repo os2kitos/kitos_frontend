@@ -17,8 +17,8 @@ describe('it-system-usage', () => {
     });
     cy.intercept('/api/v2/it-system-usages/*/permissions', { fixture: './shared/permissions.json' });
     cy.intercept('/api/v2/it-systems/*', { fixture: 'it-system.json' }); //gets the base system
-    cy.intercept('/api/v2/internal/organizations/*/grid/permissions', {statusCode: 404, body: {}});
-    cy.intercept('/api/v2/internal/organizations/*/grid/*/*', {statusCode: 404, body: {}});
+    cy.intercept('/api/v2/internal/organizations/*/grid/permissions', { statusCode: 404, body: {} });
+    cy.intercept('/api/v2/internal/organizations/*/grid/*/*', { statusCode: 404, body: {} });
     cy.setup(true, 'it-systems/it-system-usages');
   });
 
@@ -69,7 +69,9 @@ describe('it-system-usage', () => {
       const row = () => nameCell.parentsUntil('tr').parent();
       row().contains(expectedRow.user.email);
       row().contains(expectedRow.user.name);
-      row().contains(expectedRow.writeAccess ? 'Ja' : 'Nej');
+      row()
+        .get(expectedRow.writeAccess ? 'app-check-positive-green-icon' : 'app-check-negative-gray-icon')
+        .should('exist');
 
       if (expectedRow.description) {
         row()
