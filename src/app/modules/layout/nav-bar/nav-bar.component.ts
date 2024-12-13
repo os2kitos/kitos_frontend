@@ -16,6 +16,7 @@ import {
 } from 'src/app/store/user-store/selectors';
 import { AppPath } from '../../../shared/enums/app-path';
 import { ChooseOrganizationComponent } from '../choose-organization/choose-organization.component';
+import { selectAllAlertCount } from 'src/app/store/alerts/selectors';
 
 @Component({
   selector: 'app-nav-bar',
@@ -30,6 +31,8 @@ export class NavBarComponent extends BaseComponent implements OnInit {
   public readonly hasMultipleOrganizations$ = this.store.select(selectHasMultipleOrganizations);
   public readonly uiRootConfig$ = this.store.select(selectUIRootConfig).pipe(filterNullish());
   public readonly isUserCurrentyLocalAdmin$ = this.store.select(selectUserIsCurrentlyLocalAdmin);
+
+  public readonly alertsCount$ = this.store.select(selectAllAlertCount);
 
   constructor(private store: Store, private dialog: MatDialog, private router: Router) {
     super();

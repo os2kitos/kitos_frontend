@@ -24,6 +24,7 @@ import { PopupMessageActions } from 'src/app/store/popup-messages/actions';
 import { UserActions } from 'src/app/store/user-store/actions';
 import { PopupMessageType } from '../enums/popup-message-type';
 import { createPopupMessage } from '../models/popup-messages/popup-message.model';
+import { AlertActions } from 'src/app/store/alerts/actions';
 
 @Injectable({ providedIn: 'root' })
 export class NotificationService implements OnDestroy {
@@ -41,6 +42,7 @@ export class NotificationService implements OnDestroy {
 
   public subscribeOnActions() {
     this.subscribeToFrontPageEvents();
+    this.subscribeToAlertEvents();
 
     this.subscribeToGridEvents();
     this.subscribeToExcelImportActions();
@@ -656,6 +658,11 @@ export class NotificationService implements OnDestroy {
 
     this.subscribeAsDefault(UserActions.resetPasswordSuccess, $localize`Dit password er blevet nulstillet`);
     this.subscribeAsError(UserActions.resetPasswordError, $localize`Dit password kunne ikke nulstilles`);
+  }
+
+  private subscribeToAlertEvents(): void {
+    this.subscribeAsDefault(AlertActions.deleteAlertSuccess, $localize`Advarslen blev slettet`);
+    this.subscribeAsError(AlertActions.deleteAlertError, $localize`Advarslen kunne ikke slettes`);
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

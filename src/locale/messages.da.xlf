@@ -6417,6 +6417,42 @@
         <source>Lokale tilknyttede opgaver</source>
         <target state="new">Lokale tilknyttede opgaver</target>
       </trans-unit>
+      <trans-unit id="9117861173318709156" datatype="html">
+        <source>Notifikationer</source>
+        <target state="new">Notifikationer</target>
+      </trans-unit>
+      <trans-unit id="5550616292634600838" datatype="html">
+        <source>Advarsler</source>
+        <target state="new">Advarsler</target>
+      </trans-unit>
+      <trans-unit id="2513003037040133293" datatype="html">
+        <source>Modtager</source>
+        <target state="new">Modtager</target>
+      </trans-unit>
+      <trans-unit id="6546355986883757646" datatype="html">
+        <source>Ikke angivet</source>
+        <target state="new">Ikke angivet</target>
+      </trans-unit>
+      <trans-unit id="3349798521063634552" datatype="html">
+        <source>Slet advarsel</source>
+        <target state="new">Slet advarsel</target>
+      </trans-unit>
+      <trans-unit id="250985142269881011" datatype="html">
+        <source>Er du sikker på, at du vil slette advarslen?</source>
+        <target state="new">Er du sikker på, at du vil slette advarslen?</target>
+      </trans-unit>
+      <trans-unit id="4279066211673456731" datatype="html">
+        <source>Besked</source>
+        <target state="new">Besked</target>
+      </trans-unit>
+      <trans-unit id="6309084160312780879" datatype="html">
+        <source>Advarslen blev slettet</source>
+        <target state="new">Advarslen blev slettet</target>
+      </trans-unit>
+      <trans-unit id="7821102703466673779" datatype="html">
+        <source>Advarslen kunne ikke slettes</source>
+        <target state="new">Advarslen kunne ikke slettes</target>
+      </trans-unit>
       <trans-unit id="987801205594216692" datatype="html">
         <source> For at ændre din primære organisationsenhed, skal du skifte til &quot;<x id="INTERPOLATION" equiv-text="{{ userOrganizationName$ | async }}"/>&quot;. </source>
         <target state="new"> For at ændre din primære organisationsenhed, skal du skifte til &quot;<x id="INTERPOLATION" equiv-text="{{ userOrganizationName$ | async }}"/>&quot;. </target>

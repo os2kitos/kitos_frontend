@@ -5,7 +5,7 @@ declare namespace Cypress {
     /**
      * Setup initial intercepters and go to path.
      */
-    setup(authenticate?: boolean,  urlPath?: string, uiCustomizationFixturePath?: string): void;
+    setup(authenticate?: boolean,  urlPath?: string, uiCustomizationFixturePath?: string, interceptAlerts?: boolean): void;
 
     /**
      * Login using form.

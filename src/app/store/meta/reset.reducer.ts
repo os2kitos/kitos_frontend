@@ -7,6 +7,8 @@ import { regularOptionTypeFeature, regularOptionTypeInitialState } from '../regu
 import { roleOptionTypeFeature, roleOptionTypeInitialState } from '../roles-option-type-store/reducer';
 import { userFeature, userInitialState } from '../user-store/reducer';
 import { resetOrganizationStateAction, resetStateAction } from './actions';
+import { alertsFeature, initialAlertsState } from '../alerts/reducers';
+import { initialNotificationsState, notificationFeature } from '../user-notifications/reducer';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function resetReducer(reducer: ActionReducer<any>): ActionReducer<any> {
@@ -17,6 +19,8 @@ export function resetReducer(reducer: ActionReducer<any>): ActionReducer<any> {
       [regularOptionTypeFeature.name]: regularOptionTypeInitialState,
       [organizationUnitFeature.name]: organizationUnitInitialState,
       [roleOptionTypeFeature.name]: roleOptionTypeInitialState,
+      [notificationFeature.name]: initialNotificationsState,
+      [alertsFeature.name]: initialAlertsState,
     };
 
     switch (action.type) {

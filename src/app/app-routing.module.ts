@@ -52,6 +52,11 @@ const routes: Routes = [
         canActivate: [AuthGuardService],
       },
       {
+        path: AppPath.notifications,
+        loadChildren: () => import('./modules/notifications/notifications.module').then((m) => m.NotifcationsModule),
+        canActivate: [AuthGuardService],
+      },
+      {
         path: AppPath.localAdmin,
         loadChildren: () => import('./modules/local-admin/local-admin.module').then((m) => m.LocalAdminModule),
         canActivate: [LocalAdminGuardService],

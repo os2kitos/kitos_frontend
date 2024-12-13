@@ -29,6 +29,7 @@ import { NotificationService } from '../../services/notification.service';
 import { NotificationsTableDialogComponent } from './notifications-table-dialog/notifications-table-dialog.component';
 import { NotificationsTableSentDialogComponent } from './notifications-table-sent-dialog/notifications-table-sent-dialog.component';
 import { NotificationsTableComponentStore } from './notifications-table.component-store';
+import { UserNotificationActions } from 'src/app/store/user-notifications/actions';
 
 @Component({
   selector: 'app-notifications-table[entityUuid][ownerResourceType][hasModifyPermission]',
@@ -206,6 +207,7 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
   }
 
   public onDialogActionComplete() {
+    this.store.dispatch(UserNotificationActions.notificationCreated(this.ownerResourceType));
     this.getNotifications();
     this.notificationDialog.closeAll();
   }

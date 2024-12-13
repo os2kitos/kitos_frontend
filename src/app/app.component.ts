@@ -10,6 +10,9 @@ import { OrganizationService } from './shared/services/organization.service';
 import { RoleOptionTypeService } from './shared/services/role-option-type.service';
 import { UserActions } from './store/user-store/actions';
 import { selectIsAuthenticating } from './store/user-store/selectors';
+import { Actions, ofType } from '@ngrx/effects';
+import { RelatedEntityType } from './store/alerts/state';
+import { AlertActions } from './store/alerts/actions';
 
 @Component({
   selector: 'app-root',
@@ -26,7 +29,8 @@ export class AppComponent extends BaseComponent implements OnInit {
     private dialog: MatDialog,
     private organizationService: OrganizationService,
     private materialIconsService: MaterialIconsConfigService,
-    private externalReferencesService: ExternalReferencesStoreAdapterService
+    private externalReferencesService: ExternalReferencesStoreAdapterService,
+    private actions$: Actions
   ) {
     super();
   }
@@ -37,6 +41,7 @@ export class AppComponent extends BaseComponent implements OnInit {
     this.notificationService.subscribeOnActions();
     this.roleOptionTypeService.subscribeOnActions();
     this.externalReferencesService.subscribeOnActions();
+    this.setupAlertSubscriptions();
   }
 
   private ensureUserIsPartOfAnOrganization() {
@@ -61,5 +66,13 @@ export class AppComponent extends BaseComponent implements OnInit {
         this.store.dispatch(UserActions.updateHasMultipleOrganizations(organizations.length > 1));
       })
     );
+  }
+
+  private setupAlertSubscriptions() {
+    this.actions$.pipe(ofType(UserActions.resetOnOrganizationUpdate)).subscribe(() => {
+      this.store.dispatch(AlertActions.getAlerts(RelatedEntityType.ItSystemUsage));
+      this.store.dispatch(AlertActions.getAlerts(RelatedEntityType.ItContract));
+      this.store.dispatch(AlertActions.getAlerts(RelatedEntityType.DataProcessingRegistration));
+    });
   }
 }

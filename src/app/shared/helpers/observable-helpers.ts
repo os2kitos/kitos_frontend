@@ -1,5 +1,5 @@
 import { Observable, combineLatest } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 /**
  * Combines an array of boolean Observables using logical AND.
@@ -17,4 +17,19 @@ export function combineBooleansWithAnd(observables: Observable<boolean>[]): Obse
  */
 export function combineBooleansWithOr(observables: Observable<boolean>[]): Observable<boolean> {
   return combineLatest(observables).pipe(map((values: boolean[]) => values.some((value) => value)));
+}
+
+/**
+ * Debug operator that logs the value of the observable.
+ * @param label - Optional label to prepend to the log message.
+ * @returns An operator function that logs the value of the observable.
+ */
+export function debugPipe<T>(label?: string) {
+  return tap<T>((value) => {
+    if (label) {
+      console.log(`${label}:`, value);
+    } else {
+      console.log(value);
+    }
+  });
 }

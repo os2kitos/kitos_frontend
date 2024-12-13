@@ -4873,6 +4873,33 @@
       <trans-unit id="4491906435283548133" datatype="html">
         <source>Lokale tilknyttede opgaver</source>
       </trans-unit>
+      <trans-unit id="5550616292634600838" datatype="html">
+        <source>Advarsler</source>
+      </trans-unit>
+      <trans-unit id="9117861173318709156" datatype="html">
+        <source>Notifikationer</source>
+      </trans-unit>
+      <trans-unit id="2513003037040133293" datatype="html">
+        <source>Modtager</source>
+      </trans-unit>
+      <trans-unit id="6546355986883757646" datatype="html">
+        <source>Ikke angivet</source>
+      </trans-unit>
+      <trans-unit id="250985142269881011" datatype="html">
+        <source>Er du sikker på, at du vil slette advarslen?</source>
+      </trans-unit>
+      <trans-unit id="3349798521063634552" datatype="html">
+        <source>Slet advarsel</source>
+      </trans-unit>
+      <trans-unit id="4279066211673456731" datatype="html">
+        <source>Besked</source>
+      </trans-unit>
+      <trans-unit id="6309084160312780879" datatype="html">
+        <source>Advarslen blev slettet</source>
+      </trans-unit>
+      <trans-unit id="7821102703466673779" datatype="html">
+        <source>Advarslen kunne ikke slettes</source>
+      </trans-unit>
       <trans-unit id="1164724015350728554" datatype="html">
         <source>Søg...</source>
       </trans-unit>

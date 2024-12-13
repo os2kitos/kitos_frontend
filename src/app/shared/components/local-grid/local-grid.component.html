@@ -12,7 +12,7 @@
   (sortChange)="onSortChange($event)"
   (pageChange)="onPageChange($event)"
   style="width: 100%"
-  [ngClass]="{ 'grid-outline': withOutline, 'fit-size-to-content': fitSizeToContent}"
+  [ngClass]="{ 'grid-outline': withOutline, 'fit-size-to-content': fitSizeToContent }"
 >
   <ng-container *ngFor="let column of columns">
     <kendo-grid-column
@@ -112,6 +112,19 @@
             [maxPriority]="column.extraData.maxPriority"
           ></app-priority-buttons>
         </div>
+      </ng-template>
+
+      <ng-template *ngIf="column.style === 'page-link' && column.idField" kendoGridCellTemplate let-dataItem>
+        <app-paragraph [cropOnOverflow]="true">
+          <app-details-page-link
+            *ngIf="searchProperty(dataItem, column.idField) as itemUuid"
+            linkFontSize="small"
+            [itemType]="column.entityType"
+            [itemUuid]="itemUuid"
+            [subpagePath]="column.extraData"
+            >{{ searchProperty(dataItem, column.field) }}</app-details-page-link
+          >
+        </app-paragraph>
       </ng-template>
 
       <ng-template *ngIf="column.style === 'action-buttons'" kendoGridCellTemplate let-dataItem>

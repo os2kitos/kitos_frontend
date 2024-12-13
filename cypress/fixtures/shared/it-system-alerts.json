@@ -1,0 +1,10 @@
+[
+  {
+      "uuid": "a146bb20-c071-4a1a-901d-fcec94188cfa",
+      "entityUuid": "2fee1207-3f50-490c-b258-c1402c6ec1f4",
+      "name": "Ikke navngivet",
+      "alertType": "Advis",
+      "message": "Advis kunne ikke sendes da der ikke blev fundet nogen gyldig modtager. Dette kan skyldes at der ikke er nogen bruger tilknyttet den/de valgte rolle(r).",
+      "created": "2024-12-12T10:34:59.7502299Z"
+  }
+]

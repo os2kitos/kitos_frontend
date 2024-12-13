@@ -1,0 +1,355 @@
+[
+  {
+      "uuid": "96e088b3-87e2-46e8-a387-aafc4ce31aca",
+      "active": false,
+      "name": null,
+      "lastSent": null,
+      "fromDate": null,
+      "toDate": null,
+      "subject": "asdasd",
+      "body": "<p>asd</p>",
+      "ownerResourceType": "ItSystemUsage",
+      "notificationType": "Immediate",
+      "ownerResource": {
+          "uuid": "2fee1207-3f50-490c-b258-c1402c6ec1f4",
+          "name": "DefaultTestItSystem"
+      },
+      "repetitionFrequency": null,
+      "receivers": {
+          "emailRecipients": [],
+          "roleRecipients": [
+              {
+                  "role": {
+                      "uuid": "28051bc6-0ae1-4537-bf16-4e3f5caa85a5",
+                      "name": "Changemanager"
+                  }
+              },
+              {
+                  "role": {
+                      "uuid": "2d5aeaa8-c725-4b26-a6b9-10850ac52fea",
+                      "name": "Dataejer"
+                  }
+              },
+              {
+                  "role": {
+                      "uuid": "88c9bb1e-f41f-4607-8469-57035ed8cfe1",
+                      "name": "Forretningsejer"
+                  }
+              },
+              {
+                  "role": {
+                      "uuid": "1cf2ac9c-2353-4bd7-b2a9-5c8a3660ea0d",
+                      "name": "Sikkerhedsansvarlig"
+                  }
+              },
+              {
+                  "role": {
+                      "uuid": "d79c9a8c-b469-4aa2-910a-ab1897f851b3",
+                      "name": "Superbruger"
+                  }
+              },
+              {
+                  "role": {
+                      "uuid": "a0c5e81c-2a35-4868-af82-10dbbec7f79f",
+                      "name": "Superbrugeransvarlig"
+                  }
+              },
+              {
+                  "role": {
+                      "uuid": "d39ba4b4-8b36-4b50-8976-43c7dcdfb52f",
+                      "name": "Systemadminstrator"
+                  }
+              },
+              {
+                  "role": {
+                      "uuid": "b7d64bd8-8137-45c2-ae30-9c44cb31fe4b",
+                      "name": "Systemansvarlig"
+                  }
+              },
+              {
+                  "role": {
+                      "uuid": "01397b08-ef16-4167-acf5-7b238f7278b6",
+                      "name": "Systemejer"
+                  }
+              }
+          ]
+      },
+      "cCs": {
+          "emailRecipients": [],
+          "roleRecipients": []
+      }
+  },
+  {
+      "uuid": "2d5cc869-c37e-414a-9f9a-f66eba2effcf",
+      "active": true,
+      "name": null,
+      "lastSent": null,
+      "fromDate": null,
+      "toDate": null,
+      "subject": "asdasd",
+      "body": "<p>asdasdasd</p>",
+      "ownerResourceType": "ItSystemUsage",
+      "notificationType": "Immediate",
+      "ownerResource": {
+          "uuid": "2fee1207-3f50-490c-b258-c1402c6ec1f4",
+          "name": "DefaultTestItSystem"
+      },
+      "repetitionFrequency": null,
+      "receivers": {
+          "emailRecipients": [],
+          "roleRecipients": [
+              {
+                  "role": {
+                      "uuid": "28051bc6-0ae1-4537-bf16-4e3f5caa85a5",
+                      "name": "Changemanager"
+                  }
+              },
+              {
+                  "role": {
+                      "uuid": "2d5aeaa8-c725-4b26-a6b9-10850ac52fea",
+                      "name": "Dataejer"
+                  }
+              },
+              {
+                  "role": {
+                      "uuid": "88c9bb1e-f41f-4607-8469-57035ed8cfe1",
+                      "name": "Forretningsejer"
+                  }
+              },
+              {
+                  "role": {
+                      "uuid": "1cf2ac9c-2353-4bd7-b2a9-5c8a3660ea0d",
+                      "name": "Sikkerhedsansvarlig"
+                  }
+              },
+              {
+                  "role": {
+                      "uuid": "d79c9a8c-b469-4aa2-910a-ab1897f851b3",
+                      "name": "Superbruger"
+                  }
+              },
+              {
+                  "role": {
+                      "uuid": "a0c5e81c-2a35-4868-af82-10dbbec7f79f",
+                      "name": "Superbrugeransvarlig"
+                  }
+              },
+              {
+                  "role": {
+                      "uuid": "d39ba4b4-8b36-4b50-8976-43c7dcdfb52f",
+                      "name": "Systemadminstrator"
+                  }
+              },
+              {
+                  "role": {
+                      "uuid": "b7d64bd8-8137-45c2-ae30-9c44cb31fe4b",
+                      "name": "Systemansvarlig"
+                  }
+              },
+              {
+                  "role": {
+                      "uuid": "01397b08-ef16-4167-acf5-7b238f7278b6",
+                      "name": "Systemejer"
+                  }
+              }
+          ]
+      },
+      "cCs": {
+          "emailRecipients": [],
+          "roleRecipients": []
+      }
+  },
+  {
+      "uuid": "62a4f987-8b68-4b66-b3e1-cb70d6fd0897",
+      "active": false,
+      "name": null,
+      "lastSent": "2024-12-12T10:50:28.9697797Z",
+      "fromDate": null,
+      "toDate": null,
+      "subject": "emne",
+      "body": "<p>en ting</p>",
+      "ownerResourceType": "ItSystemUsage",
+      "notificationType": "Immediate",
+      "ownerResource": {
+          "uuid": "2fee1207-3f50-490c-b258-c1402c6ec1f4",
+          "name": "DefaultTestItSystem"
+      },
+      "repetitionFrequency": null,
+      "receivers": {
+          "emailRecipients": [
+              {
+                  "email": "test@mail.dk"
+              }
+          ],
+          "roleRecipients": []
+      },
+      "cCs": {
+          "emailRecipients": [],
+          "roleRecipients": []
+      }
+  },
+  {
+      "uuid": "82980a7c-fad9-4702-ac7b-589ab448d7d5",
+      "active": true,
+      "name": "asd",
+      "lastSent": "2024-12-12T13:00:14.7737297Z",
+      "fromDate": "2024-12-12T00:00:00Z",
+      "toDate": "2024-12-20T00:00:00Z",
+      "subject": "asd",
+      "body": "<p>asd</p>",
+      "ownerResourceType": "ItSystemUsage",
+      "notificationType": "Repeat",
+      "ownerResource": {
+          "uuid": "2fee1207-3f50-490c-b258-c1402c6ec1f4",
+          "name": "DefaultTestItSystem"
+      },
+      "repetitionFrequency": "Hour",
+      "receivers": {
+          "emailRecipients": [
+              {
+                  "email": "test@user.dk"
+              }
+          ],
+          "roleRecipients": [
+              {
+                  "role": {
+                      "uuid": "28051bc6-0ae1-4537-bf16-4e3f5caa85a5",
+                      "name": "Changemanager"
+                  }
+              },
+              {
+                  "role": {
+                      "uuid": "2d5aeaa8-c725-4b26-a6b9-10850ac52fea",
+                      "name": "Dataejer"
+                  }
+              },
+              {
+                  "role": {
+                      "uuid": "88c9bb1e-f41f-4607-8469-57035ed8cfe1",
+                      "name": "Forretningsejer"
+                  }
+              },
+              {
+                  "role": {
+                      "uuid": "1cf2ac9c-2353-4bd7-b2a9-5c8a3660ea0d",
+                      "name": "Sikkerhedsansvarlig"
+                  }
+              },
+              {
+                  "role": {
+                      "uuid": "d79c9a8c-b469-4aa2-910a-ab1897f851b3",
+                      "name": "Superbruger"
+                  }
+              },
+              {
+                  "role": {
+                      "uuid": "a0c5e81c-2a35-4868-af82-10dbbec7f79f",
+                      "name": "Superbrugeransvarlig"
+                  }
+              },
+              {
+                  "role": {
+                      "uuid": "d39ba4b4-8b36-4b50-8976-43c7dcdfb52f",
+                      "name": "Systemadminstrator"
+                  }
+              },
+              {
+                  "role": {
+                      "uuid": "b7d64bd8-8137-45c2-ae30-9c44cb31fe4b",
+                      "name": "Systemansvarlig"
+                  }
+              },
+              {
+                  "role": {
+                      "uuid": "01397b08-ef16-4167-acf5-7b238f7278b6",
+                      "name": "Systemejer"
+                  }
+              }
+          ]
+      },
+      "cCs": {
+          "emailRecipients": [],
+          "roleRecipients": []
+      }
+  },
+  {
+      "uuid": "d7775dbf-2d9a-45ed-b73b-2b52f469199c",
+      "active": true,
+      "name": null,
+      "lastSent": null,
+      "fromDate": null,
+      "toDate": null,
+      "subject": "ad",
+      "body": "<p>asd</p>",
+      "ownerResourceType": "ItSystemUsage",
+      "notificationType": "Immediate",
+      "ownerResource": {
+          "uuid": "2fee1207-3f50-490c-b258-c1402c6ec1f4",
+          "name": "DefaultTestItSystem"
+      },
+      "repetitionFrequency": null,
+      "receivers": {
+          "emailRecipients": [],
+          "roleRecipients": [
+              {
+                  "role": {
+                      "uuid": "28051bc6-0ae1-4537-bf16-4e3f5caa85a5",
+                      "name": "Changemanager"
+                  }
+              },
+              {
+                  "role": {
+                      "uuid": "2d5aeaa8-c725-4b26-a6b9-10850ac52fea",
+                      "name": "Dataejer"
+                  }
+              },
+              {
+                  "role": {
+                      "uuid": "88c9bb1e-f41f-4607-8469-57035ed8cfe1",
+                      "name": "Forretningsejer"
+                  }
+              },
+              {
+                  "role": {
+                      "uuid": "1cf2ac9c-2353-4bd7-b2a9-5c8a3660ea0d",
+                      "name": "Sikkerhedsansvarlig"
+                  }
+              },
+              {
+                  "role": {
+                      "uuid": "d79c9a8c-b469-4aa2-910a-ab1897f851b3",
+                      "name": "Superbruger"
+                  }
+              },
+              {
+                  "role": {
+                      "uuid": "a0c5e81c-2a35-4868-af82-10dbbec7f79f",
+                      "name": "Superbrugeransvarlig"
+                  }
+              },
+              {
+                  "role": {
+                      "uuid": "d39ba4b4-8b36-4b50-8976-43c7dcdfb52f",
+                      "name": "Systemadminstrator"
+                  }
+              },
+              {
+                  "role": {
+                      "uuid": "b7d64bd8-8137-45c2-ae30-9c44cb31fe4b",
+                      "name": "Systemansvarlig"
+                  }
+              },
+              {
+                  "role": {
+                      "uuid": "01397b08-ef16-4167-acf5-7b238f7278b6",
+                      "name": "Systemejer"
+                  }
+              }
+          ]
+      },
+      "cCs": {
+          "emailRecipients": [],
+          "roleRecipients": []
+      }
+  }
+]

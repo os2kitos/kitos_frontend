@@ -1,0 +1,6 @@
+<app-local-grid
+  [data]="(alerts$ | async) ?? []"
+  [columns]="gridColumns"
+  [deletePermission]="true"
+  (deleteEvent)="deleteAlert($event)"
+></app-local-grid>

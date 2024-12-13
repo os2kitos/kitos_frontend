@@ -1,0 +1,14 @@
+@import "theme";
+
+:host ::ng-deep {
+  .notification-button {
+    button {
+      padding: 0 !important;
+      border-color: $color-neutral-20 !important;
+    }
+
+    .mat-badge-content {
+      color: $color-white;
+    }
+  }
+}
