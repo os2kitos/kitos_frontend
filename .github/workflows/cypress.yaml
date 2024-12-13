@@ -7,6 +7,7 @@ on:
   push:
     branches:
       - main # Runs on merges to the main branch
+  workflow_dispatch:
 
 jobs:
   cypress-run:
