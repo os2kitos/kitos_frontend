@@ -35,9 +35,11 @@ export const adaptITSystem = (value: any, currentOrganizationUuid: string): ITSy
   if (!value.Uuid) return;
   const isDisabled = value.Disabled;
 
-  const mappedUsages: IdentityNamePair[] = value.Usages.map((usage: {Organization: {Name: string, Uuid: string}}) => {
-    return { name: usage.Organization.Name, uuid: usage.Organization.Uuid };
-  });
+  const mappedUsages: IdentityNamePair[] = value.Usages.map(
+    (usage: { Organization: { Name: string; Uuid: string } }) => {
+      return { name: usage.Organization.Name, uuid: usage.Organization.Uuid };
+    }
+  );
 
   return {
     id: value.Uuid,

@@ -1,4 +1,9 @@
-import { mapRoleAssignmentsToEmails, mapRoleAssignmentsToUserFullNames, RoleAssignmentEmailsMaps, RoleAssignmentsMap } from '../helpers/read-model-role-assignments';
+import {
+  mapRoleAssignmentsToEmails,
+  mapRoleAssignmentsToUserFullNames,
+  RoleAssignmentEmailsMaps,
+  RoleAssignmentsMap,
+} from '../helpers/read-model-role-assignments';
 import { LifeCycleStatus, mapLifeCycleStatus } from '../life-cycle-status.model';
 import { YesNoDontKnowOptions } from '../yes-no-dont-know.model';
 import { mapToYesNoIrrelevantEnumGrid } from '../yes-no-irrelevant.model';
@@ -8,6 +13,7 @@ import { HostedAt, mapGridHostedAt } from './gdpr/hosted-at.model';
 export interface ITSystemUsage {
   //ngrx requires the id field to have lowercase 'id' name
   id: string;
+  SystemActive: boolean;
   ActiveAccordingToValidityPeriod: boolean;
   ActiveAccordingToLifeCycle: boolean;
   MainContractIsActive: boolean;
@@ -69,6 +75,7 @@ export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
 
   return {
     id: value.SourceEntityUuid,
+    SystemActive: value.SystemActive,
     ActiveAccordingToValidityPeriod: value.ActiveAccordingToValidityPeriod,
     ActiveAccordingToLifeCycle: value.ActiveAccordingToLifeCycle,
     MainContractIsActive: value.MainContractIsActive,

@@ -151,8 +151,7 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
               emailControl: undefined,
               emailControlDropdown: dataResponsibleFromOrganizationUsers,
             });
-          }
-          else this.dataResponsibleForm.controls.emailControl.patchValue(dataResponsible.email);
+          } else this.dataResponsibleForm.controls.emailControl.patchValue(dataResponsible.email);
         }
       )
     );
@@ -179,8 +178,7 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
               emailControl: undefined,
               emailControlDropdown: contactPersonFromOrganizationUsers,
             });
-          }
-          else this.contactPersonForm.controls.emailControl.patchValue(contactPerson.email);
+          } else this.contactPersonForm.controls.emailControl.patchValue(contactPerson.email);
         }
       )
     );
@@ -247,6 +245,11 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
 
   public updateMasterDataRolesContactPersonEmailFreeText() {
     const controls = this.contactPersonForm.controls;
+    const searchedEmail = controls.emailControlDropdown.value;
+    const typedEmail = controls.emailControl.value;
+
+    if (!typedEmail && searchedEmail) return;
+
     controls.emailControlDropdown.patchValue(undefined);
     this.toggleContactPersonNonEmailControls(true);
     this.patchMasterDataRolesContactPerson();
@@ -254,6 +257,11 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
 
   public updateMasterDataRolesDataResponsibleEmailFreeText() {
     const controls = this.dataResponsibleForm.controls;
+    const searchedEmail = controls.emailControlDropdown.value;
+    const typedEmail = controls.emailControl.value;
+
+    if (!typedEmail && searchedEmail) return;
+
     controls.emailControlDropdown.patchValue(undefined);
     this.toggleDataResponsibleNonEmailControls(true);
     this.patchMasterDataRolesDataResponsible();

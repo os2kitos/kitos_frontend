@@ -63,18 +63,21 @@
               [filter]="filter"
               *ngIf="columnFilter.filter === 'text' && !column.extraFilter"
               [entityType]="entityType"
+              class="overflow-hidden-container"
             ></app-string-filter>
             <app-numeric-filter
               [column]="columnFilter"
               [filter]="filter"
               *ngIf="columnFilter.filter === 'numeric'"
               [entityType]="entityType"
+              class="overflow-hidden-container"
             ></app-numeric-filter>
             <app-date-filter
               [column]="columnFilter"
               [filter]="filter"
               *ngIf="columnFilter.filter === 'date'"
               [entityType]="entityType"
+              class="overflow-hidden-container"
             ></app-date-filter>
             <app-dropdown-filter
               [column]="columnFilter"
@@ -84,6 +87,7 @@
               *ngIf="
                 columnFilter.filter === 'boolean' || (columnFilter.filter === 'text' && column.extraFilter === 'enum')
               "
+              class="overflow-hidden-container"
             ></app-dropdown-filter>
             <app-unit-dropdown-filter
               *ngIf="columnFilter.filter === 'text' && column.extraFilter === 'organization-unit'"
@@ -99,6 +103,7 @@
               [sortOptions]="column.sortFilter"
               *ngIf="columnFilter.filter === 'text' && column.extraFilter === 'choice-type'"
               [entityType]="entityType"
+              class="overflow-hidden-container"
             ></app-choice-type-dropdown-filter>
             <app-dropdown-column-data-filter
               [column]="columnFilter"
@@ -107,6 +112,7 @@
               [columnName]="column.field"
               *ngIf="columnFilter.filter === 'text' && column.extraFilter === 'dropdown-from-column-data'"
               [entityType]="entityType"
+              class="overflow-hidden-container"
             ></app-dropdown-column-data-filter>
             <app-choice-type-dropdown-filter
               [column]="columnFilter"
@@ -115,6 +121,7 @@
               [shouldFilterByChoiceTypeName]="true"
               *ngIf="columnFilter.filter === 'text' && column.extraFilter === 'choice-type-by-name'"
               [entityType]="entityType"
+              class="overflow-hidden-container"
             ></app-choice-type-dropdown-filter>
           </ng-container>
         </ng-template>
@@ -130,21 +137,39 @@
           <div class="paragraph might-overflow bold-font">{{ searchProperty(dataItem, column.field) }}</div>
         </ng-template>
         <ng-template *ngIf="column.style === 'chip'" kendoGridCellTemplate let-dataItem>
-          <div class="items-center-container">
+          <div class="items-center-container overflow-hidden-container" #chip>
             <app-status-chip
+              *ngIf="!checkOverflow(chip)"
               [type]="column.entityType"
               [value]="searchProperty(dataItem, column.field)"
               [valueDisplayType]="column.booleanValueDisplay"
+              [overflows]="false"
+            ></app-status-chip>
+            <app-status-chip
+              *ngIf="checkOverflow(chip)"
+              [type]="column.entityType"
+              [value]="searchProperty(dataItem, column.field)"
+              [valueDisplayType]="column.booleanValueDisplay"
+              [overflows]="true"
             ></app-status-chip>
           </div>
         </ng-template>
 
         <ng-template *ngIf="column.style === 'reverse-chip'" kendoGridCellTemplate let-dataItem>
-          <div class="items-center-container">
+          <div class="items-center-container overflow-hidden-container" #chip>
             <app-status-chip
+              *ngIf="!checkOverflow(chip)"
               type="it-interface"
               [value]="searchProperty(dataItem, column.field)"
               [reverseValues]="true"
+              [overflows]="false"
+            ></app-status-chip>
+            <app-status-chip
+              *ngIf="checkOverflow(chip)"
+              type="it-interface"
+              [value]="searchProperty(dataItem, column.field)"
+              [reverseValues]="true"
+              [overflows]="true"
             ></app-status-chip>
           </div>
         </ng-template>

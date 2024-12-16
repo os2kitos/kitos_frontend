@@ -9,6 +9,7 @@
       formName="durationYears"
       (valueChange)="patchDurationYears({ durationYears: $event })"
       [placeholder]="durationYearsPlaceholder()"
+      #durationYearsInput
     ></app-numeric-input>
     <app-numeric-input
       text="Varighed måneder"
@@ -16,19 +17,23 @@
       data-cy="deadlines-duration-months"
       [formGroup]="deadlinesFormGroup"
       formName="durationMonths"
-      [maxLength]="12"
+      [maxLength]="11"
+      placeholder="Indtast et heltal mellem 0 og 11"
       (valueChange)="patchDeadlines({ durationMonths: $event })"
+      #durationMonthsInput
     ></app-numeric-input>
-    <app-checkbox
-      text="Løbende"
-      i18n-text
-      labelPosition="after"
-      data-cy="deadlines-is-continous"
-      [formGroup]="deadlinesFormGroup"
-      formName="isContinous"
-      (valueChange)="patchIsContinous($event)"
-    >
-    </app-checkbox>
+    <div class="is-continous-checkbox-center">
+      <app-checkbox
+        text="Løbende"
+        i18n-text
+        labelPosition="after"
+        data-cy="deadlines-is-continous"
+        [formGroup]="deadlinesFormGroup"
+        formName="isContinous"
+        (valueChange)="patchIsContinous($event)"
+      >
+      </app-checkbox>
+    </div>
     <app-dropdown
       text="Option forlæng"
       i18n-text

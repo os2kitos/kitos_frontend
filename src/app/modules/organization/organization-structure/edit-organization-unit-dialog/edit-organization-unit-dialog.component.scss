@@ -78,6 +78,7 @@
 
 .right-buttons app-button {
   flex: 0 0 calc(100% / 12); /* Each button takes 1/12th of the width */
+  padding-right: 10px;
 }
 
 :host ::ng-deep ng-select {

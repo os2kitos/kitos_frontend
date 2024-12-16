@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { isNumber } from 'lodash';
@@ -10,6 +10,7 @@ import {
   APIUpdateContractRequestDTO,
 } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { NumericInputComponent } from 'src/app/shared/components/numeric-input/numeric-input.component';
 import { optionalNewDate } from 'src/app/shared/helpers/date.helpers';
 import {
   YearSegmentChoice,
@@ -69,6 +70,9 @@ export class ItContractDeadlinesComponent extends BaseComponent implements OnIni
 
   public readonly agreementDeadlinesEnabled$ = this.store.select(selectItContractsEnableAgreementDeadlines);
   public readonly terminationEnabled$ = this.store.select(selectItContractsEnableTermination);
+
+  @ViewChild('durationMonthsInput') durationYearsInput!: NumericInputComponent;
+  @ViewChild('durationMonthsInput') durationMonthsInput!: NumericInputComponent;
 
   constructor(private readonly store: Store, private readonly notificationService: NotificationService) {
     super();
@@ -147,6 +151,7 @@ export class ItContractDeadlinesComponent extends BaseComponent implements OnIni
     };
     if (isContinous) {
       request = { ...request, durationYears: '', durationMonths: '' };
+      this.clearDurationInputs();
     }
 
     this.patchDeadlines(request, valueChange);
@@ -162,5 +167,10 @@ export class ItContractDeadlinesComponent extends BaseComponent implements OnIni
 
   public durationYearsPlaceholder() {
     return $localize`Indtast et heltal mellem 0 og ${this.deadlineDurationYearsUpperLimit}`;
+  }
+
+  private clearDurationInputs() {
+    this.durationYearsInput.clear();
+    this.durationMonthsInput.clear();
   }
 }

@@ -61,22 +61,34 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
 
   private readonly systemSectionName = USAGE_SECTION_NAME;
 
+  private readonly activeInactiveData = [
+    {
+      name: $localize`Aktivt`,
+      value: true,
+    },
+    {
+      name: $localize`Ikke aktivt`,
+      value: false,
+    },
+  ];
   public readonly defaultGridColumns: GridColumn[] = [
+    {
+      field: GridFields.SystemActive,
+      title: $localize`Status`,
+      section: this.systemSectionName,
+      filter: 'boolean',
+      extraData: this.activeInactiveData,
+      entityType: 'it-system-usage',
+      style: 'chip',
+      hidden: false,
+      persistId: 'systemIsActive',
+    },
     {
       field: GridFields.ActiveAccordingToValidityPeriod,
       title: $localize`Status (Datofelter)`,
       section: this.systemSectionName,
       filter: 'boolean',
-      extraData: [
-        {
-          name: $localize`Aktivt`,
-          value: true,
-        },
-        {
-          name: $localize`Ikke aktivt`,
-          value: false,
-        },
-      ],
+      extraData: this.activeInactiveData,
       entityType: 'it-system-usage',
       style: 'chip',
       hidden: false,
@@ -87,16 +99,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       title: $localize`Status (Livscyklus)`,
       section: this.systemSectionName,
       filter: 'boolean',
-      extraData: [
-        {
-          name: $localize`Aktivt`,
-          value: true,
-        },
-        {
-          name: $localize`Ikke aktivt`,
-          value: false,
-        },
-      ],
+      extraData: this.activeInactiveData,
       entityType: 'it-system-usage',
       style: 'chip',
       hidden: false,
@@ -107,16 +110,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       title: $localize`Status (Markeret kontrakt)`,
       section: this.systemSectionName,
       filter: 'boolean',
-      extraData: [
-        {
-          name: $localize`Aktivt`,
-          value: true,
-        },
-        {
-          name: $localize`Ikke aktivt`,
-          value: false,
-        },
-      ],
+      extraData: this.activeInactiveData,
       entityType: 'it-system-usage',
       style: 'chip',
       width: 340,

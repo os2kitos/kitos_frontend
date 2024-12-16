@@ -1,3 +1,4 @@
+export const SystemActive = 'SystemActive';
 export const ActiveAccordingToValidityPeriod = 'ActiveAccordingToValidityPeriod';
 export const ActiveAccordingToLifeCycle = 'ActiveAccordingToLifeCycle';
 export const MainContractIsActive = 'MainContractIsActive';

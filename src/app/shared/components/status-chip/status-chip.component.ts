@@ -21,7 +21,7 @@ export class StatusChipComponent implements OnInit {
   @Input() public title?: string | null = '';
   @Input() public reverseValues?: boolean = false;
   @Input() public valueDisplayType?: BooleanValueDisplayType | null;
-
+  @Input() public overflows?: boolean = false;
   public trueString?: string;
   public falseString?: string;
 
@@ -30,8 +30,7 @@ export class StatusChipComponent implements OnInit {
   ngOnInit() {
     if (this.valueDisplayType) {
       this.setTrueFalseStringsFromValueDisplayType(this.valueDisplayType);
-    }
-    else if (this.type) {
+    } else if (this.type) {
       this.setTrueFalseStringsFromEntityStatusTexts(this.type);
     } else {
       console.error('type not provided');

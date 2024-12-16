@@ -74,7 +74,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   public dataSource = new MatTableDataSource<T>();
 
   public readonly defaultColumnWidth = 270;
-  public readonly defaultMinimumColumnWidth = 50;
+  public readonly defaultMinimumColumnWidth = 55;
   public readonly defaultDateColumnWidth = 350;
 
   constructor(
@@ -149,6 +149,8 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     const take = pageSize ?? this.data?.total;
     this.onStateChange({ ...this.state, skip: 0, take, all: pageSize ? false : true });
   }
+
+  private isResizing = false;
 
   public onResizeChange(event: ColumnResizeArgs[], columns: GridColumn[]) {
     const columnsCopy = JSON.parse(JSON.stringify(columns)) as GridColumn[];
@@ -330,6 +332,11 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     if (applications === true) return true;
 
     return this.gridUIConfigService.isColumnEnabled(column, applications);
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  public checkOverflow(element: any) {
+    return element.offsetWidth < 75;
   }
 
   private isExcelOnlyColumn(column: GridColumn): boolean {
