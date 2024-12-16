@@ -1,4 +1,5 @@
 export * from './alertResponseDTO';
+export * from './appliedProcurementPlanResponseDTO';
 export * from './archivingCreationRequestDTO';
 export * from './archivingRegistrationsResponseDTO';
 export * from './archivingUpdateRequestDTO';

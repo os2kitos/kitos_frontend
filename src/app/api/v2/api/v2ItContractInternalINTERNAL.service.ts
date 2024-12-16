@@ -19,6 +19,8 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
+import { APIAppliedProcurementPlanResponseDTO } from '../model/aPIAppliedProcurementPlanResponseDTO';
+// @ts-ignore
 import { APIExtendedRoleAssignmentResponseDTO } from '../model/aPIExtendedRoleAssignmentResponseDTO';
 // @ts-ignore
 import { APIIdentityNamePairResponseDTO } from '../model/aPIIdentityNamePairResponseDTO';
@@ -36,6 +38,10 @@ import { Configuration }                                     from '../configurat
 
 export interface GetManyItContractInternalV2GetAddRoleAssignmentsRequestParams {
     contractUuid: string;
+}
+
+export interface GetManyItContractInternalV2GetAppliedProcurementPlansRequestParams {
+    organizationUuid: string;
 }
 
 export interface GetManyItContractInternalV2GetDataProcessingRegistrationsRequestParams {
@@ -171,6 +177,64 @@ export class APIV2ItContractInternalINTERNALService {
 
         let localVarPath = `/api/v2/internal/it-contracts/${this.configuration.encodeParam({name: "contractUuid", value: contractUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/roles`;
         return this.httpClient.request<Array<APIExtendedRoleAssignmentResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * @param requestParameters
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getManyItContractInternalV2GetAppliedProcurementPlans(requestParameters: GetManyItContractInternalV2GetAppliedProcurementPlansRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIAppliedProcurementPlanResponseDTO>>;
+    public getManyItContractInternalV2GetAppliedProcurementPlans(requestParameters: GetManyItContractInternalV2GetAppliedProcurementPlansRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIAppliedProcurementPlanResponseDTO>>>;
+    public getManyItContractInternalV2GetAppliedProcurementPlans(requestParameters: GetManyItContractInternalV2GetAppliedProcurementPlansRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIAppliedProcurementPlanResponseDTO>>>;
+    public getManyItContractInternalV2GetAppliedProcurementPlans(requestParameters: GetManyItContractInternalV2GetAppliedProcurementPlansRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        const organizationUuid = requestParameters.organizationUuid;
+        if (organizationUuid === null || organizationUuid === undefined) {
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyItContractInternalV2GetAppliedProcurementPlans.');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/v2/internal/it-contracts/applied-procurement-plans/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
+        return this.httpClient.request<Array<APIAppliedProcurementPlanResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,

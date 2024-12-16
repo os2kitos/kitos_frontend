@@ -26,6 +26,8 @@ export const itContactInitialState: ITContractState = itContactAdapter.getInitia
 
   isRemoving: false,
   lastSeenGridConfig: undefined,
+
+  appliedProcurementPlans: undefined,
 });
 
 export const itContractFeature = createFeature({
@@ -187,6 +189,13 @@ export const itContractFeature = createFeature({
           lastSeenGridConfig: response,
         };
       }
-    )
+    ),
+
+    on(ITContractActions.getAppliedProcurementPlansSuccess, (state, { response }): ITContractState => {
+      return {
+        ...state,
+        appliedProcurementPlans: response,
+      };
+    })
   ),
 });

@@ -1,5 +1,6 @@
 import { createActionGroup, emptyProps } from '@ngrx/store';
 import {
+  APIAppliedProcurementPlanResponseDTO,
   APIColumnConfigurationRequestDTO,
   APIIdentityNamePairResponseDTO,
   APIItContractPermissionsResponseDTO,
@@ -160,5 +161,8 @@ export const ITContractActions = createActionGroup({
     'Initialize IT Contract Last Seen Grid Configuration Success': (response: APIOrganizationGridConfigurationResponseDTO) => ({response}),
     'Initialize IT Contract Last Seen Grid Configuration Error': () => emptyProps(),
 
+    'Get applied procurement plans': emptyProps(),
+    'Get applied procurement plans success': (response: APIAppliedProcurementPlanResponseDTO[]) => ({response}),
+    'Get applied procurement plans error': emptyProps(),
   },
 });

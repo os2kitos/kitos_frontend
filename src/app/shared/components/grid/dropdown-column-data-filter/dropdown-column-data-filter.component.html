@@ -1,1 +1,7 @@
-<app-dropdown-filter class="full-width" [column]="column" [filter]="filter" [options]="options" [entityType]="entityType"></app-dropdown-filter>
+<app-dropdown-filter
+  class="full-width"
+  [column]="column"
+  [filter]="filter"
+  [options]="(options$ | async) ?? []"
+  [entityType]="entityType"
+></app-dropdown-filter>

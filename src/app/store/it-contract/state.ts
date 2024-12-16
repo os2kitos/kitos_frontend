@@ -1,5 +1,6 @@
 import { EntityState } from '@ngrx/entity';
 import {
+  APIAppliedProcurementPlanResponseDTO,
   APIItContractPermissionsResponseDTO,
   APIItContractResponseDTO,
   APIOrganizationGridConfigurationResponseDTO,
@@ -25,4 +26,5 @@ export interface ITContractState extends EntityState<ITContract> {
   isRemoving: boolean;
 
   lastSeenGridConfig: APIOrganizationGridConfigurationResponseDTO | undefined;
+  appliedProcurementPlans: APIAppliedProcurementPlanResponseDTO[] | undefined;
 }

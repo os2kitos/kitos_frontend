@@ -615,6 +615,21 @@ export class ITContractEffects {
       )
     );
   });
+
+  getAppliedProcurementPlans$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITContractActions.getAppliedProcurementPlans),
+      concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
+      switchMap(([_, organizationUuid]) => {
+        return this.apiInternalItContractService
+          .getManyItContractInternalV2GetAppliedProcurementPlans({ organizationUuid })
+          .pipe(
+            map((response) => ITContractActions.getAppliedProcurementPlansSuccess(response)),
+            catchError(() => of(ITContractActions.getAppliedProcurementPlansError()))
+          );
+      })
+    );
+  });
 }
 
 function getPaymentRequest(payments: APIContractPaymentsDataResponseDTO | undefined) {

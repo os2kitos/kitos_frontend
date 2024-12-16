@@ -1,3 +1,4 @@
+import { formatProcurementPlan } from '../../helpers/procurement-plan.helpers';
 import {
   mapRoleAssignmentsToEmails,
   mapRoleAssignmentsToUserFullNames,
@@ -62,7 +63,7 @@ export const adaptITContract = (value: any): ITContract | undefined => {
   const procurementPlan =
     value.ProcurementPlanQuarter == null || value.ProcurementPlanYear == null
       ? ''
-      : `Q${value.ProcurementPlanQuarter} | ${value.ProcurementPlanYear}`;
+      : formatProcurementPlan(value.ProcurementPlanYear, value.ProcurementPlanQuarter);
   return {
     id: value.SourceEntityUuid,
     IsActive: value.IsActive,

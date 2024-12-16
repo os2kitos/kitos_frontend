@@ -2877,9 +2877,6 @@
       <trans-unit id="7299188518201836340" datatype="html">
         <source>Gentag email*</source>
       </trans-unit>
-      <trans-unit id="9193480723158679191" datatype="html">
-        <source>Primær startenhed</source>
-      </trans-unit>
       <trans-unit id="2223233384489817608" datatype="html">
         <source>Send advis om oprettelse</source>
       </trans-unit>
@@ -3280,8 +3277,8 @@
       <trans-unit id="785705451816912190" datatype="html">
         <source>Indtast et heltal</source>
       </trans-unit>
-      <trans-unit id="7183340572551759368" datatype="html">
-        <source>OBS: Opsætning af overblik afviger fra kommunens standardoverblik. Tryk på &apos;Gendan kolonneopsætning&apos; for at benytte den gældende opsætning.</source>
+      <trans-unit id="1759972015530743313" datatype="html">
+        <source>OBS: Opsætning af overblik afviger fra din organisations standardoverblik. Tryk på &apos;Gendan kolonneopsætning&apos; for at benytte den gældende opsætning.</source>
       </trans-unit>
       <trans-unit id="2961782936302807216" datatype="html">
         <source>Kolonnevisning gendannet til organisationens standardopsætning</source>
@@ -4905,6 +4902,9 @@
       </trans-unit>
       <trans-unit id="987801205594216692" datatype="html">
         <source> For at ændre din primære organisationsenhed, skal du skifte til &quot;<x id="INTERPOLATION" equiv-text="{{ userOrganizationName$ | async }}"/>&quot;. </source>
+      </trans-unit>
+      <trans-unit id="4917104049079759478" datatype="html">
+        <source>Primær startmodul</source>
       </trans-unit>
     </body>
   </file>

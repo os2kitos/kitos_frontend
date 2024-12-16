@@ -129,6 +129,7 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
 
     this.setupContactPersonFields();
     this.setupDataResponsibleFields();
+    this.setupDataProtectionAdvisorFields();
   }
 
   private setupDataResponsibleFields() {
@@ -181,6 +182,21 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
           } else this.contactPersonForm.controls.emailControl.patchValue(contactPerson.email);
         }
       )
+    );
+  }
+
+  private setupDataProtectionAdvisorFields() {
+    this.subscriptions.add(
+      this.organizationMasterDataRoles$.subscribe((organizationMasterDataRoles) => {
+        const dataProtectionAdvisor = organizationMasterDataRoles.DataProtectionAdvisor;
+        this.dataProtectionAdvisorForm.patchValue({
+          nameControl: dataProtectionAdvisor.name,
+          phoneControl: dataProtectionAdvisor.phone,
+          emailControl: dataProtectionAdvisor.email,
+          cvrControl: dataProtectionAdvisor.cvr,
+          addressControl: dataProtectionAdvisor.address,
+        });
+      })
     );
   }
 

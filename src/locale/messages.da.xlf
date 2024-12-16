@@ -4459,9 +4459,9 @@
         <source>Er du sikker på at du vil slette den nuværende kolonneopsætning af felter som standard for din organisation?</source>
         <target state="new">Er du sikker på at du vil slette den nuværende kolonneopsætning af felter som standard for din organisation?</target>
       </trans-unit>
-      <trans-unit id="7183340572551759368" datatype="html">
-        <source>OBS: Opsætning af overblik afviger fra kommunens standardoverblik. Tryk på &apos;Gendan kolonneopsætning&apos; for at benytte den gældende opsætning.</source>
-        <target state="new">OBS: Opsætning af overblik afviger fra kommunens standardoverblik. Tryk på &apos;Gendan kolonneopsætning&apos; for at benytte den gældende opsætning.</target>
+      <trans-unit id="1759972015530743313" datatype="html">
+        <source>OBS: Opsætning af overblik afviger fra din organisations standardoverblik. Tryk på &apos;Gendan kolonneopsætning&apos; for at benytte den gældende opsætning.</source>
+        <target state="new">OBS: Opsætning af overblik afviger fra din organisations standardoverblik. Tryk på &apos;Gendan kolonneopsætning&apos; for at benytte den gældende opsætning.</target>
       </trans-unit>
       <trans-unit id="2961782936302807216" datatype="html">
         <source>Kolonnevisning gendannet til organisationens standardopsætning</source>
@@ -4766,10 +4766,6 @@
       <trans-unit id="7299188518201836340" datatype="html">
         <source>Gentag email*</source>
         <target state="new">Gentag email*</target>
-      </trans-unit>
-      <trans-unit id="9193480723158679191" datatype="html">
-        <source>Primær startenhed</source>
-        <target state="new">Primær startenhed</target>
       </trans-unit>
       <trans-unit id="4827595865645899279" datatype="html">
         <source> Særlige roller i organisationen </source>
@@ -6460,6 +6456,10 @@
       <trans-unit id="1164724015350728554" datatype="html">
         <source>Søg...</source>
         <target state="new">Søg...</target>
+      </trans-unit>
+      <trans-unit id="4917104049079759478" datatype="html">
+        <source>Primær startmodul</source>
+        <target state="new">Primær startmodul</target>
       </trans-unit>
     </body>
   </file>

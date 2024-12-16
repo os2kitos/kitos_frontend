@@ -19,7 +19,7 @@ export class ResetToOrgColumnsConfigButtonComponent implements OnInit {
 
   public lastSeenGridConfig$!: Observable<APIOrganizationGridConfigurationResponseDTO | undefined>;
 
-  public readonly tooltipText = $localize`OBS: Opsætning af overblik afviger fra kommunens standardoverblik. Tryk på 'Gendan kolonneopsætning' for at benytte den gældende opsætning.`;
+  public readonly tooltipText = $localize`OBS: Opsætning af overblik afviger fra din organisations standardoverblik. Tryk på 'Gendan kolonneopsætning' for at benytte den gældende opsætning.`;
 
   constructor(private store: Store, private columnConfigService: ColumnConfigService) {}
 
