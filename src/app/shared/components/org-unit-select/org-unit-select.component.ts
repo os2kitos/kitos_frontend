@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { map } from 'rxjs';
@@ -22,6 +22,7 @@ export class OrgUnitSelectComponent extends BaseComponent implements OnInit {
   @Input() public text = '';
   @Input() public showDescription = false;
   @Input() public clearable = true;
+  @Input() public disableLoading = false;
 
   @Input() public formGroup?: FormGroup;
   @Input() public formName?: string;
@@ -35,9 +36,10 @@ export class OrgUnitSelectComponent extends BaseComponent implements OnInit {
     filterNullish(),
     map((organizationUnits) => organizationUnits.map((unit) => createNode(unit, this.disabledUnitsUuids)))
   );
-  public readonly isLoaded$ = this.store.select(selectPagedOrganizationUnitHasValidCache);
-
-  constructor(private readonly store: Store, private cdRef: ChangeDetectorRef) {
+  public readonly isLoaded$ = this.store
+    .select(selectPagedOrganizationUnitHasValidCache)
+    .pipe(map((hasValidCache) => this.disableLoading || hasValidCache));
+  constructor(private readonly store: Store) {
     super();
   }
 

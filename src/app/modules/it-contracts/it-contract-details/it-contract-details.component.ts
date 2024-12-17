@@ -8,7 +8,7 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { NavigationDrawerItem } from 'src/app/shared/components/navigation-drawer/navigation-drawer.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
-import { combineBooleansWithAnd } from 'src/app/shared/helpers/observable-helpers';
+import { combineAND } from 'src/app/shared/helpers/observable-helpers';
 import { BreadCrumb } from 'src/app/shared/models/breadcrumbs/breadcrumb.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { NotificationService } from 'src/app/shared/services/notification.service';
@@ -81,13 +81,13 @@ export class ItContractDetailsComponent extends BaseComponent implements OnInit,
       label: $localize`IT Systemer`,
       iconType: 'systems',
       route: AppPath.itSystems,
-      enabled$: combineBooleansWithAnd([this.itSystemsModuleEnabled$, this.itSystemsTabEnabled$]),
+      enabled$: combineAND([this.itSystemsModuleEnabled$, this.itSystemsTabEnabled$]),
     },
     {
       label: $localize`Databehandling`,
       iconType: 'folder-important',
       route: AppPath.dataProcessing,
-      enabled$: combineBooleansWithAnd([this.dataProcessingModuleEnabled$, this.dataProcessingTabEnabled$]),
+      enabled$: combineAND([this.dataProcessingModuleEnabled$, this.dataProcessingTabEnabled$]),
     },
     {
       label: $localize`Aftalefrister`,

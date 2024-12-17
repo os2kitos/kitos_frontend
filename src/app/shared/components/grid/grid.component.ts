@@ -316,14 +316,17 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   public getFilteredExportColumns$() {
     return combineLatest([this.columns$, this.exportAllColumns$]).pipe(
       map(([columns, exportAllColumns]) => {
-        return columns
+        const columnsToExport = columns
           ? columns
               .filter(includedColumnInExport)
-              .filter(
-                (column) =>
-                  exportAllColumns || (!column.hidden && (!this.isExcelOnlyColumn(column) || exportAllColumns))
-              )
+              .filter((column) => exportAllColumns || !column.hidden || this.isExcelOnlyColumn(column))
           : [];
+        const roleColumnsInExport = columnsToExport.filter((column) => column.extraData === 'roles');
+        const roleColumnFieldsToExport = new Set(roleColumnsInExport.map((column) => column.field));
+        return columnsToExport.filter(
+          (column) =>
+            !this.isExcelOnlyColumn(column) || roleColumnFieldsToExport.has(column.field.replaceAll('.email', ''))
+        );
       })
     );
   }

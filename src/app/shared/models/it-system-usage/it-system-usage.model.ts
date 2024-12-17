@@ -1,3 +1,4 @@
+import { entityWithUnavailableName } from '../../helpers/string.helpers';
 import {
   mapRoleAssignmentsToEmails,
   mapRoleAssignmentsToUserFullNames,
@@ -85,7 +86,7 @@ export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
     ExternalSystemUuid: value.ExternalSystemUuid,
     ParentItSystemName: value.ParentItSystemName,
     ParentItSystemUuid: value.ParentItSystemUuid,
-    SystemName: value.SystemName,
+    SystemName: entityWithUnavailableName(value.SystemName, value.SystemActive),
     Version: value.Version,
     LocalCallName: value.LocalCallName,
     ResponsibleOrganizationUnitName: value.ResponsibleOrganizationUnitName,

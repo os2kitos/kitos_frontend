@@ -12,10 +12,10 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { DropdownDialogComponent } from 'src/app/shared/components/dialogs/dropdown-dialog/dropdown-dialog.component';
 import { optionalNewDate } from 'src/app/shared/helpers/date.helpers';
-import { combineBooleansWithOr } from 'src/app/shared/helpers/observable-helpers';
+import { combineOR } from 'src/app/shared/helpers/observable-helpers';
 import {
-  OversightInterval,
   mapToOversightInterval,
+  OversightInterval,
   oversightIntervalOptions,
 } from 'src/app/shared/models/data-processing/oversight-interval.model';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
@@ -84,7 +84,7 @@ export class DataProcessingOversightComponent extends BaseComponent implements O
   public readonly oversightOptionsEnabled$ = this.store.select(selectDprEnableOversightOptions);
   public readonly oversightsEnabled$ = this.store.select(selectDprEnableOversights);
 
-  public readonly intervalCardEnabled$ = combineBooleansWithOr([
+  public readonly intervalCardEnabled$ = combineOR([
     this.oversightIntervalEnabled$,
     this.nextOversightEnabled$,
     this.oversightOptionsEnabled$,

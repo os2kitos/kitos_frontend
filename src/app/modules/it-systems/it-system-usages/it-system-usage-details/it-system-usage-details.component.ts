@@ -7,6 +7,7 @@ import { combineLatest, distinctUntilChanged, filter, map } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { NavigationDrawerItem } from 'src/app/shared/components/navigation-drawer/navigation-drawer.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
+import { combineAND } from 'src/app/shared/helpers/observable-helpers';
 import { BreadCrumb } from 'src/app/shared/models/breadcrumbs/breadcrumb.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { NotificationService } from 'src/app/shared/services/notification.service';
@@ -40,7 +41,6 @@ import {
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { selectOrganizationName } from 'src/app/store/user-store/selectors';
 import { ITSystemUsageRemoveComponent } from './it-system-usage-remove/it-system-usage-remove.component';
-import { combineBooleansWithAnd } from 'src/app/shared/helpers/observable-helpers';
 
 @Component({
   templateUrl: 'it-system-usage-details.component.html',
@@ -99,13 +99,13 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
       label: $localize`Kontrakter`,
       iconType: 'clipboard',
       route: AppPath.contracts,
-      enabled$: combineBooleansWithAnd([this.itContractsModuleEnabled$, this.enabledContractsTab$]),
+      enabled$: combineAND([this.itContractsModuleEnabled$, this.enabledContractsTab$]),
     },
     {
       label: $localize`Databehandling`,
       iconType: 'folder-important',
       route: AppPath.dataProcessing,
-      enabled$: combineBooleansWithAnd([this.dataProcessingModuleEnabled$, this.enabledDataProcessingTab$]),
+      enabled$: combineAND([this.dataProcessingModuleEnabled$, this.enabledDataProcessingTab$]),
     },
     {
       label: $localize`GDPR`,

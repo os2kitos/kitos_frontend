@@ -6,7 +6,7 @@ import { map, tap } from 'rxjs/operators';
  * @param observables - Array of boolean Observables
  * @returns An Observable that emits true if all source Observables emit true.
  */
-export function combineBooleansWithAnd(observables: Observable<boolean>[]): Observable<boolean> {
+export function combineAND(observables: Observable<boolean>[]): Observable<boolean> {
   return combineLatest(observables).pipe(map((values: boolean[]) => values.every((value) => value)));
 }
 
@@ -15,7 +15,7 @@ export function combineBooleansWithAnd(observables: Observable<boolean>[]): Obse
  * @param observables - Array of boolean Observables
  * @returns An Observable that emits true if any source Observable emits true.
  */
-export function combineBooleansWithOr(observables: Observable<boolean>[]): Observable<boolean> {
+export function combineOR(observables: Observable<boolean>[]): Observable<boolean> {
   return combineLatest(observables).pipe(map((values: boolean[]) => values.some((value) => value)));
 }
 

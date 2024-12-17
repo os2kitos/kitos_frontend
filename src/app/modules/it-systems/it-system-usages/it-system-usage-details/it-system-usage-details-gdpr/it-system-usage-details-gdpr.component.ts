@@ -3,21 +3,21 @@ import { AbstractControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { filter } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import { combineBooleansWithOr } from 'src/app/shared/helpers/observable-helpers';
+import { combineOR } from 'src/app/shared/helpers/observable-helpers';
 import { selectITSystemUsageHasModifyPermission } from 'src/app/store/it-system-usage/selectors';
 import {
-  selectITSystemUsageEnableGdprPurpose,
+  selectITSystemUsageEnabledRegisteredCategories,
   selectITSystemUsageEnableGdprBusinessCritical,
-  selectITSystemUsageEnableGdprHostedAt,
+  selectITSystemUsageEnableGdprConductedRiskAssessment,
+  selectITSystemUsageEnableGdprDataTypes,
   selectITSystemUsageEnableGdprDocumentation,
+  selectITSystemUsageEnableGdprDpiaConducted,
+  selectITSystemUsageEnableGdprHostedAt,
+  selectITSystemUsageEnableGdprPlannedRiskAssessmentDate,
+  selectITSystemUsageEnableGdprPurpose,
+  selectITSystemUsageEnableGdprRetentionPeriod,
   selectITSystemUsageEnableGdprTechnicalPrecautions,
   selectITSystemUsageEnableGdprUserSupervision,
-  selectITSystemUsageEnabledRegisteredCategories,
-  selectITSystemUsageEnableGdprPlannedRiskAssessmentDate,
-  selectITSystemUsageEnableGdprConductedRiskAssessment,
-  selectITSystemUsageEnableGdprDpiaConducted,
-  selectITSystemUsageEnableGdprRetentionPeriod,
-  selectITSystemUsageEnableGdprDataTypes,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 
 @Component({
@@ -32,7 +32,7 @@ export class ItSystemUsageDetailsGdprComponent extends BaseComponent {
     super();
   }
 
-  public readonly showGeneralInfo$ = combineBooleansWithOr([
+  public readonly showGeneralInfo$ = combineOR([
     this.store.select(selectITSystemUsageEnableGdprPurpose),
     this.store.select(selectITSystemUsageEnableGdprBusinessCritical),
     this.store.select(selectITSystemUsageEnableGdprHostedAt),
@@ -45,7 +45,7 @@ export class ItSystemUsageDetailsGdprComponent extends BaseComponent {
   public readonly technicalPrecautionsEnabled$ = this.store.select(selectITSystemUsageEnableGdprTechnicalPrecautions);
   public readonly userSupervisionEnabled$ = this.store.select(selectITSystemUsageEnableGdprUserSupervision);
 
-  public readonly showRiskAssessment$ = combineBooleansWithOr([
+  public readonly showRiskAssessment$ = combineOR([
     this.store.select(selectITSystemUsageEnableGdprPlannedRiskAssessmentDate),
     this.store.select(selectITSystemUsageEnableGdprConductedRiskAssessment),
   ]);
@@ -53,7 +53,7 @@ export class ItSystemUsageDetailsGdprComponent extends BaseComponent {
   public readonly showDpiaConducted$ = this.store.select(selectITSystemUsageEnableGdprDpiaConducted);
   public readonly showRetentionPeriod$ = this.store.select(selectITSystemUsageEnableGdprRetentionPeriod);
 
-  public readonly showMoreInformation$ = combineBooleansWithOr([
+  public readonly showMoreInformation$ = combineOR([
     this.showDataTypes$,
     this.registeredCategoriesEnabled$,
     this.technicalPrecautionsEnabled$,

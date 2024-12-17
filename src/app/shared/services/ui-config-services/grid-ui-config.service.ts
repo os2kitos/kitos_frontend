@@ -92,7 +92,7 @@ import {
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { UIModuleConfigKey } from '../../enums/ui-module-config-key';
 import { filterGridColumnsByUIConfig } from '../../helpers/grid-config-helper';
-import { combineBooleansWithAnd } from '../../helpers/observable-helpers';
+import { combineAND } from '../../helpers/observable-helpers';
 import { GridColumn } from '../../models/grid-column.model';
 import { UIConfigGridApplication } from '../../models/ui-config/ui-config-grid-application';
 
@@ -186,18 +186,18 @@ export class GridUIConfigService {
       this.store.select(selectItContractsEnabledlastModifedDate).pipe(shouldEnable([ContractFields.LastEditedAtDate])),
 
       // IT Systems
-      combineBooleansWithAnd([
+      combineAND([
         this.store.select(selectItContractEnableSystemUsages),
         this.store.select(selectShowItSystemModule),
       ]).pipe(shouldEnable([ContractFields.ItSystemUsages, ContractFields.ItSystemUsageUuidsAsCsv])),
 
-      combineBooleansWithAnd([
+      combineAND([
         this.store.select(selectItContractEnableRelations),
         this.store.select(selectShowItSystemModule),
       ]).pipe(shouldEnable([ContractFields.NumberOfAssociatedSystemRelations])),
 
       //Data processing
-      combineBooleansWithAnd([
+      combineAND([
         this.store.select(selectShowDataProcessingRegistrations),
         this.store.select(selectItContractEnableDataProcessing),
       ]).pipe(shouldEnable([ContractFields.DataProcessingAgreements])),
@@ -271,18 +271,18 @@ export class GridUIConfigService {
       this.store.select(selectITSystemUsageEnableStatus).pipe(shouldEnable([])),
 
       //Contracts
-      combineBooleansWithAnd([
+      combineAND([
         this.store.select(selectShowItContractModule),
         this.store.select(selectITSystemUsageEnableSelectContractToDetermineIfItSystemIsActive),
       ]).pipe(shouldEnable([UsageFields.MainContractIsActive, UsageFields.MainContractSupplierName])),
 
-      combineBooleansWithAnd([
+      combineAND([
         this.store.select(selectShowItContractModule),
         this.store.select(selectITSystemUsageEnableAssociatedContracts),
       ]).pipe(shouldEnable([UsageFields.AssociatedContractsNamesCsv])),
 
       //Data processing
-      combineBooleansWithAnd([
+      combineAND([
         this.store.select(selectShowDataProcessingRegistrations),
         this.store.select(selectITSystemUsageEnableDataProcessing),
       ]).pipe(
@@ -368,14 +368,13 @@ export class GridUIConfigService {
       this.store.select(selectDprEnableProcessors).pipe(shouldEnable([DprFields.DataProcessorNamesAsCsv])),
       this.store.select(selectDprEnableSubProcessors).pipe(shouldEnable([DprFields.SubDataProcessorNamesAsCsv])),
       // IT Systems
-      combineBooleansWithAnd([
-        this.store.select(selectShowItSystemModule),
-        this.store.select(selectDprEnableItSystems),
-      ]).pipe(shouldEnable([DprFields.SystemNamesAsCsv, DprFields.SystemUuidsAsCsv])),
+      combineAND([this.store.select(selectShowItSystemModule), this.store.select(selectDprEnableItSystems)]).pipe(
+        shouldEnable([DprFields.SystemNamesAsCsv, DprFields.SystemUuidsAsCsv])
+      ),
 
       // Contracts
       this.store.select(selectDprEnableMainContract).pipe(shouldEnable([DprFields.ActiveAccordingToMainContract])),
-      combineBooleansWithAnd([
+      combineAND([
         this.store.select(selectShowItContractModule),
         this.store.select(selectDprEnableAssociatedContracts),
       ]).pipe(shouldEnable([DprFields.ContractNamesAsCsv])),
@@ -441,7 +440,7 @@ export class GridUIConfigService {
 
       this.store.select(selectITSystemUsageEnableGdprHostedAt).pipe(shouldEnable([GdprFields.HOSTED_AT_NAME])),
 
-      combineBooleansWithAnd([
+      combineAND([
         this.store.select(selectITSystemUsageEnableDataProcessing),
         this.store.select(selectShowDataProcessingRegistrations),
       ]).pipe(shouldEnable([GdprFields.DATA_PROCESSING_AGREEMENT_CONCLUDED])),

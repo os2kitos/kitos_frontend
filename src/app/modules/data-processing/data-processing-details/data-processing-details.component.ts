@@ -8,7 +8,7 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { NavigationDrawerItem } from 'src/app/shared/components/navigation-drawer/navigation-drawer.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
-import { combineBooleansWithAnd } from 'src/app/shared/helpers/observable-helpers';
+import { combineAND } from 'src/app/shared/helpers/observable-helpers';
 import { BreadCrumb } from 'src/app/shared/models/breadcrumbs/breadcrumb.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { NotificationService } from 'src/app/shared/services/notification.service';
@@ -78,13 +78,13 @@ export class DataProcessingDetailsComponent extends BaseComponent implements OnI
       label: $localize`IT Systemer`,
       iconType: 'systems',
       route: AppPath.itSystems,
-      enabled$: combineBooleansWithAnd([this.itSystemsModuleEnabled$, this.itSystemsEnabled$]),
+      enabled$: combineAND([this.itSystemsModuleEnabled$, this.itSystemsEnabled$]),
     },
     {
       label: $localize`IT Kontrakter`,
       iconType: 'folder-important',
       route: AppPath.itContracts,
-      enabled$: combineBooleansWithAnd([this.itContractsModuleEnabled$, this.itContractsEnabled$]),
+      enabled$: combineAND([this.itContractsModuleEnabled$, this.itContractsEnabled$]),
     },
     {
       label: $localize`Tilsyn`,

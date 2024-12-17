@@ -73,6 +73,7 @@ export const organizationUnitFeature = createFeature({
       );
     }),
     on(OrganizationUnitActions.getOrganizationUnitsError, (state): OrganizationUnitState => ({ ...state })),
+
     on(OrganizationUnitActions.updateHierarchy, (state, { unit, units }): OrganizationUnitState => {
       const nodesCopy = units.map((u) => (u.uuid === unit.uuid ? unit : u));
 

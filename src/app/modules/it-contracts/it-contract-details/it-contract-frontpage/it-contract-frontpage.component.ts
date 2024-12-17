@@ -12,6 +12,7 @@ import {
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { RadioButtonOption } from 'src/app/shared/components/radio-buttons/radio-buttons.component';
 import { optionalNewDate } from 'src/app/shared/helpers/date.helpers';
+import { combineOR } from 'src/app/shared/helpers/observable-helpers';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { NotificationService } from 'src/app/shared/services/notification.service';
@@ -46,7 +47,6 @@ import {
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 import { ItContractFrontpageComponentStore } from './it-contract-frontpage.component-store';
-import { combineBooleansWithOr } from 'src/app/shared/helpers/observable-helpers';
 
 @Component({
   selector: 'app-it-contract-frontpage',
@@ -190,22 +190,19 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
 
   public readonly contractResponsibleUnitEnabled$ = this.store.select(selectItContractsEnableResponsibleUnit);
   public readonly contractInternalSignerEnabled$ = this.store.select(selectItContractsEnableInternalSigner);
-  public readonly showResponsibleCard$ = combineBooleansWithOr([
+  public readonly showResponsibleCard$ = combineOR([
     this.contractResponsibleUnitEnabled$,
     this.contractInternalSignerEnabled$,
   ]);
 
   public readonly contractSupplierEnabled$ = this.store.select(selectIContractsEnableSupplier);
   public readonly contractExternalSignerEnabled$ = this.store.select(selectItContractsEnableExternalSigner);
-  public readonly showSupplierCard$ = combineBooleansWithOr([
-    this.contractSupplierEnabled$,
-    this.contractExternalSignerEnabled$,
-  ]);
+  public readonly showSupplierCard$ = combineOR([this.contractSupplierEnabled$, this.contractExternalSignerEnabled$]);
 
   public readonly contractProcurementStrategyEnabled$ = this.store.select(selectItContractsEnableProcurementStrategy);
   public readonly contractProcurementPlanEnabled$ = this.store.select(selectItContractsEnableProcurementPlan);
   public readonly contractProcurementInitiatedEnabled$ = this.store.select(selectItContractsEnableProcurementInitiated);
-  public readonly showProcurementCard$ = combineBooleansWithOr([
+  public readonly showProcurementCard$ = combineOR([
     this.contractProcurementStrategyEnabled$,
     this.contractProcurementPlanEnabled$,
     this.contractProcurementInitiatedEnabled$,
@@ -214,7 +211,7 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
   public readonly contractsCreatedByEnabled$ = this.store.select(selectItContractsEnabledCreatedBy);
   public readonly contractsLastModifiedByEnabled$ = this.store.select(selectItContractsEnabledlastModifedBy);
   public readonly contractsLastModifiedDateEnabled$ = this.store.select(selectItContractsEnabledlastModifedDate);
-  public readonly showHistoryCard$ = combineBooleansWithOr([
+  public readonly showHistoryCard$ = combineOR([
     this.contractsCreatedByEnabled$,
     this.contractsLastModifiedByEnabled$,
     this.contractsLastModifiedDateEnabled$,

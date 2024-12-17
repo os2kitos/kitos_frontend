@@ -10,7 +10,7 @@ import {
   dateGreaterThanOrEqualControlValidator,
   dateLessThanControlValidator,
 } from 'src/app/shared/helpers/form.helpers';
-import { combineBooleansWithOr } from 'src/app/shared/helpers/observable-helpers';
+import { combineOR } from 'src/app/shared/helpers/observable-helpers';
 import {
   LifeCycleStatus,
   lifeCycleStatusOptions,
@@ -35,7 +35,6 @@ import {
   selectITSystemUsageEnableAmountOfUsers,
   selectITSystemUsageEnableDataClassification,
   selectITSystemUsageEnableDescription,
-  selectITSystemUsageEnabledSystemId,
   selectITSystemUsageEnableFrontPageUsagePeriod,
   selectITSystemUsageEnableLastEditedAt,
   selectITSystemUsageEnableLastEditedBy,
@@ -44,6 +43,7 @@ import {
   selectITSystemUsageEnableStatus,
   selectITSystemUsageEnableTakenIntoUsageBy,
   selectITSystemUsageEnableVersion,
+  selectITSystemUsageEnabledSystemId,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
@@ -78,7 +78,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
   public readonly usagePeriodEnabled$ = this.store.select(selectITSystemUsageEnableFrontPageUsagePeriod);
   public readonly statusEnabled$ = this.store.select(selectITSystemUsageEnableStatus);
 
-  public readonly showSystemUsageCard$ = combineBooleansWithOr([
+  public readonly showSystemUsageCard$ = combineOR([
     this.takenIntoUsageByEnabled$,
     this.lastEditedByEnabled$,
     this.lastEditedAtEnabled$,
