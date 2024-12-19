@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
@@ -149,7 +148,6 @@ export class ItSystemInterfacesComponent extends BaseOverviewComponent implement
     store: Store,
     private router: Router,
     private route: ActivatedRoute,
-    private dialog: MatDialog,
     private actions$: Actions,
     private gridColumnStorageService: GridColumnStorageService
   ) {
@@ -165,7 +163,7 @@ export class ItSystemInterfacesComponent extends BaseOverviewComponent implement
       this.store.dispatch(ITInterfaceActions.updateGridColumns(this.defaultGridColumns));
     }
 
-    this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState));
+    this.subscriptions.add(this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState)));
 
     this.subscriptions.add(
       this.actions$

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
+import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { CellClickEvent } from '@progress/kendo-angular-grid';
 import { combineLatestWith, first } from 'rxjs';
@@ -315,8 +316,6 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       );
     }
 
-    this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState));
-
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(DataProcessingActions.createDataProcessingSuccess), combineLatestWith(this.gridState$))
@@ -327,14 +326,19 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
 
     this.setupUnclickableColumns();
 
-    this.actions$
-      .pipe(ofType(DataProcessingActions.resetToOrganizationDataProcessingColumnConfigurationError))
-      .subscribe(() => {
-        this.gridColumns$.pipe(first()).subscribe((columns) => {
-          const columnsToShow = getColumnsToShow(columns, this.defaultGridColumns);
+    this.subscriptions.add(this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState)));
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(
+          ofType(DataProcessingActions.resetToOrganizationDataProcessingColumnConfigurationError),
+          concatLatestFrom(() => this.gridColumns$)
+        )
+        .subscribe(([_, gridColumns]) => {
+          const columnsToShow = getColumnsToShow(gridColumns, this.defaultGridColumns);
           this.store.dispatch(DataProcessingActions.updateGridColumns(columnsToShow));
-        });
-      });
+        })
+    );
   }
 
   private setupUnclickableColumns() {

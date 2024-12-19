@@ -1,18 +1,7 @@
 <app-tooltip [text]="title || ''" *ngIf="type">
-  <ng-container *ngIf="value === true && reverseValues === false">
-    <app-chip *ngIf="!overflows" state="success">{{ trueString }}</app-chip>
-    <app-chip *ngIf="overflows" state="success"></app-chip>
-  </ng-container>
-  <ng-container *ngIf="value === false && reverseValues === false">
-    <app-chip *ngIf="!overflows" state="error">{{ falseString }}</app-chip>
-    <app-chip *ngIf="overflows" state="error"></app-chip>
-  </ng-container>
-  <ng-container *ngIf="value === true && reverseValues === true">
-    <app-chip *ngIf="!overflows" state="error">{{ falseString }}</app-chip>
-    <app-chip *ngIf="overflows" state="error"></app-chip>
-  </ng-container>
-  <ng-container *ngIf="value === false && reverseValues === true">
-    <app-chip *ngIf="!overflows" state="success">{{ trueString }}</app-chip>
-    <app-chip *ngIf="overflows" state="success"></app-chip>
-  </ng-container>
+  <app-chip *ngIf="value !== null && value !== undefined" [state]="isError() ? 'error' : 'success'">
+    <ng-container *ngIf="!overflows">
+      {{ isError() ? falseString : trueString }}
+    </ng-container>
+  </app-chip>
 </app-tooltip>

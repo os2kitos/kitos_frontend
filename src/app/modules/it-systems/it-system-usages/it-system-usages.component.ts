@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
+import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { CellClickEvent } from '@progress/kendo-angular-grid';
 import { combineLatestWith, first, map } from 'rxjs';
@@ -539,16 +540,20 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       this.updateUnclickableColumns(this.defaultGridColumns);
       this.subscriptions.add(this.gridColumns$.subscribe((columns) => this.updateUnclickableColumns(columns)));
     }
-    this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState));
 
-    this.actions$
-      .pipe(ofType(ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationError))
-      .subscribe(() => {
-        this.gridColumns$.pipe(first()).subscribe((columns) => {
-          const columnsToShow = getColumnsToShow(columns, this.defaultGridColumns);
+    this.subscriptions.add(this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState)));
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(
+          ofType(ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationError),
+          concatLatestFrom(() => this.gridColumns$)
+        )
+        .subscribe(([_, gridColumns]) => {
+          const columnsToShow = getColumnsToShow(gridColumns, this.defaultGridColumns);
           this.store.dispatch(ITSystemUsageActions.updateGridColumns(columnsToShow));
-        });
-      });
+        })
+    );
   }
 
   public stateChange(gridState: GridState) {

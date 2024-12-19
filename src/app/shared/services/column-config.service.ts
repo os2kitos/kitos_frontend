@@ -9,7 +9,7 @@ import {
   selectDataProcessingLastSeenGridConfig,
 } from 'src/app/store/data-processing/selectors';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
-import { selectContractGridColumns, selectItContractLastSeenGridConfig } from 'src/app/store/it-contract/selectors';
+import { selectContractGridColumns, selectItContractGridConfig } from 'src/app/store/it-contract/selectors';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { selectItSystemUsageLastSeenGridConfig, selectUsageGridColumns } from 'src/app/store/it-system-usage/selectors';
 import { UIModuleConfigKey } from '../enums/ui-module-config-key';
@@ -125,7 +125,7 @@ export class ColumnConfigService {
       case 'it-system-usage':
         return this.store.select(selectItSystemUsageLastSeenGridConfig);
       case 'it-contract':
-        return this.store.select(selectItContractLastSeenGridConfig);
+        return this.store.select(selectItContractGridConfig);
       case 'data-processing-registration':
         return this.store.select(selectDataProcessingLastSeenGridConfig);
       default:

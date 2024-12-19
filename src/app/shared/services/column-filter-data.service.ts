@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { map, Observable } from 'rxjs';
-import { FilterDropdownOption } from '../components/grid/dropdown-filter/dropdown-filter.component';
 import { selectAppliedProcurementPlans } from 'src/app/store/it-contract/selectors';
-import { filterNullish } from '../pipes/filter-nullish';
+import { FilterDropdownOption } from '../components/grid/dropdown-filter/dropdown-filter.component';
 import { formatProcurementPlan } from '../helpers/procurement-plan.helpers';
+import { filterNullish } from '../pipes/filter-nullish';
 
 /**
  * The purpose of ths service is to provide a key-value store for observables.

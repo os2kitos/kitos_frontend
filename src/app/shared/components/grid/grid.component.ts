@@ -150,8 +150,6 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     this.onStateChange({ ...this.state, skip: 0, take, all: pageSize ? false : true });
   }
 
-  private isResizing = false;
-
   public onResizeChange(event: ColumnResizeArgs[], columns: GridColumn[]) {
     const columnsCopy = JSON.parse(JSON.stringify(columns)) as GridColumn[];
 

@@ -7,7 +7,7 @@ import { StatePersistingService } from './state-persisting.service';
 })
 export class GridColumnStorageService {
   constructor(private localStorage: StatePersistingService) {
-    
+
   }
 
   public setColumns(key: string, columns: GridColumn[]): void {

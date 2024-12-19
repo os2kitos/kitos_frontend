@@ -126,7 +126,7 @@ export class DataProcessingEffects {
       ofType(DataProcessingActions.updateGridColumnsAndRoleColumns),
       map(({ gridColumns, gridRoleColumns }) => {
         const allColumns = gridColumns.concat(gridRoleColumns);
-        this.gridColumnStorageService.setColumns(DATA_PROCESSING_COLUMNS_ID, gridColumns);
+        this.gridColumnStorageService.setColumns(DATA_PROCESSING_COLUMNS_ID, allColumns);
         return DataProcessingActions.updateGridColumnsAndRoleColumnsSuccess(allColumns);
       })
     );

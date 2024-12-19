@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
+import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { CellClickEvent } from '@progress/kendo-angular-grid';
 import { combineLatestWith, first } from 'rxjs';
@@ -451,11 +452,11 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
 
     this.store.dispatch(ITContractActions.getAppliedProcurementPlans());
     this.store.dispatch(ITContractActions.getITContractCollectionPermissions());
+    this.store.dispatch(ITContractActions.getItContractOverviewRoles());
 
     if (existingColumns) {
       this.store.dispatch(ITContractActions.updateGridColumns(existingColumns));
     } else {
-      this.store.dispatch(ITContractActions.getItContractOverviewRoles());
       this.subscriptions.add(
         this.actions$
           .pipe(
@@ -482,16 +483,19 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
     this.updateUnclickableColumns(this.defaultGridColumns);
     this.subscriptions.add(this.gridColumns$.subscribe((columns) => this.updateUnclickableColumns(columns)));
 
-    this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState));
+    this.subscriptions.add(this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState)));
 
-    this.actions$
-      .pipe(ofType(ITContractActions.resetToOrganizationITContractColumnConfigurationError))
-      .subscribe(() => {
-        this.gridColumns$.pipe(first()).subscribe((columns) => {
-          const columnsToShow = getColumnsToShow(columns, this.defaultGridColumns);
+    this.subscriptions.add(
+      this.actions$
+        .pipe(
+          ofType(ITContractActions.resetToOrganizationITContractColumnConfigurationError),
+          concatLatestFrom(() => this.gridColumns$)
+        )
+        .subscribe(([_, gridColumns]) => {
+          const columnsToShow = getColumnsToShow(gridColumns, this.defaultGridColumns);
           this.store.dispatch(ITContractActions.updateGridColumns(columnsToShow));
-        });
-      });
+        })
+    );
   }
 
   public stateChange(gridState: GridState) {

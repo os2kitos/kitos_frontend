@@ -37,6 +37,10 @@ export class StatusChipComponent implements OnInit {
     }
   }
 
+  public isError(): boolean {
+    return this.value === this.reverseValues;
+  }
+
   private setTrueFalseStringsFromEntityStatusTexts(type: RegistrationEntityTypes) {
     const texts = this.statusService.map(type);
     this.trueString = texts.trueString;

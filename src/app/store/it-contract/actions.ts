@@ -1,4 +1,5 @@
 import { createActionGroup, emptyProps } from '@ngrx/store';
+import { APIBusinessRoleDTO } from 'src/app/api/v1';
 import {
   APIAppliedProcurementPlanResponseDTO,
   APIColumnConfigurationRequestDTO,
@@ -37,7 +38,7 @@ export const ITContractActions = createActionGroup({
 
     'Get It Contract Overview Roles': () => emptyProps(),
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    'Get It Contract Overview Roles Success': (roles: any | undefined) => ({ roles }),
+    'Get It Contract Overview Roles Success': (roles: APIBusinessRoleDTO[] | undefined) => ({ roles }),
     'Get It Contract Overview Roles Error': emptyProps(),
 
     'Delete IT Contract': emptyProps(),

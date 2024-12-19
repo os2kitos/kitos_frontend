@@ -1,7 +1,7 @@
 import { createEntityAdapter } from '@ngrx/entity';
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { CONTRACT_ROLES_SECTION_NAME } from 'src/app/shared/constants/persistent-state-constants';
-import { GridColumn } from 'src/app/shared/models/grid-column.model';
+import { newCache, resetCache } from 'src/app/shared/models/cache-item.model';
 import { defaultGridState } from 'src/app/shared/models/grid-state.model';
 import { ITContract } from 'src/app/shared/models/it-contract/it-contract.model';
 import { roleDtoToRoleGridColumns } from '../helpers/role-column-helpers';
@@ -25,9 +25,9 @@ export const itContactInitialState: ITContractState = itContactAdapter.getInitia
   collectionPermissions: undefined,
 
   isRemoving: false,
-  lastSeenGridConfig: undefined,
+  organizationGridConfig: undefined,
 
-  appliedProcurementPlans: undefined,
+  appliedProcurementPlans: resetCache(),
 });
 
 export const itContractFeature = createFeature({
@@ -152,16 +152,9 @@ export const itContractFeature = createFeature({
       })
     ),
     on(ITContractActions.getItContractOverviewRolesSuccess, (state, { roles }): ITContractState => {
-      const roleColumns: GridColumn[] = [];
-
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      roles?.forEach((role: any) => {
-        const roleGridColumns = roleDtoToRoleGridColumns(role, CONTRACT_ROLES_SECTION_NAME, 'it-contract');
-        roleGridColumns.forEach((column) => {
-          roleColumns.push(column);
-        });
-      });
-      return { ...state, gridRoleColumns: roleColumns, contractRoles: roles };
+      const gridRoleColumns =
+        roles?.flatMap((role) => roleDtoToRoleGridColumns(role, CONTRACT_ROLES_SECTION_NAME, 'it-contract')) ?? [];
+      return { ...state, gridRoleColumns, contractRoles: roles };
     }),
 
     on(
@@ -169,7 +162,7 @@ export const itContractFeature = createFeature({
       (state, { response }): ITContractState => {
         return {
           ...state,
-          lastSeenGridConfig: response,
+          organizationGridConfig: response,
         };
       }
     ),
@@ -177,7 +170,7 @@ export const itContractFeature = createFeature({
     on(ITContractActions.resetToOrganizationITContractColumnConfigurationError, (state): ITContractState => {
       return {
         ...state,
-        lastSeenGridConfig: undefined,
+        organizationGridConfig: undefined,
       };
     }),
 
@@ -186,7 +179,7 @@ export const itContractFeature = createFeature({
       (state, { response }): ITContractState => {
         return {
           ...state,
-          lastSeenGridConfig: response,
+          organizationGridConfig: response,
         };
       }
     ),
@@ -194,7 +187,7 @@ export const itContractFeature = createFeature({
     on(ITContractActions.getAppliedProcurementPlansSuccess, (state, { response }): ITContractState => {
       return {
         ...state,
-        appliedProcurementPlans: response,
+        appliedProcurementPlans: newCache(response),
       };
     })
   ),

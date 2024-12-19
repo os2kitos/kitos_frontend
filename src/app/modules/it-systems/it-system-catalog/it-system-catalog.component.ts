@@ -63,11 +63,11 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
       extraData: [
         {
           name: $localize`Aktivt`,
-          value: true,
+          value: false,
         },
         {
           name: $localize`Ikke aktivt`,
-          value: false,
+          value: true,
         },
       ],
       style: 'reverse-chip',
@@ -224,7 +224,7 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
       this.store.dispatch(ITSystemActions.updateGridColumns(this.defaultGridColumns));
     }
 
-    this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState));
+    this.subscriptions.add(this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState)));
 
     this.subscriptions.add(
       this.actions$
