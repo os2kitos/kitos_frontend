@@ -1,5 +1,5 @@
 @import "mixins.scss";
-@include native-table-sticky-column;
+@include native-table-sticky-column-left;
 
 :host {
   display: flex;

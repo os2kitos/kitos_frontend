@@ -1,9 +1,15 @@
 <app-standard-vertical-content-grid *ngIf="(isLoading$ | async) === false">
   <ng-container *ngIf="notifications$ | async as notifications">
     <ng-container>
-      <app-native-table tableLayout="fixed" data-cy="notification-table-selector" *ngIf="notifications.length > 0">
+      <app-native-table
+        tableLayout="fixed"
+        data-cy="notification-table-selector"
+        class="notifications-table"
+        [isDisplayBlock]="true"
+        *ngIf="notifications.length > 0"
+      >
         <thead>
-          <th i18n width="5%" data-cy="is-active-column">Aktiv</th>
+          <th i18n width="5%" data-cy="is-active-column" class="sticky-column-left">Aktiv</th>
           <th i18n data-cy="name-column">Navn</th>
           <th i18n data-cy="last-sent-column">Sidst sendt</th>
           <th i18n data-cy="from-date-column">Fra dato</th>
@@ -11,10 +17,11 @@
           <th i18n width="15%" data-cy="receivers-column">Modtagere</th>
           <th i18n width="15%" data-cy="ccs-column">CC</th>
           <th i18n data-cy="title-column">Emne</th>
+          <th></th>
         </thead>
         <tbody>
           <tr *ngFor="let notification of notifications">
-            <td>
+            <td class="sticky-column-left">
               <app-paragraph>
                 <app-boolean-circle [value]="notification.active ?? false"></app-boolean-circle>
               </app-paragraph>

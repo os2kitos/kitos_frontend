@@ -3,7 +3,7 @@
   <app-standard-vertical-content-grid>
     <app-native-table *ngIf="anyPayments$ | async" class="payment-table" [isDisplayBlock]="true">
       <thead>
-        <th i18n class="sticky-column">Organisationsenhed</th>
+        <th i18n class="sticky-column-left">Organisationsenhed</th>
         <th i18n>EAN</th>
         <th i18n>Anskaffelse</th>
         <th i18n>Drift/år</th>
@@ -15,7 +15,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let payment of payments$ | async">
-          <td class="sticky-column">
+          <td class="sticky-column-left">
             <app-paragraph paragraphSize="small">{{ payment.organizationUnit?.name }}</app-paragraph>
           </td>
           <td>
