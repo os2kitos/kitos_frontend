@@ -122,6 +122,13 @@ ng-select {
     }
   }
 
+  //Error state border color
+  &.ng-invalid {
+    .ng-select-container {
+      border-color: $color-negative;
+    }
+  }
+
   // Custom scaling and positioning of active placeholder
   &.ng-select-focused,
   &.ng-select-opened,

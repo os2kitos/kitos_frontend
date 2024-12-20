@@ -575,7 +575,8 @@
     gap: 8px;
   }
 }
-@mixin dialog-footer() {
+
+@mixin dialog-footer-no-padding() {
   .dialog-footer {
     background-color: $color-white;
     display: flex;
@@ -586,6 +587,20 @@
     position: sticky;
     bottom: 0;
     z-index: 10;
+  }
+}
+
+@mixin dialog-footer-with-padding {
+  @include dialog-footer-no-padding;
+
+  :host ::ng-deep {
+    .content {
+      padding-bottom: 0 !important;
+    }
+  }
+
+  .dialog-footer {
+    padding-bottom: $padding-large + 1;
   }
 }
 

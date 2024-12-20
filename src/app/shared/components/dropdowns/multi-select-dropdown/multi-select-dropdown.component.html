@@ -1,4 +1,5 @@
 <ng-select
+  #selectDropdown
   class="{{ size }} "
   [placeholder]="text"
   [items]="data ?? []"
@@ -14,8 +15,12 @@
   (blur)="onBlur()"
   [items]="data ?? []"
   [multiple]="true"
+  [required]="isRequired"
+  [disabled]="disabled"
   [closeOnSelect]="false"
   [(ngModel)]="selectedValuesModel"
+  [addTagText]="addTagText"
+  [addTag]="includeAddTag ? onCreateNew : false"
 >
   <ng-template ng-option-tmp let-item="item" let-item$="item$">
     <div class="select-option-row" (click)="onSelected(item)">
@@ -31,9 +36,9 @@
     </div>
   </ng-template>
   <ng-template ng-multi-label-tmp let-items="items">
-    <div class="value-textbox-margin">
+    <div class="value-textbox-margin ng-value">
       <ng-container *ngFor="let item of items; let isLast = last">
-        {{ item.name }}<ng-container *ngIf="!isLast">,&nbsp;</ng-container>
+        <span class="ng-value-label">{{ item.name }}<ng-container *ngIf="!isLast">,&nbsp;</ng-container></span>
       </ng-container>
     </div>
   </ng-template>

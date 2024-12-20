@@ -1,14 +1,21 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2 } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  Renderer2,
+  ViewChild,
+} from '@angular/core';
 import { debounceTime, filter, map, Subject } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import { DEFAULT_INPUT_DEBOUNCE_TIME } from 'src/app/shared/constants/constants';
+import { DEFAULT_INPUT_DEBOUNCE_TIME, EMAIL_REGEX_PATTERN } from 'src/app/shared/constants/constants';
+import { MultiSelectDropdownItem } from 'src/app/shared/models/dropdown-option.model';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
-
-export interface MultiSelectDropdownItem<T> {
-  name: string;
-  value: T;
-  selected: boolean;
-}
+import { NotificationService } from 'src/app/shared/services/notification.service';
 
 @Component({
   selector: 'app-multi-select-dropdown',
@@ -23,7 +30,12 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
   @Input() public size: 'medium' | 'large' = 'large';
 
   @Input() public data?: MultiSelectDropdownItem<T>[] | null;
+  @Input() public initialSelectedValues?: MultiSelectDropdownItem<T>[] | null;
   @Input() public loading: boolean | null = false;
+  @Input() public includeAddTag = false;
+  @Input() public tagValidation: 'email' | 'none' = 'none';
+  @Input() public addTagText: string = $localize`Tilføj email`;
+  @Input() public isRequired = false;
 
   @Output() public valueChange = new EventEmitter<T[] | undefined>();
   @Output() public validatedValueChange = new EventEmitter<ValidatedValueChange<T[] | undefined>>();
@@ -34,6 +46,10 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
   @Output() public blurEvent = new EventEmitter();
   @Output() public selectedEvent = new EventEmitter<T[]>();
   @Output() public filterChange = new EventEmitter<string | undefined>();
+  @Output() public addTag = new EventEmitter<MultiSelectDropdownItem<T>>();
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  @ViewChild('selectDropdown') selectDropdown!: any;
 
   public focused = false;
   public readonly filter$ = new Subject<string>();
@@ -42,7 +58,12 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
   public readonly loadingText = $localize`Henter data`;
   public readonly notFoundText = $localize`Ingen data fundet`;
 
-  constructor(private el: ElementRef, private renderer: Renderer2) {
+  constructor(
+    private el: ElementRef,
+    private renderer: Renderer2,
+    private notificationService: NotificationService,
+    private cdRef: ChangeDetectorRef
+  ) {
     super();
   }
 
@@ -70,11 +91,21 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
     const ngSelectElement = this.el.nativeElement.querySelector('ng-select');
     this.renderer.removeClass(ngSelectElement, 'ng-select-multiple');
     this.renderer.addClass(ngSelectElement, 'ng-select-single');
+
+    if (this.initialSelectedValues) {
+      this.setValues(this.initialSelectedValues);
+      this.cdRef.detectChanges();
+    }
   }
 
   public setValues(values: MultiSelectDropdownItem<T>[]) {
     this.selectedValuesModel = values;
     this.selectedValues = values.map((item) => item.value);
+  }
+
+  public addValue(value: MultiSelectDropdownItem<T>) {
+    this.selectedValuesModel.push(value);
+    this.selectedValues = this.selectedValuesModel.map((item) => item.value);
   }
 
   public onFocus() {
@@ -97,12 +128,30 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
 
   public onSelected(item: MultiSelectDropdownItem<T>) {
     this.updateSelectedValues(item.value);
-    this.selectedEvent.emit(this.selectedValues);
+    this.emitSelectedEvent(this.selectedValues);
   }
 
   public clear() {
     this.valueChange.emit(undefined);
   }
+
+  public onCreateNew = (tag: string) => {
+    if (this.tagValidation === 'email' && !EMAIL_REGEX_PATTERN.test(tag)) {
+      this.notificationService.showError($localize`Ugyldig email`);
+      return;
+    }
+    const newTag = { name: tag, value: tag as T, selected: false };
+    this.addValue(newTag);
+    this.emitSelectedEvent(this.selectedValues);
+
+    //If we immediately close the dropdown, the tag will not be added to the list
+    //We need to close the dropdown in order to refresh filtering
+    setTimeout(() => {
+      this.selectDropdown.close();
+    }, 1);
+
+    return newTag;
+  };
 
   private updateSelectedValues(value: T) {
     const index = this.selectedValues.indexOf(value);
@@ -111,5 +160,9 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
     } else {
       this.selectedValues.push(value);
     }
+  }
+
+  private emitSelectedEvent(selectedValues: T[]) {
+    this.selectedEvent.emit(selectedValues);
   }
 }

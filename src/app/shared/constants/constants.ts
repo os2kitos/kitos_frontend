@@ -35,3 +35,5 @@ export const DEFAULT_CHANGELOG_SIZE = 5; //(as per old UI) the size of the chang
 
 export const KLE_FILE_NAME = $localize`KLE-Changes.csv`;
 export const GDPR_REPORT_FILE_PREEFIX = 'kitos_gdpr_report';
+
+export const EMAIL_REGEX_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

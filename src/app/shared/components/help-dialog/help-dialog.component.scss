@@ -1,7 +1,7 @@
 @import "theme";
 @import "mixins";
 
-@include dialog-footer;
+@include dialog-footer-no-padding;
 
 .help-text-container {
   text-align: start;

@@ -3173,30 +3173,6 @@
       <trans-unit id="304513782193402852" datatype="html">
         <source>Er du sikker på at du vil slette den nuværende kolonneopsætning af felter som standard for din organisation?</source>
       </trans-unit>
-      <trans-unit id="4357958595186457049" datatype="html">
-        <source>Til modtagere via email</source>
-      </trans-unit>
-      <trans-unit id="142207585763058642" datatype="html">
-        <source>Til modtager via email</source>
-      </trans-unit>
-      <trans-unit id="4166137730603958185" datatype="html">
-        <source>Tilføj modtager via email</source>
-      </trans-unit>
-      <trans-unit id="6444991990828266746" datatype="html">
-        <source>Til modtagere via rolle</source>
-      </trans-unit>
-      <trans-unit id="6300236657799192999" datatype="html">
-        <source>CC modtagere via email</source>
-      </trans-unit>
-      <trans-unit id="816090608387578871" datatype="html">
-        <source>CC modtager via email</source>
-      </trans-unit>
-      <trans-unit id="3180354395904744819" datatype="html">
-        <source>Tilføj CC modtager via email</source>
-      </trans-unit>
-      <trans-unit id="7470391611795713447" datatype="html">
-        <source>CC modtagere via rolle</source>
-      </trans-unit>
       <trans-unit id="8845731802895989121" datatype="html">
         <source>Fra dato</source>
       </trans-unit>
@@ -4905,6 +4881,18 @@
       </trans-unit>
       <trans-unit id="4917104049079759478" datatype="html">
         <source>Primær startmodul</source>
+      </trans-unit>
+      <trans-unit id="6590877104603363570" datatype="html">
+        <source>CCs</source>
+      </trans-unit>
+      <trans-unit id="7658261238857316374" datatype="html">
+        <source>Ugyldig email</source>
+      </trans-unit>
+      <trans-unit id="1927431106338973301" datatype="html">
+        <source>Vælg modtagere som mail eller rolle.</source>
+      </trans-unit>
+      <trans-unit id="9124494925493981512" datatype="html">
+        <source>Tilføj email</source>
       </trans-unit>
     </body>
   </file>

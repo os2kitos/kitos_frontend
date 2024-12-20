@@ -1,18 +1,27 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
+import { Store } from '@ngrx/store';
 import {
-  APIEmailRecipientResponseDTO,
+  APIBaseNotificationPropertiesWriteRequestDTO,
+  APIEmailRecipientWriteRequestDTO,
   APINotificationResponseDTO,
   APIRegularOptionResponseDTO,
-  APIRoleRecipientResponseDTO,
+  APIScheduledNotificationWriteRequestDTO,
 } from 'src/app/api/v2';
+import { BaseComponent } from 'src/app/shared/base/base.component';
+import { EMAIL_REGEX_PATTERN } from 'src/app/shared/constants/constants';
 import {
-  atLeastOneCheckboxCheckedValidator,
-  atLeastOneNonEmptyValidator,
   dateGreaterThanOrEqualControlValidator,
   dateGreaterThanOrEqualToDateValidator,
 } from 'src/app/shared/helpers/form.helpers';
+import {
+  MultiSelectDropdownItem,
+  mapEmailOptionToMultiSelectItem,
+  mapRegularOptionToMultiSelectItem,
+  mapRoleOptionToMultiSelectItem,
+} from 'src/app/shared/models/dropdown-option.model';
+import { NotificationEntityType } from 'src/app/shared/models/notification-entity-types';
 import {
   NotificationRepetitionFrequency,
   mapNotificationRepetitionFrequency,
@@ -25,6 +34,7 @@ import {
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import { AppRootUrlResolverService } from 'src/app/shared/services/app-root-url-resolver.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
+import { UserNotificationActions } from 'src/app/store/user-notifications/actions';
 import { NotificationsTableComponentStore } from '../notifications-table.component-store';
 
 @Component({
@@ -33,134 +43,94 @@ import { NotificationsTableComponentStore } from '../notifications-table.compone
   styleUrl: './notifications-table-dialog.component.scss',
   providers: [NotificationsTableComponentStore],
 })
-export class NotificationsTableDialogComponent implements OnInit {
+export class NotificationsTableDialogComponent extends BaseComponent implements OnInit {
   @Input() public title!: string;
   @Input() public rolesOptions!: Array<APIRegularOptionResponseDTO>;
   @Input() public notificationRepetitionFrequencyOptions!: Array<NotificationRepetitionFrequency>;
   @Input() public ownerEntityUuid!: string;
-  @Input() public onConfirm!: (
-    emailRecepientsForm: FormGroup,
-    notificationForm: FormGroup,
-    roleRecipientsForm: FormGroup,
-    roleCcsForm: FormGroup,
-    emailRecipientsFormArray: FormArray,
-    emailCcsFormArray: FormArray,
-    notificationUuid?: string
-  ) => void;
+  @Input() public ownerResourceType!: NotificationEntityType;
   @Input() public confirmText!: string;
+  @Input() public notification: APINotificationResponseDTO | undefined;
 
-  public readonly emailRecepientsForm = new FormGroup({
-    emailRecipientsFormArray: new FormArray([
-      new FormControl<string | undefined>(undefined, [Validators.email, Validators.required]),
-    ]),
-  });
+  public readonly isSaving$ = this.componentStore.isSaving$;
+
+  public receiverOptions: MultiSelectDropdownItem<string>[] = [];
+  public ccOptions: MultiSelectDropdownItem<string>[] = [];
+
+  public initialSelectedReceiverValues: MultiSelectDropdownItem<string>[] = [];
+  public initialSelectedCcValues: MultiSelectDropdownItem<string>[] = [];
+
+  public isRepeated: boolean = false;
 
   public readonly notificationForm = new FormGroup({
-    emailCcsFormArray: new FormArray([new FormControl<string | undefined>(undefined, Validators.email)]),
     subjectControl: new FormControl<string | undefined>(undefined, Validators.required),
     notificationTypeControl: new FormControl<NotificationType | undefined>(undefined, Validators.required),
+    receivers: new FormControl<string[] | undefined>(undefined, Validators.required),
+    ccs: new FormControl<string[] | undefined>(undefined),
     nameControl: new FormControl<string | undefined>(undefined),
-    repetitionControl: new FormControl<NotificationRepetitionFrequency | undefined>(undefined, Validators.required),
-    fromDateControl: new FormControl<Date | undefined>(undefined, Validators.required),
+    repetitionControl: new FormControl<NotificationRepetitionFrequency | undefined>(undefined),
+    fromDateControl: new FormControl<Date | undefined>(undefined),
     toDateControl: new FormControl<Date | undefined>(undefined),
     bodyControl: new FormControl<string | undefined>(undefined, Validators.required),
   });
-
-  get emailRecipientsFormArray(): FormArray {
-    return this.emailRecepientsForm.get('emailRecipientsFormArray') as FormArray;
-  }
-
-  get emailCcsFormArray(): FormArray {
-    return this.notificationForm.get('emailCcsFormArray') as FormArray;
-  }
-
-  emailFormArray(contextName: string): FormArray | undefined {
-    switch (contextName) {
-      case 'emailRecipientsFormArray':
-        return this.emailRecipientsFormArray;
-      case 'emailCcsFormArray':
-        return this.emailCcsFormArray;
-    }
-    return undefined;
-  }
-
-  public readonly roleRecipientsForm = new FormGroup({});
-  public readonly roleCcsForm = new FormGroup({});
 
   public readonly notificationTypeOptions = notificationTypeOptions;
   public readonly notificationTypeImmediate = this.notificationTypeOptions[0];
   public readonly notificationTypeRepeat = this.notificationTypeOptions[1];
 
   public showDateOver28Tooltip: boolean = false;
-  public notification: APINotificationResponseDTO | undefined;
   public currentNotificationSent$ = this.componentStore.currentNotificationSent$;
 
   public rootUrl: string;
   public canEdit = true;
+  private isEdit = false;
 
   constructor(
     private readonly appRootUrlResolverService: AppRootUrlResolverService,
     private readonly notificationService: NotificationService,
     private readonly dialogRef: MatDialogRef<NotificationsTableDialogComponent>,
     private readonly componentStore: NotificationsTableComponentStore,
-    @Inject(MAT_DIALOG_DATA) public data: APINotificationResponseDTO
+    private readonly store: Store
   ) {
-    if (data) this.notification = data;
+    super();
     this.rootUrl = this.appRootUrlResolverService.resolveRootUrl();
   }
 
   ngOnInit(): void {
+    this.receiverOptions = this.rolesOptions.map((option: APIRegularOptionResponseDTO) =>
+      mapRegularOptionToMultiSelectItem(option)
+    );
+    this.ccOptions = this.rolesOptions.map((option: APIRegularOptionResponseDTO) =>
+      mapRegularOptionToMultiSelectItem(option)
+    );
+
     this.setupNotificationControls();
-    this.setupRoleRecipientControls();
+    this.setupDisabledStateAndValidators();
 
-    if (this.hasImmediateNotification()) {
-      this.canEdit = false;
-      this.disableForms();
-    }
+    if (this.notification) {
+      this.isEdit = true;
 
-    if (this.notification && this.notification.notificationType === this.notificationTypeRepeat.value) {
-      this.toggleRepetitionFields(true);
-      this.notificationForm.controls.notificationTypeControl.disable();
-      this.notificationForm.controls.repetitionControl.disable();
-      this.notificationForm.controls.fromDateControl.disable();
-      this.notificationForm.controls.fromDateControl.setValidators([]);
-    } else {
-      this.toggleRepetitionFields(false);
-      const notificationControls = this.notificationForm.controls;
-      notificationControls.notificationTypeControl.setValue(mapNotificationType(this.notificationTypeImmediate.value));
+      if (!this.notification?.active) {
+        this.canEdit = false;
+        this.disableForms();
+      }
     }
+  }
 
-    if (this.notification && !this.notification?.active) {
-      this.canEdit = false;
-      this.disableForms();
-    }
+  public receipientsChanged(roles: string[], isReceivers: boolean): void {
+    this.getReceipientsControl(isReceivers).setValue(roles);
+  }
+
+  public receipientsCleared(isReceivers: boolean): void {
+    this.getReceipientsControl(isReceivers).setValue([]);
+  }
+
+  public receipientsAdded(receipient: MultiSelectDropdownItem<string>, isReceivers: boolean): void {
+    this.getReceipientsControl(isReceivers).value.push(receipient.value);
   }
 
   public hasImmediateNotification = () =>
     this.notification && this.notification.notificationType !== this.notificationTypeRepeat.value;
-
-  public handleClickConfirm() {
-    this.onConfirm(
-      this.emailRecepientsForm,
-      this.notificationForm,
-      this.roleRecipientsForm,
-      this.roleCcsForm,
-      this.emailRecipientsFormArray,
-      this.emailCcsFormArray
-    );
-  }
-
-  public onAddEmailField(formArrayName: string) {
-    const formArray = this.emailFormArray(formArrayName) as FormArray;
-    formArray.controls.push(new FormControl<string | undefined>(undefined, Validators.email));
-  }
-
-  public onRemoveEmailField(index: number, formArrayName: string) {
-    const formArray = this.emailFormArray(formArrayName) as FormArray;
-    if (formArray.controls.length > 1 && !this.hasImmediateNotification()) {
-      formArray.controls.splice(index, 1);
-    }
-  }
 
   public onCancel() {
     this.dialogRef.close();
@@ -178,18 +148,159 @@ export class NotificationsTableDialogComponent implements OnInit {
     return this.notificationForm.controls.notificationTypeControl.value === this.notificationTypeRepeat;
   }
 
+  public handleClickConfirm() {
+    const basePropertiesDto = this.getBasePropertiesDto(this.notificationForm);
+    if (!basePropertiesDto) return;
+
+    const notificationType = this.notificationForm.controls['notificationTypeControl'].value;
+    let scheduledNotificationDto = undefined;
+    if (notificationType === this.notificationTypeRepeat) {
+      scheduledNotificationDto = this.getScheduledNotificationDTO(basePropertiesDto, this.notificationForm);
+    }
+
+    if (this.isEdit) {
+      this.onEdit(scheduledNotificationDto);
+    } else {
+      this.onCreate(basePropertiesDto, scheduledNotificationDto);
+    }
+  }
+
+  private onEdit(scheduledNotificationDto?: APIScheduledNotificationWriteRequestDTO) {
+    const notificationUuid = this.notification?.uuid;
+    if (notificationUuid) {
+      if (scheduledNotificationDto) {
+        this.componentStore.putScheduledNotification({
+          ownerResourceType: this.ownerResourceType,
+          ownerResourceUuid: this.ownerEntityUuid,
+          notificationUuid: notificationUuid,
+          requestBody: scheduledNotificationDto,
+          onComplete: () => this.onDialogActionComplete(),
+        });
+      }
+    }
+  }
+
+  private onCreate(
+    basePropertiesDto: APIBaseNotificationPropertiesWriteRequestDTO,
+    scheduledNotificationDto?: APIScheduledNotificationWriteRequestDTO
+  ) {
+    if (scheduledNotificationDto) {
+      this.saveScheduledNotification(scheduledNotificationDto);
+    } else {
+      this.saveImmediateNotification(basePropertiesDto);
+    }
+  }
+
+  private getScheduledNotificationDTO(
+    basePropertiesDto: APIBaseNotificationPropertiesWriteRequestDTO,
+    notificationForm: FormGroup
+  ): APIScheduledNotificationWriteRequestDTO | undefined {
+    const notificationControls = notificationForm.controls;
+    const name = notificationControls['nameControl'].value;
+    const fromDate = notificationControls['fromDateControl'].value;
+    const toDate = notificationControls['toDateControl'].value;
+    const repetitionFrequency = notificationControls['repetitionControl'].value?.value;
+    if (fromDate && repetitionFrequency) {
+      return {
+        baseProperties: basePropertiesDto,
+        name: name ?? undefined,
+        fromDate: fromDate,
+        toDate: toDate ?? undefined,
+        repetitionFrequency: repetitionFrequency,
+      };
+    }
+    return undefined;
+  }
+
+  private getBasePropertiesDto(notificationForm: FormGroup): APIBaseNotificationPropertiesWriteRequestDTO | undefined {
+    const notificationControls = notificationForm.controls;
+    const subject = notificationControls['subjectControl'].value;
+    const body = notificationControls['bodyControl'].value;
+
+    const receivers = notificationControls['receivers'].value;
+    const ccs = notificationControls['ccs'].value;
+
+    const mappedReceivers = this.getEmailAndRoleRecipients(receivers);
+    const mappedCcs = this.getEmailAndRoleRecipients(ccs);
+
+    const emailReceivers = mappedReceivers.emailRecipients;
+    const roleReceivers = mappedReceivers.roleRecipients;
+    const emailCcs = mappedCcs.emailRecipients;
+    const roleCcs = mappedCcs.roleRecipients;
+
+    if (subject && body && (roleReceivers.length > 0 || emailReceivers.length > 0)) {
+      return {
+        subject: subject,
+        body: body,
+        receivers: {
+          roleRecipients: roleReceivers,
+          emailRecipients: emailReceivers,
+        },
+        ccs: {
+          roleRecipients: roleCcs,
+          emailRecipients: emailCcs,
+        },
+      };
+    }
+    return undefined;
+  }
+
+  private saveScheduledNotification(scheduledNotificationDto: APIScheduledNotificationWriteRequestDTO) {
+    this.componentStore.postScheduledNotification({
+      ownerResourceType: this.ownerResourceType,
+      ownerResourceUuid: this.ownerEntityUuid,
+      requestBody: scheduledNotificationDto,
+      onComplete: () => this.onDialogActionComplete(),
+    });
+  }
+
+  private saveImmediateNotification(basePropertiesDto: APIBaseNotificationPropertiesWriteRequestDTO) {
+    this.componentStore.postImmediateNotification({
+      ownerResourceType: this.ownerResourceType,
+      ownerResourceUuid: this.ownerEntityUuid,
+      requestBody: {
+        baseProperties: basePropertiesDto,
+      },
+      onComplete: () => this.onDialogActionComplete(),
+    });
+  }
+
+  private getReceipientsControl(isReceivers: boolean): FormControl {
+    return isReceivers ? this.notificationForm.controls.receivers : this.notificationForm.controls.ccs;
+  }
+
+  private getEmailAndRoleRecipients(recipients: string[] | undefined) {
+    const emailRecipients: APIEmailRecipientWriteRequestDTO[] = [];
+    const roleRecipients: { roleUuid: string }[] = [];
+
+    if (!recipients) return { emailRecipients, roleRecipients };
+
+    recipients.forEach((recipient) => {
+      if (EMAIL_REGEX_PATTERN.test(recipient)) {
+        emailRecipients.push({ email: recipient });
+      } else {
+        roleRecipients.push({ roleUuid: recipient });
+      }
+    });
+
+    return { emailRecipients, roleRecipients };
+  }
+
   private setupNotificationControls() {
     const notificationControls = this.notificationForm.controls;
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
 
-    notificationControls.fromDateControl.valueChanges.subscribe(() => this.toggleShowDateOver28Tooltip());
+    this.subscriptions.add(
+      notificationControls.fromDateControl.valueChanges.subscribe(() => {
+        this.toggleShowDateOver28Tooltip();
+        this.notificationForm.controls.toDateControl.updateValueAndValidity();
+      })
+    );
+    this.subscriptions.add(
+      notificationControls.repetitionControl.valueChanges.subscribe(() => this.toggleShowDateOver28Tooltip())
+    );
     notificationControls.toDateControl.validator = dateGreaterThanOrEqualControlValidator(
       this.notificationForm.controls.fromDateControl
     );
-    notificationControls.repetitionControl.valueChanges.subscribe(() => this.toggleShowDateOver28Tooltip());
-    this.emailRecipientsFormArray.addValidators(atLeastOneNonEmptyValidator);
-    this.emailRecipientsFormArray.updateValueAndValidity();
 
     if (this.notification) {
       const fromDate = this.notification.fromDate;
@@ -203,62 +314,74 @@ export class NotificationsTableDialogComponent implements OnInit {
       notificationControls.repetitionControl.setValue(
         mapNotificationRepetitionFrequency(this.notification.repetitionFrequency)
       );
-      this.setupEmailRecipientData(this.notification.receivers?.emailRecipients, this.emailRecipientsFormArray);
-      this.setupEmailRecipientData(this.notification.cCs?.emailRecipients, this.emailCcsFormArray);
+
+      const emailRecipientsSet = new Set(
+        this.notification.receivers?.emailRecipients?.map((option) => mapEmailOptionToMultiSelectItem(option, true)) ??
+          []
+      );
+      const roleRecipientsSet = new Set(
+        this.notification.receivers?.roleRecipients?.map((option) => mapRoleOptionToMultiSelectItem(option, true)) ?? []
+      );
+      const emailCcsSet = new Set(
+        this.notification.cCs?.emailRecipients?.map((option) => mapEmailOptionToMultiSelectItem(option, true)) ?? []
+      );
+      const roleCcsSet = new Set(
+        this.notification.cCs?.roleRecipients?.map((option) => mapRoleOptionToMultiSelectItem(option, true)) ?? []
+      );
+
+      this.receiverOptions = Array.from(new Set([...this.receiverOptions, ...emailRecipientsSet]));
+      this.ccOptions = Array.from(new Set([...this.ccOptions, ...emailCcsSet]));
+
+      this.updateSelectedRoles(roleRecipientsSet, this.receiverOptions);
+      this.updateSelectedRoles(roleCcsSet, this.ccOptions);
+
+      this.initialSelectedReceiverValues = this.receiverOptions.filter((option) => option.selected);
+      this.initialSelectedCcValues = this.ccOptions.filter((option) => option.selected);
+
+      notificationControls.receivers.setValue(this.initialSelectedReceiverValues.map((option) => option.value));
+      notificationControls.ccs.setValue(this.initialSelectedCcValues.map((option) => option.value));
     } else {
-      // 20240528: HACK: Validation dehaviour should be determined by permissions instead
+      // 20240528: HACK: Validation behaviour should be determined by permissions instead
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
       notificationControls.fromDateControl.addValidators(dateGreaterThanOrEqualToDateValidator(today));
       notificationControls.fromDateControl.updateValueAndValidity();
     }
   }
 
-  private setupEmailRecipientData(recipients: APIEmailRecipientResponseDTO[] | undefined, formArray: FormArray) {
-    const lastControl = formArray.controls[formArray.controls.length - 1];
-    recipients?.forEach((recipient) => {
-      if (!lastControl.value) lastControl.setValue(recipient.email);
-      else
-        formArray.controls.push(
-          new FormControl<string | undefined>(recipient.email, [Validators.email, Validators.required])
-        );
-    });
-  }
-
-  private setupRoleRecipientControls() {
-    this.rolesOptions.forEach((option) => {
-      this.roleRecipientsForm.addControl(option.uuid, new FormControl<boolean>(false));
-      this.roleCcsForm.addControl(option.uuid, new FormControl<boolean>(false));
-    });
-    if (this.notification) {
-      this.setupRoleRecipientData(this.notification.receivers?.roleRecipients, this.roleRecipientsForm);
-      this.setupRoleRecipientData(this.notification.cCs?.roleRecipients, this.roleCcsForm);
+  private setupDisabledStateAndValidators() {
+    if (this.hasImmediateNotification()) {
+      this.canEdit = false;
+      this.disableForms();
     }
-    this.roleRecipientsForm.setValidators(atLeastOneCheckboxCheckedValidator);
-    this.roleRecipientsForm.updateValueAndValidity();
-  }
 
-  private setupRoleRecipientData(recipients: APIRoleRecipientResponseDTO[] | undefined, form: FormGroup) {
-    recipients?.forEach((recipient) => {
-      for (const controlKey in form.controls) {
-        if (controlKey === recipient.role?.uuid) {
-          const control = form.get(controlKey);
-          control?.setValue(true);
-        }
-      }
-    });
+    if (this.notification && this.notification.notificationType === this.notificationTypeRepeat.value) {
+      this.toggleRepetitionFields(true);
+      this.notificationForm.controls.notificationTypeControl.disable();
+      this.notificationForm.controls.repetitionControl.disable();
+      this.notificationForm.controls.fromDateControl.disable();
+      this.notificationForm.controls.fromDateControl.setValidators([]);
+    } else {
+      this.toggleRepetitionFields(false);
+      const notificationControls = this.notificationForm.controls;
+      notificationControls.notificationTypeControl.setValue(mapNotificationType(this.notificationTypeImmediate.value));
+    }
   }
 
   private toggleRepetitionFields(isRepeated: boolean) {
-    const allControls = this.notificationForm.controls;
-    const toBeToggled = [
-      allControls.nameControl,
-      allControls.repetitionControl,
-      allControls.fromDateControl,
-      allControls.toDateControl,
-    ];
+    this.isRepeated = isRepeated;
+
     if (isRepeated) {
-      toBeToggled.forEach((control) => control.enable());
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      this.notificationForm.controls.repetitionControl.setValidators([Validators.required]);
+      this.notificationForm.controls.fromDateControl.setValidators([
+        Validators.required,
+        dateGreaterThanOrEqualToDateValidator(today),
+      ]);
     } else {
-      toBeToggled.forEach((control) => control.disable());
+      this.notificationForm.controls.repetitionControl.setValidators([]);
+      this.notificationForm.controls.fromDateControl.setValidators([]);
       this.notificationForm.controls.fromDateControl.patchValue(undefined);
       this.notificationForm.controls.toDateControl.patchValue(undefined);
     }
@@ -279,10 +402,17 @@ export class NotificationsTableDialogComponent implements OnInit {
 
   private disableForms() {
     this.notificationForm.disable();
-    this.emailRecepientsForm.disable();
-    this.roleRecipientsForm.disable();
-    this.roleCcsForm.disable();
-    this.emailRecipientsFormArray.controls.forEach((control) => control.disable());
-    this.emailCcsFormArray.controls.forEach((control) => control.disable());
+  }
+
+  private onDialogActionComplete() {
+    this.store.dispatch(UserNotificationActions.notificationCreated(this.ownerResourceType));
+    this.onCancel();
+  }
+
+  private updateSelectedRoles(set: Set<MultiSelectDropdownItem<string>>, options: MultiSelectDropdownItem<string>[]) {
+    set.forEach((item) => {
+      const option = options.find((option) => option.value === item.value);
+      if (option) option.selected = true;
+    });
   }
 }
