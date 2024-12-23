@@ -1,5 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
-import { ComponentStore } from '@ngrx/component-store';import { tapResponse } from '@ngrx/operators';
+import { ComponentStore } from '@ngrx/component-store';
+import { tapResponse } from '@ngrx/operators';
 
 import { Store } from '@ngrx/store';
 import { Observable, combineLatestWith, mergeMap, switchMap, tap } from 'rxjs';
@@ -18,6 +19,7 @@ interface State {
   notifications: Array<APINotificationResponseDTO>;
   isLoading: boolean;
   currentNotificationSent: Array<APISentNotificationResponseDTO> | undefined;
+  isSaving: boolean;
 }
 
 @Injectable()
@@ -27,13 +29,16 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
   public readonly currentNotificationSent$ = this.select((state) => state.currentNotificationSent).pipe(
     filterNullish()
   );
+  public readonly isSaving$ = this.select((state) => state.isSaving).pipe(filterNullish());
 
   constructor(
     private readonly store: Store,
     @Inject(APIV2NotificationINTERNALService) private readonly apiNotificationsService: APIV2NotificationINTERNALService
   ) {
-    super({ notifications: [], isLoading: false, currentNotificationSent: undefined });
+    super({ notifications: [], isLoading: false, currentNotificationSent: undefined, isSaving: false });
   }
+
+  private readonly setIsSaving = this.updater((state, isSaving: boolean): State => ({ ...state, isSaving }));
 
   public getCurrentNotificationSent = this.effect(
     (
@@ -72,6 +77,7 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
       }>
     ) =>
       params$.pipe(
+        tap(() => this.setIsSaving(true)),
         switchMap((params) => {
           return this.apiNotificationsService
             .postSingleNotificationV2CreateImmediateNotification({
@@ -79,6 +85,7 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
               ownerResourceUuid: params.ownerResourceUuid,
               request: params.requestBody,
             })
+            .pipe(tap(() => this.setIsSaving(false)))
             .pipe(tap(() => params.onComplete()));
         })
       )
@@ -94,6 +101,7 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
       }>
     ) =>
       params$.pipe(
+        tap(() => this.setIsSaving(true)),
         switchMap((params) => {
           return this.apiNotificationsService
             .postSingleNotificationV2CreateScheduledNotification({
@@ -101,6 +109,7 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
               ownerResourceUuid: params.ownerResourceUuid,
               request: params.requestBody,
             })
+            .pipe(tap(() => this.setIsSaving(false)))
             .pipe(tap(() => params.onComplete()));
         })
       )
@@ -117,6 +126,7 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
       }>
     ) =>
       params$.pipe(
+        tap(() => this.setIsSaving(true)),
         switchMap((params) => {
           return this.apiNotificationsService
             .putSingleNotificationV2UpdateScheduledNotification({
@@ -125,6 +135,7 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
               notificationUuid: params.notificationUuid,
               request: params.requestBody,
             })
+            .pipe(tap(() => this.setIsSaving(false)))
             .pipe(tap(() => params.onComplete()));
         })
       )
