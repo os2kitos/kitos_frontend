@@ -20,10 +20,23 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Cypress run
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Build Angular app
+        run: ng build --configuration=production
+
+      - name: Start static server
+        run: npx http-server dist/kitos-web -p 4200 &
+        env:
+          CI: true
+
+      - name: Wait for server to be ready
+        run: npx wait-on http://localhost:4200
+
+      - name: Run Cypress tests
         uses: cypress-io/github-action@v6
         with:
-          start: yarn start
           wait-on: "http://localhost:4200"
           wait-on-timeout: 120
           record: true
