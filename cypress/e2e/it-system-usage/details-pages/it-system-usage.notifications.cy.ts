@@ -100,7 +100,7 @@ describe('it-system-usage', () => {
     cy.getByDataCy('notifications-dialog')
       .should('be.visible')
       .within(() => {
-        cy.getByDataCy('email-recipient-accordion').click().getByDataCy('email-recipient-textbox').type(recipient);
+        cy.getByDataCy('recipient-dropdown').type(recipient).type('{enter}');
         cy.dropdownByCy('notification-type-dropdown', 'Straks', true);
         cy.getByDataCy('subject-textbox').type('testSubject');
         cy.setTinyMceContent('rich-text-editor', 'testBody');

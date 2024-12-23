@@ -1,4 +1,7 @@
 @import "theme";
+@import "mixins";
+
+@include dialog-footer-with-padding;
 
 editor {
   padding-top: $padding-medium;
@@ -7,4 +10,3 @@ editor {
 ::ng-deep .mat-dialog-content-padding {
   max-height: 778px;
 }
-

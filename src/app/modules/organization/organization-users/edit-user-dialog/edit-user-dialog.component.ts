@@ -15,10 +15,10 @@ import {
   mapUserRoleChoice,
   UserRoleChoice,
 } from 'src/app/shared/models/organization/organization-user/user-role.model';
+import { UserService } from 'src/app/shared/services/user.service';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
 import { BaseUserDialogComponent } from '../base-user-dialog.component';
 import { CopyRolesDialogComponent } from '../copy-roles-dialog/copy-roles-dialog.component';
-import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
   selector: 'app-edit-user-dialog',

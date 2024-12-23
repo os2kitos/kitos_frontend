@@ -1,14 +1,4 @@
 @import "theme";
 @import "mixins";
 
-@include dialog-footer;
-
-:host ::ng-deep {
-  .content {
-    padding-bottom: 0 !important;
-  }
-}
-
-.dialog-footer {
-  padding-bottom: $padding-large;
-}
+@include dialog-footer-with-padding;
