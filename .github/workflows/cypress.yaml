@@ -40,7 +40,7 @@ jobs:
           CI: true
 
       - name: Wait for server to be ready
-        run: npx wait-on http://localhost:4200
+        run: npx wait-on http://localhost:4200 --timeout 300000
 
       - name: Run Cypress tests
         uses: cypress-io/github-action@v6
