@@ -4591,8 +4591,8 @@
       <trans-unit id="586395525837431806" datatype="html">
         <source>Primær organisationsenhed</source>
       </trans-unit>
-      <trans-unit id="7225215805628203543" datatype="html">
-        <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="rong&gt;"/>Gamle brugerflade<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></source>
+      <trans-unit id="7132384966792473603" datatype="html">
+        <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="rong&gt;"/>Gammel brugerflade<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></source>
       </trans-unit>
       <trans-unit id="1492491332269133030" datatype="html">
         <source> Bemærk at linkets gyldighed udløber efter 10 dage. Du skal derfor nå at nulstille dit password inden da. </source>
