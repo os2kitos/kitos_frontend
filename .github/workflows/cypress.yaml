@@ -23,7 +23,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20'
+          node-version: '20' # Brug Node.js v20 eller nyere
 
       - name: Install Angular CLI
         run: npm install -g @angular/cli
@@ -34,22 +34,18 @@ jobs:
       - name: Build Angular app
         run: ng build --configuration=production
 
+      - name: Install XVFB
+        run: sudo apt-get install xvfb
+
       - name: Start static server
-        run: npx http-server dist/kitos-web -p 4200 &
+        run: |
+          npx http-server dist/kitos-web -p 4200 -c-1
         env:
           CI: true
 
-      - name: Wait for server to be ready
-        run: npx wait-on http://localhost:4200 --timeout 300000
-
-      - name: Run Cypress tests
-        uses: cypress-io/github-action@v6
-        with:
-          browser: chrome
-          wait-on: "http://localhost:4200"
-          wait-on-timeout: 120
-          record: true
-          parallel: true
+      - name: Run Cypress tests with XVFB
+        run: |
+          xvfb-run --auto-servernum --server-args="-screen 0 1920x1080x24" npx cypress run --record --key ${{ secrets.CYPRESS_RECORD_KEY }} --browser chrome
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.TOKEN_TO_GITHUB }}
