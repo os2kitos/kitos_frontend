@@ -243,12 +243,15 @@
         <ng-template *ngIf="column.style === 'page-link-array'" kendoGridCellTemplate let-dataItem>
           <app-paragraph [cropOnOverflow]="true">
             <ng-container *ngIf="column.dataField">
-              <ng-container *ngFor="let item of searchProperty(dataItem, column.dataField) as data; let i = index">
+              <div>
+                <ng-container *ngFor="let item of searchProperty(dataItem, column.dataField) as data; let i = index">
                 <app-details-page-link linkFontSize="small" [itemType]="column.entityType" [itemUuid]="item.id">{{
                   item.value
                 }}</app-details-page-link
                 >{{ i < data.length - 1 ? ", " : "" }}
               </ng-container>
+              </div>
+              
             </ng-container>
           </app-paragraph>
         </ng-template>
