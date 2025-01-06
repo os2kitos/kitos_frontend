@@ -490,9 +490,9 @@ export class NotificationService implements OnDestroy {
     );
 
     this.subscribeAsDefault(GlobalOptionTypeActions.createOptionTypeSuccess, $localize`Typen blev oprettet`);
-    this.subscribeAsDefault(GlobalOptionTypeActions.createOptionTypeError, $localize`Typen kunne ikke oprettes`);
+    this.subscribeAsError(GlobalOptionTypeActions.createOptionTypeError, $localize`Typen kunne ikke oprettes`);
     this.subscribeAsDefault(GlobalOptionTypeActions.updateOptionTypeSuccess, $localize`Typen blev opdateret`);
-    this.subscribeAsDefault(GlobalOptionTypeActions.updateOptionTypeError, $localize`Typen kunne ikke opdateres`);
+    this.subscribeAsError(GlobalOptionTypeActions.updateOptionTypeError, $localize`Typen kunne ikke opdateres`);
   }
   /**
    * Consolidates notifications related to the "roles" which is used in multiple different modules

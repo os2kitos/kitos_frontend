@@ -8,6 +8,8 @@ import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
 import { ColumnConfigService } from '../../services/column-config.service';
+import { ITSystemActions } from 'src/app/store/it-system/actions';
+import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 
 @Component({
   selector: 'app-reset-to-org-columns-config-button',
@@ -50,6 +52,12 @@ export class ResetToOrgColumnsConfigButtonComponent implements OnInit {
         break;
       case 'organization-user':
         this.store.dispatch(OrganizationUserActions.resetGridConfiguration());
+        break;
+      case 'it-system':
+        this.store.dispatch(ITSystemActions.resetGridConfiguration());
+        break;
+      case 'it-interface':
+        this.store.dispatch(ITInterfaceActions.resetGridConfiguration());
         break;
       default:
         throw new Error('Unsupported entity type');

@@ -335,11 +335,6 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     return this.gridUIConfigService.isColumnEnabled(column, applications);
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  public checkOverflow(element: any) {
-    return element.offsetWidth < 75;
-  }
-
   private isExcelOnlyColumn(column: GridColumn): boolean {
     return column.style === 'excel-only';
   }

@@ -2,3 +2,10 @@
 :host {
   cursor: default;
 }
+
+.overflow-hidden-container {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+}

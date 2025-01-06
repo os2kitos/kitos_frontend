@@ -2,6 +2,7 @@
   <h3 i18n>IT Systemkatalog</h3>
   <app-grid-options-button
     entityType="it-system"
+    [hasResetButton]="true"
     [createPermission$]="hasCreatePermission$"
   ></app-grid-options-button>
   <app-export-menu-button [exportMethod]="onExcelExport"></app-export-menu-button>

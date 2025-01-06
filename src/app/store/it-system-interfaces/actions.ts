@@ -71,5 +71,7 @@ export const ITInterfaceActions = createActionGroup({
     }),
     'Create IT Interface Success': (uuid: string, openAfterCreate: boolean) => ({ uuid, openAfterCreate }),
     'Create IT Interface Error': emptyProps(),
+
+    'Reset grid configuration': emptyProps(),
   },
 });

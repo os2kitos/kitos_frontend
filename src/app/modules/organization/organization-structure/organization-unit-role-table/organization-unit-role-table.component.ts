@@ -61,7 +61,8 @@ export class OrganizationUnitRoleTableComponent extends BaseRoleTableComponent i
         this.actions$.pipe(
           ofType(
             OrganizationUnitActions.transferRegistrationsSuccess,
-            OrganizationUnitActions.removeRegistrationsSuccess
+            OrganizationUnitActions.removeRegistrationsSuccess,
+            OrganizationUnitActions.patchOrganizationUnitSuccess
           )
         ),
         this.entityUuid$

@@ -16,13 +16,11 @@ import { UIModuleConfigKey } from '../enums/ui-module-config-key';
 import { GridColumn } from '../models/grid-column.model';
 import { RegistrationEntityTypes } from '../models/registrations/registration-entity-categories.model';
 import { GridUIConfigService } from './ui-config-services/grid-ui-config.service';
-import { UIConfigService } from './ui-config-services/ui-config.service';
 
 @Injectable({ providedIn: 'root' })
 export class ColumnConfigService {
   constructor(
     private store: Store,
-    private uiConfigService: UIConfigService,
     private gridUiConfigService: GridUIConfigService
   ) {}
 

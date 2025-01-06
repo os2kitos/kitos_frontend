@@ -2,6 +2,7 @@
   <h3 i18n>IT Snitfladekatalog</h3>
   <app-grid-options-button
     entityType="it-interface"
+    [hasResetButton]="true"
     [createPermission$]="hasCreatePermission$"
   ></app-grid-options-button>
   <app-export-menu-button [exportMethod]="onExcelExport"></app-export-menu-button>

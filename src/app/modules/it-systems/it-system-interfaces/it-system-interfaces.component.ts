@@ -175,6 +175,14 @@ export class ItSystemInterfacesComponent extends BaseOverviewComponent implement
 
     this.updateUnclickableColumns(this.defaultGridColumns);
     this.subscriptions.add(this.gridColumns$.subscribe((columns) => this.updateUnclickableColumns(columns)));
+
+    this.subscriptions.add(
+      this.actions$.pipe(ofType(ITInterfaceActions.resetGridConfiguration)).subscribe(() => this.updateDefaultColumns())
+    );
+  }
+
+  private updateDefaultColumns(): void {
+    this.store.dispatch(ITInterfaceActions.updateGridColumns(this.defaultGridColumns));
   }
 
   public stateChange(gridState: GridState) {

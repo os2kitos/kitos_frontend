@@ -136,40 +136,18 @@
         <ng-template *ngIf="column.style === 'primary'" kendoGridCellTemplate let-dataItem>
           <div class="paragraph might-overflow bold-font">{{ searchProperty(dataItem, column.field) }}</div>
         </ng-template>
-        <ng-template *ngIf="column.style === 'chip'" kendoGridCellTemplate let-dataItem>
+        <ng-template
+          *ngIf="column.style === 'chip' || column.style === 'reverse-chip'"
+          kendoGridCellTemplate
+          let-dataItem
+        >
           <div class="items-center-container overflow-hidden-container" #chip>
             <app-status-chip
-              *ngIf="!checkOverflow(chip)"
               [type]="column.entityType"
               [value]="searchProperty(dataItem, column.field)"
               [valueDisplayType]="column.booleanValueDisplay"
-              [overflows]="false"
-            ></app-status-chip>
-            <app-status-chip
-              *ngIf="checkOverflow(chip)"
-              [type]="column.entityType"
-              [value]="searchProperty(dataItem, column.field)"
-              [valueDisplayType]="column.booleanValueDisplay"
-              [overflows]="true"
-            ></app-status-chip>
-          </div>
-        </ng-template>
-
-        <ng-template *ngIf="column.style === 'reverse-chip'" kendoGridCellTemplate let-dataItem>
-          <div class="items-center-container overflow-hidden-container" #chip>
-            <app-status-chip
-              *ngIf="!checkOverflow(chip)"
-              type="it-interface"
-              [value]="searchProperty(dataItem, column.field)"
-              [reverseValues]="true"
-              [overflows]="false"
-            ></app-status-chip>
-            <app-status-chip
-              *ngIf="checkOverflow(chip)"
-              type="it-interface"
-              [value]="searchProperty(dataItem, column.field)"
-              [reverseValues]="true"
-              [overflows]="true"
+              [elementLength]="chip.offsetWidth"
+              [reverseValues]="column.style === 'reverse-chip'"
             ></app-status-chip>
           </div>
         </ng-template>

@@ -1,6 +1,6 @@
 <app-tooltip [text]="title || ''" *ngIf="type">
   <app-chip *ngIf="value !== null && value !== undefined" [state]="isError() ? 'error' : 'success'">
-    <ng-container *ngIf="!overflows">
+    <ng-container *ngIf="!isOverflowing()">
       {{ isError() ? falseString : trueString }}
     </ng-container>
   </app-chip>

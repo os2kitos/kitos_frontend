@@ -77,6 +77,8 @@ export const ITSystemActions = createActionGroup({
     'Save IT System Filter': (localStoreKey: string) => ({ localStoreKey }),
     'Apply IT System Filter': (state: SavedFilterState) => ({ state }),
 
+    'Reset grid configuration': emptyProps(),
+
     'Execute Usage Migration': (targetItSystemUuid: string, usageUuid: string) => ({ targetItSystemUuid, usageUuid }),
     'Execute Usage Migration Success': () => emptyProps(),
     'Execute Usage Migration Error': emptyProps(),
