@@ -191,6 +191,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     {
       field: GridFields.ResponsibleOrganizationUnitName,
       title: $localize`Ansv. organisationsenhed`,
+      style: 'default-wrap',
       section: ORGANIZATION_SECTION_NAME,
       extraFilter: 'organization-unit',
       width: 350,

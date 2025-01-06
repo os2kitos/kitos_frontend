@@ -26,6 +26,7 @@ export interface GridColumn {
   entityType?: RegistrationEntityTypes;
   style?:
     | 'default'
+    | 'default-wrap' //Text field where overflow results in wrap instead of ellipsis
     | 'primary'
     | 'chip'
     | 'reverse-chip'

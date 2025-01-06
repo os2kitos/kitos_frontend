@@ -29,6 +29,13 @@ import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
 import { BaseComponent } from '../../base/base.component';
+import {
+  DEFAULT_COLUMN_MINIMUM_WIDTH,
+  DEFAULT_COLUMN_WIDTH,
+  DEFAULT_DATE_COLUMN_MINIMUM_WIDTH,
+  DEFAULT_DATE_COLUMN_WIDTH,
+  DEFAULT_PRIMARY_COLUMN_MINIMUM_WIDTH,
+} from '../../constants/constants';
 import { includedColumnInExport } from '../../helpers/grid-export.helper';
 import { getApplyFilterAction, getSaveFilterAction } from '../../helpers/grid-filter.helpers';
 import { GridColumn } from '../../models/grid-column.model';
@@ -73,9 +80,11 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   public displayedColumns?: string[];
   public dataSource = new MatTableDataSource<T>();
 
-  public readonly defaultColumnWidth = 270;
-  public readonly defaultMinimumColumnWidth = 55;
-  public readonly defaultDateColumnWidth = 350;
+  public readonly defaultColumnWidth = DEFAULT_COLUMN_WIDTH;
+  public readonly defaultMinimumColumnWidth = DEFAULT_COLUMN_MINIMUM_WIDTH;
+  public readonly defaultDateColumnWidth = DEFAULT_DATE_COLUMN_WIDTH;
+  public readonly defaultPrimaryColumnMinimumWidth = DEFAULT_PRIMARY_COLUMN_MINIMUM_WIDTH;
+  public readonly defaultMinimumDateColumnWidth = DEFAULT_DATE_COLUMN_MINIMUM_WIDTH;
 
   constructor(
     private actions$: Actions,

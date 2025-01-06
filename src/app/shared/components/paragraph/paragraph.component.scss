@@ -69,6 +69,13 @@
   white-space: normal;
 }
 
+.wrap-on-overflow {
+  overflow: hidden;
+  text-overflow: clip;
+  white-space: normal;
+  word-wrap: break-word;
+}
+
 .bold-font {
   font-weight: bold;
 }

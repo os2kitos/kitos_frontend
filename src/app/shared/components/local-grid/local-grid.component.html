@@ -23,12 +23,14 @@
       [filter]="column.filter ?? 'text'"
       [width]="column.width ?? defaultColumnWidth"
       [minResizableWidth]="
-        column.minResizableWidth !== undefined
-          ? column.minResizableWidth
-          : column.filter === 'date'
-          ? defaultDateColumnWidth
+      column.minResizableWidth !== undefined
+        ? column.minResizableWidth
+        : column.filter === 'date'
+        ? defaultMinimumDateColumnWidth
+        : column.style === 'primary'
+          ? defaultPrimaryColumnMinimumWidth
           : defaultMinimumColumnWidth
-      "
+    "
       headerClass="mygrid-header-cell"
     >
       <ng-template kendoGridHeaderTemplate let-column let-columnIndex="columnIndex">
@@ -74,7 +76,7 @@
         <app-paragraph [cropOnOverflow]="true">{{ searchProperty(dataItem, column.field) }}</app-paragraph>
       </ng-template>
       <ng-template *ngIf="column.style === 'primary'" kendoGridCellTemplate let-dataItem>
-        <div class="paragraph might-overflow bold-font">{{ searchProperty(dataItem, column.field) }}</div>
+        <div class="paragraph wrap-on-overflow bold-font">{{ searchProperty(dataItem, column.field) }}</div>
       </ng-template>
 
       <ng-template *ngIf="column.style === 'enum'" kendoGridCellTemplate let-dataItem>

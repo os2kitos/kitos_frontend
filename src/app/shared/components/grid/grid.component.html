@@ -28,14 +28,20 @@
         [title]="column.title"
         [sortable]="column.sortable ?? true"
         [filter]="column.filter ?? 'text'"
-        [width]="column.width ?? defaultColumnWidth"
+        [width]="column.width !== undefined
+          ? column.width
+          : column.style === 'date'
+            ? defaultDateColumnWidth
+            : defaultColumnWidth"
         [sticky]="column.isSticky ?? false"
         [minResizableWidth]="
           column.minResizableWidth !== undefined
             ? column.minResizableWidth
             : column.filter === 'date'
-            ? defaultDateColumnWidth
-            : defaultMinimumColumnWidth
+            ? defaultMinimumDateColumnWidth
+            : column.style === 'primary'
+              ? defaultPrimaryColumnMinimumWidth
+              : defaultMinimumColumnWidth
         "
         headerClass="mygrid-header-cell"
       >
@@ -133,8 +139,15 @@
         >
           <app-paragraph [cropOnOverflow]="true">{{ searchProperty(dataItem, column.field) }}</app-paragraph>
         </ng-template>
+        <ng-template
+          *ngIf="column.style === 'default-wrap'"
+          kendoGridCellTemplate
+          let-dataItem
+        >
+          <app-paragraph [wrapOnOverflow]="true">{{ searchProperty(dataItem, column.field) }}</app-paragraph>
+        </ng-template>
         <ng-template *ngIf="column.style === 'primary'" kendoGridCellTemplate let-dataItem>
-          <div class="paragraph might-overflow bold-font">{{ searchProperty(dataItem, column.field) }}</div>
+          <div class="paragraph wrap-on-overflow bold-font">{{ searchProperty(dataItem, column.field) }}</div>
         </ng-template>
         <ng-template
           *ngIf="column.style === 'chip' || column.style === 'reverse-chip'"

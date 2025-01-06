@@ -133,7 +133,6 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       section: DATA_PROCESSING_SECTION_NAME,
       filter: 'date',
       style: 'date',
-      width: 350,
       hidden: true,
       persistId: 'changed',
     },
@@ -216,7 +215,6 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       section: DATA_PROCESSING_SECTION_NAME,
       filter: 'date',
       style: 'date',
-      width: 350,
       hidden: true,
       persistId: 'agreementConcludedAt',
     },
@@ -256,7 +254,6 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       hidden: true,
       filter: 'date',
       style: 'date',
-      width: 350,
       persistId: 'scheduledInspectionDate',
     },
     {
@@ -266,7 +263,6 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       hidden: true,
       filter: 'date',
       style: 'date',
-      width: 350,
       persistId: 'latestOversightDate',
     },
     {

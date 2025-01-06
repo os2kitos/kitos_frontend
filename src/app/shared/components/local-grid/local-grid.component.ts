@@ -9,6 +9,7 @@ import { BaseComponent } from '../../base/base.component';
 import { includedColumnInExport } from '../../helpers/grid-export.helper';
 import { GridColumn } from '../../models/grid-column.model';
 import { GridState, defaultGridState } from '../../models/grid-state.model';
+import { DEFAULT_COLUMN_MINIMUM_WIDTH, DEFAULT_COLUMN_WIDTH, DEFAULT_DATE_COLUMN_MINIMUM_WIDTH, DEFAULT_DATE_COLUMN_WIDTH, DEFAULT_PRIMARY_COLUMN_MINIMUM_WIDTH } from '../../constants/constants';
 
 @Component({
   selector: 'app-local-grid',
@@ -34,9 +35,11 @@ export class LocalGridComponent<T> extends BaseComponent implements OnInit {
 
   public state = defaultGridState;
 
-  public readonly defaultColumnWidth = 270;
-  public readonly defaultMinimumColumnWidth = 50;
-  public readonly defaultDateColumnWidth = 350;
+  public readonly defaultColumnWidth = DEFAULT_COLUMN_WIDTH;
+  public readonly defaultMinimumColumnWidth = DEFAULT_COLUMN_MINIMUM_WIDTH;
+  public readonly defaultDateColumnWidth = DEFAULT_DATE_COLUMN_WIDTH;
+  public readonly defaultMinimumDateColumnWidth = DEFAULT_DATE_COLUMN_MINIMUM_WIDTH;
+  public readonly defaultPrimaryColumnMinimumWidth = DEFAULT_PRIMARY_COLUMN_MINIMUM_WIDTH;
 
   constructor(private actions$: Actions) {
     super();

@@ -543,15 +543,11 @@
     color: $color-neutral-dark;
   }
 
-  .might-overflow {
+  .wrap-on-overflow {
     overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-  .might-overflow:hover {
     text-overflow: clip;
-    word-break: break-all;
     white-space: normal;
+    word-wrap: break-word;
   }
 
   .bold-font {

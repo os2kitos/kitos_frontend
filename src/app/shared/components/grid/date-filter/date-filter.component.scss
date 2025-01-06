@@ -6,6 +6,10 @@
   gap: $padding-small;
 }
 
+app-datepicker {
+  max-width: 66%;
+}
+
 :host ::ng-deep {
   // Make option dropdown a fixed width and hide button
   .date-option-dropdown {

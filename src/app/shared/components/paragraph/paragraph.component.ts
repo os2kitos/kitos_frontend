@@ -11,6 +11,7 @@ import { HelpDialogComponent } from '../help-dialog/help-dialog.component';
 export class ParagraphComponent {
   @Input() public paragraphSize: ParagraphFontSizeTypes = 'small';
   @Input() public cropOnOverflow = false;
+  @Input() public wrapOnOverflow = false;
   @Input() public strikeThrough = false;
   @Input() public dimmed = false;
   @Input() public bold = false;
