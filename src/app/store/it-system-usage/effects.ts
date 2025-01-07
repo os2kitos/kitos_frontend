@@ -699,20 +699,11 @@ function applyQueryFixes(odataString: string, systemRoles: APIBusinessRoleDTO[] 
     )
     .replace(/(\w+\()AssociatedContractsNamesCsv(.*\))/, 'AssociatedContracts/any(c: $1c/ItContractName$2)')
     .replace(/ItSystemBusinessTypeUuid eq '([\w-]+)'/, 'ItSystemBusinessTypeUuid eq $1');
-  //Concluded has a special case for UNDECIDED | NULL which must be treated the same, so first we replace the expression to point to the collection and then we redefine it
-  const dprUndecidedQuery = `DataProcessingRegistrations/any(c: c/IsAgreementConcluded eq '${YesNoIrrelevantEnum.Undecided}' or c/IsAgreementConcluded eq null) or (DataProcessingRegistrations/any() eq false)`;
-  convertedString = convertedString
-    .replace(
-      new RegExp(`DataProcessingRegistrationsConcludedAsCsv eq ('\\w+')`, 'i'),
-      'DataProcessingRegistrations/any(c: c/IsAgreementConcluded eq $1)'
-    )
-    .replace(
-      new RegExp(
-        `DataProcessingRegistrations\\/any\\(c: c\\/IsAgreementConcluded eq '${YesNoIrrelevantEnum.Undecided}'\\)`,
-        'i'
-      ),
-      dprUndecidedQuery
-    );
+    
+  convertedString = convertedString.replace(
+    new RegExp(`DataProcessingRegistrationsConcludedAsCsv eq ('[^']+')`, 'i'),
+    'contains(DataProcessingRegistrationsConcludedAsCsv, $1)'
+  );
 
   systemRoles?.forEach((role) => {
     convertedString = convertedString.replace(
