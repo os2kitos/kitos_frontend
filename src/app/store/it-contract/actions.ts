@@ -30,11 +30,6 @@ export const ITContractActions = createActionGroup({
     'Update Grid State': (gridState: GridState) => ({ gridState }),
     'Update Grid Columns': (gridColumns: GridColumn[]) => ({ gridColumns }),
     'Update Grid Columns Success': (gridColumns: GridColumn[]) => ({ gridColumns }),
-    'Update Grid Columns And Role Columns': (gridColumns: GridColumn[], gridRoleColumns: GridColumn[]) => ({
-      gridColumns,
-      gridRoleColumns,
-    }),
-    'Update Grid Columns And Role Columns Success': (gridColumns: GridColumn[]) => ({ gridColumns }),
 
     'Get It Contract Overview Roles': () => emptyProps(),
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

@@ -72,6 +72,7 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
     businessType: new FormControl<APIRegularOptionResponseDTO | undefined>({ value: undefined, disabled: true }),
     scope: new FormControl<ScopeChoice | undefined>({ value: undefined, disabled: true }),
     uuid: new FormControl<string | undefined>({ value: undefined, disabled: true }),
+    externalUuid: new FormControl<string | undefined>({ value: undefined, disabled: true }),
     recommendedArchiveDuty: new FormControl<ArchiveDutyRecommendationChoice | undefined>({
       value: undefined,
       disabled: true,
@@ -175,6 +176,7 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
             businessType: itSystem.businessType as APIRegularOptionResponseDTO,
             scope: mapScopeEnumToScopeChoice(itSystem.scope),
             uuid: itSystem.uuid,
+            externalUuid: itSystem.externalUuid,
             recommendedArchiveDuty: mapArchiveDutyRecommendationChoice(itSystem.recommendedArchiveDuty.id),
             recommendedArchiveDutyComment: itSystem.recommendedArchiveDuty.comment,
             urlReference: itSystem.externalReferences,
@@ -199,8 +201,9 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
             this.itSystemFrontpageFormGroup.controls.scope.disable();
           }
 
-          //Uuid should always be disabled
+          //Uuids should always be disabled
           this.itSystemFrontpageFormGroup.controls.uuid.disable();
+          this.itSystemFrontpageFormGroup.controls.externalUuid.disable();
         })
     );
   }

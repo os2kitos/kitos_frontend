@@ -6,6 +6,9 @@ import { defaultGridState } from 'src/app/shared/models/grid-state.model';
 import { roleDtoToRoleGridColumns } from '../helpers/role-column-helpers';
 import { DataProcessingActions } from './actions';
 import { DataProcessingState } from './state';
+import { newCache, resetCache } from 'src/app/shared/models/cache-item.model';
+import { GlobalOptionTypeActions } from '../global-admin/global-option-types/actions';
+import { LocalOptionTypeActions } from '../local-admin/local-option-types/actions';
 
 export const dataProcessingAdapter = createEntityAdapter<DataProcessingRegistration>();
 
@@ -15,7 +18,7 @@ export const dataProcessingInitialState: DataProcessingState = dataProcessingAda
   gridState: defaultGridState,
   gridColumns: [],
   gridRoleColumns: [],
-  overviewRoles: [],
+  overviewRoles: resetCache(),
   loading: undefined,
   dataProcessing: undefined,
   permissions: undefined,
@@ -106,19 +109,12 @@ export const dataProcessingFeature = createFeature({
       };
     }),
 
-    on(DataProcessingActions.updateGridColumnsAndRoleColumnsSuccess, (state, { gridColumns }): DataProcessingState => {
-      return {
-        ...state,
-        gridColumns,
-      };
-    }),
-
     on(DataProcessingActions.getDataProcessingOverviewRolesSuccess, (state, { roles }): DataProcessingState => {
       const roleColumns =
         roles?.flatMap((role) =>
           roleDtoToRoleGridColumns(role, DATA_PROCESSING_ROLES_SECTION_NAME, 'data-processing-registration')
         ) ?? [];
-      return { ...state, gridRoleColumns: roleColumns, overviewRoles: roles };
+      return { ...state, gridRoleColumns: roleColumns, overviewRoles: newCache(roles) };
     }),
 
     on(
@@ -147,6 +143,21 @@ export const dataProcessingFeature = createFeature({
         return {
           ...state,
           lastSeenGridConfig: response,
+        };
+      }
+    ),
+
+    on(
+      GlobalOptionTypeActions.createOptionTypeSuccess,
+      GlobalOptionTypeActions.updateOptionTypeSuccess,
+      LocalOptionTypeActions.updateOptionTypeSuccess,
+      (state, { optionType }): DataProcessingState => {
+        if (optionType !== 'data-processing') {
+          return state;
+        }
+        return {
+          ...state,
+          overviewRoles: resetCache(),
         };
       }
     )

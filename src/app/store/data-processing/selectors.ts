@@ -15,7 +15,8 @@ export const selectDataProcessingGridData = createSelector(selectAll, selectTota
 export const selectDataProcessingGridColumns = createSelector(selectDataProcessingState, (state) => state.gridColumns);
 export const selectDataProcessingRoleColumns = createSelector(selectDataProcessingState, (state) => state.gridRoleColumns);
 
-export const selectOverviewRoles = createSelector(selectDataProcessingState, (state) => state.overviewRoles);
+export const selectOverviewRolesCache = createSelector(selectDataProcessingState, (state) => state.overviewRoles);
+export const selectOverviewRoles = createSelector(selectOverviewRolesCache, (cache) => cache.value);
 
 
 export const selectDataProcessingLoading = createSelector(selectDataProcessingState, (state) => state.loading);

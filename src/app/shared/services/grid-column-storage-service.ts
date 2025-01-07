@@ -6,12 +6,10 @@ import { StatePersistingService } from './state-persisting.service';
   providedIn: 'root',
 })
 export class GridColumnStorageService {
-  constructor(private localStorage: StatePersistingService) {
-
-  }
+  constructor(private localStorage: StatePersistingService) {}
 
   public setColumns(key: string, columns: GridColumn[]): void {
-    const hash = this.computeHash(this.filterOutRoleColumns(columns));
+    const hash = this.computeHash(columns);
     this.localStorage.set<GridColumnCache>(key, { columns, hash });
   }
 
@@ -19,13 +17,9 @@ export class GridColumnStorageService {
     const existingCache = this.localStorage.get<GridColumnCache>(key);
     const cachedColumns = existingCache?.columns;
     if (!cachedColumns) return null;
-    const newHash = this.computeHash(this.filterOutRoleColumns(defaultColumns));
+    const newHash = this.computeHash(defaultColumns);
     if (existingCache.hash !== newHash) return null;
     return cachedColumns;
-  }
-
-  private filterOutRoleColumns(columns: GridColumn[]): GridColumn[] {
-    return columns.filter((column) => !column.field.includes('Roles.Role'));
   }
 
   private computeHash(columns: GridColumn[]): string {

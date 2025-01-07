@@ -7,6 +7,8 @@ import { ITContract } from 'src/app/shared/models/it-contract/it-contract.model'
 import { roleDtoToRoleGridColumns } from '../helpers/role-column-helpers';
 import { ITContractActions } from './actions';
 import { ITContractState } from './state';
+import { GlobalOptionTypeActions } from '../global-admin/global-option-types/actions';
+import { LocalOptionTypeActions } from '../local-admin/local-option-types/actions';
 
 export const itContactAdapter = createEntityAdapter<ITContract>();
 
@@ -16,7 +18,7 @@ export const itContactInitialState: ITContractState = itContactAdapter.getInitia
   gridState: defaultGridState,
   gridColumns: [],
   gridRoleColumns: [],
-  contractRoles: [],
+  contractRoles: resetCache(),
 
   loading: undefined,
   itContract: undefined,
@@ -137,12 +139,6 @@ export const itContractFeature = createFeature({
         gridColumns,
       };
     }),
-    on(ITContractActions.updateGridColumnsAndRoleColumnsSuccess, (state, { gridColumns }): ITContractState => {
-      return {
-        ...state,
-        gridColumns,
-      };
-    }),
     on(
       ITContractActions.updateGridState,
       (state, { gridState }): ITContractState => ({
@@ -154,7 +150,7 @@ export const itContractFeature = createFeature({
     on(ITContractActions.getItContractOverviewRolesSuccess, (state, { roles }): ITContractState => {
       const gridRoleColumns =
         roles?.flatMap((role) => roleDtoToRoleGridColumns(role, CONTRACT_ROLES_SECTION_NAME, 'it-contract')) ?? [];
-      return { ...state, gridRoleColumns, contractRoles: roles };
+      return { ...state, gridRoleColumns, contractRoles: newCache(roles) };
     }),
 
     on(
@@ -189,6 +185,21 @@ export const itContractFeature = createFeature({
         ...state,
         appliedProcurementPlans: newCache(response),
       };
-    })
+    }),
+
+    on(
+      GlobalOptionTypeActions.createOptionTypeSuccess,
+      GlobalOptionTypeActions.updateOptionTypeSuccess,
+      LocalOptionTypeActions.updateOptionTypeSuccess,
+      (state, { optionType }): ITContractState => {
+        if (optionType !== 'it-contract') {
+          return state;
+        }
+        return {
+          ...state,
+          contractRoles: resetCache(),
+        };
+      }
+    )
   ),
 });

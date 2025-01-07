@@ -18,7 +18,7 @@ export interface ITContractState extends EntityState<ITContract> {
   gridState: GridState;
   gridColumns: GridColumn[];
   gridRoleColumns: GridColumn[];
-  contractRoles: APIBusinessRoleDTO[] | undefined;
+  contractRoles: Cached<APIBusinessRoleDTO[]>;
 
   loading: boolean | undefined;
   itContract: APIItContractResponseDTO | undefined;

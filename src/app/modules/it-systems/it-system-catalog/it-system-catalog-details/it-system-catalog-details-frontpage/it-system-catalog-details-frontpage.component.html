@@ -73,6 +73,12 @@
       formName="uuid"
       [disabled]="true"
     ></app-textbox>
+    <app-textbox
+      text="Ekstern UUID"
+      i18n-text
+      [formGroup]="itSystemFrontpageFormGroup"
+      formName="externalUuid"
+    ></app-textbox>
     <app-contentbox data-cy="it-system-references" text="Referencer vedr. systemet" i18n-text>
       <app-external-reference
         *ngFor="let reference of externalReferences$ | async"

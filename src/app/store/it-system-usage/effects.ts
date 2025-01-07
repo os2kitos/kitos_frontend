@@ -4,7 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { compact, uniq } from 'lodash';
-import { catchError, combineLatestWith, map, mergeMap, of, switchMap } from 'rxjs';
+import { catchError, map, mergeMap, of, switchMap } from 'rxjs';
 import { APIBusinessRoleDTO, APIV1ItSystemUsageOptionsINTERNALService } from 'src/app/api/v1';
 import {
   APIItSystemUsageResponseDTO,
@@ -33,8 +33,10 @@ import {
   selectItSystemUsageUsingOrganizationUnits,
   selectItSystemUsageUuid,
   selectOverviewSystemRoles,
+  selectOverviewSystemRolesCache,
   selectUsageGridColumns,
 } from './selectors';
+import { hasValidCache } from 'src/app/shared/helpers/date.helpers';
 
 @Injectable()
 export class ITSystemUsageEffects {
@@ -97,27 +99,22 @@ export class ITSystemUsageEffects {
     );
   });
 
-  updateGridColumnsAndRoleColumns$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(ITSystemUsageActions.updateGridColumnsAndRoleColumns),
-      map(({ gridColumns, gridRoleColumns }) => {
-        const allColumns = gridColumns.concat(gridRoleColumns);
-        this.gridColumnStorageService.setColumns(USAGE_COLUMNS_ID, allColumns);
-        return ITSystemUsageActions.updateGridColumnsSuccess(allColumns);
-      })
-    );
-  });
-
   getItSystemUsageOverviewRoles = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.getItSystemUsageOverviewRoles),
-      combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
-      switchMap(([_, organizationUuid]) =>
-        this.apiItSystemUsageOptionsService.getSingleItSystemUsageOptionsGetByUuid({ organizationUuid }).pipe(
+      concatLatestFrom(() => [
+        this.store.select(selectOrganizationUuid).pipe(filterNullish()),
+        this.store.select(selectOverviewSystemRolesCache),
+      ]),
+      switchMap(([_, organizationUuid, cache]) => {
+        if (hasValidCache(cache.cacheTime)) {
+          return of(ITSystemUsageActions.getItSystemUsageOverviewRolesSuccess(cache.value));
+        }
+        return this.apiItSystemUsageOptionsService.getSingleItSystemUsageOptionsGetByUuid({ organizationUuid }).pipe(
           map((options) => ITSystemUsageActions.getItSystemUsageOverviewRolesSuccess(options.response.systemRoles)),
           catchError(() => of(ITSystemUsageActions.getItSystemUsageOverviewRolesError()))
-        )
-      )
+        );
+      })
     );
   });
 

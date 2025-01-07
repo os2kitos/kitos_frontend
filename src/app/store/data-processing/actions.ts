@@ -36,12 +36,6 @@ export const DataProcessingActions = createActionGroup({
     'Update Grid Columns': (gridColumns: GridColumn[]) => ({ gridColumns }),
     'Update Grid Columns Success': (gridColumns: GridColumn[]) => ({ gridColumns }),
 
-    'Update Grid Columns And Role Columns': (gridColumns: GridColumn[], gridRoleColumns: GridColumn[]) => ({
-      gridColumns,
-      gridRoleColumns,
-    }),
-    'Update Grid Columns And Role Columns Success': (gridColumns: GridColumn[]) => ({ gridColumns }),
-
     'Get Data Processing Overview Roles': () => emptyProps(),
     'Get Data Processing Overview Roles Success': (roles: APIBusinessRoleDTO[] | undefined) => ({ roles }),
     'Get Data Processing Overview Roles Error': emptyProps(),

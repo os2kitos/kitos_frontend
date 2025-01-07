@@ -6,6 +6,7 @@ import {
   APIResourceCollectionPermissionsResponseDTO,
   APIResourcePermissionsResponseDTO,
 } from 'src/app/api/v2';
+import { Cached } from 'src/app/shared/models/cache-item.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { ITSystemUsage } from 'src/app/shared/models/it-system-usage/it-system-usage.model';
@@ -16,7 +17,7 @@ export interface ITSystemUsageState extends EntityState<ITSystemUsage> {
   gridState: GridState;
   gridColumns: GridColumn[];
   gridRoleColumns: GridColumn[];
-  systemRoles: APIBusinessRoleDTO[] | undefined;
+  systemRoles: Cached<APIBusinessRoleDTO[]>;
 
   itSystemUsage: APIItSystemUsageResponseDTO | undefined;
   itSystemUsageLoading: boolean;

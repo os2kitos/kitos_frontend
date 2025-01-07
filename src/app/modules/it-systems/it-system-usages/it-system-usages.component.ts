@@ -520,28 +520,21 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
   }
 
   ngOnInit() {
-    const existingColumns = this.gridColumnStorageService.getColumns(USAGE_COLUMNS_ID, this.defaultGridColumns);
-    this.store.dispatch(ITSystemUsageActions.getItSystemUsageOverviewRoles());
-    if (existingColumns) {
-      this.store.dispatch(ITSystemUsageActions.updateGridColumns(existingColumns));
-    } else {
-      this.subscriptions.add(
-        this.actions$
-          .pipe(
-            ofType(ITSystemUsageActions.getItSystemUsageOverviewRolesSuccess),
-            combineLatestWith(this.store.select(selectUsageGridRoleColumns)),
-            first()
-          )
-          .subscribe(([_, gridRoleColumns]) => {
-            this.store.dispatch(
-              ITSystemUsageActions.updateGridColumnsAndRoleColumns(this.defaultGridColumns, gridRoleColumns)
-            );
-          })
-      );
-      this.updateUnclickableColumns(this.defaultGridColumns);
-      this.subscriptions.add(this.gridColumns$.subscribe((columns) => this.updateUnclickableColumns(columns)));
-    }
-
+    this.subscriptions.add(this.gridColumns$.subscribe((columns) => this.updateUnclickableColumns(columns)));
+    this.subscriptions.add(
+      this.actions$
+        .pipe(
+          ofType(ITSystemUsageActions.getItSystemUsageOverviewRolesSuccess),
+          combineLatestWith(this.store.select(selectUsageGridRoleColumns)),
+          first()
+        )
+        .subscribe(([_, roleColumns]) => {
+          const defaultColumnsAndRoles = this.defaultGridColumns.concat(roleColumns);
+          const existingColumns = this.gridColumnStorageService.getColumns(USAGE_COLUMNS_ID, defaultColumnsAndRoles);
+          const columns = existingColumns ?? defaultColumnsAndRoles;
+          this.store.dispatch(ITSystemUsageActions.updateGridColumns(columns));
+        })
+    );
     this.subscriptions.add(this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState)));
 
     this.subscriptions.add(
@@ -555,6 +548,8 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
           this.store.dispatch(ITSystemUsageActions.updateGridColumns(columnsToShow));
         })
     );
+
+    this.store.dispatch(ITSystemUsageActions.getItSystemUsageOverviewRoles());
   }
 
   public stateChange(gridState: GridState) {

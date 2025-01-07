@@ -6,6 +6,9 @@ import { ITSystemUsage } from 'src/app/shared/models/it-system-usage/it-system-u
 import { roleDtoToRoleGridColumns } from '../helpers/role-column-helpers';
 import { ITSystemUsageActions } from './actions';
 import { ITSystemUsageState } from './state';
+import { newCache, resetCache } from 'src/app/shared/models/cache-item.model';
+import { GlobalOptionTypeActions } from '../global-admin/global-option-types/actions';
+import { LocalOptionTypeActions } from '../local-admin/local-option-types/actions';
 
 export const itSystemUsageAdapter = createEntityAdapter<ITSystemUsage>();
 
@@ -15,7 +18,7 @@ export const itSystemUsageInitialState: ITSystemUsageState = itSystemUsageAdapte
   gridState: defaultGridState,
   gridColumns: [],
   gridRoleColumns: [],
-  systemRoles: [],
+  systemRoles: resetCache(),
   itSystemUsage: undefined,
   itSystemUsageLoading: false,
   permissions: undefined,
@@ -135,17 +138,10 @@ export const itSystemUsageFeature = createFeature({
       };
     }),
 
-    on(ITSystemUsageActions.updateGridColumnsAndRoleColumnsSuccess, (state, { gridColumns }): ITSystemUsageState => {
-      return {
-        ...state,
-        gridColumns,
-      };
-    }),
-
     on(ITSystemUsageActions.getItSystemUsageOverviewRolesSuccess, (state, { roles }): ITSystemUsageState => {
       const gridRoleColumns =
         roles?.flatMap((role) => roleDtoToRoleGridColumns(role, SYSTEMS_ROLES_SECTION_NAME, 'it-system-usage')) ?? [];
-      return { ...state, gridRoleColumns, systemRoles: roles };
+      return { ...state, gridRoleColumns, systemRoles: newCache(roles) };
     }),
 
     on(
@@ -176,7 +172,22 @@ export const itSystemUsageFeature = createFeature({
     ),
 
     on(ITSystemUsageActions.getItSystemUsageOverviewRolesError, (state): ITSystemUsageState => {
-      return { ...state, gridRoleColumns: [], systemRoles: [] };
-    })
+      return { ...state, gridRoleColumns: [], systemRoles: resetCache() };
+    }),
+
+    on(
+      GlobalOptionTypeActions.createOptionTypeSuccess,
+      GlobalOptionTypeActions.updateOptionTypeSuccess,
+      LocalOptionTypeActions.updateOptionTypeSuccess,
+      (state, { optionType }): ITSystemUsageState => {
+        if (optionType !== 'it-system-usage') {
+          return state;
+        }
+        return {
+          ...state,
+          systemRoles: resetCache(),
+        };
+      }
+    )
   ),
 });

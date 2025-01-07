@@ -448,29 +448,24 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
   ];
 
   ngOnInit(): void {
-    const existingColumns = this.gridColumnStorageService.getColumns(CONTRACT_COLUMNS_ID, this.defaultGridColumns);
-
     this.store.dispatch(ITContractActions.getAppliedProcurementPlans());
     this.store.dispatch(ITContractActions.getITContractCollectionPermissions());
-    this.store.dispatch(ITContractActions.getItContractOverviewRoles());
+    this.subscriptions.add(this.gridColumns$.subscribe((columns) => this.updateUnclickableColumns(columns)));
 
-    if (existingColumns) {
-      this.store.dispatch(ITContractActions.updateGridColumns(existingColumns));
-    } else {
-      this.subscriptions.add(
-        this.actions$
-          .pipe(
-            ofType(ITContractActions.getItContractOverviewRolesSuccess),
-            combineLatestWith(this.store.select(selectContractGridRoleColumns)),
-            first()
-          )
-          .subscribe(([_, gridRoleColumns]) => {
-            this.store.dispatch(
-              ITContractActions.updateGridColumnsAndRoleColumns(this.defaultGridColumns, gridRoleColumns)
-            );
-          })
-      );
-    }
+    this.subscriptions.add(
+      this.actions$
+        .pipe(
+          ofType(ITContractActions.getItContractOverviewRolesSuccess),
+          combineLatestWith(this.store.select(selectContractGridRoleColumns)),
+          first()
+        )
+        .subscribe(([_, roleColumns]) => {
+          const defaultColumnsAndRoles = this.defaultGridColumns.concat(roleColumns);
+          const existingColumns = this.gridColumnStorageService.getColumns(CONTRACT_COLUMNS_ID, defaultColumnsAndRoles);
+          const columns = existingColumns ?? defaultColumnsAndRoles;
+          this.store.dispatch(ITContractActions.updateGridColumns(columns));
+        })
+    );
 
     this.subscriptions.add(
       this.actions$
@@ -480,8 +475,6 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
         })
     );
 
-    this.updateUnclickableColumns(this.defaultGridColumns);
-    this.subscriptions.add(this.gridColumns$.subscribe((columns) => this.updateUnclickableColumns(columns)));
 
     this.subscriptions.add(this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState)));
 
@@ -496,6 +489,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
           this.store.dispatch(ITContractActions.updateGridColumns(columnsToShow));
         })
     );
+    this.store.dispatch(ITContractActions.getItContractOverviewRoles());
   }
 
   public stateChange(gridState: GridState) {

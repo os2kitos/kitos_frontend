@@ -6,6 +6,7 @@ import {
   APIOrganizationGridConfigurationResponseDTO,
   APIResourceCollectionPermissionsResponseDTO,
 } from 'src/app/api/v2';
+import { Cached } from 'src/app/shared/models/cache-item.model';
 import { DataProcessingRegistration } from 'src/app/shared/models/data-processing/data-processing.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
@@ -16,7 +17,7 @@ export interface DataProcessingState extends EntityState<DataProcessingRegistrat
   gridState: GridState;
   gridColumns: GridColumn[];
   gridRoleColumns: GridColumn[];
-  overviewRoles: APIBusinessRoleDTO[] | undefined;
+  overviewRoles: Cached<APIBusinessRoleDTO[]>;
 
   loading: boolean | undefined;
   dataProcessing: APIDataProcessingRegistrationResponseDTO | undefined;
