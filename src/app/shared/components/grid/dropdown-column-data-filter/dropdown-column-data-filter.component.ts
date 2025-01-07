@@ -43,6 +43,6 @@ export class DropdownColumnDataFilterComponent extends AppBaseFilterCellComponen
         this.dropdownFilter.chosenOption = newOption;
       });
     };
-    initializeApplyFilterSubscription(this.actions$, this.entityType, this.column.field, updateMethod);
+    initializeApplyFilterSubscription(this.actions$, this.entityType, this.column.field, updateMethod, this.destroy$);
   }
 }

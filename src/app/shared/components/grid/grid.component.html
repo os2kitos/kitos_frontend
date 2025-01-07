@@ -137,7 +137,7 @@
           kendoGridCellTemplate
           let-dataItem
         >
-          <app-paragraph [cropOnOverflow]="true">{{ searchProperty(dataItem, column.field) }}</app-paragraph>
+          <app-paragraph [cropOnOverflow]="true">{{ dataItem | searchProperty: column.field }}</app-paragraph>
         </ng-template>
         <ng-template
           *ngIf="column.style === 'default-wrap'"
@@ -147,7 +147,7 @@
           <app-paragraph [wrapOnOverflow]="true">{{ searchProperty(dataItem, column.field) }}</app-paragraph>
         </ng-template>
         <ng-template *ngIf="column.style === 'primary'" kendoGridCellTemplate let-dataItem>
-          <div class="paragraph wrap-on-overflow bold-font">{{ searchProperty(dataItem, column.field) }}</div>
+          <div class="paragraph wrap-on-overflow bold-font">{{ dataItem | searchProperty: column.field }}</div>
         </ng-template>
         <ng-template
           *ngIf="column.style === 'chip' || column.style === 'reverse-chip'"
@@ -157,7 +157,7 @@
           <div class="items-center-container overflow-hidden-container" #chip>
             <app-status-chip
               [type]="column.entityType"
-              [value]="searchProperty(dataItem, column.field)"
+              [value]="dataItem | searchProperty: column.field"
               [valueDisplayType]="column.booleanValueDisplay"
               [elementLength]="chip.offsetWidth"
               [reverseValues]="column.style === 'reverse-chip'"
@@ -168,7 +168,7 @@
         <ng-template *ngIf="column.style === 'boolean'" kendoGridCellTemplate let-dataItem>
           <div class="items-center-container">
             <app-boolean-circle
-              [value]="searchProperty(dataItem, column.field) === true"
+              [value]="(dataItem | searchProperty: column.field) === true"
               [positiveTooltipText]="column.tooltipPositiveText ?? ''"
               [negativeTooltipText]="column.tooltipNegativeText ?? ''"
             >
@@ -177,17 +177,17 @@
         </ng-template>
 
         <ng-template *ngIf="column.style === 'date'" kendoGridCellTemplate let-dataItem>
-          <app-paragraph>{{ searchProperty(dataItem, column.field) | appDate }}</app-paragraph>
+          <app-paragraph>{{ dataItem | searchProperty: column.field | appDate }}</app-paragraph>
         </ng-template>
 
         <ng-template *ngIf="column.style === 'enum'" kendoGridCellTemplate let-dataItem>
-          <app-paragraph>{{ searchProperty(dataItem, column.field)?.name }}</app-paragraph>
+          <app-paragraph>{{ (dataItem | searchProperty: column.field)?.name }}</app-paragraph>
         </ng-template>
 
         <ng-template *ngIf="column.style === 'link'" kendoGridCellTemplate let-dataItem>
           <app-paragraph [cropOnOverflow]="true">
             <app-external-page-link
-              [url]="searchProperty(dataItem, column.field)"
+              [url]="dataItem | searchProperty: column.field"
               linkFontSize="small"
             ></app-external-page-link>
           </app-paragraph>
@@ -197,7 +197,7 @@
           <app-paragraph [cropOnOverflow]="true">
             <app-external-page-link
               [url]="searchProperty(dataItem, column.idField ?? '')"
-              [title]="searchProperty(dataItem, column.field)"
+              [title]="dataItem | searchProperty: column.field"
               linkFontSize="small"
             ></app-external-page-link>
           </app-paragraph>
@@ -211,7 +211,7 @@
               [itemType]="column.entityType"
               [itemUuid]="itemUuid"
               [subpagePath]="column.extraData"
-              >{{ searchProperty(dataItem, column.field) }}</app-details-page-link
+              >{{ dataItem | searchProperty: column.field }}</app-details-page-link
             >
           </app-paragraph>
         </ng-template>
@@ -221,7 +221,7 @@
             <ng-container *ngIf="column.idField">
               <app-checkbox
                 *ngIf="entityType !== 'it-system'"
-                [value]="searchProperty(dataItem, column.field)"
+                [value]="dataItem | searchProperty: column.field"
                 [disabled]="
                   column.permissionsField ? searchProperty(dataItem, column.permissionsField) !== true : false
                 "
@@ -229,7 +229,7 @@
               ></app-checkbox>
               <app-usage-proxy-checkbox
                 *ngIf="entityType === 'it-system'"
-                [checked]="searchProperty(dataItem, column.field)"
+                [checked]="dataItem | searchProperty: column.field"
                 [disabled]="
                   column.permissionsField
                     ? searchProperty(dataItem, column.permissionsField) !== true || !createPermission
@@ -247,7 +247,7 @@
             *ngIf="column.dataField"
             [type]="column.entityType"
             [name]="searchProperty(dataItem, column.dataField)"
-            [usingOrganizations]="searchProperty(dataItem, column.field)"
+            [usingOrganizations]="dataItem | searchProperty: column.field"
             [rowEntityIdentifier]="searchProperty(dataItem, column.idField ?? 'Uuid')"
           >
           </app-usage-link>
@@ -264,7 +264,7 @@
                 >{{ i < data.length - 1 ? ", " : "" }}
               </ng-container>
               </div>
-              
+
             </ng-container>
           </app-paragraph>
         </ng-template>

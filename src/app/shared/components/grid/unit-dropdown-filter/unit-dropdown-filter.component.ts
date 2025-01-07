@@ -31,7 +31,7 @@ export class UnitDropdownFilterComponent extends AppBaseFilterCellComponent impl
       this.chosenOption = filter?.value as TreeNodeModel;
     };
 
-    initializeApplyFilterSubscription(this.actions$, this.entityType, this.column.field, updateMethod);
+    initializeApplyFilterSubscription(this.actions$, this.entityType, this.column.field, updateMethod, this.destroy$);
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

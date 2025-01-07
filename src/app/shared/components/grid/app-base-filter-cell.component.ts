@@ -1,10 +1,17 @@
+import { Component, OnDestroy } from '@angular/core';
 import { BaseFilterCellComponent, ColumnComponent } from '@progress/kendo-angular-grid';
 import { CompositeFilterDescriptor, FilterDescriptor, isCompositeFilterDescriptor } from '@progress/kendo-data-query';
+import { Subject } from 'rxjs';
 
-export class AppBaseFilterCellComponent extends BaseFilterCellComponent {
+@Component({
+  template: '',
+})
+export class AppBaseFilterCellComponent extends BaseFilterCellComponent implements OnDestroy {
   override filter!: CompositeFilterDescriptor;
 
   public column!: ColumnComponent;
+
+  protected destroy$ = new Subject<void>();
 
   public getColumnFilter(): FilterDescriptor | null {
     if (this.filter === undefined) {
@@ -23,5 +30,10 @@ export class AppBaseFilterCellComponent extends BaseFilterCellComponent {
       return null;
     }
     return filter;
+  }
+
+  override ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

@@ -34,7 +34,7 @@ export class NumericFilterComponent extends AppBaseFilterCellComponent implement
       this.numericInput.inputChanged(newInput);
     };
 
-    initializeApplyFilterSubscription(this.actions$, this.entityType, this.column.field, updateMethod);
+    initializeApplyFilterSubscription(this.actions$, this.entityType, this.column.field, updateMethod, this.destroy$);
   }
 
   public valueChange(value: string) {

@@ -32,7 +32,7 @@ export class StringFilterComponent extends AppBaseFilterCellComponent implements
     };
 
     if (this.entityType) {
-      initializeApplyFilterSubscription(this.actions$, this.entityType, this.column.field, updateMethod);
+      initializeApplyFilterSubscription(this.actions$, this.entityType, this.column.field, updateMethod, this.destroy$);
     }
   }
 

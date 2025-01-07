@@ -45,8 +45,8 @@ export class DateFilterComponent extends AppBaseFilterCellComponent implements O
       this.value = savedDate;
       this.chosenOption = savedChosenOption || this.options[0];
     };
-    
-    initializeApplyFilterSubscription(this.actions$, this.entityType, this.column.field, updateMethod);
+
+    initializeApplyFilterSubscription(this.actions$, this.entityType, this.column.field, updateMethod, this.destroy$);
   }
 
   public valueChange(value?: Date) {

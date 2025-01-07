@@ -51,7 +51,7 @@ export class ChoiceTypeDropdownFilterComponent extends AppBaseFilterCellComponen
         this.chosenOption = matchingOption;
       });
     };
-    initializeApplyFilterSubscription(this.actions$, this.entityType, this.column.field, updateMethod);
+    initializeApplyFilterSubscription(this.actions$, this.entityType, this.column.field, updateMethod, this.destroy$);
   }
 
   private applySorting(options: FilterDropdownOption[], sortOptions: boolean | undefined): FilterDropdownOption[] {
