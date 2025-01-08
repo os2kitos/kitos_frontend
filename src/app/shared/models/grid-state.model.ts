@@ -7,7 +7,7 @@ export interface GridState extends State {
 
 export const defaultGridState: GridState = {
   skip: 0,
-  take: 100,
+  take: 25,
 }
 
 export const toODataString = (gridState: GridState, settings?: ODataSettings) => {

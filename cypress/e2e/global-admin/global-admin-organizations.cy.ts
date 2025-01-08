@@ -9,7 +9,7 @@ describe('global-admin-organizations', () => {
       fixture: './global-admin/country-codes.json',
     });
     cy.intercept(
-      '/odata/Organizations?$skip=0&$top=100&$expand=ForeignCountryCode($select=Uuid,Name,Description)&$count=true',
+      '/odata/Organizations?$skip=0&$top=*&$expand=ForeignCountryCode($select=Uuid,Name,Description)&$count=true',
       { fixture: './global-admin/organizations.json' }
     );
     cy.setup(true, 'global-admin/organizations');

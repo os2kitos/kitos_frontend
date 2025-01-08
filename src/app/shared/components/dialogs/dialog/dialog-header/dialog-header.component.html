@@ -1,5 +1,5 @@
 <ng-container>
-  <div *ngIf="title" class="header" [ngClass]="{ nested: nested }">
+  <div *ngIf="title" class="header title-wrap-on-overflow" [ngClass]="{ nested: nested }" >
     <app-button *ngIf="nested" class="arrow-button" buttonStyle="tertiary" (buttonClick)="close()">
       <app-arrow-left-icon></app-arrow-left-icon>
     </app-button>
