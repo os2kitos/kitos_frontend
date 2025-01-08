@@ -75,6 +75,7 @@
       [checkboxNodes]="true"
       [disableCheck]="(hasModifyPermission$ | async) !== true"
       (nodeChecked)="onUnitChange($event)"
+      [displayDefaultNodeColorOnly]="true"
       [maxLevel]="(numberOfLevels$ | async) ?? undefined"
     ></app-drag-and-drop-tree>
   </app-standard-vertical-content-grid>

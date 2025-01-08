@@ -14,7 +14,9 @@
         <tr *ngFor="let systemUsage of systemUsages$ | async">
           <td>
             <app-content-space-between>
-              <app-paragraph paragraphSize="medium">{{ systemUsage.name }}</app-paragraph>
+              <app-details-page-link itemType="it-system-usage" [itemUuid]="systemUsage.uuid">{{
+                systemUsage.name
+              }}</app-details-page-link>
               <app-icon-button
                 (buttonClick)="onDeleteSystem(systemUsage.uuid)"
                 data-cy="delete-system-button"

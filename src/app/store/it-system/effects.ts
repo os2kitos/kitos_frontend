@@ -258,7 +258,8 @@ export class ITSystemEffects {
 function applyQueryFixes(odataString: string): string {
   let fixedOdataString = odataString
     .replace(/(\w+\()KLEIds(.*\))/, 'TaskRefs/any(c: $1c/TaskKey$2)')
-    .replace(/(\w+\()KLENames(.*\))/, 'TaskRefs/any(c: $1c/Description$2)');
+    .replace(/(\w+\()KLENames(.*\))/, 'TaskRefs/any(c: $1c/Description$2)')
+    .replace(/contains\(Uuid,/, "contains(CAST(Uuid, 'Edm.String'),");
 
   const lastChangedByUserSearchedProperties = ['Name', 'LastName'];
   fixedOdataString = replaceQueryByMultiplePropertyContains(

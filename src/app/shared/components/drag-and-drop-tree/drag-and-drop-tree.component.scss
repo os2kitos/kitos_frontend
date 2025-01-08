@@ -44,7 +44,7 @@
 }
 
 .node-green {
-  background-color: $color-white;
+  background-color: $color-secondary-10;
   border-color: $color-secondary-40;
 
   ::ng-deep {
@@ -58,6 +58,20 @@
 }
 
 .node-blue {
+  background-color: $color-primary-10;
+  border-color: $color-primary-40;
+
+  ::ng-deep {
+    a {
+      color: $color-neutral !important;
+    }
+    svg {
+      color: $color-neutral !important;
+    }
+  }
+}
+
+.node-standard {
   background-color: $color-white;
   border-color: $color-primary-40;
 
@@ -88,7 +102,7 @@
 }
 
 .current-node-blue {
-  background-color: $color-primary-20;
+  background-color: $color-primary-40;
   border-color: $color-primary-60;
 
   ::ng-deep {
@@ -102,7 +116,7 @@
 }
 
 .current-node-green {
-  background-color: $color-secondary-10;
+  background-color: $color-secondary-20;
   border-color: $color-secondary-60;
 
   ::ng-deep {
@@ -162,11 +176,11 @@ app-details-page-link {
 //Place line left of each node
 .node-wrapper::before {
   border-top: 2px solid $color-primary-20;
-  width: var(--dynamic-width, 16px);
+  width: var(--dynamic-width, 14px);
   content: "";
   position: absolute;
   top: 24px;
-  left: calc(-1 * var(--dynamic-width, 16px));
+  left: calc(-1 * var(--dynamic-left, 15px));
   z-index: 100;
 }
 
@@ -189,6 +203,13 @@ div[role="group"] > .mat-tree-node {
 
 app-details-page-link {
   cursor: pointer;
+}
+
+.no-select {
+  user-select: none; /* Standard syntax */
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
 }
 
 .checkbox-color {

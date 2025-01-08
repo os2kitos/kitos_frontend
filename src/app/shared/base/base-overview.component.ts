@@ -50,6 +50,26 @@ export class BaseOverviewComponent extends BaseComponent {
   };
 
   private cellIsClickableStyleOrEmpty(event: CellClickEvent) {
-    return this.cellIsClickableStyle(event) || !event.dataItem[event.column.field];
+    return this.cellIsClickableStyle(event) || !this.getFieldData(event);
+  }
+
+  private getFieldData(event: CellClickEvent): boolean {
+    if (!event.column.field.includes('.')) {
+      return event.dataItem[event.column.field];
+    }
+
+    const fieldParts = event.column.field.split('.');
+    let value = event.dataItem;
+
+    for (const part of fieldParts) {
+      if (value[part] === undefined) {
+        value = undefined;
+        break;
+      } else {
+        value = value[part];
+      }
+    }
+
+    return value;
   }
 }

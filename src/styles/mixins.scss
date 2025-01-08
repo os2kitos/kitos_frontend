@@ -601,8 +601,8 @@
 }
 
 //Should be applied on both th and td elements
-@mixin native-table-sticky-column() {
-  .sticky-column {
+@mixin native-table-sticky-column-left() {
+  .sticky-column-left {
     position: -webkit-sticky; /* For Safari */
     position: sticky;
     left: 0;

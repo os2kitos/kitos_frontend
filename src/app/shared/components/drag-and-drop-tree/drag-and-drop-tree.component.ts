@@ -24,6 +24,7 @@ export class DragAndDropTreeComponent<T> implements OnInit {
   @Input() public disableRedirect = false;
   @Input() public checkboxNodes = false;
   @Input() public disableCheck = false;
+  @Input() public displayDefaultNodeColorOnly = false;
 
   @Output() public readonly nodeMoved = new EventEmitter<EntityTreeNodeMoveResult>();
   @Output() public readonly nodeExpandClick = new EventEmitter<EntityTreeNode<T>>();
@@ -34,6 +35,8 @@ export class DragAndDropTreeComponent<T> implements OnInit {
   dropTargetIds: string[] = [];
   nodeLookup: { [key: string]: EntityTreeNode<T> } = {};
   dropActionTodo: DropInfo | null = null;
+
+  private readonly nodeStandardColor = 'standard';
 
   constructor(@Inject(DOCUMENT) private document: Document) {}
 
@@ -126,6 +129,10 @@ export class DragAndDropTreeComponent<T> implements OnInit {
   public checkNodeTextClick(node: EntityTreeNode<T>) {
     node.status = !node.status;
     this.checkNode(node);
+  }
+
+  public getNodeColor(node: EntityTreeNode<T>) {
+    return this.displayDefaultNodeColorOnly ? this.nodeStandardColor : node.color;
   }
 
   private getParentNodeId(id: string, nodesToSearch: EntityTreeNode<T>[], parentId: string): string | null {
