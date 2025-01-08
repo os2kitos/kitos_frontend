@@ -4,7 +4,6 @@ README.md
 api.module.ts
 api/api.ts
 api/v2AlertsINTERNAL.service.ts
-api/v2AlertsINTERNAL.service.ts
 api/v2BrokenExternalReferencesReportInternalINTERNAL.service.ts
 api/v2DataProcessingRegistration.service.ts
 api/v2DataProcessingRegistrationBasisForTransferType.service.ts

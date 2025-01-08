@@ -26,9 +26,9 @@ import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import {
   selectInterface,
   selectInterfaceData,
+  selectInterfaceDeactivated,
   selectInterfaceHasModifyPermission,
   selectInterfaceUrlReference,
-  selectInterfaceDeactivated,
   selectInterfaceUuid,
 } from 'src/app/store/it-system-interfaces/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
@@ -175,7 +175,7 @@ export class ItSystemInterfacesDetailsFrontpageComponent extends BaseComponent i
             exposedBySystem: itInterface.exposedBySystem,
             uuid: itInterface.uuid,
             createdBy: itInterface.createdBy.name,
-            rightsHolder: itInterface.organizationContext.name,
+            rightsHolder: itInterface.rightsHolder?.name,
             scope: mapScopeEnumToScopeChoice(itInterface.scope),
             interfaceType: itInterface.itInterfaceType,
             description: itInterface.description,

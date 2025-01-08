@@ -24,6 +24,11 @@
     "uuid": "7dc1db83-74cc-4912-993b-62f44d6fb7cb",
     "name": "Fælles Kommune"
   },
+  "rightsHolder": {
+    "cvr": null,
+    "uuid": "7dc1db83-74cc-4912-993b-62f44d6fb7cb",
+    "name": "Fælles Kommune"
+  },
   "uuid": "06f0000e-4fb9-4ea2-bb57-03430ee2a632",
   "exposedBySystem": {
     "uuid": "f1e3e548-d03d-4ad8-883c-439dc9600591",

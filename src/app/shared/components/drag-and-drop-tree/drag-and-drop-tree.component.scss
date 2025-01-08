@@ -203,6 +203,22 @@ div[role="group"] > .mat-tree-node {
 
 app-details-page-link {
   cursor: pointer;
+  padding: 0;
+
+  ::ng-deep a {
+    display: inline-block;
+    padding-bottom: 8px;
+    padding-top: 8px;
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+}
+
+.no-select {
+  user-select: none; /* Standard syntax */
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
 }
 
 .no-select {
