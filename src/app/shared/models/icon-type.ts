@@ -23,4 +23,6 @@ export type IconType =
   | 'disk'
   | 'blue-plus'
   | 'dots-warning'
+  | 'reorder'
+  | 'check'
   | undefined;

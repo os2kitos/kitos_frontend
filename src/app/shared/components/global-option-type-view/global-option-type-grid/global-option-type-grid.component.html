@@ -7,4 +7,6 @@
   [fitSizeToContent]="true"
   (modifyEvent)="onEdit($event)"
   (toggleChange)="onToggleChange($event)"
+  (rowReordering)="onRowReorder($event)"
+  [reorderable]="reordering"
 ></app-local-grid>

@@ -3,12 +3,12 @@ import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { GridActionColumn } from 'src/app/shared/models/grid-action-column.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
+import { BooleanChange } from 'src/app/shared/models/grid/grid-events.model';
 import {
   LocalAdminOptionType,
   LocalAdminOptionTypeItem,
 } from 'src/app/shared/models/options/local-admin-option-type.model';
 import { LocalOptionTypeActions } from 'src/app/store/local-admin/local-option-types/actions';
-import { BooleanChange } from '../../local-grid/local-grid.component';
 import { EditLocalOptionTypeDialogComponent } from '../edit-local-option-type-dialog/edit-local-option-type-dialog.component';
 
 @Component({

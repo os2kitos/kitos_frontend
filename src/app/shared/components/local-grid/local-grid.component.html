@@ -4,16 +4,20 @@
   [skip]="state.skip ?? 0"
   [loading]="loading || false"
   [pageable]="true"
-  [sortable]="true"
   [filterable]="true"
   [reorderable]="true"
+  [sortable]="!reorderable"
+  [rowReorderable]="reorderable"
+  (rowReorder)="onRowReorder($event)"
   [resizable]="true"
   (filterChange)="onFilterChange($event)"
   (sortChange)="onSortChange($event)"
   (pageChange)="onPageChange($event)"
   style="width: 100%"
-  [ngClass]="{ 'grid-outline': withOutline, 'fit-size-to-content': fitSizeToContent }"
+  [ngClass]="{ 'grid-outline': withOutline, 'fit-size-to-content': fitSizeToContent, dragging: reorderable }"
 >
+  <kendo-grid-rowreorder-column class="drag-handle" *ngIf="reorderable" [width]="40"></kendo-grid-rowreorder-column>
+  <ng-template #dragHintTemplate> THIS IS A HINT </ng-template>
   <ng-container *ngFor="let column of columns">
     <kendo-grid-column
       *ngIf="!column.hidden"
@@ -23,14 +27,14 @@
       [filter]="column.filter ?? 'text'"
       [width]="column.width ?? defaultColumnWidth"
       [minResizableWidth]="
-      column.minResizableWidth !== undefined
-        ? column.minResizableWidth
-        : column.filter === 'date'
-        ? defaultMinimumDateColumnWidth
-        : column.style === 'primary'
+        column.minResizableWidth !== undefined
+          ? column.minResizableWidth
+          : column.filter === 'date'
+          ? defaultMinimumDateColumnWidth
+          : column.style === 'primary'
           ? defaultPrimaryColumnMinimumWidth
           : defaultMinimumColumnWidth
-    "
+      "
       headerClass="mygrid-header-cell"
     >
       <ng-template kendoGridHeaderTemplate let-column let-columnIndex="columnIndex">
@@ -102,17 +106,6 @@
             (valueChange)="onCheckboxChange($event, dataItem)"
             data-cy="grid-checkbox"
           ></app-checkbox>
-        </div>
-      </ng-template>
-
-      <ng-template *ngIf="column.style === 'priority-buttons'" kendoGridCellTemplate let-dataItem>
-        <div>
-          <app-priority-buttons
-            [optionTypeItem]="dataItem"
-            [optionType]="column.extraData.optionType"
-            [minPriority]="column.extraData.minPriority"
-            [maxPriority]="column.extraData.maxPriority"
-          ></app-priority-buttons>
         </div>
       </ng-template>
 

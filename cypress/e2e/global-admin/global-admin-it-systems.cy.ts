@@ -32,20 +32,6 @@ describe('global-admin-organizations', () => {
     });
   });
 
-  it('Can toggle business type priority', () => {
-    cy.intercept('PATCH', '/api/v2/internal/it-systems/global-option-types/business-types/*', {
-      statusCode: 200,
-      body: {},
-    }).as('patch');
-
-    cy.getByDataCy('option-type-accordion').first().click();
-    cy.getByDataCy('decrease-priority-button').first().click();
-
-    cy.wait('@patch').then((interception) => {
-      expect(interception.request.body.priority).to.equal(17);
-    });
-  });
-
   it('Can edit business type in dialog', () => {
     cy.intercept('PATCH', '/api/v2/internal/it-systems/global-option-types/business-types/*', {
       statusCode: 200,

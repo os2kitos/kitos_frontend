@@ -5,17 +5,21 @@
     [isExpandedByDefault]="expandedByDefault"
     data-cy="option-type-accordion"
   >
-    <div class="create-button-container-align-right">
+    <app-overview-header class="create-button-container-align-right">
+      <app-button [iconType]="getToggleIcon()" buttonStyle="secondary" (buttonClick)="toggleMode()">
+        {{ toggleButtonText() }}
+      </app-button>
       <app-button buttonStyle="primary" (buttonClick)="onCreate()" i18n data-cy="create-button">
         Opret {{ getCreateButtonType() }}</app-button
       >
-    </div>
+    </app-overview-header>
     <app-global-option-type-grid
       [loading]="(isLoading$ | async) !== false"
       [optionType]="optionType"
       [optionTypeItems]="optionTypeItems"
       [showDescription]="showDescription"
       [showWriteAccess]="showWriteAccess"
+      [reordering]="movingMode"
     ></app-global-option-type-grid>
   </app-accordion>
 </ng-container>

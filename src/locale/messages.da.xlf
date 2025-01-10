@@ -5647,10 +5647,6 @@
         <source> Opret <x id="INTERPOLATION" equiv-text="{{ getCreateButtonType() }}"/></source>
         <target state="new"> Opret <x id="INTERPOLATION" equiv-text="{{ getCreateButtonType() }}"/></target>
       </trans-unit>
-      <trans-unit id="5917198681445260585" datatype="html">
-        <source>Prioritet</source>
-        <target state="new">Prioritet</target>
-      </trans-unit>
       <trans-unit id="859814391749202360" datatype="html">
         <source>rolle</source>
         <target state="new">rolle</target>
@@ -6444,6 +6440,10 @@
       <trans-unit id="1927431106338973301" datatype="html">
         <source>Vælg modtagere som mail eller rolle.</source>
         <target state="new">Vælg modtagere som mail eller rolle.</target>
+      </trans-unit>
+      <trans-unit id="3143168575358371654" datatype="html">
+        <source>Omstrukturer</source>
+        <target state="new">Omstrukturer</target>
       </trans-unit>
     </body>
   </file>

@@ -1,15 +1,27 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
 import { ExcelExportData } from '@progress/kendo-angular-excel-export';
-import { ExcelExportEvent, GridComponent as KendoGridComponent, PageChangeEvent } from '@progress/kendo-angular-grid';
+import {
+  ExcelExportEvent,
+  GridComponent as KendoGridComponent,
+  PageChangeEvent,
+  RowReorderEvent,
+} from '@progress/kendo-angular-grid';
 import { CompositeFilterDescriptor, SortDescriptor, process } from '@progress/kendo-data-query';
 import { get } from 'lodash';
 import { GridExportActions } from 'src/app/store/grid/actions';
 import { BaseComponent } from '../../base/base.component';
+import {
+  DEFAULT_COLUMN_MINIMUM_WIDTH,
+  DEFAULT_COLUMN_WIDTH,
+  DEFAULT_DATE_COLUMN_MINIMUM_WIDTH,
+  DEFAULT_DATE_COLUMN_WIDTH,
+  DEFAULT_PRIMARY_COLUMN_MINIMUM_WIDTH,
+} from '../../constants/constants';
 import { includedColumnInExport } from '../../helpers/grid-export.helper';
 import { GridColumn } from '../../models/grid-column.model';
 import { GridState, defaultGridState } from '../../models/grid-state.model';
-import { DEFAULT_COLUMN_MINIMUM_WIDTH, DEFAULT_COLUMN_WIDTH, DEFAULT_DATE_COLUMN_MINIMUM_WIDTH, DEFAULT_DATE_COLUMN_WIDTH, DEFAULT_PRIMARY_COLUMN_MINIMUM_WIDTH } from '../../constants/constants';
+import { BooleanChange, RowReorderingEvent } from '../../models/grid/grid-events.model';
 
 @Component({
   selector: 'app-local-grid',
@@ -27,11 +39,13 @@ export class LocalGridComponent<T> extends BaseComponent implements OnInit {
   @Input() withOutline: boolean = false;
   @Input() fitSizeToContent: boolean = false;
   @Input() height?: string;
+  @Input() reorderable: boolean = false;
 
   @Output() deleteEvent = new EventEmitter<T>();
   @Output() modifyEvent = new EventEmitter<T>();
   @Output() toggleChange = new EventEmitter<BooleanChange<T>>();
   @Output() checkboxChange = new EventEmitter<BooleanChange<T>>();
+  @Output() rowReordering = new EventEmitter<RowReorderingEvent<T>>();
 
   public state = defaultGridState;
 
@@ -118,9 +132,34 @@ export class LocalGridComponent<T> extends BaseComponent implements OnInit {
 
     return { data: processedData.data };
   }
-}
 
-export type BooleanChange<T> = {
-  value: boolean;
-  item: T;
-};
+  public onRowReorder(event: RowReorderEvent) {
+    if (!event.draggedRows?.length || !event.dropTargetRow) return;
+
+    const fromRow = event.draggedRows[0];
+    const fromIndex = fromRow.rowIndex;
+
+    let toIndex = event.dropTargetRow.rowIndex;
+
+    if (event.dropPosition === 'after') {
+      toIndex++;
+    }
+    if (fromIndex < toIndex) {
+      toIndex--;
+    }
+
+    toIndex = Math.max(0, Math.min(toIndex, this.data.length - 1));
+    const toItem = this.data[toIndex];
+
+    this.rowReordering.emit({
+      from: {
+        item: fromRow.dataItem,
+        index: fromIndex,
+      },
+      to: {
+        item: toItem,
+        index: toIndex,
+      },
+    });
+  }
+}

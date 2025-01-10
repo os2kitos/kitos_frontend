@@ -7,6 +7,7 @@ import { GlobalAdminOptionType } from '../../models/options/global-admin-option-
 import { isRoleOptionType } from '../../models/options/role-option-types.model';
 import { GlobalOptionTypeTableComponentStore } from './global-option-type-table.component-store';
 import { DialogOpenerService } from '../../services/dialog-opener.service';
+import { IconType } from '../../models/icon-type';
 
 @Component({
   selector: 'app-global-option-type-view',
@@ -33,6 +34,8 @@ export class GlobalOptionTypeViewComponent extends BaseComponent implements OnIn
   public readonly optionTypeItems$ = this.componentStore.optionTypeItems$;
   public readonly isLoading$ = this.componentStore.isLoading$;
 
+  public movingMode = false;
+
   public ngOnInit(): void {
     this.componentStore.setState({ isLoading: false, optionTypeItems: [], type: this.optionType });
     this.componentStore.getOptionTypeItems();
@@ -56,5 +59,17 @@ export class GlobalOptionTypeViewComponent extends BaseComponent implements OnIn
 
   public getCreateButtonType() {
     return isRoleOptionType(this.optionType) ? $localize`rolle` : $localize`type`;
+  }
+
+  public toggleMode(): void {
+    this.movingMode = !this.movingMode;
+  }
+
+  public toggleButtonText(): string {
+    return this.movingMode ? $localize`Færdig` : $localize`Omstrukturer`;
+  }
+
+  public getToggleIcon(): IconType {
+    return this.movingMode ? 'check' : 'reorder';
   }
 }

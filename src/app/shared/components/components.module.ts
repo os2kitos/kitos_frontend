@@ -149,7 +149,6 @@ import { UsageProxyCheckboxComponent } from './grid/usage-proxy-checkbox/usage-p
 import { IconComponent } from './icon/icon.component';
 import { LocalAdminColumnConfigButtonComponent } from './local-admin-column-config-button/local-admin-column-config-button.component';
 import { LocalGridComponent } from './local-grid/local-grid.component';
-import { PriorityButtonsComponent } from './local-grid/priority-buttons/priority-buttons.component';
 import { ToggleButtonComponent } from './local-grid/toggle-button/toggle-button.component';
 import { EditLocalOptionTypeDialogComponent } from './local-option-type-view/edit-local-option-type-dialog/edit-local-option-type-dialog.component';
 import { LocalOptionGridComponent } from './local-option-type-view/local-option-grid/local-option-grid.component';
@@ -296,7 +295,6 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     LocalOptionGridComponent,
     UsageProxyCheckboxComponent,
     GlobalOptionTypeGridComponent,
-    PriorityButtonsComponent,
     ToggleButtonComponent,
     GridFilterButtonsComponent,
     GridColumnConfigButtonsComponent,
@@ -445,7 +443,6 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     RichTextEditorComponent,
     LocalOptionGridComponent,
     UsageProxyCheckboxComponent,
-    PriorityButtonsComponent,
     ToggleButtonComponent,
     GridUsagesDropdownDialogComponent,
     GridUsagesConsequencesDialogComponent,

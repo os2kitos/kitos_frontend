@@ -4300,9 +4300,6 @@
       <trans-unit id="5340208750899970512" datatype="html">
         <source>IT System roller</source>
       </trans-unit>
-      <trans-unit id="5917198681445260585" datatype="html">
-        <source>Prioritet</source>
-      </trans-unit>
       <trans-unit id="6537904131139019667" datatype="html">
         <source>type</source>
       </trans-unit>
@@ -4893,6 +4890,9 @@
       </trans-unit>
       <trans-unit id="9124494925493981512" datatype="html">
         <source>Tilføj email</source>
+      </trans-unit>
+      <trans-unit id="3143168575358371654" datatype="html">
+        <source>Omstrukturer</source>
       </trans-unit>
     </body>
   </file>

@@ -1,14 +1,14 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { GridActionColumn } from 'src/app/shared/models/grid-action-column.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
+import { BooleanChange, RowReorderingEvent } from 'src/app/shared/models/grid/grid-events.model';
 import {
   GlobalAdminOptionType,
   GlobalAdminOptionTypeItem,
 } from 'src/app/shared/models/options/global-admin-option-type.model';
 import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.service';
-import { BooleanChange } from '../../local-grid/local-grid.component';
 import { GlobalOptionTypeActions } from 'src/app/store/global-admin/global-option-types/actions';
-import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-global-option-type-grid',
@@ -19,6 +19,7 @@ export class GlobalOptionTypeGridComponent implements OnChanges {
   @Input() loading: boolean = false;
   @Input() optionType!: GlobalAdminOptionType;
   @Input() optionTypeItems!: GlobalAdminOptionTypeItem[];
+  @Input() reordering!: boolean;
 
   @Input() showWriteAccess!: boolean;
   @Input() showDescription!: boolean;
@@ -39,15 +40,6 @@ export class GlobalOptionTypeGridComponent implements OnChanges {
       noFilter: true,
       width: 100,
       style: 'boolean',
-    },
-    {
-      field: 'priority',
-      title: $localize`Prioritet`,
-      hidden: false,
-      noFilter: true,
-      width: 100,
-      style: 'priority-buttons',
-      sortable: false,
     },
     {
       field: 'name',
@@ -96,12 +88,6 @@ export class GlobalOptionTypeGridComponent implements OnChanges {
           return { ...column, hidden: !this.showWriteAccess };
         case 'description':
           return { ...column, hidden: !this.showDescription };
-        case 'priority': {
-          const priorities = this.optionTypeItems.map((item) => item.priority);
-          const minPriority = Math.min(...priorities);
-          const maxPriority = Math.max(...priorities);
-          return { ...column, extraData: { optionType: this.optionType, minPriority, maxPriority } };
-        }
         default:
           return column;
       }
@@ -117,5 +103,13 @@ export class GlobalOptionTypeGridComponent implements OnChanges {
   public onToggleChange(toggleEvent: BooleanChange<GlobalAdminOptionTypeItem>): void {
     const { value, item } = toggleEvent;
     this.store.dispatch(GlobalOptionTypeActions.updateOptionType(this.optionType, item.uuid, { isEnabled: value }));
+  }
+
+  public onRowReorder(event: RowReorderingEvent<GlobalAdminOptionTypeItem>): void {
+    this.store.dispatch(
+      GlobalOptionTypeActions.updateOptionType(this.optionType, event.from.item.uuid, {
+        priority: event.to.item.priority,
+      })
+    );
   }
 }

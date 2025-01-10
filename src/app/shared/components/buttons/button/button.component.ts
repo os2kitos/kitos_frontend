@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { ButtonStyle } from 'src/app/shared/models/buttons/button-style.model';
+import { IconType } from 'src/app/shared/models/icon-type';
 
 export declare type ExtendedThemePalette = ThemePalette | 'secondary';
 
@@ -19,6 +20,7 @@ export class ButtonComponent {
   @Input() public tooltip?: string | null;
   @Input() public alignStart = false;
   @Input() public backgroundWhite = false;
+  @Input() public iconType?: IconType;
 
   @Output() buttonClick = new EventEmitter();
 
