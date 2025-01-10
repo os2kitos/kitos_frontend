@@ -1,15 +1,15 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { combineLatest, distinctUntilChanged, filter, map } from 'rxjs';
+import { combineLatest, distinctUntilChanged, filter, first, map, tap } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { NavigationDrawerItem } from 'src/app/shared/components/navigation-drawer/navigation-drawer.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { combineAND } from 'src/app/shared/helpers/observable-helpers';
 import { BreadCrumb } from 'src/app/shared/models/breadcrumbs/breadcrumb.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
+import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import {
@@ -40,7 +40,6 @@ import {
   selectITSystemUsageEnableTabSystemRoles,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { selectOrganizationName } from 'src/app/store/user-store/selectors';
-import { ITSystemUsageRemoveComponent } from './it-system-usage-remove/it-system-usage-remove.component';
 
 @Component({
   templateUrl: 'it-system-usage-details.component.html',
@@ -175,7 +174,7 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
     private store: Store,
     private actions$: Actions,
     private notificationService: NotificationService,
-    private dialog: MatDialog
+    private dialogOpenerService: DialogOpenerService
   ) {
     super();
   }
@@ -229,6 +228,29 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
   }
 
   public showRemoveDialog() {
-    this.dialog.open(ITSystemUsageRemoveComponent);
+    this.subscriptions.add(
+      this.organizationName$.pipe(
+        first(),
+        tap((organizationName) => {
+          const confirmationDialogRef = this.dialogOpenerService.openTakeSystemOutOfUseDialog(organizationName);
+
+          this.subscriptions.add(
+            this.actions$.pipe(ofType(ITSystemUsageActions.removeITSystemUsageSuccess), first()).subscribe(() => {
+              confirmationDialogRef.close();
+              this.notificationService.showDefault($localize`Systemanvendelsen blev slettet`);
+              this.router.navigate([`/${AppPath.itSystems}/${AppPath.itSystemUsages}`]);
+            })
+          );
+
+          this.subscriptions.add(
+            confirmationDialogRef.afterClosed().pipe(first()).subscribe((result) => {
+              if (result) {
+                this.store.dispatch(ITSystemUsageActions.removeITSystemUsage());
+              }
+            })
+          );
+        })
+    ).subscribe()
+    );
   }
 }

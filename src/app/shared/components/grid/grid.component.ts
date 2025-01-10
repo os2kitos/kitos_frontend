@@ -44,9 +44,9 @@ import { GridState } from '../../models/grid-state.model';
 import { SavedFilterState } from '../../models/grid/saved-filter-state.model';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
 import { UIConfigGridApplication } from '../../models/ui-config/ui-config-grid-application';
-import { ConfirmActionCategory, ConfirmActionService } from '../../services/confirm-action.service';
 import { StatePersistingService } from '../../services/state-persisting.service';
 import { GridUIConfigService } from '../../services/ui-config-services/grid-ui-config.service';
+import { DialogOpenerService } from '../../services/dialog-opener.service';
 
 @Component({
   selector: 'app-grid',
@@ -90,8 +90,8 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     private actions$: Actions,
     private store: Store,
     private localStorage: StatePersistingService,
-    private confirmActionService: ConfirmActionService,
-    private gridUIConfigService: GridUIConfigService
+    private gridUIConfigService: GridUIConfigService,
+    private dialogOpenerService: DialogOpenerService,
   ) {
     super();
     this.allData = this.allData.bind(this);
@@ -228,17 +228,23 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     } else {
       switch (this.entityType) {
         case 'it-system':
-          this.confirmActionService.confirmAction({
-            category: ConfirmActionCategory.Warning,
-            message: $localize`Er du sikker på at du vil fjerne den lokale anvendelse af systemet? Dette sletter ikke systemet, men vil slette alle lokale detaljer vedrørende anvendelsen.`,
-            onConfirm: () =>
-              this.store.dispatch(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganization(columnUuid)),
-          });
+          this.handleTakeSystemOutOfUse(columnUuid);
           break;
         default:
           throw `Checkbox change for entity type ${this.entityType} not implemented: grid.component.ts`;
       }
     }
+  }
+
+  private handleTakeSystemOutOfUse(columnUuid: string | undefined) {
+    const dialogRef = this.dialogOpenerService.openTakeSystemOutOfUseDialog();
+    this.subscriptions.add(
+      dialogRef.afterClosed().subscribe((result: boolean) => {
+        if (result && columnUuid !== undefined) {
+          this.store.dispatch(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganization(columnUuid));
+        }
+      })
+    );
   }
 
   private excelExport(): void {

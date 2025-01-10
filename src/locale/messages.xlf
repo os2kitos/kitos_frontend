@@ -1939,9 +1939,6 @@
       <trans-unit id="6190276943475468922" datatype="html">
         <source>Dokument ID/Sagsnr.</source>
       </trans-unit>
-      <trans-unit id="4394041055231779573" datatype="html">
-        <source>Anskaffelse.</source>
-      </trans-unit>
       <trans-unit id="2352567075185759105" datatype="html">
         <source>Driftsvederlag begyndt</source>
       </trans-unit>
@@ -2055,12 +2052,6 @@
       </trans-unit>
       <trans-unit id="9087506188025491846" datatype="html">
         <source>Bekræft og udfyld senere</source>
-      </trans-unit>
-      <trans-unit id="3482429261880040277" datatype="html">
-        <source>Er du sikker på, at du vil fjerne anvendelse af systemet?</source>
-      </trans-unit>
-      <trans-unit id="9115008271702949254" datatype="html">
-        <source>Du sletter alle lokale detaljer vedrørerende systemet, men det sletter ikke systemet</source>
       </trans-unit>
       <trans-unit id="4651029877664223444" datatype="html">
         <source>Bekræft</source>
@@ -2589,14 +2580,11 @@
       <trans-unit id="4886824982463371228" datatype="html">
         <source>IT Systemer i <x id="PH" equiv-text="organizationName"/></source>
       </trans-unit>
-      <trans-unit id="4587745812342538712" datatype="html">
-        <source>Er du sikker på at du vil fjerne den lokale anvendelse af systemet?</source>
+      <trans-unit id="4984996902763357561" datatype="html">
+        <source>Er du sikker på, at du vil fjerne den lokale anvendelse af systemet?</source>
       </trans-unit>
-      <trans-unit id="4760767147213863158" datatype="html">
-        <source>Dette sletter ikke systemet fra IT-System kataloget, men sletter den lokale anvendelse i kommunen.</source>
-      </trans-unit>
-      <trans-unit id="7504478422427751373" datatype="html">
-        <source>Systemanvendelsen er slettet</source>
+      <trans-unit id="6748140318042695939" datatype="html">
+        <source>Systemanvendelsen blev slettet</source>
       </trans-unit>
       <trans-unit id="4855557478475074835" datatype="html">
         <source>IT Systemer i <x id="INTERPOLATION" equiv-text="{{ organizationName$ | async }}"/></source>
@@ -3151,9 +3139,6 @@
       </trans-unit>
       <trans-unit id="1624430972791085553" datatype="html">
         <source>Din søgning gav intet resultat</source>
-      </trans-unit>
-      <trans-unit id="7395914888781045256" datatype="html">
-        <source>Er du sikker på at du vil fjerne den lokale anvendelse af systemet? Dette sletter ikke systemet, men vil slette alle lokale detaljer vedrørende anvendelsen.</source>
       </trans-unit>
       <trans-unit id="2602112912337116823" datatype="html">
         <source>Tilpas kolonner</source>
@@ -4890,6 +4875,9 @@
       </trans-unit>
       <trans-unit id="9124494925493981512" datatype="html">
         <source>Tilføj email</source>
+      </trans-unit>
+      <trans-unit id="5088079663399937603" datatype="html">
+        <source>Dette sletter de lokale registreringer vedrørerende systemet i <x id="PH" equiv-text="organizatioName ?? &apos;kommunen&apos;"/>, men sletter ikke stamdata om systemet i IT System Kataloget.</source>
       </trans-unit>
       <trans-unit id="3143168575358371654" datatype="html">
         <source>Omstrukturer</source>

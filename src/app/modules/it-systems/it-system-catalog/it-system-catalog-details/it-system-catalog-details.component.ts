@@ -8,11 +8,11 @@ import { combineLatest, distinctUntilChanged, filter, first, map } from 'rxjs';
 import { APIItSystemPermissionsResponseDTO } from 'src/app/api/v2/model/itSystemPermissionsResponseDTO';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
-import { IconConfirmationDialogComponent } from 'src/app/shared/components/dialogs/icon-confirmation-dialog/icon-confirmation-dialog.component';
 import { NavigationDrawerItem } from 'src/app/shared/components/navigation-drawer/navigation-drawer.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { BreadCrumb } from 'src/app/shared/models/breadcrumbs/breadcrumb.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
+import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { selectITSystemUsageHasCreateCollectionPermission } from 'src/app/store/it-system-usage/selectors';
@@ -28,6 +28,7 @@ import {
   selectItSystemName,
   selectItSystemUuid,
 } from 'src/app/store/it-system/selectors';
+import { selectOrganizationName } from 'src/app/store/user-store/selectors';
 import { ITSystemCatalogDetailsComponentStore } from './it-system-catalog-details.component-store';
 
 @Component({
@@ -41,6 +42,7 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
   public readonly isLoading$ = this.store.select(selectItSystemLoading);
   public readonly itSystemName$ = this.store.select(selectItSystemName).pipe(filterNullish());
   public readonly itSystemUuid$ = this.store.select(selectItSystemUuid).pipe(filterNullish());
+  public readonly organizationName$ = this.store.select(selectOrganizationName).pipe(filterNullish());
 
   public readonly isSystemAvailable$ = this.store.select(selectItSystemIsActive);
   public readonly isSystemInUseInOrganization$ = this.store.select(selectItSystemIsInUseInOrganization);
@@ -95,6 +97,7 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
     private notificationService: NotificationService,
     private actions$: Actions,
     private dialog: MatDialog,
+    private dialogOpenerService: DialogOpenerService,
     private componentStore: ITSystemCatalogDetailsComponentStore
   ) {
     super();
@@ -133,27 +136,30 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
   }
 
   public showChangeInUseStateDialog(takingIntoUse: boolean): void {
-    const confirmationDialogRef = this.dialog.open(IconConfirmationDialogComponent);
-    const confirmationDialogInstance = confirmationDialogRef.componentInstance as IconConfirmationDialogComponent;
-    confirmationDialogInstance.confirmationType = 'Custom';
-    if (takingIntoUse) {
-      this.setupTakeIntoUseDialog(confirmationDialogInstance);
-    } else {
-      this.setupTakeOutOfUseDialog(confirmationDialogInstance);
-    }
-
     this.subscriptions.add(
-      confirmationDialogRef
-        .afterClosed()
-        .pipe(concatLatestFrom(() => this.itSystemUuid$))
-        .subscribe(([result, systemUuid]) => {
-          if (result === undefined) return;
-
+      this.organizationName$.pipe(first())
+        .subscribe((organizationName) => {
+          let confirmationDialogRef;
           if (takingIntoUse) {
-            this.tryTakeIntoUse(result, systemUuid);
-            return;
+            confirmationDialogRef = this.dialogOpenerService.openTakeSystemIntoUseDialog();
+          } else {
+            confirmationDialogRef = this.dialogOpenerService.openTakeSystemOutOfUseDialog(organizationName);
           }
-          this.tryTakeOutOfUse(result, systemUuid);
+
+        this.subscriptions.add(
+          confirmationDialogRef
+            .afterClosed()
+            .pipe(concatLatestFrom(() => this.itSystemUuid$))
+            .subscribe(([result, systemUuid]) => {
+              if (result === undefined) return;
+
+                if (takingIntoUse) {
+                  this.tryTakeIntoUse(result, systemUuid);
+                  return;
+                }
+                this.tryTakeOutOfUse(result, systemUuid);
+              })
+          );
         })
     );
   }
@@ -169,24 +175,6 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
     if (dialogResult === true) {
       this.store.dispatch(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganization(systemUuid));
     }
-  }
-
-  private setupTakeIntoUseDialog(confirmationDialogInstance: IconConfirmationDialogComponent) {
-    confirmationDialogInstance.title = $localize`Tag system i anvendelse`;
-    confirmationDialogInstance.bodyText = $localize`Hvis du ønsker at tage systemet i anvendelse, skal du bekræfte og udfylde information, som er relevant for din kommune nu eller senere under IT systemer.`;
-    confirmationDialogInstance.icon = 'take-into-use';
-    confirmationDialogInstance.confirmColor = 'primary';
-    confirmationDialogInstance.customConfirmText = $localize`Bekræft og udfyld nu`;
-    confirmationDialogInstance.customDeclineText = $localize`Bekræft og udfyld senere`;
-  }
-
-  private setupTakeOutOfUseDialog(confirmationDialogInstance: IconConfirmationDialogComponent) {
-    confirmationDialogInstance.title = $localize`Er du sikker på, at du vil fjerne anvendelse af systemet?`;
-    confirmationDialogInstance.bodyText = $localize`Du sletter alle lokale detaljer vedrørerende systemet, men det sletter ikke systemet`;
-    confirmationDialogInstance.icon = 'not-in-use';
-    confirmationDialogInstance.confirmColor = 'warn';
-    confirmationDialogInstance.customConfirmText = $localize`Bekræft`;
-    confirmationDialogInstance.customDeclineText = $localize`Fortryd`;
   }
 
   private showRemoveConfirmationDialog(): void {

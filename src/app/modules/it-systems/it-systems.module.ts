@@ -49,7 +49,6 @@ import { RelationTableComponent } from './it-system-usages/it-system-usage-detai
 import { SystemRelationDialogComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-relations/system-relation-dialog/system-relation-dialog.component';
 import { ItSystemUsageDetailsRolesComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-roles/it-system-usage-details-roles.component';
 import { ITSystemUsageDetailsComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details.component';
-import { ITSystemUsageRemoveComponent } from './it-system-usages/it-system-usage-details/it-system-usage-remove/it-system-usage-remove.component';
 import { ITSystemUsagesComponent } from './it-system-usages/it-system-usages.component';
 import { ITSystemsComponent } from './it-systems.component';
 import { ITSystemsRouterModule } from './it-systems.routes';
@@ -65,7 +64,6 @@ import { KleTableComponent } from './shared/kle-table/kle-table.component';
     ITSystemUsageDetailsComponent,
     ITSystemUsageDetailsFrontpageComponent,
     ITSystemUsageDetailsContractsComponent,
-    ITSystemUsageRemoveComponent,
     ITSystemUsageDetailsFrontpageInformationComponent,
     ITSystemUsageDetailsFrontpageCatalogComponent,
     ItSystemUsageDetailsDataProcessingComponent,

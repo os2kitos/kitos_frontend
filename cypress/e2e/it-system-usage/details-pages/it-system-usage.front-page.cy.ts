@@ -98,11 +98,11 @@ describe('it-system-usage', () => {
 
     cy.get('app-dialog').within(() => {
       cy.contains('Fortryd');
-      cy.contains('Fjern anvendelse').click();
+      cy.contains('Bekræft').click();
     });
 
     cy.contains('IT Systemer i Fælles Kommune');
-    cy.contains('Systemanvendelsen er slettet');
+    cy.contains('Systemanvendelsen blev slettet');
   });
 
   it('hides and disables input for IT system usage when user does not have rights', () => {
