@@ -1,11 +1,17 @@
 /// <reference types="cypress" />
 
 declare namespace Cypress {
+  // Commands
   interface Chainable<Subject> {
     /**
      * Setup initial intercepters and go to path.
      */
-    setup(authenticate?: boolean,  urlPath?: string, uiCustomizationFixturePath?: string, interceptAlerts?: boolean): void;
+    setup(
+      authenticate?: boolean,
+      urlPath?: string,
+      uiCustomizationFixturePath?: string,
+      interceptAlerts?: boolean
+    ): void;
 
     /**
      * Login using form.
@@ -201,5 +207,25 @@ declare namespace Cypress {
      * @param dataCySelector: selector for target element
      */
     hoverByDataCy(dataCySelector: string): Chainable<Subject>;
+  }
+
+  // Intercept commands
+  interface Chainable<Subject> {
+    /**
+     * Setup base contract intercepts, commmon for all contract sub-pages.
+     */
+    setupContractIntercepts(): void;
+    /**
+     * Setup base data processing intercepts, commmon for all contract sub-pages.
+     */
+    setupDataProcessingIntercepts(): void;
+    /**
+     * Setup base it system intercepts, commmon for all it system sub-pages.
+     */
+    setupItSystemCatalogIntercepts(): void;
+    /**
+     * Setup base it system usage intercepts, commmon for all organization sub-pages.
+     */
+    setupItSystemUsageIntercepts(): void;
   }
 }

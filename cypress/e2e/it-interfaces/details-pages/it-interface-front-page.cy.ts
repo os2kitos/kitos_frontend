@@ -20,7 +20,7 @@ describe('it-system-interfaces', () => {
   });
 
   it('interface information area fields contain correct data, and can be edited', () => {
-    cy.intercept('/api/v2/it-interfaces/27c3e673-1111-46dc-8e44-2ba278901eae', {
+    cy.intercept('/api/v2/it-interfaces/*', {
       fixture: './it-interfaces/it-interface.json',
     });
     goToInterfaceDetails();
