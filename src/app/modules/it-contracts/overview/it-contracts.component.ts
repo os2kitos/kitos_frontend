@@ -281,10 +281,11 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
     },
     {
       field: GridFields.AccumulatedAcquisitionCost,
-      title: $localize`Anskaffelse.`,
+      title: $localize`Anskaffelse`,
       section: ECONOMY_SECTION_NAME,
       filter: 'numeric',
       hidden: false,
+      style: 'integer-with-thousands-separator',
       persistId: 'acquisition',
     },
     {
@@ -293,6 +294,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       section: ECONOMY_SECTION_NAME,
       filter: 'numeric',
       hidden: false,
+      style: 'integer-with-thousands-separator',
       persistId: 'operation',
     },
     {
@@ -301,6 +303,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       section: ECONOMY_SECTION_NAME,
       filter: 'numeric',
       hidden: false,
+      style: 'integer-with-thousands-separator',
       persistId: 'other',
     },
     {
@@ -474,7 +477,6 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
           this.stateChange(gridState);
         })
     );
-
 
     this.subscriptions.add(this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState)));
 

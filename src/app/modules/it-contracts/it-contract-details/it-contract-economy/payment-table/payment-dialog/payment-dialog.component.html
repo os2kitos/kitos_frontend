@@ -18,6 +18,7 @@
         data-cy="acquisition-input"
         [formGroup]="paymentForm"
         formName="acquisition"
+        [useThousandsSeparator]="true"
       ></app-numeric-input>
       <app-numeric-input
         text="Drift/år"
@@ -26,6 +27,7 @@
         data-cy="operation-input"
         [formGroup]="paymentForm"
         formName="operation"
+        [useThousandsSeparator]="true"
       ></app-numeric-input>
       <app-numeric-input
         text="Andet"
@@ -34,6 +36,7 @@
         data-cy="other-input"
         [formGroup]="paymentForm"
         formName="other"
+        [useThousandsSeparator]="true"
       ></app-numeric-input>
       <app-textbox
         text="Kontering"

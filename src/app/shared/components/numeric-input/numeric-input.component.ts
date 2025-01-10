@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, Input, OnDestroy, ViewChild, ViewContainerRef } from '@angular/core';
 import IMask from 'imask';
 import { BaseFormComponent } from '../../base/base-form.component';
+import { ONLY_DIGITS_REGEX } from '../../constants/regex-constants';
 
 @Component({
   selector: 'app-numeric-input',
@@ -13,6 +14,7 @@ export class NumericInputComponent extends BaseFormComponent<number | undefined>
   @Input() public maxLength = Number.MAX_SAFE_INTEGER;
   @Input() public numberType: 'integer' | undefined = 'integer';
   @Input() public placeholder = $localize`Indtast et heltal`;
+  @Input() public useThousandsSeparator = false; // 9/1/25 NOTE if set to true, emitted values will be strings that need to be converted back into numbers using helpers/string.helpers.ts:toNumberWithoutThousandsSeparators(source)
 
   @ViewChild('input', { read: ViewContainerRef }) public input!: ViewContainerRef;
 
@@ -45,6 +47,7 @@ export class NumericInputComponent extends BaseFormComponent<number | undefined>
         scale: this.getScale(), //x == 0 -> integers, x > 0 -> number of digits after point
         min: this.minLength,
         max: this.maxLength,
+        thousandsSeparator: this.useThousandsSeparator ? '.' : '',
       });
     });
   }
@@ -66,8 +69,8 @@ export class NumericInputComponent extends BaseFormComponent<number | undefined>
   private getNumberCaptureExpression() {
     switch (this.numberType) {
       case 'integer':
-        //ensures that no other values than numbers and optionally a coma is not returned
-        return /[^0-9]/g;
+        //ensures that no other values than numbers are returned
+        return ONLY_DIGITS_REGEX;
       default:
         return null;
     }

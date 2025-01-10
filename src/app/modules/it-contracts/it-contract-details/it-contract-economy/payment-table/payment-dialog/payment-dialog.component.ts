@@ -7,6 +7,7 @@ import { distinctUntilChanged } from 'rxjs';
 import { APIPaymentRequestDTO, APIPaymentResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { optionalNewDate } from 'src/app/shared/helpers/date.helpers';
+import { fromAnyToNumber } from 'src/app/shared/helpers/number.helpers';
 import { AuditModel, baseAuditStatusValue, mapAuditModel } from 'src/app/shared/models/it-contract/audit-model';
 import { PaymentTypes } from 'src/app/shared/models/it-contract/payment-types.model';
 import { TreeNodeModel, createNode } from 'src/app/shared/models/tree-node.model';
@@ -71,7 +72,7 @@ export class PaymentDialogComponent extends BaseComponent implements OnInit {
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(ITContractActions.addItContractPaymentSuccess, ITContractActions.updateItContractPaymentSuccess))
-        .subscribe((result) => {
+        .subscribe((_) => {
           this.close();
         })
     );
@@ -100,21 +101,21 @@ export class PaymentDialogComponent extends BaseComponent implements OnInit {
     if (this.paymentForm.invalid) {
       return;
     }
-    const orgUnitUuid = this.paymentForm.controls.organizationUnit.value?.id;
+    const controls = this.paymentForm.controls;
+    const orgUnitUuid = controls.organizationUnit.value?.id;
     if (orgUnitUuid === undefined) {
       return;
     }
     this.isBusy = true;
-
     const request = {
       organizationUnitUuid: orgUnitUuid,
-      acquisition: this.paymentForm.controls.acquisition.value,
-      operation: this.paymentForm.controls.operation.value,
-      other: this.paymentForm.controls.other.value,
-      accountingEntry: this.paymentForm.controls.accountingEntry.value,
-      auditStatus: this.paymentForm.controls.auditStatus.value?.id,
-      auditDate: this.paymentForm.controls.auditDate.value?.toISOString(),
-      note: this.paymentForm.controls.note.value,
+      acquisition: fromAnyToNumber(controls.acquisition.value),
+      operation: fromAnyToNumber(controls.operation.value),
+      other: fromAnyToNumber(controls.other.value),
+      accountingEntry: controls.accountingEntry.value,
+      auditStatus: controls.auditStatus.value?.id,
+      auditDate: controls.auditDate.value?.toISOString(),
+      note: controls.note.value,
     } as APIPaymentRequestDTO;
 
     if (this.isEdit) {

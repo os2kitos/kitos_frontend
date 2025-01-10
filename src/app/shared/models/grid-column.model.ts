@@ -43,6 +43,7 @@ export interface GridColumn {
     | 'excel-only'
     | 'action-buttons'
     | 'priority-buttons'
+    | 'integer-with-thousands-separator'
     ; //Style of the column
   width?: number;
   minResizableWidth?: number;

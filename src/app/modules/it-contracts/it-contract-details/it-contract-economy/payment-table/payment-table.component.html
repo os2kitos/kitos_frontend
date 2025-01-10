@@ -22,13 +22,13 @@
             <app-paragraph paragraphSize="small">{{ payment.organizationUnit?.ean ?? nullPlaceholder }}</app-paragraph>
           </td>
           <td>
-            <app-paragraph paragraphSize="small">{{ payment.acquisition }}</app-paragraph>
+            <app-paragraph paragraphSize="small">{{ payment.acquisition | number:'1.0-0' }}</app-paragraph>
           </td>
           <td>
-            <app-paragraph paragraphSize="small">{{ payment.operation }}</app-paragraph>
+            <app-paragraph paragraphSize="small">{{ payment.operation | number:'1.0-0'}}</app-paragraph>
           </td>
           <td>
-            <app-paragraph paragraphSize="small">{{ payment.other }}</app-paragraph>
+            <app-paragraph paragraphSize="small">{{ payment.other | number:'1.0-0' }}</app-paragraph>
           </td>
           <td>
             <app-paragraph paragraphSize="small">{{ payment.accountingEntry ?? nullPlaceholder }}</app-paragraph>

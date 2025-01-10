@@ -140,6 +140,13 @@
           <app-paragraph [cropOnOverflow]="true">{{ dataItem | searchProperty: column.field }}</app-paragraph>
         </ng-template>
         <ng-template
+          *ngIf="column.style === 'integer-with-thousands-separator'"
+          kendoGridCellTemplate
+          let-dataItem
+        >
+          <app-paragraph [cropOnOverflow]="true">{{ (dataItem | searchProperty: column.field) | number:'1.0-0' }}</app-paragraph>
+        </ng-template>
+        <ng-template
           *ngIf="column.style === 'default-wrap'"
           kendoGridCellTemplate
           let-dataItem
