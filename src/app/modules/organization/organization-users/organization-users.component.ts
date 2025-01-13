@@ -79,6 +79,7 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
       section: this.organizationUserSectionName,
       hidden: true,
       noFilter: true,
+      sortable: false,
     },
     {
       field: 'HasApiAccess',
@@ -88,6 +89,7 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
       noFilter: true,
       style: 'boolean',
       width: 100,
+      sortable: false,
       tooltipNegativeText: this.negativeTooltipText,
     },
     {
@@ -98,6 +100,7 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
       noFilter: true,
       style: 'boolean',
       width: 120,
+      sortable: false,
       tooltipPositiveText: $localize`Øverste myndighed. SKRIV rettighed til alle moduler, brugerhåndtering, samt adgang til lokal administrator indstillinger`,
       tooltipNegativeText: this.negativeTooltipText,
     },
@@ -109,6 +112,7 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
       noFilter: true,
       style: 'boolean',
       width: 170,
+      sortable: false,
       tooltipPositiveText: $localize`SKRIV rettighed til Organisations modul, mulighed for at oprette/redigere brugere`,
       tooltipNegativeText: this.negativeTooltipText,
     },
@@ -120,6 +124,7 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
       noFilter: true,
       style: 'boolean',
       width: 125,
+      sortable: false,
       tooltipPositiveText: $localize`SKRIV rettighed til System modul`,
       tooltipNegativeText: this.negativeTooltipText,
     },
@@ -131,6 +136,7 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
       noFilter: true,
       style: 'boolean',
       width: 130,
+      sortable: false,
       tooltipPositiveText: $localize`SKRIV rettighed til Kontrakt og Databehandling modul`,
       tooltipNegativeText: this.negativeTooltipText,
     },
@@ -142,6 +148,7 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
       noFilter: true,
       style: 'boolean',
       width: 190,
+      sortable: false,
       tooltipNegativeText: this.negativeTooltipText,
     },
     {
@@ -152,6 +159,7 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
       noFilter: true,
       style: 'boolean',
       width: 160,
+      sortable: false,
       tooltipNegativeText: this.negativeTooltipText,
     },
     {
