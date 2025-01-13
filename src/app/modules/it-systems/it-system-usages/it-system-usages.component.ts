@@ -27,6 +27,7 @@ import { archiveDutyChoiceOptions } from 'src/app/shared/models/it-system-usage/
 import { dataSensitivityLevelOptions } from 'src/app/shared/models/it-system-usage/gdpr/data-sensitivity-level.model';
 import { hostedAtOptionsGrid } from 'src/app/shared/models/it-system-usage/gdpr/hosted-at.model';
 import { lifeCycleStatusOptions } from 'src/app/shared/models/life-cycle-status.model';
+import { numberOfExpectedUsersOptionsGrid } from 'src/app/shared/models/number-of-expected-users.model';
 import { yesNoIrrelevantOptionsGrid } from 'src/app/shared/models/yes-no-irrelevant.model';
 import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 import { GridUIConfigService } from 'src/app/shared/services/ui-config-services/grid-ui-config.service';
@@ -498,6 +499,27 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       section: this.systemSectionName,
       hidden: false,
       persistId: 'note',
+    },
+    {
+      field: GridFields.UserCount,
+      title: $localize`Antal brugere`,
+      section: this.systemSectionName,
+      style: 'enum',
+      extraFilter: 'enum',
+      extraData: numberOfExpectedUsersOptionsGrid,
+      hidden: true,
+      persistId: 'userCount',
+    },
+    {
+      field: GridFields.ItSystemCategoriesUuid,
+      dataField: 'ItSystemCategoriesName',
+      title: $localize`Klassifikation af data i systemet`,
+      section: this.systemSectionName,
+      extraData: 'it-system_usage-data-classification-type',
+      extraFilter: 'choice-type',
+      style: 'uuid-to-name',
+      hidden: true,
+      persistId: 'itSystemCategoriesUuid',
     },
   ];
 

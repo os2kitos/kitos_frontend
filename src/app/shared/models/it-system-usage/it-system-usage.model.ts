@@ -7,11 +7,9 @@ import {
   RoleAssignmentsMap,
 } from '../helpers/read-model-role-assignments';
 import { LifeCycleStatus, mapLifeCycleStatus } from '../life-cycle-status.model';
+import { mapGridNumberOfExpectedUsers, NumberOfExpectedUsersGrid } from '../number-of-expected-users.model';
 import { YesNoDontKnowOptions } from '../yes-no-dont-know.model';
-import {
-  mapCapitalizedStringToYesNoIrrelevantEnum,
-  mapToYesNoIrrelevantEnumGrid,
-} from '../yes-no-irrelevant.model';
+import { mapCapitalizedStringToYesNoIrrelevantEnum, mapToYesNoIrrelevantEnumGrid } from '../yes-no-irrelevant.model';
 import { ArchiveDutyChoice, mapArchiveDutyChoice } from './archive-duty-choice.model';
 import { HostedAt, mapGridHostedAt } from './gdpr/hosted-at.model';
 
@@ -68,9 +66,11 @@ export interface ITSystemUsage {
   IncomingRelatedItSystemUsages: { id: string; value: string }[];
   RelevantOrganizationUnitNamesAsCsv: string;
   AssociatedContracts: { id: string; value: string }[];
+  ItSystemCategoriesName: string;
   Note: string;
   RiskAssessmentDate: Date;
   PlannedRiskAssessmentDate: Date;
+  UserCount: NumberOfExpectedUsersGrid | undefined;
   Roles: RoleAssignmentsMap;
   RoleEmails: RoleAssignmentEmailsMaps;
 }
@@ -161,6 +161,8 @@ export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
     Note: value.Note,
     RiskAssessmentDate: value.RiskAssessmentDate,
     PlannedRiskAssessmentDate: value.PlannedRiskAssessmentDate,
+    UserCount: mapGridNumberOfExpectedUsers(value.UserCount),
+    ItSystemCategoriesName: value.ItSystemCategoriesName,
     Roles: mapRoleAssignmentsToUserFullNames(value.RoleAssignments),
     RoleEmails: mapRoleAssignmentsToEmails(value.RoleAssignments),
   };
@@ -176,7 +178,7 @@ function getDataProcessingRegistrationsConcluded(
       IsAgreementConcluded: APIDataProcessingRegistrationGeneralDataResponseDTO.IsAgreementConcludedEnum;
     }) => ({
       id: registration.DataProcessingRegistrationUuid,
-      value: mapCapitalizedStringToYesNoIrrelevantEnum(registration.IsAgreementConcluded)?.name
+      value: mapCapitalizedStringToYesNoIrrelevantEnum(registration.IsAgreementConcluded)?.name,
     })
   ).filter((r: { value: string }) => r.value !== undefined);
 }

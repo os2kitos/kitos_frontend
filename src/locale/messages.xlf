@@ -4882,6 +4882,18 @@
       <trans-unit id="3143168575358371654" datatype="html">
         <source>Omstrukturer</source>
       </trans-unit>
+      <trans-unit id="1915808090055857753" datatype="html">
+        <source>&gt;100</source>
+      </trans-unit>
+      <trans-unit id="2828536783863894665" datatype="html">
+        <source>50-100</source>
+      </trans-unit>
+      <trans-unit id="4394847010841516727" datatype="html">
+        <source>10-50</source>
+      </trans-unit>
+      <trans-unit id="5001288584084190416" datatype="html">
+        <source>&lt;10</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

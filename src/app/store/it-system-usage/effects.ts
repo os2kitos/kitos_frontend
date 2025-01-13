@@ -14,11 +14,11 @@ import {
   APIV2OrganizationGridInternalINTERNALService,
 } from 'src/app/api/v2';
 import { USAGE_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-constants';
+import { hasValidCache } from 'src/app/shared/helpers/date.helpers';
 import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { convertDataSensitivityLevelStringToNumberMap } from 'src/app/shared/models/it-system-usage/gdpr/data-sensitivity-level.model';
 import { adaptITSystemUsage } from 'src/app/shared/models/it-system-usage/it-system-usage.model';
 import { OData } from 'src/app/shared/models/odata.model';
-import { YesNoIrrelevantEnum } from 'src/app/shared/models/yes-no-irrelevant.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ExternalReferencesApiService } from 'src/app/shared/services/external-references-api-service.service';
 import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
@@ -36,7 +36,6 @@ import {
   selectOverviewSystemRolesCache,
   selectUsageGridColumns,
 } from './selectors';
-import { hasValidCache } from 'src/app/shared/helpers/date.helpers';
 
 @Injectable()
 export class ITSystemUsageEffects {
@@ -698,8 +697,9 @@ function applyQueryFixes(odataString: string, systemRoles: APIBusinessRoleDTO[] 
       'RelevantOrganizationUnits/any(c: c/OrganizationUnitId eq $1)'
     )
     .replace(/(\w+\()AssociatedContractsNamesCsv(.*\))/, 'AssociatedContracts/any(c: $1c/ItContractName$2)')
-    .replace(/ItSystemBusinessTypeUuid eq '([\w-]+)'/, 'ItSystemBusinessTypeUuid eq $1');
-    
+    .replace(/ItSystemBusinessTypeUuid eq '([\w-]+)'/, 'ItSystemBusinessTypeUuid eq $1')
+    .replace(/ItSystemCategoriesUuid eq '([\w-]+)'/, 'ItSystemCategoriesUuid eq $1');
+
   convertedString = convertedString.replace(
     new RegExp(`DataProcessingRegistrationsConcludedAsCsv eq ('[^']+')`, 'i'),
     'contains(DataProcessingRegistrationsConcludedAsCsv, $1)'

@@ -6429,6 +6429,22 @@
         <source>Omstrukturer</source>
         <target state="new">Omstrukturer</target>
       </trans-unit>
+      <trans-unit id="5001288584084190416" datatype="html">
+        <source>&lt;10</source>
+        <target state="new">&lt;10</target>
+      </trans-unit>
+      <trans-unit id="4394847010841516727" datatype="html">
+        <source>10-50</source>
+        <target state="new">10-50</target>
+      </trans-unit>
+      <trans-unit id="2828536783863894665" datatype="html">
+        <source>50-100</source>
+        <target state="new">50-100</target>
+      </trans-unit>
+      <trans-unit id="1915808090055857753" datatype="html">
+        <source>&gt;100</source>
+        <target state="new">&gt;100</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

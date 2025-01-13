@@ -269,6 +269,10 @@ export class GridUIConfigService {
           shouldEnable([UsageFields.ExpirationDate, UsageFields.Concluded, UsageFields.ActiveAccordingToValidityPeriod])
         ),
       this.store.select(selectITSystemUsageEnableStatus).pipe(shouldEnable([])),
+      this.store.select(selectITSystemUsageEnableAmountOfUsers).pipe(shouldEnable([UsageFields.UserCount])),
+      this.store
+        .select(selectITSystemUsageEnableDataClassification)
+        .pipe(shouldEnable([UsageFields.ItSystemCategoriesUuid])),
 
       //Contracts
       combineAND([

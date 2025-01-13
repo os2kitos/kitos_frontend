@@ -43,3 +43,5 @@ export const AssociatedContractsNamesCsv = 'AssociatedContractsNamesCsv';
 export const RiskAssessmentDate = 'RiskAssessmentDate';
 export const PlannedRiskAssessmentDate = 'PlannedRiskAssessmentDate';
 export const Note = 'Note';
+export const UserCount = 'UserCount';
+export const ItSystemCategoriesUuid = 'ItSystemCategoriesUuid';
