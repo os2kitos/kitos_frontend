@@ -27,12 +27,17 @@ export class UserNotificationsEffects {
       ]),
       filter(([, , hasValidCache]) => !hasValidCache),
       switchMap(([{ ownerResourceType }, organizationUuid]) =>
-        this.notificationService.getManyNotificationV2GetNotifications({ ownerResourceType, organizationUuid }).pipe(
-          map((notifications) =>
-            UserNotificationActions.getNotificationsSuccess(ownerResourceType, notifications.map(adaptUserNotification))
-          ),
-          catchError(() => of(UserNotificationActions.getNotificationsError()))
-        )
+        this.notificationService
+          .getManyNotificationV2GetNotifications({ ownerResourceType, organizationUuid, onlyActive: true })
+          .pipe(
+            map((notifications) =>
+              UserNotificationActions.getNotificationsSuccess(
+                ownerResourceType,
+                notifications.map(adaptUserNotification)
+              )
+            ),
+            catchError(() => of(UserNotificationActions.getNotificationsError()))
+          )
       )
     );
   });
