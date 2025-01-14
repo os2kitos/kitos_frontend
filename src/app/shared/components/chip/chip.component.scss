@@ -39,4 +39,14 @@
       background-color: $color-negative;
     }
   }
+
+  &.chip-neutral {
+    border: 1px solid $color-neutral-40;
+    background-color: $color-neutral-20;
+    color: $color-neutral-80;
+
+    &:before {
+      background-color: $color-neutral-60;
+    }
+  }
 }

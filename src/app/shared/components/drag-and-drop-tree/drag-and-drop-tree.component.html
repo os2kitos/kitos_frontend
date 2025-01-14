@@ -45,7 +45,7 @@
           [disableRedirect]="disableRedirect"
           (click)="checkNodeTextClick(node)"
         >
-          {{ node.name }}
+          <span class="level-indicator-color">{{ level }}.</span> {{ node.name }}
         </app-details-page-link>
       </ng-container>
       <app-details-page-link
@@ -56,11 +56,10 @@
         [disableRedirect]="disableRedirect"
         (click)="disableRedirect ? expandClick(node) : null"
       >
-        {{ node.name }}
+        <span class="level-indicator-color">{{ level }}.</span> {{ node.name }}
       </app-details-page-link>
       <app-drag-icon *ngIf="!disableDrag && !node.isRoot" cdkDragHandle data-cy="drag-icon"></app-drag-icon>
     </div>
-
     <ng-container *ngIf="maxLevel === undefined || maxLevel > level">
       <div
         *ngIf="node.isExpanded && node.children.length"
