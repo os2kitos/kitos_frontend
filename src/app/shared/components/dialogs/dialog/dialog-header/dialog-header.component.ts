@@ -9,10 +9,9 @@ import { DialogComponent } from '../dialog.component';
 })
 export class DialogHeaderComponent {
   @Input() public title?: string;
-  @Input() public icon?: 'help';
   @Input() public dialog!: MatDialogRef<DialogComponent>;
   @Input() public closable = true;
-  @Input() public helpText?: string = undefined;
+  @Input() public helpText?: string;
   @Input() public nested = false;
 
   public close() {

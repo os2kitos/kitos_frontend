@@ -1,5 +1,5 @@
 <ng-container *ngIf="user$ | async as user">
-  <app-scrollbar-dialog title="Slet bruger" i18n-title [nested]="nested">
+  <app-scrollbar-dialog title="Slet bruger" helpText="org_user_delete_modal" i18n-title [nested]="nested">
     <app-standard-vertical-content-grid *ngIf="!isLoading">
       <app-paragraph [displayFlex]="false" i18n>
         Er du sikker på at du vil fjerne <strong>{{ getUserName(user) }}</strong> fra

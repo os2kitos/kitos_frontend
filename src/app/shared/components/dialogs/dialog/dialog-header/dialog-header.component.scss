@@ -34,13 +34,11 @@
       margin-right: 0;
     }
   }
-
-
 }
 
 h3 {
   word-wrap: break-word;
-  max-width: 90%;
+  max-width: 100%;
 }
 .title-align-bottom {
   align-items: center;
@@ -51,4 +49,12 @@ h3 {
   gap: 8px;
 }
 
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
+.hide-help-button {
+  visibility: hidden;
+}
