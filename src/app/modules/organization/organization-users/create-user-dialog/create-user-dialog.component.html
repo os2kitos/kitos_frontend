@@ -69,15 +69,14 @@
       ></app-multi-select-dropdown>
 
       <app-tooltip [text]="(userInOtherOrgHelptext$ | async) ?? ''" [tooltipDelay]="500">
-        <app-checkbox
-          text="Send advis om oprettelse"
+        <app-slide-toggle
+          text="Send advis om ændringer"
           i18n-text
-          [formGroup]="createForm"
           labelPosition="after"
+          [formGroup]="createForm"
           formName="sendNotificationOnCreation"
           data-cy="send-on-creation"
-        >
-        </app-checkbox>
+        ></app-slide-toggle>
       </app-tooltip>
       <ng-container *ngIf="(isGlobalAdmin$ | async) === true">
         <app-divider></app-divider>

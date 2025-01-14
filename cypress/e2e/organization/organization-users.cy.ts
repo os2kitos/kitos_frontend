@@ -62,7 +62,7 @@ describe('organization-users', () => {
   it('Can delete it contract role', () => {
     cy.contains('local-api-global-admin-user@kitos.dk').click();
 
-    cy.get('[data-cy="delete-role-button-Budgetansvarlig"]').click();
+    cy.getByDataCy('delete-role-button-Budgetansvarlig').click();
     cy.contains('Ja').click();
 
     cy.intercept('PATCH', 'api/v2/internal/it-contracts/*/roles/remove', {
@@ -90,7 +90,7 @@ describe('organization-users', () => {
   });
 
   it('Can create user', () => {
-    cy.intercept('api/v2/internal/organization/*/users/*', { body: null });
+    cy.intercept('api/v2/internal/organization/*/users/find-any-by-email?email=*', { body: null });
 
     cy.getByDataCy('grid-options-button').click().click();
     cy.getByDataCy('create-button').click();
@@ -101,7 +101,7 @@ describe('organization-users', () => {
     cy.inputByCy('repeat-email').type('test@email.com');
     cy.inputByCy('phone-number').type('12345678');
     cy.dropdownByCy('start-preference', 'Start side', true);
-    cy.getByDataCy('send-on-creation').find('input').click();
+    cy.getByDataCy('send-on-creation').find('kendo-switch').click();
     cy.getByDataCy('rights-holder-access').find('input').click();
     cy.getByDataCy('api-user').find('input').click();
     cy.getByDataCy('stake-holder-access').find('input').click();
@@ -113,10 +113,10 @@ describe('organization-users', () => {
   });
 
   it('Cannot create user if emails differ', () => {
-    cy.intercept('api/v2/internal/organization/*/users/*', { body: null });
+    cy.intercept('api/v2/internal/organization/*/users/find-any-by-email?email=*', { body: null });
 
-    cy.getByDataCy('grid-options-button').click().click()
-    cy.getByDataCy('create-button').click({scrollBehavior: 'center'});
+    cy.getByDataCy('grid-options-button').click().click();
+    cy.getByDataCy('create-button').click({ scrollBehavior: 'center' });
 
     cy.inputByCy('email').type('test@email.com');
     cy.inputByCy('repeat-email').type('test2@email.com');
@@ -125,7 +125,7 @@ describe('organization-users', () => {
   });
 
   it('Can edit user', () => {
-    cy.intercept('api/v2/internal/organization/*/users/*', { body: null });
+    cy.intercept('api/v2/internal/organization/*/users/find-any-by-email?email=*', { body: null });
 
     cy.contains('local-regular-user@kitos.dk').click();
     cy.contains('Rediger').click().wait(500);
@@ -150,14 +150,14 @@ describe('organization-users', () => {
 
       req.reply({ statusCode: 200, body: {} });
     }).as('patchRequest');
-    cy.getByDataCy('save-button').click({scrollBehavior: 'center'});
+    cy.getByDataCy('save-button').click({ scrollBehavior: 'center' });
 
     cy.wait('@patchRequest');
     cy.get('app-popup-message').should('exist');
   });
 
   it('Can delete user', () => {
-    cy.intercept('api/v2/internal/organization/*/users/*', { body: null });
+    cy.intercept('api/v2/internal/organization/*/users/find-any-by-email?email=*', { body: null });
     cy.intercept('api/v2/internal/organizations/*/ui-root-config', {
       fixture: './shared/ui-root-config.json',
     });
@@ -165,12 +165,11 @@ describe('organization-users', () => {
     cy.intercept('DELETE', 'api/v2/internal/organization/*/users/*', { body: {} }).as('deleteUser');
 
     cy.contains('local-regular-user@kitos.dk').click();
-    cy.contains('Slet bruger').click({scrollBehavior: 'center'});
+    cy.contains('Slet bruger').click({ scrollBehavior: 'center' });
 
     cy.getByDataCy('delete-button').click();
     cy.contains('Ja').click();
 
     cy.wait('@deleteUser');
   });
-
 });

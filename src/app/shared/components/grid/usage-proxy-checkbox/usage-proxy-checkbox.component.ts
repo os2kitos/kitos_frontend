@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
 import { filter } from 'rxjs';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
@@ -9,6 +9,8 @@ import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
   styleUrls: ['./usage-proxy-checkbox.component.scss'],
 })
 export class UsageProxyCheckboxComponent implements OnInit {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  @ViewChild('switch') switch: any;
   @Input() checked: boolean = false;
   @Input() disabled: boolean = false;
   @Input() entityUuid!: string;
@@ -25,6 +27,7 @@ export class UsageProxyCheckboxComponent implements OnInit {
       )
       .subscribe(() => {
         this.checked = false;
+        this.switch.updateValue(this.checked);
         this.cdRef.detectChanges();
       });
 
@@ -35,6 +38,7 @@ export class UsageProxyCheckboxComponent implements OnInit {
       )
       .subscribe(() => {
         this.checked = true;
+        this.switch.updateValue(this.checked);
         this.cdRef.detectChanges();
       });
 
@@ -48,11 +52,14 @@ export class UsageProxyCheckboxComponent implements OnInit {
     this.cdRef.detectChanges();
   }
 
-  public onClick(event: MouseEvent) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  public onClick(event: any) {
+    this.switch.updateValue(!event);
+    this.attemptChange.emit(event);
+  }
+
+  public preventDefault(event: Event) {
     event.preventDefault();
     event.stopPropagation();
-
-    const attemptedValue = !this.checked;
-    this.attemptChange.emit(attemptedValue);
   }
 }

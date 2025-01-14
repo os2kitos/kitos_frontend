@@ -66,16 +66,15 @@
         (cleared)="rolesCleared()"
       ></app-multi-select-dropdown>
 
-      <app-checkbox
+      <app-slide-toggle
         text="Send advis om ændringer"
-        labelPosition="after"
-        formName="sendAdvis"
-        [formGroup]="createForm"
-        [value]="this.createForm.value.sendAdvis ?? false"
         i18n-text
+        labelPosition="after"
+        [formGroup]="createForm"
+        formName="sendAdvis"
+        [value]="this.createForm.value.sendAdvis ?? false"
         data-cy="send-advis"
-      >
-      </app-checkbox>
+      ></app-slide-toggle>
 
       <app-divider></app-divider>
 

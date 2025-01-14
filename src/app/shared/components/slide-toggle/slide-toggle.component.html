@@ -1,11 +1,24 @@
-<div *ngIf="formGroup" [formGroup]="formGroup">
-  <mat-slide-toggle [labelPosition]="labelPosition" [formControlName]="formName" (change)="toggle($event.checked)">{{
-    text
-  }}</mat-slide-toggle>
+<div *ngIf="formGroup" class="flex-row" [formGroup]="formGroup">
+  <kendo-switch
+    #switch
+    offLabel=""
+    onLabel=""
+    size="small"
+    [formControlName]="formName"
+    [disabled]="disabled"
+    (valueChange)="toggle($event)"
+  ></kendo-switch>
+  <app-paragraph *ngIf="text" (click)="onParagraphClick(switch)" class="label-pointer-cursor">{{ text }}</app-paragraph>
 </div>
-
-<div *ngIf="!formGroup">
-  <mat-slide-toggle [disabled]="disabled" [labelPosition]="labelPosition" (change)="toggle($event.checked)">{{
-    text
-  }}</mat-slide-toggle>
+<div *ngIf="!formGroup" class="flex-row">
+  <kendo-switch
+    #switch
+    [(ngModel)]="value"
+    offLabel=""
+    onLabel=""
+    size="small"
+    [disabled]="disabled"
+    (valueChange)="toggle($event)"
+  ></kendo-switch>
+  <app-paragraph *ngIf="text" (click)="onParagraphClick(switch)" class="label-pointer-cursor">{{ text }}</app-paragraph>
 </div>

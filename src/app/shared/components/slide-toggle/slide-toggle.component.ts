@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { BaseFormComponent } from '../../base/base-form.component';
 
@@ -8,6 +8,8 @@ import { BaseFormComponent } from '../../base/base-form.component';
   styleUrl: './slide-toggle.component.scss',
 })
 export class SlideToggleComponent extends BaseFormComponent<boolean> {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  @ViewChild('switch') switch: any;
   @Input() labelPosition: 'before' | 'after' = 'before';
   @Input() public color: ThemePalette = undefined;
   @Input() invertCheckedValue: boolean = false;
@@ -15,5 +17,17 @@ export class SlideToggleComponent extends BaseFormComponent<boolean> {
   public toggle(value: boolean) {
     this.formValueChange(value);
     this.valueChange.emit(value);
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onParagraphClick(switchElement: any) {
+    const value = !switchElement._checked;
+    this.updateValue(value);
+    this.toggle(value);
+  }
+
+  updateValue(value: boolean) {
+    this.value = value;
+    this.switch.writeValue(value);
   }
 }

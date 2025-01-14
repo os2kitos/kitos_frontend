@@ -4747,10 +4747,6 @@
         <source>Start side</source>
         <target state="new">Start side</target>
       </trans-unit>
-      <trans-unit id="2223233384489817608" datatype="html">
-        <source>Send advis om oprettelse</source>
-        <target state="new">Send advis om oprettelse</target>
-      </trans-unit>
       <trans-unit id="4260496326052651673" datatype="html">
         <source>Brugeren blev opdateret</source>
         <target state="new">Brugeren blev opdateret</target>

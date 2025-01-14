@@ -1,1 +1,58 @@
 @import "theme";
+
+::ng-deep {
+  .k-switch-on:focus .k-switch-track,
+  .k-switch-on.k-focus .k-switch-track {
+    outline: 2px solid $color-neutral-20;
+  }
+  .k-switch-off:focus .k-switch-track,
+  .k-switch-off.k-focus .k-switch-track {
+    outline: 2px solid $color-neutral-20;
+  }
+
+  kendo-switch.k-switch-off:hover .k-switch-track {
+    outline: 1px solid $color-neutral-20;
+  }
+
+  kendo-switch.k-switch-on:hover {
+    outline: 2px solid $color-neutral-20;
+  }
+
+  .k-switch-on .k-switch-track {
+    border-color: $color-primary !important;
+    background-color: $color-primary !important;
+  }
+  .k-switch-off .k-switch-track {
+    border-color: $color-neutral-40 !important;
+    background-color: $color-neutral-40 !important;
+  }
+
+  .k-switch-on .k-switch-thumb {
+    border-color: $color-primary !important;
+  }
+
+  .k-switch-off .k-switch-thumb {
+    border-color: $color-neutral-40 !important;
+  }
+
+  .k-switch-sm {
+    width: 46px !important;
+  }
+
+  .k-switch-track {
+    width: 40px !important;
+  }
+}
+
+.flex-row {
+  display: flex;
+  align-items: center; /* Align items vertically centered */
+}
+
+.flex-row > * {
+  margin-right: 10px;
+}
+
+.label-pointer-cursor {
+  cursor: pointer;
+}

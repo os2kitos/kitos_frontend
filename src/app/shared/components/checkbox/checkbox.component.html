@@ -1,7 +1,11 @@
 <div *ngIf="formGroup" [formGroup]="formGroup" class="app-checkbox-wrapper">
-  <mat-checkbox data-cy="checkbox-input" [labelPosition]="labelPosition" [formControlName]="formName" (change)="toggle($event.checked)">{{
-    text
-  }}</mat-checkbox>
+  <mat-checkbox
+    data-cy="checkbox-input"
+    [labelPosition]="labelPosition"
+    [formControlName]="formName"
+    (change)="toggle($event.checked)"
+    >{{ text }}</mat-checkbox
+  >
 </div>
 
 <div *ngIf="!formGroup" class="app-checkbox-wrapper">
