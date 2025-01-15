@@ -2,6 +2,7 @@ import { createSelector } from '@ngrx/store';
 import { AlertsState, RelatedEntityType } from './state';
 import { alertsAdapter, alertsFeature } from './reducers';
 import { hasValidCache } from 'src/app/shared/helpers/date.helpers';
+import { selectUIRootConfig } from '../organization/selectors';
 
 export const { selectAlertsState } = alertsFeature;
 
@@ -23,10 +24,16 @@ export const selectAlertCacheTime = (entityType: RelatedEntityType) =>
     }
   );
 
-export const selectAllAlertCount = createSelector(selectAlertsState, (state: AlertsState) => {
-  return Object.values(RelatedEntityType).reduce((total, type) => {
-    const entityState = state.alerts[type];
-    const count = entityState.ids.length;
-    return total + count;
-  }, 0);
+export const selectAllAlertCount = createSelector(selectUIRootConfig, selectAlertsState, (config, alertState) => {
+  let count = 0;
+  if (config?.showDataProcessing) {
+    count = alertState.alerts[RelatedEntityType.DataProcessingRegistration].ids.length;
+  }
+  if (config?.showItContractModule) {
+    count += alertState.alerts[RelatedEntityType.ItContract].ids.length;
+  }
+  if (config?.showItSystemModule) {
+    count += alertState.alerts[RelatedEntityType.ItSystemUsage].ids.length;
+  }
+  return count;
 });

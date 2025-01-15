@@ -36,9 +36,9 @@ describe('it-system-usage', () => {
         cy.contains('Forretningsejer');
       });
 
-    const expectedFromDate = new Date('2024-02-24T21:00:00Z').toLocaleDateString();
+    const expectedFromDate = "24-02-2024";
     const expectedLastSent = expectedFromDate;
-    const expectedToDate = new Date('2024-02-26T21:00:00Z').toLocaleDateString();
+    const expectedToDate = "26-02-2024";
 
     cy.getRowForElementContent('test2')
       .first()

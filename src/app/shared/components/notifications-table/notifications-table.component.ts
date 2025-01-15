@@ -26,6 +26,7 @@ import { NotificationService } from '../../services/notification.service';
 import { NotificationsTableDialogComponent } from './notifications-table-dialog/notifications-table-dialog.component';
 import { NotificationsTableSentDialogComponent } from './notifications-table-sent-dialog/notifications-table-sent-dialog.component';
 import { NotificationsTableComponentStore } from './notifications-table.component-store';
+import { AppDatePipe } from '../../pipes/app-date.pipe';
 
 @Component({
   selector: 'app-notifications-table[entityUuid][ownerResourceType][hasModifyPermission]',
@@ -53,7 +54,8 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
     private readonly notificationDialog: MatDialog,
     private readonly notificationViewSentDialog: MatDialog,
     private readonly store: Store,
-    private readonly actions$: Actions
+    private readonly actions$: Actions,
+    private readonly appDatePipe: AppDatePipe
   ) {
     super();
   }
@@ -73,7 +75,7 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
   }
 
   public formatDate(date: string | undefined) {
-    if (date) return new Date(date).toLocaleDateString();
+    if (date) return this.appDatePipe.transform(date);
     return this.nullPlaceholder;
   }
 

@@ -20,7 +20,7 @@
     [type]="type"
     (click)="onButtonClick()"
   >
-    <app-icon *ngIf="iconType" [iconType]="iconType"></app-icon>
+    <app-icon *ngIf="iconType" [iconType]="iconType" class="center-icon"></app-icon>
     <ng-content></ng-content>
   </button>
 </app-tooltip>

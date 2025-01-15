@@ -25,4 +25,6 @@ export type IconType =
   | 'dots-warning'
   | 'reorder'
   | 'check'
+  | 'collapse'
+  | 'expand'
   | undefined;

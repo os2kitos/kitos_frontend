@@ -9,8 +9,8 @@
       [routerLink]="[item.route]"
       [attr.data-cy]="item.dataCy"
       *ngIf="item.enabled$ === undefined || (item.enabled$ | async) === true"
-      [iconType]="item.iconType"
     >
+      <app-icon [iconType]="item.iconType" class="icon-padding"></app-icon>
       <span class="label" [ngClass]="{ visible: isExpanded }">{{ item.label }}</span>
     </app-button>
   </div>
@@ -27,7 +27,7 @@
     class="chevron-container"
     data-cy="navigation-drawer-toggle"
   >
-    <app-collapse-circle-icon *ngIf="isExpanded"></app-collapse-circle-icon>
-    <app-expand-circle-icon *ngIf="!isExpanded"></app-expand-circle-icon>
+    <app-icon [iconType]="isExpanded ? 'collapse' : 'expand'" class="icon-padding"></app-icon>
+    <span class="label" [ngClass]="{ visible: isExpanded }"></span>
   </app-button>
 </app-card>
