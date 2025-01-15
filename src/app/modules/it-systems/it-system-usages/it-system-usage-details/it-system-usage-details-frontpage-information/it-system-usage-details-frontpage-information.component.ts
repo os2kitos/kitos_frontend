@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { compact } from 'lodash';
 import { filter, map } from 'rxjs';
 import { APIGeneralDataUpdateRequestDTO, APIIdentityNamePairResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
@@ -11,6 +10,7 @@ import {
   dateLessThanControlValidator,
 } from 'src/app/shared/helpers/form.helpers';
 import { combineOR } from 'src/app/shared/helpers/observable-helpers';
+import { toBulletPoints } from 'src/app/shared/helpers/string.helpers';
 import {
   LifeCycleStatus,
   lifeCycleStatusOptions,
@@ -111,14 +111,13 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
     map((general) => {
       if (general?.validity.valid) return undefined;
 
-      return (
-        $localize`Følgende gør systemet 'ikke aktivt': ` +
-        compact([
-          general?.validity.validAccordingToLifeCycle ? undefined : $localize`Livscyklus`,
-          general?.validity.validAccordingToMainContract ? undefined : $localize`Den markerede kontrakt`,
-          general?.validity.validAccordingToValidityPeriod ? undefined : $localize`Ibrugtagningsperiode`,
-        ]).join(', ')
-      );
+      const reasonsForInactivity = [
+        general?.validity.validAccordingToLifeCycle ? undefined : $localize`Livscyklus`,
+        general?.validity.validAccordingToMainContract ? undefined : $localize`Den markerede kontrakt`,
+        general?.validity.validAccordingToValidityPeriod ? undefined : $localize`Ibrugtagningsperiode`,
+      ];
+
+      return $localize`Følgende gør systemet 'ikke aktivt': ` + '\n' + toBulletPoints(reasonsForInactivity);
     })
   );
 

@@ -5,6 +5,7 @@ import { BehaviorSubject, combineLatestWith, map } from 'rxjs';
 import { APIIdentityNamePairResponseDTO, APIUpdateDataProcessingRegistrationRequestDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { optionalNewDate } from 'src/app/shared/helpers/date.helpers';
+import { toBulletPoints } from 'src/app/shared/helpers/string.helpers';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import {
   YesNoIrrelevantEnum,
@@ -19,6 +20,7 @@ import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import {
   selectDataProcessing,
   selectDataProcessingHasModifyPermissions,
+  selectDataProcessingIsValid,
 } from 'src/app/store/data-processing/selectors';
 import {
   selectDprEnableAgreementConcluded,
@@ -55,6 +57,17 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
   public readonly hasSubprocessorsValue$ = new BehaviorSubject<YesNoEnum | undefined>(undefined);
   public readonly isHasSubprocessorsTrue$ = this.hasSubprocessorsValue$.pipe(map((value) => value === 'Yes'));
 
+  public readonly dataProcessing$ = this.store.select(selectDataProcessing);
+  public readonly dprInactiveMessage$ = this.dataProcessing$.pipe(
+    map((dpr) => {
+      if (dpr?.general.valid) return undefined;
+      const reasonsForInactivity = [dpr?.general.valid ? undefined : $localize`Den markerede kontrakt er inaktiv`];
+
+      return $localize`Følgende gør databehandlingen inaktiv: ` + '\n' + toBulletPoints(reasonsForInactivity);
+    })
+  );
+  public readonly isValid$ = this.store.select(selectDataProcessingIsValid);
+
   public readonly frontpageFormGroup = new FormGroup({
     name: new FormControl<string>({ value: '', disabled: true }, Validators.required),
     status: new FormControl<string | undefined>({ value: undefined, disabled: true }),
@@ -89,8 +102,7 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
     this.store.dispatch(RegularOptionTypeActions.getOptions('data-processing-data-responsible-types'));
 
     this.subscriptions.add(
-      this.store
-        .select(selectDataProcessing)
+      this.dataProcessing$
         .pipe(filterNullish(), combineLatestWith(this.store.select(selectDataProcessingHasModifyPermissions)))
         .subscribe(([dpr, hasModifyPermission]) => {
           const agreementConcludedValue = mapToYesNoIrrelevantEnum(dpr.general.isAgreementConcluded);

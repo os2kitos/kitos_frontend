@@ -47,6 +47,7 @@ import {
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 import { ItContractFrontpageComponentStore } from './it-contract-frontpage.component-store';
+import { toBulletPoints } from 'src/app/shared/helpers/string.helpers';
 
 @Component({
   selector: 'app-it-contract-frontpage',
@@ -85,17 +86,13 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
         text += $localize`Følgende gør kontrakten ugyldig:`;
       }
 
-      if (validity?.validationErrors?.includes('StartDateNotPassed')) {
-        text += `\n• ${this.notYetValidText}`;
-      }
-      if (validity?.validationErrors?.includes('EndDatePassed')) {
-        text += `\n• ${this.expiredText}`;
-      }
-      if (validity?.validationErrors?.includes('TerminationPeriodExceeded')) {
-        text += `\n• ${this.terminationPeriodExceededText}`;
-      }
-
-      return text;
+      const validationErrors = validity?.validationErrors ?? [];
+      const errorMessages = [
+        validationErrors.includes('StartDateNotPassed') ? this.notYetValidText : undefined,
+        validationErrors.includes('EndDatePassed') ? this.expiredText : undefined,
+        validationErrors.includes('TerminationPeriodExceeded') ? this.terminationPeriodExceededText : undefined,
+      ];
+      return text + "\n" + toBulletPoints(errorMessages);
     })
   );
 

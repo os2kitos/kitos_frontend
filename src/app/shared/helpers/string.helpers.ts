@@ -5,3 +5,10 @@ export function isEmptyOrUndefined(s: string | undefined) {
 export function entityWithUnavailableName(name: string, available: boolean): string {
   return available ? name : $localize`${name} (Ikke tilgængeligt)`;
 }
+
+export function toBulletPoints(s: Array<string | undefined>): string {
+  return s
+    .filter((x) => x)
+    .map((x) => `• ${x}`)
+    .join('\n');
+}

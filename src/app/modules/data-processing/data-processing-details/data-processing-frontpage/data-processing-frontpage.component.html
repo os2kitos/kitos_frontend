@@ -1,8 +1,12 @@
 <app-card>
-  <app-card-header
-    title="Databehandling information"
-    i18n-title
-    helpTextKey="data-processing.edit-registration.main"
+  <app-card-header title="Databehandling information" i18n-title helpTextKey="data-processing.edit-registration.main"
+    ><app-status-chip
+      *ngIf="statusEnabled$ | async"
+      type="data-processing-registration"
+      [title]="dprInactiveMessage$ | async"
+      [value]="isValid$ | async"
+    >
+    </app-status-chip
   ></app-card-header>
 
   <app-form-grid [formGroup]="frontpageFormGroup">
@@ -54,7 +58,7 @@
       formName="lastChangedBy"
     >
     </app-textbox>
-    <app-textbox
+    <app-datepicker
       *ngIf="lastChangedAtEnabled$ | async"
       text="Sidst redigeret: Dato"
       i18n-text
@@ -62,7 +66,7 @@
       [formGroup]="frontpageFormGroup"
       formName="lastChangedAt"
     >
-    </app-textbox>
+    </app-datepicker>
     <ng-container *ngIf="agreementConcludedEnabled$ | async">
       <app-dropdown
         text="Databehandleraftale er indgået"

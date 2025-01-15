@@ -6441,6 +6441,14 @@
         <source>&gt;100</source>
         <target state="new">&gt;100</target>
       </trans-unit>
+      <trans-unit id="4766365470163586672" datatype="html">
+        <source>Den markerede kontrakt er inaktiv</source>
+        <target state="new">Den markerede kontrakt er inaktiv</target>
+      </trans-unit>
+      <trans-unit id="4440751846878487949" datatype="html">
+        <source>Følgende gør databehandlingen inaktiv: </source>
+        <target state="new">Følgende gør databehandlingen inaktiv: </target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

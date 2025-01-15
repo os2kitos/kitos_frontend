@@ -43,7 +43,7 @@ describe('it-system-usage', () => {
       rowElement
         .parentsUntil('tr')
         .parent()
-        .contains(row.valid ? 'Aktiv' : 'Ikke aktiv');
+        .contains(row.valid ? 'Aktiv' : 'Inaktiv');
     });
   });
 });

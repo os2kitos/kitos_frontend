@@ -6,14 +6,13 @@ import { EntityStatusTexts } from '../models/status/entity-status-texts.model';
   providedIn: 'root',
 })
 export class EntityStatusTextsService {
-
   private ACTIVE_TEXT = $localize`Aktiv`;
   private INACTIVE_TEXT = $localize`Ikke aktiv`;
 
   private readonly typeToTextMap: Record<RegistrationEntityTypes, EntityStatusTexts> = {
     'data-processing-registration': {
       trueString: this.ACTIVE_TEXT,
-      falseString: this.INACTIVE_TEXT,
+      falseString: $localize`Inaktiv`,
     },
     'it-system': {
       trueString: $localize`Tilgængeligt`,
@@ -31,7 +30,7 @@ export class EntityStatusTextsService {
       trueString: $localize`Gyldig`,
       falseString: $localize`Ikke gyldig`,
     },
-    'organization': {
+    organization: {
       trueString: this.ACTIVE_TEXT,
       falseString: this.INACTIVE_TEXT,
     },

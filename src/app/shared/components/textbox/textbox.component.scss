@@ -21,6 +21,7 @@ app-trashcan-icon:hover {
   cursor: pointer;
 }
 
+@include mat-textbox-overflow-adjustment;
 :host ::ng-deep mat-form-field {
   @include mat-form-sizes;
   @include mat-textbox-input-adjustment;
@@ -28,5 +29,5 @@ app-trashcan-icon:hover {
 }
 
 mat-form-field {
-  @include input-background-white
+  @include input-background-white;
 }
