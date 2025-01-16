@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { first, Observable } from 'rxjs';
+import { STRING_FIELD_MAX_LENGTH } from 'src/app/shared/constants/constants';
 import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
 
 @Component({
@@ -15,9 +16,12 @@ export class CreateSubunitDialogComponent {
   @Input() parentUnitName$!: Observable<string>;
 
   public createForm = new FormGroup({
-    name: new FormControl<string | undefined>(undefined, Validators.required),
+    name: new FormControl<string | undefined>(undefined, [
+      Validators.required,
+      Validators.maxLength(STRING_FIELD_MAX_LENGTH),
+    ]),
     ean: new FormControl<number | undefined>(undefined),
-    localId: new FormControl<string | undefined>(undefined),
+    localId: new FormControl<string | undefined>(undefined, Validators.maxLength(STRING_FIELD_MAX_LENGTH)),
   });
 
   constructor(private dialogRef: MatDialogRef<CreateSubunitDialogComponent>, private store: Store) {}

@@ -13,6 +13,7 @@ import {
 } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
+import { STRING_FIELD_MAX_LENGTH } from 'src/app/shared/constants/constants';
 import { AppPath } from 'src/app/shared/enums/app-path';
 import {
   PaymentRegistrationModel,
@@ -179,9 +180,12 @@ export class EditOrganizationUnitDialogComponent extends BaseComponent implement
 
   public baseInfoForm = new FormGroup({
     parentUnitControl: new FormControl<TreeNodeModel | undefined>(undefined),
-    nameControl: new FormControl<string | undefined>(undefined, Validators.required),
+    nameControl: new FormControl<string | undefined>(undefined, [
+      Validators.required,
+      Validators.maxLength(STRING_FIELD_MAX_LENGTH),
+    ]),
     eanControl: new FormControl<number | undefined>(undefined),
-    idControl: new FormControl<string | undefined>(undefined),
+    idControl: new FormControl<string | undefined>(undefined, Validators.maxLength(STRING_FIELD_MAX_LENGTH)),
   });
 
   public selectedTransferUnit: TreeNodeModel | undefined = undefined;
