@@ -91,7 +91,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     private store: Store,
     private localStorage: StatePersistingService,
     private gridUIConfigService: GridUIConfigService,
-    private dialogOpenerService: DialogOpenerService,
+    private dialogOpenerService: DialogOpenerService
   ) {
     super();
     this.allData = this.allData.bind(this);
@@ -250,7 +250,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   private excelExport(): void {
     if (this.grid) {
       this.grid.saveAsExcel();
-      this.store.dispatch(GridExportActions.exportCompleted({ all: false }, this.entityType));
+      this.store.dispatch(GridExportActions.exportCompleted({ ...this.state, all: false }, this.entityType));
     }
   }
 
@@ -263,7 +263,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
         this.data = data;
       })
     );
-    const processedData = process(this.data.data, { ...this.state, skip: 0, take: this.data.total });
+    const processedData = process(this.data.data, { skip: 0, take: this.data.total });
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const formattedData = processedData.data.map((item: any) => {
       const transformedItem = { ...item };
