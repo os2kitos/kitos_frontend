@@ -1,7 +1,7 @@
 <kendo-grid
   [data]="data$ | async"
   [loading]="loading || false"
-  [pageSize]="state?.take"
+  [pageSize]="virtualPageSize"
   [skip]="state?.skip"
   [filter]="state?.filter"
   [sort]="state?.sort"
@@ -17,6 +17,8 @@
   (cellClick)="onCellClick($event)"
   (columnResize)="onResizeChange($event, columns)"
   (excelExport)="onExcelExport($event)"
+  [rowHeight]="gridRowHeight"
+  scrollable="virtual"
   style="width: 100%"
   *ngIf="columns$ | async as columns"
 >
@@ -28,11 +30,13 @@
         [title]="column.title"
         [sortable]="column.sortable ?? true"
         [filter]="column.filter ?? 'text'"
-        [width]="column.width !== undefined
-          ? column.width
-          : column.style === 'date'
+        [width]="
+          column.width !== undefined
+            ? column.width
+            : column.style === 'date'
             ? defaultDateColumnWidth
-            : defaultColumnWidth"
+            : defaultColumnWidth
+        "
         [sticky]="column.isSticky ?? false"
         [minResizableWidth]="
           column.minResizableWidth !== undefined
@@ -40,8 +44,8 @@
             : column.filter === 'date'
             ? defaultMinimumDateColumnWidth
             : column.style === 'primary'
-              ? defaultPrimaryColumnMinimumWidth
-              : defaultMinimumColumnWidth
+            ? defaultPrimaryColumnMinimumWidth
+            : defaultMinimumColumnWidth
         "
         headerClass="mygrid-header-cell"
       >
@@ -137,24 +141,18 @@
           kendoGridCellTemplate
           let-dataItem
         >
-          <app-paragraph [cropOnOverflow]="true">{{ dataItem | searchProperty: column.field }}</app-paragraph>
+          <app-paragraph [cropOnOverflow]="true">{{ dataItem | searchProperty : column.field }}</app-paragraph>
         </ng-template>
-        <ng-template
-          *ngIf="column.style === 'integer-with-thousands-separator'"
-          kendoGridCellTemplate
-          let-dataItem
-        >
-          <app-paragraph [cropOnOverflow]="true">{{ (dataItem | searchProperty: column.field) | number:'1.0-0' }}</app-paragraph>
+        <ng-template *ngIf="column.style === 'integer-with-thousands-separator'" kendoGridCellTemplate let-dataItem>
+          <app-paragraph [cropOnOverflow]="true">{{
+            dataItem | searchProperty : column.field | number : "1.0-0"
+          }}</app-paragraph>
         </ng-template>
-        <ng-template
-          *ngIf="column.style === 'default-wrap'"
-          kendoGridCellTemplate
-          let-dataItem
-        >
+        <ng-template *ngIf="column.style === 'default-wrap'" kendoGridCellTemplate let-dataItem>
           <app-paragraph [wrapOnOverflow]="true">{{ searchProperty(dataItem, column.field) }}</app-paragraph>
         </ng-template>
         <ng-template *ngIf="column.style === 'primary'" kendoGridCellTemplate let-dataItem>
-          <div class="paragraph wrap-on-overflow bold-font">{{ dataItem | searchProperty: column.field }}</div>
+          <div class="paragraph wrap-on-overflow bold-font">{{ dataItem | searchProperty : column.field }}</div>
         </ng-template>
         <ng-template
           *ngIf="column.style === 'chip' || column.style === 'reverse-chip'"
@@ -164,7 +162,7 @@
           <div class="items-center-container overflow-hidden-container" #chip>
             <app-status-chip
               [type]="column.entityType"
-              [value]="dataItem | searchProperty: column.field"
+              [value]="dataItem | searchProperty : column.field"
               [valueDisplayType]="column.booleanValueDisplay"
               [elementLength]="chip.offsetWidth"
               [reverseValues]="column.style === 'reverse-chip'"
@@ -175,7 +173,7 @@
         <ng-template *ngIf="column.style === 'boolean'" kendoGridCellTemplate let-dataItem>
           <div class="items-center-container">
             <app-boolean-circle
-              [value]="(dataItem | searchProperty: column.field) === true"
+              [value]="(dataItem | searchProperty : column.field) === true"
               [positiveTooltipText]="column.tooltipPositiveText ?? ''"
               [negativeTooltipText]="column.tooltipNegativeText ?? ''"
             >
@@ -184,17 +182,17 @@
         </ng-template>
 
         <ng-template *ngIf="column.style === 'date'" kendoGridCellTemplate let-dataItem>
-          <app-paragraph>{{ dataItem | searchProperty: column.field | appDate }}</app-paragraph>
+          <app-paragraph>{{ dataItem | searchProperty : column.field | appDate }}</app-paragraph>
         </ng-template>
 
         <ng-template *ngIf="column.style === 'enum'" kendoGridCellTemplate let-dataItem>
-          <app-paragraph>{{ (dataItem | searchProperty: column.field)?.name }}</app-paragraph>
+          <app-paragraph>{{ (dataItem | searchProperty : column.field)?.name }}</app-paragraph>
         </ng-template>
 
         <ng-template *ngIf="column.style === 'link'" kendoGridCellTemplate let-dataItem>
           <app-paragraph [cropOnOverflow]="true">
             <app-external-page-link
-              [url]="dataItem | searchProperty: column.field"
+              [url]="dataItem | searchProperty : column.field"
               linkFontSize="small"
             ></app-external-page-link>
           </app-paragraph>
@@ -204,7 +202,7 @@
           <app-paragraph [cropOnOverflow]="true">
             <app-external-page-link
               [url]="searchProperty(dataItem, column.idField ?? '')"
-              [title]="dataItem | searchProperty: column.field"
+              [title]="dataItem | searchProperty : column.field"
               linkFontSize="small"
             ></app-external-page-link>
           </app-paragraph>
@@ -218,7 +216,7 @@
               [itemType]="column.entityType"
               [itemUuid]="itemUuid"
               [subpagePath]="column.extraData"
-              >{{ dataItem | searchProperty: column.field }}</app-details-page-link
+              >{{ dataItem | searchProperty : column.field }}</app-details-page-link
             >
           </app-paragraph>
         </ng-template>
@@ -228,7 +226,7 @@
             <ng-container *ngIf="column.idField">
               <app-checkbox
                 *ngIf="entityType !== 'it-system'"
-                [value]="dataItem | searchProperty: column.field"
+                [value]="dataItem | searchProperty : column.field"
                 [disabled]="
                   column.permissionsField ? searchProperty(dataItem, column.permissionsField) !== true : false
                 "
@@ -236,7 +234,7 @@
               ></app-checkbox>
               <app-usage-proxy-checkbox
                 *ngIf="entityType === 'it-system'"
-                [checked]="dataItem | searchProperty: column.field"
+                [checked]="dataItem | searchProperty : column.field"
                 [disabled]="
                   column.permissionsField
                     ? searchProperty(dataItem, column.permissionsField) !== true || !createPermission
@@ -254,7 +252,7 @@
             *ngIf="column.dataField"
             [type]="column.entityType"
             [name]="searchProperty(dataItem, column.dataField)"
-            [usingOrganizations]="dataItem | searchProperty: column.field"
+            [usingOrganizations]="dataItem | searchProperty : column.field"
             [rowEntityIdentifier]="searchProperty(dataItem, column.idField ?? 'Uuid')"
           >
           </app-usage-link>
@@ -265,13 +263,12 @@
             <ng-container *ngIf="column.dataField">
               <div>
                 <ng-container *ngFor="let item of searchProperty(dataItem, column.dataField) as data; let i = index">
-                <app-details-page-link linkFontSize="small" [itemType]="column.entityType" [itemUuid]="item.id">{{
-                  item.value
-                }}</app-details-page-link
-                >{{ i < data.length - 1 ? ", " : "" }}
-              </ng-container>
+                  <app-details-page-link linkFontSize="small" [itemType]="column.entityType" [itemUuid]="item.id">{{
+                    item.value
+                  }}</app-details-page-link
+                  >{{ i < data.length - 1 ? ", " : "" }}
+                </ng-container>
               </div>
-
             </ng-container>
           </app-paragraph>
         </ng-template>
@@ -331,11 +328,10 @@
     </div>
   </ng-template>
   <ng-template kendoGridNoRecordsTemplate>
-      <div class="sticky-empty-state">
-    <img src="assets/img/empty-system.svg" />
-    <p i18n>Din søgning gav intet resultat</p>
-</div>
-
+    <div class="sticky-empty-state">
+      <img src="assets/img/empty-system.svg" />
+      <p i18n>Din søgning gav intet resultat</p>
+    </div>
   </ng-template>
 
   <kendo-grid-excel [fileName]="getExportName()" [fetchData]="allData" [filterable]="true">

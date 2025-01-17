@@ -1,21 +1,21 @@
 import { createEntityAdapter } from '@ngrx/entity';
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { DATA_PROCESSING_ROLES_SECTION_NAME } from 'src/app/shared/constants/persistent-state-constants';
+import { newCache, resetCache } from 'src/app/shared/models/cache-item.model';
 import { DataProcessingRegistration } from 'src/app/shared/models/data-processing/data-processing.model';
-import { defaultGridState } from 'src/app/shared/models/grid-state.model';
+import { defaultODataGridState } from 'src/app/shared/models/grid-state.model';
+import { GlobalOptionTypeActions } from '../global-admin/global-option-types/actions';
 import { roleDtoToRoleGridColumns } from '../helpers/role-column-helpers';
+import { LocalOptionTypeActions } from '../local-admin/local-option-types/actions';
 import { DataProcessingActions } from './actions';
 import { DataProcessingState } from './state';
-import { newCache, resetCache } from 'src/app/shared/models/cache-item.model';
-import { GlobalOptionTypeActions } from '../global-admin/global-option-types/actions';
-import { LocalOptionTypeActions } from '../local-admin/local-option-types/actions';
 
 export const dataProcessingAdapter = createEntityAdapter<DataProcessingRegistration>();
 
 export const dataProcessingInitialState: DataProcessingState = dataProcessingAdapter.getInitialState({
   total: 0,
   isLoadingDataProcessingsQuery: false,
-  gridState: defaultGridState,
+  gridState: defaultODataGridState,
   gridColumns: [],
   gridRoleColumns: [],
   overviewRoles: resetCache(),

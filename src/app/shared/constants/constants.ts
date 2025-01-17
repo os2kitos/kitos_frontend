@@ -1,4 +1,3 @@
-
 export const XSRFCOOKIE = 'XSRF-TOKEN';
 export const XSRFTOKEN = 'X-XSRF-TOKEN';
 
@@ -46,3 +45,5 @@ export const DEFAULT_DATE_COLUMN_WIDTH = 220;
 export const DEFAULT_DATE_COLUMN_MINIMUM_WIDTH = 200;
 
 export const STRING_FIELD_MAX_LENGTH = 100;
+
+export const GRID_ROW_HEIGHT = 63;

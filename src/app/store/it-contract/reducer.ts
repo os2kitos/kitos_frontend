@@ -2,20 +2,20 @@ import { createEntityAdapter } from '@ngrx/entity';
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { CONTRACT_ROLES_SECTION_NAME } from 'src/app/shared/constants/persistent-state-constants';
 import { newCache, resetCache } from 'src/app/shared/models/cache-item.model';
-import { defaultGridState } from 'src/app/shared/models/grid-state.model';
+import { defaultODataGridState } from 'src/app/shared/models/grid-state.model';
 import { ITContract } from 'src/app/shared/models/it-contract/it-contract.model';
+import { GlobalOptionTypeActions } from '../global-admin/global-option-types/actions';
 import { roleDtoToRoleGridColumns } from '../helpers/role-column-helpers';
+import { LocalOptionTypeActions } from '../local-admin/local-option-types/actions';
 import { ITContractActions } from './actions';
 import { ITContractState } from './state';
-import { GlobalOptionTypeActions } from '../global-admin/global-option-types/actions';
-import { LocalOptionTypeActions } from '../local-admin/local-option-types/actions';
 
 export const itContactAdapter = createEntityAdapter<ITContract>();
 
 export const itContactInitialState: ITContractState = itContactAdapter.getInitialState({
   total: 0,
   isLoadingContractsQuery: false,
-  gridState: defaultGridState,
+  gridState: defaultODataGridState,
   gridColumns: [],
   gridRoleColumns: [],
   contractRoles: resetCache(),

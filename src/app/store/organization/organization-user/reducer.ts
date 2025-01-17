@@ -1,6 +1,6 @@
 import { createEntityAdapter, Update } from '@ngrx/entity';
 import { createFeature, createReducer, on } from '@ngrx/store';
-import { defaultGridState } from 'src/app/shared/models/grid-state.model';
+import { defaultODataGridState } from 'src/app/shared/models/grid-state.model';
 import { ODataOrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
 import { DataProcessingActions } from '../../data-processing/actions';
 import { filterRightFromRights, updateStateOfUserRights } from '../../helpers/right-helper';
@@ -17,7 +17,7 @@ export const organizationUserAdapter = createEntityAdapter<ODataOrganizationUser
 export const organizationUserInitialState: OrganizationUserState = organizationUserAdapter.getInitialState({
   total: 0,
   isLoadingUsersQuery: false,
-  gridState: defaultGridState,
+  gridState: defaultODataGridState,
   gridColumns: [],
 
   permissions: null,

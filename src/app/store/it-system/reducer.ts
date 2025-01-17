@@ -1,17 +1,17 @@
 import { createEntityAdapter } from '@ngrx/entity';
 import { createFeature, createReducer, on } from '@ngrx/store';
-import { defaultGridState } from 'src/app/shared/models/grid-state.model';
+import { defaultODataGridState } from 'src/app/shared/models/grid-state.model';
 import { ITSystem } from 'src/app/shared/models/it-system/it-system.model';
+import { ITSystemUsageActions } from '../it-system-usage/actions';
 import { ITSystemActions } from './actions';
 import { ITSystemState } from './state';
-import { ITSystemUsageActions } from '../it-system-usage/actions';
 
 export const itSystemAdapter = createEntityAdapter<ITSystem>();
 
 export const itSystemInitialState: ITSystemState = itSystemAdapter.getInitialState({
   total: 0,
   isLoadingSystemsQuery: false,
-  gridState: defaultGridState,
+  gridState: defaultODataGridState,
   gridColumns: [],
 
   loading: undefined,

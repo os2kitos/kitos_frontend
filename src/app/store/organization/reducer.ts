@@ -1,6 +1,6 @@
 import { createEntityAdapter } from '@ngrx/entity';
 import { createFeature, createReducer, on } from '@ngrx/store';
-import { defaultGridState } from 'src/app/shared/models/grid-state.model';
+import { defaultODataGridState } from 'src/app/shared/models/grid-state.model';
 import { OrganizationOData } from 'src/app/shared/models/organization/organization-odata.model';
 import { OrganizationActions } from './actions';
 import { OrganizationState } from './state';
@@ -10,7 +10,7 @@ export const organizationAdapter = createEntityAdapter<OrganizationOData>();
 export const organizationInitialState: OrganizationState = organizationAdapter.getInitialState({
   total: 0,
   isLoadingUsersQuery: false,
-  gridState: defaultGridState,
+  gridState: defaultODataGridState,
   gridColumns: [],
 
   organizationMasterData: null,

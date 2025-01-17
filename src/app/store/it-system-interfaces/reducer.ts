@@ -1,7 +1,7 @@
 import { createEntityAdapter } from '@ngrx/entity';
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { APIItInterfaceResponseDTO } from 'src/app/api/v2';
-import { defaultGridState } from 'src/app/shared/models/grid-state.model';
+import { defaultODataGridState } from 'src/app/shared/models/grid-state.model';
 import { ITInterface } from 'src/app/shared/models/it-interface/it-interface.model';
 import { ITInterfaceActions } from './actions';
 import { ITInterfaceState } from './state';
@@ -11,7 +11,7 @@ export const itInterfaceAdapter = createEntityAdapter<ITInterface>();
 export const itInterfaceInitialState: ITInterfaceState = itInterfaceAdapter.getInitialState({
   total: 0,
   isLoadingInterfacesQuery: false,
-  gridState: defaultGridState,
+  gridState: defaultODataGridState,
   gridColumns: [],
 
   loading: undefined,

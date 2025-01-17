@@ -20,7 +20,7 @@ import {
 } from '../../constants/constants';
 import { includedColumnInExport } from '../../helpers/grid-export.helper';
 import { GridColumn } from '../../models/grid-column.model';
-import { GridState, defaultGridState } from '../../models/grid-state.model';
+import { GridState, defaultLocalGridState } from '../../models/grid-state.model';
 import { BooleanChange, RowReorderingEvent } from '../../models/grid/grid-events.model';
 
 @Component({
@@ -47,7 +47,7 @@ export class LocalGridComponent<T> extends BaseComponent implements OnInit {
   @Output() checkboxChange = new EventEmitter<BooleanChange<T>>();
   @Output() rowReordering = new EventEmitter<RowReorderingEvent<T>>();
 
-  public state = defaultGridState;
+  public state = defaultLocalGridState;
 
   public readonly defaultColumnWidth = DEFAULT_COLUMN_WIDTH;
   public readonly defaultMinimumColumnWidth = DEFAULT_COLUMN_MINIMUM_WIDTH;

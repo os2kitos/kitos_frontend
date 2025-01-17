@@ -1,21 +1,21 @@
 import { createEntityAdapter } from '@ngrx/entity';
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { SYSTEMS_ROLES_SECTION_NAME } from 'src/app/shared/constants/persistent-state-constants';
-import { defaultGridState } from 'src/app/shared/models/grid-state.model';
+import { newCache, resetCache } from 'src/app/shared/models/cache-item.model';
+import { defaultODataGridState } from 'src/app/shared/models/grid-state.model';
 import { ITSystemUsage } from 'src/app/shared/models/it-system-usage/it-system-usage.model';
+import { GlobalOptionTypeActions } from '../global-admin/global-option-types/actions';
 import { roleDtoToRoleGridColumns } from '../helpers/role-column-helpers';
+import { LocalOptionTypeActions } from '../local-admin/local-option-types/actions';
 import { ITSystemUsageActions } from './actions';
 import { ITSystemUsageState } from './state';
-import { newCache, resetCache } from 'src/app/shared/models/cache-item.model';
-import { GlobalOptionTypeActions } from '../global-admin/global-option-types/actions';
-import { LocalOptionTypeActions } from '../local-admin/local-option-types/actions';
 
 export const itSystemUsageAdapter = createEntityAdapter<ITSystemUsage>();
 
 export const itSystemUsageInitialState: ITSystemUsageState = itSystemUsageAdapter.getInitialState({
   total: 0,
   isLoadingSystemUsagesQuery: false,
-  gridState: defaultGridState,
+  gridState: defaultODataGridState,
   gridColumns: [],
   gridRoleColumns: [],
   systemRoles: resetCache(),
