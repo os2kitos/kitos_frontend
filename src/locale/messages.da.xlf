@@ -6357,10 +6357,6 @@
         <source>Notifikationer</source>
         <target state="new">Notifikationer</target>
       </trans-unit>
-      <trans-unit id="5550616292634600838" datatype="html">
-        <source>Advarsler</source>
-        <target state="new">Advarsler</target>
-      </trans-unit>
       <trans-unit id="2513003037040133293" datatype="html">
         <source>Modtager</source>
         <target state="new">Modtager</target>
@@ -6448,6 +6444,14 @@
       <trans-unit id="4440751846878487949" datatype="html">
         <source>Følgende gør databehandlingen inaktiv: </source>
         <target state="new">Følgende gør databehandlingen inaktiv: </target>
+      </trans-unit>
+      <trans-unit id="7018355465405167274" datatype="html">
+        <source>Kommende advis</source>
+        <target state="new">Kommende advis</target>
+      </trans-unit>
+      <trans-unit id="6454412951656065343" datatype="html">
+        <source>Ulæste advarsler</source>
+        <target state="new">Ulæste advarsler</target>
       </trans-unit>
     </body>
   </file>

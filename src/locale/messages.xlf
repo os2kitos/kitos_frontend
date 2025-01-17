@@ -4825,9 +4825,6 @@
       <trans-unit id="4491906435283548133" datatype="html">
         <source>Lokale tilknyttede opgaver</source>
       </trans-unit>
-      <trans-unit id="5550616292634600838" datatype="html">
-        <source>Advarsler</source>
-      </trans-unit>
       <trans-unit id="9117861173318709156" datatype="html">
         <source>Notifikationer</source>
       </trans-unit>
@@ -4896,6 +4893,12 @@
       </trans-unit>
       <trans-unit id="4766365470163586672" datatype="html">
         <source>Den markerede kontrakt er inaktiv</source>
+      </trans-unit>
+      <trans-unit id="6454412951656065343" datatype="html">
+        <source>Ulæste advarsler</source>
+      </trans-unit>
+      <trans-unit id="7018355465405167274" datatype="html">
+        <source>Kommende advis</source>
       </trans-unit>
     </body>
   </file>

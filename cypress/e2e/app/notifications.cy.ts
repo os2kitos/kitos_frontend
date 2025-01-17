@@ -29,7 +29,7 @@ describe('Notifications', () => {
 
   it('Can see alerts', () => {
     cy.setup(true, 'notifications', undefined, false);
-    cy.contains('Advarsler').click();
+    cy.getByDataCy('alerts-segment').click();
 
     cy.contains('Ikke navngivet').should('exist');
     cy.contains('12-12-2024').should('exist');
@@ -38,7 +38,7 @@ describe('Notifications', () => {
 
   it('Can delete alert', () => {
     cy.setup(true, 'notifications', undefined, false);
-    cy.contains('Advarsler').click();
+    cy.getByDataCy('alerts-segment').click();
 
     cy.intercept('DELETE', 'api/v2/internal/alerts/*', { statusCode: 204 }).as('deleteAlert');
 

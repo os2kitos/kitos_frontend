@@ -4,6 +4,7 @@
     disableRipple="true"
     [checked]="button.value === selected"
     (change)="selectedChange.emit(button.value)"
+    [attr.data-cy]="button.dataCy"
     >{{ button.text }}</mat-button-toggle
   >
 </mat-button-toggle-group>

@@ -20,11 +20,13 @@ export class NotificationsPageComponent {
   public readonly segmentOptions: SegmentButtonOption<NotificationSegmentType>[] = [
     {
       value: NotificationSegmentType.Advis,
-      text: $localize`Advis`,
+      text: $localize`Kommende advis`,
+      dataCy: 'advis-segment',
     },
     {
       value: NotificationSegmentType.Alerts,
-      text: $localize`Advarsler`,
+      text: $localize`Ulæste advarsler`,
+      dataCy: 'alerts-segment',
     },
   ];
 }
