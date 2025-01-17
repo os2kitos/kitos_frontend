@@ -48,6 +48,7 @@ export class ItSystemInterfacesTableComponentStore extends ComponentStore<State>
             usedInOrganizationUuid: organizationUuid,
             includeDeactivated: true,
             orderByProperty: 'Name',
+            availableInOrganizationUuid: organizationUuid,
           })
           .pipe(
             tapResponse(

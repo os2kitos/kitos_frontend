@@ -53,6 +53,9 @@ export interface APIItSystemUsageOverviewReadModel {
     itSystemBusinessTypeName?: string;
     itSystemRightsHolderId?: number;
     itSystemRightsHolderName?: string;
+    itSystemCategoriesId?: number;
+    itSystemCategoriesUuid?: string;
+    itSystemCategoriesName?: string;
     itSystemKLEIdsAsCsv?: string;
     itSystemKLENamesAsCsv?: string;
     itSystemTaskRefs?: Array<APIItSystemUsageOverviewTaskRefReadModel>;
@@ -87,6 +90,7 @@ export interface APIItSystemUsageOverviewReadModel {
     dataProcessingRegistrations?: Array<APIItSystemUsageOverviewDataProcessingRegistrationReadModel>;
     generalPurpose?: string;
     hostedAt?: APIItSystemUsageOverviewReadModel.HostedAtEnum;
+    userCount?: APIItSystemUsageOverviewReadModel.UserCountEnum;
     dependsOnInterfacesNamesAsCsv?: string;
     dependsOnInterfaces?: Array<APIItSystemUsageOverviewInterfaceReadModel>;
     incomingRelatedItSystemUsagesNamesAsCsv?: string;
@@ -119,6 +123,14 @@ export namespace APIItSystemUsageOverviewReadModel {
         Undecided: 'UNDECIDED' as HostedAtEnum,
         Onpremise: 'ONPREMISE' as HostedAtEnum,
         External: 'EXTERNAL' as HostedAtEnum
+    };
+    export type UserCountEnum = 'BELOWTEN' | 'TENTOFIFTY' | 'FIFTYTOHUNDRED' | 'HUNDREDPLUS' | 'UNDECIDED';
+    export const UserCountEnum = {
+        Belowten: 'BELOWTEN' as UserCountEnum,
+        Tentofifty: 'TENTOFIFTY' as UserCountEnum,
+        Fiftytohundred: 'FIFTYTOHUNDRED' as UserCountEnum,
+        Hundredplus: 'HUNDREDPLUS' as UserCountEnum,
+        Undecided: 'UNDECIDED' as UserCountEnum
     };
 }
 

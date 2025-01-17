@@ -29,7 +29,7 @@ export interface GetSingleItContractRightGetAccessRightsRequestParams {
     organizationId: number;
 }
 
-export interface GetSingleItContractRightGetRightsByIdRequestParams {
+export interface GetSingleItContractRightGetRightsRequestParams {
     /** The id of the object */
     id: number;
 }
@@ -179,13 +179,13 @@ export class APIV1ItContractRightINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItContractRightGetRightsById(requestParameters: GetSingleItContractRightGetRightsByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public getSingleItContractRightGetRightsById(requestParameters: GetSingleItContractRightGetRightsByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public getSingleItContractRightGetRightsById(requestParameters: GetSingleItContractRightGetRightsByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public getSingleItContractRightGetRightsById(requestParameters: GetSingleItContractRightGetRightsByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleItContractRightGetRights(requestParameters: GetSingleItContractRightGetRightsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public getSingleItContractRightGetRights(requestParameters: GetSingleItContractRightGetRightsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleItContractRightGetRights(requestParameters: GetSingleItContractRightGetRightsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleItContractRightGetRights(requestParameters: GetSingleItContractRightGetRightsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling getSingleItContractRightGetRightsById.');
+            throw new Error('Required parameter id was null or undefined when calling getSingleItContractRightGetRights.');
         }
 
         let localVarHeaders = this.defaultHeaders;
