@@ -35,7 +35,7 @@
         ><app-trashcan-icon></app-trashcan-icon> Slet bruger
       </app-button>
       <app-button buttonStyle="secondary" (buttonClick)="onEditUser(user)" i18n> Rediger </app-button>
-      <app-button buttonStyle="primary" (buttonClick)="onSendAdvis(user)" i18n> Send advis </app-button>
+      <app-button buttonStyle="primary" (buttonClick)="onSendAdvis(user)" i18n [disabled]="($sendingNotification | async) === true"> Send advis </app-button>
     </app-dialog-actions>
   </app-scrollbar-dialog>
 </ng-container>
