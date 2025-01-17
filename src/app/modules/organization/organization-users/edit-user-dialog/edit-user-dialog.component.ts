@@ -46,7 +46,6 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
     hasApiAccess: new FormControl<boolean | undefined>(undefined),
     hasRightsHolderAccess: new FormControl<boolean | undefined>(undefined),
     hasStakeholderAccess: new FormControl<boolean | undefined>(undefined),
-    sendAdvis: new FormControl<boolean | undefined>(undefined),
   });
 
   private selectedRoles: APIUserResponseDTO.RolesEnum[] = [];
@@ -71,7 +70,6 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
       hasApiAccess: this.user.HasApiAccess,
       hasRightsHolderAccess: this.user.HasRightsHolderAccess,
       hasStakeholderAccess: this.user.HasStakeHolderAccess,
-      sendAdvis: false,
     });
 
     this.componentStore.setPreviousEmail(this.user.Email);
@@ -166,7 +164,6 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
       hasApiAccess: this.requestValue(user.HasApiAccess, formValue.hasApiAccess),
       hasStakeHolderAccess: this.requestValue(user.HasStakeHolderAccess, formValue.hasStakeholderAccess),
       roles: this.getRoleRequest(),
-      sendMail: formValue.sendAdvis === true,
     };
     return request;
   }

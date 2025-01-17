@@ -1,12 +1,20 @@
 <app-overview-header>
   <h3 i18n>IT Systemkatalog</h3>
-  <app-grid-options-button
-    entityType="it-system"
-    [hasResetButton]="true"
-    [createPermission$]="hasCreatePermission$"
-  ></app-grid-options-button>
-  <app-export-menu-button [exportMethod]="onExcelExport"></app-export-menu-button>
-  <app-hide-show-button [columns]="gridColumns$ | async" entityType="it-system"></app-hide-show-button>
+
+  <ng-container *ngIf="(hasCreatePermission$ | async) !== undefined">
+    <app-grid-options-button
+      entityType="it-system"
+      [hasResetButton]="true"
+      [createPermission$]="hasCreatePermission$"
+    ></app-grid-options-button>
+    <app-export-menu-button [exportMethod]="onExcelExport"></app-export-menu-button>
+    <app-hide-show-button
+      [columns]="gridColumns$ | async"
+      entityType="it-system"
+      [isSecondary]="(hasCreatePermission$ | async) ?? false"
+    ></app-hide-show-button>
+    <app-create-entity-button entityType="it-system" *ngIf="hasCreatePermission$ | async"></app-create-entity-button>
+  </ng-container>
 </app-overview-header>
 
 <app-grid

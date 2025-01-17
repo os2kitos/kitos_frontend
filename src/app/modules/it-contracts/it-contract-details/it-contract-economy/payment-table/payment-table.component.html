@@ -1,43 +1,57 @@
 <app-card>
   <app-card-header [title]="title" i18n-title [helpTextKey]="helpTextKey"></app-card-header>
   <app-standard-vertical-content-grid>
-    <app-native-table *ngIf="anyPayments$ | async" class="payment-table" [isDisplayBlock]="true">
+    <app-native-table *ngIf="anyPayments$ | async" tableLayout="fixed" [includeDividers]="true">
       <thead>
-        <th i18n class="sticky-column-left">Organisationsenhed</th>
+        <th i18n width="20%">Organisationsenhed</th>
         <th i18n>EAN</th>
-        <th i18n>Anskaffelse</th>
-        <th i18n>Drift/år</th>
-        <th i18n>Andet</th>
-        <th i18n>Kontering</th>
-        <th i18n>Dato</th>
+        <th i18n width="7%">Anskaffelse</th>
+        <th i18n width="7%">Drift/år</th>
+        <th i18n width="7%">Andet</th>
+        <th i18n width="7%">Kontering</th>
+        <th i18n width="6%">Dato</th>
         <th i18n>Note</th>
-        <th i18n>Audit</th>
+        <th i18n width="10%">Audit</th>
       </thead>
       <tbody>
         <tr *ngFor="let payment of payments$ | async">
-          <td class="sticky-column-left">
-            <app-paragraph paragraphSize="small">{{ payment.organizationUnit?.name }}</app-paragraph>
+          <td>
+            <app-paragraph paragraphSize="small" [cropOnOverflow]="true">{{
+              payment.organizationUnit?.name
+            }}</app-paragraph>
           </td>
           <td>
-            <app-paragraph paragraphSize="small">{{ payment.organizationUnit?.ean ?? nullPlaceholder }}</app-paragraph>
+            <app-paragraph paragraphSize="small" [cropOnOverflow]="true">{{
+              payment.organizationUnit?.ean ?? nullPlaceholder
+            }}</app-paragraph>
           </td>
           <td>
-            <app-paragraph paragraphSize="small">{{ payment.acquisition | number:'1.0-0' }}</app-paragraph>
+            <app-paragraph paragraphSize="small" [cropOnOverflow]="true">{{
+              payment.acquisition | number : "1.0-0"
+            }}</app-paragraph>
           </td>
           <td>
-            <app-paragraph paragraphSize="small">{{ payment.operation | number:'1.0-0'}}</app-paragraph>
+            <app-paragraph paragraphSize="small" [cropOnOverflow]="true">{{
+              payment.operation | number : "1.0-0"
+            }}</app-paragraph>
           </td>
           <td>
-            <app-paragraph paragraphSize="small">{{ payment.other | number:'1.0-0' }}</app-paragraph>
+            <app-paragraph paragraphSize="small" [cropOnOverflow]="true">{{
+              payment.other | number : "1.0-0"
+            }}</app-paragraph>
           </td>
           <td>
-            <app-paragraph paragraphSize="small">{{ payment.accountingEntry ?? nullPlaceholder }}</app-paragraph>
+            <app-paragraph paragraphSize="small" [cropOnOverflow]="true">{{
+              payment.accountingEntry ?? nullPlaceholder
+            }}</app-paragraph>
           </td>
           <td>
             <app-paragraph paragraphSize="small">{{ (payment.auditDate | appDate) ?? nullPlaceholder }}</app-paragraph>
           </td>
           <td>
-            <app-paragraph paragraphSize="small">{{ payment.note ?? nullPlaceholder }}</app-paragraph>
+            <app-paragraph paragraphSize="small" [cropOnOverflow]="true">{{
+              payment.note ?? nullPlaceholder
+            }}</app-paragraph>
           </td>
           <td>
             <app-content-space-between>

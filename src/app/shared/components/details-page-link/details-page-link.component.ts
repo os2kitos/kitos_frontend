@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AppPath } from '../../enums/app-path';
+import { getDetailsPageLink } from '../../helpers/link.helpers';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
 import { LinkFontSizes } from '../../models/sizes/link-font-sizes.model';
 
@@ -17,41 +17,10 @@ export class DetailsPageLinkComponent implements OnInit {
   @Input() public subpagePath?: string;
   @Input() public disableRedirect = false;
 
-  private setDetailsPagePath(resourceUrlSegment: string) {
-    let path = `/${resourceUrlSegment}/${this.itemUuid}`;
-    if (this.subpagePath) {
-      path += `/${this.subpagePath}`;
-    }
-    this.detailsPageRouterPath = path;
-  }
-
   public ngOnInit(): void {
-    const isValid = this.itemUuid != undefined && this.itemType != undefined;
-    if (isValid) {
-      switch (this.itemType) {
-        case 'data-processing-registration':
-          this.setDetailsPagePath(AppPath.dataProcessing);
-          break;
-        case 'it-contract':
-          this.setDetailsPagePath(AppPath.itContracts);
-          break;
-        case 'it-interface':
-          this.setDetailsPagePath(`${AppPath.itSystems}/${AppPath.itInterfaces}`);
-          break;
-        case 'it-system':
-          this.setDetailsPagePath(`${AppPath.itSystems}/${AppPath.itSystemCatalog}`);
-          break;
-        case 'it-system-usage':
-          this.setDetailsPagePath(`${AppPath.itSystems}/${AppPath.itSystemUsages}`);
-          break;
-        case 'organization':
-          this.setDetailsPagePath(`${AppPath.organization}/${AppPath.structure}`);
-          break;
-        default:
-          console.error('Unmapped link itemType', this.itemType);
-      }
-    } else {
-      console.error('Details page link incorrectly configured. Got (uuid,type)', this.itemUuid, this.itemType);
+    const path = getDetailsPageLink(this.itemUuid, this.itemType, this.subpagePath);
+    if (path) {
+      this.detailsPageRouterPath = path;
     }
   }
 }

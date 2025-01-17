@@ -14,6 +14,7 @@ export class HideShowButtonComponent {
   @Input() columns!: GridColumn[] | null;
   @Input() uiConfigApplications?: UIConfigGridApplication[] | null = null;
   @Input() entityType!: RegistrationEntityTypes;
+  @Input() isSecondary = false;
 
   constructor(private dialog: MatDialog) {}
 

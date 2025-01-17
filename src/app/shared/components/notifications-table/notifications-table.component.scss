@@ -1,10 +1,5 @@
 @import "mixins.scss";
-@include native-table-sticky-column-left;
 
 app-paragraph {
   word-wrap: break-word;
-}
-
-.notifications-table {
-  overflow: auto;
 }

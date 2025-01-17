@@ -1,12 +1,7 @@
 @import "mixins.scss";
-@include native-table-sticky-column-left;
 
 :host {
   display: flex;
   flex-direction: column;
   width: 100%;
-}
-
-.payment-table {
-  overflow: auto;
 }

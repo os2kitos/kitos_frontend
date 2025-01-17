@@ -21,6 +21,7 @@
         'checkbox-color': checkboxNodes === true
       }"
       data-cy="node"
+      (click)="checkboxNodes ? checkNode(node) : disableRedirect ? expandClick(node) : goToNode(node)"
     >
       <ng-container
         *ngIf="checkboxNodes === false && node.children.length && (maxLevel === undefined || maxLevel > level)"

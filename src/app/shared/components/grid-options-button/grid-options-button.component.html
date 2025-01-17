@@ -25,9 +25,6 @@
   </div>
   <app-reset-to-org-columns-config-button *ngIf="hasResetButton" [entityType]="entityType">
   </app-reset-to-org-columns-config-button>
-  <ng-container *ngIf="createPermission$ && (createPermission$ | async) === true">
-    <app-create-entity-button [entityType]="entityType"> </app-create-entity-button>
-  </ng-container>
   <ng-container *ngIf="getHelpTextKey()">
     <app-menu-button-item (itemClick)="openHelpTextDialog()" i18n>
       <app-help-icon></app-help-icon> Hjælp

@@ -22,6 +22,7 @@ export type IconType =
   | 'reload'
   | 'disk'
   | 'blue-plus'
+  | 'white-plus'
   | 'dots-warning'
   | 'reorder'
   | 'check'

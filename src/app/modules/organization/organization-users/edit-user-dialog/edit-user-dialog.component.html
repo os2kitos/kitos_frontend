@@ -66,18 +66,6 @@
         (cleared)="rolesCleared()"
       ></app-multi-select-dropdown>
 
-      <app-slide-toggle
-        text="Send advis om ændringer"
-        i18n-text
-        labelPosition="after"
-        [formGroup]="createForm"
-        formName="sendAdvis"
-        [value]="this.createForm.value.sendAdvis ?? false"
-        data-cy="send-advis"
-      ></app-slide-toggle>
-
-      <app-divider></app-divider>
-
       <ng-container *ngIf="isGlobalAdmin$ | async">
         <app-paragraph [bold]="true" paragraphSize="medium" i18n> Særlige roller i organisationen </app-paragraph>
         <app-checkbox

@@ -1,5 +1,7 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
+import { getDetailsPageLink } from '../../helpers/link.helpers';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
 import { EntityTreeNode, EntityTreeNodeMoveResult } from '../../models/structure/entity-tree-node.model';
 
@@ -38,7 +40,7 @@ export class DragAndDropTreeComponent<T> implements OnInit {
 
   private readonly nodeStandardColor = 'standard';
 
-  constructor(@Inject(DOCUMENT) private document: Document) {}
+  constructor(@Inject(DOCUMENT) private document: Document, private router: Router) {}
 
   ngOnInit(): void {
     this.prepareDragDrop(this.nodes);
@@ -133,6 +135,13 @@ export class DragAndDropTreeComponent<T> implements OnInit {
 
   public getNodeColor(node: EntityTreeNode<T>) {
     return this.displayDefaultNodeColorOnly ? this.nodeStandardColor : node.color;
+  }
+
+  public goToNode(node: EntityTreeNode<T>) {
+    const path = getDetailsPageLink(node.uuid, this.itemType);
+    if (path) {
+      this.router.navigate([path]);
+    }
   }
 
   private getParentNodeId(id: string, nodesToSearch: EntityTreeNode<T>[], parentId: string): string | null {
