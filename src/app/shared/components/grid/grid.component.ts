@@ -19,7 +19,7 @@ import {
   SortDescriptor,
 } from '@progress/kendo-data-query';
 import { get } from 'lodash';
-import { combineLatest, first, map, Observable } from 'rxjs';
+import { combineLatest, first, map, Observable, of } from 'rxjs';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import { GridExportActions } from 'src/app/store/grid/actions';
 import { selectExportAllColumns, selectReadyToExport } from 'src/app/store/grid/selectors';
@@ -74,6 +74,8 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   @Output() modifyEvent = new EventEmitter<T>();
 
   private data: GridData | null = null;
+  private readonly RolesExtraDataLabel = 'roles';
+  private readonly EmailColumnField = '.email';
 
   public readyToExport$ = this.store.select(selectReadyToExport);
   public exportAllColumns$ = this.store.select(selectExportAllColumns);
@@ -329,18 +331,24 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   }
 
   public getFilteredExportColumns$() {
-    return combineLatest([this.columns$, this.exportAllColumns$]).pipe(
-      map(([columns, exportAllColumns]) => {
+    return combineLatest([
+      this.columns$,
+      this.exportAllColumns$,
+      this.uiConfigApplications$ ?? of([])
+    ]).pipe(
+      map(([columns, exportAllColumns, uiConfigApplications]) => {
         const columnsToExport = columns
           ? columns
               .filter(includedColumnInExport)
               .filter((column) => exportAllColumns || !column.hidden || this.isExcelOnlyColumn(column))
+              .filter((column) => this.isColumnEnabled(uiConfigApplications, column))
           : [];
-        const roleColumnsInExport = columnsToExport.filter((column) => column.extraData === 'roles');
+
+        const roleColumnsInExport = columnsToExport.filter((column) => column.extraData === this.RolesExtraDataLabel);
         const roleColumnFieldsToExport = new Set(roleColumnsInExport.map((column) => column.field));
         return columnsToExport.filter(
           (column) =>
-            !this.isExcelOnlyColumn(column) || roleColumnFieldsToExport.has(column.field.replaceAll('.email', ''))
+            !this.isExcelOnlyColumn(column) || roleColumnFieldsToExport.has(column.field.replaceAll(this.EmailColumnField, ''))
         );
       })
     );
