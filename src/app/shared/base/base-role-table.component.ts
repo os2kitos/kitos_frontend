@@ -1,22 +1,22 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { Actions, ofType } from '@ngrx/effects';
 import { Dictionary } from '@ngrx/entity';
+import { Store } from '@ngrx/store';
 import { BehaviorSubject, combineLatest, first, map, merge, Observable } from 'rxjs';
 import { APIRoleOptionResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import { RoleOptionTypes } from '../models/options/role-option-types.model';
-import { RoleOptionTypeTexts } from '../models/options/role-option-texts.model';
-import { Store } from '@ngrx/store';
+import { RoleAssignmentActions } from 'src/app/store/role-assignment/actions';
 import { RoleOptionTypeActions } from 'src/app/store/roles-option-type-store/actions';
 import { selectHasValidCache, selectRoleOptionTypesDictionary } from 'src/app/store/roles-option-type-store/selectors';
-import { filterNullish } from '../pipes/filter-nullish';
 import { RoleTableComponentStore } from '../components/role-table/role-table.component-store';
-import { RoleAssignmentActions } from 'src/app/store/role-assignment/actions';
-import { Actions, ofType } from '@ngrx/effects';
-import { RoleOptionTypeService } from '../services/role-option-type.service';
-import { ConfirmActionCategory, ConfirmActionService } from '../services/confirm-action.service';
-import { IRoleAssignment } from '../models/helpers/read-model-role-assignments';
 import { RoleTableCreateDialogComponent } from '../components/role-table/role-table.create-dialog/role-table.create-dialog.component';
-import { MatDialog } from '@angular/material/dialog';
+import { IRoleAssignment } from '../models/helpers/read-model-role-assignments';
+import { RoleOptionTypeTexts } from '../models/options/role-option-texts.model';
+import { RoleOptionTypes } from '../models/options/role-option-types.model';
+import { filterNullish } from '../pipes/filter-nullish';
+import { ConfirmActionCategory, ConfirmActionService } from '../services/confirm-action.service';
+import { RoleOptionTypeService } from '../services/role-option-type.service';
 
 @Component({
   template: '',
@@ -70,9 +70,6 @@ export abstract class BaseRoleTableComponent extends BaseComponent implements On
         })
     );
 
-    //get roles
-    this.getRoles();
-
     //on role add/remove or uuid changes update the list
     this.subscriptions.add(
       merge(
@@ -93,9 +90,11 @@ export abstract class BaseRoleTableComponent extends BaseComponent implements On
   }
 
   protected getRoles() {
-    this.entityUuid$.pipe(first()).subscribe((entityUuid) => {
-      this.componentStore.getRolesByEntityUuid({ entityUuid, entityType: this.entityType });
-    });
+    this.subscriptions.add(
+      this.entityUuid$.pipe(first()).subscribe((entityUuid) => {
+        this.componentStore.getRolesByEntityUuid({ entityUuid, entityType: this.entityType });
+      })
+    );
   }
 
   protected openAddNewDialog(userRoles: IRoleAssignment[], entityUuid: string) {

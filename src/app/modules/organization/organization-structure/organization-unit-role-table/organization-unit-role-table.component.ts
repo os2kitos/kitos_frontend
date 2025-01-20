@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, combineLatest, combineLatestWith, first, map, merge } from 'rxjs';
+import { BehaviorSubject, combineLatest, combineLatestWith, first, map } from 'rxjs';
 import { BaseRoleTableComponent } from 'src/app/shared/base/base-role-table.component';
 import { RoleTableComponentStore } from 'src/app/shared/components/role-table/role-table.component-store';
 import { compareByRoleName } from 'src/app/shared/helpers/role-helpers';
@@ -57,18 +57,17 @@ export class OrganizationUnitRoleTableComponent extends BaseRoleTableComponent i
     });
 
     this.subscriptions.add(
-      merge(
-        this.actions$.pipe(
+      this.actions$
+        .pipe(
           ofType(
             OrganizationUnitActions.transferRegistrationsSuccess,
             OrganizationUnitActions.removeRegistrationsSuccess,
             OrganizationUnitActions.patchOrganizationUnitSuccess
           )
-        ),
-        this.entityUuid$
-      ).subscribe(() => {
-        this.getRoles();
-      })
+        )
+        .subscribe(() => {
+          this.getRoles();
+        })
     );
   }
 
