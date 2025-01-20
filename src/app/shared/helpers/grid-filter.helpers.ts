@@ -1,6 +1,6 @@
 import { Actions, ofType } from '@ngrx/effects';
 import { FilterDescriptor, isCompositeFilterDescriptor } from '@progress/kendo-data-query';
-import { map, Subject, takeUntil } from 'rxjs';
+import { map, Subscription } from 'rxjs';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
@@ -64,14 +64,12 @@ export function initializeApplyFilterSubscription(
   actions$: Actions,
   entityType: RegistrationEntityTypes,
   columnField: string,
-  updateFilter: (filter: FilterDescriptor | undefined) => void,
-  destroy$: Subject<void>
-) {
-  actions$
+  updateFilter: (filter: FilterDescriptor | undefined) => void
+): Subscription {
+  return actions$
     .pipe(
       ofType(getApplyFilterAction(entityType)),
-      map(({ state }) => state.filter),
-      takeUntil(destroy$)
+      map(({ state }) => state.filter)
     )
     .subscribe((compFilter) => {
       const matchingFilter = compFilter?.filters.find(

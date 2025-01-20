@@ -40,18 +40,26 @@ export class ChoiceTypeDropdownFilterComponent extends AppBaseFilterCellComponen
       map((options) => this.applySorting(options, this.sortOptions))
     );
 
-    this.chosenOption = this.getColumnFilter()?.value;
+    this.subscriptions.add(
+      this.options$.pipe(first()).subscribe((options) => {
+        this.chosenOption = options.find((option) => option.value === this.getColumnFilter()?.value);
+      })
+    );
 
     const updateMethod: (filter: FilterDescriptor | undefined) => void = (filter) => {
       const newValue = filter?.value;
-      this.options$?.pipe(first()).subscribe((options) => {
-        const matchingOption = this.shouldFilterByChoiceTypeName
-          ? options.find((option) => option.name === newValue)
-          : options.find((option) => option.value === newValue);
-        this.chosenOption = matchingOption;
-      });
+      this.subscriptions.add(
+        this.options$?.pipe(first()).subscribe((options) => {
+          const matchingOption = this.shouldFilterByChoiceTypeName
+            ? options.find((option) => option.name === newValue)
+            : options.find((option) => option.value === newValue);
+          this.chosenOption = matchingOption;
+        })
+      );
     };
-    initializeApplyFilterSubscription(this.actions$, this.entityType, this.column.field, updateMethod, this.destroy$);
+    this.subscriptions.add(
+      initializeApplyFilterSubscription(this.actions$, this.entityType, this.column.field, updateMethod)
+    );
   }
 
   private applySorting(options: FilterDropdownOption[], sortOptions: boolean | undefined): FilterDropdownOption[] {

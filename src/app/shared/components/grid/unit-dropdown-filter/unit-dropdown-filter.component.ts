@@ -30,8 +30,9 @@ export class UnitDropdownFilterComponent extends AppBaseFilterCellComponent impl
     const updateMethod: (filter: FilterDescriptor | undefined) => void = (filter) => {
       this.chosenOption = filter?.value as TreeNodeModel;
     };
-
-    initializeApplyFilterSubscription(this.actions$, this.entityType, this.column.field, updateMethod, this.destroy$);
+    this.subscriptions.add(
+      initializeApplyFilterSubscription(this.actions$, this.entityType, this.column.field, updateMethod)
+    );
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

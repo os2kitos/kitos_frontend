@@ -42,7 +42,9 @@ export class DropdownFilterComponent extends AppBaseFilterCellComponent implemen
     };
 
     if (this.entityType) {
-      initializeApplyFilterSubscription(this.actions$, this.entityType, this.column.field, updateMethod, this.destroy$);
+      this.subscriptions.add(
+        initializeApplyFilterSubscription(this.actions$, this.entityType, this.column.field, updateMethod)
+      );
     }
   }
 

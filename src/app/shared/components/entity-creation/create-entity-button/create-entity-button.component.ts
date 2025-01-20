@@ -36,7 +36,6 @@ export class CreateEntityButtonComponent extends BaseComponent {
   }
 
   public openCreateDialog() {
-    console.log('Test');
     switch (this.entityType) {
       case 'it-interface':
         this.dialog.open(CreateInterfaceDialogComponent);

@@ -37,12 +37,16 @@ export class DropdownColumnDataFilterComponent extends AppBaseFilterCellComponen
     this.options$ = this.columnFilterDataService.get(this.serviceKey);
 
     const updateMethod: (filter: FilterDescriptor | undefined) => void = (filter) => {
-      this.options$.pipe(first()).subscribe((options) => {
-        const newValue = filter?.value;
-        const newOption = options.find((option) => option.value === newValue);
-        this.dropdownFilter.chosenOption = newOption;
-      });
+      this.subscriptions.add(
+        this.options$.pipe(first()).subscribe((options) => {
+          const newValue = filter?.value;
+          const newOption = options.find((option) => option.value === newValue);
+          this.dropdownFilter.chosenOption = newOption;
+        })
+      );
     };
-    initializeApplyFilterSubscription(this.actions$, this.entityType, this.column.field, updateMethod, this.destroy$);
+    this.subscriptions.add(
+      initializeApplyFilterSubscription(this.actions$, this.entityType, this.column.field, updateMethod)
+    );
   }
 }
