@@ -34,6 +34,7 @@ export interface GridColumn {
     | 'enum'
     | 'link'
     | 'page-link'
+    | 'page-link-array-with-submodules'
     | 'title-link'
     | 'checkbox'
     | 'date'
@@ -42,8 +43,7 @@ export interface GridColumn {
     | 'uuid-to-name'
     | 'excel-only'
     | 'action-buttons'
-    | 'integer-with-thousands-separator'
-    ; //Style of the column
+    | 'integer-with-thousands-separator'; //Style of the column
   width?: number;
   minResizableWidth?: number;
   //Can column be hidden
@@ -55,4 +55,5 @@ export interface GridColumn {
   isSticky?: boolean;
   booleanValueDisplay?: BooleanValueDisplayType; // Defines how boolean values should be displayed. If not set, RegistrationEntityTypes will be used to derive the display type
   disabledByUIConfig?: boolean;
+  linkArraySeparator?: ', ' | ' - ';
 }

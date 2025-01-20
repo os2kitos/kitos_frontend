@@ -58,7 +58,7 @@
         <tr *ngFor="let system of systemUsages$ | async">
           <td>
             <app-content-space-between>
-              <app-details-page-link itemType="it-system-usage" linkFontSize="small" [itemUuid]="system.uuid">{{
+              <app-details-page-link itemType="it-system-usage" linkFontSize="small" [itemPath]="system.uuid">{{
                 system.name
               }}</app-details-page-link>
               <app-icon-button
@@ -111,7 +111,7 @@
             <app-details-page-link
               itemType="it-system-usage"
               linkFontSize="small"
-              [itemUuid]="relation.fromSystemUsage.uuid"
+              [itemPath]="relation.fromSystemUsage.uuid"
               >{{ relation.fromSystemUsage.name }}</app-details-page-link
             >
           </td>
@@ -119,7 +119,7 @@
             <app-details-page-link
               itemType="it-system-usage"
               linkFontSize="small"
-              [itemUuid]="relation.toSystemUsage.uuid"
+              [itemPath]="relation.toSystemUsage.uuid"
               >{{ relation.toSystemUsage.name }}</app-details-page-link
             >
           </td>
@@ -127,7 +127,7 @@
             <app-details-page-link
               itemType="it-interface"
               linkFontSize="small"
-              [itemUuid]="relation.relationInterface?.uuid"
+              [itemPath]="relation.relationInterface?.uuid"
               >{{ relation.relationInterface?.name }}</app-details-page-link
             >
           </td>

@@ -153,10 +153,11 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     {
       field: GridFields.ParentItSystemName,
       title: $localize`Overordnet IT System`,
-      idField: 'ParentItSystemUuid',
+      dataField: 'ParentSystemLinkPaths',
       section: this.systemSectionName,
-      style: 'page-link',
+      style: 'page-link-array-with-submodules',
       entityType: 'it-system',
+      linkArraySeparator: ' - ',
       width: 320,
       hidden: true,
       persistId: 'parentsysname',

@@ -39,7 +39,7 @@
       <tbody>
         <tr *ngFor="let contract of associatedContracts$ | async">
           <td>
-            <app-details-page-link itemType="it-contract" [itemUuid]="contract.uuid">{{
+            <app-details-page-link itemType="it-contract" [itemPath]="contract.uuid">{{
               contract.name
             }}</app-details-page-link>
           </td>

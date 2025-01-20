@@ -4681,9 +4681,6 @@
       <trans-unit id="5606291731600881005" datatype="html">
         <source><x id="START_TAG_APP_FILTER_ICON" ctype="x-app_filter_icon" equiv-text="&lt;app-filter-icon&gt;"/><x id="CLOSE_TAG_APP_FILTER_ICON" ctype="x-app_filter_icon" equiv-text="&lt;/app-filter-icon&gt;"/> Anvend </source>
       </trans-unit>
-      <trans-unit id="3443106055211830354" datatype="html">
-        <source><x id="START_TAG_APP_PLUS_ICON" ctype="x-app_plus_icon" equiv-text="&lt;app-plus-icon&gt;"/><x id="CLOSE_TAG_APP_PLUS_ICON" ctype="x-app_plus_icon" equiv-text="&lt;/app-plus-icon&gt;"/> Opret </source>
-      </trans-unit>
       <trans-unit id="6740986467507484529" datatype="html">
         <source><x id="START_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="&lt;app-trashcan-icon&gt;"/><x id="CLOSE_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="&lt;/app-trashcan-icon&gt;"/> Slet </source>
       </trans-unit>
@@ -4899,6 +4896,9 @@
       </trans-unit>
       <trans-unit id="7018355465405167274" datatype="html">
         <source>Kommende advis</source>
+      </trans-unit>
+      <trans-unit id="7473666767554000615" datatype="html">
+        <source>Gå til systemanvendelse</source>
       </trans-unit>
     </body>
   </file>

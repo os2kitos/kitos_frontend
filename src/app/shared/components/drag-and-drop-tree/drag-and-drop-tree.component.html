@@ -42,7 +42,7 @@
         <app-details-page-link
           [itemType]="itemType"
           linkFontSize="small"
-          [itemUuid]="node.uuid"
+          [itemPath]="node.uuid"
           [disableRedirect]="disableRedirect"
           (click)="checkNodeTextClick(node)"
         >
@@ -53,7 +53,7 @@
         *ngIf="checkboxNodes === false"
         [itemType]="itemType"
         linkFontSize="small"
-        [itemUuid]="node.uuid"
+        [itemPath]="node.uuid"
         [disableRedirect]="disableRedirect"
         (click)="disableRedirect ? expandClick(node) : null"
       >

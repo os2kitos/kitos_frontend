@@ -12,6 +12,7 @@ import { YesNoDontKnowOptions } from '../yes-no-dont-know.model';
 import { mapCapitalizedStringToYesNoIrrelevantEnum, mapToYesNoIrrelevantEnumGrid } from '../yes-no-irrelevant.model';
 import { ArchiveDutyChoice, mapArchiveDutyChoice } from './archive-duty-choice.model';
 import { HostedAt, mapGridHostedAt } from './gdpr/hosted-at.model';
+import { AppPath } from '../../enums/app-path';
 
 export interface ITSystemUsage {
   //ngrx requires the id field to have lowercase 'id' name
@@ -26,6 +27,7 @@ export interface ITSystemUsage {
   ExternalSystemUuid: string;
   ParentItSystemName: string;
   ParentItSystemUuid: string;
+  ParentSystemLinkPaths: {value: string, id: string}[];
   SystemName: string;
   Version: string;
   LocalCallName: string;
@@ -75,11 +77,35 @@ export interface ITSystemUsage {
   RoleEmails: RoleAssignmentEmailsMaps;
 }
 
+function getParentItSystemLinkPaths(value: {
+  ParentItSystemUsageUuid: string | undefined,
+  ParentItSystemUuid: string | undefined,
+  ParentItSystemName: string | undefined })
+  {
+    const links: {id: string, value: string}[] = [];
+    if (!value.ParentItSystemUuid || !value.ParentItSystemName) return links;
+
+    links.push({
+      id: `${AppPath.itSystemCatalog}/${value.ParentItSystemUuid}`,
+      value: value.ParentItSystemName
+    });
+
+    if (value.ParentItSystemUsageUuid) {
+      links.push({
+        id: `${AppPath.itSystemUsages}/${value.ParentItSystemUsageUuid}`,
+        value: $localize`Gå til systemanvendelse`
+      });
+    }
+
+    return links;
+}
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
   if (!value.SourceEntityUuid) return;
 
   return {
+    ParentSystemLinkPaths: getParentItSystemLinkPaths(value),
     id: value.SourceEntityUuid,
     SystemActive: value.SystemActive,
     ActiveAccordingToValidityPeriod: value.ActiveAccordingToValidityPeriod,

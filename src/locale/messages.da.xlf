@@ -6155,10 +6155,6 @@
         <source><x id="START_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="p-lock-icon /&gt;"/><x id="CLOSE_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="-menu-button-item"/> Åben GDPR overblik </source>
         <target state="new"><x id="START_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="p-lock-icon /&gt;"/><x id="CLOSE_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="-menu-button-item"/> Åben GDPR overblik </target>
       </trans-unit>
-      <trans-unit id="3443106055211830354" datatype="html">
-        <source><x id="START_TAG_APP_PLUS_ICON" ctype="x-app_plus_icon" equiv-text="&lt;app-plus-icon&gt;"/><x id="CLOSE_TAG_APP_PLUS_ICON" ctype="x-app_plus_icon" equiv-text="&lt;/app-plus-icon&gt;"/> Opret </source>
-        <target state="new"><x id="START_TAG_APP_PLUS_ICON" ctype="x-app_plus_icon" equiv-text="&lt;app-plus-icon&gt;"/><x id="CLOSE_TAG_APP_PLUS_ICON" ctype="x-app_plus_icon" equiv-text="&lt;/app-plus-icon&gt;"/> Opret </target>
-      </trans-unit>
       <trans-unit id="844753732077135788" datatype="html">
         <source><x id="START_TAG_APP_DISK_ICON" ctype="x-app_disk_icon" equiv-text="p-disk-icon&gt;"/><x id="CLOSE_TAG_APP_DISK_ICON" ctype="x-app_disk_icon" equiv-text="Gem &lt;"/> Gem </source>
         <target state="new"><x id="START_TAG_APP_DISK_ICON" ctype="x-app_disk_icon" equiv-text="p-disk-icon&gt;"/><x id="CLOSE_TAG_APP_DISK_ICON" ctype="x-app_disk_icon" equiv-text="Gem &lt;"/> Gem </target>
@@ -6452,6 +6448,10 @@
       <trans-unit id="6454412951656065343" datatype="html">
         <source>Ulæste advarsler</source>
         <target state="new">Ulæste advarsler</target>
+      </trans-unit>
+      <trans-unit id="7473666767554000615" datatype="html">
+        <source>Gå til systemanvendelse</source>
+        <target state="new">Gå til systemanvendelse</target>
       </trans-unit>
     </body>
   </file>

@@ -115,7 +115,7 @@
             *ngIf="searchProperty(dataItem, column.idField) as itemUuid"
             linkFontSize="small"
             [itemType]="column.entityType"
-            [itemUuid]="itemUuid"
+            [itemPath]="itemUuid"
             [subpagePath]="column.extraData"
             >{{ searchProperty(dataItem, column.field) }}</app-details-page-link
           >

@@ -19,7 +19,12 @@ export function validateExternalReferenceUrl(externalRef?: string): boolean {
   }
 }
 
-export function getDetailsPageLink(itemUuid?: string, itemType?: RegistrationEntityTypes, subpagePath?: string) {
+export function getDetailsPageLink(
+  itemUuid?: string,
+  itemType?: RegistrationEntityTypes,
+  subpagePath?: string,
+  itemPathIncludesSubmodule?: boolean
+): string | undefined {
   const isValid = itemUuid != undefined && itemType != undefined;
   if (isValid) {
     switch (itemType) {
@@ -28,13 +33,36 @@ export function getDetailsPageLink(itemUuid?: string, itemType?: RegistrationEnt
       case 'it-contract':
         return getDetailsPagePath(AppPath.itContracts, itemUuid, subpagePath);
       case 'it-interface':
-        return getDetailsPagePath(`${AppPath.itSystems}/${AppPath.itInterfaces}`, itemUuid, subpagePath);
+        return getDetailsPagePathWithSubmodule(
+          `${AppPath.itSystems}/${AppPath.itInterfaces}`,
+          itemUuid,
+          subpagePath,
+          itemPathIncludesSubmodule
+        );
       case 'it-system':
-        return getDetailsPagePath(`${AppPath.itSystems}/${AppPath.itSystemCatalog}`, itemUuid, subpagePath);
+        return getDetailsPagePathWithSubmodule(
+          `${AppPath.itSystems}/${AppPath.itSystemCatalog}`,
+          itemUuid,
+          subpagePath,
+          itemPathIncludesSubmodule
+        );
+        break;
       case 'it-system-usage':
-        return getDetailsPagePath(`${AppPath.itSystems}/${AppPath.itSystemUsages}`, itemUuid, subpagePath);
+        return getDetailsPagePathWithSubmodule(
+          `${AppPath.itSystems}/${AppPath.itSystemUsages}`,
+          itemUuid,
+          subpagePath,
+          itemPathIncludesSubmodule
+        );
+        break;
       case 'organization':
-        return getDetailsPagePath(`${AppPath.organization}/${AppPath.structure}`, itemUuid, subpagePath);
+        return getDetailsPagePathWithSubmodule(
+          `${AppPath.organization}/${AppPath.structure}`,
+          itemUuid,
+          subpagePath,
+          itemPathIncludesSubmodule
+        );
+        break;
       default:
         console.error('Unmapped link itemType', itemType);
         return undefined;
@@ -51,4 +79,17 @@ function getDetailsPagePath(resourceUrlSegment: string, itemUuid: string, subpag
     path += `/${subpagePath}`;
   }
   return path;
+}
+
+function getDetailsPagePathWithSubmodule(
+  resourceUrlSegment: string,
+  itemUuid: string,
+  subpagePath?: string,
+  itemPathIncludesSubmodule?: boolean
+) {
+  if (itemPathIncludesSubmodule) {
+    const segmentWithoutSubmodule = resourceUrlSegment.split('/')[0];
+    return getDetailsPagePath(segmentWithoutSubmodule, itemUuid, subpagePath);
+  }
+  return getDetailsPagePath(resourceUrlSegment, itemUuid, subpagePath);
 }

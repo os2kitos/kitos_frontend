@@ -14,7 +14,7 @@
         <tr *ngFor="let systemUsage of systemUsages$ | async">
           <td>
             <app-content-space-between>
-              <app-details-page-link itemType="it-system-usage" [itemUuid]="systemUsage.uuid">{{
+              <app-details-page-link itemType="it-system-usage" [itemPath]="systemUsage.uuid">{{
                 systemUsage.name
               }}</app-details-page-link>
               <app-icon-button

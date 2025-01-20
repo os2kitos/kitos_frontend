@@ -11,14 +11,15 @@ import { LinkFontSizes } from '../../models/sizes/link-font-sizes.model';
 export class DetailsPageLinkComponent implements OnInit {
   public detailsPageRouterPath: string | null = null;
 
-  @Input() public itemUuid?: string;
+  @Input() public itemPath?: string;
   @Input() public linkFontSize: LinkFontSizes = 'medium';
   @Input() public itemType: RegistrationEntityTypes | undefined;
   @Input() public subpagePath?: string;
   @Input() public disableRedirect = false;
+  @Input() public itemPathIncludesSubmodule = false;
 
   public ngOnInit(): void {
-    const path = getDetailsPageLink(this.itemUuid, this.itemType, this.subpagePath);
+    const path = getDetailsPageLink(this.itemPath, this.itemType, this.subpagePath, this.itemPathIncludesSubmodule);
     if (path) {
       this.detailsPageRouterPath = path;
     }

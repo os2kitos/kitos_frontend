@@ -16,7 +16,7 @@
         'current-node-green': node.uuid === currentNodeUuid && node.color === 'green'
       }"
     >
-      <app-details-page-link [itemType]="itemType" linkFontSize="small" [itemUuid]="node.uuid">
+      <app-details-page-link [itemType]="itemType" linkFontSize="small" [itemPath]="node.uuid">
         {{ node.name }}
       </app-details-page-link>
     </div>
@@ -45,7 +45,7 @@
           'current-node-green': node.uuid === currentNodeUuid && node.color === 'green'
         }"
       >
-        <app-details-page-link [itemType]="itemType" linkFontSize="small" [itemUuid]="node.uuid">
+        <app-details-page-link [itemType]="itemType" linkFontSize="small" [itemPath]="node.uuid">
           {{ node.name }}
         </app-details-page-link>
       </div>
