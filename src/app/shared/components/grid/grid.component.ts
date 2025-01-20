@@ -166,9 +166,8 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   }
 
   public onResizeChange(event: ColumnResizeArgs[], columns: GridColumn[]) {
-    const columnsCopy = JSON.parse(JSON.stringify(columns)) as GridColumn[];
-
     if (event.length > 0) {
+      const columnsCopy = Object.assign([], columns) as GridColumn[];
       const changedColumnEvent = event[0];
       const columnIndex = columnsCopy.findIndex(
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -343,9 +342,9 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
       map(([columns, exportAllColumns, uiConfigApplications]) => {
         const columnsToExport = columns
           ? columns
-              .filter(includedColumnInExport)
-              .filter((column) => exportAllColumns || !column.hidden || this.isExcelOnlyColumn(column))
-              .filter((column) => this.isColumnEnabled(uiConfigApplications, column))
+            .filter(includedColumnInExport)
+            .filter((column) => exportAllColumns || !column.hidden || this.isExcelOnlyColumn(column))
+            .filter((column) => this.isColumnEnabled(uiConfigApplications, column))
           : [];
 
         const roleColumnsInExport = columnsToExport.filter((column) => column.extraData === this.RolesExtraDataLabel);
