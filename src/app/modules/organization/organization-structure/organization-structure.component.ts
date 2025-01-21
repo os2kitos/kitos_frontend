@@ -27,6 +27,7 @@ import {
   selectUnitPermissions,
 } from 'src/app/store/organization/organization-unit/selectors';
 
+import { concatLatestFrom } from '@ngrx/operators';
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { EditOrganizationUnitDialogComponent } from './edit-organization-unit-dialog/edit-organization-unit-dialog.component';
 
@@ -113,8 +114,12 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     );
 
     this.subscriptions.add(
-      this.currentUnitUuid$.subscribe((uuid) => {
-        this.store.dispatch(OrganizationUnitActions.getPermissions(uuid));
+      this.currentUnitUuid$.pipe(concatLatestFrom(() => this.rootUnitUuid$)).subscribe(([uuid, rootUnitUuid]) => {
+        if (uuid) {
+          this.store.dispatch(OrganizationUnitActions.getPermissions(uuid));
+        } else {
+          this.store.dispatch(OrganizationUnitActions.getPermissions(rootUnitUuid));
+        }
       })
     );
 
