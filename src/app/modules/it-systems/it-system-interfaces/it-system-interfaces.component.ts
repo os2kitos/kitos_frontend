@@ -139,6 +139,7 @@ export class ItSystemInterfacesComponent extends BaseOverviewComponent implement
       style: 'usages',
       entityType: 'it-interface',
       hidden: false,
+      sortable: false,
       noFilter: true,
       width: 200,
     },

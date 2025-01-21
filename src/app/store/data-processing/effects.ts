@@ -668,5 +668,19 @@ function applyQueryFixes(odataString: string, systemRoles: APIBusinessRoleDTO[] 
       .replace(/OversightOptionNamesAsCsv eq '([^']*)'/, "contains(OversightOptionNamesAsCsv, '$1')");
   });
 
+  fixedOdataString = fixedOdataString
+    .replace(
+      /TransferToInsecureThirdCountries eq 'Undecided'/,
+      "(TransferToInsecureThirdCountries eq 'Undecided' or TransferToInsecureThirdCountries eq null)"
+    )
+    .replace(
+      /IsAgreementConcluded eq 'UNDECIDED'/,
+      "(IsAgreementConcluded eq 'UNDECIDED' or IsAgreementConcluded eq null)"
+    )
+    .replace(
+      /IsOversightCompleted eq 'Undecided'/,
+      "(IsOversightCompleted eq 'Undecided' or IsOversightCompleted eq null)"
+    );
+
   return fixedOdataString;
 }

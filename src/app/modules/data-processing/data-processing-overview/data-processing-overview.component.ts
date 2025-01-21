@@ -117,15 +117,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       style: 'chip',
       width: 320,
       hidden: true,
-      persistId: 'dpIsActive', //Does not seem to be in the old UI
-    },
-    {
-      field: GridFields.LastChangedById,
-      title: $localize`Sidst ændret ID`,
-      section: DATA_PROCESSING_SECTION_NAME,
-      filter: 'numeric',
-      hidden: true,
-      persistId: 'dpLastChangedById', //This aswell
+      persistId: 'dpIsActive',
     },
     {
       field: GridFields.LastChangedAt,

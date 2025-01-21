@@ -16,7 +16,6 @@ export interface DataProcessingRegistration {
   id: string;
   Name: string;
   IsActive: boolean;
-  LastChangedById: number;
   LastChangedAt: string;
   ActiveAccordingToMainContract: boolean;
   MainReferenceTitle: string;
@@ -52,7 +51,6 @@ export const adaptDataProcessingRegistration = (value: any): DataProcessingRegis
     id: value.SourceEntityUuid,
     Name: value.Name,
     IsActive: value.IsActive,
-    LastChangedById: value.LastChangedById,
     LastChangedAt: value.LastChangedAt,
     ActiveAccordingToMainContract: value.ActiveAccordingToMainContract,
     MainReferenceTitle: value.MainReferenceTitle,

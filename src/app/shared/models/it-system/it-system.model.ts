@@ -13,7 +13,7 @@ export interface ITSystem {
   IsInUse: boolean;
   PreviousName: string;
   Parent: { Name: string };
-  EksternalUuid: string;
+  ExternalUuid: string;
   Description: string;
   AccessModifier: AccessModifierChoice | undefined;
   KLEIds: { TaskKey: string };
@@ -51,7 +51,7 @@ export const adaptITSystem = (value: any, currentOrganizationUuid: string): ITSy
     ),
     PreviousName: value.PreviousName,
     Parent: { Name: entityWithUnavailableName(value.Parent?.Name, !value.Parent?.Disabled) },
-    EksternalUuid: value.ExternalUuid,
+    ExternalUuid: value.ExternalUuid,
     Description: value.Description,
     AccessModifier: mapAccessModifierEnumToAccessModifierChoice(value.AccessModifier),
     KLEIds: value.TaskRefs?.map((task: { TaskKey: string }) => task.TaskKey).join(', ') ?? '',
