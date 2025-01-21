@@ -24,6 +24,7 @@
       [field]="column.field"
       [title]="column.title"
       [sortable]="column.sortable ?? true"
+      [sticky]="column.isSticky ?? false"
       [filter]="column.filter ?? 'text'"
       [width]="column.width ?? defaultColumnWidth"
       [minResizableWidth]="

@@ -29,12 +29,12 @@
         <app-chevron-down-icon
           class="chevron-icon"
           *ngIf="node.isExpanded"
-          (click)="expandClick(node)"
+          (click)="disableRedirect ? null : expandClick(node)"
         ></app-chevron-down-icon>
         <app-chevron-right-icon
           class="chevron-icon"
           *ngIf="!node.isExpanded"
-          (click)="expandClick(node)"
+          (click)="disableRedirect ? null : expandClick(node)"
         ></app-chevron-right-icon>
       </ng-container>
       <ng-container *ngIf="checkboxNodes === true">
@@ -55,7 +55,6 @@
         linkFontSize="small"
         [itemPath]="node.uuid"
         [disableRedirect]="disableRedirect"
-        (click)="disableRedirect ? expandClick(node) : null"
       >
         <span class="level-indicator-color">{{ level }}.</span> {{ node.name }}
       </app-details-page-link>

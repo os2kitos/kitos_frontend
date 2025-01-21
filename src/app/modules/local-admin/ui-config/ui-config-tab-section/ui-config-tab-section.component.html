@@ -30,7 +30,7 @@
           (valueChange)="onCheckboxChanged({ enabled: $event, fullKey: fieldViewModel.fullKey })"
           data-cy="field-checkbox"
         >
-          <app-paragraph>
+          <app-paragraph class="wrap-text">
             {{ fieldViewModel.text }}
           </app-paragraph>
           <ng-container *ngIf="fieldViewModel.helpText !== undefined">

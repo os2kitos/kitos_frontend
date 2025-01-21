@@ -19,3 +19,7 @@
 .arrow-icon-disabled {
   --icon-color: #b0b7bf;
 }
+
+:host {
+  overflow: hidden;
+}

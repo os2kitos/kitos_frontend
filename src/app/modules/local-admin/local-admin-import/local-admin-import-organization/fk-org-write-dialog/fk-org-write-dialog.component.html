@@ -58,6 +58,7 @@
           title="Ændringer"
           [isExpandedByDefault]="true"
           i18n-title
+          class="overflow-hidden"
           *ngIf="updateConsequences$ | async as updateConsequences"
         >
           <ng-container *ngIf="(updateConsequencesLength$ | async) === 0">

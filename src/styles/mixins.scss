@@ -28,6 +28,13 @@
   width: 100%;
 }
 
+@mixin page-flex-layout-max-width-hidden-overflow {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow: hidden;
+}
+
 @mixin mat-input-adjustment {
   --mdc-typography-subtitle1-font-size: var(--font-size);
   --mdc-typography-body1-font-size: var(--font-size);
