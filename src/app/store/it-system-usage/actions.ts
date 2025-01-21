@@ -20,7 +20,7 @@ import { ITSystemUsage } from 'src/app/shared/models/it-system-usage/it-system-u
 export const ITSystemUsageActions = createActionGroup({
   source: 'ITSystemUsage',
   events: {
-    'Get IT System Usages': (odataString: string) => ({ odataString }),
+    'Get IT System Usages': (odataString: string, responsibleUnitUuid: string | undefined) => ({ odataString, responsibleUnitUuid }),
     'Get IT System Usages Success ': (itSystemUsages: ITSystemUsage[], total: number) => ({ itSystemUsages, total }),
     'Get IT System Usages Error': emptyProps(),
 

@@ -15,7 +15,7 @@ import {
 } from 'src/app/api/v2';
 import { USAGE_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-constants';
 import { hasValidCache } from 'src/app/shared/helpers/date.helpers';
-import { toODataString } from 'src/app/shared/models/grid-state.model';
+import { usageGridStateToAction } from 'src/app/shared/helpers/grid-filter.helpers';
 import { convertDataSensitivityLevelStringToNumberMap } from 'src/app/shared/models/it-system-usage/gdpr/data-sensitivity-level.model';
 import { adaptITSystemUsage } from 'src/app/shared/models/it-system-usage/it-system-usage.model';
 import { OData } from 'src/app/shared/models/odata.model';
@@ -59,12 +59,12 @@ export class ITSystemUsageEffects {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.getITSystemUsages),
       concatLatestFrom(() => [this.store.select(selectOrganizationUuid), this.store.select(selectOverviewSystemRoles)]),
-      switchMap(([{ odataString }, organizationUuid, systemRoles]) => {
+      switchMap(([{ odataString, responsibleUnitUuid }, organizationUuid, systemRoles]) => {
         //Redirect consolidated field search towards optimized search targets
         const convertedString = applyQueryFixes(odataString, systemRoles);
         return this.httpClient
           .get<OData>(
-            `/odata/ItSystemUsageOverviewReadModels?organizationUuid=${organizationUuid}&$expand=RoleAssignments,DataProcessingRegistrations,DependsOnInterfaces,IncomingRelatedItSystemUsages,OutgoingRelatedItSystemUsages,AssociatedContracts&${convertedString}&$count=true`
+            `/odata/ItSystemUsageOverviewReadModels?organizationUuid=${organizationUuid}&$expand=RoleAssignments,DataProcessingRegistrations,DependsOnInterfaces,IncomingRelatedItSystemUsages,OutgoingRelatedItSystemUsages,AssociatedContracts&responsibleOrganizationUnitUuid=${responsibleUnitUuid}&${convertedString}&$count=true`
           )
           .pipe(
             map((data) =>
@@ -83,7 +83,7 @@ export class ITSystemUsageEffects {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.updateGridState),
       map(({ gridState }) => {
-        return ITSystemUsageActions.getITSystemUsages(toODataString(gridState, { utcDates: true }));
+        return usageGridStateToAction(gridState);
       })
     );
   });
@@ -693,8 +693,8 @@ function applyQueryFixes(odataString: string, systemRoles: APIBusinessRoleDTO[] 
       'IncomingRelatedItSystemUsages/any(c: $1c/ItSystemUsageName$2)'
     )
     .replace(
-      new RegExp(`RelevantOrganizationUnitNamesAsCsv eq '(\\w+)'`, 'i'),
-      'RelevantOrganizationUnits/any(c: c/OrganizationUnitId eq $1)'
+      /RelevantOrganizationUnitNamesAsCsv eq '([\w-]+)'/,
+      'RelevantOrganizationUnits/any(c: c/OrganizationUnitUuid eq $1)'
     )
     .replace(/(\w+\()AssociatedContractsNamesCsv(.*\))/, 'AssociatedContracts/any(c: $1c/ItContractName$2)')
     .replace(/ItSystemBusinessTypeUuid eq '([\w-]+)'/, 'ItSystemBusinessTypeUuid eq $1')

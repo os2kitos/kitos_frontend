@@ -1,11 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ColumnComponent, FilterService } from '@progress/kendo-angular-grid';
 import { CompositeFilterDescriptor, FilterDescriptor } from '@progress/kendo-data-query';
-import { TreeNodeModel } from 'src/app/shared/models/tree-node.model';
+import { createNode, TreeNodeModel } from 'src/app/shared/models/tree-node.model';
 import { AppBaseFilterCellComponent } from '../app-base-filter-cell.component';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
 import { Actions } from '@ngrx/effects';
 import { initializeApplyFilterSubscription } from 'src/app/shared/helpers/grid-filter.helpers';
+import { Store } from '@ngrx/store';
+import { selectPagedOrganizationUnits } from 'src/app/store/organization/organization-unit/selectors';
+import { first } from 'rxjs';
 
 @Component({
   selector: 'app-unit-dropdown-filter',
@@ -16,22 +19,29 @@ export class UnitDropdownFilterComponent extends AppBaseFilterCellComponent impl
   @Input() override filter!: CompositeFilterDescriptor;
   @Input() override column!: ColumnComponent;
   @Input() entityType!: RegistrationEntityTypes;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
 
   public chosenOption?: TreeNodeModel;
 
-  constructor(filterService: FilterService, private actions$: Actions) {
+  public readonly units$ = this.store.select(selectPagedOrganizationUnits);
+
+  constructor(filterService: FilterService, private actions$: Actions, private store: Store) {
     super(filterService);
   }
 
   ngOnInit(): void {
-    this.chosenOption = this.getColumnFilter()?.value;
+    this.updateMethod(this.getColumnFilter() ?? undefined);
 
-    const updateMethod: (filter: FilterDescriptor | undefined) => void = (filter) => {
-      this.chosenOption = filter?.value as TreeNodeModel;
-    };
     this.subscriptions.add(
-      initializeApplyFilterSubscription(this.actions$, this.entityType, this.column.field, updateMethod)
+      initializeApplyFilterSubscription(this.actions$, this.entityType, this.column.field, this.updateMethod.bind(this))
+    );
+  }
+
+  private updateMethod(filter: FilterDescriptor | undefined): void {
+    this.subscriptions.add(
+      this.units$.pipe(first()).subscribe((units) => {
+        const matchingUnit = units?.find((unit) => unit.uuid === filter?.value);
+        this.chosenOption = matchingUnit ? createNode(matchingUnit) : undefined;
+      })
     );
   }
 
@@ -43,7 +53,7 @@ export class UnitDropdownFilterComponent extends AppBaseFilterCellComponent impl
         : this.updateFilter({
             field: this.column.field,
             operator: 'eq',
-            value: option.name,
+            value: option.id,
           })
     );
   }
