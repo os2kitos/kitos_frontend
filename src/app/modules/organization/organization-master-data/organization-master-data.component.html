@@ -54,7 +54,7 @@
       text="CVR-nummer"
       [formGroup]="dataResponsibleForm"
       formName="cvrControl"
-      (valueChange)="patchMasterDataRolesDataResponsible()"
+      (valueChange)="patchDataResponsibleCvr($event?.toString())"
       data-cy="data-responsible-cvr-input"
     ></app-numeric-input>
     <app-textbox
@@ -108,7 +108,7 @@
       text="CVR-nummer"
       [formGroup]="dataProtectionAdvisorForm"
       formName="cvrControl"
-      (valueChange)="patchMasterDataRolesDataProtectionAdvisor()"
+      (valueChange)="patchDataProtectionAdvisorCvr($event?.toString())"
     ></app-numeric-input>
     <app-textbox
       i18n-text

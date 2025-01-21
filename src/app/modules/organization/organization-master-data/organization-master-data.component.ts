@@ -208,18 +208,41 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
     }
   }
 
-  public patchMasterDataRolesDataResponsible(useEmailFromDropdown: boolean = false) {
-    if (this.dataResponsibleForm.valid) {
-      const dataResponsible: APIDataResponsibleRequestDTO = {};
-      const controls = this.dataResponsibleForm.controls;
-      const email = useEmailFromDropdown ? controls.emailControlDropdown.value?.name : controls.emailControl.value;
-      dataResponsible.address = controls.addressControl.value ?? undefined;
-      dataResponsible.cvr = controls.cvrControl.value ?? undefined;
-      dataResponsible.email = email ?? undefined;
-      dataResponsible.name = controls.nameControl.value ?? undefined;
-      dataResponsible.phone = controls.phoneControl.value ?? undefined;
+  public patchDataResponsibleCvr(cvr: string | undefined) {
+    this.patchMasterDataRolesDataResponsible(false, cvr);
+  }
 
-      this.store.dispatch(OrganizationActions.patchMasterDataRoles({ request: { dataResponsible } }));
+  private getValidCvrUpdate(newCvr: string | undefined, formControl: FormControl): string | undefined{
+    if (newCvr !== undefined) return newCvr;
+    return formControl.value ?? undefined;
+  }
+
+  public patchMasterDataRolesDataResponsible(
+    useEmailFromDropdown: boolean = false,
+    cvrEvent: string | undefined = undefined
+  ) {
+    if (this.dataResponsibleForm.valid) {
+      this.subscriptions.add(
+        this.organizationMasterDataRoles$.pipe(first()).subscribe((masterDataRoles) => {
+          const dataResponsible = masterDataRoles.DataResponsible;
+          const dataResponsibleDto: APIDataResponsibleRequestDTO = {};
+          const controls = this.dataResponsibleForm.controls;
+
+          const newCvr = this.getValidCvrUpdate(cvrEvent, controls.cvrControl);
+          if (newCvr === dataResponsible.cvr) return;
+
+          const email = useEmailFromDropdown ? controls.emailControlDropdown.value?.name : controls.emailControl.value;
+          dataResponsibleDto.address = controls.addressControl.value ?? undefined;
+          dataResponsibleDto.cvr = newCvr;
+          dataResponsibleDto.email = email ?? undefined;
+          dataResponsibleDto.name = controls.nameControl.value ?? undefined;
+          dataResponsibleDto.phone = controls.phoneControl.value ?? undefined;
+
+          this.store.dispatch(
+            OrganizationActions.patchMasterDataRoles({ request: { dataResponsible: dataResponsibleDto } })
+          );
+        })
+      );
     }
   }
 
@@ -241,19 +264,32 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
     }
   }
 
-  public patchMasterDataRolesDataProtectionAdvisor() {
-    if (this.dataProtectionAdvisorForm.valid) {
-      const dataProtectionAdvisor: APIDataProtectionAdvisorRequestDTO = {};
-      const controls = this.dataProtectionAdvisorForm.controls;
-      dataProtectionAdvisor.address = controls.addressControl.value ?? undefined;
-      dataProtectionAdvisor.cvr = controls.cvrControl.value ?? undefined;
-      dataProtectionAdvisor.email = controls.emailControl.value ?? undefined;
-      dataProtectionAdvisor.name = controls.nameControl.value ?? undefined;
-      dataProtectionAdvisor.phone = controls.phoneControl.value ?? undefined;
+  public patchDataProtectionAdvisorCvr(cvr: string | undefined) {
+    this.patchMasterDataRolesDataProtectionAdvisor(cvr);
+  }
 
-      this.store.dispatch(
-        OrganizationActions.patchMasterDataRoles({
-          request: { dataProtectionAdvisor },
+  public patchMasterDataRolesDataProtectionAdvisor(cvrEvent: string | undefined = undefined) {
+    if (this.dataProtectionAdvisorForm.valid) {
+      this.subscriptions.add(
+        this.organizationMasterDataRoles$.pipe(first()).subscribe((masterDataRoles) => {
+          const dataProtectionAdvisor = masterDataRoles.DataProtectionAdvisor;
+          const dataProtectionAdvisorDto: APIDataProtectionAdvisorRequestDTO = {};
+          const controls = this.dataProtectionAdvisorForm.controls;
+
+          const newCvr = this.getValidCvrUpdate(cvrEvent, controls.cvrControl);
+          if (newCvr === dataProtectionAdvisor.cvr) return;
+
+          dataProtectionAdvisorDto.address = controls.addressControl.value ?? undefined;
+          dataProtectionAdvisorDto.cvr = newCvr;
+          dataProtectionAdvisorDto.email = controls.emailControl.value ?? undefined;
+          dataProtectionAdvisorDto.name = controls.nameControl.value ?? undefined;
+          dataProtectionAdvisorDto.phone = controls.phoneControl.value ?? undefined;
+
+          this.store.dispatch(
+            OrganizationActions.patchMasterDataRoles({
+              request: { dataProtectionAdvisor: dataProtectionAdvisorDto },
+            })
+          );
         })
       );
     }
