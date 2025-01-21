@@ -18,7 +18,7 @@ import {
   process,
   SortDescriptor,
 } from '@progress/kendo-data-query';
-import { get } from 'lodash';
+import { cloneDeep, get } from 'lodash';
 import { combineLatest, first, map, Observable, of } from 'rxjs';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import { GridExportActions } from 'src/app/store/grid/actions';
@@ -166,9 +166,8 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   }
 
   public onResizeChange(event: ColumnResizeArgs[], columns: GridColumn[]) {
-    const columnsCopy = JSON.parse(JSON.stringify(columns)) as GridColumn[];
-
     if (event.length > 0) {
+      const columnsCopy = cloneDeep(columns);
       const changedColumnEvent = event[0];
       const columnIndex = columnsCopy.findIndex(
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
