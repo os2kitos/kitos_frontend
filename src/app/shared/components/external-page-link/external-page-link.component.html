@@ -2,7 +2,7 @@
 
 <ng-container *ngIf="isValidLink === false">
   <app-content-with-tooltip *ngIf="title && url" [description]="invalidLinkPrefix + url"
-    ><app-paragraph [paragraphSize]="linkFontSize" [cropOnOverflow]="true">{{
+    ><app-paragraph [paragraphSize]="linkFontSize" [cropOnOverflow]="true" class="text-padding">{{
       title
     }}</app-paragraph></app-content-with-tooltip
   >
