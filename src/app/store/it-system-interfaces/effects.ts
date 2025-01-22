@@ -218,18 +218,16 @@ export class ITInterfaceEffects {
 
 function applyQueryFixes(odataString: string): string {
   const lastChangedByUserSearchedProperties = ['Name', 'LastName'];
-  let fixedOdataString = replaceQueryByMultiplePropertyContains(
+  const fixedOdataString = replaceQueryByMultiplePropertyContains(
     odataString,
     'LastChangedByUser.Name',
     'LastChangedByUser',
     lastChangedByUserSearchedProperties
   );
-  fixedOdataString = replaceQueryByMultiplePropertyContains(
+  return replaceQueryByMultiplePropertyContains(
     fixedOdataString,
     'ObjectOwner.Name',
     'ObjectOwner',
     lastChangedByUserSearchedProperties
   );
-
-  return fixedOdataString;
 }

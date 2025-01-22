@@ -685,7 +685,7 @@ function applyQueryFixes(odataString: string, roles: APIBusinessRoleDTO[] | unde
   roles?.forEach((role) => {
     convertedString = convertedString.replace(
       new RegExp(`(\\w+\\()Roles[./]Role${role.id}(,.*?\\))`, 'i'),
-      `RoleAssignments/any(c: $1c/UserFullName$2 and c/RoleId eq ${role.id})`
+      `RoleAssignments/any(d: $1d/UserFullName$2 and d/RoleId eq ${role.id})`
     );
   });
 
