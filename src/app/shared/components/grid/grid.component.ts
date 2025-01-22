@@ -131,7 +131,14 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
 
     const sort: SortDescriptor[] = this.getLocalStorageSort();
     if (!sort) return;
-    this.onSortChange(sort);
+    this.subscriptions.add(
+      this.columns$.pipe(first()).subscribe((columns) => {
+        //This check prevents stale state from being used to sort the grid
+        const columnToBeSorted = columns?.find((column) => column.field === sort[0].field);
+        if (!columnToBeSorted || columnToBeSorted.sortable === false) return;
+        this.onSortChange(sort);
+      })
+    );
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -334,11 +341,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   }
 
   public getFilteredExportColumns$() {
-    return combineLatest([
-      this.columns$,
-      this.exportAllColumns$,
-      this.uiConfigApplications$ ?? of([])
-    ]).pipe(
+    return combineLatest([this.columns$, this.exportAllColumns$, this.uiConfigApplications$ ?? of([])]).pipe(
       map(([columns, exportAllColumns, uiConfigApplications]) => {
         const columnsToExport = columns
           ? columns
@@ -351,7 +354,8 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
         const roleColumnFieldsToExport = new Set(roleColumnsInExport.map((column) => column.field));
         return columnsToExport.filter(
           (column) =>
-            !this.isExcelOnlyColumn(column) || roleColumnFieldsToExport.has(column.field.replaceAll(this.EmailColumnField, ''))
+            !this.isExcelOnlyColumn(column) ||
+            roleColumnFieldsToExport.has(column.field.replaceAll(this.EmailColumnField, ''))
         );
       })
     );

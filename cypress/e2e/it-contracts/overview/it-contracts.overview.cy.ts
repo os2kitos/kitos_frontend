@@ -36,6 +36,7 @@ describe('it-contracts', () => {
     cy.intercept('/api/v2/internal/organizations/*/grid/*/*', { statusCode: 404, body: {} });
 
     cy.intercept('api/v2/internal/it-contracts/applied-procurement-plans/*', { body: [] });
+    cy.intercept('api/v2/organizations/*/organization-units?pageSize=*', { body: [] });
     cy.setup(true, 'it-contracts');
   });
 

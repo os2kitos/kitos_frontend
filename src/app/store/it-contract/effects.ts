@@ -19,7 +19,6 @@ import {
 import { CONTRACT_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-constants';
 import { filterByValidCache } from 'src/app/shared/helpers/observable-helpers';
 import { replaceQueryByMultiplePropertyContains } from 'src/app/shared/helpers/odata-query.helpers';
-import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { adaptITContract } from 'src/app/shared/models/it-contract/it-contract.model';
 import { PaymentTypes } from 'src/app/shared/models/it-contract/payment-types.model';
 import { OData } from 'src/app/shared/models/odata.model';
@@ -42,6 +41,7 @@ import {
   selectOverviewContractRolesCache,
 } from './selectors';
 import { hasValidCache } from 'src/app/shared/helpers/date.helpers';
+import { contractsGridStateToAction } from 'src/app/shared/helpers/grid-filter.helpers';
 
 @Injectable()
 export class ITContractEffects {
@@ -80,13 +80,13 @@ export class ITContractEffects {
         this.store.select(selectOrganizationUuid),
         this.store.select(selectOverviewContractRoles),
       ]),
-      switchMap(([{ odataString }, organizationUuid, contractRoles]) => {
+      switchMap(([{ odataString, responsibleUnitUuid }, organizationUuid, contractRoles]) => {
         const convertedString = applyQueryFixes(odataString, contractRoles);
         return this.httpClient
           .get<OData>(
             `/odata/ItContractOverviewReadModels?organizationUuid=${organizationUuid}&$expand=RoleAssignments($select=RoleId,UserId,UserFullName,Email),
             DataProcessingAgreements($select=DataProcessingRegistrationId,DataProcessingRegistrationName,DataProcessingRegistrationUuid),
-            ItSystemUsages($select=ItSystemUsageUuid,ItSystemUsageName,ItSystemIsDisabled)&${convertedString}&$count=true`
+            ItSystemUsages($select=ItSystemUsageUuid,ItSystemUsageName,ItSystemIsDisabled)&responsibleOrganizationUnitUuid=${responsibleUnitUuid}&${convertedString}&$count=true`
           )
           .pipe(
             map((data) =>
@@ -101,7 +101,7 @@ export class ITContractEffects {
   updateGridState$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITContractActions.updateGridState),
-      map(({ gridState }) => ITContractActions.getITContracts(toODataString(gridState)))
+      map(({ gridState }) => contractsGridStateToAction(gridState))
     );
   });
 
@@ -681,7 +681,7 @@ function applyQueryFixes(odataString: string, roles: APIBusinessRoleDTO[] | unde
       /contains\(DataProcessingAgreements,(.*?)\)/,
       'DataProcessingAgreements/any(c: contains(c/DataProcessingRegistrationName,$1))'
     )
-    .replace("ItSystemUsageUuidsAsCsv", "ItSystemUsagesSystemUuidCsv");
+    .replace('ItSystemUsageUuidsAsCsv', 'ItSystemUsagesSystemUuidCsv');
   roles?.forEach((role) => {
     convertedString = convertedString.replace(
       new RegExp(`(\\w+\\()Roles[./]Role${role.id}(,.*?\\))`, 'i'),

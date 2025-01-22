@@ -140,7 +140,9 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
     {
       field: GridFields.ResponsibleOrgUnitName,
       title: $localize`Ansvarlig org. enhed`,
+      style: 'default-wrap',
       section: this.contractSection,
+      extraFilter: 'organization-unit',
       width: 320,
       hidden: false,
       persistId: 'responsibleOrganizationUnitName',

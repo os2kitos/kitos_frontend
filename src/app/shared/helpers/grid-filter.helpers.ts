@@ -2,6 +2,7 @@ import { Actions, ofType } from '@ngrx/effects';
 import { CompositeFilterDescriptor, FilterDescriptor, isCompositeFilterDescriptor } from '@progress/kendo-data-query';
 import { map, Subscription } from 'rxjs';
 import * as UsageFields from 'src/app/shared/constants/it-system-usage-grid-column-constants';
+import * as ContractFields from 'src/app/shared/constants/it-contracts-grid-column-constants';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
@@ -87,22 +88,41 @@ export function initializeApplyFilterSubscription(
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function usageGridStateToAction(gridState: GridState): any {
-  if (!gridState.filter) {
-    return ITSystemUsageActions.getITSystemUsages(toODataString(gridState, { utcDates: true }), undefined);
-  }
-  const filters = gridState.filter?.filters;
-  const responsibleUnitFilter = filters.find((filter) => isResponsibleUnitFilter(filter)) as
-    | FilterDescriptor
-    | undefined;
-  if (!responsibleUnitFilter) {
-    return ITSystemUsageActions.getITSystemUsages(toODataString(gridState, { utcDates: true }), undefined);
-  }
-  const filtersWithoutResponsibleUnit = filters.filter((filter) => !isResponsibleUnitFilter(filter));
-  const responsibleUnitUuid = responsibleUnitFilter?.value as string | undefined;
-  const newState: GridState = { ...gridState, filter: { ...gridState.filter, filters: filtersWithoutResponsibleUnit } };
-  return ITSystemUsageActions.getITSystemUsages(toODataString(newState, { utcDates: true }), responsibleUnitUuid);
+  const { gridState: newGridState, filter } = extractAndRemoveFilter(
+    gridState,
+    UsageFields.ResponsibleOrganizationUnitName
+  );
+  return ITSystemUsageActions.getITSystemUsages(
+    toODataString(newGridState, { utcDates: true }),
+    filter?.value as string | undefined
+  );
 }
 
-function isResponsibleUnitFilter(filter: CompositeFilterDescriptor | FilterDescriptor): boolean {
-  return !isCompositeFilterDescriptor(filter) && filter.field === UsageFields.ResponsibleOrganizationUnitName;
+//eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function contractsGridStateToAction(gridState: GridState): any {
+  const { gridState: newGridState, filter } = extractAndRemoveFilter(gridState, ContractFields.ResponsibleOrgUnitName);
+  return ITContractActions.getITContracts(toODataString(newGridState), filter?.value as string | undefined);
+}
+
+function extractAndRemoveFilter(
+  gridState: GridState,
+  targetFilteName: string
+): { gridState: GridState; filter: FilterDescriptor | undefined } {
+  if (!gridState.filter) {
+    return { gridState, filter: undefined };
+  }
+  const filters = gridState.filter?.filters;
+  const targetFilter = filters.find((filter) => isTargetFilter(filter, targetFilteName)) as
+    | FilterDescriptor
+    | undefined;
+  if (!targetFilter) {
+    return { gridState, filter: undefined };
+  }
+  const filtersWithoutTarget = filters.filter((filter) => !isTargetFilter(filter, targetFilteName));
+  const newState: GridState = { ...gridState, filter: { ...gridState.filter, filters: filtersWithoutTarget } };
+  return { gridState: newState, filter: targetFilter };
+}
+
+function isTargetFilter(filter: CompositeFilterDescriptor | FilterDescriptor, fieldName: string): boolean {
+  return !isCompositeFilterDescriptor(filter) && filter.field === fieldName;
 }

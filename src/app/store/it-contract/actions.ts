@@ -21,10 +21,15 @@ import { PaymentTypes } from 'src/app/shared/models/it-contract/payment-types.mo
 export const ITContractActions = createActionGroup({
   source: 'ITContract',
   events: {
-    'Get IT Contract': (contractUuid: string) => ({ contractUuid }),
+    'Get IT Contract': (contractUuid: string) => ({
+      contractUuid,
+    }),
     'Get IT Contract Success': (itContract: APIItContractResponseDTO) => ({ itContract }),
     'Get IT Contract Error': emptyProps(),
-    'Get IT Contracts': (odataString: string) => ({ odataString }),
+    'Get IT Contracts': (odataString: string, responsibleUnitUuid: string | undefined) => ({
+      odataString,
+      responsibleUnitUuid,
+    }),
     'Get IT Contracts Success': (itContracts: ITContract[], total: number) => ({ itContracts, total }),
     'Get IT Contracts Error': emptyProps(),
     'Update Grid State': (gridState: GridState) => ({ gridState }),
@@ -111,8 +116,17 @@ export const ITContractActions = createActionGroup({
     'Add It Contract Role Success': (itContract: APIItContractResponseDTO) => ({ itContract }),
     'Add It Contract Role Error': emptyProps(),
 
-    'Remove It Contract Role': (userUuid: string, roleUuid: string, contractUuid: string) => ({ userUuid, roleUuid, contractUuid }),
-    'Remove It Contract Role Success': (itContract: APIItContractResponseDTO, userUuid: string, roleUuid: string, contractUuid: string) => ({ itContract, userUuid, roleUuid, contractUuid }),
+    'Remove It Contract Role': (userUuid: string, roleUuid: string, contractUuid: string) => ({
+      userUuid,
+      roleUuid,
+      contractUuid,
+    }),
+    'Remove It Contract Role Success': (
+      itContract: APIItContractResponseDTO,
+      userUuid: string,
+      roleUuid: string,
+      contractUuid: string
+    ) => ({ itContract, userUuid, roleUuid, contractUuid }),
     'Remove It Contract Role Error': emptyProps(),
 
     'Create It Contract': (name: string, openAfterCreate: boolean) => ({ name, openAfterCreate }),
@@ -141,7 +155,9 @@ export const ITContractActions = createActionGroup({
     'Save IT Contract Filter': (localStoreKey: string) => ({ localStoreKey }),
     'Apply IT Contract Filter': (state: SavedFilterState) => ({ state }),
 
-    'Save Organizational IT Contract Column Configuration': (columnConfig: APIColumnConfigurationRequestDTO[]) => ({columnConfig}),
+    'Save Organizational IT Contract Column Configuration': (columnConfig: APIColumnConfigurationRequestDTO[]) => ({
+      columnConfig,
+    }),
     'Save Organizational IT Contract Column Configuration Success': () => emptyProps(),
     'Save Organizational IT Contract Column Configuration Error': () => emptyProps(),
 
@@ -150,15 +166,19 @@ export const ITContractActions = createActionGroup({
     'Delete Organizational IT Contract Column Configuration Error': () => emptyProps(),
 
     'Reset To Organization IT Contract Column Configuration': () => emptyProps(),
-    'Reset To Organization IT Contract Column Configuration Success': (response: APIOrganizationGridConfigurationResponseDTO) => ({response}),
+    'Reset To Organization IT Contract Column Configuration Success': (
+      response: APIOrganizationGridConfigurationResponseDTO
+    ) => ({ response }),
     'Reset To Organization IT Contract Column Configuration Error': () => emptyProps(),
 
     'Initialize IT Contract Last Seen Grid Configuration': () => emptyProps(),
-    'Initialize IT Contract Last Seen Grid Configuration Success': (response: APIOrganizationGridConfigurationResponseDTO) => ({response}),
+    'Initialize IT Contract Last Seen Grid Configuration Success': (
+      response: APIOrganizationGridConfigurationResponseDTO
+    ) => ({ response }),
     'Initialize IT Contract Last Seen Grid Configuration Error': () => emptyProps(),
 
     'Get applied procurement plans': emptyProps(),
-    'Get applied procurement plans success': (response: APIAppliedProcurementPlanResponseDTO[]) => ({response}),
+    'Get applied procurement plans success': (response: APIAppliedProcurementPlanResponseDTO[]) => ({ response }),
     'Get applied procurement plans error': emptyProps(),
   },
 });
