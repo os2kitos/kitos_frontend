@@ -1,30 +1,28 @@
 <app-accordion [title]="title">
-  <form [formGroup]="formGroup">
-    <app-form-grid >
-      <app-dropdown
-        [text]="choiceTypeTitle"
-        [formGroup]="formGroup"
-        formName="yesNoDontKnowControl"
-        [data]="yesNoDontKnowOptions"
-        (valueChange)="preparePatch(choiceTypePropertyName, $event)"
-        data-cy="url-section-dropdown"
-      ></app-dropdown>
-      <app-datepicker
-        [text]="dateTitle"
-        [formGroup]="formGroup"
-        formName="dateControl"
-        (valueChange)="preparePatch(datePropertyName, $event?.toDateString())"
-      >
-      </app-datepicker>
-      <app-edit-url-section
-        [title]="linkTitle"
-        [simpleLink$]="documentation$"
-        [isDisabled]="(isYesNoDontKnowFalse$ | async) !== false"
-        data-cy="base-date-url-section-selector"
-        (submitMethod)="patchSimpleLink($event)"
-        [isDisabled]="disableLinkControl"
-      >
-      </app-edit-url-section>
-    </app-form-grid >
-  </form>
+  <app-form-grid [formGroup]="formGroup">
+    <app-dropdown
+      [text]="choiceTypeTitle"
+      [formGroup]="formGroup"
+      formName="yesNoDontKnowControl"
+      [data]="yesNoDontKnowOptions"
+      (valueChange)="preparePatch(choiceTypePropertyName, $event)"
+      data-cy="url-section-dropdown"
+    ></app-dropdown>
+    <app-datepicker
+      [text]="dateTitle"
+      [formGroup]="formGroup"
+      formName="dateControl"
+      (valueChange)="preparePatch(datePropertyName, $event?.toDateString())"
+    >
+    </app-datepicker>
+    <app-edit-url-section
+      [title]="linkTitle"
+      [simpleLink$]="documentation$"
+      [isDisabled]="(isYesNoDontKnowFalse$ | async) !== false"
+      data-cy="base-date-url-section-selector"
+      (submitMethod)="patchSimpleLink($event)"
+      [isDisabled]="disableLinkControl"
+    >
+    </app-edit-url-section>
+  </app-form-grid>
 </app-accordion>

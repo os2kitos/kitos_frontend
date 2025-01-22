@@ -1,4 +1,4 @@
-<app-scrollbar-dialog [title]="title">
+<app-dialog [title]="title">
   <form [formGroup]="paymentForm" (submit)="savePayment()">
     <app-standard-vertical-content-grid>
       <app-org-unit-select
@@ -54,7 +54,7 @@
         formName="auditDate"
       ></app-datepicker>
       <app-textarea text="Note" i18n-text data-cy="note-input" [formGroup]="paymentForm" formName="note"></app-textarea>
-      <app-dialog-actions>
+      <app-dialog-actions class="dialog-footer">
         <app-button buttonStyle="secondary" i18n (buttonClick)="close()">Annuller</app-button>
         <app-button [disabled]="isBusy || paymentForm.invalid" type="submit" data-cy="confirm-button">{{
           saveText
@@ -62,4 +62,4 @@
       </app-dialog-actions>
     </app-standard-vertical-content-grid>
   </form>
-</app-scrollbar-dialog>
+</app-dialog>

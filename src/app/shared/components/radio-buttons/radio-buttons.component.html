@@ -1,6 +1,6 @@
 <ng-container *ngIf="options && options.length > 0">
   <ng-container *ngIf="formGroup && formName">
-    <app-standard-vertical-content-grid>
+    <app-standard-vertical-content-grid [withGap]="false">
       <label *ngIf="text">{{ text }}</label>
       <div [formGroup]="formGroup">
         <mat-radio-group [formControlName]="formName" [value]="value" (change)="changeSelectedOption($event.value)">

@@ -14,10 +14,12 @@ import { RoleOptionTypeActions } from 'src/app/store/roles-option-type-store/act
 import { selectRoleOptionTypes } from 'src/app/store/roles-option-type-store/selectors';
 import { UserNotificationActions } from 'src/app/store/user-notifications/actions';
 import { BaseComponent } from '../../base/base.component';
+import { MAX_DIALOG_HEIGHT } from '../../constants/constants';
 import { NotificationEntityType, NotificationEntityTypeEnum } from '../../models/notification-entity-types';
 import { notificationRepetitionFrequencyOptions } from '../../models/notification-repetition-frequency.model';
 import { notificationTypeOptions } from '../../models/notification-type.model';
 import { RoleOptionTypes } from '../../models/options/role-option-types.model';
+import { AppDatePipe } from '../../pipes/app-date.pipe';
 import { filterNullish } from '../../pipes/filter-nullish';
 import { invertBooleanValue } from '../../pipes/invert-boolean-value';
 import { matchEmptyArray } from '../../pipes/match-empty-array';
@@ -26,7 +28,6 @@ import { NotificationService } from '../../services/notification.service';
 import { NotificationsTableDialogComponent } from './notifications-table-dialog/notifications-table-dialog.component';
 import { NotificationsTableSentDialogComponent } from './notifications-table-sent-dialog/notifications-table-sent-dialog.component';
 import { NotificationsTableComponentStore } from './notifications-table.component-store';
-import { AppDatePipe } from '../../pipes/app-date.pipe';
 
 @Component({
   selector: 'app-notifications-table[entityUuid][ownerResourceType][hasModifyPermission]',
@@ -200,7 +201,7 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
   private openNotificationsTableDialog(config?: MatDialogConfig<unknown> | undefined) {
     const paddedConfig: MatDialogConfig<unknown> = config ?? {};
     paddedConfig.height = '95%';
-    paddedConfig.maxHeight = '750px';
+    paddedConfig.maxHeight = MAX_DIALOG_HEIGHT;
     return this.notificationDialog.open(NotificationsTableDialogComponent, paddedConfig);
   }
 

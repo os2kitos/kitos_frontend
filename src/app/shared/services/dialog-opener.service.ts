@@ -5,6 +5,7 @@ import { DeleteUserDialogComponent } from 'src/app/modules/organization/organiza
 import { EditUserDialogComponent } from 'src/app/modules/organization/organization-users/edit-user-dialog/edit-user-dialog.component';
 import { IconConfirmationDialogComponent } from '../components/dialogs/icon-confirmation-dialog/icon-confirmation-dialog.component';
 import { GlobalOptionTypeDialogComponent } from '../components/global-option-type-view/global-option-type-dialog/global-option-type-dialog.component';
+import { MAX_DIALOG_HEIGHT } from '../constants/constants';
 import { GlobalAdminOptionType } from '../models/options/global-admin-option-type.model';
 import { ODataOrganizationUser } from '../models/organization/organization-user/organization-user.model';
 
@@ -19,7 +20,7 @@ export class DialogOpenerService {
   public openEditUserDialog(user: ODataOrganizationUser, nested: boolean): MatDialogRef<EditUserDialogComponent> {
     const dialogRef = this.dialog.open(EditUserDialogComponent, {
       height: '95%',
-      maxHeight: '750px',
+      maxHeight: MAX_DIALOG_HEIGHT,
     });
     dialogRef.componentInstance.user = user;
     dialogRef.componentInstance.isNested = nested;
@@ -39,12 +40,16 @@ export class DialogOpenerService {
     return dialogRef;
   }
 
-  public openTakeSystemOutOfUseDialog(organizatioName: string | undefined = undefined): MatDialogRef<IconConfirmationDialogComponent> {
+  public openTakeSystemOutOfUseDialog(
+    organizatioName: string | undefined = undefined
+  ): MatDialogRef<IconConfirmationDialogComponent> {
     const dialogRef = this.dialog.open(IconConfirmationDialogComponent);
     const confirmationDialogInstance = dialogRef.componentInstance as IconConfirmationDialogComponent;
     confirmationDialogInstance.confirmationType = 'Custom';
     confirmationDialogInstance.title = $localize`Er du sikker på, at du vil fjerne den lokale anvendelse af systemet?`;
-    confirmationDialogInstance.bodyText = $localize`Dette sletter de lokale registreringer vedrørerende systemet i ${organizatioName ?? 'kommunen'}, men sletter ikke stamdata om systemet i IT System Kataloget.`;
+    confirmationDialogInstance.bodyText = $localize`Dette sletter de lokale registreringer vedrørerende systemet i ${
+      organizatioName ?? 'kommunen'
+    }, men sletter ikke stamdata om systemet i IT System Kataloget.`;
     confirmationDialogInstance.icon = 'not-in-use';
     confirmationDialogInstance.confirmColor = 'warn';
     confirmationDialogInstance.customConfirmText = $localize`Bekræft`;

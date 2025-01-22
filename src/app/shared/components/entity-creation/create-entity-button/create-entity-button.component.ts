@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { CreateInterfaceDialogComponent } from 'src/app/modules/it-systems/it-system-interfaces/create-interface-dialog/create-interface-dialog.component';
 import { CreateUserDialogComponent } from 'src/app/modules/organization/organization-users/create-user-dialog/create-user-dialog.component';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { MAX_DIALOG_HEIGHT } from 'src/app/shared/constants/constants';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
 import { CreateEntityWithNameDialogComponent } from '../create-entity-with-name-dialog/create-entity-with-name-dialog.component';
 
@@ -41,7 +42,7 @@ export class CreateEntityButtonComponent extends BaseComponent {
         this.dialog.open(CreateInterfaceDialogComponent);
         break;
       case 'organization-user':
-        this.dialog.open(CreateUserDialogComponent, { height: '95%', maxHeight: '750px' });
+        this.dialog.open(CreateUserDialogComponent, { height: '95%', maxHeight: MAX_DIALOG_HEIGHT });
         break;
       default: {
         const dialogRef = this.dialog.open(CreateEntityWithNameDialogComponent);

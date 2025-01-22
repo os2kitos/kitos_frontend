@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
+import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
-import { filter, first, map } from 'rxjs';
+import { first, map } from 'rxjs';
 import {
   APIArchivingUpdateRequestDTO,
   APIIdentityNamePairResponseDTO,
@@ -29,21 +30,21 @@ import {
   selectItSystemUsageArchiving,
 } from 'src/app/store/it-system-usage/selectors';
 import { selectItSystemRecomendedArchiveDutyComment } from 'src/app/store/it-system/selectors';
+import {
+  selectITSystemUsageEnableActive,
+  selectITSystemUsageEnableArchiveFrequency,
+  selectITSystemUsageEnableArchiveLocation,
+  selectITSystemUsageEnableArchiveSupplier,
+  selectITSystemUsageEnableArchiveTestLocation,
+  selectITSystemUsageEnableArchiveType,
+  selectITSystemUsageEnableDocumentBearing,
+  selectITSystemUsageEnableJournalPeriods,
+  selectITSystemUsageEnableNotes,
+} from 'src/app/store/organization/ui-module-customization/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 import { ItSystemUsageDetailsArchivingComponentStore } from './it-system-usage-details-archiving.component-store';
 import { ItSystemUsageDetailsJournalPeriodWriteDialogComponent } from './write-dialog/it-system-usage-details-journal-period-write-dialog.component';
-import {
-  selectITSystemUsageEnableArchiveType,
-  selectITSystemUsageEnableArchiveLocation,
-  selectITSystemUsageEnableArchiveSupplier,
-  selectITSystemUsageEnableArchiveTestLocation,
-  selectITSystemUsageEnableArchiveFrequency,
-  selectITSystemUsageEnableDocumentBearing,
-  selectITSystemUsageEnableActive,
-  selectITSystemUsageEnableNotes,
-  selectITSystemUsageEnableJournalPeriods,
-} from 'src/app/store/organization/ui-module-customization/selectors';
 
 @Component({
   selector: 'app-it-system-usage-details-archiving',
@@ -126,7 +127,6 @@ export class ItSystemUsageDetailsArchivingComponent extends BaseComponent implem
   ngOnInit() {
     this.dispatchGetRegularOptionTypes();
     this.subscribeToArchiveDutyChanges();
-    this.validatePermissions();
     this.initializeArchiveForm();
 
     this.subscribeToJournalPeriodsChanges();
@@ -224,22 +224,16 @@ export class ItSystemUsageDetailsArchivingComponent extends BaseComponent implem
       })
     );
   }
-  private validatePermissions() {
-    this.subscriptions.add(
-      this.store
-        .select(selectITSystemUsageHasModifyPermission)
-        .pipe(filter((hasModifyPermission) => hasModifyPermission == false))
-        .subscribe(() => {
-          this.archiveForm.disable();
-        })
-    );
-  }
+
   private initializeArchiveForm() {
     this.subscriptions.add(
       this.store
         .select(selectItSystemUsageArchiving)
-        .pipe(filterNullish())
-        .subscribe((archive) =>
+        .pipe(
+          filterNullish(),
+          concatLatestFrom(() => this.hasModifyPermission$)
+        )
+        .subscribe(([archive, hasModifyPermission]) => {
           this.archiveForm.patchValue({
             archiveDuty: mapArchiveDutyChoice(archive.archiveDuty),
             type: archive.type,
@@ -250,8 +244,16 @@ export class ItSystemUsageDetailsArchivingComponent extends BaseComponent implem
             notes: archive.notes,
             frequencyInMonths: archive.frequencyInMonths,
             documentBearing: archive.documentBearing,
-          })
-        )
+          });
+
+          if (hasModifyPermission && archive.archiveDuty) {
+            this.archiveForm.enable();
+          } else if (hasModifyPermission && !archive.archiveDuty) {
+            this.archiveForm.controls.archiveDuty.enable();
+          } else {
+            this.archiveForm.disable();
+          }
+        })
     );
   }
 

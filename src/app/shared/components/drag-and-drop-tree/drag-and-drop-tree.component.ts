@@ -125,10 +125,14 @@ export class DragAndDropTreeComponent<T> implements OnInit {
   }
 
   public checkNode(node: EntityTreeNode<T>) {
+    if (this.disableCheck) return;
+
     this.nodeChecked.emit(node);
   }
 
   public checkNodeTextClick(node: EntityTreeNode<T>) {
+    if (this.disableCheck) return;
+
     node.status = !node.status;
     this.checkNode(node);
   }

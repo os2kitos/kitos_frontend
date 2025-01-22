@@ -5,7 +5,7 @@ import { Observable, first } from 'rxjs';
 import { APIPaymentResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
-import { NULL_PLACEHOLDER } from 'src/app/shared/constants/constants';
+import { MAX_DIALOG_HEIGHT, NULL_PLACEHOLDER } from 'src/app/shared/constants/constants';
 import { PaymentTypes } from 'src/app/shared/models/it-contract/payment-types.model';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { selectItContractHasModifyPermissions } from 'src/app/store/it-contract/selectors';
@@ -31,17 +31,13 @@ export class PaymentTableComponent extends BaseComponent {
   }
 
   public onAddNewPayment() {
-    const dialogRef = this.dialog.open(PaymentDialogComponent);
-    const dialogInstance = dialogRef.componentInstance as PaymentDialogComponent;
-    dialogInstance.paymentType = this.paymentType;
+    this.openPaymentDialog();
   }
 
   public onEditPayment(payment: APIPaymentResponseDTO) {
-    const dialogRef = this.dialog.open(PaymentDialogComponent);
-    const dialogInstance = dialogRef.componentInstance as PaymentDialogComponent;
+    const dialogInstance = this.openPaymentDialog();
     dialogInstance.payment = payment;
     dialogInstance.isEdit = true;
-    dialogInstance.paymentType = this.paymentType;
   }
 
   public onDeletePayment(payment: APIPaymentResponseDTO) {
@@ -63,5 +59,12 @@ export class PaymentTableComponent extends BaseComponent {
           }
         })
     );
+  }
+
+  private openPaymentDialog() {
+    const dialogRef = this.dialog.open(PaymentDialogComponent, { height: '95%', maxHeight: MAX_DIALOG_HEIGHT });
+    const dialogInstance = dialogRef.componentInstance as PaymentDialogComponent;
+    dialogInstance.paymentType = this.paymentType;
+    return dialogInstance;
   }
 }

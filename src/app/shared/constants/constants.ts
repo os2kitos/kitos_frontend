@@ -47,3 +47,5 @@ export const DEFAULT_DATE_COLUMN_MINIMUM_WIDTH = 200;
 export const STRING_FIELD_MAX_LENGTH = 100;
 
 export const GRID_ROW_HEIGHT = 63;
+
+export const MAX_DIALOG_HEIGHT = '750px';

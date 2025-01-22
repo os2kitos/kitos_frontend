@@ -19,6 +19,8 @@
       (valueChange)="patchName($event)"
     ></app-textbox>
     <ng-container *ngIf="dataResponsibleEnabled$ | async">
+      <!-- The column should span 2/3rds since it contains long data that is partially hidden if the input is smaller
+           Issue described in https://os2web.atlassian.net/browse/KITOSUDV-5632-->
       <app-dropdown
         text="Dataansvarlig"
         i18n-text

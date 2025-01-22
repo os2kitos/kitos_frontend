@@ -40,7 +40,6 @@ import { ItSystemUsageDetailsHierarchyComponent } from './it-system-usages/it-sy
 import { ItSystemUsageDetailsInterfacesComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-interfaces/it-system-usage-details-interfaces.component';
 import { ItSystemUsageDetailsKleComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-kle/it-system-usage-details-kle.component';
 import { ItSystemUsageDetailsNotificationsComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-notifications/it-system-usage-details-notifications.component';
-import { UsageOrganizationCreateDialogComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-organization/create-dialog/usage-organization.create-dialog.component';
 import { ItSystemUsageDetailsOrganizationComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-organization/it-system-usage-details-organization.component';
 import { CreateRelationDialogComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-relations/create-relation-dialog/create-relation-dialog.component';
 import { ItSystemUsageDetailsRelationsComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-relations/it-system-usage-details-relations.component';
@@ -72,7 +71,6 @@ import { KleTableComponent } from './shared/kle-table/kle-table.component';
     ItSystemUsageDetailsHierarchyComponent,
     ItSystemHierarchyTableComponent,
     ItSystemUsageDetailsOrganizationComponent,
-    UsageOrganizationCreateDialogComponent,
     ItSystemUsageDetailsRolesComponent,
     ItSystemUsageDetailsKleComponent,
     KleTableComponent,
