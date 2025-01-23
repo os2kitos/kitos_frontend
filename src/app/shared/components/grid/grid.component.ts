@@ -367,6 +367,10 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     return this.gridUIConfigService.isColumnEnabled(column, applications);
   }
 
+  public totalDataAmount(): number {
+    return this.data?.total ?? 0;
+  }
+
   private isExcelOnlyColumn(column: GridColumn): boolean {
     return column.style === 'excel-only';
   }

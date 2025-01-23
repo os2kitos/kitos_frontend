@@ -365,10 +365,6 @@
         <source>Tilpas kolonner</source>
         <target state="new">Tilpas kolonner</target>
       </trans-unit>
-      <trans-unit id="5993805561016422745" datatype="html">
-        <source>Sidst ændret ID</source>
-        <target state="new">Sidst ændret ID</target>
-      </trans-unit>
       <trans-unit id="4248719406441251270" datatype="html">
         <source>IT System information</source>
         <target state="new">IT System information</target>
@@ -992,10 +988,6 @@
       <trans-unit id="2771143625208565970" datatype="html">
         <source>Er du sikker på, at du vil gendanne den nedarvede opgave?</source>
         <target state="new">Er du sikker på, at du vil gendanne den nedarvede opgave?</target>
-      </trans-unit>
-      <trans-unit id="2215280136136225166" datatype="html">
-        <source>Vælg relevante organisationsenheder</source>
-        <target state="new">Vælg relevante organisationsenheder</target>
       </trans-unit>
       <trans-unit id="15293030230281939" datatype="html">
         <source>Tilføj</source>
@@ -6452,6 +6444,10 @@
       <trans-unit id="7473666767554000615" datatype="html">
         <source>Gå til systemanvendelse</source>
         <target state="new">Gå til systemanvendelse</target>
+      </trans-unit>
+      <trans-unit id="3415736924888217227" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="totalDataAmount() }}"/> resultater</source>
+        <target state="new"><x id="INTERPOLATION" equiv-text="totalDataAmount() }}"/> resultater</target>
       </trans-unit>
     </body>
   </file>

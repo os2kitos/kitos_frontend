@@ -1618,9 +1618,6 @@
       <trans-unit id="6596251357335554776" datatype="html">
         <source>Databehandling status</source>
       </trans-unit>
-      <trans-unit id="5993805561016422745" datatype="html">
-        <source>Sidst ændret ID</source>
-      </trans-unit>
       <trans-unit id="8301908070745025965" datatype="html">
         <source>Sidst ændret dato</source>
       </trans-unit>
@@ -2496,9 +2493,6 @@
       </trans-unit>
       <trans-unit id="2771143625208565970" datatype="html">
         <source>Er du sikker på, at du vil gendanne den nedarvede opgave?</source>
-      </trans-unit>
-      <trans-unit id="2215280136136225166" datatype="html">
-        <source>Vælg relevante organisationsenheder</source>
       </trans-unit>
       <trans-unit id="8110069076489111551" datatype="html">
         <source>Relevant organisationsenhed tilføjet</source>
@@ -4899,6 +4893,9 @@
       </trans-unit>
       <trans-unit id="7473666767554000615" datatype="html">
         <source>Gå til systemanvendelse</source>
+      </trans-unit>
+      <trans-unit id="3415736924888217227" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="totalDataAmount() }}"/> resultater</source>
       </trans-unit>
     </body>
   </file>
