@@ -96,6 +96,7 @@ export class ItSystemInterfacesComponent extends BaseOverviewComponent implement
       section: this.interfaceSectionName,
       hidden: false,
       noFilter: true,
+      sortable: false,
     },
     {
       field: 'Organization.Name',

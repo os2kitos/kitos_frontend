@@ -7,7 +7,7 @@ import { compact } from 'lodash';
 import { catchError, combineLatestWith, map, of, switchMap } from 'rxjs';
 import { APIV2ItInterfaceService } from 'src/app/api/v2';
 import { INTERFACE_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-constants';
-import { replaceQueryByMultiplePropertyContains } from 'src/app/shared/helpers/odata-query.helpers';
+import { castContainsFieldToString, replaceQueryByMultiplePropertyContains } from 'src/app/shared/helpers/odata-query.helpers';
 import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { adaptITInterface } from 'src/app/shared/models/it-interface/it-interface.model';
 import { OData } from 'src/app/shared/models/odata.model';
@@ -218,12 +218,15 @@ export class ITInterfaceEffects {
 
 function applyQueryFixes(odataString: string): string {
   const lastChangedByUserSearchedProperties = ['Name', 'LastName'];
-  const fixedOdataString = replaceQueryByMultiplePropertyContains(
+  let fixedOdataString = replaceQueryByMultiplePropertyContains(
     odataString,
     'LastChangedByUser.Name',
     'LastChangedByUser',
     lastChangedByUserSearchedProperties
   );
+
+  fixedOdataString = castContainsFieldToString(fixedOdataString, 'Uuid');
+
   return replaceQueryByMultiplePropertyContains(
     fixedOdataString,
     'ObjectOwner.Name',

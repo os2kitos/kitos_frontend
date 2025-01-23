@@ -36,6 +36,7 @@ import {
   selectOverviewSystemRolesCache,
   selectUsageGridColumns,
 } from './selectors';
+import { castContainsFieldToString } from 'src/app/shared/helpers/odata-query.helpers';
 
 @Injectable()
 export class ITSystemUsageEffects {
@@ -695,14 +696,16 @@ function applyQueryFixes(odataString: string, systemRoles: APIBusinessRoleDTO[] 
     .replace(
       /RelevantOrganizationUnitNamesAsCsv eq '([\w-]+)'/,
       'RelevantOrganizationUnits/any(g: g/OrganizationUnitUuid eq $1)'
-       )
+    )
     .replace(/(\w+\()AssociatedContractsNamesCsv(.*\))/, 'AssociatedContracts/any(h: $1h/ItContractName$2)')
     .replace(/ItSystemBusinessTypeUuid eq '([\w-]+)'/, 'ItSystemBusinessTypeUuid eq $1')
     .replace(/ItSystemCategoriesUuid eq '([\w-]+)'/, 'ItSystemCategoriesUuid eq $1')
     .replace(
-    new RegExp(`DataProcessingRegistrationsConcludedAsCsv eq ('[^']+')`, 'i'),
-    'contains(DataProcessingRegistrationsConcludedAsCsv, $1)'
-  );
+      new RegExp(`DataProcessingRegistrationsConcludedAsCsv eq ('[^']+')`, 'i'),
+      'contains(DataProcessingRegistrationsConcludedAsCsv, $1)'
+    );
+
+  convertedString = castContainsFieldToString(convertedString, 'ExternalSystemUuid');
 
   systemRoles?.forEach((role) => {
     convertedString = convertedString.replace(

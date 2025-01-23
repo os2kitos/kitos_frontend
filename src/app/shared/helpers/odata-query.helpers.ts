@@ -72,3 +72,13 @@ const extractOptionKey = (filterRequest: string, optionName: string): number => 
   const matchedString = filterRequest.replace(pattern, '$2');
   return parseInt(matchedString);
 };
+
+/**
+ * Replaces occurrences of `contains(fieldName,`
+ * with `contains(CAST(fieldName, 'Edm.String'),`.
+ */
+export function castContainsFieldToString(odataString: string, fieldName: string): string {
+  const pattern = new RegExp(`contains\\(${fieldName},`, 'g');
+  const replacement = `contains(CAST(${fieldName}, 'Edm.String'),`;
+  return odataString.replace(pattern, replacement);
+}
