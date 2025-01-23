@@ -62,6 +62,7 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
       section: this.systemSectionName,
       filter: 'boolean',
       entityType: 'it-system',
+      minResizableWidth: 140,
       extraData: [
         {
           name: $localize`Tilgængelig`,

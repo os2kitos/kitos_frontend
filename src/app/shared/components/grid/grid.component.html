@@ -159,12 +159,11 @@
           kendoGridCellTemplate
           let-dataItem
         >
-          <div class="items-center-container overflow-hidden-container" #chip>
+          <div class="items-center-container overflow-hidden-container">
             <app-status-chip
               [type]="column.entityType"
               [value]="dataItem | searchProperty : column.field"
               [valueDisplayType]="column.booleanValueDisplay"
-              [elementLength]="chip.offsetWidth"
               [reverseValues]="column.style === 'reverse-chip'"
             ></app-status-chip>
           </div>
