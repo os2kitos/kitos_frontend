@@ -3098,8 +3098,8 @@
       <trans-unit id="5971174733845305410" datatype="html">
         <source>Organisationer der anvender snitfladen: </source>
       </trans-unit>
-      <trans-unit id="7036234166279182867" datatype="html">
-        <source>Anveldelser af </source>
+      <trans-unit id="176817350007584756" datatype="html">
+        <source>Anvendelser af </source>
       </trans-unit>
       <trans-unit id="7256302874737708702" datatype="html">
         <source>Fra og med</source>
@@ -4783,8 +4783,8 @@
       <trans-unit id="5463227515602023886" datatype="html">
         <source>Sidst redigeret af bruger</source>
       </trans-unit>
-      <trans-unit id="1754540017409263785" datatype="html">
-        <source>Når denne er valgt, medtagesenhedens overordnede i hierarkiet</source>
+      <trans-unit id="3190968113618968473" datatype="html">
+        <source>Når denne er valgt, medtages enhedens overordnede i hierarkiet</source>
       </trans-unit>
       <trans-unit id="4743129658174909579" datatype="html">
         <source>Søg efter enhed</source>

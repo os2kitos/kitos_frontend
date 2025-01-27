@@ -11,7 +11,7 @@
 
 .sticky-empty-state {
   position: fixed;
-  left: 50%;
+  left: 45%;
   z-index: 1000;
 }
 
@@ -21,6 +21,6 @@
   justify-content: flex-end;
 }
 
-.padding-right {
+.result-amount-padding {
   padding-right: $padding-large;
 }

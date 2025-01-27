@@ -38,7 +38,7 @@
         ></app-chevron-right-icon>
       </ng-container>
       <ng-container *ngIf="checkboxNodes === true">
-        <app-checkbox [(value)]="node.status" [disabled]="disableCheck" (valueChange)="checkNode(node)"></app-checkbox>
+        <app-checkbox [(value)]="node.status" [disabled]="disableCheck"></app-checkbox>
         <app-details-page-link
           [itemType]="itemType"
           linkFontSize="small"

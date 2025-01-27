@@ -37,7 +37,7 @@ export class UsageLinkComponent {
       case 'it-interface':
         return $localize`Organisationer der anvender snitfladen: `;
       case 'it-system':
-        return $localize`Anveldelser af `;
+        return $localize`Anvendelser af `;
       default:
         throw new Error('Usage link not implemented for type: ' + this.type);
     }

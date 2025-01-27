@@ -57,13 +57,12 @@
             i18n-tooltip
             [isLarge]="true"
             [disabled]="(hasModifyPermission$ | async) !== true"
-            tooltip="Når denne er valgt, medtagesenhedens overordnede i hierarkiet"
+            tooltip="Når denne er valgt, medtages enhedens overordnede i hierarkiet"
           >
             Medtag overordnede enheder
           </app-checkbox-button>
         </div>
       </form>
-      <!-- <app-loading *ngIf="(isPatching$ | async) === true"></app-loading> -->
     </app-section>
 
     <app-drag-and-drop-tree

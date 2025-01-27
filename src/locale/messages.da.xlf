@@ -4147,9 +4147,9 @@
         <source>Organisationer der anvender snitfladen: </source>
         <target state="new">Organisationer der anvender snitfladen: </target>
       </trans-unit>
-      <trans-unit id="7036234166279182867" datatype="html">
-        <source>Anveldelser af </source>
-        <target state="new">Anveldelser af </target>
+      <trans-unit id="176817350007584756" datatype="html">
+        <source>Anvendelser af </source>
+        <target state="new">Anvendelser af </target>
       </trans-unit>
       <trans-unit id="6475857440782400398" datatype="html">
         <source>Filtre og sortering gemt</source>
@@ -6305,9 +6305,9 @@
         <source>Antal niveauer</source>
         <target state="new">Antal niveauer</target>
       </trans-unit>
-      <trans-unit id="1754540017409263785" datatype="html">
-        <source>Når denne er valgt, medtagesenhedens overordnede i hierarkiet</source>
-        <target state="new">Når denne er valgt, medtagesenhedens overordnede i hierarkiet</target>
+      <trans-unit id="3190968113618968473" datatype="html">
+        <source>Når denne er valgt, medtages enhedens overordnede i hierarkiet</source>
+        <target state="new">Når denne er valgt, medtages enhedens overordnede i hierarkiet</target>
       </trans-unit>
       <trans-unit id="7864242390343441005" datatype="html">
         <source> Medtag overordnede enheder </source>
