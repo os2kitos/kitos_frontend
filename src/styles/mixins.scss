@@ -445,10 +445,6 @@
       }
     }
 
-    table {
-      transform: none !important;
-    }
-
     .k-column-title {
       color: $color-primary-dark;
     }
@@ -540,19 +536,6 @@
       border-bottom-right-radius: 10px;
       z-index: 1;
       display: block;
-    }
-
-    .k-grid tbody > tr.k-grid-norecords:hover td:first-child::before {
-      content: none;
-      cursor: default;
-      background-color: transparent;
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
-    }
-
-    .k-grid tbody > tr.k-grid-norecords td {
-      cursor: default;
-      border-bottom: none;
     }
   }
   .column-title {
