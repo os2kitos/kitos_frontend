@@ -26,8 +26,8 @@ export const ITContractActions = createActionGroup({
     }),
     'Get IT Contract Success': (itContract: APIItContractResponseDTO) => ({ itContract }),
     'Get IT Contract Error': emptyProps(),
-    'Get IT Contracts': (odataString: string, responsibleUnitUuid: string | undefined) => ({
-      odataString,
+    'Get IT Contracts': (gridState: GridState, responsibleUnitUuid: string | undefined) => ({
+      gridState,
       responsibleUnitUuid,
     }),
     'Get IT Contracts Success': (itContracts: ITContract[], total: number) => ({ itContracts, total }),

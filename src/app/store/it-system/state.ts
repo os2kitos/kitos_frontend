@@ -12,6 +12,7 @@ export interface ITSystemState extends EntityState<ITSystem> {
   total: number;
   isLoadingSystemsQuery: boolean;
   gridState: GridState;
+  previousGridState: GridState;
   gridColumns: GridColumn[];
 
   loading: boolean | undefined;

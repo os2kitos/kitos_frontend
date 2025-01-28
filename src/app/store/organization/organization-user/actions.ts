@@ -15,7 +15,7 @@ import { ODataOrganizationUser } from 'src/app/shared/models/organization/organi
 export const OrganizationUserActions = createActionGroup({
   source: 'OrganizationUser',
   events: {
-    'Get Organization Users': (odataString: string) => ({ odataString }),
+    'Get Organization Users': (gridState: GridState) => ({ gridState }),
     'Get Organization Users Success ': (users: ODataOrganizationUser[], total: number) => ({ users, total }),
     'Get Organization Users Error': emptyProps(),
 

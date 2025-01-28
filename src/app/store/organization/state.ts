@@ -11,6 +11,8 @@ export interface OrganizationState extends EntityState<OrganizationOData> {
   total: number;
   isLoadingUsersQuery: boolean;
   gridState: GridState;
+  previousGridState: GridState;
+
   gridColumns: GridColumn[];
 
   organizationMasterData: OrganizationMasterData | null;

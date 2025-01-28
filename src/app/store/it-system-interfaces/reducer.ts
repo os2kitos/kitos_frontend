@@ -12,6 +12,7 @@ export const itInterfaceInitialState: ITInterfaceState = itInterfaceAdapter.getI
   total: 0,
   isLoadingInterfacesQuery: false,
   gridState: defaultODataGridState,
+  previousGridState: defaultODataGridState,
   gridColumns: [],
 
   loading: undefined,
@@ -54,6 +55,7 @@ export const itInterfaceFeature = createFeature({
         ...state,
         isLoadingInterfacesQuery: true,
         gridState,
+        previousGridState: state.gridState,
       })
     ),
 

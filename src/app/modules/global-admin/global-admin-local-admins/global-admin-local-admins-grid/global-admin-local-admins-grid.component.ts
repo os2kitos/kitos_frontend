@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Store } from '@ngrx/store';
 import { GridActionColumn } from 'src/app/shared/models/grid-action-column.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
-import { CreateLocalAdminDialogComponent } from '../create-local-admin-dialog/create-local-admin-dialog.component';
-import { Store } from '@ngrx/store';
-import { selectAllLocalAdmins, selectLocalAdminsLoading } from 'src/app/store/global-admin/local-admins/selectors';
 import { LocalAdminUser } from 'src/app/shared/models/local-admin/local-admin-user.model';
-import { LocalAdminUserActions } from 'src/app/store/global-admin/local-admins/actions';
 import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
-import { GridExportActions } from 'src/app/store/grid/actions';
+import { LocalAdminUserActions } from 'src/app/store/global-admin/local-admins/actions';
+import { selectAllLocalAdmins, selectLocalAdminsLoading } from 'src/app/store/global-admin/local-admins/selectors';
+import { GridActions } from 'src/app/store/grid/actions';
+import { CreateLocalAdminDialogComponent } from '../create-local-admin-dialog/create-local-admin-dialog.component';
 
 @Component({
   selector: 'app-global-admin-local-admins-grid',
@@ -64,6 +64,6 @@ export class GlobalAdminLocalAdminsGridComponent {
   }
 
   public exportToExcel() {
-    this.store.dispatch(GridExportActions.exportLocalData());
+    this.store.dispatch(GridActions.exportLocalData());
   }
 }

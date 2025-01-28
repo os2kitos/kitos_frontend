@@ -16,6 +16,7 @@ export const dataProcessingInitialState: DataProcessingState = dataProcessingAda
   total: 0,
   isLoadingDataProcessingsQuery: false,
   gridState: defaultODataGridState,
+  previousGridState: defaultODataGridState,
   gridColumns: [],
   gridRoleColumns: [],
   overviewRoles: resetCache(),
@@ -55,7 +56,14 @@ export const dataProcessingFeature = createFeature({
       DataProcessingActions.getDataProcessingsError,
       (state): DataProcessingState => ({ ...state, isLoadingDataProcessingsQuery: false })
     ),
-    on(DataProcessingActions.updateGridState, (state, { gridState }): DataProcessingState => ({ ...state, gridState })),
+    on(
+      DataProcessingActions.updateGridState,
+      (state, { gridState }): DataProcessingState => ({
+        ...state,
+        gridState,
+        previousGridState: state.gridState,
+      })
+    ),
     on(DataProcessingActions.deleteDataProcessing, (state): DataProcessingState => ({ ...state, isRemoving: true })),
     on(
       DataProcessingActions.deleteDataProcessingSuccess,

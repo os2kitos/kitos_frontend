@@ -17,7 +17,7 @@ export const ITSystemActions = createActionGroup({
     'Get IT System': (systemUuid: string) => ({ systemUuid }),
     'Get IT System Success ': (itSystem: APIItSystemResponseDTO) => ({ itSystem }),
     'Get IT System Error': emptyProps(),
-    'Get IT Systems': (odataString: string) => ({ odataString }),
+    'Get IT Systems': (gridState: GridState) => ({ gridState }),
     'Get IT Systems Success ': (itSystems: ITSystem[], total: number) => ({ itSystems, total }),
     'Get IT Systems Error': emptyProps(),
 

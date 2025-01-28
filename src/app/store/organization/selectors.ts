@@ -39,6 +39,7 @@ export const selectOrganizationGridLoading = createSelector(
   (state) => state.isLoadingUsersQuery
 );
 export const selectOrganizationGridState = createSelector(selectOrganizationState, (state) => state.gridState);
+export const selectPreviousGridState = createSelector(selectOrganizationState, (state) => state.previousGridState);
 export const selectOrganizationGridData = createSelector(selectAll, selectTotal, (data, total) => ({
   data,
   total,

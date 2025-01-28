@@ -16,6 +16,7 @@ export const itSystemUsageInitialState: ITSystemUsageState = itSystemUsageAdapte
   total: 0,
   isLoadingSystemUsagesQuery: false,
   gridState: defaultODataGridState,
+  previousGridState: defaultODataGridState,
   gridColumns: [],
   gridRoleColumns: [],
   systemRoles: resetCache(),
@@ -57,6 +58,7 @@ export const itSystemUsageFeature = createFeature({
         ...state,
         isLoadingSystemUsagesQuery: true,
         gridState,
+        previousGridState: state.gridState,
       })
     ),
     on(

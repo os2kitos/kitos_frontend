@@ -15,6 +15,8 @@ export interface ITSystemUsageState extends EntityState<ITSystemUsage> {
   total: number;
   isLoadingSystemUsagesQuery: boolean;
   gridState: GridState;
+  previousGridState: GridState;
+
   gridColumns: GridColumn[];
   gridRoleColumns: GridColumn[];
   systemRoles: Cached<APIBusinessRoleDTO[]>;

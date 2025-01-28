@@ -16,6 +16,7 @@ export const itContactInitialState: ITContractState = itContactAdapter.getInitia
   total: 0,
   isLoadingContractsQuery: false,
   gridState: defaultODataGridState,
+  previousGridState: defaultODataGridState,
   gridColumns: [],
   gridRoleColumns: [],
   contractRoles: resetCache(),
@@ -145,6 +146,7 @@ export const itContractFeature = createFeature({
         ...state,
         isLoadingContractsQuery: true,
         gridState,
+        previousGridState: state.gridState,
       })
     ),
     on(ITContractActions.getItContractOverviewRolesSuccess, (state, { roles }): ITContractState => {

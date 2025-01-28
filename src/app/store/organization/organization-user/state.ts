@@ -8,6 +8,7 @@ export interface OrganizationUserState extends EntityState<ODataOrganizationUser
   total: number;
   isLoadingUsersQuery: boolean;
   gridState: GridState;
+  previousGridState: GridState;
   gridColumns: GridColumn[];
 
   permissions: APIUserCollectionPermissionsResponseDTO | null;

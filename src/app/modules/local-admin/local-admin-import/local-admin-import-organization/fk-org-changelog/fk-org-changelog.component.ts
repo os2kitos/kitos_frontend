@@ -6,7 +6,7 @@ import { DropdownOption } from 'src/app/shared/models/dropdown-option.model';
 import { FkOrgChangeLogModel } from 'src/app/shared/models/local-admin/fk-org-change-log.dictionary';
 import { fkOrgChangelogGridColumns } from 'src/app/shared/models/local-admin/fk-org-changelog-columns';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
-import { GridExportActions } from 'src/app/store/grid/actions';
+import { GridActions } from 'src/app/store/grid/actions';
 import { getResponsibleEntityTextBasedOnOrigin } from 'src/app/store/helpers/fk-org-helper';
 import { FkOrgActions } from 'src/app/store/local-admin/fk-org/actions';
 import {
@@ -50,6 +50,6 @@ export class FkOrgChangelogComponent implements OnInit {
   }
 
   public exportToExcel() {
-    this.store.dispatch(GridExportActions.exportLocalData());
+    this.store.dispatch(GridActions.exportLocalData());
   }
 }

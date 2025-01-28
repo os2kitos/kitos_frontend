@@ -18,11 +18,13 @@ import {
   APIV2OrganizationGridInternalINTERNALService,
 } from 'src/app/api/v2';
 import { DATA_PROCESSING_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-constants';
+import { hasValidCache } from 'src/app/shared/helpers/date.helpers';
 import { adaptDataProcessingRegistration } from 'src/app/shared/models/data-processing/data-processing.model';
-import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { OData } from 'src/app/shared/models/odata.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ExternalReferencesApiService } from 'src/app/shared/services/external-references-api-service.service';
+import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
+import { GridDataCacheService } from 'src/app/shared/services/grid-data-cache.service';
 import { getNewGridColumnsBasedOnConfig } from '../helpers/grid-config-helper';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { DataProcessingActions } from './actions';
@@ -32,9 +34,8 @@ import {
   selectDataProcessingUuid,
   selectOverviewRoles,
   selectOverviewRolesCache,
+  selectPreviousGridState,
 } from './selectors';
-import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
-import { hasValidCache } from 'src/app/shared/helpers/date.helpers';
 
 @Injectable()
 export class DataProcessingEffects {
@@ -51,7 +52,8 @@ export class DataProcessingEffects {
     private apiv1DataProcessingService: APIV1DataProcessingRegistrationINTERNALService,
     @Inject(APIV2OrganizationGridInternalINTERNALService)
     private apiV2organizationalGridInternalService: APIV2OrganizationGridInternalINTERNALService,
-    private gridColumnStorageService: GridColumnStorageService
+    private gridColumnStorageService: GridColumnStorageService,
+    private gridDataCacheService: GridDataCacheService
   ) {}
 
   getDataProcessing$ = createEffect(() => {
@@ -71,20 +73,35 @@ export class DataProcessingEffects {
   getDataProcessings$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(DataProcessingActions.getDataProcessings),
-      concatLatestFrom(() => [this.store.select(selectOrganizationUuid), this.store.select(selectOverviewRoles)]),
-      switchMap(([{ odataString }, organizationUuid, overviewRoles]) => {
-        const fixedOdataString = applyQueryFixes(odataString, overviewRoles);
+      concatLatestFrom(() => [
+        this.store.select(selectOrganizationUuid),
+        this.store.select(selectOverviewRoles),
+        this.store.select(selectPreviousGridState),
+      ]),
+      switchMap(([{ gridState }, organizationUuid, overviewRoles, previousGridState]) => {
+        this.gridDataCacheService.tryResetOnGridStateChange(gridState, previousGridState);
+
+        const cachedRange = this.gridDataCacheService.get(gridState);
+        if (cachedRange.data !== undefined) {
+          return of(DataProcessingActions.getDataProcessingsSuccess(cachedRange.data, cachedRange.total));
+        }
+
+        const cacheableOdataString = this.gridDataCacheService.toChunkedODataString(gridState, { utcDates: true });
+        const fixedOdataString = applyQueryFixes(cacheableOdataString, overviewRoles);
+
         return this.httpClient
           .get<OData>(
             `/odata/DataProcessingRegistrationReadModels?organizationUuid=${organizationUuid}&$expand=RoleAssignments&${fixedOdataString}&$count=true`
           )
           .pipe(
-            map((data) =>
-              DataProcessingActions.getDataProcessingsSuccess(
-                compact(data.value.map(adaptDataProcessingRegistration)),
-                data['@odata.count']
-              )
-            ),
+            map((data) => {
+              const dataItems = compact(data.value.map(adaptDataProcessingRegistration));
+              const total = data['@odata.count'];
+              this.gridDataCacheService.set(gridState, dataItems, total);
+
+              const returnData = this.gridDataCacheService.gridStateSliceFromArray(dataItems, gridState);
+              return DataProcessingActions.getDataProcessingsSuccess(returnData, total);
+            }),
             catchError(() => of(DataProcessingActions.getDataProcessingsError()))
           );
       })
@@ -115,7 +132,7 @@ export class DataProcessingEffects {
   updateGridState$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(DataProcessingActions.updateGridState),
-      switchMap(({ gridState }) => of(DataProcessingActions.getDataProcessings(toODataString(gridState))))
+      switchMap(({ gridState }) => of(DataProcessingActions.getDataProcessings(gridState)))
     );
   });
 

@@ -12,6 +12,8 @@ export const itSystemInitialState: ITSystemState = itSystemAdapter.getInitialSta
   total: 0,
   isLoadingSystemsQuery: false,
   gridState: defaultODataGridState,
+  previousGridState: defaultODataGridState,
+
   gridColumns: [],
 
   loading: undefined,
@@ -47,6 +49,7 @@ export const itSystemFeature = createFeature({
         ...state,
         isLoadingSystemsQuery: true,
         gridState,
+        previousGridState: state.gridState,
       })
     ),
     on(ITSystemActions.getITSystemsError, (state): ITSystemState => ({ ...state, isLoadingSystemsQuery: false })),

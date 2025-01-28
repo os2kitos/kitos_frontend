@@ -39,7 +39,7 @@ export const OrganizationActions = createActionGroup({
     'Get Organization Permissions Success ': (permissions: OrganizationPermissions) => permissions,
     'Get Organization Permissions Error': emptyProps(),
 
-    'Get Organizations': (odataString: string) => ({ odataString }),
+    'Get Organizations': (gridState: GridState) => ({ gridState }),
     'Get Organizations Success': (organizations: OrganizationOData[], total: number) => ({ organizations, total }),
     'Get Organizations Error': emptyProps(),
 

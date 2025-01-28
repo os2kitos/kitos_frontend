@@ -10,6 +10,7 @@ export const selectAll = createSelector(selectITSystemState, itSystemAdapter.get
 export const selectTotal = createSelector(selectITSystemState, (state) => state.total);
 export const selectSystemGridLoading = createSelector(selectITSystemState, (state) => state.isLoadingSystemsQuery);
 export const selectSystemGridState = createSelector(selectITSystemState, (state) => state.gridState);
+export const selectPreviousGridState = createSelector(selectITSystemState, (state) => state.previousGridState);
 export const selectSystemGridData = createSelector(
   selectAll,
   selectTotal,

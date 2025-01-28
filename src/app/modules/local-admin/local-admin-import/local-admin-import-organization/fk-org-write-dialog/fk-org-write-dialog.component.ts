@@ -10,7 +10,7 @@ import { mapFkOrgSnapshotUnits } from 'src/app/shared/helpers/hierarchy.helpers'
 import { fkOrgChangelogGridColumns } from 'src/app/shared/models/local-admin/fk-org-changelog-columns';
 import { EntityTreeNode } from 'src/app/shared/models/structure/entity-tree-node.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
-import { GridExportActions } from 'src/app/store/grid/actions';
+import { GridActions } from 'src/app/store/grid/actions';
 import { FkOrgActions } from 'src/app/store/local-admin/fk-org/actions';
 import {
   selectHasSnapshotFailed,
@@ -143,7 +143,7 @@ export class FkOrgWriteDialogComponent extends BaseComponent implements OnInit {
   }
 
   public exportToExcel() {
-    this.store.dispatch(GridExportActions.exportLocalData());
+    this.store.dispatch(GridActions.exportLocalData());
   }
 
   private getRequest() {

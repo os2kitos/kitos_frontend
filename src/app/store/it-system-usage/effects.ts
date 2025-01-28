@@ -16,12 +16,14 @@ import {
 import { USAGE_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-constants';
 import { hasValidCache } from 'src/app/shared/helpers/date.helpers';
 import { usageGridStateToAction } from 'src/app/shared/helpers/grid-filter.helpers';
+import { castContainsFieldToString } from 'src/app/shared/helpers/odata-query.helpers';
 import { convertDataSensitivityLevelStringToNumberMap } from 'src/app/shared/models/it-system-usage/gdpr/data-sensitivity-level.model';
 import { adaptITSystemUsage } from 'src/app/shared/models/it-system-usage/it-system-usage.model';
 import { OData } from 'src/app/shared/models/odata.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ExternalReferencesApiService } from 'src/app/shared/services/external-references-api-service.service';
 import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
+import { GridDataCacheService } from 'src/app/shared/services/grid-data-cache.service';
 import { getNewGridColumnsBasedOnConfig } from '../helpers/grid-config-helper';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { ITSystemUsageActions } from './actions';
@@ -34,9 +36,9 @@ import {
   selectItSystemUsageUuid,
   selectOverviewSystemRoles,
   selectOverviewSystemRolesCache,
+  selectPreviousGridState,
   selectUsageGridColumns,
 } from './selectors';
-import { castContainsFieldToString } from 'src/app/shared/helpers/odata-query.helpers';
 
 @Injectable()
 export class ITSystemUsageEffects {
@@ -53,27 +55,42 @@ export class ITSystemUsageEffects {
     @Inject(APIV1ItSystemUsageOptionsINTERNALService)
     private apiItSystemUsageOptionsService: APIV1ItSystemUsageOptionsINTERNALService,
     @Inject(APIV2OrganizationGridInternalINTERNALService)
-    private apiV2organizationalGridInternalService: APIV2OrganizationGridInternalINTERNALService
+    private apiV2organizationalGridInternalService: APIV2OrganizationGridInternalINTERNALService,
+    private gridDataCacheService: GridDataCacheService
   ) {}
 
   getItSystemUsages$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.getITSystemUsages),
-      concatLatestFrom(() => [this.store.select(selectOrganizationUuid), this.store.select(selectOverviewSystemRoles)]),
-      switchMap(([{ odataString, responsibleUnitUuid }, organizationUuid, systemRoles]) => {
-        //Redirect consolidated field search towards optimized search targets
-        const convertedString = applyQueryFixes(odataString, systemRoles);
+      concatLatestFrom(() => [
+        this.store.select(selectOrganizationUuid),
+        this.store.select(selectOverviewSystemRoles),
+        this.store.select(selectPreviousGridState),
+      ]),
+      switchMap(([{ gridState, responsibleUnitUuid }, organizationUuid, systemRoles, previousGridState]) => {
+        this.gridDataCacheService.tryResetOnGridStateChange(gridState, previousGridState);
+
+        const cachedRange = this.gridDataCacheService.get(gridState);
+        if (cachedRange.data !== undefined) {
+          return of(ITSystemUsageActions.getITSystemUsagesSuccess(cachedRange.data, cachedRange.total));
+        }
+
+        const cacheableOdataString = this.gridDataCacheService.toChunkedODataString(gridState, { utcDates: true });
+        const fixedOdataString = applyQueryFixes(cacheableOdataString, systemRoles);
+
         return this.httpClient
           .get<OData>(
-            `/odata/ItSystemUsageOverviewReadModels?organizationUuid=${organizationUuid}&$expand=RoleAssignments,DataProcessingRegistrations,DependsOnInterfaces,IncomingRelatedItSystemUsages,OutgoingRelatedItSystemUsages,AssociatedContracts&responsibleOrganizationUnitUuid=${responsibleUnitUuid}&${convertedString}&$count=true`
+            `/odata/ItSystemUsageOverviewReadModels?organizationUuid=${organizationUuid}&$expand=RoleAssignments,DataProcessingRegistrations,DependsOnInterfaces,IncomingRelatedItSystemUsages,OutgoingRelatedItSystemUsages,AssociatedContracts&responsibleOrganizationUnitUuid=${responsibleUnitUuid}&${fixedOdataString}&$count=true`
           )
           .pipe(
-            map((data) =>
-              ITSystemUsageActions.getITSystemUsagesSuccess(
-                compact(data.value.map(adaptITSystemUsage)),
-                data['@odata.count']
-              )
-            ),
+            map((data) => {
+              const dataItems = compact(data.value.map(adaptITSystemUsage));
+              const total = data['@odata.count'];
+              this.gridDataCacheService.set(gridState, dataItems, total);
+
+              const returnData = this.gridDataCacheService.gridStateSliceFromArray(dataItems, gridState);
+              return ITSystemUsageActions.getITSystemUsagesSuccess(returnData, total);
+            }),
             catchError(() => of(ITSystemUsageActions.getITSystemUsagesError()))
           );
       })

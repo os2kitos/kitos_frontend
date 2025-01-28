@@ -15,7 +15,7 @@ import { ITInterface } from 'src/app/shared/models/it-interface/it-interface.mod
 export const ITInterfaceActions = createActionGroup({
   source: 'ITInterface',
   events: {
-    'Get IT Interfaces': (odataString: string) => ({ odataString }),
+    'Get IT Interfaces': (gridState: GridState) => ({ gridState }),
     'Get IT Interfaces Success ': (itInterfaces: ITInterface[], total: number) => ({ itInterfaces, total }),
     'Get IT Interfaces Error': emptyProps(),
     'Update Grid State': (gridState: GridState) => ({ gridState }),

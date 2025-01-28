@@ -9,7 +9,7 @@ import {
 } from '@progress/kendo-angular-grid';
 import { CompositeFilterDescriptor, SortDescriptor, process } from '@progress/kendo-data-query';
 import { get } from 'lodash';
-import { GridExportActions } from 'src/app/store/grid/actions';
+import { GridActions } from 'src/app/store/grid/actions';
 import { BaseComponent } from '../../base/base.component';
 import {
   DEFAULT_COLUMN_MINIMUM_WIDTH,
@@ -60,7 +60,7 @@ export class LocalGridComponent<T> extends BaseComponent implements OnInit {
     this.allData = this.allData.bind(this);
   }
   ngOnInit(): void {
-    this.actions$.pipe(ofType(GridExportActions.exportLocalData)).subscribe(() => this.excelExport());
+    this.actions$.pipe(ofType(GridActions.exportLocalData)).subscribe(() => this.excelExport());
   }
 
   public onModifyClick(item: T) {

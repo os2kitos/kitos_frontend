@@ -15,6 +15,7 @@ export interface DataProcessingState extends EntityState<DataProcessingRegistrat
   total: number;
   isLoadingDataProcessingsQuery: boolean;
   gridState: GridState;
+  previousGridState: GridState;
   gridColumns: GridColumn[];
   gridRoleColumns: GridColumn[];
   overviewRoles: Cached<APIBusinessRoleDTO[]>;

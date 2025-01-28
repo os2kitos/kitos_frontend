@@ -16,6 +16,7 @@ export interface ITContractState extends EntityState<ITContract> {
   total: number;
   isLoadingContractsQuery: boolean;
   gridState: GridState;
+  previousGridState: GridState;
   gridColumns: GridColumn[];
   gridRoleColumns: GridColumn[];
   contractRoles: Cached<APIBusinessRoleDTO[]>;

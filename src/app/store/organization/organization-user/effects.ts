@@ -3,7 +3,6 @@ import { Inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
-import { toODataString } from '@progress/kendo-data-query';
 import { compact } from 'lodash';
 import { catchError, combineLatestWith, map, of, switchMap } from 'rxjs';
 import { APIOrganizationUserResponseDTO, APIV2UsersInternalINTERNALService } from 'src/app/api/v2';
@@ -12,8 +11,10 @@ import { OData } from 'src/app/shared/models/odata.model';
 import { adaptOrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
+import { GridDataCacheService } from 'src/app/shared/services/grid-data-cache.service';
 import { selectOrganizationUuid } from '../../user-store/selectors';
 import { OrganizationUserActions } from './actions';
+import { selectPreviousGridState } from './selectors';
 
 @Injectable()
 export class OrganizationUserEffects {
@@ -22,15 +23,24 @@ export class OrganizationUserEffects {
     private store: Store,
     private httpClient: HttpClient,
     @Inject(APIV2UsersInternalINTERNALService) private apiService: APIV2UsersInternalINTERNALService,
-    private gridColumnStorageService: GridColumnStorageService
+    private gridColumnStorageService: GridColumnStorageService,
+    private gridDataCacheService: GridDataCacheService
   ) {}
 
   getOrganizationUsers$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(OrganizationUserActions.getOrganizationUsers),
-      combineLatestWith(this.store.select(selectOrganizationUuid)),
-      switchMap(([{ odataString }, organizationUuid]) => {
-        const fixedOdataString = applyQueryFixes(odataString);
+      concatLatestFrom(() => [this.store.select(selectOrganizationUuid), this.store.select(selectPreviousGridState)]),
+      switchMap(([{ gridState }, organizationUuid, previousGridState]) => {
+        this.gridDataCacheService.tryResetOnGridStateChange(gridState, previousGridState);
+
+        const cachedRange = this.gridDataCacheService.get(gridState);
+        if (cachedRange.data !== undefined) {
+          return of(OrganizationUserActions.getOrganizationUsersSuccess(cachedRange.data, cachedRange.total));
+        }
+
+        const cacheableOdataString = this.gridDataCacheService.toChunkedODataString(gridState, { utcDates: true });
+        const fixedOdataString = applyQueryFixes(cacheableOdataString);
 
         return this.httpClient
           .get<OData>(
@@ -42,12 +52,14 @@ export class OrganizationUserEffects {
               `DataProcessingRegistrationRights($expand=Role($select=Name,Uuid,HasWriteAccess),Object($select=Name,Uuid)),&${fixedOdataString}&$count=true`
           )
           .pipe(
-            map((data) =>
-              OrganizationUserActions.getOrganizationUsersSuccess(
-                compact(data.value.map(adaptOrganizationUser)),
-                data['@odata.count']
-              )
-            ),
+            map((data) => {
+              const dataItems = compact(data.value.map(adaptOrganizationUser));
+              const total = data['@odata.count'];
+              this.gridDataCacheService.set(gridState, dataItems, total);
+
+              const returnData = this.gridDataCacheService.gridStateSliceFromArray(dataItems, gridState);
+              return OrganizationUserActions.getOrganizationUsersSuccess(returnData, total);
+            }),
             catchError(() => of(OrganizationUserActions.getOrganizationUsersError()))
           );
       })
@@ -57,7 +69,7 @@ export class OrganizationUserEffects {
   updateGridState$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(OrganizationUserActions.updateGridState),
-      map(({ gridState }) => OrganizationUserActions.getOrganizationUsers(toODataString(gridState)))
+      map(({ gridState }) => OrganizationUserActions.getOrganizationUsers(gridState))
     );
   });
 

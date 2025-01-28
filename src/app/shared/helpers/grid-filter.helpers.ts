@@ -93,7 +93,7 @@ export function usageGridStateToAction(gridState: GridState): any {
     UsageFields.ResponsibleOrganizationUnitName
   );
   return ITSystemUsageActions.getITSystemUsages(
-    toODataString(newGridState, { utcDates: true }),
+    newGridState,
     filter?.value as string | undefined
   );
 }
@@ -101,24 +101,24 @@ export function usageGridStateToAction(gridState: GridState): any {
 //eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function contractsGridStateToAction(gridState: GridState): any {
   const { gridState: newGridState, filter } = extractAndRemoveFilter(gridState, ContractFields.ResponsibleOrgUnitName);
-  return ITContractActions.getITContracts(toODataString(newGridState), filter?.value as string | undefined);
+  return ITContractActions.getITContracts(newGridState, filter?.value as string | undefined);
 }
 
 function extractAndRemoveFilter(
   gridState: GridState,
-  targetFilteName: string
+  targetFilterName: string
 ): { gridState: GridState; filter: FilterDescriptor | undefined } {
   if (!gridState.filter) {
     return { gridState, filter: undefined };
   }
   const filters = gridState.filter?.filters;
-  const targetFilter = filters.find((filter) => isTargetFilter(filter, targetFilteName)) as
+  const targetFilter = filters.find((filter) => isTargetFilter(filter, targetFilterName)) as
     | FilterDescriptor
     | undefined;
   if (!targetFilter) {
     return { gridState, filter: undefined };
   }
-  const filtersWithoutTarget = filters.filter((filter) => !isTargetFilter(filter, targetFilteName));
+  const filtersWithoutTarget = filters.filter((filter) => !isTargetFilter(filter, targetFilterName));
   const newState: GridState = { ...gridState, filter: { ...gridState.filter, filters: filtersWithoutTarget } };
   return { gridState: newState, filter: targetFilter };
 }

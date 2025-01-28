@@ -25,7 +25,7 @@ export const DataProcessingActions = createActionGroup({
     'Get Data Processing Success': (dataProcessing: APIDataProcessingRegistrationResponseDTO) => ({ dataProcessing }),
     'Get Data Processing Error': emptyProps(),
 
-    'Get Data Processings': (odataString: string) => ({ odataString }),
+    'Get Data Processings': (gridState: GridState) => ({ gridState }),
     'Get Data Processings Success': (dataProcessings: DataProcessingRegistration[], total: number) => ({
       dataProcessings,
       total,

@@ -18,6 +18,7 @@ export const organizationUserInitialState: OrganizationUserState = organizationU
   total: 0,
   isLoadingUsersQuery: false,
   gridState: defaultODataGridState,
+  previousGridState: defaultODataGridState,
   gridColumns: [],
 
   permissions: null,
@@ -56,6 +57,7 @@ export const organizationUserFeature = createFeature({
         ...state,
         isLoadingUsersQuery: true,
         gridState,
+        previousGridState: state.gridState,
       })
     ),
     on(

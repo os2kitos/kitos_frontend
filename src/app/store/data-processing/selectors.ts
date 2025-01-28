@@ -11,6 +11,8 @@ export const selectDataProcessingGridLoading = createSelector(
   (state) => state.isLoadingDataProcessingsQuery
 );
 export const selectDataProcessingGridState = createSelector(selectDataProcessingState, (state) => state.gridState);
+export const selectPreviousGridState = createSelector(selectDataProcessingState, (state) => state.previousGridState);
+
 export const selectDataProcessingGridData = createSelector(selectAll, selectTotal, (data, total) => ({ data, total }));
 export const selectDataProcessingGridColumns = createSelector(selectDataProcessingState, (state) => state.gridColumns);
 export const selectDataProcessingRoleColumns = createSelector(selectDataProcessingState, (state) => state.gridRoleColumns);

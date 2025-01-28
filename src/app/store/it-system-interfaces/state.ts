@@ -12,6 +12,8 @@ export interface ITInterfaceState extends EntityState<ITInterface> {
   total: number;
   isLoadingInterfacesQuery: boolean;
   gridState: GridState;
+  previousGridState: GridState;
+  
   gridColumns: GridColumn[];
 
   loading: boolean | undefined;

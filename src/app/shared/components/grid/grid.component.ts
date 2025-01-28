@@ -21,7 +21,7 @@ import {
 import { cloneDeep, get } from 'lodash';
 import { combineLatest, first, map, Observable, of } from 'rxjs';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
-import { GridExportActions } from 'src/app/store/grid/actions';
+import { GridActions } from 'src/app/store/grid/actions';
 import { selectExportAllColumns, selectReadyToExport } from 'src/app/store/grid/selectors';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
@@ -262,7 +262,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   private excelExport(): void {
     if (this.grid) {
       this.grid.saveAsExcel();
-      this.store.dispatch(GridExportActions.exportCompleted({ ...this.state, all: false }, this.entityType));
+      this.store.dispatch(GridActions.exportCompleted({ ...this.state, all: false }, this.entityType));
     }
   }
 

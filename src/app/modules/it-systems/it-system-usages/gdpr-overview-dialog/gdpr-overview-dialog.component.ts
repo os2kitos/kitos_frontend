@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { GridExportActions } from 'src/app/store/grid/actions';
+import { GridActions } from 'src/app/store/grid/actions';
 
 @Component({
   selector: 'app-gdpr-overview-dialog',
@@ -11,6 +11,6 @@ export class GdprOverviewDialogComponent {
   constructor(private store: Store) {}
 
   public exportToExcel() {
-    this.store.dispatch(GridExportActions.exportLocalData());
+    this.store.dispatch(GridActions.exportLocalData());
   }
 }

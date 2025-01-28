@@ -2,20 +2,20 @@ import { Component, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { CellClickEvent } from '@progress/kendo-angular-grid';
-import { GridExportActions } from 'src/app/store/grid/actions';
+import { first } from 'rxjs';
+import { selectDataProcessingGridState } from 'src/app/store/data-processing/selectors';
+import { GridActions } from 'src/app/store/grid/actions';
+import { selectContractGridState } from 'src/app/store/it-contract/selectors';
+import { selectInterfaceGridState } from 'src/app/store/it-system-interfaces/selectors';
+import { selectGridState } from 'src/app/store/it-system-usage/selectors';
+import { selectSystemGridState } from 'src/app/store/it-system/selectors';
+import { selectOrganizationUserGridState } from 'src/app/store/organization/organization-user/selectors';
+import { selectOrganizationGridState } from 'src/app/store/organization/selectors';
 import { UserActions } from 'src/app/store/user-store/actions';
 import { DEFAULT_UNCLICKABLE_GRID_COLUMN_STYLES } from '../constants/constants';
 import { GridColumn } from '../models/grid-column.model';
 import { RegistrationEntityTypes } from '../models/registrations/registration-entity-categories.model';
 import { BaseComponent } from './base.component';
-import { selectGridState } from 'src/app/store/it-system-usage/selectors';
-import { first } from 'rxjs';
-import { selectDataProcessingGridState } from 'src/app/store/data-processing/selectors';
-import { selectContractGridState } from 'src/app/store/it-contract/selectors';
-import { selectInterfaceGridState } from 'src/app/store/it-system-interfaces/selectors';
-import { selectSystemGridState } from 'src/app/store/it-system/selectors';
-import { selectOrganizationUserGridState } from 'src/app/store/organization/organization-user/selectors';
-import { selectOrganizationGridState } from 'src/app/store/organization/selectors';
 
 @Component({
   template: '',
@@ -59,7 +59,7 @@ export class BaseOverviewComponent extends BaseComponent {
       .pipe(first())
       .subscribe((gridState) => {
         this.store.dispatch(
-          GridExportActions.exportDataFetch(exportAllColumns, { ...gridState, all: true }, this.entityType)
+          GridActions.exportDataFetch(exportAllColumns, { ...gridState, all: true }, this.entityType)
         );
       });
   };

@@ -11,6 +11,7 @@ export const organizationInitialState: OrganizationState = organizationAdapter.g
   total: 0,
   isLoadingUsersQuery: false,
   gridState: defaultODataGridState,
+  previousGridState: defaultODataGridState,
   gridColumns: [],
 
   organizationMasterData: null,
@@ -81,6 +82,7 @@ export const organizationFeature = createFeature({
         ...state,
         isLoadingUsersQuery: true,
         gridState,
+        previousGridState: state.gridState,
       })
     ),
     on(OrganizationActions.getUIRootConfigSuccess, (state, { uiRootConfig }): OrganizationState => {
