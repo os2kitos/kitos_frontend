@@ -100,7 +100,7 @@ export class GridDataCacheService {
       return true;
     }
 
-    if (isEqual(newState.sort, previousState.sort)) return true;
+    if (!isEqual(newState.sort, previousState.sort)) return true;
 
     if (!isEqual(newState.filter, previousState.filter)) {
       return true;
