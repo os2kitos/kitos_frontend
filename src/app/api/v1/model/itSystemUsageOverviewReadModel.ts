@@ -40,6 +40,7 @@ export interface APIItSystemUsageOverviewReadModel {
     parentItSystemId?: number;
     parentItSystemUuid?: string;
     parentItSystemDisabled?: boolean;
+    parentItSystemUsageUuid?: string;
     version?: string;
     localCallName?: string;
     localSystemId?: string;
@@ -101,6 +102,8 @@ export interface APIItSystemUsageOverviewReadModel {
     relevantOrganizationUnits?: Array<APIItSystemUsageOverviewRelevantOrgUnitReadModel>;
     associatedContractsNamesCsv?: string;
     associatedContracts?: Array<APIItSystemUsageOverviewItContractReadModel>;
+    dpiaConducted?: APIItSystemUsageOverviewReadModel.DpiaConductedEnum;
+    isBusinessCritical?: APIItSystemUsageOverviewReadModel.IsBusinessCriticalEnum;
 }
 export namespace APIItSystemUsageOverviewReadModel {
     export type ArchiveDutyEnum = 'Undecided' | 'B' | 'K' | 'Unknown';
@@ -131,6 +134,20 @@ export namespace APIItSystemUsageOverviewReadModel {
         Fiftytohundred: 'FIFTYTOHUNDRED' as UserCountEnum,
         Hundredplus: 'HUNDREDPLUS' as UserCountEnum,
         Undecided: 'UNDECIDED' as UserCountEnum
+    };
+    export type DpiaConductedEnum = 'NO' | 'YES' | 'DONTKNOW' | 'UNDECIDED';
+    export const DpiaConductedEnum = {
+        No: 'NO' as DpiaConductedEnum,
+        Yes: 'YES' as DpiaConductedEnum,
+        Dontknow: 'DONTKNOW' as DpiaConductedEnum,
+        Undecided: 'UNDECIDED' as DpiaConductedEnum
+    };
+    export type IsBusinessCriticalEnum = 'NO' | 'YES' | 'DONTKNOW' | 'UNDECIDED';
+    export const IsBusinessCriticalEnum = {
+        No: 'NO' as IsBusinessCriticalEnum,
+        Yes: 'YES' as IsBusinessCriticalEnum,
+        Dontknow: 'DONTKNOW' as IsBusinessCriticalEnum,
+        Undecided: 'UNDECIDED' as IsBusinessCriticalEnum
     };
 }
 

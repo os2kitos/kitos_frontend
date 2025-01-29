@@ -4894,8 +4894,38 @@
       <trans-unit id="7473666767554000615" datatype="html">
         <source>Gå til systemanvendelse</source>
       </trans-unit>
+      <trans-unit id="2710205399176716166" datatype="html">
+        <source>Forretningskritisk</source>
+      </trans-unit>
+      <trans-unit id="7610119555318059028" datatype="html">
+        <source>DPIA gennemført</source>
+      </trans-unit>
       <trans-unit id="3415736924888217227" datatype="html">
         <source><x id="INTERPOLATION" equiv-text="totalDataAmount() }}"/> resultater</source>
+      </trans-unit>
+      <trans-unit id="1870392441094924700" datatype="html">
+        <source>Dato for seneste DPIA / Konsekvensanalyse</source>
+      </trans-unit>
+      <trans-unit id="3601299378626386756" datatype="html">
+        <source>Bemærkninger til risikovurdering</source>
+      </trans-unit>
+      <trans-unit id="5098221578566106270" datatype="html">
+        <source>Dokumentation til teknisk foranstaltning</source>
+      </trans-unit>
+      <trans-unit id="7370934238044947213" datatype="html">
+        <source>Brugerkontrol</source>
+      </trans-unit>
+      <trans-unit id="7783045105356638349" datatype="html">
+        <source>Dokumentation til brugerkontrol</source>
+      </trans-unit>
+      <trans-unit id="2091835326580621436" datatype="html">
+        <source>Seneste tilsyn bemærkning</source>
+      </trans-unit>
+      <trans-unit id="2380273627031892685" datatype="html">
+        <source>Lande som data overføres til</source>
+      </trans-unit>
+      <trans-unit id="8408216526511596009" datatype="html">
+        <source>Dato for næste gang data må slettes</source>
       </trans-unit>
       <trans-unit id="4228008094140791845" datatype="html">
         <source>Åben alle</source>

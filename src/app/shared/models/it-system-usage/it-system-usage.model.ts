@@ -8,11 +8,11 @@ import {
 } from '../helpers/read-model-role-assignments';
 import { LifeCycleStatus, mapLifeCycleStatus } from '../life-cycle-status.model';
 import { mapGridNumberOfExpectedUsers, NumberOfExpectedUsersGrid } from '../number-of-expected-users.model';
-import { YesNoDontKnowOptions } from '../yes-no-dont-know.model';
-import { mapCapitalizedStringToYesNoIrrelevantEnum, mapToYesNoIrrelevantEnumGrid } from '../yes-no-irrelevant.model';
+import { mapFromCapitalizedStringToYesNoDontKnowEnum, YesNoDontKnowOptions } from '../yes-no-dont-know.model';
 import { ArchiveDutyChoice, mapArchiveDutyChoice } from './archive-duty-choice.model';
 import { HostedAt, mapGridHostedAt } from './gdpr/hosted-at.model';
 import { AppPath } from '../../enums/app-path';
+import { mapCapitalizedStringToYesNoIrrelevantEnum, mapToYesNoIrrelevantEnumGrid } from '../yes-no-irrelevant.model';
 
 export interface ITSystemUsage {
   //ngrx requires the id field to have lowercase 'id' name
@@ -27,7 +27,7 @@ export interface ITSystemUsage {
   ExternalSystemUuid: string;
   ParentItSystemName: string;
   ParentItSystemUuid: string;
-  ParentSystemLinkPaths: {value: string, id: string}[];
+  ParentSystemLinkPaths: { value: string; id: string }[];
   SystemName: string;
   Version: string;
   LocalCallName: string;
@@ -75,36 +75,38 @@ export interface ITSystemUsage {
   UserCount: NumberOfExpectedUsersGrid | undefined;
   Roles: RoleAssignmentsMap;
   RoleEmails: RoleAssignmentEmailsMaps;
+  DpiaConducted: YesNoDontKnowOptions | undefined;
+  IsBusinessCritical: YesNoDontKnowOptions | undefined;
 }
 
 function getParentItSystemLinkPaths(value: {
-  ParentItSystemUsageUuid: string | undefined,
-  ParentItSystemUuid: string | undefined,
-  ParentItSystemName: string | undefined })
-  {
-    const links: {id: string, value: string}[] = [];
-    if (!value.ParentItSystemUuid || !value.ParentItSystemName) return links;
+  ParentItSystemUsageUuid: string | undefined;
+  ParentItSystemUuid: string | undefined;
+  ParentItSystemName: string | undefined;
+}) {
+  const links: { id: string; value: string }[] = [];
+  if (!value.ParentItSystemUuid || !value.ParentItSystemName) return links;
 
+  links.push({
+    id: `${AppPath.itSystemCatalog}/${value.ParentItSystemUuid}`,
+    value: value.ParentItSystemName,
+  });
+
+  if (value.ParentItSystemUsageUuid) {
     links.push({
-      id: `${AppPath.itSystemCatalog}/${value.ParentItSystemUuid}`,
-      value: value.ParentItSystemName
+      id: `${AppPath.itSystemUsages}/${value.ParentItSystemUsageUuid}`,
+      value: $localize`Gå til systemanvendelse`,
     });
+  }
 
-    if (value.ParentItSystemUsageUuid) {
-      links.push({
-        id: `${AppPath.itSystemUsages}/${value.ParentItSystemUsageUuid}`,
-        value: $localize`Gå til systemanvendelse`
-      });
-    }
-
-    return links;
+  return links;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
   if (!value.SourceEntityUuid) return;
 
-  return {
+  const adaptedSystem = {
     ParentSystemLinkPaths: getParentItSystemLinkPaths(value),
     id: value.SourceEntityUuid,
     SystemActive: value.SystemActive,
@@ -191,7 +193,10 @@ export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
     ItSystemCategoriesName: value.ItSystemCategoriesName,
     Roles: mapRoleAssignmentsToUserFullNames(value.RoleAssignments),
     RoleEmails: mapRoleAssignmentsToEmails(value.RoleAssignments),
+    DpiaConducted: mapFromCapitalizedStringToYesNoDontKnowEnum(value.DPIAConducted),
+    IsBusinessCritical: mapFromCapitalizedStringToYesNoDontKnowEnum(value.IsBusinessCritical),
   };
+  return adaptedSystem;
 };
 
 function getDataProcessingRegistrationsConcluded(

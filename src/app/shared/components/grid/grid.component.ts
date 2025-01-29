@@ -37,7 +37,7 @@ import {
   DEFAULT_PRIMARY_COLUMN_MINIMUM_WIDTH,
   GRID_ROW_HEIGHT,
 } from '../../constants/constants';
-import { includedColumnInExport } from '../../helpers/grid-export.helper';
+import { includedColumnInExport, transformRow } from '../../helpers/grid-export.helper';
 import { getApplyFilterAction, getSaveFilterAction } from '../../helpers/grid-filter.helpers';
 import { GridColumn } from '../../models/grid-column.model';
 import { GridData } from '../../models/grid-data.model';
@@ -270,73 +270,15 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     if (!this.data || !this.state) {
       return { data: [] };
     }
-    this.subscriptions.add(
-      this.data$.pipe(first()).subscribe((data) => {
-        this.data = data;
-      })
-    );
     const processedData = process(this.data.data, { skip: 0, take: this.data.total });
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const formattedData = processedData.data.map((item: any) => {
-      const transformedItem = { ...item };
-      let exportColumns: GridColumn[] = [];
-      this.getFilteredExportColumns$()
-        .pipe(first())
-        .subscribe((columns) => {
-          exportColumns = columns;
-        });
-      exportColumns.forEach((column) => {
-        const field = column.field;
-        if (field) {
-          switch (column.style) {
-            case 'chip':
-              if (typeof transformedItem[field] === 'boolean') {
-                const boolValue = transformedItem[field] ? 0 : 1;
-                transformedItem[field] = column.extraData[boolValue].name;
-              }
-              break;
-            case 'enum':
-              if (typeof transformedItem[field] === 'object') {
-                const enumValue = transformedItem[field];
-                transformedItem[field] = enumValue.name;
-              }
-              break;
-            case 'uuid-to-name':
-              transformedItem[field] = transformedItem[`${column.dataField}`];
-              break;
-            case 'excel-only': {
-              if (transformedItem.RoleEmails) {
-                const roleEmailKeys: string[] = Object.keys(transformedItem.RoleEmails);
-                roleEmailKeys.forEach((key) => {
-                  const prefixedKey = `Roles.${key}`;
-                  if (prefixedKey === field) {
-                    transformedItem[`${column.title}`] = transformedItem.RoleEmails[key];
-                  }
-                });
-              }
-              break;
-            }
-            case 'page-link-array':
-              {
-                const array = transformedItem[column.dataField as string];
-                const excelValue = array.map((item: { value: string }) => item.value).join(', ');
-                transformedItem[field] = excelValue;
-              }
-              break;
-            case 'usages':
-              {
-                const usages = transformedItem[column.field as string];
-                transformedItem[field] = usages.length;
-              }
-              break;
-            default:
-              break;
-          }
-        }
+    let formattedData: any[] = [];
+    this.getFilteredExportColumns$()
+      .pipe(first())
+      .subscribe((columns) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        formattedData = processedData.data.map((item: any) => transformRow(item, columns));
       });
-      return transformedItem;
-    });
-
     return { data: formattedData };
   }
 

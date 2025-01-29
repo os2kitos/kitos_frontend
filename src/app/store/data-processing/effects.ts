@@ -5,7 +5,7 @@ import { concatLatestFrom } from '@ngrx/operators';
 
 import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
-import { catchError, combineLatestWith, map, mergeMap, of, switchMap } from 'rxjs';
+import { catchError, map, mergeMap, of, switchMap } from 'rxjs';
 import { APIBusinessRoleDTO, APIV1DataProcessingRegistrationINTERNALService } from 'src/app/api/v1';
 import {
   APIDataProcessingRegistrationGeneralDataWriteRequestDTO,
@@ -212,7 +212,7 @@ export class DataProcessingEffects {
   patchDataProcessing$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(DataProcessingActions.patchDataProcessing),
-      combineLatestWith(this.store.select(selectDataProcessingUuid).pipe(filterNullish())),
+      concatLatestFrom(() => this.store.select(selectDataProcessingUuid).pipe(filterNullish())),
       switchMap(([{ dataProcessing }, uuid]) =>
         this.dataProcessingService
           .patchSingleDataProcessingRegistrationV2PatchDataProcessingRegistration({ uuid, request: dataProcessing })

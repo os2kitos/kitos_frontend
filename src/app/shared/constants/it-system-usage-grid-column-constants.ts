@@ -45,3 +45,5 @@ export const PlannedRiskAssessmentDate = 'PlannedRiskAssessmentDate';
 export const Note = 'Note';
 export const UserCount = 'UserCount';
 export const ItSystemCategoriesUuid = 'ItSystemCategoriesUuid';
+export const DpiaConducted = 'DpiaConducted';
+export const IsBusinessCritical = 'IsBusinessCritical';

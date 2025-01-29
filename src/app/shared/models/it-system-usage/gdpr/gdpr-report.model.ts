@@ -18,11 +18,20 @@ export interface GdprReport {
   riskAssessmentDate?: string;
   plannedRiskAssessmentDate?: string;
   preRiskAssessment?: PreRiskAssessment;
+  riskAssessmentNotes?: string;
   personalDataCpr?: boolean;
   personalDataSocialProblems?: boolean;
   personalDataSocialOtherPrivateMatters?: boolean;
   dpia?: YesNoDontKnowOptions;
+  dpiaDate?: string;
   hostedAt?: HostedAt;
+  technicalSupervisionDocumentationUrl?: string;
+  technicalSupervisionDocumentationUrlName?: string;
+  userSupervision?: YesNoDontKnowOptions;
+  userSupervisionDocumentationUrl?: string;
+  userSupervisionDocumentationUrlName?: string;
+  nextDataRetentionEvaluationDate?: string;
+  insecureCountriesSubjectToDataTransfer: string;
 }
 
 export function adaptGdprReport(dto: APIGdprReportResponseDTO): GdprReport {
@@ -42,10 +51,19 @@ export function adaptGdprReport(dto: APIGdprReportResponseDTO): GdprReport {
     riskAssessmentDate: dto.riskAssessmentDate,
     plannedRiskAssessmentDate: dto.plannedRiskAssessmentDate,
     preRiskAssessment: mapPreRiskAssessmentEnum(dto.preRiskAssessment),
+    riskAssessmentNotes: dto.riskAssessmentNotes,
     personalDataCpr: dto.personalDataCpr,
     personalDataSocialProblems: dto.personalDataSocialProblems,
     personalDataSocialOtherPrivateMatters: dto.personalDataSocialOtherPrivateMatters,
     dpia: mapToYesNoDontKnowEnum(dto.dpia),
+    dpiaDate: dto.dpiaDate,
     hostedAt: mapHostedAt(dto.hostedAt),
+    technicalSupervisionDocumentationUrl: dto.technicalSupervisionDocumentationUrl,
+    technicalSupervisionDocumentationUrlName: dto.technicalSupervisionDocumentationUrlName,
+    userSupervision: mapToYesNoDontKnowEnum(dto.userSupervision),
+    userSupervisionDocumentationUrl: dto.userSupervisionDocumentationUrl,
+    userSupervisionDocumentationUrlName: dto.userSupervisionDocumentationUrlName,
+    nextDataRetentionEvaluationDate: dto.nextDataRetentionEvaluationDate,
+    insecureCountriesSubjectToDataTransfer: (dto as any).insecureCountriesSubjectToDataTransfer.join(', ') ?? '',
   };
 }

@@ -258,6 +258,13 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       persistId: 'latestOversightDate',
     },
     {
+      field: GridFields.LatestOversightRemark,
+      title: $localize`Seneste tilsyn bemærkning`,
+      section: SUPERVISION_SECTION_NAME,
+      hidden: true,
+      persistId: 'latestOversightRemark',
+    },
+    {
       field: GridFields.LastChangedByName,
       title: $localize`Sidst ændret bruger`,
       section: DATA_PROCESSING_SECTION_NAME,

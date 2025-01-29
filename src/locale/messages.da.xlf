@@ -6449,6 +6449,46 @@
         <source><x id="INTERPOLATION" equiv-text="totalDataAmount() }}"/> resultater</source>
         <target state="new"><x id="INTERPOLATION" equiv-text="totalDataAmount() }}"/> resultater</target>
       </trans-unit>
+      <trans-unit id="7610119555318059028" datatype="html">
+        <source>DPIA gennemført</source>
+        <target state="new">DPIA gennemført</target>
+      </trans-unit>
+      <trans-unit id="2710205399176716166" datatype="html">
+        <source>Forretningskritisk</source>
+        <target state="new">Forretningskritisk</target>
+      </trans-unit>
+      <trans-unit id="3601299378626386756" datatype="html">
+        <source>Bemærkninger til risikovurdering</source>
+        <target state="new">Bemærkninger til risikovurdering</target>
+      </trans-unit>
+      <trans-unit id="1870392441094924700" datatype="html">
+        <source>Dato for seneste DPIA / Konsekvensanalyse</source>
+        <target state="new">Dato for seneste DPIA / Konsekvensanalyse</target>
+      </trans-unit>
+      <trans-unit id="5098221578566106270" datatype="html">
+        <source>Dokumentation til teknisk foranstaltning</source>
+        <target state="new">Dokumentation til teknisk foranstaltning</target>
+      </trans-unit>
+      <trans-unit id="7370934238044947213" datatype="html">
+        <source>Brugerkontrol</source>
+        <target state="new">Brugerkontrol</target>
+      </trans-unit>
+      <trans-unit id="7783045105356638349" datatype="html">
+        <source>Dokumentation til brugerkontrol</source>
+        <target state="new">Dokumentation til brugerkontrol</target>
+      </trans-unit>
+      <trans-unit id="2091835326580621436" datatype="html">
+        <source>Seneste tilsyn bemærkning</source>
+        <target state="new">Seneste tilsyn bemærkning</target>
+      </trans-unit>
+      <trans-unit id="8408216526511596009" datatype="html">
+        <source>Dato for næste gang data må slettes</source>
+        <target state="new">Dato for næste gang data må slettes</target>
+      </trans-unit>
+      <trans-unit id="2380273627031892685" datatype="html">
+        <source>Lande som data overføres til</source>
+        <target state="new">Lande som data overføres til</target>
+      </trans-unit>
       <trans-unit id="5905238958958627451" datatype="html">
         <source>Luk alle</source>
         <target state="new">Luk alle</target>

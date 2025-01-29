@@ -26,11 +26,19 @@ export interface APIGdprReportResponseDTO {
     riskAssessmentDate?: string;
     plannedRiskAssessmentDate?: string;
     preRiskAssessment?: APIGdprReportResponseDTO.PreRiskAssessmentEnum;
+    riskAssessmentNotes?: string;
     personalDataCpr?: boolean;
     personalDataSocialProblems?: boolean;
     personalDataSocialOtherPrivateMatters?: boolean;
     dpia?: APIGdprReportResponseDTO.DpiaEnum;
+    dpiaDate?: string;
     hostedAt?: APIGdprReportResponseDTO.HostedAtEnum;
+    technicalSupervisionDocumentationUrlName?: string;
+    technicalSupervisionDocumentationUrl?: string;
+    userSupervision?: APIGdprReportResponseDTO.UserSupervisionEnum;
+    userSupervisionDocumentationUrl?: string;
+    userSupervisionDocumentationUrlName?: string;
+    nextDataRetentionEvaluationDate?: string;
 }
 export namespace APIGdprReportResponseDTO {
     export type BusinessCriticalEnum = 'No' | 'Yes' | 'DontKnow' | 'Undecided';
@@ -66,6 +74,13 @@ export namespace APIGdprReportResponseDTO {
         Undecided: 'Undecided' as HostedAtEnum,
         OnPremise: 'OnPremise' as HostedAtEnum,
         External: 'External' as HostedAtEnum
+    };
+    export type UserSupervisionEnum = 'No' | 'Yes' | 'DontKnow' | 'Undecided';
+    export const UserSupervisionEnum = {
+        No: 'No' as UserSupervisionEnum,
+        Yes: 'Yes' as UserSupervisionEnum,
+        DontKnow: 'DontKnow' as UserSupervisionEnum,
+        Undecided: 'Undecided' as UserSupervisionEnum
     };
 }
 

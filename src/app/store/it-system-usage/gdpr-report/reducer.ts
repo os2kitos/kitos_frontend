@@ -4,6 +4,7 @@ import { GdprReport } from 'src/app/shared/models/it-system-usage/gdpr/gdpr-repo
 import { GdprReportActions } from './actions';
 import { GdprReportState } from './state';
 import { ITSystemUsageActions } from '../actions';
+import { DataProcessingActions } from '../../data-processing/actions';
 
 export const gdprReportsAdapter = createEntityAdapter<GdprReport>({
   selectId: (report: GdprReport) => report.systemUuid,
@@ -28,6 +29,7 @@ export const gdprReportFeature = createFeature({
       ITSystemUsageActions.removeITSystemUsageSuccess,
       ITSystemUsageActions.createItSystemUsageSuccess,
       ITSystemUsageActions.patchITSystemUsageSuccess,
+      DataProcessingActions.patchDataProcessingSuccess,
       (state): GdprReportState => {
         return {
           ...state,

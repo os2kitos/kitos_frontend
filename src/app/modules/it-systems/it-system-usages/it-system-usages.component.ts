@@ -28,6 +28,7 @@ import { dataSensitivityLevelOptions } from 'src/app/shared/models/it-system-usa
 import { hostedAtOptionsGrid } from 'src/app/shared/models/it-system-usage/gdpr/hosted-at.model';
 import { lifeCycleStatusOptions } from 'src/app/shared/models/life-cycle-status.model';
 import { numberOfExpectedUsersOptionsGrid } from 'src/app/shared/models/number-of-expected-users.model';
+import { yesNoDontKnowOptions } from 'src/app/shared/models/yes-no-dont-know.model';
 import { yesNoIrrelevantOptionsGrid } from 'src/app/shared/models/yes-no-irrelevant.model';
 import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 import { GridUIConfigService } from 'src/app/shared/services/ui-config-services/grid-ui-config.service';
@@ -521,6 +522,26 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       style: 'uuid-to-name',
       hidden: true,
       persistId: 'itSystemCategoriesUuid',
+    },
+    {
+      field: GridFields.DpiaConducted,
+      title: $localize`DPIA gennemført`,
+      section: GDPR_SECTION_NAME,
+      style: 'enum',
+      extraFilter: 'enum',
+      extraData: yesNoDontKnowOptions,
+      hidden: true,
+      persistId: 'dpiaConducted',
+    },
+    {
+      field: GridFields.IsBusinessCritical,
+      title: $localize`Forretningskritisk`,
+      section: GDPR_SECTION_NAME,
+      style: 'enum',
+      extraFilter: 'enum',
+      extraData: yesNoDontKnowOptions,
+      hidden: true,
+      persistId: 'isBusinessCritical',
     },
   ];
 

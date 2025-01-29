@@ -18,7 +18,7 @@ import {
   DEFAULT_DATE_COLUMN_WIDTH,
   DEFAULT_PRIMARY_COLUMN_MINIMUM_WIDTH,
 } from '../../constants/constants';
-import { includedColumnInExport } from '../../helpers/grid-export.helper';
+import { includedColumnInExport, transformRow } from '../../helpers/grid-export.helper';
 import { GridColumn } from '../../models/grid-column.model';
 import { GridState, defaultLocalGridState } from '../../models/grid-state.model';
 import { BooleanChange, RowReorderingEvent } from '../../models/grid/grid-events.model';
@@ -38,7 +38,6 @@ export class LocalGridComponent<T> extends BaseComponent implements OnInit {
   @Input() deletePermission?: boolean | null;
   @Input() withOutline: boolean = false;
   @Input() fitSizeToContent: boolean = false;
-  @Input() height?: string;
   @Input() reorderable: boolean = false;
 
   @Output() deleteEvent = new EventEmitter<T>();
@@ -129,8 +128,10 @@ export class LocalGridComponent<T> extends BaseComponent implements OnInit {
       return { data: [] };
     }
     const processedData = process(this.data, { ...this.state, skip: 0, take: this.data.length });
+    const columns = this.getColumnsForExport();
+    const transformedData = processedData.data.map((item) => transformRow(item, columns));
 
-    return { data: processedData.data };
+    return { data: transformedData };
   }
 
   public onRowReorder(event: RowReorderEvent) {

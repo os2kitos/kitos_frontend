@@ -37,6 +37,7 @@ export interface DataProcessingRegistration {
   IsOversightCompleted: IsOversightCompleted | undefined;
   OversightScheduledInspectionDate: string;
   LatestOversightDate: string;
+  LatestOversightRemark: string;
   LastChangedByName: string;
   ContractNamesAsCsv: string;
   Roles: RoleAssignmentsMap;
@@ -72,6 +73,7 @@ export const adaptDataProcessingRegistration = (value: any): DataProcessingRegis
     IsOversightCompleted: mapIsOversightCompleted(value.IsOversightCompleted),
     OversightScheduledInspectionDate: value.OversightScheduledInspectionDate,
     LatestOversightDate: value.LatestOversightDate,
+    LatestOversightRemark: value.LatestOversightRemark,
     LastChangedByName: value.LastChangedByName,
     ContractNamesAsCsv: value.ContractNamesAsCsv,
     Roles: mapRoleAssignmentsToUserFullNames(value.RoleAssignments),

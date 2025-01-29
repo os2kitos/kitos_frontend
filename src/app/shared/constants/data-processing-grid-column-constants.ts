@@ -20,4 +20,5 @@ export const OversightOptionNamesAsCsv = 'OversightOptionNamesAsCsv';
 export const IsOversightCompleted = 'IsOversightCompleted';
 export const OversightScheduledInspectionDate = 'OversightScheduledInspectionDate';
 export const LatestOversightDate = 'LatestOversightDate';
+export const LatestOversightRemark = 'LatestOversightRemark';
 export const LastChangedByName = 'LastChangedByName';
