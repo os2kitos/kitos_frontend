@@ -3,7 +3,7 @@ import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { filter } from 'rxjs';
 import { APIGDPRWriteRequestDTO } from 'src/app/api/v2';
-import { BaseComponent } from 'src/app/shared/base/base.component';
+import { BaseAccordionComponent } from 'src/app/shared/base/base-accordion.component';
 import { dataSensitivityLevelOptions } from 'src/app/shared/models/it-system-usage/gdpr/data-sensitivity-level.model';
 import { specificPersonalDataOptions } from 'src/app/shared/models/it-system-usage/gdpr/specific-personal-data.model';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
@@ -24,7 +24,7 @@ import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-stor
   templateUrl: './data-sensitivity-section.component.html',
   styleUrls: ['./data-sensitivity-section.component.scss', '../it-system-usage-details-gdpr.component.scss'],
 })
-export class DataSensitivitySectionComponent extends BaseComponent implements OnInit {
+export class DataSensitivitySectionComponent extends BaseAccordionComponent implements OnInit {
   @Output() public noPermissions = new EventEmitter<AbstractControl[]>();
 
   private readonly dataSensitivityLevelsDtoField = 'dataSensitivityLevels';

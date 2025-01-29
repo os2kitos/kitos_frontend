@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { filter } from 'rxjs';
+import { BehaviorSubject, filter, first, map } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import { combineOR } from 'src/app/shared/helpers/observable-helpers';
+import { combineAND, combineOR } from 'src/app/shared/helpers/observable-helpers';
 import { selectITSystemUsageHasModifyPermission } from 'src/app/store/it-system-usage/selectors';
 import {
   selectITSystemUsageEnabledRegisteredCategories,
@@ -19,6 +19,15 @@ import {
   selectITSystemUsageEnableGdprTechnicalPrecautions,
   selectITSystemUsageEnableGdprUserSupervision,
 } from 'src/app/store/organization/ui-module-customization/selectors';
+
+type UsageGDPRSection =
+  | 'data-sensitivity'
+  | 'registered-categories'
+  | 'technical-precautions'
+  | 'user-supervision'
+  | 'risk-assessment'
+  | 'dpia-conducted'
+  | 'retention-period';
 
 @Component({
   selector: 'app-it-system-usage-details-gdpr',
@@ -63,6 +72,28 @@ export class ItSystemUsageDetailsGdprComponent extends BaseComponent {
     this.showRetentionPeriod$,
   ]);
 
+  public readonly dataSensitivityExpanded$ = new BehaviorSubject<boolean>(false);
+  public readonly registeredCategoriesExpanded$ = new BehaviorSubject<boolean>(false);
+  public readonly technicalPrecautionsExpanded$ = new BehaviorSubject<boolean>(false);
+  public readonly userSupervisionExpanded$ = new BehaviorSubject<boolean>(false);
+  public readonly riskAssessmentExpanded$ = new BehaviorSubject<boolean>(false);
+  public readonly dpiaConductedExpanded$ = new BehaviorSubject<boolean>(false);
+  public readonly retentionPeriodExpanded$ = new BehaviorSubject<boolean>(false);
+
+  public readonly allExpanded$ = combineAND([
+    this.dataSensitivityExpanded$,
+    this.registeredCategoriesExpanded$,
+    this.technicalPrecautionsExpanded$,
+    this.userSupervisionExpanded$,
+    this.riskAssessmentExpanded$,
+    this.dpiaConductedExpanded$,
+    this.retentionPeriodExpanded$,
+  ]);
+
+  public readonly expandAllButtonText$ = this.allExpanded$.pipe(
+    map((allExpanded) => (allExpanded ? $localize`Luk alle` : $localize`Åben alle`))
+  );
+
   public disableFormsIfNoPermissions(controls: AbstractControl[]) {
     this.subscriptions.add(
       this.store
@@ -72,6 +103,47 @@ export class ItSystemUsageDetailsGdprComponent extends BaseComponent {
           controls.forEach((control: AbstractControl) => control.disable());
           this.disableLinkControls.emit();
         })
+    );
+  }
+
+  public expandedSectionChanged(expanded: boolean, section: UsageGDPRSection) {
+    switch (section) {
+      case 'data-sensitivity':
+        this.dataSensitivityExpanded$.next(expanded);
+        break;
+      case 'registered-categories':
+        this.registeredCategoriesExpanded$.next(expanded);
+        break;
+      case 'technical-precautions':
+        this.technicalPrecautionsExpanded$.next(expanded);
+        break;
+      case 'user-supervision':
+        this.userSupervisionExpanded$.next(expanded);
+        break;
+      case 'risk-assessment':
+        this.riskAssessmentExpanded$.next(expanded);
+        break;
+      case 'dpia-conducted':
+        this.dpiaConductedExpanded$.next(expanded);
+        break;
+      case 'retention-period':
+        this.retentionPeriodExpanded$.next(expanded);
+        break;
+    }
+  }
+
+  public changeAllClick() {
+    this.subscriptions.add(
+      this.allExpanded$.pipe(first()).subscribe((allExpanded) => {
+        const targetValue = !allExpanded;
+        this.dataSensitivityExpanded$.next(targetValue);
+        this.registeredCategoriesExpanded$.next(targetValue);
+        this.technicalPrecautionsExpanded$.next(targetValue);
+        this.userSupervisionExpanded$.next(targetValue);
+        this.riskAssessmentExpanded$.next(targetValue);
+        this.dpiaConductedExpanded$.next(targetValue);
+        this.retentionPeriodExpanded$.next(targetValue);
+      })
     );
   }
 }

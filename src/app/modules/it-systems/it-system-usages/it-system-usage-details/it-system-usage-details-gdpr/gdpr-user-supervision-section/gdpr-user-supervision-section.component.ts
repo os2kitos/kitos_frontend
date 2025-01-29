@@ -3,7 +3,7 @@ import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { filter, map } from 'rxjs';
 import { APIGDPRRegistrationsResponseDTO } from 'src/app/api/v2';
-import { BaseComponent } from 'src/app/shared/base/base.component';
+import { BaseAccordionComponent } from 'src/app/shared/base/base-accordion.component';
 import { YesNoDontKnowOptions, mapToYesNoDontKnowEnum } from 'src/app/shared/models/yes-no-dont-know.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import {
@@ -16,7 +16,7 @@ import {
   templateUrl: './gdpr-user-supervision-section.component.html',
   styleUrls: ['./gdpr-user-supervision-section.component.scss'],
 })
-export class GdprUserSupervisionSectionComponent extends BaseComponent implements OnInit {
+export class GdprUserSupervisionSectionComponent extends BaseAccordionComponent implements OnInit {
   @Output() public noPermissions = new EventEmitter<AbstractControl[]>();
 
   private readonly currentGdpr$ = this.store.select(selectItSystemUsageGdpr).pipe(filterNullish());
@@ -39,7 +39,6 @@ export class GdprUserSupervisionSectionComponent extends BaseComponent implement
   }
 
   ngOnInit(): void {
-
     this.currentGdpr$.subscribe((gdpr) => {
       this.formGroup.patchValue({
         yesNoDontKnowControl: mapToYesNoDontKnowEnum(gdpr.userSupervision),

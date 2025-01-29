@@ -1,4 +1,9 @@
-<app-accordion title="Hvilke typer data indeholder systemet?" i18n-title>
+<app-accordion
+  title="Hvilke typer data indeholder systemet?"
+  [isExpanded]="(isExpanded$ | async) ?? false"
+  (expandedChanged)="onExpandedChanged($event)"
+  i18n-title
+>
   <form [formGroup]="dataSensitivityLevelForm">
     <app-checkbox
       labelPosition="after"

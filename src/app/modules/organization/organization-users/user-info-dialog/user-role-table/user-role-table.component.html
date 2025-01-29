@@ -1,4 +1,4 @@
-<app-accordion [isExpandedByDefault]="getUserRights().length > 0" [disabled]="getUserRights().length === 0">
+<app-accordion [isExpanded]="getUserRights().length > 0" [disabled]="getUserRights().length === 0">
   <app-accordion-header>
     <app-content-space-between class="accordion-header">
       <app-paragraph [bold]="true" paragraphSize="large"> {{ getTitle() }} </app-paragraph>

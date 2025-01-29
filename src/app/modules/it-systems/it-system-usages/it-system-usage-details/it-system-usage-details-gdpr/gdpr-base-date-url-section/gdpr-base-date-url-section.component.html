@@ -1,4 +1,8 @@
-<app-accordion [title]="title">
+<app-accordion
+  [title]="title"
+  [isExpanded]="(isExpanded$ | async) ?? false"
+  (expandedChanged)="onExpandedChanged($event)"
+>
   <app-form-grid [formGroup]="formGroup">
     <app-dropdown
       [text]="choiceTypeTitle"

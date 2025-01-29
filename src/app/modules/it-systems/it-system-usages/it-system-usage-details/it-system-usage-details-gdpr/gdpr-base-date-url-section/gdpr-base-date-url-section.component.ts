@@ -3,7 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable, combineLatest, filter } from 'rxjs';
 import { APIGDPRWriteRequestDTO, APISimpleLinkDTO } from 'src/app/api/v2';
-import { BaseComponent } from 'src/app/shared/base/base.component';
+import { BaseAccordionComponent } from 'src/app/shared/base/base-accordion.component';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import { YesNoDontKnowOptions, yesNoDontKnowOptions } from 'src/app/shared/models/yes-no-dont-know.model';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
@@ -13,7 +13,7 @@ import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
   templateUrl: './gdpr-base-date-url-section.component.html',
   styleUrls: ['./gdpr-base-date-url-section.component.scss'],
 })
-export class GdprBaseDateUrlSectionComponent extends BaseComponent implements OnInit {
+export class GdprBaseDateUrlSectionComponent extends BaseAccordionComponent implements OnInit {
   @Input() public title!: string;
 
   @Input() public choiceTypePropertyName!: string;

@@ -4897,6 +4897,12 @@
       <trans-unit id="3415736924888217227" datatype="html">
         <source><x id="INTERPOLATION" equiv-text="totalDataAmount() }}"/> resultater</source>
       </trans-unit>
+      <trans-unit id="4228008094140791845" datatype="html">
+        <source>Åben alle</source>
+      </trans-unit>
+      <trans-unit id="5905238958958627451" datatype="html">
+        <source>Luk alle</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

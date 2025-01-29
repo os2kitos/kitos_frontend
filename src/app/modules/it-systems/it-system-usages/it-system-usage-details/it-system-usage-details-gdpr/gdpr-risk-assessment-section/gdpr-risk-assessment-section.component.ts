@@ -3,7 +3,7 @@ import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
 import { APIGDPRRegistrationsResponseDTO, APIGDPRWriteRequestDTO } from 'src/app/api/v2';
-import { BaseComponent } from 'src/app/shared/base/base.component';
+import { BaseAccordionComponent } from 'src/app/shared/base/base-accordion.component';
 import {
   RiskAssessmentResultOptions,
   mapRiskAssessmentEnum,
@@ -28,7 +28,7 @@ import {
   templateUrl: './gdpr-risk-assessment-section.component.html',
   styleUrls: ['./gdpr-risk-assessment-section.component.scss'],
 })
-export class GdprRiskAssessmentSectionComponent extends BaseComponent implements OnInit {
+export class GdprRiskAssessmentSectionComponent extends BaseAccordionComponent implements OnInit {
   @Output() public noPermissions = new EventEmitter<AbstractControl[]>();
   @Input() disableLinkControl!: Observable<void>;
 

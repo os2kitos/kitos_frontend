@@ -1,6 +1,6 @@
 <app-accordion
   [title]="tabViewModel.text"
-  [isExpandedByDefault]="tabViewModelHasChildren()"
+  [isExpanded]="tabViewModelHasChildren()"
   [checkboxInTitle]="true"
   [checkboxValue]="tabViewModel.isEnabled ?? false"
   [checkboxDisabled]="(tabViewModel.isObligatory ?? false) || (moduleEnabled$ | async) === false"

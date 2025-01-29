@@ -1,4 +1,9 @@
-<app-accordion title="Risikovurdering" i18n-title>
+<app-accordion
+  title="Risikovurdering"
+  [isExpanded]="(isExpanded$ | async) ?? false"
+  (expandedChanged)="onExpandedChanged($event)"
+  i18n-title
+>
   <form [formGroup]="riskAssessmentFormGroup">
     <app-standard-vertical-content-grid>
       <app-datepicker

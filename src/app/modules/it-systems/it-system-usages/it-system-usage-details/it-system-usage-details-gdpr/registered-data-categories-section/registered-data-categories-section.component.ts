@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { BaseComponent } from 'src/app/shared/base/base.component';
+import { BaseAccordionComponent } from 'src/app/shared/base/base-accordion.component';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { NotificationService } from 'src/app/shared/services/notification.service';
@@ -15,7 +15,7 @@ import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-stor
   templateUrl: './registered-data-categories-section.component.html',
   styleUrls: ['./registered-data-categories-section.component.scss'],
 })
-export class RegisteredDataCategoriesSectionComponent extends BaseComponent implements OnInit {
+export class RegisteredDataCategoriesSectionComponent extends BaseAccordionComponent implements OnInit {
   @Output() public noPermissions = new EventEmitter<AbstractControl[]>();
 
   public readonly registeredDataCategoriesOptions$ = this.store.select(

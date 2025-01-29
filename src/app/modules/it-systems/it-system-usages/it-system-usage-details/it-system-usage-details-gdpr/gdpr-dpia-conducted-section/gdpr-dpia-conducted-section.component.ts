@@ -3,17 +3,20 @@ import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { filter, map } from 'rxjs';
 import { APIGDPRRegistrationsResponseDTO } from 'src/app/api/v2';
-import { BaseComponent } from 'src/app/shared/base/base.component';
+import { BaseAccordionComponent } from 'src/app/shared/base/base-accordion.component';
 import { YesNoDontKnowOptions, mapToYesNoDontKnowEnum } from 'src/app/shared/models/yes-no-dont-know.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
-import { selectITSystemUsageHasModifyPermission, selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors';
+import {
+  selectITSystemUsageHasModifyPermission,
+  selectItSystemUsageGdpr,
+} from 'src/app/store/it-system-usage/selectors';
 
 @Component({
   selector: 'app-gdpr-dpia-conducted-section',
   templateUrl: './gdpr-dpia-conducted-section.component.html',
   styleUrls: ['./gdpr-dpia-conducted-section.component.scss'],
 })
-export class GdprDpiaConductedSectionComponent extends BaseComponent implements OnInit {
+export class GdprDpiaConductedSectionComponent extends BaseAccordionComponent implements OnInit {
   @Output() public noPermissions = new EventEmitter<AbstractControl[]>();
 
   private readonly currentGdpr$ = this.store.select(selectItSystemUsageGdpr).pipe(filterNullish());

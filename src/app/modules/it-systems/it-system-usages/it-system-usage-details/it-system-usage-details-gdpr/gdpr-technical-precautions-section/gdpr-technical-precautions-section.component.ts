@@ -3,7 +3,7 @@ import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
 import { APIGDPRRegistrationsResponseDTO, APIGDPRWriteRequestDTO } from 'src/app/api/v2';
-import { BaseComponent } from 'src/app/shared/base/base.component';
+import { BaseAccordionComponent } from 'src/app/shared/base/base-accordion.component';
 import {
   TechnicalPrecautions,
   mapTechnicalPecautions,
@@ -25,7 +25,7 @@ import { selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors
   templateUrl: './gdpr-technical-precautions-section.component.html',
   styleUrls: ['./gdpr-technical-precautions-section.component.scss'],
 })
-export class GdprTechnicalPrecautionsSectionComponent extends BaseComponent implements OnInit {
+export class GdprTechnicalPrecautionsSectionComponent extends BaseAccordionComponent implements OnInit {
   @Output() public noPermissions = new EventEmitter<AbstractControl[]>();
   @Input() disableLinkControl!: Observable<void>;
 

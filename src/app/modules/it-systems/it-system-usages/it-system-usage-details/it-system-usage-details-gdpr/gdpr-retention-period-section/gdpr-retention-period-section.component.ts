@@ -3,7 +3,7 @@ import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { map } from 'rxjs';
 import { APIGDPRRegistrationsResponseDTO, APIGDPRWriteRequestDTO } from 'src/app/api/v2';
-import { BaseComponent } from 'src/app/shared/base/base.component';
+import { BaseAccordionComponent } from 'src/app/shared/base/base-accordion.component';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import {
   YesNoDontKnowOptions,
@@ -19,7 +19,7 @@ import { selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors
   templateUrl: './gdpr-retention-period-section.component.html',
   styleUrls: ['./gdpr-retention-period-section.component.scss'],
 })
-export class GdprRetentionPeriodSectionComponent extends BaseComponent implements OnInit {
+export class GdprRetentionPeriodSectionComponent extends BaseAccordionComponent implements OnInit {
   @Output() public noPermissions = new EventEmitter<AbstractControl[]>();
 
   private readonly currentGdpr$ = this.store.select(selectItSystemUsageGdpr).pipe(filterNullish());

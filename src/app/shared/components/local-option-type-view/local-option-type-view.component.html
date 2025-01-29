@@ -1,5 +1,5 @@
 <ng-container *ngIf="optionTypeItems$ | async as optionTypeItems">
-  <app-accordion [title]="title" [disabled]="disableAccordion" [isExpandedByDefault]="expandedByDefault">
+  <app-accordion [title]="title" [disabled]="disableAccordion" [isExpanded]="expandedByDefault">
     <app-local-option-grid
       [loading]="(isLoading$ | async) !== false"
       [optionType]="optionType"

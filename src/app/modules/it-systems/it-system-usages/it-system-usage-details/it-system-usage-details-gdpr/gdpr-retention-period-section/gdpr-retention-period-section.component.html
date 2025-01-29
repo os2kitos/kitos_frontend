@@ -1,6 +1,8 @@
 <app-accordion
   title="Er der bevaringsfrist på data inden de må slettes?"
   data-cy="retention-period-accordion"
+  [isExpanded]="(isExpanded$ | async) ?? false"
+  (expandedChanged)="onExpandedChanged($event)"
   i18n-title
 >
   <form [formGroup]="formGroup">

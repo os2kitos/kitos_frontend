@@ -15,4 +15,6 @@
   [formGroup]="formGroup"
   [disableLinkControl]="disableLinkControl"
   [hasModifyPermissions$]="hasModifyPermissions$"
+  [isExpanded$]="isExpanded$"
+  (expandedChanged)="onExpandedChanged($event)"
 ></app-gdpr-base-date-url-section>
