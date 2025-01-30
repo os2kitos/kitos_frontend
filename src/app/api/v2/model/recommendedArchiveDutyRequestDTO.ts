@@ -22,12 +22,13 @@ export interface APIRecommendedArchiveDutyRequestDTO {
     id?: APIRecommendedArchiveDutyRequestDTO.IdEnum;
 }
 export namespace APIRecommendedArchiveDutyRequestDTO {
-    export type IdEnum = 'Undecided' | 'B' | 'K' | 'NoRecommendation';
+    export type IdEnum = 'Undecided' | 'B' | 'K' | 'NoRecommendation' | 'PreserveDataCanDiscardDocuments';
     export const IdEnum = {
         Undecided: 'Undecided' as IdEnum,
         B: 'B' as IdEnum,
         K: 'K' as IdEnum,
-        NoRecommendation: 'NoRecommendation' as IdEnum
+        NoRecommendation: 'NoRecommendation' as IdEnum,
+        PreserveDataCanDiscardDocuments: 'PreserveDataCanDiscardDocuments' as IdEnum
     };
 }
 

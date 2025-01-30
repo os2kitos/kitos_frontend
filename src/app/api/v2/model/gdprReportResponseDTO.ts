@@ -39,6 +39,7 @@ export interface APIGdprReportResponseDTO {
     userSupervisionDocumentationUrl?: string;
     userSupervisionDocumentationUrlName?: string;
     nextDataRetentionEvaluationDate?: string;
+    insecureCountriesSubjectToDataTransfer?: Array<string>;
 }
 export namespace APIGdprReportResponseDTO {
     export type BusinessCriticalEnum = 'No' | 'Yes' | 'DontKnow' | 'Undecided';

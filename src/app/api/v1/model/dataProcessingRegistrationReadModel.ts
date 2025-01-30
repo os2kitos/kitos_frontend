@@ -30,6 +30,7 @@ export interface APIDataProcessingRegistrationReadModel {
     transferToInsecureThirdCountries?: APIDataProcessingRegistrationReadModel.TransferToInsecureThirdCountriesEnum;
     agreementConcludedAt?: string;
     latestOversightDate?: string;
+    latestOversightRemark?: string;
     basisForTransfer?: string;
     basisForTransferUuid?: string;
     oversightInterval?: APIDataProcessingRegistrationReadModel.OversightIntervalEnum;

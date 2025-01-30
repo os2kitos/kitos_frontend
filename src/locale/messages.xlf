@@ -3307,12 +3307,6 @@
       <trans-unit id="4715072582230935513" datatype="html">
         <source>Måned</source>
       </trans-unit>
-      <trans-unit id="2021928621838842498" datatype="html">
-        <source>B</source>
-      </trans-unit>
-      <trans-unit id="2735420972741760581" datatype="html">
-        <source>K</source>
-      </trans-unit>
       <trans-unit id="1117664735791660807" datatype="html">
         <source>Ved ikke</source>
       </trans-unit>
@@ -4932,6 +4926,15 @@
       </trans-unit>
       <trans-unit id="5905238958958627451" datatype="html">
         <source>Luk alle</source>
+      </trans-unit>
+      <trans-unit id="4958882387568728993" datatype="html">
+        <source>Data og dokumenter kasseres (K)</source>
+      </trans-unit>
+      <trans-unit id="9007353493777604696" datatype="html">
+        <source>Data og dokumenter bevares (B)</source>
+      </trans-unit>
+      <trans-unit id="1337323295460285381" datatype="html">
+        <source>Data bevares, dokumenter kan kasseres</source>
       </trans-unit>
     </body>
   </file>

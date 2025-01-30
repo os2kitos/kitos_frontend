@@ -106,12 +106,13 @@ export interface APIItSystemUsageOverviewReadModel {
     isBusinessCritical?: APIItSystemUsageOverviewReadModel.IsBusinessCriticalEnum;
 }
 export namespace APIItSystemUsageOverviewReadModel {
-    export type ArchiveDutyEnum = 'Undecided' | 'B' | 'K' | 'Unknown';
+    export type ArchiveDutyEnum = 'Undecided' | 'B' | 'K' | 'Unknown' | 'PreserveDataCanDiscardDocuments';
     export const ArchiveDutyEnum = {
         Undecided: 'Undecided' as ArchiveDutyEnum,
         B: 'B' as ArchiveDutyEnum,
         K: 'K' as ArchiveDutyEnum,
-        Unknown: 'Unknown' as ArchiveDutyEnum
+        Unknown: 'Unknown' as ArchiveDutyEnum,
+        PreserveDataCanDiscardDocuments: 'PreserveDataCanDiscardDocuments' as ArchiveDutyEnum
     };
     export type LifeCycleStatusEnum = 'Undecided' | 'NotInUse' | 'PhasingIn' | 'Operational' | 'PhasingOut';
     export const LifeCycleStatusEnum = {

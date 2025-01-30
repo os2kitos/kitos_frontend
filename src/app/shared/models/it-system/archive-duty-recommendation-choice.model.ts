@@ -1,4 +1,9 @@
 import { APIRecommendedArchiveDutyResponseDTO } from 'src/app/api/v2';
+import {
+  ARCHIVE_B_TYPE_TEXT,
+  ARCHIVE_K_TYPE_TEXT,
+  ARCHIVE_PRESERVE_DATA_CAN_DISCARD_DOCUMENTS_TEXT,
+} from '../../constants/archive.constants';
 
 export interface ArchiveDutyRecommendationChoice {
   name: string;
@@ -7,12 +12,16 @@ export interface ArchiveDutyRecommendationChoice {
 
 export const archiveDutyRecommendationChoiceOptions: ArchiveDutyRecommendationChoice[] = [
   {
-    name: $localize`B`,
+    name: ARCHIVE_B_TYPE_TEXT,
     value: APIRecommendedArchiveDutyResponseDTO.IdEnum.B,
   },
   {
-    name: $localize`K`,
+    name: ARCHIVE_K_TYPE_TEXT,
     value: APIRecommendedArchiveDutyResponseDTO.IdEnum.K,
+  },
+  {
+    name: ARCHIVE_PRESERVE_DATA_CAN_DISCARD_DOCUMENTS_TEXT,
+    value: APIRecommendedArchiveDutyResponseDTO.IdEnum.PreserveDataCanDiscardDocuments,
   },
   {
     name: $localize`Ved ikke`,
