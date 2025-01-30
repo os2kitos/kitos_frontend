@@ -13,8 +13,9 @@
   (filterChange)="onFilterChange($event)"
   (sortChange)="onSortChange($event)"
   (pageChange)="onPageChange($event)"
+  [scrollable]="reorderable ? 'scrollable' : scrollable"
   style="width: 100%"
-  [ngClass]="{ 'grid-outline': withOutline, 'fit-size-to-content': fitSizeToContent, dragging: reorderable }"
+  [ngClass]="{ 'grid-outline': withOutline, 'fit-size-to-content': fitSizeToContent, dragging: reorderable, 'expand-height-to-content': !fitSizeToContent }"
 >
   <kendo-grid-rowreorder-column class="drag-handle" *ngIf="reorderable" [width]="40"></kendo-grid-rowreorder-column>
   <ng-template #dragHintTemplate> THIS IS A HINT </ng-template>

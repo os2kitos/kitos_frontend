@@ -39,6 +39,7 @@ export class LocalGridComponent<T> extends BaseComponent implements OnInit {
   @Input() withOutline: boolean = false;
   @Input() fitSizeToContent: boolean = false;
   @Input() reorderable: boolean = false;
+  @Input() scrollable: 'scrollable' | 'virtual' | 'none' = 'scrollable';
 
   @Output() deleteEvent = new EventEmitter<T>();
   @Output() modifyEvent = new EventEmitter<T>();

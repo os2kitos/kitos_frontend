@@ -21,6 +21,10 @@
   max-height: 1000px;
 }
 
+.expand-height-to-content {
+  height: auto;
+}
+
 :host .dragging {
   user-select: none !important;
 }

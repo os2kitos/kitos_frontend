@@ -21,6 +21,4 @@ export class LocalAdminOrganizationComponent {
     { text: $localize`Roller`, value: LocalAdminOrganizationSegmentOption.Roles },
   ];
 
-
-
 }

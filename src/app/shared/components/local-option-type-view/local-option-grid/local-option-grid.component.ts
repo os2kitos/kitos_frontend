@@ -20,6 +20,8 @@ export class LocalOptionGridComponent implements OnInit {
   @Input() public loading: boolean = false;
   @Input() public optionType!: LocalAdminOptionType;
   @Input() public optionTypes: LocalAdminOptionTypeItem[] = [];
+  @Input() scrollable: 'scrollable' | 'virtual' | 'none' = 'scrollable';
+  @Input() fitSizeToContent = true;
 
   @Input() showWriteAccess: boolean = false;
   @Input() showDescription: boolean = true;

@@ -20,6 +20,8 @@ export class GlobalOptionTypeGridComponent implements OnChanges {
   @Input() optionType!: GlobalAdminOptionType;
   @Input() optionTypeItems!: GlobalAdminOptionTypeItem[];
   @Input() reordering!: boolean;
+  @Input() scrollable: 'scrollable' | 'virtual' | 'none' = 'scrollable';
+  @Input() fitSizeToContent = true;
 
   @Input() showWriteAccess!: boolean;
   @Input() showDescription!: boolean;
