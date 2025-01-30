@@ -84,6 +84,7 @@ export class NotificationsTableDialogComponent extends BaseComponent implements 
   public rootUrl: string;
   public canEdit = true;
   private isEdit = false;
+  private isSelectingRepetition = false;
 
   constructor(
     private readonly appRootUrlResolverService: AppRootUrlResolverService,
@@ -112,17 +113,21 @@ export class NotificationsTableDialogComponent extends BaseComponent implements 
 
       if (!this.notification?.active) {
         this.canEdit = false;
-        this.disableForms();
+        this.disableForm();
       }
     }
   }
 
   public receipientsChanged(roles: string[], isReceivers: boolean): void {
-    this.getReceipientsControl(isReceivers).setValue(roles);
+    const control = this.getReceipientsControl(isReceivers);
+    control.setValue(roles);
+    control.updateValueAndValidity();
   }
 
   public receipientsCleared(isReceivers: boolean): void {
-    this.getReceipientsControl(isReceivers).setValue([]);
+    const control = this.getReceipientsControl(isReceivers);
+    control.setValue([]);
+    control.updateValueAndValidity();
   }
 
   public receipientsAdded(receipient: MultiSelectDropdownItem<string>, isReceivers: boolean): void {
@@ -131,6 +136,9 @@ export class NotificationsTableDialogComponent extends BaseComponent implements 
 
   public hasImmediateNotification = () =>
     this.notification && this.notification.notificationType !== this.notificationTypeRepeat.value;
+
+  public hasRepeatNotification = () =>
+    this.notification && this.notification.notificationType === this.notificationTypeRepeat.value;
 
   public onCancel() {
     this.dialogRef.close();
@@ -352,10 +360,10 @@ export class NotificationsTableDialogComponent extends BaseComponent implements 
   private setupDisabledStateAndValidators() {
     if (this.hasImmediateNotification()) {
       this.canEdit = false;
-      this.disableForms();
+      this.disableForm();
     }
 
-    if (this.notification && this.notification.notificationType === this.notificationTypeRepeat.value) {
+    if (this.hasRepeatNotification()) {
       this.toggleRepetitionFields(true);
       this.notificationForm.controls.notificationTypeControl.disable();
       this.notificationForm.controls.repetitionControl.disable();
@@ -370,7 +378,6 @@ export class NotificationsTableDialogComponent extends BaseComponent implements 
 
   private toggleRepetitionFields(isRepeated: boolean) {
     this.isRepeated = isRepeated;
-
     if (isRepeated) {
       const today = new Date();
       today.setHours(0, 0, 0, 0);
@@ -385,6 +392,9 @@ export class NotificationsTableDialogComponent extends BaseComponent implements 
       this.notificationForm.controls.fromDateControl.patchValue(undefined);
       this.notificationForm.controls.toDateControl.patchValue(undefined);
     }
+
+    this.notificationForm.controls.repetitionControl.updateValueAndValidity();
+    this.notificationForm.controls.fromDateControl.updateValueAndValidity();
   }
 
   private toggleShowDateOver28Tooltip() {
@@ -400,7 +410,21 @@ export class NotificationsTableDialogComponent extends BaseComponent implements 
     }
   }
 
-  private disableForms() {
+  public repetitionIsInvalid() {
+    return (
+      !this.isSelectingRepetition && this.repeatIsSelected() && this.notificationForm.controls.repetitionControl.invalid
+    );
+  }
+
+  public toggleIsSelectingRepetition() {
+    this.isSelectingRepetition = !this.isSelectingRepetition;
+  }
+
+  public bodyIsInvalid() {
+    return this.notificationForm.controls.bodyControl.invalid;
+  }
+
+  private disableForm() {
     this.notificationForm.disable();
   }
 

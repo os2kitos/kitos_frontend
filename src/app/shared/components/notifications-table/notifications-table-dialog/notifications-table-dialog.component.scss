@@ -10,3 +10,8 @@ editor {
 ::ng-deep .mat-dialog-content-padding {
   max-height: 778px;
 }
+
+.invalid-input-border {
+  border: red solid 1px;
+  border-radius: 10px;
+}

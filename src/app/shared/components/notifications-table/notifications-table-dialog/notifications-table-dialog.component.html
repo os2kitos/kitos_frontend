@@ -106,6 +106,8 @@
         [formGroup]="notificationForm"
         formName="repetitionControl"
         [data]="notificationRepetitionFrequencyOptions"
+        [ngClass]="{'invalid-input-border': repetitionIsInvalid()}"
+        (openDropdown)="toggleIsSelectingRepetition()"
       >
       </app-dropdown>
 
@@ -116,7 +118,10 @@
         formName="subjectControl"
         data-cy="subject-textbox"
       ></app-textbox>
-      <app-rich-text-editor [formControl]="notificationForm.controls.bodyControl"></app-rich-text-editor>
+      <app-rich-text-editor
+        [formControl]="notificationForm.controls.bodyControl"
+        [ngClass]="{'invalid-input-border': bodyIsInvalid()}"
+      ></app-rich-text-editor>
 
       <app-dialog-actions class="dialog-footer">
         <app-button
