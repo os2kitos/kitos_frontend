@@ -12,11 +12,11 @@
         >
         </app-checkbox>
         <app-paragraph [bold]="true" paragraphSize="large">{{ title }}</app-paragraph>
-        <ng-container *ngIf="checkboxInTitle && checkboxDisabled && checkboxTooltipText !== undefined">
-          <app-tooltip [text]="checkboxTooltipText" class="tooltip-margin">
-            <app-info-icon></app-info-icon>
-          </app-tooltip>
-        </ng-container>
+
+        <app-tooltip data-cy="accordion-info" *ngIf="tooltipText" [text]="tooltipText" class="tooltip-margin">
+          <app-info-icon ></app-info-icon>
+        </app-tooltip>
+
         <ng-content class="accordion-header" select="app-accordion-header"></ng-content>
       </mat-panel-title>
     </mat-expansion-panel-header>

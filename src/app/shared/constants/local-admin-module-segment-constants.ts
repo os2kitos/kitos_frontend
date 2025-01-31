@@ -8,6 +8,6 @@ export enum LocalAdminModuleSegmentOptionType {
 
 export const LocalAdminModuleSegmentOptions: SegmentButtonOption<LocalAdminModuleSegmentOptionType>[] = [
   { text: $localize`Lokal tilpasning af brugerfladen`, value: LocalAdminModuleSegmentOptionType.UiCustomization },
-    { text: $localize`Lokal tilpasning af udfaldsrum`, value: LocalAdminModuleSegmentOptionType.RegularOptionTypes },
+    { text: $localize`Lokal tilpasning af udfaldsrum`, value: LocalAdminModuleSegmentOptionType.RegularOptionTypes, dataCy: 'local-admin-regular-option-types' },
     { text: $localize`Lokal tilpasning af roller`, value: LocalAdminModuleSegmentOptionType.RoleOptionTypes },
 ]

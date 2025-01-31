@@ -4927,14 +4927,20 @@
       <trans-unit id="5905238958958627451" datatype="html">
         <source>Luk alle</source>
       </trans-unit>
+      <trans-unit id="3407863117871869655" datatype="html">
+        <source>Dette udfaldsrum kan kun redigeres af OS2Kitos sekretariatet</source>
+      </trans-unit>
+      <trans-unit id="9044278666187230003" datatype="html">
+        <source>Dette udfald er obligatorisk og kan kun deaktiveres af OS2Kitos sekretariatet</source>
+      </trans-unit>
+      <trans-unit id="1337323295460285381" datatype="html">
+        <source>Data bevares, dokumenter kan kasseres</source>
+      </trans-unit>
       <trans-unit id="4958882387568728993" datatype="html">
         <source>Data og dokumenter kasseres (K)</source>
       </trans-unit>
       <trans-unit id="9007353493777604696" datatype="html">
         <source>Data og dokumenter bevares (B)</source>
-      </trans-unit>
-      <trans-unit id="1337323295460285381" datatype="html">
-        <source>Data bevares, dokumenter kan kasseres</source>
       </trans-unit>
     </body>
   </file>

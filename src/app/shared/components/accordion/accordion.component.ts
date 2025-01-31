@@ -12,7 +12,7 @@ export class AccordionComponent {
   @Input() checkboxInTitle = false;
   @Input() checkboxDisabled = false;
   @Input() checkboxValue = false;
-  @Input() checkboxTooltipText: string | undefined = undefined;
+  @Input() tooltipText: string | undefined = undefined;
   @Output() checkboxChanged = new EventEmitter<boolean>();
   @Output() expandedChanged = new EventEmitter<boolean>();
 

@@ -10,6 +10,7 @@ import {
 } from 'src/app/shared/models/options/local-admin-option-type.model';
 import { LocalOptionTypeActions } from 'src/app/store/local-admin/local-option-types/actions';
 import { EditLocalOptionTypeDialogComponent } from '../edit-local-option-type-dialog/edit-local-option-type-dialog.component';
+import { OBLIGATORY_LOCAL_OPTION_HELP_TEXT } from 'src/app/shared/constants/constants';
 
 @Component({
   selector: 'app-local-option-grid',
@@ -34,6 +35,9 @@ export class LocalOptionGridComponent implements OnInit {
       style: 'checkbox',
       noFilter: true,
       permissionsField: 'obligatory',
+      tooltipFn: (item: LocalAdminOptionTypeItem) => {
+        return item.obligatory ? OBLIGATORY_LOCAL_OPTION_HELP_TEXT : '';
+      },
     },
     {
       field: 'name',

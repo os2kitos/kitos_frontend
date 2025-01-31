@@ -3,9 +3,9 @@
   [isExpanded]="tabViewModelHasChildren()"
   [checkboxInTitle]="true"
   [checkboxValue]="tabViewModel.isEnabled ?? false"
-  [checkboxDisabled]="(tabViewModel.isObligatory ?? false) || (moduleEnabled$ | async) === false"
+  [checkboxDisabled]="(checkboxDisabled() | async) ?? false"
   (checkboxChanged)="onCheckboxChanged({ enabled: $event, fullKey: tabViewModel.fullKey })"
-  [checkboxTooltipText]="tabViewModel.helpText"
+  [tooltipText]="(checkboxDisabled() | async) ? tabViewModel.helpText : undefined"
 >
   <app-divider></app-divider>
 

@@ -52,6 +52,8 @@ export interface GridColumn {
   persistId?: string;
   tooltipPositiveText?: string;
   tooltipNegativeText?: string;
+  //eslint-disable-next-line @typescript-eslint/no-explicit-any
+  tooltipFn?: (dataItem: any) => string;
   isSticky?: boolean;
   booleanValueDisplay?: BooleanValueDisplayType; // Defines how boolean values should be displayed. If not set, RegistrationEntityTypes will be used to derive the display type
   disabledByUIConfig?: boolean;

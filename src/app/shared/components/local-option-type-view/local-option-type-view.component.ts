@@ -4,6 +4,7 @@ import { Actions, ofType } from '@ngrx/effects';
 import { filter } from 'rxjs';
 import { LocalOptionTypeActions } from 'src/app/store/local-admin/local-option-types/actions';
 import { BaseComponent } from '../../base/base.component';
+import { NON_EDITABLE_LOCAL_OPTION_TYPE_CATEGORY_HELP_TEXT } from '../../constants/constants';
 import { LocalAdminOptionType, LocalAdminOptionTypeItem } from '../../models/options/local-admin-option-type.model';
 import { EditLocalOptionTypeDialogComponent } from './edit-local-option-type-dialog/edit-local-option-type-dialog.component';
 import { LocalOptionTypeTableComponentStore } from './local-option-type-table.component-store';
@@ -33,6 +34,8 @@ export class LocalOptionTypeViewComponent extends BaseComponent implements OnIni
   ) {
     super();
   }
+
+  public readonly onlyEditableByGlobalAdminText = NON_EDITABLE_LOCAL_OPTION_TYPE_CATEGORY_HELP_TEXT;
 
   public readonly optionTypeItems$ = this.componentStore.optionTypeItems$;
   public readonly isLoading$ = this.componentStore.isLoading$;

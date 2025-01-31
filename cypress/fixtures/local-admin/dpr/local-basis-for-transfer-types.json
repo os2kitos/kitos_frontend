@@ -1,0 +1,42 @@
+[
+  {
+      "isActive": true,
+      "isObligatory": true,
+      "isLocallyAvailable": false,
+      "description": null,
+      "uuid": "7f9b5ea9-7a28-4591-95bd-547399ab8137",
+      "name": "EU og EØS"
+  },
+  {
+      "isActive": true,
+      "isObligatory": true,
+      "isLocallyAvailable": false,
+      "description": null,
+      "uuid": "a5bbe56f-ca80-4a79-936e-f90647b4cbf8",
+      "name": "EU's standard kontrakt /standard contract clauses"
+  },
+  {
+      "isActive": true,
+      "isObligatory": true,
+      "isLocallyAvailable": false,
+      "description": null,
+      "uuid": "efe92fe9-b9fc-48e6-abb9-bc158e3bc15d",
+      "name": "Binding corporate rules / BCR"
+  },
+  {
+      "isActive": true,
+      "isObligatory": true,
+      "isLocallyAvailable": false,
+      "description": null,
+      "uuid": "5c8aac1f-fe98-4fea-9e31-d205c0c95f66",
+      "name": "Intet"
+  },
+  {
+      "isActive": true,
+      "isObligatory": true,
+      "isLocallyAvailable": false,
+      "description": null,
+      "uuid": "5f4299ef-86a0-4850-808b-153665246ec0",
+      "name": "Andet"
+  }
+]

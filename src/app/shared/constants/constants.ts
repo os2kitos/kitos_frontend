@@ -51,3 +51,6 @@ export const STRING_FIELD_MAX_LENGTH = 100;
 export const GRID_ROW_HEIGHT = 63;
 
 export const MAX_DIALOG_HEIGHT = '750px';
+
+export const NON_EDITABLE_LOCAL_OPTION_TYPE_CATEGORY_HELP_TEXT = $localize`Dette udfaldsrum kan kun redigeres af OS2Kitos sekretariatet`;
+export const OBLIGATORY_LOCAL_OPTION_HELP_TEXT = $localize`Dette udfald er obligatorisk og kan kun deaktiveres af OS2Kitos sekretariatet`;

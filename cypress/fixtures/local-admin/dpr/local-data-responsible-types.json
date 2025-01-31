@@ -1,0 +1,42 @@
+[
+  {
+      "isActive": true,
+      "isObligatory": true,
+      "isLocallyAvailable": false,
+      "description": "(Det er vurderet at leverandøren behandler persondata på instruks fra kommunen og der skal indgås en databehandleraftale)",
+      "uuid": "4bfb25bd-f4aa-4b6a-8a30-8b267201ab10",
+      "name": "Leverandøren er databehandler"
+  },
+  {
+      "isActive": true,
+      "isObligatory": true,
+      "isLocallyAvailable": false,
+      "description": "(Og derfor skal der ikke indgås en databehandleraftale)",
+      "uuid": "c3382dee-8df4-4205-bc12-022eaac1654d",
+      "name": "Leverandøren behandler ikke personoplysninger"
+  },
+  {
+      "isActive": true,
+      "isObligatory": true,
+      "isLocallyAvailable": false,
+      "description": "(Deres anvendelse af data er ikke noget vi har indflydelse på)",
+      "uuid": "6a5fddf3-8f20-4c16-ad9f-eb37cf5b3656",
+      "name": "Leverandøren er selvstændig dataansvarlig"
+  },
+  {
+      "isActive": true,
+      "isObligatory": true,
+      "isLocallyAvailable": false,
+      "description": "(Der skal typisk indgås en anden type aftale – fortrolighedserklæring eller…)",
+      "uuid": "475e566b-1243-41c4-bf2a-561f68b4f6ba",
+      "name": "Fællesdataansvar "
+  },
+  {
+      "isActive": true,
+      "isObligatory": true,
+      "isLocallyAvailable": false,
+      "description": null,
+      "uuid": "d2afc3c0-c9f2-4488-861a-2e10468c1e49",
+      "name": "Kommunen er selv dataansvarlig"
+  }
+]
