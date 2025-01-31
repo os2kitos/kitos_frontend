@@ -12,6 +12,7 @@
           tagValidation="email"
           [disabled]="!canEdit"
           [isRequired]="true"
+          [isTagFn]="isTagAnEmail"
           (selectedEvent)="receipientsChanged($event, true)"
           (cleared)="receipientsCleared(true)"
           (addTag)="receipientsAdded($event, true)"
@@ -28,6 +29,7 @@
         [data]="ccOptions"
         [initialSelectedValues]="initialSelectedCcValues"
         [includeAddTag]="true"
+        [isTagFn]="isTagAnEmail"
         tagValidation="email"
         [disabled]="!canEdit"
         (selectedEvent)="receipientsChanged($event, false)"
@@ -106,7 +108,7 @@
         [formGroup]="notificationForm"
         formName="repetitionControl"
         [data]="notificationRepetitionFrequencyOptions"
-        [ngClass]="{'invalid-input-border': repetitionIsInvalid()}"
+        [ngClass]="{ 'invalid-input-border': repetitionIsInvalid() }"
         (openDropdown)="toggleIsSelectingRepetition()"
       >
       </app-dropdown>
@@ -120,7 +122,7 @@
       ></app-textbox>
       <app-rich-text-editor
         [formControl]="notificationForm.controls.bodyControl"
-        [ngClass]="{'invalid-input-border': bodyIsInvalid()}"
+        [ngClass]="{ 'invalid-input-border': bodyIsInvalid() }"
       ></app-rich-text-editor>
 
       <app-dialog-actions class="dialog-footer">

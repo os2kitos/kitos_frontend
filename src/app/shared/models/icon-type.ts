@@ -28,4 +28,5 @@ export type IconType =
   | 'check'
   | 'collapse'
   | 'expand'
+  | 'x'
   | undefined;

@@ -62,6 +62,9 @@ export class NotificationsTableDialogComponent extends BaseComponent implements 
 
   public isRepeated: boolean = false;
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  public isTagAnEmail = ((item: any) => !this.rolesOptions.some((option) => option.uuid === item.value)).bind(this);
+
   public readonly notificationForm = new FormGroup({
     subjectControl: new FormControl<string | undefined>(undefined, Validators.required),
     notificationTypeControl: new FormControl<NotificationType | undefined>(undefined, Validators.required),

@@ -36,6 +36,8 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
   @Input() public tagValidation: 'email' | 'none' = 'none';
   @Input() public addTagText: string = $localize`Tilføj email`;
   @Input() public isRequired = false;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  @Input() public isTagFn: (item: any) => boolean = () => false;
 
   @Output() public valueChange = new EventEmitter<T[] | undefined>();
   @Output() public validatedValueChange = new EventEmitter<ValidatedValueChange<T[] | undefined>>();
@@ -104,6 +106,7 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
   }
 
   public addValue(value: MultiSelectDropdownItem<T>) {
+    this.data?.push(value);
     this.selectedValuesModel.push(value);
     this.selectedValues = this.selectedValuesModel.map((item) => item.value);
   }
@@ -152,6 +155,15 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
 
     return newTag;
   };
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  public removeTag(item: MultiSelectDropdownItem<T>) {
+    if (this.data) {
+      this.data = this.data.filter((d) => d !== item);
+    }
+    this.selectedValuesModel = this.selectedValuesModel.filter((d) => d !== item);
+    this.selectedValues = this.selectedValues.filter((v) => v !== item.value);
+  }
 
   private updateSelectedValues(value: T) {
     const index = this.selectedValues.indexOf(value);
