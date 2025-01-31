@@ -286,7 +286,7 @@ export class NotificationService implements OnDestroy {
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(ITSystemUsageActions.patchITSystemUsageSuccess))
-        .subscribe((params) => this.showDefault(params.customSuccessText ?? $localize`Feltet er opdateret.`))
+        .subscribe((params) => this.showDefault(params.customSuccessText ?? $localize`Feltet blev opdateret.`))
     );
     this.subscriptions.add(
       this.actions$

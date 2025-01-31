@@ -10,7 +10,7 @@
             class="link-input-style"
             [disabled]="isDisabled"
             data-cy="link-textbox-input"
-            [value]="isLinkOnly ? simpleLink.url : simpleLink.name"
+            [value]="getLinkText() | async"
           />
         </div>
 
@@ -34,7 +34,7 @@
           [disabled]="isDisabled"
           data-cy="link-textbox-input"
           d
-          [value]="isLinkOnly ? simpleLink.url : simpleLink.name + ': ' + simpleLink.url"
+          [value]="getLinkText() | async"
         />
         <div matSuffix class="suffix-icons" *ngIf="!isDisabled">
           <span (click)="onClearClick()">x</span>

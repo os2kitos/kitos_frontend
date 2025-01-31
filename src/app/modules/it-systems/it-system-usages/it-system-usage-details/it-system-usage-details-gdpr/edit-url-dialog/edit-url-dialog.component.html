@@ -20,7 +20,7 @@
         <app-button buttonStyle="secondary" (buttonClick)="onCancel()" data-cy="edit-url-cancel-button" i18n
           >Annuller</app-button
         >
-        <app-button type="submit" [disabled]="isBusy" data-cy="edit-url-save-button" i18n>Gem</app-button>
+        <app-button type="submit" [disabled]="disableSave() === true" data-cy="edit-url-save-button" i18n>Gem</app-button>
       </app-dialog-actions>
     </app-standard-vertical-content-grid>
   </form>

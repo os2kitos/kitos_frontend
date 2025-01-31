@@ -43,7 +43,7 @@ describe('it-system-usage', () => {
     cy.dropdown('Arkiveringspligt', 'K', true);
     verifyArchivePatchRequest({ archiveDuty: 'K' });
 
-    cy.contains('Feltet er opdateret');
+    cy.contains('Feltet blev opdateret');
 
     cy.dropdown('Arkivtype', 'Other type', true);
     verifyArchivePatchRequest({ typeUuid: 'aaad266c-3b84-49a0-8dc4-9d57b5dbc26b' });

@@ -128,7 +128,7 @@ describe('it-system-usage', () => {
       .its('request.body')
       .should('deep.eq', { general: { localCallName: 'TEST' } });
 
-    cy.contains('Feltet er opdateret');
+    cy.contains('Feltet blev opdateret');
 
     cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' }).as(
       'patch2'
@@ -155,7 +155,7 @@ describe('it-system-usage', () => {
       .its('request.body')
       .should('deep.eq', { general: { validity: { validFrom: 'Tue May 31 2022' } } });
 
-    cy.contains('Feltet er opdateret');
+    cy.contains('Feltet blev opdateret');
   });
 
   it('does not override focused form fields', () => {
@@ -170,7 +170,7 @@ describe('it-system-usage', () => {
     cy.input('Systemnavn ID').clear().type('123');
     cy.wait('@patch');
 
-    cy.contains('Feltet er opdateret');
+    cy.contains('Feltet blev opdateret');
 
     cy.input('Systemnavn ID').type('456');
     cy.input('Version').click();

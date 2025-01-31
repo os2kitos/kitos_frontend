@@ -18,14 +18,22 @@ export class EditUrlDialogComponent extends BaseComponent implements OnInit {
   @Output() submitMethod!: EventEmitter<any>;
 
   public readonly simpleLinkForm = new FormGroup({
-    name: new FormControl<string | undefined>(undefined, Validators.required),
-    url: new FormControl<string | undefined>(undefined, Validators.required),
+    name: new FormControl<string | undefined>(undefined),
+    url: new FormControl<string | undefined>(undefined),
   });
 
   public isBusy = false;
 
   constructor(private readonly dialogRef: MatDialogRef<EditUrlDialogComponent>, private readonly actions$: Actions) {
     super();
+  }
+
+  public disableSave(){
+    if (this.isBusy) return true;
+    const controls = this.simpleLinkForm.controls;
+    const name = controls.name.value;
+    const url = controls.url.value;
+    return name && !url;
   }
 
   ngOnInit(): void {
@@ -55,10 +63,8 @@ export class EditUrlDialogComponent extends BaseComponent implements OnInit {
     if (!this.simpleLinkForm.valid) return;
     const name = this.simpleLinkForm.value.name;
     const url = this.simpleLinkForm.value.url;
-    if (!url || !name) return;
 
     this.isBusy = true;
-
     this.submitMethod.emit({ name: name, url: url });
   }
 
