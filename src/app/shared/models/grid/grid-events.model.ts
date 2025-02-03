@@ -12,3 +12,8 @@ export type Indexed<T> = {
   item: T;
   index: number;
 };
+
+export type CheckboxChange = {
+  value: boolean | undefined;
+  rowEntityUuid: string | undefined;
+};

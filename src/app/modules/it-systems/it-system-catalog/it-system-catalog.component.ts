@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
+import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { CellClickEvent } from '@progress/kendo-angular-grid';
-import { combineLatestWith, first } from 'rxjs';
+import { combineLatestWith, debounceTime, first } from 'rxjs';
 import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
 import { BooleanValueDisplayType } from 'src/app/shared/components/status-chip/status-chip.component';
+import { DEFAULT_INPUT_DEBOUNCE_TIME } from 'src/app/shared/constants/constants';
 import * as CatalogFields from 'src/app/shared/constants/it-system-catalog-grid-column-constants';
 import {
   ARCHIVE_SECTION_NAME,
@@ -17,7 +19,9 @@ import {
 import { accessModifierOptions } from 'src/app/shared/models/access-modifier.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
+import { CheckboxChange } from 'src/app/shared/models/grid/grid-events.model';
 import { archiveDutyRecommendationChoiceOptions } from 'src/app/shared/models/it-system/archive-duty-recommendation-choice.model';
+import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.service';
 import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { selectITSystemUsageHasCreateCollectionPermission } from 'src/app/store/it-system-usage/selectors';
@@ -213,7 +217,8 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
     private router: Router,
     private route: ActivatedRoute,
     private actions$: Actions,
-    private gridColumnStorageService: GridColumnStorageService
+    private gridColumnStorageService: GridColumnStorageService,
+    private dialogOpenerService: DialogOpenerService
   ) {
     super(store, 'it-system');
   }
@@ -251,6 +256,59 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
     this.subscriptions.add(
       this.actions$.pipe(ofType(ITSystemActions.resetGridConfiguration)).subscribe(() => this.updateDefaultColumns())
     );
+  }
+
+  public handleSystemUsageChange(event: CheckboxChange) {
+    const rowEntityUuid = event.rowEntityUuid;
+    if (!rowEntityUuid) return;
+
+    if (event.value === true) {
+      this.handleTakeSystemIntoUse(rowEntityUuid);
+    } else {
+      this.handleTakeSystemOutOfUse(rowEntityUuid);
+    }
+  }
+
+  private handleTakeSystemIntoUse(systemUuid: string) {
+    this.store.dispatch(ITSystemUsageActions.createItSystemUsage(systemUuid));
+    this.subscriptions.add(
+      this.actions$
+        .pipe(
+          ofType(ITSystemUsageActions.createItSystemUsageSuccess),
+          first(),
+          debounceTime(DEFAULT_INPUT_DEBOUNCE_TIME),
+          concatLatestFrom(() => this.gridState$)
+        )
+        .subscribe(([_, gridState]) => this.dispatchGetSystemsOnDataUpdate(gridState))
+    );
+  }
+
+  private handleTakeSystemOutOfUse(systemUuid: string) {
+    const dialogRef = this.dialogOpenerService.openTakeSystemOutOfUseDialog();
+    this.subscriptions.add(
+      dialogRef.afterClosed().subscribe((result: boolean) => {
+        if (result && systemUuid !== undefined) {
+          this.store.dispatch(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganization(systemUuid));
+        }
+      })
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(
+          ofType(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganizationSuccess),
+          first(),
+          debounceTime(DEFAULT_INPUT_DEBOUNCE_TIME),
+          concatLatestFrom(() => this.gridState$)
+        )
+        .subscribe(([_, gridState]) => this.dispatchGetSystemsOnDataUpdate(gridState))
+    );
+  }
+
+  private dispatchGetSystemsOnDataUpdate(gridState: GridState | undefined) {
+    if (gridState) {
+      this.store.dispatch(ITSystemActions.updateGridDataFromGrid(gridState));
+    }
   }
 
   private updateDefaultColumns(): void {

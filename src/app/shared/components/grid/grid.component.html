@@ -229,7 +229,7 @@
                 [disabled]="
                   column.permissionsField ? searchProperty(dataItem, column.permissionsField) !== true : false
                 "
-                (valueChange)="checkboxChange($event, searchProperty(dataItem, column.idField))"
+                (valueChange)="onCheckboxChange($event, searchProperty(dataItem, column.idField))"
               ></app-checkbox>
               <app-usage-proxy-checkbox
                 *ngIf="entityType === 'it-system'"
@@ -240,7 +240,7 @@
                     : false
                 "
                 [entityUuid]="searchProperty(dataItem, column.idField)"
-                (attemptChange)="checkboxChange($event, searchProperty(dataItem, column.idField))"
+                (attemptChange)="onCheckboxChange($event, searchProperty(dataItem, column.idField))"
               ></app-usage-proxy-checkbox>
             </ng-container>
           </div>
