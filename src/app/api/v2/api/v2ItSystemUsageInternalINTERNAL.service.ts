@@ -48,6 +48,7 @@ export interface GetManyItSystemUsageInternalV2GetItSystemUsagesRequestParams {
     relatedToSystemUsageUuid?: string;
     /** Query by contracts which are part of a system relation */
     relatedToContractUuid?: string;
+    systemUuid?: string;
     /** Query usages based on system name */
     systemNameContent?: string;
     /** Include only changes which were LastModified (UTC) is equal to or greater than the provided value */
@@ -268,6 +269,7 @@ export class APIV2ItSystemUsageInternalINTERNALService {
         const relatedToSystemUuid = requestParameters.relatedToSystemUuid;
         const relatedToSystemUsageUuid = requestParameters.relatedToSystemUsageUuid;
         const relatedToContractUuid = requestParameters.relatedToContractUuid;
+        const systemUuid = requestParameters.systemUuid;
         const systemNameContent = requestParameters.systemNameContent;
         const changedSinceGtEq = requestParameters.changedSinceGtEq;
         const orderByProperty = requestParameters.orderByProperty;
@@ -290,6 +292,10 @@ export class APIV2ItSystemUsageInternalINTERNALService {
         if (relatedToContractUuid !== undefined && relatedToContractUuid !== null) {
           localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
             <any>relatedToContractUuid, 'relatedToContractUuid');
+        }
+        if (systemUuid !== undefined && systemUuid !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>systemUuid, 'systemUuid');
         }
         if (systemNameContent !== undefined && systemNameContent !== null) {
           localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,

@@ -59,6 +59,7 @@
       labelPosition="after"
       text="Jeg forstår og accepterer ovenstående konsekvenser"
       i18n-text
+      *ngIf="(hasConsequences() | async) === true"
     >
     </app-checkbox>
   </app-dialog-actions>
