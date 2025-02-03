@@ -22,7 +22,9 @@ export interface ITSystem {
   LastChangedByUser: { Name: string };
   Disabled: boolean;
   LastChanged: string;
-  Reference: { Title: string; URL: string; ExternalReferenceId: string };
+  ReferenceTitle?: string;
+  ReferenceURL?: string;
+  ReferenceExternalReferenceId?: string;
   ArchiveDuty: ArchiveDutyRecommendationChoice | undefined;
   ArchiveDutyComment: string;
   CanChangeUsageStatus: boolean;
@@ -41,6 +43,7 @@ export const adaptITSystem = (value: any, currentOrganizationUuid: string): ITSy
       return { name: usage.Organization.Name, uuid: usage.Organization.Uuid };
     }
   );
+  const reference = value.Reference;
 
   return {
     id: value.Uuid,
@@ -60,7 +63,9 @@ export const adaptITSystem = (value: any, currentOrganizationUuid: string): ITSy
     LastChangedByUser: { Name: `${value.LastChangedByUser?.Name} ${value.LastChangedByUser?.LastName}` },
     LastChanged: value.LastChanged,
     Disabled: value.Disabled,
-    Reference: value.Reference,
+    ReferenceTitle: reference?.Title,
+    ReferenceURL: reference?.URL,
+    ReferenceExternalReferenceId: reference?.ExternalReferenceId,
     ArchiveDuty: mapArchiveDutyRecommendationChoice(value.ArchiveDuty),
     ArchiveDutyComment: value.ArchiveDutyComment,
     CanChangeUsageStatus: !isDisabled,

@@ -1,4 +1,5 @@
 import { GridColumn } from '../models/grid-column.model';
+import { validateUrl } from './link.helpers';
 
 export function includedColumnInExport(column: GridColumn): boolean {
   return column.style !== 'action-buttons' && !column.disabledByUIConfig;
@@ -57,7 +58,11 @@ export function transformRow(item: any, exportColumns: GridColumn[]): any {
           }
           break;
         case 'title-link':
-          transformedItem[field] = transformedItem[column.idField ?? ''];
+          {
+            const url = transformedItem[column.idField ?? ''];
+            const exportValue = validateUrl(url) ? url : transformedItem[field];
+            transformedItem[field] = exportValue;
+          }
           break;
         default:
           break;

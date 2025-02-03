@@ -48,6 +48,8 @@ import { UIConfigGridApplication } from '../../models/ui-config/ui-config-grid-a
 import { DialogOpenerService } from '../../services/dialog-opener.service';
 import { StatePersistingService } from '../../services/state-persisting.service';
 import { GridUIConfigService } from '../../services/ui-config-services/grid-ui-config.service';
+import { concatLatestFrom } from '@ngrx/operators';
+import { filterNullish } from '../../pipes/filter-nullish';
 
 @Component({
   selector: 'app-grid',
@@ -270,19 +272,23 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     if (!this.data || !this.state) {
       return { data: [] };
     }
-    const processedData = process(this.data.data, { skip: 0, take: this.data.total });
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let formattedData: any[] = [];
-    this.getFilteredExportColumns$()
-      .pipe(first())
-      .subscribe((columns) => {
+    this.data$
+      .pipe(
+        filterNullish(),
+        concatLatestFrom(() => this.getFilteredExportColumns$()),
+        first()
+      )
+      .subscribe(([data, exportColumns]) => {
+        const processedData = process(data.data, { skip: 0, take: data.data.length });
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        formattedData = processedData.data.map((item: any) => transformRow(item, columns));
+        formattedData = processedData.data.map((item: any) => transformRow(item, exportColumns));
       });
     return { data: formattedData };
   }
 
-  public getFilteredExportColumns$() {
+  public getFilteredExportColumns$(): Observable<GridColumn[]> {
     return combineLatest([this.columns$, this.exportAllColumns$, this.uiConfigApplications$ ?? of([])]).pipe(
       map(([columns, exportAllColumns, uiConfigApplications]) => {
         const columnsToExport = columns

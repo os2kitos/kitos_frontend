@@ -23,7 +23,7 @@ export class GridDataCacheService {
 
   public get(gridState: GridState): GridDataCacheRange {
     const cacheChunks = this.cache.chunks;
-    if (cacheChunks.length === 0) return this.emptyCacheRange;
+    if (cacheChunks.length === 0 || gridState.all) return this.emptyCacheRange;
 
     const cacheStartIndex = this.getCacheStartIndex(gridState);
     const chunkCount = this.getChunkCount(gridState);
@@ -68,6 +68,7 @@ export class GridDataCacheService {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public gridStateSliceFromArray(data: any[], gridState: GridState) {
+    if (gridState.all) return data;
     const chunkSkip = this.getChunkedSkip(gridState.skip);
     const startSlice = (gridState.skip ?? 0) - chunkSkip;
     const endSlice = startSlice + (gridState.take ?? 0);
@@ -134,6 +135,7 @@ export class GridDataCacheService {
   }
 
   public toChunkedODataString(gridState: GridState, settings?: ODataSettings) {
+    if (gridState.all) return toODataString(gridState, settings);
     const chunkSkip = this.getChunkedSkip(gridState.skip);
     const chunkTake = this.getChunkedTake(gridState);
     const cacheableGridState = {
