@@ -1,0 +1,20 @@
+[
+  {
+    "organization": {
+      "uuid": "f61ac3b2-8093-438d-a8df-869e27b0f77d",
+      "name": "Fælles Kommune"
+    },
+    "email": "support@kitos.dk",
+    "uuid": "04e78956-9d0a-4922-b220-871a7acbbc61",
+    "name": "Global admin"
+  },
+  {
+    "organization": {
+      "uuid": "da3642ec-76db-4f51-87aa-3762a8fd6ec9",
+      "name": "Test organisation to"
+    },
+    "email": "local-local-admin-user@kitos.dk",
+    "uuid": "a4570eb8-2048-4ec2-a582-957da43ec093",
+    "name": "Automatisk oprettet testbruger (LocalAdmin)"
+  }
+]

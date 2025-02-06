@@ -1,7 +1,8 @@
-<div *ngIf="itemParentIdsDictionary && sortedData">
-  <div *ngIf="formGroup" [formGroup]="formGroup">
+<ng-container *ngIf="itemParentIdsDictionary && sortedData">
+  <ng-container *ngIf="formGroup" [formGroup]="formGroup">
     <ng-select
       class="{{ size }}"
+      [clearable]="clearable"
       [formControlName]="formName"
       [placeholder]="text"
       [items]="sortedData"
@@ -11,23 +12,39 @@
       [loadingText]="loadingText"
       [notFoundText]="notFoundText"
       [searchFn]="searchWithItemParents"
+      [appendTo]="appendTo"
+      [readonly]="disabled"
       (search)="filter$.next($event.term)"
       (change)="formSelectionChange($event)"
       (clear)="filter$.next('')"
       ><ng-template ng-option-tmp let-item="item">
         <div
+          *ngIf="!item.description || !showDescription"
           [style.text-indent]="
             itemParentIdsDictionary[item.id] ? (itemParentIdsDictionary[item.id]!.length - 1) * 10 + 'px' : '0px'
           "
         >
           {{ item.name }}
         </div>
+        <div
+          *ngIf="item.description && showDescription"
+          [style.text-indent]="
+            itemParentIdsDictionary[item.id] ? (itemParentIdsDictionary[item.id]!.length - 1) * 10 + 'px' : '0px'
+          "
+          class="description"
+        >
+          {{ item.name }}
+          <app-paragraph *ngIf="item.description && showDescription" paragraphSize="small">{{
+            item.description
+          }}</app-paragraph>
+        </div>
       </ng-template></ng-select
     >
-  </div>
+  </ng-container>
   <ng-select
     *ngIf="!formGroup"
     class="{{ size }}"
+    [clearable]="clearable"
     [placeholder]="text"
     [items]="sortedData"
     [bindLabel]="textField"
@@ -38,6 +55,7 @@
     [notFoundText]="notFoundText"
     [(ngModel)]="value"
     [searchFn]="searchWithItemParents"
+    [appendTo]="appendTo"
     (search)="filter$.next($event.term)"
     (change)="valueChange.emit($event)"
     (clear)="filter$.next('')"
@@ -51,5 +69,5 @@
       </div>
     </ng-template>
   </ng-select>
-</div>
+</ng-container>
 <app-loading *ngIf="!itemParentIdsDictionary || !sortedData"></app-loading>

@@ -1,0 +1,58 @@
+[
+  {
+      "isActive": true,
+      "isObligatory": true,
+      "isLocallyAvailable": false,
+      "description": null,
+      "uuid": "7569e261-e86a-4eb0-aeac-010b6a688878",
+      "name": "Egen kontrol"
+  },
+  {
+      "isActive": true,
+      "isObligatory": true,
+      "isLocallyAvailable": false,
+      "description": null,
+      "uuid": "bf4fd13d-ebca-45d3-8ff2-47d756a13935",
+      "name": "Ledelseserklæring"
+  },
+  {
+      "isActive": true,
+      "isObligatory": true,
+      "isLocallyAvailable": false,
+      "description": null,
+      "uuid": "52cd4a43-96bd-46b0-9581-a400764d47a0",
+      "name": "ISAE 3000"
+  },
+  {
+      "isActive": true,
+      "isObligatory": true,
+      "isLocallyAvailable": false,
+      "description": null,
+      "uuid": "af70a2c0-ae87-490d-992b-139e16fc43e4",
+      "name": "ISAE 3402 type 1"
+  },
+  {
+      "isActive": true,
+      "isObligatory": true,
+      "isLocallyAvailable": false,
+      "description": null,
+      "uuid": "a4514bf3-6fc0-4500-9c5c-f3f489dd7569",
+      "name": "ISAE 3402 type 2"
+  },
+  {
+      "isActive": true,
+      "isObligatory": true,
+      "isLocallyAvailable": false,
+      "description": null,
+      "uuid": "c116c16c-c67f-4334-b4d6-7195eb07421a",
+      "name": "Skriftlig kontrol"
+  },
+  {
+      "isActive": true,
+      "isObligatory": true,
+      "isLocallyAvailable": false,
+      "description": null,
+      "uuid": "9c46d045-e3a9-4564-b481-b6ac2c99963d",
+      "name": "Fysisk tilsyn"
+  }
+]

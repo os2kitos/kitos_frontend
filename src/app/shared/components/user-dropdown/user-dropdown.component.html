@@ -1,0 +1,13 @@
+<app-connected-dropdown
+  [text]="text"
+  valueField="uuid"
+  [includeItemDescription]="true"
+  itemDescriptionField="email"
+  [formGroup]="formGroup"
+  [formName]="formName"
+  [isLoading$]="isLoading$"
+  [data$]="filteredUsers$"
+  (filterChange)="searchUsers($event)"
+  (valueChange)="onUserChange($event)"
+>
+</app-connected-dropdown>

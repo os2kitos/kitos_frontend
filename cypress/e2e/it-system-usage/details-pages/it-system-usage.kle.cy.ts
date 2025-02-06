@@ -3,11 +3,7 @@
 describe('it-system-usage', () => {
   beforeEach(() => {
     cy.requireIntercept();
-    cy.intercept('/odata/ItSystemUsageOverviewReadModels*', { fixture: 'it-system-usages.json' });
-    cy.intercept('/api/v2/it-system-usages/*', { fixture: 'it-system-usage.json' });
-    cy.intercept('/api/v2/it-system-usage-data-classification-types*', { fixture: 'classification-types.json' });
-    cy.intercept('/api/v2/it-system-usages/*/permissions', { fixture: 'permissions.json' });
-    cy.intercept('/api/v2/it-systems/*', { fixture: 'it-system.json' }); //gets the base system
+    cy.setupItSystemUsageIntercepts();
     cy.setup(true, 'it-systems/it-system-usages');
   });
 
@@ -47,9 +43,9 @@ describe('it-system-usage', () => {
   }
 
   it('shows KLE page with neither inherited nor local KLE', () => {
-    cy.intercept('/api/v2/kle-options', { fixture: 'kles.json' });
-    cy.intercept('/api/v2/it-system-usages/*', { fixture: './kle/it-system-usage-no-kle.json' });
-    cy.intercept('/api/v2/it-systems/*', { fixture: './kle/it-system-no-kle.json' });
+    cy.intercept('/api/v2/kle-options', { fixture: './shared/kles.json' });
+    cy.intercept('/api/v2/it-system-usages/*', { fixture: './it-system-usage/kle/it-system-usage-no-kle.json' });
+    cy.intercept('/api/v2/it-systems/*', { fixture: './it-system-catalog/kle/it-system-no-kle.json' });
 
     cy.contains('System 3').click();
     cy.navigateToDetailsSubPage('Lokale KLE');
@@ -64,9 +60,11 @@ describe('it-system-usage', () => {
   });
 
   it('shows KLE page inherited and local KLE for both opt-in and opt-out of inherited', () => {
-    cy.intercept('/api/v2/kle-options', { fixture: 'kles.json' });
-    cy.intercept('/api/v2/it-system-usages/*', { fixture: './kle/it-system-usage-kle-opt-in-and-opt-out.json' });
-    cy.intercept('/api/v2/it-systems/*', { fixture: './kle/it-system-with-kle.json' });
+    cy.intercept('/api/v2/kle-options', { fixture: './shared/kles.json' });
+    cy.intercept('/api/v2/it-system-usages/*', {
+      fixture: './it-system-usage/kle/it-system-usage-kle-opt-in-and-opt-out.json',
+    });
+    cy.intercept('/api/v2/it-systems/*', { fixture: './it-system-catalog/kle/it-system-with-kle.json' });
 
     cy.contains('System 3').click();
     cy.navigateToDetailsSubPage('Lokale KLE');
@@ -82,9 +80,11 @@ describe('it-system-usage', () => {
   });
 
   it('Can restore inherited KLE option', () => {
-    cy.intercept('/api/v2/kle-options', { fixture: 'kles.json' });
-    cy.intercept('/api/v2/it-system-usages/*', { fixture: './kle/it-system-usage-kle-opt-in-and-opt-out.json' });
-    cy.intercept('/api/v2/it-systems/*', { fixture: './kle/it-system-with-kle.json' });
+    cy.intercept('/api/v2/kle-options', { fixture: './shared/kles.json' });
+    cy.intercept('/api/v2/it-system-usages/*', {
+      fixture: './it-system-usage/kle/it-system-usage-kle-opt-in-and-opt-out.json',
+    });
+    cy.intercept('/api/v2/it-systems/*', { fixture: './it-system-catalog/kle/it-system-with-kle.json' });
 
     cy.contains('System 3').click();
     cy.navigateToDetailsSubPage('Lokale KLE');
@@ -95,7 +95,9 @@ describe('it-system-usage', () => {
 
     cy.confirmAction('Er du sikker på, at du vil gendanne den nedarvede opgave?');
 
-    cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: './kle/it-system-usage-no-kle.json' });
+    cy.intercept('PATCH', '/api/v2/it-system-usages/*', {
+      fixture: './it-system-usage/kle/it-system-usage-no-kle.json',
+    });
 
     withinKleSection('Nedarvede opgaver (Data fra IT Systemkataloget)', () => {
       //Verify that the toggled KLE is now shown as relevant
@@ -106,9 +108,9 @@ describe('it-system-usage', () => {
   });
 
   it('Can remove inherited KLE option', () => {
-    cy.intercept('/api/v2/kle-options', { fixture: 'kles.json' });
-    cy.intercept('/api/v2/it-system-usages/*', { fixture: './kle/it-system-usage-no-kle.json' });
-    cy.intercept('/api/v2/it-systems/*', { fixture: './kle/it-system-with-kle.json' });
+    cy.intercept('/api/v2/kle-options', { fixture: './shared/kles.json' });
+    cy.intercept('/api/v2/it-system-usages/*', { fixture: './it-system-usage/kle/it-system-usage-no-kle.json' });
+    cy.intercept('/api/v2/it-systems/*', { fixture: './it-system-catalog/kle/it-system-with-kle.json' });
 
     cy.contains('System 3').click();
     cy.navigateToDetailsSubPage('Lokale KLE');
@@ -120,7 +122,7 @@ describe('it-system-usage', () => {
     cy.confirmAction('Er du sikker på, at du vil fjerne den nedarvede opgave?');
 
     cy.intercept('PATCH', '/api/v2/it-system-usages/*', {
-      fixture: './kle/it-system-usage-kle-opt-in-and-opt-out.json',
+      fixture: './it-system-usage/kle/it-system-usage-kle-opt-in-and-opt-out.json',
     });
 
     withinKleSection('Nedarvede opgaver (Data fra IT Systemkataloget)', () => {
@@ -132,9 +134,11 @@ describe('it-system-usage', () => {
   });
 
   it('Can remove local KLE option', () => {
-    cy.intercept('/api/v2/kle-options', { fixture: 'kles.json' });
-    cy.intercept('/api/v2/it-system-usages/*', { fixture: './kle/it-system-usage-kle-opt-in-and-opt-out.json' });
-    cy.intercept('/api/v2/it-systems/*', { fixture: './kle/it-system-with-kle.json' });
+    cy.intercept('/api/v2/kle-options', { fixture: './shared/kles.json' });
+    cy.intercept('/api/v2/it-system-usages/*', {
+      fixture: './it-system-usage/kle/it-system-usage-kle-opt-in-and-opt-out.json',
+    });
+    cy.intercept('/api/v2/it-systems/*', { fixture: './it-system-catalog/kle/it-system-with-kle.json' });
 
     cy.contains('System 3').click();
     cy.navigateToDetailsSubPage('Lokale KLE');
@@ -144,7 +148,9 @@ describe('it-system-usage', () => {
     });
 
     cy.confirmAction('Er du sikker på, at du vil fjerne den lokale tilknytning?');
-    cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: './kle/it-system-usage-no-kle.json' });
+    cy.intercept('PATCH', '/api/v2/it-system-usages/*', {
+      fixture: './it-system-usage/kle/it-system-usage-no-kle.json',
+    });
 
     withinKleSection('Lokalt tilknyttede opgaver', () => {
       cy.contains('Der er endnu ikke registreret lokalt tilknyttede opgaver');
@@ -152,9 +158,9 @@ describe('it-system-usage', () => {
   });
 
   it('Can add local KLE option', () => {
-    cy.intercept('/api/v2/kle-options', { fixture: 'kles.json' });
-    cy.intercept('/api/v2/it-system-usages/*', { fixture: './kle/it-system-usage-no-kle.json' });
-    cy.intercept('/api/v2/it-systems/*', { fixture: './kle/it-system-with-kle.json' });
+    cy.intercept('/api/v2/kle-options', { fixture: './shared/kles.json' });
+    cy.intercept('/api/v2/it-system-usages/*', { fixture: './it-system-usage/kle/it-system-usage-no-kle.json' });
+    cy.intercept('/api/v2/it-systems/*', { fixture: './it-system-catalog/kle/it-system-with-kle.json' });
 
     cy.contains('System 3').click();
     cy.navigateToDetailsSubPage('Lokale KLE');
@@ -180,7 +186,7 @@ describe('it-system-usage', () => {
       });
 
     cy.intercept('PATCH', '/api/v2/it-system-usages/*', {
-      fixture: './kle/it-system-usage-newly-added-kle.json',
+      fixture: './it-system-usage/kle/it-system-usage-newly-added-kle.json',
     });
 
     cy.contains('Opgaven blev tilknyttet');

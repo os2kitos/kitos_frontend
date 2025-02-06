@@ -1,0 +1,74 @@
+<app-scrollbar-dialog [title]="getTitle()" i18n-title>
+  <app-loading *ngIf="(deletingOrganization$ | async) === true"></app-loading>
+  <ng-container *ngIf="(deletingOrganization$ | async) === false">
+    <ng-container *ngIf="isLoading$ | async">
+      <app-loading></app-loading>
+    </ng-container>
+    <ng-container *ngIf="(hasAnyRemovalConflict() | async) === true">
+      <app-standard-vertical-content-grid [id]="conflictContentId">
+        <app-paragraph [bold]="true" paragraphSize="x-large" i18n>
+          Opsummering af konsekvenser ifm. sletning af organisationer i Kitos
+        </app-paragraph>
+        <app-paragraph i18n>
+          For at sikre datakvaliteten i Kitos har Global admin mulighed for at slette en organisation
+          (leverandør/databehandler/underdatabehandler) på trods af, at der måtte være kontrakter eller databehandler
+          registreringer knyttet op på denne.
+        </app-paragraph>
+        <app-paragraph *ngIf="isCopying" i18n>
+          Global admin har nu slettet organisationen "Fælles Kommune", hvorfor feltet på nedenstående kontrakter
+          og/eller databehandlerregistreringer dermed nulstilles (blankes ud):
+        </app-paragraph>
+        <ng-container *ngFor="let conflictType of simpleConflictTypeOptions">
+          <app-removal-conflict-table
+            *ngIf="typeHasConflicts(conflictType) | async"
+            [type]="conflictType"
+            [removalConflicts$]="getSpecificConflicts(conflictType)"
+            [organizationName]="organization.Name"
+            [isCopying]="isCopying"
+          >
+          </app-removal-conflict-table>
+        </ng-container>
+        <app-paragraph *ngIf="hasOtherTypeConflicts() | async" [bold]="true" paragraphSize="x-large" i18n>
+          Øvrige konsekvenser som information til Global Admin:
+        </app-paragraph>
+        <ng-container *ngFor="let conflictType of otherConflictTypeOptions">
+          <app-removal-conflict-table
+            *ngIf="typeHasConflicts(conflictType) | async"
+            [type]="conflictType"
+            [removalConflicts$]="getSpecificConflicts(conflictType)"
+            [organizationName]="organization.Name"
+            [isCopying]="isCopying"
+          >
+          </app-removal-conflict-table>
+        </ng-container>
+      </app-standard-vertical-content-grid>
+    </ng-container>
+    <ng-container *ngIf="(hasAnyRemovalConflict() | async) === false">
+      <app-paragraph i18n> Organisationen kan slettes uden tværgående konsekvenser. </app-paragraph>
+    </ng-container>
+  </ng-container>
+  <app-dialog-actions *ngIf="(hasAnyRemovalConflict() | async) === true && (deletingOrganization$ | async) === false">
+    <app-checkbox
+      [(value)]="hasAcceptedConsequences"
+      labelPosition="after"
+      text="Jeg forstår og accepterer ovenstående konsekvenser"
+      i18n-text
+      data-cy="consequence-checkbox"
+    >
+    </app-checkbox>
+  </app-dialog-actions>
+  <app-dialog-actions *ngIf="(deletingOrganization$ | async) === false">
+    <app-button *ngIf="(hasAnyRemovalConflict() | async) === true" (buttonClick)="copyConflictsToClipboard()" i18n>
+      Kopier til klipholder</app-button
+    >
+    <app-button buttonStyle="secondary" (buttonClick)="onCancel()" i18n>Fortryd</app-button>
+    <app-button
+      color="warn"
+      (buttonClick)="onDelete()"
+      [disabled]="(canSubmit() | async) === false"
+      i18n
+      data-cy="delete-org-dialog-button"
+      >Slet</app-button
+    >
+  </app-dialog-actions>
+</app-scrollbar-dialog>

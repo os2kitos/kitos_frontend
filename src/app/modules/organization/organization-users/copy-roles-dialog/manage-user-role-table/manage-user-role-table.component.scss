@@ -1,0 +1,13 @@
+@import 'theme';
+
+.container {
+  border: solid $color-primary-60 1px !important;
+  border-radius: $radius-large !important;
+  overflow: auto;
+  padding-top: $padding-medium;
+}
+
+td {
+  color : $color-neutral-dark;
+  word-wrap: break-word;
+}

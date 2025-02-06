@@ -5,13 +5,13 @@ api.module.ts
 api/api.ts
 api/v1AdviceUserRelationINTERNAL.service.ts
 api/v1AuthorizeINTERNAL.service.ts
-api/v1BrokenExternalReferencesReportINTERNAL.service.ts
 api/v1ContactpersonINTERNAL.service.ts
 api/v1DataProcessingRegistrationINTERNAL.service.ts
 api/v1DataProcessingRegistrationValidationINTERNAL.service.ts
 api/v1DataProtectionAdvisorINTERNAL.service.ts
 api/v1DataResponsibleINTERNAL.service.ts
 api/v1DataRowINTERNAL.service.ts
+api/v1DprLocalRoleOptionTypesInternalV2INTERNAL.service.ts
 api/v1EconomyStreamINTERNAL.service.ts
 api/v1ExcelINTERNAL.service.ts
 api/v1ExhibitINTERNAL.service.ts
@@ -20,9 +20,11 @@ api/v1GlobalAdminINTERNAL.service.ts
 api/v1HealthCheckINTERNAL.service.ts
 api/v1ItContractINTERNAL.service.ts
 api/v1ItContractItSystemUsageINTERNAL.service.ts
+api/v1ItContractLocalRoleOptionTypesInternalV2INTERNAL.service.ts
 api/v1ItContractRightINTERNAL.service.ts
 api/v1ItInterfaceINTERNAL.service.ts
 api/v1ItSystemINTERNAL.service.ts
+api/v1ItSystemLocalRoleOptionTypesInternalV2INTERNAL.service.ts
 api/v1ItSystemUsageDataSensitivityLevelINTERNAL.service.ts
 api/v1ItSystemUsageINTERNAL.service.ts
 api/v1ItSystemUsageOptionsINTERNAL.service.ts
@@ -124,12 +126,12 @@ api/v1OrganizationPermissionsINTERNAL.service.ts
 api/v1OrganizationRightINTERNAL.service.ts
 api/v1OrganizationUnitINTERNAL.service.ts
 api/v1OrganizationUnitLifeCycleINTERNAL.service.ts
+api/v1OrganizationUnitLocalRoleOptionTypesInternalV2INTERNAL.service.ts
 api/v1OrganizationUnitPermissionsINTERNAL.service.ts
 api/v1OrganizationUnitRegistrationINTERNAL.service.ts
 api/v1OrganizationUnitRightINTERNAL.service.ts
 api/v1PasswordResetRequestINTERNAL.service.ts
 api/v1ReferenceINTERNAL.service.ts
-api/v1StsOrganizationSynchronizationINTERNAL.service.ts
 api/v1SystemRelationINTERNAL.service.ts
 api/v1TaskRefINTERNAL.service.ts
 api/v1TextINTERNAL.service.ts
@@ -171,6 +173,7 @@ model/economyStreamDTOIEnumerableApiReturnDTO.ts
 model/externalReferenceDTO.ts
 model/getTokenResponseDTO.ts
 model/getTokenResponseDTOApiReturnDTO.ts
+model/hierachyNodeDTO.ts
 model/itContractDTO.ts
 model/itContractDTOApiReturnDTO.ts
 model/itContractIQueryableODataResponse.ts
@@ -193,6 +196,7 @@ model/itSystemRightIQueryableODataResponse.ts
 model/itSystemUsageDTO.ts
 model/itSystemUsageDTOApiReturnDTO.ts
 model/itSystemUsageIEnumerableODataResponse.ts
+model/itSystemUsageOptionsDTO.ts
 model/itSystemUsageOverviewArchivePeriodReadModel.ts
 model/itSystemUsageOverviewDataProcessingRegistrationReadModel.ts
 model/itSystemUsageOverviewInterfaceReadModel.ts

@@ -1,6 +1,61 @@
+import { BooleanValueDisplayType } from '../components/status-chip/status-chip.component';
+import { RegistrationEntityTypes } from './registrations/registration-entity-categories.model';
+
 export interface GridColumn {
-  field: string;
-  title: string;
-  filter?: 'text' | 'numeric' | 'boolean' | 'date';
-  style?: 'default' | 'primary' | 'chip';
+  /*********************/
+  //Required properties
+  /*********************/
+  field: string; //The field from the API
+  title: string; //UI title
+  hidden: boolean; //If the column is hidden by default
+
+  /*********************/
+  //Optional properties
+  /*********************/
+  section?: string; //Root section for the field to be displayed in, in the Column hiding/showing dialog
+  filter?: 'text' | 'numeric' | 'boolean' | 'date'; //Base kendo filter type
+  extraFilter?: 'enum' | 'organization-unit' | 'choice-type' | 'dropdown-from-column-data' | 'choice-type-by-name'; //Filters other than the base kendo filters
+  noFilter?: boolean; //If true hides the filter for the column
+  sortable?: boolean; //If true allows sorting for the column
+  sortFilter?: boolean;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  extraData?: any; //Data for dropdown filters
+  idField?: string; //Uuid field if needed to display data (e.g. for references to other entities)
+  permissionsField?: string; //Field containing permissions for the column
+  dataField?: string; //Field containing data for the column (in case the 'field' property is necessary only for filtering)
+  entityType?: RegistrationEntityTypes;
+  style?:
+    | 'default'
+    | 'default-wrap' //Text field where overflow results in wrap instead of ellipsis
+    | 'primary'
+    | 'chip'
+    | 'reverse-chip'
+    | 'boolean'
+    | 'enum'
+    | 'link'
+    | 'page-link'
+    | 'page-link-array-with-submodules'
+    | 'title-link'
+    | 'checkbox'
+    | 'date'
+    | 'usages'
+    | 'page-link-array'
+    | 'uuid-to-name'
+    | 'excel-only'
+    | 'action-buttons'
+    | 'integer-with-thousands-separator'; //Style of the column
+  width?: number;
+  minResizableWidth?: number;
+  //Can column be hidden
+  required?: boolean;
+  // Field name from the old UI. Used for saving organizational column configuration
+  persistId?: string;
+  tooltipPositiveText?: string;
+  tooltipNegativeText?: string;
+  //eslint-disable-next-line @typescript-eslint/no-explicit-any
+  tooltipFn?: (dataItem: any) => string;
+  isSticky?: boolean;
+  booleanValueDisplay?: BooleanValueDisplayType; // Defines how boolean values should be displayed. If not set, RegistrationEntityTypes will be used to derive the display type
+  disabledByUIConfig?: boolean;
+  linkArraySeparator?: ', ' | ' - ';
 }

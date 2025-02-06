@@ -2,11 +2,11 @@ import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/c
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { CookieService } from 'ngx-cookie';
-import { catchError, first, map, mergeMap, Observable, of, retry, tap } from 'rxjs';
+import { Observable, catchError, first, map, mergeMap, of, retry, tap } from 'rxjs';
 import { APIV1AuthorizeINTERNALService } from 'src/app/api/v1';
 import { UserActions } from 'src/app/store/user-store/actions';
 import { selectXsrfToken } from 'src/app/store/user-store/selectors';
-import { XSRFCOOKIE, XSRFTOKEN } from '../constants';
+import { XSRFCOOKIE, XSRFTOKEN } from '../constants/constants';
 
 @Injectable()
 export class HttpXSRFInterceptor implements HttpInterceptor {
@@ -33,7 +33,7 @@ export class HttpXSRFInterceptor implements HttpInterceptor {
         return this.authorizeService.getSingleAuthorizeGetAntiForgeryToken().pipe(
           retry(1),
           map((antiForgeryToken) => antiForgeryToken.toString()),
-          tap((token) => this.store.dispatch(UserActions.updateXsrfToken(token))),
+          tap((token) => this.store.dispatch(UserActions.updateXSRFToken(token))),
           catchError((error) => {
             console.error(error);
             // Just return empty token if XSRF token request fails. The handled request will then fail.

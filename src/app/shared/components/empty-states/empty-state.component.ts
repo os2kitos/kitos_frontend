@@ -7,5 +7,5 @@ import { Component, Input } from '@angular/core';
 })
 export class EmptyStateComponent {
   @Input() public text = '';
-  @Input() public context!: 'emptyTable' | 'searchResult';
+  @Input() public context!: 'emptyTable' | 'searchResult' | 'emptyUpdate';
 }

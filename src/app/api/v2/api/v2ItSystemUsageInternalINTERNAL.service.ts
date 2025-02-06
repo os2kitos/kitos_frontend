@@ -21,12 +21,19 @@ import { Observable }                                        from 'rxjs';
 // @ts-ignore
 import { APIExtendedRoleAssignmentResponseDTO } from '../model/aPIExtendedRoleAssignmentResponseDTO';
 // @ts-ignore
+import { APIGeneralSystemRelationResponseDTO } from '../model/aPIGeneralSystemRelationResponseDTO';
+// @ts-ignore
 import { APIItSystemUsageSearchResultResponseDTO } from '../model/aPIItSystemUsageSearchResultResponseDTO';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
 
+
+export interface DeleteSingleItSystemUsageInternalV2DeleteItSystemUsageByOrganizationUuidAndSystemUuidRequestParams {
+    organizationUuid: string;
+    systemUuid: string;
+}
 
 export interface GetManyItSystemUsageInternalV2GetAddRoleAssignmentsRequestParams {
     systemUsageUuid: string;
@@ -41,6 +48,7 @@ export interface GetManyItSystemUsageInternalV2GetItSystemUsagesRequestParams {
     relatedToSystemUsageUuid?: string;
     /** Query by contracts which are part of a system relation */
     relatedToContractUuid?: string;
+    systemUuid?: string;
     /** Query usages based on system name */
     systemNameContent?: string;
     /** Include only changes which were LastModified (UTC) is equal to or greater than the provided value */
@@ -51,6 +59,10 @@ export interface GetManyItSystemUsageInternalV2GetItSystemUsagesRequestParams {
     page?: number;
     /** Size of the page referred by \&#39;page\&#39;.  Range: [1,250] Default: 250. */
     pageSize?: number;
+}
+
+export interface GetManyItSystemUsageInternalV2GetRelationsRequestParams {
+    contractUuid: string;
 }
 
 
@@ -116,6 +128,69 @@ export class APIV2ItSystemUsageInternalINTERNALService {
             throw Error("key may not be null if value is not object or array");
         }
         return httpParams;
+    }
+
+    /**
+     * Deletes a system usage by organizationUuid and systemUuid.
+     * @param requestParameters
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public deleteSingleItSystemUsageInternalV2DeleteItSystemUsageByOrganizationUuidAndSystemUuid(requestParameters: DeleteSingleItSystemUsageInternalV2DeleteItSystemUsageByOrganizationUuidAndSystemUuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<object>;
+    public deleteSingleItSystemUsageInternalV2DeleteItSystemUsageByOrganizationUuidAndSystemUuid(requestParameters: DeleteSingleItSystemUsageInternalV2DeleteItSystemUsageByOrganizationUuidAndSystemUuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public deleteSingleItSystemUsageInternalV2DeleteItSystemUsageByOrganizationUuidAndSystemUuid(requestParameters: DeleteSingleItSystemUsageInternalV2DeleteItSystemUsageByOrganizationUuidAndSystemUuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public deleteSingleItSystemUsageInternalV2DeleteItSystemUsageByOrganizationUuidAndSystemUuid(requestParameters: DeleteSingleItSystemUsageInternalV2DeleteItSystemUsageByOrganizationUuidAndSystemUuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
+        const organizationUuid = requestParameters.organizationUuid;
+        if (organizationUuid === null || organizationUuid === undefined) {
+            throw new Error('Required parameter organizationUuid was null or undefined when calling deleteSingleItSystemUsageInternalV2DeleteItSystemUsageByOrganizationUuidAndSystemUuid.');
+        }
+        const systemUuid = requestParameters.systemUuid;
+        if (systemUuid === null || systemUuid === undefined) {
+            throw new Error('Required parameter systemUuid was null or undefined when calling deleteSingleItSystemUsageInternalV2DeleteItSystemUsageByOrganizationUuidAndSystemUuid.');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                '*/*'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/v2/internal/it-system-usages/system/${this.configuration.encodeParam({name: "systemUuid", value: systemUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/organization/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
+        return this.httpClient.request<object>('delete', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
     }
 
     /**
@@ -194,6 +269,7 @@ export class APIV2ItSystemUsageInternalINTERNALService {
         const relatedToSystemUuid = requestParameters.relatedToSystemUuid;
         const relatedToSystemUsageUuid = requestParameters.relatedToSystemUsageUuid;
         const relatedToContractUuid = requestParameters.relatedToContractUuid;
+        const systemUuid = requestParameters.systemUuid;
         const systemNameContent = requestParameters.systemNameContent;
         const changedSinceGtEq = requestParameters.changedSinceGtEq;
         const orderByProperty = requestParameters.orderByProperty;
@@ -216,6 +292,10 @@ export class APIV2ItSystemUsageInternalINTERNALService {
         if (relatedToContractUuid !== undefined && relatedToContractUuid !== null) {
           localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
             <any>relatedToContractUuid, 'relatedToContractUuid');
+        }
+        if (systemUuid !== undefined && systemUuid !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>systemUuid, 'systemUuid');
         }
         if (systemNameContent !== undefined && systemNameContent !== null) {
           localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
@@ -274,6 +354,64 @@ export class APIV2ItSystemUsageInternalINTERNALService {
             {
                 context: localVarHttpContext,
                 params: localVarQueryParameters,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * @param requestParameters
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getManyItSystemUsageInternalV2GetRelations(requestParameters: GetManyItSystemUsageInternalV2GetRelationsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIGeneralSystemRelationResponseDTO>>;
+    public getManyItSystemUsageInternalV2GetRelations(requestParameters: GetManyItSystemUsageInternalV2GetRelationsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIGeneralSystemRelationResponseDTO>>>;
+    public getManyItSystemUsageInternalV2GetRelations(requestParameters: GetManyItSystemUsageInternalV2GetRelationsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIGeneralSystemRelationResponseDTO>>>;
+    public getManyItSystemUsageInternalV2GetRelations(requestParameters: GetManyItSystemUsageInternalV2GetRelationsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        const contractUuid = requestParameters.contractUuid;
+        if (contractUuid === null || contractUuid === undefined) {
+            throw new Error('Required parameter contractUuid was null or undefined when calling getManyItSystemUsageInternalV2GetRelations.');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/v2/internal/it-system-usages/relations/${this.configuration.encodeParam({name: "contractUuid", value: contractUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
+        return this.httpClient.request<Array<APIGeneralSystemRelationResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

@@ -1,0 +1,4 @@
+<app-menu-button buttonStyle="secondary" title="Kolonneopsætning for organisation" i18n-title>
+  <app-menu-button-item i18n (itemClick)="onSave()"> Gem </app-menu-button-item>
+  <app-menu-button-item i18n (itemClick)="onDelete()" [disabled]="(lastSeenGridConfig$ | async) === undefined"> Slet </app-menu-button-item>
+</app-menu-button>

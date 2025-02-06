@@ -21,7 +21,11 @@ import { Observable }                                        from 'rxjs';
 // @ts-ignore
 import { APICreateDataProcessingRegistrationRequestDTO } from '../model/aPICreateDataProcessingRegistrationRequestDTO';
 // @ts-ignore
+import { APIDataProcessingRegistrationPermissionsResponseDTO } from '../model/aPIDataProcessingRegistrationPermissionsResponseDTO';
+// @ts-ignore
 import { APIDataProcessingRegistrationResponseDTO } from '../model/aPIDataProcessingRegistrationResponseDTO';
+// @ts-ignore
+import { APIResourceCollectionPermissionsResponseDTO } from '../model/aPIResourceCollectionPermissionsResponseDTO';
 // @ts-ignore
 import { APIUpdateDataProcessingRegistrationRequestDTO } from '../model/aPIUpdateDataProcessingRegistrationRequestDTO';
 
@@ -48,6 +52,8 @@ export interface GetManyDataProcessingRegistrationV2GetDataProcessingRegistratio
     subDataProcessorUuid?: string;
     /** Filter based on whether or not an agreement has been concluded */
     agreementConcluded?: boolean;
+    nameContains?: string;
+    nameEquals?: string;
     /** Include only changes which were LastModified (UTC) is equal to or greater than the provided value */
     changedSinceGtEq?: string;
     /** Ordering property */
@@ -61,6 +67,16 @@ export interface GetManyDataProcessingRegistrationV2GetDataProcessingRegistratio
 export interface GetSingleDataProcessingRegistrationV2GetDataProcessingRegistrationRequestParams {
     /** UUID of Data-Processing-Registration entity */
     uuid: string;
+}
+
+export interface GetSingleDataProcessingRegistrationV2GetDataProcessingRegistrationCollectionPermissionsRequestParams {
+    /** UUID of the organization */
+    organizationUuid: string;
+}
+
+export interface GetSingleDataProcessingRegistrationV2GetDataProcessingRegistrationPermissionsRequestParams {
+    /** UUID of the contract entity */
+    dprUuid: string;
 }
 
 export interface PatchSingleDataProcessingRegistrationV2PatchDataProcessingRegistrationRequestParams {
@@ -219,6 +235,8 @@ export class APIV2DataProcessingRegistrationService {
         const dataProcessorUuid = requestParameters.dataProcessorUuid;
         const subDataProcessorUuid = requestParameters.subDataProcessorUuid;
         const agreementConcluded = requestParameters.agreementConcluded;
+        const nameContains = requestParameters.nameContains;
+        const nameEquals = requestParameters.nameEquals;
         const changedSinceGtEq = requestParameters.changedSinceGtEq;
         const orderByProperty = requestParameters.orderByProperty;
         const page = requestParameters.page;
@@ -248,6 +266,14 @@ export class APIV2DataProcessingRegistrationService {
         if (agreementConcluded !== undefined && agreementConcluded !== null) {
           localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
             <any>agreementConcluded, 'agreementConcluded');
+        }
+        if (nameContains !== undefined && nameContains !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>nameContains, 'nameContains');
+        }
+        if (nameEquals !== undefined && nameEquals !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>nameEquals, 'nameEquals');
         }
         if (changedSinceGtEq !== undefined && changedSinceGtEq !== null) {
           localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
@@ -359,6 +385,131 @@ export class APIV2DataProcessingRegistrationService {
 
         let localVarPath = `/api/v2/data-processing-registrations/${this.configuration.encodeParam({name: "uuid", value: uuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
         return this.httpClient.request<APIDataProcessingRegistrationResponseDTO>('get', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Returns the permissions of the authenticated client for the Data Processing Registration resources collection in the context of an organization (Data Processing Registration permissions in a specific Organization)
+     * @param requestParameters
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getSingleDataProcessingRegistrationV2GetDataProcessingRegistrationCollectionPermissions(requestParameters: GetSingleDataProcessingRegistrationV2GetDataProcessingRegistrationCollectionPermissionsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIResourceCollectionPermissionsResponseDTO>;
+    public getSingleDataProcessingRegistrationV2GetDataProcessingRegistrationCollectionPermissions(requestParameters: GetSingleDataProcessingRegistrationV2GetDataProcessingRegistrationCollectionPermissionsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIResourceCollectionPermissionsResponseDTO>>;
+    public getSingleDataProcessingRegistrationV2GetDataProcessingRegistrationCollectionPermissions(requestParameters: GetSingleDataProcessingRegistrationV2GetDataProcessingRegistrationCollectionPermissionsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIResourceCollectionPermissionsResponseDTO>>;
+    public getSingleDataProcessingRegistrationV2GetDataProcessingRegistrationCollectionPermissions(requestParameters: GetSingleDataProcessingRegistrationV2GetDataProcessingRegistrationCollectionPermissionsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        const organizationUuid = requestParameters.organizationUuid;
+        if (organizationUuid === null || organizationUuid === undefined) {
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleDataProcessingRegistrationV2GetDataProcessingRegistrationCollectionPermissions.');
+        }
+
+        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
+        if (organizationUuid !== undefined && organizationUuid !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>organizationUuid, 'organizationUuid');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/v2/data-processing-registrations/permissions`;
+        return this.httpClient.request<APIResourceCollectionPermissionsResponseDTO>('get', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                params: localVarQueryParameters,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Returns the permissions of the authenticated client in the context of a specific Data Processing Registration
+     * @param requestParameters
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getSingleDataProcessingRegistrationV2GetDataProcessingRegistrationPermissions(requestParameters: GetSingleDataProcessingRegistrationV2GetDataProcessingRegistrationPermissionsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIDataProcessingRegistrationPermissionsResponseDTO>;
+    public getSingleDataProcessingRegistrationV2GetDataProcessingRegistrationPermissions(requestParameters: GetSingleDataProcessingRegistrationV2GetDataProcessingRegistrationPermissionsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIDataProcessingRegistrationPermissionsResponseDTO>>;
+    public getSingleDataProcessingRegistrationV2GetDataProcessingRegistrationPermissions(requestParameters: GetSingleDataProcessingRegistrationV2GetDataProcessingRegistrationPermissionsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIDataProcessingRegistrationPermissionsResponseDTO>>;
+    public getSingleDataProcessingRegistrationV2GetDataProcessingRegistrationPermissions(requestParameters: GetSingleDataProcessingRegistrationV2GetDataProcessingRegistrationPermissionsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        const dprUuid = requestParameters.dprUuid;
+        if (dprUuid === null || dprUuid === undefined) {
+            throw new Error('Required parameter dprUuid was null or undefined when calling getSingleDataProcessingRegistrationV2GetDataProcessingRegistrationPermissions.');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/v2/data-processing-registrations/${this.configuration.encodeParam({name: "dprUuid", value: dprUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/permissions`;
+        return this.httpClient.request<APIDataProcessingRegistrationPermissionsResponseDTO>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,

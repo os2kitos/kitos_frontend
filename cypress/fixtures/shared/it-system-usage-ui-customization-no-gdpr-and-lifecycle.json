@@ -1,0 +1,77 @@
+{
+  "module": "ItSystemUsages",
+  "nodes": [
+      {
+          "key": "ItSystemUsages",
+          "enabled": true
+      },
+      {
+          "key": "ItSystemUsages.frontPage",
+          "enabled": true
+      },
+      {
+          "key": "ItSystemUsages.contracts",
+          "enabled": true
+      },
+      {
+          "key": "ItSystemUsages.dataProcessing",
+          "enabled": true
+      },
+      {
+          "key": "ItSystemUsages.systemRelations",
+          "enabled": true
+      },
+      {
+          "key": "ItSystemUsages.interfaces",
+          "enabled": true
+      },
+      {
+          "key": "ItSystemUsages.archiving",
+          "enabled": true
+      },
+      {
+          "key": "ItSystemUsages.localKle",
+          "enabled": true
+      },
+      {
+          "key": "ItSystemUsages.hierarchy",
+          "enabled": true
+      },
+      {
+          "key": "ItSystemUsages.advice",
+          "enabled": true
+      },
+      {
+          "key": "ItSystemUsages.localReferences",
+          "enabled": true
+      },
+      {
+          "key": "ItSystemUsages.organization",
+          "enabled": true
+      },
+      {
+          "key": "ItSystemUsages.frontPage.usagePeriod",
+          "enabled": true
+      },
+      {
+          "key": "ItSystemUsages.contracts.selectContractToDetermineIfItSystemIsActive",
+          "enabled": true
+      },
+      {
+          "key": "ItSystemUsages.systemRoles",
+          "enabled": true
+      },
+      {
+          "key": "ItSystemUsages.frontPage.lifeCycleStatus",
+          "enabled": false
+      },
+      {
+          "key": "ItSystemUsages.gdpr.plannedRiskAssessmentDate",
+          "enabled": false
+      },
+      {
+          "key": "ItSystemUsages.gdpr",
+          "enabled": false
+      }
+  ]
+}

@@ -1,0 +1,24 @@
+<app-dialog [title]="title" overflow="none" [nested]="nested">
+  <form [formGroup]="dropdownFormGroup" (submit)="onSave()">
+    <app-standard-vertical-content-grid>
+      <app-paragraph *ngIf="description" i18n>{{ description }}</app-paragraph>
+      <app-connected-dropdown
+        [text]="dropdownText"
+        valueField="uuid"
+        [data$]="data$"
+        [isLoading$]="isLoading$"
+        [formGroup]="dropdownFormGroup"
+        formName="dropdownControl"
+        data-cy="connected-dropdown-selector"
+        i18n-text
+        (filterChange)="onSearch($event)"
+      ></app-connected-dropdown>
+      <app-dialog-actions>
+        <app-button buttonStyle="secondary" (buttonClick)="onCancel()" i18n>Annuller</app-button>
+        <app-button type="submit" [disabled]="dropdownFormGroup.valid === false || isBusy" i18n data-cy="confirm-button"
+          >{{ confirmButtonText }}</app-button
+        >
+      </app-dialog-actions>
+    </app-standard-vertical-content-grid>
+  </form>
+</app-dialog>

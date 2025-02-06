@@ -16,6 +16,7 @@ import {
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { CreateRelationDialogComponent } from './create-relation-dialog/create-relation-dialog.component';
 import { ItSystemUsageDetailsRelationsComponentStore } from './it-system-usage-details-relations.component-store';
+import { selectITSystemUsageEnableIncomingRelations, selectITSystemUsageEnableOutgoingRelations } from 'src/app/store/organization/ui-module-customization/selectors';
 
 @Component({
   selector: 'app-it-system-usage-details-relations',
@@ -39,6 +40,9 @@ export class ItSystemUsageDetailsRelationsComponent extends BaseComponent implem
 
   public readonly isUsageLoading$ = this.store.select(selectIsLoading);
   public readonly isIncomingRelationsLoading$ = this.componentStore.isIncomingRelationsLoading$;
+
+  public readonly outgoingRelationsEnabled$ = this.store.select(selectITSystemUsageEnableOutgoingRelations);
+  public readonly incomingRelationsEnabled$ = this.store.select(selectITSystemUsageEnableIncomingRelations);
 
   constructor(
     private readonly store: Store,
@@ -71,7 +75,7 @@ export class ItSystemUsageDetailsRelationsComponent extends BaseComponent implem
           )
         )
         .subscribe(({ itSystemUsageUuid }) => {
-          this.store.dispatch(ITSystemUsageActions.getItSystemUsage(itSystemUsageUuid));
+          this.store.dispatch(ITSystemUsageActions.getITSystemUsage(itSystemUsageUuid));
         })
     );
   }

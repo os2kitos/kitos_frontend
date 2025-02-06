@@ -83,6 +83,7 @@ export interface GetManyItInterfaceV2GetItInterfacesRequestParams {
     organizationUuid?: string;
     /** Ordering property */
     orderByProperty?: 'CreationOrder' | 'Name' | 'LastChanged';
+    availableInOrganizationUuid?: string;
     /** 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0 */
     page?: number;
     /** Size of the page referred by \&#39;page\&#39;.  Range: [1,250] Default: 250. */
@@ -441,6 +442,7 @@ export class APIV2ItInterfaceService {
         const interfaceId = requestParameters.interfaceId;
         const organizationUuid = requestParameters.organizationUuid;
         const orderByProperty = requestParameters.orderByProperty;
+        const availableInOrganizationUuid = requestParameters.availableInOrganizationUuid;
         const page = requestParameters.page;
         const pageSize = requestParameters.pageSize;
 
@@ -480,6 +482,10 @@ export class APIV2ItInterfaceService {
         if (orderByProperty !== undefined && orderByProperty !== null) {
           localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
             <any>orderByProperty, 'orderByProperty');
+        }
+        if (availableInOrganizationUuid !== undefined && availableInOrganizationUuid !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>availableInOrganizationUuid, 'availableInOrganizationUuid');
         }
         if (page !== undefined && page !== null) {
           localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,

@@ -1,0 +1,37 @@
+<app-overview-header>
+  <h3 i18n>Brugere</h3>
+
+  <ng-container *ngIf="(hasCreatePermission$ | async) !== undefined">
+    <app-grid-options-button
+      entityType="organization-user"
+      [hasResetButton]="true"
+      [createPermission$]="hasCreatePermission$"
+    ></app-grid-options-button>
+    <app-export-menu-button [exportMethod]="onExcelExport"></app-export-menu-button>
+    <app-hide-show-button
+      [columns]="gridColumns$ | async"
+      entityType="organization-user"
+      [isSecondary]="(hasCreatePermission$ | async) ?? false"
+    ></app-hide-show-button>
+    <app-create-entity-button
+      [entityType]="'organization-user'"
+      *ngIf="hasCreatePermission$ | async"
+    ></app-create-entity-button>
+  </ng-container>
+</app-overview-header>
+
+<app-grid
+  [data$]="gridData$"
+  [columns$]="gridColumns$"
+  exportToExcelName="Brugere Overblik"
+  i18n-exportToExcelName
+  [loading]="isLoading$ | async"
+  [state]="gridState$ | async"
+  entityType="organization-user"
+  [modifyPermission]="hasModificationPermission$ | async"
+  [deletePermission]="hasDeletePermission$ | async"
+  (stateChange)="stateChange($event)"
+  (rowIdSelect)="rowIdSelect($event)"
+  (modifyEvent)="onEditUser($event)"
+  (deleteEvent)="onDeleteUser($event)"
+></app-grid>

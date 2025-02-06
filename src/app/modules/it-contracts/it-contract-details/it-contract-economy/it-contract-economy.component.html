@@ -1,0 +1,63 @@
+<app-card *ngIf="paymentModelEnabled$ | async">
+  <app-card-header title="Betalingsmodel" i18n-title helpTextKey="it-contract.edit.economy"></app-card-header>
+
+  <app-form-grid [formGroup]="economyFormGroup">
+    <app-datepicker
+      text="Driftsvederlag påbegyndt"
+      i18n-text
+      data-cy="contract-operations-date"
+      [formGroup]="economyFormGroup"
+      formName="operationsRemunerationStartedAt"
+      (valueChange)="patchEconomy({ paymentModel: { operationsRemunerationStartedAt: $event?.toDateString() } })"
+    ></app-datepicker>
+    <app-dropdown
+      text="Betalingsfrekvens"
+      i18n-text
+      data-cy="contract-payment-frequency"
+      valueField="uuid"
+      [formGroup]="economyFormGroup"
+      formName="paymentFrequency"
+      [data]="paymentFrequencyOptions$ | async"
+      (valueChange)="patchEconomy({ paymentModel: { paymentFrequencyUuid: $event } })"
+    >
+    </app-dropdown>
+    <app-dropdown
+      text="Betalingsmodel"
+      i18n-text
+      data-cy="contract-payment-model"
+      valueField="uuid"
+      [formGroup]="economyFormGroup"
+      formName="paymentModel"
+      [data]="paymentModelOptions$ | async"
+      (valueChange)="patchEconomy({ paymentModel: { paymentModelUuid: $event } })"
+    >
+    </app-dropdown>
+    <app-dropdown
+      text="Prisregulering"
+      i18n-text
+      data-cy="contract-price-regulation"
+      valueField="uuid"
+      [formGroup]="economyFormGroup"
+      formName="priceRegulation"
+      [data]="priceRegulationOptions$ | async"
+      (valueChange)="patchEconomy({ paymentModel: { priceRegulationUuid: $event } })"
+    >
+    </app-dropdown>
+  </app-form-grid>
+</app-card>
+<app-payment-table
+  *ngIf="externalPaymentEnabled$ | async"
+  title="Ekstern betaling"
+  helpTextKey="it-contract.edit.external-payments"
+  [payments$]="externalPayments$"
+  [anyPayments$]="anyExternalPayments$"
+  paymentType="external"
+></app-payment-table>
+<app-payment-table
+  *ngIf="internalPaymentEnabled$ | async"
+  title="Intern betaling"
+  helpTextKey="it-contract.edit.internal-payments"
+  [payments$]="internalPayments$"
+  [anyPayments$]="anyInternalPayments$"
+  paymentType="internal"
+></app-payment-table>

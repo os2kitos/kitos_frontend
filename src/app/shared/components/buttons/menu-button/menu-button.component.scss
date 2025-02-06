@@ -1,0 +1,28 @@
+@import "theme";
+
+:host {
+  display: flex;
+}
+
+app-button {
+  padding-bottom: $padding-small;
+}
+
+::ng-deep .mat-mdc-menu-panel.mat-mdc-menu-panel.button-menu-component {
+  min-width: auto !important;
+  border-radius: $radius-large;
+
+  ::ng-deep svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .mat-mdc-menu-content {
+    padding: $padding-smaller 0;
+  }
+}
+
+app-icon {
+  display: inline-flex;
+  align-items: center;
+}

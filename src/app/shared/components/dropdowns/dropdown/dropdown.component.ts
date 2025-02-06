@@ -10,11 +10,15 @@ import { BaseDropdownComponent } from '../../../base/base-dropdown.component';
   styleUrls: ['dropdown.component.scss'],
 })
 export class DropdownComponent<T> extends BaseDropdownComponent<T | null> implements OnInit, OnChanges {
-  @Input() public includeItemDescription = false;
   @Input() public considerCurrentValueObsoleteIfNotPresentInData = true;
+  @Input() public appendTo: string = '';
+  @Input() public clearable: boolean = true;
   @Input() public searchFn?: (search: string, item: T) => boolean;
+  @Input() public showDescriptionLabel: boolean = true;
   @Output() public focusEvent = new EventEmitter();
   @Output() public openDropdown = new EventEmitter();
+  @Output() public cleared = new EventEmitter();
+  @Output() public blurEvent = new EventEmitter();
 
   override ngOnInit() {
     super.ngOnInit();
@@ -22,7 +26,7 @@ export class DropdownComponent<T> extends BaseDropdownComponent<T | null> implem
     // Add obselete value when both value and data are present if data does not contain current form value
     this.subscriptions.add(
       combineLatest([this.formValueSubject$, this.formDataSubject$]).subscribe(([value]) =>
-        this.addObsoleteValueIfMissingToData(value)
+        this.addObsoleteToValueIfMissingInData(value)
       )
     );
 
@@ -46,7 +50,16 @@ export class DropdownComponent<T> extends BaseDropdownComponent<T | null> implem
     this.openDropdown.emit();
   }
 
-  private addObsoleteValueIfMissingToData(value?: any) {
+  public onClear() {
+    this.filter$.next('');
+    this.cleared.emit();
+  }
+
+  public onBlur() {
+    this.blurEvent.emit();
+  }
+
+  private addObsoleteToValueIfMissingInData(value?: any) {
     if (this.considerCurrentValueObsoleteIfNotPresentInData) {
       if (this.data && this.formName && this.doesDataContainValue(value)) {
         // Set generated obselete value on the form control
@@ -58,7 +71,6 @@ export class DropdownComponent<T> extends BaseDropdownComponent<T | null> implem
 
   private doesDataContainValue(value?: any): boolean {
     if (!this.data || value === undefined || value === null) return false;
-
     return !this.data.some(
       (option: any) => option[this.valueField] !== undefined && option[this.valueField] === value[this.valueField]
     );

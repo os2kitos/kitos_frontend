@@ -4,7 +4,7 @@
   font-weight: bold;
   border: 1px solid $color-positive-light;
   margin: auto;
-  padding: 8px 12px 8px 8px;
+  padding: 8px 8px 8px 8px;
   background-color: $color-positive-lighter;
   color: $color-positive-dark;
   cursor: inherit;
@@ -37,6 +37,16 @@
 
     &:before {
       background-color: $color-negative;
+    }
+  }
+
+  &.chip-neutral {
+    border: 1px solid $color-neutral-40;
+    background-color: $color-neutral-20;
+    color: $color-neutral-80;
+
+    &:before {
+      background-color: $color-neutral-60;
     }
   }
 }

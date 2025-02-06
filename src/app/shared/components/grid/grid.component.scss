@@ -1,47 +1,27 @@
-@import "theme";
 @import "mixins";
 
-$row-height: 56px;
+@include grid-style;
 
-.table-container {
-  height: calc($content-height - $row-height);
-  background-color: $color-white;
-  border-top-left-radius: $radius-large;
-  border-top-right-radius: $radius-large;
-  overflow: auto;
+.overflow-hidden-container {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
 }
 
-table {
-  border-top-left-radius: $radius-large;
-  border-top-right-radius: $radius-large;
-  @include elevation;
+.sticky-empty-state {
+  position: fixed;
+  left: 45%;
+  z-index: 1000;
 }
 
-th {
-  color: $color-primary-dark;
-  border-bottom-color: $color-neutral-20;
-  border-top-left-radius: $radius-large;
-  border-top-right-radius: $radius-large;
+.toolbar-container {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
 }
 
-td {
-  height: 62px;
-}
-
-.mat-mdc-row:hover {
-  background-color: $color-primary-10 !important;
-  cursor: pointer;
-}
-
-app-loading {
-  position: absolute;
-  left: 0;
-  right: 0;
-  margin-top: calc($row-height * 2);
-}
-
-mat-paginator {
-  border-top: 1px solid $color-neutral-20;
-  border-bottom-left-radius: $radius-large;
-  border-bottom-right-radius: $radius-large;
+.result-amount-padding {
+  padding-right: $padding-large;
+  cursor: default;
 }

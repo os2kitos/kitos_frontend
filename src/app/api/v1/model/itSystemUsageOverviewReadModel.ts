@@ -27,7 +27,10 @@ export interface APIItSystemUsageOverviewReadModel {
     id?: number;
     sourceEntityId?: number;
     sourceEntityUuid?: string;
+    externalSystemUuid?: string;
     systemName?: string;
+    systemPreviousName?: string;
+    systemDescription?: string;
     itSystemDisabled?: boolean;
     activeAccordingToValidityPeriod?: boolean;
     activeAccordingToLifeCycle?: boolean;
@@ -37,6 +40,7 @@ export interface APIItSystemUsageOverviewReadModel {
     parentItSystemId?: number;
     parentItSystemUuid?: string;
     parentItSystemDisabled?: boolean;
+    parentItSystemUsageUuid?: string;
     version?: string;
     localCallName?: string;
     localSystemId?: string;
@@ -50,6 +54,9 @@ export interface APIItSystemUsageOverviewReadModel {
     itSystemBusinessTypeName?: string;
     itSystemRightsHolderId?: number;
     itSystemRightsHolderName?: string;
+    itSystemCategoriesId?: number;
+    itSystemCategoriesUuid?: string;
+    itSystemCategoriesName?: string;
     itSystemKLEIdsAsCsv?: string;
     itSystemKLENamesAsCsv?: string;
     itSystemTaskRefs?: Array<APIItSystemUsageOverviewTaskRefReadModel>;
@@ -84,6 +91,7 @@ export interface APIItSystemUsageOverviewReadModel {
     dataProcessingRegistrations?: Array<APIItSystemUsageOverviewDataProcessingRegistrationReadModel>;
     generalPurpose?: string;
     hostedAt?: APIItSystemUsageOverviewReadModel.HostedAtEnum;
+    userCount?: APIItSystemUsageOverviewReadModel.UserCountEnum;
     dependsOnInterfacesNamesAsCsv?: string;
     dependsOnInterfaces?: Array<APIItSystemUsageOverviewInterfaceReadModel>;
     incomingRelatedItSystemUsagesNamesAsCsv?: string;
@@ -94,14 +102,17 @@ export interface APIItSystemUsageOverviewReadModel {
     relevantOrganizationUnits?: Array<APIItSystemUsageOverviewRelevantOrgUnitReadModel>;
     associatedContractsNamesCsv?: string;
     associatedContracts?: Array<APIItSystemUsageOverviewItContractReadModel>;
+    dpiaConducted?: APIItSystemUsageOverviewReadModel.DpiaConductedEnum;
+    isBusinessCritical?: APIItSystemUsageOverviewReadModel.IsBusinessCriticalEnum;
 }
 export namespace APIItSystemUsageOverviewReadModel {
-    export type ArchiveDutyEnum = 'Undecided' | 'B' | 'K' | 'Unknown';
+    export type ArchiveDutyEnum = 'Undecided' | 'B' | 'K' | 'Unknown' | 'PreserveDataCanDiscardDocuments';
     export const ArchiveDutyEnum = {
         Undecided: 'Undecided' as ArchiveDutyEnum,
         B: 'B' as ArchiveDutyEnum,
         K: 'K' as ArchiveDutyEnum,
-        Unknown: 'Unknown' as ArchiveDutyEnum
+        Unknown: 'Unknown' as ArchiveDutyEnum,
+        PreserveDataCanDiscardDocuments: 'PreserveDataCanDiscardDocuments' as ArchiveDutyEnum
     };
     export type LifeCycleStatusEnum = 'Undecided' | 'NotInUse' | 'PhasingIn' | 'Operational' | 'PhasingOut';
     export const LifeCycleStatusEnum = {
@@ -116,6 +127,28 @@ export namespace APIItSystemUsageOverviewReadModel {
         Undecided: 'UNDECIDED' as HostedAtEnum,
         Onpremise: 'ONPREMISE' as HostedAtEnum,
         External: 'EXTERNAL' as HostedAtEnum
+    };
+    export type UserCountEnum = 'BELOWTEN' | 'TENTOFIFTY' | 'FIFTYTOHUNDRED' | 'HUNDREDPLUS' | 'UNDECIDED';
+    export const UserCountEnum = {
+        Belowten: 'BELOWTEN' as UserCountEnum,
+        Tentofifty: 'TENTOFIFTY' as UserCountEnum,
+        Fiftytohundred: 'FIFTYTOHUNDRED' as UserCountEnum,
+        Hundredplus: 'HUNDREDPLUS' as UserCountEnum,
+        Undecided: 'UNDECIDED' as UserCountEnum
+    };
+    export type DpiaConductedEnum = 'NO' | 'YES' | 'DONTKNOW' | 'UNDECIDED';
+    export const DpiaConductedEnum = {
+        No: 'NO' as DpiaConductedEnum,
+        Yes: 'YES' as DpiaConductedEnum,
+        Dontknow: 'DONTKNOW' as DpiaConductedEnum,
+        Undecided: 'UNDECIDED' as DpiaConductedEnum
+    };
+    export type IsBusinessCriticalEnum = 'NO' | 'YES' | 'DONTKNOW' | 'UNDECIDED';
+    export const IsBusinessCriticalEnum = {
+        No: 'NO' as IsBusinessCriticalEnum,
+        Yes: 'YES' as IsBusinessCriticalEnum,
+        Dontknow: 'DONTKNOW' as IsBusinessCriticalEnum,
+        Undecided: 'UNDECIDED' as IsBusinessCriticalEnum
     };
 }
 

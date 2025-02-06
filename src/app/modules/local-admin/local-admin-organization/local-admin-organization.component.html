@@ -1,0 +1,22 @@
+<app-segment [buttons]="segmentOptions" [(selected)]="selectedSegment"> </app-segment>
+
+<app-card>
+  <app-organizations-grid *ngIf="selectedSegment === LocalAdminOrganizationSegmentOption.Organizations">
+  </app-organizations-grid>
+
+  <ng-container *ngIf="selectedSegment === LocalAdminOrganizationSegmentOption.Roles">
+    <app-overview-header>
+      <h3 i18n>Organisationsroller i din organisation</h3>
+    </app-overview-header>
+    <app-local-option-type-view
+      optionType="organization-unit"
+      i18n-title
+      [showWriteAccess]="true"
+      [disableAccordion]="true"
+      [expandedByDefault]="true"
+      [scrollable]="'none'"
+      [fitSizeToContent]="false"
+    >
+    </app-local-option-type-view>
+  </ng-container>
+</app-card>

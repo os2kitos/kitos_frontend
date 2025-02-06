@@ -1,0 +1,47 @@
+[
+  {
+    "description": "...",
+    "uuid": "8be3a5ae-5011-4fbf-9792-67d5e6694e8e",
+    "name": "Andet"
+  },
+  {
+    "description": "...",
+    "uuid": "e60c24dd-4c75-48a1-89d3-cc50c2eb9043",
+    "name": "Dokument"
+  },
+  {
+    "description": "...",
+    "uuid": "d2902b81-c7ba-4a44-b1c0-720dc277da0b",
+    "name": "Ejendom"
+  },
+  {
+    "description": "...",
+    "uuid": "eba943a8-6c5b-45e7-bcf2-44eee28c1e7c",
+    "name": "GIS"
+  },
+  {
+    "description": "...",
+    "uuid": "215445b9-c42f-49dc-8998-2eaa00697ab7",
+    "name": "Klassikfikation"
+  },
+  {
+    "description": "...",
+    "uuid": "53eb8edd-9bb6-4354-bccd-ab02b8ab7896",
+    "name": "Organisation"
+  },
+  {
+    "description": "...",
+    "uuid": "2ff72252-a8dc-4b92-8435-31f09f530cc4",
+    "name": "Person"
+  },
+  {
+    "description": "...",
+    "uuid": "bec55cbb-3747-43ed-91c3-19d22da7d142",
+    "name": "Sag"
+  },
+  {
+    "description": "...",
+    "uuid": "f5b38bb4-b855-46a7-a9eb-2f8ec3414903",
+    "name": "Virksomhed"
+  }
+]

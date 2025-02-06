@@ -7,4 +7,7 @@ import { Component, Input } from '@angular/core';
 })
 export class NativeTableComponent {
   @Input() public tableLayout: 'fixed' | 'auto' = 'auto';
+  @Input() public withOutline: boolean = false;
+  @Input() public isDisplayBlock: boolean = false;
+  @Input() public includeDividers: boolean = false;
 }

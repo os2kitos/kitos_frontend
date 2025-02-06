@@ -1,0 +1,14 @@
+<app-dialog title="Organisationer hvor brugeren har roller" i18n-title data-cy="organizations-dialog">
+  <app-native-table *ngIf="organizationNames" tableLayout="fixed">
+    <thead>
+      <th i18n>Navn</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let name of organizationNames">
+        <td>
+          <app-paragraph paragraphSize="medium" [cropOnOverflow]="true">{{ name }}</app-paragraph>
+        </td>
+      </tr>
+    </tbody>
+  </app-native-table>
+</app-dialog>

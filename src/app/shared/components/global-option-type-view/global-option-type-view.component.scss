@@ -1,0 +1,25 @@
+@import "theme";
+
+.align-priority-div {
+  display: flex;
+  gap: $padding-small;
+}
+
+.description-overflow {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.create-button-container-align-right {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.arrow-icon-disabled {
+  --icon-color: #b0b7bf;
+}
+
+:host {
+  overflow: hidden;
+}

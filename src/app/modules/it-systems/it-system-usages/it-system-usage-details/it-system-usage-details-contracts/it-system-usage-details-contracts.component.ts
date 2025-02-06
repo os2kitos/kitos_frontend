@@ -17,6 +17,10 @@ import {
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypesDictionary } from 'src/app/store/regular-option-type-store/selectors';
 import { ItSystemUsageDetailsContractsComponentStore } from './it-system-usage-details-contracts.component-store';
+import {
+  selectITSystemUsageEnableAssociatedContracts,
+  selectITSystemUsageEnableSelectContractToDetermineIfItSystemIsActive,
+} from 'src/app/store/organization/ui-module-customization/selectors';
 
 @Component({
   templateUrl: 'it-system-usage-details-contracts.component.html',
@@ -38,6 +42,11 @@ export class ITSystemUsageDetailsContractsComponent extends BaseComponent implem
     mainContract: new FormControl<APIItContractResponseDTO | undefined>(undefined),
   });
 
+  public readonly associatedContractsEnabled$ = this.store.select(selectITSystemUsageEnableAssociatedContracts);
+  public readonly contractToDetermineIsActiveEnabled$ = this.store.select(
+    selectITSystemUsageEnableSelectContractToDetermineIfItSystemIsActive
+  );
+
   constructor(
     private readonly store: Store,
     private readonly contractsStore: ItSystemUsageDetailsContractsComponentStore,
@@ -48,7 +57,7 @@ export class ITSystemUsageDetailsContractsComponent extends BaseComponent implem
 
   public patchMainContract(uuid?: string) {
     if (this.contractSelectionForm.valid) {
-      this.store.dispatch(ITSystemUsageActions.patchItSystemUsage({ general: { mainContractUuid: uuid } }));
+      this.store.dispatch(ITSystemUsageActions.patchITSystemUsage({ general: { mainContractUuid: uuid } }));
     } else {
       this.notificationService.showError($localize`Valg af kontrakt er ugyldig`);
     }

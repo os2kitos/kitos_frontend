@@ -1,0 +1,32 @@
+<app-overview-header>
+  <h3 i18n>IT Kontrakter</h3>
+  <ng-container *ngIf="(hasCreatePermission$ | async) !== undefined">
+    <app-grid-options-button
+      [hasResetButton]="true"
+      [hasColumnConfigButtons]="true"
+      [createPermission$]="hasCreatePermission$"
+      entityType="it-contract"
+    ></app-grid-options-button>
+    <app-export-menu-button [exportMethod]="onExcelExport"></app-export-menu-button>
+    <app-hide-show-button
+      [columns]="gridColumns$ | async"
+      entityType="it-contract"
+      [uiConfigApplications]="uiConfigApplications$ | async"
+      [isSecondary]="(hasCreatePermission$ | async) ?? false"
+    ></app-hide-show-button>
+    <app-create-entity-button entityType="it-contract" *ngIf="hasCreatePermission$ | async"></app-create-entity-button>
+  </ng-container>
+</app-overview-header>
+
+<app-grid
+  [data$]="gridData$"
+  [columns$]="gridColumns$"
+  [uiConfigApplications$]="uiConfigApplications$"
+  [exportToExcelName]="'IT Kontrakter Overblik'"
+  i18n-exportToExcelName
+  [loading]="isLoading$ | async"
+  [state]="gridState$ | async"
+  entityType="it-contract"
+  (stateChange)="stateChange($event)"
+  (rowIdSelect)="rowIdSelect($event)"
+></app-grid>

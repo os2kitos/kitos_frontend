@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { ComponentStore, tapResponse } from '@ngrx/component-store';
-import { mergeMap, Observable } from 'rxjs';
+import { ComponentStore } from '@ngrx/component-store';import { tapResponse } from '@ngrx/operators';
+
+import { Observable, mergeMap } from 'rxjs';
 import { APIItSystemResponseDTO, APIV2ItSystemService } from 'src/app/api/v2';
 
 interface State {
@@ -27,7 +28,7 @@ export class ITSystemUsageDetailsFrontpageCatalogComponentStore extends Componen
       mergeMap((uuid) =>
         this.apiItSystemService.getSingleItSystemV2GetItSystem({ uuid }).pipe(
           tapResponse(
-            (parentSystem) => this.updateParentSystem(parentSystem),
+            (parentSystem: APIItSystemResponseDTO) => this.updateParentSystem(parentSystem),
             (e) => console.error(e)
           )
         )

@@ -1,0 +1,24 @@
+<div class="flex-box-container">
+  <h4 i18n class="title-margin">Lokal admin</h4>
+  <div class="flex-box-container">
+    <ng-container *ngIf="currentTabModuleKey$ | async as moduleKey">
+      <app-checkbox-button
+        (valueChange)="patchUIRootConfig($event)"
+        [value]="(getModuleEnabled(moduleKey) | async) ?? false"
+        data-cy="toggle-module-button"
+        [backgroundWhite]="true"
+      >
+        <app-paragraph [bold]="true" paragraphSize="medium" i18n>
+          Inkluder modulet {{ getModuleText(moduleKey) }}
+        </app-paragraph>
+      </app-checkbox-button>
+    </ng-container>
+    <app-help-button [helpTextKey]="'local-config.' + helpText"></app-help-button>
+  </div>
+</div>
+
+<div class="content">
+  <app-navigation-drawer [items]="items"> </app-navigation-drawer>
+
+  <router-outlet></router-outlet>
+</div>

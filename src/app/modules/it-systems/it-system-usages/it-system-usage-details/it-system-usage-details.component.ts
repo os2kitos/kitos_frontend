@@ -1,13 +1,15 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { combineLatest, distinctUntilChanged, filter, map } from 'rxjs';
+import { combineLatest, distinctUntilChanged, filter, first, map, tap } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { NavigationDrawerItem } from 'src/app/shared/components/navigation-drawer/navigation-drawer.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
+import { combineAND } from 'src/app/shared/helpers/observable-helpers';
 import { BreadCrumb } from 'src/app/shared/models/breadcrumbs/breadcrumb.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
+import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import {
@@ -19,8 +21,25 @@ import {
   selectItSystemUsageUuid,
 } from 'src/app/store/it-system-usage/selectors';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
+import {
+  selectShowDataProcessingRegistrations,
+  selectShowItContractModule,
+} from 'src/app/store/organization/selectors';
+import {
+  selectITSystemUsageEnableContracts,
+  selectITSystemUsageEnableDataProcessing,
+  selectITSystemUsageEnableGdpr,
+  selectITSystemUsageEnableLocalReferences,
+  selectITSystemUsageEnableSystemRelations,
+  selectITSystemUsageEnableTabArchiving,
+  selectITSystemUsageEnableTabHierarchy,
+  selectITSystemUsageEnableTabInterfaces,
+  selectITSystemUsageEnableTabLocalKle,
+  selectITSystemUsageEnableTabNotifications,
+  selectITSystemUsageEnableTabOrganization,
+  selectITSystemUsageEnableTabSystemRoles,
+} from 'src/app/store/organization/ui-module-customization/selectors';
 import { selectOrganizationName } from 'src/app/store/user-store/selectors';
-import { ITSystemUsageRemoveComponent } from './it-system-usage-remove/it-system-usage-remove.component';
 
 @Component({
   templateUrl: 'it-system-usage-details.component.html',
@@ -34,6 +53,22 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
   public readonly itSystemUsageName$ = this.store.select(selectItSystemUsageName).pipe(filterNullish());
   public readonly itSystemUsageUuid$ = this.store.select(selectItSystemUsageUuid).pipe(filterNullish());
   public readonly hasDeletePermissions$ = this.store.select(selectITSystemUsageHasDeletePermission);
+
+  public readonly enabledContractsTab$ = this.store.select(selectITSystemUsageEnableContracts);
+  public readonly enabledDataProcessingTab$ = this.store.select(selectITSystemUsageEnableDataProcessing);
+  public readonly enableGdprTab$ = this.store.select(selectITSystemUsageEnableGdpr);
+  public readonly enableSystemRolesTab$ = this.store.select(selectITSystemUsageEnableTabSystemRoles);
+  public readonly enableOrganizationTab$ = this.store.select(selectITSystemUsageEnableTabOrganization);
+  public readonly enableSystemRelationsTab$ = this.store.select(selectITSystemUsageEnableSystemRelations);
+  public readonly enableInterfacesTab$ = this.store.select(selectITSystemUsageEnableTabInterfaces);
+  public readonly enableArchivingTab$ = this.store.select(selectITSystemUsageEnableTabArchiving);
+  public readonly enableHierarchyTab$ = this.store.select(selectITSystemUsageEnableTabHierarchy);
+  public readonly enableLocalKleTab$ = this.store.select(selectITSystemUsageEnableTabLocalKle);
+  public readonly enableNotificationsTab$ = this.store.select(selectITSystemUsageEnableTabNotifications);
+  public readonly enableLocalReferencesTab$ = this.store.select(selectITSystemUsageEnableLocalReferences);
+
+  public readonly itContractsModuleEnabled$ = this.store.select(selectShowItContractModule);
+  public readonly dataProcessingModuleEnabled$ = this.store.select(selectShowDataProcessingRegistrations);
 
   public readonly breadCrumbs$ = combineLatest([
     this.organizationName$,
@@ -53,13 +88,93 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
     filterNullish()
   );
 
+  public readonly navigationItems: NavigationDrawerItem[] = [
+    {
+      label: $localize`Systemforside`,
+      iconType: 'document',
+      route: AppPath.frontpage,
+    },
+    {
+      label: $localize`Kontrakter`,
+      iconType: 'clipboard',
+      route: AppPath.contracts,
+      enabled$: combineAND([this.itContractsModuleEnabled$, this.enabledContractsTab$]),
+    },
+    {
+      label: $localize`Databehandling`,
+      iconType: 'folder-important',
+      route: AppPath.dataProcessing,
+      enabled$: combineAND([this.dataProcessingModuleEnabled$, this.enabledDataProcessingTab$]),
+    },
+    {
+      label: $localize`GDPR`,
+      iconType: 'lock',
+      route: AppPath.gdpr,
+      enabled$: this.enableGdprTab$,
+    },
+    {
+      label: $localize`Systemroller`,
+      iconType: 'roles',
+      route: AppPath.roles,
+      enabled$: this.enableSystemRolesTab$,
+    },
+    {
+      label: $localize`Organisation`,
+      iconType: 'organization',
+      route: AppPath.organization,
+      enabled$: this.enableOrganizationTab$,
+    },
+    {
+      label: $localize`Relationer`,
+      iconType: 'intersect',
+      route: AppPath.relations,
+      enabled$: this.enableSystemRelationsTab$,
+    },
+    {
+      label: $localize`Udstillede snitflader`,
+      iconType: 'systems',
+      route: AppPath.itInterfaces,
+      enabled$: this.enableInterfacesTab$,
+    },
+    {
+      label: $localize`Arkivering`,
+      iconType: 'archive',
+      route: AppPath.archiving,
+      enabled$: this.enableArchivingTab$,
+    },
+    {
+      label: $localize`Hierarki`,
+      iconType: 'hierarchy',
+      route: AppPath.hierarchy,
+      enabled$: this.enableHierarchyTab$,
+    },
+    {
+      label: $localize`Lokale KLE`,
+      iconType: 'table',
+      route: AppPath.kle,
+      enabled$: this.enableLocalKleTab$,
+    },
+    {
+      label: $localize`Advis`,
+      iconType: 'notification',
+      route: AppPath.notifications,
+      enabled$: this.enableNotificationsTab$,
+    },
+    {
+      label: $localize`Lokale referencer`,
+      iconType: 'bookmark',
+      route: AppPath.externalReferences,
+      enabled$: this.enableLocalReferencesTab$,
+    },
+  ];
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private store: Store,
     private actions$: Actions,
     private notificationService: NotificationService,
-    private dialog: MatDialog
+    private dialogOpenerService: DialogOpenerService
   ) {
     super();
   }
@@ -72,8 +187,8 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
           distinctUntilChanged() //Ensures we get changes if navigation occurs between usages
         )
         .subscribe((itSystemUsageUuid) => {
-          this.store.dispatch(ITSystemUsageActions.getItSystemUsagePermissions(itSystemUsageUuid));
-          this.store.dispatch(ITSystemUsageActions.getItSystemUsage(itSystemUsageUuid));
+          this.store.dispatch(ITSystemUsageActions.getITSystemUsagePermissions(itSystemUsageUuid));
+          this.store.dispatch(ITSystemUsageActions.getITSystemUsage(itSystemUsageUuid));
         })
     );
 
@@ -90,7 +205,7 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
 
     // Navigate to IT System Usages if ressource does not exist
     this.subscriptions.add(
-      this.actions$.pipe(ofType(ITSystemUsageActions.getItSystemUsageError)).subscribe(() => {
+      this.actions$.pipe(ofType(ITSystemUsageActions.getITSystemUsageError)).subscribe(() => {
         this.notificationService.showError($localize`IT System findes ikke`);
         this.router.navigate([`${AppPath.itSystems}/${AppPath.itSystemUsages}`]);
       })
@@ -101,18 +216,41 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
       this.store
         .select(selectItSystemUsageSystemContextUuid)
         .pipe(filterNullish(), distinctUntilChanged())
-        .subscribe((systemContextUuid) => this.store.dispatch(ITSystemActions.getItSystem(systemContextUuid)))
+        .subscribe((systemContextUuid) => this.store.dispatch(ITSystemActions.getITSystem(systemContextUuid)))
     );
   }
 
   override ngOnDestroy() {
     super.ngOnDestroy();
 
-    this.store.dispatch(ITSystemUsageActions.getItSystemUsagePermissionsSuccess());
-    this.store.dispatch(ITSystemUsageActions.getItSystemUsageSuccess());
+    this.store.dispatch(ITSystemUsageActions.getITSystemUsagePermissionsSuccess());
+    this.store.dispatch(ITSystemUsageActions.getITSystemUsageSuccess());
   }
 
   public showRemoveDialog() {
-    this.dialog.open(ITSystemUsageRemoveComponent);
+    this.subscriptions.add(
+      this.organizationName$.pipe(
+        first(),
+        tap((organizationName) => {
+          const confirmationDialogRef = this.dialogOpenerService.openTakeSystemOutOfUseDialog(organizationName);
+
+          this.subscriptions.add(
+            this.actions$.pipe(ofType(ITSystemUsageActions.removeITSystemUsageSuccess), first()).subscribe(() => {
+              confirmationDialogRef.close();
+              this.notificationService.showDefault($localize`Systemanvendelsen blev slettet`);
+              this.router.navigate([`/${AppPath.itSystems}/${AppPath.itSystemUsages}`]);
+            })
+          );
+
+          this.subscriptions.add(
+            confirmationDialogRef.afterClosed().pipe(first()).subscribe((result) => {
+              if (result) {
+                this.store.dispatch(ITSystemUsageActions.removeITSystemUsage());
+              }
+            })
+          );
+        })
+    ).subscribe()
+    );
   }
 }

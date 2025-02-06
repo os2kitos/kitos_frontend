@@ -6,7 +6,7 @@ import { APIKLEDetailsDTO } from 'src/app/api/v2';
 import { KLEActions } from 'src/app/store/kle/actions';
 import { selectHasValidCache, selectKLEs } from 'src/app/store/kle/selectors';
 import { BaseComponent } from '../../base/base.component';
-import { KLE_DIALOG_DEFAULT_WIDTH } from '../../constants';
+import { KLE_DIALOG_DEFAULT_WIDTH } from '../../constants/constants';
 import { compareKle, matchKleChoice, matchMainGroup, matchSubGroup } from '../../helpers/kle.helpers';
 import { Dictionary } from '../../models/primitives/dictionary.model';
 import { filterNullish } from '../../pipes/filter-nullish';
@@ -147,6 +147,6 @@ export class SelectKleDialogComponent extends BaseComponent implements OnInit {
     );
 
     //Load KLE options
-    this.store.dispatch(KLEActions.getKles());
+    this.store.dispatch(KLEActions.getKLEs());
   }
 }

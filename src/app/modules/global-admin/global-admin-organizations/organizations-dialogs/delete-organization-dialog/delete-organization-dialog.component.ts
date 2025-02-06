@@ -1,0 +1,127 @@
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
+import { Actions, ofType } from '@ngrx/effects';
+import { Store } from '@ngrx/store';
+import { BehaviorSubject, map, Observable, of } from 'rxjs';
+import { BaseComponent } from 'src/app/shared/base/base.component';
+import { OrganizationOData } from 'src/app/shared/models/organization/organization-odata.model';
+import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
+import { NotificationService } from 'src/app/shared/services/notification.service';
+import { OrganizationActions } from 'src/app/store/organization/actions';
+import { DeleteOrganizationComponentStore } from './delete-organization.component-store';
+import { RemovalConflict, RemovalConflictType } from './removal-conflict-table/removal-conflict-table.component';
+import { ClipboardService } from 'src/app/shared/services/clipboard.service';
+
+@Component({
+  selector: 'app-delete-organization-dialog',
+  templateUrl: './delete-organization-dialog.component.html',
+  styleUrl: './delete-organization-dialog.component.scss',
+  providers: [DeleteOrganizationComponentStore],
+})
+export class DeleteOrganizationDialogComponent extends BaseComponent implements OnInit {
+  @Input() public organization!: OrganizationOData;
+
+  public hasAcceptedConsequences: boolean = false;
+  public isCopying: boolean = false;
+
+  public readonly removalConflicts$ = this.componentStore.removalConflicts$;
+  public readonly isLoading$ = this.componentStore.isLoading$;
+  public readonly simpleConflictTypeOptions: RemovalConflictType[] = [
+    'contracts',
+    'dprDataprocessor',
+    'dprSubDataprocessor',
+  ];
+  public readonly otherConflictTypeOptions: RemovalConflictType[] = [
+    'systemsRightsHolder',
+    'systemsExposingInterfaces',
+    'systemsParentSystem',
+    'systemsUsages',
+    'systemsArchiveSupplier',
+    'interfaces',
+  ];
+
+  public readonly deletingOrganization$ = new BehaviorSubject<boolean>(false);
+
+  public readonly conflictContentId = 'conflict-content';
+
+  constructor(
+    private dialogRef: MatDialogRef<DeleteOrganizationDialogComponent>,
+    private componentStore: DeleteOrganizationComponentStore,
+    private confirmActionService: ConfirmActionService,
+    private actions$: Actions,
+    private store: Store,
+    private cdr: ChangeDetectorRef,
+    private notificationService: NotificationService,
+    private clipboardService: ClipboardService
+  ) {
+    super();
+  }
+
+  public ngOnInit(): void {
+    this.componentStore.getConsequences(of(this.organization.Uuid));
+
+    this.subscriptions.add(
+      this.actions$.pipe(ofType(OrganizationActions.deleteOrganizationSuccess)).subscribe(() => {
+        this.deletingOrganization$.next(false);
+        this.onCancel();
+      })
+    );
+
+    this.subscriptions.add(
+      this.actions$.pipe(ofType(OrganizationActions.deleteOrganizationError)).subscribe(() => {
+        this.deletingOrganization$.next(false);
+      })
+    );
+  }
+
+  public onDelete(): void {
+    this.confirmActionService.confirmAction({
+      category: ConfirmActionCategory.Warning,
+      message: $localize`Er du sikker på at du vil slette "${this.organization.Name}"?`,
+      onConfirm: () => {
+        this.deletingOrganization$.next(true);
+        this.store.dispatch(OrganizationActions.deleteOrganization(this.organization.Uuid));
+      },
+    });
+  }
+
+  public onCancel(): void {
+    this.dialogRef.close();
+  }
+
+  public hasAnyRemovalConflict(): Observable<boolean | undefined> {
+    return this.componentStore.hasConflicts(this.simpleConflictTypeOptions.concat(this.otherConflictTypeOptions));
+  }
+
+  public hasOtherTypeConflicts(): Observable<boolean | undefined> {
+    return this.componentStore.hasConflicts(this.otherConflictTypeOptions);
+  }
+
+  public getTitle(): string {
+    return $localize`Slet "${this.organization.Name}"`;
+  }
+
+  public copyConflictsToClipboard(): void {
+    this.isCopying = true;
+    this.cdr.detectChanges();
+    this.clipboardService.copyContentToClipBoardById(this.conflictContentId);
+    this.isCopying = false;
+    this.notificationService.showDefault($localize`Konsekvenserne er kopieret til udklipsholderen`);
+  }
+
+  public canSubmit(): Observable<boolean> {
+    return this.hasAnyRemovalConflict().pipe(
+      map((hasConflicts) => {
+        return hasConflicts === false || this.hasAcceptedConsequences;
+      })
+    );
+  }
+
+  public typeHasConflicts(conflicType: RemovalConflictType): Observable<boolean> {
+    return this.componentStore.typeHasConflicts(conflicType);
+  }
+
+  public getSpecificConflicts(type: RemovalConflictType): Observable<RemovalConflict[]> {
+    return this.componentStore.getSpecificConflicts(type);
+  }
+}

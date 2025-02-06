@@ -1,0 +1,9 @@
+<app-card>
+  <app-card-header title="Databehandlingsroller" helpTextKey="data-processing.edit-registration.roles" i18n-title>
+  </app-card-header>
+  <app-role-table
+    [entityUuid$]="dataProcessingUuid$"
+    entityType="data-processing"
+    [hasModifyPermission]="(hasModifyPermission$ | async) ?? false"
+  ></app-role-table>
+</app-card>

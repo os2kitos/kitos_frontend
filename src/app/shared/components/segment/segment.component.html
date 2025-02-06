@@ -1,9 +1,10 @@
-<mat-button-toggle-group>
+<mat-button-toggle-group [hideSingleSelectionIndicator]="true">
   <mat-button-toggle
     *ngFor="let button of buttons"
     disableRipple="true"
     [checked]="button.value === selected"
     (change)="selectedChange.emit(button.value)"
+    [attr.data-cy]="button.dataCy"
     >{{ button.text }}</mat-button-toggle
   >
 </mat-button-toggle-group>

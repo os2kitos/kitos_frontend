@@ -1,0 +1,27 @@
+<app-dialog [title]="title" overflow="none">
+  <form [formGroup]="createForm">
+    <app-standard-vertical-content-grid>
+      <div>
+        <app-textbox
+          text="Navn"
+          [formGroup]="createForm"
+          formName="name"
+          i18n-title
+          data-cy="create-name"
+          [isLoading]="isLoading$ | async"
+        ></app-textbox>
+        <div class="error-paragraph-height">
+          <app-paragraph *ngIf="alreadyExists$ | async" color="error" i18n data-cy="name-error"
+            >Dette navn er allerede i brug!</app-paragraph
+          >
+        </div>
+      </div>
+    </app-standard-vertical-content-grid>
+    <app-create-entity-dialog-action-buttons
+      [alreadyExists]="alreadyExists$ | async"
+      [isFormValid]="createForm.valid"
+      (cancel)="onCancel()"
+      (create)="createEntity($event)"
+    ></app-create-entity-dialog-action-buttons>
+  </form>
+</app-dialog>

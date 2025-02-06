@@ -1,0 +1,59 @@
+<app-accordion title="Ændringslog" i18n-title data-cy="changelog-accordion">
+  <app-standard-vertical-content-grid>
+    <app-paragraph paragraphSize="small" [dimmed]="true" i18n
+      >Ændringer ifm. de seneste fem import operationer der indeholdte ændringer</app-paragraph
+    >
+    <app-dropdown
+      text="Vælg"
+      i18n-text
+      data-cy="select-changelog-dropdown"
+      [data]="changelogOptions$ | async"
+      [showDescription]="true"
+      (valueChange)="onChangelogSelected($event)"
+    ></app-dropdown>
+    <ng-container *ngIf="selectedChangelog$ | async as selectedChangelog">
+      <ng-container *ngIf="selectedChangelog?.consequences !== undefined">
+        <app-native-table [withOutline]="true">
+          <thead>
+            <th width="33%" i18n>Ansvarlig</th>
+            <th width="33%" i18n>Antal opdateringer</th>
+            <th width="33%" i18n>Dato</th>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <app-paragraph paragraphSize="small">
+                  {{ getResponsibleEntityText(selectedChangelog) }}
+                </app-paragraph>
+              </td>
+              <td>
+                <app-paragraph paragraphSize="small">
+                  {{ selectedChangelog.consequences?.length }}
+                </app-paragraph>
+              </td>
+              <td>
+                <app-paragraph paragraphSize="small">
+                  {{ selectedChangelog.logTime | appDate }}
+                </app-paragraph>
+              </td>
+            </tr>
+          </tbody>
+        </app-native-table>
+        <div class="overflow-hidden">
+          <div class="changelog-header-container">
+            <app-button (buttonClick)="exportToExcel()" i18n buttonStyle="secondary"
+              ><app-export-icon />Eksporter</app-button
+            >
+          </div>
+          <app-local-grid
+            [data]="selectedChangelog.consequences!"
+            [columns]="gridColumns"
+            [withOutline]="true"
+            exportToExcelName="FK Organisation - Konsekvenser ved opdatering"
+            i18n-exportToExcelName
+          ></app-local-grid>
+        </div>
+      </ng-container>
+    </ng-container>
+  </app-standard-vertical-content-grid>
+</app-accordion>

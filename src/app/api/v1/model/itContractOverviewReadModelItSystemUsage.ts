@@ -15,6 +15,7 @@ import { APIItContractOverviewReadModel } from './itContractOverviewReadModel';
 export interface APIItContractOverviewReadModelItSystemUsage { 
     id?: number;
     itSystemUsageId?: number;
+    itSystemUsageUuid?: string;
     itSystemUsageSystemUuid?: string;
     itSystemUsageName?: string;
     itSystemIsDisabled?: boolean;

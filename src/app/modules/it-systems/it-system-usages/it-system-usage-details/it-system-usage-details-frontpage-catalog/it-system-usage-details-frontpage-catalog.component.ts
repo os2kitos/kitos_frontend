@@ -5,7 +5,7 @@ import { first } from 'rxjs';
 import { APIExternalReferenceDataResponseDTO, APIRegularOptionResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
-import { mapItSystemScopeToString } from 'src/app/shared/models/it-system-scope.model';
+import { mapScopeEnumToScopeChoice } from 'src/app/shared/models/it-system/it-system-scope.model';
 import { mapOptionCrossReferenceToOptionDTO } from 'src/app/shared/models/options/option-type.model';
 import {
   mapRecommendedArchiveDutyComment,
@@ -36,6 +36,7 @@ export class ITSystemUsageDetailsFrontpageCatalogComponent extends BaseComponent
     businessType: new FormControl<APIRegularOptionResponseDTO | undefined>({ value: undefined, disabled: true }),
     scope: new FormControl({ value: '', disabled: true }),
     uuid: new FormControl({ value: '', disabled: true }),
+    externalUuid: new FormControl({ value: '', disabled: true }),
     recommendedArchiveDuty: new FormControl({ value: '', disabled: true }),
     recommendedArchiveDutyComment: new FormControl({ value: '', disabled: true }),
     urlReference: new FormControl<APIExternalReferenceDataResponseDTO[] | undefined>({
@@ -82,8 +83,9 @@ export class ITSystemUsageDetailsFrontpageCatalogComponent extends BaseComponent
             formerName: itSystem.formerName,
             rightsHolder: itSystem.rightsHolder?.name || '',
             businessType: mapOptionCrossReferenceToOptionDTO(itSystem.businessType),
-            scope: mapItSystemScopeToString(itSystem.scope) || '',
+            scope: mapScopeEnumToScopeChoice(itSystem.scope)?.name || '',
             uuid: itSystem.uuid,
+            externalUuid: itSystem.externalUuid,
             recommendedArchiveDuty: mapRecommendedArchiveDutyToString(itSystem.recommendedArchiveDuty) || '',
             recommendedArchiveDutyComment: mapRecommendedArchiveDutyComment(itSystem.recommendedArchiveDuty),
             urlReference: itSystem.externalReferences,

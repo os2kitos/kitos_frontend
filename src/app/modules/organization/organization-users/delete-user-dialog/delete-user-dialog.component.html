@@ -1,0 +1,70 @@
+<ng-container *ngIf="user$ | async as user">
+  <app-scrollbar-dialog title="Slet bruger" helpText="org_user_delete_modal" i18n-title [nested]="nested">
+    <app-standard-vertical-content-grid *ngIf="!isLoading">
+      <app-paragraph [displayFlex]="false" i18n>
+        Er du sikker på at du vil fjerne <strong>{{ getUserName(user) }}</strong> fra
+        <strong>{{ organizationName$ | async }}</strong
+        >?
+
+        <ng-container *ngIf="hasRoles(user)">
+          Brugeren har disse roller, som kan tildeles en anden. Det er valgfrit om du vil slette brugeren uden at
+          tildele rollerne.
+        </ng-container>
+
+        <ng-container *ngIf="!hasRoles(user)"> Denne handling kan ikke fortrydes. </ng-container>
+      </app-paragraph>
+
+      <ng-container *ngIf="hasRoles(user)">
+        <app-user-dropdown
+          [formGroup]="formGroup"
+          formName="user"
+          [disabledUuids$]="disabledUuids$"
+          text="Overfør roller til"
+          i18n-text
+        >
+        </app-user-dropdown>
+
+        <app-manage-user-role-table
+          *ngIf="user.OrganizationUnitRights.length > 0"
+          [user]="user"
+          entityType="organization-unit"
+        ></app-manage-user-role-table>
+
+        <app-manage-user-role-table
+          *ngIf="user.ItSystemRights.length > 0"
+          [user]="user"
+          entityType="it-system"
+        ></app-manage-user-role-table>
+
+        <app-manage-user-role-table
+          *ngIf="user.ItContractRights.length > 0"
+          [user]="user"
+          entityType="it-contract"
+        ></app-manage-user-role-table>
+
+        <app-manage-user-role-table
+          *ngIf="user.DataProcessingRegistrationRights.length > 0"
+          [user]="user"
+          entityType="data-processing-registration"
+        ></app-manage-user-role-table>
+      </ng-container>
+    </app-standard-vertical-content-grid>
+    <app-dialog-actions *ngIf="!isLoading">
+      <app-button
+        *ngIf="hasRoles(user)"
+        buttonStyle="secondary"
+        color="warn"
+        (buttonClick)="onTransferRoles(user)"
+        [disabled]="!isAnySelected() || !formGroup.valid"
+        i18n
+      >
+        Tildel valgte roller
+      </app-button>
+      <app-button buttonStyle="primary" color="warn" (buttonClick)="onDeleteUser(user)" data-cy="delete-button" i18n>
+        Slet bruger
+      </app-button>
+    </app-dialog-actions>
+
+    <app-loading *ngIf="isLoading"></app-loading>
+  </app-scrollbar-dialog>
+</ng-container>

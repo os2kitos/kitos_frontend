@@ -3,4 +3,10 @@ export type RegistrationEntityTypes =
   | 'it-system'
   | 'data-processing-registration'
   | 'it-contract'
-  | 'it-interface';
+  | 'it-interface'
+  | 'organization'
+  | 'organization-unit'
+  | 'organization-user'
+  | 'local-admin-organization'
+  | 'global-admin-organization'
+  ;

@@ -1,0 +1,10 @@
+<app-local-grid
+  [loading]="loading"
+  [data]="optionTypes"
+  [columns]="filteredGridColumns"
+  (modifyEvent)="onModify($event)"
+  (checkboxChange)="onCheckboxChange($event)"
+  [modifyPermission]="true"
+  [fitSizeToContent]="fitSizeToContent"
+  [scrollable]="scrollable"
+></app-local-grid>

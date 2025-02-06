@@ -1,0 +1,24 @@
+<app-card>
+  <app-overview-header>
+    <h3 i18n>
+    Hjælpetekster
+  </h3>
+  <app-button (buttonClick)="onClickCreate()" i18n data-cy="create-button">
+    Opret hjælpetekst
+  </app-button>
+  </app-overview-header>
+
+  <ng-container *ngIf="helpTexts$ | async as helpTexts">
+    <app-local-grid
+      [data]="helpTexts"
+      [columns]="columns"
+      (modifyEvent)="openEditDialog($event)"
+      (deleteEvent)="openDeleteDialog($event)"
+      [modifyPermission]="true"
+      [deletePermission]="true"
+    >
+    </app-local-grid>
+    <app-loading *ngIf="(helpTexts$ | async) === undefined"></app-loading>
+  </ng-container>
+</app-card>
+

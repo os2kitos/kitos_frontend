@@ -1,10 +1,5 @@
 @import "theme";
 
-:host {
-  display: flex;
-  flex: 1;
-}
-
 .mat-button-toggle-group {
   display: flex;
   flex: 1;
@@ -13,6 +8,7 @@
   background-color: $color-primary-20;
   box-shadow: none !important;
   border: 0px;
+  margin-bottom: $padding-medium-large;
 }
 
 .mat-button-toggle {
@@ -38,8 +34,8 @@
 }
 
 .mat-button-toggle-checked {
-  color: $color-primary;
-  background-color: $color-white;
+  color: $color-primary !important;
+  background-color: $color-white !important;
 }
 
 .mat-button-toggle-group > .mat-button-toggle {

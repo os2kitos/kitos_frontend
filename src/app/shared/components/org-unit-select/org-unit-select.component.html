@@ -1,14 +1,31 @@
-<div *ngIf="isLoaded$ | async">
-  <app-tree-node-dropdown
-    *ngIf="nodes$ | async as nodes"
-    [text]="text"
-    valueField="id"
-    [data]="nodes"
-    [showDescription]="showDescription"
-    [formGroup]="formGroup"
-    [formName]="formName"
-    (filterChange)="(filterChange)"
-  >
-  </app-tree-node-dropdown>
-</div>
+<ng-container *ngIf="isLoaded$ | async">
+  <ng-container *ngIf="nodes$ | async as nodes">
+    <app-tree-node-dropdown
+      *ngIf="formGroup"
+      [text]="text"
+      valueField="id"
+      [data]="nodes"
+      [showDescription]="showDescription"
+      [formGroup]="formGroup"
+      [formName]="formName ?? null"
+      [appendTo]="appendTo"
+      (filterChange)="(filterChange)"
+      (valueChange)="onSelectionChange($event)"
+      [clearable]="clearable"
+    >
+    </app-tree-node-dropdown>
+    <app-tree-node-dropdown
+      *ngIf="!formGroup"
+      [text]="text"
+      [data]="nodes"
+      [showDescription]="showDescription"
+      [appendTo]="appendTo"
+      [value]="value"
+      (filterChange)="(filterChange)"
+      (valueChange)="onSelectionChange($event)"
+      [clearable]="clearable"
+    >
+    </app-tree-node-dropdown>
+  </ng-container>
+</ng-container>
 <app-loading *ngIf="(isLoaded$ | async) === false"> </app-loading>

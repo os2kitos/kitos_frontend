@@ -1,0 +1,16 @@
+<app-connected-dropdown-dialog
+  title="Flytning af systemanvendelse"
+  [description]="getTitle()"
+  i18n-title
+  dropdownText="Vælg IT system"
+  i18n-dropdownText
+  [data$]="unusedItSystemsInOrganization$"
+  [isLoading$]="loadingUnusedItSystemsInOrganization$"
+  confirmButtonText="Se konsekvenser"
+  i18n-confirmButtonText
+  [nested]="true"
+  [enableRepeatConfirmWithSameData]="true"
+  (filterChange)="onFilterChange($event)"
+  (save)="onConfirm($event)"
+></app-connected-dropdown-dialog>
+

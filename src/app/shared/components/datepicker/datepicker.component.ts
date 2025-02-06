@@ -21,13 +21,15 @@ export class DatePickerComponent extends BaseFormComponent<Date | undefined> imp
     this.mask?.updateValue();
   }
 
-  private toUtcDate(date: moment.Moment) {
-    const converted = new Date(Date.UTC(date.year(), date.month(), date.date(), 0, 0, 0, 0));
+  private toLocaleUtcDate(date: moment.Moment) {
+    const thisDate = date.utc(true);
+    const converted = new Date(thisDate.year(), thisDate.month(), thisDate.date(), 0, 0, 0);
     return converted;
   }
 
   private extractDate(event: MatDatepickerInputEvent<moment.Moment, unknown>): Date | undefined {
-    return event.value ? this.toUtcDate(moment(event.value)) : undefined;
+    const result = event.value ? this.toLocaleUtcDate(event.value) : undefined;
+    return result;
   }
 
   public dateInputChanged(event: MatDatepickerInputEvent<moment.Moment, unknown>) {
@@ -43,9 +45,10 @@ export class DatePickerComponent extends BaseFormComponent<Date | undefined> imp
   // Due to issue described here: https://github.com/angular/angular/issues/16755 we have to use native control masking to not conflict with the date picker which also interacts with the input field
   // We use imask which is the up-to-date version of the vanilla-text-mask mentioned in the thread.
   public ngAfterViewInit(): void {
-    if (!this.disabled && !this.formGroup?.controls[this.formName ?? '']?.disabled) {
-      setTimeout(() => {
-        this.mask = IMask(this.input.element.nativeElement, {
+    setTimeout(() => {
+      const element = this.input?.element;
+      if (element) {
+        this.mask = IMask(element.nativeElement, {
           lazy: true,
           mask: 'DD-MM-YYYY',
           blocks: {
@@ -66,8 +69,8 @@ export class DatePickerComponent extends BaseFormComponent<Date | undefined> imp
             },
           },
         });
-      });
-    }
+      }
+    });
   }
 
   public override ngOnDestroy() {

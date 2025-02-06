@@ -1,6 +1,11 @@
 @use "@angular/material" as mat;
 @import "theme";
 
+@mixin input-background-white {
+  background-color: white;
+  border-radius: 10px;
+}
+
 @mixin elevation($el: 4, $color: $color-neutral-40) {
   @include mat.elevation($el, $color);
 }
@@ -9,6 +14,25 @@
   @media only screen and (max-width: $content-width-min) {
     @content;
   }
+}
+
+@mixin overview-flex-column-layout {
+  display: flex;
+  flex-direction: column;
+  padding: $padding-large $padding-medium 0 $padding-medium;
+}
+
+@mixin page-flex-layout-max-width {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+@mixin page-flex-layout-max-width-hidden-overflow {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow: hidden;
 }
 
 @mixin mat-input-adjustment {
@@ -182,6 +206,13 @@
         position: absolute;
         bottom: var(--bottom);
         color: $color-neutral;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        .ng-value-label {
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
       }
 
       .ng-input {
@@ -227,6 +258,13 @@
       .ng-input {
         bottom: calc(var(--bottom) - 1px);
       }
+    }
+  }
+
+  //Error state border color
+  &.ng-invalid.ng-touched {
+    .ng-select-container {
+      border-color: $color-negative;
     }
   }
 
@@ -280,6 +318,10 @@
 
       &:hover {
         border-color: $color-neutral-40;
+      }
+
+      .ng-arrow-wrapper {
+        visibility: hidden;
       }
     }
   }
@@ -341,5 +383,232 @@
     }
 
     @include ng-select-adjustment;
+  }
+}
+
+@mixin mat-textbox-input-adjustment() {
+  height: var(--height);
+}
+
+@mixin mat-textbox-overflow-adjustment() {
+  ::ng-deep .mat-mdc-form-field-flex > .mat-mdc-form-field-infix {
+    overflow: hidden;
+  }
+}
+
+@mixin mat-form-sizes() {
+  &.medium {
+    --height: 48px;
+    --font-size: 14px;
+    --offset: 17px;
+    --scale: calc(12 / 14);
+  }
+
+  &.large {
+    --height: 56px;
+    --font-size: 16px;
+    --offset: 20px;
+    --scale: calc(12 / 16);
+  }
+}
+
+@mixin grid-style() {
+  kendo-grid {
+    border-radius: $radius-large;
+    border-color: transparent;
+    height: $content-height;
+  }
+
+  .loading-container {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .items-center-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  :host ::ng-deep {
+    td {
+      overflow: visible !important;
+    }
+
+    tr {
+      cursor: pointer;
+
+      app-status-chip {
+        cursor: pointer;
+      }
+    }
+
+    .k-column-title {
+      color: $color-primary-dark;
+    }
+
+    .k-sort-icon {
+      color: $color-primary-dark;
+      margin-top: -$padding-smaller;
+    }
+
+    .k-filter-row {
+      background-color: $color-white !important;
+    }
+
+    .k-grid-header,
+    .k-grid-header .k-header {
+      background-color: $color-white !important;
+    }
+
+    .k-grid-header .k-header {
+      height: 64px;
+      padding: 0px 16px;
+    }
+
+    .k-column-title {
+      color: $color-primary-dark !important;
+      font-weight: bold;
+    }
+
+    .k-grid-header .mygrid-header-cell {
+      text-align: center;
+      display: table-cell;
+      vertical-align: middle;
+    }
+
+    .k-grid td {
+      border-bottom: 1px solid $color-neutral-20;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .k-svg-i-sort-desc-small,
+    .k-svg-i-sort-asc-small {
+      display: none !important;
+    }
+
+    kendo-pager {
+      border-top: 1px solid $color-neutral-20;
+      background-color: $color-white !important;
+      padding: $padding-small $padding-medium;
+    }
+
+    .k-grid tbody tr {
+      height: 63px !important;
+      position: relative;
+    }
+
+    .k-grid-header td.k-grid-header-sticky,
+    .k-grid-header .k-table-td.k-grid-header-sticky {
+      background-color: $color-white !important;
+      border-left: 1px solid $color-neutral-20;
+      border-right: 0;
+    }
+
+    .k-grid .k-table .k-grid-content-sticky {
+      border-left: 1px solid $color-neutral-20;
+      border-right: 0;
+    }
+
+    .k-grid-header .k-table-th.k-grid-header-sticky {
+      border-left: 1px solid $color-neutral-20;
+      border-right: 0;
+    }
+
+    .k-grid tbody > tr:hover td:first-child {
+      position: relative;
+      overflow: visible;
+    }
+
+    .k-grid tbody > tr:hover td:first-child::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 5px;
+      background-color: $color-primary-base;
+      border-top-right-radius: 10px;
+      border-bottom-right-radius: 10px;
+      z-index: 1;
+      display: block;
+    }
+  }
+  .column-title {
+    color: $color-primary-dark !important;
+    font-weight: bold;
+  }
+
+  .sort-icon {
+    ::ng-deep svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  .paragraph {
+    line-height: 100%;
+    font-size: 14px;
+    color: $color-neutral-dark;
+  }
+
+  .wrap-on-overflow {
+    overflow: hidden;
+    text-overflow: clip;
+    white-space: normal;
+    word-wrap: break-word;
+  }
+
+  .bold-font {
+    font-weight: bold;
+  }
+
+  .column-center-content {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .dropdown-inline-display {
+    display: inline !important;
+  }
+
+  .action-buttons-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+  }
+}
+
+@mixin dialog-footer-no-padding() {
+  .dialog-footer {
+    background-color: $color-white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+    position: sticky;
+    bottom: 0;
+    z-index: 10;
+  }
+}
+
+@mixin dialog-footer-with-padding {
+  @include dialog-footer-no-padding;
+
+  :host ::ng-deep {
+    .content {
+      padding-bottom: 0 !important;
+    }
+  }
+
+  .dialog-footer {
+    padding-bottom: $padding-large + 1;
   }
 }

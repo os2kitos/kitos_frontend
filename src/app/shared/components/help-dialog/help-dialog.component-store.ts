@@ -1,43 +1,58 @@
 import { Injectable } from '@angular/core';
-import { ComponentStore, tapResponse } from '@ngrx/component-store';
+import { ComponentStore } from '@ngrx/component-store';
+import { tapResponse } from '@ngrx/operators';
+
 import { mergeMap, Observable } from 'rxjs';
-import { APIV1ODATAHelpTextsINTERNALService } from 'src/app/api/v1';
-import { defaultHelpText, HelpText } from '../../models/help-text.model';
-import { OData } from '../../models/odata.model';
+import { APIV2HelpTextsInternalINTERNALService } from 'src/app/api/v2/api/v2HelpTextsInternalINTERNAL.service';
+import { adaptHelpText, defaultHelpText, HelpText } from '../../models/help-text.model';
 
 interface State {
   helpText?: HelpText;
+  isEditable: boolean | undefined;
 }
 
 @Injectable()
 export class HelpDialogComponentStore extends ComponentStore<State> {
   public readonly helpText$ = this.select((state) => state.helpText);
+  public readonly isEditable$ = this.select((state) => state.isEditable);
 
-  constructor(private apiOdataHelpTextsService: APIV1ODATAHelpTextsINTERNALService) {
-    super({});
+  constructor(private helpTextsService: APIV2HelpTextsInternalINTERNALService) {
+    super({ isEditable: false });
   }
 
   private updateHelpText = this.updater(
-    (state, helpText: HelpText): State => ({
+    (state, update: { helpText: HelpText, isEditable: boolean }): State => ({
       ...state,
-      helpText,
+      helpText: update.helpText,
+      isEditable: update.isEditable,
     })
   );
 
   public getHelpText = this.effect((helpTextKey$: Observable<string>) =>
     helpTextKey$.pipe(
-      mergeMap((helpTextKey) =>
-        this.apiOdataHelpTextsService
-          .getSingleHelpTextsGetV1({
-            $filter: `Key eq '${helpTextKey}'`,
+      mergeMap((key) =>
+        this.helpTextsService
+          .getSingleHelpTextsInternalV2GetSingle({
+            key,
           })
           .pipe(
             tapResponse(
-              (response) => this.updateHelpText((response as OData).value.pop() || defaultHelpText),
-              (e) => console.error(e)
+              (response) => {
+                try {
+                  this.updateHelpText({ helpText: adaptHelpText(response), isEditable: true });
+                } catch (e) {
+                  this.handleError(e);
+                }
+              },
+              (e) => this.handleError(e)
             )
           )
       )
     )
   );
+
+  private handleError(e: unknown){
+    console.error(e);
+    this.updateHelpText({ helpText: defaultHelpText, isEditable: false });
+  }
 }

@@ -1,0 +1,6 @@
+@import "mixins";
+@import "theme";
+
+:host {
+  @include page-flex-layout-max-width;
+}

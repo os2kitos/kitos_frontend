@@ -1,0 +1,18 @@
+<ng-container *ngIf="options && options.length > 0">
+  <ng-container *ngIf="formGroup && formName">
+    <app-standard-vertical-content-grid [withGap]="false">
+      <label *ngIf="text">{{ text }}</label>
+      <div [formGroup]="formGroup">
+        <mat-radio-group [formControlName]="formName" [value]="value" (change)="changeSelectedOption($event.value)">
+          <mat-radio-button
+            [disableRipple]="true"
+            *ngFor="let option of options"
+            [value]="option.id"
+            [disabled]="disabled"
+            >{{ option.label }}</mat-radio-button
+          >
+        </mat-radio-group>
+      </div>
+    </app-standard-vertical-content-grid>
+  </ng-container>
+</ng-container>

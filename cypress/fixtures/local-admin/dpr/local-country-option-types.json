@@ -1,0 +1,18 @@
+[
+  {
+      "isActive": true,
+      "isObligatory": true,
+      "isLocallyAvailable": false,
+      "description": null,
+      "uuid": "38997c13-fb99-4eda-9631-9738b7d7cab7",
+      "name": "Danmark"
+  },
+  {
+      "isActive": true,
+      "isObligatory": true,
+      "isLocallyAvailable": false,
+      "description": null,
+      "uuid": "9cfeb320-c683-4ceb-8672-1e92fee8510a",
+      "name": "EU"
+  }
+]

@@ -73,14 +73,48 @@
             },
             "sourceMap": false,
             "outputHashing": "all",
-            "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/styles/styles.scss"],
-            "scripts": [],
+            "assets": [
+              "src/favicon.ico",
+              "src/assets",
+              "src/tinymce",
+              {
+                "glob": "**/*",
+                "input": "node_modules/tinymce",
+                "output": "/tinymce/"
+              },
+              {
+                "glob": "**/*",
+                "input": "node_modules/tinymce/icons",
+                "output": "/tinymce/icons/"
+              },
+              {
+                "glob": "**/*",
+                "input": "node_modules/tinymce/skins",
+                "output": "/tinymce/skins/"
+              },
+              {
+                "glob": "**/*",
+                "input": "node_modules/tinymce/themes",
+                "output": "/tinymce/themes/"
+              },
+              {
+                "glob": "**/*",
+                "input": "node_modules/tinymce/plugins",
+                "output": "/tinymce/plugins/"
+              }
+            ],
+            "styles": [
+              {
+                "input": "node_modules/@progress/kendo-theme-default/dist/all.css"
+              },
+              "src/styles/styles.scss"
+            ],
+            "scripts": ["node_modules/tinymce/tinymce.min.js"],
             "budgets": [
               {
                 "type": "initial",
-                "maximumWarning": "3mb",
-                "maximumError": "4mb"
+                "maximumWarning": "4mb",
+                "maximumError": "6mb"
               },
               {
                 "type": "anyComponentStyle",
@@ -149,11 +183,11 @@
           "builder": "@angular-builders/custom-webpack:dev-server",
           "configurations": {
             "ci": {
-              "browserTarget": "kitos-web:build:ci,da",
+              "buildTarget": "kitos-web:build:ci,da",
               "proxyConfig": "src/proxy.conf.json"
             },
             "development": {
-              "browserTarget": "kitos-web:build:development,da",
+              "buildTarget": "kitos-web:build:development,da",
               "proxyConfig": "src/proxy.conf.json"
             }
           },

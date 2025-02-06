@@ -1,0 +1,22 @@
+<ng-container>
+  <div *ngIf="title" class="header" [ngClass]="{ nested: nested }">
+    <app-button *ngIf="nested" class="arrow-button" buttonStyle="tertiary" (buttonClick)="close()">
+      <app-arrow-left-icon></app-arrow-left-icon>
+    </app-button>
+    <div class="container">
+      <h3 class="title-align-bottom">
+        <span class="title-container">
+          {{ title }}
+        </span>
+      </h3>
+      <app-help-button
+        [helpTextKey]="helpText"
+        [ngClass]="{ 'hide-help-button': !helpText }"
+      ></app-help-button>
+    </div>
+  </div>
+</ng-container>
+
+<app-button class="close-button" buttonStyle="tertiary" (buttonClick)="close()" *ngIf="closable"
+  ><app-x-icon></app-x-icon
+></app-button>

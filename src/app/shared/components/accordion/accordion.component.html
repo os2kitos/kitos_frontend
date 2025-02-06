@@ -1,0 +1,25 @@
+<mat-accordion>
+  <mat-expansion-panel [disabled]="disabled" [expanded]="isExpanded" (expandedChange)="onExpandedChanged($event)">
+    <mat-expansion-panel-header data-cy="accordion-header">
+      <mat-panel-title>
+        <app-checkbox
+          *ngIf="checkboxInTitle"
+          [disabled]="checkboxDisabled"
+          [value]="checkboxValue"
+          (valueChange)="onCheckboxToggled($event)"
+          (click)="$event.stopPropagation()"
+          data-cy="accordion-checkbox"
+        >
+        </app-checkbox>
+        <app-paragraph [bold]="true" paragraphSize="large">{{ title }}</app-paragraph>
+
+        <app-tooltip data-cy="accordion-info" *ngIf="tooltipText" [text]="tooltipText" class="tooltip-margin">
+          <app-info-icon ></app-info-icon>
+        </app-tooltip>
+
+        <ng-content class="accordion-header" select="app-accordion-header"></ng-content>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <ng-content></ng-content>
+  </mat-expansion-panel>
+</mat-accordion>

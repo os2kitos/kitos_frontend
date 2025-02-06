@@ -1,18 +1,30 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
+import { Inject, Injectable } from '@angular/core';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { compact, uniq } from 'lodash';
 import { catchError, map, mergeMap, of, switchMap } from 'rxjs';
+import { APIBusinessRoleDTO, APIV1ItSystemUsageOptionsINTERNALService } from 'src/app/api/v1';
 import {
-  APIUpdateExternalReferenceDataWriteRequestDTO,
+  APIItSystemUsageResponseDTO,
   APIUpdateItSystemUsageRequestDTO,
+  APIV2ItSystemUsageInternalINTERNALService,
   APIV2ItSystemUsageService,
+  APIV2OrganizationGridInternalINTERNALService,
 } from 'src/app/api/v2';
-import { toODataString } from 'src/app/shared/models/grid-state.model';
-import { adaptITSystemUsage } from 'src/app/shared/models/it-system-usage.model';
+import { USAGE_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-constants';
+import { hasValidCache } from 'src/app/shared/helpers/date.helpers';
+import { usageGridStateToAction } from 'src/app/shared/helpers/grid-filter.helpers';
+import { castContainsFieldToString } from 'src/app/shared/helpers/odata-query.helpers';
+import { convertDataSensitivityLevelStringToNumberMap } from 'src/app/shared/models/it-system-usage/gdpr/data-sensitivity-level.model';
+import { adaptITSystemUsage } from 'src/app/shared/models/it-system-usage/it-system-usage.model';
 import { OData } from 'src/app/shared/models/odata.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
+import { ExternalReferencesApiService } from 'src/app/shared/services/external-references-api-service.service';
+import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
+import { GridDataCacheService } from 'src/app/shared/services/grid-data-cache.service';
+import { getNewGridColumnsBasedOnConfig } from '../helpers/grid-config-helper';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { ITSystemUsageActions } from './actions';
 import {
@@ -22,6 +34,10 @@ import {
   selectItSystemUsageResponsibleUnit,
   selectItSystemUsageUsingOrganizationUnits,
   selectItSystemUsageUuid,
+  selectOverviewSystemRoles,
+  selectOverviewSystemRolesCache,
+  selectPreviousGridState,
+  selectUsageGridColumns,
 } from './selectors';
 
 @Injectable()
@@ -30,43 +46,102 @@ export class ITSystemUsageEffects {
     private actions$: Actions,
     private store: Store,
     private httpClient: HttpClient,
-    private apiV2ItSystemUsageService: APIV2ItSystemUsageService
+    @Inject(APIV2ItSystemUsageService)
+    private apiV2ItSystemUsageService: APIV2ItSystemUsageService,
+    @Inject(APIV2ItSystemUsageInternalINTERNALService)
+    private apiV2ItSystemUsageInternalService: APIV2ItSystemUsageInternalINTERNALService,
+    private externalReferencesApiService: ExternalReferencesApiService,
+    private gridColumnStorageService: GridColumnStorageService,
+    @Inject(APIV1ItSystemUsageOptionsINTERNALService)
+    private apiItSystemUsageOptionsService: APIV1ItSystemUsageOptionsINTERNALService,
+    @Inject(APIV2OrganizationGridInternalINTERNALService)
+    private apiV2organizationalGridInternalService: APIV2OrganizationGridInternalINTERNALService,
+    private gridDataCacheService: GridDataCacheService
   ) {}
 
   getItSystemUsages$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(ITSystemUsageActions.getItSystemUsages),
-      concatLatestFrom(() => this.store.select(selectOrganizationUuid)),
-      switchMap(([{ odataString }, organizationUuid]) =>
-        this.httpClient
-          .get<OData>(`/odata/ItSystemUsageOverviewReadModels?organizationUuid=${organizationUuid}&${odataString}`)
-          .pipe(
-            map((data) =>
-              ITSystemUsageActions.getItSystemUsagesSuccess(
-                compact(data.value.map(adaptITSystemUsage)),
-                data['@odata.count']
-              )
-            ),
-            catchError(() => of(ITSystemUsageActions.getItSystemUsagesError()))
+      ofType(ITSystemUsageActions.getITSystemUsages),
+      concatLatestFrom(() => [
+        this.store.select(selectOrganizationUuid),
+        this.store.select(selectOverviewSystemRoles),
+        this.store.select(selectPreviousGridState),
+      ]),
+      switchMap(([{ gridState, responsibleUnitUuid }, organizationUuid, systemRoles, previousGridState]) => {
+        this.gridDataCacheService.tryResetOnGridStateChange(gridState, previousGridState);
+
+        const cachedRange = this.gridDataCacheService.get(gridState);
+        if (cachedRange.data !== undefined) {
+          return of(ITSystemUsageActions.getITSystemUsagesSuccess(cachedRange.data, cachedRange.total));
+        }
+
+        const cacheableOdataString = this.gridDataCacheService.toChunkedODataString(gridState, { utcDates: true });
+        const fixedOdataString = applyQueryFixes(cacheableOdataString, systemRoles);
+
+        return this.httpClient
+          .get<OData>(
+            `/odata/ItSystemUsageOverviewReadModels?organizationUuid=${organizationUuid}&$expand=RoleAssignments,DataProcessingRegistrations,DependsOnInterfaces,IncomingRelatedItSystemUsages,OutgoingRelatedItSystemUsages,AssociatedContracts&responsibleOrganizationUnitUuid=${responsibleUnitUuid}&${fixedOdataString}&$count=true`
           )
-      )
+          .pipe(
+            map((data) => {
+              const dataItems = compact(data.value.map(adaptITSystemUsage));
+              const total = data['@odata.count'];
+              this.gridDataCacheService.set(gridState, dataItems, total);
+
+              const returnData = this.gridDataCacheService.gridStateSliceFromArray(dataItems, gridState);
+              return ITSystemUsageActions.getITSystemUsagesSuccess(returnData, total);
+            }),
+            catchError(() => of(ITSystemUsageActions.getITSystemUsagesError()))
+          );
+      })
     );
   });
 
   updateGridState$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.updateGridState),
-      map(({ gridState }) => ITSystemUsageActions.getItSystemUsages(toODataString(gridState)))
+      map(({ gridState }) => {
+        return usageGridStateToAction(gridState);
+      })
+    );
+  });
+
+  updateGridColumns$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.updateGridColumns),
+      map(({ gridColumns }) => {
+        this.gridColumnStorageService.setColumns(USAGE_COLUMNS_ID, gridColumns);
+        return ITSystemUsageActions.updateGridColumnsSuccess(gridColumns);
+      })
+    );
+  });
+
+  getItSystemUsageOverviewRoles = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.getItSystemUsageOverviewRoles),
+      concatLatestFrom(() => [
+        this.store.select(selectOrganizationUuid).pipe(filterNullish()),
+        this.store.select(selectOverviewSystemRolesCache),
+      ]),
+      switchMap(([_, organizationUuid, cache]) => {
+        if (hasValidCache(cache.cacheTime)) {
+          return of(ITSystemUsageActions.getItSystemUsageOverviewRolesSuccess(cache.value));
+        }
+        return this.apiItSystemUsageOptionsService.getSingleItSystemUsageOptionsGetByUuid({ organizationUuid }).pipe(
+          map((options) => ITSystemUsageActions.getItSystemUsageOverviewRolesSuccess(options.response.systemRoles)),
+          catchError(() => of(ITSystemUsageActions.getItSystemUsageOverviewRolesError()))
+        );
+      })
     );
   });
 
   getItSystemUsage$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(ITSystemUsageActions.getItSystemUsage),
+      ofType(ITSystemUsageActions.getITSystemUsage),
       switchMap(({ systemUsageUuid }) =>
         this.apiV2ItSystemUsageService.getSingleItSystemUsageV2GetItSystemUsage({ systemUsageUuid }).pipe(
-          map((itSystemUsage) => ITSystemUsageActions.getItSystemUsageSuccess(itSystemUsage)),
-          catchError(() => of(ITSystemUsageActions.getItSystemUsageError()))
+          map((itSystemUsage) => ITSystemUsageActions.getITSystemUsageSuccess(itSystemUsage)),
+          catchError(() => of(ITSystemUsageActions.getITSystemUsageError()))
         )
       )
     );
@@ -74,14 +149,14 @@ export class ITSystemUsageEffects {
 
   removeItSystemUsage$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(ITSystemUsageActions.removeItSystemUsage),
+      ofType(ITSystemUsageActions.removeITSystemUsage),
       concatLatestFrom(() => this.store.select(selectItSystemUsageUuid)),
       switchMap(([_, systemUsageUuid]) => {
-        if (!systemUsageUuid) return of(ITSystemUsageActions.removeItSystemUsageError());
+        if (!systemUsageUuid) return of(ITSystemUsageActions.removeITSystemUsageError());
 
         return this.apiV2ItSystemUsageService.deleteSingleItSystemUsageV2DeleteItSystemUsage({ systemUsageUuid }).pipe(
-          map(() => ITSystemUsageActions.removeItSystemUsageSuccess()),
-          catchError(() => of(ITSystemUsageActions.removeItSystemUsageError()))
+          map(() => ITSystemUsageActions.removeITSystemUsageSuccess()),
+          catchError(() => of(ITSystemUsageActions.removeITSystemUsageError()))
         );
       })
     );
@@ -89,7 +164,7 @@ export class ITSystemUsageEffects {
 
   removeItSystemUsageUsingUnit$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(ITSystemUsageActions.removeItSystemUsageUsingUnit),
+      ofType(ITSystemUsageActions.removeITSystemUsageUsingUnit),
       concatLatestFrom(() => [
         this.store.select(selectItSystemUsageResponsibleUnit),
         this.store.select(selectItSystemUsageUsingOrganizationUnits),
@@ -103,17 +178,17 @@ export class ITSystemUsageEffects {
           },
         } as APIUpdateItSystemUsageRequestDTO;
 
-        return of(ITSystemUsageActions.patchItSystemUsage(requestBody, $localize`Relevant organisationsenhed fjernet`));
+        return of(ITSystemUsageActions.patchITSystemUsage(requestBody, $localize`Relevant organisationsenhed fjernet`));
       })
     );
   });
 
   patchItSystemUsage$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(ITSystemUsageActions.patchItSystemUsage),
+      ofType(ITSystemUsageActions.patchITSystemUsage),
       concatLatestFrom(() => this.store.select(selectItSystemUsageUuid)),
       mergeMap(([{ itSystemUsage, customSuccessText, customErrorText }, systemUsageUuid]) => {
-        if (!systemUsageUuid) return of(ITSystemUsageActions.patchItSystemUsageError(customErrorText));
+        if (!systemUsageUuid) return of(ITSystemUsageActions.patchITSystemUsageError(customErrorText));
 
         return this.apiV2ItSystemUsageService
           .patchSingleItSystemUsageV2PatchSystemUsage({
@@ -122,9 +197,9 @@ export class ITSystemUsageEffects {
           })
           .pipe(
             map((itSystemUsage) => {
-              return ITSystemUsageActions.patchItSystemUsageSuccess(itSystemUsage, customSuccessText);
+              return ITSystemUsageActions.patchITSystemUsageSuccess(itSystemUsage, customSuccessText);
             }),
-            catchError(() => of(ITSystemUsageActions.patchItSystemUsageError(customErrorText)))
+            catchError(() => of(ITSystemUsageActions.patchITSystemUsageError(customErrorText)))
           );
       })
     );
@@ -132,12 +207,27 @@ export class ITSystemUsageEffects {
 
   getItSystemUsagePermissions$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(ITSystemUsageActions.getItSystemUsagePermissions),
+      ofType(ITSystemUsageActions.getITSystemUsagePermissions),
       switchMap(({ systemUsageUuid }) =>
         this.apiV2ItSystemUsageService.getSingleItSystemUsageV2GetItSystemUsagePermissions({ systemUsageUuid }).pipe(
-          map((permissions) => ITSystemUsageActions.getItSystemUsagePermissionsSuccess(permissions)),
-          catchError(() => of(ITSystemUsageActions.getItSystemUsagePermissionsError()))
+          map((permissions) => ITSystemUsageActions.getITSystemUsagePermissionsSuccess(permissions)),
+          catchError(() => of(ITSystemUsageActions.getITSystemUsagePermissionsError()))
         )
+      )
+    );
+  });
+
+  getItSystemUsageCollectionPermissions$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.getITSystemUsageCollectionPermissions),
+      concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+      switchMap(([_, organizationUuid]) =>
+        this.apiV2ItSystemUsageService
+          .getSingleItSystemUsageV2GetItSystemUsageCollectionPermissions({ organizationUuid })
+          .pipe(
+            map((permissions) => ITSystemUsageActions.getITSystemUsageCollectionPermissionsSuccess(permissions)),
+            catchError(() => of(ITSystemUsageActions.getITSystemUsageCollectionPermissionsError()))
+          )
       )
     );
   });
@@ -163,15 +253,16 @@ export class ITSystemUsageEffects {
   removeItSystemUsageRole$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.removeItSystemUsageRole),
-      concatLatestFrom(() => this.store.select(selectItSystemUsageUuid).pipe(filterNullish())),
-      mergeMap(([{ userUuid, roleUuid }, usageUuid]) =>
+      mergeMap(({ userUuid, roleUuid, itSystemUsageUuid }) =>
         this.apiV2ItSystemUsageService
           .patchSingleItSystemUsageV2PatchRemoveRoleAssignment({
-            systemUsageUuid: usageUuid,
+            systemUsageUuid: itSystemUsageUuid,
             request: { userUuid: userUuid, roleUuid: roleUuid },
           })
           .pipe(
-            map((usage) => ITSystemUsageActions.removeItSystemUsageRoleSuccess(usage)),
+            map((usage) =>
+              ITSystemUsageActions.removeItSystemUsageRoleSuccess(usage, userUuid, roleUuid, itSystemUsageUuid)
+            ),
             catchError(() => of(ITSystemUsageActions.removeItSystemUsageRoleError()))
           )
       )
@@ -180,7 +271,7 @@ export class ITSystemUsageEffects {
 
   addLocalKle$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(ITSystemUsageActions.addLocalKle),
+      ofType(ITSystemUsageActions.addLocalKLE),
       concatLatestFrom(() => [
         this.store.select(selectItSystemUsageLocallyAddedKleUuids),
         this.store.select(selectItSystemUsageUuid),
@@ -191,7 +282,7 @@ export class ITSystemUsageEffects {
           const allAddedKleIncludingCurrent = [...currentKle, addedKle.kleUuid];
 
           return of(
-            ITSystemUsageActions.patchItSystemUsage(
+            ITSystemUsageActions.patchITSystemUsage(
               {
                 localKleDeviations: {
                   addedKLEUuids: uniq(allAddedKleIncludingCurrent),
@@ -209,7 +300,7 @@ export class ITSystemUsageEffects {
 
   removeLocalKle$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(ITSystemUsageActions.removeLocalKle),
+      ofType(ITSystemUsageActions.removeLocalKLE),
       concatLatestFrom(() => [
         this.store.select(selectItSystemUsageLocallyAddedKleUuids),
         this.store.select(selectItSystemUsageUuid),
@@ -220,7 +311,7 @@ export class ITSystemUsageEffects {
           const allAddedKleIncludingCurrent = currentKle.filter((uuid) => uuid !== addedKleToRemove.kleUuid);
 
           return of(
-            ITSystemUsageActions.patchItSystemUsage(
+            ITSystemUsageActions.patchITSystemUsage(
               {
                 localKleDeviations: {
                   addedKLEUuids: uniq(allAddedKleIncludingCurrent),
@@ -238,7 +329,7 @@ export class ITSystemUsageEffects {
 
   removeInheritedKle$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(ITSystemUsageActions.removeInheritedKle),
+      ofType(ITSystemUsageActions.removeInheritedKLE),
       concatLatestFrom(() => [
         this.store.select(selectItSystemUsageLocallyRemovedKleUuids),
         this.store.select(selectItSystemUsageUuid),
@@ -249,7 +340,7 @@ export class ITSystemUsageEffects {
           const removedKleUuids = [...currentState, inheritedKleToRemove.kleUuid];
 
           return of(
-            ITSystemUsageActions.patchItSystemUsage(
+            ITSystemUsageActions.patchITSystemUsage(
               {
                 localKleDeviations: {
                   removedKLEUuids: uniq(removedKleUuids),
@@ -267,7 +358,7 @@ export class ITSystemUsageEffects {
 
   restoreInheritedKle$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(ITSystemUsageActions.restoreInheritedKle),
+      ofType(ITSystemUsageActions.restoreInheritedKLE),
       concatLatestFrom(() => [
         this.store.select(selectItSystemUsageLocallyRemovedKleUuids),
         this.store.select(selectItSystemUsageUuid),
@@ -278,7 +369,7 @@ export class ITSystemUsageEffects {
           const removedKleUuids = currentState.filter((uuid) => uuid !== inheritedKleToRestore.kleUuid);
 
           return of(
-            ITSystemUsageActions.patchItSystemUsage(
+            ITSystemUsageActions.patchITSystemUsage(
               {
                 localKleDeviations: {
                   removedKLEUuids: uniq(removedKleUuids),
@@ -357,34 +448,17 @@ export class ITSystemUsageEffects {
         this.store.select(selectItSystemUsageUuid),
       ]),
       mergeMap(([newExternalReference, externalReferences, systemUsageUuid]) => {
-        if (newExternalReference && externalReferences && systemUsageUuid) {
-          const externalReferenceToAdd = newExternalReference.externalReference;
-          const nextState = externalReferences.map<APIUpdateExternalReferenceDataWriteRequestDTO>(
-            (externalReference) => ({
-              ...externalReference,
-              //If the new reference is master we must reset the existing as the api dictates to provide only one
-              masterReference: !externalReferenceToAdd.isMasterReference && externalReference.masterReference,
-            })
+        return this.externalReferencesApiService
+          .addExternalReference<APIItSystemUsageResponseDTO>(
+            newExternalReference.externalReference,
+            externalReferences,
+            systemUsageUuid,
+            'it-system-usage'
+          )
+          .pipe(
+            map((response) => ITSystemUsageActions.addExternalReferenceSuccess(response)),
+            catchError(() => of(ITSystemUsageActions.addExternalReferenceError()))
           );
-          //Add the new reference
-          nextState.push({
-            ...externalReferenceToAdd,
-            masterReference: externalReferenceToAdd.isMasterReference,
-          });
-
-          return this.apiV2ItSystemUsageService
-            .patchSingleItSystemUsageV2PatchSystemUsage({
-              systemUsageUuid: systemUsageUuid,
-              request: {
-                externalReferences: nextState,
-              },
-            })
-            .pipe(
-              map((response) => ITSystemUsageActions.addExternalReferenceSuccess(response)),
-              catchError(() => of(ITSystemUsageActions.addExternalReferenceError()))
-            );
-        }
-        return of(ITSystemUsageActions.addExternalReferenceError());
       })
     );
   });
@@ -397,39 +471,17 @@ export class ITSystemUsageEffects {
         this.store.select(selectItSystemUsageUuid),
       ]),
       mergeMap(([editData, externalReferences, systemUsageUuid]) => {
-        if (editData && externalReferences && systemUsageUuid) {
-          const externalReferenceToEdit = editData.externalReference;
-          const nextState = externalReferences.map<APIUpdateExternalReferenceDataWriteRequestDTO>(
-            (externalReference) => {
-              //Map changes to the edited
-              if (externalReference.uuid === editData.referenceUuid) {
-                return {
-                  ...externalReferenceToEdit,
-                  masterReference: externalReferenceToEdit.isMasterReference,
-                };
-              } else {
-                return {
-                  ...externalReference,
-                  //If the edited reference is master we must reset the existing as the api dictates to provide only one
-                  masterReference: !externalReferenceToEdit.isMasterReference && externalReference.masterReference,
-                };
-              }
-            }
+        return this.externalReferencesApiService
+          .editExternalReference<APIItSystemUsageResponseDTO>(
+            editData,
+            externalReferences,
+            systemUsageUuid,
+            'it-system-usage'
+          )
+          .pipe(
+            map((response) => ITSystemUsageActions.editExternalReferenceSuccess(response)),
+            catchError(() => of(ITSystemUsageActions.editExternalReferenceError()))
           );
-
-          return this.apiV2ItSystemUsageService
-            .patchSingleItSystemUsageV2PatchSystemUsage({
-              systemUsageUuid: systemUsageUuid,
-              request: {
-                externalReferences: nextState,
-              },
-            })
-            .pipe(
-              map((response) => ITSystemUsageActions.editExternalReferenceSuccess(response)),
-              catchError(() => of(ITSystemUsageActions.editExternalReferenceError()))
-            );
-        }
-        return of(ITSystemUsageActions.editExternalReferenceError());
       })
     );
   });
@@ -442,28 +494,242 @@ export class ITSystemUsageEffects {
         this.store.select(selectItSystemUsageUuid),
       ]),
       mergeMap(([referenceUuid, externalReferences, systemUsageUuid]) => {
-        if (referenceUuid && externalReferences && systemUsageUuid) {
-          const currentState = externalReferences.map<APIUpdateExternalReferenceDataWriteRequestDTO>(
-            (externalReference) => ({
-              ...externalReference,
-            })
+        return this.externalReferencesApiService
+          .deleteExternalReference<APIItSystemUsageResponseDTO>(
+            referenceUuid.referenceUuid,
+            externalReferences,
+            systemUsageUuid,
+            'it-system-usage'
+          )
+          .pipe(
+            map((response) => ITSystemUsageActions.removeExternalReferenceSuccess(response)),
+            catchError(() => of(ITSystemUsageActions.removeExternalReferenceError()))
           );
-          const nextState = currentState.filter((reference) => reference.uuid !== referenceUuid.referenceUuid);
-
-          return this.apiV2ItSystemUsageService
-            .patchSingleItSystemUsageV2PatchSystemUsage({
-              systemUsageUuid: systemUsageUuid,
-              request: {
-                externalReferences: nextState,
-              },
-            })
-            .pipe(
-              map((response) => ITSystemUsageActions.removeExternalReferenceSuccess(response)),
-              catchError(() => of(ITSystemUsageActions.removeExternalReferenceError()))
-            );
-        }
-        return of(ITSystemUsageActions.removeExternalReferenceError());
       })
     );
   });
+
+  removeItSystemUsageJournalPeriod$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.removeItSystemUsageJournalPeriod),
+      concatLatestFrom(() => this.store.select(selectItSystemUsageUuid).pipe(filterNullish())),
+      mergeMap(([{ journalPeriodUuid }, usageUuid]) =>
+        this.apiV2ItSystemUsageService
+          .deleteSingleItSystemUsageV2DeleteJournalPeriod({
+            systemUsageUuid: usageUuid,
+            journalPeriodUuid: journalPeriodUuid,
+          })
+          .pipe(
+            map(() => ITSystemUsageActions.removeItSystemUsageJournalPeriodSuccess(usageUuid)),
+            catchError(() => of(ITSystemUsageActions.removeItSystemUsageJournalPeriodError()))
+          )
+      )
+    );
+  });
+
+  addItSystemUsageJournalPeriod$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.addItSystemUsageJournalPeriod),
+      concatLatestFrom(() => this.store.select(selectItSystemUsageUuid).pipe(filterNullish())),
+      mergeMap(([{ journalPeriod }, usageUuid]) =>
+        this.apiV2ItSystemUsageService
+          .postSingleItSystemUsageV2PostJournalPeriod({
+            systemUsageUuid: usageUuid,
+            request: journalPeriod,
+          })
+          .pipe(
+            map((_) => ITSystemUsageActions.addItSystemUsageJournalPeriodSuccess(usageUuid)),
+            catchError(() => of(ITSystemUsageActions.addItSystemUsageJournalPeriodError()))
+          )
+      )
+    );
+  });
+
+  patchItSystemUsageJournalPeriod$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.patchItSystemUsageJournalPeriod),
+      concatLatestFrom(() => this.store.select(selectItSystemUsageUuid).pipe(filterNullish())),
+      mergeMap(([{ journalPeriodUuid, journalPeriod }, usageUuid]) =>
+        this.apiV2ItSystemUsageService
+          .putSingleItSystemUsageV2PutJournalPeriod({
+            systemUsageUuid: usageUuid,
+            journalPeriodUuid: journalPeriodUuid,
+            request: journalPeriod,
+          })
+          .pipe(
+            map((_) => ITSystemUsageActions.patchItSystemUsageJournalPeriodSuccess(usageUuid)),
+            catchError(() => of(ITSystemUsageActions.patchItSystemUsageJournalPeriodError()))
+          )
+      )
+    );
+  });
+
+  createItSystemUsage$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.createItSystemUsage),
+      concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
+      switchMap(([{ itSystemUuid }, organizationUuid]) =>
+        this.apiV2ItSystemUsageService
+          .postSingleItSystemUsageV2PostItSystemUsage({ request: { systemUuid: itSystemUuid, organizationUuid } })
+          .pipe(
+            map((usage: APIItSystemUsageResponseDTO) =>
+              ITSystemUsageActions.createItSystemUsageSuccess(itSystemUuid, usage.uuid)
+            ),
+            catchError(() => of(ITSystemUsageActions.createItSystemUsageError()))
+          )
+      )
+    );
+  });
+
+  deleteItSystemUsageByItSystemAndOrganization$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganization),
+      concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
+      switchMap(([{ itSystemUuid }, organizationUuid]) =>
+        this.apiV2ItSystemUsageInternalService
+          .deleteSingleItSystemUsageInternalV2DeleteItSystemUsageByOrganizationUuidAndSystemUuid({
+            organizationUuid,
+            systemUuid: itSystemUuid,
+          })
+          .pipe(
+            map(() => ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganizationSuccess(itSystemUuid)),
+            catchError(() => of(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganizationError()))
+          )
+      )
+    );
+  });
+
+  saveOrganizationalITSystemUsageColumnConfiguration$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.saveOrganizationalITSystemUsageColumnConfiguration),
+      concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
+      switchMap(([{ columnConfig }, organizationUuid]) =>
+        this.apiV2organizationalGridInternalService
+          .postSingleOrganizationGridInternalV2SaveGridConfiguration({
+            organizationUuid,
+            overviewType: 'ItSystemUsage',
+            config: {
+              visibleColumns: columnConfig,
+            },
+          })
+          .pipe(
+            map(() => ITSystemUsageActions.saveOrganizationalITSystemUsageColumnConfigurationSuccess()),
+            catchError(() => of(ITSystemUsageActions.saveOrganizationalITSystemUsageColumnConfigurationError()))
+          )
+      )
+    );
+  });
+
+  deleteOrganizationalITSystemUsageColumnConfiguration$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.deleteOrganizationalITSystemUsageColumnConfiguration),
+      concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
+      switchMap(([_, organizationUuid]) =>
+        this.apiV2organizationalGridInternalService
+          .deleteSingleOrganizationGridInternalV2DeleteGridConfiguration({
+            organizationUuid,
+            overviewType: 'ItSystemUsage',
+          })
+          .pipe(
+            map(() => ITSystemUsageActions.deleteOrganizationalITSystemUsageColumnConfigurationSuccess()),
+            catchError(() => of(ITSystemUsageActions.deleteOrganizationalITSystemUsageColumnConfigurationError()))
+          )
+      )
+    );
+  });
+
+  resetToOrganizationalITSystemUsageColumnConfiguration$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfiguration),
+      concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
+      switchMap(([_, organizationUuid]) =>
+        this.apiV2organizationalGridInternalService
+          .getSingleOrganizationGridInternalV2GetGridConfiguration({
+            organizationUuid,
+            overviewType: 'ItSystemUsage',
+          })
+          .pipe(
+            map((response) =>
+              ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationSuccess(response)
+            ),
+            catchError(() => of(ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationError()))
+          )
+      )
+    );
+  });
+
+  resetToOrganizationITSystemUsageColumnConfigurationSuccess$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationSuccess),
+      concatLatestFrom(() => [this.store.select(selectUsageGridColumns)]),
+      map(([{ response }, columns]) => {
+        const configColumns = response?.visibleColumns;
+        if (!configColumns) return ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationError();
+        const newColumns = getNewGridColumnsBasedOnConfig(configColumns, columns);
+        return ITSystemUsageActions.updateGridColumns(newColumns);
+      })
+    );
+  });
+
+  initializeITSystemUsageLastSeenGridConfig$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.initializeITSystemUsageLastSeenGridConfiguration),
+      concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
+      switchMap(([_, organizationUuid]) =>
+        this.apiV2organizationalGridInternalService
+          .getSingleOrganizationGridInternalV2GetGridConfiguration({
+            organizationUuid,
+            overviewType: 'ItSystemUsage',
+          })
+          .pipe(
+            map((response) => ITSystemUsageActions.initializeITSystemUsageLastSeenGridConfigurationSuccess(response)),
+            catchError(() => of(ITSystemUsageActions.initializeITSystemUsageLastSeenGridConfigurationError()))
+          )
+      )
+    );
+  });
+}
+
+function applyQueryFixes(odataString: string, systemRoles: APIBusinessRoleDTO[] | undefined) {
+  let convertedString = odataString
+    .replace(/(\w+\()ItSystemKLEIdsAsCsv(.*\))/, 'ItSystemTaskRefs/any(a: $1a/KLEId$2)')
+    .replace(/(\w+\()ItSystemKLENamesAsCsv(.*\))/, 'ItSystemTaskRefs/any(b: $1b/KLEName$2)')
+    .replace(
+      new RegExp(`SensitiveDataLevelsAsCsv eq ('\\w+')`, 'i'),
+      (_, p1) =>
+        `SensitiveDataLevels/any(c: c/SensitivityDataLevel eq '${convertDataSensitivityLevelStringToNumberMap(
+          p1.replace(/'/g, '')
+        )}')`
+    )
+    .replace(
+      /(\w+\()DataProcessingRegistrationNamesAsCsv(.*\))/,
+      'DataProcessingRegistrations/any(d: $1d/DataProcessingRegistrationName$2)'
+    )
+    .replace(/(\w+\()DependsOnInterfacesNamesAsCsv(.*\))/, 'DependsOnInterfaces/any(e: $1e/InterfaceName$2)')
+    .replace(
+      /(\w+\()IncomingRelatedItSystemUsagesNamesAsCsv(.*\))/,
+      'IncomingRelatedItSystemUsages/any(f: $1f/ItSystemUsageName$2)'
+    )
+    .replace(
+      /RelevantOrganizationUnitNamesAsCsv eq '([\w-]+)'/,
+      'RelevantOrganizationUnits/any(g: g/OrganizationUnitUuid eq $1)'
+    )
+    .replace(/(\w+\()AssociatedContractsNamesCsv(.*\))/, 'AssociatedContracts/any(h: $1h/ItContractName$2)')
+    .replace(/ItSystemBusinessTypeUuid eq '([\w-]+)'/, 'ItSystemBusinessTypeUuid eq $1')
+    .replace(/ItSystemCategoriesUuid eq '([\w-]+)'/, 'ItSystemCategoriesUuid eq $1')
+    .replace(
+      new RegExp(`DataProcessingRegistrationsConcludedAsCsv eq ('[^']+')`, 'i'),
+      'contains(DataProcessingRegistrationsConcludedAsCsv, $1)'
+    );
+
+  convertedString = castContainsFieldToString(convertedString, 'ExternalSystemUuid');
+
+  systemRoles?.forEach((role) => {
+    convertedString = convertedString.replace(
+      new RegExp(`(\\w+\\()Roles[./]Role${role.id}(,.*?\\))`, 'i'),
+      `RoleAssignments/any(i: $1i/UserFullName$2 and i/RoleId eq ${role.id})`
+    );
+  });
+
+  return convertedString;
 }

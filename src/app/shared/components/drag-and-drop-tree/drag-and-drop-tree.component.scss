@@ -1,0 +1,251 @@
+@import "theme";
+
+.cdk-drag-placeholder {
+  display: none;
+}
+
+.cdk-drag-preview {
+  box-sizing: border-box;
+  box-shadow: 0 3px 3px -2px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+
+  background: #fff;
+  opacity: 0.3;
+  overflow: visible;
+}
+
+.drop-inside {
+  border: 1px dotted $color-primary-darker;
+  border-radius: $radius-large;
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.drop-before {
+  border-top: 1px dotted $color-primary-darker;
+}
+
+.drop-after {
+  border-bottom: 1px dotted $color-primary-darker;
+}
+
+.node-title {
+  padding: 15px;
+  margin: 5px;
+  background: #eee;
+  cursor: grab;
+}
+
+.node-children {
+  position: relative;
+  transition: height 0.2s;
+}
+.item-notes {
+  margin-left: 20px;
+  color: #aaa;
+}
+
+.node-green {
+  background-color: $color-secondary-10;
+  border-color: $color-secondary-40;
+
+  ::ng-deep {
+    a {
+      color: $color-neutral !important;
+    }
+    svg {
+      color: $color-neutral !important;
+    }
+  }
+}
+
+.node-blue {
+  background-color: $color-primary-10;
+  border-color: $color-primary-40;
+
+  ::ng-deep {
+    a {
+      color: $color-neutral !important;
+    }
+    svg {
+      color: $color-neutral !important;
+    }
+  }
+}
+
+.node-standard {
+  background-color: $color-white;
+  border-color: $color-primary-40;
+
+  ::ng-deep {
+    a {
+      color: $color-neutral !important;
+    }
+    svg {
+      color: $color-neutral !important;
+    }
+  }
+}
+
+.node-wrapper {
+  width: fit-content;
+  height: 35px;
+  position: relative;
+  min-height: unset;
+  border-radius: $radius-large;
+  border-width: 1px;
+  border-style: solid;
+  padding-left: $padding-small;
+  padding-top: $padding-small;
+  padding-bottom: $padding-small;
+  z-index: 50;
+  margin: 0px;
+  margin-bottom: $padding-medium;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.current-node-blue {
+  background-color: $color-primary-40;
+  border-color: $color-primary-60;
+
+  ::ng-deep {
+    a {
+      color: $color-primary !important;
+    }
+    svg {
+      color: $color-primary !important;
+    }
+  }
+}
+
+.current-node-green {
+  background-color: $color-secondary-20;
+  border-color: $color-secondary-60;
+
+  ::ng-deep {
+    a {
+      color: $color-secondary !important;
+    }
+    svg {
+      color: $color-secondary !important;
+    }
+  }
+}
+
+app-details-page-link {
+  padding: $padding-smaller;
+}
+
+/*
+  DRAW CONNECTING LINES BETWEEN TREE ELEMENTS
+*/
+
+.root-node {
+  --spacing: 1.5rem;
+  --radius: 10px;
+}
+
+.child-node {
+  position: relative;
+  padding-left: 15px;
+}
+
+.child-of-root {
+  position: relative;
+  padding-left: calc(2 * var(--spacing) - var(--radius) - 2px);
+}
+
+.root-node .child-of-root::before,
+.root-node .child-of-root::after {
+  position: absolute;
+  display: block;
+  right: auto;
+  left: 20px;
+  content: "";
+}
+
+//Set the border left of each child-node in the tree (root does not get one as it has no parent)
+.root-node .child-of-root::before {
+  top: -40px;
+  width: 1px;
+  height: calc(100% + 17px);
+  border-left: 2px solid $color-primary-20;
+}
+
+.root-node .child-of-root:last-child::before {
+  top: -43px;
+}
+
+//Place line left of each node
+.node-wrapper::before {
+  border-top: 2px solid $color-primary-20;
+  width: var(--dynamic-width, 14px);
+  content: "";
+  position: absolute;
+  top: 24px;
+  left: calc(-1 * var(--dynamic-left, 15px));
+  z-index: 100;
+}
+
+.root-node-wrapper::before {
+  border-top: unset;
+  content: unset;
+}
+
+div[role="group"] > .mat-tree-node {
+  padding-left: 48px;
+}
+
+.cdk-drag-handle {
+  cursor: move;
+}
+
+.chevron-icon {
+  cursor: pointer;
+}
+
+app-details-page-link {
+  cursor: pointer;
+  padding: 0;
+
+  ::ng-deep a {
+    display: inline-block;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    padding-left: 4px;
+    padding-right: 12px;
+    border-top-right-radius: $radius-large;
+    border-bottom-right-radius: $radius-large;
+  }
+}
+
+.no-select {
+  user-select: none; /* Standard syntax */
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+}
+
+.no-select {
+  user-select: none; /* Standard syntax */
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+}
+
+.checkbox-color {
+  ::ng-deep {
+    svg {
+      color: $color-white !important;
+    }
+  }
+}
+
+.level-indicator-color {
+  color: $color-neutral-60 !important;
+}
+
+.current-node-blue .level-indicator-color,
+.current-node-green .level-indicator-color {
+  color: $color-neutral-80 !important;
+}

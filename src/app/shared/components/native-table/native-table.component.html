@@ -1,3 +1,10 @@
-<table class="table-layout-{{ tableLayout }}">
+<table
+  class="table-layout-{{ tableLayout }}"
+  [ngClass]="{
+    'table-outline': withOutline,
+    'table-display-block': isDisplayBlock,
+    'table-with-dividers': includeDividers
+  }"
+>
   <ng-content></ng-content>
 </table>

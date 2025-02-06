@@ -1,0 +1,20 @@
+{
+  "targetUsage": {
+      "deactivated": false,
+      "uuid": "3e24e49b-ca9a-424a-bc9f-811e281f78bf",
+      "name": "DefaultTestItSystem"
+  },
+  "fromSystem": {
+      "deactivated": false,
+      "uuid": "4091045a-bf59-4a56-89c8-8043b621e79f",
+      "name": "DefaultTestItSystem"
+  },
+  "toSystem": {
+      "deactivated": false,
+      "uuid": "19b699f2-63bb-4268-9515-d6ceb62d7657",
+      "name": "nan2"
+  },
+  "affectedContracts": [],
+  "affectedRelations": [],
+  "affectedDataProcessingRegistrations": []
+}

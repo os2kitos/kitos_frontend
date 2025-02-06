@@ -1,0 +1,25 @@
+<app-dialog title="Tilføj global admin" overflow="none" i18n-title>
+  <app-loading *ngIf="globalAdminsLoading$ | async"></app-loading>
+  <ng-container *ngIf="(globalAdminsLoading$ | async) !== true">
+    <app-user-dropdown
+      [formGroup]="formGroup"
+      formName="user"
+      [disabledUuids$]="globalAdminUuids$"
+      [searchGlobalUsers]="true"
+      data-cy="add-global-admin-dropdown"
+    >
+    </app-user-dropdown>
+
+    <app-dialog-actions>
+      <app-button buttonStyle="secondary" (buttonClick)="close()"> Annuller </app-button>
+      <app-button
+        buttonStyle="primary"
+        [disabled]="!formGroup.valid"
+        (buttonClick)="addGlobalAdmin()"
+        data-cy="add-global-admin-dialog-button"
+      >
+        Tilføj
+      </app-button>
+    </app-dialog-actions>
+  </ng-container>
+</app-dialog>

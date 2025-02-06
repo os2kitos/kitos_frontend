@@ -1,23 +1,36 @@
 import { createActionGroup, emptyProps } from '@ngrx/store';
+import { APIBusinessRoleDTO } from 'src/app/api/v1';
 import {
+  APIColumnConfigurationRequestDTO,
   APIItSystemUsageResponseDTO,
+  APIJournalPeriodDTO,
+  APIOrganizationGridConfigurationResponseDTO,
   APIOutgoingSystemRelationResponseDTO,
+  APIResourceCollectionPermissionsResponseDTO,
   APIResourcePermissionsResponseDTO,
   APISystemRelationWriteRequestDTO,
   APIUpdateItSystemUsageRequestDTO,
 } from 'src/app/api/v2';
 import { ExternalReferenceProperties } from 'src/app/shared/models/external-references/external-reference-properties.model';
+import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
-import { ITSystemUsage } from 'src/app/shared/models/it-system-usage.model';
+import { SavedFilterState } from 'src/app/shared/models/grid/saved-filter-state.model';
+import { ITSystemUsage } from 'src/app/shared/models/it-system-usage/it-system-usage.model';
 
 export const ITSystemUsageActions = createActionGroup({
   source: 'ITSystemUsage',
   events: {
-    'Get IT System Usages': (odataString: string) => ({ odataString }),
+    'Get IT System Usages': (gridState: GridState, responsibleUnitUuid: string | undefined) => ({ gridState, responsibleUnitUuid }),
     'Get IT System Usages Success ': (itSystemUsages: ITSystemUsage[], total: number) => ({ itSystemUsages, total }),
     'Get IT System Usages Error': emptyProps(),
 
     'Update Grid State': (gridState: GridState) => ({ gridState }),
+    'Update Grid Columns': (gridColumns: GridColumn[]) => ({ gridColumns }),
+    'Update Grid Columns Success': (gridColumns: GridColumn[]) => ({ gridColumns }),
+
+    'Get It System Usage Overview Roles': () => emptyProps(),
+    'Get It System Usage Overview Roles Success': (roles: APIBusinessRoleDTO[] | undefined) => ({ roles }),
+    'Get It System Usage Overview Roles Error': emptyProps(),
 
     'Get IT System Usage': (systemUsageUuid: string) => ({ systemUsageUuid }),
     'Get IT System Usage Success ': (itSystemUsage?: APIItSystemUsageResponseDTO) => ({ itSystemUsage }),
@@ -52,12 +65,27 @@ export const ITSystemUsageActions = createActionGroup({
     }),
     'Get IT System Usage Permissions Error': emptyProps(),
 
+    'Get IT System Usage Collection Permissions': emptyProps(),
+    'Get IT System Usage Collection Permissions Success ': (
+      permissions?: APIResourceCollectionPermissionsResponseDTO
+    ) => ({ permissions }),
+    'Get IT System Usage Collection Permissions Error': emptyProps(),
+
     'Add It System Usage Role': (userUuid: string, roleUuid: string) => ({ userUuid, roleUuid }),
     'Add It System Usage Role Success': (itSystemUsage: APIItSystemUsageResponseDTO) => ({ itSystemUsage }),
     'Add It System Usage Role Error': emptyProps(),
 
-    'Remove It System Usage Role': (userUuid: string, roleUuid: string) => ({ userUuid, roleUuid }),
-    'Remove It System Usage Role Success': (itSystemUsage: APIItSystemUsageResponseDTO) => ({ itSystemUsage }),
+    'Remove It System Usage Role': (userUuid: string, roleUuid: string, itSystemUsageUuid: string) => ({
+      userUuid,
+      roleUuid,
+      itSystemUsageUuid,
+    }),
+    'Remove It System Usage Role Success': (
+      itSystemUsage: APIItSystemUsageResponseDTO,
+      userUuid: string,
+      roleUuid: string,
+      itSystemUsageUuid: string
+    ) => ({ itSystemUsage, userUuid, roleUuid, itSystemUsageUuid }),
     'Remove It System Usage Role Error': emptyProps(),
     'Add Local KLE': (kleUuid: string) => ({
       kleUuid,
@@ -101,5 +129,54 @@ export const ITSystemUsageActions = createActionGroup({
     }),
     'Edit External Reference Success': (itSystemUsage: APIItSystemUsageResponseDTO) => ({ itSystemUsage }),
     'Edit External Reference Error': () => emptyProps(),
+    'Remove It System Usage Journal Period': (journalPeriodUuid: string) => ({ journalPeriodUuid }),
+    'Remove It System Usage Journal Period Success': (itSystemUsageUuid: string) => ({ itSystemUsageUuid }),
+    'Remove It System Usage Journal Period Error': emptyProps(),
+    'Add It System Usage Journal Period': (journalPeriod: APIJournalPeriodDTO) => ({
+      journalPeriod,
+    }),
+    'Add It System Usage Journal Period Success': (itSystemUsageUuid: string) => ({ itSystemUsageUuid }),
+    'Add It System Usage Journal Period Error': emptyProps(),
+    'Patch It System Usage Journal Period': (journalPeriodUuid: string, journalPeriod: APIJournalPeriodDTO) => ({
+      journalPeriodUuid,
+      journalPeriod,
+    }),
+    'Patch It System Usage Journal Period Success': (itSystemUsageUuid: string) => ({
+      itSystemUsageUuid,
+    }),
+    'Patch It System Usage Journal Period Error': emptyProps(),
+
+    'Create It System Usage': (itSystemUuid: string) => ({ itSystemUuid }),
+    'Create It System Usage Success': (itSystemUuid: string, usageUuid: string) => ({ itSystemUuid, usageUuid }),
+    'Create It System Usage Error': emptyProps(),
+
+    'Delete It System Usage By It System And Organization': (itSystemUuid: string) => ({ itSystemUuid }),
+    'Delete It System Usage By It System And Organization Success': (itSystemUuid: string) => ({ itSystemUuid }),
+    'Delete It System Usage By It System And Organization Error': emptyProps(),
+
+    'Save IT System Usage Filter': (localStoreKey: string) => ({ localStoreKey }),
+    'Apply IT System Usage Filter': (state: SavedFilterState) => ({ state }),
+
+    'Save Organizational IT System Usage Column Configuration': (columnConfig: APIColumnConfigurationRequestDTO[]) => ({
+      columnConfig,
+    }),
+    'Save Organizational IT System Usage Column Configuration Success': () => emptyProps(),
+    'Save Organizational IT System Usage Column Configuration Error': () => emptyProps(),
+
+    'Delete Organizational IT System Usage Column Configuration': () => emptyProps(),
+    'Delete Organizational IT System Usage Column Configuration Success': () => emptyProps(),
+    'Delete Organizational IT System Usage Column Configuration Error': () => emptyProps(),
+
+    'Reset To Organization IT System Usage Column Configuration': () => emptyProps(),
+    'Reset To Organization IT System Usage Column Configuration Success': (
+      response: APIOrganizationGridConfigurationResponseDTO
+    ) => ({ response }),
+    'Reset To Organization IT System Usage Column Configuration Error': () => emptyProps(),
+
+    'Initialize IT System Usage Last Seen Grid Configuration': () => emptyProps(),
+    'Initialize IT System Usage Last Seen Grid Configuration Success': (
+      response: APIOrganizationGridConfigurationResponseDTO
+    ) => ({ response }),
+    'Initialize IT System Usage Last Seen Grid Configuration Error': () => emptyProps(),
   },
 });

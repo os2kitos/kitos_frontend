@@ -1,0 +1,17 @@
+@import "theme";
+@import "mixins";
+
+.header {
+  font-size: small;
+  margin-top: $padding-medium;
+}
+
+form {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $padding-small;
+}
+
+.form-nested {
+  margin-left: $padding-large;
+}

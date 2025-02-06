@@ -15,6 +15,10 @@ import {
 } from 'src/app/store/it-system-usage/selectors';
 import { selectItSystemKleUuids } from 'src/app/store/it-system/selectors';
 import { KleCommandEventArgs, SelectedKle } from '../../../shared/kle-table/kle-table.component';
+import {
+  selectITSystemUsageEnableInheritedKle,
+  selectITSystemUsageEnableLocalKle,
+} from 'src/app/store/organization/ui-module-customization/selectors';
 
 @Component({
   selector: 'app-it-system-usage-details-kle',
@@ -37,6 +41,9 @@ export class ItSystemUsageDetailsKleComponent extends BaseComponent implements O
     .select(selectItSystemUsageLocallyRemovedKleUuids)
     .pipe(filterNullish());
 
+  public readonly inheritedKleEnabled$ = this.store.select(selectITSystemUsageEnableInheritedKle);
+  public readonly localKleEnabled$ = this.store.select(selectITSystemUsageEnableLocalKle);
+
   constructor(
     private readonly store: Store,
     private readonly dialog: MatDialog,
@@ -54,7 +61,7 @@ export class ItSystemUsageDetailsKleComponent extends BaseComponent implements O
         .pipe(first())
         .subscribe((addedKleUuid) => {
           if (addedKleUuid) {
-            this.store.dispatch(ITSystemUsageActions.addLocalKle(addedKleUuid));
+            this.store.dispatch(ITSystemUsageActions.addLocalKLE(addedKleUuid));
           }
         })
     );
@@ -64,7 +71,7 @@ export class ItSystemUsageDetailsKleComponent extends BaseComponent implements O
     if (args.command === 'delete-assignment') {
       this.confirmActionService.confirmAction({
         category: ConfirmActionCategory.Warning,
-        onConfirm: () => this.store.dispatch(ITSystemUsageActions.removeLocalKle(args.kleUuid)),
+        onConfirm: () => this.store.dispatch(ITSystemUsageActions.removeLocalKLE(args.kleUuid)),
         message: $localize`Er du sikker på, at du vil fjerne den lokale tilknytning?`,
       });
     }
@@ -75,14 +82,14 @@ export class ItSystemUsageDetailsKleComponent extends BaseComponent implements O
       case 'toggle-assignment-relevance-off':
         this.confirmActionService.confirmAction({
           category: ConfirmActionCategory.Warning,
-          onConfirm: () => this.store.dispatch(ITSystemUsageActions.removeInheritedKle(args.kleUuid)),
+          onConfirm: () => this.store.dispatch(ITSystemUsageActions.removeInheritedKLE(args.kleUuid)),
           message: $localize`Er du sikker på, at du vil fjerne den nedarvede opgave?`,
         });
         break;
       case 'toggle-assignment-relevance-on':
         this.confirmActionService.confirmAction({
           category: ConfirmActionCategory.Neutral,
-          onConfirm: () => this.store.dispatch(ITSystemUsageActions.restoreInheritedKle(args.kleUuid)),
+          onConfirm: () => this.store.dispatch(ITSystemUsageActions.restoreInheritedKLE(args.kleUuid)),
           message: $localize`Er du sikker på, at du vil gendanne den nedarvede opgave?`,
         });
         break;

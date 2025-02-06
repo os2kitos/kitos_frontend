@@ -1,0 +1,40 @@
+@import "theme";
+
+:host {
+  display: flex;
+  flex: 1;
+  gap: $padding-small;
+}
+
+app-datepicker {
+  max-width: 66%;
+}
+
+:host ::ng-deep {
+  // Make option dropdown a fixed width and hide button
+  .date-option-dropdown {
+    flex: 0 0 60px;
+    color: $color-primary-dark;
+    border-radius: $radius-large;
+    border-color: $color-neutral-40;
+    height: 56px;
+
+    .k-input-inner {
+      padding: 11px 16px 5px;
+    }
+
+    button {
+      display: none;
+    }
+  }
+  .date-option-dropdown:hover {
+    box-sizing: border-box;
+    background-color: $color-primary-10;
+    border: 1px solid $color-primary !important;
+  }
+  .date-option-dropdown:active {
+    box-sizing: border-box;
+    background-color: $color-primary-20;
+    border: 1px solid $color-primary !important;
+  }
+}

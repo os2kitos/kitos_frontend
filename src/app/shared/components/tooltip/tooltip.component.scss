@@ -4,6 +4,7 @@
 ::ng-deep .app-tool-tip-content {
   --mdc-plain-tooltip-supporting-text-size: 12px;
   --mdc-plain-tooltip-container-color: #{$color-neutral};
+  white-space: pre-wrap;
 
   &::after {
     position: absolute;
@@ -23,4 +24,10 @@
     padding: 12px 12px;
     border-radius: 6px;
   }
+}
+
+.align-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

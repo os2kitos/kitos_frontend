@@ -2,7 +2,6 @@
 
 :host {
   display: flex;
-  flex: 0 0 $navigation-drawer-width;
 }
 
 // Customization of button in navigation context
@@ -18,9 +17,52 @@
     background: $color-primary-10 !important;
   }
 
-  //Resize the svg to spec
+  // Resize the svg to spec
   svg {
     width: 20px;
     height: 20px;
   }
+
+  .label {
+    margin-left: -8px;
+    opacity: 0;
+    max-width: 0;
+    transition: opacity 0.3s ease, max-width 0.3s ease, margin-left 0.3s ease;
+  }
+
+  .label.visible {
+    opacity: 1;
+    max-width: 200px;
+    margin-left: 8px;
+  }
 }
+
+app-icon {
+  padding-top: $padding-smaller;
+}
+
+.expanded {
+  min-width: 240px;
+}
+
+app-card {
+  padding-bottom: $padding-small;
+  min-width: 60px;
+  transition: min-width 0.3s ease;
+  overflow: hidden;
+}
+
+.chevron-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.divider-margin {
+  margin-top: $padding-small;
+  margin-bottom: $padding-small;
+}
+
+.icon-padding {
+  padding-left: 11px;
+}
+

@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { map, mergeMap, of, withLatestFrom } from 'rxjs';
 import { APIOrganizationResponseDTO, APIV2OrganizationService } from 'src/app/api/v2';
-import { selectOrganization, selectUser } from 'src/app/store/user-store/selectors';
+import { selectOrganization, selectUserUuid } from 'src/app/store/user-store/selectors';
 import { filterNullish } from '../pipes/filter-nullish';
 
 @Injectable({ providedIn: 'root' })
 export class OrganizationService {
-  public verifiedUserOrganization$ = this.store.select(selectUser).pipe(
+  //subscribe to user uuid to only trigger when user changes, and prevent unnecessary API calls if a single user property is updated
+  public verifiedUserOrganization$ = this.store.select(selectUserUuid).pipe(
     filterNullish(),
     withLatestFrom(this.store.select(selectOrganization)),
     // Check if users persisted organization exists

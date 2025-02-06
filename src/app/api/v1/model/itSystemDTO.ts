@@ -16,6 +16,7 @@ import { APITaskRefDTO } from './taskRefDTO';
 export interface APIItSystemDTO { 
     reference?: APIExternalReferenceDTO;
     id?: number;
+    externalUuid?: string;
     uuid?: string;
     parentId?: number;
     parentName?: string;
@@ -67,12 +68,13 @@ export namespace APIItSystemDTO {
         Local: 'Local' as AccessModifierEnum,
         Public: 'Public' as AccessModifierEnum
     };
-    export type ArchiveDutyEnum = 'Undecided' | 'B' | 'K' | 'NoRecommendation';
+    export type ArchiveDutyEnum = 'Undecided' | 'B' | 'K' | 'NoRecommendation' | 'PreserveDataCanDiscardDocuments';
     export const ArchiveDutyEnum = {
         Undecided: 'Undecided' as ArchiveDutyEnum,
         B: 'B' as ArchiveDutyEnum,
         K: 'K' as ArchiveDutyEnum,
-        NoRecommendation: 'NoRecommendation' as ArchiveDutyEnum
+        NoRecommendation: 'NoRecommendation' as ArchiveDutyEnum,
+        PreserveDataCanDiscardDocuments: 'PreserveDataCanDiscardDocuments' as ArchiveDutyEnum
     };
 }
 

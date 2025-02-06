@@ -1,0 +1,13 @@
+[
+  {
+    "description": "string",
+    "uuid": "00000000-0000-0000-0000-000000000000",
+    "name": "data type 1"
+  },
+  {
+    "description": "string",
+    "uuid": "11111111-1111-1111-1111-111111111111",
+    "name": "data type 2"
+  }
+]
+

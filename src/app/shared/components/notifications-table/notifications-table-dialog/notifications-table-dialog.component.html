@@ -1,0 +1,149 @@
+<app-dialog [title]="title" [closable]="true" i18n-title data-cy="notifications-dialog">
+  <form [formGroup]="notificationForm">
+    <app-standard-vertical-content-grid>
+      <div>
+        <app-multi-select-dropdown
+          text="Modtager"
+          i18n-text
+          data-cy="recipient-dropdown"
+          [data]="receiverOptions"
+          [initialSelectedValues]="initialSelectedReceiverValues"
+          [includeAddTag]="true"
+          tagValidation="email"
+          [disabled]="!canEdit"
+          [isRequired]="true"
+          [isTagFn]="isTagAnEmail"
+          (selectedEvent)="receipientsChanged($event, true)"
+          (cleared)="receipientsCleared(true)"
+          (addTag)="receipientsAdded($event, true)"
+        ></app-multi-select-dropdown>
+        <app-textbox-info
+          ><app-paragraph paragraphSize="x-small" i18n
+            >Vælg modtagere som mail eller rolle.</app-paragraph
+          ></app-textbox-info
+        >
+      </div>
+      <app-multi-select-dropdown
+        text="CCs"
+        i18n-text
+        [data]="ccOptions"
+        [initialSelectedValues]="initialSelectedCcValues"
+        [includeAddTag]="true"
+        [isTagFn]="isTagAnEmail"
+        tagValidation="email"
+        [disabled]="!canEdit"
+        (selectedEvent)="receipientsChanged($event, false)"
+        (cleared)="receipientsCleared(false)"
+        (addTag)="receipientsAdded($event, false)"
+      ></app-multi-select-dropdown>
+
+      <app-dropdown
+        text="Afsendelsestype"
+        i18n-text
+        [formGroup]="notificationForm"
+        [data]="notificationTypeOptions"
+        formName="notificationTypeControl"
+        (valueChange)="changeNotificationType($event)"
+        data-cy="notification-type-dropdown"
+      >
+      </app-dropdown>
+
+      <app-textbox *ngIf="isRepeated" text="Navn" i18n-text [formGroup]="notificationForm" formName="nameControl">
+      </app-textbox>
+
+      <div *ngIf="isRepeated">
+        <app-datepicker text="Fra dato" i18n-text [formGroup]="notificationForm" formName="fromDateControl">
+        </app-datepicker>
+        <app-textbox-info
+          *ngIf="
+            this.notificationForm.controls.fromDateControl.enabled &&
+            this.notificationForm.controls.fromDateControl.invalid &&
+            repeatIsSelected()
+          "
+        >
+          <app-paragraph paragraphSize="x-small" i18n> 'Fra dato' må ikke være før i dag </app-paragraph>
+        </app-textbox-info>
+        <app-textbox-info *ngIf="this.showDateOver28Tooltip && repeatIsSelected()">
+          <app-paragraph paragraphSize="x-small" i18n>
+            OBS: Du har valgt en 'Fra dato' større end 28 og et gentagelsesinterval, der kan ramme måneder, hvor datoen
+            ikke findes. Hvis datoen ikke findes i måneden, vil advis blive afsendt den sidste dag i den aktuelle måned.
+          </app-paragraph>
+        </app-textbox-info>
+      </div>
+
+      <div *ngIf="isRepeated">
+        <app-datepicker
+          text="Til dato"
+          i18n-text
+          [formGroup]="notificationForm"
+          formName="toDateControl"
+        ></app-datepicker>
+        <app-textbox-info
+          *ngIf="
+            this.notificationForm.controls.fromDateControl.value &&
+            !this.notificationForm.controls.toDateControl.value &&
+            repeatIsSelected()
+          "
+        >
+          <app-paragraph paragraphSize="x-small" i18n>
+            Når der ikke er valgt 'Til dato', vil advis fortsætte indtil den deaktiveres eller ved efterfølgende at
+            tilføje en 'Til dato' til den aktive advis.
+          </app-paragraph>
+        </app-textbox-info>
+        <app-textbox-info
+          *ngIf="
+            this.notificationForm.controls.toDateControl.value &&
+            !this.notificationForm.controls.toDateControl.valid &&
+            repeatIsSelected()
+          "
+        >
+          <app-paragraph paragraphSize="x-small" i18n> 'Til dato' må ikke være før 'Fra dato' </app-paragraph>
+        </app-textbox-info>
+      </div>
+
+      <app-dropdown
+        *ngIf="isRepeated"
+        text="Frekvens"
+        i18n-text
+        [formGroup]="notificationForm"
+        formName="repetitionControl"
+        [data]="notificationRepetitionFrequencyOptions"
+        [ngClass]="{ 'invalid-input-border': repetitionIsInvalid() }"
+        (openDropdown)="toggleIsSelectingRepetition()"
+      >
+      </app-dropdown>
+
+      <app-textbox
+        text="Emne"
+        i18n-text
+        [formGroup]="notificationForm"
+        formName="subjectControl"
+        data-cy="subject-textbox"
+      ></app-textbox>
+      <app-rich-text-editor
+        [formControl]="notificationForm.controls.bodyControl"
+        [ngClass]="{ 'invalid-input-border': bodyIsInvalid() }"
+      ></app-rich-text-editor>
+
+      <app-dialog-actions class="dialog-footer">
+        <app-button
+          buttonStyle="secondary"
+          size="large"
+          i18n
+          [disabled]="(isSaving$ | async) === true"
+          (buttonClick)="onCancel()"
+          >Annuller</app-button
+        >
+        <app-button
+          type="submit"
+          size="large"
+          [disabled]="canEdit === false || notificationForm.invalid || (isSaving$ | async) === true"
+          i18n
+          (buttonClick)="handleClickConfirm()"
+          data-cy="confirm-button"
+          >{{ confirmText }}
+        </app-button>
+      </app-dialog-actions>
+    </app-standard-vertical-content-grid>
+  </form>
+</app-dialog>

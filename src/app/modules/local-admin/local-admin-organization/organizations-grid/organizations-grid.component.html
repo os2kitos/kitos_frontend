@@ -1,0 +1,17 @@
+<app-overview-header>
+  <h3 i18n>Organisationer i Kitos</h3>
+  <app-grid-options-button entityType="local-admin-organization"></app-grid-options-button>
+  <app-export-menu-button [showColumnsOnlyOption]="false" [exportMethod]="onExcelExport"></app-export-menu-button>
+</app-overview-header>
+
+<app-grid
+  [data$]="gridData$"
+  [columns$]="gridColumns$"
+  exportToExcelName="Organisationer Overblik"
+  i18n-exportToExcelName
+  [loading]="isLoading$ | async"
+  [state]="gridState$ | async"
+  entityType="local-admin-organization"
+  (stateChange)="stateChange($event)"
+>
+</app-grid>

@@ -1,0 +1,14 @@
+@import "theme";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  max-width: $content-width-max;
+  margin: $padding-large auto;
+  padding: 0 $padding-large;
+}
+
+.content {
+  display: flex;
+  gap: $padding-medium;
+}

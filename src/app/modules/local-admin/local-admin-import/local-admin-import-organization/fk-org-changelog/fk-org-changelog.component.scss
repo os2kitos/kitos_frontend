@@ -1,0 +1,11 @@
+@import "theme";
+
+.changelog-header-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: $padding-medium;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}

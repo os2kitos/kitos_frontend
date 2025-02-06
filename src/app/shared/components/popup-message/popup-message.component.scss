@@ -1,0 +1,56 @@
+@import "theme";
+@import "mixins";
+$animationSpeed: 250ms;
+
+.popup-message {
+  display: flex;
+  align-items: center;
+  padding: $padding-medium;
+  border-radius: $radius-small;
+  background-color: $color-primary-darker;
+  color: $color-white;
+  margin-top: $padding-medium;
+  @include elevation(4, $color-neutral-80);
+  visibility: hidden;
+  transition: visibility $animationSpeed ease-in-out;
+  z-index: 2000;
+}
+
+.popup-message-fade {
+  &-in {
+    visibility: visible;
+    animation: fadeInAnimation ease $animationSpeed;
+  }
+
+  &-out {
+    animation: fadeOutAnimation ease $animationSpeed;
+    visibility: hidden;
+  }
+}
+
+@keyframes fadeOutAnimation {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeInAnimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.popup-message-type-error {
+  background-color: $color-negative-base;
+}
+
+p {
+  margin: 0;
+  padding: 0 $padding-small;
+}

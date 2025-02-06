@@ -1,0 +1,19 @@
+@import "theme";
+
+.card {
+  padding: $padding-medium;
+  border-radius: $radius-large;
+  background: $color-white;
+  margin-bottom: $padding-medium;
+}
+
+.divider-margin {
+  margin-top: $padding-medium;
+  margin-bottom: $padding-medium;
+}
+
+app-button {
+  width: fit-content;
+  display: block;
+  margin: auto;
+}

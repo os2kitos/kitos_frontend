@@ -1,0 +1,218 @@
+<ng-container *ngIf="unit$ | async as unit">
+  <app-dialog
+    [title]="'Rediger ' + unit.name"
+    i18n-title
+    backgroundColor="grey"
+    [noPadding]="true"
+    *ngIf="unitPermissions$ | async as permissions"
+  >
+    <div class="content">
+      <div class="grid-container">
+        <app-standard-vertical-content-grid class="basic-information-section">
+          <app-paragraph paragraphSize="large" [bold]="true" i18n>Information om enhed</app-paragraph>
+          <div>
+            <app-org-unit-select
+              [text]="(getParentUnitDropdownText() | async) ?? ''"
+              i18n-text
+              [disabledUnitsUuids]="(disabledUnitsUuids$ | async) ?? []"
+              [clearable]="false"
+              [formGroup]="baseInfoForm"
+              formName="parentUnitControl"
+            ></app-org-unit-select>
+            <app-textbox-info i18n>{{ getParentUnitHelpText() | async }}</app-textbox-info>
+          </div>
+
+          <app-textbox
+            [value]="unit.name"
+            text="Enhedens navn"
+            i18n-text
+            [formGroup]="baseInfoForm"
+            formName="nameControl"
+            data-cy="name-control"
+            [disabled]="!permissions.canBeRenamed"
+          ></app-textbox>
+
+          <app-numeric-input
+            [value]="unit.ean"
+            text="EAN nummer"
+            i18n-text
+            [formGroup]="baseInfoForm"
+            formName="eanControl"
+            data-cy="ean-control"
+            [disabled]="!permissions.canEanBeModified"
+          ></app-numeric-input>
+
+          <app-textbox
+            [value]="unit.unitId"
+            text="Enhedens ID"
+            i18n-text
+            [formGroup]="baseInfoForm"
+            formName="idControl"
+            data-cy="id-control"
+            [disabled]="!permissions.canDeviceIdBeModified"
+          ></app-textbox>
+          <app-dialog-actions *ngIf="permissions.canBeModified">
+            <app-button [color]="confirmColor" size="large" (buttonClick)="onSave()" i18n data-cy="save-button"
+              >Gem</app-button
+            >
+          </app-dialog-actions>
+        </app-standard-vertical-content-grid>
+        <div class="registrations-section-container">
+          <app-paragraph class="registrations-section-title-padding" paragraphSize="large" [bold]="true" i18n
+            >Registeringer for: {{ unit.name }}</app-paragraph
+          >
+          <!-- Check if it's loading -->
+          <ng-container *ngIf="(isLoading$ | async) === false">
+            <!-- Check for empty state -->
+            <ng-container *ngIf="anyRegistrations$ | async">
+              <app-standard-vertical-content-grid class="registrations-section">
+                <app-org-unit-select
+                  *ngIf="permissions.canEditRegistrations"
+                  text="Overfør til"
+                  i18n-text
+                  [value]="selectedTransferUnit"
+                  [disabledUnitsUuids]="[unit.uuid]"
+                  (valueChange)="onUnitSelectionChange($event)"
+                  data-cy="transfer-to-unit-select"
+                ></app-org-unit-select>
+
+                <app-registrations-roles-section
+                  *ngIf="hasOrganizationUnitRights$ | async"
+                  [unitUuid]="unit.uuid"
+                  registrationType="unitRights"
+                  [roleRegistrations$]="organizationUnitRegistrations$"
+                  [areAllSelected$]="allOrganizationUnitRightsSelected$"
+                  [canEditRegistrations]="permissions.canEditRegistrations ?? false"
+                ></app-registrations-roles-section>
+                <app-registrations-payments-section
+                  *ngIf="hasInternalPayments$ | async"
+                  [unitUuid]="unit.uuid"
+                  registrationType="internalPayment"
+                  [paymentRegistrations$]="internalPaymentsRegistrations$"
+                  [areAllSelected$]="allInternalPaymentsSelected$"
+                  [canEditRegistrations]="permissions.canEditRegistrations ?? false"
+                >
+                </app-registrations-payments-section>
+                <app-registrations-payments-section
+                  *ngIf="hasExternalPayments$ | async"
+                  [unitUuid]="unit.uuid"
+                  registrationType="externalPayment"
+                  [paymentRegistrations$]="externalPaymentsRegistrations$"
+                  [areAllSelected$]="allExternalPaymentsSelected$"
+                  [canEditRegistrations]="permissions.canEditRegistrations ?? false"
+                >
+                </app-registrations-payments-section>
+                <app-registrations-page-details-section
+                  *ngIf="hasItContractRegistrations$ | async"
+                  [unitUuid]="unit.uuid"
+                  registrationType="itContract"
+                  [registrations$]="itContractRegistrations$"
+                  [areAllSelected$]="allItContractRegistrationsSelected$"
+                  entityType="it-contract"
+                  (navigateToDetailsPage)="onNavigateToDetailsPage()"
+                  [canEditRegistrations]="permissions.canEditRegistrations ?? false"
+                ></app-registrations-page-details-section>
+                <app-registrations-page-details-section
+                  *ngIf="hasRelevantSystems$ | async"
+                  [unitUuid]="unit.uuid"
+                  registrationType="relevantSystem"
+                  [registrations$]="relevantSystemsRegistrations$"
+                  [areAllSelected$]="allRelevantSystemsSelected$"
+                  entityType="it-system-usage"
+                  subpagePath="organization"
+                  (navigateToDetailsPage)="onNavigateToDetailsPage()"
+                  [canEditRegistrations]="permissions.canEditRegistrations ?? false"
+                ></app-registrations-page-details-section>
+                <app-registrations-page-details-section
+                  *ngIf="hasResponsibleSystems$ | async"
+                  [unitUuid]="unit.uuid"
+                  registrationType="responsibleSystem"
+                  [registrations$]="responsibleSystemsRegistrations$"
+                  [areAllSelected$]="allResponsibleSystemsSelected$"
+                  entityType="it-system-usage"
+                  subpagePath="organization"
+                  (navigateToDetailsPage)="onNavigateToDetailsPage()"
+                  [canEditRegistrations]="permissions.canEditRegistrations ?? false"
+                ></app-registrations-page-details-section>
+              </app-standard-vertical-content-grid>
+            </ng-container>
+            <!-- Display empty state -->
+            <app-empty-state
+              *ngIf="(anyRegistrations$ | async) === false"
+              class="vertical-center-container"
+              [text]="'Der er ingen registreringer, der anvender ' + unit.name"
+              context="emptyTable"
+              i18n
+            ></app-empty-state>
+          </ng-container>
+          <!-- Loading state -->
+          <app-loading *ngIf="(isLoading$ | async) !== false" class="vertical-center-container"></app-loading>
+          <!-- Snackbar -->
+          <ng-container *ngIf="selectedRegistrationsCount$ | async as numberOfRegistrations">
+            <app-snackbar-actions *ngIf="numberOfRegistrations > 0" data-cy="actions-snackbar">
+              <app-paragraph color="white" paragraphSize="medium" [dimmed]="true" i18n
+                >Vælg handling for valgte registreringer ({{ numberOfRegistrations }})</app-paragraph
+              >
+
+              <div class="right-buttons">
+                <app-button
+                  color="secondary"
+                  buttonStyle="secondary"
+                  size="small"
+                  data-cy="delete-selected-button"
+                  (buttonClick)="deleteSelected(unit.uuid)"
+                  i18n
+                  >Slet</app-button
+                >
+                <app-button
+                  color="secondary"
+                  size="small"
+                  [disabled]="!selectedTransferUnit"
+                  [tooltip]="!selectedTransferUnit ? disabledTransferButtonTooltip : ''"
+                  data-cy="transfer-selected-button"
+                  (buttonClick)="transferSelected(unit.uuid)"
+                  i18n
+                  >Overfør</app-button
+                >
+              </div>
+            </app-snackbar-actions>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+
+    <div class="dialog-footer">
+      <div>
+        <app-button
+          i18n
+          buttonStyle="tertiary"
+          color="warn"
+          data-cy="delete-unit-button"
+          *ngIf="permissions.canBeDeleted"
+          (buttonClick)="openDeleteDialog()"
+          ><app-trashcan-icon></app-trashcan-icon> Slet enhed</app-button
+        >
+      </div>
+      <div class="right-buttons" *ngIf="(anyRegistrations$ | async) === true">
+        <app-button
+          buttonStyle="secondary"
+          [color]="'accent'"
+          i18n
+          data-cy="deselect-all-button"
+          [disabled]="(allRegistrationsSelected$ | async) !== true"
+          (buttonClick)="changeSelectAllRegistrationsState(false)"
+          >Fravælg alle</app-button
+        >
+        <app-button
+          i18n
+          buttonStyle="secondary"
+          color="accent"
+          data-cy="select-all-button"
+          [disabled]="(allRegistrationsSelected$ | async) === true"
+          (buttonClick)="changeSelectAllRegistrationsState(true)"
+          >Vælg alle</app-button
+        >
+      </div>
+    </div>
+  </app-dialog>
+</ng-container>

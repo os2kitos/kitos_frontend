@@ -1,5 +1,7 @@
-import { Injectable } from '@angular/core';
-import { ComponentStore, tapResponse } from '@ngrx/component-store';
+import { Inject, Injectable } from '@angular/core';
+import { ComponentStore } from '@ngrx/component-store';
+import { tapResponse } from '@ngrx/operators';
+
 import { Observable, mergeMap } from 'rxjs';
 import { APIRegistrationHierarchyNodeWithActivationStatusResponseDTO, APIV2ItSystemService } from 'src/app/api/v2';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
@@ -14,7 +16,7 @@ export class ItSystemHierarchyTableComponentStore extends ComponentStore<State> 
   public readonly hierarchy$ = this.select((state) => state.hierarchy).pipe(filterNullish());
   public readonly isLoading$ = this.select((state) => state.loading).pipe(filterNullish());
 
-  constructor(private apiItSystemService: APIV2ItSystemService) {
+  constructor(@Inject(APIV2ItSystemService) private apiItSystemService: APIV2ItSystemService) {
     super({ loading: false });
   }
 

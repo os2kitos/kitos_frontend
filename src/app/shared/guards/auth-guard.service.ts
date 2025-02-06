@@ -1,25 +1,13 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router, UrlTree } from '@angular/router';
-import { Store } from '@ngrx/store';
+import { UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { selectUser } from 'src/app/store/user-store/selectors';
-import { AppPath } from '../enums/app-path';
+import { UserGuardService } from './user-guard.service';
 
 @Injectable({ providedIn: 'root' })
-export class AuthGuardService implements CanActivate {
-  constructor(private router: Router, private store: Store) {}
+export class AuthGuardService {
+  constructor(private userGuardService: UserGuardService) {}
 
   canActivate(): Observable<boolean | UrlTree> {
-    // Active if user is present otherwise navigate to root
-    return this.store.select(selectUser).pipe(
-      map((user) => {
-        if (user) {
-          return true;
-        } else {
-          return this.router.parseUrl(AppPath.root);
-        }
-      })
-    );
+    return this.userGuardService.verifyAuthorization((_) => true);
   }
 }

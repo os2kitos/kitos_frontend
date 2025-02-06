@@ -1,0 +1,23 @@
+{
+  "msg": "",
+  "response": {
+    "id": 1,
+    "uuid": "9ebdc1e3-897f-42c1-a390-bda717d2dc10",
+    "name": "Test",
+    "lastName": "User",
+    "phoneNumber": "123",
+    "email": "test@test.com",
+    "defaultUserStartPreference": "it-system.overview",
+    "defaultOrganizationUnitId": null,
+    "defaultOrganizationUnitName": null,
+    "isGlobalAdmin": false,
+    "organizationRights": [],
+    "objectOwnerName": "Admin",
+    "objectOwnerLastName": "(Lokaladmin)",
+    "lastAdvisDate": "2022-11-15T00:00:00Z",
+    "lastChanged": "2023-01-23T10:14:11.0629196Z",
+    "lastChangedByUserId": 2,
+    "hasApiAccess": null,
+    "fullName": "Test User"
+  }
+}

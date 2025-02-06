@@ -18,13 +18,17 @@ export interface APIRightsHolderUpdateSystemPropertiesRequestDTO {
      */
     parentUuid?: string;
     /**
+     * External Uuid for IT-System
+     */
+    externalUuid?: string;
+    /**
      * Name of IT-System
      */
     name?: string;
     /**
      * Former name of IT-System (if any)
      */
-    formerName?: string;
+    previousName?: string;
     /**
      * Description
      */

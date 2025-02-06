@@ -1,0 +1,113 @@
+{
+  "module": "ItContracts",
+  "nodes": [
+      {
+          "key": "ItContracts",
+          "enabled": true
+      },
+      {
+          "key": "ItContracts.frontPage",
+          "enabled": true
+      },
+      {
+          "key": "ItContracts.itSystems",
+          "enabled": true
+      },
+      {
+          "key": "ItContracts.dataProcessing",
+          "enabled": true
+      },
+      {
+          "key": "ItContracts.hierarchy",
+          "enabled": true
+      },
+      {
+          "key": "ItContracts.references",
+          "enabled": true
+      },
+      {
+          "key": "ItContracts.deadlines",
+          "enabled": true
+      },
+      {
+          "key": "ItContracts.economy",
+          "enabled": true
+      },
+      {
+          "key": "ItContracts.contractRoles",
+          "enabled": true
+      },
+      {
+          "key": "ItContracts.frontPage.contractId",
+          "enabled": true
+      },
+      {
+          "key": "ItContracts.frontPage.criticality",
+          "enabled": true
+      },
+      {
+          "key": "ItContracts.frontPage.internalSigner",
+          "enabled": true
+      },
+      {
+          "key": "ItContracts.frontPage.procurementPlan",
+          "enabled": true
+      },
+      {
+          "key": "ItContracts.frontPage.contractType",
+          "enabled": true
+      },
+      {
+          "key": "ItContracts.frontPage.procurementInitiated",
+          "enabled": true
+      },
+      {
+          "key": "ItContracts.frontPage.agreementPeriod",
+          "enabled": true
+      },
+      {
+          "key": "ItContracts.frontPage.purchaseForm",
+          "enabled": true
+      },
+      {
+          "key": "ItContracts.frontPage.template",
+          "enabled": true
+      },
+      {
+          "key": "ItContracts.frontPage.procurementStrategy",
+          "enabled": true
+      },
+      {
+          "key": "ItContracts.frontPage.externalSigner",
+          "enabled": true
+      },
+      {
+          "key": "ItContracts.frontPage.isActive",
+          "enabled": true
+      },
+      {
+          "key": "ItContracts.deadlines.termination",
+          "enabled": true
+      },
+      {
+          "key": "ItContracts.deadlines.agreementDeadlines",
+          "enabled": true
+      },
+      {
+          "key": "ItContracts.economy.paymentModel",
+          "enabled": true
+      },
+      {
+          "key": "ItContracts.economy.extPayment",
+          "enabled": true
+      },
+      {
+          "key": "ItContracts.economy.intPayment",
+          "enabled": true
+      },
+      {
+          "key": "ItContracts.advice",
+          "enabled": true
+      }
+  ]
+}

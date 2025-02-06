@@ -1,0 +1,14 @@
+[
+  {
+    "writeAccess": true,
+    "description": null,
+    "uuid": "7101f076-2ce5-4073-b238-111c39fe4973",
+    "name": "RoleType1"
+  },
+  {
+    "writeAccess": true,
+    "description": null,
+    "uuid": "b5c89414-e5dd-4f3a-a6ce-1e5de90d6293",
+    "name": "RoleType2"
+  }
+]

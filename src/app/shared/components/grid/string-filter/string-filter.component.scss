@@ -1,0 +1,8 @@
+@import "theme";
+:host ::ng-deep .label {
+  margin-left: 41px;
+}
+
+app-textbox {
+  max-width: 100%;
+}

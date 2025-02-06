@@ -44,7 +44,7 @@
     },
     {
       "files": ["*.ts"],
-      "extends": ["plugin:@ngrx/all-requiring-type-checking"],
+      "extends": ["plugin:@ngrx/all"],
       "rules": {
         "@ngrx/avoid-mapping-selectors": ["off"],
         "@ngrx/no-store-subscription": ["off"],

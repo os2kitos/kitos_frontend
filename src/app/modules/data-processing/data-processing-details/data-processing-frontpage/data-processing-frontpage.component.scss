@@ -1,0 +1,22 @@
+@import "mixins.scss";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.field-all-grid-length {
+  grid-column: 1 / 4;
+
+  @include min-breakpoint {
+    grid-column: 1 / 4;
+  }
+}
+
+.input-one-third-column-width {
+  grid-column: auto/ span 1;
+}
+
+.input-two-thirds-column-width {
+  grid-column: span 2;
+}

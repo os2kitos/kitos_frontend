@@ -12,10 +12,38 @@ app-loading {
   .mdc-dialog__surface {
     overflow-y: visible !important;
   }
-  .cdk-overlay-container {
-    position: absolute;
-  }
   .cdk-overlay-backdrop {
     position: fixed !important;
+  }
+}
+
+:host ::ng-deep {
+  .k-list-item.k-selected {
+    background-color: $color-primary-10 !important;
+    color: $color-primary-dark !important;
+  }
+  .k-list-item {
+    border-radius: 8px !important;
+    font-size: 18px;
+    color: $color-primary-dark;
+    padding: $padding-medium;
+  }
+
+  .k-list-item:focus,
+  .k-list-optionlabel:focus,
+  .k-list-item.k-focus,
+  .k-focus.k-list-optionlabel {
+    box-shadow: none !important;
+  }
+
+  .k-list-content {
+    padding: 3px;
+  }
+
+  .k-popup {
+    margin-top: 6px;
+    margin-bottom: 6px;
+    border-radius: 8px !important;
+    border-width: 1px !important;
   }
 }

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { BaseFormComponent } from '../../base/base-form.component';
 
 @Component({
@@ -8,9 +8,16 @@ import { BaseFormComponent } from '../../base/base-form.component';
 })
 export class TextBoxComponent extends BaseFormComponent<string> {
   @Input() public clearable = false;
-  @Input() public type: 'text' | 'number' | 'email' | 'password' = 'text';
+  @Input() public type: 'text' | 'email' | 'password' | 'tel' = 'text';
   @Input() public maxLength = 2000;
-  @Input() public icon?: 'search';
+  @Input() public icon?: 'search' | 'edit' | 'trashcan';
   @Input() public size: 'medium' | 'large' = 'large';
   @Input() public info?: string | null;
+  @Input() public isLoading: boolean | null = null;
+  @Input() public pattern: string = '';
+  @Output() public iconClick = new EventEmitter<void>();
+
+  public onIconClick(): void {
+    this.iconClick.emit();
+  }
 }

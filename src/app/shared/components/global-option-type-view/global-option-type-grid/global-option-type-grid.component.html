@@ -1,0 +1,13 @@
+<app-local-grid
+  [loading]="loading"
+  [data]="optionTypeItems"
+  [columns]="filteredGridColumns"
+  [modifyPermission]="true"
+  [deletePermission]="true"
+  [fitSizeToContent]="fitSizeToContent"
+  (modifyEvent)="onEdit($event)"
+  (toggleChange)="onToggleChange($event)"
+  (rowReordering)="onRowReorder($event)"
+  [reorderable]="reordering"
+  [scrollable]="scrollable"
+></app-local-grid>

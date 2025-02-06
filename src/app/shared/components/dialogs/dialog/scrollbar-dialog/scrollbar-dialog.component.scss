@@ -1,0 +1,20 @@
+@import "theme";
+
+.mat-dialog-content-padding {
+  padding: 0 !important;
+}
+
+.dialog-actions-wrapper {
+  padding-left: $padding-large;
+  padding-right: $padding-large;
+  padding-bottom: $padding-large;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.sticky-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000; /* Ensures it stays on top of other elements */
+  background-color: white; /* Ensures the background is preserved */
+}

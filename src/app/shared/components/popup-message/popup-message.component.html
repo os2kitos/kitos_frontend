@@ -1,0 +1,9 @@
+<div
+  class="popup-message popup-message-type-{{ popupMessage.data.type }}"
+  [ngClass]="dismissing ? 'popup-message-fade-out' : 'popup-message-fade-in'"
+>
+  <p>{{ popupMessage.data.message }}</p>
+  <app-button buttonStyle="tertiary" (buttonClick)="dismiss()">
+    <app-white-x-icon></app-white-x-icon>
+  </app-button>
+</div>

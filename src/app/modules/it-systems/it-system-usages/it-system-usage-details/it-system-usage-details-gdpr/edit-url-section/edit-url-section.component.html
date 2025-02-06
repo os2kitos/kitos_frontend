@@ -1,0 +1,23 @@
+<ng-container class="remove-padding-from-edit-url-section">
+  <ng-container *ngIf="simpleLink$ | async as simpleLink">
+    <app-link-textbox
+      [title]="title"
+      i18n-title
+      [isDisabled]="isDisabled"
+      [simpleLink$]="simpleLink$"
+      placeholder="Fortegnelse"
+      i18n-placeholder
+      (iconClick)="openDirectoryUrlDialog(simpleLink)"
+      (clearClick)="clearClick.emit()"
+    ></app-link-textbox>
+  </ng-container>
+  <ng-container *ngIf="(simpleLink$ | async) === undefined">
+    <app-link-textbox
+      [title]="title"
+      i18n-title
+      [isDisabled]="isDisabled"
+      (iconClick)="openDirectoryUrlDialog()"
+      [simpleLink$]="simpleLink$"
+    ></app-link-textbox>
+  </ng-container>
+</ng-container>

@@ -1,13 +1,25 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppPath } from 'src/app/shared/enums/app-path';
+import { ItSystemCatalogDetailsFrontpageComponent } from './it-system-catalog/it-system-catalog-details/it-system-catalog-details-frontpage/it-system-catalog-details-frontpage.component';
+import { ItSystemCatalogDetailsComponent } from './it-system-catalog/it-system-catalog-details/it-system-catalog-details.component';
+import { ItSystemCatalogInterfacesComponent } from './it-system-catalog/it-system-catalog-details/it-system-catalog-interfaces/it-system-catalog-interfaces.component';
+import { ItSystemCatalogKleComponent } from './it-system-catalog/it-system-catalog-details/it-system-catalog-kle/it-system-catalog-kle.component';
+import { ItSystemCatalogReferencesComponent } from './it-system-catalog/it-system-catalog-details/it-system-catalog-references/it-system-catalog-references.component';
+import { ItSystemCatalogComponent } from './it-system-catalog/it-system-catalog.component';
+import { ItSystemInterfacesDetailsFrontpageComponent } from './it-system-interfaces/it-system-interfaces-details/it-system-interfaces-details-frontpage/it-system-interfaces-details-frontpage.component';
+import { ItSystemInterfacesDetailsComponent } from './it-system-interfaces/it-system-interfaces-details/it-system-interfaces-details.component';
+import { ItSystemInterfacesComponent } from './it-system-interfaces/it-system-interfaces.component';
+import { ItSystemUsageDetailsArchivingComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-archiving/it-system-usage-details-archiving.component';
 import { ITSystemUsageDetailsContractsComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-contracts/it-system-usage-details-contracts.component';
 import { ItSystemUsageDetailsDataProcessingComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-data-processing/it-system-usage-details-data-processing.component';
 import { ItSystemUsageDetailsExternalReferencesComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-external-references/it-system-usage-details-external-references.component';
 import { ITSystemUsageDetailsFrontpageComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-frontpage/it-system-usage-details-frontpage.component';
+import { ItSystemUsageDetailsGdprComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-gdpr/it-system-usage-details-gdpr.component';
 import { ItSystemUsageDetailsHierarchyComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-hierarchy/it-system-usage-details-hierarchy.component';
 import { ItSystemUsageDetailsInterfacesComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-interfaces/it-system-usage-details-interfaces.component';
 import { ItSystemUsageDetailsKleComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-kle/it-system-usage-details-kle.component';
+import { ItSystemUsageDetailsNotificationsComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-notifications/it-system-usage-details-notifications.component';
 import { ItSystemUsageDetailsOrganizationComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-organization/it-system-usage-details-organization.component';
 import { ItSystemUsageDetailsRelationsComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-relations/it-system-usage-details-relations.component';
 import { ItSystemUsageDetailsRolesComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-roles/it-system-usage-details-roles.component';
@@ -38,6 +50,14 @@ const routes: Routes = [
             component: ItSystemUsageDetailsDataProcessingComponent,
           },
           {
+            path: AppPath.gdpr,
+            component: ItSystemUsageDetailsGdprComponent,
+          },
+          {
+            path: AppPath.gdpr,
+            component: ItSystemUsageDetailsGdprComponent,
+          },
+          {
             path: AppPath.organization,
             component: ItSystemUsageDetailsOrganizationComponent,
           },
@@ -65,6 +85,38 @@ const routes: Routes = [
             path: AppPath.externalReferences,
             component: ItSystemUsageDetailsExternalReferencesComponent,
           },
+          {
+            path: AppPath.archiving,
+            component: ItSystemUsageDetailsArchivingComponent,
+          },
+          {
+            path: AppPath.notifications,
+            component: ItSystemUsageDetailsNotificationsComponent,
+          },
+          { path: AppPath.root, pathMatch: 'full', redirectTo: AppPath.frontpage },
+        ],
+      },
+      { path: AppPath.itSystemCatalog, component: ItSystemCatalogComponent },
+      {
+        path: AppPath.itSystemCatalogDetails,
+        component: ItSystemCatalogDetailsComponent,
+        children: [
+          { path: AppPath.frontpage, component: ItSystemCatalogDetailsFrontpageComponent },
+          { path: AppPath.itInterfaces, component: ItSystemCatalogInterfacesComponent },
+          { path: AppPath.externalReferences, component: ItSystemCatalogReferencesComponent },
+          { path: AppPath.kle, component: ItSystemCatalogKleComponent },
+          { path: AppPath.root, pathMatch: 'full', redirectTo: AppPath.frontpage },
+        ],
+      },
+      {
+        path: AppPath.itInterfaces,
+        component: ItSystemInterfacesComponent,
+      },
+      {
+        path: AppPath.itInterfacesDetails,
+        component: ItSystemInterfacesDetailsComponent,
+        children: [
+          { path: AppPath.frontpage, component: ItSystemInterfacesDetailsFrontpageComponent },
           { path: AppPath.root, pathMatch: 'full', redirectTo: AppPath.frontpage },
         ],
       },
@@ -77,4 +129,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class ITSystemsRouterModule {}
+export class ITSystemsRouterModule { }

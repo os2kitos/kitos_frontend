@@ -1,0 +1,86 @@
+<div class="page-title-container">
+  <h3 data-cy="organization-page-title" class="page-title" i18n>Organisation</h3>
+  <app-help-button helpTextKey="organization.structure"></app-help-button>
+</div>
+<div class="structure-page-flex">
+  <app-card class="structure-section-width resizable-right">
+    <div class="card-header">
+      <h6 i18n>Organisationslag</h6>
+      <ng-container *ngIf="unitPermissions$ | async as permissions">
+        <app-menu-button
+          iconType="dots"
+          buttonStyle="tertiary"
+          class="align-end"
+          *ngIf="permissions.canBeModified"
+          data-cy="actions-button"
+        >
+          <app-menu-button-item i18n (itemClick)="openCreateSubUnitDialog()"
+            ><app-plus-icon-blue></app-plus-icon-blue> Opret ny enhed</app-menu-button-item
+          >
+          <app-menu-button-item i18n (itemClick)="changeDragState()" data-cy="restructure-button"
+            ><app-reorder-icon></app-reorder-icon> Omstrukturer</app-menu-button-item
+          >
+        </app-menu-button>
+      </ng-container>
+    </div>
+    <app-standard-vertical-content-grid *ngIf="currentUnitUuid$ | async as currentUnitUuid">
+      <app-button
+        *ngIf="(isDragDisabled$ | async) === false"
+        buttonStyle="secondary"
+        (buttonClick)="changeDragState()"
+        data-cy="finish-restructure-button"
+        i18n
+        >Færdig</app-button
+      >
+      <app-drag-and-drop-tree
+        itemType="organization"
+        [currentNodeUuid]="currentUnitUuid"
+        [nodes]="(unitTree$ | async) ?? []"
+        [disableDrag]="(isDragDisabled$ | async) ?? true"
+        (nodeMoved)="moveNode($event)"
+        (nodeExpandClick)="nodeExpandClick($event)"
+      ></app-drag-and-drop-tree>
+      <div *ngIf="(hasFkOrg$ | async) === true">
+        <app-paragraph paragraphSize="x-small" [dimmed]="true" i18n
+          ><app-kitos-unit-color-icon></app-kitos-unit-color-icon> Enheder oprettet i Kitos</app-paragraph
+        >
+        <app-paragraph paragraphSize="x-small" [dimmed]="true" i18n
+          ><app-fk-org-color-icon></app-fk-org-color-icon> Enheder synkroniseret fra FK Organisation</app-paragraph
+        >
+      </div>
+    </app-standard-vertical-content-grid>
+
+    <app-loading *ngIf="(currentUnitUuid$ | async) === undefined"></app-loading>
+  </app-card>
+  <div class="flex-roles-section">
+    <app-card>
+      <app-details-header [title$]="currentUnitName$" i18n-title>
+        <app-checkbox-button (valueChange)="checkboxChange($event)" i18n>
+          Tilføj brugere fra underenheder
+        </app-checkbox-button>
+
+        <ng-container *ngIf="unitPermissions$ | async as permissions">
+          <app-button
+            buttonStyle="secondary"
+            i18n
+            (buttonClick)="onClickEdit()"
+            data-cy="edit-button"
+            *ngIf="permissions.canBeModified"
+            >Rediger enhed</app-button
+          >
+        </ng-container>
+      </app-details-header>
+
+      <ng-container *ngIf="currentUnitName$ | async as unitName">
+        <app-org-unit-role-table
+          [unitName]="unitName"
+          [checkboxSubject$]="includeSubnits$"
+          entityType="organization-unit"
+          [entityUuid$]="currentUnitUuid$"
+          [hasModifyPermission]="(modificationPermission$ | async) || false"
+        >
+        </app-org-unit-role-table>
+      </ng-container>
+    </app-card>
+  </div>
+</div>

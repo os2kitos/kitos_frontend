@@ -1,0 +1,244 @@
+@import "theme";
+@import "mixins";
+
+.description {
+  margin-top: $padding-small;
+  margin-bottom: $padding-small;
+  line-height: 110%;
+}
+
+ng-select {
+  font-size: large;
+}
+
+:host {
+  flex: 1;
+}
+
+:host ::ng-deep ng-select {
+  padding-bottom: 0;
+
+  &.medium {
+    --height: 48px;
+    --font-size: 14px;
+    --bottom: 2px;
+    --offset: 8px;
+    --scale: calc(12 / 14);
+  }
+
+  &.large {
+    --height: 56px;
+    --font-size: 16px;
+    --bottom: 8px;
+    --offset: 14px;
+    --scale: calc(12 / 16);
+  }
+
+  // Customization of dropdown container styling
+  .ng-select-container {
+    height: var(--height);
+    min-height: var(--height);
+    padding: 1px;
+    border: 1px solid $color-neutral-40;
+    border-radius: $radius-large;
+    cursor: pointer;
+
+    &:hover {
+      border-color: $color-primary-80;
+    }
+
+    &::after {
+      content: initial;
+    }
+
+    .ng-value-container {
+      padding: 0 $padding-medium;
+      border-top: var(--offset) solid transparent;
+
+      .ng-placeholder {
+        color: $color-neutral-80;
+      }
+
+      .ng-value {
+        position: absolute;
+        bottom: var(--bottom);
+        color: $color-neutral;
+      }
+
+      .ng-input {
+        bottom: var(--bottom);
+        padding: 0 $padding-medium;
+
+        input {
+          cursor: pointer;
+          font-size: var(--font-size);
+          caret-color: $color-primary;
+        }
+      }
+    }
+
+    .ng-spinner-loader {
+      align-self: center;
+    }
+
+    .ng-clear-wrapper {
+      display: flex;
+      height: 100%;
+      align-items: center;
+      bottom: 0 !important;
+    }
+
+    .ng-clear-wrapper.ng-star-inserted {
+      border-top-width: 0px !important;
+    }
+  }
+
+  &.ng-select-single {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  // Adjustments for focused 2px border
+  &.ng-select-focused {
+    .ng-select-container {
+      border: 2px solid $color-primary-80;
+      padding: 0;
+    }
+
+    .ng-value-container {
+      bottom: 20px;
+      .ng-placeholder {
+        top: calc(var(--bottom) - 1px);
+      }
+
+      .ng-value {
+        bottom: calc(var(--bottom) - 1px);
+      }
+
+      .ng-input {
+        bottom: calc(var(--bottom) - 1px);
+      }
+    }
+  }
+
+  //Error state border color
+  &.ng-invalid {
+    .ng-select-container {
+      border-color: $color-negative;
+    }
+  }
+
+  // Custom scaling and positioning of active placeholder
+  &.ng-select-focused,
+  &.ng-select-opened,
+  .ng-has-value {
+    .ng-placeholder {
+      top: var(--bottom);
+      color: $color-neutral-dark !important;
+      font-weight: bold;
+      transform: scale(var(--scale)) !important;
+      transition: none !important;
+      backface-visibility: hidden;
+      -webkit-font-smoothing: auto;
+    }
+  }
+
+  // Custom dropdown icon
+  .ng-arrow-wrapper {
+    height: 100%;
+    width: var(--height);
+    background-color: $color-primary-darker;
+    mask-image: url("../../../../../app/shared/components/icons/chevron-down.svg");
+    mask-repeat: no-repeat;
+    mask-position: 50%;
+    bottom: 0 !important;
+
+    .ng-arrow {
+      display: none;
+    }
+  }
+
+  // Custom disabled state
+  &.ng-select-disabled {
+    .ng-select-container {
+      background-color: $color-neutral-10;
+      cursor: default;
+      align-content: center !important;
+
+      input {
+        cursor: default !important;
+      }
+
+      .ng-value-container .ng-placeholder {
+        color: $color-neutral-80;
+      }
+
+      .ng-value-container .ng-value {
+        color: $color-neutral-80;
+      }
+
+      &:hover {
+        border-color: $color-neutral-40;
+      }
+    }
+  }
+
+  // Custom dropdown menu styling
+  ng-dropdown-panel {
+    &.ng-select-top {
+      bottom: calc(100% + $padding-small);
+    }
+
+    &.ng-select-bottom {
+      top: calc(100% + $padding-small);
+    }
+
+    &.ng-select-bottom,
+    &.ng-select-top {
+      border-radius: $radius-large;
+      padding: $padding-smaller;
+
+      .ng-option {
+        border-radius: 6px;
+        white-space: normal !important;
+        line-break: normal !important;
+
+        &.ng-option-marked,
+        &.ng-option-selected {
+          background: $color-primary-10;
+          color: $color-neutral-dark;
+        }
+      }
+    }
+
+    .ng-dropdown-footer {
+      min-height: 0px;
+    }
+  }
+}
+
+input[type="checkbox"] {
+  stroke-width: 1px; // Adjust this to change the thickness of the check
+  transform: scale(1.5); // Adjust this to change the size of the check, 1 is the original size
+  transform-origin: 50% 50%; // Adjust this to change the origin of the transformation
+}
+
+.select-option-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.select-option-text-margin {
+  margin: 0;
+}
+
+.value-textbox-margin {
+  margin-top: 8px;
+}
+
+.remove-tag-button {
+  margin-left: auto;
+  padding-right: $padding-small;
+}

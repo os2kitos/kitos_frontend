@@ -1,0 +1,150 @@
+<app-card>
+  <app-card-header title="Databehandling information" i18n-title helpTextKey="data-processing.edit-registration.main"
+    ><app-status-chip
+      *ngIf="statusEnabled$ | async"
+      type="data-processing-registration"
+      [title]="dprInactiveMessage$ | async"
+      [value]="isValid$ | async"
+    >
+    </app-status-chip
+  ></app-card-header>
+
+  <app-form-grid [formGroup]="frontpageFormGroup">
+    <app-textbox
+      text="Navn"
+      i18n-text
+      data-cy="dpr-name"
+      [formGroup]="frontpageFormGroup"
+      formName="name"
+      (valueChange)="patchName($event)"
+    ></app-textbox>
+    <ng-container *ngIf="dataResponsibleEnabled$ | async">
+      <!-- The column should span 2/3rds since it contains long data that is partially hidden if the input is smaller
+           Issue described in https://os2web.atlassian.net/browse/KITOSUDV-5632-->
+      <app-dropdown
+        text="Dataansvarlig"
+        i18n-text
+        class="input-two-thirds-column-width"
+        data-cy="dpr-data-responsible"
+        valueField="uuid"
+        [formGroup]="frontpageFormGroup"
+        formName="dataResponsible"
+        [data]="dataResponsibleTypes$ | async"
+        (valueChange)="patchFrontPage({ general: { dataResponsibleUuid: $event } })"
+      >
+      </app-dropdown>
+      <app-textarea
+        text="Dataansvarlig bemærkning"
+        class="field-all-grid-length"
+        i18n-text
+        data-cy="dpr-notes"
+        [formGroup]="frontpageFormGroup"
+        formName="dataResponsibleRemarks"
+        (valueChange)="patchFrontPage({ general: { dataResponsibleRemark: $event } })"
+      ></app-textarea>
+    </ng-container>
+    <app-textbox
+      *ngIf="statusEnabled$ | async"
+      text="Status"
+      i18n-text
+      data-cy="dpr-status"
+      [formGroup]="frontpageFormGroup"
+      formName="status"
+    ></app-textbox>
+    <app-textbox
+      *ngIf="lastChangedByEnabled$ | async"
+      text="Sidst redigeret: Bruger"
+      i18n-text
+      data-cy="dpr-last-changed-by"
+      [formGroup]="frontpageFormGroup"
+      formName="lastChangedBy"
+    >
+    </app-textbox>
+    <app-datepicker
+      *ngIf="lastChangedAtEnabled$ | async"
+      text="Sidst redigeret: Dato"
+      i18n-text
+      data-cy="dpr-last-changed-at"
+      [formGroup]="frontpageFormGroup"
+      formName="lastChangedAt"
+    >
+    </app-datepicker>
+    <ng-container *ngIf="agreementConcludedEnabled$ | async">
+      <app-dropdown
+        text="Databehandleraftale er indgået"
+        i18n-text
+        data-cy="dpr-agreement-concluded"
+        [formGroup]="frontpageFormGroup"
+        formName="agreementConcluded"
+        [data]="yesNoIrrelevantOptions"
+        (valueChange)="patchAgreementConcluded($event)"
+      ></app-dropdown>
+      <app-datepicker
+        text="Dato for indgåelse af databehandleraftale"
+        i18n-text
+        class="input-two-thirds-column-width"
+        data-cy="dpr-agreement-concluded-date"
+        [formGroup]="frontpageFormGroup"
+        formName="agreementConclusionDate"
+        (valueChange)="patchFrontPage({ general: { agreementConcludedAt: $event?.toDateString() } })"
+      ></app-datepicker>
+      <app-textarea
+        text="Databehandleraftale bemærkning"
+        class="field-all-grid-length"
+        i18n-text
+        data-cy="dpr-agreement-concluded-notes"
+        [formGroup]="frontpageFormGroup"
+        formName="agreementRemarks"
+        (valueChange)="patchFrontPage({ general: { isAgreementConcludedRemark: $event } })"
+      ></app-textarea>
+    </ng-container>
+  </app-form-grid>
+</app-card>
+
+<app-card *ngIf="transferBasisEnabled$ | async">
+  <app-card-header
+    title="Overførselsgrundlag"
+    i18n-title
+    helpTextKey="data-processing.edit-registration.transfer-basis"
+  ></app-card-header>
+
+  <app-standard-vertical-content-grid>
+    <app-form-grid [formGroup]="transferBasisFormGroup">
+      <app-dropdown
+        text="Overførselsgrundlag"
+        class="input-one-third-column-width"
+        valueField="uuid"
+        i18n-text
+        data-cy="dpr-transfer-basis"
+        [formGroup]="transferBasisFormGroup"
+        formName="transferBasis"
+        [data]="basisForTransferTypes$ | async"
+        (valueChange)="patchFrontPage({ general: { basisForTransferUuid: $event } })"
+      >
+      </app-dropdown>
+    </app-form-grid>
+    <app-third-countries-table></app-third-countries-table>
+  </app-standard-vertical-content-grid>
+</app-card>
+
+<app-card *ngIf="processorsEnabled$ | async">
+  <app-card-header
+    title="Databehandlere"
+    i18n-title
+    helpTextKey="data-processing.edit-registration.processors"
+  ></app-card-header>
+
+  <app-processors-table></app-processors-table>
+</app-card>
+
+<app-card *ngIf="subProcessorsEnabled$ | async">
+  <app-card-header
+    title="Underdatabehandlere"
+    i18n-title
+    helpTextKey="data-processing.edit-registration.subprocessors"
+  ></app-card-header>
+
+  <app-standard-vertical-content-grid>
+    <app-sub-processors-table></app-sub-processors-table>
+  </app-standard-vertical-content-grid>
+</app-card>

@@ -28,5 +28,18 @@ export interface APIContractValidityResponseDTO {
      * If specified, the entity is valid up until and including this date.
      */
     validTo?: string;
+    /**
+     * Reasons as to why the contract is considered to be invalid
+     */
+    validationErrors?: Array<APIContractValidityResponseDTO.ValidationErrorsEnum>;
 }
+export namespace APIContractValidityResponseDTO {
+    export type ValidationErrorsEnum = 'StartDateNotPassed' | 'EndDatePassed' | 'TerminationPeriodExceeded';
+    export const ValidationErrorsEnum = {
+        StartDateNotPassed: 'StartDateNotPassed' as ValidationErrorsEnum,
+        EndDatePassed: 'EndDatePassed' as ValidationErrorsEnum,
+        TerminationPeriodExceeded: 'TerminationPeriodExceeded' as ValidationErrorsEnum
+    };
+}
+
 

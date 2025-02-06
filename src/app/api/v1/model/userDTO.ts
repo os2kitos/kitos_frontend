@@ -14,12 +14,14 @@ import { APIOrganizationRightDTO } from './organizationRightDTO';
 
 export interface APIUserDTO { 
     id?: number;
+    uuid?: string;
     name?: string;
     lastName?: string;
     phoneNumber?: string;
     email?: string;
     defaultUserStartPreference?: string;
     defaultOrganizationUnitId?: number;
+    defaultOrganizationUnitUuid?: string;
     defaultOrganizationUnitName?: string;
     isGlobalAdmin?: boolean;
     organizationRights?: Array<APIOrganizationRightDTO>;

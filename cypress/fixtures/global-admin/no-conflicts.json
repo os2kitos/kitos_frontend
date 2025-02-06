@@ -1,0 +1,11 @@
+{
+  "systemsWithUsagesOutsideTheOrganization": [],
+  "interfacesExposedOnSystemsOutsideTheOrganization": [],
+  "systemsExposingInterfacesDefinedInOtherOrganizations": [],
+  "systemsSetAsParentSystemToSystemsInOtherOrganizations": [],
+  "dprInOtherOrganizationsWhereOrgIsDataProcessor": [],
+  "dprInOtherOrganizationsWhereOrgIsSubDataProcessor": [],
+  "contractsInOtherOrganizationsWhereOrgIsSupplier": [],
+  "systemsInOtherOrganizationsWhereOrgIsRightsHolder": [],
+  "systemsWhereOrgIsArchiveSupplier": []
+}

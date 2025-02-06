@@ -6,10 +6,13 @@ import { EntityStatusTexts } from '../models/status/entity-status-texts.model';
   providedIn: 'root',
 })
 export class EntityStatusTextsService {
+  private ACTIVE_TEXT = $localize`Aktiv`;
+  private INACTIVE_TEXT = $localize`Ikke aktiv`;
+
   private readonly typeToTextMap: Record<RegistrationEntityTypes, EntityStatusTexts> = {
     'data-processing-registration': {
-      trueString: $localize`Aktiv`,
-      falseString: $localize`Ikke aktiv`,
+      trueString: this.ACTIVE_TEXT,
+      falseString: $localize`Inaktiv`,
     },
     'it-system': {
       trueString: $localize`Tilgængeligt`,
@@ -17,15 +20,35 @@ export class EntityStatusTextsService {
     },
     'it-system-usage': {
       trueString: $localize`Aktivt`,
-      falseString: $localize`Ikke aktivt`,
+      falseString: this.INACTIVE_TEXT,
     },
     'it-interface': {
-      trueString: $localize`Aktiv`,
-      falseString: $localize`Ikke aktiv`,
+      trueString: this.ACTIVE_TEXT,
+      falseString: this.INACTIVE_TEXT,
     },
     'it-contract': {
       trueString: $localize`Gyldig`,
       falseString: $localize`Ikke gyldig`,
+    },
+    organization: {
+      trueString: this.ACTIVE_TEXT,
+      falseString: this.INACTIVE_TEXT,
+    },
+    'organization-unit': {
+      trueString: this.ACTIVE_TEXT,
+      falseString: this.INACTIVE_TEXT,
+    },
+    'organization-user': {
+      trueString: this.ACTIVE_TEXT,
+      falseString: this.INACTIVE_TEXT,
+    },
+    'local-admin-organization': {
+      trueString: this.ACTIVE_TEXT,
+      falseString: this.INACTIVE_TEXT,
+    },
+    'global-admin-organization': {
+      trueString: this.ACTIVE_TEXT,
+      falseString: this.INACTIVE_TEXT,
     },
   };
 

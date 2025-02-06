@@ -1,0 +1,20 @@
+<app-gdpr-base-date-url-section
+  title="Gennemført DPIA / Konsekvensanalyse"
+  i18n-title
+  choiceTypePropertyName="dpiaConducted"
+  choiceTypeTitle="DPIA / Konsekvensanalyse"
+  i18n-choiceTypeTitle
+  datePropertyName="dpiaDate"
+  dateTitle="Dato for den seneste DPIA"
+  i18n-dateTitle
+  linkPropertyName="dpiaDocumentation"
+  linkTitle="Link til dokumentation"
+  i18n-linkTitle
+  [isYesNoDontKnowFalse$]="isDpiaConductedFalse$"
+  [documentation$]="selectDpiaDocumentation$"
+  [formGroup]="formGroup"
+  [disableLinkControl]="disableLinkControl"
+  [hasModifyPermissions$]="hasModifyPermissions$"
+  [isExpanded$]="isExpanded$"
+  (expandedChanged)="onExpandedChanged($event)"
+></app-gdpr-base-date-url-section>

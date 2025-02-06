@@ -14,7 +14,7 @@
           <app-details-page-link
             itemType="it-system-usage"
             linkFontSize="small"
-            [itemUuid]="relation.systemUsage.uuid"
+            [itemPath]="relation.systemUsage.uuid"
             >{{ relation.systemUsage.name }}</app-details-page-link
           >
         </td>
@@ -23,12 +23,12 @@
             *ngIf="relation.relationInterface as interface"
             itemType="it-interface"
             linkFontSize="small"
-            [itemUuid]="interface.uuid"
+            [itemPath]="interface.uuid"
             >{{ interface.name }}</app-details-page-link
           >
         </td>
         <td>
-          <app-paragraph paragraphSize="small" [cropOnOverlow]="true">{{ relation.description }}</app-paragraph>
+          <app-paragraph paragraphSize="small" [cropOnOverflow]="true">{{ relation.description }}</app-paragraph>
         </td>
         <td>
           <app-external-page-link linkFontSize="small" [url]="relation.urlReference"></app-external-page-link>
@@ -38,7 +38,7 @@
             *ngIf="relation.associatedContract as contract"
             itemType="it-contract"
             linkFontSize="small"
-            [itemUuid]="contract.uuid"
+            [itemPath]="contract.uuid"
             >{{ contract.name }}</app-details-page-link
           >
         </td>

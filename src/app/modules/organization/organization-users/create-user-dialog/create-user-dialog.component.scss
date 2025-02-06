@@ -1,0 +1,8 @@
+@import "theme";
+@import "mixins";
+
+@include dialog-footer-with-padding;
+
+.error-paragraph-height {
+  height: 20px;
+}

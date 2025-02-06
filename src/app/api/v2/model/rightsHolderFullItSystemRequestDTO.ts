@@ -21,9 +21,9 @@ export interface APIRightsHolderFullItSystemRequestDTO {
      */
     rightsHolderUuid: string;
     /**
-     * UUID for IT-System  If no uuid is provided, KITOS will assign one automatically
+     * External Uuid for IT-System  Note: When setting ExternalUuid to NULL there\'s no way to tell if the value was removed or if it was never set.
      */
-    uuid?: string;
+    externalUuid?: string;
     /**
      * UUID for possible IT-System parent (if any)
      */
@@ -35,7 +35,7 @@ export interface APIRightsHolderFullItSystemRequestDTO {
     /**
      * Former name of IT-System (if any)
      */
-    formerName?: string;
+    previousName?: string;
     /**
      * Description
      */

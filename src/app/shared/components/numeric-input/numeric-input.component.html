@@ -1,0 +1,26 @@
+<mat-form-field *ngIf="formGroup" [formGroup]="formGroup" class="{{ size }}">
+  <mat-label>{{ text }}</mat-label>
+  <input
+    matInput
+    type="text"
+    [placeholder]="placeholder"
+    [formControlName]="formName"
+    (input)="formInputValueChange($event)"
+    (focus)="focus(true)"
+    (blur)="focus(false)"
+    #input
+  />
+</mat-form-field>
+
+<mat-form-field *ngIf="!formGroup" class="{{ size }}">
+  <mat-label>{{ text }}</mat-label>
+  <input
+    matInput
+    type="text"
+    [placeholder]="placeholder"
+    [disabled]="disabled"
+    [(ngModel)]="value"
+    (ngModelChange)="inputChanged($event)"
+    #input
+  />
+</mat-form-field>

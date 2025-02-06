@@ -1,0 +1,27 @@
+<ng-container *ngIf="(isLoading$ | async) === false">
+  <app-breadcrumbs [items]="breadCrumbs$ | async"></app-breadcrumbs>
+
+  <div class="header">
+    <h4>{{ contractName$ | async }}</h4>
+    <div class="header-buttons" *ngIf="(hasDeletePermission$ | async) === true">
+      <ng-container>
+        <app-button
+          (buttonClick)="showDeleteDialog()"
+          buttonStyle="secondary"
+          color="warn"
+          i18n
+          data-cy="delete-contract-button"
+          [disabled]="(hasDeletePermission$ | async) !== true"
+        >
+          Slet IT Kontrakt
+        </app-button>
+      </ng-container>
+    </div>
+  </div>
+  <div class="content">
+    <app-navigation-drawer [items]="navigationItems"> </app-navigation-drawer>
+
+    <router-outlet></router-outlet>
+  </div>
+</ng-container>
+<app-loading *ngIf="isLoading$ | async"></app-loading>

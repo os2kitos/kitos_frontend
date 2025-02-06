@@ -1,0 +1,311 @@
+<app-card>
+  <app-card-header title="IT kontrakt information" i18n-title helpTextKey="it-contract.edit.main">
+    <app-status-chip
+      *ngIf="contractIsActiveEnabled$ | async"
+      type="it-contract"
+      [title]="statusText$ | async"
+      [value]="isValid$ | async"
+    >
+    </app-status-chip>
+  </app-card-header>
+  <app-form-grid [formGroup]="frontpageFormGroup">
+    <app-textbox
+      text="IT kontraktnavn"
+      i18n-text
+      data-cy="contract-name"
+      [formGroup]="frontpageFormGroup"
+      formName="name"
+      (valueChange)="patchName($event)"
+    ></app-textbox>
+    <app-textbox
+      *ngIf="contractIdEnabled$ | async"
+      text="Kontrakt ID"
+      i18n-text
+      data-cy="contract-id"
+      [formGroup]="frontpageFormGroup"
+      formName="contractId"
+      (valueChange)="patchFrontPage({ general: { contractId: $event } })"
+    ></app-textbox>
+    <app-option-type-dropdown
+      *ngIf="contractTypeEnabled$ | async"
+      optionType="it-contract_contract-type"
+      [formGroup]="frontpageFormGroup"
+      formName="contractType"
+      (valueChange)="patchFrontPage({ general: { contractTypeUuid: ignoreNullReturnType($event) } })"
+    >
+    </app-option-type-dropdown>
+    <app-dropdown
+      *ngIf="contractTemplateEnabled$ | async"
+      text="Kontraktskabelon"
+      i18n-text
+      data-cy="contract-template"
+      valueField="uuid"
+      [formGroup]="frontpageFormGroup"
+      formName="contractTemplate"
+      [data]="contractTemplates$ | async"
+      (valueChange)="patchFrontPage({ general: { contractTemplateUuid: $event } })"
+    >
+    </app-dropdown>
+    <app-dropdown
+      *ngIf="contractCriticalityEnabled$ | async"
+      text="Kritikalitet"
+      i18n-text
+      data-cy="contract-criticality"
+      [formGroup]="frontpageFormGroup"
+      formName="criticality"
+      valueField="uuid"
+      [data]="criticalityTypes$ | async"
+      (valueChange)="patchFrontPage({ general: { criticalityUuid: $event } })"
+    ></app-dropdown>
+    <app-dropdown
+      *ngIf="contractPurchaseFormEnabled$ | async"
+      text="Indkøbsform"
+      i18n-text
+      data-cy="contract-purchase-type"
+      [formGroup]="frontpageFormGroup"
+      formName="purchaseType"
+      valueField="uuid"
+      [data]="purchaseFormTypes$ | async"
+      (valueChange)="patchFrontPage({ procurement: { purchaseTypeUuid: $event } })"
+    >
+    </app-dropdown>
+    <app-standard-vertical-content-grid>
+      <app-textbox
+        *ngIf="contractIsActiveEnabled$ | async"
+        text="Status"
+        i18n-text
+        data-cy="contract-valid-status"
+        [formGroup]="frontpageFormGroup"
+        formName="status"
+        [info]="statusText$ | async"
+      ></app-textbox>
+      <app-checkbox
+        *ngIf="contractIsActiveEnabled$ | async"
+        text="Gennemtving gyldighed"
+        i18n-text
+        labelPosition="after"
+        data-cy="contract-force-validity"
+        [formGroup]="frontpageFormGroup"
+        formName="enforcedValid"
+        (valueChange)="patchFrontPage({ general: { validity: { enforcedValid: $event } } })"
+      ></app-checkbox>
+    </app-standard-vertical-content-grid>
+    <ng-container *ngIf="contractAgreementPeriodEnabled$ | async">
+      <app-datepicker
+        text="Gyldig fra"
+        i18n-text
+        data-cy="contract-valid-from"
+        [formGroup]="frontpageFormGroup"
+        formName="validFrom"
+        (valueChange)="patchFrontPage({ general: { validity: { validFrom: $event?.toDateString() } } })"
+      ></app-datepicker>
+      <app-datepicker
+        text="Gyldig til"
+        i18n-text
+        data-cy="contract-valid-to"
+        [formGroup]="frontpageFormGroup"
+        formName="validTo"
+        (valueChange)="patchFrontPage({ general: { validity: { validTo: $event?.toDateString() } } })"
+      >
+      </app-datepicker>
+    </ng-container>
+    <app-textarea
+      *ngIf="contractNotesEnabled$ | async"
+      text="Bemærkning"
+      class="notes"
+      i18n-text
+      data-cy="contract-notes"
+      [formGroup]="frontpageFormGroup"
+      formName="notes"
+      (valueChange)="patchFrontPage({ general: { notes: $event } })"
+    ></app-textarea>
+  </app-form-grid>
+</app-card>
+
+<app-card *ngIf="contractParentContractEnabled$ | async">
+  <app-card-header
+    title="Overordnet kontrakt"
+    helpTextKey="it-contract.edit.parent-contract"
+    i18n-title
+  ></app-card-header>
+
+  <app-connected-dropdown
+    text="Overordnet kontrakt"
+    i18n-text
+    data-cy="parent-contract"
+    valueField="uuid"
+    [formGroup]="parentContractForm"
+    formName="parentContract"
+    [data$]="validParentContracts$"
+    [isLoading$]="contractsIsLoading$"
+    (filterChange)="searchParentContracts($event)"
+    (valueChange)="patchFrontPage({ parentContractUuid: $event })"
+  >
+  </app-connected-dropdown>
+</app-card>
+
+<app-card *ngIf="showResponsibleCard$ | async">
+  <app-card-header title="Ansvarlig enhed" i18n-title helpTextKey="it-contract.edit.responsible"></app-card-header>
+  <app-form-grid [formGroup]="responsibleFormGroup">
+    <app-org-unit-select
+      *ngIf="contractResponsibleUnitEnabled$ | async"
+      text="Ansvarlig enhed"
+      i18n-text
+      data-cy="contract-responsible"
+      [formGroup]="responsibleFormGroup"
+      formName="responsibleEntityOrganizationUnit"
+      (valueChange)="patchFrontPage({ responsible: { organizationUnitUuid: $event } })"
+    ></app-org-unit-select>
+    <ng-container *ngIf="contractInternalSignerEnabled$ | async">
+      <app-connected-dropdown
+        text="Kontraktunderskriver"
+        i18n-text
+        data-cy="contract-responsible-signer"
+        valueField="name"
+        [formGroup]="responsibleFormGroup"
+        formName="responsibleEntitySignedBy"
+        [data$]="users$"
+        [isLoading$]="usersIsLoading$"
+        (filterChange)="searchUsers($event)"
+        (valueChange)="patchFrontPage({ responsible: { signedBy: $event } })"
+      ></app-connected-dropdown>
+      <app-datepicker
+        text="Dato"
+        i18n-text
+        data-cy="contract-responsible-date"
+        [formGroup]="responsibleFormGroup"
+        formName="responsibleEntitySignedAt"
+        (valueChange)="patchFrontPage({ responsible: { signedAt: $event?.toDateString() } })"
+      >
+      </app-datepicker>
+      <app-checkbox
+        text="Underskrevet"
+        i18n-text
+        labelPosition="after"
+        data-cy="contract-responsible-signed"
+        [formGroup]="responsibleFormGroup"
+        formName="responsibleEntitySigned"
+        (valueChange)="patchFrontPage({ responsible: { signed: $event } })"
+      >
+      </app-checkbox>
+    </ng-container>
+  </app-form-grid>
+</app-card>
+
+<app-card *ngIf="showSupplierCard$ | async">
+  <app-card-header title="Leverandør" i18n-title helpTextKey="it-contract.edit.supplier"></app-card-header>
+  <app-form-grid [formGroup]="supplierFormGroup">
+    <app-connected-dropdown
+      *ngIf="contractSupplierEnabled$ | async"
+      text="Leverandør"
+      i18n-text
+      data-cy="contract-supplier"
+      valueField="uuid"
+      [formGroup]="supplierFormGroup"
+      formName="supplierOrganization"
+      [data$]="organizations$"
+      [isLoading$]="organizationsIsLoading$"
+      (filterChange)="searchOrganizations($event)"
+      (valueChange)="patchFrontPage({ supplier: { organizationUuid: $event } })"
+    ></app-connected-dropdown>
+    <ng-container *ngIf="contractExternalSignerEnabled$ | async">
+      <app-textbox
+        text="Leverandørens kontraktunderskriver"
+        i18n-text
+        data-cy="contract-supplier-signer"
+        [formGroup]="supplierFormGroup"
+        formName="supplierSignedBy"
+        (valueChange)="patchFrontPage({ supplier: { signedBy: $event } })"
+      >
+      </app-textbox>
+      <app-datepicker
+        text="Dato"
+        i18n-text
+        data-cy="contract-supplier-date"
+        [formGroup]="supplierFormGroup"
+        formName="supplierSignedAt"
+        (valueChange)="patchFrontPage({ supplier: { signedAt: $event?.toDateString() } })"
+      ></app-datepicker>
+      <app-checkbox
+        text="Underskrevet"
+        i18n-text
+        labelPosition="after"
+        data-cy="contract-supplier-signed"
+        [formGroup]="supplierFormGroup"
+        formName="supplierSigned"
+        (valueChange)="patchFrontPage({ supplier: { signed: $event } })"
+      ></app-checkbox>
+    </ng-container>
+  </app-form-grid>
+</app-card>
+
+<app-card *ngIf="showProcurementCard$ | async">
+  <app-card-header title="Genanskaffelse" i18n-title helpTextKey="it-contract.edit.procurement"></app-card-header>
+  <app-form-grid [formGroup]="procurementFormGroup">
+    <app-dropdown
+      *ngIf="contractProcurementStrategyEnabled$ | async"
+      text="Genanskaffelsesstrategi"
+      i18n-text
+      data-cy="contract-procurement-strategy"
+      [formGroup]="procurementFormGroup"
+      formName="procurementStrategy"
+      valueField="uuid"
+      [data]="procurementStrategyTypes$ | async"
+      (valueChange)="patchFrontPage({ procurement: { procurementStrategyUuid: $event } })"
+    >
+    </app-dropdown>
+    <app-dropdown
+      *ngIf="contractProcurementPlanEnabled$ | async"
+      text="Genanskaffelsesplan"
+      i18n-text
+      data-cy="contract-procurement-plan"
+      valueField="name"
+      [formGroup]="procurementFormGroup"
+      formName="procurementPlan"
+      [data]="yearsWithQuarters"
+      (valueChange)="patchProcurementPlan($event)"
+    >
+    </app-dropdown>
+    <app-radio-buttons
+      *ngIf="contractProcurementInitiatedEnabled$ | async"
+      text="Genanskaffelse igangsat"
+      i18n-text
+      data-cy="contract-procurement-initiated"
+      [formGroup]="procurementFormGroup"
+      formName="procurementInitiated"
+      [options]="activeOptions"
+      (optionChanged)="patchFrontPage({ procurement: { procurementInitiated: $event } })"
+    >
+    </app-radio-buttons>
+  </app-form-grid>
+</app-card>
+
+<app-card *ngIf="showHistoryCard$ | async">
+  <app-card-header title="Historik" i18n-title helpTextKey="it-contract.edit.history"> </app-card-header>
+  <app-form-grid [formGroup]="historyFormGroup">
+    <app-textbox
+      *ngIf="contractsCreatedByEnabled$ | async"
+      text="Oprettet af"
+      i18n-text
+      data-cy="contract-created-by"
+      [formGroup]="historyFormGroup"
+      formName="createdBy"
+    ></app-textbox>
+    <app-textbox
+      *ngIf="contractsLastModifiedByEnabled$ | async"
+      text="Sidst redigeret (bruger)"
+      i18n-text
+      data-cy="contract-modified-by"
+      [formGroup]="historyFormGroup"
+      formName="lastModifiedBy"
+    ></app-textbox>
+    <app-datepicker
+      *ngIf="contractsLastModifiedDateEnabled$ | async"
+      text="Sidst redigeret (dato)"
+      i18n-text
+      data-cy="contract-modified"
+      [formGroup]="historyFormGroup"
+      formName="lastModified"
+    ></app-datepicker>
+  </app-form-grid>
+</app-card>

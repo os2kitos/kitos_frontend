@@ -1,0 +1,26 @@
+[
+  {
+      "isEnabled": true,
+      "isObligatory": true,
+      "priority": 0,
+      "description": "...",
+      "uuid": "0a8c896b-d540-4504-b15a-ae4f5f1e490n",
+      "name": "NO"
+  },
+  {
+      "isEnabled": true,
+      "isObligatory": true,
+      "priority": 0,
+      "description": "...",
+      "uuid": "67f8231d-78ee-4016-923f-822652fdacb9",
+      "name": "SE"
+  },
+  {
+      "isEnabled": true,
+      "isObligatory": true,
+      "priority": 0,
+      "description": "...",
+      "uuid": "7db1d56c-06d8-44c0-aca4-b0ed1c0fcd8b",
+      "name": "UA"
+  }
+]

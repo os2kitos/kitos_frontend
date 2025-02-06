@@ -1,0 +1,133 @@
+<app-standard-vertical-content-grid *ngIf="(isLoading$ | async) === false">
+  <ng-container *ngIf="notifications$ | async as notifications">
+    <ng-container>
+      <app-native-table
+        tableLayout="fixed"
+        data-cy="notification-table-selector"
+        class="notifications-table"
+        [includeDividers]="true"
+        *ngIf="notifications.length > 0"
+      >
+        <thead>
+          <th i18n width="5%" data-cy="is-active-column">Aktiv</th>
+          <th i18n data-cy="name-column" width="15%">Navn</th>
+          <th i18n data-cy="last-sent-column" width="6%">Sidst sendt</th>
+          <th i18n data-cy="from-date-column" width="6%">Fra dato</th>
+          <th i18n data-cy="to-date-column" width="6%">Til dato</th>
+          <th i18n width="15%" data-cy="receivers-column">Modtagere</th>
+          <th i18n width="15%" data-cy="ccs-column">CC</th>
+          <th i18n data-cy="title-column" width="15%">Emne</th>
+          <th width="105px"></th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let notification of notifications">
+            <td>
+              <app-paragraph>
+                <app-boolean-circle [value]="notification.active ?? false"></app-boolean-circle>
+              </app-paragraph>
+            </td>
+            <td>
+              <app-paragraph [cropOnOverflow]="true"> {{ notification.name ?? nullPlaceholder }}</app-paragraph>
+            </td>
+            <td>
+              <app-paragraph>
+                {{ notification.lastSent ? formatDate(notification.lastSent) : nullPlaceholder }}
+              </app-paragraph>
+            </td>
+            <td>
+              <app-paragraph>
+                {{ notification.fromDate ? formatDate(notification.fromDate) : nullPlaceholder }}
+              </app-paragraph>
+            </td>
+            <td>
+              <app-paragraph>
+                {{ notification.toDate ? formatDate(notification.toDate) : nullPlaceholder }}
+              </app-paragraph>
+            </td>
+            <td>
+              <app-paragraph [cropOnOverflow]="true">
+                {{
+                  getCommaSeparatedRecipients(
+                    notification.receivers?.emailRecipients,
+                    notification.receivers?.roleRecipients
+                  )
+                }}
+              </app-paragraph>
+              <app-paragraph
+                [cropOnOverflow]="true"
+                *ngIf="
+                  notification.receivers?.emailRecipients?.length === 0 &&
+                  notification.receivers?.roleRecipients?.length === 0
+                "
+              >
+                {{ nullPlaceholder }}</app-paragraph
+              >
+            </td>
+            <td>
+              <app-paragraph [cropOnOverflow]="true">
+                {{ getCommaSeparatedRecipients(notification.cCs?.emailRecipients, notification.cCs?.roleRecipients) }}
+              </app-paragraph>
+              <app-paragraph
+                *ngIf="
+                  notification.cCs?.emailRecipients?.length === 0 && notification.cCs?.roleRecipients?.length === 0
+                "
+                [cropOnOverflow]="true"
+              >
+                {{ nullPlaceholder }}</app-paragraph
+              >
+            </td>
+            <td>
+              <app-paragraph [cropOnOverflow]="true">
+                {{ notification.subject ?? nullPlaceholder }}
+              </app-paragraph>
+            </td>
+            <td>
+              <app-table-row-actions floatSide="left" *ngIf="hasModifyPermission | async">
+                <app-icon-button (buttonClick)="onClickEdit(notification)">
+                  <app-pencil-icon></app-pencil-icon>
+                </app-icon-button>
+                <app-icon-button
+                  (buttonClick)="onClickViewSent(notification)"
+                  *ngIf="notification.notificationType === 'Repeat'"
+                  data-cy="view-sent-notifications-button"
+                >
+                  <app-eye-icon></app-eye-icon>
+                </app-icon-button>
+                <!-- 20240527 - Deactivation should be determined by permissions and not logic like this -- permissions currently not passed in NotificationResponseDTO -->
+                <app-icon-button
+                  (buttonClick)="onDeactivate(notification)"
+                  *ngIf="notification.active && notification.notificationType === 'Repeat'"
+                  data-cy="deactivate-button"
+                >
+                  <app-x-icon></app-x-icon>
+                </app-icon-button>
+                <!-- 20240527 - Removal should be determined by permissions and not logic like this -- permissions currently not passed in NotificationResponseDTO -->
+                <app-icon-button
+                  (buttonClick)="onRemove(notification)"
+                  *ngIf="!notification.active && !notification.lastSent"
+                >
+                  <app-trashcan-icon></app-trashcan-icon>
+                </app-icon-button>
+              </app-table-row-actions>
+            </td>
+          </tr>
+        </tbody>
+      </app-native-table>
+    </ng-container>
+  </ng-container>
+  <app-empty-state
+    *ngIf="(anyNotifications$ | async) === false"
+    text="Ingen notifikationer tilføjet endnu"
+    context="emptyTable"
+    i18n-text
+  ></app-empty-state>
+  <app-collection-extension-button
+    *ngIf="hasModifyPermission | async"
+    text="Tilføj advis"
+    (clicked)="onCreate()"
+    i18n-text
+    data-cy="add-notification-button"
+  >
+  </app-collection-extension-button>
+</app-standard-vertical-content-grid>
+<app-loading *ngIf="isLoading$ | async"></app-loading>

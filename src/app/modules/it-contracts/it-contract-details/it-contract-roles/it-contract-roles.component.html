@@ -1,0 +1,8 @@
+<app-card>
+  <app-card-header title="Kontraktroller" helpTextKey="it-contract.edit.roles" i18n-title> </app-card-header>
+  <app-role-table
+    [entityUuid$]="contractUuid$"
+    entityType="it-contract"
+    [hasModifyPermission]="(hasModifyPermission$ | async) ?? false"
+  ></app-role-table>
+</app-card>

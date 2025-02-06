@@ -1,0 +1,123 @@
+{
+  "@odata.context": "https://kitos-dev.strongminds.dk/odata/$metadata#DataProcessingRegistrationReadModels",
+  "@odata.count": 1,
+  "value": [
+    {
+      "Id": 1,
+      "Name": "Dpa 1",
+      "OrganizationId": 1,
+      "SourceEntityId": 1,
+      "SourceEntityUuid": "fce05ba6-cbb0-4d52-bd33-156f1ef29c72",
+      "MainReferenceUserAssignedId": null,
+      "MainReferenceUrl": null,
+      "MainReferenceTitle": null,
+      "SystemNamesAsCsv": "",
+      "SystemUuidsAsCsv": "",
+      "DataProcessorNamesAsCsv": "",
+      "SubDataProcessorNamesAsCsv": "",
+      "IsAgreementConcluded": null,
+      "TransferToInsecureThirdCountries": null,
+      "AgreementConcludedAt": null,
+      "LatestOversightDate": null,
+      "BasisForTransfer": null,
+      "OversightInterval": null,
+      "DataResponsible": null,
+      "OversightOptionNamesAsCsv": "",
+      "IsOversightCompleted": null,
+      "OversightScheduledInspectionDate": null,
+      "IsActive": true,
+      "ActiveAccordingToMainContract": true,
+      "ContractNamesAsCsv": "",
+      "LastChangedById": 6,
+      "LastChangedByName": "Automatisk oprettet testbruger (Api GlobalAdmin)",
+      "LastChangedAt": "2024-05-14T05:05:40.8180342Z",
+      "RoleAssignments": [
+        {
+          "Id": 1,
+          "RoleId": 2,
+          "UserId": 6,
+          "UserFullName": "Automatisk oprettet testbruger (Api GlobalAdmin)",
+          "ParentId": 1
+        }
+      ]
+    },
+    {
+      "Id": 2,
+      "Name": "Dpa 2",
+      "OrganizationId": 1,
+      "SourceEntityId": 1,
+      "SourceEntityUuid": "fce05ba6-cbb0-4d52-bd33-156f1ef29c73",
+      "MainReferenceUserAssignedId": null,
+      "MainReferenceUrl": null,
+      "MainReferenceTitle": null,
+      "SystemNamesAsCsv": "",
+      "SystemUuidsAsCsv": "",
+      "DataProcessorNamesAsCsv": "",
+      "SubDataProcessorNamesAsCsv": "",
+      "IsAgreementConcluded": null,
+      "TransferToInsecureThirdCountries": null,
+      "AgreementConcludedAt": null,
+      "LatestOversightDate": null,
+      "BasisForTransfer": null,
+      "OversightInterval": null,
+      "DataResponsible": null,
+      "OversightOptionNamesAsCsv": "",
+      "IsOversightCompleted": null,
+      "OversightScheduledInspectionDate": null,
+      "IsActive": true,
+      "ActiveAccordingToMainContract": true,
+      "ContractNamesAsCsv": "",
+      "LastChangedById": 6,
+      "LastChangedByName": "Automatisk oprettet testbruger (Api GlobalAdmin)",
+      "LastChangedAt": "2024-05-14T05:05:40.8180342Z",
+      "RoleAssignments": [
+        {
+          "Id": 1,
+          "RoleId": 2,
+          "UserId": 6,
+          "UserFullName": "Automatisk oprettet testbruger (Api GlobalAdmin)",
+          "ParentId": 1
+        }
+      ]
+    },
+    {
+      "Id": 3,
+      "Name": "Dpa 3",
+      "OrganizationId": 1,
+      "SourceEntityId": 1,
+      "SourceEntityUuid": "fce05ba6-cbb0-4d52-bd33-156f1ef29c74",
+      "MainReferenceUserAssignedId": null,
+      "MainReferenceUrl": null,
+      "MainReferenceTitle": null,
+      "SystemNamesAsCsv": "",
+      "SystemUuidsAsCsv": "",
+      "DataProcessorNamesAsCsv": "",
+      "SubDataProcessorNamesAsCsv": "",
+      "IsAgreementConcluded": null,
+      "TransferToInsecureThirdCountries": null,
+      "AgreementConcludedAt": null,
+      "LatestOversightDate": null,
+      "BasisForTransfer": null,
+      "OversightInterval": null,
+      "DataResponsible": null,
+      "OversightOptionNamesAsCsv": "",
+      "IsOversightCompleted": null,
+      "OversightScheduledInspectionDate": null,
+      "IsActive": true,
+      "ActiveAccordingToMainContract": true,
+      "ContractNamesAsCsv": "",
+      "LastChangedById": 6,
+      "LastChangedByName": "Automatisk oprettet testbruger (Api GlobalAdmin)",
+      "LastChangedAt": "2024-05-14T05:05:40.8180342Z",
+      "RoleAssignments": [
+        {
+          "Id": 1,
+          "RoleId": 2,
+          "UserId": 6,
+          "UserFullName": "Automatisk oprettet testbruger (Api GlobalAdmin)",
+          "ParentId": 1
+        }
+      ]
+    }
+  ]
+}

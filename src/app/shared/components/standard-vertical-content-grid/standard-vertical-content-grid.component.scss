@@ -1,6 +1,9 @@
 @import "theme";
 
-:host {
+.grid-container {
   display: grid;
-  grid-gap: $padding-medium;
+
+  &.with-gap {
+    gap: $padding-medium;
+  }
 }

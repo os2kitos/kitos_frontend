@@ -1,0 +1,19 @@
+<app-accordion
+  title="Hvilke kategorier af registrerede indgår i databehandlingen?"
+  [isExpanded]="(isExpanded$ | async) ?? false"
+  (expandedChanged)="onExpandedChanged($event)"
+  i18n-title
+>
+  <form [formGroup]="registeredDataCategoriesForm">
+    <app-checkbox
+      *ngFor="let option of registeredDataCategoriesOptions$ | async"
+      labelPosition="after"
+      i18n-text
+      [text]="option.name"
+      [formGroup]="registeredDataCategoriesForm"
+      [formName]="option.uuid"
+      (valueChange)="patchRegisteredDataCategories()"
+    >
+    </app-checkbox>
+  </form>
+</app-accordion>

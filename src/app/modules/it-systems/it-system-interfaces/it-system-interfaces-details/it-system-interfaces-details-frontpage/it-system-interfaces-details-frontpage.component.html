@@ -1,0 +1,158 @@
+<app-card>
+  <app-card-header title="Snitflade information" i18n-title helpTextKey="it-system.interface-edit.main">
+    <app-status-chip type="it-interface" [value]="isInterfaceActive$ | async" [reverseValues]="true"> </app-status-chip>
+  </app-card-header>
+
+  <app-form-grid [formGroup]="interfaceFormGroup">
+    <app-textbox
+      text="Navn"
+      i18n-text
+      data-cy="interface-name"
+      [formGroup]="interfaceFormGroup"
+      formName="name"
+      (valueChange)="patchFrontPage({ name: $event })"
+    ></app-textbox>
+    <app-textbox
+      text="Snitflade ID"
+      i18n-text
+      data-cy="interface-id"
+      [formGroup]="interfaceFormGroup"
+      formName="interfaceId"
+      (valueChange)="patchFrontPage({ interfaceId: $event })"
+    >
+    </app-textbox>
+    <app-textbox
+      text="Version"
+      i18n-text
+      data-cy="interface-version"
+      [formGroup]="interfaceFormGroup"
+      formName="version"
+      (valueChange)="patchFrontPage({ version: $event })"
+    ></app-textbox>
+    <app-connected-dropdown
+      text="Udstillet system"
+      i18n-text
+      data-cy="interface-system"
+      valueField="uuid"
+      [formGroup]="interfaceFormGroup"
+      formName="exposedBySystem"
+      [data$]="itSystems$"
+      [isLoading$]="isLoadingSystems$"
+      (filterChange)="searchItSystems($event)"
+      (valueChange)="patchExposedBySystem($event)"
+    ></app-connected-dropdown>
+    <app-dropdown
+      text="Synlighed"
+      i18n-text
+      data-cy="interface-visibility"
+      [formGroup]="interfaceFormGroup"
+      formName="scope"
+      [data]="scopeOptions"
+      (valueChange)="patchFrontPage({ scope: $event })"
+    ></app-dropdown>
+    <app-dropdown
+      text="Grænseflade"
+      i18n-text
+      valueField="uuid"
+      data-cy="interface-type"
+      [formGroup]="interfaceFormGroup"
+      formName="interfaceType"
+      [data]="interfaceTypeOptions$ | async"
+      (valueChange)="patchFrontPage({ itInterfaceTypeUuid: $event })"
+    ></app-dropdown>
+    <app-textbox
+      text="UUID"
+      i18n-text
+      data-cy="interface-uuid"
+      [formGroup]="interfaceFormGroup"
+      formName="uuid"
+    ></app-textbox>
+    <app-textbox
+      text="Oprettet af"
+      i18n-text
+      data-cy="interface-create-by"
+      [formGroup]="interfaceFormGroup"
+      formName="createdBy"
+    ></app-textbox>
+    <app-textbox
+      text="Rettighedshaver"
+      i18n-text
+      data-cy="interface-rights-holder"
+      [formGroup]="interfaceFormGroup"
+      formName="rightsHolder"
+    ></app-textbox>
+    <app-link-textbox
+      title="Link til yderligere beskrivelse"
+      i18n-title
+      data-cy="interface-link"
+      [simpleLink$]="urlReferenceAsSimpleLink$"
+      [isLinkOnly]="true"
+      (iconClick)="openUpdateUrlDialog()"
+      [isDisabled]="disableLinkControl"
+    >
+    </app-link-textbox>
+    <app-textarea
+      text="Beskrivelse"
+      class="notes"
+      i18n-text
+      data-cy="interface-description"
+      [formGroup]="interfaceFormGroup"
+      formName="description"
+      (valueChange)="patchFrontPage({ description: $event })"
+    ></app-textarea>
+    <app-textarea
+      text="Note"
+      class="notes"
+      i18n-text
+      data-cy="interface-notes"
+      [formGroup]="interfaceFormGroup"
+      formName="notes"
+      (valueChange)="patchFrontPage({ note: $event })"
+    ></app-textarea>
+  </app-form-grid>
+</app-card>
+<app-card>
+  <app-card-header title="Data" i18n-title helpTextKey="it-system.interface-data-edit.main"></app-card-header>
+  <app-standard-vertical-content-grid>
+    <ng-container *ngIf="anyInterfaceData$ | async">
+      <app-native-table>
+        <thead>
+          <th i18n>Data</th>
+          <th i18n>Type</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of interfaceData$ | async">
+            <td>
+              <app-paragraph>{{ data.description ?? "Ingen beskrivelse" }}</app-paragraph>
+            </td>
+            <td>
+              <app-content-space-between>
+                <app-paragraph>{{ data.dataType?.name }}</app-paragraph>
+                <app-table-row-actions *ngIf="hasModifyPermission$ | async">
+                  <app-icon-button data-cy="edit-data-button" (buttonClick)="openWriteDialog(data)"
+                    ><app-pencil-icon></app-pencil-icon
+                  ></app-icon-button>
+                  <app-icon-button data-cy="remove-data-button" (buttonClick)="deleteInterfaceDataRow(data.uuid)"
+                    ><app-trashcan-icon></app-trashcan-icon
+                  ></app-icon-button>
+                </app-table-row-actions>
+              </app-content-space-between>
+            </td>
+          </tr>
+        </tbody>
+      </app-native-table>
+    </ng-container>
+    <app-empty-state
+      *ngIf="(anyInterfaceData$ | async) === false"
+      text="Ingen data tilføjet endnu"
+      context="emptyTable"
+    ></app-empty-state>
+    <app-collection-extension-button
+      *ngIf="hasModifyPermission$ | async"
+      text="Tilføj data"
+      (clicked)="openWriteDialog()"
+      i18n-title
+      data-cy="add-data-button"
+    ></app-collection-extension-button>
+  </app-standard-vertical-content-grid>
+</app-card>

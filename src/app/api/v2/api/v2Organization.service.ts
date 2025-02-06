@@ -52,6 +52,7 @@ export interface GetManyOrganizationV2GetOrganizationUsersRequestParams {
     organizationUuid: string;
     /** Query by text in name or email */
     nameOrEmailQuery?: string;
+    emailQuery?: string;
     /** Query by role assignment */
     roleQuery?: 'User' | 'LocalAdmin' | 'OrganizationModuleAdmin' | 'SystemModuleAdmin' | 'ContractModuleAdmin' | 'RightsHolderAccess';
     /** Property to order by */
@@ -274,6 +275,7 @@ export class APIV2OrganizationService {
             throw new Error('Required parameter organizationUuid was null or undefined when calling getManyOrganizationV2GetOrganizationUsers.');
         }
         const nameOrEmailQuery = requestParameters.nameOrEmailQuery;
+        const emailQuery = requestParameters.emailQuery;
         const roleQuery = requestParameters.roleQuery;
         const orderByProperty = requestParameters.orderByProperty;
         const page = requestParameters.page;
@@ -283,6 +285,10 @@ export class APIV2OrganizationService {
         if (nameOrEmailQuery !== undefined && nameOrEmailQuery !== null) {
           localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
             <any>nameOrEmailQuery, 'nameOrEmailQuery');
+        }
+        if (emailQuery !== undefined && emailQuery !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>emailQuery, 'emailQuery');
         }
         if (roleQuery !== undefined && roleQuery !== null) {
           localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
@@ -347,7 +353,7 @@ export class APIV2OrganizationService {
     }
 
     /**
-     * Returns organizations organizations from KITOS
+     * Returns organizations from KITOS
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.

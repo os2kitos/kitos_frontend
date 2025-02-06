@@ -1,0 +1,14 @@
+[
+  {
+    "writeAccess": true,
+    "description": null,
+    "uuid": "5f257c9c-4a71-4be2-b94c-94aca2edb54e",
+    "name": "Standard skriverolle"
+  },
+  {
+    "writeAccess": false,
+    "description": null,
+    "uuid": "d2e62996-bdc1-4a22-bef6-ceb518679f34",
+    "name": "Standard læserolle"
+  }
+]

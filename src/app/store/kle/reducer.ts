@@ -10,6 +10,10 @@ export const kleAdapter = createEntityAdapter<APIKLEDetailsDTO>({
 
 export const kleInitialState: KLEState = kleAdapter.getInitialState({
   cacheTime: undefined,
+
+  adminKleStatus: undefined,
+  adminKleIsLoading: false,
+  adminKleChangesDownloaded: false,
 });
 
 export const kleFeature = createFeature({
@@ -17,11 +21,30 @@ export const kleFeature = createFeature({
   reducer: createReducer(
     kleInitialState,
     on(
-      KLEActions.getKlesSuccess,
+      KLEActions.getKLEsSuccess,
       (state, { kles }): KLEState => ({
         ...kleAdapter.setAll(kles, state),
         cacheTime: new Date().getTime(),
       })
-    )
+    ),
+
+    on(KLEActions.getAdminKLEStatus, (state): KLEState => ({ ...state, adminKleIsLoading: true })),
+    on(
+      KLEActions.getAdminKLEStatusSuccess,
+      (state, { status }): KLEState => ({ ...state, adminKleIsLoading: false, adminKleStatus: status })
+    ),
+    on(KLEActions.getAdminKLEStatusError, (state): KLEState => ({ ...state, adminKleIsLoading: false })),
+
+    on(KLEActions.getAdminKLEFile, (state): KLEState => ({ ...state, adminKleIsLoading: true })),
+    on(KLEActions.getAdminKLEFileSuccess, (state): KLEState => {
+      return { ...state, adminKleIsLoading: false, adminKleChangesDownloaded: true };
+    }),
+    on(KLEActions.getAdminKLEFileError, (state): KLEState => {
+      return { ...state, adminKleIsLoading: false };
+    }),
+
+    on(KLEActions.updateAdminKLE, (state): KLEState => ({ ...state, adminKleIsLoading: true })),
+    on(KLEActions.updateAdminKLESuccess, (state): KLEState => ({ ...state, adminKleIsLoading: false })),
+    on(KLEActions.updateAdminKLEError, (state): KLEState => ({ ...state, adminKleIsLoading: false }))
   ),
 });

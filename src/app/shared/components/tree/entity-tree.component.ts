@@ -15,6 +15,7 @@ export class EntityTreeComponent<T> implements OnInit {
   public toggleStatusText = 'status';
 
   @Input() public showStatus = false;
+  @Input() public hideStatusButton = false;
   @Input() public itemType!: RegistrationEntityTypes;
   @Input() public currentNodeUuid?: string;
   @Input() public set nodes(nodes: EntityTreeNode<T>[]) {
@@ -27,6 +28,7 @@ export class EntityTreeComponent<T> implements OnInit {
 
   ngOnInit(): void {
     switch (this.itemType) {
+      case 'organization':
       case 'it-system-usage':
       case 'it-system':
         this.toggleStatusText = $localize`Vis tilgængelighed`;

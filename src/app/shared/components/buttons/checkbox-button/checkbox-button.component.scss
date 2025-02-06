@@ -1,0 +1,29 @@
+@import "theme";
+
+.button-alignment {
+  justify-content: flex-start;
+}
+.button-auto-width {
+  width: auto;
+}
+
+.align-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+::ng-deep .disabled-border-color button {
+  border-color: $color-primary-40 !important;
+}
+
+::ng-deep button.mat-mdc-button-base {
+  padding-left: 10px !important;
+}
+
+.size-large {
+  ::ng-deep button.mat-mdc-button-base {
+    height: 56px;
+  }
+}

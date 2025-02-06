@@ -1,0 +1,48 @@
+<app-card>
+  <app-card-header
+    title="IT Kontrakten gælder flg. databehandlingsregisteringer"
+    i18n-title
+    helpTextKey="it-contract.edit.data-processing"
+  ></app-card-header>
+
+  <app-standard-vertical-content-grid>
+    <app-native-table *ngIf="anyDataProcessingRegistrations$ | async">
+      <thead>
+        <th i18n>Registering</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let dpr of dataProcessingRegistrations$ | async">
+          <td>
+            <app-content-space-between>
+              <app-details-page-link
+                itemType="data-processing-registration"
+                linkFontSize="small"
+                [itemPath]="dpr.uuid"
+                >{{ dpr.name }}</app-details-page-link
+              >
+              <app-icon-button
+                (buttonClick)="onDelete(dpr.uuid)"
+                data-cy="delete-dpr-button"
+                *ngIf="(hasModifyPermission$ | async) === true"
+                ><app-trashcan-icon></app-trashcan-icon
+              ></app-icon-button>
+            </app-content-space-between>
+          </td>
+        </tr>
+      </tbody>
+    </app-native-table>
+    <app-empty-state
+      *ngIf="(anyDataProcessingRegistrations$ | async) === false"
+      text="Ingen databehandlingsregisteringer tilføjet endnu"
+      context="emptyTable"
+      i18n-text
+    ></app-empty-state>
+    <app-collection-extension-button
+      text="Tilføj databehandling"
+      (clicked)="onAdd()"
+      data-cy="add-dpr-button"
+      i18n-text
+      *ngIf="(hasModifyPermission$ | async) === true"
+    ></app-collection-extension-button>
+  </app-standard-vertical-content-grid>
+</app-card>

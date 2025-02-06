@@ -1,0 +1,52 @@
+[
+  {
+    "description": "...",
+    "uuid": "aceaaf46-3c55-45d7-81bc-96925b3fc403",
+    "name": "Backup"
+  },
+  {
+    "description": "...",
+    "uuid": "b8fdc821-8193-4898-8e04-644e9e1d917d",
+    "name": "Databaselicenser"
+  },
+  {
+    "description": "...",
+    "uuid": "f9065582-ec62-4483-85e8-d6d5b27e3ed4",
+    "name": "Drift"
+  },
+  {
+    "description": "...",
+    "uuid": "7d94e6a8-7651-4e63-b9b0-7af2e0b0d16b",
+    "name": "Licens"
+  },
+  {
+    "description": "...",
+    "uuid": "94629465-ca47-4576-917c-566ee2754ec2",
+    "name": "Overvågning"
+  },
+  {
+    "description": "...",
+    "uuid": "732d81f2-d9c2-415c-a86f-0598d88c293e",
+    "name": "Serverdrift"
+  },
+  {
+    "description": "...",
+    "uuid": "fb858776-aa1e-4bc8-a51b-8a6d23d048a0",
+    "name": "Serverlicenser"
+  },
+  {
+    "description": "...",
+    "uuid": "bb7f696c-95a7-44c7-aa5c-f7fd7b1f85fd",
+    "name": "Support"
+  },
+  {
+    "description": "...",
+    "uuid": "9f607116-088f-498f-8f9d-225802450167",
+    "name": "Udvikling"
+  },
+  {
+    "description": "...",
+    "uuid": "969fe00d-526e-48ad-a132-05a3a4a35ec3",
+    "name": "Vedligehold"
+  }
+]

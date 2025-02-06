@@ -1,0 +1,80 @@
+{
+  "name": "Dpa 1",
+  "uuid": "fce05ba6-cbb0-4d52-bd33-156f1ef29c72",
+  "createdBy": {
+    "uuid": "22d3c6bc-399a-435d-92a8-38e8fe9fa3f4",
+    "name": "Automatisk oprettet testbruger (Api GlobalAdmin)"
+  },
+  "lastModified": "2024-05-24T13:20:17.2359052Z",
+  "lastModifiedBy": {
+    "uuid": "daf59e91-4ab3-4f2d-9d89-8446dab01171",
+    "name": "Automatisk oprettet testbruger (GlobalAdmin)"
+  },
+  "organizationContext": {
+    "cvr": "11111111",
+    "uuid": "9081238b-7d42-45fa-bf0a-672fdcf8c602",
+    "name": "Fælles Kommune"
+  },
+  "general": {
+    "dataResponsible": {
+      "uuid": "5fdbfbfb-09f7-40b0-ae5d-24c424f2da23",
+      "name": "Fællesdataansvar "
+    },
+    "dataResponsibleRemark": "description",
+    "isAgreementConcluded": "Yes",
+    "isAgreementConcludedRemark": "description",
+    "agreementConcludedAt": "2024-05-24T00:00:00Z",
+    "basisForTransfer": {
+      "uuid": "0b384d2e-18ec-4cad-9e3d-b9725a136eed",
+      "name": "Andet"
+    },
+    "transferToInsecureThirdCountries": "Yes",
+    "insecureCountriesSubjectToDataTransfer": [
+      {
+        "uuid": "b7dac0cd-e15a-481e-a29b-6111a941137c",
+        "name": "Danmark"
+      }
+    ],
+    "dataProcessors": [
+      {
+        "cvr": "11111111",
+        "uuid": "9081238b-7d42-45fa-bf0a-672fdcf8c602",
+        "name": "Fælles Kommune"
+      }
+    ],
+    "hasSubDataProcessors": "Yes",
+    "subDataProcessors": [
+      {
+        "dataProcessorOrganization": {
+          "cvr": "11111111",
+          "uuid": "9081238b-7d42-45fa-bf0a-672fdcf8c602",
+          "name": "Fælles Kommune"
+        },
+        "basisForTransfer": {
+          "uuid": "c551bee2-6422-4980-8743-9aa2e6d13c59",
+          "name": "Binding corporate rules / BCR"
+        },
+        "transferToInsecureThirdCountry": "Yes",
+        "insecureThirdCountrySubjectToDataProcessing": {
+          "uuid": "b7dac0cd-e15a-481e-a29b-6111a941137c",
+          "name": "Danmark"
+        }
+      }
+    ],
+    "valid": true,
+    "mainContract": null
+  },
+  "systemUsages": [],
+  "oversight": {
+    "oversightOptions": [],
+    "oversightOptionsRemark": null,
+    "oversightInterval": null,
+    "oversightIntervalRemark": null,
+    "isOversightCompleted": null,
+    "oversightCompletedRemark": null,
+    "oversightScheduledInspectionDate": null,
+    "oversightDates": []
+  },
+  "roles": [],
+  "externalReferences": []
+}

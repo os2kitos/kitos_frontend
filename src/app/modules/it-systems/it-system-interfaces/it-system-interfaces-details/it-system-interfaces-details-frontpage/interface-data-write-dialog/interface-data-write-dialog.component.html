@@ -1,0 +1,33 @@
+<app-dialog title="Redigér data" i18n-title overflow="none">
+  <form [formGroup]="dataForm" (submit)="onSaveClick()">
+    <app-standard-vertical-content-grid>
+      <app-textbox
+        text="Data"
+        i18n-text
+        [formGroup]="dataForm"
+        formName="description"
+        data-cy="data-textbox"
+      ></app-textbox>
+      <app-dropdown
+        text="Datatype"
+        i18n-text
+        [formGroup]="dataForm"
+        formName="dataType"
+        data-cy="data-type-dropdown"
+        [data]="dataTypes$ | async"
+        valueField="uuid"
+      ></app-dropdown>
+      <app-dialog-actions>
+        <app-button
+          buttonStyle="secondary"
+          [disabled]="isBusy"
+          (buttonClick)="onCancelClick()"
+          data-cy="write-data-cancel-button"
+          i18n
+          >Annuller</app-button
+        >
+        <app-button type="submit" [disabled]="isBusy" data-cy="write-data-save-button" i18n>Gem</app-button>
+      </app-dialog-actions>
+    </app-standard-vertical-content-grid>
+  </form>
+</app-dialog>

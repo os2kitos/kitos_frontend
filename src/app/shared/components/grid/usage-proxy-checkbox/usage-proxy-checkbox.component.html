@@ -1,0 +1,7 @@
+<app-slide-toggle
+  #switch
+  [value]="checked"
+  [disabled]="disabled"
+  (valueChange)="onClick($event)"
+  (click)="preventDefault($event)"
+></app-slide-toggle>

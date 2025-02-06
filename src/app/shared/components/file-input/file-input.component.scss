@@ -1,0 +1,16 @@
+@import "theme";
+
+.file-input-style {
+  border: 1px solid $color-neutral-40;
+  background-color: white;
+  padding-top: $padding-small + $padding-smallest;
+  padding-bottom: $padding-small + $padding-smallest;
+  padding-left: $padding-medium;
+  padding-right: $padding-medium;
+  border-radius: 10px;
+  border-color: $color-primary;
+  color: $color-primary;
+  font-weight: bold;
+  width: 100%;
+  box-sizing: border-box;
+}

@@ -1,0 +1,18 @@
+@import "theme";
+
+.circle {
+  width: 25px;
+  height : 25px;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.color-primary {
+  background-color: $color-primary-base;
+}
+
+.color-light-grey {
+  background-color: $color-neutral-20;
+}

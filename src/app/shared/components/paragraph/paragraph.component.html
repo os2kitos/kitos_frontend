@@ -1,6 +1,20 @@
 <p
   class="paragraph paragraph-{{ paragraphSize }}"
-  [ngClass]="{ 'might-overflow': cropOnOverlow, strikeThrough: strikeThrough, dimmed: dimmed }"
+  [ngClass]="{
+    'might-overflow': cropOnOverflow,
+    'wrap-on-overflow': wrapOnOverflow,
+    strikeThrough: strikeThrough,
+    dimmed: dimmed,
+    'bold-font': bold,
+    'error-color': color === 'error',
+    'primary-dark-color': color === 'primary-dark',
+    'white-color': color === 'white',
+    'neutral-color': color === 'grey',
+    'display-flex': displayFlex,
+  }"
 >
   <ng-content></ng-content>
+  <app-icon-button *ngIf="helpTextKey" (buttonClick)="openHelpTextDialog()">
+    <app-help-icon></app-help-icon>
+  </app-icon-button>
 </p>

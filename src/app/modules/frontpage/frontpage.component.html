@@ -2,30 +2,27 @@
 
 <ng-container *ngIf="(loading$ | async) === false && (text$ | async) as text">
   <div class="card-column">
-    <div class="card" *ngIf="text.about as textContent">
-      <p [innerHTML]="textContent"></p>
-    </div>
-    <div class="card" *ngIf="text.contactInfo as textContent">
-      <p [innerHTML]="textContent"></p>
-    </div>
+    <app-public-message type="about" [content]="text.about"></app-public-message>
+    <app-public-message type="contact-info" [content]="text.contactInfo"></app-public-message>
   </div>
 
   <div class="card-column">
-    <div class="card" *ngIf="text.guides as textContent">
-      <p [innerHTML]="textContent"></p>
-    </div>
+    <app-public-message type="guides" [content]="text.guides"></app-public-message>
   </div>
 
   <div class="card-column">
     <div class="card" *ngIf="(user$ | async) === undefined && (isAuthenticating$ | async) === false">
       <app-login></app-login>
+      <div class="divider-margin">
+        <app-divider></app-divider>
+      </div>
+      <app-reset-password-text-link></app-reset-password-text-link>
     </div>
 
-    <div class="card" *ngIf="text.statusMessages as textContent">
-      <p [innerHTML]="textContent"></p>
+    <div class="sso-button" *ngIf="(user$ | async) === undefined && (isAuthenticating$ | async) === false">
+      <app-button (buttonClick)="goToSSO()">Log ind via fælleskommunal adgangsstyring</app-button>
     </div>
-    <div class="card" *ngIf="text.misc as textContent">
-      <p [innerHTML]="textContent"></p>
-    </div>
+    <app-public-message type="status-messages" [content]="text.statusMessages"></app-public-message>
+    <app-public-message type="misc" [content]="text.misc"></app-public-message>
   </div>
 </ng-container>

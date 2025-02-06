@@ -1,64 +1,61 @@
 @import "theme";
 
+:host ::ng-deep {
+  display: flex;
+
+  .footer-section {
+    display: flex;
+    align-items: center;
+    border-bottom-left-radius: $radius-large;
+    gap: $padding-small;
+  }
+  font-size: 14px;
+  color: $color-neutral-80;
+
+  kendo-dropdownlist {
+    width: 90px;
+    padding: 0 $padding-small;
+  }
+
+  kendo-pager-prev-buttons,
+  kendo-pager-next-buttons,
+  kendo-pager-numeric-buttons {
+    color: $color-primary-dark;
+
+    .k-button {
+      font-weight: bold;
+      border-radius: $radius-large !important;
+
+      &.k-disabled {
+        color: $color-neutral-60;
+      }
+    }
+  }
+
+  kendo-pager-info {
+    order: initial;
+    justify-content: center;
+  }
+
+  .option-dropdown {
+    color: $color-primary-dark;
+    border-radius: $radius-large;
+    border-color: $color-neutral-40;
+  }
+  .option-dropdown:hover {
+    box-sizing: border-box;
+    background-color: $color-primary-10;
+    border: 1px solid $color-primary !important;
+  }
+  .option-dropdown:active {
+    box-sizing: border-box;
+    background-color: $color-primary-20;
+    border: 1px solid $color-primary !important;
+  }
+}
+
 $select-height: 44px;
 
 :host {
   display: flex;
-}
-
-.page-size-container {
-  display: flex;
-  align-items: center;
-  background-color: $color-white;
-  padding-left: $padding-medium;
-  color: $color-neutral-80;
-  border-bottom-left-radius: $radius-large;
-  font-size: 14px;
-
-  mat-form-field {
-    width: 90px;
-    padding: 0 $padding-small;
-  }
-}
-
-mat-paginator {
-  flex: 1;
-  border-top: 1px solid $color-neutral-20;
-  border-bottom-right-radius: $radius-large;
-}
-
-:host ::ng-deep {
-  .mat-mdc-paginator-container {
-    justify-content: space-between;
-    color: $color-neutral-80;
-  }
-
-  .mat-mdc-paginator-range-actions {
-    flex: 1;
-  }
-
-  .mat-mdc-paginator-range-label {
-    flex: 1;
-    text-align: center;
-  }
-
-  .mat-mdc-paginator-icon {
-    fill: $color-primary-dark;
-  }
-
-  .page-size-select {
-    height: $select-height;
-
-    .mat-mdc-text-field-wrapper {
-      height: $select-height;
-    }
-
-    .mat-mdc-form-field-infix {
-      padding-top: $padding-small;
-    }
-  }
-}
-
-::ng-deep .mdc-menu-surface.mat-mdc-select-panel.paginator-panel {
-  max-height: 310px;
 }

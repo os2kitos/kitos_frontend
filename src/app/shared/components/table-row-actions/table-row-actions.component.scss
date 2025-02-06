@@ -2,6 +2,13 @@
 :host {
   display: flex;
   flex-wrap: nowrap;
-  float: right;
   gap: $padding-small;
+
+  &.float-left {
+    float: left;
+  }
+
+  &.float-right {
+    float: right;
+  }
 }

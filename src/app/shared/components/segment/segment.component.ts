@@ -3,6 +3,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export interface SegmentButtonOption<T> {
   text: string;
   value: T;
+  dataCy?: string;
 }
 
 @Component({

@@ -1,0 +1,37 @@
+<app-accordion [title]="title" [isExpanded]="true">
+  <app-native-table tableLayout="fixed">
+    <thead>
+      <th width="5%">
+        <app-checkbox
+          [value]="(areAllSelected$ | async) ?? false"
+          (valueChange)="changeRegistrationCollectionState($event, registrationType)"
+          [disabled]="!canEditRegistrations"
+        ></app-checkbox>
+      </th>
+      <th width="45%">{{ nameColumnTitle }}</th>
+      <th i18n width="50%">Bruger</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let roleRegistration of roleRegistrations$ | async">
+        <td>
+          <app-checkbox
+            [value]="roleRegistration.isSelected"
+            (valueChange)="changeSelectRegistrationState(roleRegistration)"
+            [disabled]="!canEditRegistrations"
+          ></app-checkbox>
+        </td>
+        <td>
+          <app-paragraph>{{ roleRegistration.registration.name }}</app-paragraph>
+        </td>
+        <td>
+          <app-content-space-between>
+            <app-paragraph>{{ roleRegistration.registration.userFullName }}</app-paragraph>
+            <app-icon-button (buttonClick)="removeSingleRegistration(roleRegistration.registration.id)"
+              ><app-trashcan-icon></app-trashcan-icon
+            ></app-icon-button>
+          </app-content-space-between>
+        </td>
+      </tr>
+    </tbody>
+  </app-native-table>
+</app-accordion>

@@ -1,0 +1,42 @@
+[
+  {
+    "description": "...",
+    "uuid": "4eae7964-6c10-4cbe-948c-54c6d24fb629",
+    "name": "Anden"
+  },
+  {
+    "description": "...",
+    "uuid": "61d8a600-ff49-4fb0-baf3-a78b5f6019d2",
+    "name": "Egen"
+  },
+  {
+    "description": "...",
+    "uuid": "6b6c9c66-bd6e-4a47-879d-9ee0c9fbd85d",
+    "name": "K01"
+  },
+  {
+    "description": "...",
+    "uuid": "f83477f1-920d-426b-9c51-a0cd42850735",
+    "name": "K02"
+  },
+  {
+    "description": "...",
+    "uuid": "cee64bfc-94e2-48fe-a8b0-818fc50a7b11",
+    "name": "K03"
+  },
+  {
+    "description": "...",
+    "uuid": "692c1e1e-f11b-4494-8a75-e3ca715bd222",
+    "name": "KOMBIT"
+  },
+  {
+    "description": "...",
+    "uuid": "02032277-4f47-4e61-839f-29e8a94c405b",
+    "name": "Leverandør"
+  },
+  {
+    "description": "...",
+    "uuid": "d1a7dba9-83c4-429d-a501-2be648a4f6f7",
+    "name": "OPI"
+  }
+]

@@ -1,0 +1,20 @@
+<app-dialog title="Rediger" i18n-title>
+  <form [formGroup]="form">
+    <app-standard-vertical-content-grid>
+      <app-textbox [disabled]="true" text="Navn" i18n-text [value]="optionTypeItem.name"></app-textbox>
+      <app-textarea
+        text="Beskrivelse"
+        i18n-text
+        [formGroup]="form"
+        formName="description"
+        [value]="form.value.description ?? ''"
+        class="text-area-margin-bottom"
+        data-cy="description-text-area"
+      ></app-textarea>
+    </app-standard-vertical-content-grid>
+  </form>
+  <app-dialog-actions>
+    <app-button (buttonClick)="onSave()" [disabled]="disableSaveButton()" i18n> Gem </app-button>
+    <app-button buttonStyle="secondary" (buttonClick)="onCancel()" i18n> Annuller </app-button>
+  </app-dialog-actions>
+</app-dialog>

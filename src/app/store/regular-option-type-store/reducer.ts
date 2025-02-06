@@ -4,6 +4,9 @@ import { cloneDeep } from 'lodash';
 import { APIRegularOptionResponseDTO } from 'src/app/api/v2';
 import { RegularOptionTypeActions } from './actions';
 import { RegularOptionTypeState } from './state';
+import { isRegularOptionType } from 'src/app/shared/models/options/role-option-types.model';
+import { GlobalOptionTypeActions } from '../global-admin/global-option-types/actions';
+import { LocalOptionTypeActions } from '../local-admin/local-option-types/actions';
 
 export const regularOptionTypeAdapter = createEntityAdapter<APIRegularOptionResponseDTO>({
   selectId: (contractType) => contractType.uuid,
@@ -21,6 +24,27 @@ function createEmptyState(): RegularOptionTypeState {
     'it-system_business-type': null,
     'it-system_usage-data-classification-type': null,
     'it-system_usage-relation-frequency-type': null,
+    'it_system_usage-gdpr-sensitive-data-type': null,
+    'it_system_usage-gdpr-registered-data-category-type': null,
+    'it-system_usage-archive-type': null,
+    'it-system_usage-archive-location-type': null,
+    'it-system_usage-archive-location-test-type': null,
+    'it-system-usage-roles': null,
+    'it-interface_data-type': null,
+    'it-contract_contract-template-type': null,
+    'it-contract_criticality-type': null,
+    'it-contract_procurement-strategy-type': null,
+    'it-contract_purchase-form-type': null,
+    'it-contract-agreement-element-types': null,
+    'it-contract-extend-types': null,
+    'it-contract-termination-period-types': null,
+    'it-contract-payment-frequency-types': null,
+    'it-contract-payment-model-types': null,
+    'it-contract-price-regulation-types': null,
+    'data-processing-basis-for-transfer-types': null,
+    'data-processing-country-types': null,
+    'data-processing-data-responsible-types': null,
+    'data-processing-oversight-option-types': null,
   };
 }
 
@@ -41,6 +65,25 @@ export const regularOptionTypeFeature = createFeature({
       };
 
       return nextState;
-    })
+    }),
+    on(
+      LocalOptionTypeActions.updateOptionTypeSuccess,
+      GlobalOptionTypeActions.updateOptionTypeSuccess,
+      (state, { optionType }) => {
+        if (isRegularOptionType(optionType)) {
+          const currentOptionState = state[optionType] ?? createInitialOptionState();
+
+          return {
+            ...state,
+            [optionType]: {
+              ...currentOptionState,
+              cacheTime: undefined,
+            },
+          };
+        } else {
+          return state;
+        }
+      }
+    )
   ),
 });

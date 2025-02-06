@@ -1,0 +1,56 @@
+<app-segment [buttons]="segmentOptions" [(selected)]="selectedSegment"> </app-segment>
+
+<app-card>
+  <ng-container *ngIf="selectedSegment === GlobalAdminModuleSegmentOptionType.RegularOptionTypes">
+    <app-standard-vertical-content-grid>
+      <app-global-option-type-view
+      optionType="data-processing-basis-for-transfer-types"
+      title="Overførselsgrundlag"
+      i18n-title
+      [showDescription]="false"
+    >
+    </app-global-option-type-view>
+
+    <app-global-option-type-view
+      optionType="data-processing-oversight-option-types"
+      title="Tilsynsmuligheder"
+      i18n-title
+      [showDescription]="false"
+    >
+    </app-global-option-type-view>
+
+    <app-global-option-type-view
+      optionType="data-processing-data-responsible-types"
+      title="Dataansvarlige"
+      i18n-title
+    >
+    </app-global-option-type-view>
+
+    <app-global-option-type-view
+      optionType="data-processing-country-types"
+      title="Lande"
+      i18n-title
+      [showDescription]="false"
+    >
+    </app-global-option-type-view>
+
+    </app-standard-vertical-content-grid>
+  </ng-container>
+
+  <ng-container *ngIf="selectedSegment === GlobalAdminModuleSegmentOptionType.RoleOptionTypes">
+    <app-standard-vertical-content-grid>
+      <app-global-option-type-view
+      title="Databehandlingsroller"
+      i18n-title
+      optionType="data-processing"
+      [expandedByDefault]="true"
+      [disableAccordion]="true"
+      [showWriteAccess]="true"
+      [scrollable]="'none'"
+      [fitSizeToContent]="false"
+      >
+      </app-global-option-type-view>
+    </app-standard-vertical-content-grid>
+  </ng-container>
+
+</app-card>

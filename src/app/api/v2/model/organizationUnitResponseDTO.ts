@@ -22,6 +22,7 @@ export interface APIOrganizationUnitResponseDTO {
      * Optional Organization Unit Id
      */
     unitId?: string;
+    origin?: APIOrganizationUnitResponseDTO.OriginEnum;
     /**
      * UUID which is unique within collection of entities of the same type
      */
@@ -31,4 +32,12 @@ export interface APIOrganizationUnitResponseDTO {
      */
     name: string;
 }
+export namespace APIOrganizationUnitResponseDTO {
+    export type OriginEnum = 'Kitos' | 'STSOrganisation';
+    export const OriginEnum = {
+        Kitos: 'Kitos' as OriginEnum,
+        StsOrganisation: 'STSOrganisation' as OriginEnum
+    };
+}
+
 

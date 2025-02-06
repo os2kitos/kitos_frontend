@@ -1,9 +1,5 @@
 <app-card>
-  <app-card-header
-    title="Udstillede snitflader"
-    helpTextKey="it-system.usage.it-interfaces"
-    i18n-title
-  ></app-card-header>
+  <app-card-header title="Udstillede snitflader" [helpTextKey]="helpTextKey" i18n-title></app-card-header>
   <app-loading *ngIf="isLoading$ | async"></app-loading>
   <ng-container *ngIf="(isLoading$ | async) === false">
     <div *ngIf="anyInterfaces$ | async" class="content">
@@ -18,7 +14,7 @@
         <tbody>
           <tr *ngFor="let itInterface of itInterfaces$ | async">
             <td>
-              <app-details-page-link itemType="it-interface" linkFontSize="small" [itemUuid]="itInterface.uuid">{{
+              <app-details-page-link itemType="it-interface" linkFontSize="small" [itemPath]="itInterface.uuid">{{
                 itInterface.name
               }}</app-details-page-link>
             </td>
@@ -26,7 +22,7 @@
               <app-status-chip type="it-interface" [value]="!itInterface.deactivated"></app-status-chip>
             </td>
             <td>
-              <app-paragraph paragraphSize="small" [cropOnOverlow]="true">
+              <app-paragraph paragraphSize="small" [cropOnOverflow]="true">
                 <app-selected-option-type-text
                   *ngIf="availableInterfaceTypesDictionary$ | async as interfaceTypesDictionary"
                   [selectedOption]="itInterface.itInterfaceType"
@@ -36,7 +32,7 @@
               </app-paragraph>
             </td>
             <td>
-              <app-paragraph paragraphSize="small" [cropOnOverlow]="true">{{ itInterface.description }}</app-paragraph>
+              <app-paragraph paragraphSize="small" [cropOnOverflow]="true">{{ itInterface.description }}</app-paragraph>
             </td>
             <td>
               <app-external-page-link [url]="itInterface.urlReference" linkFontSize="small"></app-external-page-link>

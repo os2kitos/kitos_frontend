@@ -4,37 +4,81 @@
   </a>
 
   <ng-container *ngIf="user$ | async as user">
+    <ng-container *ngIf="uiRootConfig$ | async as uiRootConfig">
+      <app-spacer></app-spacer>
+      <span>
+        <app-menu title="Organisation" [path]="AppPath.organization" i18n-title>
+          <app-menu-item [path]="AppPath.structure" [parentPath]="AppPath.organization" i18n
+            ><app-table-icon></app-table-icon>Organisation</app-menu-item
+          >
+          <app-menu-item [path]="AppPath.users" [parentPath]="AppPath.organization" i18n
+            ><app-table-icon></app-table-icon>Brugere</app-menu-item
+          >
+          <app-menu-item [path]="AppPath.masterData" [parentPath]="AppPath.organization" i18n
+            ><app-table-icon></app-table-icon>Stamdata</app-menu-item
+          >
+        </app-menu>
+        <app-menu
+          title="IT Systemer"
+          [path]="AppPath.itSystems"
+          i18n-title
+          *ngIf="uiRootConfig.showItSystemModule"
+          data-cy="it-system-nav-bar-item"
+        >
+          <app-menu-item [path]="AppPath.itSystemUsages" [parentPath]="AppPath.itSystems" i18n
+            ><app-table-icon></app-table-icon>IT Systemer</app-menu-item
+          >
+          <app-menu-item [path]="AppPath.itSystemCatalog" [parentPath]="AppPath.itSystems" i18n
+            ><app-table-icon></app-table-icon>IT Systemkatalog</app-menu-item
+          >
+          <app-menu-item [path]="AppPath.itInterfaces" [parentPath]="AppPath.itSystems" i18n
+            ><app-table-icon></app-table-icon>Snitfladekatalog</app-menu-item
+          >
+        </app-menu>
+        <app-menu
+          title="IT Kontrakter"
+          [path]="AppPath.itContracts"
+          i18n-title
+          *ngIf="uiRootConfig.showItContractModule"
+        >
+        </app-menu>
+        <app-menu
+          title="Databehandling"
+          [path]="AppPath.dataProcessing"
+          i18n-title
+          *ngIf="uiRootConfig.showDataProcessing"
+          data-cy="dpr-nav-bar-item"
+        >
+        </app-menu>
+      </span>
+    </ng-container>
     <app-spacer></app-spacer>
 
     <span>
-      <app-menu title="Organisation" [path]="AppPath.organization" i18n-title> </app-menu>
-      <app-menu title="IT Systemer" [path]="AppPath.itSystems" i18n-title>
-        <app-menu-item [path]="AppPath.itSystems" i18n><app-table-icon></app-table-icon>IT Systemer</app-menu-item>
-        <app-menu-item [path]="AppPath.itSystems" i18n><app-table-icon></app-table-icon>IT Systemkatalog</app-menu-item>
-        <app-menu-item [path]="AppPath.itSystems" i18n><app-table-icon></app-table-icon>Snitfladekatalog</app-menu-item>
-      </app-menu>
-      <app-menu title="IT Kontrakter" [path]="AppPath.itContracts" i18n-title> </app-menu>
-      <app-menu title="Databehandling" [path]="AppPath.dataProcessing" i18n-title> </app-menu>
-    </span>
-
-    <app-spacer></app-spacer>
-
-    <span>
-      <app-button matBadge="0" matBadgeColor="primary" buttonStyle="secondary" class="notification-button">
-        <app-notification-icon></app-notification-icon>
-      </app-button>
+      <app-notifications-button></app-notifications-button>
 
       <span class="separator"></span>
 
-      <app-menu [path]="AppPath.profile" i18n-title>
+      <app-menu [path]="AppPath.profile" i18n-title data-cy="profile-menu">
         <span title class="user-menu">
           <p>{{ (user$ | async)?.fullName }}</p>
           <p>{{ organizationName$ | async }}</p>
         </span>
         <app-menu-item [path]="AppPath.profile" i18n>Min profil</app-menu-item>
+        <app-menu-item
+          [path]="AppPath.localAdmin"
+          i18n
+          *ngIf="isUserCurrentyLocalAdmin$ | async"
+          data-cy="local-admin-menu-item"
+          >Lokal admin</app-menu-item
+        >
+        <app-menu-item [path]="AppPath.globalAdmin" *ngIf="user.isGlobalAdmin" data-cy="global-admin-menu-item" i18n
+          >Global admin</app-menu-item
+        >
         <app-menu-item *ngIf="hasMultipleOrganizations$ | async" (itemClick)="showOrganizationDialog()" i18n
           >Skift organisation</app-menu-item
         >
+        <app-menu-item (itemClick)="goToOldKitos()" i18n><strong>Gammel brugerflade</strong></app-menu-item>
         <app-menu-item (itemClick)="logout()">
           <span class="logout-container" i18n>Log ud<app-logout-icon></app-logout-icon> </span>
         </app-menu-item>

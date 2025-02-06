@@ -22,9 +22,23 @@ $color-neutral-40: #dcdfe5;
 $color-neutral-60: #b0b7bf;
 $color-neutral-80: #67707e;
 
+$color-secondary: #2f6b24;
+$color-secondary-base: $color-secondary;
+$color-secondary-dark: #294e22;
+$color-secondary-darker: #1a3215;
+$color-secondary-10: #f5faf4;
+$color-secondary-20: #e8f4e6;
+$color-secondary-40: #d1e4cd;
+$color-secondary-60: #66a659;
+$color-secondary-80: #518547;
+
 $color-white: #ffffff;
+$color-white-10: #ffffff1a;
+$color-white-20: #ffffff33;
+$color-white-40: #ffffff66;
 
 $color-negative: #dc4747;
+$color-negative-base: #d2284a;
 $color-negative-dark: #73122f;
 $color-negative-light: #ffe5ed;
 $color-negative-lighter: #ffeaf0;
@@ -39,8 +53,10 @@ $light-primary-text: $color-white;
 
 // Sizes
 
+$padding-smallest: 2px;
 $padding-smaller: 4px;
 $padding-small: 8px;
+$padding-small-medium: 12px;
 $padding-medium: 16px;
 $padding-medium-large: 24px;
 $padding-large: 32px;

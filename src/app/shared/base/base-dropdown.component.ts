@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Subject, combineLatest, debounceTime, filter, map } from 'rxjs';
-import { DEFAULT_INPUT_DEBOUNCE_TIME } from '../constants';
+import { DEFAULT_INPUT_DEBOUNCE_TIME } from '../constants/constants';
 import { BaseFormComponent } from './base-form.component';
 
 @Component({
@@ -10,6 +10,7 @@ import { BaseFormComponent } from './base-form.component';
 export class BaseDropdownComponent<T> extends BaseFormComponent<T | null> implements OnInit, OnChanges {
   @Input() public data?: T[] | null;
   @Input() public textField = 'name';
+  @Input() public itemDescriptionField = 'description';
   @Input() public valueField = 'value';
   @Input() public loading: boolean | null = false;
   @Input() public showDescription = false;

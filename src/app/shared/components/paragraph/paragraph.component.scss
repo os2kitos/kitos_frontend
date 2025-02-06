@@ -3,6 +3,28 @@
   line-height: 150%;
   margin: 0px;
   color: $color-neutral-dark;
+  align-items: center;
+  gap: 4px;
+}
+
+.display-flex {
+  display: flex;
+}
+
+.white-color {
+  color: $color-white !important;
+}
+
+.error-color {
+  color: $color-negative !important;
+}
+
+.primary-dark-color {
+  color: $color-primary-dark;
+}
+
+.neutral-color {
+  color: $color-neutral-dark;
 }
 
 .strikeThrough {
@@ -45,4 +67,19 @@
   text-overflow: clip;
   word-break: break-all;
   white-space: normal;
+}
+
+.wrap-on-overflow {
+  overflow: hidden;
+  text-overflow: clip;
+  white-space: normal;
+  word-wrap: break-word;
+}
+
+.bold-font {
+  font-weight: bold;
+}
+
+p app-help-icon {
+  margin-left: 8px;
 }

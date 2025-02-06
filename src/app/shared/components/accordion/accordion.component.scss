@@ -1,0 +1,29 @@
+@import "theme.scss";
+
+.mat-expansion-panel-header {
+  min-height: 56px;
+}
+
+.mat-expansion-panel-header-title {
+  font-weight: normal;
+}
+
+.mat-accordion > .mat-expansion-panel-spacing {
+  overflow: inherit;
+}
+
+.mat-expansion-panel:not([class*="mat-elevation-z"]) {
+  box-shadow: none;
+  border: 1px solid $color-neutral-40;
+}
+
+.accordion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tooltip-margin {
+  margin-left: $padding-small;
+  margin-top: $padding-small;
+}

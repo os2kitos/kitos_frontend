@@ -1,0 +1,52 @@
+@import "theme";
+@import "mixins";
+
+:host {
+  @include page-flex-layout-max-width;
+}
+
+.page-title-container {
+  margin-left: $padding-medium-large;
+  display: flex;
+  justify-content: space-between;
+}
+
+.page-title {
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+.card-header {
+  height: $input-height;
+  display: flex;
+  align-items: center; /* Vertically centers the content */
+  justify-content: space-between; /* Ensures items are spaced out */
+  border-bottom: 1px solid $color-neutral-20;
+  margin: 0 0 $padding-medium-large;
+}
+
+.flex-roles-section {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.structure-page-flex {
+  display: flex;
+  gap: $padding-medium;
+  margin-top: 22px;
+}
+
+.structure-section-width {
+  width: 652px;
+  overflow-x: auto;
+}
+
+.space {
+  flex: 1;
+}
+
+.resizable-right {
+  resize: horizontal;
+}

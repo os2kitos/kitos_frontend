@@ -5,13 +5,13 @@
       *ngIf="itSystemCatalogItemUuid$ | async as systemUuid"
       class="catalog-link"
       itemType="it-system"
-      [itemUuid]="systemUuid"
+      [itemPath]="systemUuid"
       i18n
       >Gå til IT Systemkataloget</app-details-page-link
     >
   </app-card-header>
 
-  <form [formGroup]="itSystemInformationForm">
+  <app-form-grid [formGroup]="itSystemInformationForm">
     <app-textbox text="Systemnavn" i18n-text [formGroup]="itSystemInformationForm" formName="name"></app-textbox>
     <app-textbox
       text="Overordnet system"
@@ -42,6 +42,12 @@
     ></app-dropdown>
     <app-textbox text="Synlighed" i18n-text [formGroup]="itSystemInformationForm" formName="scope"></app-textbox>
     <app-textbox text="UUID" i18n-text [formGroup]="itSystemInformationForm" formName="uuid"></app-textbox>
+    <app-textbox
+      text="Ekstern UUID"
+      i18n-text
+      [formGroup]="itSystemInformationForm"
+      formName="externalUuid"
+    ></app-textbox>
     <div>
       <app-textbox
         text="Rigsarkivets vejledning til arkivering"
@@ -73,12 +79,12 @@
     </app-contentbox>
     <app-textarea
       class="notes"
-      text="Beskrivelse"
+      text="Noter"
       i18n-text
       [formGroup]="itSystemInformationForm"
       formName="description"
     ></app-textarea>
-  </form>
+  </app-form-grid>
 </app-card>
 
 <app-card>

@@ -1,0 +1,7 @@
+@import "theme";
+.popup-message-container {
+  position: fixed;
+  bottom: $padding-medium;
+  right: $padding-medium;
+  z-index: 10000;
+}

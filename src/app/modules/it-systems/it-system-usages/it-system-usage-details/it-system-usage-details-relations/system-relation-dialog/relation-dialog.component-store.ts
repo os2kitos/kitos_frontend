@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { ComponentStore, tapResponse } from '@ngrx/component-store';
-import { concatLatestFrom } from '@ngrx/effects';
+import { ComponentStore } from '@ngrx/component-store';
+import { concatLatestFrom, tapResponse } from '@ngrx/operators';
+
 import { Store } from '@ngrx/store';
 import { Observable, Subject, combineLatest, distinctUntilChanged, map, mergeMap, tap } from 'rxjs';
 import {
@@ -12,7 +13,7 @@ import {
   APIV2ItSystemUsageInternalINTERNALService,
   APIV2ItSystemUsageService,
 } from 'src/app/api/v2';
-import { BOUNDED_PAGINATION_QUERY_MAX_SIZE } from 'src/app/shared/constants';
+import { BOUNDED_PAGINATION_QUERY_MAX_SIZE } from 'src/app/shared/constants/constants';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectItSystemUsageUuid } from 'src/app/store/it-system-usage/selectors';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';

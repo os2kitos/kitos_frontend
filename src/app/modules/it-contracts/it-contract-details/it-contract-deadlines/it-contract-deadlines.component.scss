@@ -1,0 +1,12 @@
+@import "mixins.scss";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.is-continous-checkbox-center {
+  display: flex;
+  align-items: center;
+}

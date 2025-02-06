@@ -1,0 +1,27 @@
+[
+  {
+    "description": "(Der skal typisk indgås en anden type aftale – fortrolighedserklæring eller…)",
+    "uuid": "5fdbfbfb-09f7-40b0-ae5d-24c424f2da23",
+    "name": "Fællesdataansvar "
+  },
+  {
+    "description": null,
+    "uuid": "59d91007-2878-4fd8-9b61-26b3c7060a67",
+    "name": "Kommunen er selv dataansvarlig"
+  },
+  {
+    "description": "(Og derfor skal der ikke indgås en databehandleraftale)",
+    "uuid": "587fb53b-d0f7-4c15-8ff8-9a9c9d049b91",
+    "name": "Leverandøren behandler ikke personoplysninger"
+  },
+  {
+    "description": "(Det er vurderet at leverandøren behandler persondata på instruks fra kommunen og der skal indgås en databehandleraftale)",
+    "uuid": "4d6acce7-55b8-4c73-b723-fb23758dd9b9",
+    "name": "Leverandøren er databehandler"
+  },
+  {
+    "description": "(Deres anvendelse af data er ikke noget vi har indflydelse på)",
+    "uuid": "0e9653d0-fbe5-46a2-9760-fba199232cdb",
+    "name": "Leverandøren er selvstændig dataansvarlig"
+  }
+]

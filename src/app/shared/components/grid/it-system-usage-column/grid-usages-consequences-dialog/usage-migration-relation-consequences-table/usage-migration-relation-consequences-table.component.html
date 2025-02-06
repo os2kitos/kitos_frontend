@@ -1,0 +1,94 @@
+<app-paragraph i18n [bold]="true" paragraphSize="medium">Følgende systemrelationer berøres:</app-paragraph>
+<app-native-table *ngIf="!isCopingToClipboard">
+  <thead>
+    <th i18n>Anvendersystem</th>
+    <th i18n>Udstillersystem</th>
+    <th i18n>Relationsbeskrivelse</th>
+    <th i18n>Snitflade der fjernes fra relationen</th>
+    <th i18n>Frekvens</th>
+    <th i18n>Kontrakt</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let relation of migration.affectedRelations">
+      <td>
+        <app-paragraph i18n>
+          Navn: {{ formatSystemName(relation.fromSystem?.name, relation.fromSystem?.deactivated) }}
+          <br />
+          Uuid: {{ relation.fromSystem?.uuid }}
+        </app-paragraph>
+      </td>
+      <td>
+        <app-paragraph i18n>
+          Navn: {{ formatSystemName(relation.toSystem?.name, relation.toSystem?.deactivated) }}
+          <br />
+          Uuid: {{ relation.toSystem?.uuid }}
+        </app-paragraph>
+      </td>
+      <td>
+        <app-paragraph>
+          {{ relation.description }}
+        </app-paragraph>
+      </td>
+      <td>
+        <app-paragraph i18n *ngIf="relation.interface">
+          Navn: {{ relation.interface.name }}
+          <br />
+          Uuid: {{ relation.interface.uuid }}
+        </app-paragraph>
+      </td>
+      <td>
+        <app-paragraph>
+          {{ relation.frequencyType?.name }}
+        </app-paragraph>
+      </td>
+      <td *ngIf="relation.contract">
+        <app-paragraph i18n>
+          Navn: {{ relation.contract.name }}
+          <br />
+          Uuid: {{ relation.contract.uuid }}
+        </app-paragraph>
+      </td>
+      <td *ngIf="!relation.contract">
+        <app-paragraph i18n>Ingen kontrakt </app-paragraph>
+      </td>
+    </tr>
+  </tbody>
+</app-native-table>
+<ng-container *ngIf="isCopingToClipboard">
+  <app-native-table>
+    <thead>
+      <th i18n>Anvendersystem</th>
+      <th i18n>Udstillersystem</th>
+      <th i18n>Relationsbeskrivelse</th>
+      <th i18n>Snitflade der fjernes fra relationen</th>
+      <th i18n>Frekvens</th>
+      <th i18n>Kontrakt</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let relation of migration.affectedRelations">
+        <td i18n>
+          Navn: {{ formatSystemName(relation.fromSystem?.name, relation.fromSystem?.deactivated) }} Uuid:
+          {{ relation.fromSystem?.uuid }}
+        </td>
+        <td i18n>
+          Navn: {{ formatSystemName(relation.toSystem?.name, relation.toSystem?.deactivated) }} Uuid:
+          {{ relation.toSystem?.uuid }}
+        </td>
+        <td>
+          {{ relation.description }}
+        </td>
+        <td i18n *ngIf="relation.interface">Navn: {{ relation.interface.name }} Uuid: {{ relation.interface.uuid }}</td>
+        <td>
+          {{ relation.frequencyType?.name }}
+        </td>
+        <td *ngIf="relation.contract" i18n>Navn: {{ relation.contract.name }} Uuid: {{ relation.contract.uuid }}</td>
+        <td *ngIf="!relation.contract">
+          <app-paragraph i18n>Ingen kontrakt </app-paragraph>
+        </td>
+      </tr>
+    </tbody>
+  </app-native-table>
+  <br />
+  <br />
+  <br />
+</ng-container>

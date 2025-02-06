@@ -1,0 +1,91 @@
+<app-segment [buttons]="segmentOptions" [(selected)]="selectedSegment"> </app-segment>
+
+<app-card>
+  <ng-container *ngIf="selectedSegment === GlobalAdminModuleSegmentOptionType.RegularOptionTypes">
+    <app-standard-vertical-content-grid>
+      <app-global-option-type-view
+        optionType="it-contract_contract-type"
+        title="Kontrakttyper"
+        i18n-title
+      ></app-global-option-type-view>
+
+      <app-global-option-type-view
+        optionType="it-contract_contract-template-type"
+        title="Kontraktskabeloner"
+        i18n-title
+      ></app-global-option-type-view>
+
+      <app-global-option-type-view
+        optionType="it-contract_purchase-form-type"
+        title="Indkøbsformer"
+        i18n-title
+      ></app-global-option-type-view>
+
+      <app-global-option-type-view
+        optionType="it-contract-payment-model-types"
+        title="Betalingsmodeller"
+        i18n-title
+      ></app-global-option-type-view>
+
+      <app-global-option-type-view
+        optionType="it-contract-agreement-element-types"
+        title="Aftaleelementer"
+        i18n-title
+        [showDescription]="false"
+      ></app-global-option-type-view>
+
+      <app-global-option-type-view
+        optionType="it-contract-extend-types"
+        title="Option forlæng"
+        i18n-title
+      ></app-global-option-type-view>
+
+      <app-global-option-type-view
+        optionType="it-contract-payment-frequency-types"
+        title="Betalingsfrekvenser"
+        i18n-title
+      ></app-global-option-type-view>
+
+      <app-global-option-type-view
+        optionType="it-contract-price-regulation-types"
+        title="Prisreguleringer"
+        i18n-title
+      ></app-global-option-type-view>
+
+      <app-global-option-type-view
+        optionType="it-contract_procurement-strategy-type"
+        title="Genanskaffelsesstrategier"
+        i18n-title
+      ></app-global-option-type-view>
+
+      <app-global-option-type-view
+        optionType="it-contract-termination-period-types"
+        title="Opsigelsesfrister"
+        i18n-title
+      ></app-global-option-type-view>
+
+      <app-global-option-type-view
+        optionType="it-contract_criticality-type"
+        title="Kritikalitet"
+        i18n-title
+      ></app-global-option-type-view>
+    </app-standard-vertical-content-grid>
+  </ng-container>
+
+  <ng-container *ngIf="selectedSegment === GlobalAdminModuleSegmentOptionType.RoleOptionTypes">
+    <app-standard-vertical-content-grid>
+      <app-global-option-type-view
+      title="IT Kontrakt roller"
+      i18n-title
+      optionType="it-contract"
+      [expandedByDefault]="true"
+      [disableAccordion]="true"
+      [showWriteAccess]="true"
+      [scrollable]="'none'"
+      [fitSizeToContent]="false"
+      >
+      </app-global-option-type-view>
+    </app-standard-vertical-content-grid>
+  </ng-container>
+
+</app-card>

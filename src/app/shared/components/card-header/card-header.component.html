@@ -1,4 +1,10 @@
 <h6>{{ title }}</h6>
 <ng-content></ng-content>
 <span *ngIf="spacer" class="space"></span>
-<app-help-button *ngIf="helpTextKey" [helpTextKey]="helpTextKey" data-cy="help-button"></app-help-button>
+<ng-content select="[secondary-content]"></ng-content>
+<app-help-button
+  *ngIf="helpTextKey"
+  [helpTextKey]="helpTextKey"
+  class="help-text-button-margin"
+  data-cy="help-button"
+></app-help-button>

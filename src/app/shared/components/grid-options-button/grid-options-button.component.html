@@ -1,0 +1,33 @@
+<app-menu-button
+  buttonStyle="tertiary"
+  [iconType]="(hasChanges$ | async) ? 'dots-warning' : 'dots'"
+  data-cy="grid-options-button"
+>
+  <div class="section-text">
+    <app-paragraph [bold]="true" i18n>Filter</app-paragraph>
+  </div>
+  <app-grid-filter-buttons [entityType]="entityType"></app-grid-filter-buttons>
+  <ng-container *ngIf="hasColumnConfigButtons && (hasConfigGridPermission$ | async) === true">
+    <div class="divider-margin">
+      <app-divider></app-divider>
+    </div>
+    <div class="section-text">
+      <app-paragraph [bold]="true" i18n>Opsætning</app-paragraph>
+    </div>
+    <app-grid-column-config-buttons [entityType]="entityType"></app-grid-column-config-buttons>
+  </ng-container>
+
+  <div
+    class="divider-margin"
+    *ngIf="hasResetButton || createPermission$ !== undefined || getHelpTextKey() !== undefined"
+  >
+    <app-divider></app-divider>
+  </div>
+  <app-reset-to-org-columns-config-button *ngIf="hasResetButton" [entityType]="entityType">
+  </app-reset-to-org-columns-config-button>
+  <ng-container *ngIf="getHelpTextKey()">
+    <app-menu-button-item (itemClick)="openHelpTextDialog()" i18n>
+      <app-help-icon></app-help-icon> Hjælp
+    </app-menu-button-item>
+  </ng-container>
+</app-menu-button>

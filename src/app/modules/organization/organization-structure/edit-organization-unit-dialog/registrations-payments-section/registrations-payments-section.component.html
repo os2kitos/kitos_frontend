@@ -1,0 +1,42 @@
+<app-accordion [title]="title" [isExpanded]="true">
+  <app-native-table tableLayout="fixed">
+    <thead>
+      <th width="5%">
+        <app-checkbox
+          [value]="(areAllSelected$ | async) ?? false"
+          (valueChange)="changeRegistrationCollectionState($event, registrationType)"
+          [disabled]="!canEditRegistrations"
+        ></app-checkbox>
+      </th>
+      <th i18n width="5%">Index</th>
+      <th width="60%">{{ nameColumnTitle }}</th>
+      <th i18n width="30%">Betaling (Anskaffelse, Drift, Andet)</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let paymentRegistration of paymentRegistrations$ | async">
+        <td>
+          <app-checkbox
+            [value]="paymentRegistration.isSelected"
+            (valueChange)="changeSelectRegistrationState(paymentRegistration)"
+            [disabled]="!canEditRegistrations"
+          ></app-checkbox>
+        </td>
+        <td>
+          <app-paragraph>{{ paymentRegistration.registration.id }}</app-paragraph>
+        </td>
+        <td>
+          <app-paragraph>{{ paymentRegistration.itContract.name }}</app-paragraph>
+        </td>
+        <td>
+          <app-content-space-between>
+            <app-paragraph>{{ paymentRegistration.registration.name }}</app-paragraph>
+            <app-icon-button
+              (buttonClick)="removeSinglePayment(paymentRegistration.registration.id, paymentRegistration.itContractId)"
+              ><app-trashcan-icon></app-trashcan-icon
+            ></app-icon-button>
+          </app-content-space-between>
+        </td>
+      </tr>
+    </tbody>
+  </app-native-table>
+</app-accordion>

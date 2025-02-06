@@ -1,0 +1,41 @@
+<ng-container *ngIf="user$ | async as user">
+  <app-scrollbar-dialog [title]="getFullName(user)" overflow="none">
+    <app-standard-vertical-content-grid>
+      <app-user-role-table
+        [user]="user"
+        entityType="organization-unit"
+        [hasModifyPermission$]="hasModificationPermission$"
+      ></app-user-role-table>
+
+      <app-user-role-table
+        [user]="user"
+        entityType="it-system"
+        [hasModifyPermission$]="hasModificationPermission$"
+      ></app-user-role-table>
+
+      <app-user-role-table
+        [user]="user"
+        entityType="it-contract"
+        [hasModifyPermission$]="hasModificationPermission$"
+      ></app-user-role-table>
+
+      <app-user-role-table
+        [user]="user"
+        entityType="data-processing-registration"
+        [hasModifyPermission$]="hasModificationPermission$"
+      ></app-user-role-table>
+
+      <app-content-space-between *ngIf="user.LastAdvisSent">
+        <app-paragraph paragraphSize="small" i18n> Login oplysninger sidst sendt: </app-paragraph>
+        <app-paragraph paragraphSize="small" [bold]="true" i18n> {{ user.LastAdvisSent | appDate }} </app-paragraph>
+      </app-content-space-between>
+    </app-standard-vertical-content-grid>
+    <app-dialog-actions *ngIf="hasModificationPermission$ | async">
+      <app-button i18n buttonStyle="tertiary" color="warn" (buttonClick)="onDeleteUser()"
+        ><app-trashcan-icon></app-trashcan-icon> Slet bruger
+      </app-button>
+      <app-button buttonStyle="secondary" (buttonClick)="onEditUser(user)" i18n> Rediger </app-button>
+      <app-button buttonStyle="primary" (buttonClick)="onSendAdvis(user)" i18n [disabled]="($sendingNotification | async) === true"> Send advis </app-button>
+    </app-dialog-actions>
+  </app-scrollbar-dialog>
+</ng-container>

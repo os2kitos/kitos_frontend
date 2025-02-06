@@ -1,0 +1,19 @@
+<app-dialog-actions>
+  <ng-container>
+    <app-button buttonStyle="secondary" (buttonClick)="cancel.emit()" i18n>Annuller</app-button>
+    <app-button
+      [disabled]="isFormValid === false || alreadyExists === true"
+      i18n
+      data-cy="confirm-button"
+      (buttonClick)="create.emit(true)"
+      >Gem, og gå til</app-button
+    >
+    <app-button
+      [disabled]="isFormValid === false || alreadyExists === true"
+      i18n
+      data-cy="confirm-button"
+      (buttonClick)="create.emit(false)"
+      >Gem</app-button
+    >
+  </ng-container>
+</app-dialog-actions>

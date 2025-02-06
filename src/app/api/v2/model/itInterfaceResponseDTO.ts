@@ -27,6 +27,7 @@ export interface APIItInterfaceResponseDTO {
      */
     data: Array<APIItInterfaceDataResponseDTO>;
     organizationContext: APIShallowOrganizationResponseDTO;
+    rightsHolder: APIShallowOrganizationResponseDTO;
     /**
      * UUID for IT-Interface
      */

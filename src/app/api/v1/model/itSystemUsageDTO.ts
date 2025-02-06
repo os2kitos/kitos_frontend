@@ -123,12 +123,13 @@ export namespace APIItSystemUsageDTO {
         Hundredplus: 'HUNDREDPLUS' as UserCountEnum,
         Undecided: 'UNDECIDED' as UserCountEnum
     };
-    export type ArchiveDutyEnum = 'Undecided' | 'B' | 'K' | 'Unknown';
+    export type ArchiveDutyEnum = 'Undecided' | 'B' | 'K' | 'Unknown' | 'PreserveDataCanDiscardDocuments';
     export const ArchiveDutyEnum = {
         Undecided: 'Undecided' as ArchiveDutyEnum,
         B: 'B' as ArchiveDutyEnum,
         K: 'K' as ArchiveDutyEnum,
-        Unknown: 'Unknown' as ArchiveDutyEnum
+        Unknown: 'Unknown' as ArchiveDutyEnum,
+        PreserveDataCanDiscardDocuments: 'PreserveDataCanDiscardDocuments' as ArchiveDutyEnum
     };
     export type IsBusinessCriticalEnum = 'NO' | 'YES' | 'DONTKNOW' | 'UNDECIDED';
     export const IsBusinessCriticalEnum = {

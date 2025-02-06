@@ -1,0 +1,42 @@
+<app-paragraph i18n [bold]="true" paragraphSize="medium">Systemanvendelsen flyttes:</app-paragraph>
+<app-native-table *ngIf="!isCopingToClipboard">
+  <thead>
+    <th i18n>Fra</th>
+    <th i18n>Til</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <app-paragraph i18n>
+          Navn: {{ migration.fromSystem?.name }}
+          <br />
+          Uuid: {{ migration.fromSystem?.uuid }}
+        </app-paragraph>
+      </td>
+      <td>
+        <app-paragraph i18n>
+          Navn: {{ migration.toSystem?.name }}
+          <br />
+          Uuid: {{ migration.toSystem?.uuid }}
+        </app-paragraph>
+      </td>
+    </tr>
+  </tbody>
+</app-native-table>
+<ng-container *ngIf="isCopingToClipboard">
+  <app-native-table>
+    <thead>
+      <th i18n>Fra</th>
+      <th i18n>Til</th>
+    </thead>
+    <tbody>
+      <tr>
+        <td i18n>Navn: {{ migration.fromSystem?.name }} Uuid: {{ migration.fromSystem?.uuid }}</td>
+        <td i18n>Navn: {{ migration.toSystem?.name }} Uuid: {{ migration.toSystem?.uuid }}</td>
+      </tr>
+    </tbody>
+  </app-native-table>
+  <br />
+  <br />
+  <br />
+</ng-container>
