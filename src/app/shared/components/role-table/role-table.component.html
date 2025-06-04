@@ -1,4 +1,9 @@
-<app-role-table-container (addNew)="onAddNew()" [isLoading$]="isLoading$" [anyRoles$]="anyRoles$" [hasModifyPermission]="hasModifyPermission">
+<app-role-table-container
+  (addNew)="onAddNew()"
+  [isLoading$]="isLoading$"
+  [anyRoles$]="anyRoles$"
+  [hasModifyPermission]="hasModifyPermission"
+>
   <ng-container *ngIf="roles$ | async as roles">
     <ng-container *ngIf="availableRolesDictionary$ | async as rolesDictionary">
       <app-native-table tableLayout="fixed">
@@ -18,6 +23,7 @@
             [hasModifyPermission]="hasModifyPermission"
             [rolesDictionary]="rolesDictionary"
             (removeRole)="onRemove($event)"
+            (editRole)="onEdit($event)"
           ></tr>
         </tbody>
       </app-native-table>

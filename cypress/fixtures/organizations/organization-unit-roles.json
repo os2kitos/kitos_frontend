@@ -1,0 +1,14 @@
+[
+  {
+    "writeAccess": true,
+    "description": null,
+    "uuid": "8232e65b-e4be-464c-9156-5497c059b611",
+    "name": "Systemansvarlig"
+  },
+  {
+    "writeAccess": true,
+    "description": null,
+    "uuid": "071119f8-6c30-4aac-9d2b-12f66d8490dc",
+    "name": "Chef"
+  }
+]

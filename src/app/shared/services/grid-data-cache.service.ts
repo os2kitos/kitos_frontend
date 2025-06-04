@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ODataSettings } from '@progress/kendo-data-query/dist/npm/odata.operators';
+import { isEqual } from 'lodash';
 import { GRID_DATA_CACHE_CHUNK_SIZE } from '../constants/constants';
 import { GridDataCache, GridDataCacheChunk, GridDataCacheRange } from '../models/grid-data.model';
 import { GridState, toODataString } from '../models/grid-state.model';
-import { isEqual } from 'lodash';
 
 @Injectable({
   providedIn: 'root',
@@ -16,14 +16,20 @@ export class GridDataCacheService {
   private chunkSize = GRID_DATA_CACHE_CHUNK_SIZE;
   private cache: GridDataCache = {
     chunks: [],
+    externalFilter: undefined,
     total: 0,
   };
 
   constructor() {}
 
-  public get(gridState: GridState): GridDataCacheRange {
+  public get(gridState: GridState, externalFilter?: string): GridDataCacheRange {
     const cacheChunks = this.cache.chunks;
     if (cacheChunks.length === 0 || gridState.all) return this.emptyCacheRange;
+
+    if (this.cache.externalFilter !== externalFilter) {
+      this.reset();
+      return this.emptyCacheRange;
+    }
 
     const cacheStartIndex = this.getCacheStartIndex(gridState);
     const chunkCount = this.getChunkCount(gridState);
@@ -41,7 +47,7 @@ export class GridDataCacheService {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  public set(gridState: GridState, data: any[], total: number) {
+  public set(gridState: GridState, data: any[], total: number, externalFilter?: string) {
     let cacheIndex = this.getCacheStartIndex(gridState);
     const passesToDo = Math.ceil(data.length / this.chunkSize);
 
@@ -51,15 +57,20 @@ export class GridDataCacheService {
       };
     }
     this.cache.total = total;
+    this.cache.externalFilter = externalFilter;
   }
 
-  public tryResetOnGridStateOrDataChange(currState: GridState, prevState: GridState, dataChangedInGrid: boolean | undefined) {
+  public tryResetOnGridStateOrDataChange(
+    currState: GridState,
+    prevState: GridState,
+    dataChangedInGrid: boolean | undefined
+  ) {
     if (dataChangedInGrid) this.reset();
     this.tryResetOnGridStateChange(currState, prevState);
   }
 
-  public tryResetOnGridStateChange(currState: GridState, prevState: GridState) {
-    if (this.shouldResetOnGridStateChange(currState, prevState)) {
+  public tryResetOnGridStateChange(currState: GridState, prevState: GridState, forceReset = false) {
+    if (forceReset || this.shouldResetOnGridStateChange(currState, prevState)) {
       this.reset();
     }
   }
@@ -67,6 +78,7 @@ export class GridDataCacheService {
   public reset() {
     this.cache = {
       chunks: [],
+      externalFilter: undefined,
       total: 0,
     };
   }

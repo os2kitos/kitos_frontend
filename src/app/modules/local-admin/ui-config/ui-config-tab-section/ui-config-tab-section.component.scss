@@ -1,7 +1,7 @@
-@import "theme.scss";
+@use "theme.scss";
 
 .form-section-top-padding {
-  padding-top: $padding-medium;
+  padding-top: theme.$padding-medium;
 }
 
 .center-no-fields-text {
@@ -9,8 +9,8 @@
 }
 
 .tooltip-margin {
-  margin-left: $padding-small;
-  margin-top: $padding-small;
+  margin-left: theme.$padding-small;
+  margin-top: theme.$padding-small;
 }
 
 :host ::ng-deep {

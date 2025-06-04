@@ -1,4 +1,4 @@
-@import "theme";
+@use "theme";
 
 :host {
   height: 100%;
@@ -9,7 +9,7 @@
 .content {
   height: 100%;
 
-  padding: $padding-large;
+  padding: theme.$padding-large;
   max-height: 100%;
 
   display: flex;
@@ -31,5 +31,5 @@
 }
 
 .background-grey {
-  background-color: $color-primary-10;
+  background-color: theme.$color-primary-10;
 }

@@ -1,6 +1,6 @@
-@import "theme";
-@import "mixins";
+@use "theme";
+@use "mixins";
 
 app-standard-vertical-content-grid {
-  gap: $padding-small
+  gap: theme.$padding-small;
 }

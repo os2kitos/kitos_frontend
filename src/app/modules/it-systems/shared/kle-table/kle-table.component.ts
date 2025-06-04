@@ -8,6 +8,15 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { invertBooleanValue } from 'src/app/shared/pipes/invert-boolean-value';
 import { KLEActions } from 'src/app/store/kle/actions';
 import { selectHasValidCache, selectKLEEntities } from 'src/app/store/kle/selectors';
+import { NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { LoadingComponent } from '../../../../shared/components/loading/loading.component';
+import { NativeTableComponent } from '../../../../shared/components/native-table/native-table.component';
+import { ParagraphComponent } from '../../../../shared/components/paragraph/paragraph.component';
+import { ContentSpaceBetweenComponent } from '../../../../shared/components/content-space-between/content-space-between.component';
+import { TableRowActionsComponent } from '../../../../shared/components/table-row-actions/table-row-actions.component';
+import { IconButtonComponent } from '../../../../shared/components/buttons/icon-button/icon-button.component';
+import { TrashcanIconComponent } from '../../../../shared/components/icons/trashcan-icon.component';
+import { PlusIconComponent } from '../../../../shared/components/icons/plus-icon.component';
 
 export type SelectedKleCommand =
   | 'delete-assignment'
@@ -32,6 +41,19 @@ export interface SelectedKleDetails extends APIKLEDetailsDTO {
   selector: 'app-kle-table[selectedKles]',
   templateUrl: './kle-table.component.html',
   styleUrls: ['./kle-table.component.scss'],
+  imports: [
+    NgIf,
+    LoadingComponent,
+    NativeTableComponent,
+    NgFor,
+    ParagraphComponent,
+    ContentSpaceBetweenComponent,
+    TableRowActionsComponent,
+    IconButtonComponent,
+    TrashcanIconComponent,
+    PlusIconComponent,
+    AsyncPipe,
+  ],
 })
 export class KleTableComponent extends BaseComponent implements OnInit {
   @Input() public hasModifyPermission = false;
@@ -68,7 +90,7 @@ export class KleTableComponent extends BaseComponent implements OnInit {
         })
         .sort(compareKle);
     }),
-    filterNullish()
+    filterNullish(),
   );
 
   constructor(private readonly store: Store) {

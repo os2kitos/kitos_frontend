@@ -4,11 +4,13 @@ import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
 import { UIConfigGridApplication } from 'src/app/shared/models/ui-config/ui-config-grid-application';
 import { HideShowDialogComponent } from '../hide-show-dialog/hide-show-dialog.component';
+import { ButtonComponent } from '../../buttons/button/button.component';
 
 @Component({
   selector: 'app-hide-show-button[columns][entityType]',
   templateUrl: './hide-show-button.component.html',
   styleUrl: './hide-show-button.component.scss',
+  imports: [ButtonComponent],
 })
 export class HideShowButtonComponent {
   @Input() columns!: GridColumn[] | null;

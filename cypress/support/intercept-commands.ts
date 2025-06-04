@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 Cypress.Commands.add('setupContractIntercepts', () => {
   cy.intercept('/odata/ItContractOverviewReadModels*', { fixture: './it-contracts/it-contracts.json' });
   cy.intercept('/api/v2/it-contracts/permissions*', { fixture: 'shared/create-permissions.json' });
@@ -61,6 +59,11 @@ Cypress.Commands.add('setupDataProcessingIntercepts', () => {
   cy.intercept('api/v2/data-processing-registration-data-responsible-types*', {
     fixture: './dpr/choice-types/data-responsible-types.json',
   });
+
+  cy.intercept('GET', 'api/v2/organizations/*/organization-units?pageSize=*', {
+    fixture: './organizations/organization-units.json',
+  });
+
   cy.intercept('api/v2/internal/organizations/*/grid/permissions', { statusCode: 404, body: {} });
   cy.intercept('api/v2/internal/organizations/*/grid/*/*', { statusCode: 404, body: {} });
 });

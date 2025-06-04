@@ -1,12 +1,12 @@
-@import "theme";
+@use "theme";
 
 .chip {
   font-weight: bold;
-  border: 1px solid $color-positive-light;
+  border: 1px solid theme.$color-positive-light;
   margin: auto;
-  padding: 8px 8px 8px 8px;
-  background-color: $color-positive-lighter;
-  color: $color-positive-dark;
+  padding: 6px 8px 6px 8px;
+  background-color: theme.$color-positive-lighter;
+  color: theme.$color-positive-dark;
   cursor: inherit;
   font-size: 14px;
   line-height: 130%;
@@ -25,28 +25,28 @@
     content: "";
     height: 8px;
     width: 8px;
-    background-color: $color-positive;
+    background-color: theme.$color-positive;
     border-radius: 50%;
     display: inline-block;
   }
 
   &.chip-error {
-    border: 1px solid $color-negative-light;
-    background-color: $color-negative-lighter;
-    color: $color-negative-dark;
+    border: 1px solid theme.$color-negative-light;
+    background-color: theme.$color-negative-lighter;
+    color: theme.$color-negative-dark;
 
     &:before {
-      background-color: $color-negative;
+      background-color: theme.$color-negative;
     }
   }
 
   &.chip-neutral {
-    border: 1px solid $color-neutral-40;
-    background-color: $color-neutral-20;
-    color: $color-neutral-80;
+    border: 1px solid theme.$color-neutral-40;
+    background-color: theme.$color-neutral-20;
+    color: theme.$color-neutral-80;
 
     &:before {
-      background-color: $color-neutral-60;
+      background-color: theme.$color-neutral-60;
     }
   }
 }

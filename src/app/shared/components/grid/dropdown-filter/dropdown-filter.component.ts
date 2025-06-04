@@ -5,6 +5,7 @@ import { CompositeFilterDescriptor, FilterDescriptor } from '@progress/kendo-dat
 import { initializeApplyFilterSubscription } from 'src/app/shared/helpers/grid-filter.helpers';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
 import { AppBaseFilterCellComponent } from '../app-base-filter-cell.component';
+import { DropdownComponent } from '../../dropdowns/dropdown/dropdown.component';
 
 export interface FilterDropdownOption {
   name: string;
@@ -16,6 +17,7 @@ export interface FilterDropdownOption {
   selector: 'app-dropdown-filter',
   templateUrl: './dropdown-filter.component.html',
   styleUrl: './dropdown-filter.component.scss',
+  imports: [DropdownComponent],
 })
 export class DropdownFilterComponent extends AppBaseFilterCellComponent implements OnInit {
   @Input() override filter!: CompositeFilterDescriptor;
@@ -27,7 +29,10 @@ export class DropdownFilterComponent extends AppBaseFilterCellComponent implemen
 
   public chosenOption?: FilterDropdownOption;
 
-  constructor(filterService: FilterService, private actions$: Actions) {
+  constructor(
+    filterService: FilterService,
+    private actions$: Actions,
+  ) {
     super(filterService);
   }
 
@@ -43,7 +48,7 @@ export class DropdownFilterComponent extends AppBaseFilterCellComponent implemen
 
     if (this.entityType) {
       this.subscriptions.add(
-        initializeApplyFilterSubscription(this.actions$, this.entityType, this.column.field, updateMethod)
+        initializeApplyFilterSubscription(this.actions$, this.entityType, this.column.field, updateMethod),
       );
     }
   }
@@ -56,7 +61,7 @@ export class DropdownFilterComponent extends AppBaseFilterCellComponent implemen
             field: this.column.field,
             operator: 'eq',
             value: this.searchByNames === false ? (option.value as number) : option.name,
-          })
+          }),
     );
   }
 }

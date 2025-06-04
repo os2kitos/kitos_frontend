@@ -1,0 +1,91 @@
+<app-scrollbar-dialog
+  [title]="title"
+  [nested]="true"
+  [ngClass]="{ 'removed-padding': isAnySelected() }"
+  data-cy="bulk-action-dialog"
+>
+  <app-standard-vertical-content-grid>
+    <!-- Dialog body -->
+    <ng-container *ngIf="!isLoading && (checkIfContainsData$() | async) === true">
+      <app-user-dropdown
+        *ngIf="dropdownType === 'user'"
+        [disabledUuids$]="dropdownDisabledUuids$"
+        [text]="dropdownTitle"
+        [formGroup]="formGroup"
+        formName="option"
+      ></app-user-dropdown>
+      <app-contracts-dropdown
+        *ngIf="dropdownType === 'it-contract'"
+        [disabledUuids$]="dropdownDisabledUuids$"
+        [text]="dropdownTitle"
+        [formGroup]="formGroup"
+        formName="option"
+      ></app-contracts-dropdown>
+      <ng-container *ngFor="let section of sections">
+        <ng-container *ngIf="section.options$ | async as options">
+          <app-bulk-action-dialog-section
+            *ngIf="options.length > 0"
+            [options]="options"
+            [entityType]="section.entityType"
+            [title]="section.title"
+            [primaryColumnTitle]="section.primaryColumnTitle"
+            [secondaryColumnTitle]="section.secondaryColumnTitle"
+          ></app-bulk-action-dialog-section>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+
+    <!-- Loading state -->
+    <app-loading *ngIf="isLoading"></app-loading>
+
+    <!-- Empty state -->
+    <app-empty-state
+      *ngIf="!isLoading && (checkIfContainsData$() | async) === false"
+      [text]="emptyStateText"
+      context="searchResult"
+    ></app-empty-state>
+  </app-standard-vertical-content-grid>
+  <app-dialog-actions>
+    <app-standard-vertical-content-grid>
+      <!-- Snackbar buttons -->
+      <app-snackbar-actions *ngIf="isAnySelected() && !isLoading">
+        <app-paragraph color="white" paragraphSize="medium" [dimmed]="true">{{ getSnackbarText() }}</app-paragraph>
+
+        <app-button
+          *ngFor="let button of actionButtons"
+          [color]="button.color"
+          [buttonStyle]="button.buttonStyle"
+          (buttonClick)="emitSelectedOptionsResult(button)"
+          class="perform-action-button"
+          [disabled]="formGroup.invalid"
+        >
+          {{ button.text }}
+        </app-button>
+      </app-snackbar-actions>
+
+      <!-- Dialog action buttons -->
+      <app-content-space-between class="action-buttons">
+        <app-button
+          [disabled]="!isAnySelected() || (checkIfContainsData$() | async) === false"
+          buttonStyle="secondary"
+          color="accent"
+          (buttonClick)="deselectAll()"
+          data-cy="deselect-all-bulk-action-button"
+          i18n
+        >
+          Fravælg alle
+        </app-button>
+        <app-button
+          [disabled]="((isAllSelected$() | async) ?? false) || (checkIfContainsData$() | async) === false"
+          buttonStyle="secondary"
+          color="accent"
+          (buttonClick)="selectAll()"
+          data-cy="select-all-bulk-action-button"
+          i18n
+        >
+          Vælg alle
+        </app-button>
+      </app-content-space-between>
+    </app-standard-vertical-content-grid>
+  </app-dialog-actions>
+</app-scrollbar-dialog>

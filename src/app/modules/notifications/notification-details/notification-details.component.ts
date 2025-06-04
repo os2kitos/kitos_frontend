@@ -7,11 +7,15 @@ import {
   selectShowItContractModule,
   selectShowItSystemModule,
 } from 'src/app/store/organization/selectors';
+import { HelpButtonComponent } from '../../../shared/components/help-button/help-button.component';
+import { NavigationDrawerComponent } from '../../../shared/components/navigation-drawer/navigation-drawer.component';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-notification-details',
   templateUrl: './notification-details.component.html',
   styleUrl: './notification-details.component.scss',
+  imports: [HelpButtonComponent, NavigationDrawerComponent, RouterOutlet],
 })
 export class NotificationDetailsComponent {
   public readonly navItems: NavigationDrawerItem[] = [

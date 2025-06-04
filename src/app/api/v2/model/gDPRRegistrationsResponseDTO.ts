@@ -49,11 +49,12 @@ export namespace APIGDPRRegistrationsResponseDTO {
         DontKnow: 'DontKnow' as BusinessCriticalEnum,
         Undecided: 'Undecided' as BusinessCriticalEnum
     };
-    export type HostedAtEnum = 'Undecided' | 'OnPremise' | 'External';
+    export type HostedAtEnum = 'Undecided' | 'OnPremise' | 'External' | 'Hybrid';
     export const HostedAtEnum = {
         Undecided: 'Undecided' as HostedAtEnum,
         OnPremise: 'OnPremise' as HostedAtEnum,
-        External: 'External' as HostedAtEnum
+        External: 'External' as HostedAtEnum,
+        Hybrid: 'Hybrid' as HostedAtEnum
     };
     export type DataSensitivityLevelsEnum = 'None' | 'PersonData' | 'SensitiveData' | 'LegalData';
     export const DataSensitivityLevelsEnum = {

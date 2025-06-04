@@ -1,0 +1,25 @@
+<app-paragraph [cropOnOverflow]="true">
+  <ng-container *ngIf="column.dataField">
+    <div>
+      <ng-container *ngFor="let collectionItem of getProperty(column.dataField) as data; let i = index">
+        <app-details-page-link-with-tooltip
+          *ngIf="column.itemTooltipField"
+          [toolTip]="getPropertyFromObject(collectionItem, column.itemTooltipField) ?? ''"
+          linkFontSize="small"
+          [itemType]="column.entityType"
+          [itemPath]="collectionItem.id"
+          [itemPathIncludesSubmodule]="column.style === 'page-link-array-with-submodules'"
+          >{{ collectionItem.value }}
+        </app-details-page-link-with-tooltip>
+        <app-details-page-link
+          *ngIf="!column.itemTooltipField"
+          linkFontSize="small"
+          [itemType]="column.entityType"
+          [itemPath]="collectionItem.id"
+          [itemPathIncludesSubmodule]="column.style === 'page-link-array-with-submodules'"
+          >{{ collectionItem.value }}</app-details-page-link
+        >{{ i < data.length - 1 ? (column.linkArraySeparator ?? ", ") : "" }}
+      </ng-container>
+    </div>
+  </ng-container>
+</app-paragraph>

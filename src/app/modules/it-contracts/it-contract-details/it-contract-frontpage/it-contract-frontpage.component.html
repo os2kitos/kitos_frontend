@@ -31,6 +31,7 @@
       optionType="it-contract_contract-type"
       [formGroup]="frontpageFormGroup"
       formName="contractType"
+      data-cy="contract-type"
       (valueChange)="patchFrontPage({ general: { contractTypeUuid: ignoreNullReturnType($event) } })"
     >
     </app-option-type-dropdown>
@@ -54,6 +55,7 @@
       [formGroup]="frontpageFormGroup"
       formName="criticality"
       valueField="uuid"
+      [showDescription]="true"
       [data]="criticalityTypes$ | async"
       (valueChange)="patchFrontPage({ general: { criticalityUuid: $event } })"
     ></app-dropdown>
@@ -129,19 +131,36 @@
     i18n-title
   ></app-card-header>
 
-  <app-connected-dropdown
-    text="Overordnet kontrakt"
-    i18n-text
-    data-cy="parent-contract"
-    valueField="uuid"
-    [formGroup]="parentContractForm"
-    formName="parentContract"
-    [data$]="validParentContracts$"
-    [isLoading$]="contractsIsLoading$"
-    (filterChange)="searchParentContracts($event)"
-    (valueChange)="patchFrontPage({ parentContractUuid: $event })"
-  >
-  </app-connected-dropdown>
+  <app-form-grid [formGroup]="parentContractForm">
+    <app-connected-dropdown
+      text="Overordnet kontrakt"
+      i18n-text
+      data-cy="parent-contract"
+      class="input-two-thirds-column-width"
+      valueField="uuid"
+      [formGroup]="parentContractForm"
+      formName="parentContract"
+      [data$]="validParentContracts$"
+      [isLoading$]="contractsIsLoading$"
+      (filterChange)="searchParentContracts($event)"
+      (valueChange)="patchFrontPage({ parentContractUuid: $event })"
+    >
+    </app-connected-dropdown>
+
+    <app-checkbox
+      *ngIf="useParentValidityEnabled$ | async"
+      [formGroup]="parentContractForm"
+      formName="requireValidParent"
+      (valueChange)="patchFrontPage({ general: { validity: { requireValidParent: $event } } })"
+      labelPosition="after"
+      text="Nedarv den overordnedes gyldighed"
+      tooltip="Hvis dette er sat, så vil den pågældende kontrakts status, altid være denne samme, som dens overordnede kontrakt."
+      i18n-tooltip
+      class="flex"
+      i18n-text
+      data-cy="require-valid-parent"
+    ></app-checkbox>
+  </app-form-grid>
 </app-card>
 
 <app-card *ngIf="showResponsibleCard$ | async">
@@ -166,6 +185,7 @@
         formName="responsibleEntitySignedBy"
         [data$]="users$"
         [isLoading$]="usersIsLoading$"
+        [addTag]="true"
         (filterChange)="searchUsers($event)"
         (valueChange)="patchFrontPage({ responsible: { signedBy: $event } })"
       ></app-connected-dropdown>

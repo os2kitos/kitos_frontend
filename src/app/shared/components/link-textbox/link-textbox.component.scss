@@ -1,5 +1,5 @@
-@import "theme";
-@import "mixins";
+@use "theme";
+@use "mixins";
 
 :host {
   display: flex;
@@ -24,13 +24,13 @@ input {
 }
 
 :host ::ng-deep mat-form-field {
-  @include mat-form-sizes;
-  @include mat-textbox-input-adjustment;
-  @include mat-input-adjustment;
+  @include mixins.mat-form-sizes;
+  @include mixins.mat-textbox-input-adjustment;
+  @include mixins.mat-input-adjustment;
 }
 
 .link-input-style {
-  color: $color-primary-base !important;
+  color: theme.$color-primary-base !important;
   cursor: pointer;
   text-decoration: none;
 }
@@ -40,21 +40,25 @@ input {
 }
 
 .incorrect-link-color {
-  color: $color-negative;
+  color: theme.$color-negative;
+}
+
+.incorrect-link-color:hover {
+  color: theme.$color-negative;
 }
 
 span {
-  color: $color-neutral-80;
+  color: theme.$color-neutral-80;
 }
 
 span:hover {
-  color: $color-neutral-dark;
+  color: theme.$color-neutral-dark;
   cursor: pointer;
 }
 
 .suffix-icons {
   display: flex;
   align-items: center;
-  gap: $padding-medium;
+  gap: theme.$padding-medium;
   font-weight: 300;
 }

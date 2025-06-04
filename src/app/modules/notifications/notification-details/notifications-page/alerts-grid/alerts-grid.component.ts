@@ -2,18 +2,21 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { mapEntityTypeToRelatedEntityType } from 'src/app/shared/helpers/entity-type.helper';
-import { GridActionColumn } from 'src/app/shared/models/grid-action-column.model';
+import { createGridActionColumn } from 'src/app/shared/models/grid-action-column.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
 import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
 import { AlertActions } from 'src/app/store/alerts/actions';
 import { selectAlertsByType } from 'src/app/store/alerts/selectors';
 import { Alert, RelatedEntityType } from 'src/app/store/alerts/state';
+import { LocalGridComponent } from '../../../../../shared/components/local-grid/local-grid.component';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-alerts-grid',
   templateUrl: './alerts-grid.component.html',
   styleUrl: './alerts-grid.component.scss',
+  imports: [LocalGridComponent, AsyncPipe],
 })
 export class AlertsGridComponent implements OnInit {
   @Input() entityType!: RegistrationEntityTypes;
@@ -24,7 +27,10 @@ export class AlertsGridComponent implements OnInit {
 
   public gridColumns!: GridColumn[];
 
-  constructor(private store: Store, private confirmActionService: ConfirmActionService) {}
+  constructor(
+    private store: Store,
+    private confirmActionService: ConfirmActionService,
+  ) {}
 
   ngOnInit(): void {
     this.relatedEntityType = mapEntityTypeToRelatedEntityType(this.entityType);
@@ -70,16 +76,7 @@ export class AlertsGridComponent implements OnInit {
         hidden: false,
         field: 'message',
       },
-      {
-        field: 'Actions',
-        title: ' ',
-        hidden: false,
-        style: 'action-buttons',
-        isSticky: true,
-        noFilter: true,
-        extraData: [{ type: 'delete' }] as GridActionColumn[],
-        width: 50,
-      },
+      createGridActionColumn(['delete']),
     ];
   }
 }

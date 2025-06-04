@@ -2,7 +2,7 @@ import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/c
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { CookieService } from 'ngx-cookie';
-import { Observable, catchError, first, map, mergeMap, of, retry, tap } from 'rxjs';
+import { Observable, catchError, first, map, mergeMap, of, tap, throwError } from 'rxjs';
 import { APIV1AuthorizeINTERNALService } from 'src/app/api/v1';
 import { UserActions } from 'src/app/store/user-store/actions';
 import { selectXsrfToken } from 'src/app/store/user-store/selectors';
@@ -13,7 +13,7 @@ export class HttpXSRFInterceptor implements HttpInterceptor {
   constructor(
     private cookieService: CookieService,
     private store: Store,
-    private authorizeService: APIV1AuthorizeINTERNALService
+    private authorizeService: APIV1AuthorizeINTERNALService,
   ) {}
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -23,7 +23,7 @@ export class HttpXSRFInterceptor implements HttpInterceptor {
       return next.handle(req);
     }
 
-    // Fetch new XSRF token if missing cookie or session token before handling request
+    // Get or refresh the token before handling the request
     return this.store.select(selectXsrfToken).pipe(
       first(),
       mergeMap((token) => {
@@ -31,18 +31,33 @@ export class HttpXSRFInterceptor implements HttpInterceptor {
         if (token && cookie) return of(token);
 
         return this.authorizeService.getSingleAuthorizeGetAntiForgeryToken().pipe(
-          retry(1),
           map((antiForgeryToken) => antiForgeryToken.toString()),
-          tap((token) => this.store.dispatch(UserActions.updateXSRFToken(token))),
+          tap((newToken) => this.store.dispatch(UserActions.updateXSRFToken(newToken))),
           catchError((error) => {
-            console.error(error);
-            // Just return empty token if XSRF token request fails. The handled request will then fail.
+            console.error('Token fetch failed', error);
             return of('');
-          })
+          }),
         );
       }),
-      // Add XSRF token to header and handle request
-      mergeMap((token) => next.handle(req.clone({ headers: req.headers.set(XSRFTOKEN, token) })))
+      mergeMap((token) =>
+        next.handle(req.clone({ headers: req.headers.set(XSRFTOKEN, token) })).pipe(
+          catchError((error) => {
+            //On status code 400 (possible invalid XSFR token), we need to refresh the token and retry the request as the token might have been invalidated by another tab
+            if (error.status == 400) {
+              return this.authorizeService.getSingleAuthorizeGetAntiForgeryToken().pipe(
+                map((newToken) => newToken.toString()),
+                tap((newToken) => this.store.dispatch(UserActions.updateXSRFToken(newToken))),
+                mergeMap((newToken) => next.handle(req.clone({ headers: req.headers.set(XSRFTOKEN, newToken) }))),
+                catchError((err) => {
+                  console.error('Retry after token refresh failed', err);
+                  return throwError(() => error);
+                }),
+              );
+            }
+            return throwError(() => error);
+          }),
+        ),
+      ),
     );
   }
 }

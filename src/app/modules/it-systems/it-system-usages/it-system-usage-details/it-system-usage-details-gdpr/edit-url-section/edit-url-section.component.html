@@ -8,7 +8,7 @@
       placeholder="Fortegnelse"
       i18n-placeholder
       (iconClick)="openDirectoryUrlDialog(simpleLink)"
-      (clearClick)="clearClick.emit()"
+      (clearClick)="clearSimpleLink()"
     ></app-link-textbox>
   </ng-container>
   <ng-container *ngIf="(simpleLink$ | async) === undefined">

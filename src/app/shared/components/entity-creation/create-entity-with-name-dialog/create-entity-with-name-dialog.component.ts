@@ -1,17 +1,34 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime } from 'rxjs';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
 import { BaseCreateEntityDialogComponent } from '../base-create-entity-dialog-component';
 import { CreateEntityDialogComponentStore } from '../create-entity-dialog.component-store';
+import { DialogComponent } from '../../dialogs/dialog/dialog.component';
+import { StandardVerticalContentGridComponent } from '../../standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { TextBoxComponent } from '../../textbox/textbox.component';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { ParagraphComponent } from '../../paragraph/paragraph.component';
+import { CreateEntityDialogActionButtonsComponent } from '../create-entity-dialog-action-buttons/create-entity-dialog-action-buttons.component';
 
 @Component({
   selector: 'app-create-entity-with-name-dialog',
   templateUrl: './create-entity-with-name-dialog.component.html',
   styleUrl: './create-entity-with-name-dialog.component.scss',
   providers: [CreateEntityDialogComponentStore],
+  imports: [
+    DialogComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    StandardVerticalContentGridComponent,
+    TextBoxComponent,
+    NgIf,
+    ParagraphComponent,
+    CreateEntityDialogActionButtonsComponent,
+    AsyncPipe,
+  ],
 })
 export class CreateEntityWithNameDialogComponent extends BaseCreateEntityDialogComponent implements OnInit {
   public createForm = new FormGroup({
@@ -30,7 +47,7 @@ export class CreateEntityWithNameDialogComponent extends BaseCreateEntityDialogC
         if (!value) return;
 
         this.componentStore.checkNameAvailability({ searchObject: { nameEquals: value }, entityType: this.entityType });
-      })
+      }),
     );
   }
 

@@ -5,7 +5,7 @@
     "deactivated": true,
     "description": "Test description 1",
     "itInterfaceType": {
-      "uuid":"04fb8cbb-0eb2-482c-b8f7-029017a22bbf",
+      "uuid": "04fb8cbb-0eb2-482c-b8f7-029017a22bbf",
       "name": "InterfaceType1"
     },
     "urlReference": "http://www.kitos.dk"
@@ -16,7 +16,7 @@
     "deactivated": false,
     "description": "Test description 2",
     "itInterfaceType": {
-      "uuid":"d4f25a09-490f-4ba1-b66d-7473d3599639",
+      "uuid": "d4f25a09-490f-4ba1-b66d-7473d3599639",
       "name": "InterfaceType2"
     },
     "urlReference": "www.google.com"

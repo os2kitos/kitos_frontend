@@ -1,0 +1,21 @@
+@use "theme";
+
+app-standard-vertical-content-grid {
+  width: 100%;
+}
+
+.perform-action-button {
+  flex: none;
+}
+
+.action-buttons * {
+  padding: theme.$padding-small;
+}
+
+app-dialog-actions {
+  padding-top: 0px !important;
+}
+
+.removed-padding ::ng-deep .content {
+  padding-bottom: 0px !important;
+}

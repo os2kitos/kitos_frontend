@@ -1,118 +1,158 @@
-/// <reference types="Cypress" />
+/// <reference types="cypress" />
 
-describe('it-system-usage', () => {
+import { TestRunner } from 'cypress/support/test-runner';
+
+function setupTest() {
+  cy.requireIntercept();
+  cy.setupItSystemUsageIntercepts();
+  cy.setup(true, 'it-systems/it-system-usages');
+}
+
+describe('it-system-usage references', () => {
   const itSystemUsageBaseUrl = '/api/v2/it-system-usages/*';
-  beforeEach(() => {
-    cy.requireIntercept();
-    cy.setupItSystemUsageIntercepts();
-    cy.setup(true, 'it-systems/it-system-usages');
-  });
+  const refsBaseUrl = '/api/v2/internal/external-references/it-system-usages/*';
 
-  it('can show external references', () => {
-    cy.contains('System 3').click();
+  const testRunner = new TestRunner(setupTest);
 
-    cy.navigateToDetailsSubPage('Lokale referencer');
+  it('Tests', () => {
+    testRunner.runTestWithSetup('can show external references', () => {
+      cy.contains('System 3').click();
 
-    cy.testCanShowExternalReferences();
-  });
+      cy.intercept(refsBaseUrl, {
+        fixture: './it-system-usage/external-references/normal-external-references.json',
+      });
 
-  it('can show no external references', () => {
-    cy.intercept('/api/v2/it-system-usages/*', {
-      fixture: './it-system-usage/external-references/it-system-usage-no-external-references.json',
+      cy.navigateToDetailsSubPage('Lokale referencer');
+
+      cy.testCanShowExternalReferences();
+    });
+
+    testRunner.runTestWithSetup('can show no external references', () => {
+      cy.intercept(refsBaseUrl, {
+        fixture: './it-system-usage/external-references/no-external-references.json',
+      });
+
+      cy.contains('System 3').click();
+      cy.navigateToDetailsSubPage('Lokale referencer');
+
+      cy.contains('Der er endnu ikke tilføjet referencer');
+      cy.contains('Opret reference');
+    });
+
+    testRunner.runTestWithSetup('can add external reference and override master reference', () => {
+      cy.intercept(refsBaseUrl, {
+        fixture: './it-system-usage/external-references/normal-external-references.json',
+      });
+      cy.contains('System 3').click();
+      cy.navigateToDetailsSubPage('Lokale referencer');
+
+      cy.intercept(refsBaseUrl, {
+        fixture: './it-system-usage/external-references/extra-external-references.json',
+      });
+
+      cy.externalReferencesSaveAndValidate(
+        false,
+        true,
+        false,
+        itSystemUsageBaseUrl,
+        './it-system-usage/external-references/it-system-usage.json'
+      );
+    });
+
+    testRunner.runTestWithSetup(
+      'can add external reference with required master reference, when no reference is present',
+      () => {
+        cy.intercept(refsBaseUrl, {
+          fixture: './it-system-usage/external-references/no-external-references.json',
+        });
+
+        cy.contains('System 3').click();
+        cy.navigateToDetailsSubPage('Lokale referencer');
+
+        cy.intercept(refsBaseUrl, {
+          fixture: './it-system-usage/external-references/extra-external-references.json',
+        });
+
+        cy.externalReferencesSaveAndValidate(
+          true,
+          false,
+          false,
+          itSystemUsageBaseUrl,
+          './it-system-usage/external-references/it-system-usage.json'
+        );
+      }
+    );
+
+    testRunner.runTestWithSetup('can modify external reference, and assign new Master reference', () => {
+      cy.intercept(refsBaseUrl, {
+        fixture: './it-system-usage/external-references/normal-external-references.json',
+      });
+
+      cy.contains('System 3').click();
+      cy.navigateToDetailsSubPage('Lokale referencer');
+
+      cy.intercept(refsBaseUrl, {
+        fixture: './it-system-usage/external-references/edited-external-references.json',
+      });
+
+      cy.externalReferencesSaveAndValidate(
+        false,
+        true,
+        true,
+        itSystemUsageBaseUrl,
+        './it-system-usage/external-references/it-system-usage.json',
+        'Valid url'
+      );
+    });
+
+    testRunner.runTestWithSetup('can modify external reference master reference', () => {});
+    cy.intercept(refsBaseUrl, {
+      fixture: './it-system-usage/external-references/normal-external-references.json',
     });
 
     cy.contains('System 3').click();
     cy.navigateToDetailsSubPage('Lokale referencer');
 
-    cy.contains('Der er endnu ikke tilføjet referencer');
-    cy.contains('Opret reference');
-  });
-
-  it('can add external reference and override master reference', () => {
-    cy.contains('System 3').click();
-    cy.navigateToDetailsSubPage('Lokale referencer');
-
-    cy.externalReferencesSaveAndValidate(
-      false,
-      true,
-      false,
-      itSystemUsageBaseUrl,
-      './it-system-usage/external-references/it-system-usage-with-extra-external-reference.json'
-    );
-  });
-
-  it('can add external reference with required master reference, when no reference is present', () => {
-    cy.intercept('/api/v2/it-system-usages/*', {
-      fixture: './it-system-usage/external-references/it-system-usage-no-external-references.json',
+    cy.intercept(refsBaseUrl, {
+      fixture: './it-system-usage/external-references/modified-master-external-references.json',
     });
 
-    cy.contains('System 3').click();
-    cy.navigateToDetailsSubPage('Lokale referencer');
-
-    cy.externalReferencesSaveAndValidate(
-      true,
-      false,
-      false,
-      itSystemUsageBaseUrl,
-      './it-system-usage/external-references/it-system-usage-with-extra-external-reference.json'
-    );
-  });
-
-  it('can modify external reference, and assign new Master reference', () => {
-    cy.contains('System 3').click();
-    cy.navigateToDetailsSubPage('Lokale referencer');
-
     cy.externalReferencesSaveAndValidate(
       false,
-      true,
-      true,
-      itSystemUsageBaseUrl,
-      './it-system-usage/external-references/it-system-usage-with-edited-external-reference.json',
-      'Valid url'
-    );
-  });
-
-  it('can modify external reference master reference', () => {
-    cy.contains('System 3').click();
-    cy.navigateToDetailsSubPage('Lokale referencer');
-
-    cy.externalReferencesSaveAndValidate(
-      true,
       false,
       true,
       itSystemUsageBaseUrl,
-      './it-system-usage/external-references/it-system-usage-modified-master-reference.json',
+      './it-system-usage/external-references/it-system-usage.json',
       'No url Master reference'
     );
-  });
 
-  it('can delete non master external reference', () => {
-    cy.contains('System 3').click();
-    cy.navigateToDetailsSubPage('Lokale referencer');
+    testRunner.runTestWithSetup('can delete non master external reference', () => {
+      cy.intercept(refsBaseUrl, {
+        fixture: './it-system-usage/external-references/normal-external-references.json',
+      });
 
-    const referenceTitleToRemove = 'Valid url';
+      cy.contains('System 3').click();
+      cy.navigateToDetailsSubPage('Lokale referencer');
 
-    cy.getRowForElementContent(referenceTitleToRemove)
-      .first()
-      .within(() => cy.get('app-trashcan-icon').click({ force: true }));
+      const referenceTitleToRemove = 'Valid url';
 
-    cy.verifyYesNoConfirmationDialogAndConfirm(
-      'PATCH',
-      '/api/v2/it-system-usages/*',
-      { fixture: './it-system-usage/external-references/it-system-usage-external-references-removed-item.json' },
-      'Er du sikker på at du vil fjerne referencen?'
-    );
-    cy.contains('Referencen blev slettet');
+      cy.getRowForElementContent(referenceTitleToRemove)
+        .first()
+        .within(() => cy.get('app-trashcan-icon').click({ force: true }));
 
-    cy.contains(referenceTitleToRemove).should('not.exist');
-  });
+      cy.intercept(refsBaseUrl, {
+        fixture: './it-system-usage/external-references/external-references-removed-item.json',
+      });
 
-  it('can not delete master external reference', () => {
-    cy.contains('System 3').click();
-    cy.navigateToDetailsSubPage('Lokale referencer');
+      cy.verifyYesNoConfirmationDialogAndConfirm(
+        'PATCH',
+        '/api/v2/it-system-usages/*',
+        { fixture: './it-system-usage/external-references/it-system-usage.json' },
+        'Er du sikker på at du vil fjerne referencen?'
+      );
+      cy.contains('Referencen blev slettet');
 
-    cy.getRowForElementContent('No url Master reference')
-      .first()
-      .within(() => cy.get('app-trashcan-icon').should('not.exist'));
+      cy.contains(referenceTitleToRemove).should('not.exist');
+    });
   });
 });

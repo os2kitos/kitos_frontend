@@ -111,7 +111,7 @@ export class GlobalAdminOptionTypeService {
     @Inject(APIV2DprGlobalRoleOptionTypesInternalINTERNALService)
     private dprRoleService: APIV2DprGlobalRoleOptionTypesInternalINTERNALService,
     @Inject(APIV2OrganizationUnitGlobalRoleOptionTypesInternalINTERNALService)
-    private orgUnitRoleService: APIV2OrganizationUnitGlobalRoleOptionTypesInternalINTERNALService
+    private orgUnitRoleService: APIV2OrganizationUnitGlobalRoleOptionTypesInternalINTERNALService,
   ) {}
 
   public getGlobalOptions(optionType: GlobalAdminOptionType): Observable<Array<APIGlobalRoleOptionResponseDTO>> {
@@ -120,7 +120,7 @@ export class GlobalAdminOptionTypeService {
 
   public createGlobalOption(
     optionType: GlobalAdminOptionType,
-    request: APIGlobalRoleOptionCreateRequestDTO
+    request: APIGlobalRoleOptionCreateRequestDTO,
   ): Observable<APIGlobalRoleOptionResponseDTO> {
     return this.resolveCreateGlobalOptionEndpoint(optionType)(request);
   }
@@ -128,13 +128,13 @@ export class GlobalAdminOptionTypeService {
   public patchGlobalOption(
     optionType: GlobalAdminOptionType,
     optionUuid: string,
-    request: APIGlobalRoleOptionUpdateRequestDTO
+    request: APIGlobalRoleOptionUpdateRequestDTO,
   ) {
     return this.resolvePatchGlobalOptionEndpoint(optionType)(optionUuid, request);
   }
 
   private resolveGetGlobalOptionsEndpoint(
-    optionType: GlobalAdminOptionType
+    optionType: GlobalAdminOptionType,
   ): () => Observable<Array<APIGlobalRoleOptionResponseDTO>> {
     switch (optionType) {
       //It system regular types
@@ -268,7 +268,7 @@ export class GlobalAdminOptionTypeService {
             {
               optionUuid,
               dto,
-            }
+            },
           );
       case 'it-interface_data-type':
         return (optionUuid: string, dto: APIGlobalRoleOptionUpdateRequestDTO) =>
@@ -294,7 +294,7 @@ export class GlobalAdminOptionTypeService {
             {
               optionUuid,
               dto,
-            }
+            },
           );
       case 'it-system_usage-data-classification-type':
         return (optionUuid: string, dto: APIGlobalRoleOptionUpdateRequestDTO) =>
@@ -302,7 +302,7 @@ export class GlobalAdminOptionTypeService {
             {
               optionUuid,
               dto,
-            }
+            },
           );
       case 'it_system_usage-gdpr-registered-data-category-type':
         return (optionUuid: string, dto: APIGlobalRoleOptionUpdateRequestDTO) =>
@@ -325,7 +325,7 @@ export class GlobalAdminOptionTypeService {
             {
               optionUuid,
               dto: request,
-            }
+            },
           );
 
       case 'it-contract_purchase-form-type':
@@ -334,7 +334,7 @@ export class GlobalAdminOptionTypeService {
             {
               optionUuid,
               dto: request,
-            }
+            },
           );
 
       case 'it-contract-payment-model-types':
@@ -343,7 +343,7 @@ export class GlobalAdminOptionTypeService {
             {
               optionUuid,
               dto: request,
-            }
+            },
           );
 
       case 'it-contract-agreement-element-types':
@@ -352,7 +352,7 @@ export class GlobalAdminOptionTypeService {
             {
               optionUuid,
               dto: request,
-            }
+            },
           );
 
       case 'it-contract-extend-types':
@@ -361,7 +361,7 @@ export class GlobalAdminOptionTypeService {
             {
               optionUuid,
               dto: request,
-            }
+            },
           );
 
       case 'it-contract-payment-frequency-types':
@@ -370,7 +370,7 @@ export class GlobalAdminOptionTypeService {
             {
               optionUuid,
               dto: request,
-            }
+            },
           );
 
       case 'it-contract-price-regulation-types':
@@ -379,7 +379,7 @@ export class GlobalAdminOptionTypeService {
             {
               optionUuid,
               dto: request,
-            }
+            },
           );
 
       case 'it-contract_procurement-strategy-type':
@@ -388,7 +388,7 @@ export class GlobalAdminOptionTypeService {
             {
               optionUuid,
               dto: request,
-            }
+            },
           );
 
       case 'it-contract-termination-period-types':
@@ -397,7 +397,7 @@ export class GlobalAdminOptionTypeService {
             {
               optionUuid,
               dto: request,
-            }
+            },
           );
 
       case 'it-contract_criticality-type':
@@ -414,7 +414,7 @@ export class GlobalAdminOptionTypeService {
             {
               optionUuid,
               dto: request,
-            }
+            },
           );
 
       case 'data-processing-oversight-option-types':
@@ -423,7 +423,7 @@ export class GlobalAdminOptionTypeService {
             {
               optionUuid,
               dto: request,
-            }
+            },
           );
 
       case 'data-processing-data-responsible-types':
@@ -432,7 +432,7 @@ export class GlobalAdminOptionTypeService {
             {
               optionUuid,
               dto: request,
-            }
+            },
           );
 
       case 'data-processing-country-types':
@@ -441,7 +441,7 @@ export class GlobalAdminOptionTypeService {
             {
               optionUuid,
               dto: request,
-            }
+            },
           );
 
       //Organization types
@@ -465,7 +465,7 @@ export class GlobalAdminOptionTypeService {
             {
               optionUuid,
               dto,
-            }
+            },
           );
       case 'data-processing':
         return (optionUuid: string, dto: APIGlobalRoleOptionUpdateRequestDTO) =>
@@ -479,7 +479,7 @@ export class GlobalAdminOptionTypeService {
             {
               optionUuid,
               dto,
-            }
+            },
           );
       default:
         throw new Error(`Patch operation is not supported for ${optionType}`);
@@ -509,7 +509,7 @@ export class GlobalAdminOptionTypeService {
           this.archiveTestLocationService.postSingleItSystemGlobalArchiveTestLocationsInternalV2CreateGlobalArchiveTestLocation(
             {
               dto: request,
-            }
+            },
           );
       case 'it-interface_data-type':
         return (request: APIGlobalRoleOptionCreateRequestDTO) =>
@@ -531,14 +531,14 @@ export class GlobalAdminOptionTypeService {
           this.sensitivePersonalDataTypeService.postSingleItSystemGlobalSensitivePersonalDataTypesInternalV2CreateGlobalSensitivePersonalData(
             {
               dto: request,
-            }
+            },
           );
       case 'it-system_usage-data-classification-type':
         return (request: APIGlobalRoleOptionCreateRequestDTO) =>
           this.itSystemCategoryService.postSingleItSystemGlobalItSystemCategoriesInternalV2CreateGlobalItSystemCategories(
             {
               dto: request,
-            }
+            },
           );
       case 'it_system_usage-gdpr-registered-data-category-type':
         return (request: APIGlobalRoleOptionCreateRequestDTO) =>
@@ -558,7 +558,7 @@ export class GlobalAdminOptionTypeService {
           this.templateTypeService.postSingleItContractGlobalItContractTemplateTypesInternalV2CreateGlobalItContractTemplateType(
             {
               dto: request,
-            }
+            },
           );
 
       case 'it-contract_purchase-form-type':
@@ -566,7 +566,7 @@ export class GlobalAdminOptionTypeService {
           this.purchaseFormTypeService.postSingleItContractGlobalPurchaseFormTypesInternalV2CreateGlobalPurchaseFormType(
             {
               dto: request,
-            }
+            },
           );
 
       case 'it-contract-payment-model-types':
@@ -574,7 +574,7 @@ export class GlobalAdminOptionTypeService {
           this.paymentModelTypeService.postSingleItContractGlobalPaymentModelTypesInternalV2CreateGlobalPaymentModelType(
             {
               dto: request,
-            }
+            },
           );
 
       case 'it-contract-agreement-element-types':
@@ -582,7 +582,7 @@ export class GlobalAdminOptionTypeService {
           this.agreementElementTypeService.postSingleItContractGlobalAgreementElementTypesInternalV2CreateGlobalAgreementElementType(
             {
               dto: request,
-            }
+            },
           );
 
       case 'it-contract-extend-types':
@@ -590,7 +590,7 @@ export class GlobalAdminOptionTypeService {
           this.optionExtendTypeService.postSingleItContractGlobalOptionExtendTypesInternalV2CreateGlobalOptionExtendType(
             {
               dto: request,
-            }
+            },
           );
 
       case 'it-contract-payment-frequency-types':
@@ -598,7 +598,7 @@ export class GlobalAdminOptionTypeService {
           this.paymentFrequencyTypeService.postSingleItContractGlobalPaymentFrequencyTypesInternalV2CreateGlobalPaymentFreqencyType(
             {
               dto: request,
-            }
+            },
           );
 
       case 'it-contract-price-regulation-types':
@@ -606,7 +606,7 @@ export class GlobalAdminOptionTypeService {
           this.priceRegulationTypeService.postSingleItContractGlobalPriceRegulationTypesInternalV2CreateGlobalPriceRegulationType(
             {
               dto: request,
-            }
+            },
           );
 
       case 'it-contract_procurement-strategy-type':
@@ -614,7 +614,7 @@ export class GlobalAdminOptionTypeService {
           this.procurementStrategyTypeService.postSingleItContractGlobalProcurementStrategyTypesInternalV2CreateGlobalProcurementStrategyType(
             {
               dto: request,
-            }
+            },
           );
 
       case 'it-contract-termination-period-types':
@@ -622,7 +622,7 @@ export class GlobalAdminOptionTypeService {
           this.terminationDeadlineTypeService.postSingleItContractGlobalTerminationDeadlineTypesInternalV2CreateGlobalTerminationDeadlineType(
             {
               dto: request,
-            }
+            },
           );
 
       case 'it-contract_criticality-type':
@@ -637,7 +637,7 @@ export class GlobalAdminOptionTypeService {
           this.basisForTransferService.postSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2CreateGlobalDataProcessingBasisForTransferOption(
             {
               dto: dto,
-            }
+            },
           );
 
       case 'data-processing-oversight-option-types':
@@ -645,7 +645,7 @@ export class GlobalAdminOptionTypeService {
           this.oversightOptionService.postSingleDprGlobalDataProcessingOversightOptionsInternalV2CreateGlobalDataProcessingOversightOption(
             {
               dto: dto,
-            }
+            },
           );
 
       case 'data-processing-data-responsible-types':
@@ -653,7 +653,7 @@ export class GlobalAdminOptionTypeService {
           this.dataResponsibleService.postSingleDprGlobalDataProcessingDataResponsibleOptionsInternalV2CreateGlobalDataProcessingDataResponsibleOption(
             {
               dto: dto,
-            }
+            },
           );
 
       case 'data-processing-country-types':
@@ -661,7 +661,7 @@ export class GlobalAdminOptionTypeService {
           this.countryService.postSingleDprGlobalDataProcessingCountryOptionsInternalV2CreateGlobalDataProcessingCountryOption(
             {
               dto: dto,
-            }
+            },
           );
 
       //Organization types
@@ -682,7 +682,7 @@ export class GlobalAdminOptionTypeService {
           this.itContractRoleService.postSingleItContractGlobalItContractRoleTypesInternalV2CreateGlobalItContractRoleType(
             {
               dto,
-            }
+            },
           );
       case 'data-processing':
         return (dto: APIGlobalRoleOptionCreateRequestDTO) =>

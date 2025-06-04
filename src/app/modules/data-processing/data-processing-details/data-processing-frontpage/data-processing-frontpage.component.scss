@@ -1,4 +1,4 @@
-@import "mixins.scss";
+@use "mixins.scss";
 
 :host {
   display: flex;
@@ -8,7 +8,7 @@
 .field-all-grid-length {
   grid-column: 1 / 4;
 
-  @include min-breakpoint {
+  @include mixins.min-breakpoint {
     grid-column: 1 / 4;
   }
 }

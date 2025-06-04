@@ -1,6 +1,7 @@
-@import "mixins";
+@use "../../../../styles/theme.scss";
+@use "../../../../styles/mixins.scss";
 
-@include grid-style;
+@include mixins.grid-style;
 
 .overflow-hidden-container {
   overflow: hidden;
@@ -22,6 +23,6 @@
 }
 
 .result-amount-padding {
-  padding-right: $padding-large;
+  padding-right: theme.$padding-large;
   cursor: default;
 }

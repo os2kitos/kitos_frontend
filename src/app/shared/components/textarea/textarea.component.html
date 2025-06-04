@@ -11,6 +11,7 @@
       (input)="formInputValueChange($event)"
       (focus)="focus(true)"
       (blur)="focus(false)"
+      [ngClass]="{ disabled: disabled }"
     ></textarea>
   </mat-form-field>
 
@@ -25,6 +26,7 @@
       [disabled]="disabled"
       [(ngModel)]="value"
       (ngModelChange)="valueChange.emit($event)"
+      [ngClass]="{ disabled: disabled }"
     ></textarea>
   </mat-form-field>
 </ng-container>

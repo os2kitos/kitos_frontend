@@ -1,47 +1,3 @@
-<app-card *ngIf="agreementElementsEnabled$ | async">
-  <app-card-header
-    title="IT Kontrakten omfatter flg. aftaleelementer"
-    i18n-title
-    helpTextKey="it-contract.edit.systems-elemets"
-  ></app-card-header>
-
-  <app-standard-vertical-content-grid>
-    <app-native-table *ngIf="anyAgreementElements$ | async">
-      <thead>
-        <th i18n>Aftaleelement</th>
-      </thead>
-      <tbody>
-        <tr *ngFor="let agreementElement of systemAgreementElements$ | async">
-          <td>
-            <app-content-space-between>
-              <app-paragraph paragraphSize="small">{{ agreementElement.name }}</app-paragraph>
-              <app-icon-button
-                (buttonClick)="onDeleteAgreementElement(agreementElement.uuid)"
-                data-cy="delete-agreement-element-button"
-                *ngIf="(hasModifyPermission$ | async) === true"
-                ><app-trashcan-icon></app-trashcan-icon
-              ></app-icon-button>
-            </app-content-space-between>
-          </td>
-        </tr>
-      </tbody>
-    </app-native-table>
-    <app-empty-state
-      *ngIf="(anyAgreementElements$ | async) === false"
-      text="Ingen aftaleelementer tilføjet endnu"
-      context="emptyTable"
-      i18n-text
-    ></app-empty-state>
-    <app-collection-extension-button
-      text="Tilføj aftaleelement"
-      data-cy="add-agreement-element-button"
-      (clicked)="onAddNewAgreementElement()"
-      i18n-text
-      *ngIf="(hasModifyPermission$ | async) === true"
-    ></app-collection-extension-button>
-  </app-standard-vertical-content-grid>
-</app-card>
-
 <app-card *ngIf="systemUsagesEnabled$ | async">
   <app-card-header
     title="IT Kontrakten gælder flg. IT Systemer"
@@ -151,4 +107,48 @@
     ></app-empty-state>
   </app-standard-vertical-content-grid>
   <app-loading *ngIf="relationsIsLoading$ | async"></app-loading>
+</app-card>
+
+<app-card *ngIf="agreementElementsEnabled$ | async">
+  <app-card-header
+    title="IT Kontrakten omfatter flg. aftaleelementer"
+    i18n-title
+    helpTextKey="it-contract.edit.systems-elemets"
+  ></app-card-header>
+
+  <app-standard-vertical-content-grid>
+    <app-native-table *ngIf="anyAgreementElements$ | async">
+      <thead>
+        <th i18n>Aftaleelement</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let agreementElement of systemAgreementElements$ | async">
+          <td>
+            <app-content-space-between>
+              <app-paragraph paragraphSize="small">{{ agreementElement.name }}</app-paragraph>
+              <app-icon-button
+                (buttonClick)="onDeleteAgreementElement(agreementElement.uuid)"
+                data-cy="delete-agreement-element-button"
+                *ngIf="(hasModifyPermission$ | async) === true"
+                ><app-trashcan-icon></app-trashcan-icon
+              ></app-icon-button>
+            </app-content-space-between>
+          </td>
+        </tr>
+      </tbody>
+    </app-native-table>
+    <app-empty-state
+      *ngIf="(anyAgreementElements$ | async) === false"
+      text="Ingen aftaleelementer tilføjet endnu"
+      context="emptyTable"
+      i18n-text
+    ></app-empty-state>
+    <app-collection-extension-button
+      text="Tilføj aftaleelement"
+      data-cy="add-agreement-element-button"
+      (clicked)="onAddNewAgreementElement()"
+      i18n-text
+      *ngIf="(hasModifyPermission$ | async) === true"
+    ></app-collection-extension-button>
+  </app-standard-vertical-content-grid>
 </app-card>

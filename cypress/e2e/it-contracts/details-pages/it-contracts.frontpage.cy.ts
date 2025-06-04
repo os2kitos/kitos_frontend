@@ -1,4 +1,4 @@
-/// <reference types="Cypress" />
+/// <reference types="cypress" />
 
 describe('it-contracts.frontpage', () => {
   beforeEach(() => {
@@ -51,10 +51,14 @@ describe('it-contracts.frontpage', () => {
   //   cy.getByDataCy('contract-modified').find('input').should('have.value', '03-04-2024');
   // });
 
-  it('can select parent contract', () => {
+  it('can select parent contract and set it as required only if a parent is', () => {
     cy.contains('Contract 1').click();
-
+    cy.getByDataCy('require-valid-parent').find('input').should('be.disabled');
+    cy.intercept('/api/v2/it-contracts/*', {
+      body: { parentContract: { uuid: '7db2be10-c030-485a-b520-2e22de1b8642', name: 'The valid contract' } },
+    });
     cy.dropdownByCy('parent-contract', 'The valid contract', true);
+    cy.getByDataCy('require-valid-parent').find('input').click();
     cy.get('app-popup-message').should('exist');
   });
 });

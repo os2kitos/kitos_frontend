@@ -23,9 +23,12 @@ export class OrganizationService {
     mergeMap((organization?: APIOrganizationResponseDTO) =>
       this.apiOrganizationService
         .getManyOrganizationV2GetOrganizations({ onlyWhereUserHasMembership: true, pageSize: 2 })
-        .pipe(map((organizations) => ({ organization, organizations })))
-    )
+        .pipe(map((organizations) => ({ organization, organizations }))),
+    ),
   );
 
-  constructor(private store: Store, private apiOrganizationService: APIV2OrganizationService) {}
+  constructor(
+    private store: Store,
+    private apiOrganizationService: APIV2OrganizationService,
+  ) {}
 }

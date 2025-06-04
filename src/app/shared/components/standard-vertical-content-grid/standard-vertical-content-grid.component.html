@@ -1,7 +1,12 @@
 <div
   class="grid-container"
   [style.grid-template-columns]="'repeat(' + numColumns + ', 1fr)'"
-  [ngClass]="{ 'with-gap': withGap === true }"
+  [ngClass]="{
+    'with-gap': withGap === true,
+    'small-gap': gapSize === 'small',
+    'medium-gap': gapSize === 'medium',
+    'large-gap': gapSize === 'large',
+  }"
 >
   <ng-content></ng-content>
 </div>

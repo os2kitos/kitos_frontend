@@ -2,13 +2,13 @@
   <form [formGroup]="form">
     <app-standard-vertical-content-grid>
       <app-textbox
-       text="Navn"
-       i18n-text
-       [formGroup]="form"
-       formName="name"
-       [value]="form.value.name ?? undefined"
-       data-cy="name-textbox"
-       ></app-textbox>
+        text="Navn"
+        i18n-text
+        [formGroup]="form"
+        formName="name"
+        [value]="form.value.name ?? undefined"
+        data-cy="name-textbox"
+      ></app-textbox>
       <app-checkbox
         [formGroup]="form"
         formName="obligatory"
@@ -20,7 +20,7 @@
       >
       </app-checkbox>
       <app-checkbox
-      *ngIf="isRoleOption()"
+        *ngIf="isRoleOption()"
         [formGroup]="form"
         formName="writeAccess"
         [value]="form.value.writeAccess ?? false"

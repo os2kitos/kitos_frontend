@@ -30,7 +30,7 @@ export class UserService {
         }
 
         return startPreferenceChoiceOptions.filter((o) => !excludedValues.includes(o.value));
-      })
+      }),
     );
   }
 }

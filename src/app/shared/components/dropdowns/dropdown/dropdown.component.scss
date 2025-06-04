@@ -1,19 +1,17 @@
-@import "theme";
-@import "mixins";
+@use "theme";
+@use "mixins";
 
-@include ng-select-default-style;
+@include mixins.ng-select-default-style;
 
 .description {
-  margin-top: $padding-small;
-  margin-bottom: $padding-small;
+  margin-top: theme.$padding-small;
+  margin-bottom: theme.$padding-small;
   line-height: 110%;
 }
 
 ng-select {
   font-size: large;
+  @include mixins.input-background-white;
 }
 
-
-ng-select {
-  @include input-background-white
-}
+@include mixins.ng-select-medium-styles;

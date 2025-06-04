@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
@@ -12,11 +12,35 @@ import { AuditModel, baseAuditStatusValue, mapAuditModel } from 'src/app/shared/
 import { PaymentTypes } from 'src/app/shared/models/it-contract/payment-types.model';
 import { TreeNodeModel, createNode } from 'src/app/shared/models/tree-node.model';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
+import { DialogComponent } from '../../../../../../shared/components/dialogs/dialog/dialog.component';
+import { StandardVerticalContentGridComponent } from '../../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { OrgUnitSelectComponent } from '../../../../../../shared/components/org-unit-select/org-unit-select.component';
+import { NumericInputComponent } from '../../../../../../shared/components/numeric-input/numeric-input.component';
+import { TextBoxComponent } from '../../../../../../shared/components/textbox/textbox.component';
+import { AuditPickerComponent } from './color-picker/audit-picker.component';
+import { DatePickerComponent } from '../../../../../../shared/components/datepicker/datepicker.component';
+import { TextAreaComponent } from '../../../../../../shared/components/textarea/textarea.component';
+import { DialogActionsComponent } from '../../../../../../shared/components/dialogs/dialog-actions/dialog-actions.component';
+import { ButtonComponent } from '../../../../../../shared/components/buttons/button/button.component';
 
 @Component({
   selector: 'app-payment-dialog',
   templateUrl: './payment-dialog.component.html',
   styleUrl: './payment-dialog.component.scss',
+  imports: [
+    DialogComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    StandardVerticalContentGridComponent,
+    OrgUnitSelectComponent,
+    NumericInputComponent,
+    TextBoxComponent,
+    AuditPickerComponent,
+    DatePickerComponent,
+    TextAreaComponent,
+    DialogActionsComponent,
+    ButtonComponent,
+  ],
 })
 export class PaymentDialogComponent extends BaseComponent implements OnInit {
   @Input() public paymentType!: PaymentTypes;
@@ -41,7 +65,7 @@ export class PaymentDialogComponent extends BaseComponent implements OnInit {
   constructor(
     private readonly store: Store,
     private readonly actions$: Actions,
-    private readonly dialogRef: MatDialogRef<PaymentDialogComponent>
+    private readonly dialogRef: MatDialogRef<PaymentDialogComponent>,
   ) {
     super();
   }
@@ -74,7 +98,7 @@ export class PaymentDialogComponent extends BaseComponent implements OnInit {
         .pipe(ofType(ITContractActions.addItContractPaymentSuccess, ITContractActions.updateItContractPaymentSuccess))
         .subscribe((_) => {
           this.close();
-        })
+        }),
     );
 
     this.subscriptions.add(
@@ -82,7 +106,7 @@ export class PaymentDialogComponent extends BaseComponent implements OnInit {
         .pipe(ofType(ITContractActions.addItContractPaymentError, ITContractActions.updateItContractPaymentError))
         .subscribe(() => {
           this.isBusy = false;
-        })
+        }),
     );
 
     this.subscriptions.add(
@@ -93,7 +117,7 @@ export class PaymentDialogComponent extends BaseComponent implements OnInit {
           this.paymentForm.disable();
           this.paymentForm.controls.organizationUnit.enable();
         }
-      })
+      }),
     );
   }
 

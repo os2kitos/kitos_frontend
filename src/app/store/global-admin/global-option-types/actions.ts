@@ -8,15 +8,15 @@ export const GlobalOptionTypeActions = createActionGroup({
     'Update Option Type': (
       optionType: GlobalAdminOptionType,
       optionUuid: string,
-      request: APIGlobalRoleOptionUpdateRequestDTO
+      request: APIGlobalRoleOptionUpdateRequestDTO,
     ) => ({ optionType, optionUuid, request }),
     'Update Option Type Success': (optionType: GlobalAdminOptionType) => ({ optionType }),
     'Update Option Type Error': () => emptyProps(),
 
-    'Create Option Type': (
-      optionType: GlobalAdminOptionType,
-      request: APIGlobalRoleOptionCreateRequestDTO
-    ) => ({ optionType, request }),
+    'Create Option Type': (optionType: GlobalAdminOptionType, request: APIGlobalRoleOptionCreateRequestDTO) => ({
+      optionType,
+      request,
+    }),
     'Create Option Type Success': (optionType: GlobalAdminOptionType) => ({ optionType }),
     'Create Option Type Error': () => emptyProps(),
   },

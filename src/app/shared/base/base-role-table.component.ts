@@ -9,9 +9,10 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
 import { RoleAssignmentActions } from 'src/app/store/role-assignment/actions';
 import { RoleOptionTypeActions } from 'src/app/store/roles-option-type-store/actions';
 import { selectHasValidCache, selectRoleOptionTypesDictionary } from 'src/app/store/roles-option-type-store/selectors';
+import { EditRoleDialogComponent } from '../components/role-table/role-row/edit-role-dialog/edit-role-dialog.component';
 import { RoleTableComponentStore } from '../components/role-table/role-table.component-store';
 import { RoleTableCreateDialogComponent } from '../components/role-table/role-table.create-dialog/role-table.create-dialog.component';
-import { IRoleAssignment } from '../models/helpers/read-model-role-assignments';
+import { extractUnitFromRoleAssignment, RoleAssignment } from '../models/helpers/read-model-role-assignments';
 import { RoleOptionTypeTexts } from '../models/options/role-option-texts.model';
 import { RoleOptionTypes } from '../models/options/role-option-types.model';
 import { filterNullish } from '../pipes/filter-nullish';
@@ -20,6 +21,7 @@ import { RoleOptionTypeService } from '../services/role-option-type.service';
 
 @Component({
   template: '',
+  standalone: false,
 })
 export abstract class BaseRoleTableComponent extends BaseComponent implements OnInit {
   @Input() public entityType!: RoleOptionTypes;
@@ -34,7 +36,7 @@ export abstract class BaseRoleTableComponent extends BaseComponent implements On
     protected actions$: Actions,
     protected roleOptionTypeService: RoleOptionTypeService,
     protected confirmationService: ConfirmActionService,
-    protected dialog: MatDialog
+    protected dialog: MatDialog,
   ) {
     super();
   }
@@ -44,7 +46,7 @@ export abstract class BaseRoleTableComponent extends BaseComponent implements On
   public readonly availableRolesLoading = this.availableRolesDictionary$.pipe(
     map((availableRoles) => {
       return availableRoles ? false : true;
-    })
+    }),
   );
 
   public readonly isLoading$ = combineLatest([
@@ -52,7 +54,7 @@ export abstract class BaseRoleTableComponent extends BaseComponent implements On
     this.store.select(selectHasValidCache(this.entityType)),
     this.availableRolesLoading,
   ]).pipe(
-    map(([isLoading, hasInvalidCache, availableRolesLoading]) => isLoading || hasInvalidCache || availableRolesLoading)
+    map(([isLoading, hasInvalidCache, availableRolesLoading]) => isLoading || hasInvalidCache || availableRolesLoading),
   );
 
   ngOnInit(): void {
@@ -67,21 +69,21 @@ export abstract class BaseRoleTableComponent extends BaseComponent implements On
         .pipe(filterNullish())
         .subscribe((roles) => {
           this.availableRolesDictionary$.next(roles);
-        })
+        }),
     );
 
     //on role add/remove or uuid changes update the list
     this.subscriptions.add(
       merge(
         this.actions$.pipe(ofType(RoleAssignmentActions.addRoleSuccess, RoleAssignmentActions.removeRoleSuccess)),
-        this.entityUuid$
+        this.entityUuid$,
       ).subscribe(() => {
         this.getRoles();
-      })
+      }),
     );
   }
 
-  public onRemove(role: IRoleAssignment) {
+  public onRemove(role: RoleAssignment) {
     this.confirmationService.confirmAction({
       category: ConfirmActionCategory.Warning,
       message: $localize`Er du sikker på at du vil fjerne tildelingen af rollen "${role.assignment.role.name}" til brugeren "${role.assignment.user.name}"?`,
@@ -89,15 +91,24 @@ export abstract class BaseRoleTableComponent extends BaseComponent implements On
     });
   }
 
+  public onEdit(role: RoleAssignment) {
+    const dialogRef = this.dialog.open(EditRoleDialogComponent);
+    dialogRef.componentInstance.roleType = this.entityType;
+    dialogRef.componentInstance.initialValue = role;
+    dialogRef.componentInstance.componentStore = this.componentStore;
+    dialogRef.componentInstance.title = $localize`Rediger ${this.entityName.toLocaleLowerCase()}`;
+    dialogRef.componentInstance.orgUnit = extractUnitFromRoleAssignment(role);
+  }
+
   protected getRoles() {
     this.subscriptions.add(
       this.entityUuid$.pipe(first()).subscribe((entityUuid) => {
         this.componentStore.getRolesByEntityUuid({ entityUuid, entityType: this.entityType });
-      })
+      }),
     );
   }
 
-  protected openAddNewDialog(userRoles: IRoleAssignment[], entityUuid: string) {
+  protected openAddNewDialog(userRoles: RoleAssignment[], entityUuid: string) {
     const dialogRef = this.dialog.open(RoleTableCreateDialogComponent);
     dialogRef.componentInstance.userRoles = userRoles;
     dialogRef.componentInstance.entityType = this.entityType;

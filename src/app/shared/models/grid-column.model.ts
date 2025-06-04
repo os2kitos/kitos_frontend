@@ -43,7 +43,8 @@ export interface GridColumn {
     | 'uuid-to-name'
     | 'excel-only'
     | 'action-buttons'
-    | 'integer-with-thousands-separator'; //Style of the column
+    | 'integer-with-thousands-separator'
+    | 'contract-audit'; //Style of the column
   width?: number;
   minResizableWidth?: number;
   //Can column be hidden
@@ -58,4 +59,9 @@ export interface GridColumn {
   booleanValueDisplay?: BooleanValueDisplayType; // Defines how boolean values should be displayed. If not set, RegistrationEntityTypes will be used to derive the display type
   disabledByUIConfig?: boolean;
   linkArraySeparator?: ', ' | ' - ';
+  helpText?: string;
+  itemTooltipField?: string;
+
+  // snake case to differentiate from the standard field properties
+  order_id?: number; //Automatically set, used to always sort columns in the same order
 }

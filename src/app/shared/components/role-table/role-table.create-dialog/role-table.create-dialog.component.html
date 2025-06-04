@@ -1,32 +1,33 @@
 <app-dialog [title]="title" [closable]="true" overflow="none" i18n-title>
   <form [formGroup]="roleForm" (ngSubmit)="onSave()">
     <app-standard-vertical-content-grid>
-      <app-connected-dropdown
-        text="Vælg bruger"
-        valueField="uuid"
-        [data$]="users$"
-        [isLoading$]="isLoading$"
-        [showSearchHelpText$]="selectUserResultIsLimited$"
-        (filterChange)="userFilterChange($event)"
-        (valueChange)="userChange($event)"
-        i18n-text
-        [formGroup]="roleForm"
-        formName="user"
-        [includeItemDescription]="true"
-      ></app-connected-dropdown>
       <app-dropdown
         text="Vælg rolle"
-        valueField="uuid"
-        [data]="roles$ | async"
         i18n-text
+        valueField="uuid"
+        [data]="availableRoles$ | async"
         [formGroup]="roleForm"
         formName="role"
         [showDescription]="true"
+        (valueChange)="roleChange($event)"
       ></app-dropdown>
+      <app-multi-select-dropdown
+        text="Vælg brugere"
+        i18n-text
+        [data]="filteredUsers$ | async"
+        (filterChange)="userFilterChange($event)"
+        (selectedEvent)="userChange($event)"
+        (cleared)="userChange()"
+        [disabled]="!isRoleSelected"
+        [resetSubject$]="resetSubject$"
+        [loading]="isLoading$ | async"
+        [showDescription]="true"
+        [useExternalSearch]="true"
+      ></app-multi-select-dropdown>
 
       <app-dialog-actions>
         <app-button buttonStyle="secondary" size="large" (buttonClick)="onCancel()" i18n>Annuller</app-button>
-        <app-button type="submit" size="large" [disabled]="roleForm.valid === false || isBusy" i18n>Tilføj</app-button>
+        <app-button type="submit" size="large" [disabled]="isValid() === false || isBusy" i18n>Tilføj</app-button>
       </app-dialog-actions>
     </app-standard-vertical-content-grid>
   </form>

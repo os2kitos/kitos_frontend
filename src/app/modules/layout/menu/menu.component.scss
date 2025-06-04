@@ -1,4 +1,4 @@
-@import "theme";
+@use "theme";
 
 :host {
   display: flex;
@@ -6,7 +6,7 @@
 
 app-button {
   position: relative;
-  padding: 28px $padding-medium;
+  padding: 28px theme.$padding-medium;
   outline: none;
 
   &::before,
@@ -23,20 +23,20 @@ app-button {
   &.active::after {
     content: "";
     height: 20px;
-    background-color: $color-primary-base;
+    background-color: theme.$color-primary-base;
   }
 }
 
 // Custom navigation bar button color
 :host ::ng-deep app-button:not(.active) button {
-  color: $color-primary-darker;
+  color: theme.$color-primary-darker;
 }
 
 // Overall styling of the menu attached to body by Material UI
 ::ng-deep .mat-mdc-menu-panel.mat-mdc-menu-panel.menu-component {
   width: 400px;
   max-width: 400px;
-  border-radius: $radius-large;
+  border-radius: theme.$radius-large;
 
   ::ng-deep svg {
     width: 20px;
@@ -44,6 +44,6 @@ app-button {
   }
 
   .mat-mdc-menu-content {
-    padding: $padding-smaller 0;
+    padding: theme.$padding-smaller 0;
   }
 }

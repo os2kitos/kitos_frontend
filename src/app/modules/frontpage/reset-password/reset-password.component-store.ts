@@ -27,16 +27,16 @@ export class ResetPasswordComponentStore extends ComponentStore<State> {
         return this.resetPasswordService.getSinglePasswordResetInternalV2GetPasswordReset({ requestId }).pipe(
           tapResponse(
             (response: APIPasswordResetResponseDTO) => this.setEmail(response.email),
-            (_) => this.setEmail(undefined)
+            (_) => this.setEmail(undefined),
           ),
-          finalize(() => this.setLoading(false))
+          finalize(() => this.setLoading(false)),
         );
-      })
-    )
+      }),
+    ),
   );
 
   public readonly setSuccess = this.updater(
-    (state, resetPasswordSuccess: boolean): State => ({ ...state, resetPasswordSuccess })
+    (state, resetPasswordSuccess: boolean): State => ({ ...state, resetPasswordSuccess }),
   );
 
   public readonly setEmail = this.updater((state, email: string | undefined): State => ({ ...state, email }));

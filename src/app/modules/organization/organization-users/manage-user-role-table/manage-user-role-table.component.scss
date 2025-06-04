@@ -1,0 +1,13 @@
+@use "theme";
+
+.container {
+  border: solid theme.$color-primary-60 1px !important;
+  border-radius: theme.$radius-large !important;
+  overflow: auto;
+  padding-top: theme.$padding-medium;
+}
+
+td {
+  color: theme.$color-neutral-dark;
+  word-wrap: break-word;
+}

@@ -7,6 +7,8 @@
         [currentNodeUuid]="contractUuid"
         [nodes]="(hierarchy$ | async) ?? []"
         data-cy="contract-hierarchy"
+        [showExtraStatus]="true"
+        [extraStatusDisplayType]="extraStatusDisplayTypeValue"
       ></app-entity-tree>
     </ng-container>
   </div>

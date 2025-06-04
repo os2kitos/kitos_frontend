@@ -1,4 +1,4 @@
-@import "theme";
+@use "theme";
 
 .grid-container {
   display: grid;
@@ -11,21 +11,21 @@
   flex: 1;
   height: 100%;
   max-height: 100%;
-  padding: $padding-large;
+  padding: theme.$padding-large;
   display: flex;
   flex-direction: column;
 
   overflow: auto;
-  margin-bottom: $padding-small;
+  margin-bottom: theme.$padding-small;
 }
 
 .basic-information-section {
-  padding-right: $padding-large;
-  border-right: 1px solid $color-neutral-40;
+  padding-right: theme.$padding-large;
+  border-right: 1px solid theme.$color-neutral-40;
 }
 
 .registrations-section-container {
-  padding-left: $padding-large;
+  padding-left: theme.$padding-large;
   overflow-y: auto;
   box-sizing: border-box;
   flex: 1;
@@ -44,7 +44,7 @@
 }
 
 .registrations-section-title-padding {
-  padding-bottom: $padding-medium;
+  padding-bottom: theme.$padding-medium;
 }
 
 :host {
@@ -55,8 +55,8 @@
 
 // dialog-footer mixin not used in this context since slightly different styling is needed
 .dialog-footer {
-  background-color: $color-white;
-  padding: $padding-large;
+  background-color: theme.$color-white;
+  padding: theme.$padding-large;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -84,7 +84,7 @@
 :host ::ng-deep ng-select {
   // Customization of dropdown container styling
   .ng-select-container {
-    background-color: $color-white;
+    background-color: theme.$color-white;
   }
 }
 

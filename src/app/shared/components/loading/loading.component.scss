@@ -1,4 +1,4 @@
-@import "theme";
+@use "theme";
 
 :host {
   margin: 0 auto;
@@ -19,18 +19,18 @@ app-kitos-k-icon {
 }
 
 h6 {
-  margin-top: $padding-medium;
-  color: $color-primary-base;
+  margin-top: theme.$padding-medium;
+  color: theme.$color-primary-base;
   text-align: center;
 }
 
 .spinner {
   position: absolute;
-  background-color: $color-primary-base;
+  background-color: theme.$color-primary-base;
   height: 100px;
   width: 100px;
   border-radius: 50%;
-  background: conic-gradient(transparent, $color-primary-base);
+  background: conic-gradient(transparent, theme.$color-primary-base);
   animation: rotate 1s linear infinite;
 }
 
@@ -46,13 +46,13 @@ h6 {
   height: 84px;
   top: 8px;
   left: 8px;
-  background-color: $color-primary-10;
+  background-color: theme.$color-primary-10;
 }
 
 .spinner:after {
   height: 8px;
   width: 8px;
-  background-color: $color-primary-base;
+  background-color: theme.$color-primary-base;
   top: 0;
   left: 45px;
 }
@@ -64,4 +64,11 @@ h6 {
   to {
     transform: rotateZ(360deg);
   }
+}
+
+.centered-spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

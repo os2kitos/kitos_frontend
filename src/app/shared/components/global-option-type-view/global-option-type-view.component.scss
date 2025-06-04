@@ -1,8 +1,8 @@
-@import "theme";
+@use "theme";
 
 .align-priority-div {
   display: flex;
-  gap: $padding-small;
+  gap: theme.$padding-small;
 }
 
 .description-overflow {

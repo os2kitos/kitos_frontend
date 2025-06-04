@@ -6,7 +6,10 @@ import { GlobalOptionTypeActions } from './actions';
 
 @Injectable()
 export class GlobalAdminOptionTypeEffects {
-  constructor(private actions$: Actions, private globalOptionTypeService: GlobalAdminOptionTypeService) {}
+  constructor(
+    private actions$: Actions,
+    private globalOptionTypeService: GlobalAdminOptionTypeService,
+  ) {}
 
   patchGlobalOptionType$ = createEffect(() => {
     return this.actions$.pipe(
@@ -19,11 +22,11 @@ export class GlobalAdminOptionTypeEffects {
               .patchGlobalOption(action.optionType, action.optionUuid, action.request)
               .pipe(
                 map(() => GlobalOptionTypeActions.updateOptionTypeSuccess(action.optionType)),
-                catchError(() => of(GlobalOptionTypeActions.updateOptionTypeError()))
+                catchError(() => of(GlobalOptionTypeActions.updateOptionTypeError())),
               );
-          })
-        )
-      )
+          }),
+        ),
+      ),
     );
   });
 
@@ -33,9 +36,9 @@ export class GlobalAdminOptionTypeEffects {
       switchMap((action) => {
         return this.globalOptionTypeService.createGlobalOption(action.optionType, action.request).pipe(
           map(() => GlobalOptionTypeActions.createOptionTypeSuccess(action.optionType)),
-          catchError(() => of(GlobalOptionTypeActions.createOptionTypeError()))
+          catchError(() => of(GlobalOptionTypeActions.createOptionTypeError())),
         );
-      })
+      }),
     );
   });
 }

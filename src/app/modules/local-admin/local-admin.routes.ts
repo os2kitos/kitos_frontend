@@ -33,15 +33,16 @@ const routes: Routes = [
       },
       {
         path: AppPath.dataProcessing,
-        component: LocalAdminDprComponent
+        component: LocalAdminDprComponent,
       },
       {
         path: AppPath.itContracts,
         component: LocalAdminItContractComponent,
       },
       { path: AppPath.import, component: LocalAdminImportComponent },
-    ]
-}]
+    ],
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

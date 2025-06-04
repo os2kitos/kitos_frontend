@@ -1,4 +1,5 @@
 import { APIDataProcessingRegistrationGeneralDataResponseDTO } from 'src/app/api/v2';
+import { AppPath } from '../../enums/app-path';
 import { entityWithUnavailableName } from '../../helpers/string.helpers';
 import {
   mapRoleAssignmentsToEmails,
@@ -8,11 +9,12 @@ import {
 } from '../helpers/read-model-role-assignments';
 import { LifeCycleStatus, mapLifeCycleStatus } from '../life-cycle-status.model';
 import { mapGridNumberOfExpectedUsers, NumberOfExpectedUsersGrid } from '../number-of-expected-users.model';
-import { mapFromCapitalizedStringToYesNoDontKnowEnum, YesNoDontKnowOptions } from '../yes-no-dont-know.model';
+import { mapFromCapitalizedStringToYesNoDontKnowEnum, YesNoDontKnowOption } from '../yes-no-dont-know.model';
+import { mapCapitalizedStringToYesNoIrrelevantEnum } from '../yes-no-irrelevant.model';
+import { mapToYesNoEnum, YesNoOption } from '../yes-no.model';
 import { ArchiveDutyChoice, mapArchiveDutyChoice } from './archive-duty-choice.model';
 import { HostedAt, mapGridHostedAt } from './gdpr/hosted-at.model';
-import { AppPath } from '../../enums/app-path';
-import { mapCapitalizedStringToYesNoIrrelevantEnum, mapToYesNoIrrelevantEnumGrid } from '../yes-no-irrelevant.model';
+import { mapToYesNoPartiallyEnum, YesNoPartiallyOption } from '../yes-no-partially.model';
 
 export interface ITSystemUsage {
   //ngrx requires the id field to have lowercase 'id' name
@@ -59,7 +61,7 @@ export interface ITSystemUsage {
   LinkToDirectoryUrl: string;
   HostedAt: HostedAt | undefined;
   GeneralPurpose: string;
-  DataProcessingRegistrationsConcludedAsCsv: YesNoDontKnowOptions | undefined;
+  DataProcessingRegistrationsConcludedAsCsv: string;
   DataProcessingRegistrationNamesAsCsv: string;
   DataProcessingRegistrations: { id: string; value: string }[];
   DataProcessingRegistrationsConcluded: { id: string; value: string }[];
@@ -75,8 +77,14 @@ export interface ITSystemUsage {
   UserCount: NumberOfExpectedUsersGrid | undefined;
   Roles: RoleAssignmentsMap;
   RoleEmails: RoleAssignmentEmailsMaps;
-  DpiaConducted: YesNoDontKnowOptions | undefined;
-  IsBusinessCritical: YesNoDontKnowOptions | undefined;
+  DpiaConducted: YesNoDontKnowOption | undefined;
+  IsBusinessCritical: YesNoDontKnowOption | undefined;
+  ContainsAITechnology: YesNoOption | undefined;
+  CatalogArchiveDuty: ArchiveDutyChoice | undefined;
+  CatalogArchiveDutyComment: string | undefined;
+  WebAccessibilityCompliance: YesNoPartiallyOption | undefined;
+  LastWebAccessibilityCheck: Date | undefined;
+  WebAccessibilityNotes: string | undefined;
 }
 
 function getParentItSystemLinkPaths(value: {
@@ -150,41 +158,39 @@ export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
     LinkToDirectoryUrl: value.LinkToDirectoryUrl,
     HostedAt: mapGridHostedAt(value.HostedAt),
     GeneralPurpose: value.GeneralPurpose,
-    DataProcessingRegistrationsConcludedAsCsv: mapToYesNoIrrelevantEnumGrid(
-      value.DataProcessingRegistrationsConcludedAsCsv
-    ),
+    DataProcessingRegistrationsConcludedAsCsv: value.DataProcessingRegistrationsConcludedAsCsv,
     DataProcessingRegistrationNamesAsCsv: value.DataProcessingRegistrationNamesAsCsv,
     DataProcessingRegistrations: value.DataProcessingRegistrations?.map(
       (registration: { DataProcessingRegistrationUuid: string; DataProcessingRegistrationName: string }) => ({
         id: registration.DataProcessingRegistrationUuid,
         value: registration.DataProcessingRegistrationName,
-      })
+      }),
     ),
     DataProcessingRegistrationsConcluded: getDataProcessingRegistrationsConcluded(value),
     OutgoingRelatedItSystemUsages: value.OutgoingRelatedItSystemUsages?.map(
       (relatedItSystem: { ItSystemUsageUuid: string; ItSystemUsageName: string }) => ({
         id: relatedItSystem.ItSystemUsageUuid,
         value: relatedItSystem.ItSystemUsageName,
-      })
+      }),
     ),
     RelevantOrganizationUnitNamesAsCsv: value.RelevantOrganizationUnitNamesAsCsv,
     DependsOnInterfaces: value.DependsOnInterfaces?.map(
       (interfaceItem: { InterfaceUuid: string; InterfaceName: string }) => ({
         id: interfaceItem.InterfaceUuid,
         value: interfaceItem.InterfaceName,
-      })
+      }),
     ),
     IncomingRelatedItSystemUsages: value.IncomingRelatedItSystemUsages?.map(
       (relatedItSystem: { ItSystemUsageUuid: string; ItSystemUsageName: string }) => ({
         id: relatedItSystem.ItSystemUsageUuid,
         value: relatedItSystem.ItSystemUsageName,
-      })
+      }),
     ),
     AssociatedContracts: value.AssociatedContracts?.map(
       (contract: { ItContractUuid: string; ItContractName: string }) => ({
         id: contract.ItContractUuid,
         value: contract.ItContractName,
-      })
+      }),
     ),
     Note: value.Note,
     RiskAssessmentDate: value.RiskAssessmentDate,
@@ -195,21 +201,29 @@ export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
     RoleEmails: mapRoleAssignmentsToEmails(value.RoleAssignments),
     DpiaConducted: mapFromCapitalizedStringToYesNoDontKnowEnum(value.DPIAConducted),
     IsBusinessCritical: mapFromCapitalizedStringToYesNoDontKnowEnum(value.IsBusinessCritical),
+    ContainsAITechnology: mapToYesNoEnum(value.ContainsAITechnology),
+    CatalogArchiveDuty: mapArchiveDutyChoice(value.CatalogArchiveDuty),
+    CatalogArchiveDutyComment: value.CatalogArchiveDutyComment,
+    WebAccessibilityCompliance: mapToYesNoPartiallyEnum(value.WebAccessibilityCompliance),
+    LastWebAccessibilityCheck: value.LastWebAccessibilityCheck,
+    WebAccessibilityNotes: value.WebAccessibilityNotes,
   };
   return adaptedSystem;
 };
 
 function getDataProcessingRegistrationsConcluded(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  value: any
+  value: any,
 ): { id: string; value: string }[] {
   return value.DataProcessingRegistrations?.map(
     (registration: {
       DataProcessingRegistrationUuid: string;
       IsAgreementConcluded: APIDataProcessingRegistrationGeneralDataResponseDTO.IsAgreementConcludedEnum;
+      DataProcessingRegistrationName: string;
     }) => ({
       id: registration.DataProcessingRegistrationUuid,
       value: mapCapitalizedStringToYesNoIrrelevantEnum(registration.IsAgreementConcluded)?.name,
-    })
+      name: registration.DataProcessingRegistrationName,
+    }),
   ).filter((r: { value: string }) => r.value !== undefined);
 }

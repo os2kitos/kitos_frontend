@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { first } from 'rxjs';
 import { APIExternalReferenceDataResponseDTO, APIRegularOptionResponseDTO } from 'src/app/api/v2';
@@ -18,12 +18,46 @@ import { selectItSystem, selectItSystemIsActive, selectItSystemParentSystem } fr
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 import { ITSystemUsageDetailsFrontpageCatalogComponentStore } from './it-system-usage-details-frontpage-catalog.component-store';
+import { CardComponent } from '../../../../../shared/components/card/card.component';
+import { CardHeaderComponent } from '../../../../../shared/components/card-header/card-header.component';
+import { StatusChipComponent } from '../../../../../shared/components/status-chip/status-chip.component';
+import { NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { DetailsPageLinkComponent } from '../../../../../shared/components/details-page-link/details-page-link.component';
+import { FormGridComponent } from '../../../../../shared/components/form-grid/form-grid.component';
+import { TextBoxComponent } from '../../../../../shared/components/textbox/textbox.component';
+import { DropdownComponent } from '../../../../../shared/components/dropdowns/dropdown/dropdown.component';
+import { TextBoxInfoComponent } from '../../../../../shared/components/textbox-info/textbox-info.component';
+import { ParagraphComponent } from '../../../../../shared/components/paragraph/paragraph.component';
+import { ContentBoxComponent } from '../../../../../shared/components/contentbox/contentbox.component';
+import { ExternalReferenceComponent } from '../../../../../shared/components/external-reference/external-reference.component';
+import { TextAreaComponent } from '../../../../../shared/components/textarea/textarea.component';
+import { ItSystemKleOverviewComponent } from '../../../shared/it-system-kle-overview/it-system-kle-overview.component';
 
 @Component({
   selector: 'app-it-system-usage-details-frontpage-catalog',
   templateUrl: 'it-system-usage-details-frontpage-catalog.component.html',
   styleUrls: ['it-system-usage-details-frontpage-catalog.component.scss'],
   providers: [ITSystemUsageDetailsFrontpageCatalogComponentStore],
+  imports: [
+    CardComponent,
+    CardHeaderComponent,
+    StatusChipComponent,
+    NgIf,
+    DetailsPageLinkComponent,
+    FormGridComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    TextBoxComponent,
+    DropdownComponent,
+    TextBoxInfoComponent,
+    ParagraphComponent,
+    ContentBoxComponent,
+    NgFor,
+    ExternalReferenceComponent,
+    TextAreaComponent,
+    ItSystemKleOverviewComponent,
+    AsyncPipe,
+  ],
 })
 export class ITSystemUsageDetailsFrontpageCatalogComponent extends BaseComponent implements OnInit {
   public readonly AppPath = AppPath;
@@ -44,6 +78,8 @@ export class ITSystemUsageDetailsFrontpageCatalogComponent extends BaseComponent
       disabled: true,
     }),
     description: new FormControl({ value: '', disabled: true }),
+    legalName: new FormControl({ value: '', disabled: true }),
+    legalDataProcessorName: new FormControl({ value: '', disabled: true }),
   });
 
   public readonly businessTypes$ = this.store
@@ -55,7 +91,7 @@ export class ITSystemUsageDetailsFrontpageCatalogComponent extends BaseComponent
   constructor(
     private store: Store,
     private componentStore: ITSystemUsageDetailsFrontpageCatalogComponentStore,
-    private readonly entityStatusTextsService: EntityStatusTextsService
+    private readonly entityStatusTextsService: EntityStatusTextsService,
   ) {
     super();
   }
@@ -66,7 +102,7 @@ export class ITSystemUsageDetailsFrontpageCatalogComponent extends BaseComponent
       this.store
         .select(selectItSystemParentSystem)
         .pipe(filterNullish(), first())
-        .subscribe((parentSystem) => this.componentStore.getParentSystem(parentSystem.uuid))
+        .subscribe((parentSystem) => this.componentStore.getParentSystem(parentSystem.uuid)),
     );
 
     this.store.dispatch(RegularOptionTypeActions.getOptions('it-system_business-type'));
@@ -90,8 +126,10 @@ export class ITSystemUsageDetailsFrontpageCatalogComponent extends BaseComponent
             recommendedArchiveDutyComment: mapRecommendedArchiveDutyComment(itSystem.recommendedArchiveDuty),
             urlReference: itSystem.externalReferences,
             description: itSystem.description,
-          })
-        )
+            legalName: itSystem.legalName,
+            legalDataProcessorName: itSystem.legalDataProcessorName,
+          }),
+        ),
     );
 
     // Update form with parent system details
@@ -104,7 +142,7 @@ export class ITSystemUsageDetailsFrontpageCatalogComponent extends BaseComponent
               : ''
           }`,
         });
-      })
+      }),
     );
   }
 }

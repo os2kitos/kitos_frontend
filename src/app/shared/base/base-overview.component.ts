@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Store } from '@ngrx/store';
+import { Action, Store } from '@ngrx/store';
 import { CellClickEvent } from '@progress/kendo-angular-grid';
 import { first } from 'rxjs';
 import { selectDataProcessingGridState } from 'src/app/store/data-processing/selectors';
@@ -13,12 +13,14 @@ import { selectOrganizationUserGridState } from 'src/app/store/organization/orga
 import { selectOrganizationGridState } from 'src/app/store/organization/selectors';
 import { UserActions } from 'src/app/store/user-store/actions';
 import { DEFAULT_UNCLICKABLE_GRID_COLUMN_STYLES } from '../constants/constants';
+import { verifyClickAndOpenNewTab } from '../helpers/navigation/ctrl-click.helpers';
 import { GridColumn } from '../models/grid-column.model';
 import { RegistrationEntityTypes } from '../models/registrations/registration-entity-categories.model';
 import { BaseComponent } from './base.component';
 
 @Component({
   template: '',
+  standalone: false,
 })
 export class BaseOverviewComponent extends BaseComponent {
   protected unclickableColumnFields: string[] = [];
@@ -34,8 +36,12 @@ export class BaseOverviewComponent extends BaseComponent {
   protected updateUnclickableColumns(currentColumns: GridColumn[]) {
     this.unclickableColumnFields = [];
     currentColumns.forEach((column) => {
-      if (column.style && DEFAULT_UNCLICKABLE_GRID_COLUMN_STYLES.includes(column.style)) {
-        this.unclickableColumnFields.push(column.field);
+      if (column && column.style && DEFAULT_UNCLICKABLE_GRID_COLUMN_STYLES.includes(column.style)) {
+        if (column.field) {
+          this.unclickableColumnFields.push(column.field);
+        } else {
+          console.warn('Column is missing the "field" property:', column);
+        }
       }
     });
   }
@@ -43,10 +49,13 @@ export class BaseOverviewComponent extends BaseComponent {
   protected rowIdSelect(event: CellClickEvent, router: Router, route: ActivatedRoute) {
     if (this.cellIsClickableStyleOrEmpty(event)) {
       const rowId = event.dataItem?.id;
+
+      const fullUrl = this.getTargetUrl(rowId, router, route);
+      const newTabResult = verifyClickAndOpenNewTab(event.originalEvent, fullUrl);
+      if (newTabResult) return;
       router.navigate([rowId], { relativeTo: route });
     }
   }
-
   protected cellIsClickableStyle(event: CellClickEvent) {
     const column = event.column;
     const columnFieldName = column.field;
@@ -63,6 +72,26 @@ export class BaseOverviewComponent extends BaseComponent {
         );
       });
   };
+
+  protected updateLocalOrDefaultGridColumns(
+    defaultColumnsAndRoles: GridColumn[],
+    localStorageColumns: GridColumn[] | null,
+    updateColumnsAction: (columns: GridColumn[]) => Action,
+    resetToOrgConfigAction: (disablePopupNotification: boolean) => Action
+  ) {
+    const columnsToUse = localStorageColumns ?? defaultColumnsAndRoles;
+    this.store.dispatch(updateColumnsAction(columnsToUse));
+    if (!localStorageColumns) {
+      this.store.dispatch(resetToOrgConfigAction(true));
+    }
+  }
+
+  protected mapColumnOrder(defaultColumnsAndRoles: GridColumn[]) {
+    return defaultColumnsAndRoles.map((column, index) => ({
+      ...column,
+      order_id: index,
+    }));
+  }
 
   private getStateSelector() {
     switch (this.entityType) {
@@ -108,5 +137,24 @@ export class BaseOverviewComponent extends BaseComponent {
     }
 
     return value;
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private getTargetUrl(rowId: any, router: Router, route: ActivatedRoute): string {
+    const urlTree = router.createUrlTree([rowId], { relativeTo: route });
+    const fullUrl = router.serializeUrl(urlTree);
+
+    return this.adjustUrlForUiPrefix(fullUrl);
+  }
+
+  private adjustUrlForUiPrefix(fullUrl: string): string {
+    const uiPrefix = '/ui';
+
+    const newUrl = new URL(fullUrl, window.location.origin);
+    const hostContainsUiPrefix = window.location.pathname.includes(uiPrefix);
+    if (!newUrl.pathname.startsWith(uiPrefix) && hostContainsUiPrefix) {
+      return `${uiPrefix}${newUrl.pathname}${newUrl.search}${newUrl.hash}`;
+    }
+    return fullUrl;
   }
 }

@@ -16,6 +16,7 @@ import {
 import { USAGE_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-constants';
 import { hasValidCache } from 'src/app/shared/helpers/date.helpers';
 import { usageGridStateToAction } from 'src/app/shared/helpers/grid-filter.helpers';
+import { findUnitParentUuids } from 'src/app/shared/helpers/hierarchy.helpers';
 import { castContainsFieldToString } from 'src/app/shared/helpers/odata-query.helpers';
 import { convertDataSensitivityLevelStringToNumberMap } from 'src/app/shared/models/it-system-usage/gdpr/data-sensitivity-level.model';
 import { adaptITSystemUsage } from 'src/app/shared/models/it-system-usage/it-system-usage.model';
@@ -25,6 +26,7 @@ import { ExternalReferencesApiService } from 'src/app/shared/services/external-r
 import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 import { GridDataCacheService } from 'src/app/shared/services/grid-data-cache.service';
 import { getNewGridColumnsBasedOnConfig } from '../helpers/grid-config-helper';
+import { selectOrganizationUnits } from '../organization/organization-unit/selectors';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { ITSystemUsageActions } from './actions';
 import {
@@ -32,6 +34,7 @@ import {
   selectItSystemUsageLocallyAddedKleUuids,
   selectItSystemUsageLocallyRemovedKleUuids,
   selectItSystemUsageResponsibleUnit,
+  selectItSystemUsageRightUuidPairs,
   selectItSystemUsageUsingOrganizationUnits,
   selectItSystemUsageUuid,
   selectOverviewSystemRoles,
@@ -70,7 +73,7 @@ export class ITSystemUsageEffects {
       switchMap(([{ gridState, responsibleUnitUuid }, organizationUuid, systemRoles, previousGridState]) => {
         this.gridDataCacheService.tryResetOnGridStateChange(gridState, previousGridState);
 
-        const cachedRange = this.gridDataCacheService.get(gridState);
+        const cachedRange = this.gridDataCacheService.get(gridState, responsibleUnitUuid);
         if (cachedRange.data !== undefined) {
           return of(ITSystemUsageActions.getITSystemUsagesSuccess(cachedRange.data, cachedRange.total));
         }
@@ -78,21 +81,21 @@ export class ITSystemUsageEffects {
         const cacheableOdataString = this.gridDataCacheService.toChunkedODataString(gridState, { utcDates: true });
         const fixedOdataString = applyQueryFixes(cacheableOdataString, systemRoles);
 
-        return this.httpClient
-          .get<OData>(
-            `/odata/ItSystemUsageOverviewReadModels?organizationUuid=${organizationUuid}&$expand=RoleAssignments,DataProcessingRegistrations,DependsOnInterfaces,IncomingRelatedItSystemUsages,OutgoingRelatedItSystemUsages,AssociatedContracts&responsibleOrganizationUnitUuid=${responsibleUnitUuid}&${fixedOdataString}&$count=true`
-          )
-          .pipe(
-            map((data) => {
-              const dataItems = compact(data.value.map(adaptITSystemUsage));
-              const total = data['@odata.count'];
-              this.gridDataCacheService.set(gridState, dataItems, total);
+        const query =
+          `/odata/ItSystemUsageOverviewReadModels?organizationUuid=${organizationUuid}` +
+          `&$expand=RoleAssignments,DataProcessingRegistrations,DependsOnInterfaces,IncomingRelatedItSystemUsages,` +
+          `OutgoingRelatedItSystemUsages,AssociatedContracts&responsibleOrganizationUnitUuid=${responsibleUnitUuid}&${fixedOdataString}&$count=true`;
+        return this.httpClient.get<OData>(query).pipe(
+          map((data) => {
+            const dataItems = compact(data.value.map(adaptITSystemUsage));
+            const total = data['@odata.count'];
+            this.gridDataCacheService.set(gridState, dataItems, total, responsibleUnitUuid);
 
-              const returnData = this.gridDataCacheService.gridStateSliceFromArray(dataItems, gridState);
-              return ITSystemUsageActions.getITSystemUsagesSuccess(returnData, total);
-            }),
-            catchError(() => of(ITSystemUsageActions.getITSystemUsagesError()))
-          );
+            const returnData = this.gridDataCacheService.gridStateSliceFromArray(dataItems, gridState);
+            return ITSystemUsageActions.getITSystemUsagesSuccess(returnData, total);
+          }),
+          catchError(() => of(ITSystemUsageActions.getITSystemUsagesError()))
+        );
       })
     );
   });
@@ -168,17 +171,52 @@ export class ITSystemUsageEffects {
       concatLatestFrom(() => [
         this.store.select(selectItSystemUsageResponsibleUnit),
         this.store.select(selectItSystemUsageUsingOrganizationUnits),
+        this.store.select(selectOrganizationUnits),
       ]),
-      mergeMap(([{ usingUnitToRemoveUuid }, responsibleUnit, usingUnits]) => {
-        const unitUuids = usingUnits?.filter((x) => x.uuid !== usingUnitToRemoveUuid).map((x) => x.uuid);
+      mergeMap(([{ usingUnitToRemoveUuid, includeParents }, responsibleUnit, usingUnits, organizationUnits]) => {
+        let unitUuids = usingUnits?.filter((x) => x.uuid !== usingUnitToRemoveUuid).map((x) => x.uuid);
+
+        if (includeParents) {
+          const parentUuids = findUnitParentUuids(organizationUnits, usingUnitToRemoveUuid);
+          unitUuids = unitUuids.filter((uuid) => !parentUuids.includes(uuid));
+        }
+
         const requestBody = {
           organizationUsage: {
             usingOrganizationUnitUuids: unitUuids,
-            responsibleOrganizationUnitUuid: responsibleUnit?.uuid === usingUnitToRemoveUuid ? null : undefined,
+            responsibleOrganizationUnitUuid:
+              responsibleUnit?.uuid && unitUuids.includes(responsibleUnit?.uuid) ? null : undefined,
           },
         } as APIUpdateItSystemUsageRequestDTO;
 
         return of(ITSystemUsageActions.patchITSystemUsage(requestBody, $localize`Relevant organisationsenhed fjernet`));
+      })
+    );
+  });
+
+  addItSystemUsageUsingUnit$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.addITSystemUsageUsingUnit),
+      concatLatestFrom(() => [
+        this.store.select(selectItSystemUsageUsingOrganizationUnits),
+        this.store.select(selectOrganizationUnits),
+      ]),
+      mergeMap(([{ usingUnitToAddUuid, includeParents }, usingUnits, organizationUnits]) => {
+        const unitUuids = usingUnits?.map((x) => x.uuid);
+        unitUuids.push(usingUnitToAddUuid);
+
+        if (includeParents) {
+          const parentUuids = findUnitParentUuids(organizationUnits, usingUnitToAddUuid);
+          const nonExistingParentUuids = parentUuids.filter((uuid) => !unitUuids.includes(uuid));
+          unitUuids.push(...nonExistingParentUuids);
+        }
+
+        return of(
+          ITSystemUsageActions.patchITSystemUsage(
+            { organizationUsage: { usingOrganizationUnitUuids: unitUuids } },
+            $localize`Relevant organisationsenhed tilføjet`
+          )
+        );
       })
     );
   });
@@ -232,21 +270,27 @@ export class ITSystemUsageEffects {
     );
   });
 
-  addItSystemUsageRole$ = createEffect(() => {
+  bulkAddItSystemUsageRoles$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(ITSystemUsageActions.addItSystemUsageRole),
-      concatLatestFrom(() => this.store.select(selectItSystemUsageUuid).pipe(filterNullish())),
-      mergeMap(([{ userUuid, roleUuid }, usageUuid]) =>
-        this.apiV2ItSystemUsageService
-          .patchSingleItSystemUsageV2PatchAddRoleAssignment({
-            systemUsageUuid: usageUuid,
-            request: { userUuid: userUuid, roleUuid: roleUuid },
+      ofType(ITSystemUsageActions.bulkAddItSystemUsageRole),
+      concatLatestFrom(() => [
+        this.store.select(selectItSystemUsageRightUuidPairs),
+        this.store.select(selectItSystemUsageUuid).pipe(filterNullish()),
+      ]),
+      switchMap(([{ userUuids, roleUuid }, existingRoles, systemUsageUuid]) => {
+        const rolesToAdd = userUuids.map((userUuid) => ({ userUuid, roleUuid }));
+        return this.apiV2ItSystemUsageService
+          .patchSingleItSystemUsageV2PatchSystemUsage({
+            systemUsageUuid,
+            request: {
+              roles: existingRoles.concat(rolesToAdd),
+            },
           })
           .pipe(
-            map((usage) => ITSystemUsageActions.addItSystemUsageRoleSuccess(usage)),
-            catchError(() => of(ITSystemUsageActions.addItSystemUsageRoleError()))
-          )
-      )
+            map((usage) => ITSystemUsageActions.bulkAddItSystemUsageRoleSuccess(usage)),
+            catchError(() => of(ITSystemUsageActions.bulkAddItSystemUsageRoleError()))
+          );
+      })
     );
   });
 
@@ -642,7 +686,7 @@ export class ITSystemUsageEffects {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfiguration),
       concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
-      switchMap(([_, organizationUuid]) =>
+      switchMap(([{ disablePopupNotification }, organizationUuid]) =>
         this.apiV2organizationalGridInternalService
           .getSingleOrganizationGridInternalV2GetGridConfiguration({
             organizationUuid,
@@ -650,9 +694,16 @@ export class ITSystemUsageEffects {
           })
           .pipe(
             map((response) =>
-              ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationSuccess(response)
+              ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationSuccess(
+                response,
+                disablePopupNotification
+              )
             ),
-            catchError(() => of(ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationError()))
+            catchError(() =>
+              of(
+                ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationError(disablePopupNotification)
+              )
+            )
           )
       )
     );
@@ -663,9 +714,9 @@ export class ITSystemUsageEffects {
       ofType(ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationSuccess),
       concatLatestFrom(() => [this.store.select(selectUsageGridColumns)]),
       map(([{ response }, columns]) => {
-        const configColumns = response?.visibleColumns;
-        if (!configColumns) return ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationError();
-        const newColumns = getNewGridColumnsBasedOnConfig(configColumns, columns);
+        const columnConfigs = response?.visibleColumns;
+        if (!columnConfigs) return ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationError();
+        const newColumns = getNewGridColumnsBasedOnConfig(columnConfigs, columns);
         return ITSystemUsageActions.updateGridColumns(newColumns);
       })
     );
@@ -730,6 +781,11 @@ function applyQueryFixes(odataString: string, systemRoles: APIBusinessRoleDTO[] 
       `RoleAssignments/any(i: $1i/UserFullName$2 and i/RoleId eq ${role.id})`
     );
   });
+
+  convertedString = convertedString.replace(
+    /LifeCycleStatus eq 'Undecided'/,
+    "(LifeCycleStatus eq 'Undecided' or LifeCycleStatus eq null)"
+  );
 
   return convertedString;
 }

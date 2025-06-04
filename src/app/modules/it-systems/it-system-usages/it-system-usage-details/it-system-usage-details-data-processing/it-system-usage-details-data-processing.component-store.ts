@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ComponentStore } from '@ngrx/component-store';import { tapResponse } from '@ngrx/operators';
+import { ComponentStore } from '@ngrx/component-store';
+import { tapResponse } from '@ngrx/operators';
 
 import { Observable, mergeMap } from 'rxjs';
 import { APIDataProcessingRegistrationResponseDTO, APIV2DataProcessingRegistrationService } from 'src/app/api/v2';
@@ -13,11 +14,11 @@ interface State {
 @Injectable()
 export class ItSystemUsageDetailsDataProcessingComponentStore extends ComponentStore<State> {
   public readonly associatedDataProcessingRegistrations$ = this.select(
-    (state) => state.dataProcessingRegistrations
+    (state) => state.dataProcessingRegistrations,
   ).pipe(filterNullish());
 
   public readonly associatedDataProcessingRegistrationsIsLoading$ = this.select((state) => state.loading).pipe(
-    filterNullish()
+    filterNullish(),
   );
 
   constructor(private apiDataProcessingRegistrationService: APIV2DataProcessingRegistrationService) {
@@ -28,14 +29,14 @@ export class ItSystemUsageDetailsDataProcessingComponentStore extends ComponentS
     (state, dataProcessingRegistrations: Array<APIDataProcessingRegistrationResponseDTO>): State => ({
       ...state,
       dataProcessingRegistrations,
-    })
+    }),
   );
 
   private updateAssociatedDataProcessingRegistrationsIsLoading = this.updater(
     (state, loading: boolean): State => ({
       ...state,
       loading: loading,
-    })
+    }),
   );
 
   public getAssociatedDataProcessingRegistrations = this.effect((systemUsageUuid$: Observable<string>) =>
@@ -52,10 +53,10 @@ export class ItSystemUsageDetailsDataProcessingComponentStore extends ComponentS
               (dataProcessingRegistrations) =>
                 this.updateAssociatedDataProcessingRegistrations(dataProcessingRegistrations),
               (e) => console.error(e),
-              () => this.updateAssociatedDataProcessingRegistrationsIsLoading(false)
-            )
+              () => this.updateAssociatedDataProcessingRegistrationsIsLoading(false),
+            ),
           );
-      })
-    )
+      }),
+    ),
   );
 }

@@ -21,7 +21,7 @@ export const accessModifierOptions: AccessModifierChoice[] = [
 ];
 
 export const mapAccessModifierEnumToAccessModifierChoice = (
-  value: AccessModifierEnum
+  value: AccessModifierEnum,
 ): AccessModifierChoice | undefined => {
   return accessModifierOptions.find((option) => option.value === value);
 };

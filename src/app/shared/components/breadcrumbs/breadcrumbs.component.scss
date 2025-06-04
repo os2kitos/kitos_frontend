@@ -1,8 +1,8 @@
-@import "theme";
+@use "theme";
 
 :host {
-  padding-top: $padding-smaller;
-  padding-bottom: $padding-smaller;
-  padding-left: $padding-small;
+  padding-top: theme.$padding-smaller;
+  padding-bottom: theme.$padding-smaller;
+  padding-left: theme.$padding-small;
   padding-right: 0px;
 }

@@ -30,11 +30,13 @@ export const OrganizationUnitActions = createActionGroup({
     'Get organization units paged': (
       pageSize?: number,
       currentPage?: number,
-      units?: APIOrganizationUnitResponseDTO[]
+      units?: APIOrganizationUnitResponseDTO[],
+      ignoreCache?: boolean,
     ) => ({
       units,
       currentPage,
       pageSize,
+      ignoreCache,
     }),
     'Get organization units paged Success': (units: APIOrganizationUnitResponseDTO[]) => ({
       units,
@@ -69,9 +71,13 @@ export const OrganizationUnitActions = createActionGroup({
     'Add expanded nodes': (uuids: string[]) => ({ uuids }),
     'Remove expanded node': (uuid: string) => ({ uuid }),
 
-    'Add organization unit role': (userUuid: string, roleUuid: string) => ({ userUuid, roleUuid }),
-    'Add organization unit role Success': emptyProps(),
-    'Add organization unit role Error': emptyProps(),
+    'Bulk add organization unit role': (userUuids: string[], roleUuid: string, orgUnitUuid: string) => ({
+      userUuids,
+      roleUuid,
+      orgUnitUuid,
+    }),
+    'Bulk add organization unit role Success': emptyProps(),
+    'Bulk add organization unit role Error': emptyProps(),
 
     'Delete organization unit role': (userUuid: string, roleUuid: string, unitUuid: string) => ({
       userUuid,
@@ -103,12 +109,12 @@ export const OrganizationUnitActions = createActionGroup({
       request,
     }),
     'Transfer registrations Success': (
-      transferedRegistrations: APITransferOrganizationUnitRegistrationV2RequestDTO
+      transferedRegistrations: APITransferOrganizationUnitRegistrationV2RequestDTO,
     ) => ({ transferedRegistrations }),
     'Transfer registrations Error': emptyProps(),
 
     'Change organization unit registration select': (
-      registration: RegistrationModel<APINamedEntityWithUserFullNameV2DTO>
+      registration: RegistrationModel<APINamedEntityWithUserFullNameV2DTO>,
     ) => ({ registration }),
     'Change it contract registration select': (registration: RegistrationModel<APINamedEntityV2DTO>) => ({
       registration,

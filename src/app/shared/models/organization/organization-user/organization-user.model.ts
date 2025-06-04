@@ -26,6 +26,7 @@ export interface ODataOrganizationUser {
 }
 
 export interface Right {
+  id: string;
   role: { name: string; uuid: string; id: number };
   entity: { name: string; uuid: string };
   writeAccess: boolean;
@@ -48,7 +49,9 @@ export const adaptOrganizationUser = (value: any): ODataOrganizationUser | undef
     PhoneNumber: value.PhoneNumber,
     Email: value.Email,
     LastAdvisSent: value.LastAdvisDate,
-    ObjectOwner: { Name: value.ObjectOwner ? `${value.ObjectOwner?.Name} ${value.ObjectOwner?.LastName}` : 'Ingen' },
+    ObjectOwner: {
+      Name: value.ObjectOwner ? `${value.ObjectOwner?.Name} ${value.ObjectOwner?.LastName}` : $localize`Ingen`,
+    },
     HasApiAccess: value.HasApiAccess ?? false,
     HasStakeHolderAccess: value.HasStakeHolderAccess ?? false,
     DefaultStartPreference: mapStartPreferenceChoiceFromV1(value.DefaultUserStartPreference),
@@ -58,10 +61,10 @@ export const adaptOrganizationUser = (value: any): ODataOrganizationUser | undef
     IsContractModuleAdmin: checkIfUserHasRole(contractModuleAdminRole, value.OrganizationRights),
     IsSystemModuleAdmin: checkIfUserHasRole(systemModuleAdminRole, value.OrganizationRights),
     Roles: roles,
-    OrganizationUnitRights: value.OrganizationUnitRights.map(adaptEntityRights),
-    ItSystemRights: value.ItSystemRights.map(adaptItSystemRights),
-    ItContractRights: value.ItContractRights.map(adaptEntityRights),
-    DataProcessingRegistrationRights: value.DataProcessingRegistrationRights.map(adaptEntityRights),
+    OrganizationUnitRights: value.OrganizationUnitRights?.map(adaptEntityRights) ?? [],
+    ItSystemRights: value.ItSystemRights?.map(adaptItSystemRights) ?? [],
+    ItContractRights: value.ItContractRights?.map(adaptEntityRights) ?? [],
+    DataProcessingRegistrationRights: value.DataProcessingRegistrationRights?.map(adaptEntityRights) ?? [],
   };
 
   return adaptedUser;
@@ -75,6 +78,7 @@ function checkIfUserHasRole(roleName: string, userRights: any[]): boolean {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function adaptEntityRights(right: any): Right {
   return {
+    id: getRightId(right.Role.Uuid, right.Object.Uuid),
     role: { name: right.Role.Name, uuid: right.Role.Uuid, id: right.Id },
     entity: { name: right.Object.Name, uuid: right.Object.Uuid },
     writeAccess: right.Role.HasWriteAccess,
@@ -82,12 +86,17 @@ function adaptEntityRights(right: any): Right {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-function adaptItSystemRights(rights: any): Right {
+function adaptItSystemRights(right: any): Right {
   return {
-    role: { name: rights.Role.Name, uuid: rights.Role.Uuid, id: rights.Id },
-    entity: { name: rights.Object.ItSystem.Name, uuid: rights.Object.Uuid },
-    writeAccess: rights.Role.HasWriteAccess,
+    id: getRightId(right.Role.Uuid, right.Object.Uuid),
+    role: { name: right.Role.Name, uuid: right.Role.Uuid, id: right.Id },
+    entity: { name: right.Object.ItSystem.Name, uuid: right.Object.Uuid },
+    writeAccess: right.Role.HasWriteAccess,
   };
+}
+
+function getRightId(roleUuid: string, entityUuid: string) {
+  return `${roleUuid}-${entityUuid}`;
 }
 
 const rightsHolderAccessRole = 'RightsHolderAccess';

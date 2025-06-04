@@ -3,4 +3,6 @@ export interface ExternalReferenceProperties {
   documentId?: string;
   url?: string;
   masterReference: boolean;
+  lastChangedDate?: string;
+  lastChangedBy?: string;
 }

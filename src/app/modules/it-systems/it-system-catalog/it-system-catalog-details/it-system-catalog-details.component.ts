@@ -1,6 +1,7 @@
+import { AsyncPipe, NgIf } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
@@ -29,12 +30,27 @@ import {
   selectItSystemUuid,
 } from 'src/app/store/it-system/selectors';
 import { selectOrganizationName } from 'src/app/store/user-store/selectors';
+import { BreadcrumbsComponent } from '../../../../shared/components/breadcrumbs/breadcrumbs.component';
+import { ButtonComponent } from '../../../../shared/components/buttons/button/button.component';
+import { DetailsHeaderComponent } from '../../../../shared/components/details-header/details-header.component';
+import { LoadingComponent } from '../../../../shared/components/loading/loading.component';
+import { NavigationDrawerComponent } from '../../../../shared/components/navigation-drawer/navigation-drawer.component';
 import { ITSystemCatalogDetailsComponentStore } from './it-system-catalog-details.component-store';
 
 @Component({
   templateUrl: './it-system-catalog-details.component.html',
   styleUrl: './it-system-catalog-details.component.scss',
   providers: [ITSystemCatalogDetailsComponentStore],
+  imports: [
+    NgIf,
+    BreadcrumbsComponent,
+    DetailsHeaderComponent,
+    ButtonComponent,
+    NavigationDrawerComponent,
+    RouterOutlet,
+    LoadingComponent,
+    AsyncPipe,
+  ],
 })
 export class ItSystemCatalogDetailsComponent extends BaseComponent implements OnInit, OnDestroy {
   public readonly AppPath = AppPath;
@@ -64,7 +80,7 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
         routerLink: `${systemUuid}`,
       },
     ]),
-    filterNullish()
+    filterNullish(),
   );
 
   public readonly navigationItems: NavigationDrawerItem[] = [
@@ -98,7 +114,7 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
     private actions$: Actions,
     private dialog: MatDialog,
     private dialogOpenerService: DialogOpenerService,
-    private componentStore: ITSystemCatalogDetailsComponentStore
+    private componentStore: ITSystemCatalogDetailsComponentStore,
   ) {
     super();
   }
@@ -131,20 +147,19 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
           if (result === true) {
             this.store.dispatch(ITSystemActions.patchITSystem({ deactivated: shouldBeDisabled }));
           }
-        })
+        }),
     );
   }
 
   public showChangeInUseStateDialog(takingIntoUse: boolean): void {
     this.subscriptions.add(
-      this.organizationName$.pipe(first())
-        .subscribe((organizationName) => {
-          let confirmationDialogRef;
-          if (takingIntoUse) {
-            confirmationDialogRef = this.dialogOpenerService.openTakeSystemIntoUseDialog();
-          } else {
-            confirmationDialogRef = this.dialogOpenerService.openTakeSystemOutOfUseDialog(organizationName);
-          }
+      this.organizationName$.pipe(first()).subscribe((organizationName) => {
+        let confirmationDialogRef;
+        if (takingIntoUse) {
+          confirmationDialogRef = this.dialogOpenerService.openTakeSystemIntoUseDialog();
+        } else {
+          confirmationDialogRef = this.dialogOpenerService.openTakeSystemOutOfUseDialog(organizationName);
+        }
 
         this.subscriptions.add(
           confirmationDialogRef
@@ -153,14 +168,14 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
             .subscribe(([result, systemUuid]) => {
               if (result === undefined) return;
 
-                if (takingIntoUse) {
-                  this.tryTakeIntoUse(result, systemUuid);
-                  return;
-                }
-                this.tryTakeOutOfUse(result, systemUuid);
-              })
-          );
-        })
+              if (takingIntoUse) {
+                this.tryTakeIntoUse(result, systemUuid);
+                return;
+              }
+              this.tryTakeOutOfUse(result, systemUuid);
+            }),
+        );
+      }),
     );
   }
 
@@ -191,7 +206,7 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
           if (result === true) {
             this.store.dispatch(ITSystemActions.deleteITSystem());
           }
-        })
+        }),
     );
   }
 
@@ -211,7 +226,7 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
       }
 
       return text;
-    })
+    }),
   );
 
   private subscribeToUuidNavigation(): void {
@@ -219,13 +234,13 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
       this.route.params
         .pipe(
           map((params) => params['uuid']),
-          distinctUntilChanged() //Ensures we get changes if navigation occurs between systems
+          distinctUntilChanged(), //Ensures we get changes if navigation occurs between systems
         )
         .subscribe((itSystemUuid) => {
-          this.store.dispatch(ITSystemActions.getITSystemPermissions(itSystemUuid));
           this.store.dispatch(ITSystemActions.getITSystem(itSystemUuid));
+          this.store.dispatch(ITSystemActions.getITSystemPermissions(itSystemUuid));
           this.store.dispatch(ITSystemUsageActions.getITSystemUsageCollectionPermissions());
-        })
+        }),
     );
   }
 
@@ -238,7 +253,7 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
         .subscribe(() => {
           this.notificationService.showError($localize`Du har ikke læseadgang til dette IT System`);
           this.router.navigate([`${AppPath.itSystems}/${AppPath.itSystemCatalog}`]);
-        })
+        }),
     );
   }
 
@@ -248,7 +263,7 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
       this.actions$.pipe(ofType(ITSystemActions.getITSystemError)).subscribe(() => {
         this.notificationService.showError($localize`IT System findes ikke`);
         this.router.navigate([`${AppPath.itSystems}/${AppPath.itSystemCatalog}`]);
-      })
+      }),
     );
   }
 
@@ -258,19 +273,19 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
         .pipe(
           ofType(
             ITSystemUsageActions.createItSystemUsageSuccess,
-            ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganizationSuccess
-          )
+            ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganizationSuccess,
+          ),
         )
         .subscribe(({ itSystemUuid }) => {
           this.store.dispatch(ITSystemActions.getITSystem(itSystemUuid));
           this.store.dispatch(ITSystemActions.getITSystemPermissions(itSystemUuid));
-        })
+        }),
     );
 
     this.subscriptions.add(
       this.actions$.pipe(ofType(ITSystemActions.deleteITSystemSuccess)).subscribe(() => {
         this.router.navigate([`${AppPath.itSystems}/${AppPath.itSystemCatalog}`]);
-      })
+      }),
     );
   }
 
@@ -280,7 +295,7 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
         .pipe(ofType(ITSystemUsageActions.createItSystemUsageSuccess))
         .subscribe(({ itSystemUuid: _, usageUuid }) => {
           this.router.navigate([`${AppPath.itSystems}/${AppPath.itSystemUsages}/${usageUuid}`]);
-        })
+        }),
     );
   }
 }

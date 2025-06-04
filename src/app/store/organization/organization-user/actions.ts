@@ -15,11 +15,11 @@ import { ODataOrganizationUser } from 'src/app/shared/models/organization/organi
 export const OrganizationUserActions = createActionGroup({
   source: 'OrganizationUser',
   events: {
-    'Get Organization Users': (gridState: GridState) => ({ gridState }),
+    'Get Organization Users': (gridState: GridState, forceUpdate: boolean) => ({ gridState, forceUpdate }),
     'Get Organization Users Success ': (users: ODataOrganizationUser[], total: number) => ({ users, total }),
     'Get Organization Users Error': emptyProps(),
 
-    'Update Grid State': (gridState: GridState) => ({ gridState }),
+    'Update Grid State': (gridState: GridState, forceUpdate: boolean) => ({ gridState, forceUpdate }),
     'Update Grid Columns': (gridColumns: GridColumn[]) => ({ gridColumns }),
     'Update Grid Columns Success': (gridColumns: GridColumn[]) => ({ gridColumns }),
 

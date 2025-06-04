@@ -10,11 +10,17 @@ import { RegistrationEntityTypes } from '../../models/registrations/registration
 import { ColumnConfigService } from '../../services/column-config.service';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
+import { MenuButtonItemComponent } from '../buttons/menu-button/menu-button-item/menu-button-item.component';
+import { ReloadIconComponent } from '../icons/reload-icon.component';
+import { TooltipComponent } from '../tooltip/tooltip.component';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { WarningIconComponent } from '../icons/warning-icon.component';
 
 @Component({
   selector: 'app-reset-to-org-columns-config-button',
   templateUrl: './reset-to-org-columns-config-button.component.html',
   styleUrl: './reset-to-org-columns-config-button.component.scss',
+  imports: [MenuButtonItemComponent, ReloadIconComponent, TooltipComponent, NgIf, WarningIconComponent, AsyncPipe],
 })
 export class ResetToOrgColumnsConfigButtonComponent implements OnInit {
   @Input() public entityType!: RegistrationEntityTypes;
@@ -23,7 +29,10 @@ export class ResetToOrgColumnsConfigButtonComponent implements OnInit {
 
   public readonly tooltipText = $localize`OBS: Opsætning af overblik afviger fra din organisations standardoverblik. Tryk på 'Gendan kolonneopsætning' for at benytte den gældende opsætning.`;
 
-  constructor(private store: Store, private columnConfigService: ColumnConfigService) {}
+  constructor(
+    private store: Store,
+    private columnConfigService: ColumnConfigService,
+  ) {}
 
   public ngOnInit(): void {
     this.lastSeenGridConfig$ = this.columnConfigService?.getGridConfig(this.entityType);

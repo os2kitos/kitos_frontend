@@ -29,8 +29,8 @@
       <app-create-entity-dialog-action-buttons
         [alreadyExists]="alreadyExists$ | async"
         [isFormValid]="createForm.valid"
-        (cancel)="onCancel()"
-        (create)="createEntity($event)"
+        (cancelEvent)="onCancel()"
+        (createEvent)="createEntity($event)"
       ></app-create-entity-dialog-action-buttons>
     </ng-container>
   </form>

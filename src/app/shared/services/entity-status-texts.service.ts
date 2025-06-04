@@ -12,7 +12,7 @@ export class EntityStatusTextsService {
   private readonly typeToTextMap: Record<RegistrationEntityTypes, EntityStatusTexts> = {
     'data-processing-registration': {
       trueString: this.ACTIVE_TEXT,
-      falseString: $localize`Inaktiv`,
+      falseString: this.INACTIVE_TEXT,
     },
     'it-system': {
       trueString: $localize`Tilgængeligt`,

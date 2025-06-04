@@ -1,4 +1,4 @@
-@import "theme";
+@use "theme";
 
 :host {
   display: flex;
@@ -14,7 +14,7 @@
 
   .active button {
     font-weight: bold;
-    background: $color-primary-10 !important;
+    background: theme.$color-primary-10 !important;
   }
 
   // Resize the svg to spec
@@ -27,7 +27,10 @@
     margin-left: -8px;
     opacity: 0;
     max-width: 0;
-    transition: opacity 0.3s ease, max-width 0.3s ease, margin-left 0.3s ease;
+    transition:
+      opacity 0.3s ease,
+      max-width 0.3s ease,
+      margin-left 0.3s ease;
   }
 
   .label.visible {
@@ -38,7 +41,7 @@
 }
 
 app-icon {
-  padding-top: $padding-smaller;
+  padding-top: theme.$padding-smaller;
 }
 
 .expanded {
@@ -46,7 +49,7 @@ app-icon {
 }
 
 app-card {
-  padding-bottom: $padding-small;
+  padding-bottom: theme.$padding-small;
   min-width: 60px;
   transition: min-width 0.3s ease;
   overflow: hidden;
@@ -58,11 +61,10 @@ app-card {
 }
 
 .divider-margin {
-  margin-top: $padding-small;
-  margin-bottom: $padding-small;
+  margin-top: theme.$padding-small;
+  margin-bottom: theme.$padding-small;
 }
 
 .icon-padding {
-  padding-left: 11px;
+  padding-left: theme.$padding-smallest;
 }
-

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
 import { Observable } from 'rxjs';
 import { HelpDialogComponent } from '../help-dialog/help-dialog.component';
@@ -6,13 +6,34 @@ import { MatDialog } from '@angular/material/dialog';
 import { selectGridConfigModificationPermission } from 'src/app/store/user-store/selectors';
 import { Store } from '@ngrx/store';
 import { ColumnConfigService } from '../../services/column-config.service';
+import { MenuButtonComponent } from '../buttons/menu-button/menu-button.component';
+import { ParagraphComponent } from '../paragraph/paragraph.component';
+import { GridFilterButtonsComponent } from './grid-filter-buttons/grid-filter-buttons.component';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { DividerComponent } from '../divider/divider.component';
+import { GridColumnConfigButtonsComponent } from './grid-column-config-buttons/grid-column-config-buttons.component';
+import { ResetToOrgColumnsConfigButtonComponent } from '../reset-to-org-columns-config-button/reset-to-org-columns-config-button.component';
+import { MenuButtonItemComponent } from '../buttons/menu-button/menu-button-item/menu-button-item.component';
+import { HelpIconComponent } from '../icons/help.component';
 
 @Component({
   selector: 'app-grid-options-button',
   templateUrl: './grid-options-button.component.html',
   styleUrl: './grid-options-button.component.scss',
+  imports: [
+    MenuButtonComponent,
+    ParagraphComponent,
+    GridFilterButtonsComponent,
+    NgIf,
+    DividerComponent,
+    GridColumnConfigButtonsComponent,
+    ResetToOrgColumnsConfigButtonComponent,
+    MenuButtonItemComponent,
+    HelpIconComponent,
+    AsyncPipe,
+  ],
 })
-export class GridOptionsButtonComponent implements OnInit {
+export class GridOptionsButtonComponent {
   @Input() entityType!: RegistrationEntityTypes;
   @Input() hasResetButton: boolean = false;
   @Input() hasColumnConfigButtons: boolean = false;
@@ -20,12 +41,14 @@ export class GridOptionsButtonComponent implements OnInit {
 
   public readonly hasConfigGridPermission$ = this.store.select(selectGridConfigModificationPermission);
 
-  public hasChanges$!: Observable<boolean>;
+  constructor(
+    private dialog: MatDialog,
+    private store: Store,
+    private columnConfigService: ColumnConfigService,
+  ) {}
 
-  constructor(private dialog: MatDialog, private store: Store, private columnConfigService: ColumnConfigService) {}
-
-  public ngOnInit(): void {
-    this.hasChanges$ = this.columnConfigService.hasChanges(this.entityType);
+  public hasChanges$(): Observable<boolean> {
+    return this.columnConfigService.hasChanges(this.entityType);
   }
 
   public getHelpTextKey(): string | undefined {

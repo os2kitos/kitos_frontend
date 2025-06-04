@@ -1,5 +1,7 @@
+import { CdkScrollable } from '@angular/cdk/scrolling';
+import { NgFor, NgIf } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogContent, MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
@@ -11,11 +13,29 @@ import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
+import { ButtonComponent } from '../../buttons/button/button.component';
+import { CheckboxComponent } from '../../checkbox/checkbox.component';
+import { DialogActionsComponent } from '../../dialogs/dialog-actions/dialog-actions.component';
+import { DialogComponent } from '../../dialogs/dialog/dialog.component';
+import { ParagraphComponent } from '../../paragraph/paragraph.component';
+import { StandardVerticalContentGridComponent } from '../../standard-vertical-content-grid/standard-vertical-content-grid.component';
 
 @Component({
   selector: 'app-hide-show-dialog',
   templateUrl: './hide-show-dialog.component.html',
   styleUrl: './hide-show-dialog.component.scss',
+  imports: [
+    DialogComponent,
+    StandardVerticalContentGridComponent,
+    CdkScrollable,
+    MatDialogContent,
+    NgFor,
+    ParagraphComponent,
+    NgIf,
+    CheckboxComponent,
+    DialogActionsComponent,
+    ButtonComponent,
+  ],
 })
 export class HideShowDialogComponent implements OnInit {
   @Input() columns!: GridColumn[];
@@ -35,7 +55,8 @@ export class HideShowDialogComponent implements OnInit {
     this.columnsCopy = this.columns
       .filter((column) => column.style !== 'excel-only' && column.style !== 'action-buttons')
       .filter((column) => this.isColumnEnabled(column, this.uiConfigApplications))
-      .map((column) => ({ ...column }));
+      .map((column) => ({ ...column }))
+      .sort((a, b) => (a.order_id ?? 0) - (b.order_id ?? 0));
     this.uniqueSections = Array.from(new Set(this.columnsCopy.map((column) => column.section!)));
   }
 
@@ -73,6 +94,14 @@ export class HideShowDialogComponent implements OnInit {
 
   public close() {
     this.dialogRef.close();
+  }
+
+  public isAllSelectedOfSection(section: string): boolean {
+    return this.columnsCopy.filter((column) => column.section === section).every((column) => !column.hidden);
+  }
+  public toggleSection(value: boolean | undefined, section: string) {
+    const columnsInSection = this.columnsCopy.filter((column) => column.section === section && !column.required);
+    columnsInSection.forEach((column) => (column.hidden = !value));
   }
 
   private mergeColumnChanges(): GridColumn[] {

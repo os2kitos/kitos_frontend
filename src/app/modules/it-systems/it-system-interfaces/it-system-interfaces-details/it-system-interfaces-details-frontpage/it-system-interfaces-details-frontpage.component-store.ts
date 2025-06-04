@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ComponentStore } from '@ngrx/component-store';import { tapResponse } from '@ngrx/operators';
+import { ComponentStore } from '@ngrx/component-store';
+import { tapResponse } from '@ngrx/operators';
 
 import { Observable, mergeMap } from 'rxjs';
 import { APIItSystemResponseDTO, APIV2ItSystemInternalINTERNALService } from 'src/app/api/v2';
@@ -23,7 +24,7 @@ export class ITSystemInterfacesDetailsFrontpageComponentStore extends ComponentS
   private updateIsLoading = this.updater((state, isLoading: boolean): State => ({ ...state, isLoading: isLoading }));
 
   private updateItSystems = this.updater(
-    (state, itSystems: APIItSystemResponseDTO[]): State => ({ ...state, itSystems })
+    (state, itSystems: APIItSystemResponseDTO[]): State => ({ ...state, itSystems }),
   );
 
   public searchItSystems = this.effect((searchTerm$: Observable<string | undefined>) =>
@@ -39,10 +40,10 @@ export class ITSystemInterfacesDetailsFrontpageComponentStore extends ComponentS
             tapResponse(
               (itSystems: APIItSystemResponseDTO[]) => this.updateItSystems(itSystems),
               (e) => console.error(e),
-              () => this.updateIsLoading(false)
-            )
+              () => this.updateIsLoading(false),
+            ),
           );
-      })
-    )
+      }),
+    ),
   );
 }

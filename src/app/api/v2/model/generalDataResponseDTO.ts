@@ -35,5 +35,33 @@ export interface APIGeneralDataResponseDTO {
     numberOfExpectedUsers?: APIExpectedUsersIntervalDTO;
     validity: APIItSystemUsageValidityResponseDTO;
     mainContract?: APIIdentityNamePairResponseDTO;
+    containsAITechnology?: APIGeneralDataResponseDTO.ContainsAITechnologyEnum;
+    /**
+     * Defines if the system is web accessibility compliant
+     */
+    webAccessibilityCompliance?: APIGeneralDataResponseDTO.WebAccessibilityComplianceEnum;
+    /**
+     * Last time the supplier checked system web accessibility
+     */
+    lastWebAccessibilityCheck?: string;
+    /**
+     * Notes related to the web accessibility of the system
+     */
+    webAccessibilityNotes?: string;
 }
+export namespace APIGeneralDataResponseDTO {
+    export type ContainsAITechnologyEnum = 'No' | 'Yes' | 'Undecided';
+    export const ContainsAITechnologyEnum = {
+        No: 'No' as ContainsAITechnologyEnum,
+        Yes: 'Yes' as ContainsAITechnologyEnum,
+        Undecided: 'Undecided' as ContainsAITechnologyEnum
+    };
+    export type WebAccessibilityComplianceEnum = 'No' | 'Yes' | 'Partially';
+    export const WebAccessibilityComplianceEnum = {
+        No: 'No' as WebAccessibilityComplianceEnum,
+        Yes: 'Yes' as WebAccessibilityComplianceEnum,
+        Partially: 'Partially' as WebAccessibilityComplianceEnum
+    };
+}
+
 

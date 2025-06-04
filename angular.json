@@ -114,7 +114,7 @@
               {
                 "type": "initial",
                 "maximumWarning": "4mb",
-                "maximumError": "6mb"
+                "maximumError": "7mb"
               },
               {
                 "type": "anyComponentStyle",
@@ -131,12 +131,22 @@
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
                 }
-              ]
+              ],
+              "buildOptimizer": true,
+              "vendorChunk": true
             },
             "dev": {
-              "sourceMap": true,
+              "sourceMap": false,
               "namedChunks": true,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "outputHashing": "none",
+              "optimization": false,
+              "buildOptimizer": false,
               "budgets": [],
+              "customWebpackConfig": {
+                "path": "./webpack.config.js"
+              },
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",

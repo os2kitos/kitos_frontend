@@ -1,4 +1,4 @@
-@import "theme";
+@use "theme";
 
 :host ::ng-deep {
   display: flex;
@@ -6,28 +6,28 @@
   .footer-section {
     display: flex;
     align-items: center;
-    border-bottom-left-radius: $radius-large;
-    gap: $padding-small;
+    border-bottom-left-radius: theme.$radius-large;
+    gap: theme.$padding-small;
   }
   font-size: 14px;
-  color: $color-neutral-80;
+  color: theme.$color-neutral-80;
 
   kendo-dropdownlist {
     width: 90px;
-    padding: 0 $padding-small;
+    padding: 0 theme.$padding-small;
   }
 
   kendo-pager-prev-buttons,
   kendo-pager-next-buttons,
   kendo-pager-numeric-buttons {
-    color: $color-primary-dark;
+    color: theme.$color-primary-dark;
 
     .k-button {
       font-weight: bold;
-      border-radius: $radius-large !important;
+      border-radius: theme.$radius-large !important;
 
       &.k-disabled {
-        color: $color-neutral-60;
+        color: theme.$color-neutral-60;
       }
     }
   }
@@ -38,19 +38,19 @@
   }
 
   .option-dropdown {
-    color: $color-primary-dark;
-    border-radius: $radius-large;
-    border-color: $color-neutral-40;
+    color: theme.$color-primary-dark;
+    border-radius: theme.$radius-large;
+    border-color: theme.$color-neutral-40;
   }
   .option-dropdown:hover {
     box-sizing: border-box;
-    background-color: $color-primary-10;
-    border: 1px solid $color-primary !important;
+    background-color: theme.$color-primary-10;
+    border: 1px solid theme.$color-primary !important;
   }
   .option-dropdown:active {
     box-sizing: border-box;
-    background-color: $color-primary-20;
-    border: 1px solid $color-primary !important;
+    background-color: theme.$color-primary-20;
+    border: 1px solid theme.$color-primary !important;
   }
 }
 

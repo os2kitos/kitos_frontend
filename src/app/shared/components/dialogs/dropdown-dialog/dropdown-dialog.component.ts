@@ -1,15 +1,31 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Observable } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ConnectedDropdownDialogComponent } from '../connected-dropdown-dialog/connected-dropdown-dialog.component';
+import { DialogComponent } from '../dialog/dialog.component';
+import { StandardVerticalContentGridComponent } from '../../standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { DropdownComponent } from '../../dropdowns/dropdown/dropdown.component';
+import { DialogActionsComponent } from '../dialog-actions/dialog-actions.component';
+import { ButtonComponent } from '../../buttons/button/button.component';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-dropdown-dialog',
   templateUrl: './dropdown-dialog.component.html',
   styleUrl: './dropdown-dialog.component.scss',
+  imports: [
+    DialogComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    StandardVerticalContentGridComponent,
+    DropdownComponent,
+    DialogActionsComponent,
+    ButtonComponent,
+    AsyncPipe,
+  ],
 })
 export class DropdownDialogComponent<T> extends BaseComponent implements OnInit {
   @Input() public title!: string;
@@ -29,7 +45,7 @@ export class DropdownDialogComponent<T> extends BaseComponent implements OnInit 
 
   constructor(
     private readonly actions$: Actions,
-    private readonly dialogRef: MatDialogRef<ConnectedDropdownDialogComponent<T>>
+    private readonly dialogRef: MatDialogRef<ConnectedDropdownDialogComponent<T>>,
   ) {
     super();
   }

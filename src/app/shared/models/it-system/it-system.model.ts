@@ -31,6 +31,8 @@ export interface ITSystem {
   BelongsTo: { Name: string };
   BusinessType: { Name: string };
   Usages: IdentityNamePair[];
+  LegalName?: string;
+  LegalDataProcessorName?: string;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -41,8 +43,8 @@ export const adaptITSystem = (value: any, currentOrganizationUuid: string): ITSy
   const mappedUsages: IdentityNamePair[] = value.Usages.map(
     (usage: { Organization: { Name: string; Uuid: string } }) => {
       return { name: usage.Organization.Name, uuid: usage.Organization.Uuid };
-    }
-  );
+    },
+  ).sort((a: IdentityNamePair, b: IdentityNamePair) => a.name.localeCompare(b.name));
   const reference = value.Reference;
 
   return {
@@ -50,7 +52,7 @@ export const adaptITSystem = (value: any, currentOrganizationUuid: string): ITSy
     Uuid: value.Uuid,
     Name: entityWithUnavailableName(value.Name, !isDisabled),
     IsInUse: value.Usages.some(
-      (usage: { Organization: { Uuid: string } }) => usage.Organization.Uuid === currentOrganizationUuid
+      (usage: { Organization: { Uuid: string } }) => usage.Organization.Uuid === currentOrganizationUuid,
     ),
     PreviousName: value.PreviousName,
     Parent: { Name: entityWithUnavailableName(value.Parent?.Name, !value.Parent?.Disabled) },
@@ -72,5 +74,7 @@ export const adaptITSystem = (value: any, currentOrganizationUuid: string): ITSy
     BelongsTo: { Name: value.BelongsTo?.Name },
     BusinessType: value.BusinessType,
     Usages: mappedUsages,
+    LegalName: value.LegalName,
+    LegalDataProcessorName: value.LegalDataProcessorName,
   };
 };

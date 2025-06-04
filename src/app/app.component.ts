@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
+import { map } from 'rxjs';
 import { ChooseOrganizationComponent } from './modules/layout/choose-organization/choose-organization.component';
 import { BaseComponent } from './shared/base/base.component';
 import { ExternalReferencesStoreAdapterService } from './shared/services/external-references-store-adapter.service';
@@ -8,19 +10,25 @@ import { MaterialIconsConfigService } from './shared/services/material-icons-con
 import { NotificationService } from './shared/services/notification.service';
 import { OrganizationService } from './shared/services/organization.service';
 import { RoleOptionTypeService } from './shared/services/role-option-type.service';
-import { UserActions } from './store/user-store/actions';
-import { selectIsAuthenticating } from './store/user-store/selectors';
-import { Actions, ofType } from '@ngrx/effects';
-import { RelatedEntityType } from './store/alerts/state';
 import { AlertActions } from './store/alerts/actions';
+import { RelatedEntityType } from './store/alerts/state';
+import { UserActions } from './store/user-store/actions';
+import { selectIsAuthenticating, selectUser } from './store/user-store/selectors';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { NavBarComponent } from './modules/layout/nav-bar/nav-bar.component';
+import { RouterOutlet } from '@angular/router';
+import { PopupMessagesComponent } from './shared/components/popup-messages/popup-messages.component';
+import { LoadingComponent } from './shared/components/loading/loading.component';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  imports: [NgIf, NavBarComponent, LoadingComponent, RouterOutlet, PopupMessagesComponent, AsyncPipe],
 })
 export class AppComponent extends BaseComponent implements OnInit {
   public isAuthenticating$ = this.store.select(selectIsAuthenticating);
+  public isAuthenticated$ = this.store.select(selectUser).pipe(map((user) => !!user));
 
   constructor(
     private store: Store,
@@ -53,7 +61,9 @@ export class AppComponent extends BaseComponent implements OnInit {
         }
         // Automatically choose organization if user is only part of one or persisted organization exists
         else if (organization || organizations.length === 1) {
-          this.store.dispatch(UserActions.resetOnOrganizationUpdate(organization ?? organizations[0]));
+          const currentOrganization = organization ?? organizations[0];
+          this.store.dispatch(UserActions.resetOnOrganizationUpdate(currentOrganization));
+          this.store.dispatch(UserActions.getUserDefaultUnit(currentOrganization.uuid));
         }
         // Force the user to choose on organization if user has not selected an organization or organization
         // selected does not exist anymore.

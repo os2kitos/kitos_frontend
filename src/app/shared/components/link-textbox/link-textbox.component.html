@@ -1,27 +1,36 @@
 <ng-container *ngIf="simpleLink$ | async as simpleLink">
-  <ng-container *ngIf="simpleLink.name !== null || isLinkOnly">
+  <ng-container *ngIf="(hasNoLink() | async) === false">
     <ng-container *ngIf="validateSimpleLinkUrl(simpleLink.url) === true">
-      <mat-form-field class="{{ size }}">
-        <mat-label>{{ title }}</mat-label>
-        <div (click)="openLink(simpleLink.url)">
-          <input
-            matInput
-            type="text"
-            class="link-input-style"
-            [disabled]="isDisabled"
-            data-cy="link-textbox-input"
-            [value]="getLinkText() | async"
-          />
-        </div>
+      <ng-container *ngIf="!isUrlEmpty(simpleLink.url)">
+        <mat-form-field class="{{ size }}">
+          <mat-label>{{ title }}</mat-label>
+          <div (click)="openLink(simpleLink.url)">
+            <input
+              matInput
+              type="text"
+              class="link-input-style"
+              [disabled]="isDisabled"
+              data-cy="link-textbox-input"
+              [value]="getLinkText() | async"
+            />
+          </div>
 
-        <div matSuffix class="suffix-icons" *ngIf="!isDisabled">
-          <span (click)="onClearClick()">x</span>
-
-          <app-icon-button (buttonClick)="onIconClick()" data-cy="edit-link-button"
-            ><app-pencil-icon></app-pencil-icon>
-          </app-icon-button>
-        </div>
-      </mat-form-field>
+          <div matSuffix class="suffix-icons" *ngIf="!isDisabled">
+            <span (click)="onClearClick()" *ngIf="enableClearX() | async">x</span>
+            <app-icon-button (buttonClick)="onIconClick()" data-cy="edit-link-button"
+              ><app-pencil-icon></app-pencil-icon>
+            </app-icon-button>
+          </div>
+        </mat-form-field>
+      </ng-container>
+      <ng-container *ngIf="isUrlEmpty(simpleLink.url)">
+        <app-readonly-link-textbox
+          [size]="size"
+          [title]="title"
+          [isDisabled]="isDisabled"
+          (iconClick)="onIconClick()"
+        ></app-readonly-link-textbox>
+      </ng-container>
     </ng-container>
 
     <ng-container *ngIf="validateSimpleLinkUrl(simpleLink.url) !== true">
@@ -37,7 +46,7 @@
           [value]="getLinkText() | async"
         />
         <div matSuffix class="suffix-icons" *ngIf="!isDisabled">
-          <span (click)="onClearClick()">x</span>
+          <span (click)="onClearClick()" *ngIf="enableClearX() | async">x</span>
 
           <app-icon-button (buttonClick)="onIconClick()" data-cy="edit-link-button"
             ><app-pencil-icon></app-pencil-icon>
@@ -48,12 +57,11 @@
   </ng-container>
 </ng-container>
 
-<ng-container *ngIf="(simpleLink$ | async) === undefined || (simpleLink$ | async)?.name === null">
-  <mat-form-field class="{{ size }}">
-    <mat-label>{{ title }}</mat-label>
-    <input matInput type="text" readonly [disabled]="isDisabled" data-cy="link-textbox-input" />
-    <app-icon-button *ngIf="!isDisabled" (buttonClick)="onIconClick()" matSuffix data-cy="edit-link-button"
-      ><app-pencil-icon></app-pencil-icon>
-    </app-icon-button>
-  </mat-form-field>
+<ng-container *ngIf="hasNoLink() | async">
+  <app-readonly-link-textbox
+    [size]="size"
+    [title]="title"
+    [isDisabled]="isDisabled"
+    (iconClick)="onIconClick()"
+  ></app-readonly-link-textbox>
 </ng-container>

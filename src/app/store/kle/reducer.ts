@@ -25,13 +25,13 @@ export const kleFeature = createFeature({
       (state, { kles }): KLEState => ({
         ...kleAdapter.setAll(kles, state),
         cacheTime: new Date().getTime(),
-      })
+      }),
     ),
 
     on(KLEActions.getAdminKLEStatus, (state): KLEState => ({ ...state, adminKleIsLoading: true })),
     on(
       KLEActions.getAdminKLEStatusSuccess,
-      (state, { status }): KLEState => ({ ...state, adminKleIsLoading: false, adminKleStatus: status })
+      (state, { status }): KLEState => ({ ...state, adminKleIsLoading: false, adminKleStatus: status }),
     ),
     on(KLEActions.getAdminKLEStatusError, (state): KLEState => ({ ...state, adminKleIsLoading: false })),
 
@@ -45,6 +45,6 @@ export const kleFeature = createFeature({
 
     on(KLEActions.updateAdminKLE, (state): KLEState => ({ ...state, adminKleIsLoading: true })),
     on(KLEActions.updateAdminKLESuccess, (state): KLEState => ({ ...state, adminKleIsLoading: false })),
-    on(KLEActions.updateAdminKLEError, (state): KLEState => ({ ...state, adminKleIsLoading: false }))
+    on(KLEActions.updateAdminKLEError, (state): KLEState => ({ ...state, adminKleIsLoading: false })),
   ),
 });

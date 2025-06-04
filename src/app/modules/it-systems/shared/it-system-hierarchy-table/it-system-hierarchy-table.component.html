@@ -6,6 +6,8 @@
       itemType="it-system"
       [currentNodeUuid]="systemUuid"
       [nodes]="(treeNodes$ | async) ?? []"
+      [showExtraStatus]="true"
+      [extraStatusDisplayType]="extraStatusDisplayTypeValue"
     ></app-entity-tree>
   </div>
 </app-card>

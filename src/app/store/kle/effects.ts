@@ -16,7 +16,7 @@ export class KLEEffects {
     private actions$: Actions,
     private store: Store,
     @Inject(APIV2KleOptionService) private apiKleOptionService: APIV2KleOptionService,
-    @Inject(APIV2KLEInternalINTERNALService) private apiKleInternalService: APIV2KLEInternalINTERNALService
+    @Inject(APIV2KLEInternalINTERNALService) private apiKleInternalService: APIV2KLEInternalINTERNALService,
   ) {}
 
   getKles$ = createEffect(() => {
@@ -27,9 +27,9 @@ export class KLEEffects {
       switchMap(() =>
         this.apiKleOptionService.getSingleKleOptionV2Get({ kleUuid: '' }).pipe(
           map((response) => KLEActions.getKLEsSuccess(response.payload)),
-          catchError(() => of(KLEActions.getKLEsError()))
-        )
-      )
+          catchError(() => of(KLEActions.getKLEsError())),
+        ),
+      ),
     );
   });
 
@@ -39,9 +39,9 @@ export class KLEEffects {
       switchMap(() =>
         this.apiKleInternalService.getSingleKLEInternalV2GetKLEStatus().pipe(
           map((response) => KLEActions.getAdminKLEStatusSuccess(response)),
-          catchError(() => of(KLEActions.getAdminKLEStatusError()))
-        )
-      )
+          catchError(() => of(KLEActions.getAdminKLEStatusError())),
+        ),
+      ),
     );
   });
 
@@ -63,9 +63,9 @@ export class KLEEffects {
             catchError((err) => {
               console.error(err);
               return of(KLEActions.getAdminKLEFileError());
-            })
-          )
-      )
+            }),
+          ),
+      ),
     );
   });
 
@@ -75,9 +75,9 @@ export class KLEEffects {
       switchMap(() =>
         this.apiKleInternalService.putSingleKLEInternalV2PutKLEChanges().pipe(
           map(() => KLEActions.updateAdminKLESuccess()),
-          catchError(() => of(KLEActions.updateAdminKLEError()))
-        )
-      )
+          catchError(() => of(KLEActions.updateAdminKLEError())),
+        ),
+      ),
     );
   });
 }

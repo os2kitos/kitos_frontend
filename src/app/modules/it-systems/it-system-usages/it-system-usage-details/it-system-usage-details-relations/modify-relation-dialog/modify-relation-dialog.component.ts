@@ -6,13 +6,17 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { SystemRelationModel } from '../relation-table/relation-table.component';
 import { ItSystemUsageDetailsRelationsDialogComponentStore } from '../system-relation-dialog/relation-dialog.component-store';
-import { SystemRelationDialogFormModel } from '../system-relation-dialog/system-relation-dialog.component';
+import {
+  SystemRelationDialogFormModel,
+  SystemRelationDialogComponent,
+} from '../system-relation-dialog/system-relation-dialog.component';
 
 @Component({
   selector: 'app-modify-relation-dialog[relationModel]',
   templateUrl: './modify-relation-dialog.component.html',
   styleUrls: ['./modify-relation-dialog.component.scss'],
   providers: [ItSystemUsageDetailsRelationsDialogComponentStore],
+  imports: [SystemRelationDialogComponent],
 })
 export class ModifyRelationDialogComponent extends BaseComponent implements OnInit {
   @Input() public relationModel!: SystemRelationModel;
@@ -21,7 +25,7 @@ export class ModifyRelationDialogComponent extends BaseComponent implements OnIn
 
   constructor(
     private readonly store: Store,
-    private readonly componentStore: ItSystemUsageDetailsRelationsDialogComponentStore
+    private readonly componentStore: ItSystemUsageDetailsRelationsDialogComponentStore,
   ) {
     super();
   }
@@ -33,7 +37,7 @@ export class ModifyRelationDialogComponent extends BaseComponent implements OnIn
           value: this.relationModel.systemUsage,
           disabled: false,
         },
-        Validators.required
+        Validators.required,
       ),
       description: new FormControl<string | undefined>({ value: this.relationModel.description, disabled: false }),
       reference: new FormControl<string | undefined>({ value: this.relationModel.urlReference, disabled: false }),

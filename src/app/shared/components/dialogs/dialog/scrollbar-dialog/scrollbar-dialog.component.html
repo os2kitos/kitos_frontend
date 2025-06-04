@@ -7,12 +7,7 @@
 ></app-dialog-header>
 
 <mat-dialog-content class="mat-dialog-content-padding">
-  <app-dialog
-    [overflow]="overflow"
-    [loading]="loading"
-    [withHeader]="false"
-    [backgroundColor]="backgroundColor"
-  >
+  <app-dialog [overflow]="overflow" [loading]="loading" [withHeader]="false" [backgroundColor]="backgroundColor">
     <ng-content></ng-content>
   </app-dialog>
 </mat-dialog-content>

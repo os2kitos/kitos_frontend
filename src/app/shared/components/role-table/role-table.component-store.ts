@@ -7,14 +7,14 @@ import { Observable, combineLatestWith, map, mergeMap, tap } from 'rxjs';
 import { APIOrganizationUserResponseDTO, APIV2OrganizationService } from 'src/app/api/v2';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 import { BOUNDED_PAGINATION_QUERY_MAX_SIZE } from '../../constants/constants';
-import { IRoleAssignment } from '../../models/helpers/read-model-role-assignments';
+import { RoleAssignment } from '../../models/helpers/read-model-role-assignments';
 import { RoleOptionTypes } from '../../models/options/role-option-types.model';
 import { filterNullish } from '../../pipes/filter-nullish';
 import { RoleOptionTypeService } from '../../services/role-option-type.service';
 
 interface State {
   rolesLoading: boolean;
-  roles?: Array<IRoleAssignment>;
+  roles?: Array<RoleAssignment>;
   usersLoading: boolean;
   users?: Array<APIOrganizationUserResponseDTO>;
 }
@@ -31,44 +31,44 @@ export class RoleTableComponentStore extends ComponentStore<State> {
 
   public readonly selectUserResultIsLimited$ = this.users$.pipe(
     filterNullish(),
-    map((users) => users.length >= this.PAGE_SIZE)
+    map((users) => users.length >= this.PAGE_SIZE),
   );
 
   constructor(
     private readonly store: Store,
     @Inject(APIV2OrganizationService)
     private readonly apiOrganizationService: APIV2OrganizationService,
-    private readonly roleOptionTypeService: RoleOptionTypeService
+    private readonly roleOptionTypeService: RoleOptionTypeService,
   ) {
     super({ rolesLoading: false, usersLoading: false });
   }
 
   private updateRoles = this.updater(
-    (state, roles: Array<IRoleAssignment>): State => ({
+    (state, roles: Array<RoleAssignment>): State => ({
       ...state,
       roles,
-    })
+    }),
   );
 
   private updateRolesIsLoading = this.updater(
     (state, loading: boolean): State => ({
       ...state,
       rolesLoading: loading,
-    })
+    }),
   );
 
   private updateUsers = this.updater(
     (state, users: Array<APIOrganizationUserResponseDTO>): State => ({
       ...state,
       users,
-    })
+    }),
   );
 
   private updateUsersIsLoading = this.updater(
     (state, loading: boolean): State => ({
       ...state,
       usersLoading: loading,
-    })
+    }),
   );
 
   public getRolesByEntityUuid = this.effect(
@@ -81,11 +81,11 @@ export class RoleTableComponentStore extends ComponentStore<State> {
             tapResponse(
               (roles) => this.updateRoles(roles),
               (e) => console.error(e),
-              () => this.updateRolesIsLoading(false)
-            )
+              () => this.updateRolesIsLoading(false),
+            ),
           );
-        })
-      )
+        }),
+      ),
   );
 
   public getUsers = this.effect((search$: Observable<string | undefined>) =>
@@ -104,10 +104,10 @@ export class RoleTableComponentStore extends ComponentStore<State> {
             tapResponse(
               (users) => this.updateUsers(users),
               (error) => console.error(error),
-              () => this.updateUsersIsLoading(false)
-            )
-          )
-      )
-    )
+              () => this.updateUsersIsLoading(false),
+            ),
+          ),
+      ),
+    ),
   );
 }

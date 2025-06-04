@@ -11,6 +11,13 @@ import { compareKle, matchKleChoice, matchMainGroup, matchSubGroup } from '../..
 import { Dictionary } from '../../models/primitives/dictionary.model';
 import { filterNullish } from '../../pipes/filter-nullish';
 import { invertBooleanValue } from '../../pipes/invert-boolean-value';
+import { DialogComponent } from '../dialogs/dialog/dialog.component';
+import { StandardVerticalContentGridComponent } from '../standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { DropdownComponent } from '../dropdowns/dropdown/dropdown.component';
+import { DividerComponent } from '../divider/divider.component';
+import { DialogActionsComponent } from '../dialogs/dialog-actions/dialog-actions.component';
+import { ButtonComponent } from '../buttons/button/button.component';
+import { AsyncPipe } from '@angular/common';
 
 interface KleChoiceViewModel extends APIKLEDetailsDTO {
   fullText: string;
@@ -21,6 +28,15 @@ interface KleChoiceViewModel extends APIKLEDetailsDTO {
   selector: 'app-select-kle-dialog',
   templateUrl: './select-kle-dialog.component.html',
   styleUrls: ['./select-kle-dialog.component.scss'],
+  imports: [
+    DialogComponent,
+    StandardVerticalContentGridComponent,
+    DropdownComponent,
+    DividerComponent,
+    DialogActionsComponent,
+    ButtonComponent,
+    AsyncPipe,
+  ],
 })
 export class SelectKleDialogComponent extends BaseComponent implements OnInit {
   public readonly isLoading = new BehaviorSubject<boolean>(false);
@@ -35,12 +51,12 @@ export class SelectKleDialogComponent extends BaseComponent implements OnInit {
 
   private readonly allKle$ = this.store.select(selectKLEs).pipe(
     filterNullish(),
-    map((kles) => kles.sort(compareKle))
+    map((kles) => kles.sort(compareKle)),
   );
 
   public mainGroups$ = this.allKle$.pipe(
     map((kles) => kles.filter(matchMainGroup)),
-    map((mainGroups) => mainGroups.map((kle) => this.mapChoice(kle)))
+    map((mainGroups) => mainGroups.map((kle) => this.mapChoice(kle))),
   );
 
   public subGroups$ = this.allKle$.pipe(
@@ -49,8 +65,8 @@ export class SelectKleDialogComponent extends BaseComponent implements OnInit {
     map(([subGroups, mainGroupFilter]) =>
       subGroups
         .filter((subGroup) => this.matchByKleNumberPrefix(mainGroupFilter, subGroup))
-        .map((kle) => this.mapChoice(kle))
-    )
+        .map((kle) => this.mapChoice(kle)),
+    ),
   );
 
   public availableKle$ = this.allKle$.pipe(
@@ -60,13 +76,13 @@ export class SelectKleDialogComponent extends BaseComponent implements OnInit {
       sortedKles
         .filter((kle) => this.matchByKleNumberPrefix(mainGroupFilter, kle))
         .filter((kle) => this.matchByKleNumberPrefix(subGroupFilter, kle))
-        .map((kle) => this.mapChoice(kle))
-    )
+        .map((kle) => this.mapChoice(kle)),
+    ),
   );
 
   constructor(
     private readonly dialog: MatDialogRef<SelectKleDialogComponent, string | undefined>,
-    private readonly store: Store
+    private readonly store: Store,
   ) {
     super();
     this.dialog.updateSize(`${KLE_DIALOG_DEFAULT_WIDTH}px`);
@@ -90,7 +106,7 @@ export class SelectKleDialogComponent extends BaseComponent implements OnInit {
 
   public confirm(): void {
     this.subscriptions.add(
-      this.selectedKle.pipe(filterNullish(), first()).subscribe((selectedKle) => this.dialog.close(selectedKle.uuid))
+      this.selectedKle.pipe(filterNullish(), first()).subscribe((selectedKle) => this.dialog.close(selectedKle.uuid)),
     );
   }
 
@@ -116,7 +132,7 @@ export class SelectKleDialogComponent extends BaseComponent implements OnInit {
       this.store
         .select(selectHasValidCache)
         .pipe(invertBooleanValue())
-        .subscribe((hasValidCache) => this.isLoading.next(hasValidCache))
+        .subscribe((hasValidCache) => this.isLoading.next(hasValidCache)),
     );
 
     //Allow confirm when a kle is chosen
@@ -130,7 +146,7 @@ export class SelectKleDialogComponent extends BaseComponent implements OnInit {
           if (selectedKle != undefined) {
             if (
               [selectedMainGroup, selectedSubGroup].some(
-                (filter) => this.matchByKleNumberPrefix(filter, selectedKle) === false
+                (filter) => this.matchByKleNumberPrefix(filter, selectedKle) === false,
               )
             ) {
               this.selectedKle.next(undefined);
@@ -142,8 +158,8 @@ export class SelectKleDialogComponent extends BaseComponent implements OnInit {
               this.selectedSubGroupFilter.next(undefined);
             }
           }
-        }
-      )
+        },
+      ),
     );
 
     //Load KLE options

@@ -1,5 +1,5 @@
-@import "theme";
+@use "theme";
 
 .text-area-margin-bottom {
-  margin-bottom: $padding-small;
+  margin-bottom: theme.$padding-small;
 }

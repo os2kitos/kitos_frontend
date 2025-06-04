@@ -1,6 +1,6 @@
 import { EntityState } from '@ngrx/entity';
-import { GlobalAdminUser } from 'src/app/shared/models/global-admin/global-admin-user.model';
+import { ShallowUser } from 'src/app/shared/models/userV2.model';
 
-export interface GlobalAdminState extends EntityState<GlobalAdminUser> {
+export interface GlobalAdminState extends EntityState<ShallowUser> {
   loading: boolean;
 }

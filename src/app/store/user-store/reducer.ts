@@ -1,5 +1,4 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
-import { User } from 'src/app/shared/models/user.model';
 import { UserActions } from './actions';
 import { UserState } from './state';
 
@@ -12,6 +11,8 @@ export const userInitialState: UserState = {
   organization: undefined,
   hasMultipleOrganizations: undefined,
   gridPermissions: undefined,
+  ssoErrorCode: undefined,
+  defaultUnit: undefined,
 };
 
 export const userFeature = createFeature({
@@ -26,16 +27,16 @@ export const userFeature = createFeature({
         user,
         isAuthenticating: false,
         hasTriedAuthenticating: true,
-      })
+      }),
     ),
     on(
       UserActions.loginError,
-      (state): UserState => ({ ...state, user: undefined, isAuthenticating: false, hasTriedAuthenticating: true })
+      (state): UserState => ({ ...state, user: undefined, isAuthenticating: false, hasTriedAuthenticating: true }),
     ),
 
     on(
       UserActions.authenticate,
-      (state): UserState => ({ ...state, isAuthenticating: true, hasTriedAuthenticating: false })
+      (state): UserState => ({ ...state, isAuthenticating: true, hasTriedAuthenticating: false }),
     ),
     on(
       UserActions.authenticateSuccess,
@@ -44,11 +45,11 @@ export const userFeature = createFeature({
         user,
         isAuthenticating: false,
         hasTriedAuthenticating: true,
-      })
+      }),
     ),
     on(
       UserActions.authenticateError,
-      (state): UserState => ({ ...state, user: undefined, isAuthenticating: false, hasTriedAuthenticating: true })
+      (state): UserState => ({ ...state, user: undefined, isAuthenticating: false, hasTriedAuthenticating: true }),
     ),
 
     on(UserActions.updateXSRFToken, (state, { xsrfToken }): UserState => ({ ...state, xsrfToken })),
@@ -56,17 +57,21 @@ export const userFeature = createFeature({
     on(UserActions.resetOnOrganizationUpdate, (state, { organization }): UserState => ({ ...state, organization })),
     on(
       UserActions.updateHasMultipleOrganizations,
-      (state, { hasMultipleOrganizations }): UserState => ({ ...state, hasMultipleOrganizations })
+      (state, { hasMultipleOrganizations }): UserState => ({ ...state, hasMultipleOrganizations }),
     ),
 
     on(
       UserActions.getUserGridPermissionsSuccess,
-      (state, { response }): UserState => ({ ...state, gridPermissions: response })
+      (state, { response }): UserState => ({ ...state, gridPermissions: response }),
     ),
     on(UserActions.patchOrganizationSuccess, (state, organization): UserState => ({ ...state, organization })),
 
-    on(UserActions.updateUserDefaultUnitState, (state, { unitUuid }): UserState => {
-      return { ...state, user: { ...state.user, defaultUnitUuid: unitUuid } as User };
-    })
+    on(UserActions.updateSSOErrorCode, (state, { ssoErrorCode }): UserState => ({ ...state, ssoErrorCode })),
+    on(UserActions.getUserDefaultUnitSuccess, (state, { unit }): UserState => ({ ...state, defaultUnit: unit })),
+    on(UserActions.getUserDefaultUnitError, (state): UserState => ({ ...state, defaultUnit: undefined })),
+    on(
+      UserActions.setUserDefaultUnitSuccess,
+      (state, { organizationUnit }): UserState => ({ ...state, defaultUnit: organizationUnit }),
+    ),
   ),
 });

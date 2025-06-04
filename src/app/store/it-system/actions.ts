@@ -17,7 +17,10 @@ export const ITSystemActions = createActionGroup({
     'Get IT System': (systemUuid: string) => ({ systemUuid }),
     'Get IT System Success ': (itSystem: APIItSystemResponseDTO) => ({ itSystem }),
     'Get IT System Error': emptyProps(),
-    'Get IT Systems': (gridState: GridState, dataChangedInGrid: boolean | undefined = undefined) => ({ gridState, dataChangedInGrid }),
+    'Get IT Systems': (gridState: GridState, dataChangedInGrid: boolean | undefined = undefined) => ({
+      gridState,
+      dataChangedInGrid,
+    }),
     'Get IT Systems Success ': (itSystems: ITSystem[], total: number) => ({ itSystems, total }),
     'Get IT Systems Error': emptyProps(),
 
@@ -35,7 +38,7 @@ export const ITSystemActions = createActionGroup({
 
     'Get IT System Collection Permissions': emptyProps(),
     'Get IT System Collection Permissions Success ': (
-      collectionPermissions?: APIResourceCollectionPermissionsResponseDTO
+      collectionPermissions?: APIResourceCollectionPermissionsResponseDTO,
     ) => ({
       collectionPermissions,
     }),
@@ -48,7 +51,7 @@ export const ITSystemActions = createActionGroup({
     'Patch IT System': (
       itSystem: APIUpdateItSystemRequestDTO,
       customSuccessText?: string,
-      customErrorText?: string
+      customErrorText?: string,
     ) => ({
       itSystem,
       customSuccessText,

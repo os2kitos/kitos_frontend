@@ -1,0 +1,30 @@
+<app-accordion [title]="title" [isExpanded]="true">
+  <app-native-table tableLayout="fixed">
+    <thead>
+      <tr>
+        <th width="5%">
+          <app-checkbox
+            [value]="isAllSelected()"
+            (valueChange)="allOptionsSelectedChanged($event)"
+            data-cy="select-all-bulk-action-checkbox"
+          ></app-checkbox>
+        </th>
+        <th>{{ primaryColumnTitle }}</th>
+        <th>{{ secondaryColumnTitle }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let option of options">
+        <td>
+          <app-checkbox
+            [value]="isOptionSelected(option)"
+            (valueChange)="optionSelectionChanged(option, $event)"
+            data-cy="bulk-action-checkbox"
+          ></app-checkbox>
+        </td>
+        <td>{{ option.name }}</td>
+        <td>{{ option.secondaryName }}</td>
+      </tr>
+    </tbody>
+  </app-native-table>
+</app-accordion>

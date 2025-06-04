@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { combineLatestWith, first, of } from 'rxjs';
 import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
 import { ORGANIZATION_SECTION_NAME } from 'src/app/shared/constants/persistent-state-constants';
-import { GridActionColumn } from 'src/app/shared/models/grid-action-column.model';
+import { createGridActionColumn } from 'src/app/shared/models/grid-action-column.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import {
@@ -22,11 +22,25 @@ import {
 import { CreateOrganizationDialogComponent } from '../organizations-dialogs/create-organization-dialog/create-organization-dialog.component';
 import { DeleteOrganizationDialogComponent } from '../organizations-dialogs/delete-organization-dialog/delete-organization-dialog.component';
 import { EditOrganizationDialogComponent } from '../organizations-dialogs/edit-organization-dialog/edit-organization-dialog.component';
+import { OverviewHeaderComponent } from '../../../../shared/components/overview-header/overview-header.component';
+import { GridOptionsButtonComponent } from '../../../../shared/components/grid-options-button/grid-options-button.component';
+import { ExportMenuButtonComponent } from '../../../../shared/components/buttons/export-menu-button/export-menu-button.component';
+import { ButtonComponent } from '../../../../shared/components/buttons/button/button.component';
+import { GridComponent } from '../../../../shared/components/grid/grid.component';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-global-admin-organizations-grid',
   templateUrl: './global-admin-organizations-grid.component.html',
   styleUrl: './global-admin-organizations-grid.component.scss',
+  imports: [
+    OverviewHeaderComponent,
+    GridOptionsButtonComponent,
+    ExportMenuButtonComponent,
+    ButtonComponent,
+    GridComponent,
+    AsyncPipe,
+  ],
 })
 export class GlobalAdminOrganizationsGridComponent extends BaseOverviewComponent implements OnInit {
   private readonly sectionName: string = ORGANIZATION_SECTION_NAME;
@@ -62,22 +76,16 @@ export class GlobalAdminOrganizationsGridComponent extends BaseOverviewComponent
       section: this.sectionName,
       hidden: false,
     },
-    {
-      field: 'Actions',
-      title: ' ',
-      section: this.sectionName,
-      hidden: false,
-      style: 'action-buttons',
-      isSticky: true,
-      noFilter: true,
-      extraData: [{ type: 'edit' }, { type: 'delete' }] as GridActionColumn[],
-      width: 100,
-    },
+    createGridActionColumn(['edit', 'delete']),
   ];
 
   public readonly gridColumns$ = of(this.gridColumns);
 
-  constructor(store: Store, private dialog: MatDialog, private actions$: Actions) {
+  constructor(
+    store: Store,
+    private dialog: MatDialog,
+    private actions$: Actions,
+  ) {
     super(store, 'global-admin-organization');
   }
   ngOnInit() {
@@ -89,13 +97,13 @@ export class GlobalAdminOrganizationsGridComponent extends BaseOverviewComponent
           ofType(
             OrganizationActions.createOrganizationSuccess,
             OrganizationActions.patchOrganizationSuccess,
-            OrganizationActions.deleteOrganizationSuccess
+            OrganizationActions.deleteOrganizationSuccess,
           ),
-          combineLatestWith(this.gridState$)
+          combineLatestWith(this.gridState$),
         )
         .subscribe(([_, gridState]) => {
           this.stateChange(gridState);
-        })
+        }),
     );
   }
 

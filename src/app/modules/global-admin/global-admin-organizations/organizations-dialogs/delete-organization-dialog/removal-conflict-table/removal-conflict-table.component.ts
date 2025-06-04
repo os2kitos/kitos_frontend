@@ -1,10 +1,14 @@
 import { Component, Input } from '@angular/core';
 import { Observable } from 'rxjs';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { AccordionComponent } from '../../../../../../shared/components/accordion/accordion.component';
+import { InnerConflictTableComponent } from './inner-conflict-table/inner-conflict-table.component';
 
 @Component({
   selector: 'app-removal-conflict-table',
   templateUrl: './removal-conflict-table.component.html',
   styleUrl: './removal-conflict-table.component.scss',
+  imports: [NgIf, AccordionComponent, InnerConflictTableComponent, AsyncPipe],
 })
 export class RemovalConflictTableComponent {
   @Input() public removalConflicts$!: Observable<RemovalConflict[]>;

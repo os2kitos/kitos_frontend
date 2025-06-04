@@ -1,35 +1,29 @@
-/// <reference types="Cypress" />
+import { TestRunner } from 'cypress/support/test-runner';
 
-describe('it-system-usage', () => {
-  beforeEach(() => {
-    cy.requireIntercept();
-    cy.setupItSystemUsageIntercepts();
-    cy.setup(true, 'it-systems/it-system-usages');
-  });
+function setupTest() {
+  cy.requireIntercept();
+  cy.setupItSystemUsageIntercepts();
+  cy.setup(true, 'it-systems/it-system-usages');
+}
 
-  it('shows simple hierarchy', () => {
-    cy.intercept('/api/v2/it-systems/*/hierarchy', { fixture: './it-system-usage/hierarchy.json' });
+describe('it-system-usage hierarchy', () => {
+  it('Tests', () => {
+    const testRunner = new TestRunner(setupTest);
 
-    cy.contains('System 3').click();
-    cy.navigateToDetailsSubPage('Hierarki');
+    testRunner.runTestWithSetup('shows complex hierarchy', () => {
+      cy.intercept('/api/v2/internal/organization/*/it-systems/*/hierarchy', {
+        fixture: './it-system-usage/hierarchy-complex.json',
+      });
 
-    cy.get('app-it-system-hierarchy-table').within(() => {
-      cy.contains('System 1');
-      cy.contains('System 2');
-    });
-  });
+      cy.contains('System 3').click();
+      cy.navigateToDetailsSubPage('Hierarki');
 
-  it('shows complex hierarchy', () => {
-    cy.intercept('/api/v2/it-systems/*/hierarchy', { fixture: './it-system-usage/hierarchy-complex.json' });
-
-    cy.contains('System 3').click();
-    cy.navigateToDetailsSubPage('Hierarki');
-
-    cy.get('app-it-system-hierarchy-table').within(() => {
-      cy.contains('System 1');
-      cy.contains('System 2');
-      cy.contains('System 4');
-      cy.contains('System 6');
+      cy.get('app-it-system-hierarchy-table').within(() => {
+        cy.contains('System 1');
+        cy.contains('System 2');
+        cy.contains('System 4');
+        cy.contains('System 6');
+      });
     });
   });
 });

@@ -4,11 +4,16 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { BaseComponent } from '../../../base/base.component';
 import { CONFIRM_TEXT, DECLINE_TEXT, NO_TEXT, YES_TEXT } from '../../../constants/constants';
 import { ConfirmationStyle } from '../../../models/confirmation/confirmation-style.model';
+import { DialogComponent } from '../dialog/dialog.component';
+import { ParagraphComponent } from '../../paragraph/paragraph.component';
+import { DialogActionsComponent } from '../dialog-actions/dialog-actions.component';
+import { ButtonComponent } from '../../buttons/button/button.component';
 
 @Component({
   selector: 'app-confirmation-dialog',
   templateUrl: './confirmation-dialog.component.html',
   styleUrls: ['./confirmation-dialog.component.scss'],
+  imports: [DialogComponent, ParagraphComponent, DialogActionsComponent, ButtonComponent],
 })
 export class ConfirmationDialogComponent extends BaseComponent implements OnInit {
   @Input() public title = $localize`Bekræft handling`;

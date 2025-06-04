@@ -1,6 +1,6 @@
-@import "theme";
-@import 'mixins';
+@use "theme";
+@use "mixins";
 
 :host {
-  @include overview-flex-column-layout
+  @include mixins.overview-flex-column-layout;
 }

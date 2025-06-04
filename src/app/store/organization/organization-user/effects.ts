@@ -4,7 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
-import { catchError, combineLatestWith, map, of, switchMap } from 'rxjs';
+import { catchError, combineLatestWith, filter, map, of, switchMap } from 'rxjs';
 import { APIOrganizationUserResponseDTO, APIV2UsersInternalINTERNALService } from 'src/app/api/v2';
 import { ORGANIZATION_USER_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-constants';
 import { OData } from 'src/app/shared/models/odata.model';
@@ -12,7 +12,7 @@ import { adaptOrganizationUser } from 'src/app/shared/models/organization/organi
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 import { GridDataCacheService } from 'src/app/shared/services/grid-data-cache.service';
-import { selectOrganizationUuid } from '../../user-store/selectors';
+import { selectOrganizationUuid, selectUserUuid } from '../../user-store/selectors';
 import { OrganizationUserActions } from './actions';
 import { selectPreviousGridState } from './selectors';
 
@@ -31,10 +31,11 @@ export class OrganizationUserEffects {
     return this.actions$.pipe(
       ofType(OrganizationUserActions.getOrganizationUsers),
       concatLatestFrom(() => [this.store.select(selectOrganizationUuid), this.store.select(selectPreviousGridState)]),
-      switchMap(([{ gridState }, organizationUuid, previousGridState]) => {
-        this.gridDataCacheService.tryResetOnGridStateChange(gridState, previousGridState);
+      switchMap(([{ gridState, forceUpdate }, organizationUuid, previousGridState]) => {
+        this.gridDataCacheService.tryResetOnGridStateChange(gridState, previousGridState, forceUpdate);
 
         const cachedRange = this.gridDataCacheService.get(gridState);
+
         if (cachedRange.data !== undefined) {
           return of(OrganizationUserActions.getOrganizationUsersSuccess(cachedRange.data, cachedRange.total));
         }
@@ -69,7 +70,7 @@ export class OrganizationUserEffects {
   updateGridState$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(OrganizationUserActions.updateGridState),
-      map(({ gridState }) => OrganizationUserActions.getOrganizationUsers(gridState))
+      map(({ gridState, forceUpdate }) => OrganizationUserActions.getOrganizationUsers(gridState, forceUpdate))
     );
   });
 
@@ -226,6 +227,15 @@ export class OrganizationUserEffects {
             catchError(() => of(OrganizationUserActions.verifyUserEmailError()))
           )
       )
+    );
+  });
+
+  updatePermissionsOnUserEdit = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(OrganizationUserActions.updateUserSuccess),
+      concatLatestFrom(() => this.store.select(selectUserUuid).pipe(filterNullish())),
+      filter(([{ user: editedUser }, currentUserUuid]) => editedUser.uuid === currentUserUuid),
+      map(() => OrganizationUserActions.getOrganizationUserPermissions())
     );
   });
 }

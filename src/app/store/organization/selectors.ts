@@ -17,12 +17,12 @@ export const selectOrganizationMasterDataRoles = createSelector(selectOrganizati
 
 export const selectOrganizationHasModifyPermission = createSelector(
   selectOrganizationState,
-  (state) => state.permissions?.modify
+  (state) => state.permissions?.modify,
 );
 
 export const selectOrganizationHasModifyCvrPermission = createSelector(
   selectOrganizationState,
-  (state) => state.permissions?.modifyCvr
+  (state) => state.permissions?.modifyCvr,
 );
 
 const masterDataRolesEmptyState = {
@@ -36,7 +36,7 @@ export const selectAll = createSelector(selectOrganizationState, organizationAda
 export const selectTotal = createSelector(selectOrganizationState, (state) => state.total);
 export const selectOrganizationGridLoading = createSelector(
   selectOrganizationState,
-  (state) => state.isLoadingUsersQuery
+  (state) => state.isLoadingUsersQuery,
 );
 export const selectOrganizationGridState = createSelector(selectOrganizationState, (state) => state.gridState);
 export const selectPreviousGridState = createSelector(selectOrganizationState, (state) => state.previousGridState);
@@ -52,8 +52,8 @@ export const selectHasValidUIRootConfigCache: () => MemoizedSelector<any, boolea
   createSelector(
     selectOrganizationState,
     () => new Date(),
-    (state, now) => hasValidCache(state.uiRootConfigCacheTime, now)
-  )
+    (state, now) => hasValidCache(state.uiRootConfigCacheTime, now),
+  ),
 );
 
 export const selectModuleVisibility = (configKey: UIModuleConfigKey) => {
@@ -71,14 +71,14 @@ export const selectModuleVisibility = (configKey: UIModuleConfigKey) => {
 
 export const selectShowItSystemModule = createSelector(
   selectOrganizationState,
-  (state) => state.uiRootConfig?.showItSystemModule ?? false
+  (state) => state.uiRootConfig?.showItSystemModule ?? false,
 );
 export const selectShowItContractModule = createSelector(
   selectOrganizationState,
-  (state) => state.uiRootConfig?.showItContractModule ?? false
+  (state) => state.uiRootConfig?.showItContractModule ?? false,
 );
 
 export const selectShowDataProcessingRegistrations = createSelector(
   selectOrganizationState,
-  (state) => state.uiRootConfig?.showDataProcessing ?? false
+  (state) => state.uiRootConfig?.showDataProcessing ?? false,
 );

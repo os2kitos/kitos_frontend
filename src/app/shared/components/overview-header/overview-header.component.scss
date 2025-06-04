@@ -1,12 +1,12 @@
-@import "theme";
+@use "theme";
 :host ::ng-deep {
   display: flex;
-  gap: $padding-medium;
-  padding-left: $padding-small;
-  padding-bottom: $padding-medium;
+  gap: theme.$padding-medium;
+  padding-left: theme.$padding-small;
+  padding-bottom: theme.$padding-medium;
 
   h3 {
-    padding-left: $padding-medium;
+    padding-left: theme.$padding-medium;
     flex: 1;
   }
 }

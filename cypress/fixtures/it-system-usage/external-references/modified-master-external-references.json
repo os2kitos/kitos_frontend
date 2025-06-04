@@ -1,0 +1,23 @@
+[
+  {
+    "uuid": "199172b2-7237-4a0f-8eae-c4107808bb80",
+    "title": "Invalid url",
+    "documentId": "document1",
+    "url": "www.google.com",
+    "masterReference": false
+  },
+  {
+    "uuid": "bb7bfc61-de3d-4337-a84e-0d99e46d0b4e",
+    "title": "Valid url",
+    "documentId": "document2",
+    "url": "https://www.google.com",
+    "masterReference": false
+  },
+  {
+    "uuid": "ec77cd49-e8ed-47e2-8d3b-188e095ea6fc",
+    "title": "Reference1",
+    "documentId": "document3Document id",
+    "url": "url",
+    "masterReference": true
+  }
+]

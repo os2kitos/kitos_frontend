@@ -20,7 +20,7 @@ export class OrganizationsDialogComponentStore extends ComponentStore<State> {
   }
 
   private readonly setCountryCodes = this.updater(
-    (state, countryCodes: ShallowOptionType[]): State => ({ ...state, countryCodes })
+    (state, countryCodes: ShallowOptionType[]): State => ({ ...state, countryCodes }),
   );
 
   private readonly setLoading = this.updater((state, loading: boolean): State => ({ ...state, loading }));
@@ -36,10 +36,10 @@ export class OrganizationsDialogComponentStore extends ComponentStore<State> {
               this.setCountryCodes(countryCodeDtos);
             },
             (e) => console.error(e),
-            () => this.setLoading(false)
-          )
+            () => this.setLoading(false),
+          ),
         );
-      })
-    )
+      }),
+    ),
   );
 }

@@ -1,0 +1,60 @@
+@use "theme";
+@use "mixins";
+
+:host {
+  display: flex;
+  flex: 1;
+}
+mat-form-field {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+app-x-icon {
+  width: 30px;
+  height: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+  font-size: 14px !important;
+  font-weight: bold !important;
+}
+
+:host ::ng-deep mat-form-field {
+  @include mixins.mat-form-sizes;
+  @include mixins.mat-textbox-input-adjustment;
+  @include mixins.mat-input-adjustment;
+}
+
+.link-input-style {
+  color: theme.$color-primary-base !important;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.link-input-style:hover {
+  text-decoration: underline;
+}
+
+.incorrect-link-color {
+  color: theme.$color-negative;
+}
+
+span {
+  color: theme.$color-neutral-80;
+}
+
+span:hover {
+  color: theme.$color-neutral-dark;
+  cursor: pointer;
+}
+
+.suffix-icons {
+  display: flex;
+  align-items: center;
+  gap: theme.$padding-medium;
+  font-weight: 300;
+}

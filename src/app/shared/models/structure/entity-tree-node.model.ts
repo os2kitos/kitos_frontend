@@ -5,6 +5,7 @@ export interface EntityTreeNode<T> {
   isRoot?: boolean;
   name: string;
   status?: boolean;
+  extraStatus?: boolean;
   children: Array<EntityTreeNode<T>>;
   sourceData?: T;
   color?: EntityTreeNodeColors;

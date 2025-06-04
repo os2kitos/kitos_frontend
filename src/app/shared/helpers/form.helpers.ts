@@ -1,5 +1,5 @@
 import { AbstractControl, FormArray, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
-import * as moment from 'moment';
+import moment from 'moment';
 import { MAX_DATE } from '../constants/constants';
 
 interface OnInvalid {
@@ -98,7 +98,7 @@ function compareDatesBy(controlDate: Date | undefined, date: Date, operator: Dat
           return false;
       }
     },
-    { result: false }
+    { result: false },
   );
 }
 
@@ -106,7 +106,7 @@ function compareDates(
   startDate: Date | undefined,
   endDate: Date | undefined,
   comparator: (a: Date, b: Date) => boolean,
-  onInvalid: OnInvalid
+  onInvalid: OnInvalid,
 ) {
   if (!startDate || !endDate) return null;
   return comparator(startDate, endDate) ? null : onInvalid;

@@ -27,13 +27,14 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
   public readonly notifications$ = this.select((state) => state.notifications).pipe(filterNullish());
   public readonly notificationsLoading$ = this.select((state) => state.isLoading).pipe(filterNullish());
   public readonly currentNotificationSent$ = this.select((state) => state.currentNotificationSent).pipe(
-    filterNullish()
+    filterNullish(),
   );
   public readonly isSaving$ = this.select((state) => state.isSaving).pipe(filterNullish());
 
   constructor(
     private readonly store: Store,
-    @Inject(APIV2NotificationINTERNALService) private readonly apiNotificationsService: APIV2NotificationINTERNALService
+    @Inject(APIV2NotificationINTERNALService)
+    private readonly apiNotificationsService: APIV2NotificationINTERNALService,
   ) {
     super({ notifications: [], isLoading: false, currentNotificationSent: undefined, isSaving: false });
   }
@@ -46,7 +47,7 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
         ownerResourceType: NotificationEntityType;
         ownerResourceUuid: string;
         notificationUuid: string;
-      }>
+      }>,
     ) =>
       params$.pipe(
         mergeMap((params) => {
@@ -60,11 +61,11 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
               tapResponse(
                 (currentNotificationSent) => this.updateCurrentNotificationSent(currentNotificationSent),
                 (e) => console.error(e),
-                () => this.updateIsLoading(false)
-              )
+                () => this.updateIsLoading(false),
+              ),
             );
-        })
-      )
+        }),
+      ),
   );
 
   public postImmediateNotification = this.effect(
@@ -74,7 +75,7 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
         ownerResourceUuid: string;
         requestBody: APIImmediateNotificationWriteRequestDTO;
         onComplete: () => void;
-      }>
+      }>,
     ) =>
       params$.pipe(
         tap(() => this.setIsSaving(true)),
@@ -87,8 +88,8 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
             })
             .pipe(tap(() => this.setIsSaving(false)))
             .pipe(tap(() => params.onComplete()));
-        })
-      )
+        }),
+      ),
   );
 
   public postScheduledNotification = this.effect(
@@ -98,7 +99,7 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
         ownerResourceUuid: string;
         requestBody: APIScheduledNotificationWriteRequestDTO;
         onComplete: () => void;
-      }>
+      }>,
     ) =>
       params$.pipe(
         tap(() => this.setIsSaving(true)),
@@ -111,8 +112,8 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
             })
             .pipe(tap(() => this.setIsSaving(false)))
             .pipe(tap(() => params.onComplete()));
-        })
-      )
+        }),
+      ),
   );
 
   public putScheduledNotification = this.effect(
@@ -123,7 +124,7 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
         notificationUuid: string;
         requestBody: APIScheduledNotificationWriteRequestDTO;
         onComplete: () => void;
-      }>
+      }>,
     ) =>
       params$.pipe(
         tap(() => this.setIsSaving(true)),
@@ -137,8 +138,8 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
             })
             .pipe(tap(() => this.setIsSaving(false)))
             .pipe(tap(() => params.onComplete()));
-        })
-      )
+        }),
+      ),
   );
 
   public deleteNotification = this.effect(
@@ -148,7 +149,7 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
         notificationUuid: string;
         ownerResourceUuid: string;
         onComplete: () => void;
-      }>
+      }>,
     ) =>
       params$.pipe(
         switchMap((params) => {
@@ -159,8 +160,8 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
               ownerResourceUuid: params.ownerResourceUuid,
             })
             .pipe(tap(() => params.onComplete()));
-        })
-      )
+        }),
+      ),
   );
 
   public deactivateNotification = this.effect(
@@ -170,7 +171,7 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
         ownerResourceUuid: string;
         notificationUuid: string;
         onComplete: () => void;
-      }>
+      }>,
     ) =>
       params$.pipe(
         switchMap((params) => {
@@ -181,8 +182,8 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
               notificationUuid: params.notificationUuid,
             })
             .pipe(tap(() => params.onComplete()));
-        })
-      )
+        }),
+      ),
   );
 
   public getNotificationsByEntityUuid = this.effect(
@@ -190,7 +191,7 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
       params$: Observable<{
         ownerResourceType: NotificationEntityType;
         entityUuid: string;
-      }>
+      }>,
     ) =>
       params$.pipe(
         combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
@@ -206,31 +207,31 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
               tapResponse(
                 (notifications) => this.updateNotifications(notifications),
                 (e) => console.error(e),
-                () => this.updateIsLoading(false)
-              )
+                () => this.updateIsLoading(false),
+              ),
             );
-        })
-      )
+        }),
+      ),
   );
 
   private updateCurrentNotificationSent = this.updater(
     (state, currentNotificationSent: Array<APISentNotificationResponseDTO>): State => ({
       ...state,
       currentNotificationSent,
-    })
+    }),
   );
 
   private updateNotifications = this.updater(
     (state, notifications: Array<APINotificationResponseDTO>): State => ({
       ...state,
       notifications,
-    })
+    }),
   );
 
   private updateIsLoading = this.updater(
     (state, loading: boolean): State => ({
       ...state,
       isLoading: loading,
-    })
+    }),
   );
 }

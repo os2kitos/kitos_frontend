@@ -19,14 +19,14 @@ export class ExternalReferencesApiService {
     private readonly apiItSystemUsageService: APIV2ItSystemUsageService,
     private readonly apiItSystemService: APIV2ItSystemService,
     private readonly apiItContractService: APIV2ItContractService,
-    private readonly apiDataProcessingRegistrationService: APIV2DataProcessingRegistrationService
+    private readonly apiDataProcessingRegistrationService: APIV2DataProcessingRegistrationService,
   ) {}
 
   public addExternalReference<T>(
     newExternalReference: ExternalReferenceProperties,
     externalReferences: APIExternalReferenceDataResponseDTO[] | undefined,
     entityUuid: string | undefined,
-    entityType: RegistrationEntityTypes
+    entityType: RegistrationEntityTypes,
   ): Observable<T> {
     if (newExternalReference && externalReferences && entityUuid) {
       const nextState = this.prepareAdd(newExternalReference, externalReferences);
@@ -52,7 +52,7 @@ export class ExternalReferencesApiService {
             {
               uuid: entityUuid,
               request: { externalReferences: nextState },
-            }
+            },
           );
         default:
           console.error(`Missing support for entity type:${entityType}`);
@@ -66,7 +66,7 @@ export class ExternalReferencesApiService {
     editData: { referenceUuid: string; externalReference: ExternalReferenceProperties },
     externalReferences: APIExternalReferenceDataResponseDTO[] | undefined,
     entityUuid: string | undefined,
-    entityType: RegistrationEntityTypes
+    entityType: RegistrationEntityTypes,
   ): Observable<T> {
     if (editData && externalReferences && entityUuid) {
       const nextState = this.prepareEdit(editData, externalReferences);
@@ -89,7 +89,7 @@ export class ExternalReferencesApiService {
           });
         case 'data-processing-registration':
           return this.apiDataProcessingRegistrationService.patchSingleDataProcessingRegistrationV2PatchDataProcessingRegistration(
-            { uuid: entityUuid, request: { externalReferences: nextState } }
+            { uuid: entityUuid, request: { externalReferences: nextState } },
           );
         default:
           console.error(`Missing support for entity type:${entityType}`);
@@ -103,7 +103,7 @@ export class ExternalReferencesApiService {
     referenceUuid: string,
     externalReferences: APIExternalReferenceDataResponseDTO[] | undefined,
     entityUuid: string | undefined,
-    entityType: RegistrationEntityTypes
+    entityType: RegistrationEntityTypes,
   ): Observable<T> {
     if (referenceUuid && externalReferences && entityUuid) {
       const nextState = this.prepareDelete(referenceUuid, externalReferences);
@@ -126,7 +126,7 @@ export class ExternalReferencesApiService {
           });
         case 'data-processing-registration':
           return this.apiDataProcessingRegistrationService.patchSingleDataProcessingRegistrationV2PatchDataProcessingRegistration(
-            { uuid: entityUuid, request: { externalReferences: nextState } }
+            { uuid: entityUuid, request: { externalReferences: nextState } },
           );
         default:
           console.error(`Missing support for entity type:${entityType}`);
@@ -138,7 +138,7 @@ export class ExternalReferencesApiService {
 
   private prepareAdd(
     newExternalReference: ExternalReferenceProperties,
-    externalReferences: APIExternalReferenceDataResponseDTO[]
+    externalReferences: APIExternalReferenceDataResponseDTO[],
   ): ExternalReferenceProperties[] {
     const externalReferenceToAdd = newExternalReference;
     const nextState = externalReferences.map((externalReference: APIUpdateExternalReferenceDataWriteRequestDTO) => ({
@@ -157,7 +157,7 @@ export class ExternalReferencesApiService {
 
   private prepareEdit(
     editData: { referenceUuid: string; externalReference: ExternalReferenceProperties },
-    externalReferences: APIExternalReferenceDataResponseDTO[]
+    externalReferences: APIExternalReferenceDataResponseDTO[],
   ): ExternalReferenceProperties[] {
     const externalReferenceToEdit = editData.externalReference;
 
@@ -180,7 +180,7 @@ export class ExternalReferencesApiService {
 
   private prepareDelete(
     referenceUuid: string,
-    externalReferences: APIExternalReferenceDataResponseDTO[]
+    externalReferences: APIExternalReferenceDataResponseDTO[],
   ): ExternalReferenceProperties[] {
     const currentState = externalReferences.filter((externalReference) => externalReference.uuid !== referenceUuid);
     return currentState.filter((reference) => reference.uuid !== referenceUuid);

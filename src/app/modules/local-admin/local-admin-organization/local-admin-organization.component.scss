@@ -1,10 +1,10 @@
-@import "theme";
-@import "mixins.scss";
+@use "theme";
+@use "mixins.scss";
 
 :host {
-  @include page-flex-layout-max-width-hidden-overflow;
+  @include mixins.page-flex-layout-max-width-hidden-overflow;
 }
 
 app-segment {
-  margin-bottom: $padding-medium-large;
+  margin-bottom: theme.$padding-medium-large;
 }

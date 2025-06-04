@@ -4,20 +4,26 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { CookieService } from 'ngx-cookie';
-import { catchError, combineLatestWith, filter, map, mergeMap, of, switchMap, tap, withLatestFrom } from 'rxjs';
+import { catchError, combineLatestWith, map, mergeMap, of, switchMap, tap, withLatestFrom } from 'rxjs';
 import { APIUserDTOApiReturnDTO, APIV1AuthorizeINTERNALService } from 'src/app/api/v1';
-import { APIOrganizationGridPermissionsResponseDTO, APIUserResponseDTO, APIV2PasswordResetInternalINTERNALService } from 'src/app/api/v2';
+import {
+  APIOrganizationGridPermissionsResponseDTO,
+  APIUserResponseDTO,
+  APIV2PasswordResetInternalINTERNALService,
+  APIV2UsersInternalINTERNALService,
+} from 'src/app/api/v2';
 import { APIV2OrganizationGridInternalINTERNALService } from 'src/app/api/v2/api/v2OrganizationGridInternalINTERNAL.service';
 import { APIV2OrganizationsInternalINTERNALService } from 'src/app/api/v2/api/v2OrganizationsInternalINTERNAL.service';
 import { AppPath } from 'src/app/shared/enums/app-path';
+import { StartPreferenceChoice } from 'src/app/shared/models/organization/organization-user/start-preference.model';
+import { UIRootConfig } from 'src/app/shared/models/ui-config/ui-root-config.model';
 import { adaptUser } from 'src/app/shared/models/user.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { resetOrganizationStateAction, resetStateAction } from '../meta/actions';
-import { UserActions } from './actions';
-import { selectOrganizationUuid, selectUser } from './selectors';
+import { selectPagedOrganizationUnits } from '../organization/organization-unit/selectors';
 import { selectUIRootConfig } from '../organization/selectors';
-import { StartPreferenceChoice } from 'src/app/shared/models/organization/organization-user/start-preference.model';
-import { UIRootConfig } from 'src/app/shared/models/ui-config/ui-root-config.model';
+import { UserActions } from './actions';
+import { selectOrganizationUuid, selectUser, selectUserUuid } from './selectors';
 
 @Injectable()
 export class UserEffects {
@@ -32,7 +38,10 @@ export class UserEffects {
     private organizationGridService: APIV2OrganizationGridInternalINTERNALService,
     @Inject(APIV2OrganizationsInternalINTERNALService)
     private organizationInternalService: APIV2OrganizationsInternalINTERNALService,
-    private resetPasswordService: APIV2PasswordResetInternalINTERNALService
+    @Inject(APIV2PasswordResetInternalINTERNALService)
+    private resetPasswordService: APIV2PasswordResetInternalINTERNALService,
+    @Inject(APIV2UsersInternalINTERNALService)
+    private userInternalService: APIV2UsersInternalINTERNALService,
   ) {}
 
   login$ = createEffect(() => {
@@ -52,9 +61,9 @@ export class UserEffects {
           .pipe(
             tap(() => this.cookieService.removeAll()),
             map((userDTO: APIUserDTOApiReturnDTO) => UserActions.loginSuccess(adaptUser(userDTO.response))),
-            catchError(() => of(UserActions.loginError()))
-          )
-      )
+            catchError(() => of(UserActions.loginError())),
+          ),
+      ),
     );
   });
 
@@ -65,9 +74,9 @@ export class UserEffects {
         this.authorizeService.postSingleAuthorizePostLogout().pipe(
           tap(() => this.cookieService.removeAll()),
           map(() => UserActions.logoutSuccess()),
-          catchError(() => of(UserActions.logoutError()))
-        )
-      )
+          catchError(() => of(UserActions.logoutError())),
+        ),
+      ),
     );
   });
 
@@ -79,9 +88,9 @@ export class UserEffects {
       mergeMap(({ returnUrl }) =>
         this.authorizeService.getSingleAuthorizeGetLogin().pipe(
           map((userDTO) => UserActions.authenticateSuccess(adaptUser(userDTO.response))),
-          catchError(() => of(UserActions.authenticateError(returnUrl)))
-        )
-      )
+          catchError(() => of(UserActions.authenticateError(returnUrl))),
+        ),
+      ),
     );
   });
 
@@ -89,40 +98,156 @@ export class UserEffects {
     return this.actions$.pipe(
       ofType(UserActions.logoutSuccess),
       tap(() => this.router.navigate([AppPath.root])),
-      map(() => resetStateAction())
+      map(() => resetStateAction()),
     );
   });
 
   resetOnOrganizationUpdate$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(UserActions.resetOnOrganizationUpdate),
-      map(() => resetOrganizationStateAction())
+      map(() => resetOrganizationStateAction()),
     );
   });
 
-  useUserDefaultStartPageOnLogin$ = createEffect(() => {
+  useUserDefaultStartPageOnLogin$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(UserActions.resetOnOrganizationUpdate),
+        switchMap(() =>
+          this.store.select(selectUIRootConfig).pipe(filterNullish(), withLatestFrom(this.store.select(selectUser))),
+        ),
+        tap(([uiRootConfig, user]) => {
+          const userDefaultStartPage = user?.defaultStartPage;
+          if (this.shouldGoToUserDefaultStartPage(userDefaultStartPage, uiRootConfig)) {
+            this.navigateToUserDefaultStartPage(userDefaultStartPage!);
+          }
+        }),
+      );
+    },
+    { dispatch: false },
+  );
+
+  goToRootOnAuthenticateFailed$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(UserActions.authenticateError),
+        tap(({ returnUrl }) => {
+          const extras = returnUrl ? { queryParams: { returnUrl } } : {};
+          return this.router.navigate([AppPath.root], extras);
+        }),
+      );
+    },
+    { dispatch: false },
+  );
+
+  getUserGridPermissions$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(UserActions.resetOnOrganizationUpdate),
-      switchMap(() =>
-        this.store.select(selectUIRootConfig).pipe(
-          filterNullish(),
-          withLatestFrom(this.store.select(selectUser))
-        )
+      ofType(UserActions.getUserGridPermissions),
+      concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
+      switchMap(([_, organizationUuid]) =>
+        this.organizationGridService
+          .getSingleOrganizationGridInternalV2GetOrganizationGridPermissions({ organizationUuid })
+          .pipe(
+            map((response: APIOrganizationGridPermissionsResponseDTO) =>
+              UserActions.getUserGridPermissionsSuccess(response),
+            ),
+            catchError(() => of(UserActions.getUserGridPermissionsError())),
+          ),
       ),
-      tap(([uiRootConfig, user]) => {
-        const userDefaultStartPage = user?.defaultStartPage;
-        if (this.shouldGoToUserDefaultStartPage(userDefaultStartPage, uiRootConfig)) {
-          this.navigateToUserDefaultStartPage(userDefaultStartPage!);
-        }
-      })
     );
-  }, { dispatch: false });
+  });
 
+  patchOrganization$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(UserActions.patchOrganization),
+      combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+      switchMap(([{ request }, organizationUuid]) =>
+        this.organizationInternalService
+          .patchSingleOrganizationsInternalV2PatchOrganization({ organizationUuid, requestDto: request })
+          .pipe(
+            map((organizationResponseDto) => UserActions.patchOrganizationSuccess(organizationResponseDto)),
+            catchError(() => of(UserActions.patchOrganizationError())),
+          ),
+      ),
+    );
+  });
 
+  sendResetPasswordRequest$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(UserActions.resetPasswordRequest),
+      switchMap(({ email }) =>
+        this.resetPasswordService.postSinglePasswordResetInternalV2RequestPasswordReset({ request: { email } }).pipe(
+          map(() => UserActions.resetPasswordRequestSuccess(email)),
+          catchError(() => of(UserActions.resetPasswordRequestError())),
+        ),
+      ),
+    );
+  });
+
+  resetPassword$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(UserActions.resetPassword),
+      switchMap(({ requestId, password }) =>
+        this.resetPasswordService
+          .postSinglePasswordResetInternalV2PostPasswordReset({
+            requestId,
+            request: { password },
+          })
+          .pipe(
+            map(() => UserActions.resetPasswordSuccess()),
+            catchError(() => of(UserActions.resetPasswordError())),
+          ),
+      ),
+    );
+  });
+
+  getDefaultUnit$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(UserActions.getUserDefaultUnit),
+      combineLatestWith(this.store.select(selectUserUuid).pipe(filterNullish())),
+      switchMap(([{ organizationUuid }, userUuid]) =>
+        this.userInternalService.getSingleUsersInternalV2GetUserDefaultUnit({ organizationUuid, userUuid }).pipe(
+          map((unit) => {
+            return UserActions.getUserDefaultUnitSuccess(unit);
+          }),
+          catchError(() => of(UserActions.getUserDefaultUnitError())),
+        ),
+      ),
+    );
+  });
+
+  setDefaultUnit$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(UserActions.setUserDefaultUnit),
+      concatLatestFrom(() => [
+        this.store.select(selectOrganizationUuid).pipe(filterNullish()),
+        this.store.select(selectUserUuid).pipe(filterNullish()),
+        this.store.select(selectPagedOrganizationUnits).pipe(filterNullish()),
+      ]),
+      switchMap(([{ organizationUnitUuid }, organizationUuid, userUuid, organizationUnits]) =>
+        this.userInternalService
+          .patchSingleUsersInternalV2PatchDefaultOrgUnit({
+            organizationUuid,
+            userUuid,
+            organizationUnitUuid: organizationUnitUuid,
+          })
+          .pipe(
+            map(() => {
+              const defaultUnit = organizationUnits.find((unit) => unit.uuid === organizationUnitUuid);
+              if (!defaultUnit) {
+                return UserActions.setUserDefaultUnitError();
+              }
+              return UserActions.setUserDefaultUnitSuccess(defaultUnit);
+            }),
+            catchError(() => of(UserActions.setUserDefaultUnitError())),
+          ),
+      ),
+    );
+  });
 
   private shouldGoToUserDefaultStartPage(
     userDefaultStartPage: StartPreferenceChoice | undefined,
-    uiRootConfig: UIRootConfig
+    uiRootConfig: UIRootConfig,
   ): boolean {
     return (
       this.isOnStartPage() &&
@@ -137,7 +262,7 @@ export class UserEffects {
 
   private userDefaultStartPageDisabledInOrganization(
     userDefaultStartPage: StartPreferenceChoice,
-    uiRootConfig: UIRootConfig
+    uiRootConfig: UIRootConfig,
   ): boolean {
     const startPageValue = userDefaultStartPage.value;
     switch (startPageValue) {
@@ -177,78 +302,4 @@ export class UserEffects {
         throw new Error(`Unknown start page: ${startPageValue}`);
     }
   }
-
-  goToRootOnAuthenticateFailed$ = createEffect(
-    () => {
-      return this.actions$.pipe(
-        ofType(UserActions.authenticateError),
-        tap(({ returnUrl }) => {
-          const extras = returnUrl ? { queryParams: { returnUrl } } : {};
-          return this.router.navigate([AppPath.root], extras);
-        })
-      );
-    },
-    { dispatch: false }
-  );
-
-  getUserGridPermissions$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(UserActions.getUserGridPermissions),
-      concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
-      switchMap(([_, organizationUuid]) =>
-        this.organizationGridService
-          .getSingleOrganizationGridInternalV2GetOrganizationGridPermissions({ organizationUuid })
-          .pipe(
-            map((response: APIOrganizationGridPermissionsResponseDTO) =>
-              UserActions.getUserGridPermissionsSuccess(response)
-            ),
-            catchError(() => of(UserActions.getUserGridPermissionsError()))
-          )
-      )
-    );
-  });
-
-  patchOrganization$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(UserActions.patchOrganization),
-      combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
-      switchMap(([{ request }, organizationUuid]) =>
-        this.organizationInternalService
-          .patchSingleOrganizationsInternalV2PatchOrganization({ organizationUuid, requestDto: request })
-          .pipe(
-            map((organizationResponseDto) => UserActions.patchOrganizationSuccess(organizationResponseDto)),
-            catchError(() => of(UserActions.patchOrganizationError()))
-          )
-      )
-    );
-  });
-
-  sendResetPasswordRequest$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(UserActions.resetPasswordRequest),
-      switchMap(({ email }) =>
-        this.resetPasswordService.postSinglePasswordResetInternalV2RequestPasswordReset({ request: { email } }).pipe(
-          map(() => UserActions.resetPasswordRequestSuccess(email)),
-          catchError(() => of(UserActions.resetPasswordRequestError()))
-        )
-      )
-    );
-  });
-
-  resetPassword$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(UserActions.resetPassword),
-      switchMap(({ requestId, password }) =>
-        this.resetPasswordService
-          .postSinglePasswordResetInternalV2PostPasswordReset({
-            requestId,
-            request: { password },
-          })
-          .pipe(
-            map(() => UserActions.resetPasswordSuccess()),
-            catchError(() => of(UserActions.resetPasswordError()))
-          )
-      )
-    );
-  });
 }

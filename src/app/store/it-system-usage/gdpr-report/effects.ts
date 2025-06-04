@@ -15,7 +15,7 @@ export class GdprReportEffects {
   constructor(
     private gdprReportService: APIV2GdprExportReportInternalINTERNALService,
     private actions$: Actions,
-    private store: Store
+    private store: Store,
   ) {}
 
   getGdprReport$ = createEffect(() => {
@@ -30,9 +30,9 @@ export class GdprReportEffects {
       switchMap((organizationUuid) =>
         this.gdprReportService.getManyGdprExportReportInternalV2GetGdprReport({ organizationUuid }).pipe(
           map((reports) => GdprReportActions.getGDPRReportsSuccess(reports.map(adaptGdprReport))),
-          catchError(() => of(GdprReportActions.getGDPRReportsError()))
-        )
-      )
+          catchError(() => of(GdprReportActions.getGDPRReportsError())),
+        ),
+      ),
     );
   });
 }

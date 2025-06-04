@@ -7,7 +7,10 @@ import { APIV2OrganizationService, GetManyOrganizationV2GetOrganizationUsersRequ
 import { IdentityNamePair } from 'src/app/shared/models/identity-name-pair.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
-import { adaptOrganizationUserV2, OrganizationUserV2 } from '../../../shared/models/organization/organization-user/organization-user-v2.model';
+import {
+  adaptOrganizationUserV2,
+  OrganizationUserV2,
+} from '../../../shared/models/organization/organization-user/organization-user-v2.model';
 
 interface State {
   organizationUsers: OrganizationUserV2[];
@@ -19,23 +22,23 @@ export class OrganizationMasterDataComponentStore extends ComponentStore<State> 
   public readonly organizationUsersLoading$ = this.select((state) => state.organizationUsersLoading);
   public readonly organizationUsers$ = this.select((state) => state.organizationUsers);
   public readonly organizationUserIdentityNamePairs$ = this.organizationUsers$.pipe(
-    map((users) => users.map((user) => this.toIdentityNamePair(user)))
+    map((users) => users.map((user) => this.toIdentityNamePair(user))),
   );
 
   constructor(
     @Inject(APIV2OrganizationService)
     private organizationService: APIV2OrganizationService,
-    private store: Store
+    private store: Store,
   ) {
     super({ organizationUsers: [], organizationUsersLoading: false });
   }
 
   private readonly setLoading = this.updater(
-    (state, organizationUsersLoading: boolean): State => ({ ...state, organizationUsersLoading })
+    (state, organizationUsersLoading: boolean): State => ({ ...state, organizationUsersLoading }),
   );
 
   private readonly setOrganizationUsers = this.updater(
-    (state, organizationUsers: OrganizationUserV2[]): State => ({ ...state, organizationUsers })
+    (state, organizationUsers: OrganizationUserV2[]): State => ({ ...state, organizationUsers }),
   );
 
   public searchOrganizationUsers = this.effect((search$: Observable<string | undefined>) =>
@@ -53,12 +56,12 @@ export class OrganizationMasterDataComponentStore extends ComponentStore<State> 
                 .filter((u) => u !== undefined);
               this.setOrganizationUsers(organizationUsers);
             },
-            (e) => console.error(e)
+            (e) => console.error(e),
           ),
-          finalize(() => this.setLoading(false))
+          finalize(() => this.setLoading(false)),
         );
-      })
-    )
+      }),
+    ),
   );
 
   private toIdentityNamePair = (source: OrganizationUserV2): IdentityNamePair => {

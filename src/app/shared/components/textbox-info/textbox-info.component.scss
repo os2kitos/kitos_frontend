@@ -1,9 +1,9 @@
-@import "theme";
+@use "theme";
 
 :host {
   display: flex;
-  margin-top: $padding-small;
-  gap: $padding-small;
+  margin-top: theme.$padding-small;
+  gap: theme.$padding-small;
 }
 
 app-info-icon {
@@ -24,8 +24,8 @@ app-info-icon {
     display: flex;
     align-items: center;
     font-size: 12px;
-    color: $color-neutral-base;
+    color: theme.$color-neutral-base;
     margin: 0;
-    gap: $padding-smaller;
+    gap: theme.$padding-smaller;
   }
 }

@@ -1,12 +1,37 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ValidatorFn } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ValidatorFn, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { debounceTime } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { DEFAULT_INPUT_DEBOUNCE_TIME } from 'src/app/shared/constants/constants';
+import { isUrlEmptyOrValid } from 'src/app/shared/helpers/link.helpers';
 import { ExternalReferenceProperties } from 'src/app/shared/models/external-references/external-reference-properties.model';
+import { DialogComponent } from '../../dialogs/dialog/dialog.component';
+import { StandardVerticalContentGridComponent } from '../../standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { TextBoxComponent } from '../../textbox/textbox.component';
+import { DividerComponent } from '../../divider/divider.component';
+import { NgIf } from '@angular/common';
+import { ParagraphComponent } from '../../paragraph/paragraph.component';
+import { CheckboxComponent } from '../../checkbox/checkbox.component';
+import { DialogActionsComponent } from '../../dialogs/dialog-actions/dialog-actions.component';
+import { ButtonComponent } from '../../buttons/button/button.component';
 
 @Component({
   selector: 'app-external-reference-dialog[externalReferenceProperties][title]',
   templateUrl: './external-reference-dialog.component.html',
   styleUrls: ['./external-reference-dialog.component.scss'],
+  imports: [
+    DialogComponent,
+    StandardVerticalContentGridComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    TextBoxComponent,
+    DividerComponent,
+    NgIf,
+    ParagraphComponent,
+    CheckboxComponent,
+    DialogActionsComponent,
+    ButtonComponent,
+  ],
 })
 export class ExternalReferenceDialogComponent extends BaseComponent implements OnInit {
   @Input() public externalReferenceProperties!: ExternalReferenceProperties;
@@ -27,6 +52,8 @@ export class ExternalReferenceDialogComponent extends BaseComponent implements O
     }
   }
 
+  public showUrlError = false;
+
   @Input() public masterReferenceIsReadOnly = false;
   @Input() public title!: string;
   @Output() public cancelled = new EventEmitter();
@@ -39,7 +66,7 @@ export class ExternalReferenceDialogComponent extends BaseComponent implements O
       url: new FormControl<string | undefined>(undefined),
       masterReference: new FormControl<boolean>(false),
     },
-    { updateOn: 'change' }
+    { updateOn: 'change' },
   );
 
   constructor() {
@@ -69,8 +96,15 @@ export class ExternalReferenceDialogComponent extends BaseComponent implements O
       title: this.externalReferenceProperties.title,
       url: this.externalReferenceProperties.url,
     });
-    this.externalReferenceForm.controls.title;
     this.busy = this.isBusy;
+
+    this.subscriptions.add(
+      this.externalReferenceForm.controls.url.valueChanges
+        .pipe(debounceTime(DEFAULT_INPUT_DEBOUNCE_TIME))
+        .subscribe((url) => {
+          this.showUrlError = !isUrlEmptyOrValid(url ?? undefined);
+        }),
+    );
   }
   createValidator(): ValidatorFn {
     return (_: AbstractControl) => {

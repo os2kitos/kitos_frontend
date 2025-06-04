@@ -5,7 +5,7 @@ const { selectGlobalAdminState } = globalAdminFeature;
 
 export const selectAllGlobalAdmins = createSelector(
   selectGlobalAdminState,
-  globalAdminsAdapter.getSelectors().selectAll
+  globalAdminsAdapter.getSelectors().selectAll,
 );
 
 export const selectGlobalAdminsLoading = createSelector(selectGlobalAdminState, (state) => state.loading);

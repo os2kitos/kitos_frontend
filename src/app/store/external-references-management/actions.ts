@@ -25,12 +25,12 @@ export const ExternalReferencesManagmentActions = createActionGroup({
     'Edit Success': (
       entityType: RegistrationEntityTypes,
       referenceUuid: string,
-      properties: ExternalReferenceProperties
+      properties: ExternalReferenceProperties,
     ) => ({ entityType, referenceUuid, properties }),
     'Edit Error': (
       entityType: RegistrationEntityTypes,
       referenceUuid: string,
-      properties: ExternalReferenceProperties
+      properties: ExternalReferenceProperties,
     ) => ({ entityType, referenceUuid, properties }),
     Delete: (entityType: RegistrationEntityTypes, referenceUuid: string) => ({ entityType, referenceUuid }),
     'Delete Success': (entityType: RegistrationEntityTypes, referenceUuid: string) => ({ entityType, referenceUuid }),

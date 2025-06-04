@@ -1,5 +1,6 @@
 <app-dialog-header
   [title]="title"
+  [url]="url"
   [closable]="closable"
   [dialog]="dialog"
   [helpText]="helpText"
@@ -16,7 +17,7 @@
   [ngClass]="{
     'overflow-auto': overflow === 'auto',
     'background-grey': backgroundColor === 'grey',
-    'remove-padding': noPadding === true
+    'remove-padding': noPadding === true,
   }"
   *ngIf="loading === false"
 >

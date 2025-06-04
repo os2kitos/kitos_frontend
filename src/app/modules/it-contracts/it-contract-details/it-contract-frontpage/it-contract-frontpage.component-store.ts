@@ -1,4 +1,4 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { Inject, Injectable, OnDestroy } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { tapResponse } from '@ngrx/operators';
 
@@ -40,9 +40,9 @@ export class ItContractFrontpageComponentStore extends ComponentStore<State> imp
   public readonly validParentContracts$ = this.select((state) => state.validParentContracts).pipe(filterNullish());
 
   constructor(
-    private readonly organizationApiService: APIV2OrganizationService,
-    private readonly apiItContractService: APIV2ItContractService,
-    private readonly store: Store
+    @Inject(APIV2OrganizationService) private readonly organizationApiService: APIV2OrganizationService,
+    @Inject(APIV2ItContractService) private readonly apiItContractService: APIV2ItContractService,
+    private readonly store: Store,
   ) {
     super({ usersIsLoading: false, organizationsIsLoading: false, contractsLoading: false });
   }
@@ -51,33 +51,33 @@ export class ItContractFrontpageComponentStore extends ComponentStore<State> imp
     (state, validParentContracts: IdentityNamePair[]): State => ({
       ...state,
       validParentContracts,
-    })
+    }),
   );
 
   private updateUsers = this.updater(
     (state, users: APIOrganizationUserResponseDTO[]): State => ({
       ...state,
       users,
-    })
+    }),
   );
 
   private updateUsersIsLoading = this.updater(
-    (state, isLoading: boolean): State => ({ ...state, usersIsLoading: isLoading })
+    (state, isLoading: boolean): State => ({ ...state, usersIsLoading: isLoading }),
   );
 
   private updateOrganizations = this.updater(
-    (state, organizations: APIOrganizationResponseDTO[]): State => ({ ...state, organizations })
+    (state, organizations: APIOrganizationResponseDTO[]): State => ({ ...state, organizations }),
   );
 
   private updateOrganizationsIsLoading = this.updater(
-    (state, isLoading: boolean): State => ({ ...state, organizationsIsLoading: isLoading })
+    (state, isLoading: boolean): State => ({ ...state, organizationsIsLoading: isLoading }),
   );
 
   private updateContractsLoading = this.updater(
     (state, contractsLoading: boolean): State => ({
       ...state,
       contractsLoading,
-    })
+    }),
   );
 
   public searchUsersInOrganization = this.effect((search$: Observable<string | undefined>) =>
@@ -94,11 +94,11 @@ export class ItContractFrontpageComponentStore extends ComponentStore<State> imp
             tapResponse(
               (users) => this.updateUsers(users),
               (e) => console.error(e),
-              () => this.updateUsersIsLoading(false)
-            )
+              () => this.updateUsersIsLoading(false),
+            ),
           );
-      })
-    )
+      }),
+    ),
   );
 
   public searchOrganizations = this.effect((search$: Observable<string | undefined>) =>
@@ -114,11 +114,11 @@ export class ItContractFrontpageComponentStore extends ComponentStore<State> imp
             tapResponse(
               (organizations) => this.updateOrganizations(organizations),
               (e) => console.error(e),
-              () => this.updateOrganizationsIsLoading(false)
-            )
+              () => this.updateOrganizationsIsLoading(false),
+            ),
           );
-      })
-    )
+      }),
+    ),
   );
 
   public searchParentContracts = this.effect((search$: Observable<string | undefined>) =>
@@ -126,7 +126,7 @@ export class ItContractFrontpageComponentStore extends ComponentStore<State> imp
       tap(() => this.updateContractsLoading(true)),
       combineLatestWith(
         this.store.select(selectOrganizationUuid).pipe(filterNullish()),
-        this.store.select(selectItContractUuid).pipe(filterNullish())
+        this.store.select(selectItContractUuid).pipe(filterNullish()),
       ),
       mergeMap(([search, organizationUuid, contractUuid]) => {
         return this.apiItContractService
@@ -138,10 +138,10 @@ export class ItContractFrontpageComponentStore extends ComponentStore<State> imp
                 this.updateValidParentContracts(mapTreeToIdentityNamePairs(validContractsTree));
               },
               (e) => console.error(e),
-              () => this.updateContractsLoading(false)
-            )
+              () => this.updateContractsLoading(false),
+            ),
           );
-      })
-    )
+      }),
+    ),
   );
 }

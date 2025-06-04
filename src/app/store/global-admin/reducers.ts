@@ -1,10 +1,10 @@
 import { createEntityAdapter } from '@ngrx/entity';
 import { createFeature, createReducer, on } from '@ngrx/store';
-import { GlobalAdminUser } from 'src/app/shared/models/global-admin/global-admin-user.model';
 import { GlobalAdminActions } from './actions';
 import { GlobalAdminState } from './state';
+import { ShallowUser } from 'src/app/shared/models/userV2.model';
 
-export const globalAdminsAdapter = createEntityAdapter<GlobalAdminUser>({
+export const globalAdminsAdapter = createEntityAdapter<ShallowUser>({
   selectId: (user) => user.uuid,
   sortComparer: (a, b) => a.name.localeCompare(b.name),
 });
@@ -19,7 +19,7 @@ export const globalAdminFeature = createFeature({
       GlobalAdminActions.getGlobalAdmins,
       GlobalAdminActions.removeGlobalAdmin,
       GlobalAdminActions.addGlobalAdmin,
-      (state): GlobalAdminState => ({ ...state, loading: true })
+      (state): GlobalAdminState => ({ ...state, loading: true }),
     ),
     on(
       GlobalAdminActions.getGlobalAdminsError,
@@ -28,21 +28,21 @@ export const globalAdminFeature = createFeature({
       GlobalAdminActions.getGlobalAdminsSuccess,
       GlobalAdminActions.removeGlobalAdminSuccess,
       GlobalAdminActions.addGlobalAdminSuccess,
-      (state): GlobalAdminState => ({ ...state, loading: false })
+      (state): GlobalAdminState => ({ ...state, loading: false }),
     ),
     on(
       GlobalAdminActions.getGlobalAdminsSuccess,
-      (state, { admins }): GlobalAdminState => globalAdminsAdapter.setAll(admins, state)
+      (state, { admins }): GlobalAdminState => globalAdminsAdapter.setAll(admins, state),
     ),
 
     on(
       GlobalAdminActions.removeGlobalAdminSuccess,
-      (state, { userUuid }): GlobalAdminState => globalAdminsAdapter.removeOne(userUuid, state)
+      (state, { userUuid }): GlobalAdminState => globalAdminsAdapter.removeOne(userUuid, state),
     ),
 
     on(
       GlobalAdminActions.addGlobalAdminSuccess,
-      (state, { user }): GlobalAdminState => globalAdminsAdapter.addOne(user, state)
-    )
+      (state, { user }): GlobalAdminState => globalAdminsAdapter.addOne(user, state),
+    ),
   ),
 });

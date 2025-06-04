@@ -1,5 +1,6 @@
+import { AsyncPipe, NgIf } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
 import { APIGDPRRegistrationsResponseDTO, APIGDPRWriteRequestDTO } from 'src/app/api/v2';
@@ -11,7 +12,7 @@ import {
 } from 'src/app/shared/models/it-system-usage/gdpr/risk-assessment-result';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import {
-  YesNoDontKnowOptions,
+  YesNoDontKnowOption,
   mapToYesNoDontKnowEnum,
   yesNoDontKnowOptions,
 } from 'src/app/shared/models/yes-no-dont-know.model';
@@ -22,11 +23,29 @@ import {
   selectITSystemUsageEnableGdprConductedRiskAssessment,
   selectITSystemUsageEnableGdprPlannedRiskAssessmentDate,
 } from 'src/app/store/organization/ui-module-customization/selectors';
+import { AccordionComponent } from '../../../../../../shared/components/accordion/accordion.component';
+import { DatePickerComponent } from '../../../../../../shared/components/datepicker/datepicker.component';
+import { DropdownComponent } from '../../../../../../shared/components/dropdowns/dropdown/dropdown.component';
+import { StandardVerticalContentGridComponent } from '../../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { TextAreaComponent } from '../../../../../../shared/components/textarea/textarea.component';
+import { EditUrlSectionComponent } from '../edit-url-section/edit-url-section.component';
 
 @Component({
   selector: 'app-gdpr-risk-assessment-section',
   templateUrl: './gdpr-risk-assessment-section.component.html',
   styleUrls: ['./gdpr-risk-assessment-section.component.scss'],
+  imports: [
+    AccordionComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    StandardVerticalContentGridComponent,
+    NgIf,
+    DatePickerComponent,
+    DropdownComponent,
+    EditUrlSectionComponent,
+    TextAreaComponent,
+    AsyncPipe,
+  ],
 })
 export class GdprRiskAssessmentSectionComponent extends BaseAccordionComponent implements OnInit {
   @Output() public noPermissions = new EventEmitter<AbstractControl[]>();
@@ -51,7 +70,7 @@ export class GdprRiskAssessmentSectionComponent extends BaseAccordionComponent i
   public readonly riskAssessmentFormGroup = new FormGroup(
     {
       plannedDateControl: new FormControl<Date | undefined>(undefined),
-      yesNoDontKnowControl: new FormControl<YesNoDontKnowOptions | undefined>(undefined),
+      yesNoDontKnowControl: new FormControl<YesNoDontKnowOption | undefined>(undefined),
       conductedDateControl: new FormControl<Date | undefined>(undefined),
       assessmentResultControl: new FormControl<RiskAssessmentResultOptions | undefined>(undefined),
       notesControl: new FormControl<string | undefined>(undefined),
@@ -98,5 +117,10 @@ export class GdprRiskAssessmentSectionComponent extends BaseAccordionComponent i
     if (valueChange && !valueChange.valid) return;
 
     this.store.dispatch(ITSystemUsageActions.patchITSystemUsage({ gdpr }));
+  }
+
+  public clearLink() {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    this.patchGdpr({ riskAssessmentDocumentation: null } as any);
   }
 }

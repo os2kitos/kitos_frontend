@@ -21,11 +21,11 @@ export class HelpDialogComponentStore extends ComponentStore<State> {
   }
 
   private updateHelpText = this.updater(
-    (state, update: { helpText: HelpText, isEditable: boolean }): State => ({
+    (state, update: { helpText: HelpText; isEditable: boolean }): State => ({
       ...state,
       helpText: update.helpText,
       isEditable: update.isEditable,
-    })
+    }),
   );
 
   public getHelpText = this.effect((helpTextKey$: Observable<string>) =>
@@ -44,14 +44,14 @@ export class HelpDialogComponentStore extends ComponentStore<State> {
                   this.handleError(e);
                 }
               },
-              (e) => this.handleError(e)
-            )
-          )
-      )
-    )
+              (e) => this.handleError(e),
+            ),
+          ),
+      ),
+    ),
   );
 
-  private handleError(e: unknown){
+  private handleError(e: unknown) {
     console.error(e);
     this.updateHelpText({ helpText: defaultHelpText, isEditable: false });
   }

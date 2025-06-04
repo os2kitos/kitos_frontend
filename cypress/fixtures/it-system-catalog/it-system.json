@@ -73,5 +73,7 @@
   "recommendedArchiveDuty": {
     "comment": "Old comment",
     "id": "B"
-  }
+  },
+  "legalName": "Et DBS navn",
+  "legalDataProcessorName": "Et DBS databehandler navn"
 }

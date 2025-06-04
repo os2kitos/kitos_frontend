@@ -1,5 +1,5 @@
-@import "theme";
-@import "mixins";
+@use "theme";
+@use "mixins";
 
 :host {
   display: flex;
@@ -10,7 +10,7 @@
 .notes {
   grid-column: 1 / 4;
 
-  @include min-breakpoint {
+  @include mixins.min-breakpoint {
     grid-column: 1 / 4;
   }
 }

@@ -1,11 +1,4 @@
-@import "theme";
-
-app-loading {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
+@use "theme";
 
 // Custom styling of material dialog
 ::ng-deep {
@@ -19,14 +12,14 @@ app-loading {
 
 :host ::ng-deep {
   .k-list-item.k-selected {
-    background-color: $color-primary-10 !important;
-    color: $color-primary-dark !important;
+    background-color: theme.$color-primary-10 !important;
+    color: theme.$color-primary-dark !important;
   }
   .k-list-item {
     border-radius: 8px !important;
     font-size: 18px;
-    color: $color-primary-dark;
-    padding: $padding-medium;
+    color: theme.$color-primary-dark;
+    padding: theme.$padding-medium;
   }
 
   .k-list-item:focus,
@@ -46,4 +39,11 @@ app-loading {
     border-radius: 8px !important;
     border-width: 1px !important;
   }
+}
+
+.frontpage-spinner {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

@@ -26,7 +26,7 @@ export const exportFeature = createFeature({
         readyToExport: false,
         exportAllColumns: false,
       };
-    })
+    }),
   ),
 });
 

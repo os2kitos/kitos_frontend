@@ -23,7 +23,7 @@ export class CreateUserDialogComponentStore extends ComponentStore<State> {
 
   constructor(
     @Inject(APIV2UsersInternalINTERNALService) private userService: APIV2UsersInternalINTERNALService,
-    private store: Store
+    private store: Store,
   ) {
     super({ isLoading: false, existsInOrganization: false, noUserInOtherOrgs: true });
   }
@@ -35,7 +35,7 @@ export class CreateUserDialogComponentStore extends ComponentStore<State> {
       existsInOrganization: user?.isPartOfCurrentOrganization ?? false,
       noUserInOtherOrgs: !user || user.isPartOfCurrentOrganization === true,
       existingUserUuid: user?.uuid,
-    })
+    }),
   );
 
   public orginalEmail: string | undefined;
@@ -58,10 +58,10 @@ export class CreateUserDialogComponentStore extends ComponentStore<State> {
             tapResponse(
               (user) => this.setUser(email !== this.orginalEmail ? user : undefined),
               (e) => console.error(e),
-              () => this.setLoading(false)
-            )
+              () => this.setLoading(false),
+            ),
           );
-      })
-    )
+      }),
+    ),
   );
 }

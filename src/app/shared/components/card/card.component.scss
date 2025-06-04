@@ -1,13 +1,13 @@
-@import "theme";
-@import "mixins";
+@use "theme";
+@use "mixins";
 
 :host {
-  background: $color-white;
-  border-radius: $radius-large;
-  padding: $padding-medium;
-  padding-bottom: $padding-medium-large;
-  margin-bottom: $padding-large;
+  background: theme.$color-white;
+  border-radius: theme.$radius-large;
+  padding: theme.$padding-medium;
+  padding-bottom: theme.$padding-medium-large;
+  margin-bottom: theme.$padding-large;
   height: fit-content;
 
-  @include elevation;
+  @include mixins.elevation;
 }

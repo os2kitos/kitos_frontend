@@ -4,6 +4,7 @@
       *ngIf="formGroup"
       [text]="text"
       valueField="id"
+      [size]="size"
       [data]="nodes"
       [showDescription]="showDescription"
       [formGroup]="formGroup"
@@ -18,6 +19,7 @@
       *ngIf="!formGroup"
       [text]="text"
       [data]="nodes"
+      [size]="size"
       [showDescription]="showDescription"
       [appendTo]="appendTo"
       [value]="value"
@@ -28,4 +30,4 @@
     </app-tree-node-dropdown>
   </ng-container>
 </ng-container>
-<app-loading *ngIf="(isLoaded$ | async) === false"> </app-loading>
+<app-loading *ngIf="(isLoaded$ | async) === false" [type]="useMaterialSpinner ? 'material' : 'kitos'"> </app-loading>

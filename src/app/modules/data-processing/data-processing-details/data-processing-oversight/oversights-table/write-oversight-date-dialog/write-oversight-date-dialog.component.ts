@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
@@ -9,11 +9,27 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
 import { optionalNewDate } from 'src/app/shared/helpers/date.helpers';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import { selectDataProcessingOversightDates } from 'src/app/store/data-processing/selectors';
+import { DialogComponent } from '../../../../../../shared/components/dialogs/dialog/dialog.component';
+import { StandardVerticalContentGridComponent } from '../../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { DatePickerComponent } from '../../../../../../shared/components/datepicker/datepicker.component';
+import { TextAreaComponent } from '../../../../../../shared/components/textarea/textarea.component';
+import { DialogActionsComponent } from '../../../../../../shared/components/dialogs/dialog-actions/dialog-actions.component';
+import { ButtonComponent } from '../../../../../../shared/components/buttons/button/button.component';
 
 @Component({
   selector: 'app-write-oversight-date-dialog',
   templateUrl: './write-oversight-date-dialog.component.html',
   styleUrl: './write-oversight-date-dialog.component.scss',
+  imports: [
+    DialogComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    StandardVerticalContentGridComponent,
+    DatePickerComponent,
+    TextAreaComponent,
+    DialogActionsComponent,
+    ButtonComponent,
+  ],
 })
 export class WriteOversightDateDialogComponent extends BaseComponent implements OnInit {
   @Input() public oversightDate: APIOversightDateDTO | undefined;
@@ -26,7 +42,7 @@ export class WriteOversightDateDialogComponent extends BaseComponent implements 
   constructor(
     private store: Store,
     private dialogRef: MatDialogRef<WriteOversightDateDialogComponent>,
-    private actions$: Actions
+    private actions$: Actions,
   ) {
     super();
   }
@@ -50,13 +66,13 @@ export class WriteOversightDateDialogComponent extends BaseComponent implements 
     this.subscriptions.add(
       this.actions$.pipe(ofType(DataProcessingActions.patchDataProcessingSuccess)).subscribe(() => {
         this.onCancel();
-      })
+      }),
     );
 
     this.subscriptions.add(
       this.actions$.pipe(ofType(DataProcessingActions.patchDataProcessingError)).subscribe(() => {
         this.isBusy = false;
-      })
+      }),
     );
 
     this.subscriptions.add(
@@ -66,7 +82,7 @@ export class WriteOversightDateDialogComponent extends BaseComponent implements 
         } else {
           this.oversightDateFormGroup.controls.notes.disable();
         }
-      })
+      }),
     );
   }
 
@@ -90,8 +106,8 @@ export class WriteOversightDateDialogComponent extends BaseComponent implements 
           this.store.dispatch(
             DataProcessingActions.patchDataProcessingOversightDate(
               { ...request, uuid: this.oversightDate?.uuid },
-              oversightDates
-            )
+              oversightDates,
+            ),
           );
         } else {
           this.store.dispatch(DataProcessingActions.addDataProcessingOversightDate(request, oversightDates));

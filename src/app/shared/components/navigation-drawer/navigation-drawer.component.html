@@ -18,16 +18,16 @@
   <div class="divider-margin">
     <app-divider></app-divider>
   </div>
-  <app-button
-    buttonStyle="tertiary"
-    [tooltip]="isExpanded ? 'Minimer' : 'Udvid'"
-    color="accent"
-    size="large"
-    (buttonClick)="toggleExpanded()"
-    class="chevron-container"
-    data-cy="navigation-drawer-toggle"
-  >
-    <app-icon [iconType]="isExpanded ? 'collapse' : 'expand'" class="icon-padding"></app-icon>
-    <span class="label" [ngClass]="{ visible: isExpanded }"></span>
-  </app-button>
+  <div class="chevron-container">
+    <app-button
+      buttonStyle="tertiary"
+      [tooltip]="isExpanded ? 'Minimer' : 'Udvid'"
+      color="accent"
+      size="large"
+      (buttonClick)="toggleExpanded()"
+      data-cy="navigation-drawer-toggle"
+    >
+      <app-icon [iconType]="isExpanded ? 'collapse' : 'expand'" class="icon-padding"></app-icon>
+    </app-button>
+  </div>
 </app-card>

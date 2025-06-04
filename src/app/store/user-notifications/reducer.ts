@@ -44,7 +44,7 @@ export const notificationFeature = createFeature({
             ...newState,
             dataProcessingNotifications: dprNotificationsAdapter.setAll(
               notifications,
-              newState.dataProcessingNotifications
+              newState.dataProcessingNotifications,
             ),
           };
           break;
@@ -68,6 +68,6 @@ export const notificationFeature = createFeature({
           [ownerResourceType]: undefined,
         },
       };
-    })
+    }),
   ),
 });

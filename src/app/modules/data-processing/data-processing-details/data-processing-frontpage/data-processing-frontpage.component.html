@@ -69,6 +69,16 @@
       formName="lastChangedAt"
     >
     </app-datepicker>
+    <app-org-unit-select
+      *ngIf="responsibleUnitEnabled$ | async"
+      text="Ansvarlig enhed"
+      i18n-text
+      [formGroup]="frontpageFormGroup"
+      (valueChange)="patchFrontPage({ general: { responsibleOrganizationUnitUuid: $event } })"
+      formName="responsibleOrgUnit"
+      data-cy="responsible-unit-select"
+    >
+    </app-org-unit-select>
     <ng-container *ngIf="agreementConcludedEnabled$ | async">
       <app-dropdown
         text="Databehandleraftale er indgået"
@@ -82,7 +92,6 @@
       <app-datepicker
         text="Dato for indgåelse af databehandleraftale"
         i18n-text
-        class="input-two-thirds-column-width"
         data-cy="dpr-agreement-concluded-date"
         [formGroup]="frontpageFormGroup"
         formName="agreementConclusionDate"

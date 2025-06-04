@@ -45,6 +45,9 @@ export interface APIDataProcessingRegistrationReadModel {
     lastChangedById?: number;
     lastChangedByName?: string;
     lastChangedAt?: string;
+    responsibleOrgUnitUuid?: string;
+    responsibleOrgUnitId?: number;
+    responsibleOrgUnitName?: string;
 }
 export namespace APIDataProcessingRegistrationReadModel {
     export type IsAgreementConcludedEnum = 'NO' | 'YES' | 'IRRELEVANT' | 'UNDECIDED';

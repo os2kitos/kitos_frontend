@@ -7,25 +7,25 @@ import { regularOptionTypeAdapter, regularOptionTypeFeature } from './reducer';
 const { selectRegularOptionTypeState } = regularOptionTypeFeature;
 
 export const selectStateByOptionType = memoize((optionType: RegularOptionType) =>
-  createSelector(selectRegularOptionTypeState, (state) => state[optionType])
+  createSelector(selectRegularOptionTypeState, (state) => state[optionType]),
 );
 
 export const selectRegularOptionTypes = memoize((optionType: RegularOptionType) =>
   createSelector(selectStateByOptionType(optionType), (optionState) =>
-    optionState ? regularOptionTypeAdapter.getSelectors().selectAll(optionState) : null
-  )
+    optionState ? regularOptionTypeAdapter.getSelectors().selectAll(optionState) : null,
+  ),
 );
 
 export const selectRegularOptionTypesDictionary = memoize((optionType: RegularOptionType) =>
   createSelector(selectStateByOptionType(optionType), (optionState) =>
-    optionState ? regularOptionTypeAdapter.getSelectors().selectEntities(optionState) : null
-  )
+    optionState ? regularOptionTypeAdapter.getSelectors().selectEntities(optionState) : null,
+  ),
 );
 
 export const selectHasValidCache = memoize((optionType: RegularOptionType) =>
   createSelector(
     selectRegularOptionTypeState,
     () => new Date(),
-    (state, time) => hasValidCache(state[optionType]?.cacheTime, time)
-  )
+    (state, time) => hasValidCache(state[optionType]?.cacheTime, time),
+  ),
 );

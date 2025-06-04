@@ -9,7 +9,7 @@ import { RemovalConflict } from 'src/app/modules/global-admin/global-admin-organ
 import { OrganizationRemovalConflicts } from '../models/global-admin/organization-removal-conflicts.model';
 
 export function mapConflictsDtoToOrganizationRemovalConflicts(
-  conflictsDto: APIOrganizationRemovalConflictsResponseDTO
+  conflictsDto: APIOrganizationRemovalConflictsResponseDTO,
 ): OrganizationRemovalConflicts {
   const conflicts: OrganizationRemovalConflicts = {
     contractsInOtherOrganizationsWhereOrgIsSupplier:
@@ -20,7 +20,7 @@ export function mapConflictsDtoToOrganizationRemovalConflicts(
       conflictsDto.dprInOtherOrganizationsWhereOrgIsSubDataProcessor?.map(mapSimpleConflictToTableItem) ?? [],
     interfacesExposedOnSystemsOutsideTheOrganization:
       conflictsDto.interfacesExposedOnSystemsOutsideTheOrganization?.map(
-        mapInterfacesExposedOutsideTheOrganizationToTableItem
+        mapInterfacesExposedOutsideTheOrganizationToTableItem,
       ) ?? [],
     systemsExposingInterfacesDefinedInOtherOrganizations:
       conflictsDto.systemsExposingInterfacesDefinedInOtherOrganizations?.flatMap(mapMultipleConflictsToTableItem) ?? [],
@@ -33,7 +33,7 @@ export function mapConflictsDtoToOrganizationRemovalConflicts(
       conflictsDto.systemsWhereOrgIsArchiveSupplier?.map(mapSimpleConflictToTableItem) ?? [],
     systemsWithUsagesOutsideTheOrganization:
       conflictsDto.systemsWithUsagesOutsideTheOrganization?.flatMap(
-        mapSystemUsageOutsideOrganizationConflictToTableItem
+        mapSystemUsageOutsideOrganizationConflictToTableItem,
       ) ?? [],
   };
   return conflicts;
@@ -53,7 +53,7 @@ function mapMultipleConflictsToTableItem(multiConflict: APIMultipleConflictsResp
 }
 
 function mapSystemUsageOutsideOrganizationConflictToTableItem(
-  conflict: APISystemWithUsageOutsideOrganizationConflictResponseDTO
+  conflict: APISystemWithUsageOutsideOrganizationConflictResponseDTO,
 ): RemovalConflict[] {
   return (conflict.organizationNames ?? []).map((organizationName) => ({
     mainEntityName: undefined,
@@ -63,7 +63,7 @@ function mapSystemUsageOutsideOrganizationConflictToTableItem(
 }
 
 function mapInterfacesExposedOutsideTheOrganizationToTableItem(
-  conflict: APIInterfacesExposedOutsideTheOrganizationResponseDTO
+  conflict: APIInterfacesExposedOutsideTheOrganizationResponseDTO,
 ): RemovalConflict {
   return {
     mainEntityName: conflict.exposedInterfaceName,

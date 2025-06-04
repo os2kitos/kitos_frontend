@@ -1,8 +1,8 @@
-@import "theme";
+@use "theme";
 .paragraph {
   line-height: 150%;
   margin: 0px;
-  color: $color-neutral-dark;
+  color: theme.$color-neutral-dark;
   align-items: center;
   gap: 4px;
 }
@@ -12,19 +12,19 @@
 }
 
 .white-color {
-  color: $color-white !important;
+  color: theme.$color-white !important;
 }
 
 .error-color {
-  color: $color-negative !important;
+  color: theme.$color-negative !important;
 }
 
 .primary-dark-color {
-  color: $color-primary-dark;
+  color: theme.$color-primary-dark;
 }
 
 .neutral-color {
-  color: $color-neutral-dark;
+  color: theme.$color-neutral-dark;
 }
 
 .strikeThrough {
@@ -32,8 +32,8 @@
 }
 
 .dimmed {
-  color: $color-neutral-80;
-  text-decoration-color: $color-neutral-80;
+  color: theme.$color-neutral-80;
+  text-decoration-color: theme.$color-neutral-80;
 }
 
 .paragraph-x-large {
@@ -65,8 +65,11 @@
 /* expand content to its full length on mouseover */
 .might-overflow:hover {
   text-overflow: clip;
-  word-break: break-all;
   white-space: normal;
+}
+
+.break-word:hover {
+  word-break: break-word;
 }
 
 .wrap-on-overflow {

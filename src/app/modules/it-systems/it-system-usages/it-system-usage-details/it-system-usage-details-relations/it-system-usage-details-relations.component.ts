@@ -16,13 +16,33 @@ import {
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { CreateRelationDialogComponent } from './create-relation-dialog/create-relation-dialog.component';
 import { ItSystemUsageDetailsRelationsComponentStore } from './it-system-usage-details-relations.component-store';
-import { selectITSystemUsageEnableIncomingRelations, selectITSystemUsageEnableOutgoingRelations } from 'src/app/store/organization/ui-module-customization/selectors';
+import {
+  selectITSystemUsageEnableIncomingRelations,
+  selectITSystemUsageEnableOutgoingRelations,
+} from 'src/app/store/organization/ui-module-customization/selectors';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { CardComponent } from '../../../../../shared/components/card/card.component';
+import { CardHeaderComponent } from '../../../../../shared/components/card-header/card-header.component';
+import { StandardVerticalContentGridComponent } from '../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { RelationTableComponent } from './relation-table/relation-table.component';
+import { CollectionExtensionButtonComponent } from '../../../../../shared/components/collection-extension-button/collection-extension-button.component';
+import { LoadingComponent } from '../../../../../shared/components/loading/loading.component';
 
 @Component({
   selector: 'app-it-system-usage-details-relations',
   templateUrl: './it-system-usage-details-relations.component.html',
   styleUrls: ['./it-system-usage-details-relations.component.scss'],
   providers: [ItSystemUsageDetailsRelationsComponentStore],
+  imports: [
+    NgIf,
+    CardComponent,
+    CardHeaderComponent,
+    StandardVerticalContentGridComponent,
+    RelationTableComponent,
+    CollectionExtensionButtonComponent,
+    LoadingComponent,
+    AsyncPipe,
+  ],
 })
 export class ItSystemUsageDetailsRelationsComponent extends BaseComponent implements OnInit {
   public readonly usageName$ = this.store.select(selectItSystemUsageName);
@@ -31,9 +51,9 @@ export class ItSystemUsageDetailsRelationsComponent extends BaseComponent implem
     .pipe(
       map((outgoingRelations) =>
         outgoingRelations?.map((relation) =>
-          this.componentStore.mapRelationResponseDTOToSystemRelationModel(relation, relation.toSystemUsage)
-        )
-      )
+          this.componentStore.mapRelationResponseDTOToSystemRelationModel(relation, relation.toSystemUsage),
+        ),
+      ),
     );
   public readonly incomingRelations$ = this.componentStore.incomingRelations$;
   public readonly hasModifyPermission$ = this.store.select(selectITSystemUsageHasModifyPermission);
@@ -48,7 +68,7 @@ export class ItSystemUsageDetailsRelationsComponent extends BaseComponent implem
     private readonly store: Store,
     private readonly componentStore: ItSystemUsageDetailsRelationsComponentStore,
     private readonly actions$: Actions,
-    private readonly dialog: MatDialog
+    private readonly dialog: MatDialog,
   ) {
     super();
   }
@@ -61,7 +81,7 @@ export class ItSystemUsageDetailsRelationsComponent extends BaseComponent implem
       this.store
         .select(selectItSystemUsageUuid)
         .pipe(filterNullish())
-        .subscribe((systemUsageUuid) => this.componentStore.getIncomingRelations(systemUsageUuid))
+        .subscribe((systemUsageUuid) => this.componentStore.getIncomingRelations(systemUsageUuid)),
     );
 
     //on add/patch/remove success action, reload the outgoing relations
@@ -71,12 +91,12 @@ export class ItSystemUsageDetailsRelationsComponent extends BaseComponent implem
           ofType(
             ITSystemUsageActions.addItSystemUsageRelationSuccess,
             ITSystemUsageActions.patchItSystemUsageRelationSuccess,
-            ITSystemUsageActions.removeItSystemUsageRelationSuccess
-          )
+            ITSystemUsageActions.removeItSystemUsageRelationSuccess,
+          ),
         )
         .subscribe(({ itSystemUsageUuid }) => {
           this.store.dispatch(ITSystemUsageActions.getITSystemUsage(itSystemUsageUuid));
-        })
+        }),
     );
   }
 

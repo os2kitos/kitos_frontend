@@ -4,7 +4,7 @@
     <body>
       <trans-unit id="7493428362965307555" datatype="html">
         <source>
-          <x id="INTERPOLATION" equiv-text="&quot;&gt; &lt;/ng-container&gt; &lt;button"/>
+          <x id="INTERPOLATION" equiv-text="&quot; &gt; &lt;/ng-container&gt; &lt;bu"/>
         </source>
         <note priority="1" from="description">The text for the SplitButton aria-label</note>
         <note priority="1" from="meaning">kendo.splitbutton.splitButtonLabel</note>
@@ -752,7 +752,7 @@
       </trans-unit>
       <trans-unit id="5332162737795508854" datatype="html">
         <source>Columns</source>
-        <note priority="1" from="description">The text shown in the column menu for the columns item</note>
+        <note priority="1" from="description">The text for the Grid Column Chooser and Column Chooser toolbar tool</note>
         <note priority="1" from="meaning">kendo.grid.columns</note>
       </trans-unit>
       <trans-unit id="5849203148124173556" datatype="html">
@@ -880,10 +880,10 @@
         <note priority="1" from="description">The text of the title and aria-label attributes applied to the expand icon of group rows.</note>
         <note priority="1" from="meaning">kendo.grid.groupExpand</note>
       </trans-unit>
-      <trans-unit id="5939232818993851320" datatype="html">
+      <trans-unit id="4742914884195495203" datatype="html">
         <source>Select page</source>
         <note priority="1" from="description">The text of the title and aria-label attributes applied to the page chooser in the Grid Pager</note>
-        <note priority="1" from="meaning">kendo.grid.selectPage</note>
+        <note priority="1" from="meaning">kendo.grid.pagerSelectPage</note>
       </trans-unit>
       <trans-unit id="6555488355487907527" datatype="html">
         <source>Top toolbar</source>
@@ -1639,11 +1639,8 @@
       <trans-unit id="1431416938026210429" datatype="html">
         <source>Password</source>
       </trans-unit>
-      <trans-unit id="6388882061374799898" datatype="html">
-        <source>Log ind</source>
-      </trans-unit>
-      <trans-unit id="8924400491805013399" datatype="html">
-        <source>Log mig ikke ud</source>
+      <trans-unit id="7999400360003292845" datatype="html">
+        <source> Log ind</source>
       </trans-unit>
       <trans-unit id="8256595798453816213" datatype="html">
         <source>Aftalefrister</source>
@@ -1921,9 +1918,6 @@
       <trans-unit id="2836495158620557333" datatype="html">
         <source>Ingen relationer tilføjet endnu</source>
       </trans-unit>
-      <trans-unit id="374566596275178480" datatype="html">
-        <source>Gyldig/Ikke Gyldig</source>
-      </trans-unit>
       <trans-unit id="3576761254218207442" datatype="html">
         <source>Ansvarlig org. enhed</source>
       </trans-unit>
@@ -1941,18 +1935,6 @@
       </trans-unit>
       <trans-unit id="5960176024187087505" datatype="html">
         <source>Audit dato</source>
-      </trans-unit>
-      <trans-unit id="7714110594292272072" datatype="html">
-        <source>Audit status: grøn</source>
-      </trans-unit>
-      <trans-unit id="5825713374970966816" datatype="html">
-        <source>Audit status: rød</source>
-      </trans-unit>
-      <trans-unit id="5083080824036369784" datatype="html">
-        <source>Audit status: gul</source>
-      </trans-unit>
-      <trans-unit id="7902716833517761584" datatype="html">
-        <source>Audit status: hvid</source>
       </trans-unit>
       <trans-unit id="5445471729146930289" datatype="html">
         <source>Varighed</source>
@@ -2547,7 +2529,7 @@
       </trans-unit>
       <trans-unit id="187187500641108332" datatype="html">
         <source>
-          <x id="INTERPOLATION" equiv-text="saveText }}"/>
+          <x id="INTERPOLATION" equiv-text="proceedText }}"/>
         </source>
       </trans-unit>
       <trans-unit id="5796886515252568996" datatype="html">
@@ -2997,10 +2979,10 @@
         <source>Eksporter</source>
       </trans-unit>
       <trans-unit id="6309617208533698803" datatype="html">
-        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="pp-menu-button-it"/>Eksporter alle kolonner </source>
+        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-menu-button-ite"/>Eksporter alle kolonner </source>
       </trans-unit>
       <trans-unit id="948657358778361709" datatype="html">
-        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="app-menu-button-i"/>Eksporter viste kolonner </source>
+        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="pp-menu-button-it"/>Eksporter viste kolonner </source>
       </trans-unit>
       <trans-unit id="7150593562313015326" datatype="html">
         <source>
@@ -3083,9 +3065,6 @@
       <trans-unit id="6510461966645751823" datatype="html">
         <source> Gem </source>
       </trans-unit>
-      <trans-unit id="5513078980496116959" datatype="html">
-        <source> Slet </source>
-      </trans-unit>
       <trans-unit id="6475857440782400398" datatype="html">
         <source>Filtre og sortering gemt</source>
       </trans-unit>
@@ -3136,9 +3115,6 @@
       </trans-unit>
       <trans-unit id="7693246133592988372" datatype="html">
         <source> (ugyldigt link) </source>
-      </trans-unit>
-      <trans-unit id="7967107304088297046" datatype="html">
-        <source>Kolonneopsætning for organisation</source>
       </trans-unit>
       <trans-unit id="4059930962225165267" datatype="html">
         <source>Er du sikker på at du vil gemme den nuværende kolonneopsætning af felter som standard til din organisation?</source>
@@ -3203,7 +3179,7 @@
         <source>Tilføj advis</source>
       </trans-unit>
       <trans-unit id="7226881883300543573" datatype="html">
-        <source>Er du sikker på at du vil deaktivere <x id="PH" equiv-text="this.getSpecificNotificationWarning( notification.name )"/>?</source>
+        <source>Er du sikker på at du vil deaktivere <x id="PH" equiv-text="this.getSpecificNotificationWarning( notification.name, )"/>?</source>
       </trans-unit>
       <trans-unit id="1987610800064579199" datatype="html">
         <source>Fejl: kan ikke deaktivere en advis uden uuid.</source>
@@ -3613,14 +3589,8 @@
       <trans-unit id="4260496326052651673" datatype="html">
         <source>Brugeren blev opdateret</source>
       </trans-unit>
-      <trans-unit id="1945093732206878937" datatype="html">
-        <source>Bruger blev oprettet</source>
-      </trans-unit>
       <trans-unit id="7702390112614253672" datatype="html">
         <source>Brugeren kunne ikke opdateres</source>
-      </trans-unit>
-      <trans-unit id="755329899946556802" datatype="html">
-        <source>Bruger kunne ikke oprettes</source>
       </trans-unit>
       <trans-unit id="1985017503817569842" datatype="html">
         <source>Tildelingen blev tilføjet</source>
@@ -3727,9 +3697,6 @@
       <trans-unit id="3048587120469429420" datatype="html">
         <source>Kunne ikke kopiere roller</source>
       </trans-unit>
-      <trans-unit id="7680003617143986371" datatype="html">
-        <source>Vælg handling for valgte roller <x id="PH" equiv-text="this.buttonNumberText()"/></source>
-      </trans-unit>
       <trans-unit id="8526724513361212996" datatype="html">
         <source>Roller kopieret</source>
       </trans-unit>
@@ -3747,12 +3714,6 @@
       </trans-unit>
       <trans-unit id="1467323000161302264" datatype="html">
         <source>Slet bruger</source>
-      </trans-unit>
-      <trans-unit id="1827402117610901290" datatype="html">
-        <source> Tildel valgte roller </source>
-      </trans-unit>
-      <trans-unit id="3129699240351431056" datatype="html">
-        <source> Er du sikker på at du vil fjerne <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION" equiv-text="}}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="?"/> fra <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION_1" equiv-text="| async }}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="?"/>? <x id="START_TAG_NG_CONTAINER" ctype="x-ng_container" equiv-text="&lt;ng-container *ngIf=&quot;hasRoles(user)&quot;&gt;"/> Brugeren har disse roller, som kan tildeles en anden. Det er valgfrit om du vil slette brugeren uden at tildele rollerne. <x id="CLOSE_TAG_NG_CONTAINER" ctype="x-ng_container" equiv-text="&lt;/ng-container&gt;"/><x id="START_TAG_NG_CONTAINER_1" ctype="x-ng_container_1" equiv-text="&lt;ng-container *ngIf=&quot;!hasRoles(user)&quot;&gt;"/> Denne handling kan ikke fortrydes. <x id="CLOSE_TAG_NG_CONTAINER" ctype="x-ng_container" equiv-text="&lt;/ng-container&gt;"/></source>
       </trans-unit>
       <trans-unit id="12801649558012035" datatype="html">
         <source>Tilgængelig</source>
@@ -3780,9 +3741,6 @@
       </trans-unit>
       <trans-unit id="4741242196851213916" datatype="html">
         <source>Brugeren blev slettet</source>
-      </trans-unit>
-      <trans-unit id="7224605356565787228" datatype="html">
-        <source>Er du sikker på, at du vil overføre rollerne?</source>
       </trans-unit>
       <trans-unit id="8007594754054323000" datatype="html">
         <source>Brugeren har ingen roller</source>
@@ -4031,7 +3989,7 @@
         <source>Afvis ændringer </source>
       </trans-unit>
       <trans-unit id="6021905614502626006" datatype="html">
-        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="-button (buttonCl"/>Eksporter</source>
+        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="button (buttonCli"/>Eksporter</source>
       </trans-unit>
       <trans-unit id="6162528529889600567" datatype="html">
         <source>Ingen ændringer registreret </source>
@@ -4318,9 +4276,6 @@
       <trans-unit id="2311412587966355874" datatype="html">
         <source>Nøgle</source>
       </trans-unit>
-      <trans-unit id="3879129476245182465" datatype="html">
-        <source> Hjælpetekster </source>
-      </trans-unit>
       <trans-unit id="2075864540086018716" datatype="html">
         <source>Opret hjælpetekst</source>
       </trans-unit>
@@ -4558,20 +4513,11 @@
       <trans-unit id="586395525837431806" datatype="html">
         <source>Primær organisationsenhed</source>
       </trans-unit>
-      <trans-unit id="7132384966792473603" datatype="html">
-        <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="rong&gt;"/>Gammel brugerflade<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></source>
-      </trans-unit>
       <trans-unit id="1492491332269133030" datatype="html">
         <source> Bemærk at linkets gyldighed udløber efter 10 dage. Du skal derfor nå at nulstille dit password inden da. </source>
       </trans-unit>
-      <trans-unit id="1910138790709309910" datatype="html">
-        <source>kan du anmode om at nulstille det her.</source>
-      </trans-unit>
       <trans-unit id="3006097408675799565" datatype="html">
         <source> Send email </source>
-      </trans-unit>
-      <trans-unit id="3732788840591611874" datatype="html">
-        <source>Hvis du har glemt dit password, </source>
       </trans-unit>
       <trans-unit id="374396670767482335" datatype="html">
         <source> Hvis du har glemt passwordet til din KITOS bruger, kan du få tilsendt en email med et link til at nulstille det. </source>
@@ -4608,12 +4554,6 @@
       </trans-unit>
       <trans-unit id="706676642418633166" datatype="html">
         <source>Dit password er blevet nulstillet</source>
-      </trans-unit>
-      <trans-unit id="2223640905439252475" datatype="html">
-        <source>Single Sign-On (SSO)</source>
-      </trans-unit>
-      <trans-unit id="530214592421461833" datatype="html">
-        <source>Efter du er logget ind med SSO, bliver du omdirigeret til den gamle brugerflade. Så kan du vende tilbage til den nye brugerflade på https://kitos.dk/ui</source>
       </trans-unit>
       <trans-unit id="303883128089787443" datatype="html">
         <source>Kolonnevisnining gendannet til standardopsætning</source>
@@ -4652,7 +4592,7 @@
         <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon /&gt;"/> Eksporter</source>
       </trans-unit>
       <trans-unit id="793272841717310926" datatype="html">
-        <source><x id="START_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="p-lock-icon /&gt;"/><x id="CLOSE_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="-menu-button-item"/> Åben GDPR overblik </source>
+        <source><x id="START_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="p-lock-icon /&gt;"/><x id="CLOSE_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="menu-button-item&gt;"/> Åben GDPR overblik </source>
       </trans-unit>
       <trans-unit id="8145441157302108078" datatype="html">
         <source>System UUID</source>
@@ -4676,10 +4616,10 @@
         <source><x id="START_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="p-trashcan-icon&gt;"/><x id="CLOSE_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="Slet"/> Slet </source>
       </trans-unit>
       <trans-unit id="844753732077135788" datatype="html">
-        <source><x id="START_TAG_APP_DISK_ICON" ctype="x-app_disk_icon" equiv-text="p-disk-icon&gt;"/><x id="CLOSE_TAG_APP_DISK_ICON" ctype="x-app_disk_icon" equiv-text="Gem &lt;"/> Gem </source>
+        <source><x id="START_TAG_APP_DISK_ICON" ctype="x-app_disk_icon" equiv-text="p-disk-icon&gt;"/><x id="CLOSE_TAG_APP_DISK_ICON" ctype="x-app_disk_icon" equiv-text="Gem"/> Gem </source>
       </trans-unit>
       <trans-unit id="7970981235010102529" datatype="html">
-        <source><x id="START_TAG_APP_HELP_ICON" ctype="x-app_help_icon" equiv-text="p-help-icon&gt;"/><x id="CLOSE_TAG_APP_HELP_ICON" ctype="x-app_help_icon" equiv-text="Hjælp"/> Hjælp </source>
+        <source><x id="START_TAG_APP_HELP_ICON" ctype="x-app_help_icon" equiv-text="p-help-icon&gt;"/><x id="CLOSE_TAG_APP_HELP_ICON" ctype="x-app_help_icon" equiv-text="Hjælp &lt;"/> Hjælp </source>
       </trans-unit>
       <trans-unit id="1162347843657363489" datatype="html">
         <source>Er du sikker på, at du vil slette systemet?</source>
@@ -4801,9 +4741,6 @@
       <trans-unit id="2526296220627158527" datatype="html">
         <source>Relationer til andre systemer</source>
       </trans-unit>
-      <trans-unit id="4444328125924097461" datatype="html">
-        <source>Relevante organisationsenheder </source>
-      </trans-unit>
       <trans-unit id="5224755622036276546" datatype="html">
         <source>Relationer fra andre systemer</source>
       </trans-unit>
@@ -4836,9 +4773,6 @@
       </trans-unit>
       <trans-unit id="1164724015350728554" datatype="html">
         <source>Søg...</source>
-      </trans-unit>
-      <trans-unit id="987801205594216692" datatype="html">
-        <source> For at ændre din primære organisationsenhed, skal du skifte til &quot;<x id="INTERPOLATION" equiv-text="{{ userOrganizationName$ | async }}"/>&quot;. </source>
       </trans-unit>
       <trans-unit id="4917104049079759478" datatype="html">
         <source>Primær startmodul</source>
@@ -4933,14 +4867,446 @@
       <trans-unit id="9044278666187230003" datatype="html">
         <source>Dette udfald er obligatorisk og kan kun deaktiveres af OS2Kitos sekretariatet</source>
       </trans-unit>
-      <trans-unit id="1337323295460285381" datatype="html">
-        <source>Data bevares, dokumenter kan kasseres</source>
-      </trans-unit>
       <trans-unit id="4958882387568728993" datatype="html">
         <source>Data og dokumenter kasseres (K)</source>
       </trans-unit>
       <trans-unit id="9007353493777604696" datatype="html">
         <source>Data og dokumenter bevares (B)</source>
+      </trans-unit>
+      <trans-unit id="3609485978604004141" datatype="html">
+        <source>kontrakt</source>
+      </trans-unit>
+      <trans-unit id="4284262710394423144" datatype="html">
+        <source>systemanvendelse</source>
+      </trans-unit>
+      <trans-unit id="6000192550087006178" datatype="html">
+        <source>databehandling</source>
+      </trans-unit>
+      <trans-unit id="8979685620310883836" datatype="html">
+        <source>Data bevares men udvalgte eller alle dokumenter kan kasseres</source>
+      </trans-unit>
+      <trans-unit id="2479737654708088517" datatype="html">
+        <source>Filtrerer systemerne efter om de er aktive/ikke aktive, uanset årsag.</source>
+      </trans-unit>
+      <trans-unit id="5207851183117045385" datatype="html">
+        <source>Filtrerer på visning af aktive/ikke aktive systemer, efter om datoen på den tilknyttede kontrakt fra kontrakt modulet er udløbet.</source>
+      </trans-unit>
+      <trans-unit id="2306616791979379771" datatype="html">
+        <source>Filtrerer på visning efter systemets livscyklus markeret på system forsiden.</source>
+      </trans-unit>
+      <trans-unit id="4274186331072716554" datatype="html">
+        <source>Filtrerer på visning af systemer med en aktiv/ikke aktiv kontrakt tilknyttet fra kontrakt modulet.</source>
+      </trans-unit>
+      <trans-unit id="8902690316511427918" datatype="html">
+        <source>Dette filtrerer dine systemer efter om det er tilgængeligt eller et udgået system, som ikke længere kan tages i anvendelse og bør udfases.</source>
+      </trans-unit>
+      <trans-unit id="2590340397431371543" datatype="html">
+        <source>Hybrid</source>
+      </trans-unit>
+      <trans-unit id="3531169621040073341" datatype="html">
+        <source>Indeholder AI-teknologi</source>
+      </trans-unit>
+      <trans-unit id="3888819941059729884" datatype="html">
+        <source>Kontrakt oprettet og tilknyttet</source>
+      </trans-unit>
+      <trans-unit id="4965924264660200872" datatype="html">
+        <source>Kontrakt kunne ikke oprettes</source>
+      </trans-unit>
+      <trans-unit id="5655648815512279384" datatype="html">
+        <source> Opret og registrer </source>
+      </trans-unit>
+      <trans-unit id="2353526137738121108" datatype="html">
+        <source>Opret og registrer kontrakt</source>
+      </trans-unit>
+      <trans-unit id="5906499730586056252" datatype="html">
+        <source>Opret og registrer</source>
+      </trans-unit>
+      <trans-unit id="5878940564313218703" datatype="html">
+        <source>Webadressen er ugyldig. Sørg for, at den begynder med &quot;https://&quot; </source>
+      </trans-unit>
+      <trans-unit id="8066999230194125800" datatype="html">
+        <source>Webadressen er ugyldig. Sørg for, at den begynder med &quot;https://&quot;</source>
+      </trans-unit>
+      <trans-unit id="148234676016705932" datatype="html">
+        <source>DBS Databehandler</source>
+      </trans-unit>
+      <trans-unit id="5827469881532042511" datatype="html">
+        <source>DBS Navn</source>
+      </trans-unit>
+      <trans-unit id="3077468353243900065" datatype="html">
+        <source>Læs mere om Kitos</source>
+      </trans-unit>
+      <trans-unit id="6663244887897834438" datatype="html">
+        <source>Normal drift</source>
+      </trans-unit>
+      <trans-unit id="7829160424698222567" datatype="html">
+        <source>Ustabil drift</source>
+      </trans-unit>
+      <trans-unit id="8056066478947543702" datatype="html">
+        <source> Luk </source>
+      </trans-unit>
+      <trans-unit id="2966213553381382988" datatype="html">
+        <source> Glemt dit password? </source>
+      </trans-unit>
+      <trans-unit id="622752670487596537" datatype="html">
+        <source> Hvad er Kitos?</source>
+      </trans-unit>
+      <trans-unit id="6429720393055416101" datatype="html">
+        <source> eller </source>
+      </trans-unit>
+      <trans-unit id="820049001498537565" datatype="html">
+        <source>Log ind med SSO</source>
+      </trans-unit>
+      <trans-unit id="8924400491805013399" datatype="html">
+        <source>Log mig ikke ud</source>
+      </trans-unit>
+      <trans-unit id="5423741656801177932" datatype="html">
+        <source> Opret Systemintegrator</source>
+      </trans-unit>
+      <trans-unit id="6077242221566477767" datatype="html">
+        <source>API-brugere</source>
+      </trans-unit>
+      <trans-unit id="6584322019872984203" datatype="html">
+        <source>Diverse</source>
+      </trans-unit>
+      <trans-unit id="6690985920092272336" datatype="html">
+        <source>Brugerstyring</source>
+      </trans-unit>
+      <trans-unit id="1862687234657090800" datatype="html">
+        <source>Ændringer kunne ikke gemmes</source>
+      </trans-unit>
+      <trans-unit id="3984565971698645463" datatype="html">
+        <source>Ændringer gemt</source>
+      </trans-unit>
+      <trans-unit id="7241391520100148399" datatype="html">
+        <source>Opret Systemintegrator</source>
+      </trans-unit>
+      <trans-unit id="3659417500377682001" datatype="html">
+        <source>Er du sikker på at du vil fjerne &quot;<x id="PH" equiv-text="systemIntegrator.name"/>&quot;&apos;s rettighed som Systemintegrator?</source>
+      </trans-unit>
+      <trans-unit id="7847315002899056423" datatype="html">
+        <source>Primært startmodul</source>
+      </trans-unit>
+      <trans-unit id="6457416557932664753" datatype="html">
+        <source>Vis anvendelse</source>
+      </trans-unit>
+      <trans-unit id="8373896753514601426" datatype="html">
+        <source>Anvendes ikke</source>
+      </trans-unit>
+      <trans-unit id="3990765908365003353" datatype="html">
+        <source>Webtilgængelighed</source>
+      </trans-unit>
+      <trans-unit id="5200200492652807397" datatype="html">
+        <source>Noter om webtilgængelighed</source>
+      </trans-unit>
+      <trans-unit id="5315655945623152182" datatype="html">
+        <source>Seneste webtilgængelighedskontrol</source>
+      </trans-unit>
+      <trans-unit id="623060952116105946" datatype="html">
+        <source>Hvornår leverandøren har udført gennemsynet</source>
+      </trans-unit>
+      <trans-unit id="6505837149972184227" datatype="html">
+        <source>Webtilgængelighed (WCAG)</source>
+      </trans-unit>
+      <trans-unit id="8637037167675157753" datatype="html">
+        <source>Delvist</source>
+      </trans-unit>
+      <trans-unit id="3654247776975529872" datatype="html">
+        <source>Den overordnede kontrakt er ikke gyldig</source>
+      </trans-unit>
+      <trans-unit id="8481160601059811611" datatype="html">
+        <source>Kontrakten arver sin overordnede kontrakts gyldighed, og er derfor gyldig trods af at:</source>
+      </trans-unit>
+      <trans-unit id="3606013648406401255" datatype="html">
+        <source> Prøv igen og kontakt venligst Kitos sekretariatet, hvis problemet fortsætter</source>
+      </trans-unit>
+      <trans-unit id="4082842369475273113" datatype="html">
+        <source> Kontakt venligst din lokale IT administrator for at få tildelt adgang til Kitos</source>
+      </trans-unit>
+      <trans-unit id="4172062469313536052" datatype="html">
+        <source> Kontakt venligst Kitos sekretariatet, hvis I ønsker at tilslutte jer samarbejdet omkring Kitos</source>
+      </trans-unit>
+      <trans-unit id="8809613748564697708" datatype="html">
+        <source> Kontakt venligst din lokale IT administrator</source>
+      </trans-unit>
+      <trans-unit id="1440318310489375093" datatype="html">
+        <source>Den bruger, som du forsøger at logge på med, er ukendt i det fælleskommunale STS Organisation eller tilhører en kommune uden godkendt serviceaftale</source>
+      </trans-unit>
+      <trans-unit id="4639924666969098557" datatype="html">
+        <source>Uklassificeret SSO fejl</source>
+      </trans-unit>
+      <trans-unit id="5141417027258638490" datatype="html">
+        <source>Den bruger, som du er logget på med, har ikke adgang til Kitos</source>
+      </trans-unit>
+      <trans-unit id="5448518196835237176" datatype="html">
+        <source>Den bruger, som du forsøger at logge på med, kan ikke autooprettes i Kitos da brugerens organisation er ukendt</source>
+      </trans-unit>
+      <trans-unit id="8435640758869757683" datatype="html">
+        <source> Du kan kun tilknytte en primær organisationsenhed, i organisationer du har en rolle i. </source>
+      </trans-unit>
+      <trans-unit id="2813580300767889762" datatype="html">
+        <source>Nedarver kontrakten sin overordnedes gyldighed</source>
+      </trans-unit>
+      <trans-unit id="4604630012212940269" datatype="html">
+        <source>Nedarver ikke</source>
+      </trans-unit>
+      <trans-unit id="7741594211409337213" datatype="html">
+        <source>Nedarv den overordnedes gyldighed</source>
+      </trans-unit>
+      <trans-unit id="810543436502151784" datatype="html">
+        <source>Nedarver</source>
+      </trans-unit>
+      <trans-unit id="1620385434838836828" datatype="html">
+        <source>Audit status</source>
+      </trans-unit>
+      <trans-unit id="3407587864810413529" datatype="html">
+        <source>Hvid: <x id="PH" equiv-text="audit.white"/>, Rød: <x id="PH_1" equiv-text="audit.red"/>, Gul: <x id="PH_2" equiv-text="audit.yellow"/>, Grøn: <x id="PH_3" equiv-text="audit.green"/>, Max: <x id="PH_4" equiv-text="audit.total"/></source>
+      </trans-unit>
+      <trans-unit id="2581887775164854038" datatype="html">
+        <source>Kopier roller til</source>
+      </trans-unit>
+      <trans-unit id="29832309535656200" datatype="html">
+        <source>System</source>
+      </trans-unit>
+      <trans-unit id="3051919120993673498" datatype="html">
+        <source>
+          <x id="PH" equiv-text="this.snackbarText"/>
+          <x id="PH_1" equiv-text="this.buttonNumberText()"/>
+        </source>
+      </trans-unit>
+      <trans-unit id="3118206486836195151" datatype="html">
+        <source>Der er ikke flere kontrakter at overføre</source>
+      </trans-unit>
+      <trans-unit id="4197097943225405677" datatype="html">
+        <source>Overfør kontrakter</source>
+      </trans-unit>
+      <trans-unit id="4451069668768368167" datatype="html">
+        <source>Underordnet kontrakter</source>
+      </trans-unit>
+      <trans-unit id="4534305672667817010" datatype="html">
+        <source>Er du sikker på at du vil slette kontrakten, samt dens underordnede kontrakter?</source>
+      </trans-unit>
+      <trans-unit id="5050471481386035781" datatype="html">
+        <source>Slet kontrakt</source>
+      </trans-unit>
+      <trans-unit id="5681409232995626808" datatype="html">
+        <source>Vælge</source>
+      </trans-unit>
+      <trans-unit id="609393622749372398" datatype="html">
+        <source>Er du sikker på at du vil overføre de valgte kontrakter?</source>
+      </trans-unit>
+      <trans-unit id="6176199424956130195" datatype="html">
+        <source>Ingen data</source>
+      </trans-unit>
+      <trans-unit id="6872051229214902883" datatype="html">
+        <source>Vælg handling for kontrakter</source>
+      </trans-unit>
+      <trans-unit id="862924224019392737" datatype="html">
+        <source>Er du sikker på du vil slette denne kontrakt? Kontraktens underordnede kontrakter vil blive slettet sammen med den. De underordnede kontrakter kan også overføres til en anden kontrakt. </source>
+      </trans-unit>
+      <trans-unit id="8750750261302099129" datatype="html">
+        <source>Vælg handling for valgte roller</source>
+      </trans-unit>
+      <trans-unit id="1292737233370901804" datatype="html">
+        <source>Mail</source>
+      </trans-unit>
+      <trans-unit id="1412916315741996751" datatype="html">
+        <source>Udklipsholder</source>
+      </trans-unit>
+      <trans-unit id="5979549623650471307" datatype="html">
+        <source>Dokument</source>
+      </trans-unit>
+      <trans-unit id="6897943711350574955" datatype="html">
+        <source>Kalendar</source>
+      </trans-unit>
+      <trans-unit id="7872550646351072421" datatype="html">
+        <source>Indstillinger</source>
+      </trans-unit>
+      <trans-unit id="4334674530466993946" datatype="html">
+        <source>Ikon</source>
+      </trans-unit>
+      <trans-unit id="8053985576501192145" datatype="html">
+        <source>Vælg brugere</source>
+      </trans-unit>
+      <trans-unit id="1281858338231957865" datatype="html">
+        <source>Hvis dette er sat, så vil den pågældende kontrakts status, altid være denne samme, som dens overordnede kontrakt.</source>
+      </trans-unit>
+      <trans-unit id="8653808192316183108" datatype="html">
+        <source>Nedarv overordnet kontrakts gyldighed</source>
+      </trans-unit>
+      <trans-unit id="1461683135245713706" datatype="html">
+        <source>Choose Color</source>
+        <note priority="1" from="description">The title for the ActionSheet when in adaptive mode.</note>
+        <note priority="1" from="meaning">kendo.colorpicker.adaptiveTitle</note>
+      </trans-unit>
+      <trans-unit id="1493345812229818724" datatype="html">
+        <source>Close</source>
+        <note priority="1" from="description">The title for the Close button.</note>
+        <note priority="1" from="meaning">kendo.colorpicker.closeButton</note>
+      </trans-unit>
+      <trans-unit id="1737032542950161383" datatype="html">
+        <source>items per page</source>
+        <note priority="1" from="description">The label for the page size chooser in the Pager</note>
+        <note priority="1" from="meaning">kendo.pager.itemsPerPage</note>
+      </trans-unit>
+      <trans-unit id="2001603891643955632" datatype="html">
+        <source>Select page</source>
+        <note priority="1" from="description">The text of the title and aria-label attributes applied to the page chooser in the Pager</note>
+        <note priority="1" from="meaning">kendo.pager.selectPage</note>
+      </trans-unit>
+      <trans-unit id="2124176984717923206" datatype="html">
+        <source>
+          <x id="INTERPOLATION" equiv-text="&quot; i18"/>
+        </source>
+        <note priority="1" from="description">The value of the aria-label attribute of the Pager</note>
+        <note priority="1" from="meaning">kendo.pager.ariaLabel</note>
+      </trans-unit>
+      <trans-unit id="2144512323940687374" datatype="html">
+        <source>Are you sure you want to delete this item?</source>
+        <note priority="1" from="description">The content of the built-in remove item confirmation Dialog</note>
+        <note priority="1" from="meaning">kendo.grid.removeConfirmationDialogContent</note>
+      </trans-unit>
+      <trans-unit id="2224878318274179684" datatype="html">
+        <source>Cancel</source>
+        <note priority="1" from="description">The text of the external editing form Cancel button</note>
+        <note priority="1" from="meaning">kendo.grid.externalEditingCancelText</note>
+      </trans-unit>
+      <trans-unit id="2281955701430052538" datatype="html">
+        <source>
+          <x id="INTERPOLATION" equiv-text="&quot; i18n-removeConfirmationDialogTitle="/>
+        </source>
+        <note priority="1" from="description">The default text of a form validation error when using external editing.</note>
+        <note priority="1" from="meaning">kendo.grid.formValidationErrorText</note>
+      </trans-unit>
+      <trans-unit id="2330948786674386987" datatype="html">
+        <source>Page Number</source>
+        <note priority="1" from="description">The label for the pager input in the Pager</note>
+        <note priority="1" from="meaning">kendo.pager.pageNumberInputTitle</note>
+      </trans-unit>
+      <trans-unit id="2438575870810538060" datatype="html">
+        <source>of</source>
+        <note priority="1" from="description">The label before the total pages number in the Pager</note>
+        <note priority="1" from="meaning">kendo.pager.of</note>
+      </trans-unit>
+      <trans-unit id="2574527919448072107" datatype="html">
+        <source>
+          <x id="INTERPOLATION" equiv-text="&quot; &gt;&lt;/ng-cont"/>
+        </source>
+        <note priority="1" from="description">The value of the aria-label attribute of the input fields.</note>
+        <note priority="1" from="meaning">kendo.otpinput.ariaLabel</note>
+      </trans-unit>
+      <trans-unit id="2977649834936444534" datatype="html">
+        <source>Go to the next page</source>
+        <note priority="1" from="description">The label for the next page button in the Pager</note>
+        <note priority="1" from="meaning">kendo.pager.nextPage</note>
+      </trans-unit>
+      <trans-unit id="3173443332469111280" datatype="html">
+        <source>Go to the previous page</source>
+        <note priority="1" from="description">The label for the previous page button in the Pager</note>
+        <note priority="1" from="meaning">kendo.pager.previousPage</note>
+      </trans-unit>
+      <trans-unit id="3496480700570244582" datatype="html">
+        <source>items</source>
+        <note priority="1" from="description">The label after the total pages number in the Pager</note>
+        <note priority="1" from="meaning">kendo.pager.items</note>
+      </trans-unit>
+      <trans-unit id="3543857959141568934" datatype="html">
+        <source>Scroll left</source>
+        <note priority="1" from="description">The title for the **Previous Tool** button when the Toolbar is scrollable.</note>
+        <note priority="1" from="meaning">kendo.toolbar.previousToolButton</note>
+      </trans-unit>
+      <trans-unit id="4302174378452165800" datatype="html">
+        <source>Go to the last page</source>
+        <note priority="1" from="description">The label for the last page button in the Pager</note>
+        <note priority="1" from="meaning">kendo.pager.lastPage</note>
+      </trans-unit>
+      <trans-unit id="5538270010027711668" datatype="html">
+        <source>No</source>
+        <note priority="1" from="description">The text of the built-in remove item confirmation Dialog reject action button</note>
+        <note priority="1" from="meaning">kendo.grid.removeConfirmationDialogRejectText</note>
+      </trans-unit>
+      <trans-unit id="6360019495709584643" datatype="html">
+        <source>Type a page number</source>
+        <note priority="1" from="description">The text of the aria-label attribute applied to the input element for entering the page number</note>
+        <note priority="1" from="meaning">kendo.grid.pagerInputLabel</note>
+      </trans-unit>
+      <trans-unit id="639527922029546265" datatype="html">
+        <source>Edit</source>
+        <note priority="1" from="description">The title of the built-in external editing form container</note>
+        <note priority="1" from="meaning">kendo.grid.externalEditingTitle</note>
+      </trans-unit>
+      <trans-unit id="6762596725712096287" datatype="html">
+        <source>More tools</source>
+        <note priority="1" from="description">The title of the **more tools** button in a responsive ToolBar</note>
+        <note priority="1" from="meaning">kendo.toolbar.moreToolsTitle</note>
+      </trans-unit>
+      <trans-unit id="6806557244499949355" datatype="html">
+        <source>Save</source>
+        <note priority="1" from="description">The text of the external editing form Save button</note>
+        <note priority="1" from="meaning">kendo.grid.externalEditingSaveText</note>
+      </trans-unit>
+      <trans-unit id="7169522157181311670" datatype="html">
+        <source>Go to the first page</source>
+        <note priority="1" from="description">The label for the first page button in the Pager</note>
+        <note priority="1" from="meaning">kendo.pager.firstPage</note>
+      </trans-unit>
+      <trans-unit id="7831598438145269124" datatype="html">
+        <source>Yes</source>
+        <note priority="1" from="description">The text of the built-in remove item confirmation Dialog confirm action button</note>
+        <note priority="1" from="meaning">kendo.grid.removeConfirmationDialogConfirmText</note>
+      </trans-unit>
+      <trans-unit id="8477550023881248885" datatype="html">
+        <source>Type a page number</source>
+        <note priority="1" from="description">The text of the aria-label attribute applied to the input element for entering the page number.</note>
+        <note priority="1" from="meaning">kendo.pager.inputLabel</note>
+      </trans-unit>
+      <trans-unit id="8678868632586383003" datatype="html">
+        <source>Page</source>
+        <note priority="1" from="description">The label before the current page number in the Pager</note>
+        <note priority="1" from="meaning">kendo.pager.page</note>
+      </trans-unit>
+      <trans-unit id="9125528523516170497" datatype="html">
+        <source>Scroll right</source>
+        <note priority="1" from="description">The title for the **Next Tool** button when the Toolbar is scrollable.</note>
+        <note priority="1" from="meaning">kendo.toolbar.nextToolButton</note>
+      </trans-unit>
+      <trans-unit id="9130988197537985781" datatype="html">
+        <source>Please confirm</source>
+        <note priority="1" from="description">The title of the built-in remove item confirmation Dialog</note>
+        <note priority="1" from="meaning">kendo.grid.removeConfirmationDialogTitle</note>
+      </trans-unit>
+      <trans-unit id="4447588157619270374" datatype="html">
+        <source> Brugeren har nogle roller, som kan tildeles en anden. Det er valgfrit om du vil slette brugeren uden at tildele rollerne. </source>
+      </trans-unit>
+      <trans-unit id="6973173527205023878" datatype="html">
+        <source> Overfør roller </source>
+      </trans-unit>
+      <trans-unit id="8006200185320958273" datatype="html">
+        <source> Denne handling kan ikke fortrydes. </source>
+      </trans-unit>
+      <trans-unit id="866125510857454253" datatype="html">
+        <source>Overfør roller</source>
+      </trans-unit>
+      <trans-unit id="9190795738522963148" datatype="html">
+        <source> Er du sikker på at du vil fjerne <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION" equiv-text="}}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="?"/> fra <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION_1" equiv-text="| async }}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="?"/>? </source>
+      </trans-unit>
+      <trans-unit id="4577772021742281224" datatype="html">
+        <source>Brugeren har allerede denne rolle.</source>
+      </trans-unit>
+      <trans-unit id="5299437974151521850" datatype="html">
+        <source>Rediger <x id="PH" equiv-text="this.entityName.toLocaleLowerCase()"/></source>
+      </trans-unit>
+      <trans-unit id="7788193785121346142" datatype="html">
+        <source> Anuller </source>
+      </trans-unit>
+      <trans-unit id="1611684173879100499" datatype="html">
+        <source>Gå til</source>
+      </trans-unit>
+      <trans-unit id="7724449879287826549" datatype="html">
+        <source>Indeholder AI-teknologi?</source>
+      </trans-unit>
+      <trans-unit id="1502212713118381557" datatype="html">
+        <source>Ingen</source>
       </trans-unit>
     </body>
   </file>

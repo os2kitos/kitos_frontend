@@ -11,7 +11,7 @@ export interface FkOrganizationUnit {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const adaptFkOrganizationUnit = (
-  value: APIConnectionUpdateOrganizationUnitConsequenceDTO
+  value: APIConnectionUpdateOrganizationUnitConsequenceDTO,
 ): FkOrganizationUnit => {
   return {
     id: value.uuid!,

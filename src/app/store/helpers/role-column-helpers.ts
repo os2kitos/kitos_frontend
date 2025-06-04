@@ -5,7 +5,7 @@ import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/reg
 export function roleDtoToRoleGridColumns(
   role: APIBusinessRoleDTO,
   sectionName: string,
-  entityType: RegistrationEntityTypes
+  entityType: RegistrationEntityTypes,
 ): GridColumn[] {
   return [
     {

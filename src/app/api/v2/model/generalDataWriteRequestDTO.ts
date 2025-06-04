@@ -36,5 +36,36 @@ export interface APIGeneralDataWriteRequestDTO {
     systemVersion?: string;
     numberOfExpectedUsers?: APIExpectedUsersIntervalDTO;
     validity?: APIItSystemUsageValidityWriteRequestDTO;
+    /**
+     * Whether the system usage is known to include any kind of AI technology
+     */
+    containsAITechnology?: APIGeneralDataWriteRequestDTO.ContainsAITechnologyEnum;
+    /**
+     * Defines if the system is web accessibility compliant
+     */
+    webAccessibilityCompliance?: APIGeneralDataWriteRequestDTO.WebAccessibilityComplianceEnum;
+    /**
+     * Last time the supplier checked system web accessibility
+     */
+    lastWebAccessibilityCheck?: string;
+    /**
+     * Notes related to the web accessibility of the system
+     */
+    webAccessibilityNotes?: string;
 }
+export namespace APIGeneralDataWriteRequestDTO {
+    export type ContainsAITechnologyEnum = 'No' | 'Yes' | 'Undecided';
+    export const ContainsAITechnologyEnum = {
+        No: 'No' as ContainsAITechnologyEnum,
+        Yes: 'Yes' as ContainsAITechnologyEnum,
+        Undecided: 'Undecided' as ContainsAITechnologyEnum
+    };
+    export type WebAccessibilityComplianceEnum = 'No' | 'Yes' | 'Partially';
+    export const WebAccessibilityComplianceEnum = {
+        No: 'No' as WebAccessibilityComplianceEnum,
+        Yes: 'Yes' as WebAccessibilityComplianceEnum,
+        Partially: 'Partially' as WebAccessibilityComplianceEnum
+    };
+}
+
 

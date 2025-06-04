@@ -2,82 +2,83 @@
 
 // Colors
 
-$color-primary: #3767a9;
-$color-primary-base: $color-primary;
-$color-primary-dark: #284b7b;
-$color-primary-darker: #1f3b61;
-$color-primary-80: #6a92c8;
-$color-primary-60: #90aed5;
-$color-primary-40: #d9e3f2;
-$color-primary-20: #e8eef7;
-$color-primary-10: #f4f7fb;
+$color-primary: #3767a9 !default;
+$color-primary-base: $color-primary !default;
+$color-primary-dark: #284b7b !default;
+$color-primary-darker: #1f3b61 !default;
+$color-primary-80: #6a92c8 !default;
+$color-primary-60: #90aed5 !default;
+$color-primary-40: #d9e3f2 !default;
+$color-primary-20: #e8eef7 !default;
+$color-primary-10: #f4f7fb !default;
 
-$color-neutral: #39414b;
-$color-neutral-base: $color-neutral;
-$color-neutral-dark: #111e32;
-$color-neutral-darker: #111e32;
-$color-neutral-10: #f6f7f9;
-$color-neutral-20: #e9edf2;
-$color-neutral-40: #dcdfe5;
-$color-neutral-60: #b0b7bf;
-$color-neutral-80: #67707e;
+$color-neutral: #39414b !default;
+$color-neutral-base: $color-neutral !default;
+$color-neutral-dark: #111e32 !default;
+$color-neutral-darker: #111e32 !default;
+$color-neutral-10: #f6f7f9 !default;
+$color-neutral-20: #e9edf2 !default;
+$color-neutral-40: #dcdfe5 !default;
+$color-neutral-60: #b0b7bf !default;
+$color-neutral-80: #67707e !default;
 
-$color-secondary: #2f6b24;
-$color-secondary-base: $color-secondary;
-$color-secondary-dark: #294e22;
-$color-secondary-darker: #1a3215;
-$color-secondary-10: #f5faf4;
-$color-secondary-20: #e8f4e6;
-$color-secondary-40: #d1e4cd;
-$color-secondary-60: #66a659;
-$color-secondary-80: #518547;
+$color-secondary: #2f6b24 !default;
+$color-secondary-base: $color-secondary !default;
+$color-secondary-dark: #294e22 !default;
+$color-secondary-darker: #1a3215 !default;
+$color-secondary-10: #f5faf4 !default;
+$color-secondary-20: #e8f4e6 !default;
+$color-secondary-40: #d1e4cd !default;
+$color-secondary-60: #66a659 !default;
+$color-secondary-80: #518547 !default;
 
-$color-white: #ffffff;
-$color-white-10: #ffffff1a;
-$color-white-20: #ffffff33;
-$color-white-40: #ffffff66;
+$color-white: #ffffff !default;
+$color-white-10: #ffffff1a !default;
+$color-white-20: #ffffff33 !default;
+$color-white-40: #ffffff66 !default;
 
-$color-negative: #dc4747;
-$color-negative-base: #d2284a;
-$color-negative-dark: #73122f;
-$color-negative-light: #ffe5ed;
-$color-negative-lighter: #ffeaf0;
-$color-positive: #4db28c;
-$color-positive-dark: #275946;
-$color-positive-light: #ceeddc;
-$color-positive-lighter: #e6f6ed;
-$color-warning: #ffb020;
+$color-negative: #dc4747 !default;
+$color-negative-base: #d2284a !default;
+$color-negative-dark: #73122f !default;
+$color-negative-light: #ffe5ed !default;
+$color-negative-lighter: #ffeaf0 !default;
+$color-positive: #4db28c !default;
+$color-positive-dark: #275946 !default;
+$color-positive-light: #ceeddc !default;
+$color-positive-lighter: #e6f6ed !default;
+$color-warning: #ffb020 !default;
 
-$dark-primary-text: $color-neutral-dark;
-$light-primary-text: $color-white;
+$dark-primary-text: $color-neutral-dark !default;
+$light-primary-text: $color-white !default;
 
 // Sizes
 
-$padding-smallest: 2px;
-$padding-smaller: 4px;
-$padding-small: 8px;
-$padding-small-medium: 12px;
-$padding-medium: 16px;
-$padding-medium-large: 24px;
-$padding-large: 32px;
+$padding-smallest: 2px !default;
+$padding-smaller: 4px !default;
+$padding-small: 8px !default;
+$padding-small-medium: 12px !default;
+$padding-medium: 16px !default;
+$padding-medium-large: 24px !default;
+$padding-large: 32px !default;
 
-$radius-small: 4px;
-$radius-large: 8px;
+$radius-small: 4px !default;
+$radius-large: 8px !default;
 
-$content-width-min: 1440px;
-$content-width-max: 1920px;
+$content-width-min: 1440px !default;
+$content-width-max: 1920px !default;
 
-$navbar-height: 92px;
-$header-height: 50px;
-$navigation-drawer-width: 275px;
-$content-height: calc(100vh - $navbar-height - $padding-medium * 2 - $padding-large - $header-height);
+$navbar-height: 76px !default;
+$header-height: 50px !default;
+$navigation-drawer-width: 275px !default;
+$content-height: calc(100vh - $navbar-height - $padding-medium * 2 - $padding-large - $header-height) !default;
 
-$menu-item-width: 280px;
-$input-height: 56px;
+$menu-item-width: 280px !default;
+$input-height: 56px !default;
 
-$link-font-size-x-small: 12px;
-$link-font-size-small: 14px;
-$link-font-size-medium: 16px;
+$link-font-size-x-small: 12px !default;
+$link-font-size-small: 14px !default;
+$link-font-size-medium: 16px !default;
+$link-font-size-large: 18px !default;
 
 // Fonts
 

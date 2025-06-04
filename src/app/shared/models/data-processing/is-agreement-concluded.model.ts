@@ -25,7 +25,7 @@ export const isAgreementConcludedOptions: IsAgreementConcluded[] = [
 ];
 
 export const mapIsAgreementConcluded = (
-  source?: APIDataProcessingRegistrationReadModel.IsAgreementConcludedEnum
+  source?: APIDataProcessingRegistrationReadModel.IsAgreementConcludedEnum,
 ): IsAgreementConcluded | undefined => {
   return isAgreementConcludedOptions.find((option) => option.value === source);
 };

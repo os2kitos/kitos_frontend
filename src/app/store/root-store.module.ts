@@ -53,6 +53,7 @@ import { notificationFeature } from './user-notifications/reducer';
 import { UserNotificationsEffects } from './user-notifications/effects';
 import { alertsFeature } from './alerts/reducers';
 import { AlertsEffects } from './alerts/effects';
+import { SystemIntegratorEffects } from './global-admin/system-integrators/effects';
 
 @NgModule({
   imports: [
@@ -115,6 +116,7 @@ import { AlertsEffects } from './alerts/effects';
       GdprReportEffects,
       UserNotificationsEffects,
       AlertsEffects,
+      SystemIntegratorEffects,
     ]),
     RouterModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),

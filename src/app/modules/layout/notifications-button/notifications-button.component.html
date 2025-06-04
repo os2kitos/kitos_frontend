@@ -2,7 +2,8 @@
   [matBadge]="alertsCount$ | async"
   matBadgeColor="primary"
   buttonStyle="secondary"
-  (buttonClick)="navigateToNotifications()"
+  [routerLink]="getFullRoute$() | async"
+  routerLinkActive="active"
   class="notification-button"
   data-cy="notifications-button"
 >

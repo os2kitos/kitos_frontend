@@ -1,20 +1,20 @@
-@import "theme";
-@import "mixins";
+@use "theme";
+@use "mixins";
 
 :host {
   display: flex;
   flex-direction: column;
   height: fit-content;
-  min-height: $input-height;
+  min-height: theme.$input-height;
   padding: 7px 14px;
 
-  background-color: $color-neutral-10;
+  background-color: theme.$color-neutral-10;
   border-color: rgba(0, 0, 0, 0.06);
-  color: $color-neutral-80;
+  color: theme.$color-neutral-80;
   font-size: 16px;
   line-height: 1.25;
 
-  border-radius: $radius-large;
+  border-radius: theme.$radius-large;
   margin: 0;
   width: 100%;
   min-width: 0;
@@ -35,7 +35,7 @@
 }
 
 label {
-  color: $color-neutral-base;
+  color: theme.$color-neutral-base;
   font-size: 13px;
   font-weight: bold;
   line-height: 1.25;

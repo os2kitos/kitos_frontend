@@ -1,9 +1,9 @@
-@import "theme";
+@use "theme";
 
 .changelog-header-container {
   display: flex;
   justify-content: flex-end;
-  margin-bottom: $padding-medium;
+  margin-bottom: theme.$padding-medium;
 }
 
 .overflow-hidden {

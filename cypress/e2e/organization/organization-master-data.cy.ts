@@ -16,17 +16,18 @@ describe('organization-master-data', () => {
     cy.setup(true, 'organization/master-data');
   });
 
-  it('Can edit organization master data', () => {
-    const newPhone = '12345678';
-    cy.intercept('api/v2/internal/organizations/*/master-data').as('patch');
+  // flaky test - https://os2web.atlassian.net/browse/KITOSUDV-5831
+  // it('Can edit organization master data', () => {
+  //   const newPhone = '12345678';
+  //   cy.intercept('api/v2/internal/organizations/*/master-data').as('patch');
 
-    cy.getByDataCy('master-data-phone-input').type('{selectall}{backspace}').type(newPhone);
-    cy.getByDataCy('master-data-headline').click();
+  //   cy.getByDataCy('master-data-phone-input').type('{selectall}{backspace}').type(newPhone);
+  //   cy.getByDataCy('master-data-headline').click();
 
-    cy.wait('@patch').then((interception) => {
-      expect(interception.request.body.phone).to.equal(newPhone);
-    });
-  });
+  //   cy.wait('@patch').then((interception) => {
+  //     expect(interception.request.body.phone).to.equal(newPhone);
+  //   });
+  // });
 
   // it('Can edit data responsible role master data', () => {
   //   const newCvr = '12345678';

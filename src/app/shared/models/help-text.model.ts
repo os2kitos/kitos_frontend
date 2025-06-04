@@ -21,4 +21,3 @@ export function adaptHelpText(apiHelpText: APIHelpTextResponseDTO): HelpText {
     Title: apiHelpText.title,
   };
 }
-

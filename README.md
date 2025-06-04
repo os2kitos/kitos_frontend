@@ -40,6 +40,7 @@ The list below mentions some of the larger dependencies of the project.
 - [Cypress](https://www.cypress.io/) for e2e tests.
 - [Typescript](https://www.typescriptlang.org) for type-safe javascript programming.
 - [yarn](https://yarnpkg.com/lang/en/) for dependency management and execution.
+- [Kendo Grid](https://www.telerik.com/kendo-angular-ui/components/grid) for the overview pages.
 
 ## API
 
@@ -54,6 +55,8 @@ Webpacks [proxy](https://webpack.js.org/configuration/dev-server/#devserverproxy
 [Angular Material](https://material.angular.io/) is chosen for Angular Material UI components - customized to match the Kitos design language. `src/styles/typography.scss` defines Material fonts and `src/styles/material.scss` defines the Material theme palette which is set to the same color across all hues, because the shades does not match the design.
 
 ## Kendo Grid
+
+The licensed Kendo Grid from Telerik is used as the underlying component for the various overview pages (IT System Usages, It Contracts etc.).
 
 To install a Kendo Grid license follow this guide: [install license](https://www.telerik.com/kendo-angular-ui/components/my-license/), and make sure to set the license as a [system environment variable](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_environment_variables?view=powershell-7.4)
 

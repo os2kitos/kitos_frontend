@@ -32,7 +32,7 @@ export const itSystemFeature = createFeature({
     on(ITSystemActions.getITSystem, (state): ITSystemState => ({ ...state, itSystem: undefined, loading: true })),
     on(
       ITSystemActions.getITSystemSuccess,
-      (state, { itSystem }): ITSystemState => ({ ...state, itSystem, loading: false })
+      (state, { itSystem }): ITSystemState => ({ ...state, itSystem, loading: false }),
     ),
     on(ITSystemActions.getITSystems, (state): ITSystemState => ({ ...state, isLoadingSystemsQuery: true })),
     on(
@@ -41,7 +41,7 @@ export const itSystemFeature = createFeature({
         ...itSystemAdapter.setAll(itSystems, state),
         total,
         isLoadingSystemsQuery: false,
-      })
+      }),
     ),
     on(
       ITSystemActions.updateGridState,
@@ -50,7 +50,7 @@ export const itSystemFeature = createFeature({
         isLoadingSystemsQuery: true,
         gridState,
         previousGridState: state.gridState,
-      })
+      }),
     ),
     on(ITSystemActions.getITSystemsError, (state): ITSystemState => ({ ...state, isLoadingSystemsQuery: false })),
     on(ITSystemActions.deleteITSystem, (state): ITSystemState => ({ ...state, isRemoving: true })),
@@ -61,22 +61,22 @@ export const itSystemFeature = createFeature({
     on(ITSystemActions.getITSystemPermissions, (state): ITSystemState => ({ ...state, permissions: undefined })),
     on(
       ITSystemActions.getITSystemPermissionsSuccess,
-      (state, { permissions }): ITSystemState => ({ ...state, permissions })
+      (state, { permissions }): ITSystemState => ({ ...state, permissions }),
     ),
     on(
       ITSystemActions.getITSystemCollectionPermissions,
-      (state): ITSystemState => ({ ...state, collectionPermissions: undefined })
+      (state): ITSystemState => ({ ...state, collectionPermissions: undefined }),
     ),
     on(
       ITSystemActions.getITSystemCollectionPermissionsSuccess,
-      (state, { collectionPermissions }): ITSystemState => ({ ...state, collectionPermissions })
+      (state, { collectionPermissions }): ITSystemState => ({ ...state, collectionPermissions }),
     ),
 
     on(ITSystemActions.addExternalReferenceSuccess, (state, { itSystem }): ITSystemState => ({ ...state, itSystem })),
     on(ITSystemActions.editExternalReferenceSuccess, (state, { itSystem }): ITSystemState => ({ ...state, itSystem })),
     on(
       ITSystemActions.removeExternalReferenceSuccess,
-      (state, { itSystem }): ITSystemState => ({ ...state, itSystem })
+      (state, { itSystem }): ITSystemState => ({ ...state, itSystem }),
     ),
 
     on(ITSystemActions.updateGridColumnsSuccess, (state, { gridColumns }): ITSystemState => {
@@ -103,7 +103,7 @@ export const itSystemFeature = createFeature({
         }
         const newSystem = { ...itSystem, IsInUse: false };
         return { ...state, entities: { ...state.entities, [itSystemUuid]: newSystem } };
-      }
-    )
+      },
+    ),
   ),
 });

@@ -39,7 +39,7 @@ export class ItSystemUsageDetailsRelationsDialogComponentStore extends Component
   public readonly systemUsages$ = this.select((state) => state.systemUsages).pipe(filterNullish());
   public readonly usageSearchResultIsLimited$ = this.systemUsages$.pipe(
     filterNullish(),
-    map((usages) => usages.length >= this.PAGE_SIZE)
+    map((usages) => usages.length >= this.PAGE_SIZE),
   );
   public readonly isSystemUsagesLoading$ = this.select((state) => state.usagesLoading).pipe(filterNullish());
 
@@ -61,7 +61,7 @@ export class ItSystemUsageDetailsRelationsDialogComponentStore extends Component
     private readonly apiUsageService: APIV2ItSystemUsageService,
     private readonly apiInternalUsageService: APIV2ItSystemUsageInternalINTERNALService,
     private readonly apiInterfaceService: APIV2ItInterfaceService,
-    private readonly apiContractService: APIV2ItContractService
+    private readonly apiContractService: APIV2ItContractService,
   ) {
     super({ systemUuidLoading: false, usagesLoading: false, interfacesLoading: false, contractsLoading: false });
   }
@@ -70,56 +70,56 @@ export class ItSystemUsageDetailsRelationsDialogComponentStore extends Component
     (state, systemUuid: string | undefined): State => ({
       ...state,
       systemUuid,
-    })
+    }),
   );
 
   private updateSystemUuidIsLoading = this.updater(
     (state, systemUuidLoading: boolean): State => ({
       ...state,
       systemUuidLoading,
-    })
+    }),
   );
 
   private updateSystemUsages = this.updater(
     (state, systemUsages: Array<APIIdentityNamePairResponseDTO>): State => ({
       ...state,
       systemUsages,
-    })
+    }),
   );
 
   private updateSystemUsagesIsLoading = this.updater(
     (state, usagesLoading: boolean): State => ({
       ...state,
       usagesLoading,
-    })
+    }),
   );
 
   private updateInterfaces = this.updater(
     (state, interfaces: Array<APIItInterfaceResponseDTO>): State => ({
       ...state,
       interfaces,
-    })
+    }),
   );
 
   private updateInterfacesIsLoading = this.updater(
     (state, interfacesListIsLoading: boolean): State => ({
       ...state,
       interfacesLoading: interfacesListIsLoading,
-    })
+    }),
   );
 
   private updateContracts = this.updater(
     (state, contracts: Array<APIItContractResponseDTO>): State => ({
       ...state,
       contracts,
-    })
+    }),
   );
 
   private updateContractsIsLoading = this.updater(
     (state, contractsListIsLoading: boolean): State => ({
       ...state,
       contractsLoading: contractsListIsLoading,
-    })
+    }),
   );
 
   public updateCurrentSystemUuid(usageUuid: string | undefined) {
@@ -139,11 +139,11 @@ export class ItSystemUsageDetailsRelationsDialogComponentStore extends Component
           tapResponse(
             (usage) => this.updateSystemUuid(usage.systemContext.uuid),
             (error) => console.error(error),
-            () => this.updateSystemUuidIsLoading(false)
-          )
+            () => this.updateSystemUuidIsLoading(false),
+          ),
         );
-      })
-    )
+      }),
+    ),
   );
 
   public getItSystemUsages = this.effect((search$: Observable<string | undefined>) =>
@@ -169,15 +169,15 @@ export class ItSystemUsageDetailsRelationsDialogComponentStore extends Component
                     .map((usage) => ({
                       name: usage.systemContext.name,
                       uuid: usage.uuid,
-                    }))
+                    })),
                 );
               },
               (error) => console.error(error),
-              () => this.updateSystemUsagesIsLoading(false)
-            )
+              () => this.updateSystemUsagesIsLoading(false),
+            ),
           );
-      })
-    )
+      }),
+    ),
   );
 
   public getItInterfaces = this.effect((params$: Observable<{ systemUuid: string; search: string | undefined }>) =>
@@ -195,11 +195,11 @@ export class ItSystemUsageDetailsRelationsDialogComponentStore extends Component
             tapResponse(
               (interfaces) => this.updateInterfaces(interfaces),
               (error) => console.error(error),
-              () => this.updateInterfacesIsLoading(false)
-            )
+              () => this.updateInterfacesIsLoading(false),
+            ),
           );
-      })
-    )
+      }),
+    ),
   );
 
   public getItContracts = this.effect((search$: Observable<string | undefined>) =>
@@ -218,10 +218,10 @@ export class ItSystemUsageDetailsRelationsDialogComponentStore extends Component
             tapResponse(
               (contracts) => this.updateContracts(contracts),
               (error) => console.error(error),
-              () => this.updateContractsIsLoading(false)
-            )
+              () => this.updateContractsIsLoading(false),
+            ),
           );
-      })
-    )
+      }),
+    ),
   );
 }

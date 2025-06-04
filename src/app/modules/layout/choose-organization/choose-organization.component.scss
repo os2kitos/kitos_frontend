@@ -1,5 +1,5 @@
-@import "theme";
+@use "theme";
 
 p {
-  padding-bottom: $padding-medium-large;
+  padding-bottom: theme.$padding-medium-large;
 }

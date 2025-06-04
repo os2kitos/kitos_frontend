@@ -1,11 +1,14 @@
 import { Component, Input } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MatDialogContent } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog.component';
+import { DialogHeaderComponent } from '../dialog-header/dialog-header.component';
+import { CdkScrollable } from '@angular/cdk/scrolling';
 
 @Component({
   selector: 'app-scrollbar-dialog',
   templateUrl: './scrollbar-dialog.component.html',
   styleUrl: './scrollbar-dialog.component.scss',
+  imports: [DialogHeaderComponent, CdkScrollable, MatDialogContent, DialogComponent],
 })
 export class ScrollbarDialogComponent {
   @Input() public title?: string;

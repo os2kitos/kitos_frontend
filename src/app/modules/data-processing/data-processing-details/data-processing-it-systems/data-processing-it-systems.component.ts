@@ -12,11 +12,37 @@ import {
   selectDataProcessingSystems,
 } from 'src/app/store/data-processing/selectors';
 import { CreateDprSystemUsageComponent } from './create-dpr-system-usage/create-dpr-system-usage.component';
+import { CardComponent } from '../../../../shared/components/card/card.component';
+import { CardHeaderComponent } from '../../../../shared/components/card-header/card-header.component';
+import { StandardVerticalContentGridComponent } from '../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { NativeTableComponent } from '../../../../shared/components/native-table/native-table.component';
+import { ContentSpaceBetweenComponent } from '../../../../shared/components/content-space-between/content-space-between.component';
+import { DetailsPageLinkComponent } from '../../../../shared/components/details-page-link/details-page-link.component';
+import { IconButtonComponent } from '../../../../shared/components/buttons/icon-button/icon-button.component';
+import { TrashcanIconComponent } from '../../../../shared/components/icons/trashcan-icon.component';
+import { EmptyStateComponent } from '../../../../shared/components/empty-states/empty-state.component';
+import { CollectionExtensionButtonComponent } from '../../../../shared/components/collection-extension-button/collection-extension-button.component';
 
 @Component({
   selector: 'app-data-processing-it-systems',
   templateUrl: './data-processing-it-systems.component.html',
   styleUrl: './data-processing-it-systems.component.scss',
+  imports: [
+    CardComponent,
+    CardHeaderComponent,
+    StandardVerticalContentGridComponent,
+    NgIf,
+    NativeTableComponent,
+    NgFor,
+    ContentSpaceBetweenComponent,
+    DetailsPageLinkComponent,
+    IconButtonComponent,
+    TrashcanIconComponent,
+    EmptyStateComponent,
+    CollectionExtensionButtonComponent,
+    AsyncPipe,
+  ],
 })
 export class DataProcessingItSystemsComponent extends BaseComponent {
   public readonly systemUsages$ = this.store.select(selectDataProcessingSystems).pipe(filterNullish());
@@ -24,7 +50,10 @@ export class DataProcessingItSystemsComponent extends BaseComponent {
 
   public readonly hasModifyPermissions$ = this.store.select(selectDataProcessingHasModifyPermissions);
 
-  constructor(private store: Store, private dialog: MatDialog) {
+  constructor(
+    private store: Store,
+    private dialog: MatDialog,
+  ) {
     super();
   }
 
@@ -42,11 +71,11 @@ export class DataProcessingItSystemsComponent extends BaseComponent {
             this.store.dispatch(
               DataProcessingActions.deleteDataProcessingSystemUsage(
                 uuid,
-                systemUsages.map((usage) => usage.uuid)
-              )
+                systemUsages.map((usage) => usage.uuid),
+              ),
             );
           }
-        })
+        }),
     );
   }
 

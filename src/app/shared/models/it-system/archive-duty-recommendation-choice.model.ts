@@ -3,6 +3,7 @@ import {
   ARCHIVE_B_TYPE_TEXT,
   ARCHIVE_K_TYPE_TEXT,
   ARCHIVE_PRESERVE_DATA_CAN_DISCARD_DOCUMENTS_TEXT,
+  ARCHIVE_TEXT_NO_RECOMMENDATION,
 } from '../../constants/archive.constants';
 
 export interface ArchiveDutyRecommendationChoice {
@@ -24,13 +25,13 @@ export const archiveDutyRecommendationChoiceOptions: ArchiveDutyRecommendationCh
     value: APIRecommendedArchiveDutyResponseDTO.IdEnum.PreserveDataCanDiscardDocuments,
   },
   {
-    name: $localize`Ved ikke`,
+    name: ARCHIVE_TEXT_NO_RECOMMENDATION,
     value: APIRecommendedArchiveDutyResponseDTO.IdEnum.NoRecommendation,
   },
 ];
 
 export const mapArchiveDutyRecommendationChoice = (
-  value?: APIRecommendedArchiveDutyResponseDTO.IdEnum
+  value?: APIRecommendedArchiveDutyResponseDTO.IdEnum,
 ): ArchiveDutyRecommendationChoice | undefined => {
   return archiveDutyRecommendationChoiceOptions.find((option) => option.value === value);
 };

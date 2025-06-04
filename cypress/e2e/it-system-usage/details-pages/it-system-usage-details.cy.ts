@@ -1,13 +1,13 @@
-/// <reference types="Cypress" />
+/// <reference types="cypress" />
 
-describe('it-system-usage', () => {
+describe('it-system-usage details', () => {
   beforeEach(() => {
     cy.requireIntercept();
     cy.setupItSystemUsageIntercepts();
     cy.setup(
       true,
       'it-systems/it-system-usages',
-      './shared/it-system-usage-ui-customization-no-gdpr-and-lifecycle.json'
+      './shared/it-system-usage-ui-customization-no-gdpr-and-lifecycle.json',
     );
   });
 

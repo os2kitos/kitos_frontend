@@ -1,18 +1,18 @@
-@import "theme";
+@use "theme";
 
 .main-container {
-  padding: $padding-small-medium;
-  border-radius: $radius-large;
+  padding: theme.$padding-small-medium;
+  border-radius: theme.$radius-large;
 }
 
 .color-gray {
-  background-color: $color-primary-10;
+  background-color: theme.$color-primary-10;
 }
 
 .color-white {
-  background-color: $color-white;
+  background-color: theme.$color-white;
 }
 
 .title-margin {
-  margin-bottom: $padding-small;
+  margin-bottom: theme.$padding-small;
 }

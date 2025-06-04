@@ -6,14 +6,14 @@
     [ngClass]="{
       'child-node': node.isRoot !== true,
       'root-node': node.isRoot === true,
-      'leaf-node': node.children.length === 0
+      'leaf-node': node.children.length === 0,
     }"
   >
     <div
       [class]="'node-wrapper node-' + node.color"
       [ngClass]="{
         'current-node-blue': node.uuid === currentNodeUuid && node.color === 'blue',
-        'current-node-green': node.uuid === currentNodeUuid && node.color === 'green'
+        'current-node-green': node.uuid === currentNodeUuid && node.color === 'green',
       }"
     >
       <app-details-page-link [itemType]="itemType" linkFontSize="small" [itemPath]="node.uuid">
@@ -21,6 +21,11 @@
       </app-details-page-link>
     </div>
     <app-status-chip *ngIf="showStatus" [type]="itemType" [value]="node.status"></app-status-chip>
+    <app-status-chip
+      *ngIf="showExtraStatusValue"
+      [valueDisplayType]="extraStatusDisplayType"
+      [value]="node.extraStatus"
+    ></app-status-chip>
   </mat-tree-node>
 
   <!-- This is the tree node template for expandable nodes -->
@@ -30,7 +35,7 @@
     [ngClass]="{
       'child-node': node.isRoot !== true,
       'root-node': node.isRoot === true,
-      'leaf-node': node.children.length === 0
+      'leaf-node': node.children.length === 0,
     }"
   >
     <div class="mat-tree-node">
@@ -42,7 +47,7 @@
         [class]="'node-wrapper node-' + node.color"
         [ngClass]="{
           'current-node-blue': node.uuid === currentNodeUuid && node.color === 'blue',
-          'current-node-green': node.uuid === currentNodeUuid && node.color === 'green'
+          'current-node-green': node.uuid === currentNodeUuid && node.color === 'green',
         }"
       >
         <app-details-page-link [itemType]="itemType" linkFontSize="small" [itemPath]="node.uuid">
@@ -50,6 +55,11 @@
         </app-details-page-link>
       </div>
       <app-status-chip *ngIf="showStatus" [type]="itemType" [value]="node.status"></app-status-chip>
+      <app-status-chip
+        *ngIf="showExtraStatusValue"
+        [valueDisplayType]="extraStatusDisplayType"
+        [value]="node.extraStatus"
+      ></app-status-chip>
     </div>
     <div [class.invisible]="!treeControl.isExpanded(node)" class="child-nodes">
       <div role="group">
@@ -59,10 +69,18 @@
   </mat-nested-tree-node>
 </mat-tree>
 
-<app-checkbox
-  *ngIf="hideStatusButton === false"
-  [text]="toggleStatusText"
-  [value]="showStatus"
-  (valueChange)="showStatus = $event === true"
-  labelPosition="after"
-></app-checkbox>
+<div class="checkbox-row">
+  <app-checkbox
+    *ngIf="hideStatusButton === false"
+    [text]="toggleStatusText"
+    [(value)]="showStatus"
+    labelPosition="after"
+  ></app-checkbox>
+
+  <app-checkbox
+    *ngIf="showExtraStatus"
+    [text]="toggleExtraStatusText"
+    [(value)]="showExtraStatusValue"
+    labelPosition="after"
+  ></app-checkbox>
+</div>

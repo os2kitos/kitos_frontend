@@ -1,0 +1,12 @@
+<app-tooltip [text]="toolTip" class="display-in-row">
+  <app-details-page-link
+    [linkFontSize]="linkFontSize"
+    [itemType]="itemType"
+    [itemPath]="itemPath"
+    [itemPathIncludesSubmodule]="itemPathIncludesSubmodule"
+    [subpagePath]="subpagePath"
+    [disableRedirect]="disableRedirect"
+  >
+    <ng-content></ng-content>
+  </app-details-page-link>
+</app-tooltip>

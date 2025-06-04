@@ -1,4 +1,4 @@
-@import "theme";
+@use "theme";
 
 .button-alignment {
   justify-content: flex-start;
@@ -15,11 +15,13 @@
 }
 
 ::ng-deep .disabled-border-color button {
-  border-color: $color-primary-40 !important;
+  border-color: theme.$color-primary-40 !important;
 }
 
-::ng-deep button.mat-mdc-button-base {
-  padding-left: 10px !important;
+:host {
+  ::ng-deep button.mat-mdc-button-base {
+    padding-left: 10px !important;
+  }
 }
 
 .size-large {

@@ -1,9 +1,8 @@
 /// <reference types="cypress" />
 
 describe('grid columns', () => {
-
   //eslint-disable-next-line
-  let cache: {columns: any[], hash: string};
+  let cache: { columns: any[]; hash: string };
 
   beforeEach(() => {
     cy.intercept('/odata/DataProcessingRegistrationReadModels*', {
@@ -28,7 +27,7 @@ describe('grid columns', () => {
 
   it('Doesnt invalidate columns when visibility has been changed', () => {
     cy.contains('Tilpas kolonner').click();
-    cy.getByDataCy('checkbox-input').eq(2).click()
+    cy.getByDataCy('checkbox-input').eq(2).click();
     cy.contains('Gem').click();
 
     cy.window().then((window) => {
@@ -39,7 +38,7 @@ describe('grid columns', () => {
   });
 
   it('Invalidates columns when hash is different', () => {
-    const mockHashChange = {...cache, hash: '12345678'};
+    const mockHashChange = { ...cache, hash: '12345678' };
     cy.window().then((window) => {
       window.localStorage.setItem('data-processing-grid-columns', JSON.stringify(mockHashChange));
     });

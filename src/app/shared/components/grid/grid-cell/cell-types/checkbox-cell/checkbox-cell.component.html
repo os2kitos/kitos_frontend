@@ -1,0 +1,19 @@
+<div class="column-center-content">
+  <app-tooltip *ngIf="column.entityType !== 'it-system'" [text]="getTooltipText()">
+    <app-checkbox
+      [value]="getProperty(column.field)"
+      [disabled]="column.permissionsField ? getProperty(column.permissionsField) !== false : true"
+      (valueChange)="onCheckboxChange($event)"
+      data-cy="grid-checkbox"
+    ></app-checkbox>
+  </app-tooltip>
+  <ng-container *ngIf="column.idField">
+    <app-usage-proxy-checkbox
+      *ngIf="column.entityType === 'it-system'"
+      [checked]="dataItem | searchProperty: column.field"
+      [disabled]="column.permissionsField ? getProperty(column.permissionsField) !== true || !createPermission : false"
+      [entityUuid]="getProperty(column.idField)"
+      (attemptChange)="onCheckboxChange($event)"
+    ></app-usage-proxy-checkbox>
+  </ng-container>
+</div>

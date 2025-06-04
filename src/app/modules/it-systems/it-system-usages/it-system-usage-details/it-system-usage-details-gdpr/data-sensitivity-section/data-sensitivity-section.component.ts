@@ -1,12 +1,11 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { filter } from 'rxjs';
 import { APIGDPRWriteRequestDTO } from 'src/app/api/v2';
 import { BaseAccordionComponent } from 'src/app/shared/base/base-accordion.component';
 import { dataSensitivityLevelOptions } from 'src/app/shared/models/it-system-usage/gdpr/data-sensitivity-level.model';
 import { specificPersonalDataOptions } from 'src/app/shared/models/it-system-usage/gdpr/specific-personal-data.model';
-import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
@@ -18,11 +17,24 @@ import {
 } from 'src/app/store/it-system-usage/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
+import { AccordionComponent } from '../../../../../../shared/components/accordion/accordion.component';
+import { CheckboxComponent } from '../../../../../../shared/components/checkbox/checkbox.component';
+import { ContentWithInfoComponent } from '../../../../../../shared/components/content-with-info/content-with-info.component';
+import { NgFor, AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-data-sensitivity-section',
   templateUrl: './data-sensitivity-section.component.html',
   styleUrls: ['./data-sensitivity-section.component.scss', '../it-system-usage-details-gdpr.component.scss'],
+  imports: [
+    AccordionComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    CheckboxComponent,
+    ContentWithInfoComponent,
+    NgFor,
+    AsyncPipe,
+  ],
 })
 export class DataSensitivitySectionComponent extends BaseAccordionComponent implements OnInit {
   @Output() public noPermissions = new EventEmitter<AbstractControl[]>();
@@ -37,9 +49,7 @@ export class DataSensitivitySectionComponent extends BaseAccordionComponent impl
   public readonly specificPersonalData$ = this.store
     .select(selectItSystemUsageGdprSpecificPersonalData)
     .pipe(filterNullish());
-  public readonly sensitivePersonalData$ = this.store
-    .select(selectItSystemUsageGdprSensitivePersonalData)
-    .pipe(filterNullish());
+  public readonly sensitivePersonalData$ = this.store.select(selectItSystemUsageGdprSensitivePersonalData);
 
   public readonly dataSensitivityLevelOptions = dataSensitivityLevelOptions;
   public readonly specificPersonalDataOptions = specificPersonalDataOptions;
@@ -54,7 +64,7 @@ export class DataSensitivitySectionComponent extends BaseAccordionComponent impl
       SensitiveDataControl: new FormControl<boolean>(false),
       LegalDataControl: new FormControl<boolean>(false),
     },
-    { updateOn: 'change' }
+    { updateOn: 'change' },
   );
 
   public readonly specificPersonalDataForm = new FormGroup(
@@ -63,13 +73,16 @@ export class DataSensitivitySectionComponent extends BaseAccordionComponent impl
       SocialProblemsControl: new FormControl<boolean>(false),
       OtherPrivateMattersControl: new FormControl<boolean>(false),
     },
-    { updateOn: 'change' }
+    { updateOn: 'change' },
   );
 
   public readonly sensitivePersonDataForm = new FormGroup({}, { updateOn: 'change' });
   public hasModifyPermissions$ = this.store.select(selectITSystemUsageHasModifyPermission);
 
-  constructor(private readonly store: Store, private readonly notificationService: NotificationService) {
+  constructor(
+    private readonly store: Store,
+    private readonly notificationService: NotificationService,
+  ) {
     super();
   }
 
@@ -80,7 +93,7 @@ export class DataSensitivitySectionComponent extends BaseAccordionComponent impl
     this.setupSensitivePersonalDataForm();
     this.toggleControlState(
       this.specificPersonalDataForm,
-      this.dataSensitivityLevelForm.controls.PersonDataControl.value
+      this.dataSensitivityLevelForm.controls.PersonDataControl.value,
     );
 
     const forms = [this.dataSensitivityLevelForm, this.specificPersonalDataForm, this.sensitivePersonDataForm];
@@ -113,13 +126,17 @@ export class DataSensitivitySectionComponent extends BaseAccordionComponent impl
       options?.forEach((option) => {
         this.sensitivePersonDataForm.addControl(
           option.uuid,
-          new FormControl<boolean>({ value: false, disabled: true })
+          new FormControl<boolean>({ value: false, disabled: true }),
         );
         const newControl = this.sensitivePersonDataForm.get(option.uuid);
         if (newControl)
           this.toggleControlState(newControl, this.dataSensitivityLevelForm.controls.SensitiveDataControl.value);
       });
       this.sensitivePersonalData$.subscribe((sensitivePersonData) => {
+        if (!sensitivePersonData || sensitivePersonData.length === 0) {
+          this.sensitivePersonDataForm.reset();
+          return;
+        }
         sensitivePersonData.forEach((type) => {
           if (type) {
             const control = this.sensitivePersonDataForm.get(type.uuid);
@@ -130,48 +147,60 @@ export class DataSensitivitySectionComponent extends BaseAccordionComponent impl
     });
   }
 
-  public patchDataSensitivityLevels(valueChange?: ValidatedValueChange<unknown>) {
+  public patchDataSensitivityLevelNone(valueChange?: boolean | undefined) {
+    if (valueChange) {
+      if (this.dataSensitivityLevelForm.controls.PersonDataControl.value)
+        this.dataSensitivityLevelForm.controls.PersonDataControl.patchValue(false);
+
+      if (this.dataSensitivityLevelForm.controls.SensitiveDataControl.value)
+        this.dataSensitivityLevelForm.controls.SensitiveDataControl.patchValue(false);
+
+      if (this.dataSensitivityLevelForm.controls.LegalDataControl.value)
+        this.dataSensitivityLevelForm.controls.LegalDataControl.patchValue(false);
+    }
+
+    this.patchDataSensitivityLevels();
+  }
+
+  public patchDataSensitivityLevelPersonData(valueChange?: boolean | undefined) {
+    if (valueChange && this.dataSensitivityLevelForm.controls.NoneControl.value) {
+      this.dataSensitivityLevelForm.controls.NoneControl.patchValue(false);
+    }
+
+    this.patchDataSensitivityLevels();
+  }
+
+  public patchDataSensitivityLevels() {
     const dataSensitivityLevelEnums = dataSensitivityLevelOptions.map((option) => option.value);
     this.patchCheckboxFormData<APIGDPRWriteRequestDTO.DataSensitivityLevelsEnum>(
       this.dataSensitivityLevelForm,
       this.dataSensitivityLevelsDtoField,
-      valueChange,
-      dataSensitivityLevelEnums
+      dataSensitivityLevelEnums,
     );
     this.toggleFormStates();
   }
 
-  public patchSpecificPersonalData(valueChange?: ValidatedValueChange<unknown>) {
+  public patchSpecificPersonalData() {
     const specificPersonalDataEnums = specificPersonalDataOptions.map((option) => option.value);
     this.patchCheckboxFormData<APIGDPRWriteRequestDTO.SpecificPersonalDataEnum>(
       this.specificPersonalDataForm,
       this.specificPersonalDataDtoField,
-      valueChange,
-      specificPersonalDataEnums
+      specificPersonalDataEnums,
     );
   }
 
-  public patchSensitivePersonalData(valueChange?: ValidatedValueChange<unknown>) {
-    this.patchCheckboxFormData(this.sensitivePersonDataForm, this.sensitivePersonalDataDtoField, valueChange);
+  public patchSensitivePersonalData() {
+    this.patchCheckboxFormData(this.sensitivePersonDataForm, this.sensitivePersonalDataDtoField);
   }
 
-  private patchCheckboxFormData<T>(
-    form: FormGroup,
-    dtoField: string,
-    valueChange?: ValidatedValueChange<unknown>,
-    options?: T[]
-  ) {
-    if (valueChange && !valueChange.valid) {
-      this.notificationService.showInvalidFormField(valueChange.text);
+  private patchCheckboxFormData<T>(form: FormGroup, dtoField: string, options?: T[]) {
+    let newData: T[] | string[];
+    if (options) {
+      newData = this.getEnumFormData(form, options);
     } else {
-      let newData: T[] | string[];
-      if (options) {
-        newData = this.getEnumFormData(form, options);
-      } else {
-        newData = this.getChoiceTypeFormData(form);
-      }
-      this.store.dispatch(ITSystemUsageActions.patchITSystemUsage({ gdpr: { [dtoField]: newData } }));
+      newData = this.getChoiceTypeFormData(form);
     }
+    this.store.dispatch(ITSystemUsageActions.patchITSystemUsage({ gdpr: { [dtoField]: newData } }));
   }
 
   private getEnumFormData<T>(form: FormGroup, options: T[]): T[] {
@@ -199,11 +228,11 @@ export class DataSensitivitySectionComponent extends BaseAccordionComponent impl
   private toggleFormStates() {
     this.toggleControlState(
       this.specificPersonalDataForm,
-      this.dataSensitivityLevelForm.controls.PersonDataControl.value
+      this.dataSensitivityLevelForm.controls.PersonDataControl.value,
     );
     this.toggleControlState(
       this.sensitivePersonDataForm,
-      this.dataSensitivityLevelForm.controls.SensitiveDataControl.value
+      this.dataSensitivityLevelForm.controls.SensitiveDataControl.value,
     );
   }
 

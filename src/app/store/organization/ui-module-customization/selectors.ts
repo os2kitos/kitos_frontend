@@ -14,8 +14,8 @@ export const selectHasValidUIModuleConfigCache: (module: UIModuleConfigKey) => M
     createSelector(
       selectUIModuleCustomizationState,
       () => new Date(),
-      (state, now) => hasValidCache(state.uiModuleConfigs.find((config) => config.module === module)?.cacheTime, now)
-    )
+      (state, now) => hasValidCache(state.uiModuleConfigs.find((config) => config.module === module)?.cacheTime, now),
+    ),
 );
 
 export const selectModuleConfig = (module: UIModuleConfigKey) =>
@@ -25,7 +25,7 @@ export const selectModuleConfig = (module: UIModuleConfigKey) =>
 
 export const selectUIConfigLoading = createSelector(
   selectUIModuleCustomizationState,
-  (state: UIModuleConfigState) => state.loading
+  (state: UIModuleConfigState) => state.loading,
 );
 
 // eslint-disable-next-line @ngrx/prefix-selectors-with-select
@@ -71,6 +71,7 @@ export const selectDprEnableAgreementConcluded = createDprFrontPageFieldSelector
 export const selectDprEnableTransferBasis = createDprFrontPageFieldSelector('transferBasis');
 export const selectDprEnableProcessors = createDprFrontPageFieldSelector('processors');
 export const selectDprEnableSubProcessors = createDprFrontPageFieldSelector('subProcessors');
+export const selectDprEnableResponsibleOrgUnit = createDprFrontPageFieldSelector('responsibleOrgUnit');
 
 //DPR -> IT Contract
 const createDprItContractsFieldSelector = (fieldKey: string) =>
@@ -121,6 +122,9 @@ export const selectITSystemUsageEnableLastEditedAt = createItSystemUsageFrontPag
 export const selectITSystemUsageEnableLifeCycleStatus = createItSystemUsageFrontPageFieldSelector('lifeCycleStatus');
 export const selectITSystemUsageEnableFrontPageUsagePeriod = createItSystemUsageFrontPageFieldSelector('usagePeriod');
 export const selectITSystemUsageEnableStatus = createItSystemUsageFrontPageFieldSelector('status');
+export const selectITSystemUsageEnableContainsAITechnology =
+  createItSystemUsageFrontPageFieldSelector('containsAITechnology');
+export const selectITSystemUsageEnableWebAccessibility = createItSystemUsageFrontPageFieldSelector('webAccessibility');
 
 //IT System Usage > Contracts
 const createItSystemUsageContractsFieldSelector = (fieldKey: string) =>
@@ -151,12 +155,6 @@ export const selectITSystemUsageEnableGdprConductedRiskAssessment =
 export const selectITSystemUsageEnableGdprDpiaConducted = createItSystemUsageGdprFieldSelector('dpiaConducted');
 export const selectITSystemUsageEnableGdprRetentionPeriod = createItSystemUsageGdprFieldSelector('retentionPeriod');
 
-//IT System Usage > Organization
-const createItSystemUsageOrganizationFieldSelector = (fieldKey: string) =>
-  createFieldOrGroupEnabledSelector(UIModuleConfigKey.ItSystemUsage, 'organization', fieldKey);
-export const selectITSystemUsageEnableResponsibleUnit = createItSystemUsageOrganizationFieldSelector('responsibleUnit');
-export const selectITSystemUsageEnableRelevantUnits = createItSystemUsageOrganizationFieldSelector('relevantUnits');
-
 //IT System Usage > Relations
 const createItSystemUsageRelationsFieldSelector = (fieldKey: string) =>
   createFieldOrGroupEnabledSelector(UIModuleConfigKey.ItSystemUsage, 'systemRelations', fieldKey);
@@ -178,6 +176,10 @@ export const selectITSystemUsageEnableDocumentBearing = createItSystemUsageArchi
 export const selectITSystemUsageEnableActive = createItSystemUsageArchivingFieldSelector('active');
 export const selectITSystemUsageEnableNotes = createItSystemUsageArchivingFieldSelector('notes');
 export const selectITSystemUsageEnableJournalPeriods = createItSystemUsageArchivingFieldSelector('journalPeriods');
+export const selectITSystemUsageEnableCatalogArchiveDuty =
+  createItSystemUsageArchivingFieldSelector('catalogArchiveDuty');
+export const selectITSystemUsageEnableCatalogArchiveDutyComment =
+  createItSystemUsageArchivingFieldSelector('catalogArchiveDutyComment');
 
 //IT system usage > KLE
 const createItSystemUsageKleFieldSelector = (fieldKey: string) =>
@@ -210,6 +212,7 @@ export const selectItContractsEnableIsActive = createItContractFrontpageFieldSel
 export const selectItContractsEnableAgreementPeriod = createItContractFrontpageFieldSelector('agreementPeriod');
 export const selectItContractsEnableNotes = createItContractFrontpageFieldSelector('notes');
 export const selectItContractsEnableParentContract = createItContractFrontpageFieldSelector('parentContract');
+export const selectItContractsEnableUseParentValidity = createItContractFrontpageFieldSelector('useParentValidity');
 
 export const selectItContractsEnableResponsibleUnit = createItContractFrontpageFieldSelector('responsibleUnit');
 export const selectItContractsEnableInternalSigner = createItContractFrontpageFieldSelector('internalSigner');
@@ -254,7 +257,7 @@ function tabIsEnabled(uiConfigViewModels: UIConfigNodeViewModel, tabFullKey: str
 function fieldOrGroupIsEnabled(
   uiConfigViewModels: UIConfigNodeViewModel,
   tabFullKey: string,
-  fieldKey: string
+  fieldKey: string,
 ): boolean {
   const tabViewModel = getTabViewModelFromModule(uiConfigViewModels, tabFullKey);
   const tabViewModelChildren = tabViewModel?.children;
@@ -267,7 +270,7 @@ function fieldOrGroupIsEnabled(
 
 function getTabViewModelFromModule(
   uiConfigViewModels: UIConfigNodeViewModel,
-  tabFullKey: string
+  tabFullKey: string,
 ): UIConfigNodeViewModel | undefined {
   const moduleConfigChildren = uiConfigViewModels.children;
   if (!moduleConfigChildren) return undefined;

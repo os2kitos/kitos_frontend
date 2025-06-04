@@ -6,11 +6,16 @@ import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/reg
 import { ColumnConfigService } from 'src/app/shared/services/column-config.service';
 import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
 import { selectGridConfigModificationPermission } from 'src/app/store/user-store/selectors';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { MenuButtonItemComponent } from '../../buttons/menu-button/menu-button-item/menu-button-item.component';
+import { DiskIconComponent } from '../../icons/disk-icon.component';
+import { TrashcanIconComponent } from '../../icons/trashcan-icon.component';
 
 @Component({
   selector: 'app-grid-column-config-buttons',
   templateUrl: './grid-column-config-buttons.component.html',
   styleUrl: './grid-column-config-buttons.component.scss',
+  imports: [NgIf, MenuButtonItemComponent, DiskIconComponent, TrashcanIconComponent, AsyncPipe],
 })
 export class GridColumnConfigButtonsComponent implements OnInit {
   @Input() entityType!: RegistrationEntityTypes;
@@ -19,7 +24,7 @@ export class GridColumnConfigButtonsComponent implements OnInit {
     private confirmActionService: ConfirmActionService,
     private columnConfigService: ColumnConfigService,
     private actions$: Actions,
-    private store: Store
+    private store: Store,
   ) {}
 
   public readonly hasGridConfigPermission$ = this.store.select(selectGridConfigModificationPermission);
@@ -42,7 +47,7 @@ export class GridColumnConfigButtonsComponent implements OnInit {
             this.actions$
               .pipe(ofType(this.columnConfigService.getSaveSuccessConfigAction(this.entityType)), first())
               .subscribe(() => {
-                this.columnConfigService.dispatchResetAction(this.entityType);
+                this.columnConfigService.dispatchResetAction(this.entityType, true);
               });
           });
       },

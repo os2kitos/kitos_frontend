@@ -11,6 +11,7 @@ on:
 
 jobs:
   cypress-run:
+    if: github.event.pull_request == null || github.event.pull_request.draft == false
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -28,6 +29,24 @@ jobs:
           wait-on-timeout: 300
           record: true
           parallel: true
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          GITHUB_TOKEN: ${{ secrets.TOKEN_TO_GITHUB }}
+
+  cypress-component:
+    if: github.event.pull_request == null || github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Cypress Component Tests
+        uses: cypress-io/github-action@v6
+        with:
+          command: yarn cypress run --component
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.TOKEN_TO_GITHUB }}

@@ -39,7 +39,7 @@ export const fkOrgFeature = createFeature({
         synchronizationStatus: undefined,
         accessError: undefined,
         isLoadingConnectionStatus: true,
-      })
+      }),
     ),
     on(FkOrgActions.getSynchronizationStatusSuccess, (state, { synchronizationStatus }): FkOrgState => {
       let accessError = undefined;
@@ -54,7 +54,7 @@ export const fkOrgFeature = createFeature({
       (state): FkOrgState => ({
         ...state,
         accessError: handleAccessError('Unknown'),
-      })
+      }),
     ),
 
     on(
@@ -65,29 +65,29 @@ export const fkOrgFeature = createFeature({
         isSynchronizationDialogLoading: true,
         hasSnapshotFailed: false,
         updateConsequences: undefined, //reset update consequences when snapshot is requested
-      })
+      }),
     ),
     on(
       FkOrgActions.getSnapshotSuccess,
-      (state, { snapshot }): FkOrgState => ({ ...state, snapshot, isSynchronizationDialogLoading: false })
+      (state, { snapshot }): FkOrgState => ({ ...state, snapshot, isSynchronizationDialogLoading: false }),
     ),
     on(
       FkOrgActions.getSnapshotError,
-      (state): FkOrgState => ({ ...state, isSynchronizationDialogLoading: false, hasSnapshotFailed: true })
+      (state): FkOrgState => ({ ...state, isSynchronizationDialogLoading: false, hasSnapshotFailed: true }),
     ),
 
     on(FkOrgActions.createConnection, (state): FkOrgState => ({ ...state, isSynchronizationDialogLoading: true })),
     on(
       FkOrgActions.createConnectionSuccess,
-      (state): FkOrgState => ({ ...state, isSynchronizationDialogLoading: false })
+      (state): FkOrgState => ({ ...state, isSynchronizationDialogLoading: false }),
     ),
     on(
       FkOrgActions.createConnectionError,
-      (state): FkOrgState => ({ ...state, isSynchronizationDialogLoading: false })
+      (state): FkOrgState => ({ ...state, isSynchronizationDialogLoading: false }),
     ),
     on(
       FkOrgActions.previewConnectionUpdate,
-      (state): FkOrgState => ({ ...state, isSynchronizationDialogLoading: true })
+      (state): FkOrgState => ({ ...state, isSynchronizationDialogLoading: true }),
     ),
     on(
       FkOrgActions.previewConnectionUpdateSuccess,
@@ -95,38 +95,38 @@ export const fkOrgFeature = createFeature({
         ...state,
         updateConsequences: response.consequences?.map((unit) => adaptFkOrganizationUnit(unit)) ?? [],
         isSynchronizationDialogLoading: false,
-      })
+      }),
     ),
     on(
       FkOrgActions.previewConnectionUpdateError,
-      (state): FkOrgState => ({ ...state, isSynchronizationDialogLoading: false, hasSnapshotFailed: true })
+      (state): FkOrgState => ({ ...state, isSynchronizationDialogLoading: false, hasSnapshotFailed: true }),
     ),
     on(FkOrgActions.cancelUpdate, (state): FkOrgState => ({ ...state, updateConsequences: undefined })),
 
     on(FkOrgActions.updateConnection, (state): FkOrgState => ({ ...state, isSynchronizationDialogLoading: true })),
     on(
       FkOrgActions.updateConnectionSuccess,
-      (state): FkOrgState => ({ ...state, isSynchronizationDialogLoading: false })
+      (state): FkOrgState => ({ ...state, isSynchronizationDialogLoading: false }),
     ),
     on(
       FkOrgActions.updateConnectionError,
-      (state): FkOrgState => ({ ...state, isSynchronizationDialogLoading: false })
+      (state): FkOrgState => ({ ...state, isSynchronizationDialogLoading: false }),
     ),
 
     on(
       FkOrgActions.deleteAutomaticUpdateSubscription,
       FkOrgActions.deleteConnection,
-      (state): FkOrgState => ({ ...state, isDeleteLoading: true })
+      (state): FkOrgState => ({ ...state, isDeleteLoading: true }),
     ),
     on(
       FkOrgActions.deleteAutomaticUpdateSubscriptionSuccess,
       FkOrgActions.deleteConnectionSuccess,
-      (state): FkOrgState => ({ ...state, isDeleteLoading: false })
+      (state): FkOrgState => ({ ...state, isDeleteLoading: false }),
     ),
     on(
       FkOrgActions.deleteAutomaticUpdateSubscriptionError,
       FkOrgActions.deleteConnectionError,
-      (state): FkOrgState => ({ ...state, isDeleteLoading: false })
+      (state): FkOrgState => ({ ...state, isDeleteLoading: false }),
     ),
 
     on(FkOrgActions.getChangelog, (state): FkOrgState => ({ ...state, isLoadingChangelogs: true })),
@@ -148,7 +148,7 @@ export const fkOrgFeature = createFeature({
         isLoadingChangelogs: false,
       };
     }),
-    on(FkOrgActions.getChangelogError, (state): FkOrgState => ({ ...state, isLoadingChangelogs: false }))
+    on(FkOrgActions.getChangelogError, (state): FkOrgState => ({ ...state, isLoadingChangelogs: false })),
   ),
 });
 

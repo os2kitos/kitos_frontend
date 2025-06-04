@@ -6,11 +6,13 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
 import { MAX_DIALOG_HEIGHT } from 'src/app/shared/constants/constants';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
 import { CreateEntityWithNameDialogComponent } from '../create-entity-with-name-dialog/create-entity-with-name-dialog.component';
+import { ButtonComponent } from '../../buttons/button/button.component';
 
 @Component({
   selector: 'app-create-entity-button',
   templateUrl: './create-entity-button.component.html',
   styleUrl: './create-entity-button.component.scss',
+  imports: [ButtonComponent],
 })
 export class CreateEntityButtonComponent extends BaseComponent {
   @Input() public entityType!: RegistrationEntityTypes;

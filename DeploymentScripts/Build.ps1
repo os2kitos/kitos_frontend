@@ -8,3 +8,5 @@ $ErrorActionPreference = 'Stop'
 
 yarn
 yarn build --configuration $environment
+
+if ( -not $? ) { throw "Failed to build for environment: $environment" }

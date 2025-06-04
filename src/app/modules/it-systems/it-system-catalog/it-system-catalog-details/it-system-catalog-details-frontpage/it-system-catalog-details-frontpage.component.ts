@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { combineLatestWith, first, map } from 'rxjs';
 import { APIShallowOrganizationDTO } from 'src/app/api/v1';
@@ -38,12 +38,45 @@ import {
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 import { ITSystemCatalogDetailsFrontpageComponentStore } from './it-system-catalog-details-frontpage.component-store';
+import { CardComponent } from '../../../../../shared/components/card/card.component';
+import { CardHeaderComponent } from '../../../../../shared/components/card-header/card-header.component';
+import { StatusChipComponent } from '../../../../../shared/components/status-chip/status-chip.component';
+import { FormGridComponent } from '../../../../../shared/components/form-grid/form-grid.component';
+import { TextBoxComponent } from '../../../../../shared/components/textbox/textbox.component';
+import { ConnectedDropdownComponent } from '../../../../../shared/components/dropdowns/connected-dropdown/connected-dropdown.component';
+import { DropdownComponent } from '../../../../../shared/components/dropdowns/dropdown/dropdown.component';
+import { ContentBoxComponent } from '../../../../../shared/components/contentbox/contentbox.component';
+import { NgFor, AsyncPipe } from '@angular/common';
+import { ExternalReferenceComponent } from '../../../../../shared/components/external-reference/external-reference.component';
+import { TextAreaComponent } from '../../../../../shared/components/textarea/textarea.component';
+import { TextBoxInfoComponent } from '../../../../../shared/components/textbox-info/textbox-info.component';
+import { ParagraphComponent } from '../../../../../shared/components/paragraph/paragraph.component';
+import { ItSystemKleOverviewComponent } from '../../../shared/it-system-kle-overview/it-system-kle-overview.component';
 
 @Component({
   selector: 'app-it-system-catalog-details-frontpage',
   templateUrl: './it-system-catalog-details-frontpage.component.html',
   styleUrl: './it-system-catalog-details-frontpage.component.scss',
   providers: [ITSystemCatalogDetailsFrontpageComponentStore],
+  imports: [
+    CardComponent,
+    CardHeaderComponent,
+    StatusChipComponent,
+    FormGridComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    TextBoxComponent,
+    ConnectedDropdownComponent,
+    DropdownComponent,
+    ContentBoxComponent,
+    NgFor,
+    ExternalReferenceComponent,
+    TextAreaComponent,
+    TextBoxInfoComponent,
+    ParagraphComponent,
+    ItSystemKleOverviewComponent,
+    AsyncPipe,
+  ],
 })
 export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent implements OnInit {
   public readonly itSystemIsActive$ = this.store.select(selectItSystemIsActive);
@@ -59,7 +92,7 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
 
   public readonly externalReferences$ = this.store.select(selectItSystemExternalReferences).pipe(
     filterNullish(),
-    map((references) => [...references].sort((a, b) => a.title.localeCompare(b.title)))
+    map((references) => [...references].sort((a, b) => a.title.localeCompare(b.title))),
   );
 
   public readonly archiveDutyRecommendationOptions = archiveDutyRecommendationChoiceOptions;
@@ -83,6 +116,8 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
       disabled: true,
     }),
     description: new FormControl<string | undefined>({ value: undefined, disabled: true }),
+    legalName: new FormControl<string | undefined>({ value: undefined, disabled: true }),
+    legalDataProcessorName: new FormControl<string | undefined>({ value: undefined, disabled: true }),
   });
 
   public readonly nationalArchivesText = ARCHIVE_TEXT;
@@ -91,7 +126,7 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
     private store: Store,
     private componentStore: ITSystemCatalogDetailsFrontpageComponentStore,
     private entityStatusTextsService: EntityStatusTextsService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
   ) {
     super();
   }
@@ -123,19 +158,19 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
   public onDropdownCleared() {
     this.patchFrontPage(
       { recommendedArchiveDuty: { id: APIRecommendedArchiveDutyResponseDTO.IdEnum.Undecided, comment: '' } },
-      undefined
+      undefined,
     );
   }
 
   public patchArchiveDutyId(
     value: APIRecommendedArchiveDutyResponseDTO.IdEnum,
-    valueChange?: ValidatedValueChange<unknown>
+    valueChange?: ValidatedValueChange<unknown>,
   ) {
     const archiveDutyRecommendationComment =
       this.itSystemFrontpageFormGroup.controls.recommendedArchiveDutyComment.value ?? undefined;
     this.patchFrontPage(
       { recommendedArchiveDuty: { id: value, comment: archiveDutyRecommendationComment } },
-      valueChange
+      valueChange,
     );
   }
 
@@ -152,7 +187,7 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
       this.store
         .select(selectItSystemParentSystem)
         .pipe(filterNullish(), first())
-        .subscribe((parentSystem) => this.componentStore.getParentSystem(parentSystem.uuid))
+        .subscribe((parentSystem) => this.componentStore.getParentSystem(parentSystem.uuid)),
     );
   }
 
@@ -164,8 +199,8 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
           filterNullish(),
           combineLatestWith(
             this.store.select(selectITSystemHasModifyPermission),
-            this.store.select(selectITSystemCanModifyVisibilityPermission)
-          )
+            this.store.select(selectITSystemCanModifyVisibilityPermission),
+          ),
         )
         .subscribe(([itSystem, hasModifyPermission, canModifyVisibility]) => {
           this.itSystemFrontpageFormGroup.patchValue({
@@ -181,6 +216,8 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
             recommendedArchiveDutyComment: itSystem.recommendedArchiveDuty.comment,
             urlReference: itSystem.externalReferences,
             description: itSystem.description,
+            legalName: itSystem.legalName,
+            legalDataProcessorName: itSystem.legalDataProcessorName,
           });
 
           if (hasModifyPermission) {
@@ -204,7 +241,9 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
           //Uuids should always be disabled
           this.itSystemFrontpageFormGroup.controls.uuid.disable();
           this.itSystemFrontpageFormGroup.controls.externalUuid.disable();
-        })
+          this.itSystemFrontpageFormGroup.controls.legalName.disable();
+          this.itSystemFrontpageFormGroup.controls.legalDataProcessorName.disable();
+        }),
     );
   }
 
@@ -221,7 +260,7 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
             }`,
           },
         });
-      })
+      }),
     );
   }
 }

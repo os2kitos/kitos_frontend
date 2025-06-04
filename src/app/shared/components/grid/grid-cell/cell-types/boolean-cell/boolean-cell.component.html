@@ -1,0 +1,8 @@
+<div class="items-center-container">
+  <app-boolean-circle
+    [value]="(dataItem | searchProperty: column.field) === true"
+    [positiveTooltipText]="column.tooltipPositiveText ?? ''"
+    [negativeTooltipText]="column.tooltipNegativeText ?? ''"
+  >
+  </app-boolean-circle>
+</div>

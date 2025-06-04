@@ -1,13 +1,60 @@
+import { NgIf } from '@angular/common';
 import { AfterViewInit, Component, Input, OnDestroy, ViewChild, ViewContainerRef } from '@angular/core';
-import { MatDatepickerInputEvent } from '@angular/material/datepicker';
-import IMask, { AnyMaskedOptions } from 'imask';
-import * as moment from 'moment';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatMomentDateModule, provideMomentDateAdapter } from '@angular/material-moment-adapter';
+import { MAT_DATE_FORMATS } from '@angular/material/core';
+import {
+  MatDatepickerInput,
+  MatDatepickerInputEvent,
+  MatDatepickerModule,
+  MatDatepickerToggle,
+  MatDatepickerToggleIcon,
+} from '@angular/material/datepicker';
+import { MatIcon } from '@angular/material/icon';
+import { MatInput } from '@angular/material/input';
+import { MatFormField, MatLabel, MatSuffix } from '@angular/material/select';
+import IMask from 'imask';
 import { BaseFormComponent } from '../../base/base-form.component';
 
 @Component({
   selector: 'app-datepicker',
   templateUrl: 'datepicker.component.html',
   styleUrls: ['datepicker.component.scss'],
+  imports: [
+    NgIf,
+    FormsModule,
+    ReactiveFormsModule,
+
+    MatFormField,
+    MatIcon,
+    MatInput,
+    MatLabel,
+
+    MatDatepickerInput,
+    MatDatepickerToggle,
+
+    MatSuffix,
+    MatDatepickerToggleIcon,
+    MatDatepickerModule,
+    MatMomentDateModule,
+  ],
+  providers: [
+    provideMomentDateAdapter(),
+    {
+      provide: MAT_DATE_FORMATS,
+      useValue: {
+        parse: {
+          dateInput: ['DD-MM-yyyy', 'DDMMyyyy'],
+        },
+        display: {
+          dateInput: 'DD-MM-yyyy',
+          monthYearLabel: 'MMM YYYY',
+          dateA11yLabel: 'LL',
+          monthYearA11yLabel: 'MMMM YYYY',
+        },
+      },
+    },
+  ],
 })
 export class DatePickerComponent extends BaseFormComponent<Date | undefined> implements AfterViewInit, OnDestroy {
   @Input() public icon?: 'search';
@@ -38,7 +85,7 @@ export class DatePickerComponent extends BaseFormComponent<Date | undefined> imp
     this.mask?.updateValue();
   }
 
-  private mask?: IMask.InputMask<AnyMaskedOptions>;
+  private mask?: InstanceType<typeof IMask.InputMask>;
 
   @ViewChild('input', { read: ViewContainerRef }) public input!: ViewContainerRef;
 

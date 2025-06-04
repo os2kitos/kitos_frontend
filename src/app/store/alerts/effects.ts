@@ -12,7 +12,11 @@ import { selectAlertCacheTime } from './selectors';
 
 @Injectable()
 export class AlertsEffects {
-  constructor(private actions$: Actions, private store: Store, private alertsService: APIV2AlertsINTERNALService) {}
+  constructor(
+    private actions$: Actions,
+    private store: Store,
+    private alertsService: APIV2AlertsINTERNALService,
+  ) {}
 
   getAlerts$ = createEffect(() => {
     return this.actions$.pipe(
@@ -24,7 +28,7 @@ export class AlertsEffects {
       ]),
       filter(
         ([_, userUuid, organizationUuid, hasValidCache]) =>
-          userUuid !== undefined && organizationUuid !== undefined && !hasValidCache
+          userUuid !== undefined && organizationUuid !== undefined && !hasValidCache,
       ),
       mergeMap(([{ entityType }, userUuid, organizationUuid]) => {
         return this.alertsService
@@ -35,9 +39,9 @@ export class AlertsEffects {
           })
           .pipe(
             map((alerts) => AlertActions.getAlertsSuccess(entityType, alerts.map(adaptAlert))),
-            catchError(() => of(AlertActions.getAlertsError()))
+            catchError(() => of(AlertActions.getAlertsError())),
           );
-      })
+      }),
     );
   });
 
@@ -51,9 +55,9 @@ export class AlertsEffects {
           })
           .pipe(
             map(() => AlertActions.deleteAlertSuccess(entitType, alertUuid)),
-            catchError(() => of(AlertActions.deleteAlertError()))
+            catchError(() => of(AlertActions.deleteAlertError())),
           );
-      })
+      }),
     );
   });
 }

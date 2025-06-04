@@ -1,5 +1,6 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { ComponentStore } from '@ngrx/component-store';import { tapResponse } from '@ngrx/operators';
+import { ComponentStore } from '@ngrx/component-store';
+import { tapResponse } from '@ngrx/operators';
 
 import { Store } from '@ngrx/store';
 import { Observable, combineLatestWith, map, mergeMap, tap } from 'rxjs';
@@ -30,15 +31,15 @@ export class ItContractSystemsComponentStore extends ComponentStore<State> imple
     map(([systemUsages, contractSystemUsages]) =>
       systemUsages.filter(
         (systemUsage) =>
-          !contractSystemUsages.some((contractSystemUsage) => contractSystemUsage.uuid === systemUsage.uuid)
-      )
-    )
+          !contractSystemUsages.some((contractSystemUsage) => contractSystemUsage.uuid === systemUsage.uuid),
+      ),
+    ),
   );
   public readonly systemUsagesIsLoading$ = this.select((state) => state.systemUsagesIsLoading);
 
   constructor(
     private readonly systemUsageService: APIV2ItSystemUsageInternalINTERNALService,
-    private readonly store: Store
+    private readonly store: Store,
   ) {
     super({ systemRelationsIsLoading: false, systemUsagesIsLoading: false });
   }
@@ -47,22 +48,22 @@ export class ItContractSystemsComponentStore extends ComponentStore<State> imple
     (state, systemRelations: APIGeneralSystemRelationResponseDTO[]): State => ({
       ...state,
       systemRelations,
-    })
+    }),
   );
 
   private updateSystemRelationsIsLoading = this.updater(
-    (state, systemRelationsIsLoading: boolean): State => ({ ...state, systemRelationsIsLoading })
+    (state, systemRelationsIsLoading: boolean): State => ({ ...state, systemRelationsIsLoading }),
   );
 
   private updateSystemUsages = this.updater(
     (state, systemUsages: APIIdentityNamePairResponseDTO[]): State => ({
       ...state,
       systemUsages,
-    })
+    }),
   );
 
   private updateSystemUsagesIsLoading = this.updater(
-    (state, systemUsagesIsLoading: boolean): State => ({ ...state, systemUsagesIsLoading })
+    (state, systemUsagesIsLoading: boolean): State => ({ ...state, systemUsagesIsLoading }),
   );
 
   public getSystemRelations = this.effect(() =>
@@ -76,11 +77,11 @@ export class ItContractSystemsComponentStore extends ComponentStore<State> imple
             tapResponse(
               (relations) => this.updateSystemRelations(relations),
               (e) => console.error(e),
-              () => this.updateSystemRelationsIsLoading(false)
-            )
+              () => this.updateSystemRelationsIsLoading(false),
+            ),
           );
-      })
-    )
+      }),
+    ),
   );
 
   public searchSystemUsages = this.effect((search$: Observable<string | undefined>) =>
@@ -98,10 +99,10 @@ export class ItContractSystemsComponentStore extends ComponentStore<State> imple
               (usages) =>
                 this.updateSystemUsages(usages.map((usage) => ({ uuid: usage.uuid, name: usage.systemContext.name }))),
               (e) => console.error(e),
-              () => this.updateSystemUsagesIsLoading(false)
-            )
+              () => this.updateSystemUsagesIsLoading(false),
+            ),
           );
-      })
-    )
+      }),
+    ),
   );
 }

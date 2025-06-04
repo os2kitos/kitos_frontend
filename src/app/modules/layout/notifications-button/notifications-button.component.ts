@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLinkActive, RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { combineLatest, first, map, Observable } from 'rxjs';
+import { combineLatest, map, Observable, of } from 'rxjs';
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { selectAllAlertCount } from 'src/app/store/alerts/selectors';
 import {
@@ -9,11 +9,16 @@ import {
   selectShowItContractModule,
   selectShowDataProcessingRegistrations,
 } from 'src/app/store/organization/selectors';
+import { ButtonComponent } from '../../../shared/components/buttons/button/button.component';
+import { MatBadge } from '@angular/material/badge';
+import { NotificationIconComponent } from '../../../shared/components/icons/notification-icon.component';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-notifications-button',
   templateUrl: './notifications-button.component.html',
   styleUrl: './notifications-button.component.scss',
+  imports: [ButtonComponent, RouterLinkActive, MatBadge, RouterLink, NotificationIconComponent, AsyncPipe],
 })
 export class NotificationsButtonComponent {
   public readonly alertsCount$ = this.store.select(selectAllAlertCount);
@@ -22,19 +27,21 @@ export class NotificationsButtonComponent {
   private readonly itContractsEnabled$ = this.store.select(selectShowItContractModule);
   private readonly dataProcessingEnabled$ = this.store.select(selectShowDataProcessingRegistrations);
 
-  constructor(private store: Store, private router: Router) {}
+  constructor(
+    private store: Store,
+    private router: Router,
+  ) {}
 
-  public navigateToNotifications() {
+  public getFullRoute$(): Observable<string> {
+    return this.getSubRoute$().pipe(map((route) => `notifications/${route}`));
+  }
+
+  private getSubRoute$(): Observable<string> {
     const subRoute = this.getSubroute();
     if (subRoute === AppPath.root) {
-      //Let UI Customization decide the default page
-      this.getDefaultNotificationPage()
-        .pipe(first())
-        .subscribe((defaultPage) => {
-          this.router.navigate([`${AppPath.notifications}/${defaultPage}`]);
-        });
+      return this.getDefaultNotificationPage$();
     } else {
-      this.router.navigate([`${AppPath.notifications}/${subRoute}`]);
+      return of(subRoute);
     }
   }
 
@@ -58,14 +65,14 @@ export class NotificationsButtonComponent {
     return moduleRoute;
   }
 
-  private getDefaultNotificationPage(): Observable<string> {
+  private getDefaultNotificationPage$(): Observable<string> {
     return combineLatest([this.itSystemsEnabled$, this.itContractsEnabled$, this.dataProcessingEnabled$]).pipe(
       map(([itSystemsEnabled, itContractsEnabled, dataProcessingEnabled]) => {
         if (itSystemsEnabled) return AppPath.itSystems;
         if (itContractsEnabled) return AppPath.itContracts;
         if (dataProcessingEnabled) return AppPath.dataProcessing;
         return AppPath.root;
-      })
+      }),
     );
   }
 }

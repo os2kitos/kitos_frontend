@@ -1,6 +1,6 @@
 <app-menu-button
   buttonStyle="tertiary"
-  [iconType]="(hasChanges$ | async) ? 'dots-warning' : 'dots'"
+  [iconType]="(hasChanges$() | async) ? 'dots-warning' : 'dots'"
   data-cy="grid-options-button"
 >
   <div class="section-text">

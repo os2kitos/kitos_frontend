@@ -1,17 +1,17 @@
 @use "@angular/material" as mat;
-@import "theme";
+@use "theme";
 
 @mixin input-background-white {
   background-color: white;
   border-radius: 10px;
 }
 
-@mixin elevation($el: 4, $color: $color-neutral-40) {
+@mixin elevation($el: 4, $color: theme.$color-neutral-40) {
   @include mat.elevation($el, $color);
 }
 
 @mixin min-breakpoint {
-  @media only screen and (max-width: $content-width-min) {
+  @media only screen and (max-width: theme.$content-width-min) {
     @content;
   }
 }
@@ -19,7 +19,7 @@
 @mixin overview-flex-column-layout {
   display: flex;
   flex-direction: column;
-  padding: $padding-large $padding-medium 0 $padding-medium;
+  padding: theme.$padding-large theme.$padding-medium 0 theme.$padding-medium;
 }
 
 @mixin page-flex-layout-max-width {
@@ -35,6 +35,11 @@
   overflow: hidden;
 }
 
+@mixin invalid-input-border {
+  border: red solid 1px;
+  border-radius: 10px;
+}
+
 @mixin mat-input-adjustment {
   --mdc-typography-subtitle1-font-size: var(--font-size);
   --mdc-typography-body1-font-size: var(--font-size);
@@ -42,7 +47,7 @@
   // Thicker border on focus
   &.mat-focused {
     .mat-mdc-text-field-wrapper {
-      border: 2px solid $color-primary-80;
+      border: 2px solid theme.$color-primary-80;
     }
 
     .mat-mdc-form-field-infix {
@@ -62,26 +67,26 @@
   // Disabled state
   &.mat-form-field-disabled {
     .mat-mdc-text-field-wrapper {
-      border: 1px solid $color-neutral-40 !important;
-      background-color: $color-neutral-10;
+      border: 1px solid theme.$color-neutral-40 !important;
+      background-color: theme.$color-neutral-10;
 
       .mat-mdc-form-field-infix input {
-        color: $color-neutral-80;
+        color: theme.$color-neutral-80;
       }
     }
     .mat-mdc-form-field-icon-prefix,
     .mat-mdc-form-field-icon-suffix {
-      color: $color-neutral-80;
+      color: theme.$color-neutral-80;
     }
   }
 
   // Wrapper border and color
   .mat-mdc-text-field-wrapper {
-    border: 1px solid $color-neutral-40;
-    border-radius: $radius-large;
+    border: 1px solid theme.$color-neutral-40;
+    border-radius: theme.$radius-large;
 
     &:hover {
-      border-color: $color-primary-80;
+      border-color: theme.$color-primary-80;
     }
 
     .mat-mdc-form-field-infix {
@@ -90,7 +95,7 @@
       padding-top: var(--offset);
 
       textarea {
-        color: $color-neutral;
+        color: theme.$color-neutral;
         font-size: --font-size;
         line-height: 150%;
         backface-visibility: hidden;
@@ -98,7 +103,7 @@
       }
 
       input {
-        color: $color-neutral;
+        color: theme.$color-neutral;
         backface-visibility: hidden;
         -webkit-font-smoothing: auto;
       }
@@ -117,7 +122,7 @@
 
   // Invalid state border color
   .mdc-text-field--invalid {
-    border-color: $color-negative !important;
+    border-color: theme.$color-negative !important;
   }
 
   // No focus overlay
@@ -128,7 +133,7 @@
   // Floating label adjustments
   .mat-mdc-form-field-flex .mdc-floating-label {
     top: calc(var(--offset) * 1.4);
-    color: $color-neutral-80 !important;
+    color: theme.$color-neutral-80 !important;
     transition: none;
     will-change: unset;
 
@@ -138,7 +143,7 @@
 
     &--float-above {
       top: calc(var(--offset) * 0.4);
-      color: $color-neutral-dark !important;
+      color: theme.$color-neutral-dark !important;
       font-weight: bold;
       transform: scale(var(--scale));
       backface-visibility: hidden;
@@ -148,12 +153,12 @@
 
   // Prefix and suffix padding
   .mat-mdc-form-field-icon-prefix {
-    padding-left: $padding-medium;
-    padding-right: $padding-small;
+    padding-left: theme.$padding-medium;
+    padding-right: theme.$padding-small;
   }
 
   .mat-mdc-form-field-icon-suffix {
-    padding-right: $padding-medium;
+    padding-right: theme.$padding-medium;
   }
 
   // Hide input number spinners
@@ -182,12 +187,12 @@
     height: var(--height);
     min-height: var(--height);
     padding: 1px;
-    border: 1px solid $color-neutral-40;
-    border-radius: $radius-large;
+    border: 1px solid theme.$color-neutral-40;
+    border-radius: theme.$radius-large;
     cursor: pointer;
 
     &:hover {
-      border-color: $color-primary-80;
+      border-color: theme.$color-primary-80;
     }
 
     &::after {
@@ -195,19 +200,21 @@
     }
 
     .ng-value-container {
-      padding: 0 $padding-medium;
+      padding: 0 theme.$padding-medium;
       border-top: var(--offset) solid transparent;
 
       .ng-placeholder {
-        color: $color-neutral-80;
+        color: theme.$color-neutral-80;
       }
 
       .ng-value {
         position: absolute;
         bottom: var(--bottom);
-        color: $color-neutral;
+        color: theme.$color-neutral;
         overflow: hidden;
         text-overflow: ellipsis;
+        //100px takes the 'x' clear button, and the chevron into account so ellipsis is shown before them
+        max-width: calc(100% - 100px);
 
         .ng-value-label {
           overflow: hidden;
@@ -217,12 +224,12 @@
 
       .ng-input {
         bottom: var(--bottom);
-        padding: 0 $padding-medium;
+        padding: 0 theme.$padding-medium;
 
         input {
           cursor: pointer;
           font-size: var(--font-size);
-          caret-color: $color-primary;
+          caret-color: theme.$color-primary;
         }
       }
     }
@@ -242,7 +249,7 @@
   // Adjustments for focused 2px border
   &.ng-select-focused {
     .ng-select-container {
-      border: 2px solid $color-primary-80;
+      border: 2px solid theme.$color-primary-80;
       padding: 0;
     }
 
@@ -264,7 +271,7 @@
   //Error state border color
   &.ng-invalid.ng-touched {
     .ng-select-container {
-      border-color: $color-negative;
+      border-color: theme.$color-negative;
     }
   }
 
@@ -274,7 +281,7 @@
   .ng-has-value {
     .ng-placeholder {
       top: var(--bottom);
-      color: $color-neutral-dark !important;
+      color: theme.$color-neutral-dark !important;
       font-weight: bold;
       transform: scale(var(--scale)) !important;
       transition: none !important;
@@ -287,7 +294,7 @@
   .ng-arrow-wrapper {
     height: 100%;
     width: var(--height);
-    background-color: $color-primary-darker;
+    background-color: theme.$color-primary-darker;
     mask-image: url("../app/shared/components/icons/chevron-down.svg");
     mask-repeat: no-repeat;
     mask-position: 50%;
@@ -301,7 +308,7 @@
   // Custom disabled state
   &.ng-select-disabled {
     .ng-select-container {
-      background-color: $color-neutral-10;
+      background-color: theme.$color-neutral-10;
       cursor: default;
 
       input {
@@ -309,15 +316,15 @@
       }
 
       .ng-value-container .ng-placeholder {
-        color: $color-neutral-80;
+        color: theme.$color-neutral-80;
       }
 
       .ng-value-container .ng-value {
-        color: $color-neutral-80;
+        color: theme.$color-neutral-80;
       }
 
       &:hover {
-        border-color: $color-neutral-40;
+        border-color: theme.$color-neutral-40;
       }
 
       .ng-arrow-wrapper {
@@ -329,17 +336,17 @@
   // Custom dropdown menu styling
   ng-dropdown-panel {
     &.ng-select-top {
-      bottom: calc(100% + $padding-small);
+      bottom: calc(100% + theme.$padding-small);
     }
 
     &.ng-select-bottom {
-      top: calc(100% + $padding-small);
+      top: calc(100% + theme.$padding-small);
     }
 
     &.ng-select-bottom,
     &.ng-select-top {
-      border-radius: $radius-large;
-      padding: $padding-smaller;
+      border-radius: theme.$radius-large;
+      padding: theme.$padding-smaller;
 
       .ng-option {
         border-radius: 6px;
@@ -348,8 +355,8 @@
 
         &.ng-option-marked,
         &.ng-option-selected {
-          background: $color-primary-10;
-          color: $color-neutral-dark;
+          background: theme.$color-primary-10;
+          color: theme.$color-neutral-dark;
         }
       }
     }
@@ -371,7 +378,7 @@
       --font-size: 14px;
       --bottom: 2px;
       --offset: 8px;
-      --scale: calc(12 / 14);
+      --scale: calc(10 / 14);
     }
 
     &.large {
@@ -392,7 +399,13 @@
 
 @mixin mat-textbox-overflow-adjustment() {
   ::ng-deep .mat-mdc-form-field-flex > .mat-mdc-form-field-infix {
-    overflow: hidden;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    max-width: 100%;
+
+    input {
+      text-overflow: ellipsis !important;
+    }
   }
 }
 
@@ -400,8 +413,8 @@
   &.medium {
     --height: 48px;
     --font-size: 14px;
-    --offset: 17px;
-    --scale: calc(12 / 14);
+    --offset: 16px;
+    --scale: calc(10 / 14);
   }
 
   &.large {
@@ -414,22 +427,18 @@
 
 @mixin grid-style() {
   kendo-grid {
-    border-radius: $radius-large;
+    border-radius: theme.$radius-large;
     border-color: transparent;
-    height: $content-height;
+    height: theme.$content-height;
   }
 
   .loading-container {
     height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include center-items-container;
   }
 
   .items-center-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include center-items-container;
   }
 
   :host ::ng-deep {
@@ -446,30 +455,30 @@
     }
 
     .k-column-title {
-      color: $color-primary-dark;
+      color: theme.$color-primary-dark;
     }
 
     .k-sort-icon {
-      color: $color-primary-dark;
-      margin-top: -$padding-smaller;
+      color: theme.$color-primary-dark;
+      margin-top: -(theme.$padding-smaller);
     }
 
     .k-filter-row {
-      background-color: $color-white !important;
+      background-color: theme.$color-white !important;
     }
 
     .k-grid-header,
     .k-grid-header .k-header {
-      background-color: $color-white !important;
+      background-color: theme.$color-white !important;
     }
 
     .k-grid-header .k-header {
-      height: 64px;
+      height: 48px;
       padding: 0px 16px;
     }
 
     .k-column-title {
-      color: $color-primary-dark !important;
+      color: theme.$color-primary-dark !important;
       font-weight: bold;
     }
 
@@ -480,7 +489,7 @@
     }
 
     .k-grid td {
-      border-bottom: 1px solid $color-neutral-20;
+      border-bottom: 1px solid theme.$color-neutral-20;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -492,30 +501,30 @@
     }
 
     kendo-pager {
-      border-top: 1px solid $color-neutral-20;
-      background-color: $color-white !important;
-      padding: $padding-small $padding-medium;
+      border-top: 1px solid theme.$color-neutral-20;
+      background-color: theme.$color-white !important;
+      padding: theme.$padding-small theme.$padding-medium;
     }
 
     .k-grid tbody tr {
-      height: 63px !important;
+      height: 56px !important;
       position: relative;
     }
 
     .k-grid-header td.k-grid-header-sticky,
     .k-grid-header .k-table-td.k-grid-header-sticky {
-      background-color: $color-white !important;
-      border-left: 1px solid $color-neutral-20;
+      background-color: theme.$color-white !important;
+      border-left: 1px solid theme.$color-neutral-20;
       border-right: 0;
     }
 
     .k-grid .k-table .k-grid-content-sticky {
-      border-left: 1px solid $color-neutral-20;
+      border-left: 1px solid theme.$color-neutral-20;
       border-right: 0;
     }
 
     .k-grid-header .k-table-th.k-grid-header-sticky {
-      border-left: 1px solid $color-neutral-20;
+      border-left: 1px solid theme.$color-neutral-20;
       border-right: 0;
     }
 
@@ -531,15 +540,41 @@
       top: 0;
       height: 100%;
       width: 5px;
-      background-color: $color-primary-base;
+      background-color: theme.$color-primary-base;
       border-top-right-radius: 10px;
       border-bottom-right-radius: 10px;
       z-index: 1;
       display: block;
     }
+
+    .k-grid tbody > tr.k-grid-norecords:hover td:first-child::before {
+      content: none;
+      cursor: default;
+      background-color: transparent;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    .k-grid tbody > tr.k-grid-norecords td {
+      cursor: default;
+      border-bottom: none;
+    }
+
+    .not-sortable {
+      ::ng-deep {
+        span {
+          cursor: default !important;
+        }
+
+        .k-column-resizer {
+          cursor: col-resize !important;
+        }
+      }
+    }
   }
+
   .column-title {
-    color: $color-primary-dark !important;
+    color: theme.$color-primary-dark !important;
     font-weight: bold;
   }
 
@@ -553,7 +588,7 @@
   .paragraph {
     line-height: 100%;
     font-size: 14px;
-    color: $color-neutral-dark;
+    color: theme.$color-neutral-dark;
   }
 
   .wrap-on-overflow {
@@ -578,19 +613,15 @@
   }
 
   .action-buttons-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include center-items-container;
     gap: 8px;
   }
 }
 
 @mixin dialog-footer-no-padding() {
   .dialog-footer {
-    background-color: $color-white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include center-items-container;
+    background-color: theme.$color-white;
     width: 100%;
     box-sizing: border-box;
     position: sticky;
@@ -609,6 +640,54 @@
   }
 
   .dialog-footer {
-    padding-bottom: $padding-large + 1;
+    padding-bottom: theme.$padding-large + 1;
   }
+}
+
+@mixin medium-font-size {
+  &.medium {
+    font-size: 16px !important;
+  }
+}
+
+@mixin ng-select-medium-styles {
+  ng-select.medium {
+    ::ng-deep {
+      .ng-value * {
+        font-size: 16px !important;
+      }
+
+      .ng-has-value .ng-placeholder {
+        top: 5px !important;
+      }
+    }
+
+    &.ng-select-opened {
+      ::ng-deep .ng-placeholder {
+        top: 5px !important;
+      }
+    }
+  }
+}
+
+@mixin details-page-link-font-sizes {
+  .details-page-link-medium {
+    font-size: theme.$link-font-size-medium;
+  }
+  .details-page-link-small {
+    font-size: theme.$link-font-size-small;
+  }
+  .details-page-link-x-small {
+    font-size: theme.$link-font-size-x-small;
+  }
+}
+
+@mixin center-items-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin two-thirds-column-width {
+  grid-column: span 2;
 }

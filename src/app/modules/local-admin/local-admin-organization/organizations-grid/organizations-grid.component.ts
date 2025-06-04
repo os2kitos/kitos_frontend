@@ -12,11 +12,17 @@ import {
   selectOrganizationGridLoading,
   selectOrganizationGridState,
 } from 'src/app/store/organization/selectors';
+import { OverviewHeaderComponent } from '../../../../shared/components/overview-header/overview-header.component';
+import { GridOptionsButtonComponent } from '../../../../shared/components/grid-options-button/grid-options-button.component';
+import { ExportMenuButtonComponent } from '../../../../shared/components/buttons/export-menu-button/export-menu-button.component';
+import { GridComponent } from '../../../../shared/components/grid/grid.component';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-organizations-grid',
   templateUrl: './organizations-grid.component.html',
   styleUrl: './organizations-grid.component.scss',
+  imports: [OverviewHeaderComponent, GridOptionsButtonComponent, ExportMenuButtonComponent, GridComponent, AsyncPipe],
 })
 export class OrganizationsGridComponent extends BaseOverviewComponent implements OnInit {
   private readonly sectionName: string = ORGANIZATION_SECTION_NAME;

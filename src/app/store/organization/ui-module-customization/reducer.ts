@@ -28,7 +28,7 @@ export const uiModuleConfigFeature = createFeature({
           ...state,
           uiModuleConfigs: updateUIModuleConfigs(state, uiModuleConfig),
         };
-      }
+      },
     ),
     on(
       UIModuleConfigActions.putUIModuleCustomizationSuccess,
@@ -41,7 +41,7 @@ export const uiModuleConfigFeature = createFeature({
           ...state,
           uiModuleConfigs: updateUIModuleConfigs(state, uiModuleConfig),
         };
-      }
+      },
     ),
     on(
       UIModuleConfigActions.getUIModuleConfig,
@@ -51,7 +51,7 @@ export const uiModuleConfigFeature = createFeature({
           ...state,
           loading: true,
         };
-      }
+      },
     ),
     on(
       UIModuleConfigActions.resetLoading,
@@ -64,8 +64,8 @@ export const uiModuleConfigFeature = createFeature({
           ...state,
           loading: false,
         };
-      }
-    )
+      },
+    ),
   ),
 });
 

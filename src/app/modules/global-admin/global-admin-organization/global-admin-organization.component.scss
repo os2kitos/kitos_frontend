@@ -1,5 +1,5 @@
-@import "mixins.scss";
+@use "mixins.scss";
 
 :host {
-  @include page-flex-layout-max-width;
+  @include mixins.page-flex-layout-max-width;
 }

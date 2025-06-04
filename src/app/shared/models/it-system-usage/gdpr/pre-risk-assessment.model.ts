@@ -13,7 +13,7 @@ export const riskAssessmentResultOptions: PreRiskAssessment[] = [
 ];
 
 export const mapPreRiskAssessmentEnum = (
-  value?: APIGdprReportResponseDTO.PreRiskAssessmentEnum
+  value?: APIGdprReportResponseDTO.PreRiskAssessmentEnum,
 ): PreRiskAssessment | undefined => {
   return riskAssessmentResultOptions.find((option) => option.value === value);
 };

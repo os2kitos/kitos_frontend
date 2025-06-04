@@ -17,7 +17,6 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectOrganizationUuid } from '../../user-store/selectors';
 import { OrganizationUnitActions } from './actions';
 import {
-  selectCurrentUnitUuid,
   selectOrganizationUnitHasValidCache,
   selectOrganizationUnits,
   selectPagedOrganizationUnitHasValidCache,
@@ -69,7 +68,10 @@ export class OrganizationUnitEffects {
         this.store.select(selectOrganizationUuid).pipe(filterNullish()),
         this.store.select(selectPagedOrganizationUnitHasValidCache),
       ]),
-      filter(([_, __, validCache]) => {
+      filter(([{ ignoreCache }, __, validCache]) => {
+        if (ignoreCache) {
+          return true;
+        }
         return !validCache;
       }),
       switchMap(([{ units, currentPage, pageSize }, organizationUuid]) =>
@@ -167,22 +169,21 @@ export class OrganizationUnitEffects {
 
   addOrganizationUnitRoleAssignment$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(OrganizationUnitActions.addOrganizationUnitRole),
+      ofType(OrganizationUnitActions.bulkAddOrganizationUnitRole),
       concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
-      concatLatestFrom(() => this.store.select(selectCurrentUnitUuid).pipe(filterNullish())),
-      switchMap(([[{ userUuid, roleUuid }, organizationUuid], organizationUnitUuid]) =>
+      switchMap(([{ userUuids, roleUuid, orgUnitUuid }, organizationUuid]) =>
         this.apiUnitService
-          .postSingleOrganizationUnitsInternalV2CreateRoleAssignment({
+          .postSingleOrganizationUnitsInternalV2CreateBulkRoleAssignment({
             organizationUuid,
-            organizationUnitUuid,
+            organizationUnitUuid: orgUnitUuid,
             request: {
-              roleUuid,
-              userUuid,
+              roleUuid: roleUuid,
+              userUuids: userUuids,
             },
           })
           .pipe(
-            map(() => OrganizationUnitActions.addOrganizationUnitRoleSuccess()),
-            catchError(() => of(OrganizationUnitActions.addOrganizationUnitRoleError()))
+            map(() => OrganizationUnitActions.bulkAddOrganizationUnitRoleSuccess()),
+            catchError(() => of(OrganizationUnitActions.bulkAddOrganizationUnitRoleError()))
           )
       )
     );

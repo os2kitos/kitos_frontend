@@ -24,5 +24,9 @@ export interface APIContractValidityWriteRequestDTO {
      * If specified, the entity is valid up until and including this date.  Must be greater than or equal to ValidFrom
      */
     validTo?: string;
+    /**
+     * Determines if the parent contract should be part of the contracts validation
+     */
+    requireValidParent?: boolean;
 }
 

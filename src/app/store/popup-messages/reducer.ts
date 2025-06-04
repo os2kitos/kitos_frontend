@@ -17,11 +17,15 @@ export const popupMessagesFeature = createFeature({
     popupMessagesInitialState,
     on(
       PopupMessageActions.add,
-      (state, { popupMessage: notification }): PopupMessagesState => ({ ...popupMessageAdapter.addOne(notification, state) })
+      (state, { popupMessage: notification }): PopupMessagesState => ({
+        ...popupMessageAdapter.addOne(notification, state),
+      }),
     ),
     on(
       PopupMessageActions.remove,
-      (state, { popupMessageId: notificationId }): PopupMessagesState => ({ ...popupMessageAdapter.removeOne(notificationId, state) })
-    )
+      (state, { popupMessageId: notificationId }): PopupMessagesState => ({
+        ...popupMessageAdapter.removeOne(notificationId, state),
+      }),
+    ),
   ),
 });

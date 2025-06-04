@@ -1,5 +1,6 @@
+import { AsyncPipe, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { combineLatest, first } from 'rxjs';
 import {
@@ -9,6 +10,8 @@ import {
   APIOrganizationMasterDataRequestDTO,
 } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { ONLY_DIGITS_AND_WHITESPACE_REGEX } from 'src/app/shared/constants/regex-constants';
+import { removeWhitespace } from 'src/app/shared/helpers/string.helpers';
 import { IdentityNamePair } from 'src/app/shared/models/identity-name-pair.model';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
@@ -21,6 +24,13 @@ import {
   selectOrganizationMasterDataRoles,
 } from 'src/app/store/organization/selectors';
 import { selectOrganizationName, selectOrganizationUuid } from 'src/app/store/user-store/selectors';
+import { CardHeaderComponent } from '../../../shared/components/card-header/card-header.component';
+import { CardComponent } from '../../../shared/components/card/card.component';
+import { ConnectedDropdownComponent } from '../../../shared/components/dropdowns/connected-dropdown/connected-dropdown.component';
+import { FormGridComponent } from '../../../shared/components/form-grid/form-grid.component';
+import { HelpButtonComponent } from '../../../shared/components/help-button/help-button.component';
+import { NumericInputComponent } from '../../../shared/components/numeric-input/numeric-input.component';
+import { TextBoxComponent } from '../../../shared/components/textbox/textbox.component';
 import { OrganizationMasterDataComponentStore } from './organization-master-data.component-store';
 
 @Component({
@@ -28,6 +38,19 @@ import { OrganizationMasterDataComponentStore } from './organization-master-data
   templateUrl: './organization-master-data.component.html',
   styleUrl: './organization-master-data.component.scss',
   providers: [OrganizationMasterDataComponentStore],
+  imports: [
+    NgIf,
+    HelpButtonComponent,
+    CardComponent,
+    CardHeaderComponent,
+    FormGridComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    NumericInputComponent,
+    TextBoxComponent,
+    ConnectedDropdownComponent,
+    AsyncPipe,
+  ],
 })
 export class OrganizationMasterDataComponent extends BaseComponent implements OnInit {
   public readonly organizationName$ = this.store.select(selectOrganizationName);
@@ -40,6 +63,7 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
   public readonly organizationUsers$ = this.componentStore.organizationUsers$;
   public readonly organizationUsersLoading$ = this.componentStore.organizationUsersLoading$;
   public readonly organizationUserIdentityNamePairs$ = this.componentStore.organizationUserIdentityNamePairs$;
+  public readonly phoneNumberRegex = ONLY_DIGITS_AND_WHITESPACE_REGEX;
 
   public readonly masterDataForm = new FormGroup({
     ...this.commonOrganizationControls(),
@@ -208,13 +232,26 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
     }
   }
 
+  public patchMasterDataPhoneNumber() {
+    const phoneNumber = this.getPhoneNumberWithoutWhitespace(this.masterDataForm.controls.phoneControl);
+    if (phoneNumber) {
+      this.patchMasterData({ phone: phoneNumber });
+    }
+  }
+
   public patchDataResponsibleCvr(cvr: string | undefined) {
     this.patchMasterDataRolesDataResponsible(false, cvr);
   }
 
-  private getValidCvrUpdate(newCvr: string | undefined, formControl: FormControl): string | undefined{
+  private getValidCvrUpdate(newCvr: string | undefined, formControl: FormControl): string | undefined {
     if (newCvr !== undefined) return newCvr;
     return formControl.value ?? undefined;
+  }
+
+  private getPhoneNumberWithoutWhitespace(phoneControl: FormControl): string | undefined {
+    const phoneNumberFromControl = phoneControl.value;
+    if (phoneControl.invalid || !phoneNumberFromControl) return undefined;
+    return removeWhitespace(phoneNumberFromControl);
   }
 
   public patchMasterDataRolesDataResponsible(
@@ -236,7 +273,7 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
           dataResponsibleDto.cvr = newCvr;
           dataResponsibleDto.email = email ?? undefined;
           dataResponsibleDto.name = controls.nameControl.value ?? undefined;
-          dataResponsibleDto.phone = controls.phoneControl.value ?? undefined;
+          dataResponsibleDto.phone = this.getPhoneNumberWithoutWhitespace(controls.phoneControl);
 
           this.store.dispatch(
             OrganizationActions.patchMasterDataRoles({ request: { dataResponsible: dataResponsibleDto } })
@@ -254,7 +291,7 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
       contactPerson.lastName = controls.lastNameControl.value ?? undefined;
       contactPerson.email = email ?? undefined;
       contactPerson.name = controls.nameControl.value ?? undefined;
-      contactPerson.phoneNumber = controls.phoneControl.value ?? undefined;
+      contactPerson.phoneNumber = this.getPhoneNumberWithoutWhitespace(controls.phoneControl);
 
       this.store.dispatch(
         OrganizationActions.patchMasterDataRoles({
@@ -283,7 +320,7 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
           dataProtectionAdvisorDto.cvr = newCvr;
           dataProtectionAdvisorDto.email = controls.emailControl.value ?? undefined;
           dataProtectionAdvisorDto.name = controls.nameControl.value ?? undefined;
-          dataProtectionAdvisorDto.phone = controls.phoneControl.value ?? undefined;
+          dataProtectionAdvisorDto.phone = this.getPhoneNumberWithoutWhitespace(controls.phoneControl);
 
           this.store.dispatch(
             OrganizationActions.patchMasterDataRoles({

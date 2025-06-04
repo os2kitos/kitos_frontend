@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
 import { APIOrganizationUpdateRequestDTO } from 'src/app/api/v2';
@@ -15,11 +15,30 @@ import {
   selectOrganizationName,
   selectOrganizationType,
 } from 'src/app/store/user-store/selectors';
+import { StandardVerticalContentGridComponent } from '../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { CardComponent } from '../../../shared/components/card/card.component';
+import { CardHeaderComponent } from '../../../shared/components/card-header/card-header.component';
+import { FormGridComponent } from '../../../shared/components/form-grid/form-grid.component';
+import { TextBoxComponent } from '../../../shared/components/textbox/textbox.component';
+import { NumericInputComponent } from '../../../shared/components/numeric-input/numeric-input.component';
 
 @Component({
   selector: 'app-local-admin-information',
   templateUrl: './local-admin-information.component.html',
   styleUrl: './local-admin-information.component.scss',
+  imports: [
+    StandardVerticalContentGridComponent,
+    NgIf,
+    CardComponent,
+    CardHeaderComponent,
+    FormGridComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    TextBoxComponent,
+    NumericInputComponent,
+    AsyncPipe,
+  ],
 })
 export class LocalAdminInformationComponent extends BaseComponent implements OnInit {
   public readonly organizationName$ = this.store.select(selectOrganizationName);
@@ -51,14 +70,14 @@ export class LocalAdminInformationComponent extends BaseComponent implements OnI
             cvrControl: this.GetCvrAsNumber(cvr),
             typeControl: mapOrganizationType(type),
           });
-        }
-      )
+        },
+      ),
     );
 
     this.subscriptions.add(
       this.hasModifyCvrPermission$.pipe(filterNullish()).subscribe((hasModifyCvrPermission) => {
         if (!hasModifyCvrPermission) this.form.controls.cvrControl.disable();
-      })
+      }),
     );
   }
 

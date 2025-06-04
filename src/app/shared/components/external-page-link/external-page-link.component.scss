@@ -1,17 +1,21 @@
-@import "theme";
+@use "theme";
 
 :host {
+  .external-page-link-large {
+    font-size: theme.$link-font-size-large;
+  }
+
   .external-page-link-medium {
-    font-size: $link-font-size-medium;
+    font-size: theme.$link-font-size-medium;
   }
   .external-page-link-small {
-    font-size: $link-font-size-small;
+    font-size: theme.$link-font-size-small;
   }
   .external-page-link-x-small {
-    font-size: $link-font-size-x-small;
+    font-size: theme.$link-font-size-x-small;
   }
 }
 
 .text-padding {
-  padding-right: $padding-small;
+  padding-right: theme.$padding-small;
 }

@@ -1,4 +1,4 @@
-@import "theme.scss";
+@use "theme.scss";
 
 .mat-expansion-panel-header {
   min-height: 56px;
@@ -14,7 +14,7 @@
 
 .mat-expansion-panel:not([class*="mat-elevation-z"]) {
   box-shadow: none;
-  border: 1px solid $color-neutral-40;
+  border: 1px solid theme.$color-neutral-40;
 }
 
 .accordion-header {
@@ -24,6 +24,6 @@
 }
 
 .tooltip-margin {
-  margin-left: $padding-small;
-  margin-top: $padding-small;
+  margin-left: theme.$padding-small;
+  margin-top: theme.$padding-small;
 }

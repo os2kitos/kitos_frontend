@@ -14,23 +14,41 @@ import {
   selectItSystemUsageLocallyRemovedKleUuids,
 } from 'src/app/store/it-system-usage/selectors';
 import { selectItSystemKleUuids } from 'src/app/store/it-system/selectors';
-import { KleCommandEventArgs, SelectedKle } from '../../../shared/kle-table/kle-table.component';
+import { KleCommandEventArgs, SelectedKle, KleTableComponent } from '../../../shared/kle-table/kle-table.component';
 import {
   selectITSystemUsageEnableInheritedKle,
   selectITSystemUsageEnableLocalKle,
 } from 'src/app/store/organization/ui-module-customization/selectors';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { CardComponent } from '../../../../../shared/components/card/card.component';
+import { CardHeaderComponent } from '../../../../../shared/components/card-header/card-header.component';
+import { ItSystemKleOverviewComponent } from '../../../shared/it-system-kle-overview/it-system-kle-overview.component';
+import { StandardVerticalContentGridComponent } from '../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { EmptyStateComponent } from '../../../../../shared/components/empty-states/empty-state.component';
+import { CollectionExtensionButtonComponent } from '../../../../../shared/components/collection-extension-button/collection-extension-button.component';
 
 @Component({
   selector: 'app-it-system-usage-details-kle',
   templateUrl: './it-system-usage-details-kle.component.html',
   styleUrls: ['./it-system-usage-details-kle.component.scss'],
+  imports: [
+    NgIf,
+    CardComponent,
+    CardHeaderComponent,
+    ItSystemKleOverviewComponent,
+    StandardVerticalContentGridComponent,
+    KleTableComponent,
+    EmptyStateComponent,
+    CollectionExtensionButtonComponent,
+    AsyncPipe,
+  ],
 })
 export class ItSystemUsageDetailsKleComponent extends BaseComponent implements OnInit {
   private disabledKleUuids: Array<string> = [];
   public hasModifyPermission$ = this.store.select(selectITSystemUsageHasModifyPermission);
   private readonly localKleUuids$ = this.store.select(selectItSystemUsageLocallyAddedKleUuids).pipe(filterNullish());
   public readonly localKleUuidsWithActions$ = this.localKleUuids$.pipe(
-    map((uuids) => uuids.map<SelectedKle>((uuid) => ({ uuid: uuid, availableCommands: ['delete-assignment'] })))
+    map((uuids) => uuids.map<SelectedKle>((uuid) => ({ uuid: uuid, availableCommands: ['delete-assignment'] }))),
   );
   public readonly systemContextKleUuids$ = this.store.select(selectItSystemKleUuids).pipe(filterNullish());
   public readonly anyLocalKleUuids$ = this.store
@@ -47,7 +65,7 @@ export class ItSystemUsageDetailsKleComponent extends BaseComponent implements O
   constructor(
     private readonly store: Store,
     private readonly dialog: MatDialog,
-    private readonly confirmActionService: ConfirmActionService
+    private readonly confirmActionService: ConfirmActionService,
   ) {
     super();
   }
@@ -63,7 +81,7 @@ export class ItSystemUsageDetailsKleComponent extends BaseComponent implements O
           if (addedKleUuid) {
             this.store.dispatch(ITSystemUsageActions.addLocalKLE(addedKleUuid));
           }
-        })
+        }),
     );
   }
 
@@ -102,8 +120,8 @@ export class ItSystemUsageDetailsKleComponent extends BaseComponent implements O
   ngOnInit(): void {
     this.subscriptions.add(
       combineLatest([this.systemContextKleUuids$, this.localKleUuids$]).subscribe(
-        ([systemKleUuids, localKleUuids]) => (this.disabledKleUuids = [...systemKleUuids, ...localKleUuids])
-      )
+        ([systemKleUuids, localKleUuids]) => (this.disabledKleUuids = [...systemKleUuids, ...localKleUuids]),
+      ),
     );
   }
 }

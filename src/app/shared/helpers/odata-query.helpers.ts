@@ -3,7 +3,7 @@ export const replaceQueryByMultiplePropertyContains = (
   replaceQueryParameter: string,
   columnName: string,
   propertyNames: string[],
-  addSlashBeforeProperty: boolean = true
+  addSlashBeforeProperty: boolean = true,
 ) => {
   const pattern = new RegExp(`(\\w+\\()${replaceQueryParameter}(.*?\\))`, 'i');
   const matchingFilterPart = pattern.exec(filterUrl);
@@ -47,7 +47,7 @@ const createContainsQueryForProperties = (
   columnName: string,
   propertyNames: string[],
   searchValue: string,
-  addSlashBeforeProperty: boolean
+  addSlashBeforeProperty: boolean,
 ): string => {
   let result = '(';
   propertyNames.forEach((name, i) => {

@@ -1,4 +1,4 @@
-@import "theme";
+@use "theme";
 :host ::ng-deep .label {
   margin-left: 41px;
 }

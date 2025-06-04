@@ -1,15 +1,38 @@
-<div class="card">
-  <p *ngIf="content" [innerHTML]="content"></p>
-  <app-empty-state
-    [text]="'Ingen besked at vise'"
-    [context]="'emptyUpdate'"
-    i18n-text
-    *ngIf="!content"
-  ></app-empty-state>
-  <ng-container *ngIf="isUserGlobalAdmin$ | async">
-    <div class="divider-margin">
-      <app-divider></app-divider>
+<app-card
+  *ngIf="publicMessage$ | async as publicMessage"
+  [ngClass]="{ 'compact-height': mode === 'compact', 'normal-height': mode === 'normal' }"
+>
+  <div class="top-container">
+    <div class="icon-container">
+      <app-icon [iconType]="getIconType(publicMessage)"></app-icon>
     </div>
-    <app-button (buttonClick)="onEdit()" data-cy="edit-public-message-button" i18n> Rediger </app-button>
-  </ng-container>
-</div>
+
+    <div class="link-container">
+      <app-status-chip
+        [value]="activeStatus(publicMessage)"
+        [valueDisplayType]="statusDisplayType"
+        data-cy="public-message-status"
+      ></app-status-chip>
+      <app-button
+        size="x-small"
+        buttonStyle="tertiary"
+        (buttonClick)="openPublicMessageDialog()"
+        data-cy="open-public-message"
+      >
+        Læs mere
+      </app-button>
+    </div>
+  </div>
+
+  <app-external-page-link
+    *ngIf="hasValidUrl(publicMessage)"
+    [url]="publicMessage.link"
+    [title]="publicMessage.title"
+    linkFontSize="large"
+  ></app-external-page-link>
+  <app-paragraph *ngIf="!hasValidUrl(publicMessage)" paragraphSize="large" [bold]="true">
+    {{ publicMessage.title }}</app-paragraph
+  >
+  <div class="padding"></div>
+  <app-paragraph [dimmed]="true" paragraphSize="medium"> {{ publicMessage.shortDescription }}</app-paragraph>
+</app-card>

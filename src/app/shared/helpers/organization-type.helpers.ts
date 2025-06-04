@@ -2,7 +2,7 @@ import { APIOrganizationResponseDTO } from 'src/app/api/v2';
 import { OrganizationTypeEnum } from '../models/organization/organization-odata.model';
 
 export function mapOrganizationType(
-  source: APIOrganizationResponseDTO.OrganizationTypeEnum | undefined
+  source: APIOrganizationResponseDTO.OrganizationTypeEnum | undefined,
 ): string | undefined {
   switch (source) {
     case APIOrganizationResponseDTO.OrganizationTypeEnum.Municipality: {

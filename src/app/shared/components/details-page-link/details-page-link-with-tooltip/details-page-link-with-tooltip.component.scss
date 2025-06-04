@@ -1,0 +1,10 @@
+@use "theme";
+@use "mixins";
+
+:host {
+  @include mixins.details-page-link-font-sizes;
+}
+
+.display-in-row {
+  display: inline-block;
+}

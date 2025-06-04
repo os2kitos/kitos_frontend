@@ -18,11 +18,34 @@ import {
 } from 'src/app/store/local-admin/fk-org/selectors';
 import { FkOrgDeleteDialogComponent } from '../fk-org-delete-dialog/fk-org-delete-dialog.component';
 import { FkOrgWriteDialogComponent } from '../fk-org-write-dialog/fk-org-write-dialog.component';
+import { CardComponent } from '../../../../../shared/components/card/card.component';
+import { CardHeaderComponent } from '../../../../../shared/components/card-header/card-header.component';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { StandardVerticalContentGridComponent } from '../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { ParagraphComponent } from '../../../../../shared/components/paragraph/paragraph.component';
+import { NativeTableComponent } from '../../../../../shared/components/native-table/native-table.component';
+import { FkOrgChangelogComponent } from '../fk-org-changelog/fk-org-changelog.component';
+import { ButtonComponent } from '../../../../../shared/components/buttons/button/button.component';
+import { LoadingComponent } from '../../../../../shared/components/loading/loading.component';
+import { AppDatePipe } from '../../../../../shared/pipes/app-date.pipe';
 
 @Component({
   selector: 'app-local-admin-import-fk-org',
   templateUrl: './local-admin-import-fk-org.component.html',
   styleUrl: './local-admin-import-fk-org.component.scss',
+  imports: [
+    CardComponent,
+    CardHeaderComponent,
+    NgIf,
+    StandardVerticalContentGridComponent,
+    ParagraphComponent,
+    NativeTableComponent,
+    FkOrgChangelogComponent,
+    ButtonComponent,
+    LoadingComponent,
+    AsyncPipe,
+    AppDatePipe,
+  ],
 })
 export class LocalAdminImportFkOrgComponent extends BaseComponent implements OnInit {
   public readonly synchronizationStatus$ = this.store.select(selectSynchronizationStatus);
@@ -40,7 +63,7 @@ export class LocalAdminImportFkOrgComponent extends BaseComponent implements OnI
     private store: Store,
     private actions$: Actions,
     private matDialog: MatDialog,
-    private confirmActionService: ConfirmActionService
+    private confirmActionService: ConfirmActionService,
   ) {
     super();
   }
@@ -55,10 +78,10 @@ export class LocalAdminImportFkOrgComponent extends BaseComponent implements OnI
             FkOrgActions.createConnectionSuccess,
             FkOrgActions.updateConnectionSuccess,
             FkOrgActions.deleteAutomaticUpdateSubscriptionSuccess,
-            FkOrgActions.deleteConnectionSuccess
-          )
+            FkOrgActions.deleteConnectionSuccess,
+          ),
         )
-        .subscribe(() => this.dispatchGetSynchronizationStatus())
+        .subscribe(() => this.dispatchGetSynchronizationStatus()),
     );
   }
 

@@ -30,6 +30,8 @@ export interface APIItSystemResponseDTO {
      */
     scope: APIItSystemResponseDTO.ScopeEnum;
     organizationContext: APIShallowOrganizationResponseDTO;
+    legalName?: string;
+    legalDataProcessorName?: string;
     /**
      * UUID for IT-System
      */
@@ -71,6 +73,10 @@ export interface APIItSystemResponseDTO {
     created: string;
     createdBy: APIIdentityNamePairResponseDTO;
     recommendedArchiveDuty: APIRecommendedArchiveDutyResponseDTO;
+    /**
+     * A list of unique suppliers associated with each usage’s main contract.
+     */
+    mainContractSuppliers: Array<APIShallowOrganizationResponseDTO>;
 }
 export namespace APIItSystemResponseDTO {
     export type ScopeEnum = 'Local' | 'Global';

@@ -100,13 +100,9 @@
     "hostedAt": "External",
     "directoryDocumentation": { "name": "newName", "url": "newUrl" },
     "dataSensitivityLevels": ["PersonData", "LegalData"],
-    "sensitivePersonData": [
-      { "uuid": "00000000-0000-0000-0000-000000000000", "name": "data type 1" }
-    ],
+    "sensitivePersonData": [{ "uuid": "00000000-0000-0000-0000-000000000000", "name": "data type 1" }],
     "specificPersonalData": ["CprNumber"],
-    "registeredDataCategories": [
-      { "uuid": "00000000-0000-0000-0000-000000000000", "name": "data category 1" }
-    ],
+    "registeredDataCategories": [{ "uuid": "00000000-0000-0000-0000-000000000000", "name": "data category 1" }],
     "technicalPrecautionsInPlace": "Yes",
     "technicalPrecautionsApplied": [2, 0, 1],
     "technicalPrecautionsDocumentation": { "name": null, "url": null },

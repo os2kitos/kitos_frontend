@@ -4,6 +4,7 @@ import { OrganizationsDialogComponentStore } from './organizations-dialog.compon
 @Component({
   template: '',
   providers: [OrganizationsDialogComponentStore],
+  standalone: false,
 })
 export class GlobalAdminOrganizationsDialogBaseComponent implements OnInit {
   protected countryCodes$ = this.componentStore.countryCodes$;

@@ -1,4 +1,5 @@
 import { APIExtendedRoleAssignmentResponseDTO, APIOrganizationUnitRolesResponseDTO } from 'src/app/api/v2';
+import { IdentityNamePair } from '../identity-name-pair.model';
 
 export type RoleAssignmentsMap = {
   [key: string]: string;
@@ -36,7 +37,7 @@ export function mapRoleAssignmentsToEmails(roleAssignments: any): RoleAssignment
   return emailsPerRole;
 }
 
-export class RegularRoleAssignment implements IRoleAssignment {
+export class RegularRoleAssignment implements RoleAssignment {
   public assignment: APIExtendedRoleAssignmentResponseDTO;
 
   constructor(assignment: APIExtendedRoleAssignmentResponseDTO) {
@@ -44,7 +45,7 @@ export class RegularRoleAssignment implements IRoleAssignment {
   }
 }
 
-export class OrganizationUnitRoleAssignment implements IRoleAssignment {
+export class OrganizationUnitRoleAssignment implements RoleAssignment {
   public assignment: APIExtendedRoleAssignmentResponseDTO;
   public unitName: string;
   public unitUuid: string;
@@ -57,15 +58,20 @@ export class OrganizationUnitRoleAssignment implements IRoleAssignment {
   }
 }
 
-export interface IRoleAssignment {
+export interface RoleAssignment {
   assignment: APIExtendedRoleAssignmentResponseDTO;
   unitName?: string;
   unitUuid?: string;
 }
 
+export function extractUnitFromRoleAssignment(assignment: RoleAssignment): IdentityNamePair | undefined {
+  if (!assignment.unitName || !assignment.unitUuid) return undefined;
+  return { name: assignment.unitName, uuid: assignment.unitUuid };
+}
+
 export function mapDTOsToRoleAssignment(
-  roleAssignment: APIExtendedRoleAssignmentResponseDTO | APIOrganizationUnitRolesResponseDTO
-): IRoleAssignment {
+  roleAssignment: APIExtendedRoleAssignmentResponseDTO | APIOrganizationUnitRolesResponseDTO,
+): RoleAssignment {
   if (isAPIOrganizationUnitRolesResponseDTO(roleAssignment)) {
     return new OrganizationUnitRoleAssignment(roleAssignment);
   } else {

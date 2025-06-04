@@ -1,4 +1,4 @@
-@import "theme";
+@use "theme";
 
 .close-button {
   position: absolute;
@@ -9,11 +9,11 @@
 .header {
   display: flex;
   align-items: center;
-  gap: $padding-small;
-  border-bottom: 1px solid $color-neutral-20;
-  padding: $padding-medium;
-  padding-left: $padding-large;
-  color: $color-neutral-dark;
+  gap: theme.$padding-small;
+  border-bottom: 1px solid theme.$color-neutral-20;
+  padding: theme.$padding-medium;
+  padding-left: theme.$padding-large;
+  color: theme.$color-neutral-dark;
 
   h3 {
     margin: 12px 4px 12px 0;
@@ -30,7 +30,7 @@
 
     .arrow-button {
       position: absolute;
-      left: $padding-medium;
+      left: theme.$padding-medium;
       margin-right: 0;
     }
   }

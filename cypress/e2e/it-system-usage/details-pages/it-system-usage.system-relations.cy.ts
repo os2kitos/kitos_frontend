@@ -11,7 +11,7 @@ interface RelationRow {
   expectedInvalidUrlReference?: string;
 }
 
-describe('it-system-usage', () => {
+describe('it-system-usage system-relations', () => {
   beforeEach(() => {
     cy.requireIntercept();
     cy.setupItSystemUsageIntercepts();
@@ -185,7 +185,7 @@ describe('it-system-usage', () => {
       'DELETE',
       '**/system-relations/*',
       {},
-      'Er du sikker på at du vil fjerne denne relation'
+      'Er du sikker på at du vil fjerne denne relation',
     );
 
     cy.contains('Relationen er slettet');
@@ -195,7 +195,7 @@ describe('it-system-usage', () => {
     cy.getCardWithTitle(
       isOutgoing
         ? `'${systemName}' har følgende relationer til andre systemer/snitflader`
-        : `Andre systemer har følgende relationer til '${systemName}'`
+        : `Andre systemer har følgende relationer til '${systemName}'`,
     ).within(() => {
       for (const expectedRow of rows) {
         const row = () => cy.getRowForElementContent(expectedRow.systemUsageName);

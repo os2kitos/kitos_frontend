@@ -58,11 +58,11 @@ interface MasterDataDataProtectionAdvisor {
 function adaptContactPerson(sourceContactPerson: any) {
   const contactPerson: MasterDataContactPerson = {};
   if (sourceContactPerson) {
-    (contactPerson.lastName = sourceContactPerson.lastName),
-      (contactPerson.phoneNumber = sourceContactPerson.phoneNumber),
-      (contactPerson.email = sourceContactPerson.email),
-      (contactPerson.name = sourceContactPerson.name),
-      (contactPerson.id = sourceContactPerson.id);
+    contactPerson.lastName = sourceContactPerson.lastName;
+    contactPerson.phoneNumber = sourceContactPerson.phoneNumber;
+    contactPerson.email = sourceContactPerson.email;
+    contactPerson.name = sourceContactPerson.name;
+    contactPerson.id = sourceContactPerson.id;
   }
   return contactPerson;
 }

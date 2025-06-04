@@ -13,7 +13,7 @@ export class FkOrgEffects {
     private actions$: Actions,
     private store: Store,
     @Inject(APIV2StsOrganizationSynchronizationInternalINTERNALService)
-    private apiService: APIV2StsOrganizationSynchronizationInternalINTERNALService
+    private apiService: APIV2StsOrganizationSynchronizationInternalINTERNALService,
   ) {}
 
   getSynchronizationStatus$ = createEffect(() => {
@@ -25,9 +25,9 @@ export class FkOrgEffects {
           .getSingleStsOrganizationSynchronizationInternalV2GetSynchronizationStatus({ organizationUuid })
           .pipe(
             map((synchronizationStatus) => FkOrgActions.getSynchronizationStatusSuccess(synchronizationStatus)),
-            catchError(() => of(FkOrgActions.getSynchronizationStatusError()))
-          )
-      )
+            catchError(() => of(FkOrgActions.getSynchronizationStatusError())),
+          ),
+      ),
     );
   });
 
@@ -40,9 +40,9 @@ export class FkOrgEffects {
           .getSingleStsOrganizationSynchronizationInternalV2GetSnapshotFromStsOrganization({ organizationUuid })
           .pipe(
             map((snapshot) => FkOrgActions.getSnapshotSuccess(snapshot)),
-            catchError(() => of(FkOrgActions.getSnapshotError()))
-          )
-      )
+            catchError(() => of(FkOrgActions.getSnapshotError())),
+          ),
+      ),
     );
   });
 
@@ -55,9 +55,9 @@ export class FkOrgEffects {
           .postSingleStsOrganizationSynchronizationInternalV2CreateConnection({ organizationUuid, request })
           .pipe(
             map(() => FkOrgActions.createConnectionSuccess()),
-            catchError(() => of(FkOrgActions.createConnectionError()))
-          )
-      )
+            catchError(() => of(FkOrgActions.createConnectionError())),
+          ),
+      ),
     );
   });
 
@@ -73,9 +73,9 @@ export class FkOrgEffects {
           })
           .pipe(
             map((snapshot) => FkOrgActions.previewConnectionUpdateSuccess(snapshot)),
-            catchError(() => of(FkOrgActions.previewConnectionUpdateError()))
-          )
-      )
+            catchError(() => of(FkOrgActions.previewConnectionUpdateError())),
+          ),
+      ),
     );
   });
 
@@ -88,9 +88,9 @@ export class FkOrgEffects {
           .putSingleStsOrganizationSynchronizationInternalV2UpdateConnection({ organizationUuid, request })
           .pipe(
             map(() => FkOrgActions.updateConnectionSuccess()),
-            catchError(() => of(FkOrgActions.updateConnectionError()))
-          )
-      )
+            catchError(() => of(FkOrgActions.updateConnectionError())),
+          ),
+      ),
     );
   });
 
@@ -103,9 +103,9 @@ export class FkOrgEffects {
           .deleteSingleStsOrganizationSynchronizationInternalV2DeleteSubscription({ organizationUuid })
           .pipe(
             map(() => FkOrgActions.deleteAutomaticUpdateSubscriptionSuccess()),
-            catchError(() => of(FkOrgActions.deleteAutomaticUpdateSubscriptionError()))
-          )
-      )
+            catchError(() => of(FkOrgActions.deleteAutomaticUpdateSubscriptionError())),
+          ),
+      ),
     );
   });
 
@@ -121,9 +121,9 @@ export class FkOrgEffects {
           })
           .pipe(
             map(() => FkOrgActions.deleteConnectionSuccess()),
-            catchError(() => of(FkOrgActions.deleteConnectionError()))
-          )
-      )
+            catchError(() => of(FkOrgActions.deleteConnectionError())),
+          ),
+      ),
     );
   });
 
@@ -139,9 +139,9 @@ export class FkOrgEffects {
           })
           .pipe(
             map((response) => FkOrgActions.getChangelogSuccess(response)),
-            catchError(() => of(FkOrgActions.getChangelogError()))
-          )
-      )
+            catchError(() => of(FkOrgActions.getChangelogError())),
+          ),
+      ),
     );
   });
 }

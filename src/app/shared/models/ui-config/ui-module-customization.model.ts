@@ -7,7 +7,7 @@ export interface UIModuleCustomization {
 }
 
 export function adaptUIModuleCustomization(
-  source: APIUIModuleCustomizationResponseDTO
+  source: APIUIModuleCustomizationResponseDTO,
 ): UIModuleCustomization | undefined {
   if (!source.module) return;
 

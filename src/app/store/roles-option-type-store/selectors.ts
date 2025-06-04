@@ -16,6 +16,10 @@ export const selectRoleOptionTypes = memoize((optionType: RoleOptionTypes) =>
   )
 );
 
+export const selectRoleOptionTypesLoading = memoize((optionType: RoleOptionTypes) =>
+  createSelector(selectStateByOptionType(optionType), (optionState) => optionState?.isLoading)
+);
+
 export const selectRoleOptionTypesDictionary = memoize((optionType: RoleOptionTypes) =>
   createSelector(selectStateByOptionType(optionType), (optionState) =>
     optionState ? roleOptionTypeAdapter.getSelectors().selectEntities(optionState) : null

@@ -1,11 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { combineLatest, distinctUntilChanged, filter, first, map } from 'rxjs';
+import { combineLatest, distinctUntilChanged, filter, map } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { NavigationDrawerItem } from 'src/app/shared/components/navigation-drawer/navigation-drawer.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { combineAND } from 'src/app/shared/helpers/observable-helpers';
@@ -31,11 +30,26 @@ import {
   selectItContractEnableItSystems,
   selectItContractEnableReferences,
 } from 'src/app/store/organization/ui-module-customization/selectors';
+import { DeleteContractDialogComponent } from './delete-contract-dialog/delete-contract-dialog.component';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { BreadcrumbsComponent } from '../../../shared/components/breadcrumbs/breadcrumbs.component';
+import { ButtonComponent } from '../../../shared/components/buttons/button/button.component';
+import { NavigationDrawerComponent } from '../../../shared/components/navigation-drawer/navigation-drawer.component';
+import { LoadingComponent } from '../../../shared/components/loading/loading.component';
 
 @Component({
   selector: 'app-it-contract-details',
   templateUrl: './it-contract-details.component.html',
   styleUrl: './it-contract-details.component.scss',
+  imports: [
+    NgIf,
+    BreadcrumbsComponent,
+    ButtonComponent,
+    NavigationDrawerComponent,
+    RouterOutlet,
+    LoadingComponent,
+    AsyncPipe,
+  ],
 })
 export class ItContractDetailsComponent extends BaseComponent implements OnInit, OnDestroy {
   public readonly AppPath = AppPath;
@@ -57,7 +71,7 @@ export class ItContractDetailsComponent extends BaseComponent implements OnInit,
         routerLink: `${contractUuid}`,
       },
     ]),
-    filterNullish()
+    filterNullish(),
   );
   public readonly itSystemsTabEnabled$ = this.store.select(selectItContractEnableItSystems);
   public readonly dataProcessingTabEnabled$ = this.store.select(selectItContractEnableDataProcessing);
@@ -133,7 +147,7 @@ export class ItContractDetailsComponent extends BaseComponent implements OnInit,
     private router: Router,
     private notificationService: NotificationService,
     private actions$: Actions,
-    private dialog: MatDialog
+    private dialog: MatDialog,
   ) {
     super();
   }
@@ -145,27 +159,14 @@ export class ItContractDetailsComponent extends BaseComponent implements OnInit,
 
     this.subscriptions.add(
       this.actions$.pipe(ofType(ITContractActions.deleteITContractSuccess)).subscribe(() => {
+        this.dialog.closeAll();
         this.router.navigate([`${AppPath.itContracts}`]);
-      })
+      }),
     );
   }
 
   public showDeleteDialog(): void {
-    const confirmationDialogRef = this.dialog.open(ConfirmationDialogComponent);
-    const confirmationDialogInstance = confirmationDialogRef.componentInstance as ConfirmationDialogComponent;
-    confirmationDialogInstance.bodyText = $localize`Er du sikker på, at du vil slette kontrakten?`;
-    confirmationDialogInstance.confirmColor = 'warn';
-
-    this.subscriptions.add(
-      confirmationDialogRef
-        .afterClosed()
-        .pipe(first())
-        .subscribe((result) => {
-          if (result === true) {
-            this.store.dispatch(ITContractActions.deleteITContract());
-          }
-        })
-    );
+    this.dialog.open(DeleteContractDialogComponent);
   }
 
   private subscribeToUuidNavigation(): void {
@@ -173,12 +174,12 @@ export class ItContractDetailsComponent extends BaseComponent implements OnInit,
       this.route.params
         .pipe(
           map((params) => params['uuid']),
-          distinctUntilChanged()
+          distinctUntilChanged(),
         )
         .subscribe((itContractUuid) => {
           this.store.dispatch(ITContractActions.getITContractPermissions(itContractUuid));
           this.store.dispatch(ITContractActions.getITContract(itContractUuid));
-        })
+        }),
     );
   }
 
@@ -191,7 +192,7 @@ export class ItContractDetailsComponent extends BaseComponent implements OnInit,
         .subscribe(() => {
           this.notificationService.showError($localize`Du har ikke læseadgang til denne IT Kontrakt`);
           this.router.navigate([`${AppPath.itContracts}`]);
-        })
+        }),
     );
   }
 
@@ -200,7 +201,7 @@ export class ItContractDetailsComponent extends BaseComponent implements OnInit,
       this.actions$.pipe(ofType(ITContractActions.getITContractError)).subscribe(() => {
         this.notificationService.showError($localize`IT Kontrakt findes ikke`);
         this.router.navigate([`${AppPath.itContracts}`]);
-      })
+      }),
     );
   }
 }

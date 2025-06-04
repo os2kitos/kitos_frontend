@@ -35,7 +35,7 @@ export const gdprReportFeature = createFeature({
           ...state,
           cacheTime: undefined,
         };
-      }
-    )
+      },
+    ),
   ),
 });

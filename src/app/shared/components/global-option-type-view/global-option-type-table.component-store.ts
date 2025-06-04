@@ -41,11 +41,11 @@ export class GlobalOptionTypeTableComponentStore extends ComponentStore<State> {
             (error) => {
               console.error(error);
               this.updateIsLoading(false);
-            }
-          )
-        )
-      )
-    )
+            },
+          ),
+        ),
+      ),
+    ),
   );
 
   private sortByPriority(items: GlobalAdminOptionTypeItem[]) {
@@ -60,13 +60,13 @@ export class GlobalOptionTypeTableComponentStore extends ComponentStore<State> {
     (state: State, optionTypeItems: GlobalAdminOptionTypeItem[]): State => ({
       ...state,
       optionTypeItems: optionTypeItems,
-    })
+    }),
   );
 
   private updateIsLoading = this.updater(
     (state: State, loading: boolean): State => ({
       ...state,
       isLoading: loading,
-    })
+    }),
   );
 }

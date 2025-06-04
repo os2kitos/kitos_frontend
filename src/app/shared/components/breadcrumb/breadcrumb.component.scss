@@ -1,8 +1,8 @@
-@import "theme";
+@use "theme";
 
 :host {
   background-color: transparent;
-  color: $color-primary-base;
+  color: theme.$color-primary-base;
   font-weight: bold;
   font-size: 14px;
 }
@@ -26,8 +26,8 @@
 
 .app-breadcrumb-item-seperator {
   cursor: default;
-  padding-left: $padding-small;
-  padding-right: $padding-small;
+  padding-left: theme.$padding-small;
+  padding-right: theme.$padding-small;
 }
 
 .app-breadcrumb-item-last {

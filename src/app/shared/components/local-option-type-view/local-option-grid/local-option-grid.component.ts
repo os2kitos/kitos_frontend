@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { GridActionColumn } from 'src/app/shared/models/grid-action-column.model';
+import { createGridActionColumn } from 'src/app/shared/models/grid-action-column.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { BooleanChange } from 'src/app/shared/models/grid/grid-events.model';
 import {
@@ -11,11 +11,13 @@ import {
 import { LocalOptionTypeActions } from 'src/app/store/local-admin/local-option-types/actions';
 import { EditLocalOptionTypeDialogComponent } from '../edit-local-option-type-dialog/edit-local-option-type-dialog.component';
 import { OBLIGATORY_LOCAL_OPTION_HELP_TEXT } from 'src/app/shared/constants/constants';
+import { LocalGridComponent } from '../../local-grid/local-grid.component';
 
 @Component({
   selector: 'app-local-option-grid',
   templateUrl: './local-option-grid.component.html',
   styleUrl: './local-option-grid.component.scss',
+  imports: [LocalGridComponent],
 })
 export class LocalOptionGridComponent implements OnInit {
   @Input() public loading: boolean = false;
@@ -56,21 +58,15 @@ export class LocalOptionGridComponent implements OnInit {
       title: $localize`Beskrivelse`,
       hidden: false,
     },
-    {
-      field: 'Actions',
-      title: ' ',
-      hidden: false,
-      style: 'action-buttons',
-      isSticky: true,
-      noFilter: true,
-      extraData: [{ type: 'edit' }] as GridActionColumn[],
-      width: 50,
-    },
+    createGridActionColumn(['edit']),
   ];
 
   public filteredGridColumns!: GridColumn[];
 
-  constructor(private dialog: MatDialog, private store: Store) {}
+  constructor(
+    private dialog: MatDialog,
+    private store: Store,
+  ) {}
 
   public ngOnInit(): void {
     this.filteredGridColumns = this.gridColumns.map((column) => {
@@ -97,7 +93,7 @@ export class LocalOptionGridComponent implements OnInit {
     const activeStatus = event.value;
     const option = event.item;
     this.store.dispatch(
-      LocalOptionTypeActions.updateOptionTypeActiveStatus(this.optionType, option.uuid, activeStatus)
+      LocalOptionTypeActions.updateOptionTypeActiveStatus(this.optionType, option.uuid, activeStatus),
     );
   }
 }

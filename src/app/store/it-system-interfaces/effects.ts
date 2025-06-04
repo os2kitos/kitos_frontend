@@ -28,7 +28,7 @@ export class ITInterfaceEffects {
     private httpClient: HttpClient,
     private apiService: APIV2ItInterfaceService,
     private gridColumnStorageService: GridColumnStorageService,
-    private gridDataCacheService: GridDataCacheService
+    private gridDataCacheService: GridDataCacheService,
   ) {}
 
   getItInterfaces$ = createEffect(() => {
@@ -48,11 +48,11 @@ export class ITInterfaceEffects {
 
         return this.httpClient
           .get<OData>(
-            `/odata/ItInterfaces?$expand=Interface($select=Name),
-            ObjectOwner($select=Name,LastName),
-            Organization($select=Name),
-            ExhibitedBy($expand=ItSystem($select=Id,Name,Uuid,Disabled;$expand=BelongsTo($select=Name))),
-            LastChangedByUser($select=Name,LastName),DataRows($expand=DataType($select=Name))&${fixedOdataString}&$count=true`
+            `/odata/ItInterfaces?$expand=Interface($select=Name),` +
+              `ObjectOwner($select=Name,LastName),` +
+              `Organization($select=Name),` +
+              `ExhibitedBy($expand=ItSystem($select=Id,Name,Uuid,Disabled;$expand=BelongsTo($select=Name))),` +
+              `LastChangedByUser($select=Name,LastName),DataRows($expand=DataType($select=Name))&${fixedOdataString}&$count=true`,
           )
           .pipe(
             map((data) => {
@@ -63,16 +63,16 @@ export class ITInterfaceEffects {
               const returnData = this.gridDataCacheService.gridStateSliceFromArray(dataItems, gridState);
               return ITInterfaceActions.getITInterfacesSuccess(returnData, total);
             }),
-            catchError(() => of(ITInterfaceActions.getITInterfacesError()))
+            catchError(() => of(ITInterfaceActions.getITInterfacesError())),
           );
-      })
+      }),
     );
   });
 
   updateGridState$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITInterfaceActions.updateGridState),
-      map(({ gridState }) => ITInterfaceActions.getITInterfaces(gridState))
+      map(({ gridState }) => ITInterfaceActions.getITInterfaces(gridState)),
     );
   });
 
@@ -82,7 +82,7 @@ export class ITInterfaceEffects {
       map(({ gridColumns }) => {
         this.gridColumnStorageService.setColumns(INTERFACE_COLUMNS_ID, gridColumns);
         return ITInterfaceActions.updateGridColumnsSuccess(gridColumns);
-      })
+      }),
     );
   });
 
@@ -92,9 +92,9 @@ export class ITInterfaceEffects {
       switchMap(({ uuid }) =>
         this.apiService.getSingleItInterfaceV2GetItInterface({ uuid }).pipe(
           map((itInterface) => ITInterfaceActions.getITInterfaceSuccess(itInterface)),
-          catchError(() => of(ITInterfaceActions.getITInterfaceError()))
-        )
-      )
+          catchError(() => of(ITInterfaceActions.getITInterfaceError())),
+        ),
+      ),
     );
   });
 
@@ -104,9 +104,9 @@ export class ITInterfaceEffects {
       switchMap(({ uuid }) =>
         this.apiService.getSingleItInterfaceV2GetItInterfacePermissions({ interfaceUuid: uuid }).pipe(
           map((permissions) => ITInterfaceActions.getITInterfacePermissionsSuccess(permissions)),
-          catchError(() => of(ITInterfaceActions.getITInterfacePermissionsError()))
-        )
-      )
+          catchError(() => of(ITInterfaceActions.getITInterfacePermissionsError())),
+        ),
+      ),
     );
   });
 
@@ -117,11 +117,11 @@ export class ITInterfaceEffects {
       switchMap(([_, organizationUuid]) =>
         this.apiService.getSingleItInterfaceV2GetItInterfaceCollectionPermissions({ organizationUuid }).pipe(
           map((collectionPermissions) =>
-            ITInterfaceActions.getITInterfaceCollectionPermissionsSuccess(collectionPermissions)
+            ITInterfaceActions.getITInterfaceCollectionPermissionsSuccess(collectionPermissions),
           ),
-          catchError(() => of(ITInterfaceActions.getITInterfaceCollectionPermissionsError()))
-        )
-      )
+          catchError(() => of(ITInterfaceActions.getITInterfaceCollectionPermissionsError())),
+        ),
+      ),
     );
   });
 
@@ -135,9 +135,9 @@ export class ITInterfaceEffects {
         }
         return this.apiService.deleteSingleItInterfaceV2Delete({ uuid: interfaceUuid }).pipe(
           map(() => ITInterfaceActions.deleteITInterfaceSuccess()),
-          catchError(() => of(ITInterfaceActions.deleteITInterfaceError()))
+          catchError(() => of(ITInterfaceActions.deleteITInterfaceError())),
         );
-      })
+      }),
     );
   });
 
@@ -154,15 +154,15 @@ export class ITInterfaceEffects {
               //Name conflict
               return of(
                 ITInterfaceActions.updateITInterfaceError(
-                  $localize`Fejl! Feltet kunne ikke ændres da værdien allerede findes i KITOS!`
-                )
+                  $localize`Fejl! Feltet kunne ikke ændres da værdien allerede findes i KITOS!`,
+                ),
               );
             } else {
               return of(ITInterfaceActions.updateITInterfaceError()); //Uses default error message
             }
-          })
+          }),
         );
-      })
+      }),
     );
   });
 
@@ -178,9 +178,9 @@ export class ITInterfaceEffects {
           })
           .pipe(
             map(() => ITInterfaceActions.removeITInterfaceDataSuccess(uuid)),
-            catchError(() => of(ITInterfaceActions.removeITInterfaceDataError()))
-          )
-      )
+            catchError(() => of(ITInterfaceActions.removeITInterfaceDataError())),
+          ),
+      ),
     );
   });
 
@@ -191,9 +191,9 @@ export class ITInterfaceEffects {
       switchMap(([{ data }, interfaceUuid]) =>
         this.apiService.postSingleItInterfaceV2PostDataDescription({ request: data, uuid: interfaceUuid }).pipe(
           map((response) => ITInterfaceActions.addITInterfaceDataSuccess(response)),
-          catchError(() => of(ITInterfaceActions.addITInterfaceDataError()))
-        )
-      )
+          catchError(() => of(ITInterfaceActions.addITInterfaceDataError())),
+        ),
+      ),
     );
   });
 
@@ -210,9 +210,9 @@ export class ITInterfaceEffects {
           })
           .pipe(
             map((response) => ITInterfaceActions.updateITInterfaceDataSuccess(response)),
-            catchError(() => of(ITInterfaceActions.updateITInterfaceDataError()))
-          )
-      )
+            catchError(() => of(ITInterfaceActions.updateITInterfaceDataError())),
+          ),
+      ),
     );
   });
 
@@ -227,9 +227,9 @@ export class ITInterfaceEffects {
           })
           .pipe(
             map(({ uuid }) => ITInterfaceActions.createITInterfaceSuccess(uuid, openAfterCreate)),
-            catchError(() => of(ITInterfaceActions.createITInterfaceError()))
-          )
-      )
+            catchError(() => of(ITInterfaceActions.createITInterfaceError())),
+          ),
+      ),
     );
   });
 }
@@ -240,7 +240,7 @@ function applyQueryFixes(odataString: string): string {
     odataString,
     'LastChangedByUser.Name',
     'LastChangedByUser',
-    lastChangedByUserSearchedProperties
+    lastChangedByUserSearchedProperties,
   );
 
   fixedOdataString = castContainsFieldToString(fixedOdataString, 'Uuid');
@@ -249,6 +249,6 @@ function applyQueryFixes(odataString: string): string {
     fixedOdataString,
     'ObjectOwner.Name',
     'ObjectOwner',
-    lastChangedByUserSearchedProperties
+    lastChangedByUserSearchedProperties,
   );
 }

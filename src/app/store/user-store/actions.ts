@@ -1,10 +1,12 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
 import {
+  APIIdentityNamePairResponseDTO,
   APIOrganizationGridPermissionsResponseDTO,
   APIOrganizationResponseDTO,
   APIOrganizationUpdateRequestDTO,
   APIPasswordResetResponseDTO,
 } from 'src/app/api/v2';
+import { SsoErrorCode } from 'src/app/shared/enums/sso-error-code';
 import { Login } from 'src/app/shared/models/login.model';
 import { User } from 'src/app/shared/models/user.model';
 
@@ -37,8 +39,6 @@ export const UserActions = createActionGroup({
     'Patch organization success': (organization: APIOrganizationResponseDTO) => organization,
     'Patch organization error': emptyProps(),
 
-    'Update user default unit state': (unitUuid: string | undefined) => ({ unitUuid }),
-
     'Reset Password Request': (email: string) => ({ email }),
     'Reset Password Request Success': (email: string) => ({ email }),
     'Reset Password Request Error': emptyProps(),
@@ -50,5 +50,15 @@ export const UserActions = createActionGroup({
     'Reset Password': (requestId: string, password: string) => ({ requestId, password }),
     'Reset Password Success': emptyProps(),
     'Reset Password Error': emptyProps(),
+
+    'Update SSO Error Code': (ssoErrorCode: SsoErrorCode) => ({ ssoErrorCode }),
+
+    'Get User Default Unit': (organizationUuid: string) => ({ organizationUuid }),
+    'Get User Default Unit Success': (unit: APIIdentityNamePairResponseDTO) => ({ unit }),
+    'Get User Default Unit Error': emptyProps(),
+
+    'Set User Default Unit': (organizationUnitUuid: string) => ({ organizationUnitUuid }),
+    'Set User Default Unit Success': (organizationUnit: APIIdentityNamePairResponseDTO) => ({ organizationUnit }),
+    'Set User Default Unit Error': emptyProps(),
   },
 });

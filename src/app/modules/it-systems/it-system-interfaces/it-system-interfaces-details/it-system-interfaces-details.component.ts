@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { combineLatest, distinctUntilChanged, filter, first, map } from 'rxjs';
@@ -24,11 +24,27 @@ import {
   selectInterfaceUuid,
   selectIsInterfaceLoading,
 } from 'src/app/store/it-system-interfaces/selectors';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { BreadcrumbsComponent } from '../../../../shared/components/breadcrumbs/breadcrumbs.component';
+import { DetailsHeaderComponent } from '../../../../shared/components/details-header/details-header.component';
+import { ButtonComponent } from '../../../../shared/components/buttons/button/button.component';
+import { NavigationDrawerComponent } from '../../../../shared/components/navigation-drawer/navigation-drawer.component';
+import { LoadingComponent } from '../../../../shared/components/loading/loading.component';
 
 @Component({
   selector: 'app-it-system-interfaces-details',
   templateUrl: './it-system-interfaces-details.component.html',
   styleUrl: './it-system-interfaces-details.component.scss',
+  imports: [
+    NgIf,
+    BreadcrumbsComponent,
+    DetailsHeaderComponent,
+    ButtonComponent,
+    NavigationDrawerComponent,
+    RouterOutlet,
+    LoadingComponent,
+    AsyncPipe,
+  ],
 })
 export class ItSystemInterfacesDetailsComponent extends BaseComponent implements OnInit {
   private readonly interfacesRootPath = `${AppPath.itSystems}/${AppPath.itInterfaces}`;
@@ -48,7 +64,7 @@ export class ItSystemInterfacesDetailsComponent extends BaseComponent implements
     {
       label: $localize`Snitflade detaljer`,
       iconType: 'document',
-      route: AppPath.frontpage
+      route: AppPath.frontpage,
     },
   ];
 
@@ -58,7 +74,7 @@ export class ItSystemInterfacesDetailsComponent extends BaseComponent implements
     private readonly notificationService: NotificationService,
     private readonly router: Router,
     private readonly actions$: Actions,
-    private readonly dialog: MatDialog
+    private readonly dialog: MatDialog,
   ) {
     super();
   }
@@ -74,7 +90,7 @@ export class ItSystemInterfacesDetailsComponent extends BaseComponent implements
         routerLink: `${interfaceUuid}`,
       },
     ]),
-    filterNullish()
+    filterNullish(),
   );
 
   public readonly conflictsText$ = this.deletionConflicts$.pipe(
@@ -87,7 +103,7 @@ export class ItSystemInterfacesDetailsComponent extends BaseComponent implements
       }
 
       return text;
-    })
+    }),
   );
 
   ngOnInit(): void {
@@ -98,14 +114,14 @@ export class ItSystemInterfacesDetailsComponent extends BaseComponent implements
         .subscribe(() => {
           this.notificationService.showError($localize`Du har ikke læseadgang til denne snitflade`);
           this.router.navigate([this.interfacesRootPath]);
-        })
+        }),
     );
 
     this.subscriptions.add(
       this.actions$.pipe(ofType(ITInterfaceActions.getITInterfaceError)).subscribe(() => {
         this.notificationService.showError($localize`Snitflade findes ikke`);
         this.navigateToRoot();
-      })
+      }),
     );
 
     this.subscriptions.add(
@@ -114,19 +130,19 @@ export class ItSystemInterfacesDetailsComponent extends BaseComponent implements
         this.navigateToRoot().then(() => {
           window.location.reload();
         });
-      })
+      }),
     );
 
     this.subscriptions.add(
       this.route.params
         .pipe(
           map((params) => params['uuid']),
-          distinctUntilChanged() //Ensures we get changes if navigation occurs between interfaces
+          distinctUntilChanged(), //Ensures we get changes if navigation occurs between interfaces
         )
         .subscribe((itInterfaceUuid) => {
           this.store.dispatch(ITInterfaceActions.getITInterfacePermissions(itInterfaceUuid));
           this.store.dispatch(ITInterfaceActions.getITInterface(itInterfaceUuid));
-        })
+        }),
     );
   }
 
@@ -141,18 +157,23 @@ export class ItSystemInterfacesDetailsComponent extends BaseComponent implements
   }
 
   public showActivateDeactivateDialog(shouldBeDeactivated: boolean): void {
-    const bodyText = $localize`Er du sikker på, at du vil ${shouldBeDeactivated ? 'deaktivere' : 'aktivere'
-      } snitfladen?`;
+    const bodyText = $localize`Er du sikker på, at du vil ${
+      shouldBeDeactivated ? 'deaktivere' : 'aktivere'
+    } snitfladen?`;
     const confirmColor = shouldBeDeactivated ? 'warn' : 'primary';
     this.showConfirmationDialog(bodyText, confirmColor, (result: boolean) => {
       if (result === true) {
-          this.ensureSubscribedToInterfaceUpdateResults();
-          this.store.dispatch(ITInterfaceActions.updateITInterface({ deactivated: shouldBeDeactivated }));
-        }
+        this.ensureSubscribedToInterfaceUpdateResults();
+        this.store.dispatch(ITInterfaceActions.updateITInterface({ deactivated: shouldBeDeactivated }));
+      }
     });
   }
 
-  private showConfirmationDialog(bodyText: string, confirmColor: ThemePalette, subscriptionCallback: (result: boolean) => void){
+  private showConfirmationDialog(
+    bodyText: string,
+    confirmColor: ThemePalette,
+    subscriptionCallback: (result: boolean) => void,
+  ) {
     const confirmationDialogRef = this.dialog.open(ConfirmationDialogComponent);
     const confirmationDialogInstance = confirmationDialogRef.componentInstance as ConfirmationDialogComponent;
     confirmationDialogInstance.bodyText = bodyText;
@@ -164,7 +185,7 @@ export class ItSystemInterfacesDetailsComponent extends BaseComponent implements
         .pipe(first())
         .subscribe((result) => {
           subscriptionCallback(result);
-        })
+        }),
     );
   }
 
@@ -175,12 +196,14 @@ export class ItSystemInterfacesDetailsComponent extends BaseComponent implements
   private ensureSubscribedToInterfaceUpdateResults() {
     if (!this.subscribedToInterfaceUpdateResults) {
       this.subscriptions.add(
-      this.actions$.pipe(ofType(ITInterfaceActions.updateITInterfaceSuccess)).subscribe(() =>
-        this.notificationService.showDefault($localize`Feltet er opdateret`))
+        this.actions$
+          .pipe(ofType(ITInterfaceActions.updateITInterfaceSuccess))
+          .subscribe(() => this.notificationService.showDefault($localize`Feltet er opdateret`)),
       );
       this.subscriptions.add(
-        this.actions$.pipe(ofType(ITInterfaceActions.updateITInterfaceError)).subscribe(() =>
-          this.notificationService.showError($localize`Feltet kunne ikke opdateres`))
+        this.actions$
+          .pipe(ofType(ITInterfaceActions.updateITInterfaceError))
+          .subscribe(() => this.notificationService.showError($localize`Feltet kunne ikke opdateres`)),
       );
       this.subscribedToInterfaceUpdateResults = true;
     }

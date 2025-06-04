@@ -1,17 +1,33 @@
+import { AsyncPipe } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable, combineLatest, filter } from 'rxjs';
 import { APIGDPRWriteRequestDTO, APISimpleLinkDTO } from 'src/app/api/v2';
 import { BaseAccordionComponent } from 'src/app/shared/base/base-accordion.component';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
-import { YesNoDontKnowOptions, yesNoDontKnowOptions } from 'src/app/shared/models/yes-no-dont-know.model';
+import { YesNoDontKnowOption, yesNoDontKnowOptions } from 'src/app/shared/models/yes-no-dont-know.model';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
+import { AccordionComponent } from '../../../../../../shared/components/accordion/accordion.component';
+import { DatePickerComponent } from '../../../../../../shared/components/datepicker/datepicker.component';
+import { DropdownComponent } from '../../../../../../shared/components/dropdowns/dropdown/dropdown.component';
+import { FormGridComponent } from '../../../../../../shared/components/form-grid/form-grid.component';
+import { EditUrlSectionComponent } from '../edit-url-section/edit-url-section.component';
 
 @Component({
   selector: 'app-gdpr-base-date-url-section',
   templateUrl: './gdpr-base-date-url-section.component.html',
   styleUrls: ['./gdpr-base-date-url-section.component.scss'],
+  imports: [
+    AccordionComponent,
+    FormGridComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    DropdownComponent,
+    DatePickerComponent,
+    EditUrlSectionComponent,
+    AsyncPipe,
+  ],
 })
 export class GdprBaseDateUrlSectionComponent extends BaseAccordionComponent implements OnInit {
   @Input() public title!: string;
@@ -30,7 +46,7 @@ export class GdprBaseDateUrlSectionComponent extends BaseAccordionComponent impl
   @Input() documentation$!: Observable<APISimpleLinkDTO | undefined>;
 
   @Input() formGroup!: FormGroup<{
-    yesNoDontKnowControl: FormControl<YesNoDontKnowOptions | null | undefined>;
+    yesNoDontKnowControl: FormControl<YesNoDontKnowOption | null | undefined>;
     dateControl: FormControl<Date | null | undefined>;
   }>;
 
@@ -77,7 +93,10 @@ export class GdprBaseDateUrlSectionComponent extends BaseAccordionComponent impl
     this.store.dispatch(ITSystemUsageActions.patchITSystemUsage({ gdpr }));
   }
 
-  public patchSimpleLink(simpleLink: { url: string; name: string }, valueChange?: ValidatedValueChange<unknown>) {
+  public patchSimpleLink(
+    simpleLink: { url: string; name: string } | null,
+    valueChange?: ValidatedValueChange<unknown>
+  ) {
     this.patchGdpr({ [this.linkPropertyName]: simpleLink }, valueChange);
   }
 }

@@ -13,7 +13,7 @@ export interface ITInterfaceState extends EntityState<ITInterface> {
   isLoadingInterfacesQuery: boolean;
   gridState: GridState;
   previousGridState: GridState;
-  
+
   gridColumns: GridColumn[];
 
   loading: boolean | undefined;

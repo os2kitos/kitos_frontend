@@ -24,22 +24,19 @@ export class CreateHelpTextDialogComponent extends BaseComponent implements OnIn
   public readonly keyExists$ = this.componentStore.keyExists$;
   public readonly isLoading$ = this.componentStore.isLoading$;
 
-
   constructor(
     private dialogRef: MatDialogRef<CreateHelpTextDialogComponent>,
     private store: Store,
-    private componentStore: CreateHelpTextDialogComponentStore
+    private componentStore: CreateHelpTextDialogComponentStore,
   ) {
     super();
   }
   ngOnInit(): void {
     this.subscriptions.add(
-      this.formGroup.controls.key.valueChanges
-      .pipe(debounceTime(300))
-        .subscribe((key) => {
-          if (!key) return;
-          this.componentStore.checkIfKeyExists(key);
-      })
+      this.formGroup.controls.key.valueChanges.pipe(debounceTime(300)).subscribe((key) => {
+        if (!key) return;
+        this.componentStore.checkIfKeyExists(key);
+      }),
     );
   }
 

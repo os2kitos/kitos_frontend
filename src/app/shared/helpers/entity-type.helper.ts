@@ -3,7 +3,7 @@ import { RegistrationEntityTypes } from '../models/registrations/registration-en
 import { RelatedEntityType } from 'src/app/store/alerts/state';
 
 export function mapEntityTypeToOwnerResourceType(
-  entityType: RegistrationEntityTypes
+  entityType: RegistrationEntityTypes,
 ): APINotificationResponseDTO.OwnerResourceTypeEnum {
   switch (entityType) {
     case 'it-system-usage':
@@ -31,7 +31,7 @@ export function mapEntityTypeToRelatedEntityType(entityType: RegistrationEntityT
 }
 
 export function mapRelatedEntityTypeToDTO(
-  entityType: RelatedEntityType
+  entityType: RelatedEntityType,
 ): 'itContract' | 'itSystemUsage' | 'dataProcessingRegistration' {
   switch (entityType) {
     case RelatedEntityType.ItSystemUsage:

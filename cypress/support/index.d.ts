@@ -10,13 +10,13 @@ declare namespace Cypress {
       authenticate?: boolean,
       urlPath?: string,
       uiCustomizationFixturePath?: string,
-      interceptAlerts?: boolean
+      interceptAlerts?: boolean,
     ): void;
 
     /**
      * Login using form.
      */
-    login(authorizeFixturePath: string): void;
+    login(authorizeFixturePath?: string): void;
 
     /**
      * Require all api request to be intercepted.
@@ -114,7 +114,7 @@ declare namespace Cypress {
       requestAlias: string,
       propertyPath: string,
       verifyMethod: (actual: any, expectedObject: any) => boolean,
-      expectedObject: any
+      expectedObject: any,
     ): Chainable<Subject>;
 
     /**
@@ -145,7 +145,7 @@ declare namespace Cypress {
       url: string,
       fixture?: object,
       message?: string,
-      title?: string
+      title?: string,
     ): Chainable<Subject>;
 
     /**
@@ -174,7 +174,7 @@ declare namespace Cypress {
       isEdit: boolean,
       requestUrl: string,
       responseBodyPath: string,
-      rowTitle?: string
+      rowTitle?: string,
     ): Chainable<Subject>;
 
     /**
@@ -207,6 +207,14 @@ declare namespace Cypress {
      * @param dataCySelector: selector for target element
      */
     hoverByDataCy(dataCySelector: string): Chainable<Subject>;
+
+    /**
+     * Verify that a confirm button in a dialog is disabled by Angular reactive forms (and not by html attribute, so 'should.be.disabled' does not work)
+     * @param dataCySelector: selector for target element
+     */
+    verifyDialogConfirmButtonDisabledByReactiveForm(dataCySelector: string): Chainable<Subject>;
+
+    isLinkTo(expectedHref: string, expectedTarget?: string): Chainable<Subject>;
   }
 
   // Intercept commands

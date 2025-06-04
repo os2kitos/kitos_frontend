@@ -70,11 +70,12 @@ export namespace APIGdprReportResponseDTO {
         DontKnow: 'DontKnow' as DpiaEnum,
         Undecided: 'Undecided' as DpiaEnum
     };
-    export type HostedAtEnum = 'Undecided' | 'OnPremise' | 'External';
+    export type HostedAtEnum = 'Undecided' | 'OnPremise' | 'External' | 'Hybrid';
     export const HostedAtEnum = {
         Undecided: 'Undecided' as HostedAtEnum,
         OnPremise: 'OnPremise' as HostedAtEnum,
-        External: 'External' as HostedAtEnum
+        External: 'External' as HostedAtEnum,
+        Hybrid: 'Hybrid' as HostedAtEnum
     };
     export type UserSupervisionEnum = 'No' | 'Yes' | 'DontKnow' | 'Undecided';
     export const UserSupervisionEnum = {

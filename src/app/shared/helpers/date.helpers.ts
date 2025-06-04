@@ -1,4 +1,4 @@
-import * as moment from 'moment';
+import moment from 'moment';
 
 const oneHourInMs = 60 * 60 * 1000;
 

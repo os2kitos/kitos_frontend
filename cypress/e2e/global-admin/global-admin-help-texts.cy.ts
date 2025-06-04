@@ -25,9 +25,9 @@ describe('global-admin-help-texts', () => {
       cy.getByDataCy('save-button').click();
 
       cy.wait('@post').then((interception) => {
-      expect(interception.request.body.key).to.equal(key);
-      expect(interception.request.body.title).to.equal(title);
-    });
+        expect(interception.request.body.key).to.equal(key);
+        expect(interception.request.body.title).to.equal(title);
+      });
     });
   });
 
@@ -43,7 +43,7 @@ describe('global-admin-help-texts', () => {
 
     cy.wait('@delete').then((interception) => {
       expect(interception.request.url).to.contain(key);
-  });
+    });
   });
 
   it('Can patch help text', () => {
@@ -60,8 +60,8 @@ describe('global-admin-help-texts', () => {
       cy.getByDataCy('save-button').click();
 
       cy.wait('@patch').then((interception) => {
-      expect(interception.request.body.title).to.equal(title);
-    });
+        expect(interception.request.body.title).to.equal(title);
+      });
     });
   });
 });

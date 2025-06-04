@@ -19,7 +19,7 @@ export class ProfileComponentStore extends ComponentStore<State> {
 
   constructor(
     @Inject(APIV2UsersInternalINTERNALService) private userService: APIV2UsersInternalINTERNALService,
-    private store: Store
+    private store: Store,
   ) {
     super({ isLoading: false });
   }
@@ -37,10 +37,10 @@ export class ProfileComponentStore extends ComponentStore<State> {
           tapResponse(
             (user) => this.setUser(user as APIUserResponseDTO),
             (e) => console.error(e),
-            () => this.setLoading(false)
-          )
+            () => this.setLoading(false),
+          ),
         );
-      })
-    )
+      }),
+    ),
   );
 }

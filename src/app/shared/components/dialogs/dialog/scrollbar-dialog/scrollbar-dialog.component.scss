@@ -1,13 +1,13 @@
-@import "theme";
+@use "theme";
 
 .mat-dialog-content-padding {
   padding: 0 !important;
 }
 
 .dialog-actions-wrapper {
-  padding-left: $padding-large;
-  padding-right: $padding-large;
-  padding-bottom: $padding-large;
+  padding-left: theme.$padding-large;
+  padding-right: theme.$padding-large;
+  padding-bottom: theme.$padding-large;
   width: 100%;
   box-sizing: border-box;
 }

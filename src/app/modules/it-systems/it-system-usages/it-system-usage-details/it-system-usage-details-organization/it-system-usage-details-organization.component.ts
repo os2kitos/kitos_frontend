@@ -1,9 +1,11 @@
+import { AsyncPipe, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, combineLatestWith, filter, first, map } from 'rxjs';
-import { APIIdentityNamePairResponseDTO, APIOrganizationUnitResponseDTO } from 'src/app/api/v2';
+import { APIIdentityNamePairResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { LoadingComponent } from 'src/app/shared/components/loading/loading.component';
 import { MAX_INTEGER } from 'src/app/shared/constants/constants';
 import { mapUnitsWithSelectedUnitsToTree } from 'src/app/shared/helpers/hierarchy.helpers';
 import { EntityTreeNode } from 'src/app/shared/models/structure/entity-tree-node.model';
@@ -20,15 +22,38 @@ import {
 } from 'src/app/store/it-system-usage/selectors';
 import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
 import { selectOrganizationUnits } from 'src/app/store/organization/organization-unit/selectors';
-import {
-  selectITSystemUsageEnableRelevantUnits,
-  selectITSystemUsageEnableResponsibleUnit,
-} from 'src/app/store/organization/ui-module-customization/selectors';
+import { CheckboxButtonComponent } from '../../../../../shared/components/buttons/checkbox-button/checkbox-button.component';
+import { CardHeaderComponent } from '../../../../../shared/components/card-header/card-header.component';
+import { CardComponent } from '../../../../../shared/components/card/card.component';
+import { DragAndDropTreeComponent } from '../../../../../shared/components/drag-and-drop-tree/drag-and-drop-tree.component';
+import { DropdownComponent } from '../../../../../shared/components/dropdowns/dropdown/dropdown.component';
+import { NumericInputComponent } from '../../../../../shared/components/numeric-input/numeric-input.component';
+import { OrgUnitSelectComponent } from '../../../../../shared/components/org-unit-select/org-unit-select.component';
+import { ParagraphComponent } from '../../../../../shared/components/paragraph/paragraph.component';
+import { SectionComponent } from '../../../../../shared/components/section/section.component';
+import { StandardVerticalContentGridComponent } from '../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
 
 @Component({
   selector: 'app-it-system-usage-details-organization',
   templateUrl: './it-system-usage-details-organization.component.html',
   styleUrls: ['./it-system-usage-details-organization.component.scss'],
+  imports: [
+    CardComponent,
+    CardHeaderComponent,
+    NgIf,
+    ParagraphComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    DropdownComponent,
+    StandardVerticalContentGridComponent,
+    SectionComponent,
+    OrgUnitSelectComponent,
+    LoadingComponent,
+    NumericInputComponent,
+    CheckboxButtonComponent,
+    DragAndDropTreeComponent,
+    AsyncPipe,
+  ],
 })
 export class ItSystemUsageDetailsOrganizationComponent extends BaseComponent implements OnInit {
   public readonly responsibleUnit$ = this.store.select(selectItSystemUsageResponsibleUnit);
@@ -41,6 +66,7 @@ export class ItSystemUsageDetailsOrganizationComponent extends BaseComponent imp
       return units.map((x) => x.uuid);
     })
   );
+  private expandedUnitUuids: string[] | undefined = undefined;
 
   public readonly hasModifyPermission$ = this.store.select(selectITSystemUsageHasModifyPermission);
   public readonly isPatching$ = this.store.select(selectItSystemUsageIsPatching);
@@ -48,7 +74,7 @@ export class ItSystemUsageDetailsOrganizationComponent extends BaseComponent imp
   public readonly organizationUnits$ = this.store.select(selectOrganizationUnits);
   public readonly unitTree$ = this.organizationUnits$.pipe(
     combineLatestWith(this.usedUnitUuids$),
-    map(([units, selectedUuids]) => mapUnitsWithSelectedUnitsToTree(units, selectedUuids))
+    map(([units, selectedUuids]) => mapUnitsWithSelectedUnitsToTree(units, selectedUuids, this.expandedUnitUuids))
   );
 
   public readonly rootUnitUuid$ = this.unitTree$.pipe(
@@ -67,9 +93,6 @@ export class ItSystemUsageDetailsOrganizationComponent extends BaseComponent imp
     relevantUnit: new FormControl<TreeNodeModel | undefined>(undefined),
   });
   public includeParents = false;
-
-  public readonly responsibleUnitEnabled$ = this.store.select(selectITSystemUsageEnableResponsibleUnit);
-  public readonly relevantUnitsEnabled$ = this.store.select(selectITSystemUsageEnableRelevantUnits);
 
   constructor(private readonly store: Store) {
     super();
@@ -93,6 +116,32 @@ export class ItSystemUsageDetailsOrganizationComponent extends BaseComponent imp
         this.relevantUnitsForm.disable();
       })
     );
+
+    this.subscriptions.add(
+      this.unitTree$
+        .pipe(
+          filter((unitTree) => unitTree.length > 0),
+          first()
+        )
+        .subscribe((unitTree) => {
+          this.expandedUnitUuids = this.searchUnitTreeForExpandedUnits(unitTree);
+        })
+    );
+  }
+
+  public nodeExpandClick(node: EntityTreeNode<APIIdentityNamePairResponseDTO>): void {
+    node.isExpanded = !node.isExpanded;
+
+    const nodeUuid = node.uuid;
+    if (node.isExpanded) {
+      // Add the unitUuid if it's not already in the array
+      if (!this.expandedUnitUuids?.includes(nodeUuid)) {
+        this.expandedUnitUuids?.push(nodeUuid);
+      }
+    } else {
+      // Remove the unitUuid if it exists in the array
+      this.expandedUnitUuids = this.expandedUnitUuids?.filter((uuid) => uuid !== nodeUuid);
+    }
   }
 
   public patchResponsibleUnit(uuid?: string) {
@@ -139,43 +188,25 @@ export class ItSystemUsageDetailsOrganizationComponent extends BaseComponent imp
   }
 
   private onSave(selectedUnitUuid: string) {
-    this.usedUnitUuids$.pipe(first()).subscribe((unitUuids) => {
-      unitUuids.push(selectedUnitUuid);
-
-      if (this.includeParents) {
-        this.organizationUnits$.pipe(first()).subscribe((unitTree) => {
-          const parentUuids = this.findParentUuids(unitTree, selectedUnitUuid);
-          const nonExistingParentUuids = parentUuids.filter((uuid) => !unitUuids.includes(uuid));
-          unitUuids.push(...nonExistingParentUuids);
-
-          this.dispatchUpdateHierarchy(unitUuids);
-        });
-        return;
-      }
-
-      this.dispatchUpdateHierarchy(unitUuids);
-    });
-  }
-
-  private dispatchUpdateHierarchy(unitUuids: string[]) {
-    this.store.dispatch(
-      ITSystemUsageActions.patchITSystemUsage(
-        { organizationUsage: { usingOrganizationUnitUuids: unitUuids } },
-        $localize`Relevant organisationsenhed tilføjet`
-      )
-    );
+    this.store.dispatch(ITSystemUsageActions.addITSystemUsageUsingUnit(selectedUnitUuid, this.includeParents));
   }
 
   private deleteUsedByUnit(unit: APIIdentityNamePairResponseDTO) {
-    this.store.dispatch(ITSystemUsageActions.removeITSystemUsageUsingUnit(unit.uuid));
+    this.store.dispatch(ITSystemUsageActions.removeITSystemUsageUsingUnit(unit.uuid, this.includeParents));
   }
 
-  private findParentUuids(units: APIOrganizationUnitResponseDTO[], uuid: string): string[] {
-    const unit = units.find((u) => u.uuid === uuid);
-    const parent = unit?.parentOrganizationUnit;
-    if (!unit || !parent?.uuid) {
-      return [];
-    }
-    return [parent.uuid, ...this.findParentUuids(units, parent.uuid)];
+  private searchUnitTreeForExpandedUnits(unitTree: EntityTreeNode<never>[]): string[] {
+    let expandedUuids: string[] = [];
+    unitTree.forEach((unit) => {
+      if (unit.isExpanded) {
+        expandedUuids.push(unit.uuid);
+      }
+
+      if (unit.children.length > 0) {
+        expandedUuids = expandedUuids.concat(this.searchUnitTreeForExpandedUnits(unit.children));
+      }
+    });
+
+    return expandedUuids;
   }
 }

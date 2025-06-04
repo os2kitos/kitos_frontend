@@ -1,3 +1,4 @@
+import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
@@ -26,10 +27,13 @@ import { GridState } from 'src/app/shared/models/grid-state.model';
 import { archiveDutyChoiceOptions } from 'src/app/shared/models/it-system-usage/archive-duty-choice.model';
 import { dataSensitivityLevelOptions } from 'src/app/shared/models/it-system-usage/gdpr/data-sensitivity-level.model';
 import { hostedAtOptionsGrid } from 'src/app/shared/models/it-system-usage/gdpr/hosted-at.model';
+import { archiveDutyRecommendationChoiceOptions } from 'src/app/shared/models/it-system/archive-duty-recommendation-choice.model';
 import { lifeCycleStatusOptions } from 'src/app/shared/models/life-cycle-status.model';
 import { numberOfExpectedUsersOptionsGrid } from 'src/app/shared/models/number-of-expected-users.model';
 import { yesNoDontKnowOptions } from 'src/app/shared/models/yes-no-dont-know.model';
 import { yesNoIrrelevantOptionsGrid } from 'src/app/shared/models/yes-no-irrelevant.model';
+import { yesNoPartiallyOptions } from 'src/app/shared/models/yes-no-partially.model';
+import { yesNoOptions } from 'src/app/shared/models/yes-no.model';
 import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 import { GridUIConfigService } from 'src/app/shared/services/ui-config-services/grid-ui-config.service';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
@@ -47,10 +51,23 @@ import {
   selectITSystemUsageEnableLifeCycleStatus,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { selectOrganizationName } from 'src/app/store/user-store/selectors';
+import { ExportMenuButtonComponent } from '../../../shared/components/buttons/export-menu-button/export-menu-button.component';
+import { GridOptionsButtonComponent } from '../../../shared/components/grid-options-button/grid-options-button.component';
+import { GridComponent } from '../../../shared/components/grid/grid.component';
+import { HideShowButtonComponent } from '../../../shared/components/grid/hide-show-button/hide-show-button.component';
+import { OverviewHeaderComponent } from '../../../shared/components/overview-header/overview-header.component';
 
 @Component({
   templateUrl: 'it-system-usages.component.html',
   styleUrls: ['it-system-usages.component.scss'],
+  imports: [
+    OverviewHeaderComponent,
+    GridOptionsButtonComponent,
+    ExportMenuButtonComponent,
+    HideShowButtonComponent,
+    GridComponent,
+    AsyncPipe,
+  ],
 })
 export class ITSystemUsagesComponent extends BaseOverviewComponent implements OnInit {
   public readonly isLoading$ = this.store.select(selectIsLoading);
@@ -85,6 +102,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       style: 'chip',
       hidden: false,
       persistId: 'systemIsActive',
+      helpText: $localize`Filtrerer systemerne efter om de er aktive/ikke aktive, uanset årsag.`,
     },
     {
       field: GridFields.ActiveAccordingToValidityPeriod,
@@ -96,6 +114,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       style: 'chip',
       hidden: false,
       persistId: 'isActive',
+      helpText: $localize`Filtrerer på visning af aktive/ikke aktive systemer, efter om datoen på den tilknyttede kontrakt fra kontrakt modulet er udløbet.`,
     },
     {
       field: GridFields.ActiveAccordingToLifeCycle,
@@ -107,6 +126,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       style: 'chip',
       hidden: false,
       persistId: 'isActiveAccordingToLifeCycle',
+      helpText: $localize`Filtrerer på visning efter systemets livscyklus markeret på system forsiden.`,
     },
     {
       field: GridFields.MainContractIsActive,
@@ -119,6 +139,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       width: 340,
       hidden: false,
       persistId: 'contract',
+      helpText: $localize`Filtrerer på visning af systemer med en aktiv/ikke aktiv kontrakt tilknyttet fra kontrakt modulet.`,
     },
     {
       field: GridFields.LocalSystemId,
@@ -424,6 +445,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       extraData: yesNoIrrelevantOptionsGrid,
       hidden: true,
       persistId: 'dataProcessingAgreementConcluded',
+      itemTooltipField: 'name',
     },
     {
       field: GridFields.DataProcessingRegistrationNamesAsCsv,
@@ -543,6 +565,61 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       hidden: true,
       persistId: 'isBusinessCritical',
     },
+    {
+      field: GridFields.ContainsAITechnology,
+      title: $localize`Indeholder AI-teknologi`,
+      style: 'enum',
+      section: this.systemSectionName,
+      hidden: true,
+      persistId: 'containsAITechnology',
+      extraFilter: 'enum',
+      extraData: yesNoOptions,
+    },
+    {
+      field: GridFields.CatalogArchiveDuty,
+      title: $localize`Rigsarkivets vejledning til arkivering`,
+      style: 'enum',
+      section: ARCHIVE_SECTION_NAME,
+      hidden: true,
+      persistId: 'catalogArchiveDuty',
+      extraFilter: 'enum',
+      extraData: archiveDutyRecommendationChoiceOptions,
+    },
+    {
+      field: GridFields.CatalogArchiveDutyComment,
+      title: $localize`Bemærkning fra Rigsarkivet`,
+      style: 'default',
+      section: ARCHIVE_SECTION_NAME,
+      hidden: true,
+      persistId: 'catalogArchiveDutyComment',
+    },
+    {
+      field: GridFields.WebAccessibilityCompliance,
+      title: $localize`Webtilgængelighed`,
+      style: 'enum',
+      section: this.systemSectionName,
+      hidden: true,
+      persistId: 'webAccessibilityCompliance',
+      extraFilter: 'enum',
+      extraData: yesNoPartiallyOptions,
+    },
+    {
+      field: GridFields.LastWebAccessibilityCheck,
+      title: $localize`Seneste webtilgængelighedskontrol`,
+      section: this.systemSectionName,
+      style: 'date',
+      filter: 'date',
+      width: 350,
+      hidden: true,
+      persistId: 'lastWebAccessibilityCheck',
+    },
+    {
+      field: GridFields.WebAccessibilityNotes,
+      title: $localize`Noter om webtilgængelighed`,
+      section: this.systemSectionName,
+      hidden: true,
+      persistId: 'webAccessibilityNotes',
+    },
   ];
 
   public readonly enableLifeCycleStatus$ = this.store.select(selectITSystemUsageEnableLifeCycleStatus);
@@ -571,11 +648,19 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
         )
         .subscribe(([_, roleColumns]) => {
           const defaultColumnsAndRoles = this.defaultGridColumns.concat(roleColumns);
-          const existingColumns = this.gridColumnStorageService.getColumns(USAGE_COLUMNS_ID, defaultColumnsAndRoles);
-          const columns = existingColumns ?? defaultColumnsAndRoles;
-          this.store.dispatch(ITSystemUsageActions.updateGridColumns(columns));
+          const orderedGridColumns = this.mapColumnOrder(defaultColumnsAndRoles);
+
+          const localStorageColumns = this.gridColumnStorageService.getColumns(USAGE_COLUMNS_ID, orderedGridColumns);
+
+          this.updateLocalOrDefaultGridColumns(
+            orderedGridColumns,
+            localStorageColumns,
+            ITSystemUsageActions.updateGridColumns,
+            ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfiguration
+          );
         })
     );
+
     this.subscriptions.add(this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState)));
 
     this.subscriptions.add(
@@ -584,9 +669,15 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
           ofType(ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationError),
           concatLatestFrom(() => this.gridColumns$)
         )
-        .subscribe(([_, gridColumns]) => {
-          const columnsToShow = getColumnsToShow(gridColumns, this.defaultGridColumns);
-          this.store.dispatch(ITSystemUsageActions.updateGridColumns(columnsToShow));
+        .subscribe(([_, gridColumnsFromState]) => {
+          const columnsToShow = getColumnsToShow(gridColumnsFromState, this.defaultGridColumns);
+          const gridColumnStateIsCorrect = this.gridColumnStorageService.columnsAreEqual(
+            gridColumnsFromState,
+            columnsToShow
+          );
+          if (!gridColumnStateIsCorrect) {
+            this.store.dispatch(ITSystemUsageActions.updateGridColumns(columnsToShow));
+          }
         })
     );
 

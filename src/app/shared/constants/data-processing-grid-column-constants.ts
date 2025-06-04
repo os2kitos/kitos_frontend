@@ -22,3 +22,5 @@ export const OversightScheduledInspectionDate = 'OversightScheduledInspectionDat
 export const LatestOversightDate = 'LatestOversightDate';
 export const LatestOversightRemark = 'LatestOversightRemark';
 export const LastChangedByName = 'LastChangedByName';
+export const ResponsibleOrgUnitUuid = 'ResponsibleOrgUnitUuid';
+export const ResponsibleOrgUnitName = 'ResponsibleOrgUnitName';

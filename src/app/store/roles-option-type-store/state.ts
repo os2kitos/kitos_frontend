@@ -4,6 +4,7 @@ import { RoleOptionTypes } from 'src/app/shared/models/options/role-option-types
 
 export interface RoleOptionTypeStateItem extends EntityState<APIRoleOptionResponseDTO> {
   cacheTime: number | undefined;
+  isLoading?: boolean;
 }
 
 export type RoleOptionTypeState = Record<RoleOptionTypes, RoleOptionTypeStateItem | null>;

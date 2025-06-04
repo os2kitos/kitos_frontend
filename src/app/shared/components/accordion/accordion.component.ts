@@ -1,9 +1,31 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  MatAccordion,
+  MatExpansionPanel,
+  MatExpansionPanelHeader,
+  MatExpansionPanelTitle,
+} from '@angular/material/expansion';
+import { NgIf } from '@angular/common';
+import { CheckboxComponent } from '../checkbox/checkbox.component';
+import { ParagraphComponent } from '../paragraph/paragraph.component';
+import { TooltipComponent } from '../tooltip/tooltip.component';
+import { InfoIconComponent } from '../icons/info-icon.component';
 
 @Component({
   selector: 'app-accordion',
   templateUrl: './accordion.component.html',
   styleUrls: ['./accordion.component.scss'],
+  imports: [
+    MatAccordion,
+    MatExpansionPanel,
+    MatExpansionPanelHeader,
+    MatExpansionPanelTitle,
+    NgIf,
+    CheckboxComponent,
+    ParagraphComponent,
+    TooltipComponent,
+    InfoIconComponent,
+  ],
 })
 export class AccordionComponent {
   @Input() title: string | undefined;

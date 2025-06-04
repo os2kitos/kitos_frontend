@@ -10,7 +10,7 @@ export const UserNotificationActions = createActionGroup({
     }),
     'Get notifications success': (
       ownerResourceType: APINotificationResponseDTO.OwnerResourceTypeEnum,
-      notifications: UserNotification[]
+      notifications: UserNotification[],
     ) => ({ ownerResourceType, notifications }),
     'Get notifications error': emptyProps(),
 

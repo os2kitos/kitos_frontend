@@ -1,19 +1,15 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
-import { concatLatestFrom } from '@ngrx/operators';
 
+import { AsyncPipe } from '@angular/common';
 import { Store } from '@ngrx/store';
-import { Subject, map } from 'rxjs';
-import { APIOrganizationUserResponseDTO, APIRoleOptionResponseDTO } from 'src/app/api/v2';
+import { BehaviorSubject, Subject, combineLatest, map } from 'rxjs';
+import { APIRoleOptionResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import {
-  RoleDropdownOption,
-  mapRoleToDropdownOptions,
-  mapUserToOption,
-} from 'src/app/shared/models/dropdown-option.model';
-import { IRoleAssignment } from 'src/app/shared/models/helpers/read-model-role-assignments';
+import { mapUserToOption } from 'src/app/shared/models/dropdown-option.model';
+import { RoleAssignment } from 'src/app/shared/models/helpers/read-model-role-assignments';
 import { RoleOptionTypes } from 'src/app/shared/models/options/role-option-types.model';
 import { Dictionary } from 'src/app/shared/models/primitives/dictionary.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
@@ -23,6 +19,12 @@ import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
 import { selectRoleOptionTypes } from 'src/app/store/roles-option-type-store/selectors';
+import { ButtonComponent } from '../../buttons/button/button.component';
+import { DialogActionsComponent } from '../../dialogs/dialog-actions/dialog-actions.component';
+import { DialogComponent } from '../../dialogs/dialog/dialog.component';
+import { DropdownComponent } from '../../dropdowns/dropdown/dropdown.component';
+import { MultiSelectDropdownComponent } from '../../dropdowns/multi-select-dropdown/multi-select-dropdown.component';
+import { StandardVerticalContentGridComponent } from '../../standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { RoleTableComponentStore } from '../role-table.component-store';
 
 @Component({
@@ -30,141 +32,174 @@ import { RoleTableComponentStore } from '../role-table.component-store';
   templateUrl: './role-table.create-dialog.component.html',
   styleUrls: ['./role-table.create-dialog.component.scss'],
   providers: [RoleTableComponentStore],
+  imports: [
+    DialogComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    StandardVerticalContentGridComponent,
+    DropdownComponent,
+    MultiSelectDropdownComponent,
+    DialogActionsComponent,
+    ButtonComponent,
+    AsyncPipe,
+  ],
 })
 export class RoleTableCreateDialogComponent extends BaseComponent implements OnInit {
   public readonly roleForm = new FormGroup({
-    user: new FormControl<APIOrganizationUserResponseDTO | undefined>(
-      { value: undefined, disabled: false },
-      Validators.required
-    ),
     role: new FormControl<APIRoleOptionResponseDTO | undefined>(
-      { value: undefined, disabled: true },
-      Validators.required
+      { value: undefined, disabled: false },
+      Validators.required,
     ),
   });
 
-  @Input() public userRoles: Array<IRoleAssignment> = [];
+  @Input() public userRoles: Array<RoleAssignment> = [];
   @Input() public entityType!: RoleOptionTypes;
   @Input() public entityUuid!: string;
   @Input() public title!: string;
 
-  public readonly users$ = this.componentStore.users$.pipe(
+  public readonly availableRoles$ = new BehaviorSubject<APIRoleOptionResponseDTO[]>([]);
+
+  private readonly existingUserUuids$ = new BehaviorSubject<string[]>([]);
+  private readonly mappedUsers$ = this.componentStore.users$.pipe(
     filterNullish(),
-    map((users) => users?.map((user) => mapUserToOption(user)))
+    map((users) => users?.map((user) => mapUserToOption(user))),
   );
+  public readonly filteredUsers$ = combineLatest([this.mappedUsers$, this.existingUserUuids$]).pipe(
+    map(([users, existingUserUuids]) => users.filter((user) => !existingUserUuids.includes(user.value))),
+  );
+
   public readonly isLoading$ = this.componentStore.usersIsLoading$;
-
-  public roles$ = new Subject<Array<RoleDropdownOption>>();
-  public selectedUserUuid$ = new Subject<string>();
-
-  public readonly selectUserResultIsLimited$ = this.componentStore.selectUserResultIsLimited$;
+  public resetSubject$ = new Subject<void>();
 
   public isBusy = false;
+  public isRoleSelected = false;
 
-  private userRoleUuidsDictionary: Dictionary<string[]> = {};
+  private readonly selectedRoleUuid$ = new Subject<string>();
+  private selectedUserUuids: string[] = [];
+  private roleUserUuidsDictionary: Dictionary<string[]> = {};
 
   constructor(
     private readonly store: Store,
     private readonly componentStore: RoleTableComponentStore,
     private readonly dialog: MatDialogRef<RoleTableCreateDialogComponent>,
     private readonly roleOptionTypeService: RoleOptionTypeService,
-    private readonly actions$: Actions
+    private readonly actions$: Actions,
   ) {
     super();
   }
 
   ngOnInit() {
-    //map assigned roles for each user to enable quick lookup
-    this.userRoles.forEach((role) => {
-      const userUuid = role.assignment.user.uuid;
-      let rolesUuids = this.userRoleUuidsDictionary[userUuid];
-      if (!rolesUuids) {
-        rolesUuids = [];
-        this.userRoleUuidsDictionary[userUuid] = rolesUuids;
-      }
-      rolesUuids.push(role.assignment.role.uuid);
-    });
+    this.userFilterChange(undefined);
+    this.setupExistingUsersPerRoleDictionary();
 
-    //assign roles onInit, because optionType is not available before
-    this.subscriptions.add(
-      this.selectedUserUuid$
-        .pipe(
-          concatLatestFrom(() =>
-            this.store.select(selectRoleOptionTypes(this.entityType)).pipe(
-              filterNullish(),
-              map((roles) => roles.map((role) => mapRoleToDropdownOptions(role)))
-            )
-          )
-        )
-        .subscribe(([userUuid, roles]) => {
-          const rolesAssignedToUserUuids = this.userRoleUuidsDictionary[userUuid];
-          const availableRoles = roles.filter((x) => !rolesAssignedToUserUuids?.includes(x.uuid));
-          this.roles$.next(availableRoles);
-        })
-    );
+    this.selectRoleOptions();
 
-    this.subscriptions.add(
-      this.actions$
-        .pipe(
-          ofType(
-            ITSystemUsageActions.addItSystemUsageRoleSuccess,
-            ITContractActions.addItContractRoleSuccess,
-            DataProcessingActions.addDataProcessingRoleSuccess,
-            OrganizationUnitActions.addOrganizationUnitRoleSuccess
-          )
-        )
-        .subscribe(() => {
-          this.dialog.close();
-        })
-    );
-
-    this.subscriptions.add(
-      this.actions$
-        .pipe(
-          ofType(
-            ITSystemUsageActions.addItSystemUsageRoleError,
-            ITContractActions.addItContractRoleError,
-            DataProcessingActions.addDataProcessingRoleError,
-            OrganizationUnitActions.addOrganizationUnitRoleError
-          )
-        )
-        .subscribe(() => {
-          this.isBusy = false;
-        })
-    );
+    this.subscribeToRoleSelectionChanges();
+    this.subscribeToRoleOptionTypeActions();
   }
 
   public userFilterChange(filter?: string) {
     this.componentStore.getUsers(filter);
   }
 
-  public userChange(userUuid?: string | null) {
-    const roleControl = this.roleForm.controls['role'];
-    roleControl.reset();
+  public userChange(userUuids?: string[]) {
+    this.selectedUserUuids = userUuids ?? [];
+  }
 
-    //if user is null disable the role dropdown
-    if (!userUuid) {
-      roleControl.disable();
+  public roleChange(roleUuid?: string | null) {
+    if (!roleUuid) {
+      this.isRoleSelected = false;
       return;
     }
 
-    //enable role dropdown
-    roleControl.enable();
-    this.selectedUserUuid$.next(userUuid);
+    this.isRoleSelected = true;
+    this.selectedUserUuids = [];
+    this.resetSubject$.next();
+    this.selectedRoleUuid$.next(roleUuid);
   }
 
   public onSave() {
     if (!this.roleForm.valid) return;
 
-    const userUuid = this.roleForm.value.user?.uuid;
     const roleUuid = this.roleForm.value.role?.uuid;
-    if (!userUuid || !roleUuid) return;
+    if (this.selectedUserUuids.length === 0 || !roleUuid) return;
 
     this.isBusy = true;
-    this.roleOptionTypeService.dispatchAddEntityRoleAction(userUuid, roleUuid, this.entityType);
+    this.roleOptionTypeService.dispatchAddEntityRoleAction(this.selectedUserUuids, roleUuid, this.entityType);
   }
 
   public onCancel() {
     this.dialog.close();
+  }
+
+  public isValid() {
+    return this.roleForm.valid && this.selectedUserUuids.length > 0;
+  }
+
+  private setupExistingUsersPerRoleDictionary() {
+    this.userRoles.forEach((role) => {
+      const roleUuid = role.assignment.role.uuid;
+      let existingUserUuids = this.roleUserUuidsDictionary[roleUuid];
+      if (!existingUserUuids) {
+        existingUserUuids = [];
+        this.roleUserUuidsDictionary[roleUuid] = existingUserUuids;
+      }
+      if (role.unitUuid && role.unitUuid != this.entityUuid) {
+        return;
+      }
+      existingUserUuids.push(role.assignment.user.uuid);
+    });
+  }
+
+  private selectRoleOptions() {
+    this.subscriptions.add(
+      this.store
+        .select(selectRoleOptionTypes(this.entityType))
+        .pipe(filterNullish())
+        .subscribe((roles) => {
+          this.availableRoles$.next(roles);
+        }),
+    );
+  }
+
+  private subscribeToRoleSelectionChanges() {
+    this.subscriptions.add(
+      this.selectedRoleUuid$.subscribe((roleUuid) => {
+        const userUuids = this.roleUserUuidsDictionary[roleUuid];
+        this.existingUserUuids$.next(userUuids ?? []);
+      }),
+    );
+  }
+
+  private subscribeToRoleOptionTypeActions() {
+    this.subscriptions.add(
+      this.actions$
+        .pipe(
+          ofType(
+            ITSystemUsageActions.bulkAddItSystemUsageRoleSuccess,
+            ITContractActions.bulkAddItContractRoleSuccess,
+            DataProcessingActions.bulkAddDataProcessingRoleSuccess,
+            OrganizationUnitActions.bulkAddOrganizationUnitRoleSuccess,
+          ),
+        )
+        .subscribe(() => {
+          this.dialog.close();
+        }),
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(
+          ofType(
+            ITSystemUsageActions.bulkAddItSystemUsageRoleError,
+            ITContractActions.bulkAddItContractRoleError,
+            DataProcessingActions.bulkAddDataProcessingRoleError,
+            OrganizationUnitActions.bulkAddOrganizationUnitRoleError,
+          ),
+        )
+        .subscribe(() => {
+          this.isBusy = false;
+        }),
+    );
   }
 }

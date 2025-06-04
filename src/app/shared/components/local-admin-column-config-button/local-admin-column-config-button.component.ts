@@ -6,11 +6,15 @@ import { GridColumn } from '../../models/grid-column.model';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
 import { ConfirmActionCategory, ConfirmActionService } from '../../services/confirm-action.service';
 import { ColumnConfigService } from '../../services/column-config.service';
+import { MenuButtonComponent } from '../buttons/menu-button/menu-button.component';
+import { MenuButtonItemComponent } from '../buttons/menu-button/menu-button-item/menu-button-item.component';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-local-admin-column-config-button',
   templateUrl: './local-admin-column-config-button.component.html',
   styleUrl: './local-admin-column-config-button.component.scss',
+  imports: [MenuButtonComponent, MenuButtonItemComponent, AsyncPipe],
 })
 export class LocalAdminColumnConfigButtonComponent {
   @Input() columns$!: Observable<GridColumn[]>;
@@ -20,7 +24,7 @@ export class LocalAdminColumnConfigButtonComponent {
   constructor(
     private confirmActionService: ConfirmActionService,
     private actions$: Actions,
-    private columnConfigService: ColumnConfigService
+    private columnConfigService: ColumnConfigService,
   ) {}
 
   public onSave(): void {

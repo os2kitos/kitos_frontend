@@ -15,10 +15,17 @@
   (pageChange)="onPageChange($event)"
   [scrollable]="reorderable ? 'scrollable' : scrollable"
   style="width: 100%"
-  [ngClass]="{ 'grid-outline': withOutline, 'fit-size-to-content': fitSizeToContent, dragging: reorderable, 'expand-height-to-content': !fitSizeToContent }"
+  [ngClass]="{
+    'grid-outline': withOutline,
+    'fit-size-to-content': fitSizeToContent,
+    'expand-height-to-content': !fitSizeToContent,
+  }"
 >
-  <kendo-grid-rowreorder-column class="drag-handle" *ngIf="reorderable" [width]="40"></kendo-grid-rowreorder-column>
-  <ng-template #dragHintTemplate> THIS IS A HINT </ng-template>
+  <kendo-grid-rowreorder-column *ngIf="reorderable" [width]="40">
+    <ng-template kendoGridRowDragHintTemplate let-dataItem>
+      <span>{{ dataItem.name }}</span>
+    </ng-template>
+  </kendo-grid-rowreorder-column>
   <ng-container *ngFor="let column of columns">
     <kendo-grid-column
       *ngIf="!column.hidden"
@@ -32,10 +39,10 @@
         column.minResizableWidth !== undefined
           ? column.minResizableWidth
           : column.filter === 'date'
-          ? defaultMinimumDateColumnWidth
-          : column.style === 'primary'
-          ? defaultPrimaryColumnMinimumWidth
-          : defaultMinimumColumnWidth
+            ? defaultMinimumDateColumnWidth
+            : column.style === 'primary'
+              ? defaultPrimaryColumnMinimumWidth
+              : defaultMinimumColumnWidth
       "
       headerClass="mygrid-header-cell"
     >
@@ -78,93 +85,18 @@
         </ng-container>
       </ng-template>
 
-      <ng-template *ngIf="column.style === 'default' || column.style === undefined" kendoGridCellTemplate let-dataItem>
-        <app-paragraph [cropOnOverflow]="true">{{ searchProperty(dataItem, column.field) }}</app-paragraph>
-      </ng-template>
-      <ng-template *ngIf="column.style === 'primary'" kendoGridCellTemplate let-dataItem>
-        <div class="paragraph wrap-on-overflow bold-font">{{ searchProperty(dataItem, column.field) }}</div>
-      </ng-template>
-
-      <ng-template *ngIf="column.style === 'enum'" kendoGridCellTemplate let-dataItem>
-        <app-paragraph>{{ searchProperty(dataItem, column.field)?.name }}</app-paragraph>
-      </ng-template>
-
-      <ng-template *ngIf="column.style === 'boolean'" kendoGridCellTemplate let-dataItem>
-        <div class="items-center-container">
-          <app-boolean-circle
-            [value]="searchProperty(dataItem, column.field) === true"
-            [positiveTooltipText]="column.tooltipPositiveText ?? ''"
-            [negativeTooltipText]="column.tooltipNegativeText ?? ''"
-          >
-          </app-boolean-circle>
-        </div>
-      </ng-template>
-
-      <ng-template *ngIf="column.style === 'checkbox'" kendoGridCellTemplate let-dataItem>
-        <div class="column-center-content">
-          <app-tooltip [text]="column?.tooltipFn(dataItem) ?? ''">
-            <app-checkbox
-              [value]="searchProperty(dataItem, column.field)"
-              [disabled]="column.permissionsField ? searchProperty(dataItem, column.permissionsField) !== false : true"
-              (valueChange)="onCheckboxChange($event, dataItem)"
-              data-cy="grid-checkbox"
-            ></app-checkbox>
-          </app-tooltip>
-        </div>
-      </ng-template>
-
-      <ng-template *ngIf="column.style === 'title-link'" kendoGridCellTemplate let-dataItem>
-        <app-paragraph [cropOnOverflow]="true">
-          <app-external-page-link
-            [url]="searchProperty(dataItem, column.idField ?? '')"
-            [title]="dataItem | searchProperty : column.field"
-            linkFontSize="small"
-          ></app-external-page-link>
-        </app-paragraph>
-      </ng-template>
-
-      <ng-template *ngIf="column.style === 'page-link' && column.idField" kendoGridCellTemplate let-dataItem>
-        <app-paragraph [cropOnOverflow]="true">
-          <app-details-page-link
-            *ngIf="searchProperty(dataItem, column.idField) as itemUuid"
-            linkFontSize="small"
-            [itemType]="column.entityType"
-            [itemPath]="itemUuid"
-            [subpagePath]="column.extraData"
-            >{{ searchProperty(dataItem, column.field) }}</app-details-page-link
-          >
-        </app-paragraph>
-      </ng-template>
-
-      <ng-template *ngIf="column.style === 'action-buttons'" kendoGridCellTemplate let-dataItem>
-        <div class="action-buttons-container">
-          <ng-container *ngFor="let button of column.extraData">
-            <app-icon-button
-              *ngIf="button.type === 'edit' && modifyPermission"
-              (click)="onModifyClick(dataItem)"
-              data-cy="grid-edit-button"
-            >
-              <app-pencil-icon></app-pencil-icon>
-            </app-icon-button>
-            <app-icon-button
-              *ngIf="button.type === 'delete' && deletePermission"
-              (click)="onDeleteClick(dataItem)"
-              data-cy="grid-delete-button"
-            >
-              <app-trashcan-icon></app-trashcan-icon>
-            </app-icon-button>
-            <app-toggle-button
-              *ngIf="button.type === 'toggle'"
-              (valueChange)="onToggleChange($event, dataItem)"
-              [value]="searchProperty(dataItem, column.field)"
-            >
-            </app-toggle-button>
-          </ng-container>
-        </div>
-      </ng-template>
-
-      <ng-template *ngIf="column.style === 'date'" kendoGridCellTemplate let-dataItem>
-        <app-paragraph>{{ searchProperty(dataItem, column.field) | appDate }}</app-paragraph>
+      <ng-template kendoGridCellTemplate let-dataItem>
+        <app-grid-cell
+          [column]="column"
+          [dataItem]="dataItem"
+          (modifyEvent)="onModifyClick(dataItem)"
+          (deleteEvent)="onDeleteClick(dataItem)"
+          (toggleEvent)="onToggleChange($event, dataItem)"
+          (checkboxChange)="onCheckboxChange($event, dataItem)"
+          [createPermission]="createPermission ?? false"
+          [modifyPermission]="modifyPermission ?? false"
+          [deletePermission]="deletePermission ?? false"
+        ></app-grid-cell>
       </ng-template>
     </kendo-grid-column>
   </ng-container>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { combineLatestWith, map } from 'rxjs';
 import {
@@ -43,17 +43,53 @@ import {
   selectItContractsEnablePurchaseForm,
   selectItContractsEnableResponsibleUnit,
   selectItContractsEnableTemplate,
+  selectItContractsEnableUseParentValidity,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 import { ItContractFrontpageComponentStore } from './it-contract-frontpage.component-store';
 import { toBulletPoints } from 'src/app/shared/helpers/string.helpers';
+import { CardComponent } from '../../../../shared/components/card/card.component';
+import { CardHeaderComponent } from '../../../../shared/components/card-header/card-header.component';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { StatusChipComponent } from '../../../../shared/components/status-chip/status-chip.component';
+import { FormGridComponent } from '../../../../shared/components/form-grid/form-grid.component';
+import { TextBoxComponent } from '../../../../shared/components/textbox/textbox.component';
+import { OptionTypeDropdownComponent } from '../../../../shared/components/dropdowns/option-type-dropdown/option-type-dropdown.component';
+import { DropdownComponent } from '../../../../shared/components/dropdowns/dropdown/dropdown.component';
+import { StandardVerticalContentGridComponent } from '../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { CheckboxComponent } from '../../../../shared/components/checkbox/checkbox.component';
+import { DatePickerComponent } from '../../../../shared/components/datepicker/datepicker.component';
+import { TextAreaComponent } from '../../../../shared/components/textarea/textarea.component';
+import { ConnectedDropdownComponent } from '../../../../shared/components/dropdowns/connected-dropdown/connected-dropdown.component';
+import { OrgUnitSelectComponent } from '../../../../shared/components/org-unit-select/org-unit-select.component';
+import { RadioButtonsComponent } from '../../../../shared/components/radio-buttons/radio-buttons.component';
 
 @Component({
   selector: 'app-it-contract-frontpage',
   templateUrl: './it-contract-frontpage.component.html',
   styleUrl: './it-contract-frontpage.component.scss',
   providers: [ItContractFrontpageComponentStore],
+  imports: [
+    CardComponent,
+    CardHeaderComponent,
+    NgIf,
+    StatusChipComponent,
+    FormGridComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    TextBoxComponent,
+    OptionTypeDropdownComponent,
+    DropdownComponent,
+    StandardVerticalContentGridComponent,
+    CheckboxComponent,
+    DatePickerComponent,
+    TextAreaComponent,
+    ConnectedDropdownComponent,
+    OrgUnitSelectComponent,
+    RadioButtonsComponent,
+    AsyncPipe,
+  ],
 })
 export class ItContractFrontpageComponent extends BaseComponent implements OnInit {
   public readonly contractTemplates$ = this.store
@@ -72,16 +108,15 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
   public readonly isValid$ = this.store.select(selectItContractIsValid).pipe(filterNullish());
   public readonly statusText$ = this.store.select(selectItContractValidity).pipe(
     map((validity) => {
-      if (
-        (validity?.valid && validity?.enforcedValid === false) ||
-        (validity?.enforcedValid && validity?.validationErrors?.length === 0)
-      ) {
+      if (validity?.validationErrors?.length === 0) {
         return '';
       }
 
       let text = '';
       if (validity?.enforcedValid) {
         text += $localize`Gyldigheden er gennemtvunget og kontrakten er derfor gyldig på trods af at:`;
+      } else if (validity?.requireValidParent && validity.valid) {
+        text += $localize`Kontrakten arver sin overordnede kontrakts gyldighed, og er derfor gyldig trods af at:`;
       } else {
         text += $localize`Følgende gør kontrakten ugyldig:`;
       }
@@ -91,17 +126,19 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
         validationErrors.includes('StartDateNotPassed') ? this.notYetValidText : undefined,
         validationErrors.includes('EndDatePassed') ? this.expiredText : undefined,
         validationErrors.includes('TerminationPeriodExceeded') ? this.terminationPeriodExceededText : undefined,
+        validationErrors.includes('InvalidParentContract') ? this.invalidParentContractText : undefined,
       ];
-      return text + "\n" + toBulletPoints(errorMessages);
-    })
+      return text + '\n' + toBulletPoints(errorMessages);
+    }),
   );
 
   private readonly notYetValidText = $localize`'Gyldig fra' er endnu ikke passeret`;
   private readonly expiredText = $localize`'Gyldig til' er overskredet`;
   private readonly terminationPeriodExceededText = $localize`Kontrakten er opsagt og evt. opsigelsesfrist er overskredet`;
+  private readonly invalidParentContractText = $localize`Den overordnede kontrakt er ikke gyldig`;
 
   public readonly users$ = this.componentStore.users$.pipe(
-    map((users) => users.map((user) => ({ name: user.firstName + ' ' + user.lastName, uuid: user.uuid })))
+    map((users) => users.map((user) => ({ name: user.firstName + ' ' + user.lastName, uuid: user.uuid }))),
   );
   public readonly usersIsLoading$ = this.componentStore.usersIsLoading$;
   public readonly organizations$ = this.componentStore.organizations$;
@@ -126,6 +163,7 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
 
   public readonly parentContractForm = new FormGroup({
     parentContract: new FormControl<APIIdentityNamePairResponseDTO | undefined>({ value: undefined, disabled: true }),
+    requireValidParent: new FormControl<boolean | undefined>({ value: undefined, disabled: true }),
   });
 
   public readonly responsibleFormGroup = new FormGroup({
@@ -184,6 +222,7 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
   public readonly contractAgreementPeriodEnabled$ = this.store.select(selectItContractsEnableAgreementPeriod);
   public readonly contractNotesEnabled$ = this.store.select(selectItContractsEnableNotes);
   public readonly contractParentContractEnabled$ = this.store.select(selectItContractsEnableParentContract);
+  public readonly useParentValidityEnabled$ = this.store.select(selectItContractsEnableUseParentValidity);
 
   public readonly contractResponsibleUnitEnabled$ = this.store.select(selectItContractsEnableResponsibleUnit);
   public readonly contractInternalSignerEnabled$ = this.store.select(selectItContractsEnableInternalSigner);
@@ -217,12 +256,22 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
   constructor(
     private readonly store: Store,
     private readonly notificationService: NotificationService,
-    private readonly componentStore: ItContractFrontpageComponentStore
+    private readonly componentStore: ItContractFrontpageComponentStore,
   ) {
     super();
   }
 
   ngOnInit(): void {
+    const parentContractControl = this.parentContractForm.controls;
+    this.subscriptions.add(
+      parentContractControl.parentContract.valueChanges.subscribe((value) => {
+        if (value) {
+          parentContractControl.requireValidParent.enable();
+        } else {
+          parentContractControl.requireValidParent.disable();
+        }
+      }),
+    );
     this.store.dispatch(RegularOptionTypeActions.getOptions('it-contract_contract-type'));
     this.store.dispatch(RegularOptionTypeActions.getOptions('it-contract_contract-template-type'));
     this.store.dispatch(RegularOptionTypeActions.getOptions('it-contract_criticality-type'));
@@ -287,7 +336,7 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
           const quarter = i + 1;
           if (year === currentYear && quarter < currentQuarter) return;
           return { name: `Q${quarter} | ${year}` };
-        })
+        }),
       )
       .filter(Boolean);
     return quarters;
@@ -300,7 +349,7 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
         .pipe(filterNullish(), combineLatestWith(this.store.select(selectItContractHasModifyPermissions)))
         .subscribe(([contract, hasModifyPermission]) => {
           this.updateFormGroups(contract, hasModifyPermission);
-        })
+        }),
     );
   }
 
@@ -326,8 +375,8 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
       status: enforcedValid
         ? $localize`Gennemtvunget gyldig`
         : contract.general.validity.valid
-        ? $localize`Gyldig`
-        : $localize`Ikke gyldig`,
+          ? $localize`Gyldig`
+          : $localize`Ikke gyldig`,
       isValid: contract.general.validity.valid,
       validFrom: optionalNewDate(contract.general.validity.validFrom),
       validTo: optionalNewDate(contract.general.validity.validTo),
@@ -338,7 +387,10 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
   }
 
   private patchParentContractFormGroup(contract: APIItContractResponseDTO) {
-    this.parentContractForm.patchValue({ parentContract: contract.parentContract });
+    this.parentContractForm.patchValue({
+      parentContract: contract.parentContract,
+      requireValidParent: contract.general.validity.requireValidParent,
+    });
   }
 
   private patchResponsibleFormGroup(contract: APIItContractResponseDTO) {
@@ -382,11 +434,19 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
   private enableFormGroups(hasModifyPermission?: boolean) {
     if (hasModifyPermission) {
       this.frontpageFormGroup.enable();
-      this.parentContractForm.enable();
+      this.enableParentContractForm();
       this.responsibleFormGroup.enable();
       this.supplierFormGroup.enable();
       this.procurementFormGroup.enable();
     }
     this.frontpageFormGroup.controls.status.disable();
+  }
+
+  private enableParentContractForm() {
+    const formgroup = this.parentContractForm;
+    formgroup.controls.parentContract.enable();
+    if (formgroup.value.parentContract) {
+      formgroup.controls.requireValidParent.enable();
+    }
   }
 }

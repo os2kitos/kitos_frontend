@@ -42,6 +42,7 @@ export interface APIItSystemUsageOverviewReadModel {
     parentItSystemDisabled?: boolean;
     parentItSystemUsageUuid?: string;
     version?: string;
+    containsAITechnology?: APIItSystemUsageOverviewReadModel.ContainsAITechnologyEnum;
     localCallName?: string;
     localSystemId?: string;
     roleAssignments?: Array<APIItSystemUsageOverviewRoleAssignmentReadModel>;
@@ -104,8 +105,19 @@ export interface APIItSystemUsageOverviewReadModel {
     associatedContracts?: Array<APIItSystemUsageOverviewItContractReadModel>;
     dpiaConducted?: APIItSystemUsageOverviewReadModel.DpiaConductedEnum;
     isBusinessCritical?: APIItSystemUsageOverviewReadModel.IsBusinessCriticalEnum;
+    catalogArchiveDuty?: APIItSystemUsageOverviewReadModel.CatalogArchiveDutyEnum;
+    catalogArchiveDutyComment?: string;
+    webAccessibilityCompliance?: APIItSystemUsageOverviewReadModel.WebAccessibilityComplianceEnum;
+    lastWebAccessibilityCheck?: string;
+    webAccessibilityNotes?: string;
 }
 export namespace APIItSystemUsageOverviewReadModel {
+    export type ContainsAITechnologyEnum = 'Yes' | 'No' | 'Undecided';
+    export const ContainsAITechnologyEnum = {
+        Yes: 'Yes' as ContainsAITechnologyEnum,
+        No: 'No' as ContainsAITechnologyEnum,
+        Undecided: 'Undecided' as ContainsAITechnologyEnum
+    };
     export type ArchiveDutyEnum = 'Undecided' | 'B' | 'K' | 'Unknown' | 'PreserveDataCanDiscardDocuments';
     export const ArchiveDutyEnum = {
         Undecided: 'Undecided' as ArchiveDutyEnum,
@@ -122,11 +134,12 @@ export namespace APIItSystemUsageOverviewReadModel {
         Operational: 'Operational' as LifeCycleStatusEnum,
         PhasingOut: 'PhasingOut' as LifeCycleStatusEnum
     };
-    export type HostedAtEnum = 'UNDECIDED' | 'ONPREMISE' | 'EXTERNAL';
+    export type HostedAtEnum = 'UNDECIDED' | 'ONPREMISE' | 'EXTERNAL' | 'HYBRID';
     export const HostedAtEnum = {
         Undecided: 'UNDECIDED' as HostedAtEnum,
         Onpremise: 'ONPREMISE' as HostedAtEnum,
-        External: 'EXTERNAL' as HostedAtEnum
+        External: 'EXTERNAL' as HostedAtEnum,
+        Hybrid: 'HYBRID' as HostedAtEnum
     };
     export type UserCountEnum = 'BELOWTEN' | 'TENTOFIFTY' | 'FIFTYTOHUNDRED' | 'HUNDREDPLUS' | 'UNDECIDED';
     export const UserCountEnum = {
@@ -149,6 +162,20 @@ export namespace APIItSystemUsageOverviewReadModel {
         Yes: 'YES' as IsBusinessCriticalEnum,
         Dontknow: 'DONTKNOW' as IsBusinessCriticalEnum,
         Undecided: 'UNDECIDED' as IsBusinessCriticalEnum
+    };
+    export type CatalogArchiveDutyEnum = 'Undecided' | 'B' | 'K' | 'NoRecommendation' | 'PreserveDataCanDiscardDocuments';
+    export const CatalogArchiveDutyEnum = {
+        Undecided: 'Undecided' as CatalogArchiveDutyEnum,
+        B: 'B' as CatalogArchiveDutyEnum,
+        K: 'K' as CatalogArchiveDutyEnum,
+        NoRecommendation: 'NoRecommendation' as CatalogArchiveDutyEnum,
+        PreserveDataCanDiscardDocuments: 'PreserveDataCanDiscardDocuments' as CatalogArchiveDutyEnum
+    };
+    export type WebAccessibilityComplianceEnum = 'No' | 'Yes' | 'Partially';
+    export const WebAccessibilityComplianceEnum = {
+        No: 'No' as WebAccessibilityComplianceEnum,
+        Yes: 'Yes' as WebAccessibilityComplianceEnum,
+        Partially: 'Partially' as WebAccessibilityComplianceEnum
     };
 }
 

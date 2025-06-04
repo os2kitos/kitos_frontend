@@ -11,5 +11,7 @@ export const RoleOptionTypeActions = createActionGroup({
       optionType,
     }),
     'Get options Error': (optionType: RoleOptionTypes) => ({ optionType }),
+
+    'Update loading on valid cache': (optionType: RoleOptionTypes) => ({ optionType }),
   },
 });

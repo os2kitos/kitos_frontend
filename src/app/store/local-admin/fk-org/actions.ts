@@ -12,7 +12,7 @@ export const FkOrgActions = createActionGroup({
   events: {
     'Get Synchronization Status': emptyProps(),
     'Get Synchronization Status Success ': (
-      synchronizationStatus: APIStsOrganizationSynchronizationDetailsResponseDTO
+      synchronizationStatus: APIStsOrganizationSynchronizationDetailsResponseDTO,
     ) => ({ synchronizationStatus }),
     'Get Synchronization Status Error': emptyProps(),
 

@@ -1,5 +1,13 @@
 import { APIPaymentResponseDTO } from 'src/app/api/v2';
 
+export interface OverviewAuditModel {
+  total: number;
+  green: number;
+  red: number;
+  yellow: number;
+  white: number;
+}
+
 export interface AuditModel {
   name: string;
   id: APIPaymentResponseDTO.AuditStatusEnum;

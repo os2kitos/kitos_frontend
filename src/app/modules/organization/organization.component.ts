@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { filter, pairwise } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
@@ -10,9 +10,13 @@ import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
   templateUrl: 'organization.component.html',
   styleUrls: ['organization.component.scss'],
   selector: 'app-organization',
+  imports: [RouterOutlet],
 })
 export class OrganizationComponent extends BaseComponent implements OnInit {
-  constructor(private store: Store, private router: Router) {
+  constructor(
+    private store: Store,
+    private router: Router,
+  ) {
     super();
   }
 
@@ -22,13 +26,13 @@ export class OrganizationComponent extends BaseComponent implements OnInit {
         .select(selectOrganizationUuid)
         .pipe(
           pairwise(),
-          filter(([prevUuid, nextUuid]) => prevUuid !== nextUuid)
+          filter(([prevUuid, nextUuid]) => prevUuid !== nextUuid),
         )
         .subscribe(() =>
           this.router
             .navigateByUrl(AppPath.root, { skipLocationChange: true })
-            .then(() => this.router.navigate([AppPath.organization]))
-        )
+            .then(() => this.router.navigate([AppPath.organization])),
+        ),
     );
   }
 }

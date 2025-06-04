@@ -1,4 +1,4 @@
-import { APIDataProcessingRegistrationDTO } from "src/app/api/v1";
+import { APIDataProcessingRegistrationDTO } from 'src/app/api/v1';
 
 export interface TransferToInsecureThirdCountries {
   name: string;
@@ -8,20 +8,20 @@ export interface TransferToInsecureThirdCountries {
 export const transferToInsecureThirdCountriesOptions: TransferToInsecureThirdCountries[] = [
   {
     name: $localize`Ja`,
-    value: APIDataProcessingRegistrationDTO.TransferToInsecureThirdCountriesEnum.Yes
+    value: APIDataProcessingRegistrationDTO.TransferToInsecureThirdCountriesEnum.Yes,
   },
   {
     name: $localize`Nej`,
-    value: APIDataProcessingRegistrationDTO.TransferToInsecureThirdCountriesEnum.No
+    value: APIDataProcessingRegistrationDTO.TransferToInsecureThirdCountriesEnum.No,
   },
   {
     name: '',
-    value: APIDataProcessingRegistrationDTO.TransferToInsecureThirdCountriesEnum.Undecided
-  }
-]
+    value: APIDataProcessingRegistrationDTO.TransferToInsecureThirdCountriesEnum.Undecided,
+  },
+];
 
 export const mapTransferToInsecureThirdCountries = (
-  source?: APIDataProcessingRegistrationDTO.TransferToInsecureThirdCountriesEnum
+  source?: APIDataProcessingRegistrationDTO.TransferToInsecureThirdCountriesEnum,
 ): TransferToInsecureThirdCountries | undefined => {
-  return transferToInsecureThirdCountriesOptions.find((option) => option.value === source)
-}
+  return transferToInsecureThirdCountriesOptions.find((option) => option.value === source);
+};

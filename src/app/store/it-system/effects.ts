@@ -36,7 +36,7 @@ export class ITSystemEffects {
     private gridColumnStorageService: GridColumnStorageService,
     @Inject(APIV2ItSystemUsageMigrationINTERNALService)
     private readonly itSystemUsageMigrationService: APIV2ItSystemUsageMigrationINTERNALService,
-    private gridDataCacheService: GridDataCacheService
+    private gridDataCacheService: GridDataCacheService,
   ) {}
 
   getItSystem$ = createEffect(() => {
@@ -45,9 +45,9 @@ export class ITSystemEffects {
       switchMap(({ systemUuid }) =>
         this.apiItSystemService.getSingleItSystemV2GetItSystem({ uuid: systemUuid }).pipe(
           map((itSystem) => ITSystemActions.getITSystemSuccess(itSystem)),
-          catchError(() => of(ITSystemActions.getITSystemError()))
-        )
-      )
+          catchError(() => of(ITSystemActions.getITSystemError())),
+        ),
+      ),
     );
   });
 
@@ -71,14 +71,14 @@ export class ITSystemEffects {
 
         return this.httpClient
           .get<OData>(
-            `/odata/ItSystems?$expand=BusinessType($select=Name),
-          BelongsTo($select=Name),
-          TaskRefs($select=Description,TaskKey),
-          Parent($select=Name,Disabled),
-          Organization($select=Id,Name),
-          Usages($select=OrganizationId;$expand=Organization($select=Uuid,Name)),
-          LastChangedByUser($select=Name,LastName),
-          Reference($select=Title,URL,ExternalReferenceId)&${fixedOdataString}&$count=true`
+            `/odata/ItSystems?$expand=BusinessType($select=Name),` +
+              `BelongsTo($select=Name),` +
+              `TaskRefs($select=Description,TaskKey),` +
+              `Parent($select=Name,Disabled),` +
+              `Organization($select=Id,Name),` +
+              `Usages($select=OrganizationId;$expand=Organization($select=Uuid,Name)),` +
+              `LastChangedByUser($select=Name,LastName),` +
+              `Reference($select=Title,URL,ExternalReferenceId)&${fixedOdataString}&$count=true`,
           )
           .pipe(
             map((data) => {
@@ -91,16 +91,16 @@ export class ITSystemEffects {
 
               return ITSystemActions.getITSystemsSuccess(returnData, total);
             }),
-            catchError(() => of(ITSystemActions.getITSystemsError()))
+            catchError(() => of(ITSystemActions.getITSystemsError())),
           );
-      })
+      }),
     );
   });
 
   updateGridState$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITSystemActions.updateGridState),
-      map(({ gridState }) => ITSystemActions.getITSystems(gridState))
+      map(({ gridState }) => ITSystemActions.getITSystems(gridState)),
     );
   });
 
@@ -110,15 +110,15 @@ export class ITSystemEffects {
       map(({ gridColumns }) => {
         this.gridColumnStorageService.setColumns(CATALOG_COLUMNS_ID, gridColumns);
         return ITSystemActions.updateGridColumnsSuccess(gridColumns);
-      })
+      }),
     );
   });
 
   updateGridDataFromGrid$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITSystemActions.updateGridDataFromGrid),
-      map(({ gridState }) => ITSystemActions.getITSystems(gridState, true))
-    )
+      map(({ gridState }) => ITSystemActions.getITSystems(gridState, true)),
+    );
   });
 
   deleteItSystem$ = createEffect(() => {
@@ -130,9 +130,9 @@ export class ITSystemEffects {
 
         return this.apiItSystemService.deleteSingleItSystemV2DeleteItSystem({ uuid: systemUuid }).pipe(
           map(() => ITSystemActions.deleteITSystemSuccess()),
-          catchError(() => of(ITSystemActions.getITSystemsError()))
+          catchError(() => of(ITSystemActions.getITSystemsError())),
         );
-      })
+      }),
     );
   });
 
@@ -148,15 +148,15 @@ export class ITSystemEffects {
             if (err.status === 409) {
               return of(
                 ITSystemActions.patchITSystemError(
-                  $localize`Fejl! Feltet kunne ikke ændres da værdien den allerede findes i KITOS!`
-                )
+                  $localize`Fejl! Feltet kunne ikke ændres da værdien den allerede findes i KITOS!`,
+                ),
               );
             } else {
               return of(ITSystemActions.patchITSystemError(customErrorText));
             }
-          })
+          }),
         );
-      })
+      }),
     );
   });
 
@@ -166,9 +166,9 @@ export class ITSystemEffects {
       switchMap(({ systemUuid }) =>
         this.apiItSystemService.getSingleItSystemV2GetItSystemPermissions({ systemUuid }).pipe(
           map((permissions) => ITSystemActions.getITSystemPermissionsSuccess(permissions)),
-          catchError(() => of(ITSystemActions.getITSystemPermissionsError()))
-        )
-      )
+          catchError(() => of(ITSystemActions.getITSystemPermissionsError())),
+        ),
+      ),
     );
   });
 
@@ -179,9 +179,9 @@ export class ITSystemEffects {
       switchMap(([_, organizationUuid]) =>
         this.apiItSystemService.getSingleItSystemV2GetItSystemCollectionPermissions({ organizationUuid }).pipe(
           map((permissions) => ITSystemActions.getITSystemCollectionPermissionsSuccess(permissions)),
-          catchError(() => of(ITSystemActions.getITSystemCollectionPermissionsError()))
-        )
-      )
+          catchError(() => of(ITSystemActions.getITSystemCollectionPermissionsError())),
+        ),
+      ),
     );
   });
 
@@ -198,13 +198,13 @@ export class ITSystemEffects {
             newExternalReference.externalReference,
             externalReferences,
             systemUuid,
-            'it-system'
+            'it-system',
           )
           .pipe(
             map((response) => ITSystemActions.addExternalReferenceSuccess(response)),
-            catchError(() => of(ITSystemActions.addExternalReferenceError()))
+            catchError(() => of(ITSystemActions.addExternalReferenceError())),
           );
-      })
+      }),
     );
   });
 
@@ -220,9 +220,9 @@ export class ITSystemEffects {
           .editExternalReference<APIItSystemResponseDTO>(editData, externalReferences, systemUuid, 'it-system')
           .pipe(
             map((response) => ITSystemActions.editExternalReferenceSuccess(response)),
-            catchError(() => of(ITSystemActions.editExternalReferenceError()))
+            catchError(() => of(ITSystemActions.editExternalReferenceError())),
           );
-      })
+      }),
     );
   });
 
@@ -239,13 +239,13 @@ export class ITSystemEffects {
             referenceUuid.referenceUuid,
             externalReferences,
             systemUuid,
-            'it-system'
+            'it-system',
           )
           .pipe(
             map((response) => ITSystemActions.removeExternalReferenceSuccess(response)),
-            catchError(() => of(ITSystemActions.removeExternalReferenceError()))
+            catchError(() => of(ITSystemActions.removeExternalReferenceError())),
           );
-      })
+      }),
     );
   });
 
@@ -256,9 +256,9 @@ export class ITSystemEffects {
       switchMap(([{ name, openAfterCreate }, organizationUuid]) => {
         return this.apiItSystemService.postSingleItSystemV2PostItSystem({ request: { name, organizationUuid } }).pipe(
           map(({ uuid }) => ITSystemActions.createItSystemSuccess(uuid, openAfterCreate)),
-          catchError(() => of(ITSystemActions.createItSystemError()))
+          catchError(() => of(ITSystemActions.createItSystemError())),
         );
-      })
+      }),
     );
   });
 
@@ -273,9 +273,9 @@ export class ITSystemEffects {
           })
           .pipe(
             map(() => ITSystemActions.executeUsageMigrationSuccess()),
-            catchError(() => of(ITSystemActions.executeUsageMigrationError()))
-          )
-      )
+            catchError(() => of(ITSystemActions.executeUsageMigrationError())),
+          ),
+      ),
     );
   });
 }
@@ -283,7 +283,10 @@ export class ITSystemEffects {
 function applyQueryFixes(odataString: string): string {
   let fixedOdataString = odataString
     .replace(/(\w+\()KLEIds(.*\))/, 'TaskRefs/any(c: $1c/TaskKey$2)')
-    .replace(/(\w+\()KLENames(.*\))/, 'TaskRefs/any(d: $1d/Description$2)');
+    .replace(/(\w+\()KLENames(.*\))/, 'TaskRefs/any(d: $1d/Description$2)')
+    .replace('ReferenceTitle', 'Reference/Title')
+    .replace('ReferenceURL', 'Reference/URL')
+    .replace('ReferenceExternalReferenceId', 'Reference/ExternalReferenceId');
 
   fixedOdataString = castContainsFieldToString(fixedOdataString, 'Uuid');
   fixedOdataString = castContainsFieldToString(fixedOdataString, 'ExternalUuid');
@@ -293,7 +296,7 @@ function applyQueryFixes(odataString: string): string {
     fixedOdataString,
     'LastChangedByUser.Name',
     'LastChangedByUser',
-    lastChangedByUserSearchedProperties
+    lastChangedByUserSearchedProperties,
   );
   return fixedOdataString;
 }

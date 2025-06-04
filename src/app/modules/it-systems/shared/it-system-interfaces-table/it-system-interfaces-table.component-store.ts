@@ -19,7 +19,10 @@ export class ItSystemInterfacesTableComponentStore extends ComponentStore<State>
 
   public readonly itInterfacesIsLoading$ = this.select((state) => state.loading).pipe(filterNullish());
 
-  constructor(private store: Store, private apiInterfaceService: APIV2ItInterfaceService) {
+  constructor(
+    private store: Store,
+    private apiInterfaceService: APIV2ItInterfaceService,
+  ) {
     super({ loading: false });
   }
 
@@ -27,14 +30,14 @@ export class ItSystemInterfacesTableComponentStore extends ComponentStore<State>
     (state, itInterfaces: Array<APIItInterfaceResponseDTO>): State => ({
       ...state,
       itInterfaces,
-    })
+    }),
   );
 
   private updateItInterfacesIsLoading = this.updater(
     (state, loading: boolean): State => ({
       ...state,
       loading,
-    })
+    }),
   );
 
   public getInterfacesExposedBySystemWithUuid = this.effect((itSystemUuid$: Observable<string>) =>
@@ -54,10 +57,10 @@ export class ItSystemInterfacesTableComponentStore extends ComponentStore<State>
             tapResponse(
               (itInterfaces) => this.updateInterfaces(itInterfaces),
               (e) => console.error(e),
-              () => this.updateItInterfacesIsLoading(false)
-            )
+              () => this.updateItInterfacesIsLoading(false),
+            ),
           );
-      })
-    )
+      }),
+    ),
   );
 }

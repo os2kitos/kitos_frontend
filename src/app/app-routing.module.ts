@@ -23,47 +23,49 @@ const routes: Routes = [
     children: [
       {
         path: AppPath.root,
-        loadChildren: () => import('./modules/frontpage/frontpage.module').then((m) => m.FrontpageModule),
+        loadChildren: () => import('./modules/frontpage/frontpage.routes').then((m) => m.FrontpageRouterModule),
       },
       {
         path: AppPath.organization,
-        loadChildren: () => import('./modules/organization/organization.module').then((m) => m.OrganizationModule),
+        loadChildren: () =>
+          import('./modules/organization/organization.routes').then((m) => m.OrganizationRouterModule),
         canActivate: [AuthGuardService],
       },
       {
         path: AppPath.itSystems,
-        loadChildren: () => import('./modules/it-systems/it-systems.module').then((m) => m.ItSystemsModule),
+        loadChildren: () => import('./modules/it-systems/it-systems.routes').then((m) => m.ITSystemsRouterModule),
         canActivate: [AuthGuardService],
       },
       {
         path: AppPath.itContracts,
-        loadChildren: () => import('./modules/it-contracts/it-contracts.module').then((m) => m.ITContractsModule),
+        loadChildren: () => import('./modules/it-contracts/it-contracts.routes').then((m) => m.ITContractsRouterModule),
         canActivate: [AuthGuardService],
       },
       {
         path: AppPath.dataProcessing,
         loadChildren: () =>
-          import('./modules/data-processing/data-processing.module').then((m) => m.DataProcessingModule),
+          import('./modules/data-processing/data-processing.routes').then((m) => m.DataProcessingRouterModule),
         canActivate: [AuthGuardService],
       },
       {
         path: AppPath.profile,
-        loadChildren: () => import('./modules/profile/profile.module').then((m) => m.ProfileModule),
+        loadChildren: () => import('./modules/profile/profile.routes').then((m) => m.ProfileRouterModule),
         canActivate: [AuthGuardService],
       },
       {
         path: AppPath.notifications,
-        loadChildren: () => import('./modules/notifications/notifications.module').then((m) => m.NotifcationsModule),
+        loadChildren: () =>
+          import('./modules/notifications/notifications.routes').then((m) => m.NotifcationsRouterModule),
         canActivate: [AuthGuardService],
       },
       {
         path: AppPath.localAdmin,
-        loadChildren: () => import('./modules/local-admin/local-admin.module').then((m) => m.LocalAdminModule),
+        loadChildren: () => import('./modules/local-admin/local-admin.routes').then((m) => m.LocalAdminRouterModule),
         canActivate: [LocalAdminGuardService],
       },
       {
         path: AppPath.globalAdmin,
-        loadChildren: () => import('./modules/global-admin/global-admin.module').then((m) => m.GlobalAdminModule),
+        loadChildren: () => import('./modules/global-admin/global-admin.routes').then((m) => m.GlobalAdminRouterModule),
         canActivate: [GlobalAdminGuardService],
       },
     ],

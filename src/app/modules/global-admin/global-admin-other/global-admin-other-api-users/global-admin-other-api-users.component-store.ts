@@ -19,17 +19,17 @@ interface State {
 @Injectable()
 export class GlobalAdminOtherApiUsersComponentStore extends ComponentStore<State> {
   public readonly isLoadingUsersWithRightsholderAccess$ = this.select(
-    (state) => state.isLoadingUsersWithRightsholderAccess
+    (state) => state.isLoadingUsersWithRightsholderAccess,
   );
   public readonly isLoadingUsersWithCrossAccess$ = this.select((state) => state.isLoadingUsersWithCrossAccess);
   public readonly usersWithRightsholderAccess$ = this.select((state) => state.usersWithRightsholderAccess);
   public readonly usersWithCrossOrganizationalAccess$ = this.select(
-    (state) => state.usersWithCrossOrganizationalAccess
+    (state) => state.usersWithCrossOrganizationalAccess,
   );
 
   constructor(
     @Inject(APIV2GlobalUserInternalINTERNALService) private userService: APIV2GlobalUserInternalINTERNALService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
   ) {
     super({ isLoadingUsersWithRightsholderAccess: false, isLoadingUsersWithCrossAccess: false });
   }
@@ -38,28 +38,28 @@ export class GlobalAdminOtherApiUsersComponentStore extends ComponentStore<State
     (state, isLoadingUsersWithRightsholderAccess: boolean): State => ({
       ...state,
       isLoadingUsersWithRightsholderAccess,
-    })
+    }),
   );
   private readonly setLoadingUsersWithCrossAccess = this.updater(
     (state, isLoadingUsersWithCrossAccess: boolean): State => ({
       ...state,
       isLoadingUsersWithCrossAccess,
-    })
+    }),
   );
   private readonly setUsersWithRightsholderAccess = this.updater(
     (state, usersWithRightsholderAccess: APIUserWithOrganizationResponseDTO[] | undefined): State => ({
       ...state,
       usersWithRightsholderAccess: usersWithRightsholderAccess,
-    })
+    }),
   );
   private readonly setUsersWithCrossAccess = this.updater(
     (
       state,
-      usersWithCrossOrganizationalAccess: APIUserWithCrossOrganizationalRightsResponseDTO[] | undefined
+      usersWithCrossOrganizationalAccess: APIUserWithCrossOrganizationalRightsResponseDTO[] | undefined,
     ): State => ({
       ...state,
       usersWithCrossOrganizationalAccess: usersWithCrossOrganizationalAccess,
-    })
+    }),
   );
 
   public getUsersWithRightsholderAccess = this.effect<void>((trigger$) =>
@@ -72,11 +72,11 @@ export class GlobalAdminOtherApiUsersComponentStore extends ComponentStore<State
               this.setUsersWithRightsholderAccess(users);
             },
             (e) => console.error(e),
-            () => this.setLoadingUsersWithRightsholderAccess(false)
-          )
+            () => this.setLoadingUsersWithRightsholderAccess(false),
+          ),
         );
-      })
-    )
+      }),
+    ),
   );
 
   public getUsersWithCrossAccess = this.effect<void>((trigger$) =>
@@ -87,10 +87,10 @@ export class GlobalAdminOtherApiUsersComponentStore extends ComponentStore<State
           tapResponse(
             (users) => this.setUsersWithCrossAccess(users),
             (e) => console.error(e),
-            () => this.setLoadingUsersWithCrossAccess(false)
-          )
+            () => this.setLoadingUsersWithCrossAccess(false),
+          ),
         );
-      })
-    )
+      }),
+    ),
   );
 }

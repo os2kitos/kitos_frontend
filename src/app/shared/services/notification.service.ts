@@ -1,13 +1,16 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Injectable, OnDestroy } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { Subscription } from 'rxjs';
+import { filter, Subscription } from 'rxjs';
+import { AlertActions } from 'src/app/store/alerts/actions';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import { GlobalAdminActions } from 'src/app/store/global-admin/actions';
 import { GlobalOptionTypeActions } from 'src/app/store/global-admin/global-option-types/actions';
 import { HelpTextActions } from 'src/app/store/global-admin/help-texts/actions';
 import { LocalAdminUserActions } from 'src/app/store/global-admin/local-admins/actions';
 import { GlobalAdminPublicMessageActions } from 'src/app/store/global-admin/public-messages/actions';
+import { GlobalAdminSystemIntegratorActions } from 'src/app/store/global-admin/system-integrators/actions';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
@@ -24,7 +27,6 @@ import { PopupMessageActions } from 'src/app/store/popup-messages/actions';
 import { UserActions } from 'src/app/store/user-store/actions';
 import { PopupMessageType } from '../enums/popup-message-type';
 import { createPopupMessage } from '../models/popup-messages/popup-message.model';
-import { AlertActions } from 'src/app/store/alerts/actions';
 
 @Injectable({ providedIn: 'root' })
 export class NotificationService implements OnDestroy {
@@ -187,6 +189,12 @@ export class NotificationService implements OnDestroy {
       GlobalAdminPublicMessageActions.editPublicMessagesError,
       $localize`Beskeden kunne ikke opdateres`
     );
+
+    this.subscribeAsDefault(GlobalAdminSystemIntegratorActions.editSystemIntegratorSuccess, $localize`Ændringer gemt`);
+    this.subscribeAsError(
+      GlobalAdminSystemIntegratorActions.editSystemIntegratorError,
+      $localize`Ændringer kunne ikke gemmes`
+    );
   }
 
   private subscribeToOrganizationEvents() {
@@ -227,8 +235,14 @@ export class NotificationService implements OnDestroy {
       $localize`Registrering kunne ikke opdateres`
     );
 
-    this.subscribeAsDefault(OrganizationUnitActions.addOrganizationUnitRoleSuccess, $localize`Rollen blev tilføjet`);
-    this.subscribeAsError(OrganizationUnitActions.addOrganizationUnitRoleError, $localize`Rollen kunne ikke tilføjes`);
+    this.subscribeAsDefault(
+      OrganizationUnitActions.bulkAddOrganizationUnitRoleSuccess,
+      $localize`Rollen blev tilføjet`
+    );
+    this.subscribeAsError(
+      OrganizationUnitActions.bulkAddOrganizationUnitRoleError,
+      $localize`Rollen kunne ikke tilføjes`
+    );
 
     this.subscribeAsDefault(OrganizationUnitActions.deleteOrganizationUnitRoleSuccess, $localize`Rollen blev fjernet`);
     this.subscribeAsError(
@@ -239,11 +253,23 @@ export class NotificationService implements OnDestroy {
     this.subscribeAsDefault(OrganizationUserActions.sendNotificationSuccess, $localize`Besked sendt`);
     this.subscribeAsError(OrganizationUserActions.sendNotificationError, $localize`Beskeden kunne ikke sendes`);
 
-    this.subscribeAsDefault(OrganizationUserActions.updateUserSuccess, $localize`Brugeren blev opdateret`);
-    this.subscribeAsError(OrganizationUserActions.updateUserError, $localize`Brugeren kunne ikke opdateres`);
+    this.subscribeMultipleDefault(
+      ofType(
+        OrganizationUserActions.updateUserSuccess,
+        UserActions.setUserDefaultUnitSuccess,
+        OrganizationUserActions.createUserSuccess
+      ),
+      $localize`Brugeren blev opdateret`
+    );
 
-    this.subscribeAsDefault(OrganizationUserActions.createUserSuccess, $localize`Bruger blev oprettet`);
-    this.subscribeAsError(OrganizationUserActions.createUserError, $localize`Bruger kunne ikke oprettes`);
+    this.subscribeMultipleError(
+      ofType(
+        OrganizationUserActions.updateUserError,
+        UserActions.setUserDefaultUnitError,
+        OrganizationUserActions.createUserError
+      ),
+      $localize`Brugeren kunne ikke opdateres`
+    );
 
     this.subscribeAsError(OrganizationActions.getMasterDataError, this.getMasterDataError);
     this.subscribeAsDefault(OrganizationActions.patchMasterDataSuccess, this.patchMasterDataSuccess);
@@ -458,6 +484,12 @@ export class NotificationService implements OnDestroy {
 
     this.subscribeAsDefault(ITContractActions.removeItContractPaymentSuccess, $localize`Betalingen blev slettet`);
     this.subscribeAsError(ITContractActions.removeItContractPaymentError, $localize`Betalingen kunne ikke slettes`);
+
+    this.subscribeAsDefault(
+      ITContractActions.createAndAssociateContractSuccess,
+      $localize`Kontrakt oprettet og tilknyttet`
+    );
+    this.subscribeAsError(ITContractActions.createAndAssociateContractError, $localize`Kontrakt kunne ikke oprettes`);
   }
 
   private subscribeToDprEvents() {
@@ -499,12 +531,12 @@ export class NotificationService implements OnDestroy {
    */
   private subscribeToRoleNotifications() {
     this.subscribeMultipleDefault(
-      ofType(ITSystemUsageActions.addItSystemUsageRoleSuccess, ITContractActions.addItContractRoleSuccess),
+      ofType(ITSystemUsageActions.bulkAddItSystemUsageRoleSuccess, ITContractActions.bulkAddItContractRoleSuccess),
       $localize`Tildelingen blev tilføjet`
     );
 
     this.subscribeMultipleError(
-      ofType(ITSystemUsageActions.addItSystemUsageRoleError, ITContractActions.addItContractRoleError),
+      ofType(ITSystemUsageActions.bulkAddItSystemUsageRoleError, ITContractActions.bulkAddItContractRoleError),
       $localize`Kunne ikke oprette tildelingen`
     );
 
@@ -665,36 +697,37 @@ export class NotificationService implements OnDestroy {
     this.subscribeAsError(AlertActions.deleteAlertError, $localize`Advarslen kunne ikke slettes`);
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private subscribeAsDefault(actionType: any, msg: string) {
     this.subscribeToActionWithMessage(actionType, msg, PopupMessageType.default);
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private subscribeAsError(actionType: any, msg: string) {
     this.subscribeToActionWithMessage(actionType, msg, PopupMessageType.error);
   }
 
   //Call this with single actionType
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private subscribeToActionWithMessage(actionType: any, msg: string, type: PopupMessageType) {
     this.subscribeToMultiple(ofType(actionType), msg, type);
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private subscribeMultipleDefault(actionTypes: any, msg: string) {
     this.subscribeToMultiple(actionTypes, msg, PopupMessageType.default);
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private subscribeMultipleError(actionTypes: any, msg: string) {
     this.subscribeToMultiple(actionTypes, msg, PopupMessageType.error);
   }
 
   //actionTypes should be" ofType(actionType1, actionType2, actionType3, ...)"
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private subscribeToMultiple(actionTypes: any, msg: string, type: PopupMessageType) {
-    this.subscriptions.add(this.actions$.pipe(actionTypes).subscribe(() => this.show(msg, type)));
+    this.subscriptions.add(
+      this.actions$
+        .pipe(
+          actionTypes,
+          filter((action: any) => !action.disablePopupNotification)
+        )
+        .subscribe(() => this.show(msg, type))
+    );
   }
 
   public show(text: string, type: PopupMessageType) {

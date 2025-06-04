@@ -1,5 +1,6 @@
-<div class="spinner-container">
+<div class="spinner-container" *ngIf="type === 'kitos'">
   <div class="spinner"></div>
   <app-kitos-k-icon></app-kitos-k-icon>
 </div>
+<mat-spinner *ngIf="type === 'material'" [diameter]="50" class="centered-spinner"></mat-spinner>
 <h6><ng-content></ng-content></h6>

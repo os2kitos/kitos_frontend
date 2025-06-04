@@ -1,5 +1,6 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { ComponentStore } from '@ngrx/component-store';import { tapResponse } from '@ngrx/operators';
+import { ComponentStore } from '@ngrx/component-store';
+import { tapResponse } from '@ngrx/operators';
 
 import { Observable, map, mergeMap } from 'rxjs';
 import { APIItContractResponseDTO, APIV2ItContractService } from 'src/app/api/v2';
@@ -25,8 +26,8 @@ export class ItSystemUsageDetailsContractsComponentStore extends ComponentStore<
           ...contract,
           hasOperation: contract.general.agreementElements.some((ae) => ae.name.toLowerCase() === 'drift'),
         };
-      })
-    )
+      }),
+    ),
   );
 
   constructor(private contractsService: APIV2ItContractService) {
@@ -37,14 +38,14 @@ export class ItSystemUsageDetailsContractsComponentStore extends ComponentStore<
     (state, contracts: Array<APIItContractResponseDTO>): State => ({
       ...state,
       contracts: contracts,
-    })
+    }),
   );
 
   private updateAssociatedContractsIsLoading = this.updater(
     (state, loading: boolean): State => ({
       ...state,
       loading: loading,
-    })
+    }),
   );
 
   public getAssociatedContracts = this.effect((systemUsageUuid$: Observable<string>) =>
@@ -57,10 +58,10 @@ export class ItSystemUsageDetailsContractsComponentStore extends ComponentStore<
             tapResponse(
               (associatedContracts) => this.updateAssociatedContracts(associatedContracts),
               (e) => console.error(e),
-              () => this.updateAssociatedContractsIsLoading(false)
-            )
+              () => this.updateAssociatedContractsIsLoading(false),
+            ),
           );
-      })
-    )
+      }),
+    ),
   );
 }

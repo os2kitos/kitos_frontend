@@ -21,7 +21,7 @@ export const selectAlertCacheTime = (entityType: RelatedEntityType) =>
     (state, time) => {
       const cacheTime = state.cacheTimes[entityType];
       return hasValidCache(cacheTime, time);
-    }
+    },
   );
 
 export const selectAllAlertCount = createSelector(selectUIRootConfig, selectAlertsState, (config, alertState) => {

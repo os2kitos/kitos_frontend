@@ -1,9 +1,9 @@
-@import "theme";
-@import "mixins";
+@use "theme";
+@use "mixins";
 
 ::ng-deep .app-tool-tip-content {
   --mdc-plain-tooltip-supporting-text-size: 12px;
-  --mdc-plain-tooltip-container-color: #{$color-neutral};
+  --mdc-plain-tooltip-container-color: #{theme.$color-neutral};
   white-space: pre-wrap;
 
   &::after {
@@ -13,7 +13,7 @@
     height: 0;
     border-left: 8px solid transparent;
     border-right: 8px solid transparent;
-    border-top: 9px solid $color-neutral;
+    border-top: 9px solid theme.$color-neutral;
     position: absolute;
     left: calc(50% - 8px);
     bottom: -8px;
@@ -30,4 +30,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.match-content-width {
+  display: inline-block;
+  width: fit-content;
 }

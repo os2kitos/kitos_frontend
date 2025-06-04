@@ -23,7 +23,7 @@ export class GlobalAdminOtherUserShutdownComponentStore extends ComponentStore<S
 
   constructor(
     @Inject(APIV2GlobalUserInternalINTERNALService) private userService: APIV2GlobalUserInternalINTERNALService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
   ) {
     super({ isLoading: false, users: [] });
   }
@@ -33,13 +33,13 @@ export class GlobalAdminOtherUserShutdownComponentStore extends ComponentStore<S
     (state, users: APIUserReferenceResponseDTO[] | undefined): State => ({
       ...state,
       users: users ?? [],
-    })
+    }),
   );
   private readonly setUserOrganizations = this.updater(
     (state, userOrganizations: APIOrganizationResponseDTO[] | undefined): State => ({
       ...state,
       userOrganizations: userOrganizations,
-    })
+    }),
   );
 
   public searchUsers = this.effect((search$: Observable<string | undefined>) =>
@@ -54,11 +54,11 @@ export class GlobalAdminOtherUserShutdownComponentStore extends ComponentStore<S
             tapResponse(
               (users) => this.setUsers(users),
               (e) => console.error(e),
-              () => this.setLoading(false)
-            )
+              () => this.setLoading(false),
+            ),
           );
-      })
-    )
+      }),
+    ),
   );
 
   public getUserOrganizations = this.effect((userUuid$: Observable<string>) =>
@@ -69,11 +69,11 @@ export class GlobalAdminOtherUserShutdownComponentStore extends ComponentStore<S
             (userOrganizations) => {
               this.setUserOrganizations(userOrganizations);
             },
-            (e) => console.error(e)
-          )
+            (e) => console.error(e),
+          ),
         );
-      })
-    )
+      }),
+    ),
   );
 
   public deleteUser = this.effect((userUuid$: Observable<string>) =>
@@ -87,11 +87,11 @@ export class GlobalAdminOtherUserShutdownComponentStore extends ComponentStore<S
             (e) => {
               console.error(e);
               this.notificationService.showError($localize`Kunne ikke slette brugeren`);
-            }
-          )
+            },
+          ),
         );
-      })
-    )
+      }),
+    ),
   );
 
   public resetUserOrganizations() {

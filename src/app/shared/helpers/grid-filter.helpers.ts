@@ -1,8 +1,8 @@
 import { Actions, ofType } from '@ngrx/effects';
 import { CompositeFilterDescriptor, FilterDescriptor, isCompositeFilterDescriptor } from '@progress/kendo-data-query';
 import { map, Subscription } from 'rxjs';
-import * as UsageFields from 'src/app/shared/constants/it-system-usage-grid-column-constants';
 import * as ContractFields from 'src/app/shared/constants/it-contracts-grid-column-constants';
+import * as UsageFields from 'src/app/shared/constants/it-system-usage-grid-column-constants';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
@@ -10,7 +10,7 @@ import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
 import { OrganizationActions } from 'src/app/store/organization/actions';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
-import { GridState, toODataString } from '../models/grid-state.model';
+import { GridState } from '../models/grid-state.model';
 import { RegistrationEntityTypes } from '../models/registrations/registration-entity-categories.model';
 
 export function getSaveFilterAction(entityType: RegistrationEntityTypes) {
@@ -92,10 +92,7 @@ export function usageGridStateToAction(gridState: GridState): any {
     gridState,
     UsageFields.ResponsibleOrganizationUnitName
   );
-  return ITSystemUsageActions.getITSystemUsages(
-    newGridState,
-    filter?.value as string | undefined
-  );
+  return ITSystemUsageActions.getITSystemUsages(newGridState, filter?.value as string | undefined);
 }
 
 //eslint-disable-next-line @typescript-eslint/no-explicit-any

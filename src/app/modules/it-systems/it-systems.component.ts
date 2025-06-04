@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { filter, pairwise } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
@@ -12,9 +12,13 @@ import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
   templateUrl: 'it-systems.component.html',
   styleUrls: ['it-systems.component.scss'],
   selector: 'app-systems',
+  imports: [RouterOutlet],
 })
 export class ITSystemsComponent extends BaseComponent implements OnInit {
-  constructor(private store: Store, private router: Router) {
+  constructor(
+    private store: Store,
+    private router: Router,
+  ) {
     super();
   }
 
@@ -25,19 +29,19 @@ export class ITSystemsComponent extends BaseComponent implements OnInit {
         .select(selectOrganizationUuid)
         .pipe(
           pairwise(),
-          filter(([prevUuid, nextUuid]) => prevUuid !== nextUuid)
+          filter(([prevUuid, nextUuid]) => prevUuid !== nextUuid),
         )
         .subscribe(() =>
           this.router
             .navigateByUrl(AppPath.root, { skipLocationChange: true })
-            .then(() => this.router.navigate([AppPath.itSystems]))
-        )
+            .then(() => this.router.navigate([AppPath.itSystems])),
+        ),
     );
 
     this.store.dispatch(
       UIModuleConfigActions.getUIModuleConfig({
         module: UIModuleConfigKey.ItSystemUsage,
-      })
+      }),
     );
   }
 }

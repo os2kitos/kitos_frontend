@@ -42,6 +42,8 @@ export interface DataProcessingRegistration {
   ContractNamesAsCsv: string;
   Roles: RoleAssignmentsMap;
   RoleEmails: RoleAssignmentEmailsMaps;
+  ResponsibleOrgUnitName?: string;
+  ResponsibleOrgUnitUuid?: string;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -78,5 +80,7 @@ export const adaptDataProcessingRegistration = (value: any): DataProcessingRegis
     ContractNamesAsCsv: value.ContractNamesAsCsv,
     Roles: mapRoleAssignmentsToUserFullNames(value.RoleAssignments),
     RoleEmails: mapRoleAssignmentsToEmails(value.RoleAssignments),
+    ResponsibleOrgUnitName: value.ResponsibleOrgUnitName,
+    ResponsibleOrgUnitUuid: value.ResponsibleOrgUnitUuid,
   };
 };

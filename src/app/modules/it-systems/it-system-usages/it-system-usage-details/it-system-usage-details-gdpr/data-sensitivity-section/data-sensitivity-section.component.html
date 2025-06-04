@@ -11,7 +11,7 @@
       i18n-text
       [formGroup]="dataSensitivityLevelForm"
       formName="NoneControl"
-      (valueChange)="patchDataSensitivityLevels()"
+      (valueChange)="patchDataSensitivityLevelNone($event)"
     >
     </app-checkbox>
 
@@ -22,7 +22,7 @@
         i18n-text
         [formGroup]="dataSensitivityLevelForm"
         formName="PersonDataControl"
-        (valueChange)="patchDataSensitivityLevels()"
+        (valueChange)="patchDataSensitivityLevelPersonData($event)"
       >
       </app-checkbox>
     </app-content-with-info>
@@ -60,7 +60,7 @@
       i18n-text
       [formGroup]="dataSensitivityLevelForm"
       formName="SensitiveDataControl"
-      (valueChange)="patchDataSensitivityLevels()"
+      (valueChange)="patchDataSensitivityLevelPersonData($event)"
     >
     </app-checkbox>
 
@@ -83,7 +83,7 @@
       i18n-text
       [formGroup]="dataSensitivityLevelForm"
       formName="LegalDataControl"
-      (valueChange)="patchDataSensitivityLevels()"
+      (valueChange)="patchDataSensitivityLevelPersonData($event)"
     >
     </app-checkbox>
   </form>

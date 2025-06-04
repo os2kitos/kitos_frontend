@@ -8,12 +8,16 @@ import { NON_EDITABLE_LOCAL_OPTION_TYPE_CATEGORY_HELP_TEXT } from '../../constan
 import { LocalAdminOptionType, LocalAdminOptionTypeItem } from '../../models/options/local-admin-option-type.model';
 import { EditLocalOptionTypeDialogComponent } from './edit-local-option-type-dialog/edit-local-option-type-dialog.component';
 import { LocalOptionTypeTableComponentStore } from './local-option-type-table.component-store';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { AccordionComponent } from '../accordion/accordion.component';
+import { LocalOptionGridComponent } from './local-option-grid/local-option-grid.component';
 
 @Component({
   selector: 'app-local-option-type-view',
   templateUrl: './local-option-type-view.component.html',
   styleUrl: './local-option-type-view.component.scss',
   providers: [LocalOptionTypeTableComponentStore],
+  imports: [NgIf, AccordionComponent, LocalOptionGridComponent, AsyncPipe],
 })
 export class LocalOptionTypeViewComponent extends BaseComponent implements OnInit {
   @Input() optionType!: LocalAdminOptionType;
@@ -30,7 +34,7 @@ export class LocalOptionTypeViewComponent extends BaseComponent implements OnIni
   constructor(
     private componentStore: LocalOptionTypeTableComponentStore,
     private dialog: MatDialog,
-    private actions$: Actions
+    private actions$: Actions,
   ) {
     super();
   }
@@ -48,11 +52,11 @@ export class LocalOptionTypeViewComponent extends BaseComponent implements OnIni
       this.actions$
         .pipe(
           ofType(LocalOptionTypeActions.updateOptionTypeSuccess),
-          filter(({ optionType }) => optionType === this.optionType)
+          filter(({ optionType }) => optionType === this.optionType),
         )
         .subscribe(() => {
           this.componentStore.getOptionTypeItems();
-        })
+        }),
     );
   }
 

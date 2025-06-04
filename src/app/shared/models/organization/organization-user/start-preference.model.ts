@@ -33,7 +33,7 @@ export const startPreferenceChoiceOptions: StartPreferenceChoice[] = [
 ];
 
 export const mapStartPreferenceChoice = (
-  value?: APIUserResponseDTO.DefaultUserStartPreferenceEnum
+  value?: APIUserResponseDTO.DefaultUserStartPreferenceEnum,
 ): StartPreferenceChoice | undefined => {
   return startPreferenceChoiceOptions.find((option) => option.value === value);
 };

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
@@ -10,11 +10,27 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { selectItContractSystemAgreementElements } from 'src/app/store/it-contract/selectors';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
+import { DialogComponent } from '../../../../../shared/components/dialogs/dialog/dialog.component';
+import { StandardVerticalContentGridComponent } from '../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { DropdownComponent } from '../../../../../shared/components/dropdowns/dropdown/dropdown.component';
+import { DialogActionsComponent } from '../../../../../shared/components/dialogs/dialog-actions/dialog-actions.component';
+import { ButtonComponent } from '../../../../../shared/components/buttons/button/button.component';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-agreement-element-create-dialog',
   templateUrl: './agreement-element-create-dialog.component.html',
   styleUrl: './agreement-element-create-dialog.component.scss',
+  imports: [
+    DialogComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    StandardVerticalContentGridComponent,
+    DropdownComponent,
+    DialogActionsComponent,
+    ButtonComponent,
+    AsyncPipe,
+  ],
 })
 export class AgreementElementCreateDialogComponent extends BaseComponent implements OnInit {
   public readonly agreementElementTypes$ = this.store
@@ -24,15 +40,15 @@ export class AgreementElementCreateDialogComponent extends BaseComponent impleme
       combineLatestWith(
         this.store
           .select(selectItContractSystemAgreementElements)
-          .pipe(map((elements) => elements?.map((element) => element.uuid)))
+          .pipe(map((elements) => elements?.map((element) => element.uuid))),
       ),
       map(([agreementElementTypes, existingAgreementElementUuids]) => {
         if (!existingAgreementElementUuids || existingAgreementElementUuids.length == 0) return agreementElementTypes;
 
         return agreementElementTypes.filter(
-          (type: APIRegularOptionResponseDTO) => !existingAgreementElementUuids.includes(type.uuid)
+          (type: APIRegularOptionResponseDTO) => !existingAgreementElementUuids.includes(type.uuid),
         );
-      })
+      }),
     );
 
   public agreementElementForm = new FormGroup({
@@ -44,7 +60,7 @@ export class AgreementElementCreateDialogComponent extends BaseComponent impleme
   constructor(
     private readonly store: Store,
     private readonly dialogRef: MatDialogRef<AgreementElementCreateDialogComponent>,
-    private readonly actions$: Actions
+    private readonly actions$: Actions,
   ) {
     super();
   }

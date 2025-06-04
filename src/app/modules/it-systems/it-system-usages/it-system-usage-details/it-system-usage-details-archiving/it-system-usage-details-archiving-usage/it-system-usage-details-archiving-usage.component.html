@@ -1,0 +1,171 @@
+<app-card>
+  <app-card-header title="Arkivering" helpTextKey="it-system.usage.archiving" i18n-title></app-card-header>
+  <app-form-grid [formGroup]="archiveForm">
+    <div>
+      <app-dropdown
+        text="Arkiveringspligt"
+        i18n-text
+        [formGroup]="archiveForm"
+        formName="archiveDuty"
+        [data]="archiveDutyChoice"
+        [showDescription]="true"
+        (valueChange)="patchArchiving({ archiveDuty: $event })"
+      ></app-dropdown>
+      <app-textbox-info>
+        <app-paragraph paragraphSize="x-small" *ngIf="recommendedArchiveDutyComment$ | async as commentObject">{{
+          commentObject.comment
+        }}</app-paragraph>
+        <app-paragraph paragraphSize="x-small" i18n>
+          Læs mere hos
+          <a
+            target="_blank"
+            href="https://www.sa.dk/da/offentlig-forvaltning/kommuner-og-regioner/bevaring-kassation-it-systemer/"
+            >{{ nationalArchivesText }}</a
+          >
+        </app-paragraph>
+      </app-textbox-info>
+    </div>
+    <app-dropdown
+      *ngIf="archiveTypeEnabled$ | async"
+      text="Arkivtype"
+      i18n-text
+      valueField="uuid"
+      [formGroup]="archiveForm"
+      formName="type"
+      [data]="archiveTypes$ | async"
+      [showDescription]="true"
+      (valueChange)="patchArchiving({ typeUuid: $event })"
+    ></app-dropdown>
+    <app-dropdown
+      *ngIf="archiveLocationEnabled$ | async"
+      text="Arkiveringssted"
+      i18n-text
+      valueField="uuid"
+      [formGroup]="archiveForm"
+      formName="location"
+      [data]="archiveLocationTypes$ | async"
+      [showDescription]="true"
+      (valueChange)="patchArchiving({ locationUuid: $event })"
+    ></app-dropdown>
+    <app-connected-dropdown
+      *ngIf="archiveSupplierEnabled$ | async"
+      text="Arkiveringsleverandør"
+      i18n-text
+      valueField="uuid"
+      [formGroup]="archiveForm"
+      formName="supplier"
+      [data$]="supplierOrganizations$"
+      (filterChange)="supplierFilterChange($event)"
+      (valueChange)="patchArchiving({ supplierOrganizationUuid: $event })"
+    ></app-connected-dropdown>
+    <app-dropdown
+      *ngIf="archiveTestLocationEnabled$ | async"
+      text="Arkiveringsteststed"
+      i18n-text
+      valueField="uuid"
+      [formGroup]="archiveForm"
+      formName="testLocation"
+      [data]="archiveLocationTestTypes$ | async"
+      [showDescription]="true"
+      (valueChange)="patchArchiving({ testLocationUuid: $event })"
+    ></app-dropdown>
+    <app-numeric-input
+      *ngIf="archiveFrequencyEnabled$ | async"
+      text="Arkiveringsfrekvens (antal år)"
+      i18n-text
+      [formGroup]="archiveForm"
+      formName="frequencyInMonths"
+      (valueChange)="patchJournalFrequency({ frequencyInMonths: $event })"
+      [placeholder]="journalFrequencyPlaceholder()"
+    ></app-numeric-input>
+    <app-content-vertical-center *ngIf="documentBearingEnabled$ | async">
+      <app-checkbox
+        text="Dokumentbærende"
+        i18n-text
+        [formGroup]="archiveForm"
+        formName="documentBearing"
+        labelPosition="after"
+        (valueChange)="patchArchiving({ documentBearing: $event })"
+      >
+      </app-checkbox>
+    </app-content-vertical-center>
+    <app-radio-buttons
+      *ngIf="activeEnabled$ | async"
+      text="Er der arkiveret fra systemet?"
+      i18n-text
+      [formGroup]="archiveForm"
+      formName="active"
+      [options]="activeOptions"
+      [disabled]="!isArchiveDutySelected"
+      (optionChanged)="patchActiveValue($event)"
+    ></app-radio-buttons>
+    <app-textarea
+      *ngIf="notesEnabled$ | async"
+      class="notes-column-span"
+      text="Arkiveringsbemærkninger"
+      i18n-text
+      [formGroup]="archiveForm"
+      formName="notes"
+      (valueChange)="patchArchiving({ notes: $event })"
+    ></app-textarea>
+  </app-form-grid>
+</app-card>
+<app-card *ngIf="journalPeriodsEnabled$ | async">
+  <app-card-header title="Journalperioder" helpTextKey="it-system.usage.archiving.periods" i18n-title></app-card-header>
+  <app-standard-vertical-content-grid>
+    <app-native-table *ngIf="anyJournalPeriods$ | async">
+      <thead>
+        <th i18n>Startdato</th>
+        <th i18n>Slutdato</th>
+        <th i18n>Unikt arkiv-ID</th>
+        <th i18n>Godkendt</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let journalPeriod of journalPeriods$ | async">
+          <td>
+            <app-paragraph paragraphSize="small">
+              {{ journalPeriod.startDate | appDate }}
+            </app-paragraph>
+          </td>
+          <td>
+            <app-paragraph paragraphSize="small">
+              {{ journalPeriod.endDate | appDate }}
+            </app-paragraph>
+          </td>
+          <td>
+            <app-paragraph paragraphSize="small">
+              {{ journalPeriod.archiveId }}
+            </app-paragraph>
+          </td>
+          <td>
+            <app-content-space-between>
+              <app-paragraph paragraphSize="small" *ngIf="journalPeriod.approved" i18n> Ja </app-paragraph>
+              <app-paragraph paragraphSize="small" *ngIf="!journalPeriod.approved" i18n> Nej </app-paragraph>
+              <app-table-row-actions *ngIf="hasModifyPermission$ | async">
+                <app-icon-button *ngIf="isArchiveDutySelected" (buttonClick)="onEdit(journalPeriod)"
+                  ><app-pencil-icon></app-pencil-icon
+                ></app-icon-button>
+                <app-icon-button *ngIf="isArchiveDutySelected" (buttonClick)="onDelete(journalPeriod)"
+                  ><app-trashcan-icon></app-trashcan-icon
+                ></app-icon-button>
+              </app-table-row-actions>
+            </app-content-space-between>
+          </td>
+        </tr>
+      </tbody>
+    </app-native-table>
+    <app-empty-state
+      *ngIf="(anyJournalPeriods$ | async) === false"
+      text="Ingen journalperioder tilføjet endnu"
+      context="emptyTable"
+      i18n-text
+    ></app-empty-state>
+    <app-collection-extension-button
+      *ngIf="(hasModifyPermission$ | async) && isArchiveDutySelected"
+      text="Tilføj journalperiode"
+      (clicked)="onAddNew()"
+      i18n-text
+    >
+    </app-collection-extension-button>
+  </app-standard-vertical-content-grid>
+</app-card>

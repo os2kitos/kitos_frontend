@@ -22,7 +22,7 @@ export class GlobalAdminOtherBrokenLinksComponentStore extends ComponentStore<St
   constructor(
     @Inject(APIV2BrokenExternalReferencesReportInternalINTERNALService)
     private statusService: APIV2BrokenExternalReferencesReportInternalINTERNALService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
   ) {
     super({ isLoading: false });
   }
@@ -32,7 +32,7 @@ export class GlobalAdminOtherBrokenLinksComponentStore extends ComponentStore<St
     (state, status: APIBrokenExternalReferencesReportStatusResponseDTO | undefined): State => ({
       ...state,
       status: status,
-    })
+    }),
   );
 
   public getStatus = this.effect<void>((trigger$) =>
@@ -43,11 +43,11 @@ export class GlobalAdminOtherBrokenLinksComponentStore extends ComponentStore<St
           tapResponse(
             (status) => this.setStatus(status as APIBrokenExternalReferencesReportStatusResponseDTO),
             (e) => console.error(e),
-            () => this.setLoading(false)
-          )
+            () => this.setLoading(false),
+          ),
         );
-      })
-    )
+      }),
+    ),
   );
 
   public getReport = this.effect<void>((trigger$) =>
@@ -73,11 +73,11 @@ export class GlobalAdminOtherBrokenLinksComponentStore extends ComponentStore<St
                 console.error(e);
                 this.notificationService.showError($localize`Kunne ikke hente rapporten`);
               },
-              () => this.setLoading(false)
-            )
+              () => this.setLoading(false),
+            ),
           );
-      })
-    )
+      }),
+    ),
   );
 
   private getFileNameFromContentDisposition(contentDisposition: string): string {

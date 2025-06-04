@@ -7,7 +7,7 @@ export const selectAll = createSelector(selectITInterfaceState, itInterfaceAdapt
 export const selectTotal = createSelector(selectITInterfaceState, (state) => state.total);
 export const selectInterfaceGridLoading = createSelector(
   selectITInterfaceState,
-  (state) => state.isLoadingInterfacesQuery
+  (state) => state.isLoadingInterfacesQuery,
 );
 export const selectInterfaceGridState = createSelector(selectITInterfaceState, (state) => state.gridState);
 export const selectInterfaceGridData = createSelector(selectAll, selectTotal, (data, total) => ({ data, total }));
@@ -25,21 +25,21 @@ export const selectInterfaceDeactivated = createSelector(selectInterface, (itInt
 
 export const selectInterfaceHasReadPermission = createSelector(
   selectITInterfaceState,
-  (state) => state.permissions?.read
+  (state) => state.permissions?.read,
 );
 export const selectInterfaceHasModifyPermission = createSelector(
   selectITInterfaceState,
-  (state) => state.permissions?.modify
+  (state) => state.permissions?.modify,
 );
 export const selectInterfaceHasDeletePermission = createSelector(
   selectITInterfaceState,
-  (state) => state.permissions?.delete
+  (state) => state.permissions?.delete,
 );
 export const selectInterfaceDeletionConflicts = createSelector(
   selectITInterfaceState,
-  (state) => state.permissions?.deletionConflicts
+  (state) => state.permissions?.deletionConflicts,
 );
 export const selectInterfaceHasCreateCollectionPermission = createSelector(
   selectITInterfaceState,
-  (state) => state.collectionPermissions?.create
+  (state) => state.collectionPermissions?.create,
 );

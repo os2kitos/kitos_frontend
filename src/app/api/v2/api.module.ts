@@ -22,6 +22,7 @@ import { APIV2DprLocalCountryOptionTypesInternalINTERNALService } from './api/v2
 import { APIV2DprLocalDataResponsibleTypesInternalINTERNALService } from './api/v2DprLocalDataResponsibleTypesInternalINTERNAL.service';
 import { APIV2DprLocalOversightOptionTypesInternalINTERNALService } from './api/v2DprLocalOversightOptionTypesInternalINTERNAL.service';
 import { APIV2DprLocalRoleOptionTypesInternalINTERNALService } from './api/v2DprLocalRoleOptionTypesInternalINTERNAL.service';
+import { APIV2ExternalReferencesInternalINTERNALService } from './api/v2ExternalReferencesInternalINTERNAL.service';
 import { APIV2GdprExportReportInternalINTERNALService } from './api/v2GdprExportReportInternalINTERNAL.service';
 import { APIV2GlobalUserInternalINTERNALService } from './api/v2GlobalUserInternalINTERNAL.service';
 import { APIV2GridLocalItContractRolesINTERNALService } from './api/v2GridLocalItContractRolesINTERNAL.service';
@@ -69,6 +70,7 @@ import { APIV2ItInterfaceInterfaceDataTypeService } from './api/v2ItInterfaceInt
 import { APIV2ItInterfaceInterfaceTypeService } from './api/v2ItInterfaceInterfaceType.service';
 import { APIV2ItSystemService } from './api/v2ItSystem.service';
 import { APIV2ItSystemBusinessTypeService } from './api/v2ItSystemBusinessType.service';
+import { APIV2ItSystemDBSService } from './api/v2ItSystemDBS.service';
 import { APIV2ItSystemGlobalArchiveLocationsInternalINTERNALService } from './api/v2ItSystemGlobalArchiveLocationsInternalINTERNAL.service';
 import { APIV2ItSystemGlobalArchiveTestLocationsInternalINTERNALService } from './api/v2ItSystemGlobalArchiveTestLocationsInternalINTERNAL.service';
 import { APIV2ItSystemGlobalArchiveTypesInternalINTERNALService } from './api/v2ItSystemGlobalArchiveTypesInternalINTERNAL.service';
@@ -118,6 +120,7 @@ import { APIV2OrganizationsInternalINTERNALService } from './api/v2Organizations
 import { APIV2PasswordResetInternalINTERNALService } from './api/v2PasswordResetInternalINTERNAL.service';
 import { APIV2PublicMessagesINTERNALService } from './api/v2PublicMessagesINTERNAL.service';
 import { APIV2StsOrganizationSynchronizationInternalINTERNALService } from './api/v2StsOrganizationSynchronizationInternalINTERNAL.service';
+import { APIV2TokenService } from './api/v2Token.service';
 import { APIV2UsersInternalINTERNALService } from './api/v2UsersInternalINTERNAL.service';
 
 @NgModule({

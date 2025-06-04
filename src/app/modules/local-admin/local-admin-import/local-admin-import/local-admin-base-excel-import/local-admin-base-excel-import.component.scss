@@ -1,0 +1,15 @@
+@use "mixins";
+@use "theme";
+
+:host {
+  @include mixins.page-flex-layout-max-width;
+}
+
+.inline-block-button {
+  width: auto;
+  display: inline-block;
+}
+
+.button-full-width {
+  width: 100%;
+}

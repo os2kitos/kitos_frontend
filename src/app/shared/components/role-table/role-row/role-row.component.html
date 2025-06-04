@@ -27,6 +27,9 @@
       {{ role.assignment.user.email }}
     </app-paragraph>
     <app-table-row-actions *ngIf="hasModifyPermission">
+      <app-icon-button (buttonClick)="onEditClick()" data-cy="edit-role-button">
+        <app-pencil-icon></app-pencil-icon>
+      </app-icon-button>
       <app-icon-button (buttonClick)="onRemoveClick()">
         <app-trashcan-icon></app-trashcan-icon>
       </app-icon-button>

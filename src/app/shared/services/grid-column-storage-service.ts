@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { GridColumn } from '../models/grid-column.model';
-import { StatePersistingService } from './state-persisting.service';
+import { LocalStorageService } from './state-persisting.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GridColumnStorageService {
-  constructor(private localStorage: StatePersistingService) {}
+  constructor(private localStorage: LocalStorageService) {}
 
   public setColumns(key: string, columns: GridColumn[]): void {
     const hash = this.computeHash(columns);
@@ -25,6 +25,13 @@ export class GridColumnStorageService {
   private computeHash(columns: GridColumn[]): string {
     const hashableColumns = columns.map(this.toHashableGridColumn).sort((a, b) => a.field.localeCompare(b.field));
     return this.hashMappedColumns(hashableColumns);
+  }
+
+  public columnsAreEqual(columns1: GridColumn[], columns2: GridColumn[]): boolean {
+    if (columns1.length !== columns2.length) return false;
+    const hash1 = this.computeHash(columns1);
+    const hash2 = this.computeHash(columns2);
+    return hash1 === hash2;
   }
 
   private hashMappedColumns(columns: GridColumn[]): string {

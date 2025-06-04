@@ -1,5 +1,6 @@
 <app-dropdown
   *ngIf="options$"
+  size="medium"
   text="Vælg..."
   [data]="(options$ | async) ?? []"
   [(value)]="chosenOption"

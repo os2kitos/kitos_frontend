@@ -6,17 +6,20 @@ import { catchError, map, of, switchMap } from 'rxjs';
 
 @Injectable()
 export class PublicMessageEffects {
-  constructor(private actions$: Actions, private publicMessageService: APIV2PublicMessagesINTERNALService) {}
+  constructor(
+    private actions$: Actions,
+    private publicMessageService: APIV2PublicMessagesINTERNALService,
+  ) {}
 
   editPublicMessage$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(GlobalAdminPublicMessageActions.editPublicMessages),
-      switchMap(({ request }) =>
-        this.publicMessageService.patchSinglePublicMessagesV2Patch({ body: request }).pipe(
+      switchMap(({ messageUuid, request }) =>
+        this.publicMessageService.patchSinglePublicMessagesV2Patch({ messageUuid, body: request }).pipe(
           map((response) => GlobalAdminPublicMessageActions.editPublicMessagesSuccess(response)),
-          catchError(() => of(GlobalAdminPublicMessageActions.editPublicMessagesError()))
-        )
-      )
+          catchError(() => of(GlobalAdminPublicMessageActions.editPublicMessagesError())),
+        ),
+      ),
     );
   });
 }

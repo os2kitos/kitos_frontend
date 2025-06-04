@@ -1,5 +1,3 @@
-/// <reference types="Cypress" />
-
 const regularOptionTypesSegment = 'Lokal tilpasning af udfaldsrum';
 
 describe('local-admin it system usage', () => {

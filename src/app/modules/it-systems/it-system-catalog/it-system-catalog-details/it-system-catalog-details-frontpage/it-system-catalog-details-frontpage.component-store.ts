@@ -35,7 +35,7 @@ export class ITSystemCatalogDetailsFrontpageComponentStore extends ComponentStor
     @Inject(APIV2OrganizationService) private apiOrganizationService: APIV2OrganizationService,
     @Inject(APIV2ItSystemInternalINTERNALService)
     private apiItSystemInternalService: APIV2ItSystemInternalINTERNALService,
-    private store: Store
+    private store: Store,
   ) {
     super({ isLoading: false, isLoadingOrganizations: false });
   }
@@ -44,21 +44,21 @@ export class ITSystemCatalogDetailsFrontpageComponentStore extends ComponentStor
     (state, parentSystem: APIItSystemResponseDTO): State => ({
       ...state,
       parentSystem,
-    })
+    }),
   );
 
   private updateIsLoading = this.updater((state, isLoading: boolean): State => ({ ...state, isLoading: isLoading }));
 
   private updateItSystems = this.updater(
-    (state, itSystems: APIItSystemResponseDTO[]): State => ({ ...state, itSystems })
+    (state, itSystems: APIItSystemResponseDTO[]): State => ({ ...state, itSystems }),
   );
 
   private updateIsLoadingOrganizations = this.updater(
-    (state, isLoadingOrganizations: boolean): State => ({ ...state, isLoadingOrganizations })
+    (state, isLoadingOrganizations: boolean): State => ({ ...state, isLoadingOrganizations }),
   );
 
   private updateOrganizations = this.updater(
-    (state, organizations: APIOrganizationResponseDTO[]): State => ({ ...state, organizations })
+    (state, organizations: APIOrganizationResponseDTO[]): State => ({ ...state, organizations }),
   );
 
   public getParentSystem = this.effect((systemUuid$: Observable<string>) =>
@@ -67,11 +67,11 @@ export class ITSystemCatalogDetailsFrontpageComponentStore extends ComponentStor
         this.apiItSystemService.getSingleItSystemV2GetItSystem({ uuid }).pipe(
           tapResponse(
             (parentSystem: APIItSystemResponseDTO) => this.updateParentSystem(parentSystem),
-            (e) => console.error(e)
-          )
-        )
-      )
-    )
+            (e) => console.error(e),
+          ),
+        ),
+      ),
+    ),
   );
 
   public searchItSystems = this.effect((searchTerm$: Observable<string | undefined>) =>
@@ -93,14 +93,14 @@ export class ITSystemCatalogDetailsFrontpageComponentStore extends ComponentStor
                   itSystems.map((system) => ({
                     ...system,
                     name: system.deactivated ? `${system.name} (Ikke tilgængeligt)` : system.name,
-                  }))
+                  })),
                 ),
               (e) => console.error(e),
-              () => this.updateIsLoading(false)
-            )
+              () => this.updateIsLoading(false),
+            ),
           );
-      })
-    )
+      }),
+    ),
   );
 
   public searchRightsHolderOrganizations = this.effect((searchTerm$: Observable<string | undefined>) =>
@@ -111,10 +111,10 @@ export class ITSystemCatalogDetailsFrontpageComponentStore extends ComponentStor
           tapResponse(
             (organizations) => this.updateOrganizations(organizations),
             (e) => console.error(e),
-            () => this.updateIsLoadingOrganizations(false)
-          )
+            () => this.updateIsLoadingOrganizations(false),
+          ),
         );
-      })
-    )
+      }),
+    ),
   );
 }

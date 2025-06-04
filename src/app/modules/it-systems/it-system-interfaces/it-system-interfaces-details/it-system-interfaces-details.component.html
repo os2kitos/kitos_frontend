@@ -2,19 +2,19 @@
   <app-breadcrumbs [items]="breadCrumbs$ | async"></app-breadcrumbs>
 
   <app-details-header [title$]="interfaceName$">
-      <ng-container *ngIf="hasDeletePermissions$ | async">
-        <app-button
-          *ngIf="deletionConflicts$ | async as deletionConflicts"
-          color="warn"
-          (buttonClick)="showRemoveDialog()"
-          [disabled]="deletionConflicts.length > 0"
-          i18n
-          [tooltip]="conflictsText$ | async"
-          >Slet Snitflade</app-button
-        >
-      </ng-container>
-      <ng-container *ngIf="(hasModifyPermissions$ | async) === true">
-        <app-button
+    <ng-container *ngIf="hasDeletePermissions$ | async">
+      <app-button
+        *ngIf="deletionConflicts$ | async as deletionConflicts"
+        color="warn"
+        (buttonClick)="showRemoveDialog()"
+        [disabled]="deletionConflicts.length > 0"
+        i18n
+        [tooltip]="conflictsText$ | async"
+        >Slet Snitflade</app-button
+      >
+    </ng-container>
+    <ng-container *ngIf="(hasModifyPermissions$ | async) === true">
+      <app-button
         class="button-margin-right"
         *ngIf="(interfaceDeactivated$ | async) === true"
         i18n
@@ -22,11 +22,11 @@
         [disabled]="(hasModifyPermissions$ | async) === false"
         (buttonClick)="showActivateDeactivateDialog(false)"
         data-cy="activate-interface-button"
-        >
+      >
         Aktiver snitflade
-        </app-button>
+      </app-button>
 
-        <app-button
+      <app-button
         *ngIf="(interfaceDeactivated$ | async) === false"
         class="button-margin-right"
         i18n
@@ -35,11 +35,11 @@
         [disabled]="(hasModifyPermissions$ | async) === false"
         (buttonClick)="showActivateDeactivateDialog(true)"
         data-cy="deactivate-interface-button"
-        >
+      >
         Deaktiver snitflade
-        </app-button>
-      </ng-container>
-    </app-details-header>
+      </app-button>
+    </ng-container>
+  </app-details-header>
   <div class="content">
     <app-navigation-drawer [items]="navigationItems"> </app-navigation-drawer>
 

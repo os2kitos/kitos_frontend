@@ -2,7 +2,7 @@
   class="app-breadcrumb-item"
   [ngClass]="{ 'app-breadcrumb-item-last': context.last, 'app-breadcrumb-item-text-only': !context.routerCommands }"
   [title]="breadCrumb.text"
-  (click)="itemClicked()"
+  (click)="itemClicked($event)"
 >
   {{ breadCrumb.text }}
 </div>

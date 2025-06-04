@@ -45,7 +45,7 @@
               </app-paragraph>
             </td>
             <td>
-              <app-paragraph [cropOnOverflow]="true">
+              <app-paragraph [cropOnOverflow]="true" [breakWordOnOverflow]="true">
                 {{
                   getCommaSeparatedRecipients(
                     notification.receivers?.emailRecipients,
@@ -55,6 +55,7 @@
               </app-paragraph>
               <app-paragraph
                 [cropOnOverflow]="true"
+                [breakWordOnOverflow]="true"
                 *ngIf="
                   notification.receivers?.emailRecipients?.length === 0 &&
                   notification.receivers?.roleRecipients?.length === 0
@@ -102,10 +103,7 @@
                   <app-x-icon></app-x-icon>
                 </app-icon-button>
                 <!-- 20240527 - Removal should be determined by permissions and not logic like this -- permissions currently not passed in NotificationResponseDTO -->
-                <app-icon-button
-                  (buttonClick)="onRemove(notification)"
-                  *ngIf="!notification.active && !notification.lastSent"
-                >
+                <app-icon-button (buttonClick)="onRemove(notification)" *ngIf="canDelete(notification)">
                   <app-trashcan-icon></app-trashcan-icon>
                 </app-icon-button>
               </app-table-row-actions>

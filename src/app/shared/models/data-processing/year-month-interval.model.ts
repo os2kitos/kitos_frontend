@@ -1,4 +1,4 @@
-import { APIDataProcessingRegistrationReadModel } from "src/app/api/v1";
+import { APIDataProcessingRegistrationReadModel } from 'src/app/api/v1';
 
 export interface YearMonthInterval {
   name: string;
@@ -21,8 +21,7 @@ export const yearMonthIntervalOptions: YearMonthInterval[] = [
 ];
 
 export const mapToYearMonthInterval = (
-  value?: APIDataProcessingRegistrationReadModel.OversightIntervalEnum
+  value?: APIDataProcessingRegistrationReadModel.OversightIntervalEnum,
 ): YearMonthInterval | undefined => {
   return yearMonthIntervalOptions.find((option) => option.value === value);
 };
-

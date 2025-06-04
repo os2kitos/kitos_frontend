@@ -83,7 +83,7 @@ export const regularOptionTypeFeature = createFeature({
         } else {
           return state;
         }
-      }
-    )
+      },
+    ),
   ),
 });

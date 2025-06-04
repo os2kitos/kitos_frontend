@@ -1,49 +1,53 @@
-/// <reference types="Cypress" />
+import { TestRunner } from 'cypress/support/test-runner';
 
-describe('it-system-usage', () => {
-  beforeEach(() => {
-    cy.requireIntercept();
-    cy.setupItSystemUsageIntercepts();
-    cy.setup(true, 'it-systems/it-system-usages');
-  });
+function setupTest() {
+  cy.requireIntercept();
+  cy.setupItSystemUsageIntercepts();
+  cy.setup(true, 'it-systems/it-system-usages');
+}
 
-  it('can show DPR tab when no associated dprs', () => {
-    cy.contains('System 3').click();
+describe('it-system-usage dpr', () => {
+  it('Tests', () => {
+    const testRunner = new TestRunner(setupTest);
 
-    cy.intercept('/api/v2/data-processing-registrations*', []);
+    testRunner.runTestWithSetup('can show DPR tab when no associated dprs', () => {
+      cy.contains('System 3').click();
 
-    cy.navigateToDetailsSubPage('Databehandling');
+      cy.intercept('/api/v2/data-processing-registrations*', []);
 
-    cy.contains('Systemet er ikke omfattet af registreringer i modulet "Databehandling"');
-  });
+      cy.navigateToDetailsSubPage('Databehandling');
 
-  it('can show DPR with two, known associated dprs', () => {
-    cy.contains('System 3').click();
-
-    cy.intercept('/api/v2/data-processing-registrations*', {
-      fixture: './dpr/it-system-usage-data-processing-registrations.json',
+      cy.contains('Systemet er ikke omfattet af registreringer i modulet "Databehandling"');
     });
 
-    cy.navigateToDetailsSubPage('Databehandling');
+    testRunner.runTestWithSetup('can show DPR with two, known associated dprs', () => {
+      cy.contains('System 3').click();
 
-    const expectedRows = [
-      {
-        name: 'DPA 1 - INVALID',
-        valid: false,
-      },
-      {
-        name: 'DPA 2 - VALID',
-        valid: true,
-      },
-    ];
+      cy.intercept('/api/v2/data-processing-registrations*', {
+        fixture: './dpr/it-system-usage-data-processing-registrations.json',
+      });
 
-    cy.get('tr').should('have.length', expectedRows.length);
-    expectedRows.forEach((row) => {
-      const rowElement = cy.contains(row.name);
-      rowElement
-        .parentsUntil('tr')
-        .parent()
-        .contains(row.valid ? 'Aktiv' : 'Inaktiv');
+      cy.navigateToDetailsSubPage('Databehandling');
+
+      const expectedRows = [
+        {
+          name: 'DPA 1 - INVALID',
+          valid: false,
+        },
+        {
+          name: 'DPA 2 - VALID',
+          valid: true,
+        },
+      ];
+
+      cy.get('tr').should('have.length', expectedRows.length);
+      expectedRows.forEach((row) => {
+        const rowElement = cy.contains(row.name);
+        rowElement
+          .parentsUntil('tr')
+          .parent()
+          .contains(row.valid ? 'Aktiv' : 'Ikke aktiv');
+      });
     });
   });
 });

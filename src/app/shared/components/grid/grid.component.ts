@@ -1,16 +1,28 @@
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Actions, ofType } from '@ngrx/effects';
+import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
-import { ExcelExportData } from '@progress/kendo-angular-excel-export';
+import { ExcelExportData, KENDO_EXCELEXPORT } from '@progress/kendo-angular-excel-export';
 import {
   CellClickEvent,
+  CellTemplateDirective,
+  ColumnComponent,
   ColumnReorderEvent,
   ColumnResizeArgs,
+  CustomMessagesComponent,
+  ExcelComponent,
   ExcelExportEvent,
+  FilterCellTemplateDirective,
+  HeaderTemplateDirective,
   GridComponent as KendoGridComponent,
+  LoadingTemplateDirective,
+  NoRecordsTemplateDirective,
   PageChangeEvent,
+  ToolbarTemplateDirective,
 } from '@progress/kendo-angular-grid';
+import { PagerTemplateDirective } from '@progress/kendo-angular-pager';
 import {
   CompositeFilterDescriptor,
   FilterDescriptor,
@@ -19,7 +31,7 @@ import {
   SortDescriptor,
 } from '@progress/kendo-data-query';
 import { cloneDeep, get } from 'lodash';
-import { combineLatest, first, map, Observable, of } from 'rxjs';
+import { BehaviorSubject, combineLatest, debounceTime, first, map, Observable, of } from 'rxjs';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import { GridActions } from 'src/app/store/grid/actions';
 import { selectExportAllColumns, selectReadyToExport } from 'src/app/store/grid/selectors';
@@ -34,27 +46,73 @@ import {
   DEFAULT_COLUMN_WIDTH,
   DEFAULT_DATE_COLUMN_MINIMUM_WIDTH,
   DEFAULT_DATE_COLUMN_WIDTH,
+  DEFAULT_INPUT_DEBOUNCE_TIME,
   DEFAULT_PRIMARY_COLUMN_MINIMUM_WIDTH,
   GRID_ROW_HEIGHT,
 } from '../../constants/constants';
-import { includedColumnInExport, transformRow } from '../../helpers/grid-export.helper';
+import { includedColumnInExport } from '../../helpers/grid-export.helper';
 import { getApplyFilterAction, getSaveFilterAction } from '../../helpers/grid-filter.helpers';
 import { GridColumn } from '../../models/grid-column.model';
 import { GridData } from '../../models/grid-data.model';
 import { DEFAULT_VIRTUALIZTION_PAGE_SIZE, GridState } from '../../models/grid-state.model';
+import { BooleanChange } from '../../models/grid/grid-events.model';
 import { SavedFilterState } from '../../models/grid/saved-filter-state.model';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
 import { UIConfigGridApplication } from '../../models/ui-config/ui-config-grid-application';
-import { StatePersistingService } from '../../services/state-persisting.service';
-import { GridUIConfigService } from '../../services/ui-config-services/grid-ui-config.service';
-import { concatLatestFrom } from '@ngrx/operators';
 import { filterNullish } from '../../pipes/filter-nullish';
-import { CheckboxChange } from '../../models/grid/grid-events.model';
+import { GridExportService } from '../../services/grid-export.service';
+import { LocalStorageService } from '../../services/state-persisting.service';
+import { GridUIConfigService } from '../../services/ui-config-services/grid-ui-config.service';
+import { ArrowDownIconComponent } from '../icons/arrow-down-icon.component';
+import { ArrowUpIconComponent } from '../icons/arrow-up-icon.component';
+import { HelpIconComponent } from '../icons/help.component';
+import { LoadingComponent } from '../loading/loading.component';
+import { ParagraphComponent } from '../paragraph/paragraph.component';
+import { TooltipComponent } from '../tooltip/tooltip.component';
+import { ChoiceTypeDropdownFilterComponent } from './choice-type-dropdown-filter/choice-type-dropdown-filter.component';
+import { DateFilterComponent } from './date-filter/date-filter.component';
+import { DropdownColumnDataFilterComponent } from './dropdown-column-data-filter/dropdown-column-data-filter.component';
+import { DropdownFilterComponent } from './dropdown-filter/dropdown-filter.component';
+import { GridCellComponent } from './grid-cell/grid-cell.component';
+import { GridPaginatorComponent } from './grid-paginator/grid-paginator.component';
+import { NumericFilterComponent } from './numeric-filter/numeric-filter.component';
+import { StringFilterComponent } from './string-filter/string-filter.component';
+import { UnitDropdownFilterComponent } from './unit-dropdown-filter/unit-dropdown-filter.component';
 
 @Component({
   selector: 'app-grid',
   templateUrl: 'grid.component.html',
   styleUrls: ['grid.component.scss'],
+  imports: [
+    CommonModule,
+    KendoGridComponent,
+    ColumnComponent,
+    HeaderTemplateDirective,
+    ParagraphComponent,
+    TooltipComponent,
+    HelpIconComponent,
+    ArrowUpIconComponent,
+    ArrowDownIconComponent,
+    FilterCellTemplateDirective,
+    StringFilterComponent,
+    NumericFilterComponent,
+    DateFilterComponent,
+    DropdownFilterComponent,
+    UnitDropdownFilterComponent,
+    ChoiceTypeDropdownFilterComponent,
+    DropdownColumnDataFilterComponent,
+    CellTemplateDirective,
+    GridCellComponent,
+    PagerTemplateDirective,
+    GridPaginatorComponent,
+    CustomMessagesComponent,
+    LoadingTemplateDirective,
+    LoadingComponent,
+    NoRecordsTemplateDirective,
+    ExcelComponent,
+    ToolbarTemplateDirective,
+    KENDO_EXCELEXPORT,
+  ],
 })
 export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges {
   @ViewChild(KendoGridComponent) grid?: KendoGridComponent;
@@ -75,11 +133,12 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   @Output() rowIdSelect = new EventEmitter<CellClickEvent>();
   @Output() deleteEvent = new EventEmitter<T>();
   @Output() modifyEvent = new EventEmitter<T>();
-  @Output() checkboxChange = new EventEmitter<CheckboxChange>();
+  @Output() checkboxChange = new EventEmitter<BooleanChange<T>>();
 
   private data: GridData | null = null;
   private readonly RolesExtraDataLabel = 'roles';
   private readonly EmailColumnField = '.email';
+  private stateChangeSubject = new BehaviorSubject<GridState | null>(null);
 
   public readonly virtualPageSize = DEFAULT_VIRTUALIZTION_PAGE_SIZE;
 
@@ -98,8 +157,9 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   constructor(
     private actions$: Actions,
     private store: Store,
-    private localStorage: StatePersistingService,
+    private localStorage: LocalStorageService,
     private gridUIConfigService: GridUIConfigService,
+    private readonly gridExportService: GridExportService
   ) {
     super();
     this.allData = this.allData.bind(this);
@@ -107,12 +167,21 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
 
   ngOnInit(): void {
     this.subscriptions.add(
+      this.stateChangeSubject.pipe(debounceTime(DEFAULT_INPUT_DEBOUNCE_TIME)).subscribe((state) => {
+        if (state) {
+          this.stateChange.emit(state);
+        }
+      })
+    );
+
+    this.subscriptions.add(
       this.readyToExport$.subscribe((ready) => {
         if (ready) {
           this.excelExport();
         }
       })
     );
+
     this.subscriptions.add(
       this.data$.subscribe((data) => {
         this.data = data;
@@ -136,7 +205,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     this.subscriptions.add(
       this.columns$.pipe(first()).subscribe((columns) => {
         //This check prevents stale state from being used to sort the grid
-        const columnToBeSorted = columns?.find((column) => column.field === sort[0].field);
+        const columnToBeSorted = columns?.find((column) => column?.field === sort[0]?.field);
         if (!columnToBeSorted || columnToBeSorted.sortable === false) return;
         this.onSortChange(sort);
       })
@@ -152,7 +221,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
 
   public onStateChange(state: GridState) {
     this.state = state;
-    this.stateChange.emit(state);
+    this.stateChangeSubject.next(state);
   }
 
   public onFilterChange(filter: CompositeFilterDescriptor | undefined) {
@@ -224,8 +293,8 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     e.workbook.sheets[0].title = this.exportToExcelName;
   }
 
-  public onCheckboxChange(value: boolean | undefined, rowEntityUuid?: string){
-    this.checkboxChange.emit({ value, rowEntityUuid });
+  public onCheckboxChange(value: boolean, item: T) {
+    this.checkboxChange.emit({ value, item });
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -255,7 +324,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
       .subscribe(([data, exportColumns]) => {
         const processedData = process(data.data, { skip: 0, take: data.data.length });
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        formattedData = processedData.data.map((item: any) => transformRow(item, exportColumns));
+        formattedData = processedData.data.map((item: any) => this.gridExportService.transformRow(item, exportColumns));
       });
     return { data: formattedData };
   }
@@ -272,11 +341,18 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
 
         const roleColumnsInExport = columnsToExport.filter((column) => column.extraData === this.RolesExtraDataLabel);
         const roleColumnFieldsToExport = new Set(roleColumnsInExport.map((column) => column.field));
-        return columnsToExport.filter(
+
+        const result = columnsToExport.filter(
           (column) =>
             !this.isExcelOnlyColumn(column) ||
             roleColumnFieldsToExport.has(column.field.replaceAll(this.EmailColumnField, ''))
         );
+
+        if (exportAllColumns) {
+          return result.sort((a, b) => (a.order_id ?? 0) - (b.order_id ?? 0));
+        }
+
+        return this.moveEmailColumnsToRespectiveRoleColumns(result, roleColumnsInExport);
       })
     );
   }
@@ -300,7 +376,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   }
 
   private getLocalStorageSort(): SortDescriptor[] {
-    return this.localStorage.get(this.localStorageSortKey());
+    return this.localStorage.get(this.localStorageSortKey()) ?? [];
   }
 
   private setLocalStorageSort(sort: SortDescriptor[] | undefined) {
@@ -397,5 +473,26 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
       default:
         return undefined;
     }
+  }
+
+  private moveEmailColumnsToRespectiveRoleColumns(columns: GridColumn[], roleColumns: GridColumn[]): GridColumn[] {
+    const roleEmailColumns = columns.filter((column) => column.field.includes(this.EmailColumnField));
+    const reorderedColumns: GridColumn[] = [];
+
+    columns.forEach((column) => {
+      if (column.field.includes(this.EmailColumnField)) return; // Skip email columns
+
+      reorderedColumns.push(column);
+
+      // If the column is a role column, find its corresponding email column, then add it to the columns
+      if (roleColumns.includes(column)) {
+        const matchingEmailColumn = roleEmailColumns.find((emailColumn) => emailColumn.field.startsWith(column.field));
+        if (matchingEmailColumn) {
+          reorderedColumns.push(matchingEmailColumn);
+        }
+      }
+    });
+
+    return reorderedColumns;
   }
 }

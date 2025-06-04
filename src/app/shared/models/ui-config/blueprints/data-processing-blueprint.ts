@@ -40,6 +40,9 @@ export const DataProcessingUiBluePrint = {
         subProcessors: {
           text: $localize`Underdatabehandlere`,
         },
+        responsibleOrgUnit: {
+          text: $localize`Ansvarlig enhed`,
+        },
       },
     },
     itSystems: {
@@ -73,7 +76,7 @@ export const DataProcessingUiBluePrint = {
         },
         oversights: {
           text: $localize`Gennemførte og kommende tilsyn`,
-        }
+        },
       },
     },
     roles: {

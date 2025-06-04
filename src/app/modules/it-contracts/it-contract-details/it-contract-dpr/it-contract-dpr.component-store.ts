@@ -1,5 +1,6 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { ComponentStore } from '@ngrx/component-store';import { tapResponse } from '@ngrx/operators';
+import { ComponentStore } from '@ngrx/component-store';
+import { tapResponse } from '@ngrx/operators';
 
 import { Store } from '@ngrx/store';
 import { Observable, combineLatestWith, mergeMap, tap } from 'rxjs';
@@ -15,13 +16,16 @@ interface State {
 @Injectable()
 export class ItContractDataProcessingRegistrationsComponentStore extends ComponentStore<State> implements OnDestroy {
   public readonly dataProcessingRegistrations$ = this.select((state) => state.dataProcessingRegistrations).pipe(
-    filterNullish()
+    filterNullish(),
   );
   public readonly dataProcessingRegistrationsIsLoading$ = this.select(
-    (state) => state.dataProcessingRegistrationsIsLoading
+    (state) => state.dataProcessingRegistrationsIsLoading,
   );
 
-  constructor(private readonly store: Store, private readonly contractService: APIV2ItContractInternalINTERNALService) {
+  constructor(
+    private readonly store: Store,
+    private readonly contractService: APIV2ItContractInternalINTERNALService,
+  ) {
     super({ dataProcessingRegistrationsIsLoading: false });
   }
 
@@ -29,14 +33,14 @@ export class ItContractDataProcessingRegistrationsComponentStore extends Compone
     (state, dataProcessingRegistrations: APIIdentityNamePairResponseDTO[]): State => ({
       ...state,
       dataProcessingRegistrations,
-    })
+    }),
   );
 
   private updateDataProcessingRegistrationsIsLoading = this.updater(
     (state, dataProcessingRegistrationsIsLoading: boolean): State => ({
       ...state,
       dataProcessingRegistrationsIsLoading,
-    })
+    }),
   );
 
   public searchDataProcessingRegistrations = this.effect((search$: Observable<string | undefined>) =>
@@ -53,10 +57,10 @@ export class ItContractDataProcessingRegistrationsComponentStore extends Compone
             tapResponse(
               (dprs) => this.updateDataProcessingRegistrations(dprs),
               (e) => console.error(e),
-              () => this.updateDataProcessingRegistrationsIsLoading(false)
-            )
+              () => this.updateDataProcessingRegistrationsIsLoading(false),
+            ),
           );
-      })
-    )
+      }),
+    ),
   );
 }

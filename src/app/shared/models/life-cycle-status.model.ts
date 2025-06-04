@@ -16,10 +16,14 @@ export const lifeCycleStatusOptions: LifeCycleStatus[] = [
     value: APIItSystemUsageValidityResponseDTO.LifeCycleStatusEnum.PhasingOut,
   },
   { name: $localize`Ikke i drift`, value: APIItSystemUsageValidityResponseDTO.LifeCycleStatusEnum.NotInUse },
+  {
+    name: '',
+    value: APIItSystemUsageValidityResponseDTO.LifeCycleStatusEnum.Undecided,
+  },
 ];
 
 export const mapLifeCycleStatus = (
-  value?: APIItSystemUsageValidityResponseDTO.LifeCycleStatusEnum
+  value?: APIItSystemUsageValidityResponseDTO.LifeCycleStatusEnum,
 ): LifeCycleStatus | undefined => {
   return lifeCycleStatusOptions.find((option) => option.value === value);
 };

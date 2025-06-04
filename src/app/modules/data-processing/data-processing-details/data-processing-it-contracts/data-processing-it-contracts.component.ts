@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { combineLatestWith } from 'rxjs';
 import { APIIdentityNamePairResponseDTO } from 'src/app/api/v2';
@@ -13,12 +13,41 @@ import {
   selectDataProcessingIsValid,
   selectDataProcessingMainContract,
 } from 'src/app/store/data-processing/selectors';
-import { selectDprEnableAssociatedContracts, selectDprEnableMainContract } from 'src/app/store/organization/ui-module-customization/selectors';
+import {
+  selectDprEnableAssociatedContracts,
+  selectDprEnableMainContract,
+} from 'src/app/store/organization/ui-module-customization/selectors';
+import { NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { CardComponent } from '../../../../shared/components/card/card.component';
+import { CardHeaderComponent } from '../../../../shared/components/card-header/card-header.component';
+import { DropdownComponent } from '../../../../shared/components/dropdowns/dropdown/dropdown.component';
+import { StatusChipComponent } from '../../../../shared/components/status-chip/status-chip.component';
+import { ParagraphComponent } from '../../../../shared/components/paragraph/paragraph.component';
+import { StandardVerticalContentGridComponent } from '../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { NativeTableComponent } from '../../../../shared/components/native-table/native-table.component';
+import { DetailsPageLinkComponent } from '../../../../shared/components/details-page-link/details-page-link.component';
+import { EmptyStateComponent } from '../../../../shared/components/empty-states/empty-state.component';
 
 @Component({
   selector: 'app-data-processing-it-contracts',
   templateUrl: './data-processing-it-contracts.component.html',
   styleUrl: './data-processing-it-contracts.component.scss',
+  imports: [
+    NgIf,
+    CardComponent,
+    CardHeaderComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    DropdownComponent,
+    StatusChipComponent,
+    ParagraphComponent,
+    StandardVerticalContentGridComponent,
+    NativeTableComponent,
+    NgFor,
+    DetailsPageLinkComponent,
+    EmptyStateComponent,
+    AsyncPipe,
+  ],
 })
 export class DataProcessingItContractsComponent extends BaseComponent implements OnInit {
   public readonly mainContract$ = this.store.select(selectDataProcessingMainContract);
@@ -49,7 +78,7 @@ export class DataProcessingItContractsComponent extends BaseComponent implements
           if (hasModifyPermissions) {
             this.contractFormGroup.enable();
           }
-        })
+        }),
     );
   }
 

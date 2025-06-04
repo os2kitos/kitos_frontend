@@ -1,0 +1,29 @@
+[
+  {
+    "uuid": "199172b2-7237-4a0f-8eae-c4107808bb80",
+    "title": "Invalid url",
+    "documentId": "document1",
+    "url": "www.google.com",
+    "masterReference": false,
+    "lastChangedByUsername": "Jens Jensen",
+    "lastChangedDate": "2025-01-24T13:35:57.9114758Z"
+  },
+  {
+    "uuid": "bb7bfc61-de3d-4337-a84e-0d99e46d0b4e",
+    "title": "Valid url",
+    "documentId": "document2",
+    "url": "https://www.google.com",
+    "masterReference": false,
+    "lastChangedByUsername": "Bruger123",
+    "lastChangedDate": "2025-01-25T13:35:57.9114758Z"
+  },
+  {
+    "uuid": "ec77cd49-e8ed-47e2-8d3b-188e095ea6fc",
+    "title": "No url Master reference",
+    "documentId": "document3",
+    "url": "",
+    "masterReference": true,
+    "lastChangedByUsername": "En tredje bruger",
+    "lastChangedDate": "2025-01-26T13:35:57.9114758Z"
+  }
+]

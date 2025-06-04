@@ -1,5 +1,11 @@
 import { Component } from '@angular/core';
 import { SegmentButtonOption } from 'src/app/shared/components/segment/segment.component';
+import { SegmentComponent } from '../../../shared/components/segment/segment.component';
+import { CardComponent } from '../../../shared/components/card/card.component';
+import { NgIf } from '@angular/common';
+import { OrganizationsGridComponent } from './organizations-grid/organizations-grid.component';
+import { OverviewHeaderComponent } from '../../../shared/components/overview-header/overview-header.component';
+import { LocalOptionTypeViewComponent } from '../../../shared/components/local-option-type-view/local-option-type-view.component';
 
 enum LocalAdminOrganizationSegmentOption {
   Organizations = 'Organizations',
@@ -10,6 +16,14 @@ enum LocalAdminOrganizationSegmentOption {
   selector: 'app-local-admin-organization',
   templateUrl: './local-admin-organization.component.html',
   styleUrl: './local-admin-organization.component.scss',
+  imports: [
+    SegmentComponent,
+    CardComponent,
+    NgIf,
+    OrganizationsGridComponent,
+    OverviewHeaderComponent,
+    LocalOptionTypeViewComponent,
+  ],
 })
 export class LocalAdminOrganizationComponent {
   public readonly LocalAdminOrganizationSegmentOption = LocalAdminOrganizationSegmentOption;
@@ -20,5 +34,4 @@ export class LocalAdminOrganizationComponent {
     { text: $localize`Organisationer`, value: LocalAdminOrganizationSegmentOption.Organizations },
     { text: $localize`Roller`, value: LocalAdminOrganizationSegmentOption.Roles },
   ];
-
 }

@@ -17,3 +17,12 @@ export const createNode = (unit: APIOrganizationUnitResponseDTO, disabledUnitsUu
     description: unit.ean ? `EAN: ${unit.ean}` : undefined,
   } as TreeNodeModel;
 };
+
+export function createIdentityPairNode(name: string, id: string): TreeNodeModel {
+  return {
+    id,
+    name,
+    disabled: false,
+    parentId: '',
+  };
+}

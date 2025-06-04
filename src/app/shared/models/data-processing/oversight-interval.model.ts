@@ -21,7 +21,7 @@ export const oversightIntervalOptions: OversightInterval[] = [
 ];
 
 export const mapToOversightInterval = (
-  value?: APIDataProcessingRegistrationOversightResponseDTO.OversightIntervalEnum
+  value?: APIDataProcessingRegistrationOversightResponseDTO.OversightIntervalEnum,
 ): OversightInterval | undefined => {
   return oversightIntervalOptions.find((option) => option.value === value);
 };

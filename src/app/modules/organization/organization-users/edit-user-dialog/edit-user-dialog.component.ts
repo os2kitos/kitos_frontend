@@ -1,36 +1,81 @@
-import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { debounceTime } from 'rxjs';
+import { debounceTime, of } from 'rxjs';
 import { APIUpdateUserRequestDTO, APIUserResponseDTO } from 'src/app/api/v2';
-import { phoneNumberLengthValidator } from 'src/app/shared/validators/phone-number-length.validator';
+import { notDirtyAndEmptyStringValidator } from 'src/app/shared/validators/not-dirty-and-empty-string-validator';
 import { requiredIfDirtyValidator } from 'src/app/shared/validators/required-if-dirty.validator';
 import { CreateUserDialogComponentStore } from '../create-user-dialog/create-user-dialog.component-store';
 
+import { AsyncPipe, NgIf } from '@angular/common';
+import {
+  BulkActionButton,
+  BulkActionResult,
+} from 'src/app/shared/components/dialogs/bulk-action-dialog/bulk-action-dialog.component';
 import { MultiSelectDropdownComponent } from 'src/app/shared/components/dropdowns/multi-select-dropdown/multi-select-dropdown.component';
+import { ONLY_DIGITS_AND_WHITESPACE_REGEX } from 'src/app/shared/constants/regex-constants';
+import { getUserRoleSelectionDialogSections } from 'src/app/shared/helpers/bulk-action.helpers';
+import { removeWhitespace } from 'src/app/shared/helpers/string.helpers';
+import { getRoleActionRequest } from 'src/app/shared/helpers/user-role.helpers';
 import { ODataOrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
 import { StartPreferenceChoice } from 'src/app/shared/models/organization/organization-user/start-preference.model';
 import {
   mapUserRoleChoice,
   UserRoleChoice,
 } from 'src/app/shared/models/organization/organization-user/user-role.model';
+import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.service';
+import { RoleOptionTypeService } from 'src/app/shared/services/role-option-type.service';
 import { UserService } from 'src/app/shared/services/user.service';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
+import { selectRoleOptionTypes } from 'src/app/store/roles-option-type-store/selectors';
+import { ButtonComponent } from '../../../../shared/components/buttons/button/button.component';
+import { CheckboxComponent } from '../../../../shared/components/checkbox/checkbox.component';
+import { DialogActionsComponent } from '../../../../shared/components/dialogs/dialog-actions/dialog-actions.component';
+import { DialogComponent } from '../../../../shared/components/dialogs/dialog/dialog.component';
+import { DividerComponent } from '../../../../shared/components/divider/divider.component';
+import { DropdownComponent } from '../../../../shared/components/dropdowns/dropdown/dropdown.component';
+import { MultiSelectDropdownComponent as MultiSelectDropdownComponent_1 } from '../../../../shared/components/dropdowns/multi-select-dropdown/multi-select-dropdown.component';
+import { ParagraphComponent } from '../../../../shared/components/paragraph/paragraph.component';
+import { StandardVerticalContentGridComponent } from '../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { TextBoxInfoComponent } from '../../../../shared/components/textbox-info/textbox-info.component';
+import { TextBoxComponent } from '../../../../shared/components/textbox/textbox.component';
 import { BaseUserDialogComponent } from '../base-user-dialog.component';
-import { CopyRolesDialogComponent } from '../copy-roles-dialog/copy-roles-dialog.component';
 
 @Component({
   selector: 'app-edit-user-dialog',
   templateUrl: './edit-user-dialog.component.html',
   styleUrl: './edit-user-dialog.component.scss',
   providers: [CreateUserDialogComponentStore],
+  imports: [
+    DialogComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    StandardVerticalContentGridComponent,
+    TextBoxComponent,
+    NgIf,
+    ParagraphComponent,
+    DropdownComponent,
+    MultiSelectDropdownComponent_1,
+    CheckboxComponent,
+    DividerComponent,
+    TextBoxInfoComponent,
+    DialogActionsComponent,
+    ButtonComponent,
+    AsyncPipe,
+  ],
 })
-export class EditUserDialogComponent extends BaseUserDialogComponent implements OnInit, AfterViewInit {
+export class EditUserDialogComponent extends BaseUserDialogComponent implements OnInit {
   @Input() public user!: ODataOrganizationUser;
   @Input() public isNested!: boolean;
   @ViewChild(MultiSelectDropdownComponent)
   public multiSelectDropdown!: MultiSelectDropdownComponent<APIUserResponseDTO.RolesEnum>;
+  public readonly phoneNumberRegex = ONLY_DIGITS_AND_WHITESPACE_REGEX;
+
+  private readonly availableUnitRoles$ = this.store.select(selectRoleOptionTypes('organization-unit'));
+  private readonly availableContractRoles$ = this.store.select(selectRoleOptionTypes('it-contract'));
+  private readonly availableUsageRoles$ = this.store.select(selectRoleOptionTypes('it-system-usage'));
+  private readonly availableDprRoles$ = this.store.select(selectRoleOptionTypes('data-processing'));
 
   public createForm = new FormGroup({
     firstName: new FormControl<string | undefined>(undefined, Validators.required),
@@ -40,9 +85,8 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
       Validators.email,
       requiredIfDirtyValidator(),
     ]),
-    phoneNumber: new FormControl<string | undefined>(undefined, phoneNumberLengthValidator()),
+    phoneNumber: new FormControl<string | undefined>(undefined, notDirtyAndEmptyStringValidator()),
     defaultStartPreference: new FormControl<StartPreferenceChoice | undefined>(undefined),
-    roles: new FormControl<UserRoleChoice[] | undefined>(undefined),
     hasApiAccess: new FormControl<boolean | undefined>(undefined),
     hasRightsHolderAccess: new FormControl<boolean | undefined>(undefined),
     hasStakeholderAccess: new FormControl<boolean | undefined>(undefined),
@@ -52,8 +96,9 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
 
   constructor(
     private dialogRef: MatDialogRef<EditUserDialogComponent>,
+    private openerService: DialogOpenerService,
+    private roleService: RoleOptionTypeService,
     componentStore: CreateUserDialogComponentStore,
-    private dialog: MatDialog,
     store: Store,
     userService: UserService
   ) {
@@ -61,6 +106,8 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
   }
 
   public ngOnInit(): void {
+    this.roleService.dispatchAllGetAvailableOptions();
+
     this.createForm.patchValue({
       firstName: this.user.FirstName,
       lastName: this.user.LastName,
@@ -93,14 +140,15 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
         }
       })
     );
+    const initialValues = this.getUserRoleChoices();
+    this.selectedRoles = initialValues.map((role) => role.value);
   }
 
-  public ngAfterViewInit(): void {
+  public getUserRoleChoices(): UserRoleChoice[] {
     const initialValues = this.getSelectableRolesThatUserHas()
       .map((role) => mapUserRoleChoice(role))
       .filter((role) => role !== undefined);
-    this.multiSelectDropdown.setValues(initialValues);
-    this.selectedRoles = initialValues.map((role) => role.value);
+    return initialValues;
   }
 
   public onSave(): void {
@@ -126,14 +174,39 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
   }
 
   public onCopyRoles(): void {
-    const dialogRef = this.dialog.open(CopyRolesDialogComponent, {
-      width: '50%',
-      minWidth: '600px',
-      maxWidth: '800px',
-      height: 'auto',
-      maxHeight: '90vh%',
-    });
-    dialogRef.componentInstance.user = this.user;
+    const dialogActions = [
+      {
+        text: $localize`Kopier roller`,
+        color: 'secondary',
+        buttonStyle: 'secondary',
+        callback: (result) => this.copyRoles(result),
+      },
+    ] as BulkActionButton[];
+
+    const dialogRef = this.openerService.openUserRoleSelectionDialog(this.user);
+
+    const instance = dialogRef.componentInstance;
+    instance.title = $localize`Kopier roller`;
+    instance.actionButtons = dialogActions;
+    instance.dropdownTitle = $localize`Kopier roller til`;
+    instance.successActionTypes = OrganizationUserActions.copyRolesSuccess;
+    instance.errorActionTypes = OrganizationUserActions.copyRolesError;
+    instance.sections = getUserRoleSelectionDialogSections(
+      of(this.user),
+      this.availableUnitRoles$,
+      this.availableContractRoles$,
+      this.availableUsageRoles$,
+      this.availableDprRoles$
+    );
+  }
+
+  private copyRoles(result: BulkActionResult): void {
+    const request = getRoleActionRequest(result, this.user);
+
+    if (!result.selectedEntityId) {
+      throw new Error('Selected entity ID is undefined');
+    }
+    this.store.dispatch(OrganizationUserActions.copyRoles(this.user.Uuid, result.selectedEntityId, request));
   }
 
   private hasAnythingChanged(): boolean {
@@ -157,7 +230,7 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
       email: this.requestValue(user.Email, formValue.email),
       firstName: this.requestValue(user.FirstName, formValue.firstName),
       lastName: this.requestValue(user.LastName, formValue.lastName),
-      phoneNumber: this.requestValue(user.PhoneNumber, formValue.phoneNumber),
+      phoneNumber: this.requestValue(user.PhoneNumber, this.getPhoneNumberString(formValue.phoneNumber)),
       defaultUserStartPreference:
         this.requestValue(user.DefaultStartPreference, formValue.defaultStartPreference)?.value ??
         APIUserResponseDTO.DefaultUserStartPreferenceEnum.StartSite,
@@ -214,6 +287,10 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
       roles.push(APIUserResponseDTO.RolesEnum.ContractModuleAdmin);
     }
     return roles;
+  }
+
+  private getPhoneNumberString(phoneNumberFromControl: string | undefined | null) {
+    return phoneNumberFromControl ? removeWhitespace(String(phoneNumberFromControl)) : '';
   }
 
   private requestValue<T>(valueBefore: T, formValue: T | undefined | null) {

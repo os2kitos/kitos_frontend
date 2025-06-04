@@ -15,7 +15,7 @@ export class RegularOptionTypeEffects {
   constructor(
     private actions$: Actions,
     private store: Store,
-    private regularOptionTypeService: RegularOptionTypeService
+    private regularOptionTypeService: RegularOptionTypeService,
   ) {}
 
   getOptions$ = createEffect(() => {
@@ -33,9 +33,9 @@ export class RegularOptionTypeEffects {
       mergeMap((params) =>
         this.regularOptionTypeService.getAvailableOptions(params.organizationUuid, params.optionType).pipe(
           map((response) => RegularOptionTypeActions.getOptionsSuccess(params.optionType, response)),
-          catchError(() => of(RegularOptionTypeActions.getOptionsError(params.optionType)))
-        )
-      )
+          catchError(() => of(RegularOptionTypeActions.getOptionsError(params.optionType))),
+        ),
+      ),
     );
   });
 }

@@ -7,6 +7,7 @@
     [formControlName]="formName"
     [pattern]="pattern"
     (input)="formInputValueChange($event)"
+    class="{{ size }}"
     (focus)="focus(true)"
     (blur)="focus(false)"
   />
@@ -27,6 +28,7 @@
     [maxlength]="maxLength"
     [disabled]="disabled"
     [(ngModel)]="value"
+    class="{{ size }}"
     (ngModelChange)="valueChange.emit($event)"
   />
   <mat-spinner *ngIf="isLoading" [diameter]="20" matSuffix></mat-spinner>

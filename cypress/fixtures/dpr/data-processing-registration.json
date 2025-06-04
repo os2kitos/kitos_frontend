@@ -46,7 +46,11 @@
         "uuid": "c06074f6-6a3c-43b9-862e-47ea6421d1e0",
         "name": "DefaultTestItContract"
       }
-    ]
+    ],
+    "responsibleOrganizationUnit": {
+      "uuid": "0c2c1b3b-0b1b-4b3b-8b3b-0b1b3b0b1b3b",
+      "name": "En enhed"
+    }
   },
   "systemUsages": [],
   "oversight": {

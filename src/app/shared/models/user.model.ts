@@ -23,7 +23,7 @@ export const adaptUser = (apiUser?: APIUserDTO): User | undefined => {
 
   const userOrganizationRight = apiUser?.organizationRights?.find(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (right) => right.role === APIOrganizationRightDTO.RoleEnum.User || right.role === (0 as any)
+    (right) => right.role === APIOrganizationRightDTO.RoleEnum.User || right.role === (0 as any),
   );
   const organizationUuid = userOrganizationRight?.organizationUuid;
   const organizationName = userOrganizationRight?.organizationName;

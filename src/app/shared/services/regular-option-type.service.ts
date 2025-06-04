@@ -87,11 +87,11 @@ export class RegularOptionTypeService {
     @Inject(APIV2DataProcessingRegistrationCountryTypeService)
     private readonly dataProcessingCountryTypesService: APIV2DataProcessingRegistrationCountryTypeService,
     @Inject(APIV2DataProcessingRegistrationOversightTypeService)
-    private readonly dataProcessingOversightOptionsService: APIV2DataProcessingRegistrationOversightTypeService
+    private readonly dataProcessingOversightOptionsService: APIV2DataProcessingRegistrationOversightTypeService,
   ) {}
 
   private resolveLocalOptionsEndpoint(
-    optionType: RegularOptionType
+    optionType: RegularOptionType,
   ): (organizationUuid: string) => Observable<Array<APIRegularOptionResponseDTO>> {
     switch (optionType) {
       case 'it-system_business-type':
@@ -223,7 +223,7 @@ export class RegularOptionTypeService {
    */
   public getAvailableOptions(
     organizationUuid: string,
-    optionType: RegularOptionType
+    optionType: RegularOptionType,
   ): Observable<Array<APIRegularOptionResponseDTO>> {
     return this.resolveLocalOptionsEndpoint(optionType)(organizationUuid);
   }

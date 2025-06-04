@@ -8,7 +8,7 @@ export const LocalOptionTypeActions = createActionGroup({
     'Uppdate Option Type': (
       optionType: LocalAdminOptionType,
       optionUuid: string,
-      request: APILocalRegularOptionUpdateRequestDTO
+      request: APILocalRegularOptionUpdateRequestDTO,
     ) => ({ optionType, optionUuid, request }),
     'Update Option Type Active Status': (optionType: LocalAdminOptionType, optionUuid: string, isActive: boolean) => ({
       optionType,

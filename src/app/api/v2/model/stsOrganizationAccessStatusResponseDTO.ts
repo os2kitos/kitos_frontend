@@ -22,13 +22,14 @@ export interface APIStsOrganizationAccessStatusResponseDTO {
     error?: APIStsOrganizationAccessStatusResponseDTO.ErrorEnum;
 }
 export namespace APIStsOrganizationAccessStatusResponseDTO {
-    export type ErrorEnum = 'InvalidCvrOnOrganization' | 'MissingServiceAgreement' | 'ExistingServiceAgreementIssue' | 'Unknown' | 'UserContextDoesNotExistOnSystem';
+    export type ErrorEnum = 'InvalidCvrOnOrganization' | 'MissingServiceAgreement' | 'ExistingServiceAgreementIssue' | 'Unknown' | 'UserContextDoesNotExistOnSystem' | 'FailedToLookupOrganizationCompany';
     export const ErrorEnum = {
         InvalidCvrOnOrganization: 'InvalidCvrOnOrganization' as ErrorEnum,
         MissingServiceAgreement: 'MissingServiceAgreement' as ErrorEnum,
         ExistingServiceAgreementIssue: 'ExistingServiceAgreementIssue' as ErrorEnum,
         Unknown: 'Unknown' as ErrorEnum,
-        UserContextDoesNotExistOnSystem: 'UserContextDoesNotExistOnSystem' as ErrorEnum
+        UserContextDoesNotExistOnSystem: 'UserContextDoesNotExistOnSystem' as ErrorEnum,
+        FailedToLookupOrganizationCompany: 'FailedToLookupOrganizationCompany' as ErrorEnum
     };
 }
 

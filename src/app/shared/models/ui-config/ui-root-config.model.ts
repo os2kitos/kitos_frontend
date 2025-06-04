@@ -4,9 +4,10 @@ export interface UIRootConfig {
   showItSystemModule?: boolean;
 }
 
-export function mapUIRootConfig
+export function mapUIRootConfig(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  (dto: any): UIRootConfig {
+  dto: any,
+): UIRootConfig {
   return {
     showItContractModule: dto.showItContractModule,
     showDataProcessing: dto.showDataProcessing,

@@ -5,14 +5,16 @@
     </app-button>
     <div class="container">
       <h3 class="title-align-bottom">
-        <span class="title-container">
-          {{ title }}
+        <span class="title-container" data-cy="dialog-title">
+          <a *ngIf="url" [href]="url" target="_blank" data-cy="dialog-title-link">
+            {{ title }}
+          </a>
+          <span *ngIf="!url">
+            {{ title }}
+          </span>
         </span>
       </h3>
-      <app-help-button
-        [helpTextKey]="helpText"
-        [ngClass]="{ 'hide-help-button': !helpText }"
-      ></app-help-button>
+      <app-help-button [helpTextKey]="helpText" [ngClass]="{ 'hide-help-button': !helpText }"></app-help-button>
     </div>
   </div>
 </ng-container>

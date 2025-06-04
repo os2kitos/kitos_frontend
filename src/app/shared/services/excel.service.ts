@@ -21,7 +21,10 @@ export class APIExcelService {
   private configuration: any;
   private fileNamePrefix = 'OS2KITOS';
 
-  constructor(private httpClient: HttpClient, private apiService: APIV1ExcelINTERNALService) {
+  constructor(
+    private httpClient: HttpClient,
+    private apiService: APIV1ExcelINTERNALService,
+  ) {
     this.basePath = this.apiService['configuration'].basePath ?? '';
     this.defaultHeaders = this.apiService['defaultHeaders'];
     this.encoder = this.apiService['encoder'];
@@ -36,7 +39,7 @@ export class APIExcelService {
       map((blob) => ({
         data: blob,
         fileName: entityFileName,
-      }))
+      })),
     );
   }
 
@@ -60,7 +63,7 @@ export class APIExcelService {
 
   public postExcelWithFormData(
     requestParameters: PostSingleExcelOrgUnitsRequestParameters,
-    type: LocalAdminImportEntityType
+    type: LocalAdminImportEntityType,
   ): Observable<any> {
     const entityName = this.getEntityName(type);
     return this.postSingleExcelInternalV2PostByEntityName(requestParameters, entityName);
@@ -86,7 +89,7 @@ export class APIExcelService {
         explode: false,
         dataType: 'string',
         dataFormat: 'uuid',
-      }
+      },
     )}`;
     return this.httpClient.request<Blob>('get', `${this.configuration.basePath}${localVarPath}`, {
       context: new HttpContext(),
@@ -98,24 +101,24 @@ export class APIExcelService {
 
   private postSingleExcelInternalV2PostByEntityName(
     requestParameters: PostSingleExcelOrgUnitsRequestParameters,
-    entityName: string
+    entityName: string,
   ): Observable<any> {
     const organizationUuid = requestParameters.organizationUuid;
     if (organizationUuid === null || organizationUuid === undefined) {
       throw new Error(
-        'Required parameter organizationUuid was null or undefined when calling postSingleExcelInternalV2PostOrgUnits.'
+        'Required parameter organizationUuid was null or undefined when calling postSingleExcelInternalV2PostOrgUnits.',
       );
     }
     const importOrgUnits = requestParameters.importOrgUnits;
     if (importOrgUnits === null || importOrgUnits === undefined) {
       throw new Error(
-        'Required parameter importOrgUnits was null or undefined when calling postSingleExcelInternalV2PostOrgUnits.'
+        'Required parameter importOrgUnits was null or undefined when calling postSingleExcelInternalV2PostOrgUnits.',
       );
     }
     const body = requestParameters.body;
     if (body === null || body === undefined) {
       throw new Error(
-        'Required parameter body was null or undefined when calling postSingleExcelInternalV2PostOrgUnits.'
+        'Required parameter body was null or undefined when calling postSingleExcelInternalV2PostOrgUnits.',
       );
     }
 
@@ -152,7 +155,7 @@ export class APIExcelService {
         explode: false,
         dataType: 'string',
         dataFormat: 'uuid',
-      }
+      },
     )}`;
     return this.httpClient.request<any>('post', `${this.basePath}${localVarPath}`, {
       context: new HttpContext(),

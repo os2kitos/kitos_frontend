@@ -1,12 +1,12 @@
-@import "theme";
-@import "mixins";
+@use "theme";
+@use "mixins";
 
-@include grid-style;
+@include mixins.grid-style;
 
 .grid-outline {
   border: 1px solid #ccc;
   border-radius: 4px;
-  padding: $padding-small;
+  padding: theme.$padding-small;
   padding-top: 0;
 }
 
@@ -23,8 +23,4 @@
 
 .expand-height-to-content {
   height: auto;
-}
-
-:host .dragging {
-  user-select: none !important;
 }

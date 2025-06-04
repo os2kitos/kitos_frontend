@@ -33,7 +33,7 @@ export const fkOrgConnectionChangeTypeChoiceOptions: FkOrgConnectionChangeTypeCh
 ];
 
 export const mapFkOrgConnectionChangeType = (
-  value?: APIConnectionUpdateOrganizationUnitConsequenceDTO.CategoryEnum
+  value?: APIConnectionUpdateOrganizationUnitConsequenceDTO.CategoryEnum,
 ): FkOrgConnectionChangeTypeChoice | undefined => {
   return fkOrgConnectionChangeTypeChoiceOptions.find((option) => option.value === value);
 };

@@ -1,4 +1,4 @@
-@import "theme";
+@use "theme";
 
 :host ::ng-deep {
   .mdc-checkbox__checkmark-path {
@@ -16,8 +16,8 @@
 
   mat-checkbox {
     label {
-      padding-right: $padding-smaller;
-      color: $color-neutral-dark;
+      padding-right: theme.$padding-smaller;
+      color: theme.$color-neutral-dark;
     }
   }
 
@@ -27,25 +27,25 @@
 
   .mat-mdc-checkbox-ripple,
   .mdc-checkbox__ripple {
-    border-radius: $radius-large;
+    border-radius: theme.$radius-large;
   }
 
   .mat-mdc-checkbox.mat-accent {
     //Selected state
-    --mdc-checkbox-selected-checkmark-color: #{$color-white};
-    --mdc-checkbox-selected-focus-icon-color: #{$color-primary-base};
-    --mdc-checkbox-selected-hover-icon-color: #{$color-primary-base};
-    --mdc-checkbox-selected-icon-color: #{$color-primary-base};
-    --mdc-checkbox-selected-pressed-icon-color: #{$color-primary-base};
+    --mdc-checkbox-selected-checkmark-color: #{theme.$color-white};
+    --mdc-checkbox-selected-focus-icon-color: #{theme.$color-primary-base};
+    --mdc-checkbox-selected-hover-icon-color: #{theme.$color-primary-base};
+    --mdc-checkbox-selected-icon-color: #{theme.$color-primary-base};
+    --mdc-checkbox-selected-pressed-icon-color: #{theme.$color-primary-base};
 
     //Unselected state
-    --mdc-checkbox-unselected-icon-color: #{$color-neutral-60};
-    --mdc-checkbox-unselected-pressed-icon-color: #{$color-primary-base};
-    --mdc-checkbox-unselected-focus-icon-color: #{$color-primary-base};
-    --mdc-checkbox-unselected-hover-icon-color: #{$color-primary-base};
+    --mdc-checkbox-unselected-icon-color: #{theme.$color-neutral-60};
+    --mdc-checkbox-unselected-pressed-icon-color: #{theme.$color-primary-base};
+    --mdc-checkbox-unselected-focus-icon-color: #{theme.$color-primary-base};
+    --mdc-checkbox-unselected-hover-icon-color: #{theme.$color-primary-base};
 
     //Diabled state
-    --mdc-checkbox-disabled-selected-icon-color: #{$color-neutral-60};
-    --mdc-checkbox-disabled-unselected-icon-color: #{$color-neutral-60};
+    --mdc-checkbox-disabled-selected-icon-color: #{theme.$color-neutral-60};
+    --mdc-checkbox-disabled-unselected-icon-color: #{theme.$color-neutral-60};
   }
 }

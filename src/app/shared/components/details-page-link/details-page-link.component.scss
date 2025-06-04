@@ -1,13 +1,6 @@
-@import "theme";
+@use "theme";
+@use "mixins";
 
 :host {
-  .details-page-link-medium {
-    font-size: $link-font-size-medium;
-  }
-  .details-page-link-small {
-    font-size: $link-font-size-small;
-  }
-  .details-page-link-x-small {
-    font-size: $link-font-size-x-small;
-  }
+  @include mixins.details-page-link-font-sizes;
 }

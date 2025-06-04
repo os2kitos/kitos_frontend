@@ -27,10 +27,7 @@ export const OperationRemunerationBegunDate = 'OperationRemunerationBegunDate';
 export const PaymentModelUuid = 'PaymentModelUuid';
 export const PaymentFrequencyUuid = 'PaymentFrequencyUuid';
 export const LatestAuditDate = 'LatestAuditDate';
-export const AuditStatusGreen = 'AuditStatusGreen';
-export const AuditStatusRed = 'AuditStatusRed';
-export const AuditStatusYellow = 'AuditStatusYellow';
-export const AuditStatusWhite = 'AuditStatusWhite';
+export const AuditStatus = 'AuditStatus';
 export const Duration = 'Duration';
 export const OptionExtendUuid = 'OptionExtendUuid';
 export const TerminationDeadlineUuid = 'TerminationDeadlineUuid';
@@ -39,4 +36,3 @@ export const TerminatedAt = 'TerminatedAt';
 export const LastEditedByUserName = 'LastEditedByUserName';
 export const LastEditedAtDate = 'LastEditedAtDate';
 export const ItSystemUsageUuidsAsCsv = 'ItSystemUsageUuidsAsCsv';
-

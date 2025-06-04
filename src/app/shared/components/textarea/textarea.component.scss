@@ -1,5 +1,5 @@
-@import "theme";
-@import "mixins";
+@use "theme";
+@use "mixins";
 
 :host {
   display: flex;
@@ -15,5 +15,9 @@ mat-form-field {
   --offset: 17px;
   --scale: calc(12 / 16);
 
-  @include mat-input-adjustment;
+  @include mixins.mat-input-adjustment;
+}
+
+.disabled {
+  color: theme.$color-neutral-80 !important;
 }

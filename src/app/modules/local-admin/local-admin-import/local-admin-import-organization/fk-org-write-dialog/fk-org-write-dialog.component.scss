@@ -1,8 +1,8 @@
-@import "theme";
+@use "theme";
 
 .import-units-card-adjust-bottom-margin {
   margin-bottom: 0 !important;
-  padding: $padding-medium !important;
+  padding: theme.$padding-medium !important;
 }
 
 .levels-margin-bottom {
@@ -10,11 +10,11 @@
 }
 
 .configuration-margin-bottom {
-  margin-bottom: $padding-medium;
+  margin-bottom: theme.$padding-medium;
 }
 
 .consequences-header-container {
-  margin-bottom: $padding-medium;
+  margin-bottom: theme.$padding-medium;
 }
 
 .overflow-hidden {

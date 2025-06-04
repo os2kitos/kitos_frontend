@@ -3,9 +3,7 @@ import { Subject, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { DEFAULT_INPUT_DEBOUNCE_TIME } from '../constants/constants';
 
-@Directive({
-  selector: '[appAfterValueChanged]',
-})
+@Directive({ selector: '[appAfterValueChanged]' })
 export class AfterValueChangedDirective<T> implements OnDestroy {
   @Output()
   public appAfterValueChanged: EventEmitter<T> = new EventEmitter<T>();

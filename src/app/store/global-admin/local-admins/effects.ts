@@ -8,13 +8,14 @@ import { UserActions } from '../../user-store/actions';
 import { concatLatestFrom } from '@ngrx/operators';
 import { selectUserUuid } from '../../user-store/selectors';
 import { Store } from '@ngrx/store';
+import { OrganizationUserActions } from '../../organization/organization-user/actions';
 
 @Injectable()
 export class LocalAdminUserEffects {
   constructor(
     private actions$: Actions,
     private globalUserService: APIV2GlobalUserInternalINTERNALService,
-    private store: Store
+    private store: Store,
   ) {}
 
   getLocalAdmins$ = createEffect(() => {
@@ -24,9 +25,9 @@ export class LocalAdminUserEffects {
         return this.globalUserService.getManyGlobalUserInternalV2GetAllLocalAdmins().pipe(
           map((adminsDto) => adminsDto.map((userDto) => adaptLocalAdminUser(userDto))),
           map((admins) => LocalAdminUserActions.getLocalAdminsSuccess(admins)),
-          catchError(() => of(LocalAdminUserActions.getLocalAdminsError()))
+          catchError(() => of(LocalAdminUserActions.getLocalAdminsError())),
         );
-      })
+      }),
     );
   });
 
@@ -37,9 +38,9 @@ export class LocalAdminUserEffects {
         return this.globalUserService.postSingleGlobalUserInternalV2AddLocalAdmin({ organizationUuid, userUuid }).pipe(
           map((userDto) => adaptLocalAdminUser(userDto)),
           map((user) => LocalAdminUserActions.addLocalAdminSuccess(user)),
-          catchError(() => of(LocalAdminUserActions.addLocalAdminError()))
+          catchError(() => of(LocalAdminUserActions.addLocalAdminError())),
         );
-      })
+      }),
     );
   });
 
@@ -51,26 +52,32 @@ export class LocalAdminUserEffects {
           .deleteSingleGlobalUserInternalV2RemoveLocalAdmin({ organizationUuid, userUuid })
           .pipe(
             map(() => LocalAdminUserActions.removeLocalAdminSuccess(organizationUuid, userUuid)),
-            catchError(() => of(LocalAdminUserActions.removeLocalAdminError()))
+            catchError(() => of(LocalAdminUserActions.removeLocalAdminError())),
           );
-      })
+      }),
     );
   });
 
   updateUserAuthentication$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(LocalAdminUserActions.addLocalAdminSuccess, LocalAdminUserActions.removeLocalAdminSuccess),
+      ofType(
+        LocalAdminUserActions.addLocalAdminSuccess,
+        LocalAdminUserActions.removeLocalAdminSuccess,
+        OrganizationUserActions.updateUserSuccess,
+      ),
       map((action) => {
         switch (action.type) {
           case LocalAdminUserActions.addLocalAdminSuccess.type:
             return action.user.user.uuid;
           case LocalAdminUserActions.removeLocalAdminSuccess.type:
             return action.userUuid;
+          case OrganizationUserActions.updateUserSuccess.type:
+            return action.user.uuid;
         }
       }),
       concatLatestFrom(() => this.store.select(selectUserUuid)),
       filter(([modifiedUserUuid, currentUserUuid]) => modifiedUserUuid === currentUserUuid),
-      map(() => UserActions.authenticate())
+      map(() => UserActions.authenticate()),
     );
   });
 }

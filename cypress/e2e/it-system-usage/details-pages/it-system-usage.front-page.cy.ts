@@ -1,6 +1,6 @@
-/// <reference types="Cypress" />
+/// <reference types="cypress" />
 
-describe('it-system-usage', () => {
+describe('it-system-usage frontpage', () => {
   beforeEach(() => {
     cy.requireIntercept();
     cy.setupItSystemUsageIntercepts();
@@ -33,12 +33,18 @@ describe('it-system-usage', () => {
     cy.intercept('/api/v2/business-types*', { fixture: './shared/business-types.json' });
     cy.intercept('/api/v2/kle-options', { fixture: './shared/kles.json' });
 
+    cy.getByDataCy('web-accessibility-compliance').within(() => cy.contains('Ja'));
+    cy.inputByCy('last-web-accessibility-check').should('have.value', '27-02-2025');
+    cy.textareaByCy('web-accessibility-notes').should('have.value', 'en note om tilgængelighed');
+
     cy.contains('Data fra IT Systemkataloget').click();
 
     cy.contains('Ikke tilgængeligt');
 
     // Test parent system deactivated
     cy.input('Overordnet system').should('have.value', 'System 3 (ikke tilgængeligt)');
+    cy.getByDataCy('legal-name').find('input').should('have.value', 'DBS navn 123');
+    cy.getByDataCy('legal-data-processor-name').find('input').should('have.value', 'DBS databehandler navn 123');
 
     // Test obselete option
     cy.dropdown('Forretningstype').should('have.text', 'Test (udgået)');
@@ -119,7 +125,7 @@ describe('it-system-usage', () => {
     cy.contains('System 3').click();
 
     cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' }).as(
-      'patch1'
+      'patch1',
     );
 
     cy.input('Systemnavn (lokalt)').clear().type('TEST');
@@ -131,7 +137,7 @@ describe('it-system-usage', () => {
     cy.contains('Feltet blev opdateret');
 
     cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' }).as(
-      'patch2'
+      'patch2',
     );
     cy.dropdown('Antal brugere', '50-100');
     cy.wait('@patch2')
@@ -139,7 +145,7 @@ describe('it-system-usage', () => {
       .should('deep.eq', { general: { numberOfExpectedUsers: { lowerBound: 50, upperBound: 100 } } });
 
     cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' }).as(
-      'patch3'
+      'patch3',
     );
     cy.dropdown('Livscyklus', 'Ikke i drift');
     cy.wait('@patch3')
@@ -147,7 +153,7 @@ describe('it-system-usage', () => {
       .should('deep.eq', { general: { validity: { lifeCycleStatus: 'NotInUse' } } });
 
     cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' }).as(
-      'patch4'
+      'patch4',
     );
     cy.input('Ibrugtagningsdato').clear().type('31052022');
     cy.input('Systemnavn ID').click({ force: true });
@@ -156,6 +162,16 @@ describe('it-system-usage', () => {
       .should('deep.eq', { general: { validity: { validFrom: 'Tue May 31 2022' } } });
 
     cy.contains('Feltet blev opdateret');
+
+    expectGeneralPropertyUpdate({ webAccessibilityCompliance: 'No' }, () =>
+      cy.dropdownByCy('web-accessibility-compliance', 'Nej', true),
+    );
+    expectGeneralPropertyUpdate({ lastWebAccessibilityCheck: 'Thu Mar 27 2025' }, () =>
+      cy.inputByCy('last-web-accessibility-check').clear().type('27032025').blur(),
+    );
+    expectGeneralPropertyUpdate({ webAccessibilityNotes: 'ny note' }, () =>
+      cy.textareaByCy('web-accessibility-notes').clear().type('ny note').blur(),
+    );
   });
 
   it('does not override focused form fields', () => {
@@ -187,3 +203,18 @@ describe('it-system-usage', () => {
     cy.contains('"Slutdato for anvendelse" er ugyldig');
   });
 });
+
+function expectGeneralPropertyUpdate(generalBody: object, initiator: () => void) {
+  const randomPatchName = Math.random().toString(36).substring(7);
+  cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' }).as(
+    randomPatchName,
+  );
+
+  initiator();
+
+  cy.wait('@' + randomPatchName)
+    .its('request.body')
+    .should('deep.eq', {
+      general: generalBody,
+    });
+}

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { UIModuleConfigKey } from '../../enums/ui-module-config-key';
 import { DataProcessingUiBluePrint } from '../../models/ui-config/blueprints/data-processing-blueprint';
+import { GdprUiBluePrint } from '../../models/ui-config/blueprints/gdpr-blueprint';
 import { ItContractsUiBluePrint } from '../../models/ui-config/blueprints/it-contracts-blueprint';
 import { ItSystemUsageUiBluePrint } from '../../models/ui-config/blueprints/it-system-usages-blueprint';
 import { UIConfigNodeViewModel } from '../../models/ui-config/ui-config-node-view-model.model';
@@ -16,7 +17,7 @@ export class UIConfigService {
     const blueprint = this.getUIBlueprintWithFullKeys(module);
     const moduleConfigViewModel: UIConfigNodeViewModel | undefined = this.buildUIConfigNodeViewModels(
       blueprint,
-      uiModuleCustomizations
+      uiModuleCustomizations,
     );
     return { module, moduleConfigViewModel, cacheTime: undefined };
   }
@@ -33,14 +34,14 @@ export class UIConfigService {
   private buildBasicNodeViewModel(
     node: UINodeBlueprint,
     uiNodeCustomizations: UINodeCustomization[],
-    nodeFullKey: string
+    nodeFullKey: string,
   ): UIConfigNodeViewModel {
     const nodeViewModel: UIConfigNodeViewModel = {
       text: node.text,
       helpText: node.helpText,
       fullKey: nodeFullKey,
       isObligatory: node.isObligatory ?? false,
-      isEnabled: true,
+      isEnabled: !node.disableByDefault,
       disableIfSubtreeDisabled: node.disableIfSubtreeDisabled,
     };
 
@@ -53,7 +54,7 @@ export class UIConfigService {
 
   private buildUIConfigNodeViewModels(
     node: UINodeBlueprint,
-    uiNodeCustomizations: UINodeCustomization[]
+    uiNodeCustomizations: UINodeCustomization[],
   ): UIConfigNodeViewModel | undefined {
     if (!node.fullKey) return undefined;
 
@@ -81,8 +82,13 @@ export class UIConfigService {
         return ItContractsUiBluePrint;
       case UIModuleConfigKey.DataProcessingRegistrations:
         return DataProcessingUiBluePrint;
-      default:
-        throw new Error(`No blueprint found for module ${module}`);
+      case UIModuleConfigKey.Gdpr:
+        return GdprUiBluePrint;
+      default: {
+        const error = `No blueprint found for module ${module}`;
+        console.error(error);
+        throw new Error(error);
+      }
     }
   }
 

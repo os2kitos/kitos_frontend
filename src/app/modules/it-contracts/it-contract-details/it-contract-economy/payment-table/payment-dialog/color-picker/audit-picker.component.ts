@@ -3,11 +3,16 @@ import { Component, EventEmitter, OnChanges, OnInit, Output } from '@angular/cor
 import { APIPaymentResponseDTO } from 'src/app/api/v2';
 import { BaseDropdownComponent } from 'src/app/shared/base/base-dropdown.component';
 import { AuditModel, baseAuditStatusValue } from 'src/app/shared/models/it-contract/audit-model';
+import { NgIf } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgSelectComponent, NgOptionTemplateDirective } from '@ng-select/ng-select';
+import { ColorCircleComponent } from '../../../color-circle/color-circle.component';
 
 @Component({
   selector: 'app-audit-picker',
   templateUrl: './audit-picker.component.html',
   styleUrl: './audit-picker.component.scss',
+  imports: [NgIf, FormsModule, ReactiveFormsModule, NgSelectComponent, NgOptionTemplateDirective, ColorCircleComponent],
 })
 export class AuditPickerComponent extends BaseDropdownComponent<AuditModel | null> implements OnInit, OnChanges {
   @Output() public openDropdown = new EventEmitter();
@@ -28,7 +33,7 @@ export class AuditPickerComponent extends BaseDropdownComponent<AuditModel | nul
 
     // Update value subject to be used in calculating obselete values
     this.subscriptions.add(
-      this.formGroup?.controls[this.formName]?.valueChanges.subscribe((value) => this.formValueSubject$.next(value))
+      this.formGroup?.controls[this.formName]?.valueChanges.subscribe((value) => this.formValueSubject$.next(value)),
     );
 
     // Push initial values to value and data form subjects

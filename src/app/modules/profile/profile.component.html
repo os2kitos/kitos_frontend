@@ -2,7 +2,7 @@
 <app-card>
   <app-form-grid [formGroup]="editForm" *ngIf="(isLoading$ | async) === false">
     <app-org-unit-select
-      *ngIf="isUserInPrimaryOrganization$ | async"
+      *ngIf="hasRoleInOrganization$ | async"
       text="Primær organisationsenhed"
       i18n-text
       data-cy="default-responsible"
@@ -11,11 +11,11 @@
       [clearable]="false"
       (valueChange)="onChange({ defaultOrganizationUnitUuid: $event })"
     ></app-org-unit-select>
-    <div *ngIf="(isUserInPrimaryOrganization$ | async) !== true">
+    <div *ngIf="(hasRoleInOrganization$ | async) !== true">
       <app-textbox text="Primær organisationsenhed" [disabled]="true" i18n-text> </app-textbox>
       <app-textbox-info
         ><app-paragraph paragraphSize="x-small" i18n>
-          For at ændre din primære organisationsenhed, skal du skifte til "{{ userOrganizationName$ | async }}".
+          Du kan kun tilknytte en primær organisationsenhed, i organisationer du har en rolle i.
         </app-paragraph>
       </app-textbox-info>
     </div>
@@ -54,12 +54,11 @@
     <app-textbox
       text="Telefonnummer"
       i18n-text
-      type="tel"
-      pattern="^\+?[0-9]*$"
+      [pattern]="phoneNumberRegex"
       [formGroup]="editForm"
       formName="phoneNumber"
       data-cy="phoneNumber"
-      (valueChange)="onChange({ phoneNumber: $event })"
+      (validatedValueChange)="phoneNumberChange($event)"
     >
     </app-textbox>
     <app-dropdown

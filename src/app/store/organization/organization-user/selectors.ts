@@ -20,9 +20,6 @@ export const selectOrganizationUserGridColumns = createSelector(
   (state) => state.gridColumns
 );
 
-export const selectOrganizationUserByIndex = (index: number) =>
-  createSelector(selectAll, (organizationUsers) => organizationUsers[index]);
-
 export const selectOrganizationUserByUuid = (uuid: string) =>
   createSelector(selectAll, (organizationUsers) => organizationUsers.find((user) => user.Uuid === uuid));
 

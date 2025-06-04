@@ -90,7 +90,10 @@
           "ParentId": 1
         }
       ],
-      "AssociatedContracts": []
+      "AssociatedContracts": [],
+      "WebAccessibilityCompliance": "No",
+      "LastWebAccessibilityCheck": "2024-08-20T00:00:00Z",
+      "WebAccessibilityNotes": "en note om tilgængelighed"
     },
     {
       "Id": 3,

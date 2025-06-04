@@ -2,12 +2,14 @@
   #selectDropdown
   class="{{ size }} "
   [placeholder]="text"
+  [fixedPlaceholder]="true"
   [items]="data ?? []"
   [bindLabel]="textField"
   [loading]="loading || false"
   [clearAllText]="clearAllText"
   [loadingText]="loadingText"
   [notFoundText]="notFoundText"
+  [searchFn]="useExternalSearch ? externalSearch : null"
   (search)="filter$.next($event.term)"
   (clear)="onClear()"
   (focus)="onFocus()"
@@ -19,23 +21,32 @@
   [disabled]="disabled"
   [closeOnSelect]="false"
   [(ngModel)]="selectedValuesModel"
+  (ngModelChange)="onSelected($event)"
   [addTagText]="addTagText"
   [addTag]="includeAddTag ? onCreateNew : false"
+  data-cy="multi-select-dropdown"
 >
   <ng-template ng-option-tmp let-item="item" let-item$="item$">
-    <div class="select-option-row" (click)="onSelected(item)">
+    <div class="select-option-row" [attr.data-cy]="item.dataCy">
       <input
         id="item-{{ item.name }}"
         type="checkbox"
         [(ngModel)]="item$.selected"
         [ngModelOptions]="{ standalone: true }"
+        [disabled]="item.disabled"
       />
-      <p class="select-option-text-margin">
+      <p class="select-option-text-margin" *ngIf="!showDescription || !item.description">
         {{ item.name }}
       </p>
+      <div *ngIf="item.description && showDescription" class="item-with-description">
+        {{ item.name }}
+        <app-paragraph *ngIf="item.description && showDescription" paragraphSize="small">{{
+          item.description
+        }}</app-paragraph>
+      </div>
       <div *ngIf="isTagFn(item)" class="ng-clear-wrapper remove-tag-button" (click)="removeTag(item)">
         <span class="ng-clear">x</span>
-      </div>
+      </div>  
     </div>
   </ng-template>
   <ng-template ng-multi-label-tmp let-items="items">

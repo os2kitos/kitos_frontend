@@ -1,9 +1,15 @@
-import { DOCUMENT } from '@angular/common';
+import { DOCUMENT, NgClass, NgIf, NgFor, NgTemplateOutlet } from '@angular/common';
 import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { getDetailsPageLink } from '../../helpers/link.helpers';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
 import { EntityTreeNode, EntityTreeNodeMoveResult } from '../../models/structure/entity-tree-node.model';
+import { ChevronDownIconComponent } from '../icons/chevron-down-icon.component';
+import { ChevronRightIconComponent } from '../icons/chevron-right-icon.component';
+import { CheckboxComponent } from '../checkbox/checkbox.component';
+import { DetailsPageLinkComponent } from '../details-page-link/details-page-link.component';
+import { DragIconComponent } from '../icons/drag-icon.component';
+import { CdkDragHandle, CdkDropList, CdkDrag } from '@angular/cdk/drag-drop';
 
 interface DropInfo {
   targetId: string;
@@ -14,6 +20,20 @@ interface DropInfo {
   selector: 'app-drag-and-drop-tree[nodes][itemType]',
   templateUrl: './drag-and-drop-tree.component.html',
   styleUrls: ['./drag-and-drop-tree.component.scss'],
+  imports: [
+    NgClass,
+    NgIf,
+    ChevronDownIconComponent,
+    ChevronRightIconComponent,
+    CheckboxComponent,
+    DetailsPageLinkComponent,
+    DragIconComponent,
+    CdkDragHandle,
+    CdkDropList,
+    NgFor,
+    CdkDrag,
+    NgTemplateOutlet,
+  ],
 })
 export class DragAndDropTreeComponent<T> implements OnInit {
   public toggleStatusText = 'status';
@@ -40,7 +60,10 @@ export class DragAndDropTreeComponent<T> implements OnInit {
 
   private readonly nodeStandardColor = 'standard';
 
-  constructor(@Inject(DOCUMENT) private document: Document, private router: Router) {}
+  constructor(
+    @Inject(DOCUMENT) private document: Document,
+    private router: Router,
+  ) {}
 
   ngOnInit(): void {
     this.prepareDragDrop(this.nodes);

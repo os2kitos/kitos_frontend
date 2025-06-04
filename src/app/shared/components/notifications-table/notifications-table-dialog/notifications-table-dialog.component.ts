@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
@@ -11,6 +12,7 @@ import {
 } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { EMAIL_REGEX_PATTERN } from 'src/app/shared/constants/constants';
+import { AppPath } from 'src/app/shared/enums/app-path';
 import {
   dateGreaterThanOrEqualControlValidator,
   dateGreaterThanOrEqualToDateValidator,
@@ -35,6 +37,11 @@ import { ValidatedValueChange } from 'src/app/shared/models/validated-value-chan
 import { AppRootUrlResolverService } from 'src/app/shared/services/app-root-url-resolver.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { UserNotificationActions } from 'src/app/store/user-notifications/actions';
+import { DialogActionsComponent } from '../../dialogs/dialog-actions/dialog-actions.component';
+import { DialogComponent } from '../../dialogs/dialog/dialog.component';
+import { RichTextEditorComponent } from '../../rich-text-editor/rich-text-editor.component';
+import { sharedFormComponents } from '../../shared-components';
+import { StandardVerticalContentGridComponent } from '../../standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { NotificationsTableComponentStore } from '../notifications-table.component-store';
 
 @Component({
@@ -42,6 +49,14 @@ import { NotificationsTableComponentStore } from '../notifications-table.compone
   templateUrl: './notifications-table-dialog.component.html',
   styleUrl: './notifications-table-dialog.component.scss',
   providers: [NotificationsTableComponentStore],
+  imports: [
+    CommonModule,
+    sharedFormComponents,
+    DialogComponent,
+    DialogActionsComponent,
+    StandardVerticalContentGridComponent,
+    RichTextEditorComponent,
+  ],
 })
 export class NotificationsTableDialogComponent extends BaseComponent implements OnInit {
   @Input() public title!: string;
@@ -74,7 +89,7 @@ export class NotificationsTableDialogComponent extends BaseComponent implements 
     repetitionControl: new FormControl<NotificationRepetitionFrequency | undefined>(undefined),
     fromDateControl: new FormControl<Date | undefined>(undefined),
     toDateControl: new FormControl<Date | undefined>(undefined),
-    bodyControl: new FormControl<string | undefined>(undefined, Validators.required),
+    bodyControl: new FormControl<string | undefined>(undefined),
   });
 
   public readonly notificationTypeOptions = notificationTypeOptions;
@@ -118,6 +133,38 @@ export class NotificationsTableDialogComponent extends BaseComponent implements 
         this.canEdit = false;
         this.disableForm();
       }
+    }
+  }
+
+  public getDefaultNotificationBody() {
+    const goToText = $localize`Gå til`;
+    return `<a href="${this.getEntityLink()}">${goToText} ${this.getEntityName()}</a>`;
+  }
+
+  public getEntityLink() {
+    const modulePath = this.getEntityModulePath();
+    return `${this.rootUrl}/${modulePath}/${this.ownerEntityUuid}`;
+  }
+
+  private getEntityModulePath() {
+    switch (this.ownerResourceType) {
+      case 'ItSystemUsage':
+        return `${AppPath.itSystems}/${AppPath.itSystemUsages}`;
+      case 'DataProcessingRegistration':
+        return AppPath.dataProcessing;
+      case 'ItContract':
+        return AppPath.itContracts;
+    }
+  }
+
+  public getEntityName() {
+    switch (this.ownerResourceType) {
+      case 'ItSystemUsage':
+        return $localize`systemanvendelse`;
+      case 'DataProcessingRegistration':
+        return $localize`databehandling`;
+      case 'ItContract':
+        return $localize`kontrakt`;
     }
   }
 
@@ -239,7 +286,7 @@ export class NotificationsTableDialogComponent extends BaseComponent implements 
     const emailCcs = mappedCcs.emailRecipients;
     const roleCcs = mappedCcs.roleRecipients;
 
-    if (subject && body && (roleReceivers.length > 0 || emailReceivers.length > 0)) {
+    if (subject && this.hasRecipients(roleReceivers, emailReceivers)) {
       return {
         subject: subject,
         body: body,
@@ -254,6 +301,10 @@ export class NotificationsTableDialogComponent extends BaseComponent implements 
       };
     }
     return undefined;
+  }
+
+  private hasRecipients(roleReceivers: { roleUuid: string }[], emailReceivers: APIEmailRecipientWriteRequestDTO[]) {
+    return roleReceivers.length > 0 || emailReceivers.length > 0;
   }
 
   private saveScheduledNotification(scheduledNotificationDto: APIScheduledNotificationWriteRequestDTO) {
@@ -357,6 +408,7 @@ export class NotificationsTableDialogComponent extends BaseComponent implements 
       today.setHours(0, 0, 0, 0);
       notificationControls.fromDateControl.addValidators(dateGreaterThanOrEqualToDateValidator(today));
       notificationControls.fromDateControl.updateValueAndValidity();
+      notificationControls.bodyControl.setValue(this.getDefaultNotificationBody());
     }
   }
 

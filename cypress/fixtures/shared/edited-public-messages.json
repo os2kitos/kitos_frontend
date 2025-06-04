@@ -1,0 +1,50 @@
+[
+  {
+    "uuid": "c769bffc-129f-493f-b283-f1dfe16c1f3b",
+    "title": "Ny titel",
+    "longDescription": "Lang beskrivelse.",
+    "shortDescription": "Kort beskrivelse.",
+    "status": "Inactive",
+    "link": "https://www.youtube.com"
+  },
+  {
+    "uuid": "c19be801-8a98-4d0a-89d2-ab7ae083e556",
+    "title": "Skabeloner",
+    "longDescription": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer tortor ligula, malesuada nec molestie sit amet, tempor quis elit. Suspendisse porttitor imperdiet lacus, sed ultrices augue pharetra sed. Maecenas rutrum metus non dui blandit, vel dignissim lacus pellentesque. Etiam magna nunc, lacinia blandit diam in, laoreet gravida urna. Suspendisse potenti. Nunc ornare sapien sit amet faucibus eleifend. Nunc eros sapien, hendrerit in lacus sit amet, posuere auctor augue. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Integer imperdiet ante id nunc tincidunt lacinia. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Vivamus pharetra lorem ut libero fringilla iaculis. Curabitur et suscipit leo, non fermentum nibh. Proin id leo vehicula, dignissim felis vitae, imperdiet leo.</p>",
+    "shortDescription": "Brugerklubben i Kitos har et filarkiv, hvor du og dine kolleger kan tilgå materiale om Kitos.",
+    "status": null,
+    "link": "https://google.com"
+  },
+  {
+    "uuid": "316bdb10-ab35-42a3-a62e-c11b56b834fc",
+    "title": "Driftsstatus",
+    "longDescription": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer tortor ligula, malesuada nec molestie sit amet, tempor quis elit. Suspendisse porttitor imperdiet lacus, sed ultrices augue pharetra sed. Maecenas rutrum metus non dui blandit, vel dignissim lacus pellentesque. Etiam magna nunc, lacinia blandit diam in, laoreet gravida urna. Suspendisse potenti. Nunc ornare sapien sit amet faucibus eleifend. Nunc eros sapien, hendrerit in lacus sit amet, posuere auctor augue. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Integer imperdiet ante id nunc tincidunt lacinia. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Vivamus pharetra lorem ut libero fringilla iaculis. Curabitur et suscipit leo, non fermentum nibh. Proin id leo vehicula, dignissim felis vitae, imperdiet leo.</p>",
+    "shortDescription": "Hvis der opleves fejl i Kitos vil du kunne se en begrundelse på denne side.",
+    "status": "Active",
+    "link": "https://google.com"
+  },
+  {
+    "uuid": "a087dd24-0b39-481b-9034-7ef65b9168e7",
+    "title": "Arrangementer",
+    "longDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer tortor ligula, malesuada nec molestie sit amet, tempor quis elit. Suspendisse porttitor imperdiet lacus, sed ultrices augue pharetra sed. Maecenas rutrum metus non dui blandit, vel dignissim lacus pellentesque. Etiam magna nunc, lacinia blandit diam in, laoreet gravida urna. Suspendisse potenti. Nunc ornare sapien sit amet faucibus eleifend. Nunc eros sapien, hendrerit in lacus sit amet, posuere auctor augue. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Integer imperdiet ante id nunc tincidunt lacinia. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Vivamus pharetra lorem ut libero fringilla iaculis. Curabitur et suscipit leo, non fermentum nibh. Proin id leo vehicula, dignissim felis vitae, imperdiet leo.",
+    "shortDescription": "Brugerklubben holder løbende arrangementer, som du har mulighed for at tilmelde dig.",
+    "status": null,
+    "link": "https://google.com"
+  },
+  {
+    "uuid": "eecebbe7-0df6-46bf-b7a8-a967f78c0588",
+    "title": "OS2Kitos kontaktpersoner",
+    "longDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer tortor ligula, malesuada nec molestie sit amet, tempor quis elit. Suspendisse porttitor imperdiet lacus, sed ultrices augue pharetra sed. Maecenas rutrum metus non dui blandit, vel dignissim lacus pellentesque. Etiam magna nunc, lacinia blandit diam in, laoreet gravida urna. Suspendisse potenti. Nunc ornare sapien sit amet faucibus eleifend. Nunc eros sapien, hendrerit in lacus sit amet, posuere auctor augue. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Integer imperdiet ante id nunc tincidunt lacinia. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Vivamus pharetra lorem ut libero fringilla iaculis. Curabitur et suscipit leo, non fermentum nibh. Proin id leo vehicula, dignissim felis vitae, imperdiet leo.",
+    "shortDescription": "Se hvem, der er Kitos kontaktpersoner i kommunerne og spar med hinanden.",
+    "status": null,
+    "link": "https://google.com"
+  },
+  {
+    "uuid": "e1d7c129-252b-42c7-9eee-6cf839de52f6",
+    "title": "Kontakt",
+    "longDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer tortor ligula, malesuada nec molestie sit amet, tempor quis elit. Suspendisse porttitor imperdiet lacus, sed ultrices augue pharetra sed. Maecenas rutrum metus non dui blandit, vel dignissim lacus pellentesque. Etiam magna nunc, lacinia blandit diam in, laoreet gravida urna. Suspendisse potenti. Nunc ornare sapien sit amet faucibus eleifend. Nunc eros sapien, hendrerit in lacus sit amet, posuere auctor augue. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Integer imperdiet ante id nunc tincidunt lacinia. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Vivamus pharetra lorem ut libero fringilla iaculis. Curabitur et suscipit leo, non fermentum nibh. Proin id leo vehicula, dignissim felis vitae, imperdiet leo.",
+    "shortDescription": "Har du nogen spørgsmål til Kitos? Kontakt os og vi vil hjælpe dig hurtigst muligt.",
+    "status": null,
+    "link": "https://google.com"
+  }
+]

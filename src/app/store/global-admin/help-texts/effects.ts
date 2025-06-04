@@ -11,7 +11,7 @@ export class GlobalAdminHelpTextsEffects {
   constructor(
     private actions$: Actions,
     @Inject(APIV2HelpTextsInternalINTERNALService)
-    private helpTextsInternalService: APIV2HelpTextsInternalINTERNALService
+    private helpTextsInternalService: APIV2HelpTextsInternalINTERNALService,
   ) {}
 
   getHelpTexts$ = createEffect(() => {
@@ -19,20 +19,18 @@ export class GlobalAdminHelpTextsEffects {
       ofType(
         HelpTextActions.getHelpTexts,
         HelpTextActions.deleteHelpTextSuccess,
-        HelpTextActions.updateHelpTextSuccess
+        HelpTextActions.updateHelpTextSuccess,
       ),
       switchMap(() => {
         return this.helpTextsInternalService.getManyHelpTextsInternalV2GetAll().pipe(
-          map((helptextDtos) =>
-            HelpTextActions.getHelpTextsSuccess(this.adaptAndSortHelpTexts(helptextDtos))
-          ),
-          catchError(() => of(HelpTextActions.getHelpTextsError()))
+          map((helptextDtos) => HelpTextActions.getHelpTextsSuccess(this.adaptAndSortHelpTexts(helptextDtos))),
+          catchError(() => of(HelpTextActions.getHelpTextsError())),
         );
-      })
+      }),
     );
   });
 
-  private adaptAndSortHelpTexts(dtos: APIHelpTextResponseDTO[]): HelpText[]{
+  private adaptAndSortHelpTexts(dtos: APIHelpTextResponseDTO[]): HelpText[] {
     return dtos.map((dto) => adaptHelpText(dto)).sort((a, b) => a.Key.localeCompare(b.Key));
   }
 
@@ -42,9 +40,9 @@ export class GlobalAdminHelpTextsEffects {
       switchMap(({ request }) => {
         return this.helpTextsInternalService.postSingleHelpTextsInternalV2Post({ dto: request }).pipe(
           map((helpTextDto) => HelpTextActions.createHelpTextSuccess(adaptHelpText(helpTextDto))),
-          catchError(() => of(HelpTextActions.createHelpTextError()))
+          catchError(() => of(HelpTextActions.createHelpTextError())),
         );
-      })
+      }),
     );
   });
 
@@ -54,9 +52,9 @@ export class GlobalAdminHelpTextsEffects {
       switchMap(({ key, request }) => {
         return this.helpTextsInternalService.patchSingleHelpTextsInternalV2Patch({ key, dto: request }).pipe(
           map((helpTextDto) => HelpTextActions.updateHelpTextSuccess(adaptHelpText(helpTextDto))),
-          catchError(() => of(HelpTextActions.updateHelpTextError()))
+          catchError(() => of(HelpTextActions.updateHelpTextError())),
         );
-      })
+      }),
     );
   });
 
@@ -66,9 +64,9 @@ export class GlobalAdminHelpTextsEffects {
       switchMap(({ key }) => {
         return this.helpTextsInternalService.deleteSingleHelpTextsInternalV2Delete({ key }).pipe(
           map(() => HelpTextActions.deleteHelpTextSuccess()),
-          catchError(() => of(HelpTextActions.deleteHelpTextError()))
+          catchError(() => of(HelpTextActions.deleteHelpTextError())),
         );
-      })
+      }),
     );
   });
 }

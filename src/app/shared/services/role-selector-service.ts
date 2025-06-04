@@ -1,53 +1,13 @@
 import { Injectable } from '@angular/core';
 import { ODataOrganizationUser, Right } from '../models/organization/organization-user/organization-user.model';
 import { RegistrationEntityTypes } from '../models/registrations/registration-entity-categories.model';
+import { EntitySelectionService } from './entity-selector-service';
 
 @Injectable()
-export class RoleSelectionService {
-  private selectedItems: Map<RegistrationEntityTypes, Set<Right>> = new Map();
-
+export class RoleSelectionService extends EntitySelectionService<Right, RegistrationEntityTypes> {
   constructor() {
-    this.selectedItems.set('organization-unit', new Set());
-    this.selectedItems.set('it-system', new Set());
-    this.selectedItems.set('it-contract', new Set());
-    this.selectedItems.set('data-processing-registration', new Set());
-  }
-
-  selectItem(entityType: RegistrationEntityTypes, right: Right): void {
-    this.selectedItems.get(entityType)?.add(right);
-  }
-
-  deselectItem(entityType: RegistrationEntityTypes, right: Right): void {
-    this.selectedItems.get(entityType)?.delete(right);
-  }
-
-  isItemSelected(entityType: RegistrationEntityTypes, right: Right): boolean {
-    return this.selectedItems.get(entityType)?.has(right) ?? false;
-  }
-
-  selectAllOfType(entityType: RegistrationEntityTypes, rights: Right[]): void {
-    this.selectedItems.set(entityType, new Set(rights));
-  }
-
-  deselectAllOfType(entityType: RegistrationEntityTypes): void {
-    this.selectedItems.set(entityType, new Set());
-  }
-
-  deselectAll(): void {
-    this.selectedItems.forEach((_, entityType) => this.deselectAllOfType(entityType));
-  }
-
-  isAllOfTypeSelected(entityType: RegistrationEntityTypes, rights: Right[]): boolean {
-    return rights.every((right) => this.isItemSelected(entityType, right));
-  }
-
-  getSelectedItemsOfType(entityType: RegistrationEntityTypes): Right[] {
-    return Array.from(this.selectedItems.get(entityType)?.values() ?? []);
-  }
-
-  getSelectedItems(): Right[] {
-    const sets = Array.from(this.selectedItems.values());
-    return sets.flatMap((set) => Array.from(set));
+    super();
+    this.initSelectedItems(['organization-unit', 'it-system', 'it-contract', 'data-processing-registration']);
   }
 
   selectAll(user: ODataOrganizationUser): void {

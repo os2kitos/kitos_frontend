@@ -1,16 +1,16 @@
-@import "theme";
+@use "theme";
 
 :host {
   display: flex;
 }
 
 app-button {
-  padding-bottom: $padding-small;
+  padding-bottom: theme.$padding-small;
 }
 
 ::ng-deep .mat-mdc-menu-panel.mat-mdc-menu-panel.button-menu-component {
   min-width: auto !important;
-  border-radius: $radius-large;
+  border-radius: theme.$radius-large;
 
   ::ng-deep svg {
     width: 20px;
@@ -18,7 +18,7 @@ app-button {
   }
 
   .mat-mdc-menu-content {
-    padding: $padding-smaller 0;
+    padding: theme.$padding-smaller 0;
   }
 }
 

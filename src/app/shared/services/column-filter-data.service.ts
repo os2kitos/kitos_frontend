@@ -20,7 +20,7 @@ export class ColumnFilterDataService {
         return this.store.select(selectAppliedProcurementPlans).pipe(
           filterNullish(),
           map((plans) => plans.map((plan) => formatProcurementPlan(plan.year, plan.quarter))),
-          map((plans) => plans.map((plan) => ({ name: plan, value: plan })))
+          map((plans) => plans.map((plan) => ({ name: plan, value: plan }))),
         );
     }
   }

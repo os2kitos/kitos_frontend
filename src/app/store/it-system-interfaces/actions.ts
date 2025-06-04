@@ -36,7 +36,7 @@ export const ITInterfaceActions = createActionGroup({
     'Get IT Interface permissions Error': emptyProps(),
     'Get IT Interface Collection Permissions': () => emptyProps(),
     'Get IT Interface Collection Permissions Success': (
-      collectionPermissions: APIResourceCollectionPermissionsResponseDTO
+      collectionPermissions: APIResourceCollectionPermissionsResponseDTO,
     ) => ({
       collectionPermissions,
     }),

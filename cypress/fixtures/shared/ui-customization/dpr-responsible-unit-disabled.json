@@ -1,0 +1,9 @@
+{
+  "module": "DataProcessingRegistrations",
+  "nodes": [
+    {
+      "key": "DataProcessingRegistrations.frontPage.responsibleOrgUnit",
+      "enabled": false
+    }
+  ]
+}

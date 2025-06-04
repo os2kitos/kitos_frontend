@@ -48,7 +48,8 @@
       "rules": {
         "@ngrx/avoid-mapping-selectors": ["off"],
         "@ngrx/no-store-subscription": ["off"],
-        "@ngrx/avoid-dispatching-multiple-actions-sequentially": ["off"]
+        "@ngrx/avoid-dispatching-multiple-actions-sequentially": ["off"],
+        "@angular-eslint/prefer-standalone": ["off"]
       }
     }
   ]

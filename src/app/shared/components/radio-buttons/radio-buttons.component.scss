@@ -1,13 +1,13 @@
-@import "theme";
+@use "theme";
 :host {
   ::ng-deep app-standard-vertical-content-grid {
-    grid-gap: $padding-smaller;
+    grid-gap: theme.$padding-smaller;
   }
 
   label {
     font-size: 12px;
     font-weight: bold;
-    color: $color-neutral-dark;
+    color: theme.$color-neutral-dark;
   }
 
   .mdc-checkbox__background {
@@ -16,7 +16,7 @@
 
   .mat-mdc-checkbox-ripple,
   .mdc-checkbox__ripple {
-    border-radius: $radius-large;
+    border-radius: theme.$radius-large;
   }
 
   ::ng-deep .mdc-radio__outer-circle {
@@ -29,26 +29,26 @@
 
   ::ng-deep .mat-mdc-radio-button {
     label {
-      padding-right: $padding-medium;
-      color: $color-neutral-dark;
+      padding-right: theme.$padding-medium;
+      color: theme.$color-neutral-dark;
     }
   }
 
   .mat-mdc-radio-button.mat-accent {
     // Selected state
-    --mdc-radio-selected-focus-icon-color: #{$color-primary-base};
-    --mdc-radio-selected-hover-icon-color: #{$color-primary-base};
-    --mdc-radio-selected-icon-color: #{$color-primary-base};
-    --mdc-radio-selected-pressed-icon-color: #{$color-primary-base};
+    --mdc-radio-selected-focus-icon-color: #{theme.$color-primary-base};
+    --mdc-radio-selected-hover-icon-color: #{theme.$color-primary-base};
+    --mdc-radio-selected-icon-color: #{theme.$color-primary-base};
+    --mdc-radio-selected-pressed-icon-color: #{theme.$color-primary-base};
 
     //Unselected state
-    --mdc-radio-unselected-focus-icon-color: #{$color-primary-base};
-    --mdc-radio-unselected-hover-icon-color: #{$color-primary-base};
-    --mdc-radio-unselected-icon-color: #{$color-neutral-60};
-    --mdc-radio-unselected-pressed-icon-color: #{$color-primary-base};
+    --mdc-radio-unselected-focus-icon-color: #{theme.$color-primary-base};
+    --mdc-radio-unselected-hover-icon-color: #{theme.$color-primary-base};
+    --mdc-radio-unselected-icon-color: #{theme.$color-neutral-60};
+    --mdc-radio-unselected-pressed-icon-color: #{theme.$color-primary-base};
 
     //disabled state
-    --mdc-radio-disabled-selected-icon-color: #{$color-neutral-base};
-    --mdc-radio-disabled-unselected-icon-color: #{$color-neutral-base};
+    --mdc-radio-disabled-selected-icon-color: #{theme.$color-neutral-base};
+    --mdc-radio-disabled-unselected-icon-color: #{theme.$color-neutral-base};
   }
 }

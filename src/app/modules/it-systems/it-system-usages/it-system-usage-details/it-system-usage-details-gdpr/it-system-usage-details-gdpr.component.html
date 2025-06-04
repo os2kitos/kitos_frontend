@@ -29,6 +29,13 @@
       (expandedChanged)="expandedSectionChanged($event, 'registered-categories')"
       data-cy="registed-categories-accordion"
     ></app-registered-data-categories-section>
+    <app-gdpr-user-supervision-section
+      *ngIf="userSupervisionEnabled$ | async"
+      (noPermissions)="disableFormsIfNoPermissions($event)"
+      [isExpanded$]="userSupervisionExpanded$"
+      (expandedChanged)="expandedSectionChanged($event, 'user-supervision')"
+      data-cy="user-supervision-accordion"
+    ></app-gdpr-user-supervision-section>
     <app-gdpr-technical-precautions-section
       *ngIf="technicalPrecautionsEnabled$ | async"
       (noPermissions)="disableFormsIfNoPermissions($event)"
@@ -37,13 +44,6 @@
       (expandedChanged)="expandedSectionChanged($event, 'technical-precautions')"
       data-cy="technical-precautions-accordion"
     ></app-gdpr-technical-precautions-section>
-    <app-gdpr-user-supervision-section
-      *ngIf="userSupervisionEnabled$ | async"
-      (noPermissions)="disableFormsIfNoPermissions($event)"
-      [isExpanded$]="userSupervisionExpanded$"
-      (expandedChanged)="expandedSectionChanged($event, 'user-supervision')"
-      data-cy="user-supervision-accordion"
-    ></app-gdpr-user-supervision-section>
     <app-gdpr-risk-assessment-section
       *ngIf="showRiskAssessment$ | async"
       (noPermissions)="disableFormsIfNoPermissions($event)"

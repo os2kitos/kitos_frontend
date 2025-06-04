@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
@@ -12,6 +12,15 @@ import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-stor
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 import { ModifyRelationDialogComponent } from '../modify-relation-dialog/modify-relation-dialog.component';
 import { ItSystemUsageDetailsRelationsDialogComponentStore } from './relation-dialog.component-store';
+import { DialogComponent } from '../../../../../../shared/components/dialogs/dialog/dialog.component';
+import { StandardVerticalContentGridComponent } from '../../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { ConnectedDropdownComponent } from '../../../../../../shared/components/dropdowns/connected-dropdown/connected-dropdown.component';
+import { TextAreaComponent } from '../../../../../../shared/components/textarea/textarea.component';
+import { TextBoxComponent } from '../../../../../../shared/components/textbox/textbox.component';
+import { DropdownComponent } from '../../../../../../shared/components/dropdowns/dropdown/dropdown.component';
+import { DialogActionsComponent } from '../../../../../../shared/components/dialogs/dialog-actions/dialog-actions.component';
+import { ButtonComponent } from '../../../../../../shared/components/buttons/button/button.component';
+import { AsyncPipe } from '@angular/common';
 
 export interface SystemRelationDialogFormModel {
   systemUsage: FormControl<APIIdentityNamePairResponseDTO | null | undefined>;
@@ -26,6 +35,19 @@ export interface SystemRelationDialogFormModel {
   selector: 'app-system-relation-dialog[title][saveText][relationForm]',
   templateUrl: './system-relation-dialog.component.html',
   styleUrls: ['./system-relation-dialog.component.scss'],
+  imports: [
+    DialogComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    StandardVerticalContentGridComponent,
+    ConnectedDropdownComponent,
+    TextAreaComponent,
+    TextBoxComponent,
+    DropdownComponent,
+    DialogActionsComponent,
+    ButtonComponent,
+    AsyncPipe,
+  ],
 })
 export class SystemRelationDialogComponent extends BaseComponent implements OnInit {
   @Input() public title!: string;
@@ -61,7 +83,7 @@ export class SystemRelationDialogComponent extends BaseComponent implements OnIn
     protected readonly store: Store,
     protected readonly componentStore: ItSystemUsageDetailsRelationsDialogComponentStore,
     private readonly dialog: MatDialogRef<ModifyRelationDialogComponent>,
-    private readonly actions$: Actions
+    private readonly actions$: Actions,
   ) {
     super();
   }
@@ -75,7 +97,7 @@ export class SystemRelationDialogComponent extends BaseComponent implements OnIn
         .pipe(map(([systemUuid, searchTerm]) => ({ systemUuid, searchTerm })))
         .subscribe(({ systemUuid, searchTerm }) => {
           this.componentStore.getItInterfaces({ systemUuid: systemUuid, search: searchTerm });
-        })
+        }),
     );
 
     //when usage is selected enable the form, otherwise turn it off (other than the usage dropdown)
@@ -88,7 +110,7 @@ export class SystemRelationDialogComponent extends BaseComponent implements OnIn
           this.relationForm.disable();
           this.relationForm.controls['systemUsage'].enable();
         }
-      })
+      }),
     );
 
     //on success close the dialog
@@ -97,11 +119,11 @@ export class SystemRelationDialogComponent extends BaseComponent implements OnIn
         .pipe(
           ofType(
             ITSystemUsageActions.addItSystemUsageRelationSuccess,
-            ITSystemUsageActions.patchItSystemUsageRelationSuccess
+            ITSystemUsageActions.patchItSystemUsageRelationSuccess,
           ),
-          first()
+          first(),
         )
-        .subscribe(() => this.dialog.close())
+        .subscribe(() => this.dialog.close()),
     );
 
     //on error set isBusy to false
@@ -110,12 +132,12 @@ export class SystemRelationDialogComponent extends BaseComponent implements OnIn
         .pipe(
           ofType(
             ITSystemUsageActions.addItSystemUsageRelationError,
-            ITSystemUsageActions.patchItSystemUsageRelationError
-          )
+            ITSystemUsageActions.patchItSystemUsageRelationError,
+          ),
         )
         .subscribe(() => {
           this.isBusy = false;
-        })
+        }),
     );
   }
 

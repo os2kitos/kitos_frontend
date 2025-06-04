@@ -1,4 +1,3 @@
-
 export type Cached<T> = {
   value: T | undefined;
   cacheTime: number | undefined;

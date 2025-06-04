@@ -19,7 +19,7 @@ export const technicalPrecautionsOptions: TechnicalPrecautions[] = [
 ];
 
 export const mapTechnicalPecautions = (
-  value?: APIGDPRRegistrationsResponseDTO.TechnicalPrecautionsAppliedEnum
+  value?: APIGDPRRegistrationsResponseDTO.TechnicalPrecautionsAppliedEnum,
 ): TechnicalPrecautions | undefined => {
   return technicalPrecautionsOptions.find((option) => option.value === value);
 };

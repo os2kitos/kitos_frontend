@@ -1,6 +1,6 @@
 <app-standard-vertical-content-grid *ngIf="(isLoading$ | async) === false">
-    <ng-container *ngIf="anyRoles$ | async">
-        <ng-content></ng-content>
+  <ng-container *ngIf="anyRoles$ | async">
+    <ng-content></ng-content>
   </ng-container>
   <app-empty-state
     *ngIf="(anyRoles$ | async) === false"

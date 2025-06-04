@@ -18,7 +18,7 @@ export const numberOfExpectedUsersOptions: NumberOfExpectedUsers[] = [
 ];
 
 export const mapNumberOfExpectedUsers = (
-  numberOfExpectedUsers?: APIExpectedUsersIntervalDTO
+  numberOfExpectedUsers?: APIExpectedUsersIntervalDTO,
 ): NumberOfExpectedUsers | undefined => {
   return numberOfExpectedUsersOptions.find((option) => option.value.lowerBound === numberOfExpectedUsers?.lowerBound);
 };

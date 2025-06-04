@@ -1,14 +1,14 @@
-@import "theme";
+@use "theme";
 
 :host {
   display: flex;
   flex-direction: column;
-  max-width: $content-width-max;
-  margin: $padding-large auto;
-  padding: 0 $padding-large;
+  max-width: theme.$content-width-max;
+  margin: theme.$padding-large auto;
+  padding: 0 theme.$padding-large;
 }
 
 .content {
   display: flex;
-  gap: $padding-medium;
+  gap: theme.$padding-medium;
 }

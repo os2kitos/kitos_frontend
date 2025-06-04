@@ -3,17 +3,18 @@ import { ComponentStore } from '@ngrx/component-store';
 import { tapResponse } from '@ngrx/operators';
 
 import { switchMap, tap } from 'rxjs';
-import { APIPublicMessagesResponseDTO, APIV2PublicMessagesINTERNALService } from 'src/app/api/v2';
+import { APIPublicMessageResponseDTO, APIV2PublicMessagesINTERNALService } from 'src/app/api/v2';
+import { adaptPublicMessage, PublicMessage } from 'src/app/shared/models/public-messages/public-message.model';
 
 interface FrontpageComponentStoreState {
   loading: boolean;
-  text?: APIPublicMessagesResponseDTO;
+  publicMessages?: PublicMessage[];
 }
 
 @Injectable({ providedIn: 'any' })
 export class FrontpageComponentStore extends ComponentStore<FrontpageComponentStoreState> {
   public readonly loading$ = this.select((state) => state.loading);
-  public readonly text$ = this.select((state) => state.text);
+  public readonly publicMessages$ = this.select((state) => state.publicMessages);
 
   constructor(@Inject(APIV2PublicMessagesINTERNALService) private apiTextService: APIV2PublicMessagesINTERNALService) {
     super({
@@ -25,31 +26,31 @@ export class FrontpageComponentStore extends ComponentStore<FrontpageComponentSt
     (state, loading: boolean): FrontpageComponentStoreState => ({
       ...state,
       loading,
-    })
+    }),
   );
 
-  private updateText = this.updater(
-    (state, text: APIPublicMessagesResponseDTO): FrontpageComponentStoreState => ({
+  private updatePublicMessages = this.updater(
+    (state, publicMessages: PublicMessage[]): FrontpageComponentStoreState => ({
       ...state,
       loading: false,
-      text,
-    })
+      publicMessages,
+    }),
   );
 
-  public getText = this.effect<void>((trigger$) =>
+  public getPublicMessages = this.effect<void>((trigger$) =>
     trigger$.pipe(
       tap(() => this.updateLoading(true)),
       switchMap(() =>
-        this.apiTextService.getSinglePublicMessagesV2Get().pipe(
+        this.apiTextService.getManyPublicMessagesV2Get().pipe(
           tapResponse(
-            (response: APIPublicMessagesResponseDTO) => this.updateText(response),
+            (response: APIPublicMessageResponseDTO[]) => this.updatePublicMessages(response.map(adaptPublicMessage)),
             (e) => {
               console.error(e);
             },
-            () => this.updateLoading(false)
-          )
-        )
-      )
-    )
+            () => this.updateLoading(false),
+          ),
+        ),
+      ),
+    ),
   );
 }

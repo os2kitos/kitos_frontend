@@ -20,7 +20,10 @@ import { RegistrationEntityTypes } from '../models/registrations/registration-en
 })
 export class ExternalReferencesStoreAdapterService implements OnDestroy {
   public subscriptions = new Subscription();
-  constructor(private readonly store: Store, private readonly actions$: Actions) {}
+  constructor(
+    private readonly store: Store,
+    private readonly actions$: Actions,
+  ) {}
 
   public ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
@@ -35,20 +38,20 @@ export class ExternalReferencesStoreAdapterService implements OnDestroy {
       this.actions$
         .pipe(ofType(ExternalReferencesManagmentActions.delete))
         .subscribe((deleteCommand) =>
-          this.dispatchDeleteExternalReference(deleteCommand.entityType, deleteCommand.referenceUuid)
-        )
+          this.dispatchDeleteExternalReference(deleteCommand.entityType, deleteCommand.referenceUuid),
+        ),
     );
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(ExternalReferencesManagmentActions.add))
-        .subscribe((addCommand) => this.dispatchCreateExternalReference(addCommand.entityType, addCommand.properties))
+        .subscribe((addCommand) => this.dispatchCreateExternalReference(addCommand.entityType, addCommand.properties)),
     );
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(ExternalReferencesManagmentActions.edit))
         .subscribe((editCommand) =>
-          this.dispatchEditExternalReference(editCommand.entityType, editCommand.referenceUuid, editCommand.properties)
-        )
+          this.dispatchEditExternalReference(editCommand.entityType, editCommand.referenceUuid, editCommand.properties),
+        ),
     );
   }
 
@@ -57,7 +60,7 @@ export class ExternalReferencesStoreAdapterService implements OnDestroy {
   //***************** */
 
   public selectExternalReferences(
-    entityType: RegistrationEntityTypes
+    entityType: RegistrationEntityTypes,
   ): Observable<Array<APIExternalReferenceDataResponseDTO> | undefined> {
     switch (entityType) {
       case 'it-system-usage':
@@ -98,12 +101,12 @@ export class ExternalReferencesStoreAdapterService implements OnDestroy {
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(ITSystemUsageActions.removeExternalReferenceSuccess), first())
-        .subscribe(() => this.dispatchGenericDeleteSuccess('it-system-usage', referenceUuid))
+        .subscribe(() => this.dispatchGenericDeleteSuccess('it-system-usage', referenceUuid)),
     );
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(ITSystemUsageActions.removeExternalReferenceError), first())
-        .subscribe(() => this.dispatchGenericDeleteError('it-system-usage', referenceUuid))
+        .subscribe(() => this.dispatchGenericDeleteError('it-system-usage', referenceUuid)),
     );
     return this.store.dispatch(ITSystemUsageActions.removeExternalReference(referenceUuid));
   }
@@ -112,12 +115,12 @@ export class ExternalReferencesStoreAdapterService implements OnDestroy {
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(ITSystemActions.removeExternalReferenceSuccess), first())
-        .subscribe(() => this.dispatchGenericDeleteSuccess('it-system', referenceUuid))
+        .subscribe(() => this.dispatchGenericDeleteSuccess('it-system', referenceUuid)),
     );
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(ITSystemActions.removeExternalReferenceError), first())
-        .subscribe(() => this.dispatchGenericDeleteError('it-system', referenceUuid))
+        .subscribe(() => this.dispatchGenericDeleteError('it-system', referenceUuid)),
     );
     return this.store.dispatch(ITSystemActions.removeExternalReference(referenceUuid));
   }
@@ -126,12 +129,12 @@ export class ExternalReferencesStoreAdapterService implements OnDestroy {
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(ITContractActions.removeExternalReferenceSuccess), first())
-        .subscribe(() => this.dispatchGenericDeleteSuccess('it-contract', referenceUuid))
+        .subscribe(() => this.dispatchGenericDeleteSuccess('it-contract', referenceUuid)),
     );
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(ITContractActions.removeExternalReferenceError), first())
-        .subscribe(() => this.dispatchGenericDeleteError('it-contract', referenceUuid))
+        .subscribe(() => this.dispatchGenericDeleteError('it-contract', referenceUuid)),
     );
     return this.store.dispatch(ITContractActions.removeExternalReference(referenceUuid));
   }
@@ -140,12 +143,12 @@ export class ExternalReferencesStoreAdapterService implements OnDestroy {
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(DataProcessingActions.removeExternalReferenceSuccess), first())
-        .subscribe(() => this.dispatchGenericDeleteSuccess('data-processing-registration', referenceUuid))
+        .subscribe(() => this.dispatchGenericDeleteSuccess('data-processing-registration', referenceUuid)),
     );
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(DataProcessingActions.removeExternalReferenceError), first())
-        .subscribe(() => this.dispatchGenericDeleteError('data-processing-registration', referenceUuid))
+        .subscribe(() => this.dispatchGenericDeleteError('data-processing-registration', referenceUuid)),
     );
     return this.store.dispatch(DataProcessingActions.removeExternalReference(referenceUuid));
   }
@@ -164,7 +167,7 @@ export class ExternalReferencesStoreAdapterService implements OnDestroy {
 
   private dispatchCreateExternalReference(
     entityType: RegistrationEntityTypes,
-    properties: ExternalReferenceProperties
+    properties: ExternalReferenceProperties,
   ): void {
     switch (entityType) {
       case 'it-system-usage':
@@ -185,12 +188,12 @@ export class ExternalReferencesStoreAdapterService implements OnDestroy {
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(ITSystemUsageActions.addExternalReferenceSuccess), first())
-        .subscribe(() => this.dispatchGenericAddSuccess('it-system-usage', properties))
+        .subscribe(() => this.dispatchGenericAddSuccess('it-system-usage', properties)),
     );
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(ITSystemUsageActions.addExternalReferenceError), first())
-        .subscribe(() => this.dispatchGenericAddError('it-system-usage', properties))
+        .subscribe(() => this.dispatchGenericAddError('it-system-usage', properties)),
     );
     return this.store.dispatch(ITSystemUsageActions.addExternalReference(properties));
   }
@@ -199,12 +202,12 @@ export class ExternalReferencesStoreAdapterService implements OnDestroy {
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(ITSystemActions.addExternalReferenceSuccess), first())
-        .subscribe(() => this.dispatchGenericAddSuccess('it-system', properties))
+        .subscribe(() => this.dispatchGenericAddSuccess('it-system', properties)),
     );
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(ITSystemActions.addExternalReferenceError), first())
-        .subscribe(() => this.dispatchGenericAddError('it-system', properties))
+        .subscribe(() => this.dispatchGenericAddError('it-system', properties)),
     );
 
     return this.store.dispatch(ITSystemActions.addExternalReference(properties));
@@ -214,12 +217,12 @@ export class ExternalReferencesStoreAdapterService implements OnDestroy {
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(ITContractActions.addExternalReferenceSuccess), first())
-        .subscribe(() => this.dispatchGenericAddSuccess('it-contract', properties))
+        .subscribe(() => this.dispatchGenericAddSuccess('it-contract', properties)),
     );
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(ITContractActions.addExternalReferenceError), first())
-        .subscribe(() => this.dispatchGenericAddError('it-contract', properties))
+        .subscribe(() => this.dispatchGenericAddError('it-contract', properties)),
     );
 
     return this.store.dispatch(ITContractActions.addExternalReference(properties));
@@ -229,12 +232,12 @@ export class ExternalReferencesStoreAdapterService implements OnDestroy {
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(DataProcessingActions.addExternalReferenceSuccess), first())
-        .subscribe(() => this.dispatchGenericAddSuccess('data-processing-registration', properties))
+        .subscribe(() => this.dispatchGenericAddSuccess('data-processing-registration', properties)),
     );
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(DataProcessingActions.addExternalReferenceError), first())
-        .subscribe(() => this.dispatchGenericAddError('data-processing-registration', properties))
+        .subscribe(() => this.dispatchGenericAddError('data-processing-registration', properties)),
     );
 
     return this.store.dispatch(DataProcessingActions.addExternalReference(properties));
@@ -246,7 +249,7 @@ export class ExternalReferencesStoreAdapterService implements OnDestroy {
 
   private dispatchGenericAddSuccess(
     entityType: RegistrationEntityTypes,
-    properties: ExternalReferenceProperties
+    properties: ExternalReferenceProperties,
   ): void {
     return this.store.dispatch(ExternalReferencesManagmentActions.addSuccess(entityType, properties));
   }
@@ -257,7 +260,7 @@ export class ExternalReferencesStoreAdapterService implements OnDestroy {
   private dispatchEditExternalReference(
     entityType: RegistrationEntityTypes,
     referenceUuid: string,
-    properties: ExternalReferenceProperties
+    properties: ExternalReferenceProperties,
   ): void {
     switch (entityType) {
       case 'it-system-usage':
@@ -278,12 +281,12 @@ export class ExternalReferencesStoreAdapterService implements OnDestroy {
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(ITSystemUsageActions.editExternalReferenceSuccess), first())
-        .subscribe(() => this.dispatchGenericEditSuccess('it-system-usage', referenceUuid, properties))
+        .subscribe(() => this.dispatchGenericEditSuccess('it-system-usage', referenceUuid, properties)),
     );
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(ITSystemUsageActions.editExternalReferenceError), first())
-        .subscribe(() => this.dispatchGenericEditError('it-system-usage', referenceUuid, properties))
+        .subscribe(() => this.dispatchGenericEditError('it-system-usage', referenceUuid, properties)),
     );
     return this.store.dispatch(ITSystemUsageActions.editExternalReference(referenceUuid, properties));
   }
@@ -292,12 +295,12 @@ export class ExternalReferencesStoreAdapterService implements OnDestroy {
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(ITSystemActions.editExternalReferenceSuccess), first())
-        .subscribe(() => this.dispatchGenericEditSuccess('it-system', referenceUuid, properties))
+        .subscribe(() => this.dispatchGenericEditSuccess('it-system', referenceUuid, properties)),
     );
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(ITSystemActions.editExternalReferenceError), first())
-        .subscribe(() => this.dispatchGenericEditError('it-system', referenceUuid, properties))
+        .subscribe(() => this.dispatchGenericEditError('it-system', referenceUuid, properties)),
     );
     return this.store.dispatch(ITSystemActions.editExternalReference(referenceUuid, properties));
   }
@@ -306,12 +309,12 @@ export class ExternalReferencesStoreAdapterService implements OnDestroy {
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(ITContractActions.editExternalReferenceSuccess), first())
-        .subscribe(() => this.dispatchGenericEditSuccess('it-contract', referenceUuid, properties))
+        .subscribe(() => this.dispatchGenericEditSuccess('it-contract', referenceUuid, properties)),
     );
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(ITContractActions.editExternalReferenceError), first())
-        .subscribe(() => this.dispatchGenericEditError('it-contract', referenceUuid, properties))
+        .subscribe(() => this.dispatchGenericEditError('it-contract', referenceUuid, properties)),
     );
     return this.store.dispatch(ITContractActions.editExternalReference(referenceUuid, properties));
   }
@@ -320,12 +323,12 @@ export class ExternalReferencesStoreAdapterService implements OnDestroy {
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(DataProcessingActions.editExternalReferenceSuccess), first())
-        .subscribe(() => this.dispatchGenericEditSuccess('data-processing-registration', referenceUuid, properties))
+        .subscribe(() => this.dispatchGenericEditSuccess('data-processing-registration', referenceUuid, properties)),
     );
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(DataProcessingActions.editExternalReferenceError), first())
-        .subscribe(() => this.dispatchGenericEditError('data-processing-registration', referenceUuid, properties))
+        .subscribe(() => this.dispatchGenericEditError('data-processing-registration', referenceUuid, properties)),
     );
     return this.store.dispatch(DataProcessingActions.editExternalReference(referenceUuid, properties));
   }
@@ -333,7 +336,7 @@ export class ExternalReferencesStoreAdapterService implements OnDestroy {
   private dispatchGenericEditError(
     entityType: RegistrationEntityTypes,
     referenceUuid: string,
-    properties: ExternalReferenceProperties
+    properties: ExternalReferenceProperties,
   ): void {
     return this.store.dispatch(ExternalReferencesManagmentActions.editError(entityType, referenceUuid, properties));
   }
@@ -341,7 +344,7 @@ export class ExternalReferencesStoreAdapterService implements OnDestroy {
   private dispatchGenericEditSuccess(
     entityType: RegistrationEntityTypes,
     referenceUuid: string,
-    properties: ExternalReferenceProperties
+    properties: ExternalReferenceProperties,
   ): void {
     return this.store.dispatch(ExternalReferencesManagmentActions.editSuccess(entityType, referenceUuid, properties));
   }

@@ -8,7 +8,10 @@ import { User } from '../models/user.model';
 
 @Injectable({ providedIn: 'root' })
 export class UserGuardService {
-  constructor(private router: Router, private store: Store) {}
+  constructor(
+    private router: Router,
+    private store: Store,
+  ) {}
 
   public verifyAuthorization(shouldUserBeAuthorized: (user: User) => boolean): Observable<boolean | UrlTree> {
     return this.store.select(selectUser).pipe(
@@ -19,7 +22,7 @@ export class UserGuardService {
           // Redirect unauthorized users
           return this.router.createUrlTree([AppPath.root]);
         }
-      })
+      }),
     );
   }
 }

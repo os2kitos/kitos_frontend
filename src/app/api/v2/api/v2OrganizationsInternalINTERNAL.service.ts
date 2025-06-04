@@ -19,8 +19,6 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
-import { APIIdentityNamePairResponseDTO } from '../model/aPIIdentityNamePairResponseDTO';
-// @ts-ignore
 import { APIOrganizationCreateRequestDTO } from '../model/aPIOrganizationCreateRequestDTO';
 // @ts-ignore
 import { APIOrganizationMasterDataRequestDTO } from '../model/aPIOrganizationMasterDataRequestDTO';
@@ -38,6 +36,8 @@ import { APIOrganizationRemovalConflictsResponseDTO } from '../model/aPIOrganiza
 import { APIOrganizationResponseDTO } from '../model/aPIOrganizationResponseDTO';
 // @ts-ignore
 import { APIOrganizationUpdateRequestDTO } from '../model/aPIOrganizationUpdateRequestDTO';
+// @ts-ignore
+import { APIShallowOrganizationResponseDTO } from '../model/aPIShallowOrganizationResponseDTO';
 // @ts-ignore
 import { APIUIModuleCustomizationRequestDTO } from '../model/aPIUIModuleCustomizationRequestDTO';
 // @ts-ignore

@@ -1,11 +1,27 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { PageSizeItem } from 'src/app/shared/models/page-size-item.model';
 import { GridState } from '../../../models/grid-state.model';
+import { DropDownListComponent } from '@progress/kendo-angular-dropdowns';
+import { GridSpacerComponent } from '@progress/kendo-angular-grid';
+import {
+  PagerInfoComponent,
+  PagerPrevButtonsComponent,
+  PagerInputComponent,
+  PagerNextButtonsComponent,
+} from '@progress/kendo-angular-pager';
 
 @Component({
   selector: 'app-grid-paginator',
   templateUrl: 'grid-paginator.component.html',
   styleUrls: ['grid-paginator.component.scss'],
+  imports: [
+    DropDownListComponent,
+    GridSpacerComponent,
+    PagerInfoComponent,
+    PagerPrevButtonsComponent,
+    PagerInputComponent,
+    PagerNextButtonsComponent,
+  ],
 })
 export class GridPaginatorComponent implements OnInit {
   @Input() state?: GridState | null;
@@ -25,7 +41,7 @@ export class GridPaginatorComponent implements OnInit {
 
   ngOnInit() {
     this.pageSizeValue = this.pageSizes.find(
-      (pageSize) => pageSize.value === this.state?.take || pageSize.value === 'all'
+      (pageSize) => pageSize.value === this.state?.take || pageSize.value === 'all',
     );
   }
 

@@ -2,11 +2,14 @@ import { Component, Input, OnInit } from '@angular/core';
 import { getDetailsPageLink } from '../../helpers/link.helpers';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
 import { LinkFontSizes } from '../../models/sizes/link-font-sizes.model';
+import { NgIf } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-details-page-link',
   templateUrl: './details-page-link.component.html',
   styleUrls: ['./details-page-link.component.scss'],
+  imports: [NgIf, RouterLink],
 })
 export class DetailsPageLinkComponent implements OnInit {
   public detailsPageRouterPath: string | null = null;

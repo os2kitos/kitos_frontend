@@ -9,8 +9,8 @@ export const selectGdprReportHasValidCache = memoize(() =>
   createSelector(
     selectGdprReportState,
     () => new Date(),
-    (state, time) => hasValidCache(state.cacheTime, time)
-  )
+    (state, time) => hasValidCache(state.cacheTime, time),
+  ),
 );
 
 export const selectGdprReports = createSelector(selectGdprReportState, gdprReportsAdapter.getSelectors().selectAll);

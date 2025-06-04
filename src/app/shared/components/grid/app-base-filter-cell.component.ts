@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 
 @Component({
   template: '',
+  standalone: false,
 })
 export class AppBaseFilterCellComponent extends BaseFilterCellComponent implements OnDestroy {
   override filter!: CompositeFilterDescriptor;

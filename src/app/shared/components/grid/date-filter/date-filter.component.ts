@@ -1,10 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Actions } from '@ngrx/effects';
+import { DropDownListComponent, ValueTemplateDirective } from '@progress/kendo-angular-dropdowns';
 import { ColumnComponent, FilterService } from '@progress/kendo-angular-grid';
 import { CompositeFilterDescriptor, FilterDescriptor } from '@progress/kendo-data-query';
-import { AppBaseFilterCellComponent } from '../app-base-filter-cell.component';
-import { Actions } from '@ngrx/effects';
-import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
 import { initializeApplyFilterSubscription } from 'src/app/shared/helpers/grid-filter.helpers';
+import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
+import { DatePickerComponent } from '../../datepicker/datepicker.component';
+import { FilterIconComponent } from '../../icons/filter.component';
+import { AppBaseFilterCellComponent } from '../app-base-filter-cell.component';
 
 interface DateFilterOption {
   text: string;
@@ -15,6 +18,7 @@ interface DateFilterOption {
   selector: 'app-date-filter',
   templateUrl: 'date-filter.component.html',
   styleUrls: ['date-filter.component.scss'],
+  imports: [DatePickerComponent, DropDownListComponent, ValueTemplateDirective, FilterIconComponent],
 })
 export class DateFilterComponent extends AppBaseFilterCellComponent implements OnInit {
   @Input() override filter!: CompositeFilterDescriptor;

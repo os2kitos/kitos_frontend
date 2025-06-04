@@ -2,11 +2,11 @@ import { createEntityAdapter } from '@ngrx/entity';
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { cloneDeep } from 'lodash';
 import { APIRoleOptionResponseDTO } from 'src/app/api/v2';
+import { isRoleOptionType, RoleOptionTypes } from 'src/app/shared/models/options/role-option-types.model';
+import { GlobalOptionTypeActions } from '../global-admin/global-option-types/actions';
+import { LocalOptionTypeActions } from '../local-admin/local-option-types/actions';
 import { RoleOptionTypeActions } from './actions';
 import { RoleOptionTypeState } from './state';
-import { LocalOptionTypeActions } from '../local-admin/local-option-types/actions';
-import { isRoleOptionType } from 'src/app/shared/models/options/role-option-types.model';
-import { GlobalOptionTypeActions } from '../global-admin/global-option-types/actions';
 
 export const roleOptionTypeAdapter = createEntityAdapter<APIRoleOptionResponseDTO>({
   selectId: (optionType) => optionType.uuid,
@@ -15,6 +15,7 @@ export const roleOptionTypeAdapter = createEntityAdapter<APIRoleOptionResponseDT
 const createInitialOptionState = () =>
   roleOptionTypeAdapter.getInitialState({
     cacheTime: undefined,
+    isLoading: false,
   });
 
 function createEmptyState(): RoleOptionTypeState {
@@ -32,17 +33,38 @@ export const roleOptionTypeFeature = createFeature({
   name: 'RoleOptionType',
   reducer: createReducer(
     roleOptionTypeInitialState,
-    on(RoleOptionTypeActions.getOptionsSuccess, (state, { optionType, options }): RoleOptionTypeState => {
-      const nextState = state ? cloneDeep(state) : createEmptyState();
+    on(RoleOptionTypeActions.getOptions, (state, { optionType }): RoleOptionTypeState => {
+      const nextState = getNextState(state);
 
-      //Update the changed state
-      const currentOptionState = nextState[optionType] ?? createInitialOptionState();
+      const updatedState = updateIsLoading(nextState, optionType, true);
+
+      return updatedState;
+    }),
+    on(RoleOptionTypeActions.updateLoadingOnValidCache, (state, { optionType }): RoleOptionTypeState => {
+      const nextState = getNextState(state);
+
+      const updatedState = updateIsLoading(nextState, optionType, false);
+
+      return updatedState;
+    }),
+    on(RoleOptionTypeActions.getOptionsSuccess, (state, { optionType, options }): RoleOptionTypeState => {
+      const nextState = getNextState(state);
+
+      const currentOptionState = getCurrentOptionState(nextState, optionType);
       nextState[optionType] = {
         ...roleOptionTypeAdapter.setAll(options, currentOptionState),
         cacheTime: new Date().getTime(),
+        isLoading: false,
       };
 
       return nextState;
+    }),
+    on(RoleOptionTypeActions.getOptionsError, (state, { optionType }): RoleOptionTypeState => {
+      const nextState = getNextState(state);
+
+      const updatedState = updateIsLoading(nextState, optionType, false);
+
+      return updatedState;
     }),
     on(
       LocalOptionTypeActions.updateOptionTypeSuccess,
@@ -65,3 +87,20 @@ export const roleOptionTypeFeature = createFeature({
     )
   ),
 });
+
+function updateIsLoading(nextState: RoleOptionTypeState, optionType: RoleOptionTypes, isLoading: boolean) {
+  const currentOptionState = getCurrentOptionState(nextState, optionType);
+  nextState[optionType] = {
+    ...currentOptionState,
+    isLoading,
+  };
+
+  return nextState;
+}
+
+function getNextState(state: RoleOptionTypeState | undefined): RoleOptionTypeState {
+  return state ? cloneDeep(state) : createEmptyState();
+}
+function getCurrentOptionState(nextState: RoleOptionTypeState, optionType: RoleOptionTypes) {
+  return nextState[optionType] ?? createInitialOptionState();
+}

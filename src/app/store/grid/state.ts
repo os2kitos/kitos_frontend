@@ -1,6 +1,5 @@
-
 export interface ExportState {
-    isExporting: boolean;
-    readyToExport: boolean;
-    exportAllColumns: boolean;
+  isExporting: boolean;
+  readyToExport: boolean;
+  exportAllColumns: boolean;
 }

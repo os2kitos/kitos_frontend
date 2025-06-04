@@ -1,3 +1,4 @@
+import { AsyncPipe, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
@@ -9,15 +10,15 @@ import {
   ORGANIZATION_USER_COLUMNS_ID,
   ORGANIZATION_USER_SECTION_NAME,
 } from 'src/app/shared/constants/persistent-state-constants';
-import { GridActionColumn } from 'src/app/shared/models/grid-action-column.model';
+import { createGridActionColumn } from 'src/app/shared/models/grid-action-column.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { ODataOrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.service';
+import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
 import {
-  selectOrganizationUserByIndex,
   selectOrganizationUserByUuid,
   selectOrganizationUserCreatePermissions,
   selectOrganizationUserDeletePermissions,
@@ -27,13 +28,28 @@ import {
   selectOrganizationUserGridState,
   selectOrganizationUserModifyPermissions,
 } from 'src/app/store/organization/organization-user/selectors';
+import { ExportMenuButtonComponent } from '../../../shared/components/buttons/export-menu-button/export-menu-button.component';
+import { CreateEntityButtonComponent } from '../../../shared/components/entity-creation/create-entity-button/create-entity-button.component';
+import { GridOptionsButtonComponent } from '../../../shared/components/grid-options-button/grid-options-button.component';
+import { GridComponent } from '../../../shared/components/grid/grid.component';
+import { HideShowButtonComponent } from '../../../shared/components/grid/hide-show-button/hide-show-button.component';
+import { OverviewHeaderComponent } from '../../../shared/components/overview-header/overview-header.component';
 import { UserInfoDialogComponent } from './user-info-dialog/user-info-dialog.component';
-import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 
 @Component({
   selector: 'app-organization-users',
   templateUrl: './organization-users.component.html',
   styleUrl: './organization-users.component.scss',
+  imports: [
+    OverviewHeaderComponent,
+    NgIf,
+    GridOptionsButtonComponent,
+    ExportMenuButtonComponent,
+    HideShowButtonComponent,
+    CreateEntityButtonComponent,
+    GridComponent,
+    AsyncPipe,
+  ],
 })
 export class OrganizationUsersComponent extends BaseOverviewComponent implements OnInit {
   public readonly isLoading$ = this.store.select(selectOrganizationUserGridLoading);
@@ -161,17 +177,7 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
       sortable: false,
       tooltipNegativeText: this.negativeTooltipText,
     },
-    {
-      field: 'Actions',
-      title: ' ',
-      section: this.organizationUserSectionName,
-      hidden: false,
-      style: 'action-buttons',
-      isSticky: true,
-      noFilter: true,
-      extraData: [{ type: 'edit' }, { type: 'delete' }] as GridActionColumn[],
-      width: 100,
-    },
+    createGridActionColumn(['edit', 'delete']),
   ];
 
   constructor(
@@ -219,13 +225,13 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
           combineLatestWith(this.gridState$)
         )
         .subscribe(([_, gridState]) => {
-          this.stateChange(gridState);
+          this.stateChange(gridState, true);
         })
     );
   }
 
-  public stateChange(gridState: GridState) {
-    this.store.dispatch(OrganizationUserActions.updateGridState(gridState));
+  public stateChange(gridState: GridState, forceUpdate = false): void {
+    this.store.dispatch(OrganizationUserActions.updateGridState(gridState, forceUpdate));
   }
 
   public onEditUser(user: ODataOrganizationUser): void {
@@ -239,16 +245,17 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
 
   override rowIdSelect(event: CellClickEvent) {
     if (this.cellIsClickableStyle(event)) {
-      this.openUserInfoDialog(event.rowIndex);
+      this.openUserInfoDialog(event.dataItem.Uuid);
     }
   }
 
   private updateDefaultColumns(): void {
-    this.store.dispatch(OrganizationUserActions.updateGridColumns(this.defaultGridColumns));
+    const columns = this.mapColumnOrder(this.defaultGridColumns);
+    this.store.dispatch(OrganizationUserActions.updateGridColumns(columns));
   }
 
-  private openUserInfoDialog(index: number) {
-    const user$ = this.store.select(selectOrganizationUserByIndex(index));
+  private openUserInfoDialog(uuid: string): void {
+    const user$ = this.store.select(selectOrganizationUserByUuid(uuid)).pipe(filterNullish());
     const dialogRef = this.dialog.open(UserInfoDialogComponent, { minWidth: '800px', width: '25%' });
     dialogRef.componentInstance.user$ = user$;
     dialogRef.componentInstance.hasModificationPermission$ = this.hasModificationPermission$;

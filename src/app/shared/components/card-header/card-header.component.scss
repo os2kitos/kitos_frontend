@@ -1,16 +1,16 @@
-@import "theme";
+@use "theme";
 
 :host {
-  height: $input-height;
+  height: theme.$input-height;
   display: flex;
   align-items: center;
-  border-bottom: 1px solid $color-neutral-20;
-  margin: -$padding-medium 0 $padding-medium-large;
+  border-bottom: 1px solid theme.$color-neutral-20;
+  margin: -(theme.$padding-medium) 0 theme.$padding-medium-large;
 }
 
 h6 {
   margin-bottom: 0;
-  margin-right: $padding-medium;
+  margin-right: theme.$padding-medium;
 }
 
 .space {
@@ -18,5 +18,5 @@ h6 {
 }
 
 .help-text-button-margin {
-  margin-left: $padding-small;
+  margin-left: theme.$padding-small;
 }

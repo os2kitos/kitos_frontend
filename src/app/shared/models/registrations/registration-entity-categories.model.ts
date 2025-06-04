@@ -8,5 +8,4 @@ export type RegistrationEntityTypes =
   | 'organization-unit'
   | 'organization-user'
   | 'local-admin-organization'
-  | 'global-admin-organization'
-  ;
+  | 'global-admin-organization';

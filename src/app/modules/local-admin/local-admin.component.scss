@@ -1,15 +1,15 @@
-@import "theme";
-@import "mixins";
+@use "theme";
+@use "mixins";
 
 :host {
   display: flex;
   flex-direction: column;
-  padding: $padding-large;
+  padding: theme.$padding-large;
 }
 
 .content {
   display: flex;
-  gap: $padding-medium;
+  gap: theme.$padding-medium;
   margin-top: 20px;
 }
 
@@ -22,5 +22,5 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: $padding-small;
+  gap: theme.$padding-small;
 }

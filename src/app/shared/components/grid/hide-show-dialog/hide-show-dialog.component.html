@@ -3,7 +3,13 @@
     <mat-dialog-content>
       <div *ngFor="let section of uniqueSections" class="section-container">
         <app-standard-vertical-content-grid>
-          <app-paragraph paragraphSize="x-large" [bold]="true">{{ section }}</app-paragraph>
+          <div class="title-container">
+            <app-checkbox
+              [value]="isAllSelectedOfSection(section)"
+              (valueChange)="toggleSection($event, section)"
+            ></app-checkbox>
+            <app-paragraph paragraphSize="x-large" [bold]="true">{{ section }}</app-paragraph>
+          </div>
           <div class="hide-show-grid">
             <ng-container *ngFor="let column of columnsCopy">
               <app-checkbox
@@ -22,7 +28,9 @@
     </mat-dialog-content>
     <app-dialog-actions>
       <app-button buttonStyle="secondary" (buttonClick)="close()" i18n>Annuller</app-button>
-      <app-button buttonStyle="primary" (buttonClick)="save()" i18n>Gem</app-button>
+      <app-button buttonStyle="primary" (buttonClick)="save()" i18n data-cy="column-config-dialog-save-button"
+        >Gem</app-button
+      >
     </app-dialog-actions>
   </app-standard-vertical-content-grid>
 </app-dialog>

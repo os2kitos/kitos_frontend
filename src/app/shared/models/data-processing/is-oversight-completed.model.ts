@@ -1,4 +1,4 @@
-import { APIDataProcessingRegistrationReadModel } from "src/app/api/v1";
+import { APIDataProcessingRegistrationReadModel } from 'src/app/api/v1';
 
 export interface IsOversightCompleted {
   name: string;
@@ -8,20 +8,20 @@ export interface IsOversightCompleted {
 export const isOversightCompletedOptions: IsOversightCompleted[] = [
   {
     name: $localize`Ja`,
-    value: APIDataProcessingRegistrationReadModel.IsOversightCompletedEnum.Yes
+    value: APIDataProcessingRegistrationReadModel.IsOversightCompletedEnum.Yes,
   },
   {
     name: $localize`Nej`,
-    value: APIDataProcessingRegistrationReadModel.IsOversightCompletedEnum.No
+    value: APIDataProcessingRegistrationReadModel.IsOversightCompletedEnum.No,
   },
   {
     name: '',
-    value: APIDataProcessingRegistrationReadModel.IsOversightCompletedEnum.Undecided
-  }
-]
+    value: APIDataProcessingRegistrationReadModel.IsOversightCompletedEnum.Undecided,
+  },
+];
 
 export const mapIsOversightCompleted = (
-  source?: APIDataProcessingRegistrationReadModel.IsOversightCompletedEnum
+  source?: APIDataProcessingRegistrationReadModel.IsOversightCompletedEnum,
 ): IsOversightCompleted | undefined => {
-  return isOversightCompletedOptions.find((option) => option.value === source)
-}
+  return isOversightCompletedOptions.find((option) => option.value === source);
+};

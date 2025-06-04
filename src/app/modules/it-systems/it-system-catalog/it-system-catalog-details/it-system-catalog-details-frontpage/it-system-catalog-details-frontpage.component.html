@@ -85,6 +85,20 @@
         [reference]="reference"
       ></app-external-reference>
     </app-contentbox>
+    <app-textbox
+      text="DBS Navn"
+      [formGroup]="itSystemFrontpageFormGroup"
+      formName="legalName"
+      data-cy="legal-name"
+      i18n-text
+    ></app-textbox>
+    <app-textbox
+      text="DBS Databehandler"
+      [formGroup]="itSystemFrontpageFormGroup"
+      formName="legalDataProcessorName"
+      data-cy="legal-data-processor-name"
+      i18n-text
+    ></app-textbox>
     <app-textarea
       class="notes"
       text="Beskrivelse"

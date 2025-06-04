@@ -17,10 +17,7 @@ export interface APIBaseNotificationPropertiesWriteRequestDTO {
      * Subject of the Notification
      */
     subject: string;
-    /**
-     * Body of the Notification
-     */
-    body: string;
+    body?: string;
     ccs?: APIRecipientWriteRequestDTO;
     receivers: APIRecipientWriteRequestDTO;
 }

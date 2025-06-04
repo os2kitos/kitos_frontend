@@ -25,7 +25,7 @@ export const yearSegmentChoiceOptions: YearSegmentChoice[] = [
 export const mapYearSegmentChoice = (
   value?:
     | APIContractTerminationTermsRequestDTO.NoticePeriodExtendsCurrentEnum
-    | APIContractTerminationTermsRequestDTO.NoticeByEndOfEnum
+    | APIContractTerminationTermsRequestDTO.NoticeByEndOfEnum,
 ): YearSegmentChoice | undefined => {
   return yearSegmentChoiceOptions.find((option) => option.value === value);
 };

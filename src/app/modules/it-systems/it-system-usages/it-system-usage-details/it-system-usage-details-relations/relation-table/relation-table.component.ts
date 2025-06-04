@@ -9,6 +9,19 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { selectRegularOptionTypesDictionary } from 'src/app/store/regular-option-type-store/selectors';
 import { ModifyRelationDialogComponent } from '../modify-relation-dialog/modify-relation-dialog.component';
+import { StandardVerticalContentGridComponent } from '../../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { NativeTableComponent } from '../../../../../../shared/components/native-table/native-table.component';
+import { DetailsPageLinkComponent } from '../../../../../../shared/components/details-page-link/details-page-link.component';
+import { ParagraphComponent } from '../../../../../../shared/components/paragraph/paragraph.component';
+import { ExternalPageLinkComponent } from '../../../../../../shared/components/external-page-link/external-page-link.component';
+import { ContentSpaceBetweenComponent } from '../../../../../../shared/components/content-space-between/content-space-between.component';
+import { SelectedOptionTypeTextComponent } from '../../../../../../shared/components/selected-option-type-text/selected-option-type-text.component';
+import { TableRowActionsComponent } from '../../../../../../shared/components/table-row-actions/table-row-actions.component';
+import { IconButtonComponent } from '../../../../../../shared/components/buttons/icon-button/icon-button.component';
+import { PencilIconComponent } from '../../../../../../shared/components/icons/pencil-icon.compnent';
+import { TrashcanIconComponent } from '../../../../../../shared/components/icons/trashcan-icon.component';
+import { EmptyStateComponent } from '../../../../../../shared/components/empty-states/empty-state.component';
 
 export interface SystemRelationModel {
   uuid: string;
@@ -24,6 +37,23 @@ export interface SystemRelationModel {
   selector: 'app-relation-table[relations][emptyText]',
   templateUrl: './relation-table.component.html',
   styleUrls: ['./relation-table.component.scss'],
+  imports: [
+    StandardVerticalContentGridComponent,
+    NgIf,
+    NativeTableComponent,
+    NgFor,
+    DetailsPageLinkComponent,
+    ParagraphComponent,
+    ExternalPageLinkComponent,
+    ContentSpaceBetweenComponent,
+    SelectedOptionTypeTextComponent,
+    TableRowActionsComponent,
+    IconButtonComponent,
+    PencilIconComponent,
+    TrashcanIconComponent,
+    EmptyStateComponent,
+    AsyncPipe,
+  ],
 })
 export class RelationTableComponent extends BaseComponent {
   @Input() public relations!: Array<SystemRelationModel>;
@@ -35,7 +65,10 @@ export class RelationTableComponent extends BaseComponent {
     .select(selectRegularOptionTypesDictionary('it-system_usage-relation-frequency-type'))
     .pipe(filterNullish());
 
-  constructor(private readonly store: Store, private readonly dialog: MatDialog) {
+  constructor(
+    private readonly store: Store,
+    private readonly dialog: MatDialog,
+  ) {
     super();
   }
 

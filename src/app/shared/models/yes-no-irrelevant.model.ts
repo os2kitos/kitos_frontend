@@ -30,7 +30,7 @@ export function mapCapitalizedStringToYesNoIrrelevantEnum(source: string): YesNo
 }
 
 const fromCapitalizedString = (
-  value: string
+  value: string,
 ): APIDataProcessingRegistrationGeneralDataResponseDTO.IsAgreementConcludedEnum | undefined => {
   switch (value) {
     case 'YES':
@@ -48,13 +48,13 @@ const fromCapitalizedString = (
 };
 
 export const mapToYesNoIrrelevantEnum = (
-  value?: APIDataProcessingRegistrationGeneralDataResponseDTO.IsAgreementConcludedEnum
+  value?: APIDataProcessingRegistrationGeneralDataResponseDTO.IsAgreementConcludedEnum,
 ): YesNoIrrelevantOptions | undefined => {
   return yesNoIrrelevantOptions.find((option) => option.value === value);
 };
 
 export const mapToYesNoIrrelevantEnumGrid = (
-  value?: APIDataProcessingRegistrationGeneralDataResponseDTO.IsAgreementConcludedEnum
+  value?: APIDataProcessingRegistrationGeneralDataResponseDTO.IsAgreementConcludedEnum,
 ): YesNoIrrelevantOptions | undefined => {
   return yesNoIrrelevantOptionsGrid.find((option) => option.value === value);
 };

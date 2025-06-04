@@ -13,12 +13,38 @@ import {
   selectItContractHasModifyPermissions,
 } from 'src/app/store/it-contract/selectors';
 import { ItContractDataProcessingRegistrationsComponentStore } from './it-contract-dpr.component-store';
+import { CardComponent } from '../../../../shared/components/card/card.component';
+import { CardHeaderComponent } from '../../../../shared/components/card-header/card-header.component';
+import { StandardVerticalContentGridComponent } from '../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { NativeTableComponent } from '../../../../shared/components/native-table/native-table.component';
+import { ContentSpaceBetweenComponent } from '../../../../shared/components/content-space-between/content-space-between.component';
+import { DetailsPageLinkComponent } from '../../../../shared/components/details-page-link/details-page-link.component';
+import { IconButtonComponent } from '../../../../shared/components/buttons/icon-button/icon-button.component';
+import { TrashcanIconComponent } from '../../../../shared/components/icons/trashcan-icon.component';
+import { EmptyStateComponent } from '../../../../shared/components/empty-states/empty-state.component';
+import { CollectionExtensionButtonComponent } from '../../../../shared/components/collection-extension-button/collection-extension-button.component';
 
 @Component({
   selector: 'app-it-contract-dpr',
   templateUrl: './it-contract-dpr.component.html',
   styleUrl: './it-contract-dpr.component.scss',
   providers: [ItContractDataProcessingRegistrationsComponentStore],
+  imports: [
+    CardComponent,
+    CardHeaderComponent,
+    StandardVerticalContentGridComponent,
+    NgIf,
+    NativeTableComponent,
+    NgFor,
+    ContentSpaceBetweenComponent,
+    DetailsPageLinkComponent,
+    IconButtonComponent,
+    TrashcanIconComponent,
+    EmptyStateComponent,
+    CollectionExtensionButtonComponent,
+    AsyncPipe,
+  ],
 })
 export class ItContractDprComponent extends BaseComponent {
   public readonly dataProcessingRegistrations$ = this.store
@@ -30,7 +56,7 @@ export class ItContractDprComponent extends BaseComponent {
   constructor(
     private readonly store: Store,
     private readonly dialog: MatDialog,
-    private readonly componentStore: ItContractDataProcessingRegistrationsComponentStore
+    private readonly componentStore: ItContractDataProcessingRegistrationsComponentStore,
   ) {
     super();
   }
@@ -48,7 +74,7 @@ export class ItContractDprComponent extends BaseComponent {
           if (result === true) {
             this.store.dispatch(ITContractActions.removeITContractDataProcessingRegistration(uuid));
           }
-        })
+        }),
     );
   }
 

@@ -1,33 +1,39 @@
 /// <reference types="Cypress" />
 
+import { TestRunner } from 'cypress/support/test-runner';
+
+function setupTest() {
+  cy.requireIntercept();
+  cy.setupContractIntercepts();
+  cy.setup(true, 'it-contracts');
+}
+
 describe('it-contracts.hierarchy', () => {
-  beforeEach(() => {
-    cy.requireIntercept();
-    cy.setupContractIntercepts();
-    cy.setup(true, 'it-contracts');
-  });
+  it('Tests', () => {
+    const testRunner = new TestRunner(setupTest);
 
-  it('shows simple hierarchy', () => {
-    cy.intercept('/api/v2/internal/it-contracts/*/hierarchy', { fixture: './it-contracts/hierarchy.json' });
+    testRunner.runTestWithSetup('shows simple hierarchy', () => {
+      cy.intercept('/api/v2/internal/it-contracts/*/hierarchy', { fixture: './it-contracts/hierarchy.json' });
 
-    goToHierarchy();
+      goToHierarchy();
 
-    cy.getByDataCy('contract-hierarchy').within(() => {
-      cy.contains('Contract 1');
-      cy.contains('Contract 2');
+      cy.getByDataCy('contract-hierarchy').within(() => {
+        cy.contains('Contract 1');
+        cy.contains('Contract 2');
+      });
     });
-  });
 
-  it('shows complex hierarchy', () => {
-    cy.intercept('/api/v2/internal/it-contracts/*/hierarchy', { fixture: './it-contracts/hierarchy-complex.json' });
+    it('shows complex hierarchy', () => {
+      cy.intercept('/api/v2/internal/it-contracts/*/hierarchy', { fixture: './it-contracts/hierarchy-complex.json' });
 
-    goToHierarchy();
+      goToHierarchy();
 
-    cy.getByDataCy('contract-hierarchy').within(() => {
-      cy.contains('Contract 1');
-      cy.contains('Contract 2');
-      cy.contains('Contract 4');
-      cy.contains('Contract 6');
+      cy.getByDataCy('contract-hierarchy').within(() => {
+        cy.contains('Contract 1');
+        cy.contains('Contract 2');
+        cy.contains('Contract 4');
+        cy.contains('Contract 6');
+      });
     });
   });
 });

@@ -10,6 +10,7 @@ export interface GridDataCacheRange {
 
 export interface GridDataCache {
   chunks: (GridDataCacheChunk | undefined)[];
+  externalFilter: string | undefined;
   total: number;
 }
 

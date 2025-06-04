@@ -10,11 +10,44 @@ import { PaymentTypes } from 'src/app/shared/models/it-contract/payment-types.mo
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { selectItContractHasModifyPermissions } from 'src/app/store/it-contract/selectors';
 import { PaymentDialogComponent } from './payment-dialog/payment-dialog.component';
+import { CardComponent } from '../../../../../shared/components/card/card.component';
+import { CardHeaderComponent } from '../../../../../shared/components/card-header/card-header.component';
+import { StandardVerticalContentGridComponent } from '../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { NgIf, NgFor, AsyncPipe, DecimalPipe } from '@angular/common';
+import { NativeTableComponent } from '../../../../../shared/components/native-table/native-table.component';
+import { ParagraphComponent } from '../../../../../shared/components/paragraph/paragraph.component';
+import { ContentSpaceBetweenComponent } from '../../../../../shared/components/content-space-between/content-space-between.component';
+import { ColorCircleComponent } from '../color-circle/color-circle.component';
+import { IconButtonComponent } from '../../../../../shared/components/buttons/icon-button/icon-button.component';
+import { PencilIconComponent } from '../../../../../shared/components/icons/pencil-icon.compnent';
+import { TrashcanIconComponent } from '../../../../../shared/components/icons/trashcan-icon.component';
+import { EmptyStateComponent } from '../../../../../shared/components/empty-states/empty-state.component';
+import { CollectionExtensionButtonComponent } from '../../../../../shared/components/collection-extension-button/collection-extension-button.component';
+import { AppDatePipe } from '../../../../../shared/pipes/app-date.pipe';
 
 @Component({
   selector: 'app-payment-table[title][helpTextKey][paymentType]',
   templateUrl: './payment-table.component.html',
   styleUrl: './payment-table.component.scss',
+  imports: [
+    CardComponent,
+    CardHeaderComponent,
+    StandardVerticalContentGridComponent,
+    NgIf,
+    NativeTableComponent,
+    NgFor,
+    ParagraphComponent,
+    ContentSpaceBetweenComponent,
+    ColorCircleComponent,
+    IconButtonComponent,
+    PencilIconComponent,
+    TrashcanIconComponent,
+    EmptyStateComponent,
+    CollectionExtensionButtonComponent,
+    AsyncPipe,
+    DecimalPipe,
+    AppDatePipe,
+  ],
 })
 export class PaymentTableComponent extends BaseComponent {
   @Input() public title!: string;
@@ -26,7 +59,10 @@ export class PaymentTableComponent extends BaseComponent {
   public readonly hasModifyPermission$ = this.store.select(selectItContractHasModifyPermissions);
   public readonly nullPlaceholder = NULL_PLACEHOLDER;
 
-  constructor(private readonly store: Store, private readonly dialog: MatDialog) {
+  constructor(
+    private readonly store: Store,
+    private readonly dialog: MatDialog,
+  ) {
     super();
   }
 
@@ -57,7 +93,7 @@ export class PaymentTableComponent extends BaseComponent {
           if (result === true) {
             this.store.dispatch(ITContractActions.removeItContractPayment(payment.id!, this.paymentType));
           }
-        })
+        }),
     );
   }
 

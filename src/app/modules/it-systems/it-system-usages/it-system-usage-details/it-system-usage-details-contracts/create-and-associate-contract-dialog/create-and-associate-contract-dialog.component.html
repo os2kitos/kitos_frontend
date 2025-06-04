@@ -1,0 +1,30 @@
+<app-dialog title="Opret og registrer kontrakt" i18n-title>
+  <app-standard-vertical-content-grid>
+    <app-textbox
+      formName="contractName"
+      [formGroup]="formGroup"
+      text="Kontraktnavn"
+      i18n-text
+      data-cy="contract-name-input"
+      [isLoading]="loading$ | async"
+    ></app-textbox>
+  </app-standard-vertical-content-grid>
+
+  <div class="error-paragraph-height">
+    <app-paragraph *ngIf="alreadyExists$ | async" color="error" i18n data-cy="name-error"
+      >Dette navn er allerede i brug!</app-paragraph
+    >
+  </div>
+
+  <app-dialog-actions>
+    <app-button
+      (buttonClick)="createAndRegisterContract()"
+      [disabled]="(canSubmit$ | async) !== true"
+      i18n
+      data-cy="create-and-associate-contract-button"
+    >
+      Opret og registrer
+    </app-button>
+    <app-button buttonStyle="secondary" (click)="closeDialog()" i18n> Annuller</app-button>
+  </app-dialog-actions>
+</app-dialog>

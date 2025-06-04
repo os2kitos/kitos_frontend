@@ -1,0 +1,8 @@
+<div class="items-center-container overflow-hidden-container">
+  <app-status-chip
+    [type]="column.entityType"
+    [value]="dataItem | searchProperty: column.field"
+    [valueDisplayType]="column.booleanValueDisplay"
+    [reverseValues]="column.style === 'reverse-chip'"
+  ></app-status-chip>
+</div>

@@ -22,7 +22,7 @@ export const dataSensitivityLevelOptions: DataSensitivityLevel[] = [
 ];
 
 export const mapDataSensitivityLevel = (
-  value?: APIGDPRRegistrationsResponseDTO.DataSensitivityLevelsEnum
+  value?: APIGDPRRegistrationsResponseDTO.DataSensitivityLevelsEnum,
 ): DataSensitivityLevel | undefined => {
   return dataSensitivityLevelOptions.find((option) => option.value === value);
 };

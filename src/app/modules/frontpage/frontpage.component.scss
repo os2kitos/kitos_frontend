@@ -1,33 +1,84 @@
-@import "theme";
+@use "theme";
+@use "mixins";
 
 :host {
-  max-width: $content-width-max;
-  margin: auto;
+  height: 100%;
+  margin: 0;
+}
+
+.container {
   display: flex;
-  gap: $padding-medium;
-  padding: $padding-large;
-  flex-wrap: wrap;
+  height: 100vh;
 }
 
-.card-column {
-  flex: 1 1 30%;
+.left {
+  flex-grow: 1;
+  background-color: white;
+  @include mixins.center-items-container;
 }
 
-.card {
-  padding: $padding-medium;
-  border-radius: $radius-large;
-  background: $color-white;
-  margin-bottom: $padding-medium;
+.right {
+  width: 40%;
+  min-width: 800px;
+  background-color: theme.$color-primary-10;
+  @include mixins.center-items-container;
 }
 
-.login-button {
-  width: 100%;
+app-login {
+  display: block;
+  max-width: 440px !important;
 }
 
-.sso-button {
-  margin-bottom: $padding-medium;
+.grid-container {
+  display: grid;
+  justify-content: center;
+  align-items: center;
 }
 
-.divider-margin {
-  margin: $padding-medium 0 $padding-small 0;
+.authenticated-grid-columns {
+  grid-template-columns: auto auto auto;
+}
+
+.login-grid-columns {
+  grid-template-columns: auto auto;
+}
+
+.authenticated-frontpage {
+  height: theme.$content-height;
+  display: flex;
+  justify-content: center;
+}
+
+.center-item {
+  @include mixins.center-items-container;
+  gap: theme.$padding-small;
+}
+
+.center-text {
+  text-align: center;
+}
+
+.title {
+  text-align: center;
+  text-wrap: wrap;
+  margin-bottom: 0px !important;
+}
+
+.info-section-container {
+  padding: 56px;
+}
+
+.info-section-max-width {
+  max-width: 580px;
+}
+
+.top-left-corner {
+  :hover {
+    cursor: pointer;
+  }
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  gap: theme.$padding-small;
+  @include mixins.center-items-container;
 }

@@ -39,7 +39,7 @@ interface State {
 @Injectable()
 export class GridUsagesDialogComponentStore extends ComponentStore<State> {
   public readonly unusedItSystemsInOrganization$ = this.select((state) => state.unusedItSystemsInOrganization).pipe(
-    filterNullish()
+    filterNullish(),
   );
   public readonly migration$ = this.select((state) => state.migration);
   public readonly loading$ = this.select((state) => state.loading);
@@ -57,7 +57,7 @@ export class GridUsagesDialogComponentStore extends ComponentStore<State> {
     @Inject(APIV2ItSystemUsageInternalINTERNALService)
     private readonly itSystemUsageInternalService: APIV2ItSystemUsageInternalINTERNALService,
     private notificationService: NotificationService,
-    private store: Store
+    private store: Store,
   ) {
     super({
       loading: false,
@@ -70,7 +70,7 @@ export class GridUsagesDialogComponentStore extends ComponentStore<State> {
   private allowExecuteMigration$() {
     return this.select(
       (state) =>
-        state.migrationPermissions?.commands?.find((c) => c.id === this.executeMigrationCommandId)?.canExecute === true
+        state.migrationPermissions?.commands?.find((c) => c.id === this.executeMigrationCommandId)?.canExecute === true,
     );
   }
 
@@ -78,35 +78,35 @@ export class GridUsagesDialogComponentStore extends ComponentStore<State> {
     (state, loading: boolean): State => ({
       ...state,
       loading,
-    })
+    }),
   );
 
   private updateUnusedItSystemsInOrganization = this.updater(
     (state, unusedItSystemsInOrganization: IdentityNamePair[]): State => ({
       ...state,
       unusedItSystemsInOrganization,
-    })
+    }),
   );
 
   private updateMigration = this.updater(
     (state, migration: ItSystemUsageMigration | undefined): State => ({
       ...state,
       migration,
-    })
+    }),
   );
 
   private updateMigrationPermissions = this.updater(
     (state, migrationPermissions: ItSystemUsageMigrationPermissions): State => ({
       ...state,
       migrationPermissions,
-    })
+    }),
   );
 
   private updateUsageUuid = this.updater(
     (state, usageUuid: string): State => ({
       ...state,
       usageUuid,
-    })
+    }),
   );
 
   public getMigrationPermissions = this.effect<void>((trigger$) =>
@@ -121,11 +121,11 @@ export class GridUsagesDialogComponentStore extends ComponentStore<State> {
             (error) => {
               console.error(error);
             },
-            () => this.updateLoading(false)
-          )
+            () => this.updateLoading(false),
+          ),
         );
-      })
-    )
+      }),
+    ),
   );
   public getMigration = this.effect((getModel: Observable<GetMigrationModel>) =>
     getModel.pipe(
@@ -148,11 +148,11 @@ export class GridUsagesDialogComponentStore extends ComponentStore<State> {
             (error) => {
               console.error(error);
               this.updateLoading(false);
-            }
-          )
-        )
-      )
-    )
+            },
+          ),
+        ),
+      ),
+    ),
   );
 
   public executeMigration = this.effect((targetItSystemUuid$: Observable<string>) =>
@@ -163,8 +163,8 @@ export class GridUsagesDialogComponentStore extends ComponentStore<State> {
       }),
       tap(([targetItSystemUuid, usageUuid]) => {
         this.store.dispatch(ITSystemActions.executeUsageMigration(targetItSystemUuid, usageUuid));
-      })
-    )
+      }),
+    ),
   );
 
   public finishLoading = () => {
@@ -180,13 +180,20 @@ export class GridUsagesDialogComponentStore extends ComponentStore<State> {
       .pipe(
         map((usages) => {
           return this.getPresumedSingleUsage(usages, usingOrganizationUuid, sourceItSystemUuid);
-        })
+        }),
       );
   }
 
   //31/1/25 This is a niche situation where a single usage has to be retrieved without knowing its uuid in advance, and did not warrant an API change on its own.
-  private getPresumedSingleUsage(usages: APIItSystemUsageSearchResultResponseDTO[], usingOrganizationUuid: string, sourceItSystemUuid: string){
-    if ((usages.length !== 1)) throw new Error(`Invalid number of usages received for organizationUuid ${usingOrganizationUuid} and systemUuid ${sourceItSystemUuid}: ${usages.length}`)
+  private getPresumedSingleUsage(
+    usages: APIItSystemUsageSearchResultResponseDTO[],
+    usingOrganizationUuid: string,
+    sourceItSystemUuid: string,
+  ) {
+    if (usages.length !== 1)
+      throw new Error(
+        `Invalid number of usages received for organizationUuid ${usingOrganizationUuid} and systemUuid ${sourceItSystemUuid}: ${usages.length}`,
+      );
     return usages[0].uuid;
   }
 
@@ -206,13 +213,13 @@ export class GridUsagesDialogComponentStore extends ComponentStore<State> {
               tapResponse(
                 (dtos) =>
                   this.updateUnusedItSystemsInOrganization(
-                    dtos.map(mapIdentityNamePair).filter((x) => x !== undefined)
+                    dtos.map(mapIdentityNamePair).filter((x) => x !== undefined),
                   ),
                 (error) => console.error(error),
-                () => this.updateLoading(false)
-              )
+                () => this.updateLoading(false),
+              ),
             );
-        })
-      )
+        }),
+      ),
     );
 }

@@ -1,5 +1,3 @@
-/// <reference types="Cypress" />
-
 describe('data-processing-systems', () => {
   beforeEach(() => {
     cy.requireIntercept();

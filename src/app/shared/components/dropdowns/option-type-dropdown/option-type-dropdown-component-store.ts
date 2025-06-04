@@ -25,20 +25,20 @@ export class OptionTypeDropdownComponentStore extends ComponentStore<State> {
   constructor(
     private regularOptionService: RegularOptionTypeService,
     private roleOptionService: RoleOptionTypeService,
-    private store: Store
+    private store: Store,
   ) {
     super({ optionTypes: undefined, loading: false });
   }
 
   private readonly setOptionTypes = this.updater(
-    (state, optionTypes: APIRegularOptionResponseDTO[]): State => ({ ...state, optionTypes })
+    (state, optionTypes: APIRegularOptionResponseDTO[]): State => ({ ...state, optionTypes }),
   );
 
   private readonly setLoading = this.updater((state, loading: boolean): State => ({ ...state, loading }));
 
   public getOptionTypesInternal(
     organizationUuid: string,
-    optionType: RegularOptionType | RoleOptionTypes
+    optionType: RegularOptionType | RoleOptionTypes,
   ): Observable<ShallowOptionType[]> {
     if (isRoleOptionType(optionType)) {
       return this.roleOptionService.getAvailableOptions(organizationUuid, optionType);
@@ -56,10 +56,10 @@ export class OptionTypeDropdownComponentStore extends ComponentStore<State> {
           tapResponse(
             (optionTypes) => this.setOptionTypes(optionTypes),
             (e) => console.error(e),
-            () => this.setLoading(false)
-          )
+            () => this.setLoading(false),
+          ),
         );
-      })
+      }),
     );
   });
 }

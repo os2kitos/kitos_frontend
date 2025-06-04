@@ -1,4 +1,4 @@
-/// <reference types="Cypress" />
+/// <reference types="cypress" />
 
 describe('it-system-catalog', () => {
   beforeEach(() => {
@@ -93,6 +93,15 @@ describe('it-system-catalog', () => {
 
     cy.getByDataCy('delete-it-system-button').should('exist');
     cy.getByDataCy('enable-it-system-button').should('exist');
+  });
+
+  it('Can see, but not edit, DBS name and DBS data processor name', () => {
+    goToDetails();
+    cy.getByDataCy('legal-name').find('input').should('be.disabled');
+    cy.getByDataCy('legal-data-processor-name').find('input').should('be.disabled');
+
+    cy.getByDataCy('legal-name').find('input').should('have.value', 'Et DBS navn');
+    cy.getByDataCy('legal-data-processor-name').find('input').should('have.value', 'Et DBS databehandler navn');
   });
 });
 

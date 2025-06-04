@@ -1,7 +1,7 @@
-@import "theme";
+@use "theme";
 
 app-content-space-between {
-  background-color: $color-neutral-20;
-  padding: $padding-medium;
-  border-radius: $radius-large;
+  background-color: theme.$color-neutral-20;
+  padding: theme.$padding-medium;
+  border-radius: theme.$radius-large;
 }

@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AsyncPipe, CommonModule } from '@angular/common';
+import { Component, forwardRef, Inject, Input, OnInit } from '@angular/core';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { debounceTime } from 'rxjs';
@@ -7,6 +8,14 @@ import { APIHelpTextCreateRequestDTO } from 'src/app/api/v2/model/helpTextCreate
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { AppRootUrlResolverService } from 'src/app/shared/services/app-root-url-resolver.service';
 import { HelpTextActions } from 'src/app/store/global-admin/help-texts/actions';
+import { ButtonComponent } from '../../buttons/button/button.component';
+import { DividerComponent } from '../../divider/divider.component';
+import { ParagraphComponent } from '../../paragraph/paragraph.component';
+import { RichTextEditorComponent } from '../../rich-text-editor/rich-text-editor.component';
+import { StandardVerticalContentGridComponent } from '../../standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { TextBoxComponent } from '../../textbox/textbox.component';
+import { DialogActionsComponent } from '../dialog-actions/dialog-actions.component';
+import { DialogComponent } from '../dialog/dialog.component';
 import { CreateHelpTextDialogComponentStore } from './create-help-text-dialog.component-store';
 
 @Component({
@@ -14,6 +23,20 @@ import { CreateHelpTextDialogComponentStore } from './create-help-text-dialog.co
   templateUrl: './create-help-text-dialog.component.html',
   styleUrl: './create-help-text-dialog.component.scss',
   providers: [CreateHelpTextDialogComponentStore],
+  imports: [
+    forwardRef(() => DialogComponent),
+    CommonModule,
+    StandardVerticalContentGridComponent,
+    TextBoxComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    ParagraphComponent,
+    DividerComponent,
+    RichTextEditorComponent,
+    DialogActionsComponent,
+    ButtonComponent,
+    AsyncPipe,
+  ],
 })
 export class CreateHelpTextDialogComponent extends BaseComponent implements OnInit {
   @Input() existingKey: string | undefined;
@@ -29,10 +52,10 @@ export class CreateHelpTextDialogComponent extends BaseComponent implements OnIn
   public rootUrl: string;
 
   constructor(
-    private dialogRef: MatDialogRef<CreateHelpTextDialogComponent>,
+    @Inject(MatDialogRef<CreateHelpTextDialogComponent>) private dialogRef: MatDialogRef<CreateHelpTextDialogComponent>,
     private store: Store,
     private componentStore: CreateHelpTextDialogComponentStore,
-    private rootUrlResolver: AppRootUrlResolverService
+    private rootUrlResolver: AppRootUrlResolverService,
   ) {
     super();
     this.rootUrl = this.rootUrlResolver.resolveRootUrl();
@@ -44,7 +67,7 @@ export class CreateHelpTextDialogComponent extends BaseComponent implements OnIn
       keyControl.valueChanges.pipe(debounceTime(300)).subscribe((key) => {
         if (!key) return;
         this.componentStore.checkIfKeyExists(key);
-      })
+      }),
     );
 
     if (this.existingKey) {

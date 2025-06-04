@@ -6,6 +6,7 @@ import {
   RoleAssignmentsMap,
 } from '../helpers/read-model-role-assignments';
 import { mapToYesNoEnum } from '../yes-no.model';
+import { OverviewAuditModel } from './audit-model';
 
 export interface ITContract {
   id: string;
@@ -39,10 +40,7 @@ export interface ITContract {
   AccumulatedOperationCost: number;
   AccumulatedOtherCost: number;
   LatestAuditDate: Date;
-  AuditStatusGreen: number;
-  AuditStatusRed: number;
-  AuditStatusWhite: number;
-  AuditStatusYellow: number;
+  AuditStatus: OverviewAuditModel;
   OperationRemunerationBegunDate: Date;
   PaymentModelName: string;
   PaymentFrequencyName: string;
@@ -64,6 +62,14 @@ export const adaptITContract = (value: any): ITContract | undefined => {
     value.ProcurementPlanQuarter == null || value.ProcurementPlanYear == null
       ? ''
       : formatProcurementPlan(value.ProcurementPlanYear, value.ProcurementPlanQuarter);
+
+  const audit = {
+    total: value.AuditStatusGreen + value.AuditStatusRed + value.AuditStatusWhite + value.AuditStatusYellow,
+    green: value.AuditStatusGreen,
+    red: value.AuditStatusRed,
+    yellow: value.AuditStatusYellow,
+    white: value.AuditStatusWhite,
+  } as OverviewAuditModel;
   return {
     id: value.SourceEntityUuid,
     IsActive: value.IsActive,
@@ -87,7 +93,7 @@ export const adaptITContract = (value: any): ITContract | undefined => {
       (dpa: { DataProcessingRegistrationUuid: string; DataProcessingRegistrationName: string }) => ({
         id: dpa.DataProcessingRegistrationUuid,
         value: dpa.DataProcessingRegistrationName,
-      })
+      }),
     ),
     ItSystemUsageUuids: value.ItSystemUsageUuids,
     ItSystemUsageUuidsAsCsv: value.ItSystemUsagesSystemUuidCsv,
@@ -105,10 +111,7 @@ export const adaptITContract = (value: any): ITContract | undefined => {
     AccumulatedOtherCost: value.AccumulatedOtherCost,
     OperationRemunerationBegunDate: value.OperationRemunerationBegunDate,
     LatestAuditDate: value.LatestAuditDate,
-    AuditStatusGreen: value.AuditStatusGreen,
-    AuditStatusRed: value.AuditStatusRed,
-    AuditStatusWhite: value.AuditStatusWhite,
-    AuditStatusYellow: value.AuditStatusYellow,
+    AuditStatus: audit,
     PaymentModelName: value.PaymentModelName,
     PaymentFrequencyName: value.PaymentFrequencyName,
     Duration: value.Duration,

@@ -12,7 +12,7 @@ export const riskAssessmentResultOptions: RiskAssessmentResultOptions[] = [
 ];
 
 export const mapRiskAssessmentEnum = (
-  value?: APIGDPRRegistrationsResponseDTO.RiskAssessmentResultEnum
+  value?: APIGDPRRegistrationsResponseDTO.RiskAssessmentResultEnum,
 ): RiskAssessmentResultOptions | undefined => {
   return riskAssessmentResultOptions.find((option) => option.value === value);
 };

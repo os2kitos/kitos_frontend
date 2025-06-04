@@ -1,5 +1,5 @@
-@import "theme";
-@import "mixins";
+@use "theme";
+@use "mixins";
 
 mat-toolbar {
   position: sticky;
@@ -9,10 +9,10 @@ mat-toolbar {
   top: 0;
   bottom: auto;
   z-index: 1000;
-  height: $navbar-height;
-  padding: 0 $padding-large;
-  background-color: $color-white;
-  @include elevation(4, $color-neutral-80);
+  height: theme.$navbar-height;
+  padding: 0 theme.$padding-large;
+  background-color: theme.$color-white;
+  @include mixins.elevation(4, theme.$color-neutral-80);
 
   & > span {
     display: flex;
@@ -22,14 +22,14 @@ mat-toolbar {
 
 .separator {
   width: 1px;
-  height: $navbar-height - 2 * $padding-medium;
-  margin-left: $padding-large;
-  background-color: $color-neutral-20;
+  height: theme.$navbar-height - 2 * theme.$padding-medium;
+  margin-left: theme.$padding-large;
+  background-color: theme.$color-neutral-20;
 }
 
 .user-menu {
   text-align: left;
-  min-width: $menu-item-width;
+  min-width: theme.$menu-item-width;
 
   p {
     margin: 0;
@@ -38,7 +38,7 @@ mat-toolbar {
   p:last-child {
     margin: 0;
     font-weight: normal;
-    color: $color-neutral;
+    color: theme.$color-neutral;
   }
 }
 
@@ -47,4 +47,3 @@ mat-toolbar {
   width: 100%;
   justify-content: space-between;
 }
-

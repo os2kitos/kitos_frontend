@@ -36,8 +36,7 @@
       <app-textbox
         text="Telefonnummer"
         i18n-text
-        type="tel"
-        pattern="^\+?[0-9]*$"
+        [pattern]="phoneNumberRegex"
         [formGroup]="createForm"
         formName="phoneNumber"
         [value]="createForm.value.phoneNumber ?? ''"
@@ -59,11 +58,11 @@
       <app-multi-select-dropdown
         text="Roller"
         i18n-text
-        [formGroup]="createForm"
-        formName="roles"
-        [data]="roleOptions"
+        [data]="roleOptions$ | async"
+        [initialSelectedValues]="getUserRoleChoices()"
         (selectedEvent)="rolesChanged($event)"
         (cleared)="rolesCleared()"
+        data-cy="roles-dropdown"
       ></app-multi-select-dropdown>
 
       <ng-container *ngIf="isGlobalAdmin$ | async">

@@ -5,4 +5,5 @@ export interface UINodeBlueprint {
   fullKey?: string;
   helpText?: string;
   disableIfSubtreeDisabled?: boolean;
+  disableByDefault?: boolean;
 }

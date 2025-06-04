@@ -1,0 +1,21 @@
+<app-card>
+  <app-card-header title="Systemintegratorer">
+    <app-collection-extension-button
+      secondary-content
+      text=" Opret Systemintegrator"
+      (clicked)="openAddSystemIntegratorDialog()"
+      data-cy="open-add-system-integrator-dialog-button"
+      i18n-text
+    ></app-collection-extension-button>
+  </app-card-header>
+  <ng-container *ngIf="systemIntegrators$ | async as systemIntegrators">
+    <app-local-grid
+      [data]="systemIntegrators"
+      [loading]="loading$ | async"
+      [columns]="gridColumns"
+      [deletePermission]="true"
+      (deleteEvent)="deleteSystemIntegrator($event)"
+    >
+    </app-local-grid>
+  </ng-container>
+</app-card>

@@ -12,7 +12,7 @@ export function filterRightFromRights(rights: Right[], roleUuid: string, entityU
 export function updateStateOfUserRights(
   state: OrganizationUserState,
   userUuid: string,
-  updateFunction: (previousState: ODataOrganizationUser) => Partial<ODataOrganizationUser>
+  updateFunction: (previousState: ODataOrganizationUser) => Partial<ODataOrganizationUser>,
 ): OrganizationUserState {
   const previousValue = state.entities[userUuid];
   if (!previousValue) return state;
@@ -21,6 +21,6 @@ export function updateStateOfUserRights(
       id: userUuid,
       changes: updateFunction(previousValue),
     },
-    state
+    state,
   );
 }

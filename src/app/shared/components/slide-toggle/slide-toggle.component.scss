@@ -1,38 +1,38 @@
-@import "theme";
+@use "theme";
 
 ::ng-deep {
   .k-switch-on:focus .k-switch-track,
   .k-switch-on.k-focus .k-switch-track {
-    outline: 2px solid $color-neutral-20;
+    outline: 2px solid theme.$color-neutral-20;
   }
   .k-switch-off:focus .k-switch-track,
   .k-switch-off.k-focus .k-switch-track {
-    outline: 2px solid $color-neutral-20;
+    outline: 2px solid theme.$color-neutral-20;
   }
 
   kendo-switch.k-switch-off:hover .k-switch-track {
-    outline: 1px solid $color-neutral-20;
+    outline: 1px solid theme.$color-neutral-20;
   }
 
   kendo-switch.k-switch-on:hover {
-    outline: 2px solid $color-neutral-20;
+    outline: 2px solid theme.$color-neutral-20;
   }
 
   .k-switch-on .k-switch-track {
-    border-color: $color-primary !important;
-    background-color: $color-primary !important;
+    border-color: theme.$color-primary !important;
+    background-color: theme.$color-primary !important;
   }
   .k-switch-off .k-switch-track {
-    border-color: $color-neutral-40 !important;
-    background-color: $color-neutral-40 !important;
+    border-color: theme.$color-neutral-40 !important;
+    background-color: theme.$color-neutral-40 !important;
   }
 
   .k-switch-on .k-switch-thumb {
-    border-color: $color-primary !important;
+    border-color: theme.$color-primary !important;
   }
 
   .k-switch-off .k-switch-thumb {
-    border-color: $color-neutral-40 !important;
+    border-color: theme.$color-neutral-40 !important;
   }
 
   .k-switch-sm {

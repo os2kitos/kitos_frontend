@@ -14,13 +14,25 @@ import { debounceTime, filter, map, Subject } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { DEFAULT_INPUT_DEBOUNCE_TIME, EMAIL_REGEX_PATTERN } from 'src/app/shared/constants/constants';
 import { MultiSelectDropdownItem } from 'src/app/shared/models/dropdown-option.model';
-import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import { NotificationService } from 'src/app/shared/services/notification.service';
+import { NgSelectComponent, NgOptionTemplateDirective, NgMultiLabelTemplateDirective } from '@ng-select/ng-select';
+import { FormsModule } from '@angular/forms';
+import { NgIf, NgFor } from '@angular/common';
+import { ParagraphComponent } from '../../paragraph/paragraph.component';
 
 @Component({
   selector: 'app-multi-select-dropdown',
   templateUrl: './multi-select-dropdown.component.html',
   styleUrl: './multi-select-dropdown.component.scss',
+  imports: [
+    NgSelectComponent,
+    FormsModule,
+    NgOptionTemplateDirective,
+    NgIf,
+    ParagraphComponent,
+    NgMultiLabelTemplateDirective,
+    NgFor,
+  ],
 })
 export class MultiSelectDropdownComponent<T> extends BaseComponent implements OnInit, AfterViewInit {
   @Input() public text = '';
@@ -32,15 +44,18 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
   @Input() public data?: MultiSelectDropdownItem<T>[] | null;
   @Input() public initialSelectedValues?: MultiSelectDropdownItem<T>[] | null;
   @Input() public loading: boolean | null = false;
+
   @Input() public includeAddTag = false;
   @Input() public tagValidation: 'email' | 'none' = 'none';
   @Input() public addTagText: string = $localize`Tilføj email`;
   @Input() public isRequired = false;
+  @Input() public showDescription = false;
+  @Input() public useExternalSearch = false;
+
+  @Input() public resetSubject$?: Subject<void>;
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   @Input() public isTagFn: (item: any) => boolean = () => false;
-
-  @Output() public valueChange = new EventEmitter<T[] | undefined>();
-  @Output() public validatedValueChange = new EventEmitter<ValidatedValueChange<T[] | undefined>>();
 
   @Output() public focusEvent = new EventEmitter();
   @Output() public openDropdown = new EventEmitter();
@@ -83,6 +98,14 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
         )
         .subscribe((filter) => this.filterChange.emit(filter))
     );
+
+    if (this.resetSubject$) {
+      this.subscriptions.add(
+        this.resetSubject$.subscribe(() => {
+          this.onClear();
+        })
+      );
+    }
   }
 
   ngAfterViewInit() {
@@ -111,6 +134,11 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
     this.selectedValues = this.selectedValuesModel.map((item) => item.value);
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  public externalSearch(_: string, __: any) {
+    return true;
+  }
+
   public onFocus() {
     this.focusEvent.emit();
   }
@@ -120,22 +148,22 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
   }
 
   public onClear() {
+    this.selectedValues = [];
+    this.selectedValuesModel = [];
     this.filter$.next('');
     this.cleared.emit();
   }
 
   public onBlur() {
     this.blurEvent.emit();
-    this.selectedEvent.emit(this.selectedValues);
   }
 
-  public onSelected(item: MultiSelectDropdownItem<T>) {
-    this.updateSelectedValues(item.value);
-    this.emitSelectedEvent(this.selectedValues);
+  public onSelected(selectedItems: Array<MultiSelectDropdownItem<T>>) {
+    this.emitSelectedEvent(selectedItems.map((item) => item.value));
   }
 
   public clear() {
-    this.valueChange.emit(undefined);
+    this.selectedEvent.emit(undefined);
   }
 
   public onCreateNew = (tag: string) => {
@@ -156,22 +184,14 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
     return newTag;
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public removeTag(item: MultiSelectDropdownItem<T>) {
-    if (this.data) {
-      this.data = this.data.filter((d) => d !== item);
-    }
-    this.selectedValuesModel = this.selectedValuesModel.filter((d) => d !== item);
-    this.selectedValues = this.selectedValues.filter((v) => v !== item.value);
-  }
+    this.data = this.data?.filter((d) => d !== item) ?? [];
 
-  private updateSelectedValues(value: T) {
-    const index = this.selectedValues.indexOf(value);
-    if (index !== -1) {
-      this.selectedValues.splice(index, 1);
-    } else {
-      this.selectedValues.push(value);
-    }
+    this.selectedValuesModel = this.selectedValuesModel.filter((d) => d !== item);
+
+    this.selectedValues = this.selectedValuesModel.map((d) => d.value);
+
+    this.selectedEvent.emit(this.selectedValues);
   }
 
   private emitSelectedEvent(selectedValues: T[]) {

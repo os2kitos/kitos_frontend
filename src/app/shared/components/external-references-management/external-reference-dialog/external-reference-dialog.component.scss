@@ -1,4 +1,4 @@
-@import "theme";
+@use "theme";
 
 :host {
   display: flex;
@@ -7,6 +7,6 @@
 }
 
 app-divider {
-  padding-top: $padding-small;
-  padding-bottom: $padding-small;
+  padding-top: theme.$padding-small;
+  padding-bottom: theme.$padding-small;
 }

@@ -1,15 +1,15 @@
-@import "theme";
+@use "theme";
 
 .file-input-style {
-  border: 1px solid $color-neutral-40;
+  border: 1px solid theme.$color-neutral-40;
   background-color: white;
-  padding-top: $padding-small + $padding-smallest;
-  padding-bottom: $padding-small + $padding-smallest;
-  padding-left: $padding-medium;
-  padding-right: $padding-medium;
+  padding-top: theme.$padding-small + theme.$padding-smallest;
+  padding-bottom: theme.$padding-small + theme.$padding-smallest;
+  padding-left: theme.$padding-medium;
+  padding-right: theme.$padding-medium;
   border-radius: 10px;
-  border-color: $color-primary;
-  color: $color-primary;
+  border-color: theme.$color-primary;
+  color: theme.$color-primary;
   font-weight: bold;
   width: 100%;
   box-sizing: border-box;

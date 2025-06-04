@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Component, forwardRef, Input } from '@angular/core';
-import { FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { AfterViewInit, Component, forwardRef, Input, ViewChild } from '@angular/core';
+import { FormControl, NG_VALUE_ACCESSOR, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EditorComponent } from '@tinymce/tinymce-angular';
+import { HALF_SECOND_IN_MILLISECONDS } from '../../constants/constants';
 import { AppRootUrlResolverService } from '../../services/app-root-url-resolver.service';
 
 @Component({
@@ -14,9 +16,14 @@ import { AppRootUrlResolverService } from '../../services/app-root-url-resolver.
       multi: true,
     },
   ],
+  imports: [EditorComponent, FormsModule, ReactiveFormsModule],
 })
-export class RichTextEditorComponent {
+export class RichTextEditorComponent implements AfterViewInit {
   @Input() formControl!: FormControl;
+  @Input() defaultEditorContent: string | undefined = undefined;
+
+  @ViewChild('editor') editorRef!: EditorComponent;
+
   public rootUrl: string;
 
   private onChange: (value: any) => void = () => {};
@@ -24,6 +31,19 @@ export class RichTextEditorComponent {
 
   constructor(private readonly rootUrlResolver: AppRootUrlResolverService) {
     this.rootUrl = this.rootUrlResolver.resolveRootUrl();
+  }
+
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      if (this.editorHasNoContent() && this.defaultEditorContent) {
+        this.editorRef.editor.setContent(this.defaultEditorContent);
+      }
+    }, HALF_SECOND_IN_MILLISECONDS);
+  }
+
+  private editorHasNoContent() {
+    const editor = this.editorRef?.editor;
+    return editor && editor.getContent() == undefined;
   }
 
   writeValue(value: any): void {

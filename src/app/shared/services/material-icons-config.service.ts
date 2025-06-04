@@ -8,7 +8,7 @@ export class MaterialIconsConfigService {
   constructor(
     private readonly iconRegistry: MatIconRegistry,
     private readonly sanitizer: DomSanitizer,
-    private readonly appRootUrlLocationStrategy: AppRootUrlResolverService
+    private readonly appRootUrlLocationStrategy: AppRootUrlResolverService,
   ) {}
 
   public configureCustomIcons() {
@@ -22,7 +22,7 @@ export class MaterialIconsConfigService {
     ];
     //Register all custom icons
     iconsFromLocalFileAssets.forEach((icon) =>
-      this.iconRegistry.addSvgIcon(icon.id, this.sanitizer.bypassSecurityTrustResourceUrl(icon.url))
+      this.iconRegistry.addSvgIcon(icon.id, this.sanitizer.bypassSecurityTrustResourceUrl(icon.url)),
     );
   }
 }

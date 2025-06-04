@@ -1,0 +1,6 @@
+<ng-container *ngIf="getProperty(column.field) as auditModel">
+  <app-white-circle-number-icon *ngFor="let i of [].constructor(auditModel.white)"></app-white-circle-number-icon>
+  <app-red-circle-number-icon *ngFor="let i of [].constructor(auditModel.red)"></app-red-circle-number-icon>
+  <app-orange-circle-number-icon *ngFor="let i of [].constructor(auditModel.yellow)"></app-orange-circle-number-icon>
+  <app-green-circle-number-icon *ngFor="let i of [].constructor(auditModel.green)"></app-green-circle-number-icon>
+</ng-container>

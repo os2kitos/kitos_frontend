@@ -1,4 +1,4 @@
-@import "theme";
+@use "theme";
 
 .hide-show-grid {
   display: grid;
@@ -7,4 +7,9 @@
 
 .section-container {
   margin-bottom: 20px;
+}
+
+.title-container {
+  display: flex;
+  gap: theme.$padding-small;
 }

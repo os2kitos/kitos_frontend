@@ -1,4 +1,4 @@
-@import 'theme';
+@use "theme";
 
 .section-text {
   width: inherit;
@@ -6,5 +6,5 @@
 }
 
 .divider-margin {
-  padding: $padding-small 0 $padding-small 0;
+  padding: theme.$padding-small 0 theme.$padding-small 0;
 }

@@ -25,7 +25,7 @@ export class DeleteOrganizationComponentStore extends ComponentStore<State> {
     (state, consequences: OrganizationRemovalConflicts): State => ({
       ...state,
       removalConflicts: consequences,
-    })
+    }),
   );
 
   public hasConflicts(types: RemovalConflictType[]): Observable<boolean | undefined> {
@@ -38,9 +38,9 @@ export class DeleteOrganizationComponentStore extends ComponentStore<State> {
         const conflictChecks$ = types.map((type) => this.typeHasConflicts(type));
 
         return combineLatest(conflictChecks$).pipe(
-          map((conflictResults) => conflictResults.some((hasConflict) => hasConflict))
+          map((conflictResults) => conflictResults.some((hasConflict) => hasConflict)),
         );
-      })
+      }),
     );
   }
 
@@ -74,7 +74,7 @@ export class DeleteOrganizationComponentStore extends ComponentStore<State> {
             throw new Error(`Unknown removal conflict type: ${type}`);
         }
       }),
-      map((conflicts) => conflicts ?? [])
+      map((conflicts) => conflicts ?? []),
     );
   }
 
@@ -89,10 +89,10 @@ export class DeleteOrganizationComponentStore extends ComponentStore<State> {
           tapResponse(
             (conflicts) => this.updateConsequences(conflicts),
             (e) => console.error(e),
-            () => this.setLoading(false)
-          )
-        )
-      )
-    )
+            () => this.setLoading(false),
+          ),
+        ),
+      ),
+    ),
   );
 }

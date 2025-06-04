@@ -15,7 +15,7 @@ export class UserNotificationsEffects {
   constructor(
     private actions$: Actions,
     private store: Store,
-    private notificationService: APIV2NotificationINTERNALService
+    private notificationService: APIV2NotificationINTERNALService,
   ) {}
 
   getNotifications$ = createEffect(() => {
@@ -33,12 +33,12 @@ export class UserNotificationsEffects {
             map((notifications) =>
               UserNotificationActions.getNotificationsSuccess(
                 ownerResourceType,
-                notifications.map(adaptUserNotification)
-              )
+                notifications.map(adaptUserNotification),
+              ),
             ),
-            catchError(() => of(UserNotificationActions.getNotificationsError()))
-          )
-      )
+            catchError(() => of(UserNotificationActions.getNotificationsError())),
+          ),
+      ),
     );
   });
 }

@@ -29,16 +29,21 @@ export interface APIContractValidityResponseDTO {
      */
     validTo?: string;
     /**
+     * Determines if the parent contract should be part of the contracts validation
+     */
+    requireValidParent: boolean;
+    /**
      * Reasons as to why the contract is considered to be invalid
      */
     validationErrors?: Array<APIContractValidityResponseDTO.ValidationErrorsEnum>;
 }
 export namespace APIContractValidityResponseDTO {
-    export type ValidationErrorsEnum = 'StartDateNotPassed' | 'EndDatePassed' | 'TerminationPeriodExceeded';
+    export type ValidationErrorsEnum = 'StartDateNotPassed' | 'EndDatePassed' | 'TerminationPeriodExceeded' | 'InvalidParentContract';
     export const ValidationErrorsEnum = {
         StartDateNotPassed: 'StartDateNotPassed' as ValidationErrorsEnum,
         EndDatePassed: 'EndDatePassed' as ValidationErrorsEnum,
-        TerminationPeriodExceeded: 'TerminationPeriodExceeded' as ValidationErrorsEnum
+        TerminationPeriodExceeded: 'TerminationPeriodExceeded' as ValidationErrorsEnum,
+        InvalidParentContract: 'InvalidParentContract' as ValidationErrorsEnum
     };
 }
 

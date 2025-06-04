@@ -57,7 +57,7 @@ describe('navigation', () => {
   it('can navigate between pages', () => {
     cy.intercept('/odata/**', {});
 
-    cy.contains('Kitos - Kommunernes IT OverbliksSystem');
+    cy.contains('Kitos er Kommunernes IT Overblikssystem');
 
     cy.get('app-nav-bar').contains('Organisation').click();
     cy.getByDataCy('organization-page-title').should('have.text', 'Organisation');
@@ -79,7 +79,7 @@ describe('navigation', () => {
     cy.get('h3').should('have.text', 'Min profil');
 
     cy.get('app-nav-bar').get('img').first().click();
-    cy.contains('Kitos - Kommunernes IT OverbliksSystem');
+    cy.contains('Kitos er Kommunernes IT Overblikssystem');
   });
 
   it('can see local admin menu item if local admin', () => {

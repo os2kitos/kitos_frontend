@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { verifyArrayContainsObject } from 'cypress/support/request-verification';
-import { Method, RouteMatcher } from 'Cypress/types/net-stubbing';
+import { Method, RouteMatcher } from 'cypress/types/net-stubbing';
 
 Cypress.Commands.add(
   'setup',
@@ -29,6 +29,8 @@ Cypress.Commands.add(
       fixture: uiCustomizationFixturePath ?? './shared/it-contracts-ui-customization.json',
     });
 
+    cy.intercept('api/v2/internal/organization/*/users/*/default-unit', { statusCode: 400 });
+
     if (interceptAlerts !== false) {
       cy.intercept('GET', 'api/v2/internal/alerts/organization/*/user/*/*', { body: [], statusCode: 200 });
     }
@@ -44,8 +46,13 @@ Cypress.Commands.add(
     } else {
       cy.wait('@authorize');
     }
-  }
+  },
 );
+
+Cypress.Commands.add('verifyDialogConfirmButtonDisabledByReactiveForm', (dataCySelector: string) => {
+  cy.getByDataCy(dataCySelector).click();
+  cy.getByDataCy(dataCySelector).should('exist');
+});
 
 Cypress.Commands.add('login', (authorizeFixturePath = './shared/authorize.json') => {
   cy.intercept('/api/authorize/antiforgery', '"ABC"');
@@ -53,7 +60,7 @@ Cypress.Commands.add('login', (authorizeFixturePath = './shared/authorize.json')
 
   cy.contains('Email').parent().find('input').type('test@test.com');
   cy.contains('Password').parent().find('input').type('123456');
-  cy.contains('Log ind').click();
+  cy.getByDataCy('login-button').click();
 
   cy.wait('@authorize');
 });
@@ -171,7 +178,7 @@ Cypress.Commands.add(
     requestAlias: string,
     propertyPath: string,
     verifyMethod: (actual: any, expectedObject: any) => boolean,
-    expectedObject: any
+    expectedObject: any,
   ) => {
     return cy
       .wait(`@${requestAlias}`)
@@ -179,7 +186,7 @@ Cypress.Commands.add(
       .then((actual) => {
         expect(verifyMethod(actual, expectedObject)).to.be.true;
       });
-  }
+  },
 );
 
 Cypress.Commands.add('verifyRequestUsingDeepEq', (requestAlias: string, propertyPath: string, expectedObject: any) => {
@@ -219,7 +226,7 @@ Cypress.Commands.add(
       })
       .get('app-popup-message')
       .should('exist');
-  }
+  },
 );
 
 Cypress.Commands.add('getByDataCy', (dataCy: string) => {
@@ -233,18 +240,24 @@ Cypress.Commands.add('testCanShowExternalReferences', () => {
       documentId: 'document1',
       expectedInvalidUrl: 'www.google.com',
       masterReference: false,
+      lastChangedByUsername: 'Jens Jensen',
+      lastChangedDate: '24-01-2025',
     },
     {
       title: 'Valid url',
       documentId: 'document2',
       expectedValidUrl: 'https://www.google.com',
       masterReference: false,
+      lastChangedByUsername: 'Bruger123',
+      lastChangedDate: '25-01-2025',
     },
     {
       title: 'No url Master reference',
       documentId: 'document3',
       url: '',
       masterReference: true,
+      lastChangedByUsername: 'En tredje bruger',
+      lastChangedDate: '26-01-2025',
     },
   ];
 
@@ -263,6 +276,8 @@ Cypress.Commands.add('testCanShowExternalReferences', () => {
     if (expectedRow.expectedValidUrl) {
       row().verifyExternalReferenceHrefValue(expectedRow.title, expectedRow.expectedValidUrl);
     }
+    row().contains(expectedRow.lastChangedByUsername);
+    row().contains(expectedRow.lastChangedDate);
   });
 });
 
@@ -274,7 +289,7 @@ Cypress.Commands.add(
     isEdit: boolean,
     requestUrl: string,
     responseBodyPath: string,
-    rowTitle?: string
+    rowTitle?: string,
   ) => {
     cy.interceptPatch(requestUrl, responseBodyPath, 'patchRequest');
 
@@ -323,7 +338,7 @@ Cypress.Commands.add(
         documentId: 'Document id',
         url: 'url',
         masterReference: true,
-      }
+      },
     );
 
     cy.getRowForElementContent(newReference.title)
@@ -331,11 +346,11 @@ Cypress.Commands.add(
       .within(() => {
         cy.contains(newReference.documentId);
         cy.get(newReference.masterReference ? 'app-check-positive-green-icon' : 'app-check-negative-gray-icon').should(
-          'exist'
+          'exist',
         );
         cy.verifyTooltipText('Ugyldigt link: ' + newReference.url);
       });
-  }
+  },
 );
 
 Cypress.Commands.add('setTinyMceContent', (dataCySelector, content) => {
@@ -345,10 +360,10 @@ Cypress.Commands.add('setTinyMceContent', (dataCySelector, content) => {
     cy.get('@editorTextarea').then((element) => {
       const editorId = element.attr('id');
       const editorInstance = (win as any).tinymce.EditorManager.get().filter(
-        (editor: { id: string | undefined }) => editor.id === editorId
+        (editor: { id: string | undefined }) => editor.id === editorId,
       )[0];
       editorInstance.setContent(content);
-    })
+    }),
   );
   cy.getByDataCy(dataCySelector).click({ force: true });
 });
@@ -369,6 +384,10 @@ Cypress.Commands.add('confirmTextboxStateByDataCy', (dataCySelector, shouldBeEna
 
 Cypress.Commands.add('hoverByDataCy', (dataCySelector) => {
   cy.getByDataCy(dataCySelector).trigger('mouseenter');
+});
+
+Cypress.Commands.add('isLinkTo', { prevSubject: true }, (subject, expectedHref, expectedTarget = '_blank') => {
+  cy.wrap(subject).should('have.attr', 'href', expectedHref).and('have.attr', 'target', expectedTarget);
 });
 
 function getElementParentWithSelector(elementName: string, selector: string) {

@@ -61,6 +61,10 @@ export interface APIDataProcessingRegistrationGeneralDataWriteRequestDTO {
      * Defines the master contract for this Data Processing Registration (many contracts can point to a DPR but only one can be the master contract)  Constraint: The contract provided MUST point to this Data Processing Registration for it to be selected as \"main contract\".
      */
     mainContractUuid?: string;
+    /**
+     * Defines the organization unit that is responsible for this Data Processing Registration
+     */
+    responsibleOrganizationUnitUuid?: string;
 }
 export namespace APIDataProcessingRegistrationGeneralDataWriteRequestDTO {
     export type IsAgreementConcludedEnum = 'No' | 'Yes' | 'Irrelevant' | 'Undecided';

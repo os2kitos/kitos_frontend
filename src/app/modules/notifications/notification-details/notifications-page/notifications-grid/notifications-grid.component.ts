@@ -7,11 +7,14 @@ import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/reg
 import { UserNotificationActions } from 'src/app/store/user-notifications/actions';
 import { selectNotificationsByType } from 'src/app/store/user-notifications/selectors';
 import { UserNotification } from 'src/app/store/user-notifications/state';
+import { LocalGridComponent } from '../../../../../shared/components/local-grid/local-grid.component';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-notifications-grid',
   templateUrl: './notifications-grid.component.html',
   styleUrl: './notifications-grid.component.scss',
+  imports: [LocalGridComponent, AsyncPipe],
 })
 export class NotificationsGridComponent implements OnInit {
   @Input() entityType!: RegistrationEntityTypes;

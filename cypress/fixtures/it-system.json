@@ -38,5 +38,7 @@
   "rightsHolder": { "cvr": "33599617", "uuid": "a1552ea1-8722-4755-a5dd-cda6d226277a", "name": "MDT Group A/S" },
   "created": null,
   "createdBy": { "uuid": "2baacf6b-9e3b-4ebf-b23f-45646b7ddada", "name": "Global admin" },
-  "recommendedArchiveDuty": { "comment": null, "id": "NoRecommendation" }
+  "recommendedArchiveDuty": { "comment": null, "id": "NoRecommendation" },
+  "legalName": "DBS navn 123",
+  "legalDataProcessorName": "DBS databehandler navn 123"
 }

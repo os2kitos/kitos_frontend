@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
@@ -9,11 +9,29 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
+import { DialogComponent } from '../../../../../../shared/components/dialogs/dialog/dialog.component';
+import { StandardVerticalContentGridComponent } from '../../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { TextBoxComponent } from '../../../../../../shared/components/textbox/textbox.component';
+import { DropdownComponent } from '../../../../../../shared/components/dropdowns/dropdown/dropdown.component';
+import { DialogActionsComponent } from '../../../../../../shared/components/dialogs/dialog-actions/dialog-actions.component';
+import { ButtonComponent } from '../../../../../../shared/components/buttons/button/button.component';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-interface-data-write-dialog',
   templateUrl: './interface-data-write-dialog.component.html',
   styleUrl: './interface-data-write-dialog.component.scss',
+  imports: [
+    DialogComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    StandardVerticalContentGridComponent,
+    TextBoxComponent,
+    DropdownComponent,
+    DialogActionsComponent,
+    ButtonComponent,
+    AsyncPipe,
+  ],
 })
 export class InterfaceDataWriteDialogComponent extends BaseComponent implements OnInit {
   @Input() public existingData: APIItInterfaceDataResponseDTO | undefined;
@@ -30,7 +48,7 @@ export class InterfaceDataWriteDialogComponent extends BaseComponent implements 
   constructor(
     private readonly dialogRef: MatDialogRef<InterfaceDataWriteDialogComponent>,
     private readonly store: Store,
-    private readonly actions$: Actions
+    private readonly actions$: Actions,
   ) {
     super();
   }
@@ -48,9 +66,9 @@ export class InterfaceDataWriteDialogComponent extends BaseComponent implements 
       this.actions$
         .pipe(
           ofType(ITInterfaceActions.addITInterfaceDataSuccess, ITInterfaceActions.updateITInterfaceDataSuccess),
-          first()
+          first(),
         )
-        .subscribe(() => this.dialogRef.close())
+        .subscribe(() => this.dialogRef.close()),
     );
 
     this.subscriptions.add(
@@ -58,7 +76,7 @@ export class InterfaceDataWriteDialogComponent extends BaseComponent implements 
         .pipe(ofType(ITInterfaceActions.addITInterfaceDataError, ITInterfaceActions.updateITInterfaceDataError))
         .subscribe(() => {
           this.isBusy = false;
-        })
+        }),
     );
   }
 

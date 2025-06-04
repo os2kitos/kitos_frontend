@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { filter, pairwise } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
@@ -11,9 +11,13 @@ import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 @Component({
   templateUrl: 'data-processing.component.html',
   styleUrls: ['data-processing.component.scss'],
+  imports: [RouterOutlet],
 })
 export class DataProcessingComponent extends BaseComponent implements OnInit {
-  constructor(private store: Store, private router: Router) {
+  constructor(
+    private store: Store,
+    private router: Router,
+  ) {
     super();
   }
   ngOnInit(): void {
@@ -23,19 +27,19 @@ export class DataProcessingComponent extends BaseComponent implements OnInit {
         .select(selectOrganizationUuid)
         .pipe(
           pairwise(),
-          filter(([prevUuid, nextUuid]) => prevUuid !== nextUuid)
+          filter(([prevUuid, nextUuid]) => prevUuid !== nextUuid),
         )
         .subscribe(() =>
           this.router
             .navigateByUrl(AppPath.root, { skipLocationChange: true })
-            .then(() => this.router.navigate([AppPath.dataProcessing]))
-        )
+            .then(() => this.router.navigate([AppPath.dataProcessing])),
+        ),
     );
 
     this.store.dispatch(
       UIModuleConfigActions.getUIModuleConfig({
         module: UIModuleConfigKey.DataProcessingRegistrations,
-      })
+      }),
     );
   }
 }

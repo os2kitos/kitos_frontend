@@ -39,11 +39,11 @@ export const itContractFeature = createFeature({
     itContactInitialState,
     on(
       ITContractActions.getITContract,
-      (state): ITContractState => ({ ...state, itContract: undefined, loading: true })
+      (state): ITContractState => ({ ...state, itContract: undefined, loading: true }),
     ),
     on(
       ITContractActions.getITContractSuccess,
-      (state, { itContract }): ITContractState => ({ ...state, itContract, loading: false })
+      (state, { itContract }): ITContractState => ({ ...state, itContract, loading: false }),
     ),
     on(ITContractActions.getITContracts, (state): ITContractState => ({ ...state, isLoadingContractsQuery: true })),
     on(
@@ -52,87 +52,87 @@ export const itContractFeature = createFeature({
         ...itContactAdapter.setAll(itContracts, state),
         total,
         isLoadingContractsQuery: false,
-      })
+      }),
     ),
     on(
       ITContractActions.getITContractsError,
-      (state): ITContractState => ({ ...state, isLoadingContractsQuery: false })
+      (state): ITContractState => ({ ...state, isLoadingContractsQuery: false }),
     ),
     on(ITContractActions.deleteITContract, (state): ITContractState => ({ ...state, isRemoving: true })),
     on(ITContractActions.deleteITContractSuccess, (state): ITContractState => ({ ...state, isRemoving: false })),
     on(ITContractActions.deleteITContractError, (state): ITContractState => ({ ...state, isRemoving: false })),
     on(
       ITContractActions.patchITContractSuccess,
-      (state, { itContract }): ITContractState => ({ ...state, itContract })
+      (state, { itContract }): ITContractState => ({ ...state, itContract }),
     ),
     on(
       ITContractActions.addITContractSystemAgreementElementSuccess,
-      (state, { itContract }): ITContractState => ({ ...state, itContract })
+      (state, { itContract }): ITContractState => ({ ...state, itContract }),
     ),
     on(
       ITContractActions.removeITContractSystemAgreementElementSuccess,
-      (state, { itContract }): ITContractState => ({ ...state, itContract })
+      (state, { itContract }): ITContractState => ({ ...state, itContract }),
     ),
     on(
       ITContractActions.addITContractSystemUsageSuccess,
-      (state, { itContract }): ITContractState => ({ ...state, itContract })
+      (state, { itContract }): ITContractState => ({ ...state, itContract }),
     ),
     on(
       ITContractActions.removeITContractSystemUsageSuccess,
-      (state, { itContract }): ITContractState => ({ ...state, itContract })
+      (state, { itContract }): ITContractState => ({ ...state, itContract }),
     ),
     on(
       ITContractActions.addITContractDataProcessingRegistrationSuccess,
-      (state, { itContract }): ITContractState => ({ ...state, itContract })
+      (state, { itContract }): ITContractState => ({ ...state, itContract }),
     ),
     on(
       ITContractActions.removeITContractDataProcessingRegistrationSuccess,
-      (state, { itContract }): ITContractState => ({ ...state, itContract })
+      (state, { itContract }): ITContractState => ({ ...state, itContract }),
     ),
     on(ITContractActions.getITContractPermissions, (state): ITContractState => ({ ...state, permissions: undefined })),
     on(
       ITContractActions.getITContractPermissionsSuccess,
-      (state, { permissions }): ITContractState => ({ ...state, permissions })
+      (state, { permissions }): ITContractState => ({ ...state, permissions }),
     ),
     on(
       ITContractActions.getITContractCollectionPermissions,
-      (state): ITContractState => ({ ...state, collectionPermissions: undefined })
+      (state): ITContractState => ({ ...state, collectionPermissions: undefined }),
     ),
     on(
       ITContractActions.getITContractCollectionPermissionsSuccess,
-      (state, { collectionPermissions }): ITContractState => ({ ...state, collectionPermissions })
+      (state, { collectionPermissions }): ITContractState => ({ ...state, collectionPermissions }),
     ),
     on(
       ITContractActions.addExternalReferenceSuccess,
-      (state, { itContract }): ITContractState => ({ ...state, itContract })
+      (state, { itContract }): ITContractState => ({ ...state, itContract }),
     ),
     on(
       ITContractActions.editExternalReferenceSuccess,
-      (state, { itContract }): ITContractState => ({ ...state, itContract })
+      (state, { itContract }): ITContractState => ({ ...state, itContract }),
     ),
     on(
       ITContractActions.removeExternalReferenceSuccess,
-      (state, { itContract }): ITContractState => ({ ...state, itContract })
+      (state, { itContract }): ITContractState => ({ ...state, itContract }),
     ),
     on(
-      ITContractActions.addItContractRoleSuccess,
-      (state, { itContract }): ITContractState => ({ ...state, itContract })
+      ITContractActions.bulkAddItContractRoleSuccess,
+      (state, { itContract }): ITContractState => ({ ...state, itContract }),
     ),
     on(
       ITContractActions.removeItContractRoleSuccess,
-      (state, { itContract }): ITContractState => ({ ...state, itContract })
+      (state, { itContract }): ITContractState => ({ ...state, itContract }),
     ),
     on(
       ITContractActions.addItContractPaymentSuccess,
-      (state, { itContract }): ITContractState => ({ ...state, itContract })
+      (state, { itContract }): ITContractState => ({ ...state, itContract }),
     ),
     on(
       ITContractActions.updateItContractPaymentSuccess,
-      (state, { itContract }): ITContractState => ({ ...state, itContract })
+      (state, { itContract }): ITContractState => ({ ...state, itContract }),
     ),
     on(
       ITContractActions.removeItContractPaymentSuccess,
-      (state, { itContract }): ITContractState => ({ ...state, itContract })
+      (state, { itContract }): ITContractState => ({ ...state, itContract }),
     ),
     on(ITContractActions.updateGridColumnsSuccess, (state, { gridColumns }): ITContractState => {
       return {
@@ -147,7 +147,7 @@ export const itContractFeature = createFeature({
         isLoadingContractsQuery: true,
         gridState,
         previousGridState: state.gridState,
-      })
+      }),
     ),
     on(ITContractActions.getItContractOverviewRolesSuccess, (state, { roles }): ITContractState => {
       const gridRoleColumns =
@@ -162,7 +162,7 @@ export const itContractFeature = createFeature({
           ...state,
           organizationGridConfig: response,
         };
-      }
+      },
     ),
 
     on(ITContractActions.resetToOrganizationITContractColumnConfigurationError, (state): ITContractState => {
@@ -179,7 +179,7 @@ export const itContractFeature = createFeature({
           ...state,
           organizationGridConfig: response,
         };
-      }
+      },
     ),
 
     on(ITContractActions.getAppliedProcurementPlansSuccess, (state, { response }): ITContractState => {
@@ -201,7 +201,7 @@ export const itContractFeature = createFeature({
           ...state,
           contractRoles: resetCache(),
         };
-      }
-    )
+      },
+    ),
   ),
 });

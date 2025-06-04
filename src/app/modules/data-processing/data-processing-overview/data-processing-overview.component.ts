@@ -1,3 +1,4 @@
+import { AsyncPipe, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
@@ -34,11 +35,27 @@ import {
   selectDataProcessingHasCreateCollectionPermissions,
   selectDataProcessingRoleColumns,
 } from 'src/app/store/data-processing/selectors';
+import { ExportMenuButtonComponent } from '../../../shared/components/buttons/export-menu-button/export-menu-button.component';
+import { CreateEntityButtonComponent } from '../../../shared/components/entity-creation/create-entity-button/create-entity-button.component';
+import { GridOptionsButtonComponent } from '../../../shared/components/grid-options-button/grid-options-button.component';
+import { GridComponent } from '../../../shared/components/grid/grid.component';
+import { HideShowButtonComponent } from '../../../shared/components/grid/hide-show-button/hide-show-button.component';
+import { OverviewHeaderComponent } from '../../../shared/components/overview-header/overview-header.component';
 
 @Component({
   selector: 'app-data-processing-overview',
   templateUrl: './data-processing-overview.component.html',
   styleUrl: './data-processing-overview.component.scss',
+  imports: [
+    OverviewHeaderComponent,
+    NgIf,
+    GridOptionsButtonComponent,
+    ExportMenuButtonComponent,
+    HideShowButtonComponent,
+    CreateEntityButtonComponent,
+    GridComponent,
+    AsyncPipe,
+  ],
 })
 export class DataProcessingOverviewComponent extends BaseOverviewComponent implements OnInit {
   public readonly isLoading$ = this.store.select(selectDataProcessingGridLoading);
@@ -76,8 +93,8 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       title: $localize`Status (Markeret kontrakt)`,
       section: DATA_PROCESSING_SECTION_NAME,
       filter: 'boolean',
-      extraData: this.activeOptions,
       entityType: 'data-processing-registration',
+      extraData: this.activeOptions,
       style: 'chip',
       width: 340,
       hidden: true,
@@ -272,6 +289,14 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       hidden: true,
       persistId: 'lastchangedname',
     },
+    {
+      field: GridFields.ResponsibleOrgUnitName,
+      title: $localize`Ansvarlig org. enhed`,
+      section: DATA_PROCESSING_SECTION_NAME,
+      hidden: true,
+      extraFilter: 'organization-unit',
+      persistId: 'responsibleUnitName',
+    },
   ];
 
   constructor(
@@ -297,12 +322,18 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
         )
         .subscribe(([_, roleColumns]) => {
           const defaultColumnsAndRoles = this.defaultGridColumns.concat(roleColumns);
-          const existingColumns = this.gridColumnStorageService.getColumns(
+          const orderedGridColumns = this.mapColumnOrder(defaultColumnsAndRoles);
+
+          const localStorageColumns = this.gridColumnStorageService.getColumns(
             DATA_PROCESSING_COLUMNS_ID,
-            defaultColumnsAndRoles
+            orderedGridColumns
           );
-          const columns = existingColumns ?? defaultColumnsAndRoles;
-          this.store.dispatch(DataProcessingActions.updateGridColumns(columns));
+          this.updateLocalOrDefaultGridColumns(
+            orderedGridColumns,
+            localStorageColumns,
+            DataProcessingActions.updateGridColumns,
+            DataProcessingActions.resetToOrganizationDataProcessingColumnConfiguration
+          );
         })
     );
 
@@ -324,7 +355,10 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
         )
         .subscribe(([_, gridColumns]) => {
           const columnsToShow = getColumnsToShow(gridColumns, this.defaultGridColumns);
-          this.store.dispatch(DataProcessingActions.updateGridColumns(columnsToShow));
+          const gridColumnStateIsCorrect = this.gridColumnStorageService.columnsAreEqual(gridColumns, columnsToShow);
+          if (!gridColumnStateIsCorrect) {
+            this.store.dispatch(DataProcessingActions.updateGridColumns(columnsToShow));
+          }
         })
     );
     this.store.dispatch(DataProcessingActions.getDataProcessingCollectionPermissions());

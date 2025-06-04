@@ -12,7 +12,7 @@ export interface PopupMessage {
 export function createPopupMessage(
   message: string,
   type: PopupMessageType = PopupMessageType.default,
-  durationInMs: number = DEFAULT_NOTIFICATION_DURATION
+  durationInMs: number = DEFAULT_NOTIFICATION_DURATION,
 ): PopupMessage {
   return {
     createdTimeStamp: Date.now(),

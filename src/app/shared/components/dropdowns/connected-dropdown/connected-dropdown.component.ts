@@ -1,13 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Observable, Subject, map, pairwise, startWith } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { DropdownComponent } from '../dropdown/dropdown.component';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-connected-dropdown[text][valueField][filterChange][formGroup][formName]',
   templateUrl: './connected-dropdown.component.html',
   styleUrls: ['./connected-dropdown.component.scss'],
+  imports: [DropdownComponent, FormsModule, ReactiveFormsModule, AsyncPipe],
 })
 export class ConnectedDropdownComponent<T> extends BaseComponent implements OnInit {
   @Input() public text!: string;
@@ -20,6 +23,8 @@ export class ConnectedDropdownComponent<T> extends BaseComponent implements OnIn
   @Input() public formGroup!: FormGroup<any>;
   @Input() public formName!: string;
   @Input() public includeItemDescription = false;
+  @Input() public addTag = false;
+  @Input() public addTagText = $localize`Vælg`;
   @Output() public filterChange = new EventEmitter<string>();
   @Output() public valueChange = new EventEmitter<string>();
 
@@ -27,7 +32,7 @@ export class ConnectedDropdownComponent<T> extends BaseComponent implements OnIn
   private lastTwoSearchTerms$ = this.searchTermsSource$.pipe(
     startWith(undefined),
     pairwise(),
-    map(([previous, current]) => ({ previous: previous, current: current }))
+    map(([previous, current]) => ({ previous: previous, current: current })),
   );
 
   ngOnInit() {
@@ -37,7 +42,7 @@ export class ConnectedDropdownComponent<T> extends BaseComponent implements OnIn
         if (terms.previous != terms.current) {
           this.filterChange.emit(terms.current);
         }
-      })
+      }),
     );
   }
 

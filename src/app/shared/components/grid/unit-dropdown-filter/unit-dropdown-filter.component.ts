@@ -1,19 +1,21 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Actions } from '@ngrx/effects';
+import { Store } from '@ngrx/store';
 import { ColumnComponent, FilterService } from '@progress/kendo-angular-grid';
 import { CompositeFilterDescriptor, FilterDescriptor } from '@progress/kendo-data-query';
-import { createNode, TreeNodeModel } from 'src/app/shared/models/tree-node.model';
-import { AppBaseFilterCellComponent } from '../app-base-filter-cell.component';
-import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
-import { Actions } from '@ngrx/effects';
-import { initializeApplyFilterSubscription } from 'src/app/shared/helpers/grid-filter.helpers';
-import { Store } from '@ngrx/store';
-import { selectPagedOrganizationUnits } from 'src/app/store/organization/organization-unit/selectors';
 import { first } from 'rxjs';
+import { initializeApplyFilterSubscription } from 'src/app/shared/helpers/grid-filter.helpers';
+import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
+import { createNode, TreeNodeModel } from 'src/app/shared/models/tree-node.model';
+import { selectPagedOrganizationUnits } from 'src/app/store/organization/organization-unit/selectors';
+import { OrgUnitSelectComponent } from '../../org-unit-select/org-unit-select.component';
+import { AppBaseFilterCellComponent } from '../app-base-filter-cell.component';
 
 @Component({
   selector: 'app-unit-dropdown-filter',
   templateUrl: './unit-dropdown-filter.component.html',
   styleUrl: './unit-dropdown-filter.component.scss',
+  imports: [OrgUnitSelectComponent],
 })
 export class UnitDropdownFilterComponent extends AppBaseFilterCellComponent implements OnInit {
   @Input() override filter!: CompositeFilterDescriptor;

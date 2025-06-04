@@ -1,69 +1,73 @@
-/// <reference types="Cypress" />
+import { TestRunner } from 'cypress/support/test-runner';
 
-describe('it-system-usage', () => {
-  beforeEach(() => {
-    cy.requireIntercept();
-    cy.setupItSystemUsageIntercepts();
-    cy.setup(true, 'it-systems/it-system-usages');
-  });
+function setupTest() {
+  cy.requireIntercept();
+  cy.setupItSystemUsageIntercepts();
+  cy.setup(true, 'it-systems/it-system-usages');
+}
 
-  it('can show interfaces when no associated interfaces', () => {
-    cy.contains('System 3').click();
+describe('it-system-usage interfaces', () => {
+  const testRunner = new TestRunner(setupTest);
 
-    cy.intercept('/api/v2/it-interfaces*includeDeactivated*', []);
-    cy.intercept('/api/v2/it-interface-interface-types*', []);
+  it('Tests', () => {
+    testRunner.runTestWithSetup('can show interfaces when no associated interfaces', () => {
+      cy.contains('System 3').click();
 
-    cy.navigateToDetailsSubPage('Udstillede snitflader');
+      cy.intercept('/api/v2/it-interfaces*includeDeactivated*', []);
+      cy.intercept('/api/v2/it-interface-interface-types*', []);
 
-    cy.contains('Systemet udstiller ingen snitflader');
-  });
+      cy.navigateToDetailsSubPage('Udstillede snitflader');
 
-  it('can show interfaces with 2 associated interfaces', () => {
-    cy.contains('System 3').click();
+      cy.contains('Systemet udstiller ingen snitflader');
+    });
 
-    cy.intercept('/api/v2/it-interfaces*includeDeactivated*', { fixture: './it-interfaces/it-interfaces.json' });
-    cy.intercept('/api/v2/it-interface-interface-types*', { fixture: './it-interfaces/it-interfaces-types.json' });
+    testRunner.runTestWithSetup('can show interfaces with 2 associated interfaces', () => {
+      cy.contains('System 3').click();
 
-    cy.navigateToDetailsSubPage('Udstillede snitflader');
+      cy.intercept('/api/v2/it-interfaces*includeDeactivated*', { fixture: './it-interfaces/it-interfaces.json' });
+      cy.intercept('/api/v2/it-interface-interface-types*', { fixture: './it-interfaces/it-interfaces-types.json' });
 
-    const expectedRows = [
-      {
-        name: 'Interface 1 - ACTIVE',
-        deactivated: true,
-        description: 'Test description 1',
-        itInterfaceType: {
-          name: 'InterfaceType1',
+      cy.navigateToDetailsSubPage('Udstillede snitflader');
+
+      const expectedRows = [
+        {
+          name: 'Interface 1 - ACTIVE',
+          deactivated: true,
+          description: 'Test description 1',
+          itInterfaceType: {
+            name: 'InterfaceType1',
+          },
+          urlReference: 'http://www.kitos.dk',
         },
-        urlReference: 'http://www.kitos.dk',
-      },
-      {
-        name: 'Interface 2 - INACTIVE',
-        deactivated: false,
-        description: 'Test description 2',
-        itInterfaceType: {
-          name: 'InterfaceType2 (udgået)',
+        {
+          name: 'Interface 2 - INACTIVE',
+          deactivated: false,
+          description: 'Test description 2',
+          itInterfaceType: {
+            name: 'InterfaceType2 (udgået)',
+          },
+          urlReference: '', //since the url doesn't contain 'http' it should be invalid
         },
-        urlReference: '', //since the url doesn't contain 'http' it should be invalid
-      },
-    ];
+      ];
 
-    cy.get('tr').should('have.length', expectedRows.length);
-    expectedRows.forEach((row) => {
-      const rowElement = cy.contains(row.name);
-      rowElement
-        .parentsUntil('tr')
-        .parent('tr')
-        .within(() => {
-          cy.get('td')
-            .eq(1)
-            .contains(row.deactivated ? 'Ikke aktiv' : 'Aktiv');
-          cy.get('td').eq(2).contains(row.itInterfaceType.name);
-          cy.get('td').eq(3).contains(row.description);
+      cy.get('tr').should('have.length', expectedRows.length);
+      expectedRows.forEach((row) => {
+        const rowElement = cy.contains(row.name);
+        rowElement
+          .parentsUntil('tr')
+          .parent('tr')
+          .within(() => {
+            cy.get('td')
+              .eq(1)
+              .contains(row.deactivated ? 'Ikke aktiv' : 'Aktiv');
+            cy.get('td').eq(2).contains(row.itInterfaceType.name);
+            cy.get('td').eq(3).contains(row.description);
 
-          if (row.urlReference.includes('http')) {
-            cy.get('td').eq(4).verifyExternalReferenceHrefValue('Læs mere', row.urlReference);
-          }
-        });
+            if (row.urlReference.includes('http')) {
+              cy.get('td').eq(4).verifyExternalReferenceHrefValue('Læs mere', row.urlReference);
+            }
+          });
+      });
     });
   });
 });

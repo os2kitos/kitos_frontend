@@ -7,13 +7,16 @@ import { UserGuardService } from './user-guard.service';
 
 @Injectable({ providedIn: 'root' })
 export class LocalAdminGuardService {
-  constructor(private userGuardService: UserGuardService, private store: Store) {}
+  constructor(
+    private userGuardService: UserGuardService,
+    private store: Store,
+  ) {}
 
   canActivate(): Observable<boolean | UrlTree> {
     return this.store
       .select(selectUserIsCurrentlyLocalAdmin)
       .pipe(
-        switchMap((isCurrentyLocalAdmin) => this.userGuardService.verifyAuthorization((_) => isCurrentyLocalAdmin))
+        switchMap((isCurrentyLocalAdmin) => this.userGuardService.verifyAuthorization((_) => isCurrentyLocalAdmin)),
       );
   }
 }

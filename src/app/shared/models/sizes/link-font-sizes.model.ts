@@ -1,1 +1,1 @@
-export type LinkFontSizes = 'medium' | 'small' | 'x-small';
+export type LinkFontSizes = 'large' | 'medium' | 'small' | 'x-small';

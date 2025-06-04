@@ -18,7 +18,8 @@
         text="Telefonnummer"
         [formGroup]="masterDataForm"
         formName="phoneControl"
-        (valueChange)="patchMasterData({ phone: $event })"
+        [pattern]="phoneNumberRegex"
+        (valueChange)="patchMasterDataPhoneNumber()"
         data-cy="master-data-phone-input"
       ></app-textbox>
       <app-textbox
@@ -61,6 +62,7 @@
       i18n-text
       text="Telefonnummer"
       [formGroup]="dataResponsibleForm"
+      [pattern]="phoneNumberRegex"
       formName="phoneControl"
       (valueChange)="patchMasterDataRolesDataResponsible()"
     ></app-textbox>
@@ -114,6 +116,7 @@
       i18n-text
       text="Telefonnummer"
       [formGroup]="dataProtectionAdvisorForm"
+      [pattern]="phoneNumberRegex"
       formName="phoneControl"
       (valueChange)="patchMasterDataRolesDataProtectionAdvisor()"
     ></app-textbox>
@@ -157,6 +160,7 @@
       i18n-text
       text="Telefonnummer"
       [formGroup]="contactPersonForm"
+      [pattern]="phoneNumberRegex"
       formName="phoneControl"
       (valueChange)="patchMasterDataRolesContactPerson()"
       data-cy="contact-person-phone-control"

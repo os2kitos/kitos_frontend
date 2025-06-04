@@ -19,6 +19,19 @@ import {
   selectITSystemUsageEnableGdprTechnicalPrecautions,
   selectITSystemUsageEnableGdprUserSupervision,
 } from 'src/app/store/organization/ui-module-customization/selectors';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { GeneralInfoSectionComponent } from './general-info-section/general-info-section.component';
+import { CardComponent } from '../../../../../shared/components/card/card.component';
+import { CardHeaderComponent } from '../../../../../shared/components/card-header/card-header.component';
+import { ButtonComponent } from '../../../../../shared/components/buttons/button/button.component';
+import { StandardVerticalContentGridComponent } from '../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { DataSensitivitySectionComponent } from './data-sensitivity-section/data-sensitivity-section.component';
+import { RegisteredDataCategoriesSectionComponent } from './registered-data-categories-section/registered-data-categories-section.component';
+import { GdprTechnicalPrecautionsSectionComponent } from './gdpr-technical-precautions-section/gdpr-technical-precautions-section.component';
+import { GdprUserSupervisionSectionComponent } from './gdpr-user-supervision-section/gdpr-user-supervision-section.component';
+import { GdprRiskAssessmentSectionComponent } from './gdpr-risk-assessment-section/gdpr-risk-assessment-section.component';
+import { GdprDpiaConductedSectionComponent } from './gdpr-dpia-conducted-section/gdpr-dpia-conducted-section.component';
+import { GdprRetentionPeriodSectionComponent } from './gdpr-retention-period-section/gdpr-retention-period-section.component';
 
 type UsageGDPRSection =
   | 'data-sensitivity'
@@ -33,6 +46,22 @@ type UsageGDPRSection =
   selector: 'app-it-system-usage-details-gdpr',
   templateUrl: './it-system-usage-details-gdpr.component.html',
   styleUrls: ['./it-system-usage-details-gdpr.component.scss'],
+  imports: [
+    NgIf,
+    GeneralInfoSectionComponent,
+    CardComponent,
+    CardHeaderComponent,
+    ButtonComponent,
+    StandardVerticalContentGridComponent,
+    DataSensitivitySectionComponent,
+    RegisteredDataCategoriesSectionComponent,
+    GdprTechnicalPrecautionsSectionComponent,
+    GdprUserSupervisionSectionComponent,
+    GdprRiskAssessmentSectionComponent,
+    GdprDpiaConductedSectionComponent,
+    GdprRetentionPeriodSectionComponent,
+    AsyncPipe,
+  ],
 })
 export class ItSystemUsageDetailsGdprComponent extends BaseComponent {
   @Output() disableLinkControls = new EventEmitter<void>();
@@ -91,7 +120,7 @@ export class ItSystemUsageDetailsGdprComponent extends BaseComponent {
   ]);
 
   public readonly expandAllButtonText$ = this.allExpanded$.pipe(
-    map((allExpanded) => (allExpanded ? $localize`Luk alle` : $localize`Åben alle`))
+    map((allExpanded) => (allExpanded ? $localize`Luk alle` : $localize`Åben alle`)),
   );
 
   public disableFormsIfNoPermissions(controls: AbstractControl[]) {
@@ -102,7 +131,7 @@ export class ItSystemUsageDetailsGdprComponent extends BaseComponent {
         .subscribe(() => {
           controls.forEach((control: AbstractControl) => control.disable());
           this.disableLinkControls.emit();
-        })
+        }),
     );
   }
 
@@ -143,7 +172,7 @@ export class ItSystemUsageDetailsGdprComponent extends BaseComponent {
         this.riskAssessmentExpanded$.next(targetValue);
         this.dpiaConductedExpanded$.next(targetValue);
         this.retentionPeriodExpanded$.next(targetValue);
-      })
+      }),
     );
   }
 }

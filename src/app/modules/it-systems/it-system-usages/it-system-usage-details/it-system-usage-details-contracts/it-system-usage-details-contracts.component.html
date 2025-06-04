@@ -1,7 +1,7 @@
 <app-card *ngIf="associatedContractsEnabled$ | async">
   <app-card-header title="Tilknyttede kontrakter" helpTextKey="it-system.usage.contracts" i18n-title></app-card-header>
   <app-loading *ngIf="isLoading$ | async"></app-loading>
-  <ng-container *ngIf="(isLoading$ | async) === false">
+  <app-standard-vertical-content-grid *ngIf="(isLoading$ | async) === false">
     <ng-container *ngIf="anyContracts$ | async">
       <app-native-table>
         <thead>
@@ -54,13 +54,22 @@
         </tbody>
       </app-native-table>
     </ng-container>
-    <app-empty-state
-      *ngIf="(anyContracts$ | async) === false"
-      text='Systemet er ikke omfattet af registreringer i modulet "IT Kontrakter"'
-      context="searchResult"
-      i18n-text
-    ></app-empty-state>
-  </ng-container>
+    <app-standard-vertical-content-grid>
+      <app-empty-state
+        *ngIf="(anyContracts$ | async) === false"
+        text='Systemet er ikke omfattet af registreringer i modulet "IT Kontrakter"'
+        context="searchResult"
+        i18n-text
+      ></app-empty-state>
+      <app-collection-extension-button
+        *ngIf="contractCreationPermission$ | async"
+        (clicked)="openCreateAndRegisterContractDialog()"
+        data-cy="open-create-and-associate-contract-dialog-button"
+        text="Opret og registrer"
+        i18n-text
+      ></app-collection-extension-button>
+    </app-standard-vertical-content-grid>
+  </app-standard-vertical-content-grid>
 </app-card>
 <app-card *ngIf="(isLoading$ | async) === false && (contractToDetermineIsActiveEnabled$ | async)">
   <app-card-header

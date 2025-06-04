@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
@@ -11,11 +11,27 @@ import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import { selectDataProcessingTransferToCountries } from 'src/app/store/data-processing/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
+import { DialogComponent } from '../../../../../../shared/components/dialogs/dialog/dialog.component';
+import { StandardVerticalContentGridComponent } from '../../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { DropdownComponent } from '../../../../../../shared/components/dropdowns/dropdown/dropdown.component';
+import { DialogActionsComponent } from '../../../../../../shared/components/dialogs/dialog-actions/dialog-actions.component';
+import { ButtonComponent } from '../../../../../../shared/components/buttons/button/button.component';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-country-create-dialog',
   templateUrl: './country-create-dialog.component.html',
   styleUrl: './country-create-dialog.component.scss',
+  imports: [
+    DialogComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    StandardVerticalContentGridComponent,
+    DropdownComponent,
+    DialogActionsComponent,
+    ButtonComponent,
+    AsyncPipe,
+  ],
 })
 export class CountryCreateDialogComponent extends BaseComponent implements OnInit {
   public readonly thirdCountries$ = this.store.select(selectRegularOptionTypes('data-processing-country-types')).pipe(
@@ -24,9 +40,9 @@ export class CountryCreateDialogComponent extends BaseComponent implements OnIni
       if (!thirdCountriesOptions) return [];
 
       return thirdCountriesOptions.filter(
-        (option) => !existingCountries.some((country) => country.uuid === option.uuid)
+        (option) => !existingCountries.some((country) => country.uuid === option.uuid),
       );
-    })
+    }),
   );
 
   public readonly thirdCountriesFormGroup = new FormGroup({
@@ -36,7 +52,7 @@ export class CountryCreateDialogComponent extends BaseComponent implements OnIni
   constructor(
     private store: Store,
     private dialog: MatDialogRef<CountryCreateDialogComponent>,
-    private actions$: Actions
+    private actions$: Actions,
   ) {
     super();
   }
@@ -49,13 +65,13 @@ export class CountryCreateDialogComponent extends BaseComponent implements OnIni
     this.subscriptions.add(
       this.actions$.pipe(ofType(DataProcessingActions.patchDataProcessingSuccess)).subscribe(() => {
         this.onClose();
-      })
+      }),
     );
 
     this.subscriptions.add(
       this.actions$.pipe(ofType(DataProcessingActions.patchDataProcessingError)).subscribe(() => {
         this.isBusy = false;
-      })
+      }),
     );
   }
 
@@ -72,8 +88,8 @@ export class CountryCreateDialogComponent extends BaseComponent implements OnIni
         this.store.dispatch(
           DataProcessingActions.addDataProcessingThirdCountry(
             this.thirdCountriesFormGroup.value.thirdCountry!,
-            countries
-          )
+            countries,
+          ),
         );
       });
   }

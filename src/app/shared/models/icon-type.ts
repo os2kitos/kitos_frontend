@@ -29,4 +29,6 @@ export type IconType =
   | 'collapse'
   | 'expand'
   | 'x'
+  | 'calendar'
+  | 'mail'
   | undefined;

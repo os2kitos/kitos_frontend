@@ -1,6 +1,4 @@
-/// <reference types="Cypress" />
-
-describe('it-system-usage', () => {
+describe('it-system-usage help-texts', () => {
   beforeEach(() => {
     cy.requireIntercept();
     cy.setupItSystemUsageIntercepts();

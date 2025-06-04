@@ -78,7 +78,9 @@
           "UserFullName": "Automatisk oprettet testbruger (Api GlobalAdmin)",
           "ParentId": 1
         }
-      ]
+      ],
+      "ResponsibleOrgUnitUuid": "0c2c1b3b-0b1b-4b3b-8b3b-0b1b3b0b1b3b",
+      "ResponsibleOrgUnitName": "En enhed"
     },
     {
       "Id": 3,

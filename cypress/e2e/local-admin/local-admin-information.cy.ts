@@ -1,53 +1,59 @@
 /// <reference types="Cypress" />
 
+import { TestRunner } from 'cypress/support/test-runner';
+
+function setupTest() {
+  cy.requireIntercept();
+  cy.setup(true);
+}
+
 describe('local-admin information', () => {
-  beforeEach(() => {
-    cy.requireIntercept();
-    cy.setup(true);
-  });
+  const testRunner = new TestRunner(setupTest);
 
-  it('can edit just organization name if local admin', () => {
-    const newName = 'someOrg';
-    cy.intercept('/api/v2/internal/organizations/*/permissions', {
-      fixture: './organizations/organization-permissions-local-admin.json',
+  it('Tests', () => {
+    testRunner.runTestWithSetup('can edit just organization name if local admin', () => {
+      const newName = 'someOrg';
+      cy.intercept('/api/v2/internal/organizations/*/permissions', {
+        fixture: './organizations/organization-permissions-local-admin.json',
+      });
+      cy.intercept('PATCH', '/api/v2/internal/organizations/*/patch', {
+        statusCode: 200,
+        body: {},
+      }).as('patch');
+
+      cy.hoverByDataCy('profile-menu');
+      cy.getByDataCy('local-admin-menu-item').should('exist').click();
+
+      cy.confirmTextboxStateByDataCy('name-input', true);
+      cy.confirmTextboxStateByDataCy('cvr-input', false);
+      cy.replaceTextByDataCy('name-input', newName);
+      cy.getByDataCy('info-title').click();
+
+      cy.wait('@patch', { timeout: 10000 }).then((interception) => {
+        expect(interception.request.body.name).to.equal(newName);
+      });
     });
-    cy.intercept('PATCH', '/api/v2/internal/organizations/*/patch', {
-      statusCode: 200,
-      body: {},
-    }).as('patch');
 
-    cy.hoverByDataCy('profile-menu');
-    cy.getByDataCy('local-admin-menu-item').should('exist').click();
+    testRunner.runTestWithSetup('can edit cvr if global admin', () => {
+      const newCvr = '12345678';
+      cy.intercept('/api/v2/internal/organizations/*/permissions', {
+        fixture: './organizations/organization-permissions-global-admin.json',
+      });
+      cy.intercept('PATCH', '/api/v2/internal/organizations/*/patch', {
+        statusCode: 200,
+        body: {},
+      }).as('patch');
 
-    cy.confirmTextboxStateByDataCy('name-input', true);
-    cy.confirmTextboxStateByDataCy('cvr-input', false);
-    cy.replaceTextByDataCy('name-input', newName);
-    cy.getByDataCy('info-title').click();
+      cy.hoverByDataCy('profile-menu');
+      cy.getByDataCy('local-admin-menu-item').should('exist').click();
 
-    cy.wait('@patch', { timeout: 10000 }).then((interception) => {
-      expect(interception.request.body.name).to.equal(newName);
-    });
-  });
+      cy.confirmTextboxStateByDataCy('cvr-input', true);
+      cy.replaceTextByDataCy('cvr-input', newCvr);
+      cy.getByDataCy('info-title').click();
 
-  it('can edit cvr if global admin', () => {
-    const newCvr = '12345678';
-    cy.intercept('/api/v2/internal/organizations/*/permissions', {
-      fixture: './organizations/organization-permissions-global-admin.json',
-    });
-    cy.intercept('PATCH', '/api/v2/internal/organizations/*/patch', {
-      statusCode: 200,
-      body: {},
-    }).as('patch');
-
-    cy.hoverByDataCy('profile-menu');
-    cy.getByDataCy('local-admin-menu-item').should('exist').click();
-
-    cy.confirmTextboxStateByDataCy('cvr-input', true);
-    cy.replaceTextByDataCy('cvr-input', newCvr);
-    cy.getByDataCy('info-title').click();
-
-    cy.wait('@patch', { timeout: 10000 }).then((interception) => {
-      expect(interception.request.body.cvr).to.equal(newCvr);
+      cy.wait('@patch', { timeout: 10000 }).then((interception) => {
+        expect(interception.request.body.cvr).to.equal(newCvr);
+      });
     });
   });
 });

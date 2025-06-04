@@ -1,10 +1,10 @@
-@import "theme";
+@use "theme";
 
 td {
-  color : $color-neutral-dark;
+  color: theme.$color-neutral-dark;
   word-wrap: break-word;
 }
 
 .accordion-header * {
-  padding: $padding-smaller;
+  padding: theme.$padding-smaller;
 }

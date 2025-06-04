@@ -1,18 +1,20 @@
+import { AsyncPipe, NgIf } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { RegularOptionType } from 'src/app/shared/models/options/regular-option-types.model';
-import { OptionTypeDropdownComponentStore } from './option-type-dropdown-component-store';
-import { BaseComponent } from 'src/app/shared/base/base.component';
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { APIRegularOptionResponseDTO } from 'src/app/api/v2';
+import { BaseComponent } from 'src/app/shared/base/base.component';
 import { getOptionTypeName } from 'src/app/shared/helpers/option-type.helper';
-import { Store } from '@ngrx/store';
+import { RegularOptionType } from 'src/app/shared/models/options/regular-option-types.model';
 import { RoleOptionTypes } from 'src/app/shared/models/options/role-option-types.model';
+import { DropdownComponent } from '../dropdown/dropdown.component';
+import { OptionTypeDropdownComponentStore } from './option-type-dropdown-component-store';
 
 @Component({
   selector: 'app-option-type-dropdown',
   templateUrl: './option-type-dropdown.component.html',
   styleUrl: './option-type-dropdown.component.scss',
   providers: [OptionTypeDropdownComponentStore],
+  imports: [NgIf, DropdownComponent, FormsModule, ReactiveFormsModule, AsyncPipe],
 })
 export class OptionTypeDropdownComponent extends BaseComponent implements OnInit {
   @Input() optionType!: RegularOptionType | RoleOptionTypes;
@@ -20,13 +22,14 @@ export class OptionTypeDropdownComponent extends BaseComponent implements OnInit
   @Input() formGroup?: FormGroup;
   @Input() formName?: string;
   @Input() value?: APIRegularOptionResponseDTO;
+  @Input() dropdownTitle?: string;
 
   @Output() valueChange = new EventEmitter<string | null | undefined>();
 
   public readonly optionTypes$ = this.componentStore.optionTypes$;
   public readonly loading$ = this.componentStore.loading$;
 
-  constructor(private componentStore: OptionTypeDropdownComponentStore, private store: Store) {
+  constructor(private componentStore: OptionTypeDropdownComponentStore) {
     super();
   }
 
@@ -35,7 +38,7 @@ export class OptionTypeDropdownComponent extends BaseComponent implements OnInit
   }
 
   public getDropdownTitle(): string {
-    return getOptionTypeName(this.optionType);
+    return this.dropdownTitle ?? getOptionTypeName(this.optionType);
   }
 
   public onValueChange(item: APIRegularOptionResponseDTO | null | undefined): void {

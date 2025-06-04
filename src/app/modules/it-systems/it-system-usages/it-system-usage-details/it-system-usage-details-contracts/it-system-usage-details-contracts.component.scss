@@ -1,4 +1,4 @@
-@import "theme";
+@use "theme";
 
 :host {
   display: flex;
@@ -9,6 +9,6 @@
 .contract-selection-form {
   display: grid;
   grid-template-columns: 2fr 1fr;
-  grid-gap: $padding-large;
+  grid-gap: theme.$padding-large;
   align-items: center;
 }

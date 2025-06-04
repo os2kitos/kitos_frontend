@@ -1,9 +1,8 @@
-import { APINotificationResponseDTO } from "src/app/api/v2";
-
+import { APINotificationResponseDTO } from 'src/app/api/v2';
 
 export interface NotificationRepetitionFrequency {
-  name: string,
-  value: APINotificationResponseDTO.RepetitionFrequencyEnum
+  name: string;
+  value: APINotificationResponseDTO.RepetitionFrequencyEnum;
 }
 
 export const notificationRepetitionFrequencyOptions: NotificationRepetitionFrequency[] = [
@@ -14,8 +13,10 @@ export const notificationRepetitionFrequencyOptions: NotificationRepetitionFrequ
   { name: $localize`Kvartal`, value: APINotificationResponseDTO.RepetitionFrequencyEnum.Quarter },
   { name: $localize`Halvårlig`, value: APINotificationResponseDTO.RepetitionFrequencyEnum.HalfYear },
   { name: $localize`År`, value: APINotificationResponseDTO.RepetitionFrequencyEnum.Year },
-]
+];
 
-export const mapNotificationRepetitionFrequency = (value?: APINotificationResponseDTO.RepetitionFrequencyEnum): NotificationRepetitionFrequency | undefined => {
+export const mapNotificationRepetitionFrequency = (
+  value?: APINotificationResponseDTO.RepetitionFrequencyEnum,
+): NotificationRepetitionFrequency | undefined => {
   return notificationRepetitionFrequencyOptions.find((option) => option.value === value);
 };

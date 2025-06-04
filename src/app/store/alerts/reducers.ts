@@ -46,6 +46,6 @@ export const alertsFeature = createFeature({
           [entityType]: alertsAdapter.removeOne(alertUuid, state.alerts[entityType]),
         },
       };
-    })
+    }),
   ),
 });

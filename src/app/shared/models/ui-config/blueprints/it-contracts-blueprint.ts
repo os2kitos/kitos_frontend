@@ -32,7 +32,7 @@ export const ItContractsUiBluePrint = {
           text: $localize`Indkøbsform`,
         },
         isActive: {
-          text: $localize`Gyldig`,
+          text: $localize`Status`,
         },
         agreementPeriod: {
           text: $localize`Gyldig fra/til`,
@@ -42,6 +42,9 @@ export const ItContractsUiBluePrint = {
         },
         parentContract: {
           text: $localize`Overordnet kontrakt`,
+        },
+        useParentValidity: {
+          text: $localize`Nedarv overordnet kontrakts gyldighed`,
         },
         responsibleUnit: {
           text: $localize`Ansvarlig enhed`,

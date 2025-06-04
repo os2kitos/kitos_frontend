@@ -1,8 +1,8 @@
-<app-scrollbar-dialog [title]="data.title" [closable]="true" overflow="none" i18n-title>
+<app-scrollbar-dialog [title]="title" [closable]="true" overflow="none" i18n-title>
   <app-native-table>
     <tbody>
       <th i18n-title>Organisation</th>
-      <tr *ngFor="let usage of data.usingOrganizations">
+      <tr *ngFor="let usage of usingOrganizations">
         <td>
           <app-content-space-between>
             <app-paragraph [bold]="true">

@@ -10,12 +10,17 @@
           [formGroup]="externalReferenceForm"
           formName="documentId"
         ></app-textbox>
-        <app-textbox
-          text="URL, hvis dokumenttitel skal virke som link"
-          i18n-text
-          [formGroup]="externalReferenceForm"
-          formName="url"
-        ></app-textbox>
+        <div>
+          <app-textbox
+            text="URL, hvis dokumenttitel skal virke som link"
+            i18n-text
+            [formGroup]="externalReferenceForm"
+            formName="url"
+          ></app-textbox>
+          <app-paragraph paragraphSize="small" color="error" *ngIf="showUrlError" i18n
+            >Webadressen er ugyldig. Sørg for, at den begynder med "https://"</app-paragraph
+          >
+        </div>
         <app-checkbox
           text="Vises i overblik"
           [labelPosition]="'after'"

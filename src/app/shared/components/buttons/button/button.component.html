@@ -1,5 +1,6 @@
-<app-tooltip [text]="tooltip ?? ''">
+<app-tooltip [text]="tooltip ?? ''" [matchContentWidth]="tooltipMatchContentWidth">
   <button
+    appCtrlClick
     mat-button
     class="{{ size }}"
     [ngClass]="{
@@ -14,12 +15,12 @@
       'style-primary-color-secondary-disabled': color === 'secondary' && buttonStyle === 'primary' && disabled,
       'button-content-alignment-start': alignStart,
       'background-white': backgroundWhite,
-      'icon-button': iconType
     }"
     [color]="color"
     [disabled]="disabled || loading"
     [type]="type"
     (click)="onButtonClick()"
+    data-cy="mat-button"
   >
     <app-icon *ngIf="iconType" [iconType]="iconType" class="center-icon"></app-icon>
     <ng-content></ng-content>

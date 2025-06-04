@@ -5,6 +5,9 @@ $ErrorActionPreference = 'Stop'
 Write-Host "Installing packages"
 yarn
 
+yarn cypress install
+if ( -not $? ) { throw "Failed installing cypress" }
+
 yarn lint
 if ( -not $? ) { throw "Failed linting" }
 

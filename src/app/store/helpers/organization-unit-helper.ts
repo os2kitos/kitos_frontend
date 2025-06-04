@@ -6,17 +6,17 @@ export function removeUnitAndUpdateChildren(
   unit: APIOrganizationUnitResponseDTO,
   children: APIOrganizationUnitResponseDTO[],
   parent: APIOrganizationUnitResponseDTO,
-  state: OrganizationUnitState
+  state: OrganizationUnitState,
 ): OrganizationUnitState {
   const stateAfterRemovingChildren = organizationUnitAdapter.removeMany(
     children.map((unit) => unit.uuid),
-    state
+    state,
   );
   const stateAfterRemovingNode = organizationUnitAdapter.removeOne(unit.uuid, stateAfterRemovingChildren);
   const setChildrensNewParent = children.map((unit) => ({ ...unit, parentOrganizationUnit: parent }));
   const stateAfterAddingUpdatedChildren = organizationUnitAdapter.addMany(
     setChildrensNewParent,
-    stateAfterRemovingNode
+    stateAfterRemovingNode,
   );
 
   return {

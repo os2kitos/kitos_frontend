@@ -1,0 +1,24 @@
+<div class="action-buttons-container">
+  <ng-container *ngFor="let button of column.extraData">
+    <app-icon-button
+      *ngIf="button.type === 'edit' && modifyPermission"
+      (click)="onModifyClick()"
+      data-cy="grid-edit-button"
+    >
+      <app-pencil-icon></app-pencil-icon>
+    </app-icon-button>
+    <app-icon-button
+      *ngIf="button.type === 'delete' && deletePermission"
+      (click)="onDeleteClick()"
+      data-cy="grid-delete-button"
+    >
+      <app-trashcan-icon></app-trashcan-icon>
+    </app-icon-button>
+    <app-toggle-button
+      *ngIf="button.type === 'toggle'"
+      (valueChange)="onToggleChange($event)"
+      [value]="getProperty(column.field)"
+    >
+    </app-toggle-button>
+  </ng-container>
+</div>

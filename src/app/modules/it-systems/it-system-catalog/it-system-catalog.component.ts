@@ -1,3 +1,4 @@
+import { AsyncPipe, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
@@ -19,8 +20,9 @@ import {
 import { accessModifierOptions } from 'src/app/shared/models/access-modifier.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
-import { CheckboxChange } from 'src/app/shared/models/grid/grid-events.model';
+import { BooleanChange } from 'src/app/shared/models/grid/grid-events.model';
 import { archiveDutyRecommendationChoiceOptions } from 'src/app/shared/models/it-system/archive-duty-recommendation-choice.model';
+import { ITSystem } from 'src/app/shared/models/it-system/it-system.model';
 import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.service';
 import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
@@ -33,10 +35,26 @@ import {
   selectSystemGridLoading,
   selectSystemGridState,
 } from 'src/app/store/it-system/selectors';
+import { ExportMenuButtonComponent } from '../../../shared/components/buttons/export-menu-button/export-menu-button.component';
+import { CreateEntityButtonComponent } from '../../../shared/components/entity-creation/create-entity-button/create-entity-button.component';
+import { GridOptionsButtonComponent } from '../../../shared/components/grid-options-button/grid-options-button.component';
+import { GridComponent } from '../../../shared/components/grid/grid.component';
+import { HideShowButtonComponent } from '../../../shared/components/grid/hide-show-button/hide-show-button.component';
+import { OverviewHeaderComponent } from '../../../shared/components/overview-header/overview-header.component';
 
 @Component({
   templateUrl: './it-system-catalog.component.html',
   styleUrl: './it-system-catalog.component.scss',
+  imports: [
+    OverviewHeaderComponent,
+    NgIf,
+    GridOptionsButtonComponent,
+    ExportMenuButtonComponent,
+    HideShowButtonComponent,
+    CreateEntityButtonComponent,
+    GridComponent,
+    AsyncPipe,
+  ],
 })
 export class ItSystemCatalogComponent extends BaseOverviewComponent implements OnInit {
   public readonly isLoading$ = this.store.select(selectSystemGridLoading);
@@ -58,6 +76,7 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
       noFilter: true,
       hidden: false,
       style: 'checkbox',
+      entityType: 'it-system',
       permissionsField: 'CanChangeUsageStatus',
       sortable: false,
     },
@@ -82,6 +101,7 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
       style: 'reverse-chip',
       hidden: false,
       persistId: 'isActive',
+      helpText: $localize`Dette filtrerer dine systemer efter om det er tilgængeligt eller et udgået system, som ikke længere kan tages i anvendelse og bør udfases.`,
     },
     {
       field: CatalogFields.PARENT_NAME,
@@ -210,6 +230,18 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
       section: ARCHIVE_SECTION_NAME,
       hidden: true,
     },
+    {
+      field: CatalogFields.LEGAL_SYSTEM_NAME,
+      title: $localize`DBS Navn`,
+      section: this.systemSectionName,
+      hidden: true,
+    },
+    {
+      field: CatalogFields.LEGAL_DATA_PROCESSOR_NAME,
+      title: $localize`DBS Databehandler`,
+      section: this.systemSectionName,
+      hidden: true,
+    },
   ];
 
   constructor(
@@ -231,7 +263,8 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
     if (existingColumns) {
       this.store.dispatch(ITSystemActions.updateGridColumns(existingColumns));
     } else {
-      this.store.dispatch(ITSystemActions.updateGridColumns(this.defaultGridColumns));
+      const columns = this.mapColumnOrder(this.defaultGridColumns);
+      this.store.dispatch(ITSystemActions.updateGridColumns(columns));
     }
 
     this.subscriptions.add(this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState)));
@@ -258,14 +291,13 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
     );
   }
 
-  public handleSystemUsageChange(event: CheckboxChange) {
-    const rowEntityUuid = event.rowEntityUuid;
-    if (!rowEntityUuid) return;
+  public handleSystemUsageChange(event: BooleanChange<ITSystem>) {
+    const systemUuid = event.item.Uuid;
 
     if (event.value === true) {
-      this.handleTakeSystemIntoUse(rowEntityUuid);
+      this.handleTakeSystemIntoUse(systemUuid);
     } else {
-      this.handleTakeSystemOutOfUse(rowEntityUuid);
+      this.handleTakeSystemOutOfUse(systemUuid);
     }
   }
 

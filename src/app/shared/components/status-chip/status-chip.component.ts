@@ -1,6 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
 import { EntityStatusTextsService } from '../../services/entity-status-texts.service';
+import { TooltipComponent } from '../tooltip/tooltip.component';
+import { NgIf } from '@angular/common';
+import { ChipComponent } from '../chip/chip.component';
 
 export enum BooleanValueDisplayType {
   TrueFalse = 'true-false',
@@ -8,12 +11,16 @@ export enum BooleanValueDisplayType {
   ActiveInactive = 'active-inactive',
   ValidInvalid = 'valid-invalid',
   AvailableNotAvailable = 'available-not-available',
+  NormalUnstable = 'normal-unstable',
+  InUseNotInUse = 'in-use-not-in-use',
+  RequiresValidParent = 'requires-valid-parent',
 }
 
 @Component({
   selector: 'app-status-chip',
   templateUrl: 'status-chip.component.html',
   styleUrls: ['status-chip.component.scss'],
+  imports: [TooltipComponent, NgIf, ChipComponent],
 })
 export class StatusChipComponent implements OnInit {
   @Input() public type?: RegistrationEntityTypes;
@@ -67,6 +74,18 @@ export class StatusChipComponent implements OnInit {
       case BooleanValueDisplayType.AvailableNotAvailable:
         this.trueString = $localize`Tilgængelig`;
         this.falseString = $localize`Ikke tilgængelig`;
+        break;
+      case BooleanValueDisplayType.NormalUnstable:
+        this.trueString = $localize`Normal drift`;
+        this.falseString = $localize`Ustabil drift`;
+        break;
+      case BooleanValueDisplayType.InUseNotInUse:
+        this.trueString = $localize`Anvendes`;
+        this.falseString = $localize`Anvendes ikke`;
+        break;
+      case BooleanValueDisplayType.RequiresValidParent:
+        this.trueString = $localize`Nedarver`;
+        this.falseString = $localize`Nedarver ikke`;
         break;
       default:
         console.error('Invalid value display type');

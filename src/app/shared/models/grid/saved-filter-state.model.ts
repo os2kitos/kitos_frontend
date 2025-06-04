@@ -1,4 +1,4 @@
-import { CompositeFilterDescriptor, SortDescriptor } from "@progress/kendo-data-query";
+import { CompositeFilterDescriptor, SortDescriptor } from '@progress/kendo-data-query';
 
 export type SavedFilterState = {
   filter: CompositeFilterDescriptor | undefined;

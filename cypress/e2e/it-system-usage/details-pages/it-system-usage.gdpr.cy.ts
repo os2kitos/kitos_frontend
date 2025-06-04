@@ -1,5 +1,3 @@
-/// <reference types="Cypress" />
-
 const generalInformation = 'Generel information';
 const purposeInput = 'Systemets overordnede formål';
 const businessCriticalDropdown = 'Forretningskritisk IT-System';
@@ -12,7 +10,7 @@ const userSupervisionAccordion = 'user-supervision-accordion';
 const riskAssessmentAccordion = 'risk-assessment-accordion';
 const datepickerToggle = 'datepicker-toggle';
 
-describe('it-system-usage', () => {
+describe('it-system-usage gdpr', () => {
   beforeEach(() => {
     cy.requireIntercept();
     cy.setupItSystemUsageIntercepts();
@@ -24,7 +22,6 @@ describe('it-system-usage', () => {
       fixture: './it-system-usage/it-system-usage-registered-data-category-types.json',
     });
     cy.setup(true, 'it-systems/it-system-usages');
-
     cy.contains('System 3').click();
     cy.navigateToDetailsSubPage('GDPR');
   });
@@ -181,7 +178,7 @@ describe('it-system-usage', () => {
         verifyGdprPatchRequest({ technicalPrecautionsApplied: ['Encryption'] }, 'patchAddPrecaution');
         verifyLinkTextAndPressEdit('technical-precautions-documentation-link', 'newName: newUrl');
       });
-    verifyLinkEditDialog();
+    verifyLinkEditDialogAndPerformEdit();
   });
 
   it('can edit user supervision', () => {
@@ -205,7 +202,7 @@ describe('it-system-usage', () => {
 
         verifyLinkTextAndPressEdit('base-date-url-section-selector', 'newName: newUrl');
       });
-    verifyLinkEditDialog();
+    verifyLinkEditDialogAndPerformEdit();
   });
 
   it('can edit risk assessment', () => {
@@ -228,7 +225,15 @@ describe('it-system-usage', () => {
     verifyAppNotification();
 
     verifyLinkTextAndPressEdit('risk-documentation-link', 'newName: newUrl');
-    verifyLinkEditDialog();
+    verifyLinkEditDialogAndPerformEdit();
+  });
+
+  it('cannot save directory documentation with unchanged url', () => {
+    verifyLinkTextAndPressEdit('directory-documentation-link', 'newName: newUrl');
+
+    cy.get('app-edit-url-dialog').within(() => {
+      cy.verifyDialogConfirmButtonDisabledByReactiveForm('edit-url-save-button');
+    });
   });
 
   it('can edit retention period', () => {
@@ -261,7 +266,7 @@ function verifyGdprPatchRequest(gdprUpdate: object, requestAlias?: string) {
 function verifyLinkTextbox(textboxSelector: string, textboxText: string) {
   verifyLinkTextAndPressEdit(textboxSelector, textboxText);
 
-  verifyLinkEditDialog();
+  verifyLinkEditDialogAndPerformEdit();
 }
 
 function verifyLinkTextAndPressEdit(textboxSelector: string, textboxText: string) {
@@ -270,7 +275,7 @@ function verifyLinkTextAndPressEdit(textboxSelector: string, textboxText: string
   });
 }
 
-function verifyLinkEditDialog() {
+function verifyLinkEditDialogAndPerformEdit() {
   cy.get('app-edit-url-dialog').within(() => {
     cy.getByDataCy('link-name-textbox').type('Test');
     cy.getByDataCy('link-url-textbox').type('https://test.dk');

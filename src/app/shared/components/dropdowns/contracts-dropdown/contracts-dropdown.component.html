@@ -1,0 +1,12 @@
+<app-connected-dropdown
+  [text]="text"
+  valueField="uuid"
+  [includeItemDescription]="true"
+  [formGroup]="formGroup"
+  [formName]="formName"
+  [isLoading$]="isLoading$"
+  [data$]="filteredContracts$"
+  (filterChange)="searchContracts($event)"
+  (valueChange)="onContractChange($event)"
+>
+</app-connected-dropdown>

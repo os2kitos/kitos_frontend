@@ -1,19 +1,45 @@
-@import "theme";
+@use "theme";
+@use "mixins";
 
-.card {
-  padding: $padding-medium;
-  border-radius: $radius-large;
-  background: $color-white;
-  margin-bottom: $padding-medium;
-}
-
-.divider-margin {
-  margin-top: $padding-medium;
-  margin-bottom: $padding-medium;
-}
-
-app-button {
+:host {
+  display: flex;
+  flex-direction: column;
   width: fit-content;
-  display: block;
-  margin: auto;
+}
+
+.top-container {
+  overflow: hidden;
+}
+
+.icon-container {
+  @include mixins.center-items-container;
+  background-color: theme.$color-primary-20;
+  width: 40px;
+  height: 40px;
+  border-radius: theme.$radius-large;
+  margin-bottom: theme.$padding-medium-large;
+  float: left;
+}
+
+.link-container {
+  @include mixins.center-items-container;
+  gap: 8px;
+  float: right;
+}
+
+.padding {
+  padding: 4px;
+}
+
+app-card {
+  min-height: 171px;
+  margin: 12px;
+}
+
+.compact-height {
+  min-height: 171px;
+}
+
+.normal-height {
+  min-height: 150px;
 }

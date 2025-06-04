@@ -1,10 +1,10 @@
-import { APISimpleLinkDTO } from "src/app/api/v2"
+import { APISimpleLinkDTO } from 'src/app/api/v2';
 
 export interface SimpleLink {
-  name?: string,
-  url?: string
+  name?: string;
+  url?: string;
 }
 
 export const mapSimpleLink = (apiSimpleLinkDto?: APISimpleLinkDTO) => {
-  return { name: apiSimpleLinkDto?.name, url: apiSimpleLinkDto?.url }
-}
+  return { name: apiSimpleLinkDto?.name, url: apiSimpleLinkDto?.url };
+};

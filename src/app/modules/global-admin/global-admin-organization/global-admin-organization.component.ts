@@ -1,16 +1,21 @@
 import { Component } from '@angular/core';
 import { SegmentButtonOption } from 'src/app/shared/components/segment/segment.component';
+import { SegmentComponent } from '../../../shared/components/segment/segment.component';
+import { CardComponent } from '../../../shared/components/card/card.component';
+import { NgIf } from '@angular/common';
+import { StandardVerticalContentGridComponent } from '../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { GlobalOptionTypeViewComponent } from '../../../shared/components/global-option-type-view/global-option-type-view.component';
 
 enum GlobalAdminOrganizationSegmentOptionType {
   CountryCodes = 'CountryCodes',
   RoleOptionTypes = 'RoleOptionTypes',
 }
 
-
 @Component({
   selector: 'app-global-admin-organization',
   templateUrl: './global-admin-organization.component.html',
-  styleUrl: './global-admin-organization.component.scss'
+  styleUrl: './global-admin-organization.component.scss',
+  imports: [SegmentComponent, CardComponent, NgIf, StandardVerticalContentGridComponent, GlobalOptionTypeViewComponent],
 })
 export class GlobalAdminOrganizationComponent {
   public readonly GlobalAdminOrganizationSegmentOptionType = GlobalAdminOrganizationSegmentOptionType;
@@ -20,5 +25,4 @@ export class GlobalAdminOrganizationComponent {
   ];
 
   public selectedSegment = GlobalAdminOrganizationSegmentOptionType.CountryCodes;
-
 }

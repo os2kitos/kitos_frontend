@@ -25,7 +25,7 @@ Function Setup-Environment([String] $environmentName) {
 
   switch ( $environmentName ) {
     "integration" {
-      $Env:DeploymentBundleName = "production"
+      $Env:DeploymentBundleName = "dev"
       break;
     }
     "dev" {
@@ -33,7 +33,7 @@ Function Setup-Environment([String] $environmentName) {
       break;
     }
     "staging" {
-      $Env:DeploymentBundleName = "production"
+      $Env:DeploymentBundleName = "dev"
       break;
     }
     "production" {

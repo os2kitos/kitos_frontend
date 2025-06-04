@@ -32,14 +32,14 @@ export class ItSystemUsageDetailsRelationsComponentStore extends ComponentStore<
     (state, incomingRelations: Array<SystemRelationModel>): State => ({
       ...state,
       incomingRelations,
-    })
+    }),
   );
 
   private updateIncomingRelationsIsLoading = this.updater(
     (state, loading: boolean): State => ({
       ...state,
       loading,
-    })
+    }),
   );
   public getIncomingRelations = this.effect((systemUsageUuid$: Observable<string>) =>
     systemUsageUuid$.pipe(
@@ -50,20 +50,20 @@ export class ItSystemUsageDetailsRelationsComponentStore extends ComponentStore<
             (relations) =>
               this.updateIncomingRelations(
                 relations.map((relation) =>
-                  this.mapRelationResponseDTOToSystemRelationModel(relation, relation.fromSystemUsage)
-                )
+                  this.mapRelationResponseDTOToSystemRelationModel(relation, relation.fromSystemUsage),
+                ),
               ),
             (e) => console.error(e),
-            () => this.updateIncomingRelationsIsLoading(false)
-          )
+            () => this.updateIncomingRelationsIsLoading(false),
+          ),
         );
-      })
-    )
+      }),
+    ),
   );
 
   public mapRelationResponseDTOToSystemRelationModel(
     relation: APIOutgoingSystemRelationResponseDTO | APIIncomingSystemRelationResponseDTO,
-    relationSystemUsage: APIIdentityNamePairResponseDTO
+    relationSystemUsage: APIIdentityNamePairResponseDTO,
   ): SystemRelationModel {
     return {
       uuid: relation.uuid,

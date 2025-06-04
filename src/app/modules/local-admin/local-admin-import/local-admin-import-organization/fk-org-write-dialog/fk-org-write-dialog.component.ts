@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
@@ -20,11 +20,48 @@ import {
   selectUpdateConsequences,
 } from 'src/app/store/local-admin/fk-org/selectors';
 import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
+import { ScrollbarDialogComponent } from '../../../../../shared/components/dialogs/dialog/scrollbar-dialog/scrollbar-dialog.component';
+import { StandardVerticalContentGridComponent } from '../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { CardComponent } from '../../../../../shared/components/card/card.component';
+import { CardHeaderComponent } from '../../../../../shared/components/card-header/card-header.component';
+import { NumericInputComponent } from '../../../../../shared/components/numeric-input/numeric-input.component';
+import { ParagraphComponent } from '../../../../../shared/components/paragraph/paragraph.component';
+import { CheckboxComponent } from '../../../../../shared/components/checkbox/checkbox.component';
+import { DragAndDropTreeComponent } from '../../../../../shared/components/drag-and-drop-tree/drag-and-drop-tree.component';
+import { AccordionComponent } from '../../../../../shared/components/accordion/accordion.component';
+import { ContentSpaceBetweenComponent } from '../../../../../shared/components/content-space-between/content-space-between.component';
+import { ButtonComponent } from '../../../../../shared/components/buttons/button/button.component';
+import { ExportIconComponent } from '../../../../../shared/components/icons/export-icon.component';
+import { LocalGridComponent } from '../../../../../shared/components/local-grid/local-grid.component';
+import { LoadingComponent } from '../../../../../shared/components/loading/loading.component';
+import { DialogActionsComponent } from '../../../../../shared/components/dialogs/dialog-actions/dialog-actions.component';
 
 @Component({
   selector: 'app-fk-org-write-dialog',
   templateUrl: './fk-org-write-dialog.component.html',
   styleUrl: './fk-org-write-dialog.component.scss',
+  imports: [
+    ScrollbarDialogComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    StandardVerticalContentGridComponent,
+    NgIf,
+    CardComponent,
+    CardHeaderComponent,
+    NumericInputComponent,
+    ParagraphComponent,
+    CheckboxComponent,
+    DragAndDropTreeComponent,
+    AccordionComponent,
+    ContentSpaceBetweenComponent,
+    ButtonComponent,
+    ExportIconComponent,
+    LocalGridComponent,
+    LoadingComponent,
+    DialogActionsComponent,
+    AsyncPipe,
+  ],
 })
 export class FkOrgWriteDialogComponent extends BaseComponent implements OnInit {
   @Input() isEdit: boolean = false;
@@ -37,7 +74,7 @@ export class FkOrgWriteDialogComponent extends BaseComponent implements OnInit {
 
   public readonly updateConsequences$ = this.store.select(selectUpdateConsequences);
   public readonly updateConsequencesLength$ = this.updateConsequences$.pipe(
-    map((consequences) => (consequences ? consequences.length : 0))
+    map((consequences) => (consequences ? consequences.length : 0)),
   );
 
   public readonly synchronizationStatus$ = this.store.select(selectSynchronizationStatus);
@@ -54,7 +91,7 @@ export class FkOrgWriteDialogComponent extends BaseComponent implements OnInit {
         return $localize`Alle niveauer i organisationen synkroniseres fra FK Organisation. Angiv antal niveauer for at begrænse hierarkiet.`;
 
       return $localize`KITOS synkroniserer ${level} niveauer fra organisationshierarkiet i FK Organisation. Slet indtastningen for at synkronisere det fulde organisationshierarki.`;
-    })
+    }),
   );
 
   public readonly gridColumns = fkOrgChangelogGridColumns;
@@ -62,7 +99,7 @@ export class FkOrgWriteDialogComponent extends BaseComponent implements OnInit {
   constructor(
     private readonly store: Store,
     private readonly actions$: Actions,
-    private readonly dialog: MatDialogRef<FkOrgWriteDialogComponent>
+    private readonly dialog: MatDialogRef<FkOrgWriteDialogComponent>,
   ) {
     super();
   }
@@ -83,7 +120,7 @@ export class FkOrgWriteDialogComponent extends BaseComponent implements OnInit {
         this.synchronizationStatus$.pipe(first()).subscribe((status) => {
           this.fkOrgFormGroup.controls.levels.setValue(status?.synchronizationDepth);
           this.fkOrgFormGroup.controls.subscribeToUpdates.setValue(status?.subscribesToUpdates ?? false);
-        })
+        }),
       );
     }
 
@@ -93,7 +130,7 @@ export class FkOrgWriteDialogComponent extends BaseComponent implements OnInit {
         .subscribe(() => {
           this.store.dispatch(OrganizationUnitActions.getOrganizationUnits());
           this.cancel();
-        })
+        }),
     );
 
     this.subscriptions.add(
@@ -103,7 +140,7 @@ export class FkOrgWriteDialogComponent extends BaseComponent implements OnInit {
         } else {
           this.fkOrgFormGroup.controls.levels.disable();
         }
-      })
+      }),
     );
   }
 

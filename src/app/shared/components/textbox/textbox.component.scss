@@ -1,9 +1,10 @@
-@import "theme";
-@import "mixins";
+@use "theme";
+@use "mixins";
 
 :host {
   display: flex;
   flex: 1;
+  font-size: 14px !important;
 }
 
 mat-form-field {
@@ -17,17 +18,30 @@ app-x-icon {
   flex-direction: column;
 }
 
+app-search-icon {
+  display: flex;
+  padding-bottom: 3px;
+}
+
 app-trashcan-icon:hover {
   cursor: pointer;
 }
 
-@include mat-textbox-overflow-adjustment;
+@include mixins.mat-textbox-overflow-adjustment;
 :host ::ng-deep mat-form-field {
-  @include mat-form-sizes;
-  @include mat-textbox-input-adjustment;
-  @include mat-input-adjustment;
+  @include mixins.mat-form-sizes;
+  @include mixins.mat-textbox-input-adjustment;
+  @include mixins.mat-input-adjustment;
 }
 
 mat-form-field {
-  @include input-background-white;
+  @include mixins.input-background-white;
+}
+
+input {
+  @include mixins.medium-font-size;
+}
+
+input.medium {
+  padding-top: 3px;
 }

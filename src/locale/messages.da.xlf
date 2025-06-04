@@ -13,13 +13,9 @@
         <source>Password</source>
         <target state="new">Password</target>
       </trans-unit>
-      <trans-unit id="6388882061374799898" datatype="html">
-        <source>Log ind</source>
-        <target state="new">Log ind</target>
-      </trans-unit>
-      <trans-unit id="8924400491805013399" datatype="html">
-        <source>Log mig ikke ud</source>
-        <target state="new">Log mig ikke ud</target>
+      <trans-unit id="7999400360003292845" datatype="html">
+        <source> Log ind</source>
+        <target state="new"> Log ind</target>
       </trans-unit>
       <trans-unit id="8256595798453816213" datatype="html">
         <source>Aftalefrister</source>
@@ -1063,10 +1059,10 @@
       </trans-unit>
       <trans-unit id="187187500641108332" datatype="html">
         <source>
-          <x id="INTERPOLATION" equiv-text="saveText }}"/>
+          <x id="INTERPOLATION" equiv-text="proceedText }}"/>
         </source>
         <target state="new">
-          <x id="INTERPOLATION" equiv-text="saveText }}"/>
+          <x id="INTERPOLATION" equiv-text="proceedText }}"/>
         </target>
       </trans-unit>
       <trans-unit id="5796886515252568996" datatype="html">
@@ -1364,8 +1360,8 @@
         <target state="new">Tilføj advis</target>
       </trans-unit>
       <trans-unit id="7226881883300543573" datatype="html">
-        <source>Er du sikker på at du vil deaktivere <x id="PH" equiv-text="this.getSpecificNotificationWarning( notification.name )"/>?</source>
-        <target state="new">Er du sikker på at du vil deaktivere <x id="PH" equiv-text="this.getSpecificNotificationWarning( notification.name )"/>?</target>
+        <source>Er du sikker på at du vil deaktivere <x id="PH" equiv-text="this.getSpecificNotificationWarning( notification.name, )"/>?</source>
+        <target state="new">Er du sikker på at du vil deaktivere <x id="PH" equiv-text="this.getSpecificNotificationWarning( notification.name, )"/>?</target>
       </trans-unit>
       <trans-unit id="1987610800064579199" datatype="html">
         <source>Fejl: kan ikke deaktivere en advis uden uuid.</source>
@@ -2253,10 +2249,10 @@
       </trans-unit>
       <trans-unit id="7493428362965307555" datatype="html">
         <source>
-          <x id="INTERPOLATION" equiv-text="&quot;&gt; &lt;/ng-container&gt; &lt;button"/>
+          <x id="INTERPOLATION" equiv-text="&quot; &gt; &lt;/ng-container&gt; &lt;bu"/>
         </source>
         <target state="new">
-          <x id="INTERPOLATION" equiv-text="&quot;&gt; &lt;/ng-container&gt; &lt;button"/>
+          <x id="INTERPOLATION" equiv-text="&quot; &gt; &lt;/ng-container&gt; &lt;bu"/>
         </target>
         <note priority="1" from="description">The text for the SplitButton aria-label</note>
         <note priority="1" from="meaning">kendo.splitbutton.splitButtonLabel</note>
@@ -3166,7 +3162,7 @@
       <trans-unit id="5332162737795508854" datatype="html">
         <source>Columns</source>
         <target state="new">Columns</target>
-        <note priority="1" from="description">The text shown in the column menu for the columns item</note>
+        <note priority="1" from="description">The text for the Grid Column Chooser and Column Chooser toolbar tool</note>
         <note priority="1" from="meaning">kendo.grid.columns</note>
       </trans-unit>
       <trans-unit id="5849203148124173556" datatype="html">
@@ -3319,11 +3315,11 @@
         <note priority="1" from="description">The text of the title and aria-label attributes applied to the expand icon of group rows.</note>
         <note priority="1" from="meaning">kendo.grid.groupExpand</note>
       </trans-unit>
-      <trans-unit id="5939232818993851320" datatype="html">
+      <trans-unit id="4742914884195495203" datatype="html">
         <source>Select page</source>
         <target state="new">Select page</target>
         <note priority="1" from="description">The text of the title and aria-label attributes applied to the page chooser in the Grid Pager</note>
-        <note priority="1" from="meaning">kendo.grid.selectPage</note>
+        <note priority="1" from="meaning">kendo.grid.pagerSelectPage</note>
       </trans-unit>
       <trans-unit id="6555488355487907527" datatype="html">
         <source>Top toolbar</source>
@@ -4108,12 +4104,12 @@
         <target state="new">Systemer der anvender systemet</target>
       </trans-unit>
       <trans-unit id="6309617208533698803" datatype="html">
-        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="pp-menu-button-it"/>Eksporter alle kolonner </source>
-        <target state="new"><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="pp-menu-button-it"/>Eksporter alle kolonner </target>
+        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-menu-button-ite"/>Eksporter alle kolonner </source>
+        <target state="new"><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-menu-button-ite"/>Eksporter alle kolonner </target>
       </trans-unit>
       <trans-unit id="948657358778361709" datatype="html">
-        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="app-menu-button-i"/>Eksporter viste kolonner </source>
-        <target state="new"><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="app-menu-button-i"/>Eksporter viste kolonner </target>
+        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="pp-menu-button-it"/>Eksporter viste kolonner </source>
+        <target state="new"><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="pp-menu-button-it"/>Eksporter viste kolonner </target>
       </trans-unit>
       <trans-unit id="948657358778361709" datatype="html">
         <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon/&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;/app-menu-button-"/>Eksporter viste kolonner </source>
@@ -4155,10 +4151,6 @@
         <source>Filtre og sortering slettet</source>
         <target state="new">Filtre og sortering slettet</target>
       </trans-unit>
-      <trans-unit id="374566596275178480" datatype="html">
-        <source>Gyldig/Ikke Gyldig</source>
-        <target state="new">Gyldig/Ikke Gyldig</target>
-      </trans-unit>
       <trans-unit id="3576761254218207442" datatype="html">
         <source>Ansvarlig org. enhed</source>
         <target state="new">Ansvarlig org. enhed</target>
@@ -4186,22 +4178,6 @@
       <trans-unit id="5960176024187087505" datatype="html">
         <source>Audit dato</source>
         <target state="new">Audit dato</target>
-      </trans-unit>
-      <trans-unit id="7714110594292272072" datatype="html">
-        <source>Audit status: grøn</source>
-        <target state="new">Audit status: grøn</target>
-      </trans-unit>
-      <trans-unit id="5825713374970966816" datatype="html">
-        <source>Audit status: rød</source>
-        <target state="new">Audit status: rød</target>
-      </trans-unit>
-      <trans-unit id="5083080824036369784" datatype="html">
-        <source>Audit status: gul</source>
-        <target state="new">Audit status: gul</target>
-      </trans-unit>
-      <trans-unit id="7902716833517761584" datatype="html">
-        <source>Audit status: hvid</source>
-        <target state="new">Audit status: hvid</target>
       </trans-unit>
       <trans-unit id="5445471729146930289" datatype="html">
         <source>Varighed</source>
@@ -4370,14 +4346,6 @@
       <trans-unit id="6510461966645751823" datatype="html">
         <source> Gem </source>
         <target state="new"> Gem </target>
-      </trans-unit>
-      <trans-unit id="5513078980496116959" datatype="html">
-        <source> Slet </source>
-        <target state="new"> Slet </target>
-      </trans-unit>
-      <trans-unit id="7967107304088297046" datatype="html">
-        <source>Kolonneopsætning for organisation</source>
-        <target state="new">Kolonneopsætning for organisation</target>
       </trans-unit>
       <trans-unit id="4059930962225165267" datatype="html">
         <source>Er du sikker på at du vil gemme den nuværende kolonneopsætning af felter som standard til din organisation?</source>
@@ -4735,17 +4703,9 @@
         <source>Brugeren blev opdateret</source>
         <target state="new">Brugeren blev opdateret</target>
       </trans-unit>
-      <trans-unit id="1945093732206878937" datatype="html">
-        <source>Bruger blev oprettet</source>
-        <target state="new">Bruger blev oprettet</target>
-      </trans-unit>
       <trans-unit id="7702390112614253672" datatype="html">
         <source>Brugeren kunne ikke opdateres</source>
         <target state="new">Brugeren kunne ikke opdateres</target>
-      </trans-unit>
-      <trans-unit id="755329899946556802" datatype="html">
-        <source>Bruger kunne ikke oprettes</source>
-        <target state="new">Bruger kunne ikke oprettes</target>
       </trans-unit>
       <trans-unit id="2033915976638075036" datatype="html">
         <source> Aktiverer udstedelse af KITOS Tokens. Bemærk: Adgang til KITOS brugerflade deaktiveres. </source>
@@ -4778,14 +4738,6 @@
       <trans-unit id="5114853473211035789" datatype="html">
         <source>Kontrakt admin</source>
         <target state="new">Kontrakt admin</target>
-      </trans-unit>
-      <trans-unit id="1945093732206878937" datatype="html">
-        <source>Bruger blev oprettet</source>
-        <target state="new">Bruger blev oprettet</target>
-      </trans-unit>
-      <trans-unit id="755329899946556802" datatype="html">
-        <source>Bruger kunne ikke oprettes</source>
-        <target state="new">Bruger kunne ikke oprettes</target>
       </trans-unit>
       <trans-unit id="1920124659830189543" datatype="html">
         <source>Kopier roller</source>
@@ -4847,10 +4799,6 @@
         <source>Kunne ikke hente organisationsrettigheder.</source>
         <target state="new">Kunne ikke hente organisationsrettigheder.</target>
       </trans-unit>
-      <trans-unit id="7680003617143986371" datatype="html">
-        <source>Vælg handling for valgte roller <x id="PH" equiv-text="this.buttonNumberText()"/></source>
-        <target state="new">Vælg handling for valgte roller <x id="PH" equiv-text="this.buttonNumberText()"/></target>
-      </trans-unit>
       <trans-unit id="9034694311930313078" datatype="html">
         <source>Send advis om ændringer</source>
         <target state="new">Send advis om ændringer</target>
@@ -4882,14 +4830,6 @@
       <trans-unit id="1467323000161302264" datatype="html">
         <source>Slet bruger</source>
         <target state="new">Slet bruger</target>
-      </trans-unit>
-      <trans-unit id="3129699240351431056" datatype="html">
-        <source> Er du sikker på at du vil fjerne <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION" equiv-text="}}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="?"/> fra <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION_1" equiv-text="| async }}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="?"/>? <x id="START_TAG_NG_CONTAINER" ctype="x-ng_container" equiv-text="&lt;ng-container *ngIf=&quot;hasRoles(user)&quot;&gt;"/> Brugeren har disse roller, som kan tildeles en anden. Det er valgfrit om du vil slette brugeren uden at tildele rollerne. <x id="CLOSE_TAG_NG_CONTAINER" ctype="x-ng_container" equiv-text="&lt;/ng-container&gt;"/><x id="START_TAG_NG_CONTAINER_1" ctype="x-ng_container_1" equiv-text="&lt;ng-container *ngIf=&quot;!hasRoles(user)&quot;&gt;"/> Denne handling kan ikke fortrydes. <x id="CLOSE_TAG_NG_CONTAINER" ctype="x-ng_container" equiv-text="&lt;/ng-container&gt;"/></source>
-        <target state="new"> Er du sikker på at du vil fjerne <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION" equiv-text="}}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="?"/> fra <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION_1" equiv-text="| async }}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="?"/>? <x id="START_TAG_NG_CONTAINER" ctype="x-ng_container" equiv-text="&lt;ng-container *ngIf=&quot;hasRoles(user)&quot;&gt;"/> Brugeren har disse roller, som kan tildeles en anden. Det er valgfrit om du vil slette brugeren uden at tildele rollerne. <x id="CLOSE_TAG_NG_CONTAINER" ctype="x-ng_container" equiv-text="&lt;/ng-container&gt;"/><x id="START_TAG_NG_CONTAINER_1" ctype="x-ng_container_1" equiv-text="&lt;ng-container *ngIf=&quot;!hasRoles(user)&quot;&gt;"/> Denne handling kan ikke fortrydes. <x id="CLOSE_TAG_NG_CONTAINER" ctype="x-ng_container" equiv-text="&lt;/ng-container&gt;"/></target>
-      </trans-unit>
-      <trans-unit id="1827402117610901290" datatype="html">
-        <source> Tildel valgte roller </source>
-        <target state="new"> Tildel valgte roller </target>
       </trans-unit>
       <trans-unit id="5007829064962714817" datatype="html">
         <source>Sandt</source>
@@ -4938,10 +4878,6 @@
       <trans-unit id="4621931238368826704" datatype="html">
         <source>Organisationer Overblik</source>
         <target state="new">Organisationer Overblik</target>
-      </trans-unit>
-      <trans-unit id="7224605356565787228" datatype="html">
-        <source>Er du sikker på, at du vil overføre rollerne?</source>
-        <target state="new">Er du sikker på, at du vil overføre rollerne?</target>
       </trans-unit>
       <trans-unit id="1669829107156320635" datatype="html">
         <source>Roller overført</source>
@@ -5244,8 +5180,8 @@
         <target state="new">Viser konsekvenser <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>(<x id="INTERPOLATION" equiv-text="{{ updateConsequencesLength$ | async }}"/>)<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> af opdateringen for organisationshierarkiet i KITOS</target>
       </trans-unit>
       <trans-unit id="6021905614502626006" datatype="html">
-        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="-button (buttonCl"/>Eksporter</source>
-        <target state="new"><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="-button (buttonCl"/>Eksporter</target>
+        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="button (buttonCli"/>Eksporter</source>
+        <target state="new"><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="button (buttonCli"/>Eksporter</target>
       </trans-unit>
       <trans-unit id="4691966835263640588" datatype="html">
         <source>FK Organisation - Konsekvenser ved opdatering</source>
@@ -5671,10 +5607,6 @@
         <source>KLE kunne ikke opdateres</source>
         <target state="new">KLE kunne ikke opdateres</target>
       </trans-unit>
-      <trans-unit id="3879129476245182465" datatype="html">
-        <source> Hjælpetekster </source>
-        <target state="new"> Hjælpetekster </target>
-      </trans-unit>
       <trans-unit id="2311412587966355874" datatype="html">
         <source>Nøgle</source>
         <target state="new">Nøgle</target>
@@ -5995,18 +5927,6 @@
         <source>Primær organisationsenhed</source>
         <target state="new">Primær organisationsenhed</target>
       </trans-unit>
-      <trans-unit id="7132384966792473603" datatype="html">
-        <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="rong&gt;"/>Gammel brugerflade<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></source>
-        <target state="new"><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="rong&gt;"/>Gammel brugerflade<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></target>
-      </trans-unit>
-      <trans-unit id="3732788840591611874" datatype="html">
-        <source>Hvis du har glemt dit password, </source>
-        <target state="new">Hvis du har glemt dit password, </target>
-      </trans-unit>
-      <trans-unit id="1910138790709309910" datatype="html">
-        <source>kan du anmode om at nulstille det her.</source>
-        <target state="new">kan du anmode om at nulstille det her.</target>
-      </trans-unit>
       <trans-unit id="8383847967683586849" datatype="html">
         <source>Glemt password?</source>
         <target state="new">Glemt password?</target>
@@ -6062,14 +5982,6 @@
       <trans-unit id="640398851777061837" datatype="html">
         <source>Dit password kunne ikke nulstilles</source>
         <target state="new">Dit password kunne ikke nulstilles</target>
-      </trans-unit>
-      <trans-unit id="2223640905439252475" datatype="html">
-        <source>Single Sign-On (SSO)</source>
-        <target state="new">Single Sign-On (SSO)</target>
-      </trans-unit>
-      <trans-unit id="530214592421461833" datatype="html">
-        <source>Efter du er logget ind med SSO, bliver du omdirigeret til den gamle brugerflade. Så kan du vende tilbage til den nye brugerflade på https://kitos.dk/ui</source>
-        <target state="new">Efter du er logget ind med SSO, bliver du omdirigeret til den gamle brugerflade. Så kan du vende tilbage til den nye brugerflade på https://kitos.dk/ui</target>
       </trans-unit>
       <trans-unit id="303883128089787443" datatype="html">
         <source>Kolonnevisnining gendannet til standardopsætning</source>
@@ -6136,12 +6048,12 @@
         <target state="new">IT-Systemet driftes</target>
       </trans-unit>
       <trans-unit id="793272841717310926" datatype="html">
-        <source><x id="START_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="p-lock-icon /&gt;"/><x id="CLOSE_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="-menu-button-item"/> Åben GDPR overblik </source>
-        <target state="new"><x id="START_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="p-lock-icon /&gt;"/><x id="CLOSE_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="-menu-button-item"/> Åben GDPR overblik </target>
+        <source><x id="START_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="p-lock-icon /&gt;"/><x id="CLOSE_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="menu-button-item&gt;"/> Åben GDPR overblik </source>
+        <target state="new"><x id="START_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="p-lock-icon /&gt;"/><x id="CLOSE_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="menu-button-item&gt;"/> Åben GDPR overblik </target>
       </trans-unit>
       <trans-unit id="844753732077135788" datatype="html">
-        <source><x id="START_TAG_APP_DISK_ICON" ctype="x-app_disk_icon" equiv-text="p-disk-icon&gt;"/><x id="CLOSE_TAG_APP_DISK_ICON" ctype="x-app_disk_icon" equiv-text="Gem &lt;"/> Gem </source>
-        <target state="new"><x id="START_TAG_APP_DISK_ICON" ctype="x-app_disk_icon" equiv-text="p-disk-icon&gt;"/><x id="CLOSE_TAG_APP_DISK_ICON" ctype="x-app_disk_icon" equiv-text="Gem &lt;"/> Gem </target>
+        <source><x id="START_TAG_APP_DISK_ICON" ctype="x-app_disk_icon" equiv-text="p-disk-icon&gt;"/><x id="CLOSE_TAG_APP_DISK_ICON" ctype="x-app_disk_icon" equiv-text="Gem"/> Gem </source>
+        <target state="new"><x id="START_TAG_APP_DISK_ICON" ctype="x-app_disk_icon" equiv-text="p-disk-icon&gt;"/><x id="CLOSE_TAG_APP_DISK_ICON" ctype="x-app_disk_icon" equiv-text="Gem"/> Gem </target>
       </trans-unit>
       <trans-unit id="7413119087194289434" datatype="html">
         <source><x id="START_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="p-trashcan-icon&gt;"/><x id="CLOSE_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="Slet"/> Slet </source>
@@ -6156,8 +6068,8 @@
         <target state="new"><x id="START_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="&lt;app-trashcan-icon&gt;"/><x id="CLOSE_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="&lt;/app-trashcan-icon&gt;"/> Slet </target>
       </trans-unit>
       <trans-unit id="7970981235010102529" datatype="html">
-        <source><x id="START_TAG_APP_HELP_ICON" ctype="x-app_help_icon" equiv-text="p-help-icon&gt;"/><x id="CLOSE_TAG_APP_HELP_ICON" ctype="x-app_help_icon" equiv-text="Hjælp"/> Hjælp </source>
-        <target state="new"><x id="START_TAG_APP_HELP_ICON" ctype="x-app_help_icon" equiv-text="p-help-icon&gt;"/><x id="CLOSE_TAG_APP_HELP_ICON" ctype="x-app_help_icon" equiv-text="Hjælp"/> Hjælp </target>
+        <source><x id="START_TAG_APP_HELP_ICON" ctype="x-app_help_icon" equiv-text="p-help-icon&gt;"/><x id="CLOSE_TAG_APP_HELP_ICON" ctype="x-app_help_icon" equiv-text="Hjælp &lt;"/> Hjælp </source>
+        <target state="new"><x id="START_TAG_APP_HELP_ICON" ctype="x-app_help_icon" equiv-text="p-help-icon&gt;"/><x id="CLOSE_TAG_APP_HELP_ICON" ctype="x-app_help_icon" equiv-text="Hjælp &lt;"/> Hjælp </target>
       </trans-unit>
       <trans-unit id="1162347843657363489" datatype="html">
         <source>Er du sikker på, at du vil slette systemet?</source>
@@ -6313,10 +6225,6 @@
         <source>Klassifikation af data</source>
         <target state="new">Klassifikation af data</target>
       </trans-unit>
-      <trans-unit id="4444328125924097461" datatype="html">
-        <source>Relevante organisationsenheder </source>
-        <target state="new">Relevante organisationsenheder </target>
-      </trans-unit>
       <trans-unit id="2526296220627158527" datatype="html">
         <source>Relationer til andre systemer</source>
         <target state="new">Relationer til andre systemer</target>
@@ -6364,10 +6272,6 @@
       <trans-unit id="7821102703466673779" datatype="html">
         <source>Advarslen kunne ikke slettes</source>
         <target state="new">Advarslen kunne ikke slettes</target>
-      </trans-unit>
-      <trans-unit id="987801205594216692" datatype="html">
-        <source> For at ændre din primære organisationsenhed, skal du skifte til &quot;<x id="INTERPOLATION" equiv-text="{{ userOrganizationName$ | async }}"/>&quot;. </source>
-        <target state="new"> For at ændre din primære organisationsenhed, skal du skifte til &quot;<x id="INTERPOLATION" equiv-text="{{ userOrganizationName$ | async }}"/>&quot;. </target>
       </trans-unit>
       <trans-unit id="1164724015350728554" datatype="html">
         <source>Søg...</source>
@@ -6505,9 +6409,577 @@
         <source>Data og dokumenter kasseres (K)</source>
         <target state="new">Data og dokumenter kasseres (K)</target>
       </trans-unit>
-      <trans-unit id="1337323295460285381" datatype="html">
-        <source>Data bevares, dokumenter kan kasseres</source>
-        <target state="new">Data bevares, dokumenter kan kasseres</target>
+      <trans-unit id="4284262710394423144" datatype="html">
+        <source>systemanvendelse</source>
+        <target state="new">systemanvendelse</target>
+      </trans-unit>
+      <trans-unit id="6000192550087006178" datatype="html">
+        <source>databehandling</source>
+        <target state="new">databehandling</target>
+      </trans-unit>
+      <trans-unit id="3609485978604004141" datatype="html">
+        <source>kontrakt</source>
+        <target state="new">kontrakt</target>
+      </trans-unit>
+      <trans-unit id="8979685620310883836" datatype="html">
+        <source>Data bevares men udvalgte eller alle dokumenter kan kasseres</source>
+        <target state="new">Data bevares men udvalgte eller alle dokumenter kan kasseres</target>
+      </trans-unit>
+      <trans-unit id="8902690316511427918" datatype="html">
+        <source>Dette filtrerer dine systemer efter om det er tilgængeligt eller et udgået system, som ikke længere kan tages i anvendelse og bør udfases.</source>
+        <target state="new">Dette filtrerer dine systemer efter om det er tilgængeligt eller et udgået system, som ikke længere kan tages i anvendelse og bør udfases.</target>
+      </trans-unit>
+      <trans-unit id="2479737654708088517" datatype="html">
+        <source>Filtrerer systemerne efter om de er aktive/ikke aktive, uanset årsag.</source>
+        <target state="new">Filtrerer systemerne efter om de er aktive/ikke aktive, uanset årsag.</target>
+      </trans-unit>
+      <trans-unit id="5207851183117045385" datatype="html">
+        <source>Filtrerer på visning af aktive/ikke aktive systemer, efter om datoen på den tilknyttede kontrakt fra kontrakt modulet er udløbet.</source>
+        <target state="new">Filtrerer på visning af aktive/ikke aktive systemer, efter om datoen på den tilknyttede kontrakt fra kontrakt modulet er udløbet.</target>
+      </trans-unit>
+      <trans-unit id="2306616791979379771" datatype="html">
+        <source>Filtrerer på visning efter systemets livscyklus markeret på system forsiden.</source>
+        <target state="new">Filtrerer på visning efter systemets livscyklus markeret på system forsiden.</target>
+      </trans-unit>
+      <trans-unit id="4274186331072716554" datatype="html">
+        <source>Filtrerer på visning af systemer med en aktiv/ikke aktiv kontrakt tilknyttet fra kontrakt modulet.</source>
+        <target state="new">Filtrerer på visning af systemer med en aktiv/ikke aktiv kontrakt tilknyttet fra kontrakt modulet.</target>
+      </trans-unit>
+      <trans-unit id="3531169621040073341" datatype="html">
+        <source>Indeholder AI-teknologi</source>
+        <target state="new">Indeholder AI-teknologi</target>
+      </trans-unit>
+      <trans-unit id="3888819941059729884" datatype="html">
+        <source>Kontrakt oprettet og tilknyttet</source>
+        <target state="new">Kontrakt oprettet og tilknyttet</target>
+      </trans-unit>
+      <trans-unit id="4965924264660200872" datatype="html">
+        <source>Kontrakt kunne ikke oprettes</source>
+        <target state="new">Kontrakt kunne ikke oprettes</target>
+      </trans-unit>
+      <trans-unit id="2590340397431371543" datatype="html">
+        <source>Hybrid</source>
+        <target state="new">Hybrid</target>
+      </trans-unit>
+      <trans-unit id="2590340397431371543" datatype="html">
+        <source>Hybrid</source>
+        <target state="new">Hybrid</target>
+      </trans-unit>
+      <trans-unit id="2353526137738121108" datatype="html">
+        <source>Opret og registrer kontrakt</source>
+        <target state="new">Opret og registrer kontrakt</target>
+      </trans-unit>
+      <trans-unit id="5655648815512279384" datatype="html">
+        <source> Opret og registrer </source>
+        <target state="new"> Opret og registrer </target>
+      </trans-unit>
+      <trans-unit id="5906499730586056252" datatype="html">
+        <source>Opret og registrer</source>
+        <target state="new">Opret og registrer</target>
+      </trans-unit>
+      <trans-unit id="5878940564313218703" datatype="html">
+        <source>Webadressen er ugyldig. Sørg for, at den begynder med &quot;https://&quot; </source>
+        <target state="new">Webadressen er ugyldig. Sørg for, at den begynder med &quot;https://&quot; </target>
+      </trans-unit>
+      <trans-unit id="8066999230194125800" datatype="html">
+        <source>Webadressen er ugyldig. Sørg for, at den begynder med &quot;https://&quot;</source>
+        <target state="new">Webadressen er ugyldig. Sørg for, at den begynder med &quot;https://&quot;</target>
+      </trans-unit>
+      <trans-unit id="5827469881532042511" datatype="html">
+        <source>DBS Navn</source>
+        <target state="new">DBS Navn</target>
+      </trans-unit>
+      <trans-unit id="148234676016705932" datatype="html">
+        <source>DBS Databehandler</source>
+        <target state="new">DBS Databehandler</target>
+      </trans-unit>
+      <trans-unit id="3077468353243900065" datatype="html">
+        <source>Læs mere om Kitos</source>
+        <target state="new">Læs mere om Kitos</target>
+      </trans-unit>
+      <trans-unit id="8056066478947543702" datatype="html">
+        <source> Luk </source>
+        <target state="new"> Luk </target>
+      </trans-unit>
+      <trans-unit id="6663244887897834438" datatype="html">
+        <source>Normal drift</source>
+        <target state="new">Normal drift</target>
+      </trans-unit>
+      <trans-unit id="7829160424698222567" datatype="html">
+        <source>Ustabil drift</source>
+        <target state="new">Ustabil drift</target>
+      </trans-unit>
+      <trans-unit id="622752670487596537" datatype="html">
+        <source> Hvad er Kitos?</source>
+        <target state="new"> Hvad er Kitos?</target>
+      </trans-unit>
+      <trans-unit id="6429720393055416101" datatype="html">
+        <source> eller </source>
+        <target state="new"> eller </target>
+      </trans-unit>
+      <trans-unit id="8924400491805013399" datatype="html">
+        <source>Log mig ikke ud</source>
+        <target state="new">Log mig ikke ud</target>
+      </trans-unit>
+      <trans-unit id="2966213553381382988" datatype="html">
+        <source> Glemt dit password? </source>
+        <target state="new"> Glemt dit password? </target>
+      </trans-unit>
+      <trans-unit id="820049001498537565" datatype="html">
+        <source>Log ind med SSO</source>
+        <target state="new">Log ind med SSO</target>
+      </trans-unit>
+      <trans-unit id="6690985920092272336" datatype="html">
+        <source>Brugerstyring</source>
+        <target state="new">Brugerstyring</target>
+      </trans-unit>
+      <trans-unit id="6077242221566477767" datatype="html">
+        <source>API-brugere</source>
+        <target state="new">API-brugere</target>
+      </trans-unit>
+      <trans-unit id="6584322019872984203" datatype="html">
+        <source>Diverse</source>
+        <target state="new">Diverse</target>
+      </trans-unit>
+      <trans-unit id="5423741656801177932" datatype="html">
+        <source> Opret Systemintegrator</source>
+        <target state="new"> Opret Systemintegrator</target>
+      </trans-unit>
+      <trans-unit id="7241391520100148399" datatype="html">
+        <source>Opret Systemintegrator</source>
+        <target state="new">Opret Systemintegrator</target>
+      </trans-unit>
+      <trans-unit id="3984565971698645463" datatype="html">
+        <source>Ændringer gemt</source>
+        <target state="new">Ændringer gemt</target>
+      </trans-unit>
+      <trans-unit id="1862687234657090800" datatype="html">
+        <source>Ændringer kunne ikke gemmes</source>
+        <target state="new">Ændringer kunne ikke gemmes</target>
+      </trans-unit>
+      <trans-unit id="3659417500377682001" datatype="html">
+        <source>Er du sikker på at du vil fjerne &quot;<x id="PH" equiv-text="systemIntegrator.name"/>&quot;&apos;s rettighed som Systemintegrator?</source>
+        <target state="new">Er du sikker på at du vil fjerne &quot;<x id="PH" equiv-text="systemIntegrator.name"/>&quot;&apos;s rettighed som Systemintegrator?</target>
+      </trans-unit>
+      <trans-unit id="7847315002899056423" datatype="html">
+        <source>Primært startmodul</source>
+        <target state="new">Primært startmodul</target>
+      </trans-unit>
+      <trans-unit id="8373896753514601426" datatype="html">
+        <source>Anvendes ikke</source>
+        <target state="new">Anvendes ikke</target>
+      </trans-unit>
+      <trans-unit id="6457416557932664753" datatype="html">
+        <source>Vis anvendelse</source>
+        <target state="new">Vis anvendelse</target>
+      </trans-unit>
+      <trans-unit id="6505837149972184227" datatype="html">
+        <source>Webtilgængelighed (WCAG)</source>
+        <target state="new">Webtilgængelighed (WCAG)</target>
+      </trans-unit>
+      <trans-unit id="3990765908365003353" datatype="html">
+        <source>Webtilgængelighed</source>
+        <target state="new">Webtilgængelighed</target>
+      </trans-unit>
+      <trans-unit id="623060952116105946" datatype="html">
+        <source>Hvornår leverandøren har udført gennemsynet</source>
+        <target state="new">Hvornår leverandøren har udført gennemsynet</target>
+      </trans-unit>
+      <trans-unit id="5315655945623152182" datatype="html">
+        <source>Seneste webtilgængelighedskontrol</source>
+        <target state="new">Seneste webtilgængelighedskontrol</target>
+      </trans-unit>
+      <trans-unit id="5200200492652807397" datatype="html">
+        <source>Noter om webtilgængelighed</source>
+        <target state="new">Noter om webtilgængelighed</target>
+      </trans-unit>
+      <trans-unit id="8637037167675157753" datatype="html">
+        <source>Delvist</source>
+        <target state="new">Delvist</target>
+      </trans-unit>
+      <trans-unit id="8481160601059811611" datatype="html">
+        <source>Kontrakten arver sin overordnede kontrakts gyldighed, og er derfor gyldig trods af at:</source>
+        <target state="new">Kontrakten arver sin overordnede kontrakts gyldighed, og er derfor gyldig trods af at:</target>
+      </trans-unit>
+      <trans-unit id="3654247776975529872" datatype="html">
+        <source>Den overordnede kontrakt er ikke gyldig</source>
+        <target state="new">Den overordnede kontrakt er ikke gyldig</target>
+      </trans-unit>
+      <trans-unit id="3606013648406401255" datatype="html">
+        <source> Prøv igen og kontakt venligst Kitos sekretariatet, hvis problemet fortsætter</source>
+        <target state="new"> Prøv igen og kontakt venligst Kitos sekretariatet, hvis problemet fortsætter</target>
+      </trans-unit>
+      <trans-unit id="4082842369475273113" datatype="html">
+        <source> Kontakt venligst din lokale IT administrator for at få tildelt adgang til Kitos</source>
+        <target state="new"> Kontakt venligst din lokale IT administrator for at få tildelt adgang til Kitos</target>
+      </trans-unit>
+      <trans-unit id="4172062469313536052" datatype="html">
+        <source> Kontakt venligst Kitos sekretariatet, hvis I ønsker at tilslutte jer samarbejdet omkring Kitos</source>
+        <target state="new"> Kontakt venligst Kitos sekretariatet, hvis I ønsker at tilslutte jer samarbejdet omkring Kitos</target>
+      </trans-unit>
+      <trans-unit id="8809613748564697708" datatype="html">
+        <source> Kontakt venligst din lokale IT administrator</source>
+        <target state="new"> Kontakt venligst din lokale IT administrator</target>
+      </trans-unit>
+      <trans-unit id="4639924666969098557" datatype="html">
+        <source>Uklassificeret SSO fejl</source>
+        <target state="new">Uklassificeret SSO fejl</target>
+      </trans-unit>
+      <trans-unit id="5141417027258638490" datatype="html">
+        <source>Den bruger, som du er logget på med, har ikke adgang til Kitos</source>
+        <target state="new">Den bruger, som du er logget på med, har ikke adgang til Kitos</target>
+      </trans-unit>
+      <trans-unit id="5448518196835237176" datatype="html">
+        <source>Den bruger, som du forsøger at logge på med, kan ikke autooprettes i Kitos da brugerens organisation er ukendt</source>
+        <target state="new">Den bruger, som du forsøger at logge på med, kan ikke autooprettes i Kitos da brugerens organisation er ukendt</target>
+      </trans-unit>
+      <trans-unit id="1440318310489375093" datatype="html">
+        <source>Den bruger, som du forsøger at logge på med, er ukendt i det fælleskommunale STS Organisation eller tilhører en kommune uden godkendt serviceaftale</source>
+        <target state="new">Den bruger, som du forsøger at logge på med, er ukendt i det fælleskommunale STS Organisation eller tilhører en kommune uden godkendt serviceaftale</target>
+      </trans-unit>
+      <trans-unit id="8435640758869757683" datatype="html">
+        <source> Du kan kun tilknytte en primær organisationsenhed, i organisationer du har en rolle i. </source>
+        <target state="new"> Du kan kun tilknytte en primær organisationsenhed, i organisationer du har en rolle i. </target>
+      </trans-unit>
+      <trans-unit id="7741594211409337213" datatype="html">
+        <source>Nedarv den overordnedes gyldighed</source>
+        <target state="new">Nedarv den overordnedes gyldighed</target>
+      </trans-unit>
+      <trans-unit id="810543436502151784" datatype="html">
+        <source>Nedarver</source>
+        <target state="new">Nedarver</target>
+      </trans-unit>
+      <trans-unit id="4604630012212940269" datatype="html">
+        <source>Nedarver ikke</source>
+        <target state="new">Nedarver ikke</target>
+      </trans-unit>
+      <trans-unit id="2813580300767889762" datatype="html">
+        <source>Nedarver kontrakten sin overordnedes gyldighed</source>
+        <target state="new">Nedarver kontrakten sin overordnedes gyldighed</target>
+      </trans-unit>
+      <trans-unit id="1620385434838836828" datatype="html">
+        <source>Audit status</source>
+        <target state="new">Audit status</target>
+      </trans-unit>
+      <trans-unit id="3407587864810413529" datatype="html">
+        <source>Hvid: <x id="PH" equiv-text="audit.white"/>, Rød: <x id="PH_1" equiv-text="audit.red"/>, Gul: <x id="PH_2" equiv-text="audit.yellow"/>, Grøn: <x id="PH_3" equiv-text="audit.green"/>, Max: <x id="PH_4" equiv-text="audit.total"/></source>
+        <target state="new">Hvid: <x id="PH" equiv-text="audit.white"/>, Rød: <x id="PH_1" equiv-text="audit.red"/>, Gul: <x id="PH_2" equiv-text="audit.yellow"/>, Grøn: <x id="PH_3" equiv-text="audit.green"/>, Max: <x id="PH_4" equiv-text="audit.total"/></target>
+      </trans-unit>
+      <trans-unit id="5050471481386035781" datatype="html">
+        <source>Slet kontrakt</source>
+        <target state="new">Slet kontrakt</target>
+      </trans-unit>
+      <trans-unit id="862924224019392737" datatype="html">
+        <source>Er du sikker på du vil slette denne kontrakt? Kontraktens underordnede kontrakter vil blive slettet sammen med den. De underordnede kontrakter kan også overføres til en anden kontrakt. </source>
+        <target state="new">Er du sikker på du vil slette denne kontrakt? Kontraktens underordnede kontrakter vil blive slettet sammen med den. De underordnede kontrakter kan også overføres til en anden kontrakt. </target>
+      </trans-unit>
+      <trans-unit id="4197097943225405677" datatype="html">
+        <source>Overfør kontrakter</source>
+        <target state="new">Overfør kontrakter</target>
+      </trans-unit>
+      <trans-unit id="4534305672667817010" datatype="html">
+        <source>Er du sikker på at du vil slette kontrakten, samt dens underordnede kontrakter?</source>
+        <target state="new">Er du sikker på at du vil slette kontrakten, samt dens underordnede kontrakter?</target>
+      </trans-unit>
+      <trans-unit id="4451069668768368167" datatype="html">
+        <source>Underordnet kontrakter</source>
+        <target state="new">Underordnet kontrakter</target>
+      </trans-unit>
+      <trans-unit id="3118206486836195151" datatype="html">
+        <source>Der er ikke flere kontrakter at overføre</source>
+        <target state="new">Der er ikke flere kontrakter at overføre</target>
+      </trans-unit>
+      <trans-unit id="6872051229214902883" datatype="html">
+        <source>Vælg handling for kontrakter</source>
+        <target state="new">Vælg handling for kontrakter</target>
+      </trans-unit>
+      <trans-unit id="8750750261302099129" datatype="html">
+        <source>Vælg handling for valgte roller</source>
+        <target state="new">Vælg handling for valgte roller</target>
+      </trans-unit>
+      <trans-unit id="2581887775164854038" datatype="html">
+        <source>Kopier roller til</source>
+        <target state="new">Kopier roller til</target>
+      </trans-unit>
+      <trans-unit id="29832309535656200" datatype="html">
+        <source>System</source>
+        <target state="new">System</target>
+      </trans-unit>
+      <trans-unit id="6176199424956130195" datatype="html">
+        <source>Ingen data</source>
+        <target state="new">Ingen data</target>
+      </trans-unit>
+      <trans-unit id="5681409232995626808" datatype="html">
+        <source>Vælge</source>
+        <target state="new">Vælge</target>
+      </trans-unit>
+      <trans-unit id="609393622749372398" datatype="html">
+        <source>Er du sikker på at du vil overføre de valgte kontrakter?</source>
+        <target state="new">Er du sikker på at du vil overføre de valgte kontrakter?</target>
+      </trans-unit>
+      <trans-unit id="3051919120993673498" datatype="html">
+        <source>
+          <x id="PH" equiv-text="this.snackbarText"/>
+          <x id="PH_1" equiv-text="this.buttonNumberText()"/>
+        </source>
+        <target state="new">
+          <x id="PH" equiv-text="this.snackbarText"/>
+          <x id="PH_1" equiv-text="this.buttonNumberText()"/>
+        </target>
+      </trans-unit>
+      <trans-unit id="5979549623650471307" datatype="html">
+        <source>Dokument</source>
+        <target state="new">Dokument</target>
+      </trans-unit>
+      <trans-unit id="1412916315741996751" datatype="html">
+        <source>Udklipsholder</source>
+        <target state="new">Udklipsholder</target>
+      </trans-unit>
+      <trans-unit id="7872550646351072421" datatype="html">
+        <source>Indstillinger</source>
+        <target state="new">Indstillinger</target>
+      </trans-unit>
+      <trans-unit id="6897943711350574955" datatype="html">
+        <source>Kalendar</source>
+        <target state="new">Kalendar</target>
+      </trans-unit>
+      <trans-unit id="1292737233370901804" datatype="html">
+        <source>Mail</source>
+        <target state="new">Mail</target>
+      </trans-unit>
+      <trans-unit id="4334674530466993946" datatype="html">
+        <source>Ikon</source>
+        <target state="new">Ikon</target>
+      </trans-unit>
+      <trans-unit id="8053985576501192145" datatype="html">
+        <source>Vælg brugere</source>
+        <target state="new">Vælg brugere</target>
+      </trans-unit>
+      <trans-unit id="1281858338231957865" datatype="html">
+        <source>Hvis dette er sat, så vil den pågældende kontrakts status, altid være denne samme, som dens overordnede kontrakt.</source>
+        <target state="new">Hvis dette er sat, så vil den pågældende kontrakts status, altid være denne samme, som dens overordnede kontrakt.</target>
+      </trans-unit>
+      <trans-unit id="8653808192316183108" datatype="html">
+        <source>Nedarv overordnet kontrakts gyldighed</source>
+        <target state="new">Nedarv overordnet kontrakts gyldighed</target>
+      </trans-unit>
+      <trans-unit id="6360019495709584643" datatype="html">
+        <source>Type a page number</source>
+        <target state="new">Type a page number</target>
+        <note priority="1" from="description">The text of the aria-label attribute applied to the input element for entering the page number</note>
+        <note priority="1" from="meaning">kendo.grid.pagerInputLabel</note>
+      </trans-unit>
+      <trans-unit id="2281955701430052538" datatype="html">
+        <source>
+          <x id="INTERPOLATION" equiv-text="&quot; i18n-removeConfirmationDialogTitle="/>
+        </source>
+        <target state="new">
+          <x id="INTERPOLATION" equiv-text="&quot; i18n-removeConfirmationDialogTitle="/>
+        </target>
+        <note priority="1" from="description">The default text of a form validation error when using external editing.</note>
+        <note priority="1" from="meaning">kendo.grid.formValidationErrorText</note>
+      </trans-unit>
+      <trans-unit id="9130988197537985781" datatype="html">
+        <source>Please confirm</source>
+        <target state="new">Please confirm</target>
+        <note priority="1" from="description">The title of the built-in remove item confirmation Dialog</note>
+        <note priority="1" from="meaning">kendo.grid.removeConfirmationDialogTitle</note>
+      </trans-unit>
+      <trans-unit id="2144512323940687374" datatype="html">
+        <source>Are you sure you want to delete this item?</source>
+        <target state="new">Are you sure you want to delete this item?</target>
+        <note priority="1" from="description">The content of the built-in remove item confirmation Dialog</note>
+        <note priority="1" from="meaning">kendo.grid.removeConfirmationDialogContent</note>
+      </trans-unit>
+      <trans-unit id="7831598438145269124" datatype="html">
+        <source>Yes</source>
+        <target state="new">Yes</target>
+        <note priority="1" from="description">The text of the built-in remove item confirmation Dialog confirm action button</note>
+        <note priority="1" from="meaning">kendo.grid.removeConfirmationDialogConfirmText</note>
+      </trans-unit>
+      <trans-unit id="5538270010027711668" datatype="html">
+        <source>No</source>
+        <target state="new">No</target>
+        <note priority="1" from="description">The text of the built-in remove item confirmation Dialog reject action button</note>
+        <note priority="1" from="meaning">kendo.grid.removeConfirmationDialogRejectText</note>
+      </trans-unit>
+      <trans-unit id="639527922029546265" datatype="html">
+        <source>Edit</source>
+        <target state="new">Edit</target>
+        <note priority="1" from="description">The title of the built-in external editing form container</note>
+        <note priority="1" from="meaning">kendo.grid.externalEditingTitle</note>
+      </trans-unit>
+      <trans-unit id="6806557244499949355" datatype="html">
+        <source>Save</source>
+        <target state="new">Save</target>
+        <note priority="1" from="description">The text of the external editing form Save button</note>
+        <note priority="1" from="meaning">kendo.grid.externalEditingSaveText</note>
+      </trans-unit>
+      <trans-unit id="2224878318274179684" datatype="html">
+        <source>Cancel</source>
+        <target state="new">Cancel</target>
+        <note priority="1" from="description">The text of the external editing form Cancel button</note>
+        <note priority="1" from="meaning">kendo.grid.externalEditingCancelText</note>
+      </trans-unit>
+      <trans-unit id="1493345812229818724" datatype="html">
+        <source>Close</source>
+        <target state="new">Close</target>
+        <note priority="1" from="description">The title for the Close button.</note>
+        <note priority="1" from="meaning">kendo.colorpicker.closeButton</note>
+      </trans-unit>
+      <trans-unit id="1461683135245713706" datatype="html">
+        <source>Choose Color</source>
+        <target state="new">Choose Color</target>
+        <note priority="1" from="description">The title for the ActionSheet when in adaptive mode.</note>
+        <note priority="1" from="meaning">kendo.colorpicker.adaptiveTitle</note>
+      </trans-unit>
+      <trans-unit id="2574527919448072107" datatype="html">
+        <source>
+          <x id="INTERPOLATION" equiv-text="&quot; &gt;&lt;/ng-cont"/>
+        </source>
+        <target state="new">
+          <x id="INTERPOLATION" equiv-text="&quot; &gt;&lt;/ng-cont"/>
+        </target>
+        <note priority="1" from="description">The value of the aria-label attribute of the input fields.</note>
+        <note priority="1" from="meaning">kendo.otpinput.ariaLabel</note>
+      </trans-unit>
+      <trans-unit id="2124176984717923206" datatype="html">
+        <source>
+          <x id="INTERPOLATION" equiv-text="&quot; i18"/>
+        </source>
+        <target state="new">
+          <x id="INTERPOLATION" equiv-text="&quot; i18"/>
+        </target>
+        <note priority="1" from="description">The value of the aria-label attribute of the Pager</note>
+        <note priority="1" from="meaning">kendo.pager.ariaLabel</note>
+      </trans-unit>
+      <trans-unit id="7169522157181311670" datatype="html">
+        <source>Go to the first page</source>
+        <target state="new">Go to the first page</target>
+        <note priority="1" from="description">The label for the first page button in the Pager</note>
+        <note priority="1" from="meaning">kendo.pager.firstPage</note>
+      </trans-unit>
+      <trans-unit id="3173443332469111280" datatype="html">
+        <source>Go to the previous page</source>
+        <target state="new">Go to the previous page</target>
+        <note priority="1" from="description">The label for the previous page button in the Pager</note>
+        <note priority="1" from="meaning">kendo.pager.previousPage</note>
+      </trans-unit>
+      <trans-unit id="2977649834936444534" datatype="html">
+        <source>Go to the next page</source>
+        <target state="new">Go to the next page</target>
+        <note priority="1" from="description">The label for the next page button in the Pager</note>
+        <note priority="1" from="meaning">kendo.pager.nextPage</note>
+      </trans-unit>
+      <trans-unit id="4302174378452165800" datatype="html">
+        <source>Go to the last page</source>
+        <target state="new">Go to the last page</target>
+        <note priority="1" from="description">The label for the last page button in the Pager</note>
+        <note priority="1" from="meaning">kendo.pager.lastPage</note>
+      </trans-unit>
+      <trans-unit id="8678868632586383003" datatype="html">
+        <source>Page</source>
+        <target state="new">Page</target>
+        <note priority="1" from="description">The label before the current page number in the Pager</note>
+        <note priority="1" from="meaning">kendo.pager.page</note>
+      </trans-unit>
+      <trans-unit id="2438575870810538060" datatype="html">
+        <source>of</source>
+        <target state="new">of</target>
+        <note priority="1" from="description">The label before the total pages number in the Pager</note>
+        <note priority="1" from="meaning">kendo.pager.of</note>
+      </trans-unit>
+      <trans-unit id="2330948786674386987" datatype="html">
+        <source>Page Number</source>
+        <target state="new">Page Number</target>
+        <note priority="1" from="description">The label for the pager input in the Pager</note>
+        <note priority="1" from="meaning">kendo.pager.pageNumberInputTitle</note>
+      </trans-unit>
+      <trans-unit id="3496480700570244582" datatype="html">
+        <source>items</source>
+        <target state="new">items</target>
+        <note priority="1" from="description">The label after the total pages number in the Pager</note>
+        <note priority="1" from="meaning">kendo.pager.items</note>
+      </trans-unit>
+      <trans-unit id="1737032542950161383" datatype="html">
+        <source>items per page</source>
+        <target state="new">items per page</target>
+        <note priority="1" from="description">The label for the page size chooser in the Pager</note>
+        <note priority="1" from="meaning">kendo.pager.itemsPerPage</note>
+      </trans-unit>
+      <trans-unit id="2001603891643955632" datatype="html">
+        <source>Select page</source>
+        <target state="new">Select page</target>
+        <note priority="1" from="description">The text of the title and aria-label attributes applied to the page chooser in the Pager</note>
+        <note priority="1" from="meaning">kendo.pager.selectPage</note>
+      </trans-unit>
+      <trans-unit id="8477550023881248885" datatype="html">
+        <source>Type a page number</source>
+        <target state="new">Type a page number</target>
+        <note priority="1" from="description">The text of the aria-label attribute applied to the input element for entering the page number.</note>
+        <note priority="1" from="meaning">kendo.pager.inputLabel</note>
+      </trans-unit>
+      <trans-unit id="6762596725712096287" datatype="html">
+        <source>More tools</source>
+        <target state="new">More tools</target>
+        <note priority="1" from="description">The title of the **more tools** button in a responsive ToolBar</note>
+        <note priority="1" from="meaning">kendo.toolbar.moreToolsTitle</note>
+      </trans-unit>
+      <trans-unit id="3543857959141568934" datatype="html">
+        <source>Scroll left</source>
+        <target state="new">Scroll left</target>
+        <note priority="1" from="description">The title for the **Previous Tool** button when the Toolbar is scrollable.</note>
+        <note priority="1" from="meaning">kendo.toolbar.previousToolButton</note>
+      </trans-unit>
+      <trans-unit id="9125528523516170497" datatype="html">
+        <source>Scroll right</source>
+        <target state="new">Scroll right</target>
+        <note priority="1" from="description">The title for the **Next Tool** button when the Toolbar is scrollable.</note>
+        <note priority="1" from="meaning">kendo.toolbar.nextToolButton</note>
+      </trans-unit>
+      <trans-unit id="9190795738522963148" datatype="html">
+        <source> Er du sikker på at du vil fjerne <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION" equiv-text="}}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="?"/> fra <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION_1" equiv-text="| async }}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="?"/>? </source>
+        <target state="new"> Er du sikker på at du vil fjerne <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION" equiv-text="}}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="?"/> fra <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION_1" equiv-text="| async }}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="?"/>? </target>
+      </trans-unit>
+      <trans-unit id="4447588157619270374" datatype="html">
+        <source> Brugeren har nogle roller, som kan tildeles en anden. Det er valgfrit om du vil slette brugeren uden at tildele rollerne. </source>
+        <target state="new"> Brugeren har nogle roller, som kan tildeles en anden. Det er valgfrit om du vil slette brugeren uden at tildele rollerne. </target>
+      </trans-unit>
+      <trans-unit id="8006200185320958273" datatype="html">
+        <source> Denne handling kan ikke fortrydes. </source>
+        <target state="new"> Denne handling kan ikke fortrydes. </target>
+      </trans-unit>
+      <trans-unit id="6973173527205023878" datatype="html">
+        <source> Overfør roller </source>
+        <target state="new"> Overfør roller </target>
+      </trans-unit>
+      <trans-unit id="866125510857454253" datatype="html">
+        <source>Overfør roller</source>
+        <target state="new">Overfør roller</target>
+      </trans-unit>
+      <trans-unit id="4577772021742281224" datatype="html">
+        <source>Brugeren har allerede denne rolle.</source>
+        <target state="new">Brugeren har allerede denne rolle.</target>
+      </trans-unit>
+      <trans-unit id="5299437974151521850" datatype="html">
+        <source>Rediger <x id="PH" equiv-text="this.entityName.toLocaleLowerCase()"/></source>
+        <target state="new">Rediger <x id="PH" equiv-text="this.entityName.toLocaleLowerCase()"/></target>
+      </trans-unit>
+      <trans-unit id="7788193785121346142" datatype="html">
+        <source> Anuller </source>
+        <target state="new"> Anuller </target>
+      </trans-unit>
+      <trans-unit id="1611684173879100499" datatype="html">
+        <source>Gå til</source>
+        <target state="new">Gå til</target>
+      </trans-unit>
+      <trans-unit id="7724449879287826549" datatype="html">
+        <source>Indeholder AI-teknologi?</source>
+        <target state="new">Indeholder AI-teknologi?</target>
+      </trans-unit>
+      <trans-unit id="1502212713118381557" datatype="html">
+        <source>Ingen</source>
+        <target state="new">Ingen</target>
       </trans-unit>
     </body>
   </file>

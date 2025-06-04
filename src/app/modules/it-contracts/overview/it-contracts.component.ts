@@ -1,3 +1,4 @@
+import { AsyncPipe, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
@@ -33,10 +34,26 @@ import {
   selectContractGridState,
   selectItContractHasCollectionCreatePermissions,
 } from 'src/app/store/it-contract/selectors';
+import { ExportMenuButtonComponent } from '../../../shared/components/buttons/export-menu-button/export-menu-button.component';
+import { CreateEntityButtonComponent } from '../../../shared/components/entity-creation/create-entity-button/create-entity-button.component';
+import { GridOptionsButtonComponent } from '../../../shared/components/grid-options-button/grid-options-button.component';
+import { GridComponent } from '../../../shared/components/grid/grid.component';
+import { HideShowButtonComponent } from '../../../shared/components/grid/hide-show-button/hide-show-button.component';
+import { OverviewHeaderComponent } from '../../../shared/components/overview-header/overview-header.component';
 
 @Component({
   templateUrl: 'it-contracts.component.html',
   styleUrls: ['it-contracts.component.scss'],
+  imports: [
+    OverviewHeaderComponent,
+    NgIf,
+    GridOptionsButtonComponent,
+    ExportMenuButtonComponent,
+    HideShowButtonComponent,
+    CreateEntityButtonComponent,
+    GridComponent,
+    AsyncPipe,
+  ],
 })
 export class ITContractsComponent extends BaseOverviewComponent implements OnInit {
   public readonly isLoading$ = this.store.select(selectContractGridLoading);
@@ -62,7 +79,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
   private readonly defaultGridColumns: GridColumn[] = [
     {
       field: GridFields.IsActive,
-      title: $localize`Gyldig/Ikke Gyldig`,
+      title: $localize`Status`,
       section: this.contractSection,
       filter: 'boolean',
       extraData: [
@@ -351,36 +368,15 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       persistId: 'auditDate',
     },
     {
-      field: GridFields.AuditStatusGreen,
-      title: $localize`Audit status: grøn`,
+      field: GridFields.AuditStatus,
+      title: $localize`Audit status`,
       section: ECONOMY_SECTION_NAME,
       noFilter: true,
+      sortable: false,
       hidden: false,
-      persistId: 'auditStatus', //These colors also differ from the old UI as they are 4 seperate columns. Need to be handled later
-    },
-    {
-      field: GridFields.AuditStatusRed,
-      title: $localize`Audit status: rød`,
-      section: ECONOMY_SECTION_NAME,
-      noFilter: true,
-      hidden: false,
-      persistId: 'auditStatusRed',
-    },
-    {
-      field: GridFields.AuditStatusYellow,
-      title: $localize`Audit status: gul`,
-      section: ECONOMY_SECTION_NAME,
-      noFilter: true,
-      hidden: false,
-      persistId: 'auditStatusYellow',
-    },
-    {
-      field: GridFields.AuditStatusWhite,
-      title: $localize`Audit status: hvid`,
-      section: ECONOMY_SECTION_NAME,
-      noFilter: true,
-      hidden: false,
-      persistId: 'auditStatusWhite',
+      idField: 'audit-status',
+      style: 'contract-audit',
+      persistId: 'auditStatus',
     },
     {
       field: GridFields.Duration,
@@ -466,9 +462,15 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
         )
         .subscribe(([_, roleColumns]) => {
           const defaultColumnsAndRoles = this.defaultGridColumns.concat(roleColumns);
-          const existingColumns = this.gridColumnStorageService.getColumns(CONTRACT_COLUMNS_ID, defaultColumnsAndRoles);
-          const columns = existingColumns ?? defaultColumnsAndRoles;
-          this.store.dispatch(ITContractActions.updateGridColumns(columns));
+          const orderedGridColumns = this.mapColumnOrder(defaultColumnsAndRoles);
+
+          const localStorageColumns = this.gridColumnStorageService.getColumns(CONTRACT_COLUMNS_ID, orderedGridColumns);
+          this.updateLocalOrDefaultGridColumns(
+            orderedGridColumns,
+            localStorageColumns,
+            ITContractActions.updateGridColumns,
+            ITContractActions.resetToOrganizationITContractColumnConfiguration
+          );
         })
     );
 
@@ -488,9 +490,15 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
           ofType(ITContractActions.resetToOrganizationITContractColumnConfigurationError),
           concatLatestFrom(() => this.gridColumns$)
         )
-        .subscribe(([_, gridColumns]) => {
-          const columnsToShow = getColumnsToShow(gridColumns, this.defaultGridColumns);
-          this.store.dispatch(ITContractActions.updateGridColumns(columnsToShow));
+        .subscribe(([_, gridColumnsFromState]) => {
+          const columnsToShow = getColumnsToShow(gridColumnsFromState, this.defaultGridColumns);
+          const gridColumnStateIsCorrect = this.gridColumnStorageService.columnsAreEqual(
+            gridColumnsFromState,
+            columnsToShow
+          );
+          if (!gridColumnStateIsCorrect) {
+            this.store.dispatch(ITContractActions.updateGridColumns(columnsToShow));
+          }
         })
     );
     this.store.dispatch(ITContractActions.getItContractOverviewRoles());

@@ -1,9 +1,10 @@
-@import "mixins";
+@use "../../../../styles/mixins.scss";
+@use "../../../../styles/theme.scss";
 
 :host {
-  @include page-flex-layout-max-width;
+  @include mixins.page-flex-layout-max-width;
 }
 
 app-segment {
-  margin-bottom: $padding-medium-large;
+  margin-bottom: theme.$padding-medium-large;
 }

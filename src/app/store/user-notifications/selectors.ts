@@ -13,15 +13,15 @@ import { APINotificationResponseDTO } from 'src/app/api/v2';
 import { hasValidCache } from 'src/app/shared/helpers/date.helpers';
 
 const { selectAll: selectAllUsageNotifications } = systemNotificationsAdapter.getSelectors<NotificationState>(
-  (state) => state.usageNotifications
+  (state) => state.usageNotifications,
 );
 
 const { selectAll: selectAllContractNotifications } = contractNotificationsAdapter.getSelectors<NotificationState>(
-  (state) => state.contractNotifications
+  (state) => state.contractNotifications,
 );
 
 const { selectAll: selectAllDprNotifications } = dprNotificationsAdapter.getSelectors<NotificationState>(
-  (state) => state.dataProcessingNotifications
+  (state) => state.dataProcessingNotifications,
 );
 
 export const selectHasValidCacheForResourceType = (resourceType: APINotificationResponseDTO.OwnerResourceTypeEnum) =>
@@ -31,7 +31,7 @@ export const selectHasValidCacheForResourceType = (resourceType: APINotification
     (state, time) => {
       const cacheTime = state.cacheTime[resourceType];
       return hasValidCache(cacheTime, time);
-    }
+    },
   );
 
 // A selector factory that returns a selector based on the notification type
