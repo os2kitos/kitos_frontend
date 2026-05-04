@@ -6,11 +6,12 @@ api/api.ts
 api/authorize.service.ts
 api/dataProcessingRegistration.service.ts
 api/dataProcessingRegistrationReadModels.service.ts
-api/excel.service.ts
+api/excelExport.service.ts
 api/healthCheck.service.ts
 api/itContractOverviewReadModels.service.ts
 api/itSystemUsageOptions.service.ts
 api/itSystemUsageOverviewReadModels.service.ts
+api/localAdminExcel.service.ts
 api/metadata.service.ts
 api/sSO.service.ts
 api/tokenAuthentication.service.ts

@@ -24,32 +24,32 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GetSingleExcelGetAccessRightsRequestParams {
+export interface GetSingleLocalAdminExcelGetAccessRightsRequestParams {
     getEntitiesAccessRights?: boolean;
     organizationId?: number;
 }
 
-export interface GetSingleExcelGetContractsRequestParams {
+export interface GetSingleLocalAdminExcelGetContractsRequestParams {
     organizationId?: number;
 }
 
-export interface GetSingleExcelGetContractsByUuidRequestParams {
+export interface GetSingleLocalAdminExcelGetContractsByUuidRequestParams {
     organizationUuid?: string;
 }
 
-export interface GetSingleExcelGetOrgUnitsRequestParams {
+export interface GetSingleLocalAdminExcelGetOrgUnitsRequestParams {
     organizationId?: number;
 }
 
-export interface GetSingleExcelGetOrgUnitsByUuidRequestParams {
+export interface GetSingleLocalAdminExcelGetOrgUnitsByUuidRequestParams {
     organizationUuid?: string;
 }
 
-export interface GetSingleExcelGetUsersRequestParams {
+export interface GetSingleLocalAdminExcelGetUsersRequestParams {
     organizationId?: number;
 }
 
-export interface GetSingleExcelGetUsersByUuidRequestParams {
+export interface GetSingleLocalAdminExcelGetUsersByUuidRequestParams {
     organizationUuid?: string;
 }
 
@@ -57,7 +57,7 @@ export interface GetSingleExcelGetUsersByUuidRequestParams {
 @Injectable({
   providedIn: 'root'
 })
-export class ExcelService {
+export class LocalAdminExcelService {
 
     protected basePath = 'http://localhost';
     public defaultHeaders = new HttpHeaders();
@@ -123,10 +123,10 @@ export class ExcelService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleExcelGetAccessRights(requestParameters: GetSingleExcelGetAccessRightsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public getSingleExcelGetAccessRights(requestParameters: GetSingleExcelGetAccessRightsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleExcelGetAccessRights(requestParameters: GetSingleExcelGetAccessRightsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleExcelGetAccessRights(requestParameters: GetSingleExcelGetAccessRightsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public getSingleLocalAdminExcelGetAccessRights(requestParameters: GetSingleLocalAdminExcelGetAccessRightsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public getSingleLocalAdminExcelGetAccessRights(requestParameters: GetSingleLocalAdminExcelGetAccessRightsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public getSingleLocalAdminExcelGetAccessRights(requestParameters: GetSingleLocalAdminExcelGetAccessRightsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public getSingleLocalAdminExcelGetAccessRights(requestParameters: GetSingleLocalAdminExcelGetAccessRightsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         const getEntitiesAccessRights = requestParameters.getEntitiesAccessRights;
         const organizationId = requestParameters.organizationId;
 
@@ -189,10 +189,10 @@ export class ExcelService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleExcelGetContracts(requestParameters: GetSingleExcelGetContractsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public getSingleExcelGetContracts(requestParameters: GetSingleExcelGetContractsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleExcelGetContracts(requestParameters: GetSingleExcelGetContractsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleExcelGetContracts(requestParameters: GetSingleExcelGetContractsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public getSingleLocalAdminExcelGetContracts(requestParameters: GetSingleLocalAdminExcelGetContractsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public getSingleLocalAdminExcelGetContracts(requestParameters: GetSingleLocalAdminExcelGetContractsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public getSingleLocalAdminExcelGetContracts(requestParameters: GetSingleLocalAdminExcelGetContractsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public getSingleLocalAdminExcelGetContracts(requestParameters: GetSingleLocalAdminExcelGetContractsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         const organizationId = requestParameters.organizationId;
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -250,10 +250,10 @@ export class ExcelService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleExcelGetContractsByUuid(requestParameters: GetSingleExcelGetContractsByUuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public getSingleExcelGetContractsByUuid(requestParameters: GetSingleExcelGetContractsByUuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleExcelGetContractsByUuid(requestParameters: GetSingleExcelGetContractsByUuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleExcelGetContractsByUuid(requestParameters: GetSingleExcelGetContractsByUuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public getSingleLocalAdminExcelGetContractsByUuid(requestParameters: GetSingleLocalAdminExcelGetContractsByUuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public getSingleLocalAdminExcelGetContractsByUuid(requestParameters: GetSingleLocalAdminExcelGetContractsByUuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public getSingleLocalAdminExcelGetContractsByUuid(requestParameters: GetSingleLocalAdminExcelGetContractsByUuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public getSingleLocalAdminExcelGetContractsByUuid(requestParameters: GetSingleLocalAdminExcelGetContractsByUuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -311,10 +311,10 @@ export class ExcelService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleExcelGetOrgUnits(requestParameters: GetSingleExcelGetOrgUnitsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public getSingleExcelGetOrgUnits(requestParameters: GetSingleExcelGetOrgUnitsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleExcelGetOrgUnits(requestParameters: GetSingleExcelGetOrgUnitsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleExcelGetOrgUnits(requestParameters: GetSingleExcelGetOrgUnitsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public getSingleLocalAdminExcelGetOrgUnits(requestParameters: GetSingleLocalAdminExcelGetOrgUnitsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public getSingleLocalAdminExcelGetOrgUnits(requestParameters: GetSingleLocalAdminExcelGetOrgUnitsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public getSingleLocalAdminExcelGetOrgUnits(requestParameters: GetSingleLocalAdminExcelGetOrgUnitsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public getSingleLocalAdminExcelGetOrgUnits(requestParameters: GetSingleLocalAdminExcelGetOrgUnitsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         const organizationId = requestParameters.organizationId;
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -372,10 +372,10 @@ export class ExcelService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleExcelGetOrgUnitsByUuid(requestParameters: GetSingleExcelGetOrgUnitsByUuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public getSingleExcelGetOrgUnitsByUuid(requestParameters: GetSingleExcelGetOrgUnitsByUuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleExcelGetOrgUnitsByUuid(requestParameters: GetSingleExcelGetOrgUnitsByUuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleExcelGetOrgUnitsByUuid(requestParameters: GetSingleExcelGetOrgUnitsByUuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public getSingleLocalAdminExcelGetOrgUnitsByUuid(requestParameters: GetSingleLocalAdminExcelGetOrgUnitsByUuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public getSingleLocalAdminExcelGetOrgUnitsByUuid(requestParameters: GetSingleLocalAdminExcelGetOrgUnitsByUuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public getSingleLocalAdminExcelGetOrgUnitsByUuid(requestParameters: GetSingleLocalAdminExcelGetOrgUnitsByUuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public getSingleLocalAdminExcelGetOrgUnitsByUuid(requestParameters: GetSingleLocalAdminExcelGetOrgUnitsByUuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -433,10 +433,10 @@ export class ExcelService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleExcelGetUsers(requestParameters: GetSingleExcelGetUsersRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public getSingleExcelGetUsers(requestParameters: GetSingleExcelGetUsersRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleExcelGetUsers(requestParameters: GetSingleExcelGetUsersRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleExcelGetUsers(requestParameters: GetSingleExcelGetUsersRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public getSingleLocalAdminExcelGetUsers(requestParameters: GetSingleLocalAdminExcelGetUsersRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public getSingleLocalAdminExcelGetUsers(requestParameters: GetSingleLocalAdminExcelGetUsersRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public getSingleLocalAdminExcelGetUsers(requestParameters: GetSingleLocalAdminExcelGetUsersRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public getSingleLocalAdminExcelGetUsers(requestParameters: GetSingleLocalAdminExcelGetUsersRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         const organizationId = requestParameters.organizationId;
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -494,10 +494,10 @@ export class ExcelService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleExcelGetUsersByUuid(requestParameters: GetSingleExcelGetUsersByUuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public getSingleExcelGetUsersByUuid(requestParameters: GetSingleExcelGetUsersByUuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleExcelGetUsersByUuid(requestParameters: GetSingleExcelGetUsersByUuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleExcelGetUsersByUuid(requestParameters: GetSingleExcelGetUsersByUuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public getSingleLocalAdminExcelGetUsersByUuid(requestParameters: GetSingleLocalAdminExcelGetUsersByUuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public getSingleLocalAdminExcelGetUsersByUuid(requestParameters: GetSingleLocalAdminExcelGetUsersByUuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public getSingleLocalAdminExcelGetUsersByUuid(requestParameters: GetSingleLocalAdminExcelGetUsersByUuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public getSingleLocalAdminExcelGetUsersByUuid(requestParameters: GetSingleLocalAdminExcelGetUsersByUuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
