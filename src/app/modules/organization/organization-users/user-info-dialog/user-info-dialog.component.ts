@@ -146,4 +146,8 @@ export class UserInfoDialogComponent extends BaseComponent implements OnInit {
   public getFullName(user: ODataOrganizationUser): string {
     return `${user.FirstName} ${user.LastName}`;
   }
+
+  public closeDialog(): void {
+    this.dialogRef.close();
+  }
 }

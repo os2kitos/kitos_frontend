@@ -57,6 +57,7 @@ export function getDetailsPageLink(
           itemPathIncludesSubmodule,
         );
       case 'it-system-usage':
+        console.log('Getting details page link for it-system-usage');
         return getDetailsPagePathWithSubmodule(
           `${AppPath.itSystems}/${AppPath.itSystemUsages}`,
           itemUuid,
@@ -70,6 +71,8 @@ export function getDetailsPageLink(
           subpagePath,
           itemPathIncludesSubmodule,
         );
+      case 'organization-unit':
+        return getDetailsPagePath(`${AppPath.organization}/${AppPath.structure}`, itemUuid);
       default:
         console.error('Unmapped link itemType', itemType);
         return undefined;

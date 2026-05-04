@@ -1,4 +1,3 @@
-
 import { Component, Input, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { getDetailsPageLink } from '../../helpers/link.helpers';
@@ -22,6 +21,7 @@ export class DetailsPageLinkComponent implements OnInit {
   @Input() public itemPathIncludesSubmodule = false;
 
   public ngOnInit(): void {
+    console.log('itemType', this.itemType);
     const path = getDetailsPageLink(this.itemPath, this.itemType, this.subpagePath, this.itemPathIncludesSubmodule);
     if (path) {
       this.detailsPageRouterPath = path;

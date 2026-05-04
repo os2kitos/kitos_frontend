@@ -8,6 +8,7 @@
           entityType="organization-unit"
           [hasModifyPermission$]="hasOrganizationRolesModifyPermission$"
           [availableRoles$]="unitRoles$"
+          (linkClicked)="closeDialog()"
         ></app-user-role-table>
         <app-user-role-table
           [user]="user"
@@ -15,6 +16,7 @@
           entityType="it-system"
           [hasModifyPermission$]="hasSystemAndDprRolesModifyPermission$"
           [availableRoles$]="usageRoles$"
+          (linkClicked)="closeDialog()"
         ></app-user-role-table>
         <app-user-role-table
           [user]="user"
@@ -22,6 +24,7 @@
           entityType="it-contract"
           [hasModifyPermission$]="hasContractRolesModifyPermission$"
           [availableRoles$]="contractRoles$"
+          (linkClicked)="closeDialog()"
         ></app-user-role-table>
         <app-user-role-table
           [user]="user"
@@ -29,6 +32,7 @@
           entityType="data-processing-registration"
           [hasModifyPermission$]="hasSystemAndDprRolesModifyPermission$"
           [availableRoles$]="dprRoles$"
+          (linkClicked)="closeDialog()"
         ></app-user-role-table>
         @if (user.LastAdvisSent) {
           <app-content-space-between>
@@ -45,16 +49,16 @@
       <app-dialog-actions>
         <app-button i18n buttonStyle="tertiary" color="warn" (buttonClick)="onDeleteUser()"
           ><app-trashcan-icon></app-trashcan-icon> Slet bruger
-      </app-button>
+        </app-button>
         <app-button buttonStyle="secondary" (buttonClick)="onEditUser(user)" i18n> Rediger </app-button>
         <app-button
           buttonStyle="primary"
           (buttonClick)="onSendAdvis(user)"
           i18n
           [disabled]="($sendingNotification | async) === true"
-          >
-        Send advis
-      </app-button>
+        >
+          Send advis
+        </app-button>
       </app-dialog-actions>
     }
   </app-scrollbar-dialog>
