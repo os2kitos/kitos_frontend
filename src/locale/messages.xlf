@@ -2438,9 +2438,6 @@
       <trans-unit id="1367605704987726222" datatype="html">
         <source>Systemets overordnede formål</source>
       </trans-unit>
-      <trans-unit id="7810461789493260398" datatype="html">
-        <source>Forretningskritisk IT-System</source>
-      </trans-unit>
       <trans-unit id="2577876001692170237" datatype="html">
         <source>IT-systemet driftes</source>
       </trans-unit>
@@ -6001,6 +5998,12 @@
       </trans-unit>
       <trans-unit id="7468937510501419203" datatype="html">
         <source>Skrive</source>
+      </trans-unit>
+      <trans-unit id="2143535785980974186" datatype="html">
+        <source>Systemkritikalitet sidst opdateret</source>
+      </trans-unit>
+      <trans-unit id="7109755738988441858" datatype="html">
+        <source>Systemkritikalitet</source>
       </trans-unit>
     </body>
   </file>

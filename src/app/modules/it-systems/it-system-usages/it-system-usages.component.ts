@@ -653,6 +653,15 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       style: 'enum',
       extraData: yesNoDontKnowOptions,
     },
+    {
+      field: GridFields.CriticalityFieldsLastChanged,
+      title: $localize`Systemkritikalitet sidst opdateret`,
+      section: USAGE_SECTION_NAME,
+      hidden: true,
+      style: 'date',
+      filter: 'date',
+      width: 350,
+    },
   ];
 
   public readonly enableLifeCycleStatus$ = this.store.select(selectITSystemUsageEnableLifeCycleStatus);

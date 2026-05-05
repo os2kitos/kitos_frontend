@@ -129,6 +129,8 @@ export const selectITSystemUsageEnableIsSociallyCritical =
   createItSystemUsageFrontPageFieldSelector('isSociallyCritical');
 export const selectITSystemUsageEnableIsBusinessCritical =
   createItSystemUsageFrontPageFieldSelector('isBusinessCritical');
+export const selectITSystemUsageEnableCriticalityFieldsLastChanged =
+  createItSystemUsageFrontPageFieldSelector('criticalityFieldsLastChanged');
 
 //IT System Usage > Contracts
 const createItSystemUsageContractsFieldSelector = (fieldKey: string) =>

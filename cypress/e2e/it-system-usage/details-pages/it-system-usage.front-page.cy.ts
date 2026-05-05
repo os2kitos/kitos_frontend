@@ -23,7 +23,7 @@ describe('it-system-usage frontpage', () => {
       'patchRequest',
     );
 
-    cy.dropdown('Forretningskritisk IT-System', 'Nej', true);
+    cy.dropdown('Forretningskritisk IT-system', 'Nej', true);
 
     cy.wait('@patchRequest')
       .its('request.body')
@@ -54,7 +54,7 @@ describe('it-system-usage frontpage', () => {
     cy.inputByCy('last-web-accessibility-check').should('have.value', '27-02-2025');
     cy.textareaByCy('web-accessibility-notes').should('have.value', 'en note om tilgængelighed');
 
-    cy.dropdown('Forretningskritisk IT-System').should('have.text', 'Ja');
+    cy.dropdown('Forretningskritisk IT-system').should('have.text', 'Ja');
 
     cy.contains('Data fra IT Systemkataloget').click();
 

@@ -74,33 +74,6 @@
         </app-dropdown
       ></app-tooltip>
     }
-
-    @if (isSociallyCriticalEnabled$ | async) {
-      <app-dropdown
-        text="Samfundskritisk IT-system"
-        i18n-text
-        [formGroup]="itSystemInformationForm"
-        formName="isSociallyCritical"
-        (valueChange)="patchGeneral({ isSociallyCritical: $event })"
-        [data]="isSociallyCriticalOptions"
-        toolTipText="Understøtter systemet funktioner, hvor nedbrud kan medføre alvorlige konsekvenser for samfundets generelle funktionsdygtighed?"
-        i18n-toolTipText
-      ></app-dropdown>
-    }
-
-    @if (isBusinessCriticalEnabled$ | async) {
-      <app-dropdown
-        text="Forretningskritisk IT-System"
-        i18n-text
-        [formGroup]="itSystemInformationForm"
-        formName="isBusinessCritical"
-        [data]="isBusinessCriticalOptions"
-        (valueChange)="patchGeneral({ isBusinessCritical: $event })"
-        toolTipText="Definitionen fra fællesoffentlig IT kritikalitet: driftsforstyrrelser rammer størstedelen af organisationens evne til at arbejde"
-        i18n-toolTipText
-      ></app-dropdown>
-    }
-
     @if (descriptionEnabled$ | async) {
       <app-textarea
         class="full-width"
@@ -113,6 +86,49 @@
     }
   </form>
 </app-card>
+
+@if (showSystemCriticalityCard$ | async) {
+<app-card data-cy="system-criticality-section">
+  <app-card-header title="Systemkritikalitet" helpTextKey="it-system.criticality" i18n-title></app-card-header>
+  <form [formGroup]="itSystemCriticalityForm">
+    @if (isSociallyCriticalEnabled$ | async) {
+        <app-dropdown
+          text="Samfundskritisk IT-system"
+          i18n-text
+          [formGroup]="itSystemCriticalityForm"
+          formName="isSociallyCritical"
+          (valueChange)="patchGeneral({ isSociallyCritical: $event } )"
+          [data]="isSociallyCriticalOptions"
+          toolTipText="Understøtter systemet funktioner, hvor nedbrud kan medføre alvorlige konsekvenser for samfundets generelle funktionsdygtighed?"
+          i18n-toolTipText
+        ></app-dropdown>
+      }
+
+    @if (isBusinessCriticalEnabled$ | async) {
+      <app-dropdown
+        text="Forretningskritisk IT-system"
+        i18n-text
+        [formGroup]="itSystemCriticalityForm"
+        formName="isBusinessCritical"
+        [data]="isBusinessCriticalOptions"
+        (valueChange)="patchGeneral({ isBusinessCritical: $event })"
+        toolTipText="Definitionen fra fællesoffentlig IT kritikalitet: driftsforstyrrelser rammer størstedelen af organisationens evne til at arbejde"
+        i18n-toolTipText
+      ></app-dropdown>
+
+      @if (criticalityFieldsLastChangedEnabled$ | async){
+        <app-datepicker
+        i18n-text
+        text="Systemkritikalitet sidst opdateret"
+        formName="criticalityFieldsLastChanged"
+        [formGroup]="itSystemCriticalityForm"
+        >
+      </app-datepicker>
+      }
+    }
+    </form>
+</app-card>
+}
 
 @if (showSystemUsageCard$ | async) {
   <app-card data-cy="system-usage-section">

@@ -3,7 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { filter, map } from 'rxjs';
-import { APIGeneralDataUpdateRequestDTO, APIIdentityNamePairResponseDTO } from 'src/app/api/v2';
+import {
+  APIGeneralDataResponseDTO,
+  APIGeneralDataUpdateRequestDTO,
+  APIIdentityNamePairResponseDTO,
+} from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { TooltipComponent } from 'src/app/shared/components/tooltip/tooltip.component';
 import { SUPPLIER_DISABLED_MESSAGE } from 'src/app/shared/constants/constants';
@@ -50,6 +54,7 @@ import {
 import {
   selectITSystemUsageEnableAmountOfUsers,
   selectITSystemUsageEnableContainsAITechnology,
+  selectITSystemUsageEnableCriticalityFieldsLastChanged,
   selectITSystemUsageEnableDataClassification,
   selectITSystemUsageEnableDescription,
   selectITSystemUsageEnableFrontPageUsagePeriod,
@@ -102,8 +107,15 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
       dataClassification: new FormControl<APIIdentityNamePairResponseDTO | undefined>(undefined),
       notes: new FormControl<string | undefined>(undefined),
       aiTechnology: new FormControl<YesNoDontKnowOption | undefined>(undefined),
+    },
+    { updateOn: 'blur' },
+  );
+
+  public readonly itSystemCriticalityForm = new FormGroup(
+    {
       isSociallyCritical: new FormControl<YesNoDontKnowOption | undefined>(undefined),
       isBusinessCritical: new FormControl<YesNoDontKnowOption | undefined>(undefined),
+      criticalityFieldsLastChanged: new FormControl<Date | undefined>(undefined),
     },
     { updateOn: 'blur' },
   );
@@ -129,6 +141,9 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
   public readonly webAccessiblityEnabled$ = this.store.select(selectITSystemUsageEnableWebAccessibility);
   public readonly isSociallyCriticalEnabled$ = this.store.select(selectITSystemUsageEnableIsSociallyCritical);
   public readonly isBusinessCriticalEnabled$ = this.store.select(selectITSystemUsageEnableIsBusinessCritical);
+  public readonly criticalityFieldsLastChangedEnabled$ = this.store.select(
+    selectITSystemUsageEnableCriticalityFieldsLastChanged,
+  );
 
   public readonly containsAITechnologyModifyEnabled$ = this.store.select(
     selectITSystemUsageFieldPermissions(itSystemUsageFields.containsAITechnology),
@@ -141,6 +156,12 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
     this.lifeCycleStatusEnabled$,
     this.usagePeriodEnabled$,
     this.statusEnabled$,
+  ]);
+
+  public readonly showSystemCriticalityCard$ = combineOR([
+    this.isSociallyCriticalEnabled$,
+    this.isBusinessCriticalEnabled$,
+    this.criticalityFieldsLastChangedEnabled$,
   ]);
 
   public readonly itSystemApplicationForm = new FormGroup(
@@ -199,6 +220,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
     this.itSystemApplicationForm.controls.validTo.validator = dateGreaterThanOrEqualControlValidator(
       this.itSystemApplicationForm.controls.validFrom,
     );
+    this.itSystemCriticalityForm.controls.criticalityFieldsLastChanged.disable();
 
     this.store.dispatch(RegularOptionTypeActions.getOptions('it-system_usage-data-classification-type'));
     // Disable forms if user does not have rights to modify
@@ -251,9 +273,14 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
             dataClassification: general.dataClassification,
             notes: general.notes,
             aiTechnology: mapToYesNoEnum(general.containsAITechnology),
+          });
+
+          this.itSystemCriticalityForm.patchValue({
             isSociallyCritical: mapToYesNoDontKnowEnum(general.isSociallyCritical),
             isBusinessCritical: mapToYesNoDontKnowEnum(general.isBusinessCritical),
           });
+
+          this.setFormCriticalityFieldsLastChanged(general);
 
           this.webAccessibilityForm.patchValue({
             webAccessibilityCompliance: mapToYesNoPartiallyEnum(general.webAccessibilityCompliance ?? undefined),
@@ -282,6 +309,14 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
           }),
         ),
     );
+  }
+
+  private setFormCriticalityFieldsLastChanged(general: APIGeneralDataResponseDTO) {
+    if (general.criticalityFieldsLastChanged) {
+      this.itSystemCriticalityForm.controls.criticalityFieldsLastChanged.setValue(
+        new Date(general.criticalityFieldsLastChanged),
+      );
+    }
   }
 
   public patchGeneral(general: APIGeneralDataUpdateRequestDTO, valueChange?: ValidatedValueChange<unknown>) {

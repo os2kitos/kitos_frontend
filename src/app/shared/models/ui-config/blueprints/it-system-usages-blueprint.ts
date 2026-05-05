@@ -60,7 +60,10 @@ export const ItSystemUsageUiBluePrint = {
           text: $localize`Samfundskritisk IT-system`,
         },
         isBusinessCritical: {
-          text: $localize`Forretningskritisk IT-System`,
+          text: $localize`Forretningskritisk IT-system`,
+        },
+        criticalityFieldsLastChanged: {
+          text: $localize`Systemkritikalitet sidst opdateret`,
         },
       },
     },

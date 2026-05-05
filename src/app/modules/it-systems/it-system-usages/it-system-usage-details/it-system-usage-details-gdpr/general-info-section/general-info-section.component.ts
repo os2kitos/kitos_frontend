@@ -24,7 +24,7 @@ import {
   selectITSystemUsageEnableGdprCriticality,
   selectITSystemUsageEnableGdprDocumentation,
   selectITSystemUsageEnableGdprHostedAt,
-  selectITSystemUsageEnableGdprPurpose,
+  selectITSystemUsageEnableGdprPurpose
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { CardHeaderComponent } from '../../../../../../shared/components/card-header/card-header.component';
 import { CardComponent } from '../../../../../../shared/components/card/card.component';

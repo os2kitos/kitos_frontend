@@ -64,6 +64,7 @@ import {
   selectITSystemUsageEnableCatalogArchiveDuty,
   selectITSystemUsageEnableCatalogArchiveDutyComment,
   selectITSystemUsageEnableContainsAITechnology,
+  selectITSystemUsageEnableCriticalityFieldsLastChanged,
   selectITSystemUsageEnableDataClassification,
   selectITSystemUsageEnableDataProcessing,
   selectITSystemUsageEnableDescription,
@@ -307,6 +308,9 @@ export class GridUIConfigService {
       this.store
         .select(selectITSystemUsageEnableIsBusinessCritical)
         .pipe(shouldEnable([UsageFields.IsBusinessCritical])),
+      this.store
+        .select(selectITSystemUsageEnableCriticalityFieldsLastChanged)
+        .pipe(shouldEnable([UsageFields.CriticalityFieldsLastChanged])),
 
       //Contracts
       combineAND([
