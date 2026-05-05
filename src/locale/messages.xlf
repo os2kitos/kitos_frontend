@@ -5297,21 +5297,6 @@
       <trans-unit id="3629666201490878672" datatype="html">
         <source>Kun organisationer af typen &quot;Virksomhed&quot; kan være ISMS leverandører.</source>
       </trans-unit>
-      <trans-unit id="5070899896766404217" datatype="html">
-        <source>Ikke kritisk</source>
-      </trans-unit>
-      <trans-unit id="5533383424441473672" datatype="html">
-        <source>Høj</source>
-      </trans-unit>
-      <trans-unit id="5982496808088686844" datatype="html">
-        <source>Medium</source>
-      </trans-unit>
-      <trans-unit id="6572607453095683769" datatype="html">
-        <source>Meget høj</source>
-      </trans-unit>
-      <trans-unit id="6905265339095064583" datatype="html">
-        <source>Lav</source>
-      </trans-unit>
       <trans-unit id="2368085507469871" datatype="html">
         <source>Seneste tilsynsrapport</source>
       </trans-unit>
@@ -5371,9 +5356,6 @@
       </trans-unit>
       <trans-unit id="398378182976183657" datatype="html">
         <source>IT System: Anvendes af organisationer</source>
-      </trans-unit>
-      <trans-unit id="2441857005381821884" datatype="html">
-        <source>IT Systemer - GDPR - Kritikalitet</source>
       </trans-unit>
       <trans-unit id="2906905998458410320" datatype="html">
         <source>Indkommende relationer</source>

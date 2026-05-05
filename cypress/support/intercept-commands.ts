@@ -97,6 +97,9 @@ Cypress.Commands.add('setupItSystemUsageIntercepts', () => {
   cy.intercept('/api/v2/it-system-usage-data-classification-types*', {
     fixture: './it-system-usage/classification-types.json',
   });
+  cy.intercept('/api/v2/it-system-usage-criticality-level-types*', {
+    fixture: './it-system-usage/criticality-level-types.json',
+  });
   cy.intercept('/api/v2/it-system-usages/*/permissions', { fixture: './shared/permissions.json' });
   cy.intercept('/api/v2/it-systems/*', { fixture: 'it-system.json' }); //gets the base system
   cy.intercept('/api/v2/internal/organizations/*/grid/permissions', { statusCode: 404, body: {} });

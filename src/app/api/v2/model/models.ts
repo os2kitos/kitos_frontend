@@ -87,7 +87,6 @@ export * from './fieldPermissionsResponseDTO';
 export * from './gDPRPersonalDataChoice';
 export * from './gDPRRegistrationsResponseDTO';
 export * from './gDPRWriteRequestDTO';
-export * from './gdprCriticalityChoice';
 export * from './gdprReportResponseDTO';
 export * from './generalDataResponseDTO';
 export * from './generalDataUpdateRequestDTO';

@@ -1,0 +1,17 @@
+[
+  {
+    "description": "Laveste kritikalitet",
+    "uuid": "3b0c3098-45c7-4e25-9d10-1232918bfaa4",
+    "name": "Lav"
+  },
+  {
+    "description": "Midterste kritikalitet",
+    "uuid": "a90730b2-82cc-45b5-8dd3-f771d61b2d7d",
+    "name": "Mellem"
+  },
+  {
+    "description": "Højeste kritikalitet",
+    "uuid": "75f51b5c-0e7e-4389-9f26-04d1988b3bc0",
+    "name": "Høj"
+  }
+]

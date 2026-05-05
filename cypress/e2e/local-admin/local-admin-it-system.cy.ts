@@ -19,6 +19,7 @@ describe('local-admin it system usage', () => {
     cy.intercept('/api/v2/internal/organizations/*/permissions', {
       fixture: './organizations/organization-permissions-local-admin.json',
     });
+    cy.intercept('/api/v2/internal/it-systems/*/local-option-types/system-usage-criticality-level-types*', {});
     cy.setup(true, 'local-admin/system');
   });
 
@@ -60,7 +61,7 @@ describe('local-admin it system usage', () => {
     cy.wait('@put').then((interception) => {
       const nodes = interception.request.body.nodes;
       const gdprNode = nodes.find(
-        (node: { key: string; enabled: boolean }) => node.key === 'ItSystemUsages.gdpr.plannedRiskAssessmentDate'
+        (node: { key: string; enabled: boolean }) => node.key === 'ItSystemUsages.gdpr.plannedRiskAssessmentDate',
       );
       expect(gdprNode.enabled).to.equal(false);
     });

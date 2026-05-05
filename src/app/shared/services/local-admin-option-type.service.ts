@@ -33,6 +33,7 @@ import {
   ItSystemLocalRegisterTypesInternalV2Service,
   ItSystemLocalRoleOptionTypesInternalV2Service,
   ItSystemLocalSensitivePersonalDataTypesInternalV2Service,
+  ItSystemLocalSystemUsageCriticalityLevelTypesInternalV2Service,
   OrganizationUnitLocalRoleOptionTypesInternalV2Service,
 } from 'src/app/api/v2';
 import { LocalAdminOptionType } from '../models/options/local-admin-option-type.model';
@@ -65,6 +66,9 @@ export class LocalAdminOptionTypeService implements OnDestroy {
     private itSystemCategoryService: ItSystemLocalItSystemCategoriesTypesInternalV2Service,
     @Inject(ItSystemLocalRegisterTypesInternalV2Service)
     private registerTypeService: ItSystemLocalRegisterTypesInternalV2Service,
+    @Inject(ItSystemLocalSystemUsageCriticalityLevelTypesInternalV2Service)
+    private criticalityLevelService: ItSystemLocalSystemUsageCriticalityLevelTypesInternalV2Service,
+
     //It contract regular option services
     @Inject(ItContractLocalContractTypesInternalV2Service)
     private contractTypeService: ItContractLocalContractTypesInternalV2Service,
@@ -213,6 +217,13 @@ export class LocalAdminOptionTypeService implements OnDestroy {
           this.registerTypeService.getSingleItSystemLocalRegisterTypesInternalV2GetLocalRegisterTypes({
             organizationUuid,
           });
+      case 'it-system-usage_system-usage-criticality-level':
+        return (organizationUuid) =>
+          this.criticalityLevelService.getSingleItSystemLocalSystemUsageCriticalityLevelTypesInternalV2GetLocalSystemUsageCriticalityLevelTypes(
+            {
+              organizationUuid,
+            },
+          );
 
       //Data processing regular option types
       case 'data-processing-basis-for-transfer-types':
@@ -409,6 +420,16 @@ export class LocalAdminOptionTypeService implements OnDestroy {
             optionUuid,
             aPILocalRegularOptionUpdateRequestDTO: request,
           });
+
+      case 'it-system-usage_system-usage-criticality-level':
+        return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
+          this.criticalityLevelService.patchSingleItSystemLocalSystemUsageCriticalityLevelTypesInternalV2PatchSystemUsageCriticalityLevelType(
+            {
+              organizationUuid,
+              optionUuid,
+              aPILocalRegularOptionUpdateRequestDTO: request,
+            },
+          );
 
       //Data processing regular option types
       case 'data-processing-basis-for-transfer-types':
@@ -680,6 +701,14 @@ export class LocalAdminOptionTypeService implements OnDestroy {
             organizationUuid,
             aPILocalOptionCreateRequestDTO: { optionUuid },
           });
+      case 'it-system-usage_system-usage-criticality-level':
+        return (organizationUuid, optionUuid) =>
+          this.criticalityLevelService.postSingleItSystemLocalSystemUsageCriticalityLevelTypesInternalV2CreateSystemUsageCriticalityLevelType(
+            {
+              organizationUuid,
+              aPILocalOptionCreateRequestDTO: { optionUuid },
+            },
+          );
 
       //Data processing regular option types
       case 'data-processing-basis-for-transfer-types':
@@ -894,6 +923,15 @@ export class LocalAdminOptionTypeService implements OnDestroy {
             organizationUuid,
             optionUuid,
           });
+
+      case 'it-system-usage_system-usage-criticality-level':
+        return (organizationUuid, optionUuid) =>
+          this.criticalityLevelService.deleteSingleItSystemLocalSystemUsageCriticalityLevelTypesInternalV2DeleteSystemUsageCriticalityLevelType(
+            {
+              organizationUuid,
+              optionUuid,
+            },
+          );
 
       //Data processing regular option types
       case 'data-processing-basis-for-transfer-types':

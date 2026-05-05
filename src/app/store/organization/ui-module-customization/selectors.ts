@@ -131,6 +131,11 @@ export const selectITSystemUsageEnableIsBusinessCritical =
   createItSystemUsageFrontPageFieldSelector('isBusinessCritical');
 export const selectITSystemUsageEnableCriticalityFieldsLastChanged =
   createItSystemUsageFrontPageFieldSelector('criticalityFieldsLastChanged');
+export const selectITSystemUsageEnableCriticalityLevelDocumentation = createItSystemUsageFrontPageFieldSelector(
+  'criticalityLevelDocumentation',
+);
+export const selectITSystemUsageEnableSystemUsageCriticalityLevel =
+  createItSystemUsageFrontPageFieldSelector('systemUsageCriticalityLevel');
 
 //IT System Usage > Contracts
 const createItSystemUsageContractsFieldSelector = (fieldKey: string) =>
@@ -159,7 +164,6 @@ export const selectITSystemUsageEnableGdprConductedRiskAssessment =
   createItSystemUsageGdprFieldSelector('conductedRiskAssessment');
 export const selectITSystemUsageEnableGdprDpiaConducted = createItSystemUsageGdprFieldSelector('dpiaConducted');
 export const selectITSystemUsageEnableGdprRetentionPeriod = createItSystemUsageGdprFieldSelector('retentionPeriod');
-export const selectITSystemUsageEnableGdprCriticality = createItSystemUsageGdprFieldSelector('gdprCriticality');
 
 //IT System Usage > Relations
 const createItSystemUsageRelationsFieldSelector = (fieldKey: string) =>

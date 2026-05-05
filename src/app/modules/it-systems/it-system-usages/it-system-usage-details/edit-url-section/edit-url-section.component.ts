@@ -6,7 +6,7 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
 import { hasOpenDialogOf } from 'src/app/shared/helpers/dialog.helpers';
 import { validateHttpUrl } from 'src/app/shared/helpers/link.helpers';
 import { SimpleLink } from 'src/app/shared/models/SimpleLink.model';
-import { LinkTextboxComponent } from '../../../../../../shared/components/link-textbox/link-textbox.component';
+import { LinkTextboxComponent } from '../../../../../shared/components/link-textbox/link-textbox.component';
 import { EditSimpleLinkDialogComponent } from '../edit-url-dialog/edit-url-dialog.component';
 
 @Component({

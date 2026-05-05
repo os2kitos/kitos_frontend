@@ -12,6 +12,7 @@ export type RegularOptionType =
   | 'it-system_usage-archive-location-test-type'
   | 'it-contract_contract-type'
   | 'it_system_usage-gdpr-registered-data-category-type'
+  | 'it-system-usage_system-usage-criticality-level'
   | 'it-system-usage-roles'
   | 'it-interface_data-type'
   | 'it-contract_contract-template-type'

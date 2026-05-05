@@ -83,6 +83,7 @@ api/itSystemGlobalItSystemCategoriesInternalV2.service.ts
 api/itSystemGlobalRegisterTypesInternalV2.service.ts
 api/itSystemGlobalRoleOptionTypesInternalV2.service.ts
 api/itSystemGlobalSensitivePersonalDataTypesInternalV2.service.ts
+api/itSystemGlobalSystemUsageCriticalityLevelTypesInternalV2.service.ts
 api/itSystemInternalV2.service.ts
 api/itSystemLocalArchiveLocationTypesInternalV2.service.ts
 api/itSystemLocalArchiveTestLocationTypesInternalV2.service.ts
@@ -95,9 +96,11 @@ api/itSystemLocalItSystemCategoriesTypesInternalV2.service.ts
 api/itSystemLocalRegisterTypesInternalV2.service.ts
 api/itSystemLocalRoleOptionTypesInternalV2.service.ts
 api/itSystemLocalSensitivePersonalDataTypesInternalV2.service.ts
+api/itSystemLocalSystemUsageCriticalityLevelTypesInternalV2.service.ts
 api/itSystemUsageArchiveLocationTypeV2.service.ts
 api/itSystemUsageArchiveTestLocationTypeV2.service.ts
 api/itSystemUsageArchiveTypeV2.service.ts
+api/itSystemUsageCriticalityLevelTypeV2.service.ts
 api/itSystemUsageDataClassificationTypeV2.service.ts
 api/itSystemUsageInternalV2.service.ts
 api/itSystemUsageMigrationV2.service.ts
@@ -218,7 +221,6 @@ model/fieldPermissionsResponseDTO.ts
 model/gDPRPersonalDataChoice.ts
 model/gDPRRegistrationsResponseDTO.ts
 model/gDPRWriteRequestDTO.ts
-model/gdprCriticalityChoice.ts
 model/gdprReportResponseDTO.ts
 model/generalDataResponseDTO.ts
 model/generalDataUpdateRequestDTO.ts

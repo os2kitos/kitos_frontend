@@ -29,6 +29,7 @@ import {
   mapNumberOfExpectedUsers,
   numberOfExpectedUsersOptions,
 } from 'src/app/shared/models/number-of-expected-users.model';
+import { SimpleLink } from 'src/app/shared/models/SimpleLink.model';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import {
   YesNoDontKnowOption,
@@ -55,6 +56,7 @@ import {
   selectITSystemUsageEnableAmountOfUsers,
   selectITSystemUsageEnableContainsAITechnology,
   selectITSystemUsageEnableCriticalityFieldsLastChanged,
+  selectITSystemUsageEnableCriticalityLevelDocumentation,
   selectITSystemUsageEnableDataClassification,
   selectITSystemUsageEnableDescription,
   selectITSystemUsageEnableFrontPageUsagePeriod,
@@ -65,6 +67,7 @@ import {
   selectITSystemUsageEnableLifeCycleStatus,
   selectITSystemUsageEnableName,
   selectITSystemUsageEnableStatus,
+  selectITSystemUsageEnableSystemUsageCriticalityLevel,
   selectITSystemUsageEnableTakenIntoUsageBy,
   selectITSystemUsageEnableVersion,
   selectITSystemUsageEnableWebAccessibility,
@@ -79,6 +82,8 @@ import { DropdownComponent } from '../../../../../shared/components/dropdowns/dr
 import { StatusChipComponent } from '../../../../../shared/components/status-chip/status-chip.component';
 import { TextAreaComponent } from '../../../../../shared/components/textarea/textarea.component';
 import { TextBoxComponent } from '../../../../../shared/components/textbox/textbox.component';
+import { EditUrlSectionComponent } from '../edit-url-section/edit-url-section.component';
+
 @Component({
   selector: 'app-it-system-usage-details-frontpage-information',
   templateUrl: 'it-system-usage-details-frontpage-information.component.html',
@@ -95,6 +100,7 @@ import { TextBoxComponent } from '../../../../../shared/components/textbox/textb
     DatePickerComponent,
     AsyncPipe,
     TooltipComponent,
+    EditUrlSectionComponent,
   ],
 })
 export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseComponent implements OnInit {
@@ -116,6 +122,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
       isSociallyCritical: new FormControl<YesNoDontKnowOption | undefined>(undefined),
       isBusinessCritical: new FormControl<YesNoDontKnowOption | undefined>(undefined),
       criticalityFieldsLastChanged: new FormControl<Date | undefined>(undefined),
+      systemUsageCriticalityLevel: new FormControl<APIIdentityNamePairResponseDTO | undefined>(undefined),
     },
     { updateOn: 'blur' },
   );
@@ -144,7 +151,9 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
   public readonly criticalityFieldsLastChangedEnabled$ = this.store.select(
     selectITSystemUsageEnableCriticalityFieldsLastChanged,
   );
-
+  public readonly criticalityLevelDocumentationEnabled$ = this.store.select(
+    selectITSystemUsageEnableCriticalityLevelDocumentation,
+  );
   public readonly containsAITechnologyModifyEnabled$ = this.store.select(
     selectITSystemUsageFieldPermissions(itSystemUsageFields.containsAITechnology),
   );
@@ -158,11 +167,34 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
     this.statusEnabled$,
   ]);
 
+  public readonly systemUsageCriticalityEnabled$ = this.store.select(
+    selectITSystemUsageEnableSystemUsageCriticalityLevel,
+  );
+
+  public readonly systemUsageCriticalityModifyEnabled$ = this.store.select(
+    selectITSystemUsageFieldPermissions(itSystemUsageFields.systemUsageCriticalityLevel),
+  );
+
   public readonly showSystemCriticalityCard$ = combineOR([
     this.isSociallyCriticalEnabled$,
     this.isBusinessCriticalEnabled$,
     this.criticalityFieldsLastChangedEnabled$,
+    this.systemUsageCriticalityEnabled$,
+    this.criticalityLevelDocumentationEnabled$,
   ]);
+
+  public disableCriticalityLevelDocumentationControl = false;
+
+  public selectCriticalityLevelDocumentation$ = this.store.select(selectItSystemUsageGeneral).pipe(
+    map((general) =>
+      general?.criticalityLevelDocumentation
+        ? ({
+            url: general.criticalityLevelDocumentation.url,
+            name: general.criticalityLevelDocumentation.name,
+          } as SimpleLink)
+        : undefined,
+    ),
+  );
 
   public readonly itSystemApplicationForm = new FormGroup(
     {
@@ -188,6 +220,10 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
   public readonly yesNoPartiallyOptions = yesNoPartiallyOptions;
 
   public readonly itSystemUsageValid$ = this.store.select(selectItSystemUsageValid);
+  public readonly systemUsageCriticalityLevelTypes$ = this.store
+    .select(selectRegularOptionTypes('it-system-usage_system-usage-criticality-level'))
+    .pipe(filterNullish());
+
   public readonly dataClassificationTypes$ = this.store
     .select(selectRegularOptionTypes('it-system_usage-data-classification-type'))
     .pipe(filterNullish());
@@ -213,17 +249,17 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
   }
 
   ngOnInit() {
-    // Add custom date validators
-    this.itSystemApplicationForm.controls.validFrom.validator = dateLessThanControlValidator(
-      this.itSystemApplicationForm.controls.validTo,
-    );
-    this.itSystemApplicationForm.controls.validTo.validator = dateGreaterThanOrEqualControlValidator(
-      this.itSystemApplicationForm.controls.validFrom,
-    );
+    this.addDateValidators();
     this.itSystemCriticalityForm.controls.criticalityFieldsLastChanged.disable();
 
     this.store.dispatch(RegularOptionTypeActions.getOptions('it-system_usage-data-classification-type'));
-    // Disable forms if user does not have rights to modify
+    this.store.dispatch(RegularOptionTypeActions.getOptions('it-system-usage_system-usage-criticality-level'));
+
+    this.disableFormsIfNoModifyPermission();
+    this.setupFormValueChangeSubscriptions();
+  }
+
+  private disableFormsIfNoModifyPermission() {
     this.subscriptions.add(
       this.store
         .select(selectITSystemUsageHasModifyPermission)
@@ -259,7 +295,19 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
       }),
     );
 
-    // Set initial state of information form
+    this.subscriptions.add(
+      this.systemUsageCriticalityModifyEnabled$.subscribe((enabled) => {
+        const control = this.itSystemCriticalityForm.controls.systemUsageCriticalityLevel;
+        if (enabled) {
+          control.enable();
+        } else {
+          control.disable();
+        }
+      }),
+    );
+  }
+
+  private setupFormValueChangeSubscriptions() {
     this.subscriptions.add(
       this.store
         .select(selectItSystemUsageGeneral)
@@ -278,6 +326,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
           this.itSystemCriticalityForm.patchValue({
             isSociallyCritical: mapToYesNoDontKnowEnum(general.isSociallyCritical),
             isBusinessCritical: mapToYesNoDontKnowEnum(general.isBusinessCritical),
+            systemUsageCriticalityLevel: general.systemUsageCriticalityLevel,
           });
 
           this.setFormCriticalityFieldsLastChanged(general);
@@ -311,6 +360,15 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
     );
   }
 
+  private addDateValidators() {
+    this.itSystemApplicationForm.controls.validFrom.validator = dateLessThanControlValidator(
+      this.itSystemApplicationForm.controls.validTo,
+    );
+    this.itSystemApplicationForm.controls.validTo.validator = dateGreaterThanOrEqualControlValidator(
+      this.itSystemApplicationForm.controls.validFrom,
+    );
+  }
+
   private setFormCriticalityFieldsLastChanged(general: APIGeneralDataResponseDTO) {
     if (general.criticalityFieldsLastChanged) {
       this.itSystemCriticalityForm.controls.criticalityFieldsLastChanged.setValue(
@@ -325,5 +383,16 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
     } else {
       this.store.dispatch(ITSystemUsageActions.patchITSystemUsage({ general }));
     }
+  }
+
+  public patchCriticalityLevelDocumentation(
+    simpleLink: { url: string; name: string },
+    valueChange?: ValidatedValueChange<unknown>,
+  ) {
+    this.patchGeneral({ criticalityLevelDocumentation: simpleLink }, valueChange);
+  }
+
+  public resetCriticalityLevelDocumentation() {
+    this.patchGeneral({ criticalityLevelDocumentation: undefined });
   }
 }

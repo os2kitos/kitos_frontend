@@ -34,17 +34,5 @@
         [isDisabled]="disableDirectoryDocumentationControl"
       ></app-edit-url-section>
     }
-    <app-tooltip [text]="(gdprCriticalityModifyEnabled$ | async) === false ? supplierMessage : ''">
-      @if (gdprCriticalityEnabled$ | async) {
-        <app-dropdown
-          text="Kritikalitet"
-          i18n-text
-          [data]="gdprCriticalityOptions"
-          [formGroup]="generalInformationForm"
-          formName="gdprCriticality"
-          (valueChange)="patchGdpr({ gdprCriticality: $event })"
-        ></app-dropdown>
-      }
-    </app-tooltip>
   </app-form-grid>
 </app-card>

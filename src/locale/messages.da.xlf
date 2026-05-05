@@ -6967,26 +6967,6 @@
         <source>Bruges eksternt</source>
         <target state="new">Bruges eksternt</target>
       </trans-unit>
-      <trans-unit id="5070899896766404217" datatype="html">
-        <source>Ikke kritisk</source>
-        <target state="new">Ikke kritisk</target>
-      </trans-unit>
-      <trans-unit id="6905265339095064583" datatype="html">
-        <source>Lav</source>
-        <target state="new">Lav</target>
-      </trans-unit>
-      <trans-unit id="5982496808088686844" datatype="html">
-        <source>Medium</source>
-        <target state="new">Medium</target>
-      </trans-unit>
-      <trans-unit id="5533383424441473672" datatype="html">
-        <source>Høj</source>
-        <target state="new">Høj</target>
-      </trans-unit>
-      <trans-unit id="6572607453095683769" datatype="html">
-        <source>Meget høj</source>
-        <target state="new">Meget høj</target>
-      </trans-unit>
       <trans-unit id="503532903699772235" datatype="html">
         <source>Tilsynsrapport</source>
         <target state="new">Tilsynsrapport</target>
@@ -7078,10 +7058,6 @@
       <trans-unit id="7857124855661066958" datatype="html">
         <source>IT Systemer - Systemforside - Indeholder AI-teknologi?</source>
         <target state="new">IT Systemer - Systemforside - Indeholder AI-teknologi?</target>
-      </trans-unit>
-      <trans-unit id="2441857005381821884" datatype="html">
-        <source>IT Systemer - GDPR - Kritikalitet</source>
-        <target state="new">IT Systemer - GDPR - Kritikalitet</target>
       </trans-unit>
       <trans-unit id="6192599242508017517" datatype="html">
         <source>IT Systemer - GDPR - Hvad viste den seneste risikovurdering?</source>

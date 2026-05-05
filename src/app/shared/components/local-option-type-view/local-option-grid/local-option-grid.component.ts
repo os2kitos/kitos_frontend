@@ -79,7 +79,10 @@ export class LocalOptionGridComponent implements OnInit {
 
   public filteredGridColumns!: GridColumn[];
 
-  constructor(private dialog: MatDialog, private store: Store) {}
+  constructor(
+    private dialog: MatDialog,
+    private store: Store,
+  ) {}
 
   public ngOnInit(): void {
     this.filteredGridColumns = this.gridColumns.map((column) => {
@@ -110,7 +113,7 @@ export class LocalOptionGridComponent implements OnInit {
     const activeStatus = event.value;
     const option = event.item;
     this.store.dispatch(
-      LocalOptionTypeActions.updateOptionTypeActiveStatus(this.optionType, option.uuid, activeStatus)
+      LocalOptionTypeActions.updateOptionTypeActiveStatus(this.optionType, option.uuid, activeStatus),
     );
   }
 }

@@ -58,12 +58,22 @@ export const ItSystemUsageUiBluePrint = {
         },
         isSociallyCritical: {
           text: $localize`Samfundskritisk IT-system`,
+          disableByDefault: true,
         },
         isBusinessCritical: {
           text: $localize`Forretningskritisk IT-system`,
         },
         criticalityFieldsLastChanged: {
           text: $localize`Systemkritikalitet sidst opdateret`,
+          disableByDefault: true,
+        },
+        systemUsageCriticalityLevel: {
+          text: $localize`Kritikalitet`,
+          disableByDefault: true,
+        },
+        criticalityLevelDocumentation: {
+          text: $localize`Reference for kritikalitetsvurdering`,
+          disableByDefault: true,
         },
       },
     },
@@ -118,10 +128,6 @@ export const ItSystemUsageUiBluePrint = {
         },
         retentionPeriod: {
           text: $localize`Er der bevaringsfrist på data inden de må slettes?`,
-        },
-        gdprCriticality: {
-          text: $localize`Kritikalitet`,
-          disableByDefault: true,
         },
       },
     },

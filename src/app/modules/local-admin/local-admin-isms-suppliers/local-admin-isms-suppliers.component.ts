@@ -28,7 +28,10 @@ import { selectOrganizationHasModifyPermission } from 'src/app/store/organizatio
   styleUrl: './local-admin-isms-suppliers.component.scss',
 })
 export class LocalAdminIsmsSuppliersComponent extends BaseComponent implements OnInit {
-  constructor(private store: Store, private dialog: MatDialog) {
+  constructor(
+    private store: Store,
+    private dialog: MatDialog,
+  ) {
     super();
   }
 
@@ -56,7 +59,7 @@ export class LocalAdminIsmsSuppliersComponent extends BaseComponent implements O
     dialogInstance.bulletPoints = [
       $localize`Databehandling - Tilsyn - Gennemførte og kommende tilsyn`,
       $localize`IT Systemer - Systemforside - Indeholder AI-teknologi?`,
-      $localize`IT Systemer - GDPR - Kritikalitet`,
+      $localize`IT Systemer - Systemforside - Kritikalitet`,
       $localize`IT Systemer - GDPR - Hvad viste den seneste risikovurdering?`,
     ];
     dialogInstance.data$ = this.availableSuppliers$;
@@ -92,7 +95,7 @@ export class LocalAdminIsmsSuppliersComponent extends BaseComponent implements O
           if (remove) {
             this.store.dispatch(OrganizationSuppliersActions.removeOrganizationSupplier($event.uuid));
           }
-        })
+        }),
     );
   }
 }

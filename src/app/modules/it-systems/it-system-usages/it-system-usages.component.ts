@@ -26,7 +26,6 @@ import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { archiveDutyChoiceOptions } from 'src/app/shared/models/it-system-usage/archive-duty-choice.model';
 import { dataSensitivityLevelOptions } from 'src/app/shared/models/it-system-usage/gdpr/data-sensitivity-level.model';
-import { gdprCriticalityOptions } from 'src/app/shared/models/it-system-usage/gdpr/gdpr-criticality.model';
 import { hostedAtOptionsGrid } from 'src/app/shared/models/it-system-usage/gdpr/hosted-at.model';
 import { archiveDutyRecommendationChoiceOptions } from 'src/app/shared/models/it-system/archive-duty-recommendation-choice.model';
 import { lifeCycleStatusOptions } from 'src/app/shared/models/life-cycle-status.model';
@@ -635,14 +634,15 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       persistId: 'webAccessibilityNotes',
     },
     {
-      field: GridFields.GdprCriticality,
+      field: GridFields.SystemUsageCriticalityLevelUuid,
+      dataField: GridFields.SystemUsageCriticalityLevelName,
       title: $localize`Kritikalitet`,
-      section: GDPR_SECTION_NAME,
-      hidden: false,
+      section: USAGE_SECTION_NAME,
+      hidden: true,
       persistId: 'gdprCriticality',
-      extraFilter: 'enum',
-      style: 'enum',
-      extraData: gdprCriticalityOptions,
+      extraFilter: 'choice-type',
+      extraData: 'it-system-usage_system-usage-criticality-level',
+      style: 'uuid-to-name',
     },
     {
       field: GridFields.IsSociallyCritical,

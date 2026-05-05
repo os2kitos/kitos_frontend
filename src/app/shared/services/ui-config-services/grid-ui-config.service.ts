@@ -72,7 +72,6 @@ import {
   selectITSystemUsageEnabledSystemId,
   selectITSystemUsageEnableFrontPageUsagePeriod,
   selectITSystemUsageEnableGdprConductedRiskAssessment,
-  selectITSystemUsageEnableGdprCriticality,
   selectITSystemUsageEnableGdprDataTypes,
   selectITSystemUsageEnableGdprDocumentation,
   selectITSystemUsageEnableGdprDpiaConducted,
@@ -94,6 +93,7 @@ import {
   selectITSystemUsageEnableOutgoingRelations,
   selectITSystemUsageEnableSelectContractToDetermineIfItSystemIsActive,
   selectITSystemUsageEnableStatus,
+  selectITSystemUsageEnableSystemUsageCriticalityLevel,
   selectITSystemUsageEnableTabArchiving,
   selectITSystemUsageEnableTabOrganization,
   selectITSystemUsageEnableTabSystemRoles,
@@ -350,7 +350,9 @@ export class GridUIConfigService {
         .select(selectITSystemUsageEnableGdprDocumentation)
         .pipe(shouldEnable([UsageFields.LinkToDirectoryName])),
       this.store.select(selectITSystemUsageEnableGdprDpiaConducted).pipe(shouldEnable([UsageFields.DpiaConducted])),
-      this.store.select(selectITSystemUsageEnableGdprCriticality).pipe(shouldEnable([UsageFields.GdprCriticality])),
+      this.store
+        .select(selectITSystemUsageEnableSystemUsageCriticalityLevel)
+        .pipe(shouldEnable([UsageFields.SystemUsageCriticalityLevelUuid])),
 
       //Organization
       this.store

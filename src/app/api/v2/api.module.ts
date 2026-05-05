@@ -82,6 +82,7 @@ import { ItSystemGlobalItSystemCategoriesInternalV2Service } from './api/itSyste
 import { ItSystemGlobalRegisterTypesInternalV2Service } from './api/itSystemGlobalRegisterTypesInternalV2.service';
 import { ItSystemGlobalRoleOptionTypesInternalV2Service } from './api/itSystemGlobalRoleOptionTypesInternalV2.service';
 import { ItSystemGlobalSensitivePersonalDataTypesInternalV2Service } from './api/itSystemGlobalSensitivePersonalDataTypesInternalV2.service';
+import { ItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2Service } from './api/itSystemGlobalSystemUsageCriticalityLevelTypesInternalV2.service';
 import { ItSystemInternalV2Service } from './api/itSystemInternalV2.service';
 import { ItSystemLocalArchiveLocationTypesInternalV2Service } from './api/itSystemLocalArchiveLocationTypesInternalV2.service';
 import { ItSystemLocalArchiveTestLocationTypesInternalV2Service } from './api/itSystemLocalArchiveTestLocationTypesInternalV2.service';
@@ -94,9 +95,11 @@ import { ItSystemLocalItSystemCategoriesTypesInternalV2Service } from './api/itS
 import { ItSystemLocalRegisterTypesInternalV2Service } from './api/itSystemLocalRegisterTypesInternalV2.service';
 import { ItSystemLocalRoleOptionTypesInternalV2Service } from './api/itSystemLocalRoleOptionTypesInternalV2.service';
 import { ItSystemLocalSensitivePersonalDataTypesInternalV2Service } from './api/itSystemLocalSensitivePersonalDataTypesInternalV2.service';
+import { ItSystemLocalSystemUsageCriticalityLevelTypesInternalV2Service } from './api/itSystemLocalSystemUsageCriticalityLevelTypesInternalV2.service';
 import { ItSystemUsageArchiveLocationTypeV2Service } from './api/itSystemUsageArchiveLocationTypeV2.service';
 import { ItSystemUsageArchiveTestLocationTypeV2Service } from './api/itSystemUsageArchiveTestLocationTypeV2.service';
 import { ItSystemUsageArchiveTypeV2Service } from './api/itSystemUsageArchiveTypeV2.service';
+import { ItSystemUsageCriticalityLevelTypeV2Service } from './api/itSystemUsageCriticalityLevelTypeV2.service';
 import { ItSystemUsageDataClassificationTypeV2Service } from './api/itSystemUsageDataClassificationTypeV2.service';
 import { ItSystemUsageInternalV2Service } from './api/itSystemUsageInternalV2.service';
 import { ItSystemUsageMigrationV2Service } from './api/itSystemUsageMigrationV2.service';

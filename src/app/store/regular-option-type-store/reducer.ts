@@ -2,11 +2,11 @@ import { createEntityAdapter } from '@ngrx/entity';
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { cloneDeep } from 'lodash';
 import { APIRegularOptionResponseDTO } from 'src/app/api/v2';
-import { RegularOptionTypeActions } from './actions';
-import { RegularOptionTypeState } from './state';
 import { isRegularOptionType } from 'src/app/shared/models/options/role-option-types.model';
 import { GlobalOptionTypeActions } from '../global-admin/global-option-types/actions';
 import { LocalOptionTypeActions } from '../local-admin/local-option-types/actions';
+import { RegularOptionTypeActions } from './actions';
+import { RegularOptionTypeState } from './state';
 
 export const regularOptionTypeAdapter = createEntityAdapter<APIRegularOptionResponseDTO>({
   selectId: (contractType) => contractType.uuid,
@@ -30,6 +30,7 @@ function createEmptyState(): RegularOptionTypeState {
     'it-system_usage-archive-location-type': null,
     'it-system_usage-archive-location-test-type': null,
     'it-system-usage-roles': null,
+    'it-system-usage_system-usage-criticality-level': null,
     'it-interface_data-type': null,
     'it-contract_contract-template-type': null,
     'it-contract_criticality-type': null,

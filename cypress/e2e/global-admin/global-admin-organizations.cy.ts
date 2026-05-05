@@ -4,14 +4,14 @@ import { TestRunner } from 'cypress/support/test-runner';
 
 function setupTest() {
   cy.requireIntercept();
-
+  cy.intercept('/api/v2/internal/it-systems/global-option-types/system-usage-criticality-level-types', {});
   cy.intercept('api/v2/internal/organizations/*/grid/permissions', { statusCode: 404, body: {} });
   cy.intercept('/api/v2/internal/organizations/global-option-types/country-codes', {
     fixture: './global-admin/country-codes.json',
   });
   cy.intercept(
     '/odata/Organizations?$skip=0&$top=*&$expand=ForeignCountryCode($select=Uuid,Name,Description)&$count=true',
-    { fixture: './global-admin/organizations.json' }
+    { fixture: './global-admin/organizations.json' },
   );
   cy.setup(true, 'global-admin/organizations');
 }
@@ -70,7 +70,7 @@ describe('global-admin-organizations', () => {
       cy.getByDataCy('grid-delete-button').first().click();
 
       cy.intercept('DELETE', 'api/v2/internal/organizations/*/delete*', { statusCode: 204, body: {} }).as(
-        'deleteOrganization'
+        'deleteOrganization',
       );
 
       cy.getByDataCy('delete-org-dialog-button').click();
@@ -102,7 +102,7 @@ describe('global-admin-organizations', () => {
       cy.getByDataCy('grid-delete-button').first().click();
 
       cy.intercept('DELETE', 'api/v2/internal/organizations/*/delete*', { statusCode: 204, body: {} }).as(
-        'deleteOrganization'
+        'deleteOrganization',
       );
 
       cy.getByDataCy('consequence-checkbox').click();

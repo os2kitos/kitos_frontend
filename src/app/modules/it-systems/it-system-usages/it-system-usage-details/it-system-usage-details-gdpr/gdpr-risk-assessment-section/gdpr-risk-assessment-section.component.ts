@@ -14,6 +14,7 @@ import {
   mapRiskAssessmentEnum,
   riskAssessmentResultOptions,
 } from 'src/app/shared/models/it-system-usage/gdpr/risk-assessment-result';
+import { SimpleLink } from 'src/app/shared/models/SimpleLink.model';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import {
   YesNoDontKnowOption,
@@ -32,8 +33,7 @@ import { DatePickerComponent } from '../../../../../../shared/components/datepic
 import { DropdownComponent } from '../../../../../../shared/components/dropdowns/dropdown/dropdown.component';
 import { StandardVerticalContentGridComponent } from '../../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { TextAreaComponent } from '../../../../../../shared/components/textarea/textarea.component';
-import { EditUrlSectionComponent } from '../edit-url-section/edit-url-section.component';
-import { SimpleLink } from 'src/app/shared/models/SimpleLink.model';
+import { EditUrlSectionComponent } from '../../edit-url-section/edit-url-section.component';
 
 @Component({
   selector: 'app-gdpr-risk-assessment-section',
@@ -65,7 +65,7 @@ export class GdprRiskAssessmentSectionComponent extends BaseAccordionComponent i
   public readonly selectRiskDocumentation$ = this.currentGdpr$.pipe(
     map((gdpr) =>
       gdpr.riskAssessmentDocumentation
-        ? { url: gdpr.riskAssessmentDocumentation.url, name: gdpr.riskAssessmentDocumentation.name } as SimpleLink
+        ? ({ url: gdpr.riskAssessmentDocumentation.url, name: gdpr.riskAssessmentDocumentation.name } as SimpleLink)
         : undefined,
     ),
   );

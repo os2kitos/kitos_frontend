@@ -13,7 +13,6 @@ import { mapCapitalizedStringToYesNoIrrelevantEnum } from '../yes-no-irrelevant.
 import { mapToYesNoPartiallyEnum, YesNoPartiallyOption } from '../yes-no-partially.model';
 import { mapToYesNoEnum, YesNoOption } from '../yes-no.model';
 import { ArchiveDutyChoice, mapArchiveDutyChoice } from './archive-duty-choice.model';
-import { GdprCriticality, mapGdprCriticality } from './gdpr/gdpr-criticality.model';
 import { HostedAt, mapGridHostedAt } from './gdpr/hosted-at.model';
 
 export interface ITSystemUsage {
@@ -86,7 +85,8 @@ export interface ITSystemUsage {
   WebAccessibilityCompliance: YesNoPartiallyOption | undefined;
   LastWebAccessibilityCheck: Date | undefined;
   WebAccessibilityNotes: string | undefined;
-  GdprCriticality: GdprCriticality | undefined;
+  SystemUsageCriticalityLevelUuid: string | undefined;
+  SystemUsageCriticalityLevelName: string | undefined;
   IsSociallyCritical: YesNoDontKnowOption | undefined;
   CriticalityFieldsLastChanged: Date | undefined;
 }
@@ -212,7 +212,8 @@ export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
     WebAccessibilityCompliance: mapToYesNoPartiallyEnum(value.WebAccessibilityCompliance),
     LastWebAccessibilityCheck: value.LastWebAccessibilityCheck,
     WebAccessibilityNotes: value.WebAccessibilityNotes,
-    GdprCriticality: mapGdprCriticality(value.GdprCriticality),
+    SystemUsageCriticalityLevelUuid: value.SystemUsageCriticalityLevelUuid,
+    SystemUsageCriticalityLevelName: value.SystemUsageCriticalityLevelName,
     IsSociallyCritical: mapFromCapitalizedStringToYesNoDontKnowEnum(value.IsSociallyCritical),
     CriticalityFieldsLastChanged: value.CriticalityFieldsLastChanged,
   };

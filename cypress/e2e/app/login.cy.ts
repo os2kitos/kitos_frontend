@@ -88,6 +88,9 @@ describe('login', () => {
   });
 
   it('can switch organization on a details page', () => {
+    cy.intercept('/api/v2/it-system-usage-criticality-level-types*', {
+      fixture: './it-system-usage/criticality-level-types.json',
+    });
     cy.intercept('/api/v2/organizations*', { fixture: './organizations/organizations-multiple.json' });
     cy.login();
 

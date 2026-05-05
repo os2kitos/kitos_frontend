@@ -23,6 +23,7 @@ import {
   ItSystemUsageArchiveLocationTypeV2Service,
   ItSystemUsageArchiveTestLocationTypeV2Service,
   ItSystemUsageArchiveTypeV2Service,
+  ItSystemUsageCriticalityLevelTypeV2Service,
   ItSystemUsageDataClassificationTypeV2Service,
   ItSystemUsageRegisteredDataCategoryTypeV2Service,
   ItSystemUsageRelationFrequencyTypeV2Service,
@@ -56,6 +57,8 @@ export class RegularOptionTypeService {
     private readonly itSystemUsageArchiveLocationTestTypesService: ItSystemUsageArchiveTestLocationTypeV2Service,
     @Inject(ItSystemUsageRegisteredDataCategoryTypeV2Service)
     private readonly itSystemUsageRegisteredDataCategoryTypeService: ItSystemUsageRegisteredDataCategoryTypeV2Service,
+    @Inject(ItSystemUsageCriticalityLevelTypeV2Service)
+    private readonly itSystemUsageCriticalityLevelService: ItSystemUsageCriticalityLevelTypeV2Service,
     @Inject(ItSystemUsageRoleTypeV2Service)
     private readonly itSystemUsageRoleTypeService: ItSystemUsageRoleTypeV2Service,
     @Inject(ItInterfaceInterfaceDataTypeV2Service)
@@ -136,6 +139,11 @@ export class RegularOptionTypeService {
       case 'it_system_usage-gdpr-registered-data-category-type':
         return (organizationUuid) =>
           this.itSystemUsageRegisteredDataCategoryTypeService.getSingleItSystemUsageRegisteredDataCategoryTypeV2Get({
+            organizationUuid: organizationUuid,
+          });
+      case 'it-system-usage_system-usage-criticality-level':
+        return (organizationUuid) =>
+          this.itSystemUsageCriticalityLevelService.getSingleItSystemUsageCriticalityLevelTypeV2Get({
             organizationUuid: organizationUuid,
           });
       case 'it-system-usage-roles':
