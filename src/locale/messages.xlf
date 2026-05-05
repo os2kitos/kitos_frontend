@@ -5999,6 +5999,9 @@
       <trans-unit id="481320365420058756" datatype="html">
         <source>Definitionen fra fællesoffentlig IT kritikalitet: driftsforstyrrelser rammer størstedelen af organisationens evne til at arbejde</source>
       </trans-unit>
+      <trans-unit id="7468937510501419203" datatype="html">
+        <source>Skrive</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

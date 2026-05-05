@@ -7837,6 +7837,10 @@
         <source>Forretningskritisk IT-system</source>
         <target state="new">Forretningskritisk IT-system</target>
       </trans-unit>
+      <trans-unit id="7468937510501419203" datatype="html">
+        <source>Skrive</source>
+        <target state="new">Skrive</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

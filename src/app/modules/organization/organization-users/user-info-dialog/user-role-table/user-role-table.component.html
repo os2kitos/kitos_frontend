@@ -13,13 +13,23 @@
             <tr>
               <th>{{ getRoleTypeName() }}</th>
               <th i18n>Rolle</th>
-              <th i18>Skrive</th>
+              <th i18n>Skrive</th>
             </tr>
           </thead>
           <tbody>
             @for (right of userRights; track right) {
               <tr>
-                <td>{{ right.entity.name }}</td>
+                <td>
+                  <app-details-page-link
+                    [itemType]="linkEntityType"
+                    [itemPath]="right.entity.uuid"
+                    [subpagePath]="linkEntityType === 'organization-unit' ? undefined : 'roles'"
+                    [itemPathIncludesSubmodule]="false"
+                    (click)="onRoleLink()"
+                  >
+                    {{ right.entity.name }}
+                  </app-details-page-link>
+                </td>
                 <td>{{ right.role.name }}</td>
                 <td>
                   <app-content-space-between>
@@ -29,7 +39,7 @@
                         <app-icon-button
                           (buttonClick)="onRemove(right)"
                           [attr.data-cy]="'delete-role-button-' + right.role.name"
-                          >
+                        >
                           <app-trashcan-icon></app-trashcan-icon>
                         </app-icon-button>
                       </app-table-row-actions>

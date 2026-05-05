@@ -70,6 +70,8 @@ export function getDetailsPageLink(
           subpagePath,
           itemPathIncludesSubmodule,
         );
+      case 'organization-unit':
+        return getDetailsPagePath(`${AppPath.organization}/${AppPath.structure}`, itemUuid);
       default:
         console.error('Unmapped link itemType', itemType);
         return undefined;

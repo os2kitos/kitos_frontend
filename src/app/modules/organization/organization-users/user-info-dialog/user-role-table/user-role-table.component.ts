@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { combineLatest, map, Observable } from 'rxjs';
 import { getRoleTypeNameByEntityType, getTypeTitleNameByType } from 'src/app/shared/helpers/user-role.helpers';
@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 import { Actions, ofType } from '@ngrx/effects';
 import { APIRoleOptionResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { DetailsPageLinkComponent } from 'src/app/shared/components/details-page-link/details-page-link.component';
 import { addExpiredText } from 'src/app/shared/helpers/option-type.helper';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
 import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
@@ -47,6 +48,7 @@ import { TableRowActionsComponent } from '../../../../../shared/components/table
     IconButtonComponent,
     TrashcanIconComponent,
     LoadingComponent,
+    DetailsPageLinkComponent,
   ],
 })
 export class UserRoleTableComponent extends BaseComponent implements OnInit {
@@ -55,9 +57,12 @@ export class UserRoleTableComponent extends BaseComponent implements OnInit {
   @Input() entityType!: RegistrationEntityTypes;
   @Input() hasModifyPermission$!: Observable<boolean | undefined>;
   @Input() availableRoles$!: Observable<APIRoleOptionResponseDTO[]>;
+  @Output() linkClicked = new EventEmitter<void>();
 
   public userRightsWithExpired$: Observable<Right[]> = new Observable<Right[]>();
   public isLoading = false;
+
+  public linkEntityType!: RegistrationEntityTypes;
 
   constructor(
     private store: Store,
@@ -68,6 +73,8 @@ export class UserRoleTableComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.linkEntityType = this.getEntityTypeForLink();
+
     this.userRightsWithExpired$ = combineLatest([this.roles$, this.availableRoles$]).pipe(
       map(([userRights, roles]) => {
         const availableRoleUuids = new Set(roles.map((r) => r.uuid));
@@ -108,6 +115,10 @@ export class UserRoleTableComponent extends BaseComponent implements OnInit {
     return getRoleTypeNameByEntityType(this.entityType);
   }
 
+  public onRoleLink(): void {
+    this.linkClicked.emit();
+  }
+
   public onRemove(right: Right): void {
     this.confirmService.confirmAction({
       title: $localize`Fjern rolle`,
@@ -136,6 +147,15 @@ export class UserRoleTableComponent extends BaseComponent implements OnInit {
         return DataProcessingActions.removeDataProcessingRole;
       default:
         throw new Error(`This component does not support entity type: ${this.entityType}`);
+    }
+  }
+
+  private getEntityTypeForLink(): RegistrationEntityTypes {
+    switch (this.entityType) {
+      case 'it-system':
+        return 'it-system-usage';
+      default:
+        return this.entityType;
     }
   }
 
