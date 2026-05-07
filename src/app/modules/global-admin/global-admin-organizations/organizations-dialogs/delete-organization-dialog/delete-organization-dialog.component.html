@@ -51,7 +51,7 @@
         }
       </app-standard-vertical-content-grid>
     }
-    @if ((hasAnyRemovalConflict() | async) === false) {
+    @if ((hasAnyRemovalConflict() | async) === false && (hasNoUsingOrganizations$ | async) === true) {
       <app-paragraph i18n> Organisationen kan slettes uden tværgående konsekvenser. </app-paragraph>
     }
   }
@@ -67,6 +67,21 @@
       </app-checkbox>
     </app-dialog-actions>
   }
+  @if (isSupplier && (usingOrganizations$ | async); as usingOrganizations) {
+    @if (usingOrganizations.length > 0){
+      <app-paragraph i18n>
+        Organisationen er markeret som ISMS leverandør for følgende kommuner:
+      </app-paragraph>
+      <app-paragraph>
+        <ul>
+          @for (org of usingOrganizations; track org){
+            <li>{{ org.name }}</li>
+          }
+        </ul>
+      </app-paragraph>
+    }
+  }
+
   <app-dialog-actions>
     @if ((hasAnyRemovalConflict() | async) === true) {
       <app-button (buttonClick)="copyConflictsToClipboard()" i18n>

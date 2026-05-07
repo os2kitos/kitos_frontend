@@ -5987,6 +5987,18 @@
       <trans-unit id="7109755738988441858" datatype="html">
         <source>Systemkritikalitet</source>
       </trans-unit>
+      <trans-unit id="5186123670940091932" datatype="html">
+        <source>Bruges til kommunens egen vurdering af systemets betydning for driften</source>
+      </trans-unit>
+      <trans-unit id="5362915117064427453" datatype="html">
+        <source>Reference for kritikalitetsvurdering</source>
+      </trans-unit>
+      <trans-unit id="5623216180964356135" datatype="html">
+        <source> Organisationen er markeret som ISMS leverandør for følgende kommuner: </source>
+      </trans-unit>
+      <trans-unit id="5717990299723971305" datatype="html">
+        <source>IT Systemer - Systemforside - Kritikalitet</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

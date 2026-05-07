@@ -7821,6 +7821,22 @@
         <source>Systemkritikalitet sidst opdateret</source>
         <target state="new">Systemkritikalitet sidst opdateret</target>
       </trans-unit>
+      <trans-unit id="5623216180964356135" datatype="html">
+        <source> Organisationen er markeret som ISMS leverandør for følgende kommuner: </source>
+        <target state="new"> Organisationen er markeret som ISMS leverandør for følgende kommuner: </target>
+      </trans-unit>
+      <trans-unit id="5186123670940091932" datatype="html">
+        <source>Bruges til kommunens egen vurdering af systemets betydning for driften</source>
+        <target state="new">Bruges til kommunens egen vurdering af systemets betydning for driften</target>
+      </trans-unit>
+      <trans-unit id="5362915117064427453" datatype="html">
+        <source>Reference for kritikalitetsvurdering</source>
+        <target state="new">Reference for kritikalitetsvurdering</target>
+      </trans-unit>
+      <trans-unit id="5717990299723971305" datatype="html">
+        <source>IT Systemer - Systemforside - Kritikalitet</source>
+        <target state="new">IT Systemer - Systemforside - Kritikalitet</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

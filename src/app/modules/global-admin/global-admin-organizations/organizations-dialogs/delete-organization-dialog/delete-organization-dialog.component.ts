@@ -1,3 +1,4 @@
+import { AsyncPipe } from '@angular/common';
 import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
@@ -5,24 +6,23 @@ import { Store } from '@ngrx/store';
 import { BehaviorSubject, map, Observable, of } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { OrganizationOData } from 'src/app/shared/models/organization/organization-odata.model';
+import { ClipboardService } from 'src/app/shared/services/clipboard.service';
 import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { OrganizationActions } from 'src/app/store/organization/actions';
+import { ButtonComponent } from '../../../../../shared/components/buttons/button/button.component';
+import { CheckboxComponent } from '../../../../../shared/components/checkbox/checkbox.component';
+import { DialogActionsComponent } from '../../../../../shared/components/dialogs/dialog-actions/dialog-actions.component';
+import { ScrollbarDialogComponent } from '../../../../../shared/components/dialogs/dialog/scrollbar-dialog/scrollbar-dialog.component';
+import { LoadingComponent } from '../../../../../shared/components/loading/loading.component';
+import { ParagraphComponent } from '../../../../../shared/components/paragraph/paragraph.component';
+import { StandardVerticalContentGridComponent } from '../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { DeleteOrganizationComponentStore } from './delete-organization.component-store';
 import {
   RemovalConflict,
-  RemovalConflictType,
   RemovalConflictTableComponent,
+  RemovalConflictType,
 } from './removal-conflict-table/removal-conflict-table.component';
-import { ClipboardService } from 'src/app/shared/services/clipboard.service';
-import { ScrollbarDialogComponent } from '../../../../../shared/components/dialogs/dialog/scrollbar-dialog/scrollbar-dialog.component';
-import { AsyncPipe } from '@angular/common';
-import { LoadingComponent } from '../../../../../shared/components/loading/loading.component';
-import { StandardVerticalContentGridComponent } from '../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
-import { ParagraphComponent } from '../../../../../shared/components/paragraph/paragraph.component';
-import { DialogActionsComponent } from '../../../../../shared/components/dialogs/dialog-actions/dialog-actions.component';
-import { CheckboxComponent } from '../../../../../shared/components/checkbox/checkbox.component';
-import { ButtonComponent } from '../../../../../shared/components/buttons/button/button.component';
 
 @Component({
   selector: 'app-delete-organization-dialog',
@@ -38,8 +38,8 @@ import { ButtonComponent } from '../../../../../shared/components/buttons/button
     DialogActionsComponent,
     CheckboxComponent,
     ButtonComponent,
-    AsyncPipe
-],
+    AsyncPipe,
+  ],
 })
 export class DeleteOrganizationDialogComponent extends BaseComponent implements OnInit {
   @Input() public organization!: OrganizationOData;
@@ -49,6 +49,7 @@ export class DeleteOrganizationDialogComponent extends BaseComponent implements 
 
   public readonly removalConflicts$ = this.componentStore.removalConflicts$;
   public readonly isLoading$ = this.componentStore.isLoading$;
+  public readonly usingOrganizations$ = this.componentStore.usingOrganizations$;
   public readonly simpleConflictTypeOptions: RemovalConflictType[] = [
     'contracts',
     'dprDataprocessor',
@@ -64,7 +65,10 @@ export class DeleteOrganizationDialogComponent extends BaseComponent implements 
   ];
 
   public readonly deletingOrganization$ = new BehaviorSubject<boolean>(false);
-
+  public isSupplier = false;
+  public hasNoUsingOrganizations$ = this.usingOrganizations$.pipe(
+    map((usingOrganizations) => !this.isSupplier || usingOrganizations?.length === 0),
+  );
   public readonly conflictContentId = 'conflict-content';
 
   constructor(
@@ -81,7 +85,9 @@ export class DeleteOrganizationDialogComponent extends BaseComponent implements 
   }
 
   public ngOnInit(): void {
+    this.isSupplier = this.organization.IsSupplier ?? false;
     this.componentStore.getConsequences(of(this.organization.Uuid));
+    if (this.isSupplier) this.componentStore.getUsingOrganizations(of(this.organization.Uuid));
 
     this.subscriptions.add(
       this.actions$.pipe(ofType(OrganizationActions.deleteOrganizationSuccess)).subscribe(() => {
