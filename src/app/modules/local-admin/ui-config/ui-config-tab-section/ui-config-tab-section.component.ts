@@ -1,20 +1,20 @@
-import { Store } from '@ngrx/store';
-import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
+import { AsyncPipe } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { map, Observable } from 'rxjs';
+import { APICustomizedUINodeResponseDTO } from 'src/app/api/v2';
+import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
 import { UIConfigNodeViewModel } from 'src/app/shared/models/ui-config/ui-config-node-view-model.model';
 import { UINodeCustomization } from 'src/app/shared/models/ui-config/ui-node-customization';
 import { UIModuleConfigActions } from 'src/app/store/organization/ui-module-customization/actions';
 import { selectUIConfigLoading } from 'src/app/store/organization/ui-module-customization/selectors';
 import { AccordionComponent } from '../../../../shared/components/accordion/accordion.component';
+import { CheckboxButtonComponent } from '../../../../shared/components/buttons/checkbox-button/checkbox-button.component';
 import { DividerComponent } from '../../../../shared/components/divider/divider.component';
-import { AsyncPipe } from '@angular/common';
+import { InfoIconComponent } from '../../../../shared/components/icons/info-icon.component';
 import { ParagraphComponent } from '../../../../shared/components/paragraph/paragraph.component';
 import { StandardVerticalContentGridComponent } from '../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
-import { CheckboxButtonComponent } from '../../../../shared/components/buttons/checkbox-button/checkbox-button.component';
 import { TooltipComponent } from '../../../../shared/components/tooltip/tooltip.component';
-import { InfoIconComponent } from '../../../../shared/components/icons/info-icon.component';
-import { APICustomizedUINodeResponseDTO } from 'src/app/api/v2';
 
 @Component({
   selector: 'app-ui-config-tab-section',
@@ -28,8 +28,8 @@ import { APICustomizedUINodeResponseDTO } from 'src/app/api/v2';
     CheckboxButtonComponent,
     TooltipComponent,
     InfoIconComponent,
-    AsyncPipe
-],
+    AsyncPipe,
+  ],
 })
 export class UiConfigTabSectionComponent {
   @Input() tabViewModel!: UIConfigNodeViewModel;
