@@ -7837,6 +7837,10 @@
         <source>IT Systemer - Systemforside - Kritikalitet</source>
         <target state="new">IT Systemer - Systemforside - Kritikalitet</target>
       </trans-unit>
+      <trans-unit id="6778544494529637057" datatype="html">
+        <source>Under afprøvning</source>
+        <target state="new">Under afprøvning</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

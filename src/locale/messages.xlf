@@ -5999,6 +5999,9 @@
       <trans-unit id="5717990299723971305" datatype="html">
         <source>IT Systemer - Systemforside - Kritikalitet</source>
       </trans-unit>
+      <trans-unit id="6778544494529637057" datatype="html">
+        <source>Under afprøvning</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

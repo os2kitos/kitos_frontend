@@ -6,6 +6,8 @@ export interface LifeCycleStatus {
 }
 
 export const lifeCycleStatusOptions: LifeCycleStatus[] = [
+  { name: $localize`Ikke i drift`, value: APILifeCycleStatusChoice.NotInUse },
+  { name: $localize`Under afprøvning`, value: APILifeCycleStatusChoice.Pilot },
   {
     name: $localize`Under indfasning`,
     value: APILifeCycleStatusChoice.PhasingIn,
@@ -14,11 +16,6 @@ export const lifeCycleStatusOptions: LifeCycleStatus[] = [
   {
     name: $localize`Under udfasning`,
     value: APILifeCycleStatusChoice.PhasingOut,
-  },
-  { name: $localize`Ikke i drift`, value: APILifeCycleStatusChoice.NotInUse },
-  {
-    name: '',
-    value: APILifeCycleStatusChoice.Undecided,
   },
 ];
 

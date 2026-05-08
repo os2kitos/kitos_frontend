@@ -11,13 +11,14 @@
  */
 
 
-export type APILifeCycleStatusChoice = 'Undecided' | 'NotInUse' | 'PhasingIn' | 'Operational' | 'PhasingOut';
+export type APILifeCycleStatusChoice = 'Undecided' | 'NotInUse' | 'PhasingIn' | 'Operational' | 'PhasingOut' | 'Pilot';
 
 export const APILifeCycleStatusChoice = {
     Undecided: 'Undecided' as APILifeCycleStatusChoice,
     NotInUse: 'NotInUse' as APILifeCycleStatusChoice,
     PhasingIn: 'PhasingIn' as APILifeCycleStatusChoice,
     Operational: 'Operational' as APILifeCycleStatusChoice,
-    PhasingOut: 'PhasingOut' as APILifeCycleStatusChoice
+    PhasingOut: 'PhasingOut' as APILifeCycleStatusChoice,
+    Pilot: 'Pilot' as APILifeCycleStatusChoice
 };
 
