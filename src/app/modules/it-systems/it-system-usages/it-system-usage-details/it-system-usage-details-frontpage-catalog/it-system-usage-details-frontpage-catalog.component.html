@@ -49,30 +49,15 @@
         [formGroup]="itSystemInformationForm"
         formName="externalUuid"
       ></app-textbox>
-      <div>
-        <app-textbox
-          text="Rigsarkivets vejledning til arkivering"
-          i18n-text
-          [formGroup]="itSystemInformationForm"
-          formName="recommendedArchiveDuty"
-        ></app-textbox>
-        <app-textbox-info>
-          @if (itSystemInformationForm.controls['recommendedArchiveDutyComment'].value; as comment) {
-            <app-paragraph
-              paragraphSize="x-small"
-              >{{ comment }}</app-paragraph
-              >
-            }
-            <app-paragraph paragraphSize="x-small" i18n>
-          Læs mere hos
-          <a
-            target="_blank"
-            href="https://www.sa.dk/da/offentlig-forvaltning/kommuner-og-regioner/bevaring-kassation-it-systemer/"
-            >Rigsarkivet</a
-          >
-        </app-paragraph>
-            </app-textbox-info>
-          </div>
+      <app-textbox
+        text="Licens- og kodegrundlag"
+        i18n-text
+        [formGroup]="itSystemInformationForm"
+        formName="licensingAndCodeModels"
+      >
+
+      </app-textbox>
+
           <app-contentbox text="Referencer vedr. systemet" i18n-text>
             @for (reference of itSystemInformationForm.controls['urlReference'].value; track reference) {
               <app-external-reference
@@ -104,6 +89,30 @@
             formName="description"
             [disabled]="true"
           ></app-textarea>
+          <div>
+        <app-textbox
+          text="Rigsarkivets vejledning til arkivering"
+          i18n-text
+          [formGroup]="itSystemInformationForm"
+          formName="recommendedArchiveDuty"
+        ></app-textbox>
+        <app-textbox-info>
+          @if (itSystemInformationForm.controls['recommendedArchiveDutyComment'].value; as comment) {
+            <app-paragraph
+              paragraphSize="x-small"
+              >{{ comment }}</app-paragraph
+              >
+            }
+            <app-paragraph paragraphSize="x-small" i18n>
+          Læs mere hos
+          <a
+            target="_blank"
+            href="https://www.sa.dk/da/offentlig-forvaltning/kommuner-og-regioner/bevaring-kassation-it-systemer/"
+            >Rigsarkivet</a
+          >
+        </app-paragraph>
+            </app-textbox-info>
+          </div>
         </app-form-grid>
       </app-card>
 

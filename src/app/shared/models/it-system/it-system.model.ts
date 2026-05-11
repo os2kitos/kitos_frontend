@@ -6,6 +6,7 @@ import {
   ArchiveDutyRecommendationChoice,
   mapArchiveDutyRecommendationChoice,
 } from './archive-duty-recommendation-choice.model';
+import { LicensingAndCodeModel, mapLicensingAndCodeModels } from './licensing-and-code-model.model';
 
 export interface ITSystem {
   id: string;
@@ -35,6 +36,7 @@ export interface ITSystem {
   UsageNames: string;
   LegalName?: string;
   LegalDataProcessorName?: string;
+  LicensingAndCodeModels?: LicensingAndCodeModel[];
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -81,5 +83,6 @@ export const adaptITSystem = (value: any, currentOrganizationUuid: string): ITSy
     UsageNames: mappedUsages.map((usage) => usage.name).join(', '),
     LegalName: value.LegalName,
     LegalDataProcessorName: value.LegalDataProcessorName,
+    LicensingAndCodeModels: mapLicensingAndCodeModels(value.LicensingAndCodeModels),
   };
 };

@@ -14,6 +14,7 @@ import { APIRegistrationScopeChoice } from './registrationScopeChoice';
 import { APIRecommendedArchiveDutyResponseDTO } from './recommendedArchiveDutyResponseDTO';
 import { APIShallowOrganizationResponseDTO } from './shallowOrganizationResponseDTO';
 import { APIExternalReferenceDataResponseDTO } from './externalReferenceDataResponseDTO';
+import { APILicensingAndCodeModelChoice } from './licensingAndCodeModelChoice';
 
 
 export interface APIItSystemResponseDTO { 
@@ -32,6 +33,7 @@ export interface APIItSystemResponseDTO {
     createdBy: APIIdentityNamePairResponseDTO;
     recommendedArchiveDuty: APIRecommendedArchiveDutyResponseDTO;
     mainContractSuppliers: Array<APIShallowOrganizationResponseDTO>;
+    licensingAndCodeModels?: Array<APILicensingAndCodeModelChoice> | null;
     usingOrganizations: Array<APIShallowOrganizationResponseDTO>;
     lastModified: string;
     lastModifiedBy: APIIdentityNamePairResponseDTO;

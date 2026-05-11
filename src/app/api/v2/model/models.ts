@@ -136,6 +136,7 @@ export * from './kLEStatusResponseDTO';
 export * from './kLEUpdateResponseDTO';
 export * from './kLEUpdateStatusChoice';
 export * from './legalPropertiesUpdateRequestDTO';
+export * from './licensingAndCodeModelChoice';
 export * from './lifeCycleStatusChoice';
 export * from './localItContractRolesResponseDTO';
 export * from './localKLEDeviationsRequestDTO';

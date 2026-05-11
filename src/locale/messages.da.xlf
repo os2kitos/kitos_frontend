@@ -7841,6 +7841,22 @@
         <source>Under afprøvning</source>
         <target state="new">Under afprøvning</target>
       </trans-unit>
+      <trans-unit id="6316396755039555698" datatype="html">
+        <source>Licens- og kodegrundlag</source>
+        <target state="new">Licens- og kodegrundlag</target>
+      </trans-unit>
+      <trans-unit id="6984983607470794786" datatype="html">
+        <source>Open Source</source>
+        <target state="new">Open Source</target>
+      </trans-unit>
+      <trans-unit id="7627144534064102389" datatype="html">
+        <source>Freeware</source>
+        <target state="new">Freeware</target>
+      </trans-unit>
+      <trans-unit id="6979270293215636528" datatype="html">
+        <source>Proprietær</source>
+        <target state="new">Proprietær</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

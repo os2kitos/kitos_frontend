@@ -13,6 +13,7 @@ import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 import { APIRecommendedArchiveDutyResponseDTO } from './recommendedArchiveDutyResponseDTO';
 import { APIShallowOrganizationResponseDTO } from './shallowOrganizationResponseDTO';
 import { APIExternalReferenceDataResponseDTO } from './externalReferenceDataResponseDTO';
+import { APILicensingAndCodeModelChoice } from './licensingAndCodeModelChoice';
 
 
 export interface APIRightsHolderItSystemResponseDTO { 
@@ -31,5 +32,6 @@ export interface APIRightsHolderItSystemResponseDTO {
     createdBy: APIIdentityNamePairResponseDTO;
     recommendedArchiveDuty: APIRecommendedArchiveDutyResponseDTO;
     mainContractSuppliers: Array<APIShallowOrganizationResponseDTO>;
+    licensingAndCodeModels?: Array<APILicensingAndCodeModelChoice> | null;
 }
 

@@ -27,28 +27,29 @@ export interface GridColumn {
   dataField?: string; //Field containing data for the column (in case the 'field' property is necessary only for filtering)
   entityType?: RegistrationEntityTypes;
   style?:
-  | 'default'
-  | 'default-wrap' //Text field where overflow results in wrap instead of ellipsis
-  | 'primary'
-  | 'chip'
-  | 'reverse-chip'
-  | 'boolean'
-  | 'enum'
-  | 'link'
-  | 'page-link'
-  | 'page-link-array-with-submodules'
-  | 'title-link'
-  | 'checkbox'
-  | 'date'
-  | 'usages'
-  | 'page-link-array'
-  | 'uuid-to-name'
-  | 'excel-only'
-  | 'role-excel-only'
-  | 'action-buttons'
-  | 'integer-with-thousands-separator'
-  | 'contract-audit'
-  | 'contract-status-chip'; //Style of the column
+    | 'default'
+    | 'default-wrap' //Text field where overflow results in wrap instead of ellipsis
+    | 'primary'
+    | 'chip'
+    | 'reverse-chip'
+    | 'boolean'
+    | 'enum'
+    | 'link'
+    | 'page-link'
+    | 'page-link-array-with-submodules'
+    | 'title-link'
+    | 'checkbox'
+    | 'date'
+    | 'usages'
+    | 'page-link-array'
+    | 'uuid-to-name'
+    | 'excel-only'
+    | 'role-excel-only'
+    | 'action-buttons'
+    | 'integer-with-thousands-separator'
+    | 'contract-audit'
+    | 'contract-status-chip'
+    | 'enum-array'; //Style of the column
   width?: number;
   minResizableWidth?: number;
   //Can column be hidden

@@ -23,6 +23,7 @@ import { GridState } from 'src/app/shared/models/grid-state.model';
 import { BooleanChange } from 'src/app/shared/models/grid/grid-events.model';
 import { archiveDutyRecommendationChoiceOptions } from 'src/app/shared/models/it-system/archive-duty-recommendation-choice.model';
 import { ITSystem } from 'src/app/shared/models/it-system/it-system.model';
+import { licensingAndCodeModelOptions } from 'src/app/shared/models/it-system/licensing-and-code-model.model';
 import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.service';
 import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
@@ -256,6 +257,15 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
       title: $localize`DBS Databehandler`,
       section: this.systemSectionName,
       hidden: true,
+    },
+    {
+      field: CatalogFields.LICENSING_AND_CODE_MODELS,
+      title: $localize`Licens- og kodegrundlag`,
+      section: this.systemSectionName,
+      hidden: true,
+      style: 'enum-array',
+      extraFilter: 'enum',
+      extraData: licensingAndCodeModelOptions,
     },
   ];
 

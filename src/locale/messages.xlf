@@ -6002,6 +6002,18 @@
       <trans-unit id="6778544494529637057" datatype="html">
         <source>Under afprøvning</source>
       </trans-unit>
+      <trans-unit id="6316396755039555698" datatype="html">
+        <source>Licens- og kodegrundlag</source>
+      </trans-unit>
+      <trans-unit id="6979270293215636528" datatype="html">
+        <source>Proprietær</source>
+      </trans-unit>
+      <trans-unit id="6984983607470794786" datatype="html">
+        <source>Open Source</source>
+      </trans-unit>
+      <trans-unit id="7627144534064102389" datatype="html">
+        <source>Freeware</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

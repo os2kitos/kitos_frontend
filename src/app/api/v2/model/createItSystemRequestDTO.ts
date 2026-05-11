@@ -12,6 +12,7 @@
 import { APIExternalReferenceDataWriteRequestDTO } from './externalReferenceDataWriteRequestDTO';
 import { APIRecommendedArchiveDutyRequestDTO } from './recommendedArchiveDutyRequestDTO';
 import { APIRegistrationScopeChoice } from './registrationScopeChoice';
+import { APILicensingAndCodeModelChoice } from './licensingAndCodeModelChoice';
 
 
 export interface APICreateItSystemRequestDTO { 
@@ -27,5 +28,6 @@ export interface APICreateItSystemRequestDTO {
     scope?: APIRegistrationScopeChoice;
     recommendedArchiveDuty?: APIRecommendedArchiveDutyRequestDTO;
     deactivated?: boolean;
+    licensingAndCodeModels?: Array<APILicensingAndCodeModelChoice> | null;
 }
 

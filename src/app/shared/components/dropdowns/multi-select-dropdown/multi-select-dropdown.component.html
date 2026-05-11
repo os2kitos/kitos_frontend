@@ -54,7 +54,7 @@
   <ng-template ng-multi-label-tmp let-items="items">
     <div class="value-textbox-margin ng-value">
       @for (item of items; track item; let isLast = $last) {
-      <span class="ng-value-label">{{ item[textField] }}@if (!isLast) { ,&nbsp; }</span>
+      <span class="ng-value-label">{{ item[textField] }}@if (!isLast) {,&nbsp; }</span>
       }
     </div>
   </ng-template>

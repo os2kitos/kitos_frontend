@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 import { APIUpdateExternalReferenceDataWriteRequestDTO } from './updateExternalReferenceDataWriteRequestDTO';
+import { APILicensingAndCodeModelChoice } from './licensingAndCodeModelChoice';
 
 
 export interface APIRightsHolderUpdateSystemPropertiesRequestDTO { 
@@ -21,5 +22,6 @@ export interface APIRightsHolderUpdateSystemPropertiesRequestDTO {
     externalReferences?: Array<APIUpdateExternalReferenceDataWriteRequestDTO> | null;
     businessTypeUuid?: string | null;
     kleUuids?: Array<string> | null;
+    licensingAndCodeModels?: Array<APILicensingAndCodeModelChoice> | null;
 }
 

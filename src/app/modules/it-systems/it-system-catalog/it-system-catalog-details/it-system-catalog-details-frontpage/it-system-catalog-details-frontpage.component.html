@@ -100,6 +100,18 @@
       data-cy="legal-data-processor-name"
       i18n-text
     ></app-textbox>
+    <app-multi-select-dropdown
+      text="Licens- og kodegrundlag"
+      i18n-text
+      [data]="licensingAndCodeModelDropdownOptions$ | async"
+      formName="licensingAndCodeModels"
+      [formGroup]="itSystemFrontpageFormGroup"
+      [disabled]="!(hasModifyPermission$ | async)"
+      [initialSelectedValues]="initialSelectedLicensingAndCodeModels"
+      (selectedEvent)="patchLicensingAndCodeModels( $event )"
+      (cleared)="patchLicensingAndCodeModels([])"
+    >
+    </app-multi-select-dropdown>
     <app-textarea
       class="notes"
       text="Beskrivelse"

@@ -24,3 +24,5 @@ export const ARCHIVE_DUTY_COMMENT = 'ArchiveDutyComment';
 
 export const LEGAL_SYSTEM_NAME = 'LegalName';
 export const LEGAL_DATA_PROCESSOR_NAME = 'LegalDataProcessorName';
+
+export const LICENSING_AND_CODE_MODELS = 'LicensingAndCodeModels';

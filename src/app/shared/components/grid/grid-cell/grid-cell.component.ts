@@ -7,6 +7,7 @@ import { CheckboxCellComponent } from './cell-types/checkbox-cell/checkbox-cell.
 import { ContractStatusChipCellComponent } from './cell-types/contract-status-chip-cell/contract-status-chip-cell.component';
 import { DateCellComponent } from './cell-types/date-cell/date-cell.component';
 import { DefaultWrapCellComponent } from './cell-types/default-wrap-cell/default-wrap-cell.component';
+import { EnumArrayCellComponent } from './cell-types/enum-array-cell/enum-array-cell.component';
 import { EnumCellComponent } from './cell-types/enum-cell/enum-cell.component';
 import { LinkCellComponent } from './cell-types/link-cell/link-cell.component';
 import { PageLinkArrayCellComponent } from './cell-types/page-link-array-cell/page-link-array-cell.component';
@@ -32,6 +33,7 @@ import { UuidToNameCellComponent } from './cell-types/uuid-to-name-cell/uuid-to-
     BooleanCellComponent,
     DateCellComponent,
     EnumCellComponent,
+    EnumArrayCellComponent,
     LinkCellComponent,
     TitleLinkCellComponent,
     PageLinkCellComponent,

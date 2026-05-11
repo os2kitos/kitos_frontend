@@ -284,6 +284,7 @@ function applyQueryFixes(odataString: string): string {
   let fixedOdataString = odataString
     .replace(/(\w+\()KLEIds(.*\))/, 'TaskRefs/any(c: $1c/TaskKey$2)')
     .replace(/(\w+\()KLENames(.*\))/, 'TaskRefs/any(d: $1d/Description$2)')
+    .replace(/LicensingAndCodeModels eq '([^']+)'/g, "LicensingAndCodeModels/any(e: e eq '$1')")
     .replace('ReferenceTitle', 'Reference/Title')
     .replace('ReferenceURL', 'Reference/URL')
     .replace('ReferenceExternalReferenceId', 'Reference/ExternalReferenceId');

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { NO_TEXT, YES_TEXT } from '../constants/constants';
+import { toCommaSeparatedString } from '../helpers/array.helpers';
 import { validateHttpUrl } from '../helpers/link.helpers';
 import { GridColumn } from '../models/grid-column.model';
 import { OverviewAuditModel } from '../models/it-contract/audit-model';
@@ -35,6 +36,13 @@ export class GridExportService {
               transformedItem[field] = enumValue.name;
             }
             break;
+          case 'enum-array':
+            if (Array.isArray(transformedItem[field])) {
+              const enumArray = transformedItem[field];
+              const enumNamesCsv = toCommaSeparatedString(enumArray.map((enumItem) => enumItem.name));
+              transformedItem[field] = enumNamesCsv;
+            }
+            break;
           case 'boolean':
             {
               transformedItem[field] = transformedItem[field] ? YES_TEXT : NO_TEXT;
@@ -58,7 +66,7 @@ export class GridExportService {
           case 'page-link-array':
             {
               const array = transformedItem[column.dataField as string];
-              const excelValue = array.map((item: { value: string }) => item.value).join(', ');
+              const excelValue = toCommaSeparatedString(array.map((item: { value: string }) => item.value));
               transformedItem[field] = excelValue;
             }
             break;
@@ -70,7 +78,7 @@ export class GridExportService {
 
               // Create a separate field for the names
               const namesField = `${field}Names`;
-              const usageNames = usages.map((usage: any) => usage.name).join(', ');
+              const usageNames = toCommaSeparatedString(usages.map((usage: any) => usage.name));
               transformedItem[namesField] = usageNames;
             }
             break;

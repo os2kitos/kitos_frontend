@@ -270,6 +270,7 @@ model/kLEStatusResponseDTO.ts
 model/kLEUpdateResponseDTO.ts
 model/kLEUpdateStatusChoice.ts
 model/legalPropertiesUpdateRequestDTO.ts
+model/licensingAndCodeModelChoice.ts
 model/lifeCycleStatusChoice.ts
 model/localItContractRolesResponseDTO.ts
 model/localKLEDeviationsRequestDTO.ts

@@ -42,6 +42,10 @@
   <app-enum-cell [column]="column" [dataItem]="dataItem"> </app-enum-cell>
 }
 
+@if (column.style === 'enum-array'){
+  <app-enum-array-cell [column]="column" [dataItem]="dataItem"> </app-enum-array-cell>
+}
+
 @if (column.style === 'link') {
   <app-link-cell [column]="column" [dataItem]="dataItem"> </app-link-cell>
 }
