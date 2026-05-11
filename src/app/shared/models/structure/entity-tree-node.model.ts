@@ -10,6 +10,7 @@ export interface EntityTreeNode<T> {
   sourceData?: T;
   color?: EntityTreeNodeColors;
   isExpanded?: boolean;
+  isRearrangeDisabled?: boolean;
 }
 
 export interface HierachyNodeWithParentUuid extends EntityTreeNode<never> {

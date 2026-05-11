@@ -80,7 +80,7 @@
           [cdkDropListSortingDisabled]="true"
           >
           @for (child of node.children; track child) {
-            <div cdkDrag [cdkDragData]="child.uuid" (cdkDragMoved)="dragMoved($event)">
+            <div cdkDrag [cdkDragData]="child.uuid" (cdkDragMoved)="dragMoved($event)" [cdkDragDisabled]="child.isRearrangeDisabled">
               <ng-container
                 *ngTemplateOutlet="tmplNode; context: { node: child, childOfRoot: node.isRoot, level: level + 1 }"
               ></ng-container>
@@ -102,7 +102,7 @@
   [cdkDropListDisabled]="disableDrag"
   >
   @for (node of nodes; track node) {
-    <div cdkDrag [cdkDragData]="node.uuid" (cdkDragMoved)="dragMoved($event)">
+    <div cdkDrag [cdkDragData]="node.uuid" (cdkDragMoved)="dragMoved($event)" [cdkDragDisabled]="node.isRearrangeDisabled">
       <ng-container *ngTemplateOutlet="tmplNode; context: { node: node, childOfRoot: false, level: 1 }"></ng-container>
     </div>
   }

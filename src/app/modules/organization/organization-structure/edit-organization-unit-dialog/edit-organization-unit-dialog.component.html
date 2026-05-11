@@ -28,7 +28,6 @@
               [formGroup]="baseInfoForm"
               formName="nameControl"
               data-cy="name-control"
-              [disabled]="!permissions.canBeRenamed"
             ></app-textbox>
             <app-numeric-input
               [value]="unit.ean ?? undefined"
@@ -37,7 +36,6 @@
               [formGroup]="baseInfoForm"
               formName="eanControl"
               data-cy="ean-control"
-              [disabled]="!permissions.canEanBeModified"
             ></app-numeric-input>
             <app-textbox
               [value]="unit.unitId ?? undefined"
@@ -46,7 +44,6 @@
               [formGroup]="baseInfoForm"
               formName="idControl"
               data-cy="id-control"
-              [disabled]="!permissions.canDeviceIdBeModified"
             ></app-textbox>
             @if (permissions.canBeModified) {
               <app-dialog-actions>

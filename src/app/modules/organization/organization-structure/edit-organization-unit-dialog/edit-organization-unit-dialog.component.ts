@@ -1,5 +1,6 @@
+import { AsyncPipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ThemePalette } from '@angular/material/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -35,23 +36,22 @@ import {
   selectResponsibleSystemsRegistrations,
   selectUnitPermissions,
 } from 'src/app/store/organization/organization-unit/selectors';
-import { AsyncPipe } from '@angular/common';
+import { ButtonComponent } from '../../../../shared/components/buttons/button/button.component';
+import { DialogActionsComponent } from '../../../../shared/components/dialogs/dialog-actions/dialog-actions.component';
 import { DialogComponent } from '../../../../shared/components/dialogs/dialog/dialog.component';
-import { StandardVerticalContentGridComponent } from '../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
-import { ParagraphComponent } from '../../../../shared/components/paragraph/paragraph.component';
+import { EmptyStateComponent } from '../../../../shared/components/empty-states/empty-state.component';
+import { TrashcanIconComponent } from '../../../../shared/components/icons/trashcan-icon.component';
+import { LoadingComponent } from '../../../../shared/components/loading/loading.component';
+import { NumericInputComponent } from '../../../../shared/components/numeric-input/numeric-input.component';
 import { OrgUnitSelectComponent } from '../../../../shared/components/org-unit-select/org-unit-select.component';
+import { ParagraphComponent } from '../../../../shared/components/paragraph/paragraph.component';
+import { SnackbarActionsComponent } from '../../../../shared/components/snackbar-actions/snackbar-actions.component';
+import { StandardVerticalContentGridComponent } from '../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { TextBoxInfoComponent } from '../../../../shared/components/textbox-info/textbox-info.component';
 import { TextBoxComponent } from '../../../../shared/components/textbox/textbox.component';
-import { NumericInputComponent } from '../../../../shared/components/numeric-input/numeric-input.component';
-import { DialogActionsComponent } from '../../../../shared/components/dialogs/dialog-actions/dialog-actions.component';
-import { ButtonComponent } from '../../../../shared/components/buttons/button/button.component';
-import { RegistrationsRolesSectionComponent } from './registrations-roles-section/registrations-roles-section.component';
-import { RegistrationsPaymentsSectionComponent } from './registrations-payments-section/registrations-payments-section.component';
 import { RegistrationsPageDetailsSectionComponent } from './registrations-page-details-section/registrations-page-details-section.component';
-import { EmptyStateComponent } from '../../../../shared/components/empty-states/empty-state.component';
-import { LoadingComponent } from '../../../../shared/components/loading/loading.component';
-import { SnackbarActionsComponent } from '../../../../shared/components/snackbar-actions/snackbar-actions.component';
-import { TrashcanIconComponent } from '../../../../shared/components/icons/trashcan-icon.component';
+import { RegistrationsPaymentsSectionComponent } from './registrations-payments-section/registrations-payments-section.component';
+import { RegistrationsRolesSectionComponent } from './registrations-roles-section/registrations-roles-section.component';
 
 @Component({
   selector: 'app-edit-organization-unit-dialog',
@@ -76,8 +76,8 @@ import { TrashcanIconComponent } from '../../../../shared/components/icons/trash
     LoadingComponent,
     SnackbarActionsComponent,
     TrashcanIconComponent,
-    AsyncPipe
-],
+    AsyncPipe,
+  ],
 })
 export class EditOrganizationUnitDialogComponent extends BaseComponent implements OnInit {
   @Input() public unit$!: Observable<APIOrganizationUnitResponseDTO>;
@@ -198,6 +198,15 @@ export class EditOrganizationUnitDialogComponent extends BaseComponent implement
   }
 
   ngOnInit(): void {
+    this.subscriptions.add(
+      this.unitPermissions$.pipe(filterNullish()).subscribe((permissions) => {
+        if (!permissions.canBeModified) this.baseInfoForm.disable();
+        if (!permissions.canBeRenamed) this.baseInfoForm.controls.nameControl.disable();
+        if (!permissions.canEanBeModified) this.baseInfoForm.controls.eanControl.disable();
+        if (!permissions.canDeviceIdBeModified) this.baseInfoForm.controls.idControl.disable();
+      }),
+    );
+
     this.subscriptions.add(
       this.unit$.pipe(filterNullish()).subscribe((unit) => {
         if (!unit.uuid) return;

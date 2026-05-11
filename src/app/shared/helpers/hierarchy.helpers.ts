@@ -42,15 +42,15 @@ export const mapUnitsToTree = (units: APIOrganizationUnitResponseDTO[], expanded
     children: [],
     color: unit.origin === 'Kitos' ? 'blue' : 'green',
     isExpanded: expandedNodeUuids !== undefined ? expandedNodeUuids.includes(unit.uuid) : true,
+    isRearrangeDisabled: isRearrangeUnitDisabled(unit),
   }));
-
   return mapArrayToTree(mappedHierarchy);
 };
 
 export const mapUnitsWithSelectedUnitsToTree = (
   units: APIOrganizationUnitResponseDTO[],
   selectedUnitUuids?: string[],
-  expandedNodeUuids?: string[]
+  expandedNodeUuids?: string[],
 ) => {
   const mappedHierarchy = units.map<HierachyNodeWithParentUuid>((unit) => ({
     uuid: unit.uuid,
@@ -60,7 +60,7 @@ export const mapUnitsWithSelectedUnitsToTree = (
     parentUuid: unit.parentOrganizationUnit?.uuid,
     children: [],
     color: unit.origin === 'Kitos' ? 'blue' : 'green',
-    isExpanded: expandedNodeUuids?.includes(unit.uuid) ?? !unit.parentOrganizationUnit ? true : false,
+    isExpanded: (expandedNodeUuids?.includes(unit.uuid) ?? !unit.parentOrganizationUnit) ? true : false,
   }));
 
   return mapArrayToTree(mappedHierarchy);
@@ -68,7 +68,7 @@ export const mapUnitsWithSelectedUnitsToTree = (
 
 export const mapFkOrgSnapshotUnits = (
   units: APIStsOrganizationOrgUnitDTO[],
-  parentUnit?: APIStsOrganizationOrgUnitDTO
+  parentUnit?: APIStsOrganizationOrgUnitDTO,
 ): EntityTreeNode<APIStsOrganizationOrgUnitDTO>[] => {
   return units.map<EntityTreeNode<APIStsOrganizationOrgUnitDTO>>((unit) => ({
     uuid: unit.uuid ?? '',
@@ -94,6 +94,10 @@ export const mapContractsToTree = (contracts: APIItContractResponseDTO[]) => {
   return mapArrayToTree(mappedHierarchy);
 };
 
+const isRearrangeUnitDisabled = (unit: APIOrganizationUnitResponseDTO): boolean => {
+  return unit.origin === 'STSOrganisation';
+};
+
 const mapArrayToTree = (nodes: HierachyNodeWithParentUuid[]): HierachyNodeWithParentUuid[] => {
   const tree = arrayToTree(nodes, { id: 'uuid', parentId: 'parentUuid', dataField: null });
   return <HierachyNodeWithParentUuid[]>tree;
@@ -115,7 +119,7 @@ export function mapTreeToIdentityNamePairs(nodes: EntityTreeNode<never>[]): Iden
 
 export function removeNodeAndChildren(
   nodes: HierachyNodeWithParentUuid[],
-  rootToRemoveUuid: string
+  rootToRemoveUuid: string,
 ): HierachyNodeWithParentUuid[] {
   return nodes
     .map((node) => removeNodeAndChildrenHelper(node, rootToRemoveUuid))
@@ -124,7 +128,7 @@ export function removeNodeAndChildren(
 
 function removeNodeAndChildrenHelper(
   node: EntityTreeNode<never>,
-  rootToRemoveUuid: string
+  rootToRemoveUuid: string,
 ): EntityTreeNode<never> | undefined {
   if (node.uuid === rootToRemoveUuid) {
     return undefined;
@@ -163,7 +167,7 @@ export function findNodeByUuid(node: EntityTreeNode<never>, uuid: string): Entit
 }
 
 function mapHierarchyNode(
-  node: APIRegistrationHierarchyNodeWithActivationStatusResponseDTO
+  node: APIRegistrationHierarchyNodeWithActivationStatusResponseDTO,
 ): HierachyNodeWithParentUuid {
   return {
     uuid: node.node.uuid,
