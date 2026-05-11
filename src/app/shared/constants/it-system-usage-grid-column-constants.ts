@@ -35,6 +35,7 @@ export const RiskSupervisionDocumentationName = 'RiskSupervisionDocumentationNam
 export const LinkToDirectoryName = 'LinkToDirectoryName';
 export const HostedAt = 'HostedAt';
 export const GeneralPurpose = 'GeneralPurpose';
+export const ProcessingPurpose = 'ProcessingPurpose';
 export const DataProcessingRegistrationsConcludedAsCsv = 'DataProcessingRegistrationsConcludedAsCsv';
 export const DataProcessingRegistrationNamesAsCsv = 'DataProcessingRegistrationNamesAsCsv';
 export const OutgoingRelatedItSystemUsagesNamesAsCsv = 'OutgoingRelatedItSystemUsagesNamesAsCsv';

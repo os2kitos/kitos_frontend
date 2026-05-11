@@ -36,6 +36,7 @@ export interface APIGeneralDataUpdateRequestDTO {
      */
     systemUsageCriticalityLevelUuid?: string | null;
     criticalityLevelDocumentation?: APISimpleLinkDTO;
+    purpose?: string | null;
     mainContractUuid?: string | null;
 }
 

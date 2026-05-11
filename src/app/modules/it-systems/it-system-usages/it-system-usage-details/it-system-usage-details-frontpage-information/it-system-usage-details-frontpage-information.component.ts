@@ -60,6 +60,7 @@ import {
   selectITSystemUsageEnableDataClassification,
   selectITSystemUsageEnableDescription,
   selectITSystemUsageEnableFrontPageUsagePeriod,
+  selectITSystemUsageEnableGeneralPurpose,
   selectITSystemUsageEnableIsBusinessCritical,
   selectITSystemUsageEnableIsSociallyCritical,
   selectITSystemUsageEnableLastEditedAt,
@@ -106,6 +107,7 @@ import { EditUrlSectionComponent } from '../edit-url-section/edit-url-section.co
 export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseComponent implements OnInit {
   public readonly itSystemInformationForm = new FormGroup(
     {
+      purpose: new FormControl(''),
       localCallName: new FormControl(''),
       localSystemId: new FormControl(''),
       systemVersion: new FormControl(''),
@@ -135,6 +137,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
   public readonly nameEnabled$ = this.store.select(selectITSystemUsageEnableName);
   public readonly systemIdEnabled$ = this.store.select(selectITSystemUsageEnabledSystemId);
   public readonly versionEnabled$ = this.store.select(selectITSystemUsageEnableVersion);
+  public readonly purposeEnabled$ = this.store.select(selectITSystemUsageEnableGeneralPurpose);
   public readonly amountOfUsersEnabled$ = this.store.select(selectITSystemUsageEnableAmountOfUsers);
   public readonly dataClassificationEnabled$ = this.store.select(selectITSystemUsageEnableDataClassification);
   public readonly descriptionEnabled$ = this.store.select(selectITSystemUsageEnableDescription);
@@ -314,6 +317,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
         .pipe(filterNullish())
         .subscribe((general) => {
           this.itSystemInformationForm.patchValue({
+            purpose: general.purpose,
             localCallName: general.localCallName,
             localSystemId: general.localSystemId,
             systemVersion: general.systemVersion,

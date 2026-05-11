@@ -36,5 +36,6 @@ export interface APIGeneralDataResponseDTO {
     criticalityFieldsLastChanged?: string | null;
     systemUsageCriticalityLevel?: APIIdentityNamePairResponseDTO;
     criticalityLevelDocumentation?: APISimpleLinkDTO;
+    purpose?: string | null;
 }
 

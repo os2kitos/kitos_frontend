@@ -25,6 +25,6 @@ export interface APIArchivingRegistrationsResponseDTO {
     notes?: string | null;
     frequencyInMonths?: number | null;
     documentBearing?: boolean | null;
-    journalPeriods: Array<APIJournalPeriodResponseDTO>;
+    journalPeriods: Array<APIJournalPeriodResponseDTO> | null;
 }
 

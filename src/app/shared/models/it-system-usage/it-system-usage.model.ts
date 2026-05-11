@@ -61,6 +61,7 @@ export interface ITSystemUsage {
   LinkToDirectoryUrl: string;
   HostedAt: HostedAt | undefined;
   GeneralPurpose: string;
+  ProcessingPurpose: string;
   DataProcessingRegistrationsConcludedAsCsv: string;
   DataProcessingRegistrationNamesAsCsv: string;
   DataProcessingRegistrations: { id: string; value: string }[];
@@ -163,6 +164,7 @@ export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
     LinkToDirectoryUrl: value.LinkToDirectoryUrl,
     HostedAt: mapGridHostedAt(value.HostedAt),
     GeneralPurpose: value.GeneralPurpose,
+    ProcessingPurpose: value.ProcessingPurpose,
     DataProcessingRegistrationsConcludedAsCsv: value.DataProcessingRegistrationsConcludedAsCsv,
     DataProcessingRegistrationNamesAsCsv: value.DataProcessingRegistrationNamesAsCsv,
     DataProcessingRegistrations: value.DataProcessingRegistrations?.map(

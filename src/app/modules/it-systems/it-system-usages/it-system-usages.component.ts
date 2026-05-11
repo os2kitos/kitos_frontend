@@ -440,10 +440,18 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     {
       field: GridFields.GeneralPurpose,
       title: $localize`Systemets overordnede formål`,
-      section: GDPR_SECTION_NAME,
+      section: this.systemSectionName,
       width: 390,
       hidden: false,
       persistId: 'GeneralPurpose',
+    },
+    {
+      field: GridFields.ProcessingPurpose,
+      title: $localize`Behandlingsformål`,
+      section: GDPR_SECTION_NAME,
+      width: 390,
+      hidden: false,
+      persistId: 'ProcessingPurpose',
     },
     {
       field: GridFields.DataProcessingRegistrationsConcludedAsCsv,

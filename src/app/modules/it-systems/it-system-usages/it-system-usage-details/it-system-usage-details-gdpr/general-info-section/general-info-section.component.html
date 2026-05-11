@@ -4,13 +4,13 @@
   <app-form-grid [formGroup]="generalInformationForm">
     @if (purposeEnabled$ | async) {
       <app-textbox
-        text="Systemets overordnede formål"
+        text="Behandlingsformål"
         i18n-text
         class="two-thirds-column-width"
         [formGroup]="generalInformationForm"
         formName="purpose"
         [maxLength]="250"
-        (valueChange)="patchGdpr({ purpose: $event })"
+        (valueChange)="patchGdpr({ processingPurpose: $event })"
       ></app-textbox>
     }
     @if (hostedAtEnabled$ | async) {

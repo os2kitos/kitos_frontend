@@ -6014,6 +6014,9 @@
       <trans-unit id="7627144534064102389" datatype="html">
         <source>Freeware</source>
       </trans-unit>
+      <trans-unit id="5905435256195510767" datatype="html">
+        <source>Behandlingsformål</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

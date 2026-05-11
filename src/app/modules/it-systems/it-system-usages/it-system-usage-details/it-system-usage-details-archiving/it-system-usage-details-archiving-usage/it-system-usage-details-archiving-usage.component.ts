@@ -1,5 +1,6 @@
+import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
@@ -46,31 +47,30 @@ import {
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
-import { ItSystemUsageDetailsArchivingComponentStore } from '../it-system-usage-details-archiving.component-store';
-import { ItSystemUsageDetailsJournalPeriodWriteDialogComponent } from '../write-dialog/it-system-usage-details-journal-period-write-dialog.component';
-import { CardComponent } from '../../../../../../shared/components/card/card.component';
-import { CardHeaderComponent } from '../../../../../../shared/components/card-header/card-header.component';
-import { FormGridComponent } from '../../../../../../shared/components/form-grid/form-grid.component';
-import { DropdownComponent } from '../../../../../../shared/components/dropdowns/dropdown/dropdown.component';
-import { TextBoxInfoComponent } from '../../../../../../shared/components/textbox-info/textbox-info.component';
-import { AsyncPipe } from '@angular/common';
-import { ParagraphComponent } from '../../../../../../shared/components/paragraph/paragraph.component';
-import { ConnectedDropdownComponent } from '../../../../../../shared/components/dropdowns/connected-dropdown/connected-dropdown.component';
-import { NumericInputComponent } from '../../../../../../shared/components/numeric-input/numeric-input.component';
-import { ContentVerticalCenterComponent } from '../../../../../../shared/components/content-vertical-center/content-vertical-center.component';
-import { CheckboxComponent } from '../../../../../../shared/components/checkbox/checkbox.component';
-import { RadioButtonsComponent } from '../../../../../../shared/components/radio-buttons/radio-buttons.component';
-import { TextAreaComponent } from '../../../../../../shared/components/textarea/textarea.component';
-import { StandardVerticalContentGridComponent } from '../../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
-import { NativeTableComponent } from '../../../../../../shared/components/native-table/native-table.component';
-import { ContentSpaceBetweenComponent } from '../../../../../../shared/components/content-space-between/content-space-between.component';
-import { TableRowActionsComponent } from '../../../../../../shared/components/table-row-actions/table-row-actions.component';
 import { IconButtonComponent } from '../../../../../../shared/components/buttons/icon-button/icon-button.component';
+import { CardHeaderComponent } from '../../../../../../shared/components/card-header/card-header.component';
+import { CardComponent } from '../../../../../../shared/components/card/card.component';
+import { CheckboxComponent } from '../../../../../../shared/components/checkbox/checkbox.component';
+import { CollectionExtensionButtonComponent } from '../../../../../../shared/components/collection-extension-button/collection-extension-button.component';
+import { ContentSpaceBetweenComponent } from '../../../../../../shared/components/content-space-between/content-space-between.component';
+import { ContentVerticalCenterComponent } from '../../../../../../shared/components/content-vertical-center/content-vertical-center.component';
+import { ConnectedDropdownComponent } from '../../../../../../shared/components/dropdowns/connected-dropdown/connected-dropdown.component';
+import { DropdownComponent } from '../../../../../../shared/components/dropdowns/dropdown/dropdown.component';
+import { EmptyStateComponent } from '../../../../../../shared/components/empty-states/empty-state.component';
+import { FormGridComponent } from '../../../../../../shared/components/form-grid/form-grid.component';
 import { PencilIconComponent } from '../../../../../../shared/components/icons/pencil-icon.compnent';
 import { TrashcanIconComponent } from '../../../../../../shared/components/icons/trashcan-icon.component';
-import { EmptyStateComponent } from '../../../../../../shared/components/empty-states/empty-state.component';
-import { CollectionExtensionButtonComponent } from '../../../../../../shared/components/collection-extension-button/collection-extension-button.component';
+import { NativeTableComponent } from '../../../../../../shared/components/native-table/native-table.component';
+import { NumericInputComponent } from '../../../../../../shared/components/numeric-input/numeric-input.component';
+import { ParagraphComponent } from '../../../../../../shared/components/paragraph/paragraph.component';
+import { RadioButtonsComponent } from '../../../../../../shared/components/radio-buttons/radio-buttons.component';
+import { StandardVerticalContentGridComponent } from '../../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { TableRowActionsComponent } from '../../../../../../shared/components/table-row-actions/table-row-actions.component';
+import { TextAreaComponent } from '../../../../../../shared/components/textarea/textarea.component';
+import { TextBoxInfoComponent } from '../../../../../../shared/components/textbox-info/textbox-info.component';
 import { AppDatePipe } from '../../../../../../shared/pipes/app-date.pipe';
+import { ItSystemUsageDetailsArchivingComponentStore } from '../it-system-usage-details-archiving.component-store';
+import { ItSystemUsageDetailsJournalPeriodWriteDialogComponent } from '../write-dialog/it-system-usage-details-journal-period-write-dialog.component';
 
 @Component({
   selector: 'app-it-system-usage-details-archiving-usage',
@@ -102,8 +102,8 @@ import { AppDatePipe } from '../../../../../../shared/pipes/app-date.pipe';
     EmptyStateComponent,
     CollectionExtensionButtonComponent,
     AsyncPipe,
-    AppDatePipe
-],
+    AppDatePipe,
+  ],
 })
 export class ItSystemUsageDetailsArchivingUsageComponent extends BaseComponent implements OnInit {
   private readonly journalFrequencyInputUpperLimit = 100;
@@ -129,7 +129,7 @@ export class ItSystemUsageDetailsArchivingUsageComponent extends BaseComponent i
   public readonly archiving$ = this.store.select(selectItSystemUsageArchiving);
   public readonly journalPeriods$ = this.archiving$.pipe(
     filterNullish(),
-    map((archive) => archive.journalPeriods),
+    map((archive) => archive.journalPeriods ?? []),
   );
   public readonly anyJournalPeriods$ = this.journalPeriods$.pipe(matchEmptyArray(), invertBooleanValue());
   public readonly recommendedArchiveDutyComment$ = this.store.select(selectItSystemRecomendedArchiveDutyComment);

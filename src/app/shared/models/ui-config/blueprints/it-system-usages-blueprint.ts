@@ -19,6 +19,9 @@ export const ItSystemUsageUiBluePrint = {
         systemId: {
           text: $localize`System ID`,
         },
+        purpose: {
+          text: $localize`Systemets overordnede formål`,
+        },
         version: {
           text: $localize`Version`,
         },
@@ -96,8 +99,8 @@ export const ItSystemUsageUiBluePrint = {
     gdpr: {
       text: $localize`GDPR`,
       children: {
-        purpose: {
-          text: $localize`Systemets overordnede formål`,
+        processingPurpose: {
+          text: $localize`Behandlingsformål`,
         },
         hostedAt: {
           text: $localize`IT-Systemet driftes`,

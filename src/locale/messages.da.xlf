@@ -7857,6 +7857,10 @@
         <source>Proprietær</source>
         <target state="new">Proprietær</target>
       </trans-unit>
+      <trans-unit id="5905435256195510767" datatype="html">
+        <source>Behandlingsformål</source>
+        <target state="new">Behandlingsformål</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -13,7 +13,7 @@ import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 
 
 export interface APIOrganizationUsageResponseDTO { 
-    usingOrganizationUnits: Array<APIIdentityNamePairResponseDTO>;
+    usingOrganizationUnits: Array<APIIdentityNamePairResponseDTO> | null;
     responsibleOrganizationUnit?: APIIdentityNamePairResponseDTO;
 }
 

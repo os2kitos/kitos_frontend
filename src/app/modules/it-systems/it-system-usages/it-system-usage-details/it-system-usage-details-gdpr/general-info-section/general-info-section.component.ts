@@ -16,7 +16,7 @@ import { selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors
 import {
   selectITSystemUsageEnableGdprDocumentation,
   selectITSystemUsageEnableGdprHostedAt,
-  selectITSystemUsageEnableGdprPurpose
+  selectITSystemUsageEnableGdprPurpose,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { CardHeaderComponent } from '../../../../../../shared/components/card-header/card-header.component';
 import { CardComponent } from '../../../../../../shared/components/card/card.component';
@@ -80,7 +80,7 @@ export class GeneralInfoSectionComponent extends BaseComponent implements OnInit
     this.subscriptions.add(
       this.gdpr$.subscribe((gdpr) => {
         this.generalInformationForm.patchValue({
-          purpose: gdpr.purpose,
+          purpose: gdpr.processingPurpose,
           hostedAt: mapHostedAt(gdpr.hostedAt ?? undefined),
         });
       }),

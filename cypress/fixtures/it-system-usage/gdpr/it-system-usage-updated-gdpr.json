@@ -95,7 +95,7 @@
     ]
   },
   "gdpr": {
-    "purpose": "New purpose",
+    "processingPurpose": "New purpose",
     "businessCritical": "No",
     "hostedAt": "External",
     "directoryDocumentation": { "name": "newName", "url": "newUrl" },

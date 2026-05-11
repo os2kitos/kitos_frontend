@@ -29,123 +29,123 @@ export const selectOverviewSystemRoles = createSelector(selectOverviewSystemRole
 export const selectItSystemUsage = createSelector(selectITSystemUsageState, (state) => state.itSystemUsage);
 export const selectIsSystemUsageLoading = createSelector(
   selectITSystemUsageState,
-  (state) => state.itSystemUsageLoading
+  (state) => state.itSystemUsageLoading,
 );
 export const selectItSystemUsageUuid = createSelector(selectItSystemUsage, (itSystemUsage) => itSystemUsage?.uuid);
 export const selectItSystemUsageName = createSelector(
   selectItSystemUsage,
-  (itSystemUsage) => itSystemUsage?.systemContext.name
+  (itSystemUsage) => itSystemUsage?.systemContext.name,
 );
 export const selectItSystemUsageGeneral = createSelector(
   selectItSystemUsage,
-  (itSystemUsage) => itSystemUsage?.general
+  (itSystemUsage) => itSystemUsage?.general,
 );
 export const selectItSystemUsageMainContract = createSelector(
   selectItSystemUsageGeneral,
-  (general) => general?.mainContract
+  (general) => general?.mainContract,
 );
 export const selectItSystemUsageValid = createSelector(
   selectItSystemUsage,
-  (itSystemUsage) => itSystemUsage?.general.validity.valid
+  (itSystemUsage) => itSystemUsage?.general.validity.valid,
 );
 export const selectItSystemUsageValidAccordingToMainContract = createSelector(
   selectItSystemUsage,
-  (itSystemUsage) => itSystemUsage?.general.validity.validAccordingToMainContract
+  (itSystemUsage) => itSystemUsage?.general.validity.validAccordingToMainContract,
 );
 export const selectItSystemUsageSystemContextUuid = createSelector(
   selectItSystemUsage,
-  (itSystemUsage) => itSystemUsage?.systemContext.uuid
+  (itSystemUsage) => itSystemUsage?.systemContext.uuid,
 );
 export const selectITSystemUsageHasReadPermission = createSelector(
   selectITSystemUsageState,
-  (state) => state.permissions?.read
+  (state) => state.permissions?.read,
 );
 export const selectITSystemUsageHasModifyPermission = createSelector(
   selectITSystemUsageState,
-  (state) => state.permissions?.modify
+  (state) => state.permissions?.modify,
 );
 export const selectITSystemUsageHasDeletePermission = createSelector(
   selectITSystemUsageState,
-  (state) => state.permissions?.delete
+  (state) => state.permissions?.delete,
 );
 export const selectITSystemUsageFieldPermissions = memoize((field: string) =>
   createSelector(selectITSystemUsageState, (state) =>
     state.permissions?.fieldPermissions?.fields
       ? FieldPermissionsService.hasPermission(state.permissions.fieldPermissions.fields, field)
-      : false
-  )
+      : false,
+  ),
 );
 export const selectITSystemUsageHasCreateCollectionPermission = createSelector(
   selectITSystemUsageState,
-  (state) => state.collectionPermissions?.create
+  (state) => state.collectionPermissions?.create,
 );
 export const selectITSystemUsageIsRemoving = createSelector(selectITSystemUsageState, (state) => state.isRemoving);
 export const selectItSystemUsageContextSystemUuid = createSelector(
   selectItSystemUsage,
-  (itSystemUsage) => itSystemUsage?.systemContext.uuid
+  (itSystemUsage) => itSystemUsage?.systemContext.uuid,
 );
 export const selectItSystemUsageResponsibleUnit = createSelector(
   selectItSystemUsage,
-  (itSystemUsage) => itSystemUsage?.organizationUsage?.responsibleOrganizationUnit
+  (itSystemUsage) => itSystemUsage?.organizationUsage?.responsibleOrganizationUnit,
 );
 export const selectItSystemUsageUsingOrganizationUnits = createSelector(
   selectItSystemUsage,
   (itSystemUsage): APIIdentityNamePairResponseDTO[] =>
-    itSystemUsage?.organizationUsage?.usingOrganizationUnits
+    (itSystemUsage?.organizationUsage?.usingOrganizationUnits ?? [])
       .slice()
       .sort((a: APIIdentityNamePairResponseDTO, b: APIIdentityNamePairResponseDTO) =>
-        a.name.localeCompare(b.name)
-      ) as APIIdentityNamePairResponseDTO[]
+        a.name.localeCompare(b.name),
+      ) as APIIdentityNamePairResponseDTO[],
 );
 
 export const selectItSystemUsageLocallyAddedKleUuids = createSelector(
   selectItSystemUsage,
   (itSystemUsage): string[] =>
-    itSystemUsage?.localKLEDeviations.addedKLE.map((kle: APIIdentityNamePairResponseDTO) => kle.uuid) as string[]
+    itSystemUsage?.localKLEDeviations.addedKLE.map((kle: APIIdentityNamePairResponseDTO) => kle.uuid) as string[],
 );
 
 export const selectItSystemUsageLocallyRemovedKleUuids = createSelector(
   selectItSystemUsage,
   (itSystemUsage): string[] =>
-    itSystemUsage?.localKLEDeviations.removedKLE.map((kle: APIIdentityNamePairResponseDTO) => kle.uuid) as string[]
+    itSystemUsage?.localKLEDeviations.removedKLE.map((kle: APIIdentityNamePairResponseDTO) => kle.uuid) as string[],
 );
 
 export const selectItSystemUsageOutgoingSystemRelations = createSelector(
   selectItSystemUsage,
-  (itSystemUsage) => itSystemUsage?.outgoingSystemRelations
+  (itSystemUsage) => itSystemUsage?.outgoingSystemRelations,
 );
 
 export const selectItSystemUsageExternalReferences = createSelector(
   selectITSystemUsageState,
-  (state) => state.itSystemUsage?.externalReferences
+  (state) => state.itSystemUsage?.externalReferences,
 );
 
 export const selectItSystemUsageGdpr = createSelector(selectItSystemUsage, (itSystemUsage) => itSystemUsage?.gdpr);
 
 export const selectItSystemUsageGdprDataSensitivityLevels = createSelector(selectItSystemUsageGdpr, (gdpr) =>
-  gdpr?.dataSensitivityLevels.map((level) => mapDataSensitivityLevel(level))
+  gdpr?.dataSensitivityLevels.map((level) => mapDataSensitivityLevel(level)),
 );
 
 export const selectItSystemUsageGdprSpecificPersonalData = createSelector(selectItSystemUsageGdpr, (gdpr) =>
-  gdpr?.specificPersonalData.map((type) => mapSpecificPersonalData(type))
+  gdpr?.specificPersonalData.map((type) => mapSpecificPersonalData(type)),
 );
 
 export const selectItSystemUsageGdprSensitivePersonalData = createSelector(selectItSystemUsageGdpr, (gdpr) =>
-  gdpr?.sensitivePersonData.map((type) => mapIdentityNamePair(type))
+  gdpr?.sensitivePersonData.map((type) => mapIdentityNamePair(type)),
 );
 
 export const selectItSystemUsageGdprRegisteredDataCategories = createSelector(selectItSystemUsageGdpr, (gdpr) =>
-  gdpr?.registeredDataCategories.map((category) => mapIdentityNamePair(category))
+  gdpr?.registeredDataCategories.map((category) => mapIdentityNamePair(category)),
 );
 
 export const selectItSystemUsageArchiving = createSelector(
   selectItSystemUsage,
-  (itSystemUsage) => itSystemUsage?.archiving
+  (itSystemUsage) => itSystemUsage?.archiving,
 );
 
 export const selectItSystemUsageLastSeenGridConfig = createSelector(
   selectITSystemUsageState,
-  (state) => state.lastSeenGridConfig
+  (state) => state.lastSeenGridConfig,
 );
 
 export const selectItSystemUsageIsPatching = createSelector(selectITSystemUsageState, (state) => state.isPatching);
@@ -155,5 +155,5 @@ export const selectItSystemUsageRights = createSelector(selectItSystemUsage, (st
 
 export const selectItSystemUsageRightUuidPairs = createSelector(
   selectItSystemUsageRights,
-  mapToRoleAssignmentsRequests
+  mapToRoleAssignmentsRequests,
 );

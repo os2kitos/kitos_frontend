@@ -1,5 +1,5 @@
 const generalInformation = 'Generel information';
-const purposeInput = 'Systemets overordnede formål';
+const purposeInput = 'Behandlingsformål';
 const hostedAtDropdown = 'IT-systemet driftes';
 const personDataCheckbox = 'Almindelige personoplysninger';
 const dataSensitivityAccordion = 'data-sensitivity-accordion';
@@ -46,7 +46,7 @@ describe('it-system-usage gdpr', () => {
     cy.input(purposeInput).clear().type(newPurpose);
     cy.contains(generalInformation).click();
 
-    cy.verifyRequestUsingDeepEq('patch', 'request.body', { gdpr: { purpose: newPurpose } });
+    cy.verifyRequestUsingDeepEq('patch', 'request.body', { gdpr: { processingPurpose: newPurpose } });
     cy.input(purposeInput).should('have.value', newPurpose);
   });
 

@@ -95,7 +95,7 @@
     ]
   },
   "gdpr": {
-    "purpose": "Test purpose",
+    "processingPurpose": "Test purpose",
     "businessCritical": "Yes",
     "hostedAt": "OnPremise",
     "directoryDocumentation": { "name": "newName", "url": "newUrl" },

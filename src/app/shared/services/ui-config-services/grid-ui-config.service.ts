@@ -81,6 +81,7 @@ import {
   selectITSystemUsageEnableGdprRetentionPeriod,
   selectITSystemUsageEnableGdprTechnicalPrecautions,
   selectITSystemUsageEnableGdprUserSupervision,
+  selectITSystemUsageEnableGeneralPurpose,
   selectITSystemUsageEnableIncomingRelations,
   selectITSystemUsageEnableInheritedKle,
   selectITSystemUsageEnableIsBusinessCritical,
@@ -344,7 +345,8 @@ export class GridUIConfigService {
       this.store
         .select(selectITSystemUsageEnableGdprPlannedRiskAssessmentDate)
         .pipe(shouldEnable([UsageFields.PlannedRiskAssessmentDate])),
-      this.store.select(selectITSystemUsageEnableGdprPurpose).pipe(shouldEnable([UsageFields.GeneralPurpose])),
+      this.store.select(selectITSystemUsageEnableGeneralPurpose).pipe(shouldEnable([UsageFields.GeneralPurpose])),
+      this.store.select(selectITSystemUsageEnableGdprPurpose).pipe(shouldEnable([UsageFields.ProcessingPurpose])),
       this.store.select(selectITSystemUsageEnableGdprHostedAt).pipe(shouldEnable([UsageFields.HostedAt])),
       this.store
         .select(selectITSystemUsageEnableGdprDocumentation)
