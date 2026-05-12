@@ -84,6 +84,7 @@ api/itSystemGlobalRegisterTypesInternalV2.service.ts
 api/itSystemGlobalRoleOptionTypesInternalV2.service.ts
 api/itSystemGlobalSensitivePersonalDataTypesInternalV2.service.ts
 api/itSystemGlobalSystemUsageCriticalityLevelTypesInternalV2.service.ts
+api/itSystemGlobalTechnicalSystemTypesInternalV2.service.ts
 api/itSystemInternalV2.service.ts
 api/itSystemLocalArchiveLocationTypesInternalV2.service.ts
 api/itSystemLocalArchiveTestLocationTypesInternalV2.service.ts
@@ -97,6 +98,7 @@ api/itSystemLocalRegisterTypesInternalV2.service.ts
 api/itSystemLocalRoleOptionTypesInternalV2.service.ts
 api/itSystemLocalSensitivePersonalDataTypesInternalV2.service.ts
 api/itSystemLocalSystemUsageCriticalityLevelTypesInternalV2.service.ts
+api/itSystemLocalTechnicalSystemTypesInternalV2.service.ts
 api/itSystemUsageArchiveLocationTypeV2.service.ts
 api/itSystemUsageArchiveTestLocationTypeV2.service.ts
 api/itSystemUsageArchiveTypeV2.service.ts
@@ -108,6 +110,7 @@ api/itSystemUsageRegisteredDataCategoryTypeV2.service.ts
 api/itSystemUsageRelationFrequencyTypeV2.service.ts
 api/itSystemUsageRoleTypeV2.service.ts
 api/itSystemUsageSensitivePersonalDataTypeV2.service.ts
+api/itSystemUsageTechnicalSystemTypeV2.service.ts
 api/itSystemUsageV2.service.ts
 api/itSystemV2.service.ts
 api/kLEInternalV2.service.ts

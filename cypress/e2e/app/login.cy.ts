@@ -91,6 +91,9 @@ describe('login', () => {
     cy.intercept('/api/v2/it-system-usage-criticality-level-types*', {
       fixture: './it-system-usage/criticality-level-types.json',
     });
+    cy.intercept('/api/v2/it-system-usage-technical-system-types*', {
+      fixture: './it-system-usage/technical-system-types.json',
+    });
     cy.intercept('/api/v2/organizations*', { fixture: './organizations/organizations-multiple.json' });
     cy.login();
 

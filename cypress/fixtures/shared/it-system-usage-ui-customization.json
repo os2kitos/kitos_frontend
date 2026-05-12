@@ -70,6 +70,10 @@
       "enabled": true
     },
     {
+      "key": "ItSystemUsages.frontPage.technicalSystemType",
+      "enabled": true
+    },
+    {
       "key": "ItSystemUsages.gdpr",
       "enabled": true
     }

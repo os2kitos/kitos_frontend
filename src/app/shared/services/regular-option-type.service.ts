@@ -29,6 +29,7 @@ import {
   ItSystemUsageRelationFrequencyTypeV2Service,
   ItSystemUsageRoleTypeV2Service,
   ItSystemUsageSensitivePersonalDataTypeV2Service,
+  ItSystemUsageTechnicalSystemTypeV2Service,
 } from 'src/app/api/v2';
 import { RegularOptionType } from '../models/options/regular-option-types.model';
 
@@ -61,6 +62,8 @@ export class RegularOptionTypeService {
     private readonly itSystemUsageCriticalityLevelService: ItSystemUsageCriticalityLevelTypeV2Service,
     @Inject(ItSystemUsageRoleTypeV2Service)
     private readonly itSystemUsageRoleTypeService: ItSystemUsageRoleTypeV2Service,
+    @Inject(ItSystemUsageTechnicalSystemTypeV2Service)
+    private readonly itSystemUsageTechnicalSystemTypeService: ItSystemUsageTechnicalSystemTypeV2Service,
     @Inject(ItInterfaceInterfaceDataTypeV2Service)
     private readonly itInterfaceDataTypesService: ItInterfaceInterfaceDataTypeV2Service,
     @Inject(ItContractContractTemplateTypeV2Service)
@@ -144,6 +147,11 @@ export class RegularOptionTypeService {
       case 'it-system-usage_system-usage-criticality-level':
         return (organizationUuid) =>
           this.itSystemUsageCriticalityLevelService.getSingleItSystemUsageCriticalityLevelTypeV2Get({
+            organizationUuid: organizationUuid,
+          });
+      case 'it-system-usage_technical-system-type':
+        return (organizationUuid) =>
+          this.itSystemUsageTechnicalSystemTypeService.getSingleItSystemUsageTechnicalSystemTypeV2Get({
             organizationUuid: organizationUuid,
           });
       case 'it-system-usage-roles':

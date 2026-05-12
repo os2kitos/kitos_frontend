@@ -57,5 +57,7 @@ export const LastWebAccessibilityCheck = 'LastWebAccessibilityCheck';
 export const WebAccessibilityNotes = 'WebAccessibilityNotes';
 export const SystemUsageCriticalityLevelUuid = 'SystemUsageCriticalityLevelUuid';
 export const SystemUsageCriticalityLevelName = 'SystemUsageCriticalityLevelName';
+export const TechnicalSystemTypeUuid = 'TechnicalSystemTypeUuid';
+export const TechnicalSystemTypeName = 'TechnicalSystemTypeName';
 export const IsSociallyCritical = 'IsSociallyCritical';
 export const CriticalityFieldsLastChanged = 'CriticalityFieldsLastChanged';

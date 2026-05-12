@@ -6017,6 +6017,9 @@
       <trans-unit id="5905435256195510767" datatype="html">
         <source>Behandlingsformål</source>
       </trans-unit>
+      <trans-unit id="6123762912751952636" datatype="html">
+        <source>Teknisk systemtype</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

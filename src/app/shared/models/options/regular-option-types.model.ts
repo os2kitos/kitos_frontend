@@ -13,6 +13,7 @@ export type RegularOptionType =
   | 'it-contract_contract-type'
   | 'it_system_usage-gdpr-registered-data-category-type'
   | 'it-system-usage_system-usage-criticality-level'
+  | 'it-system-usage_technical-system-type'
   | 'it-system-usage-roles'
   | 'it-interface_data-type'
   | 'it-contract_contract-template-type'

@@ -38,6 +38,18 @@
         (valueChange)="patchGeneral({ systemVersion: $event })"
       ></app-textbox>
     }
+
+    @if (technicalSystemTypeEnabled$ | async) {
+      <app-dropdown
+        text="Teknisk systemtype"
+        i18n-text
+        valueField="uuid"
+        [formGroup]="itSystemInformationForm"
+        formName="technicalSystemType"
+        [data]="technicalSystemTypes$ | async"
+        (valueChange)="patchGeneral({ technicalSystemTypeUuid: $event })"
+      ></app-dropdown>
+    }
     @if (purposeEnabled$ | async) {
       <app-textbox
         text="Systemets overordnede formål"

@@ -37,5 +37,6 @@ export interface APIGeneralDataResponseDTO {
     systemUsageCriticalityLevel?: APIIdentityNamePairResponseDTO;
     criticalityLevelDocumentation?: APISimpleLinkDTO;
     purpose?: string | null;
+    technicalSystemType?: APIIdentityNamePairResponseDTO;
 }
 

@@ -95,6 +95,7 @@ import {
   selectITSystemUsageEnableSelectContractToDetermineIfItSystemIsActive,
   selectITSystemUsageEnableStatus,
   selectITSystemUsageEnableSystemUsageCriticalityLevel,
+  selectITSystemUsageEnableTechnicalSystemType,
   selectITSystemUsageEnableTabArchiving,
   selectITSystemUsageEnableTabOrganization,
   selectITSystemUsageEnableTabSystemRoles,
@@ -355,6 +356,9 @@ export class GridUIConfigService {
       this.store
         .select(selectITSystemUsageEnableSystemUsageCriticalityLevel)
         .pipe(shouldEnable([UsageFields.SystemUsageCriticalityLevelUuid])),
+      this.store
+        .select(selectITSystemUsageEnableTechnicalSystemType)
+        .pipe(shouldEnable([UsageFields.TechnicalSystemTypeUuid])),
 
       //Organization
       this.store

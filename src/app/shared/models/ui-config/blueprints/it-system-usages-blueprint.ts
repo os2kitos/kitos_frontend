@@ -25,6 +25,10 @@ export const ItSystemUsageUiBluePrint = {
         version: {
           text: $localize`Version`,
         },
+        technicalSystemType: {
+          text: $localize`Teknisk systemtype`,
+          disableByDefault: true,
+        },
         amountOfUsers: {
           text: $localize`Antal brugere`,
         },

@@ -7861,6 +7861,10 @@
         <source>Behandlingsformål</source>
         <target state="new">Behandlingsformål</target>
       </trans-unit>
+      <trans-unit id="6123762912751952636" datatype="html">
+        <source>Teknisk systemtype</source>
+        <target state="new">Teknisk systemtype</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

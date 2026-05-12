@@ -137,6 +137,8 @@ export const selectITSystemUsageEnableCriticalityLevelDocumentation = createItSy
 );
 export const selectITSystemUsageEnableSystemUsageCriticalityLevel =
   createItSystemUsageFrontPageFieldSelector('systemUsageCriticalityLevel');
+export const selectITSystemUsageEnableTechnicalSystemType =
+  createItSystemUsageFrontPageFieldSelector('technicalSystemType');
 
 //IT System Usage > Contracts
 const createItSystemUsageContractsFieldSelector = (fieldKey: string) =>

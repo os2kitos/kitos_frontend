@@ -34,6 +34,7 @@ import {
   ItSystemGlobalRoleOptionTypesInternalV2Service,
   ItSystemGlobalSensitivePersonalDataTypesInternalV2Service,
   ItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2Service,
+  ItSystemGlobalTechnicalSystemTypesInternalV2Service,
   OrganizationGlobalCountryCodesInternalV2Service,
   OrganizationUnitGlobalRoleOptionTypesInternalV2Service,
 } from 'src/app/api/v2';
@@ -67,6 +68,8 @@ export class GlobalAdminOptionTypeService {
     private readonly registerTypeService: ItSystemGlobalRegisterTypesInternalV2Service,
     @Inject(ItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2Service)
     private readonly systemUsageCriticalityLevelService: ItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2Service,
+    @Inject(ItSystemGlobalTechnicalSystemTypesInternalV2Service)
+    private readonly technicalSystemTypeService: ItSystemGlobalTechnicalSystemTypesInternalV2Service,
 
     //IT Contract regular types
     @Inject(ItContractGlobalItContractTypesInternalV2Service)
@@ -167,6 +170,9 @@ export class GlobalAdminOptionTypeService {
       case 'it-system-usage_system-usage-criticality-level':
         return () =>
           this.systemUsageCriticalityLevelService.getSingleItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2GetSystemUsageCriticalityLevelTypes();
+      case 'it-system-usage_technical-system-type':
+        return () =>
+          this.technicalSystemTypeService.getSingleItSystemGlobalTechnicalSystemTypesInternalV2GetTechnicalSystemTypes();
 
       //It Contract regular types
       case 'it-contract_contract-type':
@@ -319,6 +325,14 @@ export class GlobalAdminOptionTypeService {
       case 'it-system-usage_system-usage-criticality-level':
         return (optionUuid: string, dto: APIGlobalRoleOptionUpdateRequestDTO) =>
           this.systemUsageCriticalityLevelService.patchSingleItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2PatchSystemUsageCriticalityLevelType(
+            {
+              optionUuid,
+              aPIGlobalRegularOptionUpdateRequestDTO: dto,
+            },
+          );
+      case 'it-system-usage_technical-system-type':
+        return (optionUuid: string, dto: APIGlobalRoleOptionUpdateRequestDTO) =>
+          this.technicalSystemTypeService.patchSingleItSystemGlobalTechnicalSystemTypesInternalV2PatchTechnicalSystemType(
             {
               optionUuid,
               aPIGlobalRegularOptionUpdateRequestDTO: dto,
@@ -563,6 +577,13 @@ export class GlobalAdminOptionTypeService {
       case 'it-system-usage_system-usage-criticality-level':
         return (request: APIGlobalRoleOptionCreateRequestDTO) =>
           this.systemUsageCriticalityLevelService.postSingleItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2CreateSystemUsageCriticalityLevelType(
+            {
+              aPIGlobalRegularOptionCreateRequestDTO: request,
+            },
+          );
+      case 'it-system-usage_technical-system-type':
+        return (request: APIGlobalRoleOptionCreateRequestDTO) =>
+          this.technicalSystemTypeService.postSingleItSystemGlobalTechnicalSystemTypesInternalV2CreateTechnicalSystemType(
             {
               aPIGlobalRegularOptionCreateRequestDTO: request,
             },

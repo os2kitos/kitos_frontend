@@ -20,6 +20,7 @@ describe('local-admin it system usage', () => {
       fixture: './organizations/organization-permissions-local-admin.json',
     });
     cy.intercept('/api/v2/internal/it-systems/*/local-option-types/system-usage-criticality-level-types*', {});
+    cy.intercept('/api/v2/internal/it-systems/*/local-option-types/technical-system-types', { body: [] });
     cy.setup(true, 'local-admin/system');
   });
 
