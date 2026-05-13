@@ -63,7 +63,7 @@
           <span class="level-indicator-color">{{ level }}.</span> {{ node.name }}
         </app-details-page-link>
       }
-      @if (!disableDrag && !node.isRoot) {
+      @if (!disableDrag && !node.isRoot && node.isRearrangeDisabled !== true) {
         <app-drag-icon cdkDragHandle data-cy="drag-icon"></app-drag-icon>
       }
     </div>

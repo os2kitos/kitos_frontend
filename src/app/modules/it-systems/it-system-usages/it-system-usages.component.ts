@@ -27,6 +27,7 @@ import { GridState } from 'src/app/shared/models/grid-state.model';
 import { archiveDutyChoiceOptions } from 'src/app/shared/models/it-system-usage/archive-duty-choice.model';
 import { dataSensitivityLevelOptions } from 'src/app/shared/models/it-system-usage/gdpr/data-sensitivity-level.model';
 import { hostedAtOptionsGrid } from 'src/app/shared/models/it-system-usage/gdpr/hosted-at.model';
+import { isDataProcessingAgreementRequiredOptions } from 'src/app/shared/models/it-system-usage/gdpr/is-data-processing-agreement-required.model';
 import { archiveDutyRecommendationChoiceOptions } from 'src/app/shared/models/it-system/archive-duty-recommendation-choice.model';
 import { lifeCycleStatusOptions } from 'src/app/shared/models/life-cycle-status.model';
 import { numberOfExpectedUsersOptionsGrid } from 'src/app/shared/models/number-of-expected-users.model';
@@ -680,6 +681,15 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       style: 'date',
       filter: 'date',
       width: 350,
+    },
+    {
+      field: GridFields.IsDataProcessingAgreementRequired,
+      title: $localize`Kræver system databehandleraftale`,
+      section: GDPR_SECTION_NAME,
+      hidden: true,
+      extraFilter: 'enum',
+      style: 'enum',
+      extraData: isDataProcessingAgreementRequiredOptions,
     },
   ];
 

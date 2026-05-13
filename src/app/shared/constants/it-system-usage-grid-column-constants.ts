@@ -61,3 +61,4 @@ export const TechnicalSystemTypeUuid = 'TechnicalSystemTypeUuid';
 export const TechnicalSystemTypeName = 'TechnicalSystemTypeName';
 export const IsSociallyCritical = 'IsSociallyCritical';
 export const CriticalityFieldsLastChanged = 'CriticalityFieldsLastChanged';
+export const IsDataProcessingAgreementRequired = 'IsDataProcessingAgreementRequired';

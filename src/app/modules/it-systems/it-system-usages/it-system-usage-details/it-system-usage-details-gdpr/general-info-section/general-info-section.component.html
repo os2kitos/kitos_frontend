@@ -13,17 +13,7 @@
         (valueChange)="patchGdpr({ processingPurpose: $event })"
       ></app-textbox>
     }
-    @if (hostedAtEnabled$ | async) {
-      <app-dropdown
-        text="IT-systemet driftes"
-        i18n-text
-        [formGroup]="generalInformationForm"
-        formName="hostedAt"
-        [data]="hostedAtOptions"
-        (valueChange)="patchGdpr({ hostedAt: $event })"
-      ></app-dropdown>
-    }
-    @if (documentationEnabled$ | async) {
+        @if (documentationEnabled$ | async) {
       <app-edit-url-section
         title="Link til fortegnelse"
         [simpleLink$]="selectDirectoryDocumentation$"
@@ -33,6 +23,27 @@
         (clearClick)="resetSimpleLink()"
         [isDisabled]="disableDirectoryDocumentationControl"
       ></app-edit-url-section>
+    }
+    @if (isDataProcessingAgreementRequiredEnabled$ | async) {
+    <app-dropdown
+      text="Kræver system databehandleraftale"
+      i18n-text
+      [formGroup]="generalInformationForm"
+      formName="isDataProcessingAgreementRequired"
+      [data]="isDataProcessingAgreementRequiredOptions"
+      (valueChange)="patchGdpr({ isDataProcessingAgreementRequired: $event })"
+    >
+    </app-dropdown>
+    }
+    @if (hostedAtEnabled$ | async) {
+      <app-dropdown
+        text="IT-systemet driftes"
+        i18n-text
+        [formGroup]="generalInformationForm"
+        formName="hostedAt"
+        [data]="hostedAtOptions"
+        (valueChange)="patchGdpr({ hostedAt: $event })"
+      ></app-dropdown>
     }
   </app-form-grid>
 </app-card>

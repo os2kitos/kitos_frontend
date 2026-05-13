@@ -155,6 +155,9 @@ const createItSystemUsageGdprFieldSelector = (fieldKey: string) =>
 export const selectITSystemUsageEnableGdprPurpose = createItSystemUsageGdprFieldSelector('processingPurpose');
 export const selectITSystemUsageEnableGdprHostedAt = createItSystemUsageGdprFieldSelector('hostedAt');
 export const selectITSystemUsageEnableGdprDocumentation = createItSystemUsageGdprFieldSelector('documentation');
+export const selectITSystemUsageEnableGdprIsDataProcessingAgreementRequired = createItSystemUsageGdprFieldSelector(
+  'isDataProcessingAgreementRequired',
+);
 export const selectITSystemUsageEnableGdprDataTypes = createItSystemUsageGdprFieldSelector('dataTypes');
 export const selectITSystemUsageEnabledRegisteredCategories =
   createItSystemUsageGdprFieldSelector('registeredCategories');

@@ -6020,6 +6020,12 @@
       <trans-unit id="6123762912751952636" datatype="html">
         <source>Teknisk systemtype</source>
       </trans-unit>
+      <trans-unit id="6624218801716266997" datatype="html">
+        <source>Styret via lovgivning</source>
+      </trans-unit>
+      <trans-unit id="6959125562012930761" datatype="html">
+        <source>Kræver system databehandleraftale</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

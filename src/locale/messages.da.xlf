@@ -7865,6 +7865,14 @@
         <source>Teknisk systemtype</source>
         <target state="new">Teknisk systemtype</target>
       </trans-unit>
+      <trans-unit id="6959125562012930761" datatype="html">
+        <source>Kræver system databehandleraftale</source>
+        <target state="new">Kræver system databehandleraftale</target>
+      </trans-unit>
+      <trans-unit id="6624218801716266997" datatype="html">
+        <source>Styret via lovgivning</source>
+        <target state="new">Styret via lovgivning</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

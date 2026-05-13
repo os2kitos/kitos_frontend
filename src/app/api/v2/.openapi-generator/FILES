@@ -244,6 +244,7 @@ model/identityNamePairWithDeactivatedStatusDTO.ts
 model/immediateNotificationWriteRequestDTO.ts
 model/incomingSystemRelationResponseDTO.ts
 model/interfacesExposedOutsideTheOrganizationResponseDTO.ts
+model/isDataProcessingAgreementRequiredChoice.ts
 model/itContractHierarchyNodeResponseDTO.ts
 model/itContractPermissionsResponseDTO.ts
 model/itContractResponseDTO.ts

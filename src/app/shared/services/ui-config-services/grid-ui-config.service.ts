@@ -76,6 +76,7 @@ import {
   selectITSystemUsageEnableGdprDocumentation,
   selectITSystemUsageEnableGdprDpiaConducted,
   selectITSystemUsageEnableGdprHostedAt,
+  selectITSystemUsageEnableGdprIsDataProcessingAgreementRequired,
   selectITSystemUsageEnableGdprPlannedRiskAssessmentDate,
   selectITSystemUsageEnableGdprPurpose,
   selectITSystemUsageEnableGdprRetentionPeriod,
@@ -95,11 +96,11 @@ import {
   selectITSystemUsageEnableSelectContractToDetermineIfItSystemIsActive,
   selectITSystemUsageEnableStatus,
   selectITSystemUsageEnableSystemUsageCriticalityLevel,
-  selectITSystemUsageEnableTechnicalSystemType,
   selectITSystemUsageEnableTabArchiving,
   selectITSystemUsageEnableTabOrganization,
   selectITSystemUsageEnableTabSystemRoles,
   selectITSystemUsageEnableTakenIntoUsageBy,
+  selectITSystemUsageEnableTechnicalSystemType,
   selectITSystemUsageEnableVersion,
   selectITSystemUsageEnableWebAccessibility,
 } from 'src/app/store/organization/ui-module-customization/selectors';
@@ -356,6 +357,9 @@ export class GridUIConfigService {
       this.store
         .select(selectITSystemUsageEnableSystemUsageCriticalityLevel)
         .pipe(shouldEnable([UsageFields.SystemUsageCriticalityLevelUuid])),
+      this.store
+        .select(selectITSystemUsageEnableGdprIsDataProcessingAgreementRequired)
+        .pipe(shouldEnable([UsageFields.IsDataProcessingAgreementRequired])),
       this.store
         .select(selectITSystemUsageEnableTechnicalSystemType)
         .pipe(shouldEnable([UsageFields.TechnicalSystemTypeUuid])),

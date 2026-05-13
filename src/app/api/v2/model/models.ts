@@ -107,6 +107,7 @@ export * from './identityNamePairWithDeactivatedStatusDTO';
 export * from './immediateNotificationWriteRequestDTO';
 export * from './incomingSystemRelationResponseDTO';
 export * from './interfacesExposedOutsideTheOrganizationResponseDTO';
+export * from './isDataProcessingAgreementRequiredChoice';
 export * from './itContractHierarchyNodeResponseDTO';
 export * from './itContractPermissionsResponseDTO';
 export * from './itContractResponseDTO';

@@ -14,6 +14,10 @@ import { mapToYesNoPartiallyEnum, YesNoPartiallyOption } from '../yes-no-partial
 import { mapToYesNoEnum, YesNoOption } from '../yes-no.model';
 import { ArchiveDutyChoice, mapArchiveDutyChoice } from './archive-duty-choice.model';
 import { HostedAt, mapGridHostedAt } from './gdpr/hosted-at.model';
+import {
+  IsDataProcessingAgreementRequired,
+  mapIsDataProcessingAgreementRequired,
+} from './gdpr/is-data-processing-agreement-required.model';
 
 export interface ITSystemUsage {
   //ngrx requires the id field to have lowercase 'id' name
@@ -92,6 +96,7 @@ export interface ITSystemUsage {
   TechnicalSystemTypeName: string | undefined;
   IsSociallyCritical: YesNoDontKnowOption | undefined;
   CriticalityFieldsLastChanged: Date | undefined;
+  IsDataProcessingAgreementRequired: IsDataProcessingAgreementRequired | undefined;
 }
 
 function getParentItSystemLinkPaths(value: {
@@ -222,6 +227,7 @@ export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
     TechnicalSystemTypeName: value.TechnicalSystemTypeName,
     IsSociallyCritical: mapFromCapitalizedStringToYesNoDontKnowEnum(value.IsSociallyCritical),
     CriticalityFieldsLastChanged: value.CriticalityFieldsLastChanged,
+    IsDataProcessingAgreementRequired: mapIsDataProcessingAgreementRequired(value.IsDataProcessingAgreementRequired),
   };
   return adaptedSystem;
 };
