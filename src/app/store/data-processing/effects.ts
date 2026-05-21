@@ -669,15 +669,6 @@ function removeOversightDateByUuid(targetUuid: string, oversightDates: APIOversi
   return oversightDates.filter((oversightDate) => oversightDate.uuid !== targetUuid);
 }
 
-function replaceOldOversightDateWithNewOne(target: APIOversightDateDTO, oversightDates: APIOversightDateDTO[]) {
-  if (!target.uuid) {
-    throw new Error('Target oversight date must have a uuid to be replaced in the list.');
-  }
-  const filtered = removeOversightDateByUuid(target.uuid, oversightDates);
-  filtered.push(target);
-  return filtered;
-}
-
 function mapSubDataProcessors(
   subProcessors: APIDataProcessorRegistrationSubDataProcessorResponseDTO[],
 ): APIDataProcessorRegistrationSubDataProcessorWriteRequestDTO[] {
@@ -718,6 +709,14 @@ function applyQueryFixes(odataString: string, systemRoles: APIBusinessRoleDTO[] 
     .replace(
       /IsOversightCompleted eq 'Undecided'/,
       "(IsOversightCompleted eq 'Undecided' or IsOversightCompleted eq null)",
+    )
+    .replace(
+      /contains\(DataProcessorNamesAsCsv,([^)]+)\)/gi,
+      '(contains(DataProcessorNamesAsCsv,$1) or contains(DataProcessorCvrsAsCsv,$1))',
+    )
+    .replace(
+      /contains\(SubDataProcessorNamesAsCsv,([^)]+)\)/gi,
+      '(contains(SubDataProcessorNamesAsCsv,$1) or contains(SubDataProcessorCvrsAsCsv,$1))',
     )
     .replace(/ResponsibleOrgUnitName eq '([\w-]+)'/, 'ResponsibleOrgUnitUuid eq $1');
 

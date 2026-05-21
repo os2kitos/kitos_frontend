@@ -1,5 +1,5 @@
 import { AppPath } from '../../enums/app-path';
-import { entityWithUnavailableName } from '../../helpers/string.helpers';
+import { entityWithUnavailableName, organizationNameWithCvr } from '../../helpers/string.helpers';
 import {
   mapRoleAssignmentsToEmails,
   mapRoleAssignmentsToUserFullNames,
@@ -155,7 +155,7 @@ export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
     LocalReferenceDocumentId: value.LocalReferenceDocumentId,
     SensitiveDataLevelsAsCsv: value.SensitiveDataLevelsAsCsv,
     MainContractSupplierName: value.MainContractSupplierName,
-    ItSystemRightsHolderName: value.ItSystemRightsHolderName,
+    ItSystemRightsHolderName: organizationNameWithCvr(value.ItSystemRightsHolderName, value.ItSystemRightsHolderCvr),
     ObjectOwnerName: value.ObjectOwnerName,
     LastChangedByName: value.LastChangedByName,
     LastChangedAt: value.LastChangedAt,

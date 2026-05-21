@@ -104,6 +104,13 @@ export class MetadataService {
 
         let localVarHeaders = this.defaultHeaders;
 
+        let localVarCredential: string | undefined;
+        // authentication (Bearer) required
+        localVarCredential = this.configuration.lookupCredential('Bearer');
+        if (localVarCredential) {
+            localVarHeaders = localVarHeaders.set('Authorization', 'Bearer ' + localVarCredential);
+        }
+
         let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
         if (localVarHttpHeaderAcceptSelected === undefined) {
             // to determine the Accept header
@@ -195,6 +202,13 @@ export class MetadataService {
     public getSingleMetadataGetServiceDocument(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json;odata.metadata&#x3D;minimal;odata.streaming&#x3D;true' | 'application/json;odata.metadata&#x3D;minimal;odata.streaming&#x3D;false' | 'application/json;odata.metadata&#x3D;minimal' | 'application/json;odata.metadata&#x3D;full;odata.streaming&#x3D;true' | 'application/json;odata.metadata&#x3D;full;odata.streaming&#x3D;false' | 'application/json;odata.metadata&#x3D;full' | 'application/json;odata.metadata&#x3D;none;odata.streaming&#x3D;true' | 'application/json;odata.metadata&#x3D;none;odata.streaming&#x3D;false' | 'application/json;odata.metadata&#x3D;none' | 'application/json;odata.streaming&#x3D;true' | 'application/json;odata.streaming&#x3D;false' | 'application/json' | 'application/json;odata.metadata&#x3D;minimal;odata.streaming&#x3D;true;IEEE754Compatible&#x3D;false' | 'application/json;odata.metadata&#x3D;minimal;odata.streaming&#x3D;true;IEEE754Compatible&#x3D;true' | 'application/json;odata.metadata&#x3D;minimal;odata.streaming&#x3D;false;IEEE754Compatible&#x3D;false' | 'application/json;odata.metadata&#x3D;minimal;odata.streaming&#x3D;false;IEEE754Compatible&#x3D;true' | 'application/json;odata.metadata&#x3D;minimal;IEEE754Compatible&#x3D;false' | 'application/json;odata.metadata&#x3D;minimal;IEEE754Compatible&#x3D;true' | 'application/json;odata.metadata&#x3D;full;odata.streaming&#x3D;true;IEEE754Compatible&#x3D;false' | 'application/json;odata.metadata&#x3D;full;odata.streaming&#x3D;true;IEEE754Compatible&#x3D;true' | 'application/json;odata.metadata&#x3D;full;odata.streaming&#x3D;false;IEEE754Compatible&#x3D;false' | 'application/json;odata.metadata&#x3D;full;odata.streaming&#x3D;false;IEEE754Compatible&#x3D;true' | 'application/json;odata.metadata&#x3D;full;IEEE754Compatible&#x3D;false' | 'application/json;odata.metadata&#x3D;full;IEEE754Compatible&#x3D;true' | 'application/json;odata.metadata&#x3D;none;odata.streaming&#x3D;true;IEEE754Compatible&#x3D;false' | 'application/json;odata.metadata&#x3D;none;odata.streaming&#x3D;true;IEEE754Compatible&#x3D;true' | 'application/json;odata.metadata&#x3D;none;odata.streaming&#x3D;false;IEEE754Compatible&#x3D;true' | 'application/json;odata.metadata&#x3D;none;odata.streaming&#x3D;false;IEEE754Compatible&#x3D;false' | 'application/json;odata.metadata&#x3D;none;IEEE754Compatible&#x3D;false' | 'application/json;odata.metadata&#x3D;none;IEEE754Compatible&#x3D;true' | 'application/json;odata.streaming&#x3D;true;IEEE754Compatible&#x3D;false' | 'application/json;odata.streaming&#x3D;true;IEEE754Compatible&#x3D;true' | 'application/json;odata.streaming&#x3D;false;IEEE754Compatible&#x3D;false' | 'application/json;odata.streaming&#x3D;false;IEEE754Compatible&#x3D;true' | 'application/json;IEEE754Compatible&#x3D;false' | 'application/json;IEEE754Compatible&#x3D;true' | 'application/xml' | 'text/plain' | 'application/octet-stream' | 'text/json', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
+
+        let localVarCredential: string | undefined;
+        // authentication (Bearer) required
+        localVarCredential = this.configuration.lookupCredential('Bearer');
+        if (localVarCredential) {
+            localVarHeaders = localVarHeaders.set('Authorization', 'Bearer ' + localVarCredential);
+        }
 
         let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
         if (localVarHttpHeaderAcceptSelected === undefined) {

@@ -841,6 +841,11 @@ function applyQueryFixes(odataString: string, systemRoles: APIBusinessRoleDTO[] 
 
   convertedString = castContainsFieldToString(convertedString, 'ExternalSystemUuid');
 
+  convertedString = convertedString.replace(
+    /contains\(ItSystemRightsHolderName,([^)]+)\)/gi,
+    '(contains(ItSystemRightsHolderName,$1) or contains(ItSystemRightsHolderCvr,$1))',
+  );
+
   systemRoles?.forEach((role) => {
     convertedString = convertedString.replace(
       new RegExp(`(\\w+\\()Roles[./]Role${role.id}(,.*?\\))`, 'i'),

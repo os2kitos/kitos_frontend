@@ -1,3 +1,4 @@
+import { fromCommaSeparatedString, toCommaSeparatedString } from '../../helpers/array.helpers';
 import {
   mapRoleAssignmentsToEmails,
   mapRoleAssignmentsToUserFullNames,
@@ -63,8 +64,14 @@ export const adaptDataProcessingRegistration = (value: any): DataProcessingRegis
     MainReferenceUserAssignedId: value.MainReferenceUserAssignedId,
     SystemNamesAsCsv: value.SystemNamesAsCsv,
     SystemUuidsAsCsv: value.SystemUuidsAsCsv,
-    DataProcessorNamesAsCsv: value.DataProcessorNamesAsCsv,
-    SubDataProcessorNamesAsCsv: value.SubDataProcessorNamesAsCsv,
+    DataProcessorNamesAsCsv: formatOrganizationNamesAndCvrs(
+      value.DataProcessorNamesAsCsv,
+      value.DataProcessorCvrsAsCsv,
+    ),
+    SubDataProcessorNamesAsCsv: formatOrganizationNamesAndCvrs(
+      value.SubDataProcessorNamesAsCsv,
+      value.SubDataProcessorCvrsAsCsv,
+    ),
     TransferToInsecureThirdCountries: mapTransferToInsecureThirdCountries(value.TransferToInsecureThirdCountries),
     BasisForTransfer: value.BasisForTransfer,
     BasisForTransferUuid: value.basisForTransferUuid,
@@ -87,4 +94,13 @@ export const adaptDataProcessingRegistration = (value: any): DataProcessingRegis
     ResponsibleOrgUnitName: value.ResponsibleOrgUnitName,
     ResponsibleOrgUnitUuid: value.ResponsibleOrgUnitUuid,
   };
+};
+
+const formatOrganizationNamesAndCvrs = (names: string | undefined, cvrs: string | undefined): string => {
+  if (!names) return '';
+  if (!cvrs) return names;
+  const nameList = fromCommaSeparatedString(names);
+  const cvrList = fromCommaSeparatedString(cvrs);
+  const namesWithOptionalCvrs = nameList.map((name, i) => (cvrList[i] ? `${name} (${cvrList[i]})` : name));
+  return toCommaSeparatedString(namesWithOptionalCvrs);
 };

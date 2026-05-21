@@ -68,7 +68,7 @@ export class ITSystemEffects {
         return this.httpClient
           .get<OData>(
             `/odata/ItSystems?$expand=BusinessType($select=Name),` +
-              `BelongsTo($select=Name,Disabled),` +
+              `BelongsTo($select=Name,Disabled,Cvr),` +
               `TaskRefs($select=Description,TaskKey),` +
               `Parent($select=Name,Disabled),` +
               `Organization($select=Id,Name),` +
@@ -291,6 +291,11 @@ function applyQueryFixes(odataString: string): string {
 
   fixedOdataString = castContainsFieldToString(fixedOdataString, 'Uuid');
   fixedOdataString = castContainsFieldToString(fixedOdataString, 'ExternalUuid');
+
+  fixedOdataString = fixedOdataString.replace(
+    /contains\(BelongsTo\/Name,([^)]+)\)/gi,
+    '(contains(BelongsTo/Name,$1) or contains(BelongsTo/Cvr,$1))',
+  );
 
   const lastChangedByUserSearchedProperties = ['Name', 'LastName'];
   fixedOdataString = replaceQueryByMultiplePropertyContains(

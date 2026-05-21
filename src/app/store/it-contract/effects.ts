@@ -759,6 +759,7 @@ function applyQueryFixes(odataString: string, roles: APIBusinessRoleDTO[] | unde
       /contains\(DataProcessingAgreements,(.*?)\)/,
       'DataProcessingAgreements/any(c: contains(c/DataProcessingRegistrationName,$1))',
     )
+    .replace(/contains\(SupplierName,([^)]+)\)/gi, '(contains(SupplierName,$1) or contains(SupplierCvr,$1))')
     .replace('ItSystemUsageUuidsAsCsv', 'ItSystemUsagesSystemUuidCsv');
   roles?.forEach((role) => {
     convertedString = convertedString.replace(
