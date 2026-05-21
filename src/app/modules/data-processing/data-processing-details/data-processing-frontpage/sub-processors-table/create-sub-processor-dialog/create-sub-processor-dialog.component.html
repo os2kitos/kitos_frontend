@@ -8,6 +8,8 @@
         formName="subprocessor"
         data-cy="subprocessor-dropdown"
         valueField="uuid"
+        itemDescriptionField="cvr"
+        [includeItemDescription]="true"
         [data$]="organizations$"
         (filterChange)="searchOrganizations($event)"
       ></app-connected-dropdown>
