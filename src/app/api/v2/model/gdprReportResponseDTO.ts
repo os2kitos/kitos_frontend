@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 import { APIYesNoDontKnowChoice } from './yesNoDontKnowChoice';
+import { APIYesNoDontKnowIrrelevantChoice } from './yesNoDontKnowIrrelevantChoice';
 import { APIHostingChoice } from './hostingChoice';
 import { APIRiskLevelChoice } from './riskLevelChoice';
 
@@ -24,7 +25,7 @@ export interface APIGdprReportResponseDTO {
     dataProcessingAgreementConcluded?: boolean;
     linkToDirectory?: boolean;
     sensitiveDataTypes?: Array<string> | null;
-    riskAssessment?: APIYesNoDontKnowChoice;
+    riskAssessment?: APIYesNoDontKnowIrrelevantChoice;
     riskAssessmentDate?: string | null;
     plannedRiskAssessmentDate?: string | null;
     preRiskAssessment?: APIRiskLevelChoice;

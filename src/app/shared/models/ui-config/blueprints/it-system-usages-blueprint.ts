@@ -130,6 +130,10 @@ export const ItSystemUsageUiBluePrint = {
         conductedRiskAssessment: {
           text: $localize`Foretaget risikovurdering`,
         },
+        riskAssessmentResult: {
+          text: $localize`Hvad viste den seneste risikovurdering?`,
+          disableByDefault: true,
+        },
         dpiaConducted: {
           text: $localize`Gennemført DPIA / Konsekvensanalyse`,
         },

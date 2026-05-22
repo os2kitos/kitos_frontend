@@ -16,11 +16,8 @@ import {
 } from 'src/app/shared/models/it-system-usage/gdpr/risk-assessment-result';
 import { SimpleLink } from 'src/app/shared/models/SimpleLink.model';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
-import {
-  YesNoDontKnowOption,
-  mapToYesNoDontKnowEnum,
-  yesNoDontKnowOptions,
-} from 'src/app/shared/models/yes-no-dont-know.model';
+import { YesNoDontKnowIrrelevantOption, mapToYesNoDontKnowIrrelevantEnum, yesNoDontKnowIrrelevantOptions } from 'src/app/shared/models/yes-no-dont-know-irrelevant.model';
+import { yesNoDontKnowOptions } from 'src/app/shared/models/yes-no-dont-know.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { selectITSystemUsageFieldPermissions, selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors';
@@ -78,12 +75,12 @@ export class GdprRiskAssessmentSectionComponent extends BaseAccordionComponent i
     selectITSystemUsageEnableGdprConductedRiskAssessment,
   );
 
-  public readonly yesNoDontKnowOptions = yesNoDontKnowOptions;
+  public readonly yesNoDontKnowIrrelevantOptions = yesNoDontKnowIrrelevantOptions;
   public readonly riskAssessmentResultOptions = riskAssessmentResultOptions;
   public readonly riskAssessmentFormGroup = new FormGroup(
     {
       plannedDateControl: new FormControl<Date | undefined>(undefined),
-      yesNoDontKnowControl: new FormControl<YesNoDontKnowOption | undefined>(undefined),
+      riskAssessmentConductedControl: new FormControl<YesNoDontKnowIrrelevantOption | undefined>(undefined),
       conductedDateControl: new FormControl<Date | undefined>(undefined),
       assessmentResultControl: new FormControl<RiskAssessmentResultOptions | undefined>({
         value: undefined,
@@ -123,7 +120,7 @@ export class GdprRiskAssessmentSectionComponent extends BaseAccordionComponent i
     this.currentGdpr$.subscribe((gdpr) => {
       this.riskAssessmentFormGroup.patchValue({
         plannedDateControl: gdpr.plannedRiskAssessmentDate ? new Date(gdpr.plannedRiskAssessmentDate) : undefined,
-        yesNoDontKnowControl: mapToYesNoDontKnowEnum(gdpr.riskAssessmentConducted),
+        riskAssessmentConductedControl: mapToYesNoDontKnowIrrelevantEnum(gdpr.riskAssessmentConducted),
         conductedDateControl: gdpr.riskAssessmentConductedDate ? new Date(gdpr.riskAssessmentConductedDate) : undefined,
         assessmentResultControl: mapRiskAssessmentEnum(gdpr.riskAssessmentResult ?? undefined),
         notesControl: gdpr.riskAssessmentNotes,

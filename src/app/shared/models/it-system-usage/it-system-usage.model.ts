@@ -8,6 +8,10 @@ import {
 } from '../helpers/read-model-role-assignments';
 import { LifeCycleStatus, mapLifeCycleStatus } from '../life-cycle-status.model';
 import { mapGridNumberOfExpectedUsers, NumberOfExpectedUsersGrid } from '../number-of-expected-users.model';
+import {
+  mapToYesNoDontKnowIrrelevantEnum,
+  YesNoDontKnowIrrelevantOption,
+} from '../yes-no-dont-know-irrelevant.model';
 import { mapFromCapitalizedStringToYesNoDontKnowEnum, YesNoDontKnowOption } from '../yes-no-dont-know.model';
 import { mapCapitalizedStringToYesNoIrrelevantEnum } from '../yes-no-irrelevant.model';
 import { mapToYesNoPartiallyEnum, YesNoPartiallyOption } from '../yes-no-partially.model';
@@ -18,6 +22,7 @@ import {
   IsDataProcessingAgreementRequired,
   mapIsDataProcessingAgreementRequired,
 } from './gdpr/is-data-processing-agreement-required.model';
+import { mapGridRiskAssessmentEnum, RiskAssessmentResultGridOptions } from './gdpr/risk-assessment-result';
 
 export interface ITSystemUsage {
   //ngrx requires the id field to have lowercase 'id' name
@@ -79,6 +84,8 @@ export interface ITSystemUsage {
   Note: string;
   RiskAssessmentDate: Date;
   PlannedRiskAssessmentDate: Date;
+  RiskAssessmentResult: RiskAssessmentResultGridOptions | undefined;
+  RiskAssessmentConducted: YesNoDontKnowIrrelevantOption | undefined;
   UserCount: NumberOfExpectedUsersGrid | undefined;
   Roles: RoleAssignmentsMap;
   RoleEmails: RoleAssignmentEmailsMaps;
@@ -167,6 +174,7 @@ export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
     ActiveArchivePeriodEndDate: value.ActiveArchivePeriodEndDate,
     RiskSupervisionDocumentationName: value.RiskSupervisionDocumentationName,
     RiskSupervisionDocumentationUrl: value.RiskSupervisionDocumentationUrl,
+    RiskAssessmentConducted: mapToYesNoDontKnowIrrelevantEnum(value.RiskAssessmentConducted),
     LinkToDirectoryName: value.LinkToDirectoryName,
     LinkToDirectoryUrl: value.LinkToDirectoryUrl,
     HostedAt: mapGridHostedAt(value.HostedAt),
@@ -209,6 +217,7 @@ export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
     Note: value.Note,
     RiskAssessmentDate: value.RiskAssessmentDate,
     PlannedRiskAssessmentDate: value.PlannedRiskAssessmentDate,
+    RiskAssessmentResult: mapGridRiskAssessmentEnum(value.RiskAssessmentResult),
     UserCount: mapGridNumberOfExpectedUsers(value.UserCount),
     ItSystemCategoriesName: value.ItSystemCategoriesName,
     Roles: mapRoleAssignmentsToUserFullNames(value.RoleAssignments),

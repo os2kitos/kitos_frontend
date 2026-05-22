@@ -22,8 +22,8 @@
           text="Foretaget risikovurdering"
           i18n-text
           [formGroup]="riskAssessmentFormGroup"
-          formName="yesNoDontKnowControl"
-          [data]="yesNoDontKnowOptions"
+          formName="riskAssessmentConductedControl"
+          [data]="yesNoDontKnowIrrelevantOptions"
           (valueChange)="patchGdpr({ riskAssessmentConducted: $event })"
           data-cy="risk-assessment-dropdown"
         ></app-dropdown>

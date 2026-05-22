@@ -168,6 +168,8 @@ export const selectITSystemUsageEnableGdprPlannedRiskAssessmentDate =
   createItSystemUsageGdprFieldSelector('plannedRiskAssessmentDate');
 export const selectITSystemUsageEnableGdprConductedRiskAssessment =
   createItSystemUsageGdprFieldSelector('conductedRiskAssessment');
+export const selectITSystemUsageEnableGdprRiskAssessmentResult =
+  createItSystemUsageGdprFieldSelector('riskAssessmentResult');
 export const selectITSystemUsageEnableGdprDpiaConducted = createItSystemUsageGdprFieldSelector('dpiaConducted');
 export const selectITSystemUsageEnableGdprRetentionPeriod = createItSystemUsageGdprFieldSelector('retentionPeriod');
 

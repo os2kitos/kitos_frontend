@@ -80,6 +80,7 @@ import {
   selectITSystemUsageEnableGdprPlannedRiskAssessmentDate,
   selectITSystemUsageEnableGdprPurpose,
   selectITSystemUsageEnableGdprRetentionPeriod,
+  selectITSystemUsageEnableGdprRiskAssessmentResult,
   selectITSystemUsageEnableGdprTechnicalPrecautions,
   selectITSystemUsageEnableGdprUserSupervision,
   selectITSystemUsageEnableGeneralPurpose,
@@ -343,10 +344,19 @@ export class GridUIConfigService {
         .pipe(shouldEnable([UsageFields.SensitiveDataLevelsAsCsv])),
       this.store
         .select(selectITSystemUsageEnableGdprConductedRiskAssessment)
-        .pipe(shouldEnable([UsageFields.RiskAssessmentDate, UsageFields.RiskSupervisionDocumentationName])),
+        .pipe(
+          shouldEnable([
+            UsageFields.RiskAssessmentDate,
+            UsageFields.RiskSupervisionDocumentationName,
+            UsageFields.RiskAssessmentConducted,
+          ]),
+        ),
       this.store
         .select(selectITSystemUsageEnableGdprPlannedRiskAssessmentDate)
         .pipe(shouldEnable([UsageFields.PlannedRiskAssessmentDate])),
+      this.store
+        .select(selectITSystemUsageEnableGdprRiskAssessmentResult)
+        .pipe(shouldEnable([UsageFields.RiskAssessmentResult])),
       this.store.select(selectITSystemUsageEnableGeneralPurpose).pipe(shouldEnable([UsageFields.GeneralPurpose])),
       this.store.select(selectITSystemUsageEnableGdprPurpose).pipe(shouldEnable([UsageFields.ProcessingPurpose])),
       this.store.select(selectITSystemUsageEnableGdprHostedAt).pipe(shouldEnable([UsageFields.HostedAt])),
@@ -505,6 +515,10 @@ export class GridUIConfigService {
       this.store
         .select(selectITSystemUsageEnableGdprPlannedRiskAssessmentDate)
         .pipe(shouldEnable([GdprFields.PLANNED_RISK_ASSESSMENT_DATE])),
+
+      this.store
+        .select(selectITSystemUsageEnableGdprRiskAssessmentResult)
+        .pipe(shouldEnable([GdprFields.PRE_RISK_ASSESSMENT_NAME])),
 
       this.store
         .select(selectITSystemUsageEnableGdprDpiaConducted)

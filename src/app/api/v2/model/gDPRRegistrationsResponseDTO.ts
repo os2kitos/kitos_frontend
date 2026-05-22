@@ -12,6 +12,7 @@
 import { APIIsDataProcessingAgreementRequiredChoice } from './isDataProcessingAgreementRequiredChoice';
 import { APIYesNoDontKnowChoice } from './yesNoDontKnowChoice';
 import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
+import { APIYesNoDontKnowIrrelevantChoice } from './yesNoDontKnowIrrelevantChoice';
 import { APITechnicalPrecautionChoice } from './technicalPrecautionChoice';
 import { APIDataSensitivityLevelChoice } from './dataSensitivityLevelChoice';
 import { APIHostingChoice } from './hostingChoice';
@@ -34,7 +35,7 @@ export interface APIGDPRRegistrationsResponseDTO {
     userSupervision?: APIYesNoDontKnowChoice;
     userSupervisionDate?: string | null;
     userSupervisionDocumentation?: APISimpleLinkDTO;
-    riskAssessmentConducted?: APIYesNoDontKnowChoice;
+    riskAssessmentConducted?: APIYesNoDontKnowIrrelevantChoice;
     riskAssessmentConductedDate?: string | null;
     riskAssessmentResult?: APIRiskLevelChoice;
     riskAssessmentDocumentation?: APISimpleLinkDTO;

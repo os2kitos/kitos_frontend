@@ -1,4 +1,5 @@
 import { APIGdprReportResponseDTO } from 'src/app/api/v2';
+import { mapToYesNoDontKnowIrrelevantEnum } from '../../yes-no-dont-know-irrelevant.model';
 import { mapToYesNoDontKnowEnum, YesNoDontKnowOption } from '../../yes-no-dont-know.model';
 import { HostedAt, mapHostedAt } from './hosted-at.model';
 import { mapPreRiskAssessmentEnum, PreRiskAssessment } from './pre-risk-assessment.model';
@@ -45,7 +46,7 @@ export function adaptGdprReport(dto: APIGdprReportResponseDTO): GdprReport {
     dataProcessingAgreementConcluded: dto.dataProcessingAgreementConcluded,
     linkToDirectory: dto.linkToDirectory,
     sensitiveDataTypes: dto.sensitiveDataTypes?.join(', ') ?? '',
-    riskAssessment: mapToYesNoDontKnowEnum(dto.riskAssessment),
+    riskAssessment: mapToYesNoDontKnowIrrelevantEnum(dto.riskAssessment),
     riskAssessmentDate: dto.riskAssessmentDate ?? undefined,
     plannedRiskAssessmentDate: dto.plannedRiskAssessmentDate ?? undefined,
     preRiskAssessment: mapPreRiskAssessmentEnum(dto.preRiskAssessment ?? undefined),

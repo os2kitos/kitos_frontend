@@ -280,6 +280,7 @@ export * from './userWithCrossOrganizationalRightsResponseDTO';
 export * from './userWithOrganizationResponseDTO';
 export * from './yearSegmentChoice';
 export * from './yesNoDontKnowChoice';
+export * from './yesNoDontKnowIrrelevantChoice';
 export * from './yesNoIrrelevantChoice';
 export * from './yesNoPartiallyChoice';
 export * from './yesNoUndecidedChoice';

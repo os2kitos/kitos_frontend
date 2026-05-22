@@ -418,6 +418,7 @@ model/userWithCrossOrganizationalRightsResponseDTO.ts
 model/userWithOrganizationResponseDTO.ts
 model/yearSegmentChoice.ts
 model/yesNoDontKnowChoice.ts
+model/yesNoDontKnowIrrelevantChoice.ts
 model/yesNoIrrelevantChoice.ts
 model/yesNoPartiallyChoice.ts
 model/yesNoUndecidedChoice.ts
