@@ -11,13 +11,14 @@
  */
 
 
-export type APIYearMonthIntervalOption = 'Half_yearly' | 'Yearly' | 'Every_second_year' | 'Other' | 'Undecided';
+export type APIYearMonthIntervalOption = 'Half_yearly' | 'Yearly' | 'Every_second_year' | 'Other' | 'Undecided' | 'Every_third_year';
 
 export const APIYearMonthIntervalOption = {
     HalfYearly: 'Half_yearly' as APIYearMonthIntervalOption,
     Yearly: 'Yearly' as APIYearMonthIntervalOption,
     EverySecondYear: 'Every_second_year' as APIYearMonthIntervalOption,
     Other: 'Other' as APIYearMonthIntervalOption,
-    Undecided: 'Undecided' as APIYearMonthIntervalOption
+    Undecided: 'Undecided' as APIYearMonthIntervalOption,
+    EveryThirdYear: 'Every_third_year' as APIYearMonthIntervalOption
 };
 

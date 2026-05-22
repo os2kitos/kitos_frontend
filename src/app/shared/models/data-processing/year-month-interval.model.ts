@@ -9,6 +9,7 @@ export enum YearMonthIntervalEnum {
   HalfYearly = 'Half_yearly',
   Yearly = 'Yearly',
   EverySecondYear = 'Every_second_year',
+  EveryThirdYear = 'Every_third_year',
   Other = 'Other',
   Undecided = 'Undecided',
 }
@@ -17,6 +18,7 @@ export const yearMonthIntervalOptions: YearMonthInterval[] = [
   { name: $localize`Halvårligt`, value: YearMonthIntervalEnum.HalfYearly },
   { name: $localize`Årligt`, value: YearMonthIntervalEnum.Yearly },
   { name: $localize`Hver andet år`, value: YearMonthIntervalEnum.EverySecondYear },
+  { name: $localize`Hvert tredje år`, value: YearMonthIntervalEnum.EveryThirdYear },
   { name: $localize`Andet`, value: YearMonthIntervalEnum.Other },
 ];
 

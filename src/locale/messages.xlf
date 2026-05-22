@@ -6026,6 +6026,9 @@
       <trans-unit id="6959125562012930761" datatype="html">
         <source>Kræver system databehandleraftale</source>
       </trans-unit>
+      <trans-unit id="2828316376928374361" datatype="html">
+        <source>Hvert tredje år</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

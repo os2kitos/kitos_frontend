@@ -7873,6 +7873,10 @@
         <source>Styret via lovgivning</source>
         <target state="new">Styret via lovgivning</target>
       </trans-unit>
+      <trans-unit id="2828316376928374361" datatype="html">
+        <source>Hvert tredje år</source>
+        <target state="new">Hvert tredje år</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
