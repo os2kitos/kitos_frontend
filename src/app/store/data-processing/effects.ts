@@ -239,7 +239,7 @@ export class DataProcessingEffects {
         const countries = existingCountries ? [...existingCountries] : [];
         countries.push(country);
         const countryUuids = countries.map((country) => country.uuid);
-        const transferToInsecureThirdCountries = APIYesNoUndecidedOption.No;
+        const transferToInsecureThirdCountries = APIYesNoUndecidedOption.Yes;
         return of(
           DataProcessingActions.patchDataProcessing({
             general: { transferToInsecureThirdCountries, insecureCountriesSubjectToDataTransferUuids: countryUuids },
@@ -258,7 +258,7 @@ export class DataProcessingEffects {
           .filter((country) => country.uuid !== countryUuid)
           .map((country) => country.uuid);
         const transferToInsecureThirdCountries =
-          listWithoutCountry.length > 0 ? APIYesNoUndecidedOption.No : APIYesNoUndecidedOption.Yes;
+          listWithoutCountry.length > 0 ? APIYesNoUndecidedOption.Yes : APIYesNoUndecidedOption.No;
         return of(
           DataProcessingActions.patchDataProcessing({
             general: {
@@ -302,7 +302,7 @@ export class DataProcessingEffects {
       switchMap(({ subprocessor, existingSubProcessors }) => {
         const subProcessors = existingSubProcessors ? [...existingSubProcessors] : [];
         const mappedSubProcessors = mapSubDataProcessors(subProcessors);
-        const hasSubDataProcessors = APIYesNoUndecidedOption.No;
+        const hasSubDataProcessors = APIYesNoUndecidedOption.Yes;
         mappedSubProcessors.push(subprocessor);
         return of(
           DataProcessingActions.patchDataProcessing({
@@ -323,7 +323,7 @@ export class DataProcessingEffects {
         );
         const mappedSubProcessors = mapSubDataProcessors(listWithoutSubProcessor);
         const hasSubDataProcessors =
-          mappedSubProcessors.length > 0 ? APIYesNoUndecidedOption.No : APIYesNoUndecidedOption.Yes;
+          mappedSubProcessors.length > 0 ? APIYesNoUndecidedOption.Yes : APIYesNoUndecidedOption.No;
         return of(
           DataProcessingActions.patchDataProcessing({
             general: { hasSubDataProcessors, subDataProcessors: mappedSubProcessors },
