@@ -28,5 +28,6 @@ export interface APIDataProcessingRegistrationGeneralDataWriteRequestDTO {
     subDataProcessors?: Array<APIDataProcessorRegistrationSubDataProcessorWriteRequestDTO> | null;
     mainContractUuid?: string | null;
     responsibleOrganizationUnitUuid?: string | null;
+    enforceInvalidity?: boolean | null;
 }
 

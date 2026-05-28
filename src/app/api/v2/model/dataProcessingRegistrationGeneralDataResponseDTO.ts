@@ -14,6 +14,7 @@ import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 import { APIYesNoUndecidedChoice } from './yesNoUndecidedChoice';
 import { APIYesNoIrrelevantChoice } from './yesNoIrrelevantChoice';
 import { APIShallowOrganizationResponseDTO } from './shallowOrganizationResponseDTO';
+import { APIDataProcessingResgistrationValidityDTO } from './dataProcessingResgistrationValidityDTO';
 
 
 export interface APIDataProcessingRegistrationGeneralDataResponseDTO { 
@@ -24,11 +25,11 @@ export interface APIDataProcessingRegistrationGeneralDataResponseDTO {
     agreementConcludedAt?: string | null;
     basisForTransfer?: APIIdentityNamePairResponseDTO;
     transferToInsecureThirdCountries?: APIYesNoUndecidedChoice;
-    insecureCountriesSubjectToDataTransfer: Array<APIIdentityNamePairResponseDTO>;
-    dataProcessors: Array<APIShallowOrganizationResponseDTO>;
+    insecureCountriesSubjectToDataTransfer: Array<APIIdentityNamePairResponseDTO> | null;
+    dataProcessors: Array<APIShallowOrganizationResponseDTO> | null;
     hasSubDataProcessors?: APIYesNoUndecidedChoice;
-    subDataProcessors: Array<APIDataProcessorRegistrationSubDataProcessorResponseDTO>;
-    valid: boolean;
+    subDataProcessors: Array<APIDataProcessorRegistrationSubDataProcessorResponseDTO> | null;
+    validity: APIDataProcessingResgistrationValidityDTO;
     mainContract?: APIIdentityNamePairResponseDTO;
     associatedContracts?: Array<APIIdentityNamePairResponseDTO> | null;
     responsibleOrganizationUnit?: APIIdentityNamePairResponseDTO;

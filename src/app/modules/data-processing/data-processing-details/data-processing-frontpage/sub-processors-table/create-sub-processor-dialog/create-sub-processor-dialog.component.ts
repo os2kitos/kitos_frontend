@@ -148,10 +148,10 @@ export class CreateSubProcessorDialogComponent extends BaseComponent implements 
       .pipe(first())
       .subscribe((subprocessors) => {
         if (this.isEdit) {
-          this.store.dispatch(DataProcessingActions.patchDataProcessingSubProcessor(request, subprocessors));
+          this.store.dispatch(DataProcessingActions.patchDataProcessingSubProcessor(request, subprocessors ?? []));
           return;
         }
-        this.store.dispatch(DataProcessingActions.addDataProcessingSubProcessor(request, subprocessors));
+        this.store.dispatch(DataProcessingActions.addDataProcessingSubProcessor(request, subprocessors ?? []));
       });
   }
 

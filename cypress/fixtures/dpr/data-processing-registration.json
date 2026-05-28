@@ -39,7 +39,10 @@
     ],
     "hasSubDataProcessors": "No",
     "subDataProcessors": null,
-    "valid": true,
+    "validity": {
+      "valid": true,
+      "enforceInvalidity": false
+    },
     "mainContract": null,
     "associatedContracts": [
       {

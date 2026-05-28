@@ -44,15 +44,26 @@
           (valueChange)="patchFrontPage({ general: { dataResponsibleRemark: $event } })"
         ></app-textarea>
       }
-      @if (statusEnabled$ | async) {
-        <app-textbox
-          text="Status"
-          i18n-text
-          data-cy="dpr-status"
-          [formGroup]="frontpageFormGroup"
-          formName="status"
-        ></app-textbox>
-      }
+      <app-standard-vertical-content-grid>
+        @if (statusEnabled$ | async) {
+          <app-textbox
+            text="Status"
+            i18n-text
+            data-cy="dpr-status"
+            [formGroup]="frontpageFormGroup"
+            formName="status"
+          ></app-textbox>
+
+          <app-checkbox
+            text="Gennemtving deaktivering"
+            i18n-text
+            labelPosition="after"
+            [formGroup]="frontpageFormGroup"
+            formName="enforceInvalidity"
+            (valueChange)="patchFrontPage({ general: { enforceInvalidity: $event } })"
+          ></app-checkbox>
+        }
+      </app-standard-vertical-content-grid>
       @if (lastChangedByEnabled$ | async) {
         <app-textbox
           text="Sidst redigeret: Bruger"
@@ -73,6 +84,7 @@
           >
         </app-datepicker>
       }
+
       @if (responsibleUnitEnabled$ | async) {
         <app-org-unit-select
           text="Ansvarlig organisationsenhed"

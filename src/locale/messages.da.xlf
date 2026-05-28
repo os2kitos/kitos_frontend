@@ -7877,6 +7877,22 @@
         <source>Hvert tredje år</source>
         <target state="new">Hvert tredje år</target>
       </trans-unit>
+      <trans-unit id="4971147359373783437" datatype="html">
+        <source>Gennemtving deaktivering</source>
+        <target state="new">Gennemtving deaktivering</target>
+      </trans-unit>
+      <trans-unit id="9001377840803074775" datatype="html">
+        <source>Der er gennemtvunget inaktivitet</source>
+        <target state="new">Der er gennemtvunget inaktivitet</target>
+      </trans-unit>
+      <trans-unit id="697483343074377619" datatype="html">
+        <source>Link til risikovurdering</source>
+        <target state="new">Link til risikovurdering</target>
+      </trans-unit>
+      <trans-unit id="2565200191881896388" datatype="html">
+        <source>Hvad viste den seneste risikovurdering</source>
+        <target state="new">Hvad viste den seneste risikovurdering</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -11,13 +11,13 @@
  */
 
 
-export type APIYesNoDontKnowIrrelevantChoice = 'No' | 'Yes' | 'DontKnow' | 'Irrelevant' | 'Undecided';
+export type APIYesNoDontKnowIrrelevantChoice = 'No' | 'Yes' | 'DontKnow' | 'Undecided' | 'Irrelevant';
 
 export const APIYesNoDontKnowIrrelevantChoice = {
     No: 'No' as APIYesNoDontKnowIrrelevantChoice,
     Yes: 'Yes' as APIYesNoDontKnowIrrelevantChoice,
     DontKnow: 'DontKnow' as APIYesNoDontKnowIrrelevantChoice,
-    Irrelevant: 'Irrelevant' as APIYesNoDontKnowIrrelevantChoice,
-    Undecided: 'Undecided' as APIYesNoDontKnowIrrelevantChoice
+    Undecided: 'Undecided' as APIYesNoDontKnowIrrelevantChoice,
+    Irrelevant: 'Irrelevant' as APIYesNoDontKnowIrrelevantChoice
 };
 

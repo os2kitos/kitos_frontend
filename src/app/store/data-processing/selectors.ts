@@ -11,7 +11,7 @@ export const selectAll = createSelector(selectDataProcessingState, dataProcessin
 export const selectTotal = createSelector(selectDataProcessingState, (state) => state.total);
 export const selectDataProcessingGridLoading = createSelector(
   selectDataProcessingState,
-  (state) => state.isLoadingDataProcessingsQuery
+  (state) => state.isLoadingDataProcessingsQuery,
 );
 export const selectDataProcessingGridState = createSelector(selectDataProcessingState, (state) => state.gridState);
 export const selectPreviousGridState = createSelector(selectDataProcessingState, (state) => state.previousGridState);
@@ -20,7 +20,7 @@ export const selectDataProcessingGridData = createSelector(selectAll, selectTota
 export const selectDataProcessingGridColumns = createSelector(selectDataProcessingState, (state) => state.gridColumns);
 export const selectDataProcessingRoleColumns = createSelector(
   selectDataProcessingState,
-  (state) => state.gridRoleColumns
+  (state) => state.gridRoleColumns,
 );
 
 export const selectOverviewRolesCache = createSelector(selectDataProcessingState, (state) => state.overviewRoles);
@@ -31,92 +31,92 @@ export const selectDataProcessing = createSelector(selectDataProcessingState, (s
 
 export const selectDataProcessingUuid = createSelector(
   selectDataProcessingState,
-  (state) => state.dataProcessing?.uuid
+  (state) => state.dataProcessing?.uuid,
 );
 export const selectDataProcessingName = createSelector(selectDataProcessing, (dataProcessing) => dataProcessing?.name);
 
 export const selectDataProcessingTransferToCountries = createSelector(
   selectDataProcessing,
-  (dataProcessing) => dataProcessing?.general.insecureCountriesSubjectToDataTransfer
+  (dataProcessing) => dataProcessing?.general.insecureCountriesSubjectToDataTransfer,
 );
 export const selectDataProcessingProcessors = createSelector(
   selectDataProcessing,
-  (dataProcessing) => dataProcessing?.general.dataProcessors
+  (dataProcessing) => dataProcessing?.general.dataProcessors,
 );
 export const selectDataProcessingSubProcessors = createSelector(
   selectDataProcessing,
-  (dataProcessing) => dataProcessing?.general.subDataProcessors
+  (dataProcessing) => dataProcessing?.general.subDataProcessors,
 );
 export const selectDataProcessingSystems = createSelector(
   selectDataProcessing,
-  (dataProcessing) => dataProcessing?.systemUsages
+  (dataProcessing) => dataProcessing?.systemUsages,
 );
 export const selectDataProcessingExternalReferences = createSelector(
   selectDataProcessing,
-  (dataProcessing) => dataProcessing?.externalReferences
+  (dataProcessing) => dataProcessing?.externalReferences,
 );
 export const selectDataProcessingItContacts = createSelector(
   selectDataProcessing,
-  (dataProcessing) => dataProcessing?.general
+  (dataProcessing) => dataProcessing?.general,
 );
 export const selectDataProcessingMainContract = createSelector(
   selectDataProcessing,
-  (dataProcessing) => dataProcessing?.general.mainContract
+  (dataProcessing) => dataProcessing?.general.mainContract,
 );
 export const selectDataProcessingAssociatedContracts = createSelector(
   selectDataProcessing,
-  (dataProcessing) => dataProcessing?.general.associatedContracts
+  (dataProcessing) => dataProcessing?.general.associatedContracts,
 );
 export const selectDataProcessingIsValid = createSelector(
   selectDataProcessing,
-  (dataProcessing) => dataProcessing?.general.valid
+  (dataProcessing) => dataProcessing?.general.validity.valid,
 );
 
 export const selectDataProcessingHasReadPermissions = createSelector(
   selectDataProcessingState,
-  (state) => state.permissions?.read
+  (state) => state.permissions?.read,
 );
 export const selectDataProcessingHasModifyPermissions = createSelector(
   selectDataProcessingState,
-  (state) => state.permissions?.modify
+  (state) => state.permissions?.modify,
 );
 export const selectDataProcessingHasDeletePermissions = createSelector(
   selectDataProcessingState,
-  (state) => state.permissions?.delete
+  (state) => state.permissions?.delete,
 );
 export const selectDataProcessingFieldPermissions = memoize((field: string) =>
   createSelector(selectDataProcessingState, (state) =>
     state.permissions?.fieldPermissions?.fields
       ? FieldPermissionsService.hasPermission(state.permissions.fieldPermissions.fields, field)
-      : false
-  )
+      : false,
+  ),
 );
 
 export const selectDataProcessingHasCreateCollectionPermissions = createSelector(
   selectDataProcessingState,
-  (state) => state.collectionPermissions?.create
+  (state) => state.collectionPermissions?.create,
 );
 
 export const selectDataProcessingOversightOptions = createSelector(
   selectDataProcessing,
-  (state) => state?.oversight?.oversightOptions
+  (state) => state?.oversight?.oversightOptions,
 );
 export const selectDataProcessingOversightDates = createSelector(
   selectDataProcessing,
-  (state) => state?.oversight?.oversightDates
+  (state) => state?.oversight?.oversightDates,
 );
 
 export const selectDataProcessingLastSeenGridConfig = createSelector(
   selectDataProcessingState,
-  (state) => state.lastSeenGridConfig
+  (state) => state.lastSeenGridConfig,
 );
 
 export const selectDataProcessingRights = createSelector(
   selectDataProcessing,
-  (dataProcessing) => dataProcessing?.roles
+  (dataProcessing) => dataProcessing?.roles,
 );
 
 export const selectDataProcessingRightUuidPairs = createSelector(
   selectDataProcessingRights,
-  mapToRoleAssignmentsRequests
+  mapToRoleAssignmentsRequests,
 );

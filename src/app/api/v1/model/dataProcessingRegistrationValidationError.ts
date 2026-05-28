@@ -11,9 +11,10 @@
  */
 
 
-export type APIDataProcessingRegistrationValidationError = 'MainContractNotActive';
+export type APIDataProcessingRegistrationValidationError = 'MainContractNotActive' | 'EnforcedInvalidity';
 
 export const APIDataProcessingRegistrationValidationError = {
-    MainContractNotActive: 'MainContractNotActive' as APIDataProcessingRegistrationValidationError
+    MainContractNotActive: 'MainContractNotActive' as APIDataProcessingRegistrationValidationError,
+    EnforcedInvalidity: 'EnforcedInvalidity' as APIDataProcessingRegistrationValidationError
 };
 
