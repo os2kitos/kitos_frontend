@@ -6029,17 +6029,23 @@
       <trans-unit id="2828316376928374361" datatype="html">
         <source>Hvert tredje år</source>
       </trans-unit>
+      <trans-unit id="9023620029886781717" datatype="html">
+        <source>Lokale KLE ID</source>
+      </trans-unit>
+      <trans-unit id="2565200191881896388" datatype="html">
+        <source>Hvad viste den seneste risikovurdering</source>
+      </trans-unit>
+      <trans-unit id="2745585017282963528" datatype="html">
+        <source>Lokale KLE navn</source>
+      </trans-unit>
+      <trans-unit id="697483343074377619" datatype="html">
+        <source>Link til risikovurdering</source>
+      </trans-unit>
       <trans-unit id="4971147359373783437" datatype="html">
         <source>Gennemtving deaktivering</source>
       </trans-unit>
       <trans-unit id="9001377840803074775" datatype="html">
         <source>Der er gennemtvunget inaktivitet</source>
-      </trans-unit>
-      <trans-unit id="2565200191881896388" datatype="html">
-        <source>Hvad viste den seneste risikovurdering</source>
-      </trans-unit>
-      <trans-unit id="697483343074377619" datatype="html">
-        <source>Link til risikovurdering</source>
       </trans-unit>
     </body>
   </file>

@@ -809,6 +809,8 @@ function applyQueryFixes(odataString: string, systemRoles: APIBusinessRoleDTO[] 
   let convertedString = odataString
     .replace(/(\w+\()ItSystemKLEIdsAsCsv(.*\))/, 'ItSystemTaskRefs/any(a: $1a/KLEId$2)')
     .replace(/(\w+\()ItSystemKLENamesAsCsv(.*\))/, 'ItSystemTaskRefs/any(b: $1b/KLEName$2)')
+    .replace(/(\w+\()LocalKleIdsAsCsv(.*\))/, 'LocalItSystemTaskRefs/any(la: $1la/KLEId$2)')
+    .replace(/(\w+\()LocalKleNamesAsCsv(.*\))/, 'LocalItSystemTaskRefs/any(lb: $1lb/KLEName$2)')
     .replace(
       new RegExp(`SensitiveDataLevelsAsCsv eq ('\\w+')`, 'i'),
       (_, p1) =>

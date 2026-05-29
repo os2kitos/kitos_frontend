@@ -49,6 +49,8 @@ export interface ITSystemUsage {
   ItSystemBusinessTypeName: string;
   ItSystemKLEIdsAsCsv: string;
   ItSystemKLENamesAsCsv: string;
+  LocalKleIdsAsCsv: string;
+  LocalKleNamesAsCsv: string;
   LocalReferenceTitle: string;
   LocalReferenceUrl: string;
   LocalReferenceDocumentId: string;
@@ -157,6 +159,8 @@ export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
     ItSystemBusinessTypeName: value.ItSystemBusinessTypeName,
     ItSystemKLEIdsAsCsv: value.ItSystemKLEIdsAsCsv,
     ItSystemKLENamesAsCsv: value.ItSystemKLENamesAsCsv,
+    LocalKleIdsAsCsv: value.LocalKleIdsAsCsv,
+    LocalKleNamesAsCsv: value.LocalKleNamesAsCsv,
     LocalReferenceTitle: value.LocalReferenceTitle,
     LocalReferenceUrl: value.LocalReferenceUrl,
     LocalReferenceDocumentId: value.LocalReferenceDocumentId,

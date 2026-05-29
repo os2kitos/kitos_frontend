@@ -86,6 +86,7 @@ import {
   selectITSystemUsageEnableGeneralPurpose,
   selectITSystemUsageEnableIncomingRelations,
   selectITSystemUsageEnableInheritedKle,
+  selectITSystemUsageEnableLocalKle,
   selectITSystemUsageEnableIsBusinessCritical,
   selectITSystemUsageEnableIsSociallyCritical,
   selectITSystemUsageEnableJournalPeriods,
@@ -414,6 +415,9 @@ export class GridUIConfigService {
       this.store
         .select(selectITSystemUsageEnableInheritedKle)
         .pipe(shouldEnable([UsageFields.ItSystemKLEIdsAsCsv, UsageFields.ItSystemKLENamesAsCsv])),
+      this.store
+        .select(selectITSystemUsageEnableLocalKle)
+        .pipe(shouldEnable([UsageFields.LocalKleIdsAsCsv, UsageFields.LocalKleNamesAsCsv])),
 
       //References
       this.store
