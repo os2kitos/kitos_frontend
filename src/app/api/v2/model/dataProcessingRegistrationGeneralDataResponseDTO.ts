@@ -13,8 +13,8 @@ import { APIDataProcessorRegistrationSubDataProcessorResponseDTO } from './dataP
 import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 import { APIYesNoUndecidedChoice } from './yesNoUndecidedChoice';
 import { APIYesNoIrrelevantChoice } from './yesNoIrrelevantChoice';
+import { APIDataProcessingRegistrationValidityDTO } from './dataProcessingRegistrationValidityDTO';
 import { APIShallowOrganizationResponseDTO } from './shallowOrganizationResponseDTO';
-import { APIDataProcessingResgistrationValidityDTO } from './dataProcessingResgistrationValidityDTO';
 
 
 export interface APIDataProcessingRegistrationGeneralDataResponseDTO { 
@@ -29,9 +29,9 @@ export interface APIDataProcessingRegistrationGeneralDataResponseDTO {
     dataProcessors: Array<APIShallowOrganizationResponseDTO> | null;
     hasSubDataProcessors?: APIYesNoUndecidedChoice;
     subDataProcessors: Array<APIDataProcessorRegistrationSubDataProcessorResponseDTO> | null;
-    validity: APIDataProcessingResgistrationValidityDTO;
+    validity: APIDataProcessingRegistrationValidityDTO;
     mainContract?: APIIdentityNamePairResponseDTO;
-    associatedContracts?: Array<APIIdentityNamePairResponseDTO> | null;
+    associatedContracts: Array<APIIdentityNamePairResponseDTO> | null;
     responsibleOrganizationUnit?: APIIdentityNamePairResponseDTO;
 }
 

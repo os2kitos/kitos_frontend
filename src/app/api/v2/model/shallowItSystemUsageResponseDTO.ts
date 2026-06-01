@@ -9,12 +9,11 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIDataProcessingRegistrationValidationErrorChoice } from './dataProcessingRegistrationValidationErrorChoice';
 
 
-export interface APIDataProcessingResgistrationValidityDTO { 
-    valid: boolean;
-    enforceInvalidity: boolean;
-    validationErrors: Array<APIDataProcessingRegistrationValidationErrorChoice> | null;
+export interface APIShallowItSystemUsageResponseDTO { 
+    uuid: string;
+    name: string;
+    valid?: boolean;
 }
 

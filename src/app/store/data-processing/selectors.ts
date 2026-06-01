@@ -53,7 +53,7 @@ export const selectDataProcessingSystems = createSelector(
 );
 export const selectDataProcessingExternalReferences = createSelector(
   selectDataProcessing,
-  (dataProcessing) => dataProcessing?.externalReferences,
+  (dataProcessing) => dataProcessing?.externalReferences ?? [],
 );
 export const selectDataProcessingItContacts = createSelector(
   selectDataProcessing,
@@ -113,7 +113,7 @@ export const selectDataProcessingLastSeenGridConfig = createSelector(
 
 export const selectDataProcessingRights = createSelector(
   selectDataProcessing,
-  (dataProcessing) => dataProcessing?.roles,
+  (dataProcessing) => dataProcessing?.roles ?? undefined,
 );
 
 export const selectDataProcessingRightUuidPairs = createSelector(

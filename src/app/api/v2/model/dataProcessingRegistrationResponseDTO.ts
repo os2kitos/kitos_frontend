@@ -15,19 +15,20 @@ import { APIDataProcessingRegistrationGeneralDataResponseDTO } from './dataProce
 import { APIShallowOrganizationResponseDTO } from './shallowOrganizationResponseDTO';
 import { APIDataProcessingRegistrationOversightResponseDTO } from './dataProcessingRegistrationOversightResponseDTO';
 import { APIExternalReferenceDataResponseDTO } from './externalReferenceDataResponseDTO';
+import { APIShallowItSystemUsageResponseDTO } from './shallowItSystemUsageResponseDTO';
 
 
 export interface APIDataProcessingRegistrationResponseDTO { 
-    name: string;
+    name: string | null;
     uuid: string;
     createdBy: APIIdentityNamePairResponseDTO;
     lastModified: string;
     lastModifiedBy: APIIdentityNamePairResponseDTO;
     organizationContext: APIShallowOrganizationResponseDTO;
     general: APIDataProcessingRegistrationGeneralDataResponseDTO;
-    systemUsages: Array<APIIdentityNamePairResponseDTO>;
+    systemUsages: Array<APIShallowItSystemUsageResponseDTO> | null;
     oversight: APIDataProcessingRegistrationOversightResponseDTO;
-    roles: Array<APIRoleAssignmentResponseDTO>;
-    externalReferences: Array<APIExternalReferenceDataResponseDTO>;
+    roles: Array<APIRoleAssignmentResponseDTO> | null;
+    externalReferences: Array<APIExternalReferenceDataResponseDTO> | null;
 }
 

@@ -21,6 +21,7 @@ import { hasValidCache } from 'src/app/shared/helpers/date.helpers';
 import { contractsGridStateToAction } from 'src/app/shared/helpers/grid-filter.helpers';
 import { filterByValidCache } from 'src/app/shared/helpers/observable-helpers';
 import { replaceQueryByMultiplePropertyContains } from 'src/app/shared/helpers/odata-query.helpers';
+import { addSecondaryContainsField } from 'src/app/shared/helpers/odata-query.helpers';
 import { adaptITContract } from 'src/app/shared/models/it-contract/it-contract.model';
 import { PaymentTypes } from 'src/app/shared/models/it-contract/payment-types.model';
 import { OData } from 'src/app/shared/models/odata.model';
@@ -759,8 +760,8 @@ function applyQueryFixes(odataString: string, roles: APIBusinessRoleDTO[] | unde
       /contains\(DataProcessingAgreements,(.*?)\)/,
       'DataProcessingAgreements/any(c: contains(c/DataProcessingRegistrationName,$1))',
     )
-    .replace(/contains\(SupplierName,([^)]+)\)/gi, '(contains(SupplierName,$1) or contains(SupplierCvr,$1))')
     .replace('ItSystemUsageUuidsAsCsv', 'ItSystemUsagesSystemUuidCsv');
+  convertedString = addSecondaryContainsField(convertedString, 'SupplierName', 'SupplierCvr');
   roles?.forEach((role) => {
     convertedString = convertedString.replace(
       new RegExp(`(\\w+\\()Roles[./]Role${role.id}(,.*?\\))`, 'i'),

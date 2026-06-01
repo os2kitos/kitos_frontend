@@ -18,6 +18,7 @@ import { hasValidCache } from 'src/app/shared/helpers/date.helpers';
 import { usageGridStateToAction } from 'src/app/shared/helpers/grid-filter.helpers';
 import { findUnitParentUuids } from 'src/app/shared/helpers/hierarchy.helpers';
 import { castContainsFieldToString } from 'src/app/shared/helpers/odata-query.helpers';
+import { addSecondaryContainsField } from 'src/app/shared/helpers/odata-query.helpers';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { convertDataSensitivityLevelStringToNumberMap } from 'src/app/shared/models/it-system-usage/gdpr/data-sensitivity-level.model';
 import { adaptITSystemUsage, ITSystemUsage } from 'src/app/shared/models/it-system-usage/it-system-usage.model';
@@ -843,10 +844,7 @@ function applyQueryFixes(odataString: string, systemRoles: APIBusinessRoleDTO[] 
 
   convertedString = castContainsFieldToString(convertedString, 'ExternalSystemUuid');
 
-  convertedString = convertedString.replace(
-    /contains\(ItSystemRightsHolderName,([^)]+)\)/gi,
-    '(contains(ItSystemRightsHolderName,$1) or contains(ItSystemRightsHolderCvr,$1))',
-  );
+  convertedString = addSecondaryContainsField(convertedString, 'ItSystemRightsHolderName', 'ItSystemRightsHolderCvr');
 
   systemRoles?.forEach((role) => {
     convertedString = convertedString.replace(

@@ -10,15 +10,28 @@
       <app-native-table>
         <thead>
           <th i18n>Navn</th>
+        @if (systemUsageStatusEnabled$ | async){
+          <th i18n>Status</th>
+        }
         </thead>
         <tbody>
           @for (systemUsage of systemUsages$ | async; track systemUsage) {
             <tr>
               <td>
-                <app-content-space-between>
                   <app-details-page-link itemType="it-system-usage" [itemPath]="systemUsage.uuid">{{
                     systemUsage.name
                   }}</app-details-page-link>
+              </td>
+              <td>
+                <app-content-space-between>
+                  <div>
+                    @if (systemUsageStatusEnabled$ | async){
+                      <app-status-chip
+                        type="it-system-usage"
+                        [value]="systemUsage.valid"
+                      ></app-status-chip>
+                    }
+                  </div>
                   @if ((hasModifyPermissions$ | async) === true) {
                     <app-icon-button
                       (buttonClick)="onDeleteSystem(systemUsage.uuid)"

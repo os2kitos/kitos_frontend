@@ -8,6 +8,7 @@ import { catchError, map, mergeMap, of, switchMap } from 'rxjs';
 import { APIItSystemResponseDTO, ItSystemUsageMigrationV2Service, ItSystemV2Service } from 'src/app/api/v2';
 import { CATALOG_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-constants';
 import {
+  addSecondaryContainsField,
   castContainsFieldToString,
   replaceQueryByMultiplePropertyContains,
 } from 'src/app/shared/helpers/odata-query.helpers';
@@ -292,10 +293,7 @@ function applyQueryFixes(odataString: string): string {
   fixedOdataString = castContainsFieldToString(fixedOdataString, 'Uuid');
   fixedOdataString = castContainsFieldToString(fixedOdataString, 'ExternalUuid');
 
-  fixedOdataString = fixedOdataString.replace(
-    /contains\(BelongsTo\/Name,([^)]+)\)/gi,
-    '(contains(BelongsTo/Name,$1) or contains(BelongsTo/Cvr,$1))',
-  );
+  fixedOdataString = addSecondaryContainsField(fixedOdataString, 'BelongsTo/Name', 'BelongsTo/Cvr');
 
   const lastChangedByUserSearchedProperties = ['Name', 'LastName'];
   fixedOdataString = replaceQueryByMultiplePropertyContains(

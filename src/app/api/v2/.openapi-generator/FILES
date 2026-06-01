@@ -202,6 +202,7 @@ model/dataProcessingRegistrationOversightResponseDTO.ts
 model/dataProcessingRegistrationOversightWriteRequestDTO.ts
 model/dataProcessingRegistrationResponseDTO.ts
 model/dataProcessingRegistrationValidationErrorChoice.ts
+model/dataProcessingRegistrationValidityDTO.ts
 model/dataProcessingRegistrationWriteRequestDTO.ts
 model/dataProcessingResgistrationValidityDTO.ts
 model/dataProcessorRegistrationSubDataProcessorResponseDTO.ts
@@ -375,6 +376,7 @@ model/roleRecipientResponseDTO.ts
 model/roleRecipientWriteRequestDTO.ts
 model/scheduledNotificationWriteRequestDTO.ts
 model/sentNotificationResponseDTO.ts
+model/shallowItSystemUsageResponseDTO.ts
 model/shallowOrganizationResponseDTO.ts
 model/simpleConflictResponseDTO.ts
 model/simpleLinkDTO.ts
