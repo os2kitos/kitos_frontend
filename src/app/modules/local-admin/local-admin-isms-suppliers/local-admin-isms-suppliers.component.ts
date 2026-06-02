@@ -1,6 +1,7 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { first } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
@@ -20,6 +21,7 @@ import {
   selectOrganizationSuppliersLoading,
 } from 'src/app/store/organization/organization-suppliers/selectors';
 import { selectOrganizationHasModifyPermission } from 'src/app/store/organization/selectors';
+import { UserActions } from 'src/app/store/user-store/actions';
 
 @Component({
   selector: 'app-local-admin-isms-suppliers',
@@ -31,13 +33,19 @@ export class LocalAdminIsmsSuppliersComponent extends BaseComponent implements O
   constructor(
     private store: Store,
     private dialog: MatDialog,
+    private actions$: Actions,
   ) {
     super();
   }
 
   ngOnInit(): void {
-    this.store.dispatch(OrganizationSuppliersActions.getOrganizationSuppliers());
-    this.store.dispatch(OrganizationActions.getOrganizationPermissions());
+    this.refreshData();
+
+    this.subscriptions.add(
+      this.actions$.pipe(ofType(UserActions.resetOnOrganizationUpdate)).subscribe(() => {
+        this.refreshData();
+      }),
+    );
   }
 
   public gridColumns = [
@@ -79,6 +87,11 @@ export class LocalAdminIsmsSuppliersComponent extends BaseComponent implements O
 
   public onOpenAddDialog() {
     this.store.dispatch(OrganizationSuppliersActions.getAvailableOrganizationSuppliers());
+  }
+
+  private refreshData(): void {
+    this.store.dispatch(OrganizationSuppliersActions.getOrganizationSuppliers());
+    this.store.dispatch(OrganizationActions.getOrganizationPermissions());
   }
 
   public removeSupplier($event: ShallowOrganization) {
