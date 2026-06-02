@@ -3,4 +3,15 @@
 .bullet-list {
   margin-top: theme.$padding-small;
   margin-bottom: theme.$padding-small;
+  padding-left: 1.5em;
+
+  li {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 0.5em;
+
+    app-paragraph {
+      margin: 0;
+    }
+  }
 }
