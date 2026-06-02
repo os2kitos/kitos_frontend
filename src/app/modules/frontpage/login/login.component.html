@@ -8,27 +8,43 @@
     @if (ssoErrorCode$ | async; as ssoErrorCode) {
       <app-sso-error [ssoErrorCode]="ssoErrorCode"></app-sso-error>
     }
-    <div class="center-item">
-      <app-paragraph [dimmed]="true" i18n> eller </app-paragraph>
-    </div>
-    <app-textbox
-      [formGroup]="loginForm"
-      formName="email"
-      type="email"
-      showValidation="initial"
-      text="Email addresse"
-    ></app-textbox>
-    <app-textbox
-      text="Password"
-      [formGroup]="loginForm"
-      formName="password"
-      type="password"
-      showValidation="initial"
-      i18n-text
-    ></app-textbox>
-    <app-checkbox labelPosition="after" [formGroup]="loginForm" formName="remember" text="Log mig ikke ud" i18n-text>
-    </app-checkbox>
-    <app-button type="submit" [disabled]="disableLoginButton()" data-cy="login-button" i18n> Log ind</app-button>
-    <app-reset-password-text-link class="center-item"></app-reset-password-text-link>
+    @if (!showManualLogin) {
+      <div class="center-item">
+        <app-paragraph
+          class="manual-login-toggle"
+          (click)="showManualLogin = true"
+          [bold]="true"
+          data-cy="show-manual-login-text"
+          i18n
+        >
+          Prøv manuel login ved fejl
+        </app-paragraph>
+      </div>
+    }
+    @if (showManualLogin) {
+      <div class="center-item">
+        <app-paragraph [dimmed]="true" i18n> eller </app-paragraph>
+      </div>
+      <app-textbox
+        [formGroup]="loginForm"
+        formName="email"
+        type="email"
+        showValidation="initial"
+        text="Email adresse"
+        i18n-text
+      ></app-textbox>
+      <app-textbox
+        text="Password"
+        [formGroup]="loginForm"
+        formName="password"
+        type="password"
+        showValidation="initial"
+        i18n-text
+      ></app-textbox>
+      <app-checkbox labelPosition="after" [formGroup]="loginForm" formName="remember" text="Log mig ikke ud" i18n-text>
+      </app-checkbox>
+      <app-button type="submit" [disabled]="disableLoginButton()" data-cy="login-button" i18n> Log ind</app-button>
+      <app-reset-password-text-link class="center-item"></app-reset-password-text-link>
+    }
   </app-standard-vertical-content-grid>
 </form>

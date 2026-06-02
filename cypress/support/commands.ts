@@ -61,6 +61,7 @@ Cypress.Commands.add('login', (authorizeFixturePath = './shared/authorize.json')
   cy.intercept('/api/authorize/antiforgery', '"ABC"');
   cy.intercept('/api/authorize', { fixture: authorizeFixturePath }).as('authorize');
 
+  cy.getByDataCy('show-manual-login-text').click();
   cy.contains('Email').parent().find('input').type('test@test.com');
   cy.contains('Password').parent().find('input').type('123456');
   cy.getByDataCy('login-button').click();

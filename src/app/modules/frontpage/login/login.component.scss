@@ -8,3 +8,11 @@
   text-align: center;
   text-wrap: wrap;
 }
+
+.manual-login-toggle {
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.75;
+  }
+}
