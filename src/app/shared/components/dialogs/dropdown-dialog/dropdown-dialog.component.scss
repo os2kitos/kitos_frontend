@@ -7,9 +7,12 @@
 
   li {
     margin-bottom: 0.5em;
+    vertical-align: middle;
+    line-height: 1.5;
 
     app-paragraph {
       margin: 0;
+      display: inline;
     }
   }
 }
