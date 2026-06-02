@@ -4,6 +4,7 @@
   display: flex;
   gap: 12px;
   padding-top: theme.$padding-medium;
+  align-items: center;
 }
 
 :host ::ng-deep {
