@@ -7901,6 +7901,14 @@
         <source>Der er gennemtvunget inaktivitet</source>
         <target state="new">Der er gennemtvunget inaktivitet</target>
       </trans-unit>
+      <trans-unit id="7890295061763731705" datatype="html">
+        <source>Oprettet</source>
+        <target state="new">Oprettet</target>
+      </trans-unit>
+      <trans-unit id="1666740219531317475" datatype="html">
+        <source>Seneste login</source>
+        <target state="new">Seneste login</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
