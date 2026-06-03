@@ -7909,6 +7909,10 @@
         <source>Seneste login</source>
         <target state="new">Seneste login</target>
       </trans-unit>
+      <trans-unit id="6132592257892903826" datatype="html">
+        <source> Prøv manuel login ved fejl </source>
+        <target state="new"> Prøv manuel login ved fejl </target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -1,6 +1,7 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { first } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
@@ -12,6 +13,7 @@ import { LocalGridComponent } from 'src/app/shared/components/local-grid/local-g
 import { OverviewHeaderComponent } from 'src/app/shared/components/overview-header/overview-header.component';
 import { createGridActionColumn } from 'src/app/shared/models/grid-action-column.model';
 import { ShallowOrganization } from 'src/app/shared/models/organization/shallow-organization.model';
+import { resetOrganizationStateAction } from 'src/app/store/meta/actions';
 import { OrganizationActions } from 'src/app/store/organization/actions';
 import { OrganizationSuppliersActions } from 'src/app/store/organization/organization-suppliers/actions';
 import {
@@ -31,13 +33,19 @@ export class LocalAdminIsmsSuppliersComponent extends BaseComponent implements O
   constructor(
     private store: Store,
     private dialog: MatDialog,
+    private actions$: Actions,
   ) {
     super();
   }
 
   ngOnInit(): void {
-    this.store.dispatch(OrganizationSuppliersActions.getOrganizationSuppliers());
-    this.store.dispatch(OrganizationActions.getOrganizationPermissions());
+    this.refreshData();
+
+    this.subscriptions.add(
+      this.actions$.pipe(ofType(resetOrganizationStateAction)).subscribe(() => {
+        this.refreshData();
+      }),
+    );
   }
 
   public gridColumns = [
@@ -79,6 +87,11 @@ export class LocalAdminIsmsSuppliersComponent extends BaseComponent implements O
 
   public onOpenAddDialog() {
     this.store.dispatch(OrganizationSuppliersActions.getAvailableOrganizationSuppliers());
+  }
+
+  private refreshData(): void {
+    this.store.dispatch(OrganizationSuppliersActions.getOrganizationSuppliers());
+    this.store.dispatch(OrganizationActions.getOrganizationPermissions());
   }
 
   public removeSupplier($event: ShallowOrganization) {
