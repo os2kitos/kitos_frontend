@@ -1,4 +1,5 @@
 @use "mixins";
+@use "theme";
 
 .center-item {
   @include mixins.center-items-container;
@@ -9,10 +10,76 @@
   text-wrap: wrap;
 }
 
-.manual-login-toggle {
-  cursor: pointer;
 
-  &:hover {
-    opacity: 0.75;
+.manual-login-description {
+  text-align: center;
+  color: theme.$color-neutral-80;
+  font-size: 14px;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.manual-login-accordion {
+  margin-top: 8px;
+  // Remove the accordion's default card chrome so it blends with the login form
+  ::ng-deep .mat-expansion-panel:not([class*='mat-elevation-z']) {
+    box-shadow: none;
+    border: none;
+    background: transparent;
+  }
+
+  // Shrink the header height and centre the title + chevron together
+  ::ng-deep .mat-expansion-panel-header {
+    padding: 0 8px;
+    height: 38px;
+    min-height: 38px !important;
+    justify-content: center;
+    align-items: baseline;
+
+    &:hover {
+      background: transparent !important;
+    }
+  }
+
+  // Keep the content span tight so the chevron sits right next to the text
+  ::ng-deep .mat-expansion-panel-header .mat-content {
+    flex: 0 0 auto;
+    overflow: visible;
+  }
+
+  ::ng-deep .mat-expansion-panel-header-title {
+    flex: 0 0 auto;
+    margin-right: 8px;
+    align-items: center;
+  }
+
+  // Style the title text like a regular Kitos link: small, bold, primary blue
+  ::ng-deep .mat-expansion-panel-header-title .paragraph {
+    color: theme.$color-primary !important;
+    font-size: 14px !important;
+    font-weight: bold !important;
+    margin: 0;
+    line-height: 1;
+  }
+
+  // Match the chevron colour to the link text; vertically centre it with the title
+  ::ng-deep .mat-expansion-indicator {
+    display: flex;
+    align-items: center;
+    transform: translateY(-3px);
+  }
+  ::ng-deep .mat-expansion-indicator::after {
+    color: theme.$color-primary;
+  }
+
+  ::ng-deep .mat-expansion-panel-body {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  ::ng-deep .mat-expansion-panel-body app-reset-password-text-link {
+    margin-top: 8px;
   }
 }

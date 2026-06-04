@@ -11,7 +11,7 @@ describe('login', () => {
   it('shows error on failed login', () => {
     cy.intercept('/api/authorize/antiforgery', '"ABC"');
     cy.intercept('/api/Authorize', { statusCode: 401, fixture: './shared/authorize-401.json' });
-    cy.getByDataCy('show-manual-login-text').click();
+    cy.getByDataCy('accordion-header').click();
     cy.contains('Email').parent().find('input').type('test@test.com');
     cy.contains('Password').parent().find('input').type('123456');
     cy.getByDataCy('login-button').click();
@@ -42,11 +42,11 @@ describe('login', () => {
     cy.contains('Log ud').click();
 
     cy.contains('Du er nu logget ud');
-    cy.getByDataCy('show-manual-login-text').should('exist');
+    cy.getByDataCy('accordion-header').should('exist');
   });
 
   it('can authenticate with loading spinner', () => {
-    cy.getByDataCy('show-manual-login-text').should('exist');
+    cy.getByDataCy('accordion-header').should('exist');
 
     cy.intercept('/api/authorize', (req) => {
       req.reply({

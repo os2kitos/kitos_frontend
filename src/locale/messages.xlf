@@ -2342,17 +2342,11 @@
       <trans-unit id="4182570784522399250" datatype="html">
         <source>Rediger</source>
       </trans-unit>
-      <trans-unit id="6429720393055416101" datatype="html">
-        <source> eller </source>
-      </trans-unit>
       <trans-unit id="1431416938026210429" datatype="html">
         <source>Password</source>
       </trans-unit>
-      <trans-unit id="8924400491805013399" datatype="html">
-        <source>Log mig ikke ud</source>
-      </trans-unit>
-      <trans-unit id="7999400360003292845" datatype="html">
-        <source> Log ind</source>
+      <trans-unit id="6388882061374799898" datatype="html">
+        <source>Log ind</source>
       </trans-unit>
       <trans-unit id="4639924666969098557" datatype="html">
         <source>Uklassificeret SSO fejl</source>
@@ -6053,8 +6047,17 @@
       <trans-unit id="6017792095370304684" datatype="html">
         <source>Der skete en fejl ifm. tjek for forbindelsen til FK Organisation. Genindlæs venligst siden for at prøve igen.</source>
       </trans-unit>
-      <trans-unit id="6132592257892903826" datatype="html">
-        <source> Prøv manuel login ved fejl </source>
+      <trans-unit id="3259866161044628872" datatype="html">
+        <source> Brug manuel login, hvis din organisation ikke anvender SSO, eller hvis du har fået besked på at logge ind med email og password. </source>
+      </trans-unit>
+      <trans-unit id="3487984946687907387" datatype="html">
+        <source>Kan du ikke logge ind med SSO?</source>
+      </trans-unit>
+      <trans-unit id="3617720446026509047" datatype="html">
+        <source>Gemmer din session så du ikke logges ud automatisk.</source>
+      </trans-unit>
+      <trans-unit id="7259401532876698278" datatype="html">
+        <source>Forbliv logget ind</source>
       </trans-unit>
     </body>
   </file>

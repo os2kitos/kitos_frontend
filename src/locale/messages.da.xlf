@@ -13,9 +13,9 @@
         <source>Password</source>
         <target state="new">Password</target>
       </trans-unit>
-      <trans-unit id="7999400360003292845" datatype="html">
-        <source> Log ind</source>
-        <target state="new"> Log ind</target>
+      <trans-unit id="6388882061374799898" datatype="html">
+        <source>Log ind</source>
+        <target state="new">Log ind</target>
       </trans-unit>
       <trans-unit id="8256595798453816213" datatype="html">
         <source>Aftalefrister</source>
@@ -6427,14 +6427,6 @@
         <source> Hvad er Kitos?</source>
         <target state="new"> Hvad er Kitos?</target>
       </trans-unit>
-      <trans-unit id="6429720393055416101" datatype="html">
-        <source> eller </source>
-        <target state="new"> eller </target>
-      </trans-unit>
-      <trans-unit id="8924400491805013399" datatype="html">
-        <source>Log mig ikke ud</source>
-        <target state="new">Log mig ikke ud</target>
-      </trans-unit>
       <trans-unit id="2966213553381382988" datatype="html">
         <source> Glemt dit password? </source>
         <target state="new"> Glemt dit password? </target>
@@ -7909,9 +7901,18 @@
         <source>Seneste login</source>
         <target state="new">Seneste login</target>
       </trans-unit>
-      <trans-unit id="6132592257892903826" datatype="html">
-        <source> Prøv manuel login ved fejl </source>
-        <target state="new"> Prøv manuel login ved fejl </target>
+      <trans-unit id="3487984946687907387" datatype="html">
+        <source>Kan du ikke logge ind med SSO?</source>
+        <target state="new">Kan du ikke logge ind med SSO?</target>
+      </trans-unit>
+
+      <trans-unit id="7259401532876698278" datatype="html">
+        <source>Forbliv logget ind</source>
+        <target state="new">Forbliv logget ind</target>
+      </trans-unit>
+      <trans-unit id="3617720446026509047" datatype="html">
+        <source>Gemmer din session så du ikke logges ud automatisk.</source>
+        <target state="new">Gemmer din session så du ikke logges ud automatisk.</target>
       </trans-unit>
     </body>
   </file>

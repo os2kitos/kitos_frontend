@@ -72,6 +72,14 @@ yarn swagger           # Regenerate API clients from OpenAPI spec
 - Always run `yarn build` to verify compilation
 - Follow existing patterns in the codebase for consistency
 
+## Sign-off Checklist
+
+Before marking any task as done, always perform these steps in order:
+
+1. **`yarn lint`** — fix any new lint errors introduced by your changes.
+2. **`yarn i18n`** — extract any new `$localize` / `i18n` strings into `src/locale/messages.xlf` and merge them into `src/locale/messages.da.xlf`. This prevents "No translation found" build warnings. The generated `target` values will match the Danish source strings, which is correct.
+3. **`yarn build`** — verify the project compiles without errors or new warnings.
+
 ## UI Libraries
 
 - **Kendo UI** — grids, date pickers, dropdowns

@@ -2,11 +2,11 @@ import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { ParagraphComponent } from 'src/app/shared/components/paragraph/paragraph.component';
 import { Login } from 'src/app/shared/models/login.model';
 import { resetStateAction } from 'src/app/store/meta/actions';
 import { UserActions } from 'src/app/store/user-store/actions';
 import { selectSsoErrorCode } from 'src/app/store/user-store/selectors';
+import { AccordionComponent } from '../../../shared/components/accordion/accordion.component';
 import { ButtonComponent } from '../../../shared/components/buttons/button/button.component';
 import { CheckboxComponent } from '../../../shared/components/checkbox/checkbox.component';
 import { StandardVerticalContentGridComponent } from '../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
@@ -22,6 +22,7 @@ import { SsoErrorComponent } from './sso-error/sso-error.component';
   imports: [
     FormsModule,
     ReactiveFormsModule,
+    AccordionComponent,
     StandardVerticalContentGridComponent,
     SsoButtonComponent,
     SsoErrorComponent,
@@ -30,12 +31,9 @@ import { SsoErrorComponent } from './sso-error/sso-error.component';
     ButtonComponent,
     ResetPasswordTextLinkComponent,
     AsyncPipe,
-    ParagraphComponent,
   ],
 })
 export class LoginComponent {
-  public showManualLogin = false;
-
   public readonly loginForm = new FormGroup({
     email: new FormControl('', [Validators.email]),
     password: new FormControl(''),
