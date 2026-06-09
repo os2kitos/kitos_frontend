@@ -690,15 +690,11 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       style: 'uuid-to-name',
     },
     {
-      field: GridFields.TechnicalSystemTypeUuid,
-      dataField: GridFields.TechnicalSystemTypeName,
-      title: $localize`Teknisk systemtype`,
+      field: GridFields.TechnicalSystemTypeNamesAsCsv,
+      title: $localize`Teknisk systemtyper`,
       section: USAGE_SECTION_NAME,
       hidden: true,
       persistId: 'technicalSystemType',
-      extraFilter: 'choice-type',
-      extraData: 'it-system-usage_technical-system-type',
-      style: 'uuid-to-name',
     },
     {
       field: GridFields.IsSociallyCritical,

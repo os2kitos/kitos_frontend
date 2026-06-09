@@ -86,13 +86,13 @@ import {
   selectITSystemUsageEnableGeneralPurpose,
   selectITSystemUsageEnableIncomingRelations,
   selectITSystemUsageEnableInheritedKle,
-  selectITSystemUsageEnableLocalKle,
   selectITSystemUsageEnableIsBusinessCritical,
   selectITSystemUsageEnableIsSociallyCritical,
   selectITSystemUsageEnableJournalPeriods,
   selectITSystemUsageEnableLastEditedAt,
   selectITSystemUsageEnableLastEditedBy,
   selectITSystemUsageEnableLifeCycleStatus,
+  selectITSystemUsageEnableLocalKle,
   selectITSystemUsageEnableLocalReferences,
   selectITSystemUsageEnableOutgoingRelations,
   selectITSystemUsageEnableSelectContractToDetermineIfItSystemIsActive,
@@ -373,7 +373,7 @@ export class GridUIConfigService {
         .pipe(shouldEnable([UsageFields.IsDataProcessingAgreementRequired])),
       this.store
         .select(selectITSystemUsageEnableTechnicalSystemType)
-        .pipe(shouldEnable([UsageFields.TechnicalSystemTypeUuid])),
+        .pipe(shouldEnable([UsageFields.TechnicalSystemTypeNamesAsCsv])),
 
       //Organization
       this.store

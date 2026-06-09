@@ -2525,9 +2525,6 @@
       <trans-unit id="3244446524809192034" datatype="html">
         <source>Klassifikation af data i systemet</source>
       </trans-unit>
-      <trans-unit id="6123762912751952636" datatype="html">
-        <source>Teknisk systemtype</source>
-      </trans-unit>
       <trans-unit id="5340208750899970512" datatype="html">
         <source>IT System roller</source>
       </trans-unit>
@@ -6047,9 +6044,6 @@
       <trans-unit id="6017792095370304684" datatype="html">
         <source>Der skete en fejl ifm. tjek for forbindelsen til FK Organisation. Genindlæs venligst siden for at prøve igen.</source>
       </trans-unit>
-      <trans-unit id="3259866161044628872" datatype="html">
-        <source> Brug manuel login, hvis din organisation ikke anvender SSO, eller hvis du har fået besked på at logge ind med email og password. </source>
-      </trans-unit>
       <trans-unit id="3487984946687907387" datatype="html">
         <source>Kan du ikke logge ind med SSO?</source>
       </trans-unit>
@@ -6058,6 +6052,15 @@
       </trans-unit>
       <trans-unit id="7259401532876698278" datatype="html">
         <source>Forbliv logget ind</source>
+      </trans-unit>
+      <trans-unit id="8384286620027712249" datatype="html">
+        <source>Teknisk systemtyper</source>
+      </trans-unit>
+      <trans-unit id="1186571126953128683" datatype="html">
+        <source>Tekniske systemtyper</source>
+      </trans-unit>
+      <trans-unit id="1639312213164225055" datatype="html">
+        <source> Brug manuel login, hvis din organisation ikke anvender SSO,<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> eller hvis du har fået besked på at logge ind med email og password. </source>
       </trans-unit>
     </body>
   </file>

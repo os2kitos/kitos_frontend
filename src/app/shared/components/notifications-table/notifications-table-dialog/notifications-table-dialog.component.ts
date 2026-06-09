@@ -20,7 +20,7 @@ import {
 import {
   MultiSelectDropdownItem,
   mapEmailOptionToMultiSelectItem,
-  mapRegularOptionToMultiSelectItem,
+  mapRegularOptionToMultiSelectItemWithUuidValue,
   mapRoleOptionToMultiSelectItem,
 } from 'src/app/shared/models/dropdown-option.model';
 import { NotificationEntityType } from 'src/app/shared/models/notification-entity-types';
@@ -109,7 +109,7 @@ export class NotificationsTableDialogComponent extends BaseComponent implements 
     private readonly notificationService: NotificationService,
     private readonly dialogRef: MatDialogRef<NotificationsTableDialogComponent>,
     private readonly componentStore: NotificationsTableComponentStore,
-    private readonly store: Store
+    private readonly store: Store,
   ) {
     super();
     this.rootUrl = this.appRootUrlResolverService.resolveRootUrl();
@@ -117,10 +117,10 @@ export class NotificationsTableDialogComponent extends BaseComponent implements 
 
   ngOnInit(): void {
     this.receiverOptions = this.rolesOptions.map((option: APIRegularOptionResponseDTO) =>
-      mapRegularOptionToMultiSelectItem(option)
+      mapRegularOptionToMultiSelectItemWithUuidValue(option),
     );
     this.ccOptions = this.rolesOptions.map((option: APIRegularOptionResponseDTO) =>
-      mapRegularOptionToMultiSelectItem(option)
+      mapRegularOptionToMultiSelectItemWithUuidValue(option),
     );
 
     this.setupNotificationControls();
@@ -240,7 +240,7 @@ export class NotificationsTableDialogComponent extends BaseComponent implements 
 
   private onCreate(
     basePropertiesDto: APIBaseNotificationPropertiesWriteRequestDTO,
-    scheduledNotificationDto?: APIScheduledNotificationWriteRequestDTO
+    scheduledNotificationDto?: APIScheduledNotificationWriteRequestDTO,
   ) {
     if (scheduledNotificationDto) {
       this.saveScheduledNotification(scheduledNotificationDto);
@@ -251,7 +251,7 @@ export class NotificationsTableDialogComponent extends BaseComponent implements 
 
   private getScheduledNotificationDTO(
     basePropertiesDto: APIBaseNotificationPropertiesWriteRequestDTO,
-    notificationForm: FormGroup
+    notificationForm: FormGroup,
   ): APIScheduledNotificationWriteRequestDTO | undefined {
     const notificationControls = notificationForm.controls;
     const name = notificationControls['nameControl'].value;
@@ -355,13 +355,13 @@ export class NotificationsTableDialogComponent extends BaseComponent implements 
       notificationControls.fromDateControl.valueChanges.subscribe(() => {
         this.toggleShowDateOver28Tooltip();
         this.notificationForm.controls.toDateControl.updateValueAndValidity();
-      })
+      }),
     );
     this.subscriptions.add(
-      notificationControls.repetitionControl.valueChanges.subscribe(() => this.toggleShowDateOver28Tooltip())
+      notificationControls.repetitionControl.valueChanges.subscribe(() => this.toggleShowDateOver28Tooltip()),
     );
     notificationControls.toDateControl.validator = dateGreaterThanOrEqualControlValidator(
-      this.notificationForm.controls.fromDateControl
+      this.notificationForm.controls.fromDateControl,
     );
 
     if (this.notification) {
@@ -374,21 +374,22 @@ export class NotificationsTableDialogComponent extends BaseComponent implements 
       notificationControls.bodyControl.setValue(this.notification.body);
       notificationControls.notificationTypeControl.setValue(mapNotificationType(this.notification.notificationType));
       notificationControls.repetitionControl.setValue(
-        mapNotificationRepetitionFrequency(this.notification.repetitionFrequency ?? undefined)
+        mapNotificationRepetitionFrequency(this.notification.repetitionFrequency ?? undefined),
       );
 
       const emailRecipientsSet = new Set(
         this.notification.receivers?.emailRecipients?.map((option) => mapEmailOptionToMultiSelectItem(option, true)) ??
-          []
+          [],
       );
       const roleRecipientsSet = new Set(
-        this.notification.receivers?.roleRecipients?.map((option) => mapRoleOptionToMultiSelectItem(option, true)) ?? []
+        this.notification.receivers?.roleRecipients?.map((option) => mapRoleOptionToMultiSelectItem(option, true)) ??
+          [],
       );
       const emailCcsSet = new Set(
-        this.notification.cCs?.emailRecipients?.map((option) => mapEmailOptionToMultiSelectItem(option, true)) ?? []
+        this.notification.cCs?.emailRecipients?.map((option) => mapEmailOptionToMultiSelectItem(option, true)) ?? [],
       );
       const roleCcsSet = new Set(
-        this.notification.cCs?.roleRecipients?.map((option) => mapRoleOptionToMultiSelectItem(option, true)) ?? []
+        this.notification.cCs?.roleRecipients?.map((option) => mapRoleOptionToMultiSelectItem(option, true)) ?? [],
       );
 
       this.receiverOptions = Array.from(new Set([...this.receiverOptions, ...emailRecipientsSet]));

@@ -2,11 +2,12 @@ import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { filter, map } from 'rxjs';
+import { BehaviorSubject, filter, map } from 'rxjs';
 import {
   APIGeneralDataResponseDTO,
   APIGeneralDataUpdateRequestDTO,
   APIIdentityNamePairResponseDTO,
+  APIRegularOptionResponseDTO,
 } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { TooltipComponent } from 'src/app/shared/components/tooltip/tooltip.component';
@@ -18,6 +19,10 @@ import {
 } from 'src/app/shared/helpers/form.helpers';
 import { combineOR } from 'src/app/shared/helpers/observable-helpers';
 import { toBulletPoints } from 'src/app/shared/helpers/string.helpers';
+import {
+  MultiSelectDropdownItem,
+  mapRegularOptionToMultiSelectItem,
+} from 'src/app/shared/models/dropdown-option.model';
 import { itSystemUsageFields } from 'src/app/shared/models/field-permissions-blueprints.model';
 import {
   LifeCycleStatus,
@@ -81,6 +86,7 @@ import { CardHeaderComponent } from '../../../../../shared/components/card-heade
 import { CardComponent } from '../../../../../shared/components/card/card.component';
 import { DatePickerComponent } from '../../../../../shared/components/datepicker/datepicker.component';
 import { DropdownComponent } from '../../../../../shared/components/dropdowns/dropdown/dropdown.component';
+import { MultiSelectDropdownComponent } from '../../../../../shared/components/dropdowns/multi-select-dropdown/multi-select-dropdown.component';
 import { StatusChipComponent } from '../../../../../shared/components/status-chip/status-chip.component';
 import { TextAreaComponent } from '../../../../../shared/components/textarea/textarea.component';
 import { TextBoxComponent } from '../../../../../shared/components/textbox/textbox.component';
@@ -98,6 +104,7 @@ import { EditUrlSectionComponent } from '../edit-url-section/edit-url-section.co
     ReactiveFormsModule,
     TextBoxComponent,
     DropdownComponent,
+    MultiSelectDropdownComponent,
     TextAreaComponent,
     DatePickerComponent,
     AsyncPipe,
@@ -112,7 +119,9 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
       localCallName: new FormControl(''),
       localSystemId: new FormControl(''),
       systemVersion: new FormControl(''),
-      technicalSystemType: new FormControl<APIIdentityNamePairResponseDTO | undefined>(undefined),
+      technicalSystemTypes: new FormControl<MultiSelectDropdownItem<APIRegularOptionResponseDTO>[] | undefined>(
+        undefined,
+      ),
       numberOfExpectedUsers: new FormControl<NumberOfExpectedUsers | undefined>(undefined),
       dataClassification: new FormControl<APIIdentityNamePairResponseDTO | undefined>(undefined),
       notes: new FormControl<string | undefined>(undefined),
@@ -230,9 +239,12 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
     .select(selectRegularOptionTypes('it-system-usage_system-usage-criticality-level'))
     .pipe(filterNullish());
 
-  public readonly technicalSystemTypes$ = this.store
-    .select(selectRegularOptionTypes('it-system-usage_technical-system-type'))
-    .pipe(filterNullish());
+  public readonly technicalSystemTypeDropdownOptions$ = new BehaviorSubject<
+    MultiSelectDropdownItem<APIRegularOptionResponseDTO>[]
+  >([]);
+  public initialSelectedTechnicalSystemTypes: MultiSelectDropdownItem<APIRegularOptionResponseDTO>[] = [];
+
+  public readonly hasModifyPermission$ = this.store.select(selectITSystemUsageHasModifyPermission);
 
   public readonly dataClassificationTypes$ = this.store
     .select(selectRegularOptionTypes('it-system_usage-data-classification-type'))
@@ -265,6 +277,18 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
     this.store.dispatch(RegularOptionTypeActions.getOptions('it-system_usage-data-classification-type'));
     this.store.dispatch(RegularOptionTypeActions.getOptions('it-system-usage_system-usage-criticality-level'));
     this.store.dispatch(RegularOptionTypeActions.getOptions('it-system-usage_technical-system-type'));
+
+    this.subscriptions.add(
+      this.store
+        .select(selectRegularOptionTypes('it-system-usage_technical-system-type'))
+        .pipe(filterNullish())
+        .subscribe((options) => {
+          const dropdownItems: MultiSelectDropdownItem<APIRegularOptionResponseDTO>[] = options.map((option) =>
+            mapRegularOptionToMultiSelectItem(option),
+          );
+          this.technicalSystemTypeDropdownOptions$.next(dropdownItems);
+        }),
+    );
 
     this.disableFormsIfNoModifyPermission();
     this.setupFormValueChangeSubscriptions();
@@ -324,17 +348,21 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
         .select(selectItSystemUsageGeneral)
         .pipe(filterNullish())
         .subscribe((general) => {
+          const technicalSystemTypeItems = this.mapTechnicalSystemTypeDropdownItems(general.technicalSystemTypes ?? []);
+
           this.itSystemInformationForm.patchValue({
             purpose: general.purpose,
             localCallName: general.localCallName,
             localSystemId: general.localSystemId,
             systemVersion: general.systemVersion,
-            technicalSystemType: general.technicalSystemType,
+            technicalSystemTypes: technicalSystemTypeItems,
             numberOfExpectedUsers: mapNumberOfExpectedUsers(general.numberOfExpectedUsers ?? undefined),
             dataClassification: general.dataClassification,
             notes: general.notes,
             aiTechnology: mapToYesNoEnum(general.containsAITechnology),
           });
+
+          this.setupTechnicalSystemTypesControl(technicalSystemTypeItems);
 
           this.itSystemCriticalityForm.patchValue({
             isSociallyCritical: mapToYesNoDontKnowEnum(general.isSociallyCritical),
@@ -407,5 +435,24 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
 
   public resetCriticalityLevelDocumentation() {
     this.patchGeneral({ criticalityLevelDocumentation: undefined });
+  }
+
+  public patchTechnicalSystemTypes(selectedOptions: APIRegularOptionResponseDTO[]) {
+    const uuids = selectedOptions.map((option) => option.uuid);
+    this.patchGeneral({ technicalSystemTypeUuids: uuids });
+  }
+
+  private setupTechnicalSystemTypesControl(items: MultiSelectDropdownItem<APIRegularOptionResponseDTO>[]) {
+    this.initialSelectedTechnicalSystemTypes = items;
+  }
+
+  private mapTechnicalSystemTypeDropdownItems(
+    types: APIIdentityNamePairResponseDTO[],
+  ): MultiSelectDropdownItem<APIRegularOptionResponseDTO>[] {
+    return types.map((type) => ({
+      name: type.name,
+      value: { uuid: type.uuid, name: type.name, description: '' } as APIRegularOptionResponseDTO,
+      selected: true,
+    }));
   }
 }

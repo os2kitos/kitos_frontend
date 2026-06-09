@@ -8,10 +8,7 @@ import {
 } from '../helpers/read-model-role-assignments';
 import { LifeCycleStatus, mapLifeCycleStatus } from '../life-cycle-status.model';
 import { mapGridNumberOfExpectedUsers, NumberOfExpectedUsersGrid } from '../number-of-expected-users.model';
-import {
-  mapToYesNoDontKnowIrrelevantEnum,
-  YesNoDontKnowIrrelevantOption,
-} from '../yes-no-dont-know-irrelevant.model';
+import { mapToYesNoDontKnowIrrelevantEnum, YesNoDontKnowIrrelevantOption } from '../yes-no-dont-know-irrelevant.model';
 import { mapFromCapitalizedStringToYesNoDontKnowEnum, YesNoDontKnowOption } from '../yes-no-dont-know.model';
 import { mapCapitalizedStringToYesNoIrrelevantEnum } from '../yes-no-irrelevant.model';
 import { mapToYesNoPartiallyEnum, YesNoPartiallyOption } from '../yes-no-partially.model';
@@ -101,8 +98,7 @@ export interface ITSystemUsage {
   WebAccessibilityNotes: string | undefined;
   SystemUsageCriticalityLevelUuid: string | undefined;
   SystemUsageCriticalityLevelName: string | undefined;
-  TechnicalSystemTypeUuid: string | undefined;
-  TechnicalSystemTypeName: string | undefined;
+  TechnicalSystemTypeNamesAsCsv: string | undefined;
   IsSociallyCritical: YesNoDontKnowOption | undefined;
   CriticalityFieldsLastChanged: Date | undefined;
   IsDataProcessingAgreementRequired: IsDataProcessingAgreementRequired | undefined;
@@ -236,8 +232,7 @@ export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
     WebAccessibilityNotes: value.WebAccessibilityNotes,
     SystemUsageCriticalityLevelUuid: value.SystemUsageCriticalityLevelUuid,
     SystemUsageCriticalityLevelName: value.SystemUsageCriticalityLevelName,
-    TechnicalSystemTypeUuid: value.TechnicalSystemTypeUuid,
-    TechnicalSystemTypeName: value.TechnicalSystemTypeName,
+    TechnicalSystemTypeNamesAsCsv: value.TechnicalSystemTypeNamesAsCsv,
     IsSociallyCritical: mapFromCapitalizedStringToYesNoDontKnowEnum(value.IsSociallyCritical),
     CriticalityFieldsLastChanged: value.CriticalityFieldsLastChanged,
     IsDataProcessingAgreementRequired: mapIsDataProcessingAgreementRequired(value.IsDataProcessingAgreementRequired),

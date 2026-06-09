@@ -7853,9 +7853,9 @@
         <source>Behandlingsformål</source>
         <target state="new">Behandlingsformål</target>
       </trans-unit>
-      <trans-unit id="6123762912751952636" datatype="html">
-        <source>Teknisk systemtype</source>
-        <target state="new">Teknisk systemtype</target>
+      <trans-unit id="1186571126953128683" datatype="html">
+        <source>Tekniske systemtyper</source>
+        <target state="new">Tekniske systemtyper</target>
       </trans-unit>
       <trans-unit id="6959125562012930761" datatype="html">
         <source>Kræver system databehandleraftale</source>
@@ -7905,7 +7905,6 @@
         <source>Kan du ikke logge ind med SSO?</source>
         <target state="new">Kan du ikke logge ind med SSO?</target>
       </trans-unit>
-
       <trans-unit id="7259401532876698278" datatype="html">
         <source>Forbliv logget ind</source>
         <target state="new">Forbliv logget ind</target>
@@ -7917,6 +7916,10 @@
       <trans-unit id="8384286620027712249" datatype="html">
         <source>Teknisk systemtyper</source>
         <target state="new">Teknisk systemtyper</target>
+      </trans-unit>
+      <trans-unit id="1639312213164225055" datatype="html">
+        <source> Brug manuel login, hvis din organisation ikke anvender SSO,<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> eller hvis du har fået besked på at logge ind med email og password. </source>
+        <target state="new"> Brug manuel login, hvis din organisation ikke anvender SSO,<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> eller hvis du har fået besked på at logge ind med email og password. </target>
       </trans-unit>
     </body>
   </file>
