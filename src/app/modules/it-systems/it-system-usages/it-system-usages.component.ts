@@ -526,6 +526,18 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       persistId: 'incomingRelatedItSystemUsages',
     },
     {
+      field: GridFields.ItInterfaceIdsAsCsv,
+      title: $localize`Snitflade ID'er`,
+      section: RELATIONS_SECTION_NAME,
+      hidden: true,
+    },
+    {
+      field: GridFields.ItInterfaceVersionsAsCsv,
+      title: $localize`Snitflade versioner`,
+      section: RELATIONS_SECTION_NAME,
+      hidden: true,
+    },
+    {
       field: GridFields.AssociatedContractsNamesCsv,
       title: $localize`IT Kontrakter`,
       section: CONTRACT_SECTION_NAME,

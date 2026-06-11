@@ -6062,6 +6062,12 @@
       <trans-unit id="1639312213164225055" datatype="html">
         <source> Brug manuel login, hvis din organisation ikke anvender SSO,<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> eller hvis du har fået besked på at logge ind med email og password. </source>
       </trans-unit>
+      <trans-unit id="6140487118381407136" datatype="html">
+        <source>Snitflade versioner</source>
+      </trans-unit>
+      <trans-unit id="9154056184529721480" datatype="html">
+        <source>Snitflade ID&apos;er</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

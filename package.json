@@ -24,18 +24,6 @@
     "reset-api-urls": "find src/app/api -type f -exec sed -i 's/localhost:44300/kitos-dev.strongminds.dk/g' {} +"
   },
   "private": true,
-  "resolutions": {
-    "axios": "1.16.1",
-    "basic-ftp": "5.3.1",
-    "systeminformation": "5.31.6",
-    "postcss": "8.5.15",
-    "tmp": "0.2.7",
-    "ws": "8.21.0",
-    "qs": "6.15.2",
-    "webpack-dev-server": "5.2.4",
-    "brace-expansion": "5.0.6",
-    "uuid": "11.1.1"
-  },
   "dependencies": {
     "@angular/animations": "^20.3.23",
     "@angular/cdk": "20.2.14",

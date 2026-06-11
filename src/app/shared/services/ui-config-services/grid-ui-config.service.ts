@@ -88,6 +88,8 @@ import {
   selectITSystemUsageEnableInheritedKle,
   selectITSystemUsageEnableIsBusinessCritical,
   selectITSystemUsageEnableIsSociallyCritical,
+  selectITSystemUsageEnableItInterfaceIds,
+  selectITSystemUsageEnableItInterfaceVersions,
   selectITSystemUsageEnableJournalPeriods,
   selectITSystemUsageEnableLastEditedAt,
   selectITSystemUsageEnableLastEditedBy,
@@ -423,6 +425,12 @@ export class GridUIConfigService {
       this.store
         .select(selectITSystemUsageEnableLocalReferences)
         .pipe(shouldEnable([UsageFields.LocalReferenceTitle, UsageFields.LocalReferenceDocumentId])),
+
+      //Interfaces
+      this.store.select(selectITSystemUsageEnableItInterfaceIds).pipe(shouldEnable([UsageFields.ItInterfaceIdsAsCsv])),
+      this.store
+        .select(selectITSystemUsageEnableItInterfaceVersions)
+        .pipe(shouldEnable([UsageFields.ItInterfaceVersionsAsCsv])),
     ];
 
     return combineLatest(configObservables);

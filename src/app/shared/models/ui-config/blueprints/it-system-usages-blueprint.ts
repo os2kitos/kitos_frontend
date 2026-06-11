@@ -165,6 +165,16 @@ export const ItSystemUsageUiBluePrint = {
     },
     interfaces: {
       text: $localize`Udstillede snitflader`,
+      children: {
+        itInterfaceIds: {
+          text: $localize`Snitflade ID'er`,
+          disableByDefault: true,
+        },
+        itInterfaceVersions: {
+          text: $localize`Snitflade versioner`,
+          disableByDefault: true,
+        },
+      },
     },
     archiving: {
       text: $localize`Arkivering`,

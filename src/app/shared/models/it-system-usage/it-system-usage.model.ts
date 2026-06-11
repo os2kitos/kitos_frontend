@@ -102,6 +102,8 @@ export interface ITSystemUsage {
   IsSociallyCritical: YesNoDontKnowOption | undefined;
   CriticalityFieldsLastChanged: Date | undefined;
   IsDataProcessingAgreementRequired: IsDataProcessingAgreementRequired | undefined;
+  ItInterfaceIdsAsCsv: string;
+  ItInterfaceVersionsAsCsv: string;
 }
 
 function getParentItSystemLinkPaths(value: {
@@ -236,6 +238,8 @@ export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
     IsSociallyCritical: mapFromCapitalizedStringToYesNoDontKnowEnum(value.IsSociallyCritical),
     CriticalityFieldsLastChanged: value.CriticalityFieldsLastChanged,
     IsDataProcessingAgreementRequired: mapIsDataProcessingAgreementRequired(value.IsDataProcessingAgreementRequired),
+    ItInterfaceIdsAsCsv: value.ItInterfaceIdsAsCsv,
+    ItInterfaceVersionsAsCsv: value.ItInterfaceVersionsAsCsv,
   };
   return adaptedSystem;
 };

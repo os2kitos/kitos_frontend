@@ -205,6 +205,13 @@ const createItSystemUsageKleFieldSelector = (fieldKey: string) =>
 export const selectITSystemUsageEnableInheritedKle = createItSystemUsageKleFieldSelector('inheritedKle');
 export const selectITSystemUsageEnableLocalKle = createItSystemUsageKleFieldSelector('localKle');
 
+//IT system usage > Interfaces
+const createItSystemUsageInterfacesFieldSelector = (fieldKey: string) =>
+  createFieldOrGroupEnabledSelector(UIModuleConfigKey.ItSystemUsage, 'interfaces', fieldKey);
+export const selectITSystemUsageEnableItInterfaceIds = createItSystemUsageInterfacesFieldSelector('itInterfaceIds');
+export const selectITSystemUsageEnableItInterfaceVersions =
+  createItSystemUsageInterfacesFieldSelector('itInterfaceVersions');
+
 //IT contracts
 const createItContractsTabEnabledSelector = (tabKey: string) =>
   createTabEnabledSelector(UIModuleConfigKey.ItContract, tabKey);
