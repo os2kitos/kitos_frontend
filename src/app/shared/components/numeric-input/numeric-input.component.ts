@@ -3,9 +3,9 @@ import IMask from 'imask';
 import { BaseFormComponent } from '../../base/base-form.component';
 import { ONLY_DIGITS_REGEX } from '../../constants/regex-constants';
 
-import { MatFormField, MatLabel } from '@angular/material/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInput } from '@angular/material/input';
+import { MatFormField, MatLabel } from '@angular/material/select';
 
 @Component({
   selector: 'app-numeric-input',
@@ -29,7 +29,9 @@ export class NumericInputComponent extends BaseFormComponent<number | undefined>
   override formInputValueChange(event: Event) {
     const value = (event.target as HTMLInputElement).value;
     const newValue = this.convertEventValueToNumber(value);
-    super.formValueChange(newValue);
+    if (this.shouldDispatchValueChange(newValue)) {
+      super.formValueChange(newValue);
+    }
   }
 
   override clear() {
@@ -39,7 +41,17 @@ export class NumericInputComponent extends BaseFormComponent<number | undefined>
 
   public inputChanged(value: string) {
     const newValue = this.convertEventValueToNumber(value);
-    this.valueChange.emit(newValue);
+    if (this.shouldDispatchValueChange(newValue)) {
+      this.valueChange.emit(newValue);
+    }
+  }
+
+  private shouldDispatchValueChange(value: number | undefined): boolean {
+    if (value === undefined) {
+      return true;
+    }
+
+    return value >= this.minLength && value <= this.maxLength;
   }
 
   public ngAfterViewInit(): void {
