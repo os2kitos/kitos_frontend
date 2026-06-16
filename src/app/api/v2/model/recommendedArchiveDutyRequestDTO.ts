@@ -13,6 +13,9 @@ import { APIRecommendedArchiveDutyChoice } from './recommendedArchiveDutyChoice'
 
 
 export interface APIRecommendedArchiveDutyRequestDTO { 
+    /**
+     * Comment attached to the recommendation  Constraints:  - Only valid if \'Id\' is NOT null or \'Undecided\'
+     */
     comment?: string | null;
     id?: APIRecommendedArchiveDutyChoice;
 }

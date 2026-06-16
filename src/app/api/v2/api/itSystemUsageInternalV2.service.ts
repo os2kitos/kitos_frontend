@@ -29,20 +29,31 @@ import { Configuration }                                     from '../configurat
 
 
 export interface DeleteSingleItSystemUsageInternalV2DeleteItSystemUsageByOrganizationUuidAndSystemUuidRequestParams {
+    /**  */
     organizationUuid: string;
+    /**  */
     systemUuid: string;
 }
 
 export interface GetSingleItSystemUsageInternalV2GetItSystemUsagesRequestParams {
+    /** Required organization filter */
     organizationUuid?: string;
+    /** Query by systems with outgoing relations related to another system */
     relatedToSystemUuid?: string;
+    /** Query by system usages with outgoing relations to a specific system usage (more narrow search than using system id) */
     relatedToSystemUsageUuid?: string;
+    /** Query by contracts which are part of a system relation */
     relatedToContractUuid?: string;
     systemUuid?: string;
+    /** Query usages based on system name */
     systemNameContent?: string;
+    /** Include only changes which were LastModified (UTC) is equal to or greater than the provided value */
     changedSinceGtEq?: string;
+    /** Ordering property */
     orderByProperty?: APICommonOrderByProperty;
+    /** 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0 */
     page?: number;
+    /** Size of the page referred by \&#39;page\&#39;.  Range: [1,250] Default: 250. */
     pageSize?: number;
 }
 
@@ -51,6 +62,7 @@ export interface GetSingleItSystemUsageInternalV2GetRelationsRequestParams {
 }
 
 export interface GetSingleItSystemUsageInternalV2GetRoleAssignmentsRequestParams {
+    /**  */
     systemUsageUuid: string;
 }
 
@@ -125,6 +137,7 @@ export class ItSystemUsageInternalV2Service {
     }
 
     /**
+     * Deletes a system usage by organizationUuid and systemUuid.
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -193,6 +206,7 @@ export class ItSystemUsageInternalV2Service {
     }
 
     /**
+     * Low-payload search endpoint alternative to the public endpoint which returns full objects.  This one is a convenience endpoint for UI cases returning only   - Name   - Uuid   - Valid state of the local registration   - Deactivated state of the system master data
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -372,6 +386,7 @@ export class ItSystemUsageInternalV2Service {
     }
 
     /**
+     * Get roles assigned to the system usage
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.

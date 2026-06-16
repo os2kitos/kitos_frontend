@@ -12,7 +12,13 @@
 
 
 export interface APIExpectedUsersIntervalDTO { 
+    /**
+     * Optional lower bound.  If left unspecified, the interval has no lower bound.
+     */
     lowerBound?: number;
+    /**
+     * Optional upper bound  If left unspecified the interval has no upper bound.
+     */
     upperBound?: number | null;
 }
 

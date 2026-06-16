@@ -14,13 +14,31 @@ import { APILifeCycleStatusChoice } from './lifeCycleStatusChoice';
 
 
 export interface APIItSystemUsageValidityResponseDTO { 
+    /**
+     * Determines if the entity is considered valid. This is computed from ValidAccordingToValidityPeriod, ValidAccordingToLifeCycle and ValidAccordingToMainContract.
+     */
     valid?: boolean;
+    /**
+     * Determines if the entity is considered valid based on the validity period defined by ValidFrom and ValidTo
+     */
     validAccordingToValidityPeriod?: boolean;
+    /**
+     * Determines if the entity is considered valid based on the Life Cycle
+     */
     validAccordingToLifeCycle?: boolean;
+    /**
+     * Determines if the entity is considered valid based on the validity of the related contract.  Note: This will be true if there is no contract (NoContract state) or if the contract is active.  Consider using MainContractState for more detailed information.
+     */
     validAccordingToMainContract?: boolean;
     mainContractState?: APIMainContractStateChoice;
     lifeCycleStatus?: APILifeCycleStatusChoice;
+    /**
+     * If specified, the entity is valid from this date.
+     */
     validFrom?: string | null;
+    /**
+     * If specified, the entity is valid up until and including this date.
+     */
     validTo?: string | null;
 }
 

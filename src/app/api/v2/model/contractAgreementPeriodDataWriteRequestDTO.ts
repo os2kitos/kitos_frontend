@@ -12,11 +12,29 @@
 
 
 export interface APIContractAgreementPeriodDataWriteRequestDTO { 
+    /**
+     * If the agreement has a fixed duration, optionally define the years + months for which it is valid  Constraints:      - If DurationMonths/Years are defined then IsContinuous must be null or false
+     */
     durationYears?: number | null;
+    /**
+     * If the agreement has a fixed duration, optionally define the years + months for which it is valid  Constraints:      - If DurationMonths/Years are defined then IsContinuous must be null or false
+     */
     durationMonths?: number | null;
+    /**
+     * Determines if the agreement has no fixed duration  Constraints:      - If set to true, the DurationMonths/Years must be null
+     */
     isContinuous?: boolean;
+    /**
+     * Optional agreement extension option  Constraints:      - If changed from current state, the option type must be available in the organization
+     */
     extensionOptionsUuid?: string | null;
+    /**
+     * Determines how many of the agreement available extension options that have been used
+     */
     extensionOptionsUsed?: number;
+    /**
+     * The agreement cannot be revoked before this date
+     */
     irrevocableUntil?: string | null;
 }
 

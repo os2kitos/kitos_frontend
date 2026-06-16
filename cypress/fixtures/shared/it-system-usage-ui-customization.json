@@ -76,6 +76,10 @@
     {
       "key": "ItSystemUsages.gdpr",
       "enabled": true
+    },
+    {
+      "key": "ItSystemUsages.frontPage.hostedAt",
+      "enabled": true
     }
   ]
 }

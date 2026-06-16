@@ -13,7 +13,13 @@ import { APIPaymentResponseDTO } from './paymentResponseDTO';
 
 
 export interface APIContractPaymentsDataResponseDTO { 
+    /**
+     * External payments
+     */
     external: Array<APIPaymentResponseDTO>;
+    /**
+     * Internal payments
+     */
     internal: Array<APIPaymentResponseDTO>;
 }
 

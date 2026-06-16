@@ -13,11 +13,29 @@ import { APIItContractValidationErrorChoice } from './itContractValidationErrorC
 
 
 export interface APIContractValidityResponseDTO { 
+    /**
+     * Determines if the entity is considered valid. This is computed from both \"EnforcedValid\" as well as ValidAccordingToValidityPeriod.
+     */
     valid: boolean;
+    /**
+     * Determines if this entity has been forced into valid state even if context properties would dictate otherwise (e.g. no longer in use)
+     */
     enforcedValid: boolean;
+    /**
+     * If specified, the entity is valid from this date.
+     */
     validFrom?: string | null;
+    /**
+     * If specified, the entity is valid up until and including this date.
+     */
     validTo?: string | null;
+    /**
+     * Determines if the parent contract should be part of the contracts validation
+     */
     requireValidParent: boolean;
+    /**
+     * Reasons as to why the contract is considered to be invalid
+     */
     validationErrors?: Array<APIItContractValidationErrorChoice> | null;
 }
 

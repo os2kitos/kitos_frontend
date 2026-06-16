@@ -13,7 +13,13 @@
 
 export interface APIJournalPeriodResponseDTO { 
     archiveId: string;
+    /**
+     * Constraint StartDate must be less than or equal to EndDate
+     */
     startDate: string;
+    /**
+     * Constraint EndDate must be greater than or equal to StartDate
+     */
     endDate: string;
     approved: boolean;
     uuid: string;

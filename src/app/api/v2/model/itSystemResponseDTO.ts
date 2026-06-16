@@ -18,23 +18,62 @@ import { APILicensingAndCodeModelChoice } from './licensingAndCodeModelChoice';
 
 
 export interface APIItSystemResponseDTO { 
+    /**
+     * UUID for IT-System
+     */
     uuid: string;
+    /**
+     * External Uuid for IT-System
+     */
     externalUuid?: string | null;
     parentSystem?: APIIdentityNamePairResponseDTO;
+    /**
+     * Name of IT-System
+     */
     name: string;
+    /**
+     * Former name of IT-System (if any)
+     */
     formerName?: string | null;
+    /**
+     * Description
+     */
     description?: string | null;
+    /**
+     * User defined external references
+     */
     externalReferences: Array<APIExternalReferenceDataResponseDTO>;
+    /**
+     * List of KLE number representations as name and UUID pairs
+     */
     kle: Array<APIIdentityNamePairResponseDTO>;
+    /**
+     * Active status
+     */
     deactivated: boolean;
     businessType?: APIIdentityNamePairResponseDTO;
     rightsHolder?: APIShallowOrganizationResponseDTO;
+    /**
+     * Date of creation (on some legacy systems , this information is not available. If so, it will be null)
+     */
     created: string;
     createdBy: APIIdentityNamePairResponseDTO;
     recommendedArchiveDuty: APIRecommendedArchiveDutyResponseDTO;
+    /**
+     * A list of unique suppliers associated with each usage’s main contract.
+     */
     mainContractSuppliers: Array<APIShallowOrganizationResponseDTO>;
+    /**
+     * The licensing and code models used for this system.
+     */
     licensingAndCodeModels?: Array<APILicensingAndCodeModelChoice> | null;
+    /**
+     * Organizations using this IT-System
+     */
     usingOrganizations: Array<APIShallowOrganizationResponseDTO>;
+    /**
+     * UTC timestamp of latest modification
+     */
     lastModified: string;
     lastModifiedBy: APIIdentityNamePairResponseDTO;
     scope: APIRegistrationScopeChoice;

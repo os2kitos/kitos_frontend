@@ -12,8 +12,17 @@
 
 
 export interface APIGlobalRegularOptionResponseDTO { 
+    /**
+     * UUID which is unique within collection of entities of the same type
+     */
     uuid: string;
+    /**
+     * Human readable name of the entity
+     */
     name: string;
+    /**
+     * Extended description of the choice
+     */
     description: string;
     isEnabled?: boolean;
     isObligatory?: boolean;

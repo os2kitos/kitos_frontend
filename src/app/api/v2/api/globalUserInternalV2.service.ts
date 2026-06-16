@@ -46,8 +46,11 @@ export interface GetSingleGlobalUserInternalV2GetOrganizationsByUserUuidRequestP
 export interface GetSingleGlobalUserInternalV2GetUsersRequestParams {
     nameOrEmailQuery?: string;
     emailQuery?: string;
+    /** Generic fields available for ordering */
     orderByProperty?: APICommonOrderByProperty;
+    /** 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0 */
     page?: number;
+    /** Size of the page referred by \&#39;page\&#39;.  Range: [1,250] Default: 250. */
     pageSize?: number;
 }
 

@@ -13,8 +13,14 @@ import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 
 
 export interface APIItInterfaceDataResponseDTO { 
+    /**
+     * Optional description of the data
+     */
     description?: string | null;
     dataType?: APIIdentityNamePairResponseDTO;
+    /**
+     * UUID of the data description
+     */
     uuid?: string;
 }
 

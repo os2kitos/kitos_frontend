@@ -11,6 +11,9 @@
  */
 
 
+/**
+ * Represents the state of the main contract for an IT system usage
+ */
 export type APIMainContractStateChoice = 'NoContract' | 'Active' | 'Inactive';
 
 export const APIMainContractStateChoice = {

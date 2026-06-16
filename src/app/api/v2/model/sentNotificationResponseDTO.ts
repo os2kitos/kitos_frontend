@@ -12,6 +12,9 @@
 
 
 export interface APISentNotificationResponseDTO { 
+    /**
+     * Notification sent time
+     */
     sentDate?: string;
 }
 

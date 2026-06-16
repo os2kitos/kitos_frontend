@@ -12,7 +12,13 @@
 
 
 export interface APIOrganizationUsageWriteRequestDTO { 
+    /**
+     * UUIds of Organization units using this system
+     */
     usingOrganizationUnitUuids?: Array<string> | null;
+    /**
+     * Out of all of the using organization units, this one is responsible for the system within the organization.  Constraint: The uuid provided must also be present in UsingOrganizationUnitUuids
+     */
     responsibleOrganizationUnitUuid?: string | null;
 }
 

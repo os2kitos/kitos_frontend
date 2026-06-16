@@ -13,6 +13,9 @@ import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 
 
 export interface APIIncomingSystemRelationResponseDTO { 
+    /**
+     * UUID of the system relation registration
+     */
     uuid: string;
     relationInterface?: APIIdentityNamePairResponseDTO;
     associatedContract?: APIIdentityNamePairResponseDTO;

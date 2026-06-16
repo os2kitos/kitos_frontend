@@ -13,12 +13,27 @@ import { APIPaymentAuditStatus } from './paymentAuditStatus';
 
 
 export interface APIPaymentRequestDTO { 
+    /**
+     * Optionally defined the organization unit responsible for the payment  Constraints:      - Organization unit must belong to the same organization as the contract
+     */
     organizationUnitUuid?: string | null;
+    /**
+     * Part of payment which covers acquisition
+     */
     acquisition?: number;
+    /**
+     * Part of payment which covers operations
+     */
     operation?: number;
+    /**
+     * Part of payment which is not classified as either operations or acquisition
+     */
     other?: number;
     accountingEntry?: string | null;
     auditStatus?: APIPaymentAuditStatus;
+    /**
+     * Defines the date at which the payment was audited
+     */
     auditDate?: string | null;
     note?: string | null;
 }

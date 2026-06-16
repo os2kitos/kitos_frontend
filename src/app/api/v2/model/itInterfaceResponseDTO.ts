@@ -16,21 +16,54 @@ import { APIShallowOrganizationResponseDTO } from './shallowOrganizationResponse
 
 
 export interface APIItInterfaceResponseDTO { 
+    /**
+     * UUID for IT-Interface
+     */
     uuid: string;
     exposedBySystem?: APIIdentityNamePairResponseDTO;
+    /**
+     * Name of IT-Interface
+     */
     name: string;
+    /**
+     * Identifier for IT-Interface
+     */
     interfaceId?: string | null;
+    /**
+     * Version signifier for IT-Interface
+     */
     version?: string | null;
+    /**
+     * General description of the IT-Interface
+     */
     description?: string | null;
+    /**
+     * Internal notes regarding the IT-System (usually written by Global Admin)
+     */
     notes?: string | null;
+    /**
+     * Url reference for further information
+     */
     urlReference?: string | null;
+    /**
+     * Active status
+     */
     deactivated: boolean;
+    /**
+     * Date of creation. (on some legacy systems , this information is not available. If so, it will be null)
+     */
     created: string;
     createdBy: APIIdentityNamePairResponseDTO;
+    /**
+     * UTC timestamp of latest modification
+     */
     lastModified: string;
     lastModifiedBy: APIIdentityNamePairResponseDTO;
     scope: APIRegistrationScopeChoice;
     itInterfaceType?: APIIdentityNamePairResponseDTO;
+    /**
+     * Optional interface data descriptions
+     */
     data: Array<APIItInterfaceDataResponseDTO>;
     organizationContext: APIShallowOrganizationResponseDTO;
     rightsHolder: APIShallowOrganizationResponseDTO;

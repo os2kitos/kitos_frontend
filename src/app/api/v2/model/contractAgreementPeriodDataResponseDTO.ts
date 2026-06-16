@@ -13,11 +13,26 @@ import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 
 
 export interface APIContractAgreementPeriodDataResponseDTO { 
+    /**
+     * If the agreement has a fixed duration, optionally define the years + months for which it is valid
+     */
     durationYears?: number | null;
+    /**
+     * If the agreement has a fixed duration, optionally define the years + months for which it is valid
+     */
     durationMonths?: number | null;
+    /**
+     * Determines if the agreement has no fixed duration
+     */
     isContinuous?: boolean | null;
     extensionOptions?: APIIdentityNamePairResponseDTO;
+    /**
+     * Determines how many of the agreement available extension options that have been used
+     */
     extensionOptionsUsed: number;
+    /**
+     * The agreement cannot be revoked before this date
+     */
     irrevocableUntil?: string | null;
 }
 

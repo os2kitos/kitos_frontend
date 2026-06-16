@@ -13,8 +13,17 @@ import { APIOrganizationType } from './organizationType';
 
 
 export interface APIOrganizationResponseDTO { 
+    /**
+     * UUID which is unique within collection of entities of the same type
+     */
     uuid: string;
+    /**
+     * Human readable name of the entity
+     */
     name: string;
+    /**
+     * Organizational CVR identifier, if any
+     */
     cvr?: string | null;
     organizationType: APIOrganizationType;
     isSupplier?: boolean;

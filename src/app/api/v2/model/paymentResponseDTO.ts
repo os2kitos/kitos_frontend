@@ -14,13 +14,28 @@ import { APIOrganizationUnitResponseDTO } from './organizationUnitResponseDTO';
 
 
 export interface APIPaymentResponseDTO { 
+    /**
+     * Id of the payment
+     */
     id?: number;
     organizationUnit?: APIOrganizationUnitResponseDTO;
+    /**
+     * Part of payment which covers acquisition
+     */
     acquisition?: number;
+    /**
+     * Part of payment which covers operations
+     */
     operation?: number;
+    /**
+     * Part of payment which is not classified as either operations or acquisition
+     */
     other?: number;
     accountingEntry?: string | null;
     auditStatus?: APIPaymentAuditStatus;
+    /**
+     * Defines the date at which the payment was audited
+     */
     auditDate?: string | null;
     note?: string | null;
 }

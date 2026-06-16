@@ -14,8 +14,17 @@ import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 
 export interface APIContractResponsibleDataResponseDTO { 
     organizationUnit?: APIIdentityNamePairResponseDTO;
+    /**
+     * Determines if the contract has been signed
+     */
     signed: boolean;
+    /**
+     * Who, in the organization, signed the contract
+     */
     signedBy?: string | null;
+    /**
+     * Which date was the contract signed
+     */
     signedAt?: string | null;
 }
 

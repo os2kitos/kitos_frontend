@@ -1,13 +1,12 @@
 import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
-import { select, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { combineLatest, map, of } from 'rxjs';
 import { GDPR_REPORT_FILE_PREEFIX } from 'src/app/shared/constants/constants';
 import * as GdprFields from 'src/app/shared/constants/gdpr-overview-grid-column-constants';
 import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
 import { mapDateToString } from 'src/app/shared/helpers/date.helpers';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
-import { hostedAtOptions } from 'src/app/shared/models/it-system-usage/gdpr/hosted-at.model';
 import { riskAssessmentResultOptions } from 'src/app/shared/models/it-system-usage/gdpr/risk-assessment-result';
 import { yesNoDontKnowOptions } from 'src/app/shared/models/yes-no-dont-know.model';
 import { GridUIConfigService } from 'src/app/shared/services/ui-config-services/grid-ui-config.service';
@@ -152,13 +151,6 @@ export class GdprOverviewComponent {
       width: 350,
     },
     {
-      field: GdprFields.HOSTED_AT_NAME,
-      title: $localize`IT-Systemet driftes`,
-      hidden: false,
-      extraData: hostedAtOptions,
-      extraFilter: 'enum',
-    },
-    {
       field: GdprFields.TECHNICAL_SUPERVISION_DOCUMENTATION_NAME,
       title: $localize`Dokumentation til teknisk foranstaltning`,
       hidden: false,
@@ -193,16 +185,19 @@ export class GdprOverviewComponent {
   ];
 
   public readonly filteredGridColumns$ = of(this.gridColumns).pipe(
-    this.uiConfigService.filterGridColumnsByUIConfig(UIModuleConfigKey.Gdpr)
+    this.uiConfigService.filterGridColumnsByUIConfig(UIModuleConfigKey.Gdpr),
   );
 
   public readonly allGdprReports$ = this.store.select(selectGdprReports);
 
   public readonly filteredGdprReports$ = combineLatest([this.allGdprReports$, this.systemUsageItSystemUuids$]).pipe(
-    map(([reports, uuids]) => reports.filter((report) => uuids.includes(report.systemUuid)))
+    map(([reports, uuids]) => reports.filter((report) => uuids.includes(report.systemUuid))),
   );
 
-  constructor(private store: Store, private uiConfigService: GridUIConfigService) {
+  constructor(
+    private store: Store,
+    private uiConfigService: GridUIConfigService,
+  ) {
     this.store.dispatch(GdprReportActions.getGDPRReports());
   }
 

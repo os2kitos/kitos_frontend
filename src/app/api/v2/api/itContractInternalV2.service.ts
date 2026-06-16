@@ -29,10 +29,12 @@ import { Configuration }                                     from '../configurat
 
 
 export interface DeleteSingleItContractInternalV2DeleteItContractWithChildrenRequestParams {
+    /**  */
     contractUuid: string;
 }
 
 export interface GetSingleItContractInternalV2GetAddRoleAssignmentsRequestParams {
+    /**  */
     contractUuid: string;
 }
 
@@ -60,11 +62,14 @@ export interface PatchSingleItContractInternalV2PatchAddRoleAssignmentRequestPar
 }
 
 export interface PatchSingleItContractInternalV2PatchRemoveRoleAssignmentRequestParams {
+    /**  */
     contractUuid: string;
+    /**  */
     aPIRoleAssignmentRequestDTO?: APIRoleAssignmentRequestDTO;
 }
 
 export interface PatchSingleItContractInternalV2TransferItContractRangeRequestParams {
+    /**  */
     aPIMultipleContractsRequestDto?: APIMultipleContractsRequestDto;
 }
 
@@ -134,6 +139,7 @@ export class ItContractInternalV2Service {
     }
 
     /**
+     * Delete an existing contract together with all its children
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -198,6 +204,7 @@ export class ItContractInternalV2Service {
     }
 
     /**
+     * Get roles assigned to the contract
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -613,6 +620,7 @@ export class ItContractInternalV2Service {
     }
 
     /**
+     * Remove an existing role assignment to the it-contract
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -690,6 +698,7 @@ export class ItContractInternalV2Service {
     }
 
     /**
+     * Transfer multiple contracts
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.

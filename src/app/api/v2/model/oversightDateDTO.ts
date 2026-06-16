@@ -14,11 +14,11 @@ import { APISimpleLinkDTO } from './simpleLinkDTO';
 
 export interface APIOversightDateDTO { 
     /**
-     *  (Supplier Field)
+     * Date of oversight completion (Supplier Field)
      */
     completedAt?: string;
     /**
-     *  (Supplier Field)
+     * Optional remark related to the oversight (Supplier Field)
      */
     remark?: string | null;
     oversightReportLink?: APISimpleLinkDTO;

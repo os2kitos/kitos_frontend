@@ -12,11 +12,29 @@
 
 
 export interface APIRightsHolderPartialUpdateItInterfaceRequestDTO { 
+    /**
+     * Name of IT-Interface
+     */
     name?: string | null;
+    /**
+     * UUID for IT-System exposing this IT-Interface
+     */
     exposedBySystemUuid?: string;
+    /**
+     * Identifier for IT-Interface
+     */
     interfaceId?: string | null;
+    /**
+     * Version signifier for IT-Interface
+     */
     version?: string | null;
+    /**
+     * General description of the IT-Interface
+     */
     description?: string | null;
+    /**
+     * Url reference for further information
+     */
     urlReference?: string | null;
 }
 

@@ -12,7 +12,13 @@
 
 
 export interface APISimpleLinkDTO { 
+    /**
+     * Name displayed to the user in kitos
+     */
     name?: string | null;
+    /**
+     * External link
+     */
     url?: string | null;
 }
 

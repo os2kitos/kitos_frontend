@@ -41,11 +41,13 @@ import { Configuration }                                     from '../configurat
 
 
 export interface DeleteSingleItInterfaceV2DeactivateItInterfaceAsRightsHolderRequestParams {
+    /** Specific IT-Interface UUID */
     uuid: string;
     aPIDeactivationReasonRequestDTO?: APIDeactivationReasonRequestDTO;
 }
 
 export interface DeleteSingleItInterfaceV2DeleteRequestParams {
+    /** UUID of the interface in KITOS */
     uuid: string;
 }
 
@@ -55,75 +57,104 @@ export interface DeleteSingleItInterfaceV2DeleteDataDescriptionRequestParams {
 }
 
 export interface GetSingleItInterfaceV2GetItInterfaceRequestParams {
+    /** Specific IT-Interface UUID */
     uuid: string;
 }
 
 export interface GetSingleItInterfaceV2GetItInterfaceAsRightsHolderRequestParams {
+    /** Specific IT-Interface UUID */
     uuid: string;
 }
 
 export interface GetSingleItInterfaceV2GetItInterfaceCollectionPermissionsRequestParams {
+    /** UUID of the organization */
     organizationUuid: string;
 }
 
 export interface GetSingleItInterfaceV2GetItInterfacePermissionsRequestParams {
+    /** UUID of the interface entity */
     interfaceUuid: string;
 }
 
 export interface GetSingleItInterfaceV2GetItInterfacesRequestParams {
+    /** IT-System UUID filter */
     exposedBySystemUuid?: string;
+    /** If set to true, the response will also include deactivated it-interfaces */
     includeDeactivated?: boolean;
+    /** Include only changes which were LastModified (UTC) is equal to or greater than the provided value */
     changedSinceGtEq?: string;
+    /** Include only interfaces with a name equal to the parameter */
     nameEquals?: string;
+    /** Filter by UUID of an organization which has taken the related it-system into use through an it-system-usage resource */
     usedInOrganizationUuid?: string;
+    /** Filter by contents of the name */
     nameContains?: string;
+    /** Include only interfaces with an InterfaceId equal to the parameter */
     interfaceId?: string;
+    /** Query it-interfaces created in a specific organization */
     organizationUuid?: string;
+    /** Ordering property */
     orderByProperty?: APICommonOrderByProperty;
     availableInOrganizationUuid?: string;
     nameOrItInterfaceIdContains?: string;
+    /** 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0 */
     page?: number;
+    /** Size of the page referred by \&#39;page\&#39;.  Range: [1,250] Default: 250. */
     pageSize?: number;
 }
 
 export interface GetSingleItInterfaceV2GetItInterfacesAsRightsHolderRequestParams {
+    /** Uuid of the organization you want interfaces from. If not provided all available interfaces (based on access rights) will be returned */
     rightsHolderUuid?: string;
+    /** If set to true, the response will also include deactivated it-interfaces */
     includeDeactivated?: boolean;
+    /** Include only changes which were LastModified (UTC) is equal to or greater than the provided value */
     changedSinceGtEq?: string;
+    /** 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0 */
     page?: number;
+    /** Size of the page referred by \&#39;page\&#39;.  Range: [1,250] Default: 250. */
     pageSize?: number;
 }
 
 export interface PatchSingleItInterfaceV2PatchRequestParams {
+    /** UUID of the interface in KITOS */
     uuid: string;
+    /** Updates for the interface */
     aPIUpdateItInterfaceRequestDTO?: APIUpdateItInterfaceRequestDTO;
 }
 
 export interface PatchSingleItInterfaceV2PatchItInterfaceAsRightsHolderRequestParams {
+    /** UUID of the interface in KITOS */
     uuid: string;
+    /** Updates for the interface */
     aPIRightsHolderPartialUpdateItInterfaceRequestDTO?: APIRightsHolderPartialUpdateItInterfaceRequestDTO;
 }
 
 export interface PostSingleItInterfaceV2PostRequestParams {
+    /** A collection of specific IT-Interface values */
     aPICreateItInterfaceRequestDTO?: APICreateItInterfaceRequestDTO;
 }
 
 export interface PostSingleItInterfaceV2PostDataDescriptionRequestParams {
     uuid: string;
+    /** A collection of specific IT-Interface data description values */
     aPIItInterfaceDataRequestDTO?: APIItInterfaceDataRequestDTO;
 }
 
 export interface PostSingleItInterfaceV2PostItInterfaceAsRightsHolderRequestParams {
+    /** A collection of specific IT-Interface values */
     aPIRightsHolderCreateItInterfaceRequestDTO?: APIRightsHolderCreateItInterfaceRequestDTO;
 }
 
 export interface PutSingleItInterfaceV2PutDataDescriptionRequestParams {
     uuid: string;
     dataDescriptionUuid: string;
+    /** A collection of specific IT-Interface data description values */
     aPIItInterfaceDataRequestDTO?: APIItInterfaceDataRequestDTO;
 }
 
 export interface PutSingleItInterfaceV2PutItInterfaceAsRightsHolderRequestParams {
+    /** Specific IT-Interface UUID */
     uuid: string;
     aPIRightsHolderWritableItInterfacePropertiesDTO?: APIRightsHolderWritableItInterfacePropertiesDTO;
 }
@@ -194,6 +225,7 @@ export class ItInterfaceV2Service {
     }
 
     /**
+     * Deactivates an IT-Interface
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -269,6 +301,7 @@ export class ItInterfaceV2Service {
     }
 
     /**
+     * Delete an It-interface  Constraints:  - Exposing it-system must be reset before deleting this it-interface
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -333,6 +366,7 @@ export class ItInterfaceV2Service {
     }
 
     /**
+     * Delete an existing IT-Interface data description
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -401,6 +435,7 @@ export class ItInterfaceV2Service {
     }
 
     /**
+     * Returns requested IT-Interface
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -466,6 +501,7 @@ export class ItInterfaceV2Service {
     }
 
     /**
+     * Returns requested IT-Interface
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -531,6 +567,7 @@ export class ItInterfaceV2Service {
     }
 
     /**
+     * Returns the permissions of the authenticated client for the IT-Interface resources collection in the context of an organization (IT-Interface permissions in a specific Organization)
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -603,6 +640,7 @@ export class ItInterfaceV2Service {
     }
 
     /**
+     * Returns the permissions of the authenticated client in the context of a specific IT-Interface
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -668,6 +706,7 @@ export class ItInterfaceV2Service {
     }
 
     /**
+     * Returns IT-Interfaces available to the user
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -797,6 +836,7 @@ export class ItInterfaceV2Service {
     }
 
     /**
+     * Returns all IT-Interfaces for which the user has rights holders access
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -886,6 +926,7 @@ export class ItInterfaceV2Service {
     }
 
     /**
+     * Allows partial updates of an existing it-interface using json merge patch semantics (RFC7396)
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -963,6 +1004,7 @@ export class ItInterfaceV2Service {
     }
 
     /**
+     * Allows partial updates of an existing it-interface using json merge patch semantics (RFC7396)
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -1040,6 +1082,7 @@ export class ItInterfaceV2Service {
     }
 
     /**
+     * Creates a new IT-Interface based on given input values
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -1112,6 +1155,7 @@ export class ItInterfaceV2Service {
     }
 
     /**
+     * Creates a new IT-Interface data description
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -1188,6 +1232,7 @@ export class ItInterfaceV2Service {
     }
 
     /**
+     * Creates a new IT-Interface based on given input values
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -1260,6 +1305,7 @@ export class ItInterfaceV2Service {
     }
 
     /**
+     * Replace an existing IT-Interface data description
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -1340,6 +1386,7 @@ export class ItInterfaceV2Service {
     }
 
     /**
+     * Sets IT-Interface values
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.

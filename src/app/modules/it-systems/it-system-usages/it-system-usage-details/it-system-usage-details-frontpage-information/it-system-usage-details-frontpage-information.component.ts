@@ -24,6 +24,7 @@ import {
   mapRegularOptionToMultiSelectItem,
 } from 'src/app/shared/models/dropdown-option.model';
 import { itSystemUsageFields } from 'src/app/shared/models/field-permissions-blueprints.model';
+import { HostedAt, hostedAtOptions, mapHostedAt } from 'src/app/shared/models/it-system-usage/gdpr/hosted-at.model';
 import {
   LifeCycleStatus,
   lifeCycleStatusOptions,
@@ -65,6 +66,7 @@ import {
   selectITSystemUsageEnableDataClassification,
   selectITSystemUsageEnableDescription,
   selectITSystemUsageEnableFrontPageUsagePeriod,
+  selectITSystemUsageEnableGeneralHostedAt,
   selectITSystemUsageEnableGeneralPurpose,
   selectITSystemUsageEnableIsBusinessCritical,
   selectITSystemUsageEnableIsSociallyCritical,
@@ -126,6 +128,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
       dataClassification: new FormControl<APIIdentityNamePairResponseDTO | undefined>(undefined),
       notes: new FormControl<string | undefined>(undefined),
       aiTechnology: new FormControl<YesNoDontKnowOption | undefined>(undefined),
+      hostedAt: new FormControl<HostedAt | undefined>(undefined),
     },
     { updateOn: 'blur' },
   );
@@ -150,6 +153,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
   public readonly versionEnabled$ = this.store.select(selectITSystemUsageEnableVersion);
   public readonly technicalSystemTypeEnabled$ = this.store.select(selectITSystemUsageEnableTechnicalSystemType);
   public readonly purposeEnabled$ = this.store.select(selectITSystemUsageEnableGeneralPurpose);
+  public readonly hostedAtEnabled$ = this.store.select(selectITSystemUsageEnableGeneralHostedAt);
   public readonly amountOfUsersEnabled$ = this.store.select(selectITSystemUsageEnableAmountOfUsers);
   public readonly dataClassificationEnabled$ = this.store.select(selectITSystemUsageEnableDataClassification);
   public readonly descriptionEnabled$ = this.store.select(selectITSystemUsageEnableDescription);
@@ -233,6 +237,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
   public readonly numberOfExpectedUsersOptions = numberOfExpectedUsersOptions;
   public readonly lifeCycleStatusOptions = lifeCycleStatusOptions;
   public readonly yesNoPartiallyOptions = yesNoPartiallyOptions;
+  public readonly hostedAtOptions = hostedAtOptions;
 
   public readonly itSystemUsageValid$ = this.store.select(selectItSystemUsageValid);
   public readonly systemUsageCriticalityLevelTypes$ = this.store
@@ -360,6 +365,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
             dataClassification: general.dataClassification,
             notes: general.notes,
             aiTechnology: mapToYesNoEnum(general.containsAITechnology),
+            hostedAt: mapHostedAt(general.hostedAt ?? undefined),
           });
 
           this.setupTechnicalSystemTypesControl(technicalSystemTypeItems);

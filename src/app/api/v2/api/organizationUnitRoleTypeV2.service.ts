@@ -26,7 +26,9 @@ import { Configuration }                                     from '../configurat
 
 export interface GetSingleOrganizationUnitRoleTypeV2GetRequestParams {
     organizationUuid?: string;
+    /** 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0  NOTE: This parameter has no effect if \&#39;pageSize\&#39; is left unspecified */
     page?: number;
+    /** Size of the page referred by \&#39;page\&#39;.  Range: [1,2^31] Default: null.  If left unspecified, the entire result set will be returned. */
     pageSize?: number;
 }
 

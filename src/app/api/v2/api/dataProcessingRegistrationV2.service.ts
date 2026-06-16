@@ -31,47 +31,66 @@ import { Configuration }                                     from '../configurat
 
 
 export interface DeleteSingleDataProcessingRegistrationV2DeleteDataProcessingRegistrationRequestParams {
+    /** UUID of the data processing registration */
     uuid: string;
 }
 
 export interface GetSingleDataProcessingRegistrationV2GetDataProcessingRegistrationRequestParams {
+    /** UUID of Data-Processing-Registration entity */
     uuid: string;
 }
 
 export interface GetSingleDataProcessingRegistrationV2GetDataProcessingRegistrationCollectionPermissionsRequestParams {
+    /** UUID of the organization */
     organizationUuid: string;
 }
 
 export interface GetSingleDataProcessingRegistrationV2GetDataProcessingRegistrationPermissionsRequestParams {
+    /** UUID of the contract entity */
     dprUuid: string;
 }
 
 export interface GetSingleDataProcessingRegistrationV2GetDataProcessingRegistrationsRequestParams {
+    /** Organization UUID filter */
     organizationUuid?: string;
+    /** System UUID filter */
     systemUuid?: string;
+    /** SystemUsage UUID filter */
     systemUsageUuid?: string;
+    /** UUID of a data processor in the registration */
     dataProcessorUuid?: string;
+    /** UUID of a sub data processor in the registration */
     subDataProcessorUuid?: string;
+    /** Filter based on whether or not an agreement has been concluded */
     agreementConcluded?: boolean;
     nameContains?: string;
     nameEquals?: string;
+    /** Include only changes which were LastModified (UTC) is equal to or greater than the provided value */
     changedSinceGtEq?: string;
+    /** Ordering property */
     orderByProperty?: APICommonOrderByProperty;
+    /** 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0 */
     page?: number;
+    /** Size of the page referred by \&#39;page\&#39;.  Range: [1,250] Default: 250. */
     pageSize?: number;
 }
 
 export interface PatchSingleDataProcessingRegistrationV2PatchDataProcessingRegistrationRequestParams {
+    /** UUID of the data processing registration */
     uuid: string;
+    /**  */
     aPIUpdateDataProcessingRegistrationRequestDTO?: APIUpdateDataProcessingRegistrationRequestDTO;
 }
 
 export interface PostSingleDataProcessingRegistrationV2PostDataProcessingRegistrationRequestParams {
+    /**  */
     aPICreateDataProcessingRegistrationRequestDTO?: APICreateDataProcessingRegistrationRequestDTO;
 }
 
 export interface PutSingleDataProcessingRegistrationV2PutDataProcessingRegistrationRequestParams {
+    /** UUID of the data processing registration */
     uuid: string;
+    /**  */
     aPIUpdateDataProcessingRegistrationRequestDTO?: APIUpdateDataProcessingRegistrationRequestDTO;
 }
 
@@ -141,6 +160,7 @@ export class DataProcessingRegistrationV2Service {
     }
 
     /**
+     * Removes an existing data processing registration.
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -205,6 +225,7 @@ export class DataProcessingRegistrationV2Service {
     }
 
     /**
+     * Returns a specific Data-Processing-Registration
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -270,6 +291,7 @@ export class DataProcessingRegistrationV2Service {
     }
 
     /**
+     * Returns the permissions of the authenticated client for the Data Processing Registration resources collection in the context of an organization (Data Processing Registration permissions in a specific Organization)
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -342,6 +364,7 @@ export class DataProcessingRegistrationV2Service {
     }
 
     /**
+     * Returns the permissions of the authenticated client in the context of a specific Data Processing Registration
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -407,6 +430,7 @@ export class DataProcessingRegistrationV2Service {
     }
 
     /**
+     * Returns all Data-Processing-Registrations available to the user
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -531,6 +555,7 @@ export class DataProcessingRegistrationV2Service {
     }
 
     /**
+     * Allows partial updates of an existing data processing registration using json merge patch semantics (RFC7396)
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -608,6 +633,7 @@ export class DataProcessingRegistrationV2Service {
     }
 
     /**
+     * Create a new data processing registration
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -680,6 +706,7 @@ export class DataProcessingRegistrationV2Service {
     }
 
     /**
+     * Perform a full update of an existing data processing registration.  Note: PUT expects a full version of the updated registration. For partial updates, please use PATCH.
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.

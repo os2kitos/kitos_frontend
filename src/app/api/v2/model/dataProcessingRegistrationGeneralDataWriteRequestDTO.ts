@@ -15,19 +15,52 @@ import { APIYesNoIrrelevantChoice } from './yesNoIrrelevantChoice';
 
 
 export interface APIDataProcessingRegistrationGeneralDataWriteRequestDTO { 
+    /**
+     * Optional data responsible selection  Constraints:      - If changed from existing value, the option must currently be available in the organization
+     */
     dataResponsibleUuid?: string | null;
+    /**
+     * Additional remark related to the data responsible
+     */
     dataResponsibleRemark?: string | null;
     isAgreementConcluded?: APIYesNoIrrelevantChoice;
+    /**
+     * Remark related to whether or not an agreement has been concluded
+     */
     isAgreementConcludedRemark?: string | null;
+    /**
+     * Describes the date when the data processing agreement was concluded  Constraints:      - IsAgreementConcluded equals \'yes\'
+     */
     agreementConcludedAt?: string | null;
+    /**
+     * Optional basis for transfer selection  Constraints:      - If changed from existing value, the option must currently be available in the organization
+     */
     basisForTransferUuid?: string | null;
     transferToInsecureThirdCountries?: APIYesNoUndecidedChoice;
+    /**
+     * Which insecure third countries are subject to data transfer as part of the data processing  Constraints:      - TransferToInsecureThirdCountries equals \'yes\'      - Duplicates are not allowed      - If changed from existing value, the options must currently be available in the organization
+     */
     insecureCountriesSubjectToDataTransferUuids?: Array<string> | null;
+    /**
+     * UUID\'s of the organization entities selected as data processors  Constraints:      - No duplicates
+     */
     dataProcessorUuids?: Array<string> | null;
     hasSubDataProcessors?: APIYesNoUndecidedChoice;
+    /**
+     * Sub data processors  Constraints:      - HasSubDataProcesors equals \'yes\'      - No duplicates allowed
+     */
     subDataProcessors?: Array<APIDataProcessorRegistrationSubDataProcessorWriteRequestDTO> | null;
+    /**
+     * Defines the master contract for this Data Processing Registration (many contracts can point to a DPR but only one can be the master contract)  Constraint: The contract provided MUST point to this Data Processing Registration for it to be selected as \"main contract\".
+     */
     mainContractUuid?: string | null;
+    /**
+     * Defines the organization unit that is responsible for this Data Processing Registration
+     */
     responsibleOrganizationUnitUuid?: string | null;
+    /**
+     * Whether this registration should be considered invalid regardless of other properties.
+     */
     enforceInvalidity?: boolean | null;
 }
 

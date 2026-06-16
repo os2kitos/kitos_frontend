@@ -12,6 +12,7 @@
     "notes": "En beskrivelse...",
     "systemVersion": null,
     "numberOfExpectedUsers": { "lowerBound": 100, "upperBound": 499 },
+    "hostedAt": "OnPremise",
     "validity": {
       "valid": false,
       "validAccordingToValidityPeriod": false,
@@ -97,7 +98,6 @@
   "gdpr": {
     "purpose": "Test purpose",
     "businessCritical": "Yes",
-    "hostedAt": "OnPremise",
     "directoryDocumentation": { "name": null, "url": null },
     "dataSensitivityLevels": ["LegalData"],
     "sensitivePersonData": [

@@ -12,9 +12,21 @@
 
 
 export interface APIRegularOptionExtendedResponseDTO { 
+    /**
+     * UUID which is unique within collection of entities of the same type
+     */
     uuid: string;
+    /**
+     * Human readable name of the entity
+     */
     name: string;
+    /**
+     * Extended description of the choice
+     */
     description: string;
+    /**
+     * IsAvailable is set to true if the type is available in the requested organization context.  If set to false, changes which point to this will fail since it has been deprecated within the organization.  Existing registrations will be unaffected.
+     */
     isAvailable?: boolean;
 }
 

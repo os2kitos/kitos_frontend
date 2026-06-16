@@ -13,6 +13,9 @@ import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 
 
 export interface APIOrganizationUsageResponseDTO { 
+    /**
+     * A collection of organization units which have taken this system into use
+     */
     usingOrganizationUnits: Array<APIIdentityNamePairResponseDTO> | null;
     responsibleOrganizationUnit?: APIIdentityNamePairResponseDTO;
 }

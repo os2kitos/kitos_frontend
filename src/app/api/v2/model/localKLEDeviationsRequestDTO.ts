@@ -12,7 +12,13 @@
 
 
 export interface APILocalKLEDeviationsRequestDTO { 
+    /**
+     * Inherited KLE which have been removed locally  Constraints:      - No duplicates      - Contents CANNOT intersect with AddedKLEUuids      - Contents MUST be a complete subset of the KLE set on the system context
+     */
     removedKLEUuids?: Array<string> | null;
+    /**
+     * KLE which has been added locally  Constraints:      - No duplicates      - Contents CANNOT intersect with RemovedKLEUuids      - Contents CANNOT be a subset of the KLE set on the system context
+     */
     addedKLEUuids?: Array<string> | null;
 }
 

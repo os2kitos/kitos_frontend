@@ -27,9 +27,13 @@ import { Configuration }                                     from '../configurat
 
 
 export interface GetSingleDeltaFeedV2GetDeletedObjectsRequestParams {
+    /** Filter results based on tracked entity type. */
     entityType?: APITrackedEntityTypeChoice;
+    /** Results will be returned where \&#39;deletedTimeStamp &gt;&#x3D; deletedSinceUTC\&#39; */
     deletedSinceUTC?: string;
+    /** 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0 */
     page?: number;
+    /** Size of the page referred by \&#39;page\&#39;.  Range: [1,250] Default: 250. */
     pageSize?: number;
 }
 
@@ -99,6 +103,7 @@ export class DeltaFeedV2Service {
     }
 
     /**
+     * Returns a feed of deleted items, optionally since a specified time (UTC)
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.

@@ -12,6 +12,9 @@
 
 
 export interface APIDeactivationReasonRequestDTO { 
+    /**
+     * Reason for deactivation
+     */
     deactivationReason: string;
 }
 

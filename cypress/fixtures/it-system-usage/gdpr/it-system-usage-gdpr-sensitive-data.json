@@ -12,6 +12,7 @@
     "notes": "En beskrivelse...",
     "systemVersion": null,
     "numberOfExpectedUsers": { "lowerBound": 100, "upperBound": 499 },
+    "hostedAt": "External",
     "validity": {
       "valid": false,
       "validAccordingToValidityPeriod": false,
@@ -97,7 +98,6 @@
   "gdpr": {
     "purpose": "New purpose",
     "businessCritical": "No",
-    "hostedAt": "External",
     "directoryDocumentation": { "name": "newName", "url": "newUrl" },
     "dataSensitivityLevels": ["SensitiveData", "LegalData"],
     "sensitivePersonData": [

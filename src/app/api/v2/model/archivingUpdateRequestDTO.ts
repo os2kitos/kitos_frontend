@@ -15,14 +15,35 @@ import { APIArchiveDutyChoice } from './archiveDutyChoice';
 
 export interface APIArchivingUpdateRequestDTO { 
     archiveDuty?: APIArchiveDutyChoice;
+    /**
+     * Defines the archiving type associated with the it-system  Constraint: If an update changes this field, the option identified must be currently available in the organization context
+     */
     typeUuid?: string | null;
+    /**
+     * Identifies the physical location for archive receiving the data  Constraint: If an update changes this field, the option identified must be currently available in the organization context
+     */
     locationUuid?: string | null;
+    /**
+     * Identifies the physical location for the archiving test  Constraint: If an update changes this field, the option identified must be currently available in the organization context
+     */
     testLocationUuid?: string | null;
     supplierOrganizationUuid?: string | null;
+    /**
+     * Determines if any archiving has occurred from this system
+     */
     active?: boolean | null;
+    /**
+     * Archiving notes
+     */
     notes?: string | null;
+    /**
+     * Determines the frequency of the archiving activity
+     */
     frequencyInMonths?: number | null;
     documentBearing?: boolean | null;
+    /**
+     * Updated journal periods  Constraints:      - If the period has a uuid it will update an existing period (with the same uuid), uuid must exist      - If the period has no uuid, a new Period will be created      - Existing periods will be replaced by the input data, so unless identified using uuid in the updates, the existing references will be removed,        so if you want to retain \"identity\" of periods between updates make sure to specify the uuid.        Otherwise the data will be as the input dictates but the uuids will have changed.
+     */
     journalPeriods?: Array<APIJournalPeriodUpdateRequestDTO> | null;
 }
 

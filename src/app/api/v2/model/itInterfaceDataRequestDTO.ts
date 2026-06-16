@@ -12,7 +12,13 @@
 
 
 export interface APIItInterfaceDataRequestDTO { 
+    /**
+     * Optional description of the data
+     */
     description?: string | null;
+    /**
+     * Optional reference to the it-interface-data-type option type  Constraint:  - If changing from previous state, the newly selected option must be available in the organization
+     */
     dataTypeUuid?: string | null;
 }
 

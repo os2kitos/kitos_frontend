@@ -12,7 +12,13 @@
 
 
 export interface APIBulkRoleAssignmentRequestDTO { 
+    /**
+     * UUID of the role option  Constraints:      - Role must be available in the organization
+     */
     roleUuid: string;
+    /**
+     * UUIDs of users  Constraints:      - every User must be a member of the organization
+     */
     userUuids: Array<string>;
 }
 

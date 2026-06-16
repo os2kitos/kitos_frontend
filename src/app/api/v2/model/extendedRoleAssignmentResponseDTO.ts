@@ -13,6 +13,9 @@ import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 import { APIUserReferenceResponseDTO } from './userReferenceResponseDTO';
 
 
+/**
+ * Internal response DTO used to extend the regular role assignment dto with extended user details (email)  This information is only added to simplify UI cases, whereas the public interface is in line with the V2  principles of not repeating data representation.
+ */
 export interface APIExtendedRoleAssignmentResponseDTO { 
     user: APIUserReferenceResponseDTO;
     role: APIIdentityNamePairResponseDTO;

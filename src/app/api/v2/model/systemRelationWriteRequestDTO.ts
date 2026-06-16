@@ -12,9 +12,21 @@
 
 
 export interface APISystemRelationWriteRequestDTO { 
+    /**
+     * Identifies the system usage the relation points to
+     */
     toSystemUsageUuid: string;
+    /**
+     * The relation uses the interface  The interface must be exposed by the system identified by ToSystemUsageUuid
+     */
     relationInterfaceUuid?: string | null;
+    /**
+     * The contract association of the system relation  The contract must be defined in the same organization as the it-system usages.
+     */
     associatedContractUuid?: string | null;
+    /**
+     * Frequency of the relation  If part of a new relation or a change, the option must be enabled in the organization context.
+     */
     relationFrequencyUuid?: string | null;
     description?: string | null;
     urlReference?: string | null;

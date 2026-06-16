@@ -11,6 +11,9 @@
  */
 
 
+/**
+ * A choice defining the scope of a registration
+ */
 export type APIRegistrationScopeChoice = 'Local' | 'Global';
 
 export const APIRegistrationScopeChoice = {

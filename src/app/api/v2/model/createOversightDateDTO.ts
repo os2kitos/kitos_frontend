@@ -13,7 +13,13 @@ import { APISimpleLinkDTO } from './simpleLinkDTO';
 
 
 export interface APICreateOversightDateDTO { 
+    /**
+     * Date of oversight completion
+     */
     completedAt: string;
+    /**
+     * Optional remark related to the oversight
+     */
     remark?: string | null;
     oversightReportLink?: APISimpleLinkDTO;
 }

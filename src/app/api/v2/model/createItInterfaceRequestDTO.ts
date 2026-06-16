@@ -14,17 +14,50 @@ import { APIItInterfaceDataRequestDTO } from './itInterfaceDataRequestDTO';
 
 
 export interface APICreateItInterfaceRequestDTO { 
+    /**
+     * Reference to the organization to which the interface belongs
+     */
     organizationUuid: string;
+    /**
+     * Optional reference to exposing it-system resource
+     */
     exposedBySystemUuid?: string | null;
+    /**
+     * Determines if the it-interface has been disabled
+     */
     deactivated?: boolean;
     scope?: APIRegistrationScopeChoice;
+    /**
+     * Optional reference to the interface type option
+     */
     itInterfaceTypeUuid?: string | null;
+    /**
+     * Optional interface data descriptions
+     */
     data?: Array<APIItInterfaceDataRequestDTO> | null;
+    /**
+     * Optional internal note
+     */
     note?: string | null;
+    /**
+     * Name of IT-Interface
+     */
     name: string;
+    /**
+     * Identifier for IT-Interface
+     */
     interfaceId?: string | null;
+    /**
+     * Version signifier for IT-Interface
+     */
     version?: string | null;
+    /**
+     * General description of the IT-Interface
+     */
     description?: string | null;
+    /**
+     * Url reference for further information
+     */
     urlReference?: string | null;
 }
 

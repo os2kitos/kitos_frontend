@@ -14,7 +14,13 @@ import { APIYesNoUndecidedChoice } from './yesNoUndecidedChoice';
 
 
 export interface APIContractProcurementDataWriteRequestDTO { 
+    /**
+     * Optionally assigned purchase type  Constraints:      - If changed from current state, the option type must be available in the organization
+     */
     purchaseTypeUuid?: string | null;
+    /**
+     * Optionally assigned procurement strategy  Constraints:      - If changed from current state, the option type must be available in the organization
+     */
     procurementStrategyUuid?: string | null;
     procurementPlan?: APIProcurementPlanDTO;
     procurementInitiated?: APIYesNoUndecidedChoice;

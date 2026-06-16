@@ -12,9 +12,21 @@
 
 
 export interface APIContractSupplierDataWriteRequestDTO { 
+    /**
+     * Optional reference to the supplier organization
+     */
     organizationUuid?: string | null;
+    /**
+     * Determines if the contract has been signed by the supplier
+     */
     signed?: boolean;
+    /**
+     * Who, at the supplier, signed the contract
+     */
     signedBy?: string | null;
+    /**
+     * Which date was the contract signed by the supplier
+     */
     signedAt?: string | null;
 }
 

@@ -32,17 +32,29 @@ export interface GetSingleItSystemInternalV2GetHierarchyRequestParams {
 }
 
 export interface GetSingleItSystemInternalV2GetItSystemsRequestParams {
+    /** Rightsholder UUID filter */
     rightsHolderUuid?: string;
+    /** Business type UUID filter */
     businessTypeUuid?: string;
+    /** KLE number filter (\&quot;NN.NN.NN\&quot; format) */
     kleNumber?: string;
+    /** KLE UUID number filter */
     kleUuid?: string;
+    /** Greater than or equal to number of users filter */
     numberOfUsers?: number;
+    /** If set to true, the response will also include deactivated it-systems */
     includeDeactivated?: boolean;
+    /** Include only changes which were LastModified (UTC) is equal to or greater than the provided value */
     changedSinceGtEq?: string;
+    /** Include only systems with a name equal to the parameter */
     nameEquals?: string;
+    /** Include only systems with a name that contains the content in the parameter */
     nameContains?: string;
+    /** Ordering property */
     orderByProperty?: APICommonOrderByProperty;
+    /** 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0 */
     page?: number;
+    /** Size of the page referred by \&#39;page\&#39;.  Range: [1,250] Default: 250. */
     pageSize?: number;
     excludeUuid?: string;
     excludeChildrenOfUuid?: string;
@@ -183,6 +195,7 @@ export class ItSystemInternalV2Service {
     }
 
     /**
+     * Shallow search endpoint returning all IT-Systems available to the current user
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.

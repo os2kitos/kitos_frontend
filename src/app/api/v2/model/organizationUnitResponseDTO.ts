@@ -14,10 +14,22 @@ import { APIOrganizationUnitOriginChoice } from './organizationUnitOriginChoice'
 
 
 export interface APIOrganizationUnitResponseDTO { 
+    /**
+     * UUID which is unique within collection of entities of the same type
+     */
     uuid: string;
+    /**
+     * Human readable name of the entity
+     */
     name: string;
     parentOrganizationUnit?: APIIdentityNamePairResponseDTO;
+    /**
+     * Optional EAN number for the organization unit.
+     */
     ean?: number | null;
+    /**
+     * Optional Organization Unit Id
+     */
     unitId?: string | null;
     origin?: APIOrganizationUnitOriginChoice;
 }

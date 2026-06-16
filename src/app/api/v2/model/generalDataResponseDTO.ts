@@ -12,6 +12,7 @@
 import { APIYesNoDontKnowChoice } from './yesNoDontKnowChoice';
 import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 import { APIYesNoUndecidedChoice } from './yesNoUndecidedChoice';
+import { APIHostingChoice } from './hostingChoice';
 import { APISimpleLinkDTO } from './simpleLinkDTO';
 import { APIExpectedUsersIntervalDTO } from './expectedUsersIntervalDTO';
 import { APIYesNoPartiallyChoice } from './yesNoPartiallyChoice';
@@ -19,24 +20,52 @@ import { APIItSystemUsageValidityResponseDTO } from './itSystemUsageValidityResp
 
 
 export interface APIGeneralDataResponseDTO { 
+    /**
+     * System Id assigned locally within the organization
+     */
     localSystemId?: string | null;
+    /**
+     * Call name used locally within the organization
+     */
     localCallName?: string | null;
     dataClassification?: APIIdentityNamePairResponseDTO;
+    /**
+     * Notes relevant to the system usage within the organization
+     */
     notes?: string | null;
+    /**
+     * Locally registered system version
+     */
     systemVersion?: string | null;
     numberOfExpectedUsers?: APIExpectedUsersIntervalDTO;
     validity: APIItSystemUsageValidityResponseDTO;
     mainContract?: APIIdentityNamePairResponseDTO;
     containsAITechnology?: APIYesNoUndecidedChoice;
     webAccessibilityCompliance?: APIYesNoPartiallyChoice;
+    /**
+     * Last time the supplier checked system web accessibility
+     */
     lastWebAccessibilityCheck?: string | null;
+    /**
+     * Notes related to the web accessibility of the system
+     */
     webAccessibilityNotes?: string | null;
     isSociallyCritical?: APIYesNoDontKnowChoice;
     isBusinessCritical?: APIYesNoDontKnowChoice;
+    /**
+     * The latest time where fields related to system criticality were changed.
+     */
     criticalityFieldsLastChanged?: string | null;
     systemUsageCriticalityLevel?: APIIdentityNamePairResponseDTO;
     criticalityLevelDocumentation?: APISimpleLinkDTO;
+    /**
+     * Gets or sets the purpose associated with the system usage.
+     */
     purpose?: string | null;
-    technicalSystemTypes?: Array<APIIdentityNamePairResponseDTO> | null;
+    /**
+     * The technical system types of this system usage.
+     */
+    technicalSystemTypes: Array<APIIdentityNamePairResponseDTO> | null;
+    hostedAt?: APIHostingChoice;
 }
 

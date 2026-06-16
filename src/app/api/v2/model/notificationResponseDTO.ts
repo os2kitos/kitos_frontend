@@ -17,13 +17,37 @@ import { APIOwnerResourceType } from './ownerResourceType';
 
 
 export interface APINotificationResponseDTO { 
+    /**
+     * Uuid of the Notification
+     */
     uuid?: string;
+    /**
+     * Indicates whether notification is active
+     */
     active?: boolean;
+    /**
+     * Name of the notification (different field than Subject)
+     */
     name?: string | null;
+    /**
+     * Date when the notification was sent last time
+     */
     lastSent?: string | null;
+    /**
+     * Date when the notification becomes active
+     */
     fromDate?: string | null;
+    /**
+     * Date when the notification expires
+     */
     toDate?: string | null;
+    /**
+     * Subject of the email
+     */
     subject?: string | null;
+    /**
+     * Body of the email
+     */
     body?: string | null;
     ownerResourceType?: APIOwnerResourceType;
     notificationType?: APINotificationSendType;

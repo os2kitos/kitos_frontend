@@ -13,7 +13,13 @@ import { APIPaymentRequestDTO } from './paymentRequestDTO';
 
 
 export interface APIContractPaymentsDataWriteRequestDTO { 
+    /**
+     * External payments
+     */
     external?: Array<APIPaymentRequestDTO> | null;
+    /**
+     * Internal payments
+     */
     internal?: Array<APIPaymentRequestDTO> | null;
 }
 

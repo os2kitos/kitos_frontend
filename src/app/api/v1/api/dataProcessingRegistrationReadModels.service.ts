@@ -25,11 +25,13 @@ import { Configuration }                                     from '../configurat
 
 
 export interface GetSingleDataProcessingRegistrationReadModelsGetRequestParams {
+    /**  */
     organizationUuid?: string;
     responsibleOrganizationUnitUuid?: string;
 }
 
 export interface GetSingleDataProcessingRegistrationReadModelsGetCountRequestParams {
+    /**  */
     organizationUuid?: string;
     responsibleOrganizationUnitUuid?: string;
 }
@@ -100,6 +102,7 @@ export class DataProcessingRegistrationReadModelsService {
     }
 
     /**
+     * V2 style OData endpoint suited for consumption by clients using UUID\&#39;s for entity identity
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -173,6 +176,7 @@ export class DataProcessingRegistrationReadModelsService {
     }
 
     /**
+     * V2 style OData endpoint suited for consumption by clients using UUID\&#39;s for entity identity
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.

@@ -14,9 +14,18 @@ import { APIRepetitionFrequencyOptions } from './repetitionFrequencyOptions';
 
 
 export interface APIScheduledNotificationWriteRequestDTO { 
+    /**
+     * Name of the notification (different from the Subject)
+     */
     name?: string | null;
+    /**
+     * Date on which the notification expires
+     */
     toDate?: string | null;
     repetitionFrequency: APIRepetitionFrequencyOptions;
+    /**
+     * Date from which the notification is active
+     */
     fromDate: string;
     baseProperties: APIBaseNotificationPropertiesWriteRequestDTO;
 }

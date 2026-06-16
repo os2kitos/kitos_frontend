@@ -16,17 +16,47 @@ import { APILicensingAndCodeModelChoice } from './licensingAndCodeModelChoice';
 
 
 export interface APIUpdateItSystemRequestDTO { 
+    /**
+     * UUID for possible IT-System parent (if any)
+     */
     parentUuid?: string | null;
+    /**
+     * Determines if the system has been deactivated from being taken into use
+     */
     deactivated?: boolean;
+    /**
+     * Name of IT-System
+     */
     name?: string | null;
+    /**
+     * Former name of IT-System (if any)
+     */
     previousName?: string | null;
+    /**
+     * Description
+     */
     description?: string | null;
+    /**
+     * User defined external references.  The external reference marked as \"master reference\" will be shown in overviews  Constraints:      - If the list is not empty one (and only one) must be marked as the master reference.      - If the reference has a uuid it will update an existing reference (with the same uuid), uuid must exist      - If the reference has no uuid, a new External Reference will be created      - Existing references will be replaced by the input data, so unless identified using uuid in the updates, the existing references will be removed.
+     */
     externalReferences?: Array<APIUpdateExternalReferenceDataWriteRequestDTO> | null;
+    /**
+     * UUID for IT-System business type
+     */
     businessTypeUuid?: string | null;
+    /**
+     * UUID\'s for KLE numbers categorizing this IT-System
+     */
     kleUuids?: Array<string> | null;
+    /**
+     * Optional rightsholder organization reference uuid
+     */
     rightsHolderUuid?: string | null;
     scope?: APIRegistrationScopeChoice;
     recommendedArchiveDuty?: APIRecommendedArchiveDutyRequestDTO;
+    /**
+     * The licensing and code model used for this system. Existing models will be replaced by the input data.
+     */
     licensingAndCodeModels?: Array<APILicensingAndCodeModelChoice> | null;
 }
 

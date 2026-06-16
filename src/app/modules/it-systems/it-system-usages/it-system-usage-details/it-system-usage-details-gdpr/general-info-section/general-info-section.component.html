@@ -35,15 +35,5 @@
     >
     </app-dropdown>
     }
-    @if (hostedAtEnabled$ | async) {
-      <app-dropdown
-        text="IT-systemet driftes"
-        i18n-text
-        [formGroup]="generalInformationForm"
-        formName="hostedAt"
-        [data]="hostedAtOptions"
-        (valueChange)="patchGdpr({ hostedAt: $event })"
-      ></app-dropdown>
-    }
   </app-form-grid>
 </app-card>

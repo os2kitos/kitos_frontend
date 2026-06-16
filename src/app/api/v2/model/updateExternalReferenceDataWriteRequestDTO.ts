@@ -12,10 +12,25 @@
 
 
 export interface APIUpdateExternalReferenceDataWriteRequestDTO { 
+    /**
+     * Reference title as shown in KITOS UI
+     */
     title: string;
+    /**
+     * Document ID/Case number
+     */
     documentId?: string | null;
+    /**
+     * URL e.g. data sheet or other supplier related url.  Also accepts ESDH system url\'s following the pattern: (kmdsageraabn|kmdedhvis|sbsyslauncher):.*
+     */
     url?: string | null;
+    /**
+     * Determines if this is the master reference for the KITOS entity  Constraint: Only one external reference can be marked as the master reference
+     */
     masterReference: boolean;
+    /**
+     * The UUID of the External Reference  Constrains:      - If the reference has a uuid it the update points to an existing reference (with the same uuid).      - If the reference has no uuid, it will be considered anonymous and be added as such (and KITOS will assign a uuid to it automatically)
+     */
     uuid?: string | null;
 }
 

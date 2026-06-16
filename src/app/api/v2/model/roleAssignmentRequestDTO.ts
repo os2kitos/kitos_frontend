@@ -12,7 +12,13 @@
 
 
 export interface APIRoleAssignmentRequestDTO { 
+    /**
+     * UUID of the role option  Constraints:      - Role must be available in the organization
+     */
     roleUuid: string;
+    /**
+     * UUID of the user  Constraints:      - User must be a member of the organization
+     */
     userUuid: string;
 }
 

@@ -25,15 +25,22 @@ import { Configuration }                                     from '../configurat
 
 
 export interface GetSingleKleOptionV2GetRequestParams {
+    /** UUID of the KLE number */
     kleUuid: string;
 }
 
 export interface GetSingleKleOptionV2GetV1RequestParams {
+    /** Query by parent KLE uuid */
     parentKleUuid?: string;
+    /** Query by parent KLE number (exact match) */
     parentKleNumber?: string;
+    /** Query by KLE number prefix */
     kleNumberPrefix?: string;
+    /** Query by KLE description content */
     kleDescriptionContent?: string;
+    /** 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0  NOTE: This parameter has no effect if \&#39;pageSize\&#39; is left unspecified */
     page?: number;
+    /** Size of the page referred by \&#39;page\&#39;.  Range: [1,2^31] Default: null.  If left unspecified, the entire result set will be returned. */
     pageSize?: number;
 }
 
@@ -103,6 +110,7 @@ export class KleOptionV2Service {
     }
 
     /**
+     * Returns the details of a single KLE
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -168,6 +176,7 @@ export class KleOptionV2Service {
     }
 
     /**
+     * Returns the KLE reference used by KITOS
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.

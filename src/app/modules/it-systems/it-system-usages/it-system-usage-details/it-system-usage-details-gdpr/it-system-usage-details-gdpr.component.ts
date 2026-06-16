@@ -1,3 +1,4 @@
+import { AsyncPipe } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
@@ -11,26 +12,25 @@ import {
   selectITSystemUsageEnableGdprDataTypes,
   selectITSystemUsageEnableGdprDocumentation,
   selectITSystemUsageEnableGdprDpiaConducted,
-  selectITSystemUsageEnableGdprHostedAt,
   selectITSystemUsageEnableGdprPlannedRiskAssessmentDate,
   selectITSystemUsageEnableGdprPurpose,
   selectITSystemUsageEnableGdprRetentionPeriod,
   selectITSystemUsageEnableGdprTechnicalPrecautions,
   selectITSystemUsageEnableGdprUserSupervision,
+  selectITSystemUsageEnableGeneralHostedAt,
 } from 'src/app/store/organization/ui-module-customization/selectors';
-import { AsyncPipe } from '@angular/common';
-import { GeneralInfoSectionComponent } from './general-info-section/general-info-section.component';
-import { CardComponent } from '../../../../../shared/components/card/card.component';
-import { CardHeaderComponent } from '../../../../../shared/components/card-header/card-header.component';
 import { ButtonComponent } from '../../../../../shared/components/buttons/button/button.component';
+import { CardHeaderComponent } from '../../../../../shared/components/card-header/card-header.component';
+import { CardComponent } from '../../../../../shared/components/card/card.component';
 import { StandardVerticalContentGridComponent } from '../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { DataSensitivitySectionComponent } from './data-sensitivity-section/data-sensitivity-section.component';
-import { RegisteredDataCategoriesSectionComponent } from './registered-data-categories-section/registered-data-categories-section.component';
-import { GdprTechnicalPrecautionsSectionComponent } from './gdpr-technical-precautions-section/gdpr-technical-precautions-section.component';
-import { GdprUserSupervisionSectionComponent } from './gdpr-user-supervision-section/gdpr-user-supervision-section.component';
-import { GdprRiskAssessmentSectionComponent } from './gdpr-risk-assessment-section/gdpr-risk-assessment-section.component';
 import { GdprDpiaConductedSectionComponent } from './gdpr-dpia-conducted-section/gdpr-dpia-conducted-section.component';
 import { GdprRetentionPeriodSectionComponent } from './gdpr-retention-period-section/gdpr-retention-period-section.component';
+import { GdprRiskAssessmentSectionComponent } from './gdpr-risk-assessment-section/gdpr-risk-assessment-section.component';
+import { GdprTechnicalPrecautionsSectionComponent } from './gdpr-technical-precautions-section/gdpr-technical-precautions-section.component';
+import { GdprUserSupervisionSectionComponent } from './gdpr-user-supervision-section/gdpr-user-supervision-section.component';
+import { GeneralInfoSectionComponent } from './general-info-section/general-info-section.component';
+import { RegisteredDataCategoriesSectionComponent } from './registered-data-categories-section/registered-data-categories-section.component';
 
 type UsageGDPRSection =
   | 'data-sensitivity'
@@ -58,8 +58,8 @@ type UsageGDPRSection =
     GdprRiskAssessmentSectionComponent,
     GdprDpiaConductedSectionComponent,
     GdprRetentionPeriodSectionComponent,
-    AsyncPipe
-],
+    AsyncPipe,
+  ],
 })
 export class ItSystemUsageDetailsGdprComponent extends BaseComponent {
   @Output() disableLinkControls = new EventEmitter<void>();
@@ -70,7 +70,7 @@ export class ItSystemUsageDetailsGdprComponent extends BaseComponent {
 
   public readonly showGeneralInfo$ = combineOR([
     this.store.select(selectITSystemUsageEnableGdprPurpose),
-    this.store.select(selectITSystemUsageEnableGdprHostedAt),
+    this.store.select(selectITSystemUsageEnableGeneralHostedAt),
     this.store.select(selectITSystemUsageEnableGdprDocumentation),
   ]);
 

@@ -12,6 +12,9 @@
 
 
 export interface APIDisconnectFromStsOrganizationRequestDTO { 
+    /**
+     * If set to true, KITOS will purge all unused external units while disconnecting from STS Organization
+     */
     purgeUnusedExternalUnits?: boolean;
 }
 

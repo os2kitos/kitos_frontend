@@ -1,6 +1,5 @@
 const generalInformation = 'Generel information';
 const purposeInput = 'Behandlingsformål';
-const hostedAtDropdown = 'IT-systemet driftes';
 const personDataCheckbox = 'Almindelige personoplysninger';
 const dataSensitivityAccordion = 'data-sensitivity-accordion';
 const registedCategoriesAccordion = 'registed-categories-accordion';
@@ -33,7 +32,6 @@ describe('it-system-usage gdpr', () => {
     cy.contains(generalInformation);
     cy.contains('Yderligere information');
     cy.input(purposeInput).should('have.value', 'Test purpose');
-    cy.dropdown(hostedAtDropdown).should('have.text', 'On-premise');
 
     verifyLinkTextbox('directory-documentation-link', 'newName: newUrl');
   });
@@ -48,18 +46,6 @@ describe('it-system-usage gdpr', () => {
 
     cy.verifyRequestUsingDeepEq('patch', 'request.body', { gdpr: { processingPurpose: newPurpose } });
     cy.input(purposeInput).should('have.value', newPurpose);
-  });
-
-  it('can edit hosted at status', () => {
-    cy.intercept('PATCH', '/api/v2/it-system-usages/*', {
-      fixture: './it-system-usage/gdpr/it-system-usage-updated-gdpr.json',
-    }).as('patch');
-    const newHostedAt = 'Eksternt';
-    cy.dropdown(hostedAtDropdown, newHostedAt, true);
-    cy.contains(generalInformation).click();
-
-    verifyGdprPatchRequest({ hostedAt: 'External' });
-    cy.dropdown(hostedAtDropdown).should('have.text', newHostedAt);
   });
 
   it('can edit data sensitivity levels', () => {

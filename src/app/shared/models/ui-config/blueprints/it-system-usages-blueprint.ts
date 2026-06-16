@@ -82,6 +82,9 @@ export const ItSystemUsageUiBluePrint = {
           text: $localize`Reference for kritikalitetsvurdering`,
           disableByDefault: true,
         },
+        hostedAt: {
+          text: $localize`IT-Systemet driftes`,
+        },
       },
     },
     contracts: {
@@ -105,9 +108,6 @@ export const ItSystemUsageUiBluePrint = {
       children: {
         processingPurpose: {
           text: $localize`Behandlingsformål`,
-        },
-        hostedAt: {
-          text: $localize`IT-Systemet driftes`,
         },
         documentation: {
           text: $localize`Link til fortegnelse`,

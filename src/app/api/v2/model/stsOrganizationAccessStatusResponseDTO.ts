@@ -13,6 +13,9 @@ import { APICheckConnectionError } from './checkConnectionError';
 
 
 export interface APIStsOrganizationAccessStatusResponseDTO { 
+    /**
+     * Determines if KITOS has access to data from FK Organisation
+     */
     accessGranted?: boolean;
     error?: APICheckConnectionError;
 }

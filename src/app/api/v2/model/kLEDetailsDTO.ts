@@ -13,8 +13,17 @@ import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 
 
 export interface APIKLEDetailsDTO { 
+    /**
+     * UUID of the KLE number
+     */
     uuid: string;
+    /**
+     * KLE number from KLE-Online e.g. 00.01.10
+     */
     kleNumber: string;
+    /**
+     * KLE description from KLE-Online
+     */
     description: string;
     parentKle?: APIIdentityNamePairResponseDTO;
 }

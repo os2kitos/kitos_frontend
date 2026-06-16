@@ -14,7 +14,13 @@ import { APIRoleRecipientWriteRequestDTO } from './roleRecipientWriteRequestDTO'
 
 
 export interface APIRecipientWriteRequestDTO { 
+    /**
+     * Emails of the Recipients
+     */
     emailRecipients?: Array<APIEmailRecipientWriteRequestDTO> | null;
+    /**
+     * Uuids of the Recipient roles
+     */
     roleRecipients?: Array<APIRoleRecipientWriteRequestDTO> | null;
 }
 

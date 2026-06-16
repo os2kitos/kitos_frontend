@@ -14,7 +14,6 @@ import { APIYesNoDontKnowChoice } from './yesNoDontKnowChoice';
 import { APIYesNoDontKnowIrrelevantChoice } from './yesNoDontKnowIrrelevantChoice';
 import { APITechnicalPrecautionChoice } from './technicalPrecautionChoice';
 import { APIDataSensitivityLevelChoice } from './dataSensitivityLevelChoice';
-import { APIHostingChoice } from './hostingChoice';
 import { APISimpleLinkDTO } from './simpleLinkDTO';
 import { APIGDPRPersonalDataChoice } from './gDPRPersonalDataChoice';
 import { APIRiskLevelChoice } from './riskLevelChoice';
@@ -22,11 +21,19 @@ import { APIRiskLevelChoice } from './riskLevelChoice';
 
 export interface APIGDPRWriteRequestDTO { 
     processingPurpose?: string | null;
-    hostedAt?: APIHostingChoice;
     directoryDocumentation?: APISimpleLinkDTO;
     dataSensitivityLevels?: Array<APIDataSensitivityLevelChoice> | null;
+    /**
+     * Constraint: If an update changes this field, the option identified must be currently available in the organization context
+     */
     sensitivePersonDataUuids?: Array<string> | null;
+    /**
+     * Constraint: Can only be added if DataSensitivityLevelChoice.PersonData is present in DataSensitivityLevels field
+     */
     specificPersonalData?: Array<APIGDPRPersonalDataChoice> | null;
+    /**
+     * Constraint: If an update changes this field, the option identified must be currently available in the organization context
+     */
     registeredDataCategoryUuids?: Array<string> | null;
     technicalPrecautionsInPlace?: APIYesNoDontKnowChoice;
     technicalPrecautionsApplied?: Array<APITechnicalPrecautionChoice> | null;

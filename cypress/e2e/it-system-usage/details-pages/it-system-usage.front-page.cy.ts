@@ -1,5 +1,7 @@
 /// <reference types="cypress" />
 
+const generalInformation = 'Systeminformation';
+
 describe('it-system-usage frontpage', () => {
   beforeEach(() => {
     cy.requireIntercept();
@@ -56,6 +58,7 @@ describe('it-system-usage frontpage', () => {
     cy.textareaByCy('web-accessibility-notes').should('have.value', 'en note om tilgængelighed');
 
     cy.dropdown('Forretningskritisk IT-system').should('have.text', 'Ja');
+    cy.dropdown('IT-systemet driftes').should('have.text', 'On-premise');
 
     cy.contains('Data fra IT Systemkataloget').click();
 
@@ -75,6 +78,22 @@ describe('it-system-usage frontpage', () => {
       .within(() => {
         verifyKle('83.01.02', 'IT-udstyr, anskaffelse');
       });
+  });
+
+  it.only('can edit hosted at status', () => {
+    cy.intercept('PATCH', '/api/v2/it-system-usages/*', {
+      fixture: './it-system-usage/it-system-usage-updated.json',
+    }).as('patch');
+    cy.contains('System 3').click();
+
+    const newHostedAt = 'Eksternt';
+    cy.dropdown('IT-systemet driftes', newHostedAt, true);
+    cy.contains(generalInformation).click();
+
+    cy.wait('@patch')
+      .its('request.body')
+      .should('deep.eq', { general: { hostedAt: 'External' } });
+    cy.dropdown('IT-systemet driftes').should('have.text', newHostedAt);
   });
 
   it('can refresh page on IT system usage details', () => {

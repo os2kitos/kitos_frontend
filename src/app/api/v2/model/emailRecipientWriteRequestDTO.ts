@@ -12,6 +12,9 @@
 
 
 export interface APIEmailRecipientWriteRequestDTO { 
+    /**
+     * Email of the recipient
+     */
     email: string;
 }
 

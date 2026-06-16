@@ -12,9 +12,21 @@
 
 
 export interface APIContractResponsibleDataWriteRequestDTO { 
+    /**
+     * Optional reference responsible organization unit  Constraints:      - Must be a organization unit of the Organization to which the contract belongs
+     */
     organizationUnitUuid?: string | null;
+    /**
+     * Determines if the contract has been signed
+     */
     signed?: boolean;
+    /**
+     * Who, in the organization, signed the contract
+     */
     signedBy?: string | null;
+    /**
+     * Which date was the contract signed
+     */
     signedAt?: string | null;
 }
 

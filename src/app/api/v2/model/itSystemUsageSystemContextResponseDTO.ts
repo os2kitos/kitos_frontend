@@ -12,8 +12,17 @@
 
 
 export interface APIItSystemUsageSystemContextResponseDTO { 
+    /**
+     * UUID which is unique within collection of entities of the same type
+     */
     uuid: string;
+    /**
+     * Human readable name of the entity
+     */
     name: string;
+    /**
+     * Deactivated status of the entity
+     */
     deactivated: boolean;
 }
 

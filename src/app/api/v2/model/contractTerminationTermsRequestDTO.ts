@@ -13,6 +13,9 @@ import { APIYearSegmentChoice } from './yearSegmentChoice';
 
 
 export interface APIContractTerminationTermsRequestDTO { 
+    /**
+     * Optionally assigned notice period  Constraints:      - If changed from current state, the option type must be available in the organization
+     */
     noticePeriodMonthsUuid?: string | null;
     noticePeriodExtendsCurrent?: APIYearSegmentChoice;
     noticeByEndOf?: APIYearSegmentChoice;

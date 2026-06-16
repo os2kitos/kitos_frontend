@@ -14,7 +14,13 @@ import { APIEmailRecipientResponseDTO } from './emailRecipientResponseDTO';
 
 
 export interface APIRecipientResponseDTO { 
+    /**
+     * List of recipient emails
+     */
     emailRecipients?: Array<APIEmailRecipientResponseDTO> | null;
+    /**
+     * List of recipient roles
+     */
     roleRecipients?: Array<APIRoleRecipientResponseDTO> | null;
 }
 

@@ -33,11 +33,14 @@ import { Configuration }                                     from '../configurat
 
 
 export interface DeleteSingleItContractV2DeleteExternalReferenceRequestParams {
+    /**  */
     contractUuid: string;
+    /**  */
     externalReferenceUuid: string;
 }
 
 export interface DeleteSingleItContractV2DeleteItContractRequestParams {
+    /**  */
     contractUuid: string;
 }
 
@@ -46,50 +49,69 @@ export interface GetSingleItContractV2GetItContractRequestParams {
 }
 
 export interface GetSingleItContractV2GetItContractCollectionPermissionsRequestParams {
+    /** UUID of the organization */
     organizationUuid: string;
 }
 
 export interface GetSingleItContractV2GetItContractPermissionsRequestParams {
+    /** UUID of the contract entity */
     contractUuid: string;
 }
 
 export interface GetSingleItContractV2GetItContractsRequestParams {
+    /** Organization UUID filter */
     organizationUuid?: string;
+    /** Associated system UUID filter */
     systemUuid?: string;
+    /** Associated system usage UUID filter */
     systemUsageUuid?: string;
+    /** Associated data processing registration UUID filter */
     dataProcessingRegistrationUuid?: string;
     responsibleOrgUnitUuid?: string;
     supplierUuid?: string;
+    /** Name content filter */
     nameContent?: string;
     nameEquals?: string;
+    /** Include only changes which were LastModified (UTC) is equal to or greater than the provided value */
     changedSinceGtEq?: string;
+    /** Ordering property */
     orderByProperty?: APICommonOrderByProperty;
+    /** 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0 */
     page?: number;
+    /** Size of the page referred by \&#39;page\&#39;.  Range: [1,250] Default: 250. */
     pageSize?: number;
 }
 
 export interface PatchSingleItContractV2PatchItContractRequestParams {
+    /** UUID of the contract in KITOS */
     contractUuid: string;
+    /** Full update of the contract */
     aPIUpdateContractRequestDTO?: APIUpdateContractRequestDTO;
 }
 
 export interface PostSingleItContractV2PostExternalReferenceRequestParams {
+    /**  */
     contractUuid: string;
     aPIExternalReferenceDataWriteRequestDTO?: APIExternalReferenceDataWriteRequestDTO;
 }
 
 export interface PostSingleItContractV2PostItContractRequestParams {
+    /**  */
     aPICreateNewContractRequestDTO?: APICreateNewContractRequestDTO;
 }
 
 export interface PutSingleItContractV2PutExternalReferenceRequestParams {
+    /**  */
     contractUuid: string;
+    /**  */
     externalReferenceUuid: string;
     aPIExternalReferenceDataWriteRequestDTO?: APIExternalReferenceDataWriteRequestDTO;
 }
 
 export interface PutSingleItContractV2PutItContractRequestParams {
+    /** UUID of the contract in KITOS */
     contractUuid: string;
+    /** Full update of the contract */
     aPIUpdateContractRequestDTO?: APIUpdateContractRequestDTO;
 }
 
@@ -159,6 +181,7 @@ export class ItContractV2Service {
     }
 
     /**
+     * Deletes a contract external reference
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -227,6 +250,7 @@ export class ItContractV2Service {
     }
 
     /**
+     * Delete an existing contract
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -291,6 +315,7 @@ export class ItContractV2Service {
     }
 
     /**
+     * Returns requested IT-Contract
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -356,6 +381,7 @@ export class ItContractV2Service {
     }
 
     /**
+     * Returns the permissions of the authenticated client for the IT-Contract resources collection in the context of an organization (IT-Contract permissions in a specific Organization)
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -428,6 +454,7 @@ export class ItContractV2Service {
     }
 
     /**
+     * Returns the permissions of the authenticated client in the context of a specific IT-Contract
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -493,6 +520,7 @@ export class ItContractV2Service {
     }
 
     /**
+     * Returns all IT-Contracts available to the current user within the provided organization context
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -617,6 +645,7 @@ export class ItContractV2Service {
     }
 
     /**
+     * Allows partial updates of an existing it-contract using json merge patch semantics (RFC7396)
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -694,6 +723,7 @@ export class ItContractV2Service {
     }
 
     /**
+     * Creates an external reference for the contract
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -770,6 +800,7 @@ export class ItContractV2Service {
     }
 
     /**
+     * Creates a new it-contract in the requested organization
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -842,6 +873,7 @@ export class ItContractV2Service {
     }
 
     /**
+     * Updates a contract external reference
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -922,6 +954,7 @@ export class ItContractV2Service {
     }
 
     /**
+     * Updates an existing it-contract  Note: PUT expects a full version of the updated contract. For partial updates, please use PATCH.
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.

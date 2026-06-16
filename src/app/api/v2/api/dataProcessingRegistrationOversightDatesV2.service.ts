@@ -29,18 +29,25 @@ import { Configuration }                                     from '../configurat
 
 
 export interface DeleteSingleDataProcessingRegistrationOversightDatesV2DeleteDataProcessingRegistrationOversightDateRequestParams {
+    /** UUID of the data processing registration */
     uuid: string;
+    /** UUID of the oversight date */
     oversightDateUuid: string;
 }
 
 export interface PatchSingleDataProcessingRegistrationOversightDatesV2PatchDataProcessingRegistrationOversightDateRequestParams {
+    /** UUID of the data processing registration */
     uuid: string;
+    /** UUID of the oversight date */
     oversightDateUuid: string;
+    /**  */
     aPIModifyOversightDateDTO?: APIModifyOversightDateDTO;
 }
 
 export interface PostSingleDataProcessingRegistrationOversightDatesV2PostDataProcessingRegistrationOversightDateRequestParams {
+    /** UUID of the data processing registration */
     uuid: string;
+    /**  */
     aPICreateOversightDateDTO?: APICreateOversightDateDTO;
 }
 
@@ -110,6 +117,7 @@ export class DataProcessingRegistrationOversightDatesV2Service {
     }
 
     /**
+     * Deletes an oversight date from a data processing registration.
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -178,6 +186,7 @@ export class DataProcessingRegistrationOversightDatesV2Service {
     }
 
     /**
+     * Partially updates an existing oversight date in a data processing registration.
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -259,6 +268,7 @@ export class DataProcessingRegistrationOversightDatesV2Service {
     }
 
     /**
+     * Add an oversight date to an existing data processing registration.
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.

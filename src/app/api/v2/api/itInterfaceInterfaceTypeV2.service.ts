@@ -25,13 +25,18 @@ import { Configuration }                                     from '../configurat
 
 
 export interface GetSingleItInterfaceInterfaceTypeV2GetRequestParams {
+    /** organization context for the archive locations availability */
     organizationUuid?: string;
+    /** 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0  NOTE: This parameter has no effect if \&#39;pageSize\&#39; is left unspecified */
     page?: number;
+    /** Size of the page referred by \&#39;page\&#39;.  Range: [1,2^31] Default: null.  If left unspecified, the entire result set will be returned. */
     pageSize?: number;
 }
 
 export interface GetSingleItInterfaceInterfaceTypeV2GetV1RequestParams {
+    /** archive location identifier */
     itInterfaceTypeUuid: string;
+    /** organization context for the archive location availability */
     organizationUuid?: string;
 }
 
@@ -101,6 +106,7 @@ export class ItInterfaceInterfaceTypeV2Service {
     }
 
     /**
+     * Returns IT-Interface \&#39;interface-type\&#39; options which are available for new registrations within the organization
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -180,6 +186,7 @@ export class ItInterfaceInterfaceTypeV2Service {
     }
 
     /**
+     * Returns requested IT-Interface \&#39;interface-type\&#39;
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.

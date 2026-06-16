@@ -11,6 +11,9 @@
  */
 
 
+/**
+ * Type of resource owning the notification, in Domain terms Core.DomainModel.Shared.RelatedEntityType
+ */
 export type APIOwnerResourceType = 'ItContract' | 'ItSystemUsage' | 'DataProcessingRegistration';
 
 export const APIOwnerResourceType = {

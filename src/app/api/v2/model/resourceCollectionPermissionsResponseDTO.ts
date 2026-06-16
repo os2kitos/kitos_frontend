@@ -12,6 +12,9 @@
 
 
 export interface APIResourceCollectionPermissionsResponseDTO { 
+    /**
+     * True when API client is allowed to CREATE the resource
+     */
     create?: boolean;
 }
 

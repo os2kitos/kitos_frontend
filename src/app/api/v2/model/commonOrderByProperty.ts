@@ -11,6 +11,9 @@
  */
 
 
+/**
+ * Generic fields available for ordering
+ */
 export type APICommonOrderByProperty = 'CreationOrder' | 'Name' | 'LastChanged';
 
 export const APICommonOrderByProperty = {

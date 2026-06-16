@@ -11,8 +11,17 @@
  */
 
 
+/**
+ * Extended user reference response including the email property.  This DTO should only be used on responses of internal convenience endpoints.
+ */
 export interface APIUserReferenceResponseDTO { 
+    /**
+     * UUID which is unique within collection of entities of the same type
+     */
     uuid: string;
+    /**
+     * Human readable name of the entity
+     */
     name: string;
     email: string;
 }

@@ -29,6 +29,7 @@ import { Configuration }                                     from '../configurat
 
 
 export interface GetSingleDataProcessingRegistrationInternalV2GetAddRoleAssignmentsRequestParams {
+    /**  */
     dprUuid: string;
 }
 
@@ -52,9 +53,13 @@ export interface GetSingleDataProcessingRegistrationInternalV2GetAvailableSystem
 
 export interface GetSingleDataProcessingRegistrationInternalV2GetItSystemsRequestParams {
     organizationUuid?: string;
+    /** Include only dprs with a name that contains the content in the parameter */
     nameContains?: string;
+    /** Ordering property */
     orderByProperty?: APICommonOrderByProperty;
+    /** 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0 */
     page?: number;
+    /** Size of the page referred by \&#39;page\&#39;.  Range: [1,250] Default: 250. */
     pageSize?: number;
 }
 
@@ -64,7 +69,9 @@ export interface PatchSingleDataProcessingRegistrationInternalV2PatchAddRoleAssi
 }
 
 export interface PatchSingleDataProcessingRegistrationInternalV2PatchRemoveRoleAssignmentRequestParams {
+    /**  */
     dprUuid: string;
+    /**  */
     aPIRoleAssignmentRequestDTO?: APIRoleAssignmentRequestDTO;
 }
 
@@ -134,6 +141,7 @@ export class DataProcessingRegistrationInternalV2Service {
     }
 
     /**
+     * Get roles assigned to the data processing registration
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -433,6 +441,7 @@ export class DataProcessingRegistrationInternalV2Service {
     }
 
     /**
+     * Shallow search endpoint returning all Data Processing Registrations available to the current user
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -599,6 +608,7 @@ export class DataProcessingRegistrationInternalV2Service {
     }
 
     /**
+     * Remove an existing role assignment to the data processing registration
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.

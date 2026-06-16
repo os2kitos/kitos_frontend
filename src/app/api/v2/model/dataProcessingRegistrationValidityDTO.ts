@@ -13,8 +13,17 @@ import { APIDataProcessingRegistrationValidationErrorChoice } from './dataProces
 
 
 export interface APIDataProcessingRegistrationValidityDTO { 
+    /**
+     * Determines if the entity is considered valid.
+     */
     valid: boolean;
+    /**
+     * Determines if this entity has been forced into invalid state even if context properties would dictate otherwise
+     */
     enforceInvalidity: boolean;
+    /**
+     * Reasons as to why the registration is considered to be invalid
+     */
     validationErrors: Array<APIDataProcessingRegistrationValidationErrorChoice> | null;
 }
 

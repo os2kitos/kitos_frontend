@@ -13,6 +13,9 @@ import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 
 
 export interface APIContractPaymentModelDataResponseDTO { 
+    /**
+     * The data at which operations remuneration started
+     */
     operationsRemunerationStartedAt?: string | null;
     paymentFrequency?: APIIdentityNamePairResponseDTO;
     paymentModel?: APIIdentityNamePairResponseDTO;

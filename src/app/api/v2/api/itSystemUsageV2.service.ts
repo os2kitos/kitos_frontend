@@ -39,116 +39,161 @@ import { Configuration }                                     from '../configurat
 
 
 export interface DeleteSingleItSystemUsageV2DeleteExternalReferenceRequestParams {
+    /**  */
     systemUsageUuid: string;
+    /**  */
     externalReferenceUuid: string;
 }
 
 export interface DeleteSingleItSystemUsageV2DeleteItSystemUsageRequestParams {
+    /**  */
     systemUsageUuid: string;
 }
 
 export interface DeleteSingleItSystemUsageV2DeleteJournalPeriodRequestParams {
+    /**  */
     systemUsageUuid: string;
+    /**  */
     journalPeriodUuid: string;
 }
 
 export interface DeleteSingleItSystemUsageV2DeleteSystemUsageRelationRequestParams {
+    /**  */
     systemUsageUuid: string;
+    /**  */
     systemRelationUuid: string;
 }
 
 export interface GetSingleItSystemUsageV2GetIncomingSystemRelationsRequestParams {
+    /**  */
     systemUsageUuid: string;
 }
 
 export interface GetSingleItSystemUsageV2GetItSystemUsageRequestParams {
+    /** UUID of the system usage entity */
     systemUsageUuid: string;
 }
 
 export interface GetSingleItSystemUsageV2GetItSystemUsageCollectionPermissionsRequestParams {
+    /** UUID of the organization */
     organizationUuid: string;
 }
 
 export interface GetSingleItSystemUsageV2GetItSystemUsagePermissionsRequestParams {
+    /** UUID of the system usage entity */
     systemUsageUuid: string;
 }
 
 export interface GetSingleItSystemUsageV2GetItSystemUsagesRequestParams {
+    /** Query usages within a specific organization */
     organizationUuid?: string;
+    /** Query by systems with outgoing relations related to another system */
     relatedToSystemUuid?: string;
+    /** Query by system usages with outgoing relations to a specific system usage (more narrow search than using system id) */
     relatedToSystemUsageUuid?: string;
+    /** Query by contracts which are part of a system relation */
     relatedToContractUuid?: string;
+    /** Query usages of a specific system */
     systemUuid?: string;
+    /** Query usages based on system name */
     systemNameContent?: string;
+    /** Include only changes which were LastModified (UTC) is equal to or greater than the provided value */
     changedSinceGtEq?: string;
+    /** Ordering property */
     orderByProperty?: APICommonOrderByProperty;
+    /** 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0 */
     page?: number;
+    /** Size of the page referred by \&#39;page\&#39;.  Range: [1,250] Default: 250. */
     pageSize?: number;
 }
 
 export interface GetSingleItSystemUsageV2GetJournalPeriodRequestParams {
+    /**  */
     systemUsageUuid: string;
+    /**  */
     journalPeriodUuid: string;
 }
 
 export interface GetSingleItSystemUsageV2GetSystemUsageRelationRequestParams {
+    /**  */
     systemUsageUuid: string;
+    /**  */
     systemRelationUuid: string;
 }
 
 export interface PatchSingleItSystemUsageV2PatchAddRoleAssignmentRequestParams {
+    /**  */
     systemUsageUuid: string;
+    /**  */
     aPIRoleAssignmentRequestDTO?: APIRoleAssignmentRequestDTO;
 }
 
 export interface PatchSingleItSystemUsageV2PatchRemoveRoleAssignmentRequestParams {
+    /**  */
     systemUsageUuid: string;
+    /**  */
     aPIRoleAssignmentRequestDTO?: APIRoleAssignmentRequestDTO;
 }
 
 export interface PatchSingleItSystemUsageV2PatchSystemUsageRequestParams {
+    /**  */
     systemUsageUuid: string;
+    /**  */
     aPIUpdateItSystemUsageRequestDTO?: APIUpdateItSystemUsageRequestDTO;
 }
 
 export interface PostSingleItSystemUsageV2PostExternalReferenceRequestParams {
+    /**  */
     systemUsageUuid: string;
     aPIExternalReferenceDataWriteRequestDTO?: APIExternalReferenceDataWriteRequestDTO;
 }
 
 export interface PostSingleItSystemUsageV2PostItSystemUsageRequestParams {
+    /**  */
     aPICreateItSystemUsageRequestDTO?: APICreateItSystemUsageRequestDTO;
 }
 
 export interface PostSingleItSystemUsageV2PostJournalPeriodRequestParams {
+    /**  */
     systemUsageUuid: string;
+    /**  */
     aPIJournalPeriodDTO: APIJournalPeriodDTO;
 }
 
 export interface PostSingleItSystemUsageV2PostSystemUsageRelationRequestParams {
+    /**  */
     systemUsageUuid: string;
     aPISystemRelationWriteRequestDTO: APISystemRelationWriteRequestDTO;
 }
 
 export interface PutSingleItSystemUsageV2PutExternalReferenceRequestParams {
+    /**  */
     systemUsageUuid: string;
+    /**  */
     externalReferenceUuid: string;
     aPIExternalReferenceDataWriteRequestDTO?: APIExternalReferenceDataWriteRequestDTO;
 }
 
 export interface PutSingleItSystemUsageV2PutJournalPeriodRequestParams {
+    /**  */
     systemUsageUuid: string;
+    /**  */
     journalPeriodUuid: string;
+    /**  */
     aPIJournalPeriodDTO?: APIJournalPeriodDTO;
 }
 
 export interface PutSingleItSystemUsageV2PutSystemUsageRequestParams {
+    /**  */
     systemUsageUuid: string;
+    /**  */
     aPIUpdateItSystemUsageRequestDTO?: APIUpdateItSystemUsageRequestDTO;
 }
 
 export interface PutSingleItSystemUsageV2PutSystemUsageRelationRequestParams {
+    /**  */
     systemUsageUuid: string;
+    /**  */
     systemRelationUuid: string;
     aPISystemRelationWriteRequestDTO?: APISystemRelationWriteRequestDTO;
 }
@@ -219,6 +264,7 @@ export class ItSystemUsageV2Service {
     }
 
     /**
+     * Deletes a system usage external reference
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -287,6 +333,7 @@ export class ItSystemUsageV2Service {
     }
 
     /**
+     * Deletes a system usage.  NOTE: this action also clears any incoming relation e.g. relations from other system usages, contracts or data processing registrations.
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -351,6 +398,7 @@ export class ItSystemUsageV2Service {
     }
 
     /**
+     * Delete an existing journal period
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -419,6 +467,7 @@ export class ItSystemUsageV2Service {
     }
 
     /**
+     * Deletes a system relation FROM the system usage to another
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -487,6 +536,7 @@ export class ItSystemUsageV2Service {
     }
 
     /**
+     * Get all system relations TO the system usage FROM another system usage
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -552,6 +602,7 @@ export class ItSystemUsageV2Service {
     }
 
     /**
+     * Returns a specific IT-System usage (a specific IT-System in a specific Organization)
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -617,6 +668,7 @@ export class ItSystemUsageV2Service {
     }
 
     /**
+     * Returns the permissions of the authenticated client for the IT-System usage resources collection in the context of an organization (IT-System usage permissions in a specific Organization)
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -689,6 +741,7 @@ export class ItSystemUsageV2Service {
     }
 
     /**
+     * Returns the permissions of the authenticated client in the context of a specific IT-System usage (a specific IT-System in a specific Organization)
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -754,6 +807,7 @@ export class ItSystemUsageV2Service {
     }
 
     /**
+     * Returns all IT-System usages available to the current user
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -868,6 +922,7 @@ export class ItSystemUsageV2Service {
     }
 
     /**
+     * Get a specific journal period
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -937,6 +992,7 @@ export class ItSystemUsageV2Service {
     }
 
     /**
+     * Gets a specific relation FROM the system usage to another
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -1006,6 +1062,7 @@ export class ItSystemUsageV2Service {
     }
 
     /**
+     * Add role assignment to the it-system usage  Constraint: Duplicates are not allowed (existing assignment of the same user/role)
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -1083,6 +1140,7 @@ export class ItSystemUsageV2Service {
     }
 
     /**
+     * Remove an existing role assignment to the it-system usage
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -1160,6 +1218,7 @@ export class ItSystemUsageV2Service {
     }
 
     /**
+     * Allows partial updates of an existing system usage  NOTE:At the root level, defined sections will be mapped as changes e.g. {General: null} will reset the entire \&quot;General\&quot; section.  If the section is not provided in the json, the omitted section will remain unchanged.  At the moment we only manage PATCH at the root level so all levels below that must be provided in it\&#39;s entirety.
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -1237,6 +1296,7 @@ export class ItSystemUsageV2Service {
     }
 
     /**
+     * Creates an external reference for the system usage
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -1313,6 +1373,7 @@ export class ItSystemUsageV2Service {
     }
 
     /**
+     * Creates an IT-System usage
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -1385,6 +1446,7 @@ export class ItSystemUsageV2Service {
     }
 
     /**
+     * Add a single journal period to the system usage
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -1464,6 +1526,7 @@ export class ItSystemUsageV2Service {
     }
 
     /**
+     * Creates a system relation FROM the system usage to another
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -1543,6 +1606,7 @@ export class ItSystemUsageV2Service {
     }
 
     /**
+     * Updates a system usage external reference
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -1623,6 +1687,7 @@ export class ItSystemUsageV2Service {
     }
 
     /**
+     * Perform a FULL update of an existing journal period
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -1703,6 +1768,7 @@ export class ItSystemUsageV2Service {
     }
 
     /**
+     * Perform a full update of an existing system usage.  Note: PUT expects a full version of the system usage. For partial updates, please use PATCH.
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -1779,6 +1845,7 @@ export class ItSystemUsageV2Service {
     }
 
     /**
+     * Updates the system relation FROM the system usage to another
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.

@@ -22,20 +22,41 @@ import { APIRoleAssignmentRequestDTO } from './roleAssignmentRequestDTO';
 
 
 export interface APICreateNewContractRequestDTO { 
+    /**
+     * UUID of the optional parent contract  Constraints:      - Parent and child contract must belong to the same organization
+     */
     parentContractUuid?: string | null;
     general?: APIContractGeneralDataWriteRequestDTO;
     procurement?: APIContractProcurementDataWriteRequestDTO;
     supplier?: APIContractSupplierDataWriteRequestDTO;
     responsible?: APIContractResponsibleDataWriteRequestDTO;
+    /**
+     * IT-System usages covered by this it-contract  Constraints:      - System usages must belong to the same organization as the it-contract      - No duplicates
+     */
     systemUsageUuids?: Array<string> | null;
+    /**
+     * Data processing registrations associated with this it-contract  Constraints:      - Must belong to the same organization as the it-contract      - No duplicates
+     */
     dataProcessingRegistrationUuids?: Array<string> | null;
     paymentModel?: APIContractPaymentModelDataWriteRequestDTO;
     agreementPeriod?: APIContractAgreementPeriodDataWriteRequestDTO;
     termination?: APIContractTerminationDataWriteRequestDTO;
     payments?: APIContractPaymentsDataWriteRequestDTO;
+    /**
+     * Role assignments  Constraints:      - No duplicates
+     */
     roles?: Array<APIRoleAssignmentRequestDTO> | null;
+    /**
+     * UUID of the organization in which the contract will be created
+     */
     organizationUuid: string;
+    /**
+     * Name of the contract.  Constraints:      - Max length: 200 characters      - Must be unique within the organization
+     */
     name: string;
+    /**
+     * User defined external references.  The external reference marked as \"master reference\" will be shown in overviews  Constraints:      - If the list is not empty one (and only one) must be marked as the master reference.
+     */
     externalReferences?: Array<APIExternalReferenceDataWriteRequestDTO> | null;
 }
 

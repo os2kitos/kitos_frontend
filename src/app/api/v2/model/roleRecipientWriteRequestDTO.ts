@@ -12,6 +12,9 @@
 
 
 export interface APIRoleRecipientWriteRequestDTO { 
+    /**
+     * RoleUuid pointing to the Role to which the notification should be sent
+     */
     roleUuid: string;
 }
 

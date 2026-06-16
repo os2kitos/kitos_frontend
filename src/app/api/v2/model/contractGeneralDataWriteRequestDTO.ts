@@ -13,12 +13,27 @@ import { APIContractValidityWriteRequestDTO } from './contractValidityWriteReque
 
 
 export interface APIContractGeneralDataWriteRequestDTO { 
+    /**
+     * User-assigned contract id
+     */
     contractId?: string | null;
+    /**
+     * Optionally assigned contract type  Constraints:      - If changed from current state, the option type must be available in the organization
+     */
     contractTypeUuid?: string | null;
+    /**
+     * Optionally assigned contract template  Constraints:      - If changed from current state, the option type must be available in the organization
+     */
     contractTemplateUuid?: string | null;
+    /**
+     * Optionally assigned agreement elements  Constraints:      - If changed from current state, the option types must be available in the organization
+     */
     agreementElementUuids?: Array<string> | null;
     notes?: string | null;
     validity?: APIContractValidityWriteRequestDTO;
+    /**
+     * Optionally assigned criticality  Constraints:      - If changed from current state, the option type must be available in the organization
+     */
     criticalityUuid?: string | null;
 }
 

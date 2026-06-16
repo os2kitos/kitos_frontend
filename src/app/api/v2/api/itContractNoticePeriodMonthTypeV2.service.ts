@@ -25,13 +25,18 @@ import { Configuration }                                     from '../configurat
 
 
 export interface GetSingleItContractNoticePeriodMonthTypeV2GetRequestParams {
+    /** organization context for the notice period month types availability */
     organizationUuid?: string;
+    /** 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0  NOTE: This parameter has no effect if \&#39;pageSize\&#39; is left unspecified */
     page?: number;
+    /** Size of the page referred by \&#39;page\&#39;.  Range: [1,2^31] Default: null.  If left unspecified, the entire result set will be returned. */
     pageSize?: number;
 }
 
 export interface GetSingleItContractNoticePeriodMonthTypeV2GetV1RequestParams {
+    /** notice period month type identifier */
     noticePeriodMonthTypeUuid: string;
+    /** organization context for the notice period month type availability */
     organizationUuid?: string;
 }
 
@@ -101,6 +106,7 @@ export class ItContractNoticePeriodMonthTypeV2Service {
     }
 
     /**
+     * Returns It-Contract notice period month type options
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -180,6 +186,7 @@ export class ItContractNoticePeriodMonthTypeV2Service {
     }
 
     /**
+     * Returns requested It-Contract notice period month type
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.

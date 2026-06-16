@@ -12,13 +12,37 @@
 
 
 export interface APIRightsHolderCreateItInterfaceRequestDTO { 
+    /**
+     * UUID for IT-System exposing this IT-Interface
+     */
     exposedBySystemUuid: string;
+    /**
+     * Name of IT-Interface
+     */
     name: string;
+    /**
+     * Identifier for IT-Interface
+     */
     interfaceId?: string | null;
+    /**
+     * Version signifier for IT-Interface
+     */
     version?: string | null;
+    /**
+     * General description of the IT-Interface
+     */
     description: string;
+    /**
+     * Url reference for further information
+     */
     urlReference: string;
+    /**
+     * UUID for owning organization
+     */
     rightsHolderUuid: string;
+    /**
+     * UUID for IT-Interface  If no UUID is provided, KITOS will assign one.
+     */
     uuid?: string | null;
 }
 

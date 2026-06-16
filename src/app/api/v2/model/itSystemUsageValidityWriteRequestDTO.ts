@@ -14,7 +14,13 @@ import { APILifeCycleStatusChoice } from './lifeCycleStatusChoice';
 
 export interface APIItSystemUsageValidityWriteRequestDTO { 
     lifeCycleStatus?: APILifeCycleStatusChoice;
+    /**
+     * If specified, the entity is valid from this date.  Must be less than or equal to ValidTo
+     */
     validFrom?: string | null;
+    /**
+     * If specified, the entity is valid up until and including this date.  Must be greater than or equal to ValidFrom
+     */
     validTo?: string | null;
 }
 

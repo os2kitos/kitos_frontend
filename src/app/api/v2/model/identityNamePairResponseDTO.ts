@@ -12,7 +12,13 @@
 
 
 export interface APIIdentityNamePairResponseDTO { 
+    /**
+     * UUID which is unique within collection of entities of the same type
+     */
     uuid: string;
+    /**
+     * Human readable name of the entity
+     */
     name: string;
 }
 

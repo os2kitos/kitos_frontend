@@ -75,7 +75,6 @@ import {
   selectITSystemUsageEnableGdprDataTypes,
   selectITSystemUsageEnableGdprDocumentation,
   selectITSystemUsageEnableGdprDpiaConducted,
-  selectITSystemUsageEnableGdprHostedAt,
   selectITSystemUsageEnableGdprIsDataProcessingAgreementRequired,
   selectITSystemUsageEnableGdprPlannedRiskAssessmentDate,
   selectITSystemUsageEnableGdprPurpose,
@@ -83,6 +82,7 @@ import {
   selectITSystemUsageEnableGdprRiskAssessmentResult,
   selectITSystemUsageEnableGdprTechnicalPrecautions,
   selectITSystemUsageEnableGdprUserSupervision,
+  selectITSystemUsageEnableGeneralHostedAt,
   selectITSystemUsageEnableGeneralPurpose,
   selectITSystemUsageEnableIncomingRelations,
   selectITSystemUsageEnableInheritedKle,
@@ -362,7 +362,7 @@ export class GridUIConfigService {
         .pipe(shouldEnable([UsageFields.RiskAssessmentResult])),
       this.store.select(selectITSystemUsageEnableGeneralPurpose).pipe(shouldEnable([UsageFields.GeneralPurpose])),
       this.store.select(selectITSystemUsageEnableGdprPurpose).pipe(shouldEnable([UsageFields.ProcessingPurpose])),
-      this.store.select(selectITSystemUsageEnableGdprHostedAt).pipe(shouldEnable([UsageFields.HostedAt])),
+      this.store.select(selectITSystemUsageEnableGeneralHostedAt).pipe(shouldEnable([UsageFields.HostedAt])),
       this.store
         .select(selectITSystemUsageEnableGdprDocumentation)
         .pipe(shouldEnable([UsageFields.LinkToDirectoryName])),
@@ -535,8 +535,6 @@ export class GridUIConfigService {
       this.store
         .select(selectITSystemUsageEnableGdprDpiaConducted)
         .pipe(shouldEnable([GdprFields.DPIA_NAME, GdprFields.DPIA_DATE])),
-
-      this.store.select(selectITSystemUsageEnableGdprHostedAt).pipe(shouldEnable([GdprFields.HOSTED_AT_NAME])),
 
       combineAND([
         this.store.select(selectITSystemUsageEnableDataProcessing),

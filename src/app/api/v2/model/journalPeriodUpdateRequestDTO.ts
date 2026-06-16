@@ -13,9 +13,18 @@
 
 export interface APIJournalPeriodUpdateRequestDTO { 
     archiveId: string;
+    /**
+     * Constraint StartDate must be less than or equal to EndDate
+     */
     startDate: string;
+    /**
+     * Constraint EndDate must be greater than or equal to StartDate
+     */
     endDate: string;
     approved: boolean;
+    /**
+     * Optionally references an existing, specific journal period  NOTE: If provided, an existing period with the same uuid must exist
+     */
     uuid?: string | null;
 }
 

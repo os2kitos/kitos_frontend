@@ -19,18 +19,39 @@ import { APIShallowOrganizationResponseDTO } from './shallowOrganizationResponse
 
 export interface APIDataProcessingRegistrationGeneralDataResponseDTO { 
     dataResponsible?: APIIdentityNamePairResponseDTO;
+    /**
+     * Additional remark related to the data responsible
+     */
     dataResponsibleRemark?: string | null;
     isAgreementConcluded?: APIYesNoIrrelevantChoice;
+    /**
+     * Remark related to whether or not an agreement has been concluded
+     */
     isAgreementConcludedRemark?: string | null;
+    /**
+     * Describes the date when the data processing agreement was concluded
+     */
     agreementConcludedAt?: string | null;
     basisForTransfer?: APIIdentityNamePairResponseDTO;
     transferToInsecureThirdCountries?: APIYesNoUndecidedChoice;
+    /**
+     * Which insecure third countries are subject to data transfer as part of the data processing
+     */
     insecureCountriesSubjectToDataTransfer: Array<APIIdentityNamePairResponseDTO> | null;
+    /**
+     * UUID\'s of the organization entities selected as data processors
+     */
     dataProcessors: Array<APIShallowOrganizationResponseDTO> | null;
     hasSubDataProcessors?: APIYesNoUndecidedChoice;
+    /**
+     * UUID\'s of the organization entities selected as sub data processors
+     */
     subDataProcessors: Array<APIDataProcessorRegistrationSubDataProcessorResponseDTO> | null;
     validity: APIDataProcessingRegistrationValidityDTO;
     mainContract?: APIIdentityNamePairResponseDTO;
+    /**
+     * Defines the associated contracts with this data processing registration
+     */
     associatedContracts: Array<APIIdentityNamePairResponseDTO> | null;
     responsibleOrganizationUnit?: APIIdentityNamePairResponseDTO;
 }

@@ -14,9 +14,15 @@ import { APIContractValidityResponseDTO } from './contractValidityResponseDTO';
 
 
 export interface APIContractGeneralDataResponseDTO { 
+    /**
+     * User-assigned contract id
+     */
     contractId?: string | null;
     contractType?: APIIdentityNamePairResponseDTO;
     contractTemplate?: APIIdentityNamePairResponseDTO;
+    /**
+     * Optionally assigned agreement elements
+     */
     agreementElements: Array<APIIdentityNamePairResponseDTO>;
     notes?: string | null;
     validity: APIContractValidityResponseDTO;

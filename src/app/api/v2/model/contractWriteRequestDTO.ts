@@ -21,17 +21,29 @@ import { APIRoleAssignmentRequestDTO } from './roleAssignmentRequestDTO';
 
 
 export interface APIContractWriteRequestDTO { 
+    /**
+     * UUID of the optional parent contract  Constraints:      - Parent and child contract must belong to the same organization
+     */
     parentContractUuid?: string | null;
     general?: APIContractGeneralDataWriteRequestDTO;
     procurement?: APIContractProcurementDataWriteRequestDTO;
     supplier?: APIContractSupplierDataWriteRequestDTO;
     responsible?: APIContractResponsibleDataWriteRequestDTO;
+    /**
+     * IT-System usages covered by this it-contract  Constraints:      - System usages must belong to the same organization as the it-contract      - No duplicates
+     */
     systemUsageUuids?: Array<string> | null;
+    /**
+     * Data processing registrations associated with this it-contract  Constraints:      - Must belong to the same organization as the it-contract      - No duplicates
+     */
     dataProcessingRegistrationUuids?: Array<string> | null;
     paymentModel?: APIContractPaymentModelDataWriteRequestDTO;
     agreementPeriod?: APIContractAgreementPeriodDataWriteRequestDTO;
     termination?: APIContractTerminationDataWriteRequestDTO;
     payments?: APIContractPaymentsDataWriteRequestDTO;
+    /**
+     * Role assignments  Constraints:      - No duplicates
+     */
     roles?: Array<APIRoleAssignmentRequestDTO> | null;
 }
 

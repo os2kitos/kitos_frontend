@@ -25,13 +25,18 @@ import { Configuration }                                     from '../configurat
 
 
 export interface GetSingleItContractContractTypeV2GetRequestParams {
+    /** organization context for the contract types availability */
     organizationUuid?: string;
+    /** 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0  NOTE: This parameter has no effect if \&#39;pageSize\&#39; is left unspecified */
     page?: number;
+    /** Size of the page referred by \&#39;page\&#39;.  Range: [1,2^31] Default: null.  If left unspecified, the entire result set will be returned. */
     pageSize?: number;
 }
 
 export interface GetSingleItContractContractTypeV2GetV1RequestParams {
+    /** contract type identifier */
     contractTypeUuid: string;
+    /** organization context for the contract type availability */
     organizationUuid?: string;
 }
 
@@ -101,6 +106,7 @@ export class ItContractContractTypeV2Service {
     }
 
     /**
+     * Returns It-Contract contract type options
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -180,6 +186,7 @@ export class ItContractContractTypeV2Service {
     }
 
     /**
+     * Returns requested It-Contract contract type
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.

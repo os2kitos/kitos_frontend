@@ -21,8 +21,17 @@ export interface APIArchivingRegistrationsResponseDTO {
     location?: APIIdentityNamePairResponseDTO;
     testLocation?: APIIdentityNamePairResponseDTO;
     supplier?: APIShallowOrganizationResponseDTO;
+    /**
+     * Determines if any archiving has occurred from this system
+     */
     active?: boolean | null;
+    /**
+     * Archiving notes
+     */
     notes?: string | null;
+    /**
+     * Determines the frequency of the archiving activity
+     */
     frequencyInMonths?: number | null;
     documentBearing?: boolean | null;
     journalPeriods: Array<APIJournalPeriodResponseDTO> | null;

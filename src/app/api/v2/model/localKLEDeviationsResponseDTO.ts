@@ -12,8 +12,17 @@
 import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 
 
+/**
+ * Defines IT-System KLE deviations locally within an organization. All deviations are in the context of the inherited deviations which are found on the IT-System
+ */
 export interface APILocalKLEDeviationsResponseDTO { 
+    /**
+     * Inherited KLE which have been removed locally
+     */
     removedKLE: Array<APIIdentityNamePairResponseDTO>;
+    /**
+     * KLE which has been added locally
+     */
     addedKLE: Array<APIIdentityNamePairResponseDTO>;
 }
 

@@ -13,7 +13,13 @@ import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 
 
 export interface APIUserReferenceWithOrganizationResponseDTO { 
+    /**
+     * UUID which is unique within collection of entities of the same type
+     */
     uuid: string;
+    /**
+     * Human readable name of the entity
+     */
     name: string;
     email: string;
     organization: APIIdentityNamePairResponseDTO;

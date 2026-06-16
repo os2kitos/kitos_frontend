@@ -19,13 +19,22 @@ import { APIArchivingCreationRequestDTO } from './archivingCreationRequestDTO';
 
 
 export interface APICreateItSystemUsageRequestDTO { 
+    /**
+     * A collection of IT-System usage role option assignments  Constraint: Duplicates are not allowed
+     */
     roles?: Array<APIRoleAssignmentRequestDTO> | null;
     organizationUsage?: APIOrganizationUsageWriteRequestDTO;
     localKleDeviations?: APILocalKLEDeviationsRequestDTO;
     gdpr?: APIGDPRWriteRequestDTO;
+    /**
+     * Points to the main system which the usage will extend.  Constraints:      - must be accessible to the authorized user      - must not already be in use in the organization      - system must be active iow. not in a disabled state
+     */
     systemUuid: string;
     organizationUuid: string;
     general?: APIGeneralDataWriteRequestDTO;
+    /**
+     * User defined external references.  The external reference marked as \"master reference\" will be shown in overviews  Constraint:      - If the list is not empty one (and only one) must be marked as the master reference.
+     */
     externalReferences?: Array<APIExternalReferenceDataWriteRequestDTO> | null;
     archiving?: APIArchivingCreationRequestDTO;
 }

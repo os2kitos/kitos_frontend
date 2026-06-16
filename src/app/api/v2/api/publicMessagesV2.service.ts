@@ -101,6 +101,7 @@ export class PublicMessagesV2Service {
     }
 
     /**
+     * Returns public messages from KITOS
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -161,6 +162,7 @@ export class PublicMessagesV2Service {
     }
 
     /**
+     * Returns permissions of the current api client in relation to the public texts resource
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -221,6 +223,7 @@ export class PublicMessagesV2Service {
     }
 
     /**
+     * Update the public messages
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.

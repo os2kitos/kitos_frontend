@@ -13,8 +13,17 @@ import { APIItInterfaceDeletionConflict } from './itInterfaceDeletionConflict';
 
 
 export interface APIItInterfacePermissionsResponseDTO { 
+    /**
+     * True when API client is allowed to READ the resource
+     */
     read?: boolean;
+    /**
+     * True when API client is allowed to MODIFY the resource
+     */
     modify?: boolean;
+    /**
+     * True when the API client is allowed to DELETE the
+     */
     delete?: boolean;
     deletionConflicts?: Array<APIItInterfaceDeletionConflict> | null;
 }

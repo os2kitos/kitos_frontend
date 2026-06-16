@@ -11,6 +11,7 @@
  */
 import { APIYesNoDontKnowChoice } from './yesNoDontKnowChoice';
 import { APIYesNoUndecidedChoice } from './yesNoUndecidedChoice';
+import { APIHostingChoice } from './hostingChoice';
 import { APISimpleLinkDTO } from './simpleLinkDTO';
 import { APIExpectedUsersIntervalDTO } from './expectedUsersIntervalDTO';
 import { APIYesNoPartiallyChoice } from './yesNoPartiallyChoice';
@@ -18,25 +19,53 @@ import { APIItSystemUsageValidityWriteRequestDTO } from './itSystemUsageValidity
 
 
 export interface APIGeneralDataWriteRequestDTO { 
+    /**
+     * System Id assigned locally within the organization  Max length: 200
+     */
     localSystemId?: string | null;
+    /**
+     * Call name used locally within the organization  Max length: 100
+     */
     localCallName?: string | null;
+    /**
+     * Optional classification of the registered data  Constraint: If an update changes this field, the option identified must be currently available in the organization context
+     */
     dataClassificationUuid?: string | null;
+    /**
+     * Notes relevant to the system usage within the organization
+     */
     notes?: string | null;
+    /**
+     * Locally registered system version  Max length: 100
+     */
     systemVersion?: string | null;
     numberOfExpectedUsers?: APIExpectedUsersIntervalDTO;
     validity?: APIItSystemUsageValidityWriteRequestDTO;
     containsAITechnology?: APIYesNoUndecidedChoice;
     webAccessibilityCompliance?: APIYesNoPartiallyChoice;
+    /**
+     * Last time the supplier checked system web accessibility
+     */
     lastWebAccessibilityCheck?: string | null;
+    /**
+     * Notes related to the web accessibility of the system
+     */
     webAccessibilityNotes?: string | null;
     isSociallyCritical?: APIYesNoDontKnowChoice;
     isBusinessCritical?: APIYesNoDontKnowChoice;
     /**
-     *  (Supplier Field)
+     * How critical this system usage is considered to be in general. (Supplier Field)
      */
     systemUsageCriticalityLevelUuid?: string | null;
     criticalityLevelDocumentation?: APISimpleLinkDTO;
+    /**
+     * The general purpose of this system usage.
+     */
     purpose?: string | null;
+    /**
+     * The technical system type classifications of this system usage (multi-choice).  Constraint: If an update changes this field, all options identified must be currently available in the organization context
+     */
     technicalSystemTypeUuids?: Array<string> | null;
+    hostedAt?: APIHostingChoice;
 }
 

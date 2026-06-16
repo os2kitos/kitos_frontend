@@ -27,6 +27,7 @@ import { Configuration }                                     from '../configurat
 
 
 export interface PostSingleTokenAuthenticationGetTokenRequestParams {
+    /**  */
     aPIUserCredentialsDTO?: APIUserCredentialsDTO;
 }
 
@@ -96,6 +97,7 @@ export class TokenAuthenticationService {
     }
 
     /**
+     * Issue a KITOS JWT  Notes:  - Credentials must belong to a user which has a membership in one or more organizations  - The user must be of type \&#39;API User\&#39;. For more info, check the KITOS API \&#39;Getting started\&#39; documentation.  - KITOS JWT are valid for 24 hours (see \&#39;expires\&#39; field).  - Read/Write permissions are provided by the Local Administrators in the individual municipalities
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.

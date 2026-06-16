@@ -29,51 +29,78 @@ import { Configuration }                                     from '../configurat
 
 
 export interface GetSingleOrganizationV2GetOrganizationRequestParams {
+    /** UUID of the organization */
     organizationUuid: string;
 }
 
 export interface GetSingleOrganizationV2GetOrganizationUnitRequestParams {
+    /** UUID of the organization */
     organizationUuid: string;
+    /** UUID of the organization unit in KITOS */
     organizationUnitId: string;
 }
 
 export interface GetSingleOrganizationV2GetOrganizationUnitsRequestParams {
+    /** UUID of the organization */
     organizationUuid: string;
+    /** Query by text in name */
     nameQuery?: string;
+    /** Include only changes which were LastModified (UTC) is equal to or greater than the provided value */
     changedSinceGtEq?: string;
+    /** Ordering property */
     orderByProperty?: APICommonOrderByProperty;
+    /** 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0 */
     page?: number;
+    /** Size of the page referred by \&#39;page\&#39;.  Range: [1,250] Default: 250. */
     pageSize?: number;
 }
 
 export interface GetSingleOrganizationV2GetOrganizationUserRequestParams {
+    /** UUID of the organization */
     organizationUuid: string;
+    /** UUID of the user entity in KITOS */
     userUuid: string;
 }
 
 export interface GetSingleOrganizationV2GetOrganizationUsersRequestParams {
+    /** UUID of the organization */
     organizationUuid: string;
+    /** Query by text in name or email */
     nameOrEmailQuery?: string;
     emailQuery?: string;
+    /** Query by role assignment */
     roleQuery?: APIOrganizationUserRole;
+    /** Property to order by */
     orderByProperty?: APICommonOrderByProperty;
+    /** 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0 */
     page?: number;
+    /** Size of the page referred by \&#39;page\&#39;.  Range: [1,250] Default: 250. */
     pageSize?: number;
 }
 
 export interface GetSingleOrganizationV2GetOrganizationsRequestParams {
+    /** If set to true, only organizations where the user has access and/or role(s) will be included. */
     onlyWhereUserHasMembership?: boolean;
+    /** Optional query for name content */
     nameContent?: string;
+    /** Optional query on CVR number */
     cvrContent?: string;
+    /** Optional query which will query both name and CVR number using OR logic */
     nameOrCvrContent?: string;
+    /** Optional query by organization uuid */
     uuid?: string;
+    /** Ordering property */
     orderByProperty?: APICommonOrderByProperty;
+    /** 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0 */
     page?: number;
+    /** Size of the page referred by \&#39;page\&#39;.  Range: [1,250] Default: 250. */
     pageSize?: number;
 }
 
 export interface GetSingleOrganizationV2GetOrganizationsAsRightsHolderRequestParams {
+    /** 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0 */
     page?: number;
+    /** Size of the page referred by \&#39;page\&#39;.  Range: [1,250] Default: 250. */
     pageSize?: number;
 }
 
@@ -143,6 +170,7 @@ export class OrganizationV2Service {
     }
 
     /**
+     * Returns organization identified by uuid
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -208,6 +236,7 @@ export class OrganizationV2Service {
     }
 
     /**
+     * Returns the a specific organization unit inside an organization
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -277,6 +306,7 @@ export class OrganizationV2Service {
     }
 
     /**
+     * Returns the organization units of an organization if the authenticated user is a member of the organization.
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -370,6 +400,7 @@ export class OrganizationV2Service {
     }
 
     /**
+     * Returns the a specific user within an organization
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -439,6 +470,7 @@ export class OrganizationV2Service {
     }
 
     /**
+     * Returns the users of an organization if the authenticated user is a member of the organization.
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -537,6 +569,7 @@ export class OrganizationV2Service {
     }
 
     /**
+     * Returns organizations from KITOS
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -641,6 +674,7 @@ export class OrganizationV2Service {
     }
 
     /**
+     * Returns organizations in which the current user has \&quot;RightsHolderAccess\&quot; permission
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.

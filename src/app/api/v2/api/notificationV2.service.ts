@@ -33,60 +33,90 @@ import { Configuration }                                     from '../configurat
 
 
 export interface DeleteSingleNotificationV2DeleteNotificationRequestParams {
+    /**  */
     ownerResourceType: APIOwnerResourceType;
+    /**  */
     ownerResourceUuid: string;
+    /**  */
     notificationUuid: string;
 }
 
 export interface GetSingleNotificationV2GetNotificationByUuidRequestParams {
+    /**  */
     ownerResourceType: APIOwnerResourceType;
+    /**  */
     ownerResourceUuid: string;
+    /**  */
     notificationUuid: string;
 }
 
 export interface GetSingleNotificationV2GetNotificationsRequestParams {
+    /** Filter by owner resource type */
     ownerResourceType: APIOwnerResourceType;
+    /** Filter by organization owning the owner resource */
     organizationUuid: string;
+    /** Filter by uuid of owner resource */
     ownerResourceUuid?: string;
+    /** Only include active notifications */
     onlyActive?: boolean;
+    /** 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0  NOTE: This parameter has no effect if \&#39;pageSize\&#39; is left unspecified */
     page?: number;
+    /** Size of the page referred by \&#39;page\&#39;.  Range: [1,2^31] Default: null.  If left unspecified, the entire result set will be returned. */
     pageSize?: number;
 }
 
 export interface GetSingleNotificationV2GetPermissionsRequestParams {
+    /**  */
     ownerResourceType: APIOwnerResourceType;
+    /**  */
     ownerResourceUuid: string;
+    /**  */
     notificationUuid: string;
 }
 
 export interface GetSingleNotificationV2GetSentNotificationRequestParams {
+    /**  */
     ownerResourceType: APIOwnerResourceType;
+    /**  */
     ownerResourceUuid: string;
+    /**  */
     notificationUuid: string;
 }
 
 export interface PatchSingleNotificationV2DeactivateScheduledNotificationRequestParams {
+    /**  */
     ownerResourceType: APIOwnerResourceType;
+    /**  */
     ownerResourceUuid: string;
     notificationUuid: string;
 }
 
 export interface PostSingleNotificationV2CreateImmediateNotificationRequestParams {
+    /**  */
     ownerResourceType: APIOwnerResourceType;
+    /**  */
     ownerResourceUuid: string;
+    /**  */
     aPIImmediateNotificationWriteRequestDTO?: APIImmediateNotificationWriteRequestDTO;
 }
 
 export interface PostSingleNotificationV2CreateScheduledNotificationRequestParams {
+    /**  */
     ownerResourceType: APIOwnerResourceType;
+    /**  */
     ownerResourceUuid: string;
+    /**  */
     aPIScheduledNotificationWriteRequestDTO?: APIScheduledNotificationWriteRequestDTO;
 }
 
 export interface PutSingleNotificationV2UpdateScheduledNotificationRequestParams {
+    /**  */
     ownerResourceType: APIOwnerResourceType;
+    /**  */
     ownerResourceUuid: string;
+    /**  */
     notificationUuid: string;
+    /**  */
     aPIUpdateScheduledNotificationWriteRequestDTO?: APIUpdateScheduledNotificationWriteRequestDTO;
 }
 
@@ -156,6 +186,7 @@ export class NotificationV2Service {
     }
 
     /**
+     * Deletes a notification
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -228,6 +259,7 @@ export class NotificationV2Service {
     }
 
     /**
+     * Gets a notification based on the ownerResourceType and notificationUuid
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -301,6 +333,7 @@ export class NotificationV2Service {
     }
 
     /**
+     * Gets all notifications owned by the specified ownerResourceType with a matching organizationUuid, which become active after the specified fromDate
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -397,6 +430,7 @@ export class NotificationV2Service {
     }
 
     /**
+     * Gets a notification based on the ownerResourceType and notificationUuid
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -470,6 +504,7 @@ export class NotificationV2Service {
     }
 
     /**
+     * Gets sent notification information
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -543,6 +578,7 @@ export class NotificationV2Service {
     }
 
     /**
+     * Deactivates the scheduled notification
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -616,6 +652,7 @@ export class NotificationV2Service {
     }
 
     /**
+     * Creates an immediate notifications, which is being sent after creation
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -696,6 +733,7 @@ export class NotificationV2Service {
     }
 
     /**
+     * Creates a scheduled notification. The notification will be sent on a specified date, and will repeat for a specified time
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -776,6 +814,7 @@ export class NotificationV2Service {
     }
 
     /**
+     * Updates the scheduled notification
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.

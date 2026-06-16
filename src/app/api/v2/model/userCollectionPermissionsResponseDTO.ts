@@ -13,6 +13,9 @@ import { APIUserCollectionEditPermissionsResponseDTO } from './userCollectionEdi
 
 
 export interface APIUserCollectionPermissionsResponseDTO { 
+    /**
+     * True when API client is allowed to CREATE the resource
+     */
     create?: boolean;
     modify?: APIUserCollectionEditPermissionsResponseDTO;
     delete?: boolean;

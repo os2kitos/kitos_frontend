@@ -25,18 +25,25 @@ import { Configuration }                                     from '../configurat
 
 
 export interface GetSingleItSystemUsageMigrationV2GetRequestParams {
+    /** uuid of system usage being migrated */
     usageUuid: string;
+    /** uuid of the master it-system to migrate to */
     toSystemUuid: string;
 }
 
 export interface GetSingleItSystemUsageMigrationV2GetUnusedItSystemsBySearchAndOrganizationRequestParams {
+    /**  */
     organizationUuid: string;
+    /**  */
     numberOfItSystems: number;
+    /**  */
     nameContent?: string;
 }
 
 export interface PostSingleItSystemUsageMigrationV2ExecuteMigrationRequestParams {
+    /**  */
     usageUuid: string;
+    /**  */
     toSystemUuid: string;
 }
 
@@ -106,6 +113,7 @@ export class ItSystemUsageMigrationV2Service {
     }
 
     /**
+     * Gets the migration description if a system usage is migrated to another master it-system resource
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -182,6 +190,7 @@ export class ItSystemUsageMigrationV2Service {
     }
 
     /**
+     * Gets the migration permissions of the authenticated user
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -242,6 +251,7 @@ export class ItSystemUsageMigrationV2Service {
     }
 
     /**
+     * Search for systems which are not in use and which are valid migration targets
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -327,6 +337,7 @@ export class ItSystemUsageMigrationV2Service {
     }
 
     /**
+     * Perform a migration of the it-system-usage to from the current it-system master data to a new it-system master data
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.

@@ -15,13 +15,31 @@ import { APIOversightDateDTO } from './oversightDateDTO';
 
 
 export interface APIDataProcessingRegistrationOversightWriteRequestDTO { 
+    /**
+     * Applied oversight options.  Constraints:      - No duplicates      - Option must be available in the organization
+     */
     oversightOptionUuids?: Array<string> | null;
+    /**
+     * Remark related to the selected oversight options
+     */
     oversightOptionsRemark?: string | null;
     oversightInterval?: APIOversightIntervalChoice;
+    /**
+     * Remark regarding the oversight interval
+     */
     oversightIntervalRemark?: string | null;
     isOversightCompleted?: APIYesNoUndecidedChoice;
+    /**
+     * Remark related to the oversight completion
+     */
     oversightCompletedRemark?: string | null;
+    /**
+     * Determines the date of a scheduled inspection
+     */
     oversightScheduledInspectionDate?: string | null;
+    /**
+     * Specific dates where the oversight activity took place  Constraints:      - IsOversightCompleted equals yes
+     */
     oversightDates?: Array<APIOversightDateDTO> | null;
 }
 

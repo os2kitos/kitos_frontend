@@ -6,7 +6,6 @@ import { Observable, map } from 'rxjs';
 import { APIGDPRWriteRequestDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { SUPPLIER_DISABLED_MESSAGE } from 'src/app/shared/constants/constants';
-import { HostedAt, hostedAtOptions, mapHostedAt } from 'src/app/shared/models/it-system-usage/gdpr/hosted-at.model';
 import {
   IsDataProcessingAgreementRequired,
   isDataProcessingAgreementRequiredOptions,
@@ -20,7 +19,6 @@ import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors';
 import {
   selectITSystemUsageEnableGdprDocumentation,
-  selectITSystemUsageEnableGdprHostedAt,
   selectITSystemUsageEnableGdprIsDataProcessingAgreementRequired,
   selectITSystemUsageEnableGdprPurpose,
 } from 'src/app/store/organization/ui-module-customization/selectors';
@@ -53,7 +51,6 @@ export class GeneralInfoSectionComponent extends BaseComponent implements OnInit
 
   public readonly supplierMessage = SUPPLIER_DISABLED_MESSAGE;
 
-  public readonly hostedAtOptions = hostedAtOptions;
   public readonly gdpr$ = this.store.select(selectItSystemUsageGdpr).pipe(filterNullish());
   public readonly selectDirectoryDocumentation$ = this.gdpr$.pipe(
     map((gdpr) =>
@@ -65,7 +62,6 @@ export class GeneralInfoSectionComponent extends BaseComponent implements OnInit
   public readonly generalInformationForm = new FormGroup(
     {
       purpose: new FormControl(''),
-      hostedAt: new FormControl<HostedAt | undefined>(undefined),
       isDataProcessingAgreementRequired: new FormControl<IsDataProcessingAgreementRequired | undefined>(undefined),
     },
     { updateOn: 'blur' },
@@ -74,7 +70,6 @@ export class GeneralInfoSectionComponent extends BaseComponent implements OnInit
   public isDataProcessingAgreementRequiredOptions = isDataProcessingAgreementRequiredOptions;
 
   public readonly purposeEnabled$ = this.store.select(selectITSystemUsageEnableGdprPurpose);
-  public readonly hostedAtEnabled$ = this.store.select(selectITSystemUsageEnableGdprHostedAt);
   public readonly documentationEnabled$ = this.store.select(selectITSystemUsageEnableGdprDocumentation);
   public readonly isDataProcessingAgreementRequiredEnabled$ = this.store.select(selectITSystemUsageEnableGdprIsDataProcessingAgreementRequired);
 
@@ -90,7 +85,6 @@ export class GeneralInfoSectionComponent extends BaseComponent implements OnInit
       this.gdpr$.subscribe((gdpr) => {
         this.generalInformationForm.patchValue({
           purpose: gdpr.processingPurpose,
-          hostedAt: mapHostedAt(gdpr.hostedAt ?? undefined),
           isDataProcessingAgreementRequired: mapIsDataProcessingAgreementRequired(
             gdpr.isDataProcessingAgreementRequired ?? undefined,
           ),

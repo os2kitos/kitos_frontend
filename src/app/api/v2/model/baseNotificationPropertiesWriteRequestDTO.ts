@@ -13,6 +13,9 @@ import { APIRecipientWriteRequestDTO } from './recipientWriteRequestDTO';
 
 
 export interface APIBaseNotificationPropertiesWriteRequestDTO { 
+    /**
+     * Subject of the Notification
+     */
     subject: string;
     body?: string | null;
     ccs?: APIRecipientWriteRequestDTO;

@@ -39,12 +39,16 @@ import { Configuration }                                     from '../configurat
 
 
 export interface DeleteSingleItSystemV2DeactivateSystemAsRightsHolderRequestParams {
+    /** Specific IT-System UUID */
     uuid: string;
+    /** Reason for deactivation */
     aPIDeactivationReasonRequestDTO?: APIDeactivationReasonRequestDTO;
 }
 
 export interface DeleteSingleItSystemV2DeleteExternalReferenceRequestParams {
+    /**  */
     systemUuid: string;
+    /**  */
     externalReferenceUuid: string;
 }
 
@@ -53,45 +57,67 @@ export interface DeleteSingleItSystemV2DeleteItSystemRequestParams {
 }
 
 export interface GetSingleItSystemV2GetHierarchyRequestParams {
+    /** Specific IT-System UUID */
     uuid: string;
 }
 
 export interface GetSingleItSystemV2GetItSystemRequestParams {
+    /** Specific IT-System UUID */
     uuid: string;
 }
 
 export interface GetSingleItSystemV2GetItSystemByRightsHoldersAccessRequestParams {
+    /** Specific IT-System UUID */
     uuid: string;
 }
 
 export interface GetSingleItSystemV2GetItSystemCollectionPermissionsRequestParams {
+    /** UUID of the organization */
     organizationUuid: string;
 }
 
 export interface GetSingleItSystemV2GetItSystemPermissionsRequestParams {
+    /** UUID of the system entity */
     systemUuid: string;
 }
 
 export interface GetSingleItSystemV2GetItSystemsRequestParams {
+    /** Rightsholder UUID filter */
     rightsHolderUuid?: string;
+    /** Business type UUID filter */
     businessTypeUuid?: string;
+    /** KLE number filter (\&quot;NN.NN.NN\&quot; format) */
     kleNumber?: string;
+    /** KLE UUID number filter */
     kleUuid?: string;
+    /** Greater than or equal to number of users filter */
     numberOfUsers?: number;
+    /** If set to true, the response will also include deactivated it-interfaces */
     includeDeactivated?: boolean;
+    /** Include only changes which were LastModified (UTC) is equal to or greater than the provided value */
     changedSinceGtEq?: string;
+    /** Filter by UUID of an organization which has taken the it-system into use through an it-system-usage resource */
     usedInOrganizationUuid?: string;
+    /** Include only systems with a name that contains the content in the parameter */
     nameContains?: string;
+    /** Ordering property */
     orderByProperty?: APICommonOrderByProperty;
+    /** 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0 */
     page?: number;
+    /** Size of the page referred by \&#39;page\&#39;.  Range: [1,250] Default: 250. */
     pageSize?: number;
 }
 
 export interface GetSingleItSystemV2GetItSystemsByRightsHoldersAccessRequestParams {
+    /** Optional filtering if a user is rights holder in multiple organizations and wishes to scope the request to a single one */
     rightsHolderUuid?: string;
+    /** If set to true, the response will also include deactivated it-interfaces */
     includeDeactivated?: boolean;
+    /** Include only changes which were LastModified (UTC) is equal to or greater than the provided value */
     changedSinceGtEq?: string;
+    /** 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0 */
     page?: number;
+    /** Size of the page referred by \&#39;page\&#39;.  Range: [1,250] Default: 250. */
     pageSize?: number;
 }
 
@@ -101,11 +127,13 @@ export interface PatchSingleItSystemV2PatchItSystemRequestParams {
 }
 
 export interface PatchSingleItSystemV2PatchItSystemAsRightsHolderRequestParams {
+    /** Specific IT-System UUID */
     uuid: string;
     aPIRightsHolderUpdateSystemPropertiesRequestDTO?: APIRightsHolderUpdateSystemPropertiesRequestDTO;
 }
 
 export interface PostSingleItSystemV2PostExternalReferenceRequestParams {
+    /**  */
     systemUuid: string;
     aPIExternalReferenceDataWriteRequestDTO?: APIExternalReferenceDataWriteRequestDTO;
 }
@@ -115,16 +143,20 @@ export interface PostSingleItSystemV2PostItSystemRequestParams {
 }
 
 export interface PostSingleItSystemV2PostItSystemAsRightsHolderRequestParams {
+    /** A collection of specific IT-System values */
     aPIRightsHolderFullItSystemRequestDTO?: APIRightsHolderFullItSystemRequestDTO;
 }
 
 export interface PutSingleItSystemV2PutExternalReferenceRequestParams {
+    /**  */
     systemUuid: string;
+    /**  */
     externalReferenceUuid: string;
     aPIExternalReferenceDataWriteRequestDTO?: APIExternalReferenceDataWriteRequestDTO;
 }
 
 export interface PutSingleItSystemV2PutItSystemAsRightsHolderRequestParams {
+    /** Specific IT-System UUID */
     uuid: string;
     aPIRightsHolderFullItSystemRequestDTO?: APIRightsHolderFullItSystemRequestDTO;
 }
@@ -195,6 +227,7 @@ export class ItSystemV2Service {
     }
 
     /**
+     * Deactivates an IT-System
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -270,6 +303,7 @@ export class ItSystemV2Service {
     }
 
     /**
+     * Deletes a system external reference
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -338,6 +372,7 @@ export class ItSystemV2Service {
     }
 
     /**
+     * DELETE an existing it-system  NOTE: This is for master data only. Local usages extend this with local data, and are managed through the it-system-usage resource  Constraints:  - All usages must be removed before deletion  - All child systems must be removed  - No interfaces may still be exposed on the it-system
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -402,6 +437,7 @@ export class ItSystemV2Service {
     }
 
     /**
+     * Returns hierarchy for the specified IT-System
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -467,6 +503,7 @@ export class ItSystemV2Service {
     }
 
     /**
+     * Returns requested IT-System
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -532,6 +569,7 @@ export class ItSystemV2Service {
     }
 
     /**
+     * Returns requested IT-System
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -597,6 +635,7 @@ export class ItSystemV2Service {
     }
 
     /**
+     * Returns the permissions of the authenticated client for the IT-System resources collection in the context of an organization (IT-System permissions in a specific Organization)
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -669,6 +708,7 @@ export class ItSystemV2Service {
     }
 
     /**
+     * Returns the permissions of the authenticated client in the context of a specific IT-System
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -734,6 +774,7 @@ export class ItSystemV2Service {
     }
 
     /**
+     * Returns all IT-Systems available to the current user
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -858,6 +899,7 @@ export class ItSystemV2Service {
     }
 
     /**
+     * Returns IT-Systems for which the current user has rights holders access
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -947,6 +989,7 @@ export class ItSystemV2Service {
     }
 
     /**
+     * Update an existing it-system  NOTE: This is for master data only. Local usages extend this with local data, and are managed through the it-system-usage resource
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -1024,6 +1067,7 @@ export class ItSystemV2Service {
     }
 
     /**
+     * Partially updates an existing it-system using json merge patch semantics (RFC7396)  NOTE: Only active systems can be modified.
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -1101,6 +1145,7 @@ export class ItSystemV2Service {
     }
 
     /**
+     * Creates an external reference for the system
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -1177,6 +1222,7 @@ export class ItSystemV2Service {
     }
 
     /**
+     * Create a new IT-System master data entity  NOTE: This is for master data only. Local usages extend this with local data, and are managed through the it-system-usage resource
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -1249,6 +1295,7 @@ export class ItSystemV2Service {
     }
 
     /**
+     * Creates a new IT-System based on given input values
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -1321,6 +1368,7 @@ export class ItSystemV2Service {
     }
 
     /**
+     * Updates a system external reference
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -1401,6 +1449,7 @@ export class ItSystemV2Service {
     }
 
     /**
+     * Sets IT-System values  If a property value is not provided, KITOS will fallback to the default value of the type and that will be written to the it-system so remember to define all data specified in the request DTO want them to have a value after the request.  Required properties dictate the minimum value set accepted by KITOS.  NOTE: Only active systems can be modified.
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.

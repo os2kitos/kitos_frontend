@@ -12,11 +12,29 @@
 
 
 export interface APIRoleOptionResponseDTO { 
+    /**
+     * UUID which is unique within collection of entities of the same type
+     */
     uuid: string;
+    /**
+     * Human readable name of the entity
+     */
     name: string;
+    /**
+     * Extended description of the choice
+     */
     description: string;
+    /**
+     * Determines if this role grants write access to the entity through which it has been created
+     */
     writeAccess?: boolean;
+    /**
+     * Determines if this role is used by any existing entities
+     */
     isExternallyAvailable?: boolean;
+    /**
+     * Description about this roles usage externally
+     */
     externallyAvailableDescription?: string | null;
 }
 

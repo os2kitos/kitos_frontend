@@ -12,9 +12,21 @@
 
 
 export interface APIContractPaymentModelDataWriteRequestDTO { 
+    /**
+     * The data at which operations remuneration started
+     */
     operationsRemunerationStartedAt?: string | null;
+    /**
+     * Optionally assigned payment frequency  Constraints:      - If changed from current state, the option type must be available in the organization
+     */
     paymentFrequencyUuid?: string | null;
+    /**
+     * Optionally assigned payment model  Constraints:      - If changed from current state, the option type must be available in the organization
+     */
     paymentModelUuid?: string | null;
+    /**
+     * Optionally assigned price regulation  Constraints:      - If changed from current state, the option type must be available in the organization
+     */
     priceRegulationUuid?: string | null;
 }
 

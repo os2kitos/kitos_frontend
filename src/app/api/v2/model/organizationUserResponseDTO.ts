@@ -13,13 +13,37 @@ import { APIOrganizationUserRole } from './organizationUserRole';
 
 
 export interface APIOrganizationUserResponseDTO { 
+    /**
+     * UUID which is unique within collection of entities of the same type
+     */
     uuid: string;
+    /**
+     * Human readable name of the entity
+     */
     name: string;
+    /**
+     * User\'s first name
+     */
     firstName: string;
+    /**
+     * User\'s last name(s)
+     */
     lastName?: string | null;
+    /**
+     * User\'s email
+     */
     email: string;
+    /**
+     * User\'s phone number
+     */
     phoneNumber?: string | null;
+    /**
+     * Determines if the user credentials can be used to request a KITOS API token
+     */
     apiAccess: boolean;
+    /**
+     * Roles assigned to the user within the context of the organization
+     */
     roles: Array<APIOrganizationUserRole>;
 }
 

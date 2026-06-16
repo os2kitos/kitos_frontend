@@ -12,6 +12,9 @@
 import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 
 
+/**
+ * Defines a generic assignment DTO representing the assignment of a role option to a KITOS User
+ */
 export interface APIRoleAssignmentResponseDTO { 
     user: APIIdentityNamePairResponseDTO;
     role: APIIdentityNamePairResponseDTO;

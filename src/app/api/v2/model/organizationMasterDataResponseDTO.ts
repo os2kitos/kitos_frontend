@@ -12,7 +12,13 @@
 
 
 export interface APIOrganizationMasterDataResponseDTO { 
+    /**
+     * UUID which is unique within collection of entities of the same type
+     */
     uuid: string;
+    /**
+     * Human readable name of the entity
+     */
     name: string;
     cvr?: string | null;
     phone?: string | null;

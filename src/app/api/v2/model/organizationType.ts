@@ -11,6 +11,9 @@
  */
 
 
+/**
+ * Defines a stable API enumeration over the organization types found in KITOS
+ */
 export type APIOrganizationType = 'Municipality' | 'CommunityOfInterest' | 'Company' | 'OtherPublicAuthority';
 
 export const APIOrganizationType = {

@@ -15,6 +15,9 @@ import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 export interface APIItSystemHierarchyNodeResponseDTO { 
     node: APIIdentityNamePairResponseDTO;
     parent?: APIIdentityNamePairResponseDTO;
+    /**
+     * Active status of the node
+     */
     deactivated?: boolean;
     isInUse?: boolean;
 }

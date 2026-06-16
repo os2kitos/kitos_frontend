@@ -24,9 +24,18 @@ import { APIExternalReferenceDataResponseDTO } from './externalReferenceDataResp
 
 
 export interface APIItContractResponseDTO { 
+    /**
+     * UUID for IT-Contract
+     */
     uuid: string;
+    /**
+     * Name of IT-Contract
+     */
     name: string;
     organizationContext: APIShallowOrganizationResponseDTO;
+    /**
+     * UTC timestamp of latest modification
+     */
     lastModified: string;
     lastModifiedBy: APIIdentityNamePairResponseDTO;
     createdBy: APIIdentityNamePairResponseDTO;
@@ -35,13 +44,25 @@ export interface APIItContractResponseDTO {
     procurement: APIContractProcurementDataResponseDTO;
     supplier: APIContractSupplierDataResponseDTO;
     responsible: APIContractResponsibleDataResponseDTO;
+    /**
+     * Associated IT-System usages
+     */
     systemUsages: Array<APIIdentityNamePairResponseDTO>;
+    /**
+     * Data processing registrations associated with this it-contract
+     */
     dataProcessingRegistrations: Array<APIIdentityNamePairResponseDTO>;
     paymentModel: APIContractPaymentModelDataResponseDTO;
     agreementPeriod: APIContractAgreementPeriodDataResponseDTO;
     termination: APIContractTerminationDataResponseDTO;
     payments: APIContractPaymentsDataResponseDTO;
+    /**
+     * Role assignments
+     */
     roles: Array<APIRoleAssignmentResponseDTO>;
+    /**
+     * External reference definitions
+     */
     externalReferences: Array<APIExternalReferenceDataResponseDTO>;
 }
 

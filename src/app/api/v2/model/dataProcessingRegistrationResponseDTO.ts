@@ -22,13 +22,22 @@ export interface APIDataProcessingRegistrationResponseDTO {
     name: string | null;
     uuid: string;
     createdBy: APIIdentityNamePairResponseDTO;
+    /**
+     * UTC timestamp of latest modification
+     */
     lastModified: string;
     lastModifiedBy: APIIdentityNamePairResponseDTO;
     organizationContext: APIShallowOrganizationResponseDTO;
     general: APIDataProcessingRegistrationGeneralDataResponseDTO;
     systemUsages: Array<APIShallowItSystemUsageResponseDTO> | null;
     oversight: APIDataProcessingRegistrationOversightResponseDTO;
+    /**
+     * Data processing role assignments
+     */
     roles: Array<APIRoleAssignmentResponseDTO> | null;
+    /**
+     * External reference definitions
+     */
     externalReferences: Array<APIExternalReferenceDataResponseDTO> | null;
 }
 

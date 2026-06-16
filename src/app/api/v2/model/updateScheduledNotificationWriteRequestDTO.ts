@@ -13,7 +13,13 @@ import { APIBaseNotificationPropertiesWriteRequestDTO } from './baseNotification
 
 
 export interface APIUpdateScheduledNotificationWriteRequestDTO { 
+    /**
+     * Name of the notification (different from the Subject)
+     */
     name?: string | null;
+    /**
+     * Date on which the notification expires
+     */
     toDate?: string | null;
     baseProperties: APIBaseNotificationPropertiesWriteRequestDTO;
 }

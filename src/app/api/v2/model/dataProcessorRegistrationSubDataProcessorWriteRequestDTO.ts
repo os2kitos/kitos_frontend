@@ -13,9 +13,18 @@ import { APIYesNoUndecidedChoice } from './yesNoUndecidedChoice';
 
 
 export interface APIDataProcessorRegistrationSubDataProcessorWriteRequestDTO { 
+    /**
+     * The UUID of the data processor\'s organization in KITOS
+     */
     dataProcessorOrganizationUuid: string;
+    /**
+     * Optional reference to the uuid of the selected basis for transfer option
+     */
     basisForTransferUuid?: string | null;
     transferToInsecureThirdCountry?: APIYesNoUndecidedChoice;
+    /**
+     * Optional reference to the uuid a specific insecure country, which is subject to data processing
+     */
     insecureThirdCountrySubjectToDataProcessingUuid?: string | null;
 }
 

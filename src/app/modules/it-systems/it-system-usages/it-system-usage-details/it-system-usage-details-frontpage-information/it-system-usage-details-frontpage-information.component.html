@@ -59,6 +59,16 @@
         (valueChange)="patchGeneral({ purpose: $event })"
       ></app-textbox>
     }
+    @if (hostedAtEnabled$ | async) {
+      <app-dropdown
+        text="IT-systemet driftes"
+        i18n-text
+        [formGroup]="itSystemInformationForm"
+        formName="hostedAt"
+        [data]="hostedAtOptions"
+        (valueChange)="patchGeneral({ hostedAt: $event })"
+      ></app-dropdown>
+    }
     @if (amountOfUsersEnabled$ | async) {
       <app-dropdown
         text="Antal brugere"

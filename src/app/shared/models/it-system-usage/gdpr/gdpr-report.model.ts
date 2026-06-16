@@ -1,7 +1,6 @@
 import { APIGdprReportResponseDTO } from 'src/app/api/v2';
 import { mapToYesNoDontKnowIrrelevantEnum } from '../../yes-no-dont-know-irrelevant.model';
 import { mapToYesNoDontKnowEnum, YesNoDontKnowOption } from '../../yes-no-dont-know.model';
-import { HostedAt, mapHostedAt } from './hosted-at.model';
 import { mapPreRiskAssessmentEnum, PreRiskAssessment } from './pre-risk-assessment.model';
 
 export interface GdprReport {
@@ -24,7 +23,6 @@ export interface GdprReport {
   personalDataSocialOtherPrivateMatters?: boolean;
   dpia?: YesNoDontKnowOption;
   dpiaDate?: string;
-  hostedAt?: HostedAt;
   technicalSupervisionDocumentationUrl?: string;
   technicalSupervisionDocumentationUrlName?: string;
   userSupervision?: YesNoDontKnowOption;
@@ -56,7 +54,6 @@ export function adaptGdprReport(dto: APIGdprReportResponseDTO): GdprReport {
     personalDataSocialOtherPrivateMatters: dto.personalDataSocialOtherPrivateMatters,
     dpia: mapToYesNoDontKnowEnum(dto.dpia),
     dpiaDate: dto.dpiaDate ?? undefined,
-    hostedAt: mapHostedAt(dto.hostedAt ?? undefined),
     technicalSupervisionDocumentationUrl: dto.technicalSupervisionDocumentationUrl ?? undefined,
     technicalSupervisionDocumentationUrlName: dto.technicalSupervisionDocumentationUrlName ?? undefined,
     userSupervision: mapToYesNoDontKnowEnum(dto.userSupervision),

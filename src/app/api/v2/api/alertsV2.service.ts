@@ -33,6 +33,7 @@ export interface DeleteSingleAlertsV2DeleteAlertRequestParams {
 export interface GetSingleAlertsV2GetByOrganizationAndUserRequestParams {
     organizationUuid: string;
     userUuid: string;
+    /** Type of resource owning the notification, in Domain terms Core.DomainModel.Shared.RelatedEntityType */
     ownerResourceType: APIOwnerResourceType;
 }
 

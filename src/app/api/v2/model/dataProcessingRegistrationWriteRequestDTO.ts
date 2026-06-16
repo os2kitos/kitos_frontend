@@ -16,8 +16,14 @@ import { APIDataProcessingRegistrationOversightWriteRequestDTO } from './dataPro
 
 export interface APIDataProcessingRegistrationWriteRequestDTO { 
     general?: APIDataProcessingRegistrationGeneralDataWriteRequestDTO;
+    /**
+     * UUIDs of associated it-system-usage entities  Constraints:      - No duplicates      - System usages must be belong to the same organization as this data processing registration
+     */
     systemUsageUuids?: Array<string> | null;
     oversight?: APIDataProcessingRegistrationOversightWriteRequestDTO;
+    /**
+     * Data processing role assignments  Constraints:      - Users must be members of the same organization as this data processing registration      - Role options must be available in the organization of the data processing registration
+     */
     roles?: Array<APIRoleAssignmentRequestDTO> | null;
 }
 

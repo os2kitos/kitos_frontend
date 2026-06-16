@@ -12,9 +12,21 @@
 
 
 export interface APIContractValidityWriteRequestDTO { 
+    /**
+     * Determines if the entity has been forced into valid state even if context properties would dictate otherwise (e.g. no longer in use)
+     */
     enforcedValid?: boolean;
+    /**
+     * If specified, the entity is valid from this date.  Must be less than or equal to ValidTo
+     */
     validFrom?: string | null;
+    /**
+     * If specified, the entity is valid up until and including this date.  Must be greater than or equal to ValidFrom
+     */
     validTo?: string | null;
+    /**
+     * Determines if the parent contract should be part of the contracts validation
+     */
     requireValidParent?: boolean;
 }
 

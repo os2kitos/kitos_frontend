@@ -15,12 +15,30 @@ import { APIJournalPeriodDTO } from './journalPeriodDTO';
 
 export interface APIArchivingCreationRequestDTO { 
     archiveDuty?: APIArchiveDutyChoice;
+    /**
+     * Defines the archiving type associated with the it-system  Constraint: If an update changes this field, the option identified must be currently available in the organization context
+     */
     typeUuid?: string | null;
+    /**
+     * Identifies the physical location for archive receiving the data  Constraint: If an update changes this field, the option identified must be currently available in the organization context
+     */
     locationUuid?: string | null;
+    /**
+     * Identifies the physical location for the archiving test  Constraint: If an update changes this field, the option identified must be currently available in the organization context
+     */
     testLocationUuid?: string | null;
     supplierOrganizationUuid?: string | null;
+    /**
+     * Determines if any archiving has occurred from this system
+     */
     active?: boolean | null;
+    /**
+     * Archiving notes
+     */
     notes?: string | null;
+    /**
+     * Determines the frequency of the archiving activity
+     */
     frequencyInMonths?: number | null;
     documentBearing?: boolean | null;
     journalPeriods?: Array<APIJournalPeriodDTO> | null;

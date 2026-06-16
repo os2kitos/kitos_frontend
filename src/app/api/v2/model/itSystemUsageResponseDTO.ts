@@ -21,20 +21,38 @@ import { APIGeneralDataResponseDTO } from './generalDataResponseDTO';
 import { APIExternalReferenceDataResponseDTO } from './externalReferenceDataResponseDTO';
 
 
+/**
+ * NOTE: IT-System usages are registrations which extend those of a system within the context of a specific organization.  IT-System usages have their own lifecycle and identity but the human readable name is inherited from the system context.
+ */
 export interface APIItSystemUsageResponseDTO { 
+    /**
+     * UUID of the IT-System usage registration instance
+     */
     uuid: string;
     createdBy?: APIIdentityNamePairResponseDTO;
+    /**
+     * UTC timestamp of latest modification
+     */
     lastModified: string;
     lastModifiedBy?: APIIdentityNamePairResponseDTO;
     systemContext: APIIdentityNamePairResponseDTO;
     organizationContext: APIShallowOrganizationResponseDTO;
     general: APIGeneralDataResponseDTO;
+    /**
+     * A collection of IT-System usage role option assignments
+     */
     roles: Array<APIRoleAssignmentResponseDTO>;
     organizationUsage: APIOrganizationUsageResponseDTO;
     localKLEDeviations: APILocalKLEDeviationsResponseDTO;
+    /**
+     * User defined external references
+     */
     externalReferences: Array<APIExternalReferenceDataResponseDTO>;
     archiving: APIArchivingRegistrationsResponseDTO;
     gdpr: APIGDPRRegistrationsResponseDTO;
+    /**
+     * Contains registered relations to other system usages within the organization
+     */
     outgoingSystemRelations: Array<APIOutgoingSystemRelationResponseDTO>;
 }
 
