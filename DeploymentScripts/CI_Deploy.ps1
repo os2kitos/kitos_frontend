@@ -22,9 +22,10 @@ $password = $Env:MsDeployPassword
   -disableLink:CertificateExtension `
   -source:dirPath="$deployment_packages_dir" `
   -allowUntrusted `
+  -enableRule:AppOffline `
   -dest:dirPath="`"C:\inetpub\kitos-frontend`",computerName=`"$computerName`",userName=`"$username`",password=`"$password`",authtype=`"Basic`",includeAcls=`"False`""
 
 if ($LASTEXITCODE -ne 0) {
-    Write-Error "MSdeploy failed with exit code $LASTEXITCODE"
-    exit $LASTEXITCODE
+  Write-Error "MSdeploy failed with exit code $LASTEXITCODE"
+  exit $LASTEXITCODE
 }
