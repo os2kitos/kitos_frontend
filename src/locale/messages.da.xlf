@@ -7933,6 +7933,14 @@
         <source>Teknisk systemtyper</source>
         <target state="new">Teknisk systemtyper</target>
       </trans-unit>
+      <trans-unit id="5222795483056055508" datatype="html">
+        <source>Dele af data bevares + Dokumenter kasseres (D+K)</source>
+        <target state="new">Dele af data bevares + Dokumenter kasseres (D+K)</target>
+      </trans-unit>
+      <trans-unit id="1129788292088432889" datatype="html">
+        <source>Dele af data bevares + Delmængde kasseres (D+D)</source>
+        <target state="new">Dele af data bevares + Delmængde kasseres (D+D)</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -6068,6 +6068,12 @@
       <trans-unit id="9154056184529721480" datatype="html">
         <source>Snitflade ID&apos;er</source>
       </trans-unit>
+      <trans-unit id="1129788292088432889" datatype="html">
+        <source>Dele af data bevares + Delmængde kasseres (D+D)</source>
+      </trans-unit>
+      <trans-unit id="5222795483056055508" datatype="html">
+        <source>Dele af data bevares + Dokumenter kasseres (D+K)</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

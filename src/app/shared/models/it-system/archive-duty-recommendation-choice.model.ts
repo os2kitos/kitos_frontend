@@ -2,6 +2,8 @@ import { APIRecommendedArchiveDutyChoice } from 'src/app/api/v2';
 import {
   ARCHIVE_B_TYPE_TEXT,
   ARCHIVE_BK_TYPE_TEXT,
+  ARCHIVE_DD_TYPE_TEXT,
+  ARCHIVE_DK_TYPE_TEXT,
   ARCHIVE_K_TYPE_TEXT,
   ARCHIVE_KB_TYPE_TEXT,
   ARCHIVE_KD_TYPE_TEXT,
@@ -38,6 +40,14 @@ export const archiveDutyRecommendationChoiceOptions: ArchiveDutyRecommendationCh
   {
     name: ARCHIVE_KB_TYPE_TEXT,
     value: APIRecommendedArchiveDutyChoice.Kb,
+  },
+  {
+    name: ARCHIVE_DK_TYPE_TEXT,
+    value: APIRecommendedArchiveDutyChoice.Dk,
+  },
+  {
+    name: ARCHIVE_DD_TYPE_TEXT,
+    value: APIRecommendedArchiveDutyChoice.Dd,
   },
   {
     name: ARCHIVE_TEXT_NO_RECOMMENDATION,
