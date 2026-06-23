@@ -7,6 +7,7 @@ import {
   APIGeneralDataResponseDTO,
   APIGeneralDataUpdateRequestDTO,
   APIIdentityNamePairResponseDTO,
+  APILicensingAndCodeModelChoice,
   APIRegularOptionResponseDTO,
 } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
@@ -25,6 +26,11 @@ import {
 } from 'src/app/shared/models/dropdown-option.model';
 import { itSystemUsageFields } from 'src/app/shared/models/field-permissions-blueprints.model';
 import { HostedAt, hostedAtOptions, mapHostedAt } from 'src/app/shared/models/it-system-usage/gdpr/hosted-at.model';
+import {
+  LicensingAndCodeModel,
+  licensingAndCodeModelOptions,
+  mapLicensingAndCodeModels,
+} from 'src/app/shared/models/it-system/licensing-and-code-model.model';
 import {
   LifeCycleStatus,
   lifeCycleStatusOptions,
@@ -72,6 +78,7 @@ import {
   selectITSystemUsageEnableIsSociallyCritical,
   selectITSystemUsageEnableLastEditedAt,
   selectITSystemUsageEnableLastEditedBy,
+  selectITSystemUsageEnableLicensingAndCodeModels,
   selectITSystemUsageEnableLifeCycleStatus,
   selectITSystemUsageEnableName,
   selectITSystemUsageEnableStatus,
@@ -129,6 +136,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
       notes: new FormControl<string | undefined>(undefined),
       aiTechnology: new FormControl<YesNoDontKnowOption | undefined>(undefined),
       hostedAt: new FormControl<HostedAt | undefined>(undefined),
+      licensingAndCodeModels: new FormControl<MultiSelectDropdownItem<LicensingAndCodeModel>[] | undefined>(undefined),
     },
     { updateOn: 'blur' },
   );
@@ -167,6 +175,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
   public readonly webAccessiblityEnabled$ = this.store.select(selectITSystemUsageEnableWebAccessibility);
   public readonly isSociallyCriticalEnabled$ = this.store.select(selectITSystemUsageEnableIsSociallyCritical);
   public readonly isBusinessCriticalEnabled$ = this.store.select(selectITSystemUsageEnableIsBusinessCritical);
+  public readonly licensingAndCodeModelsEnabled$ = this.store.select(selectITSystemUsageEnableLicensingAndCodeModels);
   public readonly criticalityFieldsLastChangedEnabled$ = this.store.select(
     selectITSystemUsageEnableCriticalityFieldsLastChanged,
   );
@@ -248,6 +257,12 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
     MultiSelectDropdownItem<APIRegularOptionResponseDTO>[]
   >([]);
   public initialSelectedTechnicalSystemTypes: MultiSelectDropdownItem<APIRegularOptionResponseDTO>[] = [];
+
+  public readonly licensingAndCodeModelDropdownOptions$ = new BehaviorSubject<
+    MultiSelectDropdownItem<LicensingAndCodeModel>[]
+  >(this.getDefaultLicensingAndCodeModelDropdownOptions());
+  public initialSelectedLicensingAndCodeModels: MultiSelectDropdownItem<LicensingAndCodeModel>[] = [];
+  public readonly licensingAndCodeModelOptions = licensingAndCodeModelOptions;
 
   public readonly hasModifyPermission$ = this.store.select(selectITSystemUsageHasModifyPermission);
 
@@ -354,6 +369,9 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
         .pipe(filterNullish())
         .subscribe((general) => {
           const technicalSystemTypeItems = this.mapTechnicalSystemTypeDropdownItems(general.technicalSystemTypes ?? []);
+          const licensingAndCodeModelItems = this.mapLicensingAndCodeModelDropdownItems(
+            general.licensingAndCodeModels ?? [],
+          );
 
           this.itSystemInformationForm.patchValue({
             purpose: general.purpose,
@@ -366,9 +384,11 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
             notes: general.notes,
             aiTechnology: mapToYesNoEnum(general.containsAITechnology),
             hostedAt: mapHostedAt(general.hostedAt ?? undefined),
+            licensingAndCodeModels: licensingAndCodeModelItems,
           });
 
           this.setupTechnicalSystemTypesControl(technicalSystemTypeItems);
+          this.setupLicensingAndCodeModelsControl(licensingAndCodeModelItems);
 
           this.itSystemCriticalityForm.patchValue({
             isSociallyCritical: mapToYesNoDontKnowEnum(general.isSociallyCritical),
@@ -404,6 +424,72 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
               : $localize`Systemet er ikke aktivt`,
           }),
         ),
+    );
+  }
+
+  private noLicensingAndCodeModelSelected(): boolean {
+    return this.initialSelectedLicensingAndCodeModels.length === 0;
+  }
+
+  private proprietaryLicensingAndCodeModelIsSelected(): boolean {
+    return this.initialSelectedLicensingAndCodeModels.some(
+      (option) => option.value.value === APILicensingAndCodeModelChoice.Proprietary,
+    );
+  }
+
+  private anyNonProprietaryLicensingAndCodeModelIsSelected(): boolean {
+    return this.initialSelectedLicensingAndCodeModels.some(
+      (option) => option.value.value !== APILicensingAndCodeModelChoice.Proprietary,
+    );
+  }
+
+  private setupLicensingAndCodeModelsControl(
+    licensingAndCodeModelDropdownItems: MultiSelectDropdownItem<LicensingAndCodeModel>[],
+  ) {
+    this.initialSelectedLicensingAndCodeModels = licensingAndCodeModelDropdownItems;
+
+    let newOptions: MultiSelectDropdownItem<LicensingAndCodeModel>[];
+
+    if (this.noLicensingAndCodeModelSelected()) {
+      newOptions = this.getDefaultLicensingAndCodeModelDropdownOptions();
+    } else if (this.proprietaryLicensingAndCodeModelIsSelected()) {
+      newOptions = this.enableAppropriateLicensingAndCodeModels(true);
+    } else if (this.anyNonProprietaryLicensingAndCodeModelIsSelected()) {
+      newOptions = this.enableAppropriateLicensingAndCodeModels(false);
+    } else {
+      newOptions = [...this.licensingAndCodeModelDropdownOptions$.value];
+    }
+
+    this.licensingAndCodeModelDropdownOptions$.next(newOptions);
+  }
+
+  private enableAppropriateLicensingAndCodeModels(
+    enableProprietary: boolean,
+  ): MultiSelectDropdownItem<LicensingAndCodeModel>[] {
+    return this.licensingAndCodeModelDropdownOptions$.value.map((option) => {
+      const isProprietary = option.value.value === APILicensingAndCodeModelChoice.Proprietary;
+      const shouldBeEnabled = enableProprietary ? isProprietary : !isProprietary;
+      return { ...option, disabled: !shouldBeEnabled };
+    });
+  }
+
+  private mapLicensingAndCodeModelDropdownItems(apiModels: APILicensingAndCodeModelChoice[]) {
+    const frontendModels = mapLicensingAndCodeModels(apiModels);
+    return frontendModels.map((option) => ({
+      name: option.name,
+      value: option,
+      selected: false,
+    }));
+  }
+
+  private getDefaultLicensingAndCodeModelDropdownOptions(): MultiSelectDropdownItem<LicensingAndCodeModel>[] {
+    return licensingAndCodeModelOptions.map(
+      (option) =>
+        ({
+          name: option.name,
+          value: option,
+          selected: false,
+        }) as MultiSelectDropdownItem<LicensingAndCodeModel>,
     );
   }
 
@@ -446,6 +532,15 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
   public patchTechnicalSystemTypes(selectedOptions: APIRegularOptionResponseDTO[]) {
     const uuids = selectedOptions.map((option) => option.uuid);
     this.patchGeneral({ technicalSystemTypeUuids: uuids });
+  }
+
+  public patchLicensingAndCodeModels(
+    selectedOptions: LicensingAndCodeModel[],
+    valueChange?: ValidatedValueChange<unknown>,
+  ) {
+    this.setupLicensingAndCodeModelsControl(this.itSystemInformationForm.controls.licensingAndCodeModels.value ?? []);
+    const apiEnums = selectedOptions.map((option) => option.value);
+    this.patchGeneral({ licensingAndCodeModels: apiEnums }, valueChange);
   }
 
   private setupTechnicalSystemTypesControl(items: MultiSelectDropdownItem<APIRegularOptionResponseDTO>[]) {

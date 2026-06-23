@@ -49,14 +49,6 @@
         [formGroup]="itSystemInformationForm"
         formName="externalUuid"
       ></app-textbox>
-      <app-textbox
-        text="Licens- og kodegrundlag"
-        i18n-text
-        [formGroup]="itSystemInformationForm"
-        formName="licensingAndCodeModels"
-      >
-
-      </app-textbox>
 
           <app-contentbox text="Referencer vedr. systemet" i18n-text>
             @for (reference of itSystemInformationForm.controls['urlReference'].value; track reference) {

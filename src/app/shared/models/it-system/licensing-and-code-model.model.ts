@@ -11,9 +11,7 @@ export const licensingAndCodeModelOptions: LicensingAndCodeModel[] = [
   { name: $localize`Proprietær`, value: APILicensingAndCodeModelChoice.Proprietary },
 ];
 
-export const mapLicensingAndCodeModel = (
-  source?: APILicensingAndCodeModelChoice,
-): LicensingAndCodeModel | undefined => {
+const mapLicensingAndCodeModel = (source?: APILicensingAndCodeModelChoice): LicensingAndCodeModel | undefined => {
   return licensingAndCodeModelOptions.find((option) => option.value === source);
 };
 

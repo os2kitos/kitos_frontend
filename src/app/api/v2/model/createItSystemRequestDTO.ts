@@ -12,7 +12,6 @@
 import { APIExternalReferenceDataWriteRequestDTO } from './externalReferenceDataWriteRequestDTO';
 import { APIRecommendedArchiveDutyRequestDTO } from './recommendedArchiveDutyRequestDTO';
 import { APIRegistrationScopeChoice } from './registrationScopeChoice';
-import { APILicensingAndCodeModelChoice } from './licensingAndCodeModelChoice';
 
 
 export interface APICreateItSystemRequestDTO { 
@@ -58,9 +57,5 @@ export interface APICreateItSystemRequestDTO {
      * Determines if the system has been deactivated from being taken into use
      */
     deactivated?: boolean;
-    /**
-     * The licensing and code model used for this system. Existing models will be replaced by the input data.
-     */
-    licensingAndCodeModels?: Array<APILicensingAndCodeModelChoice> | null;
 }
 

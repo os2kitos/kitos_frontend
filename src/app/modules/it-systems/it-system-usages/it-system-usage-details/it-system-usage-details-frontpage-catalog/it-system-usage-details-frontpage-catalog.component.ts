@@ -6,9 +6,7 @@ import { first } from 'rxjs';
 import { APIExternalReferenceDataResponseDTO, APIRegularOptionResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
-import { toCommaSeparatedString } from 'src/app/shared/helpers/array.helpers';
 import { mapScopeEnumToScopeChoice } from 'src/app/shared/models/it-system/it-system-scope.model';
-import { mapLicensingAndCodeModels } from 'src/app/shared/models/it-system/licensing-and-code-model.model';
 import { mapOptionCrossReferenceToOptionDTO } from 'src/app/shared/models/options/option-type.model';
 import {
   mapRecommendedArchiveDutyComment,
@@ -80,7 +78,6 @@ export class ITSystemUsageDetailsFrontpageCatalogComponent extends BaseComponent
     description: new FormControl({ value: '', disabled: true }),
     legalName: new FormControl({ value: '', disabled: true }),
     legalDataProcessorName: new FormControl({ value: '', disabled: true }),
-    licensingAndCodeModels: new FormControl<string | undefined>({ value: undefined, disabled: true }),
   });
 
   public readonly businessTypes$ = this.store
@@ -129,9 +126,6 @@ export class ITSystemUsageDetailsFrontpageCatalogComponent extends BaseComponent
             description: itSystem.description,
             legalName: itSystem.legalName,
             legalDataProcessorName: itSystem.legalDataProcessorName,
-            licensingAndCodeModels: toCommaSeparatedString(
-              mapLicensingAndCodeModels(itSystem.licensingAndCodeModels).map((option) => option.name),
-            ),
           }),
         ),
     );

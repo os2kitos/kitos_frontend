@@ -105,6 +105,16 @@
         </app-dropdown
       ></app-tooltip>
     }
+    @if (licensingAndCodeModelsEnabled$ | async) {
+      <app-multi-select-dropdown
+        text="Licens- og kodegrundlag"
+        i18n-text
+        [data]="licensingAndCodeModelDropdownOptions$ | async"
+        [initialSelectedValues]="initialSelectedLicensingAndCodeModels"
+        [disabled]="!(hasModifyPermission$ | async)"
+        (selectedEvent)="patchLicensingAndCodeModels($event)"
+      ></app-multi-select-dropdown>
+    }
     @if (descriptionEnabled$ | async) {
       <app-textarea
         class="full-width"

@@ -67,3 +67,5 @@ export const CriticalityFieldsLastChanged = 'CriticalityFieldsLastChanged';
 export const IsDataProcessingAgreementRequired = 'IsDataProcessingAgreementRequired';
 export const ItInterfaceIdsAsCsv = 'ItInterfaceIdsAsCsv';
 export const ItInterfaceVersionsAsCsv = 'ItInterfaceVersionsAsCsv';
+export const LicensingAndCodeModels = 'LicensingAndCodeModels';
+

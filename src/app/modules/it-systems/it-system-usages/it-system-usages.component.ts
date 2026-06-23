@@ -31,6 +31,7 @@ import { hostedAtOptionsGrid } from 'src/app/shared/models/it-system-usage/gdpr/
 import { isDataProcessingAgreementRequiredOptions } from 'src/app/shared/models/it-system-usage/gdpr/is-data-processing-agreement-required.model';
 import { riskAssessmentResultOptionsGrid } from 'src/app/shared/models/it-system-usage/gdpr/risk-assessment-result';
 import { archiveDutyRecommendationChoiceOptions } from 'src/app/shared/models/it-system/archive-duty-recommendation-choice.model';
+import { licensingAndCodeModelOptions } from 'src/app/shared/models/it-system/licensing-and-code-model.model';
 import { lifeCycleStatusOptions } from 'src/app/shared/models/life-cycle-status.model';
 import { numberOfExpectedUsersOptionsGrid } from 'src/app/shared/models/number-of-expected-users.model';
 import { yesNoBooleanOptions } from 'src/app/shared/models/yes-no-boolean-options.model';
@@ -734,6 +735,16 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       extraFilter: 'enum',
       style: 'enum',
       extraData: isDataProcessingAgreementRequiredOptions,
+    },
+    {
+      field: GridFields.LicensingAndCodeModels,
+      title: $localize`Licens- og kodegrundlag`,
+      section: this.systemSectionName,
+      hidden: true,
+      style: 'enum-array',
+      extraFilter: 'enum',
+      extraData: licensingAndCodeModelOptions,
+      persistId: 'licensingAndCodeModels',
     },
   ];
 

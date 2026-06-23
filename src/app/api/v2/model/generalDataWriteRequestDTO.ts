@@ -16,6 +16,7 @@ import { APISimpleLinkDTO } from './simpleLinkDTO';
 import { APIExpectedUsersIntervalDTO } from './expectedUsersIntervalDTO';
 import { APIYesNoPartiallyChoice } from './yesNoPartiallyChoice';
 import { APIItSystemUsageValidityWriteRequestDTO } from './itSystemUsageValidityWriteRequestDTO';
+import { APILicensingAndCodeModelChoice } from './licensingAndCodeModelChoice';
 
 
 export interface APIGeneralDataWriteRequestDTO { 
@@ -67,5 +68,9 @@ export interface APIGeneralDataWriteRequestDTO {
      */
     technicalSystemTypeUuids?: Array<string> | null;
     hostedAt?: APIHostingChoice;
+    /**
+     * The licensing and code models used for this system usage. Existing models will be replaced by the input data.
+     */
+    licensingAndCodeModels?: Array<APILicensingAndCodeModelChoice> | null;
 }
 

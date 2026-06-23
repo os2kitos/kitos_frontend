@@ -96,6 +96,7 @@ import {
   selectITSystemUsageEnableLifeCycleStatus,
   selectITSystemUsageEnableLocalKle,
   selectITSystemUsageEnableLocalReferences,
+  selectITSystemUsageEnableLicensingAndCodeModels,
   selectITSystemUsageEnableOutgoingRelations,
   selectITSystemUsageEnableSelectContractToDetermineIfItSystemIsActive,
   selectITSystemUsageEnableStatus,
@@ -431,6 +432,11 @@ export class GridUIConfigService {
       this.store
         .select(selectITSystemUsageEnableItInterfaceVersions)
         .pipe(shouldEnable([UsageFields.ItInterfaceVersionsAsCsv])),
+
+      //Licensing and Code Models
+      this.store
+        .select(selectITSystemUsageEnableLicensingAndCodeModels)
+        .pipe(shouldEnable([UsageFields.LicensingAndCodeModels])),
     ];
 
     return combineLatest(configObservables);

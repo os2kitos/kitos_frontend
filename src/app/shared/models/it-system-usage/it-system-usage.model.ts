@@ -6,6 +6,7 @@ import {
   RoleAssignmentEmailsMaps,
   RoleAssignmentsMap,
 } from '../helpers/read-model-role-assignments';
+import { LicensingAndCodeModel, mapLicensingAndCodeModels } from '../it-system/licensing-and-code-model.model';
 import { LifeCycleStatus, mapLifeCycleStatus } from '../life-cycle-status.model';
 import { mapGridNumberOfExpectedUsers, NumberOfExpectedUsersGrid } from '../number-of-expected-users.model';
 import { mapToYesNoDontKnowIrrelevantEnum, YesNoDontKnowIrrelevantOption } from '../yes-no-dont-know-irrelevant.model';
@@ -104,6 +105,7 @@ export interface ITSystemUsage {
   IsDataProcessingAgreementRequired: IsDataProcessingAgreementRequired | undefined;
   ItInterfaceIdsAsCsv: string;
   ItInterfaceVersionsAsCsv: string;
+  LicensingAndCodeModels: LicensingAndCodeModel[] | undefined;
 }
 
 function getParentItSystemLinkPaths(value: {
@@ -240,6 +242,7 @@ export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
     IsDataProcessingAgreementRequired: mapIsDataProcessingAgreementRequired(value.IsDataProcessingAgreementRequired),
     ItInterfaceIdsAsCsv: value.ItInterfaceIdsAsCsv,
     ItInterfaceVersionsAsCsv: value.ItInterfaceVersionsAsCsv,
+    LicensingAndCodeModels: mapLicensingAndCodeModels(value.LicensingAndCodeModels),
   };
   return adaptedSystem;
 };

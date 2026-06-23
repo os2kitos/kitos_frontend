@@ -2,19 +2,17 @@ import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, combineLatestWith, first, map } from 'rxjs';
+import { combineLatestWith, first, map } from 'rxjs';
 import { APIShallowOrganizationDTO } from 'src/app/api/v1';
 import {
   APIExternalReferenceDataResponseDTO,
   APIIdentityNamePairResponseDTO,
-  APILicensingAndCodeModelChoice,
   APIRecommendedArchiveDutyChoice,
   APIRegularOptionResponseDTO,
   APIUpdateItSystemRequestDTO,
 } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ARCHIVE_TEXT } from 'src/app/shared/constants/constants';
-import { MultiSelectDropdownItem } from 'src/app/shared/models/dropdown-option.model';
 import {
   ArchiveDutyRecommendationChoice,
   archiveDutyRecommendationChoiceOptions,
@@ -25,11 +23,6 @@ import {
   mapScopeEnumToScopeChoice,
   scopeOptions,
 } from 'src/app/shared/models/it-system/it-system-scope.model';
-import {
-  LicensingAndCodeModel,
-  licensingAndCodeModelOptions,
-  mapLicensingAndCodeModels,
-} from 'src/app/shared/models/it-system/licensing-and-code-model.model';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { EntityStatusTextsService } from 'src/app/shared/services/entity-status-texts.service';
@@ -83,7 +76,6 @@ import { ITSystemCatalogDetailsFrontpageComponentStore } from './it-system-catal
     ParagraphComponent,
     ItSystemKleOverviewComponent,
     AsyncPipe,
-    MultiSelectDropdownComponent,
   ],
 })
 export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent implements OnInit {
@@ -97,9 +89,6 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
   public readonly organizations$ = this.componentStore.organizations$;
   public readonly isLoadingOrganizations$ = this.componentStore.isLoadingOrganizations$;
   public readonly hasModifyVisibilityPermission$ = this.store.select(selectITSystemHasModifyPermission);
-  public readonly licensingAndCodeModelDropdownOptions$: BehaviorSubject<
-    MultiSelectDropdownItem<LicensingAndCodeModel>[]
-  > = new BehaviorSubject(this.getDefaultLicensingAndCodeModelDropdownOptions());
 
   public readonly externalReferences$ = this.store.select(selectItSystemExternalReferences).pipe(
     filterNullish(),
@@ -107,7 +96,6 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
   );
 
   public readonly archiveDutyRecommendationOptions = archiveDutyRecommendationChoiceOptions;
-  public initialSelectedLicensingAndCodeModels: MultiSelectDropdownItem<LicensingAndCodeModel>[] = [];
 
   public readonly itSystemFrontpageFormGroup = new FormGroup({
     name: new FormControl<string | undefined>({ value: undefined, disabled: true }, Validators.required),
@@ -130,10 +118,6 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
     description: new FormControl<string | undefined>({ value: undefined, disabled: true }),
     legalName: new FormControl<string | undefined>({ value: undefined, disabled: true }),
     legalDataProcessorName: new FormControl<string | undefined>({ value: undefined, disabled: true }),
-    licensingAndCodeModels: new FormControl<MultiSelectDropdownItem<LicensingAndCodeModel>[] | undefined>({
-      value: undefined,
-      disabled: true,
-    }),
   });
 
   public readonly nationalArchivesText = ARCHIVE_TEXT;
@@ -164,17 +148,6 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
     } else {
       this.store.dispatch(ITSystemActions.patchITSystem(frontpage));
     }
-  }
-
-  public patchLicensingAndCodeModels(
-    frontendModels: LicensingAndCodeModel[],
-    valueChange?: ValidatedValueChange<unknown>,
-  ) {
-    this.setupLicensingAndCodeModelsControl(
-      this.itSystemFrontpageFormGroup.controls.licensingAndCodeModels.value ?? [],
-    );
-    const apiEnums = frontendModels.map((model) => model.value);
-    this.patchFrontPage({ licensingAndCodeModels: apiEnums }, valueChange);
   }
 
   public patchArchiveDutyComment(value: string | undefined, valueChange?: ValidatedValueChange<unknown>) {
@@ -215,52 +188,6 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
     );
   }
 
-  private noLicensingAndCodeModelSelected(): boolean {
-    return this.initialSelectedLicensingAndCodeModels.length === 0;
-  }
-
-  private proprietaryLicensingAndCodeModelIsSelected(): boolean {
-    return this.initialSelectedLicensingAndCodeModels.some(
-      (option) => option.value.value === APILicensingAndCodeModelChoice.Proprietary,
-    );
-  }
-
-  private anyNonProprietaryLicensingAndCodeModelIsSelected(): boolean {
-    return this.initialSelectedLicensingAndCodeModels.some(
-      (option) => option.value.value !== APILicensingAndCodeModelChoice.Proprietary,
-    );
-  }
-
-  private setupLicensingAndCodeModelsControl(
-    licensingAndCodeModelDropdownItems: MultiSelectDropdownItem<LicensingAndCodeModel>[],
-  ) {
-    this.initialSelectedLicensingAndCodeModels = licensingAndCodeModelDropdownItems;
-
-    let newOptions: MultiSelectDropdownItem<LicensingAndCodeModel>[];
-
-    if (this.noLicensingAndCodeModelSelected()) {
-      newOptions = this.getDefaultLicensingAndCodeModelDropdownOptions();
-    } else if (this.proprietaryLicensingAndCodeModelIsSelected()) {
-      newOptions = this.enableAppropriateLicensingAndCodeModels(true);
-    } else if (this.anyNonProprietaryLicensingAndCodeModelIsSelected()) {
-      newOptions = this.enableAppropriateLicensingAndCodeModels(false);
-    } else {
-      newOptions = [...this.licensingAndCodeModelDropdownOptions$.value];
-    }
-
-    this.licensingAndCodeModelDropdownOptions$.next(newOptions);
-  }
-
-  private enableAppropriateLicensingAndCodeModels(
-    enableProprietary: boolean,
-  ): MultiSelectDropdownItem<LicensingAndCodeModel>[] {
-    return this.licensingAndCodeModelDropdownOptions$.value.map((option) => {
-      const isProprietary = option.value.value === APILicensingAndCodeModelChoice.Proprietary;
-      const shouldBeEnabled = enableProprietary ? isProprietary : !isProprietary;
-      return { ...option, disabled: !shouldBeEnabled };
-    });
-  }
-
   public hasModifyPermission$ = this.store.select(selectITSystemHasModifyPermission);
 
   private subscribeToItSystem() {
@@ -275,9 +202,6 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
           ),
         )
         .subscribe(([itSystem, hasModifyPermission, canModifyVisibility]) => {
-          const licensingAndCodeModelDropdownItems = this.mapLicensingAndCodeModelDropdownItems(
-            itSystem.licensingAndCodeModels ?? [],
-          );
 
           this.itSystemFrontpageFormGroup.patchValue({
             name: itSystem.name,
@@ -294,10 +218,7 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
             description: itSystem.description,
             legalName: itSystem.legalName,
             legalDataProcessorName: itSystem.legalDataProcessorName,
-            licensingAndCodeModels: licensingAndCodeModelDropdownItems,
           });
-
-          this.setupLicensingAndCodeModelsControl(licensingAndCodeModelDropdownItems);
 
           if (hasModifyPermission) {
             this.itSystemFrontpageFormGroup.enable();
@@ -323,26 +244,6 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
           this.itSystemFrontpageFormGroup.controls.legalName.disable();
           this.itSystemFrontpageFormGroup.controls.legalDataProcessorName.disable();
         }),
-    );
-  }
-
-  private mapLicensingAndCodeModelDropdownItems(apiModels: APILicensingAndCodeModelChoice[]) {
-    const frontendModels = mapLicensingAndCodeModels(apiModels);
-    return frontendModels.map((option) => ({
-      name: option.name,
-      value: option,
-      selected: false,
-    }));
-  }
-
-  private getDefaultLicensingAndCodeModelDropdownOptions(): MultiSelectDropdownItem<LicensingAndCodeModel>[] {
-    return licensingAndCodeModelOptions.map(
-      (option) =>
-        ({
-          name: option.name,
-          value: option,
-          selected: false,
-        }) as MultiSelectDropdownItem<LicensingAndCodeModel>,
     );
   }
 
