@@ -1,0 +1,64 @@
+<app-card>
+  <app-card-header title="Anvendelseshistorik" helpTextKey="it-system.archive.main" i18n-title> </app-card-header>
+
+  <form [formGroup]="archiveForm">
+    <app-datepicker
+      [formGroup]="archiveForm"
+      formName="takenIntoUsageDate"
+      text="Ibrugtagningsdato"
+      i18n-text
+    ></app-datepicker>
+    <app-datepicker [formGroup]="archiveForm" formName="archivingDate" text="Udfasningsdato" i18n-text></app-datepicker>
+    <app-textbox
+      [formGroup]="archiveForm"
+      formName="referenceName"
+      text="Navngivning på ESDH sag"
+      i18n-text
+    ></app-textbox>
+    <app-textarea
+      class="full-width"
+      [formGroup]="archiveForm"
+      formName="note"
+      text="Kommentar"
+      i18n-text
+    ></app-textarea>
+    <app-textbox i18n-text text="Arkiveringsnavn" [formGroup]="archiveForm" formName="legacyName"></app-textbox>
+    <app-textbox i18n-text text="Systemnavn (lokalt)" [formGroup]="archiveForm" formName="localName"></app-textbox>
+    <app-textbox i18n-text text="Systemnavn ID (lokalt)" [formGroup]="archiveForm" formName="localId"></app-textbox>
+    <app-textbox i18n-text text="Organisation" [formGroup]="archiveForm" formName="organization"></app-textbox>
+    <app-textbox
+      i18n-text
+      text="Nuværende systemnavn"
+      [formGroup]="archiveForm"
+      formName="currentSystemName"
+    ></app-textbox>
+  </form>
+</app-card>
+
+<app-card>
+  <app-card-header title="Referencer" i18n-title></app-card-header>
+  @if (archiveReferenceItems.length > 0) {
+    <app-native-table>
+      <thead>
+        <tr>
+          <th i18n>Reference</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (reference of archiveReferenceItems; track $index) {
+          <tr>
+            <td>
+              <app-external-page-link
+                [title]="reference.name"
+                [url]="reference.url"
+                linkFontSize="small"
+              ></app-external-page-link>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </app-native-table>
+  } @else {
+    <app-empty-state context="emptyTable" text="Der er endnu ikke tilføjet referencer" i18n-text></app-empty-state>
+  }
+</app-card>

@@ -1,0 +1,30 @@
+@if ((isLoading$ | async) === false) {
+  <app-breadcrumbs [items]="breadCrumbs$ | async"></app-breadcrumbs>
+  <div class="header">
+    <h4>{{ usageArchiveLegacyName$ | async }}</h4>
+    @if ((hasDeletePermission$ | async) === true) {
+      <div class="header-buttons">
+        <ng-container>
+          <app-button
+            (buttonClick)="showDeleteDialog()"
+            buttonStyle="secondary"
+            color="warn"
+            i18n
+            data-cy="delete-contract-button"
+            [disabled]="(hasDeletePermission$ | async) !== true"
+          >
+            Slet Anvendelseshistorik
+          </app-button>
+        </ng-container>
+      </div>
+    }
+  </div>
+  <div class="content">
+    <app-navigation-drawer [items]="navigationItems"> </app-navigation-drawer>
+    <router-outlet></router-outlet>
+  </div>
+}
+
+@if (isLoading$ | async) {
+  <app-loading></app-loading>
+}

@@ -6,6 +6,10 @@
   align-items: center;
   margin-top: 12px;
   margin-bottom: 12px;
+
+  app-paragraph {
+    white-space: pre-line;
+  }
 }
 
 .icon-center-flexbox {

@@ -11,6 +11,7 @@ export enum AppPath {
   itSystemUsagesDetails = 'it-system-usages/:uuid',
   itSystemCatalog = 'it-system-catalog',
   itSystemCatalogDetails = 'it-system-catalog/:uuid',
+  itSystemUsageArchive = 'it-system-usage-archive',
 
   frontpage = 'frontpage',
   passwordReset = 'reset-password',

@@ -36,7 +36,7 @@ export const itSystemUsageFeature = createFeature({
     itSystemUsageInitialState,
     on(
       ITSystemUsageActions.getITSystemUsages,
-      (state): ITSystemUsageState => ({ ...state, isLoadingSystemUsagesQuery: true })
+      (state): ITSystemUsageState => ({ ...state, isLoadingSystemUsagesQuery: true }),
     ),
     on(
       ITSystemUsageActions.getITSystemUsagesSuccess,
@@ -44,14 +44,14 @@ export const itSystemUsageFeature = createFeature({
         ...itSystemUsageAdapter.setAll(itSystemUsages, state),
         total,
         isLoadingSystemUsagesQuery: false,
-      })
+      }),
     ),
     on(
       ITSystemUsageActions.getITSystemUsagesError,
       (state): ITSystemUsageState => ({
         ...state,
         isLoadingSystemUsagesQuery: false,
-      })
+      }),
     ),
     on(
       ITSystemUsageActions.updateGridState,
@@ -60,83 +60,83 @@ export const itSystemUsageFeature = createFeature({
         isLoadingSystemUsagesQuery: true,
         gridState,
         previousGridState: state.gridState,
-      })
+      }),
     ),
     on(
       ITSystemUsageActions.getITSystemUsage,
-      (state): ITSystemUsageState => ({ ...state, itSystemUsage: undefined, itSystemUsageLoading: true })
+      (state): ITSystemUsageState => ({ ...state, itSystemUsage: undefined, itSystemUsageLoading: true }),
     ),
     on(
       ITSystemUsageActions.getITSystemUsageSuccess,
-      (state, { itSystemUsage }): ITSystemUsageState => ({ ...state, itSystemUsage, itSystemUsageLoading: false })
+      (state, { itSystemUsage }): ITSystemUsageState => ({ ...state, itSystemUsage, itSystemUsageLoading: false }),
     ),
     on(
       ITSystemUsageActions.getITSystemUsageError,
-      (state): ITSystemUsageState => ({ ...state, itSystemUsageLoading: false })
+      (state): ITSystemUsageState => ({ ...state, itSystemUsageLoading: false }),
     ),
 
     on(ITSystemUsageActions.removeITSystemUsage, (state): ITSystemUsageState => ({ ...state, isRemoving: true })),
     on(
       ITSystemUsageActions.removeITSystemUsageSuccess,
-      (state): ITSystemUsageState => ({ ...state, itSystemUsage: undefined, isRemoving: false })
+      (state): ITSystemUsageState => ({ ...state, itSystemUsage: undefined, isRemoving: false }),
     ),
     on(ITSystemUsageActions.removeITSystemUsageError, (state): ITSystemUsageState => ({ ...state, isRemoving: false })),
 
     on(
       ITSystemUsageActions.removeITSystemUsageUsingUnitSuccess,
-      (state, { itSystemUsage }): ITSystemUsageState => ({ ...state, itSystemUsage: itSystemUsage })
+      (state, { itSystemUsage }): ITSystemUsageState => ({ ...state, itSystemUsage: itSystemUsage }),
     ),
 
     on(
       ITSystemUsageActions.addITSystemUsageUsingUnitSuccess,
-      (state, { itSystemUsage }): ITSystemUsageState => ({ ...state, itSystemUsage: itSystemUsage })
+      (state, { itSystemUsage }): ITSystemUsageState => ({ ...state, itSystemUsage: itSystemUsage }),
     ),
 
     on(ITSystemUsageActions.patchITSystemUsage, (state): ITSystemUsageState => ({ ...state, isPatching: true })),
 
     on(
       ITSystemUsageActions.patchITSystemUsageSuccess,
-      (state, { itSystemUsage }): ITSystemUsageState => ({ ...state, itSystemUsage, isPatching: false })
+      (state, { itSystemUsage }): ITSystemUsageState => ({ ...state, itSystemUsage, isPatching: false }),
     ),
     on(ITSystemUsageActions.patchITSystemUsageError, (state): ITSystemUsageState => ({ ...state, isPatching: false })),
 
     on(
       ITSystemUsageActions.getITSystemUsagePermissions,
-      (state): ITSystemUsageState => ({ ...state, permissions: undefined })
+      (state): ITSystemUsageState => ({ ...state, permissions: undefined }),
     ),
     on(
       ITSystemUsageActions.getITSystemUsagePermissionsSuccess,
-      (state, { permissions }): ITSystemUsageState => ({ ...state, permissions })
+      (state, { permissions }): ITSystemUsageState => ({ ...state, permissions }),
     ),
 
     on(
       ITSystemUsageActions.getITSystemUsageCollectionPermissions,
-      (state): ITSystemUsageState => ({ ...state, collectionPermissions: undefined })
+      (state): ITSystemUsageState => ({ ...state, collectionPermissions: undefined }),
     ),
     on(
       ITSystemUsageActions.getITSystemUsageCollectionPermissionsSuccess,
-      (state, { permissions }): ITSystemUsageState => ({ ...state, collectionPermissions: permissions })
+      (state, { permissions }): ITSystemUsageState => ({ ...state, collectionPermissions: permissions }),
     ),
 
     on(
       ITSystemUsageActions.bulkAddItSystemUsageRoleSuccess,
-      (state, { itSystemUsage }): ITSystemUsageState => ({ ...state, itSystemUsage })
+      (state, { itSystemUsage }): ITSystemUsageState => ({ ...state, itSystemUsage }),
     ),
     on(
       ITSystemUsageActions.removeItSystemUsageRoleSuccess,
-      (state, { itSystemUsage }): ITSystemUsageState => ({ ...state, itSystemUsage })
+      (state, { itSystemUsage }): ITSystemUsageState => ({ ...state, itSystemUsage }),
     ),
     on(
       ITSystemUsageActions.addExternalReferenceSuccess,
-      (state, { itSystemUsage }): ITSystemUsageState => ({ ...state, itSystemUsage })
+      (state, { itSystemUsage }): ITSystemUsageState => ({ ...state, itSystemUsage }),
     ),
     on(
       ITSystemUsageActions.editExternalReferenceSuccess,
-      (state, { itSystemUsage }): ITSystemUsageState => ({ ...state, itSystemUsage })
+      (state, { itSystemUsage }): ITSystemUsageState => ({ ...state, itSystemUsage }),
     ),
     on(
       ITSystemUsageActions.removeExternalReferenceSuccess,
-      (state, { itSystemUsage }): ITSystemUsageState => ({ ...state, itSystemUsage })
+      (state, { itSystemUsage }): ITSystemUsageState => ({ ...state, itSystemUsage }),
     ),
 
     on(ITSystemUsageActions.updateGridColumnsSuccess, (state, { gridColumns }): ITSystemUsageState => {
@@ -159,7 +159,7 @@ export const itSystemUsageFeature = createFeature({
           ...state,
           lastSeenGridConfig: response,
         };
-      }
+      },
     ),
 
     on(ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationError, (state): ITSystemUsageState => {
@@ -176,7 +176,7 @@ export const itSystemUsageFeature = createFeature({
           ...state,
           lastSeenGridConfig: response,
         };
-      }
+      },
     ),
 
     on(ITSystemUsageActions.getItSystemUsageOverviewRolesError, (state): ITSystemUsageState => {
@@ -186,7 +186,7 @@ export const itSystemUsageFeature = createFeature({
     on(ITSystemUsageActions.createItSystemUsage, (state): ITSystemUsageState => ({ ...state, isCreating: true })),
     on(
       ITSystemUsageActions.createItSystemUsageSuccess,
-      (state): ITSystemUsageState => ({ ...state, isCreating: false })
+      (state): ITSystemUsageState => ({ ...state, isCreating: false }),
     ),
     on(ITSystemUsageActions.createItSystemUsageError, (state): ITSystemUsageState => ({ ...state, isCreating: false })),
 
@@ -202,7 +202,7 @@ export const itSystemUsageFeature = createFeature({
           ...state,
           systemRoles: resetCache(),
         };
-      }
-    )
+      },
+    ),
   ),
 });

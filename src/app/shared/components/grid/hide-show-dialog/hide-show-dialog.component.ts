@@ -11,6 +11,7 @@ import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
+import { ITSystemUsageArchiveActions } from 'src/app/store/it-system-usage-archive/actions';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
 import { ButtonComponent } from '../../buttons/button/button.component';
@@ -74,6 +75,9 @@ export class HideShowDialogComponent implements OnInit {
         break;
       case 'it-system':
         this.store.dispatch(ITSystemActions.updateGridColumns(updatedColumns));
+        break;
+      case 'it-system-usage-archive':
+        this.store.dispatch(ITSystemUsageArchiveActions.updateGridColumns(updatedColumns));
         break;
       case 'it-interface':
         this.store.dispatch(ITInterfaceActions.updateGridColumns(updatedColumns));

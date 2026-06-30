@@ -2,6 +2,15 @@
 
 OS2 KITOS (Kommunernes IT OverbliksSystem) is a Danish municipal IT-oversight platform. It tracks IT system usages, contracts, data processing registrations (GDPR), and system integrations across public organisations.
 
+## Scope (in priority order)
+
+1. **Correctness & reliability:** Logic errors, race conditions, data loss, broken edge cases.
+2. **Security & privacy:** Injection, auth/z, secret handling, unsafe deserialization, insecure defaults.
+3. **Compatibility:** Breaking changes, backwards compatibility, input/output validation.
+4. **Performance:** Changes that meaningfully impact latency, memory, or scale.
+5. **Testing:** Gaps for critical paths; propose **minimal** test additions.
+6. **Economic token spend:** Be concise. No explanations unless asked. Code only for generation tasks. Bullets over paragraphs.
+
 ## Commands
 
 ```bash
@@ -66,11 +75,11 @@ HTTP communication uses an XSRF interceptor (`HttpXSRF.interceptor.ts`). Authent
 
 ### Extend the Base Classes
 
-| Base class | Use when |
-|---|---|
-| `BaseComponent` | Every component – provides `subscriptions: Subscription` cleaned up on destroy |
-| `BaseFormComponent<T>` | Form-input components – emits `valueChange` / `validatedValueChange` |
-| `BaseOverviewComponent` | Grid/overview pages – handles row-click navigation, unclickable columns |
+| Base class              | Use when                                                                       |
+| ----------------------- | ------------------------------------------------------------------------------ |
+| `BaseComponent`         | Every component – provides `subscriptions: Subscription` cleaned up on destroy |
+| `BaseFormComponent<T>`  | Form-input components – emits `valueChange` / `validatedValueChange`           |
+| `BaseOverviewComponent` | Grid/overview pages – handles row-click navigation, unclickable columns        |
 
 ### Component Structure
 

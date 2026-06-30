@@ -10,84 +10,63 @@
         <app-menu title="Organisation" [path]="AppPath.organization" i18n-title>
           <app-menu-item [path]="AppPath.structure" [parentPath]="AppPath.organization" i18n
             ><app-table-icon></app-table-icon>Organisation</app-menu-item
+          >
+          <app-menu-item [path]="AppPath.users" [parentPath]="AppPath.organization" i18n
+            ><app-table-icon></app-table-icon>Brugere</app-menu-item
+          >
+          <app-menu-item [path]="AppPath.masterData" [parentPath]="AppPath.organization" i18n
+            ><app-table-icon></app-table-icon>Stamdata</app-menu-item
+          >
+        </app-menu>
+        @if (uiRootConfig.showItSystemModule) {
+          <app-menu title="IT Systemer" [path]="AppPath.itSystems" i18n-title data-cy="it-system-nav-bar-item">
+            <app-menu-item [path]="AppPath.itSystemUsages" [parentPath]="AppPath.itSystems" i18n
+              ><app-table-icon></app-table-icon>IT Systemer</app-menu-item
             >
-            <app-menu-item [path]="AppPath.users" [parentPath]="AppPath.organization" i18n
-              ><app-table-icon></app-table-icon>Brugere</app-menu-item
-              >
-              <app-menu-item [path]="AppPath.masterData" [parentPath]="AppPath.organization" i18n
-                ><app-table-icon></app-table-icon>Stamdata</app-menu-item
-                >
-              </app-menu>
-              @if (uiRootConfig.showItSystemModule) {
-                <app-menu
-                  title="IT Systemer"
-                  [path]="AppPath.itSystems"
-                  i18n-title
-                  data-cy="it-system-nav-bar-item"
-                  >
-                  <app-menu-item [path]="AppPath.itSystemUsages" [parentPath]="AppPath.itSystems" i18n
-                    ><app-table-icon></app-table-icon>IT Systemer</app-menu-item
-                    >
-                    <app-menu-item [path]="AppPath.itSystemCatalog" [parentPath]="AppPath.itSystems" i18n
-                      ><app-table-icon></app-table-icon>IT Systemkatalog</app-menu-item
-                      >
-                      <app-menu-item [path]="AppPath.itInterfaces" [parentPath]="AppPath.itSystems" i18n
-                        ><app-table-icon></app-table-icon>Snitfladekatalog</app-menu-item
-                        >
-                      </app-menu>
-                    }
-                    @if (uiRootConfig.showItContractModule) {
-                      <app-menu
-                        title="IT Kontrakter"
-                        [path]="AppPath.itContracts"
-                        i18n-title
-                        >
-                      </app-menu>
-                    }
-                    @if (uiRootConfig.showDataProcessing) {
-                      <app-menu
-                        title="Databehandling"
-                        [path]="AppPath.dataProcessing"
-                        i18n-title
-                        data-cy="dpr-nav-bar-item"
-                        >
-                      </app-menu>
-                    }
-                  </span>
-                }
-                <app-spacer></app-spacer>
-                <span>
-                  <app-notifications-button></app-notifications-button>
-                  <span class="separator"></span>
-                  <app-menu [path]="AppPath.profile" i18n-title data-cy="profile-menu">
-                    <span title class="user-menu">
-                      <p>{{ (user$ | async)?.fullName }}</p>
-                      <p>{{ organizationName$ | async }}</p>
-                    </span>
-                    <app-menu-item [path]="AppPath.profile" i18n>Min profil</app-menu-item>
-                    @if (isUserCurrentyLocalAdmin$ | async) {
-                      <app-menu-item
-                        [path]="AppPath.localAdmin"
-                        i18n
-                        data-cy="local-admin-menu-item"
-                        >Lokal admin</app-menu-item
-                        >
-                      }
-                      @if (user.isGlobalAdmin) {
-                        <app-menu-item [path]="AppPath.globalAdmin" data-cy="global-admin-menu-item" i18n
-                          >Global admin</app-menu-item
-                          >
-                        }
-                        @if (hasMultipleOrganizations$ | async) {
-                          <app-menu-item (itemClick)="showOrganizationDialog()" i18n
-                            >Skift organisation</app-menu-item
-                            >
-                          }
-                          <app-menu-item (itemClick)="logout()">
-                            <span class="logout-container" i18n>Log ud<app-logout-icon></app-logout-icon> </span>
-                          </app-menu-item>
-                        </app-menu>
-                      </span>
-                    }
-                  </mat-toolbar>
-                  <app-test-environment-ribbon *appHideInProd></app-test-environment-ribbon>
+            <app-menu-item [path]="AppPath.itSystemCatalog" [parentPath]="AppPath.itSystems" i18n
+              ><app-table-icon></app-table-icon>IT Systemkatalog</app-menu-item
+            >
+            <app-menu-item [path]="AppPath.itSystemUsageArchive" [parentPath]="AppPath.itSystems" i18n
+              ><app-table-icon></app-table-icon>Anvendelseshistorik</app-menu-item
+            >
+            <app-menu-item [path]="AppPath.itInterfaces" [parentPath]="AppPath.itSystems" i18n
+              ><app-table-icon></app-table-icon>Snitfladekatalog</app-menu-item
+            >
+          </app-menu>
+        }
+        @if (uiRootConfig.showItContractModule) {
+          <app-menu title="IT Kontrakter" [path]="AppPath.itContracts" i18n-title> </app-menu>
+        }
+        @if (uiRootConfig.showDataProcessing) {
+          <app-menu title="Databehandling" [path]="AppPath.dataProcessing" i18n-title data-cy="dpr-nav-bar-item">
+          </app-menu>
+        }
+      </span>
+    }
+    <app-spacer></app-spacer>
+    <span>
+      <app-notifications-button></app-notifications-button>
+      <span class="separator"></span>
+      <app-menu [path]="AppPath.profile" i18n-title data-cy="profile-menu">
+        <span title class="user-menu">
+          <p>{{ (user$ | async)?.fullName }}</p>
+          <p>{{ organizationName$ | async }}</p>
+        </span>
+        <app-menu-item [path]="AppPath.profile" i18n>Min profil</app-menu-item>
+        @if (isUserCurrentyLocalAdmin$ | async) {
+          <app-menu-item [path]="AppPath.localAdmin" i18n data-cy="local-admin-menu-item">Lokal admin</app-menu-item>
+        }
+        @if (user.isGlobalAdmin) {
+          <app-menu-item [path]="AppPath.globalAdmin" data-cy="global-admin-menu-item" i18n>Global admin</app-menu-item>
+        }
+        @if (hasMultipleOrganizations$ | async) {
+          <app-menu-item (itemClick)="showOrganizationDialog()" i18n>Skift organisation</app-menu-item>
+        }
+        <app-menu-item (itemClick)="logout()">
+          <span class="logout-container" i18n>Log ud<app-logout-icon></app-logout-icon> </span>
+        </app-menu-item>
+      </app-menu>
+    </span>
+  }
+</mat-toolbar>
+<app-test-environment-ribbon *appHideInProd></app-test-environment-ribbon>

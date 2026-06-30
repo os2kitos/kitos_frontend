@@ -21,7 +21,7 @@ export function removeWhitespace(s: string): string {
   return s.replace(SPACE_CHARACTER_REGEX, '');
 }
 
-export function organizationNameWithCvr(name: string | undefined, cvr: string | undefined): string {
+export function organizationNameWithCvr(name: string | undefined, cvr: string | undefined | null): string {
   if (!name) return '';
   return cvr ? `${name} (${cvr})` : name;
 }

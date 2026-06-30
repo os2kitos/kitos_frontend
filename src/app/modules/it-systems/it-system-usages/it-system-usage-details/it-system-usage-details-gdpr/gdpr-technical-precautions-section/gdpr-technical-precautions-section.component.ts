@@ -26,7 +26,7 @@ import { CheckboxComponent } from '../../../../../../shared/components/checkbox/
 import { DropdownComponent } from '../../../../../../shared/components/dropdowns/dropdown/dropdown.component';
 import { ParagraphComponent } from '../../../../../../shared/components/paragraph/paragraph.component';
 import { StandardVerticalContentGridComponent } from '../../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
-import { EditUrlSectionComponent } from '../../edit-url-section/edit-url-section.component';
+import { EditUrlSectionComponent } from '../../../../shared/edit-url-section/edit-url-section.component';
 
 @Component({
   selector: 'app-gdpr-technical-precautions-section',

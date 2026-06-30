@@ -11,12 +11,12 @@ import { URL_VALIDATION_ERROR_MESSAGE } from 'src/app/shared/constants/error-mes
 import { isExternalReferenceUrlEmptyOrValid } from 'src/app/shared/helpers/link.helpers';
 import { SimpleLink } from 'src/app/shared/models/SimpleLink.model';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
-import { ButtonComponent } from '../../../../../shared/components/buttons/button/button.component';
-import { DialogActionsComponent } from '../../../../../shared/components/dialogs/dialog-actions/dialog-actions.component';
-import { DialogComponent } from '../../../../../shared/components/dialogs/dialog/dialog.component';
-import { ParagraphComponent } from '../../../../../shared/components/paragraph/paragraph.component';
-import { StandardVerticalContentGridComponent } from '../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
-import { TextBoxComponent } from '../../../../../shared/components/textbox/textbox.component';
+import { ButtonComponent } from '../../../../shared/components/buttons/button/button.component';
+import { DialogActionsComponent } from '../../../../shared/components/dialogs/dialog-actions/dialog-actions.component';
+import { DialogComponent } from '../../../../shared/components/dialogs/dialog/dialog.component';
+import { ParagraphComponent } from '../../../../shared/components/paragraph/paragraph.component';
+import { StandardVerticalContentGridComponent } from '../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { TextBoxComponent } from '../../../../shared/components/textbox/textbox.component';
 
 @Component({
   selector: 'app-edit-url-dialog',
@@ -41,6 +41,8 @@ export class EditSimpleLinkDialogComponent extends BaseComponent implements OnIn
   @Input() nameDisabledMessage?: string;
   @Input() linkPermission$?: Observable<boolean>;
   @Input() linkDisabledMessage?: string;
+  @Input() closeDialogOnSubmit = false;
+  @Input() disableSubmitIfNoUrl = false;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   @Output() submitMethod!: EventEmitter<any>;
 
@@ -62,7 +64,7 @@ export class EditSimpleLinkDialogComponent extends BaseComponent implements OnIn
   }
 
   public disableSave() {
-    return this.isBusy || this.hasNoChanges();
+    return this.isBusy || this.hasNoChanges() || (this.disableSubmitIfNoUrl && !this.simpleLinkForm.controls.url.value);
   }
 
   private urlIsInvalid() {
@@ -132,6 +134,10 @@ export class EditSimpleLinkDialogComponent extends BaseComponent implements OnIn
 
     this.isBusy = true;
     this.submitMethod.emit({ name: name ?? '', url: url });
+
+    if (this.closeDialogOnSubmit) {
+      this.dialogRef.close();
+    }
   }
 
   onCancel() {

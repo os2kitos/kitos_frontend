@@ -16,8 +16,11 @@ import {
 } from 'src/app/shared/models/it-system-usage/gdpr/risk-assessment-result';
 import { SimpleLink } from 'src/app/shared/models/SimpleLink.model';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
-import { YesNoDontKnowIrrelevantOption, mapToYesNoDontKnowIrrelevantEnum, yesNoDontKnowIrrelevantOptions } from 'src/app/shared/models/yes-no-dont-know-irrelevant.model';
-import { yesNoDontKnowOptions } from 'src/app/shared/models/yes-no-dont-know.model';
+import {
+  YesNoDontKnowIrrelevantOption,
+  mapToYesNoDontKnowIrrelevantEnum,
+  yesNoDontKnowIrrelevantOptions,
+} from 'src/app/shared/models/yes-no-dont-know-irrelevant.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { selectITSystemUsageFieldPermissions, selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors';
@@ -30,7 +33,7 @@ import { DatePickerComponent } from '../../../../../../shared/components/datepic
 import { DropdownComponent } from '../../../../../../shared/components/dropdowns/dropdown/dropdown.component';
 import { StandardVerticalContentGridComponent } from '../../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { TextAreaComponent } from '../../../../../../shared/components/textarea/textarea.component';
-import { EditUrlSectionComponent } from '../../edit-url-section/edit-url-section.component';
+import { EditUrlSectionComponent } from '../../../../shared/edit-url-section/edit-url-section.component';
 
 @Component({
   selector: 'app-gdpr-risk-assessment-section',

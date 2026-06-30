@@ -99,7 +99,7 @@ import { MultiSelectDropdownComponent } from '../../../../../shared/components/d
 import { StatusChipComponent } from '../../../../../shared/components/status-chip/status-chip.component';
 import { TextAreaComponent } from '../../../../../shared/components/textarea/textarea.component';
 import { TextBoxComponent } from '../../../../../shared/components/textbox/textbox.component';
-import { EditUrlSectionComponent } from '../edit-url-section/edit-url-section.component';
+import { EditUrlSectionComponent } from '../../../shared/edit-url-section/edit-url-section.component';
 
 @Component({
   selector: 'app-it-system-usage-details-frontpage-information',

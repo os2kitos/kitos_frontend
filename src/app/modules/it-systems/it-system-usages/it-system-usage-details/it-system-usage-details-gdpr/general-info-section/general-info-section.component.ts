@@ -27,7 +27,7 @@ import { CardComponent } from '../../../../../../shared/components/card/card.com
 import { DropdownComponent } from '../../../../../../shared/components/dropdowns/dropdown/dropdown.component';
 import { FormGridComponent } from '../../../../../../shared/components/form-grid/form-grid.component';
 import { TextBoxComponent } from '../../../../../../shared/components/textbox/textbox.component';
-import { EditUrlSectionComponent } from '../../edit-url-section/edit-url-section.component';
+import { EditUrlSectionComponent } from '../../../../shared/edit-url-section/edit-url-section.component';
 
 @Component({
   selector: 'app-general-info-section',
@@ -71,7 +71,9 @@ export class GeneralInfoSectionComponent extends BaseComponent implements OnInit
 
   public readonly purposeEnabled$ = this.store.select(selectITSystemUsageEnableGdprPurpose);
   public readonly documentationEnabled$ = this.store.select(selectITSystemUsageEnableGdprDocumentation);
-  public readonly isDataProcessingAgreementRequiredEnabled$ = this.store.select(selectITSystemUsageEnableGdprIsDataProcessingAgreementRequired);
+  public readonly isDataProcessingAgreementRequiredEnabled$ = this.store.select(
+    selectITSystemUsageEnableGdprIsDataProcessingAgreementRequired,
+  );
 
   constructor(
     private readonly store: Store,

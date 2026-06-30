@@ -13,7 +13,7 @@ import { AccordionComponent } from '../../../../../../shared/components/accordio
 import { DatePickerComponent } from '../../../../../../shared/components/datepicker/datepicker.component';
 import { DropdownComponent } from '../../../../../../shared/components/dropdowns/dropdown/dropdown.component';
 import { FormGridComponent } from '../../../../../../shared/components/form-grid/form-grid.component';
-import { EditUrlSectionComponent } from '../../edit-url-section/edit-url-section.component';
+import { EditUrlSectionComponent } from '../../../../shared/edit-url-section/edit-url-section.component';
 
 @Component({
   selector: 'app-gdpr-base-date-url-section',

@@ -18,9 +18,15 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ExternalReferencesApiService } from 'src/app/shared/services/external-references-api-service.service';
 import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 import { GridDataCacheService } from 'src/app/shared/services/grid-data-cache.service';
+import { ITSystemUsageActions } from '../it-system-usage/actions';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { ITSystemActions } from './actions';
-import { selectItSystemExternalReferences, selectItSystemUuid, selectPreviousGridState } from './selectors';
+import {
+  selectItSystemExternalReferences,
+  selectItSystemUuid,
+  selectPreviousGridState,
+  selectSystemGridState,
+} from './selectors';
 
 @Injectable()
 export class ITSystemEffects {
@@ -277,6 +283,22 @@ export class ITSystemEffects {
             catchError(() => of(ITSystemActions.executeUsageMigrationError())),
           ),
       ),
+    );
+  });
+
+  archiveItSystemUsageRefreshSystems$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.archiveItSystemUsageSuccess),
+      concatLatestFrom(() => this.store.select(selectSystemGridState)),
+      map(([_, gridState]) => ITSystemActions.getITSystems(gridState)),
+    );
+  });
+
+  archiveItSystemUsageRefreshSystem$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.archiveItSystemUsageSuccess),
+      concatLatestFrom(() => this.store.select(selectItSystemUuid).pipe(filterNullish())),
+      map(([_, systemUuid]) => ITSystemActions.getITSystem(systemUuid)),
     );
   });
 }

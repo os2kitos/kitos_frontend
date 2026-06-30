@@ -1,3 +1,4 @@
+import { AsyncPipe } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
@@ -40,11 +41,10 @@ import {
   selectITSystemUsageEnableTabSystemRoles,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { selectOrganizationName } from 'src/app/store/user-store/selectors';
-import { AsyncPipe } from '@angular/common';
 import { BreadcrumbsComponent } from '../../../../shared/components/breadcrumbs/breadcrumbs.component';
 import { ButtonComponent } from '../../../../shared/components/buttons/button/button.component';
-import { NavigationDrawerComponent } from '../../../../shared/components/navigation-drawer/navigation-drawer.component';
 import { LoadingComponent } from '../../../../shared/components/loading/loading.component';
+import { NavigationDrawerComponent } from '../../../../shared/components/navigation-drawer/navigation-drawer.component';
 
 @Component({
   templateUrl: 'it-system-usage-details.component.html',
@@ -55,8 +55,8 @@ import { LoadingComponent } from '../../../../shared/components/loading/loading.
     NavigationDrawerComponent,
     RouterOutlet,
     LoadingComponent,
-    AsyncPipe
-],
+    AsyncPipe,
+  ],
 })
 export class ITSystemUsageDetailsComponent extends BaseComponent implements OnInit, OnDestroy {
   public readonly AppPath = AppPath;
@@ -240,18 +240,26 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
     this.store.dispatch(ITSystemUsageActions.getITSystemUsageSuccess());
   }
 
+  public handleArchiveClick() {
+    this.itSystemUsageUuid$.pipe(filterNullish(), first()).subscribe((itSystemUsageUuid) => {
+      this.dialogOpenerService.openArchiveSystemUsageDialog(itSystemUsageUuid);
+    });
+  }
+
   public showRemoveDialog() {
     this.subscriptions.add(
       this.organizationName$
         .pipe(
           first(),
           tap((organizationName) => {
-            const confirmationDialogRef = this.dialogOpenerService.openTakeSystemOutOfUseDialog(organizationName);
+            const confirmationDialogRef = this.dialogOpenerService.openTakeSystemOutOfUseDialog({
+              organizationName,
+              extraAction: this.handleArchiveClick.bind(this),
+            });
 
             this.subscriptions.add(
               this.actions$.pipe(ofType(ITSystemUsageActions.removeITSystemUsageSuccess), first()).subscribe(() => {
                 confirmationDialogRef.close();
-                this.notificationService.showDefault($localize`Systemanvendelsen blev slettet`);
                 this.router.navigate([`/${AppPath.itSystems}/${AppPath.itSystemUsages}`]);
               }),
             );
@@ -265,6 +273,13 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
                     this.store.dispatch(ITSystemUsageActions.removeITSystemUsage());
                   }
                 }),
+            );
+
+            this.subscriptions.add(
+              this.actions$.pipe(ofType(ITSystemUsageActions.archiveItSystemUsageSuccess), first()).subscribe(() => {
+                confirmationDialogRef.close();
+                this.router.navigate([`/${AppPath.itSystems}/${AppPath.itSystemUsages}`]);
+              }),
             );
           }),
         )

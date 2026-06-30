@@ -2,6 +2,8 @@ import { createActionGroup, emptyProps } from '@ngrx/store';
 import { APIBusinessRoleDTO } from 'src/app/api/v1';
 import {
   APIColumnConfigurationRequestDTO,
+  APICreateItSystemUsageArchiveRequestDTO,
+  APIItSystemArchiveResponseDTO as APIItSystemUsageArchiveResponseDTO,
   APIItSystemUsageResponseDTO,
   APIJournalPeriodDTO,
   APIOrganizationGridConfigurationResponseDTO,
@@ -169,6 +171,13 @@ export const ITSystemUsageActions = createActionGroup({
     'Create It System Usage Success': (itSystemUuid: string, usageUuid: string) => ({ itSystemUuid, usageUuid }),
     'Create It System Usage Error': emptyProps(),
 
+    'Archive It System Usage': (
+      itSystemUsageUuid: string,
+      archiveRequestDto?: APICreateItSystemUsageArchiveRequestDTO,
+    ) => ({ itSystemUsageUuid, archiveRequestDto }),
+    'Archive It System Usage Success': (archive: APIItSystemUsageArchiveResponseDTO) => ({ archive }),
+    'Archive It System Usage Error': emptyProps(),
+
     'Delete It System Usage By It System And Organization': (itSystemUuid: string) => ({ itSystemUuid }),
     'Delete It System Usage By It System And Organization Success': (itSystemUuid: string) => ({ itSystemUuid }),
     'Delete It System Usage By It System And Organization Error': emptyProps(),
@@ -191,10 +200,10 @@ export const ITSystemUsageActions = createActionGroup({
     }),
     'Reset To Organization IT System Usage Column Configuration Success': (
       response: APIOrganizationGridConfigurationResponseDTO,
-      disablePopupNotification: boolean = false
+      disablePopupNotification: boolean = false,
     ) => ({ response, disablePopupNotification }),
     'Reset To Organization IT System Usage Column Configuration Error': (
-      disablePopupNotification: boolean = false
+      disablePopupNotification: boolean = false,
     ) => ({
       disablePopupNotification,
     }),

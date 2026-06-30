@@ -23,6 +23,7 @@ import { GridState } from 'src/app/shared/models/grid-state.model';
 import { BooleanChange } from 'src/app/shared/models/grid/grid-events.model';
 import { archiveDutyRecommendationChoiceOptions } from 'src/app/shared/models/it-system/archive-duty-recommendation-choice.model';
 import { ITSystem } from 'src/app/shared/models/it-system/it-system.model';
+import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.service';
 import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
@@ -38,15 +39,18 @@ import {
   selectSystemGridLoading,
   selectSystemGridState,
 } from 'src/app/store/it-system/selectors';
+import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 import { ExportMenuButtonComponent } from '../../../shared/components/buttons/export-menu-button/export-menu-button.component';
 import { CreateEntityButtonComponent } from '../../../shared/components/entity-creation/create-entity-button/create-entity-button.component';
 import { GridOptionsButtonComponent } from '../../../shared/components/grid-options-button/grid-options-button.component';
 import { GridComponent } from '../../../shared/components/grid/grid.component';
 import { HideShowButtonComponent } from '../../../shared/components/grid/hide-show-button/hide-show-button.component';
 import { OverviewHeaderComponent } from '../../../shared/components/overview-header/overview-header.component';
+import { ITSystemCatalogComponentStore } from './it-system-catalog.component-store';
 
 @Component({
   templateUrl: './it-system-catalog.component.html',
+  providers: [ITSystemCatalogComponentStore],
   styleUrl: './it-system-catalog.component.scss',
   imports: [
     OverviewHeaderComponent,
@@ -67,6 +71,8 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
   public readonly hasCreatePermission$ = this.store.select(selectITSystemHasCreateCollectionPermission);
   public readonly hasCreateUsagePermission$ = this.store.select(selectITSystemUsageHasCreateCollectionPermission);
   public readonly isCreatingUsage$ = this.store.select(selectItSystemUsageIsCreating);
+  public readonly organizationUuid$ = this.store.select(selectOrganizationUuid);
+  public readonly systemUsageUuid$ = this.componentStore.systemUsageUuid$;
 
   private readonly systemSectionName = CATALOG_SECTION_NAME;
   public readonly defaultGridColumns: GridColumn[] = [
@@ -266,6 +272,7 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
     private readonly actions$: Actions,
     private readonly gridColumnStorageService: GridColumnStorageService,
     private readonly dialogOpenerService: DialogOpenerService,
+    private readonly componentStore: ITSystemCatalogComponentStore,
   ) {
     super(store, 'it-system');
   }
@@ -329,13 +336,30 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
     );
   }
 
+  public handleArchiveClick() {
+    this.subscriptions.add(
+      this.systemUsageUuid$.pipe(filterNullish(), first()).subscribe((usageUuid) => {
+        this.dialogOpenerService.openArchiveSystemUsageDialog(usageUuid);
+      }),
+    );
+  }
+
   private handleTakeSystemOutOfUse(systemUuid: string) {
-    const dialogRef = this.dialogOpenerService.openTakeSystemOutOfUseDialog();
+    this.componentStore.getSystemUsageUuidByItSystemAndOrganization(systemUuid);
+    const dialogRef = this.dialogOpenerService.openTakeSystemOutOfUseDialog({
+      extraAction: this.handleArchiveClick.bind(this),
+    });
     this.subscriptions.add(
       dialogRef.afterClosed().subscribe((result: boolean) => {
         if (result && systemUuid !== undefined) {
           this.store.dispatch(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganization(systemUuid));
         }
+      }),
+    );
+
+    this.subscriptions.add(
+      this.actions$.pipe(ofType(ITSystemUsageActions.archiveItSystemUsageSuccess), first()).subscribe(() => {
+        dialogRef.close();
       }),
     );
 

@@ -22,6 +22,7 @@ export class ParagraphComponent {
   @Input() public color: 'error' | 'primary-dark' | 'grey' | 'white' | undefined = undefined;
   @Input() public helpTextKey?: string = undefined;
   @Input() public displayFlex = true;
+  @Input() public leftAlignText = false;
 
   constructor(private dialog: MatDialog) {}
 

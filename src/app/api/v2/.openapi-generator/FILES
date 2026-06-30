@@ -70,6 +70,7 @@ api/itContractV2.service.ts
 api/itInterfaceInterfaceDataTypeV2.service.ts
 api/itInterfaceInterfaceTypeV2.service.ts
 api/itInterfaceV2.service.ts
+api/itSystemArchiveV2.service.ts
 api/itSystemBusinessTypeV2.service.ts
 api/itSystemDBSV2.service.ts
 api/itSystemGlobalArchiveLocationsInternalV2.service.ts
@@ -102,6 +103,7 @@ api/itSystemLocalTechnicalSystemTypesInternalV2.service.ts
 api/itSystemUsageArchiveLocationTypeV2.service.ts
 api/itSystemUsageArchiveTestLocationTypeV2.service.ts
 api/itSystemUsageArchiveTypeV2.service.ts
+api/itSystemUsageArchiveV2.service.ts
 api/itSystemUsageCriticalityLevelTypeV2.service.ts
 api/itSystemUsageDataClassificationTypeV2.service.ts
 api/itSystemUsageInternalV2.service.ts
@@ -139,6 +141,7 @@ model/alertResponseDTO.ts
 model/alertType.ts
 model/appliedProcurementPlanResponseDTO.ts
 model/archiveDutyChoice.ts
+model/archiveReferenceResponseDTO.ts
 model/archivingCreationRequestDTO.ts
 model/archivingRegistrationsResponseDTO.ts
 model/archivingUpdateRequestDTO.ts
@@ -188,6 +191,7 @@ model/contractWriteRequestDTO.ts
 model/createDataProcessingRegistrationRequestDTO.ts
 model/createItInterfaceRequestDTO.ts
 model/createItSystemRequestDTO.ts
+model/createItSystemUsageArchiveRequestDTO.ts
 model/createItSystemUsageRequestDTO.ts
 model/createNewContractRequestDTO.ts
 model/createOrganizationUnitRequestDTO.ts
@@ -257,10 +261,12 @@ model/itInterfaceDataResponseDTO.ts
 model/itInterfaceDeletionConflict.ts
 model/itInterfacePermissionsResponseDTO.ts
 model/itInterfaceResponseDTO.ts
+model/itSystemArchiveResponseDTO.ts
 model/itSystemHierarchyNodeResponseDTO.ts
 model/itSystemPermissionsResponseDTO.ts
 model/itSystemResponseDTO.ts
 model/itSystemSearchResponseDTO.ts
+model/itSystemUsageArchiveResponseDTO.ts
 model/itSystemUsageMigrationPermissionsResponseDTO.ts
 model/itSystemUsageMigrationV2ResponseDTO.ts
 model/itSystemUsageRelationMigrationV2ResponseDTO.ts

@@ -5435,9 +5435,6 @@
       <trans-unit id="4984996902763357561" datatype="html">
         <source>Er du sikker på, at du vil fjerne den lokale anvendelse af systemet?</source>
       </trans-unit>
-      <trans-unit id="5088079663399937603" datatype="html">
-        <source>Dette sletter de lokale registreringer vedrørerende systemet i <x id="PH" equiv-text="organizatioName ?? &apos;kommunen&apos;"/>, men sletter ikke stamdata om systemet i IT System Kataloget.</source>
-      </trans-unit>
       <trans-unit id="4651029877664223444" datatype="html">
         <source>Bekræft</source>
       </trans-unit>
@@ -6073,6 +6070,90 @@
       </trans-unit>
       <trans-unit id="5222795483056055508" datatype="html">
         <source>Dele af data bevares + Dokumenter kasseres (D+K)</source>
+      </trans-unit>
+      <trans-unit id="505788991318317980" datatype="html">
+        <source>IT System UUID</source>
+      </trans-unit>
+      <trans-unit id="5584606577235934124" datatype="html">
+        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;app-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;/app-table-icon&gt;"/>Anvendelseshistorik</source>
+      </trans-unit>
+      <trans-unit id="7550982890201476053" datatype="html">
+        <source>Arkiveringsdato</source>
+      </trans-unit>
+      <trans-unit id="9106425744426550513" datatype="html">
+        <source>Referencenavn</source>
+      </trans-unit>
+      <trans-unit id="2193029653870382707" datatype="html">
+        <source>Lokalt systemnavn</source>
+      </trans-unit>
+      <trans-unit id="3231887773453065724" datatype="html">
+        <source>Lokalt system ID</source>
+      </trans-unit>
+      <trans-unit id="752345348010102991" datatype="html">
+        <source>Anvendelses historik</source>
+      </trans-unit>
+      <trans-unit id="1220374093016564303" datatype="html">
+        <source>Reference/link til ESDH</source>
+      </trans-unit>
+      <trans-unit id="174474605473542575" datatype="html">
+        <source>Udfasningsdato</source>
+      </trans-unit>
+      <trans-unit id="2137405200624328487" datatype="html">
+        <source>Kommentar</source>
+      </trans-unit>
+      <trans-unit id="8785270844621556660" datatype="html">
+        <source>Tryk &quot;Bekræft&quot; for at slette de lokale registreringer vedrørerende systemet i <x id="PH" equiv-text="organizationName ?? &apos;kommunen&apos;"/>. Tryk &quot;Bevar historik&quot; for at slette de lokale registreringer og udfylde arkivinformation om systemanvendelsen. Disse handlinger påvirker ikke stamdata om systemet i IT System Kataloget.</source>
+      </trans-unit>
+      <trans-unit id="4999037601378878230" datatype="html">
+        <source>Systemanvendelsen blev arkiveret</source>
+      </trans-unit>
+      <trans-unit id="5766947941131376694" datatype="html">
+        <source>Systemanvendelsen kunne ikke arkiveres</source>
+      </trans-unit>
+      <trans-unit id="8075189991660862448" datatype="html">
+        <source>Tilføj flere referencer</source>
+      </trans-unit>
+      <trans-unit id="8881457969183282275" datatype="html">
+        <source>Bevar historik</source>
+      </trans-unit>
+      <trans-unit id="9011845971830514604" datatype="html">
+        <source> Udfasningsdato kan ikke være før ibrugtagningsdato </source>
+      </trans-unit>
+      <trans-unit id="9158368026582482088" datatype="html">
+        <source>Navngivning på ESDH sag</source>
+      </trans-unit>
+      <trans-unit id="3935383731107011054" datatype="html">
+        <source>Bevar historik system</source>
+      </trans-unit>
+      <trans-unit id="3874266071933284498" datatype="html">
+        <source>Nuværende systemnavn</source>
+      </trans-unit>
+      <trans-unit id="7064956610519919142" datatype="html">
+        <source>Anvendelseshistorik for IT Systemer i <x id="PH" equiv-text="organizationName"/></source>
+      </trans-unit>
+      <trans-unit id="6054002959930374150" datatype="html">
+        <source>Arkiveringsnavn</source>
+      </trans-unit>
+      <trans-unit id="7138544597137982663" datatype="html">
+        <source>Systemets historie blev slettet</source>
+      </trans-unit>
+      <trans-unit id="662410450618468717" datatype="html">
+        <source>Anvendelseshistorik findes ikke</source>
+      </trans-unit>
+      <trans-unit id="8168990326741274594" datatype="html">
+        <source>Systemets historie kunne ikke slettes</source>
+      </trans-unit>
+      <trans-unit id="1280193355564271597" datatype="html">
+        <source>Du har ikke læseadgang til denne anvendelseshistorik</source>
+      </trans-unit>
+      <trans-unit id="2330794348019688932" datatype="html">
+        <source>Er du sikker på, at du vil slette anvendelseshistorikken?</source>
+      </trans-unit>
+      <trans-unit id="1210105962379318163" datatype="html">
+        <source>Anvendelseshistorik</source>
+      </trans-unit>
+      <trans-unit id="698209411636094619" datatype="html">
+        <source> Slet Anvendelseshistorik </source>
       </trans-unit>
     </body>
   </file>

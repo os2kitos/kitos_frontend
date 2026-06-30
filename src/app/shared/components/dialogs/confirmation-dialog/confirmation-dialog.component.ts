@@ -8,7 +8,6 @@ import { DialogComponent } from '../dialog/dialog.component';
 import { ParagraphComponent } from '../../paragraph/paragraph.component';
 import { DialogActionsComponent } from '../dialog-actions/dialog-actions.component';
 import { ButtonComponent } from '../../buttons/button/button.component';
-import { on } from '@ngrx/store';
 
 @Component({
   selector: 'app-confirmation-dialog',

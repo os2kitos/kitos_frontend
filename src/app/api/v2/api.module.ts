@@ -69,6 +69,7 @@ import { ItContractV2Service } from './api/itContractV2.service';
 import { ItInterfaceInterfaceDataTypeV2Service } from './api/itInterfaceInterfaceDataTypeV2.service';
 import { ItInterfaceInterfaceTypeV2Service } from './api/itInterfaceInterfaceTypeV2.service';
 import { ItInterfaceV2Service } from './api/itInterfaceV2.service';
+import { ItSystemArchiveV2Service } from './api/itSystemArchiveV2.service';
 import { ItSystemBusinessTypeV2Service } from './api/itSystemBusinessTypeV2.service';
 import { ItSystemDBSV2Service } from './api/itSystemDBSV2.service';
 import { ItSystemGlobalArchiveLocationsInternalV2Service } from './api/itSystemGlobalArchiveLocationsInternalV2.service';
@@ -101,6 +102,7 @@ import { ItSystemLocalTechnicalSystemTypesInternalV2Service } from './api/itSyst
 import { ItSystemUsageArchiveLocationTypeV2Service } from './api/itSystemUsageArchiveLocationTypeV2.service';
 import { ItSystemUsageArchiveTestLocationTypeV2Service } from './api/itSystemUsageArchiveTestLocationTypeV2.service';
 import { ItSystemUsageArchiveTypeV2Service } from './api/itSystemUsageArchiveTypeV2.service';
+import { ItSystemUsageArchiveV2Service } from './api/itSystemUsageArchiveV2.service';
 import { ItSystemUsageCriticalityLevelTypeV2Service } from './api/itSystemUsageCriticalityLevelTypeV2.service';
 import { ItSystemUsageDataClassificationTypeV2Service } from './api/itSystemUsageDataClassificationTypeV2.service';
 import { ItSystemUsageInternalV2Service } from './api/itSystemUsageInternalV2.service';

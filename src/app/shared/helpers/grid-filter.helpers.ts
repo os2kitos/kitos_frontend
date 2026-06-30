@@ -7,6 +7,7 @@ import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
+import { ITSystemUsageArchiveActions } from 'src/app/store/it-system-usage-archive/actions';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
 import { OrganizationActions } from 'src/app/store/organization/actions';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
@@ -27,6 +28,8 @@ export function getSaveFilterAction(entityType: RegistrationEntityTypes) {
       return DataProcessingActions.saveDataProcessingFilter;
     case 'organization-user':
       return OrganizationUserActions.saveOrganizationUsersFilter;
+    case 'it-system-usage-archive':
+      return ITSystemUsageArchiveActions.saveITSystemUsageArchiveFilter;
     case 'local-admin-organization':
       return OrganizationActions.saveLocalAdminOrganizationsFilter;
     case 'global-admin-organization':
@@ -50,6 +53,8 @@ export function getApplyFilterAction(entityType: RegistrationEntityTypes) {
       return DataProcessingActions.applyDataProcessingFilter;
     case 'organization-user':
       return OrganizationUserActions.applyOrganizationUsersFilter;
+    case 'it-system-usage-archive':
+      return ITSystemUsageArchiveActions.applyITSystemUsageArchiveFilter;
     case 'local-admin-organization':
       return OrganizationActions.applyLocalAdminOrganizationsFilter;
     case 'global-admin-organization':

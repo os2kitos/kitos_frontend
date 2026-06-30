@@ -34,6 +34,10 @@ export interface APIItSystemUsageResponseDTO {
      * UTC timestamp of latest modification
      */
     lastModified: string;
+    /**
+     * The time when this system usage was created
+     */
+    createdAt?: string | null;
     lastModifiedBy?: APIIdentityNamePairResponseDTO;
     systemContext: APIIdentityNamePairResponseDTO;
     organizationContext: APIShallowOrganizationResponseDTO;

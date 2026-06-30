@@ -10,6 +10,9 @@ import { ItSystemCatalogComponent } from './it-system-catalog/it-system-catalog.
 import { ItSystemInterfacesDetailsFrontpageComponent } from './it-system-interfaces/it-system-interfaces-details/it-system-interfaces-details-frontpage/it-system-interfaces-details-frontpage.component';
 import { ItSystemInterfacesDetailsComponent } from './it-system-interfaces/it-system-interfaces-details/it-system-interfaces-details.component';
 import { ItSystemInterfacesComponent } from './it-system-interfaces/it-system-interfaces.component';
+import { ItSystemUsageArchiveDetailsFrontpageComponent } from './it-system-usage-archive/it-system-usage-archive-details/it-system-usage-archive-details-frontpage/it-system-usage-archive-details-frontpage.component';
+import { ItSystemUsageArchiveDetailsComponent } from './it-system-usage-archive/it-system-usage-archive-details/it-system-usage-archive-details.component';
+import { ItSystemUsageArchiveComponent } from './it-system-usage-archive/it-system-usage-archive.component';
 import { ItSystemUsageDetailsArchivingComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-archiving/it-system-usage-details-archiving.component';
 import { ITSystemUsageDetailsContractsComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-contracts/it-system-usage-details-contracts.component';
 import { ItSystemUsageDetailsDataProcessingComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-data-processing/it-system-usage-details-data-processing.component';
@@ -105,6 +108,15 @@ const routes: Routes = [
           { path: AppPath.itInterfaces, component: ItSystemCatalogInterfacesComponent },
           { path: AppPath.externalReferences, component: ItSystemCatalogReferencesComponent },
           { path: AppPath.kle, component: ItSystemCatalogKleComponent },
+          { path: AppPath.root, pathMatch: 'full', redirectTo: AppPath.frontpage },
+        ],
+      },
+      { path: AppPath.itSystemUsageArchive, component: ItSystemUsageArchiveComponent },
+      {
+        path: `${AppPath.itSystemUsageArchive}/${AppPath.uuid}`,
+        component: ItSystemUsageArchiveDetailsComponent,
+        children: [
+          { path: AppPath.frontpage, component: ItSystemUsageArchiveDetailsFrontpageComponent },
           { path: AppPath.root, pathMatch: 'full', redirectTo: AppPath.frontpage },
         ],
       },

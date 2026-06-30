@@ -173,6 +173,25 @@ export class ITSystemUsageEffects {
     );
   });
 
+  archiveItSystemUsage$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.archiveItSystemUsage),
+      switchMap(({ itSystemUsageUuid, archiveRequestDto }) => {
+        if (!itSystemUsageUuid) return of(ITSystemUsageActions.archiveItSystemUsageError());
+
+        return this.apiV2ItSystemUsageService
+          .postSingleItSystemUsageV2ArchiveItSystemUsage({
+            systemUsageUuid: itSystemUsageUuid,
+            aPICreateItSystemUsageArchiveRequestDTO: archiveRequestDto,
+          })
+          .pipe(
+            map((archiveResponse) => ITSystemUsageActions.archiveItSystemUsageSuccess(archiveResponse)),
+            catchError(() => of(ITSystemUsageActions.archiveItSystemUsageError())),
+          );
+      }),
+    );
+  });
+
   removeItSystemUsageUsingUnit$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.removeITSystemUsageUsingUnit),

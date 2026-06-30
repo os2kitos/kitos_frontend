@@ -4,6 +4,7 @@ import { ITContractActions } from '../it-contract/actions';
 import { ITInterfaceActions } from '../it-system-interfaces/actions';
 import { ITSystemUsageActions } from '../it-system-usage/actions';
 import { ITSystemActions } from '../it-system/actions';
+import { ITSystemUsageArchiveActions } from '../it-system-usage-archive/actions';
 import { OrganizationUserActions } from '../organization/organization-user/actions';
 import { OrganizationActions } from '../organization/actions';
 
@@ -16,6 +17,7 @@ export function exportReadyMetaReducer(reducer: ActionReducer<any>): ActionReduc
       action.type === ITSystemActions.getITSystemsSuccess.type ||
       action.type === DataProcessingActions.getDataProcessingsSuccess.type ||
       action.type === ITContractActions.getITContractsSuccess.type ||
+      action.type === ITSystemUsageArchiveActions.getITSystemUsageArchivesSuccess.type ||
       action.type === OrganizationUserActions.getOrganizationUsersSuccess.type ||
       action.type === OrganizationActions.getOrganizationsSuccess.type
     ) {

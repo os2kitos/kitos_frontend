@@ -13,6 +13,7 @@ import { GlobalAdminPublicMessageActions } from 'src/app/store/global-admin/publ
 import { GlobalAdminSystemIntegratorActions } from 'src/app/store/global-admin/system-integrators/actions';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
+import { ITSystemUsageArchiveActions } from 'src/app/store/it-system-usage-archive/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
 import { KLEActions } from 'src/app/store/kle/actions';
@@ -37,7 +38,10 @@ export class NotificationService implements OnDestroy {
   private readonly patchMasterDataSuccess = $localize`Stamdata for organisationen blev opdateret`;
   private readonly patchMasterDataError = $localize`Stamdata for organisationen kunne ikke opdateres`;
 
-  constructor(private actions$: Actions, private readonly store: Store) {}
+  constructor(
+    private actions$: Actions,
+    private readonly store: Store,
+  ) {}
 
   ngOnDestroy() {
     this.subscriptions.unsubscribe();
@@ -69,54 +73,54 @@ export class NotificationService implements OnDestroy {
       ofType(
         ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationSuccess,
         ITContractActions.resetToOrganizationITContractColumnConfigurationSuccess,
-        DataProcessingActions.resetToOrganizationDataProcessingColumnConfigurationSuccess
+        DataProcessingActions.resetToOrganizationDataProcessingColumnConfigurationSuccess,
       ),
-      $localize`Kolonnevisning gendannet til organisationens standardopsætning`
+      $localize`Kolonnevisning gendannet til organisationens standardopsætning`,
     );
 
     this.subscribeMultipleDefault(
       ofType(
         ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationError,
         ITContractActions.resetToOrganizationITContractColumnConfigurationError,
-        DataProcessingActions.resetToOrganizationDataProcessingColumnConfigurationError
+        DataProcessingActions.resetToOrganizationDataProcessingColumnConfigurationError,
       ),
-      $localize`Kolonnevisnining gendannet til standardopsætning`
+      $localize`Kolonnevisnining gendannet til standardopsætning`,
     );
 
     this.subscribeMultipleDefault(
       ofType(
         ITSystemUsageActions.saveOrganizationalITSystemUsageColumnConfigurationSuccess,
         ITContractActions.saveOrganizationalITContractColumnConfigurationSuccess,
-        DataProcessingActions.saveOrganizationalDataProcessingColumnConfigurationSuccess
+        DataProcessingActions.saveOrganizationalDataProcessingColumnConfigurationSuccess,
       ),
-      $localize`Kolonneopsætning gemt for organisationen`
+      $localize`Kolonneopsætning gemt for organisationen`,
     );
 
     this.subscribeMultipleError(
       ofType(
         ITSystemUsageActions.saveOrganizationalITSystemUsageColumnConfigurationError,
         ITContractActions.saveOrganizationalITContractColumnConfigurationError,
-        DataProcessingActions.saveOrganizationalDataProcessingColumnConfigurationError
+        DataProcessingActions.saveOrganizationalDataProcessingColumnConfigurationError,
       ),
-      $localize`Kolonneopsætning kunne ikke gemmes for organisationen`
+      $localize`Kolonneopsætning kunne ikke gemmes for organisationen`,
     );
 
     this.subscribeMultipleDefault(
       ofType(
         ITSystemUsageActions.deleteOrganizationalITSystemUsageColumnConfigurationSuccess,
         ITContractActions.deleteOrganizationalITContractColumnConfigurationSuccess,
-        DataProcessingActions.deleteOrganizationalDataProcessingColumnConfigurationSuccess
+        DataProcessingActions.deleteOrganizationalDataProcessingColumnConfigurationSuccess,
       ),
-      $localize`Kolonneopsætning slettet for organisationen`
+      $localize`Kolonneopsætning slettet for organisationen`,
     );
 
     this.subscribeMultipleError(
       ofType(
         ITSystemUsageActions.deleteOrganizationalITSystemUsageColumnConfigurationError,
         ITContractActions.deleteOrganizationalITContractColumnConfigurationError,
-        DataProcessingActions.deleteOrganizationalDataProcessingColumnConfigurationError
+        DataProcessingActions.deleteOrganizationalDataProcessingColumnConfigurationError,
       ),
-      $localize`Kolonneopsætning kunne ikke slettes for organisationen`
+      $localize`Kolonneopsætning kunne ikke slettes for organisationen`,
     );
   }
 
@@ -140,27 +144,27 @@ export class NotificationService implements OnDestroy {
     this.subscribeAsError(LocalOptionTypeActions.updateOptionTypeError, $localize`Typen kunne ikke opdateres`);
     this.subscribeAsDefault(
       OrganizationSuppliersActions.addOrganizationSupplierSuccess,
-      $localize`ISMS leverandøren blev tilføjet`
+      $localize`ISMS leverandøren blev tilføjet`,
     );
     this.subscribeAsError(
       OrganizationSuppliersActions.addOrganizationSupplierError,
-      $localize`Kunne ikke tilføje ISMS leverandøren`
+      $localize`Kunne ikke tilføje ISMS leverandøren`,
     );
     this.subscribeAsDefault(
       OrganizationSuppliersActions.removeOrganizationSupplierSuccess,
-      $localize`ISMS leverandøren blev fjernet`
+      $localize`ISMS leverandøren blev fjernet`,
     );
     this.subscribeAsError(
       OrganizationSuppliersActions.removeOrganizationSupplierError,
-      $localize`Kunne ikke fjerne ISMS leverandøren`
+      $localize`Kunne ikke fjerne ISMS leverandøren`,
     );
     this.subscribeAsError(
       OrganizationSuppliersActions.getOrganizationSuppliersError,
-      $localize`Kunne ikke hente ISMS leverandører`
+      $localize`Kunne ikke hente ISMS leverandører`,
     );
     this.subscribeAsError(
       OrganizationSuppliersActions.getAvailableOrganizationSuppliersError,
-      $localize`Kunne ikke hente tilgængelige ISMS leverandører`
+      $localize`Kunne ikke hente tilgængelige ISMS leverandører`,
     );
   }
 
@@ -181,20 +185,20 @@ export class NotificationService implements OnDestroy {
 
     this.subscribeAsDefault(
       GlobalAdminActions.addGlobalAdminSuccess,
-      $localize`Bruger tilføjet som global administrator`
+      $localize`Bruger tilføjet som global administrator`,
     );
     this.subscribeAsError(
       GlobalAdminActions.addGlobalAdminError,
-      $localize`Bruger kunne ikke tilføjes som global administrator`
+      $localize`Bruger kunne ikke tilføjes som global administrator`,
     );
 
     this.subscribeAsDefault(
       GlobalAdminActions.removeGlobalAdminSuccess,
-      $localize`Bruger fjernet som global administrator`
+      $localize`Bruger fjernet som global administrator`,
     );
     this.subscribeAsError(
       GlobalAdminActions.removeGlobalAdminError,
-      $localize`Bruger kunne ikke fjernes som global administrator`
+      $localize`Bruger kunne ikke fjernes som global administrator`,
     );
 
     this.subscribeAsDefault(LocalAdminUserActions.addLocalAdminSuccess, $localize`Lokal administrator blev tilføjet`);
@@ -203,22 +207,22 @@ export class NotificationService implements OnDestroy {
     this.subscribeAsDefault(LocalAdminUserActions.removeLocalAdminSuccess, $localize`Lokal administrator blev fjernet`);
     this.subscribeAsError(
       LocalAdminUserActions.removeLocalAdminError,
-      $localize`Lokal administrator kunne ikke fjernes`
+      $localize`Lokal administrator kunne ikke fjernes`,
     );
 
     this.subscribeAsDefault(
       GlobalAdminPublicMessageActions.editPublicMessagesSuccess,
-      $localize`Beskeden blev opdateret`
+      $localize`Beskeden blev opdateret`,
     );
     this.subscribeAsError(
       GlobalAdminPublicMessageActions.editPublicMessagesError,
-      $localize`Beskeden kunne ikke opdateres`
+      $localize`Beskeden kunne ikke opdateres`,
     );
 
     this.subscribeAsDefault(GlobalAdminSystemIntegratorActions.editSystemIntegratorSuccess, $localize`Ændringer gemt`);
     this.subscribeAsError(
       GlobalAdminSystemIntegratorActions.editSystemIntegratorError,
-      $localize`Ændringer kunne ikke gemmes`
+      $localize`Ændringer kunne ikke gemmes`,
     );
   }
 
@@ -226,26 +230,26 @@ export class NotificationService implements OnDestroy {
     this.subscribeAsDefault(OrganizationUnitActions.deleteOrganizationUnitSuccess, $localize`Enheden blev slettet!`);
     this.subscribeAsError(
       OrganizationUnitActions.deleteOrganizationUnitError,
-      $localize`Der skete en fejl under sletning af enheden`
+      $localize`Der skete en fejl under sletning af enheden`,
     );
 
     this.subscriptions.add(
       this.actions$.pipe(ofType(OrganizationUnitActions.createOrganizationSubunitSuccess)).subscribe(({ unit }) => {
         this.showDefault($localize`${unit.name} er gemt`);
-      })
+      }),
     );
     this.subscribeAsError(
       OrganizationUnitActions.createOrganizationSubunitError,
-      $localize`Fejl! Enheden kunne ikke oprettes!`
+      $localize`Fejl! Enheden kunne ikke oprettes!`,
     );
 
     this.subscribeAsDefault(
       OrganizationUnitActions.patchOrganizationUnitSuccess,
-      $localize`Organisationslag blev opdateret`
+      $localize`Organisationslag blev opdateret`,
     );
     this.subscribeAsError(
       OrganizationUnitActions.patchOrganizationUnitError,
-      $localize`Organisationslag kunne ikke opdateres`
+      $localize`Organisationslag kunne ikke opdateres`,
     );
 
     this.subscribeAsDefault(OrganizationUnitActions.removeRegistrationsSuccess, $localize`Registrering blev fjernet`);
@@ -253,26 +257,26 @@ export class NotificationService implements OnDestroy {
 
     this.subscribeAsDefault(
       OrganizationUnitActions.transferRegistrationsSuccess,
-      $localize`Registrering blev opdateret`
+      $localize`Registrering blev opdateret`,
     );
     this.subscribeAsError(
       OrganizationUnitActions.transferRegistrationsError,
-      $localize`Registrering kunne ikke opdateres`
+      $localize`Registrering kunne ikke opdateres`,
     );
 
     this.subscribeAsDefault(
       OrganizationUnitActions.bulkAddOrganizationUnitRoleSuccess,
-      $localize`Rollen blev tilføjet`
+      $localize`Rollen blev tilføjet`,
     );
     this.subscribeAsError(
       OrganizationUnitActions.bulkAddOrganizationUnitRoleError,
-      $localize`Rollen kunne ikke tilføjes`
+      $localize`Rollen kunne ikke tilføjes`,
     );
 
     this.subscribeAsDefault(OrganizationUnitActions.deleteOrganizationUnitRoleSuccess, $localize`Rollen blev fjernet`);
     this.subscribeAsError(
       OrganizationUnitActions.deleteOrganizationUnitRoleError,
-      $localize`Rollen kunne ikke fjernes`
+      $localize`Rollen kunne ikke fjernes`,
     );
 
     this.subscribeAsDefault(OrganizationUserActions.sendNotificationSuccess, $localize`Besked sendt`);
@@ -282,18 +286,18 @@ export class NotificationService implements OnDestroy {
       ofType(
         OrganizationUserActions.updateUserSuccess,
         UserActions.setUserDefaultUnitSuccess,
-        OrganizationUserActions.createUserSuccess
+        OrganizationUserActions.createUserSuccess,
       ),
-      $localize`Brugeren blev opdateret`
+      $localize`Brugeren blev opdateret`,
     );
 
     this.subscribeMultipleError(
       ofType(
         OrganizationUserActions.updateUserError,
         UserActions.setUserDefaultUnitError,
-        OrganizationUserActions.createUserError
+        OrganizationUserActions.createUserError,
       ),
-      $localize`Brugeren kunne ikke opdateres`
+      $localize`Brugeren kunne ikke opdateres`,
     );
 
     this.subscribeAsError(OrganizationActions.getMasterDataError, this.getMasterDataError);
@@ -307,20 +311,20 @@ export class NotificationService implements OnDestroy {
     this.subscribeAsError(UserActions.patchOrganizationError, $localize`Kunne ikke opdatere organisation.`);
     this.subscribeAsError(
       OrganizationActions.getOrganizationPermissionsError,
-      $localize`Kunne ikke hente organisationsrettigheder.`
+      $localize`Kunne ikke hente organisationsrettigheder.`,
     );
 
     this.subscribeAsError(
       OrganizationActions.getUIRootConfigError,
-      $localize`Kunne ikke hente lokal tilpasning af moduler.`
+      $localize`Kunne ikke hente lokal tilpasning af moduler.`,
     );
     this.subscribeAsDefault(
       OrganizationActions.patchUIRootConfigSuccess,
-      $localize`Lokal tilpasning af moduler blev opdateret.`
+      $localize`Lokal tilpasning af moduler blev opdateret.`,
     );
     this.subscribeAsError(
       OrganizationActions.patchUIRootConfigError,
-      $localize`Kunne ikke opdatere lokal tilpasning af moduler.`
+      $localize`Kunne ikke opdatere lokal tilpasning af moduler.`,
     );
 
     this.subscribeAsDefault(OrganizationUserActions.copyRolesSuccess, $localize`Roller kopieret`);
@@ -338,7 +342,7 @@ export class NotificationService implements OnDestroy {
         .subscribe(({ disabled }) => {
           const message = disabled ? $localize`Organisationen er deaktiveret` : $localize`Organisationen er aktiveret`;
           this.showDefault(message);
-        })
+        }),
     );
     this.subscriptions.add(
       this.actions$
@@ -346,7 +350,7 @@ export class NotificationService implements OnDestroy {
         .subscribe(({ disabled }) => {
           const message = disabled ? $localize`Organisationen er deaktiveret` : $localize`Organisationen er aktiveret`;
           this.showError(message);
-        })
+        }),
     );
   }
 
@@ -354,90 +358,109 @@ export class NotificationService implements OnDestroy {
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(ITSystemUsageActions.patchITSystemUsageSuccess))
-        .subscribe((params) => this.showDefault(params.customSuccessText ?? $localize`Feltet blev opdateret.`))
+        .subscribe((params) => this.showDefault(params.customSuccessText ?? $localize`Feltet blev opdateret.`)),
     );
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(ITSystemUsageActions.patchITSystemUsageError))
-        .subscribe((params) => this.showError(params.customErrorText ?? $localize`Feltet kunne ikke opdateres.`))
+        .subscribe((params) => this.showError(params.customErrorText ?? $localize`Feltet kunne ikke opdateres.`)),
     );
 
     this.subscribeAsDefault(ITSystemUsageActions.addItSystemUsageRelationSuccess, $localize`Relation tilføjet`);
     this.subscribeAsError(
       ITSystemUsageActions.addItSystemUsageRelationError,
-      $localize`Kunne ikke tilføje relationen.`
+      $localize`Kunne ikke tilføje relationen.`,
     );
 
     this.subscribeAsDefault(ITSystemUsageActions.addItSystemUsageRelationsSuccess, $localize`Relationer tilføjet`);
     this.subscribeAsError(
       ITSystemUsageActions.addItSystemUsageRelationsError,
-      $localize`Kunne ikke tilføje relationerne.`
+      $localize`Kunne ikke tilføje relationerne.`,
     );
 
     this.subscribeAsDefault(ITSystemUsageActions.patchItSystemUsageRelationSuccess, $localize`Relation ændret`);
     this.subscribeAsError(
       ITSystemUsageActions.patchItSystemUsageRelationError,
-      $localize`Kunne ikke redigere relationen`
+      $localize`Kunne ikke redigere relationen`,
     );
 
     this.subscribeAsDefault(ITSystemUsageActions.removeItSystemUsageRelationSuccess, $localize`Relationen er slettet`);
     this.subscribeAsError(
       ITSystemUsageActions.removeItSystemUsageRelationError,
-      $localize`Kunne ikke slette relationen`
+      $localize`Kunne ikke slette relationen`,
     );
 
     this.subscribeAsDefault(
       ITSystemUsageActions.addItSystemUsageJournalPeriodSuccess,
-      $localize`Journalperioden blev tilføjet`
+      $localize`Journalperioden blev tilføjet`,
     );
     this.subscribeAsError(
       ITSystemUsageActions.addItSystemUsageJournalPeriodError,
-      $localize`Kunne ikke tilføje journalperioden`
+      $localize`Kunne ikke tilføje journalperioden`,
     );
 
     this.subscribeAsDefault(
       ITSystemUsageActions.patchItSystemUsageJournalPeriodSuccess,
-      $localize`Journalperioden ændret`
+      $localize`Journalperioden ændret`,
     );
     this.subscribeAsError(
       ITSystemUsageActions.patchItSystemUsageJournalPeriodError,
-      $localize`Kunne ikke redigere journalperioden`
+      $localize`Kunne ikke redigere journalperioden`,
     );
 
     this.subscribeAsDefault(
       ITSystemUsageActions.removeItSystemUsageJournalPeriodSuccess,
-      $localize`Journalperioden er slettet`
+      $localize`Journalperioden er slettet`,
     );
     this.subscribeAsError(
       ITSystemUsageActions.removeItSystemUsageJournalPeriodError,
-      $localize`Kunne ikke slette journalperioden`
+      $localize`Kunne ikke slette journalperioden`,
     );
 
     this.subscribeAsDefault(
       ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganizationSuccess,
-      $localize`Anvendelsen er blevet slettet`
+      $localize`Anvendelsen er blevet slettet`,
     );
     this.subscribeAsError(
       ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganizationError,
-      $localize`Anvendelsen kunne ikke slettes`
+      $localize`Anvendelsen kunne ikke slettes`,
     );
 
     this.subscribeAsDefault(ITSystemUsageActions.createItSystemUsageSuccess, $localize`Anvendelse oprettet`);
     this.subscribeAsError(
       ITSystemUsageActions.createItSystemUsageError,
-      $localize`Oprettelse af anvendelse mislykkedes`
+      $localize`Oprettelse af anvendelse mislykkedes`,
+    );
+
+    this.subscribeAsDefault(ITSystemUsageActions.removeITSystemUsageSuccess, $localize`Systemanvendelsen blev slettet`);
+
+    this.subscribeAsDefault(
+      ITSystemUsageActions.archiveItSystemUsageSuccess,
+      $localize`Systemanvendelsen blev arkiveret`,
+    );
+    this.subscribeAsError(
+      ITSystemUsageActions.archiveItSystemUsageError,
+      $localize`Systemanvendelsen kunne ikke arkiveres`,
+    );
+    this.subscribeAsDefault(
+      ITSystemUsageArchiveActions.deleteITSystemUsageArchiveSuccess,
+      $localize`Systemets historie blev slettet`,
+    );
+    this.subscribeAsError(
+      ITSystemUsageArchiveActions.deleteITSystemUsageArchiveError,
+      $localize`Systemets historie kunne ikke slettes`,
     );
 
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(ITSystemActions.patchITSystemSuccess))
-        .subscribe((params) => this.showDefault(params.customSuccessText ?? $localize`Feltet er opdateret`))
+        .subscribe((params) => this.showDefault(params.customSuccessText ?? $localize`Feltet er opdateret`)),
     );
 
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(ITSystemActions.patchITSystemError))
-        .subscribe((params) => this.showError(params.customErrorText ?? $localize`Feltet kunne ikke opdateres`))
+        .subscribe((params) => this.showError(params.customErrorText ?? $localize`Feltet kunne ikke opdateres`)),
     );
 
     this.subscribeAsDefault(ITInterfaceActions.deleteITInterfaceSuccess, $localize`Snitflade blev slettet`);
@@ -447,7 +470,7 @@ export class NotificationService implements OnDestroy {
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(ITInterfaceActions.updateITInterfaceError))
-        .subscribe((errMsg) => this.showError(errMsg.customErrorText ?? $localize`Snitflade kunne ikke opdateres`))
+        .subscribe((errMsg) => this.showError(errMsg.customErrorText ?? $localize`Snitflade kunne ikke opdateres`)),
     );
 
     this.subscribeAsDefault(ITInterfaceActions.removeITInterfaceDataSuccess, $localize`Snitflade data blev slettet`);
@@ -456,7 +479,7 @@ export class NotificationService implements OnDestroy {
     this.subscribeAsDefault(ITInterfaceActions.updateITInterfaceDataSuccess, $localize`Snitflade data blev opdateret`);
     this.subscribeAsError(
       ITInterfaceActions.updateITInterfaceDataError,
-      $localize`Snitflade data kunne ikke opdateres`
+      $localize`Snitflade data kunne ikke opdateres`,
     );
 
     this.subscribeAsDefault(ITInterfaceActions.addITInterfaceDataSuccess, $localize`Snitflade data blev oprettet`);
@@ -472,56 +495,56 @@ export class NotificationService implements OnDestroy {
 
     this.subscribeAsDefault(
       ITContractActions.addITContractSystemAgreementElementSuccess,
-      $localize`Aftaleelementet blev opdateret`
+      $localize`Aftaleelementet blev opdateret`,
     );
     this.subscribeAsError(
       ITContractActions.addITContractSystemAgreementElementError,
-      $localize`Aftaleelementet kunne ikke opdateres`
+      $localize`Aftaleelementet kunne ikke opdateres`,
     );
 
     this.subscribeAsDefault(
       ITContractActions.addITContractSystemUsageSuccess,
-      $localize`Kontrakt systemet blev opdateret`
+      $localize`Kontrakt systemet blev opdateret`,
     );
     this.subscribeAsError(
       ITContractActions.addITContractSystemUsageError,
-      $localize`Kontrakt systemet kunne ikke opdateres`
+      $localize`Kontrakt systemet kunne ikke opdateres`,
     );
 
     this.subscribeAsDefault(
       ITContractActions.removeITContractSystemAgreementElementSuccess,
-      $localize`Aftaleelementet blev slettet`
+      $localize`Aftaleelementet blev slettet`,
     );
     this.subscribeAsError(
       ITContractActions.removeITContractSystemAgreementElementError,
-      $localize`Aftaleelementet kunne ikke slettes`
+      $localize`Aftaleelementet kunne ikke slettes`,
     );
 
     this.subscribeAsDefault(
       ITContractActions.removeITContractSystemUsageSuccess,
-      $localize`Kontrakt systemet blev slettet`
+      $localize`Kontrakt systemet blev slettet`,
     );
     this.subscribeAsError(
       ITContractActions.removeITContractSystemUsageError,
-      $localize`Kontrakt systemet kunne ikke slettes`
+      $localize`Kontrakt systemet kunne ikke slettes`,
     );
 
     this.subscribeAsDefault(
       ITContractActions.addITContractDataProcessingRegistrationSuccess,
-      $localize`Tilknytningen blev oprettet`
+      $localize`Tilknytningen blev oprettet`,
     );
     this.subscribeAsError(
       ITContractActions.addITContractDataProcessingRegistrationError,
-      $localize`Tilknytningen kunne ikke oprettes`
+      $localize`Tilknytningen kunne ikke oprettes`,
     );
 
     this.subscribeAsDefault(
       ITContractActions.removeITContractDataProcessingRegistrationSuccess,
-      $localize`Tilknytningen blev slettet`
+      $localize`Tilknytningen blev slettet`,
     );
     this.subscribeAsError(
       ITContractActions.removeITContractDataProcessingRegistrationError,
-      $localize`Tilknytningen kunne ikke slettes`
+      $localize`Tilknytningen kunne ikke slettes`,
     );
 
     this.subscribeAsDefault(ITContractActions.addItContractPaymentSuccess, $localize`Betalingen blev oprettet`);
@@ -535,7 +558,7 @@ export class NotificationService implements OnDestroy {
 
     this.subscribeAsDefault(
       ITContractActions.createAndAssociateContractSuccess,
-      $localize`Kontrakt oprettet og tilknyttet`
+      $localize`Kontrakt oprettet og tilknyttet`,
     );
     this.subscribeAsError(ITContractActions.createAndAssociateContractError, $localize`Kontrakt kunne ikke oprettes`);
   }
@@ -543,30 +566,30 @@ export class NotificationService implements OnDestroy {
   private subscribeToDprEvents() {
     this.subscribeAsDefault(
       DataProcessingActions.createDataProcessingSuccess,
-      $localize`Databehandlingen blev oprettet`
+      $localize`Databehandlingen blev oprettet`,
     );
 
     this.subscribeAsError(
       DataProcessingActions.createDataProcessingError,
-      $localize`Databehandlingen kunne ikke oprettes`
+      $localize`Databehandlingen kunne ikke oprettes`,
     );
 
     this.subscribeAsDefault(
       DataProcessingActions.patchDataProcessingSuccess,
-      $localize`Databehandlingen blev opdateret`
+      $localize`Databehandlingen blev opdateret`,
     );
     this.subscribeAsError(
       DataProcessingActions.patchDataProcessingError,
-      $localize`Databehandlingen kunne ikke opdateres`
+      $localize`Databehandlingen kunne ikke opdateres`,
     );
 
     this.subscribeAsDefault(
       DataProcessingActions.deleteDataProcessingSuccess,
-      $localize`Databehandlingen blev slettet`
+      $localize`Databehandlingen blev slettet`,
     );
     this.subscribeAsError(
       DataProcessingActions.patchDataProcessingError,
-      $localize`Databehandlingen kunne ikke slettes`
+      $localize`Databehandlingen kunne ikke slettes`,
     );
 
     this.subscribeAsDefault(GlobalOptionTypeActions.createOptionTypeSuccess, $localize`Typen blev oprettet`);
@@ -580,37 +603,37 @@ export class NotificationService implements OnDestroy {
   private subscribeToRoleNotifications() {
     this.subscribeMultipleDefault(
       ofType(ITSystemUsageActions.bulkAddItSystemUsageRoleSuccess, ITContractActions.bulkAddItContractRoleSuccess),
-      $localize`Tildelingen blev tilføjet`
+      $localize`Tildelingen blev tilføjet`,
     );
 
     this.subscribeMultipleError(
       ofType(ITSystemUsageActions.bulkAddItSystemUsageRoleError, ITContractActions.bulkAddItContractRoleError),
-      $localize`Kunne ikke oprette tildelingen`
+      $localize`Kunne ikke oprette tildelingen`,
     );
 
     this.subscribeMultipleDefault(
       ofType(ITSystemUsageActions.removeItSystemUsageRoleSuccess, ITContractActions.removeItContractRoleSuccess),
-      $localize`Tildelingen blev fjernet`
+      $localize`Tildelingen blev fjernet`,
     );
 
     this.subscribeMultipleError(
       ofType(ITSystemUsageActions.removeItSystemUsageRoleError, ITContractActions.removeItContractRoleError),
-      $localize`Kunne ikke fjerne tildelingen`
+      $localize`Kunne ikke fjerne tildelingen`,
     );
 
     this.subscribeAsError(
       UIModuleConfigActions.getUIModuleConfigError,
-      $localize`Kunne ikke hente lokal tilpasning af brugerfladen`
+      $localize`Kunne ikke hente lokal tilpasning af brugerfladen`,
     );
 
     this.subscribeAsError(
       UIModuleConfigActions.putUIModuleCustomizationError,
-      $localize`Kunne ikke opdatere lokal tilpasning af brugerfladen`
+      $localize`Kunne ikke opdatere lokal tilpasning af brugerfladen`,
     );
 
     this.subscribeAsDefault(
       UIModuleConfigActions.putUIModuleCustomizationSuccess,
-      $localize`Lokal tilpasning af brugerfladen blev opdateret`
+      $localize`Lokal tilpasning af brugerfladen blev opdateret`,
     );
   }
 
@@ -620,39 +643,39 @@ export class NotificationService implements OnDestroy {
   private subscribeToFkOrganizationEvents() {
     this.subscribeAsDefault(
       FkOrgActions.createConnectionSuccess,
-      $localize`Forbindelse til FK Organisation blev oprettet`
+      $localize`Forbindelse til FK Organisation blev oprettet`,
     );
 
     this.subscribeAsError(
       FkOrgActions.createConnectionError,
-      $localize`Kunne ikke oprette en forbindelse til Fk Organisation`
+      $localize`Kunne ikke oprette en forbindelse til Fk Organisation`,
     );
 
     this.subscribeAsDefault(
       FkOrgActions.updateConnectionSuccess,
-      $localize`Forbindelse til FK Organisation er opdateret`
+      $localize`Forbindelse til FK Organisation er opdateret`,
     );
     this.subscribeAsError(
       FkOrgActions.updateConnectionError,
-      $localize`Kunne ikke opdatere forbindelsen til Fk Organisation`
+      $localize`Kunne ikke opdatere forbindelsen til Fk Organisation`,
     );
 
     this.subscribeAsDefault(
       FkOrgActions.deleteAutomaticUpdateSubscriptionSuccess,
-      $localize`Automatisk import af opdateringer blev deaktiveret`
+      $localize`Automatisk import af opdateringer blev deaktiveret`,
     );
     this.subscribeAsError(
       FkOrgActions.deleteAutomaticUpdateSubscriptionError,
-      $localize`Automatisk import af opdateringer kunne ikke deaktiveres`
+      $localize`Automatisk import af opdateringer kunne ikke deaktiveres`,
     );
 
     this.subscribeAsDefault(
       FkOrgActions.deleteConnectionSuccess,
-      $localize`Forbindelsen til FK Organisation blev fjernet`
+      $localize`Forbindelsen til FK Organisation blev fjernet`,
     );
     this.subscribeAsError(
       FkOrgActions.deleteConnectionError,
-      $localize`Kunne ikke slette forbindelsen til Fk Organisation`
+      $localize`Kunne ikke slette forbindelsen til Fk Organisation`,
     );
   }
 
@@ -665,9 +688,9 @@ export class NotificationService implements OnDestroy {
         ITSystemUsageActions.addExternalReferenceSuccess,
         ITSystemActions.addExternalReferenceSuccess,
         ITContractActions.addExternalReferenceSuccess,
-        DataProcessingActions.addExternalReferenceSuccess
+        DataProcessingActions.addExternalReferenceSuccess,
       ),
-      $localize`Referencen blev oprettet`
+      $localize`Referencen blev oprettet`,
     );
 
     this.subscribeMultipleError(
@@ -675,9 +698,9 @@ export class NotificationService implements OnDestroy {
         ITSystemUsageActions.addExternalReferenceError,
         ITSystemActions.addExternalReferenceError,
         ITContractActions.addExternalReferenceError,
-        DataProcessingActions.addExternalReferenceError
+        DataProcessingActions.addExternalReferenceError,
       ),
-      $localize`Referencen kunne ikke oprettes`
+      $localize`Referencen kunne ikke oprettes`,
     );
 
     this.subscribeMultipleDefault(
@@ -685,9 +708,9 @@ export class NotificationService implements OnDestroy {
         ITSystemUsageActions.editExternalReferenceSuccess,
         ITSystemActions.editExternalReferenceSuccess,
         ITContractActions.editExternalReferenceSuccess,
-        DataProcessingActions.editExternalReferenceSuccess
+        DataProcessingActions.editExternalReferenceSuccess,
       ),
-      $localize`Referencen blev ændret`
+      $localize`Referencen blev ændret`,
     );
 
     this.subscribeMultipleError(
@@ -695,9 +718,9 @@ export class NotificationService implements OnDestroy {
         ITSystemUsageActions.editExternalReferenceError,
         ITSystemActions.editExternalReferenceError,
         ITContractActions.editExternalReferenceError,
-        DataProcessingActions.editExternalReferenceError
+        DataProcessingActions.editExternalReferenceError,
       ),
-      $localize`Referencen kunne ikke ændres`
+      $localize`Referencen kunne ikke ændres`,
     );
 
     this.subscribeMultipleDefault(
@@ -705,9 +728,9 @@ export class NotificationService implements OnDestroy {
         ITSystemUsageActions.removeExternalReferenceSuccess,
         ITSystemActions.removeExternalReferenceSuccess,
         ITContractActions.removeExternalReferenceSuccess,
-        DataProcessingActions.removeExternalReferenceSuccess
+        DataProcessingActions.removeExternalReferenceSuccess,
       ),
-      $localize`Referencen blev slettet`
+      $localize`Referencen blev slettet`,
     );
 
     this.subscribeMultipleError(
@@ -715,9 +738,9 @@ export class NotificationService implements OnDestroy {
         ITSystemUsageActions.removeExternalReferenceError,
         ITSystemActions.removeExternalReferenceError,
         ITContractActions.removeExternalReferenceError,
-        DataProcessingActions.removeExternalReferenceError
+        DataProcessingActions.removeExternalReferenceError,
       ),
-      $localize`Referencen kunne ikke slettes`
+      $localize`Referencen kunne ikke slettes`,
     );
   }
 
@@ -733,7 +756,7 @@ export class NotificationService implements OnDestroy {
     });
     this.subscribeAsError(
       UserActions.resetPasswordRequestError,
-      $localize`Der skete en fejl under afsendelse af email`
+      $localize`Der skete en fejl under afsendelse af email`,
     );
 
     this.subscribeAsDefault(UserActions.resetPasswordSuccess, $localize`Dit password er blevet nulstillet`);
@@ -772,9 +795,9 @@ export class NotificationService implements OnDestroy {
       this.actions$
         .pipe(
           actionTypes,
-          filter((action: any) => !action.disablePopupNotification)
+          filter((action: any) => !action.disablePopupNotification),
         )
-        .subscribe(() => this.show(msg, type))
+        .subscribe(() => this.show(msg, type)),
     );
   }
 

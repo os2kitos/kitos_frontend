@@ -6,7 +6,7 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
 import { hasOpenDialogOf } from 'src/app/shared/helpers/dialog.helpers';
 import { validateHttpUrl } from 'src/app/shared/helpers/link.helpers';
 import { SimpleLink } from 'src/app/shared/models/SimpleLink.model';
-import { LinkTextboxComponent } from '../../../../../shared/components/link-textbox/link-textbox.component';
+import { LinkTextboxComponent } from '../../../../shared/components/link-textbox/link-textbox.component';
 import { EditSimpleLinkDialogComponent } from '../edit-url-dialog/edit-url-dialog.component';
 
 @Component({
@@ -23,6 +23,9 @@ export class EditUrlSectionComponent extends BaseComponent {
   @Input() nameDisabledMessage?: string;
   @Input() linkPermission$?: Observable<boolean>;
   @Input() linkDisabledMessage?: string;
+  @Input() closeDialogOnSubmit = false;
+  @Input() disableSubmitIfNoUrl = false;
+
   @Output() submitMethod = new EventEmitter();
 
   public doesSimpleLinkExist$ = this.simpleLink$?.pipe(map((simpleLink) => simpleLink !== undefined));
@@ -42,6 +45,8 @@ export class EditUrlSectionComponent extends BaseComponent {
     dialogInstance.nameDisabledMessage = this.nameDisabledMessage;
     dialogInstance.linkPermission$ = this.linkPermission$;
     dialogInstance.linkDisabledMessage = this.linkDisabledMessage;
+    dialogInstance.closeDialogOnSubmit = this.closeDialogOnSubmit;
+    dialogInstance.disableSubmitIfNoUrl = this.disableSubmitIfNoUrl;
     dialogInstance.submitMethod = this.submitMethod;
   }
 
