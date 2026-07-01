@@ -69,7 +69,6 @@ import { ItContractV2Service } from './api/itContractV2.service';
 import { ItInterfaceInterfaceDataTypeV2Service } from './api/itInterfaceInterfaceDataTypeV2.service';
 import { ItInterfaceInterfaceTypeV2Service } from './api/itInterfaceInterfaceTypeV2.service';
 import { ItInterfaceV2Service } from './api/itInterfaceV2.service';
-import { ItSystemArchiveV2Service } from './api/itSystemArchiveV2.service';
 import { ItSystemBusinessTypeV2Service } from './api/itSystemBusinessTypeV2.service';
 import { ItSystemDBSV2Service } from './api/itSystemDBSV2.service';
 import { ItSystemGlobalArchiveLocationsInternalV2Service } from './api/itSystemGlobalArchiveLocationsInternalV2.service';

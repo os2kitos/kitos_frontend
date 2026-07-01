@@ -55,5 +55,9 @@ export interface APIItSystemUsageArchiveResponseDTO {
      * References associated with the archive
      */
     archiveReferences?: Array<APIArchiveReferenceResponseDTO> | null;
+    /**
+     * Full name of the user who archived the system usage
+     */
+    archivedByFullName: string | null;
 }
 

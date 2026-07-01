@@ -122,7 +122,6 @@ export * from './itInterfaceDataResponseDTO';
 export * from './itInterfaceDeletionConflict';
 export * from './itInterfacePermissionsResponseDTO';
 export * from './itInterfaceResponseDTO';
-export * from './itSystemArchiveResponseDTO';
 export * from './itSystemHierarchyNodeResponseDTO';
 export * from './itSystemPermissionsResponseDTO';
 export * from './itSystemResponseDTO';

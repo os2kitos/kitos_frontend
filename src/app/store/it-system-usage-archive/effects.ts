@@ -7,6 +7,7 @@ import { compact } from 'lodash';
 import { catchError, map, of, switchMap } from 'rxjs';
 import { ItSystemUsageArchiveV2Service } from 'src/app/api/v2';
 import { USAGE_ARCHIVE_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-constants';
+import { replaceQueryByMultiplePropertyContains } from 'src/app/shared/helpers/odata-query.helpers';
 import { adaptItSystemUsageArchive } from 'src/app/shared/models/it-system/it-system-usage-archive-odata.model';
 import { OData } from 'src/app/shared/models/odata.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
@@ -43,9 +44,10 @@ export class ITSystemUsageArchiveEffects {
         }
 
         const cacheableOdataString = this.gridDataCacheService.toChunkedODataString(gridState);
+        const fixedOdataString = applyQueryFixes(cacheableOdataString);
         return this.httpClient
           .get<OData>(
-            `/odata/ItSystemUsageArchives?organizationUuid=${organizationUuid}&$expand=Snapshot($expand=ItSystem($select=Name,Uuid))&${cacheableOdataString}&$count=true`,
+            `/odata/ItSystemUsageArchives?organizationUuid=${organizationUuid}&$expand=Snapshot($select=LegacyName,LocalName,LocalId;$expand=ItSystem($select=Name,Uuid)),ArchivedByUser($select=Name,LastName)&${fixedOdataString}&$count=true`,
           )
           .pipe(
             map((data) => {
@@ -134,4 +136,13 @@ export class ITSystemUsageArchiveEffects {
       ),
     );
   });
+}
+
+function applyQueryFixes(odataString: string): string {
+  return replaceQueryByMultiplePropertyContains(
+    odataString,
+    'ArchivedByUser.Name',
+    'ArchivedByUser',
+    ['Name', 'LastName'],
+  );
 }

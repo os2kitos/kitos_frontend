@@ -3,7 +3,7 @@ import { APIBusinessRoleDTO } from 'src/app/api/v1';
 import {
   APIColumnConfigurationRequestDTO,
   APICreateItSystemUsageArchiveRequestDTO,
-  APIItSystemArchiveResponseDTO as APIItSystemUsageArchiveResponseDTO,
+  APIItSystemUsageArchiveResponseDTO,
   APIItSystemUsageResponseDTO,
   APIJournalPeriodDTO,
   APIOrganizationGridConfigurationResponseDTO,

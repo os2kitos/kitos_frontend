@@ -51,6 +51,7 @@ export class ItSystemUsageArchiveDetailsFrontpageComponent extends BaseComponent
     localId: new FormControl<string | undefined>({ value: undefined, disabled: true }),
     organization: new FormControl<string | undefined>({ value: undefined, disabled: true }),
     currentSystemName: new FormControl<string | undefined>({ value: undefined, disabled: true }),
+    archivedByFullName: new FormControl<string | undefined>({ value: undefined, disabled: true }),
   });
 
   constructor(private readonly store: Store) {
@@ -81,9 +82,7 @@ export class ItSystemUsageArchiveDetailsFrontpageComponent extends BaseComponent
       combineLatest([this.itSystemUsageArchive$, this.currentItSystemName$]).subscribe(
         ([usageArchive, currentItSystemName]) => {
           this.archiveForm.patchValue({
-            takenIntoUsageDate: usageArchive.takenIntoUsageDate
-              ? new Date(usageArchive.takenIntoUsageDate)
-              : undefined,
+            takenIntoUsageDate: usageArchive.takenIntoUsageDate ? new Date(usageArchive.takenIntoUsageDate) : undefined,
             archivingDate: usageArchive.archivingDate ? new Date(usageArchive.archivingDate) : undefined,
             referenceName: usageArchive.referenceName,
             note: usageArchive.note,
@@ -92,6 +91,7 @@ export class ItSystemUsageArchiveDetailsFrontpageComponent extends BaseComponent
             localId: usageArchive.localId,
             organization: this.getOrganizationName(usageArchive.organization),
             currentSystemName: currentItSystemName,
+            archivedByFullName: usageArchive.archivedByFullName,
           });
           this.setupArchiveReferenceItems(usageArchive.archiveReferences ?? []);
         },

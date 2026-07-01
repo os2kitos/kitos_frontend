@@ -281,6 +281,10 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
                 this.router.navigate([`/${AppPath.itSystems}/${AppPath.itSystemUsages}`]);
               }),
             );
+
+            this.subscriptions.add(
+              this.actions$.pipe(ofType(ITSystemUsageActions.archiveItSystemUsageError), first()).subscribe(() => {}),
+            );
           }),
         )
         .subscribe(),

@@ -70,7 +70,6 @@ api/itContractV2.service.ts
 api/itInterfaceInterfaceDataTypeV2.service.ts
 api/itInterfaceInterfaceTypeV2.service.ts
 api/itInterfaceV2.service.ts
-api/itSystemArchiveV2.service.ts
 api/itSystemBusinessTypeV2.service.ts
 api/itSystemDBSV2.service.ts
 api/itSystemGlobalArchiveLocationsInternalV2.service.ts
@@ -261,7 +260,6 @@ model/itInterfaceDataResponseDTO.ts
 model/itInterfaceDeletionConflict.ts
 model/itInterfacePermissionsResponseDTO.ts
 model/itInterfaceResponseDTO.ts
-model/itSystemArchiveResponseDTO.ts
 model/itSystemHierarchyNodeResponseDTO.ts
 model/itSystemPermissionsResponseDTO.ts
 model/itSystemResponseDTO.ts
