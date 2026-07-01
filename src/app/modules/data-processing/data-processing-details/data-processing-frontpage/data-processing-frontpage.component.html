@@ -54,14 +54,16 @@
             formName="status"
           ></app-textbox>
 
+        @if (enforceInvalidityEnabled$ | async) {
           <app-checkbox
-            text="Gennemtving deaktivering"
-            i18n-text
-            labelPosition="after"
-            [formGroup]="frontpageFormGroup"
-            formName="enforceInvalidity"
-            (valueChange)="patchFrontPage({ general: { enforceInvalidity: $event } })"
+                text="Gennemtving deaktivering"
+                i18n-text
+                labelPosition="after"
+                [formGroup]="frontpageFormGroup"
+                formName="enforceInvalidity"
+                (valueChange)="patchFrontPage({ general: { enforceInvalidity: $event } })"
           ></app-checkbox>
+          }
         }
       </app-standard-vertical-content-grid>
       @if (lastChangedByEnabled$ | async) {

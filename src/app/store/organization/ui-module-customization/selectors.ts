@@ -72,6 +72,7 @@ export const selectDprEnableTransferBasis = createDprFrontPageFieldSelector('tra
 export const selectDprEnableProcessors = createDprFrontPageFieldSelector('processors');
 export const selectDprEnableSubProcessors = createDprFrontPageFieldSelector('subProcessors');
 export const selectDprEnableResponsibleOrgUnit = createDprFrontPageFieldSelector('responsibleOrgUnit');
+export const selectDprEnableEnforceInvalidity = createDprFrontPageFieldSelector('enforceInvalidity');
 
 //DPR -> IT Contract
 const createDprItContractsFieldSelector = (fieldKey: string) =>

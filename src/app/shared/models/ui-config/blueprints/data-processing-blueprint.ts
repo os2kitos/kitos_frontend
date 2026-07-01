@@ -43,6 +43,10 @@ export const DataProcessingUiBluePrint = {
         responsibleOrgUnit: {
           text: $localize`Ansvarlig enhed`,
         },
+        enforceInvalidity: {
+          text: $localize`Gennemtving deaktivering`,
+          disableByDefault: true,
+        },
       },
     },
     itSystems: {

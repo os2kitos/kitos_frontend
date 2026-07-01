@@ -31,6 +31,7 @@ import {
 import {
   selectDprEnableAgreementConcluded,
   selectDprEnableDataResponsible,
+  selectDprEnableEnforceInvalidity,
   selectDprEnableLastChangedAt,
   selectDprEnableLastChangedBy,
   selectDprEnableProcessors,
@@ -142,6 +143,7 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
   public readonly processorsEnabled$ = this.store.select(selectDprEnableProcessors);
   public readonly subProcessorsEnabled$ = this.store.select(selectDprEnableSubProcessors);
   public readonly responsibleUnitEnabled$ = this.store.select(selectDprEnableResponsibleOrgUnit);
+  public readonly enforceInvalidityEnabled$ = this.store.select(selectDprEnableEnforceInvalidity);
 
   constructor(
     private store: Store,
