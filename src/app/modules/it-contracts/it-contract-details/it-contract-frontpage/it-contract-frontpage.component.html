@@ -239,6 +239,8 @@
           formName="supplierOrganization"
           [data$]="organizations$"
           [isLoading$]="organizationsIsLoading$"
+          [includeItemDescription]="true"
+          itemDescriptionField="cvr"
           (filterChange)="searchOrganizations($event)"
           (valueChange)="patchFrontPage({ supplier: { organizationUuid: $event } })"
         ></app-connected-dropdown>
