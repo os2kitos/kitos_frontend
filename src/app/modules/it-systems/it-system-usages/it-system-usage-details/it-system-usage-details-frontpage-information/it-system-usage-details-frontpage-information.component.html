@@ -49,16 +49,6 @@
         (selectedEvent)="patchTechnicalSystemTypes($event)"
       ></app-multi-select-dropdown>
     }
-    @if (purposeEnabled$ | async) {
-      <app-textbox
-        text="Systemets overordnede formål"
-        i18n-text
-        [formGroup]="itSystemInformationForm"
-        formName="purpose"
-        [maxLength]="250"
-        (valueChange)="patchGeneral({ purpose: $event })"
-      ></app-textbox>
-    }
     @if (hostedAtEnabled$ | async) {
       <app-dropdown
         text="IT-systemet driftes"
@@ -114,6 +104,17 @@
         [disabled]="!(hasModifyPermission$ | async)"
         (selectedEvent)="patchLicensingAndCodeModels($event)"
       ></app-multi-select-dropdown>
+    }
+    @if (purposeEnabled$ | async) {
+      <app-textarea
+        class="full-width"
+        text="Systemets overordnede formål"
+        i18n-text
+        [formGroup]="itSystemInformationForm"
+        formName="purpose"
+        (validatedValueChange)="patchGeneral({ purpose: $event.value }, $event)"
+        [autosizeMinRows]="1"
+      ></app-textarea>
     }
     @if (descriptionEnabled$ | async) {
       <app-textarea
