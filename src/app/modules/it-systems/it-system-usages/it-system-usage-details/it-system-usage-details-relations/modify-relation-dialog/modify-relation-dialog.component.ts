@@ -126,7 +126,7 @@ export class ModifyRelationDialogComponent extends SystemRelationDialogComponent
     if (!usage) return;
 
     this.isBusy = true;
-    var formValue = this.formGroup.value;
+    const formValue = this.formGroup.value;
 
     const request = {
       toSystemUsageUuid: usage.uuid,

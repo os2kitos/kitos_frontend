@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { GridActions } from 'src/app/store/grid/actions';
 import { DialogComponent } from '../../../../shared/components/dialogs/dialog/dialog.component';

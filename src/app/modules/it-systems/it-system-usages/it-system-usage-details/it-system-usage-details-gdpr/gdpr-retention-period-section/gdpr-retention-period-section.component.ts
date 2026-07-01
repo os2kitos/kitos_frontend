@@ -3,7 +3,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { map } from 'rxjs';
-import { APIGDPRRegistrationsResponseDTO, APIGDPRWriteRequestDTO, APIYesNoDontKnowChoice } from 'src/app/api/v2';
+import { APIGDPRWriteRequestDTO, APIYesNoDontKnowChoice } from 'src/app/api/v2';
 import { BaseAccordionComponent } from 'src/app/shared/base/base-accordion.component';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import {

@@ -34,13 +34,17 @@
             "varsIgnorePattern": "^_",
             "caughtErrorsIgnorePattern": "^_"
           }
-        ]
+        ],
+        "@angular-eslint/prefer-inject": ["off"],
+        "@angular-eslint/use-lifecycle-interface": ["off"]
       }
     },
     {
       "files": ["*.html"],
       "extends": ["plugin:@angular-eslint/template/recommended"],
-      "rules": {}
+      "rules": {
+        "@angular-eslint/template/no-negated-async": ["off"]
+      }
     },
     {
       "files": ["*.ts"],
@@ -49,7 +53,8 @@
         "@ngrx/avoid-mapping-selectors": ["off"],
         "@ngrx/no-store-subscription": ["off"],
         "@ngrx/avoid-dispatching-multiple-actions-sequentially": ["off"],
-        "@angular-eslint/prefer-standalone": ["off"]
+        "@angular-eslint/prefer-standalone": ["off"],
+        "@ngrx/on-function-explicit-return-type": ["off"]
       }
     }
   ]

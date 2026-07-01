@@ -11,7 +11,6 @@ import {
   APIDataProcessingRegistrationResponseDTO,
   APIDataProcessorRegistrationSubDataProcessorResponseDTO,
   APIDataProcessorRegistrationSubDataProcessorWriteRequestDTO,
-  APIOversightDateDTO,
   DataProcessingRegistrationInternalV2Service,
   DataProcessingRegistrationOversightDatesV2Service,
   DataProcessingRegistrationV2Service,
@@ -540,7 +539,7 @@ export class DataProcessingEffects {
             oversightDateUuid,
           })
           .pipe(
-            map((response) => DataProcessingActions.removeDataProcessingOversightDateSuccess(oversightDateUuid)),
+            map(() => DataProcessingActions.removeDataProcessingOversightDateSuccess(oversightDateUuid)),
             catchError(() => of(DataProcessingActions.removeDataProcessingOversightDateError())),
           );
       }),
@@ -664,10 +663,6 @@ export class DataProcessingEffects {
       ),
     );
   });
-}
-
-function removeOversightDateByUuid(targetUuid: string, oversightDates: APIOversightDateDTO[]) {
-  return oversightDates.filter((oversightDate) => oversightDate.uuid !== targetUuid);
 }
 
 function mapSubDataProcessors(

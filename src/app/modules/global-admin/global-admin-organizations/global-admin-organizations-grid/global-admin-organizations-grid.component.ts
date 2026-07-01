@@ -154,7 +154,7 @@ export class GlobalAdminOrganizationsGridComponent extends BaseOverviewComponent
 
   public onEditOrganization(organization: OrganizationOData) {
     const dialogRef = this.dialog.open(EditOrganizationDialogComponent);
-    var componentInstance = dialogRef.componentInstance;
+    const componentInstance = dialogRef.componentInstance;
     componentInstance.organization = organization;
     componentInstance.tooltipText = this.disabledSupplierFieldTooltip;
   }
