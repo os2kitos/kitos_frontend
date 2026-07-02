@@ -7,6 +7,7 @@ export const dataProcessingFields = {
       name: 'DataProcessingRegistrationOversightDate.OversightReportLinkName',
       url: 'DataProcessingRegistrationOversightDate.OversightReportLink',
     },
+    oversightOption: 'DataProcessingRegistrationOversightDate.OversightOptionId',
   },
 };
 

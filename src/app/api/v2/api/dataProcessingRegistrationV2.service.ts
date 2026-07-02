@@ -63,7 +63,9 @@ export interface GetSingleDataProcessingRegistrationV2GetDataProcessingRegistrat
     subDataProcessorUuid?: string;
     /** Filter based on whether or not an agreement has been concluded */
     agreementConcluded?: boolean;
+    /** Filter based on whether the name contains the provided value */
     nameContains?: string;
+    /** Filter based on whether the name equals the provided value */
     nameEquals?: string;
     /** Include only changes which were LastModified (UTC) is equal to or greater than the provided value */
     changedSinceGtEq?: string;

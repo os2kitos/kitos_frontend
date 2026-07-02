@@ -22,5 +22,6 @@ export interface APICreateOversightDateDTO {
      */
     remark?: string | null;
     oversightReportLink?: APISimpleLinkDTO;
+    oversightOptionUuid?: string | null;
 }
 

@@ -16,5 +16,6 @@ export interface APICreateDataProcessingRegistrationOversightDateDTO {
     oversightDate?: string;
     oversightRemark?: string | null;
     oversightReportLink?: APISimpleLinkDTO;
+    oversightOptionUuid?: string | null;
 }
 

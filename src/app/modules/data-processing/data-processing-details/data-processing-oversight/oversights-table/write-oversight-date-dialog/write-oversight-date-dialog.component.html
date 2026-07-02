@@ -21,6 +21,17 @@
           i18n-text
         ></app-datepicker>
       </app-tooltip>
+      <app-tooltip [text]="(oversightOptionFieldPermission$ | async) !== true ? supplierText : ''">
+        <app-dropdown
+          text="Tilsynsmulighed"
+          [formGroup]="oversightDateFormGroup"
+          formName="oversightOption"
+          data-cy="oversight-option-control"
+          [data]="oversightOptions$ | async"
+          valueField="uuid"
+          i18n-text
+        ></app-dropdown>
+      </app-tooltip>
       <app-tooltip [text]="(oversightRemarkFieldPermission$ | async) !== true ? supplierText : ''">
         <app-textarea
           text="Bemærkning"

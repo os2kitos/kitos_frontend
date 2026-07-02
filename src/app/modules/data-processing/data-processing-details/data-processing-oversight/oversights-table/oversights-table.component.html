@@ -1,60 +1,66 @@
 <app-standard-vertical-content-grid data-cy="subprocessors-table">
   @if (anyOversightDates$ | async) {
-  <app-native-table tableLayout="fixed">
-    <thead>
-      <th i18n width="10%">Dato for tilsyn</th>
-      <th i18n width="50%">Bemærkninger</th>
-      <th i18n width="30%">Tilsynsrapport</th>
-      <th width="10%"></th>
-    </thead>
-    <tbody>
-      @for (oversightDate of oversightDates$ | async; track oversightDate) {
-      <tr>
-        <td>
-          <app-paragraph>{{ oversightDate.completedAt | appDate }}</app-paragraph>
-        </td>
-        <td>
-          <app-paragraph [cropOnOverflow]="true">{{ oversightDate.remark }}</app-paragraph>
-        </td>
-        <td>
-          <app-external-page-link
-            [url]="oversightDate.oversightReportLink?.url ?? undefined"
-            [title]="oversightDate.oversightReportLink?.name ?? undefined"
-            placeholderName="Link til tilsynsrapport"
-            i18n-placeholderName
-          ></app-external-page-link>
-        </td>
-        <td>
-          @if ((hasModifyPermissions$ | async) === true) {
-          <app-table-row-actions>
-            <app-icon-button data-cy="edit-oversight-date-button" (buttonClick)="editOversightDate(oversightDate)"
-              ><app-pencil-icon></app-pencil-icon
-            ></app-icon-button>
-            @if (oversightDatesCollectionFieldPermission$ | async) {
-            <app-icon-button
-              data-cy="delete-oversight-date-button"
-              (buttonClick)="deleteOversightDate(oversightDate.uuid)"
-              ><app-trashcan-icon></app-trashcan-icon
-            ></app-icon-button>
-            }
-          </app-table-row-actions>
-          }
-        </td>
-      </tr>
-      }
-    </tbody>
-  </app-native-table>
-  } @if ((anyOversightDates$ | async) === false) {
-  <app-empty-state text="Ingen tilsyn tilføjet endnu" context="emptyTable" i18n-text></app-empty-state>
-  } @if ((hasModifyPermissions$ | async) === true) {
-  <app-tooltip [text]="(oversightDatesCollectionFieldPermission$ | async) !== true ? supplierText : ''">
-    <app-collection-extension-button
-      text="Opret tilsyn"
-      data-cy="add-oversight-date-button"
-      i18n-text
-      [disabled]="(oversightDatesCollectionFieldPermission$ | async) !== true"
-      (clicked)="addOversightDate()"
-    ></app-collection-extension-button>
-  </app-tooltip>
+    <app-native-table tableLayout="fixed">
+      <thead>
+        <th i18n width="10%">Dato for tilsyn</th>
+        <th i18n width="15%">Tilsynsmulighed</th>
+        <th i18n width="35%">Bemærkninger</th>
+        <th i18n width="30%">Tilsynsrapport</th>
+        <th width="10%"></th>
+      </thead>
+      <tbody>
+        @for (oversightDate of oversightDates$ | async; track oversightDate) {
+          <tr>
+            <td>
+              <app-paragraph>{{ oversightDate.completedAt | appDate }}</app-paragraph>
+            </td>
+            <td>
+              <app-paragraph [cropOnOverflow]="true">{{ oversightDate.oversightOption?.name }}</app-paragraph>
+            </td>
+            <td>
+              <app-paragraph [cropOnOverflow]="true">{{ oversightDate.remark }}</app-paragraph>
+            </td>
+            <td>
+              <app-external-page-link
+                [url]="oversightDate.oversightReportLink?.url ?? undefined"
+                [title]="oversightDate.oversightReportLink?.name ?? undefined"
+                placeholderName="Link til tilsynsrapport"
+                i18n-placeholderName
+              ></app-external-page-link>
+            </td>
+            <td>
+              @if ((hasModifyPermissions$ | async) === true) {
+                <app-table-row-actions>
+                  <app-icon-button data-cy="edit-oversight-date-button" (buttonClick)="editOversightDate(oversightDate)"
+                    ><app-pencil-icon></app-pencil-icon
+                  ></app-icon-button>
+                  @if (oversightDatesCollectionFieldPermission$ | async) {
+                    <app-icon-button
+                      data-cy="delete-oversight-date-button"
+                      (buttonClick)="deleteOversightDate(oversightDate.uuid)"
+                      ><app-trashcan-icon></app-trashcan-icon
+                    ></app-icon-button>
+                  }
+                </app-table-row-actions>
+              }
+            </td>
+          </tr>
+        }
+      </tbody>
+    </app-native-table>
+  }
+  @if ((anyOversightDates$ | async) === false) {
+    <app-empty-state text="Ingen tilsyn tilføjet endnu" context="emptyTable" i18n-text></app-empty-state>
+  }
+  @if ((hasModifyPermissions$ | async) === true) {
+    <app-tooltip [text]="(oversightDatesCollectionFieldPermission$ | async) !== true ? supplierText : ''">
+      <app-collection-extension-button
+        text="Opret tilsyn"
+        data-cy="add-oversight-date-button"
+        i18n-text
+        [disabled]="(oversightDatesCollectionFieldPermission$ | async) !== true"
+        (clicked)="addOversightDate()"
+      ></app-collection-extension-button>
+    </app-tooltip>
   }
 </app-standard-vertical-content-grid>

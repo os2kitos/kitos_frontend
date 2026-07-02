@@ -64,7 +64,9 @@ export interface GetSingleDataProcessingRegistrationInternalV2GetItSystemsReques
 }
 
 export interface PatchSingleDataProcessingRegistrationInternalV2PatchAddRoleAssignmentRequestParams {
+    /**  */
     dprUuid: string;
+    /**  */
     aPIRoleAssignmentRequestDTO?: APIRoleAssignmentRequestDTO;
 }
 
@@ -531,6 +533,7 @@ export class DataProcessingRegistrationInternalV2Service {
     }
 
     /**
+     * Add role assignment to the data processing registration  Constraint: Duplicates are not allowed (existing assignment of the same user/role)
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.

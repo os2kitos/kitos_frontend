@@ -19,7 +19,7 @@ export interface APIDataProcessingRegistrationOversightResponseDTO {
     /**
      * Applied oversight options.
      */
-    oversightOptions: Array<APIIdentityNamePairResponseDTO>;
+    oversightOptions: Array<APIIdentityNamePairResponseDTO> | null;
     /**
      * Remark related to the selected oversight options
      */
@@ -38,6 +38,9 @@ export interface APIDataProcessingRegistrationOversightResponseDTO {
      * Determines the date of a scheduled inspection
      */
     oversightScheduledInspectionDate?: string | null;
-    oversightDates: Array<APIOversightDateDTO>;
+    /**
+     * Specific dates where the oversight activity took place
+     */
+    oversightDates: Array<APIOversightDateDTO> | null;
 }
 

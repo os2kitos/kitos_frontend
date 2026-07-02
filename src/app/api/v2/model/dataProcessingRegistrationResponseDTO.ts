@@ -29,6 +29,9 @@ export interface APIDataProcessingRegistrationResponseDTO {
     lastModifiedBy: APIIdentityNamePairResponseDTO;
     organizationContext: APIShallowOrganizationResponseDTO;
     general: APIDataProcessingRegistrationGeneralDataResponseDTO;
+    /**
+     * Associated it-system-usage entities
+     */
     systemUsages: Array<APIShallowItSystemUsageResponseDTO> | null;
     oversight: APIDataProcessingRegistrationOversightResponseDTO;
     /**

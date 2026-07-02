@@ -16,11 +16,15 @@ export interface APIModifyOversightDateDTO {
     /**
      * Date of oversight completion (Supplier Field)
      */
-    completedAt?: string;
+    completedAt: string;
     /**
      * Optional remark related to the oversight (Supplier Field)
      */
     remark?: string | null;
     oversightReportLink?: APISimpleLinkDTO;
+    /**
+     * Optional UUID for the oversight option
+     */
+    oversightOptionUuid?: string | null;
 }
 

@@ -40,11 +40,12 @@ export interface DeleteSingleItContractV2DeleteExternalReferenceRequestParams {
 }
 
 export interface DeleteSingleItContractV2DeleteItContractRequestParams {
-    /**  */
+    /** UUID of the contract in KITOS */
     contractUuid: string;
 }
 
 export interface GetSingleItContractV2GetItContractRequestParams {
+    /** Specific IT-Contract UUID */
     contractUuid: string;
 }
 

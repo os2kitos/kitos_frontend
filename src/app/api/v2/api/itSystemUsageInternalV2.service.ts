@@ -62,7 +62,7 @@ export interface GetSingleItSystemUsageInternalV2GetRelationsRequestParams {
 }
 
 export interface GetSingleItSystemUsageInternalV2GetRoleAssignmentsRequestParams {
-    /**  */
+    /** UUID of the system usage */
     systemUsageUuid: string;
 }
 

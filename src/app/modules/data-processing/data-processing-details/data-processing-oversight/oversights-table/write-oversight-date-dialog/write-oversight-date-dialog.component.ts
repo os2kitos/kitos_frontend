@@ -5,18 +5,23 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, distinctUntilChanged } from 'rxjs';
-import { APIOversightDateDTO } from 'src/app/api/v2';
+import { APIIdentityNamePairResponseDTO, APIModifyOversightDateDTO, APIOversightDateDTO } from 'src/app/api/v2';
 import { EditSimpleLinkDialogComponent } from 'src/app/modules/it-systems/shared/edit-url-dialog/edit-url-dialog.component';
 import { EditUrlSectionComponent } from 'src/app/modules/it-systems/shared/edit-url-section/edit-url-section.component';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { DropdownComponent } from 'src/app/shared/components/dropdowns/dropdown/dropdown.component';
 import { TooltipComponent } from 'src/app/shared/components/tooltip/tooltip.component';
 import { SUPPLIER_DISABLED_MESSAGE } from 'src/app/shared/constants/constants';
 import { optionalNewDate } from 'src/app/shared/helpers/date.helpers';
 import { findDialogInstanceOf } from 'src/app/shared/helpers/dialog.helpers';
 import { dataProcessingFields } from 'src/app/shared/models/field-permissions-blueprints.model';
 import { SimpleLink } from 'src/app/shared/models/SimpleLink.model';
+import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
-import { selectDataProcessingFieldPermissions } from 'src/app/store/data-processing/selectors';
+import {
+  selectDataProcessingFieldPermissions,
+  selectDataProcessingOversightOptions,
+} from 'src/app/store/data-processing/selectors';
 import { ButtonComponent } from '../../../../../../shared/components/buttons/button/button.component';
 import { DatePickerComponent } from '../../../../../../shared/components/datepicker/datepicker.component';
 import { DialogActionsComponent } from '../../../../../../shared/components/dialogs/dialog-actions/dialog-actions.component';
@@ -40,6 +45,7 @@ import { TextAreaComponent } from '../../../../../../shared/components/textarea/
     ButtonComponent,
     EditUrlSectionComponent,
     TooltipComponent,
+    DropdownComponent,
   ],
 })
 export class WriteOversightDateDialogComponent extends BaseComponent implements OnInit {
@@ -47,11 +53,14 @@ export class WriteOversightDateDialogComponent extends BaseComponent implements 
 
   public readonly supplierText = SUPPLIER_DISABLED_MESSAGE;
 
+  public readonly oversightOptions$ = this.store.select(selectDataProcessingOversightOptions).pipe(filterNullish());
+
   public oversightDateFormGroup = new FormGroup({
     date: new FormControl<Date | undefined>(undefined, Validators.required),
     notes: new FormControl<string | undefined>({ value: undefined, disabled: true }),
     reportLinkUrl: new FormControl<string | undefined>(undefined),
     reportLinkName: new FormControl<string | undefined>(undefined),
+    oversightOption: new FormControl<APIIdentityNamePairResponseDTO | undefined>(undefined),
   });
 
   public currentReportLink$ = new BehaviorSubject<SimpleLink | undefined>(undefined);
@@ -67,6 +76,9 @@ export class WriteOversightDateDialogComponent extends BaseComponent implements 
   );
   public readonly oversightLinkUrlFieldPermission$ = this.store.select(
     selectDataProcessingFieldPermissions(dataProcessingFields.oversightDates.oversightReportLink.url),
+  );
+  public readonly oversightOptionFieldPermission$ = this.store.select(
+    selectDataProcessingFieldPermissions(dataProcessingFields.oversightDates.oversightOption),
   );
 
   constructor(
@@ -96,6 +108,7 @@ export class WriteOversightDateDialogComponent extends BaseComponent implements 
         notes: this.oversightDate.remark,
         reportLinkUrl: this.oversightDate.oversightReportLink?.url,
         reportLinkName: this.oversightDate.oversightReportLink?.name,
+        oversightOption: this.oversightDate.oversightOption,
       });
       this.oversightDateFormGroup.controls.notes.enable();
     }
@@ -158,6 +171,10 @@ export class WriteOversightDateDialogComponent extends BaseComponent implements 
         permission$: this.oversightLinkNameFieldPermission$,
         control: this.oversightDateFormGroup.controls.reportLinkName,
       },
+      {
+        permission$: this.oversightOptionFieldPermission$,
+        control: this.oversightDateFormGroup.controls.oversightOption,
+      },
     ];
 
     fieldPermissions.forEach(({ permission$, control }) => {
@@ -197,13 +214,14 @@ export class WriteOversightDateDialogComponent extends BaseComponent implements 
 
     this.isBusy = true;
 
-    const request: APIOversightDateDTO = {
-      completedAt: this.oversightDateFormGroup.value.date?.toISOString() ?? undefined,
+    const request: APIModifyOversightDateDTO = {
+      completedAt: this.oversightDateFormGroup.value.date!.toISOString(),
       remark: this.oversightDateFormGroup.value.notes ?? '',
       oversightReportLink: {
         url: this.oversightDateFormGroup.value.reportLinkUrl ?? undefined,
         name: this.oversightDateFormGroup.value.reportLinkName ?? undefined,
       },
+      oversightOptionUuid: this.oversightDateFormGroup.value.oversightOption?.uuid ?? undefined,
     };
 
     if (this.isEdit && this.oversightDate?.uuid) {
