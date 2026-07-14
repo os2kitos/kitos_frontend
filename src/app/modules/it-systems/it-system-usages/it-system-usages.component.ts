@@ -88,7 +88,6 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
   public readonly hasCreatePermission$ = this.store.select(selectITSystemUsageHasCreateCollectionPermission);
 
   private readonly systemSectionName = USAGE_SECTION_NAME;
-
   private readonly activeInactiveData = [
     {
       name: $localize`Aktivt`,
@@ -531,12 +530,14 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       title: $localize`Snitflade ID'er`,
       section: RELATIONS_SECTION_NAME,
       hidden: true,
+      persistId: 'itInterfaceIds',
     },
     {
       field: GridFields.ItInterfaceVersionsAsCsv,
       title: $localize`Snitflade versioner`,
       section: RELATIONS_SECTION_NAME,
       hidden: true,
+      persistId: 'itInterfaceVersions',
     },
     {
       field: GridFields.AssociatedContractsNamesCsv,
@@ -557,6 +558,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       extraData: riskAssessmentResultOptionsGrid,
       hidden: true,
       width: 330,
+      persistId: 'latestRiskAssessmentResult',
     },
     {
       field: GridFields.RiskAssessmentDate,
@@ -587,6 +589,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       extraFilter: 'enum',
       extraData: yesNoDontKnowIrrelevantOptionsGrid,
       hidden: true,
+      persistId: 'riskAssessmentConducted',
     },
     {
       field: GridFields.Note,
@@ -717,6 +720,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       extraFilter: 'enum',
       style: 'enum',
       extraData: yesNoDontKnowOptions,
+      persistId: 'isSociallyCritical',
     },
     {
       field: GridFields.CriticalityFieldsLastChanged,
@@ -726,6 +730,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       style: 'date',
       filter: 'date',
       width: 350,
+      persistId: 'criticalityFieldsLastChanged',
     },
     {
       field: GridFields.IsDataProcessingAgreementRequired,
@@ -735,6 +740,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       extraFilter: 'enum',
       style: 'enum',
       extraData: isDataProcessingAgreementRequiredOptions,
+      persistId: 'isDataProcessingAgreementRequired',
     },
     {
       field: GridFields.LicensingAndCodeModels,
