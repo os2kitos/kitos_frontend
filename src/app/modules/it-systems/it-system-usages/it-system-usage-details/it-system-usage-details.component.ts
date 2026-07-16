@@ -39,6 +39,7 @@ import {
   selectITSystemUsageEnableTabNotifications,
   selectITSystemUsageEnableTabOrganization,
   selectITSystemUsageEnableTabSystemRoles,
+  selectITSystemUsageEnableUsageArchive,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { selectOrganizationName } from 'src/app/store/user-store/selectors';
 import { BreadcrumbsComponent } from '../../../../shared/components/breadcrumbs/breadcrumbs.component';
@@ -79,6 +80,7 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
   public readonly enableLocalKleTab$ = this.store.select(selectITSystemUsageEnableTabLocalKle);
   public readonly enableNotificationsTab$ = this.store.select(selectITSystemUsageEnableTabNotifications);
   public readonly enableLocalReferencesTab$ = this.store.select(selectITSystemUsageEnableLocalReferences);
+  public readonly enableUsageArchive$ = this.store.select(selectITSystemUsageEnableUsageArchive);
 
   public readonly itContractsModuleEnabled$ = this.store.select(selectShowItContractModule);
   public readonly dataProcessingModuleEnabled$ = this.store.select(selectShowDataProcessingRegistrations);
@@ -248,13 +250,12 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
 
   public showRemoveDialog() {
     this.subscriptions.add(
-      this.organizationName$
+      combineLatest([this.organizationName$.pipe(first()), this.enableUsageArchive$.pipe(first())])
         .pipe(
-          first(),
-          tap((organizationName) => {
+          tap(([organizationName, enableUsageArchive]) => {
             const confirmationDialogRef = this.dialogOpenerService.openTakeSystemOutOfUseDialog({
               organizationName,
-              extraAction: this.handleArchiveClick.bind(this),
+              extraAction: enableUsageArchive ? this.handleArchiveClick.bind(this) : undefined,
             });
 
             this.subscriptions.add(

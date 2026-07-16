@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
@@ -24,6 +23,7 @@ import { SimpleLink } from 'src/app/shared/models/SimpleLink.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { selectItSystemUsage } from 'src/app/store/it-system-usage/selectors';
+import { CommonModule } from '@angular/common';
 import { EditUrlSectionComponent } from '../edit-url-section/edit-url-section.component';
 
 @Component({

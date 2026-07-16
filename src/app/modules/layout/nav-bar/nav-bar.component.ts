@@ -11,6 +11,7 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectAllAlertCount } from 'src/app/store/alerts/selectors';
 import { OrganizationActions } from 'src/app/store/organization/actions';
 import { selectUIRootConfig } from 'src/app/store/organization/selectors';
+import { selectITSystemUsageEnableUsageArchive } from 'src/app/store/organization/ui-module-customization/selectors';
 import { UserActions } from 'src/app/store/user-store/actions';
 import {
   selectHasMultipleOrganizations,
@@ -54,6 +55,7 @@ export class NavBarComponent extends BaseComponent implements OnInit {
   public readonly hasMultipleOrganizations$ = this.store.select(selectHasMultipleOrganizations);
   public readonly uiRootConfig$ = this.store.select(selectUIRootConfig).pipe(filterNullish());
   public readonly isUserCurrentyLocalAdmin$ = this.store.select(selectUserIsCurrentlyLocalAdmin);
+  public readonly enableUsageArchive$ = this.store.select(selectITSystemUsageEnableUsageArchive);
 
   public readonly alertsCount$ = this.store.select(selectAllAlertCount);
 

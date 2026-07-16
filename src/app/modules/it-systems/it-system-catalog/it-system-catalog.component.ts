@@ -40,6 +40,7 @@ import {
   selectSystemGridState,
 } from 'src/app/store/it-system/selectors';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
+import { selectITSystemUsageEnableUsageArchive } from 'src/app/store/organization/ui-module-customization/selectors';
 import { ExportMenuButtonComponent } from '../../../shared/components/buttons/export-menu-button/export-menu-button.component';
 import { CreateEntityButtonComponent } from '../../../shared/components/entity-creation/create-entity-button/create-entity-button.component';
 import { GridOptionsButtonComponent } from '../../../shared/components/grid-options-button/grid-options-button.component';
@@ -73,6 +74,7 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
   public readonly isCreatingUsage$ = this.store.select(selectItSystemUsageIsCreating);
   public readonly organizationUuid$ = this.store.select(selectOrganizationUuid);
   public readonly systemUsageUuid$ = this.componentStore.systemUsageUuid$;
+  public readonly enableUsageArchive$ = this.store.select(selectITSystemUsageEnableUsageArchive);
 
   private readonly systemSectionName = CATALOG_SECTION_NAME;
   public readonly defaultGridColumns: GridColumn[] = [
@@ -346,32 +348,38 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
 
   private handleTakeSystemOutOfUse(systemUuid: string) {
     this.componentStore.getSystemUsageUuidByItSystemAndOrganization(systemUuid);
-    const dialogRef = this.dialogOpenerService.openTakeSystemOutOfUseDialog({
-      extraAction: this.handleArchiveClick.bind(this),
-    });
     this.subscriptions.add(
-      dialogRef.afterClosed().subscribe((result: boolean) => {
-        if (result && systemUuid !== undefined) {
-          this.store.dispatch(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganization(systemUuid));
-        }
-      }),
-    );
+      this.enableUsageArchive$
+        .pipe(first())
+        .subscribe((enableUsageArchive) => {
+          const dialogRef = this.dialogOpenerService.openTakeSystemOutOfUseDialog({
+            extraAction: enableUsageArchive ? this.handleArchiveClick.bind(this) : undefined,
+          });
+          this.subscriptions.add(
+            dialogRef.afterClosed().subscribe((result: boolean) => {
+              if (result && systemUuid !== undefined) {
+                this.store.dispatch(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganization(systemUuid));
+              }
+            }),
+          );
 
-    this.subscriptions.add(
-      this.actions$.pipe(ofType(ITSystemUsageActions.archiveItSystemUsageSuccess), first()).subscribe(() => {
-        dialogRef.close();
-      }),
-    );
+          this.subscriptions.add(
+            this.actions$.pipe(ofType(ITSystemUsageActions.archiveItSystemUsageSuccess), first()).subscribe(() => {
+              dialogRef.close();
+            }),
+          );
 
-    this.subscriptions.add(
-      this.actions$
-        .pipe(
-          ofType(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganizationSuccess),
-          first(),
-          debounceTime(DEFAULT_INPUT_DEBOUNCE_TIME),
-          concatLatestFrom(() => this.gridState$),
-        )
-        .subscribe(([_, gridState]) => this.dispatchGetSystemsOnDataUpdate(gridState)),
+          this.subscriptions.add(
+            this.actions$
+              .pipe(
+                ofType(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganizationSuccess),
+                first(),
+                debounceTime(DEFAULT_INPUT_DEBOUNCE_TIME),
+                concatLatestFrom(() => this.gridState$),
+              )
+              .subscribe(([_, gridState]) => this.dispatchGetSystemsOnDataUpdate(gridState)),
+          );
+        }),
     );
   }
 

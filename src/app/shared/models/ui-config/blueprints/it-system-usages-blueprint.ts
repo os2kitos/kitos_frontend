@@ -242,5 +242,8 @@ export const ItSystemUsageUiBluePrint = {
     localReferences: {
       text: $localize`Lokale referencer`,
     },
+    usageArchive: {
+      text: $localize`Anvendelseshistorik`,
+    },
   },
 };

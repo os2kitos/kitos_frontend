@@ -1,3 +1,4 @@
+import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
@@ -18,6 +19,7 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectItSystemUsageArchive } from 'src/app/store/it-system-usage-archive/selectors';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
 import { selectItSystemName } from 'src/app/store/it-system/selectors';
+import { selectITSystemUsageEnableUsageArchive } from 'src/app/store/organization/ui-module-customization/selectors';
 
 @Component({
   selector: 'app-it-system-usage-archive-details-frontpage',
@@ -32,6 +34,7 @@ import { selectItSystemName } from 'src/app/store/it-system/selectors';
     EmptyStateComponent,
     FormsModule,
     ReactiveFormsModule,
+    AsyncPipe,
   ],
   templateUrl: './it-system-usage-archive-details-frontpage.component.html',
   styleUrl: './it-system-usage-archive-details-frontpage.component.scss',
@@ -40,6 +43,7 @@ export class ItSystemUsageArchiveDetailsFrontpageComponent extends BaseComponent
   public readonly itSystemUsageArchive$ = this.store.select(selectItSystemUsageArchive).pipe(filterNullish());
   public readonly currentItSystemName$ = this.store.select(selectItSystemName).pipe(filterNullish());
   public archiveReferenceItems: SimpleLink[] = [];
+  public readonly usageArchiveEnabled$ = this.store.select(selectITSystemUsageEnableUsageArchive);
 
   public readonly archiveForm = new FormGroup({
     takenIntoUsageDate: new FormControl<Date | undefined>({ value: undefined, disabled: true }),

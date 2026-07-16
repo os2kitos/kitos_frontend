@@ -44,6 +44,10 @@ export class UiConfigTabSectionComponent {
     return this.tabViewModel.children !== undefined && this.tabViewModel.children.length > 0;
   }
 
+  public noChildrenLabel(): string {
+    return this.tabViewModel.fullKey.endsWith('.usageArchive') ? $localize`undermodul` : $localize`faneblad`;
+  }
+
   public onCheckboxChanged($event: UINodeCustomization) {
     const dto: APICustomizedUINodeResponseDTO = { enabled: $event.enabled, key: $event.fullKey };
     this.store.dispatch(
