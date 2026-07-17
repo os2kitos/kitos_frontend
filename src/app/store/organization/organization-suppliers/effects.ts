@@ -43,7 +43,7 @@ export class OrganizationSuppliersEffects {
       switchMap(([_, organizationUuid, validCache, cachedSuppliers]) => {
         if (validCache) return of(OrganizationSuppliersActions.getOrganizationSuppliersSuccess(cachedSuppliers));
         return this.organizationSuppliersService
-          .getSingleOrganizationSupplierInternalV2GetSuppliers({ organizationUuid })
+          .getManyOrganizationSupplierInternalV2GetSuppliers({ organizationUuid })
           .pipe(
             map((data) => this.adaptShallowOrganizations(data)),
             filterUndefinedInArray(),
@@ -70,7 +70,7 @@ export class OrganizationSuppliersEffects {
         if (validCache)
           return of(OrganizationSuppliersActions.getAvailableOrganizationSuppliersSuccess(cachedAvailableSuppliers));
         return this.organizationSuppliersService
-          .getSingleOrganizationSupplierInternalV2GetAvailableSuppliers({ organizationUuid })
+          .getManyOrganizationSupplierInternalV2GetAvailableSuppliers({ organizationUuid })
           .pipe(
             map((data) => this.adaptShallowOrganizations(data)),
             filterUndefinedInArray(),

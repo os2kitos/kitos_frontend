@@ -144,27 +144,27 @@ export class NotificationService implements OnDestroy {
     this.subscribeAsError(LocalOptionTypeActions.updateOptionTypeError, $localize`Typen kunne ikke opdateres`);
     this.subscribeAsDefault(
       OrganizationSuppliersActions.addOrganizationSupplierSuccess,
-      $localize`ISMS leverandøren blev tilføjet`,
+      $localize`Den ISMS ansvarlige blev tilføjet`,
     );
     this.subscribeAsError(
       OrganizationSuppliersActions.addOrganizationSupplierError,
-      $localize`Kunne ikke tilføje ISMS leverandøren`,
+      $localize`Kunne ikke tilføje den ISMS ansvarlige`,
     );
     this.subscribeAsDefault(
       OrganizationSuppliersActions.removeOrganizationSupplierSuccess,
-      $localize`ISMS leverandøren blev fjernet`,
+      $localize`Den ISMS ansvarlige blev fjernet`,
     );
     this.subscribeAsError(
       OrganizationSuppliersActions.removeOrganizationSupplierError,
-      $localize`Kunne ikke fjerne ISMS leverandøren`,
+      $localize`Kunne ikke fjerne den ISMS ansvarlige`,
     );
     this.subscribeAsError(
       OrganizationSuppliersActions.getOrganizationSuppliersError,
-      $localize`Kunne ikke hente ISMS leverandører`,
+      $localize`Kunne ikke hente ISMS ansvarlige`,
     );
     this.subscribeAsError(
       OrganizationSuppliersActions.getAvailableOrganizationSuppliersError,
-      $localize`Kunne ikke hente tilgængelige ISMS leverandører`,
+      $localize`Kunne ikke hente tilgængelige ISMS ansvarlige`,
     );
   }
 

@@ -45,7 +45,7 @@ export class CreateDprSystemUsageDialogComponentStore extends ComponentStore<Sta
       mergeMap(([search, dprUuid]) => {
         this.updateIsLoading(true);
         return this.dprApiService
-          .getSingleDataProcessingRegistrationInternalV2GetAvailableSystemUsages({ dprUuid, nameQuery: search })
+          .getManyDataProcessingRegistrationInternalV2GetAvailableSystemUsages({ dprUuid, nameQuery: search })
           .pipe(
             tapResponse({
               next: (organizations) => this.updateSystemUsages(organizations),

@@ -31,7 +31,7 @@ export class CreateHelpTextDialogComponentStore extends ComponentStore<State> {
     key$.pipe(
       tap(() => this.setLoading(true)),
       switchMap((key) => {
-        return this.helpTextsService.getSingleHelpTextsInternalV2GetAll().pipe(
+        return this.helpTextsService.getManyHelpTextsInternalV2GetAll().pipe(
           tapResponse({
             next: (helpTextDtos) => this.setKeyExists(this.keyIsInArray(helpTextDtos, key)),
             error: (e) => console.error(e),

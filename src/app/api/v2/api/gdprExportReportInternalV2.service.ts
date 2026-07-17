@@ -18,13 +18,15 @@ import { HttpClient, HttpHeaders, HttpParams,
 import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
+// @ts-ignore
+import { APIGdprReportResponseDTO } from '../model/aPIGdprReportResponseDTO';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
 
 
-export interface GetSingleGdprExportReportInternalV2GetGdprReportRequestParams {
+export interface GetManyGdprExportReportInternalV2GetGdprReportRequestParams {
     organizationUuid: string;
 }
 
@@ -98,13 +100,13 @@ export class GdprExportReportInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleGdprExportReportInternalV2GetGdprReport(requestParameters: GetSingleGdprExportReportInternalV2GetGdprReportRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleGdprExportReportInternalV2GetGdprReport(requestParameters: GetSingleGdprExportReportInternalV2GetGdprReportRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleGdprExportReportInternalV2GetGdprReport(requestParameters: GetSingleGdprExportReportInternalV2GetGdprReportRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleGdprExportReportInternalV2GetGdprReport(requestParameters: GetSingleGdprExportReportInternalV2GetGdprReportRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyGdprExportReportInternalV2GetGdprReport(requestParameters: GetManyGdprExportReportInternalV2GetGdprReportRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIGdprReportResponseDTO>>;
+    public getManyGdprExportReportInternalV2GetGdprReport(requestParameters: GetManyGdprExportReportInternalV2GetGdprReportRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIGdprReportResponseDTO>>>;
+    public getManyGdprExportReportInternalV2GetGdprReport(requestParameters: GetManyGdprExportReportInternalV2GetGdprReportRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIGdprReportResponseDTO>>>;
+    public getManyGdprExportReportInternalV2GetGdprReport(requestParameters: GetManyGdprExportReportInternalV2GetGdprReportRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleGdprExportReportInternalV2GetGdprReport.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyGdprExportReportInternalV2GetGdprReport.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -146,7 +148,7 @@ export class GdprExportReportInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/gdpr-report/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<Array<APIGdprReportResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,

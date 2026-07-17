@@ -45,7 +45,7 @@ const routes: Routes = [
             component: ITSystemUsageDetailsFrontpageComponent,
           },
           {
-            path: AppPath.contracts,
+            path: AppPath.itContracts,
             component: ITSystemUsageDetailsContractsComponent,
           },
           {

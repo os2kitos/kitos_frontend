@@ -45,7 +45,7 @@ export class ItSystemUsageDetailsRelationsComponentStore extends ComponentStore<
     systemUsageUuid$.pipe(
       mergeMap((systemUsageUuid) => {
         this.updateIncomingRelationsIsLoading(true);
-        return this.apiUsageService.getSingleItSystemUsageV2GetIncomingSystemRelations({ systemUsageUuid }).pipe(
+        return this.apiUsageService.getManyItSystemUsageV2GetIncomingSystemRelations({ systemUsageUuid }).pipe(
           tapResponse({
             next: (relations) =>
               this.updateIncomingRelations(

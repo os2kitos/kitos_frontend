@@ -24,12 +24,12 @@ import {
 import { selectOrganizationHasModifyPermission } from 'src/app/store/organization/selectors';
 
 @Component({
-  selector: 'app-local-admin-isms-suppliers',
+  selector: 'app-local-admin-isms-responsible-organizations',
   imports: [CardComponent, LocalGridComponent, AsyncPipe, OverviewHeaderComponent, ButtonComponent],
-  templateUrl: './local-admin-isms-suppliers.component.html',
-  styleUrl: './local-admin-isms-suppliers.component.scss',
+  templateUrl: './local-admin-isms-responsible-organizations.component.html',
+  styleUrls: ['./local-admin-isms-responsible-organizations.component.scss'],
 })
-export class LocalAdminIsmsSuppliersComponent extends BaseComponent implements OnInit {
+export class LocalAdminIsmsResponsibleOrganizationsComponent extends BaseComponent implements OnInit {
   constructor(
     private store: Store,
     private dialog: MatDialog,
@@ -97,7 +97,7 @@ export class LocalAdminIsmsSuppliersComponent extends BaseComponent implements O
   public removeSupplier($event: ShallowOrganization) {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent);
     const dialogInstance = dialogRef.componentInstance;
-    dialogInstance.bodyText = $localize`Er du sikker på, at du vil fjerne ISMS leverandøren "${$event.name}"?`;
+    dialogInstance.bodyText = $localize`Er du sikker på, at du vil fjerne den ISMS ansvarlige "${$event.name}"?`;
     dialogInstance.confirmColor = 'warn';
 
     this.subscriptions.add(

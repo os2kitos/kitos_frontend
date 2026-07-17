@@ -4,18 +4,32 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { AlertsEffects } from './alerts/effects';
+import { alertsFeature } from './alerts/reducers';
 import { DataProcessingEffects } from './data-processing/effects';
 import { dataProcessingFeature } from './data-processing/reducer';
+import { GlobalAdminEffects } from './global-admin/effects';
 import { GlobalAdminOptionTypeEffects } from './global-admin/global-option-types/effects';
+import { GlobalAdminHelpTextsEffects } from './global-admin/help-texts/effects';
+import { helpTextFeature } from './global-admin/help-texts/reducer';
+import { LocalAdminUserEffects } from './global-admin/local-admins/effects';
+import { localAdminUsersFeature } from './global-admin/local-admins/reducers';
+import { PublicMessageEffects } from './global-admin/public-messages/effects';
+import { globalAdminFeature } from './global-admin/reducers';
+import { SystemIntegratorEffects } from './global-admin/system-integrators/effects';
 import { GridExportEffects } from './grid/effects';
 import { exportFeature } from './grid/reducer';
-import { ITSystemUsageArchiveEffects } from './it-system-usage-archive/effects';
-import { itSystemUsageArchiveFeature } from './it-system-usage-archive/reducer';
 import { ITContractEffects } from './it-contract/effects';
+import { ITContractSupplierEffects } from './it-contract/it-contract-supplier/effects';
+import { itContractSupplierFeature } from './it-contract/it-contract-supplier/reducer';
 import { itContractFeature } from './it-contract/reducer';
 import { ITInterfaceEffects } from './it-system-interfaces/effects';
 import { itInterfaceFeature } from './it-system-interfaces/reducer';
+import { ITSystemUsageArchiveEffects } from './it-system-usage-archive/effects';
+import { itSystemUsageArchiveFeature } from './it-system-usage-archive/reducer';
 import { ITSystemUsageEffects } from './it-system-usage/effects';
+import { GdprReportEffects } from './it-system-usage/gdpr-report/effects';
+import { gdprReportFeature } from './it-system-usage/gdpr-report/reducer';
 import { itSystemUsageFeature } from './it-system-usage/reducer';
 import { ITSystemEffects } from './it-system/effects';
 import { itSystemFeature } from './it-system/reducer';
@@ -28,6 +42,8 @@ import { exportReadyMetaReducer } from './meta/grid-export.reducer';
 import { localStorageSyncReducer } from './meta/local-storage-sync.reducer';
 import { resetReducer } from './meta/reset.reducer';
 import { OrganizationEffects } from './organization/effects';
+import { OrganizationSuppliersEffects } from './organization/organization-suppliers/effects';
+import { organizationSuppliersFeature } from './organization/organization-suppliers/reducer';
 import { OrganizationUnitEffects } from './organization/organization-unit/effects';
 import { organizationUnitFeature } from './organization/organization-unit/reducer';
 import { OrganizationUserEffects } from './organization/organization-user/effects';
@@ -40,24 +56,10 @@ import { RegularOptionTypeEffects } from './regular-option-type-store/effects';
 import { regularOptionTypeFeature } from './regular-option-type-store/reducer';
 import { RoleOptionTypeEffects } from './roles-option-type-store/effects';
 import { roleOptionTypeFeature } from './roles-option-type-store/reducer';
+import { UserNotificationsEffects } from './user-notifications/effects';
+import { notificationFeature } from './user-notifications/reducer';
 import { UserEffects } from './user-store/effects';
 import { userFeature } from './user-store/reducer';
-import { globalAdminFeature } from './global-admin/reducers';
-import { helpTextFeature } from './global-admin/help-texts/reducer';
-import { GlobalAdminHelpTextsEffects } from './global-admin/help-texts/effects';
-import { GlobalAdminEffects } from './global-admin/effects';
-import { localAdminUsersFeature } from './global-admin/local-admins/reducers';
-import { LocalAdminUserEffects } from './global-admin/local-admins/effects';
-import { PublicMessageEffects } from './global-admin/public-messages/effects';
-import { gdprReportFeature } from './it-system-usage/gdpr-report/reducer';
-import { GdprReportEffects } from './it-system-usage/gdpr-report/effects';
-import { notificationFeature } from './user-notifications/reducer';
-import { UserNotificationsEffects } from './user-notifications/effects';
-import { alertsFeature } from './alerts/reducers';
-import { AlertsEffects } from './alerts/effects';
-import { SystemIntegratorEffects } from './global-admin/system-integrators/effects';
-import { organizationSuppliersFeature } from './organization/organization-suppliers/reducer';
-import { OrganizationSuppliersEffects } from './organization/organization-suppliers/effects';
 
 @NgModule({
   imports: [
@@ -76,6 +78,7 @@ import { OrganizationSuppliersEffects } from './organization/organization-suppli
     StoreModule.forFeature(itSystemUsageFeature),
     StoreModule.forFeature(itSystemFeature),
     StoreModule.forFeature(itContractFeature),
+    StoreModule.forFeature(itContractSupplierFeature),
     StoreModule.forFeature(kleFeature),
     StoreModule.forFeature(regularOptionTypeFeature),
     StoreModule.forFeature(popupMessagesFeature),
@@ -103,6 +106,7 @@ import { OrganizationSuppliersEffects } from './organization/organization-suppli
       ITSystemEffects,
       ITSystemUsageArchiveEffects,
       ITContractEffects,
+      ITContractSupplierEffects,
       KLEEffects,
       RegularOptionTypeEffects,
       OrganizationUnitEffects,

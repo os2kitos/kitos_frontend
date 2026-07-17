@@ -21,6 +21,8 @@ import { Observable }                                        from 'rxjs';
 // @ts-ignore
 import { APIGlobalRegularOptionCreateRequestDTO } from '../model/aPIGlobalRegularOptionCreateRequestDTO';
 // @ts-ignore
+import { APIGlobalRegularOptionResponseDTO } from '../model/aPIGlobalRegularOptionResponseDTO';
+// @ts-ignore
 import { APIGlobalRegularOptionUpdateRequestDTO } from '../model/aPIGlobalRegularOptionUpdateRequestDTO';
 
 // @ts-ignore
@@ -106,10 +108,10 @@ export class ItContractGlobalPaymentFrequencyTypesInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItContractGlobalPaymentFrequencyTypesInternalV2GetGlobalPaymentFreqencyTypes(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleItContractGlobalPaymentFrequencyTypesInternalV2GetGlobalPaymentFreqencyTypes(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleItContractGlobalPaymentFrequencyTypesInternalV2GetGlobalPaymentFreqencyTypes(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleItContractGlobalPaymentFrequencyTypesInternalV2GetGlobalPaymentFreqencyTypes(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyItContractGlobalPaymentFrequencyTypesInternalV2GetGlobalPaymentFreqencyTypes(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIGlobalRegularOptionResponseDTO>>;
+    public getManyItContractGlobalPaymentFrequencyTypesInternalV2GetGlobalPaymentFreqencyTypes(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIGlobalRegularOptionResponseDTO>>>;
+    public getManyItContractGlobalPaymentFrequencyTypesInternalV2GetGlobalPaymentFreqencyTypes(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIGlobalRegularOptionResponseDTO>>>;
+    public getManyItContractGlobalPaymentFrequencyTypesInternalV2GetGlobalPaymentFreqencyTypes(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -150,7 +152,7 @@ export class ItContractGlobalPaymentFrequencyTypesInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/it-contract/global-option-types/payment-frequency-types`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<Array<APIGlobalRegularOptionResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -167,9 +169,9 @@ export class ItContractGlobalPaymentFrequencyTypesInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleItContractGlobalPaymentFrequencyTypesInternalV2PatchGlobalPaymentFreqencyType(requestParameters: PatchSingleItContractGlobalPaymentFrequencyTypesInternalV2PatchGlobalPaymentFreqencyTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public patchSingleItContractGlobalPaymentFrequencyTypesInternalV2PatchGlobalPaymentFreqencyType(requestParameters: PatchSingleItContractGlobalPaymentFrequencyTypesInternalV2PatchGlobalPaymentFreqencyTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public patchSingleItContractGlobalPaymentFrequencyTypesInternalV2PatchGlobalPaymentFreqencyType(requestParameters: PatchSingleItContractGlobalPaymentFrequencyTypesInternalV2PatchGlobalPaymentFreqencyTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public patchSingleItContractGlobalPaymentFrequencyTypesInternalV2PatchGlobalPaymentFreqencyType(requestParameters: PatchSingleItContractGlobalPaymentFrequencyTypesInternalV2PatchGlobalPaymentFreqencyTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRegularOptionResponseDTO>;
+    public patchSingleItContractGlobalPaymentFrequencyTypesInternalV2PatchGlobalPaymentFreqencyType(requestParameters: PatchSingleItContractGlobalPaymentFrequencyTypesInternalV2PatchGlobalPaymentFreqencyTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRegularOptionResponseDTO>>;
+    public patchSingleItContractGlobalPaymentFrequencyTypesInternalV2PatchGlobalPaymentFreqencyType(requestParameters: PatchSingleItContractGlobalPaymentFrequencyTypesInternalV2PatchGlobalPaymentFreqencyTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRegularOptionResponseDTO>>;
     public patchSingleItContractGlobalPaymentFrequencyTypesInternalV2PatchGlobalPaymentFreqencyType(requestParameters: PatchSingleItContractGlobalPaymentFrequencyTypesInternalV2PatchGlobalPaymentFreqencyTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
@@ -226,7 +228,7 @@ export class ItContractGlobalPaymentFrequencyTypesInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/it-contract/global-option-types/payment-frequency-types/${this.configuration.encodeParam({name: "optionUuid", value: optionUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
-        return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APIGlobalRegularOptionResponseDTO>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPIGlobalRegularOptionUpdateRequestDTO,
@@ -244,9 +246,9 @@ export class ItContractGlobalPaymentFrequencyTypesInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleItContractGlobalPaymentFrequencyTypesInternalV2CreateGlobalPaymentFreqencyType(requestParameters: PostSingleItContractGlobalPaymentFrequencyTypesInternalV2CreateGlobalPaymentFreqencyTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public postSingleItContractGlobalPaymentFrequencyTypesInternalV2CreateGlobalPaymentFreqencyType(requestParameters: PostSingleItContractGlobalPaymentFrequencyTypesInternalV2CreateGlobalPaymentFreqencyTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public postSingleItContractGlobalPaymentFrequencyTypesInternalV2CreateGlobalPaymentFreqencyType(requestParameters: PostSingleItContractGlobalPaymentFrequencyTypesInternalV2CreateGlobalPaymentFreqencyTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public postSingleItContractGlobalPaymentFrequencyTypesInternalV2CreateGlobalPaymentFreqencyType(requestParameters: PostSingleItContractGlobalPaymentFrequencyTypesInternalV2CreateGlobalPaymentFreqencyTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRegularOptionResponseDTO>;
+    public postSingleItContractGlobalPaymentFrequencyTypesInternalV2CreateGlobalPaymentFreqencyType(requestParameters: PostSingleItContractGlobalPaymentFrequencyTypesInternalV2CreateGlobalPaymentFreqencyTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRegularOptionResponseDTO>>;
+    public postSingleItContractGlobalPaymentFrequencyTypesInternalV2CreateGlobalPaymentFreqencyType(requestParameters: PostSingleItContractGlobalPaymentFrequencyTypesInternalV2CreateGlobalPaymentFreqencyTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRegularOptionResponseDTO>>;
     public postSingleItContractGlobalPaymentFrequencyTypesInternalV2CreateGlobalPaymentFreqencyType(requestParameters: PostSingleItContractGlobalPaymentFrequencyTypesInternalV2CreateGlobalPaymentFreqencyTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const aPIGlobalRegularOptionCreateRequestDTO = requestParameters.aPIGlobalRegularOptionCreateRequestDTO;
 
@@ -298,7 +300,7 @@ export class ItContractGlobalPaymentFrequencyTypesInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/it-contract/global-option-types/payment-frequency-types`;
-        return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APIGlobalRegularOptionResponseDTO>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPIGlobalRegularOptionCreateRequestDTO,

@@ -27,6 +27,16 @@ import { APICreateOrganizationUnitRoleAssignmentRequestDTO } from '../model/aPIC
 // @ts-ignore
 import { APIDeleteOrganizationUnitRoleAssignmentRequestDTO } from '../model/aPIDeleteOrganizationUnitRoleAssignmentRequestDTO';
 // @ts-ignore
+import { APIOrganizationUnitResponseDTO } from '../model/aPIOrganizationUnitResponseDTO';
+// @ts-ignore
+import { APIOrganizationUnitRoleAssignmentResponseDTO } from '../model/aPIOrganizationUnitRoleAssignmentResponseDTO';
+// @ts-ignore
+import { APIOrganizationUnitRolesResponseDTO } from '../model/aPIOrganizationUnitRolesResponseDTO';
+// @ts-ignore
+import { APIUnitAccessRightsResponseDTO } from '../model/aPIUnitAccessRightsResponseDTO';
+// @ts-ignore
+import { APIUnitAccessRightsWithUnitDataResponseDTO } from '../model/aPIUnitAccessRightsWithUnitDataResponseDTO';
+// @ts-ignore
 import { APIUpdateOrganizationUnitRequestDTO } from '../model/aPIUpdateOrganizationUnitRequestDTO';
 
 // @ts-ignore
@@ -45,6 +55,11 @@ export interface DeleteSingleOrganizationUnitsInternalV2DeleteUnitRequestParams 
     organizationUnitUuid: string;
 }
 
+export interface GetManyOrganizationUnitsInternalV2GetRoleAssignmentsRequestParams {
+    organizationUuid: string;
+    organizationUnitUuid: string;
+}
+
 export interface GetSingleOrganizationUnitsInternalV2GetCollectionPermissionsRequestParams {
     organizationUuid: string;
 }
@@ -52,11 +67,6 @@ export interface GetSingleOrganizationUnitsInternalV2GetCollectionPermissionsReq
 export interface GetSingleOrganizationUnitsInternalV2GetPermissionsRequestParams {
     organizationUuid: string;
     unitUuid: string;
-}
-
-export interface GetSingleOrganizationUnitsInternalV2GetRoleAssignmentsRequestParams {
-    organizationUuid: string;
-    organizationUnitUuid: string;
 }
 
 export interface PatchSingleOrganizationUnitsInternalV2PatchUnitRequestParams {
@@ -299,9 +309,78 @@ export class OrganizationUnitsInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleOrganizationUnitsInternalV2GetCollectionPermissions(requestParameters: GetSingleOrganizationUnitsInternalV2GetCollectionPermissionsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleOrganizationUnitsInternalV2GetCollectionPermissions(requestParameters: GetSingleOrganizationUnitsInternalV2GetCollectionPermissionsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleOrganizationUnitsInternalV2GetCollectionPermissions(requestParameters: GetSingleOrganizationUnitsInternalV2GetCollectionPermissionsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public getManyOrganizationUnitsInternalV2GetRoleAssignments(requestParameters: GetManyOrganizationUnitsInternalV2GetRoleAssignmentsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIOrganizationUnitRolesResponseDTO>>;
+    public getManyOrganizationUnitsInternalV2GetRoleAssignments(requestParameters: GetManyOrganizationUnitsInternalV2GetRoleAssignmentsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIOrganizationUnitRolesResponseDTO>>>;
+    public getManyOrganizationUnitsInternalV2GetRoleAssignments(requestParameters: GetManyOrganizationUnitsInternalV2GetRoleAssignmentsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIOrganizationUnitRolesResponseDTO>>>;
+    public getManyOrganizationUnitsInternalV2GetRoleAssignments(requestParameters: GetManyOrganizationUnitsInternalV2GetRoleAssignmentsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        const organizationUuid = requestParameters.organizationUuid;
+        if (organizationUuid === null || organizationUuid === undefined) {
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyOrganizationUnitsInternalV2GetRoleAssignments.');
+        }
+        const organizationUnitUuid = requestParameters.organizationUnitUuid;
+        if (organizationUnitUuid === null || organizationUnitUuid === undefined) {
+            throw new Error('Required parameter organizationUnitUuid was null or undefined when calling getManyOrganizationUnitsInternalV2GetRoleAssignments.');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarCredential: string | undefined;
+        // authentication (Bearer) required
+        localVarCredential = this.configuration.lookupCredential('Bearer');
+        if (localVarCredential) {
+            localVarHeaders = localVarHeaders.set('Authorization', 'Bearer ' + localVarCredential);
+        }
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/v2/internal/organizations/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/organization-units/${this.configuration.encodeParam({name: "organizationUnitUuid", value: organizationUnitUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/roles`;
+        return this.httpClient.request<Array<APIOrganizationUnitRolesResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * @param requestParameters
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getSingleOrganizationUnitsInternalV2GetCollectionPermissions(requestParameters: GetSingleOrganizationUnitsInternalV2GetCollectionPermissionsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIUnitAccessRightsWithUnitDataResponseDTO>;
+    public getSingleOrganizationUnitsInternalV2GetCollectionPermissions(requestParameters: GetSingleOrganizationUnitsInternalV2GetCollectionPermissionsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIUnitAccessRightsWithUnitDataResponseDTO>>;
+    public getSingleOrganizationUnitsInternalV2GetCollectionPermissions(requestParameters: GetSingleOrganizationUnitsInternalV2GetCollectionPermissionsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIUnitAccessRightsWithUnitDataResponseDTO>>;
     public getSingleOrganizationUnitsInternalV2GetCollectionPermissions(requestParameters: GetSingleOrganizationUnitsInternalV2GetCollectionPermissionsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
@@ -347,7 +426,7 @@ export class OrganizationUnitsInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/organizations/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/organization-units/all/collection-permissions`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APIUnitAccessRightsWithUnitDataResponseDTO>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -364,9 +443,9 @@ export class OrganizationUnitsInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleOrganizationUnitsInternalV2GetPermissions(requestParameters: GetSingleOrganizationUnitsInternalV2GetPermissionsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleOrganizationUnitsInternalV2GetPermissions(requestParameters: GetSingleOrganizationUnitsInternalV2GetPermissionsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleOrganizationUnitsInternalV2GetPermissions(requestParameters: GetSingleOrganizationUnitsInternalV2GetPermissionsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public getSingleOrganizationUnitsInternalV2GetPermissions(requestParameters: GetSingleOrganizationUnitsInternalV2GetPermissionsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIUnitAccessRightsResponseDTO>;
+    public getSingleOrganizationUnitsInternalV2GetPermissions(requestParameters: GetSingleOrganizationUnitsInternalV2GetPermissionsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIUnitAccessRightsResponseDTO>>;
+    public getSingleOrganizationUnitsInternalV2GetPermissions(requestParameters: GetSingleOrganizationUnitsInternalV2GetPermissionsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIUnitAccessRightsResponseDTO>>;
     public getSingleOrganizationUnitsInternalV2GetPermissions(requestParameters: GetSingleOrganizationUnitsInternalV2GetPermissionsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
@@ -416,7 +495,7 @@ export class OrganizationUnitsInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/organizations/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/organization-units/${this.configuration.encodeParam({name: "unitUuid", value: unitUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/permissions`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APIUnitAccessRightsResponseDTO>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -433,78 +512,9 @@ export class OrganizationUnitsInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleOrganizationUnitsInternalV2GetRoleAssignments(requestParameters: GetSingleOrganizationUnitsInternalV2GetRoleAssignmentsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleOrganizationUnitsInternalV2GetRoleAssignments(requestParameters: GetSingleOrganizationUnitsInternalV2GetRoleAssignmentsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleOrganizationUnitsInternalV2GetRoleAssignments(requestParameters: GetSingleOrganizationUnitsInternalV2GetRoleAssignmentsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleOrganizationUnitsInternalV2GetRoleAssignments(requestParameters: GetSingleOrganizationUnitsInternalV2GetRoleAssignmentsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
-        const organizationUuid = requestParameters.organizationUuid;
-        if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleOrganizationUnitsInternalV2GetRoleAssignments.');
-        }
-        const organizationUnitUuid = requestParameters.organizationUnitUuid;
-        if (organizationUnitUuid === null || organizationUnitUuid === undefined) {
-            throw new Error('Required parameter organizationUnitUuid was null or undefined when calling getSingleOrganizationUnitsInternalV2GetRoleAssignments.');
-        }
-
-        let localVarHeaders = this.defaultHeaders;
-
-        let localVarCredential: string | undefined;
-        // authentication (Bearer) required
-        localVarCredential = this.configuration.lookupCredential('Bearer');
-        if (localVarCredential) {
-            localVarHeaders = localVarHeaders.set('Authorization', 'Bearer ' + localVarCredential);
-        }
-
-        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
-        if (localVarHttpHeaderAcceptSelected === undefined) {
-            // to determine the Accept header
-            const httpHeaderAccepts: string[] = [
-                'application/json'
-            ];
-            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        }
-        if (localVarHttpHeaderAcceptSelected !== undefined) {
-            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
-        }
-
-        let localVarHttpContext: HttpContext | undefined = options && options.context;
-        if (localVarHttpContext === undefined) {
-            localVarHttpContext = new HttpContext();
-        }
-
-
-        let responseType_: 'text' | 'json' | 'blob' = 'json';
-        if (localVarHttpHeaderAcceptSelected) {
-            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
-                responseType_ = 'text';
-            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
-                responseType_ = 'json';
-            } else {
-                responseType_ = 'blob';
-            }
-        }
-
-        let localVarPath = `/api/v2/internal/organizations/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/organization-units/${this.configuration.encodeParam({name: "organizationUnitUuid", value: organizationUnitUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/roles`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
-            {
-                context: localVarHttpContext,
-                responseType: <any>responseType_,
-                withCredentials: this.configuration.withCredentials,
-                headers: localVarHeaders,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * @param requestParameters
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public patchSingleOrganizationUnitsInternalV2PatchUnit(requestParameters: PatchSingleOrganizationUnitsInternalV2PatchUnitRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public patchSingleOrganizationUnitsInternalV2PatchUnit(requestParameters: PatchSingleOrganizationUnitsInternalV2PatchUnitRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public patchSingleOrganizationUnitsInternalV2PatchUnit(requestParameters: PatchSingleOrganizationUnitsInternalV2PatchUnitRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public patchSingleOrganizationUnitsInternalV2PatchUnit(requestParameters: PatchSingleOrganizationUnitsInternalV2PatchUnitRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIOrganizationUnitResponseDTO>;
+    public patchSingleOrganizationUnitsInternalV2PatchUnit(requestParameters: PatchSingleOrganizationUnitsInternalV2PatchUnitRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIOrganizationUnitResponseDTO>>;
+    public patchSingleOrganizationUnitsInternalV2PatchUnit(requestParameters: PatchSingleOrganizationUnitsInternalV2PatchUnitRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIOrganizationUnitResponseDTO>>;
     public patchSingleOrganizationUnitsInternalV2PatchUnit(requestParameters: PatchSingleOrganizationUnitsInternalV2PatchUnitRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
@@ -565,7 +575,7 @@ export class OrganizationUnitsInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/organizations/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/organization-units/${this.configuration.encodeParam({name: "organizationUnitUuid", value: organizationUnitUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/patch`;
-        return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APIOrganizationUnitResponseDTO>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPIUpdateOrganizationUnitRequestDTO,
@@ -583,9 +593,9 @@ export class OrganizationUnitsInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleOrganizationUnitsInternalV2CreateBulkRoleAssignment(requestParameters: PostSingleOrganizationUnitsInternalV2CreateBulkRoleAssignmentRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public postSingleOrganizationUnitsInternalV2CreateBulkRoleAssignment(requestParameters: PostSingleOrganizationUnitsInternalV2CreateBulkRoleAssignmentRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public postSingleOrganizationUnitsInternalV2CreateBulkRoleAssignment(requestParameters: PostSingleOrganizationUnitsInternalV2CreateBulkRoleAssignmentRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public postSingleOrganizationUnitsInternalV2CreateBulkRoleAssignment(requestParameters: PostSingleOrganizationUnitsInternalV2CreateBulkRoleAssignmentRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIOrganizationUnitResponseDTO>;
+    public postSingleOrganizationUnitsInternalV2CreateBulkRoleAssignment(requestParameters: PostSingleOrganizationUnitsInternalV2CreateBulkRoleAssignmentRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIOrganizationUnitResponseDTO>>;
+    public postSingleOrganizationUnitsInternalV2CreateBulkRoleAssignment(requestParameters: PostSingleOrganizationUnitsInternalV2CreateBulkRoleAssignmentRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIOrganizationUnitResponseDTO>>;
     public postSingleOrganizationUnitsInternalV2CreateBulkRoleAssignment(requestParameters: PostSingleOrganizationUnitsInternalV2CreateBulkRoleAssignmentRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUnitUuid = requestParameters.organizationUnitUuid;
         if (organizationUnitUuid === null || organizationUnitUuid === undefined) {
@@ -645,7 +655,7 @@ export class OrganizationUnitsInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/organizations/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/organization-units/${this.configuration.encodeParam({name: "organizationUnitUuid", value: organizationUnitUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/roles/bulk/create`;
-        return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APIOrganizationUnitResponseDTO>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPIBulkRoleAssignmentRequestDTO,
@@ -663,9 +673,9 @@ export class OrganizationUnitsInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleOrganizationUnitsInternalV2CreateRoleAssignment(requestParameters: PostSingleOrganizationUnitsInternalV2CreateRoleAssignmentRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public postSingleOrganizationUnitsInternalV2CreateRoleAssignment(requestParameters: PostSingleOrganizationUnitsInternalV2CreateRoleAssignmentRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public postSingleOrganizationUnitsInternalV2CreateRoleAssignment(requestParameters: PostSingleOrganizationUnitsInternalV2CreateRoleAssignmentRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public postSingleOrganizationUnitsInternalV2CreateRoleAssignment(requestParameters: PostSingleOrganizationUnitsInternalV2CreateRoleAssignmentRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIOrganizationUnitRoleAssignmentResponseDTO>;
+    public postSingleOrganizationUnitsInternalV2CreateRoleAssignment(requestParameters: PostSingleOrganizationUnitsInternalV2CreateRoleAssignmentRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIOrganizationUnitRoleAssignmentResponseDTO>>;
+    public postSingleOrganizationUnitsInternalV2CreateRoleAssignment(requestParameters: PostSingleOrganizationUnitsInternalV2CreateRoleAssignmentRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIOrganizationUnitRoleAssignmentResponseDTO>>;
     public postSingleOrganizationUnitsInternalV2CreateRoleAssignment(requestParameters: PostSingleOrganizationUnitsInternalV2CreateRoleAssignmentRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUnitUuid = requestParameters.organizationUnitUuid;
         if (organizationUnitUuid === null || organizationUnitUuid === undefined) {
@@ -725,7 +735,7 @@ export class OrganizationUnitsInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/organizations/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/organization-units/${this.configuration.encodeParam({name: "organizationUnitUuid", value: organizationUnitUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/roles/create`;
-        return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APIOrganizationUnitRoleAssignmentResponseDTO>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPICreateOrganizationUnitRoleAssignmentRequestDTO,
@@ -743,9 +753,9 @@ export class OrganizationUnitsInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleOrganizationUnitsInternalV2CreateUnit(requestParameters: PostSingleOrganizationUnitsInternalV2CreateUnitRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public postSingleOrganizationUnitsInternalV2CreateUnit(requestParameters: PostSingleOrganizationUnitsInternalV2CreateUnitRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public postSingleOrganizationUnitsInternalV2CreateUnit(requestParameters: PostSingleOrganizationUnitsInternalV2CreateUnitRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public postSingleOrganizationUnitsInternalV2CreateUnit(requestParameters: PostSingleOrganizationUnitsInternalV2CreateUnitRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIOrganizationUnitResponseDTO>;
+    public postSingleOrganizationUnitsInternalV2CreateUnit(requestParameters: PostSingleOrganizationUnitsInternalV2CreateUnitRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIOrganizationUnitResponseDTO>>;
+    public postSingleOrganizationUnitsInternalV2CreateUnit(requestParameters: PostSingleOrganizationUnitsInternalV2CreateUnitRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIOrganizationUnitResponseDTO>>;
     public postSingleOrganizationUnitsInternalV2CreateUnit(requestParameters: PostSingleOrganizationUnitsInternalV2CreateUnitRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
@@ -801,7 +811,7 @@ export class OrganizationUnitsInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/organizations/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/organization-units/create`;
-        return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APIOrganizationUnitResponseDTO>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPICreateOrganizationUnitRequestDTO,

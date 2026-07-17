@@ -20,13 +20,15 @@ import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
 import { APITrackedEntityTypeChoice } from '../model/aPITrackedEntityTypeChoice';
+// @ts-ignore
+import { APITrackingEventResponseDTO } from '../model/aPITrackingEventResponseDTO';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
 
 
-export interface GetSingleDeltaFeedV2GetDeletedObjectsRequestParams {
+export interface GetManyDeltaFeedV2GetDeletedObjectsRequestParams {
     /** Filter results based on tracked entity type. */
     entityType?: APITrackedEntityTypeChoice;
     /** Results will be returned where \&#39;deletedTimeStamp &gt;&#x3D; deletedSinceUTC\&#39; */
@@ -108,10 +110,10 @@ export class DeltaFeedV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleDeltaFeedV2GetDeletedObjects(requestParameters: GetSingleDeltaFeedV2GetDeletedObjectsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleDeltaFeedV2GetDeletedObjects(requestParameters: GetSingleDeltaFeedV2GetDeletedObjectsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleDeltaFeedV2GetDeletedObjects(requestParameters: GetSingleDeltaFeedV2GetDeletedObjectsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleDeltaFeedV2GetDeletedObjects(requestParameters: GetSingleDeltaFeedV2GetDeletedObjectsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyDeltaFeedV2GetDeletedObjects(requestParameters: GetManyDeltaFeedV2GetDeletedObjectsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APITrackingEventResponseDTO>>;
+    public getManyDeltaFeedV2GetDeletedObjects(requestParameters: GetManyDeltaFeedV2GetDeletedObjectsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APITrackingEventResponseDTO>>>;
+    public getManyDeltaFeedV2GetDeletedObjects(requestParameters: GetManyDeltaFeedV2GetDeletedObjectsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APITrackingEventResponseDTO>>>;
+    public getManyDeltaFeedV2GetDeletedObjects(requestParameters: GetManyDeltaFeedV2GetDeletedObjectsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const entityType = requestParameters.entityType;
         const deletedSinceUTC = requestParameters.deletedSinceUTC;
         const page = requestParameters.page;
@@ -174,7 +176,7 @@ export class DeltaFeedV2Service {
         }
 
         let localVarPath = `/api/v2/delta-feed/deleted-entities`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<Array<APITrackingEventResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 params: localVarQueryParameters,

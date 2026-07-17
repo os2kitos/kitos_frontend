@@ -28,6 +28,7 @@ import { MenuItemComponent } from '../menu-item/menu-item.component';
 import { MenuComponent } from '../menu/menu.component';
 import { NotificationsButtonComponent } from '../notifications-button/notifications-button.component';
 import { TestEnvironmentRibbonComponent } from '../test-environment-ribbon/test-environment-ribbon.component';
+import { selectIContractsEnableSupplier } from 'src/app/store/organization/ui-module-customization/selectors';
 
 @Component({
   selector: 'app-nav-bar',
@@ -55,6 +56,7 @@ export class NavBarComponent extends BaseComponent implements OnInit {
   public readonly hasMultipleOrganizations$ = this.store.select(selectHasMultipleOrganizations);
   public readonly uiRootConfig$ = this.store.select(selectUIRootConfig).pipe(filterNullish());
   public readonly isUserCurrentyLocalAdmin$ = this.store.select(selectUserIsCurrentlyLocalAdmin);
+  public readonly enableContractSupplier$ = this.store.select(selectIContractsEnableSupplier);
   public readonly enableUsageArchive$ = this.store.select(selectITSystemUsageEnableUsageArchive);
 
   public readonly alertsCount$ = this.store.select(selectAllAlertCount);

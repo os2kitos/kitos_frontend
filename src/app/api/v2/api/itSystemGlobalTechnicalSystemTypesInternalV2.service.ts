@@ -21,6 +21,8 @@ import { Observable }                                        from 'rxjs';
 // @ts-ignore
 import { APIGlobalRegularOptionCreateRequestDTO } from '../model/aPIGlobalRegularOptionCreateRequestDTO';
 // @ts-ignore
+import { APIGlobalRegularOptionResponseDTO } from '../model/aPIGlobalRegularOptionResponseDTO';
+// @ts-ignore
 import { APIGlobalRegularOptionUpdateRequestDTO } from '../model/aPIGlobalRegularOptionUpdateRequestDTO';
 
 // @ts-ignore
@@ -28,12 +30,12 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface PatchSingleItSystemGlobalTechnicalSystemTypesInternalV2PatchTechnicalSystemTypeRequestParams {
+export interface PatchManyItSystemGlobalTechnicalSystemTypesInternalV2PatchTechnicalSystemTypeRequestParams {
     optionUuid: string;
     aPIGlobalRegularOptionUpdateRequestDTO?: APIGlobalRegularOptionUpdateRequestDTO;
 }
 
-export interface PostSingleItSystemGlobalTechnicalSystemTypesInternalV2CreateTechnicalSystemTypeRequestParams {
+export interface PostManyItSystemGlobalTechnicalSystemTypesInternalV2CreateTechnicalSystemTypeRequestParams {
     aPIGlobalRegularOptionCreateRequestDTO?: APIGlobalRegularOptionCreateRequestDTO;
 }
 
@@ -106,10 +108,10 @@ export class ItSystemGlobalTechnicalSystemTypesInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItSystemGlobalTechnicalSystemTypesInternalV2GetTechnicalSystemTypes(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleItSystemGlobalTechnicalSystemTypesInternalV2GetTechnicalSystemTypes(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleItSystemGlobalTechnicalSystemTypesInternalV2GetTechnicalSystemTypes(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleItSystemGlobalTechnicalSystemTypesInternalV2GetTechnicalSystemTypes(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyItSystemGlobalTechnicalSystemTypesInternalV2GetTechnicalSystemTypes(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIGlobalRegularOptionResponseDTO>>;
+    public getManyItSystemGlobalTechnicalSystemTypesInternalV2GetTechnicalSystemTypes(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIGlobalRegularOptionResponseDTO>>>;
+    public getManyItSystemGlobalTechnicalSystemTypesInternalV2GetTechnicalSystemTypes(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIGlobalRegularOptionResponseDTO>>>;
+    public getManyItSystemGlobalTechnicalSystemTypesInternalV2GetTechnicalSystemTypes(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -150,7 +152,7 @@ export class ItSystemGlobalTechnicalSystemTypesInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/it-systems/global-option-types/technical-system-types`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<Array<APIGlobalRegularOptionResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -167,13 +169,13 @@ export class ItSystemGlobalTechnicalSystemTypesInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleItSystemGlobalTechnicalSystemTypesInternalV2PatchTechnicalSystemType(requestParameters: PatchSingleItSystemGlobalTechnicalSystemTypesInternalV2PatchTechnicalSystemTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public patchSingleItSystemGlobalTechnicalSystemTypesInternalV2PatchTechnicalSystemType(requestParameters: PatchSingleItSystemGlobalTechnicalSystemTypesInternalV2PatchTechnicalSystemTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public patchSingleItSystemGlobalTechnicalSystemTypesInternalV2PatchTechnicalSystemType(requestParameters: PatchSingleItSystemGlobalTechnicalSystemTypesInternalV2PatchTechnicalSystemTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
-    public patchSingleItSystemGlobalTechnicalSystemTypesInternalV2PatchTechnicalSystemType(requestParameters: PatchSingleItSystemGlobalTechnicalSystemTypesInternalV2PatchTechnicalSystemTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public patchManyItSystemGlobalTechnicalSystemTypesInternalV2PatchTechnicalSystemType(requestParameters: PatchManyItSystemGlobalTechnicalSystemTypesInternalV2PatchTechnicalSystemTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIGlobalRegularOptionResponseDTO>>;
+    public patchManyItSystemGlobalTechnicalSystemTypesInternalV2PatchTechnicalSystemType(requestParameters: PatchManyItSystemGlobalTechnicalSystemTypesInternalV2PatchTechnicalSystemTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIGlobalRegularOptionResponseDTO>>>;
+    public patchManyItSystemGlobalTechnicalSystemTypesInternalV2PatchTechnicalSystemType(requestParameters: PatchManyItSystemGlobalTechnicalSystemTypesInternalV2PatchTechnicalSystemTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIGlobalRegularOptionResponseDTO>>>;
+    public patchManyItSystemGlobalTechnicalSystemTypesInternalV2PatchTechnicalSystemType(requestParameters: PatchManyItSystemGlobalTechnicalSystemTypesInternalV2PatchTechnicalSystemTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
-            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItSystemGlobalTechnicalSystemTypesInternalV2PatchTechnicalSystemType.');
+            throw new Error('Required parameter optionUuid was null or undefined when calling patchManyItSystemGlobalTechnicalSystemTypesInternalV2PatchTechnicalSystemType.');
         }
         const aPIGlobalRegularOptionUpdateRequestDTO = requestParameters.aPIGlobalRegularOptionUpdateRequestDTO;
 
@@ -226,7 +228,7 @@ export class ItSystemGlobalTechnicalSystemTypesInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/it-systems/global-option-types/technical-system-types/${this.configuration.encodeParam({name: "optionUuid", value: optionUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
-        return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<Array<APIGlobalRegularOptionResponseDTO>>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPIGlobalRegularOptionUpdateRequestDTO,
@@ -244,10 +246,10 @@ export class ItSystemGlobalTechnicalSystemTypesInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleItSystemGlobalTechnicalSystemTypesInternalV2CreateTechnicalSystemType(requestParameters: PostSingleItSystemGlobalTechnicalSystemTypesInternalV2CreateTechnicalSystemTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public postSingleItSystemGlobalTechnicalSystemTypesInternalV2CreateTechnicalSystemType(requestParameters: PostSingleItSystemGlobalTechnicalSystemTypesInternalV2CreateTechnicalSystemTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public postSingleItSystemGlobalTechnicalSystemTypesInternalV2CreateTechnicalSystemType(requestParameters: PostSingleItSystemGlobalTechnicalSystemTypesInternalV2CreateTechnicalSystemTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
-    public postSingleItSystemGlobalTechnicalSystemTypesInternalV2CreateTechnicalSystemType(requestParameters: PostSingleItSystemGlobalTechnicalSystemTypesInternalV2CreateTechnicalSystemTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public postManyItSystemGlobalTechnicalSystemTypesInternalV2CreateTechnicalSystemType(requestParameters: PostManyItSystemGlobalTechnicalSystemTypesInternalV2CreateTechnicalSystemTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIGlobalRegularOptionResponseDTO>>;
+    public postManyItSystemGlobalTechnicalSystemTypesInternalV2CreateTechnicalSystemType(requestParameters: PostManyItSystemGlobalTechnicalSystemTypesInternalV2CreateTechnicalSystemTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIGlobalRegularOptionResponseDTO>>>;
+    public postManyItSystemGlobalTechnicalSystemTypesInternalV2CreateTechnicalSystemType(requestParameters: PostManyItSystemGlobalTechnicalSystemTypesInternalV2CreateTechnicalSystemTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIGlobalRegularOptionResponseDTO>>>;
+    public postManyItSystemGlobalTechnicalSystemTypesInternalV2CreateTechnicalSystemType(requestParameters: PostManyItSystemGlobalTechnicalSystemTypesInternalV2CreateTechnicalSystemTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const aPIGlobalRegularOptionCreateRequestDTO = requestParameters.aPIGlobalRegularOptionCreateRequestDTO;
 
         let localVarHeaders = this.defaultHeaders;
@@ -298,7 +300,7 @@ export class ItSystemGlobalTechnicalSystemTypesInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/it-systems/global-option-types/technical-system-types`;
-        return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<Array<APIGlobalRegularOptionResponseDTO>>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPIGlobalRegularOptionCreateRequestDTO,

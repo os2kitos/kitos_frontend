@@ -139,7 +139,7 @@ export class FkOrgEffects {
       combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       mergeMap(([{ numberOfChangeLogs }, organizationUuid]) =>
         this.apiService
-          .getSingleStsOrganizationSynchronizationInternalV2GetChangeLogs({
+          .getManyStsOrganizationSynchronizationInternalV2GetChangeLogs({
             organizationUuid,
             numberOfChangeLogs,
           })

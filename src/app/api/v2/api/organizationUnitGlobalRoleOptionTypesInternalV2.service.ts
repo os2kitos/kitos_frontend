@@ -21,6 +21,8 @@ import { Observable }                                        from 'rxjs';
 // @ts-ignore
 import { APIGlobalRoleOptionCreateRequestDTO } from '../model/aPIGlobalRoleOptionCreateRequestDTO';
 // @ts-ignore
+import { APIGlobalRoleOptionResponseDTO } from '../model/aPIGlobalRoleOptionResponseDTO';
+// @ts-ignore
 import { APIGlobalRoleOptionUpdateRequestDTO } from '../model/aPIGlobalRoleOptionUpdateRequestDTO';
 
 // @ts-ignore
@@ -106,10 +108,10 @@ export class OrganizationUnitGlobalRoleOptionTypesInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleOrganizationUnitGlobalRoleOptionTypesInternalV2GetOrganizationUnitRoles(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleOrganizationUnitGlobalRoleOptionTypesInternalV2GetOrganizationUnitRoles(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleOrganizationUnitGlobalRoleOptionTypesInternalV2GetOrganizationUnitRoles(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleOrganizationUnitGlobalRoleOptionTypesInternalV2GetOrganizationUnitRoles(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyOrganizationUnitGlobalRoleOptionTypesInternalV2GetOrganizationUnitRoles(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIGlobalRoleOptionResponseDTO>>;
+    public getManyOrganizationUnitGlobalRoleOptionTypesInternalV2GetOrganizationUnitRoles(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIGlobalRoleOptionResponseDTO>>>;
+    public getManyOrganizationUnitGlobalRoleOptionTypesInternalV2GetOrganizationUnitRoles(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIGlobalRoleOptionResponseDTO>>>;
+    public getManyOrganizationUnitGlobalRoleOptionTypesInternalV2GetOrganizationUnitRoles(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -150,7 +152,7 @@ export class OrganizationUnitGlobalRoleOptionTypesInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/organization/global-option-types/organization-unit-roles`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<Array<APIGlobalRoleOptionResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -167,9 +169,9 @@ export class OrganizationUnitGlobalRoleOptionTypesInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleOrganizationUnitGlobalRoleOptionTypesInternalV2PatchGlobalOrganizationUnitRole(requestParameters: PatchSingleOrganizationUnitGlobalRoleOptionTypesInternalV2PatchGlobalOrganizationUnitRoleRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public patchSingleOrganizationUnitGlobalRoleOptionTypesInternalV2PatchGlobalOrganizationUnitRole(requestParameters: PatchSingleOrganizationUnitGlobalRoleOptionTypesInternalV2PatchGlobalOrganizationUnitRoleRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public patchSingleOrganizationUnitGlobalRoleOptionTypesInternalV2PatchGlobalOrganizationUnitRole(requestParameters: PatchSingleOrganizationUnitGlobalRoleOptionTypesInternalV2PatchGlobalOrganizationUnitRoleRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public patchSingleOrganizationUnitGlobalRoleOptionTypesInternalV2PatchGlobalOrganizationUnitRole(requestParameters: PatchSingleOrganizationUnitGlobalRoleOptionTypesInternalV2PatchGlobalOrganizationUnitRoleRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRoleOptionResponseDTO>;
+    public patchSingleOrganizationUnitGlobalRoleOptionTypesInternalV2PatchGlobalOrganizationUnitRole(requestParameters: PatchSingleOrganizationUnitGlobalRoleOptionTypesInternalV2PatchGlobalOrganizationUnitRoleRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRoleOptionResponseDTO>>;
+    public patchSingleOrganizationUnitGlobalRoleOptionTypesInternalV2PatchGlobalOrganizationUnitRole(requestParameters: PatchSingleOrganizationUnitGlobalRoleOptionTypesInternalV2PatchGlobalOrganizationUnitRoleRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRoleOptionResponseDTO>>;
     public patchSingleOrganizationUnitGlobalRoleOptionTypesInternalV2PatchGlobalOrganizationUnitRole(requestParameters: PatchSingleOrganizationUnitGlobalRoleOptionTypesInternalV2PatchGlobalOrganizationUnitRoleRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
@@ -226,7 +228,7 @@ export class OrganizationUnitGlobalRoleOptionTypesInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/organization/global-option-types/organization-unit-roles/${this.configuration.encodeParam({name: "optionUuid", value: optionUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
-        return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APIGlobalRoleOptionResponseDTO>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPIGlobalRoleOptionUpdateRequestDTO,
@@ -244,9 +246,9 @@ export class OrganizationUnitGlobalRoleOptionTypesInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleOrganizationUnitGlobalRoleOptionTypesInternalV2CreateOrganizationUnitRole(requestParameters: PostSingleOrganizationUnitGlobalRoleOptionTypesInternalV2CreateOrganizationUnitRoleRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public postSingleOrganizationUnitGlobalRoleOptionTypesInternalV2CreateOrganizationUnitRole(requestParameters: PostSingleOrganizationUnitGlobalRoleOptionTypesInternalV2CreateOrganizationUnitRoleRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public postSingleOrganizationUnitGlobalRoleOptionTypesInternalV2CreateOrganizationUnitRole(requestParameters: PostSingleOrganizationUnitGlobalRoleOptionTypesInternalV2CreateOrganizationUnitRoleRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public postSingleOrganizationUnitGlobalRoleOptionTypesInternalV2CreateOrganizationUnitRole(requestParameters: PostSingleOrganizationUnitGlobalRoleOptionTypesInternalV2CreateOrganizationUnitRoleRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRoleOptionResponseDTO>;
+    public postSingleOrganizationUnitGlobalRoleOptionTypesInternalV2CreateOrganizationUnitRole(requestParameters: PostSingleOrganizationUnitGlobalRoleOptionTypesInternalV2CreateOrganizationUnitRoleRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRoleOptionResponseDTO>>;
+    public postSingleOrganizationUnitGlobalRoleOptionTypesInternalV2CreateOrganizationUnitRole(requestParameters: PostSingleOrganizationUnitGlobalRoleOptionTypesInternalV2CreateOrganizationUnitRoleRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRoleOptionResponseDTO>>;
     public postSingleOrganizationUnitGlobalRoleOptionTypesInternalV2CreateOrganizationUnitRole(requestParameters: PostSingleOrganizationUnitGlobalRoleOptionTypesInternalV2CreateOrganizationUnitRoleRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const aPIGlobalRoleOptionCreateRequestDTO = requestParameters.aPIGlobalRoleOptionCreateRequestDTO;
 
@@ -298,7 +300,7 @@ export class OrganizationUnitGlobalRoleOptionTypesInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/organization/global-option-types/organization-unit-roles`;
-        return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APIGlobalRoleOptionResponseDTO>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPIGlobalRoleOptionCreateRequestDTO,

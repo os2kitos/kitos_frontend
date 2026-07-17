@@ -21,6 +21,8 @@ import { Observable }                                        from 'rxjs';
 // @ts-ignore
 import { APILocalOptionCreateRequestDTO } from '../model/aPILocalOptionCreateRequestDTO';
 // @ts-ignore
+import { APILocalRegularOptionResponseDTO } from '../model/aPILocalRegularOptionResponseDTO';
+// @ts-ignore
 import { APILocalRegularOptionUpdateRequestDTO } from '../model/aPILocalRegularOptionUpdateRequestDTO';
 
 // @ts-ignore
@@ -33,13 +35,13 @@ export interface DeleteSingleItContractLocalTemplateTypesInternalV2DeleteLocalTe
     optionUuid: string;
 }
 
+export interface GetManyItContractLocalTemplateTypesInternalV2GetLocalTemplateTypesRequestParams {
+    organizationUuid: string;
+}
+
 export interface GetSingleItContractLocalTemplateTypesInternalV2GetLocalTemplateTypeByOptionIdRequestParams {
     organizationUuid: string;
     optionUuid: string;
-}
-
-export interface GetSingleItContractLocalTemplateTypesInternalV2GetLocalTemplateTypesRequestParams {
-    organizationUuid: string;
 }
 
 export interface PatchSingleItContractLocalTemplateTypesInternalV2PatchLocalTemplateTypeRequestParams {
@@ -191,9 +193,74 @@ export class ItContractLocalTemplateTypesInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItContractLocalTemplateTypesInternalV2GetLocalTemplateTypeByOptionId(requestParameters: GetSingleItContractLocalTemplateTypesInternalV2GetLocalTemplateTypeByOptionIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleItContractLocalTemplateTypesInternalV2GetLocalTemplateTypeByOptionId(requestParameters: GetSingleItContractLocalTemplateTypesInternalV2GetLocalTemplateTypeByOptionIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleItContractLocalTemplateTypesInternalV2GetLocalTemplateTypeByOptionId(requestParameters: GetSingleItContractLocalTemplateTypesInternalV2GetLocalTemplateTypeByOptionIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public getManyItContractLocalTemplateTypesInternalV2GetLocalTemplateTypes(requestParameters: GetManyItContractLocalTemplateTypesInternalV2GetLocalTemplateTypesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APILocalRegularOptionResponseDTO>>;
+    public getManyItContractLocalTemplateTypesInternalV2GetLocalTemplateTypes(requestParameters: GetManyItContractLocalTemplateTypesInternalV2GetLocalTemplateTypesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APILocalRegularOptionResponseDTO>>>;
+    public getManyItContractLocalTemplateTypesInternalV2GetLocalTemplateTypes(requestParameters: GetManyItContractLocalTemplateTypesInternalV2GetLocalTemplateTypesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APILocalRegularOptionResponseDTO>>>;
+    public getManyItContractLocalTemplateTypesInternalV2GetLocalTemplateTypes(requestParameters: GetManyItContractLocalTemplateTypesInternalV2GetLocalTemplateTypesRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        const organizationUuid = requestParameters.organizationUuid;
+        if (organizationUuid === null || organizationUuid === undefined) {
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyItContractLocalTemplateTypesInternalV2GetLocalTemplateTypes.');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarCredential: string | undefined;
+        // authentication (Bearer) required
+        localVarCredential = this.configuration.lookupCredential('Bearer');
+        if (localVarCredential) {
+            localVarHeaders = localVarHeaders.set('Authorization', 'Bearer ' + localVarCredential);
+        }
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/v2/internal/it-contracts/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/local-option-types/template-types`;
+        return this.httpClient.request<Array<APILocalRegularOptionResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * @param requestParameters
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getSingleItContractLocalTemplateTypesInternalV2GetLocalTemplateTypeByOptionId(requestParameters: GetSingleItContractLocalTemplateTypesInternalV2GetLocalTemplateTypeByOptionIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
+    public getSingleItContractLocalTemplateTypesInternalV2GetLocalTemplateTypeByOptionId(requestParameters: GetSingleItContractLocalTemplateTypesInternalV2GetLocalTemplateTypeByOptionIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
+    public getSingleItContractLocalTemplateTypesInternalV2GetLocalTemplateTypeByOptionId(requestParameters: GetSingleItContractLocalTemplateTypesInternalV2GetLocalTemplateTypeByOptionIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
     public getSingleItContractLocalTemplateTypesInternalV2GetLocalTemplateTypeByOptionId(requestParameters: GetSingleItContractLocalTemplateTypesInternalV2GetLocalTemplateTypeByOptionIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
@@ -243,7 +310,7 @@ export class ItContractLocalTemplateTypesInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/it-contracts/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/local-option-types/template-types/${this.configuration.encodeParam({name: "optionUuid", value: optionUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APILocalRegularOptionResponseDTO>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -260,74 +327,9 @@ export class ItContractLocalTemplateTypesInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItContractLocalTemplateTypesInternalV2GetLocalTemplateTypes(requestParameters: GetSingleItContractLocalTemplateTypesInternalV2GetLocalTemplateTypesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleItContractLocalTemplateTypesInternalV2GetLocalTemplateTypes(requestParameters: GetSingleItContractLocalTemplateTypesInternalV2GetLocalTemplateTypesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleItContractLocalTemplateTypesInternalV2GetLocalTemplateTypes(requestParameters: GetSingleItContractLocalTemplateTypesInternalV2GetLocalTemplateTypesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleItContractLocalTemplateTypesInternalV2GetLocalTemplateTypes(requestParameters: GetSingleItContractLocalTemplateTypesInternalV2GetLocalTemplateTypesRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
-        const organizationUuid = requestParameters.organizationUuid;
-        if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleItContractLocalTemplateTypesInternalV2GetLocalTemplateTypes.');
-        }
-
-        let localVarHeaders = this.defaultHeaders;
-
-        let localVarCredential: string | undefined;
-        // authentication (Bearer) required
-        localVarCredential = this.configuration.lookupCredential('Bearer');
-        if (localVarCredential) {
-            localVarHeaders = localVarHeaders.set('Authorization', 'Bearer ' + localVarCredential);
-        }
-
-        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
-        if (localVarHttpHeaderAcceptSelected === undefined) {
-            // to determine the Accept header
-            const httpHeaderAccepts: string[] = [
-                'application/json'
-            ];
-            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        }
-        if (localVarHttpHeaderAcceptSelected !== undefined) {
-            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
-        }
-
-        let localVarHttpContext: HttpContext | undefined = options && options.context;
-        if (localVarHttpContext === undefined) {
-            localVarHttpContext = new HttpContext();
-        }
-
-
-        let responseType_: 'text' | 'json' | 'blob' = 'json';
-        if (localVarHttpHeaderAcceptSelected) {
-            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
-                responseType_ = 'text';
-            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
-                responseType_ = 'json';
-            } else {
-                responseType_ = 'blob';
-            }
-        }
-
-        let localVarPath = `/api/v2/internal/it-contracts/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/local-option-types/template-types`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
-            {
-                context: localVarHttpContext,
-                responseType: <any>responseType_,
-                withCredentials: this.configuration.withCredentials,
-                headers: localVarHeaders,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * @param requestParameters
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public patchSingleItContractLocalTemplateTypesInternalV2PatchLocalTemplateType(requestParameters: PatchSingleItContractLocalTemplateTypesInternalV2PatchLocalTemplateTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public patchSingleItContractLocalTemplateTypesInternalV2PatchLocalTemplateType(requestParameters: PatchSingleItContractLocalTemplateTypesInternalV2PatchLocalTemplateTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public patchSingleItContractLocalTemplateTypesInternalV2PatchLocalTemplateType(requestParameters: PatchSingleItContractLocalTemplateTypesInternalV2PatchLocalTemplateTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public patchSingleItContractLocalTemplateTypesInternalV2PatchLocalTemplateType(requestParameters: PatchSingleItContractLocalTemplateTypesInternalV2PatchLocalTemplateTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
+    public patchSingleItContractLocalTemplateTypesInternalV2PatchLocalTemplateType(requestParameters: PatchSingleItContractLocalTemplateTypesInternalV2PatchLocalTemplateTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
+    public patchSingleItContractLocalTemplateTypesInternalV2PatchLocalTemplateType(requestParameters: PatchSingleItContractLocalTemplateTypesInternalV2PatchLocalTemplateTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
     public patchSingleItContractLocalTemplateTypesInternalV2PatchLocalTemplateType(requestParameters: PatchSingleItContractLocalTemplateTypesInternalV2PatchLocalTemplateTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
@@ -388,7 +390,7 @@ export class ItContractLocalTemplateTypesInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/it-contracts/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/local-option-types/template-types/${this.configuration.encodeParam({name: "optionUuid", value: optionUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
-        return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APILocalRegularOptionResponseDTO>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPILocalRegularOptionUpdateRequestDTO,
@@ -406,9 +408,9 @@ export class ItContractLocalTemplateTypesInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleItContractLocalTemplateTypesInternalV2CreateLocalTemplateType(requestParameters: PostSingleItContractLocalTemplateTypesInternalV2CreateLocalTemplateTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public postSingleItContractLocalTemplateTypesInternalV2CreateLocalTemplateType(requestParameters: PostSingleItContractLocalTemplateTypesInternalV2CreateLocalTemplateTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public postSingleItContractLocalTemplateTypesInternalV2CreateLocalTemplateType(requestParameters: PostSingleItContractLocalTemplateTypesInternalV2CreateLocalTemplateTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public postSingleItContractLocalTemplateTypesInternalV2CreateLocalTemplateType(requestParameters: PostSingleItContractLocalTemplateTypesInternalV2CreateLocalTemplateTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
+    public postSingleItContractLocalTemplateTypesInternalV2CreateLocalTemplateType(requestParameters: PostSingleItContractLocalTemplateTypesInternalV2CreateLocalTemplateTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
+    public postSingleItContractLocalTemplateTypesInternalV2CreateLocalTemplateType(requestParameters: PostSingleItContractLocalTemplateTypesInternalV2CreateLocalTemplateTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
     public postSingleItContractLocalTemplateTypesInternalV2CreateLocalTemplateType(requestParameters: PostSingleItContractLocalTemplateTypesInternalV2CreateLocalTemplateTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
@@ -464,7 +466,7 @@ export class ItContractLocalTemplateTypesInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/it-contracts/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/local-option-types/template-types`;
-        return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APILocalRegularOptionResponseDTO>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPILocalOptionCreateRequestDTO,

@@ -45,7 +45,7 @@ export class CreateProcessorDialogComponentStore extends ComponentStore<State> {
       mergeMap(([search, dprUuid]) => {
         this.updateIsLoading(true);
         return this.dprApiService
-          .getSingleDataProcessingRegistrationInternalV2GetAvailableDataProcessors({ dprUuid, nameQuery: search })
+          .getManyDataProcessingRegistrationInternalV2GetAvailableDataProcessors({ dprUuid, nameQuery: search })
           .pipe(
             tapResponse({
               next: (organizations) => this.updateOrganizations(organizations),

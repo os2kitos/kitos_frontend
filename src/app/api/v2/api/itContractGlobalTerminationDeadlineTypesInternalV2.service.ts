@@ -21,6 +21,8 @@ import { Observable }                                        from 'rxjs';
 // @ts-ignore
 import { APIGlobalRegularOptionCreateRequestDTO } from '../model/aPIGlobalRegularOptionCreateRequestDTO';
 // @ts-ignore
+import { APIGlobalRegularOptionResponseDTO } from '../model/aPIGlobalRegularOptionResponseDTO';
+// @ts-ignore
 import { APIGlobalRegularOptionUpdateRequestDTO } from '../model/aPIGlobalRegularOptionUpdateRequestDTO';
 
 // @ts-ignore
@@ -106,10 +108,10 @@ export class ItContractGlobalTerminationDeadlineTypesInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItContractGlobalTerminationDeadlineTypesInternalV2GetGlobalTerminationDeadlineTypes(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleItContractGlobalTerminationDeadlineTypesInternalV2GetGlobalTerminationDeadlineTypes(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleItContractGlobalTerminationDeadlineTypesInternalV2GetGlobalTerminationDeadlineTypes(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleItContractGlobalTerminationDeadlineTypesInternalV2GetGlobalTerminationDeadlineTypes(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyItContractGlobalTerminationDeadlineTypesInternalV2GetGlobalTerminationDeadlineTypes(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIGlobalRegularOptionResponseDTO>>;
+    public getManyItContractGlobalTerminationDeadlineTypesInternalV2GetGlobalTerminationDeadlineTypes(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIGlobalRegularOptionResponseDTO>>>;
+    public getManyItContractGlobalTerminationDeadlineTypesInternalV2GetGlobalTerminationDeadlineTypes(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIGlobalRegularOptionResponseDTO>>>;
+    public getManyItContractGlobalTerminationDeadlineTypesInternalV2GetGlobalTerminationDeadlineTypes(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -150,7 +152,7 @@ export class ItContractGlobalTerminationDeadlineTypesInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/it-contract/global-option-types/termination-deadline-types`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<Array<APIGlobalRegularOptionResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -167,9 +169,9 @@ export class ItContractGlobalTerminationDeadlineTypesInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleItContractGlobalTerminationDeadlineTypesInternalV2PatchGlobalTerminationDeadlineType(requestParameters: PatchSingleItContractGlobalTerminationDeadlineTypesInternalV2PatchGlobalTerminationDeadlineTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public patchSingleItContractGlobalTerminationDeadlineTypesInternalV2PatchGlobalTerminationDeadlineType(requestParameters: PatchSingleItContractGlobalTerminationDeadlineTypesInternalV2PatchGlobalTerminationDeadlineTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public patchSingleItContractGlobalTerminationDeadlineTypesInternalV2PatchGlobalTerminationDeadlineType(requestParameters: PatchSingleItContractGlobalTerminationDeadlineTypesInternalV2PatchGlobalTerminationDeadlineTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public patchSingleItContractGlobalTerminationDeadlineTypesInternalV2PatchGlobalTerminationDeadlineType(requestParameters: PatchSingleItContractGlobalTerminationDeadlineTypesInternalV2PatchGlobalTerminationDeadlineTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRegularOptionResponseDTO>;
+    public patchSingleItContractGlobalTerminationDeadlineTypesInternalV2PatchGlobalTerminationDeadlineType(requestParameters: PatchSingleItContractGlobalTerminationDeadlineTypesInternalV2PatchGlobalTerminationDeadlineTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRegularOptionResponseDTO>>;
+    public patchSingleItContractGlobalTerminationDeadlineTypesInternalV2PatchGlobalTerminationDeadlineType(requestParameters: PatchSingleItContractGlobalTerminationDeadlineTypesInternalV2PatchGlobalTerminationDeadlineTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRegularOptionResponseDTO>>;
     public patchSingleItContractGlobalTerminationDeadlineTypesInternalV2PatchGlobalTerminationDeadlineType(requestParameters: PatchSingleItContractGlobalTerminationDeadlineTypesInternalV2PatchGlobalTerminationDeadlineTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
@@ -226,7 +228,7 @@ export class ItContractGlobalTerminationDeadlineTypesInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/it-contract/global-option-types/termination-deadline-types/${this.configuration.encodeParam({name: "optionUuid", value: optionUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
-        return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APIGlobalRegularOptionResponseDTO>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPIGlobalRegularOptionUpdateRequestDTO,
@@ -244,9 +246,9 @@ export class ItContractGlobalTerminationDeadlineTypesInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleItContractGlobalTerminationDeadlineTypesInternalV2CreateGlobalTerminationDeadlineType(requestParameters: PostSingleItContractGlobalTerminationDeadlineTypesInternalV2CreateGlobalTerminationDeadlineTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public postSingleItContractGlobalTerminationDeadlineTypesInternalV2CreateGlobalTerminationDeadlineType(requestParameters: PostSingleItContractGlobalTerminationDeadlineTypesInternalV2CreateGlobalTerminationDeadlineTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public postSingleItContractGlobalTerminationDeadlineTypesInternalV2CreateGlobalTerminationDeadlineType(requestParameters: PostSingleItContractGlobalTerminationDeadlineTypesInternalV2CreateGlobalTerminationDeadlineTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public postSingleItContractGlobalTerminationDeadlineTypesInternalV2CreateGlobalTerminationDeadlineType(requestParameters: PostSingleItContractGlobalTerminationDeadlineTypesInternalV2CreateGlobalTerminationDeadlineTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRegularOptionResponseDTO>;
+    public postSingleItContractGlobalTerminationDeadlineTypesInternalV2CreateGlobalTerminationDeadlineType(requestParameters: PostSingleItContractGlobalTerminationDeadlineTypesInternalV2CreateGlobalTerminationDeadlineTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRegularOptionResponseDTO>>;
+    public postSingleItContractGlobalTerminationDeadlineTypesInternalV2CreateGlobalTerminationDeadlineType(requestParameters: PostSingleItContractGlobalTerminationDeadlineTypesInternalV2CreateGlobalTerminationDeadlineTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRegularOptionResponseDTO>>;
     public postSingleItContractGlobalTerminationDeadlineTypesInternalV2CreateGlobalTerminationDeadlineType(requestParameters: PostSingleItContractGlobalTerminationDeadlineTypesInternalV2CreateGlobalTerminationDeadlineTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const aPIGlobalRegularOptionCreateRequestDTO = requestParameters.aPIGlobalRegularOptionCreateRequestDTO;
 
@@ -298,7 +300,7 @@ export class ItContractGlobalTerminationDeadlineTypesInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/it-contract/global-option-types/termination-deadline-types`;
-        return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APIGlobalRegularOptionResponseDTO>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPIGlobalRegularOptionCreateRequestDTO,

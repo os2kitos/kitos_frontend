@@ -21,6 +21,8 @@ import { Observable }                                        from 'rxjs';
 // @ts-ignore
 import { APIGlobalRegularOptionCreateRequestDTO } from '../model/aPIGlobalRegularOptionCreateRequestDTO';
 // @ts-ignore
+import { APIGlobalRegularOptionResponseDTO } from '../model/aPIGlobalRegularOptionResponseDTO';
+// @ts-ignore
 import { APIGlobalRegularOptionUpdateRequestDTO } from '../model/aPIGlobalRegularOptionUpdateRequestDTO';
 
 // @ts-ignore
@@ -106,10 +108,10 @@ export class DprGlobalDataProcessingOversightOptionsInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleDprGlobalDataProcessingOversightOptionsInternalV2GetGlobalDataProcessingOversightOptions(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleDprGlobalDataProcessingOversightOptionsInternalV2GetGlobalDataProcessingOversightOptions(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleDprGlobalDataProcessingOversightOptionsInternalV2GetGlobalDataProcessingOversightOptions(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleDprGlobalDataProcessingOversightOptionsInternalV2GetGlobalDataProcessingOversightOptions(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyDprGlobalDataProcessingOversightOptionsInternalV2GetGlobalDataProcessingOversightOptions(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIGlobalRegularOptionResponseDTO>>;
+    public getManyDprGlobalDataProcessingOversightOptionsInternalV2GetGlobalDataProcessingOversightOptions(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIGlobalRegularOptionResponseDTO>>>;
+    public getManyDprGlobalDataProcessingOversightOptionsInternalV2GetGlobalDataProcessingOversightOptions(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIGlobalRegularOptionResponseDTO>>>;
+    public getManyDprGlobalDataProcessingOversightOptionsInternalV2GetGlobalDataProcessingOversightOptions(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -150,7 +152,7 @@ export class DprGlobalDataProcessingOversightOptionsInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/dpr/global-option-types/data-processing-oversight-options`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<Array<APIGlobalRegularOptionResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -167,9 +169,9 @@ export class DprGlobalDataProcessingOversightOptionsInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleDprGlobalDataProcessingOversightOptionsInternalV2PatchGlobalDataProcessingOversightOption(requestParameters: PatchSingleDprGlobalDataProcessingOversightOptionsInternalV2PatchGlobalDataProcessingOversightOptionRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public patchSingleDprGlobalDataProcessingOversightOptionsInternalV2PatchGlobalDataProcessingOversightOption(requestParameters: PatchSingleDprGlobalDataProcessingOversightOptionsInternalV2PatchGlobalDataProcessingOversightOptionRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public patchSingleDprGlobalDataProcessingOversightOptionsInternalV2PatchGlobalDataProcessingOversightOption(requestParameters: PatchSingleDprGlobalDataProcessingOversightOptionsInternalV2PatchGlobalDataProcessingOversightOptionRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public patchSingleDprGlobalDataProcessingOversightOptionsInternalV2PatchGlobalDataProcessingOversightOption(requestParameters: PatchSingleDprGlobalDataProcessingOversightOptionsInternalV2PatchGlobalDataProcessingOversightOptionRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRegularOptionResponseDTO>;
+    public patchSingleDprGlobalDataProcessingOversightOptionsInternalV2PatchGlobalDataProcessingOversightOption(requestParameters: PatchSingleDprGlobalDataProcessingOversightOptionsInternalV2PatchGlobalDataProcessingOversightOptionRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRegularOptionResponseDTO>>;
+    public patchSingleDprGlobalDataProcessingOversightOptionsInternalV2PatchGlobalDataProcessingOversightOption(requestParameters: PatchSingleDprGlobalDataProcessingOversightOptionsInternalV2PatchGlobalDataProcessingOversightOptionRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRegularOptionResponseDTO>>;
     public patchSingleDprGlobalDataProcessingOversightOptionsInternalV2PatchGlobalDataProcessingOversightOption(requestParameters: PatchSingleDprGlobalDataProcessingOversightOptionsInternalV2PatchGlobalDataProcessingOversightOptionRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
@@ -226,7 +228,7 @@ export class DprGlobalDataProcessingOversightOptionsInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/dpr/global-option-types/data-processing-oversight-options/${this.configuration.encodeParam({name: "optionUuid", value: optionUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
-        return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APIGlobalRegularOptionResponseDTO>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPIGlobalRegularOptionUpdateRequestDTO,
@@ -244,9 +246,9 @@ export class DprGlobalDataProcessingOversightOptionsInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleDprGlobalDataProcessingOversightOptionsInternalV2CreateGlobalDataProcessingOversightOption(requestParameters: PostSingleDprGlobalDataProcessingOversightOptionsInternalV2CreateGlobalDataProcessingOversightOptionRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public postSingleDprGlobalDataProcessingOversightOptionsInternalV2CreateGlobalDataProcessingOversightOption(requestParameters: PostSingleDprGlobalDataProcessingOversightOptionsInternalV2CreateGlobalDataProcessingOversightOptionRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public postSingleDprGlobalDataProcessingOversightOptionsInternalV2CreateGlobalDataProcessingOversightOption(requestParameters: PostSingleDprGlobalDataProcessingOversightOptionsInternalV2CreateGlobalDataProcessingOversightOptionRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public postSingleDprGlobalDataProcessingOversightOptionsInternalV2CreateGlobalDataProcessingOversightOption(requestParameters: PostSingleDprGlobalDataProcessingOversightOptionsInternalV2CreateGlobalDataProcessingOversightOptionRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRegularOptionResponseDTO>;
+    public postSingleDprGlobalDataProcessingOversightOptionsInternalV2CreateGlobalDataProcessingOversightOption(requestParameters: PostSingleDprGlobalDataProcessingOversightOptionsInternalV2CreateGlobalDataProcessingOversightOptionRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRegularOptionResponseDTO>>;
+    public postSingleDprGlobalDataProcessingOversightOptionsInternalV2CreateGlobalDataProcessingOversightOption(requestParameters: PostSingleDprGlobalDataProcessingOversightOptionsInternalV2CreateGlobalDataProcessingOversightOptionRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRegularOptionResponseDTO>>;
     public postSingleDprGlobalDataProcessingOversightOptionsInternalV2CreateGlobalDataProcessingOversightOption(requestParameters: PostSingleDprGlobalDataProcessingOversightOptionsInternalV2CreateGlobalDataProcessingOversightOptionRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const aPIGlobalRegularOptionCreateRequestDTO = requestParameters.aPIGlobalRegularOptionCreateRequestDTO;
 
@@ -298,7 +300,7 @@ export class DprGlobalDataProcessingOversightOptionsInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/dpr/global-option-types/data-processing-oversight-options`;
-        return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APIGlobalRegularOptionResponseDTO>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPIGlobalRegularOptionCreateRequestDTO,

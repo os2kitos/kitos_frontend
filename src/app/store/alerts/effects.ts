@@ -32,7 +32,7 @@ export class AlertsEffects {
       ),
       mergeMap(([{ entityType }, userUuid, organizationUuid]) => {
         return this.alertsService
-          .getSingleAlertsV2GetByOrganizationAndUser({
+          .getManyAlertsV2GetByOrganizationAndUser({
             organizationUuid: organizationUuid!,
             userUuid: userUuid!,
             ownerResourceType: mapRelatedEntityTypeToDTO(entityType),

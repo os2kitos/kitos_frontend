@@ -18,25 +18,27 @@ import { HttpClient, HttpHeaders, HttpParams,
 import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
+// @ts-ignore
+import { APIExternalReferenceWithLastChangedResponseDTO } from '../model/aPIExternalReferenceWithLastChangedResponseDTO';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
 
 
-export interface GetSingleExternalReferencesInternalV2GetDataProcessingReferencesRequestParams {
+export interface GetManyExternalReferencesInternalV2GetDataProcessingReferencesRequestParams {
     dprUuid: string;
 }
 
-export interface GetSingleExternalReferencesInternalV2GetItContractReferencesRequestParams {
+export interface GetManyExternalReferencesInternalV2GetItContractReferencesRequestParams {
     contractUuid: string;
 }
 
-export interface GetSingleExternalReferencesInternalV2GetItSystemReferencesRequestParams {
+export interface GetManyExternalReferencesInternalV2GetItSystemReferencesRequestParams {
     systemUuid: string;
 }
 
-export interface GetSingleExternalReferencesInternalV2GetItSystemUsageReferencesRequestParams {
+export interface GetManyExternalReferencesInternalV2GetItSystemUsageReferencesRequestParams {
     systemUsageUuid: string;
 }
 
@@ -110,13 +112,13 @@ export class ExternalReferencesInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleExternalReferencesInternalV2GetDataProcessingReferences(requestParameters: GetSingleExternalReferencesInternalV2GetDataProcessingReferencesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleExternalReferencesInternalV2GetDataProcessingReferences(requestParameters: GetSingleExternalReferencesInternalV2GetDataProcessingReferencesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleExternalReferencesInternalV2GetDataProcessingReferences(requestParameters: GetSingleExternalReferencesInternalV2GetDataProcessingReferencesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleExternalReferencesInternalV2GetDataProcessingReferences(requestParameters: GetSingleExternalReferencesInternalV2GetDataProcessingReferencesRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyExternalReferencesInternalV2GetDataProcessingReferences(requestParameters: GetManyExternalReferencesInternalV2GetDataProcessingReferencesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIExternalReferenceWithLastChangedResponseDTO>>;
+    public getManyExternalReferencesInternalV2GetDataProcessingReferences(requestParameters: GetManyExternalReferencesInternalV2GetDataProcessingReferencesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIExternalReferenceWithLastChangedResponseDTO>>>;
+    public getManyExternalReferencesInternalV2GetDataProcessingReferences(requestParameters: GetManyExternalReferencesInternalV2GetDataProcessingReferencesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIExternalReferenceWithLastChangedResponseDTO>>>;
+    public getManyExternalReferencesInternalV2GetDataProcessingReferences(requestParameters: GetManyExternalReferencesInternalV2GetDataProcessingReferencesRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const dprUuid = requestParameters.dprUuid;
         if (dprUuid === null || dprUuid === undefined) {
-            throw new Error('Required parameter dprUuid was null or undefined when calling getSingleExternalReferencesInternalV2GetDataProcessingReferences.');
+            throw new Error('Required parameter dprUuid was null or undefined when calling getManyExternalReferencesInternalV2GetDataProcessingReferences.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -158,7 +160,7 @@ export class ExternalReferencesInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/external-references/data-processing/${this.configuration.encodeParam({name: "dprUuid", value: dprUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<Array<APIExternalReferenceWithLastChangedResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -175,13 +177,13 @@ export class ExternalReferencesInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleExternalReferencesInternalV2GetItContractReferences(requestParameters: GetSingleExternalReferencesInternalV2GetItContractReferencesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleExternalReferencesInternalV2GetItContractReferences(requestParameters: GetSingleExternalReferencesInternalV2GetItContractReferencesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleExternalReferencesInternalV2GetItContractReferences(requestParameters: GetSingleExternalReferencesInternalV2GetItContractReferencesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleExternalReferencesInternalV2GetItContractReferences(requestParameters: GetSingleExternalReferencesInternalV2GetItContractReferencesRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyExternalReferencesInternalV2GetItContractReferences(requestParameters: GetManyExternalReferencesInternalV2GetItContractReferencesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIExternalReferenceWithLastChangedResponseDTO>>;
+    public getManyExternalReferencesInternalV2GetItContractReferences(requestParameters: GetManyExternalReferencesInternalV2GetItContractReferencesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIExternalReferenceWithLastChangedResponseDTO>>>;
+    public getManyExternalReferencesInternalV2GetItContractReferences(requestParameters: GetManyExternalReferencesInternalV2GetItContractReferencesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIExternalReferenceWithLastChangedResponseDTO>>>;
+    public getManyExternalReferencesInternalV2GetItContractReferences(requestParameters: GetManyExternalReferencesInternalV2GetItContractReferencesRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const contractUuid = requestParameters.contractUuid;
         if (contractUuid === null || contractUuid === undefined) {
-            throw new Error('Required parameter contractUuid was null or undefined when calling getSingleExternalReferencesInternalV2GetItContractReferences.');
+            throw new Error('Required parameter contractUuid was null or undefined when calling getManyExternalReferencesInternalV2GetItContractReferences.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -223,7 +225,7 @@ export class ExternalReferencesInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/external-references/it-contracts/${this.configuration.encodeParam({name: "contractUuid", value: contractUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<Array<APIExternalReferenceWithLastChangedResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -240,13 +242,13 @@ export class ExternalReferencesInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleExternalReferencesInternalV2GetItSystemReferences(requestParameters: GetSingleExternalReferencesInternalV2GetItSystemReferencesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleExternalReferencesInternalV2GetItSystemReferences(requestParameters: GetSingleExternalReferencesInternalV2GetItSystemReferencesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleExternalReferencesInternalV2GetItSystemReferences(requestParameters: GetSingleExternalReferencesInternalV2GetItSystemReferencesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleExternalReferencesInternalV2GetItSystemReferences(requestParameters: GetSingleExternalReferencesInternalV2GetItSystemReferencesRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyExternalReferencesInternalV2GetItSystemReferences(requestParameters: GetManyExternalReferencesInternalV2GetItSystemReferencesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIExternalReferenceWithLastChangedResponseDTO>>;
+    public getManyExternalReferencesInternalV2GetItSystemReferences(requestParameters: GetManyExternalReferencesInternalV2GetItSystemReferencesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIExternalReferenceWithLastChangedResponseDTO>>>;
+    public getManyExternalReferencesInternalV2GetItSystemReferences(requestParameters: GetManyExternalReferencesInternalV2GetItSystemReferencesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIExternalReferenceWithLastChangedResponseDTO>>>;
+    public getManyExternalReferencesInternalV2GetItSystemReferences(requestParameters: GetManyExternalReferencesInternalV2GetItSystemReferencesRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const systemUuid = requestParameters.systemUuid;
         if (systemUuid === null || systemUuid === undefined) {
-            throw new Error('Required parameter systemUuid was null or undefined when calling getSingleExternalReferencesInternalV2GetItSystemReferences.');
+            throw new Error('Required parameter systemUuid was null or undefined when calling getManyExternalReferencesInternalV2GetItSystemReferences.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -288,7 +290,7 @@ export class ExternalReferencesInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/external-references/it-systems/${this.configuration.encodeParam({name: "systemUuid", value: systemUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<Array<APIExternalReferenceWithLastChangedResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -305,13 +307,13 @@ export class ExternalReferencesInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleExternalReferencesInternalV2GetItSystemUsageReferences(requestParameters: GetSingleExternalReferencesInternalV2GetItSystemUsageReferencesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleExternalReferencesInternalV2GetItSystemUsageReferences(requestParameters: GetSingleExternalReferencesInternalV2GetItSystemUsageReferencesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleExternalReferencesInternalV2GetItSystemUsageReferences(requestParameters: GetSingleExternalReferencesInternalV2GetItSystemUsageReferencesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleExternalReferencesInternalV2GetItSystemUsageReferences(requestParameters: GetSingleExternalReferencesInternalV2GetItSystemUsageReferencesRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyExternalReferencesInternalV2GetItSystemUsageReferences(requestParameters: GetManyExternalReferencesInternalV2GetItSystemUsageReferencesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIExternalReferenceWithLastChangedResponseDTO>>;
+    public getManyExternalReferencesInternalV2GetItSystemUsageReferences(requestParameters: GetManyExternalReferencesInternalV2GetItSystemUsageReferencesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIExternalReferenceWithLastChangedResponseDTO>>>;
+    public getManyExternalReferencesInternalV2GetItSystemUsageReferences(requestParameters: GetManyExternalReferencesInternalV2GetItSystemUsageReferencesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIExternalReferenceWithLastChangedResponseDTO>>>;
+    public getManyExternalReferencesInternalV2GetItSystemUsageReferences(requestParameters: GetManyExternalReferencesInternalV2GetItSystemUsageReferencesRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const systemUsageUuid = requestParameters.systemUsageUuid;
         if (systemUsageUuid === null || systemUsageUuid === undefined) {
-            throw new Error('Required parameter systemUsageUuid was null or undefined when calling getSingleExternalReferencesInternalV2GetItSystemUsageReferences.');
+            throw new Error('Required parameter systemUsageUuid was null or undefined when calling getManyExternalReferencesInternalV2GetItSystemUsageReferences.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -353,7 +355,7 @@ export class ExternalReferencesInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/external-references/it-system-usages/${this.configuration.encodeParam({name: "systemUsageUuid", value: systemUsageUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<Array<APIExternalReferenceWithLastChangedResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,

@@ -145,109 +145,109 @@ export class GlobalAdminOptionTypeService {
     switch (optionType) {
       //It system regular types
       case 'it-system_business-type':
-        return () => this.businessTypeService.getSingleItSystemGlobalBusinessTypesInternalV2GetBusinessTypes();
+        return () => this.businessTypeService.getManyItSystemGlobalBusinessTypesInternalV2GetBusinessTypes();
       case 'it-system_usage-archive-type':
-        return () => this.archiveTypeService.getSingleItSystemGlobalArchiveTypesInternalV2GetGlobalArchiveTypes();
+        return () => this.archiveTypeService.getManyItSystemGlobalArchiveTypesInternalV2GetGlobalArchiveTypes();
       case 'it-system_usage-archive-location-type':
-        return () => this.archiveLocationService.getSingleItSystemGlobalArchiveLocationsInternalV2GetArchiveLocations();
+        return () => this.archiveLocationService.getManyItSystemGlobalArchiveLocationsInternalV2GetArchiveLocations();
       case 'it-system_usage-archive-location-test-type':
         return () =>
-          this.archiveTestLocationService.getSingleItSystemGlobalArchiveTestLocationsInternalV2GetGlobalArchiveTestLocations();
+          this.archiveTestLocationService.getManyItSystemGlobalArchiveTestLocationsInternalV2GetGlobalArchiveTestLocations();
       case 'it-interface_data-type':
-        return () => this.dataTypeService.getSingleItSystemGlobalDataTypesInternalV2GetGlobalDataTypes();
+        return () => this.dataTypeService.getManyItSystemGlobalDataTypesInternalV2GetGlobalDataTypes();
       case 'it-system_usage-relation-frequency-type':
-        return () => this.frequencyTypeService.getSingleItSystemGlobalFrequencyTypesInternalV2GetGlobalFrequencyTypes();
+        return () => this.frequencyTypeService.getManyItSystemGlobalFrequencyTypesInternalV2GetGlobalFrequencyTypes();
       case 'it-interface_interface-type':
-        return () => this.interfaceTypeService.getSingleItSystemGlobalInterfaceTypesInternalV2GetGlobalInterfaceTypes();
+        return () => this.interfaceTypeService.getManyItSystemGlobalInterfaceTypesInternalV2GetGlobalInterfaceTypes();
       case 'it_system_usage-gdpr-sensitive-data-type':
         return () =>
-          this.sensitivePersonalDataTypeService.getSingleItSystemGlobalSensitivePersonalDataTypesInternalV2GetGlobalSensitivePersonalDatas();
+          this.sensitivePersonalDataTypeService.getManyItSystemGlobalSensitivePersonalDataTypesInternalV2GetGlobalSensitivePersonalDatas();
       case 'it-system_usage-data-classification-type':
         return () =>
-          this.itSystemCategoryService.getSingleItSystemGlobalItSystemCategoriesInternalV2GetGlobalItSystemCategoriess();
+          this.itSystemCategoryService.getManyItSystemGlobalItSystemCategoriesInternalV2GetGlobalItSystemCategoriess();
       case 'it_system_usage-gdpr-registered-data-category-type':
-        return () => this.registerTypeService.getSingleItSystemGlobalRegisterTypesInternalV2GetGlobalRegisterTypes();
+        return () => this.registerTypeService.getManyItSystemGlobalRegisterTypesInternalV2GetGlobalRegisterTypes();
       case 'it-system-usage_system-usage-criticality-level':
         return () =>
-          this.systemUsageCriticalityLevelService.getSingleItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2GetSystemUsageCriticalityLevelTypes();
+          this.systemUsageCriticalityLevelService.getManyItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2GetSystemUsageCriticalityLevelTypes();
       case 'it-system-usage_technical-system-type':
         return () =>
-          this.technicalSystemTypeService.getSingleItSystemGlobalTechnicalSystemTypesInternalV2GetTechnicalSystemTypes();
+          this.technicalSystemTypeService.getManyItSystemGlobalTechnicalSystemTypesInternalV2GetTechnicalSystemTypes();
 
       //It Contract regular types
       case 'it-contract_contract-type':
         return () =>
-          this.contractTypeService.getSingleItContractGlobalItContractTypesInternalV2GetGlobalItContractTypes();
+          this.contractTypeService.getManyItContractGlobalItContractTypesInternalV2GetGlobalItContractTypes();
 
       case 'it-contract_contract-template-type':
         return () =>
-          this.templateTypeService.getSingleItContractGlobalItContractTemplateTypesInternalV2GetGlobalItContractTemplateTypes();
+          this.templateTypeService.getManyItContractGlobalItContractTemplateTypesInternalV2GetGlobalItContractTemplateTypes();
 
       case 'it-contract_purchase-form-type':
         return () =>
-          this.purchaseFormTypeService.getSingleItContractGlobalPurchaseFormTypesInternalV2GetGlobalPurchaseFormTypes();
+          this.purchaseFormTypeService.getManyItContractGlobalPurchaseFormTypesInternalV2GetGlobalPurchaseFormTypes();
 
       case 'it-contract-payment-model-types':
         return () =>
-          this.paymentModelTypeService.getSingleItContractGlobalPaymentModelTypesInternalV2GetGlobalPaymentModelTypes();
+          this.paymentModelTypeService.getManyItContractGlobalPaymentModelTypesInternalV2GetGlobalPaymentModelTypes();
 
       case 'it-contract-agreement-element-types':
         return () =>
-          this.agreementElementTypeService.getSingleItContractGlobalAgreementElementTypesInternalV2GetGlobalAgreementElementTypes();
+          this.agreementElementTypeService.getManyItContractGlobalAgreementElementTypesInternalV2GetGlobalAgreementElementTypes();
 
       case 'it-contract-extend-types':
         return () =>
-          this.optionExtendTypeService.getSingleItContractGlobalOptionExtendTypesInternalV2GetGlobalOptionExtendTypes();
+          this.optionExtendTypeService.getManyItContractGlobalOptionExtendTypesInternalV2GetGlobalOptionExtendTypes();
 
       case 'it-contract-payment-frequency-types':
         return () =>
-          this.paymentFrequencyTypeService.getSingleItContractGlobalPaymentFrequencyTypesInternalV2GetGlobalPaymentFreqencyTypes();
+          this.paymentFrequencyTypeService.getManyItContractGlobalPaymentFrequencyTypesInternalV2GetGlobalPaymentFreqencyTypes();
 
       case 'it-contract-price-regulation-types':
         return () =>
-          this.priceRegulationTypeService.getSingleItContractGlobalPriceRegulationTypesInternalV2GetGlobalPriceRegulationTypes();
+          this.priceRegulationTypeService.getManyItContractGlobalPriceRegulationTypesInternalV2GetGlobalPriceRegulationTypes();
 
       case 'it-contract_procurement-strategy-type':
         return () =>
-          this.procurementStrategyTypeService.getSingleItContractGlobalProcurementStrategyTypesInternalV2GetGlobalProcurementStrategyTypes();
+          this.procurementStrategyTypeService.getManyItContractGlobalProcurementStrategyTypesInternalV2GetGlobalProcurementStrategyTypes();
 
       case 'it-contract-termination-period-types':
         return () =>
-          this.terminationDeadlineTypeService.getSingleItContractGlobalTerminationDeadlineTypesInternalV2GetGlobalTerminationDeadlineTypes();
+          this.terminationDeadlineTypeService.getManyItContractGlobalTerminationDeadlineTypesInternalV2GetGlobalTerminationDeadlineTypes();
 
       case 'it-contract_criticality-type':
         return () =>
-          this.criticalityTypeService.getSingleItContractGlobalCriticalityTypesInternalV2GetGlobalCriticalityTypes();
+          this.criticalityTypeService.getManyItContractGlobalCriticalityTypesInternalV2GetGlobalCriticalityTypes();
 
       //Data processing regular types
       case 'data-processing-basis-for-transfer-types':
         return () =>
-          this.basisForTransferService.getSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2GetGlobalDataProcessingBasisForTransferOptions();
+          this.basisForTransferService.getManyDprGlobalDataProcessingBasisForTransferOptionsInternalV2GetGlobalDataProcessingBasisForTransferOptions();
       case 'data-processing-oversight-option-types':
         return () =>
-          this.oversightOptionService.getSingleDprGlobalDataProcessingOversightOptionsInternalV2GetGlobalDataProcessingOversightOptions();
+          this.oversightOptionService.getManyDprGlobalDataProcessingOversightOptionsInternalV2GetGlobalDataProcessingOversightOptions();
       case 'data-processing-data-responsible-types':
         return () =>
-          this.dataResponsibleService.getSingleDprGlobalDataProcessingDataResponsibleOptionsInternalV2GetGlobalDataProcessingDataResponsibleOptions();
+          this.dataResponsibleService.getManyDprGlobalDataProcessingDataResponsibleOptionsInternalV2GetGlobalDataProcessingDataResponsibleOptions();
       case 'data-processing-country-types':
         return () =>
-          this.countryService.getSingleDprGlobalDataProcessingCountryOptionsInternalV2GetGlobalDataProcessingCountryOptions();
+          this.countryService.getManyDprGlobalDataProcessingCountryOptionsInternalV2GetGlobalDataProcessingCountryOptions();
 
       //Organization types
       case 'organization_country-code':
-        return () => this.countryCodeService.getSingleOrganizationGlobalCountryCodesInternalV2GetCountryCodes();
+        return () => this.countryCodeService.getManyOrganizationGlobalCountryCodesInternalV2GetCountryCodes();
 
       //Role types
       case 'it-system-usage':
-        return () => this.itSystemRoleService.getSingleItSystemGlobalRoleOptionTypesInternalV2GetItSystemRoles();
+        return () => this.itSystemRoleService.getManyItSystemGlobalRoleOptionTypesInternalV2GetItSystemRoles();
       case 'it-contract':
         return () =>
-          this.itContractRoleService.getSingleItContractGlobalItContractRoleTypesInternalV2GetGlobalItContractRoleTypes();
+          this.itContractRoleService.getManyItContractGlobalItContractRoleTypesInternalV2GetGlobalItContractRoleTypes();
       case 'data-processing':
-        return () => this.dprRoleService.getSingleDprGlobalRoleOptionTypesInternalV2GetDprRoles();
+        return () => this.dprRoleService.getManyDprGlobalRoleOptionTypesInternalV2GetDprRoles();
       case 'organization-unit':
         return () =>
-          this.orgUnitRoleService.getSingleOrganizationUnitGlobalRoleOptionTypesInternalV2GetOrganizationUnitRoles();
+          this.orgUnitRoleService.getManyOrganizationUnitGlobalRoleOptionTypesInternalV2GetOrganizationUnitRoles();
       default:
         throw new Error(`Get operation is not supported for ${optionType}`);
     }
@@ -324,7 +324,7 @@ export class GlobalAdminOptionTypeService {
           });
       case 'it-system-usage_system-usage-criticality-level':
         return (optionUuid: string, dto: APIGlobalRoleOptionUpdateRequestDTO) =>
-          this.systemUsageCriticalityLevelService.patchSingleItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2PatchSystemUsageCriticalityLevelType(
+          this.systemUsageCriticalityLevelService.patchManyItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2PatchSystemUsageCriticalityLevelType(
             {
               optionUuid,
               aPIGlobalRegularOptionUpdateRequestDTO: dto,
@@ -332,7 +332,7 @@ export class GlobalAdminOptionTypeService {
           );
       case 'it-system-usage_technical-system-type':
         return (optionUuid: string, dto: APIGlobalRoleOptionUpdateRequestDTO) =>
-          this.technicalSystemTypeService.patchSingleItSystemGlobalTechnicalSystemTypesInternalV2PatchTechnicalSystemType(
+          this.technicalSystemTypeService.patchManyItSystemGlobalTechnicalSystemTypesInternalV2PatchTechnicalSystemType(
             {
               optionUuid,
               aPIGlobalRegularOptionUpdateRequestDTO: dto,
@@ -576,14 +576,14 @@ export class GlobalAdminOptionTypeService {
 
       case 'it-system-usage_system-usage-criticality-level':
         return (request: APIGlobalRoleOptionCreateRequestDTO) =>
-          this.systemUsageCriticalityLevelService.postSingleItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2CreateSystemUsageCriticalityLevelType(
+          this.systemUsageCriticalityLevelService.postManyItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2CreateSystemUsageCriticalityLevelType(
             {
               aPIGlobalRegularOptionCreateRequestDTO: request,
             },
           );
       case 'it-system-usage_technical-system-type':
         return (request: APIGlobalRoleOptionCreateRequestDTO) =>
-          this.technicalSystemTypeService.postSingleItSystemGlobalTechnicalSystemTypesInternalV2CreateTechnicalSystemType(
+          this.technicalSystemTypeService.postManyItSystemGlobalTechnicalSystemTypesInternalV2CreateTechnicalSystemType(
             {
               aPIGlobalRegularOptionCreateRequestDTO: request,
             },

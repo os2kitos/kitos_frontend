@@ -21,6 +21,8 @@ import { Observable }                                        from 'rxjs';
 // @ts-ignore
 import { APIGlobalRegularOptionCreateRequestDTO } from '../model/aPIGlobalRegularOptionCreateRequestDTO';
 // @ts-ignore
+import { APIGlobalRegularOptionResponseDTO } from '../model/aPIGlobalRegularOptionResponseDTO';
+// @ts-ignore
 import { APIGlobalRegularOptionUpdateRequestDTO } from '../model/aPIGlobalRegularOptionUpdateRequestDTO';
 
 // @ts-ignore
@@ -106,10 +108,10 @@ export class ItContractGlobalPurchaseFormTypesInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItContractGlobalPurchaseFormTypesInternalV2GetGlobalPurchaseFormTypes(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleItContractGlobalPurchaseFormTypesInternalV2GetGlobalPurchaseFormTypes(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleItContractGlobalPurchaseFormTypesInternalV2GetGlobalPurchaseFormTypes(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleItContractGlobalPurchaseFormTypesInternalV2GetGlobalPurchaseFormTypes(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyItContractGlobalPurchaseFormTypesInternalV2GetGlobalPurchaseFormTypes(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIGlobalRegularOptionResponseDTO>>;
+    public getManyItContractGlobalPurchaseFormTypesInternalV2GetGlobalPurchaseFormTypes(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIGlobalRegularOptionResponseDTO>>>;
+    public getManyItContractGlobalPurchaseFormTypesInternalV2GetGlobalPurchaseFormTypes(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIGlobalRegularOptionResponseDTO>>>;
+    public getManyItContractGlobalPurchaseFormTypesInternalV2GetGlobalPurchaseFormTypes(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -150,7 +152,7 @@ export class ItContractGlobalPurchaseFormTypesInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/it-contract/global-option-types/purchase-form-types`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<Array<APIGlobalRegularOptionResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -167,9 +169,9 @@ export class ItContractGlobalPurchaseFormTypesInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleItContractGlobalPurchaseFormTypesInternalV2PatchGlobalPurchaseFormType(requestParameters: PatchSingleItContractGlobalPurchaseFormTypesInternalV2PatchGlobalPurchaseFormTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public patchSingleItContractGlobalPurchaseFormTypesInternalV2PatchGlobalPurchaseFormType(requestParameters: PatchSingleItContractGlobalPurchaseFormTypesInternalV2PatchGlobalPurchaseFormTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public patchSingleItContractGlobalPurchaseFormTypesInternalV2PatchGlobalPurchaseFormType(requestParameters: PatchSingleItContractGlobalPurchaseFormTypesInternalV2PatchGlobalPurchaseFormTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public patchSingleItContractGlobalPurchaseFormTypesInternalV2PatchGlobalPurchaseFormType(requestParameters: PatchSingleItContractGlobalPurchaseFormTypesInternalV2PatchGlobalPurchaseFormTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRegularOptionResponseDTO>;
+    public patchSingleItContractGlobalPurchaseFormTypesInternalV2PatchGlobalPurchaseFormType(requestParameters: PatchSingleItContractGlobalPurchaseFormTypesInternalV2PatchGlobalPurchaseFormTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRegularOptionResponseDTO>>;
+    public patchSingleItContractGlobalPurchaseFormTypesInternalV2PatchGlobalPurchaseFormType(requestParameters: PatchSingleItContractGlobalPurchaseFormTypesInternalV2PatchGlobalPurchaseFormTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRegularOptionResponseDTO>>;
     public patchSingleItContractGlobalPurchaseFormTypesInternalV2PatchGlobalPurchaseFormType(requestParameters: PatchSingleItContractGlobalPurchaseFormTypesInternalV2PatchGlobalPurchaseFormTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
@@ -226,7 +228,7 @@ export class ItContractGlobalPurchaseFormTypesInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/it-contract/global-option-types/purchase-form-types/${this.configuration.encodeParam({name: "optionUuid", value: optionUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
-        return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APIGlobalRegularOptionResponseDTO>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPIGlobalRegularOptionUpdateRequestDTO,
@@ -244,9 +246,9 @@ export class ItContractGlobalPurchaseFormTypesInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleItContractGlobalPurchaseFormTypesInternalV2CreateGlobalPurchaseFormType(requestParameters: PostSingleItContractGlobalPurchaseFormTypesInternalV2CreateGlobalPurchaseFormTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public postSingleItContractGlobalPurchaseFormTypesInternalV2CreateGlobalPurchaseFormType(requestParameters: PostSingleItContractGlobalPurchaseFormTypesInternalV2CreateGlobalPurchaseFormTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public postSingleItContractGlobalPurchaseFormTypesInternalV2CreateGlobalPurchaseFormType(requestParameters: PostSingleItContractGlobalPurchaseFormTypesInternalV2CreateGlobalPurchaseFormTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public postSingleItContractGlobalPurchaseFormTypesInternalV2CreateGlobalPurchaseFormType(requestParameters: PostSingleItContractGlobalPurchaseFormTypesInternalV2CreateGlobalPurchaseFormTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRegularOptionResponseDTO>;
+    public postSingleItContractGlobalPurchaseFormTypesInternalV2CreateGlobalPurchaseFormType(requestParameters: PostSingleItContractGlobalPurchaseFormTypesInternalV2CreateGlobalPurchaseFormTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRegularOptionResponseDTO>>;
+    public postSingleItContractGlobalPurchaseFormTypesInternalV2CreateGlobalPurchaseFormType(requestParameters: PostSingleItContractGlobalPurchaseFormTypesInternalV2CreateGlobalPurchaseFormTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRegularOptionResponseDTO>>;
     public postSingleItContractGlobalPurchaseFormTypesInternalV2CreateGlobalPurchaseFormType(requestParameters: PostSingleItContractGlobalPurchaseFormTypesInternalV2CreateGlobalPurchaseFormTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const aPIGlobalRegularOptionCreateRequestDTO = requestParameters.aPIGlobalRegularOptionCreateRequestDTO;
 
@@ -298,7 +300,7 @@ export class ItContractGlobalPurchaseFormTypesInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/it-contract/global-option-types/purchase-form-types`;
-        return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APIGlobalRegularOptionResponseDTO>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPIGlobalRegularOptionCreateRequestDTO,

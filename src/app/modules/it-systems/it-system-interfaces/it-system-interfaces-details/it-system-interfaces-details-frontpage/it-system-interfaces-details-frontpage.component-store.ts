@@ -32,7 +32,7 @@ export class ITSystemInterfacesDetailsFrontpageComponentStore extends ComponentS
       mergeMap((searchTerm) => {
         this.updateIsLoading(true);
         return this.apiItSystemInternalService
-          .getSingleItSystemInternalV2GetItSystems({
+          .getManyItSystemInternalV2GetItSystems({
             nameContains: searchTerm,
             includeDeactivated: false,
           })

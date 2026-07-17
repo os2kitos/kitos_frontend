@@ -39,7 +39,7 @@ export class ITSystemCatalogComponentStore extends ComponentStore<State> {
           concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
           mergeMap(([itSystemUuid, organizationUuid]) =>
             this.apiItSystemUsageService
-              .getSingleItSystemUsageV2GetItSystemUsages({
+              .getManyItSystemUsageV2GetItSystemUsages({
                 systemUuid: itSystemUuid,
                 organizationUuid,
               })

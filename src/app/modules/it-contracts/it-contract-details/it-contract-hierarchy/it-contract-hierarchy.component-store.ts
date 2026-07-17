@@ -56,7 +56,7 @@ export class ItContractHierarchyComponentStore extends ComponentStore<State> {
     itContractUuid$.pipe(
       mergeMap((uuid) => {
         this.updateIsLoading(true);
-        return this.apiItContractInternalService.getSingleItContractInternalV2GetHierarchy({ contractUuid: uuid }).pipe(
+        return this.apiItContractInternalService.getManyItContractInternalV2GetHierarchy({ contractUuid: uuid }).pipe(
           tapResponse({
             next: (hierarchy: any) => this.updateHierarchy(hierarchy),
             error: (e) => console.error(e),
@@ -72,7 +72,7 @@ export class ItContractHierarchyComponentStore extends ComponentStore<State> {
       mergeMap((uuid) => {
         this.updateIsLoading(true);
         return this.apiItContractInternalService
-          .getSingleItContractInternalV2GetSubHierarchy({ contractUuid: uuid })
+          .getManyItContractInternalV2GetSubHierarchy({ contractUuid: uuid })
           .pipe(
             tapResponse({
               next: (hierarchy) => this.updateSubHierarchy(hierarchy),

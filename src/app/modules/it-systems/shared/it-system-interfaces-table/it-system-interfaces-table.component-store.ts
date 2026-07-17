@@ -46,7 +46,7 @@ export class ItSystemInterfacesTableComponentStore extends ComponentStore<State>
       mergeMap(([exposedBySystemUuid, organizationUuid]) => {
         this.updateItInterfacesIsLoading(true);
         return this.apiInterfaceService
-          .getSingleItInterfaceV2GetItInterfaces({
+          .getManyItInterfaceV2GetItInterfaces({
             exposedBySystemUuid: exposedBySystemUuid,
             usedInOrganizationUuid: organizationUuid,
             includeDeactivated: true,

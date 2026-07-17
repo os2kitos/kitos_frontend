@@ -46,7 +46,7 @@ import { EditOrganizationDialogComponent } from '../organizations-dialogs/edit-o
 })
 export class GlobalAdminOrganizationsGridComponent extends BaseOverviewComponent implements OnInit {
   private readonly sectionName: string = ORGANIZATION_SECTION_NAME;
-  public readonly disabledSupplierFieldTooltip = $localize`Kun organisationer af typen "Virksomhed" kan være ISMS leverandører.`;
+  public readonly disabledSupplierFieldTooltip = $localize`Kun organisationer af typen "Virksomhed" kan være ISMS ansvarlige.`;
 
   public readonly globalAdminEntityType: RegistrationEntityTypes = 'global-admin-organization';
   public readonly isLoading$ = this.store.select(selectOrganizationGridLoading);
@@ -83,7 +83,7 @@ export class GlobalAdminOrganizationsGridComponent extends BaseOverviewComponent
     },
     {
       field: 'IsSupplier',
-      title: $localize`ISMS leverandør`,
+      title: $localize`ISMS ansvarlig`,
       section: this.sectionName,
       hidden: false,
       style: 'boolean',

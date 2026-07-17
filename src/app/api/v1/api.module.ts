@@ -8,6 +8,7 @@ import { DataProcessingRegistrationReadModelsService } from './api/dataProcessin
 import { ExcelService } from './api/excel.service';
 import { HealthCheckService } from './api/healthCheck.service';
 import { ItContractOverviewReadModelsService } from './api/itContractOverviewReadModels.service';
+import { ItContractSupplierOverviewReadModelsService } from './api/itContractSupplierOverviewReadModels.service';
 import { ItSystemUsageOptionsService } from './api/itSystemUsageOptions.service';
 import { ItSystemUsageOverviewReadModelsService } from './api/itSystemUsageOverviewReadModels.service';
 import { MetadataService } from './api/metadata.service';

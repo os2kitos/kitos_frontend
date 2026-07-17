@@ -19,6 +19,8 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
+import { APIPasswordResetResponseDTO } from '../model/aPIPasswordResetResponseDTO';
+// @ts-ignore
 import { APIRequestPasswordResetRequestDTO } from '../model/aPIRequestPasswordResetRequestDTO';
 // @ts-ignore
 import { APIResetPasswordRequestDTO } from '../model/aPIResetPasswordRequestDTO';
@@ -111,9 +113,9 @@ export class PasswordResetInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSinglePasswordResetInternalV2GetPasswordReset(requestParameters: GetSinglePasswordResetInternalV2GetPasswordResetRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSinglePasswordResetInternalV2GetPasswordReset(requestParameters: GetSinglePasswordResetInternalV2GetPasswordResetRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSinglePasswordResetInternalV2GetPasswordReset(requestParameters: GetSinglePasswordResetInternalV2GetPasswordResetRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public getSinglePasswordResetInternalV2GetPasswordReset(requestParameters: GetSinglePasswordResetInternalV2GetPasswordResetRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIPasswordResetResponseDTO>;
+    public getSinglePasswordResetInternalV2GetPasswordReset(requestParameters: GetSinglePasswordResetInternalV2GetPasswordResetRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIPasswordResetResponseDTO>>;
+    public getSinglePasswordResetInternalV2GetPasswordReset(requestParameters: GetSinglePasswordResetInternalV2GetPasswordResetRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIPasswordResetResponseDTO>>;
     public getSinglePasswordResetInternalV2GetPasswordReset(requestParameters: GetSinglePasswordResetInternalV2GetPasswordResetRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const requestId = requestParameters.requestId;
         if (requestId === null || requestId === undefined) {
@@ -159,7 +161,7 @@ export class PasswordResetInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/users/password-reset/${this.configuration.encodeParam({name: "requestId", value: requestId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APIPasswordResetResponseDTO>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,

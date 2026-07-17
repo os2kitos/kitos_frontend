@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { NotificationV2Service } from 'src/app/api/v2';
-import { UserNotificationActions } from './actions';
-import { catchError, filter, map, of, switchMap } from 'rxjs';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
-import { selectOrganizationUuid } from '../user-store/selectors';
+import { catchError, filter, map, of, switchMap } from 'rxjs';
+import { NotificationV2Service } from 'src/app/api/v2';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
-import { adaptUserNotification } from './state';
+import { selectOrganizationUuid } from '../user-store/selectors';
+import { UserNotificationActions } from './actions';
 import { selectHasValidCacheForResourceType } from './selectors';
+import { adaptUserNotification } from './state';
 
 @Injectable()
 export class UserNotificationsEffects {
@@ -28,7 +28,7 @@ export class UserNotificationsEffects {
       filter(([, , hasValidCache]) => !hasValidCache),
       switchMap(([{ ownerResourceType }, organizationUuid]) =>
         this.notificationService
-          .getSingleNotificationV2GetNotifications({ ownerResourceType, organizationUuid, onlyActive: true })
+          .getManyNotificationV2GetNotifications({ ownerResourceType, organizationUuid, onlyActive: true })
           .pipe(
             map((notifications) =>
               UserNotificationActions.getNotificationsSuccess(

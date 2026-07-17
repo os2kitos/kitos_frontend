@@ -4,9 +4,11 @@ export const CATALOG_COLUMNS_ID = 'it-system-catalog-grid-columns';
 export const USAGE_COLUMNS_ID = 'it-system-usage-grid-columns';
 export const DATA_PROCESSING_COLUMNS_ID = 'data-processing-grid-columns';
 export const CONTRACT_COLUMNS_ID = 'it-contract-grid-columns';
+export const CONTRACT_SUPPLIERS_COLUMNS_ID = 'it-contract-supplier-grid-columns';
 export const USAGE_ARCHIVE_COLUMNS_ID = 'it-system-usage-archive-grid-columns';
 
 export const CONTRACT_SECTION_NAME = $localize`IT Kontrakt`;
+export const CONTRACT_SUPPLIERS_SECTION_NAME = $localize`IT Kontraktleverandører`;
 export const CATALOG_SECTION_NAME = $localize`IT Systemer`;
 export const USAGE_SECTION_NAME = $localize`IT Systemer`;
 export const INTERFACE_SECTION_NAME = $localize`Snitflade`;

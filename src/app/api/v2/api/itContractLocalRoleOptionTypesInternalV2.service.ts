@@ -21,6 +21,8 @@ import { Observable }                                        from 'rxjs';
 // @ts-ignore
 import { APILocalOptionCreateRequestDTO } from '../model/aPILocalOptionCreateRequestDTO';
 // @ts-ignore
+import { APILocalRoleOptionResponseDTO } from '../model/aPILocalRoleOptionResponseDTO';
+// @ts-ignore
 import { APILocalRoleOptionUpdateRequestDTO } from '../model/aPILocalRoleOptionUpdateRequestDTO';
 
 // @ts-ignore
@@ -33,13 +35,13 @@ export interface DeleteSingleItContractLocalRoleOptionTypesInternalV2DeleteLocal
     optionUuid: string;
 }
 
+export interface GetManyItContractLocalRoleOptionTypesInternalV2GetLocalItContractRolesRequestParams {
+    organizationUuid: string;
+}
+
 export interface GetSingleItContractLocalRoleOptionTypesInternalV2GetLocalItContractRoleRequestParams {
     organizationUuid: string;
     optionUuid: string;
-}
-
-export interface GetSingleItContractLocalRoleOptionTypesInternalV2GetLocalItContractRolesRequestParams {
-    organizationUuid: string;
 }
 
 export interface PatchSingleItContractLocalRoleOptionTypesInternalV2PatchLocalItContractRoleRequestParams {
@@ -191,9 +193,74 @@ export class ItContractLocalRoleOptionTypesInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItContractLocalRoleOptionTypesInternalV2GetLocalItContractRole(requestParameters: GetSingleItContractLocalRoleOptionTypesInternalV2GetLocalItContractRoleRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleItContractLocalRoleOptionTypesInternalV2GetLocalItContractRole(requestParameters: GetSingleItContractLocalRoleOptionTypesInternalV2GetLocalItContractRoleRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleItContractLocalRoleOptionTypesInternalV2GetLocalItContractRole(requestParameters: GetSingleItContractLocalRoleOptionTypesInternalV2GetLocalItContractRoleRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public getManyItContractLocalRoleOptionTypesInternalV2GetLocalItContractRoles(requestParameters: GetManyItContractLocalRoleOptionTypesInternalV2GetLocalItContractRolesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APILocalRoleOptionResponseDTO>>;
+    public getManyItContractLocalRoleOptionTypesInternalV2GetLocalItContractRoles(requestParameters: GetManyItContractLocalRoleOptionTypesInternalV2GetLocalItContractRolesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APILocalRoleOptionResponseDTO>>>;
+    public getManyItContractLocalRoleOptionTypesInternalV2GetLocalItContractRoles(requestParameters: GetManyItContractLocalRoleOptionTypesInternalV2GetLocalItContractRolesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APILocalRoleOptionResponseDTO>>>;
+    public getManyItContractLocalRoleOptionTypesInternalV2GetLocalItContractRoles(requestParameters: GetManyItContractLocalRoleOptionTypesInternalV2GetLocalItContractRolesRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        const organizationUuid = requestParameters.organizationUuid;
+        if (organizationUuid === null || organizationUuid === undefined) {
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyItContractLocalRoleOptionTypesInternalV2GetLocalItContractRoles.');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarCredential: string | undefined;
+        // authentication (Bearer) required
+        localVarCredential = this.configuration.lookupCredential('Bearer');
+        if (localVarCredential) {
+            localVarHeaders = localVarHeaders.set('Authorization', 'Bearer ' + localVarCredential);
+        }
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/v2/internal/it-contracts/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/local-option-types/it-contract-roles`;
+        return this.httpClient.request<Array<APILocalRoleOptionResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * @param requestParameters
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getSingleItContractLocalRoleOptionTypesInternalV2GetLocalItContractRole(requestParameters: GetSingleItContractLocalRoleOptionTypesInternalV2GetLocalItContractRoleRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRoleOptionResponseDTO>;
+    public getSingleItContractLocalRoleOptionTypesInternalV2GetLocalItContractRole(requestParameters: GetSingleItContractLocalRoleOptionTypesInternalV2GetLocalItContractRoleRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRoleOptionResponseDTO>>;
+    public getSingleItContractLocalRoleOptionTypesInternalV2GetLocalItContractRole(requestParameters: GetSingleItContractLocalRoleOptionTypesInternalV2GetLocalItContractRoleRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRoleOptionResponseDTO>>;
     public getSingleItContractLocalRoleOptionTypesInternalV2GetLocalItContractRole(requestParameters: GetSingleItContractLocalRoleOptionTypesInternalV2GetLocalItContractRoleRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
@@ -243,7 +310,7 @@ export class ItContractLocalRoleOptionTypesInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/it-contracts/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/local-option-types/it-contract-roles/${this.configuration.encodeParam({name: "optionUuid", value: optionUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APILocalRoleOptionResponseDTO>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -260,74 +327,9 @@ export class ItContractLocalRoleOptionTypesInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItContractLocalRoleOptionTypesInternalV2GetLocalItContractRoles(requestParameters: GetSingleItContractLocalRoleOptionTypesInternalV2GetLocalItContractRolesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleItContractLocalRoleOptionTypesInternalV2GetLocalItContractRoles(requestParameters: GetSingleItContractLocalRoleOptionTypesInternalV2GetLocalItContractRolesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleItContractLocalRoleOptionTypesInternalV2GetLocalItContractRoles(requestParameters: GetSingleItContractLocalRoleOptionTypesInternalV2GetLocalItContractRolesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleItContractLocalRoleOptionTypesInternalV2GetLocalItContractRoles(requestParameters: GetSingleItContractLocalRoleOptionTypesInternalV2GetLocalItContractRolesRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
-        const organizationUuid = requestParameters.organizationUuid;
-        if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleItContractLocalRoleOptionTypesInternalV2GetLocalItContractRoles.');
-        }
-
-        let localVarHeaders = this.defaultHeaders;
-
-        let localVarCredential: string | undefined;
-        // authentication (Bearer) required
-        localVarCredential = this.configuration.lookupCredential('Bearer');
-        if (localVarCredential) {
-            localVarHeaders = localVarHeaders.set('Authorization', 'Bearer ' + localVarCredential);
-        }
-
-        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
-        if (localVarHttpHeaderAcceptSelected === undefined) {
-            // to determine the Accept header
-            const httpHeaderAccepts: string[] = [
-                'application/json'
-            ];
-            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        }
-        if (localVarHttpHeaderAcceptSelected !== undefined) {
-            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
-        }
-
-        let localVarHttpContext: HttpContext | undefined = options && options.context;
-        if (localVarHttpContext === undefined) {
-            localVarHttpContext = new HttpContext();
-        }
-
-
-        let responseType_: 'text' | 'json' | 'blob' = 'json';
-        if (localVarHttpHeaderAcceptSelected) {
-            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
-                responseType_ = 'text';
-            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
-                responseType_ = 'json';
-            } else {
-                responseType_ = 'blob';
-            }
-        }
-
-        let localVarPath = `/api/v2/internal/it-contracts/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/local-option-types/it-contract-roles`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
-            {
-                context: localVarHttpContext,
-                responseType: <any>responseType_,
-                withCredentials: this.configuration.withCredentials,
-                headers: localVarHeaders,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * @param requestParameters
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public patchSingleItContractLocalRoleOptionTypesInternalV2PatchLocalItContractRole(requestParameters: PatchSingleItContractLocalRoleOptionTypesInternalV2PatchLocalItContractRoleRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public patchSingleItContractLocalRoleOptionTypesInternalV2PatchLocalItContractRole(requestParameters: PatchSingleItContractLocalRoleOptionTypesInternalV2PatchLocalItContractRoleRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public patchSingleItContractLocalRoleOptionTypesInternalV2PatchLocalItContractRole(requestParameters: PatchSingleItContractLocalRoleOptionTypesInternalV2PatchLocalItContractRoleRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public patchSingleItContractLocalRoleOptionTypesInternalV2PatchLocalItContractRole(requestParameters: PatchSingleItContractLocalRoleOptionTypesInternalV2PatchLocalItContractRoleRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRoleOptionResponseDTO>;
+    public patchSingleItContractLocalRoleOptionTypesInternalV2PatchLocalItContractRole(requestParameters: PatchSingleItContractLocalRoleOptionTypesInternalV2PatchLocalItContractRoleRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRoleOptionResponseDTO>>;
+    public patchSingleItContractLocalRoleOptionTypesInternalV2PatchLocalItContractRole(requestParameters: PatchSingleItContractLocalRoleOptionTypesInternalV2PatchLocalItContractRoleRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRoleOptionResponseDTO>>;
     public patchSingleItContractLocalRoleOptionTypesInternalV2PatchLocalItContractRole(requestParameters: PatchSingleItContractLocalRoleOptionTypesInternalV2PatchLocalItContractRoleRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
@@ -388,7 +390,7 @@ export class ItContractLocalRoleOptionTypesInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/it-contracts/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/local-option-types/it-contract-roles/${this.configuration.encodeParam({name: "optionUuid", value: optionUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
-        return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APILocalRoleOptionResponseDTO>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPILocalRoleOptionUpdateRequestDTO,
@@ -406,9 +408,9 @@ export class ItContractLocalRoleOptionTypesInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleItContractLocalRoleOptionTypesInternalV2CreateLocalItContractRole(requestParameters: PostSingleItContractLocalRoleOptionTypesInternalV2CreateLocalItContractRoleRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public postSingleItContractLocalRoleOptionTypesInternalV2CreateLocalItContractRole(requestParameters: PostSingleItContractLocalRoleOptionTypesInternalV2CreateLocalItContractRoleRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public postSingleItContractLocalRoleOptionTypesInternalV2CreateLocalItContractRole(requestParameters: PostSingleItContractLocalRoleOptionTypesInternalV2CreateLocalItContractRoleRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public postSingleItContractLocalRoleOptionTypesInternalV2CreateLocalItContractRole(requestParameters: PostSingleItContractLocalRoleOptionTypesInternalV2CreateLocalItContractRoleRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRoleOptionResponseDTO>;
+    public postSingleItContractLocalRoleOptionTypesInternalV2CreateLocalItContractRole(requestParameters: PostSingleItContractLocalRoleOptionTypesInternalV2CreateLocalItContractRoleRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRoleOptionResponseDTO>>;
+    public postSingleItContractLocalRoleOptionTypesInternalV2CreateLocalItContractRole(requestParameters: PostSingleItContractLocalRoleOptionTypesInternalV2CreateLocalItContractRoleRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRoleOptionResponseDTO>>;
     public postSingleItContractLocalRoleOptionTypesInternalV2CreateLocalItContractRole(requestParameters: PostSingleItContractLocalRoleOptionTypesInternalV2CreateLocalItContractRoleRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
@@ -464,7 +466,7 @@ export class ItContractLocalRoleOptionTypesInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/it-contracts/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/local-option-types/it-contract-roles`;
-        return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APILocalRoleOptionResponseDTO>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPILocalOptionCreateRequestDTO,

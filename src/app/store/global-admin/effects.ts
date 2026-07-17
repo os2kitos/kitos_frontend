@@ -18,7 +18,7 @@ export class GlobalAdminEffects {
     return this.actions$.pipe(
       ofType(GlobalAdminActions.getGlobalAdmins),
       switchMap(() => {
-        return this.globalUserService.getSingleGlobalUserInternalV2GetGlobalAdmins().pipe(
+        return this.globalUserService.getManyGlobalUserInternalV2GetGlobalAdmins().pipe(
           mapArray(toShallowUser),
           map((admins) => GlobalAdminActions.getGlobalAdminsSuccess(admins)),
           catchError(() => of(GlobalAdminActions.getGlobalAdminsError())),

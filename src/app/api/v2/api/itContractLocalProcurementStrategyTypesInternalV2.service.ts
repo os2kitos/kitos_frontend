@@ -21,6 +21,8 @@ import { Observable }                                        from 'rxjs';
 // @ts-ignore
 import { APILocalOptionCreateRequestDTO } from '../model/aPILocalOptionCreateRequestDTO';
 // @ts-ignore
+import { APILocalRegularOptionResponseDTO } from '../model/aPILocalRegularOptionResponseDTO';
+// @ts-ignore
 import { APILocalRegularOptionUpdateRequestDTO } from '../model/aPILocalRegularOptionUpdateRequestDTO';
 
 // @ts-ignore
@@ -33,13 +35,13 @@ export interface DeleteSingleItContractLocalProcurementStrategyTypesInternalV2De
     optionUuid: string;
 }
 
+export interface GetManyItContractLocalProcurementStrategyTypesInternalV2GetLocalProcurementStrategyTypesRequestParams {
+    organizationUuid: string;
+}
+
 export interface GetSingleItContractLocalProcurementStrategyTypesInternalV2GetLocalProcurementStrategyTypeByOptionIdRequestParams {
     organizationUuid: string;
     optionUuid: string;
-}
-
-export interface GetSingleItContractLocalProcurementStrategyTypesInternalV2GetLocalProcurementStrategyTypesRequestParams {
-    organizationUuid: string;
 }
 
 export interface PatchSingleItContractLocalProcurementStrategyTypesInternalV2PatchLocalProcurementStrategyTypeRequestParams {
@@ -191,9 +193,74 @@ export class ItContractLocalProcurementStrategyTypesInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItContractLocalProcurementStrategyTypesInternalV2GetLocalProcurementStrategyTypeByOptionId(requestParameters: GetSingleItContractLocalProcurementStrategyTypesInternalV2GetLocalProcurementStrategyTypeByOptionIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleItContractLocalProcurementStrategyTypesInternalV2GetLocalProcurementStrategyTypeByOptionId(requestParameters: GetSingleItContractLocalProcurementStrategyTypesInternalV2GetLocalProcurementStrategyTypeByOptionIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleItContractLocalProcurementStrategyTypesInternalV2GetLocalProcurementStrategyTypeByOptionId(requestParameters: GetSingleItContractLocalProcurementStrategyTypesInternalV2GetLocalProcurementStrategyTypeByOptionIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public getManyItContractLocalProcurementStrategyTypesInternalV2GetLocalProcurementStrategyTypes(requestParameters: GetManyItContractLocalProcurementStrategyTypesInternalV2GetLocalProcurementStrategyTypesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APILocalRegularOptionResponseDTO>>;
+    public getManyItContractLocalProcurementStrategyTypesInternalV2GetLocalProcurementStrategyTypes(requestParameters: GetManyItContractLocalProcurementStrategyTypesInternalV2GetLocalProcurementStrategyTypesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APILocalRegularOptionResponseDTO>>>;
+    public getManyItContractLocalProcurementStrategyTypesInternalV2GetLocalProcurementStrategyTypes(requestParameters: GetManyItContractLocalProcurementStrategyTypesInternalV2GetLocalProcurementStrategyTypesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APILocalRegularOptionResponseDTO>>>;
+    public getManyItContractLocalProcurementStrategyTypesInternalV2GetLocalProcurementStrategyTypes(requestParameters: GetManyItContractLocalProcurementStrategyTypesInternalV2GetLocalProcurementStrategyTypesRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        const organizationUuid = requestParameters.organizationUuid;
+        if (organizationUuid === null || organizationUuid === undefined) {
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyItContractLocalProcurementStrategyTypesInternalV2GetLocalProcurementStrategyTypes.');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarCredential: string | undefined;
+        // authentication (Bearer) required
+        localVarCredential = this.configuration.lookupCredential('Bearer');
+        if (localVarCredential) {
+            localVarHeaders = localVarHeaders.set('Authorization', 'Bearer ' + localVarCredential);
+        }
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/v2/internal/it-contracts/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/local-option-types/procurement-strategy-types`;
+        return this.httpClient.request<Array<APILocalRegularOptionResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * @param requestParameters
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getSingleItContractLocalProcurementStrategyTypesInternalV2GetLocalProcurementStrategyTypeByOptionId(requestParameters: GetSingleItContractLocalProcurementStrategyTypesInternalV2GetLocalProcurementStrategyTypeByOptionIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
+    public getSingleItContractLocalProcurementStrategyTypesInternalV2GetLocalProcurementStrategyTypeByOptionId(requestParameters: GetSingleItContractLocalProcurementStrategyTypesInternalV2GetLocalProcurementStrategyTypeByOptionIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
+    public getSingleItContractLocalProcurementStrategyTypesInternalV2GetLocalProcurementStrategyTypeByOptionId(requestParameters: GetSingleItContractLocalProcurementStrategyTypesInternalV2GetLocalProcurementStrategyTypeByOptionIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
     public getSingleItContractLocalProcurementStrategyTypesInternalV2GetLocalProcurementStrategyTypeByOptionId(requestParameters: GetSingleItContractLocalProcurementStrategyTypesInternalV2GetLocalProcurementStrategyTypeByOptionIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
@@ -243,7 +310,7 @@ export class ItContractLocalProcurementStrategyTypesInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/it-contracts/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/local-option-types/procurement-strategy-types/${this.configuration.encodeParam({name: "optionUuid", value: optionUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APILocalRegularOptionResponseDTO>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -260,74 +327,9 @@ export class ItContractLocalProcurementStrategyTypesInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItContractLocalProcurementStrategyTypesInternalV2GetLocalProcurementStrategyTypes(requestParameters: GetSingleItContractLocalProcurementStrategyTypesInternalV2GetLocalProcurementStrategyTypesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleItContractLocalProcurementStrategyTypesInternalV2GetLocalProcurementStrategyTypes(requestParameters: GetSingleItContractLocalProcurementStrategyTypesInternalV2GetLocalProcurementStrategyTypesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleItContractLocalProcurementStrategyTypesInternalV2GetLocalProcurementStrategyTypes(requestParameters: GetSingleItContractLocalProcurementStrategyTypesInternalV2GetLocalProcurementStrategyTypesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleItContractLocalProcurementStrategyTypesInternalV2GetLocalProcurementStrategyTypes(requestParameters: GetSingleItContractLocalProcurementStrategyTypesInternalV2GetLocalProcurementStrategyTypesRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
-        const organizationUuid = requestParameters.organizationUuid;
-        if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleItContractLocalProcurementStrategyTypesInternalV2GetLocalProcurementStrategyTypes.');
-        }
-
-        let localVarHeaders = this.defaultHeaders;
-
-        let localVarCredential: string | undefined;
-        // authentication (Bearer) required
-        localVarCredential = this.configuration.lookupCredential('Bearer');
-        if (localVarCredential) {
-            localVarHeaders = localVarHeaders.set('Authorization', 'Bearer ' + localVarCredential);
-        }
-
-        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
-        if (localVarHttpHeaderAcceptSelected === undefined) {
-            // to determine the Accept header
-            const httpHeaderAccepts: string[] = [
-                'application/json'
-            ];
-            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        }
-        if (localVarHttpHeaderAcceptSelected !== undefined) {
-            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
-        }
-
-        let localVarHttpContext: HttpContext | undefined = options && options.context;
-        if (localVarHttpContext === undefined) {
-            localVarHttpContext = new HttpContext();
-        }
-
-
-        let responseType_: 'text' | 'json' | 'blob' = 'json';
-        if (localVarHttpHeaderAcceptSelected) {
-            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
-                responseType_ = 'text';
-            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
-                responseType_ = 'json';
-            } else {
-                responseType_ = 'blob';
-            }
-        }
-
-        let localVarPath = `/api/v2/internal/it-contracts/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/local-option-types/procurement-strategy-types`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
-            {
-                context: localVarHttpContext,
-                responseType: <any>responseType_,
-                withCredentials: this.configuration.withCredentials,
-                headers: localVarHeaders,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * @param requestParameters
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public patchSingleItContractLocalProcurementStrategyTypesInternalV2PatchLocalProcurementStrategyType(requestParameters: PatchSingleItContractLocalProcurementStrategyTypesInternalV2PatchLocalProcurementStrategyTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public patchSingleItContractLocalProcurementStrategyTypesInternalV2PatchLocalProcurementStrategyType(requestParameters: PatchSingleItContractLocalProcurementStrategyTypesInternalV2PatchLocalProcurementStrategyTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public patchSingleItContractLocalProcurementStrategyTypesInternalV2PatchLocalProcurementStrategyType(requestParameters: PatchSingleItContractLocalProcurementStrategyTypesInternalV2PatchLocalProcurementStrategyTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public patchSingleItContractLocalProcurementStrategyTypesInternalV2PatchLocalProcurementStrategyType(requestParameters: PatchSingleItContractLocalProcurementStrategyTypesInternalV2PatchLocalProcurementStrategyTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
+    public patchSingleItContractLocalProcurementStrategyTypesInternalV2PatchLocalProcurementStrategyType(requestParameters: PatchSingleItContractLocalProcurementStrategyTypesInternalV2PatchLocalProcurementStrategyTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
+    public patchSingleItContractLocalProcurementStrategyTypesInternalV2PatchLocalProcurementStrategyType(requestParameters: PatchSingleItContractLocalProcurementStrategyTypesInternalV2PatchLocalProcurementStrategyTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
     public patchSingleItContractLocalProcurementStrategyTypesInternalV2PatchLocalProcurementStrategyType(requestParameters: PatchSingleItContractLocalProcurementStrategyTypesInternalV2PatchLocalProcurementStrategyTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
@@ -388,7 +390,7 @@ export class ItContractLocalProcurementStrategyTypesInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/it-contracts/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/local-option-types/procurement-strategy-types/${this.configuration.encodeParam({name: "optionUuid", value: optionUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
-        return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APILocalRegularOptionResponseDTO>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPILocalRegularOptionUpdateRequestDTO,
@@ -406,9 +408,9 @@ export class ItContractLocalProcurementStrategyTypesInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleItContractLocalProcurementStrategyTypesInternalV2CreateLocalProcurementStrategyType(requestParameters: PostSingleItContractLocalProcurementStrategyTypesInternalV2CreateLocalProcurementStrategyTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public postSingleItContractLocalProcurementStrategyTypesInternalV2CreateLocalProcurementStrategyType(requestParameters: PostSingleItContractLocalProcurementStrategyTypesInternalV2CreateLocalProcurementStrategyTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public postSingleItContractLocalProcurementStrategyTypesInternalV2CreateLocalProcurementStrategyType(requestParameters: PostSingleItContractLocalProcurementStrategyTypesInternalV2CreateLocalProcurementStrategyTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public postSingleItContractLocalProcurementStrategyTypesInternalV2CreateLocalProcurementStrategyType(requestParameters: PostSingleItContractLocalProcurementStrategyTypesInternalV2CreateLocalProcurementStrategyTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
+    public postSingleItContractLocalProcurementStrategyTypesInternalV2CreateLocalProcurementStrategyType(requestParameters: PostSingleItContractLocalProcurementStrategyTypesInternalV2CreateLocalProcurementStrategyTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
+    public postSingleItContractLocalProcurementStrategyTypesInternalV2CreateLocalProcurementStrategyType(requestParameters: PostSingleItContractLocalProcurementStrategyTypesInternalV2CreateLocalProcurementStrategyTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
     public postSingleItContractLocalProcurementStrategyTypesInternalV2CreateLocalProcurementStrategyType(requestParameters: PostSingleItContractLocalProcurementStrategyTypesInternalV2CreateLocalProcurementStrategyTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
@@ -464,7 +466,7 @@ export class ItContractLocalProcurementStrategyTypesInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/it-contracts/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/local-option-types/procurement-strategy-types`;
-        return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APILocalRegularOptionResponseDTO>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPILocalOptionCreateRequestDTO,

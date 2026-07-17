@@ -11,7 +11,7 @@ import { EditUrlSectionComponent } from 'src/app/modules/it-systems/shared/edit-
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { DropdownComponent } from 'src/app/shared/components/dropdowns/dropdown/dropdown.component';
 import { TooltipComponent } from 'src/app/shared/components/tooltip/tooltip.component';
-import { SUPPLIER_DISABLED_MESSAGE } from 'src/app/shared/constants/constants';
+import { ISMS_RESPONSIBLE_DISABLED_MESSAGE } from 'src/app/shared/constants/constants';
 import { optionalNewDate } from 'src/app/shared/helpers/date.helpers';
 import { findDialogInstanceOf } from 'src/app/shared/helpers/dialog.helpers';
 import { dataProcessingFields } from 'src/app/shared/models/field-permissions-blueprints.model';
@@ -51,7 +51,7 @@ import { TextAreaComponent } from '../../../../../../shared/components/textarea/
 export class WriteOversightDateDialogComponent extends BaseComponent implements OnInit {
   @Input() public oversightDate: APIOversightDateDTO | undefined;
 
-  public readonly supplierText = SUPPLIER_DISABLED_MESSAGE;
+  public readonly supplierText = ISMS_RESPONSIBLE_DISABLED_MESSAGE;
 
   public readonly oversightOptions$ = this.store.select(selectDataProcessingOversightOptions).pipe(filterNullish());
 

@@ -101,16 +101,16 @@ export class RoleOptionTypeService implements OnDestroy {
     switch (optionType) {
       case 'it-system-usage':
         return (organizationUuid: string) =>
-          this.systemUsageRoleService.getSingleItSystemUsageRoleTypeV2Get({ organizationUuid });
+          this.systemUsageRoleService.getManyItSystemUsageRoleTypeV2Get({ organizationUuid });
       case 'it-contract':
         return (organizationUuid: string) =>
-          this.contractRolesService.getSingleItContractRoleTypeV2Get({ organizationUuid });
+          this.contractRolesService.getManyItContractRoleTypeV2Get({ organizationUuid });
       case 'data-processing':
         return (organizationUuid: string) =>
-          this.dataprocessingRolesService.getSingleDataProcessingRegistrationRoleTypeV2Get({ organizationUuid });
+          this.dataprocessingRolesService.getManyDataProcessingRegistrationRoleTypeV2Get({ organizationUuid });
       case 'organization-unit':
         return (organizationUuid: string) =>
-          this.organizationUnitRolesService.getSingleOrganizationUnitRoleTypeV2Get({ organizationUuid });
+          this.organizationUnitRolesService.getManyOrganizationUnitRoleTypeV2Get({ organizationUuid });
     }
   }
 
@@ -123,22 +123,22 @@ export class RoleOptionTypeService implements OnDestroy {
     switch (entityType) {
       case 'it-system-usage':
         return (entityUuid: string) =>
-          this.internalUsageService.getSingleItSystemUsageInternalV2GetRoleAssignments({
+          this.internalUsageService.getManyItSystemUsageInternalV2GetRoleAssignments({
             systemUsageUuid: entityUuid,
           });
       case 'it-contract':
         return (entityUuid: string) =>
-          this.contractInternalService.getSingleItContractInternalV2GetAddRoleAssignments({
+          this.contractInternalService.getManyItContractInternalV2GetAddRoleAssignments({
             contractUuid: entityUuid,
           });
       case 'data-processing':
         return (entityUuid: string) =>
-          this.dataprocessingInternalService.getSingleDataProcessingRegistrationInternalV2GetAddRoleAssignments({
+          this.dataprocessingInternalService.getManyDataProcessingRegistrationInternalV2GetAddRoleAssignments({
             dprUuid: entityUuid,
           });
       case 'organization-unit':
         return (entityUuid: string) =>
-          this.organizationUnitInternalService.getSingleOrganizationUnitsInternalV2GetRoleAssignments({
+          this.organizationUnitInternalService.getManyOrganizationUnitsInternalV2GetRoleAssignments({
             organizationUuid,
             organizationUnitUuid: entityUuid,
           });

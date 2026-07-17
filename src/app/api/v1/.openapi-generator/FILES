@@ -9,6 +9,7 @@ api/dataProcessingRegistrationReadModels.service.ts
 api/excel.service.ts
 api/healthCheck.service.ts
 api/itContractOverviewReadModels.service.ts
+api/itContractSupplierOverviewReadModels.service.ts
 api/itSystemUsageOptions.service.ts
 api/itSystemUsageOverviewReadModels.service.ts
 api/metadata.service.ts

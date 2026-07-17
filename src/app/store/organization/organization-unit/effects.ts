@@ -48,7 +48,7 @@ export class OrganizationUnitEffects {
         }
 
         return this.apiOrganizationService
-          .getSingleOrganizationV2GetOrganizationUnits({
+          .getManyOrganizationV2GetOrganizationUnits({
             organizationUuid,
             pageSize: MAX_INTEGER,
           })
@@ -76,7 +76,7 @@ export class OrganizationUnitEffects {
       }),
       switchMap(([{ units, currentPage, pageSize }, organizationUuid]) =>
         this.apiOrganizationService
-          .getSingleOrganizationV2GetOrganizationUnits({
+          .getManyOrganizationV2GetOrganizationUnits({
             organizationUuid,
             page: currentPage,
             pageSize: pageSize,

@@ -21,6 +21,8 @@ import { Observable }                                        from 'rxjs';
 // @ts-ignore
 import { APIGlobalRegularOptionCreateRequestDTO } from '../model/aPIGlobalRegularOptionCreateRequestDTO';
 // @ts-ignore
+import { APIGlobalRegularOptionResponseDTO } from '../model/aPIGlobalRegularOptionResponseDTO';
+// @ts-ignore
 import { APIGlobalRegularOptionUpdateRequestDTO } from '../model/aPIGlobalRegularOptionUpdateRequestDTO';
 
 // @ts-ignore
@@ -28,12 +30,12 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface PatchSingleItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2PatchSystemUsageCriticalityLevelTypeRequestParams {
+export interface PatchManyItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2PatchSystemUsageCriticalityLevelTypeRequestParams {
     optionUuid: string;
     aPIGlobalRegularOptionUpdateRequestDTO?: APIGlobalRegularOptionUpdateRequestDTO;
 }
 
-export interface PostSingleItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2CreateSystemUsageCriticalityLevelTypeRequestParams {
+export interface PostManyItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2CreateSystemUsageCriticalityLevelTypeRequestParams {
     aPIGlobalRegularOptionCreateRequestDTO?: APIGlobalRegularOptionCreateRequestDTO;
 }
 
@@ -106,10 +108,10 @@ export class ItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2GetSystemUsageCriticalityLevelTypes(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2GetSystemUsageCriticalityLevelTypes(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2GetSystemUsageCriticalityLevelTypes(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2GetSystemUsageCriticalityLevelTypes(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2GetSystemUsageCriticalityLevelTypes(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIGlobalRegularOptionResponseDTO>>;
+    public getManyItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2GetSystemUsageCriticalityLevelTypes(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIGlobalRegularOptionResponseDTO>>>;
+    public getManyItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2GetSystemUsageCriticalityLevelTypes(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIGlobalRegularOptionResponseDTO>>>;
+    public getManyItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2GetSystemUsageCriticalityLevelTypes(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -150,7 +152,7 @@ export class ItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/it-systems/global-option-types/system-usage-criticality-level-types`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<Array<APIGlobalRegularOptionResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -167,13 +169,13 @@ export class ItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2PatchSystemUsageCriticalityLevelType(requestParameters: PatchSingleItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2PatchSystemUsageCriticalityLevelTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public patchSingleItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2PatchSystemUsageCriticalityLevelType(requestParameters: PatchSingleItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2PatchSystemUsageCriticalityLevelTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public patchSingleItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2PatchSystemUsageCriticalityLevelType(requestParameters: PatchSingleItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2PatchSystemUsageCriticalityLevelTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
-    public patchSingleItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2PatchSystemUsageCriticalityLevelType(requestParameters: PatchSingleItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2PatchSystemUsageCriticalityLevelTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public patchManyItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2PatchSystemUsageCriticalityLevelType(requestParameters: PatchManyItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2PatchSystemUsageCriticalityLevelTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIGlobalRegularOptionResponseDTO>>;
+    public patchManyItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2PatchSystemUsageCriticalityLevelType(requestParameters: PatchManyItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2PatchSystemUsageCriticalityLevelTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIGlobalRegularOptionResponseDTO>>>;
+    public patchManyItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2PatchSystemUsageCriticalityLevelType(requestParameters: PatchManyItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2PatchSystemUsageCriticalityLevelTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIGlobalRegularOptionResponseDTO>>>;
+    public patchManyItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2PatchSystemUsageCriticalityLevelType(requestParameters: PatchManyItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2PatchSystemUsageCriticalityLevelTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
-            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2PatchSystemUsageCriticalityLevelType.');
+            throw new Error('Required parameter optionUuid was null or undefined when calling patchManyItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2PatchSystemUsageCriticalityLevelType.');
         }
         const aPIGlobalRegularOptionUpdateRequestDTO = requestParameters.aPIGlobalRegularOptionUpdateRequestDTO;
 
@@ -226,7 +228,7 @@ export class ItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/it-systems/global-option-types/system-usage-criticality-level-types/${this.configuration.encodeParam({name: "optionUuid", value: optionUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
-        return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<Array<APIGlobalRegularOptionResponseDTO>>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPIGlobalRegularOptionUpdateRequestDTO,
@@ -244,10 +246,10 @@ export class ItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2CreateSystemUsageCriticalityLevelType(requestParameters: PostSingleItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2CreateSystemUsageCriticalityLevelTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public postSingleItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2CreateSystemUsageCriticalityLevelType(requestParameters: PostSingleItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2CreateSystemUsageCriticalityLevelTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public postSingleItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2CreateSystemUsageCriticalityLevelType(requestParameters: PostSingleItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2CreateSystemUsageCriticalityLevelTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
-    public postSingleItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2CreateSystemUsageCriticalityLevelType(requestParameters: PostSingleItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2CreateSystemUsageCriticalityLevelTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public postManyItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2CreateSystemUsageCriticalityLevelType(requestParameters: PostManyItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2CreateSystemUsageCriticalityLevelTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIGlobalRegularOptionResponseDTO>>;
+    public postManyItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2CreateSystemUsageCriticalityLevelType(requestParameters: PostManyItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2CreateSystemUsageCriticalityLevelTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIGlobalRegularOptionResponseDTO>>>;
+    public postManyItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2CreateSystemUsageCriticalityLevelType(requestParameters: PostManyItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2CreateSystemUsageCriticalityLevelTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIGlobalRegularOptionResponseDTO>>>;
+    public postManyItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2CreateSystemUsageCriticalityLevelType(requestParameters: PostManyItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2CreateSystemUsageCriticalityLevelTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const aPIGlobalRegularOptionCreateRequestDTO = requestParameters.aPIGlobalRegularOptionCreateRequestDTO;
 
         let localVarHeaders = this.defaultHeaders;
@@ -298,7 +300,7 @@ export class ItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/it-systems/global-option-types/system-usage-criticality-level-types`;
-        return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<Array<APIGlobalRegularOptionResponseDTO>>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPIGlobalRegularOptionCreateRequestDTO,

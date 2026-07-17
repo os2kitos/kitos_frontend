@@ -3,7 +3,7 @@ import { ComponentStore } from '@ngrx/component-store';
 import { tapResponse } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { combineLatestWith, finalize, map, Observable, switchMap, tap } from 'rxjs';
-import { GetSingleOrganizationV2GetOrganizationUsersRequestParams, OrganizationV2Service } from 'src/app/api/v2';
+import { OrganizationV2Service } from 'src/app/api/v2';
 import { IdentityNamePair } from 'src/app/shared/models/identity-name-pair.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
@@ -46,9 +46,8 @@ export class OrganizationMasterDataComponentStore extends ComponentStore<State> 
       tap(() => this.setLoading(true)),
       combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       switchMap(([search, organizationUuid]) => {
-        const request: GetSingleOrganizationV2GetOrganizationUsersRequestParams = { organizationUuid };
-        if (search) request.emailQuery = search;
-        return this.organizationService.getSingleOrganizationV2GetOrganizationUsers(request).pipe(
+        const request = search ? { organizationUuid, emailQuery: search } : { organizationUuid };
+        return this.organizationService.getManyOrganizationV2GetOrganizationUsers(request).pipe(
           tapResponse({
             next: (responseDtos) => {
               const organizationUsers = responseDtos

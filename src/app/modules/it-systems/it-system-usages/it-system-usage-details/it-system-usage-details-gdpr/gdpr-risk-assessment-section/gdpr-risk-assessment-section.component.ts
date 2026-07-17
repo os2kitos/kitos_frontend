@@ -7,7 +7,7 @@ import { Observable, map } from 'rxjs';
 import { APIGDPRWriteRequestDTO, APIYesNoDontKnowChoice } from 'src/app/api/v2';
 import { BaseAccordionComponent } from 'src/app/shared/base/base-accordion.component';
 import { TooltipComponent } from 'src/app/shared/components/tooltip/tooltip.component';
-import { SUPPLIER_DISABLED_MESSAGE } from 'src/app/shared/constants/constants';
+import { ISMS_RESPONSIBLE_DISABLED_MESSAGE } from 'src/app/shared/constants/constants';
 import { itSystemUsageFields } from 'src/app/shared/models/field-permissions-blueprints.model';
 import {
   RiskAssessmentResultOptions,
@@ -56,7 +56,7 @@ export class GdprRiskAssessmentSectionComponent extends BaseAccordionComponent i
   @Output() public noPermissions = new EventEmitter<AbstractControl[]>();
   @Input() disableLinkControl!: Observable<void>;
 
-  public readonly supplierMessage = SUPPLIER_DISABLED_MESSAGE;
+  public readonly supplierMessage = ISMS_RESPONSIBLE_DISABLED_MESSAGE;
 
   private readonly currentGdpr$ = this.store.select(selectItSystemUsageGdpr).pipe(filterNullish());
   public readonly isRiskAssessmentFalse$ = this.currentGdpr$.pipe(

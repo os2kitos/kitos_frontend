@@ -81,7 +81,7 @@ export class ITSystemCatalogDetailsFrontpageComponentStore extends ComponentStor
       mergeMap(([searchTerm, systemUuid]) => {
         this.updateIsLoading(true);
         return this.apiItSystemInternalService
-          .getSingleItSystemInternalV2GetItSystems({
+          .getManyItSystemInternalV2GetItSystems({
             nameContains: searchTerm,
             includeDeactivated: true,
             excludeUuid: systemUuid,
@@ -109,7 +109,7 @@ export class ITSystemCatalogDetailsFrontpageComponentStore extends ComponentStor
       mergeMap((searchTerm) => {
         this.updateIsLoadingOrganizations(true);
         return this.apiOrganizationService
-          .getSingleOrganizationV2GetOrganizations({ nameOrCvrContent: searchTerm })
+          .getManyOrganizationV2GetOrganizations({ nameOrCvrContent: searchTerm })
           .pipe(
             tapResponse({
               next: (organizations) => this.updateOrganizations(organizations),

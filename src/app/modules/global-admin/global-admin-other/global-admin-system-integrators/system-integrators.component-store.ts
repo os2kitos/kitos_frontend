@@ -33,7 +33,7 @@ export class SystemIntegratorComponentStore extends ComponentStore<State> {
     trigger$.pipe(
       tap(() => this.setLoading(true)),
       switchMap(() =>
-        this.userApiService.getSingleGlobalUserInternalV2GetSystemIntegrators().pipe(
+        this.userApiService.getManyGlobalUserInternalV2GetSystemIntegrators().pipe(
           tapResponse({
             next: (response: APIUserReferenceResponseDTO[]) => this.setSystemIntegrators(response.map(toShallowUser)),
             error: (e) => {

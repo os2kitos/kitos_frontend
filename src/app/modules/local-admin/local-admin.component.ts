@@ -48,7 +48,10 @@ export class LocalAdminComponent extends BaseComponent implements OnInit {
   public currentTabPathSegment$: Observable<string> = of('');
   public currentTabModuleKey$: Observable<UIModuleConfigKey | undefined> = of(undefined);
 
-  constructor(private store: Store, private router: Router) {
+  constructor(
+    private store: Store,
+    private router: Router,
+  ) {
     super();
   }
 
@@ -85,7 +88,7 @@ export class LocalAdminComponent extends BaseComponent implements OnInit {
       route: AppPath.import,
     },
     {
-      label: $localize`ISMS leverandører`,
+      label: $localize`ISMS ansvarlige`,
       iconType: 'multiple-users',
       route: AppPath.ismsSuppliers,
     },
@@ -116,7 +119,7 @@ export class LocalAdminComponent extends BaseComponent implements OnInit {
       this.currentTabModuleKey$.subscribe((moduleKey) => {
         const moduleTabInfo = this.getModuleTabInfo(moduleKey);
         this.store.dispatch(OrganizationActions.patchUIRootConfig({ dto: { [moduleTabInfo.dtoFieldName]: $event } }));
-      })
+      }),
     );
   }
 
@@ -134,7 +137,7 @@ export class LocalAdminComponent extends BaseComponent implements OnInit {
     this.store.dispatch(UIModuleConfigActions.getUIModuleConfig({ module: UIModuleConfigKey.ItSystemUsage }));
     this.store.dispatch(UIModuleConfigActions.getUIModuleConfig({ module: UIModuleConfigKey.ItContract }));
     this.store.dispatch(
-      UIModuleConfigActions.getUIModuleConfig({ module: UIModuleConfigKey.DataProcessingRegistrations })
+      UIModuleConfigActions.getUIModuleConfig({ module: UIModuleConfigKey.DataProcessingRegistrations }),
     );
   }
 
@@ -143,13 +146,13 @@ export class LocalAdminComponent extends BaseComponent implements OnInit {
       filter((event) => event instanceof NavigationEnd),
       map((navigationEnd) => this.extractLastUrlSegment(navigationEnd.urlAfterRedirects)),
       startWith(this.extractLastUrlSegment(this.router.url)),
-      distinctUntilChanged()
+      distinctUntilChanged(),
     );
     this.subscriptions.add(
       this.currentTabPathSegment$.subscribe((segment) => {
         this.currentTabModuleKey$ = this.getCurrentTabModuleKey(segment);
         this.helpText = this.getCurrentTabHelpText(segment);
-      })
+      }),
     );
   }
 

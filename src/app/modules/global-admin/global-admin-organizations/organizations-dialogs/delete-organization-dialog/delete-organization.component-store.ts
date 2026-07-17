@@ -129,7 +129,7 @@ export class DeleteOrganizationComponentStore extends ComponentStore<State> {
       tap(() => this.setLoadingUsingOrganizations(true)),
       mergeMap((supplierUuid: string) =>
         this.apiOrganizationSuppliersService
-          .getSingleOrganizationSupplierInternalV2GetUsingOrganizations({
+          .getManyOrganizationSupplierInternalV2GetUsingOrganizations({
             supplierUuid,
           })
           .pipe(

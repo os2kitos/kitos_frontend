@@ -44,7 +44,7 @@ export class ItSystemHierarchyTableComponentStore extends ComponentStore<State> 
       tap(() => this.updateIsLoading(true)),
       concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       mergeMap(([systemUuid, organizationUuid]) => {
-        return this.apiItSystemService.getSingleItSystemInternalV2GetHierarchy({ organizationUuid, systemUuid }).pipe(
+        return this.apiItSystemService.getManyItSystemInternalV2GetHierarchy({ organizationUuid, systemUuid }).pipe(
           tapResponse({
             next: (hierarchy) => this.updateHierarchy(hierarchy),
             error: (e) => console.error(e),

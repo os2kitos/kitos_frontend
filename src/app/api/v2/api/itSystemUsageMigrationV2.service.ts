@@ -18,26 +18,32 @@ import { HttpClient, HttpHeaders, HttpParams,
 import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
+// @ts-ignore
+import { APIIdentityNamePairWithDeactivatedStatusDTO } from '../model/aPIIdentityNamePairWithDeactivatedStatusDTO';
+// @ts-ignore
+import { APIItSystemUsageMigrationPermissionsResponseDTO } from '../model/aPIItSystemUsageMigrationPermissionsResponseDTO';
+// @ts-ignore
+import { APIItSystemUsageMigrationV2ResponseDTO } from '../model/aPIItSystemUsageMigrationV2ResponseDTO';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
 
 
-export interface GetSingleItSystemUsageMigrationV2GetRequestParams {
-    /** uuid of system usage being migrated */
-    usageUuid: string;
-    /** uuid of the master it-system to migrate to */
-    toSystemUuid: string;
-}
-
-export interface GetSingleItSystemUsageMigrationV2GetUnusedItSystemsBySearchAndOrganizationRequestParams {
+export interface GetManyItSystemUsageMigrationV2GetUnusedItSystemsBySearchAndOrganizationRequestParams {
     /**  */
     organizationUuid: string;
     /**  */
     numberOfItSystems: number;
     /**  */
     nameContent?: string;
+}
+
+export interface GetSingleItSystemUsageMigrationV2GetRequestParams {
+    /** uuid of system usage being migrated */
+    usageUuid: string;
+    /** uuid of the master it-system to migrate to */
+    toSystemUuid: string;
 }
 
 export interface PostSingleItSystemUsageMigrationV2ExecuteMigrationRequestParams {
@@ -113,160 +119,22 @@ export class ItSystemUsageMigrationV2Service {
     }
 
     /**
-     * Gets the migration description if a system usage is migrated to another master it-system resource
-     * @param requestParameters
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public getSingleItSystemUsageMigrationV2Get(requestParameters: GetSingleItSystemUsageMigrationV2GetRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleItSystemUsageMigrationV2Get(requestParameters: GetSingleItSystemUsageMigrationV2GetRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleItSystemUsageMigrationV2Get(requestParameters: GetSingleItSystemUsageMigrationV2GetRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleItSystemUsageMigrationV2Get(requestParameters: GetSingleItSystemUsageMigrationV2GetRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
-        const usageUuid = requestParameters.usageUuid;
-        if (usageUuid === null || usageUuid === undefined) {
-            throw new Error('Required parameter usageUuid was null or undefined when calling getSingleItSystemUsageMigrationV2Get.');
-        }
-        const toSystemUuid = requestParameters.toSystemUuid;
-        if (toSystemUuid === null || toSystemUuid === undefined) {
-            throw new Error('Required parameter toSystemUuid was null or undefined when calling getSingleItSystemUsageMigrationV2Get.');
-        }
-
-        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
-        if (toSystemUuid !== undefined && toSystemUuid !== null) {
-          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
-            <any>toSystemUuid, 'toSystemUuid');
-        }
-
-        let localVarHeaders = this.defaultHeaders;
-
-        let localVarCredential: string | undefined;
-        // authentication (Bearer) required
-        localVarCredential = this.configuration.lookupCredential('Bearer');
-        if (localVarCredential) {
-            localVarHeaders = localVarHeaders.set('Authorization', 'Bearer ' + localVarCredential);
-        }
-
-        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
-        if (localVarHttpHeaderAcceptSelected === undefined) {
-            // to determine the Accept header
-            const httpHeaderAccepts: string[] = [
-                'application/json'
-            ];
-            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        }
-        if (localVarHttpHeaderAcceptSelected !== undefined) {
-            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
-        }
-
-        let localVarHttpContext: HttpContext | undefined = options && options.context;
-        if (localVarHttpContext === undefined) {
-            localVarHttpContext = new HttpContext();
-        }
-
-
-        let responseType_: 'text' | 'json' | 'blob' = 'json';
-        if (localVarHttpHeaderAcceptSelected) {
-            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
-                responseType_ = 'text';
-            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
-                responseType_ = 'json';
-            } else {
-                responseType_ = 'blob';
-            }
-        }
-
-        let localVarPath = `/api/v2/internal/it-system-usages/${this.configuration.encodeParam({name: "usageUuid", value: usageUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/migration`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
-            {
-                context: localVarHttpContext,
-                params: localVarQueryParameters,
-                responseType: <any>responseType_,
-                withCredentials: this.configuration.withCredentials,
-                headers: localVarHeaders,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * Gets the migration permissions of the authenticated user
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public getSingleItSystemUsageMigrationV2GetPermissions(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleItSystemUsageMigrationV2GetPermissions(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleItSystemUsageMigrationV2GetPermissions(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleItSystemUsageMigrationV2GetPermissions(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
-
-        let localVarHeaders = this.defaultHeaders;
-
-        let localVarCredential: string | undefined;
-        // authentication (Bearer) required
-        localVarCredential = this.configuration.lookupCredential('Bearer');
-        if (localVarCredential) {
-            localVarHeaders = localVarHeaders.set('Authorization', 'Bearer ' + localVarCredential);
-        }
-
-        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
-        if (localVarHttpHeaderAcceptSelected === undefined) {
-            // to determine the Accept header
-            const httpHeaderAccepts: string[] = [
-                'application/json'
-            ];
-            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        }
-        if (localVarHttpHeaderAcceptSelected !== undefined) {
-            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
-        }
-
-        let localVarHttpContext: HttpContext | undefined = options && options.context;
-        if (localVarHttpContext === undefined) {
-            localVarHttpContext = new HttpContext();
-        }
-
-
-        let responseType_: 'text' | 'json' | 'blob' = 'json';
-        if (localVarHttpHeaderAcceptSelected) {
-            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
-                responseType_ = 'text';
-            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
-                responseType_ = 'json';
-            } else {
-                responseType_ = 'blob';
-            }
-        }
-
-        let localVarPath = `/api/v2/internal/it-system-usages/migration/permissions`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
-            {
-                context: localVarHttpContext,
-                responseType: <any>responseType_,
-                withCredentials: this.configuration.withCredentials,
-                headers: localVarHeaders,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
      * Search for systems which are not in use and which are valid migration targets
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItSystemUsageMigrationV2GetUnusedItSystemsBySearchAndOrganization(requestParameters: GetSingleItSystemUsageMigrationV2GetUnusedItSystemsBySearchAndOrganizationRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleItSystemUsageMigrationV2GetUnusedItSystemsBySearchAndOrganization(requestParameters: GetSingleItSystemUsageMigrationV2GetUnusedItSystemsBySearchAndOrganizationRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleItSystemUsageMigrationV2GetUnusedItSystemsBySearchAndOrganization(requestParameters: GetSingleItSystemUsageMigrationV2GetUnusedItSystemsBySearchAndOrganizationRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleItSystemUsageMigrationV2GetUnusedItSystemsBySearchAndOrganization(requestParameters: GetSingleItSystemUsageMigrationV2GetUnusedItSystemsBySearchAndOrganizationRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyItSystemUsageMigrationV2GetUnusedItSystemsBySearchAndOrganization(requestParameters: GetManyItSystemUsageMigrationV2GetUnusedItSystemsBySearchAndOrganizationRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIIdentityNamePairWithDeactivatedStatusDTO>>;
+    public getManyItSystemUsageMigrationV2GetUnusedItSystemsBySearchAndOrganization(requestParameters: GetManyItSystemUsageMigrationV2GetUnusedItSystemsBySearchAndOrganizationRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIIdentityNamePairWithDeactivatedStatusDTO>>>;
+    public getManyItSystemUsageMigrationV2GetUnusedItSystemsBySearchAndOrganization(requestParameters: GetManyItSystemUsageMigrationV2GetUnusedItSystemsBySearchAndOrganizationRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIIdentityNamePairWithDeactivatedStatusDTO>>>;
+    public getManyItSystemUsageMigrationV2GetUnusedItSystemsBySearchAndOrganization(requestParameters: GetManyItSystemUsageMigrationV2GetUnusedItSystemsBySearchAndOrganizationRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleItSystemUsageMigrationV2GetUnusedItSystemsBySearchAndOrganization.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyItSystemUsageMigrationV2GetUnusedItSystemsBySearchAndOrganization.');
         }
         const numberOfItSystems = requestParameters.numberOfItSystems;
         if (numberOfItSystems === null || numberOfItSystems === undefined) {
-            throw new Error('Required parameter numberOfItSystems was null or undefined when calling getSingleItSystemUsageMigrationV2GetUnusedItSystemsBySearchAndOrganization.');
+            throw new Error('Required parameter numberOfItSystems was null or undefined when calling getManyItSystemUsageMigrationV2GetUnusedItSystemsBySearchAndOrganization.');
         }
         const nameContent = requestParameters.nameContent;
 
@@ -323,10 +191,148 @@ export class ItSystemUsageMigrationV2Service {
         }
 
         let localVarPath = `/api/v2/internal/it-system-usages/migration/unused-it-systems`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<Array<APIIdentityNamePairWithDeactivatedStatusDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 params: localVarQueryParameters,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Gets the migration description if a system usage is migrated to another master it-system resource
+     * @param requestParameters
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getSingleItSystemUsageMigrationV2Get(requestParameters: GetSingleItSystemUsageMigrationV2GetRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIItSystemUsageMigrationV2ResponseDTO>;
+    public getSingleItSystemUsageMigrationV2Get(requestParameters: GetSingleItSystemUsageMigrationV2GetRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIItSystemUsageMigrationV2ResponseDTO>>;
+    public getSingleItSystemUsageMigrationV2Get(requestParameters: GetSingleItSystemUsageMigrationV2GetRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIItSystemUsageMigrationV2ResponseDTO>>;
+    public getSingleItSystemUsageMigrationV2Get(requestParameters: GetSingleItSystemUsageMigrationV2GetRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        const usageUuid = requestParameters.usageUuid;
+        if (usageUuid === null || usageUuid === undefined) {
+            throw new Error('Required parameter usageUuid was null or undefined when calling getSingleItSystemUsageMigrationV2Get.');
+        }
+        const toSystemUuid = requestParameters.toSystemUuid;
+        if (toSystemUuid === null || toSystemUuid === undefined) {
+            throw new Error('Required parameter toSystemUuid was null or undefined when calling getSingleItSystemUsageMigrationV2Get.');
+        }
+
+        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
+        if (toSystemUuid !== undefined && toSystemUuid !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>toSystemUuid, 'toSystemUuid');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarCredential: string | undefined;
+        // authentication (Bearer) required
+        localVarCredential = this.configuration.lookupCredential('Bearer');
+        if (localVarCredential) {
+            localVarHeaders = localVarHeaders.set('Authorization', 'Bearer ' + localVarCredential);
+        }
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/v2/internal/it-system-usages/${this.configuration.encodeParam({name: "usageUuid", value: usageUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/migration`;
+        return this.httpClient.request<APIItSystemUsageMigrationV2ResponseDTO>('get', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                params: localVarQueryParameters,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Gets the migration permissions of the authenticated user
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getSingleItSystemUsageMigrationV2GetPermissions(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIItSystemUsageMigrationPermissionsResponseDTO>;
+    public getSingleItSystemUsageMigrationV2GetPermissions(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIItSystemUsageMigrationPermissionsResponseDTO>>;
+    public getSingleItSystemUsageMigrationV2GetPermissions(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIItSystemUsageMigrationPermissionsResponseDTO>>;
+    public getSingleItSystemUsageMigrationV2GetPermissions(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarCredential: string | undefined;
+        // authentication (Bearer) required
+        localVarCredential = this.configuration.lookupCredential('Bearer');
+        if (localVarCredential) {
+            localVarHeaders = localVarHeaders.set('Authorization', 'Bearer ' + localVarCredential);
+        }
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/v2/internal/it-system-usages/migration/permissions`;
+        return this.httpClient.request<APIItSystemUsageMigrationPermissionsResponseDTO>('get', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

@@ -43,7 +43,7 @@ export class GlobalAdminOtherUserShutdownComponentStore extends ComponentStore<S
       tap(() => this.setLoading(true)),
       mergeMap((search) => {
         return this.userService
-          .getSingleGlobalUserInternalV2GetUsers({
+          .getManyGlobalUserInternalV2GetUsers({
             nameOrEmailQuery: search,
           })
           .pipe(
@@ -60,7 +60,7 @@ export class GlobalAdminOtherUserShutdownComponentStore extends ComponentStore<S
   public getUserOrganizations = this.effect((userUuid$: Observable<string>) =>
     userUuid$.pipe(
       mergeMap((userUuid) => {
-        return this.userService.getSingleGlobalUserInternalV2GetOrganizationsByUserUuid({ userUuid }).pipe(
+        return this.userService.getManyGlobalUserInternalV2GetOrganizationsByUserUuid({ userUuid }).pipe(
           tapResponse({
             next: (userOrganizations) => {
               this.setUserOrganizations(userOrganizations);

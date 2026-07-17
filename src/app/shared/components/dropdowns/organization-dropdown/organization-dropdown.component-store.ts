@@ -37,7 +37,7 @@ export class OrganizationDropdownComponentStore extends ComponentStore<State> {
       tap(() => this.setLoading(true)),
       mergeMap((search) => {
         return this.organizationService
-          .getSingleOrganizationV2GetOrganizations({
+          .getManyOrganizationV2GetOrganizations({
             nameOrCvrContent: search,
           })
           .pipe(

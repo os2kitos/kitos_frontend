@@ -22,7 +22,7 @@ export class GlobalAdminHelpTextsEffects {
         HelpTextActions.updateHelpTextSuccess,
       ),
       switchMap(() => {
-        return this.helpTextsInternalService.getSingleHelpTextsInternalV2GetAll().pipe(
+        return this.helpTextsInternalService.getManyHelpTextsInternalV2GetAll().pipe(
           map((helptextDtos) => HelpTextActions.getHelpTextsSuccess(this.adaptAndSortHelpTexts(helptextDtos))),
           catchError(() => of(HelpTextActions.getHelpTextsError())),
         );

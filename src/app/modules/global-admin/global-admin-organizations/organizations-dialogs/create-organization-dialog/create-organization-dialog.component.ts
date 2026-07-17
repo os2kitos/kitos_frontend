@@ -84,14 +84,14 @@ export class CreateOrganizationDialogComponent extends GlobalAdminOrganizationsD
       });
   }
 
-  public enableISMSSupplierField() {
+  public enableISMSResponsibleField() {
     return this.formGroup.controls['organizationType'].value?.value === OrganizationTypeEnum.Company;
   }
 
   public toggleIsSupplierField() {
     const controls = this.formGroup.controls;
     const supplierStateControl = controls['isSupplier'];
-    if (this.enableISMSSupplierField()) {
+    if (this.enableISMSResponsibleField()) {
       supplierStateControl.enable();
     } else {
       supplierStateControl.setValue(undefined);
@@ -122,7 +122,7 @@ export class CreateOrganizationDialogComponent extends GlobalAdminOrganizationsD
       cvr: formValue.cvr ?? undefined,
       type: mapOrgTypeToDtoType(type.value),
       foreignCountryCodeUuid: formValue.foreignCountryCode?.uuid ?? undefined,
-      isSupplier: this.enableISMSSupplierField() ? isSupplierValue : undefined,
+      isSupplier: this.enableISMSResponsibleField() ? isSupplierValue : undefined,
     };
   }
 }

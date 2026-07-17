@@ -48,22 +48,22 @@ export class ExternalReferencesComponentStore extends ComponentStore<State> {
     switch (entityType) {
       case 'it-system':
         return (systemUuid) =>
-          this.externalReferenceService.getSingleExternalReferencesInternalV2GetItSystemReferences({
+          this.externalReferenceService.getManyExternalReferencesInternalV2GetItSystemReferences({
             systemUuid,
           });
       case 'it-system-usage':
         return (systemUsageUuid) =>
-          this.externalReferenceService.getSingleExternalReferencesInternalV2GetItSystemUsageReferences({
+          this.externalReferenceService.getManyExternalReferencesInternalV2GetItSystemUsageReferences({
             systemUsageUuid,
           });
       case 'it-contract':
         return (contractUuid) =>
-          this.externalReferenceService.getSingleExternalReferencesInternalV2GetItContractReferences({
+          this.externalReferenceService.getManyExternalReferencesInternalV2GetItContractReferences({
             contractUuid,
           });
       case 'data-processing-registration':
         return (dprUuid) =>
-          this.externalReferenceService.getSingleExternalReferencesInternalV2GetDataProcessingReferences({
+          this.externalReferenceService.getManyExternalReferencesInternalV2GetDataProcessingReferences({
             dprUuid,
           });
       default:

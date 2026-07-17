@@ -37,7 +37,15 @@
           </app-menu>
         }
         @if (uiRootConfig.showItContractModule) {
-          <app-menu title="IT Kontrakter" [path]="AppPath.itContracts" i18n-title> </app-menu>
+          <app-menu title="IT Kontrakter" [path]="AppPath.itContracts" i18n-title>
+            <app-menu-item [path]="AppPath.contracts" [parentPath]="AppPath.itContracts" i18n
+              ><app-table-icon></app-table-icon>IT Kontrakter</app-menu-item>
+              @if (enableContractSupplier$ | async) {
+                <app-menu-item [path]="AppPath.suppliers" [parentPath]="AppPath.itContracts" i18n
+                ><app-table-icon></app-table-icon>Kontraktleverandører</app-menu-item
+                >
+              }
+            </app-menu>
         }
         @if (uiRootConfig.showDataProcessing) {
           <app-menu title="Databehandling" [path]="AppPath.dataProcessing" i18n-title data-cy="dpr-nav-bar-item">

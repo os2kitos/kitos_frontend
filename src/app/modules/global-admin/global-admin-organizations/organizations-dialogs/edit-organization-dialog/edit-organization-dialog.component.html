@@ -36,10 +36,10 @@
           [formGroup]="formGroup"
           formName="isSupplier"
           labelPosition="after"
-          text="ISMS leverandør"
+          text="ISMS ansvarlig"
           i18n-text
         ></app-checkbox>
-        @if (enableISMSSupplierField() === false) {
+        @if (enableISMSResponsibleField() === false) {
           <app-tooltip [text]="tooltipText" class="tooltip-margin">
             <app-info-icon></app-info-icon>
           </app-tooltip>

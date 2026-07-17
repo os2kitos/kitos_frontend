@@ -112,7 +112,7 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
     {
       label: $localize`Kontrakter`,
       iconType: 'clipboard',
-      route: AppPath.contracts,
+      route: AppPath.itContracts,
       enabled$: combineAND([this.itContractsModuleEnabled$, this.enabledContractsTab$]),
     },
     {

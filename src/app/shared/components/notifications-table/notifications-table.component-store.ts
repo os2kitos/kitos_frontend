@@ -52,7 +52,7 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
       params$.pipe(
         mergeMap((params) => {
           return this.apiNotificationsService
-            .getSingleNotificationV2GetSentNotification({
+            .getManyNotificationV2GetSentNotification({
               ownerResourceType: params.ownerResourceType,
               ownerResourceUuid: params.ownerResourceUuid,
               notificationUuid: params.notificationUuid,
@@ -198,7 +198,7 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
         mergeMap(([{ ownerResourceType, entityUuid }, organizationUuid]) => {
           this.updateIsLoading(true);
           return this.apiNotificationsService
-            .getSingleNotificationV2GetNotifications({
+            .getManyNotificationV2GetNotifications({
               ownerResourceType: ownerResourceType,
               ownerResourceUuid: entityUuid,
               organizationUuid: organizationUuid,

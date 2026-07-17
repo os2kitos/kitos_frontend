@@ -20,6 +20,7 @@ import { DialogActionsComponent } from '../../dialogs/dialog-actions/dialog-acti
 import { DialogComponent } from '../../dialogs/dialog/dialog.component';
 import { ParagraphComponent } from '../../paragraph/paragraph.component';
 import { StandardVerticalContentGridComponent } from '../../standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { ITContractSupplierActions } from 'src/app/store/it-contract/it-contract-supplier/actions';
 
 @Component({
   selector: 'app-hide-show-dialog',
@@ -90,6 +91,9 @@ export class HideShowDialogComponent implements OnInit {
         break;
       case 'organization-user':
         this.store.dispatch(OrganizationUserActions.updateGridColumns(updatedColumns));
+        break;
+      case 'it-contract-supplier':
+        this.store.dispatch(ITContractSupplierActions.updateGridColumns(updatedColumns));
         break;
       default:
         throw `HideShowDialogComponent: ${this.entityType} not implemented`;

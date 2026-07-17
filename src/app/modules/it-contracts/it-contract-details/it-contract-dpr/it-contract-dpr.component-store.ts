@@ -50,7 +50,7 @@ export class ItContractDataProcessingRegistrationsComponentStore extends Compone
       combineLatestWith(this.store.select(selectItContractUuid).pipe(filterNullish())),
       mergeMap(([search, contractUuid]) => {
         return this.contractService
-          .getSingleItContractInternalV2GetDataProcessingRegistrations({
+          .getManyItContractInternalV2GetDataProcessingRegistrations({
             contractUuid,
             nameQuery: search,
           })

@@ -22,6 +22,8 @@ import { Observable }                                        from 'rxjs';
 import { APICreateOversightDateDTO } from '../model/aPICreateOversightDateDTO';
 // @ts-ignore
 import { APIModifyOversightDateDTO } from '../model/aPIModifyOversightDateDTO';
+// @ts-ignore
+import { APIOversightDateDTO } from '../model/aPIOversightDateDTO';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -191,9 +193,9 @@ export class DataProcessingRegistrationOversightDatesV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleDataProcessingRegistrationOversightDatesV2PatchDataProcessingRegistrationOversightDate(requestParameters: PatchSingleDataProcessingRegistrationOversightDatesV2PatchDataProcessingRegistrationOversightDateRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public patchSingleDataProcessingRegistrationOversightDatesV2PatchDataProcessingRegistrationOversightDate(requestParameters: PatchSingleDataProcessingRegistrationOversightDatesV2PatchDataProcessingRegistrationOversightDateRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public patchSingleDataProcessingRegistrationOversightDatesV2PatchDataProcessingRegistrationOversightDate(requestParameters: PatchSingleDataProcessingRegistrationOversightDatesV2PatchDataProcessingRegistrationOversightDateRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public patchSingleDataProcessingRegistrationOversightDatesV2PatchDataProcessingRegistrationOversightDate(requestParameters: PatchSingleDataProcessingRegistrationOversightDatesV2PatchDataProcessingRegistrationOversightDateRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIOversightDateDTO>;
+    public patchSingleDataProcessingRegistrationOversightDatesV2PatchDataProcessingRegistrationOversightDate(requestParameters: PatchSingleDataProcessingRegistrationOversightDatesV2PatchDataProcessingRegistrationOversightDateRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIOversightDateDTO>>;
+    public patchSingleDataProcessingRegistrationOversightDatesV2PatchDataProcessingRegistrationOversightDate(requestParameters: PatchSingleDataProcessingRegistrationOversightDatesV2PatchDataProcessingRegistrationOversightDateRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIOversightDateDTO>>;
     public patchSingleDataProcessingRegistrationOversightDatesV2PatchDataProcessingRegistrationOversightDate(requestParameters: PatchSingleDataProcessingRegistrationOversightDatesV2PatchDataProcessingRegistrationOversightDateRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const uuid = requestParameters.uuid;
         if (uuid === null || uuid === undefined) {
@@ -254,7 +256,7 @@ export class DataProcessingRegistrationOversightDatesV2Service {
         }
 
         let localVarPath = `/api/v2/data-processing-registrations/${this.configuration.encodeParam({name: "uuid", value: uuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/oversight-dates/${this.configuration.encodeParam({name: "oversightDateUuid", value: oversightDateUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
-        return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APIOversightDateDTO>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPIModifyOversightDateDTO,
@@ -273,9 +275,9 @@ export class DataProcessingRegistrationOversightDatesV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleDataProcessingRegistrationOversightDatesV2PostDataProcessingRegistrationOversightDate(requestParameters: PostSingleDataProcessingRegistrationOversightDatesV2PostDataProcessingRegistrationOversightDateRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public postSingleDataProcessingRegistrationOversightDatesV2PostDataProcessingRegistrationOversightDate(requestParameters: PostSingleDataProcessingRegistrationOversightDatesV2PostDataProcessingRegistrationOversightDateRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public postSingleDataProcessingRegistrationOversightDatesV2PostDataProcessingRegistrationOversightDate(requestParameters: PostSingleDataProcessingRegistrationOversightDatesV2PostDataProcessingRegistrationOversightDateRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public postSingleDataProcessingRegistrationOversightDatesV2PostDataProcessingRegistrationOversightDate(requestParameters: PostSingleDataProcessingRegistrationOversightDatesV2PostDataProcessingRegistrationOversightDateRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIOversightDateDTO>;
+    public postSingleDataProcessingRegistrationOversightDatesV2PostDataProcessingRegistrationOversightDate(requestParameters: PostSingleDataProcessingRegistrationOversightDatesV2PostDataProcessingRegistrationOversightDateRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIOversightDateDTO>>;
+    public postSingleDataProcessingRegistrationOversightDatesV2PostDataProcessingRegistrationOversightDate(requestParameters: PostSingleDataProcessingRegistrationOversightDatesV2PostDataProcessingRegistrationOversightDateRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIOversightDateDTO>>;
     public postSingleDataProcessingRegistrationOversightDatesV2PostDataProcessingRegistrationOversightDate(requestParameters: PostSingleDataProcessingRegistrationOversightDatesV2PostDataProcessingRegistrationOversightDateRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const uuid = requestParameters.uuid;
         if (uuid === null || uuid === undefined) {
@@ -331,7 +333,7 @@ export class DataProcessingRegistrationOversightDatesV2Service {
         }
 
         let localVarPath = `/api/v2/data-processing-registrations/${this.configuration.encodeParam({name: "uuid", value: uuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/oversight-dates`;
-        return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APIOversightDateDTO>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPICreateOversightDateDTO,

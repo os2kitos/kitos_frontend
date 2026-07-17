@@ -50,18 +50,16 @@ export class CreateEntityDialogComponentStore extends ComponentStore<State> {
       mergeMap(({ searchObject, entityType }) => {
         switch (entityType) {
           case 'it-contract':
-            return this.contractService
-              .getSingleItContractV2GetItContracts({ nameEquals: searchObject.nameEquals })
-              .pipe(
-                tapResponse({
-                  next: (contracts) => this.setAlreadyExists(contracts.length),
-                  error: (e) => console.error(e),
-                  complete: () => this.setLoading(false),
-                }),
-              );
+            return this.contractService.getManyItContractV2GetItContracts({ nameEquals: searchObject.nameEquals }).pipe(
+              tapResponse({
+                next: (contracts) => this.setAlreadyExists(contracts.length),
+                error: (e) => console.error(e),
+                complete: () => this.setLoading(false),
+              }),
+            );
           case 'it-system':
             return this.systemService
-              .getSingleItSystemInternalV2GetItSystems({ nameEquals: searchObject.nameEquals })
+              .getManyItSystemInternalV2GetItSystems({ nameEquals: searchObject.nameEquals })
               .pipe(
                 tapResponse({
                   next: (systems) => this.setAlreadyExists(systems.length),
@@ -74,7 +72,7 @@ export class CreateEntityDialogComponentStore extends ComponentStore<State> {
             if (searchObject.extraSearchParameter) {
               request.interfaceId = searchObject.extraSearchParameter;
             }
-            return this.interfaceService.getSingleItInterfaceV2GetItInterfaces(request).pipe(
+            return this.interfaceService.getManyItInterfaceV2GetItInterfaces(request).pipe(
               tapResponse({
                 next: (interfaces) => this.setAlreadyExists(interfaces.length),
                 error: (e) => console.error(e),
@@ -84,7 +82,7 @@ export class CreateEntityDialogComponentStore extends ComponentStore<State> {
           }
           case 'data-processing-registration':
             return this.dataProcessingService
-              .getSingleDataProcessingRegistrationV2GetDataProcessingRegistrations({
+              .getManyDataProcessingRegistrationV2GetDataProcessingRegistrations({
                 nameEquals: searchObject.nameEquals,
               })
               .pipe(

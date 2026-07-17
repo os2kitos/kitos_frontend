@@ -254,6 +254,7 @@ model/isDataProcessingAgreementRequiredChoice.ts
 model/itContractHierarchyNodeResponseDTO.ts
 model/itContractPermissionsResponseDTO.ts
 model/itContractResponseDTO.ts
+model/itContractSupplierTypeChoice.ts
 model/itContractValidationErrorChoice.ts
 model/itInterfaceDataRequestDTO.ts
 model/itInterfaceDataResponseDTO.ts
@@ -277,6 +278,8 @@ model/journalPeriodDTO.ts
 model/journalPeriodResponseDTO.ts
 model/journalPeriodUpdateRequestDTO.ts
 model/kLEDetailsDTO.ts
+model/kLEDetailsDTOIEnumerableVersionedKLEResponseDTO.ts
+model/kLEDetailsDTOVersionedKLEResponseDTO.ts
 model/kLEStatusResponseDTO.ts
 model/kLEUpdateResponseDTO.ts
 model/kLEUpdateStatusChoice.ts

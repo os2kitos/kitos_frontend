@@ -27,7 +27,17 @@ import { APIDeactivationReasonRequestDTO } from '../model/aPIDeactivationReasonR
 // @ts-ignore
 import { APIItInterfaceDataRequestDTO } from '../model/aPIItInterfaceDataRequestDTO';
 // @ts-ignore
+import { APIItInterfaceDataResponseDTO } from '../model/aPIItInterfaceDataResponseDTO';
+// @ts-ignore
+import { APIItInterfacePermissionsResponseDTO } from '../model/aPIItInterfacePermissionsResponseDTO';
+// @ts-ignore
+import { APIItInterfaceResponseDTO } from '../model/aPIItInterfaceResponseDTO';
+// @ts-ignore
+import { APIResourceCollectionPermissionsResponseDTO } from '../model/aPIResourceCollectionPermissionsResponseDTO';
+// @ts-ignore
 import { APIRightsHolderCreateItInterfaceRequestDTO } from '../model/aPIRightsHolderCreateItInterfaceRequestDTO';
+// @ts-ignore
+import { APIRightsHolderItInterfaceResponseDTO } from '../model/aPIRightsHolderItInterfaceResponseDTO';
 // @ts-ignore
 import { APIRightsHolderPartialUpdateItInterfaceRequestDTO } from '../model/aPIRightsHolderPartialUpdateItInterfaceRequestDTO';
 // @ts-ignore
@@ -56,27 +66,7 @@ export interface DeleteSingleItInterfaceV2DeleteDataDescriptionRequestParams {
     dataDescriptionUuid: string;
 }
 
-export interface GetSingleItInterfaceV2GetItInterfaceRequestParams {
-    /** Specific IT-Interface UUID */
-    uuid: string;
-}
-
-export interface GetSingleItInterfaceV2GetItInterfaceAsRightsHolderRequestParams {
-    /** Specific IT-Interface UUID */
-    uuid: string;
-}
-
-export interface GetSingleItInterfaceV2GetItInterfaceCollectionPermissionsRequestParams {
-    /** UUID of the organization */
-    organizationUuid: string;
-}
-
-export interface GetSingleItInterfaceV2GetItInterfacePermissionsRequestParams {
-    /** UUID of the interface entity */
-    interfaceUuid: string;
-}
-
-export interface GetSingleItInterfaceV2GetItInterfacesRequestParams {
+export interface GetManyItInterfaceV2GetItInterfacesRequestParams {
     /** IT-System UUID filter */
     exposedBySystemUuid?: string;
     /** If set to true, the response will also include deactivated it-interfaces */
@@ -103,7 +93,7 @@ export interface GetSingleItInterfaceV2GetItInterfacesRequestParams {
     pageSize?: number;
 }
 
-export interface GetSingleItInterfaceV2GetItInterfacesAsRightsHolderRequestParams {
+export interface GetManyItInterfaceV2GetItInterfacesAsRightsHolderRequestParams {
     /** Uuid of the organization you want interfaces from. If not provided all available interfaces (based on access rights) will be returned */
     rightsHolderUuid?: string;
     /** If set to true, the response will also include deactivated it-interfaces */
@@ -114,6 +104,26 @@ export interface GetSingleItInterfaceV2GetItInterfacesAsRightsHolderRequestParam
     page?: number;
     /** Size of the page referred by \&#39;page\&#39;.  Range: [1,250] Default: 250. */
     pageSize?: number;
+}
+
+export interface GetSingleItInterfaceV2GetItInterfaceRequestParams {
+    /** Specific IT-Interface UUID */
+    uuid: string;
+}
+
+export interface GetSingleItInterfaceV2GetItInterfaceAsRightsHolderRequestParams {
+    /** Specific IT-Interface UUID */
+    uuid: string;
+}
+
+export interface GetSingleItInterfaceV2GetItInterfaceCollectionPermissionsRequestParams {
+    /** UUID of the organization */
+    organizationUuid: string;
+}
+
+export interface GetSingleItInterfaceV2GetItInterfacePermissionsRequestParams {
+    /** UUID of the interface entity */
+    interfaceUuid: string;
 }
 
 export interface PatchSingleItInterfaceV2PatchRequestParams {
@@ -435,286 +445,15 @@ export class ItInterfaceV2Service {
     }
 
     /**
-     * Returns requested IT-Interface
-     * @param requestParameters
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public getSingleItInterfaceV2GetItInterface(requestParameters: GetSingleItInterfaceV2GetItInterfaceRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleItInterfaceV2GetItInterface(requestParameters: GetSingleItInterfaceV2GetItInterfaceRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleItInterfaceV2GetItInterface(requestParameters: GetSingleItInterfaceV2GetItInterfaceRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleItInterfaceV2GetItInterface(requestParameters: GetSingleItInterfaceV2GetItInterfaceRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
-        const uuid = requestParameters.uuid;
-        if (uuid === null || uuid === undefined) {
-            throw new Error('Required parameter uuid was null or undefined when calling getSingleItInterfaceV2GetItInterface.');
-        }
-
-        let localVarHeaders = this.defaultHeaders;
-
-        let localVarCredential: string | undefined;
-        // authentication (Bearer) required
-        localVarCredential = this.configuration.lookupCredential('Bearer');
-        if (localVarCredential) {
-            localVarHeaders = localVarHeaders.set('Authorization', 'Bearer ' + localVarCredential);
-        }
-
-        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
-        if (localVarHttpHeaderAcceptSelected === undefined) {
-            // to determine the Accept header
-            const httpHeaderAccepts: string[] = [
-                'application/json'
-            ];
-            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        }
-        if (localVarHttpHeaderAcceptSelected !== undefined) {
-            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
-        }
-
-        let localVarHttpContext: HttpContext | undefined = options && options.context;
-        if (localVarHttpContext === undefined) {
-            localVarHttpContext = new HttpContext();
-        }
-
-
-        let responseType_: 'text' | 'json' | 'blob' = 'json';
-        if (localVarHttpHeaderAcceptSelected) {
-            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
-                responseType_ = 'text';
-            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
-                responseType_ = 'json';
-            } else {
-                responseType_ = 'blob';
-            }
-        }
-
-        let localVarPath = `/api/v2/it-interfaces/${this.configuration.encodeParam({name: "uuid", value: uuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
-            {
-                context: localVarHttpContext,
-                responseType: <any>responseType_,
-                withCredentials: this.configuration.withCredentials,
-                headers: localVarHeaders,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * Returns requested IT-Interface
-     * @param requestParameters
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public getSingleItInterfaceV2GetItInterfaceAsRightsHolder(requestParameters: GetSingleItInterfaceV2GetItInterfaceAsRightsHolderRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleItInterfaceV2GetItInterfaceAsRightsHolder(requestParameters: GetSingleItInterfaceV2GetItInterfaceAsRightsHolderRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleItInterfaceV2GetItInterfaceAsRightsHolder(requestParameters: GetSingleItInterfaceV2GetItInterfaceAsRightsHolderRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleItInterfaceV2GetItInterfaceAsRightsHolder(requestParameters: GetSingleItInterfaceV2GetItInterfaceAsRightsHolderRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
-        const uuid = requestParameters.uuid;
-        if (uuid === null || uuid === undefined) {
-            throw new Error('Required parameter uuid was null or undefined when calling getSingleItInterfaceV2GetItInterfaceAsRightsHolder.');
-        }
-
-        let localVarHeaders = this.defaultHeaders;
-
-        let localVarCredential: string | undefined;
-        // authentication (Bearer) required
-        localVarCredential = this.configuration.lookupCredential('Bearer');
-        if (localVarCredential) {
-            localVarHeaders = localVarHeaders.set('Authorization', 'Bearer ' + localVarCredential);
-        }
-
-        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
-        if (localVarHttpHeaderAcceptSelected === undefined) {
-            // to determine the Accept header
-            const httpHeaderAccepts: string[] = [
-                'application/json'
-            ];
-            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        }
-        if (localVarHttpHeaderAcceptSelected !== undefined) {
-            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
-        }
-
-        let localVarHttpContext: HttpContext | undefined = options && options.context;
-        if (localVarHttpContext === undefined) {
-            localVarHttpContext = new HttpContext();
-        }
-
-
-        let responseType_: 'text' | 'json' | 'blob' = 'json';
-        if (localVarHttpHeaderAcceptSelected) {
-            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
-                responseType_ = 'text';
-            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
-                responseType_ = 'json';
-            } else {
-                responseType_ = 'blob';
-            }
-        }
-
-        let localVarPath = `/api/v2/rightsholder/it-interfaces/${this.configuration.encodeParam({name: "uuid", value: uuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
-            {
-                context: localVarHttpContext,
-                responseType: <any>responseType_,
-                withCredentials: this.configuration.withCredentials,
-                headers: localVarHeaders,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * Returns the permissions of the authenticated client for the IT-Interface resources collection in the context of an organization (IT-Interface permissions in a specific Organization)
-     * @param requestParameters
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public getSingleItInterfaceV2GetItInterfaceCollectionPermissions(requestParameters: GetSingleItInterfaceV2GetItInterfaceCollectionPermissionsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleItInterfaceV2GetItInterfaceCollectionPermissions(requestParameters: GetSingleItInterfaceV2GetItInterfaceCollectionPermissionsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleItInterfaceV2GetItInterfaceCollectionPermissions(requestParameters: GetSingleItInterfaceV2GetItInterfaceCollectionPermissionsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleItInterfaceV2GetItInterfaceCollectionPermissions(requestParameters: GetSingleItInterfaceV2GetItInterfaceCollectionPermissionsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
-        const organizationUuid = requestParameters.organizationUuid;
-        if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleItInterfaceV2GetItInterfaceCollectionPermissions.');
-        }
-
-        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
-        if (organizationUuid !== undefined && organizationUuid !== null) {
-          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
-            <any>organizationUuid, 'organizationUuid');
-        }
-
-        let localVarHeaders = this.defaultHeaders;
-
-        let localVarCredential: string | undefined;
-        // authentication (Bearer) required
-        localVarCredential = this.configuration.lookupCredential('Bearer');
-        if (localVarCredential) {
-            localVarHeaders = localVarHeaders.set('Authorization', 'Bearer ' + localVarCredential);
-        }
-
-        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
-        if (localVarHttpHeaderAcceptSelected === undefined) {
-            // to determine the Accept header
-            const httpHeaderAccepts: string[] = [
-                'application/json'
-            ];
-            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        }
-        if (localVarHttpHeaderAcceptSelected !== undefined) {
-            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
-        }
-
-        let localVarHttpContext: HttpContext | undefined = options && options.context;
-        if (localVarHttpContext === undefined) {
-            localVarHttpContext = new HttpContext();
-        }
-
-
-        let responseType_: 'text' | 'json' | 'blob' = 'json';
-        if (localVarHttpHeaderAcceptSelected) {
-            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
-                responseType_ = 'text';
-            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
-                responseType_ = 'json';
-            } else {
-                responseType_ = 'blob';
-            }
-        }
-
-        let localVarPath = `/api/v2/it-interfaces/permissions`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
-            {
-                context: localVarHttpContext,
-                params: localVarQueryParameters,
-                responseType: <any>responseType_,
-                withCredentials: this.configuration.withCredentials,
-                headers: localVarHeaders,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * Returns the permissions of the authenticated client in the context of a specific IT-Interface
-     * @param requestParameters
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public getSingleItInterfaceV2GetItInterfacePermissions(requestParameters: GetSingleItInterfaceV2GetItInterfacePermissionsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleItInterfaceV2GetItInterfacePermissions(requestParameters: GetSingleItInterfaceV2GetItInterfacePermissionsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleItInterfaceV2GetItInterfacePermissions(requestParameters: GetSingleItInterfaceV2GetItInterfacePermissionsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleItInterfaceV2GetItInterfacePermissions(requestParameters: GetSingleItInterfaceV2GetItInterfacePermissionsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
-        const interfaceUuid = requestParameters.interfaceUuid;
-        if (interfaceUuid === null || interfaceUuid === undefined) {
-            throw new Error('Required parameter interfaceUuid was null or undefined when calling getSingleItInterfaceV2GetItInterfacePermissions.');
-        }
-
-        let localVarHeaders = this.defaultHeaders;
-
-        let localVarCredential: string | undefined;
-        // authentication (Bearer) required
-        localVarCredential = this.configuration.lookupCredential('Bearer');
-        if (localVarCredential) {
-            localVarHeaders = localVarHeaders.set('Authorization', 'Bearer ' + localVarCredential);
-        }
-
-        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
-        if (localVarHttpHeaderAcceptSelected === undefined) {
-            // to determine the Accept header
-            const httpHeaderAccepts: string[] = [
-                'application/json'
-            ];
-            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        }
-        if (localVarHttpHeaderAcceptSelected !== undefined) {
-            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
-        }
-
-        let localVarHttpContext: HttpContext | undefined = options && options.context;
-        if (localVarHttpContext === undefined) {
-            localVarHttpContext = new HttpContext();
-        }
-
-
-        let responseType_: 'text' | 'json' | 'blob' = 'json';
-        if (localVarHttpHeaderAcceptSelected) {
-            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
-                responseType_ = 'text';
-            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
-                responseType_ = 'json';
-            } else {
-                responseType_ = 'blob';
-            }
-        }
-
-        let localVarPath = `/api/v2/it-interfaces/${this.configuration.encodeParam({name: "interfaceUuid", value: interfaceUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/permissions`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
-            {
-                context: localVarHttpContext,
-                responseType: <any>responseType_,
-                withCredentials: this.configuration.withCredentials,
-                headers: localVarHeaders,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
      * Returns IT-Interfaces available to the user
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItInterfaceV2GetItInterfaces(requestParameters: GetSingleItInterfaceV2GetItInterfacesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleItInterfaceV2GetItInterfaces(requestParameters: GetSingleItInterfaceV2GetItInterfacesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleItInterfaceV2GetItInterfaces(requestParameters: GetSingleItInterfaceV2GetItInterfacesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleItInterfaceV2GetItInterfaces(requestParameters: GetSingleItInterfaceV2GetItInterfacesRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyItInterfaceV2GetItInterfaces(requestParameters: GetManyItInterfaceV2GetItInterfacesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIItInterfaceResponseDTO>>;
+    public getManyItInterfaceV2GetItInterfaces(requestParameters: GetManyItInterfaceV2GetItInterfacesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIItInterfaceResponseDTO>>>;
+    public getManyItInterfaceV2GetItInterfaces(requestParameters: GetManyItInterfaceV2GetItInterfacesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIItInterfaceResponseDTO>>>;
+    public getManyItInterfaceV2GetItInterfaces(requestParameters: GetManyItInterfaceV2GetItInterfacesRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const exposedBySystemUuid = requestParameters.exposedBySystemUuid;
         const includeDeactivated = requestParameters.includeDeactivated;
         const changedSinceGtEq = requestParameters.changedSinceGtEq;
@@ -822,7 +561,7 @@ export class ItInterfaceV2Service {
         }
 
         let localVarPath = `/api/v2/it-interfaces`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<Array<APIItInterfaceResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 params: localVarQueryParameters,
@@ -841,10 +580,10 @@ export class ItInterfaceV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItInterfaceV2GetItInterfacesAsRightsHolder(requestParameters: GetSingleItInterfaceV2GetItInterfacesAsRightsHolderRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleItInterfaceV2GetItInterfacesAsRightsHolder(requestParameters: GetSingleItInterfaceV2GetItInterfacesAsRightsHolderRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleItInterfaceV2GetItInterfacesAsRightsHolder(requestParameters: GetSingleItInterfaceV2GetItInterfacesAsRightsHolderRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleItInterfaceV2GetItInterfacesAsRightsHolder(requestParameters: GetSingleItInterfaceV2GetItInterfacesAsRightsHolderRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyItInterfaceV2GetItInterfacesAsRightsHolder(requestParameters: GetManyItInterfaceV2GetItInterfacesAsRightsHolderRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIRightsHolderItInterfaceResponseDTO>>;
+    public getManyItInterfaceV2GetItInterfacesAsRightsHolder(requestParameters: GetManyItInterfaceV2GetItInterfacesAsRightsHolderRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIRightsHolderItInterfaceResponseDTO>>>;
+    public getManyItInterfaceV2GetItInterfacesAsRightsHolder(requestParameters: GetManyItInterfaceV2GetItInterfacesAsRightsHolderRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIRightsHolderItInterfaceResponseDTO>>>;
+    public getManyItInterfaceV2GetItInterfacesAsRightsHolder(requestParameters: GetManyItInterfaceV2GetItInterfacesAsRightsHolderRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const rightsHolderUuid = requestParameters.rightsHolderUuid;
         const includeDeactivated = requestParameters.includeDeactivated;
         const changedSinceGtEq = requestParameters.changedSinceGtEq;
@@ -912,10 +651,281 @@ export class ItInterfaceV2Service {
         }
 
         let localVarPath = `/api/v2/rightsholder/it-interfaces`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<Array<APIRightsHolderItInterfaceResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 params: localVarQueryParameters,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Returns requested IT-Interface
+     * @param requestParameters
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getSingleItInterfaceV2GetItInterface(requestParameters: GetSingleItInterfaceV2GetItInterfaceRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIItInterfaceResponseDTO>;
+    public getSingleItInterfaceV2GetItInterface(requestParameters: GetSingleItInterfaceV2GetItInterfaceRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIItInterfaceResponseDTO>>;
+    public getSingleItInterfaceV2GetItInterface(requestParameters: GetSingleItInterfaceV2GetItInterfaceRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIItInterfaceResponseDTO>>;
+    public getSingleItInterfaceV2GetItInterface(requestParameters: GetSingleItInterfaceV2GetItInterfaceRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        const uuid = requestParameters.uuid;
+        if (uuid === null || uuid === undefined) {
+            throw new Error('Required parameter uuid was null or undefined when calling getSingleItInterfaceV2GetItInterface.');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarCredential: string | undefined;
+        // authentication (Bearer) required
+        localVarCredential = this.configuration.lookupCredential('Bearer');
+        if (localVarCredential) {
+            localVarHeaders = localVarHeaders.set('Authorization', 'Bearer ' + localVarCredential);
+        }
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/v2/it-interfaces/${this.configuration.encodeParam({name: "uuid", value: uuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
+        return this.httpClient.request<APIItInterfaceResponseDTO>('get', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Returns requested IT-Interface
+     * @param requestParameters
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getSingleItInterfaceV2GetItInterfaceAsRightsHolder(requestParameters: GetSingleItInterfaceV2GetItInterfaceAsRightsHolderRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRightsHolderItInterfaceResponseDTO>;
+    public getSingleItInterfaceV2GetItInterfaceAsRightsHolder(requestParameters: GetSingleItInterfaceV2GetItInterfaceAsRightsHolderRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRightsHolderItInterfaceResponseDTO>>;
+    public getSingleItInterfaceV2GetItInterfaceAsRightsHolder(requestParameters: GetSingleItInterfaceV2GetItInterfaceAsRightsHolderRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRightsHolderItInterfaceResponseDTO>>;
+    public getSingleItInterfaceV2GetItInterfaceAsRightsHolder(requestParameters: GetSingleItInterfaceV2GetItInterfaceAsRightsHolderRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        const uuid = requestParameters.uuid;
+        if (uuid === null || uuid === undefined) {
+            throw new Error('Required parameter uuid was null or undefined when calling getSingleItInterfaceV2GetItInterfaceAsRightsHolder.');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarCredential: string | undefined;
+        // authentication (Bearer) required
+        localVarCredential = this.configuration.lookupCredential('Bearer');
+        if (localVarCredential) {
+            localVarHeaders = localVarHeaders.set('Authorization', 'Bearer ' + localVarCredential);
+        }
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/v2/rightsholder/it-interfaces/${this.configuration.encodeParam({name: "uuid", value: uuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
+        return this.httpClient.request<APIRightsHolderItInterfaceResponseDTO>('get', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Returns the permissions of the authenticated client for the IT-Interface resources collection in the context of an organization (IT-Interface permissions in a specific Organization)
+     * @param requestParameters
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getSingleItInterfaceV2GetItInterfaceCollectionPermissions(requestParameters: GetSingleItInterfaceV2GetItInterfaceCollectionPermissionsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIResourceCollectionPermissionsResponseDTO>;
+    public getSingleItInterfaceV2GetItInterfaceCollectionPermissions(requestParameters: GetSingleItInterfaceV2GetItInterfaceCollectionPermissionsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIResourceCollectionPermissionsResponseDTO>>;
+    public getSingleItInterfaceV2GetItInterfaceCollectionPermissions(requestParameters: GetSingleItInterfaceV2GetItInterfaceCollectionPermissionsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIResourceCollectionPermissionsResponseDTO>>;
+    public getSingleItInterfaceV2GetItInterfaceCollectionPermissions(requestParameters: GetSingleItInterfaceV2GetItInterfaceCollectionPermissionsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        const organizationUuid = requestParameters.organizationUuid;
+        if (organizationUuid === null || organizationUuid === undefined) {
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleItInterfaceV2GetItInterfaceCollectionPermissions.');
+        }
+
+        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
+        if (organizationUuid !== undefined && organizationUuid !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>organizationUuid, 'organizationUuid');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarCredential: string | undefined;
+        // authentication (Bearer) required
+        localVarCredential = this.configuration.lookupCredential('Bearer');
+        if (localVarCredential) {
+            localVarHeaders = localVarHeaders.set('Authorization', 'Bearer ' + localVarCredential);
+        }
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/v2/it-interfaces/permissions`;
+        return this.httpClient.request<APIResourceCollectionPermissionsResponseDTO>('get', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                params: localVarQueryParameters,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Returns the permissions of the authenticated client in the context of a specific IT-Interface
+     * @param requestParameters
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getSingleItInterfaceV2GetItInterfacePermissions(requestParameters: GetSingleItInterfaceV2GetItInterfacePermissionsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIItInterfacePermissionsResponseDTO>;
+    public getSingleItInterfaceV2GetItInterfacePermissions(requestParameters: GetSingleItInterfaceV2GetItInterfacePermissionsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIItInterfacePermissionsResponseDTO>>;
+    public getSingleItInterfaceV2GetItInterfacePermissions(requestParameters: GetSingleItInterfaceV2GetItInterfacePermissionsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIItInterfacePermissionsResponseDTO>>;
+    public getSingleItInterfaceV2GetItInterfacePermissions(requestParameters: GetSingleItInterfaceV2GetItInterfacePermissionsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        const interfaceUuid = requestParameters.interfaceUuid;
+        if (interfaceUuid === null || interfaceUuid === undefined) {
+            throw new Error('Required parameter interfaceUuid was null or undefined when calling getSingleItInterfaceV2GetItInterfacePermissions.');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarCredential: string | undefined;
+        // authentication (Bearer) required
+        localVarCredential = this.configuration.lookupCredential('Bearer');
+        if (localVarCredential) {
+            localVarHeaders = localVarHeaders.set('Authorization', 'Bearer ' + localVarCredential);
+        }
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/v2/it-interfaces/${this.configuration.encodeParam({name: "interfaceUuid", value: interfaceUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/permissions`;
+        return this.httpClient.request<APIItInterfacePermissionsResponseDTO>('get', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -931,9 +941,9 @@ export class ItInterfaceV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleItInterfaceV2Patch(requestParameters: PatchSingleItInterfaceV2PatchRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public patchSingleItInterfaceV2Patch(requestParameters: PatchSingleItInterfaceV2PatchRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public patchSingleItInterfaceV2Patch(requestParameters: PatchSingleItInterfaceV2PatchRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public patchSingleItInterfaceV2Patch(requestParameters: PatchSingleItInterfaceV2PatchRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIItInterfaceResponseDTO>;
+    public patchSingleItInterfaceV2Patch(requestParameters: PatchSingleItInterfaceV2PatchRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIItInterfaceResponseDTO>>;
+    public patchSingleItInterfaceV2Patch(requestParameters: PatchSingleItInterfaceV2PatchRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIItInterfaceResponseDTO>>;
     public patchSingleItInterfaceV2Patch(requestParameters: PatchSingleItInterfaceV2PatchRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const uuid = requestParameters.uuid;
         if (uuid === null || uuid === undefined) {
@@ -990,7 +1000,7 @@ export class ItInterfaceV2Service {
         }
 
         let localVarPath = `/api/v2/it-interfaces/${this.configuration.encodeParam({name: "uuid", value: uuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
-        return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APIItInterfaceResponseDTO>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPIUpdateItInterfaceRequestDTO,
@@ -1009,9 +1019,9 @@ export class ItInterfaceV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleItInterfaceV2PatchItInterfaceAsRightsHolder(requestParameters: PatchSingleItInterfaceV2PatchItInterfaceAsRightsHolderRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public patchSingleItInterfaceV2PatchItInterfaceAsRightsHolder(requestParameters: PatchSingleItInterfaceV2PatchItInterfaceAsRightsHolderRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public patchSingleItInterfaceV2PatchItInterfaceAsRightsHolder(requestParameters: PatchSingleItInterfaceV2PatchItInterfaceAsRightsHolderRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public patchSingleItInterfaceV2PatchItInterfaceAsRightsHolder(requestParameters: PatchSingleItInterfaceV2PatchItInterfaceAsRightsHolderRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRightsHolderItInterfaceResponseDTO>;
+    public patchSingleItInterfaceV2PatchItInterfaceAsRightsHolder(requestParameters: PatchSingleItInterfaceV2PatchItInterfaceAsRightsHolderRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRightsHolderItInterfaceResponseDTO>>;
+    public patchSingleItInterfaceV2PatchItInterfaceAsRightsHolder(requestParameters: PatchSingleItInterfaceV2PatchItInterfaceAsRightsHolderRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRightsHolderItInterfaceResponseDTO>>;
     public patchSingleItInterfaceV2PatchItInterfaceAsRightsHolder(requestParameters: PatchSingleItInterfaceV2PatchItInterfaceAsRightsHolderRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const uuid = requestParameters.uuid;
         if (uuid === null || uuid === undefined) {
@@ -1068,7 +1078,7 @@ export class ItInterfaceV2Service {
         }
 
         let localVarPath = `/api/v2/rightsholder/it-interfaces/${this.configuration.encodeParam({name: "uuid", value: uuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
-        return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APIRightsHolderItInterfaceResponseDTO>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPIRightsHolderPartialUpdateItInterfaceRequestDTO,
@@ -1087,9 +1097,9 @@ export class ItInterfaceV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleItInterfaceV2Post(requestParameters: PostSingleItInterfaceV2PostRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public postSingleItInterfaceV2Post(requestParameters: PostSingleItInterfaceV2PostRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public postSingleItInterfaceV2Post(requestParameters: PostSingleItInterfaceV2PostRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public postSingleItInterfaceV2Post(requestParameters: PostSingleItInterfaceV2PostRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIItInterfaceResponseDTO>;
+    public postSingleItInterfaceV2Post(requestParameters: PostSingleItInterfaceV2PostRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIItInterfaceResponseDTO>>;
+    public postSingleItInterfaceV2Post(requestParameters: PostSingleItInterfaceV2PostRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIItInterfaceResponseDTO>>;
     public postSingleItInterfaceV2Post(requestParameters: PostSingleItInterfaceV2PostRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const aPICreateItInterfaceRequestDTO = requestParameters.aPICreateItInterfaceRequestDTO;
 
@@ -1141,7 +1151,7 @@ export class ItInterfaceV2Service {
         }
 
         let localVarPath = `/api/v2/it-interfaces`;
-        return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APIItInterfaceResponseDTO>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPICreateItInterfaceRequestDTO,
@@ -1160,9 +1170,9 @@ export class ItInterfaceV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleItInterfaceV2PostDataDescription(requestParameters: PostSingleItInterfaceV2PostDataDescriptionRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public postSingleItInterfaceV2PostDataDescription(requestParameters: PostSingleItInterfaceV2PostDataDescriptionRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public postSingleItInterfaceV2PostDataDescription(requestParameters: PostSingleItInterfaceV2PostDataDescriptionRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public postSingleItInterfaceV2PostDataDescription(requestParameters: PostSingleItInterfaceV2PostDataDescriptionRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIItInterfaceDataResponseDTO>;
+    public postSingleItInterfaceV2PostDataDescription(requestParameters: PostSingleItInterfaceV2PostDataDescriptionRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIItInterfaceDataResponseDTO>>;
+    public postSingleItInterfaceV2PostDataDescription(requestParameters: PostSingleItInterfaceV2PostDataDescriptionRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIItInterfaceDataResponseDTO>>;
     public postSingleItInterfaceV2PostDataDescription(requestParameters: PostSingleItInterfaceV2PostDataDescriptionRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const uuid = requestParameters.uuid;
         if (uuid === null || uuid === undefined) {
@@ -1218,7 +1228,7 @@ export class ItInterfaceV2Service {
         }
 
         let localVarPath = `/api/v2/it-interfaces/${this.configuration.encodeParam({name: "uuid", value: uuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/data`;
-        return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APIItInterfaceDataResponseDTO>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPIItInterfaceDataRequestDTO,
@@ -1237,9 +1247,9 @@ export class ItInterfaceV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleItInterfaceV2PostItInterfaceAsRightsHolder(requestParameters: PostSingleItInterfaceV2PostItInterfaceAsRightsHolderRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public postSingleItInterfaceV2PostItInterfaceAsRightsHolder(requestParameters: PostSingleItInterfaceV2PostItInterfaceAsRightsHolderRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public postSingleItInterfaceV2PostItInterfaceAsRightsHolder(requestParameters: PostSingleItInterfaceV2PostItInterfaceAsRightsHolderRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public postSingleItInterfaceV2PostItInterfaceAsRightsHolder(requestParameters: PostSingleItInterfaceV2PostItInterfaceAsRightsHolderRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRightsHolderItInterfaceResponseDTO>;
+    public postSingleItInterfaceV2PostItInterfaceAsRightsHolder(requestParameters: PostSingleItInterfaceV2PostItInterfaceAsRightsHolderRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRightsHolderItInterfaceResponseDTO>>;
+    public postSingleItInterfaceV2PostItInterfaceAsRightsHolder(requestParameters: PostSingleItInterfaceV2PostItInterfaceAsRightsHolderRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRightsHolderItInterfaceResponseDTO>>;
     public postSingleItInterfaceV2PostItInterfaceAsRightsHolder(requestParameters: PostSingleItInterfaceV2PostItInterfaceAsRightsHolderRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const aPIRightsHolderCreateItInterfaceRequestDTO = requestParameters.aPIRightsHolderCreateItInterfaceRequestDTO;
 
@@ -1291,7 +1301,7 @@ export class ItInterfaceV2Service {
         }
 
         let localVarPath = `/api/v2/rightsholder/it-interfaces`;
-        return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APIRightsHolderItInterfaceResponseDTO>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPIRightsHolderCreateItInterfaceRequestDTO,
@@ -1310,9 +1320,9 @@ export class ItInterfaceV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public putSingleItInterfaceV2PutDataDescription(requestParameters: PutSingleItInterfaceV2PutDataDescriptionRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public putSingleItInterfaceV2PutDataDescription(requestParameters: PutSingleItInterfaceV2PutDataDescriptionRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public putSingleItInterfaceV2PutDataDescription(requestParameters: PutSingleItInterfaceV2PutDataDescriptionRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public putSingleItInterfaceV2PutDataDescription(requestParameters: PutSingleItInterfaceV2PutDataDescriptionRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIItInterfaceDataResponseDTO>;
+    public putSingleItInterfaceV2PutDataDescription(requestParameters: PutSingleItInterfaceV2PutDataDescriptionRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIItInterfaceDataResponseDTO>>;
+    public putSingleItInterfaceV2PutDataDescription(requestParameters: PutSingleItInterfaceV2PutDataDescriptionRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIItInterfaceDataResponseDTO>>;
     public putSingleItInterfaceV2PutDataDescription(requestParameters: PutSingleItInterfaceV2PutDataDescriptionRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const uuid = requestParameters.uuid;
         if (uuid === null || uuid === undefined) {
@@ -1372,7 +1382,7 @@ export class ItInterfaceV2Service {
         }
 
         let localVarPath = `/api/v2/it-interfaces/${this.configuration.encodeParam({name: "uuid", value: uuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/data/${this.configuration.encodeParam({name: "dataDescriptionUuid", value: dataDescriptionUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
-        return this.httpClient.request<any>('put', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APIItInterfaceDataResponseDTO>('put', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPIItInterfaceDataRequestDTO,
@@ -1391,9 +1401,9 @@ export class ItInterfaceV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public putSingleItInterfaceV2PutItInterfaceAsRightsHolder(requestParameters: PutSingleItInterfaceV2PutItInterfaceAsRightsHolderRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public putSingleItInterfaceV2PutItInterfaceAsRightsHolder(requestParameters: PutSingleItInterfaceV2PutItInterfaceAsRightsHolderRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public putSingleItInterfaceV2PutItInterfaceAsRightsHolder(requestParameters: PutSingleItInterfaceV2PutItInterfaceAsRightsHolderRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public putSingleItInterfaceV2PutItInterfaceAsRightsHolder(requestParameters: PutSingleItInterfaceV2PutItInterfaceAsRightsHolderRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRightsHolderItInterfaceResponseDTO>;
+    public putSingleItInterfaceV2PutItInterfaceAsRightsHolder(requestParameters: PutSingleItInterfaceV2PutItInterfaceAsRightsHolderRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRightsHolderItInterfaceResponseDTO>>;
+    public putSingleItInterfaceV2PutItInterfaceAsRightsHolder(requestParameters: PutSingleItInterfaceV2PutItInterfaceAsRightsHolderRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRightsHolderItInterfaceResponseDTO>>;
     public putSingleItInterfaceV2PutItInterfaceAsRightsHolder(requestParameters: PutSingleItInterfaceV2PutItInterfaceAsRightsHolderRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const uuid = requestParameters.uuid;
         if (uuid === null || uuid === undefined) {
@@ -1449,7 +1459,7 @@ export class ItInterfaceV2Service {
         }
 
         let localVarPath = `/api/v2/rightsholder/it-interfaces/${this.configuration.encodeParam({name: "uuid", value: uuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
-        return this.httpClient.request<any>('put', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APIRightsHolderItInterfaceResponseDTO>('put', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPIRightsHolderWritableItInterfacePropertiesDTO,

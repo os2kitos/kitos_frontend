@@ -28,7 +28,7 @@ export class GdprReportEffects {
       filter(([_, __, validCache]) => !validCache),
       map(([, organizationUuid]) => organizationUuid),
       switchMap((organizationUuid) =>
-        this.gdprReportService.getSingleGdprExportReportInternalV2GetGdprReport({ organizationUuid }).pipe(
+        this.gdprReportService.getManyGdprExportReportInternalV2GetGdprReport({ organizationUuid }).pipe(
           map((reports) => GdprReportActions.getGDPRReportsSuccess(reports.map(adaptGdprReport))),
           catchError(() => of(GdprReportActions.getGDPRReportsError())),
         ),

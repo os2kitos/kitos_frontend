@@ -18,6 +18,8 @@ import { HttpClient, HttpHeaders, HttpParams,
 import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
+// @ts-ignore
+import { APIItSystemUsageArchiveResponseDTO } from '../model/aPIItSystemUsageArchiveResponseDTO';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -180,9 +182,9 @@ export class ItSystemUsageArchiveV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItSystemUsageArchiveV2Get(requestParameters: GetSingleItSystemUsageArchiveV2GetRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleItSystemUsageArchiveV2Get(requestParameters: GetSingleItSystemUsageArchiveV2GetRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleItSystemUsageArchiveV2Get(requestParameters: GetSingleItSystemUsageArchiveV2GetRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public getSingleItSystemUsageArchiveV2Get(requestParameters: GetSingleItSystemUsageArchiveV2GetRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIItSystemUsageArchiveResponseDTO>;
+    public getSingleItSystemUsageArchiveV2Get(requestParameters: GetSingleItSystemUsageArchiveV2GetRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIItSystemUsageArchiveResponseDTO>>;
+    public getSingleItSystemUsageArchiveV2Get(requestParameters: GetSingleItSystemUsageArchiveV2GetRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIItSystemUsageArchiveResponseDTO>>;
     public getSingleItSystemUsageArchiveV2Get(requestParameters: GetSingleItSystemUsageArchiveV2GetRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const archiveUuid = requestParameters.archiveUuid;
         if (archiveUuid === null || archiveUuid === undefined) {
@@ -228,7 +230,7 @@ export class ItSystemUsageArchiveV2Service {
         }
 
         let localVarPath = `/api/v2/it-system-usage-archives/${this.configuration.encodeParam({name: "archiveUuid", value: archiveUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APIItSystemUsageArchiveResponseDTO>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -246,9 +248,9 @@ export class ItSystemUsageArchiveV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItSystemUsageArchiveV2GetItSystemUsageArchiveCollectionPermissions(requestParameters: GetSingleItSystemUsageArchiveV2GetItSystemUsageArchiveCollectionPermissionsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleItSystemUsageArchiveV2GetItSystemUsageArchiveCollectionPermissions(requestParameters: GetSingleItSystemUsageArchiveV2GetItSystemUsageArchiveCollectionPermissionsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleItSystemUsageArchiveV2GetItSystemUsageArchiveCollectionPermissions(requestParameters: GetSingleItSystemUsageArchiveV2GetItSystemUsageArchiveCollectionPermissionsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public getSingleItSystemUsageArchiveV2GetItSystemUsageArchiveCollectionPermissions(requestParameters: GetSingleItSystemUsageArchiveV2GetItSystemUsageArchiveCollectionPermissionsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIItSystemUsageArchiveResponseDTO>;
+    public getSingleItSystemUsageArchiveV2GetItSystemUsageArchiveCollectionPermissions(requestParameters: GetSingleItSystemUsageArchiveV2GetItSystemUsageArchiveCollectionPermissionsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIItSystemUsageArchiveResponseDTO>>;
+    public getSingleItSystemUsageArchiveV2GetItSystemUsageArchiveCollectionPermissions(requestParameters: GetSingleItSystemUsageArchiveV2GetItSystemUsageArchiveCollectionPermissionsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIItSystemUsageArchiveResponseDTO>>;
     public getSingleItSystemUsageArchiveV2GetItSystemUsageArchiveCollectionPermissions(requestParameters: GetSingleItSystemUsageArchiveV2GetItSystemUsageArchiveCollectionPermissionsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
@@ -300,7 +302,7 @@ export class ItSystemUsageArchiveV2Service {
         }
 
         let localVarPath = `/api/v2/it-system-usage-archives/permissions`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APIItSystemUsageArchiveResponseDTO>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 params: localVarQueryParameters,
@@ -319,9 +321,9 @@ export class ItSystemUsageArchiveV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItSystemUsageArchiveV2GetItSystemUsageArchivePermissions(requestParameters: GetSingleItSystemUsageArchiveV2GetItSystemUsageArchivePermissionsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleItSystemUsageArchiveV2GetItSystemUsageArchivePermissions(requestParameters: GetSingleItSystemUsageArchiveV2GetItSystemUsageArchivePermissionsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleItSystemUsageArchiveV2GetItSystemUsageArchivePermissions(requestParameters: GetSingleItSystemUsageArchiveV2GetItSystemUsageArchivePermissionsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public getSingleItSystemUsageArchiveV2GetItSystemUsageArchivePermissions(requestParameters: GetSingleItSystemUsageArchiveV2GetItSystemUsageArchivePermissionsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIItSystemUsageArchiveResponseDTO>;
+    public getSingleItSystemUsageArchiveV2GetItSystemUsageArchivePermissions(requestParameters: GetSingleItSystemUsageArchiveV2GetItSystemUsageArchivePermissionsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIItSystemUsageArchiveResponseDTO>>;
+    public getSingleItSystemUsageArchiveV2GetItSystemUsageArchivePermissions(requestParameters: GetSingleItSystemUsageArchiveV2GetItSystemUsageArchivePermissionsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIItSystemUsageArchiveResponseDTO>>;
     public getSingleItSystemUsageArchiveV2GetItSystemUsageArchivePermissions(requestParameters: GetSingleItSystemUsageArchiveV2GetItSystemUsageArchivePermissionsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const archiveUuid = requestParameters.archiveUuid;
         if (archiveUuid === null || archiveUuid === undefined) {
@@ -367,7 +369,7 @@ export class ItSystemUsageArchiveV2Service {
         }
 
         let localVarPath = `/api/v2/it-system-usage-archives/${this.configuration.encodeParam({name: "archiveUuid", value: archiveUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/permissions`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APIItSystemUsageArchiveResponseDTO>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,

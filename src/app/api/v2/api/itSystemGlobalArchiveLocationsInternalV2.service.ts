@@ -21,6 +21,8 @@ import { Observable }                                        from 'rxjs';
 // @ts-ignore
 import { APIGlobalRegularOptionCreateRequestDTO } from '../model/aPIGlobalRegularOptionCreateRequestDTO';
 // @ts-ignore
+import { APIGlobalRegularOptionResponseDTO } from '../model/aPIGlobalRegularOptionResponseDTO';
+// @ts-ignore
 import { APIGlobalRegularOptionUpdateRequestDTO } from '../model/aPIGlobalRegularOptionUpdateRequestDTO';
 
 // @ts-ignore
@@ -106,10 +108,10 @@ export class ItSystemGlobalArchiveLocationsInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItSystemGlobalArchiveLocationsInternalV2GetArchiveLocations(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleItSystemGlobalArchiveLocationsInternalV2GetArchiveLocations(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleItSystemGlobalArchiveLocationsInternalV2GetArchiveLocations(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleItSystemGlobalArchiveLocationsInternalV2GetArchiveLocations(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyItSystemGlobalArchiveLocationsInternalV2GetArchiveLocations(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIGlobalRegularOptionResponseDTO>>;
+    public getManyItSystemGlobalArchiveLocationsInternalV2GetArchiveLocations(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIGlobalRegularOptionResponseDTO>>>;
+    public getManyItSystemGlobalArchiveLocationsInternalV2GetArchiveLocations(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIGlobalRegularOptionResponseDTO>>>;
+    public getManyItSystemGlobalArchiveLocationsInternalV2GetArchiveLocations(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -150,7 +152,7 @@ export class ItSystemGlobalArchiveLocationsInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/it-systems/global-option-types/archive-location-types`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<Array<APIGlobalRegularOptionResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -167,9 +169,9 @@ export class ItSystemGlobalArchiveLocationsInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleItSystemGlobalArchiveLocationsInternalV2PatchGlobalArchiveLocation(requestParameters: PatchSingleItSystemGlobalArchiveLocationsInternalV2PatchGlobalArchiveLocationRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public patchSingleItSystemGlobalArchiveLocationsInternalV2PatchGlobalArchiveLocation(requestParameters: PatchSingleItSystemGlobalArchiveLocationsInternalV2PatchGlobalArchiveLocationRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public patchSingleItSystemGlobalArchiveLocationsInternalV2PatchGlobalArchiveLocation(requestParameters: PatchSingleItSystemGlobalArchiveLocationsInternalV2PatchGlobalArchiveLocationRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public patchSingleItSystemGlobalArchiveLocationsInternalV2PatchGlobalArchiveLocation(requestParameters: PatchSingleItSystemGlobalArchiveLocationsInternalV2PatchGlobalArchiveLocationRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRegularOptionResponseDTO>;
+    public patchSingleItSystemGlobalArchiveLocationsInternalV2PatchGlobalArchiveLocation(requestParameters: PatchSingleItSystemGlobalArchiveLocationsInternalV2PatchGlobalArchiveLocationRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRegularOptionResponseDTO>>;
+    public patchSingleItSystemGlobalArchiveLocationsInternalV2PatchGlobalArchiveLocation(requestParameters: PatchSingleItSystemGlobalArchiveLocationsInternalV2PatchGlobalArchiveLocationRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRegularOptionResponseDTO>>;
     public patchSingleItSystemGlobalArchiveLocationsInternalV2PatchGlobalArchiveLocation(requestParameters: PatchSingleItSystemGlobalArchiveLocationsInternalV2PatchGlobalArchiveLocationRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
@@ -226,7 +228,7 @@ export class ItSystemGlobalArchiveLocationsInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/it-systems/global-option-types/archive-location-types/${this.configuration.encodeParam({name: "optionUuid", value: optionUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
-        return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APIGlobalRegularOptionResponseDTO>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPIGlobalRegularOptionUpdateRequestDTO,
@@ -244,9 +246,9 @@ export class ItSystemGlobalArchiveLocationsInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleItSystemGlobalArchiveLocationsInternalV2CreateArchiveLocation(requestParameters: PostSingleItSystemGlobalArchiveLocationsInternalV2CreateArchiveLocationRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public postSingleItSystemGlobalArchiveLocationsInternalV2CreateArchiveLocation(requestParameters: PostSingleItSystemGlobalArchiveLocationsInternalV2CreateArchiveLocationRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public postSingleItSystemGlobalArchiveLocationsInternalV2CreateArchiveLocation(requestParameters: PostSingleItSystemGlobalArchiveLocationsInternalV2CreateArchiveLocationRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public postSingleItSystemGlobalArchiveLocationsInternalV2CreateArchiveLocation(requestParameters: PostSingleItSystemGlobalArchiveLocationsInternalV2CreateArchiveLocationRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRegularOptionResponseDTO>;
+    public postSingleItSystemGlobalArchiveLocationsInternalV2CreateArchiveLocation(requestParameters: PostSingleItSystemGlobalArchiveLocationsInternalV2CreateArchiveLocationRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRegularOptionResponseDTO>>;
+    public postSingleItSystemGlobalArchiveLocationsInternalV2CreateArchiveLocation(requestParameters: PostSingleItSystemGlobalArchiveLocationsInternalV2CreateArchiveLocationRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRegularOptionResponseDTO>>;
     public postSingleItSystemGlobalArchiveLocationsInternalV2CreateArchiveLocation(requestParameters: PostSingleItSystemGlobalArchiveLocationsInternalV2CreateArchiveLocationRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const aPIGlobalRegularOptionCreateRequestDTO = requestParameters.aPIGlobalRegularOptionCreateRequestDTO;
 
@@ -298,7 +300,7 @@ export class ItSystemGlobalArchiveLocationsInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/it-systems/global-option-types/archive-location-types`;
-        return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APIGlobalRegularOptionResponseDTO>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPIGlobalRegularOptionCreateRequestDTO,

@@ -86,7 +86,7 @@ export class ItContractFrontpageComponentStore extends ComponentStore<State> imp
       mergeMap(([search, organizationUuid]) => {
         this.updateUsersIsLoading(true);
         return this.organizationApiService
-          .getSingleOrganizationV2GetOrganizationUsers({
+          .getManyOrganizationV2GetOrganizationUsers({
             organizationUuid,
             nameOrEmailQuery: search,
           })
@@ -106,7 +106,7 @@ export class ItContractFrontpageComponentStore extends ComponentStore<State> imp
       switchMap((search) => {
         this.updateOrganizationsIsLoading(true);
         return this.organizationApiService
-          .getSingleOrganizationV2GetOrganizations({
+          .getManyOrganizationV2GetOrganizations({
             nameOrCvrContent: search,
             orderByProperty: 'Name',
           })
@@ -130,7 +130,7 @@ export class ItContractFrontpageComponentStore extends ComponentStore<State> imp
       ),
       mergeMap(([search, organizationUuid, contractUuid]) => {
         return this.apiItContractService
-          .getSingleItContractV2GetItContracts({ organizationUuid, nameContent: search })
+          .getManyItContractV2GetItContracts({ organizationUuid, nameContent: search })
           .pipe(
             tapResponse({
               next: (contracts) => {

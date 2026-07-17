@@ -21,6 +21,8 @@ import { Observable }                                        from 'rxjs';
 // @ts-ignore
 import { APIHelpTextCreateRequestDTO } from '../model/aPIHelpTextCreateRequestDTO';
 // @ts-ignore
+import { APIHelpTextResponseDTO } from '../model/aPIHelpTextResponseDTO';
+// @ts-ignore
 import { APIHelpTextUpdateRequestDTO } from '../model/aPIHelpTextUpdateRequestDTO';
 
 // @ts-ignore
@@ -178,10 +180,10 @@ export class HelpTextsInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleHelpTextsInternalV2GetAll(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleHelpTextsInternalV2GetAll(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleHelpTextsInternalV2GetAll(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleHelpTextsInternalV2GetAll(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyHelpTextsInternalV2GetAll(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIHelpTextResponseDTO>>;
+    public getManyHelpTextsInternalV2GetAll(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIHelpTextResponseDTO>>>;
+    public getManyHelpTextsInternalV2GetAll(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIHelpTextResponseDTO>>>;
+    public getManyHelpTextsInternalV2GetAll(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -222,7 +224,7 @@ export class HelpTextsInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/help-texts`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<Array<APIHelpTextResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -239,9 +241,9 @@ export class HelpTextsInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleHelpTextsInternalV2GetSingle(requestParameters: GetSingleHelpTextsInternalV2GetSingleRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleHelpTextsInternalV2GetSingle(requestParameters: GetSingleHelpTextsInternalV2GetSingleRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleHelpTextsInternalV2GetSingle(requestParameters: GetSingleHelpTextsInternalV2GetSingleRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public getSingleHelpTextsInternalV2GetSingle(requestParameters: GetSingleHelpTextsInternalV2GetSingleRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIHelpTextResponseDTO>;
+    public getSingleHelpTextsInternalV2GetSingle(requestParameters: GetSingleHelpTextsInternalV2GetSingleRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIHelpTextResponseDTO>>;
+    public getSingleHelpTextsInternalV2GetSingle(requestParameters: GetSingleHelpTextsInternalV2GetSingleRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIHelpTextResponseDTO>>;
     public getSingleHelpTextsInternalV2GetSingle(requestParameters: GetSingleHelpTextsInternalV2GetSingleRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const key = requestParameters.key;
         if (key === null || key === undefined) {
@@ -287,7 +289,7 @@ export class HelpTextsInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/help-texts/${this.configuration.encodeParam({name: "key", value: key, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APIHelpTextResponseDTO>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -304,9 +306,9 @@ export class HelpTextsInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleHelpTextsInternalV2Patch(requestParameters: PatchSingleHelpTextsInternalV2PatchRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public patchSingleHelpTextsInternalV2Patch(requestParameters: PatchSingleHelpTextsInternalV2PatchRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public patchSingleHelpTextsInternalV2Patch(requestParameters: PatchSingleHelpTextsInternalV2PatchRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public patchSingleHelpTextsInternalV2Patch(requestParameters: PatchSingleHelpTextsInternalV2PatchRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIHelpTextResponseDTO>;
+    public patchSingleHelpTextsInternalV2Patch(requestParameters: PatchSingleHelpTextsInternalV2PatchRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIHelpTextResponseDTO>>;
+    public patchSingleHelpTextsInternalV2Patch(requestParameters: PatchSingleHelpTextsInternalV2PatchRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIHelpTextResponseDTO>>;
     public patchSingleHelpTextsInternalV2Patch(requestParameters: PatchSingleHelpTextsInternalV2PatchRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const key = requestParameters.key;
         if (key === null || key === undefined) {
@@ -363,7 +365,7 @@ export class HelpTextsInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/help-texts/${this.configuration.encodeParam({name: "key", value: key, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
-        return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APIHelpTextResponseDTO>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPIHelpTextUpdateRequestDTO,
@@ -381,9 +383,9 @@ export class HelpTextsInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleHelpTextsInternalV2Post(requestParameters: PostSingleHelpTextsInternalV2PostRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public postSingleHelpTextsInternalV2Post(requestParameters: PostSingleHelpTextsInternalV2PostRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public postSingleHelpTextsInternalV2Post(requestParameters: PostSingleHelpTextsInternalV2PostRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public postSingleHelpTextsInternalV2Post(requestParameters: PostSingleHelpTextsInternalV2PostRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIHelpTextResponseDTO>;
+    public postSingleHelpTextsInternalV2Post(requestParameters: PostSingleHelpTextsInternalV2PostRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIHelpTextResponseDTO>>;
+    public postSingleHelpTextsInternalV2Post(requestParameters: PostSingleHelpTextsInternalV2PostRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIHelpTextResponseDTO>>;
     public postSingleHelpTextsInternalV2Post(requestParameters: PostSingleHelpTextsInternalV2PostRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const aPIHelpTextCreateRequestDTO = requestParameters.aPIHelpTextCreateRequestDTO;
 
@@ -435,7 +437,7 @@ export class HelpTextsInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/help-texts`;
-        return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APIHelpTextResponseDTO>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPIHelpTextCreateRequestDTO,

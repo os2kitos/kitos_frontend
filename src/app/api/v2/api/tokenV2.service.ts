@@ -20,6 +20,8 @@ import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
 import { APITokenIntrospectionRequest } from '../model/aPITokenIntrospectionRequest';
+// @ts-ignore
+import { APITokenIntrospectionResponseDTO } from '../model/aPITokenIntrospectionResponseDTO';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -100,9 +102,9 @@ export class TokenV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleTokenV2Introspect(requestParameters: PostSingleTokenV2IntrospectRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public postSingleTokenV2Introspect(requestParameters: PostSingleTokenV2IntrospectRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public postSingleTokenV2Introspect(requestParameters: PostSingleTokenV2IntrospectRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public postSingleTokenV2Introspect(requestParameters: PostSingleTokenV2IntrospectRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APITokenIntrospectionResponseDTO>;
+    public postSingleTokenV2Introspect(requestParameters: PostSingleTokenV2IntrospectRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APITokenIntrospectionResponseDTO>>;
+    public postSingleTokenV2Introspect(requestParameters: PostSingleTokenV2IntrospectRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APITokenIntrospectionResponseDTO>>;
     public postSingleTokenV2Introspect(requestParameters: PostSingleTokenV2IntrospectRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const aPITokenIntrospectionRequest = requestParameters.aPITokenIntrospectionRequest;
 
@@ -154,7 +156,7 @@ export class TokenV2Service {
         }
 
         let localVarPath = `/api/v2/token/validate`;
-        return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APITokenIntrospectionResponseDTO>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPITokenIntrospectionRequest,

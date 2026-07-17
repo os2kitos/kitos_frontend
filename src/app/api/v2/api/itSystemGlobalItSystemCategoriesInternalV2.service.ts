@@ -21,6 +21,8 @@ import { Observable }                                        from 'rxjs';
 // @ts-ignore
 import { APIGlobalRegularOptionCreateRequestDTO } from '../model/aPIGlobalRegularOptionCreateRequestDTO';
 // @ts-ignore
+import { APIGlobalRegularOptionResponseDTO } from '../model/aPIGlobalRegularOptionResponseDTO';
+// @ts-ignore
 import { APIGlobalRegularOptionUpdateRequestDTO } from '../model/aPIGlobalRegularOptionUpdateRequestDTO';
 
 // @ts-ignore
@@ -106,10 +108,10 @@ export class ItSystemGlobalItSystemCategoriesInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItSystemGlobalItSystemCategoriesInternalV2GetGlobalItSystemCategoriess(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleItSystemGlobalItSystemCategoriesInternalV2GetGlobalItSystemCategoriess(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleItSystemGlobalItSystemCategoriesInternalV2GetGlobalItSystemCategoriess(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleItSystemGlobalItSystemCategoriesInternalV2GetGlobalItSystemCategoriess(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyItSystemGlobalItSystemCategoriesInternalV2GetGlobalItSystemCategoriess(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIGlobalRegularOptionResponseDTO>>;
+    public getManyItSystemGlobalItSystemCategoriesInternalV2GetGlobalItSystemCategoriess(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIGlobalRegularOptionResponseDTO>>>;
+    public getManyItSystemGlobalItSystemCategoriesInternalV2GetGlobalItSystemCategoriess(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIGlobalRegularOptionResponseDTO>>>;
+    public getManyItSystemGlobalItSystemCategoriesInternalV2GetGlobalItSystemCategoriess(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -150,7 +152,7 @@ export class ItSystemGlobalItSystemCategoriesInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/it-systems/global-option-types/it-system-categories`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<Array<APIGlobalRegularOptionResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -167,9 +169,9 @@ export class ItSystemGlobalItSystemCategoriesInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleItSystemGlobalItSystemCategoriesInternalV2PatchGlobalItSystemCategories(requestParameters: PatchSingleItSystemGlobalItSystemCategoriesInternalV2PatchGlobalItSystemCategoriesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public patchSingleItSystemGlobalItSystemCategoriesInternalV2PatchGlobalItSystemCategories(requestParameters: PatchSingleItSystemGlobalItSystemCategoriesInternalV2PatchGlobalItSystemCategoriesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public patchSingleItSystemGlobalItSystemCategoriesInternalV2PatchGlobalItSystemCategories(requestParameters: PatchSingleItSystemGlobalItSystemCategoriesInternalV2PatchGlobalItSystemCategoriesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public patchSingleItSystemGlobalItSystemCategoriesInternalV2PatchGlobalItSystemCategories(requestParameters: PatchSingleItSystemGlobalItSystemCategoriesInternalV2PatchGlobalItSystemCategoriesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRegularOptionResponseDTO>;
+    public patchSingleItSystemGlobalItSystemCategoriesInternalV2PatchGlobalItSystemCategories(requestParameters: PatchSingleItSystemGlobalItSystemCategoriesInternalV2PatchGlobalItSystemCategoriesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRegularOptionResponseDTO>>;
+    public patchSingleItSystemGlobalItSystemCategoriesInternalV2PatchGlobalItSystemCategories(requestParameters: PatchSingleItSystemGlobalItSystemCategoriesInternalV2PatchGlobalItSystemCategoriesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRegularOptionResponseDTO>>;
     public patchSingleItSystemGlobalItSystemCategoriesInternalV2PatchGlobalItSystemCategories(requestParameters: PatchSingleItSystemGlobalItSystemCategoriesInternalV2PatchGlobalItSystemCategoriesRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
@@ -226,7 +228,7 @@ export class ItSystemGlobalItSystemCategoriesInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/it-systems/global-option-types/it-system-categories/${this.configuration.encodeParam({name: "optionUuid", value: optionUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
-        return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APIGlobalRegularOptionResponseDTO>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPIGlobalRegularOptionUpdateRequestDTO,
@@ -244,9 +246,9 @@ export class ItSystemGlobalItSystemCategoriesInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleItSystemGlobalItSystemCategoriesInternalV2CreateGlobalItSystemCategories(requestParameters: PostSingleItSystemGlobalItSystemCategoriesInternalV2CreateGlobalItSystemCategoriesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public postSingleItSystemGlobalItSystemCategoriesInternalV2CreateGlobalItSystemCategories(requestParameters: PostSingleItSystemGlobalItSystemCategoriesInternalV2CreateGlobalItSystemCategoriesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public postSingleItSystemGlobalItSystemCategoriesInternalV2CreateGlobalItSystemCategories(requestParameters: PostSingleItSystemGlobalItSystemCategoriesInternalV2CreateGlobalItSystemCategoriesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public postSingleItSystemGlobalItSystemCategoriesInternalV2CreateGlobalItSystemCategories(requestParameters: PostSingleItSystemGlobalItSystemCategoriesInternalV2CreateGlobalItSystemCategoriesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRegularOptionResponseDTO>;
+    public postSingleItSystemGlobalItSystemCategoriesInternalV2CreateGlobalItSystemCategories(requestParameters: PostSingleItSystemGlobalItSystemCategoriesInternalV2CreateGlobalItSystemCategoriesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRegularOptionResponseDTO>>;
+    public postSingleItSystemGlobalItSystemCategoriesInternalV2CreateGlobalItSystemCategories(requestParameters: PostSingleItSystemGlobalItSystemCategoriesInternalV2CreateGlobalItSystemCategoriesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRegularOptionResponseDTO>>;
     public postSingleItSystemGlobalItSystemCategoriesInternalV2CreateGlobalItSystemCategories(requestParameters: PostSingleItSystemGlobalItSystemCategoriesInternalV2CreateGlobalItSystemCategoriesRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const aPIGlobalRegularOptionCreateRequestDTO = requestParameters.aPIGlobalRegularOptionCreateRequestDTO;
 
@@ -298,7 +300,7 @@ export class ItSystemGlobalItSystemCategoriesInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/it-systems/global-option-types/it-system-categories`;
-        return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APIGlobalRegularOptionResponseDTO>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPIGlobalRegularOptionCreateRequestDTO,

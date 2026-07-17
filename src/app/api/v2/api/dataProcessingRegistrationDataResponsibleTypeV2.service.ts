@@ -18,13 +18,17 @@ import { HttpClient, HttpHeaders, HttpParams,
 import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
+// @ts-ignore
+import { APIRegularOptionExtendedResponseDTO } from '../model/aPIRegularOptionExtendedResponseDTO';
+// @ts-ignore
+import { APIRegularOptionResponseDTO } from '../model/aPIRegularOptionResponseDTO';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
 
 
-export interface GetSingleDataProcessingRegistrationDataResponsibleTypeV2GetRequestParams {
+export interface GetManyDataProcessingRegistrationDataResponsibleTypeV2GetRequestParams {
     /** organization context for the data responsible availability */
     organizationUuid?: string;
     /** 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0  NOTE: This parameter has no effect if \&#39;pageSize\&#39; is left unspecified */
@@ -111,10 +115,10 @@ export class DataProcessingRegistrationDataResponsibleTypeV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleDataProcessingRegistrationDataResponsibleTypeV2Get(requestParameters: GetSingleDataProcessingRegistrationDataResponsibleTypeV2GetRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleDataProcessingRegistrationDataResponsibleTypeV2Get(requestParameters: GetSingleDataProcessingRegistrationDataResponsibleTypeV2GetRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleDataProcessingRegistrationDataResponsibleTypeV2Get(requestParameters: GetSingleDataProcessingRegistrationDataResponsibleTypeV2GetRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleDataProcessingRegistrationDataResponsibleTypeV2Get(requestParameters: GetSingleDataProcessingRegistrationDataResponsibleTypeV2GetRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyDataProcessingRegistrationDataResponsibleTypeV2Get(requestParameters: GetManyDataProcessingRegistrationDataResponsibleTypeV2GetRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIRegularOptionResponseDTO>>;
+    public getManyDataProcessingRegistrationDataResponsibleTypeV2Get(requestParameters: GetManyDataProcessingRegistrationDataResponsibleTypeV2GetRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIRegularOptionResponseDTO>>>;
+    public getManyDataProcessingRegistrationDataResponsibleTypeV2Get(requestParameters: GetManyDataProcessingRegistrationDataResponsibleTypeV2GetRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIRegularOptionResponseDTO>>>;
+    public getManyDataProcessingRegistrationDataResponsibleTypeV2Get(requestParameters: GetManyDataProcessingRegistrationDataResponsibleTypeV2GetRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         const page = requestParameters.page;
         const pageSize = requestParameters.pageSize;
@@ -172,7 +176,7 @@ export class DataProcessingRegistrationDataResponsibleTypeV2Service {
         }
 
         let localVarPath = `/api/v2/data-processing-registration-data-responsible-types`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<Array<APIRegularOptionResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 params: localVarQueryParameters,
@@ -191,9 +195,9 @@ export class DataProcessingRegistrationDataResponsibleTypeV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleDataProcessingRegistrationDataResponsibleTypeV2GetV1(requestParameters: GetSingleDataProcessingRegistrationDataResponsibleTypeV2GetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleDataProcessingRegistrationDataResponsibleTypeV2GetV1(requestParameters: GetSingleDataProcessingRegistrationDataResponsibleTypeV2GetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleDataProcessingRegistrationDataResponsibleTypeV2GetV1(requestParameters: GetSingleDataProcessingRegistrationDataResponsibleTypeV2GetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public getSingleDataProcessingRegistrationDataResponsibleTypeV2GetV1(requestParameters: GetSingleDataProcessingRegistrationDataResponsibleTypeV2GetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
+    public getSingleDataProcessingRegistrationDataResponsibleTypeV2GetV1(requestParameters: GetSingleDataProcessingRegistrationDataResponsibleTypeV2GetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
+    public getSingleDataProcessingRegistrationDataResponsibleTypeV2GetV1(requestParameters: GetSingleDataProcessingRegistrationDataResponsibleTypeV2GetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
     public getSingleDataProcessingRegistrationDataResponsibleTypeV2GetV1(requestParameters: GetSingleDataProcessingRegistrationDataResponsibleTypeV2GetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const dataResponsibleUuid = requestParameters.dataResponsibleUuid;
         if (dataResponsibleUuid === null || dataResponsibleUuid === undefined) {
@@ -246,7 +250,7 @@ export class DataProcessingRegistrationDataResponsibleTypeV2Service {
         }
 
         let localVarPath = `/api/v2/data-processing-registration-data-responsible-types/${this.configuration.encodeParam({name: "dataResponsibleUuid", value: dataResponsibleUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APIRegularOptionExtendedResponseDTO>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 params: localVarQueryParameters,

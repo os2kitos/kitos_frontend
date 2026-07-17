@@ -32,12 +32,12 @@
         data-cy="foreign-country-code"
       ></app-dropdown>
       <div class="isms-supplier-input-container">
-        <app-tooltip [text]="enableISMSSupplierField() === false ? tooltipText : ''">
+        <app-tooltip [text]="enableISMSResponsibleField() === false ? tooltipText : ''">
           <app-checkbox
             [formGroup]="formGroup"
             formName="isSupplier"
             labelPosition="after"
-            text="ISMS leverandør"
+            text="ISMS ansvarlig"
             i18n-text
           ></app-checkbox>
         </app-tooltip>

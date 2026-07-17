@@ -41,7 +41,7 @@ export function getDetailsPageLink(
       case 'data-processing-registration':
         return getDetailsPagePath(AppPath.dataProcessing, itemUuid, subpagePath);
       case 'it-contract':
-        return getDetailsPagePath(AppPath.itContracts, itemUuid, subpagePath);
+        return getDetailsPagePath(`${AppPath.itContracts}/${AppPath.contracts}`, itemUuid, subpagePath);
       case 'it-interface':
         return getDetailsPagePathWithSubmodule(
           `${AppPath.itSystems}/${AppPath.itInterfaces}`,

@@ -28,5 +28,29 @@ export interface APIContractSupplierDataWriteRequestDTO {
      * Which date was the contract signed by the supplier
      */
     signedAt?: string | null;
+    /**
+     * Optional reference to the supplier organization unit  requires IsInternal to be true
+     */
+    organizationUnitUuid?: string | null;
+    /**
+     * Determines if the contract is internal (supplier is part of the same organization)
+     */
+    isInternal?: boolean;
+    /**
+     * Contact person at the supplier organization
+     */
+    contactPerson?: string | null;
+    /**
+     * Determines if the contact person is the same as the person who signed the contract
+     */
+    useSignedByForContact?: boolean;
+    /**
+     * Contact phone number at the supplier organization
+     */
+    contactPhoneNumber?: string | null;
+    /**
+     * Contact email at the supplier organization
+     */
+    contactEmail?: string | null;
 }
 

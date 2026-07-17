@@ -21,6 +21,8 @@ import { Observable }                                        from 'rxjs';
 // @ts-ignore
 import { APIChangeOrganizationUnitRegistrationV2RequestDTO } from '../model/aPIChangeOrganizationUnitRegistrationV2RequestDTO';
 // @ts-ignore
+import { APIOrganizationRegistrationUnitResponseDTO } from '../model/aPIOrganizationRegistrationUnitResponseDTO';
+// @ts-ignore
 import { APITransferOrganizationUnitRegistrationV2RequestDTO } from '../model/aPITransferOrganizationUnitRegistrationV2RequestDTO';
 
 // @ts-ignore
@@ -194,9 +196,9 @@ export class OrganizationUnitRegistrationInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleOrganizationUnitRegistrationInternalV2GetRegistrations(requestParameters: GetSingleOrganizationUnitRegistrationInternalV2GetRegistrationsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleOrganizationUnitRegistrationInternalV2GetRegistrations(requestParameters: GetSingleOrganizationUnitRegistrationInternalV2GetRegistrationsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleOrganizationUnitRegistrationInternalV2GetRegistrations(requestParameters: GetSingleOrganizationUnitRegistrationInternalV2GetRegistrationsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public getSingleOrganizationUnitRegistrationInternalV2GetRegistrations(requestParameters: GetSingleOrganizationUnitRegistrationInternalV2GetRegistrationsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIOrganizationRegistrationUnitResponseDTO>;
+    public getSingleOrganizationUnitRegistrationInternalV2GetRegistrations(requestParameters: GetSingleOrganizationUnitRegistrationInternalV2GetRegistrationsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIOrganizationRegistrationUnitResponseDTO>>;
+    public getSingleOrganizationUnitRegistrationInternalV2GetRegistrations(requestParameters: GetSingleOrganizationUnitRegistrationInternalV2GetRegistrationsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIOrganizationRegistrationUnitResponseDTO>>;
     public getSingleOrganizationUnitRegistrationInternalV2GetRegistrations(requestParameters: GetSingleOrganizationUnitRegistrationInternalV2GetRegistrationsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
@@ -246,7 +248,7 @@ export class OrganizationUnitRegistrationInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/organizations/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/organization-units/${this.configuration.encodeParam({name: "unitUuid", value: unitUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/registrations`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APIOrganizationRegistrationUnitResponseDTO>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,

@@ -31,7 +31,7 @@ export interface APIItContractResponseDTO {
     /**
      * Name of IT-Contract
      */
-    name: string;
+    name: string | null;
     organizationContext: APIShallowOrganizationResponseDTO;
     /**
      * UTC timestamp of latest modification
@@ -47,11 +47,11 @@ export interface APIItContractResponseDTO {
     /**
      * Associated IT-System usages
      */
-    systemUsages: Array<APIIdentityNamePairResponseDTO>;
+    systemUsages: Array<APIIdentityNamePairResponseDTO> | null;
     /**
      * Data processing registrations associated with this it-contract
      */
-    dataProcessingRegistrations: Array<APIIdentityNamePairResponseDTO>;
+    dataProcessingRegistrations: Array<APIIdentityNamePairResponseDTO> | null;
     paymentModel: APIContractPaymentModelDataResponseDTO;
     agreementPeriod: APIContractAgreementPeriodDataResponseDTO;
     termination: APIContractTerminationDataResponseDTO;
@@ -59,10 +59,10 @@ export interface APIItContractResponseDTO {
     /**
      * Role assignments
      */
-    roles: Array<APIRoleAssignmentResponseDTO>;
+    roles: Array<APIRoleAssignmentResponseDTO> | null;
     /**
      * External reference definitions
      */
-    externalReferences: Array<APIExternalReferenceDataResponseDTO>;
+    externalReferences: Array<APIExternalReferenceDataResponseDTO> | null;
 }
 

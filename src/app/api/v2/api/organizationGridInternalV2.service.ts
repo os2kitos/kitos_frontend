@@ -21,6 +21,10 @@ import { Observable }                                        from 'rxjs';
 // @ts-ignore
 import { APIOrganizationGridConfigurationRequestDTO } from '../model/aPIOrganizationGridConfigurationRequestDTO';
 // @ts-ignore
+import { APIOrganizationGridConfigurationResponseDTO } from '../model/aPIOrganizationGridConfigurationResponseDTO';
+// @ts-ignore
+import { APIOrganizationGridPermissionsResponseDTO } from '../model/aPIOrganizationGridPermissionsResponseDTO';
+// @ts-ignore
 import { APIOverviewTypeOptions } from '../model/aPIOverviewTypeOptions';
 
 // @ts-ignore
@@ -255,9 +259,9 @@ export class OrganizationGridInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleOrganizationGridInternalV2GetOrganizationGridPermissions(requestParameters: GetSingleOrganizationGridInternalV2GetOrganizationGridPermissionsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleOrganizationGridInternalV2GetOrganizationGridPermissions(requestParameters: GetSingleOrganizationGridInternalV2GetOrganizationGridPermissionsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleOrganizationGridInternalV2GetOrganizationGridPermissions(requestParameters: GetSingleOrganizationGridInternalV2GetOrganizationGridPermissionsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public getSingleOrganizationGridInternalV2GetOrganizationGridPermissions(requestParameters: GetSingleOrganizationGridInternalV2GetOrganizationGridPermissionsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIOrganizationGridPermissionsResponseDTO>;
+    public getSingleOrganizationGridInternalV2GetOrganizationGridPermissions(requestParameters: GetSingleOrganizationGridInternalV2GetOrganizationGridPermissionsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIOrganizationGridPermissionsResponseDTO>>;
+    public getSingleOrganizationGridInternalV2GetOrganizationGridPermissions(requestParameters: GetSingleOrganizationGridInternalV2GetOrganizationGridPermissionsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIOrganizationGridPermissionsResponseDTO>>;
     public getSingleOrganizationGridInternalV2GetOrganizationGridPermissions(requestParameters: GetSingleOrganizationGridInternalV2GetOrganizationGridPermissionsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
@@ -303,7 +307,7 @@ export class OrganizationGridInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/organizations/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/grid/permissions`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APIOrganizationGridPermissionsResponseDTO>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -320,9 +324,9 @@ export class OrganizationGridInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleOrganizationGridInternalV2SaveGridConfiguration(requestParameters: PostSingleOrganizationGridInternalV2SaveGridConfigurationRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public postSingleOrganizationGridInternalV2SaveGridConfiguration(requestParameters: PostSingleOrganizationGridInternalV2SaveGridConfigurationRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public postSingleOrganizationGridInternalV2SaveGridConfiguration(requestParameters: PostSingleOrganizationGridInternalV2SaveGridConfigurationRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public postSingleOrganizationGridInternalV2SaveGridConfiguration(requestParameters: PostSingleOrganizationGridInternalV2SaveGridConfigurationRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIOrganizationGridConfigurationResponseDTO>;
+    public postSingleOrganizationGridInternalV2SaveGridConfiguration(requestParameters: PostSingleOrganizationGridInternalV2SaveGridConfigurationRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIOrganizationGridConfigurationResponseDTO>>;
+    public postSingleOrganizationGridInternalV2SaveGridConfiguration(requestParameters: PostSingleOrganizationGridInternalV2SaveGridConfigurationRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIOrganizationGridConfigurationResponseDTO>>;
     public postSingleOrganizationGridInternalV2SaveGridConfiguration(requestParameters: PostSingleOrganizationGridInternalV2SaveGridConfigurationRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
@@ -382,7 +386,7 @@ export class OrganizationGridInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/organizations/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/grid/${this.configuration.encodeParam({name: "overviewType", value: overviewType, in: "path", style: "simple", explode: false, dataType: "APIOverviewTypeOptions", dataFormat: undefined})}/save`;
-        return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APIOrganizationGridConfigurationResponseDTO>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPIOrganizationGridConfigurationRequestDTO,

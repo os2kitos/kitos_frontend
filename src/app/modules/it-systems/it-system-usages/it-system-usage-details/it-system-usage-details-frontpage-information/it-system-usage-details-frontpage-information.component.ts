@@ -12,7 +12,7 @@ import {
 } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { TooltipComponent } from 'src/app/shared/components/tooltip/tooltip.component';
-import { SUPPLIER_DISABLED_MESSAGE } from 'src/app/shared/constants/constants';
+import { ISMS_RESPONSIBLE_DISABLED_MESSAGE } from 'src/app/shared/constants/constants';
 import { optionalNewDate } from 'src/app/shared/helpers/date.helpers';
 import {
   dateGreaterThanOrEqualControlValidator,
@@ -151,7 +151,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
     { updateOn: 'blur' },
   );
 
-  public readonly supplierMessage = SUPPLIER_DISABLED_MESSAGE;
+  public readonly supplierMessage = ISMS_RESPONSIBLE_DISABLED_MESSAGE;
 
   public readonly aiTechnologyOptions = yesNoOptions;
   public readonly isSociallyCriticalOptions = yesNoDontKnowOptions;

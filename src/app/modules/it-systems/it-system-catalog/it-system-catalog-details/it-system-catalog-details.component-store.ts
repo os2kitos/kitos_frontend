@@ -27,7 +27,7 @@ export class ITSystemCatalogDetailsComponentStore extends ITSystemCatalogCompone
       concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       mergeMap(([itSystemUuid, organizationUuid]) =>
         this.apiItSystemUsageService
-          .getSingleItSystemUsageV2GetItSystemUsages({ systemUuid: itSystemUuid, organizationUuid })
+          .getManyItSystemUsageV2GetItSystemUsages({ systemUuid: itSystemUuid, organizationUuid })
           .pipe(
             tapResponse({
               next: (usages) => {

@@ -21,6 +21,8 @@ import { Observable }                                        from 'rxjs';
 // @ts-ignore
 import { APILocalOptionCreateRequestDTO } from '../model/aPILocalOptionCreateRequestDTO';
 // @ts-ignore
+import { APILocalRegularOptionResponseDTO } from '../model/aPILocalRegularOptionResponseDTO';
+// @ts-ignore
 import { APILocalRegularOptionUpdateRequestDTO } from '../model/aPILocalRegularOptionUpdateRequestDTO';
 
 // @ts-ignore
@@ -33,13 +35,13 @@ export interface DeleteSingleDprLocalOversightOptionTypesInternalV2DeleteLocalOv
     optionUuid: string;
 }
 
+export interface GetManyDprLocalOversightOptionTypesInternalV2GetLocalOversightOptionTypesRequestParams {
+    organizationUuid: string;
+}
+
 export interface GetSingleDprLocalOversightOptionTypesInternalV2GetLocalOversightOptionTypeByOptionIdRequestParams {
     organizationUuid: string;
     optionUuid: string;
-}
-
-export interface GetSingleDprLocalOversightOptionTypesInternalV2GetLocalOversightOptionTypesRequestParams {
-    organizationUuid: string;
 }
 
 export interface PatchSingleDprLocalOversightOptionTypesInternalV2PatchLocalOversightOptionTypeRequestParams {
@@ -191,9 +193,74 @@ export class DprLocalOversightOptionTypesInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleDprLocalOversightOptionTypesInternalV2GetLocalOversightOptionTypeByOptionId(requestParameters: GetSingleDprLocalOversightOptionTypesInternalV2GetLocalOversightOptionTypeByOptionIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleDprLocalOversightOptionTypesInternalV2GetLocalOversightOptionTypeByOptionId(requestParameters: GetSingleDprLocalOversightOptionTypesInternalV2GetLocalOversightOptionTypeByOptionIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleDprLocalOversightOptionTypesInternalV2GetLocalOversightOptionTypeByOptionId(requestParameters: GetSingleDprLocalOversightOptionTypesInternalV2GetLocalOversightOptionTypeByOptionIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public getManyDprLocalOversightOptionTypesInternalV2GetLocalOversightOptionTypes(requestParameters: GetManyDprLocalOversightOptionTypesInternalV2GetLocalOversightOptionTypesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APILocalRegularOptionResponseDTO>>;
+    public getManyDprLocalOversightOptionTypesInternalV2GetLocalOversightOptionTypes(requestParameters: GetManyDprLocalOversightOptionTypesInternalV2GetLocalOversightOptionTypesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APILocalRegularOptionResponseDTO>>>;
+    public getManyDprLocalOversightOptionTypesInternalV2GetLocalOversightOptionTypes(requestParameters: GetManyDprLocalOversightOptionTypesInternalV2GetLocalOversightOptionTypesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APILocalRegularOptionResponseDTO>>>;
+    public getManyDprLocalOversightOptionTypesInternalV2GetLocalOversightOptionTypes(requestParameters: GetManyDprLocalOversightOptionTypesInternalV2GetLocalOversightOptionTypesRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        const organizationUuid = requestParameters.organizationUuid;
+        if (organizationUuid === null || organizationUuid === undefined) {
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyDprLocalOversightOptionTypesInternalV2GetLocalOversightOptionTypes.');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarCredential: string | undefined;
+        // authentication (Bearer) required
+        localVarCredential = this.configuration.lookupCredential('Bearer');
+        if (localVarCredential) {
+            localVarHeaders = localVarHeaders.set('Authorization', 'Bearer ' + localVarCredential);
+        }
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/v2/internal/data-processing/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/local-option-types/oversight-option-types`;
+        return this.httpClient.request<Array<APILocalRegularOptionResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * @param requestParameters
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getSingleDprLocalOversightOptionTypesInternalV2GetLocalOversightOptionTypeByOptionId(requestParameters: GetSingleDprLocalOversightOptionTypesInternalV2GetLocalOversightOptionTypeByOptionIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
+    public getSingleDprLocalOversightOptionTypesInternalV2GetLocalOversightOptionTypeByOptionId(requestParameters: GetSingleDprLocalOversightOptionTypesInternalV2GetLocalOversightOptionTypeByOptionIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
+    public getSingleDprLocalOversightOptionTypesInternalV2GetLocalOversightOptionTypeByOptionId(requestParameters: GetSingleDprLocalOversightOptionTypesInternalV2GetLocalOversightOptionTypeByOptionIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
     public getSingleDprLocalOversightOptionTypesInternalV2GetLocalOversightOptionTypeByOptionId(requestParameters: GetSingleDprLocalOversightOptionTypesInternalV2GetLocalOversightOptionTypeByOptionIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
@@ -243,7 +310,7 @@ export class DprLocalOversightOptionTypesInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/data-processing/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/local-option-types/oversight-option-types/${this.configuration.encodeParam({name: "optionUuid", value: optionUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APILocalRegularOptionResponseDTO>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -260,74 +327,9 @@ export class DprLocalOversightOptionTypesInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleDprLocalOversightOptionTypesInternalV2GetLocalOversightOptionTypes(requestParameters: GetSingleDprLocalOversightOptionTypesInternalV2GetLocalOversightOptionTypesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleDprLocalOversightOptionTypesInternalV2GetLocalOversightOptionTypes(requestParameters: GetSingleDprLocalOversightOptionTypesInternalV2GetLocalOversightOptionTypesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleDprLocalOversightOptionTypesInternalV2GetLocalOversightOptionTypes(requestParameters: GetSingleDprLocalOversightOptionTypesInternalV2GetLocalOversightOptionTypesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleDprLocalOversightOptionTypesInternalV2GetLocalOversightOptionTypes(requestParameters: GetSingleDprLocalOversightOptionTypesInternalV2GetLocalOversightOptionTypesRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
-        const organizationUuid = requestParameters.organizationUuid;
-        if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleDprLocalOversightOptionTypesInternalV2GetLocalOversightOptionTypes.');
-        }
-
-        let localVarHeaders = this.defaultHeaders;
-
-        let localVarCredential: string | undefined;
-        // authentication (Bearer) required
-        localVarCredential = this.configuration.lookupCredential('Bearer');
-        if (localVarCredential) {
-            localVarHeaders = localVarHeaders.set('Authorization', 'Bearer ' + localVarCredential);
-        }
-
-        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
-        if (localVarHttpHeaderAcceptSelected === undefined) {
-            // to determine the Accept header
-            const httpHeaderAccepts: string[] = [
-                'application/json'
-            ];
-            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        }
-        if (localVarHttpHeaderAcceptSelected !== undefined) {
-            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
-        }
-
-        let localVarHttpContext: HttpContext | undefined = options && options.context;
-        if (localVarHttpContext === undefined) {
-            localVarHttpContext = new HttpContext();
-        }
-
-
-        let responseType_: 'text' | 'json' | 'blob' = 'json';
-        if (localVarHttpHeaderAcceptSelected) {
-            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
-                responseType_ = 'text';
-            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
-                responseType_ = 'json';
-            } else {
-                responseType_ = 'blob';
-            }
-        }
-
-        let localVarPath = `/api/v2/internal/data-processing/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/local-option-types/oversight-option-types`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
-            {
-                context: localVarHttpContext,
-                responseType: <any>responseType_,
-                withCredentials: this.configuration.withCredentials,
-                headers: localVarHeaders,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * @param requestParameters
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public patchSingleDprLocalOversightOptionTypesInternalV2PatchLocalOversightOptionType(requestParameters: PatchSingleDprLocalOversightOptionTypesInternalV2PatchLocalOversightOptionTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public patchSingleDprLocalOversightOptionTypesInternalV2PatchLocalOversightOptionType(requestParameters: PatchSingleDprLocalOversightOptionTypesInternalV2PatchLocalOversightOptionTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public patchSingleDprLocalOversightOptionTypesInternalV2PatchLocalOversightOptionType(requestParameters: PatchSingleDprLocalOversightOptionTypesInternalV2PatchLocalOversightOptionTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public patchSingleDprLocalOversightOptionTypesInternalV2PatchLocalOversightOptionType(requestParameters: PatchSingleDprLocalOversightOptionTypesInternalV2PatchLocalOversightOptionTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
+    public patchSingleDprLocalOversightOptionTypesInternalV2PatchLocalOversightOptionType(requestParameters: PatchSingleDprLocalOversightOptionTypesInternalV2PatchLocalOversightOptionTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
+    public patchSingleDprLocalOversightOptionTypesInternalV2PatchLocalOversightOptionType(requestParameters: PatchSingleDprLocalOversightOptionTypesInternalV2PatchLocalOversightOptionTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
     public patchSingleDprLocalOversightOptionTypesInternalV2PatchLocalOversightOptionType(requestParameters: PatchSingleDprLocalOversightOptionTypesInternalV2PatchLocalOversightOptionTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
@@ -388,7 +390,7 @@ export class DprLocalOversightOptionTypesInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/data-processing/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/local-option-types/oversight-option-types/${this.configuration.encodeParam({name: "optionUuid", value: optionUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
-        return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APILocalRegularOptionResponseDTO>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPILocalRegularOptionUpdateRequestDTO,
@@ -406,9 +408,9 @@ export class DprLocalOversightOptionTypesInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleDprLocalOversightOptionTypesInternalV2CreateLocalOversightOptionType(requestParameters: PostSingleDprLocalOversightOptionTypesInternalV2CreateLocalOversightOptionTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public postSingleDprLocalOversightOptionTypesInternalV2CreateLocalOversightOptionType(requestParameters: PostSingleDprLocalOversightOptionTypesInternalV2CreateLocalOversightOptionTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public postSingleDprLocalOversightOptionTypesInternalV2CreateLocalOversightOptionType(requestParameters: PostSingleDprLocalOversightOptionTypesInternalV2CreateLocalOversightOptionTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public postSingleDprLocalOversightOptionTypesInternalV2CreateLocalOversightOptionType(requestParameters: PostSingleDprLocalOversightOptionTypesInternalV2CreateLocalOversightOptionTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APILocalRegularOptionResponseDTO>;
+    public postSingleDprLocalOversightOptionTypesInternalV2CreateLocalOversightOptionType(requestParameters: PostSingleDprLocalOversightOptionTypesInternalV2CreateLocalOversightOptionTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APILocalRegularOptionResponseDTO>>;
+    public postSingleDprLocalOversightOptionTypesInternalV2CreateLocalOversightOptionType(requestParameters: PostSingleDprLocalOversightOptionTypesInternalV2CreateLocalOversightOptionTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APILocalRegularOptionResponseDTO>>;
     public postSingleDprLocalOversightOptionTypesInternalV2CreateLocalOversightOptionType(requestParameters: PostSingleDprLocalOversightOptionTypesInternalV2CreateLocalOversightOptionTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
@@ -464,7 +466,7 @@ export class DprLocalOversightOptionTypesInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/data-processing/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/local-option-types/oversight-option-types`;
-        return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APILocalRegularOptionResponseDTO>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPILocalOptionCreateRequestDTO,

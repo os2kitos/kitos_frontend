@@ -483,7 +483,7 @@ export class ITSystemUsageEffects {
       concatLatestFrom(() => this.store.select(selectItSystemUsageUuid).pipe(filterNullish())),
       mergeMap(([{ request }, usageUuid]) =>
         this.apiV2ItSystemUsageInternalService
-          .postSingleItSystemUsageInternalV2PostSystemUsageRelations({
+          .postManyItSystemUsageInternalV2PostSystemUsageRelations({
             systemUsageUuid: usageUuid,
             aPISystemRelationWriteRequestDTO: request,
           })

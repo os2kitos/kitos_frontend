@@ -75,7 +75,7 @@ export class UserDropdownComponentStore extends ComponentStore<State> {
   }
 
   private searchGlobally(search: string | undefined): Observable<APIUserReferenceResponseDTO[]> {
-    return this.globalUserService.getSingleGlobalUserInternalV2GetUsers({
+    return this.globalUserService.getManyGlobalUserInternalV2GetUsers({
       nameOrEmailQuery: search,
     });
   }
@@ -85,7 +85,7 @@ export class UserDropdownComponentStore extends ComponentStore<State> {
       filterNullish(),
       first(),
       switchMap((organizationUuid) => {
-        return this.organizationApiService.getSingleOrganizationV2GetOrganizationUsers({
+        return this.organizationApiService.getManyOrganizationV2GetOrganizationUsers({
           organizationUuid,
           nameOrEmailQuery: search,
         });

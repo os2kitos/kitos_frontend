@@ -10,7 +10,7 @@
       (valueChange)="toggle($event)"
     ></kendo-switch>
     @if (text) {
-      <app-paragraph (click)="onParagraphClick(switch)" class="label-pointer-cursor">{{ text }}</app-paragraph>
+      <app-paragraph (click)="onParagraphClick(switch)" class="label-pointer-cursor" [paragraphSize]="textSize">{{ text }}</app-paragraph>
     }
   </div>
 }

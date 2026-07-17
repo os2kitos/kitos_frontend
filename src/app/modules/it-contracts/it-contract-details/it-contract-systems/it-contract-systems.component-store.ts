@@ -72,7 +72,7 @@ export class ItContractSystemsComponentStore extends ComponentStore<State> imple
       tap(() => this.updateSystemRelationsIsLoading(true)),
       mergeMap((itContractUuid) => {
         return this.systemUsageService
-          .getSingleItSystemUsageInternalV2GetRelations({ contractUuid: itContractUuid })
+          .getManyItSystemUsageInternalV2GetRelations({ contractUuid: itContractUuid })
           .pipe(
             tapResponse({
               next: (relations) => this.updateSystemRelations(relations),
@@ -90,7 +90,7 @@ export class ItContractSystemsComponentStore extends ComponentStore<State> imple
       combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       mergeMap(([search, organizationUuid]) => {
         return this.systemUsageService
-          .getSingleItSystemUsageInternalV2GetItSystemUsages({
+          .getManyItSystemUsageInternalV2GetItSystemUsages({
             organizationUuid,
             systemNameContent: search,
           })

@@ -44,7 +44,7 @@ export class ItSystemUsageDetailsDataProcessingComponentStore extends ComponentS
       mergeMap((systemUsageUuid) => {
         this.updateAssociatedDataProcessingRegistrationsIsLoading(true);
         return this.apiDataProcessingRegistrationService
-          .getSingleDataProcessingRegistrationV2GetDataProcessingRegistrations({
+          .getManyDataProcessingRegistrationV2GetDataProcessingRegistrations({
             systemUsageUuid: systemUsageUuid,
             orderByProperty: 'Name',
           })

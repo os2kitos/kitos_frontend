@@ -162,7 +162,7 @@ export class ItSystemUsageDetailsRelationsDialogComponentStore extends Component
       ]),
       mergeMap(([search, organizationUuid, currentUsageUuid]) => {
         return this.apiInternalUsageService
-          .getSingleItSystemUsageInternalV2GetItSystemUsages({
+          .getManyItSystemUsageInternalV2GetItSystemUsages({
             organizationUuid: organizationUuid,
             systemNameContent: search,
             orderByProperty: 'Name',
@@ -192,7 +192,7 @@ export class ItSystemUsageDetailsRelationsDialogComponentStore extends Component
       tap(() => this.updateInterfacesIsLoading(true)),
       mergeMap((params) => {
         return this.apiInterfaceService
-          .getSingleItInterfaceV2GetItInterfaces({
+          .getManyItInterfaceV2GetItInterfaces({
             nameOrItInterfaceIdContains: params.search,
             exposedBySystemUuid: params.systemUuid,
             orderByProperty: 'Name',
@@ -215,7 +215,7 @@ export class ItSystemUsageDetailsRelationsDialogComponentStore extends Component
       concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       mergeMap(([search, organizationUuid]) => {
         return this.apiContractService
-          .getSingleItContractV2GetItContracts({
+          .getManyItContractV2GetItContracts({
             nameContent: search,
             organizationUuid: organizationUuid,
             orderByProperty: 'Name',

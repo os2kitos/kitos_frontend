@@ -40,7 +40,7 @@ export class ChooseOrganizationComponentStore extends ComponentStore<State> {
       tap(() => this.updateLoading(true)),
       mergeMap((organizationName) =>
         this.apiOrganizationService
-          .getSingleOrganizationV2GetOrganizations({
+          .getManyOrganizationV2GetOrganizations({
             onlyWhereUserHasMembership: true,
             pageSize: this.PAGE_SIZE,
             nameContent: organizationName,

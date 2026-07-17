@@ -20,6 +20,16 @@ import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
 import { APICommonOrderByProperty } from '../model/aPICommonOrderByProperty';
+// @ts-ignore
+import { APIOrganizationResponseDTO } from '../model/aPIOrganizationResponseDTO';
+// @ts-ignore
+import { APIUserReferenceResponseDTO } from '../model/aPIUserReferenceResponseDTO';
+// @ts-ignore
+import { APIUserReferenceWithOrganizationResponseDTO } from '../model/aPIUserReferenceWithOrganizationResponseDTO';
+// @ts-ignore
+import { APIUserWithCrossOrganizationalRightsResponseDTO } from '../model/aPIUserWithCrossOrganizationalRightsResponseDTO';
+// @ts-ignore
+import { APIUserWithOrganizationResponseDTO } from '../model/aPIUserWithOrganizationResponseDTO';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -39,11 +49,11 @@ export interface DeleteSingleGlobalUserInternalV2RemoveLocalAdminRequestParams {
     userUuid: string;
 }
 
-export interface GetSingleGlobalUserInternalV2GetOrganizationsByUserUuidRequestParams {
+export interface GetManyGlobalUserInternalV2GetOrganizationsByUserUuidRequestParams {
     userUuid: string;
 }
 
-export interface GetSingleGlobalUserInternalV2GetUsersRequestParams {
+export interface GetManyGlobalUserInternalV2GetUsersRequestParams {
     nameOrEmailQuery?: string;
     emailQuery?: string;
     /** Generic fields available for ordering */
@@ -333,10 +343,10 @@ export class GlobalUserInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleGlobalUserInternalV2GetAllLocalAdmins(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleGlobalUserInternalV2GetAllLocalAdmins(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleGlobalUserInternalV2GetAllLocalAdmins(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleGlobalUserInternalV2GetAllLocalAdmins(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyGlobalUserInternalV2GetAllLocalAdmins(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIUserReferenceWithOrganizationResponseDTO>>;
+    public getManyGlobalUserInternalV2GetAllLocalAdmins(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIUserReferenceWithOrganizationResponseDTO>>>;
+    public getManyGlobalUserInternalV2GetAllLocalAdmins(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIUserReferenceWithOrganizationResponseDTO>>>;
+    public getManyGlobalUserInternalV2GetAllLocalAdmins(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -377,7 +387,7 @@ export class GlobalUserInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/users/local-admins`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<Array<APIUserReferenceWithOrganizationResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -393,10 +403,10 @@ export class GlobalUserInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleGlobalUserInternalV2GetGlobalAdmins(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleGlobalUserInternalV2GetGlobalAdmins(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleGlobalUserInternalV2GetGlobalAdmins(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleGlobalUserInternalV2GetGlobalAdmins(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyGlobalUserInternalV2GetGlobalAdmins(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIUserReferenceResponseDTO>>;
+    public getManyGlobalUserInternalV2GetGlobalAdmins(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIUserReferenceResponseDTO>>>;
+    public getManyGlobalUserInternalV2GetGlobalAdmins(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIUserReferenceResponseDTO>>>;
+    public getManyGlobalUserInternalV2GetGlobalAdmins(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -437,7 +447,7 @@ export class GlobalUserInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/users/global-admins`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<Array<APIUserReferenceResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -454,13 +464,13 @@ export class GlobalUserInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleGlobalUserInternalV2GetOrganizationsByUserUuid(requestParameters: GetSingleGlobalUserInternalV2GetOrganizationsByUserUuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleGlobalUserInternalV2GetOrganizationsByUserUuid(requestParameters: GetSingleGlobalUserInternalV2GetOrganizationsByUserUuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleGlobalUserInternalV2GetOrganizationsByUserUuid(requestParameters: GetSingleGlobalUserInternalV2GetOrganizationsByUserUuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleGlobalUserInternalV2GetOrganizationsByUserUuid(requestParameters: GetSingleGlobalUserInternalV2GetOrganizationsByUserUuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyGlobalUserInternalV2GetOrganizationsByUserUuid(requestParameters: GetManyGlobalUserInternalV2GetOrganizationsByUserUuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIOrganizationResponseDTO>>;
+    public getManyGlobalUserInternalV2GetOrganizationsByUserUuid(requestParameters: GetManyGlobalUserInternalV2GetOrganizationsByUserUuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIOrganizationResponseDTO>>>;
+    public getManyGlobalUserInternalV2GetOrganizationsByUserUuid(requestParameters: GetManyGlobalUserInternalV2GetOrganizationsByUserUuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIOrganizationResponseDTO>>>;
+    public getManyGlobalUserInternalV2GetOrganizationsByUserUuid(requestParameters: GetManyGlobalUserInternalV2GetOrganizationsByUserUuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const userUuid = requestParameters.userUuid;
         if (userUuid === null || userUuid === undefined) {
-            throw new Error('Required parameter userUuid was null or undefined when calling getSingleGlobalUserInternalV2GetOrganizationsByUserUuid.');
+            throw new Error('Required parameter userUuid was null or undefined when calling getManyGlobalUserInternalV2GetOrganizationsByUserUuid.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -502,7 +512,7 @@ export class GlobalUserInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/users/${this.configuration.encodeParam({name: "userUuid", value: userUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/organizations`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<Array<APIOrganizationResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -518,10 +528,10 @@ export class GlobalUserInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleGlobalUserInternalV2GetSystemIntegrators(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleGlobalUserInternalV2GetSystemIntegrators(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleGlobalUserInternalV2GetSystemIntegrators(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleGlobalUserInternalV2GetSystemIntegrators(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyGlobalUserInternalV2GetSystemIntegrators(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIUserReferenceResponseDTO>>;
+    public getManyGlobalUserInternalV2GetSystemIntegrators(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIUserReferenceResponseDTO>>>;
+    public getManyGlobalUserInternalV2GetSystemIntegrators(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIUserReferenceResponseDTO>>>;
+    public getManyGlobalUserInternalV2GetSystemIntegrators(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -562,7 +572,7 @@ export class GlobalUserInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/users/system-integrators`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<Array<APIUserReferenceResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -579,10 +589,10 @@ export class GlobalUserInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleGlobalUserInternalV2GetUsers(requestParameters: GetSingleGlobalUserInternalV2GetUsersRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleGlobalUserInternalV2GetUsers(requestParameters: GetSingleGlobalUserInternalV2GetUsersRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleGlobalUserInternalV2GetUsers(requestParameters: GetSingleGlobalUserInternalV2GetUsersRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleGlobalUserInternalV2GetUsers(requestParameters: GetSingleGlobalUserInternalV2GetUsersRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyGlobalUserInternalV2GetUsers(requestParameters: GetManyGlobalUserInternalV2GetUsersRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIUserReferenceResponseDTO>>;
+    public getManyGlobalUserInternalV2GetUsers(requestParameters: GetManyGlobalUserInternalV2GetUsersRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIUserReferenceResponseDTO>>>;
+    public getManyGlobalUserInternalV2GetUsers(requestParameters: GetManyGlobalUserInternalV2GetUsersRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIUserReferenceResponseDTO>>>;
+    public getManyGlobalUserInternalV2GetUsers(requestParameters: GetManyGlobalUserInternalV2GetUsersRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const nameOrEmailQuery = requestParameters.nameOrEmailQuery;
         const emailQuery = requestParameters.emailQuery;
         const orderByProperty = requestParameters.orderByProperty;
@@ -650,7 +660,7 @@ export class GlobalUserInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/users/search`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<Array<APIUserReferenceResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 params: localVarQueryParameters,
@@ -667,10 +677,10 @@ export class GlobalUserInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleGlobalUserInternalV2GetUsersWithCrossAccess(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleGlobalUserInternalV2GetUsersWithCrossAccess(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleGlobalUserInternalV2GetUsersWithCrossAccess(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleGlobalUserInternalV2GetUsersWithCrossAccess(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyGlobalUserInternalV2GetUsersWithCrossAccess(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIUserWithCrossOrganizationalRightsResponseDTO>>;
+    public getManyGlobalUserInternalV2GetUsersWithCrossAccess(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIUserWithCrossOrganizationalRightsResponseDTO>>>;
+    public getManyGlobalUserInternalV2GetUsersWithCrossAccess(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIUserWithCrossOrganizationalRightsResponseDTO>>>;
+    public getManyGlobalUserInternalV2GetUsersWithCrossAccess(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -711,7 +721,7 @@ export class GlobalUserInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/users/with-cross-organization-permissions`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<Array<APIUserWithCrossOrganizationalRightsResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -727,10 +737,10 @@ export class GlobalUserInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleGlobalUserInternalV2GetUsersWithRightsholderAccess(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleGlobalUserInternalV2GetUsersWithRightsholderAccess(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleGlobalUserInternalV2GetUsersWithRightsholderAccess(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleGlobalUserInternalV2GetUsersWithRightsholderAccess(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyGlobalUserInternalV2GetUsersWithRightsholderAccess(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIUserWithOrganizationResponseDTO>>;
+    public getManyGlobalUserInternalV2GetUsersWithRightsholderAccess(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIUserWithOrganizationResponseDTO>>>;
+    public getManyGlobalUserInternalV2GetUsersWithRightsholderAccess(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIUserWithOrganizationResponseDTO>>>;
+    public getManyGlobalUserInternalV2GetUsersWithRightsholderAccess(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -771,7 +781,7 @@ export class GlobalUserInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/users/with-rightsholder-access`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<Array<APIUserWithOrganizationResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -861,9 +871,9 @@ export class GlobalUserInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleGlobalUserInternalV2AddGlobalAdmin(requestParameters: PostSingleGlobalUserInternalV2AddGlobalAdminRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public postSingleGlobalUserInternalV2AddGlobalAdmin(requestParameters: PostSingleGlobalUserInternalV2AddGlobalAdminRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public postSingleGlobalUserInternalV2AddGlobalAdmin(requestParameters: PostSingleGlobalUserInternalV2AddGlobalAdminRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public postSingleGlobalUserInternalV2AddGlobalAdmin(requestParameters: PostSingleGlobalUserInternalV2AddGlobalAdminRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIUserReferenceResponseDTO>;
+    public postSingleGlobalUserInternalV2AddGlobalAdmin(requestParameters: PostSingleGlobalUserInternalV2AddGlobalAdminRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIUserReferenceResponseDTO>>;
+    public postSingleGlobalUserInternalV2AddGlobalAdmin(requestParameters: PostSingleGlobalUserInternalV2AddGlobalAdminRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIUserReferenceResponseDTO>>;
     public postSingleGlobalUserInternalV2AddGlobalAdmin(requestParameters: PostSingleGlobalUserInternalV2AddGlobalAdminRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const userUuid = requestParameters.userUuid;
         if (userUuid === null || userUuid === undefined) {
@@ -909,7 +919,7 @@ export class GlobalUserInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/users/global-admins/${this.configuration.encodeParam({name: "userUuid", value: userUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
-        return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APIUserReferenceResponseDTO>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -926,9 +936,9 @@ export class GlobalUserInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleGlobalUserInternalV2AddLocalAdmin(requestParameters: PostSingleGlobalUserInternalV2AddLocalAdminRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public postSingleGlobalUserInternalV2AddLocalAdmin(requestParameters: PostSingleGlobalUserInternalV2AddLocalAdminRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public postSingleGlobalUserInternalV2AddLocalAdmin(requestParameters: PostSingleGlobalUserInternalV2AddLocalAdminRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public postSingleGlobalUserInternalV2AddLocalAdmin(requestParameters: PostSingleGlobalUserInternalV2AddLocalAdminRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIUserReferenceWithOrganizationResponseDTO>;
+    public postSingleGlobalUserInternalV2AddLocalAdmin(requestParameters: PostSingleGlobalUserInternalV2AddLocalAdminRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIUserReferenceWithOrganizationResponseDTO>>;
+    public postSingleGlobalUserInternalV2AddLocalAdmin(requestParameters: PostSingleGlobalUserInternalV2AddLocalAdminRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIUserReferenceWithOrganizationResponseDTO>>;
     public postSingleGlobalUserInternalV2AddLocalAdmin(requestParameters: PostSingleGlobalUserInternalV2AddLocalAdminRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
@@ -978,7 +988,7 @@ export class GlobalUserInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/users/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/local-admins/${this.configuration.encodeParam({name: "userUuid", value: userUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
-        return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APIUserReferenceWithOrganizationResponseDTO>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,

@@ -66,7 +66,7 @@ export class GlobalAdminOtherApiUsersComponentStore extends ComponentStore<State
     trigger$.pipe(
       tap(() => this.setLoadingUsersWithRightsholderAccess(true)),
       mergeMap(() => {
-        return this.userService.getSingleGlobalUserInternalV2GetUsersWithRightsholderAccess().pipe(
+        return this.userService.getManyGlobalUserInternalV2GetUsersWithRightsholderAccess().pipe(
           tapResponse({
             next: (users) => {
               this.setUsersWithRightsholderAccess(users);
@@ -83,7 +83,7 @@ export class GlobalAdminOtherApiUsersComponentStore extends ComponentStore<State
     trigger$.pipe(
       tap(() => this.setLoadingUsersWithCrossAccess(true)),
       mergeMap(() => {
-        return this.userService.getSingleGlobalUserInternalV2GetUsersWithCrossAccess().pipe(
+        return this.userService.getManyGlobalUserInternalV2GetUsersWithCrossAccess().pipe(
           tapResponse({
             next: (users) => this.setUsersWithCrossAccess(users),
             error: (e) => console.error(e),

@@ -77,6 +77,7 @@ import { GridCellComponent } from './grid-cell/grid-cell.component';
 import { NumericFilterComponent } from './numeric-filter/numeric-filter.component';
 import { StringFilterComponent } from './string-filter/string-filter.component';
 import { UnitDropdownFilterComponent } from './unit-dropdown-filter/unit-dropdown-filter.component';
+import { ITContractSupplierActions } from 'src/app/store/it-contract/it-contract-supplier/actions';
 
 @Component({
   selector: 'app-grid',
@@ -490,6 +491,9 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
         break;
       case 'organization-user':
         this.store.dispatch(OrganizationUserActions.updateGridColumns(columns));
+        break;
+      case 'it-contract-supplier':
+        this.store.dispatch(ITContractSupplierActions.updateGridColumns(columns));
         break;
       default:
         throw `Column reorder for entity type ${this.entityType} not implemented: grid.component.ts`;

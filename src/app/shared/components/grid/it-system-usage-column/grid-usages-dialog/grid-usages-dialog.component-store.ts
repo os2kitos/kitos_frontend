@@ -174,7 +174,7 @@ export class GridUsagesDialogComponentStore extends ComponentStore<State> {
 
   private getUsageUuid(usingOrganizationUuid: string, sourceItSystemUuid: string): Observable<string> {
     return this.itSystemUsageInternalService
-      .getSingleItSystemUsageInternalV2GetItSystemUsages({
+      .getManyItSystemUsageInternalV2GetItSystemUsages({
         organizationUuid: usingOrganizationUuid,
         systemUuid: sourceItSystemUuid,
       })
@@ -205,7 +205,7 @@ export class GridUsagesDialogComponentStore extends ComponentStore<State> {
         mergeMap(([organizationUuid, nameContent]) => {
           this.updateLoading(true);
           return this.itSystemUsageMigrationService
-            .getSingleItSystemUsageMigrationV2GetUnusedItSystemsBySearchAndOrganization({
+            .getManyItSystemUsageMigrationV2GetUnusedItSystemsBySearchAndOrganization({
               organizationUuid,
               nameContent,
               numberOfItSystems: this.numberOfItSystemsPerQuery,

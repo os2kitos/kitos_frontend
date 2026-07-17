@@ -1,10 +1,12 @@
 /// <reference types="Cypress" />
 
+const contracts = 'it-contracts';
+
 describe('it-contracts.dpr', () => {
   beforeEach(() => {
     cy.requireIntercept();
     cy.setupContractIntercepts();
-    cy.setup(true, 'it-contracts');
+    cy.setup(true, contracts);
   });
 
   it('can create contract dpr', () => {

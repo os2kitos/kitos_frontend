@@ -21,6 +21,8 @@ import { Observable }                                        from 'rxjs';
 // @ts-ignore
 import { APIGlobalRoleOptionCreateRequestDTO } from '../model/aPIGlobalRoleOptionCreateRequestDTO';
 // @ts-ignore
+import { APIGlobalRoleOptionResponseDTO } from '../model/aPIGlobalRoleOptionResponseDTO';
+// @ts-ignore
 import { APIGlobalRoleOptionUpdateRequestDTO } from '../model/aPIGlobalRoleOptionUpdateRequestDTO';
 
 // @ts-ignore
@@ -106,10 +108,10 @@ export class ItSystemGlobalRoleOptionTypesInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItSystemGlobalRoleOptionTypesInternalV2GetItSystemRoles(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleItSystemGlobalRoleOptionTypesInternalV2GetItSystemRoles(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleItSystemGlobalRoleOptionTypesInternalV2GetItSystemRoles(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleItSystemGlobalRoleOptionTypesInternalV2GetItSystemRoles(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyItSystemGlobalRoleOptionTypesInternalV2GetItSystemRoles(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIGlobalRoleOptionResponseDTO>>;
+    public getManyItSystemGlobalRoleOptionTypesInternalV2GetItSystemRoles(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIGlobalRoleOptionResponseDTO>>>;
+    public getManyItSystemGlobalRoleOptionTypesInternalV2GetItSystemRoles(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIGlobalRoleOptionResponseDTO>>>;
+    public getManyItSystemGlobalRoleOptionTypesInternalV2GetItSystemRoles(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -150,7 +152,7 @@ export class ItSystemGlobalRoleOptionTypesInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/it-systems/global-option-types/it-systems-roles`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<Array<APIGlobalRoleOptionResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -167,9 +169,9 @@ export class ItSystemGlobalRoleOptionTypesInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleItSystemGlobalRoleOptionTypesInternalV2PatchGlobalBItSystemRole(requestParameters: PatchSingleItSystemGlobalRoleOptionTypesInternalV2PatchGlobalBItSystemRoleRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public patchSingleItSystemGlobalRoleOptionTypesInternalV2PatchGlobalBItSystemRole(requestParameters: PatchSingleItSystemGlobalRoleOptionTypesInternalV2PatchGlobalBItSystemRoleRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public patchSingleItSystemGlobalRoleOptionTypesInternalV2PatchGlobalBItSystemRole(requestParameters: PatchSingleItSystemGlobalRoleOptionTypesInternalV2PatchGlobalBItSystemRoleRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public patchSingleItSystemGlobalRoleOptionTypesInternalV2PatchGlobalBItSystemRole(requestParameters: PatchSingleItSystemGlobalRoleOptionTypesInternalV2PatchGlobalBItSystemRoleRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRoleOptionResponseDTO>;
+    public patchSingleItSystemGlobalRoleOptionTypesInternalV2PatchGlobalBItSystemRole(requestParameters: PatchSingleItSystemGlobalRoleOptionTypesInternalV2PatchGlobalBItSystemRoleRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRoleOptionResponseDTO>>;
+    public patchSingleItSystemGlobalRoleOptionTypesInternalV2PatchGlobalBItSystemRole(requestParameters: PatchSingleItSystemGlobalRoleOptionTypesInternalV2PatchGlobalBItSystemRoleRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRoleOptionResponseDTO>>;
     public patchSingleItSystemGlobalRoleOptionTypesInternalV2PatchGlobalBItSystemRole(requestParameters: PatchSingleItSystemGlobalRoleOptionTypesInternalV2PatchGlobalBItSystemRoleRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
@@ -226,7 +228,7 @@ export class ItSystemGlobalRoleOptionTypesInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/it-systems/global-option-types/it-systems-roles/${this.configuration.encodeParam({name: "optionUuid", value: optionUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
-        return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APIGlobalRoleOptionResponseDTO>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPIGlobalRoleOptionUpdateRequestDTO,
@@ -244,9 +246,9 @@ export class ItSystemGlobalRoleOptionTypesInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleItSystemGlobalRoleOptionTypesInternalV2CreateItSystemRole(requestParameters: PostSingleItSystemGlobalRoleOptionTypesInternalV2CreateItSystemRoleRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public postSingleItSystemGlobalRoleOptionTypesInternalV2CreateItSystemRole(requestParameters: PostSingleItSystemGlobalRoleOptionTypesInternalV2CreateItSystemRoleRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public postSingleItSystemGlobalRoleOptionTypesInternalV2CreateItSystemRole(requestParameters: PostSingleItSystemGlobalRoleOptionTypesInternalV2CreateItSystemRoleRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public postSingleItSystemGlobalRoleOptionTypesInternalV2CreateItSystemRole(requestParameters: PostSingleItSystemGlobalRoleOptionTypesInternalV2CreateItSystemRoleRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRoleOptionResponseDTO>;
+    public postSingleItSystemGlobalRoleOptionTypesInternalV2CreateItSystemRole(requestParameters: PostSingleItSystemGlobalRoleOptionTypesInternalV2CreateItSystemRoleRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRoleOptionResponseDTO>>;
+    public postSingleItSystemGlobalRoleOptionTypesInternalV2CreateItSystemRole(requestParameters: PostSingleItSystemGlobalRoleOptionTypesInternalV2CreateItSystemRoleRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRoleOptionResponseDTO>>;
     public postSingleItSystemGlobalRoleOptionTypesInternalV2CreateItSystemRole(requestParameters: PostSingleItSystemGlobalRoleOptionTypesInternalV2CreateItSystemRoleRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const aPIGlobalRoleOptionCreateRequestDTO = requestParameters.aPIGlobalRoleOptionCreateRequestDTO;
 
@@ -298,7 +300,7 @@ export class ItSystemGlobalRoleOptionTypesInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/it-systems/global-option-types/it-systems-roles`;
-        return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APIGlobalRoleOptionResponseDTO>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPIGlobalRoleOptionCreateRequestDTO,

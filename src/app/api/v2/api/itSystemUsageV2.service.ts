@@ -25,9 +25,25 @@ import { APICreateItSystemUsageArchiveRequestDTO } from '../model/aPICreateItSys
 // @ts-ignore
 import { APICreateItSystemUsageRequestDTO } from '../model/aPICreateItSystemUsageRequestDTO';
 // @ts-ignore
+import { APIExternalReferenceDataResponseDTO } from '../model/aPIExternalReferenceDataResponseDTO';
+// @ts-ignore
 import { APIExternalReferenceDataWriteRequestDTO } from '../model/aPIExternalReferenceDataWriteRequestDTO';
 // @ts-ignore
+import { APIIncomingSystemRelationResponseDTO } from '../model/aPIIncomingSystemRelationResponseDTO';
+// @ts-ignore
+import { APIItSystemUsageArchiveResponseDTO } from '../model/aPIItSystemUsageArchiveResponseDTO';
+// @ts-ignore
+import { APIItSystemUsageResponseDTO } from '../model/aPIItSystemUsageResponseDTO';
+// @ts-ignore
 import { APIJournalPeriodDTO } from '../model/aPIJournalPeriodDTO';
+// @ts-ignore
+import { APIJournalPeriodResponseDTO } from '../model/aPIJournalPeriodResponseDTO';
+// @ts-ignore
+import { APIOutgoingSystemRelationResponseDTO } from '../model/aPIOutgoingSystemRelationResponseDTO';
+// @ts-ignore
+import { APIResourceCollectionPermissionsResponseDTO } from '../model/aPIResourceCollectionPermissionsResponseDTO';
+// @ts-ignore
+import { APIResourcePermissionsResponseDTO } from '../model/aPIResourcePermissionsResponseDTO';
 // @ts-ignore
 import { APIRoleAssignmentRequestDTO } from '../model/aPIRoleAssignmentRequestDTO';
 // @ts-ignore
@@ -66,27 +82,12 @@ export interface DeleteSingleItSystemUsageV2DeleteSystemUsageRelationRequestPara
     systemRelationUuid: string;
 }
 
-export interface GetSingleItSystemUsageV2GetIncomingSystemRelationsRequestParams {
+export interface GetManyItSystemUsageV2GetIncomingSystemRelationsRequestParams {
     /**  */
     systemUsageUuid: string;
 }
 
-export interface GetSingleItSystemUsageV2GetItSystemUsageRequestParams {
-    /** UUID of the system usage entity */
-    systemUsageUuid: string;
-}
-
-export interface GetSingleItSystemUsageV2GetItSystemUsageCollectionPermissionsRequestParams {
-    /** UUID of the organization */
-    organizationUuid: string;
-}
-
-export interface GetSingleItSystemUsageV2GetItSystemUsagePermissionsRequestParams {
-    /** UUID of the system usage entity */
-    systemUsageUuid: string;
-}
-
-export interface GetSingleItSystemUsageV2GetItSystemUsagesRequestParams {
+export interface GetManyItSystemUsageV2GetItSystemUsagesRequestParams {
     /** Query usages within a specific organization */
     organizationUuid?: string;
     /** Query by systems with outgoing relations related to another system */
@@ -107,6 +108,21 @@ export interface GetSingleItSystemUsageV2GetItSystemUsagesRequestParams {
     page?: number;
     /** Size of the page referred by \&#39;page\&#39;.  Range: [1,250] Default: 250. */
     pageSize?: number;
+}
+
+export interface GetSingleItSystemUsageV2GetItSystemUsageRequestParams {
+    /** UUID of the system usage entity */
+    systemUsageUuid: string;
+}
+
+export interface GetSingleItSystemUsageV2GetItSystemUsageCollectionPermissionsRequestParams {
+    /** UUID of the organization */
+    organizationUuid: string;
+}
+
+export interface GetSingleItSystemUsageV2GetItSystemUsagePermissionsRequestParams {
+    /** UUID of the system usage entity */
+    systemUsageUuid: string;
 }
 
 export interface GetSingleItSystemUsageV2GetJournalPeriodRequestParams {
@@ -550,13 +566,13 @@ export class ItSystemUsageV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItSystemUsageV2GetIncomingSystemRelations(requestParameters: GetSingleItSystemUsageV2GetIncomingSystemRelationsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleItSystemUsageV2GetIncomingSystemRelations(requestParameters: GetSingleItSystemUsageV2GetIncomingSystemRelationsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleItSystemUsageV2GetIncomingSystemRelations(requestParameters: GetSingleItSystemUsageV2GetIncomingSystemRelationsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleItSystemUsageV2GetIncomingSystemRelations(requestParameters: GetSingleItSystemUsageV2GetIncomingSystemRelationsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyItSystemUsageV2GetIncomingSystemRelations(requestParameters: GetManyItSystemUsageV2GetIncomingSystemRelationsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIIncomingSystemRelationResponseDTO>>;
+    public getManyItSystemUsageV2GetIncomingSystemRelations(requestParameters: GetManyItSystemUsageV2GetIncomingSystemRelationsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIIncomingSystemRelationResponseDTO>>>;
+    public getManyItSystemUsageV2GetIncomingSystemRelations(requestParameters: GetManyItSystemUsageV2GetIncomingSystemRelationsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIIncomingSystemRelationResponseDTO>>>;
+    public getManyItSystemUsageV2GetIncomingSystemRelations(requestParameters: GetManyItSystemUsageV2GetIncomingSystemRelationsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const systemUsageUuid = requestParameters.systemUsageUuid;
         if (systemUsageUuid === null || systemUsageUuid === undefined) {
-            throw new Error('Required parameter systemUsageUuid was null or undefined when calling getSingleItSystemUsageV2GetIncomingSystemRelations.');
+            throw new Error('Required parameter systemUsageUuid was null or undefined when calling getManyItSystemUsageV2GetIncomingSystemRelations.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -598,212 +614,7 @@ export class ItSystemUsageV2Service {
         }
 
         let localVarPath = `/api/v2/it-system-usages/${this.configuration.encodeParam({name: "systemUsageUuid", value: systemUsageUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/incoming-system-relations`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
-            {
-                context: localVarHttpContext,
-                responseType: <any>responseType_,
-                withCredentials: this.configuration.withCredentials,
-                headers: localVarHeaders,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * Returns a specific IT-System usage (a specific IT-System in a specific Organization)
-     * @param requestParameters
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public getSingleItSystemUsageV2GetItSystemUsage(requestParameters: GetSingleItSystemUsageV2GetItSystemUsageRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleItSystemUsageV2GetItSystemUsage(requestParameters: GetSingleItSystemUsageV2GetItSystemUsageRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleItSystemUsageV2GetItSystemUsage(requestParameters: GetSingleItSystemUsageV2GetItSystemUsageRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleItSystemUsageV2GetItSystemUsage(requestParameters: GetSingleItSystemUsageV2GetItSystemUsageRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
-        const systemUsageUuid = requestParameters.systemUsageUuid;
-        if (systemUsageUuid === null || systemUsageUuid === undefined) {
-            throw new Error('Required parameter systemUsageUuid was null or undefined when calling getSingleItSystemUsageV2GetItSystemUsage.');
-        }
-
-        let localVarHeaders = this.defaultHeaders;
-
-        let localVarCredential: string | undefined;
-        // authentication (Bearer) required
-        localVarCredential = this.configuration.lookupCredential('Bearer');
-        if (localVarCredential) {
-            localVarHeaders = localVarHeaders.set('Authorization', 'Bearer ' + localVarCredential);
-        }
-
-        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
-        if (localVarHttpHeaderAcceptSelected === undefined) {
-            // to determine the Accept header
-            const httpHeaderAccepts: string[] = [
-                'application/json'
-            ];
-            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        }
-        if (localVarHttpHeaderAcceptSelected !== undefined) {
-            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
-        }
-
-        let localVarHttpContext: HttpContext | undefined = options && options.context;
-        if (localVarHttpContext === undefined) {
-            localVarHttpContext = new HttpContext();
-        }
-
-
-        let responseType_: 'text' | 'json' | 'blob' = 'json';
-        if (localVarHttpHeaderAcceptSelected) {
-            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
-                responseType_ = 'text';
-            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
-                responseType_ = 'json';
-            } else {
-                responseType_ = 'blob';
-            }
-        }
-
-        let localVarPath = `/api/v2/it-system-usages/${this.configuration.encodeParam({name: "systemUsageUuid", value: systemUsageUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
-            {
-                context: localVarHttpContext,
-                responseType: <any>responseType_,
-                withCredentials: this.configuration.withCredentials,
-                headers: localVarHeaders,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * Returns the permissions of the authenticated client for the IT-System usage resources collection in the context of an organization (IT-System usage permissions in a specific Organization)
-     * @param requestParameters
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public getSingleItSystemUsageV2GetItSystemUsageCollectionPermissions(requestParameters: GetSingleItSystemUsageV2GetItSystemUsageCollectionPermissionsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleItSystemUsageV2GetItSystemUsageCollectionPermissions(requestParameters: GetSingleItSystemUsageV2GetItSystemUsageCollectionPermissionsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleItSystemUsageV2GetItSystemUsageCollectionPermissions(requestParameters: GetSingleItSystemUsageV2GetItSystemUsageCollectionPermissionsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleItSystemUsageV2GetItSystemUsageCollectionPermissions(requestParameters: GetSingleItSystemUsageV2GetItSystemUsageCollectionPermissionsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
-        const organizationUuid = requestParameters.organizationUuid;
-        if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleItSystemUsageV2GetItSystemUsageCollectionPermissions.');
-        }
-
-        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
-        if (organizationUuid !== undefined && organizationUuid !== null) {
-          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
-            <any>organizationUuid, 'organizationUuid');
-        }
-
-        let localVarHeaders = this.defaultHeaders;
-
-        let localVarCredential: string | undefined;
-        // authentication (Bearer) required
-        localVarCredential = this.configuration.lookupCredential('Bearer');
-        if (localVarCredential) {
-            localVarHeaders = localVarHeaders.set('Authorization', 'Bearer ' + localVarCredential);
-        }
-
-        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
-        if (localVarHttpHeaderAcceptSelected === undefined) {
-            // to determine the Accept header
-            const httpHeaderAccepts: string[] = [
-                'application/json'
-            ];
-            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        }
-        if (localVarHttpHeaderAcceptSelected !== undefined) {
-            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
-        }
-
-        let localVarHttpContext: HttpContext | undefined = options && options.context;
-        if (localVarHttpContext === undefined) {
-            localVarHttpContext = new HttpContext();
-        }
-
-
-        let responseType_: 'text' | 'json' | 'blob' = 'json';
-        if (localVarHttpHeaderAcceptSelected) {
-            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
-                responseType_ = 'text';
-            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
-                responseType_ = 'json';
-            } else {
-                responseType_ = 'blob';
-            }
-        }
-
-        let localVarPath = `/api/v2/it-system-usages/permissions`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
-            {
-                context: localVarHttpContext,
-                params: localVarQueryParameters,
-                responseType: <any>responseType_,
-                withCredentials: this.configuration.withCredentials,
-                headers: localVarHeaders,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * Returns the permissions of the authenticated client in the context of a specific IT-System usage (a specific IT-System in a specific Organization)
-     * @param requestParameters
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public getSingleItSystemUsageV2GetItSystemUsagePermissions(requestParameters: GetSingleItSystemUsageV2GetItSystemUsagePermissionsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleItSystemUsageV2GetItSystemUsagePermissions(requestParameters: GetSingleItSystemUsageV2GetItSystemUsagePermissionsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleItSystemUsageV2GetItSystemUsagePermissions(requestParameters: GetSingleItSystemUsageV2GetItSystemUsagePermissionsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleItSystemUsageV2GetItSystemUsagePermissions(requestParameters: GetSingleItSystemUsageV2GetItSystemUsagePermissionsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
-        const systemUsageUuid = requestParameters.systemUsageUuid;
-        if (systemUsageUuid === null || systemUsageUuid === undefined) {
-            throw new Error('Required parameter systemUsageUuid was null or undefined when calling getSingleItSystemUsageV2GetItSystemUsagePermissions.');
-        }
-
-        let localVarHeaders = this.defaultHeaders;
-
-        let localVarCredential: string | undefined;
-        // authentication (Bearer) required
-        localVarCredential = this.configuration.lookupCredential('Bearer');
-        if (localVarCredential) {
-            localVarHeaders = localVarHeaders.set('Authorization', 'Bearer ' + localVarCredential);
-        }
-
-        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
-        if (localVarHttpHeaderAcceptSelected === undefined) {
-            // to determine the Accept header
-            const httpHeaderAccepts: string[] = [
-                'application/json'
-            ];
-            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        }
-        if (localVarHttpHeaderAcceptSelected !== undefined) {
-            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
-        }
-
-        let localVarHttpContext: HttpContext | undefined = options && options.context;
-        if (localVarHttpContext === undefined) {
-            localVarHttpContext = new HttpContext();
-        }
-
-
-        let responseType_: 'text' | 'json' | 'blob' = 'json';
-        if (localVarHttpHeaderAcceptSelected) {
-            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
-                responseType_ = 'text';
-            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
-                responseType_ = 'json';
-            } else {
-                responseType_ = 'blob';
-            }
-        }
-
-        let localVarPath = `/api/v2/it-system-usages/${this.configuration.encodeParam({name: "systemUsageUuid", value: systemUsageUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/permissions`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<Array<APIIncomingSystemRelationResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -821,10 +632,10 @@ export class ItSystemUsageV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItSystemUsageV2GetItSystemUsages(requestParameters: GetSingleItSystemUsageV2GetItSystemUsagesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleItSystemUsageV2GetItSystemUsages(requestParameters: GetSingleItSystemUsageV2GetItSystemUsagesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleItSystemUsageV2GetItSystemUsages(requestParameters: GetSingleItSystemUsageV2GetItSystemUsagesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleItSystemUsageV2GetItSystemUsages(requestParameters: GetSingleItSystemUsageV2GetItSystemUsagesRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyItSystemUsageV2GetItSystemUsages(requestParameters: GetManyItSystemUsageV2GetItSystemUsagesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIItSystemUsageResponseDTO>>;
+    public getManyItSystemUsageV2GetItSystemUsages(requestParameters: GetManyItSystemUsageV2GetItSystemUsagesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIItSystemUsageResponseDTO>>>;
+    public getManyItSystemUsageV2GetItSystemUsages(requestParameters: GetManyItSystemUsageV2GetItSystemUsagesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIItSystemUsageResponseDTO>>>;
+    public getManyItSystemUsageV2GetItSystemUsages(requestParameters: GetManyItSystemUsageV2GetItSystemUsagesRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         const relatedToSystemUuid = requestParameters.relatedToSystemUuid;
         const relatedToSystemUsageUuid = requestParameters.relatedToSystemUsageUuid;
@@ -917,10 +728,215 @@ export class ItSystemUsageV2Service {
         }
 
         let localVarPath = `/api/v2/it-system-usages`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<Array<APIItSystemUsageResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 params: localVarQueryParameters,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Returns a specific IT-System usage (a specific IT-System in a specific Organization)
+     * @param requestParameters
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getSingleItSystemUsageV2GetItSystemUsage(requestParameters: GetSingleItSystemUsageV2GetItSystemUsageRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIItSystemUsageResponseDTO>;
+    public getSingleItSystemUsageV2GetItSystemUsage(requestParameters: GetSingleItSystemUsageV2GetItSystemUsageRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIItSystemUsageResponseDTO>>;
+    public getSingleItSystemUsageV2GetItSystemUsage(requestParameters: GetSingleItSystemUsageV2GetItSystemUsageRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIItSystemUsageResponseDTO>>;
+    public getSingleItSystemUsageV2GetItSystemUsage(requestParameters: GetSingleItSystemUsageV2GetItSystemUsageRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        const systemUsageUuid = requestParameters.systemUsageUuid;
+        if (systemUsageUuid === null || systemUsageUuid === undefined) {
+            throw new Error('Required parameter systemUsageUuid was null or undefined when calling getSingleItSystemUsageV2GetItSystemUsage.');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarCredential: string | undefined;
+        // authentication (Bearer) required
+        localVarCredential = this.configuration.lookupCredential('Bearer');
+        if (localVarCredential) {
+            localVarHeaders = localVarHeaders.set('Authorization', 'Bearer ' + localVarCredential);
+        }
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/v2/it-system-usages/${this.configuration.encodeParam({name: "systemUsageUuid", value: systemUsageUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
+        return this.httpClient.request<APIItSystemUsageResponseDTO>('get', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Returns the permissions of the authenticated client for the IT-System usage resources collection in the context of an organization (IT-System usage permissions in a specific Organization)
+     * @param requestParameters
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getSingleItSystemUsageV2GetItSystemUsageCollectionPermissions(requestParameters: GetSingleItSystemUsageV2GetItSystemUsageCollectionPermissionsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIResourceCollectionPermissionsResponseDTO>;
+    public getSingleItSystemUsageV2GetItSystemUsageCollectionPermissions(requestParameters: GetSingleItSystemUsageV2GetItSystemUsageCollectionPermissionsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIResourceCollectionPermissionsResponseDTO>>;
+    public getSingleItSystemUsageV2GetItSystemUsageCollectionPermissions(requestParameters: GetSingleItSystemUsageV2GetItSystemUsageCollectionPermissionsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIResourceCollectionPermissionsResponseDTO>>;
+    public getSingleItSystemUsageV2GetItSystemUsageCollectionPermissions(requestParameters: GetSingleItSystemUsageV2GetItSystemUsageCollectionPermissionsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        const organizationUuid = requestParameters.organizationUuid;
+        if (organizationUuid === null || organizationUuid === undefined) {
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleItSystemUsageV2GetItSystemUsageCollectionPermissions.');
+        }
+
+        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
+        if (organizationUuid !== undefined && organizationUuid !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>organizationUuid, 'organizationUuid');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarCredential: string | undefined;
+        // authentication (Bearer) required
+        localVarCredential = this.configuration.lookupCredential('Bearer');
+        if (localVarCredential) {
+            localVarHeaders = localVarHeaders.set('Authorization', 'Bearer ' + localVarCredential);
+        }
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/v2/it-system-usages/permissions`;
+        return this.httpClient.request<APIResourceCollectionPermissionsResponseDTO>('get', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                params: localVarQueryParameters,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Returns the permissions of the authenticated client in the context of a specific IT-System usage (a specific IT-System in a specific Organization)
+     * @param requestParameters
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getSingleItSystemUsageV2GetItSystemUsagePermissions(requestParameters: GetSingleItSystemUsageV2GetItSystemUsagePermissionsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIResourcePermissionsResponseDTO>;
+    public getSingleItSystemUsageV2GetItSystemUsagePermissions(requestParameters: GetSingleItSystemUsageV2GetItSystemUsagePermissionsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIResourcePermissionsResponseDTO>>;
+    public getSingleItSystemUsageV2GetItSystemUsagePermissions(requestParameters: GetSingleItSystemUsageV2GetItSystemUsagePermissionsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIResourcePermissionsResponseDTO>>;
+    public getSingleItSystemUsageV2GetItSystemUsagePermissions(requestParameters: GetSingleItSystemUsageV2GetItSystemUsagePermissionsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        const systemUsageUuid = requestParameters.systemUsageUuid;
+        if (systemUsageUuid === null || systemUsageUuid === undefined) {
+            throw new Error('Required parameter systemUsageUuid was null or undefined when calling getSingleItSystemUsageV2GetItSystemUsagePermissions.');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarCredential: string | undefined;
+        // authentication (Bearer) required
+        localVarCredential = this.configuration.lookupCredential('Bearer');
+        if (localVarCredential) {
+            localVarHeaders = localVarHeaders.set('Authorization', 'Bearer ' + localVarCredential);
+        }
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/v2/it-system-usages/${this.configuration.encodeParam({name: "systemUsageUuid", value: systemUsageUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/permissions`;
+        return this.httpClient.request<APIResourcePermissionsResponseDTO>('get', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -936,9 +952,9 @@ export class ItSystemUsageV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItSystemUsageV2GetJournalPeriod(requestParameters: GetSingleItSystemUsageV2GetJournalPeriodRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleItSystemUsageV2GetJournalPeriod(requestParameters: GetSingleItSystemUsageV2GetJournalPeriodRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleItSystemUsageV2GetJournalPeriod(requestParameters: GetSingleItSystemUsageV2GetJournalPeriodRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public getSingleItSystemUsageV2GetJournalPeriod(requestParameters: GetSingleItSystemUsageV2GetJournalPeriodRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIJournalPeriodResponseDTO>;
+    public getSingleItSystemUsageV2GetJournalPeriod(requestParameters: GetSingleItSystemUsageV2GetJournalPeriodRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIJournalPeriodResponseDTO>>;
+    public getSingleItSystemUsageV2GetJournalPeriod(requestParameters: GetSingleItSystemUsageV2GetJournalPeriodRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIJournalPeriodResponseDTO>>;
     public getSingleItSystemUsageV2GetJournalPeriod(requestParameters: GetSingleItSystemUsageV2GetJournalPeriodRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const systemUsageUuid = requestParameters.systemUsageUuid;
         if (systemUsageUuid === null || systemUsageUuid === undefined) {
@@ -988,7 +1004,7 @@ export class ItSystemUsageV2Service {
         }
 
         let localVarPath = `/api/v2/it-system-usages/${this.configuration.encodeParam({name: "systemUsageUuid", value: systemUsageUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/journal-periods/${this.configuration.encodeParam({name: "journalPeriodUuid", value: journalPeriodUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APIJournalPeriodResponseDTO>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -1006,9 +1022,9 @@ export class ItSystemUsageV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItSystemUsageV2GetSystemUsageRelation(requestParameters: GetSingleItSystemUsageV2GetSystemUsageRelationRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleItSystemUsageV2GetSystemUsageRelation(requestParameters: GetSingleItSystemUsageV2GetSystemUsageRelationRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleItSystemUsageV2GetSystemUsageRelation(requestParameters: GetSingleItSystemUsageV2GetSystemUsageRelationRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public getSingleItSystemUsageV2GetSystemUsageRelation(requestParameters: GetSingleItSystemUsageV2GetSystemUsageRelationRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIOutgoingSystemRelationResponseDTO>;
+    public getSingleItSystemUsageV2GetSystemUsageRelation(requestParameters: GetSingleItSystemUsageV2GetSystemUsageRelationRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIOutgoingSystemRelationResponseDTO>>;
+    public getSingleItSystemUsageV2GetSystemUsageRelation(requestParameters: GetSingleItSystemUsageV2GetSystemUsageRelationRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIOutgoingSystemRelationResponseDTO>>;
     public getSingleItSystemUsageV2GetSystemUsageRelation(requestParameters: GetSingleItSystemUsageV2GetSystemUsageRelationRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const systemUsageUuid = requestParameters.systemUsageUuid;
         if (systemUsageUuid === null || systemUsageUuid === undefined) {
@@ -1058,7 +1074,7 @@ export class ItSystemUsageV2Service {
         }
 
         let localVarPath = `/api/v2/it-system-usages/${this.configuration.encodeParam({name: "systemUsageUuid", value: systemUsageUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/system-relations/${this.configuration.encodeParam({name: "systemRelationUuid", value: systemRelationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APIOutgoingSystemRelationResponseDTO>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -1076,9 +1092,9 @@ export class ItSystemUsageV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleItSystemUsageV2PatchAddRoleAssignment(requestParameters: PatchSingleItSystemUsageV2PatchAddRoleAssignmentRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public patchSingleItSystemUsageV2PatchAddRoleAssignment(requestParameters: PatchSingleItSystemUsageV2PatchAddRoleAssignmentRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public patchSingleItSystemUsageV2PatchAddRoleAssignment(requestParameters: PatchSingleItSystemUsageV2PatchAddRoleAssignmentRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public patchSingleItSystemUsageV2PatchAddRoleAssignment(requestParameters: PatchSingleItSystemUsageV2PatchAddRoleAssignmentRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIItSystemUsageResponseDTO>;
+    public patchSingleItSystemUsageV2PatchAddRoleAssignment(requestParameters: PatchSingleItSystemUsageV2PatchAddRoleAssignmentRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIItSystemUsageResponseDTO>>;
+    public patchSingleItSystemUsageV2PatchAddRoleAssignment(requestParameters: PatchSingleItSystemUsageV2PatchAddRoleAssignmentRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIItSystemUsageResponseDTO>>;
     public patchSingleItSystemUsageV2PatchAddRoleAssignment(requestParameters: PatchSingleItSystemUsageV2PatchAddRoleAssignmentRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const systemUsageUuid = requestParameters.systemUsageUuid;
         if (systemUsageUuid === null || systemUsageUuid === undefined) {
@@ -1135,7 +1151,7 @@ export class ItSystemUsageV2Service {
         }
 
         let localVarPath = `/api/v2/it-system-usages/${this.configuration.encodeParam({name: "systemUsageUuid", value: systemUsageUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/roles/add`;
-        return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APIItSystemUsageResponseDTO>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPIRoleAssignmentRequestDTO,
@@ -1154,9 +1170,9 @@ export class ItSystemUsageV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleItSystemUsageV2PatchRemoveRoleAssignment(requestParameters: PatchSingleItSystemUsageV2PatchRemoveRoleAssignmentRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public patchSingleItSystemUsageV2PatchRemoveRoleAssignment(requestParameters: PatchSingleItSystemUsageV2PatchRemoveRoleAssignmentRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public patchSingleItSystemUsageV2PatchRemoveRoleAssignment(requestParameters: PatchSingleItSystemUsageV2PatchRemoveRoleAssignmentRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public patchSingleItSystemUsageV2PatchRemoveRoleAssignment(requestParameters: PatchSingleItSystemUsageV2PatchRemoveRoleAssignmentRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIItSystemUsageResponseDTO>;
+    public patchSingleItSystemUsageV2PatchRemoveRoleAssignment(requestParameters: PatchSingleItSystemUsageV2PatchRemoveRoleAssignmentRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIItSystemUsageResponseDTO>>;
+    public patchSingleItSystemUsageV2PatchRemoveRoleAssignment(requestParameters: PatchSingleItSystemUsageV2PatchRemoveRoleAssignmentRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIItSystemUsageResponseDTO>>;
     public patchSingleItSystemUsageV2PatchRemoveRoleAssignment(requestParameters: PatchSingleItSystemUsageV2PatchRemoveRoleAssignmentRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const systemUsageUuid = requestParameters.systemUsageUuid;
         if (systemUsageUuid === null || systemUsageUuid === undefined) {
@@ -1213,7 +1229,7 @@ export class ItSystemUsageV2Service {
         }
 
         let localVarPath = `/api/v2/it-system-usages/${this.configuration.encodeParam({name: "systemUsageUuid", value: systemUsageUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/roles/remove`;
-        return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APIItSystemUsageResponseDTO>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPIRoleAssignmentRequestDTO,
@@ -1232,9 +1248,9 @@ export class ItSystemUsageV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleItSystemUsageV2PatchSystemUsage(requestParameters: PatchSingleItSystemUsageV2PatchSystemUsageRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public patchSingleItSystemUsageV2PatchSystemUsage(requestParameters: PatchSingleItSystemUsageV2PatchSystemUsageRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public patchSingleItSystemUsageV2PatchSystemUsage(requestParameters: PatchSingleItSystemUsageV2PatchSystemUsageRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public patchSingleItSystemUsageV2PatchSystemUsage(requestParameters: PatchSingleItSystemUsageV2PatchSystemUsageRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIItSystemUsageResponseDTO>;
+    public patchSingleItSystemUsageV2PatchSystemUsage(requestParameters: PatchSingleItSystemUsageV2PatchSystemUsageRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIItSystemUsageResponseDTO>>;
+    public patchSingleItSystemUsageV2PatchSystemUsage(requestParameters: PatchSingleItSystemUsageV2PatchSystemUsageRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIItSystemUsageResponseDTO>>;
     public patchSingleItSystemUsageV2PatchSystemUsage(requestParameters: PatchSingleItSystemUsageV2PatchSystemUsageRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const systemUsageUuid = requestParameters.systemUsageUuid;
         if (systemUsageUuid === null || systemUsageUuid === undefined) {
@@ -1291,7 +1307,7 @@ export class ItSystemUsageV2Service {
         }
 
         let localVarPath = `/api/v2/it-system-usages/${this.configuration.encodeParam({name: "systemUsageUuid", value: systemUsageUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
-        return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APIItSystemUsageResponseDTO>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPIUpdateItSystemUsageRequestDTO,
@@ -1310,9 +1326,9 @@ export class ItSystemUsageV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleItSystemUsageV2ArchiveItSystemUsage(requestParameters: PostSingleItSystemUsageV2ArchiveItSystemUsageRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public postSingleItSystemUsageV2ArchiveItSystemUsage(requestParameters: PostSingleItSystemUsageV2ArchiveItSystemUsageRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public postSingleItSystemUsageV2ArchiveItSystemUsage(requestParameters: PostSingleItSystemUsageV2ArchiveItSystemUsageRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public postSingleItSystemUsageV2ArchiveItSystemUsage(requestParameters: PostSingleItSystemUsageV2ArchiveItSystemUsageRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIItSystemUsageArchiveResponseDTO>;
+    public postSingleItSystemUsageV2ArchiveItSystemUsage(requestParameters: PostSingleItSystemUsageV2ArchiveItSystemUsageRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIItSystemUsageArchiveResponseDTO>>;
+    public postSingleItSystemUsageV2ArchiveItSystemUsage(requestParameters: PostSingleItSystemUsageV2ArchiveItSystemUsageRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIItSystemUsageArchiveResponseDTO>>;
     public postSingleItSystemUsageV2ArchiveItSystemUsage(requestParameters: PostSingleItSystemUsageV2ArchiveItSystemUsageRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const systemUsageUuid = requestParameters.systemUsageUuid;
         if (systemUsageUuid === null || systemUsageUuid === undefined) {
@@ -1368,7 +1384,7 @@ export class ItSystemUsageV2Service {
         }
 
         let localVarPath = `/api/v2/it-system-usages/${this.configuration.encodeParam({name: "systemUsageUuid", value: systemUsageUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/archive`;
-        return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APIItSystemUsageArchiveResponseDTO>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPICreateItSystemUsageArchiveRequestDTO,
@@ -1387,9 +1403,9 @@ export class ItSystemUsageV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleItSystemUsageV2PostExternalReference(requestParameters: PostSingleItSystemUsageV2PostExternalReferenceRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public postSingleItSystemUsageV2PostExternalReference(requestParameters: PostSingleItSystemUsageV2PostExternalReferenceRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public postSingleItSystemUsageV2PostExternalReference(requestParameters: PostSingleItSystemUsageV2PostExternalReferenceRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public postSingleItSystemUsageV2PostExternalReference(requestParameters: PostSingleItSystemUsageV2PostExternalReferenceRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIExternalReferenceDataResponseDTO>;
+    public postSingleItSystemUsageV2PostExternalReference(requestParameters: PostSingleItSystemUsageV2PostExternalReferenceRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIExternalReferenceDataResponseDTO>>;
+    public postSingleItSystemUsageV2PostExternalReference(requestParameters: PostSingleItSystemUsageV2PostExternalReferenceRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIExternalReferenceDataResponseDTO>>;
     public postSingleItSystemUsageV2PostExternalReference(requestParameters: PostSingleItSystemUsageV2PostExternalReferenceRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const systemUsageUuid = requestParameters.systemUsageUuid;
         if (systemUsageUuid === null || systemUsageUuid === undefined) {
@@ -1445,7 +1461,7 @@ export class ItSystemUsageV2Service {
         }
 
         let localVarPath = `/api/v2/it-system-usages/${this.configuration.encodeParam({name: "systemUsageUuid", value: systemUsageUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/external-references`;
-        return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APIExternalReferenceDataResponseDTO>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPIExternalReferenceDataWriteRequestDTO,
@@ -1464,9 +1480,9 @@ export class ItSystemUsageV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleItSystemUsageV2PostItSystemUsage(requestParameters: PostSingleItSystemUsageV2PostItSystemUsageRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public postSingleItSystemUsageV2PostItSystemUsage(requestParameters: PostSingleItSystemUsageV2PostItSystemUsageRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public postSingleItSystemUsageV2PostItSystemUsage(requestParameters: PostSingleItSystemUsageV2PostItSystemUsageRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public postSingleItSystemUsageV2PostItSystemUsage(requestParameters: PostSingleItSystemUsageV2PostItSystemUsageRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIItSystemUsageResponseDTO>;
+    public postSingleItSystemUsageV2PostItSystemUsage(requestParameters: PostSingleItSystemUsageV2PostItSystemUsageRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIItSystemUsageResponseDTO>>;
+    public postSingleItSystemUsageV2PostItSystemUsage(requestParameters: PostSingleItSystemUsageV2PostItSystemUsageRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIItSystemUsageResponseDTO>>;
     public postSingleItSystemUsageV2PostItSystemUsage(requestParameters: PostSingleItSystemUsageV2PostItSystemUsageRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const aPICreateItSystemUsageRequestDTO = requestParameters.aPICreateItSystemUsageRequestDTO;
 
@@ -1518,7 +1534,7 @@ export class ItSystemUsageV2Service {
         }
 
         let localVarPath = `/api/v2/it-system-usages`;
-        return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APIItSystemUsageResponseDTO>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPICreateItSystemUsageRequestDTO,
@@ -1537,9 +1553,9 @@ export class ItSystemUsageV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleItSystemUsageV2PostJournalPeriod(requestParameters: PostSingleItSystemUsageV2PostJournalPeriodRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public postSingleItSystemUsageV2PostJournalPeriod(requestParameters: PostSingleItSystemUsageV2PostJournalPeriodRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public postSingleItSystemUsageV2PostJournalPeriod(requestParameters: PostSingleItSystemUsageV2PostJournalPeriodRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public postSingleItSystemUsageV2PostJournalPeriod(requestParameters: PostSingleItSystemUsageV2PostJournalPeriodRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIJournalPeriodResponseDTO>;
+    public postSingleItSystemUsageV2PostJournalPeriod(requestParameters: PostSingleItSystemUsageV2PostJournalPeriodRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIJournalPeriodResponseDTO>>;
+    public postSingleItSystemUsageV2PostJournalPeriod(requestParameters: PostSingleItSystemUsageV2PostJournalPeriodRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIJournalPeriodResponseDTO>>;
     public postSingleItSystemUsageV2PostJournalPeriod(requestParameters: PostSingleItSystemUsageV2PostJournalPeriodRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const systemUsageUuid = requestParameters.systemUsageUuid;
         if (systemUsageUuid === null || systemUsageUuid === undefined) {
@@ -1598,7 +1614,7 @@ export class ItSystemUsageV2Service {
         }
 
         let localVarPath = `/api/v2/it-system-usages/${this.configuration.encodeParam({name: "systemUsageUuid", value: systemUsageUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/journal-periods`;
-        return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APIJournalPeriodResponseDTO>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPIJournalPeriodDTO,
@@ -1617,9 +1633,9 @@ export class ItSystemUsageV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleItSystemUsageV2PostSystemUsageRelation(requestParameters: PostSingleItSystemUsageV2PostSystemUsageRelationRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public postSingleItSystemUsageV2PostSystemUsageRelation(requestParameters: PostSingleItSystemUsageV2PostSystemUsageRelationRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public postSingleItSystemUsageV2PostSystemUsageRelation(requestParameters: PostSingleItSystemUsageV2PostSystemUsageRelationRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public postSingleItSystemUsageV2PostSystemUsageRelation(requestParameters: PostSingleItSystemUsageV2PostSystemUsageRelationRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIOutgoingSystemRelationResponseDTO>;
+    public postSingleItSystemUsageV2PostSystemUsageRelation(requestParameters: PostSingleItSystemUsageV2PostSystemUsageRelationRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIOutgoingSystemRelationResponseDTO>>;
+    public postSingleItSystemUsageV2PostSystemUsageRelation(requestParameters: PostSingleItSystemUsageV2PostSystemUsageRelationRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIOutgoingSystemRelationResponseDTO>>;
     public postSingleItSystemUsageV2PostSystemUsageRelation(requestParameters: PostSingleItSystemUsageV2PostSystemUsageRelationRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const systemUsageUuid = requestParameters.systemUsageUuid;
         if (systemUsageUuid === null || systemUsageUuid === undefined) {
@@ -1678,7 +1694,7 @@ export class ItSystemUsageV2Service {
         }
 
         let localVarPath = `/api/v2/it-system-usages/${this.configuration.encodeParam({name: "systemUsageUuid", value: systemUsageUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/system-relations`;
-        return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APIOutgoingSystemRelationResponseDTO>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPISystemRelationWriteRequestDTO,
@@ -1697,9 +1713,9 @@ export class ItSystemUsageV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public putSingleItSystemUsageV2PutExternalReference(requestParameters: PutSingleItSystemUsageV2PutExternalReferenceRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public putSingleItSystemUsageV2PutExternalReference(requestParameters: PutSingleItSystemUsageV2PutExternalReferenceRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public putSingleItSystemUsageV2PutExternalReference(requestParameters: PutSingleItSystemUsageV2PutExternalReferenceRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public putSingleItSystemUsageV2PutExternalReference(requestParameters: PutSingleItSystemUsageV2PutExternalReferenceRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIExternalReferenceDataResponseDTO>;
+    public putSingleItSystemUsageV2PutExternalReference(requestParameters: PutSingleItSystemUsageV2PutExternalReferenceRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIExternalReferenceDataResponseDTO>>;
+    public putSingleItSystemUsageV2PutExternalReference(requestParameters: PutSingleItSystemUsageV2PutExternalReferenceRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIExternalReferenceDataResponseDTO>>;
     public putSingleItSystemUsageV2PutExternalReference(requestParameters: PutSingleItSystemUsageV2PutExternalReferenceRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const systemUsageUuid = requestParameters.systemUsageUuid;
         if (systemUsageUuid === null || systemUsageUuid === undefined) {
@@ -1759,7 +1775,7 @@ export class ItSystemUsageV2Service {
         }
 
         let localVarPath = `/api/v2/it-system-usages/${this.configuration.encodeParam({name: "systemUsageUuid", value: systemUsageUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/external-references/${this.configuration.encodeParam({name: "externalReferenceUuid", value: externalReferenceUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
-        return this.httpClient.request<any>('put', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APIExternalReferenceDataResponseDTO>('put', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPIExternalReferenceDataWriteRequestDTO,
@@ -1778,9 +1794,9 @@ export class ItSystemUsageV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public putSingleItSystemUsageV2PutJournalPeriod(requestParameters: PutSingleItSystemUsageV2PutJournalPeriodRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public putSingleItSystemUsageV2PutJournalPeriod(requestParameters: PutSingleItSystemUsageV2PutJournalPeriodRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public putSingleItSystemUsageV2PutJournalPeriod(requestParameters: PutSingleItSystemUsageV2PutJournalPeriodRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public putSingleItSystemUsageV2PutJournalPeriod(requestParameters: PutSingleItSystemUsageV2PutJournalPeriodRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIJournalPeriodResponseDTO>;
+    public putSingleItSystemUsageV2PutJournalPeriod(requestParameters: PutSingleItSystemUsageV2PutJournalPeriodRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIJournalPeriodResponseDTO>>;
+    public putSingleItSystemUsageV2PutJournalPeriod(requestParameters: PutSingleItSystemUsageV2PutJournalPeriodRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIJournalPeriodResponseDTO>>;
     public putSingleItSystemUsageV2PutJournalPeriod(requestParameters: PutSingleItSystemUsageV2PutJournalPeriodRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const systemUsageUuid = requestParameters.systemUsageUuid;
         if (systemUsageUuid === null || systemUsageUuid === undefined) {
@@ -1840,7 +1856,7 @@ export class ItSystemUsageV2Service {
         }
 
         let localVarPath = `/api/v2/it-system-usages/${this.configuration.encodeParam({name: "systemUsageUuid", value: systemUsageUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/journal-periods/${this.configuration.encodeParam({name: "journalPeriodUuid", value: journalPeriodUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
-        return this.httpClient.request<any>('put', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APIJournalPeriodResponseDTO>('put', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPIJournalPeriodDTO,
@@ -1859,9 +1875,9 @@ export class ItSystemUsageV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public putSingleItSystemUsageV2PutSystemUsage(requestParameters: PutSingleItSystemUsageV2PutSystemUsageRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public putSingleItSystemUsageV2PutSystemUsage(requestParameters: PutSingleItSystemUsageV2PutSystemUsageRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public putSingleItSystemUsageV2PutSystemUsage(requestParameters: PutSingleItSystemUsageV2PutSystemUsageRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public putSingleItSystemUsageV2PutSystemUsage(requestParameters: PutSingleItSystemUsageV2PutSystemUsageRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIItSystemUsageResponseDTO>;
+    public putSingleItSystemUsageV2PutSystemUsage(requestParameters: PutSingleItSystemUsageV2PutSystemUsageRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIItSystemUsageResponseDTO>>;
+    public putSingleItSystemUsageV2PutSystemUsage(requestParameters: PutSingleItSystemUsageV2PutSystemUsageRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIItSystemUsageResponseDTO>>;
     public putSingleItSystemUsageV2PutSystemUsage(requestParameters: PutSingleItSystemUsageV2PutSystemUsageRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const systemUsageUuid = requestParameters.systemUsageUuid;
         if (systemUsageUuid === null || systemUsageUuid === undefined) {
@@ -1917,7 +1933,7 @@ export class ItSystemUsageV2Service {
         }
 
         let localVarPath = `/api/v2/it-system-usages/${this.configuration.encodeParam({name: "systemUsageUuid", value: systemUsageUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
-        return this.httpClient.request<any>('put', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APIItSystemUsageResponseDTO>('put', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPIUpdateItSystemUsageRequestDTO,
@@ -1936,9 +1952,9 @@ export class ItSystemUsageV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public putSingleItSystemUsageV2PutSystemUsageRelation(requestParameters: PutSingleItSystemUsageV2PutSystemUsageRelationRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public putSingleItSystemUsageV2PutSystemUsageRelation(requestParameters: PutSingleItSystemUsageV2PutSystemUsageRelationRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public putSingleItSystemUsageV2PutSystemUsageRelation(requestParameters: PutSingleItSystemUsageV2PutSystemUsageRelationRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public putSingleItSystemUsageV2PutSystemUsageRelation(requestParameters: PutSingleItSystemUsageV2PutSystemUsageRelationRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIOutgoingSystemRelationResponseDTO>;
+    public putSingleItSystemUsageV2PutSystemUsageRelation(requestParameters: PutSingleItSystemUsageV2PutSystemUsageRelationRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIOutgoingSystemRelationResponseDTO>>;
+    public putSingleItSystemUsageV2PutSystemUsageRelation(requestParameters: PutSingleItSystemUsageV2PutSystemUsageRelationRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIOutgoingSystemRelationResponseDTO>>;
     public putSingleItSystemUsageV2PutSystemUsageRelation(requestParameters: PutSingleItSystemUsageV2PutSystemUsageRelationRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const systemUsageUuid = requestParameters.systemUsageUuid;
         if (systemUsageUuid === null || systemUsageUuid === undefined) {
@@ -1998,7 +2014,7 @@ export class ItSystemUsageV2Service {
         }
 
         let localVarPath = `/api/v2/it-system-usages/${this.configuration.encodeParam({name: "systemUsageUuid", value: systemUsageUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/system-relations/${this.configuration.encodeParam({name: "systemRelationUuid", value: systemRelationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
-        return this.httpClient.request<any>('put', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APIOutgoingSystemRelationResponseDTO>('put', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPISystemRelationWriteRequestDTO,

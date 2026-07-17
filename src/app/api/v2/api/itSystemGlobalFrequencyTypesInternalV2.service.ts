@@ -21,6 +21,8 @@ import { Observable }                                        from 'rxjs';
 // @ts-ignore
 import { APIGlobalRegularOptionCreateRequestDTO } from '../model/aPIGlobalRegularOptionCreateRequestDTO';
 // @ts-ignore
+import { APIGlobalRegularOptionResponseDTO } from '../model/aPIGlobalRegularOptionResponseDTO';
+// @ts-ignore
 import { APIGlobalRegularOptionUpdateRequestDTO } from '../model/aPIGlobalRegularOptionUpdateRequestDTO';
 
 // @ts-ignore
@@ -106,10 +108,10 @@ export class ItSystemGlobalFrequencyTypesInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItSystemGlobalFrequencyTypesInternalV2GetGlobalFrequencyTypes(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleItSystemGlobalFrequencyTypesInternalV2GetGlobalFrequencyTypes(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleItSystemGlobalFrequencyTypesInternalV2GetGlobalFrequencyTypes(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleItSystemGlobalFrequencyTypesInternalV2GetGlobalFrequencyTypes(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyItSystemGlobalFrequencyTypesInternalV2GetGlobalFrequencyTypes(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIGlobalRegularOptionResponseDTO>>;
+    public getManyItSystemGlobalFrequencyTypesInternalV2GetGlobalFrequencyTypes(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIGlobalRegularOptionResponseDTO>>>;
+    public getManyItSystemGlobalFrequencyTypesInternalV2GetGlobalFrequencyTypes(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIGlobalRegularOptionResponseDTO>>>;
+    public getManyItSystemGlobalFrequencyTypesInternalV2GetGlobalFrequencyTypes(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -150,7 +152,7 @@ export class ItSystemGlobalFrequencyTypesInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/it-systems/global-option-types/frequency-types`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<Array<APIGlobalRegularOptionResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -167,9 +169,9 @@ export class ItSystemGlobalFrequencyTypesInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleItSystemGlobalFrequencyTypesInternalV2PatchGlobalFrequencyType(requestParameters: PatchSingleItSystemGlobalFrequencyTypesInternalV2PatchGlobalFrequencyTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public patchSingleItSystemGlobalFrequencyTypesInternalV2PatchGlobalFrequencyType(requestParameters: PatchSingleItSystemGlobalFrequencyTypesInternalV2PatchGlobalFrequencyTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public patchSingleItSystemGlobalFrequencyTypesInternalV2PatchGlobalFrequencyType(requestParameters: PatchSingleItSystemGlobalFrequencyTypesInternalV2PatchGlobalFrequencyTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public patchSingleItSystemGlobalFrequencyTypesInternalV2PatchGlobalFrequencyType(requestParameters: PatchSingleItSystemGlobalFrequencyTypesInternalV2PatchGlobalFrequencyTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRegularOptionResponseDTO>;
+    public patchSingleItSystemGlobalFrequencyTypesInternalV2PatchGlobalFrequencyType(requestParameters: PatchSingleItSystemGlobalFrequencyTypesInternalV2PatchGlobalFrequencyTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRegularOptionResponseDTO>>;
+    public patchSingleItSystemGlobalFrequencyTypesInternalV2PatchGlobalFrequencyType(requestParameters: PatchSingleItSystemGlobalFrequencyTypesInternalV2PatchGlobalFrequencyTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRegularOptionResponseDTO>>;
     public patchSingleItSystemGlobalFrequencyTypesInternalV2PatchGlobalFrequencyType(requestParameters: PatchSingleItSystemGlobalFrequencyTypesInternalV2PatchGlobalFrequencyTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
@@ -226,7 +228,7 @@ export class ItSystemGlobalFrequencyTypesInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/it-systems/global-option-types/frequency-types/${this.configuration.encodeParam({name: "optionUuid", value: optionUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
-        return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APIGlobalRegularOptionResponseDTO>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPIGlobalRegularOptionUpdateRequestDTO,
@@ -244,9 +246,9 @@ export class ItSystemGlobalFrequencyTypesInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleItSystemGlobalFrequencyTypesInternalV2CreateGlobalFrequencyType(requestParameters: PostSingleItSystemGlobalFrequencyTypesInternalV2CreateGlobalFrequencyTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public postSingleItSystemGlobalFrequencyTypesInternalV2CreateGlobalFrequencyType(requestParameters: PostSingleItSystemGlobalFrequencyTypesInternalV2CreateGlobalFrequencyTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public postSingleItSystemGlobalFrequencyTypesInternalV2CreateGlobalFrequencyType(requestParameters: PostSingleItSystemGlobalFrequencyTypesInternalV2CreateGlobalFrequencyTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public postSingleItSystemGlobalFrequencyTypesInternalV2CreateGlobalFrequencyType(requestParameters: PostSingleItSystemGlobalFrequencyTypesInternalV2CreateGlobalFrequencyTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRegularOptionResponseDTO>;
+    public postSingleItSystemGlobalFrequencyTypesInternalV2CreateGlobalFrequencyType(requestParameters: PostSingleItSystemGlobalFrequencyTypesInternalV2CreateGlobalFrequencyTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRegularOptionResponseDTO>>;
+    public postSingleItSystemGlobalFrequencyTypesInternalV2CreateGlobalFrequencyType(requestParameters: PostSingleItSystemGlobalFrequencyTypesInternalV2CreateGlobalFrequencyTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRegularOptionResponseDTO>>;
     public postSingleItSystemGlobalFrequencyTypesInternalV2CreateGlobalFrequencyType(requestParameters: PostSingleItSystemGlobalFrequencyTypesInternalV2CreateGlobalFrequencyTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const aPIGlobalRegularOptionCreateRequestDTO = requestParameters.aPIGlobalRegularOptionCreateRequestDTO;
 
@@ -298,7 +300,7 @@ export class ItSystemGlobalFrequencyTypesInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/it-systems/global-option-types/frequency-types`;
-        return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APIGlobalRegularOptionResponseDTO>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPIGlobalRegularOptionCreateRequestDTO,

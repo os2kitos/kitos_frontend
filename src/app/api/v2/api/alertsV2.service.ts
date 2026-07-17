@@ -19,6 +19,8 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
+import { APIAlertResponseDTO } from '../model/aPIAlertResponseDTO';
+// @ts-ignore
 import { APIOwnerResourceType } from '../model/aPIOwnerResourceType';
 
 // @ts-ignore
@@ -30,7 +32,7 @@ export interface DeleteSingleAlertsV2DeleteAlertRequestParams {
     alertUuid: string;
 }
 
-export interface GetSingleAlertsV2GetByOrganizationAndUserRequestParams {
+export interface GetManyAlertsV2GetByOrganizationAndUserRequestParams {
     organizationUuid: string;
     userUuid: string;
     /** Type of resource owning the notification, in Domain terms Core.DomainModel.Shared.RelatedEntityType */
@@ -171,21 +173,21 @@ export class AlertsV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleAlertsV2GetByOrganizationAndUser(requestParameters: GetSingleAlertsV2GetByOrganizationAndUserRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleAlertsV2GetByOrganizationAndUser(requestParameters: GetSingleAlertsV2GetByOrganizationAndUserRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleAlertsV2GetByOrganizationAndUser(requestParameters: GetSingleAlertsV2GetByOrganizationAndUserRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleAlertsV2GetByOrganizationAndUser(requestParameters: GetSingleAlertsV2GetByOrganizationAndUserRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyAlertsV2GetByOrganizationAndUser(requestParameters: GetManyAlertsV2GetByOrganizationAndUserRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIAlertResponseDTO>>;
+    public getManyAlertsV2GetByOrganizationAndUser(requestParameters: GetManyAlertsV2GetByOrganizationAndUserRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIAlertResponseDTO>>>;
+    public getManyAlertsV2GetByOrganizationAndUser(requestParameters: GetManyAlertsV2GetByOrganizationAndUserRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIAlertResponseDTO>>>;
+    public getManyAlertsV2GetByOrganizationAndUser(requestParameters: GetManyAlertsV2GetByOrganizationAndUserRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleAlertsV2GetByOrganizationAndUser.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyAlertsV2GetByOrganizationAndUser.');
         }
         const userUuid = requestParameters.userUuid;
         if (userUuid === null || userUuid === undefined) {
-            throw new Error('Required parameter userUuid was null or undefined when calling getSingleAlertsV2GetByOrganizationAndUser.');
+            throw new Error('Required parameter userUuid was null or undefined when calling getManyAlertsV2GetByOrganizationAndUser.');
         }
         const ownerResourceType = requestParameters.ownerResourceType;
         if (ownerResourceType === null || ownerResourceType === undefined) {
-            throw new Error('Required parameter ownerResourceType was null or undefined when calling getSingleAlertsV2GetByOrganizationAndUser.');
+            throw new Error('Required parameter ownerResourceType was null or undefined when calling getManyAlertsV2GetByOrganizationAndUser.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -227,7 +229,7 @@ export class AlertsV2Service {
         }
 
         let localVarPath = `/api/v2/internal/alerts/organization/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/user/${this.configuration.encodeParam({name: "userUuid", value: userUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/${this.configuration.encodeParam({name: "ownerResourceType", value: ownerResourceType, in: "path", style: "simple", explode: false, dataType: "APIOwnerResourceType", dataFormat: undefined})}`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<Array<APIAlertResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,

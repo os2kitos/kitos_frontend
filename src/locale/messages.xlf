@@ -2576,17 +2576,14 @@
       <trans-unit id="4621931238368826704" datatype="html">
         <source>Organisationer Overblik</source>
       </trans-unit>
-      <trans-unit id="3629666201490878672" datatype="html">
-        <source>Kun organisationer af typen &quot;Virksomhed&quot; kan være ISMS leverandører.</source>
+      <trans-unit id="7913441843962393222" datatype="html">
+        <source>Kun organisationer af typen &quot;Virksomhed&quot; kan være ISMS ansvarlige.</source>
       </trans-unit>
       <trans-unit id="8650499415827640724" datatype="html">
         <source>Type</source>
       </trans-unit>
       <trans-unit id="2961498540444259062" datatype="html">
         <source>Udenlandsk virksomhed</source>
-      </trans-unit>
-      <trans-unit id="2921955405937404227" datatype="html">
-        <source>ISMS leverandør</source>
       </trans-unit>
       <trans-unit id="30353932920713445" datatype="html">
         <source>Deaktiveret</source>
@@ -2636,8 +2633,8 @@
       <trans-unit id="8445117964597330148" datatype="html">
         <source>Jeg forstår og accepterer ovenstående konsekvenser</source>
       </trans-unit>
-      <trans-unit id="5623216180964356135" datatype="html">
-        <source> Organisationen er markeret som ISMS leverandør for følgende kommuner: </source>
+      <trans-unit id="2109877943674511866" datatype="html">
+        <source> Organisationen er markeret som ISMS ansvarlig for følgende kommuner: </source>
       </trans-unit>
       <trans-unit id="8669528431522521621" datatype="html">
         <source> Kopier til klipholder</source>
@@ -4185,9 +4182,6 @@
       <trans-unit id="3280711225834726320" datatype="html">
         <source>CVR-nummer</source>
       </trans-unit>
-      <trans-unit id="720072715763564568" datatype="html">
-        <source>ISMS Leverandører</source>
-      </trans-unit>
       <trans-unit id="9113741111737099906" datatype="html">
         <source><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>Tilføj<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></source>
       </trans-unit>
@@ -4215,8 +4209,8 @@
       <trans-unit id="2633970024634511367" datatype="html">
         <source>Vælg leverandør</source>
       </trans-unit>
-      <trans-unit id="478406584518441805" datatype="html">
-        <source>Er du sikker på, at du vil fjerne ISMS leverandøren &quot;<x id="PH" equiv-text="$event.name"/>&quot;?</source>
+      <trans-unit id="525217731684679998" datatype="html">
+        <source>Er du sikker på, at du vil fjerne den ISMS ansvarlige &quot;<x id="PH" equiv-text="$event.name"/>&quot;?</source>
       </trans-unit>
       <trans-unit id="303541399201403734" datatype="html">
         <source>Organisationsroller i din organisation</source>
@@ -4233,14 +4227,8 @@
       <trans-unit id="2429179520054687064" datatype="html">
         <source>Masseopret</source>
       </trans-unit>
-      <trans-unit id="4294821706131293879" datatype="html">
-        <source>ISMS leverandører</source>
-      </trans-unit>
       <trans-unit id="8666131066916332987" datatype="html">
         <source>Ukendt modul</source>
-      </trans-unit>
-      <trans-unit id="8276868235175330138" datatype="html">
-        <source> Tilpasning på feltniveau er endnu ikke muligt for dette faneblad. </source>
       </trans-unit>
       <trans-unit id="9117861173318709156" datatype="html">
         <source>Notifikationer</source>
@@ -5102,11 +5090,11 @@
       <trans-unit id="9044278666187230003" datatype="html">
         <source>Dette udfald er obligatorisk og kan kun deaktiveres af OS2Kitos sekretariatet</source>
       </trans-unit>
-      <trans-unit id="1642240908531913708" datatype="html">
-        <source>Dette felt styres af en leverandør og kan ikke ændres her – Lokal admin indstilling.</source>
+      <trans-unit id="43984547879855906" datatype="html">
+        <source>Dette felt styres af en ISMS ansvarlig og kan ikke ændres her – Lokal admin indstilling.</source>
       </trans-unit>
-      <trans-unit id="1419758105713365334" datatype="html">
-        <source>Denne handling styres af en leverandør og kan ikke udføres her – Lokal admin indstilling.</source>
+      <trans-unit id="6596801199448210208" datatype="html">
+        <source>Denne handling styres af en ISMS ansvarlig og kan ikke udføres her – Lokal admin indstilling.</source>
       </trans-unit>
       <trans-unit id="8930394023973882411" datatype="html">
         <source>Webadressen er ugyldig. Sørg for, at den begynder med én af disse: &quot;http://&quot;, &quot;https://&quot;, &quot;kmdedhvis:&quot;, &quot;kmdsageraabn:&quot;, eller &quot;sbsyslauncher:&quot;</source>
@@ -5536,24 +5524,6 @@
       </trans-unit>
       <trans-unit id="6912683886432863090" datatype="html">
         <source>Typen kunne ikke opdateres</source>
-      </trans-unit>
-      <trans-unit id="2046361179748044913" datatype="html">
-        <source>ISMS leverandøren blev tilføjet</source>
-      </trans-unit>
-      <trans-unit id="9052722120771694867" datatype="html">
-        <source>Kunne ikke tilføje ISMS leverandøren</source>
-      </trans-unit>
-      <trans-unit id="7702962993043588389" datatype="html">
-        <source>ISMS leverandøren blev fjernet</source>
-      </trans-unit>
-      <trans-unit id="6390628077096716329" datatype="html">
-        <source>Kunne ikke fjerne ISMS leverandøren</source>
-      </trans-unit>
-      <trans-unit id="977445061536403655" datatype="html">
-        <source>Kunne ikke hente ISMS leverandører</source>
-      </trans-unit>
-      <trans-unit id="2812384018586692723" datatype="html">
-        <source>Kunne ikke hente tilgængelige ISMS leverandører</source>
       </trans-unit>
       <trans-unit id="4203897629734325156" datatype="html">
         <source>Organisationen blev oprettet</source>
@@ -6089,9 +6059,6 @@
       <trans-unit id="3231887773453065724" datatype="html">
         <source>Lokalt system ID</source>
       </trans-unit>
-      <trans-unit id="752345348010102991" datatype="html">
-        <source>Anvendelses historik</source>
-      </trans-unit>
       <trans-unit id="1220374093016564303" datatype="html">
         <source>Reference/link til ESDH</source>
       </trans-unit>
@@ -6100,9 +6067,6 @@
       </trans-unit>
       <trans-unit id="2137405200624328487" datatype="html">
         <source>Kommentar</source>
-      </trans-unit>
-      <trans-unit id="8785270844621556660" datatype="html">
-        <source>Tryk &quot;Bekræft&quot; for at slette de lokale registreringer vedrørerende systemet i <x id="PH" equiv-text="organizationName ?? &apos;kommunen&apos;"/>. Tryk &quot;Bevar historik&quot; for at slette de lokale registreringer og udfylde arkivinformation om systemanvendelsen. Disse handlinger påvirker ikke stamdata om systemet i IT System Kataloget.</source>
       </trans-unit>
       <trans-unit id="4999037601378878230" datatype="html">
         <source>Systemanvendelsen blev arkiveret</source>
@@ -6160,6 +6124,87 @@
       </trans-unit>
       <trans-unit id="6695689715467154620" datatype="html">
         <source>Tilsynsmulighed</source>
+      </trans-unit>
+      <trans-unit id="1887192367982958175" datatype="html">
+        <source>Kontrakter med kritikalitet</source>
+      </trans-unit>
+      <trans-unit id="2104255059383970781" datatype="html">
+        <source>Kontraktleverandøroverblik</source>
+      </trans-unit>
+      <trans-unit id="2216578951027165690" datatype="html">
+        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;app-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;/app-table-icon&gt;"/>IT Kontrakter</source>
+      </trans-unit>
+      <trans-unit id="4489780584984050676" datatype="html">
+        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;app-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;/app-table-icon&gt;"/>Kontraktleverandører</source>
+      </trans-unit>
+      <trans-unit id="4664622852831567042" datatype="html">
+        <source>Intern</source>
+      </trans-unit>
+      <trans-unit id="6121630261857070709" datatype="html">
+        <source>Intern/Ekstern</source>
+      </trans-unit>
+      <trans-unit id="6659779351647970674" datatype="html">
+        <source>Ekstern</source>
+      </trans-unit>
+      <trans-unit id="6738836393343834673" datatype="html">
+        <source>IT Kontraktleverandører</source>
+      </trans-unit>
+      <trans-unit id="7943900294399424872" datatype="html">
+        <source>Leverandørnavn</source>
+      </trans-unit>
+      <trans-unit id="8848231426257184109" datatype="html">
+        <source>Beregnet kritikalitet</source>
+      </trans-unit>
+      <trans-unit id="1946395520925013052" datatype="html">
+        <source>ISMS ansvarlig</source>
+      </trans-unit>
+      <trans-unit id="2007804322541437177" datatype="html">
+        <source>Den ISMS ansvarlige blev fjernet</source>
+      </trans-unit>
+      <trans-unit id="3029670321689161185" datatype="html">
+        <source>Den ISMS ansvarlige blev tilføjet</source>
+      </trans-unit>
+      <trans-unit id="6344394057577656318" datatype="html">
+        <source>Kunne ikke tilføje den ISMS ansvarlige</source>
+      </trans-unit>
+      <trans-unit id="8072818207840328941" datatype="html">
+        <source>ISMS ansvarlige</source>
+      </trans-unit>
+      <trans-unit id="8233870924322599793" datatype="html">
+        <source>Kunne ikke hente ISMS ansvarlige</source>
+      </trans-unit>
+      <trans-unit id="8990563193595515538" datatype="html">
+        <source>Kunne ikke fjerne den ISMS ansvarlige</source>
+      </trans-unit>
+      <trans-unit id="900101206118530852" datatype="html">
+        <source>Kunne ikke hente tilgængelige ISMS ansvarlige</source>
+      </trans-unit>
+      <trans-unit id="2911297811675301799" datatype="html">
+        <source>Intern leverandør</source>
+      </trans-unit>
+      <trans-unit id="3251340841049392439" datatype="html">
+        <source>Underskriver er ikke kontaktperson</source>
+      </trans-unit>
+      <trans-unit id="6503850834342268312" datatype="html">
+        <source>Leverandørens enhed</source>
+      </trans-unit>
+      <trans-unit id="7099734686819055563" datatype="html">
+        <source>Leverandørens kontaktperson</source>
+      </trans-unit>
+      <trans-unit id="2330713002282166720" datatype="html">
+        <source>faneblad</source>
+      </trans-unit>
+      <trans-unit id="5473319657165590488" datatype="html">
+        <source> Tryk &quot;Bevar historik&quot; for at slette de lokale registreringer og udfylde arkivinformation om systemanvendelsen. Disse handlinger påvirker ikke stamdata om systemet i IT System Kataloget.</source>
+      </trans-unit>
+      <trans-unit id="6877831071382783768" datatype="html">
+        <source> Tilpasning på feltniveau er endnu ikke muligt for dette <x id="INTERPOLATION" equiv-text="{{ noChildrenLabel() }}"/>. </source>
+      </trans-unit>
+      <trans-unit id="8166587301539797710" datatype="html">
+        <source>Tryk &quot;Bekræft&quot; for at slette de lokale registreringer vedrørende systemet i <x id="PH" equiv-text="organizationName ?? &apos;kommunen&apos;"/>.</source>
+      </trans-unit>
+      <trans-unit id="8841697561528871723" datatype="html">
+        <source>undermodul</source>
       </trans-unit>
     </body>
   </file>

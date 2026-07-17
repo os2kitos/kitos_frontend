@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
 import { APIGDPRWriteRequestDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import { SUPPLIER_DISABLED_MESSAGE } from 'src/app/shared/constants/constants';
+import { ISMS_RESPONSIBLE_DISABLED_MESSAGE } from 'src/app/shared/constants/constants';
 import {
   IsDataProcessingAgreementRequired,
   isDataProcessingAgreementRequiredOptions,
@@ -49,7 +49,7 @@ export class GeneralInfoSectionComponent extends BaseComponent implements OnInit
   @Input() disableLinkControl!: Observable<void>;
   @Output() noPermissions = new EventEmitter<AbstractControl[]>();
 
-  public readonly supplierMessage = SUPPLIER_DISABLED_MESSAGE;
+  public readonly supplierMessage = ISMS_RESPONSIBLE_DISABLED_MESSAGE;
 
   public readonly gdpr$ = this.store.select(selectItSystemUsageGdpr).pipe(filterNullish());
   public readonly selectDirectoryDocumentation$ = this.gdpr$.pipe(

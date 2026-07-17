@@ -20,18 +20,22 @@ import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
 import { APICommonOrderByProperty } from '../model/aPICommonOrderByProperty';
+// @ts-ignore
+import { APIItSystemHierarchyNodeResponseDTO } from '../model/aPIItSystemHierarchyNodeResponseDTO';
+// @ts-ignore
+import { APIItSystemSearchResponseDTO } from '../model/aPIItSystemSearchResponseDTO';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
 
 
-export interface GetSingleItSystemInternalV2GetHierarchyRequestParams {
+export interface GetManyItSystemInternalV2GetHierarchyRequestParams {
     systemUuid: string;
     organizationUuid: string;
 }
 
-export interface GetSingleItSystemInternalV2GetItSystemsRequestParams {
+export interface GetManyItSystemInternalV2GetItSystemsRequestParams {
     /** Rightsholder UUID filter */
     rightsHolderUuid?: string;
     /** Business type UUID filter */
@@ -130,17 +134,17 @@ export class ItSystemInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItSystemInternalV2GetHierarchy(requestParameters: GetSingleItSystemInternalV2GetHierarchyRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleItSystemInternalV2GetHierarchy(requestParameters: GetSingleItSystemInternalV2GetHierarchyRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleItSystemInternalV2GetHierarchy(requestParameters: GetSingleItSystemInternalV2GetHierarchyRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleItSystemInternalV2GetHierarchy(requestParameters: GetSingleItSystemInternalV2GetHierarchyRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyItSystemInternalV2GetHierarchy(requestParameters: GetManyItSystemInternalV2GetHierarchyRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIItSystemHierarchyNodeResponseDTO>>;
+    public getManyItSystemInternalV2GetHierarchy(requestParameters: GetManyItSystemInternalV2GetHierarchyRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIItSystemHierarchyNodeResponseDTO>>>;
+    public getManyItSystemInternalV2GetHierarchy(requestParameters: GetManyItSystemInternalV2GetHierarchyRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIItSystemHierarchyNodeResponseDTO>>>;
+    public getManyItSystemInternalV2GetHierarchy(requestParameters: GetManyItSystemInternalV2GetHierarchyRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const systemUuid = requestParameters.systemUuid;
         if (systemUuid === null || systemUuid === undefined) {
-            throw new Error('Required parameter systemUuid was null or undefined when calling getSingleItSystemInternalV2GetHierarchy.');
+            throw new Error('Required parameter systemUuid was null or undefined when calling getManyItSystemInternalV2GetHierarchy.');
         }
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleItSystemInternalV2GetHierarchy.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyItSystemInternalV2GetHierarchy.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -182,7 +186,7 @@ export class ItSystemInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/organization/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/it-systems/${this.configuration.encodeParam({name: "systemUuid", value: systemUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/hierarchy`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<Array<APIItSystemHierarchyNodeResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -200,10 +204,10 @@ export class ItSystemInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItSystemInternalV2GetItSystems(requestParameters: GetSingleItSystemInternalV2GetItSystemsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleItSystemInternalV2GetItSystems(requestParameters: GetSingleItSystemInternalV2GetItSystemsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleItSystemInternalV2GetItSystems(requestParameters: GetSingleItSystemInternalV2GetItSystemsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleItSystemInternalV2GetItSystems(requestParameters: GetSingleItSystemInternalV2GetItSystemsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyItSystemInternalV2GetItSystems(requestParameters: GetManyItSystemInternalV2GetItSystemsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIItSystemSearchResponseDTO>>;
+    public getManyItSystemInternalV2GetItSystems(requestParameters: GetManyItSystemInternalV2GetItSystemsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIItSystemSearchResponseDTO>>>;
+    public getManyItSystemInternalV2GetItSystems(requestParameters: GetManyItSystemInternalV2GetItSystemsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIItSystemSearchResponseDTO>>>;
+    public getManyItSystemInternalV2GetItSystems(requestParameters: GetManyItSystemInternalV2GetItSystemsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const rightsHolderUuid = requestParameters.rightsHolderUuid;
         const businessTypeUuid = requestParameters.businessTypeUuid;
         const kleNumber = requestParameters.kleNumber;
@@ -316,7 +320,7 @@ export class ItSystemInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/it-systems/search`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<Array<APIItSystemSearchResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 params: localVarQueryParameters,

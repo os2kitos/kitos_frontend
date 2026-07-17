@@ -97,7 +97,7 @@ export class EditOrganizationDialogComponent extends GlobalAdminOrganizationsDia
   public toggleIsSupplierField() {
     const controls = this.formGroup.controls;
     const supplierStateControl = controls['isSupplier'];
-    if (this.enableISMSSupplierField()) {
+    if (this.enableISMSResponsibleField()) {
       supplierStateControl.setValue(this.organization.IsSupplier);
       supplierStateControl.enable();
     } else {
@@ -106,7 +106,7 @@ export class EditOrganizationDialogComponent extends GlobalAdminOrganizationsDia
     }
   }
 
-  public enableISMSSupplierField() {
+  public enableISMSResponsibleField() {
     return this.formGroup.controls['organizationType'].value?.value === OrganizationTypeEnum.Company;
   }
 
@@ -137,7 +137,7 @@ export class EditOrganizationDialogComponent extends GlobalAdminOrganizationsDia
       type: formValue.organizationType ? mapOrgTypeToDtoType(formValue.organizationType.value) : undefined,
       foreignCountryCodeUuid: formValue.foreignCountryCode?.uuid ?? undefined,
       updateForeignCountryCode: this.foreignCountryCodeHasChange(),
-      isSupplier: this.enableISMSSupplierField() ? isSupplierValue : undefined,
+      isSupplier: this.enableISMSResponsibleField() ? isSupplierValue : undefined,
     };
   }
 

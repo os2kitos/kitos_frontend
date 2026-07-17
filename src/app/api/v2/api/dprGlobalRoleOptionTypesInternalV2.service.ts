@@ -21,6 +21,8 @@ import { Observable }                                        from 'rxjs';
 // @ts-ignore
 import { APIGlobalRoleOptionCreateRequestDTO } from '../model/aPIGlobalRoleOptionCreateRequestDTO';
 // @ts-ignore
+import { APIGlobalRoleOptionResponseDTO } from '../model/aPIGlobalRoleOptionResponseDTO';
+// @ts-ignore
 import { APIGlobalRoleOptionUpdateRequestDTO } from '../model/aPIGlobalRoleOptionUpdateRequestDTO';
 
 // @ts-ignore
@@ -106,10 +108,10 @@ export class DprGlobalRoleOptionTypesInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleDprGlobalRoleOptionTypesInternalV2GetDprRoles(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleDprGlobalRoleOptionTypesInternalV2GetDprRoles(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleDprGlobalRoleOptionTypesInternalV2GetDprRoles(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleDprGlobalRoleOptionTypesInternalV2GetDprRoles(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyDprGlobalRoleOptionTypesInternalV2GetDprRoles(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIGlobalRoleOptionResponseDTO>>;
+    public getManyDprGlobalRoleOptionTypesInternalV2GetDprRoles(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIGlobalRoleOptionResponseDTO>>>;
+    public getManyDprGlobalRoleOptionTypesInternalV2GetDprRoles(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIGlobalRoleOptionResponseDTO>>>;
+    public getManyDprGlobalRoleOptionTypesInternalV2GetDprRoles(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -150,7 +152,7 @@ export class DprGlobalRoleOptionTypesInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/dpr/global-option-types/dpr-roles`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<Array<APIGlobalRoleOptionResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -167,9 +169,9 @@ export class DprGlobalRoleOptionTypesInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleDprGlobalRoleOptionTypesInternalV2PatchDprRole(requestParameters: PatchSingleDprGlobalRoleOptionTypesInternalV2PatchDprRoleRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public patchSingleDprGlobalRoleOptionTypesInternalV2PatchDprRole(requestParameters: PatchSingleDprGlobalRoleOptionTypesInternalV2PatchDprRoleRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public patchSingleDprGlobalRoleOptionTypesInternalV2PatchDprRole(requestParameters: PatchSingleDprGlobalRoleOptionTypesInternalV2PatchDprRoleRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public patchSingleDprGlobalRoleOptionTypesInternalV2PatchDprRole(requestParameters: PatchSingleDprGlobalRoleOptionTypesInternalV2PatchDprRoleRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRoleOptionResponseDTO>;
+    public patchSingleDprGlobalRoleOptionTypesInternalV2PatchDprRole(requestParameters: PatchSingleDprGlobalRoleOptionTypesInternalV2PatchDprRoleRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRoleOptionResponseDTO>>;
+    public patchSingleDprGlobalRoleOptionTypesInternalV2PatchDprRole(requestParameters: PatchSingleDprGlobalRoleOptionTypesInternalV2PatchDprRoleRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRoleOptionResponseDTO>>;
     public patchSingleDprGlobalRoleOptionTypesInternalV2PatchDprRole(requestParameters: PatchSingleDprGlobalRoleOptionTypesInternalV2PatchDprRoleRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
@@ -226,7 +228,7 @@ export class DprGlobalRoleOptionTypesInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/dpr/global-option-types/dpr-roles/${this.configuration.encodeParam({name: "optionUuid", value: optionUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
-        return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APIGlobalRoleOptionResponseDTO>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPIGlobalRoleOptionUpdateRequestDTO,
@@ -244,9 +246,9 @@ export class DprGlobalRoleOptionTypesInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleDprGlobalRoleOptionTypesInternalV2CreateDprRole(requestParameters: PostSingleDprGlobalRoleOptionTypesInternalV2CreateDprRoleRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public postSingleDprGlobalRoleOptionTypesInternalV2CreateDprRole(requestParameters: PostSingleDprGlobalRoleOptionTypesInternalV2CreateDprRoleRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public postSingleDprGlobalRoleOptionTypesInternalV2CreateDprRole(requestParameters: PostSingleDprGlobalRoleOptionTypesInternalV2CreateDprRoleRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public postSingleDprGlobalRoleOptionTypesInternalV2CreateDprRole(requestParameters: PostSingleDprGlobalRoleOptionTypesInternalV2CreateDprRoleRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRoleOptionResponseDTO>;
+    public postSingleDprGlobalRoleOptionTypesInternalV2CreateDprRole(requestParameters: PostSingleDprGlobalRoleOptionTypesInternalV2CreateDprRoleRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRoleOptionResponseDTO>>;
+    public postSingleDprGlobalRoleOptionTypesInternalV2CreateDprRole(requestParameters: PostSingleDprGlobalRoleOptionTypesInternalV2CreateDprRoleRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRoleOptionResponseDTO>>;
     public postSingleDprGlobalRoleOptionTypesInternalV2CreateDprRole(requestParameters: PostSingleDprGlobalRoleOptionTypesInternalV2CreateDprRoleRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const aPIGlobalRoleOptionCreateRequestDTO = requestParameters.aPIGlobalRoleOptionCreateRequestDTO;
 
@@ -298,7 +300,7 @@ export class DprGlobalRoleOptionTypesInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/dpr/global-option-types/dpr-roles`;
-        return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APIGlobalRoleOptionResponseDTO>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPIGlobalRoleOptionCreateRequestDTO,

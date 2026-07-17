@@ -5,9 +5,10 @@ import * as ContractFields from 'src/app/shared/constants/it-contracts-grid-colu
 import * as UsageFields from 'src/app/shared/constants/it-system-usage-grid-column-constants';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
+import { ITContractSupplierActions } from 'src/app/store/it-contract/it-contract-supplier/actions';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
-import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { ITSystemUsageArchiveActions } from 'src/app/store/it-system-usage-archive/actions';
+import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
 import { OrganizationActions } from 'src/app/store/organization/actions';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
@@ -34,6 +35,8 @@ export function getSaveFilterAction(entityType: RegistrationEntityTypes) {
       return OrganizationActions.saveLocalAdminOrganizationsFilter;
     case 'global-admin-organization':
       return OrganizationActions.saveGlobalAdminOrganizationsFilter;
+    case 'it-contract-supplier':
+      return ITContractSupplierActions.saveITContractSuppliersFilter;
     default:
       throw `Save filter action for entity type ${entityType} not implemented`;
   }
@@ -59,6 +62,8 @@ export function getApplyFilterAction(entityType: RegistrationEntityTypes) {
       return OrganizationActions.applyLocalAdminOrganizationsFilter;
     case 'global-admin-organization':
       return OrganizationActions.applyGlobalAdminOrganizationsFilter;
+    case 'it-contract-supplier':
+      return ITContractSupplierActions.applyITContractSuppliersFilter;
     default:
       throw `Apply filter action for entity type ${entityType} not implemented`;
   }
@@ -72,16 +77,16 @@ export function initializeApplyFilterSubscription(
   actions$: Actions,
   entityType: RegistrationEntityTypes,
   columnField: string,
-  updateFilter: (filter: FilterDescriptor | undefined) => void
+  updateFilter: (filter: FilterDescriptor | undefined) => void,
 ): Subscription {
   return actions$
     .pipe(
       ofType(getApplyFilterAction(entityType)),
-      map(({ state }) => state.filter)
+      map(({ state }) => state.filter),
     )
     .subscribe((compFilter) => {
       const matchingFilter = compFilter?.filters.find(
-        (filter) => !isCompositeFilterDescriptor(filter) && filter.field === columnField
+        (filter) => !isCompositeFilterDescriptor(filter) && filter.field === columnField,
       ) as FilterDescriptor | undefined;
       updateFilter(matchingFilter);
     });
@@ -95,7 +100,7 @@ export function initializeApplyFilterSubscription(
 export function usageGridStateToAction(gridState: GridState): any {
   const { gridState: newGridState, filter } = extractAndRemoveFilter(
     gridState,
-    UsageFields.ResponsibleOrganizationUnitName
+    UsageFields.ResponsibleOrganizationUnitName,
   );
   return ITSystemUsageActions.getITSystemUsages(newGridState, filter?.value as string | undefined);
 }
@@ -108,7 +113,7 @@ export function contractsGridStateToAction(gridState: GridState): any {
 
 function extractAndRemoveFilter(
   gridState: GridState,
-  targetFilterName: string
+  targetFilterName: string,
 ): { gridState: GridState; filter: FilterDescriptor | undefined } {
   if (!gridState.filter) {
     return { gridState, filter: undefined };

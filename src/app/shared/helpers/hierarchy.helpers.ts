@@ -85,7 +85,7 @@ export const mapFkOrgSnapshotUnits = (
 export const mapContractsToTree = (contracts: APIItContractResponseDTO[]) => {
   const mappedHierarchy = contracts.map<HierachyNodeWithParentUuid>((unit) => ({
     uuid: unit.uuid,
-    name: unit.name,
+    name: unit.name ?? '',
     isRoot: !unit.parentContract,
     parentUuid: unit.parentContract?.uuid,
     children: [],

@@ -1,12 +1,13 @@
 import { Action, ActionReducer } from '@ngrx/store';
 import { DataProcessingActions } from '../data-processing/actions';
 import { ITContractActions } from '../it-contract/actions';
+import { ITContractSupplierActions } from '../it-contract/it-contract-supplier/actions';
 import { ITInterfaceActions } from '../it-system-interfaces/actions';
+import { ITSystemUsageArchiveActions } from '../it-system-usage-archive/actions';
 import { ITSystemUsageActions } from '../it-system-usage/actions';
 import { ITSystemActions } from '../it-system/actions';
-import { ITSystemUsageArchiveActions } from '../it-system-usage-archive/actions';
-import { OrganizationUserActions } from '../organization/organization-user/actions';
 import { OrganizationActions } from '../organization/actions';
+import { OrganizationUserActions } from '../organization/organization-user/actions';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function exportReadyMetaReducer(reducer: ActionReducer<any>): ActionReducer<any> {
@@ -17,6 +18,7 @@ export function exportReadyMetaReducer(reducer: ActionReducer<any>): ActionReduc
       action.type === ITSystemActions.getITSystemsSuccess.type ||
       action.type === DataProcessingActions.getDataProcessingsSuccess.type ||
       action.type === ITContractActions.getITContractsSuccess.type ||
+      action.type === ITContractSupplierActions.getSuppliersSuccess.type ||
       action.type === ITSystemUsageArchiveActions.getITSystemUsageArchivesSuccess.type ||
       action.type === OrganizationUserActions.getOrganizationUsersSuccess.type ||
       action.type === OrganizationActions.getOrganizationsSuccess.type

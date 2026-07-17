@@ -23,7 +23,7 @@ export class LocalAdminUserEffects {
     return this.actions$.pipe(
       ofType(LocalAdminUserActions.getLocalAdmins),
       switchMap(() => {
-        return this.globalUserService.getSingleGlobalUserInternalV2GetAllLocalAdmins().pipe(
+        return this.globalUserService.getManyGlobalUserInternalV2GetAllLocalAdmins().pipe(
           map((adminsDto) => adminsDto.map((userDto: any) => adaptLocalAdminUser(userDto))),
           map((admins) => LocalAdminUserActions.getLocalAdminsSuccess(admins)),
           catchError(() => of(LocalAdminUserActions.getLocalAdminsError())),

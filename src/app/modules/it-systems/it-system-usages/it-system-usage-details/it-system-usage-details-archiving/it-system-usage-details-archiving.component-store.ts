@@ -41,7 +41,7 @@ export class ItSystemUsageDetailsArchivingComponentStore extends ComponentStore<
       mergeMap((search) => {
         this.updateOrganizationsIsLoading(true);
         return this.organizationsService
-          .getSingleOrganizationV2GetOrganizations({ nameOrCvrContent: search, orderByProperty: 'Name' })
+          .getManyOrganizationV2GetOrganizations({ nameOrCvrContent: search, orderByProperty: 'Name' })
           .pipe(
             tapResponse({
               next: (organizations) => this.updateOrganizations(organizations),

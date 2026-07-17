@@ -102,130 +102,130 @@ export class RegularOptionTypeService {
     switch (optionType) {
       case 'it-system_business-type':
         return (organizationUuid) =>
-          this.businessTypesService.getSingleItSystemBusinessTypeV2GetBusinessTypes({
+          this.businessTypesService.getManyItSystemBusinessTypeV2GetBusinessTypes({
             organizationUuid: organizationUuid,
           });
       case 'it-contract_contract-type':
         return (organizationUuid) =>
-          this.contractTypesService.getSingleItContractContractTypeV2Get({ organizationUuid: organizationUuid });
+          this.contractTypesService.getManyItContractContractTypeV2Get({ organizationUuid: organizationUuid });
       case 'it-interface_interface-type':
         return (organizationUuid) =>
-          this.interfaceTypesService.getSingleItInterfaceInterfaceTypeV2Get({ organizationUuid: organizationUuid });
+          this.interfaceTypesService.getManyItInterfaceInterfaceTypeV2Get({ organizationUuid: organizationUuid });
       case 'it-system_usage-data-classification-type':
         return (organizationUuid) =>
-          this.dataClassificationTypesService.getSingleItSystemUsageDataClassificationTypeV2Get({
+          this.dataClassificationTypesService.getManyItSystemUsageDataClassificationTypeV2Get({
             organizationUuid: organizationUuid,
           });
       case 'it-system_usage-relation-frequency-type':
         return (organizationUuid) =>
-          this.relationFrequencyTypesService.getSingleItSystemUsageRelationFrequencyTypeV2Get({ organizationUuid });
+          this.relationFrequencyTypesService.getManyItSystemUsageRelationFrequencyTypeV2Get({ organizationUuid });
       case 'it_system_usage-gdpr-sensitive-data-type':
         return (organizationUuid) =>
-          this.sensitivePersonalDataTypesService.getSingleItSystemUsageSensitivePersonalDataTypeV2Get({
+          this.sensitivePersonalDataTypesService.getManyItSystemUsageSensitivePersonalDataTypeV2Get({
             organizationUuid,
           });
       case 'it-system_usage-archive-type':
         return (organizationUuid) =>
-          this.itSystemUsageArchiveTypesService.getSingleItSystemUsageArchiveTypeV2Get({
+          this.itSystemUsageArchiveTypesService.getManyItSystemUsageArchiveTypeV2Get({
             organizationUuid: organizationUuid,
           });
       case 'it-system_usage-archive-location-type':
         return (organizationUuid) =>
-          this.itSystemUsageArchiveLocationTypesService.getSingleItSystemUsageArchiveLocationTypeV2Get({
+          this.itSystemUsageArchiveLocationTypesService.getManyItSystemUsageArchiveLocationTypeV2Get({
             organizationUuid: organizationUuid,
           });
       case 'it-system_usage-archive-location-test-type':
         return (organizationUuid) =>
-          this.itSystemUsageArchiveLocationTestTypesService.getSingleItSystemUsageArchiveTestLocationTypeV2Get({
+          this.itSystemUsageArchiveLocationTestTypesService.getManyItSystemUsageArchiveTestLocationTypeV2Get({
             organizationUuid: organizationUuid,
           });
       case 'it_system_usage-gdpr-registered-data-category-type':
         return (organizationUuid) =>
-          this.itSystemUsageRegisteredDataCategoryTypeService.getSingleItSystemUsageRegisteredDataCategoryTypeV2Get({
+          this.itSystemUsageRegisteredDataCategoryTypeService.getManyItSystemUsageRegisteredDataCategoryTypeV2Get({
             organizationUuid: organizationUuid,
           });
       case 'it-system-usage_system-usage-criticality-level':
         return (organizationUuid) =>
-          this.itSystemUsageCriticalityLevelService.getSingleItSystemUsageCriticalityLevelTypeV2Get({
+          this.itSystemUsageCriticalityLevelService.getManyItSystemUsageCriticalityLevelTypeV2Get({
             organizationUuid: organizationUuid,
           });
       case 'it-system-usage_technical-system-type':
         return (organizationUuid) =>
-          this.itSystemUsageTechnicalSystemTypeService.getSingleItSystemUsageTechnicalSystemTypeV2Get({
+          this.itSystemUsageTechnicalSystemTypeService.getManyItSystemUsageTechnicalSystemTypeV2Get({
             organizationUuid: organizationUuid,
           });
       case 'it-system-usage-roles':
         return (organizationUuid) =>
-          this.itSystemUsageRoleTypeService.getSingleItSystemUsageRoleTypeV2Get({
+          this.itSystemUsageRoleTypeService.getManyItSystemUsageRoleTypeV2Get({
             organizationUuid: organizationUuid,
           });
       case 'it-interface_data-type':
         return (organizationUuid) =>
-          this.itInterfaceDataTypesService.getSingleItInterfaceInterfaceDataTypeV2Get({
+          this.itInterfaceDataTypesService.getManyItInterfaceInterfaceDataTypeV2Get({
             organizationUuid,
           });
       case 'it-contract_contract-template-type':
         return (organizationUuid) =>
-          this.contractTemplateService.getSingleItContractContractTemplateTypeV2Get({
+          this.contractTemplateService.getManyItContractContractTemplateTypeV2Get({
             organizationUuid,
           });
       case 'it-contract_criticality-type':
         return (organizationUuid) =>
-          this.contractCriticalityService.getSingleItContractCriticalityTypeV2Get({
+          this.contractCriticalityService.getManyItContractCriticalityTypeV2Get({
             organizationUuid,
           });
       case 'it-contract_procurement-strategy-type':
         return (organizationUuid) =>
-          this.contractProcurementStrategyService.getSingleItContractProcurementStrategyV2Get({
+          this.contractProcurementStrategyService.getManyItContractProcurementStrategyV2Get({
             organizationUuid,
           });
       case 'it-contract_purchase-form-type':
         return (organizationUuid) =>
-          this.contractPurchaseFormService.getSingleItContractPurchaseTypeV2Get({
+          this.contractPurchaseFormService.getManyItContractPurchaseTypeV2Get({
             organizationUuid,
           });
       case 'it-contract-agreement-element-types':
         return (organizationUuid) =>
-          this.contractAgreementElementsService.getSingleItContractAgreementElementTypeV2Get({
+          this.contractAgreementElementsService.getManyItContractAgreementElementTypeV2Get({
             organizationUuid,
           });
       case 'it-contract-extend-types':
         return (organizationUuid) =>
-          this.contractExtendTypesService.getSingleItContractAgreementExtensionOptionTypeV2Get({
+          this.contractExtendTypesService.getManyItContractAgreementExtensionOptionTypeV2Get({
             organizationUuid,
           });
       case 'it-contract-termination-period-types':
         return (organizationUuid) =>
-          this.contractTerminationPeriodTypesService.getSingleItContractNoticePeriodMonthTypeV2Get({
+          this.contractTerminationPeriodTypesService.getManyItContractNoticePeriodMonthTypeV2Get({
             organizationUuid,
           });
       case 'it-contract-payment-frequency-types':
         return (organizationUuid) =>
-          this.contractPaymentFrequencyTypesService.getSingleItContractPaymentFrequencyTypeV2Get({ organizationUuid });
+          this.contractPaymentFrequencyTypesService.getManyItContractPaymentFrequencyTypeV2Get({ organizationUuid });
       case 'it-contract-payment-model-types':
         return (organizationUuid) =>
-          this.contractPaymentModelTypesService.getSingleItContractPaymentModelTypeV2Get({ organizationUuid });
+          this.contractPaymentModelTypesService.getManyItContractPaymentModelTypeV2Get({ organizationUuid });
       case 'it-contract-price-regulation-types':
         return (organizationUuid) =>
-          this.contractPriceRegulationTypesService.getSingleItContractPriceRegulationTypeV2Get({ organizationUuid });
+          this.contractPriceRegulationTypesService.getManyItContractPriceRegulationTypeV2Get({ organizationUuid });
       case 'data-processing-basis-for-transfer-types':
         return (organizationUuid) =>
-          this.dataProcessingBasisForTransferTypesService.getSingleDataProcessingRegistrationBasisForTransferTypeV2Get({
+          this.dataProcessingBasisForTransferTypesService.getManyDataProcessingRegistrationBasisForTransferTypeV2Get({
             organizationUuid,
           });
       case 'data-processing-data-responsible-types':
         return (organizationUuid) =>
-          this.dataProcessingDataResponsibleTypesService.getSingleDataProcessingRegistrationDataResponsibleTypeV2Get({
+          this.dataProcessingDataResponsibleTypesService.getManyDataProcessingRegistrationDataResponsibleTypeV2Get({
             organizationUuid,
           });
       case 'data-processing-country-types':
         return (organizationUuid) =>
-          this.dataProcessingCountryTypesService.getSingleDataProcessingRegistrationCountryTypeV2Get({
+          this.dataProcessingCountryTypesService.getManyDataProcessingRegistrationCountryTypeV2Get({
             organizationUuid,
           });
       case 'data-processing-oversight-option-types':
         return (organizationUuid) =>
-          this.dataProcessingOversightOptionsService.getSingleDataProcessingRegistrationOversightTypeV2Get({
+          this.dataProcessingOversightOptionsService.getManyDataProcessingRegistrationOversightTypeV2Get({
             organizationUuid,
           });
     }

@@ -42,15 +42,13 @@ export class ContractDropdownComponentStore extends ComponentStore<State> {
       tap(() => this.setLoading(true)),
       combineLatestWith(this.store.select(selectOrganizationUuid)),
       mergeMap(([search, organizationUuid]) => {
-        return this.itContractService
-          .getSingleItContractV2GetItContracts({ nameContent: search, organizationUuid })
-          .pipe(
-            tapResponse({
-              next: (contracts) => this.setContracts(contracts),
-              error: (error) => console.error(error),
-              complete: () => this.setLoading(false),
-            }),
-          );
+        return this.itContractService.getManyItContractV2GetItContracts({ nameContent: search, organizationUuid }).pipe(
+          tapResponse({
+            next: (contracts) => this.setContracts(contracts),
+            error: (error) => console.error(error),
+            complete: () => this.setLoading(false),
+          }),
+        );
       }),
     ),
   );

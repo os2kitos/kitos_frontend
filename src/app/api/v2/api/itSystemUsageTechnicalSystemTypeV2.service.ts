@@ -18,13 +18,15 @@ import { HttpClient, HttpHeaders, HttpParams,
 import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
+// @ts-ignore
+import { APIRegularOptionResponseDTO } from '../model/aPIRegularOptionResponseDTO';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
 
 
-export interface GetSingleItSystemUsageTechnicalSystemTypeV2GetRequestParams {
+export interface GetManyItSystemUsageTechnicalSystemTypeV2GetRequestParams {
     /** organization context for the technical system type availability */
     organizationUuid?: string;
     /** 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0  NOTE: This parameter has no effect if \&#39;pageSize\&#39; is left unspecified */
@@ -33,7 +35,7 @@ export interface GetSingleItSystemUsageTechnicalSystemTypeV2GetRequestParams {
     pageSize?: number;
 }
 
-export interface GetSingleItSystemUsageTechnicalSystemTypeV2GetV1RequestParams {
+export interface GetManyItSystemUsageTechnicalSystemTypeV2GetV1RequestParams {
     /** Technical system type identifier */
     technicalSystemTypeUuid: string;
     /** organization context for the technical system type availability */
@@ -111,10 +113,10 @@ export class ItSystemUsageTechnicalSystemTypeV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItSystemUsageTechnicalSystemTypeV2Get(requestParameters: GetSingleItSystemUsageTechnicalSystemTypeV2GetRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleItSystemUsageTechnicalSystemTypeV2Get(requestParameters: GetSingleItSystemUsageTechnicalSystemTypeV2GetRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleItSystemUsageTechnicalSystemTypeV2Get(requestParameters: GetSingleItSystemUsageTechnicalSystemTypeV2GetRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleItSystemUsageTechnicalSystemTypeV2Get(requestParameters: GetSingleItSystemUsageTechnicalSystemTypeV2GetRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyItSystemUsageTechnicalSystemTypeV2Get(requestParameters: GetManyItSystemUsageTechnicalSystemTypeV2GetRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIRegularOptionResponseDTO>>;
+    public getManyItSystemUsageTechnicalSystemTypeV2Get(requestParameters: GetManyItSystemUsageTechnicalSystemTypeV2GetRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIRegularOptionResponseDTO>>>;
+    public getManyItSystemUsageTechnicalSystemTypeV2Get(requestParameters: GetManyItSystemUsageTechnicalSystemTypeV2GetRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIRegularOptionResponseDTO>>>;
+    public getManyItSystemUsageTechnicalSystemTypeV2Get(requestParameters: GetManyItSystemUsageTechnicalSystemTypeV2GetRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         const page = requestParameters.page;
         const pageSize = requestParameters.pageSize;
@@ -172,7 +174,7 @@ export class ItSystemUsageTechnicalSystemTypeV2Service {
         }
 
         let localVarPath = `/api/v2/it-system-usage-technical-system-types`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<Array<APIRegularOptionResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 params: localVarQueryParameters,
@@ -191,13 +193,13 @@ export class ItSystemUsageTechnicalSystemTypeV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItSystemUsageTechnicalSystemTypeV2GetV1(requestParameters: GetSingleItSystemUsageTechnicalSystemTypeV2GetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleItSystemUsageTechnicalSystemTypeV2GetV1(requestParameters: GetSingleItSystemUsageTechnicalSystemTypeV2GetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleItSystemUsageTechnicalSystemTypeV2GetV1(requestParameters: GetSingleItSystemUsageTechnicalSystemTypeV2GetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleItSystemUsageTechnicalSystemTypeV2GetV1(requestParameters: GetSingleItSystemUsageTechnicalSystemTypeV2GetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyItSystemUsageTechnicalSystemTypeV2GetV1(requestParameters: GetManyItSystemUsageTechnicalSystemTypeV2GetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIRegularOptionResponseDTO>>;
+    public getManyItSystemUsageTechnicalSystemTypeV2GetV1(requestParameters: GetManyItSystemUsageTechnicalSystemTypeV2GetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIRegularOptionResponseDTO>>>;
+    public getManyItSystemUsageTechnicalSystemTypeV2GetV1(requestParameters: GetManyItSystemUsageTechnicalSystemTypeV2GetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIRegularOptionResponseDTO>>>;
+    public getManyItSystemUsageTechnicalSystemTypeV2GetV1(requestParameters: GetManyItSystemUsageTechnicalSystemTypeV2GetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const technicalSystemTypeUuid = requestParameters.technicalSystemTypeUuid;
         if (technicalSystemTypeUuid === null || technicalSystemTypeUuid === undefined) {
-            throw new Error('Required parameter technicalSystemTypeUuid was null or undefined when calling getSingleItSystemUsageTechnicalSystemTypeV2GetV1.');
+            throw new Error('Required parameter technicalSystemTypeUuid was null or undefined when calling getManyItSystemUsageTechnicalSystemTypeV2GetV1.');
         }
         const organizationUuid = requestParameters.organizationUuid;
 
@@ -246,7 +248,7 @@ export class ItSystemUsageTechnicalSystemTypeV2Service {
         }
 
         let localVarPath = `/api/v2/it-system-usage-technical-system-types/${this.configuration.encodeParam({name: "technicalSystemTypeUuid", value: technicalSystemTypeUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<Array<APIRegularOptionResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 params: localVarQueryParameters,
