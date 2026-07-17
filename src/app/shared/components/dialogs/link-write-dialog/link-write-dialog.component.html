@@ -4,7 +4,7 @@
       <div>
         <app-textbox text="Url" i18n-text [formGroup]="urlForm" formName="url" data-cy="url-textbox"></app-textbox>
         @if (showValidationError) {
-          <app-paragraph paragraphSize="small" color="error"
+          <app-paragraph paragraphSize="small" color="warning"
             >{{ validationErrorMessage }}</app-paragraph
             >
           }

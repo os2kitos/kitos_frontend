@@ -19,7 +19,7 @@ export class ParagraphComponent {
   @Input() public strikeThrough = false;
   @Input() public dimmed = false;
   @Input() public bold = false;
-  @Input() public color: 'error' | 'primary-dark' | 'grey' | 'white' | undefined = undefined;
+  @Input() public color: 'error' | 'primary-dark' | 'grey' | 'white' | 'warning' | undefined = undefined;
   @Input() public helpTextKey?: string = undefined;
   @Input() public displayFlex = true;
   @Input() public leftAlignText = false;
