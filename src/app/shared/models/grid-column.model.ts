@@ -17,11 +17,13 @@ export interface GridColumn {
   extraFilter?: 'enum' | 'organization-unit' | 'choice-type' | 'dropdown-from-column-data' | 'choice-type-by-name'; //Filters other than the base kendo filters
   noFilter?: boolean; //If true hides the filter for the column
   sortable?: boolean; //If true allows sorting for the column
+  sortField?: string; //Field to use for sorting (if different from display field)
   sortFilter?: boolean;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   extraData?: any; //Data for dropdown filters
   idField?: string; //Uuid field if needed to display data (e.g. for references to other entities)
   permissionsField?: string; //Field containing permissions for the column
+  extraPermissionsField?: string; //Field containing extra data required for permissions for the column
   dataField?: string; //Field containing data for the column (in case the 'field' property is necessary only for filtering)
   entityType?: RegistrationEntityTypes;
   style?:
@@ -42,9 +44,12 @@ export interface GridColumn {
     | 'page-link-array'
     | 'uuid-to-name'
     | 'excel-only'
+    | 'role-excel-only'
     | 'action-buttons'
     | 'integer-with-thousands-separator'
-    | 'contract-audit'; //Style of the column
+    | 'contract-audit'
+    | 'contract-status-chip'
+    | 'enum-array'; //Style of the column
   width?: number;
   minResizableWidth?: number;
   //Can column be hidden
@@ -61,6 +66,7 @@ export interface GridColumn {
   linkArraySeparator?: ', ' | ' - ';
   helpText?: string;
   itemTooltipField?: string;
+  defaultDateFilterOperator?: 'gte' | 'lte'; // Default date filter operator: 'gte' for "Fra og med", 'lte' for "Til og med"
 
   // snake case to differentiate from the standard field properties
   order_id?: number; //Automatically set, used to always sort columns in the same order

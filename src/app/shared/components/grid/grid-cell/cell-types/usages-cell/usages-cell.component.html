@@ -1,8 +1,9 @@
-<app-usage-link
-  *ngIf="column.dataField"
-  [type]="column.entityType"
-  [name]="dataItem | searchProperty: column.dataField"
-  [usingOrganizations]="dataItem | searchProperty: column.field"
-  [rowEntityIdentifier]="dataItem | searchProperty: column.idField ?? 'Uuid'"
->
-</app-usage-link>
+@if (column.dataField) {
+  <app-usage-link
+    [type]="column.entityType"
+    [name]="dataItem | searchProperty: column.dataField"
+    [usingOrganizations]="dataItem | searchProperty: column.field"
+    [rowEntityIdentifier]="dataItem | searchProperty: column.idField ?? 'Uuid'"
+    >
+  </app-usage-link>
+}

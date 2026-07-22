@@ -60,7 +60,7 @@ export class BaseCreateEntityDialogComponent extends BaseComponent implements On
   private navigateToRoute(uuid: string): void {
     switch (this.entityType) {
       case 'it-contract':
-        this.router.navigate([`${AppPath.itContracts}/${uuid}`]);
+        this.router.navigate([`${AppPath.itContracts}/${AppPath.contracts}/${uuid}`]);
         break;
       case 'it-system':
         this.router.navigate([`${AppPath.itSystems}/${AppPath.itSystemCatalog}/${uuid}`]);

@@ -7,11 +7,11 @@ import {
   APIIdentityNamePairResponseDTO,
   APIIncomingSystemRelationResponseDTO,
   APIOutgoingSystemRelationResponseDTO,
-  APIV2ItSystemUsageService,
+  ItSystemUsageV2Service,
 } from 'src/app/api/v2';
 import { BOUNDED_PAGINATION_QUERY_MAX_SIZE } from 'src/app/shared/constants/constants';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
-import { SystemRelationModel } from './relation-table/relation-table.component';
+import { SystemRelationModel } from './relation-table/relation-grid.component';
 
 interface State {
   loading: boolean;
@@ -24,7 +24,7 @@ export class ItSystemUsageDetailsRelationsComponentStore extends ComponentStore<
   public readonly incomingRelations$ = this.select((state) => state.incomingRelations).pipe(filterNullish());
   public readonly isIncomingRelationsLoading$ = this.select((state) => state.loading).pipe(filterNullish());
 
-  constructor(private readonly apiUsageService: APIV2ItSystemUsageService) {
+  constructor(private readonly apiUsageService: ItSystemUsageV2Service) {
     super({ loading: false });
   }
 
@@ -46,16 +46,16 @@ export class ItSystemUsageDetailsRelationsComponentStore extends ComponentStore<
       mergeMap((systemUsageUuid) => {
         this.updateIncomingRelationsIsLoading(true);
         return this.apiUsageService.getManyItSystemUsageV2GetIncomingSystemRelations({ systemUsageUuid }).pipe(
-          tapResponse(
-            (relations) =>
+          tapResponse({
+            next: (relations) =>
               this.updateIncomingRelations(
-                relations.map((relation) =>
+                relations.map((relation: any) =>
                   this.mapRelationResponseDTOToSystemRelationModel(relation, relation.fromSystemUsage),
                 ),
               ),
-            (e) => console.error(e),
-            () => this.updateIncomingRelationsIsLoading(false),
-          ),
+            error: (e) => console.error(e),
+            complete: () => this.updateIncomingRelationsIsLoading(false),
+          }),
         );
       }),
     ),
@@ -68,11 +68,11 @@ export class ItSystemUsageDetailsRelationsComponentStore extends ComponentStore<
     return {
       uuid: relation.uuid,
       systemUsage: relationSystemUsage,
-      relationInterface: relation.relationInterface,
-      associatedContract: relation.associatedContract,
-      relationFrequency: relation.relationFrequency,
-      description: relation.description,
-      urlReference: relation.urlReference,
+      relationInterface: relation.relationInterface ?? undefined,
+      associatedContract: relation.associatedContract ?? undefined,
+      relationFrequency: relation.relationFrequency ?? undefined,
+      description: relation.description ?? undefined,
+      urlReference: relation.urlReference ?? undefined,
     };
   }
 }

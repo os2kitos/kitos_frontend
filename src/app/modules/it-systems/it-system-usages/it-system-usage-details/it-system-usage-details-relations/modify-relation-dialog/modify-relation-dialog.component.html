@@ -1,8 +1,23 @@
 <app-system-relation-dialog
+  [formGroup]="formGroup"
+  [saveFunction]="save"
   title="Rediger relation"
   saveText="Gem"
-  (saveRequested)="onModifySave($event)"
-  [relationForm]="relationForm"
-  i18n-title
-  i18n-saveText
-></app-system-relation-dialog>
+  [relationModel]="relationModel"
+  >
+  <app-connected-dropdown
+        text="Søg efter snitflade"
+        textField="name"
+        valueField="uuid"
+        [data$]="interfaces$"
+        [isLoading$]="interfacesLoading$"
+        (filterChange)="interfaceFilterChange($event)"
+        [formGroup]="formGroup"
+        formName="interface"
+        [includeItemDescription]="true"
+        itemDescriptionField="interfaceId"
+        descriptionLabelTitle="Snitflade ID:"
+        i18n-text
+      >
+      </app-connected-dropdown>
+</app-system-relation-dialog>

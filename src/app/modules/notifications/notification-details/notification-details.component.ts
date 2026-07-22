@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { NavigationDrawerItem } from 'src/app/shared/components/navigation-drawer/navigation-drawer.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
@@ -9,7 +10,6 @@ import {
 } from 'src/app/store/organization/selectors';
 import { HelpButtonComponent } from '../../../shared/components/help-button/help-button.component';
 import { NavigationDrawerComponent } from '../../../shared/components/navigation-drawer/navigation-drawer.component';
-import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-notification-details',

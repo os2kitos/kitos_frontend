@@ -8,7 +8,7 @@ import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import { DialogComponent } from '../../../../shared/components/dialogs/dialog/dialog.component';
 import { StandardVerticalContentGridComponent } from '../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { TextBoxComponent } from '../../../../shared/components/textbox/textbox.component';
-import { NgIf, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { ParagraphComponent } from '../../../../shared/components/paragraph/paragraph.component';
 import { CreateEntityDialogActionButtonsComponent } from '../../../../shared/components/entity-creation/create-entity-dialog-action-buttons/create-entity-dialog-action-buttons.component';
 
@@ -23,11 +23,10 @@ import { CreateEntityDialogActionButtonsComponent } from '../../../../shared/com
     ReactiveFormsModule,
     StandardVerticalContentGridComponent,
     TextBoxComponent,
-    NgIf,
     ParagraphComponent,
     CreateEntityDialogActionButtonsComponent,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class CreateInterfaceDialogComponent extends BaseCreateEntityDialogComponent implements OnInit {
   override entityType = 'it-interface' as RegistrationEntityTypes;

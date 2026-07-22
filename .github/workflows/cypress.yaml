@@ -1,4 +1,8 @@
 name: Cypress Tests
+
+env:
+  NODE_VERSION: "22.13.0"
+
 on:
   pull_request:
     types:
@@ -21,6 +25,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "yarn"
+
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
@@ -31,7 +41,6 @@ jobs:
           parallel: true
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-          GITHUB_TOKEN: ${{ secrets.TOKEN_TO_GITHUB }}
 
   cypress-component:
     if: github.event.pull_request == null || github.event.pull_request.draft == false
@@ -43,10 +52,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "yarn"
+
       - name: Cypress Component Tests
         uses: cypress-io/github-action@v6
         with:
           command: yarn cypress run --component
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-          GITHUB_TOKEN: ${{ secrets.TOKEN_TO_GITHUB }}

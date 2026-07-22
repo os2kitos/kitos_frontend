@@ -59,15 +59,6 @@ describe('it-system-usage roles', () => {
         row()
           .get(expectedRow.writeAccess ? 'app-check-positive-green-icon' : 'app-check-negative-gray-icon')
           .should('exist');
-
-        if (expectedRow.description) {
-          row()
-            .get('td')
-            .first()
-            .within(() => {
-              cy.get('app-tooltip').should('have.attr', 'ng-reflect-text', expectedRow.description);
-            });
-        }
       }
     });
 

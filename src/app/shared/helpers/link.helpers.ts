@@ -1,7 +1,9 @@
 import { AppPath } from '../enums/app-path';
 import { RegistrationEntityTypes } from '../models/registrations/registration-entity-categories.model';
 
-export function validateUrl(url?: string): boolean {
+const validDocumentSharingProtocols = ['kmdsageraabn', 'kmdedhvis', 'sbsyslauncher'];
+
+export function validateHttpUrl(url?: string): boolean {
   if (!url) return false;
 
   const regexp = /(^https?):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-/])$)?/;
@@ -9,16 +11,20 @@ export function validateUrl(url?: string): boolean {
 }
 
 export function isUrlEmptyOrValid(url?: string): boolean {
-  return !url || validateUrl(url);
+  return !url || validateHttpUrl(url);
+}
+
+export function isExternalReferenceUrlEmptyOrValid(url?: string): boolean {
+  return !url || validateExternalReferenceUrl(url);
 }
 
 export function validateExternalReferenceUrl(externalRef?: string): boolean {
   if (!externalRef) return false;
 
-  if (validateUrl(externalRef)) {
+  if (validateHttpUrl(externalRef)) {
     return true;
   } else {
-    const regexp = /^(kmdsageraabn|kmdedhvis|sbsyslauncher):.*/;
+    const regexp = new RegExp(`^(${validDocumentSharingProtocols.join('|')}):.*`);
     return regexp.test(externalRef.toLowerCase());
   }
 }
@@ -35,7 +41,7 @@ export function getDetailsPageLink(
       case 'data-processing-registration':
         return getDetailsPagePath(AppPath.dataProcessing, itemUuid, subpagePath);
       case 'it-contract':
-        return getDetailsPagePath(AppPath.itContracts, itemUuid, subpagePath);
+        return getDetailsPagePath(`${AppPath.itContracts}/${AppPath.contracts}`, itemUuid, subpagePath);
       case 'it-interface':
         return getDetailsPagePathWithSubmodule(
           `${AppPath.itSystems}/${AppPath.itInterfaces}`,
@@ -50,7 +56,6 @@ export function getDetailsPageLink(
           subpagePath,
           itemPathIncludesSubmodule,
         );
-        break;
       case 'it-system-usage':
         return getDetailsPagePathWithSubmodule(
           `${AppPath.itSystems}/${AppPath.itSystemUsages}`,
@@ -58,7 +63,6 @@ export function getDetailsPageLink(
           subpagePath,
           itemPathIncludesSubmodule,
         );
-        break;
       case 'organization':
         return getDetailsPagePathWithSubmodule(
           `${AppPath.organization}/${AppPath.structure}`,
@@ -66,7 +70,8 @@ export function getDetailsPageLink(
           subpagePath,
           itemPathIncludesSubmodule,
         );
-        break;
+      case 'organization-unit':
+        return getDetailsPagePath(`${AppPath.organization}/${AppPath.structure}`, itemUuid);
       default:
         console.error('Unmapped link itemType', itemType);
         return undefined;

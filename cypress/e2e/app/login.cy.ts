@@ -11,6 +11,7 @@ describe('login', () => {
   it('shows error on failed login', () => {
     cy.intercept('/api/authorize/antiforgery', '"ABC"');
     cy.intercept('/api/Authorize', { statusCode: 401, fixture: './shared/authorize-401.json' });
+    cy.getByDataCy('accordion-header').click();
     cy.contains('Email').parent().find('input').type('test@test.com');
     cy.contains('Password').parent().find('input').type('123456');
     cy.getByDataCy('login-button').click();
@@ -41,16 +42,13 @@ describe('login', () => {
     cy.contains('Log ud').click();
 
     cy.contains('Du er nu logget ud');
-    cy.contains('Email');
-    cy.contains('Password');
-    cy.contains('Log ind');
+    cy.getByDataCy('accordion-header').should('exist');
   });
 
   it('can authenticate with loading spinner', () => {
-    cy.contains('Email');
-    cy.contains('Password');
+    cy.getByDataCy('accordion-header').should('exist');
 
-    cy.intercept('/api/Authorize', (req) => {
+    cy.intercept('/api/authorize', (req) => {
       req.reply({
         delay: 1000,
         fixture: './shared/authorize.json',
@@ -88,6 +86,12 @@ describe('login', () => {
   });
 
   it('can switch organization on a details page', () => {
+    cy.intercept('/api/v2/it-system-usage-criticality-level-types*', {
+      fixture: './it-system-usage/criticality-level-types.json',
+    });
+    cy.intercept('/api/v2/it-system-usage-technical-system-types*', {
+      fixture: './it-system-usage/technical-system-types.json',
+    });
     cy.intercept('/api/v2/organizations*', { fixture: './organizations/organizations-multiple.json' });
     cy.login();
 

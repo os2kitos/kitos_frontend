@@ -1,19 +1,20 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ValidatorFn, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule, ValidatorFn } from '@angular/forms';
 import { debounceTime } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { DEFAULT_INPUT_DEBOUNCE_TIME } from 'src/app/shared/constants/constants';
-import { isUrlEmptyOrValid } from 'src/app/shared/helpers/link.helpers';
+import { isExternalReferenceUrlEmptyOrValid } from 'src/app/shared/helpers/link.helpers';
 import { ExternalReferenceProperties } from 'src/app/shared/models/external-references/external-reference-properties.model';
 import { DialogComponent } from '../../dialogs/dialog/dialog.component';
+import { DividerComponent } from '../../divider/divider.component';
 import { StandardVerticalContentGridComponent } from '../../standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { TextBoxComponent } from '../../textbox/textbox.component';
-import { DividerComponent } from '../../divider/divider.component';
-import { NgIf } from '@angular/common';
-import { ParagraphComponent } from '../../paragraph/paragraph.component';
+
+import { URL_VALIDATION_ERROR_MESSAGE } from 'src/app/shared/constants/error-message-constants';
+import { ButtonComponent } from '../../buttons/button/button.component';
 import { CheckboxComponent } from '../../checkbox/checkbox.component';
 import { DialogActionsComponent } from '../../dialogs/dialog-actions/dialog-actions.component';
-import { ButtonComponent } from '../../buttons/button/button.component';
+import { ParagraphComponent } from '../../paragraph/paragraph.component';
 
 @Component({
   selector: 'app-external-reference-dialog[externalReferenceProperties][title]',
@@ -26,7 +27,6 @@ import { ButtonComponent } from '../../buttons/button/button.component';
     ReactiveFormsModule,
     TextBoxComponent,
     DividerComponent,
-    NgIf,
     ParagraphComponent,
     CheckboxComponent,
     DialogActionsComponent,
@@ -53,6 +53,7 @@ export class ExternalReferenceDialogComponent extends BaseComponent implements O
   }
 
   public showUrlError = false;
+  public urlValidationError = URL_VALIDATION_ERROR_MESSAGE;
 
   @Input() public masterReferenceIsReadOnly = false;
   @Input() public title!: string;
@@ -102,7 +103,7 @@ export class ExternalReferenceDialogComponent extends BaseComponent implements O
       this.externalReferenceForm.controls.url.valueChanges
         .pipe(debounceTime(DEFAULT_INPUT_DEBOUNCE_TIME))
         .subscribe((url) => {
-          this.showUrlError = !isUrlEmptyOrValid(url ?? undefined);
+          this.showUrlError = !isExternalReferenceUrlEmptyOrValid(url ?? undefined);
         }),
     );
   }

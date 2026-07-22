@@ -5,11 +5,12 @@
     i18n-title
     data-cy="notification-card-title"
   ></app-card-header>
-  <app-notifications-table
-    *ngIf="systemUsageUuid$ | async as systemUsageUuid"
-    [hasModifyPermission]="hasModifyPermission$"
-    [entityUuid]="systemUsageUuid"
-    ownerResourceType="ItSystemUsage"
-  >
-  </app-notifications-table>
+  @if (systemUsageUuid$ | async; as systemUsageUuid) {
+    <app-notifications-table
+      [hasModifyPermission]="hasModifyPermission$"
+      [entityUuid]="systemUsageUuid"
+      ownerResourceType="ItSystemUsage"
+      >
+    </app-notifications-table>
+  }
 </app-card>

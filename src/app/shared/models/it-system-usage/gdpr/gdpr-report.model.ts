@@ -1,6 +1,6 @@
 import { APIGdprReportResponseDTO } from 'src/app/api/v2';
+import { mapToYesNoDontKnowIrrelevantEnum } from '../../yes-no-dont-know-irrelevant.model';
 import { mapToYesNoDontKnowEnum, YesNoDontKnowOption } from '../../yes-no-dont-know.model';
-import { HostedAt, mapHostedAt } from './hosted-at.model';
 import { mapPreRiskAssessmentEnum, PreRiskAssessment } from './pre-risk-assessment.model';
 
 export interface GdprReport {
@@ -10,7 +10,6 @@ export interface GdprReport {
   personalData?: boolean;
   sensitiveData?: boolean;
   legalData?: boolean;
-  businessCritical?: YesNoDontKnowOption;
   dataProcessingAgreementConcluded?: boolean;
   linkToDirectory?: boolean;
   sensitiveDataTypes: string;
@@ -24,7 +23,6 @@ export interface GdprReport {
   personalDataSocialOtherPrivateMatters?: boolean;
   dpia?: YesNoDontKnowOption;
   dpiaDate?: string;
-  hostedAt?: HostedAt;
   technicalSupervisionDocumentationUrl?: string;
   technicalSupervisionDocumentationUrlName?: string;
   userSupervision?: YesNoDontKnowOption;
@@ -38,32 +36,30 @@ export function adaptGdprReport(dto: APIGdprReportResponseDTO): GdprReport {
   if (!dto.systemUuid) throw new Error('GDPR Report is missing a systemUuid');
   return {
     systemUuid: dto.systemUuid,
-    systemName: dto.systemName,
+    systemName: dto.systemName ?? undefined,
     noData: dto.noData,
     personalData: dto.personalData,
     sensitiveData: dto.sensitiveData,
     legalData: dto.legalData,
-    businessCritical: mapToYesNoDontKnowEnum(dto.businessCritical),
     dataProcessingAgreementConcluded: dto.dataProcessingAgreementConcluded,
     linkToDirectory: dto.linkToDirectory,
     sensitiveDataTypes: dto.sensitiveDataTypes?.join(', ') ?? '',
-    riskAssessment: mapToYesNoDontKnowEnum(dto.riskAssessment),
-    riskAssessmentDate: dto.riskAssessmentDate,
-    plannedRiskAssessmentDate: dto.plannedRiskAssessmentDate,
-    preRiskAssessment: mapPreRiskAssessmentEnum(dto.preRiskAssessment),
-    riskAssessmentNotes: dto.riskAssessmentNotes,
+    riskAssessment: mapToYesNoDontKnowIrrelevantEnum(dto.riskAssessment),
+    riskAssessmentDate: dto.riskAssessmentDate ?? undefined,
+    plannedRiskAssessmentDate: dto.plannedRiskAssessmentDate ?? undefined,
+    preRiskAssessment: mapPreRiskAssessmentEnum(dto.preRiskAssessment ?? undefined),
+    riskAssessmentNotes: dto.riskAssessmentNotes ?? undefined,
     personalDataCpr: dto.personalDataCpr,
     personalDataSocialProblems: dto.personalDataSocialProblems,
     personalDataSocialOtherPrivateMatters: dto.personalDataSocialOtherPrivateMatters,
     dpia: mapToYesNoDontKnowEnum(dto.dpia),
-    dpiaDate: dto.dpiaDate,
-    hostedAt: mapHostedAt(dto.hostedAt),
-    technicalSupervisionDocumentationUrl: dto.technicalSupervisionDocumentationUrl,
-    technicalSupervisionDocumentationUrlName: dto.technicalSupervisionDocumentationUrlName,
+    dpiaDate: dto.dpiaDate ?? undefined,
+    technicalSupervisionDocumentationUrl: dto.technicalSupervisionDocumentationUrl ?? undefined,
+    technicalSupervisionDocumentationUrlName: dto.technicalSupervisionDocumentationUrlName ?? undefined,
     userSupervision: mapToYesNoDontKnowEnum(dto.userSupervision),
-    userSupervisionDocumentationUrl: dto.userSupervisionDocumentationUrl,
-    userSupervisionDocumentationUrlName: dto.userSupervisionDocumentationUrlName,
-    nextDataRetentionEvaluationDate: dto.nextDataRetentionEvaluationDate,
+    userSupervisionDocumentationUrl: dto.userSupervisionDocumentationUrl ?? undefined,
+    userSupervisionDocumentationUrlName: dto.userSupervisionDocumentationUrlName ?? undefined,
+    nextDataRetentionEvaluationDate: dto.nextDataRetentionEvaluationDate ?? undefined,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     insecureCountriesSubjectToDataTransfer: (dto as any).insecureCountriesSubjectToDataTransfer.join(', ') ?? '',
   };

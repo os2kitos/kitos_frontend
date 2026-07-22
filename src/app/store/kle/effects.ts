@@ -5,7 +5,7 @@ import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { saveAs } from '@progress/kendo-file-saver';
 import { catchError, filter, map, of, switchMap } from 'rxjs';
-import { APIV2KLEInternalINTERNALService, APIV2KleOptionService } from 'src/app/api/v2';
+import { KLEInternalV2Service, KleOptionV2Service } from 'src/app/api/v2';
 import { KLE_FILE_NAME } from 'src/app/shared/constants/constants';
 import { KLEActions } from './actions';
 import { selectHasValidCache } from './selectors';
@@ -15,8 +15,8 @@ export class KLEEffects {
   constructor(
     private actions$: Actions,
     private store: Store,
-    @Inject(APIV2KleOptionService) private apiKleOptionService: APIV2KleOptionService,
-    @Inject(APIV2KLEInternalINTERNALService) private apiKleInternalService: APIV2KLEInternalINTERNALService,
+    @Inject(KleOptionV2Service) private apiKleOptionService: KleOptionV2Service,
+    @Inject(KLEInternalV2Service) private apiKleInternalService: KLEInternalV2Service,
   ) {}
 
   getKles$ = createEffect(() => {

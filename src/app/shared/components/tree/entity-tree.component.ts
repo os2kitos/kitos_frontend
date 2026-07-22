@@ -12,7 +12,7 @@ import {
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
 import { EntityTreeNode } from '../../models/structure/entity-tree-node.model';
 import { BooleanValueDisplayType, StatusChipComponent } from '../status-chip/status-chip.component';
-import { NgClass, NgIf } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { DetailsPageLinkComponent } from '../details-page-link/details-page-link.component';
 import { MatIconButton } from '@angular/material/button';
 import { ChevronDownIconComponent } from '../icons/chevron-down-icon.component';
@@ -29,7 +29,6 @@ import { CheckboxComponent } from '../checkbox/checkbox.component';
     MatTreeNode,
     NgClass,
     DetailsPageLinkComponent,
-    NgIf,
     StatusChipComponent,
     MatNestedTreeNode,
     MatIconButton,
@@ -37,8 +36,8 @@ import { CheckboxComponent } from '../checkbox/checkbox.component';
     ChevronDownIconComponent,
     ChevronRightIconComponent,
     MatTreeNodeOutlet,
-    CheckboxComponent,
-  ],
+    CheckboxComponent
+],
 })
 export class EntityTreeComponent<T> implements OnInit {
   public readonly treeControl = new NestedTreeControl<EntityTreeNode<T>>((node) => node.children);

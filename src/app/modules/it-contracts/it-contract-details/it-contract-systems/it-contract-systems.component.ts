@@ -21,7 +21,7 @@ import {
   selectItContractEnableSystemUsages,
   selectItContractEnableRelations,
 } from 'src/app/store/organization/ui-module-customization/selectors';
-import { NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { CardComponent } from '../../../../shared/components/card/card.component';
 import { CardHeaderComponent } from '../../../../shared/components/card-header/card-header.component';
 import { StandardVerticalContentGridComponent } from '../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
@@ -42,12 +42,10 @@ import { LoadingComponent } from '../../../../shared/components/loading/loading.
   styleUrl: './it-contract-systems.component.scss',
   providers: [ItContractSystemsComponentStore],
   imports: [
-    NgIf,
     CardComponent,
     CardHeaderComponent,
     StandardVerticalContentGridComponent,
     NativeTableComponent,
-    NgFor,
     ContentSpaceBetweenComponent,
     DetailsPageLinkComponent,
     IconButtonComponent,
@@ -57,8 +55,8 @@ import { LoadingComponent } from '../../../../shared/components/loading/loading.
     ParagraphComponent,
     ExternalPageLinkComponent,
     LoadingComponent,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class ItContractSystemsComponent extends BaseComponent implements OnInit {
   public readonly systemAgreementElements$ = this.store

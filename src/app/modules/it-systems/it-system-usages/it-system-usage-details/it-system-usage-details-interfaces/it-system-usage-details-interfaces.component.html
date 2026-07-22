@@ -1,6 +1,7 @@
-<app-it-system-interfaces-table
-  *ngIf="systemUuid$ | async as systemUuid"
-  [systemUuid]="systemUuid"
-  helpTextKey="it-system.usage.interfaces"
->
-</app-it-system-interfaces-table>
+@if (systemUuid$ | async; as systemUuid) {
+  <app-it-system-interfaces-table
+    [systemUuid]="systemUuid"
+    helpTextKey="it-system.usage.interfaces"
+    >
+  </app-it-system-interfaces-table>
+}

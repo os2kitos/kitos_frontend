@@ -19,7 +19,7 @@ export function adaptItSystemUsageMigrationPermissions(
 
 function adaptCommandPermission(source: APICommandPermissionResponseDTO): CommandPermission {
   return {
-    id: source.id,
+    id: source.id ?? undefined,
     canExecute: source.canExecute,
   };
 }

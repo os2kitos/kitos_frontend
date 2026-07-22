@@ -8,9 +8,9 @@ import { catchError, combineLatestWith, filter, map, of, switchMap } from 'rxjs'
 
 import {
   APIOrganizationRegistrationUnitResponseDTO,
-  APIV2OrganizationService,
-  APIV2OrganizationUnitRegistrationInternalINTERNALService,
-  APIV2OrganizationUnitsInternalINTERNALService,
+  OrganizationUnitRegistrationInternalV2Service,
+  OrganizationUnitsInternalV2Service,
+  OrganizationV2Service,
 } from 'src/app/api/v2';
 import { BOUNDED_PAGINATION_QUERY_MAX_SIZE, MAX_INTEGER } from 'src/app/shared/constants/constants';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
@@ -27,11 +27,11 @@ export class OrganizationUnitEffects {
   constructor(
     private actions$: Actions,
     private store: Store,
-    @Inject(APIV2OrganizationService) private apiOrganizationService: APIV2OrganizationService,
-    @Inject(APIV2OrganizationUnitsInternalINTERNALService)
-    private apiUnitService: APIV2OrganizationUnitsInternalINTERNALService,
-    @Inject(APIV2OrganizationUnitRegistrationInternalINTERNALService)
-    private apiRegistrationsService: APIV2OrganizationUnitRegistrationInternalINTERNALService
+    @Inject(OrganizationV2Service) private apiOrganizationService: OrganizationV2Service,
+    @Inject(OrganizationUnitsInternalV2Service)
+    private apiUnitService: OrganizationUnitsInternalV2Service,
+    @Inject(OrganizationUnitRegistrationInternalV2Service)
+    private apiRegistrationsService: OrganizationUnitRegistrationInternalV2Service,
   ) {}
 
   getOrganizationUnits$ = createEffect(() => {
@@ -54,9 +54,9 @@ export class OrganizationUnitEffects {
           })
           .pipe(
             map((units) => OrganizationUnitActions.getOrganizationUnitsSuccess(units)),
-            catchError(() => of(OrganizationUnitActions.getOrganizationUnitsError()))
+            catchError(() => of(OrganizationUnitActions.getOrganizationUnitsError())),
           );
-      })
+      }),
     );
   });
 
@@ -91,9 +91,9 @@ export class OrganizationUnitEffects {
               const nextPage = (currentPage ?? 0) + 1;
               return OrganizationUnitActions.getOrganizationUnitsPaged(maxPageSize, nextPage, allUnits);
             }),
-            catchError(() => of(OrganizationUnitActions.getOrganizationUnitsPagedError()))
-          )
-      )
+            catchError(() => of(OrganizationUnitActions.getOrganizationUnitsPagedError())),
+          ),
+      ),
     );
   });
 
@@ -109,9 +109,9 @@ export class OrganizationUnitEffects {
           })
           .pipe(
             map(() => OrganizationUnitActions.deleteOrganizationUnitSuccess(uuid)),
-            catchError(() => of(OrganizationUnitActions.deleteOrganizationUnitError()))
-          )
-      )
+            catchError(() => of(OrganizationUnitActions.deleteOrganizationUnitError())),
+          ),
+      ),
     );
   });
 
@@ -129,7 +129,7 @@ export class OrganizationUnitEffects {
           return this.apiUnitService
             .postSingleOrganizationUnitsInternalV2CreateUnit({
               organizationUuid,
-              parameters: {
+              aPICreateOrganizationUnitRequestDTO: {
                 name,
                 parentUuid,
                 origin: 'Kitos',
@@ -140,10 +140,10 @@ export class OrganizationUnitEffects {
             .pipe(
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
               map((unit: any) => OrganizationUnitActions.createOrganizationSubunitSuccess(unit)),
-              catchError(() => of(OrganizationUnitActions.createOrganizationSubunitError()))
+              catchError(() => of(OrganizationUnitActions.createOrganizationSubunitError())),
             );
-        }
-      )
+        },
+      ),
     );
   });
 
@@ -156,14 +156,14 @@ export class OrganizationUnitEffects {
           .patchSingleOrganizationUnitsInternalV2PatchUnit({
             organizationUuid,
             organizationUnitUuid: unitUuid,
-            parameters: request,
+            aPIUpdateOrganizationUnitRequestDTO: request,
           })
           .pipe(
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             map((unit: any) => OrganizationUnitActions.patchOrganizationUnitSuccess(unit)),
-            catchError(() => of(OrganizationUnitActions.patchOrganizationUnitError()))
-          )
-      )
+            catchError(() => of(OrganizationUnitActions.patchOrganizationUnitError())),
+          ),
+      ),
     );
   });
 
@@ -176,16 +176,16 @@ export class OrganizationUnitEffects {
           .postSingleOrganizationUnitsInternalV2CreateBulkRoleAssignment({
             organizationUuid,
             organizationUnitUuid: orgUnitUuid,
-            request: {
+            aPIBulkRoleAssignmentRequestDTO: {
               roleUuid: roleUuid,
               userUuids: userUuids,
             },
           })
           .pipe(
             map(() => OrganizationUnitActions.bulkAddOrganizationUnitRoleSuccess()),
-            catchError(() => of(OrganizationUnitActions.bulkAddOrganizationUnitRoleError()))
-          )
-      )
+            catchError(() => of(OrganizationUnitActions.bulkAddOrganizationUnitRoleError())),
+          ),
+      ),
     );
   });
 
@@ -198,16 +198,16 @@ export class OrganizationUnitEffects {
           .deleteSingleOrganizationUnitsInternalV2DeleteRoleAssignment({
             organizationUuid,
             organizationUnitUuid: unitUuid,
-            request: {
+            aPIDeleteOrganizationUnitRoleAssignmentRequestDTO: {
               roleUuid,
               userUuid,
             },
           })
           .pipe(
             map(() => OrganizationUnitActions.deleteOrganizationUnitRoleSuccess(userUuid, roleUuid, unitUuid)),
-            catchError(() => of(OrganizationUnitActions.deleteOrganizationUnitRoleError()))
-          )
-      )
+            catchError(() => of(OrganizationUnitActions.deleteOrganizationUnitRoleError())),
+          ),
+      ),
     );
   });
 
@@ -223,11 +223,11 @@ export class OrganizationUnitEffects {
           })
           .pipe(
             map((registrations: APIOrganizationRegistrationUnitResponseDTO) =>
-              OrganizationUnitActions.getRegistrationsSuccess(registrations)
+              OrganizationUnitActions.getRegistrationsSuccess(registrations),
             ),
-            catchError(() => of(OrganizationUnitActions.getRegistrationsError()))
-          )
-      )
+            catchError(() => of(OrganizationUnitActions.getRegistrationsError())),
+          ),
+      ),
     );
   });
 
@@ -240,13 +240,13 @@ export class OrganizationUnitEffects {
           .deleteSingleOrganizationUnitRegistrationInternalV2RemoveRegistrations({
             organizationUuid,
             unitUuid,
-            requestDto: request,
+            aPIChangeOrganizationUnitRegistrationV2RequestDTO: request,
           })
           .pipe(
             map(() => OrganizationUnitActions.removeRegistrationsSuccess(request)),
-            catchError(() => of(OrganizationUnitActions.removeRegistrationsError()))
-          )
-      )
+            catchError(() => of(OrganizationUnitActions.removeRegistrationsError())),
+          ),
+      ),
     );
   });
 
@@ -259,13 +259,13 @@ export class OrganizationUnitEffects {
           .putSingleOrganizationUnitRegistrationInternalV2TransferRegistrations({
             organizationUuid,
             unitUuid,
-            requestDto: request,
+            aPITransferOrganizationUnitRegistrationV2RequestDTO: request,
           })
           .pipe(
             map(() => OrganizationUnitActions.transferRegistrationsSuccess(request)),
-            catchError(() => of(OrganizationUnitActions.transferRegistrationsError()))
-          )
-      )
+            catchError(() => of(OrganizationUnitActions.transferRegistrationsError())),
+          ),
+      ),
     );
   });
 
@@ -281,9 +281,9 @@ export class OrganizationUnitEffects {
           })
           .pipe(
             map((permissions) => OrganizationUnitActions.getPermissionsSuccess(permissions)),
-            catchError(() => of(OrganizationUnitActions.getPermissionsError()))
-          )
-      )
+            catchError(() => of(OrganizationUnitActions.getPermissionsError())),
+          ),
+      ),
     );
   });
 
@@ -298,9 +298,9 @@ export class OrganizationUnitEffects {
           })
           .pipe(
             map((permissions) => OrganizationUnitActions.getCollectionPermissionsSuccess(permissions)),
-            catchError(() => of(OrganizationUnitActions.getCollectionPermissionsError()))
-          )
-      )
+            catchError(() => of(OrganizationUnitActions.getCollectionPermissionsError())),
+          ),
+      ),
     );
   });
 }

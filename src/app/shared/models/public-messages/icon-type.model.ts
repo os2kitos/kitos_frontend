@@ -1,45 +1,45 @@
-import { APIPublicMessageRequestDTO } from 'src/app/api/v2';
+import { APIPublicMessageIconTypeChoice } from 'src/app/api/v2';
 import { IconType } from '../icon-type';
 
 export interface PublicMessageIconType {
   name: string;
   icon: IconType;
-  value: APIPublicMessageRequestDTO.IconTypeEnum;
+  value: APIPublicMessageIconTypeChoice;
 }
 
 export const iconTypeOptions: PublicMessageIconType[] = [
   {
     name: $localize`Dokument`,
     icon: 'document',
-    value: APIPublicMessageRequestDTO.IconTypeEnum.Document,
+    value: APIPublicMessageIconTypeChoice.Document,
   },
   {
     name: $localize`Udklipsholder`,
     icon: 'clipboard',
-    value: APIPublicMessageRequestDTO.IconTypeEnum.Clipboard,
+    value: APIPublicMessageIconTypeChoice.Clipboard,
   },
   {
     name: $localize`Indstillinger`,
     icon: 'settings',
-    value: APIPublicMessageRequestDTO.IconTypeEnum.Settings,
+    value: APIPublicMessageIconTypeChoice.Settings,
   },
   {
     name: $localize`Kalendar`,
     icon: 'calendar',
-    value: APIPublicMessageRequestDTO.IconTypeEnum.Calendar,
+    value: APIPublicMessageIconTypeChoice.Calendar,
   },
   {
     name: $localize`Brugere`,
     icon: 'multiple-users',
-    value: APIPublicMessageRequestDTO.IconTypeEnum.MultipleUsers,
+    value: APIPublicMessageIconTypeChoice.MultipleUsers,
   },
   {
     name: $localize`Mail`,
     icon: 'mail',
-    value: APIPublicMessageRequestDTO.IconTypeEnum.Mail,
+    value: APIPublicMessageIconTypeChoice.Mail,
   },
 ];
 
-export const mapIconType = (value?: APIPublicMessageRequestDTO.IconTypeEnum): PublicMessageIconType | undefined => {
+export const mapIconType = (value?: APIPublicMessageIconTypeChoice): PublicMessageIconType | undefined => {
   return iconTypeOptions.find((option) => option.value === value);
 };

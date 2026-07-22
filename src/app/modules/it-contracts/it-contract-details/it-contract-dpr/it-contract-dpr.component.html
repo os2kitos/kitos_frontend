@@ -6,43 +6,50 @@
   ></app-card-header>
 
   <app-standard-vertical-content-grid>
-    <app-native-table *ngIf="anyDataProcessingRegistrations$ | async">
-      <thead>
-        <th i18n>Registering</th>
-      </thead>
-      <tbody>
-        <tr *ngFor="let dpr of dataProcessingRegistrations$ | async">
-          <td>
-            <app-content-space-between>
-              <app-details-page-link
-                itemType="data-processing-registration"
-                linkFontSize="small"
-                [itemPath]="dpr.uuid"
-                >{{ dpr.name }}</app-details-page-link
-              >
-              <app-icon-button
-                (buttonClick)="onDelete(dpr.uuid)"
-                data-cy="delete-dpr-button"
-                *ngIf="(hasModifyPermission$ | async) === true"
-                ><app-trashcan-icon></app-trashcan-icon
-              ></app-icon-button>
-            </app-content-space-between>
-          </td>
-        </tr>
-      </tbody>
-    </app-native-table>
-    <app-empty-state
-      *ngIf="(anyDataProcessingRegistrations$ | async) === false"
-      text="Ingen databehandlingsregisteringer tilføjet endnu"
-      context="emptyTable"
-      i18n-text
-    ></app-empty-state>
-    <app-collection-extension-button
-      text="Tilføj databehandling"
-      (clicked)="onAdd()"
-      data-cy="add-dpr-button"
-      i18n-text
-      *ngIf="(hasModifyPermission$ | async) === true"
-    ></app-collection-extension-button>
-  </app-standard-vertical-content-grid>
-</app-card>
+    @if (anyDataProcessingRegistrations$ | async) {
+      <app-native-table>
+        <thead>
+          <th i18n>Registering</th>
+        </thead>
+        <tbody>
+          @for (dpr of dataProcessingRegistrations$ | async; track dpr) {
+            <tr>
+              <td>
+                <app-content-space-between>
+                  <app-details-page-link
+                    itemType="data-processing-registration"
+                    linkFontSize="small"
+                    [itemPath]="dpr.uuid"
+                    >{{ dpr.name }}</app-details-page-link
+                    >
+                    @if ((hasModifyPermission$ | async) === true) {
+                      <app-icon-button
+                        (buttonClick)="onDelete(dpr.uuid)"
+                        data-cy="delete-dpr-button"
+                        ><app-trashcan-icon></app-trashcan-icon
+                      ></app-icon-button>
+                    }
+                  </app-content-space-between>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </app-native-table>
+      }
+      @if ((anyDataProcessingRegistrations$ | async) === false) {
+        <app-empty-state
+          text="Ingen databehandlingsregisteringer tilføjet endnu"
+          context="emptyTable"
+          i18n-text
+        ></app-empty-state>
+      }
+      @if ((hasModifyPermission$ | async) === true) {
+        <app-collection-extension-button
+          text="Tilføj databehandling"
+          (clicked)="onAdd()"
+          data-cy="add-dpr-button"
+          i18n-text
+        ></app-collection-extension-button>
+      }
+    </app-standard-vertical-content-grid>
+  </app-card>

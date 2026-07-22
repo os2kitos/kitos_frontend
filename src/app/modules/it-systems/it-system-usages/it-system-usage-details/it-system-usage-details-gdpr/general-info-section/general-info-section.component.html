@@ -2,44 +2,38 @@
   <app-card-header title="Generel information" helpTextKey="it-system.usage.gdpr.general" i18n-title></app-card-header>
 
   <app-form-grid [formGroup]="generalInformationForm">
-    <app-textbox
-      *ngIf="purposeEnabled$ | async"
-      text="Systemets overordnede formål"
-      i18n-text
-      class="two-thirds-column-width"
-      [formGroup]="generalInformationForm"
-      formName="purpose"
-      [maxLength]="250"
-      (valueChange)="patchGdpr({ purpose: $event })"
-    ></app-textbox>
+    @if (purposeEnabled$ | async) {
+      <app-textbox
+        text="Behandlingsformål"
+        i18n-text
+        class="two-thirds-column-width"
+        [formGroup]="generalInformationForm"
+        formName="purpose"
+        [maxLength]="250"
+        (valueChange)="patchGdpr({ processingPurpose: $event })"
+      ></app-textbox>
+    }
+        @if (documentationEnabled$ | async) {
+      <app-edit-url-section
+        title="Link til fortegnelse"
+        [simpleLink$]="selectDirectoryDocumentation$"
+        i18n-title
+        data-cy="directory-documentation-link"
+        (submitMethod)="patchSimpleLink($event)"
+        (clearClick)="resetSimpleLink()"
+        [isDisabled]="disableDirectoryDocumentationControl"
+      ></app-edit-url-section>
+    }
+    @if (isDataProcessingAgreementRequiredEnabled$ | async) {
     <app-dropdown
-      *ngIf="businessCriticalEnabled$ | async"
-      text="Forretningskritisk IT-System"
+      text="Kræver system databehandleraftale"
       i18n-text
       [formGroup]="generalInformationForm"
-      formName="businessCritical"
-      [data]="businessCriticalOptions"
-      (valueChange)="patchGdpr({ businessCritical: $event })"
-    ></app-dropdown>
-    <app-dropdown
-      *ngIf="hostedAtEnabled$ | async"
-      text="IT-systemet driftes"
-      i18n-text
-      [formGroup]="generalInformationForm"
-      formName="hostedAt"
-      [data]="hostedAtOptions"
-      (valueChange)="patchGdpr({ hostedAt: $event })"
-    ></app-dropdown>
-
-    <app-edit-url-section
-      *ngIf="documentationEnabled$ | async"
-      title="Link til fortegnelse"
-      [simpleLink$]="selectDirectoryDocumentation$"
-      i18n-title
-      data-cy="directory-documentation-link"
-      (submitMethod)="patchSimpleLink($event)"
-      (clearClick)="resetSimpleLink()"
-      [isDisabled]="disableDirectoryDocumentationControl"
-    ></app-edit-url-section>
+      formName="isDataProcessingAgreementRequired"
+      [data]="isDataProcessingAgreementRequiredOptions"
+      (valueChange)="patchGdpr({ isDataProcessingAgreementRequired: $event })"
+    >
+    </app-dropdown>
+    }
   </app-form-grid>
 </app-card>

@@ -1,5 +1,7 @@
 <app-paragraph>
-  <a *ngIf="usingOrganizations.length > 0" href="#" (click)="onUsageClick($event)" data-cy="grid-usages-link">
-    {{ usingOrganizations.length }}
-  </a>
+  @if (usingOrganizations.length > 0) {
+    <a href="#" (click)="onUsageClick($event)" data-cy="grid-usages-link">
+      {{ usingOrganizations.length }}
+    </a>
+  }
 </app-paragraph>

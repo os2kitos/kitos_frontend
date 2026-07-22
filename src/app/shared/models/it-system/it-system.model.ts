@@ -1,10 +1,11 @@
-import { entityWithUnavailableName } from '../../helpers/string.helpers';
+import { entityWithUnavailableName, organizationNameWithCvrAndAvailability } from '../../helpers/string.helpers';
 import { AccessModifierChoice, mapAccessModifierEnumToAccessModifierChoice } from '../access-modifier.model';
 import { IdentityNamePair } from '../identity-name-pair.model';
 import {
   ArchiveDutyRecommendationChoice,
   mapArchiveDutyRecommendationChoice,
 } from './archive-duty-recommendation-choice.model';
+import { LicensingAndCodeModel, mapLicensingAndCodeModels } from './licensing-and-code-model.model';
 
 export interface ITSystem {
   id: string;
@@ -31,8 +32,10 @@ export interface ITSystem {
   BelongsTo: { Name: string };
   BusinessType: { Name: string };
   Usages: IdentityNamePair[];
+  UsageNames: string;
   LegalName?: string;
   LegalDataProcessorName?: string;
+  LicensingAndCodeModels?: LicensingAndCodeModel[];
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -47,15 +50,17 @@ export const adaptITSystem = (value: any, currentOrganizationUuid: string): ITSy
   ).sort((a: IdentityNamePair, b: IdentityNamePair) => a.name.localeCompare(b.name));
   const reference = value.Reference;
 
+  const isInUse = value.Usages.some(
+    (usage: { Organization: { Uuid: string } }) => usage.Organization.Uuid === currentOrganizationUuid,
+  );
+
   return {
     id: value.Uuid,
     Uuid: value.Uuid,
-    Name: entityWithUnavailableName(value.Name, !isDisabled),
-    IsInUse: value.Usages.some(
-      (usage: { Organization: { Uuid: string } }) => usage.Organization.Uuid === currentOrganizationUuid,
-    ),
+    Name: entityWithUnavailableName(value.Name, isDisabled),
+    IsInUse: isInUse,
     PreviousName: value.PreviousName,
-    Parent: { Name: entityWithUnavailableName(value.Parent?.Name, !value.Parent?.Disabled) },
+    Parent: { Name: entityWithUnavailableName(value.Parent?.Name, value.Parent?.Disabled) },
     ExternalUuid: value.ExternalUuid,
     Description: value.Description,
     AccessModifier: mapAccessModifierEnumToAccessModifierChoice(value.AccessModifier),
@@ -71,10 +76,18 @@ export const adaptITSystem = (value: any, currentOrganizationUuid: string): ITSy
     ArchiveDuty: mapArchiveDutyRecommendationChoice(value.ArchiveDuty),
     ArchiveDutyComment: value.ArchiveDutyComment,
     CanChangeUsageStatus: !isDisabled,
-    BelongsTo: { Name: value.BelongsTo?.Name },
+    BelongsTo: {
+      Name: organizationNameWithCvrAndAvailability(
+        value.BelongsTo?.Name,
+        value.BelongsTo?.Cvr,
+        value.BelongsTo?.Disabled,
+      ),
+    },
     BusinessType: value.BusinessType,
     Usages: mappedUsages,
+    UsageNames: mappedUsages.map((usage) => usage.name).join(', '),
     LegalName: value.LegalName,
     LegalDataProcessorName: value.LegalDataProcessorName,
+    LicensingAndCodeModels: mapLicensingAndCodeModels(value.LicensingAndCodeModels),
   };
 };

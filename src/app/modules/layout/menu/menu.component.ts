@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+
 import { Component, DoCheck, ElementRef, Input, ViewChild } from '@angular/core';
 import { MatMenu, MatMenuTrigger } from '@angular/material/menu';
 import { RouterLink, RouterLinkActive } from '@angular/router';
@@ -16,11 +16,10 @@ import { ChevronDownIconComponent } from '../../../shared/components/icons/chevr
     RouterLinkActive,
     MatMenuTrigger,
     RouterLink,
-    NgIf,
     ChevronDownIconComponent,
     MatMenu,
-    CtrlClickDirective,
-  ],
+    CtrlClickDirective
+],
 })
 export class MenuComponent implements DoCheck {
   @Input() title?: string | null = '';

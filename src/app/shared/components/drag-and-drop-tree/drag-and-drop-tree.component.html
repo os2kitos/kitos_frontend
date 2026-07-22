@@ -9,7 +9,7 @@
     }"
     [attr.data-id]="node.uuid"
     [attr.id]="'node-' + node.uuid"
-  >
+    >
     <div
       [class]="'drag-container node-wrapper no-select node-' + getNodeColor(node)"
       [style.--dynamic-width.px]="14 * (level - 1)"
@@ -22,20 +22,22 @@
       }"
       data-cy="node"
       (click)="disableRedirect ? expandClick(node) : goToNode(node)"
-    >
-      <ng-container *ngIf="node.children.length && (maxLevel === undefined || maxLevel > level)">
-        <app-chevron-down-icon
-          class="chevron-icon"
-          *ngIf="node.isExpanded"
-          (click)="disableRedirect ? null : expandClick(node)"
-        ></app-chevron-down-icon>
-        <app-chevron-right-icon
-          class="chevron-icon"
-          *ngIf="!node.isExpanded"
-          (click)="disableRedirect ? null : expandClick(node)"
-        ></app-chevron-right-icon>
-      </ng-container>
-      <ng-container *ngIf="checkboxNodes === true">
+      >
+      @if (node.children.length && (maxLevel === undefined || maxLevel > level)) {
+        @if (node.isExpanded) {
+          <app-chevron-down-icon
+            class="chevron-icon"
+            (click)="disableRedirect ? null : expandClick(node)"
+          ></app-chevron-down-icon>
+        }
+        @if (!node.isExpanded) {
+          <app-chevron-right-icon
+            class="chevron-icon"
+            (click)="disableRedirect ? null : expandClick(node)"
+          ></app-chevron-right-icon>
+        }
+      }
+      @if (checkboxNodes === true) {
         <app-checkbox
           [value]="node.status"
           [disabled]="disableCheck"
@@ -47,40 +49,46 @@
           linkFontSize="small"
           [itemPath]="node.uuid"
           [disableRedirect]="disableRedirect"
-        >
+          >
           <span class="level-indicator-color">{{ level }}.</span> {{ node.name }}
         </app-details-page-link>
-      </ng-container>
-      <app-details-page-link
-        *ngIf="checkboxNodes === false"
-        [itemType]="itemType"
-        linkFontSize="small"
-        [itemPath]="node.uuid"
-        [disableRedirect]="disableRedirect"
-      >
-        <span class="level-indicator-color">{{ level }}.</span> {{ node.name }}
-      </app-details-page-link>
-      <app-drag-icon *ngIf="!disableDrag && !node.isRoot" cdkDragHandle data-cy="drag-icon"></app-drag-icon>
+      }
+      @if (checkboxNodes === false) {
+        <app-details-page-link
+          [itemType]="itemType"
+          linkFontSize="small"
+          [itemPath]="node.uuid"
+          [disableRedirect]="disableRedirect"
+          >
+          <span class="level-indicator-color">{{ level }}.</span> {{ node.name }}
+        </app-details-page-link>
+      }
+      @if (!disableDrag && !node.isRoot && node.isRearrangeDisabled !== true) {
+        <app-drag-icon cdkDragHandle data-cy="drag-icon"></app-drag-icon>
+      }
     </div>
-    <ng-container *ngIf="maxLevel === undefined || maxLevel > level">
-      <div
-        *ngIf="node.isExpanded && node.children.length"
-        class="node-children"
-        cdkDropList
-        [cdkDropListData]="node.children"
-        [id]="node.uuid"
-        [cdkDropListConnectedTo]="dropTargetIds"
-        (cdkDropListDropped)="drop($event)"
-        [cdkDropListDisabled]="disableDrag"
-        [cdkDropListSortingDisabled]="true"
-      >
-        <div *ngFor="let child of node.children" cdkDrag [cdkDragData]="child.uuid" (cdkDragMoved)="dragMoved($event)">
-          <ng-container
-            *ngTemplateOutlet="tmplNode; context: { node: child, childOfRoot: node.isRoot, level: level + 1 }"
-          ></ng-container>
+    @if (maxLevel === undefined || maxLevel > level) {
+      @if (node.isExpanded && node.children.length) {
+        <div
+          class="node-children"
+          cdkDropList
+          [cdkDropListData]="node.children"
+          [id]="node.uuid"
+          [cdkDropListConnectedTo]="dropTargetIds"
+          (cdkDropListDropped)="drop($event)"
+          [cdkDropListDisabled]="disableDrag"
+          [cdkDropListSortingDisabled]="true"
+          >
+          @for (child of node.children; track child) {
+            <div cdkDrag [cdkDragData]="child.uuid" (cdkDragMoved)="dragMoved($event)" [cdkDragDisabled]="child.isRearrangeDisabled">
+              <ng-container
+                *ngTemplateOutlet="tmplNode; context: { node: child, childOfRoot: node.isRoot, level: level + 1 }"
+              ></ng-container>
+            </div>
+          }
         </div>
-      </div>
-    </ng-container>
+      }
+    }
   </div>
 </ng-template>
 
@@ -92,8 +100,10 @@
   (cdkDropListDropped)="drop($event)"
   [cdkDropListSortingDisabled]="true"
   [cdkDropListDisabled]="disableDrag"
->
-  <div *ngFor="let node of nodes" cdkDrag [cdkDragData]="node.uuid" (cdkDragMoved)="dragMoved($event)">
-    <ng-container *ngTemplateOutlet="tmplNode; context: { node: node, childOfRoot: false, level: 1 }"></ng-container>
-  </div>
+  >
+  @for (node of nodes; track node) {
+    <div cdkDrag [cdkDragData]="node.uuid" (cdkDragMoved)="dragMoved($event)" [cdkDragDisabled]="node.isRearrangeDisabled">
+      <ng-container *ngTemplateOutlet="tmplNode; context: { node: node, childOfRoot: false, level: 1 }"></ng-container>
+    </div>
+  }
 </div>

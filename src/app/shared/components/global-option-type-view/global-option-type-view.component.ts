@@ -8,7 +8,7 @@ import { isRoleOptionType } from '../../models/options/role-option-types.model';
 import { GlobalOptionTypeTableComponentStore } from './global-option-type-table.component-store';
 import { DialogOpenerService } from '../../services/dialog-opener.service';
 import { IconType } from '../../models/icon-type';
-import { NgIf, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { AccordionComponent } from '../accordion/accordion.component';
 import { OverviewHeaderComponent } from '../overview-header/overview-header.component';
 import { ButtonComponent } from '../buttons/button/button.component';
@@ -20,13 +20,12 @@ import { GlobalOptionTypeGridComponent } from './global-option-type-grid/global-
   styleUrl: './global-option-type-view.component.scss',
   providers: [GlobalOptionTypeTableComponentStore],
   imports: [
-    NgIf,
     AccordionComponent,
     OverviewHeaderComponent,
     ButtonComponent,
     GlobalOptionTypeGridComponent,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class GlobalOptionTypeViewComponent extends BaseComponent implements OnInit {
   @Input() optionType!: GlobalAdminOptionType;

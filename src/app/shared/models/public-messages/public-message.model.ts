@@ -15,9 +15,13 @@ export interface PublicMessage extends HasUuid {
 
 export function adaptPublicMessage(dto: APIPublicMessageResponseDTO): PublicMessage {
   return {
-    ...dto,
     uuid: dto.uuid!,
-    status: mapStatusType(dto.status),
-    iconType: mapIconType(dto.iconType),
+    title: dto.title ?? undefined,
+    shortDescription: dto.shortDescription ?? undefined,
+    longDescription: dto.longDescription ?? undefined,
+    status: mapStatusType(dto.status ?? undefined),
+    link: dto.link ?? undefined,
+    iconType: mapIconType(dto.iconType ?? undefined),
+    isMain: dto.isMain,
   };
 }

@@ -1,24 +1,25 @@
-<ng-container *ngIf="optionTypes$ | async as optionTypes">
-  <app-dropdown
-    *ngIf="!formGroup"
-    [text]="getDropdownTitle()"
-    [value]="value"
-    valueField="uuid"
-    [showDescription]="showDescription"
-    [data]="optionTypes"
-    (valueChange)="onValueChange($event)"
-    [loading]="loading$ | async"
-  ></app-dropdown>
-
-  <app-dropdown
-    *ngIf="formGroup"
-    [text]="getDropdownTitle()"
-    valueField="uuid"
-    [formGroup]="formGroup"
-    [formName]="formName ?? null"
-    [showDescription]="showDescription"
-    [data]="optionTypes"
-    (valueChange)="onValueChange($event)"
-    [loading]="loading$ | async"
-  ></app-dropdown>
-</ng-container>
+@if (optionTypes$ | async; as optionTypes) {
+  @if (!formGroup) {
+    <app-dropdown
+      [text]="getDropdownTitle()"
+      [value]="value"
+      valueField="uuid"
+      [showDescription]="showDescription"
+      [data]="optionTypes"
+      (valueChange)="onValueChange($event)"
+      [loading]="loading$ | async"
+    ></app-dropdown>
+  }
+  @if (formGroup) {
+    <app-dropdown
+      [text]="getDropdownTitle()"
+      valueField="uuid"
+      [formGroup]="formGroup"
+      [formName]="formName ?? null"
+      [showDescription]="showDescription"
+      [data]="optionTypes"
+      (valueChange)="onValueChange($event)"
+      [loading]="loading$ | async"
+    ></app-dropdown>
+  }
+}

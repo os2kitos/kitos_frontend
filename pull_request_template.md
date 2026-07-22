@@ -2,6 +2,10 @@
 
 Follow this guide to test and review: https://strongminds.atlassian.net/wiki/spaces/KITOS/pages/993984514/QA
 
+#### Description
+_Describe what was changed in this branch, and WHY it was changed._
+
+#### Checklist
 - [ ] **Validate UI wrt Figma wireframe**
       _Look through the Figma [wireframe](https://www.figma.com/design/R1LSxTympqqC1XUCNaj6EF/Kitos-%2F-design-system-%26-redesign?node-id=531-74700&m=dev) with similar elements and validate the implementation_
 - [ ] **Remember to check for missing translations**
@@ -14,5 +18,7 @@ Follow this guide to test and review: https://strongminds.atlassian.net/wiki/spa
       _This is part of the PR checks, so look at the PR page itself_
 - [ ] **Self-review**
       _Before requesting a review do a yet another self-review_
+- [ ] **Add a description**
+      _Under "Description" above, explain what was changed in this branch, and WHY it was changed_
 - [ ] **Request review**
       _Tag whomever you wish to review your code_

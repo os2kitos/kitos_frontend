@@ -14,7 +14,7 @@ import { AlertActions } from './store/alerts/actions';
 import { RelatedEntityType } from './store/alerts/state';
 import { UserActions } from './store/user-store/actions';
 import { selectIsAuthenticating, selectUser } from './store/user-store/selectors';
-import { NgIf, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { NavBarComponent } from './modules/layout/nav-bar/nav-bar.component';
 import { RouterOutlet } from '@angular/router';
 import { PopupMessagesComponent } from './shared/components/popup-messages/popup-messages.component';
@@ -24,7 +24,7 @@ import { LoadingComponent } from './shared/components/loading/loading.component'
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  imports: [NgIf, NavBarComponent, LoadingComponent, RouterOutlet, PopupMessagesComponent, AsyncPipe],
+  imports: [NavBarComponent, LoadingComponent, RouterOutlet, PopupMessagesComponent, AsyncPipe],
 })
 export class AppComponent extends BaseComponent implements OnInit {
   public isAuthenticating$ = this.store.select(selectIsAuthenticating);

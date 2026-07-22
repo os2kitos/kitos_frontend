@@ -3,8 +3,9 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable, combineLatest, filter } from 'rxjs';
-import { APIGDPRWriteRequestDTO, APISimpleLinkDTO } from 'src/app/api/v2';
+import { APIGDPRWriteRequestDTO } from 'src/app/api/v2';
 import { BaseAccordionComponent } from 'src/app/shared/base/base-accordion.component';
+import { SimpleLink } from 'src/app/shared/models/SimpleLink.model';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import { YesNoDontKnowOption, yesNoDontKnowOptions } from 'src/app/shared/models/yes-no-dont-know.model';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
@@ -12,7 +13,7 @@ import { AccordionComponent } from '../../../../../../shared/components/accordio
 import { DatePickerComponent } from '../../../../../../shared/components/datepicker/datepicker.component';
 import { DropdownComponent } from '../../../../../../shared/components/dropdowns/dropdown/dropdown.component';
 import { FormGridComponent } from '../../../../../../shared/components/form-grid/form-grid.component';
-import { EditUrlSectionComponent } from '../edit-url-section/edit-url-section.component';
+import { EditUrlSectionComponent } from '../../../../shared/edit-url-section/edit-url-section.component';
 
 @Component({
   selector: 'app-gdpr-base-date-url-section',
@@ -43,7 +44,7 @@ export class GdprBaseDateUrlSectionComponent extends BaseAccordionComponent impl
 
   @Input() isYesNoDontKnowFalse$!: Observable<boolean>;
   @Input() hasModifyPermissions$!: Observable<boolean | undefined>;
-  @Input() documentation$!: Observable<APISimpleLinkDTO | undefined>;
+  @Input() documentation$!: Observable<SimpleLink | undefined>;
 
   @Input() formGroup!: FormGroup<{
     yesNoDontKnowControl: FormControl<YesNoDontKnowOption | null | undefined>;
@@ -95,7 +96,7 @@ export class GdprBaseDateUrlSectionComponent extends BaseAccordionComponent impl
 
   public patchSimpleLink(
     simpleLink: { url: string; name: string } | null,
-    valueChange?: ValidatedValueChange<unknown>
+    valueChange?: ValidatedValueChange<unknown>,
   ) {
     this.patchGdpr({ [this.linkPropertyName]: simpleLink }, valueChange);
   }

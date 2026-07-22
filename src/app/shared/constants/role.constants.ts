@@ -1,2 +1,2 @@
-export const LOCAL_ADMIN_ROLE = 1;
-export const ORGANIZATION_ADMIN_ROLE = 2;
+export const LOCAL_ADMIN_ROLE = 'LocalAdmin';
+export const ORGANIZATION_ADMIN_ROLE = 'OrganizationModuleAdmin';

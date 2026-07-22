@@ -6,16 +6,20 @@
     'wrap-on-overflow': wrapOnOverflow,
     strikeThrough: strikeThrough,
     dimmed: dimmed,
-    'bold-font': bold,
+    'bold-font': bold || color === 'warning',
     'error-color': color === 'error',
     'primary-dark-color': color === 'primary-dark',
     'white-color': color === 'white',
     'neutral-color': color === 'grey',
+    'warning-color': color === 'warning',
     'display-flex': displayFlex,
+    'left-align-text': leftAlignText
   }"
->
+  >
   <ng-content></ng-content>
-  <app-icon-button *ngIf="helpTextKey" (buttonClick)="openHelpTextDialog()">
-    <app-help-icon></app-help-icon>
-  </app-icon-button>
+  @if (helpTextKey) {
+    <app-icon-button (buttonClick)="openHelpTextDialog()">
+      <app-help-icon></app-help-icon>
+    </app-icon-button>
+  }
 </p>

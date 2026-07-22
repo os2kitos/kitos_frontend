@@ -42,16 +42,16 @@ describe('BulkActionDialog', () => {
 
     cy.getByDataCy('deselect-all-bulk-action-button').should('not.be.disabled');
     cy.getByDataCy('select-all-bulk-action-button').find('button').should('be.disabled');
-    cy.getByDataCy('select-all-bulk-action-checkbox').invoke('attr', 'ng-reflect-value').should('equal', 'true');
+    cy.getByDataCy('select-all-bulk-action-checkbox').find('input[type="checkbox"]').should('be.checked');
   });
 });
 
 function validateEachOption(shouldBeSelected: boolean) {
   cy.getByDataCy('bulk-action-checkbox').each(($checkbox) => {
     if (shouldBeSelected) {
-      cy.wrap($checkbox).invoke('attr', 'ng-reflect-value').should('equal', 'true');
+      cy.wrap($checkbox).find('input[type="checkbox"]').should('be.checked');
     } else {
-      cy.wrap($checkbox).should('not.be.checked');
+      cy.wrap($checkbox).find('input[type="checkbox"]').should('not.be.checked');
     }
   });
 }

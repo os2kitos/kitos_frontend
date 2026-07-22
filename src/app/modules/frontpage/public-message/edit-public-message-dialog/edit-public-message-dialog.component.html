@@ -4,46 +4,51 @@
       <app-textbox text="Titel" i18n-text [formGroup]="formGroup" formName="title" data-cy="title"></app-textbox>
       <div>
         <app-textbox text="URL" [formGroup]="formGroup" formName="url" i18n-text data-cy="url"></app-textbox>
-        <app-paragraph paragraphSize="small" color="error" *ngIf="showUrlError" i18n
-          >Webadressen er ugyldig. Sørg for, at den begynder med "https://"</app-paragraph
-        >
-      </div>
-      <app-dropdown
-        *ngIf="!publicMessage.isMain"
-        [data]="statusTypeOptions"
-        text="Status"
-        i18n-text
-        [formGroup]="formGroup"
-        formName="status"
-        data-cy="status"
-      ></app-dropdown>
-      <app-textarea
-        text="Beskrivelse"
-        i18n-text
-        [formGroup]="formGroup"
-        formName="shortDescription"
-        data-cy="short-description"
-      ></app-textarea>
-      <app-dropdown
-        *ngIf="!publicMessage.isMain"
-        text="Ikon"
-        i18n-text
-        [data]="iconTypeOptions"
-        [formGroup]="formGroup"
-        formName="iconType"
-        data-cy="icon-type"
-      ></app-dropdown>
-      <app-rich-text-editor
-        *ngIf="!publicMessage.isMain"
-        [formControl]="formGroup.controls.longDescription"
-        data-cy="long-description"
-      ></app-rich-text-editor>
-    </app-standard-vertical-content-grid>
-    <app-dialog-actions>
-      <app-button buttonStyle="secondary" (buttonClick)="close()" i18n> Luk </app-button>
-      <app-button type="submit" [disabled]="!formGroup.valid" data-cy="save-public-message-button" i18n>
+        @if (showUrlError) {
+          <app-paragraph paragraphSize="small" color="error"
+            >{{ urlValidationError }}</app-paragraph
+            >
+          }
+        </div>
+        @if (!publicMessage.isMain) {
+          <app-dropdown
+            [data]="statusTypeOptions"
+            text="Status"
+            i18n-text
+            [formGroup]="formGroup"
+            formName="status"
+            data-cy="status"
+          ></app-dropdown>
+        }
+        <app-textarea
+          text="Beskrivelse"
+          i18n-text
+          [formGroup]="formGroup"
+          formName="shortDescription"
+          data-cy="short-description"
+        ></app-textarea>
+        @if (!publicMessage.isMain) {
+          <app-dropdown
+            text="Ikon"
+            i18n-text
+            [data]="iconTypeOptions"
+            [formGroup]="formGroup"
+            formName="iconType"
+            data-cy="icon-type"
+          ></app-dropdown>
+        }
+        @if (!publicMessage.isMain) {
+          <app-rich-text-editor
+            [formControl]="formGroup.controls.longDescription"
+            data-cy="long-description"
+          ></app-rich-text-editor>
+        }
+      </app-standard-vertical-content-grid>
+      <app-dialog-actions>
+        <app-button buttonStyle="secondary" (buttonClick)="close()" i18n> Luk </app-button>
+        <app-button type="submit" [disabled]="!formGroup.valid" data-cy="save-public-message-button" i18n>
         Gem
       </app-button>
-    </app-dialog-actions>
-  </form>
-</app-scrollbar-dialog>
+      </app-dialog-actions>
+    </form>
+  </app-scrollbar-dialog>

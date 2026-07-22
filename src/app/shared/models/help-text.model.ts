@@ -16,8 +16,8 @@ export function adaptHelpText(apiHelpText: APIHelpTextResponseDTO): HelpText {
   if (!apiHelpText.key) throw new Error('Could not adapt help text');
 
   return {
-    Description: apiHelpText.description,
+    Description: apiHelpText.description ?? undefined,
     Key: apiHelpText.key,
-    Title: apiHelpText.title,
+    Title: apiHelpText.title ?? undefined,
   };
 }

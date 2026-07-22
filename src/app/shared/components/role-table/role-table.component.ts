@@ -1,4 +1,4 @@
-import { AsyncPipe, NgFor, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Actions } from '@ngrx/effects';
@@ -20,7 +20,7 @@ import { RoleTableComponentStore } from './role-table.component-store';
   templateUrl: './role-table.component.html',
   styleUrls: ['./role-table.component.scss'],
   providers: [RoleTableComponentStore],
-  imports: [RoleTableContainerComponent, NgIf, NativeTableComponent, NgFor, RoleRowComponent, AsyncPipe],
+  imports: [RoleTableContainerComponent, NativeTableComponent, RoleRowComponent, AsyncPipe],
 })
 export class RoleTableComponent extends BaseRoleTableComponent implements OnInit {
   public readonly roles$ = this.componentStore.roles$.pipe(map((roles) => roles.sort(compareByRoleName)));

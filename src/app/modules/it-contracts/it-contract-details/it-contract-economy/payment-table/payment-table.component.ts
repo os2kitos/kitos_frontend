@@ -13,7 +13,7 @@ import { PaymentDialogComponent } from './payment-dialog/payment-dialog.componen
 import { CardComponent } from '../../../../../shared/components/card/card.component';
 import { CardHeaderComponent } from '../../../../../shared/components/card-header/card-header.component';
 import { StandardVerticalContentGridComponent } from '../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
-import { NgIf, NgFor, AsyncPipe, DecimalPipe } from '@angular/common';
+import { AsyncPipe, DecimalPipe } from '@angular/common';
 import { NativeTableComponent } from '../../../../../shared/components/native-table/native-table.component';
 import { ParagraphComponent } from '../../../../../shared/components/paragraph/paragraph.component';
 import { ContentSpaceBetweenComponent } from '../../../../../shared/components/content-space-between/content-space-between.component';
@@ -33,9 +33,7 @@ import { AppDatePipe } from '../../../../../shared/pipes/app-date.pipe';
     CardComponent,
     CardHeaderComponent,
     StandardVerticalContentGridComponent,
-    NgIf,
     NativeTableComponent,
-    NgFor,
     ParagraphComponent,
     ContentSpaceBetweenComponent,
     ColorCircleComponent,
@@ -46,8 +44,8 @@ import { AppDatePipe } from '../../../../../shared/pipes/app-date.pipe';
     CollectionExtensionButtonComponent,
     AsyncPipe,
     DecimalPipe,
-    AppDatePipe,
-  ],
+    AppDatePipe
+],
 })
 export class PaymentTableComponent extends BaseComponent {
   @Input() public title!: string;

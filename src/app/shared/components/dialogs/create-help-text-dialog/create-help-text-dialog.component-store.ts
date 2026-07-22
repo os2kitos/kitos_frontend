@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { tapResponse } from '@ngrx/operators';
 import { Observable, switchMap, tap } from 'rxjs';
-import { APIV2HelpTextsInternalINTERNALService } from 'src/app/api/v2/api/v2HelpTextsInternalINTERNAL.service';
+import { HelpTextsInternalV2Service } from 'src/app/api/v2';
 import { APIHelpTextResponseDTO } from 'src/app/api/v2/model/helpTextResponseDTO';
 
 interface State {
@@ -15,9 +15,7 @@ export class CreateHelpTextDialogComponentStore extends ComponentStore<State> {
   public readonly isLoading$ = this.select((state) => state.isLoading);
   public readonly keyExists$ = this.select((state) => state.keyExists);
 
-  constructor(
-    @Inject(APIV2HelpTextsInternalINTERNALService) private helpTextsService: APIV2HelpTextsInternalINTERNALService,
-  ) {
+  constructor(@Inject(HelpTextsInternalV2Service) private helpTextsService: HelpTextsInternalV2Service) {
     super({ isLoading: false, keyExists: false });
   }
 
@@ -34,11 +32,11 @@ export class CreateHelpTextDialogComponentStore extends ComponentStore<State> {
       tap(() => this.setLoading(true)),
       switchMap((key) => {
         return this.helpTextsService.getManyHelpTextsInternalV2GetAll().pipe(
-          tapResponse(
-            (helpTextDtos) => this.setKeyExists(this.keyIsInArray(helpTextDtos, key)),
-            (e) => console.error(e),
-            () => this.setLoading(false),
-          ),
+          tapResponse({
+            next: (helpTextDtos) => this.setKeyExists(this.keyIsInArray(helpTextDtos, key)),
+            error: (e) => console.error(e),
+            complete: () => this.setLoading(false),
+          }),
         );
       }),
     ),

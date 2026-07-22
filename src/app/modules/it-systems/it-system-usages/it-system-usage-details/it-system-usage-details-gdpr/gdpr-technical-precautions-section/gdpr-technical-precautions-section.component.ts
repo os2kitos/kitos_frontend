@@ -1,14 +1,16 @@
+import { AsyncPipe } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
-import { APIGDPRRegistrationsResponseDTO, APIGDPRWriteRequestDTO } from 'src/app/api/v2';
+import { APIGDPRWriteRequestDTO, APITechnicalPrecautionChoice, APIYesNoDontKnowChoice } from 'src/app/api/v2';
 import { BaseAccordionComponent } from 'src/app/shared/base/base-accordion.component';
 import {
   TechnicalPrecautions,
   mapTechnicalPecautions,
   technicalPrecautionsOptions,
 } from 'src/app/shared/models/it-system-usage/gdpr/technical-precautions.model';
+import { SimpleLink } from 'src/app/shared/models/SimpleLink.model';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import {
   YesNoDontKnowOption,
@@ -20,12 +22,11 @@ import { NotificationService } from 'src/app/shared/services/notification.servic
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors';
 import { AccordionComponent } from '../../../../../../shared/components/accordion/accordion.component';
-import { StandardVerticalContentGridComponent } from '../../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { CheckboxComponent } from '../../../../../../shared/components/checkbox/checkbox.component';
 import { DropdownComponent } from '../../../../../../shared/components/dropdowns/dropdown/dropdown.component';
 import { ParagraphComponent } from '../../../../../../shared/components/paragraph/paragraph.component';
-import { NgFor, AsyncPipe } from '@angular/common';
-import { CheckboxComponent } from '../../../../../../shared/components/checkbox/checkbox.component';
-import { EditUrlSectionComponent } from '../edit-url-section/edit-url-section.component';
+import { StandardVerticalContentGridComponent } from '../../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { EditUrlSectionComponent } from '../../../../shared/edit-url-section/edit-url-section.component';
 
 @Component({
   selector: 'app-gdpr-technical-precautions-section',
@@ -38,7 +39,6 @@ import { EditUrlSectionComponent } from '../edit-url-section/edit-url-section.co
     StandardVerticalContentGridComponent,
     DropdownComponent,
     ParagraphComponent,
-    NgFor,
     CheckboxComponent,
     EditUrlSectionComponent,
     AsyncPipe,
@@ -50,13 +50,17 @@ export class GdprTechnicalPrecautionsSectionComponent extends BaseAccordionCompo
 
   private readonly currentGdpr$ = this.store.select(selectItSystemUsageGdpr).pipe(filterNullish());
   public readonly isTechnicalPrecautionsFalse$ = this.currentGdpr$.pipe(
-    map(
-      (gdpr) =>
-        gdpr.technicalPrecautionsInPlace !== APIGDPRRegistrationsResponseDTO.TechnicalPrecautionsInPlaceEnum.Yes,
-    ),
+    map((gdpr) => gdpr.technicalPrecautionsInPlace !== APIYesNoDontKnowChoice.Yes),
   );
   public readonly selectTechnicalDocumentation$ = this.currentGdpr$.pipe(
-    map((gdpr) => gdpr.technicalPrecautionsDocumentation),
+    map((gdpr) =>
+      gdpr.technicalPrecautionsDocumentation
+        ? ({
+            url: gdpr.technicalPrecautionsDocumentation.url,
+            name: gdpr.technicalPrecautionsDocumentation.name,
+          } as SimpleLink)
+        : undefined,
+    ),
   );
 
   public readonly yesNoDontKnowOptions = yesNoDontKnowOptions;
@@ -117,11 +121,11 @@ export class GdprTechnicalPrecautionsSectionComponent extends BaseAccordionCompo
     if (valueChange && !valueChange.valid) {
       this.notificationService.showInvalidFormField(valueChange.text);
     } else {
-      const newTechnicalPrecautionsApplied: APIGDPRWriteRequestDTO.TechnicalPrecautionsAppliedEnum[] = [];
+      const newTechnicalPrecautionsApplied: APITechnicalPrecautionChoice[] = [];
       for (const controlKey in this.technicalPrecautionsForm.controls) {
         const control = this.technicalPrecautionsForm.get(controlKey);
         if (control?.value) {
-          newTechnicalPrecautionsApplied.push(controlKey as APIGDPRWriteRequestDTO.TechnicalPrecautionsAppliedEnum);
+          newTechnicalPrecautionsApplied.push(controlKey as APITechnicalPrecautionChoice);
         }
       }
       this.store.dispatch(

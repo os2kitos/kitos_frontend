@@ -1,11 +1,29 @@
 <app-dialog [title]="title" overflow="none">
   <form [formGroup]="dropdownFormGroup" (submit)="onSave()">
     <app-standard-vertical-content-grid>
+      @if (description || bulletPoints?.length) {
+        <div>
+          @if (description) {
+            <app-paragraph>{{ description }}</app-paragraph>
+          }
+          @if (bulletPoints?.length) {
+            <ul class="bullet-list">
+              @for (point of bulletPoints; track point) {
+                <li>
+                  <app-paragraph>{{ point }}</app-paragraph>
+                </li>
+              }
+            </ul>
+          }
+        </div>
+      }
+
       <app-dropdown
         [text]="dropdownText"
         [data]="data$ | async"
         [valueField]="valueField"
         [formGroup]="dropdownFormGroup"
+        [textField]="textField"
         formName="dropdownControl"
         data-cy="dropdown-selector"
         i18n-text
@@ -15,8 +33,8 @@
         <app-button buttonStyle="secondary" (buttonClick)="onCancel()" i18n>Annuller</app-button>
         <app-button type="submit" [disabled]="dropdownFormGroup.valid === false || isBusy" i18n data-cy="save-button"
           >Tilføj</app-button
-        >
-      </app-dialog-actions>
-    </app-standard-vertical-content-grid>
-  </form>
-</app-dialog>
+          >
+        </app-dialog-actions>
+      </app-standard-vertical-content-grid>
+    </form>
+  </app-dialog>

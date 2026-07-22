@@ -10,7 +10,7 @@ import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { DialogComponent } from '../../../../../../shared/components/dialogs/dialog/dialog.component';
 import { StandardVerticalContentGridComponent } from '../../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { TextBoxComponent } from '../../../../../../shared/components/textbox/textbox.component';
-import { NgIf, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { ParagraphComponent } from '../../../../../../shared/components/paragraph/paragraph.component';
 import { DialogActionsComponent } from '../../../../../../shared/components/dialogs/dialog-actions/dialog-actions.component';
 import { ButtonComponent } from '../../../../../../shared/components/buttons/button/button.component';
@@ -26,12 +26,11 @@ import { ButtonComponent } from '../../../../../../shared/components/buttons/but
     TextBoxComponent,
     FormsModule,
     ReactiveFormsModule,
-    NgIf,
     ParagraphComponent,
     DialogActionsComponent,
     ButtonComponent,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class CreateAndAssociateContractDialogComponent extends BaseComponent implements OnInit {
   @Input() public usageToAssociateUuid!: string;

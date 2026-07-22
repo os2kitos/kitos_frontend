@@ -1,27 +1,23 @@
 import { Inject, Injectable } from '@angular/core';
-import { ComponentStore } from '@ngrx/component-store';
 import { concatLatestFrom, tapResponse } from '@ngrx/operators';
-
 import { Store } from '@ngrx/store';
 import { first, mergeMap } from 'rxjs';
-import { APIV2ItSystemUsageService } from 'src/app/api/v2';
+import { ItSystemUsageV2Service } from 'src/app/api/v2';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { selectITSystemUsageHasDeletePermission } from 'src/app/store/it-system-usage/selectors';
 import { selectItSystemUuid } from 'src/app/store/it-system/selectors';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
+import { ITSystemCatalogComponentStore } from '../it-system-catalog.component-store';
 
 @Injectable()
-export class ITSystemCatalogDetailsComponentStore extends ComponentStore<object> {
+export class ITSystemCatalogDetailsComponentStore extends ITSystemCatalogComponentStore {
   public readonly usageModifyPermission$ = this.store
     .select(selectITSystemUsageHasDeletePermission)
     .pipe(filterNullish());
 
-  constructor(
-    @Inject(APIV2ItSystemUsageService) private apiItSystemUsageService: APIV2ItSystemUsageService,
-    private store: Store,
-  ) {
-    super();
+  constructor(@Inject(ItSystemUsageV2Service) apiItSystemUsageService: ItSystemUsageV2Service, store: Store) {
+    super(apiItSystemUsageService, store);
   }
 
   public getUsageDeletePermissionsForItSystem = this.effect(() =>
@@ -33,16 +29,19 @@ export class ITSystemCatalogDetailsComponentStore extends ComponentStore<object>
         this.apiItSystemUsageService
           .getManyItSystemUsageV2GetItSystemUsages({ systemUuid: itSystemUuid, organizationUuid })
           .pipe(
-            tapResponse(
-              (usages) => {
+            tapResponse({
+              next: (usages) => {
+                if (usages.length > 1)
+                  console.error(
+                    `More than one usage found for it system ${itSystemUuid} and organization ${organizationUuid}`,
+                  );
                 const usage = usages[0];
                 if (!usage) return;
-
                 const usageUuid = usage.uuid;
                 this.store.dispatch(ITSystemUsageActions.getITSystemUsagePermissions(usageUuid));
               },
-              (e) => console.error(e),
-            ),
+              error: (e) => console.error(e),
+            }),
           ),
       ),
     ),

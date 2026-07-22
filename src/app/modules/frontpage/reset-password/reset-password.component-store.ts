@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { tapResponse } from '@ngrx/operators';
 import { finalize, mergeMap, Observable, tap } from 'rxjs';
-import { APIPasswordResetResponseDTO, APIV2PasswordResetInternalINTERNALService } from 'src/app/api/v2';
+import { APIPasswordResetResponseDTO, PasswordResetInternalV2Service } from 'src/app/api/v2';
 
 interface State {
   email: string | undefined;
@@ -12,7 +12,7 @@ interface State {
 
 @Injectable()
 export class ResetPasswordComponentStore extends ComponentStore<State> {
-  constructor(private resetPasswordService: APIV2PasswordResetInternalINTERNALService) {
+  constructor(private resetPasswordService: PasswordResetInternalV2Service) {
     super({ email: undefined, loading: true, resetPasswordSuccess: false });
   }
 
@@ -25,10 +25,10 @@ export class ResetPasswordComponentStore extends ComponentStore<State> {
       tap(() => this.setLoading(true)),
       mergeMap((requestId) => {
         return this.resetPasswordService.getSinglePasswordResetInternalV2GetPasswordReset({ requestId }).pipe(
-          tapResponse(
-            (response: APIPasswordResetResponseDTO) => this.setEmail(response.email),
-            (_) => this.setEmail(undefined),
-          ),
+          tapResponse({
+            next: (response: APIPasswordResetResponseDTO) => this.setEmail(response.email ?? undefined),
+            error: (_) => this.setEmail(undefined),
+          }),
           finalize(() => this.setLoading(false)),
         );
       }),

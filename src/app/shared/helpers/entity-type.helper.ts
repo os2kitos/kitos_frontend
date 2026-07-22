@@ -1,17 +1,15 @@
-import { APINotificationResponseDTO } from 'src/app/api/v2';
-import { RegistrationEntityTypes } from '../models/registrations/registration-entity-categories.model';
+import { APIOwnerResourceType } from 'src/app/api/v2';
 import { RelatedEntityType } from 'src/app/store/alerts/state';
+import { RegistrationEntityTypes } from '../models/registrations/registration-entity-categories.model';
 
-export function mapEntityTypeToOwnerResourceType(
-  entityType: RegistrationEntityTypes,
-): APINotificationResponseDTO.OwnerResourceTypeEnum {
+export function mapEntityTypeToOwnerResourceType(entityType: RegistrationEntityTypes): APIOwnerResourceType {
   switch (entityType) {
     case 'it-system-usage':
-      return APINotificationResponseDTO.OwnerResourceTypeEnum.ItSystemUsage;
+      return APIOwnerResourceType.ItSystemUsage;
     case 'it-contract':
-      return APINotificationResponseDTO.OwnerResourceTypeEnum.ItContract;
+      return APIOwnerResourceType.ItContract;
     case 'data-processing-registration':
-      return APINotificationResponseDTO.OwnerResourceTypeEnum.DataProcessingRegistration;
+      return APIOwnerResourceType.DataProcessingRegistration;
     default:
       throw new Error(`Owner resource type for entity type: ${entityType} does not exist`);
   }
@@ -32,14 +30,14 @@ export function mapEntityTypeToRelatedEntityType(entityType: RegistrationEntityT
 
 export function mapRelatedEntityTypeToDTO(
   entityType: RelatedEntityType,
-): 'itContract' | 'itSystemUsage' | 'dataProcessingRegistration' {
+): 'ItContract' | 'ItSystemUsage' | 'DataProcessingRegistration' {
   switch (entityType) {
     case RelatedEntityType.ItSystemUsage:
-      return 'itSystemUsage';
+      return 'ItSystemUsage';
     case RelatedEntityType.ItContract:
-      return 'itContract';
+      return 'ItContract';
     case RelatedEntityType.DataProcessingRegistration:
-      return 'dataProcessingRegistration';
+      return 'DataProcessingRegistration';
     default:
       throw new Error(`Related entity type for entity type: ${entityType} does not exist`);
   }

@@ -23,7 +23,7 @@ describe('it-contracts.hierarchy', () => {
       });
     });
 
-    it('shows complex hierarchy', () => {
+    testRunner.runTestWithSetup('shows complex hierarchy', () => {
       cy.intercept('/api/v2/internal/it-contracts/*/hierarchy', { fixture: './it-contracts/hierarchy-complex.json' });
 
       goToHierarchy();

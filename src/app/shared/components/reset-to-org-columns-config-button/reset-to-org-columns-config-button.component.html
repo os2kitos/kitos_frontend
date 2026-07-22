@@ -2,6 +2,8 @@
   <app-reload-icon></app-reload-icon>
   Gendan
   <app-tooltip [text]="tooltipText">
-    <app-warning-icon *ngIf="hasChanges() | async"> </app-warning-icon>
+    @if (hasChanges() | async) {
+      <app-warning-icon> </app-warning-icon>
+    }
   </app-tooltip>
 </app-menu-button-item>

@@ -1,7 +1,8 @@
-<a
-  class="details-page-link-{{ linkFontSize }}"
-  *ngIf="detailsPageRouterPath"
-  [routerLink]="disableRedirect ? null : detailsPageRouterPath"
->
-  <ng-content></ng-content>
-</a>
+@if (detailsPageRouterPath) {
+  <a
+    class="details-page-link-{{ linkFontSize }}"
+    [routerLink]="disableRedirect ? null : detailsPageRouterPath"
+    >
+    <ng-content></ng-content>
+  </a>
+}

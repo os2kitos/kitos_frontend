@@ -1,4 +1,4 @@
-<ng-container *ngIf="(hasGridConfigPermission$ | async) === true">
+@if ((hasGridConfigPermission$ | async) === true) {
   <app-menu-button-item (itemClick)="onSaveColumnConfig()" i18n>
     <app-disk-icon></app-disk-icon>
     Gem
@@ -7,4 +7,4 @@
     <app-trashcan-icon></app-trashcan-icon>
     Slet
   </app-menu-button-item>
-</ng-container>
+}

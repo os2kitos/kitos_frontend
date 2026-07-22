@@ -1,10 +1,13 @@
 <h6>{{ title }}</h6>
 <ng-content></ng-content>
-<span *ngIf="spacer" class="space"></span>
+@if (spacer) {
+  <span class="space"></span>
+}
 <ng-content select="[secondary-content]"></ng-content>
-<app-help-button
-  *ngIf="helpTextKey"
-  [helpTextKey]="helpTextKey"
-  class="help-text-button-margin"
-  data-cy="help-button"
-></app-help-button>
+@if (helpTextKey) {
+  <app-help-button
+    [helpTextKey]="helpTextKey"
+    class="help-text-button-margin"
+    data-cy="help-button"
+  ></app-help-button>
+}

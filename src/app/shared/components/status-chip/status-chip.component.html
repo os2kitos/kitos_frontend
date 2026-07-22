@@ -1,5 +1,7 @@
 <app-tooltip [text]="title || ''">
-  <app-chip *ngIf="value !== null && value !== undefined" [state]="isError() ? 'error' : 'success'">
-    {{ isError() ? falseString : trueString }}
-  </app-chip>
+  @if (value !== null && value !== undefined) {
+    <app-chip [state]="isError() ? 'error' : 'success'">
+      {{ isError() ? falseString : trueString }}
+    </app-chip>
+  }
 </app-tooltip>

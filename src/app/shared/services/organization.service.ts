@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { map, mergeMap, of, withLatestFrom } from 'rxjs';
-import { APIOrganizationResponseDTO, APIV2OrganizationService } from 'src/app/api/v2';
+import { APIOrganizationResponseDTO, OrganizationV2Service } from 'src/app/api/v2';
 import { selectOrganization, selectUserUuid } from 'src/app/store/user-store/selectors';
 import { filterNullish } from '../pipes/filter-nullish';
 
@@ -29,6 +29,6 @@ export class OrganizationService {
 
   constructor(
     private store: Store,
-    private apiOrganizationService: APIV2OrganizationService,
+    private apiOrganizationService: OrganizationV2Service,
   ) {}
 }

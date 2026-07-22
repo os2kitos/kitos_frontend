@@ -14,6 +14,7 @@ import {
   CONTRACT_SECTION_NAME,
   DATA_PROCESSING_SECTION_NAME,
   GDPR_SECTION_NAME,
+  KLE_SECTION_NAME,
   LOCAL_REFERENCES_SECTION_NAME,
   ORGANIZATION_SECTION_NAME,
   RELATIONS_SECTION_NAME,
@@ -27,9 +28,14 @@ import { GridState } from 'src/app/shared/models/grid-state.model';
 import { archiveDutyChoiceOptions } from 'src/app/shared/models/it-system-usage/archive-duty-choice.model';
 import { dataSensitivityLevelOptions } from 'src/app/shared/models/it-system-usage/gdpr/data-sensitivity-level.model';
 import { hostedAtOptionsGrid } from 'src/app/shared/models/it-system-usage/gdpr/hosted-at.model';
+import { isDataProcessingAgreementRequiredOptions } from 'src/app/shared/models/it-system-usage/gdpr/is-data-processing-agreement-required.model';
+import { riskAssessmentResultOptionsGrid } from 'src/app/shared/models/it-system-usage/gdpr/risk-assessment-result';
 import { archiveDutyRecommendationChoiceOptions } from 'src/app/shared/models/it-system/archive-duty-recommendation-choice.model';
+import { licensingAndCodeModelOptions } from 'src/app/shared/models/it-system/licensing-and-code-model.model';
 import { lifeCycleStatusOptions } from 'src/app/shared/models/life-cycle-status.model';
 import { numberOfExpectedUsersOptionsGrid } from 'src/app/shared/models/number-of-expected-users.model';
+import { yesNoBooleanOptions } from 'src/app/shared/models/yes-no-boolean-options.model';
+import { yesNoDontKnowIrrelevantOptionsGrid } from 'src/app/shared/models/yes-no-dont-know-irrelevant.model';
 import { yesNoDontKnowOptions } from 'src/app/shared/models/yes-no-dont-know.model';
 import { yesNoIrrelevantOptionsGrid } from 'src/app/shared/models/yes-no-irrelevant.model';
 import { yesNoPartiallyOptions } from 'src/app/shared/models/yes-no-partially.model';
@@ -38,6 +44,7 @@ import { GridColumnStorageService } from 'src/app/shared/services/grid-column-st
 import { GridUIConfigService } from 'src/app/shared/services/ui-config-services/grid-ui-config.service';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import {
+  selectAnyFilters,
   selectGridData,
   selectGridState,
   selectIsLoading,
@@ -75,12 +82,12 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
   public readonly gridState$ = this.store.select(selectGridState);
   public readonly gridColumns$ = this.store.select(selectUsageGridColumns);
   public readonly uiConfigApplications$ = this.uiConfigService.getUIConfigApplications(UIModuleConfigKey.ItSystemUsage);
+  public anySystemUsageFilters$ = this.store.select(selectAnyFilters);
 
   public readonly organizationName$ = this.store.select(selectOrganizationName);
   public readonly hasCreatePermission$ = this.store.select(selectITSystemUsageHasCreateCollectionPermission);
 
   private readonly systemSectionName = USAGE_SECTION_NAME;
-
   private readonly activeInactiveData = [
     {
       name: $localize`Aktivt`,
@@ -89,6 +96,21 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     {
       name: $localize`Ikke aktivt`,
       value: false,
+    },
+  ];
+
+  private readonly mainContractStatusData = [
+    {
+      name: $localize`Ingen kontrakt`,
+      value: 'NoContract',
+    },
+    {
+      name: $localize`Aktiv`,
+      value: 'Active',
+    },
+    {
+      name: $localize`Ikke aktiv`,
+      value: 'Inactive',
     },
   ];
   public readonly defaultGridColumns: GridColumn[] = [
@@ -114,7 +136,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       style: 'chip',
       hidden: false,
       persistId: 'isActive',
-      helpText: $localize`Filtrerer på visning af aktive/ikke aktive systemer, efter om datoen på den tilknyttede kontrakt fra kontrakt modulet er udløbet.`,
+      helpText: $localize`Filtrer på visning af aktive/ikke aktive systemer, efter om slutdatoen for systemanvendelse er udløbet.`,
     },
     {
       field: GridFields.ActiveAccordingToLifeCycle,
@@ -132,13 +154,15 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       field: GridFields.MainContractIsActive,
       title: $localize`Status (Markeret kontrakt)`,
       section: this.systemSectionName,
-      filter: 'boolean',
-      extraData: this.activeInactiveData,
+      filter: 'text',
+      extraFilter: 'enum',
+      extraData: this.mainContractStatusData,
       entityType: 'it-system-usage',
-      style: 'chip',
+      style: 'contract-status-chip',
       width: 340,
       hidden: false,
       persistId: 'contract',
+      sortField: GridFields.MainContractIsActiveSortOrder,
       helpText: $localize`Filtrerer på visning af systemer med en aktiv/ikke aktiv kontrakt tilknyttet fra kontrakt modulet.`,
     },
     {
@@ -248,16 +272,30 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     {
       field: GridFields.ItSystemKLEIdsAsCsv,
       title: $localize`KLE ID`,
-      section: this.systemSectionName,
+      section: KLE_SECTION_NAME,
       hidden: true,
       persistId: 'taskkey',
     },
     {
       field: GridFields.ItSystemKLENamesAsCsv,
       title: $localize`KLE navn`,
-      section: this.systemSectionName,
+      section: KLE_SECTION_NAME,
       hidden: false,
       persistId: 'klename',
+    },
+    {
+      field: GridFields.LocalKleIdsAsCsv,
+      title: $localize`Lokale KLE ID`,
+      section: KLE_SECTION_NAME,
+      hidden: true,
+      persistId: 'localTaskKey',
+    },
+    {
+      field: GridFields.LocalKleNamesAsCsv,
+      title: $localize`Lokale KLE navn`,
+      section: KLE_SECTION_NAME,
+      hidden: true,
+      persistId: 'localKleName',
     },
     {
       field: GridFields.LocalReferenceTitle,
@@ -345,6 +383,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       width: 350,
       hidden: false,
       persistId: 'systemUsageExpirationDate',
+      defaultDateFilterOperator: 'lte',
     },
     {
       field: GridFields.LifeCycleStatus,
@@ -371,16 +410,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       title: $localize`Er dokumentbærende`,
       section: ARCHIVE_SECTION_NAME,
       filter: 'boolean',
-      extraData: [
-        {
-          name: $localize`Ja`,
-          value: true,
-        },
-        {
-          name: $localize`Nej`,
-          value: false,
-        },
-      ],
+      extraData: yesNoBooleanOptions,
       entityType: 'it-system-usage',
       style: 'chip',
       hidden: false,
@@ -399,7 +429,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     },
     {
       field: GridFields.RiskSupervisionDocumentationName,
-      title: $localize`Risikovurdering`,
+      title: $localize`Link til risikovurdering`,
       idField: 'RiskSupervisionDocumentationUrl',
       section: GDPR_SECTION_NAME,
       style: 'title-link',
@@ -428,10 +458,18 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     {
       field: GridFields.GeneralPurpose,
       title: $localize`Systemets overordnede formål`,
-      section: GDPR_SECTION_NAME,
+      section: this.systemSectionName,
       width: 390,
       hidden: false,
       persistId: 'GeneralPurpose',
+    },
+    {
+      field: GridFields.ProcessingPurpose,
+      title: $localize`Behandlingsformål`,
+      section: GDPR_SECTION_NAME,
+      width: 390,
+      hidden: false,
+      persistId: 'ProcessingPurpose',
     },
     {
       field: GridFields.DataProcessingRegistrationsConcludedAsCsv,
@@ -488,6 +526,20 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       persistId: 'incomingRelatedItSystemUsages',
     },
     {
+      field: GridFields.ItInterfaceIdsAsCsv,
+      title: $localize`Snitflade ID'er`,
+      section: RELATIONS_SECTION_NAME,
+      hidden: true,
+      persistId: 'itInterfaceIds',
+    },
+    {
+      field: GridFields.ItInterfaceVersionsAsCsv,
+      title: $localize`Snitflade versioner`,
+      section: RELATIONS_SECTION_NAME,
+      hidden: true,
+      persistId: 'itInterfaceVersions',
+    },
+    {
       field: GridFields.AssociatedContractsNamesCsv,
       title: $localize`IT Kontrakter`,
       section: CONTRACT_SECTION_NAME,
@@ -496,6 +548,17 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       dataField: 'AssociatedContracts',
       hidden: true,
       persistId: 'itContracts',
+    },
+    {
+      field: GridFields.RiskAssessmentResult,
+      title: $localize`Hvad viste den seneste risikovurdering`,
+      section: GDPR_SECTION_NAME,
+      style: 'enum',
+      extraFilter: 'enum',
+      extraData: riskAssessmentResultOptionsGrid,
+      hidden: true,
+      width: 330,
+      persistId: 'latestRiskAssessmentResult',
     },
     {
       field: GridFields.RiskAssessmentDate,
@@ -516,6 +579,17 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       width: 350,
       hidden: false,
       persistId: 'PlannedRiskAssessmentDate',
+      defaultDateFilterOperator: 'lte',
+    },
+    {
+      field: GridFields.RiskAssessmentConducted,
+      title: $localize`Foretaget risikovurdering`,
+      section: GDPR_SECTION_NAME,
+      style: 'enum',
+      extraFilter: 'enum',
+      extraData: yesNoDontKnowIrrelevantOptionsGrid,
+      hidden: true,
+      persistId: 'riskAssessmentConducted',
     },
     {
       field: GridFields.Note,
@@ -557,8 +631,8 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     },
     {
       field: GridFields.IsBusinessCritical,
-      title: $localize`Forretningskritisk`,
-      section: GDPR_SECTION_NAME,
+      title: $localize`Forretningskritisk IT-system`,
+      section: USAGE_SECTION_NAME,
       style: 'enum',
       extraFilter: 'enum',
       extraData: yesNoDontKnowOptions,
@@ -620,6 +694,64 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       hidden: true,
       persistId: 'webAccessibilityNotes',
     },
+    {
+      field: GridFields.SystemUsageCriticalityLevelUuid,
+      dataField: GridFields.SystemUsageCriticalityLevelName,
+      title: $localize`Kritikalitet`,
+      section: USAGE_SECTION_NAME,
+      hidden: true,
+      persistId: 'gdprCriticality',
+      extraFilter: 'choice-type',
+      extraData: 'it-system-usage_system-usage-criticality-level',
+      style: 'uuid-to-name',
+    },
+    {
+      field: GridFields.TechnicalSystemTypeNamesAsCsv,
+      title: $localize`Teknisk systemtyper`,
+      section: USAGE_SECTION_NAME,
+      hidden: true,
+      persistId: 'technicalSystemType',
+    },
+    {
+      field: GridFields.IsSociallyCritical,
+      title: $localize`Samfundskritisk IT-system`,
+      section: USAGE_SECTION_NAME,
+      hidden: true,
+      extraFilter: 'enum',
+      style: 'enum',
+      extraData: yesNoDontKnowOptions,
+      persistId: 'isSociallyCritical',
+    },
+    {
+      field: GridFields.CriticalityFieldsLastChanged,
+      title: $localize`Systemkritikalitet sidst opdateret`,
+      section: USAGE_SECTION_NAME,
+      hidden: true,
+      style: 'date',
+      filter: 'date',
+      width: 350,
+      persistId: 'criticalityFieldsLastChanged',
+    },
+    {
+      field: GridFields.IsDataProcessingAgreementRequired,
+      title: $localize`Kræver system databehandleraftale`,
+      section: GDPR_SECTION_NAME,
+      hidden: true,
+      extraFilter: 'enum',
+      style: 'enum',
+      extraData: isDataProcessingAgreementRequiredOptions,
+      persistId: 'isDataProcessingAgreementRequired',
+    },
+    {
+      field: GridFields.LicensingAndCodeModels,
+      title: $localize`Licens- og kodegrundlag`,
+      section: this.systemSectionName,
+      hidden: true,
+      style: 'enum-array',
+      extraFilter: 'enum',
+      extraData: licensingAndCodeModelOptions,
+      persistId: 'licensingAndCodeModels',
+    },
   ];
 
   public readonly enableLifeCycleStatus$ = this.store.select(selectITSystemUsageEnableLifeCycleStatus);
@@ -632,7 +764,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     private route: ActivatedRoute,
     private gridColumnStorageService: GridColumnStorageService,
     private actions$: Actions,
-    private uiConfigService: GridUIConfigService
+    private uiConfigService: GridUIConfigService,
   ) {
     super(store, 'it-system-usage');
   }
@@ -644,7 +776,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
         .pipe(
           ofType(ITSystemUsageActions.getItSystemUsageOverviewRolesSuccess),
           combineLatestWith(this.store.select(selectUsageGridRoleColumns)),
-          first()
+          first(),
         )
         .subscribe(([_, roleColumns]) => {
           const defaultColumnsAndRoles = this.defaultGridColumns.concat(roleColumns);
@@ -656,9 +788,9 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
             orderedGridColumns,
             localStorageColumns,
             ITSystemUsageActions.updateGridColumns,
-            ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfiguration
+            ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfiguration,
           );
-        })
+        }),
     );
 
     this.subscriptions.add(this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState)));
@@ -667,18 +799,18 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       this.actions$
         .pipe(
           ofType(ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationError),
-          concatLatestFrom(() => this.gridColumns$)
+          concatLatestFrom(() => this.gridColumns$),
         )
         .subscribe(([_, gridColumnsFromState]) => {
           const columnsToShow = getColumnsToShow(gridColumnsFromState, this.defaultGridColumns);
           const gridColumnStateIsCorrect = this.gridColumnStorageService.columnsAreEqual(
             gridColumnsFromState,
-            columnsToShow
+            columnsToShow,
           );
           if (!gridColumnStateIsCorrect) {
             this.store.dispatch(ITSystemUsageActions.updateGridColumns(columnsToShow));
           }
-        })
+        }),
     );
 
     this.store.dispatch(ITSystemUsageActions.getItSystemUsageOverviewRoles());

@@ -1,19 +1,17 @@
-import { APIGdprReportResponseDTO } from 'src/app/api/v2';
+import { APIRiskLevelChoice } from 'src/app/api/v2';
 
 export interface PreRiskAssessment {
   name: string;
-  value: APIGdprReportResponseDTO.PreRiskAssessmentEnum;
+  value: APIRiskLevelChoice;
 }
 
 export const riskAssessmentResultOptions: PreRiskAssessment[] = [
-  { name: $localize`Ved ikke`, value: APIGdprReportResponseDTO.PreRiskAssessmentEnum.Undecided },
-  { name: $localize`Lav risiko`, value: APIGdprReportResponseDTO.PreRiskAssessmentEnum.Low },
-  { name: $localize`Mellem risiko`, value: APIGdprReportResponseDTO.PreRiskAssessmentEnum.Medium },
-  { name: $localize`Høj risiko`, value: APIGdprReportResponseDTO.PreRiskAssessmentEnum.High },
+  { name: $localize`Ved ikke`, value: APIRiskLevelChoice.Undecided },
+  { name: $localize`Lav risiko`, value: APIRiskLevelChoice.Low },
+  { name: $localize`Mellem risiko`, value: APIRiskLevelChoice.Medium },
+  { name: $localize`Høj risiko`, value: APIRiskLevelChoice.High },
 ];
 
-export const mapPreRiskAssessmentEnum = (
-  value?: APIGdprReportResponseDTO.PreRiskAssessmentEnum,
-): PreRiskAssessment | undefined => {
+export const mapPreRiskAssessmentEnum = (value?: APIRiskLevelChoice): PreRiskAssessment | undefined => {
   return riskAssessmentResultOptions.find((option) => option.value === value);
 };

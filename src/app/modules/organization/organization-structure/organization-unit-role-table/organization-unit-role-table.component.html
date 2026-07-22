@@ -3,9 +3,9 @@
   [isLoading$]="isLoading$"
   [anyRoles$]="anyRoles$"
   [hasModifyPermission]="hasModifyPermission"
->
-  <ng-container *ngIf="roles$ | async as roles">
-    <ng-container *ngIf="availableRolesDictionary$ | async as rolesDictionary">
+  >
+  @if (roles$ | async; as roles) {
+    @if (availableRolesDictionary$) {
       <app-native-table tableLayout="fixed">
         <thead>
           <tr>
@@ -17,23 +17,24 @@
           </tr>
         </thead>
         <tbody>
-          <tr
-            role-row
-            *ngFor="let role of roles"
-            [role]="role"
-            [hasModifyPermission]="hasModifyPermission"
-            [rolesDictionary]="rolesDictionary"
-            (removeRole)="onRemove($event)"
-            (editRole)="onEdit($event)"
-          >
-            <td>
-              <app-paragraph>
-                {{ role.unitName }}
-              </app-paragraph>
-            </td>
-          </tr>
+          @for (role of roles; track role) {
+            <tr
+              role-row
+              [role]="role"
+              [hasModifyPermission]="hasModifyPermission"
+              [availableRoles$]="availableRolesDictionary$"
+              (removeRole)="onRemove($event)"
+              (editRole)="onEdit($event)"
+              >
+              <td>
+                <app-paragraph>
+                  {{ role.unitName }}
+                </app-paragraph>
+              </td>
+            </tr>
+          }
         </tbody>
       </app-native-table>
-    </ng-container>
-  </ng-container>
+    }
+  }
 </app-role-table-container>

@@ -7,7 +7,7 @@ import { UserActions } from 'src/app/store/user-store/actions';
 import { CardComponent } from '../../../shared/components/card/card.component';
 import { StandardVerticalContentGridComponent } from '../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { ParagraphComponent } from '../../../shared/components/paragraph/paragraph.component';
-import { NgIf } from '@angular/common';
+
 import { LoadingComponent } from '../../../shared/components/loading/loading.component';
 import { TextBoxComponent } from '../../../shared/components/textbox/textbox.component';
 import { ButtonComponent } from '../../../shared/components/buttons/button/button.component';
@@ -20,13 +20,12 @@ import { ButtonComponent } from '../../../shared/components/buttons/button/butto
     CardComponent,
     StandardVerticalContentGridComponent,
     ParagraphComponent,
-    NgIf,
     LoadingComponent,
     TextBoxComponent,
     FormsModule,
     ReactiveFormsModule,
-    ButtonComponent,
-  ],
+    ButtonComponent
+],
 })
 export class SendPasswordResetRequestComponent extends BaseComponent {
   public readonly formGroup = new FormGroup({

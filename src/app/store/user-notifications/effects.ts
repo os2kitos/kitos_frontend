@@ -1,21 +1,21 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { APIV2NotificationINTERNALService } from 'src/app/api/v2';
-import { UserNotificationActions } from './actions';
-import { catchError, filter, map, of, switchMap } from 'rxjs';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
-import { selectOrganizationUuid } from '../user-store/selectors';
+import { catchError, filter, map, of, switchMap } from 'rxjs';
+import { NotificationV2Service } from 'src/app/api/v2';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
-import { adaptUserNotification } from './state';
+import { selectOrganizationUuid } from '../user-store/selectors';
+import { UserNotificationActions } from './actions';
 import { selectHasValidCacheForResourceType } from './selectors';
+import { adaptUserNotification } from './state';
 
 @Injectable()
 export class UserNotificationsEffects {
   constructor(
     private actions$: Actions,
     private store: Store,
-    private notificationService: APIV2NotificationINTERNALService,
+    private notificationService: NotificationV2Service,
   ) {}
 
   getNotifications$ = createEffect(() => {

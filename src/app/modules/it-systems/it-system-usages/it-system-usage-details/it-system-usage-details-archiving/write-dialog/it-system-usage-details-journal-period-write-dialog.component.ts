@@ -14,7 +14,7 @@ import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { DialogComponent } from '../../../../../../shared/components/dialogs/dialog/dialog.component';
 import { StandardVerticalContentGridComponent } from '../../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { DatePickerComponent } from '../../../../../../shared/components/datepicker/datepicker.component';
-import { NgIf } from '@angular/common';
+
 import { TextBoxInfoComponent } from '../../../../../../shared/components/textbox-info/textbox-info.component';
 import { ParagraphComponent } from '../../../../../../shared/components/paragraph/paragraph.component';
 import { TextBoxComponent } from '../../../../../../shared/components/textbox/textbox.component';
@@ -32,14 +32,13 @@ import { ButtonComponent } from '../../../../../../shared/components/buttons/but
     ReactiveFormsModule,
     StandardVerticalContentGridComponent,
     DatePickerComponent,
-    NgIf,
     TextBoxInfoComponent,
     ParagraphComponent,
     TextBoxComponent,
     CheckboxComponent,
     DialogActionsComponent,
-    ButtonComponent,
-  ],
+    ButtonComponent
+],
 })
 export class ItSystemUsageDetailsJournalPeriodWriteDialogComponent extends BaseComponent implements OnInit {
   @Input() public journalPeriod?: APIJournalPeriodResponseDTO | undefined;

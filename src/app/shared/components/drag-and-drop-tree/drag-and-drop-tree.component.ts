@@ -1,15 +1,15 @@
-import { DOCUMENT, NgClass, NgIf, NgFor, NgTemplateOutlet } from '@angular/common';
-import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
+import { CdkDrag, CdkDragHandle, CdkDropList } from '@angular/cdk/drag-drop';
+import { NgClass, NgTemplateOutlet } from '@angular/common';
+import { Component, DOCUMENT, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { getDetailsPageLink } from '../../helpers/link.helpers';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
 import { EntityTreeNode, EntityTreeNodeMoveResult } from '../../models/structure/entity-tree-node.model';
-import { ChevronDownIconComponent } from '../icons/chevron-down-icon.component';
-import { ChevronRightIconComponent } from '../icons/chevron-right-icon.component';
 import { CheckboxComponent } from '../checkbox/checkbox.component';
 import { DetailsPageLinkComponent } from '../details-page-link/details-page-link.component';
+import { ChevronDownIconComponent } from '../icons/chevron-down-icon.component';
+import { ChevronRightIconComponent } from '../icons/chevron-right-icon.component';
 import { DragIconComponent } from '../icons/drag-icon.component';
-import { CdkDragHandle, CdkDropList, CdkDrag } from '@angular/cdk/drag-drop';
 
 interface DropInfo {
   targetId: string;
@@ -22,7 +22,6 @@ interface DropInfo {
   styleUrls: ['./drag-and-drop-tree.component.scss'],
   imports: [
     NgClass,
-    NgIf,
     ChevronDownIconComponent,
     ChevronRightIconComponent,
     CheckboxComponent,
@@ -30,7 +29,6 @@ interface DropInfo {
     DragIconComponent,
     CdkDragHandle,
     CdkDropList,
-    NgFor,
     CdkDrag,
     NgTemplateOutlet,
   ],
@@ -124,7 +122,7 @@ export class DragAndDropTreeComponent<T> implements OnInit {
 
     const draggedItem = this.nodeLookup[draggedItemUuid];
 
-    const newContainer = targetListUuid !== null ? this.nodeLookup[targetListUuid].children : this.nodes;
+    const newContainer = this.getTargetContainer(targetListUuid);
 
     switch (this.dropActionTodo.action) {
       case 'before':
@@ -141,6 +139,10 @@ export class DragAndDropTreeComponent<T> implements OnInit {
     }
 
     this.clearDragInfo(true);
+  }
+
+  private getTargetContainer(targetListUuid: string | null): EntityTreeNode<T>[] {
+    return targetListUuid !== null ? this.nodeLookup[targetListUuid]?.children : this.nodes;
   }
 
   public expandClick(node: EntityTreeNode<T>) {

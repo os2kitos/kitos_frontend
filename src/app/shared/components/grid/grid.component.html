@@ -1,3 +1,4 @@
+@if (columns$ | async; as columns) {
 <kendo-grid
   [data]="data$ | async"
   [loading]="loading || false"
@@ -5,7 +6,6 @@
   [skip]="state?.skip"
   [filter]="state?.filter"
   [sort]="state?.sort"
-  [pageable]="true"
   [sortable]="true"
   [filterable]="true"
   [reorderable]="true"
@@ -20,150 +20,130 @@
   [rowHeight]="gridRowHeight"
   scrollable="virtual"
   style="width: 100%"
-  *ngIf="columns$ | async as columns"
 >
-  <ng-container *ngFor="let columnConfig of columns">
-    <ng-container *ngIf="uiConfigApplications$ === null || (uiConfigApplications$ | async) as uiConfigApplications">
-      <kendo-grid-column
-        *ngIf="!columnConfig.hidden && isColumnEnabled(uiConfigApplications, columnConfig)"
-        [field]="columnConfig.field"
-        [title]="columnConfig.title"
-        [sortable]="columnConfig.sortable ?? true"
-        [filter]="columnConfig.filter ?? 'text'"
-        [width]="
-          columnConfig.width !== undefined
-            ? columnConfig.width
-            : columnConfig.style === 'date'
-            ? defaultDateColumnWidth
-            : defaultColumnWidth
-        "
-        [sticky]="columnConfig.isSticky ?? false"
-        [minResizableWidth]="
-          columnConfig.minResizableWidth !== undefined
-            ? columnConfig.minResizableWidth
-            : columnConfig.filter === 'date'
-            ? defaultMinimumDateColumnWidth
-            : columnConfig.style === 'primary'
-            ? defaultPrimaryColumnMinimumWidth
-            : defaultMinimumColumnWidth
-        "
-        [headerClass]="{ 'mygrid-header-cell': true, 'not-sortable': columnConfig.sortable === false }"
-      >
-        <ng-template kendoGridHeaderTemplate let-column let-columnIndex="columnIndex">
-          <app-paragraph [bold]="true" color="primary-dark" class="sort-icon"
-            >{{ column.title }}
-
-            <app-tooltip *ngIf="columnConfig.helpText" [alignCenter]="true" [text]="columnConfig.helpText">
-              <app-help-icon></app-help-icon>
-            </app-tooltip>
-
-            <ng-container *ngIf="state?.sort as sortItem">
-              <ng-container *ngIf="sortItem[0].field === column.field">
-                <ng-container *ngIf="sortItem[0].dir === 'asc'">
-                  <app-arrow-up-icon></app-arrow-up-icon>
-                </ng-container>
-                <ng-container *ngIf="sortItem[0].dir === 'desc'">
-                  <app-arrow-down-icon></app-arrow-down-icon>
-                </ng-container>
-              </ng-container>
-            </ng-container>
-          </app-paragraph>
-        </ng-template>
-
-        <ng-template kendoGridFilterCellTemplate let-filter let-columnFilter="column">
-          <ng-container *ngIf="!columnConfig.noFilter">
-            <app-string-filter
-              [column]="columnFilter"
-              [filter]="filter"
-              *ngIf="columnFilter.filter === 'text' && !columnConfig.extraFilter"
-              [entityType]="entityType"
-              class="overflow-hidden-container"
-            ></app-string-filter>
-            <app-numeric-filter
-              [column]="columnFilter"
-              [filter]="filter"
-              *ngIf="columnFilter.filter === 'numeric'"
-              [entityType]="entityType"
-              class="overflow-hidden-container"
-            ></app-numeric-filter>
-            <app-date-filter
-              [column]="columnFilter"
-              [filter]="filter"
-              *ngIf="columnFilter.filter === 'date'"
-              [entityType]="entityType"
-              class="overflow-hidden-container"
-            ></app-date-filter>
-            <app-dropdown-filter
-              [column]="columnFilter"
-              [filter]="filter"
-              [options]="columnConfig.extraData"
-              [entityType]="entityType"
-              *ngIf="
-                columnFilter.filter === 'boolean' ||
-                (columnFilter.filter === 'text' && columnConfig.extraFilter === 'enum')
-              "
-              class="overflow-hidden-container"
-            ></app-dropdown-filter>
-            <app-unit-dropdown-filter
-              *ngIf="columnFilter.filter === 'text' && columnConfig.extraFilter === 'organization-unit'"
-              [column]="columnFilter"
-              [filter]="filter"
-              class="dropdown-inline-display"
-              [entityType]="entityType"
-            ></app-unit-dropdown-filter>
-            <app-choice-type-dropdown-filter
-              [column]="columnFilter"
-              [filter]="filter"
-              [choiceTypeName]="columnConfig.extraData"
-              [sortOptions]="columnConfig.sortFilter"
-              *ngIf="columnFilter.filter === 'text' && columnConfig.extraFilter === 'choice-type'"
-              [entityType]="entityType"
-              class="overflow-hidden-container"
-            ></app-choice-type-dropdown-filter>
-            <app-dropdown-column-data-filter
-              [column]="columnFilter"
-              [filter]="filter"
-              [serviceKey]="columnConfig.extraData"
-              [columnName]="columnConfig.field"
-              *ngIf="columnFilter.filter === 'text' && columnConfig.extraFilter === 'dropdown-from-column-data'"
-              [entityType]="entityType"
-              class="overflow-hidden-container"
-            ></app-dropdown-column-data-filter>
-            <app-choice-type-dropdown-filter
-              [column]="columnFilter"
-              [filter]="filter"
-              [choiceTypeName]="columnConfig.extraData"
-              [shouldFilterByChoiceTypeName]="true"
-              *ngIf="columnFilter.filter === 'text' && columnConfig.extraFilter === 'choice-type-by-name'"
-              [entityType]="entityType"
-              class="overflow-hidden-container"
-            ></app-choice-type-dropdown-filter>
-          </ng-container>
-        </ng-template>
-
-        <ng-template kendoGridCellTemplate let-dataItem>
-          <app-grid-cell
-            [column]="columnConfig"
-            [dataItem]="dataItem"
-            (checkboxChange)="onCheckboxChange($event, dataItem)"
-            (modifyEvent)="onModifyClick(dataItem)"
-            (deleteEvent)="onDeleteClick(dataItem)"
-            [createPermission]="createPermission ?? false"
-            [modifyPermission]="modifyPermission ?? false"
-            [deletePermission]="deletePermission ?? false"
-          ></app-grid-cell>
-        </ng-template>
-      </kendo-grid-column>
-    </ng-container>
-  </ng-container>
-
-  <ng-template kendoPagerTemplate>
-    <app-grid-paginator
-      style="width: 100%"
-      [state]="state"
-      (pageSizeChange)="onPageSizeChange($event)"
-    ></app-grid-paginator>
-  </ng-template>
+  @for (columnConfig of columns; track columnConfig) { @if (uiConfigApplications$ === null || (uiConfigApplications$ |
+  async); as uiConfigApplications) { @if (!columnConfig.hidden && isColumnEnabled(uiConfigApplications, columnConfig)) {
+  <kendo-grid-column
+    [field]="columnConfig.field"
+    [title]="columnConfig.title"
+    [sortable]="columnConfig.sortable ?? true"
+    [filter]="columnConfig.filter ?? 'text'"
+    [width]="
+      columnConfig.width !== undefined
+        ? columnConfig.width
+        : columnConfig.style === 'date'
+        ? defaultDateColumnWidth
+        : defaultColumnWidth
+    "
+    [sticky]="columnConfig.isSticky ?? false"
+    [minResizableWidth]="
+      columnConfig.minResizableWidth !== undefined
+        ? columnConfig.minResizableWidth
+        : columnConfig.filter === 'date'
+        ? defaultMinimumDateColumnWidth
+        : columnConfig.style === 'primary'
+        ? defaultPrimaryColumnMinimumWidth
+        : defaultMinimumColumnWidth
+    "
+    [headerClass]="{ 'mygrid-header-cell': true, 'not-sortable': columnConfig.sortable === false }"
+  >
+    <ng-template kendoGridHeaderTemplate let-column let-columnIndex="columnIndex">
+      <app-paragraph [bold]="true" color="primary-dark" class="sort-icon"
+        >{{ column.title }}
+        @if (columnConfig.helpText) {
+        <app-tooltip [alignCenter]="true" [text]="columnConfig.helpText">
+          <app-help-icon></app-help-icon>
+        </app-tooltip>
+        } @if (state?.sort; as sortItem) { @if (sortItem[0].field === column.field) { @if (sortItem[0].dir === 'asc') {
+        <app-arrow-up-icon></app-arrow-up-icon>
+        } @if (sortItem[0].dir === 'desc') {
+        <app-arrow-down-icon></app-arrow-down-icon>
+        } } }
+      </app-paragraph>
+    </ng-template>
+    <ng-template kendoGridFilterCellTemplate let-filter let-columnFilter="column">
+      @if (!columnConfig.noFilter) { @if (columnFilter.filter === 'text' && !columnConfig.extraFilter) {
+      <app-string-filter
+        [column]="columnFilter"
+        [filter]="filter"
+        [entityType]="entityType"
+        class="overflow-hidden-container"
+      ></app-string-filter>
+      } @if (columnFilter.filter === 'numeric') {
+      <app-numeric-filter
+        [column]="columnFilter"
+        [filter]="filter"
+        [entityType]="entityType"
+        class="overflow-hidden-container"
+      ></app-numeric-filter>
+      } @if (columnFilter.filter === 'date') {
+      <app-date-filter
+        [column]="columnFilter"
+        [filter]="filter"
+        [entityType]="entityType"
+        [columnConfig]="columnConfig"
+        class="overflow-hidden-container"
+      ></app-date-filter>
+      } @if ( columnFilter.filter === 'boolean' || (columnFilter.filter === 'text' && columnConfig.extraFilter ===
+      'enum') ) {
+      <app-dropdown-filter
+        [column]="columnFilter"
+        [filter]="filter"
+        [options]="columnConfig.extraData"
+        [entityType]="entityType"
+        class="overflow-hidden-container"
+      ></app-dropdown-filter>
+      } @if (columnFilter.filter === 'text' && columnConfig.extraFilter === 'organization-unit') {
+      <app-unit-dropdown-filter
+        [column]="columnFilter"
+        [filter]="filter"
+        class="dropdown-inline-display"
+        [entityType]="entityType"
+      ></app-unit-dropdown-filter>
+      } @if (columnFilter.filter === 'text' && columnConfig.extraFilter === 'choice-type') {
+      <app-choice-type-dropdown-filter
+        [column]="columnFilter"
+        [filter]="filter"
+        [choiceTypeName]="columnConfig.extraData"
+        [sortOptions]="columnConfig.sortFilter"
+        [entityType]="entityType"
+        class="overflow-hidden-container"
+      ></app-choice-type-dropdown-filter>
+      } @if (columnFilter.filter === 'text' && columnConfig.extraFilter === 'dropdown-from-column-data') {
+      <app-dropdown-column-data-filter
+        [column]="columnFilter"
+        [filter]="filter"
+        [serviceKey]="columnConfig.extraData"
+        [columnName]="columnConfig.field"
+        [entityType]="entityType"
+        class="overflow-hidden-container"
+      ></app-dropdown-column-data-filter>
+      } @if (columnFilter.filter === 'text' && columnConfig.extraFilter === 'choice-type-by-name') {
+      <app-choice-type-dropdown-filter
+        [column]="columnFilter"
+        [filter]="filter"
+        [choiceTypeName]="columnConfig.extraData"
+        [shouldFilterByChoiceTypeName]="true"
+        [entityType]="entityType"
+        class="overflow-hidden-container"
+      ></app-choice-type-dropdown-filter>
+      } }
+    </ng-template>
+    <ng-template kendoGridCellTemplate let-dataItem>
+      <app-grid-cell
+        [column]="columnConfig"
+        [dataItem]="dataItem"
+        (checkboxChange)="onCheckboxChange($event, dataItem)"
+        (modifyEvent)="onModifyClick(dataItem)"
+        (deleteEvent)="onDeleteClick(dataItem)"
+        (toggleEvent)="onToggleClick($event, dataItem)"
+        [createPermission]="createPermission ?? false"
+        [modifyPermission]="modifyPermission ?? false"
+        [deletePermission]="deletePermission ?? false"
+      ></app-grid-cell>
+    </ng-template>
+  </kendo-grid-column>
+  } } }
   <kendo-grid-messages
     pagerPage="Side"
     pagerOf="af"
@@ -172,7 +152,6 @@
     i18n-pagerOf
     i18n-pagerItems
   ></kendo-grid-messages>
-
   <ng-template kendoGridLoadingTemplate>
     <div class="loading-container">
       <app-loading></app-loading>
@@ -184,21 +163,17 @@
       <p i18n>Din søgning gav intet resultat</p>
     </div>
   </ng-template>
-
   <kendo-grid-excel [fileName]="getExportName()" [fetchData]="allData" [filterable]="true">
-    <ng-container *ngFor="let column of getFilteredExportColumns$() | async">
-      <ng-container *ngIf="column.style === 'excel-only'; else notExcelOnly">
-        <kendo-excelexport-column [title]="column.title" [field]="column.title"></kendo-excelexport-column>
-      </ng-container>
-      <ng-template #notExcelOnly>
-        <kendo-excelexport-column [title]="column.title" [field]="column.field"></kendo-excelexport-column>
-      </ng-template>
-    </ng-container>
+    @for (column of getFilteredExportColumns$() | async; track column) { @if (column.style === 'role-excel-only') {
+    <kendo-excelexport-column [title]="column.title" [field]="column.title"></kendo-excelexport-column>
+    } @else {
+    <kendo-excelexport-column [title]="column.title" [field]="column.field"></kendo-excelexport-column>
+    } }
   </kendo-grid-excel>
-
   <ng-template kendoGridToolbarTemplate position="bottom">
     <div class="toolbar-container">
       <app-paragraph i18n class="result-amount-padding">{{ totalDataAmount() }} resultater</app-paragraph>
     </div>
   </ng-template>
 </kendo-grid>
+}

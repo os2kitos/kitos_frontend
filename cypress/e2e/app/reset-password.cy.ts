@@ -7,6 +7,7 @@ describe('Reset password', () => {
   });
 
   it('Can send request for password reset', () => {
+    cy.getByDataCy('accordion-header').click();
     cy.getByDataCy('go-to-reset-password-text').click();
 
     const emailInput = 'jens@jensen.dk';

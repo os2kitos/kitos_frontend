@@ -1,4 +1,4 @@
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import {
   AbstractControl,
@@ -14,7 +14,7 @@ import { Actions, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { combineLatest, debounceTime, first, map } from 'rxjs';
-import { APICreateUserRequestDTO, APIUserResponseDTO } from 'src/app/api/v2';
+import { APICreateUserRequestDTO, APIOrganizationRoleChoice } from 'src/app/api/v2';
 import { ONLY_DIGITS_AND_WHITESPACE_REGEX } from 'src/app/shared/constants/regex-constants';
 import { removeWhitespace } from 'src/app/shared/helpers/string.helpers';
 import { StartPreferenceChoice } from 'src/app/shared/models/organization/organization-user/start-preference.model';
@@ -52,7 +52,6 @@ import { CreateUserDialogComponentStore } from './create-user-dialog.component-s
     ReactiveFormsModule,
     StandardVerticalContentGridComponent,
     TextBoxComponent,
-    NgIf,
     ParagraphComponent,
     TooltipComponent,
     DropdownComponent,
@@ -87,7 +86,7 @@ export class CreateUserDialogComponent extends BaseUserDialogComponent implement
     ]),
     phoneNumber: new FormControl<number | undefined>(undefined, [notDirtyAndEmptyStringValidator()]),
     startPreference: new FormControl<StartPreferenceChoice | undefined>(undefined),
-    roles: new FormControl<APIUserResponseDTO.RolesEnum[] | undefined>(undefined),
+    roles: new FormControl<APIOrganizationRoleChoice[] | undefined>(undefined),
     sendNotificationOnCreation: new FormControl<boolean>(false),
     rightsHolderAccess: new FormControl<boolean>(false),
     apiUser: new FormControl<boolean>(false),
@@ -95,17 +94,17 @@ export class CreateUserDialogComponent extends BaseUserDialogComponent implement
   });
 
   public readonly userInOtherOrgHelptext$ = this.noExistingUser$.pipe(
-    map((noExistingUser) => (noExistingUser ? '' : this.userInOtherOrgHelptext))
+    map((noExistingUser) => (noExistingUser ? '' : this.userInOtherOrgHelptext)),
   );
   private readonly userInOtherOrgHelptext = $localize`Denne bruger findes allerede i en anden organisation. Du kan kun redigere brugerens roller.`;
-  private selectedRoles: APIUserResponseDTO.RolesEnum[] = [];
+  private selectedRoles: APIOrganizationRoleChoice[] = [];
 
   constructor(
     private readonly actions$: Actions,
     private readonly dialog: MatDialogRef<CreateUserDialogComponent>,
     store: Store,
     componentStore: CreateUserDialogComponentStore,
-    userService: UserService
+    userService: UserService,
   ) {
     super(store, componentStore, userService);
   }
@@ -115,14 +114,14 @@ export class CreateUserDialogComponent extends BaseUserDialogComponent implement
       this.actions$
         .pipe(
           ofType(OrganizationUserActions.createUserSuccess, OrganizationUserActions.updateUserSuccess),
-          concatLatestFrom(() => this.store.select(selectUserUuid))
+          concatLatestFrom(() => this.store.select(selectUserUuid)),
         )
         .subscribe(([{ user }, userUuid]) => {
           if (user.uuid === userUuid) {
             this.store.dispatch(UserActions.authenticate());
           }
           this.onCancel();
-        })
+        }),
     );
 
     this.subscriptions.add(
@@ -132,7 +131,7 @@ export class CreateUserDialogComponent extends BaseUserDialogComponent implement
           if (!value) return;
 
           this.componentStore.getUserWithEmail(value);
-        })
+        }),
     );
 
     this.subscriptions.add(
@@ -142,7 +141,7 @@ export class CreateUserDialogComponent extends BaseUserDialogComponent implement
         } else {
           this.getEmailControl()?.setErrors(null);
         }
-      })
+      }),
     );
 
     this.subscriptions.add(
@@ -154,7 +153,7 @@ export class CreateUserDialogComponent extends BaseUserDialogComponent implement
         } else {
           this.createForm.enable();
         }
-      })
+      }),
     );
 
     this.createForm.get('email')?.valueChanges.subscribe(() => {
@@ -168,10 +167,10 @@ export class CreateUserDialogComponent extends BaseUserDialogComponent implement
 
   public sendCreateUserRequest(): void {
     const roles = this.selectedRoles;
-    roles.push(APICreateUserRequestDTO.RolesEnum.User);
+    roles.push(APIOrganizationRoleChoice.User);
     const rightsHolderAccess = this.createForm.controls.rightsHolderAccess.value;
     if (rightsHolderAccess) {
-      roles.push(APICreateUserRequestDTO.RolesEnum.RightsHolderAccess);
+      roles.push(APIOrganizationRoleChoice.RightsHolderAccess);
     }
 
     this.existingUserUuid$.pipe(first()).subscribe((existingUserUuid) => {
@@ -183,7 +182,7 @@ export class CreateUserDialogComponent extends BaseUserDialogComponent implement
     });
   }
 
-  public rolesChanged(roles: APIUserResponseDTO.RolesEnum[]): void {
+  public rolesChanged(roles: APIOrganizationRoleChoice[]): void {
     this.selectedRoles = roles;
   }
 
@@ -201,7 +200,7 @@ export class CreateUserDialogComponent extends BaseUserDialogComponent implement
       : this.createForm.controls.email.valid;
   }
 
-  private createUser(roles: APICreateUserRequestDTO.RolesEnum[]): void {
+  private createUser(roles: APIOrganizationRoleChoice[]): void {
     const firstName = this.createForm.controls.firstName.value;
     const lastName = this.createForm.controls.lastName.value;
     const email = this.createForm.controls.email.value;
@@ -231,7 +230,7 @@ export class CreateUserDialogComponent extends BaseUserDialogComponent implement
     this.store.dispatch(OrganizationUserActions.createUser(user));
   }
 
-  private updateExistingUser(existingUserUuid: string, roles: APICreateUserRequestDTO.RolesEnum[]): void {
+  private updateExistingUser(existingUserUuid: string, roles: APIOrganizationRoleChoice[]): void {
     this.store.dispatch(OrganizationUserActions.updateUser(existingUserUuid, { roles }));
   }
 

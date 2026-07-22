@@ -1,0 +1,18 @@
+<app-standard-vertical-content-grid>
+  @if (processedRelations.length > 0) {
+    <app-local-grid
+      [data]="processedRelations"
+      [columns]="columns"
+      [loading]="isLoading"
+      [modifyPermission]="modifyPermissions$ | async"
+      [deletePermission]="modifyPermissions$ | async"
+      (modifyEvent)="onModify($event)"
+      (deleteEvent)="onDelete($event)"
+      entityType="it-system-usage"
+      >
+    </app-local-grid>
+  } @else {
+    <app-empty-state [context]="isOutgoing ? 'emptyTable' : 'searchResult'" [text]="emptyText"> </app-empty-state>
+  }
+
+</app-standard-vertical-content-grid>

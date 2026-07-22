@@ -8,14 +8,14 @@ import { ExternalReferenceProperties } from 'src/app/shared/models/external-refe
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
 import { ExternalReferencesManagmentActions } from 'src/app/store/external-references-management/actions';
 import { CreateExternalReferenceDialogComponent } from '../create-external-reference-dialog/create-external-reference-dialog.component';
-import { NgIf } from '@angular/common';
+
 import { ExternalReferenceDialogComponent } from '../external-reference-dialog/external-reference-dialog.component';
 
 @Component({
   selector: 'app-edit-external-reference-dialog[initialModel][referenceUuid][entityType][masterReferenceIsReadOnly]',
   templateUrl: './edit-external-reference-dialog.component.html',
   styleUrls: ['./edit-external-reference-dialog.component.scss'],
-  imports: [NgIf, ExternalReferenceDialogComponent],
+  imports: [ExternalReferenceDialogComponent],
 })
 export class EditExternalReferenceDialogComponent extends BaseComponent implements OnInit {
   @Input() public referenceUuid!: string;

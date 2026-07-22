@@ -16,7 +16,7 @@ import {
   selectOrganizationType,
 } from 'src/app/store/user-store/selectors';
 import { StandardVerticalContentGridComponent } from '../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
-import { NgIf, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { CardComponent } from '../../../shared/components/card/card.component';
 import { CardHeaderComponent } from '../../../shared/components/card-header/card-header.component';
 import { FormGridComponent } from '../../../shared/components/form-grid/form-grid.component';
@@ -29,7 +29,6 @@ import { NumericInputComponent } from '../../../shared/components/numeric-input/
   styleUrl: './local-admin-information.component.scss',
   imports: [
     StandardVerticalContentGridComponent,
-    NgIf,
     CardComponent,
     CardHeaderComponent,
     FormGridComponent,
@@ -37,8 +36,8 @@ import { NumericInputComponent } from '../../../shared/components/numeric-input/
     ReactiveFormsModule,
     TextBoxComponent,
     NumericInputComponent,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class LocalAdminInformationComponent extends BaseComponent implements OnInit {
   public readonly organizationName$ = this.store.select(selectOrganizationName);
@@ -67,7 +66,7 @@ export class LocalAdminInformationComponent extends BaseComponent implements OnI
         ([name, cvr, type]) => {
           this.form.patchValue({
             nameControl: name,
-            cvrControl: this.GetCvrAsNumber(cvr),
+            cvrControl: this.GetCvrAsNumber(cvr ?? undefined),
             typeControl: mapOrganizationType(type),
           });
         },

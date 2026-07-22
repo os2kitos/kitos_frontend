@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { CookieService } from 'ngx-cookie';
 import { Observable, catchError, first, map, mergeMap, of, tap, throwError } from 'rxjs';
-import { APIV1AuthorizeINTERNALService } from 'src/app/api/v1';
+import { AuthorizeService } from 'src/app/api/v1';
 import { UserActions } from 'src/app/store/user-store/actions';
 import { selectXsrfToken } from 'src/app/store/user-store/selectors';
 import { XSRFCOOKIE, XSRFTOKEN } from '../constants/constants';
@@ -13,7 +13,7 @@ export class HttpXSRFInterceptor implements HttpInterceptor {
   constructor(
     private cookieService: CookieService,
     private store: Store,
-    private authorizeService: APIV1AuthorizeINTERNALService,
+    private authorizeService: AuthorizeService,
   ) {}
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

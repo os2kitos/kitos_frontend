@@ -1,0 +1,4 @@
+<div class="items-center-container overflow-hidden-container">
+  @let value = dataItem | searchProperty: column.field;
+  <app-chip [state]="getChipState(value)">{{ getChipText(value) }}</app-chip>
+</div>

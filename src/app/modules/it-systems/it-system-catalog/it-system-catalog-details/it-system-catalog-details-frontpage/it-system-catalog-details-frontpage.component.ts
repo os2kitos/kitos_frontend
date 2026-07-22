@@ -1,12 +1,13 @@
+import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { combineLatestWith, first, map } from 'rxjs';
 import { APIShallowOrganizationDTO } from 'src/app/api/v1';
 import {
   APIExternalReferenceDataResponseDTO,
   APIIdentityNamePairResponseDTO,
-  APIRecommendedArchiveDutyResponseDTO,
+  APIRecommendedArchiveDutyChoice,
   APIRegularOptionResponseDTO,
   APIUpdateItSystemRequestDTO,
 } from 'src/app/api/v2';
@@ -37,21 +38,21 @@ import {
 } from 'src/app/store/it-system/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
-import { ITSystemCatalogDetailsFrontpageComponentStore } from './it-system-catalog-details-frontpage.component-store';
-import { CardComponent } from '../../../../../shared/components/card/card.component';
 import { CardHeaderComponent } from '../../../../../shared/components/card-header/card-header.component';
-import { StatusChipComponent } from '../../../../../shared/components/status-chip/status-chip.component';
-import { FormGridComponent } from '../../../../../shared/components/form-grid/form-grid.component';
-import { TextBoxComponent } from '../../../../../shared/components/textbox/textbox.component';
+import { CardComponent } from '../../../../../shared/components/card/card.component';
+import { ContentBoxComponent } from '../../../../../shared/components/contentbox/contentbox.component';
 import { ConnectedDropdownComponent } from '../../../../../shared/components/dropdowns/connected-dropdown/connected-dropdown.component';
 import { DropdownComponent } from '../../../../../shared/components/dropdowns/dropdown/dropdown.component';
-import { ContentBoxComponent } from '../../../../../shared/components/contentbox/contentbox.component';
-import { NgFor, AsyncPipe } from '@angular/common';
+import { MultiSelectDropdownComponent } from '../../../../../shared/components/dropdowns/multi-select-dropdown/multi-select-dropdown.component';
 import { ExternalReferenceComponent } from '../../../../../shared/components/external-reference/external-reference.component';
+import { FormGridComponent } from '../../../../../shared/components/form-grid/form-grid.component';
+import { ParagraphComponent } from '../../../../../shared/components/paragraph/paragraph.component';
+import { StatusChipComponent } from '../../../../../shared/components/status-chip/status-chip.component';
 import { TextAreaComponent } from '../../../../../shared/components/textarea/textarea.component';
 import { TextBoxInfoComponent } from '../../../../../shared/components/textbox-info/textbox-info.component';
-import { ParagraphComponent } from '../../../../../shared/components/paragraph/paragraph.component';
+import { TextBoxComponent } from '../../../../../shared/components/textbox/textbox.component';
 import { ItSystemKleOverviewComponent } from '../../../shared/it-system-kle-overview/it-system-kle-overview.component';
+import { ITSystemCatalogDetailsFrontpageComponentStore } from './it-system-catalog-details-frontpage.component-store';
 
 @Component({
   selector: 'app-it-system-catalog-details-frontpage',
@@ -69,7 +70,6 @@ import { ItSystemKleOverviewComponent } from '../../../shared/it-system-kle-over
     ConnectedDropdownComponent,
     DropdownComponent,
     ContentBoxComponent,
-    NgFor,
     ExternalReferenceComponent,
     TextAreaComponent,
     TextBoxInfoComponent,
@@ -157,15 +157,12 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
 
   public onDropdownCleared() {
     this.patchFrontPage(
-      { recommendedArchiveDuty: { id: APIRecommendedArchiveDutyResponseDTO.IdEnum.Undecided, comment: '' } },
+      { recommendedArchiveDuty: { id: APIRecommendedArchiveDutyChoice.Undecided, comment: '' } },
       undefined,
     );
   }
 
-  public patchArchiveDutyId(
-    value: APIRecommendedArchiveDutyResponseDTO.IdEnum,
-    valueChange?: ValidatedValueChange<unknown>,
-  ) {
+  public patchArchiveDutyId(value: APIRecommendedArchiveDutyChoice, valueChange?: ValidatedValueChange<unknown>) {
     const archiveDutyRecommendationComment =
       this.itSystemFrontpageFormGroup.controls.recommendedArchiveDutyComment.value ?? undefined;
     this.patchFrontPage(
@@ -191,6 +188,8 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
     );
   }
 
+  public hasModifyPermission$ = this.store.select(selectITSystemHasModifyPermission);
+
   private subscribeToItSystem() {
     this.subscriptions.add(
       this.store
@@ -203,6 +202,7 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
           ),
         )
         .subscribe(([itSystem, hasModifyPermission, canModifyVisibility]) => {
+
           this.itSystemFrontpageFormGroup.patchValue({
             name: itSystem.name,
             parentSystem: itSystem.parentSystem,
@@ -223,7 +223,7 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
           if (hasModifyPermission) {
             this.itSystemFrontpageFormGroup.enable();
 
-            if (itSystem.recommendedArchiveDuty.id === APIRecommendedArchiveDutyResponseDTO.IdEnum.Undecided) {
+            if (itSystem.recommendedArchiveDuty.id === APIRecommendedArchiveDutyChoice.Undecided) {
               this.itSystemFrontpageFormGroup.controls.recommendedArchiveDutyComment.disable();
             } else {
               this.itSystemFrontpageFormGroup.controls.recommendedArchiveDutyComment.enable();

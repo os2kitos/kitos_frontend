@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { tapResponse } from '@ngrx/operators';
 import { switchMap, tap } from 'rxjs';
-import { APIUserReferenceResponseDTO, APIV2GlobalUserInternalINTERNALService } from 'src/app/api/v2';
+import { APIUserReferenceResponseDTO, GlobalUserInternalV2Service } from 'src/app/api/v2';
 import { ShallowUser, toShallowUser } from 'src/app/shared/models/userV2.model';
 
 interface State {
@@ -12,7 +12,7 @@ interface State {
 
 @Injectable()
 export class SystemIntegratorComponentStore extends ComponentStore<State> {
-  constructor(private readonly userApiService: APIV2GlobalUserInternalINTERNALService) {
+  constructor(private readonly userApiService: GlobalUserInternalV2Service) {
     super({ systemIntegrators: [], loading: false });
   }
 
@@ -34,13 +34,13 @@ export class SystemIntegratorComponentStore extends ComponentStore<State> {
       tap(() => this.setLoading(true)),
       switchMap(() =>
         this.userApiService.getManyGlobalUserInternalV2GetSystemIntegrators().pipe(
-          tapResponse(
-            (response: APIUserReferenceResponseDTO[]) => this.setSystemIntegrators(response.map(toShallowUser)),
-            (e) => {
+          tapResponse({
+            next: (response: APIUserReferenceResponseDTO[]) => this.setSystemIntegrators(response.map(toShallowUser)),
+            error: (e) => {
               console.error(e);
             },
-            () => this.setLoading(false),
-          ),
+            complete: () => this.setLoading(false),
+          }),
         ),
       ),
     ),

@@ -1,4 +1,4 @@
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
@@ -6,7 +6,7 @@ import { Actions, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { combineLatest, distinctUntilChanged, filter, first, map } from 'rxjs';
-import { APIItSystemPermissionsResponseDTO } from 'src/app/api/v2/model/itSystemPermissionsResponseDTO';
+import { APISystemDeletionConflict } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { NavigationDrawerItem } from 'src/app/shared/components/navigation-drawer/navigation-drawer.component';
@@ -30,6 +30,7 @@ import {
   selectItSystemUuid,
 } from 'src/app/store/it-system/selectors';
 import { selectOrganizationName } from 'src/app/store/user-store/selectors';
+import { selectITSystemUsageEnableUsageArchive } from 'src/app/store/organization/ui-module-customization/selectors';
 import { BreadcrumbsComponent } from '../../../../shared/components/breadcrumbs/breadcrumbs.component';
 import { ButtonComponent } from '../../../../shared/components/buttons/button/button.component';
 import { DetailsHeaderComponent } from '../../../../shared/components/details-header/details-header.component';
@@ -42,7 +43,6 @@ import { ITSystemCatalogDetailsComponentStore } from './it-system-catalog-detail
   styleUrl: './it-system-catalog-details.component.scss',
   providers: [ITSystemCatalogDetailsComponentStore],
   imports: [
-    NgIf,
     BreadcrumbsComponent,
     DetailsHeaderComponent,
     ButtonComponent,
@@ -68,6 +68,8 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
   public readonly hasUsageCreatePermission$ = this.store.select(selectITSystemUsageHasCreateCollectionPermission);
 
   public readonly hasUsageDeletePermission$ = this.componentStore.usageModifyPermission$;
+  public readonly systemUsageUuid$ = this.componentStore.systemUsageUuid$;
+  public readonly enableUsageArchive$ = this.store.select(selectITSystemUsageEnableUsageArchive);
 
   public readonly breadCrumbs$ = combineLatest([this.itSystemName$, this.itSystemUuid$]).pipe(
     map(([itSystemName, systemUuid]): BreadCrumb[] => [
@@ -125,6 +127,7 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
     this.subscribeToStateChangeEvents();
 
     this.componentStore.getUsageDeletePermissionsForItSystem();
+    this.componentStore.getSystemUsageUuidByItSystemAndOrganization(undefined);
   }
 
   public showRemoveDialog(): void {
@@ -151,31 +154,44 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
     );
   }
 
+  public handleArchiveClick() {
+    this.subscriptions.add(
+      this.systemUsageUuid$
+        .pipe(filterNullish(), first())
+        .subscribe((usageUuid) => this.dialogOpenerService.openArchiveSystemUsageDialog(usageUuid)),
+    );
+  }
+
   public showChangeInUseStateDialog(takingIntoUse: boolean): void {
     this.subscriptions.add(
-      this.organizationName$.pipe(first()).subscribe((organizationName) => {
-        let confirmationDialogRef;
-        if (takingIntoUse) {
-          confirmationDialogRef = this.dialogOpenerService.openTakeSystemIntoUseDialog();
-        } else {
-          confirmationDialogRef = this.dialogOpenerService.openTakeSystemOutOfUseDialog(organizationName);
-        }
+      combineLatest([this.organizationName$.pipe(first()), this.enableUsageArchive$.pipe(first())]).subscribe(
+        ([organizationName, enableUsageArchive]) => {
+          let confirmationDialogRef;
+          if (takingIntoUse) {
+            confirmationDialogRef = this.dialogOpenerService.openTakeSystemIntoUseDialog();
+          } else {
+            confirmationDialogRef = this.dialogOpenerService.openTakeSystemOutOfUseDialog({
+              organizationName,
+              extraAction: enableUsageArchive ? this.handleArchiveClick.bind(this) : undefined,
+            });
+          }
 
-        this.subscriptions.add(
-          confirmationDialogRef
-            .afterClosed()
-            .pipe(concatLatestFrom(() => this.itSystemUuid$))
-            .subscribe(([result, systemUuid]) => {
-              if (result === undefined) return;
+          this.subscriptions.add(
+            confirmationDialogRef
+              .afterClosed()
+              .pipe(concatLatestFrom(() => this.itSystemUuid$))
+              .subscribe(([result, systemUuid]) => {
+                if (result === undefined) return;
 
-              if (takingIntoUse) {
-                this.tryTakeIntoUse(result, systemUuid);
-                return;
-              }
-              this.tryTakeOutOfUse(result, systemUuid);
-            }),
-        );
-      }),
+                if (takingIntoUse) {
+                  this.tryTakeIntoUse(result, systemUuid);
+                  return;
+                }
+                this.tryTakeOutOfUse(result, systemUuid);
+              }),
+          );
+        },
+      ),
     );
   }
 
@@ -215,13 +231,13 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
       if (!conflicts || conflicts.length === 0) return '';
 
       let text = '';
-      if (conflicts.includes(APIItSystemPermissionsResponseDTO.DeletionConflictsEnum.HasChildSystems)) {
+      if (conflicts.includes(APISystemDeletionConflict.HasChildSystems)) {
         text += $localize`Systemet er registreret som "Overordnet System" for én eller flere IT Systemer. `;
       }
-      if (conflicts.includes(APIItSystemPermissionsResponseDTO.DeletionConflictsEnum.HasInterfaceExposures)) {
+      if (conflicts.includes(APISystemDeletionConflict.HasInterfaceExposures)) {
         text += $localize`Systemet er registreret som "Udstillet af" på én eller flere snitfladebeskrivelser i Snitfladekataloget. `;
       }
-      if (conflicts.includes(APIItSystemPermissionsResponseDTO.DeletionConflictsEnum.HasItSystemUsages)) {
+      if (conflicts.includes(APISystemDeletionConflict.HasItSystemUsages)) {
         text += $localize`Systemet er i anvendelse i én eller flere kommuner.`;
       }
 

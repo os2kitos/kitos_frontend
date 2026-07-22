@@ -8,9 +8,28 @@
         [formGroup]="form"
         formName="description"
         [value]="form.value.description ?? ''"
-        class="text-area-margin-bottom"
         data-cy="description-text-area"
       ></app-textarea>
+      @if (isRoleOptionType()) {
+        <app-checkbox
+          text="Ekstern brug"
+          i18n-text
+          [formGroup]="form"
+          formName="isExternallyUsed"
+          data-cy="is-externally-used-checkbox"
+          [labelPosition]="'after'"
+        ></app-checkbox>
+        <app-textarea
+          text="Beskrivelse af ekstern brug"
+          i18n-text
+          [formGroup]="form"
+          formName="externallyUsedDescription"
+          [value]="form.value.externallyUsedDescription ?? ''"
+          [disabled]="!form.value.isExternallyUsed"
+          class="text-area-margin-bottom"
+          data-cy="externally-used-description-text-area"
+        ></app-textarea>
+      }
     </app-standard-vertical-content-grid>
   </form>
   <app-dialog-actions>

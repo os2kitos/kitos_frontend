@@ -38,7 +38,7 @@ export const selectItContractDataProcessingRegistrations = createSelector(
 );
 export const selectItContractExternalReferences = createSelector(
   selectContract,
-  (contract) => contract?.externalReferences,
+  (contract) => contract?.externalReferences ?? undefined,
 );
 export const selectItContractValidity = createSelector(selectContract, (contract) => contract?.general.validity);
 export const selectItContractIsValid = createSelector(selectItContractValidity, (validity) => validity?.valid);
@@ -82,6 +82,6 @@ export const selectAppliedProcurementPlansCache = createSelector(
 );
 export const selectAppliedProcurementPlans = createSelector(selectAppliedProcurementPlansCache, (cache) => cache.value);
 
-export const selectItContractRights = createSelector(selectContract, (contract) => contract?.roles);
+export const selectItContractRights = createSelector(selectContract, (contract) => contract?.roles ?? undefined);
 
 export const selectItContractRightUuidPairs = createSelector(selectItContractRights, mapToRoleAssignmentsRequests);

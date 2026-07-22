@@ -1,13 +1,16 @@
 <app-segment [buttons]="segmentOptions" [(selected)]="selectedSegment"> </app-segment>
 
-<app-local-admin-it-system-usage-ui-customization
-  *ngIf="selectedSegment === LocalAdminModuleSegmentOptionType.UiCustomization"
-></app-local-admin-it-system-usage-ui-customization>
+@if (selectedSegment === LocalAdminModuleSegmentOptionType.UiCustomization) {
+  <app-local-admin-it-system-usage-ui-customization
+  ></app-local-admin-it-system-usage-ui-customization>
+}
 
-<app-local-admin-it-system-usage-option-types
-  *ngIf="selectedSegment === LocalAdminModuleSegmentOptionType.RegularOptionTypes"
-></app-local-admin-it-system-usage-option-types>
+@if (selectedSegment === LocalAdminModuleSegmentOptionType.RegularOptionTypes) {
+  <app-local-admin-it-system-usage-option-types
+  ></app-local-admin-it-system-usage-option-types>
+}
 
-<app-local-admin-it-system-usage-role-option-types
-  *ngIf="selectedSegment === LocalAdminModuleSegmentOptionType.RoleOptionTypes"
-></app-local-admin-it-system-usage-role-option-types>
+@if (selectedSegment === LocalAdminModuleSegmentOptionType.RoleOptionTypes) {
+  <app-local-admin-it-system-usage-role-option-types
+  ></app-local-admin-it-system-usage-role-option-types>
+}

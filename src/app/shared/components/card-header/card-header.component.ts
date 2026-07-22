@@ -1,12 +1,12 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { NgIf } from '@angular/common';
+
 import { HelpButtonComponent } from '../help-button/help-button.component';
 
 @Component({
   selector: 'app-card-header',
   templateUrl: 'card-header.component.html',
   styleUrls: ['card-header.component.scss'],
-  imports: [NgIf, HelpButtonComponent],
+  imports: [HelpButtonComponent],
 })
 export class CardHeaderComponent {
   @Input() public title?: string;

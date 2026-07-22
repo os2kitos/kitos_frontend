@@ -1,38 +1,56 @@
 <ng-content></ng-content>
 
-<td>
-  <app-paragraph paragraphSize="small">
-    <app-content-with-tooltip [description]="rolesDictionary[role.assignment.role.uuid]?.description">
-      <app-selected-option-type-text
-        [availableOptions]="rolesDictionary"
-        [selectedOption]="role.assignment.role"
-        class="text-padding"
-      >
-      </app-selected-option-type-text>
-    </app-content-with-tooltip>
-  </app-paragraph>
-</td>
-<td>
-  <app-paragraph>
-    <app-boolean-circle [value]="rolesDictionary[role.assignment.role.uuid]?.writeAccess || false">
-    </app-boolean-circle>
-  </app-paragraph>
-</td>
-<td>
-  <app-paragraph>{{ role.assignment.user.name }}</app-paragraph>
-</td>
-<td>
-  <app-content-space-between>
-    <app-paragraph>
-      {{ role.assignment.user.email }}
+@if (availableRoles$ | async; as rolesDictionary) {
+  <td>
+    <app-paragraph paragraphSize="small">
+      <app-content-with-tooltip [description]="rolesDictionary[role.assignment.role.uuid]?.description">
+        <app-selected-option-type-text
+          [selectedOption]="role.assignment.role"
+          [availableOptions$]="availableRoles$"
+          class="text-padding"
+          >
+        </app-selected-option-type-text>
+      </app-content-with-tooltip>
     </app-paragraph>
-    <app-table-row-actions *ngIf="hasModifyPermission">
-      <app-icon-button (buttonClick)="onEditClick()" data-cy="edit-role-button">
-        <app-pencil-icon></app-pencil-icon>
-      </app-icon-button>
-      <app-icon-button (buttonClick)="onRemoveClick()">
-        <app-trashcan-icon></app-trashcan-icon>
-      </app-icon-button>
-    </app-table-row-actions>
-  </app-content-space-between>
-</td>
+  </td>
+  <td>
+    <app-paragraph>
+      <app-boolean-circle [value]="rolesDictionary[role.assignment.role.uuid]?.writeAccess || false">
+      </app-boolean-circle>
+    </app-paragraph>
+  </td>
+  <td>
+    <app-paragraph>
+      <app-tooltip
+        [text]="
+          showExternallyUsedTooltip(rolesDictionary)
+            ? getExternallyUsedDescription(rolesDictionary[role.assignment.role.uuid]?.externallyAvailableDescription ?? undefined)
+            : ''
+        "
+        >
+        <app-boolean-circle [value]="rolesDictionary[role.assignment.role.uuid]?.isExternallyAvailable || false">
+        </app-boolean-circle>
+      </app-tooltip>
+    </app-paragraph>
+  </td>
+  <td>
+    <app-paragraph>{{ role.assignment.user.name }}</app-paragraph>
+  </td>
+  <td>
+    <app-content-space-between>
+      <app-paragraph>
+        {{ role.assignment.user.email }}
+      </app-paragraph>
+      @if (hasModifyPermission) {
+        <app-table-row-actions>
+          <app-icon-button (buttonClick)="onEditClick()" data-cy="edit-role-button">
+            <app-pencil-icon></app-pencil-icon>
+          </app-icon-button>
+          <app-icon-button (buttonClick)="onRemoveClick()">
+            <app-trashcan-icon></app-trashcan-icon>
+          </app-icon-button>
+        </app-table-row-actions>
+      }
+    </app-content-space-between>
+  </td>
+}

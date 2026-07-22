@@ -93,7 +93,7 @@ function updateIsLoading(nextState: RoleOptionTypeState, optionType: RoleOptionT
   nextState[optionType] = {
     ...currentOptionState,
     isLoading,
-  };
+  } as any;
 
   return nextState;
 }

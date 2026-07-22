@@ -10,4 +10,11 @@ Firefox ESR
 not dead
 not IE 9-11
 not kaios 2.5
+not kaios 3.0-3.1
 not op_mini all
+not and_qq < 15
+not and_uc < 16
+not op_mob < 81
+not samsung < 29
+not android > 140
+not opera > 120

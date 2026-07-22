@@ -87,7 +87,7 @@ export class PaymentDialogComponent extends BaseComponent implements OnInit {
         other: this.payment?.other,
         accountingEntry: this.payment?.accountingEntry ?? '',
         auditStatus: mapAuditModel(this.payment?.auditStatus),
-        auditDate: optionalNewDate(this.payment?.auditDate),
+        auditDate: optionalNewDate(this.payment?.auditDate ?? undefined),
         note: this.payment?.note,
       });
       this.paymentForm.enable();

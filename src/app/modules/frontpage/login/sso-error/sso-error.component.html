@@ -1,37 +1,57 @@
 <app-standard-vertical-content-grid gapSize="small">
   <app-paragraph [bold]="true" color="error" class="paragraph-center">
-    <ng-container *ngIf="compareErrorCode(ssoErrorCode, errorCodes.Unknown)" i18n>Uklassificeret SSO fejl</ng-container>
-    <ng-container *ngIf="compareErrorCode(ssoErrorCode, errorCodes.MissingPrivilege)" i18n
-      >Den bruger, som du er logget på med, har ikke adgang til Kitos</ng-container
-    >
-    <ng-container *ngIf="compareErrorCode(ssoErrorCode, errorCodes.NoOrganizationAndRole)" i18n
-      >Den bruger, som du forsøger at logge på med, kan ikke autooprettes i Kitos da brugerens organisation er
+    @if (compareErrorCode(ssoErrorCode, errorCodes.Unknown)) {
+      <ng-container i18n>Uklassificeret SSO fejl</ng-container>
+    }
+    @if (compareErrorCode(ssoErrorCode, errorCodes.MissingPrivilege)) {
+      <ng-container i18n
+        >Den bruger, som du er logget på med, har ikke adgang til Kitos</ng-container
+        >
+      }
+      @if (compareErrorCode(ssoErrorCode, errorCodes.NoOrganizationAndRole)) {
+        <ng-container i18n
+          >Den bruger, som du forsøger at logge på med, kan ikke autooprettes i Kitos da brugerens organisation er
       ukendt</ng-container
-    >
-    <ng-container *ngIf="compareErrorCode(ssoErrorCode, errorCodes.UserNotFoundInSTS)" i18n
-      >Den bruger, som du forsøger at logge på med, er ukendt i det fælleskommunale STS Organisation eller tilhører en
+          >
+        }
+        @if (compareErrorCode(ssoErrorCode, errorCodes.UserNotFoundInSTS)) {
+          <ng-container i18n
+            >Den bruger, som du forsøger at logge på med, er ukendt i det fælleskommunale STS Organisation eller tilhører en
       kommune uden godkendt serviceaftale</ng-container
-    >
-    <ng-container *ngIf="compareErrorCode(ssoErrorCode, errorCodes.UnableToCreateUserWithUnknownOrganization)" i18n
-      >Den bruger, som du forsøger at logge på med, kan ikke autooprettes i Kitos da brugerens organisation er
+            >
+          }
+          @if (compareErrorCode(ssoErrorCode, errorCodes.UnableToCreateUserWithUnknownOrganization)) {
+            <ng-container i18n
+              >Den bruger, som du forsøger at logge på med, kan ikke autooprettes i Kitos da brugerens organisation er
       ukendt</ng-container
-    >
-  </app-paragraph>
-  <app-paragraph color="error" class="paragraph-center"
-    ><ng-container *ngIf="compareErrorCode(ssoErrorCode, errorCodes.Unknown)" i18n>
+              >
+            }
+          </app-paragraph>
+          <app-paragraph color="error" class="paragraph-center"
+            >@if (compareErrorCode(ssoErrorCode, errorCodes.Unknown)) {
+            <ng-container i18n>
       Prøv igen og kontakt venligst Kitos sekretariatet, hvis problemet fortsætter</ng-container
-    >
-    <ng-container *ngIf="compareErrorCode(ssoErrorCode, errorCodes.MissingPrivilege)" i18n>
+              >
+            }
+            @if (compareErrorCode(ssoErrorCode, errorCodes.MissingPrivilege)) {
+              <ng-container i18n>
       Kontakt venligst din lokale IT administrator for at få tildelt adgang til Kitos</ng-container
-    >
-    <ng-container *ngIf="compareErrorCode(ssoErrorCode, errorCodes.NoOrganizationAndRole)" i18n>
+                >
+              }
+              @if (compareErrorCode(ssoErrorCode, errorCodes.NoOrganizationAndRole)) {
+                <ng-container i18n>
       Kontakt venligst Kitos sekretariatet, hvis I ønsker at tilslutte jer samarbejdet omkring Kitos</ng-container
-    >
-    <ng-container *ngIf="compareErrorCode(ssoErrorCode, errorCodes.UserNotFoundInSTS)" i18n>
+                  >
+                }
+                @if (compareErrorCode(ssoErrorCode, errorCodes.UserNotFoundInSTS)) {
+                  <ng-container i18n>
       Kontakt venligst din lokale IT administrator</ng-container
-    >
-    <ng-container *ngIf="compareErrorCode(ssoErrorCode, errorCodes.UnableToCreateUserWithUnknownOrganization)" i18n>
+                    >
+                  }
+                  @if (compareErrorCode(ssoErrorCode, errorCodes.UnableToCreateUserWithUnknownOrganization)) {
+                    <ng-container i18n>
       Kontakt venligst Kitos sekretariatet, hvis I ønsker at tilslutte jer samarbejdet omkring Kitos</ng-container
-    ></app-paragraph
-  ></app-standard-vertical-content-grid
->
+                      >
+                      }</app-paragraph
+                      ></app-standard-vertical-content-grid
+                      >

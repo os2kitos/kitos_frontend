@@ -1,20 +1,18 @@
-import { APIOrganizationResponseDTO } from 'src/app/api/v2';
+import { APIOrganizationType } from 'src/app/api/v2';
 import { OrganizationTypeEnum } from '../models/organization/organization-odata.model';
 
-export function mapOrganizationType(
-  source: APIOrganizationResponseDTO.OrganizationTypeEnum | undefined,
-): string | undefined {
+export function mapOrganizationType(source: APIOrganizationType | undefined): string | undefined {
   switch (source) {
-    case APIOrganizationResponseDTO.OrganizationTypeEnum.Municipality: {
+    case APIOrganizationType.Municipality: {
       return $localize`Kommune`;
     }
-    case APIOrganizationResponseDTO.OrganizationTypeEnum.CommunityOfInterest: {
+    case APIOrganizationType.CommunityOfInterest: {
       return $localize`Interessefællesskab`;
     }
-    case APIOrganizationResponseDTO.OrganizationTypeEnum.Company: {
+    case APIOrganizationType.Company: {
       return $localize`Virksomhed`;
     }
-    case APIOrganizationResponseDTO.OrganizationTypeEnum.OtherPublicAuthority: {
+    case APIOrganizationType.OtherPublicAuthority: {
       return $localize`Anden offentlig myndighed`;
     }
     default:
@@ -22,15 +20,15 @@ export function mapOrganizationType(
   }
 }
 
-export function mapOrgTypeToDtoType(type: OrganizationTypeEnum): APIOrganizationResponseDTO.OrganizationTypeEnum {
+export function mapOrgTypeToDtoType(type: OrganizationTypeEnum): APIOrganizationType {
   switch (type) {
     case OrganizationTypeEnum.Municipality:
-      return APIOrganizationResponseDTO.OrganizationTypeEnum.Municipality;
+      return APIOrganizationType.Municipality;
     case OrganizationTypeEnum.CommunityOfInterest:
-      return APIOrganizationResponseDTO.OrganizationTypeEnum.CommunityOfInterest;
+      return APIOrganizationType.CommunityOfInterest;
     case OrganizationTypeEnum.Company:
-      return APIOrganizationResponseDTO.OrganizationTypeEnum.Company;
+      return APIOrganizationType.Company;
     case OrganizationTypeEnum.OtherPublicAuthority:
-      return APIOrganizationResponseDTO.OrganizationTypeEnum.OtherPublicAuthority;
+      return APIOrganizationType.OtherPublicAuthority;
   }
 }

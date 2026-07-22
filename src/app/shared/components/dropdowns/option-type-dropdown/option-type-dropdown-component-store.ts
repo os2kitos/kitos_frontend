@@ -53,11 +53,11 @@ export class OptionTypeDropdownComponentStore extends ComponentStore<State> {
       concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       switchMap(([optionType, organizationUuid]) => {
         return this.getOptionTypesInternal(organizationUuid, optionType).pipe(
-          tapResponse(
-            (optionTypes) => this.setOptionTypes(optionTypes),
-            (e) => console.error(e),
-            () => this.setLoading(false),
-          ),
+          tapResponse({
+    next: (optionTypes) => this.setOptionTypes(optionTypes),
+    error: (e) => console.error(e),
+    complete: () => this.setLoading(false)
+}),
         );
       }),
     );

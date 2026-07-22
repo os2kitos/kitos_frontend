@@ -1,4 +1,10 @@
-<p *ngIf="reference">
-  <a *ngIf="isValidLink" target="_blank" href="{{ reference.url }}">{{ reference.title }}</a>
-  <ng-container *ngIf="isValidLink === false">{{ invalidText }}</ng-container>
-</p>
+@if (reference) {
+  <p>
+    @if (isValidLink) {
+      <a target="_blank" href="{{ reference.url }}">{{ reference.title }}</a>
+    }
+    @if (isValidLink === false) {
+      {{ invalidText }}
+    }
+  </p>
+}

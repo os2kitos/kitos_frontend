@@ -5,13 +5,10 @@ import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
 import { catchError, map, mergeMap, of, switchMap } from 'rxjs';
-import {
-  APIItSystemResponseDTO,
-  APIV2ItSystemService,
-  APIV2ItSystemUsageMigrationINTERNALService,
-} from 'src/app/api/v2';
+import { APIItSystemResponseDTO, ItSystemUsageMigrationV2Service, ItSystemV2Service } from 'src/app/api/v2';
 import { CATALOG_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-constants';
 import {
+  addSecondaryContainsField,
   castContainsFieldToString,
   replaceQueryByMultiplePropertyContains,
 } from 'src/app/shared/helpers/odata-query.helpers';
@@ -21,21 +18,27 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ExternalReferencesApiService } from 'src/app/shared/services/external-references-api-service.service';
 import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 import { GridDataCacheService } from 'src/app/shared/services/grid-data-cache.service';
+import { ITSystemUsageActions } from '../it-system-usage/actions';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { ITSystemActions } from './actions';
-import { selectItSystemExternalReferences, selectItSystemUuid, selectPreviousGridState } from './selectors';
+import {
+  selectItSystemExternalReferences,
+  selectItSystemUuid,
+  selectPreviousGridState,
+  selectSystemGridState,
+} from './selectors';
 
 @Injectable()
 export class ITSystemEffects {
   constructor(
     private actions$: Actions,
     private store: Store,
-    @Inject(APIV2ItSystemService) private apiItSystemService: APIV2ItSystemService,
+    @Inject(ItSystemV2Service) private apiItSystemService: ItSystemV2Service,
     private httpClient: HttpClient,
     private externalReferenceApiService: ExternalReferencesApiService,
     private gridColumnStorageService: GridColumnStorageService,
-    @Inject(APIV2ItSystemUsageMigrationINTERNALService)
-    private readonly itSystemUsageMigrationService: APIV2ItSystemUsageMigrationINTERNALService,
+    @Inject(ItSystemUsageMigrationV2Service)
+    private readonly itSystemUsageMigrationService: ItSystemUsageMigrationV2Service,
     private gridDataCacheService: GridDataCacheService,
   ) {}
 
@@ -72,7 +75,7 @@ export class ITSystemEffects {
         return this.httpClient
           .get<OData>(
             `/odata/ItSystems?$expand=BusinessType($select=Name),` +
-              `BelongsTo($select=Name),` +
+              `BelongsTo($select=Name,Disabled,Cvr),` +
               `TaskRefs($select=Description,TaskKey),` +
               `Parent($select=Name,Disabled),` +
               `Organization($select=Id,Name),` +
@@ -142,20 +145,22 @@ export class ITSystemEffects {
       concatLatestFrom(() => this.store.select(selectItSystemUuid)),
       switchMap(([{ itSystem, customSuccessText, customErrorText }, systemUuid]) => {
         if (!systemUuid) return of(ITSystemActions.patchITSystemError());
-        return this.apiItSystemService.patchSingleItSystemV2PatchItSystem({ uuid: systemUuid, request: itSystem }).pipe(
-          map((itSystem) => ITSystemActions.patchITSystemSuccess(itSystem, customSuccessText)),
-          catchError((err: HttpErrorResponse) => {
-            if (err.status === 409) {
-              return of(
-                ITSystemActions.patchITSystemError(
-                  $localize`Fejl! Feltet kunne ikke ændres da værdien den allerede findes i KITOS!`,
-                ),
-              );
-            } else {
-              return of(ITSystemActions.patchITSystemError(customErrorText));
-            }
-          }),
-        );
+        return this.apiItSystemService
+          .patchSingleItSystemV2PatchItSystem({ uuid: systemUuid, aPIUpdateItSystemRequestDTO: itSystem })
+          .pipe(
+            map((itSystem) => ITSystemActions.patchITSystemSuccess(itSystem, customSuccessText)),
+            catchError((err: HttpErrorResponse) => {
+              if (err.status === 409) {
+                return of(
+                  ITSystemActions.patchITSystemError(
+                    $localize`Fejl! Feltet kunne ikke ændres da værdien den allerede findes i KITOS!`,
+                  ),
+                );
+              } else {
+                return of(ITSystemActions.patchITSystemError(customErrorText));
+              }
+            }),
+          );
       }),
     );
   });
@@ -254,10 +259,12 @@ export class ITSystemEffects {
       ofType(ITSystemActions.createItSystem),
       concatLatestFrom(() => this.store.select(selectOrganizationUuid)),
       switchMap(([{ name, openAfterCreate }, organizationUuid]) => {
-        return this.apiItSystemService.postSingleItSystemV2PostItSystem({ request: { name, organizationUuid } }).pipe(
-          map(({ uuid }) => ITSystemActions.createItSystemSuccess(uuid, openAfterCreate)),
-          catchError(() => of(ITSystemActions.createItSystemError())),
-        );
+        return this.apiItSystemService
+          .postSingleItSystemV2PostItSystem({ aPICreateItSystemRequestDTO: { name, organizationUuid } })
+          .pipe(
+            map(({ uuid }) => ITSystemActions.createItSystemSuccess(uuid, openAfterCreate)),
+            catchError(() => of(ITSystemActions.createItSystemError())),
+          );
       }),
     );
   });
@@ -278,18 +285,37 @@ export class ITSystemEffects {
       ),
     );
   });
+
+  archiveItSystemUsageRefreshSystems$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.archiveItSystemUsageSuccess),
+      concatLatestFrom(() => this.store.select(selectSystemGridState)),
+      map(([_, gridState]) => ITSystemActions.getITSystems(gridState)),
+    );
+  });
+
+  archiveItSystemUsageRefreshSystem$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.archiveItSystemUsageSuccess),
+      concatLatestFrom(() => this.store.select(selectItSystemUuid).pipe(filterNullish())),
+      map(([_, systemUuid]) => ITSystemActions.getITSystem(systemUuid)),
+    );
+  });
 }
 
 function applyQueryFixes(odataString: string): string {
   let fixedOdataString = odataString
     .replace(/(\w+\()KLEIds(.*\))/, 'TaskRefs/any(c: $1c/TaskKey$2)')
     .replace(/(\w+\()KLENames(.*\))/, 'TaskRefs/any(d: $1d/Description$2)')
+    .replace(/LicensingAndCodeModels eq '([^']+)'/g, "LicensingAndCodeModels/any(e: e eq '$1')")
     .replace('ReferenceTitle', 'Reference/Title')
     .replace('ReferenceURL', 'Reference/URL')
     .replace('ReferenceExternalReferenceId', 'Reference/ExternalReferenceId');
 
   fixedOdataString = castContainsFieldToString(fixedOdataString, 'Uuid');
   fixedOdataString = castContainsFieldToString(fixedOdataString, 'ExternalUuid');
+
+  fixedOdataString = addSecondaryContainsField(fixedOdataString, 'BelongsTo/Name', 'BelongsTo/Cvr');
 
   const lastChangedByUserSearchedProperties = ['Name', 'LastName'];
   fixedOdataString = replaceQueryByMultiplePropertyContains(

@@ -1,2 +1,4 @@
-<app-it-system-hierarchy-table *ngIf="systemUuid$ | async as systemUuid" [systemUuid]="systemUuid">
-</app-it-system-hierarchy-table>
+@if (systemUuid$ | async; as systemUuid) {
+  <app-it-system-hierarchy-table [systemUuid]="systemUuid">
+  </app-it-system-hierarchy-table>
+}

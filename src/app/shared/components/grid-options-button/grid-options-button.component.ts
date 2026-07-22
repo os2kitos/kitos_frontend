@@ -9,7 +9,7 @@ import { ColumnConfigService } from '../../services/column-config.service';
 import { MenuButtonComponent } from '../buttons/menu-button/menu-button.component';
 import { ParagraphComponent } from '../paragraph/paragraph.component';
 import { GridFilterButtonsComponent } from './grid-filter-buttons/grid-filter-buttons.component';
-import { NgIf, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { DividerComponent } from '../divider/divider.component';
 import { GridColumnConfigButtonsComponent } from './grid-column-config-buttons/grid-column-config-buttons.component';
 import { ResetToOrgColumnsConfigButtonComponent } from '../reset-to-org-columns-config-button/reset-to-org-columns-config-button.component';
@@ -24,14 +24,13 @@ import { HelpIconComponent } from '../icons/help.component';
     MenuButtonComponent,
     ParagraphComponent,
     GridFilterButtonsComponent,
-    NgIf,
     DividerComponent,
     GridColumnConfigButtonsComponent,
     ResetToOrgColumnsConfigButtonComponent,
     MenuButtonItemComponent,
     HelpIconComponent,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class GridOptionsButtonComponent {
   @Input() entityType!: RegistrationEntityTypes;

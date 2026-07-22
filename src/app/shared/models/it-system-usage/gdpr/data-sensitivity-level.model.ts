@@ -1,29 +1,27 @@
-import { APIGDPRRegistrationsResponseDTO } from 'src/app/api/v2';
+import { APIDataSensitivityLevelChoice } from 'src/app/api/v2';
 
 export interface DataSensitivityLevel {
   name: string;
-  value: APIGDPRRegistrationsResponseDTO.DataSensitivityLevelsEnum;
+  value: APIDataSensitivityLevelChoice;
 }
 
 export const dataSensitivityLevelOptions: DataSensitivityLevel[] = [
-  { name: $localize`Ingen personoplysninger`, value: APIGDPRRegistrationsResponseDTO.DataSensitivityLevelsEnum.None },
+  { name: $localize`Ingen personoplysninger`, value: APIDataSensitivityLevelChoice.None },
   {
     name: $localize`Almindelige personoplysninger`,
-    value: APIGDPRRegistrationsResponseDTO.DataSensitivityLevelsEnum.PersonData,
+    value: APIDataSensitivityLevelChoice.PersonData,
   },
   {
     name: $localize`Følsomme personoplysninger`,
-    value: APIGDPRRegistrationsResponseDTO.DataSensitivityLevelsEnum.SensitiveData,
+    value: APIDataSensitivityLevelChoice.SensitiveData,
   },
   {
     name: $localize`Straffedomme og lovovertrædelser`,
-    value: APIGDPRRegistrationsResponseDTO.DataSensitivityLevelsEnum.LegalData,
+    value: APIDataSensitivityLevelChoice.LegalData,
   },
 ];
 
-export const mapDataSensitivityLevel = (
-  value?: APIGDPRRegistrationsResponseDTO.DataSensitivityLevelsEnum,
-): DataSensitivityLevel | undefined => {
+export const mapDataSensitivityLevel = (value?: APIDataSensitivityLevelChoice): DataSensitivityLevel | undefined => {
   return dataSensitivityLevelOptions.find((option) => option.value === value);
 };
 

@@ -11,6 +11,7 @@ import { ItContractNotificationsComponent } from './it-contract-details/it-contr
 import { ItContractReferencesComponent } from './it-contract-details/it-contract-references/it-contract-references.component';
 import { ItContractRolesComponent } from './it-contract-details/it-contract-roles/it-contract-roles.component';
 import { ItContractSystemsComponent } from './it-contract-details/it-contract-systems/it-contract-systems.component';
+import { ItContractSupplierComponent } from './it-contract-supplier/it-contract-supplier.component';
 import { ItContractsRootComponent } from './it-contracts-root.component';
 import { ITContractsComponent } from './overview/it-contracts.component';
 
@@ -20,11 +21,20 @@ const routes: Routes = [
     component: ItContractsRootComponent,
     children: [
       {
-        path: AppPath.root,
+        path: AppPath.contracts,
         component: ITContractsComponent,
       },
       {
+        path: AppPath.suppliers,
+        component: ItContractSupplierComponent,
+      },
+      {
         path: AppPath.uuid,
+        pathMatch: 'full',
+        redirectTo: AppPath.contractDetails,
+      },
+      {
+        path: AppPath.contractDetails,
         component: ItContractDetailsComponent,
         children: [
           { path: AppPath.frontpage, component: ItContractFrontpageComponent },
@@ -39,6 +49,7 @@ const routes: Routes = [
           { path: AppPath.root, pathMatch: 'full', redirectTo: AppPath.frontpage },
         ],
       },
+      { path: AppPath.root, pathMatch: 'full', redirectTo: AppPath.contracts },
     ],
   },
 ];

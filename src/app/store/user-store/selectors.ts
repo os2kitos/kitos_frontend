@@ -2,6 +2,7 @@ import { createSelector } from '@ngrx/store';
 import { LOCAL_ADMIN_ROLE } from 'src/app/shared/constants/role.constants';
 import { hasRoleInOrganization } from 'src/app/shared/helpers/role-helpers';
 import { GetOptionsBasedOnRights } from 'src/app/shared/models/organization/organization-user/user-role.model';
+import { selectOrganizationUserModifyPermissions } from '../organization/organization-user/selectors';
 import { userFeature } from './reducer';
 
 export const {
@@ -55,9 +56,25 @@ export const selectGridConfigModificationPermission = createSelector(
 export const selectAvailableRoleDropdownValues = createSelector(
   selectUserIsGlobalAdmin,
   selectUserOrganizationRights,
+  selectOrganizationUserModifyPermissions,
+  selectOrganizationUuid,
+  (isGlobalAdmin, organizationRights, modifyPermissions, organizationUuid) => {
+    return GetOptionsBasedOnRights(
+      isGlobalAdmin,
+      organizationRights ?? [],
+      modifyPermissions ?? undefined,
+      organizationUuid ?? '',
+    );
+  },
+);
+
+export const selectCanClearRoleDropdown = createSelector(
+  selectUserIsGlobalAdmin,
+  selectUserOrganizationRights,
   selectOrganizationUuid,
   (isGlobalAdmin, organizationRights, organizationUuid) => {
-    return GetOptionsBasedOnRights(isGlobalAdmin, organizationRights ?? [], organizationUuid ?? '');
+    const isLocalAdmin = hasRoleInOrganization(organizationRights, organizationUuid, LOCAL_ADMIN_ROLE);
+    return isGlobalAdmin || isLocalAdmin;
   },
 );
 

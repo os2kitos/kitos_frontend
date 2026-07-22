@@ -9,7 +9,7 @@ import { CreateEntityDialogComponentStore } from '../create-entity-dialog.compon
 import { DialogComponent } from '../../dialogs/dialog/dialog.component';
 import { StandardVerticalContentGridComponent } from '../../standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { TextBoxComponent } from '../../textbox/textbox.component';
-import { NgIf, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { ParagraphComponent } from '../../paragraph/paragraph.component';
 import { CreateEntityDialogActionButtonsComponent } from '../create-entity-dialog-action-buttons/create-entity-dialog-action-buttons.component';
 
@@ -24,11 +24,10 @@ import { CreateEntityDialogActionButtonsComponent } from '../create-entity-dialo
     ReactiveFormsModule,
     StandardVerticalContentGridComponent,
     TextBoxComponent,
-    NgIf,
     ParagraphComponent,
     CreateEntityDialogActionButtonsComponent,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class CreateEntityWithNameDialogComponent extends BaseCreateEntityDialogComponent implements OnInit {
   public createForm = new FormGroup({

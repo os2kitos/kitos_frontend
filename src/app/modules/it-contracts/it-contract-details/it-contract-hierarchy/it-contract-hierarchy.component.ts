@@ -11,7 +11,7 @@ import { selectItContractUuid } from 'src/app/store/it-contract/selectors';
 import { ItContractHierarchyComponentStore } from './it-contract-hierarchy.component-store';
 import { CardComponent } from '../../../../shared/components/card/card.component';
 import { CardHeaderComponent } from '../../../../shared/components/card-header/card-header.component';
-import { NgIf, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { EntityTreeComponent } from '../../../../shared/components/tree/entity-tree.component';
 import { LoadingComponent } from '../../../../shared/components/loading/loading.component';
 
@@ -20,7 +20,7 @@ import { LoadingComponent } from '../../../../shared/components/loading/loading.
   templateUrl: './it-contract-hierarchy.component.html',
   styleUrl: './it-contract-hierarchy.component.scss',
   providers: [ItContractHierarchyComponentStore],
-  imports: [CardComponent, CardHeaderComponent, NgIf, EntityTreeComponent, LoadingComponent, AsyncPipe],
+  imports: [CardComponent, CardHeaderComponent, EntityTreeComponent, LoadingComponent, AsyncPipe],
 })
 export class ItContractHierarchyComponent extends BaseComponent implements OnInit {
   public readonly contractUuid$ = this.store.select(selectItContractUuid).pipe(filterNullish());

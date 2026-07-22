@@ -1,21 +1,21 @@
-import { APIPublicMessageRequestDTO } from 'src/app/api/v2';
+import { APIPublicMessageStatusChoice } from 'src/app/api/v2';
 
 export interface StatusType {
   name: string;
-  value: APIPublicMessageRequestDTO.StatusEnum;
+  value: APIPublicMessageStatusChoice;
 }
 
 export const statusTypeOptions: StatusType[] = [
   {
     name: $localize`Normal drift`,
-    value: APIPublicMessageRequestDTO.StatusEnum.Active,
+    value: APIPublicMessageStatusChoice.Active,
   },
   {
     name: $localize`Ustabil drift`,
-    value: APIPublicMessageRequestDTO.StatusEnum.Inactive,
+    value: APIPublicMessageStatusChoice.Inactive,
   },
 ];
 
-export const mapStatusType = (value?: APIPublicMessageRequestDTO.StatusEnum): StatusType | undefined => {
+export const mapStatusType = (value?: APIPublicMessageStatusChoice): StatusType | undefined => {
   return statusTypeOptions.find((option) => option.value === value);
 };

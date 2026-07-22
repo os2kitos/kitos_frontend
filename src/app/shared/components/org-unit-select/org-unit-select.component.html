@@ -1,33 +1,37 @@
-<ng-container *ngIf="isLoaded$ | async">
-  <ng-container *ngIf="nodes$ | async as nodes">
-    <app-tree-node-dropdown
-      *ngIf="formGroup"
-      [text]="text"
-      valueField="id"
-      [size]="size"
-      [data]="nodes"
-      [showDescription]="showDescription"
-      [formGroup]="formGroup"
-      [formName]="formName ?? null"
-      [appendTo]="appendTo"
-      (filterChange)="(filterChange)"
-      (valueChange)="onSelectionChange($event)"
-      [clearable]="clearable"
-    >
-    </app-tree-node-dropdown>
-    <app-tree-node-dropdown
-      *ngIf="!formGroup"
-      [text]="text"
-      [data]="nodes"
-      [size]="size"
-      [showDescription]="showDescription"
-      [appendTo]="appendTo"
-      [value]="value"
-      (filterChange)="(filterChange)"
-      (valueChange)="onSelectionChange($event)"
-      [clearable]="clearable"
-    >
-    </app-tree-node-dropdown>
-  </ng-container>
-</ng-container>
-<app-loading *ngIf="(isLoaded$ | async) === false" [type]="useMaterialSpinner ? 'material' : 'kitos'"> </app-loading>
+@if (isLoaded$ | async) {
+  @if (nodes$ | async; as nodes) {
+    @if (formGroup) {
+      <app-tree-node-dropdown
+        [text]="text"
+        valueField="id"
+        [size]="size"
+        [data]="nodes"
+        [showDescription]="showDescription"
+        [formGroup]="formGroup"
+        [formName]="formName ?? null"
+        [appendTo]="appendTo"
+        (filterChange)="(filterChange)"
+        (valueChange)="onSelectionChange($event)"
+        [clearable]="clearable"
+        >
+      </app-tree-node-dropdown>
+    }
+    @if (!formGroup) {
+      <app-tree-node-dropdown
+        [text]="text"
+        [data]="nodes"
+        [size]="size"
+        [showDescription]="showDescription"
+        [appendTo]="appendTo"
+        [value]="value"
+        (filterChange)="(filterChange)"
+        (valueChange)="onSelectionChange($event)"
+        [clearable]="clearable"
+        >
+      </app-tree-node-dropdown>
+    }
+  }
+}
+@if ((isLoaded$ | async) === false) {
+  <app-loading [type]="useMaterialSpinner ? 'material' : 'kitos'"> </app-loading>
+}

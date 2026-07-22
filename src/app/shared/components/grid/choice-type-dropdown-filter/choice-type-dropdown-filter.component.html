@@ -1,10 +1,11 @@
-<app-dropdown
-  *ngIf="options$"
-  size="medium"
-  text="Vælg..."
-  [data]="(options$ | async) ?? []"
-  [(value)]="chosenOption"
-  (valueChange)="didChange($event)"
-  appendTo=".k-grid-aria-root"
-  i18n-text
-></app-dropdown>
+@if (options$) {
+  <app-dropdown
+    size="medium"
+    text="Vælg..."
+    [data]="(options$ | async) ?? []"
+    [(value)]="chosenOption"
+    (valueChange)="didChange($event)"
+    appendTo=".k-grid-aria-root"
+    i18n-text
+  ></app-dropdown>
+}

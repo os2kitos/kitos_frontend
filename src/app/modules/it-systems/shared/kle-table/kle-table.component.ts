@@ -8,7 +8,7 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { invertBooleanValue } from 'src/app/shared/pipes/invert-boolean-value';
 import { KLEActions } from 'src/app/store/kle/actions';
 import { selectHasValidCache, selectKLEEntities } from 'src/app/store/kle/selectors';
-import { NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { LoadingComponent } from '../../../../shared/components/loading/loading.component';
 import { NativeTableComponent } from '../../../../shared/components/native-table/native-table.component';
 import { ParagraphComponent } from '../../../../shared/components/paragraph/paragraph.component';
@@ -42,18 +42,16 @@ export interface SelectedKleDetails extends APIKLEDetailsDTO {
   templateUrl: './kle-table.component.html',
   styleUrls: ['./kle-table.component.scss'],
   imports: [
-    NgIf,
     LoadingComponent,
     NativeTableComponent,
-    NgFor,
     ParagraphComponent,
     ContentSpaceBetweenComponent,
     TableRowActionsComponent,
     IconButtonComponent,
     TrashcanIconComponent,
     PlusIconComponent,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class KleTableComponent extends BaseComponent implements OnInit {
   @Input() public hasModifyPermission = false;

@@ -8,12 +8,13 @@ import {
   APIIdentityNamePairResponseDTO,
   APIItContractResponseDTO,
   APIItInterfaceResponseDTO,
-  APIV2ItContractService,
-  APIV2ItInterfaceService,
-  APIV2ItSystemUsageInternalINTERNALService,
-  APIV2ItSystemUsageService,
+  ItContractV2Service,
+  ItInterfaceV2Service,
+  ItSystemUsageInternalV2Service,
+  ItSystemUsageV2Service,
 } from 'src/app/api/v2';
 import { BOUNDED_PAGINATION_QUERY_MAX_SIZE } from 'src/app/shared/constants/constants';
+import { MultiSelectDropdownItem } from 'src/app/shared/models/dropdown-option.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectItSystemUsageUuid } from 'src/app/store/it-system-usage/selectors';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
@@ -48,6 +49,12 @@ export class ItSystemUsageDetailsRelationsDialogComponentStore extends Component
 
   public readonly interfaces$ = this.select((state) => state.interfaces).pipe(filterNullish());
 
+  public readonly interfacesAsMultiSelectDropdownItems$: Observable<
+    MultiSelectDropdownItem<APIItInterfaceResponseDTO>[]
+  > = this.interfaces$.pipe(
+    map((interfaces) => interfaces.map((x) => ({ name: x.name, value: x, disabled: false, selected: false }))),
+  );
+
   private readonly interfacesLoading$ = this.select((state) => state.contractsLoading).pipe(filterNullish());
   private readonly systemUuidLoading$ = this.select((state) => state.systemUuidLoading).pipe(filterNullish());
 
@@ -58,10 +65,10 @@ export class ItSystemUsageDetailsRelationsDialogComponentStore extends Component
 
   constructor(
     private readonly store: Store,
-    private readonly apiUsageService: APIV2ItSystemUsageService,
-    private readonly apiInternalUsageService: APIV2ItSystemUsageInternalINTERNALService,
-    private readonly apiInterfaceService: APIV2ItInterfaceService,
-    private readonly apiContractService: APIV2ItContractService,
+    private readonly apiUsageService: ItSystemUsageV2Service,
+    private readonly apiInternalUsageService: ItSystemUsageInternalV2Service,
+    private readonly apiInterfaceService: ItInterfaceV2Service,
+    private readonly apiContractService: ItContractV2Service,
   ) {
     super({ systemUuidLoading: false, usagesLoading: false, interfacesLoading: false, contractsLoading: false });
   }
@@ -136,11 +143,11 @@ export class ItSystemUsageDetailsRelationsDialogComponentStore extends Component
       tap(() => this.updateSystemUuidIsLoading(true)),
       mergeMap((usageUuid) => {
         return this.apiUsageService.getSingleItSystemUsageV2GetItSystemUsage({ systemUsageUuid: usageUuid }).pipe(
-          tapResponse(
-            (usage) => this.updateSystemUuid(usage.systemContext.uuid),
-            (error) => console.error(error),
-            () => this.updateSystemUuidIsLoading(false),
-          ),
+          tapResponse({
+            next: (usage) => this.updateSystemUuid(usage.systemContext.uuid),
+            error: (error) => console.error(error),
+            complete: () => this.updateSystemUuidIsLoading(false),
+          }),
         );
       }),
     ),
@@ -161,20 +168,20 @@ export class ItSystemUsageDetailsRelationsDialogComponentStore extends Component
             orderByProperty: 'Name',
           })
           .pipe(
-            tapResponse(
-              (usages) => {
+            tapResponse({
+              next: (usages) => {
                 return this.updateSystemUsages(
                   usages
-                    .filter((usage) => usage.uuid != currentUsageUuid)
-                    .map((usage) => ({
+                    .filter((usage: any) => usage.uuid != currentUsageUuid)
+                    .map((usage: any) => ({
                       name: usage.systemContext.name,
                       uuid: usage.uuid,
                     })),
                 );
               },
-              (error) => console.error(error),
-              () => this.updateSystemUsagesIsLoading(false),
-            ),
+              error: (error) => console.error(error),
+              complete: () => this.updateSystemUsagesIsLoading(false),
+            }),
           );
       }),
     ),
@@ -186,17 +193,17 @@ export class ItSystemUsageDetailsRelationsDialogComponentStore extends Component
       mergeMap((params) => {
         return this.apiInterfaceService
           .getManyItInterfaceV2GetItInterfaces({
-            nameContains: params.search,
+            nameOrItInterfaceIdContains: params.search,
             exposedBySystemUuid: params.systemUuid,
             orderByProperty: 'Name',
             includeDeactivated: true,
           })
           .pipe(
-            tapResponse(
-              (interfaces) => this.updateInterfaces(interfaces),
-              (error) => console.error(error),
-              () => this.updateInterfacesIsLoading(false),
-            ),
+            tapResponse({
+              next: (interfaces) => this.updateInterfaces(interfaces),
+              error: (error) => console.error(error),
+              complete: () => this.updateInterfacesIsLoading(false),
+            }),
           );
       }),
     ),
@@ -215,11 +222,11 @@ export class ItSystemUsageDetailsRelationsDialogComponentStore extends Component
             pageSize: this.PAGE_SIZE,
           })
           .pipe(
-            tapResponse(
-              (contracts) => this.updateContracts(contracts),
-              (error) => console.error(error),
-              () => this.updateContractsIsLoading(false),
-            ),
+            tapResponse({
+              next: (contracts) => this.updateContracts(contracts),
+              error: (error) => console.error(error),
+              complete: () => this.updateContractsIsLoading(false),
+            }),
           );
       }),
     ),

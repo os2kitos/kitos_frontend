@@ -17,7 +17,7 @@ import {
   selectDprEnableAssociatedContracts,
   selectDprEnableMainContract,
 } from 'src/app/store/organization/ui-module-customization/selectors';
-import { NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { CardComponent } from '../../../../shared/components/card/card.component';
 import { CardHeaderComponent } from '../../../../shared/components/card-header/card-header.component';
 import { DropdownComponent } from '../../../../shared/components/dropdowns/dropdown/dropdown.component';
@@ -33,7 +33,6 @@ import { EmptyStateComponent } from '../../../../shared/components/empty-states/
   templateUrl: './data-processing-it-contracts.component.html',
   styleUrl: './data-processing-it-contracts.component.scss',
   imports: [
-    NgIf,
     CardComponent,
     CardHeaderComponent,
     FormsModule,
@@ -43,11 +42,10 @@ import { EmptyStateComponent } from '../../../../shared/components/empty-states/
     ParagraphComponent,
     StandardVerticalContentGridComponent,
     NativeTableComponent,
-    NgFor,
     DetailsPageLinkComponent,
     EmptyStateComponent,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class DataProcessingItContractsComponent extends BaseComponent implements OnInit {
   public readonly mainContract$ = this.store.select(selectDataProcessingMainContract);

@@ -1,5 +1,5 @@
-<ng-container *ngIf="gdprReports$ | async as gdprReports">
-  <ng-container *ngIf="filteredGridColumns$ | async as gridColumns">
+@if (filteredGdprReports$ | async; as gdprReports) {
+  @if (filteredGridColumns$ | async; as gridColumns) {
     <app-local-grid
       [columns]="gridColumns"
       [data]="gdprReports"
@@ -7,5 +7,5 @@
       [exportToExcelName]="getExportName()"
       i18n-exportToExcelName
     ></app-local-grid>
-  </ng-container>
-</ng-container>
+  }
+}

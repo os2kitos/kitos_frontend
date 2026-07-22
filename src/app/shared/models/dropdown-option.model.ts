@@ -54,12 +54,22 @@ export const mapRoleToDropdownOptions = (role: APIRoleOptionResponseDTO): RoleDr
   };
 };
 
-export const mapRegularOptionToMultiSelectItem = (
+export const mapRegularOptionToMultiSelectItemWithUuidValue = (
   option: APIRegularOptionResponseDTO,
 ): MultiSelectDropdownItem<string> => {
   return {
     name: option.name,
     value: option.uuid,
+    selected: false,
+  };
+};
+
+export const mapRegularOptionToMultiSelectItem = (
+  option: APIRegularOptionResponseDTO,
+): MultiSelectDropdownItem<APIRegularOptionResponseDTO> => {
+  return {
+    name: option.name,
+    value: option,
     selected: false,
   };
 };

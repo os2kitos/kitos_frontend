@@ -22,7 +22,7 @@ import {
 import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
 import { ScrollbarDialogComponent } from '../../../../../shared/components/dialogs/dialog/scrollbar-dialog/scrollbar-dialog.component';
 import { StandardVerticalContentGridComponent } from '../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
-import { NgIf, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { CardComponent } from '../../../../../shared/components/card/card.component';
 import { CardHeaderComponent } from '../../../../../shared/components/card-header/card-header.component';
 import { NumericInputComponent } from '../../../../../shared/components/numeric-input/numeric-input.component';
@@ -46,7 +46,6 @@ import { DialogActionsComponent } from '../../../../../shared/components/dialogs
     FormsModule,
     ReactiveFormsModule,
     StandardVerticalContentGridComponent,
-    NgIf,
     CardComponent,
     CardHeaderComponent,
     NumericInputComponent,
@@ -60,8 +59,8 @@ import { DialogActionsComponent } from '../../../../../shared/components/dialogs
     LocalGridComponent,
     LoadingComponent,
     DialogActionsComponent,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class FkOrgWriteDialogComponent extends BaseComponent implements OnInit {
   @Input() isEdit: boolean = false;

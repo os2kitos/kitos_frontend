@@ -1,4 +1,5 @@
 import { formatProcurementPlan } from '../../helpers/procurement-plan.helpers';
+import { organizationNameWithCvrAndAvailability } from '../../helpers/string.helpers';
 import {
   mapRoleAssignmentsToEmails,
   mapRoleAssignmentsToUserFullNames,
@@ -31,6 +32,8 @@ export interface ITContract {
   ItSystemUsages: { id: string; value: string }[];
   ItSystemUsageUuids: { value: string }[];
   ItSystemUsageUuidsAsCsv: string;
+  ExternalPaymentOrganizationUnitsCsv: string;
+  InternalPaymentOrganizationUnitsCsv: string;
   SourceEntityUuid: string;
   NumberOfAssociatedSystemRelations: number;
   ActiveReferenceTitle: string;
@@ -81,7 +84,11 @@ export const adaptITContract = (value: any): ITContract | undefined => {
     ExpirationDate: value.ExpirationDate,
     CriticalityName: value.CriticalityName,
     ResponsibleOrgUnitName: value.ResponsibleOrgUnitName,
-    SupplierName: value.SupplierName,
+    SupplierName: organizationNameWithCvrAndAvailability(
+      value.SupplierName,
+      value.SupplierCvr,
+      value.IsSupplierDisabled,
+    ),
     ContractSigner: value.ContractSigner,
     ContractTypeName: value.ContractTypeName,
     ContractTemplateName: value.ContractTemplateName,
@@ -97,6 +104,8 @@ export const adaptITContract = (value: any): ITContract | undefined => {
     ),
     ItSystemUsageUuids: value.ItSystemUsageUuids,
     ItSystemUsageUuidsAsCsv: value.ItSystemUsagesSystemUuidCsv,
+    ExternalPaymentOrganizationUnitsCsv: value.ExternalPaymentOrganizationUnitsCsv,
+    InternalPaymentOrganizationUnitsCsv: value.InternalPaymentOrganizationUnitsCsv,
     ItSystemUsages: value.ItSystemUsages.map((usage: { ItSystemUsageUuid: string; ItSystemUsageName: string }) => ({
       id: usage.ItSystemUsageUuid,
       value: usage.ItSystemUsageName,

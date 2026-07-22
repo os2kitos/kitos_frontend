@@ -1,10 +1,11 @@
 <app-paragraph [cropOnOverflow]="true">
-  <app-details-page-link
-    *ngIf="dataItem | searchProperty: column.idField ?? '' as itemUuid"
-    linkFontSize="small"
-    [itemType]="column.entityType"
-    [itemPath]="itemUuid"
-    [subpagePath]="column.extraData"
-    >{{ dataItem | searchProperty: column.field }}</app-details-page-link
-  >
-</app-paragraph>
+  @if (dataItem | searchProperty : column.idField ?? ''; as itemUuid) {
+    <app-details-page-link
+      linkFontSize="small"
+      [itemType]="column.entityType"
+      [itemPath]="itemUuid"
+      [subpagePath]="column.extraData"
+      >{{ dataItem | searchProperty : column.field }}</app-details-page-link
+      >
+    }
+  </app-paragraph>

@@ -3,7 +3,7 @@ import { ComponentStore } from '@ngrx/component-store';
 import { tapResponse } from '@ngrx/operators';
 
 import { Observable, map, mergeMap } from 'rxjs';
-import { APIItContractResponseDTO, APIV2ItContractService } from 'src/app/api/v2';
+import { APIItContractResponseDTO, ItContractV2Service } from 'src/app/api/v2';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 
 interface State {
@@ -30,7 +30,7 @@ export class ItSystemUsageDetailsContractsComponentStore extends ComponentStore<
     ),
   );
 
-  constructor(private contractsService: APIV2ItContractService) {
+  constructor(private contractsService: ItContractV2Service) {
     super({ loading: false });
   }
 
@@ -55,11 +55,11 @@ export class ItSystemUsageDetailsContractsComponentStore extends ComponentStore<
         return this.contractsService
           .getManyItContractV2GetItContracts({ systemUsageUuid: systemUsageUuid, orderByProperty: 'Name' })
           .pipe(
-            tapResponse(
-              (associatedContracts) => this.updateAssociatedContracts(associatedContracts),
-              (e) => console.error(e),
-              () => this.updateAssociatedContractsIsLoading(false),
-            ),
+            tapResponse({
+              next: (associatedContracts) => this.updateAssociatedContracts(associatedContracts),
+              error: (e) => console.error(e),
+              complete: () => this.updateAssociatedContractsIsLoading(false),
+            }),
           );
       }),
     ),

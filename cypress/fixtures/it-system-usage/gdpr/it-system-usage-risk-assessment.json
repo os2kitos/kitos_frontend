@@ -11,7 +11,8 @@
     "dataClassification": { "uuid": "040c3098-45c7-4e25-9d10-1232918bfaa4", "name": "Almindelige oplysninger" },
     "notes": "En beskrivelse...",
     "systemVersion": null,
-    "numberOfExpectedUsers": { "lowerBound": 100, "upperBound": null },
+    "numberOfExpectedUsers": { "lowerBound": 100, "upperBound": 499 },
+    "hostedAt": "External",
     "validity": {
       "valid": false,
       "validAccordingToValidityPeriod": false,
@@ -97,7 +98,6 @@
   "gdpr": {
     "purpose": "New purpose",
     "businessCritical": "No",
-    "hostedAt": "External",
     "directoryDocumentation": { "name": "newName", "url": "newUrl" },
     "dataSensitivityLevels": ["PersonData", "LegalData"],
     "sensitivePersonData": [{ "uuid": "00000000-0000-0000-0000-000000000000", "name": "data type 1" }],

@@ -49,7 +49,7 @@ function mapSimpleConflictToTableItem(conflict: APISimpleConflictResponseDTO): R
 function mapMultipleConflictsToTableItem(multiConflict: APIMultipleConflictsResponseDTO): RemovalConflict[] {
   return (multiConflict.conflicts ?? [])
     .map(mapSimpleConflictToTableItem)
-    .map((conflict) => ({ ...conflict, mainEntityName: multiConflict.mainEntityName }));
+    .map((conflict) => ({ ...conflict, mainEntityName: multiConflict.mainEntityName ?? undefined }));
 }
 
 function mapSystemUsageOutsideOrganizationConflictToTableItem(
@@ -66,7 +66,7 @@ function mapInterfacesExposedOutsideTheOrganizationToTableItem(
   conflict: APIInterfacesExposedOutsideTheOrganizationResponseDTO,
 ): RemovalConflict {
   return {
-    mainEntityName: conflict.exposedInterfaceName,
+    mainEntityName: conflict.exposedInterfaceName ?? undefined,
     entityName: conflict.exposingSystemName ?? '',
     organizationName: conflict.organizationName ?? '',
   };

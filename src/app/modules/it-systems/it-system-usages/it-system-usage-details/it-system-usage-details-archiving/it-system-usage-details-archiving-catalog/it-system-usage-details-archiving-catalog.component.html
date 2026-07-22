@@ -1,31 +1,34 @@
 <app-card>
   <app-card-header title="Arkivering" [spacer]="false" helpTextKey="it-system.usage.archiving.catalog" i18n-title>
-    <app-details-page-link
-      *ngIf="itSystemCatalogItemUuid$ | async as systemUuid"
-      class="catalog-link"
-      itemType="it-system"
-      [itemPath]="systemUuid"
-      i18n
-      >Gå til IT Systemkataloget</app-details-page-link
-    >
-  </app-card-header>
-  <app-form-grid [formGroup]="catalogForm">
-    <app-textbox
-      text="Rigsarkivets vejledning til arkivering"
-      i18n-text
-      [formGroup]="catalogForm"
-      formName="archiveDuty"
-      *ngIf="catalogArchiveDutyEnabled$ | async"
-    ></app-textbox>
-    <app-textarea
-      class="notes-column-span"
-      text="Bemærkning fra Rigsarkivet"
-      i18n-text
-      [formGroup]="catalogForm"
-      formName="archiveDutyComment"
-      data-cy="catalog-archive-duty-comment-textarea"
-      *ngIf="catalogArchiveDutyCommentEnabled$ | async"
-      [disabled]="true"
-    ></app-textarea>
-  </app-form-grid>
-</app-card>
+    @if (itSystemCatalogItemUuid$ | async; as systemUuid) {
+      <app-details-page-link
+        class="catalog-link"
+        itemType="it-system"
+        [itemPath]="systemUuid"
+        i18n
+        >Gå til IT Systemkataloget</app-details-page-link
+        >
+      }
+    </app-card-header>
+    <app-form-grid [formGroup]="catalogForm">
+      @if (catalogArchiveDutyEnabled$ | async) {
+        <app-textbox
+          text="Rigsarkivets vejledning til arkivering"
+          i18n-text
+          [formGroup]="catalogForm"
+          formName="archiveDuty"
+        ></app-textbox>
+      }
+      @if (catalogArchiveDutyCommentEnabled$ | async) {
+        <app-textarea
+          class="notes-column-span"
+          text="Bemærkning fra Rigsarkivet"
+          i18n-text
+          [formGroup]="catalogForm"
+          formName="archiveDutyComment"
+          data-cy="catalog-archive-duty-comment-textarea"
+          [disabled]="true"
+        ></app-textarea>
+      }
+    </app-form-grid>
+  </app-card>

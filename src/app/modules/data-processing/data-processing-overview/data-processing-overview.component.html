@@ -1,6 +1,6 @@
 <app-overview-header>
   <h3 i18n>Databehandling</h3>
-  <ng-container *ngIf="(hasCreatePermission$ | async) !== undefined">
+  @if ((hasCreatePermission$ | async) !== undefined) {
     <app-grid-options-button
       [hasResetButton]="true"
       [hasColumnConfigButtons]="true"
@@ -14,11 +14,12 @@
       [uiConfigApplications]="uiConfigApplications$ | async"
       [isSecondary]="(hasCreatePermission$ | async) ?? false"
     ></app-hide-show-button>
-    <app-create-entity-button
-      entityType="data-processing-registration"
-      *ngIf="hasCreatePermission$ | async"
-    ></app-create-entity-button>
-  </ng-container>
+    @if (hasCreatePermission$ | async) {
+      <app-create-entity-button
+        entityType="data-processing-registration"
+      ></app-create-entity-button>
+    }
+  }
 </app-overview-header>
 
 <app-grid

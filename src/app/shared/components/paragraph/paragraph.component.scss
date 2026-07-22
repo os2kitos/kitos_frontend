@@ -7,6 +7,10 @@
   gap: 4px;
 }
 
+.left-align-text {
+  text-align: start;
+}
+
 .display-flex {
   display: flex;
 }
@@ -17,6 +21,10 @@
 
 .error-color {
   color: theme.$color-negative !important;
+}
+
+.warning-color {
+  color: theme.$color-warning !important;
 }
 
 .primary-dark-color {

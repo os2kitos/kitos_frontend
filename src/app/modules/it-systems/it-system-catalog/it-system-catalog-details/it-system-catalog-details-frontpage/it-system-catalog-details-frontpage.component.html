@@ -23,7 +23,7 @@
       [isLoading$]="isLoading$"
       (filterChange)="searchItSystems($event)"
       (valueChange)="patchFrontPage({ parentUuid: $event })"
-    >
+      >
     </app-connected-dropdown>
     <app-textbox
       text="Tidligere systemnavn"
@@ -80,10 +80,11 @@
       formName="externalUuid"
     ></app-textbox>
     <app-contentbox data-cy="it-system-references" text="Referencer vedr. systemet" i18n-text>
-      <app-external-reference
-        *ngFor="let reference of externalReferences$ | async"
-        [reference]="reference"
-      ></app-external-reference>
+      @for (reference of externalReferences$ | async; track reference) {
+        <app-external-reference
+          [reference]="reference"
+        ></app-external-reference>
+      }
     </app-contentbox>
     <app-textbox
       text="DBS Navn"
@@ -133,7 +134,7 @@
         [formGroup]="itSystemFrontpageFormGroup"
         formName="recommendedArchiveDutyComment"
         (valueChange)="patchArchiveDutyComment($event)"
-      >
+        >
       </app-textarea>
       <app-textbox-info>
         <app-paragraph paragraphSize="x-small" i18n>
@@ -144,12 +145,12 @@
             >{{ nationalArchivesText }}</a
           >
         </app-paragraph>
-      </app-textbox-info>
-    </div>
-  </app-form-grid>
-</app-card>
+        </app-textbox-info>
+      </div>
+    </app-form-grid>
+  </app-card>
 
-<app-card>
-  <app-card-header title="Tilknyttede opgaver" helpTextKey="it-system.frontpage.kle" i18n-title></app-card-header>
-  <app-it-system-kle-overview data-cy="it-system-kle"></app-it-system-kle-overview>
-</app-card>
+  <app-card>
+    <app-card-header title="Tilknyttede opgaver" helpTextKey="it-system.frontpage.kle" i18n-title></app-card-header>
+    <app-it-system-kle-overview data-cy="it-system-kle"></app-it-system-kle-overview>
+  </app-card>

@@ -1,10 +1,10 @@
 <app-card>
   <app-card-header title="Ansvarlig organisationsenhed" helpTextKey="it-system.usage.org" i18n-title></app-card-header>
 
-  <app-paragraph *ngIf="(anyUsedByUnits$ | async) === false" paragraphSize="medium" i18n
-    >Systemet udstiller ingen ansvarlig organisationsenhed</app-paragraph
-  >
-  <form *ngIf="anyUsedByUnits$ | async" [formGroup]="responsibleUnitForm">
+  @if((anyUsedByUnits$ | async) === false){
+  <app-paragraph paragraphSize="medium" i18n>Systemet udstiller ingen ansvarlig organisationsenhed</app-paragraph>
+  } @if(anyUsedByUnits$ | async){
+  <form [formGroup]="responsibleUnitForm">
     <app-dropdown
       text="Vælg ansvarlig organisationsenhed"
       i18n-text
@@ -16,6 +16,7 @@
     >
     </app-dropdown>
   </form>
+  }
 </app-card>
 <app-card>
   <app-card-header
@@ -24,11 +25,11 @@
     i18n-title
   ></app-card-header>
   <app-standard-vertical-content-grid>
-    <app-section title="Filtrér i organisationsheder">
+    <app-section title="Filtrér i organisationsenheder">
       <form [formGroup]="relevantUnitsForm">
         <div class="org-unit-select-container">
+          @if((isPatching$ | async) !== true){
           <app-org-unit-select
-            *ngIf="(isPatching$ | async) !== true"
             text="Søg efter enhed"
             i18n-text
             [disabledUnitsUuids]="(usedUnitUuids$ | async) ?? []"
@@ -39,8 +40,9 @@
             [useMaterialSpinner]="true"
             (valueChange)="patchRelevantUnits()"
           ></app-org-unit-select>
-
-          <app-loading *ngIf="isPatching$ | async" type="material"></app-loading>
+          } @if (isPatching$ | async) {
+          <app-loading type="material"></app-loading>
+          }
         </div>
         <app-numeric-input
           text="Antal niveauer"
@@ -66,8 +68,8 @@
       </form>
     </app-section>
 
+    @if (unitTree$ | async; as unitTree) {
     <app-drag-and-drop-tree
-      *ngIf="unitTree$ | async as unitTree"
       itemType="organization"
       [currentNodeUuid]="(rootUnitUuid$ | async) ?? ''"
       [nodes]="unitTree ?? []"
@@ -80,5 +82,6 @@
       [displayDefaultNodeColorOnly]="true"
       [maxLevel]="(numberOfLevels$ | async) ?? undefined"
     ></app-drag-and-drop-tree>
+    }
   </app-standard-vertical-content-grid>
 </app-card>

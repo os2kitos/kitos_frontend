@@ -9,7 +9,7 @@ import { selectRegularOptionTypesDictionary } from 'src/app/store/regular-option
 import { ItSystemInterfacesTableComponentStore } from './it-system-interfaces-table.component-store';
 import { CardComponent } from '../../../../shared/components/card/card.component';
 import { CardHeaderComponent } from '../../../../shared/components/card-header/card-header.component';
-import { NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { LoadingComponent } from '../../../../shared/components/loading/loading.component';
 import { NativeTableComponent } from '../../../../shared/components/native-table/native-table.component';
 import { DetailsPageLinkComponent } from '../../../../shared/components/details-page-link/details-page-link.component';
@@ -27,18 +27,16 @@ import { EmptyStateComponent } from '../../../../shared/components/empty-states/
   imports: [
     CardComponent,
     CardHeaderComponent,
-    NgIf,
     LoadingComponent,
     NativeTableComponent,
-    NgFor,
     DetailsPageLinkComponent,
     StatusChipComponent,
     ParagraphComponent,
     SelectedOptionTypeTextComponent,
     ExternalPageLinkComponent,
     EmptyStateComponent,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class ItSystemInterfacesTableComponent extends BaseComponent implements OnInit {
   public readonly isLoading$ = this.interfaceStore.itInterfacesIsLoading$;

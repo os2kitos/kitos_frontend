@@ -2,8 +2,8 @@
 @use "mixins";
 
 ::ng-deep .app-tool-tip-content {
-  --mdc-plain-tooltip-supporting-text-size: 12px;
-  --mdc-plain-tooltip-container-color: #{theme.$color-neutral};
+  --mat-tooltip-supporting-text-size: 12px;
+  --mat-tooltip-container-color: #{theme.$color-neutral};
   white-space: pre-wrap;
 
   &::after {

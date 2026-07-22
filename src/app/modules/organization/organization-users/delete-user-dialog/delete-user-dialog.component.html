@@ -1,37 +1,46 @@
-<ng-container *ngIf="user$ | async as user">
+@if (user$ | async; as user) {
   <app-dialog title="Slet bruger" helpText="org_user_delete_modal" i18n-title [nested]="nested">
-    <app-standard-vertical-content-grid *ngIf="!isLoading">
-      <app-paragraph [displayFlex]="false" i18n>
+    @if (!isLoading) {
+      <app-standard-vertical-content-grid>
+        <app-paragraph [displayFlex]="false" i18n>
         Er du sikker på at du vil fjerne <strong>{{ getUserName(user) }}</strong> fra
         <strong>{{ organizationName$ | async }}</strong
         >?
       </app-paragraph>
-      <app-paragraph [displayFlex]="false">
-        <ng-container *ngIf="hasRoles$ | async" i18n>
+          <app-paragraph [displayFlex]="false">
+            @if (hasRoles$ | async) {
+              <ng-container i18n>
           Brugeren har nogle roller, som kan tildeles en anden. Det er valgfrit om du vil slette brugeren uden at
           tildele rollerne.
         </ng-container>
-
-        <ng-container *ngIf="(hasRoles$ | async) === false" i18n> Denne handling kan ikke fortrydes. </ng-container>
-      </app-paragraph>
-    </app-standard-vertical-content-grid>
-    <app-dialog-actions *ngIf="!isLoading">
-      <app-button buttonStyle="secondary" (buttonClick)="onClose()" data-cy="cancel-button" i18n> Anuller </app-button>
-      <app-button
-        *ngIf="hasRoles$ | async"
-        buttonStyle="secondary"
-        color="warn"
-        data-cy="transfer-roles-button"
-        (buttonClick)="openTransferDialog(user)"
-        i18n
-      >
+            }
+            @if ((hasRoles$ | async) === false) {
+              <ng-container i18n> Denne handling kan ikke fortrydes. </ng-container>
+            }
+          </app-paragraph>
+        </app-standard-vertical-content-grid>
+      }
+      @if (!isLoading) {
+        <app-dialog-actions>
+          <app-button buttonStyle="secondary" (buttonClick)="onClose()" data-cy="cancel-button" i18n> Anuller </app-button>
+          @if (hasRoles$ | async) {
+            <app-button
+              buttonStyle="secondary"
+              color="warn"
+              data-cy="transfer-roles-button"
+              (buttonClick)="openTransferDialog(user)"
+              i18n
+              >
         Overfør roller
       </app-button>
-      <app-button buttonStyle="primary" color="warn" (buttonClick)="onDeleteUser(user)" data-cy="delete-button" i18n>
+          }
+          <app-button buttonStyle="primary" color="warn" (buttonClick)="onDeleteUser(user)" data-cy="delete-button" i18n>
         Slet bruger
       </app-button>
-    </app-dialog-actions>
-
-    <app-loading *ngIf="isLoading"></app-loading>
-  </app-dialog>
-</ng-container>
+        </app-dialog-actions>
+      }
+      @if (isLoading) {
+        <app-loading></app-loading>
+      }
+    </app-dialog>
+  }

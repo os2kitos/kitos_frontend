@@ -1,4 +1,4 @@
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
@@ -39,7 +39,6 @@ import { OrganizationMasterDataComponentStore } from './organization-master-data
   styleUrl: './organization-master-data.component.scss',
   providers: [OrganizationMasterDataComponentStore],
   imports: [
-    NgIf,
     HelpButtonComponent,
     CardComponent,
     CardHeaderComponent,
@@ -49,8 +48,8 @@ import { OrganizationMasterDataComponentStore } from './organization-master-data
     NumericInputComponent,
     TextBoxComponent,
     ConnectedDropdownComponent,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class OrganizationMasterDataComponent extends BaseComponent implements OnInit {
   public readonly organizationName$ = this.store.select(selectOrganizationName);

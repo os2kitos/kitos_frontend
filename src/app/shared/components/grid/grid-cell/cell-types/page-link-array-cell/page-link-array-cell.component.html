@@ -1,25 +1,26 @@
 <app-paragraph [cropOnOverflow]="true">
-  <ng-container *ngIf="column.dataField">
-    <div>
-      <ng-container *ngFor="let collectionItem of getProperty(column.dataField) as data; let i = index">
-        <app-details-page-link-with-tooltip
-          *ngIf="column.itemTooltipField"
-          [toolTip]="getPropertyFromObject(collectionItem, column.itemTooltipField) ?? ''"
-          linkFontSize="small"
-          [itemType]="column.entityType"
-          [itemPath]="collectionItem.id"
-          [itemPathIncludesSubmodule]="column.style === 'page-link-array-with-submodules'"
-          >{{ collectionItem.value }}
-        </app-details-page-link-with-tooltip>
-        <app-details-page-link
-          *ngIf="!column.itemTooltipField"
-          linkFontSize="small"
-          [itemType]="column.entityType"
-          [itemPath]="collectionItem.id"
-          [itemPathIncludesSubmodule]="column.style === 'page-link-array-with-submodules'"
-          >{{ collectionItem.value }}</app-details-page-link
-        >{{ i < data.length - 1 ? (column.linkArraySeparator ?? ", ") : "" }}
-      </ng-container>
-    </div>
-  </ng-container>
+  @if (column.dataField) {
+  <div>
+    @for (collectionItem of getProperty(column.dataField); let i = $index; track collectionItem.id) { @if
+    (column.itemTooltipField) {
+    <app-details-page-link-with-tooltip
+      [toolTip]="getPropertyFromObject(collectionItem, column.itemTooltipField) ?? ''"
+      linkFontSize="small"
+      [itemType]="column.entityType"
+      [itemPath]="collectionItem.id"
+      [itemPathIncludesSubmodule]="column.style === 'page-link-array-with-submodules'"
+      >{{ collectionItem.value }}
+    </app-details-page-link-with-tooltip>
+    } @if (!column.itemTooltipField) {
+    <app-details-page-link
+      linkFontSize="small"
+      [itemType]="column.entityType"
+      [itemPath]="collectionItem.id"
+      [itemPathIncludesSubmodule]="column.style === 'page-link-array-with-submodules'"
+      >{{ collectionItem.value }}</app-details-page-link
+    >
+    }{{ i < getProperty(column.dataField).length - 1 ? column.linkArraySeparator ?? ", " : "" }}
+    }
+  </div>
+  }
 </app-paragraph>

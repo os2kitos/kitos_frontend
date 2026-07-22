@@ -1,7 +1,8 @@
-<ng-container *ngIf="breadCrumbs">
-  <app-breadcrumb
-    *ngFor="let breadCrumb of breadCrumbs"
-    [breadCrumb]="breadCrumb.item"
-    [context]="breadCrumb.context"
-  ></app-breadcrumb>
-</ng-container>
+@if (breadCrumbs) {
+  @for (breadCrumb of breadCrumbs; track breadCrumb) {
+    <app-breadcrumb
+      [breadCrumb]="breadCrumb.item"
+      [context]="breadCrumb.context"
+    ></app-breadcrumb>
+  }
+}

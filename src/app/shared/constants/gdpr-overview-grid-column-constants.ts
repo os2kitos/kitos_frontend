@@ -8,7 +8,6 @@ export const PERSONAL_DATA_SOCIAL_OTHER_PRIVATE_MATTERS = 'personalDataSocialOth
 export const SENSITIVE_DATA = 'sensitiveData';
 export const LEGAL_DATA = 'legalData';
 export const SENSITIVE_DATA_TYPES = 'sensitiveDataTypes';
-export const BUSINESS_CRITICAL_NAME = 'businessCritical.name';
 export const DATA_PROCESSING_AGREEMENT_CONCLUDED = 'dataProcessingAgreementConcluded';
 export const LINK_TO_DIRECTORY = 'linkToDirectory';
 export const RISK_ASSESSMENT_NAME = 'riskAssessment.name';

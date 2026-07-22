@@ -10,10 +10,12 @@
   [routerLink]="path"
   routerLinkActive="active"
   appCtrlClick
->
+  >
   {{ title }}
   <ng-content select="[title]"></ng-content>
-  <app-chevron-down-icon *ngIf="hasContent"></app-chevron-down-icon>
+  @if (hasContent) {
+    <app-chevron-down-icon></app-chevron-down-icon>
+  }
 </app-button>
 
 <mat-menu tabindex="-1" class="menu-component" #menu="matMenu" direction="down" yPosition="below" [hasBackdrop]="false">

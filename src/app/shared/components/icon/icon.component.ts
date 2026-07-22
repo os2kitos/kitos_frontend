@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, Input } from '@angular/core';
 import { IconType } from '../../models/icon-type';
 import { ArchiveIconComponent } from '../icons/archive-icon.component';
@@ -40,7 +40,6 @@ import { XIconComponent } from '../icons/x-icon.component';
   styleUrl: './icon.component.scss',
   host: { style: 'display: contents' },
   imports: [
-    CommonModule,
     ExportIconComponent,
     DocumentIconComponent,
     OrganizationIconComponent,
@@ -72,8 +71,8 @@ import { XIconComponent } from '../icons/x-icon.component';
     ExpandCircleIconComponent,
     XIconComponent,
     CalendarIconComponent,
-    MailIconComponent,
-  ],
+    MailIconComponent
+],
 })
 export class IconComponent {
   @Input() iconType!: IconType;

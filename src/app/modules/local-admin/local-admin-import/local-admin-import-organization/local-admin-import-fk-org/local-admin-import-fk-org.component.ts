@@ -20,7 +20,7 @@ import { FkOrgDeleteDialogComponent } from '../fk-org-delete-dialog/fk-org-delet
 import { FkOrgWriteDialogComponent } from '../fk-org-write-dialog/fk-org-write-dialog.component';
 import { CardComponent } from '../../../../../shared/components/card/card.component';
 import { CardHeaderComponent } from '../../../../../shared/components/card-header/card-header.component';
-import { NgIf, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { StandardVerticalContentGridComponent } from '../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { ParagraphComponent } from '../../../../../shared/components/paragraph/paragraph.component';
 import { NativeTableComponent } from '../../../../../shared/components/native-table/native-table.component';
@@ -36,7 +36,6 @@ import { AppDatePipe } from '../../../../../shared/pipes/app-date.pipe';
   imports: [
     CardComponent,
     CardHeaderComponent,
-    NgIf,
     StandardVerticalContentGridComponent,
     ParagraphComponent,
     NativeTableComponent,
@@ -44,8 +43,8 @@ import { AppDatePipe } from '../../../../../shared/pipes/app-date.pipe';
     ButtonComponent,
     LoadingComponent,
     AsyncPipe,
-    AppDatePipe,
-  ],
+    AppDatePipe
+],
 })
 export class LocalAdminImportFkOrgComponent extends BaseComponent implements OnInit {
   public readonly synchronizationStatus$ = this.store.select(selectSynchronizationStatus);

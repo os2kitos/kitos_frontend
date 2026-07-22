@@ -4,7 +4,7 @@
   <app-button (buttonClick)="createLocalAdmin()" i18n> Opret lokal administrator </app-button>
 </app-overview-header>
 
-<ng-container *ngIf="localAdmins$ | async as localAdmins">
+@if (localAdmins$ | async; as localAdmins) {
   <app-local-grid
     [data]="localAdmins"
     [loading]="isLoading$ | async"
@@ -13,6 +13,6 @@
     (deleteEvent)="deleteLocalAdmin($event)"
     exportToExcelName="Lokale administratorer"
     i18n-exportToExcelName
-  >
+    >
   </app-local-grid>
-</ng-container>
+}

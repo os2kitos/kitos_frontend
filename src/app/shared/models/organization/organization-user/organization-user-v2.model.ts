@@ -3,10 +3,10 @@ import { APIOrganizationUserResponseDTO } from 'src/app/api/v2';
 export function adaptOrganizationUserV2(source: APIOrganizationUserResponseDTO): OrganizationUserV2 {
   return {
     firstName: source.firstName,
-    lastName: source.lastName,
+    lastName: source.lastName ?? undefined,
     uuid: source.uuid,
     email: source.email,
-    phone: source.phoneNumber,
+    phone: source.phoneNumber ?? undefined,
     fullName: `${source.firstName} ${source.lastName}`,
   };
 }

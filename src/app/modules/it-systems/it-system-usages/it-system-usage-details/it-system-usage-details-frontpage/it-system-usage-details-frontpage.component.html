@@ -1,7 +1,11 @@
 <app-segment [buttons]="itSystemUsageModuleSegmentOptions" [(selected)]="selected"></app-segment>
 
-<app-it-system-usage-details-frontpage-information *ngIf="selected === ItSystemUsageModuleSegmentOption.Usage">
-</app-it-system-usage-details-frontpage-information>
+@if (selected === ItSystemUsageModuleSegmentOption.Usage) {
+  <app-it-system-usage-details-frontpage-information>
+  </app-it-system-usage-details-frontpage-information>
+}
 
-<app-it-system-usage-details-frontpage-catalog *ngIf="selected === ItSystemUsageModuleSegmentOption.Catalog">
-</app-it-system-usage-details-frontpage-catalog>
+@if (selected === ItSystemUsageModuleSegmentOption.Catalog) {
+  <app-it-system-usage-details-frontpage-catalog>
+  </app-it-system-usage-details-frontpage-catalog>
+}

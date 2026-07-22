@@ -1,3 +1,4 @@
+import { AsyncPipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
@@ -6,18 +7,17 @@ import { LocalOptionTypeActions } from 'src/app/store/local-admin/local-option-t
 import { BaseComponent } from '../../base/base.component';
 import { NON_EDITABLE_LOCAL_OPTION_TYPE_CATEGORY_HELP_TEXT } from '../../constants/constants';
 import { LocalAdminOptionType, LocalAdminOptionTypeItem } from '../../models/options/local-admin-option-type.model';
-import { EditLocalOptionTypeDialogComponent } from './edit-local-option-type-dialog/edit-local-option-type-dialog.component';
-import { LocalOptionTypeTableComponentStore } from './local-option-type-table.component-store';
-import { NgIf, AsyncPipe } from '@angular/common';
 import { AccordionComponent } from '../accordion/accordion.component';
+import { EditLocalOptionTypeDialogComponent } from './edit-local-option-type-dialog/edit-local-option-type-dialog.component';
 import { LocalOptionGridComponent } from './local-option-grid/local-option-grid.component';
+import { LocalOptionTypeTableComponentStore } from './local-option-type-table.component-store';
 
 @Component({
   selector: 'app-local-option-type-view',
   templateUrl: './local-option-type-view.component.html',
   styleUrl: './local-option-type-view.component.scss',
   providers: [LocalOptionTypeTableComponentStore],
-  imports: [NgIf, AccordionComponent, LocalOptionGridComponent, AsyncPipe],
+  imports: [AccordionComponent, LocalOptionGridComponent, AsyncPipe],
 })
 export class LocalOptionTypeViewComponent extends BaseComponent implements OnInit {
   @Input() optionType!: LocalAdminOptionType;
@@ -30,11 +30,12 @@ export class LocalOptionTypeViewComponent extends BaseComponent implements OnIni
   @Input() showWriteAccess: boolean = false;
   @Input() showDescription: boolean = true;
   @Input() showEditButton: boolean = true;
+  @Input() showExternalUse: boolean = true;
 
   constructor(
     private componentStore: LocalOptionTypeTableComponentStore,
     private dialog: MatDialog,
-    private actions$: Actions,
+    private actions$: Actions
   ) {
     super();
   }
@@ -52,11 +53,11 @@ export class LocalOptionTypeViewComponent extends BaseComponent implements OnIni
       this.actions$
         .pipe(
           ofType(LocalOptionTypeActions.updateOptionTypeSuccess),
-          filter(({ optionType }) => optionType === this.optionType),
+          filter(({ optionType }) => optionType === this.optionType)
         )
         .subscribe(() => {
           this.componentStore.getOptionTypeItems();
-        }),
+        })
     );
   }
 

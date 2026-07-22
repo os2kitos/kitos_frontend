@@ -1,25 +1,29 @@
-<app-dialog-header
-  [title]="title"
-  [url]="url"
-  [closable]="closable"
-  [dialog]="dialog"
-  [helpText]="helpText"
-  *ngIf="withHeader"
-  [nested]="nested"
-></app-dialog-header>
+@if (withHeader) {
+  <app-dialog-header
+    [title]="title"
+    [url]="url"
+    [closable]="closable"
+    [dialog]="dialog"
+    [helpText]="helpText"
+    [nested]="nested"
+  ></app-dialog-header>
+}
 
-<div class="loading-container" *ngIf="loading" [ngClass]="{ 'background-grey': backgroundColor === 'grey' }">
-  <app-loading></app-loading>
-</div>
+@if (loading) {
+  <div class="loading-container" [ngClass]="{ 'background-grey': backgroundColor === 'grey' }">
+    <app-loading></app-loading>
+  </div>
+}
 
-<div
-  class="content"
+@if (loading === false) {
+  <div
+    class="content"
   [ngClass]="{
     'overflow-auto': overflow === 'auto',
     'background-grey': backgroundColor === 'grey',
     'remove-padding': noPadding === true,
   }"
-  *ngIf="loading === false"
->
-  <ng-content></ng-content>
-</div>
+    >
+    <ng-content></ng-content>
+  </div>
+}

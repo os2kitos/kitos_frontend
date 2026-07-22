@@ -72,6 +72,7 @@ export const selectDprEnableTransferBasis = createDprFrontPageFieldSelector('tra
 export const selectDprEnableProcessors = createDprFrontPageFieldSelector('processors');
 export const selectDprEnableSubProcessors = createDprFrontPageFieldSelector('subProcessors');
 export const selectDprEnableResponsibleOrgUnit = createDprFrontPageFieldSelector('responsibleOrgUnit');
+export const selectDprEnableEnforceInvalidity = createDprFrontPageFieldSelector('enforceInvalidity');
 
 //DPR -> IT Contract
 const createDprItContractsFieldSelector = (fieldKey: string) =>
@@ -104,6 +105,7 @@ export const selectITSystemUsageEnableTabHierarchy = createItSystemUsageTabEnabl
 export const selectITSystemUsageEnableTabLocalKle = createItSystemUsageTabEnabledSelector('localKle');
 export const selectITSystemUsageEnableTabNotifications = createItSystemUsageTabEnabledSelector('advice');
 export const selectITSystemUsageEnableLocalReferences = createItSystemUsageTabEnabledSelector('localReferences');
+export const selectITSystemUsageEnableUsageArchive = createItSystemUsageTabEnabledSelector('usageArchive');
 
 //IT System Usage > frontpage
 const createItSystemUsageFrontPageFieldSelector = (fieldKey: string) =>
@@ -112,9 +114,11 @@ const createItSystemUsageFrontPageFieldSelector = (fieldKey: string) =>
 export const selectITSystemUsageEnableName = createItSystemUsageFrontPageFieldSelector('name');
 export const selectITSystemUsageEnabledSystemId = createItSystemUsageFrontPageFieldSelector('systemId');
 export const selectITSystemUsageEnableVersion = createItSystemUsageFrontPageFieldSelector('version');
+export const selectITSystemUsageEnableGeneralPurpose = createItSystemUsageFrontPageFieldSelector('purpose');
 export const selectITSystemUsageEnableAmountOfUsers = createItSystemUsageFrontPageFieldSelector('amountOfUsers');
 export const selectITSystemUsageEnableDataClassification =
   createItSystemUsageFrontPageFieldSelector('dataClassification');
+export const selectITSystemUsageEnableGeneralHostedAt = createItSystemUsageFrontPageFieldSelector('hostedAt');
 export const selectITSystemUsageEnableDescription = createItSystemUsageFrontPageFieldSelector('description');
 export const selectITSystemUsageEnableTakenIntoUsageBy = createItSystemUsageFrontPageFieldSelector('takenIntoUsageBy');
 export const selectITSystemUsageEnableLastEditedBy = createItSystemUsageFrontPageFieldSelector('lastEditedBy');
@@ -125,6 +129,21 @@ export const selectITSystemUsageEnableStatus = createItSystemUsageFrontPageField
 export const selectITSystemUsageEnableContainsAITechnology =
   createItSystemUsageFrontPageFieldSelector('containsAITechnology');
 export const selectITSystemUsageEnableWebAccessibility = createItSystemUsageFrontPageFieldSelector('webAccessibility');
+export const selectITSystemUsageEnableIsSociallyCritical =
+  createItSystemUsageFrontPageFieldSelector('isSociallyCritical');
+export const selectITSystemUsageEnableIsBusinessCritical =
+  createItSystemUsageFrontPageFieldSelector('isBusinessCritical');
+export const selectITSystemUsageEnableCriticalityFieldsLastChanged =
+  createItSystemUsageFrontPageFieldSelector('criticalityFieldsLastChanged');
+export const selectITSystemUsageEnableCriticalityLevelDocumentation = createItSystemUsageFrontPageFieldSelector(
+  'criticalityLevelDocumentation',
+);
+export const selectITSystemUsageEnableSystemUsageCriticalityLevel =
+  createItSystemUsageFrontPageFieldSelector('systemUsageCriticalityLevel');
+export const selectITSystemUsageEnableTechnicalSystemType =
+  createItSystemUsageFrontPageFieldSelector('technicalSystemType');
+export const selectITSystemUsageEnableLicensingAndCodeModels =
+  createItSystemUsageFrontPageFieldSelector('licensingAndCodeModels');
 
 //IT System Usage > Contracts
 const createItSystemUsageContractsFieldSelector = (fieldKey: string) =>
@@ -138,10 +157,11 @@ export const selectITSystemUsageEnableSelectContractToDetermineIfItSystemIsActiv
 const createItSystemUsageGdprFieldSelector = (fieldKey: string) =>
   createFieldOrGroupEnabledSelector(UIModuleConfigKey.ItSystemUsage, 'gdpr', fieldKey);
 
-export const selectITSystemUsageEnableGdprPurpose = createItSystemUsageGdprFieldSelector('purpose');
-export const selectITSystemUsageEnableGdprBusinessCritical = createItSystemUsageGdprFieldSelector('businessCritical');
-export const selectITSystemUsageEnableGdprHostedAt = createItSystemUsageGdprFieldSelector('hostedAt');
+export const selectITSystemUsageEnableGdprPurpose = createItSystemUsageGdprFieldSelector('processingPurpose');
 export const selectITSystemUsageEnableGdprDocumentation = createItSystemUsageGdprFieldSelector('documentation');
+export const selectITSystemUsageEnableGdprIsDataProcessingAgreementRequired = createItSystemUsageGdprFieldSelector(
+  'isDataProcessingAgreementRequired',
+);
 export const selectITSystemUsageEnableGdprDataTypes = createItSystemUsageGdprFieldSelector('dataTypes');
 export const selectITSystemUsageEnabledRegisteredCategories =
   createItSystemUsageGdprFieldSelector('registeredCategories');
@@ -152,6 +172,8 @@ export const selectITSystemUsageEnableGdprPlannedRiskAssessmentDate =
   createItSystemUsageGdprFieldSelector('plannedRiskAssessmentDate');
 export const selectITSystemUsageEnableGdprConductedRiskAssessment =
   createItSystemUsageGdprFieldSelector('conductedRiskAssessment');
+export const selectITSystemUsageEnableGdprRiskAssessmentResult =
+  createItSystemUsageGdprFieldSelector('riskAssessmentResult');
 export const selectITSystemUsageEnableGdprDpiaConducted = createItSystemUsageGdprFieldSelector('dpiaConducted');
 export const selectITSystemUsageEnableGdprRetentionPeriod = createItSystemUsageGdprFieldSelector('retentionPeriod');
 
@@ -186,6 +208,13 @@ const createItSystemUsageKleFieldSelector = (fieldKey: string) =>
   createFieldOrGroupEnabledSelector(UIModuleConfigKey.ItSystemUsage, 'localKle', fieldKey);
 export const selectITSystemUsageEnableInheritedKle = createItSystemUsageKleFieldSelector('inheritedKle');
 export const selectITSystemUsageEnableLocalKle = createItSystemUsageKleFieldSelector('localKle');
+
+//IT system usage > Interfaces
+const createItSystemUsageInterfacesFieldSelector = (fieldKey: string) =>
+  createFieldOrGroupEnabledSelector(UIModuleConfigKey.ItSystemUsage, 'interfaces', fieldKey);
+export const selectITSystemUsageEnableItInterfaceIds = createItSystemUsageInterfacesFieldSelector('itInterfaceIds');
+export const selectITSystemUsageEnableItInterfaceVersions =
+  createItSystemUsageInterfacesFieldSelector('itInterfaceVersions');
 
 //IT contracts
 const createItContractsTabEnabledSelector = (tabKey: string) =>

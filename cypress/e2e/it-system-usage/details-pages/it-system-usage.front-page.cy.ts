@@ -1,5 +1,7 @@
 /// <reference types="cypress" />
 
+const generalInformation = 'Systeminformation';
+
 describe('it-system-usage frontpage', () => {
   beforeEach(() => {
     cy.requireIntercept();
@@ -15,15 +17,33 @@ describe('it-system-usage frontpage', () => {
     getKleRow(kleNumber).contains(name);
   }
 
+  it('can edit business critical status', () => {
+    cy.intercept('/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' });
+    cy.contains('System 3').click();
+
+    cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' }).as(
+      'patchRequest',
+    );
+
+    cy.dropdown('Forretningskritisk IT-system', 'Nej', true);
+
+    cy.wait('@patchRequest')
+      .its('request.body')
+      .should('deep.eq', {
+        general: { isBusinessCritical: 'No' },
+      });
+  });
+
   it('can show IT system usage details', () => {
     cy.intercept('/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' });
     cy.contains('System 3').click();
 
     cy.contains('Systeminformation');
     cy.input('Systemnavn').should('have.value', 'kaldenavn');
-    cy.dropdown('Antal brugere').should('have.text', '>100');
+    cy.dropdown('Antal brugere').should('have.text', '100-499');
     cy.dropdown('Klassifikation af data').should('have.text', 'Almindelige oplysninger');
     cy.contains('Informationer, hvor offentliggørelse er naturlig eller ikke ');
+    cy.dropdown('Tekniske systemtyper').should('have.text', 'Fagsystem');
 
     cy.contains('Systemanvendelse');
     cy.input('Sidst redigeret (bruger)').should('have.value', 'Martin');
@@ -36,6 +56,9 @@ describe('it-system-usage frontpage', () => {
     cy.getByDataCy('web-accessibility-compliance').within(() => cy.contains('Ja'));
     cy.inputByCy('last-web-accessibility-check').should('have.value', '27-02-2025');
     cy.textareaByCy('web-accessibility-notes').should('have.value', 'en note om tilgængelighed');
+
+    cy.dropdown('Forretningskritisk IT-system').should('have.text', 'Ja');
+    cy.dropdown('IT-systemet driftes').should('have.text', 'On-premise');
 
     cy.contains('Data fra IT Systemkataloget').click();
 
@@ -55,6 +78,22 @@ describe('it-system-usage frontpage', () => {
       .within(() => {
         verifyKle('83.01.02', 'IT-udstyr, anskaffelse');
       });
+  });
+
+  it.only('can edit hosted at status', () => {
+    cy.intercept('PATCH', '/api/v2/it-system-usages/*', {
+      fixture: './it-system-usage/it-system-usage-updated.json',
+    }).as('patch');
+    cy.contains('System 3').click();
+
+    const newHostedAt = 'Eksternt';
+    cy.dropdown('IT-systemet driftes', newHostedAt, true);
+    cy.contains(generalInformation).click();
+
+    cy.wait('@patch')
+      .its('request.body')
+      .should('deep.eq', { general: { hostedAt: 'External' } });
+    cy.dropdown('IT-systemet driftes').should('have.text', newHostedAt);
   });
 
   it('can refresh page on IT system usage details', () => {
@@ -139,10 +178,15 @@ describe('it-system-usage frontpage', () => {
     cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' }).as(
       'patch2',
     );
-    cy.dropdown('Antal brugere', '50-100');
+    cy.dropdown('Antal brugere', '50-99');
     cy.wait('@patch2')
       .its('request.body')
-      .should('deep.eq', { general: { numberOfExpectedUsers: { lowerBound: 50, upperBound: 100 } } });
+      .should('deep.eq', { general: { numberOfExpectedUsers: { lowerBound: 50, upperBound: 99 } } });
+
+    expectGeneralPropertyUpdate(
+      { technicalSystemTypeUuids: ['1a2b3c4d-0001-0001-0001-000000000001', '1a2b3c4d-0001-0001-0001-000000000002'] },
+      () => cy.dropdown('Tekniske systemtyper', 'Infrastruktur', true),
+    );
 
     cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' }).as(
       'patch3',

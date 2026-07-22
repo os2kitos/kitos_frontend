@@ -5,6 +5,8 @@ import { TestRunner } from 'cypress/support/test-runner';
 function setupTest() {
   cy.requireIntercept();
 
+  cy.intercept('/api/v2/internal/it-systems/global-option-types/system-usage-criticality-level-types', {});
+  cy.intercept('/api/v2/internal/it-systems/global-option-types/technical-system-types', { body: [] });
   cy.intercept('api/v2/internal/it-systems/global-option-types/business-types', {
     fixture: './global-admin/it-system/business-types.json',
   });

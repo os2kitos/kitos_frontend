@@ -47,3 +47,5 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+telerik-license.txt

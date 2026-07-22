@@ -1,0 +1,23 @@
+@use "theme";
+@use "mixins";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  gap: theme.$padding-large;
+  width: 100%;
+}
+
+form {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: theme.$padding-large;
+
+  .two-thirds-column-width {
+    @include mixins.two-thirds-column-width;
+  }
+
+  .full-width {
+    grid-column: span 3;
+  }
+}

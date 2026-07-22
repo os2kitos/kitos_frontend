@@ -9,7 +9,7 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
 import { LocalAdminUserActions } from 'src/app/store/global-admin/local-admins/actions';
 import { selectAllLocalAdmins, selectLocalAdminsLoading } from 'src/app/store/global-admin/local-admins/selectors';
 import { DialogComponent } from '../../../../shared/components/dialogs/dialog/dialog.component';
-import { NgIf, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { LoadingComponent } from '../../../../shared/components/loading/loading.component';
 import { StandardVerticalContentGridComponent } from '../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { UserDropdownComponent } from '../../../../shared/components/dropdowns/user-dropdown/user-dropdown.component';
@@ -23,7 +23,6 @@ import { ButtonComponent } from '../../../../shared/components/buttons/button/bu
   styleUrl: './create-local-admin-dialog.component.scss',
   imports: [
     DialogComponent,
-    NgIf,
     LoadingComponent,
     StandardVerticalContentGridComponent,
     UserDropdownComponent,
@@ -32,8 +31,8 @@ import { ButtonComponent } from '../../../../shared/components/buttons/button/bu
     OrganizationDropdownComponent,
     DialogActionsComponent,
     ButtonComponent,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class CreateLocalAdminDialogComponent extends BaseComponent implements OnInit {
   public readonly localAdminOrganizations$ = this.store.select(selectAllLocalAdmins).pipe(

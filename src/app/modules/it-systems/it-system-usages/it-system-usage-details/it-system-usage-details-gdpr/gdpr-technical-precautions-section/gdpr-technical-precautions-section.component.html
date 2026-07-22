@@ -3,7 +3,7 @@
   [isExpanded]="(isExpanded$ | async) ?? false"
   (expandedChanged)="onExpandedChanged($event)"
   i18n-title
->
+  >
   <form [formGroup]="mainFormGroup">
     <app-standard-vertical-content-grid>
       <app-dropdown
@@ -16,14 +16,15 @@
         data-cy="technical-precautions-dropdown"
       ></app-dropdown>
       <app-paragraph paragraphSize="x-small" [bold]="true" i18n>Hvad består de af?</app-paragraph>
-      <app-checkbox
-        *ngFor="let option of technicalPrecautionsOptions"
-        labelPosition="after"
-        [text]="option.name"
-        [formGroup]="technicalPrecautionsForm"
-        [formName]="option.value"
-        (valueChange)="patchTechnicalPrecautionsApplied()"
-      ></app-checkbox>
+      @for (option of technicalPrecautionsOptions; track option) {
+        <app-checkbox
+          labelPosition="after"
+          [text]="option.name"
+          [formGroup]="technicalPrecautionsForm"
+          [formName]="option.value"
+          (valueChange)="patchTechnicalPrecautionsApplied()"
+        ></app-checkbox>
+      }
       <app-edit-url-section
         title="Link til dokumentation"
         i18n-title

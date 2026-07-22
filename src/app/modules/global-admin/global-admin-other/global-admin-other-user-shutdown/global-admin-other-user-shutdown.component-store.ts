@@ -2,11 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { tapResponse } from '@ngrx/operators';
 import { mergeMap, Observable, tap } from 'rxjs';
-import {
-  APIOrganizationResponseDTO,
-  APIUserReferenceResponseDTO,
-  APIV2GlobalUserInternalINTERNALService,
-} from 'src/app/api/v2';
+import { APIOrganizationResponseDTO, APIUserReferenceResponseDTO, GlobalUserInternalV2Service } from 'src/app/api/v2';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 
 interface State {
@@ -22,7 +18,7 @@ export class GlobalAdminOtherUserShutdownComponentStore extends ComponentStore<S
   public readonly userOrganizations$ = this.select((state) => state.userOrganizations);
 
   constructor(
-    @Inject(APIV2GlobalUserInternalINTERNALService) private userService: APIV2GlobalUserInternalINTERNALService,
+    @Inject(GlobalUserInternalV2Service) private userService: GlobalUserInternalV2Service,
     private notificationService: NotificationService,
   ) {
     super({ isLoading: false, users: [] });
@@ -51,11 +47,11 @@ export class GlobalAdminOtherUserShutdownComponentStore extends ComponentStore<S
             nameOrEmailQuery: search,
           })
           .pipe(
-            tapResponse(
-              (users) => this.setUsers(users),
-              (e) => console.error(e),
-              () => this.setLoading(false),
-            ),
+            tapResponse({
+              next: (users) => this.setUsers(users),
+              error: (e) => console.error(e),
+              complete: () => this.setLoading(false),
+            }),
           );
       }),
     ),
@@ -65,12 +61,12 @@ export class GlobalAdminOtherUserShutdownComponentStore extends ComponentStore<S
     userUuid$.pipe(
       mergeMap((userUuid) => {
         return this.userService.getManyGlobalUserInternalV2GetOrganizationsByUserUuid({ userUuid }).pipe(
-          tapResponse(
-            (userOrganizations) => {
+          tapResponse({
+            next: (userOrganizations) => {
               this.setUserOrganizations(userOrganizations);
             },
-            (e) => console.error(e),
-          ),
+            error: (e) => console.error(e),
+          }),
         );
       }),
     ),
@@ -80,15 +76,15 @@ export class GlobalAdminOtherUserShutdownComponentStore extends ComponentStore<S
     userUuid$.pipe(
       mergeMap((userUuid) => {
         return this.userService.deleteSingleGlobalUserInternalV2DeleteUser({ userUuid }).pipe(
-          tapResponse(
-            () => {
+          tapResponse({
+            next: () => {
               this.notificationService.showDefault($localize`Brugeren blev slettet`);
             },
-            (e) => {
+            error: (e) => {
               console.error(e);
               this.notificationService.showError($localize`Kunne ikke slette brugeren`);
             },
-          ),
+          }),
         );
       }),
     ),

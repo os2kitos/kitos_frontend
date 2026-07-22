@@ -1,27 +1,29 @@
+import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { of } from 'rxjs';
+import { combineLatest, map, of } from 'rxjs';
 import { GDPR_REPORT_FILE_PREEFIX } from 'src/app/shared/constants/constants';
 import * as GdprFields from 'src/app/shared/constants/gdpr-overview-grid-column-constants';
 import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
 import { mapDateToString } from 'src/app/shared/helpers/date.helpers';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
-import { hostedAtOptions } from 'src/app/shared/models/it-system-usage/gdpr/hosted-at.model';
 import { riskAssessmentResultOptions } from 'src/app/shared/models/it-system-usage/gdpr/risk-assessment-result';
 import { yesNoDontKnowOptions } from 'src/app/shared/models/yes-no-dont-know.model';
 import { GridUIConfigService } from 'src/app/shared/services/ui-config-services/grid-ui-config.service';
 import { GdprReportActions } from 'src/app/store/it-system-usage/gdpr-report/actions';
 import { selectGdprReports } from 'src/app/store/it-system-usage/gdpr-report/selectors';
-import { NgIf, AsyncPipe } from '@angular/common';
+import { selectGridDataItSystemUuids } from 'src/app/store/it-system-usage/selectors';
 import { LocalGridComponent } from '../../../../shared/components/local-grid/local-grid.component';
 
 @Component({
   selector: 'app-gdpr-overview',
   templateUrl: './gdpr-overview.component.html',
   styleUrl: './gdpr-overview.component.scss',
-  imports: [NgIf, LocalGridComponent, AsyncPipe],
+  imports: [LocalGridComponent, AsyncPipe],
 })
 export class GdprOverviewComponent {
+  public readonly systemUsageItSystemUuids$ = this.store.select(selectGridDataItSystemUuids);
+
   private readonly gridColumns: GridColumn[] = [
     {
       field: GdprFields.SYSTEM_UUID,
@@ -88,13 +90,6 @@ export class GdprOverviewComponent {
       hidden: false,
     },
     {
-      field: GdprFields.BUSINESS_CRITICAL_NAME,
-      title: $localize`Forretningskritisk IT-System`,
-      hidden: false,
-      extraData: yesNoDontKnowOptions,
-      extraFilter: 'enum',
-    },
-    {
       field: GdprFields.DATA_PROCESSING_AGREEMENT_CONCLUDED,
       title: $localize`Databehandleraftale`,
       hidden: false,
@@ -156,13 +151,6 @@ export class GdprOverviewComponent {
       width: 350,
     },
     {
-      field: GdprFields.HOSTED_AT_NAME,
-      title: $localize`IT-Systemet driftes`,
-      hidden: false,
-      extraData: hostedAtOptions,
-      extraFilter: 'enum',
-    },
-    {
       field: GdprFields.TECHNICAL_SUPERVISION_DOCUMENTATION_NAME,
       title: $localize`Dokumentation til teknisk foranstaltning`,
       hidden: false,
@@ -200,7 +188,11 @@ export class GdprOverviewComponent {
     this.uiConfigService.filterGridColumnsByUIConfig(UIModuleConfigKey.Gdpr),
   );
 
-  public readonly gdprReports$ = this.store.select(selectGdprReports);
+  public readonly allGdprReports$ = this.store.select(selectGdprReports);
+
+  public readonly filteredGdprReports$ = combineLatest([this.allGdprReports$, this.systemUsageItSystemUuids$]).pipe(
+    map(([reports, uuids]) => reports.filter((report) => uuids.includes(report.systemUuid))),
+  );
 
   constructor(
     private store: Store,

@@ -1,7 +1,7 @@
 <app-scrollbar-dialog [title]="title" backgroundColor="grey">
   <form [formGroup]="fkOrgFormGroup">
     <app-standard-vertical-content-grid>
-      <ng-container *ngIf="(isLoading$ | async) !== true">
+      @if ((isLoading$ | async) !== true) {
         <app-card class="configuration-margin-bottom">
           <app-card-header
             title="Konfiguration"
@@ -33,89 +33,98 @@
               <app-paragraph paragraphSize="x-small" [dimmed]="true" i18n
                 >* Foretager automatisk tjek hver mandag nat og sender en email med oversigt over ventende opdateringer
                 til brugere i kommunen med rollen "Lokal Administrator"</app-paragraph
+                >
+              </div>
+            </app-standard-vertical-content-grid>
+          </app-card>
+          @if ((updateConsequences$ | async) === undefined) {
+            <app-card>
+              <app-card-header
+                title="Forhåndsvisning"
+                i18n-title
+                helpTextKey="local-config-fk-org-import-modal.units"
+              ></app-card-header>
+              @if (snapshot$ | async; as snapshot) {
+                <app-drag-and-drop-tree
+                  itemType="organization"
+                  [currentNodeUuid]="snapshot.uuid"
+                  [nodes]="(snapshotTree$ | async) ?? []"
+                  [disableDrag]="true"
+                  [disableRedirect]="true"
+                  (nodeExpandClick)="nodeExpandClick($event)"
+                  [maxLevel]="(levelsSubject$ | async) ?? undefined"
+                ></app-drag-and-drop-tree>
+              }
+            </app-card>
+          }
+          @if (updateConsequences$ | async; as updateConsequences) {
+            <app-accordion
+              title="Ændringer"
+              [isExpanded]="true"
+              i18n-title
+              class="overflow-hidden"
               >
-            </div>
-          </app-standard-vertical-content-grid>
-        </app-card>
-        <app-card *ngIf="(updateConsequences$ | async) === undefined">
-          <app-card-header
-            title="Forhåndsvisning"
-            i18n-title
-            helpTextKey="local-config-fk-org-import-modal.units"
-          ></app-card-header>
-          <app-drag-and-drop-tree
-            *ngIf="snapshot$ | async as snapshot"
-            itemType="organization"
-            [currentNodeUuid]="snapshot.uuid"
-            [nodes]="(snapshotTree$ | async) ?? []"
-            [disableDrag]="true"
-            [disableRedirect]="true"
-            (nodeExpandClick)="nodeExpandClick($event)"
-            [maxLevel]="(levelsSubject$ | async) ?? undefined"
-          ></app-drag-and-drop-tree>
-        </app-card>
-        <app-accordion
-          title="Ændringer"
-          [isExpanded]="true"
-          i18n-title
-          class="overflow-hidden"
-          *ngIf="updateConsequences$ | async as updateConsequences"
-        >
-          <ng-container *ngIf="(updateConsequencesLength$ | async) === 0">
-            <app-paragraph i18n>Ingen ændringer registreret </app-paragraph>
-          </ng-container>
-          <ng-container *ngIf="(updateConsequencesLength$ | async) !== 0">
-            <app-content-space-between class="consequences-header-container">
-              <app-paragraph paragraphSize="small" [dimmed]="true" i18n
-                >Viser konsekvenser <strong>({{ updateConsequencesLength$ | async }})</strong> af opdateringen for
+              @if ((updateConsequencesLength$ | async) === 0) {
+                <app-paragraph i18n>Ingen ændringer registreret </app-paragraph>
+              }
+              @if ((updateConsequencesLength$ | async) !== 0) {
+                <app-content-space-between class="consequences-header-container">
+                  <app-paragraph paragraphSize="small" [dimmed]="true" i18n
+                    >Viser konsekvenser <strong>({{ updateConsequencesLength$ | async }})</strong> af opdateringen for
                 organisationshierarkiet i KITOS</app-paragraph
-              >
-              <app-button (buttonClick)="exportToExcel()" i18n buttonStyle="secondary"
-                ><app-export-icon />Eksporter</app-button
-              >
-            </app-content-space-between>
-            <app-local-grid
-              [data]="updateConsequences"
-              [columns]="gridColumns"
-              [withOutline]="true"
-              exportToExcelName="FK Organisation - Konsekvenser ved opdatering"
-              i18n-exportToExcelName
-            ></app-local-grid>
-          </ng-container>
-        </app-accordion>
-      </ng-container>
-      <app-loading *ngIf="isLoading$ | async"></app-loading>
-    </app-standard-vertical-content-grid>
-  </form>
-  <app-dialog-actions>
-    <app-button color="warn" (buttonClick)="cancel()" [disabled]="(isLoading$ | async) ?? false" i18n
-      >Annuller</app-button
-    >
-    <app-button
-      *ngIf="(updateConsequences$ | async) === undefined"
-      (buttonClick)="proceedSynchronization()"
-      [disabled]="(isLoading$ | async) ?? false"
-      i18n
-      data-cy="proceed-button"
-      >{{ proceedText }}</app-button
-    >
-    <app-button
-      *ngIf="updateConsequences$ | async"
-      (buttonClick)="cancelUpdate()"
-      [disabled]="(isLoading$ | async) ?? false"
-      buttonStyle="secondary"
-      color="warn"
-      i18n
-      data-cy="cancel-button"
-      >Afvis ændringer
+                    >
+                    <app-button (buttonClick)="exportToExcel()" i18n buttonStyle="secondary"
+                      ><app-export-icon />Eksporter</app-button
+                      >
+                    </app-content-space-between>
+                    <app-local-grid
+                      [data]="updateConsequences"
+                      [columns]="gridColumns"
+                      [withOutline]="true"
+                      exportToExcelName="FK Organisation - Konsekvenser ved opdatering"
+                      i18n-exportToExcelName
+                    ></app-local-grid>
+                  }
+                </app-accordion>
+              }
+            }
+            @if (isLoading$ | async) {
+              <app-loading></app-loading>
+            }
+          </app-standard-vertical-content-grid>
+        </form>
+        <app-dialog-actions>
+          <app-button color="warn" (buttonClick)="cancel()" [disabled]="(isLoading$ | async) ?? false" i18n
+            >Annuller</app-button
+            >
+            @if ((updateConsequences$ | async) === undefined) {
+              <app-button
+                (buttonClick)="proceedSynchronization()"
+                [disabled]="(isLoading$ | async) ?? false"
+                i18n
+                data-cy="proceed-button"
+                >{{ proceedText }}</app-button
+                >
+              }
+              @if (updateConsequences$ | async) {
+                <app-button
+                  (buttonClick)="cancelUpdate()"
+                  [disabled]="(isLoading$ | async) ?? false"
+                  buttonStyle="secondary"
+                  color="warn"
+                  i18n
+                  data-cy="cancel-button"
+                  >Afvis ændringer
     </app-button>
-    <app-button
-      *ngIf="updateConsequences$ | async"
-      (buttonClick)="updateSynchronization()"
-      [disabled]="(isLoading$ | async) ?? false"
-      i18n
-      data-cy="save-button"
-      >Godkend ændringer</app-button
-    >
-  </app-dialog-actions>
-</app-scrollbar-dialog>
+              }
+              @if (updateConsequences$ | async) {
+                <app-button
+                  (buttonClick)="updateSynchronization()"
+                  [disabled]="(isLoading$ | async) ?? false"
+                  i18n
+                  data-cy="save-button"
+                  >Godkend ændringer</app-button
+                  >
+                }
+              </app-dialog-actions>
+            </app-scrollbar-dialog>

@@ -4,7 +4,7 @@ import { tapResponse } from '@ngrx/operators';
 
 import { Store } from '@ngrx/store';
 import { Observable, combineLatestWith, mergeMap, tap } from 'rxjs';
-import { APIIdentityNamePairResponseDTO, APIV2DataProcessingRegistrationInternalINTERNALService } from 'src/app/api/v2';
+import { APIIdentityNamePairResponseDTO, DataProcessingRegistrationInternalV2Service } from 'src/app/api/v2';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectDataProcessingUuid } from 'src/app/store/data-processing/selectors';
 
@@ -19,7 +19,7 @@ export class CreateDprSystemUsageDialogComponentStore extends ComponentStore<Sta
 
   constructor(
     private store: Store,
-    private dprApiService: APIV2DataProcessingRegistrationInternalINTERNALService,
+    private dprApiService: DataProcessingRegistrationInternalV2Service,
   ) {
     super({ loading: false });
   }
@@ -47,11 +47,11 @@ export class CreateDprSystemUsageDialogComponentStore extends ComponentStore<Sta
         return this.dprApiService
           .getManyDataProcessingRegistrationInternalV2GetAvailableSystemUsages({ dprUuid, nameQuery: search })
           .pipe(
-            tapResponse(
-              (organizations) => this.updateSystemUsages(organizations),
-              (e) => console.error(e),
-              () => this.updateIsLoading(false),
-            ),
+            tapResponse({
+              next: (organizations) => this.updateSystemUsages(organizations),
+              error: (e) => console.error(e),
+              complete: () => this.updateIsLoading(false),
+            }),
           );
       }),
     ),

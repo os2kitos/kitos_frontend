@@ -19,7 +19,7 @@ import {
   selectITSystemUsageEnableInheritedKle,
   selectITSystemUsageEnableLocalKle,
 } from 'src/app/store/organization/ui-module-customization/selectors';
-import { NgIf, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { CardComponent } from '../../../../../shared/components/card/card.component';
 import { CardHeaderComponent } from '../../../../../shared/components/card-header/card-header.component';
 import { ItSystemKleOverviewComponent } from '../../../shared/it-system-kle-overview/it-system-kle-overview.component';
@@ -32,7 +32,6 @@ import { CollectionExtensionButtonComponent } from '../../../../../shared/compon
   templateUrl: './it-system-usage-details-kle.component.html',
   styleUrls: ['./it-system-usage-details-kle.component.scss'],
   imports: [
-    NgIf,
     CardComponent,
     CardHeaderComponent,
     ItSystemKleOverviewComponent,
@@ -40,8 +39,8 @@ import { CollectionExtensionButtonComponent } from '../../../../../shared/compon
     KleTableComponent,
     EmptyStateComponent,
     CollectionExtensionButtonComponent,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class ItSystemUsageDetailsKleComponent extends BaseComponent implements OnInit {
   private disabledKleUuids: Array<string> = [];

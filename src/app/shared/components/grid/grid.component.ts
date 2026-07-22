@@ -22,7 +22,6 @@ import {
   PageChangeEvent,
   ToolbarTemplateDirective,
 } from '@progress/kendo-angular-grid';
-import { PagerTemplateDirective } from '@progress/kendo-angular-pager';
 import {
   CompositeFilterDescriptor,
   FilterDescriptor,
@@ -32,6 +31,7 @@ import {
 } from '@progress/kendo-data-query';
 import { cloneDeep, get } from 'lodash';
 import { BehaviorSubject, combineLatest, debounceTime, first, map, Observable, of } from 'rxjs';
+import * as CatalogFields from 'src/app/shared/constants/it-system-catalog-grid-column-constants';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import { GridActions } from 'src/app/store/grid/actions';
 import { selectExportAllColumns, selectReadyToExport } from 'src/app/store/grid/selectors';
@@ -74,10 +74,10 @@ import { DateFilterComponent } from './date-filter/date-filter.component';
 import { DropdownColumnDataFilterComponent } from './dropdown-column-data-filter/dropdown-column-data-filter.component';
 import { DropdownFilterComponent } from './dropdown-filter/dropdown-filter.component';
 import { GridCellComponent } from './grid-cell/grid-cell.component';
-import { GridPaginatorComponent } from './grid-paginator/grid-paginator.component';
 import { NumericFilterComponent } from './numeric-filter/numeric-filter.component';
 import { StringFilterComponent } from './string-filter/string-filter.component';
 import { UnitDropdownFilterComponent } from './unit-dropdown-filter/unit-dropdown-filter.component';
+import { ITContractSupplierActions } from 'src/app/store/it-contract/it-contract-supplier/actions';
 
 @Component({
   selector: 'app-grid',
@@ -103,8 +103,6 @@ import { UnitDropdownFilterComponent } from './unit-dropdown-filter/unit-dropdow
     DropdownColumnDataFilterComponent,
     CellTemplateDirective,
     GridCellComponent,
-    PagerTemplateDirective,
-    GridPaginatorComponent,
     CustomMessagesComponent,
     LoadingTemplateDirective,
     LoadingComponent,
@@ -133,6 +131,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   @Output() rowIdSelect = new EventEmitter<CellClickEvent>();
   @Output() deleteEvent = new EventEmitter<T>();
   @Output() modifyEvent = new EventEmitter<T>();
+  @Output() toggleEvent = new EventEmitter<BooleanChange<T>>();
   @Output() checkboxChange = new EventEmitter<BooleanChange<T>>();
 
   private data: GridData | null = null;
@@ -169,6 +168,8 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     this.subscriptions.add(
       this.stateChangeSubject.pipe(debounceTime(DEFAULT_INPUT_DEBOUNCE_TIME)).subscribe((state) => {
         if (state) {
+          // Emit the state with original field names
+          // Remapping happens in the store effects/reducers, not here
           this.stateChange.emit(state);
         }
       })
@@ -205,9 +206,19 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     this.subscriptions.add(
       this.columns$.pipe(first()).subscribe((columns) => {
         //This check prevents stale state from being used to sort the grid
-        const columnToBeSorted = columns?.find((column) => column?.field === sort[0]?.field);
+        // Check if the stored sort is using a sortField, and convert back to display field
+        const sortFieldToUse = sort[0]?.field;
+        const columnWithSortField = columns?.find((column) => column?.sortField === sortFieldToUse);
+        const columnToBeSorted = columnWithSortField ?? columns?.find((column) => column?.field === sortFieldToUse);
+
         if (!columnToBeSorted || columnToBeSorted.sortable === false) return;
-        this.onSortChange(sort);
+
+        // If stored sort uses sortField, convert back to display field for Kendo Grid
+        const uiSort = columnWithSortField
+          ? [{ ...sort[0], field: columnWithSortField.field }]
+          : sort;
+
+        this.onSortChange(uiSort);
       })
     );
   }
@@ -230,7 +241,11 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   }
 
   public onSortChange(sort: SortDescriptor[] | undefined) {
+    // Keep the original field names for Kendo Grid's UI tracking
+    // Remapping to sortField happens in remapSortFieldsForBackend before sending to backend
     this.onStateChange({ ...this.state, sort });
+
+    // For local storage, save with the original field name (not remapped)
     this.setLocalStorageSort(sort);
   }
 
@@ -270,6 +285,10 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
 
   public onDeleteClick(item: T) {
     this.deleteEvent.emit(item);
+  }
+
+  public onToggleClick(value: boolean, item: T) {
+    this.toggleEvent.emit({ value, item });
   }
 
   public onColumnReorder(event: ColumnReorderEvent, columns: GridColumn[]) {
@@ -334,18 +353,32 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
       map(([columns, exportAllColumns, uiConfigApplications]) => {
         const columnsToExport = columns
           ? columns
-              .filter(includedColumnInExport)
-              .filter((column) => exportAllColumns || !column.hidden || this.isExcelOnlyColumn(column))
-              .filter((column) => this.isColumnEnabled(uiConfigApplications, column))
+            .filter(includedColumnInExport)
+            .filter((column) => exportAllColumns || !column.hidden || this.isExcelOnlyColumn(column))
+            .filter((column) => this.isColumnEnabled(uiConfigApplications, column))
           : [];
 
         const roleColumnsInExport = columnsToExport.filter((column) => column.extraData === this.RolesExtraDataLabel);
         const roleColumnFieldsToExport = new Set(roleColumnsInExport.map((column) => column.field));
 
+        // Check if Usages field is included in export
+        const catalogUsagesFieldToExport = new Set(
+          columnsToExport.filter((column) => column.field === CatalogFields.USAGES).map((column) => column.field)
+        );
+
         const result = columnsToExport.filter(
           (column) =>
-            !this.isExcelOnlyColumn(column) ||
-            roleColumnFieldsToExport.has(column.field.replaceAll(this.EmailColumnField, ''))
+            // Exclude role email columns if their corresponding role column is not included
+            !(
+              this.isRoleExcelOnlyColumn(column) &&
+              !roleColumnFieldsToExport.has(column.field.replaceAll(this.EmailColumnField, ''))
+            ) &&
+            // Exclude UsageNames excel-only column if Usages column is not included
+            !(
+              this.isExcelOnlyColumn(column) &&
+              column.field === CatalogFields.USAGE_NAMES &&
+              !catalogUsagesFieldToExport.has(CatalogFields.USAGES)
+            )
         );
 
         if (exportAllColumns) {
@@ -368,7 +401,11 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   }
 
   private isExcelOnlyColumn(column: GridColumn): boolean {
-    return column.style === 'excel-only';
+    return column.style === 'excel-only' || this.isRoleExcelOnlyColumn(column);
+  }
+
+  private isRoleExcelOnlyColumn(column: GridColumn): boolean {
+    return column.style === 'role-excel-only';
   }
 
   public getExportName(): string {
@@ -454,6 +491,9 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
         break;
       case 'organization-user':
         this.store.dispatch(OrganizationUserActions.updateGridColumns(columns));
+        break;
+      case 'it-contract-supplier':
+        this.store.dispatch(ITContractSupplierActions.updateGridColumns(columns));
         break;
       default:
         throw `Column reorder for entity type ${this.entityType} not implemented: grid.component.ts`;

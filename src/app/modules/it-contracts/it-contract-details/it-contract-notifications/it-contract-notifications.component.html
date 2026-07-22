@@ -4,13 +4,14 @@
     helpTextKey="it-contract.edit.advice-generic"
     i18n-title
     data-cy="notification-card-title"
-  >
+    >
   </app-card-header>
-  <app-notifications-table
-    *ngIf="contractUuid$ | async as contractUuid"
-    [hasModifyPermission]="hasModifyPermission$"
-    [entityUuid]="contractUuid"
-    ownerResourceType="ItContract"
-  >
-  </app-notifications-table>
+  @if (contractUuid$ | async; as contractUuid) {
+    <app-notifications-table
+      [hasModifyPermission]="hasModifyPermission$"
+      [entityUuid]="contractUuid"
+      ownerResourceType="ItContract"
+      >
+    </app-notifications-table>
+  }
 </app-card>

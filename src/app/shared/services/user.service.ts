@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { map } from 'rxjs';
-import { APIUserResponseDTO } from 'src/app/api/v2';
+import { APIDefaultUserStartPreferenceChoice } from 'src/app/api/v2';
 import { selectUIRootConfig } from 'src/app/store/organization/selectors';
 import { startPreferenceChoiceOptions } from '../models/organization/organization-user/start-preference.model';
 import { filterNullish } from '../pipes/filter-nullish';
@@ -17,16 +17,18 @@ export class UserService {
   public getAvailableStartPreferenceOptions() {
     return this.uiRootConfig$.pipe(
       map((uiRootConfig) => {
-        const excludedValues: APIUserResponseDTO.DefaultUserStartPreferenceEnum[] = [];
+        const excludedValues: APIDefaultUserStartPreferenceChoice[] = [];
         if (!uiRootConfig.showItSystemModule) {
-          excludedValues.push(APIUserResponseDTO.DefaultUserStartPreferenceEnum.ItSystemCatalog);
-          excludedValues.push(APIUserResponseDTO.DefaultUserStartPreferenceEnum.ItSystemUsage);
+          excludedValues.push(
+            APIDefaultUserStartPreferenceChoice.ItSystemCatalog,
+            APIDefaultUserStartPreferenceChoice.ItSystemUsage,
+          );
         }
         if (!uiRootConfig.showDataProcessing) {
-          excludedValues.push(APIUserResponseDTO.DefaultUserStartPreferenceEnum.DataProcessing);
+          excludedValues.push(APIDefaultUserStartPreferenceChoice.DataProcessing);
         }
         if (!uiRootConfig.showItContractModule) {
-          excludedValues.push(APIUserResponseDTO.DefaultUserStartPreferenceEnum.ItContract);
+          excludedValues.push(APIDefaultUserStartPreferenceChoice.ItContract);
         }
 
         return startPreferenceChoiceOptions.filter((o) => !excludedValues.includes(o.value));

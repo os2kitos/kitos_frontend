@@ -1,42 +1,48 @@
 <app-paragraph i18n [bold]="true" paragraphSize="medium">{{ title }}</app-paragraph>
-<app-native-table *ngIf="!isCopingToClipboard">
-  <thead>
-    <th i18n>Uuid</th>
-    <th i18n>Navn</th>
-  </thead>
-  <tbody>
-    <tr *ngFor="let consequence of consequences">
-      <td>
-        <app-paragraph>
-          {{ consequence.uuid }}
-        </app-paragraph>
-      </td>
-      <td>
-        <app-paragraph>
-          {{ consequence.name }}
-        </app-paragraph>
-      </td>
-    </tr>
-  </tbody>
-</app-native-table>
-<ng-container *ngIf="isCopingToClipboard">
+@if (!isCopyingToClipboard) {
   <app-native-table>
     <thead>
       <th i18n>Uuid</th>
       <th i18n>Navn</th>
     </thead>
     <tbody>
-      <tr *ngFor="let consequence of consequences">
-        <td>
-          {{ consequence.uuid }}
-        </td>
-        <td>
-          {{ consequence.name }}
-        </td>
-      </tr>
+      @for (consequence of consequences; track consequence) {
+        <tr>
+          <td>
+            <app-paragraph>
+              {{ consequence.uuid }}
+            </app-paragraph>
+          </td>
+          <td>
+            <app-paragraph>
+              {{ consequence.name }}
+            </app-paragraph>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </app-native-table>
+}
+@if (isCopyingToClipboard) {
+  <app-native-table>
+    <thead>
+      <th i18n>Uuid</th>
+      <th i18n>Navn</th>
+    </thead>
+    <tbody>
+      @for (consequence of consequences; track consequence) {
+        <tr>
+          <td>
+            {{ consequence.uuid }}
+          </td>
+          <td>
+            {{ consequence.name }}
+          </td>
+        </tr>
+      }
     </tbody>
   </app-native-table>
   <br />
   <br />
   <br />
-</ng-container>
+}

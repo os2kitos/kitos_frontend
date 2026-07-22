@@ -1,3 +1,4 @@
+import { AsyncPipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -10,7 +11,6 @@ import { AlertActions } from 'src/app/store/alerts/actions';
 import { selectAlertsByType } from 'src/app/store/alerts/selectors';
 import { Alert, RelatedEntityType } from 'src/app/store/alerts/state';
 import { LocalGridComponent } from '../../../../../shared/components/local-grid/local-grid.component';
-import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-alerts-grid',
@@ -42,8 +42,8 @@ export class AlertsGridComponent implements OnInit {
 
   public deleteAlert(alert: Alert): void {
     this.confirmActionService.confirmAction({
-      title: $localize`Slet advarsel`,
-      message: $localize`Er du sikker på, at du vil slette advarslen?`,
+      title: $localize`Fjern notifikation`,
+      message: $localize`Er du sikker på, at du vil fjerne notifikationen om manglende afsendelse af advis? BEMÆRK: dette sletter ikke den pågældende advis.`,
       category: ConfirmActionCategory.Warning,
       onConfirm: () => this.store.dispatch(AlertActions.deleteAlert(this.relatedEntityType, alert.uuid)),
     });

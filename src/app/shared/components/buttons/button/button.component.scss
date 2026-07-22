@@ -14,7 +14,7 @@ button.mat-mdc-button-base {
   white-space: nowrap;
   gap: 8px;
   border-radius: theme.$radius-large;
-  border-color: var(--mdc-text-button-label-text-color);
+  border-color: var(--mat-button-text-label-text-color);
 
   &.large {
     height: 56px;

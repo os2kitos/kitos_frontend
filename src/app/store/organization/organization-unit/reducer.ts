@@ -17,6 +17,7 @@ import {
 import { removeUnitAndUpdateChildren } from '../../helpers/organization-unit-helper';
 import { OrganizationUnitActions } from './actions';
 import { OrganizationUnitState } from './state';
+import { entityWithUnavailableName } from 'src/app/shared/helpers/string.helpers';
 
 export const organizationUnitAdapter = createEntityAdapter<APIOrganizationUnitResponseDTO>({
   selectId: (organizationUnit) => organizationUnit.uuid,
@@ -120,7 +121,7 @@ export const organizationUnitFeature = createFeature({
       (state): OrganizationUnitState => ({ ...state, isLoadingRegistrations: true }),
     ),
     on(OrganizationUnitActions.getRegistrationsSuccess, (state, { registrations }): OrganizationUnitState => {
-      const mappedRegistrations = mapRegistraitons(registrations);
+      const mappedRegistrations = mapRegistrations(registrations);
 
       return { ...state, registrations, isLoadingRegistrations: false, ...mappedRegistrations };
     }),
@@ -260,8 +261,8 @@ function filterChangedRegistrations(
   let internalPayments: Array<PaymentRegistrationModel> = copyObject(state.internalPayments);
   let externalPayments: Array<PaymentRegistrationModel> = copyObject(state.externalPayments);
   changedRegistrations.paymentRegistrationDetails?.forEach((removedPayment) => {
-    internalPayments = filterPayments(internalPayments, removedPayment.itContractId, removedPayment.internalPayments);
-    externalPayments = filterPayments(externalPayments, removedPayment.itContractId, removedPayment.externalPayments);
+    internalPayments = filterPayments(internalPayments, removedPayment.itContractId, removedPayment.internalPayments ?? undefined);
+    externalPayments = filterPayments(externalPayments, removedPayment.itContractId, removedPayment.externalPayments ?? undefined);
   });
   const relevantSystems = copyObject(state.relevantSystems)?.filter(
     (x) => !changedRegistrations.relevantSystems?.some((removedId) => removedId === x.registration.id),
@@ -293,7 +294,7 @@ function filterPayments(
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-function mapRegistraitons(registrations: APIOrganizationRegistrationUnitResponseDTO): any {
+function mapRegistrations(registrations: APIOrganizationRegistrationUnitResponseDTO): any {
   const internalPayments: PaymentRegistrationModel[] = [];
   const externalPayments: PaymentRegistrationModel[] = [];
 
@@ -441,5 +442,5 @@ function updateRelevantSystems(
   return registrations;
 }
 function getDisabledName(registration: APINamedEntityWithEnabledStatusV2DTO) {
-  return registration.disabled ? `${registration.name} ` + $localize`(Ikke tilgængeligt)` : registration.name;
+  return entityWithUnavailableName(registration.name ?? '', registration.disabled ?? false);
 }

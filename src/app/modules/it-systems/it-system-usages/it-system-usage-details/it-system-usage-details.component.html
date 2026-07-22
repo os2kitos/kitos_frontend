@@ -1,21 +1,22 @@
-<ng-container *ngIf="(isLoading$ | async) === false">
+@if ((isLoading$ | async) === false) {
   <app-breadcrumbs [items]="breadCrumbs$ | async"></app-breadcrumbs>
-
   <div class="header">
     <h4>{{ itSystemUsageName$ | async }}</h4>
-    <app-button
-      *ngIf="hasDeletePermissions$ | async"
-      buttonStyle="secondary"
-      color="warn"
-      (buttonClick)="showRemoveDialog()"
-      i18n
-      >Fjern anvendelse</app-button
-    >
-  </div>
-  <div class="content">
-    <app-navigation-drawer [items]="navigationItems"> </app-navigation-drawer>
-
-    <router-outlet></router-outlet>
-  </div>
-</ng-container>
-<app-loading *ngIf="isLoading$ | async"></app-loading>
+    @if (hasDeletePermissions$ | async) {
+      <app-button
+        buttonStyle="secondary"
+        color="warn"
+        (buttonClick)="showRemoveDialog()"
+        i18n
+        >Fjern anvendelse</app-button
+        >
+      }
+    </div>
+    <div class="content">
+      <app-navigation-drawer [items]="navigationItems"> </app-navigation-drawer>
+      <router-outlet></router-outlet>
+    </div>
+  }
+  @if (isLoading$ | async) {
+    <app-loading></app-loading>
+  }

@@ -1,4 +1,4 @@
-import { AsyncPipe, NgFor, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
@@ -23,14 +23,12 @@ import { GridUsagesDialogComponentStore } from './grid-usages-dialog.component-s
   imports: [
     ScrollbarDialogComponent,
     NativeTableComponent,
-    NgFor,
     ContentSpaceBetweenComponent,
     ParagraphComponent,
-    NgIf,
     IconButtonComponent,
     ArrowRightIconComponent,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class GridUsagesDialogComponent extends BaseComponent implements OnInit {
   @Input() type!: RegistrationEntityTypes | undefined;

@@ -4,6 +4,7 @@ export type GridColumnActionType = 'edit' | 'delete' | 'toggle';
 
 export interface GridActionColumn {
   type: GridColumnActionType;
+  visibilityColumn?: string;
 }
 
 export function createGridActionColumn(types: GridColumnActionType[]): GridColumn {

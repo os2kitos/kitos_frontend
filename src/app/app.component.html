@@ -1,6 +1,10 @@
-<app-nav-bar *ngIf="isAuthenticated$ | async"></app-nav-bar>
+@if (isAuthenticated$ | async) {
+  <app-nav-bar></app-nav-bar>
+}
 
-<app-loading *ngIf="isAuthenticating$ | async" class="frontpage-spinner"></app-loading>
+@if (isAuthenticating$ | async) {
+  <app-loading class="frontpage-spinner"></app-loading>
+}
 
 <router-outlet></router-outlet>
 

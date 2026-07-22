@@ -1,5 +1,7 @@
 import { createSelector } from '@ngrx/store';
+import { memoize } from 'lodash';
 import { mapToRoleAssignmentsRequests } from 'src/app/shared/helpers/role-helpers';
+import { FieldPermissionsService } from 'src/app/shared/services/field-permissions.service';
 import { dataProcessingAdapter, dataProcessingFeature } from './reducer';
 
 const { selectDataProcessingState } = dataProcessingFeature;
@@ -51,7 +53,7 @@ export const selectDataProcessingSystems = createSelector(
 );
 export const selectDataProcessingExternalReferences = createSelector(
   selectDataProcessing,
-  (dataProcessing) => dataProcessing?.externalReferences,
+  (dataProcessing) => dataProcessing?.externalReferences ?? [],
 );
 export const selectDataProcessingItContacts = createSelector(
   selectDataProcessing,
@@ -67,7 +69,7 @@ export const selectDataProcessingAssociatedContracts = createSelector(
 );
 export const selectDataProcessingIsValid = createSelector(
   selectDataProcessing,
-  (dataProcessing) => dataProcessing?.general.valid,
+  (dataProcessing) => dataProcessing?.general.validity.valid,
 );
 
 export const selectDataProcessingHasReadPermissions = createSelector(
@@ -82,6 +84,14 @@ export const selectDataProcessingHasDeletePermissions = createSelector(
   selectDataProcessingState,
   (state) => state.permissions?.delete,
 );
+export const selectDataProcessingFieldPermissions = memoize((field: string) =>
+  createSelector(selectDataProcessingState, (state) =>
+    state.permissions?.fieldPermissions?.fields
+      ? FieldPermissionsService.hasPermission(state.permissions.fieldPermissions.fields, field)
+      : false,
+  ),
+);
+
 export const selectDataProcessingHasCreateCollectionPermissions = createSelector(
   selectDataProcessingState,
   (state) => state.collectionPermissions?.create,
@@ -103,7 +113,7 @@ export const selectDataProcessingLastSeenGridConfig = createSelector(
 
 export const selectDataProcessingRights = createSelector(
   selectDataProcessing,
-  (dataProcessing) => dataProcessing?.roles,
+  (dataProcessing) => dataProcessing?.roles ?? undefined,
 );
 
 export const selectDataProcessingRightUuidPairs = createSelector(

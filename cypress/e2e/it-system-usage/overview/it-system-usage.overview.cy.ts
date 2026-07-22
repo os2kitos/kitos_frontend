@@ -7,7 +7,7 @@ function setupTest() {
   cy.intercept('/odata/ItSystemUsageOverviewReadModels*', { fixture: './it-system-usage/it-system-usages.json' });
   cy.intercept('/api/v1/itsystem-usage/options/overview/organizationUuid*', {});
   cy.intercept('/api/v2/organizations/*/organization-units*', {});
-  cy.intercept('/api/v2/business-types*', {});
+  cy.intercept('/api/v2/business-types*', []);
   cy.intercept('/api/v2/internal/organizations/*/grid/permissions', { statusCode: 404, body: {} });
   cy.intercept('/api/v2/internal/organizations/*/grid/*/*', { statusCode: 404, body: {} });
 }
@@ -28,7 +28,7 @@ describe('it-system-usage', () => {
       cy.setup(
         true,
         'it-systems/it-system-usages',
-        './shared/it-system-usage-ui-customization-no-gdpr-and-lifecycle.json'
+        './shared/it-system-usage-ui-customization-no-gdpr-and-lifecycle.json',
       );
       cy.get('h3').should('have.text', 'IT Systemer i Fælles Kommune');
 

@@ -26,9 +26,9 @@ export interface ItSystemUsageRelationMigration {
 
 export function adaptItSystemUsageMigration(source: APIItSystemUsageMigrationV2ResponseDTO): ItSystemUsageMigration {
   return {
-    targetUsage: mapIdentityNamePairWithDeactivatedStatus(source.targetUsage),
-    fromSystem: mapIdentityNamePairWithDeactivatedStatus(source.fromSystem),
-    toSystem: mapIdentityNamePairWithDeactivatedStatus(source.toSystem),
+    targetUsage: mapIdentityNamePairWithDeactivatedStatus(source.targetUsage ?? undefined),
+    fromSystem: mapIdentityNamePairWithDeactivatedStatus(source.fromSystem ?? undefined),
+    toSystem: mapIdentityNamePairWithDeactivatedStatus(source.toSystem ?? undefined),
     affectedContracts: source.affectedContracts?.map(mapIdentityNamePair).filter((x) => x !== undefined),
     affectedDataProcessingRegistrations: source.affectedDataProcessingRegistrations
       ?.map(mapIdentityNamePair)
@@ -37,13 +37,15 @@ export function adaptItSystemUsageMigration(source: APIItSystemUsageMigrationV2R
   };
 }
 
-function mapItSystemUsageRelationMigration(source: APIItSystemUsageRelationMigrationV2ResponseDTO) {
+function mapItSystemUsageRelationMigration(
+  source: APIItSystemUsageRelationMigrationV2ResponseDTO,
+): ItSystemUsageRelationMigration {
   return {
-    toSystem: mapIdentityNamePairWithDeactivatedStatus(source.toSystem),
-    fromSystem: mapIdentityNamePairWithDeactivatedStatus(source.fromSystem),
-    description: source.description,
-    interface: mapIdentityNamePair(source._interface),
-    frequencyType: mapIdentityNamePair(source.frequencyType),
-    contract: mapIdentityNamePair(source.contract),
+    toSystem: mapIdentityNamePairWithDeactivatedStatus(source.toSystem ?? undefined),
+    fromSystem: mapIdentityNamePairWithDeactivatedStatus(source.fromSystem ?? undefined),
+    description: source.description ?? undefined,
+    interface: mapIdentityNamePair(source._interface ?? undefined),
+    frequencyType: mapIdentityNamePair(source.frequencyType ?? undefined),
+    contract: mapIdentityNamePair(source.contract ?? undefined),
   };
 }

@@ -1,24 +1,28 @@
 <h3 i18n>Min profil</h3>
 <app-card>
-  <app-form-grid [formGroup]="editForm" *ngIf="(isLoading$ | async) === false">
-    <app-org-unit-select
-      *ngIf="hasRoleInOrganization$ | async"
-      text="Primær organisationsenhed"
-      i18n-text
-      data-cy="default-responsible"
-      [formGroup]="editForm"
-      formName="defaultOrganizationUnit"
-      [clearable]="false"
-      (valueChange)="onChange({ defaultOrganizationUnitUuid: $event })"
-    ></app-org-unit-select>
-    <div *ngIf="(hasRoleInOrganization$ | async) !== true">
-      <app-textbox text="Primær organisationsenhed" [disabled]="true" i18n-text> </app-textbox>
-      <app-textbox-info
-        ><app-paragraph paragraphSize="x-small" i18n>
+  @if ((isLoading$ | async) === false) {
+    <app-form-grid [formGroup]="editForm">
+      @if (hasRoleInOrganization$ | async) {
+        <app-org-unit-select
+          text="Primær organisationsenhed"
+          i18n-text
+          data-cy="default-responsible"
+          [formGroup]="editForm"
+          formName="defaultOrganizationUnit"
+          [clearable]="false"
+          (valueChange)="onChange({ defaultOrganizationUnitUuid: $event })"
+        ></app-org-unit-select>
+      }
+      @if ((hasRoleInOrganization$ | async) !== true) {
+        <div>
+          <app-textbox text="Primær organisationsenhed" [disabled]="true" i18n-text> </app-textbox>
+          <app-textbox-info
+            ><app-paragraph paragraphSize="x-small" i18n>
           Du kan kun tilknytte en primær organisationsenhed, i organisationer du har en rolle i.
         </app-paragraph>
-      </app-textbox-info>
-    </div>
+        </app-textbox-info>
+      </div>
+    }
     <div>
       <app-textbox
         text="Email"
@@ -27,51 +31,56 @@
         formName="email"
         data-cy="email"
         (validatedValueChange)="validateEmail($event)"
-      >
+        >
       </app-textbox>
-      <app-paragraph *ngIf="alreadyExists$ | async" color="error" i18n data-cy="error-message"
-        >Denne email er allerede i brug.</app-paragraph
-      >
-    </div>
-    <app-textbox
-      text="Fornavn"
-      i18n-text
-      [formGroup]="editForm"
-      formName="firstName"
-      data-cy="firstName"
-      (validatedValueChange)="firstNameChange($event)"
-    >
-    </app-textbox>
-    <app-textbox
-      text="Efternavn"
-      i18n-text
-      [formGroup]="editForm"
-      formName="lastName"
-      data-cy="lastName"
-      (validatedValueChange)="lastNameChange($event)"
-    >
-    </app-textbox>
-    <app-textbox
-      text="Telefonnummer"
-      i18n-text
-      [pattern]="phoneNumberRegex"
-      [formGroup]="editForm"
-      formName="phoneNumber"
-      data-cy="phoneNumber"
-      (validatedValueChange)="phoneNumberChange($event)"
-    >
-    </app-textbox>
-    <app-dropdown
-      text="Primær startmodul"
-      formName="defaultStartPreference"
-      [formGroup]="editForm"
-      [data]="startPreferenceOptions | async"
-      [clearable]="false"
-      i18n-text
-      data-cy="start-preference"
-      (valueChange)="startPreferenceChange($event)"
-    >
-    </app-dropdown>
-  </app-form-grid>
-  <app-loading *ngIf="(isLoading$ | async) === true"></app-loading>
+      @if (alreadyExists$ | async) {
+        <app-paragraph color="error" i18n data-cy="error-message"
+          >Denne email er allerede i brug.</app-paragraph
+          >
+        }
+      </div>
+      <app-textbox
+        text="Fornavn"
+        i18n-text
+        [formGroup]="editForm"
+        formName="firstName"
+        data-cy="firstName"
+        (validatedValueChange)="firstNameChange($event)"
+        >
+      </app-textbox>
+      <app-textbox
+        text="Efternavn"
+        i18n-text
+        [formGroup]="editForm"
+        formName="lastName"
+        data-cy="lastName"
+        (validatedValueChange)="lastNameChange($event)"
+        >
+      </app-textbox>
+      <app-textbox
+        text="Telefonnummer"
+        i18n-text
+        [pattern]="phoneNumberRegex"
+        [formGroup]="editForm"
+        formName="phoneNumber"
+        data-cy="phoneNumber"
+        (validatedValueChange)="phoneNumberChange($event)"
+        >
+      </app-textbox>
+      <app-dropdown
+        text="Primær startmodul"
+        formName="defaultStartPreference"
+        [formGroup]="editForm"
+        [data]="startPreferenceOptions | async"
+        [clearable]="false"
+        i18n-text
+        data-cy="start-preference"
+        (valueChange)="startPreferenceChange($event)"
+        >
+      </app-dropdown>
+    </app-form-grid>
+  }
+  @if ((isLoading$ | async) === true) {
+    <app-loading></app-loading>
+  }
 </app-card>

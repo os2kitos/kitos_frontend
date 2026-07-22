@@ -32,7 +32,7 @@ import { AppPath } from 'src/app/shared/enums/app-path';
 import { EditOrganizationUnitDialogComponent } from './edit-organization-unit-dialog/edit-organization-unit-dialog.component';
 import { HelpButtonComponent } from '../../../shared/components/help-button/help-button.component';
 import { CardComponent } from '../../../shared/components/card/card.component';
-import { NgIf, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { MenuButtonComponent } from '../../../shared/components/buttons/menu-button/menu-button.component';
 import { MenuButtonItemComponent } from '../../../shared/components/buttons/menu-button/menu-button-item/menu-button-item.component';
 import { PlusIconBlueComponent } from '../../../shared/components/icons/plus-icon-blue.component';
@@ -55,7 +55,6 @@ import { OrganizationUnitRoleTableComponent } from './organization-unit-role-tab
   imports: [
     HelpButtonComponent,
     CardComponent,
-    NgIf,
     MenuButtonComponent,
     MenuButtonItemComponent,
     PlusIconBlueComponent,
@@ -70,8 +69,8 @@ import { OrganizationUnitRoleTableComponent } from './organization-unit-role-tab
     DetailsHeaderComponent,
     CheckboxButtonComponent,
     OrganizationUnitRoleTableComponent,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class OrganizationStructureComponent extends BaseComponent implements OnInit {
   public readonly organizationUuid$ = this.store.select(selectOrganizationUuid).pipe(filterNullish());

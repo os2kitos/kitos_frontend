@@ -1,0 +1,29 @@
+@use "theme";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  max-width: theme.$content-width-max;
+  margin: theme.$padding-large auto;
+  padding: 0 theme.$padding-large;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: theme.$padding-medium; //Space between header block and content block
+
+  h4 {
+    padding: theme.$padding-medium theme.$padding-small;
+    margin-bottom: 0px; //remove margin which offsets the h4 from the buttons in the header
+  }
+
+  app-button {
+    flex: 0 0 200px;
+  }
+}
+
+.content {
+  display: flex;
+  gap: theme.$padding-medium;
+}

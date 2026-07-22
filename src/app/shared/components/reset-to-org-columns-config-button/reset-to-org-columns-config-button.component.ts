@@ -1,26 +1,27 @@
+import { AsyncPipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { APIOrganizationGridConfigurationResponseDTO } from 'src/app/api/v2';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
+import { ITContractSupplierActions } from 'src/app/store/it-contract/it-contract-supplier/actions';
+import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
+import { ITSystemActions } from 'src/app/store/it-system/actions';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
 import { ColumnConfigService } from '../../services/column-config.service';
-import { ITSystemActions } from 'src/app/store/it-system/actions';
-import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import { MenuButtonItemComponent } from '../buttons/menu-button/menu-button-item/menu-button-item.component';
 import { ReloadIconComponent } from '../icons/reload-icon.component';
-import { TooltipComponent } from '../tooltip/tooltip.component';
-import { NgIf, AsyncPipe } from '@angular/common';
 import { WarningIconComponent } from '../icons/warning-icon.component';
+import { TooltipComponent } from '../tooltip/tooltip.component';
 
 @Component({
   selector: 'app-reset-to-org-columns-config-button',
   templateUrl: './reset-to-org-columns-config-button.component.html',
   styleUrl: './reset-to-org-columns-config-button.component.scss',
-  imports: [MenuButtonItemComponent, ReloadIconComponent, TooltipComponent, NgIf, WarningIconComponent, AsyncPipe],
+  imports: [MenuButtonItemComponent, ReloadIconComponent, TooltipComponent, WarningIconComponent, AsyncPipe],
 })
 export class ResetToOrgColumnsConfigButtonComponent implements OnInit {
   @Input() public entityType!: RegistrationEntityTypes;
@@ -67,6 +68,9 @@ export class ResetToOrgColumnsConfigButtonComponent implements OnInit {
         break;
       case 'it-interface':
         this.store.dispatch(ITInterfaceActions.resetGridConfiguration());
+        break;
+      case 'it-contract-supplier':
+        this.store.dispatch(ITContractSupplierActions.resetGridConfiguration());
         break;
       default:
         throw new Error('Unsupported entity type');

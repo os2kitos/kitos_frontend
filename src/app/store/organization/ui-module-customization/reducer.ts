@@ -7,10 +7,11 @@ import { UIModuleConfigState } from './state';
 
 export const uiModuleConfigAdapter = createEntityAdapter<UIModuleCustomization>();
 
-export const UIModuleConfigInitialState: UIModuleConfigState = uiModuleConfigAdapter.getInitialState({
+export const UIModuleConfigInitialState: UIModuleConfigState = {
+  ...uiModuleConfigAdapter.getInitialState(),
   uiModuleConfigs: [],
   loading: false,
-});
+};
 
 export const uiModuleConfigFeature = createFeature({
   name: 'UIModuleCustomization',
@@ -28,7 +29,7 @@ export const uiModuleConfigFeature = createFeature({
           ...state,
           uiModuleConfigs: updateUIModuleConfigs(state, uiModuleConfig),
         };
-      },
+      }
     ),
     on(
       UIModuleConfigActions.putUIModuleCustomizationSuccess,
@@ -41,7 +42,7 @@ export const uiModuleConfigFeature = createFeature({
           ...state,
           uiModuleConfigs: updateUIModuleConfigs(state, uiModuleConfig),
         };
-      },
+      }
     ),
     on(
       UIModuleConfigActions.getUIModuleConfig,
@@ -51,7 +52,7 @@ export const uiModuleConfigFeature = createFeature({
           ...state,
           loading: true,
         };
-      },
+      }
     ),
     on(
       UIModuleConfigActions.resetLoading,
@@ -64,8 +65,8 @@ export const uiModuleConfigFeature = createFeature({
           ...state,
           loading: false,
         };
-      },
-    ),
+      }
+    )
   ),
 });
 

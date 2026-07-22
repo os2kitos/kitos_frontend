@@ -8,6 +8,8 @@ export interface LocalAdminOptionTypeItem {
   writeAccess: boolean | undefined;
   description: string | undefined;
   obligatory: boolean;
+  isExternallyUsed?: boolean;
+  externallyUsedDescription?: string;
 }
 
 export type LocalAdminOptionType = RegularOptionType | RoleOptionTypes;

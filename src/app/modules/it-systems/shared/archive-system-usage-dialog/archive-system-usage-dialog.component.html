@@ -1,0 +1,79 @@
+<app-scrollbar-dialog title="Bevar historik system" i18n-title overflow="none">
+  <app-standard-vertical-content-grid>
+    <app-datepicker
+      [formGroup]="archiveFormGroup"
+      formName="takenIntoUsageDate"
+      text="Ibrugtagningsdato"
+      i18n-text
+    ></app-datepicker>
+
+    <ng-container>
+      <app-datepicker
+        [formGroup]="archiveFormGroup"
+        formName="archivingDate"
+        text="Udfasningsdato"
+        i18n-text
+      ></app-datepicker>
+
+      @if (hasDateOrderValidationError()) {
+        <app-paragraph paragraphSize="small" color="error" i18n class="date-validation-error-margin">
+          Udfasningsdato kan ikke være før ibrugtagningsdato
+        </app-paragraph>
+      }
+    </ng-container>
+
+    <app-textbox
+      [formGroup]="archiveFormGroup"
+      formName="referenceName"
+      text="Navngivning på ESDH sag"
+      i18n-text
+    ></app-textbox>
+
+    <app-textarea [formGroup]="archiveFormGroup" formName="note" text="Kommentar" i18n-text></app-textarea>
+
+    <ng-container class="archive-references-section">
+      @for (referenceControl of archiveReferences.controls; track $index; let index = $index) {
+        <div class="reference-row">
+          <div class="reference-field">
+            <app-edit-url-section
+              [simpleLink$]="getReferenceObservable$(index)"
+              [closeDialogOnSubmit]="true"
+              title="Reference/link til ESDH"
+              i18n-title
+              (submitMethod)="onReferenceUpdated(index, $event)"
+              [closeDialogOnSubmit]="true"
+              [disableSubmitIfNoUrl]="true"
+            ></app-edit-url-section>
+          </div>
+          @if (true) {
+            <app-icon-button
+              [tooltipText]="'Fjern reference'"
+              i18n-tooltipText
+              (buttonClick)="removeReference(index)"
+              [disabled]="!canRemoveReference()"
+              ><app-trashcan-icon
+                [ngClass]="{
+                  'disabled-delete-icon': !canRemoveReference(),
+                }"
+              ></app-trashcan-icon>
+            </app-icon-button>
+          }
+        </div>
+      }
+
+      <app-button
+        i18n
+        class="add-ref-button"
+        (buttonClick)="addReference()"
+        buttonStyle="secondary"
+        [disabled]="isAddReferenceDisabled()"
+        >Tilføj flere referencer</app-button
+      >
+    </ng-container>
+  </app-standard-vertical-content-grid>
+
+  <app-dialog-actions class="dialog-actions-margin">
+    <app-button buttonStyle="secondary" (buttonClick)="onCancel()">Fortryd</app-button>
+    <app-button buttonStyle="primary" (buttonClick)="onConfirm()" [disabled]="formIsInvalid()">Bekræft</app-button>
+  </app-dialog-actions>
+</app-scrollbar-dialog>

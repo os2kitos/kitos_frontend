@@ -15,7 +15,7 @@ import {
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { CardComponent } from '../../../../../../shared/components/card/card.component';
 import { CardHeaderComponent } from '../../../../../../shared/components/card-header/card-header.component';
-import { NgIf, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { DetailsPageLinkComponent } from '../../../../../../shared/components/details-page-link/details-page-link.component';
 import { FormGridComponent } from '../../../../../../shared/components/form-grid/form-grid.component';
 import { TextBoxComponent } from '../../../../../../shared/components/textbox/textbox.component';
@@ -28,15 +28,14 @@ import { TextAreaComponent } from '../../../../../../shared/components/textarea/
   imports: [
     CardComponent,
     CardHeaderComponent,
-    NgIf,
     DetailsPageLinkComponent,
     FormGridComponent,
     FormsModule,
     ReactiveFormsModule,
     TextBoxComponent,
     TextAreaComponent,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class ItSystemUsageDetailsArchivingCatalogComponent extends BaseComponent implements OnInit {
   public readonly itSystemCatalogItemUuid$ = this.store.select(selectItSystemUsageSystemContextUuid);

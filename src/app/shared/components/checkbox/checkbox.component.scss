@@ -32,20 +32,20 @@
 
   .mat-mdc-checkbox.mat-accent {
     //Selected state
-    --mdc-checkbox-selected-checkmark-color: #{theme.$color-white};
-    --mdc-checkbox-selected-focus-icon-color: #{theme.$color-primary-base};
-    --mdc-checkbox-selected-hover-icon-color: #{theme.$color-primary-base};
-    --mdc-checkbox-selected-icon-color: #{theme.$color-primary-base};
-    --mdc-checkbox-selected-pressed-icon-color: #{theme.$color-primary-base};
+    --mat-checkbox-selected-checkmark-color: #{theme.$color-white};
+    --mat-checkbox-selected-focus-icon-color: #{theme.$color-primary-base};
+    --mat-checkbox-selected-hover-icon-color: #{theme.$color-primary-base};
+    --mat-checkbox-selected-icon-color: #{theme.$color-primary-base};
+    --mat-checkbox-selected-pressed-icon-color: #{theme.$color-primary-base};
 
     //Unselected state
-    --mdc-checkbox-unselected-icon-color: #{theme.$color-neutral-60};
-    --mdc-checkbox-unselected-pressed-icon-color: #{theme.$color-primary-base};
-    --mdc-checkbox-unselected-focus-icon-color: #{theme.$color-primary-base};
-    --mdc-checkbox-unselected-hover-icon-color: #{theme.$color-primary-base};
+    --mat-checkbox-unselected-icon-color: #{theme.$color-neutral-60};
+    --mat-checkbox-unselected-pressed-icon-color: #{theme.$color-primary-base};
+    --mat-checkbox-unselected-focus-icon-color: #{theme.$color-primary-base};
+    --mat-checkbox-unselected-hover-icon-color: #{theme.$color-primary-base};
 
     //Diabled state
-    --mdc-checkbox-disabled-selected-icon-color: #{theme.$color-neutral-60};
-    --mdc-checkbox-disabled-unselected-icon-color: #{theme.$color-neutral-60};
+    --mat-checkbox-disabled-selected-icon-color: #{theme.$color-neutral-60};
+    --mat-checkbox-disabled-unselected-icon-color: #{theme.$color-neutral-60};
   }
 }

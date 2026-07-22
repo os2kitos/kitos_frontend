@@ -1,17 +1,17 @@
 import { Inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, of, switchMap } from 'rxjs';
-import { APIV2HelpTextsInternalINTERNALService } from 'src/app/api/v2/api/v2HelpTextsInternalINTERNAL.service';
+import { HelpTextsInternalV2Service } from 'src/app/api/v2';
+import { APIHelpTextResponseDTO } from 'src/app/api/v2/model/helpTextResponseDTO';
 import { adaptHelpText, HelpText } from 'src/app/shared/models/help-text.model';
 import { HelpTextActions } from './actions';
-import { APIHelpTextResponseDTO } from 'src/app/api/v2/model/helpTextResponseDTO';
 
 @Injectable()
 export class GlobalAdminHelpTextsEffects {
   constructor(
     private actions$: Actions,
-    @Inject(APIV2HelpTextsInternalINTERNALService)
-    private helpTextsInternalService: APIV2HelpTextsInternalINTERNALService,
+    @Inject(HelpTextsInternalV2Service)
+    private helpTextsInternalService: HelpTextsInternalV2Service,
   ) {}
 
   getHelpTexts$ = createEffect(() => {
@@ -38,10 +38,12 @@ export class GlobalAdminHelpTextsEffects {
     return this.actions$.pipe(
       ofType(HelpTextActions.createHelpText),
       switchMap(({ request }) => {
-        return this.helpTextsInternalService.postSingleHelpTextsInternalV2Post({ dto: request }).pipe(
-          map((helpTextDto) => HelpTextActions.createHelpTextSuccess(adaptHelpText(helpTextDto))),
-          catchError(() => of(HelpTextActions.createHelpTextError())),
-        );
+        return this.helpTextsInternalService
+          .postSingleHelpTextsInternalV2Post({ aPIHelpTextCreateRequestDTO: request })
+          .pipe(
+            map((helpTextDto) => HelpTextActions.createHelpTextSuccess(adaptHelpText(helpTextDto))),
+            catchError(() => of(HelpTextActions.createHelpTextError())),
+          );
       }),
     );
   });
@@ -50,10 +52,12 @@ export class GlobalAdminHelpTextsEffects {
     return this.actions$.pipe(
       ofType(HelpTextActions.updateHelpText),
       switchMap(({ key, request }) => {
-        return this.helpTextsInternalService.patchSingleHelpTextsInternalV2Patch({ key, dto: request }).pipe(
-          map((helpTextDto) => HelpTextActions.updateHelpTextSuccess(adaptHelpText(helpTextDto))),
-          catchError(() => of(HelpTextActions.updateHelpTextError())),
-        );
+        return this.helpTextsInternalService
+          .patchSingleHelpTextsInternalV2Patch({ key, aPIHelpTextUpdateRequestDTO: request })
+          .pipe(
+            map((helpTextDto) => HelpTextActions.updateHelpTextSuccess(adaptHelpText(helpTextDto))),
+            catchError(() => of(HelpTextActions.updateHelpTextError())),
+          );
       }),
     );
   });

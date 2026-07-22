@@ -88,7 +88,7 @@ export class CountryCreateDialogComponent extends BaseComponent implements OnIni
         this.store.dispatch(
           DataProcessingActions.addDataProcessingThirdCountry(
             this.thirdCountriesFormGroup.value.thirdCountry!,
-            countries,
+            countries ?? [],
           ),
         );
       });

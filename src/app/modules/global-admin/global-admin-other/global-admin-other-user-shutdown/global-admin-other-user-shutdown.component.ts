@@ -9,7 +9,7 @@ import { CardHeaderComponent } from '../../../../shared/components/card-header/c
 import { StandardVerticalContentGridComponent } from '../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { ConnectedDropdownComponent } from '../../../../shared/components/dropdowns/connected-dropdown/connected-dropdown.component';
 import { ButtonComponent } from '../../../../shared/components/buttons/button/button.component';
-import { NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { NativeTableComponent } from '../../../../shared/components/native-table/native-table.component';
 import { ParagraphComponent } from '../../../../shared/components/paragraph/paragraph.component';
 
@@ -26,12 +26,10 @@ import { ParagraphComponent } from '../../../../shared/components/paragraph/para
     StandardVerticalContentGridComponent,
     ConnectedDropdownComponent,
     ButtonComponent,
-    NgIf,
     NativeTableComponent,
-    NgFor,
     ParagraphComponent,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class GlobalAdminOtherUserShutdownComponent extends BaseComponent {
   public readonly isLoading$ = this.componentStore.isLoading$;

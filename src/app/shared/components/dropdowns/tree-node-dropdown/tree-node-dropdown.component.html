@@ -1,75 +1,84 @@
-<ng-container *ngIf="itemParentIdsDictionary && sortedData">
-  <ng-container *ngIf="formGroup" [formGroup]="formGroup">
+@if (itemParentIdsDictionary && sortedData) {
+  @if (formGroup) {
+    <ng-container [formGroup]="formGroup">
+      <ng-select
+        class="{{ size }}"
+        [clearable]="clearable"
+        [formControlName]="formName"
+        [placeholder]="text"
+        [fixedPlaceholder]="true"
+        [items]="sortedData"
+        [bindLabel]="textField"
+        [loading]="loading || false"
+        [clearAllText]="clearAllText"
+        [loadingText]="loadingText"
+        [notFoundText]="notFoundText"
+        [searchFn]="searchWithItemParents"
+        [appendTo]="appendTo"
+        [readonly]="disabled"
+        (search)="filter$.next($event.term)"
+        (change)="formSelectionChange($event)"
+        (clear)="filter$.next('')"
+        ><ng-template ng-option-tmp let-item="item">
+        @if (!item.description || !showDescription) {
+          <div
+          [style.text-indent]="
+            itemParentIdsDictionary[item.id] ? (itemParentIdsDictionary[item.id]!.length - 1) * 10 + 'px' : '0px'
+          "
+            >
+            {{ item.name }}
+          </div>
+        }
+        @if (item.description && showDescription) {
+          <div
+          [style.text-indent]="
+            itemParentIdsDictionary[item.id] ? (itemParentIdsDictionary[item.id]!.length - 1) * 10 + 'px' : '0px'
+          "
+            class="description"
+            >
+            {{ item.name }}
+            @if (item.description && showDescription) {
+              <app-paragraph paragraphSize="small">{{
+                item.description
+              }}</app-paragraph>
+            }
+          </div>
+        }
+      </ng-template></ng-select
+      >
+    </ng-container>
+  }
+  @if (!formGroup) {
     <ng-select
       class="{{ size }}"
       [clearable]="clearable"
-      [formControlName]="formName"
       [placeholder]="text"
       [fixedPlaceholder]="true"
       [items]="sortedData"
       [bindLabel]="textField"
       [loading]="loading || false"
+      [readonly]="disabled"
       [clearAllText]="clearAllText"
       [loadingText]="loadingText"
       [notFoundText]="notFoundText"
+      [(ngModel)]="value"
       [searchFn]="searchWithItemParents"
       [appendTo]="appendTo"
-      [readonly]="disabled"
       (search)="filter$.next($event.term)"
-      (change)="formSelectionChange($event)"
+      (change)="valueChange.emit($event)"
       (clear)="filter$.next('')"
       ><ng-template ng-option-tmp let-item="item">
-        <div
-          *ngIf="!item.description || !showDescription"
-          [style.text-indent]="
-            itemParentIdsDictionary[item.id] ? (itemParentIdsDictionary[item.id]!.length - 1) * 10 + 'px' : '0px'
-          "
-        >
-          {{ item.name }}
-        </div>
-        <div
-          *ngIf="item.description && showDescription"
-          [style.text-indent]="
-            itemParentIdsDictionary[item.id] ? (itemParentIdsDictionary[item.id]!.length - 1) * 10 + 'px' : '0px'
-          "
-          class="description"
-        >
-          {{ item.name }}
-          <app-paragraph *ngIf="item.description && showDescription" paragraphSize="small">{{
-            item.description
-          }}</app-paragraph>
-        </div>
-      </ng-template></ng-select
-    >
-  </ng-container>
-  <ng-select
-    *ngIf="!formGroup"
-    class="{{ size }}"
-    [clearable]="clearable"
-    [placeholder]="text"
-    [fixedPlaceholder]="true"
-    [items]="sortedData"
-    [bindLabel]="textField"
-    [loading]="loading || false"
-    [readonly]="disabled"
-    [clearAllText]="clearAllText"
-    [loadingText]="loadingText"
-    [notFoundText]="notFoundText"
-    [(ngModel)]="value"
-    [searchFn]="searchWithItemParents"
-    [appendTo]="appendTo"
-    (search)="filter$.next($event.term)"
-    (change)="valueChange.emit($event)"
-    (clear)="filter$.next('')"
-    ><ng-template ng-option-tmp let-item="item">
       <div
         [style.text-indent]="
           itemParentIdsDictionary[item.id] ? (itemParentIdsDictionary[item.id]!.length - 1) * 10 + 'px' : '0px'
         "
-      >
+        >
         {{ item.name }}
       </div>
     </ng-template>
   </ng-select>
-</ng-container>
-<app-loading *ngIf="!itemParentIdsDictionary || !sortedData"></app-loading>
+}
+}
+@if (!itemParentIdsDictionary || !sortedData) {
+  <app-loading></app-loading>
+}

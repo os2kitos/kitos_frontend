@@ -3,7 +3,7 @@ import { ComponentStore } from '@ngrx/component-store';
 import { tapResponse } from '@ngrx/operators';
 
 import { mergeMap, Observable } from 'rxjs';
-import { APIV2HelpTextsInternalINTERNALService } from 'src/app/api/v2/api/v2HelpTextsInternalINTERNAL.service';
+import { HelpTextsInternalV2Service } from 'src/app/api/v2';
 import { adaptHelpText, defaultHelpText, HelpText } from '../../models/help-text.model';
 
 interface State {
@@ -16,7 +16,7 @@ export class HelpDialogComponentStore extends ComponentStore<State> {
   public readonly helpText$ = this.select((state) => state.helpText);
   public readonly isEditable$ = this.select((state) => state.isEditable);
 
-  constructor(private helpTextsService: APIV2HelpTextsInternalINTERNALService) {
+  constructor(private helpTextsService: HelpTextsInternalV2Service) {
     super({ isEditable: false });
   }
 
@@ -36,16 +36,16 @@ export class HelpDialogComponentStore extends ComponentStore<State> {
             key,
           })
           .pipe(
-            tapResponse(
-              (response) => {
+            tapResponse({
+              next: (response) => {
                 try {
                   this.updateHelpText({ helpText: adaptHelpText(response), isEditable: true });
                 } catch (e) {
                   this.handleError(e);
                 }
               },
-              (e) => this.handleError(e),
-            ),
+              error: (e) => this.handleError(e),
+            }),
           ),
       ),
     ),

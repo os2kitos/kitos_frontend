@@ -11,20 +11,22 @@
   </app-standard-vertical-content-grid>
 
   <div class="error-paragraph-height">
-    <app-paragraph *ngIf="alreadyExists$ | async" color="error" i18n data-cy="name-error"
-      >Dette navn er allerede i brug!</app-paragraph
-    >
-  </div>
+    @if (alreadyExists$ | async) {
+      <app-paragraph color="error" i18n data-cy="name-error"
+        >Dette navn er allerede i brug!</app-paragraph
+        >
+      }
+    </div>
 
-  <app-dialog-actions>
-    <app-button
-      (buttonClick)="createAndRegisterContract()"
-      [disabled]="(canSubmit$ | async) !== true"
-      i18n
-      data-cy="create-and-associate-contract-button"
-    >
+    <app-dialog-actions>
+      <app-button
+        (buttonClick)="createAndRegisterContract()"
+        [disabled]="(canSubmit$ | async) !== true"
+        i18n
+        data-cy="create-and-associate-contract-button"
+        >
       Opret og registrer
     </app-button>
-    <app-button buttonStyle="secondary" (click)="closeDialog()" i18n> Annuller</app-button>
-  </app-dialog-actions>
-</app-dialog>
+      <app-button buttonStyle="secondary" (click)="closeDialog()" i18n> Annuller</app-button>
+    </app-dialog-actions>
+  </app-dialog>

@@ -1,62 +1,72 @@
-<app-loading *ngIf="loading"></app-loading>
-<ng-container *ngIf="loading === false">
+@if (loading) {
+  <app-loading></app-loading>
+}
+@if (loading === false) {
   <app-standard-vertical-content-grid>
-    <ng-container *ngIf="externalReferenceViewModels$ | async as externalReferences">
-      <app-native-table tableLayout="fixed" *ngIf="externalReferences.length > 0">
-        <thead>
-          <th i18n>Titel</th>
-          <th i18n>Evt. DokumentID/Sagsnr./Anden Reference</th>
-          <th>Sidst ændret</th>
-          <th>Sidst ændret af</th>
-          <th i18n>Vises i overblik</th>
-        </thead>
-        <tbody>
-          <tr *ngFor="let externalReference of externalReferences">
-            <td>
-              <app-external-page-link
-                [title]="externalReference.title"
-                [url]="externalReference.url"
-                linkFontSize="small"
-              ></app-external-page-link>
-            </td>
-            <td>
-              <app-paragraph [cropOnOverflow]="true" paragraphSize="small">{{
-                externalReference.documentId
-              }}</app-paragraph>
-            </td>
-            <td>{{ externalReference.lastChangedDate | appDate }}</td>
-            <td>{{ externalReference.lastChangedBy }}</td>
-            <td>
-              <app-content-space-between>
-                <app-paragraph paragraphSize="small"
-                  ><app-boolean-circle [value]="externalReference.masterReference"></app-boolean-circle
-                ></app-paragraph>
-                <app-table-row-actions *ngIf="hasModifyPermission">
-                  <app-icon-button data-cy="edit-reference-button" (buttonClick)="editReference(externalReference)"
-                    ><app-pencil-icon></app-pencil-icon
-                  ></app-icon-button>
-                  <app-icon-button (buttonClick)="removeReference(externalReference.uuid)"
-                    ><app-trashcan-icon></app-trashcan-icon
-                  ></app-icon-button>
-                </app-table-row-actions>
-              </app-content-space-between>
-            </td>
-          </tr>
-        </tbody>
-      </app-native-table>
-      <app-empty-state
-        context="emptyTable"
-        text="Der er endnu ikke tilføjet referencer"
-        *ngIf="externalReferences.length < 1"
+    @if (externalReferenceViewModels$ | async; as externalReferences) {
+      @if (externalReferences.length > 0) {
+        <app-native-table tableLayout="fixed">
+          <thead>
+            <th i18n>Titel</th>
+            <th i18n>Evt. DokumentID/Sagsnr./Anden Reference</th>
+            <th>Sidst ændret</th>
+            <th>Sidst ændret af</th>
+            <th i18n>Vises i overblik</th>
+          </thead>
+          <tbody>
+            @for (externalReference of externalReferences; track externalReference) {
+              <tr>
+                <td>
+                  <app-external-page-link
+                    [title]="externalReference.title"
+                    [url]="externalReference.url"
+                    linkFontSize="small"
+                  ></app-external-page-link>
+                </td>
+                <td>
+                  <app-paragraph [cropOnOverflow]="true" paragraphSize="small">{{
+                    externalReference.documentId
+                  }}</app-paragraph>
+                </td>
+                <td>{{ externalReference.lastChangedDate | appDate }}</td>
+                <td>{{ externalReference.lastChangedBy }}</td>
+                <td>
+                  <app-content-space-between>
+                    <app-paragraph paragraphSize="small"
+                      ><app-boolean-circle [value]="externalReference.masterReference"></app-boolean-circle
+                    ></app-paragraph>
+                    @if (hasModifyPermission) {
+                      <app-table-row-actions>
+                        <app-icon-button data-cy="edit-reference-button" (buttonClick)="editReference(externalReference)"
+                          ><app-pencil-icon></app-pencil-icon
+                        ></app-icon-button>
+                        <app-icon-button (buttonClick)="removeReference(externalReference.uuid)"
+                          ><app-trashcan-icon></app-trashcan-icon
+                        ></app-icon-button>
+                      </app-table-row-actions>
+                    }
+                  </app-content-space-between>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </app-native-table>
+      }
+      @if (externalReferences.length < 1) {
+        <app-empty-state
+          context="emptyTable"
+          text="Der er endnu ikke tilføjet referencer"
+          i18n-text
+        ></app-empty-state>
+      }
+    }
+    @if (hasModifyPermission) {
+      <app-collection-extension-button
+        (clicked)="createReference()"
+        text="Opret reference"
         i18n-text
-      ></app-empty-state>
-    </ng-container>
-    <app-collection-extension-button
-      (clicked)="createReference()"
-      text="Opret reference"
-      *ngIf="hasModifyPermission"
-      i18n-text
-    >
-    </app-collection-extension-button>
+        >
+      </app-collection-extension-button>
+    }
   </app-standard-vertical-content-grid>
-</ng-container>
+}

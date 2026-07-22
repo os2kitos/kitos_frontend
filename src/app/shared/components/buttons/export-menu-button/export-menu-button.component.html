@@ -2,10 +2,14 @@
   <app-menu-button-item i18n (itemClick)="triggerMethod(true)">
     <app-export-icon />Eksporter alle kolonner
   </app-menu-button-item>
-  <app-menu-button-item *ngIf="showColumnsOnlyOption" i18n (itemClick)="triggerMethod(false)">
+  @if (showColumnsOnlyOption) {
+    <app-menu-button-item i18n (itemClick)="triggerMethod(false)">
     <app-export-icon />Eksporter viste kolonner
   </app-menu-button-item>
-  <app-menu-button-item i18n (itemClick)="openGdprOverview()" *ngIf="enabledGdprExport && (gdprEnabled$ | async)">
+  }
+  @if (enabledGdprExport && (gdprEnabled$ | async)) {
+    <app-menu-button-item i18n (itemClick)="openGdprOverview()">
     <app-lock-icon /> Åben GDPR overblik
   </app-menu-button-item>
+  }
 </app-menu-button>

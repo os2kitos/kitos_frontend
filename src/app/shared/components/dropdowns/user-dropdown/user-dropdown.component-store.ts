@@ -3,11 +3,7 @@ import { ComponentStore } from '@ngrx/component-store';
 import { tapResponse } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { first, map, mergeMap, Observable, switchMap, tap } from 'rxjs';
-import {
-  APIUserReferenceResponseDTO,
-  APIV2GlobalUserInternalINTERNALService,
-  APIV2OrganizationService,
-} from 'src/app/api/v2';
+import { APIUserReferenceResponseDTO, GlobalUserInternalV2Service, OrganizationV2Service } from 'src/app/api/v2';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 import { ShallowUser, toShallowUser } from '../../../models/userV2.model';
 import { filterNullish } from '../../../pipes/filter-nullish';
@@ -25,8 +21,8 @@ export class UserDropdownComponentStore extends ComponentStore<State> {
   public readonly searchGlobal$ = this.select((state) => state.searchGlobal);
 
   constructor(
-    private readonly globalUserService: APIV2GlobalUserInternalINTERNALService,
-    private readonly organizationApiService: APIV2OrganizationService,
+    private readonly globalUserService: GlobalUserInternalV2Service,
+    private readonly organizationApiService: OrganizationV2Service,
     private readonly store: Store,
   ) {
     super({ users: [], searchGlobal: false, loading: false });
@@ -59,11 +55,11 @@ export class UserDropdownComponentStore extends ComponentStore<State> {
       mergeMap((search) => {
         return this.searchUsersInternal(search).pipe(
           map((users) => users.map(toShallowUser)),
-          tapResponse(
-            (users) => this.setUsers(users),
-            (error) => console.error(error),
-            () => this.setLoading(false),
-          ),
+          tapResponse({
+            next: (users) => this.setUsers(users),
+            error: (error) => console.error(error),
+            complete: () => this.setLoading(false),
+          }),
         );
       }),
     ),

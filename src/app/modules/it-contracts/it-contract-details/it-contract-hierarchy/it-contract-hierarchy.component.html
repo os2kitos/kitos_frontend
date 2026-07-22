@@ -1,16 +1,20 @@
 <app-card>
   <app-card-header title="Kontrakthierarki" helpTextKey="it-contract.edit.hierarchy" i18n-title></app-card-header>
-  <div *ngIf="(isLoading$ | async) === false" class="content">
-    <ng-container *ngIf="contractUuid$ | async as contractUuid">
-      <app-entity-tree
-        itemType="it-contract"
-        [currentNodeUuid]="contractUuid"
-        [nodes]="(hierarchy$ | async) ?? []"
-        data-cy="contract-hierarchy"
-        [showExtraStatus]="true"
-        [extraStatusDisplayType]="extraStatusDisplayTypeValue"
-      ></app-entity-tree>
-    </ng-container>
-  </div>
-  <app-loading *ngIf="isLoading$ | async"></app-loading>
+  @if ((isLoading$ | async) === false) {
+    <div class="content">
+      @if (contractUuid$ | async; as contractUuid) {
+        <app-entity-tree
+          itemType="it-contract"
+          [currentNodeUuid]="contractUuid"
+          [nodes]="(hierarchy$ | async) ?? []"
+          data-cy="contract-hierarchy"
+          [showExtraStatus]="true"
+          [extraStatusDisplayType]="extraStatusDisplayTypeValue"
+        ></app-entity-tree>
+      }
+    </div>
+  }
+  @if (isLoading$ | async) {
+    <app-loading></app-loading>
+  }
 </app-card>

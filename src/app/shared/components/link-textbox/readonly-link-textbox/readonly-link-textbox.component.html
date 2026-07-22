@@ -1,7 +1,9 @@
 <mat-form-field class="{{ size }}" (click)="onIconClick()">
   <mat-label>{{ title }}</mat-label>
   <input matInput type="text" readonly [disabled]="isDisabled" data-cy="empty-link-textbox-input" />
-  <app-icon-button *ngIf="!isDisabled" matSuffix data-cy="empty-link-textbox"
-    ><app-pencil-icon></app-pencil-icon>
-  </app-icon-button>
+  @if (!isDisabled) {
+    <app-icon-button matSuffix data-cy="empty-link-textbox"
+      ><app-pencil-icon></app-pencil-icon>
+    </app-icon-button>
+  }
 </mat-form-field>

@@ -8,24 +8,27 @@
       'root-node': node.isRoot === true,
       'leaf-node': node.children.length === 0,
     }"
-  >
+    >
     <div
       [class]="'node-wrapper node-' + node.color"
       [ngClass]="{
         'current-node-blue': node.uuid === currentNodeUuid && node.color === 'blue',
         'current-node-green': node.uuid === currentNodeUuid && node.color === 'green',
       }"
-    >
+      >
       <app-details-page-link [itemType]="itemType" linkFontSize="small" [itemPath]="node.uuid">
         {{ node.name }}
       </app-details-page-link>
     </div>
-    <app-status-chip *ngIf="showStatus" [type]="itemType" [value]="node.status"></app-status-chip>
-    <app-status-chip
-      *ngIf="showExtraStatusValue"
-      [valueDisplayType]="extraStatusDisplayType"
-      [value]="node.extraStatus"
-    ></app-status-chip>
+    @if (showStatus) {
+      <app-status-chip [type]="itemType" [value]="node.status"></app-status-chip>
+    }
+    @if (showExtraStatusValue) {
+      <app-status-chip
+        [valueDisplayType]="extraStatusDisplayType"
+        [value]="node.extraStatus"
+      ></app-status-chip>
+    }
   </mat-tree-node>
 
   <!-- This is the tree node template for expandable nodes -->
@@ -37,11 +40,15 @@
       'root-node': node.isRoot === true,
       'leaf-node': node.children.length === 0,
     }"
-  >
+    >
     <div class="mat-tree-node">
       <button mat-icon-button [disableRipple]="true" matTreeNodeToggle>
-        <app-chevron-down-icon *ngIf="treeControl.isExpanded(node)"></app-chevron-down-icon>
-        <app-chevron-right-icon *ngIf="treeControl.isExpanded(node) === false"></app-chevron-right-icon>
+        @if (treeControl.isExpanded(node)) {
+          <app-chevron-down-icon></app-chevron-down-icon>
+        }
+        @if (treeControl.isExpanded(node) === false) {
+          <app-chevron-right-icon></app-chevron-right-icon>
+        }
       </button>
       <div
         [class]="'node-wrapper node-' + node.color"
@@ -49,17 +56,20 @@
           'current-node-blue': node.uuid === currentNodeUuid && node.color === 'blue',
           'current-node-green': node.uuid === currentNodeUuid && node.color === 'green',
         }"
-      >
+        >
         <app-details-page-link [itemType]="itemType" linkFontSize="small" [itemPath]="node.uuid">
           {{ node.name }}
         </app-details-page-link>
       </div>
-      <app-status-chip *ngIf="showStatus" [type]="itemType" [value]="node.status"></app-status-chip>
-      <app-status-chip
-        *ngIf="showExtraStatusValue"
-        [valueDisplayType]="extraStatusDisplayType"
-        [value]="node.extraStatus"
-      ></app-status-chip>
+      @if (showStatus) {
+        <app-status-chip [type]="itemType" [value]="node.status"></app-status-chip>
+      }
+      @if (showExtraStatusValue) {
+        <app-status-chip
+          [valueDisplayType]="extraStatusDisplayType"
+          [value]="node.extraStatus"
+        ></app-status-chip>
+      }
     </div>
     <div [class.invisible]="!treeControl.isExpanded(node)" class="child-nodes">
       <div role="group">
@@ -70,17 +80,19 @@
 </mat-tree>
 
 <div class="checkbox-row">
-  <app-checkbox
-    *ngIf="hideStatusButton === false"
-    [text]="toggleStatusText"
-    [(value)]="showStatus"
-    labelPosition="after"
-  ></app-checkbox>
+  @if (hideStatusButton === false) {
+    <app-checkbox
+      [text]="toggleStatusText"
+      [(value)]="showStatus"
+      labelPosition="after"
+    ></app-checkbox>
+  }
 
-  <app-checkbox
-    *ngIf="showExtraStatus"
-    [text]="toggleExtraStatusText"
-    [(value)]="showExtraStatusValue"
-    labelPosition="after"
-  ></app-checkbox>
+  @if (showExtraStatus) {
+    <app-checkbox
+      [text]="toggleExtraStatusText"
+      [(value)]="showExtraStatusValue"
+      labelPosition="after"
+    ></app-checkbox>
+  }
 </div>

@@ -1,25 +1,23 @@
-import { APIGDPRRegistrationsResponseDTO } from 'src/app/api/v2';
+import { APITechnicalPrecautionChoice } from 'src/app/api/v2';
 
 export interface TechnicalPrecautions {
   name: string;
-  value: APIGDPRRegistrationsResponseDTO.TechnicalPrecautionsAppliedEnum;
+  value: APITechnicalPrecautionChoice;
 }
 
 export const technicalPrecautionsOptions: TechnicalPrecautions[] = [
-  { name: $localize`Kryptering`, value: APIGDPRRegistrationsResponseDTO.TechnicalPrecautionsAppliedEnum.Encryption },
+  { name: $localize`Kryptering`, value: APITechnicalPrecautionChoice.Encryption },
   {
     name: $localize`Pseudonomisering`,
-    value: APIGDPRRegistrationsResponseDTO.TechnicalPrecautionsAppliedEnum.Pseudonymization,
+    value: APITechnicalPrecautionChoice.Pseudonymization,
   },
   {
     name: $localize`Adgangsstyring`,
-    value: APIGDPRRegistrationsResponseDTO.TechnicalPrecautionsAppliedEnum.AccessControl,
+    value: APITechnicalPrecautionChoice.AccessControl,
   },
-  { name: $localize`Logning`, value: APIGDPRRegistrationsResponseDTO.TechnicalPrecautionsAppliedEnum.Logging },
+  { name: $localize`Logning`, value: APITechnicalPrecautionChoice.Logging },
 ];
 
-export const mapTechnicalPecautions = (
-  value?: APIGDPRRegistrationsResponseDTO.TechnicalPrecautionsAppliedEnum,
-): TechnicalPrecautions | undefined => {
+export const mapTechnicalPecautions = (value?: APITechnicalPrecautionChoice): TechnicalPrecautions | undefined => {
   return technicalPrecautionsOptions.find((option) => option.value === value);
 };

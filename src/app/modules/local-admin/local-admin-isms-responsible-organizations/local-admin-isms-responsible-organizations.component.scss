@@ -1,0 +1,6 @@
+@use "theme";
+@use "mixins.scss";
+
+:host {
+  @include mixins.page-flex-layout-max-width-hidden-overflow;
+}

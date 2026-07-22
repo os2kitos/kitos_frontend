@@ -1,12 +1,16 @@
-<a class="external-page-link-{{ linkFontSize }}" *ngIf="isValidLink" target="_blank" href="{{ url }}">{{ title }}</a>
+@if (isValidLink) {
+  <a class="external-page-link-{{ linkFontSize }}" target="_blank" href="{{ url }}">{{ title }}</a>
+}
 
-<ng-container *ngIf="isValidLink === false">
-  <app-content-with-tooltip *ngIf="title && url" [description]="invalidLinkPrefix + url"
-    ><app-paragraph [paragraphSize]="linkFontSize" [cropOnOverflow]="true" class="text-padding">{{
+@if (isValidLink === false) {
+  @if (title && url) {
+    <app-content-with-tooltip [description]="invalidLinkPrefix + url"
+      ><app-paragraph [paragraphSize]="linkFontSize" [cropOnOverflow]="true" class="text-padding">{{
       title
     }}</app-paragraph></app-content-with-tooltip
-  >
-  <ng-container *ngIf="(title || url) && !(title && url)">
+    >
+  }
+  @if ((title || url) && !(title && url)) {
     <app-paragraph [paragraphSize]="linkFontSize" [cropOnOverflow]="true">{{ title }}{{ url }}</app-paragraph>
-  </ng-container>
-</ng-container>
+  }
+}

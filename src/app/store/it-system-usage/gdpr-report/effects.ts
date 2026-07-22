@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { catchError, filter, map, of, switchMap } from 'rxjs';
-import { APIV2GdprExportReportInternalINTERNALService } from 'src/app/api/v2';
+import { GdprExportReportInternalV2Service } from 'src/app/api/v2';
 import { adaptGdprReport } from 'src/app/shared/models/it-system-usage/gdpr/gdpr-report.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectOrganizationUuid } from '../../user-store/selectors';
@@ -13,7 +13,7 @@ import { selectGdprReportHasValidCache } from './selectors';
 @Injectable()
 export class GdprReportEffects {
   constructor(
-    private gdprReportService: APIV2GdprExportReportInternalINTERNALService,
+    private gdprReportService: GdprExportReportInternalV2Service,
     private actions$: Actions,
     private store: Store,
   ) {}

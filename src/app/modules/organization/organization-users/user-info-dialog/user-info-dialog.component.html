@@ -1,57 +1,65 @@
-<ng-container *ngIf="user$ | async as user">
+@if (user$ | async; as user) {
   <app-scrollbar-dialog [title]="getFullName(user)" overflow="none">
-    <app-standard-vertical-content-grid *ngIf="(rolesIsLoading$ | async) === false">
-      <app-user-role-table
-        [user]="user"
-        [roles$]="unitRolesSubject$"
-        entityType="organization-unit"
-        [hasModifyPermission$]="hasModificationPermission$"
-        [availableRoles$]="unitRoles$"
-      ></app-user-role-table>
-
-      <app-user-role-table
-        [user]="user"
-        [roles$]="usageRolesSubject$"
-        entityType="it-system"
-        [hasModifyPermission$]="hasModificationPermission$"
-        [availableRoles$]="usageRoles$"
-      ></app-user-role-table>
-
-      <app-user-role-table
-        [user]="user"
-        [roles$]="contractRolesSubject$"
-        entityType="it-contract"
-        [hasModifyPermission$]="hasModificationPermission$"
-        [availableRoles$]="contractRoles$"
-      ></app-user-role-table>
-
-      <app-user-role-table
-        [user]="user"
-        [roles$]="dprRolesSubject$"
-        entityType="data-processing-registration"
-        [hasModifyPermission$]="hasModificationPermission$"
-        [availableRoles$]="dprRoles$"
-      ></app-user-role-table>
-
-      <app-content-space-between *ngIf="user.LastAdvisSent">
-        <app-paragraph paragraphSize="small" i18n> Login oplysninger sidst sendt: </app-paragraph>
-        <app-paragraph paragraphSize="small" [bold]="true" i18n> {{ user.LastAdvisSent | appDate }} </app-paragraph>
-      </app-content-space-between>
-    </app-standard-vertical-content-grid>
-    <app-loading *ngIf="rolesIsLoading$ | async"></app-loading>
-    <app-dialog-actions *ngIf="hasModificationPermission$ | async">
-      <app-button i18n buttonStyle="tertiary" color="warn" (buttonClick)="onDeleteUser()"
-        ><app-trashcan-icon></app-trashcan-icon> Slet bruger
-      </app-button>
-      <app-button buttonStyle="secondary" (buttonClick)="onEditUser(user)" i18n> Rediger </app-button>
-      <app-button
-        buttonStyle="primary"
-        (buttonClick)="onSendAdvis(user)"
-        i18n
-        [disabled]="($sendingNotification | async) === true"
-      >
-        Send advis
-      </app-button>
-    </app-dialog-actions>
+    @if ((rolesIsLoading$ | async) === false) {
+      <app-standard-vertical-content-grid>
+        <app-user-role-table
+          [user]="user"
+          [roles$]="unitRolesSubject$"
+          entityType="organization-unit"
+          [hasModifyPermission$]="hasOrganizationRolesModifyPermission$"
+          [availableRoles$]="unitRoles$"
+          (linkClicked)="closeDialog()"
+        ></app-user-role-table>
+        <app-user-role-table
+          [user]="user"
+          [roles$]="usageRolesSubject$"
+          entityType="it-system"
+          [hasModifyPermission$]="hasSystemAndDprRolesModifyPermission$"
+          [availableRoles$]="usageRoles$"
+          (linkClicked)="closeDialog()"
+        ></app-user-role-table>
+        <app-user-role-table
+          [user]="user"
+          [roles$]="contractRolesSubject$"
+          entityType="it-contract"
+          [hasModifyPermission$]="hasContractRolesModifyPermission$"
+          [availableRoles$]="contractRoles$"
+          (linkClicked)="closeDialog()"
+        ></app-user-role-table>
+        <app-user-role-table
+          [user]="user"
+          [roles$]="dprRolesSubject$"
+          entityType="data-processing-registration"
+          [hasModifyPermission$]="hasSystemAndDprRolesModifyPermission$"
+          [availableRoles$]="dprRoles$"
+          (linkClicked)="closeDialog()"
+        ></app-user-role-table>
+        @if (user.LastAdvisSent) {
+          <app-content-space-between>
+            <app-paragraph paragraphSize="small" i18n> Login oplysninger sidst sendt: </app-paragraph>
+            <app-paragraph paragraphSize="small" [bold]="true" i18n> {{ user.LastAdvisSent | appDate }} </app-paragraph>
+          </app-content-space-between>
+        }
+      </app-standard-vertical-content-grid>
+    }
+    @if (rolesIsLoading$ | async) {
+      <app-loading></app-loading>
+    }
+    @if (hasModificationPermission$ | async) {
+      <app-dialog-actions>
+        <app-button i18n buttonStyle="tertiary" color="warn" (buttonClick)="onDeleteUser()"
+          ><app-trashcan-icon></app-trashcan-icon> Slet bruger
+        </app-button>
+        <app-button buttonStyle="secondary" (buttonClick)="onEditUser(user)" i18n> Rediger </app-button>
+        <app-button
+          buttonStyle="primary"
+          (buttonClick)="onSendAdvis(user)"
+          i18n
+          [disabled]="($sendingNotification | async) === true"
+        >
+          Send advis
+        </app-button>
+      </app-dialog-actions>
+    }
   </app-scrollbar-dialog>
-</ng-container>
+}

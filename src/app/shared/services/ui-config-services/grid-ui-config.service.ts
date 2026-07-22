@@ -46,6 +46,7 @@ import {
   selectItContractsEnabledlastModifedDate,
   selectItContractsEnableExternalPayment,
   selectItContractsEnableExternalSigner,
+  selectItContractsEnableInternalPayment,
   selectItContractsEnableInternalSigner,
   selectItContractsEnableIsActive,
   selectItContractsEnableNotes,
@@ -63,37 +64,48 @@ import {
   selectITSystemUsageEnableCatalogArchiveDuty,
   selectITSystemUsageEnableCatalogArchiveDutyComment,
   selectITSystemUsageEnableContainsAITechnology,
+  selectITSystemUsageEnableCriticalityFieldsLastChanged,
   selectITSystemUsageEnableDataClassification,
   selectITSystemUsageEnableDataProcessing,
   selectITSystemUsageEnableDescription,
   selectITSystemUsageEnableDocumentBearing,
   selectITSystemUsageEnabledSystemId,
   selectITSystemUsageEnableFrontPageUsagePeriod,
-  selectITSystemUsageEnableGdprBusinessCritical,
   selectITSystemUsageEnableGdprConductedRiskAssessment,
   selectITSystemUsageEnableGdprDataTypes,
   selectITSystemUsageEnableGdprDocumentation,
   selectITSystemUsageEnableGdprDpiaConducted,
-  selectITSystemUsageEnableGdprHostedAt,
+  selectITSystemUsageEnableGdprIsDataProcessingAgreementRequired,
   selectITSystemUsageEnableGdprPlannedRiskAssessmentDate,
   selectITSystemUsageEnableGdprPurpose,
   selectITSystemUsageEnableGdprRetentionPeriod,
+  selectITSystemUsageEnableGdprRiskAssessmentResult,
   selectITSystemUsageEnableGdprTechnicalPrecautions,
   selectITSystemUsageEnableGdprUserSupervision,
+  selectITSystemUsageEnableGeneralHostedAt,
+  selectITSystemUsageEnableGeneralPurpose,
   selectITSystemUsageEnableIncomingRelations,
   selectITSystemUsageEnableInheritedKle,
+  selectITSystemUsageEnableIsBusinessCritical,
+  selectITSystemUsageEnableIsSociallyCritical,
+  selectITSystemUsageEnableItInterfaceIds,
+  selectITSystemUsageEnableItInterfaceVersions,
   selectITSystemUsageEnableJournalPeriods,
   selectITSystemUsageEnableLastEditedAt,
   selectITSystemUsageEnableLastEditedBy,
   selectITSystemUsageEnableLifeCycleStatus,
+  selectITSystemUsageEnableLocalKle,
   selectITSystemUsageEnableLocalReferences,
+  selectITSystemUsageEnableLicensingAndCodeModels,
   selectITSystemUsageEnableOutgoingRelations,
   selectITSystemUsageEnableSelectContractToDetermineIfItSystemIsActive,
   selectITSystemUsageEnableStatus,
+  selectITSystemUsageEnableSystemUsageCriticalityLevel,
   selectITSystemUsageEnableTabArchiving,
   selectITSystemUsageEnableTabOrganization,
   selectITSystemUsageEnableTabSystemRoles,
   selectITSystemUsageEnableTakenIntoUsageBy,
+  selectITSystemUsageEnableTechnicalSystemType,
   selectITSystemUsageEnableVersion,
   selectITSystemUsageEnableWebAccessibility,
 } from 'src/app/store/organization/ui-module-customization/selectors';
@@ -125,8 +137,8 @@ export class GridUIConfigService {
   public isColumnEnabled(column: GridColumn, applications: UIConfigGridApplication[]) {
     let enabled = true;
 
-    for (const app of applications) {
-      const result = this.verifyColumn(app, column);
+    for (const application of applications) {
+      const result = this.verifyColumn(application, column);
       if (result !== null) {
         if (result === false) {
           enabled = false;
@@ -228,8 +240,13 @@ export class GridUIConfigService {
             ContractFields.AccumulatedOtherCost,
             ContractFields.LatestAuditDate,
             ContractFields.AuditStatus,
+            ContractFields.ExternalPaymentOrganizationUnitsCsv,
           ]),
         ),
+
+      this.store
+        .select(selectItContractsEnableInternalPayment)
+        .pipe(shouldEnable([ContractFields.InternalPaymentOrganizationUnitsCsv])),
 
       this.store
         .select(selectItContractsEnablePaymentModel)
@@ -284,7 +301,6 @@ export class GridUIConfigService {
       this.store
         .select(selectITSystemUsageEnableContainsAITechnology)
         .pipe(shouldEnable([UsageFields.ContainsAITechnology])),
-
       this.store
         .select(selectITSystemUsageEnableWebAccessibility)
         .pipe(
@@ -294,6 +310,15 @@ export class GridUIConfigService {
             UsageFields.WebAccessibilityNotes,
           ]),
         ),
+      this.store
+        .select(selectITSystemUsageEnableIsSociallyCritical)
+        .pipe(shouldEnable([UsageFields.IsSociallyCritical])),
+      this.store
+        .select(selectITSystemUsageEnableIsBusinessCritical)
+        .pipe(shouldEnable([UsageFields.IsBusinessCritical])),
+      this.store
+        .select(selectITSystemUsageEnableCriticalityFieldsLastChanged)
+        .pipe(shouldEnable([UsageFields.CriticalityFieldsLastChanged])),
 
       //Contracts
       combineAND([
@@ -323,19 +348,35 @@ export class GridUIConfigService {
         .pipe(shouldEnable([UsageFields.SensitiveDataLevelsAsCsv])),
       this.store
         .select(selectITSystemUsageEnableGdprConductedRiskAssessment)
-        .pipe(shouldEnable([UsageFields.RiskAssessmentDate, UsageFields.RiskSupervisionDocumentationName])),
+        .pipe(
+          shouldEnable([
+            UsageFields.RiskAssessmentDate,
+            UsageFields.RiskSupervisionDocumentationName,
+            UsageFields.RiskAssessmentConducted,
+          ]),
+        ),
       this.store
         .select(selectITSystemUsageEnableGdprPlannedRiskAssessmentDate)
         .pipe(shouldEnable([UsageFields.PlannedRiskAssessmentDate])),
-      this.store.select(selectITSystemUsageEnableGdprPurpose).pipe(shouldEnable([UsageFields.GeneralPurpose])),
-      this.store.select(selectITSystemUsageEnableGdprHostedAt).pipe(shouldEnable([UsageFields.HostedAt])),
+      this.store
+        .select(selectITSystemUsageEnableGdprRiskAssessmentResult)
+        .pipe(shouldEnable([UsageFields.RiskAssessmentResult])),
+      this.store.select(selectITSystemUsageEnableGeneralPurpose).pipe(shouldEnable([UsageFields.GeneralPurpose])),
+      this.store.select(selectITSystemUsageEnableGdprPurpose).pipe(shouldEnable([UsageFields.ProcessingPurpose])),
+      this.store.select(selectITSystemUsageEnableGeneralHostedAt).pipe(shouldEnable([UsageFields.HostedAt])),
       this.store
         .select(selectITSystemUsageEnableGdprDocumentation)
         .pipe(shouldEnable([UsageFields.LinkToDirectoryName])),
       this.store.select(selectITSystemUsageEnableGdprDpiaConducted).pipe(shouldEnable([UsageFields.DpiaConducted])),
       this.store
-        .select(selectITSystemUsageEnableGdprBusinessCritical)
-        .pipe(shouldEnable([UsageFields.IsBusinessCritical])),
+        .select(selectITSystemUsageEnableSystemUsageCriticalityLevel)
+        .pipe(shouldEnable([UsageFields.SystemUsageCriticalityLevelUuid])),
+      this.store
+        .select(selectITSystemUsageEnableGdprIsDataProcessingAgreementRequired)
+        .pipe(shouldEnable([UsageFields.IsDataProcessingAgreementRequired])),
+      this.store
+        .select(selectITSystemUsageEnableTechnicalSystemType)
+        .pipe(shouldEnable([UsageFields.TechnicalSystemTypeNamesAsCsv])),
 
       //Organization
       this.store
@@ -377,11 +418,25 @@ export class GridUIConfigService {
       this.store
         .select(selectITSystemUsageEnableInheritedKle)
         .pipe(shouldEnable([UsageFields.ItSystemKLEIdsAsCsv, UsageFields.ItSystemKLENamesAsCsv])),
+      this.store
+        .select(selectITSystemUsageEnableLocalKle)
+        .pipe(shouldEnable([UsageFields.LocalKleIdsAsCsv, UsageFields.LocalKleNamesAsCsv])),
 
       //References
       this.store
         .select(selectITSystemUsageEnableLocalReferences)
         .pipe(shouldEnable([UsageFields.LocalReferenceTitle, UsageFields.LocalReferenceDocumentId])),
+
+      //Interfaces
+      this.store.select(selectITSystemUsageEnableItInterfaceIds).pipe(shouldEnable([UsageFields.ItInterfaceIdsAsCsv])),
+      this.store
+        .select(selectITSystemUsageEnableItInterfaceVersions)
+        .pipe(shouldEnable([UsageFields.ItInterfaceVersionsAsCsv])),
+
+      //Licensing and Code Models
+      this.store
+        .select(selectITSystemUsageEnableLicensingAndCodeModels)
+        .pipe(shouldEnable([UsageFields.LicensingAndCodeModels])),
     ];
 
     return combineLatest(configObservables);
@@ -430,6 +485,8 @@ export class GridUIConfigService {
             DprFields.IsOversightCompleted,
             DprFields.LatestOversightDate,
             DprFields.LatestOversightRemark,
+            DprFields.LatestOversightReportLink,
+            DprFields.LatestOversightReportLinkName,
           ]),
         ),
 
@@ -463,10 +520,6 @@ export class GridUIConfigService {
         ),
 
       this.store
-        .select(selectITSystemUsageEnableGdprBusinessCritical)
-        .pipe(shouldEnable([GdprFields.BUSINESS_CRITICAL_NAME])),
-
-      this.store
         .select(selectITSystemUsageEnableGdprConductedRiskAssessment)
         .pipe(
           shouldEnable([
@@ -482,10 +535,12 @@ export class GridUIConfigService {
         .pipe(shouldEnable([GdprFields.PLANNED_RISK_ASSESSMENT_DATE])),
 
       this.store
+        .select(selectITSystemUsageEnableGdprRiskAssessmentResult)
+        .pipe(shouldEnable([GdprFields.PRE_RISK_ASSESSMENT_NAME])),
+
+      this.store
         .select(selectITSystemUsageEnableGdprDpiaConducted)
         .pipe(shouldEnable([GdprFields.DPIA_NAME, GdprFields.DPIA_DATE])),
-
-      this.store.select(selectITSystemUsageEnableGdprHostedAt).pipe(shouldEnable([GdprFields.HOSTED_AT_NAME])),
 
       combineAND([
         this.store.select(selectITSystemUsageEnableDataProcessing),

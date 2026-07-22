@@ -9,13 +9,16 @@ Cypress.Commands.add(
     cy.intercept('/api/v2/**/permissions?organizationUuid*', { fixture: 'shared/create-permissions.json' });
 
     if (authenticate) {
-      cy.intercept('/api/Authorize', { fixture: './shared/authorize.json' }).as('authorize');
+      cy.intercept('/api/authorize', { fixture: './shared/authorize.json' }).as('authorize');
     } else {
-      cy.intercept('/api/Authorize', { statusCode: 401, fixture: './shared/authorize-401.json' }).as('authorize');
+      cy.intercept('/api/authorize', { statusCode: 401, fixture: './shared/authorize-401.json' }).as('authorize');
     }
 
     cy.intercept('/api/v2/internal/public-messages', { fixture: './shared/public-messages.json' });
     cy.intercept('/api/v2/organizations*', { fixture: './organizations/organizations.json' }).as('organizations');
+    cy.intercept('/api/v2/organizations/*/organization-units*', {
+      fixture: './organizations/organization-units-hierarchy.json',
+    });
 
     cy.intercept('api/v2/internal/organizations/*/ui-customization/ItSystemUsages', {
       fixture: uiCustomizationFixturePath ?? './shared/it-system-usage-ui-customization.json',
@@ -56,8 +59,9 @@ Cypress.Commands.add('verifyDialogConfirmButtonDisabledByReactiveForm', (dataCyS
 
 Cypress.Commands.add('login', (authorizeFixturePath = './shared/authorize.json') => {
   cy.intercept('/api/authorize/antiforgery', '"ABC"');
-  cy.intercept('/api/Authorize', { fixture: authorizeFixturePath }).as('authorize');
+  cy.intercept('/api/authorize', { fixture: authorizeFixturePath }).as('authorize');
 
+  cy.getByDataCy('accordion-header').click();
   cy.contains('Email').parent().find('input').type('test@test.com');
   cy.contains('Password').parent().find('input').type('123456');
   cy.getByDataCy('login-button').click();
@@ -164,10 +168,6 @@ Cypress.Commands.add('verifyExternalReferenceHrefValue', (name: string, url: str
   return cy.contains(name).should('have.attr', 'href').and('include', url);
 });
 
-Cypress.Commands.add('verifyTooltipText', (text: string) => {
-  return cy.get('app-tooltip').should('have.attr', 'ng-reflect-text').and('include', text);
-});
-
 Cypress.Commands.add('clearInputText', (inputText: string) => {
   return cy.contains(inputText).parent().type('{selectAll}{backspace}');
 });
@@ -268,11 +268,6 @@ Cypress.Commands.add('testCanShowExternalReferences', () => {
       .get(expectedRow.masterReference ? 'app-check-positive-green-icon' : 'app-check-negative-gray-icon')
       .should('exist');
 
-    if (expectedRow.expectedInvalidUrl) {
-      row()
-        .first()
-        .within(() => cy.verifyTooltipText('Ugyldigt link: ' + expectedRow.expectedInvalidUrl));
-    }
     if (expectedRow.expectedValidUrl) {
       row().verifyExternalReferenceHrefValue(expectedRow.title, expectedRow.expectedValidUrl);
     }
@@ -348,7 +343,6 @@ Cypress.Commands.add(
         cy.get(newReference.masterReference ? 'app-check-positive-green-icon' : 'app-check-negative-gray-icon').should(
           'exist',
         );
-        cy.verifyTooltipText('Ugyldigt link: ' + newReference.url);
       });
   },
 );

@@ -1,0 +1,20 @@
+<app-multi-select-dropdown
+  [text]="text"
+  [textField]="textField"
+  [valueField]="valueField"
+  [data]="data$ | async"
+  [loading]="isLoading$ | async"
+  (filterChange)="onFilterChange($event)"
+  (selectedEvent)="onValueChange($event)"
+  (focusEvent)="onFocus()"
+  (openDropdown)="onOpen()"
+  i18n-text
+  [searchFn]="externalSearch"
+  [showDescription]="includeItemDescription"
+  [itemDescriptionField]="itemDescriptionField"
+  [showDescriptionLabel]="showDescriptionLabel"
+  [descriptionLabelTitle]="descriptionLabelTitle"
+  [addTagText]="addTagText"
+  [resetSubject$]="resetSubject$"
+>
+</app-multi-select-dropdown>

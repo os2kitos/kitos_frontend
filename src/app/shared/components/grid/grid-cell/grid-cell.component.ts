@@ -1,12 +1,13 @@
-import { NgIf } from '@angular/common';
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { BaseCellComponent } from './base-cell.component';
 import { ActionButtonsCellComponent } from './cell-types/action-buttons-cell/action-buttons-cell.component';
 import { AuditCellComponent } from './cell-types/audit-cell/audit-cell.component';
 import { BooleanCellComponent } from './cell-types/boolean-cell/boolean-cell.component';
 import { CheckboxCellComponent } from './cell-types/checkbox-cell/checkbox-cell.component';
+import { ContractStatusChipCellComponent } from './cell-types/contract-status-chip-cell/contract-status-chip-cell.component';
 import { DateCellComponent } from './cell-types/date-cell/date-cell.component';
 import { DefaultWrapCellComponent } from './cell-types/default-wrap-cell/default-wrap-cell.component';
+import { EnumArrayCellComponent } from './cell-types/enum-array-cell/enum-array-cell.component';
 import { EnumCellComponent } from './cell-types/enum-cell/enum-cell.component';
 import { LinkCellComponent } from './cell-types/link-cell/link-cell.component';
 import { PageLinkArrayCellComponent } from './cell-types/page-link-array-cell/page-link-array-cell.component';
@@ -24,7 +25,6 @@ import { UuidToNameCellComponent } from './cell-types/uuid-to-name-cell/uuid-to-
   templateUrl: './grid-cell.component.html',
   styleUrl: './grid-cell.component.scss',
   imports: [
-    NgIf,
     TextCellComponent,
     StatusCellComponent,
     ThousandSeperatorCellComponent,
@@ -33,6 +33,7 @@ import { UuidToNameCellComponent } from './cell-types/uuid-to-name-cell/uuid-to-
     BooleanCellComponent,
     DateCellComponent,
     EnumCellComponent,
+    EnumArrayCellComponent,
     LinkCellComponent,
     TitleLinkCellComponent,
     PageLinkCellComponent,
@@ -42,9 +43,11 @@ import { UuidToNameCellComponent } from './cell-types/uuid-to-name-cell/uuid-to-
     UuidToNameCellComponent,
     AuditCellComponent,
     ActionButtonsCellComponent,
+    ContractStatusChipCellComponent,
   ],
 })
 export class GridCellComponent extends BaseCellComponent {
+  @Input() public deleteIcon: 'trashcan' | 'checkmark' = 'trashcan';
   @Output() public checkboxChange = new EventEmitter<boolean>();
   @Output() public toggleEvent = new EventEmitter<boolean>();
   @Output() public modifyEvent = new EventEmitter<void>();

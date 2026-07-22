@@ -7,7 +7,7 @@ import { selectItSystemUsageUuid } from 'src/app/store/it-system-usage/selectors
 import { ItSystemUsageDetailsDataProcessingComponentStore } from './it-system-usage-details-data-processing.component-store';
 import { CardComponent } from '../../../../../shared/components/card/card.component';
 import { CardHeaderComponent } from '../../../../../shared/components/card-header/card-header.component';
-import { NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { LoadingComponent } from '../../../../../shared/components/loading/loading.component';
 import { NativeTableComponent } from '../../../../../shared/components/native-table/native-table.component';
 import { DetailsPageLinkComponent } from '../../../../../shared/components/details-page-link/details-page-link.component';
@@ -22,15 +22,13 @@ import { EmptyStateComponent } from '../../../../../shared/components/empty-stat
   imports: [
     CardComponent,
     CardHeaderComponent,
-    NgIf,
     LoadingComponent,
     NativeTableComponent,
-    NgFor,
     DetailsPageLinkComponent,
     StatusChipComponent,
     EmptyStateComponent,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class ItSystemUsageDetailsDataProcessingComponent extends BaseComponent implements OnInit {
   public readonly isLoading$ = this.dataProcessingComponentStore.associatedDataProcessingRegistrationsIsLoading$;

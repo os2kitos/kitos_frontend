@@ -1,20 +1,26 @@
-import { APIDataProcessingRegistrationGeneralDataResponseDTO } from 'src/app/api/v2';
 import { AppPath } from '../../enums/app-path';
-import { entityWithUnavailableName } from '../../helpers/string.helpers';
+import { entityWithUnavailableName, organizationNameWithCvr } from '../../helpers/string.helpers';
 import {
   mapRoleAssignmentsToEmails,
   mapRoleAssignmentsToUserFullNames,
   RoleAssignmentEmailsMaps,
   RoleAssignmentsMap,
 } from '../helpers/read-model-role-assignments';
+import { LicensingAndCodeModel, mapLicensingAndCodeModels } from '../it-system/licensing-and-code-model.model';
 import { LifeCycleStatus, mapLifeCycleStatus } from '../life-cycle-status.model';
 import { mapGridNumberOfExpectedUsers, NumberOfExpectedUsersGrid } from '../number-of-expected-users.model';
+import { mapToYesNoDontKnowIrrelevantEnum, YesNoDontKnowIrrelevantOption } from '../yes-no-dont-know-irrelevant.model';
 import { mapFromCapitalizedStringToYesNoDontKnowEnum, YesNoDontKnowOption } from '../yes-no-dont-know.model';
 import { mapCapitalizedStringToYesNoIrrelevantEnum } from '../yes-no-irrelevant.model';
+import { mapToYesNoPartiallyEnum, YesNoPartiallyOption } from '../yes-no-partially.model';
 import { mapToYesNoEnum, YesNoOption } from '../yes-no.model';
 import { ArchiveDutyChoice, mapArchiveDutyChoice } from './archive-duty-choice.model';
 import { HostedAt, mapGridHostedAt } from './gdpr/hosted-at.model';
-import { mapToYesNoPartiallyEnum, YesNoPartiallyOption } from '../yes-no-partially.model';
+import {
+  IsDataProcessingAgreementRequired,
+  mapIsDataProcessingAgreementRequired,
+} from './gdpr/is-data-processing-agreement-required.model';
+import { mapGridRiskAssessmentEnum, RiskAssessmentResultGridOptions } from './gdpr/risk-assessment-result';
 
 export interface ITSystemUsage {
   //ngrx requires the id field to have lowercase 'id' name
@@ -23,6 +29,7 @@ export interface ITSystemUsage {
   ActiveAccordingToValidityPeriod: boolean;
   ActiveAccordingToLifeCycle: boolean;
   MainContractIsActive: boolean;
+  MainContractIsActiveSortOrder: number;
   LocalSystemId: string;
   ItSystemUuid: string;
   SystemDescription: string;
@@ -40,6 +47,8 @@ export interface ITSystemUsage {
   ItSystemBusinessTypeName: string;
   ItSystemKLEIdsAsCsv: string;
   ItSystemKLENamesAsCsv: string;
+  LocalKleIdsAsCsv: string;
+  LocalKleNamesAsCsv: string;
   LocalReferenceTitle: string;
   LocalReferenceUrl: string;
   LocalReferenceDocumentId: string;
@@ -61,6 +70,7 @@ export interface ITSystemUsage {
   LinkToDirectoryUrl: string;
   HostedAt: HostedAt | undefined;
   GeneralPurpose: string;
+  ProcessingPurpose: string;
   DataProcessingRegistrationsConcludedAsCsv: string;
   DataProcessingRegistrationNamesAsCsv: string;
   DataProcessingRegistrations: { id: string; value: string }[];
@@ -74,6 +84,8 @@ export interface ITSystemUsage {
   Note: string;
   RiskAssessmentDate: Date;
   PlannedRiskAssessmentDate: Date;
+  RiskAssessmentResult: RiskAssessmentResultGridOptions | undefined;
+  RiskAssessmentConducted: YesNoDontKnowIrrelevantOption | undefined;
   UserCount: NumberOfExpectedUsersGrid | undefined;
   Roles: RoleAssignmentsMap;
   RoleEmails: RoleAssignmentEmailsMaps;
@@ -85,6 +97,15 @@ export interface ITSystemUsage {
   WebAccessibilityCompliance: YesNoPartiallyOption | undefined;
   LastWebAccessibilityCheck: Date | undefined;
   WebAccessibilityNotes: string | undefined;
+  SystemUsageCriticalityLevelUuid: string | undefined;
+  SystemUsageCriticalityLevelName: string | undefined;
+  TechnicalSystemTypeNamesAsCsv: string | undefined;
+  IsSociallyCritical: YesNoDontKnowOption | undefined;
+  CriticalityFieldsLastChanged: Date | undefined;
+  IsDataProcessingAgreementRequired: IsDataProcessingAgreementRequired | undefined;
+  ItInterfaceIdsAsCsv: string;
+  ItInterfaceVersionsAsCsv: string;
+  LicensingAndCodeModels: LicensingAndCodeModel[] | undefined;
 }
 
 function getParentItSystemLinkPaths(value: {
@@ -121,13 +142,14 @@ export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
     ActiveAccordingToValidityPeriod: value.ActiveAccordingToValidityPeriod,
     ActiveAccordingToLifeCycle: value.ActiveAccordingToLifeCycle,
     MainContractIsActive: value.MainContractIsActive,
+    MainContractIsActiveSortOrder: mapContractStatusToSortOrder(value.MainContractIsActive),
     LocalSystemId: value.LocalSystemId,
     ItSystemUuid: value.ItSystemUuid,
     SystemDescription: value.SystemDescription,
     ExternalSystemUuid: value.ExternalSystemUuid,
     ParentItSystemName: value.ParentItSystemName,
     ParentItSystemUuid: value.ParentItSystemUuid,
-    SystemName: entityWithUnavailableName(value.SystemName, value.SystemActive),
+    SystemName: entityWithUnavailableName(value.SystemName, value.ItSystemDisabled),
     Version: value.Version,
     LocalCallName: value.LocalCallName,
     ResponsibleOrganizationUnitName: value.ResponsibleOrganizationUnitName,
@@ -137,12 +159,14 @@ export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
     ItSystemBusinessTypeName: value.ItSystemBusinessTypeName,
     ItSystemKLEIdsAsCsv: value.ItSystemKLEIdsAsCsv,
     ItSystemKLENamesAsCsv: value.ItSystemKLENamesAsCsv,
+    LocalKleIdsAsCsv: value.LocalKleIdsAsCsv,
+    LocalKleNamesAsCsv: value.LocalKleNamesAsCsv,
     LocalReferenceTitle: value.LocalReferenceTitle,
     LocalReferenceUrl: value.LocalReferenceUrl,
     LocalReferenceDocumentId: value.LocalReferenceDocumentId,
     SensitiveDataLevelsAsCsv: value.SensitiveDataLevelsAsCsv,
     MainContractSupplierName: value.MainContractSupplierName,
-    ItSystemRightsHolderName: value.ItSystemRightsHolderName,
+    ItSystemRightsHolderName: organizationNameWithCvr(value.ItSystemRightsHolderName, value.ItSystemRightsHolderCvr),
     ObjectOwnerName: value.ObjectOwnerName,
     LastChangedByName: value.LastChangedByName,
     LastChangedAt: value.LastChangedAt,
@@ -154,10 +178,12 @@ export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
     ActiveArchivePeriodEndDate: value.ActiveArchivePeriodEndDate,
     RiskSupervisionDocumentationName: value.RiskSupervisionDocumentationName,
     RiskSupervisionDocumentationUrl: value.RiskSupervisionDocumentationUrl,
+    RiskAssessmentConducted: mapToYesNoDontKnowIrrelevantEnum(value.RiskAssessmentConducted),
     LinkToDirectoryName: value.LinkToDirectoryName,
     LinkToDirectoryUrl: value.LinkToDirectoryUrl,
     HostedAt: mapGridHostedAt(value.HostedAt),
     GeneralPurpose: value.GeneralPurpose,
+    ProcessingPurpose: value.ProcessingPurpose,
     DataProcessingRegistrationsConcludedAsCsv: value.DataProcessingRegistrationsConcludedAsCsv,
     DataProcessingRegistrationNamesAsCsv: value.DataProcessingRegistrationNamesAsCsv,
     DataProcessingRegistrations: value.DataProcessingRegistrations?.map(
@@ -195,6 +221,7 @@ export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
     Note: value.Note,
     RiskAssessmentDate: value.RiskAssessmentDate,
     PlannedRiskAssessmentDate: value.PlannedRiskAssessmentDate,
+    RiskAssessmentResult: mapGridRiskAssessmentEnum(value.RiskAssessmentResult),
     UserCount: mapGridNumberOfExpectedUsers(value.UserCount),
     ItSystemCategoriesName: value.ItSystemCategoriesName,
     Roles: mapRoleAssignmentsToUserFullNames(value.RoleAssignments),
@@ -207,9 +234,33 @@ export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
     WebAccessibilityCompliance: mapToYesNoPartiallyEnum(value.WebAccessibilityCompliance),
     LastWebAccessibilityCheck: value.LastWebAccessibilityCheck,
     WebAccessibilityNotes: value.WebAccessibilityNotes,
+    SystemUsageCriticalityLevelUuid: value.SystemUsageCriticalityLevelUuid,
+    SystemUsageCriticalityLevelName: value.SystemUsageCriticalityLevelName,
+    TechnicalSystemTypeNamesAsCsv: value.TechnicalSystemTypeNamesAsCsv,
+    IsSociallyCritical: mapFromCapitalizedStringToYesNoDontKnowEnum(value.IsSociallyCritical),
+    CriticalityFieldsLastChanged: value.CriticalityFieldsLastChanged,
+    IsDataProcessingAgreementRequired: mapIsDataProcessingAgreementRequired(value.IsDataProcessingAgreementRequired),
+    ItInterfaceIdsAsCsv: value.ItInterfaceIdsAsCsv,
+    ItInterfaceVersionsAsCsv: value.ItInterfaceVersionsAsCsv,
+    LicensingAndCodeModels: mapLicensingAndCodeModels(value.LicensingAndCodeModels),
   };
   return adaptedSystem;
 };
+
+function mapContractStatusToSortOrder(status: string): number {
+  // Map to numbers for consistent sort order: Inactive (0) < Active (1) < NoContract (2)
+  // This ensures contract-based systems (active/inactive) appear before systems without contracts
+  switch (status) {
+    case 'Inactive':
+      return 0; // Inactive contracts first
+    case 'Active':
+      return 1; // Active contracts second
+    case 'NoContract':
+      return 2; // No contract last
+    default:
+      return 2; // Default to last
+  }
+}
 
 function getDataProcessingRegistrationsConcluded(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -218,7 +269,7 @@ function getDataProcessingRegistrationsConcluded(
   return value.DataProcessingRegistrations?.map(
     (registration: {
       DataProcessingRegistrationUuid: string;
-      IsAgreementConcluded: APIDataProcessingRegistrationGeneralDataResponseDTO.IsAgreementConcludedEnum;
+      IsAgreementConcluded: string;
       DataProcessingRegistrationName: string;
     }) => ({
       id: registration.DataProcessingRegistrationUuid,

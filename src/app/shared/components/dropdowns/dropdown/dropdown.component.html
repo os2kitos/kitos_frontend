@@ -1,4 +1,5 @@
-<div *ngIf="formGroup" [formGroup]="formGroup">
+@if (formGroup) {
+<div [formGroup]="formGroup">
   <ng-select
     class="{{ size }}"
     [formControlName]="formName"
@@ -22,25 +23,28 @@
     (open)="onOpen()"
     (blur)="onBlur()"
   >
-    <ng-template ng-option-tmp let-item="item">
-      <ng-container *ngIf="!showDescription || !item[itemDescriptionField]">
-        {{ item[textField] }}
-      </ng-container>
-      <div *ngIf="item[itemDescriptionField] && showDescription" class="description">
-        {{ item[textField] }}
-        <app-paragraph *ngIf="item[itemDescriptionField] && showDescription" paragraphSize="small">{{
-          item[itemDescriptionField]
-        }}</app-paragraph>
-      </div>
+    <ng-template ng-label-tmp let-item="item">
+      <span class="ng-value-label">{{ getItemLabel(item) }}</span>
     </ng-template>
-    <ng-template *ngIf="showSearchHelpText && !!!(filter$ | async)" ng-footer-tmp>
+    <ng-template ng-option-tmp let-item="item">
+      @if (!showDescription || !item[itemDescriptionField]) {
+      {{ getItemLabel(item) }}
+      } @else {
+      <div class="description">
+        {{ getItemLabel(item) }}
+        <app-paragraph paragraphSize="small">{{ item[itemDescriptionField] }}</app-paragraph>
+      </div>
+      }
+    </ng-template>
+    @if (showSearchHelpText && !!!(filter$ | async)) {
+    <ng-template ng-footer-tmp>
       <app-paragraph paragraphSize="x-small" i18n>Brug søgning for at få flere resultater</app-paragraph>
     </ng-template>
+    }
   </ng-select>
 </div>
-
+} @if (!formGroup) {
 <ng-select
-  *ngIf="!formGroup"
   class="{{ size }}"
   [placeholder]="text"
   [fixedPlaceholder]="true"
@@ -59,22 +63,32 @@
   [searchFn]="searchFn"
   (clear)="onClear()"
 >
-  <ng-template ng-option-tmp let-item="item">
-    <ng-container *ngIf="!showDescription || !item[itemDescriptionField]">
-      {{ item[textField] }}
-    </ng-container>
-    <div *ngIf="item[itemDescriptionField] && showDescription" class="description">
-      {{ item[textField] }}
-      <app-paragraph *ngIf="item[itemDescriptionField] && showDescription" paragraphSize="small">{{
-        item[itemDescriptionField]
-      }}</app-paragraph>
-    </div>
+  <ng-template ng-label-tmp let-item="item">
+    <span class="ng-value-label">{{ getItemLabel(item) }}</span>
   </ng-template>
-  <ng-template *ngIf="showSearchHelpText && !!!(filter$ | async)" ng-footer-tmp>
+  <ng-template ng-option-tmp let-item="item">
+    @if (!showDescription || !item[itemDescriptionField]) {
+    {{ getItemLabel(item) }}
+    } @else {
+    <div class="description">
+      {{ getItemLabel(item) }}
+      <app-paragraph paragraphSize="small">{{ item[itemDescriptionField] }}</app-paragraph>
+    </div>
+    }
+  </ng-template>
+  @if (showSearchHelpText && !!!(filter$ | async)) {
+  <ng-template ng-footer-tmp>
     <app-paragraph paragraphSize="x-small" i18n>Brug søgning for at få flere resultater</app-paragraph>
   </ng-template>
+  }
 </ng-select>
-
-<app-textbox-info *ngIf="description && showDescriptionLabel">
-  <app-paragraph paragraphSize="x-small">{{ description }}</app-paragraph>
+} @if (description && showDescriptionLabel) {
+<app-textbox-info>
+  <app-paragraph paragraphSize="x-small">{{ descriptionLabelTitle }} {{ description }}</app-paragraph>
 </app-textbox-info>
+}
+@if (toolTipText) {
+<app-textbox-info>
+  <app-paragraph paragraphSize="x-small">{{ toolTipText }}</app-paragraph>
+</app-textbox-info>
+}

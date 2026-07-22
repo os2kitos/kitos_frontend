@@ -4,6 +4,10 @@ import { itSystemUsageFeature, itSystemUsageInitialState } from '../it-system-us
 import { itSystemFeature, itSystemInitialState } from '../it-system/reducer';
 import { kleFeature, kleInitialState } from '../kle/reducer';
 import { organizationUnitFeature, organizationUnitInitialState } from '../organization/organization-unit/reducer';
+import {
+  organizationSuppliersFeature,
+  organizationSuppliersInitialState,
+} from '../organization/organization-suppliers/reducer';
 import { organizationFeature, organizationInitialState } from '../organization/reducer';
 import { regularOptionTypeFeature, regularOptionTypeInitialState } from '../regular-option-type-store/reducer';
 import { roleOptionTypeFeature, roleOptionTypeInitialState } from '../roles-option-type-store/reducer';
@@ -24,6 +28,7 @@ export function resetReducer(reducer: ActionReducer<any>): ActionReducer<any> {
       [notificationFeature.name]: initialNotificationsState,
       [alertsFeature.name]: initialAlertsState,
       [organizationFeature.name]: organizationInitialState,
+      [organizationSuppliersFeature.name]: organizationSuppliersInitialState,
       [uiModuleConfigFeature.name]: UIModuleConfigInitialState,
     };
 

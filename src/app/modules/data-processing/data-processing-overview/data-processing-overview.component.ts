@@ -1,4 +1,4 @@
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
@@ -48,13 +48,12 @@ import { OverviewHeaderComponent } from '../../../shared/components/overview-hea
   styleUrl: './data-processing-overview.component.scss',
   imports: [
     OverviewHeaderComponent,
-    NgIf,
     GridOptionsButtonComponent,
     ExportMenuButtonComponent,
     HideShowButtonComponent,
     CreateEntityButtonComponent,
     GridComponent,
-    AsyncPipe,
+    AsyncPipe
   ],
 })
 export class DataProcessingOverviewComponent extends BaseOverviewComponent implements OnInit {
@@ -78,6 +77,21 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
     },
   ];
 
+  private readonly mainContractStatusData = [
+    {
+      name: $localize`Ingen kontrakt`,
+      value: 'NoContract',
+    },
+    {
+      name: $localize`Aktiv`,
+      value: 'Active',
+    },
+    {
+      name: $localize`Ikke aktiv`,
+      value: 'Inactive',
+    },
+  ];
+
   public readonly defaultGridColumns: GridColumn[] = [
     {
       field: GridFields.Name,
@@ -92,10 +106,11 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       field: GridFields.ActiveAccordingToMainContract,
       title: $localize`Status (Markeret kontrakt)`,
       section: DATA_PROCESSING_SECTION_NAME,
-      filter: 'boolean',
+      filter: 'text',
+      extraFilter: 'enum',
       entityType: 'data-processing-registration',
-      extraData: this.activeOptions,
-      style: 'chip',
+      extraData: this.mainContractStatusData,
+      style: 'contract-status-chip',
       width: 340,
       hidden: true,
       persistId: 'mainContract',
@@ -108,6 +123,15 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       section: REFERENCE_SECTION_NAME,
       hidden: true,
       persistId: 'dpReferenceId',
+    },
+    {
+      field: GridFields.LatestOversightReportLinkName,
+      title: $localize`Seneste tilsynsrapport`,
+      style: 'title-link',
+      idField: 'LatestOversightReportLink',
+      section: SUPERVISION_SECTION_NAME,
+      hidden: false,
+      persistId: 'latestOversightReport',
     },
     {
       field: GridFields.SystemNamesAsCsv,
@@ -226,6 +250,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       style: 'date',
       hidden: true,
       persistId: 'agreementConcludedAt',
+      defaultDateFilterOperator: 'lte',
     },
     {
       field: GridFields.OversightInterval,
@@ -264,6 +289,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       filter: 'date',
       style: 'date',
       persistId: 'scheduledInspectionDate',
+      defaultDateFilterOperator: 'lte',
     },
     {
       field: GridFields.LatestOversightDate,

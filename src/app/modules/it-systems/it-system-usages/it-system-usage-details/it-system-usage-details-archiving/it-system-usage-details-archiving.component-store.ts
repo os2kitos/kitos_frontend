@@ -1,14 +1,14 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { Inject, Injectable, OnDestroy } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { tapResponse } from '@ngrx/operators';
 
 import { Observable, mergeMap } from 'rxjs';
-import { APIOrganizationResponseDTO, APIV2OrganizationService } from 'src/app/api/v2';
+import { APIOrganizationResponseDTO, OrganizationV2Service } from 'src/app/api/v2';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 
 interface State {
   organizationsIsLoading: boolean;
-  organizations?: Array<APIOrganizationResponseDTO[]>;
+  organizations?: Array<APIOrganizationResponseDTO>;
 }
 
 @Injectable()
@@ -18,12 +18,12 @@ export class ItSystemUsageDetailsArchivingComponentStore extends ComponentStore<
     filterNullish(),
   );
 
-  constructor(private organizationsService: APIV2OrganizationService) {
+  constructor(@Inject(OrganizationV2Service) private organizationsService: OrganizationV2Service) {
     super({ organizationsIsLoading: false });
   }
 
   private updateOrganizations = this.updater(
-    (state, organizations: Array<APIOrganizationResponseDTO[]>): State => ({
+    (state, organizations: Array<APIOrganizationResponseDTO>): State => ({
       ...state,
       organizations: organizations,
     }),
@@ -43,11 +43,11 @@ export class ItSystemUsageDetailsArchivingComponentStore extends ComponentStore<
         return this.organizationsService
           .getManyOrganizationV2GetOrganizations({ nameOrCvrContent: search, orderByProperty: 'Name' })
           .pipe(
-            tapResponse(
-              (organizations) => this.updateOrganizations(organizations),
-              (e) => console.error(e),
-              () => this.updateOrganizationsIsLoading(false),
-            ),
+            tapResponse({
+              next: (organizations) => this.updateOrganizations(organizations),
+              error: (e) => console.error(e),
+              complete: () => this.updateOrganizationsIsLoading(false),
+            }),
           );
       }),
     ),

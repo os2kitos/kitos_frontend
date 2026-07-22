@@ -1,11 +1,12 @@
 <app-card>
   <app-card-header title="Systeminformation" helpTextKey="it-system.usage.main" i18n-title>
-    <app-status-chip
-      *ngIf="statusEnabled$ | async"
-      type="it-system-usage"
-      [value]="itSystemUsageValid$ | async"
-      [title]="invalidReason$ | async"
-    ></app-status-chip>
+    @if (statusEnabled$ | async) {
+      <app-status-chip
+        type="it-system-usage"
+        [value]="itSystemUsageValid$ | async"
+        [title]="invalidReason$ | async"
+      ></app-status-chip>
+    }
   </app-card-header>
 
   <form [formGroup]="itSystemInformationForm">
@@ -17,160 +18,292 @@
       [maxLength]="100"
       (valueChange)="patchGeneral({ localCallName: $event })"
     ></app-textbox>
-    <app-textbox
-      *ngIf="systemIdEnabled$ | async"
-      text="Systemnavn ID (lokalt)"
-      i18n-text
-      [formGroup]="itSystemInformationForm"
-      formName="localSystemId"
-      [maxLength]="200"
-      (valueChange)="patchGeneral({ localSystemId: $event })"
-    ></app-textbox>
-    <app-textbox
-      *ngIf="versionEnabled$ | async"
-      text="Version"
-      i18n-text
-      [formGroup]="itSystemInformationForm"
-      formName="systemVersion"
-      [maxLength]="100"
-      (valueChange)="patchGeneral({ systemVersion: $event })"
-    ></app-textbox>
-    <app-dropdown
-      *ngIf="amountOfUsersEnabled$ | async"
-      text="Antal brugere"
-      i18n-text
-      [formGroup]="itSystemInformationForm"
-      formName="numberOfExpectedUsers"
-      [data]="numberOfExpectedUsersOptions"
-      (valueChange)="patchGeneral({ numberOfExpectedUsers: $event })"
-    ></app-dropdown>
-    <app-dropdown
-      *ngIf="dataClassificationEnabled$ | async"
-      text="Klassifikation af data i systemet"
-      i18n-text
-      valueField="uuid"
-      [formGroup]="itSystemInformationForm"
-      formName="dataClassification"
-      [data]="dataClassificationTypes$ | async"
-      [showDescription]="true"
-      (valueChange)="patchGeneral({ dataClassificationUuid: $event })"
-    ></app-dropdown>
-    <app-dropdown
-      *ngIf="containsAITechnologyEnabled$ | async"
-      text="Indeholder AI-teknologi?"
-      i18n-text
-      [formGroup]="itSystemInformationForm"
-      formName="aiTechnology"
-      (valueChange)="patchGeneral({ containsAITechnology: $event })"
-      [data]="aiTechnologyOptions"
-    >
-    </app-dropdown>
-    <app-textarea
-      *ngIf="descriptionEnabled$ | async"
-      class="full-width"
-      text="Note"
-      i18n-text
-      [formGroup]="itSystemInformationForm"
-      formName="notes"
-      (valueChange)="patchGeneral({ notes: $event })"
-    ></app-textarea>
+    @if (systemIdEnabled$ | async) {
+      <app-textbox
+        text="Systemnavn ID (lokalt)"
+        i18n-text
+        [formGroup]="itSystemInformationForm"
+        formName="localSystemId"
+        [maxLength]="200"
+        (valueChange)="patchGeneral({ localSystemId: $event })"
+      ></app-textbox>
+    }
+    @if (versionEnabled$ | async) {
+      <app-textbox
+        text="Version"
+        i18n-text
+        [formGroup]="itSystemInformationForm"
+        formName="systemVersion"
+        [maxLength]="100"
+        (valueChange)="patchGeneral({ systemVersion: $event })"
+      ></app-textbox>
+    }
+
+    @if (technicalSystemTypeEnabled$ | async) {
+      <app-multi-select-dropdown
+        text="Tekniske systemtyper"
+        i18n-text
+        [data]="technicalSystemTypeDropdownOptions$ | async"
+        [initialSelectedValues]="initialSelectedTechnicalSystemTypes"
+        [disabled]="!(hasModifyPermission$ | async)"
+        (selectedEvent)="patchTechnicalSystemTypes($event)"
+      ></app-multi-select-dropdown>
+    }
+    @if (hostedAtEnabled$ | async) {
+      <app-dropdown
+        text="IT-systemet driftes"
+        i18n-text
+        [formGroup]="itSystemInformationForm"
+        formName="hostedAt"
+        [data]="hostedAtOptions"
+        (valueChange)="patchGeneral({ hostedAt: $event })"
+      ></app-dropdown>
+    }
+    @if (amountOfUsersEnabled$ | async) {
+      <app-dropdown
+        text="Antal brugere"
+        i18n-text
+        [formGroup]="itSystemInformationForm"
+        formName="numberOfExpectedUsers"
+        [data]="numberOfExpectedUsersOptions"
+        (valueChange)="patchGeneral({ numberOfExpectedUsers: $event })"
+      ></app-dropdown>
+    }
+    @if (dataClassificationEnabled$ | async) {
+      <app-dropdown
+        text="Klassifikation af data i systemet"
+        i18n-text
+        valueField="uuid"
+        [formGroup]="itSystemInformationForm"
+        formName="dataClassification"
+        [data]="dataClassificationTypes$ | async"
+        [showDescription]="true"
+        (valueChange)="patchGeneral({ dataClassificationUuid: $event })"
+      ></app-dropdown>
+    }
+
+    @if (containsAITechnologyEnabled$ | async) {
+      <app-tooltip [text]="(containsAITechnologyModifyEnabled$ | async) === false ? supplierMessage : ''">
+        <app-dropdown
+          text="Indeholder AI-teknologi?"
+          i18n-text
+          [formGroup]="itSystemInformationForm"
+          formName="aiTechnology"
+          (valueChange)="patchGeneral({ containsAITechnology: $event })"
+          [data]="aiTechnologyOptions"
+        >
+        </app-dropdown
+      ></app-tooltip>
+    }
+    @if (licensingAndCodeModelsEnabled$ | async) {
+      <app-multi-select-dropdown
+        text="Licens- og kodegrundlag"
+        i18n-text
+        [data]="licensingAndCodeModelDropdownOptions$ | async"
+        [initialSelectedValues]="initialSelectedLicensingAndCodeModels"
+        [disabled]="!(hasModifyPermission$ | async)"
+        (selectedEvent)="patchLicensingAndCodeModels($event)"
+      ></app-multi-select-dropdown>
+    }
+    @if (purposeEnabled$ | async) {
+      <app-textarea
+        class="full-width"
+        text="Systemets overordnede formål"
+        i18n-text
+        [formGroup]="itSystemInformationForm"
+        formName="purpose"
+        (validatedValueChange)="patchGeneral({ purpose: $event.value }, $event)"
+        [autosizeMinRows]="1"
+      ></app-textarea>
+    }
+    @if (descriptionEnabled$ | async) {
+      <app-textarea
+        class="full-width"
+        text="Note"
+        i18n-text
+        [formGroup]="itSystemInformationForm"
+        formName="notes"
+        (valueChange)="patchGeneral({ notes: $event })"
+      ></app-textarea>
+    }
   </form>
 </app-card>
 
-<app-card *ngIf="showSystemUsageCard$ | async" data-cy="system-usage-section">
-  <app-card-header title="Systemanvendelse" helpTextKey="it-system.usage.application" i18n-title></app-card-header>
+@if (showSystemCriticalityCard$ | async) {
+  <app-card data-cy="system-criticality-section">
+    <app-card-header title="Systemkritikalitet" helpTextKey="it-system.criticality" i18n-title></app-card-header>
+    <form [formGroup]="itSystemCriticalityForm">
+      @if (isBusinessCriticalEnabled$ | async) {
+        <app-dropdown
+          text="Forretningskritisk IT-system"
+          i18n-text
+          [formGroup]="itSystemCriticalityForm"
+          formName="isBusinessCritical"
+          [data]="isBusinessCriticalOptions"
+          (valueChange)="patchGeneral({ isBusinessCritical: $event })"
+          toolTipText="Definitionen fra fællesoffentlig IT kritikalitet: driftsforstyrrelser rammer størstedelen af organisationens evne til at arbejde"
+          i18n-toolTipText
+        ></app-dropdown>
+      }
 
-  <form [formGroup]="itSystemApplicationForm">
-    <app-textbox
-      *ngIf="takenIntoUsageByEnabled$ | async"
-      text="Taget i anvendelse af"
-      i18n-text
-      [formGroup]="itSystemApplicationForm"
-      formName="createdBy"
-    ></app-textbox>
-    <app-textbox
-      *ngIf="lastEditedByEnabled$ | async"
-      text="Sidst redigeret (bruger)"
-      i18n-text
-      [formGroup]="itSystemApplicationForm"
-      formName="lastModifiedBy"
-    ></app-textbox>
-    <app-datepicker
-      *ngIf="lastEditedAtEnabled$ | async"
-      text="Sidst redigeret (dato)"
-      i18n-text
-      [formGroup]="itSystemApplicationForm"
-      formName="lastModified"
-    ></app-datepicker>
-    <app-dropdown
-      *ngIf="lifeCycleStatusEnabled$ | async"
-      text="Livscyklus"
-      i18n-text
-      [formGroup]="itSystemApplicationForm"
-      formName="lifeCycleStatus"
-      [data]="lifeCycleStatusOptions"
-      (valueChange)="patchGeneral({ validity: { lifeCycleStatus: $event } })"
-    ></app-dropdown>
-    <app-datepicker
-      *ngIf="usagePeriodEnabled$ | async"
-      text="Ibrugtagningsdato"
-      i18n-text
-      [formGroup]="itSystemApplicationForm"
-      formName="validFrom"
-      (validatedValueChange)="patchGeneral({ validity: { validFrom: $event.value?.toDateString() } }, $event)"
-    ></app-datepicker>
-    <app-datepicker
-      *ngIf="usagePeriodEnabled$ | async"
-      text="Slutdato for anvendelse"
-      i18n-text
-      [formGroup]="itSystemApplicationForm"
-      formName="validTo"
-      (validatedValueChange)="patchGeneral({ validity: { validTo: $event.value?.toDateString() } }, $event)"
-    ></app-datepicker>
-    <app-textbox
-      *ngIf="statusEnabled$ | async"
-      text="Status"
-      i18n-text
-      [formGroup]="itSystemApplicationForm"
-      formName="valid"
-      [info]="invalidReason$ | async"
-    ></app-textbox>
-  </form>
-</app-card>
+      @if (criticalityFieldsLastChangedEnabled$ | async) {
+        <app-datepicker
+          i18n-text
+          text="Systemkritikalitet sidst opdateret"
+          formName="criticalityFieldsLastChanged"
+          [formGroup]="itSystemCriticalityForm"
+        >
+        </app-datepicker>
+      }
 
-<app-card *ngIf="webAccessiblityEnabled$ | async">
-  <app-card-header
-    title="Webtilgængelighed (WCAG)"
-    helpTextKey="it-system.usage.accessibility"
-    i18n-title
-  ></app-card-header>
-  <form [formGroup]="webAccessibilityForm">
-    <app-dropdown
-      [formGroup]="webAccessibilityForm"
-      formName="webAccessibilityCompliance"
-      [data]="yesNoPartiallyOptions"
-      text="Webtilgængelighed"
-      (valueChange)="patchGeneral({ webAccessibilityCompliance: $event })"
-      i18n-text
-      data-cy="web-accessibility-compliance"
-    ></app-dropdown>
-    <app-datepicker
-      [formGroup]="webAccessibilityForm"
-      formName="lastWebAccessibilityCheck"
-      (validatedValueChange)="patchGeneral({ lastWebAccessibilityCheck: $event.value?.toDateString() }, $event)"
-      text="Hvornår leverandøren har udført gennemsynet"
-      class="two-thirds-column-width"
-      i18n-text
-      data-cy="last-web-accessibility-check"
-    ></app-datepicker>
-    <app-textarea
-      [formGroup]="webAccessibilityForm"
-      formName="webAccessibilityNotes"
-      (valueChange)="patchGeneral({ webAccessibilityNotes: $event })"
-      class="full-width"
-      text="Noter"
-      i18n-text
-      data-cy="web-accessibility-notes"
-    ></app-textarea>
-  </form>
-</app-card>
+      @if (isSociallyCriticalEnabled$ | async) {
+        <app-dropdown
+          text="Samfundskritisk IT-system"
+          i18n-text
+          [formGroup]="itSystemCriticalityForm"
+          formName="isSociallyCritical"
+          (valueChange)="patchGeneral({ isSociallyCritical: $event })"
+          [data]="isSociallyCriticalOptions"
+          toolTipText="Understøtter systemet funktioner, hvor nedbrud kan medføre alvorlige konsekvenser for samfundets generelle funktionsdygtighed?"
+          i18n-toolTipText
+        ></app-dropdown>
+      }
+
+      <app-tooltip [text]="(systemUsageCriticalityModifyEnabled$ | async) === false ? supplierMessage : ''">
+        @if (systemUsageCriticalityEnabled$ | async) {
+          <app-dropdown
+            text="Kritikalitet"
+            i18n-text
+            valueField="uuid"
+            [data]="systemUsageCriticalityLevelTypes$ | async"
+            [formGroup]="itSystemCriticalityForm"
+            formName="systemUsageCriticalityLevel"
+            (valueChange)="patchGeneral({ systemUsageCriticalityLevelUuid: $event })"
+            [showDescription]="true"
+            i18n-toolTipText
+            toolTipText="Bruges til kommunens egen vurdering af systemets betydning for driften"
+          ></app-dropdown>
+        }
+      </app-tooltip>
+
+      @if (criticalityLevelDocumentationEnabled$ | async) {
+        <app-edit-url-section
+          title="Reference for kritikalitetsvurdering"
+          [simpleLink$]="selectCriticalityLevelDocumentation$"
+          i18n-title
+          (submitMethod)="patchCriticalityLevelDocumentation($event)"
+          (clearClick)="resetCriticalityLevelDocumentation()"
+          [isDisabled]="disableCriticalityLevelDocumentationControl"
+        ></app-edit-url-section>
+      }
+    </form>
+  </app-card>
+}
+
+@if (showSystemUsageCard$ | async) {
+  <app-card data-cy="system-usage-section">
+    <app-card-header title="Systemanvendelse" helpTextKey="it-system.usage.application" i18n-title></app-card-header>
+    <form [formGroup]="itSystemApplicationForm">
+      @if (takenIntoUsageByEnabled$ | async) {
+        <app-textbox
+          text="Taget i anvendelse af"
+          i18n-text
+          [formGroup]="itSystemApplicationForm"
+          formName="createdBy"
+        ></app-textbox>
+      }
+      @if (lastEditedByEnabled$ | async) {
+        <app-textbox
+          text="Sidst redigeret (bruger)"
+          i18n-text
+          [formGroup]="itSystemApplicationForm"
+          formName="lastModifiedBy"
+        ></app-textbox>
+      }
+      @if (lastEditedAtEnabled$ | async) {
+        <app-datepicker
+          text="Sidst redigeret (dato)"
+          i18n-text
+          [formGroup]="itSystemApplicationForm"
+          formName="lastModified"
+        ></app-datepicker>
+      }
+      @if (lifeCycleStatusEnabled$ | async) {
+        <app-dropdown
+          text="Livscyklus"
+          i18n-text
+          [formGroup]="itSystemApplicationForm"
+          formName="lifeCycleStatus"
+          [data]="lifeCycleStatusOptions"
+          (valueChange)="patchGeneral({ validity: { lifeCycleStatus: $event } })"
+        ></app-dropdown>
+      }
+      @if (usagePeriodEnabled$ | async) {
+        <app-datepicker
+          text="Ibrugtagningsdato"
+          i18n-text
+          [formGroup]="itSystemApplicationForm"
+          formName="validFrom"
+          (validatedValueChange)="patchGeneral({ validity: { validFrom: $event.value?.toDateString() } }, $event)"
+        ></app-datepicker>
+      }
+      @if (usagePeriodEnabled$ | async) {
+        <app-datepicker
+          text="Slutdato for anvendelse"
+          i18n-text
+          [formGroup]="itSystemApplicationForm"
+          formName="validTo"
+          (validatedValueChange)="patchGeneral({ validity: { validTo: $event.value?.toDateString() } }, $event)"
+        ></app-datepicker>
+      }
+      @if (statusEnabled$ | async) {
+        <app-textbox
+          text="Status"
+          i18n-text
+          [formGroup]="itSystemApplicationForm"
+          formName="valid"
+          [info]="invalidReason$ | async"
+        ></app-textbox>
+      }
+    </form>
+  </app-card>
+}
+
+@if (webAccessiblityEnabled$ | async) {
+  <app-card>
+    <app-card-header
+      title="Webtilgængelighed (WCAG)"
+      helpTextKey="it-system.usage.accessibility"
+      i18n-title
+    ></app-card-header>
+    <form [formGroup]="webAccessibilityForm">
+      <app-dropdown
+        [formGroup]="webAccessibilityForm"
+        formName="webAccessibilityCompliance"
+        [data]="yesNoPartiallyOptions"
+        text="Webtilgængelighed"
+        (valueChange)="patchGeneral({ webAccessibilityCompliance: $event })"
+        i18n-text
+        data-cy="web-accessibility-compliance"
+      ></app-dropdown>
+      <app-datepicker
+        [formGroup]="webAccessibilityForm"
+        formName="lastWebAccessibilityCheck"
+        (validatedValueChange)="patchGeneral({ lastWebAccessibilityCheck: $event.value?.toDateString() }, $event)"
+        text="Hvornår leverandøren har udført gennemsynet"
+        class="two-thirds-column-width"
+        i18n-text
+        data-cy="last-web-accessibility-check"
+      ></app-datepicker>
+      <app-textarea
+        [formGroup]="webAccessibilityForm"
+        formName="webAccessibilityNotes"
+        (valueChange)="patchGeneral({ webAccessibilityNotes: $event })"
+        class="full-width"
+        text="Noter"
+        i18n-text
+        data-cy="web-accessibility-notes"
+      ></app-textarea>
+    </form>
+  </app-card>
+}

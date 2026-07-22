@@ -14,17 +14,19 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let option of options">
-        <td>
-          <app-checkbox
-            [value]="isOptionSelected(option)"
-            (valueChange)="optionSelectionChanged(option, $event)"
-            data-cy="bulk-action-checkbox"
-          ></app-checkbox>
-        </td>
-        <td>{{ option.name }}</td>
-        <td>{{ option.secondaryName }}</td>
-      </tr>
+      @for (option of options; track option) {
+        <tr>
+          <td>
+            <app-checkbox
+              [value]="isOptionSelected(option)"
+              (valueChange)="optionSelectionChanged(option, $event)"
+              data-cy="bulk-action-checkbox"
+            ></app-checkbox>
+          </td>
+          <td>{{ option.name }}</td>
+          <td>{{ option.secondaryName }}</td>
+        </tr>
+      }
     </tbody>
   </app-native-table>
 </app-accordion>

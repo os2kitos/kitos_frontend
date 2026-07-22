@@ -1,25 +1,29 @@
-<div *ngIf="formGroup" [formGroup]="formGroup" class="app-checkbox-wrapper">
-  <app-tooltip [text]="tooltip">
-    <mat-checkbox
-      data-cy="checkbox-input"
-      [labelPosition]="labelPosition"
-      [formControlName]="formName"
-      (change)="toggle($event.checked)"
-      >{{ text }}</mat-checkbox
-    >
-  </app-tooltip>
-</div>
+@if (formGroup) {
+  <div [formGroup]="formGroup" class="app-checkbox-wrapper">
+    <app-tooltip [text]="tooltip">
+      <mat-checkbox
+        data-cy="checkbox-input"
+        [labelPosition]="labelPosition"
+        [formControlName]="formName"
+        (change)="toggle($event.checked)"
+        >{{ text }}</mat-checkbox
+        >
+      </app-tooltip>
+    </div>
+  }
 
-<div *ngIf="!formGroup" class="app-checkbox-wrapper">
-  <app-tooltip [text]="tooltip">
-    <mat-checkbox
-      data-cy="checkbox-input"
-      [disabled]="disabled"
-      [color]="color"
-      [labelPosition]="labelPosition"
-      [checked]="invertCheckedValue ? !value : value"
-      (change)="toggle($event.checked)"
-      >{{ text }}</mat-checkbox
-    >
-  </app-tooltip>
-</div>
+  @if (!formGroup) {
+    <div class="app-checkbox-wrapper">
+      <app-tooltip [text]="tooltip">
+        <mat-checkbox
+          data-cy="checkbox-input"
+          [disabled]="disabled"
+          [color]="color"
+          [labelPosition]="labelPosition"
+          [checked]="invertCheckedValue ? !value : value"
+          (change)="toggle($event.checked)"
+          >{{ text }}</mat-checkbox
+          >
+        </app-tooltip>
+      </div>
+    }

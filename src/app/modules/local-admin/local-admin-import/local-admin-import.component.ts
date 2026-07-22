@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+
 import { Component, Input } from '@angular/core';
 import { SegmentButtonOption } from 'src/app/shared/components/segment/segment.component';
 import { LocalAdminImportEntityType } from 'src/app/shared/enums/local-admin-import-entity-type';
@@ -10,7 +10,7 @@ import { LocalAdminBaseExcelImportComponent } from './local-admin-import/local-a
   selector: 'app-local-admin-import',
   templateUrl: './local-admin-import.component.html',
   styleUrl: './local-admin-import.component.scss',
-  imports: [SegmentComponent, NgIf, LocalAdminImportOrganizationComponent, LocalAdminBaseExcelImportComponent],
+  imports: [SegmentComponent, LocalAdminImportOrganizationComponent, LocalAdminBaseExcelImportComponent],
 })
 export class LocalAdminImportComponent {
   public readonly contractsType = LocalAdminImportEntityType.contracts;

@@ -1,11 +1,11 @@
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { CellClickEvent } from '@progress/kendo-angular-grid';
-import { combineLatestWith, debounceTime, first } from 'rxjs';
+import { combineLatestWith, debounceTime, filter, first } from 'rxjs';
 import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
 import { BooleanValueDisplayType } from 'src/app/shared/components/status-chip/status-chip.component';
 import { DEFAULT_INPUT_DEBOUNCE_TIME } from 'src/app/shared/constants/constants';
@@ -23,10 +23,14 @@ import { GridState } from 'src/app/shared/models/grid-state.model';
 import { BooleanChange } from 'src/app/shared/models/grid/grid-events.model';
 import { archiveDutyRecommendationChoiceOptions } from 'src/app/shared/models/it-system/archive-duty-recommendation-choice.model';
 import { ITSystem } from 'src/app/shared/models/it-system/it-system.model';
+import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.service';
 import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
-import { selectITSystemUsageHasCreateCollectionPermission } from 'src/app/store/it-system-usage/selectors';
+import {
+  selectITSystemUsageHasCreateCollectionPermission,
+  selectItSystemUsageIsCreating,
+} from 'src/app/store/it-system-usage/selectors';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
 import {
   selectITSystemHasCreateCollectionPermission,
@@ -35,19 +39,22 @@ import {
   selectSystemGridLoading,
   selectSystemGridState,
 } from 'src/app/store/it-system/selectors';
+import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
+import { selectITSystemUsageEnableUsageArchive } from 'src/app/store/organization/ui-module-customization/selectors';
 import { ExportMenuButtonComponent } from '../../../shared/components/buttons/export-menu-button/export-menu-button.component';
 import { CreateEntityButtonComponent } from '../../../shared/components/entity-creation/create-entity-button/create-entity-button.component';
 import { GridOptionsButtonComponent } from '../../../shared/components/grid-options-button/grid-options-button.component';
 import { GridComponent } from '../../../shared/components/grid/grid.component';
 import { HideShowButtonComponent } from '../../../shared/components/grid/hide-show-button/hide-show-button.component';
 import { OverviewHeaderComponent } from '../../../shared/components/overview-header/overview-header.component';
+import { ITSystemCatalogComponentStore } from './it-system-catalog.component-store';
 
 @Component({
   templateUrl: './it-system-catalog.component.html',
+  providers: [ITSystemCatalogComponentStore],
   styleUrl: './it-system-catalog.component.scss',
   imports: [
     OverviewHeaderComponent,
-    NgIf,
     GridOptionsButtonComponent,
     ExportMenuButtonComponent,
     HideShowButtonComponent,
@@ -64,6 +71,10 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
 
   public readonly hasCreatePermission$ = this.store.select(selectITSystemHasCreateCollectionPermission);
   public readonly hasCreateUsagePermission$ = this.store.select(selectITSystemUsageHasCreateCollectionPermission);
+  public readonly isCreatingUsage$ = this.store.select(selectItSystemUsageIsCreating);
+  public readonly organizationUuid$ = this.store.select(selectOrganizationUuid);
+  public readonly systemUsageUuid$ = this.componentStore.systemUsageUuid$;
+  public readonly enableUsageArchive$ = this.store.select(selectITSystemUsageEnableUsageArchive);
 
   private readonly systemSectionName = CATALOG_SECTION_NAME;
   public readonly defaultGridColumns: GridColumn[] = [
@@ -78,6 +89,7 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
       style: 'checkbox',
       entityType: 'it-system',
       permissionsField: 'CanChangeUsageStatus',
+      extraPermissionsField: 'IsInUse',
       sortable: false,
     },
     {
@@ -144,6 +156,9 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
       field: CatalogFields.BUSINESS_TYPE_NAME,
       title: $localize`Forretningstype`,
       section: this.systemSectionName,
+      extraData: 'it-system_business-type',
+      extraFilter: 'choice-type-by-name',
+      style: 'uuid-to-name',
       hidden: false,
     },
     { field: 'BelongsTo.Name', title: $localize`Rettighedshaver`, section: this.systemSectionName, hidden: false },
@@ -175,6 +190,14 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
       noFilter: true,
       width: 200,
       sortable: false,
+    },
+    {
+      field: CatalogFields.USAGE_NAMES,
+      dataField: 'Name',
+      title: $localize`IT System: Anvendes af organisationer`,
+      section: this.systemSectionName,
+      style: 'excel-only',
+      hidden: true,
     },
     {
       field: CatalogFields.ORGANIZATION_NAME,
@@ -246,11 +269,12 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
 
   constructor(
     store: Store,
-    private router: Router,
-    private route: ActivatedRoute,
-    private actions$: Actions,
-    private gridColumnStorageService: GridColumnStorageService,
-    private dialogOpenerService: DialogOpenerService
+    private readonly router: Router,
+    private readonly route: ActivatedRoute,
+    private readonly actions$: Actions,
+    private readonly gridColumnStorageService: GridColumnStorageService,
+    private readonly dialogOpenerService: DialogOpenerService,
+    private readonly componentStore: ITSystemCatalogComponentStore,
   ) {
     super(store, 'it-system');
   }
@@ -274,20 +298,20 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
         .pipe(ofType(ITSystemActions.createItSystemSuccess), combineLatestWith(this.gridState$))
         .subscribe(([_, gridState]) => {
           this.stateChange(gridState);
-        })
+        }),
     );
 
     this.subscriptions.add(
       this.actions$.pipe(ofType(ITSystemActions.executeUsageMigrationSuccess)).subscribe(() => {
         location.reload();
-      })
+      }),
     );
 
     this.updateUnclickableColumns(this.defaultGridColumns);
     this.subscriptions.add(this.gridColumns$.subscribe((columns) => this.updateUnclickableColumns(columns)));
 
     this.subscriptions.add(
-      this.actions$.pipe(ofType(ITSystemActions.resetGridConfiguration)).subscribe(() => this.updateDefaultColumns())
+      this.actions$.pipe(ofType(ITSystemActions.resetGridConfiguration)).subscribe(() => this.updateDefaultColumns()),
     );
   }
 
@@ -302,38 +326,60 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
   }
 
   private handleTakeSystemIntoUse(systemUuid: string) {
-    this.store.dispatch(ITSystemUsageActions.createItSystemUsage(systemUuid));
     this.subscriptions.add(
-      this.actions$
+      this.isCreatingUsage$
         .pipe(
-          ofType(ITSystemUsageActions.createItSystemUsageSuccess),
           first(),
-          debounceTime(DEFAULT_INPUT_DEBOUNCE_TIME),
-          concatLatestFrom(() => this.gridState$)
+          filter((isCreating) => !isCreating),
         )
-        .subscribe(([_, gridState]) => this.dispatchGetSystemsOnDataUpdate(gridState))
+        .subscribe(() => {
+          this.store.dispatch(ITSystemUsageActions.createItSystemUsage(systemUuid));
+        }),
+    );
+  }
+
+  public handleArchiveClick() {
+    this.subscriptions.add(
+      this.systemUsageUuid$.pipe(filterNullish(), first()).subscribe((usageUuid) => {
+        this.dialogOpenerService.openArchiveSystemUsageDialog(usageUuid);
+      }),
     );
   }
 
   private handleTakeSystemOutOfUse(systemUuid: string) {
-    const dialogRef = this.dialogOpenerService.openTakeSystemOutOfUseDialog();
+    this.componentStore.getSystemUsageUuidByItSystemAndOrganization(systemUuid);
     this.subscriptions.add(
-      dialogRef.afterClosed().subscribe((result: boolean) => {
-        if (result && systemUuid !== undefined) {
-          this.store.dispatch(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganization(systemUuid));
-        }
-      })
-    );
+      this.enableUsageArchive$
+        .pipe(first())
+        .subscribe((enableUsageArchive) => {
+          const dialogRef = this.dialogOpenerService.openTakeSystemOutOfUseDialog({
+            extraAction: enableUsageArchive ? this.handleArchiveClick.bind(this) : undefined,
+          });
+          this.subscriptions.add(
+            dialogRef.afterClosed().subscribe((result: boolean) => {
+              if (result && systemUuid !== undefined) {
+                this.store.dispatch(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganization(systemUuid));
+              }
+            }),
+          );
 
-    this.subscriptions.add(
-      this.actions$
-        .pipe(
-          ofType(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganizationSuccess),
-          first(),
-          debounceTime(DEFAULT_INPUT_DEBOUNCE_TIME),
-          concatLatestFrom(() => this.gridState$)
-        )
-        .subscribe(([_, gridState]) => this.dispatchGetSystemsOnDataUpdate(gridState))
+          this.subscriptions.add(
+            this.actions$.pipe(ofType(ITSystemUsageActions.archiveItSystemUsageSuccess), first()).subscribe(() => {
+              dialogRef.close();
+            }),
+          );
+
+          this.subscriptions.add(
+            this.actions$
+              .pipe(
+                ofType(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganizationSuccess),
+                first(),
+                debounceTime(DEFAULT_INPUT_DEBOUNCE_TIME),
+                concatLatestFrom(() => this.gridState$),
+              )
+              .subscribe(([_, gridState]) => this.dispatchGetSystemsOnDataUpdate(gridState)),
+          );
+        }),
     );
   }
 

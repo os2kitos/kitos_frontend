@@ -1,7 +1,9 @@
 <app-dialog [title]="title" overflow="none" [nested]="nested">
   <form [formGroup]="dropdownFormGroup" (submit)="onSave()">
     <app-standard-vertical-content-grid>
-      <app-paragraph *ngIf="description" i18n>{{ description }}</app-paragraph>
+      @if (description) {
+        <app-paragraph i18n>{{ description }}</app-paragraph>
+      }
       <app-connected-dropdown
         [text]="dropdownText"
         valueField="uuid"
@@ -21,8 +23,8 @@
           i18n
           data-cy="confirm-button"
           >{{ confirmButtonText }}</app-button
-        >
-      </app-dialog-actions>
-    </app-standard-vertical-content-grid>
-  </form>
-</app-dialog>
+          >
+        </app-dialog-actions>
+      </app-standard-vertical-content-grid>
+    </form>
+  </app-dialog>

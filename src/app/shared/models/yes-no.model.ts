@@ -1,8 +1,8 @@
-import { APIDataProcessingRegistrationGeneralDataResponseDTO } from 'src/app/api/v2';
+import { APIYesNoUndecidedChoice } from 'src/app/api/v2';
 
 export interface YesNoOption {
   name: string;
-  value: APIDataProcessingRegistrationGeneralDataResponseDTO.TransferToInsecureThirdCountriesEnum;
+  value: APIYesNoUndecidedChoice;
 }
 
 export enum YesNoEnum {
@@ -16,8 +16,6 @@ export const yesNoOptions: YesNoOption[] = [
   { name: $localize`Nej`, value: YesNoEnum.No },
 ];
 
-export const mapToYesNoEnum = (
-  value?: APIDataProcessingRegistrationGeneralDataResponseDTO.TransferToInsecureThirdCountriesEnum,
-): YesNoOption | undefined => {
+export const mapToYesNoEnum = (value?: APIYesNoUndecidedChoice): YesNoOption | undefined => {
   return yesNoOptions.find((option) => option.value === value);
 };

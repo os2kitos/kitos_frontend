@@ -36,3 +36,5 @@ export const TerminatedAt = 'TerminatedAt';
 export const LastEditedByUserName = 'LastEditedByUserName';
 export const LastEditedAtDate = 'LastEditedAtDate';
 export const ItSystemUsageUuidsAsCsv = 'ItSystemUsageUuidsAsCsv';
+export const ExternalPaymentOrganizationUnitsCsv = 'ExternalPaymentOrganizationUnitsCsv';
+export const InternalPaymentOrganizationUnitsCsv = 'InternalPaymentOrganizationUnitsCsv';

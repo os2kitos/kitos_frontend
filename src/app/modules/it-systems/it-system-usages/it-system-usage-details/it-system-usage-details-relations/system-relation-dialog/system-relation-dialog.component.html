@@ -1,5 +1,5 @@
 <app-dialog [title]="title" overflow="none">
-  <form [formGroup]="relationForm" (submit)="save()">
+  <form [formGroup]="formGroup" (submit)="saveFunction()">
     <app-standard-vertical-content-grid>
       <app-connected-dropdown
         text="Søg efter system"
@@ -9,36 +9,29 @@
         [showSearchHelpText$]="usageSearchResultIsLimited$"
         (filterChange)="usageFilterChange($event)"
         (valueChange)="usageChange($event)"
-        [formGroup]="relationForm"
+        [formGroup]="formGroup"
         formName="systemUsage"
         i18n-text
       ></app-connected-dropdown>
-      <app-connected-dropdown
-        text="Søg efter snitflade"
-        valueField="uuid"
-        [data$]="interfaces$"
-        [isLoading$]="interfacesLoading$"
-        (filterChange)="interfaceFilterChange($event)"
-        [formGroup]="relationForm"
-        formName="interface"
-        i18n-text
-      >
-      </app-connected-dropdown>
+
+      <ng-content>
+      </ng-content>
+
       <app-textarea
         text="Beskrivelse"
         i18n-text
         [autosizeMaxRows]="8"
-        [formGroup]="relationForm"
+        [formGroup]="formGroup"
         formName="description"
       ></app-textarea>
-      <app-textbox text="Reference" i18n-text [formGroup]="relationForm" formName="reference"></app-textbox>
+      <app-textbox text="Reference" i18n-text [formGroup]="formGroup" formName="reference"></app-textbox>
       <app-connected-dropdown
         text="Søg efter kontrakt"
         valueField="uuid"
         [data$]="contracts$"
         [isLoading$]="contractsLoading$"
         (filterChange)="contractFilterChange($event)"
-        [formGroup]="relationForm"
+        [formGroup]="formGroup"
         formName="contract"
         i18n-text
       >
@@ -47,14 +40,14 @@
         text="Vælg frekvens"
         valueField="uuid"
         [data]="availableReferenceFrequencyTypes$ | async"
-        [formGroup]="relationForm"
+        [formGroup]="formGroup"
         formName="frequency"
         i18n-text
       >
       </app-dropdown>
       <app-dialog-actions>
         <app-button buttonStyle="secondary" (buttonClick)="close()" i18n>Annuller</app-button>
-        <app-button type="submit" [disabled]="relationForm.valid === false || isBusy">{{ saveText }}</app-button>
+        <app-button type="submit" [disabled]="formGroup.valid === false || isBusy">{{ saveText }}</app-button>
       </app-dialog-actions>
     </app-standard-vertical-content-grid>
   </form>

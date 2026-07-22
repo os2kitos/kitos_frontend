@@ -58,6 +58,8 @@ export class LocalOptionTypeTableComponentStore extends ComponentStore<State> {
       description: dto.description,
       uuid: dto.uuid,
       obligatory: dto.isObligatory ?? false,
+      isExternallyUsed: dto.isExternallyUsed,
+      externallyUsedDescription: dto.externallyUsedDescription ?? undefined,
     };
     return item;
   }
@@ -68,16 +70,16 @@ export class LocalOptionTypeTableComponentStore extends ComponentStore<State> {
       switchMap(() =>
         this.getOptionItemsObservable().pipe(
           map((items) => items.map(this.mapDtoToOptionType)),
-          tapResponse(
-            (mappedItems) => {
+          tapResponse({
+            next: (mappedItems) => {
               this.updateItems(mappedItems);
               this.updateIsLoading(false);
             },
-            (error) => {
+            error: (error) => {
               console.error(error);
               this.updateIsLoading(false);
             },
-          ),
+          }),
         ),
       ),
     ),

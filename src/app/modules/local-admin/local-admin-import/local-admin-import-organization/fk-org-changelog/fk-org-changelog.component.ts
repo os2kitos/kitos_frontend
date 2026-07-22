@@ -18,7 +18,7 @@ import { AccordionComponent } from '../../../../../shared/components/accordion/a
 import { StandardVerticalContentGridComponent } from '../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { ParagraphComponent } from '../../../../../shared/components/paragraph/paragraph.component';
 import { DropdownComponent } from '../../../../../shared/components/dropdowns/dropdown/dropdown.component';
-import { NgIf, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { NativeTableComponent } from '../../../../../shared/components/native-table/native-table.component';
 import { ButtonComponent } from '../../../../../shared/components/buttons/button/button.component';
 import { ExportIconComponent } from '../../../../../shared/components/icons/export-icon.component';
@@ -34,14 +34,13 @@ import { AppDatePipe } from '../../../../../shared/pipes/app-date.pipe';
     StandardVerticalContentGridComponent,
     ParagraphComponent,
     DropdownComponent,
-    NgIf,
     NativeTableComponent,
     ButtonComponent,
     ExportIconComponent,
     LocalGridComponent,
     AsyncPipe,
-    AppDatePipe,
-  ],
+    AppDatePipe
+],
 })
 export class FkOrgChangelogComponent implements OnInit {
   public readonly isLoadingChangelogs$ = this.store.select(selectIsLoadingChangelogs);

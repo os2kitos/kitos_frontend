@@ -66,3 +66,6 @@ export const NON_EDITABLE_LOCAL_OPTION_TYPE_CATEGORY_HELP_TEXT = $localize`Dette
 export const OBLIGATORY_LOCAL_OPTION_HELP_TEXT = $localize`Dette udfald er obligatorisk og kan kun deaktiveres af OS2Kitos sekretariatet`;
 
 export const SSO_LOGIN_HANDLER_PATH = '/LoginHandler.ashx';
+
+export const ISMS_RESPONSIBLE_DISABLED_MESSAGE = $localize`Dette felt styres af en ISMS ansvarlig og kan ikke ændres her – Lokal admin indstilling.`;
+export const ISMS_RESPONSIBLE_ACTION_DISABLED_MESSAGE = $localize`Denne handling styres af en ISMS ansvarlig og kan ikke udføres her – Lokal admin indstilling.`;

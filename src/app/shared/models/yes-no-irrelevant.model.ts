@@ -1,8 +1,8 @@
-import { APIDataProcessingRegistrationGeneralDataResponseDTO } from 'src/app/api/v2';
+import { APIYesNoIrrelevantChoice } from 'src/app/api/v2';
 
 export interface YesNoIrrelevantOptions {
   name: string;
-  value: APIDataProcessingRegistrationGeneralDataResponseDTO.IsAgreementConcludedEnum | string;
+  value: APIYesNoIrrelevantChoice | 'Ja' | 'Nej' | 'Ikke relevant';
 }
 
 export enum YesNoIrrelevantEnum {
@@ -29,32 +29,26 @@ export function mapCapitalizedStringToYesNoIrrelevantEnum(source: string): YesNo
   return mapToYesNoIrrelevantEnum(value);
 }
 
-const fromCapitalizedString = (
-  value: string,
-): APIDataProcessingRegistrationGeneralDataResponseDTO.IsAgreementConcludedEnum | undefined => {
+const fromCapitalizedString = (value: string): APIYesNoIrrelevantChoice | undefined => {
   switch (value) {
     case 'YES':
-      return APIDataProcessingRegistrationGeneralDataResponseDTO.IsAgreementConcludedEnum.Yes;
+      return APIYesNoIrrelevantChoice.Yes;
     case 'NO':
-      return APIDataProcessingRegistrationGeneralDataResponseDTO.IsAgreementConcludedEnum.No;
+      return APIYesNoIrrelevantChoice.No;
     case 'IRRELEVANT':
-      return APIDataProcessingRegistrationGeneralDataResponseDTO.IsAgreementConcludedEnum.Irrelevant;
+      return APIYesNoIrrelevantChoice.Irrelevant;
     case 'UNDECIDED':
     case null:
-      return APIDataProcessingRegistrationGeneralDataResponseDTO.IsAgreementConcludedEnum.Undecided;
+      return APIYesNoIrrelevantChoice.Undecided;
     default:
       throw new Error(`Unknown value for conversion into API yes/no/irrelevant/undecided enum: ${value}`);
   }
 };
 
-export const mapToYesNoIrrelevantEnum = (
-  value?: APIDataProcessingRegistrationGeneralDataResponseDTO.IsAgreementConcludedEnum,
-): YesNoIrrelevantOptions | undefined => {
+export const mapToYesNoIrrelevantEnum = (value?: APIYesNoIrrelevantChoice): YesNoIrrelevantOptions | undefined => {
   return yesNoIrrelevantOptions.find((option) => option.value === value);
 };
 
-export const mapToYesNoIrrelevantEnumGrid = (
-  value?: APIDataProcessingRegistrationGeneralDataResponseDTO.IsAgreementConcludedEnum,
-): YesNoIrrelevantOptions | undefined => {
+export const mapToYesNoIrrelevantEnumGrid = (value?: APIYesNoIrrelevantChoice): YesNoIrrelevantOptions | undefined => {
   return yesNoIrrelevantOptionsGrid.find((option) => option.value === value);
 };

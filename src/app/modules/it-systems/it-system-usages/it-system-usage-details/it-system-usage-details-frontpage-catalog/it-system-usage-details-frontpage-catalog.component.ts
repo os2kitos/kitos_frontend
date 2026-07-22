@@ -1,3 +1,4 @@
+import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
@@ -17,21 +18,20 @@ import { selectItSystemUsageSystemContextUuid } from 'src/app/store/it-system-us
 import { selectItSystem, selectItSystemIsActive, selectItSystemParentSystem } from 'src/app/store/it-system/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
-import { ITSystemUsageDetailsFrontpageCatalogComponentStore } from './it-system-usage-details-frontpage-catalog.component-store';
-import { CardComponent } from '../../../../../shared/components/card/card.component';
 import { CardHeaderComponent } from '../../../../../shared/components/card-header/card-header.component';
-import { StatusChipComponent } from '../../../../../shared/components/status-chip/status-chip.component';
-import { NgIf, NgFor, AsyncPipe } from '@angular/common';
-import { DetailsPageLinkComponent } from '../../../../../shared/components/details-page-link/details-page-link.component';
-import { FormGridComponent } from '../../../../../shared/components/form-grid/form-grid.component';
-import { TextBoxComponent } from '../../../../../shared/components/textbox/textbox.component';
-import { DropdownComponent } from '../../../../../shared/components/dropdowns/dropdown/dropdown.component';
-import { TextBoxInfoComponent } from '../../../../../shared/components/textbox-info/textbox-info.component';
-import { ParagraphComponent } from '../../../../../shared/components/paragraph/paragraph.component';
+import { CardComponent } from '../../../../../shared/components/card/card.component';
 import { ContentBoxComponent } from '../../../../../shared/components/contentbox/contentbox.component';
+import { DetailsPageLinkComponent } from '../../../../../shared/components/details-page-link/details-page-link.component';
+import { DropdownComponent } from '../../../../../shared/components/dropdowns/dropdown/dropdown.component';
 import { ExternalReferenceComponent } from '../../../../../shared/components/external-reference/external-reference.component';
+import { FormGridComponent } from '../../../../../shared/components/form-grid/form-grid.component';
+import { ParagraphComponent } from '../../../../../shared/components/paragraph/paragraph.component';
+import { StatusChipComponent } from '../../../../../shared/components/status-chip/status-chip.component';
 import { TextAreaComponent } from '../../../../../shared/components/textarea/textarea.component';
+import { TextBoxInfoComponent } from '../../../../../shared/components/textbox-info/textbox-info.component';
+import { TextBoxComponent } from '../../../../../shared/components/textbox/textbox.component';
 import { ItSystemKleOverviewComponent } from '../../../shared/it-system-kle-overview/it-system-kle-overview.component';
+import { ITSystemUsageDetailsFrontpageCatalogComponentStore } from './it-system-usage-details-frontpage-catalog.component-store';
 
 @Component({
   selector: 'app-it-system-usage-details-frontpage-catalog',
@@ -42,7 +42,6 @@ import { ItSystemKleOverviewComponent } from '../../../shared/it-system-kle-over
     CardComponent,
     CardHeaderComponent,
     StatusChipComponent,
-    NgIf,
     DetailsPageLinkComponent,
     FormGridComponent,
     FormsModule,
@@ -52,7 +51,6 @@ import { ItSystemKleOverviewComponent } from '../../../shared/it-system-kle-over
     TextBoxInfoComponent,
     ParagraphComponent,
     ContentBoxComponent,
-    NgFor,
     ExternalReferenceComponent,
     TextAreaComponent,
     ItSystemKleOverviewComponent,
@@ -118,7 +116,7 @@ export class ITSystemUsageDetailsFrontpageCatalogComponent extends BaseComponent
             parentSystem: itSystem.parentSystem?.name || '',
             formerName: itSystem.formerName,
             rightsHolder: itSystem.rightsHolder?.name || '',
-            businessType: mapOptionCrossReferenceToOptionDTO(itSystem.businessType),
+            businessType: mapOptionCrossReferenceToOptionDTO(itSystem.businessType ?? undefined),
             scope: mapScopeEnumToScopeChoice(itSystem.scope)?.name || '',
             uuid: itSystem.uuid,
             externalUuid: itSystem.externalUuid,

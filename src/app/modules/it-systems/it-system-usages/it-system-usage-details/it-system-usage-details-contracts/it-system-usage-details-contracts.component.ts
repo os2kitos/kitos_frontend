@@ -26,7 +26,7 @@ import { CreateAndAssociateContractDialogComponent } from './create-and-associat
 import { Actions, ofType } from '@ngrx/effects';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { selectItContractHasCollectionCreatePermissions } from 'src/app/store/it-contract/selectors';
-import { NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { CardComponent } from '../../../../../shared/components/card/card.component';
 import { CardHeaderComponent } from '../../../../../shared/components/card-header/card-header.component';
 import { LoadingComponent } from '../../../../../shared/components/loading/loading.component';
@@ -47,13 +47,11 @@ import { AppDatePipe } from '../../../../../shared/pipes/app-date.pipe';
   styleUrls: ['it-system-usage-details-contracts.component.scss'],
   providers: [ItSystemUsageDetailsContractsComponentStore],
   imports: [
-    NgIf,
     CardComponent,
     CardHeaderComponent,
     LoadingComponent,
     StandardVerticalContentGridComponent,
     NativeTableComponent,
-    NgFor,
     DetailsPageLinkComponent,
     StatusChipComponent,
     ParagraphComponent,
@@ -65,8 +63,8 @@ import { AppDatePipe } from '../../../../../shared/pipes/app-date.pipe';
     ReactiveFormsModule,
     DropdownComponent,
     AsyncPipe,
-    AppDatePipe,
-  ],
+    AppDatePipe
+],
 })
 export class ITSystemUsageDetailsContractsComponent extends BaseComponent implements OnInit {
   public readonly mainContract$ = this.store.select(selectItSystemUsageMainContract);

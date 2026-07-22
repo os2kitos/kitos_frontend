@@ -1,17 +1,18 @@
+import { AsyncPipe } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { debounceTime, map, Observable } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { DEFAULT_INPUT_DEBOUNCE_TIME } from 'src/app/shared/constants/constants';
-import { isUrlEmptyOrValid } from 'src/app/shared/helpers/link.helpers';
-import { DialogComponent } from '../dialog/dialog.component';
+import { URL_VALIDATION_ERROR_MESSAGE } from 'src/app/shared/constants/error-message-constants';
+import { isExternalReferenceUrlEmptyOrValid } from 'src/app/shared/helpers/link.helpers';
+import { ButtonComponent } from '../../buttons/button/button.component';
+import { ParagraphComponent } from '../../paragraph/paragraph.component';
 import { StandardVerticalContentGridComponent } from '../../standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { TextBoxComponent } from '../../textbox/textbox.component';
-import { NgIf, AsyncPipe } from '@angular/common';
-import { ParagraphComponent } from '../../paragraph/paragraph.component';
 import { DialogActionsComponent } from '../dialog-actions/dialog-actions.component';
-import { ButtonComponent } from '../../buttons/button/button.component';
+import { DialogComponent } from '../dialog/dialog.component';
 
 @Component({
   selector: 'app-link-write-dialog',
@@ -23,7 +24,6 @@ import { ButtonComponent } from '../../buttons/button/button.component';
     ReactiveFormsModule,
     StandardVerticalContentGridComponent,
     TextBoxComponent,
-    NgIf,
     ParagraphComponent,
     DialogActionsComponent,
     ButtonComponent,
@@ -31,7 +31,7 @@ import { ButtonComponent } from '../../buttons/button/button.component';
   ],
 })
 export class LinkWriteDialogComponent extends BaseComponent implements OnInit {
-  @Input() public url$!: Observable<string | undefined>;
+  @Input() public url$!: Observable<string | undefined | null>;
   @Output() submitMethod = new EventEmitter();
 
   public readonly urlForm = new FormGroup({
@@ -39,6 +39,7 @@ export class LinkWriteDialogComponent extends BaseComponent implements OnInit {
   });
 
   public showValidationError = false;
+  public validationErrorMessage = URL_VALIDATION_ERROR_MESSAGE;
 
   constructor(private readonly dialogRef: MatDialogRef<LinkWriteDialogComponent>) {
     super();
@@ -55,7 +56,7 @@ export class LinkWriteDialogComponent extends BaseComponent implements OnInit {
 
     this.subscriptions.add(
       this.urlForm.controls.url.valueChanges.pipe(debounceTime(DEFAULT_INPUT_DEBOUNCE_TIME)).subscribe(() => {
-        this.showValidationError = isUrlEmptyOrValid(this.urlForm.value.url ?? undefined) === false;
+        this.showValidationError = isExternalReferenceUrlEmptyOrValid(this.urlForm.value.url ?? undefined) === false;
       }),
     );
   }

@@ -62,7 +62,7 @@ describe('it-system-catalog', () => {
     const archivingSelector = 'it-system-recommended-archive-duty';
     const oldComment = 'Old comment';
     const newValue = 'K';
-    cy.dropdownByCy(archivingSelector, newValue, true);
+    cy.dropdownByCy(archivingSelector, `(${newValue})`, true);
     verifyFrontPagePatchRequest({ recommendedArchiveDuty: { id: newValue, comment: oldComment } });
 
     const archivingCommentSelector = 'it-system-recommended-archive-duty-comment';

@@ -1,38 +1,40 @@
-<app-card
-  *ngIf="publicMessage$ | async as publicMessage"
-  [ngClass]="{ 'compact-height': mode === 'compact', 'normal-height': mode === 'normal' }"
->
-  <div class="top-container">
-    <div class="icon-container">
-      <app-icon [iconType]="getIconType(publicMessage)"></app-icon>
+@if (publicMessage$ | async; as publicMessage) {
+  <app-card
+    [ngClass]="{ 'compact-height': mode === 'compact', 'normal-height': mode === 'normal' }"
+    >
+    <div class="top-container">
+      <div class="icon-container">
+        <app-icon [iconType]="getIconType(publicMessage)"></app-icon>
+      </div>
+      <div class="link-container">
+        <app-status-chip
+          [value]="activeStatus(publicMessage)"
+          [valueDisplayType]="statusDisplayType"
+          data-cy="public-message-status"
+        ></app-status-chip>
+        <app-button
+          size="x-small"
+          buttonStyle="tertiary"
+          (buttonClick)="openPublicMessageDialog()"
+          data-cy="open-public-message"
+          >
+          Læs mere
+        </app-button>
+      </div>
     </div>
-
-    <div class="link-container">
-      <app-status-chip
-        [value]="activeStatus(publicMessage)"
-        [valueDisplayType]="statusDisplayType"
-        data-cy="public-message-status"
-      ></app-status-chip>
-      <app-button
-        size="x-small"
-        buttonStyle="tertiary"
-        (buttonClick)="openPublicMessageDialog()"
-        data-cy="open-public-message"
-      >
-        Læs mere
-      </app-button>
-    </div>
-  </div>
-
-  <app-external-page-link
-    *ngIf="hasValidUrl(publicMessage)"
-    [url]="publicMessage.link"
-    [title]="publicMessage.title"
-    linkFontSize="large"
-  ></app-external-page-link>
-  <app-paragraph *ngIf="!hasValidUrl(publicMessage)" paragraphSize="large" [bold]="true">
-    {{ publicMessage.title }}</app-paragraph
-  >
-  <div class="padding"></div>
-  <app-paragraph [dimmed]="true" paragraphSize="medium"> {{ publicMessage.shortDescription }}</app-paragraph>
-</app-card>
+    @if (hasValidUrl(publicMessage)) {
+      <app-external-page-link
+        [url]="publicMessage.link"
+        [title]="publicMessage.title"
+        linkFontSize="large"
+      ></app-external-page-link>
+    }
+    @if (!hasValidUrl(publicMessage)) {
+      <app-paragraph paragraphSize="large" [bold]="true">
+        {{ publicMessage.title }}</app-paragraph
+        >
+      }
+      <div class="padding"></div>
+      <app-paragraph [dimmed]="true" paragraphSize="medium"> {{ publicMessage.shortDescription }}</app-paragraph>
+    </app-card>
+  }

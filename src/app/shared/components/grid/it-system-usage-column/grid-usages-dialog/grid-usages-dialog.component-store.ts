@@ -6,8 +6,8 @@ import { combineLatestWith, map, mergeMap, Observable, of, switchMap, tap, withL
 import {
   APIItSystemUsageMigrationV2ResponseDTO,
   APIItSystemUsageSearchResultResponseDTO,
-  APIV2ItSystemUsageInternalINTERNALService,
-  APIV2ItSystemUsageMigrationINTERNALService,
+  ItSystemUsageInternalV2Service,
+  ItSystemUsageMigrationV2Service,
 } from 'src/app/api/v2';
 import {
   adaptItSystemUsageMigrationPermissions,
@@ -52,10 +52,10 @@ export class GridUsagesDialogComponentStore extends ComponentStore<State> {
   private readonly executeMigrationCommandId = 'system-usage-migration_execute';
 
   constructor(
-    @Inject(APIV2ItSystemUsageMigrationINTERNALService)
-    private readonly itSystemUsageMigrationService: APIV2ItSystemUsageMigrationINTERNALService,
-    @Inject(APIV2ItSystemUsageInternalINTERNALService)
-    private readonly itSystemUsageInternalService: APIV2ItSystemUsageInternalINTERNALService,
+    @Inject(ItSystemUsageMigrationV2Service)
+    private readonly itSystemUsageMigrationService: ItSystemUsageMigrationV2Service,
+    @Inject(ItSystemUsageInternalV2Service)
+    private readonly itSystemUsageInternalService: ItSystemUsageInternalV2Service,
     private notificationService: NotificationService,
     private store: Store,
   ) {
@@ -114,15 +114,15 @@ export class GridUsagesDialogComponentStore extends ComponentStore<State> {
       switchMap(() => {
         this.updateLoading(true);
         return this.itSystemUsageMigrationService.getSingleItSystemUsageMigrationV2GetPermissions().pipe(
-          tapResponse(
-            (permissionsDto) => {
+          tapResponse({
+            next: (permissionsDto) => {
               this.updateMigrationPermissions(adaptItSystemUsageMigrationPermissions(permissionsDto));
             },
-            (error) => {
+            error: (error) => {
               console.error(error);
             },
-            () => this.updateLoading(false),
-          ),
+            complete: () => this.updateLoading(false),
+          }),
         );
       }),
     ),
@@ -139,17 +139,18 @@ export class GridUsagesDialogComponentStore extends ComponentStore<State> {
               usageUuid,
             });
           }),
-          tapResponse(
-            //finally block is not working in this context for some reason
-            (migrationDto: APIItSystemUsageMigrationV2ResponseDTO) => {
-              this.updateMigration(adaptItSystemUsageMigration(migrationDto));
-              this.updateLoading(false);
-            },
-            (error) => {
+          tapResponse({
+            next:
+              //finally block is not working in this context for some reason
+              (migrationDto: APIItSystemUsageMigrationV2ResponseDTO) => {
+                this.updateMigration(adaptItSystemUsageMigration(migrationDto));
+                this.updateLoading(false);
+              },
+            error: (error) => {
               console.error(error);
               this.updateLoading(false);
             },
-          ),
+          }),
         ),
       ),
     ),
@@ -210,14 +211,14 @@ export class GridUsagesDialogComponentStore extends ComponentStore<State> {
               numberOfItSystems: this.numberOfItSystemsPerQuery,
             })
             .pipe(
-              tapResponse(
-                (dtos) =>
+              tapResponse({
+                next: (dtos) =>
                   this.updateUnusedItSystemsInOrganization(
-                    dtos.map(mapIdentityNamePair).filter((x) => x !== undefined),
+                    dtos.map(mapIdentityNamePair).filter((x: IdentityNamePair | undefined) => x !== undefined),
                   ),
-                (error) => console.error(error),
-                () => this.updateLoading(false),
-              ),
+                error: (error) => console.error(error),
+                complete: () => this.updateLoading(false),
+              }),
             );
         }),
       ),

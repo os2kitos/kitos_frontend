@@ -14,7 +14,7 @@ import {
 } from 'src/app/store/data-processing/selectors';
 import { CountryCreateDialogComponent } from './country-create-dialog/country-create-dialog.component';
 import { StandardVerticalContentGridComponent } from '../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
-import { NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { NativeTableComponent } from '../../../../../shared/components/native-table/native-table.component';
 import { ContentSpaceBetweenComponent } from '../../../../../shared/components/content-space-between/content-space-between.component';
 import { ParagraphComponent } from '../../../../../shared/components/paragraph/paragraph.component';
@@ -29,17 +29,15 @@ import { CollectionExtensionButtonComponent } from '../../../../../shared/compon
   styleUrl: './third-countries-table.component.scss',
   imports: [
     StandardVerticalContentGridComponent,
-    NgIf,
     NativeTableComponent,
-    NgFor,
     ContentSpaceBetweenComponent,
     ParagraphComponent,
     IconButtonComponent,
     TrashcanIconComponent,
     EmptyStateComponent,
     CollectionExtensionButtonComponent,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class ThirdCountriesTableComponent extends BaseComponent {
   @Output() public readonly patchEvent = new EventEmitter<APIUpdateDataProcessingRegistrationRequestDTO>();

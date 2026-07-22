@@ -7,15 +7,14 @@
   [bindLabel]="textField"
   [loading]="loading || false"
   [clearAllText]="clearAllText"
+  [clearable]="clearable"
   [loadingText]="loadingText"
   [notFoundText]="notFoundText"
-  [searchFn]="useExternalSearch ? externalSearch : null"
+  [searchFn]="useExternalSearch ? externalSearch : searchFn ?? null"
   (search)="filter$.next($event.term)"
   (clear)="onClear()"
   (focus)="onFocus()"
   (open)="onOpen()"
-  (blur)="onBlur()"
-  [items]="data ?? []"
   [multiple]="true"
   [required]="isRequired"
   [disabled]="disabled"
@@ -29,31 +28,40 @@
   <ng-template ng-option-tmp let-item="item" let-item$="item$">
     <div class="select-option-row" [attr.data-cy]="item.dataCy">
       <input
-        id="item-{{ item.name }}"
+        id="item-{{ item[textField] }}"
         type="checkbox"
         [(ngModel)]="item$.selected"
         [ngModelOptions]="{ standalone: true }"
         [disabled]="item.disabled"
       />
-      <p class="select-option-text-margin" *ngIf="!showDescription || !item.description">
-        {{ item.name }}
+      @if (!showDescription || !(item[itemDescriptionField] || item.value?.[itemDescriptionField])) {
+      <p class="select-option-text-margin">
+        {{ item[textField] }}
       </p>
-      <div *ngIf="item.description && showDescription" class="item-with-description">
-        {{ item.name }}
-        <app-paragraph *ngIf="item.description && showDescription" paragraphSize="small">{{
-          item.description
-        }}</app-paragraph>
+      } @else {
+      <div class="item-with-description">
+        {{ item[textField] }}
+        <app-paragraph paragraphSize="small">{{ item[itemDescriptionField] || item.value?.[itemDescriptionField] }}</app-paragraph>
       </div>
-      <div *ngIf="isTagFn(item)" class="ng-clear-wrapper remove-tag-button" (click)="removeTag(item)">
+      }
+      @if (isTagFn(item)) {
+      <div class="ng-clear-wrapper remove-tag-button" (click)="removeTag(item)">
         <span class="ng-clear">x</span>
-      </div>  
+      </div>
+      }
     </div>
   </ng-template>
   <ng-template ng-multi-label-tmp let-items="items">
     <div class="value-textbox-margin ng-value">
-      <ng-container *ngFor="let item of items; let isLast = last">
-        <span class="ng-value-label">{{ item.name }}<ng-container *ngIf="!isLast">,&nbsp;</ng-container></span>
-      </ng-container>
+      @for (item of items; track item; let isLast = $last) {
+      <span class="ng-value-label">{{ item[textField] }}@if (!isLast) {,&nbsp; }</span>
+      }
     </div>
   </ng-template>
 </ng-select>
+
+@if(displayDescriptionLabel()){
+<app-textbox-info>
+  <app-paragraph paragraphSize="x-small">{{ descriptionLabelTitle }} {{ descriptions.join(", ") }}</app-paragraph>
+</app-textbox-info>
+}

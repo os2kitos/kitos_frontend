@@ -1,4 +1,4 @@
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Actions, ofType } from '@ngrx/effects';
@@ -39,7 +39,6 @@ import { ProfileComponentStore } from './profile.component-store';
   providers: [ProfileComponentStore],
   imports: [
     CardComponent,
-    NgIf,
     FormGridComponent,
     FormsModule,
     ReactiveFormsModule,
@@ -49,8 +48,8 @@ import { ProfileComponentStore } from './profile.component-store';
     ParagraphComponent,
     DropdownComponent,
     LoadingComponent,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class ProfileComponent extends BaseComponent implements OnInit {
   public startPreferenceOptions = this.userService.getAvailableStartPreferenceOptions();

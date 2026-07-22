@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { SegmentComponent } from '../../../shared/components/segment/segment.component';
-import { NgIf } from '@angular/common';
+
 import { GlobalAdminOtherUserShutdownComponent } from './global-admin-other-user-shutdown/global-admin-other-user-shutdown.component';
 import { GlobalAdminSystemIntegratorsComponent } from './global-admin-system-integrators/global-admin-system-integrators.component';
 import { GlobalAdminOtherApiUsersComponent } from './global-admin-other-api-users/global-admin-other-api-users.component';
@@ -19,13 +19,12 @@ export enum GlobalAdminOtherSegmentOptionType {
   styleUrl: './global-admin-other.component.scss',
   imports: [
     SegmentComponent,
-    NgIf,
     GlobalAdminOtherUserShutdownComponent,
     GlobalAdminSystemIntegratorsComponent,
     GlobalAdminOtherApiUsersComponent,
     GlobalAdminOtherKleComponent,
-    GlobalAdminOtherBrokenLinksComponent,
-  ],
+    GlobalAdminOtherBrokenLinksComponent
+],
 })
 export class GlobalAdminOtherComponent {
   public readonly SegmentType = GlobalAdminOtherSegmentOptionType;

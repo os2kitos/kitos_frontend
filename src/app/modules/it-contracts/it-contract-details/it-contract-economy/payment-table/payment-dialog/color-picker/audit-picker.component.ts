@@ -1,18 +1,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component, EventEmitter, OnChanges, OnInit, Output } from '@angular/core';
-import { APIPaymentResponseDTO } from 'src/app/api/v2';
+import { APIPaymentAuditStatus } from 'src/app/api/v2';
 import { BaseDropdownComponent } from 'src/app/shared/base/base-dropdown.component';
 import { AuditModel, baseAuditStatusValue } from 'src/app/shared/models/it-contract/audit-model';
-import { NgIf } from '@angular/common';
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgSelectComponent, NgOptionTemplateDirective } from '@ng-select/ng-select';
+import { NgOptionTemplateDirective, NgSelectComponent } from '@ng-select/ng-select';
 import { ColorCircleComponent } from '../../../color-circle/color-circle.component';
 
 @Component({
   selector: 'app-audit-picker',
   templateUrl: './audit-picker.component.html',
   styleUrl: './audit-picker.component.scss',
-  imports: [NgIf, FormsModule, ReactiveFormsModule, NgSelectComponent, NgOptionTemplateDirective, ColorCircleComponent],
+  imports: [FormsModule, ReactiveFormsModule, NgSelectComponent, NgOptionTemplateDirective, ColorCircleComponent],
 })
 export class AuditPickerComponent extends BaseDropdownComponent<AuditModel | null> implements OnInit, OnChanges {
   @Output() public openDropdown = new EventEmitter();
@@ -21,9 +21,9 @@ export class AuditPickerComponent extends BaseDropdownComponent<AuditModel | nul
 
   override data = [
     baseAuditStatusValue,
-    { name: $localize`Opfylder standarderne`, id: APIPaymentResponseDTO.AuditStatusEnum.Green },
-    { name: $localize`Mindre forbedringer påkrævet`, id: APIPaymentResponseDTO.AuditStatusEnum.Yellow },
-    { name: $localize`Væsentlige forbedringer nødvendige`, id: APIPaymentResponseDTO.AuditStatusEnum.Red },
+    { name: $localize`Opfylder standarderne`, id: APIPaymentAuditStatus.Green },
+    { name: $localize`Mindre forbedringer påkrævet`, id: APIPaymentAuditStatus.Yellow },
+    { name: $localize`Væsentlige forbedringer nødvendige`, id: APIPaymentAuditStatus.Red },
   ];
 
   override ngOnInit() {

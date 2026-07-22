@@ -31,13 +31,13 @@ export class OrganizationsDialogComponentStore extends ComponentStore<State> {
       tap(() => this.setLoading(true)),
       switchMap(() => {
         return this.globalAdminOptionTypesService.getGlobalOptions('organization_country-code').pipe(
-          tapResponse(
-            (countryCodeDtos) => {
-              this.setCountryCodes(countryCodeDtos);
-            },
-            (e) => console.error(e),
-            () => this.setLoading(false),
-          ),
+          tapResponse({
+    next: (countryCodeDtos) => {
+        this.setCountryCodes(countryCodeDtos);
+    },
+    error: (e) => console.error(e),
+    complete: () => this.setLoading(false)
+}),
         );
       }),
     ),

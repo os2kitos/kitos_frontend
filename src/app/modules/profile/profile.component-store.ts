@@ -3,7 +3,7 @@ import { ComponentStore } from '@ngrx/component-store';
 import { tapResponse } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { combineLatestWith, mergeMap, Observable, tap } from 'rxjs';
-import { APIUserResponseDTO, APIV2UsersInternalINTERNALService } from 'src/app/api/v2';
+import { APIUserResponseDTO, UsersInternalV2Service } from 'src/app/api/v2';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectUserOrganizationUuid, selectUserUuid } from 'src/app/store/user-store/selectors';
 
@@ -18,7 +18,7 @@ export class ProfileComponentStore extends ComponentStore<State> {
   public readonly user$ = this.select((state) => state.user);
 
   constructor(
-    @Inject(APIV2UsersInternalINTERNALService) private userService: APIV2UsersInternalINTERNALService,
+    @Inject(UsersInternalV2Service) private userService: UsersInternalV2Service,
     private store: Store,
   ) {
     super({ isLoading: false });
@@ -34,11 +34,11 @@ export class ProfileComponentStore extends ComponentStore<State> {
       combineLatestWith(this.store.select(selectUserOrganizationUuid).pipe(filterNullish())),
       mergeMap(([userUuid, organizationUuid]) => {
         return this.userService.getSingleUsersInternalV2GetUserByUuid({ organizationUuid, userUuid }).pipe(
-          tapResponse(
-            (user) => this.setUser(user as APIUserResponseDTO),
-            (e) => console.error(e),
-            () => this.setLoading(false),
-          ),
+          tapResponse({
+            next: (user) => this.setUser(user as APIUserResponseDTO),
+            error: (e) => console.error(e),
+            complete: () => this.setLoading(false),
+          }),
         );
       }),
     ),

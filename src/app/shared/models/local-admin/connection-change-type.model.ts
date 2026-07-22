@@ -1,39 +1,39 @@
-import { APIConnectionUpdateOrganizationUnitConsequenceDTO } from 'src/app/api/v2';
+import { APIConnectionUpdateOrganizationUnitChangeType } from 'src/app/api/v2';
 
 export interface FkOrgConnectionChangeTypeChoice {
   name: string;
-  value: APIConnectionUpdateOrganizationUnitConsequenceDTO.CategoryEnum;
+  value: APIConnectionUpdateOrganizationUnitChangeType;
 }
 
 export const fkOrgConnectionChangeTypeChoiceOptions: FkOrgConnectionChangeTypeChoice[] = [
   {
     name: $localize`Tilføjet`,
-    value: APIConnectionUpdateOrganizationUnitConsequenceDTO.CategoryEnum.Added,
+    value: APIConnectionUpdateOrganizationUnitChangeType.Added,
   },
   {
     name: $localize`Omdøbt`,
-    value: APIConnectionUpdateOrganizationUnitConsequenceDTO.CategoryEnum.Renamed,
+    value: APIConnectionUpdateOrganizationUnitChangeType.Renamed,
   },
   {
     name: $localize`Flyttet`,
-    value: APIConnectionUpdateOrganizationUnitConsequenceDTO.CategoryEnum.Moved,
+    value: APIConnectionUpdateOrganizationUnitChangeType.Moved,
   },
   {
     name: $localize`Slettet`,
-    value: APIConnectionUpdateOrganizationUnitConsequenceDTO.CategoryEnum.Deleted,
+    value: APIConnectionUpdateOrganizationUnitChangeType.Deleted,
   },
   {
     name: $localize`Konverteret`,
-    value: APIConnectionUpdateOrganizationUnitConsequenceDTO.CategoryEnum.Converted,
+    value: APIConnectionUpdateOrganizationUnitChangeType.Converted,
   },
   {
     name: $localize`Organisationsrod erstattet`,
-    value: APIConnectionUpdateOrganizationUnitConsequenceDTO.CategoryEnum.RootChanged,
+    value: APIConnectionUpdateOrganizationUnitChangeType.RootChanged,
   },
 ];
 
 export const mapFkOrgConnectionChangeType = (
-  value?: APIConnectionUpdateOrganizationUnitConsequenceDTO.CategoryEnum,
+  value?: APIConnectionUpdateOrganizationUnitChangeType,
 ): FkOrgConnectionChangeTypeChoice | undefined => {
   return fkOrgConnectionChangeTypeChoiceOptions.find((option) => option.value === value);
 };

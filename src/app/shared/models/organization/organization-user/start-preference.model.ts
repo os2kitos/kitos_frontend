@@ -1,39 +1,39 @@
-import { APIUserResponseDTO } from 'src/app/api/v2';
+import { APIDefaultUserStartPreferenceChoice } from 'src/app/api/v2';
 
 export interface StartPreferenceChoice {
   name: string;
-  value: APIUserResponseDTO.DefaultUserStartPreferenceEnum;
+  value: APIDefaultUserStartPreferenceChoice;
 }
 
 export const startPreferenceChoiceOptions: StartPreferenceChoice[] = [
   {
     name: $localize`Start side`,
-    value: APIUserResponseDTO.DefaultUserStartPreferenceEnum.StartSite,
+    value: APIDefaultUserStartPreferenceChoice.StartSite,
   },
   {
     name: $localize`Organisation`,
-    value: APIUserResponseDTO.DefaultUserStartPreferenceEnum.Organization,
+    value: APIDefaultUserStartPreferenceChoice.Organization,
   },
   {
     name: $localize`IT Systemer`,
-    value: APIUserResponseDTO.DefaultUserStartPreferenceEnum.ItSystemUsage,
+    value: APIDefaultUserStartPreferenceChoice.ItSystemUsage,
   },
   {
     name: $localize`IT Systemkatalog`,
-    value: APIUserResponseDTO.DefaultUserStartPreferenceEnum.ItSystemCatalog,
+    value: APIDefaultUserStartPreferenceChoice.ItSystemCatalog,
   },
   {
     name: $localize`IT Kontrakter`,
-    value: APIUserResponseDTO.DefaultUserStartPreferenceEnum.ItContract,
+    value: APIDefaultUserStartPreferenceChoice.ItContract,
   },
   {
     name: $localize`Databehandling`,
-    value: APIUserResponseDTO.DefaultUserStartPreferenceEnum.DataProcessing,
+    value: APIDefaultUserStartPreferenceChoice.DataProcessing,
   },
 ];
 
 export const mapStartPreferenceChoice = (
-  value?: APIUserResponseDTO.DefaultUserStartPreferenceEnum,
+  value?: APIDefaultUserStartPreferenceChoice,
 ): StartPreferenceChoice | undefined => {
   return startPreferenceChoiceOptions.find((option) => option.value === value);
 };

@@ -6,16 +6,18 @@
   [checkboxDisabled]="(checkboxDisabled() | async) ?? false"
   (checkboxChanged)="onCheckboxChanged({ enabled: $event, fullKey: tabViewModel.fullKey })"
   [tooltipText]="(checkboxDisabled() | async) ? tabViewModel.helpText : undefined"
->
+  >
   <app-divider></app-divider>
 
   <div class="form-section-top-padding">
-    <app-paragraph class="center-no-fields-text" i18n *ngIf="!tabViewModelHasChildren()">
-      Tilpasning på feltniveau er endnu ikke muligt for dette faneblad.
+    @if (!tabViewModelHasChildren()) {
+      <app-paragraph class="center-no-fields-text" i18n>
+      Tilpasning på feltniveau er endnu ikke muligt for dette {{ noChildrenLabel() }}.
     </app-paragraph>
+    }
 
     <app-standard-vertical-content-grid [numColumns]="3">
-      <ng-container *ngFor="let fieldViewModel of tabViewModel.children">
+      @for (fieldViewModel of tabViewModel.children; track fieldViewModel) {
         <app-checkbox-button
           i18n-text
           labelPosition="after"
@@ -29,17 +31,17 @@
           "
           (valueChange)="onCheckboxChanged({ enabled: $event, fullKey: fieldViewModel.fullKey })"
           data-cy="field-checkbox"
-        >
+          >
           <app-paragraph class="wrap-text">
             {{ fieldViewModel.text }}
           </app-paragraph>
-          <ng-container *ngIf="fieldViewModel.helpText !== undefined">
+          @if (fieldViewModel.helpText !== undefined) {
             <app-tooltip [text]="fieldViewModel.helpText" class="tooltip-margin">
               <app-info-icon></app-info-icon>
             </app-tooltip>
-          </ng-container>
+          }
         </app-checkbox-button>
-      </ng-container>
+      }
     </app-standard-vertical-content-grid>
   </div>
 </app-accordion>

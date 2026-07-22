@@ -4,7 +4,7 @@ import { ApiUsersOrganizationsDialogComponent } from './api-users-organizations-
 import { GlobalAdminOtherApiUsersComponentStore } from './global-admin-other-api-users.component-store';
 import { CardComponent } from '../../../../shared/components/card/card.component';
 import { CardHeaderComponent } from '../../../../shared/components/card-header/card-header.component';
-import { NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { NativeTableComponent } from '../../../../shared/components/native-table/native-table.component';
 import { ParagraphComponent } from '../../../../shared/components/paragraph/paragraph.component';
 import { CheckPositiveGreenIconComponent } from '../../../../shared/components/icons/check-positive-green.component';
@@ -22,9 +22,7 @@ import { EyeIconComponent } from '../../../../shared/components/icons/eye-icon.c
   imports: [
     CardComponent,
     CardHeaderComponent,
-    NgIf,
     NativeTableComponent,
-    NgFor,
     ParagraphComponent,
     CheckPositiveGreenIconComponent,
     CheckNegativeGrayIconComponent,
@@ -32,8 +30,8 @@ import { EyeIconComponent } from '../../../../shared/components/icons/eye-icon.c
     LoadingComponent,
     IconButtonComponent,
     EyeIconComponent,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class GlobalAdminOtherApiUsersComponent implements OnInit {
   public usersWithRightsholderAccess$ = this.componentStore.usersWithRightsholderAccess$;

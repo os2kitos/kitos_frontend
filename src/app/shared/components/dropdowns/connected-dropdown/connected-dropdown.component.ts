@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Observable, Subject, map, pairwise, startWith } from 'rxjs';
-import { BaseComponent } from 'src/app/shared/base/base.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Observable, } from 'rxjs';
 import { DropdownComponent } from '../dropdown/dropdown.component';
 import { AsyncPipe } from '@angular/common';
+import { ConnectedDropdownBaseComponent } from '../connected-dropdown-base/connected-dropdown-base.component';
 
 @Component({
   selector: 'app-connected-dropdown[text][valueField][filterChange][formGroup][formName]',
@@ -12,66 +12,11 @@ import { AsyncPipe } from '@angular/common';
   styleUrls: ['./connected-dropdown.component.scss'],
   imports: [DropdownComponent, FormsModule, ReactiveFormsModule, AsyncPipe],
 })
-export class ConnectedDropdownComponent<T> extends BaseComponent implements OnInit {
-  @Input() public text!: string;
-  @Input() public textField: string = 'name';
-  @Input() public itemDescriptionField: string = 'description';
-  @Input() public valueField!: string;
+export class ConnectedDropdownComponent<T> extends ConnectedDropdownBaseComponent implements OnInit {
   @Input() public data$?: Observable<T[]>;
-  @Input() public isLoading$?: Observable<boolean>;
-  @Input() public showSearchHelpText$?: Observable<boolean>;
-  @Input() public formGroup!: FormGroup<any>;
-  @Input() public formName!: string;
-  @Input() public includeItemDescription = false;
-  @Input() public addTag = false;
-  @Input() public addTagText = $localize`Vælg`;
-  @Output() public filterChange = new EventEmitter<string>();
   @Output() public valueChange = new EventEmitter<string>();
-
-  private searchTermsSource$ = new Subject<string | undefined>();
-  private lastTwoSearchTerms$ = this.searchTermsSource$.pipe(
-    startWith(undefined),
-    pairwise(),
-    map(([previous, current]) => ({ previous: previous, current: current })),
-  );
-
-  ngOnInit() {
-    this.filterChange.emit(undefined);
-    this.subscriptions.add(
-      this.lastTwoSearchTerms$.subscribe((terms) => {
-        if (terms.previous != terms.current) {
-          this.filterChange.emit(terms.current);
-        }
-      }),
-    );
-  }
-
-  //since the dropdown is filtered externally, accept every item
-  public externalSearch(_: string, __: any) {
-    return true;
-  }
 
   public onValueChange(selectedUuid?: string) {
     this.valueChange.emit(selectedUuid);
-  }
-
-  public onFilterChange(searchTerm?: string) {
-    this.publishActiveSearchTerm(searchTerm);
-  }
-
-  public onFocus() {
-    this.resetActiveSearchTerm();
-  }
-
-  private publishActiveSearchTerm(term?: string) {
-    this.searchTermsSource$.next(term);
-  }
-
-  public onOpen() {
-    this.resetActiveSearchTerm();
-  }
-
-  private resetActiveSearchTerm() {
-    this.publishActiveSearchTerm();
   }
 }

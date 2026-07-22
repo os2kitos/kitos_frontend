@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
 import { catchError, combineLatestWith, filter, map, of, switchMap } from 'rxjs';
 import { mergeMap } from 'rxjs/internal/operators/mergeMap';
-import { APIV2OrganizationsInternalINTERNALService } from 'src/app/api/v2';
+import { OrganizationsInternalV2Service } from 'src/app/api/v2';
 import { OData } from 'src/app/shared/models/odata.model';
 import { adaptOrganizationMasterDataRoles } from 'src/app/shared/models/organization/organization-master-data/organization-master-data-roles.model';
 import { adaptOrganizationMasterData } from 'src/app/shared/models/organization/organization-master-data/organization-master-data.model';
@@ -24,8 +24,8 @@ import { selectHasValidUIRootConfigCache } from './selectors';
 @Injectable()
 export class OrganizationEffects {
   constructor(
-    @Inject(APIV2OrganizationsInternalINTERNALService)
-    private organizationInternalService: APIV2OrganizationsInternalINTERNALService,
+    @Inject(OrganizationsInternalV2Service)
+    private organizationInternalService: OrganizationsInternalV2Service,
     private actions$: Actions,
     private store: Store,
     private httpClient: HttpClient,
@@ -101,7 +101,10 @@ export class OrganizationEffects {
       combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       switchMap(([{ request }, organizationUuid]) =>
         this.organizationInternalService
-          .patchSingleOrganizationsInternalV2PatchOrganizationMasterData({ organizationUuid, requestDto: request })
+          .patchSingleOrganizationsInternalV2PatchOrganizationMasterData({
+            organizationUuid,
+            aPIOrganizationMasterDataRequestDTO: request,
+          })
           .pipe(
             map((organizationMasterDataDto) => {
               const organizationMasterData = adaptOrganizationMasterData(organizationMasterDataDto);
@@ -143,7 +146,7 @@ export class OrganizationEffects {
         this.organizationInternalService
           .patchSingleOrganizationsInternalV2UpsertOrganizationMasterDataRoles({
             organizationUuid,
-            requestDto: request,
+            aPIOrganizationMasterDataRolesRequestDTO: request,
           })
           .pipe(
             map((organizationMasterDataRolesDto) => {
@@ -201,7 +204,10 @@ export class OrganizationEffects {
       concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
       switchMap(([{ dto }, organizationUuid]) =>
         this.organizationInternalService
-          .patchSingleOrganizationsInternalV2PatchUIRootConfig({ dto, organizationUuid })
+          .patchSingleOrganizationsInternalV2PatchUIRootConfig({
+            aPIUIRootConfigUpdateRequestDTO: dto,
+            organizationUuid,
+          })
           .pipe(
             map((responseDto) => {
               const uiRootConfig = mapUIRootConfig(responseDto);
@@ -218,7 +224,10 @@ export class OrganizationEffects {
       ofType(OrganizationActions.patchOrganization),
       switchMap(({ request, organizationUuid }) =>
         this.organizationInternalService
-          .patchSingleOrganizationsInternalV2PatchOrganization({ requestDto: request, organizationUuid })
+          .patchSingleOrganizationsInternalV2PatchOrganization({
+            aPIOrganizationUpdateRequestDTO: request,
+            organizationUuid,
+          })
           .pipe(
             map(() => OrganizationActions.patchOrganizationSuccess()),
             catchError(() => of(OrganizationActions.patchOrganizationError())),
@@ -231,10 +240,12 @@ export class OrganizationEffects {
     return this.actions$.pipe(
       ofType(OrganizationActions.createOrganization),
       switchMap(({ request }) =>
-        this.organizationInternalService.postSingleOrganizationsInternalV2CreateOrganization({ request }).pipe(
-          map(() => OrganizationActions.createOrganizationSuccess()),
-          catchError(() => of(OrganizationActions.createOrganizationError())),
-        ),
+        this.organizationInternalService
+          .postSingleOrganizationsInternalV2CreateOrganization({ aPIOrganizationCreateRequestDTO: request })
+          .pipe(
+            map(() => OrganizationActions.createOrganizationSuccess()),
+            catchError(() => of(OrganizationActions.createOrganizationError())),
+          ),
       ),
     );
   });
@@ -248,6 +259,23 @@ export class OrganizationEffects {
           .pipe(
             map(() => OrganizationActions.deleteOrganizationSuccess()),
             catchError(() => of(OrganizationActions.deleteOrganizationError())),
+          ),
+      ),
+    );
+  });
+
+  changeOrganizationDisabledStatus$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(OrganizationActions.changeOrganizationDisabledStatus),
+      switchMap(({ organizationUuid, disabled }) =>
+        this.organizationInternalService
+          .patchSingleOrganizationsInternalV2ChangeDisabledStatus({
+            organizationUuid,
+            aPIOrganizationDisabledStatusRequestDTO: { disabled },
+          })
+          .pipe(
+            map(() => OrganizationActions.changeOrganizationDisabledStatusSuccess(disabled)),
+            catchError(() => of(OrganizationActions.changeOrganizationDisabledStatusError(disabled))),
           ),
       ),
     );

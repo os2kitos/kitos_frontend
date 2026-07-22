@@ -1,41 +1,65 @@
-<mat-form-field *ngIf="formGroup" [formGroup]="formGroup" class="{{ size }}">
-  <mat-label>{{ text }}</mat-label>
-  <input
-    matInput
-    [type]="type"
-    [maxlength]="maxLength"
-    [formControlName]="formName"
-    [pattern]="pattern"
-    (input)="formInputValueChange($event)"
-    class="{{ size }}"
-    (focus)="focus(true)"
-    (blur)="focus(false)"
-  />
-  <mat-spinner *ngIf="isLoading" [diameter]="20" matSuffix></mat-spinner>
-  <app-search-icon *ngIf="icon === 'search'" matPrefix></app-search-icon>
-  <app-trashcan-icon *ngIf="icon === 'trashcan'" matSuffix (click)="onIconClick()"></app-trashcan-icon>
-  <app-x-icon *ngIf="clearable && value" matSuffix (click)="clear()"></app-x-icon>
-  <app-tooltip *ngIf="info" [text]="info" matSuffix>
-    <app-info-icon></app-info-icon>
-  </app-tooltip>
-</mat-form-field>
+@if (formGroup) {
+  <mat-form-field [formGroup]="formGroup" class="{{ size }}">
+    <mat-label>{{ text }}</mat-label>
+    <input
+      matInput
+      [type]="type"
+      [maxlength]="maxLength"
+      [formControlName]="formName"
+      [pattern]="pattern"
+      (input)="formInputValueChange($event)"
+      class="{{ size }}"
+      (focus)="focus(true)"
+      (blur)="focus(false)"
+      />
+    @if (isLoading) {
+      <mat-spinner [diameter]="20" matSuffix></mat-spinner>
+    }
+    @if (icon === 'search') {
+      <app-search-icon matPrefix></app-search-icon>
+    }
+    @if (icon === 'trashcan') {
+      <app-trashcan-icon matSuffix (click)="onIconClick()"></app-trashcan-icon>
+    }
+    @if (clearable && value) {
+      <app-x-icon matSuffix (click)="clear()"></app-x-icon>
+    }
+    @if (info) {
+      <app-tooltip [text]="info" matSuffix>
+        <app-info-icon></app-info-icon>
+      </app-tooltip>
+    }
+  </mat-form-field>
+}
 
-<mat-form-field *ngIf="!formGroup" class="{{ size }}">
-  <mat-label>{{ text }}</mat-label>
-  <input
-    matInput
-    [type]="type"
-    [maxlength]="maxLength"
-    [disabled]="disabled"
-    [(ngModel)]="value"
-    class="{{ size }}"
-    (ngModelChange)="valueChange.emit($event)"
-  />
-  <mat-spinner *ngIf="isLoading" [diameter]="20" matSuffix></mat-spinner>
-  <app-search-icon *ngIf="icon === 'search'" matPrefix></app-search-icon>
-  <app-trashcan-icon *ngIf="icon === 'trashcan'" matSuffix (click)="onIconClick()"></app-trashcan-icon>
-  <app-x-icon *ngIf="clearable && value" matSuffix (click)="clear()"></app-x-icon>
-  <app-tooltip *ngIf="info" [text]="info" matSuffix>
-    <app-info-icon></app-info-icon>
-  </app-tooltip>
-</mat-form-field>
+@if (!formGroup) {
+  <mat-form-field class="{{ size }}">
+    <mat-label>{{ text }}</mat-label>
+    <input
+      matInput
+      [type]="type"
+      [maxlength]="maxLength"
+      [disabled]="disabled"
+      [(ngModel)]="value"
+      class="{{ size }}"
+      (ngModelChange)="valueChange.emit($event)"
+      />
+    @if (isLoading) {
+      <mat-spinner [diameter]="20" matSuffix></mat-spinner>
+    }
+    @if (icon === 'search') {
+      <app-search-icon matPrefix></app-search-icon>
+    }
+    @if (icon === 'trashcan') {
+      <app-trashcan-icon matSuffix (click)="onIconClick()"></app-trashcan-icon>
+    }
+    @if (clearable && value) {
+      <app-x-icon matSuffix (click)="clear()"></app-x-icon>
+    }
+    @if (info) {
+      <app-tooltip [text]="info" matSuffix>
+        <app-info-icon></app-info-icon>
+      </app-tooltip>
+    }
+  </mat-form-field>
+}

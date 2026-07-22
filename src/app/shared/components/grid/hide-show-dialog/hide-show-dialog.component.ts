@@ -1,5 +1,5 @@
 import { CdkScrollable } from '@angular/cdk/scrolling';
-import { NgFor, NgIf } from '@angular/common';
+
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialogContent, MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
@@ -11,6 +11,7 @@ import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
+import { ITSystemUsageArchiveActions } from 'src/app/store/it-system-usage-archive/actions';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
 import { ButtonComponent } from '../../buttons/button/button.component';
@@ -19,6 +20,7 @@ import { DialogActionsComponent } from '../../dialogs/dialog-actions/dialog-acti
 import { DialogComponent } from '../../dialogs/dialog/dialog.component';
 import { ParagraphComponent } from '../../paragraph/paragraph.component';
 import { StandardVerticalContentGridComponent } from '../../standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { ITContractSupplierActions } from 'src/app/store/it-contract/it-contract-supplier/actions';
 
 @Component({
   selector: 'app-hide-show-dialog',
@@ -29,13 +31,11 @@ import { StandardVerticalContentGridComponent } from '../../standard-vertical-co
     StandardVerticalContentGridComponent,
     CdkScrollable,
     MatDialogContent,
-    NgFor,
     ParagraphComponent,
-    NgIf,
     CheckboxComponent,
     DialogActionsComponent,
-    ButtonComponent,
-  ],
+    ButtonComponent
+],
 })
 export class HideShowDialogComponent implements OnInit {
   @Input() columns!: GridColumn[];
@@ -53,7 +53,10 @@ export class HideShowDialogComponent implements OnInit {
 
   ngOnInit() {
     this.columnsCopy = this.columns
-      .filter((column) => column.style !== 'excel-only' && column.style !== 'action-buttons')
+      .filter(
+        (column) =>
+          column.style !== 'excel-only' && column.style !== 'role-excel-only' && column.style !== 'action-buttons'
+      )
       .filter((column) => this.isColumnEnabled(column, this.uiConfigApplications))
       .map((column) => ({ ...column }))
       .sort((a, b) => (a.order_id ?? 0) - (b.order_id ?? 0));
@@ -74,6 +77,9 @@ export class HideShowDialogComponent implements OnInit {
       case 'it-system':
         this.store.dispatch(ITSystemActions.updateGridColumns(updatedColumns));
         break;
+      case 'it-system-usage-archive':
+        this.store.dispatch(ITSystemUsageArchiveActions.updateGridColumns(updatedColumns));
+        break;
       case 'it-interface':
         this.store.dispatch(ITInterfaceActions.updateGridColumns(updatedColumns));
         break;
@@ -85,6 +91,9 @@ export class HideShowDialogComponent implements OnInit {
         break;
       case 'organization-user':
         this.store.dispatch(OrganizationUserActions.updateGridColumns(updatedColumns));
+        break;
+      case 'it-contract-supplier':
+        this.store.dispatch(ITContractSupplierActions.updateGridColumns(updatedColumns));
         break;
       default:
         throw `HideShowDialogComponent: ${this.entityType} not implemented`;

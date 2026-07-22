@@ -1,46 +1,56 @@
-<app-loading *ngIf="loadingKle$ | async"></app-loading>
-<app-native-table *ngIf="selectedKleDetails$ | async as selectedKle">
-  <thead>
-    <th width="10%" i18n>KLE ID</th>
-    <th i18n>KLE Navn</th>
-  </thead>
-  <tbody>
-    <tr *ngFor="let kle of selectedKle">
-      <td>
-        <app-paragraph [strikeThrough]="kle.isIrrelevant" [dimmed]="kle.isIrrelevant" paragraphSize="small">{{
-          kle.kleNumber
-        }}</app-paragraph>
-      </td>
-      <td>
-        <app-content-space-between>
-          <app-paragraph
-            [strikeThrough]="kle.isIrrelevant"
-            [dimmed]="kle.isIrrelevant"
-            [cropOnOverflow]="true"
-            paragraphSize="small"
-            >{{ kle.description }}</app-paragraph
-          >
-          <ng-container *ngIf="hasModifyPermission">
-            <app-table-row-actions *ngIf="kle.availableCommands && kle.availableCommands.length > 0">
-              <ng-container *ngFor="let command of kle.availableCommands">
-                <app-icon-button
-                  *ngIf="command === 'delete-assignment' || command === 'toggle-assignment-relevance-off'"
-                  (buttonClick)="commandExecutionRequested({ command: command, kleUuid: kle.uuid })"
+@if (loadingKle$ | async) {
+  <app-loading></app-loading>
+}
+@if (selectedKleDetails$ | async; as selectedKle) {
+  <app-native-table>
+    <thead>
+      <th width="10%" i18n>KLE ID</th>
+      <th i18n>KLE Navn</th>
+    </thead>
+    <tbody>
+      @for (kle of selectedKle; track kle) {
+        <tr>
+          <td>
+            <app-paragraph [strikeThrough]="kle.isIrrelevant" [dimmed]="kle.isIrrelevant" paragraphSize="small">{{
+              kle.kleNumber
+            }}</app-paragraph>
+          </td>
+          <td>
+            <app-content-space-between>
+              <app-paragraph
+                [strikeThrough]="kle.isIrrelevant"
+                [dimmed]="kle.isIrrelevant"
+                [cropOnOverflow]="true"
+                paragraphSize="small"
+                >{{ kle.description }}</app-paragraph
                 >
-                  <app-trashcan-icon></app-trashcan-icon>
-                </app-icon-button>
-                <app-icon-button
-                  *ngIf="command === 'toggle-assignment-relevance-on'"
-                  buttonStyle="primary"
-                  (buttonClick)="commandExecutionRequested({ command: command, kleUuid: kle.uuid })"
-                >
-                  <app-plus-icon></app-plus-icon>
-                </app-icon-button>
-              </ng-container>
-            </app-table-row-actions>
-          </ng-container>
-        </app-content-space-between>
-      </td>
-    </tr>
-  </tbody>
-</app-native-table>
+                @if (hasModifyPermission) {
+                  @if (kle.availableCommands && kle.availableCommands.length > 0) {
+                    <app-table-row-actions>
+                      @for (command of kle.availableCommands; track command) {
+                        @if (command === 'delete-assignment' || command === 'toggle-assignment-relevance-off') {
+                          <app-icon-button
+                            (buttonClick)="commandExecutionRequested({ command: command, kleUuid: kle.uuid })"
+                            >
+                            <app-trashcan-icon></app-trashcan-icon>
+                          </app-icon-button>
+                        }
+                        @if (command === 'toggle-assignment-relevance-on') {
+                          <app-icon-button
+                            buttonStyle="primary"
+                            (buttonClick)="commandExecutionRequested({ command: command, kleUuid: kle.uuid })"
+                            >
+                            <app-plus-icon></app-plus-icon>
+                          </app-icon-button>
+                        }
+                      }
+                    </app-table-row-actions>
+                  }
+                }
+              </app-content-space-between>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </app-native-table>
+  }

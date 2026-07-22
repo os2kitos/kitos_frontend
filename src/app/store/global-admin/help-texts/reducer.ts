@@ -1,14 +1,15 @@
 import { createEntityAdapter } from '@ngrx/entity';
-import { HelpTextsState } from './state';
 import { createFeature, createReducer, on } from '@ngrx/store';
-import { HelpTextActions } from './actions';
 import { HelpText } from 'src/app/shared/models/help-text.model';
+import { HelpTextActions } from './actions';
+import { HelpTextsState } from './state';
 
 export const helpTextAdapter = createEntityAdapter<HelpText>();
 
-export const helpTextsInitialState: HelpTextsState = helpTextAdapter.getInitialState({
+export const helpTextsInitialState: HelpTextsState = {
+  ...helpTextAdapter.getInitialState(),
   helpTexts: [],
-});
+};
 
 export const helpTextFeature = createFeature({
   name: 'HelpText',
@@ -19,14 +20,14 @@ export const helpTextFeature = createFeature({
       (state, { helpTexts }): HelpTextsState => ({
         ...state,
         helpTexts,
-      }),
+      })
     ),
     on(
       HelpTextActions.createHelpTextSuccess,
       (state, { helpText }): HelpTextsState => ({
         ...state,
         helpTexts: [...state.helpTexts, helpText],
-      }),
-    ),
+      })
+    )
   ),
 });

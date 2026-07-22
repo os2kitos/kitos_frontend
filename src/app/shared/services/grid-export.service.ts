@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { NO_TEXT, YES_TEXT } from '../constants/constants';
-import { validateUrl } from '../helpers/link.helpers';
+import { toCommaSeparatedString } from '../helpers/array.helpers';
+import { validateHttpUrl } from '../helpers/link.helpers';
 import { GridColumn } from '../models/grid-column.model';
 import { OverviewAuditModel } from '../models/it-contract/audit-model';
 import { AppDatePipe } from '../pipes/app-date.pipe';
@@ -11,6 +12,13 @@ import { AppDatePipe } from '../pipes/app-date.pipe';
 export class GridExportService {
   constructor(private appDatePipe: AppDatePipe) {}
 
+  //eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private handleChipField(column: GridColumn, transformedItem: any) {
+    const isReverse = column.style === 'reverse-chip';
+    const trueIndex = isReverse ? 1 : 0;
+    const falseIndex = isReverse ? 0 : 1;
+    return transformedItem[column.field] ? column.extraData[trueIndex].name : column.extraData[falseIndex].name;
+  }
   /**
    * @param item An item representing a row in the grid
    * @param exportColumns The columns to be exported
@@ -25,14 +33,25 @@ export class GridExportService {
         switch (column.style) {
           case 'chip':
             if (typeof transformedItem[field] === 'boolean') {
-              const boolValue = transformedItem[field] ? 0 : 1;
-              transformedItem[field] = column.extraData[boolValue].name;
+              transformedItem[field] = this.handleChipField(column, transformedItem);
+            }
+            break;
+          case 'reverse-chip':
+            if (typeof transformedItem[field] === 'boolean') {
+              transformedItem[field] = this.handleChipField(column, transformedItem);
             }
             break;
           case 'enum':
             if (typeof transformedItem[field] === 'object') {
               const enumValue = transformedItem[field];
               transformedItem[field] = enumValue.name;
+            }
+            break;
+          case 'enum-array':
+            if (Array.isArray(transformedItem[field])) {
+              const enumArray = transformedItem[field];
+              const enumNamesCsv = toCommaSeparatedString(enumArray.map((enumItem) => enumItem.name));
+              transformedItem[field] = enumNamesCsv;
             }
             break;
           case 'boolean':
@@ -43,7 +62,7 @@ export class GridExportService {
           case 'uuid-to-name':
             transformedItem[field] = transformedItem[`${column.dataField}`];
             break;
-          case 'excel-only': {
+          case 'role-excel-only': {
             if (transformedItem.RoleEmails) {
               const roleEmailKeys: string[] = Object.keys(transformedItem.RoleEmails);
               roleEmailKeys.forEach((key) => {
@@ -58,20 +77,26 @@ export class GridExportService {
           case 'page-link-array':
             {
               const array = transformedItem[column.dataField as string];
-              const excelValue = array.map((item: { value: string }) => item.value).join(', ');
+              const excelValue = toCommaSeparatedString(array.map((item: { value: string }) => item.value));
               transformedItem[field] = excelValue;
             }
             break;
           case 'usages':
             {
               const usages = transformedItem[column.field as string];
+              // Set the count for the main field
               transformedItem[field] = usages.length;
+
+              // Create a separate field for the names
+              const namesField = `${field}Names`;
+              const usageNames = toCommaSeparatedString(usages.map((usage: any) => usage.name));
+              transformedItem[namesField] = usageNames;
             }
             break;
           case 'title-link':
             {
               const url = transformedItem[column.idField ?? ''];
-              const exportValue = validateUrl(url) ? url : transformedItem[field];
+              const exportValue = validateHttpUrl(url) ? url : transformedItem[field];
               transformedItem[field] = exportValue;
             }
             break;

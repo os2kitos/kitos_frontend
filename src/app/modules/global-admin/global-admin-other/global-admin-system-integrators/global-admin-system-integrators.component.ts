@@ -15,7 +15,7 @@ import { mapArray } from 'src/app/shared/helpers/observable-helpers';
 import { CardComponent } from '../../../../shared/components/card/card.component';
 import { CardHeaderComponent } from '../../../../shared/components/card-header/card-header.component';
 import { CollectionExtensionButtonComponent } from '../../../../shared/components/collection-extension-button/collection-extension-button.component';
-import { NgIf, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { LocalGridComponent } from '../../../../shared/components/local-grid/local-grid.component';
 
 @Component({
@@ -27,10 +27,9 @@ import { LocalGridComponent } from '../../../../shared/components/local-grid/loc
     CardComponent,
     CardHeaderComponent,
     CollectionExtensionButtonComponent,
-    NgIf,
     LocalGridComponent,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class GlobalAdminSystemIntegratorsComponent extends BaseComponent implements OnInit {
   public readonly systemIntegrators$ = this.componentStore.systemIntegrators$;

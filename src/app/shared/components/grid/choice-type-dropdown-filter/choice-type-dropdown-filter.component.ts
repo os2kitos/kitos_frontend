@@ -11,14 +11,14 @@ import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-stor
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 import { AppBaseFilterCellComponent } from '../app-base-filter-cell.component';
 import { FilterDropdownOption } from '../dropdown-filter/dropdown-filter.component';
-import { NgIf, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { DropdownComponent } from '../../dropdowns/dropdown/dropdown.component';
 
 @Component({
   selector: 'app-choice-type-dropdown-filter',
   templateUrl: './choice-type-dropdown-filter.component.html',
   styleUrl: './choice-type-dropdown-filter.component.scss',
-  imports: [NgIf, DropdownComponent, AsyncPipe],
+  imports: [DropdownComponent, AsyncPipe],
 })
 export class ChoiceTypeDropdownFilterComponent extends AppBaseFilterCellComponent implements OnInit {
   @Input() override filter!: CompositeFilterDescriptor;

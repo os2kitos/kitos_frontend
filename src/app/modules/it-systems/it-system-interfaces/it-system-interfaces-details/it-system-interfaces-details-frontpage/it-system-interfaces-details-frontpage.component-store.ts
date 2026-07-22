@@ -3,7 +3,7 @@ import { ComponentStore } from '@ngrx/component-store';
 import { tapResponse } from '@ngrx/operators';
 
 import { Observable, mergeMap } from 'rxjs';
-import { APIItSystemResponseDTO, APIV2ItSystemInternalINTERNALService } from 'src/app/api/v2';
+import { APIItSystemResponseDTO, ItSystemInternalV2Service } from 'src/app/api/v2';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 
 interface State {
@@ -17,7 +17,7 @@ export class ITSystemInterfacesDetailsFrontpageComponentStore extends ComponentS
   public readonly itSystems$ = this.select((state) => state.itSystems).pipe(filterNullish());
   public readonly isLoading$ = this.select((state) => state.isLoading);
 
-  constructor(private apiItSystemInternalService: APIV2ItSystemInternalINTERNALService) {
+  constructor(private apiItSystemInternalService: ItSystemInternalV2Service) {
     super({ isLoading: false, isLoadingOrganizations: false });
   }
 
@@ -37,11 +37,11 @@ export class ITSystemInterfacesDetailsFrontpageComponentStore extends ComponentS
             includeDeactivated: false,
           })
           .pipe(
-            tapResponse(
-              (itSystems: APIItSystemResponseDTO[]) => this.updateItSystems(itSystems),
-              (e) => console.error(e),
-              () => this.updateIsLoading(false),
-            ),
+            tapResponse({
+              next: (itSystems: APIItSystemResponseDTO[]) => this.updateItSystems(itSystems),
+              error: (e) => console.error(e),
+              complete: () => this.updateIsLoading(false),
+            }),
           );
       }),
     ),

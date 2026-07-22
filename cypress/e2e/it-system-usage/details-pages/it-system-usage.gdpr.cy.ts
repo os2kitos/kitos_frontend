@@ -1,7 +1,5 @@
 const generalInformation = 'Generel information';
-const purposeInput = 'Systemets overordnede formål';
-const businessCriticalDropdown = 'Forretningskritisk IT-System';
-const hostedAtDropdown = 'IT-systemet driftes';
+const purposeInput = 'Behandlingsformål';
 const personDataCheckbox = 'Almindelige personoplysninger';
 const dataSensitivityAccordion = 'data-sensitivity-accordion';
 const registedCategoriesAccordion = 'registed-categories-accordion';
@@ -34,8 +32,6 @@ describe('it-system-usage gdpr', () => {
     cy.contains(generalInformation);
     cy.contains('Yderligere information');
     cy.input(purposeInput).should('have.value', 'Test purpose');
-    cy.dropdown(businessCriticalDropdown).should('have.text', 'Ja');
-    cy.dropdown(hostedAtDropdown).should('have.text', 'On-premise');
 
     verifyLinkTextbox('directory-documentation-link', 'newName: newUrl');
   });
@@ -48,32 +44,8 @@ describe('it-system-usage gdpr', () => {
     cy.input(purposeInput).clear().type(newPurpose);
     cy.contains(generalInformation).click();
 
-    cy.verifyRequestUsingDeepEq('patch', 'request.body', { gdpr: { purpose: newPurpose } });
+    cy.verifyRequestUsingDeepEq('patch', 'request.body', { gdpr: { processingPurpose: newPurpose } });
     cy.input(purposeInput).should('have.value', newPurpose);
-  });
-
-  it('can edit business critical status', () => {
-    cy.intercept('PATCH', '/api/v2/it-system-usages/*', {
-      fixture: './it-system-usage/gdpr/it-system-usage-updated-gdpr.json',
-    }).as('patch');
-    const newBusinessCritical = 'Nej';
-    cy.dropdown(businessCriticalDropdown, newBusinessCritical, true);
-    cy.contains(generalInformation).click();
-
-    verifyGdprPatchRequest({ businessCritical: 'No' });
-    cy.dropdown(businessCriticalDropdown).should('have.text', newBusinessCritical);
-  });
-
-  it('can edit hosted at status', () => {
-    cy.intercept('PATCH', '/api/v2/it-system-usages/*', {
-      fixture: './it-system-usage/gdpr/it-system-usage-updated-gdpr.json',
-    }).as('patch');
-    const newHostedAt = 'Eksternt';
-    cy.dropdown(hostedAtDropdown, newHostedAt, true);
-    cy.contains(generalInformation).click();
-
-    verifyGdprPatchRequest({ hostedAt: 'External' });
-    cy.dropdown(hostedAtDropdown).should('have.text', newHostedAt);
   });
 
   it('can edit data sensitivity levels', () => {

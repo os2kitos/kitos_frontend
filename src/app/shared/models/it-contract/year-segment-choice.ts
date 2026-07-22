@@ -1,31 +1,25 @@
-import { APIContractTerminationTermsRequestDTO } from 'src/app/api/v2';
+import { APIYearSegmentChoice } from 'src/app/api/v2';
 
 export interface YearSegmentChoice {
   name: string;
-  value:
-    | APIContractTerminationTermsRequestDTO.NoticePeriodExtendsCurrentEnum
-    | APIContractTerminationTermsRequestDTO.NoticeByEndOfEnum;
+  value: APIYearSegmentChoice;
 }
 
 export const yearSegmentChoiceOptions: YearSegmentChoice[] = [
   {
     name: $localize`Kalenderår`,
-    value: APIContractTerminationTermsRequestDTO.NoticePeriodExtendsCurrentEnum.EndOfCalendarYear,
+    value: APIYearSegmentChoice.EndOfCalendarYear,
   },
   {
     name: $localize`Kvartal`,
-    value: APIContractTerminationTermsRequestDTO.NoticePeriodExtendsCurrentEnum.EndOfQuarter,
+    value: APIYearSegmentChoice.EndOfQuarter,
   },
   {
     name: $localize`Måned`,
-    value: APIContractTerminationTermsRequestDTO.NoticePeriodExtendsCurrentEnum.EndOfMonth,
+    value: APIYearSegmentChoice.EndOfMonth,
   },
 ];
 
-export const mapYearSegmentChoice = (
-  value?:
-    | APIContractTerminationTermsRequestDTO.NoticePeriodExtendsCurrentEnum
-    | APIContractTerminationTermsRequestDTO.NoticeByEndOfEnum,
-): YearSegmentChoice | undefined => {
+export const mapYearSegmentChoice = (value?: APIYearSegmentChoice): YearSegmentChoice | undefined => {
   return yearSegmentChoiceOptions.find((option) => option.value === value);
 };

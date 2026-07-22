@@ -1,18 +1,18 @@
+import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
-import { Router, RouterLinkActive, RouterLink } from '@angular/router';
+import { MatBadge } from '@angular/material/badge';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { combineLatest, map, Observable, of } from 'rxjs';
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { selectAllAlertCount } from 'src/app/store/alerts/selectors';
 import {
-  selectShowItSystemModule,
-  selectShowItContractModule,
   selectShowDataProcessingRegistrations,
+  selectShowItContractModule,
+  selectShowItSystemModule,
 } from 'src/app/store/organization/selectors';
 import { ButtonComponent } from '../../../shared/components/buttons/button/button.component';
-import { MatBadge } from '@angular/material/badge';
 import { NotificationIconComponent } from '../../../shared/components/icons/notification-icon.component';
-import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-notifications-button',

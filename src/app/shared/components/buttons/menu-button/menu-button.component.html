@@ -4,10 +4,10 @@
   #menuTrigger="matMenuTrigger"
   (mouseenter)="onMouseEnter()"
   (mouseleave)="onMouseLeave()"
->
-  <ng-container *ngIf="iconType">
+  >
+  @if (iconType) {
     <app-icon [iconType]="iconType"></app-icon>
-  </ng-container>
+  }
   <ng-content select="[title]"></ng-content>
   <ng-container i18n>{{ title }}</ng-container>
 </app-button>
@@ -21,7 +21,7 @@
   [hasBackdrop]="false"
   (mouseenter)="onMouseEnter()"
   (mouseleave)="onMouseLeave()"
->
+  >
   <span #content (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()">
     <ng-content></ng-content>
   </span>

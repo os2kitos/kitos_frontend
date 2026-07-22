@@ -46,7 +46,7 @@ import { DropdownComponent } from '../../../../../shared/components/dropdowns/dr
 import { LinkTextboxComponent } from '../../../../../shared/components/link-textbox/link-textbox.component';
 import { TextAreaComponent } from '../../../../../shared/components/textarea/textarea.component';
 import { StandardVerticalContentGridComponent } from '../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
-import { NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { NativeTableComponent } from '../../../../../shared/components/native-table/native-table.component';
 import { ParagraphComponent } from '../../../../../shared/components/paragraph/paragraph.component';
 import { ContentSpaceBetweenComponent } from '../../../../../shared/components/content-space-between/content-space-between.component';
@@ -75,9 +75,7 @@ import { CollectionExtensionButtonComponent } from '../../../../../shared/compon
     LinkTextboxComponent,
     TextAreaComponent,
     StandardVerticalContentGridComponent,
-    NgIf,
     NativeTableComponent,
-    NgFor,
     ParagraphComponent,
     ContentSpaceBetweenComponent,
     TableRowActionsComponent,
@@ -86,8 +84,8 @@ import { CollectionExtensionButtonComponent } from '../../../../../shared/compon
     TrashcanIconComponent,
     EmptyStateComponent,
     CollectionExtensionButtonComponent,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class ItSystemInterfacesDetailsFrontpageComponent extends BaseComponent implements OnInit {
   public readonly interfaceTypeOptions$ = this.store

@@ -1,3 +1,4 @@
+import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -37,20 +38,19 @@ import {
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
-import { NgIf, NgFor, AsyncPipe } from '@angular/common';
-import { CardComponent } from '../../../../shared/components/card/card.component';
-import { CardHeaderComponent } from '../../../../shared/components/card-header/card-header.component';
-import { StandardVerticalContentGridComponent } from '../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
-import { DropdownComponent } from '../../../../shared/components/dropdowns/dropdown/dropdown.component';
-import { TextAreaComponent } from '../../../../shared/components/textarea/textarea.component';
-import { DatePickerComponent } from '../../../../shared/components/datepicker/datepicker.component';
-import { NativeTableComponent } from '../../../../shared/components/native-table/native-table.component';
-import { ContentSpaceBetweenComponent } from '../../../../shared/components/content-space-between/content-space-between.component';
-import { ParagraphComponent } from '../../../../shared/components/paragraph/paragraph.component';
 import { IconButtonComponent } from '../../../../shared/components/buttons/icon-button/icon-button.component';
-import { TrashcanIconComponent } from '../../../../shared/components/icons/trashcan-icon.component';
-import { EmptyStateComponent } from '../../../../shared/components/empty-states/empty-state.component';
+import { CardHeaderComponent } from '../../../../shared/components/card-header/card-header.component';
+import { CardComponent } from '../../../../shared/components/card/card.component';
 import { CollectionExtensionButtonComponent } from '../../../../shared/components/collection-extension-button/collection-extension-button.component';
+import { ContentSpaceBetweenComponent } from '../../../../shared/components/content-space-between/content-space-between.component';
+import { DatePickerComponent } from '../../../../shared/components/datepicker/datepicker.component';
+import { DropdownComponent } from '../../../../shared/components/dropdowns/dropdown/dropdown.component';
+import { EmptyStateComponent } from '../../../../shared/components/empty-states/empty-state.component';
+import { TrashcanIconComponent } from '../../../../shared/components/icons/trashcan-icon.component';
+import { NativeTableComponent } from '../../../../shared/components/native-table/native-table.component';
+import { ParagraphComponent } from '../../../../shared/components/paragraph/paragraph.component';
+import { StandardVerticalContentGridComponent } from '../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { TextAreaComponent } from '../../../../shared/components/textarea/textarea.component';
 import { OversightsTableComponent } from './oversights-table/oversights-table.component';
 
 @Component({
@@ -58,7 +58,6 @@ import { OversightsTableComponent } from './oversights-table/oversights-table.co
   templateUrl: './data-processing-oversight.component.html',
   styleUrl: './data-processing-oversight.component.scss',
   imports: [
-    NgIf,
     CardComponent,
     CardHeaderComponent,
     FormsModule,
@@ -68,7 +67,6 @@ import { OversightsTableComponent } from './oversights-table/oversights-table.co
     TextAreaComponent,
     DatePickerComponent,
     NativeTableComponent,
-    NgFor,
     ContentSpaceBetweenComponent,
     ParagraphComponent,
     IconButtonComponent,
@@ -143,9 +141,9 @@ export class DataProcessingOversightComponent extends BaseComponent implements O
         .pipe(combineLatestWith(this.store.select(selectDataProcessingHasModifyPermissions)))
         .subscribe(([dataProcessing, hasModifyPermissions]) => {
           this.generalInformationForm.patchValue({
-            interval: mapToOversightInterval(dataProcessing?.oversight?.oversightInterval),
+            interval: mapToOversightInterval(dataProcessing?.oversight?.oversightInterval ?? undefined),
             intervalRemarks: dataProcessing?.oversight?.oversightIntervalRemark,
-            completedAt: optionalNewDate(dataProcessing?.oversight?.oversightScheduledInspectionDate),
+            completedAt: optionalNewDate(dataProcessing?.oversight?.oversightScheduledInspectionDate ?? undefined),
             remarks: dataProcessing?.oversight?.oversightOptionsRemark,
           });
           if (hasModifyPermissions) {
@@ -184,7 +182,9 @@ export class DataProcessingOversightComponent extends BaseComponent implements O
     dialogInstance.save
       .pipe(combineLatestWith(this.store.select(selectDataProcessingOversightOptions)), first())
       .subscribe(([data, oversightOptions]) => {
-        this.store.dispatch(DataProcessingActions.addDataProcessingOversightOption(data, oversightOptions));
+        this.store.dispatch(
+          DataProcessingActions.addDataProcessingOversightOption(data, oversightOptions ?? undefined),
+        );
       });
   }
 

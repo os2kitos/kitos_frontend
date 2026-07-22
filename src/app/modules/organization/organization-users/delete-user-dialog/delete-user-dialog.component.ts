@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
@@ -37,15 +37,14 @@ import { StandardVerticalContentGridComponent } from '../../../../shared/compone
   styleUrl: './delete-user-dialog.component.scss',
   providers: [RoleSelectionService],
   imports: [
-    NgIf,
     DialogComponent,
     StandardVerticalContentGridComponent,
     ParagraphComponent,
     DialogActionsComponent,
     ButtonComponent,
     LoadingComponent,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class DeleteUserDialogComponent extends BaseComponent implements OnInit {
   @Input() user$!: Observable<ODataOrganizationUser>;

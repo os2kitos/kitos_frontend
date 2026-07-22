@@ -1,27 +1,25 @@
-import { APIDataProcessingRegistrationReadModel } from 'src/app/api/v1';
+import { APIYesNoUndecidedChoice } from 'src/app/api/v2';
 
 export interface IsOversightCompleted {
   name: string;
-  value: APIDataProcessingRegistrationReadModel.IsOversightCompletedEnum;
+  value: APIYesNoUndecidedChoice;
 }
 
 export const isOversightCompletedOptions: IsOversightCompleted[] = [
   {
     name: $localize`Ja`,
-    value: APIDataProcessingRegistrationReadModel.IsOversightCompletedEnum.Yes,
+    value: APIYesNoUndecidedChoice.Yes,
   },
   {
     name: $localize`Nej`,
-    value: APIDataProcessingRegistrationReadModel.IsOversightCompletedEnum.No,
+    value: APIYesNoUndecidedChoice.No,
   },
   {
     name: '',
-    value: APIDataProcessingRegistrationReadModel.IsOversightCompletedEnum.Undecided,
+    value: APIYesNoUndecidedChoice.Undecided,
   },
 ];
 
-export const mapIsOversightCompleted = (
-  source?: APIDataProcessingRegistrationReadModel.IsOversightCompletedEnum,
-): IsOversightCompleted | undefined => {
+export const mapIsOversightCompleted = (source?: APIYesNoUndecidedChoice): IsOversightCompleted | undefined => {
   return isOversightCompletedOptions.find((option) => option.value === source);
 };

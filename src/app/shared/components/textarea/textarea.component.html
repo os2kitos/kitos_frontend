@@ -1,32 +1,35 @@
-<ng-container *ngIf="initialized">
-  <mat-form-field *ngIf="formGroup" [formGroup]="formGroup">
-    <mat-label>{{ text }}</mat-label>
-    <textarea
-      matInput
-      cdkTextareaAutosize
-      [cdkAutosizeMinRows]="autosizeMinRows"
-      [cdkAutosizeMaxRows]="autosizeMaxRows"
-      type="text"
-      [formControlName]="formName"
-      (input)="formInputValueChange($event)"
-      (focus)="focus(true)"
-      (blur)="focus(false)"
-      [ngClass]="{ disabled: disabled }"
-    ></textarea>
-  </mat-form-field>
+@if(initialized){ @if(formGroup){
 
-  <mat-form-field *ngIf="!formGroup">
-    <mat-label>{{ text }}</mat-label>
-    <textarea
-      matInput
-      cdkTextareaAutosize
-      [cdkAutosizeMinRows]="autosizeMinRows"
-      [cdkAutosizeMaxRows]="autosizeMaxRows"
-      type="text"
-      [disabled]="disabled"
-      [(ngModel)]="value"
-      (ngModelChange)="valueChange.emit($event)"
-      [ngClass]="{ disabled: disabled }"
-    ></textarea>
-  </mat-form-field>
-</ng-container>
+<mat-form-field [formGroup]="formGroup">
+  <mat-label>{{ text }}</mat-label>
+  <textarea
+    #autosizeTextarea
+    matInput
+    cdkTextareaAutosize
+    [cdkAutosizeMinRows]="autosizeMinRows"
+    [cdkAutosizeMaxRows]="autosizeMaxRows"
+    type="text"
+    [formControlName]="formName"
+    (input)="formInputValueChange($event)"
+    (focus)="focus(true)"
+    (blur)="focus(false)"
+    [ngClass]="{ disabled: disabled }"
+  ></textarea>
+</mat-form-field>
+} @else {
+<mat-form-field>
+  <mat-label>{{ text }}</mat-label>
+  <textarea
+    #autosizeTextarea
+    matInput
+    cdkTextareaAutosize
+    [cdkAutosizeMinRows]="autosizeMinRows"
+    [cdkAutosizeMaxRows]="autosizeMaxRows"
+    type="text"
+    [disabled]="disabled"
+    [(ngModel)]="value"
+    (ngModelChange)="valueChange.emit($event)"
+    [ngClass]="{ disabled: disabled }"
+  ></textarea>
+</mat-form-field>
+} }

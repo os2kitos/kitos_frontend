@@ -1,7 +1,7 @@
 <app-segment [buttons]="segmentOptions" [(selected)]="selectedSegment"></app-segment>
 
 <app-card>
-  <ng-container *ngIf="selectedSegment === GlobalAdminOrganizationSegmentOptionType.CountryCodes">
+  @if (selectedSegment === GlobalAdminOrganizationSegmentOptionType.CountryCodes) {
     <app-standard-vertical-content-grid>
       <app-global-option-type-view
         optionType="organization_country-code"
@@ -11,9 +11,9 @@
         [expandedByDefault]="true"
       ></app-global-option-type-view>
     </app-standard-vertical-content-grid>
-  </ng-container>
+  }
 
-  <ng-container *ngIf="selectedSegment === GlobalAdminOrganizationSegmentOptionType.RoleOptionTypes">
+  @if (selectedSegment === GlobalAdminOrganizationSegmentOptionType.RoleOptionTypes) {
     <app-global-option-type-view
       optionType="organization-unit"
       title="Organisationsroller"
@@ -23,5 +23,5 @@
       [expandedByDefault]="true"
       [fitSizeToContent]="false"
     ></app-global-option-type-view>
-  </ng-container>
+  }
 </app-card>

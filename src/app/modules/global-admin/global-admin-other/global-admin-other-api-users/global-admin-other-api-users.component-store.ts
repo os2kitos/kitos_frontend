@@ -5,7 +5,7 @@ import { mergeMap, tap } from 'rxjs';
 import {
   APIUserWithCrossOrganizationalRightsResponseDTO,
   APIUserWithOrganizationResponseDTO,
-  APIV2GlobalUserInternalINTERNALService,
+  GlobalUserInternalV2Service,
 } from 'src/app/api/v2';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 
@@ -28,7 +28,7 @@ export class GlobalAdminOtherApiUsersComponentStore extends ComponentStore<State
   );
 
   constructor(
-    @Inject(APIV2GlobalUserInternalINTERNALService) private userService: APIV2GlobalUserInternalINTERNALService,
+    @Inject(GlobalUserInternalV2Service) private userService: GlobalUserInternalV2Service,
     private notificationService: NotificationService,
   ) {
     super({ isLoadingUsersWithRightsholderAccess: false, isLoadingUsersWithCrossAccess: false });
@@ -67,13 +67,13 @@ export class GlobalAdminOtherApiUsersComponentStore extends ComponentStore<State
       tap(() => this.setLoadingUsersWithRightsholderAccess(true)),
       mergeMap(() => {
         return this.userService.getManyGlobalUserInternalV2GetUsersWithRightsholderAccess().pipe(
-          tapResponse(
-            (users) => {
+          tapResponse({
+            next: (users) => {
               this.setUsersWithRightsholderAccess(users);
             },
-            (e) => console.error(e),
-            () => this.setLoadingUsersWithRightsholderAccess(false),
-          ),
+            error: (e) => console.error(e),
+            complete: () => this.setLoadingUsersWithRightsholderAccess(false),
+          }),
         );
       }),
     ),
@@ -84,11 +84,11 @@ export class GlobalAdminOtherApiUsersComponentStore extends ComponentStore<State
       tap(() => this.setLoadingUsersWithCrossAccess(true)),
       mergeMap(() => {
         return this.userService.getManyGlobalUserInternalV2GetUsersWithCrossAccess().pipe(
-          tapResponse(
-            (users) => this.setUsersWithCrossAccess(users),
-            (e) => console.error(e),
-            () => this.setLoadingUsersWithCrossAccess(false),
-          ),
+          tapResponse({
+            next: (users) => this.setUsersWithCrossAccess(users),
+            error: (e) => console.error(e),
+            complete: () => this.setLoadingUsersWithCrossAccess(false),
+          }),
         );
       }),
     ),

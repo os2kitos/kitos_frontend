@@ -1,0 +1,22 @@
+<app-overview-header>
+  <h3 i18n>Kontraktleverandøroverblik</h3>
+
+  <app-grid-options-button entityType="it-contract-supplier" [hasResetButton]="true"></app-grid-options-button>
+  <app-export-menu-button [exportMethod]="onExcelExport"></app-export-menu-button>
+  <app-hide-show-button
+    [columns]="gridColumns$ | async"
+    entityType="it-contract-supplier"
+    [isSecondary]="true"
+  ></app-hide-show-button>
+</app-overview-header>
+
+<app-grid
+  [data$]="gridData$"
+  [columns$]="gridColumns$"
+  [loading]="isLoading$ | async"
+  [state]="gridState$ | async"
+  [exportToExcelName]="'Leverandørsoverblik'"
+  i18n-exportToExcelName
+  entityType="it-contract-supplier"
+  (stateChange)="stateChange($event)"
+></app-grid>

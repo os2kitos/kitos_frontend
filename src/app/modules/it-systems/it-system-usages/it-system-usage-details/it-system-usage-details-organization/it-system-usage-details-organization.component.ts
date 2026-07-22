@@ -1,4 +1,4 @@
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
@@ -40,7 +40,6 @@ import { StandardVerticalContentGridComponent } from '../../../../../shared/comp
   imports: [
     CardComponent,
     CardHeaderComponent,
-    NgIf,
     ParagraphComponent,
     FormsModule,
     ReactiveFormsModule,
@@ -52,8 +51,8 @@ import { StandardVerticalContentGridComponent } from '../../../../../shared/comp
     NumericInputComponent,
     CheckboxButtonComponent,
     DragAndDropTreeComponent,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class ItSystemUsageDetailsOrganizationComponent extends BaseComponent implements OnInit {
   public readonly responsibleUnit$ = this.store.select(selectItSystemUsageResponsibleUnit);

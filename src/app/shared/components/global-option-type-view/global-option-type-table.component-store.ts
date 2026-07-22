@@ -32,17 +32,17 @@ export class GlobalOptionTypeTableComponentStore extends ComponentStore<State> {
       switchMap(() =>
         this.getOptionItems$().pipe(
           map((items) => items.map(adaptGlobalAdminOptionType)),
-          tapResponse(
-            (mappedItems) => {
-              this.sortByPriority(mappedItems);
-              this.updateItems(mappedItems);
-              this.updateIsLoading(false);
-            },
-            (error) => {
-              console.error(error);
-              this.updateIsLoading(false);
-            },
-          ),
+          tapResponse({
+    next: (mappedItems) => {
+        this.sortByPriority(mappedItems);
+        this.updateItems(mappedItems);
+        this.updateIsLoading(false);
+    },
+    error: (error) => {
+        console.error(error);
+        this.updateIsLoading(false);
+    }
+}),
         ),
       ),
     ),

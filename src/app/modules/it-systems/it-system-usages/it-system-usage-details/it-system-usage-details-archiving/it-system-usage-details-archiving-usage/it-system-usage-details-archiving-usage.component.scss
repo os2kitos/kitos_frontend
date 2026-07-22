@@ -8,3 +8,12 @@
 .notes-column-span {
   grid-column: span 3;
 }
+
+.archive-duty-comments-container {
+  display: flex;
+  flex-direction: column
+}
+
+.archive-duty-link {
+  white-space: nowrap;
+}

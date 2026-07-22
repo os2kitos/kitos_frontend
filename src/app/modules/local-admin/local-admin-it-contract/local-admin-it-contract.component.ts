@@ -6,7 +6,7 @@ import {
 import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
 import { SegmentComponent } from '../../../shared/components/segment/segment.component';
 import { CardComponent } from '../../../shared/components/card/card.component';
-import { NgIf } from '@angular/common';
+
 import { UiConfigComponent } from '../ui-config/ui-config.component';
 import { StandardVerticalContentGridComponent } from '../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { LocalOptionTypeViewComponent } from '../../../shared/components/local-option-type-view/local-option-type-view.component';
@@ -18,11 +18,10 @@ import { LocalOptionTypeViewComponent } from '../../../shared/components/local-o
   imports: [
     SegmentComponent,
     CardComponent,
-    NgIf,
     UiConfigComponent,
     StandardVerticalContentGridComponent,
-    LocalOptionTypeViewComponent,
-  ],
+    LocalOptionTypeViewComponent
+],
 })
 export class LocalAdminItContractComponent {
   public readonly LocalAdminModuleSegmentOptionType = LocalAdminModuleSegmentOptionType;

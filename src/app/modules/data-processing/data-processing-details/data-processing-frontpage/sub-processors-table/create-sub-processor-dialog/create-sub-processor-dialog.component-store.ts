@@ -4,7 +4,7 @@ import { tapResponse } from '@ngrx/operators';
 
 import { Store } from '@ngrx/store';
 import { Observable, combineLatestWith, mergeMap, tap } from 'rxjs';
-import { APIOrganizationResponseDTO, APIV2DataProcessingRegistrationInternalINTERNALService } from 'src/app/api/v2';
+import { APIOrganizationResponseDTO, DataProcessingRegistrationInternalV2Service } from 'src/app/api/v2';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectDataProcessingUuid } from 'src/app/store/data-processing/selectors';
 
@@ -19,7 +19,7 @@ export class CreateSubProcessorDialogComponentStore extends ComponentStore<State
 
   constructor(
     private store: Store,
-    private dprApiService: APIV2DataProcessingRegistrationInternalINTERNALService,
+    private dprApiService: DataProcessingRegistrationInternalV2Service,
   ) {
     super({ loading: false });
   }
@@ -47,11 +47,11 @@ export class CreateSubProcessorDialogComponentStore extends ComponentStore<State
         return this.dprApiService
           .getManyDataProcessingRegistrationInternalV2GetAvailableSubDataProcessors({ dprUuid, nameQuery: search })
           .pipe(
-            tapResponse(
-              (organizations) => this.updateOrganizations(organizations),
-              (e) => console.error(e),
-              () => this.updateIsLoading(false),
-            ),
+            tapResponse({
+              next: (organizations) => this.updateOrganizations(organizations),
+              error: (e) => console.error(e),
+              complete: () => this.updateIsLoading(false),
+            }),
           );
       }),
     ),

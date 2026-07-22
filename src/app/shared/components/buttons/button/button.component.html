@@ -21,8 +21,10 @@
     [type]="type"
     (click)="onButtonClick()"
     data-cy="mat-button"
-  >
-    <app-icon *ngIf="iconType" [iconType]="iconType" class="center-icon"></app-icon>
+    >
+    @if (iconType) {
+      <app-icon [iconType]="iconType" class="center-icon"></app-icon>
+    }
     <ng-content></ng-content>
   </button>
 </app-tooltip>

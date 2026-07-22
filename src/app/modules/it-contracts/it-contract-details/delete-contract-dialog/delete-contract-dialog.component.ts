@@ -18,7 +18,7 @@ import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.servi
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { selectItContractUuid } from 'src/app/store/it-contract/selectors';
 import { ItContractHierarchyComponentStore } from '../it-contract-hierarchy/it-contract-hierarchy.component-store';
-import { NgIf, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { DialogComponent } from '../../../../shared/components/dialogs/dialog/dialog.component';
 import { StandardVerticalContentGridComponent } from '../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { ParagraphComponent } from '../../../../shared/components/paragraph/paragraph.component';
@@ -31,14 +31,13 @@ import { ButtonComponent } from '../../../../shared/components/buttons/button/bu
   styleUrl: './delete-contract-dialog.component.scss',
   providers: [ItContractHierarchyComponentStore],
   imports: [
-    NgIf,
     DialogComponent,
     StandardVerticalContentGridComponent,
     ParagraphComponent,
     DialogActionsComponent,
     ButtonComponent,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class DeleteContractDialogComponent extends BaseComponent implements OnInit {
   public readonly subHierarchy$ = this.componentStore.subHierarchy$;

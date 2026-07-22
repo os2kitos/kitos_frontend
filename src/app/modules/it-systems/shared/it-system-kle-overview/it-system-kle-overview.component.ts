@@ -12,7 +12,7 @@ import {
   SelectedKleCommand,
   KleTableComponent,
 } from '../kle-table/kle-table.component';
-import { NgIf, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { LoadingComponent } from '../../../../shared/components/loading/loading.component';
 import { StandardVerticalContentGridComponent } from '../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { TextBoxInfoComponent } from '../../../../shared/components/textbox-info/textbox-info.component';
@@ -24,15 +24,14 @@ import { EmptyStateComponent } from '../../../../shared/components/empty-states/
   templateUrl: './it-system-kle-overview.component.html',
   styleUrls: ['./it-system-kle-overview.component.scss'],
   imports: [
-    NgIf,
     LoadingComponent,
     StandardVerticalContentGridComponent,
     KleTableComponent,
     TextBoxInfoComponent,
     ParagraphComponent,
     EmptyStateComponent,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class ItSystemKleOverviewComponent extends BaseComponent implements OnInit {
   constructor(private readonly store: Store) {

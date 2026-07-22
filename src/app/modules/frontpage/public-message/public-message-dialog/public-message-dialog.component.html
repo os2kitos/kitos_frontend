@@ -1,13 +1,15 @@
-<app-dialog
-  *ngIf="publicMessage$ | async as publicMessage"
-  [title]="publicMessage.title"
-  [url]="hasValidUrl(publicMessage) ? publicMessage.link : undefined"
->
-  <p [innerHTML]="publicMessage.longDescription"></p>
-
-  <app-dialog-actions *ngIf="(isGlobalAdmin$ | async) === true">
-    <app-button (buttonClick)="openEditDialog(publicMessage)" data-cy="open-edit-public-message-dialog-button" i18n>
+@if (publicMessage$ | async; as publicMessage) {
+  <app-dialog
+    [title]="publicMessage.title"
+    [url]="hasValidUrl(publicMessage) ? publicMessage.link : undefined"
+    >
+    <p [innerHTML]="publicMessage.longDescription"></p>
+    @if ((isGlobalAdmin$ | async) === true) {
+      <app-dialog-actions>
+        <app-button (buttonClick)="openEditDialog(publicMessage)" data-cy="open-edit-public-message-dialog-button" i18n>
       Rediger
     </app-button>
-  </app-dialog-actions>
-</app-dialog>
+      </app-dialog-actions>
+    }
+  </app-dialog>
+}

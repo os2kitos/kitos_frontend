@@ -1,12 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
-import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
-import {
-  APIExternalReferenceWithLastChangedResponseDTO,
-  APIV2ExternalReferencesInternalINTERNALService,
-} from 'src/app/api/v2';
-import { Observable, switchMap } from 'rxjs';
 import { tapResponse } from '@ngrx/operators';
+import { Observable, switchMap } from 'rxjs';
+import { APIExternalReferenceWithLastChangedResponseDTO, ExternalReferencesInternalV2Service } from 'src/app/api/v2';
+import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
 
 interface State {
   externalReferences: APIExternalReferenceWithLastChangedResponseDTO[];
@@ -18,7 +15,7 @@ interface State {
  */
 @Injectable()
 export class ExternalReferencesComponentStore extends ComponentStore<State> {
-  constructor(private readonly externalReferenceService: APIV2ExternalReferencesInternalINTERNALService) {
+  constructor(private readonly externalReferenceService: ExternalReferencesInternalV2Service) {
     super({ externalReferences: [] });
   }
 
@@ -36,10 +33,10 @@ export class ExternalReferencesComponentStore extends ComponentStore<State> {
       return entityUuid$.pipe(
         switchMap((entityUuid) =>
           this.getExternalReferencesMethod(entityType)(entityUuid).pipe(
-            tapResponse(
-              (externalReferences) => this.setExternalReferences(externalReferences),
-              (e) => console.error(e),
-            ),
+            tapResponse({
+              next: (externalReferences) => this.setExternalReferences(externalReferences),
+              error: (e) => console.error(e),
+            }),
           ),
         ),
       );

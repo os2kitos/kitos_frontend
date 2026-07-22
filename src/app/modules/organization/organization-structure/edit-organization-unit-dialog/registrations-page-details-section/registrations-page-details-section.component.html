@@ -11,31 +11,34 @@
       <th width="95%">{{ nameColumnTitle }}</th>
     </thead>
     <tbody>
-      <tr *ngFor="let registration of registrations$ | async">
-        <td>
-          <app-checkbox
-            [value]="registration.isSelected"
-            (valueChange)="changeSelectRegistrationState(registration)"
-            [disabled]="!canEditRegistrations"
-          ></app-checkbox>
-        </td>
-        <td>
-          <app-content-space-between>
-            <app-details-page-link
-              [itemType]="entityType"
-              [itemPath]="registration.registration.uuid"
-              [subpagePath]="subpagePath"
-              (click)="navigateToDetailsPageClick()"
-              >{{ registration.registration.name }}</app-details-page-link
-            >
-            <app-icon-button
-              (buttonClick)="removeSingleRegistration(registration.registration.id)"
-              *ngIf="canEditRegistrations"
-              ><app-trashcan-icon></app-trashcan-icon
-            ></app-icon-button>
-          </app-content-space-between>
-        </td>
-      </tr>
-    </tbody>
-  </app-native-table>
-</app-accordion>
+      @for (registration of registrations$ | async; track registration) {
+        <tr>
+          <td>
+            <app-checkbox
+              [value]="registration.isSelected"
+              (valueChange)="changeSelectRegistrationState(registration)"
+              [disabled]="!canEditRegistrations"
+            ></app-checkbox>
+          </td>
+          <td>
+            <app-content-space-between>
+              <app-details-page-link
+                [itemType]="entityType"
+                [itemPath]="registration.registration.uuid ?? undefined"
+                [subpagePath]="subpagePath"
+                (click)="navigateToDetailsPageClick()"
+                >{{ registration.registration.name }}</app-details-page-link
+                >
+                @if (canEditRegistrations) {
+                  <app-icon-button
+                    (buttonClick)="removeSingleRegistration(registration.registration.id)"
+                    ><app-trashcan-icon></app-trashcan-icon
+                  ></app-icon-button>
+                }
+              </app-content-space-between>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </app-native-table>
+  </app-accordion>

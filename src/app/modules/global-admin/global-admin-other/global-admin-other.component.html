@@ -1,15 +1,15 @@
 <app-segment [buttons]="segmentOptions" [(selected)]="selectedSegment"></app-segment>
 
-<ng-container *ngIf="selectedSegment === SegmentType.UserManagement">
+@if (selectedSegment === SegmentType.UserManagement) {
   <app-global-admin-other-user-shutdown></app-global-admin-other-user-shutdown>
   <app-global-admin-system-integrators></app-global-admin-system-integrators>
-</ng-container>
+}
 
-<ng-container *ngIf="selectedSegment === SegmentType.APIUsers">
+@if (selectedSegment === SegmentType.APIUsers) {
   <app-global-admin-other-api-users></app-global-admin-other-api-users>
-</ng-container>
+}
 
-<ng-container *ngIf="selectedSegment === SegmentType.Misc">
+@if (selectedSegment === SegmentType.Misc) {
   <app-global-admin-other-kle></app-global-admin-other-kle>
   <app-global-admin-other-broken-links></app-global-admin-other-broken-links>
-</ng-container>
+}

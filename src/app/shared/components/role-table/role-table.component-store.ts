@@ -4,7 +4,7 @@ import { concatLatestFrom, tapResponse } from '@ngrx/operators';
 
 import { Store } from '@ngrx/store';
 import { Observable, combineLatestWith, map, mergeMap, tap } from 'rxjs';
-import { APIOrganizationUserResponseDTO, APIV2OrganizationService } from 'src/app/api/v2';
+import { APIOrganizationUserResponseDTO, OrganizationV2Service } from 'src/app/api/v2';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 import { BOUNDED_PAGINATION_QUERY_MAX_SIZE } from '../../constants/constants';
 import { RoleAssignment } from '../../models/helpers/read-model-role-assignments';
@@ -36,8 +36,8 @@ export class RoleTableComponentStore extends ComponentStore<State> {
 
   constructor(
     private readonly store: Store,
-    @Inject(APIV2OrganizationService)
-    private readonly apiOrganizationService: APIV2OrganizationService,
+    @Inject(OrganizationV2Service)
+    private readonly apiOrganizationService: OrganizationV2Service,
     private readonly roleOptionTypeService: RoleOptionTypeService,
   ) {
     super({ rolesLoading: false, usersLoading: false });
@@ -78,11 +78,11 @@ export class RoleTableComponentStore extends ComponentStore<State> {
         mergeMap(([params, orgUuid]) => {
           this.updateRolesIsLoading(true);
           return this.roleOptionTypeService.getEntityRoles(params.entityUuid, params.entityType, orgUuid).pipe(
-            tapResponse(
-              (roles) => this.updateRoles(roles),
-              (e) => console.error(e),
-              () => this.updateRolesIsLoading(false),
-            ),
+            tapResponse({
+              next: (roles) => this.updateRoles(roles),
+              error: (e) => console.error(e),
+              complete: () => this.updateRolesIsLoading(false),
+            }),
           );
         }),
       ),
@@ -101,11 +101,11 @@ export class RoleTableComponentStore extends ComponentStore<State> {
             orderByProperty: 'Name',
           })
           .pipe(
-            tapResponse(
-              (users) => this.updateUsers(users),
-              (error) => console.error(error),
-              () => this.updateUsersIsLoading(false),
-            ),
+            tapResponse({
+              next: (users) => this.updateUsers(users),
+              error: (error) => console.error(error),
+              complete: () => this.updateUsersIsLoading(false),
+            }),
           ),
       ),
     ),

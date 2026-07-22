@@ -1,4 +1,4 @@
-/// <reference types="Cypress" />
+/// <reference types="cypress" />
 
 interface RelationRow {
   systemUsageName: string;
@@ -34,6 +34,8 @@ describe('it-system-usage system-relations', () => {
       cy.contains("Endnu ingen relationer tilføjet fra 'System 3' til andre systemer/snitflader");
       cy.contains('Opret relation');
     });
+
+    cy.getByDataCy('incoming-relations-segment-button').click();
 
     cy.getCardWithTitle("Andre systemer har følgende relationer til 'System 3'").within(() => {
       cy.contains("Ingen relationer fra andre systemer til 'System 3' fundet");
@@ -98,6 +100,9 @@ describe('it-system-usage system-relations', () => {
     ];
 
     verifyRelationTable('System 3', expectedOutgoingRows, true);
+
+    cy.getByDataCy('incoming-relations-segment-button').click();
+
     verifyRelationTable('System 3', expectedIncomingRows, false);
   });
 
@@ -124,15 +129,15 @@ describe('it-system-usage system-relations', () => {
     cy.get('app-system-relation-dialog').within(() => {
       cy.dropdown('Søg efter system', 'System 1', true);
       cy.dropdown('Søg efter snitflade', 'Interface 1 - ACTIVE', true);
-      cy.contains('Beskrivelse').type('test');
       cy.contains('Reference').type('test');
+      cy.contains('Beskrivelse').type('test');
       cy.dropdown('Søg efter kontrakt', 'The valid contract', true);
       cy.dropdown('Vælg frekvens', 'Ugentligt', true);
 
       cy.intercept('POST', '**system-relations', {});
       cy.contains('Tilføj').click();
     });
-    cy.contains('Relation tilføjet');
+    cy.contains('Relationer tilføjet');
   });
 
   it('can modify Relation', () => {
@@ -185,7 +190,7 @@ describe('it-system-usage system-relations', () => {
       'DELETE',
       '**/system-relations/*',
       {},
-      'Er du sikker på at du vil fjerne denne relation',
+      'Er du sikker på at du vil fjerne denne relation'
     );
 
     cy.contains('Relationen er slettet');
@@ -195,7 +200,7 @@ describe('it-system-usage system-relations', () => {
     cy.getCardWithTitle(
       isOutgoing
         ? `'${systemName}' har følgende relationer til andre systemer/snitflader`
-        : `Andre systemer har følgende relationer til '${systemName}'`,
+        : `Andre systemer har følgende relationer til '${systemName}'`
     ).within(() => {
       for (const expectedRow of rows) {
         const row = () => cy.getRowForElementContent(expectedRow.systemUsageName);

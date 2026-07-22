@@ -1,4 +1,8 @@
 <app-tooltip [text]="value ? positiveTooltipText : negativeTooltipText" [tooltipDelay]="500">
-  <app-check-positive-green-icon *ngIf="value"></app-check-positive-green-icon>
-  <app-check-negative-gray-icon *ngIf="!value"></app-check-negative-gray-icon>
+  @if (value) {
+    <app-check-positive-green-icon></app-check-positive-green-icon>
+  }
+  @if (!value) {
+    <app-check-negative-gray-icon></app-check-negative-gray-icon>
+  }
 </app-tooltip>

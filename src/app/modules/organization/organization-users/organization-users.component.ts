@@ -1,4 +1,4 @@
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
@@ -20,6 +20,7 @@ import { GridColumnStorageService } from 'src/app/shared/services/grid-column-st
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
 import {
   selectOrganizationUserByUuid,
+  selectOrganizationUserCanModifyAnyPermissions,
   selectOrganizationUserCreatePermissions,
   selectOrganizationUserDeletePermissions,
   selectOrganizationUserGridColumns,
@@ -28,6 +29,7 @@ import {
   selectOrganizationUserGridState,
   selectOrganizationUserModifyPermissions,
 } from 'src/app/store/organization/organization-user/selectors';
+import { selectUserIsGlobalAdmin } from 'src/app/store/user-store/selectors';
 import { ExportMenuButtonComponent } from '../../../shared/components/buttons/export-menu-button/export-menu-button.component';
 import { CreateEntityButtonComponent } from '../../../shared/components/entity-creation/create-entity-button/create-entity-button.component';
 import { GridOptionsButtonComponent } from '../../../shared/components/grid-options-button/grid-options-button.component';
@@ -42,7 +44,6 @@ import { UserInfoDialogComponent } from './user-info-dialog/user-info-dialog.com
   styleUrl: './organization-users.component.scss',
   imports: [
     OverviewHeaderComponent,
-    NgIf,
     GridOptionsButtonComponent,
     ExportMenuButtonComponent,
     HideShowButtonComponent,
@@ -58,8 +59,11 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
   public readonly gridColumns$ = this.store.select(selectOrganizationUserGridColumns);
   public readonly hasCreatePermission$ = this.store.select(selectOrganizationUserCreatePermissions);
 
-  public readonly hasModificationPermission$ = this.store.select(selectOrganizationUserModifyPermissions);
+  public readonly hasModificationPermission$ = this.store.select(selectOrganizationUserCanModifyAnyPermissions);
+  public readonly modificationPermissions$ = this.store.select(selectOrganizationUserModifyPermissions);
   public readonly hasDeletePermission$ = this.store.select(selectOrganizationUserDeletePermissions);
+
+  public readonly isGlobalAdmin$ = this.store.select(selectUserIsGlobalAdmin);
 
   private readonly organizationUserSectionName = ORGANIZATION_USER_SECTION_NAME;
 
@@ -88,6 +92,27 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
       hidden: false,
       width: 350,
     },
+    {
+      field: 'CreatedAt',
+      title: $localize`Oprettet`,
+      section: this.organizationUserSectionName,
+      hidden: true,
+      width: 300,
+      style: 'date',
+      filter: 'date',
+      defaultDateFilterOperator: 'lte',
+    },
+    {
+      field: 'LastLogin',
+      title: $localize`Seneste login`,
+      section: this.organizationUserSectionName,
+      hidden: true,
+      width: 300,
+      style: 'date',
+      filter: 'date',
+      defaultDateFilterOperator: 'lte',
+    },
+
     {
       field: 'Roles',
       title: $localize`Organisations roller`,
@@ -185,21 +210,22 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
     private gridColumnStorageService: GridColumnStorageService,
     private actions$: Actions,
     private dialog: MatDialog,
-    private dialogOpenerService: DialogOpenerService
+    private dialogOpenerService: DialogOpenerService,
   ) {
     super(store, 'organization-user');
   }
 
   ngOnInit(): void {
     this.store.dispatch(OrganizationUserActions.getOrganizationUserPermissions());
+    const orderedDefaultColumns = this.mapColumnOrder(this.defaultGridColumns);
     const existingColumns = this.gridColumnStorageService.getColumns(
       ORGANIZATION_USER_COLUMNS_ID,
-      this.defaultGridColumns
+      orderedDefaultColumns,
     );
     if (existingColumns) {
       this.store.dispatch(OrganizationUserActions.updateGridColumns(existingColumns));
     } else {
-      this.updateDefaultColumns();
+      this.store.dispatch(OrganizationUserActions.updateGridColumns(orderedDefaultColumns));
     }
 
     this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState));
@@ -209,7 +235,7 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(OrganizationUserActions.resetGridConfiguration))
-        .subscribe(() => this.updateDefaultColumns())
+        .subscribe(() => this.updateDefaultColumns()),
     );
 
     this.subscriptions.add(
@@ -220,13 +246,13 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
             OrganizationUserActions.updateUserSuccess,
             OrganizationUserActions.deleteUserSuccess,
             OrganizationUserActions.copyRolesSuccess,
-            OrganizationUserActions.transferRolesSuccess
+            OrganizationUserActions.transferRolesSuccess,
           ),
-          combineLatestWith(this.gridState$)
+          combineLatestWith(this.gridState$),
         )
         .subscribe(([_, gridState]) => {
           this.stateChange(gridState, true);
-        })
+        }),
     );
   }
 
@@ -235,7 +261,11 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
   }
 
   public onEditUser(user: ODataOrganizationUser): void {
-    this.dialogOpenerService.openEditUserDialog(user, false);
+    this.subscriptions.add(
+      this.isGlobalAdmin$.pipe(first()).subscribe((isGlobalAdmin) => {
+        this.dialogOpenerService.openEditUserDialog(user, false, isGlobalAdmin);
+      }),
+    );
   }
 
   public onDeleteUser(user: ODataOrganizationUser): void {
@@ -258,6 +288,6 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
     const user$ = this.store.select(selectOrganizationUserByUuid(uuid)).pipe(filterNullish());
     const dialogRef = this.dialog.open(UserInfoDialogComponent, { minWidth: '800px', width: '25%' });
     dialogRef.componentInstance.user$ = user$;
-    dialogRef.componentInstance.hasModificationPermission$ = this.hasModificationPermission$;
+    dialogRef.componentInstance.hasModificationPermission$ = this.modificationPermissions$;
   }
 }

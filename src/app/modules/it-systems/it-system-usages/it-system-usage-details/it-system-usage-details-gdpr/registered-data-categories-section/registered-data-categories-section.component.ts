@@ -10,14 +10,14 @@ import { selectItSystemUsageGdprRegisteredDataCategories } from 'src/app/store/i
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 import { AccordionComponent } from '../../../../../../shared/components/accordion/accordion.component';
-import { NgFor, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { CheckboxComponent } from '../../../../../../shared/components/checkbox/checkbox.component';
 
 @Component({
   selector: 'app-registered-data-categories-section',
   templateUrl: './registered-data-categories-section.component.html',
   styleUrls: ['./registered-data-categories-section.component.scss'],
-  imports: [AccordionComponent, FormsModule, ReactiveFormsModule, NgFor, CheckboxComponent, AsyncPipe],
+  imports: [AccordionComponent, FormsModule, ReactiveFormsModule, CheckboxComponent, AsyncPipe],
 })
 export class RegisteredDataCategoriesSectionComponent extends BaseAccordionComponent implements OnInit {
   @Output() public noPermissions = new EventEmitter<AbstractControl[]>();

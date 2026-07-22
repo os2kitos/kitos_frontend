@@ -1,4 +1,4 @@
-import { AsyncPipe, NgClass, NgFor, NgIf } from '@angular/common';
+import { AsyncPipe, NgClass } from '@angular/common';
 import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Actions, ofType } from '@ngrx/effects';
@@ -53,12 +53,10 @@ export interface BulkActionResult {
     ScrollbarDialogComponent,
     NgClass,
     StandardVerticalContentGridComponent,
-    NgIf,
     UserDropdownComponent,
     FormsModule,
     ReactiveFormsModule,
     ContractsDropdownComponent,
-    NgFor,
     BulkActionDialogSectionComponent,
     LoadingComponent,
     EmptyStateComponent,
@@ -67,8 +65,8 @@ export interface BulkActionResult {
     ParagraphComponent,
     ButtonComponent,
     ContentSpaceBetweenComponent,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class BulkActionDialogComponent<TDropdownOption extends { uuid: string }>
   extends BaseComponent

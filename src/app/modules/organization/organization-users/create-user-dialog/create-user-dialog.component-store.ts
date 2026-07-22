@@ -3,7 +3,7 @@ import { ComponentStore } from '@ngrx/component-store';
 import { tapResponse } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { combineLatestWith, mergeMap, Observable, tap } from 'rxjs';
-import { APIUserIsPartOfCurrentOrgResponseDTO, APIV2UsersInternalINTERNALService } from 'src/app/api/v2';
+import { APIUserIsPartOfCurrentOrgResponseDTO, UsersInternalV2Service } from 'src/app/api/v2';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 
@@ -22,7 +22,7 @@ export class CreateUserDialogComponentStore extends ComponentStore<State> {
   public readonly existingUserUuid$ = this.select((state) => state.existingUserUuid);
 
   constructor(
-    @Inject(APIV2UsersInternalINTERNALService) private userService: APIV2UsersInternalINTERNALService,
+    @Inject(UsersInternalV2Service) private userService: UsersInternalV2Service,
     private store: Store,
   ) {
     super({ isLoading: false, existsInOrganization: false, noUserInOtherOrgs: true });
@@ -55,11 +55,11 @@ export class CreateUserDialogComponentStore extends ComponentStore<State> {
             email: email,
           })
           .pipe(
-            tapResponse(
-              (user) => this.setUser(email !== this.orginalEmail ? user : undefined),
-              (e) => console.error(e),
-              () => this.setLoading(false),
-            ),
+            tapResponse({
+              next: (user) => this.setUser(email !== this.orginalEmail ? user : undefined),
+              error: (e) => console.error(e),
+              complete: () => this.setLoading(false),
+            }),
           );
       }),
     ),

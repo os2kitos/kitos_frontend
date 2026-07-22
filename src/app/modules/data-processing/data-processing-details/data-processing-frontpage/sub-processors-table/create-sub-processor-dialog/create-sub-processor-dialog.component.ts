@@ -1,13 +1,14 @@
+import { AsyncPipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { distinctUntilChanged, first } from 'rxjs';
 import {
-  APIDataProcessingRegistrationGeneralDataResponseDTO,
   APIDataProcessorRegistrationSubDataProcessorResponseDTO,
   APIIdentityNamePairResponseDTO,
+  APIYesNoUndecidedChoice
 } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { YesNoOption, mapToYesNoEnum, yesNoOptions } from 'src/app/shared/models/yes-no.model';
@@ -15,15 +16,14 @@ import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import { selectDataProcessingSubProcessors } from 'src/app/store/data-processing/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
-import { CountryCreateDialogComponent } from '../../third-countries-table/country-create-dialog/country-create-dialog.component';
-import { CreateSubProcessorDialogComponentStore } from './create-sub-processor-dialog.component-store';
+import { ButtonComponent } from '../../../../../../shared/components/buttons/button/button.component';
+import { DialogActionsComponent } from '../../../../../../shared/components/dialogs/dialog-actions/dialog-actions.component';
 import { DialogComponent } from '../../../../../../shared/components/dialogs/dialog/dialog.component';
-import { StandardVerticalContentGridComponent } from '../../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { ConnectedDropdownComponent } from '../../../../../../shared/components/dropdowns/connected-dropdown/connected-dropdown.component';
 import { DropdownComponent } from '../../../../../../shared/components/dropdowns/dropdown/dropdown.component';
-import { DialogActionsComponent } from '../../../../../../shared/components/dialogs/dialog-actions/dialog-actions.component';
-import { ButtonComponent } from '../../../../../../shared/components/buttons/button/button.component';
-import { AsyncPipe } from '@angular/common';
+import { StandardVerticalContentGridComponent } from '../../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { CountryCreateDialogComponent } from '../../third-countries-table/country-create-dialog/country-create-dialog.component';
+import { CreateSubProcessorDialogComponentStore } from './create-sub-processor-dialog.component-store';
 
 @Component({
   selector: 'app-create-sub-processor-dialog',
@@ -84,7 +84,7 @@ export class CreateSubProcessorDialogComponent extends BaseComponent implements 
       this.subprocessorsFormGroup.patchValue({
         subprocessor: this.subprocessor.dataProcessorOrganization,
         basisForTransfer: this.subprocessor.basisForTransfer,
-        transferToInsecureCountry: mapToYesNoEnum(this.subprocessor.transferToInsecureThirdCountry),
+        transferToInsecureCountry: mapToYesNoEnum(this.subprocessor.transferToInsecureThirdCountry ?? undefined),
         insecureThirdCountrySubjectToDataProcessing: this.subprocessor.insecureThirdCountrySubjectToDataProcessing,
       });
       this.subprocessorsFormGroup.enable();
@@ -148,10 +148,10 @@ export class CreateSubProcessorDialogComponent extends BaseComponent implements 
       .pipe(first())
       .subscribe((subprocessors) => {
         if (this.isEdit) {
-          this.store.dispatch(DataProcessingActions.patchDataProcessingSubProcessor(request, subprocessors));
+          this.store.dispatch(DataProcessingActions.patchDataProcessingSubProcessor(request, subprocessors ?? []));
           return;
         }
-        this.store.dispatch(DataProcessingActions.addDataProcessingSubProcessor(request, subprocessors));
+        this.store.dispatch(DataProcessingActions.addDataProcessingSubProcessor(request, subprocessors ?? []));
       });
   }
 
@@ -164,7 +164,7 @@ export class CreateSubProcessorDialogComponent extends BaseComponent implements 
   }
 
   private checkTransferToInsecureCountry(
-    value: APIDataProcessingRegistrationGeneralDataResponseDTO.TransferToInsecureThirdCountriesEnum | undefined,
+    value: APIYesNoUndecidedChoice | undefined,
   ) {
     if (value === 'Yes') {
       this.subprocessorsFormGroup.controls.insecureThirdCountrySubjectToDataProcessing.enable();

@@ -5,5 +5,9 @@
 }
 
 app-overview-header {
-  flex-direction: row-reverse;
+  display: flex;
+}
+
+.push-right {
+  margin-left: auto;
 }

@@ -19,8 +19,15 @@ export const ItSystemUsageUiBluePrint = {
         systemId: {
           text: $localize`System ID`,
         },
+        purpose: {
+          text: $localize`Systemets overordnede formål`,
+        },
         version: {
           text: $localize`Version`,
+        },
+        technicalSystemType: {
+          text: $localize`Tekniske systemtyper`,
+          disableByDefault: true,
         },
         amountOfUsers: {
           text: $localize`Antal brugere`,
@@ -56,6 +63,32 @@ export const ItSystemUsageUiBluePrint = {
         webAccessibility: {
           text: $localize`Webtilgængelighed (WCAG)`,
         },
+        isSociallyCritical: {
+          text: $localize`Samfundskritisk IT-system`,
+          disableByDefault: true,
+        },
+        isBusinessCritical: {
+          text: $localize`Forretningskritisk IT-system`,
+        },
+        criticalityFieldsLastChanged: {
+          text: $localize`Systemkritikalitet sidst opdateret`,
+          disableByDefault: true,
+        },
+        systemUsageCriticalityLevel: {
+          text: $localize`Kritikalitet`,
+          disableByDefault: true,
+        },
+        criticalityLevelDocumentation: {
+          text: $localize`Reference for kritikalitetsvurdering`,
+          disableByDefault: true,
+        },
+        hostedAt: {
+          text: $localize`IT-Systemet driftes`,
+        },
+        licensingAndCodeModels: {
+          text: $localize`Licens- og kodegrundlag`,
+          disableByDefault: true,
+        },
       },
     },
     contracts: {
@@ -77,14 +110,8 @@ export const ItSystemUsageUiBluePrint = {
     gdpr: {
       text: $localize`GDPR`,
       children: {
-        purpose: {
-          text: $localize`Systemets overordnede formål`,
-        },
-        businessCritical: {
-          text: $localize`Forretningskritisk IT-System`,
-        },
-        hostedAt: {
-          text: $localize`IT-Systemet driftes`,
+        processingPurpose: {
+          text: $localize`Behandlingsformål`,
         },
         documentation: {
           text: $localize`Link til fortegnelse`,
@@ -107,11 +134,19 @@ export const ItSystemUsageUiBluePrint = {
         conductedRiskAssessment: {
           text: $localize`Foretaget risikovurdering`,
         },
+        riskAssessmentResult: {
+          text: $localize`Hvad viste den seneste risikovurdering?`,
+          disableByDefault: true,
+        },
         dpiaConducted: {
           text: $localize`Gennemført DPIA / Konsekvensanalyse`,
         },
         retentionPeriod: {
           text: $localize`Er der bevaringsfrist på data inden de må slettes?`,
+        },
+        isDataProcessingAgreementRequired: {
+          text: $localize`Kræver system databehandleraftale`,
+          disableByDefault: true,
         },
       },
     },
@@ -134,6 +169,16 @@ export const ItSystemUsageUiBluePrint = {
     },
     interfaces: {
       text: $localize`Udstillede snitflader`,
+      children: {
+        itInterfaceIds: {
+          text: $localize`Snitflade ID'er`,
+          disableByDefault: true,
+        },
+        itInterfaceVersions: {
+          text: $localize`Snitflade versioner`,
+          disableByDefault: true,
+        },
+      },
     },
     archiving: {
       text: $localize`Arkivering`,
@@ -196,6 +241,9 @@ export const ItSystemUsageUiBluePrint = {
     },
     localReferences: {
       text: $localize`Lokale referencer`,
+    },
+    usageArchive: {
+      text: $localize`Anvendelseshistorik`,
     },
   },
 };

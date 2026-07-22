@@ -13,7 +13,7 @@ import { DialogComponent } from '../../dialogs/dialog/dialog.component';
 import { StandardVerticalContentGridComponent } from '../../standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { TextBoxComponent } from '../../textbox/textbox.component';
 import { CheckboxComponent } from '../../checkbox/checkbox.component';
-import { NgIf } from '@angular/common';
+
 import { TextAreaComponent } from '../../textarea/textarea.component';
 import { DialogActionsComponent } from '../../dialogs/dialog-actions/dialog-actions.component';
 import { ButtonComponent } from '../../buttons/button/button.component';
@@ -29,11 +29,10 @@ import { ButtonComponent } from '../../buttons/button/button.component';
     StandardVerticalContentGridComponent,
     TextBoxComponent,
     CheckboxComponent,
-    NgIf,
     TextAreaComponent,
     DialogActionsComponent,
-    ButtonComponent,
-  ],
+    ButtonComponent
+],
 })
 export class GlobalOptionTypeDialogComponent implements OnInit {
   @Input() optionTypeItem!: GlobalAdminOptionTypeItem;

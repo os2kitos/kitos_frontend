@@ -105,26 +105,27 @@ describe('it-system-usage references', () => {
       );
     });
 
-    testRunner.runTestWithSetup('can modify external reference master reference', () => {});
-    cy.intercept(refsBaseUrl, {
-      fixture: './it-system-usage/external-references/normal-external-references.json',
+    testRunner.runTestWithSetup('can modify external reference master reference', () => {
+      cy.intercept(refsBaseUrl, {
+        fixture: './it-system-usage/external-references/normal-external-references.json',
+      });
+
+      cy.contains('System 3').click();
+      cy.navigateToDetailsSubPage('Lokale referencer');
+
+      cy.intercept(refsBaseUrl, {
+        fixture: './it-system-usage/external-references/modified-master-external-references.json',
+      });
+
+      cy.externalReferencesSaveAndValidate(
+        false,
+        false,
+        true,
+        itSystemUsageBaseUrl,
+        './it-system-usage/external-references/it-system-usage.json',
+        'No url Master reference'
+      );
     });
-
-    cy.contains('System 3').click();
-    cy.navigateToDetailsSubPage('Lokale referencer');
-
-    cy.intercept(refsBaseUrl, {
-      fixture: './it-system-usage/external-references/modified-master-external-references.json',
-    });
-
-    cy.externalReferencesSaveAndValidate(
-      false,
-      false,
-      true,
-      itSystemUsageBaseUrl,
-      './it-system-usage/external-references/it-system-usage.json',
-      'No url Master reference'
-    );
 
     testRunner.runTestWithSetup('can delete non master external reference', () => {
       cy.intercept(refsBaseUrl, {

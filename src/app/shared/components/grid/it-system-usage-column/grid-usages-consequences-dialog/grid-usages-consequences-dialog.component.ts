@@ -11,7 +11,7 @@ import { GridUsagesDialogComponentStore } from '../grid-usages-dialog/grid-usage
 import { ScrollbarDialogComponent } from '../../../dialogs/dialog/scrollbar-dialog/scrollbar-dialog.component';
 import { ParagraphComponent } from '../../../paragraph/paragraph.component';
 import { StandardVerticalContentGridComponent } from '../../../standard-vertical-content-grid/standard-vertical-content-grid.component';
-import { NgIf, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { CardComponent } from '../../../card/card.component';
 import { UsageMigrationSystemConsequencesTableComponent } from './usage-migration-system-consequences-table/usage-migration-system-consequences-table.component';
 import { UsageMigrationConsequencesTableComponent } from './usage-migration-consequences-table/usage-migration-consequences-table.component';
@@ -30,7 +30,6 @@ import { LoadingComponent } from '../../../loading/loading.component';
     ScrollbarDialogComponent,
     ParagraphComponent,
     StandardVerticalContentGridComponent,
-    NgIf,
     CardComponent,
     UsageMigrationSystemConsequencesTableComponent,
     UsageMigrationConsequencesTableComponent,
@@ -39,8 +38,8 @@ import { LoadingComponent } from '../../../loading/loading.component';
     CheckboxComponent,
     ButtonComponent,
     LoadingComponent,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class GridUsagesConsequencesDialogComponent extends BaseComponent implements OnInit {
   @Input() public title!: string;
@@ -54,7 +53,7 @@ export class GridUsagesConsequencesDialogComponent extends BaseComponent impleme
   public hasAcceptedConsequences: boolean = false;
   public readonly consequencesContentId = 'consequences-content';
 
-  public isCopingToClipboard = false;
+  public isCopyingToClipboard = false;
 
   constructor(
     private readonly dialogRef: MatDialogRef<GridUsagesConsequencesDialogComponent>,
@@ -143,10 +142,10 @@ export class GridUsagesConsequencesDialogComponent extends BaseComponent impleme
   }
 
   public copyConsequencesToClipboard() {
-    this.isCopingToClipboard = true;
+    this.isCopyingToClipboard = true;
     this.cdr.detectChanges();
     this.clipboardService.copyContentToClipBoardById(this.consequencesContentId);
     this.notificationService.showDefault($localize`Konsekvenserne er kopieret til udklipsholderen`);
-    this.isCopingToClipboard = false;
+    this.isCopyingToClipboard = false;
   }
 }

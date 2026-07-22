@@ -46,15 +46,15 @@ export class ColumnConfigService {
     switch (entityType) {
       case 'it-system-usage':
         return this.store.dispatch(
-          ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfiguration(disablePopupNotification)
+          ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfiguration(disablePopupNotification),
         );
       case 'it-contract':
         return this.store.dispatch(
-          ITContractActions.resetToOrganizationITContractColumnConfiguration(disablePopupNotification)
+          ITContractActions.resetToOrganizationITContractColumnConfiguration(disablePopupNotification),
         );
       case 'data-processing-registration':
         return this.store.dispatch(
-          DataProcessingActions.resetToOrganizationDataProcessingColumnConfiguration(disablePopupNotification)
+          DataProcessingActions.resetToOrganizationDataProcessingColumnConfiguration(disablePopupNotification),
         );
       default:
         throw new Error(`No reset action defined for entity type: ${entityType}`);
@@ -181,7 +181,7 @@ export class ColumnConfigService {
   ): boolean {
     if (!config?.visibleColumns) return false;
 
-    const toPersistId = (obj: { persistId?: string }) => obj.persistId;
+    const toPersistId = (obj: { persistId?: string | null }) => obj.persistId ?? undefined;
 
     const disabledByUiPersistIds = new Set(columns.filter((column) => column.disabledByUIConfig).map(toPersistId));
 

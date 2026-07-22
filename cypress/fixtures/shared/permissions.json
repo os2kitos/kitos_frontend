@@ -1,1 +1,41 @@
-{ "read": true, "modify": true, "delete": true }
+{
+  "read": true,
+  "modify": true,
+  "delete": true,
+  "fieldPermissions": {
+    "fields": [
+      {
+        "key": "ItSystemUsage.ContainsAITechnology",
+        "enabled": true
+      },
+      {
+        "key": "ItSystemUsage.GdprCriticality",
+        "enabled": true
+      },
+      {
+        "key": "ItSystemUsage.preriskAssessment",
+        "enabled": true
+      },
+      {
+        "key": "DataProcessingRegistration.IsOversightCompleted",
+        "enabled": true
+      },
+      {
+        "key": "DataProcessingRegistrationOversightDate.OversightDate",
+        "enabled": true
+      },
+      {
+        "key": "DataProcessingRegistrationOversightDate.OversightRemark",
+        "enabled": true
+      },
+      {
+        "key": "DataProcessingRegistrationOversightDate.OversightReportLink",
+        "enabled": true
+      },
+      {
+        "key": "DataProcessingRegistrationOversightDate.OversightReportLinkName",
+        "enabled": true
+      }
+    ]
+  }
+}

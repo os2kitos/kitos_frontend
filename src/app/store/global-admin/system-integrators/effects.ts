@@ -1,13 +1,14 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { APIV2GlobalUserInternalINTERNALService } from 'src/app/api/v2';
-import { GlobalAdminSystemIntegratorActions } from './actions';
 import { catchError, map, of, switchMap } from 'rxjs';
+import { GlobalUserInternalV2Service } from 'src/app/api/v2';
+import { GlobalAdminSystemIntegratorActions } from './actions';
 
 @Injectable()
 export class SystemIntegratorEffects {
   constructor(
-    private readonly globalUserService: APIV2GlobalUserInternalINTERNALService,
+    @Inject(GlobalUserInternalV2Service)
+    private readonly globalUserService: GlobalUserInternalV2Service,
     private readonly actions$: Actions,
   ) {}
 

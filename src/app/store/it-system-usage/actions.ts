@@ -2,6 +2,8 @@ import { createActionGroup, emptyProps } from '@ngrx/store';
 import { APIBusinessRoleDTO } from 'src/app/api/v1';
 import {
   APIColumnConfigurationRequestDTO,
+  APICreateItSystemUsageArchiveRequestDTO,
+  APIItSystemUsageArchiveResponseDTO,
   APIItSystemUsageResponseDTO,
   APIJournalPeriodDTO,
   APIOrganizationGridConfigurationResponseDTO,
@@ -118,6 +120,12 @@ export const ITSystemUsageActions = createActionGroup({
       relation: APIOutgoingSystemRelationResponseDTO,
     ) => ({ itSystemUsageUuid, relation }),
     'Add It System Usage Relation Error': emptyProps(),
+    'Add It System Usage Relations': (request: APISystemRelationWriteRequestDTO[]) => ({ request }),
+    'Add It System Usage Relations Success': (
+      itSystemUsageUuid: string,
+      relations: APIOutgoingSystemRelationResponseDTO[],
+    ) => ({ itSystemUsageUuid, relations }),
+    'Add It System Usage Relations Error': emptyProps(),
     'Patch It System Usage Relation': (relationUuid: string, request: APISystemRelationWriteRequestDTO) => ({
       relationUuid,
       request,
@@ -163,6 +171,13 @@ export const ITSystemUsageActions = createActionGroup({
     'Create It System Usage Success': (itSystemUuid: string, usageUuid: string) => ({ itSystemUuid, usageUuid }),
     'Create It System Usage Error': emptyProps(),
 
+    'Archive It System Usage': (
+      itSystemUsageUuid: string,
+      archiveRequestDto?: APICreateItSystemUsageArchiveRequestDTO,
+    ) => ({ itSystemUsageUuid, archiveRequestDto }),
+    'Archive It System Usage Success': (archive: APIItSystemUsageArchiveResponseDTO) => ({ archive }),
+    'Archive It System Usage Error': emptyProps(),
+
     'Delete It System Usage By It System And Organization': (itSystemUuid: string) => ({ itSystemUuid }),
     'Delete It System Usage By It System And Organization Success': (itSystemUuid: string) => ({ itSystemUuid }),
     'Delete It System Usage By It System And Organization Error': emptyProps(),
@@ -185,10 +200,10 @@ export const ITSystemUsageActions = createActionGroup({
     }),
     'Reset To Organization IT System Usage Column Configuration Success': (
       response: APIOrganizationGridConfigurationResponseDTO,
-      disablePopupNotification: boolean = false
+      disablePopupNotification: boolean = false,
     ) => ({ response, disablePopupNotification }),
     'Reset To Organization IT System Usage Column Configuration Error': (
-      disablePopupNotification: boolean = false
+      disablePopupNotification: boolean = false,
     ) => ({
       disablePopupNotification,
     }),

@@ -1,3 +1,4 @@
+import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -13,11 +14,10 @@ import {
   selectShowItSystemModule,
 } from 'src/app/store/organization/selectors';
 import { UIModuleConfigActions } from 'src/app/store/organization/ui-module-customization/actions';
-import { NgIf, AsyncPipe } from '@angular/common';
 import { CheckboxButtonComponent } from '../../shared/components/buttons/checkbox-button/checkbox-button.component';
-import { ParagraphComponent } from '../../shared/components/paragraph/paragraph.component';
 import { HelpButtonComponent } from '../../shared/components/help-button/help-button.component';
 import { NavigationDrawerComponent } from '../../shared/components/navigation-drawer/navigation-drawer.component';
+import { ParagraphComponent } from '../../shared/components/paragraph/paragraph.component';
 
 interface ModuleTabInfo {
   text: string;
@@ -30,7 +30,6 @@ interface ModuleTabInfo {
   templateUrl: './local-admin.component.html',
   styleUrl: './local-admin.component.scss',
   imports: [
-    NgIf,
     CheckboxButtonComponent,
     ParagraphComponent,
     HelpButtonComponent,
@@ -87,6 +86,11 @@ export class LocalAdminComponent extends BaseComponent implements OnInit {
       label: $localize`Masseopret`,
       iconType: 'bulk-create',
       route: AppPath.import,
+    },
+    {
+      label: $localize`ISMS ansvarlige`,
+      iconType: 'multiple-users',
+      route: AppPath.ismsSuppliers,
     },
   ];
 
@@ -166,8 +170,10 @@ export class LocalAdminComponent extends BaseComponent implements OnInit {
         return 'data-processing';
       case AppPath.import:
         return 'import.organization';
+      case AppPath.ismsSuppliers:
+        return 'isms-suppliers';
       default:
-        return '';
+        throw new Error('Unknown help text for url segment: ' + urlSegment);
     }
   }
   private getModuleTabInfo(moduleKey: UIModuleConfigKey | undefined): ModuleTabInfo {

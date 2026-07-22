@@ -7,10 +7,11 @@ import { Observable, mergeMap } from 'rxjs';
 import {
   APIItSystemResponseDTO,
   APIOrganizationResponseDTO,
-  APIV2ItSystemInternalINTERNALService,
-  APIV2ItSystemService,
-  APIV2OrganizationService,
+  ItSystemInternalV2Service,
+  ItSystemV2Service,
+  OrganizationV2Service,
 } from 'src/app/api/v2';
+import { entityWithUnavailableName } from 'src/app/shared/helpers/string.helpers';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectItSystemUuid } from 'src/app/store/it-system/selectors';
 
@@ -31,10 +32,10 @@ export class ITSystemCatalogDetailsFrontpageComponentStore extends ComponentStor
   public readonly isLoadingOrganizations$ = this.select((state) => state.isLoadingOrganizations);
 
   constructor(
-    @Inject(APIV2ItSystemService) private apiItSystemService: APIV2ItSystemService,
-    @Inject(APIV2OrganizationService) private apiOrganizationService: APIV2OrganizationService,
-    @Inject(APIV2ItSystemInternalINTERNALService)
-    private apiItSystemInternalService: APIV2ItSystemInternalINTERNALService,
+    @Inject(ItSystemV2Service) private apiItSystemService: ItSystemV2Service,
+    @Inject(OrganizationV2Service) private apiOrganizationService: OrganizationV2Service,
+    @Inject(ItSystemInternalV2Service)
+    private apiItSystemInternalService: ItSystemInternalV2Service,
     private store: Store,
   ) {
     super({ isLoading: false, isLoadingOrganizations: false });
@@ -65,10 +66,10 @@ export class ITSystemCatalogDetailsFrontpageComponentStore extends ComponentStor
     systemUuid$.pipe(
       mergeMap((uuid) =>
         this.apiItSystemService.getSingleItSystemV2GetItSystem({ uuid }).pipe(
-          tapResponse(
-            (parentSystem: APIItSystemResponseDTO) => this.updateParentSystem(parentSystem),
-            (e) => console.error(e),
-          ),
+          tapResponse({
+            next: (parentSystem: APIItSystemResponseDTO) => this.updateParentSystem(parentSystem),
+            error: (e) => console.error(e),
+          }),
         ),
       ),
     ),
@@ -87,17 +88,17 @@ export class ITSystemCatalogDetailsFrontpageComponentStore extends ComponentStor
             excludeChildrenOfUuid: systemUuid,
           })
           .pipe(
-            tapResponse(
-              (itSystems: APIItSystemResponseDTO[]) =>
+            tapResponse({
+              next: (itSystems: APIItSystemResponseDTO[]) =>
                 this.updateItSystems(
                   itSystems.map((system) => ({
                     ...system,
-                    name: system.deactivated ? `${system.name} (Ikke tilgængeligt)` : system.name,
+                    name: entityWithUnavailableName(system.name, system.deactivated),
                   })),
                 ),
-              (e) => console.error(e),
-              () => this.updateIsLoading(false),
-            ),
+              error: (e) => console.error(e),
+              complete: () => this.updateIsLoading(false),
+            }),
           );
       }),
     ),
@@ -107,13 +108,15 @@ export class ITSystemCatalogDetailsFrontpageComponentStore extends ComponentStor
     searchTerm$.pipe(
       mergeMap((searchTerm) => {
         this.updateIsLoadingOrganizations(true);
-        return this.apiOrganizationService.getManyOrganizationV2GetOrganizations({ nameOrCvrContent: searchTerm }).pipe(
-          tapResponse(
-            (organizations) => this.updateOrganizations(organizations),
-            (e) => console.error(e),
-            () => this.updateIsLoadingOrganizations(false),
-          ),
-        );
+        return this.apiOrganizationService
+          .getManyOrganizationV2GetOrganizations({ nameOrCvrContent: searchTerm })
+          .pipe(
+            tapResponse({
+              next: (organizations) => this.updateOrganizations(organizations),
+              error: (e) => console.error(e),
+              complete: () => this.updateIsLoadingOrganizations(false),
+            }),
+          );
       }),
     ),
   );

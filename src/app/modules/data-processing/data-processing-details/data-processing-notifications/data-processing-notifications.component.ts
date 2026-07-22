@@ -8,14 +8,14 @@ import {
 } from 'src/app/store/data-processing/selectors';
 import { CardComponent } from '../../../../shared/components/card/card.component';
 import { CardHeaderComponent } from '../../../../shared/components/card-header/card-header.component';
-import { NgIf, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { NotificationsTableComponent } from '../../../../shared/components/notifications-table/notifications-table.component';
 
 @Component({
   selector: 'app-data-processing-notifications',
   templateUrl: './data-processing-notifications.component.html',
   styleUrl: './data-processing-notifications.component.scss',
-  imports: [CardComponent, CardHeaderComponent, NgIf, NotificationsTableComponent, AsyncPipe],
+  imports: [CardComponent, CardHeaderComponent, NotificationsTableComponent, AsyncPipe],
 })
 export class DataProcessingNotificationsComponent extends BaseComponent {
   public readonly dataProcessingUuid$ = this.store.select(selectDataProcessingUuid).pipe(filterNullish());

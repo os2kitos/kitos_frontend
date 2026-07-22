@@ -1,17 +1,22 @@
+import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, combineLatestWith, map } from 'rxjs';
-import { APIIdentityNamePairResponseDTO, APIUpdateDataProcessingRegistrationRequestDTO } from 'src/app/api/v2';
+import {
+  APIDataProcessingRegistrationValidationErrorChoice,
+  APIIdentityNamePairResponseDTO,
+  APIUpdateDataProcessingRegistrationRequestDTO,
+} from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { optionalNewDate } from 'src/app/shared/helpers/date.helpers';
 import { toBulletPoints } from 'src/app/shared/helpers/string.helpers';
 import { createIdentityPairNode, TreeNodeModel } from 'src/app/shared/models/tree-node.model';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import {
+  mapToYesNoIrrelevantEnum,
   YesNoIrrelevantEnum,
   YesNoIrrelevantOptions,
-  mapToYesNoIrrelevantEnum,
   yesNoIrrelevantOptions,
 } from 'src/app/shared/models/yes-no-irrelevant.model';
 import { YesNoEnum, yesNoOptions } from 'src/app/shared/models/yes-no.model';
@@ -26,6 +31,7 @@ import {
 import {
   selectDprEnableAgreementConcluded,
   selectDprEnableDataResponsible,
+  selectDprEnableEnforceInvalidity,
   selectDprEnableLastChangedAt,
   selectDprEnableLastChangedBy,
   selectDprEnableProcessors,
@@ -36,20 +42,20 @@ import {
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
-import { CardComponent } from '../../../../shared/components/card/card.component';
 import { CardHeaderComponent } from '../../../../shared/components/card-header/card-header.component';
-import { NgIf, AsyncPipe } from '@angular/common';
-import { StatusChipComponent } from '../../../../shared/components/status-chip/status-chip.component';
-import { FormGridComponent } from '../../../../shared/components/form-grid/form-grid.component';
-import { TextBoxComponent } from '../../../../shared/components/textbox/textbox.component';
-import { DropdownComponent } from '../../../../shared/components/dropdowns/dropdown/dropdown.component';
-import { TextAreaComponent } from '../../../../shared/components/textarea/textarea.component';
+import { CardComponent } from '../../../../shared/components/card/card.component';
+import { CheckboxComponent } from '../../../../shared/components/checkbox/checkbox.component';
 import { DatePickerComponent } from '../../../../shared/components/datepicker/datepicker.component';
+import { DropdownComponent } from '../../../../shared/components/dropdowns/dropdown/dropdown.component';
+import { FormGridComponent } from '../../../../shared/components/form-grid/form-grid.component';
 import { OrgUnitSelectComponent } from '../../../../shared/components/org-unit-select/org-unit-select.component';
 import { StandardVerticalContentGridComponent } from '../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
-import { ThirdCountriesTableComponent } from './third-countries-table/third-countries-table.component';
+import { StatusChipComponent } from '../../../../shared/components/status-chip/status-chip.component';
+import { TextAreaComponent } from '../../../../shared/components/textarea/textarea.component';
+import { TextBoxComponent } from '../../../../shared/components/textbox/textbox.component';
 import { ProcessorsTableComponent } from './processors-table/processors-table.component';
 import { SubProcessorsTableComponent } from './sub-processors-table/sub-processors-table.component';
+import { ThirdCountriesTableComponent } from './third-countries-table/third-countries-table.component';
 
 @Component({
   selector: 'app-data-processing-frontpage',
@@ -58,12 +64,12 @@ import { SubProcessorsTableComponent } from './sub-processors-table/sub-processo
   imports: [
     CardComponent,
     CardHeaderComponent,
-    NgIf,
     StatusChipComponent,
     FormGridComponent,
     FormsModule,
     ReactiveFormsModule,
     TextBoxComponent,
+    CheckboxComponent,
     DropdownComponent,
     TextAreaComponent,
     DatePickerComponent,
@@ -95,8 +101,15 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
   public readonly dataProcessing$ = this.store.select(selectDataProcessing);
   public readonly dprInactiveMessage$ = this.dataProcessing$.pipe(
     map((dpr) => {
-      if (dpr?.general.valid) return undefined;
-      const reasonsForInactivity = [dpr?.general.valid ? undefined : $localize`Den markerede kontrakt er inaktiv`];
+      const validity = dpr?.general.validity;
+      if (validity?.valid) return undefined;
+
+      const reasonsForInactivity = [];
+      if (validity?.enforceInvalidity) reasonsForInactivity.push($localize`Der er gennemtvunget inaktivitet`);
+      if (
+        validity?.validationErrors?.includes(APIDataProcessingRegistrationValidationErrorChoice.MainContractNotActive)
+      )
+        reasonsForInactivity.push($localize`Den markerede kontrakt er inaktiv`);
 
       return $localize`Følgende gør databehandlingen inaktiv: ` + '\n' + toBulletPoints(reasonsForInactivity);
     }),
@@ -114,6 +127,7 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
     agreementConclusionDate: new FormControl<Date | undefined>({ value: undefined, disabled: true }),
     agreementRemarks: new FormControl<string | undefined>({ value: undefined, disabled: true }),
     responsibleOrgUnit: new FormControl<TreeNodeModel | undefined>({ value: undefined, disabled: true }),
+    enforceInvalidity: new FormControl<boolean | undefined>({ value: undefined, disabled: true }),
   });
 
   public readonly transferBasisFormGroup = new FormGroup({
@@ -129,6 +143,7 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
   public readonly processorsEnabled$ = this.store.select(selectDprEnableProcessors);
   public readonly subProcessorsEnabled$ = this.store.select(selectDprEnableSubProcessors);
   public readonly responsibleUnitEnabled$ = this.store.select(selectDprEnableResponsibleOrgUnit);
+  public readonly enforceInvalidityEnabled$ = this.store.select(selectDprEnableEnforceInvalidity);
 
   constructor(
     private store: Store,
@@ -145,21 +160,22 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
       this.dataProcessing$
         .pipe(filterNullish(), combineLatestWith(this.store.select(selectDataProcessingHasModifyPermissions)))
         .subscribe(([dpr, hasModifyPermission]) => {
-          const agreementConcludedValue = mapToYesNoIrrelevantEnum(dpr.general.isAgreementConcluded);
+          const agreementConcludedValue = mapToYesNoIrrelevantEnum(dpr.general.isAgreementConcluded ?? undefined);
           const responsibleOrgUnit = dpr.general.responsibleOrganizationUnit;
           this.frontpageFormGroup.patchValue({
             name: dpr.name,
-            status: dpr.general.valid ? `Aktiv` : `Inaktiv`,
+            status: dpr.general.validity.valid ? `Aktiv` : `Inaktiv`,
             lastChangedBy: dpr.lastModifiedBy.name,
             lastChangedAt: optionalNewDate(dpr.lastModified),
             dataResponsible: dpr.general.dataResponsible,
             dataResponsibleRemarks: dpr.general.dataResponsibleRemark,
             agreementConcluded: agreementConcludedValue,
-            agreementConclusionDate: optionalNewDate(dpr.general.agreementConcludedAt),
+            agreementConclusionDate: optionalNewDate(dpr.general.agreementConcludedAt ?? undefined),
             agreementRemarks: dpr.general.isAgreementConcludedRemark,
             responsibleOrgUnit: responsibleOrgUnit
               ? createIdentityPairNode(responsibleOrgUnit.name, responsibleOrgUnit.uuid)
               : undefined,
+            enforceInvalidity: dpr.general.validity.enforceInvalidity,
           });
 
           this.transferBasisFormGroup.patchValue({
@@ -175,9 +191,7 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
             this.transferBasisFormGroup.disable();
           }
 
-          this.frontpageFormGroup.controls.status.disable();
-          this.frontpageFormGroup.controls.lastChangedAt.disable();
-          this.frontpageFormGroup.controls.lastChangedBy.disable();
+          this.disableReadOnlyFormControls();
         }),
     );
 
@@ -190,6 +204,12 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
         }
       }),
     );
+  }
+
+  private disableReadOnlyFormControls() {
+    this.frontpageFormGroup.controls.status.disable();
+    this.frontpageFormGroup.controls.lastChangedAt.disable();
+    this.frontpageFormGroup.controls.lastChangedBy.disable();
   }
 
   public patchFrontPage(

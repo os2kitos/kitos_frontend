@@ -1,11 +1,8 @@
-import { APIGDPRRegistrationsResponseDTO } from 'src/app/api/v2';
+import { APIYesNoDontKnowChoice } from 'src/app/api/v2';
 
 export interface YesNoDontKnowOption {
   name: string;
-  value:
-    | APIGDPRRegistrationsResponseDTO.BusinessCriticalEnum
-    | APIGDPRRegistrationsResponseDTO.UserSupervisionEnum
-    | string;
+  value: APIYesNoDontKnowChoice | string;
 }
 
 export enum YesNoDontKnowEnum {
@@ -20,12 +17,7 @@ export const yesNoDontKnowOptions: YesNoDontKnowOption[] = [
   { name: $localize`Nej`, value: YesNoDontKnowEnum.No },
   { name: $localize`Ved ikke`, value: YesNoDontKnowEnum.DontKnow },
 ];
-export const mapToYesNoDontKnowEnum = (
-  value?:
-    | APIGDPRRegistrationsResponseDTO.BusinessCriticalEnum
-    | APIGDPRRegistrationsResponseDTO.UserSupervisionEnum
-    | APIGDPRRegistrationsResponseDTO.DpiaConductedEnum,
-): YesNoDontKnowOption | undefined => {
+export const mapToYesNoDontKnowEnum = (value?: APIYesNoDontKnowChoice): YesNoDontKnowOption | undefined => {
   return yesNoDontKnowOptions.find((option) => option.value === value);
 };
 

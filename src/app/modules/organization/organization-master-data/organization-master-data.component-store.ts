@@ -3,7 +3,7 @@ import { ComponentStore } from '@ngrx/component-store';
 import { tapResponse } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { combineLatestWith, finalize, map, Observable, switchMap, tap } from 'rxjs';
-import { APIV2OrganizationService, GetManyOrganizationV2GetOrganizationUsersRequestParams } from 'src/app/api/v2';
+import { OrganizationV2Service } from 'src/app/api/v2';
 import { IdentityNamePair } from 'src/app/shared/models/identity-name-pair.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
@@ -26,8 +26,8 @@ export class OrganizationMasterDataComponentStore extends ComponentStore<State> 
   );
 
   constructor(
-    @Inject(APIV2OrganizationService)
-    private organizationService: APIV2OrganizationService,
+    @Inject(OrganizationV2Service)
+    private organizationService: OrganizationV2Service,
     private store: Store,
   ) {
     super({ organizationUsers: [], organizationUsersLoading: false });
@@ -46,18 +46,17 @@ export class OrganizationMasterDataComponentStore extends ComponentStore<State> 
       tap(() => this.setLoading(true)),
       combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       switchMap(([search, organizationUuid]) => {
-        const request: GetManyOrganizationV2GetOrganizationUsersRequestParams = { organizationUuid };
-        if (search) request.emailQuery = search;
+        const request = search ? { organizationUuid, emailQuery: search } : { organizationUuid };
         return this.organizationService.getManyOrganizationV2GetOrganizationUsers(request).pipe(
-          tapResponse(
-            (responseDtos) => {
+          tapResponse({
+            next: (responseDtos) => {
               const organizationUsers = responseDtos
-                .map((userDto) => adaptOrganizationUserV2(userDto))
-                .filter((u) => u !== undefined);
+                .map((userDto: any) => adaptOrganizationUserV2(userDto))
+                .filter((u: any) => u !== undefined);
               this.setOrganizationUsers(organizationUsers);
             },
-            (e) => console.error(e),
-          ),
+            error: (e) => console.error(e),
+          }),
           finalize(() => this.setLoading(false)),
         );
       }),

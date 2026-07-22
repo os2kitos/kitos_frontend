@@ -3,14 +3,14 @@ import { MatMenuTrigger, MatMenu } from '@angular/material/menu';
 import { ButtonStyle } from 'src/app/shared/models/buttons/button-style.model';
 import { IconType } from 'src/app/shared/models/icon-type';
 import { ButtonComponent } from '../button/button.component';
-import { NgIf } from '@angular/common';
+
 import { IconComponent } from '../../icon/icon.component';
 
 @Component({
   selector: 'app-menu-button',
   templateUrl: './menu-button.component.html',
   styleUrls: ['./menu-button.component.scss'],
-  imports: [ButtonComponent, MatMenuTrigger, NgIf, IconComponent, MatMenu],
+  imports: [ButtonComponent, MatMenuTrigger, IconComponent, MatMenu],
 })
 export class MenuButtonComponent {
   @ViewChild(MatMenuTrigger) menuTrigger!: MatMenuTrigger;

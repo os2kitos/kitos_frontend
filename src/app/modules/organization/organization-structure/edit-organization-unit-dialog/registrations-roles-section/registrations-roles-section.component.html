@@ -12,26 +12,28 @@
       <th i18n width="50%">Bruger</th>
     </thead>
     <tbody>
-      <tr *ngFor="let roleRegistration of roleRegistrations$ | async">
-        <td>
-          <app-checkbox
-            [value]="roleRegistration.isSelected"
-            (valueChange)="changeSelectRegistrationState(roleRegistration)"
-            [disabled]="!canEditRegistrations"
-          ></app-checkbox>
-        </td>
-        <td>
-          <app-paragraph>{{ roleRegistration.registration.name }}</app-paragraph>
-        </td>
-        <td>
-          <app-content-space-between>
-            <app-paragraph>{{ roleRegistration.registration.userFullName }}</app-paragraph>
-            <app-icon-button (buttonClick)="removeSingleRegistration(roleRegistration.registration.id)"
-              ><app-trashcan-icon></app-trashcan-icon
-            ></app-icon-button>
-          </app-content-space-between>
-        </td>
-      </tr>
+      @for (roleRegistration of roleRegistrations$ | async; track roleRegistration) {
+        <tr>
+          <td>
+            <app-checkbox
+              [value]="roleRegistration.isSelected"
+              (valueChange)="changeSelectRegistrationState(roleRegistration)"
+              [disabled]="!canEditRegistrations"
+            ></app-checkbox>
+          </td>
+          <td>
+            <app-paragraph>{{ roleRegistration.registration.name }}</app-paragraph>
+          </td>
+          <td>
+            <app-content-space-between>
+              <app-paragraph>{{ roleRegistration.registration.userFullName }}</app-paragraph>
+              <app-icon-button (buttonClick)="removeSingleRegistration(roleRegistration.registration.id)"
+                ><app-trashcan-icon></app-trashcan-icon
+              ></app-icon-button>
+            </app-content-space-between>
+          </td>
+        </tr>
+      }
     </tbody>
   </app-native-table>
 </app-accordion>

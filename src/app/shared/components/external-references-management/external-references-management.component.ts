@@ -1,3 +1,4 @@
+import { AsyncPipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
@@ -12,26 +13,25 @@ import { BaseComponent } from '../../base/base.component';
 import { ExternalReferenceViewModel } from '../../models/external-references/external-reference-view.model';
 import { HasUuid } from '../../models/has-uuid';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
+import { AppDatePipe } from '../../pipes/app-date.pipe';
 import { filterNullish } from '../../pipes/filter-nullish';
 import { ConfirmActionCategory, ConfirmActionService } from '../../services/confirm-action.service';
+import { BooleanCircleComponent } from '../boolean-circle/boolean-circle.component';
+import { IconButtonComponent } from '../buttons/icon-button/icon-button.component';
+import { CollectionExtensionButtonComponent } from '../collection-extension-button/collection-extension-button.component';
+import { ContentSpaceBetweenComponent } from '../content-space-between/content-space-between.component';
+import { EmptyStateComponent } from '../empty-states/empty-state.component';
+import { ExternalPageLinkComponent } from '../external-page-link/external-page-link.component';
+import { PencilIconComponent } from '../icons/pencil-icon.compnent';
+import { TrashcanIconComponent } from '../icons/trashcan-icon.component';
+import { LoadingComponent } from '../loading/loading.component';
+import { NativeTableComponent } from '../native-table/native-table.component';
+import { ParagraphComponent } from '../paragraph/paragraph.component';
+import { StandardVerticalContentGridComponent } from '../standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { TableRowActionsComponent } from '../table-row-actions/table-row-actions.component';
 import { CreateExternalReferenceDialogComponent } from './create-external-reference-dialog/create-external-reference-dialog.component';
 import { EditExternalReferenceDialogComponent } from './edit-external-reference-dialog/edit-external-reference-dialog.component';
 import { ExternalReferencesComponentStore } from './external-references.component-store';
-import { NgIf, NgFor, AsyncPipe } from '@angular/common';
-import { LoadingComponent } from '../loading/loading.component';
-import { StandardVerticalContentGridComponent } from '../standard-vertical-content-grid/standard-vertical-content-grid.component';
-import { NativeTableComponent } from '../native-table/native-table.component';
-import { ExternalPageLinkComponent } from '../external-page-link/external-page-link.component';
-import { ParagraphComponent } from '../paragraph/paragraph.component';
-import { ContentSpaceBetweenComponent } from '../content-space-between/content-space-between.component';
-import { BooleanCircleComponent } from '../boolean-circle/boolean-circle.component';
-import { TableRowActionsComponent } from '../table-row-actions/table-row-actions.component';
-import { IconButtonComponent } from '../buttons/icon-button/icon-button.component';
-import { PencilIconComponent } from '../icons/pencil-icon.compnent';
-import { TrashcanIconComponent } from '../icons/trashcan-icon.component';
-import { EmptyStateComponent } from '../empty-states/empty-state.component';
-import { CollectionExtensionButtonComponent } from '../collection-extension-button/collection-extension-button.component';
-import { AppDatePipe } from '../../pipes/app-date.pipe';
 
 @Component({
   selector: 'app-external-references-management[entityType][hasModifyPermission]',
@@ -39,11 +39,9 @@ import { AppDatePipe } from '../../pipes/app-date.pipe';
   styleUrls: ['./external-references-management.component.scss'],
   providers: [ExternalReferencesComponentStore],
   imports: [
-    NgIf,
     LoadingComponent,
     StandardVerticalContentGridComponent,
     NativeTableComponent,
-    NgFor,
     ExternalPageLinkComponent,
     ParagraphComponent,
     ContentSpaceBetweenComponent,
@@ -136,11 +134,11 @@ export class ExternalReferencesManagementComponent extends BaseComponent impleme
   ): ExternalReferenceViewModel {
     return {
       uuid: externalReference.uuid ?? '',
-      documentId: externalReference.documentId,
+      documentId: externalReference.documentId ?? undefined,
       title: externalReference.title,
-      url: externalReference.url,
+      url: externalReference.url ?? undefined,
       masterReference: externalReference.masterReference,
-      lastChangedBy: externalReference.lastChangedByUsername,
+      lastChangedBy: externalReference.lastChangedByUsername ?? undefined,
       lastChangedDate: externalReference.lastChangedDate,
     };
   }

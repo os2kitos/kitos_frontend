@@ -1,4 +1,4 @@
-import { APIOrganizationRightDTO, APIUserDTO } from 'src/app/api/v1';
+import { APIOrganizationRole, APIUserDTO } from 'src/app/api/v1';
 import { adaptV1OrganizationRights, OrganizationRight } from './organization-right.model';
 import {
   mapStartPreferenceChoiceFromV1,
@@ -23,7 +23,7 @@ export const adaptUser = (apiUser?: APIUserDTO): User | undefined => {
 
   const userOrganizationRight = apiUser?.organizationRights?.find(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (right) => right.role === APIOrganizationRightDTO.RoleEnum.User || right.role === (0 as any),
+    (right) => right.role === APIOrganizationRole.User || right.role === (0 as any),
   );
   const organizationUuid = userOrganizationRight?.organizationUuid;
   const organizationName = userOrganizationRight?.organizationName;
@@ -31,13 +31,13 @@ export const adaptUser = (apiUser?: APIUserDTO): User | undefined => {
   return {
     id: apiUser.id,
     uuid: apiUser.uuid,
-    email: apiUser.email,
+    email: apiUser.email ?? '',
     fullName: apiUser?.fullName ?? '',
     isGlobalAdmin: apiUser?.isGlobalAdmin ?? false,
     organizationRights: adaptV1OrganizationRights(apiUser?.organizationRights ?? []),
-    defaultOrganizationUuid: organizationUuid,
-    defaultOrganizationName: organizationName,
+    defaultOrganizationUuid: organizationUuid ?? undefined,
+    defaultOrganizationName: organizationName ?? undefined,
     defaultStartPage: mapStartPreferenceChoiceFromV1(apiUser.defaultUserStartPreference),
-    defaultUnitUuid: apiUser.defaultOrganizationUnitUuid,
+    defaultUnitUuid: apiUser.defaultOrganizationUnitUuid ?? undefined,
   };
 };

@@ -57,10 +57,10 @@ export class BaseDropdownComponent<T> extends BaseFormComponent<T | null> implem
         .pipe(
           filter(() => this.showDescription),
           map(([value, data]) =>
-            data?.find((data: any) => !!value && data[this.valueField] === (value as any)[this.valueField]),
+            data?.find((d: any) => !!value && d[this.valueField] === (value as any)[this.valueField]),
           ),
         )
-        .subscribe((value: any) => (this.description = value?.description)),
+        .subscribe((value: any) => (this.description = value ? value[this.itemDescriptionField] : undefined)),
     );
   }
 

@@ -61,7 +61,10 @@
         }
       }
     ],
-    "valid": true,
+    "validity": {
+      "valid": true,
+      "enforceInvalidity": false
+    },
     "mainContract": null
   },
   "systemUsages": [],

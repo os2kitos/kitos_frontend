@@ -14,6 +14,10 @@ describe('it-system-usage archiving', () => {
     cy.intercept('/api/v2/it-system-usage-archive-test-location-types*', {
       fixture: './it-system-usage/archiving/it-system-usage-archive-test-location-types.json',
     });
+    cy.intercept('/api/v2/internal/it-systems/search?includeDeactivated*', {
+      fixture: './it-system-catalog/it-system.json',
+    });
+    cy.intercept('/api/v2/kle-options', { fixture: './shared/kles.json' });
   });
 
   it('can view but not edit information from catalog', () => {
@@ -61,10 +65,10 @@ describe('it-system-usage archiving', () => {
     openArchiveTab();
 
     cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' }).as(
-      'patch',
+      'patch'
     );
 
-    cy.dropdown('Arkiveringspligt', 'K', true);
+    cy.dropdown('Arkiveringspligt', '(K)', true);
     verifyArchivePatchRequest({ archiveDuty: 'K' });
 
     cy.contains('Feltet blev opdateret');
@@ -129,7 +133,7 @@ describe('it-system-usage archiving', () => {
       'DELETE',
       '**/journal-periods/**',
       {},
-      'Er du sikker på at du vil fjerne denne journalperiode?',
+      'Er du sikker på at du vil fjerne denne journalperiode?'
     );
   });
 });

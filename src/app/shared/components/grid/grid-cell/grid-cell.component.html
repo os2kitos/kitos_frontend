@@ -1,80 +1,117 @@
-<app-text-cell
-  *ngIf="column.style === 'default' || column.style === undefined"
-  [column]="column"
-  [dataItem]="dataItem"
-></app-text-cell>
+@if (column.style === 'default' || column.style === undefined) {
+  <app-text-cell
+    [column]="column"
+    [dataItem]="dataItem"
+  ></app-text-cell>
+}
 
-<app-status-cell
-  *ngIf="column.style === 'chip' || column.style === 'reverse-chip'"
-  [column]="column"
-  [dataItem]="dataItem"
->
-</app-status-cell>
+@if (column.style === 'chip' || column.style === 'reverse-chip') {
+  <app-status-cell
+    [column]="column"
+    [dataItem]="dataItem"
+    >
+  </app-status-cell>
+}
 
-<app-thousand-seperator-cell
-  *ngIf="column.style === 'integer-with-thousands-separator'"
-  [column]="column"
-  [dataItem]="dataItem"
->
-</app-thousand-seperator-cell>
+@if (column.style === 'integer-with-thousands-separator') {
+  <app-thousand-seperator-cell
+    [column]="column"
+    [dataItem]="dataItem"
+    >
+  </app-thousand-seperator-cell>
+}
 
-<app-default-wrap-cell *ngIf="column.style === 'default-wrap'" [column]="column" [dataItem]="dataItem">
-</app-default-wrap-cell>
+@if (column.style === 'default-wrap') {
+  <app-default-wrap-cell [column]="column" [dataItem]="dataItem">
+  </app-default-wrap-cell>
+}
 
-<app-primary-cell *ngIf="column.style === 'primary'" [column]="column" [dataItem]="dataItem"> </app-primary-cell>
+@if (column.style === 'primary') {
+  <app-primary-cell [column]="column" [dataItem]="dataItem"> </app-primary-cell>
+}
 
-<app-boolean-cell *ngIf="column.style === 'boolean'" [column]="column" [dataItem]="dataItem"> </app-boolean-cell>
+@if (column.style === 'boolean') {
+  <app-boolean-cell [column]="column" [dataItem]="dataItem"> </app-boolean-cell>
+}
 
-<app-date-cell *ngIf="column.style === 'date'" [column]="column" [dataItem]="dataItem"> </app-date-cell>
+@if (column.style === 'date') {
+  <app-date-cell [column]="column" [dataItem]="dataItem"> </app-date-cell>
+}
 
-<app-enum-cell *ngIf="column.style === 'enum'" [column]="column" [dataItem]="dataItem"> </app-enum-cell>
+@if (column.style === 'enum') {
+  <app-enum-cell [column]="column" [dataItem]="dataItem"> </app-enum-cell>
+}
 
-<app-link-cell *ngIf="column.style === 'link'" [column]="column" [dataItem]="dataItem"> </app-link-cell>
+@if (column.style === 'enum-array'){
+  <app-enum-array-cell [column]="column" [dataItem]="dataItem"> </app-enum-array-cell>
+}
 
-<app-title-link-cell
-  *ngIf="column.style === 'title-link' && column.idField"
-  [column]="column"
-  [dataItem]="dataItem"
-></app-title-link-cell>
+@if (column.style === 'link') {
+  <app-link-cell [column]="column" [dataItem]="dataItem"> </app-link-cell>
+}
 
-<app-page-link-cell
-  *ngIf="column.style === 'page-link' && column.idField"
-  [column]="column"
-  [dataItem]="dataItem"
-></app-page-link-cell>
+@if (column.style === 'title-link' && column.idField) {
+  <app-title-link-cell
+    [column]="column"
+    [dataItem]="dataItem"
+  ></app-title-link-cell>
+}
 
-<app-checkbox-cell
-  *ngIf="column.style === 'checkbox'"
-  [column]="column"
-  [dataItem]="dataItem"
-  [createPermission]="createPermission"
-  (checkboxChange)="onCheckboxChange($event)"
->
-</app-checkbox-cell>
+@if (column.style === 'page-link' && column.idField) {
+  <app-page-link-cell
+    [column]="column"
+    [dataItem]="dataItem"
+  ></app-page-link-cell>
+}
 
-<app-usages-cell *ngIf="column.style === 'usages'" [column]="column" [dataItem]="dataItem"></app-usages-cell>
+@if (column.style === 'checkbox') {
+  <app-checkbox-cell
+    [column]="column"
+    [dataItem]="dataItem"
+    [createPermission]="createPermission"
+    (checkboxChange)="onCheckboxChange($event)"
+    >
+  </app-checkbox-cell>
+}
 
-<app-page-link-array-cell
-  *ngIf="column.style === 'page-link-array' || column.style === 'page-link-array-with-submodules'"
-  [column]="column"
-  [dataItem]="dataItem"
-></app-page-link-array-cell>
+@if (column.style === 'usages') {
+  <app-usages-cell [column]="column" [dataItem]="dataItem"></app-usages-cell>
+}
 
-<app-uuid-to-name-cell
-  *ngIf="column.style === 'uuid-to-name'"
-  [column]="column"
-  [dataItem]="dataItem"
-></app-uuid-to-name-cell>
+@if (column.style === 'page-link-array' || column.style === 'page-link-array-with-submodules') {
+  <app-page-link-array-cell
+    [column]="column"
+    [dataItem]="dataItem"
+  ></app-page-link-array-cell>
+}
 
-<app-audit-cell *ngIf="column.style === 'contract-audit'" [column]="column" [dataItem]="dataItem"></app-audit-cell>
+@if (column.style === 'uuid-to-name') {
+  <app-uuid-to-name-cell
+    [column]="column"
+    [dataItem]="dataItem"
+  ></app-uuid-to-name-cell>
+}
 
-<app-action-buttons-cell
-  *ngIf="column.style === 'action-buttons' && (modifyPermission || deletePermission)"
-  [column]="column"
-  [dataItem]="dataItem"
-  [modifyPermission]="modifyPermission"
-  [deletePermission]="deletePermission"
-  (toggleEvent)="onToggleEvent($event)"
-  (modifyEvent)="onModifyEvent()"
-  (deleteEvent)="onDeleteEvent()"
-></app-action-buttons-cell>
+@if (column.style === 'contract-audit') {
+  <app-audit-cell [column]="column" [dataItem]="dataItem"></app-audit-cell>
+}
+
+@if (column.style === 'contract-status-chip') {
+  <app-contract-status-chip-cell
+    [column]="column"
+    [dataItem]="dataItem"
+  ></app-contract-status-chip-cell>
+}
+
+@if (column.style === 'action-buttons' && (modifyPermission || deletePermission)) {
+  <app-action-buttons-cell
+    [column]="column"
+    [dataItem]="dataItem"
+    [modifyPermission]="modifyPermission"
+    [deletePermission]="deletePermission"
+    [deleteIcon]="deleteIcon"
+    (toggleEvent)="onToggleEvent($event)"
+    (modifyEvent)="onModifyEvent()"
+    (deleteEvent)="onDeleteEvent()"
+  ></app-action-buttons-cell>
+}

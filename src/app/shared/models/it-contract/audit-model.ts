@@ -1,4 +1,4 @@
-import { APIPaymentResponseDTO } from 'src/app/api/v2';
+import { APIPaymentAuditStatus } from 'src/app/api/v2';
 
 export interface OverviewAuditModel {
   total: number;
@@ -10,21 +10,21 @@ export interface OverviewAuditModel {
 
 export interface AuditModel {
   name: string;
-  id: APIPaymentResponseDTO.AuditStatusEnum;
+  id: APIPaymentAuditStatus;
 }
 
 export const baseAuditStatusValue = {
   name: $localize`Audit ikke gennemført`,
-  id: APIPaymentResponseDTO.AuditStatusEnum.White,
+  id: APIPaymentAuditStatus.White,
 };
 
 export const auditStatusOptions: AuditModel[] = [
   baseAuditStatusValue,
-  { name: $localize`Opfylder standarderne`, id: APIPaymentResponseDTO.AuditStatusEnum.Green },
-  { name: $localize`Mindre forbedringer påkrævet`, id: APIPaymentResponseDTO.AuditStatusEnum.Yellow },
-  { name: $localize`Væsentlige forbedringer nødvendige`, id: APIPaymentResponseDTO.AuditStatusEnum.Red },
+  { name: $localize`Opfylder standarderne`, id: APIPaymentAuditStatus.Green },
+  { name: $localize`Mindre forbedringer påkrævet`, id: APIPaymentAuditStatus.Yellow },
+  { name: $localize`Væsentlige forbedringer nødvendige`, id: APIPaymentAuditStatus.Red },
 ];
 
-export const mapAuditModel = (value?: APIPaymentResponseDTO.AuditStatusEnum): AuditModel | undefined => {
+export const mapAuditModel = (value?: APIPaymentAuditStatus): AuditModel | undefined => {
   return auditStatusOptions.find((option) => option.id === value);
 };

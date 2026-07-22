@@ -40,6 +40,7 @@
       "ObjectOwnerId": 1,
       "LastChanged": "2024-11-05T15:22:09.7884426Z",
       "LastChangedByUserId": 2,
+      "Disabled": true,
       "SubDataProcessorRegistrations": []
     }
   ]

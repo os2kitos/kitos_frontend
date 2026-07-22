@@ -1,7 +1,7 @@
 import { EntityState } from '@ngrx/entity';
 import { APIBusinessRoleDTO } from 'src/app/api/v1';
 import {
-  APIDataProcessingRegistrationPermissionsResponseDTO,
+  APICombinedPermissionsResponseDTO,
   APIDataProcessingRegistrationResponseDTO,
   APIOrganizationGridConfigurationResponseDTO,
   APIResourceCollectionPermissionsResponseDTO,
@@ -23,7 +23,7 @@ export interface DataProcessingState extends EntityState<DataProcessingRegistrat
   loading: boolean | undefined;
   dataProcessing: APIDataProcessingRegistrationResponseDTO | undefined;
 
-  permissions: APIDataProcessingRegistrationPermissionsResponseDTO | undefined;
+  permissions: APICombinedPermissionsResponseDTO | undefined;
   collectionPermissions: APIResourceCollectionPermissionsResponseDTO | undefined;
   isRemoving: boolean;
 

@@ -4,39 +4,44 @@
     helpTextKey="it-system.usage.dataprocessing"
     i18n-title
   ></app-card-header>
-  <app-loading *ngIf="isLoading$ | async"></app-loading>
-  <ng-container *ngIf="(isLoading$ | async) === false">
-    <ng-container *ngIf="anyRegistrations$ | async">
+  @if (isLoading$ | async) {
+    <app-loading></app-loading>
+  }
+  @if ((isLoading$ | async) === false) {
+    @if (anyRegistrations$ | async) {
       <app-native-table>
         <thead>
           <th width="80%" i18n>Databehandling</th>
           <th width="20%" i18n>Status</th>
         </thead>
         <tbody>
-          <tr *ngFor="let dataProcessingRegistration of dataProcessingRegistrations$ | async">
-            <td>
-              <app-details-page-link
-                itemType="data-processing-registration"
-                linkFontSize="small"
-                [itemPath]="dataProcessingRegistration.uuid"
-                >{{ dataProcessingRegistration.name }}</app-details-page-link
-              >
-            </td>
-            <td>
-              <app-status-chip
-                type="data-processing-registration"
-                [value]="dataProcessingRegistration.general.valid"
-              ></app-status-chip>
-            </td>
-          </tr>
-        </tbody>
-      </app-native-table>
-    </ng-container>
-    <app-empty-state
-      *ngIf="(anyRegistrations$ | async) === false"
-      text='Systemet er ikke omfattet af registreringer i modulet "Databehandling"'
-      context="searchResult"
-      i18n-text
-    ></app-empty-state>
-  </ng-container>
-</app-card>
+          @for (dataProcessingRegistration of dataProcessingRegistrations$ | async; track dataProcessingRegistration) {
+            <tr>
+              <td>
+                <app-details-page-link
+                  itemType="data-processing-registration"
+                  linkFontSize="small"
+                  [itemPath]="dataProcessingRegistration.uuid"
+                  >{{ dataProcessingRegistration.name }}</app-details-page-link
+                  >
+                </td>
+                <td>
+                  <app-status-chip
+                    type="data-processing-registration"
+                    [value]="dataProcessingRegistration.general.validity.valid"
+                  ></app-status-chip>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </app-native-table>
+      }
+      @if ((anyRegistrations$ | async) === false) {
+        <app-empty-state
+          text='Systemet er ikke omfattet af registreringer i modulet "Databehandling"'
+          context="searchResult"
+          i18n-text
+        ></app-empty-state>
+      }
+    }
+  </app-card>

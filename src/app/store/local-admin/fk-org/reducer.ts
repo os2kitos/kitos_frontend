@@ -1,5 +1,5 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
-import { APIStsOrganizationAccessStatusResponseDTO, APIStsOrganizationChangeLogResponseDTO } from 'src/app/api/v2';
+import { APICheckConnectionError, APIStsOrganizationChangeLogResponseDTO } from 'src/app/api/v2';
 import { mapDateToString } from 'src/app/shared/helpers/date.helpers';
 import { DropdownOption } from 'src/app/shared/models/dropdown-option.model';
 import {
@@ -43,7 +43,7 @@ export const fkOrgFeature = createFeature({
     ),
     on(FkOrgActions.getSynchronizationStatusSuccess, (state, { synchronizationStatus }): FkOrgState => {
       let accessError = undefined;
-      if (synchronizationStatus.accessStatus?.error) {
+      if (synchronizationStatus.accessStatus?.error != null) {
         accessError = handleAccessError(synchronizationStatus.accessStatus.error);
       }
 
@@ -53,7 +53,7 @@ export const fkOrgFeature = createFeature({
       FkOrgActions.getSynchronizationStatusError,
       (state): FkOrgState => ({
         ...state,
-        accessError: handleAccessError('Unknown'),
+        accessError: handleAccessError(APICheckConnectionError.Unknown),
       }),
     ),
 
@@ -152,16 +152,17 @@ export const fkOrgFeature = createFeature({
   ),
 });
 
-function handleAccessError(error: APIStsOrganizationAccessStatusResponseDTO.ErrorEnum) {
+function handleAccessError(error: APICheckConnectionError) {
   switch (error) {
-    case APIStsOrganizationAccessStatusResponseDTO.ErrorEnum.ExistingServiceAgreementIssue:
+    case APICheckConnectionError.ExistingServiceAgreementIssue:
       return $localize`Der er problemer med den eksisterende serviceaftale, der giver KITOS adgang til data fra din kommune i FK Organisatoin. Kontakt venligst den KITOS ansvarlige i din kommune for hjælp.`;
-    case APIStsOrganizationAccessStatusResponseDTO.ErrorEnum.InvalidCvrOnOrganization:
+    case APICheckConnectionError.InvalidCvrOnOrganization:
       return $localize`Der enten mangler eller er registreret et ugyldigt CVR nummer på din kommune i KITOS.`;
-    case APIStsOrganizationAccessStatusResponseDTO.ErrorEnum.UserContextDoesNotExistOnSystem: //intended fallthrough
-    case APIStsOrganizationAccessStatusResponseDTO.ErrorEnum.MissingServiceAgreement:
+    case APICheckConnectionError.UserContextDoesNotExistOnSystem: // intended fallthrough
+    case APICheckConnectionError.MissingServiceAgreement:
       return $localize`Din organisation mangler en gyldig serviceaftale der giver KITOS adgang til data fra din kommune i FK Organisation. Kontakt venligst den KITOS ansvarlige i din kommune for hjælp.`;
-    case APIStsOrganizationAccessStatusResponseDTO.ErrorEnum.Unknown: //intended fallthrough
+    case APICheckConnectionError.FailedToLookupOrganizationCompany: // intended fallthrough
+    case APICheckConnectionError.Unknown: // intended fallthrough
     default:
       return $localize`Der skete en fejl ifm. tjek for forbindelsen til FK Organisation. Genindlæs venligst siden for at prøve igen.`;
   }
@@ -170,6 +171,7 @@ function handleAccessError(error: APIStsOrganizationAccessStatusResponseDTO.Erro
 function mapChangelogModel(changelog: APIStsOrganizationChangeLogResponseDTO): FkOrgChangeLogModel {
   return {
     ...changelog,
+    user: changelog.user ?? undefined,
     consequences: changelog.consequences?.map((unit) => adaptFkOrganizationUnit(unit)) ?? [],
   };
 }

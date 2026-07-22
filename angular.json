@@ -140,7 +140,6 @@
               "namedChunks": true,
               "vendorChunk": true,
               "extractLicenses": false,
-              "outputHashing": "none",
               "optimization": false,
               "buildOptimizer": false,
               "budgets": [],
@@ -161,7 +160,6 @@
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true,
-              "outputHashing": "none",
               "budgets": [],
               "fileReplacements": [
                 {
@@ -180,7 +178,6 @@
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true,
-              "outputHashing": "none",
               "budgets": []
             },
             "da": {
@@ -206,10 +203,15 @@
         "extract-i18n": {
           "builder": "ng-extract-i18n-merge:ng-extract-i18n-merge",
           "options": {
-            "browserTarget": "kitos-web:build",
             "format": "xlf",
             "outputPath": "src/locale",
-            "targetFiles": ["messages.xlf", "messages.da.xlf"]
+            "targetFiles": [
+              "messages.xlf",
+              "messages.da.xlf"
+            ],
+            "buildTarget": "kitos-web:build",
+            "prettyNestedTags": true,
+            "sort": "stableAppendNew"
           }
         },
         "lint": {
@@ -236,6 +238,32 @@
           }
         }
       }
+    }
+  },
+  "schematics": {
+    "@schematics/angular:component": {
+      "type": "component"
+    },
+    "@schematics/angular:directive": {
+      "type": "directive"
+    },
+    "@schematics/angular:service": {
+      "type": "service"
+    },
+    "@schematics/angular:guard": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:interceptor": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:module": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:pipe": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:resolver": {
+      "typeSeparator": "."
     }
   }
 }

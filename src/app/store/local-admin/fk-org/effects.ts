@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { catchError, combineLatestWith, map, mergeMap, of, switchMap } from 'rxjs';
-import { APIV2StsOrganizationSynchronizationInternalINTERNALService } from 'src/app/api/v2';
+import { StsOrganizationSynchronizationInternalV2Service } from 'src/app/api/v2';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectOrganizationUuid } from '../../user-store/selectors';
 import { FkOrgActions } from './actions';
@@ -12,8 +12,8 @@ export class FkOrgEffects {
   constructor(
     private actions$: Actions,
     private store: Store,
-    @Inject(APIV2StsOrganizationSynchronizationInternalINTERNALService)
-    private apiService: APIV2StsOrganizationSynchronizationInternalINTERNALService,
+    @Inject(StsOrganizationSynchronizationInternalV2Service)
+    private apiService: StsOrganizationSynchronizationInternalV2Service,
   ) {}
 
   getSynchronizationStatus$ = createEffect(() => {
@@ -52,7 +52,10 @@ export class FkOrgEffects {
       combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       switchMap(([{ request }, organizationUuid]) =>
         this.apiService
-          .postSingleStsOrganizationSynchronizationInternalV2CreateConnection({ organizationUuid, request })
+          .postSingleStsOrganizationSynchronizationInternalV2CreateConnection({
+            organizationUuid,
+            aPIConnectToStsOrganizationRequestDTO: request,
+          })
           .pipe(
             map(() => FkOrgActions.createConnectionSuccess()),
             catchError(() => of(FkOrgActions.createConnectionError())),
@@ -85,7 +88,10 @@ export class FkOrgEffects {
       combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       switchMap(([{ request }, organizationUuid]) =>
         this.apiService
-          .putSingleStsOrganizationSynchronizationInternalV2UpdateConnection({ organizationUuid, request })
+          .putSingleStsOrganizationSynchronizationInternalV2UpdateConnection({
+            organizationUuid,
+            aPIConnectToStsOrganizationRequestDTO: request,
+          })
           .pipe(
             map(() => FkOrgActions.updateConnectionSuccess()),
             catchError(() => of(FkOrgActions.updateConnectionError())),
@@ -117,7 +123,7 @@ export class FkOrgEffects {
         this.apiService
           .deleteSingleStsOrganizationSynchronizationInternalV2Disconnect({
             organizationUuid,
-            request: { purgeUnusedExternalUnits },
+            aPIDisconnectFromStsOrganizationRequestDTO: { purgeUnusedExternalUnits },
           })
           .pipe(
             map(() => FkOrgActions.deleteConnectionSuccess()),

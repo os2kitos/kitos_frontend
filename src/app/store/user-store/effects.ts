@@ -5,15 +5,15 @@ import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { CookieService } from 'ngx-cookie';
 import { catchError, combineLatestWith, map, mergeMap, of, switchMap, tap, withLatestFrom } from 'rxjs';
-import { APIUserDTOApiReturnDTO, APIV1AuthorizeINTERNALService } from 'src/app/api/v1';
+import { AuthorizeService } from 'src/app/api/v1';
 import {
+  APIDefaultUserStartPreferenceChoice,
   APIOrganizationGridPermissionsResponseDTO,
-  APIUserResponseDTO,
-  APIV2PasswordResetInternalINTERNALService,
-  APIV2UsersInternalINTERNALService,
+  OrganizationGridInternalV2Service,
+  OrganizationsInternalV2Service,
+  PasswordResetInternalV2Service,
+  UsersInternalV2Service,
 } from 'src/app/api/v2';
-import { APIV2OrganizationGridInternalINTERNALService } from 'src/app/api/v2/api/v2OrganizationGridInternalINTERNAL.service';
-import { APIV2OrganizationsInternalINTERNALService } from 'src/app/api/v2/api/v2OrganizationsInternalINTERNAL.service';
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { StartPreferenceChoice } from 'src/app/shared/models/organization/organization-user/start-preference.model';
 import { UIRootConfig } from 'src/app/shared/models/ui-config/ui-root-config.model';
@@ -30,18 +30,18 @@ export class UserEffects {
   constructor(
     private store: Store,
     private actions$: Actions,
-    @Inject(APIV1AuthorizeINTERNALService)
-    private authorizeService: APIV1AuthorizeINTERNALService,
+    @Inject(AuthorizeService)
+    private authorizeService: AuthorizeService,
     private router: Router,
     private cookieService: CookieService,
-    @Inject(APIV2OrganizationGridInternalINTERNALService)
-    private organizationGridService: APIV2OrganizationGridInternalINTERNALService,
-    @Inject(APIV2OrganizationsInternalINTERNALService)
-    private organizationInternalService: APIV2OrganizationsInternalINTERNALService,
-    @Inject(APIV2PasswordResetInternalINTERNALService)
-    private resetPasswordService: APIV2PasswordResetInternalINTERNALService,
-    @Inject(APIV2UsersInternalINTERNALService)
-    private userInternalService: APIV2UsersInternalINTERNALService,
+    @Inject(OrganizationGridInternalV2Service)
+    private organizationGridService: OrganizationGridInternalV2Service,
+    @Inject(OrganizationsInternalV2Service)
+    private organizationInternalService: OrganizationsInternalV2Service,
+    @Inject(PasswordResetInternalV2Service)
+    private resetPasswordService: PasswordResetInternalV2Service,
+    @Inject(UsersInternalV2Service)
+    private userInternalService: UsersInternalV2Service,
   ) {}
 
   login$ = createEffect(() => {
@@ -52,7 +52,7 @@ export class UserEffects {
       mergeMap(({ login: { email, password, remember } }) =>
         this.authorizeService
           .postSingleAuthorizePostLogin({
-            loginDto: {
+            aPILoginDTO: {
               email,
               password,
               rememberMe: remember,
@@ -60,7 +60,7 @@ export class UserEffects {
           })
           .pipe(
             tap(() => this.cookieService.removeAll()),
-            map((userDTO: APIUserDTOApiReturnDTO) => UserActions.loginSuccess(adaptUser(userDTO.response))),
+            map((userDTO) => UserActions.loginSuccess(adaptUser(userDTO.response))),
             catchError(() => of(UserActions.loginError())),
           ),
       ),
@@ -163,7 +163,10 @@ export class UserEffects {
       combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       switchMap(([{ request }, organizationUuid]) =>
         this.organizationInternalService
-          .patchSingleOrganizationsInternalV2PatchOrganization({ organizationUuid, requestDto: request })
+          .patchSingleOrganizationsInternalV2PatchOrganization({
+            organizationUuid,
+            aPIOrganizationUpdateRequestDTO: request,
+          })
           .pipe(
             map((organizationResponseDto) => UserActions.patchOrganizationSuccess(organizationResponseDto)),
             catchError(() => of(UserActions.patchOrganizationError())),
@@ -176,10 +179,14 @@ export class UserEffects {
     return this.actions$.pipe(
       ofType(UserActions.resetPasswordRequest),
       switchMap(({ email }) =>
-        this.resetPasswordService.postSinglePasswordResetInternalV2RequestPasswordReset({ request: { email } }).pipe(
-          map(() => UserActions.resetPasswordRequestSuccess(email)),
-          catchError(() => of(UserActions.resetPasswordRequestError())),
-        ),
+        this.resetPasswordService
+          .postSinglePasswordResetInternalV2RequestPasswordReset({
+            aPIRequestPasswordResetRequestDTO: { email },
+          })
+          .pipe(
+            map(() => UserActions.resetPasswordRequestSuccess(email)),
+            catchError(() => of(UserActions.resetPasswordRequestError())),
+          ),
       ),
     );
   });
@@ -191,7 +198,7 @@ export class UserEffects {
         this.resetPasswordService
           .postSinglePasswordResetInternalV2PostPasswordReset({
             requestId,
-            request: { password },
+            aPIResetPasswordRequestDTO: { password },
           })
           .pipe(
             map(() => UserActions.resetPasswordSuccess()),
@@ -266,12 +273,12 @@ export class UserEffects {
   ): boolean {
     const startPageValue = userDefaultStartPage.value;
     switch (startPageValue) {
-      case APIUserResponseDTO.DefaultUserStartPreferenceEnum.ItSystemCatalog:
-      case APIUserResponseDTO.DefaultUserStartPreferenceEnum.ItSystemUsage:
+      case APIDefaultUserStartPreferenceChoice.ItSystemCatalog:
+      case APIDefaultUserStartPreferenceChoice.ItSystemUsage:
         return !uiRootConfig.showItSystemModule;
-      case APIUserResponseDTO.DefaultUserStartPreferenceEnum.ItContract:
+      case APIDefaultUserStartPreferenceChoice.ItContract:
         return !uiRootConfig.showItContractModule;
-      case APIUserResponseDTO.DefaultUserStartPreferenceEnum.DataProcessing:
+      case APIDefaultUserStartPreferenceChoice.DataProcessing:
         return !uiRootConfig.showDataProcessing;
       default:
         return false;
@@ -286,17 +293,17 @@ export class UserEffects {
   private getUserDefaultStartPagePath(userDefaultStartPage: StartPreferenceChoice): string {
     const startPageValue = userDefaultStartPage.value;
     switch (startPageValue) {
-      case APIUserResponseDTO.DefaultUserStartPreferenceEnum.StartSite:
+      case APIDefaultUserStartPreferenceChoice.StartSite:
         return AppPath.root;
-      case APIUserResponseDTO.DefaultUserStartPreferenceEnum.Organization:
+      case APIDefaultUserStartPreferenceChoice.Organization:
         return `${AppPath.organization}/${AppPath.structure}`;
-      case APIUserResponseDTO.DefaultUserStartPreferenceEnum.ItSystemCatalog:
+      case APIDefaultUserStartPreferenceChoice.ItSystemCatalog:
         return `${AppPath.itSystems}/${AppPath.itSystemCatalog}`;
-      case APIUserResponseDTO.DefaultUserStartPreferenceEnum.ItSystemUsage:
+      case APIDefaultUserStartPreferenceChoice.ItSystemUsage:
         return `${AppPath.itSystems}/${AppPath.itSystemUsages}`;
-      case APIUserResponseDTO.DefaultUserStartPreferenceEnum.ItContract:
+      case APIDefaultUserStartPreferenceChoice.ItContract:
         return AppPath.itContracts;
-      case APIUserResponseDTO.DefaultUserStartPreferenceEnum.DataProcessing:
+      case APIDefaultUserStartPreferenceChoice.DataProcessing:
         return AppPath.dataProcessing;
       default:
         throw new Error(`Unknown start page: ${startPageValue}`);

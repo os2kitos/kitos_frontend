@@ -1,24 +1,29 @@
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
-import { APIGDPRRegistrationsResponseDTO, APIGDPRWriteRequestDTO } from 'src/app/api/v2';
+import { APIGDPRWriteRequestDTO, APIYesNoDontKnowChoice } from 'src/app/api/v2';
 import { BaseAccordionComponent } from 'src/app/shared/base/base-accordion.component';
+import { TooltipComponent } from 'src/app/shared/components/tooltip/tooltip.component';
+import { ISMS_RESPONSIBLE_DISABLED_MESSAGE } from 'src/app/shared/constants/constants';
+import { itSystemUsageFields } from 'src/app/shared/models/field-permissions-blueprints.model';
 import {
   RiskAssessmentResultOptions,
   mapRiskAssessmentEnum,
   riskAssessmentResultOptions,
 } from 'src/app/shared/models/it-system-usage/gdpr/risk-assessment-result';
+import { SimpleLink } from 'src/app/shared/models/SimpleLink.model';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import {
-  YesNoDontKnowOption,
-  mapToYesNoDontKnowEnum,
-  yesNoDontKnowOptions,
-} from 'src/app/shared/models/yes-no-dont-know.model';
+  YesNoDontKnowIrrelevantOption,
+  mapToYesNoDontKnowIrrelevantEnum,
+  yesNoDontKnowIrrelevantOptions,
+} from 'src/app/shared/models/yes-no-dont-know-irrelevant.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
-import { selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors';
+import { selectITSystemUsageFieldPermissions, selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors';
 import {
   selectITSystemUsageEnableGdprConductedRiskAssessment,
   selectITSystemUsageEnableGdprPlannedRiskAssessmentDate,
@@ -28,7 +33,7 @@ import { DatePickerComponent } from '../../../../../../shared/components/datepic
 import { DropdownComponent } from '../../../../../../shared/components/dropdowns/dropdown/dropdown.component';
 import { StandardVerticalContentGridComponent } from '../../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { TextAreaComponent } from '../../../../../../shared/components/textarea/textarea.component';
-import { EditUrlSectionComponent } from '../edit-url-section/edit-url-section.component';
+import { EditUrlSectionComponent } from '../../../../shared/edit-url-section/edit-url-section.component';
 
 @Component({
   selector: 'app-gdpr-risk-assessment-section',
@@ -39,69 +44,88 @@ import { EditUrlSectionComponent } from '../edit-url-section/edit-url-section.co
     FormsModule,
     ReactiveFormsModule,
     StandardVerticalContentGridComponent,
-    NgIf,
     DatePickerComponent,
     DropdownComponent,
     EditUrlSectionComponent,
     TextAreaComponent,
     AsyncPipe,
+    TooltipComponent,
   ],
 })
 export class GdprRiskAssessmentSectionComponent extends BaseAccordionComponent implements OnInit {
   @Output() public noPermissions = new EventEmitter<AbstractControl[]>();
   @Input() disableLinkControl!: Observable<void>;
 
+  public readonly supplierMessage = ISMS_RESPONSIBLE_DISABLED_MESSAGE;
+
   private readonly currentGdpr$ = this.store.select(selectItSystemUsageGdpr).pipe(filterNullish());
   public readonly isRiskAssessmentFalse$ = this.currentGdpr$.pipe(
-    map((gdpr) => gdpr.riskAssessmentConducted !== APIGDPRRegistrationsResponseDTO.RiskAssessmentConductedEnum.Yes)
+    map((gdpr) => gdpr.riskAssessmentConducted !== APIYesNoDontKnowChoice.Yes),
   );
-  public readonly selectRiskDocumentation$ = this.currentGdpr$.pipe(map((gdpr) => gdpr.riskAssessmentDocumentation));
+  public readonly selectRiskDocumentation$ = this.currentGdpr$.pipe(
+    map((gdpr) =>
+      gdpr.riskAssessmentDocumentation
+        ? ({ url: gdpr.riskAssessmentDocumentation.url, name: gdpr.riskAssessmentDocumentation.name } as SimpleLink)
+        : undefined,
+    ),
+  );
   public disableDirectoryDocumentationControl = false;
 
   public readonly enablePlannedRiskAssessmentDateField$ = this.store.select(
-    selectITSystemUsageEnableGdprPlannedRiskAssessmentDate
+    selectITSystemUsageEnableGdprPlannedRiskAssessmentDate,
   );
   public readonly conductedRiskAssessmentEnabled$ = this.store.select(
-    selectITSystemUsageEnableGdprConductedRiskAssessment
+    selectITSystemUsageEnableGdprConductedRiskAssessment,
   );
 
-  public readonly yesNoDontKnowOptions = yesNoDontKnowOptions;
+  public readonly yesNoDontKnowIrrelevantOptions = yesNoDontKnowIrrelevantOptions;
   public readonly riskAssessmentResultOptions = riskAssessmentResultOptions;
   public readonly riskAssessmentFormGroup = new FormGroup(
     {
       plannedDateControl: new FormControl<Date | undefined>(undefined),
-      yesNoDontKnowControl: new FormControl<YesNoDontKnowOption | undefined>(undefined),
+      riskAssessmentConductedControl: new FormControl<YesNoDontKnowIrrelevantOption | undefined>(undefined),
       conductedDateControl: new FormControl<Date | undefined>(undefined),
-      assessmentResultControl: new FormControl<RiskAssessmentResultOptions | undefined>(undefined),
+      assessmentResultControl: new FormControl<RiskAssessmentResultOptions | undefined>({
+        value: undefined,
+        disabled: true,
+      }),
       notesControl: new FormControl<string | undefined>(undefined),
     },
-    { updateOn: 'blur' }
+    { updateOn: 'blur' },
+  );
+
+  public readonly riskAssessmentModifyEnabled$ = this.store.select(
+    selectITSystemUsageFieldPermissions(itSystemUsageFields.gdpr.riskAssessment),
   );
 
   constructor(private readonly store: Store) {
     super();
   }
   ngOnInit(): void {
-    this.isRiskAssessmentFalse$.subscribe((isYesNoDontKnowFalse) => {
-      if (isYesNoDontKnowFalse) {
-        this.riskAssessmentFormGroup.controls.conductedDateControl.disable();
-        this.riskAssessmentFormGroup.controls.assessmentResultControl.disable();
-        this.riskAssessmentFormGroup.controls.notesControl.disable();
-        this.disableDirectoryDocumentationControl = true;
-      } else {
-        this.riskAssessmentFormGroup.controls.conductedDateControl.enable();
-        this.riskAssessmentFormGroup.controls.assessmentResultControl.enable();
-        this.riskAssessmentFormGroup.controls.notesControl.enable();
-        this.disableDirectoryDocumentationControl = false;
-      }
-    });
+    this.isRiskAssessmentFalse$
+      .pipe(concatLatestFrom(() => this.riskAssessmentModifyEnabled$))
+      .subscribe(([isYesNoDontKnowFalse, isRiskAssessmentModifyEnabled]) => {
+        if (isYesNoDontKnowFalse) {
+          this.riskAssessmentFormGroup.controls.conductedDateControl.disable();
+          this.riskAssessmentFormGroup.controls.assessmentResultControl.disable();
+          this.riskAssessmentFormGroup.controls.notesControl.disable();
+          this.disableDirectoryDocumentationControl = true;
+        } else {
+          this.riskAssessmentFormGroup.controls.conductedDateControl.enable();
+          if (isRiskAssessmentModifyEnabled) {
+            this.riskAssessmentFormGroup.controls.assessmentResultControl.enable();
+          }
+          this.riskAssessmentFormGroup.controls.notesControl.enable();
+          this.disableDirectoryDocumentationControl = false;
+        }
+      });
 
     this.currentGdpr$.subscribe((gdpr) => {
       this.riskAssessmentFormGroup.patchValue({
         plannedDateControl: gdpr.plannedRiskAssessmentDate ? new Date(gdpr.plannedRiskAssessmentDate) : undefined,
-        yesNoDontKnowControl: mapToYesNoDontKnowEnum(gdpr.riskAssessmentConducted),
+        riskAssessmentConductedControl: mapToYesNoDontKnowIrrelevantEnum(gdpr.riskAssessmentConducted),
         conductedDateControl: gdpr.riskAssessmentConductedDate ? new Date(gdpr.riskAssessmentConductedDate) : undefined,
-        assessmentResultControl: mapRiskAssessmentEnum(gdpr.riskAssessmentResult),
+        assessmentResultControl: mapRiskAssessmentEnum(gdpr.riskAssessmentResult ?? undefined),
         notesControl: gdpr.riskAssessmentNotes,
       });
     });

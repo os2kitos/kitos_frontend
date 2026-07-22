@@ -16,7 +16,7 @@ import { ItContractDataProcessingRegistrationsComponentStore } from './it-contra
 import { CardComponent } from '../../../../shared/components/card/card.component';
 import { CardHeaderComponent } from '../../../../shared/components/card-header/card-header.component';
 import { StandardVerticalContentGridComponent } from '../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
-import { NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { NativeTableComponent } from '../../../../shared/components/native-table/native-table.component';
 import { ContentSpaceBetweenComponent } from '../../../../shared/components/content-space-between/content-space-between.component';
 import { DetailsPageLinkComponent } from '../../../../shared/components/details-page-link/details-page-link.component';
@@ -34,17 +34,15 @@ import { CollectionExtensionButtonComponent } from '../../../../shared/component
     CardComponent,
     CardHeaderComponent,
     StandardVerticalContentGridComponent,
-    NgIf,
     NativeTableComponent,
-    NgFor,
     ContentSpaceBetweenComponent,
     DetailsPageLinkComponent,
     IconButtonComponent,
     TrashcanIconComponent,
     EmptyStateComponent,
     CollectionExtensionButtonComponent,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class ItContractDprComponent extends BaseComponent {
   public readonly dataProcessingRegistrations$ = this.store

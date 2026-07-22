@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { BaseDropdownComponent } from '../../../base/base-dropdown.component';
 import { Dictionary } from '../../../models/primitives/dictionary.model';
 import { TreeNodeModel } from '../../../models/tree-node.model';
-import { NgIf } from '@angular/common';
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgSelectComponent, NgOptionTemplateDirective } from '@ng-select/ng-select';
 import { ParagraphComponent } from '../../paragraph/paragraph.component';
@@ -13,14 +13,13 @@ import { LoadingComponent } from '../../loading/loading.component';
   templateUrl: './tree-node-dropdown.component.html',
   styleUrls: ['./tree-node-dropdown.component.scss'],
   imports: [
-    NgIf,
     FormsModule,
     ReactiveFormsModule,
     NgSelectComponent,
     NgOptionTemplateDirective,
     ParagraphComponent,
-    LoadingComponent,
-  ],
+    LoadingComponent
+],
 })
 export class TreeNodeDropdownComponent extends BaseDropdownComponent<TreeNodeModel> implements OnInit {
   @Input() public appendTo: string = '';

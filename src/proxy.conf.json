@@ -8,5 +8,10 @@
     "target": "https://kitos-dev.strongminds.dk/",
     "secure": false,
     "changeOrigin": true
+  },
+  "/LoginHandler.ashx": {
+    "target": "https://kitos-dev.strongminds.dk/",
+    "secure": false,
+    "changeOrigin": true
   }
 }

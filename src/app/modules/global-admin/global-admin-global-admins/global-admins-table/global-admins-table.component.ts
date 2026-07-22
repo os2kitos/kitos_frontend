@@ -4,7 +4,7 @@ import { ShallowUser } from 'src/app/shared/models/userV2.model';
 import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
 import { GlobalAdminActions } from 'src/app/store/global-admin/actions';
 import { selectAllGlobalAdmins, selectGlobalAdminsLoading } from 'src/app/store/global-admin/selectors';
-import { NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { LoadingComponent } from '../../../../shared/components/loading/loading.component';
 import { NativeTableComponent } from '../../../../shared/components/native-table/native-table.component';
 import { ContentSpaceBetweenComponent } from '../../../../shared/components/content-space-between/content-space-between.component';
@@ -18,17 +18,15 @@ import { TrashcanIconComponent } from '../../../../shared/components/icons/trash
   templateUrl: './global-admins-table.component.html',
   styleUrl: './global-admins-table.component.scss',
   imports: [
-    NgIf,
     LoadingComponent,
     NativeTableComponent,
-    NgFor,
     ContentSpaceBetweenComponent,
     ParagraphComponent,
     TableRowActionsComponent,
     IconButtonComponent,
     TrashcanIconComponent,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class GlobalAdminsTableComponent implements OnInit {
   constructor(

@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInput } from '@angular/material/input';
@@ -16,7 +16,6 @@ import { TooltipComponent } from '../tooltip/tooltip.component';
   templateUrl: 'textbox.component.html',
   styleUrls: ['textbox.component.scss'],
   imports: [
-    NgIf,
     MatFormField,
     FormsModule,
     ReactiveFormsModule,
@@ -29,8 +28,8 @@ import { TooltipComponent } from '../tooltip/tooltip.component';
     TrashcanIconComponent,
     XIconComponent,
     TooltipComponent,
-    InfoIconComponent,
-  ],
+    InfoIconComponent
+],
 })
 export class TextBoxComponent extends BaseFormComponent<string> {
   @Input() public clearable = false;

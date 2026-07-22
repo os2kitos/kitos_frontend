@@ -9,7 +9,7 @@ import { selectAllGlobalAdmins, selectGlobalAdminsLoading } from 'src/app/store/
 import { map } from 'rxjs';
 import { ShallowUser } from 'src/app/shared/models/userV2.model';
 import { DialogComponent } from '../../../../shared/components/dialogs/dialog/dialog.component';
-import { NgIf, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { LoadingComponent } from '../../../../shared/components/loading/loading.component';
 import { UserDropdownComponent } from '../../../../shared/components/dropdowns/user-dropdown/user-dropdown.component';
 import { DialogActionsComponent } from '../../../../shared/components/dialogs/dialog-actions/dialog-actions.component';
@@ -21,15 +21,14 @@ import { ButtonComponent } from '../../../../shared/components/buttons/button/bu
   styleUrl: './create-global-admin-dialog.component.scss',
   imports: [
     DialogComponent,
-    NgIf,
     LoadingComponent,
     UserDropdownComponent,
     FormsModule,
     ReactiveFormsModule,
     DialogActionsComponent,
     ButtonComponent,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class CreateGlobalAdminDialogComponent extends BaseComponent implements OnInit {
   public formGroup = new FormGroup({

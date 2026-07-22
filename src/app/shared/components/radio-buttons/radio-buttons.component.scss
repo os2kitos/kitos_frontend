@@ -36,19 +36,19 @@
 
   .mat-mdc-radio-button.mat-accent {
     // Selected state
-    --mdc-radio-selected-focus-icon-color: #{theme.$color-primary-base};
-    --mdc-radio-selected-hover-icon-color: #{theme.$color-primary-base};
-    --mdc-radio-selected-icon-color: #{theme.$color-primary-base};
-    --mdc-radio-selected-pressed-icon-color: #{theme.$color-primary-base};
+    --mat-radio-selected-focus-icon-color: #{theme.$color-primary-base};
+    --mat-radio-selected-hover-icon-color: #{theme.$color-primary-base};
+    --mat-radio-selected-icon-color: #{theme.$color-primary-base};
+    --mat-radio-selected-pressed-icon-color: #{theme.$color-primary-base};
 
     //Unselected state
-    --mdc-radio-unselected-focus-icon-color: #{theme.$color-primary-base};
-    --mdc-radio-unselected-hover-icon-color: #{theme.$color-primary-base};
-    --mdc-radio-unselected-icon-color: #{theme.$color-neutral-60};
-    --mdc-radio-unselected-pressed-icon-color: #{theme.$color-primary-base};
+    --mat-radio-unselected-focus-icon-color: #{theme.$color-primary-base};
+    --mat-radio-unselected-hover-icon-color: #{theme.$color-primary-base};
+    --mat-radio-unselected-icon-color: #{theme.$color-neutral-60};
+    --mat-radio-unselected-pressed-icon-color: #{theme.$color-primary-base};
 
     //disabled state
-    --mdc-radio-disabled-selected-icon-color: #{theme.$color-neutral-base};
-    --mdc-radio-disabled-unselected-icon-color: #{theme.$color-neutral-base};
+    --mat-radio-disabled-selected-icon-color: #{theme.$color-neutral-base};
+    --mat-radio-disabled-unselected-icon-color: #{theme.$color-neutral-base};
   }
 }

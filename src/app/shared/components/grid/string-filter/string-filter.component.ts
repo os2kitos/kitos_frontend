@@ -5,9 +5,9 @@ import { CompositeFilterDescriptor, FilterDescriptor } from '@progress/kendo-dat
 import { TextBoxComponent } from 'src/app/shared/components/textbox/textbox.component';
 import { initializeApplyFilterSubscription } from 'src/app/shared/helpers/grid-filter.helpers';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
-import { AppBaseFilterCellComponent } from '../app-base-filter-cell.component';
-import { TextBoxComponent as TextBoxComponent_1 } from '../../textbox/textbox.component';
 import { AfterValueChangedDirective } from '../../../directives/after-value-changed.directive';
+import { TextBoxComponent as TextBoxComponent_1 } from '../../textbox/textbox.component';
+import { AppBaseFilterCellComponent } from '../app-base-filter-cell.component';
 
 @Component({
   selector: 'app-string-filter',
@@ -23,10 +23,7 @@ export class StringFilterComponent extends AppBaseFilterCellComponent implements
 
   public value: string = '';
 
-  constructor(
-    filterService: FilterService,
-    private actions$: Actions,
-  ) {
+  constructor(filterService: FilterService, private actions$: Actions) {
     super(filterService);
   }
 
@@ -39,20 +36,21 @@ export class StringFilterComponent extends AppBaseFilterCellComponent implements
 
     if (this.entityType) {
       this.subscriptions.add(
-        initializeApplyFilterSubscription(this.actions$, this.entityType, this.column.field, updateMethod),
+        initializeApplyFilterSubscription(this.actions$, this.entityType, this.column.field, updateMethod)
       );
     }
   }
 
   public valueChange(value: string) {
+    const trimmedValue = value?.trim() ?? '';
     this.applyFilter(
-      !value
+      !trimmedValue
         ? this.removeFilter(this.column.field)
         : this.updateFilter({
             field: this.column.field,
             operator: 'contains',
-            value: value,
-          }),
+            value: trimmedValue,
+          })
     );
   }
 }

@@ -1,10 +1,10 @@
 import { EntityState } from '@ngrx/entity';
 import { APIBusinessRoleDTO } from 'src/app/api/v1';
 import {
+  APICombinedPermissionsResponseDTO,
   APIItSystemUsageResponseDTO,
   APIOrganizationGridConfigurationResponseDTO,
   APIResourceCollectionPermissionsResponseDTO,
-  APIResourcePermissionsResponseDTO,
 } from 'src/app/api/v2';
 import { Cached } from 'src/app/shared/models/cache-item.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
@@ -23,11 +23,12 @@ export interface ITSystemUsageState extends EntityState<ITSystemUsage> {
 
   itSystemUsage: APIItSystemUsageResponseDTO | undefined;
   itSystemUsageLoading: boolean;
-  permissions: APIResourcePermissionsResponseDTO | undefined;
+  permissions: APICombinedPermissionsResponseDTO | undefined;
   collectionPermissions: APIResourceCollectionPermissionsResponseDTO | undefined;
 
   isRemoving: boolean;
   lastSeenGridConfig: APIOrganizationGridConfigurationResponseDTO | undefined;
 
   isPatching: boolean;
+  isCreating: boolean;
 }

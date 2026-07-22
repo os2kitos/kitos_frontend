@@ -8,7 +8,7 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { UserActions } from 'src/app/store/user-store/actions';
 import { ResetPasswordComponentStore } from './reset-password.component-store';
-import { NgIf, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { LoadingComponent } from '../../../shared/components/loading/loading.component';
 import { CardComponent } from '../../../shared/components/card/card.component';
 import { StandardVerticalContentGridComponent } from '../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
@@ -22,7 +22,6 @@ import { ButtonComponent } from '../../../shared/components/buttons/button/butto
   styleUrl: './reset-password.component.scss',
   providers: [ResetPasswordComponentStore],
   imports: [
-    NgIf,
     LoadingComponent,
     CardComponent,
     StandardVerticalContentGridComponent,
@@ -32,8 +31,8 @@ import { ButtonComponent } from '../../../shared/components/buttons/button/butto
     ParagraphComponent,
     ButtonComponent,
     RouterLink,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class ResetPasswordComponent extends BaseComponent implements OnInit {
   public readonly requestId$: Observable<string> = this.route.params.pipe(map((params) => params['id']));

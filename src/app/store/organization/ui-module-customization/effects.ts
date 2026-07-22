@@ -8,7 +8,7 @@ import {
   APICustomizedUINodeResponseDTO,
   APIUIModuleCustomizationRequestDTO,
   APIUIModuleCustomizationResponseDTO,
-  APIV2OrganizationsInternalINTERNALService,
+  OrganizationsInternalV2Service,
 } from 'src/app/api/v2';
 import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
 import { UIModuleConfig } from 'src/app/shared/models/ui-config/ui-module-config.model';
@@ -23,8 +23,8 @@ import { selectHasValidUIModuleConfigCache } from './selectors';
 @Injectable()
 export class UIModuleCustomizationEffects {
   constructor(
-    @Inject(APIV2OrganizationsInternalINTERNALService)
-    private organizationInternalService: APIV2OrganizationsInternalINTERNALService,
+    @Inject(OrganizationsInternalV2Service)
+    private organizationInternalService: OrganizationsInternalV2Service,
     private actions$: Actions,
     private store: Store,
     private uiConfigService: UIConfigService,
@@ -83,7 +83,7 @@ export class UIModuleCustomizationEffects {
                 .putSingleOrganizationsInternalV2PutUIModuleCustomization({
                   organizationUuid,
                   moduleName,
-                  dto: requestDto,
+                  aPIUIModuleCustomizationRequestDTO: requestDto,
                 })
                 .pipe(
                   map((uiModuleCustomizationDto) =>
@@ -208,10 +208,10 @@ export class UIModuleCustomizationEffects {
     response: APICustomizedUINodeResponseDTO[],
     module: UIModuleConfigKey,
   ): APICustomizedUINodeResponseDTO[] {
-    const allKeys = this.uiConfigService.getAllKeysOfBlueprint(module);
+    const allNodes = this.uiConfigService.getAllNodesOfBlueprint(module);
     const existingKeys = new Set(response.map((node) => node.key));
-    const missingKeys = allKeys.filter((key) => !existingKeys.has(key));
-    const nodesToAdd = missingKeys.map((key) => ({ key, enabled: true }));
+    const missingNodes = allNodes.filter((node) => node.fullKey !== undefined && !existingKeys.has(node.fullKey));
+    const nodesToAdd = missingNodes.map((node) => ({ key: node.fullKey!, enabled: !node.disableByDefault }));
     return [...response, ...nodesToAdd];
   }
 }

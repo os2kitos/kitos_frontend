@@ -57,7 +57,7 @@ describe('organization-structure', () => {
       statusCode: 200,
       body: {},
     }).as('deleteUnit');
-    cy.contains('test2').click();
+    cy.contains('Test - 1').click();
 
     cy.getByDataCy('edit-button').click();
     cy.getByDataCy('delete-unit-button').click();
@@ -84,7 +84,7 @@ describe('organization-structure', () => {
     cy.getByDataCy('edit-button').click();
 
     cy.getByDataCy('select-all-button').click();
-    cy.dropdownByCy('transfer-to-unit-select', 'test2', true);
+    cy.dropdownByCy('transfer-to-unit-select', 'Test - 1', true);
     cy.getByDataCy('actions-snackbar').should('exist');
     cy.getByDataCy('transfer-selected-button').click();
     const message = 'Denne handling kan ikke fortrydes.';

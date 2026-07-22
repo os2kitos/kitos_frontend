@@ -13,7 +13,7 @@ import {
 } from 'src/app/store/data-processing/selectors';
 import { CreateProcessorDialogComponent } from './create-processor-dialog/create-processor-dialog.component';
 import { StandardVerticalContentGridComponent } from '../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
-import { NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { NativeTableComponent } from '../../../../../shared/components/native-table/native-table.component';
 import { ParagraphComponent } from '../../../../../shared/components/paragraph/paragraph.component';
 import { ContentSpaceBetweenComponent } from '../../../../../shared/components/content-space-between/content-space-between.component';
@@ -28,17 +28,15 @@ import { CollectionExtensionButtonComponent } from '../../../../../shared/compon
   styleUrl: './processors-table.component.scss',
   imports: [
     StandardVerticalContentGridComponent,
-    NgIf,
     NativeTableComponent,
-    NgFor,
     ParagraphComponent,
     ContentSpaceBetweenComponent,
     IconButtonComponent,
     TrashcanIconComponent,
     EmptyStateComponent,
     CollectionExtensionButtonComponent,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class ProcessorsTableComponent extends BaseComponent {
   public readonly processors$ = this.store.select(selectDataProcessingProcessors).pipe(filterNullish());

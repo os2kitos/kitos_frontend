@@ -1,100 +1,115 @@
-<app-card *ngIf="associatedContractsEnabled$ | async">
-  <app-card-header title="Tilknyttede kontrakter" helpTextKey="it-system.usage.contracts" i18n-title></app-card-header>
-  <app-loading *ngIf="isLoading$ | async"></app-loading>
-  <app-standard-vertical-content-grid *ngIf="(isLoading$ | async) === false">
-    <ng-container *ngIf="anyContracts$ | async">
-      <app-native-table>
-        <thead>
-          <th i18n>Kontrakt</th>
-          <th i18n>Status</th>
-          <th i18n>Kontrakttype</th>
-          <th i18n>Leverandør</th>
-          <th i18n>Drift</th>
-          <th i18n>Indgået</th>
-          <th i18n>Udløber</th>
-          <th i18n>Opsagt</th>
-        </thead>
-        <tbody>
-          <tr *ngFor="let contract of contractRows$ | async">
-            <td>
-              <app-details-page-link linkFontSize="small" itemType="it-contract" [itemPath]="contract.uuid">{{
-                contract.name
-              }}</app-details-page-link>
-            </td>
-            <td>
-              <app-status-chip type="it-contract" [value]="contract.general.validity.valid"></app-status-chip>
-            </td>
-            <td>
-              <app-paragraph paragraphSize="small" [cropOnOverflow]="true"
-                ><app-selected-option-type-text
-                  *ngIf="availableContractTypesDictionary$ | async as availableContractTypes"
-                  [selectedOption]="contract.general.contractType"
-                  [availableOptions]="availableContractTypes"
-                ></app-selected-option-type-text
-              ></app-paragraph>
-            </td>
-            <td>
-              <app-paragraph paragraphSize="small">{{ contract.supplier.organization?.name }}</app-paragraph>
-            </td>
-            <td>
-              <app-paragraph paragraphSize="small"
-                ><app-boolean-circle [value]="contract.hasOperation"></app-boolean-circle
-              ></app-paragraph>
-            </td>
-            <td>
-              <app-paragraph paragraphSize="small">{{ contract.general.validity.validFrom | appDate }}</app-paragraph>
-            </td>
-            <td>
-              <app-paragraph paragraphSize="small">{{ contract.general.validity.validTo | appDate }}</app-paragraph>
-            </td>
-            <td>
-              <app-paragraph paragraphSize="small">{{ contract.termination.terminatedAt | appDate }}</app-paragraph>
-            </td>
-          </tr>
-        </tbody>
-      </app-native-table>
-    </ng-container>
-    <app-standard-vertical-content-grid>
-      <app-empty-state
-        *ngIf="(anyContracts$ | async) === false"
-        text='Systemet er ikke omfattet af registreringer i modulet "IT Kontrakter"'
-        context="searchResult"
-        i18n-text
-      ></app-empty-state>
-      <app-collection-extension-button
-        *ngIf="contractCreationPermission$ | async"
-        (clicked)="openCreateAndRegisterContractDialog()"
-        data-cy="open-create-and-associate-contract-dialog-button"
-        text="Opret og registrer"
-        i18n-text
-      ></app-collection-extension-button>
-    </app-standard-vertical-content-grid>
-  </app-standard-vertical-content-grid>
-</app-card>
-<app-card *ngIf="(isLoading$ | async) === false && (contractToDetermineIsActiveEnabled$ | async)">
-  <app-card-header
-    title="Kontrakt der gør systemet aktivt"
-    helpTextKey="it-system.usage.contracts.primary"
-    i18n-title
-  ></app-card-header>
-
-  <app-paragraph *ngIf="(anyContracts$ | async) === false" paragraphSize="medium" i18n
-    >Systemet er ikke omfattet af registreringer i modulet "IT Kontrakter"</app-paragraph
-  >
-  <form class="contract-selection-form" *ngIf="anyContracts$ | async" [formGroup]="contractSelectionForm">
-    <app-dropdown
-      text="Vælg kontrakt"
-      i18n-text
-      valueField="uuid"
-      formName="mainContract"
-      [formGroup]="contractSelectionForm"
-      [data]="availableContractsForSelection$ | async"
-      (valueChange)="patchMainContract($event)"
-    ></app-dropdown>
-    <app-status-chip
-      *ngIf="mainContract$ | async"
-      type="it-contract"
-      [value]="mainContractIsValid$ | async"
-    ></app-status-chip>
-  </form>
-</app-card>
+@if (associatedContractsEnabled$ | async) {
+  <app-card>
+    <app-card-header title="Tilknyttede kontrakter" helpTextKey="it-system.usage.contracts" i18n-title></app-card-header>
+    @if (isLoading$ | async) {
+      <app-loading></app-loading>
+    }
+    @if ((isLoading$ | async) === false) {
+      <app-standard-vertical-content-grid>
+        @if (anyContracts$ | async) {
+          <app-native-table>
+            <thead>
+              <th i18n>Kontrakt</th>
+              <th i18n>Status</th>
+              <th i18n>Kontrakttype</th>
+              <th i18n>Leverandør</th>
+              <th i18n>Drift</th>
+              <th i18n>Indgået</th>
+              <th i18n>Udløber</th>
+              <th i18n>Opsagt</th>
+            </thead>
+            <tbody>
+              @for (contract of contractRows$ | async; track contract) {
+                <tr>
+                  <td>
+                    <app-details-page-link linkFontSize="small" itemType="it-contract" [itemPath]="contract.uuid">{{
+                      contract.name
+                    }}</app-details-page-link>
+                  </td>
+                  <td>
+                    <app-status-chip type="it-contract" [value]="contract.general.validity.valid"></app-status-chip>
+                  </td>
+                  <td>
+                    <app-paragraph paragraphSize="small" [cropOnOverflow]="true"
+                      ><app-selected-option-type-text
+                      [selectedOption]="contract.general.contractType ?? undefined"
+                      [availableOptions$]="availableContractTypesDictionary$"
+                      ></app-selected-option-type-text
+                    ></app-paragraph>
+                  </td>
+                  <td>
+                    <app-paragraph paragraphSize="small">{{ contract.supplier.organization?.name }}</app-paragraph>
+                  </td>
+                  <td>
+                    <app-paragraph paragraphSize="small"
+                      ><app-boolean-circle [value]="contract.hasOperation"></app-boolean-circle
+                    ></app-paragraph>
+                  </td>
+                  <td>
+                    <app-paragraph paragraphSize="small">{{ contract.general.validity.validFrom | appDate }}</app-paragraph>
+                  </td>
+                  <td>
+                    <app-paragraph paragraphSize="small">{{ contract.general.validity.validTo | appDate }}</app-paragraph>
+                  </td>
+                  <td>
+                    <app-paragraph paragraphSize="small">{{ contract.termination.terminatedAt | appDate }}</app-paragraph>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </app-native-table>
+        }
+        <app-standard-vertical-content-grid>
+          @if ((anyContracts$ | async) === false) {
+            <app-empty-state
+              text='Systemet er ikke omfattet af registreringer i modulet "IT Kontrakter"'
+              context="searchResult"
+              i18n-text
+            ></app-empty-state>
+          }
+          @if (contractCreationPermission$ | async) {
+            <app-collection-extension-button
+              (clicked)="openCreateAndRegisterContractDialog()"
+              data-cy="open-create-and-associate-contract-dialog-button"
+              text="Opret og registrer"
+              i18n-text
+            ></app-collection-extension-button>
+          }
+        </app-standard-vertical-content-grid>
+      </app-standard-vertical-content-grid>
+    }
+  </app-card>
+}
+@if ((isLoading$ | async) === false && (contractToDetermineIsActiveEnabled$ | async)) {
+  <app-card>
+    <app-card-header
+      title="Kontrakt der gør systemet aktivt"
+      helpTextKey="it-system.usage.contracts.primary"
+      i18n-title
+    ></app-card-header>
+    @if ((anyContracts$ | async) === false) {
+      <app-paragraph paragraphSize="medium" i18n
+        >Systemet er ikke omfattet af registreringer i modulet "IT Kontrakter"</app-paragraph
+        >
+      }
+      @if (anyContracts$ | async) {
+        <form class="contract-selection-form" [formGroup]="contractSelectionForm">
+          <app-dropdown
+            text="Vælg kontrakt"
+            i18n-text
+            valueField="uuid"
+            formName="mainContract"
+            [formGroup]="contractSelectionForm"
+            [data]="availableContractsForSelection$ | async"
+            (valueChange)="patchMainContract($event)"
+          ></app-dropdown>
+          @if (mainContract$ | async) {
+            <app-status-chip
+              type="it-contract"
+              [value]="mainContractIsValid$ | async"
+            ></app-status-chip>
+          }
+        </form>
+      }
+    </app-card>
+  }

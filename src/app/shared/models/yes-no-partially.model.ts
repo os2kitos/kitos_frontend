@@ -1,8 +1,8 @@
-import { APIGeneralDataResponseDTO } from 'src/app/api/v2';
+import { APIYesNoPartiallyChoice } from 'src/app/api/v2';
 
 export interface YesNoPartiallyOption {
   name: string;
-  value: YesNoPartiallyEnum;
+  value: APIYesNoPartiallyChoice;
 }
 
 export enum YesNoPartiallyEnum {
@@ -17,8 +17,6 @@ export const yesNoPartiallyOptions: YesNoPartiallyOption[] = [
   { name: $localize`Delvist`, value: YesNoPartiallyEnum.Partially },
 ];
 
-export function mapToYesNoPartiallyEnum(
-  value: APIGeneralDataResponseDTO.WebAccessibilityComplianceEnum | undefined,
-): YesNoPartiallyOption | undefined {
+export function mapToYesNoPartiallyEnum(value: APIYesNoPartiallyChoice | undefined): YesNoPartiallyOption | undefined {
   return yesNoPartiallyOptions.find((option) => option.value === value);
 }

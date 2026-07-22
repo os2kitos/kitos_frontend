@@ -2,9 +2,11 @@
   <app-standard-vertical-content-grid>
     <div>
       <app-textbox [formGroup]="formGroup" formName="key" text="Nøgle" i18n-text data-cy="key-input"> </app-textbox>
-      <div class="error-paragraph-align" *ngIf="keyExists$ | async">
+      @if(keyExists$ | async) {
+      <div class="error-paragraph-align">
         <app-paragraph color="error" i18n>Denne nøgle er allerede i brug</app-paragraph>
       </div>
+      }
     </div>
 
     <app-divider></app-divider>

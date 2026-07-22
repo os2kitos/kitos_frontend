@@ -2,7 +2,7 @@
 import { HttpClient, HttpContext, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { APIV1ExcelINTERNALService } from 'src/app/api/v1';
+import { ExcelService } from 'src/app/api/v1';
 import { LocalAdminImportEntityType } from '../enums/local-admin-import-entity-type';
 
 export interface ExcelFile {
@@ -23,7 +23,7 @@ export class APIExcelService {
 
   constructor(
     private httpClient: HttpClient,
-    private apiService: APIV1ExcelINTERNALService,
+    private apiService: ExcelService,
   ) {
     this.basePath = this.apiService['configuration'].basePath ?? '';
     this.defaultHeaders = this.apiService['defaultHeaders'];

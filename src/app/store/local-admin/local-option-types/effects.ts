@@ -12,7 +12,7 @@ export class LocalOptionTypeEffects {
   constructor(
     private store: Store,
     private actions$: Actions,
-    private localOptionTypeService: LocalAdminOptionTypeService,
+    private localOptionTypeService: LocalAdminOptionTypeService
   ) {}
 
   patchOptionType$ = createEffect(() => {
@@ -31,23 +31,50 @@ export class LocalOptionTypeEffects {
                     action.optionType,
                     organizationUuid,
                     action.optionUuid,
-                    action.request,
+                    action.request
                   );
                 } else {
                   return this.localOptionTypeService.patchIsActive(
                     action.optionType,
                     organizationUuid,
                     action.optionUuid,
-                    action.isActive,
+                    action.isActive
                   );
                 }
               }),
               map(() => LocalOptionTypeActions.updateOptionTypeSuccess(action.optionType)),
-              catchError(() => of(LocalOptionTypeActions.updateOptionTypeError())),
+              catchError(() => of(LocalOptionTypeActions.updateOptionTypeError()))
             );
-          }),
-        ),
-      ),
+          })
+        )
+      )
+    );
+  });
+
+  patchRoleOptionType$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(LocalOptionTypeActions.updateRoleOptionType),
+      groupBy((action) => action.optionUuid),
+      mergeMap((group$) =>
+        group$.pipe(
+          concatMap((action) => {
+            return this.store.select(selectOrganizationUuid).pipe(
+              filterNullish(),
+              first(),
+              switchMap((organizationUuid) => {
+                return this.localOptionTypeService.patchLocalRoleOption(
+                  action.optionType,
+                  organizationUuid,
+                  action.optionUuid,
+                  action.request
+                );
+              }),
+              map(() => LocalOptionTypeActions.updateOptionTypeSuccess(action.optionType)),
+              catchError(() => of(LocalOptionTypeActions.updateOptionTypeError()))
+            );
+          })
+        )
+      )
     );
   });
 }

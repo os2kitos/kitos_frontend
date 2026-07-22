@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, Input } from '@angular/core';
 import { BreadCrumbContext } from '../../models/breadcrumbs/breadcrumb-context.model';
 import { BreadCrumb } from '../../models/breadcrumbs/breadcrumb.model';
@@ -8,7 +8,7 @@ import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
   selector: 'app-breadcrumbs',
   templateUrl: 'breadcrumbs.component.html',
   styleUrls: ['breadcrumbs.component.scss'],
-  imports: [CommonModule, BreadcrumbComponent],
+  imports: [BreadcrumbComponent],
 })
 export class BreadcrumbsComponent {
   public breadCrumbs?: { item: BreadCrumb; context: BreadCrumbContext }[];

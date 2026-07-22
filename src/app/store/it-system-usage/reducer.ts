@@ -27,6 +27,7 @@ export const itSystemUsageInitialState: ITSystemUsageState = itSystemUsageAdapte
   isRemoving: false,
   lastSeenGridConfig: undefined,
   isPatching: false,
+  isCreating: false,
 });
 
 export const itSystemUsageFeature = createFeature({
@@ -181,6 +182,13 @@ export const itSystemUsageFeature = createFeature({
     on(ITSystemUsageActions.getItSystemUsageOverviewRolesError, (state): ITSystemUsageState => {
       return { ...state, gridRoleColumns: [], systemRoles: resetCache() };
     }),
+
+    on(ITSystemUsageActions.createItSystemUsage, (state): ITSystemUsageState => ({ ...state, isCreating: true })),
+    on(
+      ITSystemUsageActions.createItSystemUsageSuccess,
+      (state): ITSystemUsageState => ({ ...state, isCreating: false }),
+    ),
+    on(ITSystemUsageActions.createItSystemUsageError, (state): ITSystemUsageState => ({ ...state, isCreating: false })),
 
     on(
       GlobalOptionTypeActions.createOptionTypeSuccess,

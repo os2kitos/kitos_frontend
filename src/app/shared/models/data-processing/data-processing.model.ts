@@ -1,3 +1,4 @@
+import { formatNamesAndAttributesFromCsv } from '../../helpers/string.helpers';
 import {
   mapRoleAssignmentsToEmails,
   mapRoleAssignmentsToUserFullNames,
@@ -38,6 +39,8 @@ export interface DataProcessingRegistration {
   OversightScheduledInspectionDate: string;
   LatestOversightDate: string;
   LatestOversightRemark: string;
+  LatestOversightReportLink?: string;
+  LatestOversightReportLinkName?: string;
   LastChangedByName: string;
   ContractNamesAsCsv: string;
   Roles: RoleAssignmentsMap;
@@ -59,10 +62,16 @@ export const adaptDataProcessingRegistration = (value: any): DataProcessingRegis
     MainReferenceTitle: value.MainReferenceTitle,
     MainReferenceUrl: value.MainReferenceUrl,
     MainReferenceUserAssignedId: value.MainReferenceUserAssignedId,
-    SystemNamesAsCsv: value.SystemNamesAsCsv,
+    SystemNamesAsCsv: formatNamesAndAttributesFromCsv(value.SystemNamesAsCsv, value.SystemValiditiesAsCsv, false),
     SystemUuidsAsCsv: value.SystemUuidsAsCsv,
-    DataProcessorNamesAsCsv: value.DataProcessorNamesAsCsv,
-    SubDataProcessorNamesAsCsv: value.SubDataProcessorNamesAsCsv,
+    DataProcessorNamesAsCsv: formatNamesAndAttributesFromCsv(
+      value.DataProcessorNamesAsCsv,
+      value.DataProcessorCvrsAsCsv,
+    ),
+    SubDataProcessorNamesAsCsv: formatNamesAndAttributesFromCsv(
+      value.SubDataProcessorNamesAsCsv,
+      value.SubDataProcessorCvrsAsCsv,
+    ),
     TransferToInsecureThirdCountries: mapTransferToInsecureThirdCountries(value.TransferToInsecureThirdCountries),
     BasisForTransfer: value.BasisForTransfer,
     BasisForTransferUuid: value.basisForTransferUuid,
@@ -76,6 +85,8 @@ export const adaptDataProcessingRegistration = (value: any): DataProcessingRegis
     OversightScheduledInspectionDate: value.OversightScheduledInspectionDate,
     LatestOversightDate: value.LatestOversightDate,
     LatestOversightRemark: value.LatestOversightRemark,
+    LatestOversightReportLink: value.LatestOversightReportLink,
+    LatestOversightReportLinkName: value.LatestOversightReportLinkName,
     LastChangedByName: value.LastChangedByName,
     ContractNamesAsCsv: value.ContractNamesAsCsv,
     Roles: mapRoleAssignmentsToUserFullNames(value.RoleAssignments),

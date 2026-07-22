@@ -169,5 +169,61 @@ export const dataProcessingFeature = createFeature({
         };
       },
     ),
+
+    on(DataProcessingActions.addDataProcessingOversightDateSuccess, (state, { oversightDate }): DataProcessingState => {
+      if (!state.dataProcessing) return state;
+      const oversightDates = state.dataProcessing.oversight.oversightDates ?? [];
+      const updatedOversightDates = oversightDates.concat(oversightDate);
+      return {
+        ...state,
+        dataProcessing: {
+          ...state.dataProcessing,
+          oversight: {
+            ...state.dataProcessing.oversight,
+            oversightDates: updatedOversightDates,
+          },
+        },
+      };
+    }),
+
+    on(
+      DataProcessingActions.removeDataProcessingOversightDateSuccess,
+      (state, { oversightDateUuid }): DataProcessingState => {
+        if (!state.dataProcessing) return state;
+        const oversightDates = state.dataProcessing.oversight.oversightDates ?? [];
+        const updatedOversightDates = oversightDates.filter((date) => date.uuid !== oversightDateUuid);
+        return {
+          ...state,
+          dataProcessing: {
+            ...state.dataProcessing,
+            oversight: {
+              ...state.dataProcessing.oversight,
+              oversightDates: updatedOversightDates,
+            },
+          },
+        };
+      },
+    ),
+
+    on(
+      DataProcessingActions.patchDataProcessingOversightDateSuccess,
+      (state, { oversightDate }): DataProcessingState => {
+        if (!state.dataProcessing) return state;
+        const oversightDates = state.dataProcessing.oversight.oversightDates ?? [];
+        const updatedOversightDates = oversightDates.map((date) =>
+          date.uuid === oversightDate.uuid ? oversightDate : date,
+        );
+        return {
+          ...state,
+          dataProcessing: {
+            ...state.dataProcessing,
+            oversight: {
+              ...state.dataProcessing.oversight,
+              oversightDates: updatedOversightDates,
+            },
+          },
+        };
+      },
+    ),
   ),
 });

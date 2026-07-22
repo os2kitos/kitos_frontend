@@ -20,7 +20,7 @@ export class EntityStatusTextsService {
     },
     'it-system-usage': {
       trueString: $localize`Aktivt`,
-      falseString: this.INACTIVE_TEXT,
+      falseString: $localize`Ikke aktivt`,
     },
     'it-interface': {
       trueString: this.ACTIVE_TEXT,
@@ -29,6 +29,14 @@ export class EntityStatusTextsService {
     'it-contract': {
       trueString: $localize`Gyldig`,
       falseString: $localize`Ikke gyldig`,
+    },
+    'it-contract-supplier': {
+      trueString: this.ACTIVE_TEXT,
+      falseString: this.INACTIVE_TEXT,
+    },
+    'it-system-usage-archive': {
+      trueString: this.ACTIVE_TEXT,
+      falseString: this.INACTIVE_TEXT,
     },
     organization: {
       trueString: this.ACTIVE_TEXT,

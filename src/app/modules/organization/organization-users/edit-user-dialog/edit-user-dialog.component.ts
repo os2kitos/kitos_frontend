@@ -3,12 +3,12 @@ import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModu
 import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { debounceTime, of } from 'rxjs';
-import { APIUpdateUserRequestDTO, APIUserResponseDTO } from 'src/app/api/v2';
+import { APIOrganizationRoleChoice, APIUpdateUserRequestDTO } from 'src/app/api/v2';
 import { notDirtyAndEmptyStringValidator } from 'src/app/shared/validators/not-dirty-and-empty-string-validator';
 import { requiredIfDirtyValidator } from 'src/app/shared/validators/required-if-dirty.validator';
 import { CreateUserDialogComponentStore } from '../create-user-dialog/create-user-dialog.component-store';
 
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   BulkActionButton,
   BulkActionResult,
@@ -28,7 +28,9 @@ import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.servi
 import { RoleOptionTypeService } from 'src/app/shared/services/role-option-type.service';
 import { UserService } from 'src/app/shared/services/user.service';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
+import { selectOrganizationUserCanModifyFieldsPermissions } from 'src/app/store/organization/organization-user/selectors';
 import { selectRoleOptionTypes } from 'src/app/store/roles-option-type-store/selectors';
+import { selectCanClearRoleDropdown } from 'src/app/store/user-store/selectors';
 import { ButtonComponent } from '../../../../shared/components/buttons/button/button.component';
 import { CheckboxComponent } from '../../../../shared/components/checkbox/checkbox.component';
 import { DialogActionsComponent } from '../../../../shared/components/dialogs/dialog-actions/dialog-actions.component';
@@ -53,7 +55,6 @@ import { BaseUserDialogComponent } from '../base-user-dialog.component';
     ReactiveFormsModule,
     StandardVerticalContentGridComponent,
     TextBoxComponent,
-    NgIf,
     ParagraphComponent,
     DropdownComponent,
     MultiSelectDropdownComponent_1,
@@ -69,13 +70,16 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
   @Input() public user!: ODataOrganizationUser;
   @Input() public isNested!: boolean;
   @ViewChild(MultiSelectDropdownComponent)
-  public multiSelectDropdown!: MultiSelectDropdownComponent<APIUserResponseDTO.RolesEnum>;
+  public multiSelectDropdown!: MultiSelectDropdownComponent<APIOrganizationRoleChoice>;
   public readonly phoneNumberRegex = ONLY_DIGITS_AND_WHITESPACE_REGEX;
+  public readonly canClearRoleDropdown$ = this.store.select(selectCanClearRoleDropdown);
 
   private readonly availableUnitRoles$ = this.store.select(selectRoleOptionTypes('organization-unit'));
   private readonly availableContractRoles$ = this.store.select(selectRoleOptionTypes('it-contract'));
   private readonly availableUsageRoles$ = this.store.select(selectRoleOptionTypes('it-system-usage'));
   private readonly availableDprRoles$ = this.store.select(selectRoleOptionTypes('data-processing'));
+
+  private readonly hasModifyFieldsPermission$ = this.store.select(selectOrganizationUserCanModifyFieldsPermissions);
 
   public createForm = new FormGroup({
     firstName: new FormControl<string | undefined>(undefined, Validators.required),
@@ -92,7 +96,7 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
     hasStakeholderAccess: new FormControl<boolean | undefined>(undefined),
   });
 
-  private selectedRoles: APIUserResponseDTO.RolesEnum[] = [];
+  private selectedRoles: APIOrganizationRoleChoice[] = [];
 
   constructor(
     private dialogRef: MatDialogRef<EditUserDialogComponent>,
@@ -100,7 +104,7 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
     private roleService: RoleOptionTypeService,
     componentStore: CreateUserDialogComponentStore,
     store: Store,
-    userService: UserService
+    userService: UserService,
   ) {
     super(store, componentStore, userService);
   }
@@ -128,7 +132,7 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
           if (!value) return;
 
           this.componentStore.getUserWithEmail(value);
-        })
+        }),
     );
 
     this.subscriptions.add(
@@ -138,8 +142,25 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
         } else {
           this.getEmailControl()?.setErrors(null);
         }
-      })
+      }),
     );
+
+    this.subscriptions.add(
+      this.hasModifyFieldsPermission$.subscribe((canModify) => {
+        if (canModify) return;
+
+        //disable each control individually to avoid disabling the form itself
+        this.createForm.controls.firstName.disable();
+        this.createForm.controls.lastName.disable();
+        this.createForm.controls.email.disable();
+        this.createForm.controls.phoneNumber.disable();
+        this.createForm.controls.defaultStartPreference.disable();
+        this.createForm.controls.hasApiAccess.disable();
+        this.createForm.controls.hasRightsHolderAccess.disable();
+        this.createForm.controls.hasStakeholderAccess.disable();
+      }),
+    );
+
     const initialValues = this.getUserRoleChoices();
     this.selectedRoles = initialValues.map((role) => role.value);
   }
@@ -155,17 +176,26 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
     this.subscriptions.add(
       this.store.select(OrganizationUserActions.updateUserSuccess).subscribe(() => {
         this.dialogRef.close();
-      })
+      }),
     );
     const request = this.createRequest();
     this.store.dispatch(OrganizationUserActions.updateUser(this.user.Uuid, request));
   }
 
   public isFormValid(): boolean {
-    return this.createForm.valid && this.hasAnythingChanged();
+    return this.isFormValidIgnoringDisabled() && this.hasAnythingChanged();
   }
 
-  public rolesChanged(roles: APIUserResponseDTO.RolesEnum[]): void {
+  public isFormValidIgnoringDisabled(): boolean {
+    const enabledControlsValid = Object.keys(this.createForm.controls).every((key) => {
+      const control = this.createForm.get(key);
+      return control?.disabled || control?.valid;
+    });
+
+    return enabledControlsValid;
+  }
+
+  public rolesChanged(roles: APIOrganizationRoleChoice[]): void {
     this.selectedRoles = roles;
   }
 
@@ -196,7 +226,7 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
       this.availableUnitRoles$,
       this.availableContractRoles$,
       this.availableUsageRoles$,
-      this.availableDprRoles$
+      this.availableDprRoles$,
     );
   }
 
@@ -232,8 +262,7 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
       lastName: this.requestValue(user.LastName, formValue.lastName),
       phoneNumber: this.requestValue(user.PhoneNumber, this.getPhoneNumberString(formValue.phoneNumber)),
       defaultUserStartPreference:
-        this.requestValue(user.DefaultStartPreference, formValue.defaultStartPreference)?.value ??
-        APIUserResponseDTO.DefaultUserStartPreferenceEnum.StartSite,
+        this.requestValue(user.DefaultStartPreference, formValue.defaultStartPreference)?.value ?? undefined,
       hasApiAccess: this.requestValue(user.HasApiAccess, formValue.hasApiAccess),
       hasStakeHolderAccess: this.requestValue(user.HasStakeHolderAccess, formValue.hasStakeholderAccess),
       roles: this.getRoleRequest(),
@@ -241,7 +270,7 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
     return request;
   }
 
-  private getRoleRequest(): APIUpdateUserRequestDTO.RolesEnum[] | undefined {
+  private getRoleRequest(): APIOrganizationRoleChoice[] | undefined {
     const previousRoles = new Set(this.getOriginalRoles());
     const selectedRoles = new Set(this.getRolesToBePatched());
     const areTheyTheSame =
@@ -251,46 +280,46 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
     return [...selectedRoles];
   }
 
-  private getRolesToBePatched(): APIUpdateUserRequestDTO.RolesEnum[] {
+  private getRolesToBePatched(): APIOrganizationRoleChoice[] {
     const selectedRoles = this.selectedRoles.slice();
     return this.addNonSelectableRoles(selectedRoles, this.createForm.value.hasRightsHolderAccess === true);
   }
 
-  private getOriginalRoles(): APIUpdateUserRequestDTO.RolesEnum[] {
+  private getOriginalRoles(): APIOrganizationRoleChoice[] {
     const roles = this.getSelectableRolesThatUserHas();
     return this.addNonSelectableRoles(roles, this.user.HasRightsHolderAccess);
   }
 
   private addNonSelectableRoles(
-    roles: APIUpdateUserRequestDTO.RolesEnum[],
-    shouldRightsHolderAccessBeAdded: boolean
-  ): APIUpdateUserRequestDTO.RolesEnum[] {
-    roles.push(APIUpdateUserRequestDTO.RolesEnum.User);
+    roles: APIOrganizationRoleChoice[],
+    shouldRightsHolderAccessBeAdded: boolean,
+  ): APIOrganizationRoleChoice[] {
+    roles.push(APIOrganizationRoleChoice.User);
     if (shouldRightsHolderAccessBeAdded) {
-      roles.push(APIUpdateUserRequestDTO.RolesEnum.RightsHolderAccess);
+      roles.push(APIOrganizationRoleChoice.RightsHolderAccess);
     }
     return roles;
   }
 
-  private getSelectableRolesThatUserHas(): APIUserResponseDTO.RolesEnum[] {
-    const roles: APIUpdateUserRequestDTO.RolesEnum[] = [];
+  private getSelectableRolesThatUserHas(): APIOrganizationRoleChoice[] {
+    const roles: APIOrganizationRoleChoice[] = [];
     if (this.user.IsLocalAdmin) {
-      roles.push(APIUserResponseDTO.RolesEnum.LocalAdmin);
+      roles.push(APIOrganizationRoleChoice.LocalAdmin);
     }
     if (this.user.IsOrganizationModuleAdmin) {
-      roles.push(APIUserResponseDTO.RolesEnum.OrganizationModuleAdmin);
+      roles.push(APIOrganizationRoleChoice.OrganizationModuleAdmin);
     }
     if (this.user.IsSystemModuleAdmin) {
-      roles.push(APIUserResponseDTO.RolesEnum.SystemModuleAdmin);
+      roles.push(APIOrganizationRoleChoice.SystemModuleAdmin);
     }
     if (this.user.IsContractModuleAdmin) {
-      roles.push(APIUserResponseDTO.RolesEnum.ContractModuleAdmin);
+      roles.push(APIOrganizationRoleChoice.ContractModuleAdmin);
     }
     return roles;
   }
 
   private getPhoneNumberString(phoneNumberFromControl: string | undefined | null) {
-    return phoneNumberFromControl ? removeWhitespace(String(phoneNumberFromControl)) : '';
+    return phoneNumberFromControl ? removeWhitespace(String(phoneNumberFromControl)) : undefined;
   }
 
   private requestValue<T>(valueBefore: T, formValue: T | undefined | null) {

@@ -14,7 +14,7 @@
       {
         "organizationId": 400,
         "organizationName": "Ballerup kommune",
-        "role": 0,
+        "role": "User",
         "userId": 1,
         "userName": "Test",
         "userEmail": "test@test.com",
@@ -28,7 +28,7 @@
       {
         "organizationId": 400,
         "organizationName": "Ballerup kommune",
-        "role": 1,
+        "role": "LocalAdmin",
         "userId": 1,
         "userName": "Test",
         "userEmail": "test@test.com",
@@ -43,7 +43,7 @@
         "organizationId": 400,
         "organizationName": "Fælles kommune",
         "organizationUuid": "3dc52c64-3706-40f4-bf58-45035bb376da",
-        "role": 1,
+        "role": "LocalAdmin",
         "userId": 1,
         "userName": "Test",
         "userEmail": "test@test.com",

@@ -3,7 +3,7 @@ import { ComponentStore } from '@ngrx/component-store';
 import { tapResponse } from '@ngrx/operators';
 
 import { Observable, mergeMap, tap } from 'rxjs';
-import { APIOrganizationResponseDTO, APIV2OrganizationService } from 'src/app/api/v2';
+import { APIOrganizationResponseDTO, OrganizationV2Service } from 'src/app/api/v2';
 
 interface State {
   organizations?: APIOrganizationResponseDTO[];
@@ -17,7 +17,7 @@ export class ChooseOrganizationComponentStore extends ComponentStore<State> {
   public readonly organizations$ = this.select((state) => state.organizations);
   public readonly loading$ = this.select((state) => state.loading);
 
-  constructor(@Inject(APIV2OrganizationService) private apiOrganizationService: APIV2OrganizationService) {
+  constructor(@Inject(OrganizationV2Service) private apiOrganizationService: OrganizationV2Service) {
     super({ loading: false });
   }
 
@@ -47,11 +47,11 @@ export class ChooseOrganizationComponentStore extends ComponentStore<State> {
             orderByProperty: 'Name',
           })
           .pipe(
-            tapResponse(
-              (organizations) => this.updateOrganizations(organizations),
-              (e) => console.error(e),
-              () => this.updateLoading(false),
-            ),
+            tapResponse({
+              next: (organizations) => this.updateOrganizations(organizations),
+              error: (e) => console.error(e),
+              complete: () => this.updateLoading(false),
+            }),
           ),
       ),
     ),

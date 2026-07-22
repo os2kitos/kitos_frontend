@@ -60,7 +60,7 @@ Cypress.Commands.add('setupDataProcessingIntercepts', () => {
     fixture: './dpr/choice-types/data-responsible-types.json',
   });
 
-  cy.intercept('GET', 'api/v2/organizations/*/organization-units?pageSize=*', {
+  cy.intercept('GET', 'api/v2/organizations/*/organization-units?PageSize=*', {
     fixture: './organizations/organization-units.json',
   });
 
@@ -89,13 +89,19 @@ Cypress.Commands.add('setupItSystemUsageIntercepts', () => {
   cy.intercept('/api/v1/itsystem-usage/options/overview/organizationUuid*', {
     fixture: './it-system-usage/options.json',
   });
-  cy.intercept('/api/v2/organizations/*/organization-units?pageSize=*', {
+  cy.intercept('/api/v2/organizations/*/organization-units?PageSize=*', {
     fixture: './organizations/organization-units-hierarchy.json',
   });
   cy.intercept('/api/v2/business-types*', { fixture: './shared/business-types.json' });
   cy.intercept('/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' });
   cy.intercept('/api/v2/it-system-usage-data-classification-types*', {
     fixture: './it-system-usage/classification-types.json',
+  });
+  cy.intercept('/api/v2/it-system-usage-criticality-level-types*', {
+    fixture: './it-system-usage/criticality-level-types.json',
+  });
+  cy.intercept('/api/v2/it-system-usage-technical-system-types*', {
+    fixture: './it-system-usage/technical-system-types.json',
   });
   cy.intercept('/api/v2/it-system-usages/*/permissions', { fixture: './shared/permissions.json' });
   cy.intercept('/api/v2/it-systems/*', { fixture: 'it-system.json' }); //gets the base system

@@ -1,56 +1,68 @@
-<div *ngIf="(isAuthenticated$ | async) !== true && (loading$ | async) !== true" class="container">
-  <div class="left">
-    <ng-container *ngIf="mainPublicMessage$ | async as mainPublicMessage">
-      <div *ngIf="mainPublicMessage.link" (click)="goToMarketingPage(mainPublicMessage.link)" class="top-left-corner">
-        <app-help-icon></app-help-icon>
-        <app-paragraph [bold]="true" i18n> Hvad er Kitos?</app-paragraph>
-      </div></ng-container
-    >
-    <app-login> </app-login>
-  </div>
-  <div class="right">
-    <div class="grid-container login-grid-columns">
-      <app-public-message
-        *ngFor="let publicMessage of standardPublicMessages$ | async"
-        mode="compact"
-        [publicMessageUuid]="publicMessage.uuid"
-      ></app-public-message>
+@if ((isAuthenticated$ | async) !== true && (loading$ | async) !== true) {
+  <div class="container">
+    <div class="left">
+      @if (mainPublicMessage$ | async; as mainPublicMessage) {
+        @if (mainPublicMessage.link) {
+          <div (click)="goToMarketingPage(mainPublicMessage.link)" class="top-left-corner">
+            <app-help-icon></app-help-icon>
+            <app-paragraph [bold]="true" i18n> Hvad er Kitos?</app-paragraph>
+          </div>
+        }
+      }
+      <app-login> </app-login>
+    </div>
+    <div class="right">
+      <div class="grid-container login-grid-columns">
+        @for (publicMessage of standardPublicMessages$ | async; track publicMessage) {
+          <app-public-message
+            mode="compact"
+            [publicMessageUuid]="publicMessage.uuid"
+          ></app-public-message>
+        }
+      </div>
     </div>
   </div>
-</div>
-<div *ngIf="(isAuthenticated$ | async) === true" class="authenticated-frontpage">
-  <app-standard-vertical-content-grid>
-    <app-standard-vertical-content-grid
-      class="info-section-container"
-      *ngIf="mainPublicMessage$ | async as mainPublicMessage"
-    >
-      <div class="center-item">
-        <h2 class="title info-section-max-width">{{ mainPublicMessage.title }}</h2>
+}
+@if ((isAuthenticated$ | async) === true) {
+  <div class="authenticated-frontpage">
+    <app-standard-vertical-content-grid>
+      @if (mainPublicMessage$ | async; as mainPublicMessage) {
+        <app-standard-vertical-content-grid
+          class="info-section-container"
+          >
+          <div class="center-item">
+            <h2 class="title info-section-max-width">{{ mainPublicMessage.title }}</h2>
+          </div>
+          <div class="center-item">
+            <app-paragraph class="center-text info-section-max-width" [dimmed]="true">
+              {{ mainPublicMessage.shortDescription }}
+            </app-paragraph>
+          </div>
+          <div class="center-item">
+            @if (mainPublicMessage.link) {
+              <app-button (buttonClick)="goToMarketingPage(mainPublicMessage.link)" i18n
+                >Læs mere om Kitos</app-button
+                >
+              }
+              @if (isGlobalAdmin$ | async) {
+                <app-button
+                  (buttonClick)="openEditDialog(mainPublicMessage)"
+                  buttonStyle="secondary"
+                  i18n
+                  >Rediger</app-button
+                  >
+                }
+              </div>
+            </app-standard-vertical-content-grid>
+          }
+          <div class="grid-container authenticated-grid-columns">
+            @for (publicMessage of standardPublicMessages$ | async; track publicMessage) {
+              <app-public-message
+                mode="normal"
+                [publicMessageUuid]="publicMessage.uuid"
+              ></app-public-message>
+            }
+          </div>
+        </app-standard-vertical-content-grid>
       </div>
-      <div class="center-item">
-        <app-paragraph class="center-text info-section-max-width" [dimmed]="true">
-          {{ mainPublicMessage.shortDescription }}
-        </app-paragraph>
-      </div>
-      <div class="center-item">
-        <app-button *ngIf="mainPublicMessage.link" (buttonClick)="goToMarketingPage(mainPublicMessage.link)" i18n
-          >Læs mere om Kitos</app-button
-        >
-        <app-button
-          *ngIf="isGlobalAdmin$ | async"
-          (buttonClick)="openEditDialog(mainPublicMessage)"
-          buttonStyle="secondary"
-          i18n
-          >Rediger</app-button
-        >
-      </div>
-    </app-standard-vertical-content-grid>
-    <div class="grid-container authenticated-grid-columns">
-      <app-public-message
-        *ngFor="let publicMessage of standardPublicMessages$ | async"
-        mode="normal"
-        [publicMessageUuid]="publicMessage.uuid"
-      ></app-public-message>
-    </div>
-  </app-standard-vertical-content-grid>
-</div>
+    }

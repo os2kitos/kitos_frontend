@@ -1,3 +1,4 @@
+import { AsyncPipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
@@ -25,23 +26,22 @@ import { invertBooleanValue } from '../../pipes/invert-boolean-value';
 import { matchEmptyArray } from '../../pipes/match-empty-array';
 import { ConfirmActionCategory, ConfirmActionService } from '../../services/confirm-action.service';
 import { NotificationService } from '../../services/notification.service';
+import { BooleanCircleComponent } from '../boolean-circle/boolean-circle.component';
+import { IconButtonComponent } from '../buttons/icon-button/icon-button.component';
+import { CollectionExtensionButtonComponent } from '../collection-extension-button/collection-extension-button.component';
+import { EmptyStateComponent } from '../empty-states/empty-state.component';
+import { EyeIconComponent } from '../icons/eye-icon.component';
+import { PencilIconComponent } from '../icons/pencil-icon.compnent';
+import { TrashcanIconComponent } from '../icons/trashcan-icon.component';
+import { XIconComponent } from '../icons/x-icon.component';
+import { LoadingComponent } from '../loading/loading.component';
+import { NativeTableComponent } from '../native-table/native-table.component';
+import { ParagraphComponent } from '../paragraph/paragraph.component';
+import { StandardVerticalContentGridComponent } from '../standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { TableRowActionsComponent } from '../table-row-actions/table-row-actions.component';
 import { NotificationsTableDialogComponent } from './notifications-table-dialog/notifications-table-dialog.component';
 import { NotificationsTableSentDialogComponent } from './notifications-table-sent-dialog/notifications-table-sent-dialog.component';
 import { NotificationsTableComponentStore } from './notifications-table.component-store';
-import { NgIf, NgFor, AsyncPipe } from '@angular/common';
-import { StandardVerticalContentGridComponent } from '../standard-vertical-content-grid/standard-vertical-content-grid.component';
-import { NativeTableComponent } from '../native-table/native-table.component';
-import { ParagraphComponent } from '../paragraph/paragraph.component';
-import { BooleanCircleComponent } from '../boolean-circle/boolean-circle.component';
-import { TableRowActionsComponent } from '../table-row-actions/table-row-actions.component';
-import { IconButtonComponent } from '../buttons/icon-button/icon-button.component';
-import { PencilIconComponent } from '../icons/pencil-icon.compnent';
-import { EyeIconComponent } from '../icons/eye-icon.component';
-import { XIconComponent } from '../icons/x-icon.component';
-import { TrashcanIconComponent } from '../icons/trashcan-icon.component';
-import { EmptyStateComponent } from '../empty-states/empty-state.component';
-import { CollectionExtensionButtonComponent } from '../collection-extension-button/collection-extension-button.component';
-import { LoadingComponent } from '../loading/loading.component';
 
 @Component({
   selector: 'app-notifications-table[entityUuid][ownerResourceType][hasModifyPermission]',
@@ -49,10 +49,8 @@ import { LoadingComponent } from '../loading/loading.component';
   styleUrls: ['./notifications-table.component.scss'],
   providers: [NotificationsTableComponentStore],
   imports: [
-    NgIf,
     StandardVerticalContentGridComponent,
     NativeTableComponent,
-    NgFor,
     ParagraphComponent,
     BooleanCircleComponent,
     TableRowActionsComponent,
@@ -64,8 +62,8 @@ import { LoadingComponent } from '../loading/loading.component';
     EmptyStateComponent,
     CollectionExtensionButtonComponent,
     LoadingComponent,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class NotificationsTableComponent extends BaseComponent implements OnInit {
   @Input() entityUuid!: string;
@@ -116,7 +114,7 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
     this.confirmationService.confirmAction({
       category: ConfirmActionCategory.Warning,
       message: $localize`Er du sikker på at du vil deaktivere ${this.getSpecificNotificationWarning(
-        notification.name,
+        notification.name ?? undefined,
       )}?`,
       onConfirm: () => {
         if (notification.uuid) {
@@ -136,7 +134,7 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
   public onRemove(notification: APINotificationResponseDTO) {
     this.confirmationService.confirmAction({
       category: ConfirmActionCategory.Warning,
-      message: $localize`Er du sikker på at du vil fjerne ${this.getSpecificNotificationWarning(notification.name)}?`,
+      message: $localize`Er du sikker på at du vil fjerne ${this.getSpecificNotificationWarning(notification.name ?? undefined)}?`,
       onConfirm: () => {
         if (notification.uuid) {
           this.componentStore.deleteNotification({

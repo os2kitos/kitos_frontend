@@ -1,33 +1,32 @@
-<app-card *ngIf="intervalCardEnabled$ | async">
+@if (intervalCardEnabled$ | async) {
+<app-card>
   <app-card-header
     title="Interval"
     i18n-title
     helpTextKey="data-processing.edit-registration.oversight"
   ></app-card-header>
-
   <form [formGroup]="generalInformationForm">
     <app-standard-vertical-content-grid>
-      <ng-container *ngIf="oversightIntervalEnabled$ | async">
-        <app-dropdown
-          text="Tilsynsinterval"
-          [formGroup]="generalInformationForm"
-          formName="interval"
-          data-cy="data-processing-oversight-interval"
-          [data]="oversightIntervalOptions"
-          i18n-text
-          (valueChange)="patchOversight({ oversightInterval: $event })"
-        ></app-dropdown>
-        <app-textarea
-          text="Bemærkninger til interval"
-          [formGroup]="generalInformationForm"
-          formName="intervalRemarks"
-          data-cy="data-processing-oversight-interval.remarks"
-          i18n-text
-          (valueChange)="patchOversight({ oversightIntervalRemark: $event })"
-        ></app-textarea>
-      </ng-container>
+      @if (oversightIntervalEnabled$ | async) {
+      <app-dropdown
+        text="Tilsynsinterval"
+        [formGroup]="generalInformationForm"
+        formName="interval"
+        data-cy="data-processing-oversight-interval"
+        [data]="oversightIntervalOptions"
+        i18n-text
+        (valueChange)="patchOversight({ oversightInterval: $event })"
+      ></app-dropdown>
+      <app-textarea
+        text="Bemærkninger til interval"
+        [formGroup]="generalInformationForm"
+        formName="intervalRemarks"
+        data-cy="data-processing-oversight-interval.remarks"
+        i18n-text
+        (valueChange)="patchOversight({ oversightIntervalRemark: $event })"
+      ></app-textarea>
+      } @if (nextOversightEnabled$ | async) {
       <app-datepicker
-        *ngIf="nextOversightEnabled$ | async"
         text="Kommende planlagt tilsyn"
         [formGroup]="generalInformationForm"
         formName="completedAt"
@@ -35,8 +34,8 @@
         data-cy="data-processing-oversight-next-oversight"
         i18n-text
       ></app-datepicker>
+      } @if (oversightOptionsEnabled$ | async) {
       <app-textarea
-        *ngIf="oversightOptionsEnabled$ | async"
         text="Bemærkninger til valgte tilsynsmuligheder"
         [formGroup]="generalInformationForm"
         formName="remarks"
@@ -44,56 +43,58 @@
         (valueChange)="patchOversight({ oversightOptionsRemark: $event })"
         i18n-text
       ></app-textarea>
+      }
     </app-standard-vertical-content-grid>
   </form>
 </app-card>
-
-<app-card *ngIf="oversightOptionsEnabled$ | async">
+} @if (oversightOptionsEnabled$ | async) {
+<app-card>
   <app-card-header
     title="Tilsynsmuligheder"
     i18n-title
     helpTextKey="data-processing.edit-oversight.options"
   ></app-card-header>
   <app-standard-vertical-content-grid>
-    <app-native-table *ngIf="anyOversightOptions$ | async">
+    @if (anyOversightOptions$ | async) {
+    <app-native-table>
       <thead>
         <th i18n>Tilsyn</th>
       </thead>
       <tbody>
-        <tr *ngFor="let oversightOption of oversightOptions$ | async">
+        @for (oversightOption of oversightOptions$ | async; track oversightOption) {
+        <tr>
           <td>
             <app-content-space-between>
               <app-paragraph paragraphSize="small">{{ oversightOption.name }}</app-paragraph>
+              @if ((hasModifyPermission$ | async) === true) {
               <app-icon-button
                 (buttonClick)="onDeleteOversight(oversightOption.uuid)"
                 data-cy="delete-agreement-element-button"
-                *ngIf="(hasModifyPermission$ | async) === true"
                 ><app-trashcan-icon></app-trashcan-icon
               ></app-icon-button>
+              }
             </app-content-space-between>
           </td>
         </tr>
+        }
       </tbody>
     </app-native-table>
-    <app-empty-state
-      *ngIf="(anyOversightOptions$ | async) === false"
-      text="Ingen tilsynsmuligheder tilføjet endnu"
-      context="emptyTable"
-      i18n-text
-    >
-    </app-empty-state>
+    } @if ((anyOversightOptions$ | async) === false) {
+    <app-empty-state text="Ingen tilsynsmuligheder tilføjet endnu" context="emptyTable" i18n-text> </app-empty-state>
+    }
+
     <app-collection-extension-button
-      *ngIf="hasModifyPermission$ | async"
       text="Tilføj mulighed"
       i18n-text
       data-cy="oversight-create-button"
+      [disabled]="(hasModifyPermission$ | async) !== true"
       (clicked)="onAddNewOversight()"
     >
     </app-collection-extension-button>
   </app-standard-vertical-content-grid>
 </app-card>
-
-<app-card *ngIf="oversightsEnabled$ | async">
+} @if (oversightsEnabled$ | async) {
+<app-card>
   <app-card-header
     title="Gennemførte og kommende tilsyn"
     i18n-title
@@ -104,3 +105,4 @@
     <app-oversights-table></app-oversights-table>
   </app-standard-vertical-content-grid>
 </app-card>
+}

@@ -8,14 +8,14 @@
       i18n-text
     ></app-collection-extension-button>
   </app-card-header>
-  <ng-container *ngIf="systemIntegrators$ | async as systemIntegrators">
+  @if (systemIntegrators$ | async; as systemIntegrators) {
     <app-local-grid
       [data]="systemIntegrators"
       [loading]="loading$ | async"
       [columns]="gridColumns"
       [deletePermission]="true"
       (deleteEvent)="deleteSystemIntegrator($event)"
-    >
+      >
     </app-local-grid>
-  </ng-container>
+  }
 </app-card>

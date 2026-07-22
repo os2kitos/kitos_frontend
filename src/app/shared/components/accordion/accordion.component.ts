@@ -5,7 +5,7 @@ import {
   MatExpansionPanelHeader,
   MatExpansionPanelTitle,
 } from '@angular/material/expansion';
-import { NgIf } from '@angular/common';
+
 import { CheckboxComponent } from '../checkbox/checkbox.component';
 import { ParagraphComponent } from '../paragraph/paragraph.component';
 import { TooltipComponent } from '../tooltip/tooltip.component';
@@ -20,12 +20,11 @@ import { InfoIconComponent } from '../icons/info-icon.component';
     MatExpansionPanel,
     MatExpansionPanelHeader,
     MatExpansionPanelTitle,
-    NgIf,
     CheckboxComponent,
     ParagraphComponent,
     TooltipComponent,
-    InfoIconComponent,
-  ],
+    InfoIconComponent
+],
 })
 export class AccordionComponent {
   @Input() title: string | undefined;

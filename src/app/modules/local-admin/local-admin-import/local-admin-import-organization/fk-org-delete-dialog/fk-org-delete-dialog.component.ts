@@ -7,7 +7,7 @@ import { FkOrgActions } from 'src/app/store/local-admin/fk-org/actions';
 import { selectIsDeleteLoading } from 'src/app/store/local-admin/fk-org/selectors';
 import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
 import { DialogComponent } from '../../../../../shared/components/dialogs/dialog/dialog.component';
-import { NgIf, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { StandardVerticalContentGridComponent } from '../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { ParagraphComponent } from '../../../../../shared/components/paragraph/paragraph.component';
 import { LoadingComponent } from '../../../../../shared/components/loading/loading.component';
@@ -20,14 +20,13 @@ import { ButtonComponent } from '../../../../../shared/components/buttons/button
   styleUrl: './fk-org-delete-dialog.component.scss',
   imports: [
     DialogComponent,
-    NgIf,
     StandardVerticalContentGridComponent,
     ParagraphComponent,
     LoadingComponent,
     DialogActionsComponent,
     ButtonComponent,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class FkOrgDeleteDialogComponent extends BaseComponent implements OnInit {
   public readonly isDeleteLoading$ = this.store.select(selectIsDeleteLoading);

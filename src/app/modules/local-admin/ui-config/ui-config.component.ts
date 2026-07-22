@@ -6,7 +6,7 @@ import { UIModuleConfig } from 'src/app/shared/models/ui-config/ui-module-config
 import { selectModuleVisibility } from 'src/app/store/organization/selectors';
 import { selectModuleConfig } from 'src/app/store/organization/ui-module-customization/selectors';
 import { StandardVerticalContentGridComponent } from '../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
-import { NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { UiConfigTabSectionComponent } from './ui-config-tab-section/ui-config-tab-section.component';
 import { LoadingComponent } from '../../../shared/components/loading/loading.component';
 
@@ -16,12 +16,10 @@ import { LoadingComponent } from '../../../shared/components/loading/loading.com
   styleUrl: './ui-config.component.scss',
   imports: [
     StandardVerticalContentGridComponent,
-    NgIf,
-    NgFor,
     UiConfigTabSectionComponent,
     LoadingComponent,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class UiConfigComponent implements OnInit {
   constructor(private store: Store) {}

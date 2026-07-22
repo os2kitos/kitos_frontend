@@ -87,14 +87,12 @@ export class Configuration {
             this.credentials = {};
         }
 
-        // init default KITOS TOKEN credential
-        if (!this.credentials['KITOS TOKEN']) {
-            this.credentials['KITOS TOKEN'] = () => {
-                if (this.apiKeys === null || this.apiKeys === undefined) {
-                    return undefined;
-                } else {
-                    return this.apiKeys['KITOS TOKEN'] || this.apiKeys['Authorization'];
-                }
+        // init default Bearer credential
+        if (!this.credentials['Bearer']) {
+            this.credentials['Bearer'] = () => {
+                return typeof this.accessToken === 'function'
+                    ? this.accessToken()
+                    : this.accessToken;
             };
         }
     }

@@ -1,21 +1,21 @@
-import { APIItSystemResponseDTO } from 'src/app/api/v2';
+import { APIRegistrationScopeChoice } from 'src/app/api/v2';
 
 export interface ScopeChoice {
   name: string;
-  value: APIItSystemResponseDTO.ScopeEnum;
+  value: APIRegistrationScopeChoice;
 }
 
 export const scopeOptions: ScopeChoice[] = [
   {
     name: $localize`Lokal`,
-    value: APIItSystemResponseDTO.ScopeEnum.Local,
+    value: APIRegistrationScopeChoice.Local,
   },
   {
     name: $localize`Offentlig`,
-    value: APIItSystemResponseDTO.ScopeEnum.Global,
+    value: APIRegistrationScopeChoice.Global,
   },
 ];
 
-export const mapScopeEnumToScopeChoice = (value: APIItSystemResponseDTO.ScopeEnum): ScopeChoice | undefined => {
+export const mapScopeEnumToScopeChoice = (value: APIRegistrationScopeChoice): ScopeChoice | undefined => {
   return scopeOptions.find((option) => option.value === value);
 };

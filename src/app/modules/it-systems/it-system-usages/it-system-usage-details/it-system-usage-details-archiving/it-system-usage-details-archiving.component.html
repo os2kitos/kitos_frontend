@@ -1,11 +1,14 @@
-<app-segment
-  [buttons]="itSystemUsageModuleSegmentOptions"
-  [(selected)]="selected"
-  *ngIf="(disableCatalogArchivingSegment() | async) !== true"
-></app-segment>
-<app-it-system-usage-details-archiving-usage
-  *ngIf="selected === ItSystemUsageModuleSegmentOption.Usage"
-></app-it-system-usage-details-archiving-usage>
-<app-it-system-usage-details-archiving-catalog
-  *ngIf="selected === ItSystemUsageModuleSegmentOption.Catalog"
-></app-it-system-usage-details-archiving-catalog>
+@if ((disableCatalogArchivingSegment() | async) !== true) {
+  <app-segment
+    [buttons]="itSystemUsageModuleSegmentOptions"
+    [(selected)]="selected"
+  ></app-segment>
+}
+@if (selected === ItSystemUsageModuleSegmentOption.Usage) {
+  <app-it-system-usage-details-archiving-usage
+  ></app-it-system-usage-details-archiving-usage>
+}
+@if (selected === ItSystemUsageModuleSegmentOption.Catalog) {
+  <app-it-system-usage-details-archiving-catalog
+  ></app-it-system-usage-details-archiving-catalog>
+}

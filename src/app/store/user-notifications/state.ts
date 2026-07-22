@@ -1,12 +1,12 @@
 import { EntityState } from '@ngrx/entity';
-import { APINotificationResponseDTO, APIRecipientResponseDTO } from 'src/app/api/v2';
+import { APINotificationResponseDTO, APIOwnerResourceType, APIRecipientResponseDTO } from 'src/app/api/v2';
 
 export interface NotificationState {
   usageNotifications: EntityState<UserNotification>;
   contractNotifications: EntityState<UserNotification>;
   dataProcessingNotifications: EntityState<UserNotification>;
   cacheTime: {
-    [key in APINotificationResponseDTO.OwnerResourceTypeEnum]?: number;
+    [key in APIOwnerResourceType]?: number;
   };
 }
 
@@ -22,8 +22,8 @@ export function adaptUserNotification(notification: APINotificationResponseDTO):
     ...notification,
     uuid: notification.uuid ?? '',
     name: notification.name ?? $localize`Ikke angivet`,
-    receiversCsv: adaptRecipentsToCsv(notification.receivers),
-    cCsCsv: adaptRecipentsToCsv(notification.cCs),
+    receiversCsv: adaptRecipentsToCsv(notification.receivers ?? undefined),
+    cCsCsv: adaptRecipentsToCsv(notification.cCs ?? undefined),
   };
 }
 

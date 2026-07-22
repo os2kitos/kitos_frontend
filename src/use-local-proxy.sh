@@ -5,7 +5,7 @@ replace_proxy() {
   local replace=$2
   local file_path=$3
   local temp_file=$(mktemp)
-  sed "s/$search/$replace/g" "$(git rev-parse --show-toplevel)/$file_path" > "$temp_file"
+  sed "s|$search|$replace|g" "$(git rev-parse --show-toplevel)/$file_path" > "$temp_file"
   mv "$temp_file" "$(git rev-parse --show-toplevel)/$file_path"
 }
 
@@ -14,7 +14,7 @@ cleanup_start() {
 }
 
 cleanup_swagger() {
-  replace_proxy "localhost:44300" "kitos-dev\\.strongminds\\.dk" "openapitools.json"
+  replace_proxy "http://localhost:58943" "https://kitos-dev\\.strongminds\\.dk" "openapitools.json"
 }
 
 
@@ -28,6 +28,6 @@ fi
  if [ "$1" = "swagger" ]; then
    trap cleanup_swagger EXIT
 
-   replace_proxy "kitos-dev\\.strongminds\\.dk" "localhost:44300" "openapitools.json"
+   replace_proxy "https://kitos-dev\\.strongminds\\.dk" "http://localhost:58943" "openapitools.json"
    yarn swagger
  fi

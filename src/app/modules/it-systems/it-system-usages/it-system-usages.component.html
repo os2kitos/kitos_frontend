@@ -6,7 +6,7 @@
     [hasColumnConfigButtons]="true"
     entityType="it-system-usage"
   ></app-grid-options-button>
-  <app-export-menu-button [enabledGdprExport]="true" [exportMethod]="onExcelExport"></app-export-menu-button>
+  <app-export-menu-button [enabledGdprExport]="true" [exportMethod]="onExcelExport" entityText="IT Systemer" i18n-entityText [anyOverviewFiltersApplied$]="anySystemUsageFilters$"></app-export-menu-button>
   <app-hide-show-button
     entityType="it-system-usage"
     [columns]="gridColumns$ | async"

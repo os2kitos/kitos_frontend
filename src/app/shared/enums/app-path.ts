@@ -11,13 +11,16 @@ export enum AppPath {
   itSystemUsagesDetails = 'it-system-usages/:uuid',
   itSystemCatalog = 'it-system-catalog',
   itSystemCatalogDetails = 'it-system-catalog/:uuid',
+  itSystemUsageArchive = 'it-system-usage-archive',
 
   frontpage = 'frontpage',
   passwordReset = 'reset-password',
-  contracts = 'contracts',
 
   itContracts = 'it-contracts',
-  itContractDetails = 'it-contracts/:uuid',
+  contracts = 'contracts',
+  contractDetails = 'contracts/:uuid',
+  suppliers = 'suppliers',
+
   itInterfaces = 'it-interfaces',
   itInterfacesDetails = 'it-interfaces/:uuid',
   hierarchy = 'hierarchy',
@@ -40,6 +43,7 @@ export enum AppPath {
   helpTexts = 'help-texts',
   localAdminSystemUsages = 'system',
   other = 'other',
+  ismsSuppliers = 'isms-suppliers',
 
   roles = 'roles',
 

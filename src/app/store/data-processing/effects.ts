@@ -6,19 +6,19 @@ import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
 import { catchError, map, mergeMap, of, switchMap } from 'rxjs';
-import { APIBusinessRoleDTO, APIV1DataProcessingRegistrationINTERNALService } from 'src/app/api/v1';
+import { APIBusinessRoleDTO, APIYesNoUndecidedOption, DataProcessingRegistrationService } from 'src/app/api/v1';
 import {
-  APIDataProcessingRegistrationGeneralDataWriteRequestDTO,
-  APIDataProcessingRegistrationOversightWriteRequestDTO,
   APIDataProcessingRegistrationResponseDTO,
   APIDataProcessorRegistrationSubDataProcessorResponseDTO,
   APIDataProcessorRegistrationSubDataProcessorWriteRequestDTO,
-  APIV2DataProcessingRegistrationInternalINTERNALService,
-  APIV2DataProcessingRegistrationService,
-  APIV2OrganizationGridInternalINTERNALService,
+  DataProcessingRegistrationInternalV2Service,
+  DataProcessingRegistrationOversightDatesV2Service,
+  DataProcessingRegistrationV2Service,
+  OrganizationGridInternalV2Service,
 } from 'src/app/api/v2';
 import { DATA_PROCESSING_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-constants';
 import { hasValidCache } from 'src/app/shared/helpers/date.helpers';
+import { addSecondaryContainsField } from 'src/app/shared/helpers/odata-query.helpers';
 import { adaptDataProcessingRegistration } from 'src/app/shared/models/data-processing/data-processing.model';
 import { OData } from 'src/app/shared/models/odata.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
@@ -43,18 +43,20 @@ export class DataProcessingEffects {
   constructor(
     private actions$: Actions,
     private store: Store,
-    @Inject(APIV2DataProcessingRegistrationService)
-    private dataProcessingService: APIV2DataProcessingRegistrationService,
-    @Inject(APIV2DataProcessingRegistrationInternalINTERNALService)
-    private apiInternalDataProcessingRegistrationService: APIV2DataProcessingRegistrationInternalINTERNALService,
+    @Inject(DataProcessingRegistrationV2Service)
+    private dataProcessingService: DataProcessingRegistrationV2Service,
+    @Inject(DataProcessingRegistrationInternalV2Service)
+    private apiInternalDataProcessingRegistrationService: DataProcessingRegistrationInternalV2Service,
     private httpClient: HttpClient,
     private externalReferencesApiService: ExternalReferencesApiService,
-    @Inject(APIV1DataProcessingRegistrationINTERNALService)
-    private apiv1DataProcessingService: APIV1DataProcessingRegistrationINTERNALService,
-    @Inject(APIV2OrganizationGridInternalINTERNALService)
-    private apiV2organizationalGridInternalService: APIV2OrganizationGridInternalINTERNALService,
+    @Inject(DataProcessingRegistrationService)
+    private apiv1DataProcessingService: DataProcessingRegistrationService,
+    @Inject(OrganizationGridInternalV2Service)
+    private apiV2organizationalGridInternalService: OrganizationGridInternalV2Service,
     private gridColumnStorageService: GridColumnStorageService,
     private gridDataCacheService: GridDataCacheService,
+    @Inject(DataProcessingRegistrationOversightDatesV2Service)
+    private oversightDateService: DataProcessingRegistrationOversightDatesV2Service,
   ) {}
 
   getDataProcessing$ = createEffect(() => {
@@ -168,7 +170,9 @@ export class DataProcessingEffects {
       concatLatestFrom(() => this.store.select(selectOrganizationUuid)),
       switchMap(([{ name, openAfterCreate }, organizationUuid]) =>
         this.dataProcessingService
-          .postSingleDataProcessingRegistrationV2PostDataProcessingRegistration({ request: { name, organizationUuid } })
+          .postSingleDataProcessingRegistrationV2PostDataProcessingRegistration({
+            aPICreateDataProcessingRegistrationRequestDTO: { name, organizationUuid },
+          })
           .pipe(
             map(({ uuid }) => DataProcessingActions.createDataProcessingSuccess(uuid, openAfterCreate)),
             catchError(() => of(DataProcessingActions.createDataProcessingError())),
@@ -216,7 +220,10 @@ export class DataProcessingEffects {
       concatLatestFrom(() => this.store.select(selectDataProcessingUuid).pipe(filterNullish())),
       switchMap(([{ dataProcessing }, uuid]) =>
         this.dataProcessingService
-          .patchSingleDataProcessingRegistrationV2PatchDataProcessingRegistration({ uuid, request: dataProcessing })
+          .patchSingleDataProcessingRegistrationV2PatchDataProcessingRegistration({
+            uuid,
+            aPIUpdateDataProcessingRegistrationRequestDTO: dataProcessing,
+          })
           .pipe(
             map((data) => DataProcessingActions.patchDataProcessingSuccess(data)),
             catchError(() => of(DataProcessingActions.patchDataProcessingError())),
@@ -232,8 +239,7 @@ export class DataProcessingEffects {
         const countries = existingCountries ? [...existingCountries] : [];
         countries.push(country);
         const countryUuids = countries.map((country) => country.uuid);
-        const transferToInsecureThirdCountries =
-          APIDataProcessingRegistrationGeneralDataWriteRequestDTO.TransferToInsecureThirdCountriesEnum.Yes;
+        const transferToInsecureThirdCountries = APIYesNoUndecidedOption.Yes;
         return of(
           DataProcessingActions.patchDataProcessing({
             general: { transferToInsecureThirdCountries, insecureCountriesSubjectToDataTransferUuids: countryUuids },
@@ -252,9 +258,7 @@ export class DataProcessingEffects {
           .filter((country) => country.uuid !== countryUuid)
           .map((country) => country.uuid);
         const transferToInsecureThirdCountries =
-          listWithoutCountry.length > 0
-            ? 'Yes'
-            : ('No' as APIDataProcessingRegistrationGeneralDataWriteRequestDTO.TransferToInsecureThirdCountriesEnum);
+          listWithoutCountry.length > 0 ? APIYesNoUndecidedOption.Yes : APIYesNoUndecidedOption.No;
         return of(
           DataProcessingActions.patchDataProcessing({
             general: {
@@ -298,8 +302,7 @@ export class DataProcessingEffects {
       switchMap(({ subprocessor, existingSubProcessors }) => {
         const subProcessors = existingSubProcessors ? [...existingSubProcessors] : [];
         const mappedSubProcessors = mapSubDataProcessors(subProcessors);
-        const hasSubDataProcessors =
-          APIDataProcessingRegistrationGeneralDataWriteRequestDTO.HasSubDataProcessorsEnum.Yes;
+        const hasSubDataProcessors = APIYesNoUndecidedOption.Yes;
         mappedSubProcessors.push(subprocessor);
         return of(
           DataProcessingActions.patchDataProcessing({
@@ -320,9 +323,7 @@ export class DataProcessingEffects {
         );
         const mappedSubProcessors = mapSubDataProcessors(listWithoutSubProcessor);
         const hasSubDataProcessors =
-          mappedSubProcessors.length > 0
-            ? 'Yes'
-            : ('No' as APIDataProcessingRegistrationGeneralDataWriteRequestDTO.HasSubDataProcessorsEnum);
+          mappedSubProcessors.length > 0 ? APIYesNoUndecidedOption.Yes : APIYesNoUndecidedOption.No;
         return of(
           DataProcessingActions.patchDataProcessing({
             general: { hasSubDataProcessors, subDataProcessors: mappedSubProcessors },
@@ -382,7 +383,9 @@ export class DataProcessingEffects {
         return this.dataProcessingService
           .patchSingleDataProcessingRegistrationV2PatchDataProcessingRegistration({
             uuid: dprUuid,
-            request: { roles: existingRoles.concat(rolesToAdd) },
+            aPIUpdateDataProcessingRegistrationRequestDTO: {
+              roles: existingRoles.concat(rolesToAdd),
+            },
           })
           .pipe(
             map((role) => DataProcessingActions.bulkAddDataProcessingRoleSuccess(role)),
@@ -399,7 +402,10 @@ export class DataProcessingEffects {
         this.apiInternalDataProcessingRegistrationService
           .patchSingleDataProcessingRegistrationInternalV2PatchRemoveRoleAssignment({
             dprUuid: dataProcessingUuid,
-            request: { userUuid: userUuid, roleUuid: roleUuid },
+            aPIRoleAssignmentRequestDTO: {
+              userUuid: userUuid,
+              roleUuid: roleUuid,
+            },
           })
           .pipe(
             map((usage) =>
@@ -422,7 +428,7 @@ export class DataProcessingEffects {
         return this.externalReferencesApiService
           .addExternalReference<APIDataProcessingRegistrationResponseDTO>(
             newExternalReference.externalReference,
-            externalReferences,
+            externalReferences ?? [],
             dprUuid,
             'data-processing-registration',
           )
@@ -445,7 +451,7 @@ export class DataProcessingEffects {
         return this.externalReferencesApiService
           .editExternalReference<APIDataProcessingRegistrationResponseDTO>(
             editData,
-            externalReferences,
+            externalReferences ?? [],
             dprUuid,
             'data-processing-registration',
           )
@@ -468,7 +474,7 @@ export class DataProcessingEffects {
         return this.externalReferencesApiService
           .deleteExternalReference<APIDataProcessingRegistrationResponseDTO>(
             referenceUuid.referenceUuid,
-            externalReferences,
+            externalReferences ?? [],
             dprUuid,
             'data-processing-registration',
           )
@@ -507,16 +513,17 @@ export class DataProcessingEffects {
   addDataProcessingOversightDate$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(DataProcessingActions.addDataProcessingOversightDate),
-      switchMap(({ oversightDate, existingOversightDates }) => {
-        const oversightDates = existingOversightDates ? [...existingOversightDates] : [];
-        oversightDates.push(oversightDate);
-        const request = {
-          oversight: {
-            oversightDates: oversightDates,
-            isOversightCompleted: APIDataProcessingRegistrationOversightWriteRequestDTO.IsOversightCompletedEnum.Yes,
-          },
-        };
-        return of(DataProcessingActions.patchDataProcessing(request));
+      concatLatestFrom(() => this.store.select(selectDataProcessingUuid).pipe(filterNullish())),
+      switchMap(([{ oversightDate }, dprUuid]) => {
+        return this.oversightDateService
+          .postSingleDataProcessingRegistrationOversightDatesV2PostDataProcessingRegistrationOversightDate({
+            uuid: dprUuid,
+            aPICreateOversightDateDTO: oversightDate,
+          })
+          .pipe(
+            map((response) => DataProcessingActions.addDataProcessingOversightDateSuccess(response)),
+            catchError(() => of(DataProcessingActions.addDataProcessingOversightDateError())),
+          );
       }),
     );
   });
@@ -524,25 +531,17 @@ export class DataProcessingEffects {
   removeDataProcessingOversightDate$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(DataProcessingActions.removeDataProcessingOversightDate),
-      switchMap(({ oversightDateUuid, existingOversightDates }) => {
-        const oversightDates = existingOversightDates ? [...existingOversightDates] : [];
-        const listWithoutSupervision = oversightDates.filter(
-          (oversightDate) => oversightDate.uuid !== oversightDateUuid,
-        );
-        return of(
-          DataProcessingActions.patchDataProcessing({
-            oversight: {
-              oversightDates: listWithoutSupervision.map((oversightDate) => ({
-                completedAt: oversightDate.completedAt,
-                remark: oversightDate.remark,
-              })),
-              isOversightCompleted:
-                listWithoutSupervision.length === 0
-                  ? APIDataProcessingRegistrationOversightWriteRequestDTO.IsOversightCompletedEnum.No
-                  : APIDataProcessingRegistrationOversightWriteRequestDTO.IsOversightCompletedEnum.Yes,
-            },
-          }),
-        );
+      concatLatestFrom(() => this.store.select(selectDataProcessingUuid).pipe(filterNullish())),
+      switchMap(([{ oversightDateUuid }, dprUuid]) => {
+        return this.oversightDateService
+          .deleteSingleDataProcessingRegistrationOversightDatesV2DeleteDataProcessingRegistrationOversightDate({
+            uuid: dprUuid,
+            oversightDateUuid,
+          })
+          .pipe(
+            map(() => DataProcessingActions.removeDataProcessingOversightDateSuccess(oversightDateUuid)),
+            catchError(() => of(DataProcessingActions.removeDataProcessingOversightDateError())),
+          );
       }),
     );
   });
@@ -550,23 +549,18 @@ export class DataProcessingEffects {
   patchDataProcessingOversightDate$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(DataProcessingActions.patchDataProcessingOversightDate),
-      switchMap(({ oversightDate, existingOversightDates }) => {
-        const oversightDates = existingOversightDates ? [...existingOversightDates] : [];
-        const listWithoutSupervision = oversightDates.filter(
-          (oversightDateToFilter) => oversightDateToFilter.uuid !== oversightDate.uuid,
-        );
-        listWithoutSupervision.push(oversightDate);
-        return of(
-          DataProcessingActions.patchDataProcessing({
-            oversight: {
-              oversightDates: listWithoutSupervision.map((oversightDate) => ({
-                completedAt: oversightDate.completedAt,
-                remark: oversightDate.remark,
-              })),
-              isOversightCompleted: APIDataProcessingRegistrationOversightWriteRequestDTO.IsOversightCompletedEnum.Yes,
-            },
-          }),
-        );
+      concatLatestFrom(() => this.store.select(selectDataProcessingUuid).pipe(filterNullish())),
+      switchMap(([{ oversightDate, oversightDateUuid }, dprUuid]) => {
+        return this.oversightDateService
+          .patchSingleDataProcessingRegistrationOversightDatesV2PatchDataProcessingRegistrationOversightDate({
+            uuid: dprUuid,
+            oversightDateUuid,
+            aPIModifyOversightDateDTO: oversightDate,
+          })
+          .pipe(
+            map((response) => DataProcessingActions.patchDataProcessingOversightDateSuccess(response)),
+            catchError(() => of(DataProcessingActions.patchDataProcessingOversightDateError())),
+          );
       }),
     );
   });
@@ -580,7 +574,7 @@ export class DataProcessingEffects {
           .postSingleOrganizationGridInternalV2SaveGridConfiguration({
             organizationUuid,
             overviewType: 'DataProcessingRegistration',
-            config: {
+            aPIOrganizationGridConfigurationRequestDTO: {
               visibleColumns: columnConfig,
             },
           })
@@ -624,18 +618,18 @@ export class DataProcessingEffects {
             map((response) =>
               DataProcessingActions.resetToOrganizationDataProcessingColumnConfigurationSuccess(
                 response,
-                disablePopupNotification
-              )
+                disablePopupNotification,
+              ),
             ),
             catchError(() =>
               of(
                 DataProcessingActions.resetToOrganizationDataProcessingColumnConfigurationError(
-                  disablePopupNotification
-                )
-              )
-            )
-          )
-      )
+                  disablePopupNotification,
+                ),
+              ),
+            ),
+          ),
+      ),
     );
   });
 
@@ -711,8 +705,17 @@ function applyQueryFixes(odataString: string, systemRoles: APIBusinessRoleDTO[] 
     .replace(
       /IsOversightCompleted eq 'Undecided'/,
       "(IsOversightCompleted eq 'Undecided' or IsOversightCompleted eq null)",
-    )
-    .replace(/ResponsibleOrgUnitName eq '([\w-]+)'/, 'ResponsibleOrgUnitUuid eq $1');
+    );
+  fixedOdataString = addSecondaryContainsField(fixedOdataString, 'DataProcessorNamesAsCsv', 'DataProcessorCvrsAsCsv');
+  fixedOdataString = addSecondaryContainsField(
+    fixedOdataString,
+    'SubDataProcessorNamesAsCsv',
+    'SubDataProcessorCvrsAsCsv',
+  );
+  fixedOdataString = addSecondaryContainsField(fixedOdataString, 'SystemNamesAsCsv', 'SystemValiditiesAsCsv').replace(
+    /ResponsibleOrgUnitName eq '([\w-]+)'/,
+    'ResponsibleOrgUnitUuid eq $1',
+  );
 
   return fixedOdataString;
 }

@@ -14,7 +14,7 @@ import {
 } from 'src/app/store/data-processing/selectors';
 import { CreateSubProcessorDialogComponent } from './create-sub-processor-dialog/create-sub-processor-dialog.component';
 import { StandardVerticalContentGridComponent } from '../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
-import { NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { NativeTableComponent } from '../../../../../shared/components/native-table/native-table.component';
 import { ParagraphComponent } from '../../../../../shared/components/paragraph/paragraph.component';
 import { BooleanCircleComponent } from '../../../../../shared/components/boolean-circle/boolean-circle.component';
@@ -32,9 +32,7 @@ import { CollectionExtensionButtonComponent } from '../../../../../shared/compon
   styleUrl: './sub-processors-table.component.scss',
   imports: [
     StandardVerticalContentGridComponent,
-    NgIf,
     NativeTableComponent,
-    NgFor,
     ParagraphComponent,
     BooleanCircleComponent,
     ContentSpaceBetweenComponent,
@@ -44,8 +42,8 @@ import { CollectionExtensionButtonComponent } from '../../../../../shared/compon
     TrashcanIconComponent,
     EmptyStateComponent,
     CollectionExtensionButtonComponent,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class SubProcessorsTableComponent extends BaseComponent {
   public readonly subprocessors$ = this.store.select(selectDataProcessingSubProcessors).pipe(filterNullish());

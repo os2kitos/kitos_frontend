@@ -3,7 +3,7 @@
   [isExpanded]="(isExpanded$ | async) ?? false"
   (expandedChanged)="onExpandedChanged($event)"
   i18n-title
->
+  >
   <form [formGroup]="dataSensitivityLevelForm">
     <app-checkbox
       labelPosition="after"
@@ -12,7 +12,7 @@
       [formGroup]="dataSensitivityLevelForm"
       formName="NoneControl"
       (valueChange)="patchDataSensitivityLevelNone($event)"
-    >
+      >
     </app-checkbox>
 
     <app-content-with-info text="F.eks.: Navn, adresse, telefonummer, e-mailadresse, titel m.m." iconSize="small">
@@ -23,7 +23,7 @@
         [formGroup]="dataSensitivityLevelForm"
         formName="PersonDataControl"
         (valueChange)="patchDataSensitivityLevelPersonData($event)"
-      >
+        >
       </app-checkbox>
     </app-content-with-info>
 
@@ -61,20 +61,21 @@
       [formGroup]="dataSensitivityLevelForm"
       formName="SensitiveDataControl"
       (valueChange)="patchDataSensitivityLevelPersonData($event)"
-    >
+      >
     </app-checkbox>
 
     <form [formGroup]="sensitivePersonDataForm" class="form-nested">
-      <app-checkbox
-        *ngFor="let option of sensitivePersonalDataOptions$ | async"
-        labelPosition="after"
-        i18n-text
-        [text]="option.name"
-        [formGroup]="sensitivePersonDataForm"
-        [formName]="option.uuid"
-        (valueChange)="patchSensitivePersonalData()"
-      >
-      </app-checkbox>
+      @for (option of sensitivePersonalDataOptions$ | async; track option) {
+        <app-checkbox
+          labelPosition="after"
+          i18n-text
+          [text]="option.name"
+          [formGroup]="sensitivePersonDataForm"
+          [formName]="option.uuid"
+          (valueChange)="patchSensitivePersonalData()"
+          >
+        </app-checkbox>
+      }
     </form>
 
     <app-checkbox
@@ -84,7 +85,7 @@
       [formGroup]="dataSensitivityLevelForm"
       formName="LegalDataControl"
       (valueChange)="patchDataSensitivityLevelPersonData($event)"
-    >
+      >
     </app-checkbox>
   </form>
 </app-accordion>

@@ -1,13 +1,17 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { debounceTime } from 'rxjs';
-import { APIPublicMessageRequestDTO } from 'src/app/api/v2';
+import {
+  APIPublicMessageIconTypeChoice,
+  APIPublicMessageRequestDTO,
+  APIPublicMessageStatusChoice,
+} from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { DEFAULT_INPUT_DEBOUNCE_TIME } from 'src/app/shared/constants/constants';
-import { isUrlEmptyOrValid } from 'src/app/shared/helpers/link.helpers';
+import { isExternalReferenceUrlEmptyOrValid } from 'src/app/shared/helpers/link.helpers';
 import { iconTypeOptions, PublicMessageIconType } from 'src/app/shared/models/public-messages/icon-type.model';
 import { PublicMessage } from 'src/app/shared/models/public-messages/public-message.model';
 import { StatusType, statusTypeOptions } from 'src/app/shared/models/public-messages/status-type.model';
@@ -15,13 +19,14 @@ import { GlobalAdminPublicMessageActions } from 'src/app/store/global-admin/publ
 import { ScrollbarDialogComponent } from '../../../../shared/components/dialogs/dialog/scrollbar-dialog/scrollbar-dialog.component';
 import { StandardVerticalContentGridComponent } from '../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { TextBoxComponent } from '../../../../shared/components/textbox/textbox.component';
-import { NgIf } from '@angular/common';
-import { ParagraphComponent } from '../../../../shared/components/paragraph/paragraph.component';
-import { DropdownComponent } from '../../../../shared/components/dropdowns/dropdown/dropdown.component';
-import { TextAreaComponent } from '../../../../shared/components/textarea/textarea.component';
-import { RichTextEditorComponent } from '../../../../shared/components/rich-text-editor/rich-text-editor.component';
-import { DialogActionsComponent } from '../../../../shared/components/dialogs/dialog-actions/dialog-actions.component';
+
+import { URL_VALIDATION_ERROR_MESSAGE } from 'src/app/shared/constants/error-message-constants';
 import { ButtonComponent } from '../../../../shared/components/buttons/button/button.component';
+import { DialogActionsComponent } from '../../../../shared/components/dialogs/dialog-actions/dialog-actions.component';
+import { DropdownComponent } from '../../../../shared/components/dropdowns/dropdown/dropdown.component';
+import { ParagraphComponent } from '../../../../shared/components/paragraph/paragraph.component';
+import { RichTextEditorComponent } from '../../../../shared/components/rich-text-editor/rich-text-editor.component';
+import { TextAreaComponent } from '../../../../shared/components/textarea/textarea.component';
 
 @Component({
   selector: 'app-edit-public-message-dialog',
@@ -33,7 +38,6 @@ import { ButtonComponent } from '../../../../shared/components/buttons/button/bu
     ReactiveFormsModule,
     StandardVerticalContentGridComponent,
     TextBoxComponent,
-    NgIf,
     ParagraphComponent,
     DropdownComponent,
     TextAreaComponent,
@@ -68,6 +72,7 @@ export class EditPublicMessageDialogComponent extends BaseComponent implements O
   public readonly iconTypeOptions = iconTypeOptions;
 
   public showUrlError = false;
+  public urlValidationError = URL_VALIDATION_ERROR_MESSAGE;
 
   constructor(
     private store: Store,
@@ -86,7 +91,7 @@ export class EditPublicMessageDialogComponent extends BaseComponent implements O
 
     this.subscriptions.add(
       this.formGroup.controls.url.valueChanges.pipe(debounceTime(DEFAULT_INPUT_DEBOUNCE_TIME)).subscribe((url) => {
-        this.showUrlError = !isUrlEmptyOrValid(url ?? undefined);
+        this.showUrlError = !isExternalReferenceUrlEmptyOrValid(url ?? undefined);
       }),
     );
 
@@ -125,14 +130,11 @@ export class EditPublicMessageDialogComponent extends BaseComponent implements O
     };
   }
 
-  private getStatusValue(): APIPublicMessageRequestDTO.StatusEnum | undefined {
-    const value = this.formGroup.value.status?.value ?? null;
-    //We need to allow null, to reset the value, but the generateed model does not allow it, so we have to cast (28/02/2025)
-    return value as APIPublicMessageRequestDTO.StatusEnum | undefined;
+  private getStatusValue(): APIPublicMessageStatusChoice | undefined {
+    return this.formGroup.value.status?.value ?? undefined;
   }
 
-  private getIconTypeValue(): APIPublicMessageRequestDTO.IconTypeEnum | undefined {
-    const value = this.formGroup.value.iconType?.value ?? null;
-    return value as APIPublicMessageRequestDTO.IconTypeEnum | undefined;
+  private getIconTypeValue(): APIPublicMessageIconTypeChoice | undefined {
+    return this.formGroup.value.iconType?.value ?? undefined;
   }
 }

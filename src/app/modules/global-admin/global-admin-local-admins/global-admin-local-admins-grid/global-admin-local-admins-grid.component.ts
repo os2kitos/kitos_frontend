@@ -12,14 +12,14 @@ import { CreateLocalAdminDialogComponent } from '../create-local-admin-dialog/cr
 import { OverviewHeaderComponent } from '../../../../shared/components/overview-header/overview-header.component';
 import { ButtonComponent } from '../../../../shared/components/buttons/button/button.component';
 import { ExportIconComponent } from '../../../../shared/components/icons/export-icon.component';
-import { NgIf, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { LocalGridComponent } from '../../../../shared/components/local-grid/local-grid.component';
 
 @Component({
   selector: 'app-global-admin-local-admins-grid',
   templateUrl: './global-admin-local-admins-grid.component.html',
   styleUrl: './global-admin-local-admins-grid.component.scss',
-  imports: [OverviewHeaderComponent, ButtonComponent, ExportIconComponent, NgIf, LocalGridComponent, AsyncPipe],
+  imports: [OverviewHeaderComponent, ButtonComponent, ExportIconComponent, LocalGridComponent, AsyncPipe],
 })
 export class GlobalAdminLocalAdminsGridComponent {
   public readonly localAdmins$ = this.store.select(selectAllLocalAdmins);

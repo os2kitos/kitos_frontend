@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
@@ -5,6 +6,13 @@ import { Store } from '@ngrx/store';
 import { debounceTime } from 'rxjs';
 import { APIHelpTextCreateRequestDTO } from 'src/app/api/v2/model/helpTextCreateRequestDTO';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { ButtonComponent } from 'src/app/shared/components/buttons/button/button.component';
+import { DialogActionsComponent } from 'src/app/shared/components/dialogs/dialog-actions/dialog-actions.component';
+import { DialogComponent } from 'src/app/shared/components/dialogs/dialog/dialog.component';
+import { DividerComponent } from 'src/app/shared/components/divider/divider.component';
+import { ParagraphComponent } from 'src/app/shared/components/paragraph/paragraph.component';
+import { StandardVerticalContentGridComponent } from 'src/app/shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { TextBoxComponent } from 'src/app/shared/components/textbox/textbox.component';
 import { HelpTextActions } from 'src/app/store/global-admin/help-texts/actions';
 import { CreateHelpTextDialogComponentStore } from './create-help-text-dialog.component-store';
 
@@ -13,6 +21,16 @@ import { CreateHelpTextDialogComponentStore } from './create-help-text-dialog.co
   templateUrl: './create-help-text-dialog.component.html',
   styleUrl: './create-help-text-dialog.component.scss',
   providers: [CreateHelpTextDialogComponentStore],
+  imports: [
+    CommonModule,
+    DialogComponent,
+    StandardVerticalContentGridComponent,
+    TextBoxComponent,
+    ParagraphComponent,
+    DialogActionsComponent,
+    DividerComponent,
+    ButtonComponent,
+  ],
 })
 export class CreateHelpTextDialogComponent extends BaseComponent implements OnInit {
   public readonly formGroup = new FormGroup({
@@ -27,7 +45,7 @@ export class CreateHelpTextDialogComponent extends BaseComponent implements OnIn
   constructor(
     private dialogRef: MatDialogRef<CreateHelpTextDialogComponent>,
     private store: Store,
-    private componentStore: CreateHelpTextDialogComponentStore,
+    private componentStore: CreateHelpTextDialogComponentStore
   ) {
     super();
   }
@@ -36,7 +54,7 @@ export class CreateHelpTextDialogComponent extends BaseComponent implements OnIn
       this.formGroup.controls.key.valueChanges.pipe(debounceTime(300)).subscribe((key) => {
         if (!key) return;
         this.componentStore.checkIfKeyExists(key);
-      }),
+      })
     );
   }
 

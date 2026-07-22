@@ -1,20 +1,21 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, filter, map, of, switchMap } from 'rxjs';
-import { APIV2GlobalUserInternalINTERNALService } from 'src/app/api/v2';
-import { LocalAdminUserActions } from './actions';
-import { adaptLocalAdminUser } from 'src/app/shared/models/local-admin/local-admin-user.model';
-import { UserActions } from '../../user-store/actions';
 import { concatLatestFrom } from '@ngrx/operators';
-import { selectUserUuid } from '../../user-store/selectors';
 import { Store } from '@ngrx/store';
+import { catchError, filter, map, of, switchMap } from 'rxjs';
+import { GlobalUserInternalV2Service } from 'src/app/api/v2';
+import { adaptLocalAdminUser } from 'src/app/shared/models/local-admin/local-admin-user.model';
 import { OrganizationUserActions } from '../../organization/organization-user/actions';
+import { UserActions } from '../../user-store/actions';
+import { selectUserUuid } from '../../user-store/selectors';
+import { LocalAdminUserActions } from './actions';
 
 @Injectable()
 export class LocalAdminUserEffects {
   constructor(
     private actions$: Actions,
-    private globalUserService: APIV2GlobalUserInternalINTERNALService,
+    @Inject(GlobalUserInternalV2Service)
+    private globalUserService: GlobalUserInternalV2Service,
     private store: Store,
   ) {}
 
@@ -23,7 +24,7 @@ export class LocalAdminUserEffects {
       ofType(LocalAdminUserActions.getLocalAdmins),
       switchMap(() => {
         return this.globalUserService.getManyGlobalUserInternalV2GetAllLocalAdmins().pipe(
-          map((adminsDto) => adminsDto.map((userDto) => adaptLocalAdminUser(userDto))),
+          map((adminsDto) => adminsDto.map((userDto: any) => adaptLocalAdminUser(userDto))),
           map((admins) => LocalAdminUserActions.getLocalAdminsSuccess(admins)),
           catchError(() => of(LocalAdminUserActions.getLocalAdminsError())),
         );

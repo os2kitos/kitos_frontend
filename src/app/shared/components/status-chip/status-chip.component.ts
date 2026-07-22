@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
 import { EntityStatusTextsService } from '../../services/entity-status-texts.service';
 import { TooltipComponent } from '../tooltip/tooltip.component';
-import { NgIf } from '@angular/common';
+
 import { ChipComponent } from '../chip/chip.component';
 
 export enum BooleanValueDisplayType {
@@ -20,7 +20,7 @@ export enum BooleanValueDisplayType {
   selector: 'app-status-chip',
   templateUrl: 'status-chip.component.html',
   styleUrls: ['status-chip.component.scss'],
-  imports: [TooltipComponent, NgIf, ChipComponent],
+  imports: [TooltipComponent, ChipComponent],
 })
 export class StatusChipComponent implements OnInit {
   @Input() public type?: RegistrationEntityTypes;

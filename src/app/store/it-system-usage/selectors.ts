@@ -1,10 +1,12 @@
 import { createSelector } from '@ngrx/store';
+import { memoize } from 'lodash';
 import { APIIdentityNamePairResponseDTO } from 'src/app/api/v2';
 import { mapToRoleAssignmentsRequests } from 'src/app/shared/helpers/role-helpers';
 import { GridData } from 'src/app/shared/models/grid-data.model';
 import { mapIdentityNamePair } from 'src/app/shared/models/identity-name-pair.model';
 import { mapDataSensitivityLevel } from 'src/app/shared/models/it-system-usage/gdpr/data-sensitivity-level.model';
 import { mapSpecificPersonalData } from 'src/app/shared/models/it-system-usage/gdpr/specific-personal-data.model';
+import { FieldPermissionsService } from 'src/app/shared/services/field-permissions.service';
 import { itSystemUsageAdapter, itSystemUsageFeature } from './reducer';
 
 const { selectITSystemUsageState } = itSystemUsageFeature;
@@ -14,8 +16,10 @@ export const selectTotal = createSelector(selectITSystemUsageState, (state) => s
 export const selectIsLoading = createSelector(selectITSystemUsageState, (state) => state.isLoadingSystemUsagesQuery);
 export const selectGridState = createSelector(selectITSystemUsageState, (state) => state.gridState);
 export const selectPreviousGridState = createSelector(selectITSystemUsageState, (state) => state.previousGridState);
+export const selectAnyFilters = createSelector(selectGridState, (gridState) => !!gridState.filter);
 
 export const selectGridData = createSelector(selectAll, selectTotal, (data, total): GridData => ({ data, total }));
+export const selectGridDataItSystemUuids = createSelector(selectAll, (data) => data.map((x) => x.ItSystemUuid));
 export const selectUsageGridColumns = createSelector(selectITSystemUsageState, (state) => state.gridColumns);
 export const selectUsageGridRoleColumns = createSelector(selectITSystemUsageState, (state) => state.gridRoleColumns);
 
@@ -64,6 +68,13 @@ export const selectITSystemUsageHasDeletePermission = createSelector(
   selectITSystemUsageState,
   (state) => state.permissions?.delete,
 );
+export const selectITSystemUsageFieldPermissions = memoize((field: string) =>
+  createSelector(selectITSystemUsageState, (state) =>
+    state.permissions?.fieldPermissions?.fields
+      ? FieldPermissionsService.hasPermission(state.permissions.fieldPermissions.fields, field)
+      : false,
+  ),
+);
 export const selectITSystemUsageHasCreateCollectionPermission = createSelector(
   selectITSystemUsageState,
   (state) => state.collectionPermissions?.create,
@@ -80,7 +91,7 @@ export const selectItSystemUsageResponsibleUnit = createSelector(
 export const selectItSystemUsageUsingOrganizationUnits = createSelector(
   selectItSystemUsage,
   (itSystemUsage): APIIdentityNamePairResponseDTO[] =>
-    itSystemUsage?.organizationUsage?.usingOrganizationUnits
+    (itSystemUsage?.organizationUsage?.usingOrganizationUnits ?? [])
       .slice()
       .sort((a: APIIdentityNamePairResponseDTO, b: APIIdentityNamePairResponseDTO) =>
         a.name.localeCompare(b.name),
@@ -138,6 +149,7 @@ export const selectItSystemUsageLastSeenGridConfig = createSelector(
 );
 
 export const selectItSystemUsageIsPatching = createSelector(selectITSystemUsageState, (state) => state.isPatching);
+export const selectItSystemUsageIsCreating = createSelector(selectITSystemUsageState, (state) => state.isCreating);
 
 export const selectItSystemUsageRights = createSelector(selectItSystemUsage, (state) => state?.roles);
 

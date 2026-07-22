@@ -1,10 +1,10 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { Inject, Injectable, OnDestroy } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { tapResponse } from '@ngrx/operators';
 
 import { Store } from '@ngrx/store';
 import { Observable, combineLatestWith, mergeMap, tap } from 'rxjs';
-import { APIIdentityNamePairResponseDTO, APIV2ItContractInternalINTERNALService } from 'src/app/api/v2';
+import { APIIdentityNamePairResponseDTO, ItContractInternalV2Service } from 'src/app/api/v2';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectItContractUuid } from 'src/app/store/it-contract/selectors';
 
@@ -24,7 +24,8 @@ export class ItContractDataProcessingRegistrationsComponentStore extends Compone
 
   constructor(
     private readonly store: Store,
-    private readonly contractService: APIV2ItContractInternalINTERNALService,
+    @Inject(ItContractInternalV2Service)
+    private readonly contractService: ItContractInternalV2Service,
   ) {
     super({ dataProcessingRegistrationsIsLoading: false });
   }
@@ -54,11 +55,11 @@ export class ItContractDataProcessingRegistrationsComponentStore extends Compone
             nameQuery: search,
           })
           .pipe(
-            tapResponse(
-              (dprs) => this.updateDataProcessingRegistrations(dprs),
-              (e) => console.error(e),
-              () => this.updateDataProcessingRegistrationsIsLoading(false),
-            ),
+            tapResponse({
+              next: (dprs) => this.updateDataProcessingRegistrations(dprs),
+              error: (e) => console.error(e),
+              complete: () => this.updateDataProcessingRegistrationsIsLoading(false),
+            }),
           );
       }),
     ),

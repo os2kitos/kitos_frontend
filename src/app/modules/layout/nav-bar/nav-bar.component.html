@@ -3,8 +3,8 @@
     <img src="assets/img/os2kitos.svg" height="33" width="116" />
   </a>
 
-  <ng-container *ngIf="user$ | async as user">
-    <ng-container *ngIf="uiRootConfig$ | async as uiRootConfig">
+  @if (user$ | async; as user) {
+    @if (uiRootConfig$ | async; as uiRootConfig) {
       <app-spacer></app-spacer>
       <span>
         <app-menu title="Organisation" [path]="AppPath.organization" i18n-title>
@@ -18,71 +18,65 @@
             ><app-table-icon></app-table-icon>Stamdata</app-menu-item
           >
         </app-menu>
-        <app-menu
-          title="IT Systemer"
-          [path]="AppPath.itSystems"
-          i18n-title
-          *ngIf="uiRootConfig.showItSystemModule"
-          data-cy="it-system-nav-bar-item"
-        >
-          <app-menu-item [path]="AppPath.itSystemUsages" [parentPath]="AppPath.itSystems" i18n
-            ><app-table-icon></app-table-icon>IT Systemer</app-menu-item
-          >
-          <app-menu-item [path]="AppPath.itSystemCatalog" [parentPath]="AppPath.itSystems" i18n
-            ><app-table-icon></app-table-icon>IT Systemkatalog</app-menu-item
-          >
-          <app-menu-item [path]="AppPath.itInterfaces" [parentPath]="AppPath.itSystems" i18n
-            ><app-table-icon></app-table-icon>Snitfladekatalog</app-menu-item
-          >
-        </app-menu>
-        <app-menu
-          title="IT Kontrakter"
-          [path]="AppPath.itContracts"
-          i18n-title
-          *ngIf="uiRootConfig.showItContractModule"
-        >
-        </app-menu>
-        <app-menu
-          title="Databehandling"
-          [path]="AppPath.dataProcessing"
-          i18n-title
-          *ngIf="uiRootConfig.showDataProcessing"
-          data-cy="dpr-nav-bar-item"
-        >
-        </app-menu>
+        @if (uiRootConfig.showItSystemModule) {
+          <app-menu title="IT Systemer" [path]="AppPath.itSystems" i18n-title data-cy="it-system-nav-bar-item">
+            <app-menu-item [path]="AppPath.itSystemUsages" [parentPath]="AppPath.itSystems" i18n
+              ><app-table-icon></app-table-icon>IT Systemer</app-menu-item
+            >
+            <app-menu-item [path]="AppPath.itSystemCatalog" [parentPath]="AppPath.itSystems" i18n
+              ><app-table-icon></app-table-icon>IT Systemkatalog</app-menu-item
+            >
+            @if (enableUsageArchive$ | async) {
+              <app-menu-item [path]="AppPath.itSystemUsageArchive" [parentPath]="AppPath.itSystems" i18n
+                ><app-table-icon></app-table-icon>Anvendelseshistorik</app-menu-item
+              >
+            }
+            <app-menu-item [path]="AppPath.itInterfaces" [parentPath]="AppPath.itSystems" i18n
+              ><app-table-icon></app-table-icon>Snitfladekatalog</app-menu-item
+            >
+          </app-menu>
+        }
+        @if (uiRootConfig.showItContractModule) {
+          <app-menu title="IT Kontrakter" [path]="AppPath.itContracts" i18n-title>
+            <app-menu-item [path]="AppPath.contracts" [parentPath]="AppPath.itContracts" i18n
+              ><app-table-icon></app-table-icon>IT Kontrakter</app-menu-item>
+              @if (enableContractSupplier$ | async) {
+                <app-menu-item [path]="AppPath.suppliers" [parentPath]="AppPath.itContracts" i18n
+                ><app-table-icon></app-table-icon>Kontraktleverandører</app-menu-item
+                >
+              }
+            </app-menu>
+        }
+        @if (uiRootConfig.showDataProcessing) {
+          <app-menu title="Databehandling" [path]="AppPath.dataProcessing" i18n-title data-cy="dpr-nav-bar-item">
+          </app-menu>
+        }
       </span>
-    </ng-container>
+    }
     <app-spacer></app-spacer>
-
     <span>
       <app-notifications-button></app-notifications-button>
-
       <span class="separator"></span>
-
       <app-menu [path]="AppPath.profile" i18n-title data-cy="profile-menu">
         <span title class="user-menu">
           <p>{{ (user$ | async)?.fullName }}</p>
           <p>{{ organizationName$ | async }}</p>
         </span>
         <app-menu-item [path]="AppPath.profile" i18n>Min profil</app-menu-item>
-        <app-menu-item
-          [path]="AppPath.localAdmin"
-          i18n
-          *ngIf="isUserCurrentyLocalAdmin$ | async"
-          data-cy="local-admin-menu-item"
-          >Lokal admin</app-menu-item
-        >
-        <app-menu-item [path]="AppPath.globalAdmin" *ngIf="user.isGlobalAdmin" data-cy="global-admin-menu-item" i18n
-          >Global admin</app-menu-item
-        >
-        <app-menu-item *ngIf="hasMultipleOrganizations$ | async" (itemClick)="showOrganizationDialog()" i18n
-          >Skift organisation</app-menu-item
-        >
+        @if (isUserCurrentyLocalAdmin$ | async) {
+          <app-menu-item [path]="AppPath.localAdmin" i18n data-cy="local-admin-menu-item">Lokal admin</app-menu-item>
+        }
+        @if (user.isGlobalAdmin) {
+          <app-menu-item [path]="AppPath.globalAdmin" data-cy="global-admin-menu-item" i18n>Global admin</app-menu-item>
+        }
+        @if (hasMultipleOrganizations$ | async) {
+          <app-menu-item (itemClick)="showOrganizationDialog()" i18n>Skift organisation</app-menu-item>
+        }
         <app-menu-item (itemClick)="logout()">
           <span class="logout-container" i18n>Log ud<app-logout-icon></app-logout-icon> </span>
         </app-menu-item>
       </app-menu>
     </span>
-  </ng-container>
+  }
 </mat-toolbar>
 <app-test-environment-ribbon *appHideInProd></app-test-environment-ribbon>

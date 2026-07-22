@@ -1,24 +1,34 @@
 <ng-container>
-  <div *ngIf="title" class="header" [ngClass]="{ nested: nested }">
-    <app-button *ngIf="nested" class="arrow-button" buttonStyle="tertiary" (buttonClick)="close()">
-      <app-arrow-left-icon></app-arrow-left-icon>
-    </app-button>
-    <div class="container">
-      <h3 class="title-align-bottom">
-        <span class="title-container" data-cy="dialog-title">
-          <a *ngIf="url" [href]="url" target="_blank" data-cy="dialog-title-link">
-            {{ title }}
-          </a>
-          <span *ngIf="!url">
-            {{ title }}
+  @if (title) {
+    <div class="header" [ngClass]="{ nested: nested }">
+      @if (nested) {
+        <app-button class="arrow-button" buttonStyle="tertiary" (buttonClick)="close()">
+          <app-arrow-left-icon></app-arrow-left-icon>
+        </app-button>
+      }
+      <div class="container">
+        <h3 class="title-align-bottom">
+          <span class="title-container" data-cy="dialog-title">
+            @if (url) {
+              <a [href]="url" target="_blank" data-cy="dialog-title-link">
+                {{ title }}
+              </a>
+            }
+            @if (!url) {
+              <span>
+                {{ title }}
+              </span>
+            }
           </span>
-        </span>
-      </h3>
-      <app-help-button [helpTextKey]="helpText" [ngClass]="{ 'hide-help-button': !helpText }"></app-help-button>
+        </h3>
+        <app-help-button [helpTextKey]="helpText" [ngClass]="{ 'hide-help-button': !helpText }"></app-help-button>
+      </div>
     </div>
-  </div>
+  }
 </ng-container>
 
-<app-button class="close-button" buttonStyle="tertiary" (buttonClick)="close()" *ngIf="closable"
-  ><app-x-icon></app-x-icon
-></app-button>
+@if (closable) {
+  <app-button class="close-button" buttonStyle="tertiary" (buttonClick)="close()"
+    ><app-x-icon></app-x-icon
+  ></app-button>
+}

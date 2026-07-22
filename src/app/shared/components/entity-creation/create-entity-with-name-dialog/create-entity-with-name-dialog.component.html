@@ -11,17 +11,19 @@
           [isLoading]="isLoading$ | async"
         ></app-textbox>
         <div class="error-paragraph-height">
-          <app-paragraph *ngIf="alreadyExists$ | async" color="error" i18n data-cy="name-error"
-            >Dette navn er allerede i brug!</app-paragraph
-          >
+          @if (alreadyExists$ | async) {
+            <app-paragraph color="error" i18n data-cy="name-error"
+              >Dette navn er allerede i brug!</app-paragraph
+              >
+            }
+          </div>
         </div>
-      </div>
-    </app-standard-vertical-content-grid>
-    <app-create-entity-dialog-action-buttons
-      [alreadyExists]="alreadyExists$ | async"
-      [isFormValid]="createForm.valid"
-      (cancelEvent)="onCancel()"
-      (createEvent)="createEntity($event)"
-    ></app-create-entity-dialog-action-buttons>
-  </form>
-</app-dialog>
+      </app-standard-vertical-content-grid>
+      <app-create-entity-dialog-action-buttons
+        [alreadyExists]="alreadyExists$ | async"
+        [isFormValid]="createForm.valid"
+        (cancelEvent)="onCancel()"
+        (createEvent)="createEntity($event)"
+      ></app-create-entity-dialog-action-buttons>
+    </form>
+  </app-dialog>

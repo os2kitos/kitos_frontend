@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GlobalAdminOtherBrokenLinksComponentStore } from './global-admin-other-broken-links.component-store';
 import { CardComponent } from '../../../../shared/components/card/card.component';
 import { CardHeaderComponent } from '../../../../shared/components/card-header/card-header.component';
-import { NgIf, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { StandardVerticalContentGridComponent } from '../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { ParagraphComponent } from '../../../../shared/components/paragraph/paragraph.component';
 import { ButtonComponent } from '../../../../shared/components/buttons/button/button.component';
@@ -17,14 +17,13 @@ import { AppDatePipe } from '../../../../shared/pipes/app-date.pipe';
   imports: [
     CardComponent,
     CardHeaderComponent,
-    NgIf,
     StandardVerticalContentGridComponent,
     ParagraphComponent,
     ButtonComponent,
     LoadingComponent,
     AsyncPipe,
-    AppDatePipe,
-  ],
+    AppDatePipe
+],
 })
 export class GlobalAdminOtherBrokenLinksComponent implements OnInit {
   public readonly isLoading$ = this.componentStore.isLoading$;

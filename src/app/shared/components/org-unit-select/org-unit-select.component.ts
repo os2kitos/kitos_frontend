@@ -1,4 +1,4 @@
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
@@ -20,7 +20,7 @@ import { LoadingComponent } from '../loading/loading.component';
   selector: 'app-org-unit-select',
   templateUrl: './org-unit-select.component.html',
   styleUrls: ['./org-unit-select.component.scss'],
-  imports: [NgIf, TreeNodeDropdownComponent, FormsModule, ReactiveFormsModule, LoadingComponent, AsyncPipe],
+  imports: [TreeNodeDropdownComponent, FormsModule, ReactiveFormsModule, LoadingComponent, AsyncPipe],
 })
 export class OrgUnitSelectComponent extends BaseComponent implements OnInit {
   @Input() public disabledUnitsUuids?: string[] = [];

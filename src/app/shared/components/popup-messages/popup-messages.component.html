@@ -1,7 +1,8 @@
 <div class="popup-message-container">
-  <app-popup-message
-    *ngFor="let popupMessage of activePopupMessages$ | async"
-    [popupMessage]="popupMessage"
-    (dismissed)="dismiss(popupMessage.id)"
-  ></app-popup-message>
+  @for (popupMessage of activePopupMessages$ | async; track popupMessage) {
+    <app-popup-message
+      [popupMessage]="popupMessage"
+      (dismissed)="dismiss(popupMessage.id)"
+    ></app-popup-message>
+  }
 </div>

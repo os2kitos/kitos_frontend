@@ -1,0 +1,11 @@
+{
+  "create": true,
+  "modify": {
+    "canModifyAny": true,
+    "modifyProperties": true,
+    "modifyContractRole": true,
+    "modifySystemRole": true,
+    "modifyOrganizationRole": true
+  },
+  "delete": true
+}

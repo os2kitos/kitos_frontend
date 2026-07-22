@@ -1,18 +1,20 @@
+import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { combineLatestWith, map } from 'rxjs';
 import {
-  APIContractProcurementDataResponseDTO,
   APIIdentityNamePairResponseDTO,
   APIItContractResponseDTO,
   APIShallowOrganizationResponseDTO,
   APIUpdateContractRequestDTO,
+  APIYesNoUndecidedChoice,
 } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { RadioButtonOption } from 'src/app/shared/components/radio-buttons/radio-buttons.component';
 import { optionalNewDate } from 'src/app/shared/helpers/date.helpers';
 import { combineOR } from 'src/app/shared/helpers/observable-helpers';
+import { toBulletPoints } from 'src/app/shared/helpers/string.helpers';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { NotificationService } from 'src/app/shared/services/notification.service';
@@ -47,23 +49,23 @@ import {
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
-import { ItContractFrontpageComponentStore } from './it-contract-frontpage.component-store';
-import { toBulletPoints } from 'src/app/shared/helpers/string.helpers';
-import { CardComponent } from '../../../../shared/components/card/card.component';
+import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 import { CardHeaderComponent } from '../../../../shared/components/card-header/card-header.component';
-import { NgIf, AsyncPipe } from '@angular/common';
-import { StatusChipComponent } from '../../../../shared/components/status-chip/status-chip.component';
-import { FormGridComponent } from '../../../../shared/components/form-grid/form-grid.component';
-import { TextBoxComponent } from '../../../../shared/components/textbox/textbox.component';
-import { OptionTypeDropdownComponent } from '../../../../shared/components/dropdowns/option-type-dropdown/option-type-dropdown.component';
-import { DropdownComponent } from '../../../../shared/components/dropdowns/dropdown/dropdown.component';
-import { StandardVerticalContentGridComponent } from '../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { CardComponent } from '../../../../shared/components/card/card.component';
 import { CheckboxComponent } from '../../../../shared/components/checkbox/checkbox.component';
 import { DatePickerComponent } from '../../../../shared/components/datepicker/datepicker.component';
-import { TextAreaComponent } from '../../../../shared/components/textarea/textarea.component';
 import { ConnectedDropdownComponent } from '../../../../shared/components/dropdowns/connected-dropdown/connected-dropdown.component';
+import { DropdownComponent } from '../../../../shared/components/dropdowns/dropdown/dropdown.component';
+import { OptionTypeDropdownComponent } from '../../../../shared/components/dropdowns/option-type-dropdown/option-type-dropdown.component';
+import { FormGridComponent } from '../../../../shared/components/form-grid/form-grid.component';
 import { OrgUnitSelectComponent } from '../../../../shared/components/org-unit-select/org-unit-select.component';
 import { RadioButtonsComponent } from '../../../../shared/components/radio-buttons/radio-buttons.component';
+import { SlideToggleComponent } from '../../../../shared/components/slide-toggle/slide-toggle.component';
+import { StandardVerticalContentGridComponent } from '../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { StatusChipComponent } from '../../../../shared/components/status-chip/status-chip.component';
+import { TextAreaComponent } from '../../../../shared/components/textarea/textarea.component';
+import { TextBoxComponent } from '../../../../shared/components/textbox/textbox.component';
+import { ItContractFrontpageComponentStore } from './it-contract-frontpage.component-store';
 
 @Component({
   selector: 'app-it-contract-frontpage',
@@ -73,7 +75,6 @@ import { RadioButtonsComponent } from '../../../../shared/components/radio-butto
   imports: [
     CardComponent,
     CardHeaderComponent,
-    NgIf,
     StatusChipComponent,
     FormGridComponent,
     FormsModule,
@@ -88,10 +89,15 @@ import { RadioButtonsComponent } from '../../../../shared/components/radio-butto
     ConnectedDropdownComponent,
     OrgUnitSelectComponent,
     RadioButtonsComponent,
+    SlideToggleComponent,
     AsyncPipe,
   ],
 })
 export class ItContractFrontpageComponent extends BaseComponent implements OnInit {
+  private isSyncingSupplierOrganization = false;
+  private currentOrganizationUuid?: string;
+  private currentOrganization?: APIShallowOrganizationResponseDTO;
+
   public readonly contractTemplates$ = this.store
     .select(selectRegularOptionTypes('it-contract_contract-template-type'))
     .pipe(filterNullish());
@@ -181,9 +187,19 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
       value: undefined,
       disabled: true,
     }),
+    supplierOrganizationUnit: new FormControl<APIIdentityNamePairResponseDTO | undefined>({
+      value: undefined,
+      disabled: true,
+    }),
     supplierSignedBy: new FormControl<string | undefined>({ value: undefined, disabled: true }),
     supplierSignedAt: new FormControl<Date | undefined>({ value: undefined, disabled: true }),
     supplierSigned: new FormControl<boolean | undefined>({ value: undefined, disabled: true }),
+    isInternal: new FormControl<boolean | undefined>({ value: undefined, disabled: true }),
+    supplierContactPersonIsSameAsSigner: new FormControl<boolean | undefined>({ value: undefined, disabled: true }),
+    signerIsNotContact: new FormControl<boolean>({ value: true, disabled: true }),
+    contactPerson: new FormControl<string | undefined>({ value: undefined, disabled: true }),
+    contactPhoneNumber: new FormControl<string | undefined>({ value: undefined, disabled: true }),
+    contactEmail: new FormControl<string | undefined>({ value: undefined, disabled: true }),
   });
 
   public readonly procurementFormGroup = new FormGroup({
@@ -192,7 +208,7 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
       disabled: true,
     }),
     procurementPlan: new FormControl<{ name: string } | undefined>({ value: undefined, disabled: true }),
-    procurementInitiated: new FormControl<APIContractProcurementDataResponseDTO.ProcurementInitiatedEnum | undefined>({
+    procurementInitiated: new FormControl<APIYesNoUndecidedChoice | undefined>({
       value: undefined,
       disabled: true,
     }),
@@ -206,11 +222,9 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
 
   public readonly yearsWithQuarters = this.getYearsWithQuarters();
 
-  public readonly activeOptions: Array<
-    RadioButtonOption<APIContractProcurementDataResponseDTO.ProcurementInitiatedEnum>
-  > = [
-    { id: APIContractProcurementDataResponseDTO.ProcurementInitiatedEnum.Yes, label: 'Ja' },
-    { id: APIContractProcurementDataResponseDTO.ProcurementInitiatedEnum.No, label: 'Nej' },
+  public readonly activeOptions: Array<RadioButtonOption<APIYesNoUndecidedChoice>> = [
+    { id: APIYesNoUndecidedChoice.Yes, label: 'Ja' },
+    { id: APIYesNoUndecidedChoice.No, label: 'Nej' },
   ];
 
   public readonly contractIdEnabled$ = this.store.select(selectItContractEnableContractId);
@@ -278,7 +292,92 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
     this.store.dispatch(RegularOptionTypeActions.getOptions('it-contract_procurement-strategy-type'));
     this.store.dispatch(RegularOptionTypeActions.getOptions('it-contract_purchase-form-type'));
 
+    this.setupSupplierOrganizationRules();
+    this.setupContactPersonIsNotSignerRules();
     this.subscribeToItContract();
+  }
+
+  private setupSupplierOrganizationRules() {
+    this.subscriptions.add(
+      this.organizations$
+        .pipe(combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())))
+        .subscribe(([organizations, organizationUuid]) => {
+          this.currentOrganizationUuid = organizationUuid;
+          this.currentOrganization = organizations.find((organization) => organization.uuid === organizationUuid);
+
+          if (this.supplierFormGroup.controls.isInternal.value) {
+            this.syncSupplierOrganizationToCurrentOrganization(true);
+          }
+        }),
+    );
+
+    this.subscriptions.add(
+      this.supplierFormGroup.controls.isInternal.valueChanges.subscribe((isInternal) => {
+        if (!this.isSyncingSupplierOrganization) {
+          this.syncSupplierOrganizationToCurrentOrganization(isInternal === true);
+        }
+      }),
+    );
+  }
+
+  private setupContactPersonIsNotSignerRules() {
+    const signerIsNotContactControl = this.supplierFormGroup.controls.signerIsNotContact;
+    const contactPersonControl = this.supplierFormGroup.controls.contactPerson;
+
+    this.subscriptions.add(
+      signerIsNotContactControl.valueChanges.subscribe((signerIsNotContact) => {
+        if (signerIsNotContact) {
+          contactPersonControl.enable();
+        } else {
+          contactPersonControl.setValue(this.supplierFormGroup.controls.supplierSignedBy.value);
+          contactPersonControl.disable();
+        }
+      }),
+    );
+  }
+
+  public patchSupplierOrganization(valueUuid: string | undefined, valueChange?: ValidatedValueChange<unknown>) {
+    if (valueChange && !valueChange.valid) {
+      this.notificationService.showError($localize`"${valueChange.text}" er ugyldig`);
+      return;
+    }
+
+    const isCurrentOrganization = valueUuid !== undefined && valueUuid === this.currentOrganizationUuid;
+    const selectedOrganization = isCurrentOrganization ? this.currentOrganization : undefined;
+
+    this.store.dispatch(
+      ITContractActions.patchITContract({
+        supplier: {
+          organizationUuid: valueUuid,
+          isInternal: isCurrentOrganization,
+        },
+      }),
+    );
+
+    this.supplierFormGroup.controls.isInternal.setValue(isCurrentOrganization, { emitEvent: false });
+
+    if (selectedOrganization && isCurrentOrganization) {
+      this.supplierFormGroup.controls.supplierOrganization.setValue(selectedOrganization, { emitEvent: false });
+    }
+
+    this.syncSupplierOrganizationToCurrentOrganization(isCurrentOrganization);
+  }
+
+  patchSignedBy(value: string | undefined, valueChange?: ValidatedValueChange<unknown>) {
+    if (valueChange && !valueChange.valid) {
+      this.notificationService.showError($localize`"${valueChange.text}" er ugyldig`);
+    } else {
+      let dto: APIUpdateContractRequestDTO = { supplier: { signedBy: value } };
+
+      const signerIsNotContact = this.supplierFormGroup.controls.signerIsNotContact.value;
+      const contactPersonControl = this.supplierFormGroup.controls.contactPerson;
+      if (!signerIsNotContact && value !== contactPersonControl.value) {
+        contactPersonControl.setValue(value);
+        dto = { supplier: { ...dto.supplier, contactPerson: value } };
+      }
+
+      this.store.dispatch(ITContractActions.patchITContract(dto));
+    }
   }
 
   public patchFrontPage(frontpage: APIUpdateContractRequestDTO, valueChange?: ValidatedValueChange<unknown>) {
@@ -286,6 +385,39 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
       this.notificationService.showError($localize`"${valueChange.text}" er ugyldig`);
     } else {
       this.store.dispatch(ITContractActions.patchITContract(frontpage));
+    }
+  }
+
+  public patchIsInternal(value: boolean | undefined, valueChange?: ValidatedValueChange<unknown>) {
+    if (valueChange && !valueChange.valid) {
+      this.notificationService.showError($localize`"${valueChange.text}" er ugyldig`);
+    } else if (!value) {
+      const dto = { supplier: { isInternal: value, organizationUnitUuid: null, organizationUuid: null } };
+      this.store.dispatch(ITContractActions.patchITContract(dto));
+    } else {
+      this.syncSupplierOrganizationToCurrentOrganization(value ?? false);
+    }
+  }
+
+  public patchUseSignedByForContact(value: boolean | undefined, valueChange?: ValidatedValueChange<unknown>) {
+    if (valueChange && !valueChange.valid) {
+      this.notificationService.showError($localize`"${valueChange.text}" er ugyldig`);
+    } else {
+      const signerIsNotContact = value ?? true;
+      const signedByValue = this.supplierFormGroup.controls.supplierSignedBy.value;
+
+      if (!signerIsNotContact) {
+        this.supplierFormGroup.controls.contactPerson.setValue(signedByValue, { emitEvent: false });
+      }
+
+      this.store.dispatch(
+        ITContractActions.patchITContract({
+          supplier: {
+            useSignedByForContact: !signerIsNotContact,
+            ...(signerIsNotContact ? {} : { contactPerson: signedByValue }),
+          },
+        }),
+      );
     }
   }
 
@@ -378,8 +510,8 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
           ? $localize`Gyldig`
           : $localize`Ikke gyldig`,
       isValid: contract.general.validity.valid,
-      validFrom: optionalNewDate(contract.general.validity.validFrom),
-      validTo: optionalNewDate(contract.general.validity.validTo),
+      validFrom: optionalNewDate(contract.general.validity.validFrom ?? undefined),
+      validTo: optionalNewDate(contract.general.validity.validTo ?? undefined),
       enforcedValid: enforcedValid,
       notes: contract.general.notes,
       contractType: contract.general.contractType,
@@ -397,18 +529,57 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
     this.responsibleFormGroup.patchValue({
       responsibleEntityOrganizationUnit: contract.responsible.organizationUnit,
       responsibleEntitySignedBy: contract.responsible.signedBy,
-      responsibleEntitySignedAt: optionalNewDate(contract.responsible.signedAt),
+      responsibleEntitySignedAt: optionalNewDate(contract.responsible.signedAt ?? undefined),
       responsibleEntitySigned: contract.responsible.signed,
     });
   }
 
   private patchSupplierFormGroup(contract: APIItContractResponseDTO) {
+    this.isSyncingSupplierOrganization = true;
+
     this.supplierFormGroup.patchValue({
       supplierOrganization: contract.supplier.organization,
+      supplierOrganizationUnit: contract.supplier.organizationUnit,
       supplierSignedBy: contract.supplier.signedBy,
-      supplierSignedAt: optionalNewDate(contract.supplier.signedAt),
+      supplierSignedAt: optionalNewDate(contract.supplier.signedAt ?? undefined),
       supplierSigned: contract.supplier.signed,
+      isInternal: contract.supplier.isInternal,
+      signerIsNotContact: this.getSignerIsNotContact(contract.supplier.useSignedByForContact),
+      contactPerson: contract.supplier.contactPerson,
+      contactPhoneNumber: contract.supplier.contactPhoneNumber,
+      contactEmail: contract.supplier.contactEmail,
     });
+
+    this.syncSupplierOrganizationToCurrentOrganization(contract.supplier.isInternal === true);
+    this.isSyncingSupplierOrganization = false;
+  }
+
+  private getSignerIsNotContact(value: boolean | undefined): boolean {
+    if (value === undefined) return false;
+    return !value;
+  }
+
+  private syncSupplierOrganizationToCurrentOrganization(isInternal: boolean) {
+    const supplierOrganizationControl = this.supplierFormGroup.controls.supplierOrganization;
+
+    if (isInternal) {
+      if (this.currentOrganization && supplierOrganizationControl.value?.uuid !== this.currentOrganization.uuid) {
+        supplierOrganizationControl.setValue(this.currentOrganization, { emitEvent: false });
+        this.store.dispatch(
+          ITContractActions.patchITContract({
+            supplier: {
+              organizationUuid: this.currentOrganizationUuid,
+              isInternal: true,
+            },
+          }),
+        );
+      }
+
+      supplierOrganizationControl.disable({ emitEvent: false });
+      return;
+    }
+
+    supplierOrganizationControl.enable({ emitEvent: false });
   }
 
   private patchProcurementFormGroup(contract: APIItContractResponseDTO) {
@@ -440,6 +611,11 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
       this.procurementFormGroup.enable();
     }
     this.frontpageFormGroup.controls.status.disable();
+    if (this.supplierFormGroup.controls.signerIsNotContact.value !== true) {
+      this.supplierFormGroup.controls.contactPerson.disable();
+    }
+
+    this.syncSupplierOrganizationToCurrentOrganization(this.supplierFormGroup.controls.isInternal.value === true);
   }
 
   private enableParentContractForm() {

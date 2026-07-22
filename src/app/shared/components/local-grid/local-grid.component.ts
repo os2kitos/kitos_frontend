@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
-import { ExcelExportData, KENDO_EXCELEXPORT } from '@progress/kendo-angular-excel-export';
+import { ExcelExportData } from '@progress/kendo-angular-excel-export';
 import {
   CellTemplateDirective,
   ColumnComponent,
@@ -9,6 +9,7 @@ import {
   DataBindingDirective,
   ExcelComponent,
   ExcelExportEvent,
+  ExcelModule,
   FilterCellTemplateDirective,
   HeaderTemplateDirective,
   GridComponent as KendoGridComponent,
@@ -35,7 +36,10 @@ import { includedColumnInExport } from '../../helpers/grid-export.helper';
 import { GridColumn } from '../../models/grid-column.model';
 import { GridState, defaultLocalGridState } from '../../models/grid-state.model';
 import { BooleanChange, RowReorderingEvent } from '../../models/grid/grid-events.model';
+import { ActionButtonsCellDeleteIcon } from '../../models/icons/action-buttons-cell-delete-icons';
+import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
 import { GridExportService } from '../../services/grid-export.service';
+import { ChoiceTypeDropdownFilterComponent } from '../grid/choice-type-dropdown-filter/choice-type-dropdown-filter.component';
 import { DateFilterComponent } from '../grid/date-filter/date-filter.component';
 import { DropdownFilterComponent } from '../grid/dropdown-filter/dropdown-filter.component';
 import { GridCellComponent } from '../grid/grid-cell/grid-cell.component';
@@ -74,7 +78,8 @@ import { ParagraphComponent } from '../paragraph/paragraph.component';
     LoadingComponent,
     NoRecordsTemplateDirective,
     ExcelComponent,
-    KENDO_EXCELEXPORT,
+    ExcelModule,
+    ChoiceTypeDropdownFilterComponent,
   ],
 })
 export class LocalGridComponent<T> extends BaseComponent implements OnInit {
@@ -90,6 +95,9 @@ export class LocalGridComponent<T> extends BaseComponent implements OnInit {
   @Input() fitSizeToContent: boolean = false;
   @Input() reorderable: boolean = false;
   @Input() scrollable: 'scrollable' | 'virtual' | 'none' = 'scrollable';
+  @Input() resizable: boolean = true;
+  @Input() entityType?: RegistrationEntityTypes;
+  @Input() public deleteIcon: ActionButtonsCellDeleteIcon = 'trashcan';
 
   @Output() deleteEvent = new EventEmitter<T>();
   @Output() modifyEvent = new EventEmitter<T>();

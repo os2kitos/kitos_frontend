@@ -8,14 +8,14 @@ import {
 } from 'src/app/store/it-system-usage/selectors';
 import { CardComponent } from '../../../../../shared/components/card/card.component';
 import { CardHeaderComponent } from '../../../../../shared/components/card-header/card-header.component';
-import { NgIf, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { NotificationsTableComponent } from '../../../../../shared/components/notifications-table/notifications-table.component';
 
 @Component({
   selector: 'app-it-system-usage-details-notifications',
   templateUrl: './it-system-usage-details-notifications.component.html',
   styleUrls: ['./it-system-usage-details-notifications.component.scss'],
-  imports: [CardComponent, CardHeaderComponent, NgIf, NotificationsTableComponent, AsyncPipe],
+  imports: [CardComponent, CardHeaderComponent, NotificationsTableComponent, AsyncPipe],
 })
 export class ItSystemUsageDetailsNotificationsComponent extends BaseComponent {
   public readonly systemUsageUuid$ = this.store.select(selectItSystemUsageUuid).pipe(filterNullish());

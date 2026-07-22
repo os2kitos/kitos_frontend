@@ -1,17 +1,23 @@
-<app-standard-vertical-content-grid *ngIf="(isLoading$ | async) === false">
-  <ng-container *ngIf="anyRoles$ | async">
-    <ng-content></ng-content>
-  </ng-container>
-  <app-empty-state
-    *ngIf="(anyRoles$ | async) === false"
-    text="Ingen roller tilføjet endnu"
-    context="emptyTable"
-  ></app-empty-state>
-  <app-collection-extension-button
-    *ngIf="hasModifyPermission"
-    text="Tilføj rolle"
-    (clicked)="onAddNew()"
-    i18n-text
-  ></app-collection-extension-button>
-</app-standard-vertical-content-grid>
-<app-loading *ngIf="isLoading$ | async"></app-loading>
+@if ((isLoading$ | async) === false) {
+  <app-standard-vertical-content-grid>
+    @if (anyRoles$ | async) {
+      <ng-content></ng-content>
+    }
+    @if ((anyRoles$ | async) === false) {
+      <app-empty-state
+        text="Ingen roller tilføjet endnu"
+        context="emptyTable"
+      ></app-empty-state>
+    }
+    @if (hasModifyPermission) {
+      <app-collection-extension-button
+        text="Tilføj rolle"
+        (clicked)="onAddNew()"
+        i18n-text
+      ></app-collection-extension-button>
+    }
+  </app-standard-vertical-content-grid>
+}
+@if (isLoading$ | async) {
+  <app-loading></app-loading>
+}

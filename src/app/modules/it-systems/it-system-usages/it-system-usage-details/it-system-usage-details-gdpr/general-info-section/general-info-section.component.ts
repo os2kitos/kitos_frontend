@@ -1,25 +1,25 @@
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
 import { APIGDPRWriteRequestDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import { HostedAt, hostedAtOptions, mapHostedAt } from 'src/app/shared/models/it-system-usage/gdpr/hosted-at.model';
-import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
+import { ISMS_RESPONSIBLE_DISABLED_MESSAGE } from 'src/app/shared/constants/constants';
 import {
-  YesNoDontKnowOption,
-  mapToYesNoDontKnowEnum,
-  yesNoDontKnowOptions,
-} from 'src/app/shared/models/yes-no-dont-know.model';
+  IsDataProcessingAgreementRequired,
+  isDataProcessingAgreementRequiredOptions,
+  mapIsDataProcessingAgreementRequired,
+} from 'src/app/shared/models/it-system-usage/gdpr/is-data-processing-agreement-required.model';
+import { SimpleLink } from 'src/app/shared/models/SimpleLink.model';
+import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors';
 import {
-  selectITSystemUsageEnableGdprBusinessCritical,
   selectITSystemUsageEnableGdprDocumentation,
-  selectITSystemUsageEnableGdprHostedAt,
+  selectITSystemUsageEnableGdprIsDataProcessingAgreementRequired,
   selectITSystemUsageEnableGdprPurpose,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { CardHeaderComponent } from '../../../../../../shared/components/card-header/card-header.component';
@@ -27,7 +27,7 @@ import { CardComponent } from '../../../../../../shared/components/card/card.com
 import { DropdownComponent } from '../../../../../../shared/components/dropdowns/dropdown/dropdown.component';
 import { FormGridComponent } from '../../../../../../shared/components/form-grid/form-grid.component';
 import { TextBoxComponent } from '../../../../../../shared/components/textbox/textbox.component';
-import { EditUrlSectionComponent } from '../edit-url-section/edit-url-section.component';
+import { EditUrlSectionComponent } from '../../../../shared/edit-url-section/edit-url-section.component';
 
 @Component({
   selector: 'app-general-info-section',
@@ -39,7 +39,6 @@ import { EditUrlSectionComponent } from '../edit-url-section/edit-url-section.co
     FormGridComponent,
     FormsModule,
     ReactiveFormsModule,
-    NgIf,
     TextBoxComponent,
     DropdownComponent,
     EditUrlSectionComponent,
@@ -50,26 +49,36 @@ export class GeneralInfoSectionComponent extends BaseComponent implements OnInit
   @Input() disableLinkControl!: Observable<void>;
   @Output() noPermissions = new EventEmitter<AbstractControl[]>();
 
-  public readonly businessCriticalOptions = yesNoDontKnowOptions;
-  public readonly hostedAtOptions = hostedAtOptions;
+  public readonly supplierMessage = ISMS_RESPONSIBLE_DISABLED_MESSAGE;
+
   public readonly gdpr$ = this.store.select(selectItSystemUsageGdpr).pipe(filterNullish());
-  public readonly selectDirectoryDocumentation$ = this.gdpr$.pipe(map((gdpr) => gdpr.directoryDocumentation));
+  public readonly selectDirectoryDocumentation$ = this.gdpr$.pipe(
+    map((gdpr) =>
+      gdpr.directoryDocumentation
+        ? ({ url: gdpr.directoryDocumentation.url, name: gdpr.directoryDocumentation.name } as SimpleLink)
+        : undefined,
+    ),
+  );
   public readonly generalInformationForm = new FormGroup(
     {
       purpose: new FormControl(''),
-      businessCritical: new FormControl<YesNoDontKnowOption | undefined>(undefined),
-      hostedAt: new FormControl<HostedAt | undefined>(undefined),
+      isDataProcessingAgreementRequired: new FormControl<IsDataProcessingAgreementRequired | undefined>(undefined),
     },
-    { updateOn: 'blur' }
+    { updateOn: 'blur' },
   );
   public disableDirectoryDocumentationControl = false;
+  public isDataProcessingAgreementRequiredOptions = isDataProcessingAgreementRequiredOptions;
 
   public readonly purposeEnabled$ = this.store.select(selectITSystemUsageEnableGdprPurpose);
-  public readonly businessCriticalEnabled$ = this.store.select(selectITSystemUsageEnableGdprBusinessCritical);
-  public readonly hostedAtEnabled$ = this.store.select(selectITSystemUsageEnableGdprHostedAt);
   public readonly documentationEnabled$ = this.store.select(selectITSystemUsageEnableGdprDocumentation);
+  public readonly isDataProcessingAgreementRequiredEnabled$ = this.store.select(
+    selectITSystemUsageEnableGdprIsDataProcessingAgreementRequired,
+  );
 
-  constructor(private readonly store: Store, private readonly notificationService: NotificationService) {
+  constructor(
+    private readonly store: Store,
+    private readonly notificationService: NotificationService,
+  ) {
     super();
   }
 
@@ -77,11 +86,12 @@ export class GeneralInfoSectionComponent extends BaseComponent implements OnInit
     this.subscriptions.add(
       this.gdpr$.subscribe((gdpr) => {
         this.generalInformationForm.patchValue({
-          purpose: gdpr.purpose,
-          businessCritical: mapToYesNoDontKnowEnum(gdpr.businessCritical),
-          hostedAt: mapHostedAt(gdpr.hostedAt),
+          purpose: gdpr.processingPurpose,
+          isDataProcessingAgreementRequired: mapIsDataProcessingAgreementRequired(
+            gdpr.isDataProcessingAgreementRequired ?? undefined,
+          ),
         });
-      })
+      }),
     );
 
     this.noPermissions.emit([this.generalInformationForm]);

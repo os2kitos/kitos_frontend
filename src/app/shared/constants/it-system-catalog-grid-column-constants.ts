@@ -9,6 +9,7 @@ export const BUSINESS_TYPE_NAME = 'BusinessType.Name';
 export const KLE_IDS = 'KLEIds';
 export const KLE_NAMES = 'KLENames';
 export const USAGES = 'Usages';
+export const USAGE_NAMES = 'UsageNames';
 
 export const ORGANIZATION_NAME = 'Organization.Name';
 export const LAST_CHANGED_BY_USER_NAME = 'LastChangedByUser.Name';
@@ -23,3 +24,5 @@ export const ARCHIVE_DUTY_COMMENT = 'ArchiveDutyComment';
 
 export const LEGAL_SYSTEM_NAME = 'LegalName';
 export const LEGAL_DATA_PROCESSOR_NAME = 'LegalDataProcessorName';
+
+export const LICENSING_AND_CODE_MODELS = 'LicensingAndCodeModels';

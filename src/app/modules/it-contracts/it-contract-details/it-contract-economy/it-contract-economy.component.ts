@@ -1,3 +1,4 @@
+import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
@@ -23,12 +24,11 @@ import {
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
-import { NgIf, AsyncPipe } from '@angular/common';
-import { CardComponent } from '../../../../shared/components/card/card.component';
 import { CardHeaderComponent } from '../../../../shared/components/card-header/card-header.component';
-import { FormGridComponent } from '../../../../shared/components/form-grid/form-grid.component';
+import { CardComponent } from '../../../../shared/components/card/card.component';
 import { DatePickerComponent } from '../../../../shared/components/datepicker/datepicker.component';
 import { DropdownComponent } from '../../../../shared/components/dropdowns/dropdown/dropdown.component';
+import { FormGridComponent } from '../../../../shared/components/form-grid/form-grid.component';
 import { PaymentTableComponent } from './payment-table/payment-table.component';
 
 @Component({
@@ -36,7 +36,6 @@ import { PaymentTableComponent } from './payment-table/payment-table.component';
   templateUrl: './it-contract-economy.component.html',
   styleUrl: './it-contract-economy.component.scss',
   imports: [
-    NgIf,
     CardComponent,
     CardHeaderComponent,
     FormGridComponent,
@@ -92,7 +91,9 @@ export class ItContractEconomyComponent extends BaseComponent implements OnInit 
         .pipe(filterNullish(), combineLatestWith(this.store.select(selectItContractHasModifyPermissions)))
         .subscribe(([paymentModel, hasModifyPermission]) => {
           this.economyFormGroup.patchValue({
-            operationsRemunerationStartedAt: optionalNewDate(paymentModel?.operationsRemunerationStartedAt),
+            operationsRemunerationStartedAt: optionalNewDate(
+              paymentModel?.operationsRemunerationStartedAt ?? undefined,
+            ),
             paymentFrequency: paymentModel?.paymentFrequency,
             paymentModel: paymentModel?.paymentModel,
             priceRegulation: paymentModel?.priceRegulation,

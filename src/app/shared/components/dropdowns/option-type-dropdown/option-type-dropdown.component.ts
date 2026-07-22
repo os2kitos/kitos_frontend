@@ -1,4 +1,4 @@
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { APIRegularOptionResponseDTO } from 'src/app/api/v2';
@@ -14,7 +14,7 @@ import { OptionTypeDropdownComponentStore } from './option-type-dropdown-compone
   templateUrl: './option-type-dropdown.component.html',
   styleUrl: './option-type-dropdown.component.scss',
   providers: [OptionTypeDropdownComponentStore],
-  imports: [NgIf, DropdownComponent, FormsModule, ReactiveFormsModule, AsyncPipe],
+  imports: [DropdownComponent, FormsModule, ReactiveFormsModule, AsyncPipe],
 })
 export class OptionTypeDropdownComponent extends BaseComponent implements OnInit {
   @Input() optionType!: RegularOptionType | RoleOptionTypes;
