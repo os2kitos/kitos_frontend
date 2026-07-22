@@ -32,6 +32,9 @@ spec:
         - containerPort: 4200
           name: http
           protocol: TCP
+        - containerPort: 8080
+          name: https
+          protocol: TCP
         resources:
           limits:
             memory: 512Mi

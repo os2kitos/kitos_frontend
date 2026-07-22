@@ -10,6 +10,11 @@ spec:
     port: 80
     protocol: TCP
     targetPort: 4200
+  - appProtocol: https
+    name: https
+    port: 443
+    protocol: TCP
+    targetPort: 8080
   selector:
     app: kitos-frontend
   type: ClusterIP

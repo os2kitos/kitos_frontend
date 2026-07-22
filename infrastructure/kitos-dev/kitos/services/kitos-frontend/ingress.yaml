@@ -27,7 +27,33 @@ spec:
               name: http
         path: /
         pathType: Prefix
+  - host: kitos-dev.strongminds.dk
+    http:
+      paths:
+      - backend:
+          service:
+            name: kitos-frontend
+            port:
+              name: https
+        path: /
+        pathType: Prefix
+  - host: 91a42003-91b8-40e7-92e5-59492d1e5d4e.kitos-dev.strongminds.easyhosting.strongminds.dev
+    http:
+      paths:
+      - backend:
+          service:
+            name: kitos-frontend
+            port:
+              name: https
+        path: /
+        pathType: Prefix
   tls:
+  - hosts:
+    - kitos-dev.strongminds.dk
+    secretName: kitos-dev-strongminds-dk-tls
+  - hosts:
+    - 91a42003-91b8-40e7-92e5-59492d1e5d4e.kitos-dev.strongminds.easyhosting.strongminds.dev
+    secretName: 91a42003-91b8-40e7-92e5-59492d1e5d4e-kitos-dev-strongminds-easyhosting-strongminds-dev-tls
   - hosts:
     - kitos-dev.strongminds.dk
     secretName: kitos-dev-strongminds-dk-tls
