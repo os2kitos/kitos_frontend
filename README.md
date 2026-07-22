@@ -10,7 +10,33 @@ Make sure you have installed [Node.js](https://nodejs.org/en/) (preferable using
 
 `yarn start` for a development server. Navigate to `http://localhost:4200/` or `http://127.0.0.1:4200/`. The app will automatically reload if you change any of the source files.
 
+### Running in Docker
+
+Use Docker Compose for a containerized development server with hot reload:
+
+`docker compose up --build`
+
+Then open `http://localhost:4200/`.
+
+To start the frontend against a specific environment run:
+
+Bash:
+`BACKEND_URL=http://host.docker.internal:5000/ docker compose up --build`
+
+Powershell:
+`$env:BACKEND_URL=http://host.docker.internal:5000/`
+`docker compose up --build`
+
+Or use one command (PowerShell), which sets `BACKEND_URL=http://host.docker.internal:5000/` and starts compose:
+`yarn docker:up:local`
+
+Stop the container with:
+
+`docker compose down`
+
 `yarn start:local` runs the development server with a local backend, by changing the values in `src/proxy.conf.json`. This requires a local backend running on `https://localhost:44300`. After terminating, the proxy settings return to the default.
+
+`yarn start:docker` runs the development server with a Docker backend, by changing the values in `src/proxy.conf.json` to `http://localhost:5000`. After terminating, the proxy settings return to the default.
 
 `yarn start:dev` runs the development server and ensures a dev backend is used, by changing the values in `src/proxy.conf.json`. After terminating, the proxy settings return to the default.
 
