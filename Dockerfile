@@ -11,4 +11,4 @@ RUN sed -i 's/\r$//' /app/docker/start-dev.sh && chmod +x /app/docker/start-dev.
 
 EXPOSE 4200
 
-CMD ["yarn", "start:docker"]
+CMD ["sh", "./docker/start-dev.sh"]

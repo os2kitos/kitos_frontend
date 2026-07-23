@@ -196,6 +196,10 @@
             "development": {
               "buildTarget": "kitos-web:build:development,da",
               "proxyConfig": "src/proxy.conf.json"
+            },
+            "docker": {
+              "buildTarget": "kitos-web:build:development,da",
+              "host": "0.0.0.0"
             }
           },
           "defaultConfiguration": "development"
