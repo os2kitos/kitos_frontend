@@ -20,6 +20,8 @@ Then open `http://localhost:4200/`.
 
 To start the frontend against a specific environment run:
 
+The container startup reads `BACKEND_URL` and configures the API proxy from it (also when run in Kubernetes). If `BACKEND_URL` is not set, it defaults to `https://kitos-dev.strongminds.dk/`.
+
 Bash:
 `BACKEND_URL=http://host.docker.internal:5000/ docker compose up --build`
 

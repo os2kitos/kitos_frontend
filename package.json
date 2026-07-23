@@ -10,7 +10,7 @@
   "license": "MPL-2.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --host=127.0.0.1",
+    "start": "ng serve",
     "start:local": "sh -c '$(git rev-parse --show-toplevel)/src/use-local-proxy.sh start'",
     "start:docker": "sh -c '$(git rev-parse --show-toplevel)/src/use-docker-proxy.sh start'",
     "start:dev": "sh -c '$(git rev-parse --show-toplevel)/src/use-dev-proxy.sh start'",
