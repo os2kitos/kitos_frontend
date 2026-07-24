@@ -26,7 +26,7 @@ spec:
       - env:
         - name: BACKEND_URL
           value: https://kitos-dev.strongminds.dk/
-        image: '{will be replaced by build pipeline}'
+        image: ghcr.io/os2kitos/kitos_frontend-kitos-frontend:sha-98ab2eda81744e7754f91c1b79ec659fbe6cd4a5
         name: kitos-frontend
         ports:
         - containerPort: 4200
