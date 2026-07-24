@@ -34,10 +34,10 @@ spec:
           protocol: TCP
         resources:
           limits:
-            memory: 512Mi
-            cpu: 1
+            memory: 4Gi
+            cpu: 2
           requests:
-            memory: 128Mi
-            cpu: 100m
+            memory: 2Gi
+            cpu: 500m
       imagePullSecrets:
       - name: 90d73529-a238-405b-a079-3eea2e8e36e6
