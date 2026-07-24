@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kitos-frontend
+  namespace: kitos
+spec:
+  ports:
+  - appProtocol: http
+    name: http
+    port: 80
+    protocol: TCP
+    targetPort: 4200
+  selector:
+    app: kitos-frontend
+  type: ClusterIP
