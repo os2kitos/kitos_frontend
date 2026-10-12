@@ -10,7 +10,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: os2kitos/kitos_frontend-kitos-frontend
+  IMAGE_NAME: strongminds/kitos_frontend-kitos-frontend
   DEPLOYMENT_MANIFEST: infrastructure/kitos-dev/kitos/services/kitos-frontend/deployment.yaml
 
 jobs:
