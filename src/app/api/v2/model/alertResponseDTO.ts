@@ -15,9 +15,9 @@ import { APIAlertType } from './alertType';
 export interface APIAlertResponseDTO { 
     uuid: string;
     entityUuid: string;
-    name?: string | null;
+    name: string | null;
     alertType?: APIAlertType;
-    message?: string | null;
+    message: string | null;
     created?: string | null;
 }
 

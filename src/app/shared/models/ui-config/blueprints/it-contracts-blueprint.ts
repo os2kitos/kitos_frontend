@@ -33,6 +33,7 @@ export const ItContractsUiBluePrint = {
         },
         isActive: {
           text: $localize`Status`,
+          cannotBeRecommended: true,
         },
         agreementPeriod: {
           text: $localize`Gyldig fra/til`,
@@ -42,6 +43,7 @@ export const ItContractsUiBluePrint = {
         },
         parentContract: {
           text: $localize`Overordnet kontrakt`,
+          cannotBeRecommended: true,
         },
         useParentValidity: {
           text: $localize`Nedarv overordnet kontrakts gyldighed`,
@@ -60,6 +62,15 @@ export const ItContractsUiBluePrint = {
           text: $localize`Leverandørs underskrift`,
           helpText: "Herunder: 'Underskriver', 'Underskrevet' og 'Dato'",
         },
+        externalContactPerson: {
+          text: $localize`Leverandørens kontaktperson`,
+        },
+        externalContactPersonPhone: {
+          text: $localize`Leverandørens kontaktperson (telefon)`,
+        },
+        externalContactPersonEmail: {
+          text: $localize`Leverandørens kontaktperson (email)`,
+        },
         procurementStrategy: {
           text: $localize`Genanskaffelsesstrategi`,
         },
@@ -74,9 +85,11 @@ export const ItContractsUiBluePrint = {
         },
         lastModifiedBy: {
           text: $localize`Sidst redigeret (bruger)`,
+          cannotBeRecommended: true,
         },
         lastModifiedDate: {
           text: $localize`Sidst redigeret (dato)`,
+          cannotBeRecommended: true,
         },
       },
     },
@@ -98,6 +111,12 @@ export const ItContractsUiBluePrint = {
     dataProcessing: {
       text: $localize`Databehandling`,
       helpText: uiConfigHelpTexts.cannotChangeTabOnlyThroughModuleConfig,
+      children: {
+        dataProcessingRegistrations: {
+          text: $localize`Tilknyttede databehandlinger`,
+          isObligatory: true,
+        },
+      },
     },
     deadlines: {
       text: $localize`Aftalefrister`,
@@ -129,6 +148,12 @@ export const ItContractsUiBluePrint = {
     },
     contractRoles: {
       text: $localize`Kontraktroller`,
+      children: {
+        roles: {
+          text: $localize`Kontraktroller`,
+          isObligatory: true,
+        },
+      },
     },
     hierarchy: {
       text: $localize`Hierarki`,
@@ -136,10 +161,22 @@ export const ItContractsUiBluePrint = {
     },
     advice: {
       text: $localize`Advis`,
+      children: {
+        notifications: {
+          text: $localize`Advis`,
+          isObligatory: true,
+        },
+      },
     },
     references: {
       text: $localize`Referencer`,
       helpText: uiConfigHelpTexts.cannotChangeTab,
+      children: {
+        references: {
+          text: $localize`Referencer`,
+          isObligatory: true,
+        },
+      },
     },
   },
 };

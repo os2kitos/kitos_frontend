@@ -16,6 +16,6 @@ import { APIOverviewType } from './overviewType';
 export interface APIOrganizationGridConfigurationResponseDTO { 
     organizationUuid?: string;
     overviewType?: APIOverviewType;
-    visibleColumns?: Array<APIColumnConfigurationResponseDTO> | null;
+    visibleColumns: Array<APIColumnConfigurationResponseDTO> | null;
 }
 

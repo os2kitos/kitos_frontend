@@ -5,6 +5,7 @@
   display: flex;
   flex: 1;
 }
+
 mat-form-field {
   flex: 1;
   display: flex;
@@ -40,11 +41,11 @@ input {
 }
 
 .incorrect-link-color {
-  color: theme.$color-negative;
+  color: theme.$color-warning;
 }
 
 .incorrect-link-color:hover {
-  color: theme.$color-negative;
+  color: theme.$color-warning;
 }
 
 span {

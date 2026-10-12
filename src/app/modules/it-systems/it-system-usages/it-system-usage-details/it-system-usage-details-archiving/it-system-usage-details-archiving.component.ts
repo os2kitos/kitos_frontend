@@ -1,15 +1,15 @@
-import { CommonModule } from '@angular/common';
+﻿import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import {
   ItSystemUsageModuleSegmentOption,
   itSystemUsageModuleSegmentOptions,
 } from 'src/app/shared/constants/it-system-usage-module-segment-constants';
-import { combineOR } from 'src/app/shared/helpers/observable-helpers';
+import { combineOR, mapUIConfigStatusToEnabled} from 'src/app/shared/helpers/observable-helpers';
 import { invertBooleanValue } from 'src/app/shared/pipes/invert-boolean-value';
 import {
-  selectITSystemUsageEnableCatalogArchiveDuty,
-  selectITSystemUsageEnableCatalogArchiveDutyComment,
+  selectITSystemUsageEnableAndRecommendedCatalogArchiveDuty,
+  selectITSystemUsageEnableAndRecommendedCatalogArchiveDutyComment,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { SegmentComponent } from '../../../../../shared/components/segment/segment.component';
 import { ItSystemUsageDetailsArchivingCatalogComponent } from './it-system-usage-details-archiving-catalog/it-system-usage-details-archiving-catalog.component';
@@ -32,10 +32,10 @@ export class ItSystemUsageDetailsArchivingComponent {
   public ItSystemUsageModuleSegmentOption = ItSystemUsageModuleSegmentOption;
   public selected = ItSystemUsageModuleSegmentOption.Usage;
   public itSystemUsageModuleSegmentOptions = itSystemUsageModuleSegmentOptions;
-  public readonly catalogArchiveDutyEnabled$ = this.store.select(selectITSystemUsageEnableCatalogArchiveDuty);
-  public readonly catalogArchiveDutyCommentEnabled$ = this.store.select(
-    selectITSystemUsageEnableCatalogArchiveDutyComment,
-  );
+  public readonly catalogArchiveDutyEnabled$ = this.store.select(selectITSystemUsageEnableAndRecommendedCatalogArchiveDuty).pipe(mapUIConfigStatusToEnabled());
+  public readonly catalogArchiveDutyCommentEnabled$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedCatalogArchiveDutyComment)
+    .pipe(mapUIConfigStatusToEnabled());
 
   constructor(private readonly store: Store) {}
 

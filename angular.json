@@ -3,7 +3,9 @@
   "version": 1,
   "cli": {
     "packageManager": "yarn",
-    "schematicCollections": ["@angular-eslint/schematics"],
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ],
     "analytics": false
   },
   "newProjectRoot": "projects",
@@ -56,13 +58,22 @@
             "outputPath": "dist/kitos-web",
             "index": "src/index.html",
             "main": "src/main.ts",
-            "polyfills": ["zone.js"],
+            "polyfills": [
+              "zone.js"
+            ],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "stylePreprocessorOptions": {
-              "includePaths": ["src/styles"]
+              "includePaths": [
+                "src/styles"
+              ]
             },
-            "allowedCommonJsDependencies": ["deepmerge", "lodash", "moment", "performant-array-to-tree"],
+            "allowedCommonJsDependencies": [
+              "deepmerge",
+              "lodash",
+              "moment",
+              "performant-array-to-tree"
+            ],
             "optimization": {
               "scripts": true,
               "styles": {
@@ -107,9 +118,12 @@
               {
                 "input": "node_modules/@progress/kendo-theme-default/dist/all.css"
               },
-              "src/styles/styles.scss"
+              "src/styles/styles.scss",
+              "src/styles/recommended.scss"
             ],
-            "scripts": ["node_modules/tinymce/tinymce.min.js"],
+            "scripts": [
+              "node_modules/tinymce/tinymce.min.js"
+            ],
             "budgets": [
               {
                 "type": "initial",
@@ -122,7 +136,9 @@
                 "maximumError": "5kb"
               }
             ],
-            "localize": ["da"]
+            "localize": [
+              "da"
+            ]
           },
           "configurations": {
             "production": {
@@ -181,7 +197,9 @@
               "budgets": []
             },
             "da": {
-              "localize": ["da"]
+              "localize": [
+                "da"
+              ]
             }
           },
           "defaultConfiguration": "development"
@@ -221,7 +239,11 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html",
+              "cypress/**/*.ts"
+            ]
           }
         },
         "e2e": {

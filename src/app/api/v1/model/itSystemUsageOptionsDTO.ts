@@ -15,8 +15,8 @@ import { APIHierachyNodeDTO } from './hierachyNodeDTO';
 
 
 export interface APIItSystemUsageOptionsDTO { 
-    businessTypes?: Array<APINamedEntityDTO> | null;
-    systemRoles?: Array<APIBusinessRoleDTO> | null;
-    organizationUnits?: Array<APIHierachyNodeDTO> | null;
+    businessTypes: Array<APINamedEntityDTO> | null;
+    systemRoles: Array<APIBusinessRoleDTO> | null;
+    organizationUnits: Array<APIHierachyNodeDTO> | null;
 }
 

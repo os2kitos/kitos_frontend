@@ -5,7 +5,7 @@ export interface ItSystemUsageArchiveOData {
   ReferenceName: string | null;
   Note: string | null;
   Snapshot: ArchiveSnapshot | null;
-  ArchivedByUser: ArchiveUser | null;
+  ArchivedByUser: string | null;
 }
 
 interface ArchiveSnapshot {
@@ -34,6 +34,11 @@ export const adaptItSystemUsageArchive = (value: any): ItSystemUsageArchiveOData
     ReferenceName: value.ReferenceName ?? null,
     Note: value.Note ?? null,
     Snapshot: value.Snapshot ?? null,
-    ArchivedByUser: value.ArchivedByUser ?? null,
+    ArchivedByUser: getArchivedByUserFullName(value.ArchivedByUser ?? null),
   };
 };
+
+function getArchivedByUserFullName(apiUser: ArchiveUser | null): string | null {
+  if (!apiUser) return null;
+  return `${apiUser.Name} ${apiUser.LastName}`;
+}

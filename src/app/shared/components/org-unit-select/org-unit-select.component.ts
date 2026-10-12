@@ -30,6 +30,7 @@ export class OrgUnitSelectComponent extends BaseComponent implements OnInit {
   @Input() public disableLoading = false;
   @Input() public useMaterialSpinner = false;
   @Input() public size: 'medium' | 'large' = 'large';
+  @Input() public recommended = false;
 
   @Input() public formGroup?: FormGroup;
   @Input() public formName?: string;

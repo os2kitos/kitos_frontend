@@ -1,0 +1,9 @@
+@if (visible) {
+  @if (showTooltip) {
+    <app-tooltip text="Skal udfyldes" i18n-text [matchContentWidth]="true">
+      <span [class.filled]="filled" [class.warning]="!filled" class="recommended-badge">{{ filled ? "✓" : "!" }}</span>
+    </app-tooltip>
+  } @else {
+    <span [class.filled]="filled" [class.warning]="!filled" class="recommended-badge">{{ filled ? "✓" : "!" }}</span>
+  }
+}

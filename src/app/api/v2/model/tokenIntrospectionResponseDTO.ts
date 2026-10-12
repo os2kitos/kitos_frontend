@@ -15,6 +15,6 @@ import { APIClaimResponseDTO } from './claimResponseDTO';
 export interface APITokenIntrospectionResponseDTO { 
     active?: boolean;
     expiration?: string;
-    claims?: Array<APIClaimResponseDTO> | null;
+    claims: Array<APIClaimResponseDTO> | null;
 }
 

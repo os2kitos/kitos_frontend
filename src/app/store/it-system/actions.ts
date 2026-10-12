@@ -1,8 +1,8 @@
 import { createActionGroup, emptyProps } from '@ngrx/store';
 import {
+  APIItSystemPermissionsResponseDTO,
   APIItSystemResponseDTO,
   APIResourceCollectionPermissionsResponseDTO,
-  APIResourcePermissionsResponseDTO,
   APIUpdateItSystemRequestDTO,
 } from 'src/app/api/v2';
 import { ExternalReferenceProperties } from 'src/app/shared/models/external-references/external-reference-properties.model';
@@ -31,7 +31,7 @@ export const ITSystemActions = createActionGroup({
     'Update Grid Data From Grid': (gridState: GridState) => ({ gridState }),
 
     'Get IT System Permissions': (systemUuid: string) => ({ systemUuid }),
-    'Get IT System Permissions Success ': (permissions?: APIResourcePermissionsResponseDTO) => ({
+    'Get IT System Permissions Success ': (permissions?: APIItSystemPermissionsResponseDTO) => ({
       permissions,
     }),
     'Get IT System Permissions Error': emptyProps(),

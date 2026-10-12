@@ -18,6 +18,10 @@ mat-form-field {
   @include mixins.mat-input-adjustment;
 }
 
+:host ::ng-deep .recommended-badge {
+  display: inline-flex;
+}
+
 .disabled {
   color: theme.$color-neutral-80 !important;
 }

@@ -9,6 +9,7 @@ import { BaseFormComponent } from './base-form.component';
   standalone: false,
 })
 export class BaseDropdownComponent<T> extends BaseFormComponent<T | null> implements OnInit, OnChanges {
+  @Input() public recommended = false;
   @Input() public data?: T[] | null;
   @Input() public textField = 'name';
   @Input() public itemDescriptionField = 'description';

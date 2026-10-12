@@ -12,8 +12,8 @@
 
 
 export interface APIHelpTextResponseDTO { 
-    title?: string | null;
-    key?: string | null;
-    description?: string | null;
+    title: string | null;
+    key: string | null;
+    description: string | null;
 }
 

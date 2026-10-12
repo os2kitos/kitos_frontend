@@ -12,6 +12,6 @@
 
 
 export interface APITokenIntrospectionRequest { 
-    token?: string | null;
+    token: string | null;
 }
 

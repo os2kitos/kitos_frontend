@@ -4,13 +4,13 @@ import { tapResponse } from '@ngrx/operators';
 
 import { Store } from '@ngrx/store';
 import { Observable, combineLatestWith, mergeMap, tap } from 'rxjs';
-import { APIOrganizationResponseDTO, DataProcessingRegistrationInternalV2Service } from 'src/app/api/v2';
+import { APIShallowOrganizationResponseWithDisabledStateDTO, DataProcessingRegistrationInternalV2Service } from 'src/app/api/v2';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectDataProcessingUuid } from 'src/app/store/data-processing/selectors';
 
 interface State {
   loading: boolean;
-  organizations?: Array<APIOrganizationResponseDTO>;
+  organizations?: Array<APIShallowOrganizationResponseWithDisabledStateDTO>;
 }
 @Injectable()
 export class CreateProcessorDialogComponentStore extends ComponentStore<State> {
@@ -25,7 +25,7 @@ export class CreateProcessorDialogComponentStore extends ComponentStore<State> {
   }
 
   private updateOrganizations = this.updater(
-    (state, organizations: Array<APIOrganizationResponseDTO>): State => ({
+    (state, organizations: Array<APIShallowOrganizationResponseWithDisabledStateDTO>): State => ({
       ...state,
       organizations,
     }),

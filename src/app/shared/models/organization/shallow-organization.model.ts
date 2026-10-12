@@ -4,7 +4,7 @@ export interface ShallowOrganization {
   cvr?: string;
 }
 
-export function adaptShallowOrganization(source: any): ShallowOrganization | undefined {
+export function adaptShallowOrganization(source: ShallowOrganization): ShallowOrganization | undefined {
   if (!source.uuid) {
     throw new Error('Invalid shallow organization source: missing uuid');
   }

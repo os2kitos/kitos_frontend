@@ -12,8 +12,8 @@
 
 
 export interface APIOrganizationMasterDataRoleResponseDTO { 
-    name?: string | null;
-    email?: string | null;
+    name: string | null;
+    email: string | null;
     id?: number;
 }
 

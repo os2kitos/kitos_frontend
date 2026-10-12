@@ -9,7 +9,7 @@
         class="two-thirds-column-width"
         [formGroup]="generalInformationForm"
         formName="purpose"
-        [maxLength]="250"
+        [recommended]="(purposeRecommended$ | async) === true"
         (valueChange)="patchGdpr({ processingPurpose: $event })"
       ></app-textbox>
     }
@@ -22,6 +22,7 @@
         (submitMethod)="patchSimpleLink($event)"
         (clearClick)="resetSimpleLink()"
         [isDisabled]="disableDirectoryDocumentationControl"
+        [recommended]="(documentationRecommended$ | async) === true"
       ></app-edit-url-section>
     }
     @if (isDataProcessingAgreementRequiredEnabled$ | async) {
@@ -30,7 +31,9 @@
       i18n-text
       [formGroup]="generalInformationForm"
       formName="isDataProcessingAgreementRequired"
+      class="two-thirds-column-width"
       [data]="isDataProcessingAgreementRequiredOptions"
+      [recommended]="(isDataProcessingAgreementRequiredRecommended$ | async) === true"
       (valueChange)="patchGdpr({ isDataProcessingAgreementRequired: $event })"
     >
     </app-dropdown>

@@ -3011,9 +3011,6 @@
       <trans-unit id="4502831876543718290" datatype="html">
         <source>Leverandør</source>
       </trans-unit>
-      <trans-unit id="5430552859159538909" datatype="html">
-        <source>Leverandørens kontraktunderskriver</source>
-      </trans-unit>
       <trans-unit id="7344965017322024752" datatype="html">
         <source>Genanskaffelse</source>
       </trans-unit>
@@ -4191,21 +4188,6 @@
       <trans-unit id="984734426874401647" datatype="html">
         <source>Tilføj leverandør</source>
       </trans-unit>
-      <trans-unit id="4789455191486047781" datatype="html">
-        <source>Når kommunen har en eller flere leverandører tilknyttet, deaktiveres redigering af følgende felter i Kitos:</source>
-      </trans-unit>
-      <trans-unit id="5075260696326393711" datatype="html">
-        <source>Databehandling - Tilsyn - Gennemførte og kommende tilsyn</source>
-      </trans-unit>
-      <trans-unit id="7857124855661066958" datatype="html">
-        <source>IT Systemer - Systemforside - Indeholder AI-teknologi?</source>
-      </trans-unit>
-      <trans-unit id="5717990299723971305" datatype="html">
-        <source>IT Systemer - Systemforside - Kritikalitet</source>
-      </trans-unit>
-      <trans-unit id="6192599242508017517" datatype="html">
-        <source>IT Systemer - GDPR - Hvad viste den seneste risikovurdering?</source>
-      </trans-unit>
       <trans-unit id="2633970024634511367" datatype="html">
         <source>Vælg leverandør</source>
       </trans-unit>
@@ -5213,8 +5195,8 @@
       <trans-unit id="6784575836143814833" datatype="html">
         <source>Kryptering</source>
       </trans-unit>
-      <trans-unit id="3479549752860605077" datatype="html">
-        <source>Pseudonomisering</source>
+      <trans-unit id="2655152388017872668" datatype="html">
+        <source>Pseudonymisering</source>
       </trans-unit>
       <trans-unit id="8121760203222953890" datatype="html">
         <source>Adgangsstyring</source>
@@ -5354,8 +5336,8 @@
       <trans-unit id="4106659631682454209" datatype="html">
         <source>Sidst redigeret dato</source>
       </trans-unit>
-      <trans-unit id="3604722267089766233" datatype="html">
-        <source>Databehandler afftale indgået</source>
+      <trans-unit id="4745265311701888438" datatype="html">
+        <source>Databehandler aftale indgået</source>
       </trans-unit>
       <trans-unit id="7985556487871369485" datatype="html">
         <source>Ansvarlig enhed</source>
@@ -6050,9 +6032,6 @@
       <trans-unit id="7550982890201476053" datatype="html">
         <source>Arkiveringsdato</source>
       </trans-unit>
-      <trans-unit id="9106425744426550513" datatype="html">
-        <source>Referencenavn</source>
-      </trans-unit>
       <trans-unit id="2193029653870382707" datatype="html">
         <source>Lokalt systemnavn</source>
       </trans-unit>
@@ -6124,9 +6103,6 @@
       </trans-unit>
       <trans-unit id="6695689715467154620" datatype="html">
         <source>Tilsynsmulighed</source>
-      </trans-unit>
-      <trans-unit id="1887192367982958175" datatype="html">
-        <source>Kontrakter med kritikalitet</source>
       </trans-unit>
       <trans-unit id="2104255059383970781" datatype="html">
         <source>Kontraktleverandøroverblik</source>
@@ -6205,6 +6181,99 @@
       </trans-unit>
       <trans-unit id="8841697561528871723" datatype="html">
         <source>undermodul</source>
+      </trans-unit>
+      <trans-unit id="2642788272406240118" datatype="html">
+        <source>Orden</source>
+      </trans-unit>
+      <trans-unit id="2341326261110130680" datatype="html">
+        <source>En lavere værdi angiver en lavere kritikalitet.</source>
+      </trans-unit>
+      <trans-unit id="8819444938310265564" datatype="html">
+        <source>Udslagsgivende kontrakter</source>
+      </trans-unit>
+      <trans-unit id="7951043978617668941" datatype="html">
+        <source>Kritikalitetsprioritet</source>
+      </trans-unit>
+      <trans-unit id="1122304114460972965" datatype="html">
+        <source>Ingen kontrakter fundet</source>
+      </trans-unit>
+      <trans-unit id="2023668919263536036" datatype="html">
+        <source>Anbefalet</source>
+      </trans-unit>
+      <trans-unit id="7916092021353581046" datatype="html">
+        <source>Leverandørens kontaktperson (email)</source>
+      </trans-unit>
+      <trans-unit id="8144839271710808705" datatype="html">
+        <source>Leverandørens kontaktperson (telefon)</source>
+      </trans-unit>
+      <trans-unit id="1243158065978007867" datatype="html">
+        <source>ESDH Sag</source>
+      </trans-unit>
+      <trans-unit id="1288360675901164126" datatype="html">
+        <source>Du tager nu systemet ud af anvendelse og arkiverer anvendelseshistorikken.</source>
+      </trans-unit>
+      <trans-unit id="1292871686016142444" datatype="html">
+        <source>Kunne ikke indlæse felter</source>
+      </trans-unit>
+      <trans-unit id="1525646804357117160" datatype="html">
+        <source>Felt</source>
+      </trans-unit>
+      <trans-unit id="1799559380089021507" datatype="html">
+        <source>Delte</source>
+      </trans-unit>
+      <trans-unit id="3269755482736792393" datatype="html">
+        <source>Tilsyn rapport link navn</source>
+      </trans-unit>
+      <trans-unit id="3965072850039100257" datatype="html">
+        <source>Databehandling - Tilsyn</source>
+      </trans-unit>
+      <trans-unit id="5007043623745180231" datatype="html">
+        <source>Field authorization customization</source>
+      </trans-unit>
+      <trans-unit id="6181422202096188207" datatype="html">
+        <source>GDPR Foretaget risikovurdering</source>
+      </trans-unit>
+      <trans-unit id="6663759333219791704" datatype="html">
+        <source>Tilsynmulighed</source>
+      </trans-unit>
+      <trans-unit id="6707403893965762451" datatype="html">
+        <source>GDPR Hvad viste den seneste risikovurdering?</source>
+      </trans-unit>
+      <trans-unit id="6888355800188498364" datatype="html">
+        <source><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>Indstil felter<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></source>
+      </trans-unit>
+      <trans-unit id="8161236629757029716" datatype="html">
+        <source>Tilsyn rapport link</source>
+      </trans-unit>
+      <trans-unit id="838918169902639312" datatype="html">
+        <source>Indstil felter</source>
+      </trans-unit>
+      <trans-unit id="900172157446252135" datatype="html">
+        <source>Tilsyn bemærkninger</source>
+      </trans-unit>
+      <trans-unit id="8881692073958525088" datatype="html">
+        <source>Udvalgte organisationer vil have adgang til de tildelte felter i Kitos</source>
+      </trans-unit>
+      <trans-unit id="3461232292795380025" datatype="html">
+        <source>Markér alle som anbefalet</source>
+      </trans-unit>
+      <trans-unit id="6298921017590905716" datatype="html">
+        <source>Fjern alle anbefalinger</source>
+      </trans-unit>
+      <trans-unit id="5756290135695444914" datatype="html">
+        <source>Skal udfyldes</source>
+      </trans-unit>
+      <trans-unit id="6101777371996107225" datatype="html">
+        <source>Maksimalt <x id="INTERPOLATION" equiv-text="{{ error.requiredLength }}"/> tegn.</source>
+      </trans-unit>
+      <trans-unit id="8567762121583906121" datatype="html">
+        <source>Faktureringsperiode</source>
+      </trans-unit>
+      <trans-unit id="3567053018374354690" datatype="html">
+        <source>Gem delte felter</source>
+      </trans-unit>
+      <trans-unit id="5815910713095274021" datatype="html">
+        <source>Et eller flere felter er indstillet til &quot;Delte&quot;. Både leverandøren og kommunen kan redigere disse felter og dermed overskrive hinandens ændringer. Vil du fortsætte med at gemme?</source>
       </trans-unit>
     </body>
   </file>

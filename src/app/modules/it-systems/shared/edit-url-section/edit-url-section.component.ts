@@ -16,6 +16,8 @@ import { EditSimpleLinkDialogComponent } from '../edit-url-dialog/edit-url-dialo
   imports: [LinkTextboxComponent, AsyncPipe],
 })
 export class EditUrlSectionComponent extends BaseComponent {
+  // Undefined preserves the badge state derived from this field.
+  @Input() recommendedFilled: boolean | undefined;
   @Input() title!: string;
   @Input() simpleLink$!: Observable<SimpleLink | undefined>;
   @Input() isDisabled = false;
@@ -25,7 +27,7 @@ export class EditUrlSectionComponent extends BaseComponent {
   @Input() linkDisabledMessage?: string;
   @Input() closeDialogOnSubmit = false;
   @Input() disableSubmitIfNoUrl = false;
-
+  @Input() recommended: boolean = false;
   @Output() submitMethod = new EventEmitter();
 
   public doesSimpleLinkExist$ = this.simpleLink$?.pipe(map((simpleLink) => simpleLink !== undefined));

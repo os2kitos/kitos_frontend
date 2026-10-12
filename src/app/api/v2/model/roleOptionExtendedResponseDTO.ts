@@ -35,7 +35,7 @@ export interface APIRoleOptionExtendedResponseDTO {
     /**
      * Description about this roles usage externally
      */
-    externallyAvailableDescription?: string | null;
+    externallyAvailableDescription: string | null;
     /**
      * IsAvailable is set to true if the type is available in the requested organization context.  If set to false, changes which point to this will fail since it has been deprecated within the organization.  Existing registrations will be unaffected.
      */

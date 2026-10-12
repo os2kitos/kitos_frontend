@@ -13,6 +13,6 @@
 
 export interface APICreateDataProcessingRegistrationDTO { 
     organizationId?: number;
-    name?: string | null;
+    name: string | null;
 }
 

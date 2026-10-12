@@ -1,5 +1,7 @@
 <app-card>
   <app-card-header
+    [recommended]="(recommendedBadge$ | async)?.visible ?? false"
+    [recommendedFilled]="(recommendedBadge$ | async)?.filled ?? false"
     title="IT Kontrakten gælder flg. databehandlingsregisteringer"
     i18n-title
     helpTextKey="it-contract.edit.data-processing"

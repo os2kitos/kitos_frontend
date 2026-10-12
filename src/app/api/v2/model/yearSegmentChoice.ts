@@ -11,11 +11,12 @@
  */
 
 
-export type APIYearSegmentChoice = 'EndOfCalendarYear' | 'EndOfQuarter' | 'EndOfMonth';
+export type APIYearSegmentChoice = 'EndOfCalendarYear' | 'EndOfQuarter' | 'EndOfMonth' | 'BillingPeriod';
 
 export const APIYearSegmentChoice = {
     EndOfCalendarYear: 'EndOfCalendarYear' as APIYearSegmentChoice,
     EndOfQuarter: 'EndOfQuarter' as APIYearSegmentChoice,
-    EndOfMonth: 'EndOfMonth' as APIYearSegmentChoice
+    EndOfMonth: 'EndOfMonth' as APIYearSegmentChoice,
+    BillingPeriod: 'BillingPeriod' as APIYearSegmentChoice
 };
 

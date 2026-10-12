@@ -12,8 +12,8 @@
 
 
 export interface APIContactPersonResponseDTO { 
-    name?: string | null;
-    email?: string | null;
+    name: string | null;
+    email: string | null;
     id?: number;
     lastName?: string | null;
     phoneNumber?: string | null;

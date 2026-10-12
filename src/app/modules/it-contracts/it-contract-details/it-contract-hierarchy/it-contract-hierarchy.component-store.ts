@@ -58,7 +58,7 @@ export class ItContractHierarchyComponentStore extends ComponentStore<State> {
         this.updateIsLoading(true);
         return this.apiItContractInternalService.getManyItContractInternalV2GetHierarchy({ contractUuid: uuid }).pipe(
           tapResponse({
-            next: (hierarchy: any) => this.updateHierarchy(hierarchy),
+            next: (hierarchy) => this.updateHierarchy(hierarchy),
             error: (e) => console.error(e),
             complete: () => this.updateIsLoading(false),
           }),

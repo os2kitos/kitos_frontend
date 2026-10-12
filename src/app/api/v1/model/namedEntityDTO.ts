@@ -12,7 +12,7 @@
 
 
 export interface APINamedEntityDTO { 
-    id?: number;
-    name?: string | null;
+    id: number;
+    name: string | null;
 }
 

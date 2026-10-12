@@ -1,4 +1,4 @@
-import { AsyncPipe } from '@angular/common';
+﻿import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatToolbar } from '@angular/material/toolbar';
@@ -11,7 +11,7 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectAllAlertCount } from 'src/app/store/alerts/selectors';
 import { OrganizationActions } from 'src/app/store/organization/actions';
 import { selectUIRootConfig } from 'src/app/store/organization/selectors';
-import { selectITSystemUsageEnableUsageArchive } from 'src/app/store/organization/ui-module-customization/selectors';
+import { selectITSystemUsageEnableAndRecommendedUsageArchive, selectItContractsEnableAndRecommendedSupplier } from 'src/app/store/organization/ui-module-customization/selectors';
 import { UserActions } from 'src/app/store/user-store/actions';
 import {
   selectHasMultipleOrganizations,
@@ -28,7 +28,7 @@ import { MenuItemComponent } from '../menu-item/menu-item.component';
 import { MenuComponent } from '../menu/menu.component';
 import { NotificationsButtonComponent } from '../notifications-button/notifications-button.component';
 import { TestEnvironmentRibbonComponent } from '../test-environment-ribbon/test-environment-ribbon.component';
-import { selectIContractsEnableSupplier } from 'src/app/store/organization/ui-module-customization/selectors';
+import { mapUIConfigStatusToEnabled } from 'src/app/shared/helpers/observable-helpers';
 
 @Component({
   selector: 'app-nav-bar',
@@ -56,8 +56,8 @@ export class NavBarComponent extends BaseComponent implements OnInit {
   public readonly hasMultipleOrganizations$ = this.store.select(selectHasMultipleOrganizations);
   public readonly uiRootConfig$ = this.store.select(selectUIRootConfig).pipe(filterNullish());
   public readonly isUserCurrentyLocalAdmin$ = this.store.select(selectUserIsCurrentlyLocalAdmin);
-  public readonly enableContractSupplier$ = this.store.select(selectIContractsEnableSupplier);
-  public readonly enableUsageArchive$ = this.store.select(selectITSystemUsageEnableUsageArchive);
+  public readonly enableContractSupplier$ = this.store.select(selectItContractsEnableAndRecommendedSupplier).pipe(mapUIConfigStatusToEnabled());
+  public readonly enableUsageArchive$ = this.store.select(selectITSystemUsageEnableAndRecommendedUsageArchive).pipe(mapUIConfigStatusToEnabled());
 
   public readonly alertsCount$ = this.store.select(selectAllAlertCount);
 

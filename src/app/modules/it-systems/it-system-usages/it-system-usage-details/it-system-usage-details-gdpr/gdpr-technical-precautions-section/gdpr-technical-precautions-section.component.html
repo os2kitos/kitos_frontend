@@ -1,4 +1,10 @@
 <app-accordion
+  [recommended]="(technicalPrecautionsRecommended$ | async) === true"
+  [recommendedFilled]="
+    !!mainFormGroup.controls.yesNoDontKnowControl.value &&
+    (mainFormGroup.controls.yesNoDontKnowControl.value.value !== 'Yes' ||
+    !!(selectTechnicalDocumentation$ | async))
+  "
   title="Implementeret passende tekniske foranstaltninger"
   [isExpanded]="(isExpanded$ | async) ?? false"
   (expandedChanged)="onExpandedChanged($event)"
@@ -14,6 +20,7 @@
         [data]="yesNoDontKnowOptions"
         (valueChange)="patchGdpr({ technicalPrecautionsInPlace: $event })"
         data-cy="technical-precautions-dropdown"
+        [recommended]="(technicalPrecautionsRecommended$ | async) === true"
       ></app-dropdown>
       <app-paragraph paragraphSize="x-small" [bold]="true" i18n>Hvad består de af?</app-paragraph>
       @for (option of technicalPrecautionsOptions; track option) {
@@ -31,8 +38,12 @@
         [simpleLink$]="selectTechnicalDocumentation$"
         [isDisabled]="(isTechnicalPrecautionsFalse$ | async) !== false"
         data-cy="technical-precautions-documentation-link"
-        (submitMethod)="patchGdpr({ technicalPrecautionsDocumentation: $event })"
         [isDisabled]="disableDirectoryDocumentationControl"
+        [recommendedFilled]="
+          mainFormGroup.controls.yesNoDontKnowControl.value?.value === 'Yes' ? undefined : !!mainFormGroup.controls.yesNoDontKnowControl.value
+        "
+        [recommended]="(technicalPrecautionsRecommended$ | async) === true"
+        (submitMethod)="patchGdpr({ technicalPrecautionsDocumentation: $event })"
       ></app-edit-url-section>
     </app-standard-vertical-content-grid>
   </form>

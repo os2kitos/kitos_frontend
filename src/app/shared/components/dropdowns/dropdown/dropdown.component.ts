@@ -4,6 +4,7 @@ import { AsyncPipe } from '@angular/common';
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
+  NgPlaceholderTemplateDirective,
   NgFooterTemplateDirective,
   NgLabelTemplateDirective,
   NgOptionTemplateDirective,
@@ -12,6 +13,7 @@ import {
 import { combineLatest } from 'rxjs';
 import { addExpiredText } from 'src/app/shared/helpers/option-type.helper';
 import { BaseDropdownComponent } from '../../../base/base-dropdown.component';
+import { RecommendedBadgeComponent } from '../../recommended-badge/recommended-badge.component';
 import { ParagraphComponent } from '../../paragraph/paragraph.component';
 import { TextBoxInfoComponent } from '../../textbox-info/textbox-info.component';
 
@@ -20,6 +22,8 @@ import { TextBoxInfoComponent } from '../../textbox-info/textbox-info.component'
   templateUrl: 'dropdown.component.html',
   styleUrls: ['dropdown.component.scss'],
   imports: [
+    NgPlaceholderTemplateDirective,
+    RecommendedBadgeComponent,
     FormsModule,
     ReactiveFormsModule,
     NgSelectComponent,
@@ -32,6 +36,8 @@ import { TextBoxInfoComponent } from '../../textbox-info/textbox-info.component'
   ],
 })
 export class DropdownComponent<T> extends BaseDropdownComponent<T | null> implements OnInit, OnChanges {
+  // Undefined preserves the badge state derived from this field.
+  @Input() public recommendedFilled: boolean | undefined;
   @Input() public considerCurrentValueObsoleteIfNotPresentInData = true;
   @Input() public appendTo: string = '';
   @Input() public clearable: boolean = true;

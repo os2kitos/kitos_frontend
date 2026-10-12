@@ -12,9 +12,9 @@
 
 
 export interface APINamedEntityWithUserFullNameV2DTO { 
-    id?: number;
+    id: number;
     uuid?: string | null;
-    name?: string | null;
+    name: string | null;
     userFullName?: string | null;
 }
 

@@ -9,8 +9,14 @@ export default defineConfig({
     viewportHeight: 1000,
     defaultCommandTimeout: 10000,
     pageLoadTimeout: 60000,
+    // Backend is fully mocked via cy.intercept fixtures, so real network latency never
+    // occurs; the 30s Cypress default responseTimeout only delays failure detection when
+    // something hangs (e.g. a missed/misnamed intercept alias).
+    responseTimeout: 15000,
+    // Root causes of flakiness (fixed waits, intercept-ordering races) have been fixed;
+    // keep 1 retry as a safety net for genuine environment-level flakiness, not to mask bugs.
     retries: {
-      runMode: 2,
+      runMode: 1,
     },
 
     setupNodeEvents(on, config) {

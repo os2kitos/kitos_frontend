@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
 import { catchError, map, of, switchMap } from 'rxjs';
 import { CONTRACT_SUPPLIERS_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-constants';
+import { addSecondaryContainsField } from 'src/app/shared/helpers/odata-query.helpers';
 import { adaptITContractSupplier } from 'src/app/shared/models/it-contract/it-contract-supplier.model';
 import { OData } from 'src/app/shared/models/odata.model';
 import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
@@ -79,10 +80,12 @@ export class ITContractSupplierEffects {
 }
 
 function applyQueryFixes(odataString: string) {
-  return odataString
+  let fixedString = odataString
     .replace(/HighestCriticalityUuid eq '([\w-]+)'/, 'HighestCriticalityUuid eq $1')
     .replace(
       /contains\(ContractsAtHighestCriticality,\s*([^)]*)\)/g,
       'ContractsAtHighestCriticality/any(c: contains(c/ContractName,$1))',
     );
+  fixedString = addSecondaryContainsField(fixedString, 'SupplierCvr', 'SupplierForeignCvr');
+  return fixedString;
 }

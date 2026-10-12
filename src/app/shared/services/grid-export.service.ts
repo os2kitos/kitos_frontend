@@ -89,7 +89,7 @@ export class GridExportService {
 
               // Create a separate field for the names
               const namesField = `${field}Names`;
-              const usageNames = toCommaSeparatedString(usages.map((usage: any) => usage.name));
+              const usageNames = toCommaSeparatedString(usages.map((usage: { name: string }) => usage.name));
               transformedItem[namesField] = usageNames;
             }
             break;

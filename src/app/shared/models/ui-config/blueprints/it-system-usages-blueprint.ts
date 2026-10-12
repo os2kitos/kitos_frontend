@@ -15,6 +15,7 @@ export const ItSystemUsageUiBluePrint = {
         name: {
           text: $localize`Navn`,
           isObligatory: true,
+          cannotBeRecommended: true,
         },
         systemId: {
           text: $localize`System ID`,
@@ -40,12 +41,15 @@ export const ItSystemUsageUiBluePrint = {
         },
         takenIntoUsageBy: {
           text: $localize`Taget i anvendelse af`,
+          cannotBeRecommended: true,
         },
         lastEditedBy: {
           text: $localize`Sidst redigeret (bruger)`,
+          cannotBeRecommended: true,
         },
         lastEditedAt: {
           text: $localize`Sidst redigeret (dato)`,
+          cannotBeRecommended: true,
         },
         lifeCycleStatus: {
           text: $localize`Livscyklus`,
@@ -56,6 +60,7 @@ export const ItSystemUsageUiBluePrint = {
         },
         status: {
           text: $localize`Status`,
+          cannotBeRecommended: true,
         },
         containsAITechnology: {
           text: $localize`Indeholder AI-teknologi`,
@@ -73,6 +78,7 @@ export const ItSystemUsageUiBluePrint = {
         criticalityFieldsLastChanged: {
           text: $localize`Systemkritikalitet sidst opdateret`,
           disableByDefault: true,
+          cannotBeRecommended: true,
         },
         systemUsageCriticalityLevel: {
           text: $localize`Kritikalitet`,
@@ -152,6 +158,12 @@ export const ItSystemUsageUiBluePrint = {
     },
     systemRoles: {
       text: $localize`Systemroller`,
+      children: {
+        roles: {
+          text: $localize`Systemroller`,
+          isObligatory: true,
+        },
+      },
     },
     organization: {
       text: $localize`Organisation`,
@@ -164,6 +176,7 @@ export const ItSystemUsageUiBluePrint = {
         },
         incoming: {
           text: $localize`Relationer fra andre systemer`,
+          cannotBeRecommended: true,
         },
       },
     },
@@ -173,10 +186,12 @@ export const ItSystemUsageUiBluePrint = {
         itInterfaceIds: {
           text: $localize`Snitflade ID'er`,
           disableByDefault: true,
+          cannotBeRecommended: true,
         },
         itInterfaceVersions: {
           text: $localize`Snitflade versioner`,
           disableByDefault: true,
+          cannotBeRecommended: true,
         },
       },
     },
@@ -204,9 +219,11 @@ export const ItSystemUsageUiBluePrint = {
         },
         documentBearing: {
           text: $localize`Dokumentbærende`,
+          cannotBeRecommended: true,
         },
         active: {
           text: $localize`Er der arkiveret fra systemet?`,
+          cannotBeRecommended: true,
         },
         notes: {
           text: $localize`Arkiveringsbemærkninger`,
@@ -230,6 +247,7 @@ export const ItSystemUsageUiBluePrint = {
       children: {
         inheritedKle: {
           text: $localize`Nedarvede opgaver (Data fra IT Systemkataloget)`,
+          cannotBeRecommended: true,
         },
         localKle: {
           text: $localize`Lokale tilknyttede opgaver`,
@@ -238,9 +256,21 @@ export const ItSystemUsageUiBluePrint = {
     },
     advice: {
       text: $localize`Advis`,
+      children: {
+        notifications: {
+          text: $localize`Advis`,
+          isObligatory: true,
+        },
+      },
     },
     localReferences: {
       text: $localize`Lokale referencer`,
+      children: {
+        references: {
+          text: $localize`Lokale referencer`,
+          isObligatory: true,
+        },
+      },
     },
     usageArchive: {
       text: $localize`Anvendelseshistorik`,

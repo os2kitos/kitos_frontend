@@ -1,5 +1,7 @@
 <app-card>
   <app-card-header
+    [recommended]="(recommendedBadge$ | async)?.visible ?? false"
+    [recommendedFilled]="(recommendedBadge$ | async)?.filled ?? false"
     title="Advis"
     helpTextKey="it-contract.edit.advice-generic"
     i18n-title

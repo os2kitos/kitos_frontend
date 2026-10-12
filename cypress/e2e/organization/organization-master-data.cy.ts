@@ -1,4 +1,4 @@
-/// <reference types="Cypress" />
+/// <reference types="cypress" />
 
 describe('organization-master-data', () => {
   beforeEach(() => {
@@ -8,7 +8,9 @@ describe('organization-master-data', () => {
     cy.intercept('api/v2/internal/organizations/*/master-data/roles', {
       fixture: './organizations/organization-master-data-roles.json',
     });
-    cy.intercept('api/v2/organizations/*/users', { fixture: './organizations/organization-users.json' });
+    cy.intercept('api/v2/organizations/*/users*', { fixture: './organizations/organization-users.json' }).as(
+      'organizationUsers',
+    );
     cy.intercept('api/v2/internal/organizations/*/permissions', {
       fixture: './organizations/organization-permissions-global-admin.json',
     });
@@ -43,13 +45,10 @@ describe('organization-master-data', () => {
   // });
 
   it('Selecting contact person email from dropdown disables other contact person fields', () => {
-    cy.intercept('api/v2/internal/organization/*/users/permissions', {
-      fixture: './organizations/users/permissions.json',
-    });
-    cy.intercept('/api/v2/organizations/*/users', { fixture: './organizations/organization-users.json' });
-    cy.intercept('/api/v2/internal/organizations/*/masterData/roles').as('patch');
+    cy.wait('@organizationUsers');
 
-    cy.dropdownByCy('contact-person-email-dropdown', 'local-global-admin-user@kitos.dk', true);
+    cy.getByDataCy('contact-person-email-dropdown').find('input').click({ force: true });
+    cy.get('ng-dropdown-panel').contains('local-global-admin-user@kitos.dk').click();
 
     cy.confirmTextboxStateByDataCy('contact-person-name-control', false);
     cy.confirmTextboxStateByDataCy('contact-person-last-name-control', false);

@@ -13,7 +13,7 @@
 
 export interface APIStsOrganizationOrgUnitDTO { 
     uuid?: string;
-    name?: string | null;
-    children?: Array<APIStsOrganizationOrgUnitDTO> | null;
+    name: string | null;
+    children: Array<APIStsOrganizationOrgUnitDTO> | null;
 }
 

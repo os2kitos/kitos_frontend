@@ -23,6 +23,6 @@ export interface APIUserWithCrossOrganizationalRightsResponseDTO {
     email: string;
     apiAccess?: boolean;
     stakeholderAccess?: boolean;
-    organizationsWhereActive?: Array<string> | null;
+    organizationsWhereActive: Array<string> | null;
 }
 

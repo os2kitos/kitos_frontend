@@ -1,5 +1,11 @@
 <app-card>
-  <app-card-header [title]="title" i18n-title [helpTextKey]="helpTextKey"></app-card-header>
+  <app-card-header
+    [title]="title"
+    [recommended]="recommended"
+    [recommendedFilled]="(anyPayments$ | async) === true"
+    i18n-title
+    [helpTextKey]="helpTextKey"
+  ></app-card-header>
   <app-standard-vertical-content-grid>
     @if (anyPayments$ | async) {
       <app-native-table tableLayout="fixed" [includeDividers]="true">

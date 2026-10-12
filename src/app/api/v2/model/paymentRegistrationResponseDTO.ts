@@ -14,7 +14,7 @@ import { APINamedEntityV2DTO } from './namedEntityV2DTO';
 
 
 export interface APIPaymentRegistrationResponseDTO { 
-    itContract?: APIIdentityNamePairResponseDTO;
+    itContract: APIIdentityNamePairResponseDTO;
     itContractId?: number;
     internalPayments?: Array<APINamedEntityV2DTO> | null;
     externalPayments?: Array<APINamedEntityV2DTO> | null;

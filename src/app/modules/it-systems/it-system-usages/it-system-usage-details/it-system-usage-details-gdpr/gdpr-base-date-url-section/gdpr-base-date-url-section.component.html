@@ -1,32 +1,52 @@
 <app-accordion
+  [recommended]="choiceTypeRecommended"
+  [recommendedFilled]="
+    !!formGroup.controls.yesNoDontKnowControl.value &&
+    (formGroup.controls.yesNoDontKnowControl.value.value !== 'Yes' ||
+    (!!formGroup.controls.dateControl.value &&
+    !!(documentation$ | async)))
+  "
   [title]="title"
   [isExpanded]="(isExpanded$ | async) ?? false"
   (expandedChanged)="onExpandedChanged($event)"
 >
-  <app-form-grid [formGroup]="formGroup">
-    <app-dropdown
-      [text]="choiceTypeTitle"
-      [formGroup]="formGroup"
-      formName="yesNoDontKnowControl"
-      [data]="yesNoDontKnowOptions"
-      (valueChange)="preparePatch(choiceTypePropertyName, $event)"
-      data-cy="url-section-dropdown"
-    ></app-dropdown>
-    <app-datepicker
-      [text]="dateTitle"
-      [formGroup]="formGroup"
-      formName="dateControl"
-      (valueChange)="preparePatch(datePropertyName, $event?.toDateString())"
-    >
-    </app-datepicker>
-    <app-edit-url-section
-      [title]="linkTitle"
-      [simpleLink$]="documentation$"
-      [isDisabled]="(isYesNoDontKnowFalse$ | async) !== false"
-      data-cy="base-date-url-section-selector"
-      (submitMethod)="patchSimpleLink($event)"
-      [isDisabled]="disableLinkControl"
-    >
-    </app-edit-url-section>
-  </app-form-grid>
+  <form [formGroup]="formGroup">
+    <app-standard-vertical-content-grid>
+      <app-dropdown
+        [text]="choiceTypeTitle"
+        [formGroup]="formGroup"
+        formName="yesNoDontKnowControl"
+        [data]="yesNoDontKnowOptions"
+        (valueChange)="preparePatch(choiceTypePropertyName, $event)"
+        data-cy="url-section-dropdown"
+        class="full-width-column"
+        [recommended]="choiceTypeRecommended"
+      ></app-dropdown>
+      <app-datepicker
+        [text]="dateTitle"
+        [formGroup]="formGroup"
+        formName="dateControl"
+        class="full-width-column"
+        [recommendedFilled]="
+          formGroup.controls.yesNoDontKnowControl.value?.value === 'Yes' ? undefined : !!formGroup.controls.yesNoDontKnowControl.value
+        "
+        [recommended]="choiceTypeRecommended"
+        (valueChange)="preparePatch(datePropertyName, $event?.toDateString())"
+      >
+      </app-datepicker>
+      <app-edit-url-section
+        [title]="linkTitle"
+        [simpleLink$]="documentation$"
+        [isDisabled]="(isYesNoDontKnowFalse$ | async) !== false"
+        data-cy="base-date-url-section-selector"
+        [recommendedFilled]="
+          formGroup.controls.yesNoDontKnowControl.value?.value === 'Yes' ? undefined : !!formGroup.controls.yesNoDontKnowControl.value
+        "
+        [recommended]="choiceTypeRecommended"
+        [isDisabled]="disableLinkControl"
+        (submitMethod)="patchSimpleLink($event)"
+      >
+      </app-edit-url-section>
+    </app-standard-vertical-content-grid>
+  </form>
 </app-accordion>

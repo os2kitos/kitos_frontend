@@ -1,4 +1,4 @@
-import { AsyncPipe } from '@angular/common';
+﻿import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -13,7 +13,7 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { DropdownDialogComponent } from 'src/app/shared/components/dialogs/dropdown-dialog/dropdown-dialog.component';
 import { optionalNewDate } from 'src/app/shared/helpers/date.helpers';
-import { combineOR } from 'src/app/shared/helpers/observable-helpers';
+import { combineOR, mapUIConfigStatusToEnabled, mapUIConfigStatusToRecommended } from 'src/app/shared/helpers/observable-helpers';
 import {
   mapToOversightInterval,
   OversightInterval,
@@ -29,12 +29,13 @@ import {
   selectDataProcessing,
   selectDataProcessingHasModifyPermissions,
   selectDataProcessingOversightOptions,
+  selectDataProcessingOversightDates,
 } from 'src/app/store/data-processing/selectors';
 import {
-  selectDprEnabledOversightInterval,
-  selectDprEnableOversightOptions,
-  selectDprEnableOversights,
-  selectDprEnableScheduledInspectionDate,
+  selectDprEnableAndRecommendedOversightInterval,
+  selectDprEnableAndRecommendedOversightOptions,
+  selectDprEnableAndRecommendedOversights,
+  selectDprEnableAndRecommendedScheduledInspectionDate,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
@@ -113,10 +114,23 @@ export class DataProcessingOversightComponent extends BaseComponent implements O
     { updateOn: 'blur' },
   );
 
-  public readonly oversightIntervalEnabled$ = this.store.select(selectDprEnabledOversightInterval);
-  public readonly nextOversightEnabled$ = this.store.select(selectDprEnableScheduledInspectionDate);
-  public readonly oversightOptionsEnabled$ = this.store.select(selectDprEnableOversightOptions);
-  public readonly oversightsEnabled$ = this.store.select(selectDprEnableOversights);
+  public readonly oversightIntervalEnabled$ = this.store.select(selectDprEnableAndRecommendedOversightInterval).pipe(mapUIConfigStatusToEnabled());
+  public readonly oversightIntervalRecommended$ = this.store
+    .select(selectDprEnableAndRecommendedOversightInterval)
+    .pipe(mapUIConfigStatusToRecommended());
+  public readonly nextOversightEnabled$ = this.store.select(selectDprEnableAndRecommendedScheduledInspectionDate).pipe(mapUIConfigStatusToEnabled());
+  public readonly nextOversightRecommended$ = this.store
+    .select(selectDprEnableAndRecommendedScheduledInspectionDate)
+    .pipe(mapUIConfigStatusToRecommended());
+  public readonly oversightOptionsEnabled$ = this.store.select(selectDprEnableAndRecommendedOversightOptions).pipe(mapUIConfigStatusToEnabled());
+  public readonly oversightOptionsRecommended$ = this.store
+    .select(selectDprEnableAndRecommendedOversightOptions)
+    .pipe(mapUIConfigStatusToRecommended());
+  public readonly collectionOversights$ = this.store.select(selectDataProcessingOversightDates);
+  public readonly oversightsEnabled$ = this.store.select(selectDprEnableAndRecommendedOversights).pipe(mapUIConfigStatusToEnabled());
+  public readonly oversightsRecommended$ = this.store
+    .select(selectDprEnableAndRecommendedOversights)
+    .pipe(mapUIConfigStatusToRecommended());
 
   public readonly intervalCardEnabled$ = combineOR([
     this.oversightIntervalEnabled$,

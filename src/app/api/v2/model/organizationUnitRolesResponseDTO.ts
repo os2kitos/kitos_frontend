@@ -13,8 +13,8 @@ import { APIExtendedRoleAssignmentResponseDTO } from './extendedRoleAssignmentRe
 
 
 export interface APIOrganizationUnitRolesResponseDTO { 
-    roleAssignment?: APIExtendedRoleAssignmentResponseDTO;
-    organizationUnitUuid?: string;
-    organizationUnitName?: string | null;
+    roleAssignment: APIExtendedRoleAssignmentResponseDTO;
+    organizationUnitUuid: string;
+    organizationUnitName: string | null;
 }
 

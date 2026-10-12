@@ -47,6 +47,31 @@
       }
     },
     {
+      "files": ["cypress/**/*.cy.ts", "src/app/component-tests/**/*.cy.ts"],
+      "rules": {
+        "no-restricted-syntax": [
+          "error",
+          {
+            "selector": "CallExpression[callee.property.name=/^(only|skip)$/][callee.object.name=/^(it|describe|context)$/]",
+            "message": "Do not commit focused (.only) or skipped (.skip) Cypress tests."
+          }
+        ]
+      }
+    },
+    {
+      "files": ["cypress/**/*.ts", "src/app/component-tests/**/*.ts"],
+      "rules": {
+        // Chai/Cypress assertions such as `expect(x).to.be.true` are property-access
+        // getters, not function calls, so they trip this rule despite being correct.
+        "@typescript-eslint/no-unused-expressions": "off",
+        // Augmenting the global Cypress namespace for custom command typings is the
+        // documented Cypress pattern and can't be expressed as an ES module.
+        "@typescript-eslint/no-namespace": "off",
+        // Cypress custom command signatures (Chainable<Subject = any>, etc.) rely on `any`.
+        "@typescript-eslint/no-explicit-any": "off"
+      }
+    },
+    {
       "files": ["*.ts"],
       "extends": ["plugin:@ngrx/all"],
       "rules": {

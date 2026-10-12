@@ -32,8 +32,8 @@ export class CreateInterfaceDialogComponent extends BaseCreateEntityDialogCompon
   override entityType = 'it-interface' as RegistrationEntityTypes;
   override title = $localize`Opret Snitflade`;
   public createForm = new FormGroup({
-    name: new FormControl<string | undefined>(undefined, Validators.required),
-    interfaceId: new FormControl<string | undefined>(undefined),
+    name: new FormControl<string | undefined>(undefined, [Validators.required, Validators.maxLength(100)]),
+    interfaceId: new FormControl<string | undefined>(undefined, Validators.maxLength(100)),
   });
 
   override ngOnInit(): void {
@@ -68,7 +68,7 @@ export class CreateInterfaceDialogComponent extends BaseCreateEntityDialogCompon
 
   public createEntity(openAfterCreate: boolean): void {
     const name = this.createForm.controls.name.value;
-    if (!name) {
+    if (!name || this.createForm.invalid) {
       return;
     }
     const interfaceId = this.createForm.controls.interfaceId.value ?? '';

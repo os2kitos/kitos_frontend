@@ -10,32 +10,7 @@ Make sure you have installed [Node.js](https://nodejs.org/en/) (preferable using
 
 `yarn start` for a development server. Navigate to `http://localhost:4200/` or `http://127.0.0.1:4200/`. The app will automatically reload if you change any of the source files.
 
-### Running in Docker
-
-Use Docker Compose for a containerized development server with hot reload:
-
-`docker compose up --build`
-
-Then open `http://localhost:4200/`.
-
-To start the frontend against a specific environment run:
-
-The container startup reads `BACKEND_URL` and configures the API proxy from it (also when run in Kubernetes). If `BACKEND_URL` is not set, it defaults to `https://kitos-dev.strongminds.dk/`.
-
-Bash:
-`BACKEND_URL=http://host.docker.internal:5000/ docker compose up --build`
-
-Powershell:
-`$env:BACKEND_URL=http://host.docker.internal:5000/`
-`docker compose up --build`
-
-Or use one command (PowerShell), which sets `BACKEND_URL=http://host.docker.internal:5000/` and starts compose:
-`yarn docker:up:local`
-
-Stop the container with:
-
-`docker compose down`
-
+### Running in Docker`r`n`r`nBuild and run the production container (Angular production build + nginx static file serving):`r`n`r`nBash:`r`n`BACKEND_URL=http://host.docker.internal:5000 docker compose up --build``r`n`r`nPowerShell:`r`n`$env:BACKEND_URL="http://host.docker.internal:5000"``r`n`docker compose up --build``r`n`r`nThen open `http://localhost:4200/`.`r`n`r`nIn Docker, nginx serves the SPA on `/` and proxies `/api`, `/odata`, and `/LoginHandler.ashx` to `BACKEND_URL`.`r`n`r`nStop the container with:`r`n`r`n`docker compose down`
 `yarn start:local` runs the development server with a local backend, by changing the values in `src/proxy.conf.json`. This requires a local backend running on `https://localhost:44300`. After terminating, the proxy settings return to the default.
 
 `yarn start:docker` runs the development server with a Docker backend, by changing the values in `src/proxy.conf.json` to `http://localhost:5000`. After terminating, the proxy settings return to the default.
@@ -118,9 +93,30 @@ Current implementation is only localized to danish (da) which is just the fallba
 
 ## Tests
 
-[Cypress](https://www.cypress.io/) runs end-to-end and Angular component tests. Critical user journeys (e.g. login flow, changing an IT system, adding an IT contract, etc.) are covered by E2E tests using live API. Rest of functionality is tested using intercepted / mocked API requests.
+[Cypress](https://www.cypress.io/) runs end-to-end and Angular component tests. E2E specs primarily use intercepted API responses and fixtures; `cy.requireIntercept()` makes unexpected API and OData requests fail in guarded specs. The app front page also checks navigation to an external marketing page. E2E and component tests run in separate CI jobs.
 
-Code is instrumented using (istanbul)[https://github.com/istanbuljs/istanbuljs] doing CI test and coverage is continuously reported to build server.
+### E2E inventory and future Playwright migration
+
+The 55 E2E spec files cover these areas; 54 currently contain active tests. The IT-contract overview spec is retained but its former flaky tests are commented out, so it does not currently verify overview behavior.
+
+| Specs | Coverage |
+| --- | --- |
+| `cypress/e2e/app/` (7) | Login, navigation, front page, notifications, public messages, reset password, and grid-column preferences |
+| `cypress/e2e/it-system-usage/` (16) | Overview and detail journeys for general information, GDPR, archiving, contracts, data-processing registrations, external references, hierarchy, interfaces, KLE, notifications, organization, roles, and system relations |
+| `cypress/e2e/it-contracts/` (7) | Detail journeys for deadlines, data-processing registrations, economy, hierarchy, systems, and front page; the overview spec currently has no active tests |
+| `cypress/e2e/data-processings/` (5) | Overview and detail journeys for contracts, systems, oversight, and front page |
+| `cypress/e2e/it-system-catalog/` (4) | Catalog overview, front page, interfaces, and KLE |
+| `cypress/e2e/it-interfaces/` (2) | Interface overview and detail page |
+| `cypress/e2e/organization/` (3) | Organization users, structure, and master data |
+| `cypress/e2e/local-admin/` (4) | Local-admin information, IT-system options, data-processing configuration, and FK organization import |
+| `cypress/e2e/global-admin/` (6) | Global/local administrators, organizations, IT systems, help texts, and other admin flows |
+| `cypress/e2e/shared/` (1) | Recommendation-badge observable behavior; this directly tests helper logic rather than a browser journey |
+
+For an incremental Playwright migration, start with browser journeys grouped by these feature areas and keep their fixture data and mutation/request assertions. Keep the recommendation-badge helper test separate from browser journeys, or move it to a non-browser runner if one is adopted. Before migration, review the three specs not currently using `cy.requireIntercept()` (`app/grid-columns.cy.ts`, `organization/organization-master-data.cy.ts`, and `shared/recommended-badge-state.cy.ts`) to confirm their network boundary. Cypress remains the E2E and component-test runner until a separate migration adds Playwright.
+
+Recent suite maintenance combined the IT-system-usage details refresh check with its existing details journey, preserving the reload assertions while avoiding repeat setup. Permission-denied, forbidden, and missing-resource paths remain separate journeys; the 403 and 404 responses are asserted explicitly, and the permission-denied path verifies its message and redirect.
+
+Code is instrumented using [Istanbul](https://github.com/istanbuljs/istanbuljs) during CI tests and coverage is continuously reported to the build server.
 
 ## Editor
 

@@ -28,53 +28,56 @@
       <span>{{ dataItem.name }}</span>
     </ng-template>
   </kendo-grid-rowreorder-column>
-  } @for (column of columns; track column) { @if (!column.hidden) {
+  } @for (columnConfig of columns; track columnConfig) { @if (!columnConfig.hidden) {
   <kendo-grid-column
-    [field]="column.field"
-    [title]="column.title"
-    [sortable]="column.sortable ?? true"
-    [sticky]="column.isSticky ?? false"
-    [filter]="column.filter ?? 'text'"
-    [width]="column.width ?? defaultColumnWidth"
+    [field]="columnConfig.field"
+    [title]="columnConfig.title"
+    [sortable]="columnConfig.sortable ?? true"
+    [sticky]="columnConfig.isSticky ?? false"
+    [filter]="columnConfig.filter ?? 'text'"
+    [width]="columnConfig.width ?? defaultColumnWidth"
     [minResizableWidth]="
-      column.minResizableWidth !== undefined
-        ? column.minResizableWidth
-        : column.filter === 'date'
+      columnConfig.minResizableWidth !== undefined
+        ? columnConfig.minResizableWidth
+        : columnConfig.filter === 'date'
         ? defaultMinimumDateColumnWidth
-        : column.style === 'primary'
+        : columnConfig.style === 'primary'
         ? defaultPrimaryColumnMinimumWidth
         : defaultMinimumColumnWidth
     "
     headerClass="mygrid-header-cell"
   >
-    <ng-template kendoGridHeaderTemplate let-column let-columnIndex="columnIndex">
-      <app-paragraph [bold]="true" color="primary-dark">{{ column.title }}</app-paragraph>
-      @if (state.sort; as sortItem) { @if (sortItem[0].field === column.field) { @if (sortItem[0].dir === 'asc') {
+    <ng-template kendoGridHeaderTemplate let-gridColumn let-columnIndex="columnIndex">
       <app-paragraph [bold]="true" color="primary-dark" class="sort-icon">
+        {{ gridColumn.title }}
+        @if (columnConfig.helpText) {
+        <app-tooltip [alignCenter]="true" [text]="columnConfig.helpText">
+          <app-help-icon></app-help-icon>
+        </app-tooltip>
+        }
+        @if (state.sort; as sortItem) { @if (sortItem[0].field === gridColumn.field) { @if (sortItem[0].dir === 'asc') {
         <app-arrow-up-icon></app-arrow-up-icon>
-      </app-paragraph>
-      } @if (sortItem[0].dir === 'desc') {
-      <app-paragraph [bold]="true" color="primary-dark" class="sort-icon">
+        } @if (sortItem[0].dir === 'desc') {
         <app-arrow-down-icon></app-arrow-down-icon>
+        } } }
       </app-paragraph>
-      } } }
     </ng-template>
     <ng-template kendoGridFilterCellTemplate let-filter let-columnFilter="column">
-      @if (!column.noFilter) { @if (columnFilter.filter === 'text' && !column.extraFilter) {
+      @if (!columnConfig.noFilter) { @if (columnFilter.filter === 'text' && !columnConfig.extraFilter) {
       <app-string-filter [column]="columnFilter" [filter]="filter"></app-string-filter>
-      } @if ( columnFilter.filter === 'boolean' || (columnFilter.filter === 'text' && column.extraFilter === 'enum') ) {
+      } @if ( columnFilter.filter === 'boolean' || (columnFilter.filter === 'text' && columnConfig.extraFilter === 'enum') ) {
       <app-dropdown-filter
         [column]="columnFilter"
         [filter]="filter"
-        [options]="column.extraData"
+        [options]="columnConfig.extraData"
         [searchByNames]="true"
       ></app-dropdown-filter>
-      } @if (columnFilter.filter === 'text' && column.extraFilter === 'choice-type' && entityType) {
+      } @if (columnFilter.filter === 'text' && columnConfig.extraFilter === 'choice-type' && entityType) {
       <app-choice-type-dropdown-filter
         [column]="columnFilter"
         [filter]="filter"
-        [choiceTypeName]="column.extraData"
-        [sortOptions]="column.sortFilter"
+        [choiceTypeName]="columnConfig.extraData"
+        [sortOptions]="columnConfig.sortFilter"
         [entityType]="entityType"
         class="overflow-hidden-container"
       ></app-choice-type-dropdown-filter>
@@ -84,7 +87,7 @@
     </ng-template>
     <ng-template kendoGridCellTemplate let-dataItem>
       <app-grid-cell
-        [column]="column"
+        [column]="columnConfig"
         [dataItem]="dataItem"
         [deleteIcon]="deleteIcon"
         (modifyEvent)="onModifyClick(dataItem)"

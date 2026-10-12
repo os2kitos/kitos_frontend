@@ -13,10 +13,10 @@ import { APINamedEntityDTO } from './namedEntityDTO';
 
 
 export interface APIReferenceDTO { 
-    id?: number;
-    name?: string | null;
-    referenceId?: string | null;
-    url?: string | null;
+    id: number;
+    name: string | null;
+    referenceId: string | null;
+    url: string | null;
     masterReference?: boolean;
     lastChangedByUser?: APINamedEntityDTO;
     lastChanged?: string;

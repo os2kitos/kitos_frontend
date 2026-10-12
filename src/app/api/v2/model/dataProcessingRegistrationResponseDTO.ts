@@ -21,13 +21,13 @@ import { APIShallowItSystemUsageResponseDTO } from './shallowItSystemUsageRespon
 export interface APIDataProcessingRegistrationResponseDTO { 
     name: string | null;
     uuid: string;
-    createdBy: APIIdentityNamePairResponseDTO;
+    createdBy?: APIIdentityNamePairResponseDTO;
     /**
      * UTC timestamp of latest modification
      */
     lastModified: string;
-    lastModifiedBy: APIIdentityNamePairResponseDTO;
-    organizationContext: APIShallowOrganizationResponseDTO;
+    lastModifiedBy?: APIIdentityNamePairResponseDTO;
+    organizationContext?: APIShallowOrganizationResponseDTO;
     general: APIDataProcessingRegistrationGeneralDataResponseDTO;
     /**
      * Associated it-system-usage entities

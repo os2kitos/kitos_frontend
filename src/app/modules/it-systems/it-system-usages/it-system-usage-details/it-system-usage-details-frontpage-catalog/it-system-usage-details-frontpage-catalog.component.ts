@@ -1,6 +1,6 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { first } from 'rxjs';
 import { APIExternalReferenceDataResponseDTO, APIRegularOptionResponseDTO } from 'src/app/api/v2';
@@ -76,8 +76,8 @@ export class ITSystemUsageDetailsFrontpageCatalogComponent extends BaseComponent
       disabled: true,
     }),
     description: new FormControl({ value: '', disabled: true }),
-    legalName: new FormControl({ value: '', disabled: true }),
-    legalDataProcessorName: new FormControl({ value: '', disabled: true }),
+    legalName: new FormControl({ value: '', disabled: true }, Validators.maxLength(100)),
+    legalDataProcessorName: new FormControl({ value: '', disabled: true }, Validators.maxLength(100)),
   });
 
   public readonly businessTypes$ = this.store

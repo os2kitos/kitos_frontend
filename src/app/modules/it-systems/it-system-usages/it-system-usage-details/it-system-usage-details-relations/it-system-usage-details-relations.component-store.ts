@@ -49,7 +49,7 @@ export class ItSystemUsageDetailsRelationsComponentStore extends ComponentStore<
           tapResponse({
             next: (relations) =>
               this.updateIncomingRelations(
-                relations.map((relation: any) =>
+                relations.map((relation) =>
                   this.mapRelationResponseDTOToSystemRelationModel(relation, relation.fromSystemUsage),
                 ),
               ),

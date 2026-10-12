@@ -13,6 +13,6 @@
 
 export interface APIOrganizationSimpleDTO { 
     id?: number;
-    name?: string | null;
+    name: string | null;
 }
 

@@ -15,11 +15,11 @@ import { APIPublicMessageIconTypeChoice } from './publicMessageIconTypeChoice';
 
 export interface APIPublicMessageResponseDTO { 
     uuid?: string;
-    title?: string | null;
-    longDescription?: string | null;
-    shortDescription?: string | null;
+    title: string | null;
+    longDescription: string | null;
+    shortDescription: string | null;
     status?: APIPublicMessageStatusChoice;
-    link?: string | null;
+    link: string | null;
     iconType?: APIPublicMessageIconTypeChoice;
     isMain?: boolean;
 }

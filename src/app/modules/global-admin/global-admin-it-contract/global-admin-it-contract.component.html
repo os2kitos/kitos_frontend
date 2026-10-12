@@ -58,6 +58,11 @@
         optionType="it-contract_criticality-type"
         title="Kritikalitet"
         i18n-title
+        [showOrderNumberColumn]="true"
+        orderNumberColumnHeader="Kritikalitetsprioritet"
+        i18n-orderNumberColumnHeader
+        orderNumberColumnHelpText="En lavere værdi angiver en lavere kritikalitet."
+        i18n-orderNumberColumnHelpText
       ></app-global-option-type-view>
     </app-standard-vertical-content-grid>
   }
@@ -72,7 +77,7 @@
         [disableAccordion]="true"
         [showWriteAccess]="true"
         [fitSizeToContent]="false"
-        >
+      >
       </app-global-option-type-view>
     </app-standard-vertical-content-grid>
   }

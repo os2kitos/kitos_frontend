@@ -12,8 +12,8 @@
 
 
 export interface APINamedEntityWithEnabledStatusDTO { 
-    id?: number;
-    name?: string | null;
+    id: number;
+    name: string | null;
     disabled?: boolean;
 }
 

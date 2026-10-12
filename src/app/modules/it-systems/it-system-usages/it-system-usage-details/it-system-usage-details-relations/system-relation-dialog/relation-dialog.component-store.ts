@@ -172,8 +172,8 @@ export class ItSystemUsageDetailsRelationsDialogComponentStore extends Component
               next: (usages) => {
                 return this.updateSystemUsages(
                   usages
-                    .filter((usage: any) => usage.uuid != currentUsageUuid)
-                    .map((usage: any) => ({
+                    .filter((usage) => usage.uuid != currentUsageUuid)
+                    .map((usage) => ({
                       name: usage.systemContext.name,
                       uuid: usage.uuid,
                     })),

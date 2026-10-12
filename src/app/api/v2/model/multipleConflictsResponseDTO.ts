@@ -13,7 +13,7 @@ import { APISimpleConflictResponseDTO } from './simpleConflictResponseDTO';
 
 
 export interface APIMultipleConflictsResponseDTO { 
-    mainEntityName?: string | null;
-    conflicts?: Array<APISimpleConflictResponseDTO> | null;
+    mainEntityName: string | null;
+    conflicts: Array<APISimpleConflictResponseDTO> | null;
 }
 

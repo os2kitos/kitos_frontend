@@ -1,8 +1,6 @@
 @use "theme";
 @use "mixins";
 
-@include mixins.ng-select-default-style;
-
 .description {
   margin-top: theme.$padding-small;
   margin-bottom: theme.$padding-small;
@@ -16,5 +14,3 @@ ng-select {
 :host ::ng-deep .ng-select-container {
   background-color: theme.$color-white;
 }
-
-@include mixins.ng-select-medium-styles;

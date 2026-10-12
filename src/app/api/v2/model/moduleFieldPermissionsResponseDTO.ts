@@ -13,6 +13,6 @@ import { APIFieldPermissionsResponseDTO } from './fieldPermissionsResponseDTO';
 
 
 export interface APIModuleFieldPermissionsResponseDTO { 
-    fields?: Array<APIFieldPermissionsResponseDTO> | null;
+    fields: Array<APIFieldPermissionsResponseDTO> | null;
 }
 

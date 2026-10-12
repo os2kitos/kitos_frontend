@@ -16,7 +16,7 @@ export interface APIModifyOversightDateDTO {
     /**
      * Date of oversight completion (Supplier Field)
      */
-    completedAt: string;
+    completedAt?: string;
     /**
      * Optional remark related to the oversight (Supplier Field)
      */

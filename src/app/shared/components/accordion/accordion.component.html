@@ -21,6 +21,9 @@
         }
 
         <ng-content class="accordion-header" select="app-accordion-header"></ng-content>
+        @if (recommended) {
+          <app-recommended-badge class="accordion-recommended-badge" [visible]="true" [filled]="recommendedFilled"></app-recommended-badge>
+        }
       </mat-panel-title>
     </mat-expansion-panel-header>
     <ng-content></ng-content>

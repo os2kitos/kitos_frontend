@@ -1,4 +1,4 @@
-import { AsyncPipe } from '@angular/common';
+﻿import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
@@ -18,10 +18,11 @@ import {
   selectItContractPaymentModel,
 } from 'src/app/store/it-contract/selectors';
 import {
-  selectItContractsEnableExternalPayment,
-  selectItContractsEnableInternalPayment,
-  selectItContractsEnablePaymentModel,
+  selectItContractsEnableAndRecommendedExternalPayment,
+  selectItContractsEnableAndRecommendedInternalPayment,
+  selectItContractsEnableAndRecommendedPaymentModel,
 } from 'src/app/store/organization/ui-module-customization/selectors';
+import { mapUIConfigStatusToEnabled, mapUIConfigStatusToRecommended } from 'src/app/shared/helpers/observable-helpers';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 import { CardHeaderComponent } from '../../../../shared/components/card-header/card-header.component';
@@ -69,9 +70,18 @@ export class ItContractEconomyComponent extends BaseComponent implements OnInit 
     priceRegulation: new FormControl<APIIdentityNamePairResponseDTO | undefined>({ value: undefined, disabled: true }),
   });
 
-  public readonly paymentModelEnabled$ = this.store.select(selectItContractsEnablePaymentModel);
-  public readonly externalPaymentEnabled$ = this.store.select(selectItContractsEnableExternalPayment);
-  public readonly internalPaymentEnabled$ = this.store.select(selectItContractsEnableInternalPayment);
+  public readonly paymentModelEnabled$ = this.store.select(selectItContractsEnableAndRecommendedPaymentModel).pipe(mapUIConfigStatusToEnabled());
+  public readonly paymentModelRecommended$ = this.store
+    .select(selectItContractsEnableAndRecommendedPaymentModel)
+    .pipe(mapUIConfigStatusToRecommended());
+  public readonly externalPaymentEnabled$ = this.store.select(selectItContractsEnableAndRecommendedExternalPayment).pipe(mapUIConfigStatusToEnabled());
+  public readonly externalPaymentRecommended$ = this.store
+    .select(selectItContractsEnableAndRecommendedExternalPayment)
+    .pipe(mapUIConfigStatusToRecommended());
+  public readonly internalPaymentEnabled$ = this.store.select(selectItContractsEnableAndRecommendedInternalPayment).pipe(mapUIConfigStatusToEnabled());
+  public readonly internalPaymentRecommended$ = this.store
+    .select(selectItContractsEnableAndRecommendedInternalPayment)
+    .pipe(mapUIConfigStatusToRecommended());
 
   constructor(
     private store: Store,

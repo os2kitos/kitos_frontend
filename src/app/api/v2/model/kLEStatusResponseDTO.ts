@@ -13,6 +13,6 @@
 
 export interface APIKLEStatusResponseDTO { 
     upToDate?: boolean;
-    version?: string | null;
+    version: string | null;
 }
 

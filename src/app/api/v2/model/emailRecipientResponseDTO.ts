@@ -15,6 +15,6 @@ export interface APIEmailRecipientResponseDTO {
     /**
      * Email of the recipient
      */
-    email?: string | null;
+    email: string | null;
 }
 

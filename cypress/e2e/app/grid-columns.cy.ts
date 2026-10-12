@@ -18,7 +18,9 @@ describe('grid columns', () => {
 
     cy.clearAllLocalStorage();
     cy.setup(true, 'data-processing');
-    cy.wait(2000);
+    cy.window().should((window) => {
+      expect(window.localStorage.getItem('data-processing-grid-columns')).to.not.be.null;
+    });
     cy.window().then((window) => {
       const dprGridColumnsString = window.localStorage.getItem('data-processing-grid-columns') ?? '';
       cache = JSON.parse(dprGridColumnsString);
@@ -44,7 +46,11 @@ describe('grid columns', () => {
     });
 
     cy.visit('/data-processing');
-    cy.wait(2000);
+    cy.window().should((window) => {
+      const dprColumnsString = window.localStorage.getItem('data-processing-grid-columns') ?? '';
+      const newCache = JSON.parse(dprColumnsString || '{}');
+      expect(newCache.hash).to.not.eq(mockHashChange.hash);
+    });
 
     cy.window().then((window) => {
       const dprColumnsString = window.localStorage.getItem('data-processing-grid-columns') ?? '';

@@ -13,7 +13,7 @@ import { APICustomizedUINodeResponseDTO } from './customizedUINodeResponseDTO';
 
 
 export interface APIUIModuleCustomizationResponseDTO { 
-    module?: string | null;
-    nodes?: Array<APICustomizedUINodeResponseDTO> | null;
+    module: string | null;
+    nodes: Array<APICustomizedUINodeResponseDTO> | null;
 }
 

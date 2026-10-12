@@ -8,6 +8,7 @@
       [data]="optionTypes"
       (valueChange)="onValueChange($event)"
       [loading]="loading$ | async"
+      [recommended]="recommended"
     ></app-dropdown>
   }
   @if (formGroup) {
@@ -20,6 +21,7 @@
       [data]="optionTypes"
       (valueChange)="onValueChange($event)"
       [loading]="loading$ | async"
+      [recommended]="recommended"
     ></app-dropdown>
   }
 }

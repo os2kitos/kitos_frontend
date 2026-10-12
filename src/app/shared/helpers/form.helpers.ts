@@ -6,6 +6,16 @@ interface OnInvalid {
   [key: string]: boolean;
 }
 
+export function setControlError(control: AbstractControl, errorKey: string, hasError: boolean): void {
+  const errors = { ...control.errors };
+  if (hasError) {
+    errors[errorKey] = true;
+  } else {
+    delete errors[errorKey];
+  }
+  control.setErrors(Object.keys(errors).length > 0 ? errors : null);
+}
+
 function toDate(input: unknown): Date | undefined {
   let convertedDate: Date | undefined;
   if (input) {

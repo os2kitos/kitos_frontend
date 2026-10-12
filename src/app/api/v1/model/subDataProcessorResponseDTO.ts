@@ -14,9 +14,9 @@ import { APINamedEntityWithExpirationStatusDTO } from './namedEntityWithExpirati
 
 
 export interface APISubDataProcessorResponseDTO { 
-    id?: number;
-    name?: string | null;
-    cvrNumber?: string | null;
+    id: number;
+    name: string | null;
+    cvrNumber: string | null;
     basisForTransfer?: APINamedEntityWithExpirationStatusDTO;
     transferToInsecureThirdCountries?: APIYesNoUndecidedOption;
     insecureCountry?: APINamedEntityWithExpirationStatusDTO;

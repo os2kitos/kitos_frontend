@@ -7,11 +7,12 @@ import { combineLatest, distinctUntilChanged, filter, first, map, tap } from 'rx
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { NavigationDrawerItem } from 'src/app/shared/components/navigation-drawer/navigation-drawer.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
-import { combineAND } from 'src/app/shared/helpers/observable-helpers';
+import { combineAND, mapUIConfigStatusToEnabled } from 'src/app/shared/helpers/observable-helpers';
 import { BreadCrumb } from 'src/app/shared/models/breadcrumbs/breadcrumb.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
+import { RegistrationRecommendedBadgesService } from 'src/app/shared/services/registration-recommended-badges.service';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import {
   selectITSystemUsageHasDeletePermission,
@@ -27,19 +28,19 @@ import {
   selectShowItContractModule,
 } from 'src/app/store/organization/selectors';
 import {
-  selectITSystemUsageEnableContracts,
-  selectITSystemUsageEnableDataProcessing,
-  selectITSystemUsageEnableGdpr,
-  selectITSystemUsageEnableLocalReferences,
-  selectITSystemUsageEnableSystemRelations,
-  selectITSystemUsageEnableTabArchiving,
-  selectITSystemUsageEnableTabHierarchy,
-  selectITSystemUsageEnableTabInterfaces,
-  selectITSystemUsageEnableTabLocalKle,
-  selectITSystemUsageEnableTabNotifications,
-  selectITSystemUsageEnableTabOrganization,
-  selectITSystemUsageEnableTabSystemRoles,
-  selectITSystemUsageEnableUsageArchive,
+  selectITSystemUsageEnableAndRecommendedContracts,
+  selectITSystemUsageEnableAndRecommendedDataProcessing,
+  selectITSystemUsageEnableAndRecommendedGdpr,
+  selectITSystemUsageEnableAndRecommendedLocalReferences,
+  selectITSystemUsageEnableAndRecommendedSystemRelations,
+  selectITSystemUsageEnableAndRecommendedTabArchiving,
+  selectITSystemUsageEnableAndRecommendedTabHierarchy,
+  selectITSystemUsageEnableAndRecommendedTabInterfaces,
+  selectITSystemUsageEnableAndRecommendedTabLocalKle,
+  selectITSystemUsageEnableAndRecommendedTabNotifications,
+  selectITSystemUsageEnableAndRecommendedTabOrganization,
+  selectITSystemUsageEnableAndRecommendedTabSystemRoles,
+  selectITSystemUsageEnableAndRecommendedUsageArchive,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { selectOrganizationName } from 'src/app/store/user-store/selectors';
 import { BreadcrumbsComponent } from '../../../../shared/components/breadcrumbs/breadcrumbs.component';
@@ -68,22 +69,50 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
   public readonly itSystemUsageUuid$ = this.store.select(selectItSystemUsageUuid).pipe(filterNullish());
   public readonly hasDeletePermissions$ = this.store.select(selectITSystemUsageHasDeletePermission);
 
-  public readonly enabledContractsTab$ = this.store.select(selectITSystemUsageEnableContracts);
-  public readonly enabledDataProcessingTab$ = this.store.select(selectITSystemUsageEnableDataProcessing);
-  public readonly enableGdprTab$ = this.store.select(selectITSystemUsageEnableGdpr);
-  public readonly enableSystemRolesTab$ = this.store.select(selectITSystemUsageEnableTabSystemRoles);
-  public readonly enableOrganizationTab$ = this.store.select(selectITSystemUsageEnableTabOrganization);
-  public readonly enableSystemRelationsTab$ = this.store.select(selectITSystemUsageEnableSystemRelations);
-  public readonly enableInterfacesTab$ = this.store.select(selectITSystemUsageEnableTabInterfaces);
-  public readonly enableArchivingTab$ = this.store.select(selectITSystemUsageEnableTabArchiving);
-  public readonly enableHierarchyTab$ = this.store.select(selectITSystemUsageEnableTabHierarchy);
-  public readonly enableLocalKleTab$ = this.store.select(selectITSystemUsageEnableTabLocalKle);
-  public readonly enableNotificationsTab$ = this.store.select(selectITSystemUsageEnableTabNotifications);
-  public readonly enableLocalReferencesTab$ = this.store.select(selectITSystemUsageEnableLocalReferences);
-  public readonly enableUsageArchive$ = this.store.select(selectITSystemUsageEnableUsageArchive);
+  public readonly enabledContractsTab$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedContracts)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly enabledDataProcessingTab$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedDataProcessing)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly enableGdprTab$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedGdpr)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly enableSystemRolesTab$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedTabSystemRoles)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly enableOrganizationTab$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedTabOrganization)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly enableSystemRelationsTab$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedSystemRelations)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly enableInterfacesTab$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedTabInterfaces)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly enableArchivingTab$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedTabArchiving)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly enableHierarchyTab$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedTabHierarchy)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly enableLocalKleTab$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedTabLocalKle)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly enableNotificationsTab$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedTabNotifications)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly enableLocalReferencesTab$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedLocalReferences)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly enableUsageArchive$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedUsageArchive)
+    .pipe(mapUIConfigStatusToEnabled());
 
   public readonly itContractsModuleEnabled$ = this.store.select(selectShowItContractModule);
   public readonly dataProcessingModuleEnabled$ = this.store.select(selectShowDataProcessingRegistrations);
+
+  private readonly recommendedTabBadges = this.recommendedBadgesService.usage;
 
   public readonly breadCrumbs$ = combineLatest([
     this.organizationName$,
@@ -108,11 +137,13 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
       label: $localize`Systemforside`,
       iconType: 'document',
       route: AppPath.frontpage,
+      recommendedBadge$: this.recommendedTabBadges.frontpage$,
     },
     {
       label: $localize`Kontrakter`,
       iconType: 'clipboard',
       route: AppPath.itContracts,
+      recommendedBadge$: this.recommendedTabBadges.contracts$,
       enabled$: combineAND([this.itContractsModuleEnabled$, this.enabledContractsTab$]),
     },
     {
@@ -126,11 +157,13 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
       iconType: 'lock',
       route: AppPath.gdpr,
       enabled$: this.enableGdprTab$,
+      recommendedBadge$: this.recommendedTabBadges.gdpr$,
     },
     {
       label: $localize`Systemroller`,
       iconType: 'roles',
       route: AppPath.roles,
+      recommendedBadge$: this.recommendedTabBadges.roles$,
       enabled$: this.enableSystemRolesTab$,
     },
     {
@@ -143,6 +176,7 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
       label: $localize`Relationer`,
       iconType: 'intersect',
       route: AppPath.relations,
+      recommendedBadge$: this.recommendedTabBadges.relations$,
       enabled$: this.enableSystemRelationsTab$,
     },
     {
@@ -156,6 +190,7 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
       iconType: 'archive',
       route: AppPath.archiving,
       enabled$: this.enableArchivingTab$,
+      recommendedBadge$: this.recommendedTabBadges.archiving$,
     },
     {
       label: $localize`Hierarki`,
@@ -167,18 +202,21 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
       label: $localize`Lokale KLE`,
       iconType: 'table',
       route: AppPath.kle,
+      recommendedBadge$: this.recommendedTabBadges.localKle$,
       enabled$: this.enableLocalKleTab$,
     },
     {
       label: $localize`Advis`,
       iconType: 'notification',
       route: AppPath.notifications,
+      recommendedBadge$: this.recommendedTabBadges.notifications$,
       enabled$: this.enableNotificationsTab$,
     },
     {
       label: $localize`Lokale referencer`,
       iconType: 'bookmark',
       route: AppPath.externalReferences,
+      recommendedBadge$: this.recommendedTabBadges.references$,
       enabled$: this.enableLocalReferencesTab$,
     },
   ];
@@ -190,6 +228,7 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
     private actions$: Actions,
     private notificationService: NotificationService,
     private dialogOpenerService: DialogOpenerService,
+    private readonly recommendedBadgesService: RegistrationRecommendedBadgesService,
   ) {
     super();
   }

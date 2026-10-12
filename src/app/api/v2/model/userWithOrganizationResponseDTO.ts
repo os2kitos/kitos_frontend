@@ -22,6 +22,6 @@ export interface APIUserWithOrganizationResponseDTO {
     name: string;
     email: string;
     apiAccess?: boolean;
-    orgName?: string | null;
+    orgName: string | null;
 }
 

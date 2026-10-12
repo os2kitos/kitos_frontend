@@ -2,9 +2,9 @@ import { createActionGroup, emptyProps } from '@ngrx/store';
 import {
   APIItInterfaceDataRequestDTO,
   APIItInterfaceDataResponseDTO,
+  APIItInterfacePermissionsResponseDTO,
   APIItInterfaceResponseDTO,
   APIResourceCollectionPermissionsResponseDTO,
-  APIResourcePermissionsResponseDTO,
   APIUpdateItInterfaceRequestDTO,
 } from 'src/app/api/v2';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
@@ -30,7 +30,7 @@ export const ITInterfaceActions = createActionGroup({
     'Get IT Interface Error': emptyProps(),
 
     'Get IT Interface permissions': (uuid: string) => ({ uuid }),
-    'Get IT Interface permissions Success': (permissions?: APIResourcePermissionsResponseDTO) => ({
+    'Get IT Interface permissions Success': (permissions?: APIItInterfacePermissionsResponseDTO) => ({
       permissions,
     }),
     'Get IT Interface permissions Error': emptyProps(),

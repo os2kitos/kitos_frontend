@@ -10,6 +10,7 @@ import { CheckboxComponent } from '../checkbox/checkbox.component';
 import { ParagraphComponent } from '../paragraph/paragraph.component';
 import { TooltipComponent } from '../tooltip/tooltip.component';
 import { InfoIconComponent } from '../icons/info-icon.component';
+import { RecommendedBadgeComponent } from '../recommended-badge/recommended-badge.component';
 
 @Component({
   selector: 'app-accordion',
@@ -23,11 +24,14 @@ import { InfoIconComponent } from '../icons/info-icon.component';
     CheckboxComponent,
     ParagraphComponent,
     TooltipComponent,
-    InfoIconComponent
+    InfoIconComponent,
+    RecommendedBadgeComponent,
 ],
 })
 export class AccordionComponent {
   @Input() title: string | undefined;
+  @Input() recommended = false;
+  @Input() recommendedFilled = false;
   @Input() isExpanded = false;
   @Input() disabled = false;
   @Input() checkboxInTitle = false;

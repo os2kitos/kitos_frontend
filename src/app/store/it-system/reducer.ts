@@ -61,7 +61,7 @@ export const itSystemFeature = createFeature({
     on(ITSystemActions.getITSystemPermissions, (state): ITSystemState => ({ ...state, permissions: undefined })),
     on(
       ITSystemActions.getITSystemPermissionsSuccess,
-      (state, { permissions }): ITSystemState => ({ ...state, permissions }),
+      (state, { permissions }): ITSystemState => ({ ...state, permissions: permissions }),
     ),
     on(
       ITSystemActions.getITSystemCollectionPermissions,

@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { Observable, combineLatest, filter } from 'rxjs';
 import { APIGDPRWriteRequestDTO } from 'src/app/api/v2';
 import { BaseAccordionComponent } from 'src/app/shared/base/base-accordion.component';
+import { StandardVerticalContentGridComponent } from 'src/app/shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { SimpleLink } from 'src/app/shared/models/SimpleLink.model';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import { YesNoDontKnowOption, yesNoDontKnowOptions } from 'src/app/shared/models/yes-no-dont-know.model';
@@ -12,7 +13,6 @@ import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { AccordionComponent } from '../../../../../../shared/components/accordion/accordion.component';
 import { DatePickerComponent } from '../../../../../../shared/components/datepicker/datepicker.component';
 import { DropdownComponent } from '../../../../../../shared/components/dropdowns/dropdown/dropdown.component';
-import { FormGridComponent } from '../../../../../../shared/components/form-grid/form-grid.component';
 import { EditUrlSectionComponent } from '../../../../shared/edit-url-section/edit-url-section.component';
 
 @Component({
@@ -21,13 +21,13 @@ import { EditUrlSectionComponent } from '../../../../shared/edit-url-section/edi
   styleUrls: ['./gdpr-base-date-url-section.component.scss'],
   imports: [
     AccordionComponent,
-    FormGridComponent,
     FormsModule,
     ReactiveFormsModule,
     DropdownComponent,
     DatePickerComponent,
     EditUrlSectionComponent,
     AsyncPipe,
+    StandardVerticalContentGridComponent,
   ],
 })
 export class GdprBaseDateUrlSectionComponent extends BaseAccordionComponent implements OnInit {
@@ -52,6 +52,8 @@ export class GdprBaseDateUrlSectionComponent extends BaseAccordionComponent impl
   }>;
 
   @Input() disableLinkControl: boolean = false;
+
+  @Input() choiceTypeRecommended: boolean = false;
 
   @Output() patchGdprEvent = new EventEmitter();
 

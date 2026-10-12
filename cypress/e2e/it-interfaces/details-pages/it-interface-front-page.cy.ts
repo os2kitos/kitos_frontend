@@ -3,7 +3,9 @@ import { TestRunner } from 'cypress/support/test-runner';
 function setupTest() {
   cy.requireIntercept();
   cy.intercept('/odata/ItInterfaces*', { fixture: './it-interfaces/odata/it-interfaces.json' });
-  cy.intercept('/api/v2/it-interfaces/*/permissions', { fixture: './it-interfaces/it-interfaces-permissions.json' });
+  cy.intercept('/api/v2/it-interfaces/*/permissions', { fixture: './it-interfaces/it-interfaces-permissions.json' }).as(
+    'interfacePermissions',
+  );
   cy.intercept('/api/v2/it-interfaces/permissions*', { fixture: 'shared/create-permissions.json' });
   cy.intercept('/api/v2/it-interfaces**', { fixture: './it-interfaces/it-interface.json' });
   cy.intercept('/api/v2/it-interface-interface-types*', { fixture: './it-interfaces/it-interfaces-types.json' });
@@ -24,6 +26,9 @@ describe('it-system-interfaces', () => {
 
     testRunner.runTestWithSetup('interface information area fields contain correct data, and can be edited', () => {
       setupRegularInterfaceDetails();
+      // Consume the permissions request fired by the initial page load, so the later
+      // wait on this alias only matches the re-fetch triggered by the system change below.
+      cy.wait('@interfacePermissions');
       cy.intercept('PATCH', '/api/v2/it-interfaces/*', { fixture: './it-interfaces/it-interface.json' }).as('patch');
 
       const nameSelector = 'interface-name';
@@ -51,7 +56,9 @@ describe('it-system-interfaces', () => {
       cy.dropdownByCy(systemSelector, 'System 2', true);
       verifyInterfaceFrontPagePatchRequest({ exposedBySystemUuid: '33260834-333a-4820-8e1f-d1b05edf6dd0' });
 
-      cy.wait(1000);
+      // Changing the exposed system triggers a permissions re-fetch after the patch succeeds;
+      // wait for it (instead of an arbitrary delay) before interacting with the next dropdown.
+      cy.wait('@interfacePermissions');
 
       const scopeSelector = 'interface-visibility';
       cy.dropdownByCy(scopeSelector, 'Offentlig', true);

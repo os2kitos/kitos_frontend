@@ -20,6 +20,7 @@ import { removeWhitespace } from 'src/app/shared/helpers/string.helpers';
 import { StartPreferenceChoice } from 'src/app/shared/models/organization/organization-user/start-preference.model';
 import { UserService } from 'src/app/shared/services/user.service';
 import { notDirtyAndEmptyStringValidator } from 'src/app/shared/validators/not-dirty-and-empty-string-validator';
+import { setControlError } from 'src/app/shared/helpers/form.helpers';
 import { requiredIfDirtyValidator } from 'src/app/shared/validators/required-if-dirty.validator';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
 import { selectOrganizationUserIsCreateLoading } from 'src/app/store/organization/organization-user/selectors';
@@ -76,10 +77,11 @@ export class CreateUserDialogComponent extends BaseUserDialogComponent implement
   ]).pipe(map(([isLoadingAlreadyExists, isLoading]) => isLoadingAlreadyExists || isLoading));
 
   public createForm = new FormGroup({
-    firstName: new FormControl<string | undefined>(undefined, [requiredIfDirtyValidator()]),
-    lastName: new FormControl<string | undefined>(undefined, [requiredIfDirtyValidator()]),
-    email: new FormControl<string | undefined>(undefined, [requiredIfDirtyValidator(), Validators.email]),
+    firstName: new FormControl<string | undefined>(undefined, [Validators.maxLength(100), requiredIfDirtyValidator()]),
+    lastName: new FormControl<string | undefined>(undefined, [Validators.maxLength(100), requiredIfDirtyValidator()]),
+    email: new FormControl<string | undefined>(undefined, [Validators.maxLength(100), requiredIfDirtyValidator(), Validators.email]),
     repeatEmail: new FormControl<string | undefined>(undefined, [
+      Validators.maxLength(100),
       requiredIfDirtyValidator(),
       Validators.email,
       this.emailMatchValidator.bind(this),
@@ -136,11 +138,7 @@ export class CreateUserDialogComponent extends BaseUserDialogComponent implement
 
     this.subscriptions.add(
       this.alreadyExists$.subscribe((alreadyExists) => {
-        if (alreadyExists) {
-          this.getEmailControl()?.setErrors({ alreadyExists: true });
-        } else {
-          this.getEmailControl()?.setErrors(null);
-        }
+        setControlError(this.getEmailControl(), 'alreadyExists', alreadyExists);
       }),
     );
 

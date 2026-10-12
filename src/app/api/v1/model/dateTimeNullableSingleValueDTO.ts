@@ -12,6 +12,6 @@
 
 
 export interface APIDateTimeNullableSingleValueDTO { 
-    value?: string | null;
+    value: string | null;
 }
 

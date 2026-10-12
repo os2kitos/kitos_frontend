@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { RegistrationRecommendedBadgesService } from 'src/app/shared/services/registration-recommended-badges.service';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectITSystemUsageHasModifyPermission } from 'src/app/store/it-system-usage/selectors';
@@ -15,11 +16,16 @@ import { AsyncPipe } from '@angular/common';
   imports: [CardComponent, CardHeaderComponent, ExternalReferencesManagementComponent, AsyncPipe],
 })
 export class ItSystemUsageDetailsExternalReferencesComponent extends BaseComponent {
+  public readonly recommendedBadge$ = this.recommendedBadgesService.usage.references$;
+
   public readonly hasModifyPermission$ = this.store
     .select(selectITSystemUsageHasModifyPermission)
     .pipe(filterNullish());
 
-  constructor(private store: Store) {
+  constructor(
+    private store: Store,
+    private readonly recommendedBadgesService: RegistrationRecommendedBadgesService,
+  ) {
     super();
   }
 }

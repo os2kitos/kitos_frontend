@@ -16,8 +16,8 @@ import { APIUserDTO } from './userDTO';
 
 
 export interface APIOrganizationDTO { 
-    id?: number;
-    name?: string | null;
+    id: number;
+    name: string | null;
     phone?: string | null;
     adress?: string | null;
     email?: string | null;

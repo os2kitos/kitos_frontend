@@ -12,7 +12,7 @@
 
 
 export interface APICommandPermissionResponseDTO { 
-    id?: string | null;
+    id: string | null;
     canExecute?: boolean;
 }
 

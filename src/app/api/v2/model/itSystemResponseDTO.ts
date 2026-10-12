@@ -59,7 +59,7 @@ export interface APIItSystemResponseDTO {
     createdBy: APIIdentityNamePairResponseDTO;
     recommendedArchiveDuty: APIRecommendedArchiveDutyResponseDTO;
     /**
-     * A list of unique suppliers associated with each usage’s main contract.
+     * A list of unique suppliers associated with each usage\'s main contract.
      */
     mainContractSuppliers: Array<APIShallowOrganizationResponseDTO>;
     /**

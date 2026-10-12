@@ -1,6 +1,9 @@
 @if (formGroup) {
   <mat-form-field [formGroup]="formGroup" class="{{ size }}">
-    <mat-label>{{ text }}</mat-label>
+    <mat-label>
+      {{ text }}
+     <app-recommended-badge [visible]="recommended" [filled]="recommendedFilled ?? ((formName && formGroup.controls[formName].value && formGroup.controls[formName].value !== '') === true)"></app-recommended-badge>
+    </mat-label>
     <input
       matInput
       type="text"
@@ -16,7 +19,10 @@
 
 @if (!formGroup) {
   <mat-form-field class="{{ size }}">
-    <mat-label>{{ text }}</mat-label>
+    <mat-label>
+      {{ text }}
+      <app-recommended-badge [visible]="recommended" [filled]="recommendedFilled ?? (value !== undefined && value !== null)"></app-recommended-badge>
+    </mat-label>
     <input
       matInput
       type="text"

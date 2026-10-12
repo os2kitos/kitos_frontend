@@ -11,7 +11,7 @@
  */
 import { APIOversightIntervalChoice } from './oversightIntervalChoice';
 import { APIYesNoUndecidedChoice } from './yesNoUndecidedChoice';
-import { APIOversightDateDTO } from './oversightDateDTO';
+import { APIModifyOversightDateDTO } from './modifyOversightDateDTO';
 
 
 export interface APIDataProcessingRegistrationOversightWriteRequestDTO { 
@@ -40,6 +40,6 @@ export interface APIDataProcessingRegistrationOversightWriteRequestDTO {
     /**
      * Specific dates where the oversight activity took place  Constraints:      - IsOversightCompleted equals yes
      */
-    oversightDates?: Array<APIOversightDateDTO> | null;
+    oversightDates?: Array<APIModifyOversightDateDTO> | null;
 }
 

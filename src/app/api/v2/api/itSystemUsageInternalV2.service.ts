@@ -52,6 +52,7 @@ export interface GetManyItSystemUsageInternalV2GetItSystemUsagesRequestParams {
     relatedToSystemUsageUuid?: string;
     /** Query by contracts which are part of a system relation */
     relatedToContractUuid?: string;
+    /** Filter by UUID of the system */
     systemUuid?: string;
     /** Query usages based on system name */
     systemNameContent?: string;

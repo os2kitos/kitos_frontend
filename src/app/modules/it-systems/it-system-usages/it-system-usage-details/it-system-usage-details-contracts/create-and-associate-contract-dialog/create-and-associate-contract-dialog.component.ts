@@ -1,19 +1,20 @@
+import { AsyncPipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { combineLatest, debounceTime, map, startWith } from 'rxjs';
+import { setControlError } from 'src/app/shared/helpers/form.helpers';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { CreateEntityDialogComponentStore } from 'src/app/shared/components/entity-creation/create-entity-dialog.component-store';
 import { DEFAULT_INPUT_DEBOUNCE_TIME } from 'src/app/shared/constants/constants';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
+import { ButtonComponent } from '../../../../../../shared/components/buttons/button/button.component';
+import { DialogActionsComponent } from '../../../../../../shared/components/dialogs/dialog-actions/dialog-actions.component';
 import { DialogComponent } from '../../../../../../shared/components/dialogs/dialog/dialog.component';
+import { ParagraphComponent } from '../../../../../../shared/components/paragraph/paragraph.component';
 import { StandardVerticalContentGridComponent } from '../../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { TextBoxComponent } from '../../../../../../shared/components/textbox/textbox.component';
-import { AsyncPipe } from '@angular/common';
-import { ParagraphComponent } from '../../../../../../shared/components/paragraph/paragraph.component';
-import { DialogActionsComponent } from '../../../../../../shared/components/dialogs/dialog-actions/dialog-actions.component';
-import { ButtonComponent } from '../../../../../../shared/components/buttons/button/button.component';
 
 @Component({
   selector: 'app-create-and-associate-contract-dialog',
@@ -29,14 +30,14 @@ import { ButtonComponent } from '../../../../../../shared/components/buttons/but
     ParagraphComponent,
     DialogActionsComponent,
     ButtonComponent,
-    AsyncPipe
-],
+    AsyncPipe,
+  ],
 })
 export class CreateAndAssociateContractDialogComponent extends BaseComponent implements OnInit {
   @Input() public usageToAssociateUuid!: string;
 
   public readonly formGroup = new FormGroup({
-    contractName: new FormControl<string | undefined>(undefined, Validators.required),
+    contractName: new FormControl<string | undefined>(undefined, [Validators.required, Validators.maxLength(200)]),
   });
 
   public readonly loading$ = this.componentStore.isLoading$;
@@ -70,18 +71,14 @@ export class CreateAndAssociateContractDialogComponent extends BaseComponent imp
     );
     this.subscriptions.add(
       this.alreadyExists$.subscribe((alreadyExists) => {
-        if (alreadyExists) {
-          this.formGroup.controls.contractName.setErrors({ alreadyExists: true });
-        } else {
-          this.formGroup.controls.contractName.setErrors(null);
-        }
+        setControlError(this.formGroup.controls.contractName, 'alreadyExists', alreadyExists);
       }),
     );
   }
 
   public createAndRegisterContract() {
     const contractName = this.formGroup.controls.contractName.value;
-    if (!contractName) return;
+    if (!contractName || this.formGroup.invalid) return;
     this.store.dispatch(ITContractActions.createAndAssociateContract(contractName, this.usageToAssociateUuid));
     this.closeDialog();
   }

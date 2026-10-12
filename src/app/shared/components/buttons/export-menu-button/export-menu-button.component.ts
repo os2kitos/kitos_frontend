@@ -1,14 +1,15 @@
-import { AsyncPipe } from '@angular/common';
+﻿import { AsyncPipe } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { GdprOverviewDialogComponent } from 'src/app/modules/it-systems/it-system-usages/gdpr-overview-dialog/gdpr-overview-dialog.component';
-import { selectITSystemUsageEnableGdpr } from 'src/app/store/organization/ui-module-customization/selectors';
+import { selectITSystemUsageEnableAndRecommendedGdpr } from 'src/app/store/organization/ui-module-customization/selectors';
 import { ExportIconComponent } from '../../icons/export-icon.component';
 import { LockIconComponent } from '../../icons/lock-icon.component';
 import { MenuButtonItemComponent } from '../menu-button/menu-button-item/menu-button-item.component';
 import { MenuButtonComponent } from '../menu-button/menu-button.component';
 import { Observable } from 'rxjs';
+import { mapUIConfigStatusToEnabled } from 'src/app/shared/helpers/observable-helpers';
 
 @Component({
   selector: 'app-export-menu-button',
@@ -26,7 +27,7 @@ export class ExportMenuButtonComponent {
   constructor(private dialog: MatDialog, private store: Store) {
   }
 
-  public readonly gdprEnabled$ = this.store.select(selectITSystemUsageEnableGdpr);
+  public readonly gdprEnabled$ = this.store.select(selectITSystemUsageEnableAndRecommendedGdpr).pipe(mapUIConfigStatusToEnabled());
 
   triggerMethod(exportAllColumns: boolean): void {
     if (this.exportMethod) {

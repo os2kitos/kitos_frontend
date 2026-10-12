@@ -12,8 +12,8 @@
 
 
 export interface APIOptionWithDescriptionAndExpirationDTO { 
-    id?: number;
-    name?: string | null;
+    id: number;
+    name: string | null;
     expired?: boolean;
     description?: string | null;
 }

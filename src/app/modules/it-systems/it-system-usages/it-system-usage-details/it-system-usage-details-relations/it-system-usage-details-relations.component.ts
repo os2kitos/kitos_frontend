@@ -1,3 +1,4 @@
+import { RegistrationRecommendedBadgesService } from 'src/app/shared/services/registration-recommended-badges.service';
 import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
@@ -20,8 +21,8 @@ import {
   selectItSystemUsageUuid,
 } from 'src/app/store/it-system-usage/selectors';
 import {
-  selectITSystemUsageEnableIncomingRelations,
-  selectITSystemUsageEnableOutgoingRelations,
+  selectITSystemUsageEnableAndRecommendedIncomingRelations,
+  selectITSystemUsageEnableAndRecommendedOutgoingRelations,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { CardHeaderComponent } from '../../../../../shared/components/card-header/card-header.component';
@@ -32,6 +33,7 @@ import { StandardVerticalContentGridComponent } from '../../../../../shared/comp
 import { CreateRelationDialogComponent } from './create-relation-dialog/create-relation-dialog.component';
 import { ItSystemUsageDetailsRelationsComponentStore } from './it-system-usage-details-relations.component-store';
 import { RelationGridComponent } from './relation-table/relation-grid.component';
+import { mapUIConfigStatusToEnabled, mapUIConfigStatusToRecommended } from 'src/app/shared/helpers/observable-helpers';
 
 @Component({
   selector: 'app-it-system-usage-details-relations',
@@ -50,6 +52,8 @@ import { RelationGridComponent } from './relation-table/relation-grid.component'
 ],
 })
 export class ItSystemUsageDetailsRelationsComponent extends BaseComponent implements OnInit {
+  public readonly recommendedBadge$ = this.recommendedBadgesService.usage.relations$;
+
   public selected = ItSystemUsageRelationSegmentOption.Outgoing;
   public segmentOptions = itSystemUsageRelationSegmentOptions;
   public ItSystemUsageRelationSegmentOption = ItSystemUsageRelationSegmentOption;
@@ -70,14 +74,18 @@ export class ItSystemUsageDetailsRelationsComponent extends BaseComponent implem
   public readonly isUsageLoading$ = this.store.select(selectIsLoading);
   public readonly isIncomingRelationsLoading$ = this.componentStore.isIncomingRelationsLoading$;
 
-  public readonly outgoingRelationsEnabled$ = this.store.select(selectITSystemUsageEnableOutgoingRelations);
-  public readonly incomingRelationsEnabled$ = this.store.select(selectITSystemUsageEnableIncomingRelations);
+  public readonly outgoingRelationsEnabled$ = this.store.select(selectITSystemUsageEnableAndRecommendedOutgoingRelations).pipe(mapUIConfigStatusToEnabled());
+  public readonly incomingRelationsEnabled$ = this.store.select(selectITSystemUsageEnableAndRecommendedIncomingRelations).pipe(mapUIConfigStatusToEnabled());
+  public readonly incomingRelationsRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedIncomingRelations)
+    .pipe(mapUIConfigStatusToRecommended());
 
   constructor(
     private readonly store: Store,
     private readonly componentStore: ItSystemUsageDetailsRelationsComponentStore,
     private readonly actions$: Actions,
-    private readonly dialog: MatDialog
+    private readonly dialog: MatDialog,
+    private readonly recommendedBadgesService: RegistrationRecommendedBadgesService,
   ) {
     super();
   }

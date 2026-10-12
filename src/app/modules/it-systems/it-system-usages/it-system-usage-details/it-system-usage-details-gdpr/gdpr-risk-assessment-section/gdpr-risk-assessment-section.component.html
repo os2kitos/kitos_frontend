@@ -1,4 +1,23 @@
 <app-accordion
+  [recommended]="
+    ((enablePlannedRiskAssessmentDateField$ | async) === true &&
+      (plannedRiskAssessmentDateRecommended$ | async) === true) ||
+    ((conductedRiskAssessmentEnabled$ | async) === true &&
+      (conductedRiskAssessmentRecommended$ | async) === true)
+  "
+  [recommendedFilled]="
+    ((enablePlannedRiskAssessmentDateField$ | async) !== true ||
+      (plannedRiskAssessmentDateRecommended$ | async) !== true ||
+      !!riskAssessmentFormGroup.controls.plannedDateControl.value) &&
+    ((conductedRiskAssessmentEnabled$ | async) !== true ||
+      (conductedRiskAssessmentRecommended$ | async) !== true ||
+      (!!riskAssessmentFormGroup.controls.riskAssessmentConductedControl.value &&
+        (riskAssessmentFormGroup.controls.riskAssessmentConductedControl.value.value !== 'Yes' ||
+          (!!riskAssessmentFormGroup.controls.conductedDateControl.value &&
+            !!riskAssessmentFormGroup.controls.assessmentResultControl.value &&
+            !!(selectRiskDocumentation$ | async) &&
+            !!riskAssessmentFormGroup.controls.notesControl.value?.trim()))))
+  "
   title="Risikovurdering"
   [isExpanded]="(isExpanded$ | async) ?? false"
   (expandedChanged)="onExpandedChanged($event)"
@@ -6,12 +25,13 @@
   >
   <form [formGroup]="riskAssessmentFormGroup">
     <app-standard-vertical-content-grid>
-      @if ((enablePlannedRiskAssessmentDateField$ | async) !== false) {
+      @if (enablePlannedRiskAssessmentDateField$ | async) {
         <app-datepicker
           text="Dato for planlagt risikovurdering"
           i18n-text
           [formGroup]="riskAssessmentFormGroup"
           formName="plannedDateControl"
+          [recommended]="(plannedRiskAssessmentDateRecommended$ | async) === true"
           (valueChange)="patchGdpr({ plannedRiskAssessmentDate: $event?.toDateString() })"
           data-cy="planned-date-datepicker"
           >
@@ -24,6 +44,7 @@
           [formGroup]="riskAssessmentFormGroup"
           formName="riskAssessmentConductedControl"
           [data]="yesNoDontKnowIrrelevantOptions"
+          [recommended]="(conductedRiskAssessmentRecommended$ | async) === true"
           (valueChange)="patchGdpr({ riskAssessmentConducted: $event })"
           data-cy="risk-assessment-dropdown"
         ></app-dropdown>
@@ -34,6 +55,10 @@
           [formGroup]="riskAssessmentFormGroup"
           formName="conductedDateControl"
           data-cy="conducted-date-datepicker"
+          [recommendedFilled]="
+            riskAssessmentFormGroup.controls.riskAssessmentConductedControl.value?.value === 'Yes' ? undefined : !!riskAssessmentFormGroup.controls.riskAssessmentConductedControl.value
+          "
+          [recommended]="(conductedRiskAssessmentRecommended$ | async) === true"
           (valueChange)="patchGdpr({ riskAssessmentConductedDate: $event?.toDateString() })"
           >
         </app-datepicker>
@@ -52,6 +77,10 @@
             formName="assessmentResultControl"
             [data]="riskAssessmentResultOptions"
             data-cy="assessment-result-dropdown"
+            [recommendedFilled]="
+              riskAssessmentFormGroup.controls.riskAssessmentConductedControl.value?.value === 'Yes' ? undefined : !!riskAssessmentFormGroup.controls.riskAssessmentConductedControl.value
+            "
+            [recommended]="(conductedRiskAssessmentRecommended$ | async) === true"
             (valueChange)="patchGdpr({ riskAssessmentResult: $event })"
             ></app-dropdown
           ></app-tooltip>
@@ -61,15 +90,23 @@
             [simpleLink$]="selectRiskDocumentation$"
             [isDisabled]="(isRiskAssessmentFalse$ | async) !== false"
             data-cy="risk-documentation-link"
-            (submitMethod)="patchGdpr({ riskAssessmentDocumentation: $event })"
             [isDisabled]="disableDirectoryDocumentationControl"
+            [recommendedFilled]="
+              riskAssessmentFormGroup.controls.riskAssessmentConductedControl.value?.value === 'Yes' ? undefined : !!riskAssessmentFormGroup.controls.riskAssessmentConductedControl.value
+            "
+            [recommended]="(conductedRiskAssessmentRecommended$ | async) === true"
+            (submitMethod)="patchGdpr({ riskAssessmentDocumentation: $event })"
           ></app-edit-url-section>
           <app-textarea
-            title="Bemærkninger"
-            i18n-title
+            text="Bemærkninger"
+            i18n-text
             [formGroup]="riskAssessmentFormGroup"
             formName="notesControl"
             data-cy="assessment-notes"
+            [recommendedFilled]="
+              riskAssessmentFormGroup.controls.riskAssessmentConductedControl.value?.value === 'Yes' ? undefined : !!riskAssessmentFormGroup.controls.riskAssessmentConductedControl.value
+            "
+            [recommended]="(conductedRiskAssessmentRecommended$ | async) === true"
             (valueChange)="patchGdpr({ riskAssessmentNotes: $event })"
             >
           </app-textarea>

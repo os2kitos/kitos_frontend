@@ -8,6 +8,7 @@ import {
 } from '../helpers/read-model-role-assignments';
 import { mapToYesNoEnum } from '../yes-no.model';
 import { OverviewAuditModel } from './audit-model';
+import { mapYearSegmentChoice } from './year-segment-choice';
 
 export interface ITContract {
   id: string;
@@ -52,10 +53,12 @@ export interface ITContract {
   TerminationDeadlineName: string;
   IrrevocableTo: Date;
   TerminatedAt: Date;
+  ByEnding: string;
   LastEditedByUserName: string;
   LastEditedAtDate: Date;
   Roles: RoleAssignmentsMap;
   RoleEmails: RoleAssignmentEmailsMaps;
+  Note: string;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -128,9 +131,11 @@ export const adaptITContract = (value: any): ITContract | undefined => {
     TerminationDeadlineName: value.TerminationDeadlineName,
     IrrevocableTo: value.IrrevocableTo,
     TerminatedAt: value.TerminatedAt,
+    ByEnding: mapYearSegmentChoice(value.ByEnding)?.name ?? '',
     LastEditedByUserName: value.LastEditedByUserName,
     LastEditedAtDate: value.LastEditedAtDate,
     Roles: mapRoleAssignmentsToUserFullNames(value.RoleAssignments),
     RoleEmails: mapRoleAssignmentsToEmails(value.RoleAssignments),
+    Note: value.Note,
   };
 };

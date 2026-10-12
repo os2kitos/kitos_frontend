@@ -12,8 +12,8 @@
 
 
 export interface APILocalItContractRolesResponseDTO { 
-    id?: number;
-    uuid?: string;
-    name?: string | null;
+    id: number;
+    uuid: string;
+    name: string | null;
 }
 

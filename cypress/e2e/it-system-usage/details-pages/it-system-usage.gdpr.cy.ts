@@ -109,7 +109,7 @@ describe('it-system-usage gdpr', () => {
     cy.input('data type 1').click({ force: true });
     verifyGdprPatchRequest(
       { sensitivePersonDataUuids: ['00000000-0000-0000-0000-000000000000'] },
-      'patchSensitivePersonalData'
+      'patchSensitivePersonalData',
     );
   });
 
@@ -129,7 +129,7 @@ describe('it-system-usage gdpr', () => {
       .click()
       .within(() => {
         cy.getByDataCy('technical-precautions-dropdown').should('contain', 'Nej');
-        const nestedCheckboxes = ['Kryptering', 'Pseudonomisering', 'Adgangsstyring', 'Logning'];
+        const nestedCheckboxes = ['Kryptering', 'Pseudonymisering', 'Adgangsstyring', 'Logning'];
         nestedCheckboxes.forEach((checkBox) => {
           cy.input(checkBox).should('be.disabled');
         });

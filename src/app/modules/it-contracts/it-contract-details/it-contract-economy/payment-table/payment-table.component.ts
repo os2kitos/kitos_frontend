@@ -48,6 +48,7 @@ import { AppDatePipe } from '../../../../../shared/pipes/app-date.pipe';
 ],
 })
 export class PaymentTableComponent extends BaseComponent {
+  @Input() public recommended = false;
   @Input() public title!: string;
   @Input() public helpTextKey!: string;
   @Input() public payments$!: Observable<APIPaymentResponseDTO[]>;

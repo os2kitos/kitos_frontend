@@ -21,9 +21,9 @@ import { Observable }                                        from 'rxjs';
 // @ts-ignore
 import { APICommonOrderByProperty } from '../model/aPICommonOrderByProperty';
 // @ts-ignore
-import { APIOrganizationResponseDTO } from '../model/aPIOrganizationResponseDTO';
+import { APIExternalOrganizationUnitResponseDTO } from '../model/aPIExternalOrganizationUnitResponseDTO';
 // @ts-ignore
-import { APIOrganizationUnitResponseDTO } from '../model/aPIOrganizationUnitResponseDTO';
+import { APIOrganizationResponseDTO } from '../model/aPIOrganizationResponseDTO';
 // @ts-ignore
 import { APIOrganizationUserResponseDTO } from '../model/aPIOrganizationUserResponseDTO';
 // @ts-ignore
@@ -56,6 +56,7 @@ export interface GetManyOrganizationV2GetOrganizationUsersRequestParams {
     organizationUuid: string;
     /** Query by text in name or email */
     nameOrEmailQuery?: string;
+    /** Query by exact email */
     emailQuery?: string;
     /** Query by role assignment */
     roleQuery?: APIOrganizationUserRole;
@@ -183,9 +184,9 @@ export class OrganizationV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getManyOrganizationV2GetOrganizationUnits(requestParameters: GetManyOrganizationV2GetOrganizationUnitsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIOrganizationUnitResponseDTO>>;
-    public getManyOrganizationV2GetOrganizationUnits(requestParameters: GetManyOrganizationV2GetOrganizationUnitsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIOrganizationUnitResponseDTO>>>;
-    public getManyOrganizationV2GetOrganizationUnits(requestParameters: GetManyOrganizationV2GetOrganizationUnitsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIOrganizationUnitResponseDTO>>>;
+    public getManyOrganizationV2GetOrganizationUnits(requestParameters: GetManyOrganizationV2GetOrganizationUnitsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIExternalOrganizationUnitResponseDTO>>;
+    public getManyOrganizationV2GetOrganizationUnits(requestParameters: GetManyOrganizationV2GetOrganizationUnitsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIExternalOrganizationUnitResponseDTO>>>;
+    public getManyOrganizationV2GetOrganizationUnits(requestParameters: GetManyOrganizationV2GetOrganizationUnitsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIExternalOrganizationUnitResponseDTO>>>;
     public getManyOrganizationV2GetOrganizationUnits(requestParameters: GetManyOrganizationV2GetOrganizationUnitsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
@@ -258,7 +259,7 @@ export class OrganizationV2Service {
         }
 
         let localVarPath = `/api/v2/organizations/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/organization-units`;
-        return this.httpClient.request<Array<APIOrganizationUnitResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<Array<APIExternalOrganizationUnitResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 params: localVarQueryParameters,
@@ -622,9 +623,9 @@ export class OrganizationV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleOrganizationV2GetOrganizationUnit(requestParameters: GetSingleOrganizationV2GetOrganizationUnitRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIOrganizationUnitResponseDTO>;
-    public getSingleOrganizationV2GetOrganizationUnit(requestParameters: GetSingleOrganizationV2GetOrganizationUnitRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIOrganizationUnitResponseDTO>>;
-    public getSingleOrganizationV2GetOrganizationUnit(requestParameters: GetSingleOrganizationV2GetOrganizationUnitRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIOrganizationUnitResponseDTO>>;
+    public getSingleOrganizationV2GetOrganizationUnit(requestParameters: GetSingleOrganizationV2GetOrganizationUnitRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIExternalOrganizationUnitResponseDTO>;
+    public getSingleOrganizationV2GetOrganizationUnit(requestParameters: GetSingleOrganizationV2GetOrganizationUnitRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIExternalOrganizationUnitResponseDTO>>;
+    public getSingleOrganizationV2GetOrganizationUnit(requestParameters: GetSingleOrganizationV2GetOrganizationUnitRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIExternalOrganizationUnitResponseDTO>>;
     public getSingleOrganizationV2GetOrganizationUnit(requestParameters: GetSingleOrganizationV2GetOrganizationUnitRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
@@ -674,7 +675,7 @@ export class OrganizationV2Service {
         }
 
         let localVarPath = `/api/v2/organizations/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/organization-units/${this.configuration.encodeParam({name: "organizationUnitId", value: organizationUnitId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
-        return this.httpClient.request<APIOrganizationUnitResponseDTO>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APIExternalOrganizationUnitResponseDTO>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,

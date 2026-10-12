@@ -15,11 +15,11 @@ import { APIIdentityNamePairWithDeactivatedStatusDTO } from './identityNamePairW
 
 
 export interface APIItSystemUsageMigrationV2ResponseDTO { 
-    targetUsage?: APIIdentityNamePairWithDeactivatedStatusDTO;
-    fromSystem?: APIIdentityNamePairWithDeactivatedStatusDTO;
-    toSystem?: APIIdentityNamePairWithDeactivatedStatusDTO;
-    affectedContracts?: Array<APIIdentityNamePairResponseDTO> | null;
-    affectedRelations?: Array<APIItSystemUsageRelationMigrationV2ResponseDTO> | null;
-    affectedDataProcessingRegistrations?: Array<APIIdentityNamePairResponseDTO> | null;
+    targetUsage: APIIdentityNamePairWithDeactivatedStatusDTO;
+    fromSystem: APIIdentityNamePairWithDeactivatedStatusDTO;
+    toSystem: APIIdentityNamePairWithDeactivatedStatusDTO;
+    affectedContracts: Array<APIIdentityNamePairResponseDTO> | null;
+    affectedRelations: Array<APIItSystemUsageRelationMigrationV2ResponseDTO> | null;
+    affectedDataProcessingRegistrations: Array<APIIdentityNamePairResponseDTO> | null;
 }
 

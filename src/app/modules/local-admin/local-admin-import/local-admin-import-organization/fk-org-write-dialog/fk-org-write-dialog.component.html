@@ -15,6 +15,7 @@
                 i18n-text
                 [formGroup]="fkOrgFormGroup"
                 formName="levels"
+                [maxLength]="2147483647"
                 [minLength]="1"
                 data-cy="levels-input"
                 (valueChange)="levelChange($event)"

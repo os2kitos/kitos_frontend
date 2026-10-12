@@ -115,7 +115,6 @@ Cypress.Commands.add('datepicker', (name: string, value?: string) => {
   if (value) {
     picker.parentsUntil('mat-form-field').find('mat-datepicker-toggle').click();
     cy.document().within(() => {
-      cy.wait(200);
       cy.get('mat-datepicker-content').contains(value).click();
       cy.get('body').click();
     });
@@ -128,7 +127,6 @@ Cypress.Commands.add('datepickerByCy', (selector: string, value?: string, force 
   if (value) {
     picker.find('mat-datepicker-toggle').click();
     cy.document().within(() => {
-      cy.wait(200);
       cy.get('mat-datepicker-content').contains(value).click({ force });
       cy.get('body').click();
     });

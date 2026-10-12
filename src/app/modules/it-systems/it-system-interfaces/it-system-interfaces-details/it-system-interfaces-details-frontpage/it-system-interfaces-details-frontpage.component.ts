@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
@@ -107,9 +107,9 @@ export class ItSystemInterfacesDetailsFrontpageComponent extends BaseComponent i
   public disableLinkControl = false;
 
   public readonly interfaceFormGroup = new FormGroup({
-    name: new FormControl<string | undefined>({ value: undefined, disabled: true }),
-    interfaceId: new FormControl<string | undefined>({ value: undefined, disabled: true }),
-    version: new FormControl<string | undefined>({ value: undefined, disabled: true }),
+    name: new FormControl<string | undefined>({ value: undefined, disabled: true }, Validators.maxLength(100)),
+    interfaceId: new FormControl<string | undefined>({ value: undefined, disabled: true }, Validators.maxLength(100)),
+    version: new FormControl<string | undefined>({ value: undefined, disabled: true }, Validators.maxLength(20)),
     exposedBySystem: new FormControl<APIIdentityNamePairResponseDTO | undefined>({ value: undefined, disabled: true }),
     uuid: new FormControl<string | undefined>({ value: undefined, disabled: true }),
     createdBy: new FormControl<string | undefined>({ value: undefined, disabled: true }),

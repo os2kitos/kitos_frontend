@@ -8,7 +8,7 @@ export interface TechnicalPrecautions {
 export const technicalPrecautionsOptions: TechnicalPrecautions[] = [
   { name: $localize`Kryptering`, value: APITechnicalPrecautionChoice.Encryption },
   {
-    name: $localize`Pseudonomisering`,
+    name: $localize`Pseudonymisering`,
     value: APITechnicalPrecautionChoice.Pseudonymization,
   },
   {

@@ -1,23 +1,23 @@
-import { AsyncPipe } from '@angular/common';
+﻿import { AsyncPipe } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, filter, first, map } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import { combineAND, combineOR } from 'src/app/shared/helpers/observable-helpers';
+import { combineAND, combineOR, mapUIConfigStatusToEnabled} from 'src/app/shared/helpers/observable-helpers';
 import { selectITSystemUsageHasModifyPermission } from 'src/app/store/it-system-usage/selectors';
 import {
-  selectITSystemUsageEnabledRegisteredCategories,
-  selectITSystemUsageEnableGdprConductedRiskAssessment,
-  selectITSystemUsageEnableGdprDataTypes,
-  selectITSystemUsageEnableGdprDocumentation,
-  selectITSystemUsageEnableGdprDpiaConducted,
-  selectITSystemUsageEnableGdprPlannedRiskAssessmentDate,
-  selectITSystemUsageEnableGdprPurpose,
-  selectITSystemUsageEnableGdprRetentionPeriod,
-  selectITSystemUsageEnableGdprTechnicalPrecautions,
-  selectITSystemUsageEnableGdprUserSupervision,
-  selectITSystemUsageEnableGeneralHostedAt,
+  selectITSystemUsageEnableAndRecommendedRegisteredCategories,
+  selectITSystemUsageEnableAndRecommendedGdprConductedRiskAssessment,
+  selectITSystemUsageEnableAndRecommendedGdprDataTypes,
+  selectITSystemUsageEnableAndRecommendedGdprDocumentation,
+  selectITSystemUsageEnableAndRecommendedGdprDpiaConducted,
+  selectITSystemUsageEnableAndRecommendedGdprPlannedRiskAssessmentDate,
+  selectITSystemUsageEnableAndRecommendedGdprPurpose,
+  selectITSystemUsageEnableAndRecommendedGdprRetentionPeriod,
+  selectITSystemUsageEnableAndRecommendedGdprTechnicalPrecautions,
+  selectITSystemUsageEnableAndRecommendedGdprUserSupervision,
+  selectITSystemUsageEnableAndRecommendedGeneralHostedAt,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { ButtonComponent } from '../../../../../shared/components/buttons/button/button.component';
 import { CardHeaderComponent } from '../../../../../shared/components/card-header/card-header.component';
@@ -69,24 +69,24 @@ export class ItSystemUsageDetailsGdprComponent extends BaseComponent {
   }
 
   public readonly showGeneralInfo$ = combineOR([
-    this.store.select(selectITSystemUsageEnableGdprPurpose),
-    this.store.select(selectITSystemUsageEnableGeneralHostedAt),
-    this.store.select(selectITSystemUsageEnableGdprDocumentation),
+    this.store.select(selectITSystemUsageEnableAndRecommendedGdprPurpose).pipe(mapUIConfigStatusToEnabled()),
+    this.store.select(selectITSystemUsageEnableAndRecommendedGeneralHostedAt).pipe(mapUIConfigStatusToEnabled()),
+    this.store.select(selectITSystemUsageEnableAndRecommendedGdprDocumentation).pipe(mapUIConfigStatusToEnabled()),
   ]);
 
-  public readonly showDataTypes$ = this.store.select(selectITSystemUsageEnableGdprDataTypes);
+  public readonly showDataTypes$ = this.store.select(selectITSystemUsageEnableAndRecommendedGdprDataTypes).pipe(mapUIConfigStatusToEnabled());
 
-  public readonly registeredCategoriesEnabled$ = this.store.select(selectITSystemUsageEnabledRegisteredCategories);
-  public readonly technicalPrecautionsEnabled$ = this.store.select(selectITSystemUsageEnableGdprTechnicalPrecautions);
-  public readonly userSupervisionEnabled$ = this.store.select(selectITSystemUsageEnableGdprUserSupervision);
+  public readonly registeredCategoriesEnabled$ = this.store.select(selectITSystemUsageEnableAndRecommendedRegisteredCategories).pipe(mapUIConfigStatusToEnabled());
+  public readonly technicalPrecautionsEnabled$ = this.store.select(selectITSystemUsageEnableAndRecommendedGdprTechnicalPrecautions).pipe(mapUIConfigStatusToEnabled());
+  public readonly userSupervisionEnabled$ = this.store.select(selectITSystemUsageEnableAndRecommendedGdprUserSupervision).pipe(mapUIConfigStatusToEnabled());
 
   public readonly showRiskAssessment$ = combineOR([
-    this.store.select(selectITSystemUsageEnableGdprPlannedRiskAssessmentDate),
-    this.store.select(selectITSystemUsageEnableGdprConductedRiskAssessment),
+    this.store.select(selectITSystemUsageEnableAndRecommendedGdprPlannedRiskAssessmentDate).pipe(mapUIConfigStatusToEnabled()),
+    this.store.select(selectITSystemUsageEnableAndRecommendedGdprConductedRiskAssessment).pipe(mapUIConfigStatusToEnabled()),
   ]);
 
-  public readonly showDpiaConducted$ = this.store.select(selectITSystemUsageEnableGdprDpiaConducted);
-  public readonly showRetentionPeriod$ = this.store.select(selectITSystemUsageEnableGdprRetentionPeriod);
+  public readonly showDpiaConducted$ = this.store.select(selectITSystemUsageEnableAndRecommendedGdprDpiaConducted).pipe(mapUIConfigStatusToEnabled());
+  public readonly showRetentionPeriod$ = this.store.select(selectITSystemUsageEnableAndRecommendedGdprRetentionPeriod).pipe(mapUIConfigStatusToEnabled());
 
   public readonly showMoreInformation$ = combineOR([
     this.showDataTypes$,

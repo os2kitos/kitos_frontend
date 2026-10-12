@@ -53,6 +53,7 @@ import { Configuration }                                     from '../configurat
 export interface DeleteSingleItInterfaceV2DeactivateItInterfaceAsRightsHolderRequestParams {
     /** Specific IT-Interface UUID */
     uuid: string;
+    /** Reason for deactivation */
     aPIDeactivationReasonRequestDTO?: APIDeactivationReasonRequestDTO;
 }
 
@@ -62,7 +63,9 @@ export interface DeleteSingleItInterfaceV2DeleteRequestParams {
 }
 
 export interface DeleteSingleItInterfaceV2DeleteDataDescriptionRequestParams {
+    /** UUID of the IT-Interface in KITOS */
     uuid: string;
+    /** UUID of the data description in KITOS */
     dataDescriptionUuid: string;
 }
 
@@ -85,7 +88,9 @@ export interface GetManyItInterfaceV2GetItInterfacesRequestParams {
     organizationUuid?: string;
     /** Ordering property */
     orderByProperty?: APICommonOrderByProperty;
+    /** Filter by UUID of an organization which has access to the IT-Interface */
     availableInOrganizationUuid?: string;
+    /** Filter by contents of the name or IT-Interface ID */
     nameOrItInterfaceIdContains?: string;
     /** 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0 */
     page?: number;
@@ -146,6 +151,7 @@ export interface PostSingleItInterfaceV2PostRequestParams {
 }
 
 export interface PostSingleItInterfaceV2PostDataDescriptionRequestParams {
+    /** UUID of the IT-Interface in KITOS */
     uuid: string;
     /** A collection of specific IT-Interface data description values */
     aPIItInterfaceDataRequestDTO?: APIItInterfaceDataRequestDTO;
@@ -157,7 +163,9 @@ export interface PostSingleItInterfaceV2PostItInterfaceAsRightsHolderRequestPara
 }
 
 export interface PutSingleItInterfaceV2PutDataDescriptionRequestParams {
+    /** UUID of the IT-Interface in KITOS */
     uuid: string;
+    /** UUID of the data description in KITOS */
     dataDescriptionUuid: string;
     /** A collection of specific IT-Interface data description values */
     aPIItInterfaceDataRequestDTO?: APIItInterfaceDataRequestDTO;
@@ -166,6 +174,7 @@ export interface PutSingleItInterfaceV2PutDataDescriptionRequestParams {
 export interface PutSingleItInterfaceV2PutItInterfaceAsRightsHolderRequestParams {
     /** Specific IT-Interface UUID */
     uuid: string;
+    /** Updated IT-Interface properties */
     aPIRightsHolderWritableItInterfacePropertiesDTO?: APIRightsHolderWritableItInterfacePropertiesDTO;
 }
 

@@ -14,7 +14,7 @@ import { APIUserWithEmailDTO } from './userWithEmailDTO';
 
 
 export interface APIAssignedRoleDTO { 
-    user?: APIUserWithEmailDTO;
-    role?: APIBusinessRoleDTO;
+    user: APIUserWithEmailDTO;
+    role: APIBusinessRoleDTO;
 }
 

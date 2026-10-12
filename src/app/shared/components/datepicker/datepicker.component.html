@@ -1,7 +1,12 @@
 <!-- Version used inside of forms-->
 @if (formGroup) {
   <mat-form-field class="{{ size }}" [formGroup]="formGroup">
-    <mat-label>{{ text }}</mat-label>
+    <mat-label>
+      {{ text }}
+      @if (recommended) {
+        <app-recommended-badge [visible]="recommended" [filled]="recommendedFilled ?? ((formName && formGroup.controls[formName].value !== undefined && formGroup.controls[formName].valid) === true)"></app-recommended-badge>
+      }
+    </mat-label>
     <input
       matInput
       i18n-placeholder
@@ -32,7 +37,10 @@
   <!--Version used outside of forms-->
   @if (!formGroup) {
     <mat-form-field class="{{ size }}">
-      <mat-label>{{ text }}</mat-label>
+      <mat-label>
+        {{ text }}
+        <app-recommended-badge [visible]="recommended" [filled]="recommendedFilled ?? (value !== undefined)"></app-recommended-badge>
+      </mat-label>
       <input
         matInput
         i18n-placeholder

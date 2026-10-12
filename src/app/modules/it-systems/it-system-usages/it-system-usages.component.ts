@@ -1,4 +1,4 @@
-import { AsyncPipe } from '@angular/common';
+﻿import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
@@ -53,9 +53,9 @@ import {
   selectUsageGridRoleColumns,
 } from 'src/app/store/it-system-usage/selectors';
 import {
-  selectITSystemUsageEnableFrontPageUsagePeriod,
-  selectITSystemUsageEnableGdpr,
-  selectITSystemUsageEnableLifeCycleStatus,
+  selectITSystemUsageEnableAndRecommendedFrontPageUsagePeriod,
+  selectITSystemUsageEnableAndRecommendedGdpr,
+  selectITSystemUsageEnableAndRecommendedLifeCycleStatus,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { selectOrganizationName } from 'src/app/store/user-store/selectors';
 import { ExportMenuButtonComponent } from '../../../shared/components/buttons/export-menu-button/export-menu-button.component';
@@ -63,6 +63,7 @@ import { GridOptionsButtonComponent } from '../../../shared/components/grid-opti
 import { GridComponent } from '../../../shared/components/grid/grid.component';
 import { HideShowButtonComponent } from '../../../shared/components/grid/hide-show-button/hide-show-button.component';
 import { OverviewHeaderComponent } from '../../../shared/components/overview-header/overview-header.component';
+import { mapUIConfigStatusToEnabled } from 'src/app/shared/helpers/observable-helpers';
 
 @Component({
   templateUrl: 'it-system-usages.component.html',
@@ -754,9 +755,9 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     },
   ];
 
-  public readonly enableLifeCycleStatus$ = this.store.select(selectITSystemUsageEnableLifeCycleStatus);
-  public readonly enableUsagePeriod$ = this.store.select(selectITSystemUsageEnableFrontPageUsagePeriod);
-  public readonly enabledGdpr$ = this.store.select(selectITSystemUsageEnableGdpr);
+  public readonly enableLifeCycleStatus$ = this.store.select(selectITSystemUsageEnableAndRecommendedLifeCycleStatus).pipe(mapUIConfigStatusToEnabled());
+  public readonly enableUsagePeriod$ = this.store.select(selectITSystemUsageEnableAndRecommendedFrontPageUsagePeriod).pipe(mapUIConfigStatusToEnabled());
+  public readonly enabledGdpr$ = this.store.select(selectITSystemUsageEnableAndRecommendedGdpr).pipe(mapUIConfigStatusToEnabled());
 
   constructor(
     store: Store,

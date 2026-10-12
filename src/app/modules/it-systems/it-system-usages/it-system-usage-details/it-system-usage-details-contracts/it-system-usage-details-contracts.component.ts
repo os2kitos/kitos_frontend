@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { combineLatestWith, filter, first } from 'rxjs';
@@ -18,8 +18,8 @@ import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-stor
 import { selectRegularOptionTypesDictionary } from 'src/app/store/regular-option-type-store/selectors';
 import { ItSystemUsageDetailsContractsComponentStore } from './it-system-usage-details-contracts.component-store';
 import {
-  selectITSystemUsageEnableAssociatedContracts,
-  selectITSystemUsageEnableSelectContractToDetermineIfItSystemIsActive,
+  selectITSystemUsageEnableAndRecommendedAssociatedContracts,
+  selectITSystemUsageEnableAndRecommendedSelectContractToDetermineIfItSystemIsActive,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateAndAssociateContractDialogComponent } from './create-and-associate-contract-dialog/create-and-associate-contract-dialog.component';
@@ -41,6 +41,7 @@ import { EmptyStateComponent } from '../../../../../shared/components/empty-stat
 import { CollectionExtensionButtonComponent } from '../../../../../shared/components/collection-extension-button/collection-extension-button.component';
 import { DropdownComponent } from '../../../../../shared/components/dropdowns/dropdown/dropdown.component';
 import { AppDatePipe } from '../../../../../shared/pipes/app-date.pipe';
+import { mapUIConfigStatusToEnabled, mapUIConfigStatusToRecommended } from 'src/app/shared/helpers/observable-helpers';
 
 @Component({
   templateUrl: 'it-system-usage-details-contracts.component.html',
@@ -81,10 +82,16 @@ export class ITSystemUsageDetailsContractsComponent extends BaseComponent implem
     mainContract: new FormControl<APIItContractResponseDTO | undefined>(undefined),
   });
 
-  public readonly associatedContractsEnabled$ = this.store.select(selectITSystemUsageEnableAssociatedContracts);
-  public readonly contractToDetermineIsActiveEnabled$ = this.store.select(
-    selectITSystemUsageEnableSelectContractToDetermineIfItSystemIsActive,
-  );
+  public readonly associatedContractsEnabled$ = this.store.select(selectITSystemUsageEnableAndRecommendedAssociatedContracts).pipe(mapUIConfigStatusToEnabled());
+  public readonly associatedContractsRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedAssociatedContracts)
+    .pipe(mapUIConfigStatusToRecommended());
+  public readonly contractToDetermineIsActiveEnabled$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedSelectContractToDetermineIfItSystemIsActive)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly contractToDetermineIsActiveRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedSelectContractToDetermineIfItSystemIsActive)
+    .pipe(mapUIConfigStatusToRecommended());
 
   public readonly contractCreationPermission$ = this.store.select(selectItContractHasCollectionCreatePermissions);
 

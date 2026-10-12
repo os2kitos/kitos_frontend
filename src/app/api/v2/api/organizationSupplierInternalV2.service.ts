@@ -20,6 +20,10 @@ import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
 import { APIShallowOrganizationResponseDTO } from '../model/aPIShallowOrganizationResponseDTO';
+// @ts-ignore
+import { APISupplierAssociatedFieldConfigurationRequestDTO } from '../model/aPISupplierAssociatedFieldConfigurationRequestDTO';
+// @ts-ignore
+import { APISupplierAssociatedFieldConfigurationResponseDTO } from '../model/aPISupplierAssociatedFieldConfigurationResponseDTO';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -35,6 +39,10 @@ export interface GetManyOrganizationSupplierInternalV2GetAvailableSuppliersReque
     organizationUuid: string;
 }
 
+export interface GetManyOrganizationSupplierInternalV2GetSupplierFieldsRequestParams {
+    organizationUuid: string;
+}
+
 export interface GetManyOrganizationSupplierInternalV2GetSuppliersRequestParams {
     organizationUuid: string;
 }
@@ -46,6 +54,11 @@ export interface GetManyOrganizationSupplierInternalV2GetUsingOrganizationsReque
 export interface PostSingleOrganizationSupplierInternalV2AddSupplierRequestParams {
     organizationUuid: string;
     supplierUuid: string;
+}
+
+export interface PutManyOrganizationSupplierInternalV2PutSupplierFieldsRequestParams {
+    organizationUuid: string;
+    aPISupplierAssociatedFieldConfigurationRequestDTO?: APISupplierAssociatedFieldConfigurationRequestDTO;
 }
 
 
@@ -251,6 +264,71 @@ export class OrganizationSupplierInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
+    public getManyOrganizationSupplierInternalV2GetSupplierFields(requestParameters: GetManyOrganizationSupplierInternalV2GetSupplierFieldsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APISupplierAssociatedFieldConfigurationResponseDTO>>;
+    public getManyOrganizationSupplierInternalV2GetSupplierFields(requestParameters: GetManyOrganizationSupplierInternalV2GetSupplierFieldsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APISupplierAssociatedFieldConfigurationResponseDTO>>>;
+    public getManyOrganizationSupplierInternalV2GetSupplierFields(requestParameters: GetManyOrganizationSupplierInternalV2GetSupplierFieldsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APISupplierAssociatedFieldConfigurationResponseDTO>>>;
+    public getManyOrganizationSupplierInternalV2GetSupplierFields(requestParameters: GetManyOrganizationSupplierInternalV2GetSupplierFieldsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        const organizationUuid = requestParameters.organizationUuid;
+        if (organizationUuid === null || organizationUuid === undefined) {
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyOrganizationSupplierInternalV2GetSupplierFields.');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarCredential: string | undefined;
+        // authentication (Bearer) required
+        localVarCredential = this.configuration.lookupCredential('Bearer');
+        if (localVarCredential) {
+            localVarHeaders = localVarHeaders.set('Authorization', 'Bearer ' + localVarCredential);
+        }
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/v2/internal/organizations/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/suppliers/fields`;
+        return this.httpClient.request<Array<APISupplierAssociatedFieldConfigurationResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * @param requestParameters
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
     public getManyOrganizationSupplierInternalV2GetSuppliers(requestParameters: GetManyOrganizationSupplierInternalV2GetSuppliersRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIShallowOrganizationResponseDTO>>;
     public getManyOrganizationSupplierInternalV2GetSuppliers(requestParameters: GetManyOrganizationSupplierInternalV2GetSuppliersRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIShallowOrganizationResponseDTO>>>;
     public getManyOrganizationSupplierInternalV2GetSuppliers(requestParameters: GetManyOrganizationSupplierInternalV2GetSuppliersRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIShallowOrganizationResponseDTO>>>;
@@ -436,6 +514,82 @@ export class OrganizationSupplierInternalV2Service {
         return this.httpClient.request<APIShallowOrganizationResponseDTO>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * @param requestParameters
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public putManyOrganizationSupplierInternalV2PutSupplierFields(requestParameters: PutManyOrganizationSupplierInternalV2PutSupplierFieldsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APISupplierAssociatedFieldConfigurationResponseDTO>>;
+    public putManyOrganizationSupplierInternalV2PutSupplierFields(requestParameters: PutManyOrganizationSupplierInternalV2PutSupplierFieldsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APISupplierAssociatedFieldConfigurationResponseDTO>>>;
+    public putManyOrganizationSupplierInternalV2PutSupplierFields(requestParameters: PutManyOrganizationSupplierInternalV2PutSupplierFieldsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APISupplierAssociatedFieldConfigurationResponseDTO>>>;
+    public putManyOrganizationSupplierInternalV2PutSupplierFields(requestParameters: PutManyOrganizationSupplierInternalV2PutSupplierFieldsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        const organizationUuid = requestParameters.organizationUuid;
+        if (organizationUuid === null || organizationUuid === undefined) {
+            throw new Error('Required parameter organizationUuid was null or undefined when calling putManyOrganizationSupplierInternalV2PutSupplierFields.');
+        }
+        const aPISupplierAssociatedFieldConfigurationRequestDTO = requestParameters.aPISupplierAssociatedFieldConfigurationRequestDTO;
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarCredential: string | undefined;
+        // authentication (Bearer) required
+        localVarCredential = this.configuration.lookupCredential('Bearer');
+        if (localVarCredential) {
+            localVarHeaders = localVarHeaders.set('Authorization', 'Bearer ' + localVarCredential);
+        }
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Content-Type', httpContentTypeSelected);
+        }
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/v2/internal/organizations/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/suppliers/fields`;
+        return this.httpClient.request<Array<APISupplierAssociatedFieldConfigurationResponseDTO>>('put', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                body: aPISupplierAssociatedFieldConfigurationRequestDTO,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

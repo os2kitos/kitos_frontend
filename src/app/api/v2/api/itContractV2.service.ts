@@ -61,10 +61,13 @@ export interface GetManyItContractV2GetItContractsRequestParams {
     systemUsageUuid?: string;
     /** Associated data processing registration UUID filter */
     dataProcessingRegistrationUuid?: string;
+    /** Responsible organization unit UUID filter */
     responsibleOrgUnitUuid?: string;
+    /** Supplier UUID filter */
     supplierUuid?: string;
     /** Name content filter */
     nameContent?: string;
+    /** Exact name filter */
     nameEquals?: string;
     /** Include only changes which were LastModified (UTC) is equal to or greater than the provided value */
     changedSinceGtEq?: string;
@@ -99,8 +102,9 @@ export interface PatchSingleItContractV2PatchItContractRequestParams {
 }
 
 export interface PostSingleItContractV2PostExternalReferenceRequestParams {
-    /**  */
+    /** UUID of the contract */
     contractUuid: string;
+    /** External reference data */
     aPIExternalReferenceDataWriteRequestDTO?: APIExternalReferenceDataWriteRequestDTO;
 }
 
@@ -114,6 +118,7 @@ export interface PutSingleItContractV2PutExternalReferenceRequestParams {
     contractUuid: string;
     /**  */
     externalReferenceUuid: string;
+    /** External reference data */
     aPIExternalReferenceDataWriteRequestDTO?: APIExternalReferenceDataWriteRequestDTO;
 }
 

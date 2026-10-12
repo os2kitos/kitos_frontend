@@ -170,6 +170,7 @@ export interface PostSingleItSystemUsageV2ArchiveItSystemUsageRequestParams {
 export interface PostSingleItSystemUsageV2PostExternalReferenceRequestParams {
     /**  */
     systemUsageUuid: string;
+    /**  */
     aPIExternalReferenceDataWriteRequestDTO?: APIExternalReferenceDataWriteRequestDTO;
 }
 
@@ -188,6 +189,7 @@ export interface PostSingleItSystemUsageV2PostJournalPeriodRequestParams {
 export interface PostSingleItSystemUsageV2PostSystemUsageRelationRequestParams {
     /**  */
     systemUsageUuid: string;
+    /**  */
     aPISystemRelationWriteRequestDTO: APISystemRelationWriteRequestDTO;
 }
 
@@ -196,6 +198,7 @@ export interface PutSingleItSystemUsageV2PutExternalReferenceRequestParams {
     systemUsageUuid: string;
     /**  */
     externalReferenceUuid: string;
+    /**  */
     aPIExternalReferenceDataWriteRequestDTO?: APIExternalReferenceDataWriteRequestDTO;
 }
 
@@ -220,6 +223,7 @@ export interface PutSingleItSystemUsageV2PutSystemUsageRelationRequestParams {
     systemUsageUuid: string;
     /**  */
     systemRelationUuid: string;
+    /**  */
     aPISystemRelationWriteRequestDTO?: APISystemRelationWriteRequestDTO;
 }
 

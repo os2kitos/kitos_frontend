@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { combineLatestWith, first } from 'rxjs';
+import { combineLatestWith, first, map } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
+import { addOptionalExpiredText } from 'src/app/shared/helpers/option-type.helper';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { matchNonEmptyArray } from 'src/app/shared/pipes/match-non-empty-array';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
@@ -35,13 +36,22 @@ import { CollectionExtensionButtonComponent } from '../../../../../shared/compon
     TrashcanIconComponent,
     EmptyStateComponent,
     CollectionExtensionButtonComponent,
-    AsyncPipe
-],
+    AsyncPipe,
+  ],
 })
 export class ProcessorsTableComponent extends BaseComponent {
-  public readonly processors$ = this.store.select(selectDataProcessingProcessors).pipe(filterNullish());
-  public readonly anyProcessors$ = this.processors$.pipe(matchNonEmptyArray());
+  private readonly rawProcessors$ = this.store.select(selectDataProcessingProcessors).pipe(filterNullish());
 
+  public readonly processors$ = this.rawProcessors$.pipe(
+    map((processors) =>
+      processors.map((p) => ({
+        ...p,
+        name: addOptionalExpiredText(p.name, p.disabled),
+      })),
+    ),
+  );
+
+  public readonly anyProcessors$ = this.rawProcessors$.pipe(matchNonEmptyArray());
   public readonly hasModifyPermissions$ = this.store.select(selectDataProcessingHasModifyPermissions);
 
   constructor(
@@ -67,6 +77,7 @@ export class ProcessorsTableComponent extends BaseComponent {
         }),
     );
   }
+
   onAddNewProcessor() {
     this.dialog.open(CreateProcessorDialogComponent);
   }

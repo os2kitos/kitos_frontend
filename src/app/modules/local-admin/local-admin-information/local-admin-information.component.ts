@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
 import { APIOrganizationUpdateRequestDTO } from 'src/app/api/v2';
@@ -46,7 +46,7 @@ export class LocalAdminInformationComponent extends BaseComponent implements OnI
   public readonly hasModifyCvrPermission$ = this.store.select(selectOrganizationHasModifyCvrPermission);
 
   public readonly form = new FormGroup({
-    nameControl: new FormControl<string | undefined>(undefined),
+    nameControl: new FormControl<string | undefined>(undefined, Validators.maxLength(100)),
     cvrControl: new FormControl<number | undefined>(undefined, [cvrValidator()]),
     typeControl: new FormControl<string | undefined>({ value: undefined, disabled: true }),
   });

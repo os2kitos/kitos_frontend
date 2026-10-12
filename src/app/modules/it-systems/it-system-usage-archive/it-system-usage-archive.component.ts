@@ -51,7 +51,7 @@ export class ItSystemUsageArchiveComponent extends BaseOverviewComponent impleme
   public readonly defaultGridColumns: GridColumn[] = [
     {
       field: 'Snapshot.ItSystem.Name',
-      title: $localize`Systemnavn`,
+      title: $localize`Nuværende systemnavn`,
       style: 'primary',
       section: this.systemSectionName,
       hidden: false,
@@ -73,7 +73,7 @@ export class ItSystemUsageArchiveComponent extends BaseOverviewComponent impleme
     },
     {
       field: 'ReferenceName',
-      title: $localize`Referencenavn`,
+      title: $localize`ESDH Sag`,
       section: this.systemSectionName,
       hidden: false,
     },
@@ -84,7 +84,7 @@ export class ItSystemUsageArchiveComponent extends BaseOverviewComponent impleme
       hidden: false,
     },
     {
-      field: 'ArchivedByUser.Name',
+      field: 'ArchivedByUser',
       title: $localize`Udfaset af`,
       section: this.systemSectionName,
       hidden: false,

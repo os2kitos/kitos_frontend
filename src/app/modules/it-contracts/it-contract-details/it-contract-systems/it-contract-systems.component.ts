@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { first } from 'rxjs';
@@ -17,9 +17,9 @@ import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-stor
 import { AgreementElementCreateDialogComponent } from './agreement-element-create-dialog/agreement-element-create-dialog.component';
 import { ItContractSystemsComponentStore } from './it-contract-systems.component-store';
 import {
-  selectItContractEnableAgreementElements,
-  selectItContractEnableSystemUsages,
-  selectItContractEnableRelations,
+  selectItContractEnableAndRecommendedAgreementElements,
+  selectItContractEnableAndRecommendedSystemUsages,
+  selectItContractEnableAndRecommendedRelations,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { AsyncPipe } from '@angular/common';
 import { CardComponent } from '../../../../shared/components/card/card.component';
@@ -35,6 +35,7 @@ import { CollectionExtensionButtonComponent } from '../../../../shared/component
 import { ParagraphComponent } from '../../../../shared/components/paragraph/paragraph.component';
 import { ExternalPageLinkComponent } from '../../../../shared/components/external-page-link/external-page-link.component';
 import { LoadingComponent } from '../../../../shared/components/loading/loading.component';
+import { mapUIConfigStatusToEnabled, mapUIConfigStatusToRecommended } from 'src/app/shared/helpers/observable-helpers';
 
 @Component({
   selector: 'app-it-contract-systems',
@@ -70,9 +71,18 @@ export class ItContractSystemsComponent extends BaseComponent implements OnInit 
   public readonly relationsIsLoading$ = this.componentStore.systemRelationsIsLoading$;
   public readonly hasModifyPermission$ = this.store.select(selectItContractHasModifyPermissions);
 
-  public readonly agreementElementsEnabled$ = this.store.select(selectItContractEnableAgreementElements);
-  public readonly systemUsagesEnabled$ = this.store.select(selectItContractEnableSystemUsages);
-  public readonly systemRelationsEnabled$ = this.store.select(selectItContractEnableRelations);
+  public readonly agreementElementsEnabled$ = this.store.select(selectItContractEnableAndRecommendedAgreementElements).pipe(mapUIConfigStatusToEnabled());
+  public readonly agreementElementsRecommended$ = this.store
+    .select(selectItContractEnableAndRecommendedAgreementElements)
+    .pipe(mapUIConfigStatusToRecommended());
+  public readonly systemUsagesEnabled$ = this.store.select(selectItContractEnableAndRecommendedSystemUsages).pipe(mapUIConfigStatusToEnabled());
+  public readonly systemUsagesRecommended$ = this.store
+    .select(selectItContractEnableAndRecommendedSystemUsages)
+    .pipe(mapUIConfigStatusToRecommended());
+  public readonly systemRelationsEnabled$ = this.store.select(selectItContractEnableAndRecommendedRelations).pipe(mapUIConfigStatusToEnabled());
+  public readonly systemRelationsRecommended$ = this.store
+    .select(selectItContractEnableAndRecommendedRelations)
+    .pipe(mapUIConfigStatusToRecommended());
 
   constructor(
     private readonly store: Store,

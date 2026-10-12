@@ -6,14 +6,14 @@ import { isRoleOptionType, RoleOptionTypes } from 'src/app/shared/models/options
 import { GlobalOptionTypeActions } from '../global-admin/global-option-types/actions';
 import { LocalOptionTypeActions } from '../local-admin/local-option-types/actions';
 import { RoleOptionTypeActions } from './actions';
-import { RoleOptionTypeState } from './state';
+import { RoleOptionTypeState, RoleOptionTypeStateItem } from './state';
 
 export const roleOptionTypeAdapter = createEntityAdapter<APIRoleOptionResponseDTO>({
   selectId: (optionType) => optionType.uuid,
 });
 
 const createInitialOptionState = () =>
-  roleOptionTypeAdapter.getInitialState({
+  roleOptionTypeAdapter.getInitialState<RoleOptionTypeStateItem>({
     cacheTime: undefined,
     isLoading: false,
   });
@@ -93,7 +93,7 @@ function updateIsLoading(nextState: RoleOptionTypeState, optionType: RoleOptionT
   nextState[optionType] = {
     ...currentOptionState,
     isLoading,
-  } as any;
+  };
 
   return nextState;
 }

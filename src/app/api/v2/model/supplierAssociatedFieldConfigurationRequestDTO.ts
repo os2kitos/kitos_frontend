@@ -9,10 +9,10 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
+import { APISupplierAssociatedFieldConfigurationItemDTO } from './supplierAssociatedFieldConfigurationItemDTO';
 
 
-export interface APIUserDefaultUnitResponseDTO { 
-    defaultOrgUnit?: APIIdentityNamePairResponseDTO;
+export interface APISupplierAssociatedFieldConfigurationRequestDTO { 
+    configurations: Array<APISupplierAssociatedFieldConfigurationItemDTO> | null;
 }
 

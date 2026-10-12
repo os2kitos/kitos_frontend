@@ -14,6 +14,6 @@ import { APISubDataProcessorDetailsDTO } from './subDataProcessorDetailsDTO';
 
 export interface APIAssignSubDataProcessorRequestDTO { 
     organizationId: number;
-    details?: APISubDataProcessorDetailsDTO;
+    details: APISubDataProcessorDetailsDTO;
 }
 

@@ -12,8 +12,8 @@
 
 
 export interface APIGetTokenResponseDTO { 
-    token?: string | null;
-    email?: string | null;
+    token: string | null;
+    email: string | null;
     loginSuccessful?: boolean;
     expires?: string;
 }

@@ -34,6 +34,9 @@ export class GlobalOptionTypeViewComponent extends BaseComponent implements OnIn
   @Input() expandedByDefault: boolean = false;
   @Input() disableAccordion: boolean = false;
   @Input() showWriteAccess: boolean = false;
+  @Input() showOrderNumberColumn: boolean = false;
+  @Input() orderNumberColumnHeader: string = $localize`Orden`;
+  @Input() orderNumberColumnHelpText?: string;
   @Input() scrollable: 'scrollable' | 'virtual' | 'none' = 'scrollable';
   @Input() fitSizeToContent = true;
 

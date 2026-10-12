@@ -1,5 +1,10 @@
 @use "theme.scss";
 
+.recommendation-actions {
+  margin-left: auto;
+  padding-left: theme.$padding-medium;
+}
+
 .form-section-top-padding {
   padding-top: theme.$padding-medium;
 }
@@ -13,12 +18,55 @@
   margin-top: theme.$padding-small;
 }
 
+.field-config-option {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+}
+
+.recommended-checkbox {
+  margin-left: 4px;
+}
+
 :host ::ng-deep {
   overflow: hidden;
 
   .mdc-button__label {
     display: flex;
     flex-grow: 1;
+  }
+
+  .recommended-checkbox {
+    .app-checkbox-wrapper {
+      min-height: 0;
+      align-items: flex-start;
+    }
+
+    .mdc-form-field {
+      align-items: center;
+      column-gap: theme.$padding-smaller;
+    }
+
+    .mdc-checkbox {
+      padding: 0;
+      width: 14px;
+      height: 14px;
+      flex: 0 0 14px;
+    }
+
+    .mdc-checkbox__background {
+      top: 0;
+      left: 0;
+      width: 14px;
+      height: 14px;
+    }
+
+    mat-checkbox label {
+      padding-right: 0;
+      font-size: 14px;
+      line-height: 20px;
+    }
   }
 }
 

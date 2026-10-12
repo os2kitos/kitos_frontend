@@ -97,7 +97,7 @@ describe('global-admin-organizations', () => {
       cy.intercept('GET', 'api/v2/internal/organizations/*/conflicts', {
         statusCode: 200,
         fixture: './global-admin/with-conflicts.json',
-      }).as;
+      });
 
       cy.getByDataCy('grid-delete-button').first().click();
 

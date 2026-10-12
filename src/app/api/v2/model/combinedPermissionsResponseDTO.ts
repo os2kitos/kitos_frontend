@@ -25,6 +25,6 @@ export interface APICombinedPermissionsResponseDTO {
      * True when the API client is allowed to DELETE the
      */
     delete?: boolean;
-    fieldPermissions?: APIModuleFieldPermissionsResponseDTO;
+    fieldPermissions: APIModuleFieldPermissionsResponseDTO;
 }
 

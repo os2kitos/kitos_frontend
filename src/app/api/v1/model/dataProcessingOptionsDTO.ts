@@ -14,10 +14,10 @@ import { APIDataProcessingBusinessRoleDTO } from './dataProcessingBusinessRoleDT
 
 
 export interface APIDataProcessingOptionsDTO { 
-    dataResponsibleOptions?: Array<APIOptionWithDescriptionDTO> | null;
-    thirdCountryOptions?: Array<APIOptionWithDescriptionDTO> | null;
-    basisForTransferOptions?: Array<APIOptionWithDescriptionDTO> | null;
-    roles?: Array<APIDataProcessingBusinessRoleDTO> | null;
-    oversightOptions?: Array<APIOptionWithDescriptionDTO> | null;
+    dataResponsibleOptions: Array<APIOptionWithDescriptionDTO> | null;
+    thirdCountryOptions: Array<APIOptionWithDescriptionDTO> | null;
+    basisForTransferOptions: Array<APIOptionWithDescriptionDTO> | null;
+    roles: Array<APIDataProcessingBusinessRoleDTO> | null;
+    oversightOptions: Array<APIOptionWithDescriptionDTO> | null;
 }
 

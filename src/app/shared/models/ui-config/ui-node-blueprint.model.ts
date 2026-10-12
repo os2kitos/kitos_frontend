@@ -6,4 +6,5 @@ export interface UINodeBlueprint {
   helpText?: string;
   disableIfSubtreeDisabled?: boolean;
   disableByDefault?: boolean;
+  cannotBeRecommended?: boolean;
 }

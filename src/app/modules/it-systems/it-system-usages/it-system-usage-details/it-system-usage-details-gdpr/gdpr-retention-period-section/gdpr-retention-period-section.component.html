@@ -1,4 +1,11 @@
 <app-accordion
+  [recommended]="(retentionPeriodRecommended$ | async) === true"
+  [recommendedFilled]="
+    !!formGroup.controls.yesNoDontKnowControl.value &&
+    (formGroup.controls.yesNoDontKnowControl.value.value !== 'Yes' ||
+    (!!formGroup.controls.dateControl.value &&
+    (formGroup.controls.frequencyControl.value ?? null) !== null))
+  "
   title="Er der bevaringsfrist på data inden de må slettes?"
   data-cy="retention-period-accordion"
   [isExpanded]="(isExpanded$ | async) ?? false"
@@ -14,6 +21,7 @@
         formName="yesNoDontKnowControl"
         [data]="yesNoDontKnowOptions"
         data-cy="retention-period-dropdown"
+        [recommended]="(retentionPeriodRecommended$ | async) === true"
         (valueChange)="patchGdpr({ retentionPeriodDefined: $event })"
       ></app-dropdown>
       <app-datepicker
@@ -23,6 +31,10 @@
         [formGroup]="formGroup"
         formName="dateControl"
         data-cy="retention-period-datepicker"
+        [recommendedFilled]="
+          formGroup.controls.yesNoDontKnowControl.value?.value === 'Yes' ? undefined : !!formGroup.controls.yesNoDontKnowControl.value
+        "
+        [recommended]="(retentionPeriodRecommended$ | async) === true"
         (valueChange)="patchGdpr({ nextDataRetentionEvaluationDate: $event?.toDateString() })"
       >
       </app-datepicker>
@@ -32,7 +44,12 @@
         [disabled]="(isRetentionPeriodFalse$ | async) !== false"
         [formGroup]="formGroup"
         formName="frequencyControl"
+        [maxLength]="2147483647"
         data-cy="retention-period-numeric-input"
+        [recommendedFilled]="
+          formGroup.controls.yesNoDontKnowControl.value?.value === 'Yes' ? undefined : !!formGroup.controls.yesNoDontKnowControl.value
+        "
+        [recommended]="(retentionPeriodRecommended$ | async) === true"
         (valueChange)="patchGdpr({ dataRetentionEvaluationFrequencyInMonths: $event })"
       >
       </app-numeric-input>

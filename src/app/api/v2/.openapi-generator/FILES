@@ -223,9 +223,11 @@ model/emailRecipientResponseDTO.ts
 model/emailRecipientWriteRequestDTO.ts
 model/expectedUsersIntervalDTO.ts
 model/extendedRoleAssignmentResponseDTO.ts
+model/externalOrganizationUnitResponseDTO.ts
 model/externalReferenceDataResponseDTO.ts
 model/externalReferenceDataWriteRequestDTO.ts
 model/externalReferenceWithLastChangedResponseDTO.ts
+model/fieldControlStateChoice.ts
 model/fieldPermissionsResponseDTO.ts
 model/gDPRPersonalDataChoice.ts
 model/gDPRRegistrationsResponseDTO.ts
@@ -385,6 +387,7 @@ model/scheduledNotificationWriteRequestDTO.ts
 model/sentNotificationResponseDTO.ts
 model/shallowItSystemUsageResponseDTO.ts
 model/shallowOrganizationResponseDTO.ts
+model/shallowOrganizationResponseWithDisabledStateDTO.ts
 model/simpleConflictResponseDTO.ts
 model/simpleLinkDTO.ts
 model/stsOrganizationAccessStatusResponseDTO.ts
@@ -392,6 +395,9 @@ model/stsOrganizationChangeLogOriginOption.ts
 model/stsOrganizationChangeLogResponseDTO.ts
 model/stsOrganizationOrgUnitDTO.ts
 model/stsOrganizationSynchronizationDetailsResponseDTO.ts
+model/supplierAssociatedFieldConfigurationItemDTO.ts
+model/supplierAssociatedFieldConfigurationRequestDTO.ts
+model/supplierAssociatedFieldConfigurationResponseDTO.ts
 model/systemDeletionConflict.ts
 model/systemRelationWriteRequestDTO.ts
 model/systemWithUsageOutsideOrganizationConflictResponseDTO.ts
@@ -419,7 +425,6 @@ model/updateScheduledNotificationWriteRequestDTO.ts
 model/updateUserRequestDTO.ts
 model/userCollectionEditPermissionsResponseDTO.ts
 model/userCollectionPermissionsResponseDTO.ts
-model/userDefaultUnitResponseDTO.ts
 model/userIsPartOfCurrentOrgResponseDTO.ts
 model/userReferenceResponseDTO.ts
 model/userReferenceWithOrganizationResponseDTO.ts

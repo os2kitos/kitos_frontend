@@ -15,7 +15,7 @@
       i18n-text
       [formGroup]="itSystemInformationForm"
       formName="localCallName"
-      [maxLength]="100"
+      [recommended]="(nameRecommended$ | async) === true"
       (valueChange)="patchGeneral({ localCallName: $event })"
     ></app-textbox>
     @if (systemIdEnabled$ | async) {
@@ -24,7 +24,7 @@
         i18n-text
         [formGroup]="itSystemInformationForm"
         formName="localSystemId"
-        [maxLength]="200"
+        [recommended]="(systemIdRecommended$ | async) === true"
         (valueChange)="patchGeneral({ localSystemId: $event })"
       ></app-textbox>
     }
@@ -34,7 +34,7 @@
         i18n-text
         [formGroup]="itSystemInformationForm"
         formName="systemVersion"
-        [maxLength]="100"
+        [recommended]="(versionRecommended$ | async) === true"
         (valueChange)="patchGeneral({ systemVersion: $event })"
       ></app-textbox>
     }
@@ -45,6 +45,7 @@
         i18n-text
         [data]="technicalSystemTypeDropdownOptions$ | async"
         [initialSelectedValues]="initialSelectedTechnicalSystemTypes"
+        [recommended]="(technicalSystemTypeRecommended$ | async) === true"
         [disabled]="!(hasModifyPermission$ | async)"
         (selectedEvent)="patchTechnicalSystemTypes($event)"
       ></app-multi-select-dropdown>
@@ -56,6 +57,7 @@
         [formGroup]="itSystemInformationForm"
         formName="hostedAt"
         [data]="hostedAtOptions"
+        [recommended]="(hostedAtRecommended$ | async) === true"
         (valueChange)="patchGeneral({ hostedAt: $event })"
       ></app-dropdown>
     }
@@ -66,6 +68,7 @@
         [formGroup]="itSystemInformationForm"
         formName="numberOfExpectedUsers"
         [data]="numberOfExpectedUsersOptions"
+        [recommended]="(amountOfUsersRecommended$ | async) === true"
         (valueChange)="patchGeneral({ numberOfExpectedUsers: $event })"
       ></app-dropdown>
     }
@@ -78,6 +81,7 @@
         formName="dataClassification"
         [data]="dataClassificationTypes$ | async"
         [showDescription]="true"
+        [recommended]="(dataClassificationRecommended$ | async) === true"
         (valueChange)="patchGeneral({ dataClassificationUuid: $event })"
       ></app-dropdown>
     }
@@ -91,6 +95,7 @@
           formName="aiTechnology"
           (valueChange)="patchGeneral({ containsAITechnology: $event })"
           [data]="aiTechnologyOptions"
+          [recommended]="(containsAITechnologyRecommended$ | async) === true"
         >
         </app-dropdown
       ></app-tooltip>
@@ -101,6 +106,7 @@
         i18n-text
         [data]="licensingAndCodeModelDropdownOptions$ | async"
         [initialSelectedValues]="initialSelectedLicensingAndCodeModels"
+        [recommended]="(licensingAndCodeModelsRecommended$ | async) === true"
         [disabled]="!(hasModifyPermission$ | async)"
         (selectedEvent)="patchLicensingAndCodeModels($event)"
       ></app-multi-select-dropdown>
@@ -112,6 +118,7 @@
         i18n-text
         [formGroup]="itSystemInformationForm"
         formName="purpose"
+        [recommended]="(purposeRecommended$ | async) === true"
         (validatedValueChange)="patchGeneral({ purpose: $event.value }, $event)"
         [autosizeMinRows]="1"
       ></app-textarea>
@@ -123,6 +130,7 @@
         i18n-text
         [formGroup]="itSystemInformationForm"
         formName="notes"
+        [recommended]="(descriptionRecommended$ | async) === true"
         (valueChange)="patchGeneral({ notes: $event })"
       ></app-textarea>
     }
@@ -140,9 +148,10 @@
           [formGroup]="itSystemCriticalityForm"
           formName="isBusinessCritical"
           [data]="isBusinessCriticalOptions"
-          (valueChange)="patchGeneral({ isBusinessCritical: $event })"
           toolTipText="Definitionen fra fællesoffentlig IT kritikalitet: driftsforstyrrelser rammer størstedelen af organisationens evne til at arbejde"
           i18n-toolTipText
+          [recommended]="(isBusinessCriticalRecommended$ | async) === true"
+          (valueChange)="patchGeneral({ isBusinessCritical: $event })"
         ></app-dropdown>
       }
 
@@ -162,10 +171,11 @@
           i18n-text
           [formGroup]="itSystemCriticalityForm"
           formName="isSociallyCritical"
-          (valueChange)="patchGeneral({ isSociallyCritical: $event })"
           [data]="isSociallyCriticalOptions"
           toolTipText="Understøtter systemet funktioner, hvor nedbrud kan medføre alvorlige konsekvenser for samfundets generelle funktionsdygtighed?"
           i18n-toolTipText
+          [recommended]="(isSociallyCriticalRecommended$ | async) === true"
+          (valueChange)="patchGeneral({ isSociallyCritical: $event })"
         ></app-dropdown>
       }
 
@@ -180,6 +190,7 @@
             formName="systemUsageCriticalityLevel"
             (valueChange)="patchGeneral({ systemUsageCriticalityLevelUuid: $event })"
             [showDescription]="true"
+            [recommended]="(systemUsageCriticalityRecommended$ | async) === true"
             i18n-toolTipText
             toolTipText="Bruges til kommunens egen vurdering af systemets betydning for driften"
           ></app-dropdown>
@@ -192,8 +203,10 @@
           [simpleLink$]="selectCriticalityLevelDocumentation$"
           i18n-title
           (submitMethod)="patchCriticalityLevelDocumentation($event)"
-          (clearClick)="resetCriticalityLevelDocumentation()"
           [isDisabled]="disableCriticalityLevelDocumentationControl"
+          class="two-thirds-column-width"
+          [recommended]="(criticalityLevelDocumentationRecommended$ | async) === true"
+          (clearClick)="resetCriticalityLevelDocumentation()"
         ></app-edit-url-section>
       }
     </form>
@@ -235,6 +248,7 @@
           [formGroup]="itSystemApplicationForm"
           formName="lifeCycleStatus"
           [data]="lifeCycleStatusOptions"
+          [recommended]="(lifeCycleStatusRecommended$ | async) === true"
           (valueChange)="patchGeneral({ validity: { lifeCycleStatus: $event } })"
         ></app-dropdown>
       }
@@ -244,6 +258,7 @@
           i18n-text
           [formGroup]="itSystemApplicationForm"
           formName="validFrom"
+          [recommended]="(usagePeriodRecommended$ | async) === true"
           (validatedValueChange)="patchGeneral({ validity: { validFrom: $event.value?.toDateString() } }, $event)"
         ></app-datepicker>
       }
@@ -253,6 +268,7 @@
           i18n-text
           [formGroup]="itSystemApplicationForm"
           formName="validTo"
+          [recommended]="(usagePeriodRecommended$ | async) === true"
           (validatedValueChange)="patchGeneral({ validity: { validTo: $event.value?.toDateString() } }, $event)"
         ></app-datepicker>
       }
@@ -285,6 +301,7 @@
         (valueChange)="patchGeneral({ webAccessibilityCompliance: $event })"
         i18n-text
         data-cy="web-accessibility-compliance"
+        [recommended]="(webAccessiblityRecommended$ | async) === true"
       ></app-dropdown>
       <app-datepicker
         [formGroup]="webAccessibilityForm"
@@ -294,6 +311,7 @@
         class="two-thirds-column-width"
         i18n-text
         data-cy="last-web-accessibility-check"
+        [recommended]="(webAccessiblityRecommended$ | async) === true"
       ></app-datepicker>
       <app-textarea
         [formGroup]="webAccessibilityForm"
@@ -303,6 +321,7 @@
         text="Noter"
         i18n-text
         data-cy="web-accessibility-notes"
+        [recommended]="(webAccessiblityRecommended$ | async) === true"
       ></app-textarea>
     </form>
   </app-card>

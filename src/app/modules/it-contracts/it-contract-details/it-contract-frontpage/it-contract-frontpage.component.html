@@ -17,6 +17,7 @@
       [formGroup]="frontpageFormGroup"
       formName="name"
       (valueChange)="patchName($event)"
+      [recommended]="(nameRecommended$ | async) === true"
     ></app-textbox>
     @if (contractIdEnabled$ | async) {
       <app-textbox
@@ -25,6 +26,7 @@
         data-cy="contract-id"
         [formGroup]="frontpageFormGroup"
         formName="contractId"
+        [recommended]="(contractIdRecommended$ | async) === true"
         (valueChange)="patchFrontPage({ general: { contractId: $event } })"
       ></app-textbox>
     }
@@ -34,6 +36,7 @@
         [formGroup]="frontpageFormGroup"
         formName="contractType"
         data-cy="contract-type"
+        [recommended]="(contractTypeRecommended$ | async) === true"
         (valueChange)="patchFrontPage({ general: { contractTypeUuid: ignoreNullReturnType($event) } })"
         >
       </app-option-type-dropdown>
@@ -47,6 +50,7 @@
         [formGroup]="frontpageFormGroup"
         formName="contractTemplate"
         [data]="contractTemplates$ | async"
+        [recommended]="(contractTemplateRecommended$ | async) === true"
         (valueChange)="patchFrontPage({ general: { contractTemplateUuid: $event } })"
         >
       </app-dropdown>
@@ -61,6 +65,7 @@
         valueField="uuid"
         [showDescription]="true"
         [data]="criticalityTypes$ | async"
+        [recommended]="(contractCriticalityRecommended$ | async) === true"
         (valueChange)="patchFrontPage({ general: { criticalityUuid: $event } })"
       ></app-dropdown>
     }
@@ -73,6 +78,7 @@
         formName="purchaseType"
         valueField="uuid"
         [data]="purchaseFormTypes$ | async"
+        [recommended]="(contractPurchaseFormRecommended$ | async) === true"
         (valueChange)="patchFrontPage({ procurement: { purchaseTypeUuid: $event } })"
         >
       </app-dropdown>
@@ -107,6 +113,7 @@
         data-cy="contract-valid-from"
         [formGroup]="frontpageFormGroup"
         formName="validFrom"
+        [recommended]="(contractAgreementPeriodRecommended$ | async) === true"
         (valueChange)="patchFrontPage({ general: { validity: { validFrom: $event?.toDateString() } } })"
       ></app-datepicker>
       <app-datepicker
@@ -115,6 +122,7 @@
         data-cy="contract-valid-to"
         [formGroup]="frontpageFormGroup"
         formName="validTo"
+        [recommended]="(contractAgreementPeriodRecommended$ | async) === true"
         (valueChange)="patchFrontPage({ general: { validity: { validTo: $event?.toDateString() } } })"
         >
       </app-datepicker>
@@ -127,6 +135,7 @@
         data-cy="contract-notes"
         [formGroup]="frontpageFormGroup"
         formName="notes"
+        [recommended]="(contractNotesRecommended$ | async) === true"
         (valueChange)="patchFrontPage({ general: { notes: $event } })"
       ></app-textarea>
     }
@@ -184,6 +193,7 @@
           data-cy="contract-responsible"
           [formGroup]="responsibleFormGroup"
           formName="responsibleEntityOrganizationUnit"
+          [recommended]="(contractResponsibleUnitRecommended$ | async) === true"
           (valueChange)="patchFrontPage({ responsible: { organizationUnitUuid: $event } })"
         ></app-org-unit-select>
       }
@@ -198,6 +208,7 @@
           [data$]="users$"
           [isLoading$]="usersIsLoading$"
           [addTag]="true"
+          [recommended]="(contractInternalSignerRecommended$ | async) === true"
           (filterChange)="searchUsers($event)"
           (valueChange)="patchFrontPage({ responsible: { signedBy: $event } })"
         ></app-connected-dropdown>
@@ -207,6 +218,7 @@
           data-cy="contract-responsible-date"
           [formGroup]="responsibleFormGroup"
           formName="responsibleEntitySignedAt"
+          [recommended]="(contractInternalSignerRecommended$ | async) === true"
           (valueChange)="patchFrontPage({ responsible: { signedAt: $event?.toDateString() } })"
           >
         </app-datepicker>
@@ -243,6 +255,7 @@
           [isLoading$]="organizationsIsLoading$"
           [includeItemDescription]="true"
           itemDescriptionField="cvr"
+          [recommended]="(contractSupplierRecommended$ | async) === true"
           (filterChange)="searchOrganizations($event)"
           (valueChange)="patchSupplierOrganization($event)"
         ></app-connected-dropdown>
@@ -276,11 +289,12 @@
 
       @if (contractExternalSignerEnabled$ | async) {
         <app-textbox
-          text="Leverandørens kontraktunderskriver"
+          text="Kontraktunderskriver"
           i18n-text
           data-cy="contract-supplier-signer"
           [formGroup]="supplierFormGroup"
           formName="supplierSignedBy"
+          [recommended]="(contractExternalSignerRecommended$ | async) === true"
           (valueChange)="patchSignedBy($event)"
           >
         </app-textbox>
@@ -290,6 +304,7 @@
           data-cy="contract-supplier-date"
           [formGroup]="supplierFormGroup"
           formName="supplierSignedAt"
+          [recommended]="(contractExternalSignerRecommended$ | async) === true"
           (valueChange)="patchFrontPage({ supplier: { signedAt: $event?.toDateString() } })"
         ></app-datepicker>
 
@@ -305,29 +320,38 @@
         ></app-checkbox>
       </div>
 
+      @if (externalContactPersonEnabled$ | async) {
         <app-textbox
-          text="Leverandørens kontaktperson"
+          text="Kontaktperson"
           i18n-text
           [formGroup]="supplierFormGroup"
           formName="contactPerson"
+          [recommended]="(externalContactPersonRecommended$ | async) === true"
           (valueChange)="patchFrontPage({ supplier: { contactPerson: $event } })"
         ></app-textbox>
 
+        @if (externalContactPersonPhoneEnabled$ | async) {
         <app-textbox
           text="Telefonnummer"
           i18n-text
           [formGroup]="supplierFormGroup"
           formName="contactPhoneNumber"
+          [recommended]="(externalContactPersonPhoneRecommended$ | async) === true"
           (valueChange)="patchFrontPage({ supplier: { contactPhoneNumber: $event } })"
         ></app-textbox>
+        }
 
-        <app-textbox
+        @if (externalContactPersonEmailEnabled$ | async){
+          <app-textbox
           text="Email"
           i18n-text
           [formGroup]="supplierFormGroup"
           formName="contactEmail"
+          [recommended]="(externalContactPersonEmailRecommended$ | async) === true"
           (valueChange)="patchFrontPage({ supplier: { contactEmail: $event } })"
         ></app-textbox>
+        }
+      }
 
         <app-checkbox
           text="Underskriver er ikke kontaktperson"
@@ -355,6 +379,7 @@
           formName="procurementStrategy"
           valueField="uuid"
           [data]="procurementStrategyTypes$ | async"
+          [recommended]="(contractProcurementStrategyRecommended$ | async) === true"
           (valueChange)="patchFrontPage({ procurement: { procurementStrategyUuid: $event } })"
           >
         </app-dropdown>
@@ -368,6 +393,7 @@
           [formGroup]="procurementFormGroup"
           formName="procurementPlan"
           [data]="yearsWithQuarters"
+          [recommended]="(contractProcurementPlanRecommended$ | async) === true"
           (valueChange)="patchProcurementPlan($event)"
           >
         </app-dropdown>

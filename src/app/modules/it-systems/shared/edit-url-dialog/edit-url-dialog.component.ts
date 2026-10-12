@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { debounceTime, first, Observable } from 'rxjs';
@@ -47,7 +47,7 @@ export class EditSimpleLinkDialogComponent extends BaseComponent implements OnIn
   @Output() submitMethod!: EventEmitter<any>;
 
   public readonly simpleLinkForm = new FormGroup({
-    name: new FormControl<string | undefined>(undefined),
+    name: new FormControl<string | undefined>(undefined, Validators.maxLength(150)),
     url: new FormControl<string | undefined>(undefined),
   });
 
@@ -64,7 +64,7 @@ export class EditSimpleLinkDialogComponent extends BaseComponent implements OnIn
   }
 
   public disableSave() {
-    return this.isBusy || this.hasNoChanges() || (this.disableSubmitIfNoUrl && !this.simpleLinkForm.controls.url.value);
+    return this.simpleLinkForm.invalid || this.isBusy || this.hasNoChanges() || (this.disableSubmitIfNoUrl && !this.simpleLinkForm.controls.url.value);
   }
 
   private urlIsInvalid() {

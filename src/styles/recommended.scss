@@ -1,0 +1,17 @@
+@use "mixins";
+
+.recommended-badge {
+  @include mixins.recommended-badge;
+}
+
+.recommended-label-row {
+  @include mixins.recommended-label-row;
+}
+
+.align-items-vertically {
+  @include mixins.align-items-vertically;
+}
+
+.dropdown-has-recommended {
+  @include mixins.dropdown-has-recommended;
+}

@@ -10,6 +10,8 @@ import { GlobalOptionTypeDialogComponent } from '../components/global-option-typ
 import { MAX_DIALOG_HEIGHT } from '../constants/constants';
 import { GlobalAdminOptionType } from '../models/options/global-admin-option-type.model';
 import { ODataOrganizationUser } from '../models/organization/organization-user/organization-user.model';
+import { SupplierContractsDialogComponent } from 'src/app/modules/it-contracts/it-contract-supplier/supplier-contracts-dialog/supplier-contracts-dialog.component';
+import { SupplierContract } from '../models/it-contract/it-contract-supplier.model';
 
 export const defaultDialogMaxSize = {
   height: 'auto',
@@ -29,6 +31,13 @@ type TakeSystemOutOfUseDialogOptions = {
 // This service is useful if you need to open the same or similar dialogs multiple places, which need setup/configuration.
 export class DialogOpenerService {
   constructor(private dialog: MatDialog) {}
+
+  public openSupplierContractsDialog(supplierName: string, contracts: SupplierContract[]): MatDialogRef<SupplierContractsDialogComponent>{
+    const dialogRef = this.dialog.open(SupplierContractsDialogComponent);
+    dialogRef.componentInstance.supplierName = supplierName;
+    dialogRef.componentInstance.contracts = contracts;
+    return dialogRef;
+  }
 
   public openEditUserDialog(
     user: ODataOrganizationUser,

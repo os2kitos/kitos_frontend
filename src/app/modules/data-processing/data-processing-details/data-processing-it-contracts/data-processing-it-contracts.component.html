@@ -15,6 +15,7 @@
           valueField="uuid"
           formName="mainContract"
           [data]="associatedContracts$ | async"
+          [recommended]="(mainContractRecommended$ | async) === true"
           (valueChange)="patchMainContract($event)"
           >
         </app-dropdown>

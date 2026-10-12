@@ -16,6 +16,7 @@
           i18n-text
           [formGroup]="form"
           formName="cvrControl"
+          [maxLength]="9999999999"
           (valueChange)="patchOrganizationCvr($event)"
           data-cy="cvr-input"
         ></app-numeric-input>

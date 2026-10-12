@@ -44,11 +44,11 @@ export interface APINotificationResponseDTO {
     /**
      * Subject of the email
      */
-    subject?: string | null;
+    subject: string | null;
     /**
      * Body of the email
      */
-    body?: string | null;
+    body: string | null;
     ownerResourceType?: APIOwnerResourceType;
     notificationType?: APINotificationSendType;
     ownerResource?: APIIdentityNamePairResponseDTO;

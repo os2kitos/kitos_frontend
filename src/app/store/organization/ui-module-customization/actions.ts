@@ -15,6 +15,10 @@ export const UIModuleConfigActions = createActionGroup({
       updatedNodeRequest: APICustomizedUINodeRequestDTO;
     }>(),
     'Put UI Module Customization success': props<{ uiModuleConfig: UIModuleConfig }>(),
+    'Put UI Module Customizations': props<{
+      module: UIModuleConfigKey;
+      updatedNodeRequests: APICustomizedUINodeRequestDTO[];
+    }>(),
     'Put UI Module Customization error': emptyProps(),
 
     'Reset loading': emptyProps(),

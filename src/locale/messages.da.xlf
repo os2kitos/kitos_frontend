@@ -205,10 +205,6 @@
         <source>Leverandør</source>
         <target state="new">Leverandør</target>
       </trans-unit>
-      <trans-unit id="5430552859159538909" datatype="html">
-        <source>Leverandørens kontraktunderskriver</source>
-        <target state="new">Leverandørens kontraktunderskriver</target>
-      </trans-unit>
       <trans-unit id="7344965017322024752" datatype="html">
         <source>Genanskaffelse</source>
         <target state="new">Genanskaffelse</target>
@@ -1483,9 +1479,9 @@
         <source>Kryptering</source>
         <target state="new">Kryptering</target>
       </trans-unit>
-      <trans-unit id="3479549752860605077" datatype="html">
-        <source>Pseudonomisering</source>
-        <target state="new">Pseudonomisering</target>
+      <trans-unit id="2655152388017872668" datatype="html">
+        <source>Pseudonymisering</source>
+        <target state="new">Pseudonymisering</target>
       </trans-unit>
       <trans-unit id="8121760203222953890" datatype="html">
         <source>Adgangsstyring</source>
@@ -6147,9 +6143,9 @@
         <source>Sidst redigeret dato</source>
         <target state="new">Sidst redigeret dato</target>
       </trans-unit>
-      <trans-unit id="3604722267089766233" datatype="html">
-        <source>Databehandler afftale indgået</source>
-        <target state="new">Databehandler afftale indgået</target>
+      <trans-unit id="4745265311701888438" datatype="html">
+        <source>Databehandler aftale indgået</source>
+        <target state="new">Databehandler aftale indgået</target>
       </trans-unit>
       <trans-unit id="4743129658174909579" datatype="html">
         <source>Søg efter enhed</source>
@@ -6995,22 +6991,6 @@
         <source>IT System: Anvendes af organisationer</source>
         <target state="new">IT System: Anvendes af organisationer</target>
       </trans-unit>
-      <trans-unit id="4789455191486047781" datatype="html">
-        <source>Når kommunen har en eller flere leverandører tilknyttet, deaktiveres redigering af følgende felter i Kitos:</source>
-        <target state="new">Når kommunen har en eller flere leverandører tilknyttet, deaktiveres redigering af følgende felter i Kitos:</target>
-      </trans-unit>
-      <trans-unit id="5075260696326393711" datatype="html">
-        <source>Databehandling - Tilsyn - Gennemførte og kommende tilsyn</source>
-        <target state="new">Databehandling - Tilsyn - Gennemførte og kommende tilsyn</target>
-      </trans-unit>
-      <trans-unit id="7857124855661066958" datatype="html">
-        <source>IT Systemer - Systemforside - Indeholder AI-teknologi?</source>
-        <target state="new">IT Systemer - Systemforside - Indeholder AI-teknologi?</target>
-      </trans-unit>
-      <trans-unit id="6192599242508017517" datatype="html">
-        <source>IT Systemer - GDPR - Hvad viste den seneste risikovurdering?</source>
-        <target state="new">IT Systemer - GDPR - Hvad viste den seneste risikovurdering?</target>
-      </trans-unit>
       <trans-unit id="9169283032104147432" datatype="html">
         <source>Udgående relationer</source>
         <target state="new">Udgående relationer</target>
@@ -7781,10 +7761,6 @@
         <source>Reference for kritikalitetsvurdering</source>
         <target state="new">Reference for kritikalitetsvurdering</target>
       </trans-unit>
-      <trans-unit id="5717990299723971305" datatype="html">
-        <source>IT Systemer - Systemforside - Kritikalitet</source>
-        <target state="new">IT Systemer - Systemforside - Kritikalitet</target>
-      </trans-unit>
       <trans-unit id="6778544494529637057" datatype="html">
         <source>Under afprøvning</source>
         <target state="new">Under afprøvning</target>
@@ -7900,10 +7876,6 @@
       <trans-unit id="7550982890201476053" datatype="html">
         <source>Arkiveringsdato</source>
         <target state="new">Arkiveringsdato</target>
-      </trans-unit>
-      <trans-unit id="9106425744426550513" datatype="html">
-        <source>Referencenavn</source>
-        <target state="new">Referencenavn</target>
       </trans-unit>
       <trans-unit id="505788991318317980" datatype="html">
         <source>IT System UUID</source>
@@ -8029,10 +8001,6 @@
         <source>Beregnet kritikalitet</source>
         <target state="new">Beregnet kritikalitet</target>
       </trans-unit>
-      <trans-unit id="1887192367982958175" datatype="html">
-        <source>Kontrakter med kritikalitet</source>
-        <target state="new">Kontrakter med kritikalitet</target>
-      </trans-unit>
       <trans-unit id="2216578951027165690" datatype="html">
         <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;app-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;/app-table-icon&gt;"/>IT Kontrakter</source>
         <target state="new"><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;app-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;/app-table-icon&gt;"/>IT Kontrakter</target>
@@ -8116,6 +8084,130 @@
       <trans-unit id="5473319657165590488" datatype="html">
         <source> Tryk &quot;Bevar historik&quot; for at slette de lokale registreringer og udfylde arkivinformation om systemanvendelsen. Disse handlinger påvirker ikke stamdata om systemet i IT System Kataloget.</source>
         <target state="new"> Tryk &quot;Bevar historik&quot; for at slette de lokale registreringer og udfylde arkivinformation om systemanvendelsen. Disse handlinger påvirker ikke stamdata om systemet i IT System Kataloget.</target>
+      </trans-unit>
+      <trans-unit id="2341326261110130680" datatype="html">
+        <source>En lavere værdi angiver en lavere kritikalitet.</source>
+        <target state="new">En lavere værdi angiver en lavere kritikalitet.</target>
+      </trans-unit>
+      <trans-unit id="8819444938310265564" datatype="html">
+        <source>Udslagsgivende kontrakter</source>
+        <target state="new">Udslagsgivende kontrakter</target>
+      </trans-unit>
+      <trans-unit id="2642788272406240118" datatype="html">
+        <source>Orden</source>
+        <target state="new">Orden</target>
+      </trans-unit>
+      <trans-unit id="7951043978617668941" datatype="html">
+        <source>Kritikalitetsprioritet</source>
+        <target state="new">Kritikalitetsprioritet</target>
+      </trans-unit>
+      <trans-unit id="1122304114460972965" datatype="html">
+        <source>Ingen kontrakter fundet</source>
+        <target state="new">Ingen kontrakter fundet</target>
+      </trans-unit>
+      <trans-unit id="2023668919263536036" datatype="html">
+        <source>Anbefalet</source>
+        <target state="new">Anbefalet</target>
+      </trans-unit>
+      <trans-unit id="8144839271710808705" datatype="html">
+        <source>Leverandørens kontaktperson (telefon)</source>
+        <target state="new">Leverandørens kontaktperson (telefon)</target>
+      </trans-unit>
+      <trans-unit id="7916092021353581046" datatype="html">
+        <source>Leverandørens kontaktperson (email)</source>
+        <target state="new">Leverandørens kontaktperson (email)</target>
+      </trans-unit>
+      <trans-unit id="1243158065978007867" datatype="html">
+        <source>ESDH Sag</source>
+        <target state="new">ESDH Sag</target>
+      </trans-unit>
+      <trans-unit id="1288360675901164126" datatype="html">
+        <source>Du tager nu systemet ud af anvendelse og arkiverer anvendelseshistorikken.</source>
+        <target state="new">Du tager nu systemet ud af anvendelse og arkiverer anvendelseshistorikken.</target>
+      </trans-unit>
+      <trans-unit id="1292871686016142444" datatype="html">
+        <source>Kunne ikke indlæse felter</source>
+        <target state="new">Kunne ikke indlæse felter</target>
+      </trans-unit>
+      <trans-unit id="838918169902639312" datatype="html">
+        <source>Indstil felter</source>
+        <target state="new">Indstil felter</target>
+      </trans-unit>
+      <trans-unit id="1525646804357117160" datatype="html">
+        <source>Felt</source>
+        <target state="new">Felt</target>
+      </trans-unit>
+      <trans-unit id="1799559380089021507" datatype="html">
+        <source>Delte</source>
+        <target state="new">Delte</target>
+      </trans-unit>
+      <trans-unit id="3965072850039100257" datatype="html">
+        <source>Databehandling - Tilsyn</source>
+        <target state="new">Databehandling - Tilsyn</target>
+      </trans-unit>
+      <trans-unit id="5007043623745180231" datatype="html">
+        <source>Field authorization customization</source>
+        <target state="new">Field authorization customization</target>
+      </trans-unit>
+      <trans-unit id="6888355800188498364" datatype="html">
+        <source><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>Indstil felter<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></source>
+        <target state="new"><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>Indstil felter<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></target>
+      </trans-unit>
+      <trans-unit id="900172157446252135" datatype="html">
+        <source>Tilsyn bemærkninger</source>
+        <target state="new">Tilsyn bemærkninger</target>
+      </trans-unit>
+      <trans-unit id="3269755482736792393" datatype="html">
+        <source>Tilsyn rapport link navn</source>
+        <target state="new">Tilsyn rapport link navn</target>
+      </trans-unit>
+      <trans-unit id="8161236629757029716" datatype="html">
+        <source>Tilsyn rapport link</source>
+        <target state="new">Tilsyn rapport link</target>
+      </trans-unit>
+      <trans-unit id="6663759333219791704" datatype="html">
+        <source>Tilsynmulighed</source>
+        <target state="new">Tilsynmulighed</target>
+      </trans-unit>
+      <trans-unit id="6181422202096188207" datatype="html">
+        <source>GDPR Foretaget risikovurdering</source>
+        <target state="new">GDPR Foretaget risikovurdering</target>
+      </trans-unit>
+      <trans-unit id="6707403893965762451" datatype="html">
+        <source>GDPR Hvad viste den seneste risikovurdering?</source>
+        <target state="new">GDPR Hvad viste den seneste risikovurdering?</target>
+      </trans-unit>
+      <trans-unit id="8881692073958525088" datatype="html">
+        <source>Udvalgte organisationer vil have adgang til de tildelte felter i Kitos</source>
+        <target state="new">Udvalgte organisationer vil have adgang til de tildelte felter i Kitos</target>
+      </trans-unit>
+      <trans-unit id="6298921017590905716" datatype="html">
+        <source>Fjern alle anbefalinger</source>
+        <target state="new">Fjern alle anbefalinger</target>
+      </trans-unit>
+      <trans-unit id="3461232292795380025" datatype="html">
+        <source>Markér alle som anbefalet</source>
+        <target state="new">Markér alle som anbefalet</target>
+      </trans-unit>
+      <trans-unit id="5756290135695444914" datatype="html">
+        <source>Skal udfyldes</source>
+        <target state="new">Skal udfyldes</target>
+      </trans-unit>
+      <trans-unit id="6101777371996107225" datatype="html">
+        <source>Maksimalt <x id="INTERPOLATION" equiv-text="{{ error.requiredLength }}"/> tegn.</source>
+        <target state="new">Maksimalt <x id="INTERPOLATION" equiv-text="{{ error.requiredLength }}"/> tegn.</target>
+      </trans-unit>
+      <trans-unit id="8567762121583906121" datatype="html">
+        <source>Faktureringsperiode</source>
+        <target state="new">Faktureringsperiode</target>
+      </trans-unit>
+      <trans-unit id="3567053018374354690" datatype="html">
+        <source>Gem delte felter</source>
+        <target state="new">Gem delte felter</target>
+      </trans-unit>
+      <trans-unit id="5815910713095274021" datatype="html">
+        <source>Et eller flere felter er indstillet til &quot;Delte&quot;. Både leverandøren og kommunen kan redigere disse felter og dermed overskrive hinandens ændringer. Vil du fortsætte med at gemme?</source>
+        <target state="new">Et eller flere felter er indstillet til &quot;Delte&quot;. Både leverandøren og kommunen kan redigere disse felter og dermed overskrive hinandens ændringer. Vil du fortsætte med at gemme?</target>
       </trans-unit>
     </body>
   </file>

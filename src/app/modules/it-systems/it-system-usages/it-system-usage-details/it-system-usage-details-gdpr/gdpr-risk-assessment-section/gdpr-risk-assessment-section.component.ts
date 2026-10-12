@@ -1,4 +1,4 @@
-import { AsyncPipe } from '@angular/common';
+﻿import { AsyncPipe } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { concatLatestFrom } from '@ngrx/operators';
@@ -8,6 +8,7 @@ import { APIGDPRWriteRequestDTO, APIYesNoDontKnowChoice } from 'src/app/api/v2';
 import { BaseAccordionComponent } from 'src/app/shared/base/base-accordion.component';
 import { TooltipComponent } from 'src/app/shared/components/tooltip/tooltip.component';
 import { ISMS_RESPONSIBLE_DISABLED_MESSAGE } from 'src/app/shared/constants/constants';
+import { mapUIConfigStatusToEnabled, mapUIConfigStatusToRecommended } from 'src/app/shared/helpers/observable-helpers';
 import { itSystemUsageFields } from 'src/app/shared/models/field-permissions-blueprints.model';
 import {
   RiskAssessmentResultOptions,
@@ -25,8 +26,8 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { selectITSystemUsageFieldPermissions, selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors';
 import {
-  selectITSystemUsageEnableGdprConductedRiskAssessment,
-  selectITSystemUsageEnableGdprPlannedRiskAssessmentDate,
+  selectITSystemUsageEnableAndRecommendedGdprConductedRiskAssessment,
+  selectITSystemUsageEnableAndRecommendedGdprPlannedRiskAssessmentDate,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { AccordionComponent } from '../../../../../../shared/components/accordion/accordion.component';
 import { DatePickerComponent } from '../../../../../../shared/components/datepicker/datepicker.component';
@@ -72,11 +73,17 @@ export class GdprRiskAssessmentSectionComponent extends BaseAccordionComponent i
   public disableDirectoryDocumentationControl = false;
 
   public readonly enablePlannedRiskAssessmentDateField$ = this.store.select(
-    selectITSystemUsageEnableGdprPlannedRiskAssessmentDate,
-  );
+    selectITSystemUsageEnableAndRecommendedGdprPlannedRiskAssessmentDate,
+  ).pipe(mapUIConfigStatusToEnabled());
+  public readonly plannedRiskAssessmentDateRecommended$ = this.store.select(
+    selectITSystemUsageEnableAndRecommendedGdprPlannedRiskAssessmentDate,
+  ).pipe(mapUIConfigStatusToRecommended());
   public readonly conductedRiskAssessmentEnabled$ = this.store.select(
-    selectITSystemUsageEnableGdprConductedRiskAssessment,
-  );
+    selectITSystemUsageEnableAndRecommendedGdprConductedRiskAssessment,
+  ).pipe(mapUIConfigStatusToEnabled());
+  public readonly conductedRiskAssessmentRecommended$ = this.store.select(
+    selectITSystemUsageEnableAndRecommendedGdprConductedRiskAssessment,
+  ).pipe(mapUIConfigStatusToRecommended());
 
   public readonly yesNoDontKnowIrrelevantOptions = yesNoDontKnowIrrelevantOptions;
   public readonly riskAssessmentResultOptions = riskAssessmentResultOptions;

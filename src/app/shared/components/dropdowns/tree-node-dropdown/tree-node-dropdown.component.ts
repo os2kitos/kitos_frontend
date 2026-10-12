@@ -4,22 +4,26 @@ import { Dictionary } from '../../../models/primitives/dictionary.model';
 import { TreeNodeModel } from '../../../models/tree-node.model';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgSelectComponent, NgOptionTemplateDirective } from '@ng-select/ng-select';
-import { ParagraphComponent } from '../../paragraph/paragraph.component';
+import { NgPlaceholderTemplateDirective, NgLabelTemplateDirective, NgOptionTemplateDirective, NgSelectComponent } from '@ng-select/ng-select';
 import { LoadingComponent } from '../../loading/loading.component';
+import { RecommendedBadgeComponent } from '../../recommended-badge/recommended-badge.component';
+import { ParagraphComponent } from '../../paragraph/paragraph.component';
 
 @Component({
   selector: 'app-tree-node-dropdown',
   templateUrl: './tree-node-dropdown.component.html',
   styleUrls: ['./tree-node-dropdown.component.scss'],
   imports: [
+    NgPlaceholderTemplateDirective,
+    RecommendedBadgeComponent,
     FormsModule,
     ReactiveFormsModule,
     NgSelectComponent,
     NgOptionTemplateDirective,
+    NgLabelTemplateDirective,
     ParagraphComponent,
-    LoadingComponent
-],
+    LoadingComponent,
+  ],
 })
 export class TreeNodeDropdownComponent extends BaseDropdownComponent<TreeNodeModel> implements OnInit {
   @Input() public appendTo: string = '';

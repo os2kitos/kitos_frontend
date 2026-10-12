@@ -13,6 +13,6 @@ import { APIYesNoIrrelevantOption } from './yesNoIrrelevantOption';
 
 
 export interface APIYesNoIrrelevantOptionSingleValueDTO { 
-    value?: APIYesNoIrrelevantOption;
+    value: APIYesNoIrrelevantOption;
 }
 

@@ -12,6 +12,6 @@
 
 
 export interface APIRequestPasswordResetRequestDTO { 
-    email?: string | null;
+    email: string | null;
 }
 

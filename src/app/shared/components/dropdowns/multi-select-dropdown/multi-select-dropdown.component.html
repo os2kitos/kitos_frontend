@@ -1,4 +1,6 @@
+<div [class.dropdown-has-recommended]="recommended">
 <ng-select
+      #recommendedSelect
   #selectDropdown
   class="{{ size }} "
   [placeholder]="text"
@@ -25,6 +27,13 @@
   [addTag]="includeAddTag ? onCreateNew : false"
   data-cy="multi-select-dropdown"
 >
+      <ng-template ng-placeholder-tmp>
+        <div class="ng-placeholder">
+          {{ text }}
+          <app-recommended-badge [visible]="recommended" [filled]="recommendedSelect.hasValue"></app-recommended-badge>
+        </div>
+      </ng-template>
+
   <ng-template ng-option-tmp let-item="item" let-item$="item$">
     <div class="select-option-row" [attr.data-cy]="item.dataCy">
       <input
@@ -52,11 +61,12 @@
     </div>
   </ng-template>
   <ng-template ng-multi-label-tmp let-items="items">
-    <div class="value-textbox-margin ng-value">
+    <div class="value-textbox-margin ng-value align-items-vertically">
       @for (item of items; track item; let isLast = $last) {
       <span class="ng-value-label">{{ item[textField] }}@if (!isLast) {,&nbsp; }</span>
       }
     </div>
+
   </ng-template>
 </ng-select>
 
@@ -65,3 +75,4 @@
   <app-paragraph paragraphSize="x-small">{{ descriptionLabelTitle }} {{ descriptions.join(", ") }}</app-paragraph>
 </app-textbox-info>
 }
+</div>

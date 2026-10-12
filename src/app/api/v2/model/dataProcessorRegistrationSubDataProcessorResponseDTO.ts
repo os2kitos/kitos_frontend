@@ -11,11 +11,11 @@
  */
 import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 import { APIYesNoUndecidedChoice } from './yesNoUndecidedChoice';
-import { APIShallowOrganizationResponseDTO } from './shallowOrganizationResponseDTO';
+import { APIShallowOrganizationResponseWithDisabledStateDTO } from './shallowOrganizationResponseWithDisabledStateDTO';
 
 
 export interface APIDataProcessorRegistrationSubDataProcessorResponseDTO { 
-    dataProcessorOrganization: APIShallowOrganizationResponseDTO;
+    dataProcessorOrganization: APIShallowOrganizationResponseWithDisabledStateDTO;
     basisForTransfer?: APIIdentityNamePairResponseDTO;
     transferToInsecureThirdCountry?: APIYesNoUndecidedChoice;
     insecureThirdCountrySubjectToDataProcessing?: APIIdentityNamePairResponseDTO;

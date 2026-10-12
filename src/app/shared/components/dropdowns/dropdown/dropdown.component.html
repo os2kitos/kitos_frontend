@@ -1,94 +1,118 @@
 @if (formGroup) {
-<div [formGroup]="formGroup">
-  <ng-select
-    class="{{ size }}"
-    [formControlName]="formName"
-    [placeholder]="text"
-    [fixedPlaceholder]="true"
-    [items]="data ?? []"
-    [bindLabel]="textField"
-    [loading]="loading || false"
-    [clearAllText]="clearAllText"
-    [loadingText]="loadingText"
-    [notFoundText]="notFoundText"
-    [searchFn]="searchFn"
-    [addTag]="addTag"
-    [addTagText]="addTagText"
-    [appendTo]="appendTo"
-    [clearable]="clearable"
-    (search)="filter$.next($event.term)"
-    (change)="formSelectionChange($event)"
-    (clear)="onClear()"
-    (focus)="onFocus()"
-    (open)="onOpen()"
-    (blur)="onBlur()"
-  >
-    <ng-template ng-label-tmp let-item="item">
-      <span class="ng-value-label">{{ getItemLabel(item) }}</span>
-    </ng-template>
-    <ng-template ng-option-tmp let-item="item">
-      @if (!showDescription || !item[itemDescriptionField]) {
-      {{ getItemLabel(item) }}
-      } @else {
-      <div class="description">
-        {{ getItemLabel(item) }}
-        <app-paragraph paragraphSize="small">{{ item[itemDescriptionField] }}</app-paragraph>
-      </div>
+  <div [formGroup]="formGroup" [class.dropdown-has-recommended]="recommended">
+    <ng-select
+      #recommendedSelect
+      class="{{ size }}"
+      [formControlName]="formName"
+      [placeholder]="text"
+      [fixedPlaceholder]="true"
+      [items]="data ?? []"
+      [bindLabel]="textField"
+      [loading]="loading || false"
+      [clearAllText]="clearAllText"
+      [loadingText]="loadingText"
+      [notFoundText]="notFoundText"
+      [searchFn]="searchFn"
+      [addTag]="addTag"
+      [addTagText]="addTagText"
+      [appendTo]="appendTo"
+      [clearable]="clearable"
+      (search)="filter$.next($event.term)"
+      (change)="formSelectionChange($event)"
+      (clear)="onClear()"
+      (focus)="onFocus()"
+      (open)="onOpen()"
+      (blur)="onBlur()"
+    >
+      <ng-template ng-placeholder-tmp>
+        <div class="ng-placeholder">
+          {{ text }}
+          <app-recommended-badge [visible]="recommended" [filled]="recommendedFilled ?? recommendedSelect.hasValue"></app-recommended-badge>
+        </div>
+      </ng-template>
+
+      <ng-template ng-label-tmp let-item="item">
+        <span class="ng-value-label align-items-vertically">{{ getItemLabel(item) }}</span>
+      </ng-template>
+      <ng-template ng-option-tmp let-item="item">
+        @if (!showDescription || !item[itemDescriptionField]) {
+          {{ getItemLabel(item) }}
+        } @else {
+          <div class="description">
+            {{ getItemLabel(item) }}
+            <app-paragraph paragraphSize="small" [dimmed]="item.disabled">{{
+              item[itemDescriptionField]
+            }}</app-paragraph>
+          </div>
+        }
+      </ng-template>
+      @if (showSearchHelpText && !!!(filter$ | async)) {
+        <ng-template ng-footer-tmp>
+          <app-paragraph paragraphSize="x-small" i18n>Brug søgning for at få flere resultater</app-paragraph>
+        </ng-template>
       }
-    </ng-template>
-    @if (showSearchHelpText && !!!(filter$ | async)) {
-    <ng-template ng-footer-tmp>
-      <app-paragraph paragraphSize="x-small" i18n>Brug søgning for at få flere resultater</app-paragraph>
-    </ng-template>
-    }
-  </ng-select>
-</div>
-} @if (!formGroup) {
-<ng-select
-  class="{{ size }}"
-  [placeholder]="text"
-  [fixedPlaceholder]="true"
-  [items]="data ?? []"
-  [bindLabel]="textField"
-  [loading]="loading || false"
-  [readonly]="disabled"
-  [clearAllText]="clearAllText"
-  [loadingText]="loadingText"
-  [notFoundText]="notFoundText"
-  [(ngModel)]="value"
-  [appendTo]="appendTo"
-  [clearable]="clearable"
-  (search)="filter$.next($event.term)"
-  (change)="valueChange.emit($event)"
-  [searchFn]="searchFn"
-  (clear)="onClear()"
->
-  <ng-template ng-label-tmp let-item="item">
-    <span class="ng-value-label">{{ getItemLabel(item) }}</span>
-  </ng-template>
-  <ng-template ng-option-tmp let-item="item">
-    @if (!showDescription || !item[itemDescriptionField]) {
-    {{ getItemLabel(item) }}
-    } @else {
-    <div class="description">
-      {{ getItemLabel(item) }}
-      <app-paragraph paragraphSize="small">{{ item[itemDescriptionField] }}</app-paragraph>
-    </div>
-    }
-  </ng-template>
-  @if (showSearchHelpText && !!!(filter$ | async)) {
-  <ng-template ng-footer-tmp>
-    <app-paragraph paragraphSize="x-small" i18n>Brug søgning for at få flere resultater</app-paragraph>
-  </ng-template>
-  }
-</ng-select>
-} @if (description && showDescriptionLabel) {
-<app-textbox-info>
-  <app-paragraph paragraphSize="x-small">{{ descriptionLabelTitle }} {{ description }}</app-paragraph>
-</app-textbox-info>
+    </ng-select>
+  </div>
+}
+@if (!formGroup) {
+  <div [class.dropdown-has-recommended]="recommended">
+    <ng-select
+      #recommendedSelect
+      class="{{ size }}"
+      [placeholder]="text"
+      [fixedPlaceholder]="true"
+      [items]="data ?? []"
+      [bindLabel]="textField"
+      [loading]="loading || false"
+      [readonly]="disabled"
+      [clearAllText]="clearAllText"
+      [loadingText]="loadingText"
+      [notFoundText]="notFoundText"
+      [(ngModel)]="value"
+      [appendTo]="appendTo"
+      [clearable]="clearable"
+      (search)="filter$.next($event.term)"
+      (change)="valueChange.emit($event)"
+      [searchFn]="searchFn"
+      (clear)="onClear()"
+    >
+      <ng-template ng-placeholder-tmp>
+        <div class="ng-placeholder">
+          {{ text }}
+          <app-recommended-badge [visible]="recommended" [filled]="recommendedFilled ?? recommendedSelect.hasValue"></app-recommended-badge>
+        </div>
+      </ng-template>
+
+      <ng-template ng-label-tmp let-item="item">
+        <span class="ng-value-label">{{ getItemLabel(item) }}</span>
+      </ng-template>
+      <ng-template ng-option-tmp let-item="item">
+        @if (!showDescription || !item[itemDescriptionField]) {
+          {{ getItemLabel(item) }}
+        } @else {
+          <div class="description">
+            {{ getItemLabel(item) }}
+            <app-paragraph paragraphSize="small" [dimmed]="item.disabled">{{
+              item[itemDescriptionField]
+            }}</app-paragraph>
+          </div>
+        }
+      </ng-template>
+      @if (showSearchHelpText && !!!(filter$ | async)) {
+        <ng-template ng-footer-tmp>
+          <app-paragraph paragraphSize="x-small" i18n>Brug søgning for at få flere resultater</app-paragraph>
+        </ng-template>
+      }
+    </ng-select>
+  </div>
+}
+@if (description && showDescriptionLabel) {
+  <app-textbox-info>
+    <app-paragraph paragraphSize="x-small">{{ descriptionLabelTitle }} {{ description }}</app-paragraph>
+  </app-textbox-info>
 }
 @if (toolTipText) {
-<app-textbox-info>
-  <app-paragraph paragraphSize="x-small">{{ toolTipText }}</app-paragraph>
-</app-textbox-info>
+  <app-textbox-info>
+    <app-paragraph paragraphSize="x-small">{{ toolTipText }}</app-paragraph>
+  </app-textbox-info>
 }

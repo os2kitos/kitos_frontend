@@ -1,3 +1,5 @@
+import { mapUIConfigStatusToRecommended } from 'src/app/shared/helpers/observable-helpers';
+import { selectITSystemUsageEnableAndRecommendedRegisteredCategories } from 'src/app/store/organization/ui-module-customization/selectors';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
@@ -20,6 +22,8 @@ import { CheckboxComponent } from '../../../../../../shared/components/checkbox/
   imports: [AccordionComponent, FormsModule, ReactiveFormsModule, CheckboxComponent, AsyncPipe],
 })
 export class RegisteredDataCategoriesSectionComponent extends BaseAccordionComponent implements OnInit {
+  public readonly recommended$ = this.store.select(selectITSystemUsageEnableAndRecommendedRegisteredCategories).pipe(mapUIConfigStatusToRecommended());
+
   @Output() public noPermissions = new EventEmitter<AbstractControl[]>();
 
   public readonly registeredDataCategoriesOptions$ = this.store.select(

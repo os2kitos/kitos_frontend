@@ -1,24 +1,26 @@
 @if (formGroup) {
   <mat-form-field [formGroup]="formGroup" class="{{ size }}">
-    <mat-label>{{ text }}</mat-label>
+    <mat-label>
+      {{ text }}
+      <app-recommended-badge [visible]="recommended" [filled]="hasContent(formName ? formGroup.controls[formName].value : undefined)"></app-recommended-badge>
+    </mat-label>
     <input
       matInput
       [type]="type"
-      [maxlength]="maxLength"
       [formControlName]="formName"
       [pattern]="pattern"
       (input)="formInputValueChange($event)"
       class="{{ size }}"
       (focus)="focus(true)"
       (blur)="focus(false)"
-      />
+    />
     @if (isLoading) {
       <mat-spinner [diameter]="20" matSuffix></mat-spinner>
     }
-    @if (icon === 'search') {
+    @if (icon === "search") {
       <app-search-icon matPrefix></app-search-icon>
     }
-    @if (icon === 'trashcan') {
+    @if (icon === "trashcan") {
       <app-trashcan-icon matSuffix (click)="onIconClick()"></app-trashcan-icon>
     }
     @if (clearable && value) {
@@ -29,12 +31,18 @@
         <app-info-icon></app-info-icon>
       </app-tooltip>
     }
+    @if (formName && formGroup.controls[formName].getError('maxlength'); as error) {
+      <mat-error i18n>Maksimalt {{ error.requiredLength }} tegn.</mat-error>
+    }
   </mat-form-field>
 }
 
 @if (!formGroup) {
   <mat-form-field class="{{ size }}">
-    <mat-label>{{ text }}</mat-label>
+    <mat-label>
+      {{ text }}
+     <app-recommended-badge [visible]="recommended" [filled]="hasContent(value)"></app-recommended-badge>
+    </mat-label>
     <input
       matInput
       [type]="type"
@@ -43,14 +51,14 @@
       [(ngModel)]="value"
       class="{{ size }}"
       (ngModelChange)="valueChange.emit($event)"
-      />
+    />
     @if (isLoading) {
       <mat-spinner [diameter]="20" matSuffix></mat-spinner>
     }
-    @if (icon === 'search') {
+    @if (icon === "search") {
       <app-search-icon matPrefix></app-search-icon>
     }
-    @if (icon === 'trashcan') {
+    @if (icon === "trashcan") {
       <app-trashcan-icon matSuffix (click)="onIconClick()"></app-trashcan-icon>
     }
     @if (clearable && value) {

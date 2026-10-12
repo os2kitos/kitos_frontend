@@ -1,0 +1,74 @@
+@use "mixins";
+
+// Shared ng-select overrides for app-dropdown, app-multi-select-dropdown and app-tree-node-dropdown.
+// Defined once globally instead of duplicated per component styleUrls: duplicating this CSS three
+// times over was pushing each component's compiled styles well past the anyComponentStyle budget.
+app-dropdown,
+app-multi-select-dropdown,
+app-tree-node-dropdown {
+  flex: 1;
+}
+
+// ng-select's own host element always carries a "ng-select" class (see
+// @ng-select/ng-select/themes/material.theme.css, e.g. ".ng-select .ng-select-container").
+// Matching that class here (not just the "ng-select" element type) keeps our specificity at
+// least equal to the shipped theme's, since these rules no longer get an Angular view-encapsulation
+// attribute boost now that they live in a global stylesheet instead of each component's own styles.
+app-dropdown ng-select.ng-select,
+app-multi-select-dropdown ng-select.ng-select,
+app-tree-node-dropdown ng-select.ng-select {
+  &.medium {
+    --height: 48px;
+    --font-size: 14px;
+    --bottom: 2px;
+    --offset: 8px;
+    --scale: calc(10 / 14);
+  }
+
+  &.large {
+    --height: 56px;
+    --font-size: 16px;
+    --bottom: 8px;
+    --offset: 14px;
+    --scale: calc(12 / 16);
+  }
+
+  @include mixins.ng-select-adjustment;
+}
+
+app-dropdown ng-select.ng-select.medium,
+app-multi-select-dropdown ng-select.ng-select.medium,
+app-tree-node-dropdown ng-select.ng-select.medium {
+  .ng-value * {
+    font-size: 16px !important;
+  }
+
+  .ng-has-value .ng-placeholder {
+    top: 5px !important;
+  }
+
+  &.ng-select-opened .ng-placeholder {
+    top: 5px !important;
+  }
+}
+
+// "Recommended" badge shown in the placeholder of app-dropdown / app-multi-select-dropdown /
+// app-tree-node-dropdown when [recommended]="true" adds .dropdown-has-recommended to a wrapper
+// div around the <ng-select>. This mirrors mixins.dropdown-has-recommended, but without ::ng-deep:
+// that pseudo-element is only meaningful inside an Angular component stylesheet (where the
+// compiler rewrites it) — in a plain global stylesheet like this one it is invalid CSS and the
+// whole rule is silently dropped by the browser.
+.dropdown-has-recommended ng-select.ng-select .ng-select-container {
+  .ng-placeholder {
+    display: flex;
+    align-items: center;
+
+    // Keep the badge clickable above the empty dropdown's search input.
+    z-index: 1;
+    pointer-events: none;
+
+    app-recommended-badge {
+      pointer-events: auto;
+    }
+  }
+}

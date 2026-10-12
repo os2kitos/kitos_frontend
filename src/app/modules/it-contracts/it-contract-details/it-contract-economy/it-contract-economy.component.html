@@ -8,6 +8,7 @@
         data-cy="contract-operations-date"
         [formGroup]="economyFormGroup"
         formName="operationsRemunerationStartedAt"
+        [recommended]="(paymentModelRecommended$ | async) === true"
         (valueChange)="patchEconomy({ paymentModel: { operationsRemunerationStartedAt: $event?.toDateString() } })"
       ></app-datepicker>
       <app-dropdown
@@ -18,6 +19,7 @@
         [formGroup]="economyFormGroup"
         formName="paymentFrequency"
         [data]="paymentFrequencyOptions$ | async"
+        [recommended]="(paymentModelRecommended$ | async) === true"
         (valueChange)="patchEconomy({ paymentModel: { paymentFrequencyUuid: $event } })"
         >
       </app-dropdown>
@@ -29,6 +31,7 @@
         [formGroup]="economyFormGroup"
         formName="paymentModel"
         [data]="paymentModelOptions$ | async"
+        [recommended]="(paymentModelRecommended$ | async) === true"
         (valueChange)="patchEconomy({ paymentModel: { paymentModelUuid: $event } })"
         >
       </app-dropdown>
@@ -40,6 +43,7 @@
         [formGroup]="economyFormGroup"
         formName="priceRegulation"
         [data]="priceRegulationOptions$ | async"
+        [recommended]="(paymentModelRecommended$ | async) === true"
         (valueChange)="patchEconomy({ paymentModel: { priceRegulationUuid: $event } })"
         >
       </app-dropdown>
@@ -53,6 +57,7 @@
     [payments$]="externalPayments$"
     [anyPayments$]="anyExternalPayments$"
     paymentType="external"
+    [recommended]="(externalPaymentRecommended$ | async) === true"
   ></app-payment-table>
 }
 @if (internalPaymentEnabled$ | async) {
@@ -62,5 +67,6 @@
     [payments$]="internalPayments$"
     [anyPayments$]="anyInternalPayments$"
     paymentType="internal"
+    [recommended]="(internalPaymentRecommended$ | async) === true"
   ></app-payment-table>
 }

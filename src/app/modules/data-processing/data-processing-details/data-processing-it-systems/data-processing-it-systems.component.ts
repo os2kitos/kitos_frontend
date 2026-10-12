@@ -1,3 +1,4 @@
+import { RegistrationRecommendedBadgesService } from 'src/app/shared/services/registration-recommended-badges.service';
 import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
@@ -24,7 +25,8 @@ import { TrashcanIconComponent } from '../../../../shared/components/icons/trash
 import { NativeTableComponent } from '../../../../shared/components/native-table/native-table.component';
 import { StandardVerticalContentGridComponent } from '../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { CreateDprSystemUsageComponent } from './create-dpr-system-usage/create-dpr-system-usage.component';
-import { selectITSystemUsageEnableStatus } from 'src/app/store/organization/ui-module-customization/selectors';
+import { selectITSystemUsageEnableAndRecommendedStatus } from 'src/app/store/organization/ui-module-customization/selectors';
+import { mapUIConfigStatusToEnabled } from 'src/app/shared/helpers/observable-helpers';
 
 @Component({
   selector: 'app-data-processing-it-systems',
@@ -46,15 +48,18 @@ import { selectITSystemUsageEnableStatus } from 'src/app/store/organization/ui-m
   ],
 })
 export class DataProcessingItSystemsComponent extends BaseComponent {
+  public readonly recommendedBadge$ = this.recommendedBadgesService.dataProcessing.itSystems$;
+
   public readonly systemUsages$ = this.store.select(selectDataProcessingSystems).pipe(filterNullish());
   public readonly anySystemUsages$ = this.systemUsages$.pipe(matchNonEmptyArray());
-  public readonly systemUsageStatusEnabled$ = this.store.select(selectITSystemUsageEnableStatus);
+  public readonly systemUsageStatusEnabled$ = this.store.select(selectITSystemUsageEnableAndRecommendedStatus).pipe(mapUIConfigStatusToEnabled());
 
   public readonly hasModifyPermissions$ = this.store.select(selectDataProcessingHasModifyPermissions);
 
   constructor(
     private store: Store,
     private dialog: MatDialog,
+    private readonly recommendedBadgesService: RegistrationRecommendedBadgesService,
   ) {
     super();
   }

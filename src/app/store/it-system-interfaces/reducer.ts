@@ -73,7 +73,7 @@ export const itInterfaceFeature = createFeature({
     ),
     on(
       ITInterfaceActions.getITInterfacePermissionsSuccess,
-      (state, { permissions }): ITInterfaceState => ({ ...state, permissions }),
+      (state, { permissions }): ITInterfaceState => ({ ...state, permissions: permissions }),
     ),
     on(
       ITInterfaceActions.getITInterfaceCollectionPermissions,

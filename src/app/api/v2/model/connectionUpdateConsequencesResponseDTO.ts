@@ -13,6 +13,6 @@ import { APIConnectionUpdateOrganizationUnitConsequenceDTO } from './connectionU
 
 
 export interface APIConnectionUpdateConsequencesResponseDTO { 
-    consequences?: Array<APIConnectionUpdateOrganizationUnitConsequenceDTO> | null;
+    consequences: Array<APIConnectionUpdateOrganizationUnitConsequenceDTO> | null;
 }
 

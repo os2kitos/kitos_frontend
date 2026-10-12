@@ -1,5 +1,7 @@
 <app-card>
-  <app-card-header title="Systemroller" helpTextKey="it-system-usage.roles" i18n-title> </app-card-header>
+  <app-card-header
+    [recommended]="(recommendedBadge$ | async)?.visible ?? false"
+    [recommendedFilled]="(recommendedBadge$ | async)?.filled ?? false" title="Systemroller" helpTextKey="it-system-usage.roles" i18n-title> </app-card-header>
   <app-role-table
     [entityUuid$]="systemUuid$"
     entityType="it-system-usage"

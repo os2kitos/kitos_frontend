@@ -1,4 +1,4 @@
-FROM node:22.13.0-bookworm-slim
+FROM node:22.13.0-bookworm-slim AS build
 
 RUN corepack enable
 WORKDIR /app
@@ -7,8 +7,13 @@ COPY package.json yarn.lock ./
 RUN yarn install --frozen-lockfile
 
 COPY . .
-RUN sed -i 's/\r$//' /app/docker/start-dev.sh && chmod +x /app/docker/start-dev.sh
+RUN NODE_OPTIONS=--max_old_space_size=5048 yarn ng build --configuration production --base-href / --localize false
 
-EXPOSE 4200
+FROM nginx:1.27-alpine
 
-CMD ["sh", "./docker/start-dev.sh"]
+ENV NGINX_ENVSUBST_FILTER=BACKEND_URL
+
+COPY docker/nginx.conf /etc/nginx/templates/default.conf.template
+COPY --from=build /app/dist/kitos-web/ /usr/share/nginx/html/
+
+EXPOSE 80

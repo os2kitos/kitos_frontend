@@ -13,6 +13,6 @@ import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 
 
 export interface APIRoleRecipientResponseDTO { 
-    role?: APIIdentityNamePairResponseDTO;
+    role: APIIdentityNamePairResponseDTO;
 }
 

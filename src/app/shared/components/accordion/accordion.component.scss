@@ -27,3 +27,9 @@
   margin-left: theme.$padding-small;
   margin-top: theme.$padding-small;
 }
+
+.accordion-recommended-badge {
+  margin-left: auto;
+  padding-left: theme.$padding-small;
+  flex-shrink: 0;
+}

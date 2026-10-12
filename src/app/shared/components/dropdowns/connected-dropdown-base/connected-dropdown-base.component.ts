@@ -13,7 +13,7 @@ export class ConnectedDropdownBaseComponent extends BaseComponent {
   @Input() public valueField!: string;
   @Input() public isLoading$?: Observable<boolean>;
   @Input() public showSearchHelpText$?: Observable<boolean>;
-  @Input() public formGroup!: FormGroup<any>;
+  @Input() public formGroup!: FormGroup;
   @Input() public formName!: string;
   @Input() public includeItemDescription = false;
   @Input() public addTag = false;
@@ -42,7 +42,7 @@ export class ConnectedDropdownBaseComponent extends BaseComponent {
   }
 
   //since the dropdown is filtered externally, accept every item
-  public externalSearch(_: string, __: any) {
+  public externalSearch(_: string, __: unknown) {
     return true;
   }
 

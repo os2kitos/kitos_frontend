@@ -1,0 +1,6 @@
+@use "mixins.scss";
+
+.full-width-column {
+  @include mixins.full-column-width;
+}
+

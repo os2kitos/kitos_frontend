@@ -29,7 +29,7 @@ export interface APIExternalReferenceWithLastChangedResponseDTO {
      */
     masterReference: boolean;
     uuid?: string;
-    lastChangedByUsername?: string | null;
+    lastChangedByUsername: string | null;
     lastChangedDate?: string;
 }
 

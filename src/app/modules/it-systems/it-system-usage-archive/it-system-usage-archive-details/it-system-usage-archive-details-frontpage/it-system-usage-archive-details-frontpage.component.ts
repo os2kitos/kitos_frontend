@@ -1,4 +1,4 @@
-import { AsyncPipe } from '@angular/common';
+﻿import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
@@ -19,7 +19,8 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectItSystemUsageArchive } from 'src/app/store/it-system-usage-archive/selectors';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
 import { selectItSystemName } from 'src/app/store/it-system/selectors';
-import { selectITSystemUsageEnableUsageArchive } from 'src/app/store/organization/ui-module-customization/selectors';
+import { selectITSystemUsageEnableAndRecommendedUsageArchive } from 'src/app/store/organization/ui-module-customization/selectors';
+import { mapUIConfigStatusToEnabled } from 'src/app/shared/helpers/observable-helpers';
 
 @Component({
   selector: 'app-it-system-usage-archive-details-frontpage',
@@ -43,7 +44,7 @@ export class ItSystemUsageArchiveDetailsFrontpageComponent extends BaseComponent
   public readonly itSystemUsageArchive$ = this.store.select(selectItSystemUsageArchive).pipe(filterNullish());
   public readonly currentItSystemName$ = this.store.select(selectItSystemName).pipe(filterNullish());
   public archiveReferenceItems: SimpleLink[] = [];
-  public readonly usageArchiveEnabled$ = this.store.select(selectITSystemUsageEnableUsageArchive);
+  public readonly usageArchiveEnabled$ = this.store.select(selectITSystemUsageEnableAndRecommendedUsageArchive).pipe(mapUIConfigStatusToEnabled());
 
   public readonly archiveForm = new FormGroup({
     takenIntoUsageDate: new FormControl<Date | undefined>({ value: undefined, disabled: true }),
@@ -53,7 +54,6 @@ export class ItSystemUsageArchiveDetailsFrontpageComponent extends BaseComponent
     legacyName: new FormControl<string | undefined>({ value: undefined, disabled: true }),
     localName: new FormControl<string | undefined>({ value: undefined, disabled: true }),
     localId: new FormControl<string | undefined>({ value: undefined, disabled: true }),
-    organization: new FormControl<string | undefined>({ value: undefined, disabled: true }),
     currentSystemName: new FormControl<string | undefined>({ value: undefined, disabled: true }),
     archivedByFullName: new FormControl<string | undefined>({ value: undefined, disabled: true }),
   });
@@ -93,7 +93,6 @@ export class ItSystemUsageArchiveDetailsFrontpageComponent extends BaseComponent
             legacyName: usageArchive.legacyName,
             localName: usageArchive.localName,
             localId: usageArchive.localId,
-            organization: this.getOrganizationName(usageArchive.organization),
             currentSystemName: currentItSystemName,
             archivedByFullName: usageArchive.archivedByFullName,
           });

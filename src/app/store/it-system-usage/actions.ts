@@ -2,6 +2,7 @@ import { createActionGroup, emptyProps } from '@ngrx/store';
 import { APIBusinessRoleDTO } from 'src/app/api/v1';
 import {
   APIColumnConfigurationRequestDTO,
+  APICombinedPermissionsResponseDTO,
   APICreateItSystemUsageArchiveRequestDTO,
   APIItSystemUsageArchiveResponseDTO,
   APIItSystemUsageResponseDTO,
@@ -9,7 +10,6 @@ import {
   APIOrganizationGridConfigurationResponseDTO,
   APIOutgoingSystemRelationResponseDTO,
   APIResourceCollectionPermissionsResponseDTO,
-  APIResourcePermissionsResponseDTO,
   APISystemRelationWriteRequestDTO,
   APIUpdateItSystemUsageRequestDTO,
 } from 'src/app/api/v2';
@@ -75,7 +75,7 @@ export const ITSystemUsageActions = createActionGroup({
     'Add IT System Usage Using Unit Error': emptyProps(),
 
     'Get IT System Usage Permissions': (systemUsageUuid: string) => ({ systemUsageUuid }),
-    'Get IT System Usage Permissions Success ': (permissions?: APIResourcePermissionsResponseDTO) => ({
+    'Get IT System Usage Permissions Success ': (permissions?: APICombinedPermissionsResponseDTO) => ({
       permissions,
     }),
     'Get IT System Usage Permissions Error': emptyProps(),

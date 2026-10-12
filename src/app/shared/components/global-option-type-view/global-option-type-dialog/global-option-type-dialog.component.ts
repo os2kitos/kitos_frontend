@@ -41,7 +41,7 @@ export class GlobalOptionTypeDialogComponent implements OnInit {
 
   public form = new FormGroup({
     description: new FormControl<string | undefined>(undefined),
-    name: new FormControl<string | undefined>(undefined, Validators.required),
+    name: new FormControl<string | undefined>(undefined, [Validators.required, Validators.maxLength(150)]),
     obligatory: new FormControl<boolean | undefined>(undefined),
     writeAccess: new FormControl<boolean | undefined>(undefined),
   });

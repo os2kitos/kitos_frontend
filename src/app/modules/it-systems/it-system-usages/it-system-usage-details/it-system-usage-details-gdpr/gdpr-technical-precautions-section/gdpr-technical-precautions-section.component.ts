@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
 import { APIGDPRWriteRequestDTO, APITechnicalPrecautionChoice, APIYesNoDontKnowChoice } from 'src/app/api/v2';
 import { BaseAccordionComponent } from 'src/app/shared/base/base-accordion.component';
+import { mapUIConfigStatusToRecommended } from 'src/app/shared/helpers/observable-helpers';
 import {
   TechnicalPrecautions,
   mapTechnicalPecautions,
@@ -21,6 +22,7 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors';
+import { selectITSystemUsageEnableAndRecommendedGdprTechnicalPrecautions } from 'src/app/store/organization/ui-module-customization/selectors';
 import { AccordionComponent } from '../../../../../../shared/components/accordion/accordion.component';
 import { CheckboxComponent } from '../../../../../../shared/components/checkbox/checkbox.component';
 import { DropdownComponent } from '../../../../../../shared/components/dropdowns/dropdown/dropdown.component';
@@ -49,6 +51,7 @@ export class GdprTechnicalPrecautionsSectionComponent extends BaseAccordionCompo
   @Input() disableLinkControl!: Observable<void>;
 
   private readonly currentGdpr$ = this.store.select(selectItSystemUsageGdpr).pipe(filterNullish());
+  public readonly technicalPrecautionsRecommended$ = this.store.select(selectITSystemUsageEnableAndRecommendedGdprTechnicalPrecautions).pipe(mapUIConfigStatusToRecommended());
   public readonly isTechnicalPrecautionsFalse$ = this.currentGdpr$.pipe(
     map((gdpr) => gdpr.technicalPrecautionsInPlace !== APIYesNoDontKnowChoice.Yes),
   );

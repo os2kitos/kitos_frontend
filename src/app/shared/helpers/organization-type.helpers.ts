@@ -1,6 +1,10 @@
 import { APIOrganizationType } from 'src/app/api/v2';
 import { OrganizationTypeEnum } from '../models/organization/organization-odata.model';
 
+export function enableISMSResponsibleField(organizationType: OrganizationTypeEnum | undefined): boolean {
+  return organizationType === OrganizationTypeEnum.Company || organizationType === OrganizationTypeEnum.CommunityOfInterest;
+}
+
 export function mapOrganizationType(source: APIOrganizationType | undefined): string | undefined {
   switch (source) {
     case APIOrganizationType.Municipality: {

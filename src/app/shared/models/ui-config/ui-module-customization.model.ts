@@ -19,6 +19,6 @@ export function adaptUIModuleCustomization(
 
 function adaptCustomizedUINodes(sourceNodes: APICustomizedUINodeResponseDTO[]) {
   return sourceNodes.map((node) => {
-    return { fullKey: node.key, enabled: node.enabled };
+    return { fullKey: node.key, enabled: node.enabled, recommended: node.recommended };
   });
 }

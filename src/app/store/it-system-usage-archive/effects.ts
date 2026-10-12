@@ -139,10 +139,5 @@ export class ITSystemUsageArchiveEffects {
 }
 
 function applyQueryFixes(odataString: string): string {
-  return replaceQueryByMultiplePropertyContains(
-    odataString,
-    'ArchivedByUser.Name',
-    'ArchivedByUser',
-    ['Name', 'LastName'],
-  );
+  return replaceQueryByMultiplePropertyContains(odataString, 'ArchivedByUser', 'ArchivedByUser', ['Name', 'LastName']);
 }

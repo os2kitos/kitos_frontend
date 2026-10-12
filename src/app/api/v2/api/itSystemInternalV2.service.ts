@@ -60,7 +60,9 @@ export interface GetManyItSystemInternalV2GetItSystemsRequestParams {
     page?: number;
     /** Size of the page referred by \&#39;page\&#39;.  Range: [1,250] Default: 250. */
     pageSize?: number;
+    /** UUID of the system to exclude from the results */
     excludeUuid?: string;
+    /** UUID of the parent system whose children should be excluded from the results */
     excludeChildrenOfUuid?: string;
 }
 

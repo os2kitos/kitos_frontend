@@ -16,8 +16,8 @@ import { APIDataProtectionAdvisorResponseDTO } from './dataProtectionAdvisorResp
 
 export interface APIOrganizationMasterDataRolesResponseDTO { 
     organizationUuid?: string;
-    contactPerson?: APIContactPersonResponseDTO;
-    dataResponsible?: APIDataResponsibleResponseDTO;
-    dataProtectionAdvisor?: APIDataProtectionAdvisorResponseDTO;
+    contactPerson: APIContactPersonResponseDTO;
+    dataResponsible: APIDataResponsibleResponseDTO;
+    dataProtectionAdvisor: APIDataProtectionAdvisorResponseDTO;
 }
 

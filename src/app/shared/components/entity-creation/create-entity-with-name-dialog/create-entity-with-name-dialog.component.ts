@@ -34,12 +34,19 @@ export class CreateEntityWithNameDialogComponent extends BaseCreateEntityDialogC
     name: new FormControl<string | undefined>(undefined, Validators.required),
   });
 
+  // Backend: ItSystem.MaxNameLength, ItContractConstraints and DataProcessingRegistrationConstraints.
+  public get nameMaxLength(): number {
+    return this.entityType === 'it-system' ? 100 : 200;
+  }
+
   @ViewChild('nameInput') nameInput: ElementRef | undefined;
 
   override ngOnInit(): void {
     super.ngOnInit();
 
-    const control = this.createForm.get('name');
+    const control = this.createForm.controls.name;
+    control.addValidators(Validators.maxLength(this.nameMaxLength));
+    control.updateValueAndValidity();
 
     this.subscriptions.add(
       control?.valueChanges.pipe(debounceTime(300)).subscribe((value) => {
@@ -52,7 +59,7 @@ export class CreateEntityWithNameDialogComponent extends BaseCreateEntityDialogC
 
   public createEntity(openAfterCreate: boolean): void {
     const name = this.createForm.controls.name.value;
-    if (!name) {
+    if (!name || this.createForm.invalid) {
       return;
     }
 

@@ -12,7 +12,7 @@
 
 
 export interface APIFieldPermissionsResponseDTO { 
-    key?: string | null;
+    key: string | null;
     enabled?: boolean;
 }
 

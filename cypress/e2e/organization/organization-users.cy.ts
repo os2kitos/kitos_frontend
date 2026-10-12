@@ -48,11 +48,11 @@ describe('organization-users', () => {
       cy.contains('local-api-global-admin-user@kitos.dk').click();
 
       cy.get('[data-cy="delete-role-button-Chef"]').click();
-      cy.contains('Ja').click();
 
       cy.intercept('DELETE', 'api/v2/internal/organizations/*/organization-units/*/roles/delete', {
         fixture: './organizations/users/org-unit-role-table-delete.json',
       }).as('deleteRole');
+      cy.contains('Ja').click();
 
       cy.wait('@deleteRole');
 
@@ -63,11 +63,11 @@ describe('organization-users', () => {
       cy.contains('local-api-global-admin-user@kitos.dk').click();
 
       cy.get('[data-cy="delete-role-button-Changemanager"]').click();
-      cy.contains('Ja').click();
 
       cy.intercept('PATCH', 'api/v2/it-system-usages/*/roles/remove', {
         fixture: './organizations/users/it-system-role-table-delete.json',
       }).as('deleteRole');
+      cy.contains('Ja').click();
 
       cy.wait('@deleteRole');
 
@@ -78,11 +78,11 @@ describe('organization-users', () => {
       cy.contains('local-api-global-admin-user@kitos.dk').click();
 
       cy.getByDataCy('delete-role-button-Budgetansvarlig').click();
-      cy.contains('Ja').click();
 
       cy.intercept('PATCH', 'api/v2/internal/it-contracts/*/roles/remove', {
         fixture: './organizations/users/it-contract-role-table-delete.json',
       }).as('deleteRole');
+      cy.contains('Ja').click();
 
       cy.wait('@deleteRole');
 
@@ -93,11 +93,11 @@ describe('organization-users', () => {
       cy.contains('local-api-global-admin-user@kitos.dk').click();
 
       cy.get('[data-cy="delete-role-button-Standard Læserolle"]').click();
-      cy.contains('Ja').click();
 
       cy.intercept('PATCH', 'api/v2/internal/data-processing-registrations/*/roles/remove', {
         fixture: './organizations/users/dpr-role-table-delete.json',
       }).as('deleteRole');
+      cy.contains('Ja').click();
 
       cy.wait('@deleteRole');
 
@@ -137,11 +137,12 @@ describe('organization-users', () => {
 
     testRunner.runTestWithSetup('Can edit user', () => {
       cy.contains('local-regular-user@kitos.dk').click();
-      cy.contains('Rediger').click().wait(500);
+      cy.contains('Rediger').click();
 
       cy.replaceTextByDataCy('firstName', 'Jens');
       cy.replaceTextByDataCy('lastName', 'Jensen');
-      cy.replaceTextByDataCy('email', 'jens@jensen.dk'), cy.replaceTextByDataCy('phoneNumber', '12345678');
+      cy.replaceTextByDataCy('email', 'jens@jensen.dk');
+      cy.replaceTextByDataCy('phoneNumber', '12345678');
       cy.dropdownByCy('start-preference', 'Organisation', true);
       cy.getByDataCy('rights-holder-access').find('input').click();
       cy.getByDataCy('stakeholder-access').find('input').click();

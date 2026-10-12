@@ -13,6 +13,6 @@ import { APIYearMonthIntervalOption } from './yearMonthIntervalOption';
 
 
 export interface APIYearMonthIntervalOptionSingleValueDTO { 
-    value?: APIYearMonthIntervalOption;
+    value: APIYearMonthIntervalOption;
 }
 

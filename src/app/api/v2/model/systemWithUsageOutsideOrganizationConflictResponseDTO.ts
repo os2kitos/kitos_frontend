@@ -12,7 +12,7 @@
 
 
 export interface APISystemWithUsageOutsideOrganizationConflictResponseDTO { 
-    systemName?: string | null;
-    organizationNames?: Array<string> | null;
+    systemName: string | null;
+    organizationNames: Array<string> | null;
 }
 

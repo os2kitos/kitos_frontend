@@ -26,25 +26,25 @@ import { APIYesNoUndecidedOptionNullableValueWithOptionalRemarkDTO } from './yes
 
 
 export interface APIDataProcessingRegistrationDTO { 
-    id?: number;
-    name?: string | null;
+    id: number;
+    name: string | null;
     uuid?: string;
-    assignedRoles?: Array<APIAssignedRoleDTO> | null;
-    references?: Array<APIReferenceDTO> | null;
-    itSystems?: Array<APINamedEntityWithEnabledStatusDTO> | null;
-    oversightInterval?: APIYearMonthIntervalOptionNullableValueWithOptionalRemarkDTO;
+    assignedRoles: Array<APIAssignedRoleDTO> | null;
+    references: Array<APIReferenceDTO> | null;
+    itSystems: Array<APINamedEntityWithEnabledStatusDTO> | null;
+    oversightInterval: APIYearMonthIntervalOptionNullableValueWithOptionalRemarkDTO;
     hasSubDataProcessors?: APIYesNoUndecidedOption;
-    dataProcessors?: Array<APIShallowOrganizationDTO> | null;
-    subDataProcessors?: Array<APISubDataProcessorResponseDTO> | null;
-    agreementConcluded?: APIYesNoIrrelevantOptionNullableValueWithOptionalDateAndRemark;
+    dataProcessors: Array<APIShallowOrganizationDTO> | null;
+    subDataProcessors: Array<APISubDataProcessorResponseDTO> | null;
+    agreementConcluded: APIYesNoIrrelevantOptionNullableValueWithOptionalDateAndRemark;
     transferToInsecureThirdCountries?: APIYesNoUndecidedOption;
-    insecureThirdCountries?: Array<APINamedEntityWithExpirationStatusDTO> | null;
+    insecureThirdCountries: Array<APINamedEntityWithExpirationStatusDTO> | null;
     basisForTransfer?: APINamedEntityWithExpirationStatusDTO;
-    dataResponsible?: APIOptionWithDescriptionAndExpirationDTOValueWithOptionalRemarkDTO;
-    oversightOptions?: APINamedEntityWithExpirationStatusDTOArrayValueWithOptionalRemarkDTO;
-    oversightCompleted?: APIYesNoUndecidedOptionNullableValueWithOptionalRemarkDTO;
-    oversightDates?: Array<APIDataProcessingRegistrationOversightDateDTO> | null;
-    associatedContracts?: Array<APINamedEntityDTO> | null;
+    dataResponsible: APIOptionWithDescriptionAndExpirationDTOValueWithOptionalRemarkDTO;
+    oversightOptions: APINamedEntityWithExpirationStatusDTOArrayValueWithOptionalRemarkDTO;
+    oversightCompleted: APIYesNoUndecidedOptionNullableValueWithOptionalRemarkDTO;
+    oversightDates: Array<APIDataProcessingRegistrationOversightDateDTO> | null;
+    associatedContracts: Array<APINamedEntityDTO> | null;
     oversightScheduledInspectionDate?: string | null;
     lastChangedByName?: string | null;
     lastChangedAt?: string;

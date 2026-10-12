@@ -1,8 +1,12 @@
 @use "material";
 @use "theme" as *;
+@use "sass:meta";
 
 @import url("https://fonts.bunny.net/css?family=mulish:300,400,500,700&display=swap");
 @import "@ng-select/ng-select/themes/material.theme.css";
+
+// Keep the custom dropdown styles with the main stylesheet in every build.
+@include meta.load-css("ng-select-shared");
 
 // Global styles
 

@@ -16,14 +16,14 @@ import { APISimpleConflictResponseDTO } from './simpleConflictResponseDTO';
 
 
 export interface APIOrganizationRemovalConflictsResponseDTO { 
-    systemsWithUsagesOutsideTheOrganization?: Array<APISystemWithUsageOutsideOrganizationConflictResponseDTO> | null;
-    interfacesExposedOnSystemsOutsideTheOrganization?: Array<APIInterfacesExposedOutsideTheOrganizationResponseDTO> | null;
-    systemsExposingInterfacesDefinedInOtherOrganizations?: Array<APIMultipleConflictsResponseDTO> | null;
-    systemsSetAsParentSystemToSystemsInOtherOrganizations?: Array<APIMultipleConflictsResponseDTO> | null;
-    dprInOtherOrganizationsWhereOrgIsDataProcessor?: Array<APISimpleConflictResponseDTO> | null;
-    dprInOtherOrganizationsWhereOrgIsSubDataProcessor?: Array<APISimpleConflictResponseDTO> | null;
-    contractsInOtherOrganizationsWhereOrgIsSupplier?: Array<APISimpleConflictResponseDTO> | null;
-    systemsInOtherOrganizationsWhereOrgIsRightsHolder?: Array<APISimpleConflictResponseDTO> | null;
-    systemsWhereOrgIsArchiveSupplier?: Array<APISimpleConflictResponseDTO> | null;
+    systemsWithUsagesOutsideTheOrganization: Array<APISystemWithUsageOutsideOrganizationConflictResponseDTO> | null;
+    interfacesExposedOnSystemsOutsideTheOrganization: Array<APIInterfacesExposedOutsideTheOrganizationResponseDTO> | null;
+    systemsExposingInterfacesDefinedInOtherOrganizations: Array<APIMultipleConflictsResponseDTO> | null;
+    systemsSetAsParentSystemToSystemsInOtherOrganizations: Array<APIMultipleConflictsResponseDTO> | null;
+    dprInOtherOrganizationsWhereOrgIsDataProcessor: Array<APISimpleConflictResponseDTO> | null;
+    dprInOtherOrganizationsWhereOrgIsSubDataProcessor: Array<APISimpleConflictResponseDTO> | null;
+    contractsInOtherOrganizationsWhereOrgIsSupplier: Array<APISimpleConflictResponseDTO> | null;
+    systemsInOtherOrganizationsWhereOrgIsRightsHolder: Array<APISimpleConflictResponseDTO> | null;
+    systemsWhereOrgIsArchiveSupplier: Array<APISimpleConflictResponseDTO> | null;
 }
 

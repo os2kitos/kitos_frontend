@@ -1,6 +1,12 @@
 @if (associatedContractsEnabled$ | async) {
   <app-card>
-    <app-card-header title="Tilknyttede kontrakter" helpTextKey="it-system.usage.contracts" i18n-title></app-card-header>
+    <app-card-header
+      title="Tilknyttede kontrakter"
+      helpTextKey="it-system.usage.contracts"
+      [recommended]="(associatedContractsRecommended$ | async) === true"
+      [recommendedFilled]="(anyContracts$ | async) === true"
+      i18n-title
+    ></app-card-header>
     @if (isLoading$ | async) {
       <app-loading></app-loading>
     }
@@ -101,6 +107,7 @@
             formName="mainContract"
             [formGroup]="contractSelectionForm"
             [data]="availableContractsForSelection$ | async"
+            [recommended]="(contractToDetermineIsActiveRecommended$ | async) === true"
             (valueChange)="patchMainContract($event)"
           ></app-dropdown>
           @if (mainContract$ | async) {

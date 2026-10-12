@@ -1,5 +1,6 @@
 import { createEntityAdapter } from '@ngrx/entity';
 import { createFeature, createReducer, on } from '@ngrx/store';
+import { cloneDeep } from 'lodash';
 import { UIModuleConfig } from 'src/app/shared/models/ui-config/ui-module-config.model';
 import { UIModuleCustomization } from 'src/app/shared/models/ui-config/ui-module-customization.model';
 import { UIModuleConfigActions } from './actions';
@@ -19,6 +20,7 @@ export const uiModuleConfigFeature = createFeature({
     UIModuleConfigInitialState,
     on(
       UIModuleConfigActions.getUIModuleConfigSuccess,
+      UIModuleConfigActions.putUIModuleCustomizationSuccess,
       (state, { uiModuleConfig: uiModuleConfigBase }): UIModuleConfigState => {
         const cacheTime = new Date().getTime();
         const uiModuleConfig: UIModuleConfig = {
@@ -32,21 +34,19 @@ export const uiModuleConfigFeature = createFeature({
       }
     ),
     on(
-      UIModuleConfigActions.putUIModuleCustomizationSuccess,
-      (state, { uiModuleConfig: uiModuleConfigBase }): UIModuleConfigState => {
-        const uiModuleConfig: UIModuleConfig = {
-          ...uiModuleConfigBase,
-          cacheTime: undefined,
-        };
-        return {
-          ...state,
-          uiModuleConfigs: updateUIModuleConfigs(state, uiModuleConfig),
-        };
-      }
+      UIModuleConfigActions.putUIModuleCustomizationError,
+      UIModuleConfigActions.getUIModuleConfigError,
+      (state): UIModuleConfigState => ({
+        ...state,
+        // Rebind customization controls to persisted values after a failed save.
+        // The controls keep their clicked value internally, and the template tracks nodes by identity.
+        uiModuleConfigs: cloneDeep(state.uiModuleConfigs),
+      }),
     ),
     on(
       UIModuleConfigActions.getUIModuleConfig,
       UIModuleConfigActions.putUIModuleCustomization,
+      UIModuleConfigActions.putUIModuleCustomizations,
       (state): UIModuleConfigState => {
         return {
           ...state,

@@ -113,7 +113,7 @@ export class OrganizationSuppliersEffects {
     );
   });
 
-  private adaptShallowOrganizations(source: any[]): (ShallowOrganization | undefined)[] {
+  private adaptShallowOrganizations(source: ShallowOrganization[]): (ShallowOrganization | undefined)[] {
     return source.map((s) => adaptShallowOrganization(s));
   }
 }

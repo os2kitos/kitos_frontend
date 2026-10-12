@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { getDetailsPageLink } from '../../helpers/link.helpers';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
@@ -10,7 +10,7 @@ import { LinkFontSizes } from '../../models/sizes/link-font-sizes.model';
   styleUrls: ['./details-page-link.component.scss'],
   imports: [RouterLink],
 })
-export class DetailsPageLinkComponent implements OnInit {
+export class DetailsPageLinkComponent implements OnChanges {
   public detailsPageRouterPath: string | null = null;
 
   @Input() public itemPath?: string;
@@ -20,10 +20,8 @@ export class DetailsPageLinkComponent implements OnInit {
   @Input() public disableRedirect = false;
   @Input() public itemPathIncludesSubmodule = false;
 
-  public ngOnInit(): void {
-    const path = getDetailsPageLink(this.itemPath, this.itemType, this.subpagePath, this.itemPathIncludesSubmodule);
-    if (path) {
-      this.detailsPageRouterPath = path;
-    }
+  public ngOnChanges(): void {
+    this.detailsPageRouterPath =
+      getDetailsPageLink(this.itemPath, this.itemType, this.subpagePath, this.itemPathIncludesSubmodule) ?? null;
   }
 }

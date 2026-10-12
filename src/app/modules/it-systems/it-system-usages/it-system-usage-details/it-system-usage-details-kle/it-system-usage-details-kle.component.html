@@ -3,6 +3,8 @@
     <app-card-header
       title="Nedarvede opgaver (Data fra IT Systemkataloget)"
       helpTextKey="it-system.usage.kle"
+      [recommended]="(inheritedKleRecommended$ | async) === true"
+      [recommendedFilled]="(anyRelevantInheritedKle$ | async) === true"
       i18n-title
     ></app-card-header>
     <app-it-system-kle-overview
@@ -18,6 +20,8 @@
     <app-card-header
       title="Lokalt tilknyttede opgaver"
       helpTextKey="it-system.usage.kle.local"
+      [recommended]="(localKleRecommended$ | async) === true"
+      [recommendedFilled]="(anyLocalKleUuids$ | async) === true"
       i18n-title
     ></app-card-header>
     <app-standard-vertical-content-grid>

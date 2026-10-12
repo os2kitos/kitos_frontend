@@ -9,7 +9,12 @@
         text="Ibrugtagningsdato"
         i18n-text
       ></app-datepicker>
-      <app-datepicker [formGroup]="archiveForm" formName="archivingDate" text="Udfasningsdato" i18n-text></app-datepicker>
+      <app-datepicker
+        [formGroup]="archiveForm"
+        formName="archivingDate"
+        text="Udfasningsdato"
+        i18n-text
+      ></app-datepicker>
       <app-textbox
         [formGroup]="archiveForm"
         formName="referenceName"
@@ -26,7 +31,6 @@
       <app-textbox i18n-text text="Arkiveringsnavn" [formGroup]="archiveForm" formName="legacyName"></app-textbox>
       <app-textbox i18n-text text="Systemnavn (lokalt)" [formGroup]="archiveForm" formName="localName"></app-textbox>
       <app-textbox i18n-text text="Systemnavn ID (lokalt)" [formGroup]="archiveForm" formName="localId"></app-textbox>
-      <app-textbox i18n-text text="Organisation" [formGroup]="archiveForm" formName="organization"></app-textbox>
       <app-textbox
         i18n-text
         text="Nuværende systemnavn"

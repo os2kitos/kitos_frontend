@@ -62,8 +62,8 @@ import { NotificationsTableComponentStore } from './notifications-table.componen
     EmptyStateComponent,
     CollectionExtensionButtonComponent,
     LoadingComponent,
-    AsyncPipe
-],
+    AsyncPipe,
+  ],
 })
 export class NotificationsTableComponent extends BaseComponent implements OnInit {
   @Input() entityUuid!: string;
@@ -122,7 +122,10 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
             ownerResourceType: this.ownerResourceType,
             notificationUuid: notification.uuid,
             ownerResourceUuid: this.entityUuid,
-            onComplete: () => this.getNotifications(),
+            onComplete: () => {
+              this.store.dispatch(UserNotificationActions.notificationChanged(this.ownerResourceType));
+              this.getNotifications();
+            },
           });
         } else {
           this.notificationService.showError($localize`Fejl: kan ikke deaktivere en advis uden uuid.`);
@@ -141,7 +144,10 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
             ownerResourceType: this.ownerResourceType,
             notificationUuid: notification.uuid,
             ownerResourceUuid: this.entityUuid,
-            onComplete: () => this.getNotifications(),
+            onComplete: () => {
+              this.store.dispatch(UserNotificationActions.notificationChanged(this.ownerResourceType));
+              this.getNotifications();
+            },
           });
         } else {
           this.notificationService.showError($localize`Fejl: kan ikke slette en advis uden uuid.`);
@@ -191,7 +197,7 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
     roleRecipients: APIRoleRecipientResponseDTO[] | undefined,
   ) {
     const emailRecipientEmails = emailRecipients?.map((recipient) => recipient.email);
-    const roleRecipientNames = roleRecipients?.map((recipient) => recipient.role?.name);
+    const roleRecipientNames = roleRecipients?.map((recipient) => recipient.role?.name) ?? [];
     return emailRecipientEmails?.concat(roleRecipientNames).join(', ');
   }
 

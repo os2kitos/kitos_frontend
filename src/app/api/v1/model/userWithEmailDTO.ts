@@ -12,8 +12,8 @@
 
 
 export interface APIUserWithEmailDTO { 
-    id?: number;
-    name?: string | null;
+    id: number;
+    name: string | null;
     email?: string | null;
 }
 

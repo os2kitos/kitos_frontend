@@ -1,5 +1,7 @@
 <app-card>
-  <app-card-header title="Kontraktroller" helpTextKey="it-contract.edit.roles" i18n-title> </app-card-header>
+  <app-card-header
+    [recommended]="(recommendedBadge$ | async)?.visible ?? false"
+    [recommendedFilled]="(recommendedBadge$ | async)?.filled ?? false" title="Kontraktroller" helpTextKey="it-contract.edit.roles" i18n-title> </app-card-header>
   <app-role-table
     [entityUuid$]="contractUuid$"
     entityType="it-contract"

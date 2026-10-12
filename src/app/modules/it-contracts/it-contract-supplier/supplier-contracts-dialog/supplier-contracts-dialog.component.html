@@ -1,0 +1,25 @@
+<app-scrollbar-dialog title="Udslagsgivende kontrakter" [closable]="true" overflow="none" i18n-title>
+  <app-native-table>
+    <tbody>     
+        <th>{{ supplierName }}</th>
+      @for (contract of contracts; track contract) {
+        <tr>
+          <td>
+            <app-content-space-between>
+              <app-paragraph [bold]="true">
+                {{ contract.value }}
+              </app-paragraph>
+                <app-icon-button
+                  (buttonClick)="onLinkClick(contract.id)"
+                  ><app-arrow-right-icon></app-arrow-right-icon
+            ></app-icon-button>
+            </app-content-space-between>
+          </td>
+        </tr>
+      }
+      @empty {
+      <app-paragraph i18n>Ingen kontrakter fundet</app-paragraph>
+    }
+    </tbody>
+  </app-native-table>
+</app-scrollbar-dialog>

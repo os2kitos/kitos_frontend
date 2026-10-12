@@ -1,3 +1,4 @@
+import { RegistrationRecommendedBadgesService } from 'src/app/shared/services/registration-recommended-badges.service';
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
@@ -45,6 +46,8 @@ import { CollectionExtensionButtonComponent } from '../../../../shared/component
 ],
 })
 export class ItContractDprComponent extends BaseComponent {
+  public readonly recommendedBadge$ = this.recommendedBadgesService.contract.dataProcessing$;
+
   public readonly dataProcessingRegistrations$ = this.store
     .select(selectItContractDataProcessingRegistrations)
     .pipe(filterNullish());
@@ -55,6 +58,7 @@ export class ItContractDprComponent extends BaseComponent {
     private readonly store: Store,
     private readonly dialog: MatDialog,
     private readonly componentStore: ItContractDataProcessingRegistrationsComponentStore,
+    private readonly recommendedBadgesService: RegistrationRecommendedBadgesService,
   ) {
     super();
   }

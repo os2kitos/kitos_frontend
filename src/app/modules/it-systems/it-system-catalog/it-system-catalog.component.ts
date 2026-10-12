@@ -1,4 +1,4 @@
-import { AsyncPipe } from '@angular/common';
+﻿import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
@@ -40,7 +40,7 @@ import {
   selectSystemGridState,
 } from 'src/app/store/it-system/selectors';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
-import { selectITSystemUsageEnableUsageArchive } from 'src/app/store/organization/ui-module-customization/selectors';
+import { selectITSystemUsageEnableAndRecommendedUsageArchive } from 'src/app/store/organization/ui-module-customization/selectors';
 import { ExportMenuButtonComponent } from '../../../shared/components/buttons/export-menu-button/export-menu-button.component';
 import { CreateEntityButtonComponent } from '../../../shared/components/entity-creation/create-entity-button/create-entity-button.component';
 import { GridOptionsButtonComponent } from '../../../shared/components/grid-options-button/grid-options-button.component';
@@ -48,6 +48,7 @@ import { GridComponent } from '../../../shared/components/grid/grid.component';
 import { HideShowButtonComponent } from '../../../shared/components/grid/hide-show-button/hide-show-button.component';
 import { OverviewHeaderComponent } from '../../../shared/components/overview-header/overview-header.component';
 import { ITSystemCatalogComponentStore } from './it-system-catalog.component-store';
+import { mapUIConfigStatusToEnabled } from 'src/app/shared/helpers/observable-helpers';
 
 @Component({
   templateUrl: './it-system-catalog.component.html',
@@ -74,7 +75,7 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
   public readonly isCreatingUsage$ = this.store.select(selectItSystemUsageIsCreating);
   public readonly organizationUuid$ = this.store.select(selectOrganizationUuid);
   public readonly systemUsageUuid$ = this.componentStore.systemUsageUuid$;
-  public readonly enableUsageArchive$ = this.store.select(selectITSystemUsageEnableUsageArchive);
+  public readonly enableUsageArchive$ = this.store.select(selectITSystemUsageEnableAndRecommendedUsageArchive).pipe(mapUIConfigStatusToEnabled());
 
   private readonly systemSectionName = CATALOG_SECTION_NAME;
   public readonly defaultGridColumns: GridColumn[] = [

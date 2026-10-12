@@ -118,7 +118,7 @@ export class BaseOverviewComponent extends BaseComponent {
     }
   }
 
-  private cellIsClickableStyleOrEmpty(event: CellClickEvent) {
+  protected cellIsClickableStyleOrEmpty(event: CellClickEvent) {
     return this.cellIsClickableStyle(event) || !this.getFieldData(event);
   }
 

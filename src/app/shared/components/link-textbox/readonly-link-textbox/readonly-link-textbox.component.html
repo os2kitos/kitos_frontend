@@ -1,9 +1,13 @@
-<mat-form-field class="{{ size }}" (click)="onIconClick()">
-  <mat-label>{{ title }}</mat-label>
-  <input matInput type="text" readonly [disabled]="isDisabled" data-cy="empty-link-textbox-input" />
-  @if (!isDisabled) {
-    <app-icon-button matSuffix data-cy="empty-link-textbox"
-      ><app-pencil-icon></app-pencil-icon>
-    </app-icon-button>
-  }
-</mat-form-field>
+ <div class="container">
+  <mat-form-field class="{{ size }}" (click)="onIconClick()">
+    <mat-label>{{ title }}
+      <app-recommended-badge [visible]="recommended" [filled]="recommendedFilled ?? false"></app-recommended-badge>
+    </mat-label>
+    <input matInput type="text" readonly [disabled]="isDisabled" data-cy="empty-link-textbox-input" />
+    @if (!isDisabled) {
+      <app-icon-button matSuffix data-cy="empty-link-textbox"
+        ><app-pencil-icon></app-pencil-icon>
+      </app-icon-button>
+    }
+  </mat-form-field>
+ </div>

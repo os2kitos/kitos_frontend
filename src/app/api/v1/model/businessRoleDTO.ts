@@ -12,8 +12,8 @@
 
 
 export interface APIBusinessRoleDTO { 
-    id?: number;
-    name?: string | null;
+    id: number;
+    name: string | null;
     expired?: boolean;
     hasWriteAccess?: boolean;
     note?: string | null;

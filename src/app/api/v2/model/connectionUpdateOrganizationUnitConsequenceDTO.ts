@@ -14,8 +14,8 @@ import { APIConnectionUpdateOrganizationUnitChangeType } from './connectionUpdat
 
 export interface APIConnectionUpdateOrganizationUnitConsequenceDTO { 
     uuid?: string;
-    name?: string | null;
+    name: string | null;
     category?: APIConnectionUpdateOrganizationUnitChangeType;
-    description?: string | null;
+    description: string | null;
 }
 

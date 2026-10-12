@@ -17,6 +17,6 @@ export interface APIContractTerminationDataResponseDTO {
      * The date at which the contract was terminated
      */
     terminatedAt?: string | null;
-    terms?: APIContractTerminationTermsResponseDTO;
+    terms: APIContractTerminationTermsResponseDTO;
 }
 

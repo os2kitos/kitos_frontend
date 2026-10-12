@@ -8,12 +8,11 @@ import { BehaviorSubject, first } from 'rxjs';
 import { APIOrganizationCreateRequestDTO } from 'src/app/api/v2';
 import { CheckboxComponent } from 'src/app/shared/components/checkbox/checkbox.component';
 import { TooltipComponent } from 'src/app/shared/components/tooltip/tooltip.component';
-import { mapOrgTypeToDtoType } from 'src/app/shared/helpers/organization-type.helpers';
+import { enableISMSResponsibleField, mapOrgTypeToDtoType } from 'src/app/shared/helpers/organization-type.helpers';
 import { ShallowOptionType } from 'src/app/shared/models/options/option-type.model';
 import {
   defaultOrganizationType,
   OrganizationType,
-  OrganizationTypeEnum,
   organizationTypeOptions,
 } from 'src/app/shared/models/organization/organization-odata.model';
 import { cvrValidator } from 'src/app/shared/validators/cvr.validator';
@@ -53,8 +52,8 @@ export class CreateOrganizationDialogComponent extends GlobalAdminOrganizationsD
 
   public readonly organizationTypeOptions = organizationTypeOptions;
   public formGroup = new FormGroup({
-    name: new FormControl<string | undefined>(undefined, Validators.required),
-    cvr: new FormControl<string | undefined>(undefined, cvrValidator()),
+    name: new FormControl<string | undefined>(undefined, [Validators.required, Validators.maxLength(100)]),
+    cvr: new FormControl<string | undefined>(undefined, [cvrValidator(), Validators.maxLength(10)]),
     organizationType: new FormControl<OrganizationType>(defaultOrganizationType, Validators.required),
     foreignCountryCode: new FormControl<ShallowOptionType | undefined>(undefined),
     isSupplier: new FormControl<boolean | undefined>(undefined),
@@ -85,7 +84,7 @@ export class CreateOrganizationDialogComponent extends GlobalAdminOrganizationsD
   }
 
   public enableISMSResponsibleField() {
-    return this.formGroup.controls['organizationType'].value?.value === OrganizationTypeEnum.Company;
+    return enableISMSResponsibleField(this.formGroup.controls['organizationType'].value?.value);
   }
 
   public toggleIsSupplierField() {

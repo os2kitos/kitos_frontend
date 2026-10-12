@@ -27,6 +27,9 @@ export class GlobalOptionTypeGridComponent implements OnChanges {
 
   @Input() showWriteAccess!: boolean;
   @Input() showDescription!: boolean;
+  @Input() showOrderNumberColumn: boolean = false;
+  @Input() orderNumberColumnHeader: string = $localize`Orden`;
+  @Input() orderNumberColumnHelpText?: string;
 
   private readonly gridColumns: GridColumn[] = [
     {
@@ -44,6 +47,13 @@ export class GlobalOptionTypeGridComponent implements OnChanges {
       noFilter: true,
       width: 100,
       style: 'boolean',
+    },
+    {
+      field: 'priority',
+      title: '',
+      hidden: false,
+      noFilter: true,
+      width: 120,
     },
     {
       field: 'name',
@@ -95,6 +105,13 @@ export class GlobalOptionTypeGridComponent implements OnChanges {
           return { ...column, hidden: !this.showWriteAccess };
         case 'description':
           return { ...column, hidden: !this.showDescription };
+        case 'priority':
+          return {
+            ...column,
+            title: this.orderNumberColumnHeader,
+            helpText: this.orderNumberColumnHelpText,
+            hidden: !this.showOrderNumberColumn,
+          };
         default:
           return column;
       }

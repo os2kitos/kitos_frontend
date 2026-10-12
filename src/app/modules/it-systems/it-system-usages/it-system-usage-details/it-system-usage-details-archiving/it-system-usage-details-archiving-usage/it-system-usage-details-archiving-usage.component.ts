@@ -1,4 +1,4 @@
-import { AsyncPipe } from '@angular/common';
+﻿import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -15,6 +15,7 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { RadioButtonOption } from 'src/app/shared/components/radio-buttons/radio-buttons.component';
 import { ARCHIVE_TEXT } from 'src/app/shared/constants/constants';
+import { mapUIConfigStatusToEnabled, mapUIConfigStatusToRecommended } from 'src/app/shared/helpers/observable-helpers';
 import {
   ArchiveDutyChoice,
   archiveDutyChoiceOptions,
@@ -33,17 +34,18 @@ import {
 } from 'src/app/store/it-system-usage/selectors';
 import { selectItSystemRecomendedArchiveDutyComment } from 'src/app/store/it-system/selectors';
 import {
-  selectITSystemUsageEnableActive,
-  selectITSystemUsageEnableArchiveFrequency,
-  selectITSystemUsageEnableArchiveLocation,
-  selectITSystemUsageEnableArchiveSupplier,
-  selectITSystemUsageEnableArchiveTestLocation,
-  selectITSystemUsageEnableArchiveType,
-  selectITSystemUsageEnableCatalogArchiveDuty,
-  selectITSystemUsageEnableCatalogArchiveDutyComment,
-  selectITSystemUsageEnableDocumentBearing,
-  selectITSystemUsageEnableJournalPeriods,
-  selectITSystemUsageEnableNotes,
+  selectITSystemUsageEnableAndRecommendedActive,
+  selectITSystemUsageEnableAndRecommendedArchiveDuty,
+  selectITSystemUsageEnableAndRecommendedArchiveFrequency,
+  selectITSystemUsageEnableAndRecommendedArchiveLocation,
+  selectITSystemUsageEnableAndRecommendedArchiveSupplier,
+  selectITSystemUsageEnableAndRecommendedArchiveTestLocation,
+  selectITSystemUsageEnableAndRecommendedArchiveType,
+  selectITSystemUsageEnableAndRecommendedCatalogArchiveDuty,
+  selectITSystemUsageEnableAndRecommendedCatalogArchiveDutyComment,
+  selectITSystemUsageEnableAndRecommendedDocumentBearing,
+  selectITSystemUsageEnableAndRecommendedJournalPeriods,
+  selectITSystemUsageEnableAndRecommendedNotes,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
@@ -106,7 +108,7 @@ import { ItSystemUsageDetailsJournalPeriodWriteDialogComponent } from '../write-
   ],
 })
 export class ItSystemUsageDetailsArchivingUsageComponent extends BaseComponent implements OnInit {
-  private readonly journalFrequencyInputUpperLimit = 100;
+  public readonly journalFrequencyInputUpperLimit = 100;
 
   public readonly archiveForm = new FormGroup(
     {
@@ -157,19 +159,69 @@ export class ItSystemUsageDetailsArchivingUsageComponent extends BaseComponent i
 
   public readonly nationalArchivesText = ARCHIVE_TEXT;
 
-  public readonly archiveTypeEnabled$ = this.store.select(selectITSystemUsageEnableArchiveType);
-  public readonly archiveLocationEnabled$ = this.store.select(selectITSystemUsageEnableArchiveLocation);
-  public readonly archiveSupplierEnabled$ = this.store.select(selectITSystemUsageEnableArchiveSupplier);
-  public readonly archiveTestLocationEnabled$ = this.store.select(selectITSystemUsageEnableArchiveTestLocation);
-  public readonly archiveFrequencyEnabled$ = this.store.select(selectITSystemUsageEnableArchiveFrequency);
-  public readonly documentBearingEnabled$ = this.store.select(selectITSystemUsageEnableDocumentBearing);
-  public readonly activeEnabled$ = this.store.select(selectITSystemUsageEnableActive);
-  public readonly notesEnabled$ = this.store.select(selectITSystemUsageEnableNotes);
-  public readonly journalPeriodsEnabled$ = this.store.select(selectITSystemUsageEnableJournalPeriods);
+  public readonly archiveDutyRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedArchiveDuty)
+    .pipe(mapUIConfigStatusToRecommended());
+  public readonly archiveTypeEnabled$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedArchiveType)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly archiveTypeRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedArchiveType)
+    .pipe(mapUIConfigStatusToRecommended());
+  public readonly archiveLocationEnabled$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedArchiveLocation)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly archiveLocationRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedArchiveLocation)
+    .pipe(mapUIConfigStatusToRecommended());
+  public readonly archiveSupplierEnabled$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedArchiveSupplier)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly archiveSupplierRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedArchiveSupplier)
+    .pipe(mapUIConfigStatusToRecommended());
+  public readonly archiveTestLocationEnabled$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedArchiveTestLocation)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly archiveTestLocationRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedArchiveTestLocation)
+    .pipe(mapUIConfigStatusToRecommended());
+  public readonly archiveFrequencyEnabled$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedArchiveFrequency)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly archiveFrequencyRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedArchiveFrequency)
+    .pipe(mapUIConfigStatusToRecommended());
+  public readonly documentBearingEnabled$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedDocumentBearing)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly documentBearingRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedDocumentBearing)
+    .pipe(mapUIConfigStatusToRecommended());
+  public readonly activeEnabled$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedActive)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly activeRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedActive)
+    .pipe(mapUIConfigStatusToRecommended());
+  public readonly notesEnabled$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedNotes)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly notesRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedNotes)
+    .pipe(mapUIConfigStatusToRecommended());
+  public readonly journalPeriodsEnabled$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedJournalPeriods)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly journalPeriodsRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedJournalPeriods)
+    .pipe(mapUIConfigStatusToRecommended());
   public readonly itSystemCatalogItemUuid$ = this.store.select(selectItSystemUsageSystemContextUuid);
-  public readonly catalogArchiveDutyEnabled$ = this.store.select(selectITSystemUsageEnableCatalogArchiveDuty);
+  public readonly catalogArchiveDutyEnabled$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedCatalogArchiveDuty)
+    .pipe(mapUIConfigStatusToEnabled());
   public readonly catalogArchiveDutyCommentEnabled$ = this.store.select(
-    selectITSystemUsageEnableCatalogArchiveDutyComment,
+    selectITSystemUsageEnableAndRecommendedCatalogArchiveDutyComment,
   );
 
   constructor(

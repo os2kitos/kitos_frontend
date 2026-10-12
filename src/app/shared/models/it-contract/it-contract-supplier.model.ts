@@ -1,5 +1,9 @@
 import { ITContractSupplierType, mapITContractSupplierType } from './it-contract-supplier-type';
 
+export interface SupplierContract {
+  id: string;
+  value: string;
+}
 export interface ITContractSupplier {
   id: number;
   OrganizationId: number;
@@ -9,13 +13,13 @@ export interface ITContractSupplier {
   SupplierType: ITContractSupplierType | undefined;
   SupplierUuid: string;
   SupplierName: string;
-  SupplierCvr: string;
+  SupplierCvr: string | null;
   IsSupplierDisabled: boolean;
   HighestCriticalityUuid: string | null;
   HighestCriticalityName: string | null;
   HighestCriticalityRank: number | null;
   ContractsAtHighestCriticalityCsv: string | null;
-  ContractsAtHighestCriticality: { id: string; value: string }[];
+  ContractsAtHighestCriticality: SupplierContract[];
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -31,7 +35,7 @@ export const adaptITContractSupplier = (value: any): ITContractSupplier | undefi
     SupplierType: mapITContractSupplierType(value.SupplierType),
     SupplierUuid: value.SupplierUuid,
     SupplierName: value.SupplierName,
-    SupplierCvr: value.SupplierCvr,
+    SupplierCvr: value.SupplierCvr || value.SupplierForeignCvr || null,
     IsSupplierDisabled: value.IsSupplierDisabled,
     HighestCriticalityUuid: value.HighestCriticalityUuid,
     HighestCriticalityName: value.HighestCriticalityName,

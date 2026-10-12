@@ -49,7 +49,10 @@ export class BaseFormComponent<T> extends BaseComponent implements OnInit {
 
       const valid = this.formGroup?.controls[this.formName]?.valid ?? true;
       this.validatedValueChange.emit({ value: this.value, text: this.text, valid });
-      this.valueChange.emit(this.value);
+      // Length validators also protect fields that save directly through valueChange.
+      if (!this.formGroup?.controls[this.formName]?.hasError('maxlength')) {
+        this.valueChange.emit(this.value);
+      }
     }
   }
 

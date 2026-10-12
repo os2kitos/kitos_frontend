@@ -51,8 +51,8 @@ export class OrganizationMasterDataComponentStore extends ComponentStore<State> 
           tapResponse({
             next: (responseDtos) => {
               const organizationUsers = responseDtos
-                .map((userDto: any) => adaptOrganizationUserV2(userDto))
-                .filter((u: any) => u !== undefined);
+                .map((userDto) => adaptOrganizationUserV2(userDto))
+                .filter((u) => u !== undefined);
               this.setOrganizationUsers(organizationUsers);
             },
             error: (e) => console.error(e),

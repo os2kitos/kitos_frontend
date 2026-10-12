@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule, ValidatorFn } from '@angular/forms';
 import { debounceTime } from 'rxjs';
+import { setControlError } from 'src/app/shared/helpers/form.helpers';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { DEFAULT_INPUT_DEBOUNCE_TIME } from 'src/app/shared/constants/constants';
 import { isExternalReferenceUrlEmptyOrValid } from 'src/app/shared/helpers/link.helpers';
@@ -114,22 +115,22 @@ export class ExternalReferenceDialogComponent extends BaseComponent implements O
       const title = this.externalReferenceForm.controls.title;
 
       const controlsWithErrors = Array<AbstractControl>();
-      const missingError = { missing: true };
+
       if (!title.value) {
         controlsWithErrors.push(title);
       } else {
-        title.setErrors(null);
+        setControlError(title, 'missing', false);
       }
       if (!url.value && !docId.value) {
         controlsWithErrors.push(url);
         controlsWithErrors.push(docId);
       } else {
-        url.setErrors(null);
-        docId.setErrors(null);
+        setControlError(url, 'missing', false);
+        setControlError(docId, 'missing', false);
       }
 
       if (controlsWithErrors.length > 0) {
-        controlsWithErrors.forEach((control) => control.setErrors(missingError));
+        controlsWithErrors.forEach((control) => setControlError(control, 'missing', true));
         return { incomplete: true };
       }
 

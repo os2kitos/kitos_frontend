@@ -4,6 +4,8 @@
       title="IT Kontrakten gælder flg. IT Systemer"
       i18n-title
       helpTextKey="it-contract.edit.systems"
+      [recommended]="(systemUsagesRecommended$ | async) === true"
+      [recommendedFilled]="(anySystemUsages$ | async) === true"
     ></app-card-header>
     <app-standard-vertical-content-grid>
       @if (anySystemUsages$ | async) {
@@ -58,6 +60,8 @@
       title="IT Kontrakten gælder flg. relationer"
       i18n-title
       helpTextKey="it-contract.edit.system-relations"
+      [recommended]="(systemRelationsRecommended$ | async) === true"
+      [recommendedFilled]="(anyRelations$ | async) === true"
     ></app-card-header>
     @if ((relationsIsLoading$ | async) === false) {
       <app-standard-vertical-content-grid>
@@ -133,6 +137,8 @@
             title="IT Kontrakten omfatter flg. aftaleelementer"
             i18n-title
             helpTextKey="it-contract.edit.systems-elemets"
+            [recommended]="(agreementElementsRecommended$ | async) === true"
+            [recommendedFilled]="(anyAgreementElements$ | async) === true"
           ></app-card-header>
           <app-standard-vertical-content-grid>
             @if (anyAgreementElements$ | async) {

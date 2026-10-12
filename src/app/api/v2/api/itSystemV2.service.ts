@@ -141,12 +141,14 @@ export interface PatchSingleItSystemV2PatchItSystemRequestParams {
 export interface PatchSingleItSystemV2PatchItSystemAsRightsHolderRequestParams {
     /** Specific IT-System UUID */
     uuid: string;
+    /** IT-System data to update */
     aPIRightsHolderUpdateSystemPropertiesRequestDTO?: APIRightsHolderUpdateSystemPropertiesRequestDTO;
 }
 
 export interface PostSingleItSystemV2PostExternalReferenceRequestParams {
     /**  */
     systemUuid: string;
+    /**  */
     aPIExternalReferenceDataWriteRequestDTO?: APIExternalReferenceDataWriteRequestDTO;
 }
 
@@ -160,16 +162,18 @@ export interface PostSingleItSystemV2PostItSystemAsRightsHolderRequestParams {
 }
 
 export interface PutSingleItSystemV2PutExternalReferenceRequestParams {
-    /**  */
+    /** UUID of the system */
     systemUuid: string;
-    /**  */
+    /** UUID of the external reference */
     externalReferenceUuid: string;
+    /** External reference data */
     aPIExternalReferenceDataWriteRequestDTO?: APIExternalReferenceDataWriteRequestDTO;
 }
 
 export interface PutSingleItSystemV2PutItSystemAsRightsHolderRequestParams {
     /** Specific IT-System UUID */
     uuid: string;
+    /** IT-System data to update */
     aPIRightsHolderFullItSystemRequestDTO?: APIRightsHolderFullItSystemRequestDTO;
 }
 

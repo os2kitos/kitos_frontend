@@ -32,13 +32,13 @@ export interface APIItContractResponseDTO {
      * Name of IT-Contract
      */
     name: string | null;
-    organizationContext: APIShallowOrganizationResponseDTO;
+    organizationContext?: APIShallowOrganizationResponseDTO;
     /**
      * UTC timestamp of latest modification
      */
     lastModified: string;
-    lastModifiedBy: APIIdentityNamePairResponseDTO;
-    createdBy: APIIdentityNamePairResponseDTO;
+    lastModifiedBy?: APIIdentityNamePairResponseDTO;
+    createdBy?: APIIdentityNamePairResponseDTO;
     parentContract?: APIIdentityNamePairResponseDTO;
     general: APIContractGeneralDataResponseDTO;
     procurement: APIContractProcurementDataResponseDTO;

@@ -1,4 +1,6 @@
 <app-accordion
+  [recommended]="(recommended$ | async) === true"
+  [recommendedFilled]="((dataSensitivityLevels$ | async)?.length ?? 0) > 0"
   title="Hvilke typer data indeholder systemet?"
   [isExpanded]="(isExpanded$ | async) ?? false"
   (expandedChanged)="onExpandedChanged($event)"

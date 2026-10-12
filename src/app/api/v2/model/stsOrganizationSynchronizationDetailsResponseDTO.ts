@@ -13,7 +13,7 @@ import { APIStsOrganizationAccessStatusResponseDTO } from './stsOrganizationAcce
 
 
 export interface APIStsOrganizationSynchronizationDetailsResponseDTO { 
-    accessStatus?: APIStsOrganizationAccessStatusResponseDTO;
+    accessStatus: APIStsOrganizationAccessStatusResponseDTO;
     connected?: boolean;
     subscribesToUpdates?: boolean;
     dateOfLatestCheckBySubscription?: string | null;

@@ -78,9 +78,14 @@ describe('it-system-usage frontpage', () => {
       .within(() => {
         verifyKle('83.01.02', 'IT-udstyr, anskaffelse');
       });
+
+    cy.reload(true);
+
+    cy.contains('Systeminformation');
+    cy.input('Systemnavn').should('have.value', 'kaldenavn');
   });
 
-  it.only('can edit hosted at status', () => {
+  it('can edit hosted at status', () => {
     cy.intercept('PATCH', '/api/v2/it-system-usages/*', {
       fixture: './it-system-usage/it-system-usage-updated.json',
     }).as('patch');
@@ -96,18 +101,6 @@ describe('it-system-usage frontpage', () => {
     cy.dropdown('IT-systemet driftes').should('have.text', newHostedAt);
   });
 
-  it('can refresh page on IT system usage details', () => {
-    cy.contains('System 3').click();
-
-    cy.contains('Systeminformation');
-    cy.input('Systemnavn').should('have.value', 'kaldenavn');
-
-    cy.reload(true);
-
-    cy.contains('Systeminformation');
-    cy.input('Systemnavn').should('have.value', 'kaldenavn');
-  });
-
   it('redirects if missing read permission', () => {
     cy.intercept('/api/v2/it-system-usages/*/permissions', { read: false, modify: false, delete: false });
 
@@ -116,22 +109,32 @@ describe('it-system-usage frontpage', () => {
 
     cy.contains('Du har ikke læseadgang til dette IT System');
     cy.get('h3').should('have.text', 'IT Systemer i Fælles Kommune');
+  });
 
-    // Also works if IT System Usage returns forbidden
-    cy.intercept('/api/v2/it-system-usages/*', { statusCode: 403 });
+  it('returns to the overview if the usage request is forbidden', () => {
+    cy.intercept(
+      { method: 'GET', pathname: /^\/api\/v2\/it-system-usages\/[^/]+$/ },
+      { statusCode: 403 },
+    ).as('forbiddenUsage');
 
+    cy.get('h3').should('have.text', 'IT Systemer i Fælles Kommune');
     cy.contains('System 3').click();
 
-    cy.contains('Du har ikke læseadgang til dette IT System');
+    cy.wait('@forbiddenUsage').its('response.statusCode').should('eq', 403);
+    cy.contains('IT System findes ikke');
     cy.get('h3').should('have.text', 'IT Systemer i Fælles Kommune');
   });
 
   it('redirects if ressource is missing', () => {
-    cy.intercept('/api/v2/it-system-usages/*', { statusCode: 404 });
+    cy.intercept(
+      { method: 'GET', pathname: /^\/api\/v2\/it-system-usages\/[^/]+$/ },
+      { statusCode: 404 },
+    ).as('missingUsage');
 
     cy.get('h3').should('have.text', 'IT Systemer i Fælles Kommune');
     cy.contains('System 3').click();
 
+    cy.wait('@missingUsage').its('response.statusCode').should('eq', 404);
     cy.contains('IT System findes ikke');
     cy.get('h3').should('have.text', 'IT Systemer i Fælles Kommune');
   });
@@ -139,15 +142,19 @@ describe('it-system-usage frontpage', () => {
   it('can remove IT system usage', () => {
     cy.contains('System 3').click();
 
+    cy.intercept('DELETE', '/api/v2/it-system-usages/*', { statusCode: 200, body: {} }).as('deleteUsage');
+
     cy.contains('Fjern anvendelse').click();
 
     cy.get('app-dialog').within(() => {
       cy.contains('Fortryd');
-      cy.contains('Bekræft').click();
+      cy.get('app-dialog-actions').contains('Bekræft').click();
     });
 
-    cy.contains('IT Systemer i Fælles Kommune');
+    cy.wait('@deleteUsage');
+
     cy.contains('Systemanvendelsen blev slettet');
+    cy.contains('IT Systemer i Fælles Kommune');
   });
 
   it('hides and disables input for IT system usage when user does not have rights', () => {

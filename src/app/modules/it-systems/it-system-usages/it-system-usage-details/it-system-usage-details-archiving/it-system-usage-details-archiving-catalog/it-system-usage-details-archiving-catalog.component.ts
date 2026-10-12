@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { BaseComponent } from 'src/app/shared/base/base.component';
@@ -10,8 +10,8 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectItSystemUsageSystemContextUuid } from 'src/app/store/it-system-usage/selectors';
 import { selectItSystem } from 'src/app/store/it-system/selectors';
 import {
-  selectITSystemUsageEnableCatalogArchiveDuty,
-  selectITSystemUsageEnableCatalogArchiveDutyComment,
+  selectITSystemUsageEnableAndRecommendedCatalogArchiveDuty,
+  selectITSystemUsageEnableAndRecommendedCatalogArchiveDutyComment,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { CardComponent } from '../../../../../../shared/components/card/card.component';
 import { CardHeaderComponent } from '../../../../../../shared/components/card-header/card-header.component';
@@ -20,6 +20,7 @@ import { DetailsPageLinkComponent } from '../../../../../../shared/components/de
 import { FormGridComponent } from '../../../../../../shared/components/form-grid/form-grid.component';
 import { TextBoxComponent } from '../../../../../../shared/components/textbox/textbox.component';
 import { TextAreaComponent } from '../../../../../../shared/components/textarea/textarea.component';
+import { mapUIConfigStatusToEnabled } from 'src/app/shared/helpers/observable-helpers';
 
 @Component({
   selector: 'app-it-system-usage-details-archiving-catalog',
@@ -40,9 +41,9 @@ import { TextAreaComponent } from '../../../../../../shared/components/textarea/
 export class ItSystemUsageDetailsArchivingCatalogComponent extends BaseComponent implements OnInit {
   public readonly itSystemCatalogItemUuid$ = this.store.select(selectItSystemUsageSystemContextUuid);
   public itSystem$ = this.store.select(selectItSystem);
-  public readonly catalogArchiveDutyEnabled$ = this.store.select(selectITSystemUsageEnableCatalogArchiveDuty);
+  public readonly catalogArchiveDutyEnabled$ = this.store.select(selectITSystemUsageEnableAndRecommendedCatalogArchiveDuty).pipe(mapUIConfigStatusToEnabled());
   public readonly catalogArchiveDutyCommentEnabled$ = this.store.select(
-    selectITSystemUsageEnableCatalogArchiveDutyComment,
+    selectITSystemUsageEnableAndRecommendedCatalogArchiveDutyComment,
   );
 
   public readonly catalogForm = new FormGroup({

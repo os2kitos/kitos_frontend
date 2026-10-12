@@ -5,6 +5,7 @@ import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, combineLatestWith, first, map } from 'rxjs';
 import { APIIdentityNamePairResponseDTO, APIUpdateUserRequestDTO } from 'src/app/api/v2';
+import { setControlError } from 'src/app/shared/helpers/form.helpers';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ONLY_DIGITS_AND_WHITESPACE_REGEX } from 'src/app/shared/constants/regex-constants';
 import { removeWhitespace } from 'src/app/shared/helpers/string.helpers';
@@ -71,9 +72,9 @@ export class ProfileComponent extends BaseComponent implements OnInit {
   >(undefined);
 
   public editForm = new FormGroup({
-    firstName: new FormControl<string | undefined>(undefined, Validators.required),
-    lastName: new FormControl<string | undefined>(undefined, Validators.required),
-    email: new FormControl<string | undefined>(undefined, [Validators.required, Validators.email]),
+    firstName: new FormControl<string | undefined>(undefined, [Validators.required, Validators.maxLength(100)]),
+    lastName: new FormControl<string | undefined>(undefined, [Validators.required, Validators.maxLength(100)]),
+    email: new FormControl<string | undefined>(undefined, [Validators.maxLength(100), Validators.required, Validators.email]),
     phoneNumber: new FormControl<string | undefined>(undefined, notDirtyAndEmptyStringValidator()),
     defaultStartPreference: new FormControl<StartPreferenceChoice | undefined>(undefined),
     defaultOrganizationUnit: new FormControl<APIIdentityNamePairResponseDTO | undefined>(undefined),
@@ -215,10 +216,6 @@ export class ProfileComponent extends BaseComponent implements OnInit {
 
   private changeEmailValidityState(isInvalid: boolean) {
     this.alreadyExists$.next(isInvalid);
-    if (isInvalid) {
-      this.editForm.controls.email.setErrors({ invalid: true });
-    } else {
-      this.editForm.controls.email.setErrors(null);
-    }
+    setControlError(this.editForm.controls.email, 'invalid', isInvalid);
   }
 }

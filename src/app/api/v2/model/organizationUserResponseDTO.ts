@@ -36,7 +36,7 @@ export interface APIOrganizationUserResponseDTO {
     /**
      * User\'s phone number
      */
-    phoneNumber?: string | null;
+    phoneNumber: string | null;
     /**
      * Determines if the user credentials can be used to request a KITOS API token
      */

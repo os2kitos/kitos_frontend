@@ -35,6 +35,6 @@ export interface APIRoleOptionResponseDTO {
     /**
      * Description about this roles usage externally
      */
-    externallyAvailableDescription?: string | null;
+    externallyAvailableDescription: string | null;
 }
 

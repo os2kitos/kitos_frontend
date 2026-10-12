@@ -4,6 +4,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { first, map, Observable } from 'rxjs';
+import { setControlError } from 'src/app/shared/helpers/form.helpers';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { UserActions } from 'src/app/store/user-store/actions';
@@ -71,11 +72,7 @@ export class ResetPasswordComponent extends BaseComponent implements OnInit {
     );
 
     this.formGroup.valueChanges.subscribe((value) => {
-      if (value.password !== value.confirmPassword) {
-        this.formGroup.controls.confirmPassword.setErrors({ passwordMismatch: true });
-      } else {
-        this.formGroup.controls.confirmPassword.setErrors(null);
-      }
+      setControlError(this.formGroup.controls.confirmPassword, 'passwordMismatch', value.password !== value.confirmPassword);
     });
   }
 

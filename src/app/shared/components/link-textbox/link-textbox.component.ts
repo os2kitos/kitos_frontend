@@ -10,6 +10,7 @@ import { isEmptyOrUndefined } from '../../helpers/string.helpers';
 import { SimpleLink } from '../../models/SimpleLink.model';
 import { IconButtonComponent } from '../buttons/icon-button/icon-button.component';
 import { PencilIconComponent } from '../icons/pencil-icon.compnent';
+import { RecommendedBadgeComponent } from '../recommended-badge/recommended-badge.component';
 import { ReadonlyLinkTextboxComponent } from './readonly-link-textbox/readonly-link-textbox.component';
 
 @Component({
@@ -25,17 +26,21 @@ import { ReadonlyLinkTextboxComponent } from './readonly-link-textbox/readonly-l
     PencilIconComponent,
     ReadonlyLinkTextboxComponent,
     AsyncPipe,
+    RecommendedBadgeComponent,
   ],
 })
 export class LinkTextboxComponent extends BaseComponent {
-  @Input() public title!: string;
-  @Input() public simpleLink$!: Observable<SimpleLink | undefined>;
+  // Undefined preserves the badge state derived from this field.
+  @Input() recommendedFilled: boolean | undefined;
+  @Input() title!: string;
+  @Input() simpleLink$!: Observable<SimpleLink | undefined>;
   @Input() isDisabled = false;
-  @Input() public isLinkOnly = false;
-  @Input() public size: 'medium' | 'large' = 'large';
-  @Input() public placeholder: string | undefined = undefined;
-  @Output() public iconClick = new EventEmitter<void>();
-  @Output() public clearClick = new EventEmitter<void>();
+  @Input() isLinkOnly = false;
+  @Input() size: 'medium' | 'large' = 'large';
+  @Input() placeholder: string | undefined = undefined;
+  @Input() recommended: boolean = false;
+  @Output() iconClick = new EventEmitter<void>();
+  @Output() clearClick = new EventEmitter<void>();
 
   public onIconClick(): void {
     this.iconClick.emit();

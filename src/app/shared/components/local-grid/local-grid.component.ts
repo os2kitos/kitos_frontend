@@ -47,8 +47,10 @@ import { GridPaginatorComponent } from '../grid/grid-paginator/grid-paginator.co
 import { StringFilterComponent } from '../grid/string-filter/string-filter.component';
 import { ArrowDownIconComponent } from '../icons/arrow-down-icon.component';
 import { ArrowUpIconComponent } from '../icons/arrow-up-icon.component';
+import { HelpIconComponent } from '../icons/help.component';
 import { LoadingComponent } from '../loading/loading.component';
 import { ParagraphComponent } from '../paragraph/paragraph.component';
+import { TooltipComponent } from '../tooltip/tooltip.component';
 
 @Component({
   selector: 'app-local-grid',
@@ -65,6 +67,8 @@ import { ParagraphComponent } from '../paragraph/paragraph.component';
     ParagraphComponent,
     ArrowUpIconComponent,
     ArrowDownIconComponent,
+    TooltipComponent,
+    HelpIconComponent,
     FilterCellTemplateDirective,
     StringFilterComponent,
     DropdownFilterComponent,

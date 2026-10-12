@@ -1,11 +1,12 @@
-import { AsyncPipe } from '@angular/common';
+﻿import { AsyncPipe } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
 import { APIGDPRWriteRequestDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ISMS_RESPONSIBLE_DISABLED_MESSAGE } from 'src/app/shared/constants/constants';
+import { mapUIConfigStatusToEnabled, mapUIConfigStatusToRecommended } from 'src/app/shared/helpers/observable-helpers';
 import {
   IsDataProcessingAgreementRequired,
   isDataProcessingAgreementRequiredOptions,
@@ -18,9 +19,9 @@ import { NotificationService } from 'src/app/shared/services/notification.servic
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors';
 import {
-  selectITSystemUsageEnableGdprDocumentation,
-  selectITSystemUsageEnableGdprIsDataProcessingAgreementRequired,
-  selectITSystemUsageEnableGdprPurpose,
+  selectITSystemUsageEnableAndRecommendedGdprDocumentation,
+  selectITSystemUsageEnableAndRecommendedGdprIsDataProcessingAgreementRequired,
+  selectITSystemUsageEnableAndRecommendedGdprPurpose,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { CardHeaderComponent } from '../../../../../../shared/components/card-header/card-header.component';
 import { CardComponent } from '../../../../../../shared/components/card/card.component';
@@ -61,7 +62,7 @@ export class GeneralInfoSectionComponent extends BaseComponent implements OnInit
   );
   public readonly generalInformationForm = new FormGroup(
     {
-      purpose: new FormControl(''),
+      purpose: new FormControl('', Validators.maxLength(250)),
       isDataProcessingAgreementRequired: new FormControl<IsDataProcessingAgreementRequired | undefined>(undefined),
     },
     { updateOn: 'blur' },
@@ -69,11 +70,24 @@ export class GeneralInfoSectionComponent extends BaseComponent implements OnInit
   public disableDirectoryDocumentationControl = false;
   public isDataProcessingAgreementRequiredOptions = isDataProcessingAgreementRequiredOptions;
 
-  public readonly purposeEnabled$ = this.store.select(selectITSystemUsageEnableGdprPurpose);
-  public readonly documentationEnabled$ = this.store.select(selectITSystemUsageEnableGdprDocumentation);
-  public readonly isDataProcessingAgreementRequiredEnabled$ = this.store.select(
-    selectITSystemUsageEnableGdprIsDataProcessingAgreementRequired,
-  );
+  public readonly purposeEnabled$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedGdprPurpose)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly purposeRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedGdprPurpose)
+    .pipe(mapUIConfigStatusToRecommended());
+  public readonly documentationEnabled$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedGdprDocumentation)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly documentationRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedGdprDocumentation)
+    .pipe(mapUIConfigStatusToRecommended());
+  public readonly isDataProcessingAgreementRequiredEnabled$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedGdprIsDataProcessingAgreementRequired)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly isDataProcessingAgreementRequiredRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedGdprIsDataProcessingAgreementRequired)
+    .pipe(mapUIConfigStatusToRecommended());
 
   constructor(
     private readonly store: Store,

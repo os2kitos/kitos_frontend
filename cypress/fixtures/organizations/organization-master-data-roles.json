@@ -2,7 +2,7 @@
   "organizationUuid": "84ba418d-2831-4cc7-9fa7-2db1da811d26",
   "contactPerson": {
     "lastName": "test",
-    "phoneNumber": 22332233,
+    "phoneNumber": "22332233",
     "name": "test",
     "email": "local@kitos.dk",
     "id": 1

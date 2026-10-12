@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { combineLatestWith } from 'rxjs';
@@ -14,8 +14,8 @@ import {
   selectDataProcessingMainContract,
 } from 'src/app/store/data-processing/selectors';
 import {
-  selectDprEnableAssociatedContracts,
-  selectDprEnableMainContract,
+  selectDprEnableAndRecommendedAssociatedContracts,
+  selectDprEnableAndRecommendedMainContract,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { AsyncPipe } from '@angular/common';
 import { CardComponent } from '../../../../shared/components/card/card.component';
@@ -27,6 +27,7 @@ import { StandardVerticalContentGridComponent } from '../../../../shared/compone
 import { NativeTableComponent } from '../../../../shared/components/native-table/native-table.component';
 import { DetailsPageLinkComponent } from '../../../../shared/components/details-page-link/details-page-link.component';
 import { EmptyStateComponent } from '../../../../shared/components/empty-states/empty-state.component';
+import { mapUIConfigStatusToEnabled, mapUIConfigStatusToRecommended } from 'src/app/shared/helpers/observable-helpers';
 
 @Component({
   selector: 'app-data-processing-it-contracts',
@@ -59,8 +60,11 @@ export class DataProcessingItContractsComponent extends BaseComponent implements
     mainContract: new FormControl<APIIdentityNamePairResponseDTO | undefined>({ value: undefined, disabled: true }),
   });
 
-  public readonly mainContractEnabled$ = this.store.select(selectDprEnableMainContract);
-  public readonly associatedContractsEnabled$ = this.store.select(selectDprEnableAssociatedContracts);
+  public readonly mainContractEnabled$ = this.store.select(selectDprEnableAndRecommendedMainContract).pipe(mapUIConfigStatusToEnabled());
+  public readonly mainContractRecommended$ = this.store
+    .select(selectDprEnableAndRecommendedMainContract)
+    .pipe(mapUIConfigStatusToRecommended());
+  public readonly associatedContractsEnabled$ = this.store.select(selectDprEnableAndRecommendedAssociatedContracts).pipe(mapUIConfigStatusToEnabled());
 
   constructor(private store: Store) {
     super();

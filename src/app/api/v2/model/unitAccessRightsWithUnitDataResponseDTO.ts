@@ -14,7 +14,7 @@ import { APIOrganizationUnitResponseDTO } from './organizationUnitResponseDTO';
 
 
 export interface APIUnitAccessRightsWithUnitDataResponseDTO { 
-    organizationUnit?: APIOrganizationUnitResponseDTO;
-    unitAccessRights?: APIUnitAccessRightsResponseDTO;
+    organizationUnit: APIOrganizationUnitResponseDTO;
+    unitAccessRights: APIUnitAccessRightsResponseDTO;
 }
 

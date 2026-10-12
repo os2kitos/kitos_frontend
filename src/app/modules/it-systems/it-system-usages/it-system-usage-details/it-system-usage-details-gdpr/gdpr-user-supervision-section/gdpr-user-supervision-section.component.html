@@ -4,6 +4,7 @@
   choiceTypePropertyName="userSupervision"
   choiceTypeTitle="Logning af brugerkontrol"
   i18n-choiceTypeTitle
+  [choiceTypeRecommended]="(userSupervisionRecommended$ | async) === true"
   datePropertyName="userSupervisionDate"
   dateTitle="Dato for seneste brugerkontrol"
   i18n-dateTitle

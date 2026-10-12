@@ -23,6 +23,12 @@ input {
   font-weight: bold !important;
 }
 
+.container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
 :host ::ng-deep mat-form-field {
   @include mixins.mat-form-sizes;
   @include mixins.mat-textbox-input-adjustment;
@@ -43,6 +49,13 @@ input {
   color: theme.$color-negative;
 }
 
+.suffix-icons {
+  display: flex;
+  align-items: center;
+  gap: theme.$padding-medium;
+  font-weight: 300;
+}
+
 span {
   color: theme.$color-neutral-80;
 }
@@ -50,11 +63,4 @@ span {
 span:hover {
   color: theme.$color-neutral-dark;
   cursor: pointer;
-}
-
-.suffix-icons {
-  display: flex;
-  align-items: center;
-  gap: theme.$padding-medium;
-  font-weight: 300;
 }

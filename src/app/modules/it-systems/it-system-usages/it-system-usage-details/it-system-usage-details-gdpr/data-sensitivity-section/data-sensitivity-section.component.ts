@@ -1,3 +1,5 @@
+import { mapUIConfigStatusToRecommended } from 'src/app/shared/helpers/observable-helpers';
+import { selectITSystemUsageEnableAndRecommendedGdprDataTypes } from 'src/app/store/organization/ui-module-customization/selectors';
 import { AsyncPipe } from '@angular/common';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -36,6 +38,8 @@ import { ContentWithInfoComponent } from '../../../../../../shared/components/co
   ],
 })
 export class DataSensitivitySectionComponent extends BaseAccordionComponent implements OnInit {
+  public readonly recommended$ = this.store.select(selectITSystemUsageEnableAndRecommendedGdprDataTypes).pipe(mapUIConfigStatusToRecommended());
+
   @Output() public noPermissions = new EventEmitter<AbstractControl[]>();
 
   private readonly dataSensitivityLevelsDtoField = 'dataSensitivityLevels';

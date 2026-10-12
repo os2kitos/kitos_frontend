@@ -94,6 +94,7 @@ export interface PatchSingleNotificationV2DeactivateScheduledNotificationRequest
     ownerResourceType: APIOwnerResourceType;
     /**  */
     ownerResourceUuid: string;
+    /**  */
     notificationUuid: string;
 }
 

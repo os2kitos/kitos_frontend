@@ -1,4 +1,4 @@
-import { AsyncPipe } from '@angular/common';
+﻿import { AsyncPipe } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
@@ -24,9 +24,10 @@ import { NotificationService } from 'src/app/shared/services/notification.servic
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { selectContract, selectItContractHasModifyPermissions } from 'src/app/store/it-contract/selectors';
 import {
-  selectItContractsEnableAgreementDeadlines,
-  selectItContractsEnableTermination,
+  selectItContractsEnableAndRecommendedAgreementDeadlines,
+  selectItContractsEnableAndRecommendedTermination,
 } from 'src/app/store/organization/ui-module-customization/selectors';
+import { mapUIConfigStatusToEnabled, mapUIConfigStatusToRecommended } from 'src/app/shared/helpers/observable-helpers';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 import { CardHeaderComponent } from '../../../../shared/components/card-header/card-header.component';
@@ -55,7 +56,7 @@ import { NumericInputComponent as NumericInputComponent_1 } from '../../../../sh
   ],
 })
 export class ItContractDeadlinesComponent extends BaseComponent implements OnInit {
-  private readonly deadlineDurationYearsUpperLimit = 100;
+  public readonly deadlineDurationYearsUpperLimit = 100;
 
   public readonly extendTypes$ = this.store.select(selectRegularOptionTypes('it-contract-extend-types'));
   public readonly terminationPeriodTypes$ = this.store
@@ -88,8 +89,10 @@ export class ItContractDeadlinesComponent extends BaseComponent implements OnIni
     noticeByEndOf: new FormControl<YearSegmentChoice | undefined>({ value: undefined, disabled: true }),
   });
 
-  public readonly agreementDeadlinesEnabled$ = this.store.select(selectItContractsEnableAgreementDeadlines);
-  public readonly terminationEnabled$ = this.store.select(selectItContractsEnableTermination);
+  public readonly agreementDeadlinesEnabled$ = this.store.select(selectItContractsEnableAndRecommendedAgreementDeadlines).pipe(mapUIConfigStatusToEnabled());
+  public readonly agreementDeadlinesRecommended$ = this.store.select(selectItContractsEnableAndRecommendedAgreementDeadlines).pipe(mapUIConfigStatusToRecommended());
+  public readonly terminationEnabled$ = this.store.select(selectItContractsEnableAndRecommendedTermination).pipe(mapUIConfigStatusToEnabled());
+  public readonly terminationRecommended$ = this.store.select(selectItContractsEnableAndRecommendedTermination).pipe(mapUIConfigStatusToRecommended());
 
   @ViewChild('durationMonthsInput') durationYearsInput!: NumericInputComponent;
   @ViewChild('durationMonthsInput') durationMonthsInput!: NumericInputComponent;

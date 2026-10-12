@@ -12,6 +12,7 @@
           text="CVR-nummer"
           [formGroup]="masterDataForm"
           formName="cvrControl"
+          [maxLength]="9999999999"
           (valueChange)="patchMasterData({ cvr: $event?.toString() })"
         ></app-numeric-input>
         <app-textbox
@@ -57,6 +58,7 @@
       text="CVR-nummer"
       [formGroup]="dataResponsibleForm"
       formName="cvrControl"
+      [maxLength]="9999999999"
       (valueChange)="patchDataResponsibleCvr($event?.toString())"
       data-cy="data-responsible-cvr-input"
     ></app-numeric-input>
@@ -112,6 +114,7 @@
       text="CVR-nummer"
       [formGroup]="dataProtectionAdvisorForm"
       formName="cvrControl"
+      [maxLength]="9999999999"
       (valueChange)="patchDataProtectionAdvisorCvr($event?.toString())"
     ></app-numeric-input>
     <app-textbox

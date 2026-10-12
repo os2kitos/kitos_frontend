@@ -14,6 +14,8 @@ export const UserNotificationActions = createActionGroup({
     }),
     'Get notifications error': emptyProps(),
 
+    'Notification changed': (ownerResourceType: APIOwnerResourceType) => ({ ownerResourceType }),
+
     'Notification created': (ownerResourceType: APIOwnerResourceType) => ({
       ownerResourceType,
     }),

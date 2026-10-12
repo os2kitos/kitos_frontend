@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 import { Store } from '@ngrx/store';
+import { RegistrationRecommendedBadgesService } from 'src/app/shared/services/registration-recommended-badges.service';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import {
@@ -19,10 +20,15 @@ import { AsyncPipe } from '@angular/common';
   imports: [CardComponent, CardHeaderComponent, RoleTableComponent, AsyncPipe],
 })
 export class DataProcessingRolesComponent extends BaseComponent {
+  public readonly recommendedBadge$ = this.recommendedBadgesService.dataProcessing.roles$;
+
   public readonly dataProcessingUuid$ = this.store.select(selectDataProcessingUuid).pipe(filterNullish());
   public hasModifyPermission$ = this.store.select(selectDataProcessingHasModifyPermissions).pipe(filterNullish());
 
-  constructor(private store: Store) {
+  constructor(
+    private store: Store,
+    private readonly recommendedBadgesService: RegistrationRecommendedBadgesService,
+  ) {
     super();
   }
 }

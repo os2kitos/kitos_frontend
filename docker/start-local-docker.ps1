@@ -1,7 +1,7 @@
 $ErrorActionPreference = "Stop"
 
 param(
-  [string]$BackendUrl = "http://host.docker.internal:5000/"
+  [string]$BackendUrl = "http://host.docker.internal:5000"
 )
 
 $repoRoot = Split-Path -Parent $PSScriptRoot

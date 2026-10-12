@@ -1,7 +1,10 @@
 @if(initialized){ @if(formGroup){
 
 <mat-form-field [formGroup]="formGroup">
-  <mat-label>{{ text }}</mat-label>
+  <mat-label>
+    {{ text }}
+    <app-recommended-badge [visible]="recommended" [filled]="recommendedFilled ?? (hasContent(formName ? formGroup.controls[formName].value : undefined))"></app-recommended-badge>
+  </mat-label>
   <textarea
     #autosizeTextarea
     matInput
@@ -15,10 +18,16 @@
     (blur)="focus(false)"
     [ngClass]="{ disabled: disabled }"
   ></textarea>
+    @if (formName && formGroup.controls[formName].getError('maxlength'); as error) {
+      <mat-error i18n>Maksimalt {{ error.requiredLength }} tegn.</mat-error>
+    }
 </mat-form-field>
 } @else {
 <mat-form-field>
-  <mat-label>{{ text }}</mat-label>
+  <mat-label>
+    {{ text }}
+    <app-recommended-badge [visible]="recommended" [filled]="recommendedFilled ?? (hasContent(value))"></app-recommended-badge>
+  </mat-label>
   <textarea
     #autosizeTextarea
     matInput

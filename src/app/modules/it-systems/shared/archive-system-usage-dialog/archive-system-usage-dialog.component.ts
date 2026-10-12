@@ -1,6 +1,7 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { Observable, first, map, startWith } from 'rxjs';
 import { APICreateItSystemUsageArchiveRequestDTO } from 'src/app/api/v2';
@@ -8,6 +9,7 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ButtonComponent } from 'src/app/shared/components/buttons/button/button.component';
 import { IconButtonComponent } from 'src/app/shared/components/buttons/icon-button/icon-button.component';
 import { DatePickerComponent } from 'src/app/shared/components/datepicker/datepicker.component';
+import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { DialogActionsComponent } from 'src/app/shared/components/dialogs/dialog-actions/dialog-actions.component';
 import { ScrollbarDialogComponent } from 'src/app/shared/components/dialogs/dialog/scrollbar-dialog/scrollbar-dialog.component';
 import { TrashcanIconComponent } from 'src/app/shared/components/icons/trashcan-icon.component';
@@ -23,7 +25,6 @@ import { SimpleLink } from 'src/app/shared/models/SimpleLink.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { selectItSystemUsage } from 'src/app/store/it-system-usage/selectors';
-import { CommonModule } from '@angular/common';
 import { EditUrlSectionComponent } from '../edit-url-section/edit-url-section.component';
 
 @Component({
@@ -62,7 +63,8 @@ export class ArchiveSystemUsageDialogComponent extends BaseComponent implements 
 
   constructor(
     private readonly store: Store,
-    public dialogRef: MatDialogRef<ArchiveSystemUsageDialogComponent>,
+    public readonly dialogRef: MatDialogRef<ArchiveSystemUsageDialogComponent>,
+    private readonly dialog: MatDialog,
   ) {
     super();
   }
@@ -156,8 +158,33 @@ export class ArchiveSystemUsageDialogComponent extends BaseComponent implements 
     return this.archiveReferences.controls.some((reference) => !reference.value.url);
   }
 
+  onCancel(): void {
+    this.dialogRef.close();
+  }
+
   onConfirm(): void {
     if (!this.archiveFormGroup.valid) return;
+
+    const confirmationDialogRef = this.dialog.open(ConfirmationDialogComponent);
+    const confirmationDialogInstance = confirmationDialogRef.componentInstance as ConfirmationDialogComponent;
+    confirmationDialogInstance.bodyText = $localize`Du tager nu systemet ud af anvendelse og arkiverer anvendelseshistorikken.`;
+    confirmationDialogInstance.customConfirmText = $localize`Bekræft`;
+    confirmationDialogInstance.customDeclineText = $localize`Fortryd`;
+    confirmationDialogInstance.confirmationType = 'Custom';
+
+    this.subscriptions.add(
+      confirmationDialogRef
+        .afterClosed()
+        .pipe(first())
+        .subscribe((result) => {
+          if (result === true) {
+            this.archiveOnConfirm();
+          }
+        }),
+    );
+  }
+
+  private archiveOnConfirm() {
     const controls = this.archiveFormGroup.controls;
 
     const validArchiveReferences = this.archiveReferences.controls
@@ -178,9 +205,6 @@ export class ArchiveSystemUsageDialogComponent extends BaseComponent implements 
     };
 
     this.store.dispatch(ITSystemUsageActions.archiveItSystemUsage(this.itSystemUsageUuid, dto));
-    this.dialogRef.close();
-  }
-  onCancel(): void {
     this.dialogRef.close();
   }
 

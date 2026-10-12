@@ -214,15 +214,25 @@ export class WriteOversightDateDialogComponent extends BaseComponent implements 
 
     this.isBusy = true;
 
-    const request: APIModifyOversightDateDTO = {
-      completedAt: this.oversightDateFormGroup.value.date!.toISOString(),
-      remark: this.oversightDateFormGroup.value.notes ?? '',
-      oversightReportLink: {
-        url: this.oversightDateFormGroup.value.reportLinkUrl ?? undefined,
-        name: this.oversightDateFormGroup.value.reportLinkName ?? undefined,
-      },
-      oversightOptionUuid: this.oversightDateFormGroup.value.oversightOption?.uuid ?? undefined,
+    const request: APIModifyOversightDateDTO = {};
+    const controls = this.oversightDateFormGroup.controls;
+
+    if (controls.date.enabled && controls.date.dirty && this.oversightDateFormGroup.value.date) {
+      request.completedAt = this.oversightDateFormGroup.value.date.toISOString();
+    }
+
+    if (controls.notes.enabled && controls.notes.dirty) {
+      request.remark = this.oversightDateFormGroup.value.notes ?? '';
+    }
+
+    request.oversightReportLink = {
+      url: this.oversightDateFormGroup.value.reportLinkUrl ?? undefined,
+      name: this.oversightDateFormGroup.value.reportLinkName ?? undefined,
     };
+
+    if (controls.oversightOption.enabled && controls.oversightOption.dirty) {
+      request.oversightOptionUuid = this.oversightDateFormGroup.value.oversightOption?.uuid ?? undefined;
+    }
 
     if (this.isEdit && this.oversightDate?.uuid) {
       this.store.dispatch(DataProcessingActions.patchDataProcessingOversightDate(this.oversightDate?.uuid, request));
@@ -230,9 +240,6 @@ export class WriteOversightDateDialogComponent extends BaseComponent implements 
       this.store.dispatch(
         DataProcessingActions.addDataProcessingOversightDate({
           ...request,
-          // The type cast to string is safe here because request.completedAt is assigned from
-          // this.oversightDateFormGroup.value.date!.toISOString(), which always returns a string.
-          // The cast is needed to satisfy the type requirement of the action creator.
           completedAt: request.completedAt as string,
         }),
       );

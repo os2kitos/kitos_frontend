@@ -18,7 +18,11 @@ import {
   dateGreaterThanOrEqualControlValidator,
   dateLessThanControlValidator,
 } from 'src/app/shared/helpers/form.helpers';
-import { combineOR } from 'src/app/shared/helpers/observable-helpers';
+import {
+  combineOR,
+  mapUIConfigStatusToEnabled,
+  mapUIConfigStatusToRecommended,
+} from 'src/app/shared/helpers/observable-helpers';
 import { toBulletPoints } from 'src/app/shared/helpers/string.helpers';
 import {
   MultiSelectDropdownItem,
@@ -65,29 +69,29 @@ import {
   selectItSystemUsageValid,
 } from 'src/app/store/it-system-usage/selectors';
 import {
-  selectITSystemUsageEnableAmountOfUsers,
-  selectITSystemUsageEnableContainsAITechnology,
-  selectITSystemUsageEnableCriticalityFieldsLastChanged,
-  selectITSystemUsageEnableCriticalityLevelDocumentation,
-  selectITSystemUsageEnableDataClassification,
-  selectITSystemUsageEnableDescription,
-  selectITSystemUsageEnableFrontPageUsagePeriod,
-  selectITSystemUsageEnableGeneralHostedAt,
-  selectITSystemUsageEnableGeneralPurpose,
-  selectITSystemUsageEnableIsBusinessCritical,
-  selectITSystemUsageEnableIsSociallyCritical,
-  selectITSystemUsageEnableLastEditedAt,
-  selectITSystemUsageEnableLastEditedBy,
-  selectITSystemUsageEnableLicensingAndCodeModels,
-  selectITSystemUsageEnableLifeCycleStatus,
-  selectITSystemUsageEnableName,
-  selectITSystemUsageEnableStatus,
-  selectITSystemUsageEnableSystemUsageCriticalityLevel,
-  selectITSystemUsageEnableTakenIntoUsageBy,
-  selectITSystemUsageEnableTechnicalSystemType,
-  selectITSystemUsageEnableVersion,
-  selectITSystemUsageEnableWebAccessibility,
-  selectITSystemUsageEnabledSystemId,
+  selectITSystemUsageEnableAndRecommendedAmountOfUsers,
+  selectITSystemUsageEnableAndRecommendedContainsAITechnology,
+  selectITSystemUsageEnableAndRecommendedCriticalityFieldsLastChanged,
+  selectITSystemUsageEnableAndRecommendedCriticalityLevelDocumentation,
+  selectITSystemUsageEnableAndRecommendedDataClassification,
+  selectITSystemUsageEnableAndRecommendedDescription,
+  selectITSystemUsageEnableAndRecommendedFrontPageUsagePeriod,
+  selectITSystemUsageEnableAndRecommendedGeneralHostedAt,
+  selectITSystemUsageEnableAndRecommendedGeneralPurpose,
+  selectITSystemUsageEnableAndRecommendedIsBusinessCritical,
+  selectITSystemUsageEnableAndRecommendedIsSociallyCritical,
+  selectITSystemUsageEnableAndRecommendedLastEditedAt,
+  selectITSystemUsageEnableAndRecommendedLastEditedBy,
+  selectITSystemUsageEnableAndRecommendedLicensingAndCodeModels,
+  selectITSystemUsageEnableAndRecommendedLifeCycleStatus,
+  selectITSystemUsageEnableAndRecommendedName,
+  selectITSystemUsageEnableAndRecommendedStatus,
+  selectITSystemUsageEnableAndRecommendedSystemId,
+  selectITSystemUsageEnableAndRecommendedSystemUsageCriticalityLevel,
+  selectITSystemUsageEnableAndRecommendedTakenIntoUsageBy,
+  selectITSystemUsageEnableAndRecommendedTechnicalSystemType,
+  selectITSystemUsageEnableAndRecommendedVersion,
+  selectITSystemUsageEnableAndRecommendedWebAccessibility,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
@@ -124,10 +128,10 @@ import { EditUrlSectionComponent } from '../../../shared/edit-url-section/edit-u
 export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseComponent implements OnInit {
   public readonly itSystemInformationForm = new FormGroup(
     {
-      purpose: new FormControl('', Validators.maxLength(250)),
-      localCallName: new FormControl(''),
-      localSystemId: new FormControl(''),
-      systemVersion: new FormControl(''),
+      purpose: new FormControl('', Validators.maxLength(200)),
+      localCallName: new FormControl('', Validators.maxLength(100)),
+      localSystemId: new FormControl('', Validators.maxLength(200)),
+      systemVersion: new FormControl('', Validators.maxLength(100)),
       technicalSystemTypes: new FormControl<MultiSelectDropdownItem<APIRegularOptionResponseDTO>[] | undefined>(
         undefined,
       ),
@@ -156,32 +160,121 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
   public readonly aiTechnologyOptions = yesNoOptions;
   public readonly isSociallyCriticalOptions = yesNoDontKnowOptions;
   public readonly isBusinessCriticalOptions = yesNoDontKnowOptions;
-  public readonly nameEnabled$ = this.store.select(selectITSystemUsageEnableName);
-  public readonly systemIdEnabled$ = this.store.select(selectITSystemUsageEnabledSystemId);
-  public readonly versionEnabled$ = this.store.select(selectITSystemUsageEnableVersion);
-  public readonly technicalSystemTypeEnabled$ = this.store.select(selectITSystemUsageEnableTechnicalSystemType);
-  public readonly purposeEnabled$ = this.store.select(selectITSystemUsageEnableGeneralPurpose);
-  public readonly hostedAtEnabled$ = this.store.select(selectITSystemUsageEnableGeneralHostedAt);
-  public readonly amountOfUsersEnabled$ = this.store.select(selectITSystemUsageEnableAmountOfUsers);
-  public readonly dataClassificationEnabled$ = this.store.select(selectITSystemUsageEnableDataClassification);
-  public readonly descriptionEnabled$ = this.store.select(selectITSystemUsageEnableDescription);
-  public readonly takenIntoUsageByEnabled$ = this.store.select(selectITSystemUsageEnableTakenIntoUsageBy);
-  public readonly lastEditedByEnabled$ = this.store.select(selectITSystemUsageEnableLastEditedBy);
-  public readonly lastEditedAtEnabled$ = this.store.select(selectITSystemUsageEnableLastEditedAt);
-  public readonly lifeCycleStatusEnabled$ = this.store.select(selectITSystemUsageEnableLifeCycleStatus);
-  public readonly usagePeriodEnabled$ = this.store.select(selectITSystemUsageEnableFrontPageUsagePeriod);
-  public readonly statusEnabled$ = this.store.select(selectITSystemUsageEnableStatus);
-  public readonly containsAITechnologyEnabled$ = this.store.select(selectITSystemUsageEnableContainsAITechnology);
-  public readonly webAccessiblityEnabled$ = this.store.select(selectITSystemUsageEnableWebAccessibility);
-  public readonly isSociallyCriticalEnabled$ = this.store.select(selectITSystemUsageEnableIsSociallyCritical);
-  public readonly isBusinessCriticalEnabled$ = this.store.select(selectITSystemUsageEnableIsBusinessCritical);
-  public readonly licensingAndCodeModelsEnabled$ = this.store.select(selectITSystemUsageEnableLicensingAndCodeModels);
-  public readonly criticalityFieldsLastChangedEnabled$ = this.store.select(
-    selectITSystemUsageEnableCriticalityFieldsLastChanged,
-  );
-  public readonly criticalityLevelDocumentationEnabled$ = this.store.select(
-    selectITSystemUsageEnableCriticalityLevelDocumentation,
-  );
+
+  public readonly nameRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedName)
+    .pipe(mapUIConfigStatusToRecommended());
+  public readonly systemIdEnabled$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedSystemId)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly systemIdRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedSystemId)
+    .pipe(mapUIConfigStatusToRecommended());
+  public readonly versionEnabled$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedVersion)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly versionRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedVersion)
+    .pipe(mapUIConfigStatusToRecommended());
+  public readonly technicalSystemTypeEnabled$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedTechnicalSystemType)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly technicalSystemTypeRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedTechnicalSystemType)
+    .pipe(mapUIConfigStatusToRecommended());
+  public readonly purposeEnabled$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedGeneralPurpose)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly purposeRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedGeneralPurpose)
+    .pipe(mapUIConfigStatusToRecommended());
+  public readonly hostedAtEnabled$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedGeneralHostedAt)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly hostedAtRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedGeneralHostedAt)
+    .pipe(mapUIConfigStatusToRecommended());
+  public readonly amountOfUsersEnabled$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedAmountOfUsers)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly amountOfUsersRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedAmountOfUsers)
+    .pipe(mapUIConfigStatusToRecommended());
+  public readonly dataClassificationEnabled$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedDataClassification)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly dataClassificationRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedDataClassification)
+    .pipe(mapUIConfigStatusToRecommended());
+  public readonly descriptionEnabled$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedDescription)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly descriptionRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedDescription)
+    .pipe(mapUIConfigStatusToRecommended());
+  public readonly takenIntoUsageByEnabled$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedTakenIntoUsageBy)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly lastEditedByEnabled$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedLastEditedBy)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly lastEditedAtEnabled$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedLastEditedAt)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly lifeCycleStatusEnabled$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedLifeCycleStatus)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly lifeCycleStatusRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedLifeCycleStatus)
+    .pipe(mapUIConfigStatusToRecommended());
+  public readonly usagePeriodEnabled$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedFrontPageUsagePeriod)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly usagePeriodRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedFrontPageUsagePeriod)
+    .pipe(mapUIConfigStatusToRecommended());
+  public readonly statusEnabled$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedStatus)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly containsAITechnologyEnabled$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedContainsAITechnology)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly containsAITechnologyRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedContainsAITechnology)
+    .pipe(mapUIConfigStatusToRecommended());
+  public readonly webAccessiblityEnabled$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedWebAccessibility)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly webAccessiblityRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedWebAccessibility)
+    .pipe(mapUIConfigStatusToRecommended());
+  public readonly isSociallyCriticalEnabled$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedIsSociallyCritical)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly isSociallyCriticalRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedIsSociallyCritical)
+    .pipe(mapUIConfigStatusToRecommended());
+  public readonly isBusinessCriticalEnabled$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedIsBusinessCritical)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly isBusinessCriticalRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedIsBusinessCritical)
+    .pipe(mapUIConfigStatusToRecommended());
+  public readonly licensingAndCodeModelsEnabled$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedLicensingAndCodeModels)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly licensingAndCodeModelsRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedLicensingAndCodeModels)
+    .pipe(mapUIConfigStatusToRecommended());
+  public readonly criticalityFieldsLastChangedEnabled$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedCriticalityFieldsLastChanged)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly criticalityLevelDocumentationEnabled$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedCriticalityLevelDocumentation)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly criticalityLevelDocumentationRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedCriticalityLevelDocumentation)
+    .pipe(mapUIConfigStatusToRecommended());
   public readonly containsAITechnologyModifyEnabled$ = this.store.select(
     selectITSystemUsageFieldPermissions(itSystemUsageFields.containsAITechnology),
   );
@@ -195,9 +288,12 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
     this.statusEnabled$,
   ]);
 
-  public readonly systemUsageCriticalityEnabled$ = this.store.select(
-    selectITSystemUsageEnableSystemUsageCriticalityLevel,
-  );
+  public readonly systemUsageCriticalityEnabled$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedSystemUsageCriticalityLevel)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly systemUsageCriticalityRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedSystemUsageCriticalityLevel)
+    .pipe(mapUIConfigStatusToRecommended());
 
   public readonly systemUsageCriticalityModifyEnabled$ = this.store.select(
     selectITSystemUsageFieldPermissions(itSystemUsageFields.systemUsageCriticalityLevel),
@@ -322,6 +418,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
         .subscribe(() => {
           this.itSystemInformationForm.disable();
           this.itSystemApplicationForm.disable();
+          this.itSystemCriticalityForm.disable();
           this.webAccessibilityForm.disable();
         }),
     );

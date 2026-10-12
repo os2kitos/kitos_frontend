@@ -98,7 +98,7 @@ export class ItContractSystemsComponentStore extends ComponentStore<State> imple
             tapResponse({
               next: (usages) =>
                 this.updateSystemUsages(
-                  usages.map((usage: any) => ({ uuid: usage.uuid, name: usage.systemContext.name })),
+                  usages.map((usage) => ({ uuid: usage.uuid, name: usage.systemContext.name })),
                 ),
               error: (e) => console.error(e),
               complete: () => this.updateSystemUsagesIsLoading(false),

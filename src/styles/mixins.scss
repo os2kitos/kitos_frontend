@@ -1,5 +1,6 @@
 @use "@angular/material" as mat;
 @use "theme";
+@use "sass:color";
 
 @mixin input-background-white {
   background-color: white;
@@ -442,7 +443,7 @@
   }
 
   .k-grid {
-  --kendo-color-border-alt: transparent !important;
+    --kendo-color-border-alt: transparent !important;
   }
 
   :host ::ng-deep {
@@ -698,4 +699,70 @@
 
 @mixin two-thirds-column-width {
   grid-column: span 2;
+}
+
+@mixin full-column-width {
+  grid-column: span 3;
+}
+
+@mixin recommended-badge-filled {
+  background-color: color.adjust(theme.$color-positive, $lightness: 35%);
+  color: color.adjust(theme.$color-positive, $lightness: -20%);
+  border-color: theme.$color-positive;
+  margin-bottom: 2px;
+}
+
+@mixin recommended-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: color.adjust(theme.$color-warning, $lightness: 30%);
+  color: color.adjust(theme.$color-warning, $lightness: -15%);
+  border: 1px solid theme.$color-warning;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  margin-left: 6px;
+  margin-bottom: 2px;
+  vertical-align: middle;
+  line-height: 1;
+  font-variant-ligatures: none;
+
+  &.filled {
+    @include recommended-badge-filled;
+  }
+
+  &.warning {
+    font-size: 14px;
+  }
+}
+
+@mixin recommended-label-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2px;
+}
+
+@mixin align-items-vertically {
+  display: flex;
+}
+
+@mixin dropdown-has-recommended {
+  ::ng-deep ng-select .ng-select-container .ng-placeholder {
+    display: flex;
+    align-items: center;
+    // Keep the badge above the empty dropdown's search input, while allowing
+    // clicks on the label to reach that input.
+    z-index: 1;
+    pointer-events: none;
+
+    app-recommended-badge {
+      pointer-events: auto;
+    }
+
+  }
 }

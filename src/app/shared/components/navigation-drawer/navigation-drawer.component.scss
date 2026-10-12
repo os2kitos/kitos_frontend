@@ -17,6 +17,12 @@
     background: theme.$color-primary-10 !important;
   }
 
+  .recommended-badge {
+    width: 18px;
+    height: 18px;
+    font-size: 12px;
+  }
+
   // Resize the svg to spec
   svg {
     width: 20px;

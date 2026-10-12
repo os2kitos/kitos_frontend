@@ -12,6 +12,6 @@
 
 
 export interface APIInt32SingleValueDTO { 
-    value?: number;
+    value: number;
 }
 

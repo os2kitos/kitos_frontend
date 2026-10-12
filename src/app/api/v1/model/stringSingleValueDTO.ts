@@ -12,6 +12,6 @@
 
 
 export interface APIStringSingleValueDTO { 
-    value?: string | null;
+    value: string | null;
 }
 

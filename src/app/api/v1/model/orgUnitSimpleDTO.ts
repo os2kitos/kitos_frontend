@@ -13,9 +13,9 @@
 
 export interface APIOrgUnitSimpleDTO { 
     id?: number;
-    name?: string | null;
+    name: string | null;
     organizationId?: number;
-    organizationName?: string | null;
+    organizationName: string | null;
     readonly qualifiedName?: string | null;
 }
 

@@ -1,4 +1,4 @@
-/* eslint-disable @ngrx/avoid-combining-selectors */
+﻿/* eslint-disable @ngrx/avoid-combining-selectors */
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { combineLatest, combineLatestWith, map, Observable } from 'rxjs';
@@ -12,106 +12,106 @@ import {
   selectShowItSystemModule,
 } from 'src/app/store/organization/selectors';
 import {
-  selectDprEnableAgreementConcluded,
-  selectDprEnableAssociatedContracts,
-  selectDprEnableDataResponsible,
-  selectDprEnabledOversightInterval,
-  selectDprEnableItSystems,
-  selectDprEnableLastChangedAt,
-  selectDprEnableLastChangedBy,
-  selectDprEnableMainContract,
-  selectDprEnableOversightOptions,
-  selectDprEnableOversights,
-  selectDprEnableProcessors,
-  selectDprEnableReferences,
-  selectDprEnableResponsibleOrgUnit,
-  selectDprEnableRoles,
-  selectDprEnableScheduledInspectionDate,
-  selectDprEnableStatus,
-  selectDprEnableSubProcessors,
-  selectDprEnableTransferBasis,
-  selectIContractsEnableSupplier,
-  selectItContractEnableContractId,
-  selectItContractEnableContractRoles,
-  selectItContractEnableDataProcessing,
-  selectItContractEnableReferences,
-  selectItContractEnableRelations,
-  selectItContractEnableSystemUsages,
-  selectItContractsEnableAgreementDeadlines,
-  selectItContractsEnableAgreementPeriod,
-  selectItContractsEnableContractType,
-  selectItContractsEnableCriticality,
-  selectItContractsEnabledCreatedBy,
-  selectItContractsEnabledlastModifedBy,
-  selectItContractsEnabledlastModifedDate,
-  selectItContractsEnableExternalPayment,
-  selectItContractsEnableExternalSigner,
-  selectItContractsEnableInternalPayment,
-  selectItContractsEnableInternalSigner,
-  selectItContractsEnableIsActive,
-  selectItContractsEnableNotes,
-  selectItContractsEnableParentContract,
-  selectItContractsEnablePaymentModel,
-  selectItContractsEnableProcurementInitiated,
-  selectItContractsEnableProcurementPlan,
-  selectItContractsEnableProcurementStrategy,
-  selectItContractsEnablePurchaseForm,
-  selectItContractsEnableResponsibleUnit,
-  selectItContractsEnableTemplate,
-  selectItContractsEnableTermination,
-  selectITSystemUsageEnableAmountOfUsers,
-  selectITSystemUsageEnableAssociatedContracts,
-  selectITSystemUsageEnableCatalogArchiveDuty,
-  selectITSystemUsageEnableCatalogArchiveDutyComment,
-  selectITSystemUsageEnableContainsAITechnology,
-  selectITSystemUsageEnableCriticalityFieldsLastChanged,
-  selectITSystemUsageEnableDataClassification,
-  selectITSystemUsageEnableDataProcessing,
-  selectITSystemUsageEnableDescription,
-  selectITSystemUsageEnableDocumentBearing,
-  selectITSystemUsageEnabledSystemId,
-  selectITSystemUsageEnableFrontPageUsagePeriod,
-  selectITSystemUsageEnableGdprConductedRiskAssessment,
-  selectITSystemUsageEnableGdprDataTypes,
-  selectITSystemUsageEnableGdprDocumentation,
-  selectITSystemUsageEnableGdprDpiaConducted,
-  selectITSystemUsageEnableGdprIsDataProcessingAgreementRequired,
-  selectITSystemUsageEnableGdprPlannedRiskAssessmentDate,
-  selectITSystemUsageEnableGdprPurpose,
-  selectITSystemUsageEnableGdprRetentionPeriod,
-  selectITSystemUsageEnableGdprRiskAssessmentResult,
-  selectITSystemUsageEnableGdprTechnicalPrecautions,
-  selectITSystemUsageEnableGdprUserSupervision,
-  selectITSystemUsageEnableGeneralHostedAt,
-  selectITSystemUsageEnableGeneralPurpose,
-  selectITSystemUsageEnableIncomingRelations,
-  selectITSystemUsageEnableInheritedKle,
-  selectITSystemUsageEnableIsBusinessCritical,
-  selectITSystemUsageEnableIsSociallyCritical,
-  selectITSystemUsageEnableItInterfaceIds,
-  selectITSystemUsageEnableItInterfaceVersions,
-  selectITSystemUsageEnableJournalPeriods,
-  selectITSystemUsageEnableLastEditedAt,
-  selectITSystemUsageEnableLastEditedBy,
-  selectITSystemUsageEnableLifeCycleStatus,
-  selectITSystemUsageEnableLocalKle,
-  selectITSystemUsageEnableLocalReferences,
-  selectITSystemUsageEnableLicensingAndCodeModels,
-  selectITSystemUsageEnableOutgoingRelations,
-  selectITSystemUsageEnableSelectContractToDetermineIfItSystemIsActive,
-  selectITSystemUsageEnableStatus,
-  selectITSystemUsageEnableSystemUsageCriticalityLevel,
-  selectITSystemUsageEnableTabArchiving,
-  selectITSystemUsageEnableTabOrganization,
-  selectITSystemUsageEnableTabSystemRoles,
-  selectITSystemUsageEnableTakenIntoUsageBy,
-  selectITSystemUsageEnableTechnicalSystemType,
-  selectITSystemUsageEnableVersion,
-  selectITSystemUsageEnableWebAccessibility,
+  selectDprEnableAndRecommendedAgreementConcluded,
+  selectDprEnableAndRecommendedAssociatedContracts,
+  selectDprEnableAndRecommendedDataResponsible,
+  selectDprEnableAndRecommendedOversightInterval,
+  selectDprEnableAndRecommendedItSystems,
+  selectDprEnableAndRecommendedLastChangedAt,
+  selectDprEnableAndRecommendedLastChangedBy,
+  selectDprEnableAndRecommendedMainContract,
+  selectDprEnableAndRecommendedOversightOptions,
+  selectDprEnableAndRecommendedOversights,
+  selectDprEnableAndRecommendedProcessors,
+  selectDprEnableAndRecommendedReferences,
+  selectDprEnableAndRecommendedResponsibleOrgUnit,
+  selectDprEnableAndRecommendedRoles,
+  selectDprEnableAndRecommendedScheduledInspectionDate,
+  selectDprEnableAndRecommendedStatus,
+  selectDprEnableAndRecommendedSubProcessors,
+  selectDprEnableAndRecommendedTransferBasis,
+  selectItContractsEnableAndRecommendedSupplier,
+  selectItContractEnableAndRecommendedContractId,
+  selectItContractEnableAndRecommendedContractRoles,
+  selectItContractEnableAndRecommendedDataProcessing,
+  selectItContractEnableAndRecommendedReferences,
+  selectItContractEnableAndRecommendedRelations,
+  selectItContractEnableAndRecommendedSystemUsages,
+  selectItContractsEnableAndRecommendedAgreementDeadlines,
+  selectItContractsEnableAndRecommendedAgreementPeriod,
+  selectItContractsEnableAndRecommendedContractType,
+  selectItContractsEnableAndRecommendedCriticality,
+  selectItContractsEnableAndRecommendedCreatedBy,
+  selectItContractsEnableAndRecommendedlastModifedBy,
+  selectItContractsEnableAndRecommendedlastModifedDate,
+  selectItContractsEnableAndRecommendedExternalPayment,
+  selectItContractsEnableAndRecommendedExternalSigner,
+  selectItContractsEnableAndRecommendedInternalPayment,
+  selectItContractsEnableAndRecommendedInternalSigner,
+  selectItContractsEnableAndRecommendedIsActive,
+  selectItContractsEnableAndRecommendedNotes,
+  selectItContractsEnableAndRecommendedParentContract,
+  selectItContractsEnableAndRecommendedPaymentModel,
+  selectItContractsEnableAndRecommendedProcurementInitiated,
+  selectItContractsEnableAndRecommendedProcurementPlan,
+  selectItContractsEnableAndRecommendedProcurementStrategy,
+  selectItContractsEnableAndRecommendedPurchaseForm,
+  selectItContractsEnableAndRecommendedResponsibleUnit,
+  selectItContractsEnableAndRecommendedTemplate,
+  selectItContractsEnableAndRecommendedTermination,
+  selectITSystemUsageEnableAndRecommendedAmountOfUsers,
+  selectITSystemUsageEnableAndRecommendedAssociatedContracts,
+  selectITSystemUsageEnableAndRecommendedCatalogArchiveDuty,
+  selectITSystemUsageEnableAndRecommendedCatalogArchiveDutyComment,
+  selectITSystemUsageEnableAndRecommendedContainsAITechnology,
+  selectITSystemUsageEnableAndRecommendedCriticalityFieldsLastChanged,
+  selectITSystemUsageEnableAndRecommendedDataClassification,
+  selectITSystemUsageEnableAndRecommendedDataProcessing,
+  selectITSystemUsageEnableAndRecommendedDescription,
+  selectITSystemUsageEnableAndRecommendedDocumentBearing,
+  selectITSystemUsageEnableAndRecommendedSystemId,
+  selectITSystemUsageEnableAndRecommendedFrontPageUsagePeriod,
+  selectITSystemUsageEnableAndRecommendedGdprConductedRiskAssessment,
+  selectITSystemUsageEnableAndRecommendedGdprDataTypes,
+  selectITSystemUsageEnableAndRecommendedGdprDocumentation,
+  selectITSystemUsageEnableAndRecommendedGdprDpiaConducted,
+  selectITSystemUsageEnableAndRecommendedGdprIsDataProcessingAgreementRequired,
+  selectITSystemUsageEnableAndRecommendedGdprPlannedRiskAssessmentDate,
+  selectITSystemUsageEnableAndRecommendedGdprPurpose,
+  selectITSystemUsageEnableAndRecommendedGdprRetentionPeriod,
+  selectITSystemUsageEnableAndRecommendedGdprRiskAssessmentResult,
+  selectITSystemUsageEnableAndRecommendedGdprTechnicalPrecautions,
+  selectITSystemUsageEnableAndRecommendedGdprUserSupervision,
+  selectITSystemUsageEnableAndRecommendedGeneralHostedAt,
+  selectITSystemUsageEnableAndRecommendedGeneralPurpose,
+  selectITSystemUsageEnableAndRecommendedIncomingRelations,
+  selectITSystemUsageEnableAndRecommendedInheritedKle,
+  selectITSystemUsageEnableAndRecommendedIsBusinessCritical,
+  selectITSystemUsageEnableAndRecommendedIsSociallyCritical,
+  selectITSystemUsageEnableAndRecommendedItInterfaceIds,
+  selectITSystemUsageEnableAndRecommendedItInterfaceVersions,
+  selectITSystemUsageEnableAndRecommendedJournalPeriods,
+  selectITSystemUsageEnableAndRecommendedLastEditedAt,
+  selectITSystemUsageEnableAndRecommendedLastEditedBy,
+  selectITSystemUsageEnableAndRecommendedLifeCycleStatus,
+  selectITSystemUsageEnableAndRecommendedLocalKle,
+  selectITSystemUsageEnableAndRecommendedLocalReferences,
+  selectITSystemUsageEnableAndRecommendedLicensingAndCodeModels,
+  selectITSystemUsageEnableAndRecommendedOutgoingRelations,
+  selectITSystemUsageEnableAndRecommendedSelectContractToDetermineIfItSystemIsActive,
+  selectITSystemUsageEnableAndRecommendedStatus,
+  selectITSystemUsageEnableAndRecommendedSystemUsageCriticalityLevel,
+  selectITSystemUsageEnableAndRecommendedTabArchiving,
+  selectITSystemUsageEnableAndRecommendedTabOrganization,
+  selectITSystemUsageEnableAndRecommendedTabSystemRoles,
+  selectITSystemUsageEnableAndRecommendedTakenIntoUsageBy,
+  selectITSystemUsageEnableAndRecommendedTechnicalSystemType,
+  selectITSystemUsageEnableAndRecommendedVersion,
+  selectITSystemUsageEnableAndRecommendedWebAccessibility,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { UIModuleConfigKey } from '../../enums/ui-module-config-key';
 import { filterGridColumnsByUIConfig } from '../../helpers/grid-config-helper';
-import { combineAND } from '../../helpers/observable-helpers';
+import { combineAND, mapUIConfigStatusToEnabled } from '../../helpers/observable-helpers';
 import { GridColumn } from '../../models/grid-column.model';
 import { UIConfigGridApplication } from '../../models/ui-config/ui-config-grid-application';
 
@@ -167,73 +167,74 @@ export class GridUIConfigService {
   private getItContractGridConfig(): Observable<UIConfigGridApplication[]> {
     const configObservables: Observable<UIConfigGridApplication>[] = [
       //Frontpage
-      this.store.select(selectItContractEnableContractId).pipe(shouldEnable([ContractFields.ContractId])),
-      this.store.select(selectItContractsEnableContractType).pipe(shouldEnable([ContractFields.ContractTypeUuid])),
-      this.store.select(selectItContractsEnableTemplate).pipe(shouldEnable([ContractFields.ContractTemplateUuid])),
-      this.store.select(selectItContractsEnableCriticality).pipe(shouldEnable([ContractFields.CriticalityUuid])),
-      this.store.select(selectItContractsEnablePurchaseForm).pipe(shouldEnable([ContractFields.PurchaseFormUuid])),
-      this.store.select(selectItContractsEnableIsActive).pipe(shouldEnable([ContractFields.IsActive])),
+      this.store.select(selectItContractEnableAndRecommendedContractId).pipe(mapUIConfigStatusToEnabled(), shouldEnable([ContractFields.ContractId])),
+      this.store.select(selectItContractsEnableAndRecommendedContractType).pipe(mapUIConfigStatusToEnabled(), shouldEnable([ContractFields.ContractTypeUuid])),
+      this.store.select(selectItContractsEnableAndRecommendedTemplate).pipe(mapUIConfigStatusToEnabled(), shouldEnable([ContractFields.ContractTemplateUuid])),
+      this.store.select(selectItContractsEnableAndRecommendedCriticality).pipe(mapUIConfigStatusToEnabled(), shouldEnable([ContractFields.CriticalityUuid])),
+      this.store.select(selectItContractsEnableAndRecommendedPurchaseForm).pipe(mapUIConfigStatusToEnabled(), shouldEnable([ContractFields.PurchaseFormUuid])),
+      this.store.select(selectItContractsEnableAndRecommendedIsActive).pipe(mapUIConfigStatusToEnabled(), shouldEnable([ContractFields.IsActive])),
       this.store
-        .select(selectItContractsEnableAgreementPeriod)
-        .pipe(shouldEnable([ContractFields.Concluded, ContractFields.ExpirationDate])),
-      this.store.select(selectItContractsEnableNotes).pipe(shouldEnable([])),
+        .select(selectItContractsEnableAndRecommendedAgreementPeriod)
+        .pipe(mapUIConfigStatusToEnabled(), shouldEnable([ContractFields.Concluded, ContractFields.ExpirationDate])),
+      this.store.select(selectItContractsEnableAndRecommendedNotes).pipe(mapUIConfigStatusToEnabled(), shouldEnable([ContractFields.Note])),
 
-      this.store.select(selectItContractsEnableParentContract).pipe(shouldEnable([ContractFields.ParentContractName])),
-
-      this.store
-        .select(selectItContractsEnableResponsibleUnit)
-        .pipe(shouldEnable([ContractFields.ResponsibleOrgUnitName])),
-      this.store.select(selectItContractsEnableInternalSigner).pipe(shouldEnable([ContractFields.ContractSigner])),
-
-      this.store.select(selectIContractsEnableSupplier).pipe(shouldEnable([ContractFields.SupplierName])),
-      this.store.select(selectItContractsEnableExternalSigner).pipe(shouldEnable([])),
+      this.store.select(selectItContractsEnableAndRecommendedParentContract).pipe(mapUIConfigStatusToEnabled(), shouldEnable([ContractFields.ParentContractName])),
 
       this.store
-        .select(selectItContractsEnableProcurementStrategy)
-        .pipe(shouldEnable([ContractFields.ProcurementStrategyUuid])),
-      this.store
-        .select(selectItContractsEnableProcurementPlan)
-        .pipe(shouldEnable([ContractFields.ProcurementPlanYear])),
-      this.store
-        .select(selectItContractsEnableProcurementInitiated)
-        .pipe(shouldEnable([ContractFields.ProcurementInitiated])),
+        .select(selectItContractsEnableAndRecommendedResponsibleUnit)
+        .pipe(mapUIConfigStatusToEnabled(), shouldEnable([ContractFields.ResponsibleOrgUnitName])),
+      this.store.select(selectItContractsEnableAndRecommendedInternalSigner).pipe(mapUIConfigStatusToEnabled(), shouldEnable([ContractFields.ContractSigner])),
 
-      this.store.select(selectItContractsEnabledCreatedBy).pipe(shouldEnable([])),
+      this.store.select(selectItContractsEnableAndRecommendedSupplier).pipe(mapUIConfigStatusToEnabled(), shouldEnable([ContractFields.SupplierName])),
+      this.store.select(selectItContractsEnableAndRecommendedExternalSigner).pipe(mapUIConfigStatusToEnabled(), shouldEnable([])),
+
       this.store
-        .select(selectItContractsEnabledlastModifedBy)
-        .pipe(shouldEnable([ContractFields.LastEditedByUserName])),
-      this.store.select(selectItContractsEnabledlastModifedDate).pipe(shouldEnable([ContractFields.LastEditedAtDate])),
+        .select(selectItContractsEnableAndRecommendedProcurementStrategy)
+        .pipe(mapUIConfigStatusToEnabled(), shouldEnable([ContractFields.ProcurementStrategyUuid])),
+      this.store
+        .select(selectItContractsEnableAndRecommendedProcurementPlan)
+        .pipe(mapUIConfigStatusToEnabled(), shouldEnable([ContractFields.ProcurementPlanYear])),
+      this.store
+        .select(selectItContractsEnableAndRecommendedProcurementInitiated)
+        .pipe(mapUIConfigStatusToEnabled(), shouldEnable([ContractFields.ProcurementInitiated])),
+
+      this.store.select(selectItContractsEnableAndRecommendedCreatedBy).pipe(mapUIConfigStatusToEnabled(), shouldEnable([])),
+      this.store
+        .select(selectItContractsEnableAndRecommendedlastModifedBy)
+        .pipe(mapUIConfigStatusToEnabled(), shouldEnable([ContractFields.LastEditedByUserName])),
+      this.store.select(selectItContractsEnableAndRecommendedlastModifedDate).pipe(mapUIConfigStatusToEnabled(), shouldEnable([ContractFields.LastEditedAtDate])),
 
       // IT Systems
       combineAND([
-        this.store.select(selectItContractEnableSystemUsages),
+        this.store.select(selectItContractEnableAndRecommendedSystemUsages).pipe(mapUIConfigStatusToEnabled()),
         this.store.select(selectShowItSystemModule),
       ]).pipe(shouldEnable([ContractFields.ItSystemUsages, ContractFields.ItSystemUsageUuidsAsCsv])),
 
       combineAND([
-        this.store.select(selectItContractEnableRelations),
+        this.store.select(selectItContractEnableAndRecommendedRelations).pipe(mapUIConfigStatusToEnabled()),
         this.store.select(selectShowItSystemModule),
       ]).pipe(shouldEnable([ContractFields.NumberOfAssociatedSystemRelations])),
 
       //Data processing
       combineAND([
         this.store.select(selectShowDataProcessingRegistrations),
-        this.store.select(selectItContractEnableDataProcessing),
+        this.store.select(selectItContractEnableAndRecommendedDataProcessing).pipe(mapUIConfigStatusToEnabled()),
       ]).pipe(shouldEnable([ContractFields.DataProcessingAgreements])),
 
       //Agreement periods
       this.store
-        .select(selectItContractsEnableAgreementDeadlines)
-        .pipe(shouldEnable([ContractFields.Duration, ContractFields.OptionExtendUuid, ContractFields.IrrevocableTo])),
+        .select(selectItContractsEnableAndRecommendedAgreementDeadlines)
+        .pipe(mapUIConfigStatusToEnabled(), shouldEnable([ContractFields.Duration, ContractFields.OptionExtendUuid, ContractFields.IrrevocableTo])),
 
       this.store
-        .select(selectItContractsEnableTermination)
-        .pipe(shouldEnable([ContractFields.TerminationDeadlineUuid, ContractFields.TerminatedAt])),
+        .select(selectItContractsEnableAndRecommendedTermination)
+        .pipe(mapUIConfigStatusToEnabled(), shouldEnable([ContractFields.TerminationDeadlineUuid, ContractFields.TerminatedAt, ContractFields.ByEnding])),
 
       //Economy
       this.store
-        .select(selectItContractsEnableExternalPayment)
+        .select(selectItContractsEnableAndRecommendedExternalPayment)
         .pipe(
+          mapUIConfigStatusToEnabled(),
           shouldEnable([
             ContractFields.AccumulatedAcquisitionCost,
             ContractFields.AccumulatedOperationCost,
@@ -245,12 +246,13 @@ export class GridUIConfigService {
         ),
 
       this.store
-        .select(selectItContractsEnableInternalPayment)
-        .pipe(shouldEnable([ContractFields.InternalPaymentOrganizationUnitsCsv])),
+        .select(selectItContractsEnableAndRecommendedInternalPayment)
+        .pipe(mapUIConfigStatusToEnabled(), shouldEnable([ContractFields.InternalPaymentOrganizationUnitsCsv])),
 
       this.store
-        .select(selectItContractsEnablePaymentModel)
+        .select(selectItContractsEnableAndRecommendedPaymentModel)
         .pipe(
+          mapUIConfigStatusToEnabled(),
           shouldEnable([
             ContractFields.OperationRemunerationBegunDate,
             ContractFields.PaymentModelUuid,
@@ -259,12 +261,12 @@ export class GridUIConfigService {
         ),
 
       //Contract Roles
-      this.store.select(selectItContractEnableContractRoles).pipe(shouldEnable([], ['Roles.Role'])),
+      this.store.select(selectItContractEnableAndRecommendedContractRoles).pipe(mapUIConfigStatusToEnabled(), shouldEnable([], ['Roles.Role'])),
 
       //References
       this.store
-        .select(selectItContractEnableReferences)
-        .pipe(shouldEnable([ContractFields.ActiveReferenceTitle, ContractFields.ActiveReferenceExternalReferenceId])),
+        .select(selectItContractEnableAndRecommendedReferences)
+        .pipe(mapUIConfigStatusToEnabled(), shouldEnable([ContractFields.ActiveReferenceTitle, ContractFields.ActiveReferenceExternalReferenceId])),
     ];
 
     return combineLatest(configObservables);
@@ -273,37 +275,39 @@ export class GridUIConfigService {
   private getItSystemUsageGridConfig(): Observable<UIConfigGridApplication[]> {
     const configObservables: Observable<UIConfigGridApplication>[] = [
       //Frontpage
-      this.store.select(selectITSystemUsageEnabledSystemId).pipe(shouldEnable([UsageFields.LocalSystemId])),
-      this.store.select(selectITSystemUsageEnableVersion).pipe(shouldEnable([UsageFields.Version])),
-      this.store.select(selectITSystemUsageEnableAmountOfUsers).pipe(shouldEnable([])),
-      this.store.select(selectITSystemUsageEnableDataClassification).pipe(shouldEnable([])),
-      this.store.select(selectITSystemUsageEnableDescription).pipe(shouldEnable([UsageFields.Note])),
-      this.store.select(selectITSystemUsageEnableTakenIntoUsageBy).pipe(shouldEnable([UsageFields.ObjectOwnerName])),
-      this.store.select(selectITSystemUsageEnableLastEditedBy).pipe(shouldEnable([UsageFields.LastChangedByName])),
-      this.store.select(selectITSystemUsageEnableLastEditedAt).pipe(shouldEnable([UsageFields.LastChangedAt])),
+      this.store.select(selectITSystemUsageEnableAndRecommendedSystemId).pipe(mapUIConfigStatusToEnabled(), shouldEnable([UsageFields.LocalSystemId])),
+      this.store.select(selectITSystemUsageEnableAndRecommendedVersion).pipe(mapUIConfigStatusToEnabled(), shouldEnable([UsageFields.Version])),
+      this.store.select(selectITSystemUsageEnableAndRecommendedAmountOfUsers).pipe(mapUIConfigStatusToEnabled(), shouldEnable([])),
+      this.store.select(selectITSystemUsageEnableAndRecommendedDataClassification).pipe(mapUIConfigStatusToEnabled(), shouldEnable([])),
+      this.store.select(selectITSystemUsageEnableAndRecommendedDescription).pipe(mapUIConfigStatusToEnabled(), shouldEnable([UsageFields.Note])),
+      this.store.select(selectITSystemUsageEnableAndRecommendedTakenIntoUsageBy).pipe(mapUIConfigStatusToEnabled(), shouldEnable([UsageFields.ObjectOwnerName])),
+      this.store.select(selectITSystemUsageEnableAndRecommendedLastEditedBy).pipe(mapUIConfigStatusToEnabled(), shouldEnable([UsageFields.LastChangedByName])),
+      this.store.select(selectITSystemUsageEnableAndRecommendedLastEditedAt).pipe(mapUIConfigStatusToEnabled(), shouldEnable([UsageFields.LastChangedAt])),
       this.store
-        .select(selectITSystemUsageEnableLifeCycleStatus)
-        .pipe(shouldEnable([UsageFields.LifeCycleStatus, UsageFields.ActiveAccordingToLifeCycle])),
+        .select(selectITSystemUsageEnableAndRecommendedLifeCycleStatus)
+        .pipe(mapUIConfigStatusToEnabled(), shouldEnable([UsageFields.LifeCycleStatus, UsageFields.ActiveAccordingToLifeCycle])),
       this.store
-        .select(selectITSystemUsageEnableFrontPageUsagePeriod)
+        .select(selectITSystemUsageEnableAndRecommendedFrontPageUsagePeriod)
         .pipe(
+          mapUIConfigStatusToEnabled(),
           shouldEnable([
             UsageFields.ExpirationDate,
             UsageFields.Concluded,
             UsageFields.ActiveAccordingToValidityPeriod,
           ]),
         ),
-      this.store.select(selectITSystemUsageEnableStatus).pipe(shouldEnable([])),
-      this.store.select(selectITSystemUsageEnableAmountOfUsers).pipe(shouldEnable([UsageFields.UserCount])),
+      this.store.select(selectITSystemUsageEnableAndRecommendedStatus).pipe(mapUIConfigStatusToEnabled(), shouldEnable([])),
+      this.store.select(selectITSystemUsageEnableAndRecommendedAmountOfUsers).pipe(mapUIConfigStatusToEnabled(), shouldEnable([UsageFields.UserCount])),
       this.store
-        .select(selectITSystemUsageEnableDataClassification)
-        .pipe(shouldEnable([UsageFields.ItSystemCategoriesUuid])),
+        .select(selectITSystemUsageEnableAndRecommendedDataClassification)
+        .pipe(mapUIConfigStatusToEnabled(), shouldEnable([UsageFields.ItSystemCategoriesUuid])),
       this.store
-        .select(selectITSystemUsageEnableContainsAITechnology)
-        .pipe(shouldEnable([UsageFields.ContainsAITechnology])),
+        .select(selectITSystemUsageEnableAndRecommendedContainsAITechnology)
+        .pipe(mapUIConfigStatusToEnabled(), shouldEnable([UsageFields.ContainsAITechnology])),
       this.store
-        .select(selectITSystemUsageEnableWebAccessibility)
+        .select(selectITSystemUsageEnableAndRecommendedWebAccessibility)
         .pipe(
+          mapUIConfigStatusToEnabled(),
           shouldEnable([
             UsageFields.WebAccessibilityCompliance,
             UsageFields.LastWebAccessibilityCheck,
@@ -311,30 +315,30 @@ export class GridUIConfigService {
           ]),
         ),
       this.store
-        .select(selectITSystemUsageEnableIsSociallyCritical)
-        .pipe(shouldEnable([UsageFields.IsSociallyCritical])),
+        .select(selectITSystemUsageEnableAndRecommendedIsSociallyCritical)
+        .pipe(mapUIConfigStatusToEnabled(), shouldEnable([UsageFields.IsSociallyCritical])),
       this.store
-        .select(selectITSystemUsageEnableIsBusinessCritical)
-        .pipe(shouldEnable([UsageFields.IsBusinessCritical])),
+        .select(selectITSystemUsageEnableAndRecommendedIsBusinessCritical)
+        .pipe(mapUIConfigStatusToEnabled(), shouldEnable([UsageFields.IsBusinessCritical])),
       this.store
-        .select(selectITSystemUsageEnableCriticalityFieldsLastChanged)
-        .pipe(shouldEnable([UsageFields.CriticalityFieldsLastChanged])),
+        .select(selectITSystemUsageEnableAndRecommendedCriticalityFieldsLastChanged)
+        .pipe(mapUIConfigStatusToEnabled(), shouldEnable([UsageFields.CriticalityFieldsLastChanged])),
 
       //Contracts
       combineAND([
         this.store.select(selectShowItContractModule),
-        this.store.select(selectITSystemUsageEnableSelectContractToDetermineIfItSystemIsActive),
+        this.store.select(selectITSystemUsageEnableAndRecommendedSelectContractToDetermineIfItSystemIsActive).pipe(mapUIConfigStatusToEnabled()),
       ]).pipe(shouldEnable([UsageFields.MainContractIsActive, UsageFields.MainContractSupplierName])),
 
       combineAND([
         this.store.select(selectShowItContractModule),
-        this.store.select(selectITSystemUsageEnableAssociatedContracts),
+        this.store.select(selectITSystemUsageEnableAndRecommendedAssociatedContracts).pipe(mapUIConfigStatusToEnabled()),
       ]).pipe(shouldEnable([UsageFields.AssociatedContractsNamesCsv])),
 
       //Data processing
       combineAND([
         this.store.select(selectShowDataProcessingRegistrations),
-        this.store.select(selectITSystemUsageEnableDataProcessing),
+        this.store.select(selectITSystemUsageEnableAndRecommendedDataProcessing).pipe(mapUIConfigStatusToEnabled()),
       ]).pipe(
         shouldEnable([
           UsageFields.DataProcessingRegistrationsConcludedAsCsv,
@@ -344,11 +348,12 @@ export class GridUIConfigService {
 
       //GDPR
       this.store
-        .select(selectITSystemUsageEnableGdprDataTypes)
-        .pipe(shouldEnable([UsageFields.SensitiveDataLevelsAsCsv])),
+        .select(selectITSystemUsageEnableAndRecommendedGdprDataTypes)
+        .pipe(mapUIConfigStatusToEnabled(), shouldEnable([UsageFields.SensitiveDataLevelsAsCsv])),
       this.store
-        .select(selectITSystemUsageEnableGdprConductedRiskAssessment)
+        .select(selectITSystemUsageEnableAndRecommendedGdprConductedRiskAssessment)
         .pipe(
+          mapUIConfigStatusToEnabled(),
           shouldEnable([
             UsageFields.RiskAssessmentDate,
             UsageFields.RiskSupervisionDocumentationName,
@@ -356,87 +361,89 @@ export class GridUIConfigService {
           ]),
         ),
       this.store
-        .select(selectITSystemUsageEnableGdprPlannedRiskAssessmentDate)
-        .pipe(shouldEnable([UsageFields.PlannedRiskAssessmentDate])),
+        .select(selectITSystemUsageEnableAndRecommendedGdprPlannedRiskAssessmentDate)
+        .pipe(mapUIConfigStatusToEnabled(), shouldEnable([UsageFields.PlannedRiskAssessmentDate])),
       this.store
-        .select(selectITSystemUsageEnableGdprRiskAssessmentResult)
-        .pipe(shouldEnable([UsageFields.RiskAssessmentResult])),
-      this.store.select(selectITSystemUsageEnableGeneralPurpose).pipe(shouldEnable([UsageFields.GeneralPurpose])),
-      this.store.select(selectITSystemUsageEnableGdprPurpose).pipe(shouldEnable([UsageFields.ProcessingPurpose])),
-      this.store.select(selectITSystemUsageEnableGeneralHostedAt).pipe(shouldEnable([UsageFields.HostedAt])),
+        .select(selectITSystemUsageEnableAndRecommendedGdprRiskAssessmentResult)
+        .pipe(mapUIConfigStatusToEnabled(), shouldEnable([UsageFields.RiskAssessmentResult])),
+      this.store.select(selectITSystemUsageEnableAndRecommendedGeneralPurpose).pipe(mapUIConfigStatusToEnabled(), shouldEnable([UsageFields.GeneralPurpose])),
+      this.store.select(selectITSystemUsageEnableAndRecommendedGdprPurpose).pipe(mapUIConfigStatusToEnabled(), shouldEnable([UsageFields.ProcessingPurpose])),
+      this.store.select(selectITSystemUsageEnableAndRecommendedGeneralHostedAt).pipe(mapUIConfigStatusToEnabled(), shouldEnable([UsageFields.HostedAt])),
       this.store
-        .select(selectITSystemUsageEnableGdprDocumentation)
-        .pipe(shouldEnable([UsageFields.LinkToDirectoryName])),
-      this.store.select(selectITSystemUsageEnableGdprDpiaConducted).pipe(shouldEnable([UsageFields.DpiaConducted])),
+        .select(selectITSystemUsageEnableAndRecommendedGdprDocumentation)
+        .pipe(mapUIConfigStatusToEnabled(), shouldEnable([UsageFields.LinkToDirectoryName])),
+      this.store.select(selectITSystemUsageEnableAndRecommendedGdprDpiaConducted).pipe(mapUIConfigStatusToEnabled(), shouldEnable([UsageFields.DpiaConducted])),
       this.store
-        .select(selectITSystemUsageEnableSystemUsageCriticalityLevel)
-        .pipe(shouldEnable([UsageFields.SystemUsageCriticalityLevelUuid])),
+        .select(selectITSystemUsageEnableAndRecommendedSystemUsageCriticalityLevel)
+        .pipe(mapUIConfigStatusToEnabled(), shouldEnable([UsageFields.SystemUsageCriticalityLevelUuid])),
       this.store
-        .select(selectITSystemUsageEnableGdprIsDataProcessingAgreementRequired)
-        .pipe(shouldEnable([UsageFields.IsDataProcessingAgreementRequired])),
+        .select(selectITSystemUsageEnableAndRecommendedGdprIsDataProcessingAgreementRequired)
+        .pipe(mapUIConfigStatusToEnabled(), shouldEnable([UsageFields.IsDataProcessingAgreementRequired])),
       this.store
-        .select(selectITSystemUsageEnableTechnicalSystemType)
-        .pipe(shouldEnable([UsageFields.TechnicalSystemTypeNamesAsCsv])),
+        .select(selectITSystemUsageEnableAndRecommendedTechnicalSystemType)
+        .pipe(mapUIConfigStatusToEnabled(), shouldEnable([UsageFields.TechnicalSystemTypeNamesAsCsv])),
 
       //Organization
       this.store
-        .select(selectITSystemUsageEnableTabOrganization)
+        .select(selectITSystemUsageEnableAndRecommendedTabOrganization)
         .pipe(
+          mapUIConfigStatusToEnabled(),
           shouldEnable([UsageFields.ResponsibleOrganizationUnitName, UsageFields.RelevantOrganizationUnitNamesAsCsv]),
         ),
 
       //Relations
       this.store
-        .select(selectITSystemUsageEnableOutgoingRelations)
+        .select(selectITSystemUsageEnableAndRecommendedOutgoingRelations)
         .pipe(
+          mapUIConfigStatusToEnabled(),
           shouldEnable([
             UsageFields.OutgoingRelatedItSystemUsagesNamesAsCsv,
             UsageFields.DependsOnInterfacesNamesAsCsv,
           ]),
         ),
       this.store
-        .select(selectITSystemUsageEnableIncomingRelations)
-        .pipe(shouldEnable([UsageFields.IncomingRelatedItSystemUsagesNamesAsCsv])),
+        .select(selectITSystemUsageEnableAndRecommendedIncomingRelations)
+        .pipe(mapUIConfigStatusToEnabled(), shouldEnable([UsageFields.IncomingRelatedItSystemUsagesNamesAsCsv])),
 
       //Archiving
-      this.store.select(selectITSystemUsageEnableTabArchiving).pipe(shouldEnable([UsageFields.ArchiveDuty])),
-      this.store.select(selectITSystemUsageEnableDocumentBearing).pipe(shouldEnable([UsageFields.IsHoldingDocument])),
+      this.store.select(selectITSystemUsageEnableAndRecommendedTabArchiving).pipe(mapUIConfigStatusToEnabled(), shouldEnable([UsageFields.ArchiveDuty])),
+      this.store.select(selectITSystemUsageEnableAndRecommendedDocumentBearing).pipe(mapUIConfigStatusToEnabled(), shouldEnable([UsageFields.IsHoldingDocument])),
       this.store
-        .select(selectITSystemUsageEnableJournalPeriods)
-        .pipe(shouldEnable([UsageFields.ActiveArchivePeriodEndDate])),
+        .select(selectITSystemUsageEnableAndRecommendedJournalPeriods)
+        .pipe(mapUIConfigStatusToEnabled(), shouldEnable([UsageFields.ActiveArchivePeriodEndDate])),
       this.store
-        .select(selectITSystemUsageEnableCatalogArchiveDuty)
-        .pipe(shouldEnable([UsageFields.CatalogArchiveDuty])),
+        .select(selectITSystemUsageEnableAndRecommendedCatalogArchiveDuty)
+        .pipe(mapUIConfigStatusToEnabled(), shouldEnable([UsageFields.CatalogArchiveDuty])),
       this.store
-        .select(selectITSystemUsageEnableCatalogArchiveDutyComment)
-        .pipe(shouldEnable([UsageFields.CatalogArchiveDutyComment])),
+        .select(selectITSystemUsageEnableAndRecommendedCatalogArchiveDutyComment)
+        .pipe(mapUIConfigStatusToEnabled(), shouldEnable([UsageFields.CatalogArchiveDutyComment])),
 
       //Roles
-      this.store.select(selectITSystemUsageEnableTabSystemRoles).pipe(shouldEnable([], ['Roles.Role'])),
+      this.store.select(selectITSystemUsageEnableAndRecommendedTabSystemRoles).pipe(mapUIConfigStatusToEnabled(), shouldEnable([], ['Roles.Role'])),
 
       //KLE
       this.store
-        .select(selectITSystemUsageEnableInheritedKle)
-        .pipe(shouldEnable([UsageFields.ItSystemKLEIdsAsCsv, UsageFields.ItSystemKLENamesAsCsv])),
+        .select(selectITSystemUsageEnableAndRecommendedInheritedKle)
+        .pipe(mapUIConfigStatusToEnabled(), shouldEnable([UsageFields.ItSystemKLEIdsAsCsv, UsageFields.ItSystemKLENamesAsCsv])),
       this.store
-        .select(selectITSystemUsageEnableLocalKle)
-        .pipe(shouldEnable([UsageFields.LocalKleIdsAsCsv, UsageFields.LocalKleNamesAsCsv])),
+        .select(selectITSystemUsageEnableAndRecommendedLocalKle)
+        .pipe(mapUIConfigStatusToEnabled(), shouldEnable([UsageFields.LocalKleIdsAsCsv, UsageFields.LocalKleNamesAsCsv])),
 
       //References
       this.store
-        .select(selectITSystemUsageEnableLocalReferences)
-        .pipe(shouldEnable([UsageFields.LocalReferenceTitle, UsageFields.LocalReferenceDocumentId])),
+        .select(selectITSystemUsageEnableAndRecommendedLocalReferences)
+        .pipe(mapUIConfigStatusToEnabled(), shouldEnable([UsageFields.LocalReferenceTitle, UsageFields.LocalReferenceDocumentId])),
 
       //Interfaces
-      this.store.select(selectITSystemUsageEnableItInterfaceIds).pipe(shouldEnable([UsageFields.ItInterfaceIdsAsCsv])),
+      this.store.select(selectITSystemUsageEnableAndRecommendedItInterfaceIds).pipe(mapUIConfigStatusToEnabled(), shouldEnable([UsageFields.ItInterfaceIdsAsCsv])),
       this.store
-        .select(selectITSystemUsageEnableItInterfaceVersions)
-        .pipe(shouldEnable([UsageFields.ItInterfaceVersionsAsCsv])),
+        .select(selectITSystemUsageEnableAndRecommendedItInterfaceVersions)
+        .pipe(mapUIConfigStatusToEnabled(), shouldEnable([UsageFields.ItInterfaceVersionsAsCsv])),
 
       //Licensing and Code Models
       this.store
-        .select(selectITSystemUsageEnableLicensingAndCodeModels)
-        .pipe(shouldEnable([UsageFields.LicensingAndCodeModels])),
+        .select(selectITSystemUsageEnableAndRecommendedLicensingAndCodeModels)
+        .pipe(mapUIConfigStatusToEnabled(), shouldEnable([UsageFields.LicensingAndCodeModels])),
     ];
 
     return combineLatest(configObservables);
@@ -445,42 +452,43 @@ export class GridUIConfigService {
   private getDataProcessingGridConfig(): Observable<UIConfigGridApplication[]> {
     const configObservables: Observable<UIConfigGridApplication>[] = [
       // Frontpage
-      this.store.select(selectDprEnableDataResponsible).pipe(shouldEnable([DprFields.DataResponsibleUuid])),
-      this.store.select(selectDprEnableStatus).pipe(shouldEnable([DprFields.IsActive])),
+      this.store.select(selectDprEnableAndRecommendedDataResponsible).pipe(mapUIConfigStatusToEnabled(), shouldEnable([DprFields.DataResponsibleUuid])),
+      this.store.select(selectDprEnableAndRecommendedStatus).pipe(mapUIConfigStatusToEnabled(), shouldEnable([DprFields.IsActive])),
       this.store
-        .select(selectDprEnableLastChangedBy)
-        .pipe(shouldEnable([DprFields.LastChangedById, DprFields.LastChangedByName])),
-      this.store.select(selectDprEnableLastChangedAt).pipe(shouldEnable([DprFields.LastChangedAt])),
+        .select(selectDprEnableAndRecommendedLastChangedBy)
+        .pipe(mapUIConfigStatusToEnabled(), shouldEnable([DprFields.LastChangedById, DprFields.LastChangedByName])),
+      this.store.select(selectDprEnableAndRecommendedLastChangedAt).pipe(mapUIConfigStatusToEnabled(), shouldEnable([DprFields.LastChangedAt])),
       this.store
-        .select(selectDprEnableAgreementConcluded)
-        .pipe(shouldEnable([DprFields.IsAgreementConcluded, DprFields.AgreementConcludedAt])),
+        .select(selectDprEnableAndRecommendedAgreementConcluded)
+        .pipe(mapUIConfigStatusToEnabled(), shouldEnable([DprFields.IsAgreementConcluded, DprFields.AgreementConcludedAt])),
       this.store
-        .select(selectDprEnableTransferBasis)
-        .pipe(shouldEnable([DprFields.BasisForTransferUuid, DprFields.TransferToInsecureThirdCountries])),
-      this.store.select(selectDprEnableProcessors).pipe(shouldEnable([DprFields.DataProcessorNamesAsCsv])),
-      this.store.select(selectDprEnableSubProcessors).pipe(shouldEnable([DprFields.SubDataProcessorNamesAsCsv])),
-      this.store.select(selectDprEnableResponsibleOrgUnit).pipe(shouldEnable([DprFields.ResponsibleOrgUnitName])),
+        .select(selectDprEnableAndRecommendedTransferBasis)
+        .pipe(mapUIConfigStatusToEnabled(), shouldEnable([DprFields.BasisForTransferUuid, DprFields.TransferToInsecureThirdCountries])),
+      this.store.select(selectDprEnableAndRecommendedProcessors).pipe(mapUIConfigStatusToEnabled(), shouldEnable([DprFields.DataProcessorNamesAsCsv])),
+      this.store.select(selectDprEnableAndRecommendedSubProcessors).pipe(mapUIConfigStatusToEnabled(), shouldEnable([DprFields.SubDataProcessorNamesAsCsv])),
+      this.store.select(selectDprEnableAndRecommendedResponsibleOrgUnit).pipe(mapUIConfigStatusToEnabled(), shouldEnable([DprFields.ResponsibleOrgUnitName])),
       // IT Systems
-      combineAND([this.store.select(selectShowItSystemModule), this.store.select(selectDprEnableItSystems)]).pipe(
+      combineAND([this.store.select(selectShowItSystemModule), this.store.select(selectDprEnableAndRecommendedItSystems).pipe(mapUIConfigStatusToEnabled())]).pipe(
         shouldEnable([DprFields.SystemNamesAsCsv, DprFields.SystemUuidsAsCsv]),
       ),
 
       // Contracts
-      this.store.select(selectDprEnableMainContract).pipe(shouldEnable([DprFields.ActiveAccordingToMainContract])),
+      this.store.select(selectDprEnableAndRecommendedMainContract).pipe(mapUIConfigStatusToEnabled(), shouldEnable([DprFields.ActiveAccordingToMainContract])),
       combineAND([
         this.store.select(selectShowItContractModule),
-        this.store.select(selectDprEnableAssociatedContracts),
+        this.store.select(selectDprEnableAndRecommendedAssociatedContracts).pipe(mapUIConfigStatusToEnabled()),
       ]).pipe(shouldEnable([DprFields.ContractNamesAsCsv])),
 
       // Oversight
-      this.store.select(selectDprEnabledOversightInterval).pipe(shouldEnable([DprFields.OversightInterval])),
+      this.store.select(selectDprEnableAndRecommendedOversightInterval).pipe(mapUIConfigStatusToEnabled(), shouldEnable([DprFields.OversightInterval])),
       this.store
-        .select(selectDprEnableScheduledInspectionDate)
-        .pipe(shouldEnable([DprFields.OversightScheduledInspectionDate])),
-      this.store.select(selectDprEnableOversightOptions).pipe(shouldEnable([DprFields.OversightOptionNamesAsCsv])),
+        .select(selectDprEnableAndRecommendedScheduledInspectionDate)
+        .pipe(mapUIConfigStatusToEnabled(), shouldEnable([DprFields.OversightScheduledInspectionDate])),
+      this.store.select(selectDprEnableAndRecommendedOversightOptions).pipe(mapUIConfigStatusToEnabled(), shouldEnable([DprFields.OversightOptionNamesAsCsv])),
       this.store
-        .select(selectDprEnableOversights)
+        .select(selectDprEnableAndRecommendedOversights)
         .pipe(
+          mapUIConfigStatusToEnabled(),
           shouldEnable([
             DprFields.IsOversightCompleted,
             DprFields.LatestOversightDate,
@@ -491,12 +499,12 @@ export class GridUIConfigService {
         ),
 
       // Roles
-      this.store.select(selectDprEnableRoles).pipe(shouldEnable([], ['Roles.Role'])),
+      this.store.select(selectDprEnableAndRecommendedRoles).pipe(mapUIConfigStatusToEnabled(), shouldEnable([], ['Roles.Role'])),
 
       // References
       this.store
-        .select(selectDprEnableReferences)
-        .pipe(shouldEnable([DprFields.MainReferenceTitle, DprFields.MainReferenceUserAssignedId])),
+        .select(selectDprEnableAndRecommendedReferences)
+        .pipe(mapUIConfigStatusToEnabled(), shouldEnable([DprFields.MainReferenceTitle, DprFields.MainReferenceUserAssignedId])),
     ];
 
     return combineLatest(configObservables);
@@ -505,8 +513,9 @@ export class GridUIConfigService {
   private getGdprGridConfig(): Observable<UIConfigGridApplication[]> {
     return combineLatest([
       this.store
-        .select(selectITSystemUsageEnableGdprDataTypes)
+        .select(selectITSystemUsageEnableAndRecommendedGdprDataTypes)
         .pipe(
+          mapUIConfigStatusToEnabled(),
           shouldEnable([
             GdprFields.NO_DATA,
             GdprFields.PERSONAL_DATA,
@@ -520,8 +529,9 @@ export class GridUIConfigService {
         ),
 
       this.store
-        .select(selectITSystemUsageEnableGdprConductedRiskAssessment)
+        .select(selectITSystemUsageEnableAndRecommendedGdprConductedRiskAssessment)
         .pipe(
+          mapUIConfigStatusToEnabled(),
           shouldEnable([
             GdprFields.RISK_ASSESSMENT_NAME,
             GdprFields.RISK_ASSESSMENT_DATE,
@@ -531,39 +541,39 @@ export class GridUIConfigService {
         ),
 
       this.store
-        .select(selectITSystemUsageEnableGdprPlannedRiskAssessmentDate)
-        .pipe(shouldEnable([GdprFields.PLANNED_RISK_ASSESSMENT_DATE])),
+        .select(selectITSystemUsageEnableAndRecommendedGdprPlannedRiskAssessmentDate)
+        .pipe(mapUIConfigStatusToEnabled(), shouldEnable([GdprFields.PLANNED_RISK_ASSESSMENT_DATE])),
 
       this.store
-        .select(selectITSystemUsageEnableGdprRiskAssessmentResult)
-        .pipe(shouldEnable([GdprFields.PRE_RISK_ASSESSMENT_NAME])),
+        .select(selectITSystemUsageEnableAndRecommendedGdprRiskAssessmentResult)
+        .pipe(mapUIConfigStatusToEnabled(), shouldEnable([GdprFields.PRE_RISK_ASSESSMENT_NAME])),
 
       this.store
-        .select(selectITSystemUsageEnableGdprDpiaConducted)
-        .pipe(shouldEnable([GdprFields.DPIA_NAME, GdprFields.DPIA_DATE])),
+        .select(selectITSystemUsageEnableAndRecommendedGdprDpiaConducted)
+        .pipe(mapUIConfigStatusToEnabled(), shouldEnable([GdprFields.DPIA_NAME, GdprFields.DPIA_DATE])),
 
       combineAND([
-        this.store.select(selectITSystemUsageEnableDataProcessing),
+        this.store.select(selectITSystemUsageEnableAndRecommendedDataProcessing).pipe(mapUIConfigStatusToEnabled()),
         this.store.select(selectShowDataProcessingRegistrations),
       ]).pipe(shouldEnable([GdprFields.DATA_PROCESSING_AGREEMENT_CONCLUDED])),
 
-      this.store.select(selectITSystemUsageEnableGdprDocumentation).pipe(shouldEnable([GdprFields.LINK_TO_DIRECTORY])),
+      this.store.select(selectITSystemUsageEnableAndRecommendedGdprDocumentation).pipe(mapUIConfigStatusToEnabled(), shouldEnable([GdprFields.LINK_TO_DIRECTORY])),
 
       this.store
-        .select(selectITSystemUsageEnableGdprTechnicalPrecautions)
-        .pipe(shouldEnable([GdprFields.TECHNICAL_SUPERVISION_DOCUMENTATION_NAME])),
+        .select(selectITSystemUsageEnableAndRecommendedGdprTechnicalPrecautions)
+        .pipe(mapUIConfigStatusToEnabled(), shouldEnable([GdprFields.TECHNICAL_SUPERVISION_DOCUMENTATION_NAME])),
 
       this.store
-        .select(selectITSystemUsageEnableGdprUserSupervision)
-        .pipe(shouldEnable([GdprFields.USER_SUPERVISION, GdprFields.USER_SUPERVISION_DOCUMENTATION_NAME])),
+        .select(selectITSystemUsageEnableAndRecommendedGdprUserSupervision)
+        .pipe(mapUIConfigStatusToEnabled(), shouldEnable([GdprFields.USER_SUPERVISION, GdprFields.USER_SUPERVISION_DOCUMENTATION_NAME])),
 
       this.store
-        .select(selectITSystemUsageEnableGdprRetentionPeriod)
-        .pipe(shouldEnable([GdprFields.NEXT_DATA_RETENTION_EVALUATION_DATE])),
+        .select(selectITSystemUsageEnableAndRecommendedGdprRetentionPeriod)
+        .pipe(mapUIConfigStatusToEnabled(), shouldEnable([GdprFields.NEXT_DATA_RETENTION_EVALUATION_DATE])),
 
       this.store
-        .select(selectDprEnableTransferBasis)
-        .pipe(shouldEnable([GdprFields.COUNTRIES_SUBJECT_TO_DATA_TRANSFER])),
+        .select(selectDprEnableAndRecommendedTransferBasis)
+        .pipe(mapUIConfigStatusToEnabled(), shouldEnable([GdprFields.COUNTRIES_SUBJECT_TO_DATA_TRANSFER])),
     ]);
   }
 

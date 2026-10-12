@@ -14,5 +14,6 @@
 export interface APICustomizedUINodeRequestDTO { 
     key: string;
     enabled?: boolean;
+    recommended?: boolean;
 }
 

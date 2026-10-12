@@ -21,15 +21,18 @@ export const DataProcessingUiBluePrint = {
         },
         status: {
           text: $localize`Status`,
+          cannotBeRecommended: true,
         },
         lastChangedBy: {
           text: $localize`Sidst redigeret af bruger`,
+          cannotBeRecommended: true,
         },
         lastChangedAt: {
           text: $localize`Sidst redigeret dato`,
+          cannotBeRecommended: true,
         },
         agreementConcluded: {
-          text: $localize`Databehandler afftale indgået`,
+          text: $localize`Databehandler aftale indgået`,
         },
         transferBasis: {
           text: $localize`Overførselsgrundlag`,
@@ -46,12 +49,19 @@ export const DataProcessingUiBluePrint = {
         enforceInvalidity: {
           text: $localize`Gennemtving deaktivering`,
           disableByDefault: true,
+          cannotBeRecommended: true,
         },
       },
     },
     itSystems: {
       text: $localize`IT Systemer`,
       helpText: uiConfigHelpTexts.cannotChangeTabOnlyThroughModuleConfig,
+      children: {
+        systemUsages: {
+          text: $localize`IT Systemer`,
+          isObligatory: true,
+        },
+      },
     },
     itContracts: {
       text: $localize`IT Kontrakter`,
@@ -62,6 +72,7 @@ export const DataProcessingUiBluePrint = {
         },
         associatedContracts: {
           text: $localize`Tilknyttede kontrakter`,
+          cannotBeRecommended: true,
         },
       },
     },
@@ -85,12 +96,30 @@ export const DataProcessingUiBluePrint = {
     },
     roles: {
       text: $localize`Databehandlingsroller`,
+      children: {
+        roles: {
+          text: $localize`Databehandlingsroller`,
+          isObligatory: true,
+        },
+      },
     },
     notifications: {
       text: $localize`Advis`,
+      children: {
+        notifications: {
+          text: $localize`Advis`,
+          isObligatory: true,
+        },
+      },
     },
     references: {
       text: $localize`Referencer`,
+      children: {
+        references: {
+          text: $localize`Referencer`,
+          isObligatory: true,
+        },
+      },
     },
   },
 };

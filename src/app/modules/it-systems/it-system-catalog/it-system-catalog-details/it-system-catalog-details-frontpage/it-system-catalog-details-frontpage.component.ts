@@ -3,12 +3,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { combineLatestWith, first, map } from 'rxjs';
-import { APIShallowOrganizationDTO } from 'src/app/api/v1';
 import {
   APIExternalReferenceDataResponseDTO,
   APIIdentityNamePairResponseDTO,
   APIRecommendedArchiveDutyChoice,
   APIRegularOptionResponseDTO,
+  APIShallowOrganizationResponseDTO,
   APIUpdateItSystemRequestDTO,
 } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
@@ -43,7 +43,6 @@ import { CardComponent } from '../../../../../shared/components/card/card.compon
 import { ContentBoxComponent } from '../../../../../shared/components/contentbox/contentbox.component';
 import { ConnectedDropdownComponent } from '../../../../../shared/components/dropdowns/connected-dropdown/connected-dropdown.component';
 import { DropdownComponent } from '../../../../../shared/components/dropdowns/dropdown/dropdown.component';
-import { MultiSelectDropdownComponent } from '../../../../../shared/components/dropdowns/multi-select-dropdown/multi-select-dropdown.component';
 import { ExternalReferenceComponent } from '../../../../../shared/components/external-reference/external-reference.component';
 import { FormGridComponent } from '../../../../../shared/components/form-grid/form-grid.component';
 import { ParagraphComponent } from '../../../../../shared/components/paragraph/paragraph.component';
@@ -98,10 +97,10 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
   public readonly archiveDutyRecommendationOptions = archiveDutyRecommendationChoiceOptions;
 
   public readonly itSystemFrontpageFormGroup = new FormGroup({
-    name: new FormControl<string | undefined>({ value: undefined, disabled: true }, Validators.required),
+    name: new FormControl<string | undefined>({ value: undefined, disabled: true }, [Validators.required, Validators.maxLength(100)]),
     parentSystem: new FormControl<APIIdentityNamePairResponseDTO | undefined>({ value: undefined, disabled: true }),
     formerName: new FormControl<string | undefined>({ value: undefined, disabled: true }),
-    rightsHolder: new FormControl<APIShallowOrganizationDTO | undefined>({ value: undefined, disabled: true }),
+    rightsHolder: new FormControl<APIShallowOrganizationResponseDTO | undefined>({ value: undefined, disabled: true }),
     businessType: new FormControl<APIRegularOptionResponseDTO | undefined>({ value: undefined, disabled: true }),
     scope: new FormControl<ScopeChoice | undefined>({ value: undefined, disabled: true }),
     uuid: new FormControl<string | undefined>({ value: undefined, disabled: true }),
@@ -116,8 +115,8 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
       disabled: true,
     }),
     description: new FormControl<string | undefined>({ value: undefined, disabled: true }),
-    legalName: new FormControl<string | undefined>({ value: undefined, disabled: true }),
-    legalDataProcessorName: new FormControl<string | undefined>({ value: undefined, disabled: true }),
+    legalName: new FormControl<string | undefined>({ value: undefined, disabled: true }, Validators.maxLength(100)),
+    legalDataProcessorName: new FormControl<string | undefined>({ value: undefined, disabled: true }, Validators.maxLength(100)),
   });
 
   public readonly nationalArchivesText = ARCHIVE_TEXT;
@@ -202,7 +201,6 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
           ),
         )
         .subscribe(([itSystem, hasModifyPermission, canModifyVisibility]) => {
-
           this.itSystemFrontpageFormGroup.patchValue({
             name: itSystem.name,
             parentSystem: itSystem.parentSystem,

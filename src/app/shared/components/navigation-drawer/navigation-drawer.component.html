@@ -12,7 +12,16 @@
           [attr.data-cy]="item.dataCy"
           >
           <app-icon [iconType]="item.iconType" class="icon-padding"></app-icon>
-          <span class="label" [ngClass]="{ visible: isExpanded }">{{ item.label }}</span>
+          <span class="label" [ngClass]="{ visible: isExpanded }">
+            {{ item.label }}
+            @if (isExpanded && item.recommendedBadge$ && (item.recommendedBadge$ | async); as recommendedBadge) {
+              <app-recommended-badge
+                [visible]="recommendedBadge.visible"
+                [filled]="recommendedBadge.filled"
+                [showTooltip]="false"
+              ></app-recommended-badge>
+            }
+          </span>
         </app-button>
       }
     </div>

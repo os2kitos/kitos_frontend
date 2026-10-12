@@ -25,6 +25,6 @@ export interface APIItInterfacePermissionsResponseDTO {
      * True when the API client is allowed to DELETE the
      */
     delete?: boolean;
-    deletionConflicts?: Array<APIItInterfaceDeletionConflict> | null;
+    deletionConflicts: Array<APIItInterfaceDeletionConflict> | null;
 }
 

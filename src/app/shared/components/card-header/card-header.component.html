@@ -1,4 +1,5 @@
 <h6>{{ title }}</h6>
+<app-recommended-badge [visible]="recommended" [filled]="recommendedFilled"></app-recommended-badge>
 <ng-content></ng-content>
 @if (spacer) {
   <span class="space"></span>

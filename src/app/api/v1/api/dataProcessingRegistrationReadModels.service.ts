@@ -25,14 +25,16 @@ import { Configuration }                                     from '../configurat
 
 
 export interface GetSingleDataProcessingRegistrationReadModelsGetRequestParams {
-    /**  */
+    /** UUID of the organization */
     organizationUuid?: string;
+    /** UUID of the responsible organization unit */
     responsibleOrganizationUnitUuid?: string;
 }
 
 export interface GetSingleDataProcessingRegistrationReadModelsGetCountRequestParams {
-    /**  */
+    /** UUID of the organization */
     organizationUuid?: string;
+    /** UUID of the responsible organization unit */
     responsibleOrganizationUnitUuid?: string;
 }
 

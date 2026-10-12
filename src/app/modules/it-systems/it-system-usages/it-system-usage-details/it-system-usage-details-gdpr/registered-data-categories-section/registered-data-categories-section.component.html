@@ -1,4 +1,6 @@
 <app-accordion
+  [recommended]="(recommended$ | async) === true"
+  [recommendedFilled]="((registeredDataCategories$ | async)?.length ?? 0) > 0"
   title="Hvilke kategorier af registrerede indgår i databehandlingen?"
   [isExpanded]="(isExpanded$ | async) ?? false"
   (expandedChanged)="onExpandedChanged($event)"

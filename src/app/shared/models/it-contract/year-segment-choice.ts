@@ -18,6 +18,10 @@ export const yearSegmentChoiceOptions: YearSegmentChoice[] = [
     name: $localize`Måned`,
     value: APIYearSegmentChoice.EndOfMonth,
   },
+  {
+    name: $localize`Faktureringsperiode`,
+    value: APIYearSegmentChoice.BillingPeriod,
+  },
 ];
 
 export const mapYearSegmentChoice = (value?: APIYearSegmentChoice): YearSegmentChoice | undefined => {

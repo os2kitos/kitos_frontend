@@ -23,6 +23,7 @@ export class OptionTypeDropdownComponent extends BaseComponent implements OnInit
   @Input() formName?: string;
   @Input() value?: APIRegularOptionResponseDTO;
   @Input() dropdownTitle?: string;
+  @Input() recommended = false;
 
   @Output() valueChange = new EventEmitter<string | null | undefined>();
 

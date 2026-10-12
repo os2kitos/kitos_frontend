@@ -12,8 +12,8 @@
 
 
 export interface APINamedEntityV2DTO { 
-    id?: number;
+    id: number;
     uuid?: string | null;
-    name?: string | null;
+    name: string | null;
 }
 

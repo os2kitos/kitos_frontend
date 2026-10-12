@@ -21,6 +21,7 @@ import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
 import { getColumnsToShow } from 'src/app/shared/helpers/grid-config-helper';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
+import { yearSegmentChoiceOptions } from 'src/app/shared/models/it-contract/year-segment-choice';
 import { yesNoOptions } from 'src/app/shared/models/yes-no.model';
 import { GridDataKey } from 'src/app/shared/services/column-filter-data.service';
 import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
@@ -142,6 +143,14 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       hidden: false,
       persistId: 'expirationDate',
       defaultDateFilterOperator: 'lte',
+    },
+    {
+      field: GridFields.Note,
+      title: $localize`Bemærkninger`,
+      section: this.contractSection,
+      style: 'default-wrap',
+      hidden: true,
+      persistId: 'note',
     },
     {
       field: GridFields.CriticalityUuid,
@@ -442,6 +451,15 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       width: 350,
       hidden: false,
       persistId: 'terminated',
+    },
+    {
+      field: GridFields.ByEnding,
+      title: $localize`Inden udgangen af`,
+      section: AGREEMENT_DEADLINES_SECTION_NAME,
+      extraFilter: 'enum',
+      extraData: yearSegmentChoiceOptions,
+      hidden: false,
+      persistId: 'byEnding',
     },
     {
       field: GridFields.LastEditedByUserName,
