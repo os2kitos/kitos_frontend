@@ -15,6 +15,11 @@ spec:
   selector:
     matchLabels:
       app: kitos-frontend
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
   template:
     metadata:
       annotations:
@@ -42,7 +47,7 @@ spec:
             memory: 512Mi
             cpu: 1
           requests:
-            memory: 128Mi
+            memory: 64Mi
             cpu: 100m
       imagePullSecrets:
       - name: ac6379be-068d-4385-a6c6-6a13c7f5f2e6
