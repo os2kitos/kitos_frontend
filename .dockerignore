@@ -1,4 +1,7 @@
 node_modules
+.angular
+**/telerik-license.txt
+**/kendo-ui-license.txt
 dist
 .git
 .github
