@@ -75,7 +75,7 @@ jobs:
           # Revalidate the license on every run while caching dependency installation.
           no-cache-filters: build
           secrets: |
-            "TELERIK_LICENSE=${{ secrets.TELERIK_LICENSE }}"
+            "KENDO_UI_LICENSE=${{ secrets.KENDO_UI_LICENSE }}"
           context: "./"
           file: "Dockerfile"
           push: true

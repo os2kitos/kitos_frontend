@@ -10,8 +10,8 @@ RUN yarn install --frozen-lockfile
 FROM dependencies AS build
 
 COPY . .
-RUN --mount=type=secret,id=TELERIK_LICENSE,env=TELERIK_LICENSE,required=true \
-    test -n "$TELERIK_LICENSE" && \
+RUN --mount=type=secret,id=KENDO_UI_LICENSE,env=KENDO_UI_LICENSE,required=true \
+    test -n "$KENDO_UI_LICENSE" && \
     yarn run kendo-ui-license activate && \
     NODE_OPTIONS=--max_old_space_size=5048 yarn ng build --configuration production --base-href / --localize false
 
