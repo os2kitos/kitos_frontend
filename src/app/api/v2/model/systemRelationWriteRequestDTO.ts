@@ -9,6 +9,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APISystemRelationDirectionChoice } from './systemRelationDirectionChoice';
 
 
 export interface APISystemRelationWriteRequestDTO { 
@@ -30,5 +31,6 @@ export interface APISystemRelationWriteRequestDTO {
     relationFrequencyUuid?: string | null;
     description?: string | null;
     urlReference?: string | null;
+    systemRelationDirection?: APISystemRelationDirectionChoice;
 }
 

@@ -60,6 +60,8 @@ export class GridOptionsButtonComponent {
         return 'it-system.interfaceCatalog';
       case 'it-contract':
         return 'it-contract.overview';
+      case 'it-contract-supplier':
+        return 'it-contract.supplier-overview';
       case 'data-processing-registration':
         return 'data-processing.overview';
       case 'organization-user':

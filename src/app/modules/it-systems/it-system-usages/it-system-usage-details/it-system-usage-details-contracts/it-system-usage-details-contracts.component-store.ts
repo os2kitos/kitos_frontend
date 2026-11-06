@@ -1,24 +1,26 @@
-import { Injectable, OnDestroy } from '@angular/core';
-import { ComponentStore } from '@ngrx/component-store';
-import { tapResponse } from '@ngrx/operators';
+import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
 
-import { Observable, map, mergeMap } from 'rxjs';
-import { APIItContractResponseDTO, ItContractV2Service } from 'src/app/api/v2';
+import { map } from 'rxjs';
+import { APIItContractResponseDTO } from 'src/app/api/v2';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
-
-interface State {
-  loading: boolean;
-  contracts?: Array<APIItContractResponseDTO>;
-}
+import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
+import {
+  selectItSystemUsageAssociatedContracts,
+  selectItSystemUsageAssociatedContractsIsLoading,
+} from 'src/app/store/it-system-usage/selectors';
 
 interface AssociatedContractRowViewModel extends APIItContractResponseDTO {
   hasOperation: boolean;
 }
 
 @Injectable()
-export class ItSystemUsageDetailsContractsComponentStore extends ComponentStore<State> implements OnDestroy {
-  public readonly associatedContracts$ = this.select((state) => state.contracts).pipe(filterNullish());
-  public readonly associatedContractsIsLoading$ = this.select((state) => state.loading).pipe(filterNullish());
+export class ItSystemUsageDetailsContractsComponentStore {
+  public readonly associatedContracts$ = this.store.select(selectItSystemUsageAssociatedContracts).pipe(filterNullish());
+  public readonly associatedContractsLoaded$ = this.store.select(selectItSystemUsageAssociatedContracts).pipe(
+    map((contracts) => contracts !== undefined),
+  );
+  public readonly associatedContractsIsLoading$ = this.store.select(selectItSystemUsageAssociatedContractsIsLoading);
   public readonly contractRows$ = this.associatedContracts$.pipe(
     map((contracts: Array<APIItContractResponseDTO>) =>
       contracts.map<AssociatedContractRowViewModel>((contract) => {
@@ -30,38 +32,9 @@ export class ItSystemUsageDetailsContractsComponentStore extends ComponentStore<
     ),
   );
 
-  constructor(private contractsService: ItContractV2Service) {
-    super({ loading: false });
+  constructor(private store: Store) {}
+
+  public getAssociatedContracts(systemUsageUuid: string): void {
+    this.store.dispatch(ITSystemUsageActions.getAssociatedContracts(systemUsageUuid));
   }
-
-  private updateAssociatedContracts = this.updater(
-    (state, contracts: Array<APIItContractResponseDTO>): State => ({
-      ...state,
-      contracts: contracts,
-    }),
-  );
-
-  private updateAssociatedContractsIsLoading = this.updater(
-    (state, loading: boolean): State => ({
-      ...state,
-      loading: loading,
-    }),
-  );
-
-  public getAssociatedContracts = this.effect((systemUsageUuid$: Observable<string>) =>
-    systemUsageUuid$.pipe(
-      mergeMap((systemUsageUuid) => {
-        this.updateAssociatedContractsIsLoading(true);
-        return this.contractsService
-          .getManyItContractV2GetItContracts({ systemUsageUuid: systemUsageUuid, orderByProperty: 'Name' })
-          .pipe(
-            tapResponse({
-              next: (associatedContracts) => this.updateAssociatedContracts(associatedContracts),
-              error: (e) => console.error(e),
-              complete: () => this.updateAssociatedContractsIsLoading(false),
-            }),
-          );
-      }),
-    ),
-  );
 }

@@ -15,6 +15,7 @@ import {
   selectITSystemUsageEnableAndRecommendedGdprPlannedRiskAssessmentDate,
   selectITSystemUsageEnableAndRecommendedGdprPurpose,
   selectITSystemUsageEnableAndRecommendedGdprRetentionPeriod,
+  selectITSystemUsageEnableAndRecommendedGdprPersonalDataDeletion,
   selectITSystemUsageEnableAndRecommendedGdprTechnicalPrecautions,
   selectITSystemUsageEnableAndRecommendedGdprUserSupervision,
   selectITSystemUsageEnableAndRecommendedGeneralHostedAt,
@@ -32,7 +33,10 @@ import { GdprUserSupervisionSectionComponent } from './gdpr-user-supervision-sec
 import { GeneralInfoSectionComponent } from './general-info-section/general-info-section.component';
 import { RegisteredDataCategoriesSectionComponent } from './registered-data-categories-section/registered-data-categories-section.component';
 
+import { GdprPersonalDataDeletionSectionComponent } from './gdpr-personal-data-deletion-section/gdpr-personal-data-deletion-section.component';
+
 type UsageGDPRSection =
+  | 'personal-data-deletion'
   | 'data-sensitivity'
   | 'registered-categories'
   | 'technical-precautions'
@@ -58,6 +62,7 @@ type UsageGDPRSection =
     GdprRiskAssessmentSectionComponent,
     GdprDpiaConductedSectionComponent,
     GdprRetentionPeriodSectionComponent,
+    GdprPersonalDataDeletionSectionComponent,
     AsyncPipe,
   ],
 })
@@ -86,6 +91,7 @@ export class ItSystemUsageDetailsGdprComponent extends BaseComponent {
   ]);
 
   public readonly showDpiaConducted$ = this.store.select(selectITSystemUsageEnableAndRecommendedGdprDpiaConducted).pipe(mapUIConfigStatusToEnabled());
+  public readonly showPersonalDataDeletion$ = this.store.select(selectITSystemUsageEnableAndRecommendedGdprPersonalDataDeletion).pipe(mapUIConfigStatusToEnabled());
   public readonly showRetentionPeriod$ = this.store.select(selectITSystemUsageEnableAndRecommendedGdprRetentionPeriod).pipe(mapUIConfigStatusToEnabled());
 
   public readonly showMoreInformation$ = combineOR([
@@ -96,6 +102,7 @@ export class ItSystemUsageDetailsGdprComponent extends BaseComponent {
     this.showRiskAssessment$,
     this.showDpiaConducted$,
     this.showRetentionPeriod$,
+    this.showPersonalDataDeletion$,
   ]);
 
   public readonly dataSensitivityExpanded$ = new BehaviorSubject<boolean>(false);
@@ -104,6 +111,7 @@ export class ItSystemUsageDetailsGdprComponent extends BaseComponent {
   public readonly userSupervisionExpanded$ = new BehaviorSubject<boolean>(false);
   public readonly riskAssessmentExpanded$ = new BehaviorSubject<boolean>(false);
   public readonly dpiaConductedExpanded$ = new BehaviorSubject<boolean>(false);
+  public readonly personalDataDeletionExpanded$ = new BehaviorSubject<boolean>(false);
   public readonly retentionPeriodExpanded$ = new BehaviorSubject<boolean>(false);
 
   public readonly allExpanded$ = combineAND([
@@ -114,6 +122,7 @@ export class ItSystemUsageDetailsGdprComponent extends BaseComponent {
     this.riskAssessmentExpanded$,
     this.dpiaConductedExpanded$,
     this.retentionPeriodExpanded$,
+    this.personalDataDeletionExpanded$,
   ]);
 
   public readonly expandAllButtonText$ = this.allExpanded$.pipe(
@@ -152,6 +161,9 @@ export class ItSystemUsageDetailsGdprComponent extends BaseComponent {
       case 'dpia-conducted':
         this.dpiaConductedExpanded$.next(expanded);
         break;
+      case 'personal-data-deletion':
+        this.personalDataDeletionExpanded$.next(expanded);
+        break;
       case 'retention-period':
         this.retentionPeriodExpanded$.next(expanded);
         break;
@@ -169,6 +181,7 @@ export class ItSystemUsageDetailsGdprComponent extends BaseComponent {
         this.riskAssessmentExpanded$.next(targetValue);
         this.dpiaConductedExpanded$.next(targetValue);
         this.retentionPeriodExpanded$.next(targetValue);
+        this.personalDataDeletionExpanded$.next(targetValue);
       }),
     );
   }

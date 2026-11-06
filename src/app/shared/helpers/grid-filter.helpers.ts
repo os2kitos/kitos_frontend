@@ -133,3 +133,16 @@ function extractAndRemoveFilter(
 function isTargetFilter(filter: CompositeFilterDescriptor | FilterDescriptor, fieldName: string): boolean {
   return !isCompositeFilterDescriptor(filter) && filter.field === fieldName;
 }
+
+// Saved datepicker values are JSON strings. Numeric range filters also use
+// gte/lte and must retain their original values.
+export function restoreGridFilterDates(filter: CompositeFilterDescriptor | undefined): CompositeFilterDescriptor | undefined {
+  if (!filter) return undefined;
+  return { ...filter, filters: filter.filters.map(restoreGridFilterDate) };
+}
+
+function restoreGridFilterDate(filter: CompositeFilterDescriptor | FilterDescriptor): CompositeFilterDescriptor | FilterDescriptor {
+  if (isCompositeFilterDescriptor(filter)) return restoreGridFilterDates(filter)!;
+  const isSerializedDate = (filter.operator === 'gte' || filter.operator === 'lte') && typeof filter.value === 'string';
+  return isSerializedDate ? { ...filter, value: new Date(filter.value) } : filter;
+}

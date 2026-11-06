@@ -24,6 +24,24 @@ describe('data-processing', () => {
     cy.contains('Dpa 3');
   });
 
+  it('shows whether a main contract is assigned and active', () => {
+    cy.fixture('./dpr/data-processings-odata.json').then((data) => {
+      data.value[0].SourceEntity = { MainContractId: null };
+      data.value[1].SourceEntity = { MainContractId: 1 };
+      data.value[2].SourceEntity = { MainContractId: 2 };
+      data.value[2].ActiveAccordingToMainContract = false;
+      cy.intercept('/odata/DataProcessingRegistrationReadModels*', { body: data });
+    });
+    cy.setup(true, 'data-processing');
+    cy.getByDataCy('column-config-button').click();
+    cy.contains('Status (Markeret kontrakt)').click();
+    cy.getByDataCy('column-config-dialog-save-button').click();
+
+    verifyMainContractStatus('Dpa 1', 'Ingen kontrakt');
+    verifyMainContractStatus('Dpa 2', 'Aktiv');
+    verifyMainContractStatus('Dpa 3', 'Ikke aktiv');
+  });
+
   it('cant create if name already exists', () => {
     cy.setup(true, 'data-processing');
     cy.intercept('/api/v2/data-processing-registrations?nameEquals*', {
@@ -54,3 +72,11 @@ describe('data-processing', () => {
     cy.contains('Ansvarlig org. enhed').should('not.exist');
   });
 });
+
+function verifyMainContractStatus(name: string, expectedStatus: string) {
+  cy.contains('tr', name)
+    .find('app-contract-status-chip-cell')
+    .should(($cell) => {
+      expect($cell.text().trim()).to.equal(expectedStatus);
+    });
+}

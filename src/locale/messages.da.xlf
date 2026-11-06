@@ -8209,6 +8209,170 @@
         <source>Et eller flere felter er indstillet til &quot;Delte&quot;. Både leverandøren og kommunen kan redigere disse felter og dermed overskrive hinandens ændringer. Vil du fortsætte med at gemme?</source>
         <target state="new">Et eller flere felter er indstillet til &quot;Delte&quot;. Både leverandøren og kommunen kan redigere disse felter og dermed overskrive hinandens ændringer. Vil du fortsætte med at gemme?</target>
       </trans-unit>
+      <trans-unit id="7455685579320703716" datatype="html">
+        <source>It System (Udstiller-system)</source>
+        <target state="new">It System (Udstiller-system)</target>
+      </trans-unit>
+      <trans-unit id="4687159634256539615" datatype="html">
+        <source>It System (Anvender-system)</source>
+        <target state="new">It System (Anvender-system)</target>
+      </trans-unit>
+      <trans-unit id="2701213138972309391" datatype="html">
+        <source>Dataretning</source>
+        <target state="translated">Dataretning</target>
+      </trans-unit>
+      <trans-unit id="5156704320597349015" datatype="html">
+        <source>Indgående data</source>
+        <target state="translated">Indgående data</target>
+      </trans-unit>
+      <trans-unit id="7252824347282594899" datatype="html">
+        <source>Udgående data</source>
+        <target state="translated">Udgående data</target>
+      </trans-unit>
+      <trans-unit id="1707896639004290879" datatype="html">
+        <source>Bidirektionel</source>
+        <target state="translated">Bidirektionel</target>
+      </trans-unit>
+      <trans-unit id="8747803947058043155" datatype="html">
+        <source>Sletning af persondata</source>
+        <target state="new">Sletning af persondata</target>
+      </trans-unit>
+      <trans-unit id="2379824252855133424" datatype="html">
+        <source>Kan persondata slettes?</source>
+        <target state="new">Kan persondata slettes?</target>
+      </trans-unit>
+      <trans-unit id="8485449892102039589" datatype="html">
+        <source>Ja, enkelte registreringer</source>
+        <target state="new">Ja, enkelte registreringer</target>
+      </trans-unit>
+      <trans-unit id="7662664617683372377" datatype="html">
+        <source>Ja, massesletning</source>
+        <target state="new">Ja, massesletning</target>
+      </trans-unit>
+      <trans-unit id="6322347453729475906" datatype="html">
+        <source>Sletning foretages automatisk i systemet</source>
+        <target state="new">Sletning foretages automatisk i systemet</target>
+      </trans-unit>
+      <trans-unit id="2395380589394563607" datatype="html">
+        <source>Sletning foretages manuelt i organisationen</source>
+        <target state="new">Sletning foretages manuelt i organisationen</target>
+      </trans-unit>
+      <trans-unit id="898941272447243743" datatype="html">
+        <source>Sletning foretages på bestilling hos leverandøren</source>
+        <target state="new">Sletning foretages på bestilling hos leverandøren</target>
+      </trans-unit>
+      <trans-unit id="494865761333054159" datatype="html">
+        <source>Slettefrist</source>
+        <target state="new">Slettefrist</target>
+      </trans-unit>
+      <trans-unit id="4575595402077148643" datatype="html">
+        <source>Frister for sletning af persondata</source>
+        <target state="new">Frister for sletning af persondata</target>
+      </trans-unit>
+      <trans-unit id="5034677918593162587" datatype="html">
+        <source>Link til sletteprocedure</source>
+        <target state="new">Link til sletteprocedure</target>
+      </trans-unit>
+      <trans-unit id="872088996901133837" datatype="html">
+        <source>Ansvarlig for sletning</source>
+        <target state="new">Ansvarlig for sletning</target>
+      </trans-unit>
+      <trans-unit id="2419441230244269918" datatype="html">
+        <source>Dato for seneste kontrol af sletning</source>
+        <target state="new">Dato for seneste kontrol af sletning</target>
+      </trans-unit>
+      <trans-unit id="6141737652590643919" datatype="html">
+        <source>Link til dokumentation for kontrol</source>
+        <target state="new">Link til dokumentation for kontrol</target>
+      </trans-unit>
+      <trans-unit id="9141896189283023591" datatype="html">
+        <source>Kan der slettes i systemet?</source>
+        <target state="new">Kan der slettes i systemet?</target>
+      </trans-unit>
+      <trans-unit id="4764560537955570992" datatype="html">
+        <source>Hvordan foregår sletning?</source>
+        <target state="new">Hvordan foregår sletning?</target>
+      </trans-unit>
+      <trans-unit id="8461338530544032144" datatype="html">
+        <source>Slettefrist for systemet</source>
+        <target state="new">Slettefrist for systemet</target>
+      </trans-unit>
+      <trans-unit id="8790425925199955404" datatype="html">
+        <source>Hvem er ansvarlig for sletning i systemet</source>
+        <target state="new">Hvem er ansvarlig for sletning i systemet</target>
+      </trans-unit>
+      <trans-unit id="9070188215340932036" datatype="html">
+        <source>Kontrol af at der er foretaget sletning</source>
+        <target state="new">Kontrol af at der er foretaget sletning</target>
+      </trans-unit>
+      <trans-unit id="4746850687225256015" datatype="html">
+        <source>Link til kontrol af sletning</source>
+        <target state="new">Link til kontrol af sletning</target>
+      </trans-unit>
+      <trans-unit id="8303345655270462799" datatype="html">
+        <source>Periode</source>
+        <target state="new">Periode</target>
+      </trans-unit>
+      <trans-unit id="2290459434294592835" datatype="html">
+        <source>Kvartalvis</source>
+        <target state="new">Kvartalvis</target>
+      </trans-unit>
+      <trans-unit id="3259761554295941178" datatype="html">
+        <source>1. halvår</source>
+        <target state="new">1. halvår</target>
+      </trans-unit>
+      <trans-unit id="1652415162109819049" datatype="html">
+        <source>2. halvår</source>
+        <target state="new">2. halvår</target>
+      </trans-unit>
+      <trans-unit id="1737040172648089902" datatype="html">
+        <source>1. kvartal</source>
+        <target state="new">1. kvartal</target>
+      </trans-unit>
+      <trans-unit id="8069764561178863516" datatype="html">
+        <source>2. kvartal</source>
+        <target state="new">2. kvartal</target>
+      </trans-unit>
+      <trans-unit id="8022668540811942972" datatype="html">
+        <source>3. kvartal</source>
+        <target state="new">3. kvartal</target>
+      </trans-unit>
+      <trans-unit id="6339334100637156659" datatype="html">
+        <source>4. kvartal</source>
+        <target state="new">4. kvartal</target>
+      </trans-unit>
+      <trans-unit id="8322469132685027868" datatype="html">
+        <source>Fakturerings startdato 1</source>
+        <target state="new">Fakturerings startdato 1</target>
+      </trans-unit>
+      <trans-unit id="4592332289462801654" datatype="html">
+        <source>Fakturerings startdato 2</source>
+        <target state="new">Fakturerings startdato 2</target>
+      </trans-unit>
+      <trans-unit id="1407866383632849818" datatype="html">
+        <source>Fakturerings startdato 3</source>
+        <target state="new">Fakturerings startdato 3</target>
+      </trans-unit>
+      <trans-unit id="5354629695177193755" datatype="html">
+        <source>Fakturerings startdato 4</source>
+        <target state="new">Fakturerings startdato 4</target>
+      </trans-unit>
+      <trans-unit id="4905249546416313099" datatype="html">
+        <source>Ryd dato</source>
+        <target state="new">Ryd dato</target>
+      </trans-unit>
+      <trans-unit id="8705714423968353895" datatype="html">
+        <source>Angiv en gyldig dato inden for den tilladte periode.</source>
+        <target state="new">Angiv en gyldig dato inden for den tilladte periode.</target>
+      </trans-unit>
+      <trans-unit id="5647051459859298679" datatype="html">
+        <source>Nej, skal udarbejdes</source>
+        <target state="new">Nej, skal udarbejdes</target>
+      </trans-unit>
+      <trans-unit id="3968331875273171522" datatype="html">
+        <source>Nej, skal ikke udarbejdes</source>
+        <target state="new">Nej, skal ikke udarbejdes</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

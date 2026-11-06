@@ -4,7 +4,7 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: easy-hosting-issuer
   name: kitos-frontend
-  namespace: kitos
+  namespace: kitos-dev
 spec:
   rules:
   - host: kitos-dev.strongminds.tech
@@ -17,7 +17,7 @@ spec:
               name: http
         path: /
         pathType: Prefix
-  - host: bb461bb7-2424-411d-8f62-12edde1831f0.kitos-dev.strongminds.easyhosting.strongminds.dev
+  - host: f7528dba-774b-4ecc-8627-ce14f8f3a7e8.os2kitos-development.strongminds.easyhosting.strongminds.dev
     http:
       paths:
       - backend:
@@ -32,5 +32,5 @@ spec:
     - kitos-dev.strongminds.tech
     secretName: kitos-dev-strongminds-tech-tls
   - hosts:
-    - bb461bb7-2424-411d-8f62-12edde1831f0.kitos-dev.strongminds.easyhosting.strongminds.dev
-    secretName: bb461bb7-2424-411d-8f62-12edde1831f0-kitos-dev-strongminds-easyhosting-strongminds-dev-tls
+    - f7528dba-774b-4ecc-8627-ce14f8f3a7e8.os2kitos-development.strongminds.easyhosting.strongminds.dev
+    secretName: f7528dba-774b-4ecc-8627-ce14f8f3a7e8-os2kitos-development-strongminds-easyhosting-strongminds-dev-tls

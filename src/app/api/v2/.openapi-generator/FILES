@@ -80,6 +80,7 @@ api/itSystemGlobalDataTypesInternalV2.service.ts
 api/itSystemGlobalFrequencyTypesInternalV2.service.ts
 api/itSystemGlobalInterfaceTypesInternalV2.service.ts
 api/itSystemGlobalItSystemCategoriesInternalV2.service.ts
+api/itSystemGlobalPersonalDataDeletionDeadlineTypesInternalV2.service.ts
 api/itSystemGlobalRegisterTypesInternalV2.service.ts
 api/itSystemGlobalRoleOptionTypesInternalV2.service.ts
 api/itSystemGlobalSensitivePersonalDataTypesInternalV2.service.ts
@@ -94,6 +95,7 @@ api/itSystemLocalDataTypesInternalV2.service.ts
 api/itSystemLocalFrequencyTypesInternalV2.service.ts
 api/itSystemLocalInterfaceTypesInternalV2.service.ts
 api/itSystemLocalItSystemCategoriesTypesInternalV2.service.ts
+api/itSystemLocalPersonalDataDeletionDeadlineTypesInternalV2.service.ts
 api/itSystemLocalRegisterTypesInternalV2.service.ts
 api/itSystemLocalRoleOptionTypesInternalV2.service.ts
 api/itSystemLocalSensitivePersonalDataTypesInternalV2.service.ts
@@ -107,6 +109,7 @@ api/itSystemUsageCriticalityLevelTypeV2.service.ts
 api/itSystemUsageDataClassificationTypeV2.service.ts
 api/itSystemUsageInternalV2.service.ts
 api/itSystemUsageMigrationV2.service.ts
+api/itSystemUsagePersonalDataDeletionDeadlineTypeV2.service.ts
 api/itSystemUsageRegisteredDataCategoryTypeV2.service.ts
 api/itSystemUsageRelationFrequencyTypeV2.service.ts
 api/itSystemUsageRoleTypeV2.service.ts
@@ -170,6 +173,7 @@ model/contractAgreementPeriodDataResponseDTO.ts
 model/contractAgreementPeriodDataWriteRequestDTO.ts
 model/contractGeneralDataResponseDTO.ts
 model/contractGeneralDataWriteRequestDTO.ts
+model/contractInvoiceDateDTO.ts
 model/contractPaymentModelDataResponseDTO.ts
 model/contractPaymentModelDataWriteRequestDTO.ts
 model/contractPaymentsDataResponseDTO.ts
@@ -219,6 +223,7 @@ model/deactivationReasonRequestDTO.ts
 model/defaultUserStartPreferenceChoice.ts
 model/deleteOrganizationUnitRoleAssignmentRequestDTO.ts
 model/disconnectFromStsOrganizationRequestDTO.ts
+model/dpiaConductedChoice.ts
 model/emailRecipientResponseDTO.ts
 model/emailRecipientWriteRequestDTO.ts
 model/expectedUsersIntervalDTO.ts
@@ -252,6 +257,7 @@ model/identityNamePairWithDeactivatedStatusDTO.ts
 model/immediateNotificationWriteRequestDTO.ts
 model/incomingSystemRelationResponseDTO.ts
 model/interfacesExposedOutsideTheOrganizationResponseDTO.ts
+model/invoiceFrequencyChoice.ts
 model/isDataProcessingAgreementRequiredChoice.ts
 model/itContractHierarchyNodeResponseDTO.ts
 model/itContractPermissionsResponseDTO.ts
@@ -349,6 +355,8 @@ model/paymentAuditStatus.ts
 model/paymentRegistrationResponseDTO.ts
 model/paymentRequestDTO.ts
 model/paymentResponseDTO.ts
+model/personalDataDeletionCapabilityChoice.ts
+model/personalDataDeletionMethodChoice.ts
 model/procurementPlanDTO.ts
 model/publicMessageIconTypeChoice.ts
 model/publicMessageRequestDTO.ts
@@ -376,6 +384,7 @@ model/rightsHolderItSystemResponseDTO.ts
 model/rightsHolderPartialUpdateItInterfaceRequestDTO.ts
 model/rightsHolderUpdateSystemPropertiesRequestDTO.ts
 model/rightsHolderWritableItInterfacePropertiesDTO.ts
+model/riskAssessmentConductedChoice.ts
 model/riskLevelChoice.ts
 model/roleAssignmentRequestDTO.ts
 model/roleAssignmentResponseDTO.ts
@@ -399,6 +408,7 @@ model/supplierAssociatedFieldConfigurationItemDTO.ts
 model/supplierAssociatedFieldConfigurationRequestDTO.ts
 model/supplierAssociatedFieldConfigurationResponseDTO.ts
 model/systemDeletionConflict.ts
+model/systemRelationDirectionChoice.ts
 model/systemRelationWriteRequestDTO.ts
 model/systemWithUsageOutsideOrganizationConflictResponseDTO.ts
 model/technicalPrecautionChoice.ts

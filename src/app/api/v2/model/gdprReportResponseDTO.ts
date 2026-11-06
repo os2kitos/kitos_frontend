@@ -9,8 +9,9 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIRiskAssessmentConductedChoice } from './riskAssessmentConductedChoice';
 import { APIYesNoDontKnowChoice } from './yesNoDontKnowChoice';
-import { APIYesNoDontKnowIrrelevantChoice } from './yesNoDontKnowIrrelevantChoice';
+import { APIDpiaConductedChoice } from './dpiaConductedChoice';
 import { APIRiskLevelChoice } from './riskLevelChoice';
 
 
@@ -24,7 +25,7 @@ export interface APIGdprReportResponseDTO {
     dataProcessingAgreementConcluded?: boolean;
     linkToDirectory?: boolean;
     sensitiveDataTypes: Array<string> | null;
-    riskAssessment?: APIYesNoDontKnowIrrelevantChoice;
+    riskAssessment?: APIRiskAssessmentConductedChoice;
     riskAssessmentDate?: string | null;
     plannedRiskAssessmentDate?: string | null;
     preRiskAssessment?: APIRiskLevelChoice;
@@ -32,7 +33,7 @@ export interface APIGdprReportResponseDTO {
     personalDataCpr?: boolean;
     personalDataSocialProblems?: boolean;
     personalDataSocialOtherPrivateMatters?: boolean;
-    dpia?: APIYesNoDontKnowChoice;
+    dpia?: APIDpiaConductedChoice;
     dpiaDate?: string | null;
     technicalSupervisionDocumentationUrlName: string | null;
     technicalSupervisionDocumentationUrl?: string | null;

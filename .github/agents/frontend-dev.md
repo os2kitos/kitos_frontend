@@ -61,6 +61,7 @@ yarn swagger           # Regenerate API clients from OpenAPI spec
 
 ### Testing
 
+- Follow the [testing skill](../skills/testing/SKILL.md): for now, add Cypress tests only for the most crucial app flows, with minimal additions.
 - **No unit tests** — Cypress covers both component and E2E testing
 - E2E tests: `cypress/e2e/`
 - Component tests: `src/app/component-tests/`

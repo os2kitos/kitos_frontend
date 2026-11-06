@@ -4,8 +4,9 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { combineLatest, first, map } from 'rxjs';
-import { APIIdentityNamePairResponseDTO } from 'src/app/api/v2';
+import { APIIdentityNamePairResponseDTO, APISystemRelationDirectionChoice } from 'src/app/api/v2';
 import { ConnectedDropdownComponent } from 'src/app/shared/components/dropdowns/connected-dropdown/connected-dropdown.component';
+import { DropdownOption } from 'src/app/shared/models/dropdown-option.model';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { ItSystemUsageDetailsRelationsDialogComponentStore } from '../system-relation-dialog/relation-dialog.component-store';
@@ -96,6 +97,10 @@ export class ModifyRelationDialogComponent extends SystemRelationDialogComponent
         value: this.relationModel.relationInterface,
         disabled: false,
       }),
+      systemRelationDirection: new FormControl<DropdownOption<APISystemRelationDirectionChoice> | undefined>({
+        value: this.relationModel.systemRelationDirection,
+        disabled: false,
+      }),
       frequency: new FormControl<APIIdentityNamePairResponseDTO | undefined>({
         value: this.relationModel.relationFrequency,
         disabled: false,
@@ -131,6 +136,7 @@ export class ModifyRelationDialogComponent extends SystemRelationDialogComponent
     const request = {
       toSystemUsageUuid: usage.uuid,
       relationInterfaceUuid: formValue.interface?.uuid,
+      systemRelationDirection: formValue.systemRelationDirection?.value,
       associatedContractUuid: formValue.contract?.uuid,
       relationFrequencyUuid: formValue.frequency?.uuid,
       description: formValue.description ?? undefined,

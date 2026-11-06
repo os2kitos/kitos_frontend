@@ -5,6 +5,7 @@
       "name": "testUsage"
     },
     "uuid": "e3397f9e-72d4-42a2-8da4-d84de1ffc7a2",
+    "systemRelationDirection": "IncomingData",
     "relationInterface": {
       "uuid": "50497fdf-a4d9-42dd-8ac0-e69f3ee9c01d",
       "name": "testInterface"

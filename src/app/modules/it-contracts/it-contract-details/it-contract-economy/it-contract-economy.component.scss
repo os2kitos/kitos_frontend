@@ -1,7 +1,19 @@
+@use "theme";
 @use "mixins.scss";
 
 :host {
   display: flex;
   flex-direction: column;
   width: 100%;
+}
+
+.invoice-period-row {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: subgrid;
+  gap: theme.$padding-large;
+}
+
+.invoice-period-row app-datepicker {
+  grid-column: 2;
 }

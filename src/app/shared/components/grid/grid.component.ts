@@ -24,8 +24,6 @@ import {
 } from '@progress/kendo-angular-grid';
 import {
   CompositeFilterDescriptor,
-  FilterDescriptor,
-  isCompositeFilterDescriptor,
   process,
   SortDescriptor,
 } from '@progress/kendo-data-query';
@@ -51,7 +49,7 @@ import {
   GRID_ROW_HEIGHT,
 } from '../../constants/constants';
 import { includedColumnInExport } from '../../helpers/grid-export.helper';
-import { getApplyFilterAction, getSaveFilterAction } from '../../helpers/grid-filter.helpers';
+import { getApplyFilterAction, getSaveFilterAction, restoreGridFilterDates } from '../../helpers/grid-filter.helpers';
 import { GridColumn } from '../../models/grid-column.model';
 import { GridData } from '../../models/grid-data.model';
 import { DEFAULT_VIRTUALIZTION_PAGE_SIZE, GridState } from '../../models/grid-state.model';
@@ -435,37 +433,12 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
       this.actions$.pipe(ofType(getApplyFilterAction(this.entityType))).subscribe(({ state }) => {
         const newState = {
           ...this.state,
-          filter: this.mapCompositeFilterStringDatesToDateObjects(state.filter),
+          filter: restoreGridFilterDates(state.filter),
           sort: state.sort,
         };
         this.onStateChange(newState);
       })
     );
-  }
-
-  private mapCompositeFilterStringDatesToDateObjects(
-    filter: CompositeFilterDescriptor | undefined
-  ): CompositeFilterDescriptor | undefined {
-    if (!filter) return undefined;
-    return {
-      filters: filter.filters.map((filter) => {
-        if (isCompositeFilterDescriptor(filter)) {
-          return this.mapCompositeFilterStringDatesToDateObjects(filter);
-        }
-        if (this.isDateFilter(filter)) {
-          return {
-            ...filter,
-            value: new Date(filter.value),
-          };
-        }
-        return filter;
-      }),
-      logic: filter.logic,
-    } as CompositeFilterDescriptor;
-  }
-
-  private isDateFilter(filter: FilterDescriptor): boolean {
-    return filter.operator === 'gte' || filter.operator === 'lte';
   }
 
   private saveFilter(localStoreKey: string) {

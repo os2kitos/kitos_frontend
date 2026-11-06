@@ -17,6 +17,14 @@
       <ng-content>
       </ng-content>
 
+      <app-dropdown
+        text="Dataretning"
+        i18n-text
+        [data]="systemRelationDirectionOptions"
+        [formGroup]="formGroup"
+        formName="systemRelationDirection"
+      ></app-dropdown>
+
       <app-textarea
         text="Beskrivelse"
         i18n-text

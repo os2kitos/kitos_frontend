@@ -21,6 +21,7 @@ import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
 import { getColumnsToShow } from 'src/app/shared/helpers/grid-config-helper';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
+import { invoiceFrequencyChoiceOptions } from 'src/app/shared/models/it-contract/invoice-frequency-choice';
 import { yearSegmentChoiceOptions } from 'src/app/shared/models/it-contract/year-segment-choice';
 import { yesNoOptions } from 'src/app/shared/models/yes-no.model';
 import { GridDataKey } from 'src/app/shared/services/column-filter-data.service';
@@ -379,6 +380,63 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       style: 'uuid-to-name',
       hidden: false,
       persistId: 'paymentFrequency',
+    },
+    {
+      field: GridFields.InvoiceFrequency,
+      title: $localize`Faktureringsperiode`,
+      section: ECONOMY_SECTION_NAME,
+      extraFilter: 'enum',
+      extraData: invoiceFrequencyChoiceOptions,
+      hidden: false,
+      persistId: 'invoiceFrequency',
+    },
+    {
+      field: GridFields.InvoiceDate1,
+      title: $localize`Fakturerings startdato 1`,
+      section: ECONOMY_SECTION_NAME,
+      filter: 'date',
+      style: 'date',
+      width: 270,
+      minResizableWidth: 260,
+      sortable: true,
+      hidden: false,
+      persistId: 'invoiceDate1',
+    },
+    {
+      field: GridFields.InvoiceDate2,
+      title: $localize`Fakturerings startdato 2`,
+      section: ECONOMY_SECTION_NAME,
+      filter: 'date',
+      style: 'date',
+      width: 270,
+      minResizableWidth: 260,
+      sortable: true,
+      hidden: false,
+      persistId: 'invoiceDate2',
+    },
+    {
+      field: GridFields.InvoiceDate3,
+      title: $localize`Fakturerings startdato 3`,
+      section: ECONOMY_SECTION_NAME,
+      filter: 'date',
+      style: 'date',
+      width: 270,
+      minResizableWidth: 260,
+      sortable: true,
+      hidden: false,
+      persistId: 'invoiceDate3',
+    },
+    {
+      field: GridFields.InvoiceDate4,
+      title: $localize`Fakturerings startdato 4`,
+      section: ECONOMY_SECTION_NAME,
+      filter: 'date',
+      style: 'date',
+      width: 270,
+      minResizableWidth: 260,
+      sortable: true,
+      hidden: false,
+      persistId: 'invoiceDate4',
     },
     {
       field: GridFields.LatestAuditDate,

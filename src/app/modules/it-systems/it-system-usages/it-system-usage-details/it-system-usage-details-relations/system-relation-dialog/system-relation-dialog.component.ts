@@ -5,7 +5,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { Subject, combineLatest, map } from 'rxjs';
-import { APIIdentityNamePairResponseDTO } from 'src/app/api/v2';
+import { APIIdentityNamePairResponseDTO, APISystemRelationDirectionChoice } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ButtonComponent } from 'src/app/shared/components/buttons/button/button.component';
 import { DialogActionsComponent } from 'src/app/shared/components/dialogs/dialog-actions/dialog-actions.component';
@@ -15,6 +15,8 @@ import { DropdownComponent } from 'src/app/shared/components/dropdowns/dropdown/
 import { StandardVerticalContentGridComponent } from 'src/app/shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { TextAreaComponent } from 'src/app/shared/components/textarea/textarea.component';
 import { TextBoxComponent } from 'src/app/shared/components/textbox/textbox.component';
+import { DropdownOption } from 'src/app/shared/models/dropdown-option.model';
+import { systemRelationDirectionOptions } from 'src/app/shared/models/it-system-usage/system-relation-direction.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
@@ -28,6 +30,7 @@ export interface SystemRelationDialogFormModel {
   reference: FormControl<string | null | undefined>;
   contract: FormControl<APIIdentityNamePairResponseDTO | null | undefined>;
   frequency: FormControl<APIIdentityNamePairResponseDTO | null | undefined>;
+  systemRelationDirection: FormControl<DropdownOption<APISystemRelationDirectionChoice> | null | undefined>;
 }
 
 @Component({
@@ -59,6 +62,7 @@ export class SystemRelationDialogComponent extends BaseComponent {
   public readonly systemUsagesLoading$ = this.componentStore.isSystemUsagesLoading$;
   public readonly contracts$ = this.componentStore.contracts$;
   public readonly contractsLoading$ = this.componentStore.contractsLoading$;
+  public readonly systemRelationDirectionOptions = systemRelationDirectionOptions;
 
   public readonly interfacesLoading$ = this.componentStore.isInterfacesOrSystemUuidLoading$;
 

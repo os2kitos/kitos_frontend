@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, forwardRef, Input } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ButtonComponent } from '../../../buttons/button/button.component';
 import { HelpButtonComponent } from '../../../help-button/help-button.component';
@@ -11,7 +11,7 @@ import { DialogComponent } from '../dialog.component';
   selector: 'app-dialog-header',
   templateUrl: './dialog-header.component.html',
   styleUrl: './dialog-header.component.scss',
-  imports: [CommonModule, ButtonComponent, ArrowLeftIconComponent, HelpButtonComponent, XIconComponent],
+  imports: [CommonModule, ButtonComponent, ArrowLeftIconComponent, forwardRef(() => HelpButtonComponent), XIconComponent],
 })
 export class DialogHeaderComponent {
   @Input() public title?: string;

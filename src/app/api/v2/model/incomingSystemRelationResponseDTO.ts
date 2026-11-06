@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
+import { APISystemRelationDirectionChoice } from './systemRelationDirectionChoice';
 
 
 export interface APIIncomingSystemRelationResponseDTO { 
@@ -17,6 +18,7 @@ export interface APIIncomingSystemRelationResponseDTO {
      * UUID of the system relation registration
      */
     uuid: string;
+    systemRelationDirection?: APISystemRelationDirectionChoice;
     relationInterface?: APIIdentityNamePairResponseDTO;
     associatedContract?: APIIdentityNamePairResponseDTO;
     relationFrequency?: APIIdentityNamePairResponseDTO;

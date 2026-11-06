@@ -4,12 +4,12 @@ metadata:
   labels:
     app.kubernetes.io/name: kitos-frontend
     app.kubernetes.io/component: service
-    app.kubernetes.io/part-of: kitos
+    app.kubernetes.io/part-of: kitos-dev
     app.kubernetes.io/managed-by: easy-hosting
     network-policy.kubernetes.io/type: egress
     network-policy.kubernetes.io/purpose: allow-egress
   name: kitos-frontend-allow-all-egress
-  namespace: kitos
+  namespace: kitos-dev
 spec:
   egress:
   - {}
@@ -25,12 +25,12 @@ metadata:
   labels:
     app.kubernetes.io/name: kitos-frontend
     app.kubernetes.io/component: service
-    app.kubernetes.io/part-of: kitos
+    app.kubernetes.io/part-of: kitos-dev
     app.kubernetes.io/managed-by: easy-hosting
     network-policy.kubernetes.io/type: ingress
     network-policy.kubernetes.io/purpose: allow-namespace
   name: kitos-frontend-allow-from-namespace
-  namespace: kitos
+  namespace: kitos-dev
 spec:
   egress:
   - to:
@@ -54,12 +54,12 @@ metadata:
   labels:
     app.kubernetes.io/name: kitos-frontend
     app.kubernetes.io/component: service
-    app.kubernetes.io/part-of: kitos
+    app.kubernetes.io/part-of: kitos-dev
     app.kubernetes.io/managed-by: easy-hosting
     network-policy.kubernetes.io/type: ingress
     network-policy.kubernetes.io/purpose: allow-lb
   name: kitos-frontend-allow-public
-  namespace: kitos
+  namespace: kitos-dev
 spec:
   ingress:
   - from:

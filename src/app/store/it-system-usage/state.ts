@@ -2,6 +2,7 @@ import { EntityState } from '@ngrx/entity';
 import { APIBusinessRoleDTO } from 'src/app/api/v1';
 import {
   APICombinedPermissionsResponseDTO,
+  APIItContractResponseDTO,
   APIItSystemUsageResponseDTO,
   APIOrganizationGridConfigurationResponseDTO,
   APIResourceCollectionPermissionsResponseDTO,
@@ -23,6 +24,9 @@ export interface ITSystemUsageState extends EntityState<ITSystemUsage> {
 
   itSystemUsage: APIItSystemUsageResponseDTO | undefined;
   itSystemUsageLoading: boolean;
+  associatedContractUuidsByUsage: Record<string, string[] | undefined>;
+  associatedContractsByUsage: Record<string, APIItContractResponseDTO[] | undefined>;
+  associatedContractsLoadingByUsage: Record<string, boolean | undefined>;
   permissions: APICombinedPermissionsResponseDTO | undefined;
   collectionPermissions: APIResourceCollectionPermissionsResponseDTO | undefined;
 

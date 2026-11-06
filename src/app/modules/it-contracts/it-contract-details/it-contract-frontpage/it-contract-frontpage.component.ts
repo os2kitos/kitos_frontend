@@ -449,7 +449,7 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
     this.store.dispatch(
       ITContractActions.patchITContract({
         supplier: {
-          organizationUuid: valueUuid,
+          organizationUuid: valueUuid ?? null,
           isInternal: isCurrentOrganization,
         },
       }),

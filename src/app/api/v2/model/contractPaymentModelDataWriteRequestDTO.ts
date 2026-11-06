@@ -9,9 +9,16 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIContractInvoiceDateDTO } from './contractInvoiceDateDTO';
+import { APIInvoiceFrequencyChoice } from './invoiceFrequencyChoice';
 
 
 export interface APIContractPaymentModelDataWriteRequestDTO { 
+    invoiceFrequency?: APIInvoiceFrequencyChoice;
+    /**
+     * Optional replacement list of full-date/period pairs. Requires an invoice frequency.  Empty or null clears all dates. Omission preserves dates unless frequency changes (including PUT frequency reset).  Periods must be unique and within the selected frequency.
+     */
+    invoiceDates?: Array<APIContractInvoiceDateDTO> | null;
     /**
      * The data at which operations remuneration started
      */

@@ -43,14 +43,14 @@
         [ngModelOptions]="{ standalone: true }"
         [disabled]="item.disabled"
       />
-      @if (!showDescription || !(item[itemDescriptionField] || item.value?.[itemDescriptionField])) {
+      @if (!showDescription || !getItemDescription(item)) {
       <p class="select-option-text-margin">
         {{ item[textField] }}
       </p>
       } @else {
       <div class="item-with-description">
         {{ item[textField] }}
-        <app-paragraph paragraphSize="small">{{ item[itemDescriptionField] || item.value?.[itemDescriptionField] }}</app-paragraph>
+        <app-paragraph paragraphSize="small">{{ getItemDescription(item) }}</app-paragraph>
       </div>
       }
       @if (isTagFn(item)) {

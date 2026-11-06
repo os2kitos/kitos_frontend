@@ -4,8 +4,9 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { first, Subject } from 'rxjs';
-import { APIIdentityNamePairResponseDTO } from 'src/app/api/v2';
+import { APIIdentityNamePairResponseDTO, APISystemRelationDirectionChoice } from 'src/app/api/v2';
 import { ConnectedMultiSelectDropdownComponent } from 'src/app/shared/components/dropdowns/connected-multi-select-dropdown/connected-multi-select-dropdown.component';
+import { DropdownOption } from 'src/app/shared/models/dropdown-option.model';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { ItSystemUsageDetailsRelationsDialogComponentStore } from '../system-relation-dialog/relation-dialog.component-store';
@@ -32,6 +33,10 @@ export class CreateRelationDialogComponent extends SystemRelationDialogComponent
     reference: new FormControl<string | undefined>({ value: undefined, disabled: true }),
     contract: new FormControl<APIIdentityNamePairResponseDTO | undefined>({ value: undefined, disabled: true }),
     interfaces: new FormControl<APIIdentityNamePairResponseDTO[] | undefined>({ value: undefined, disabled: true }),
+    systemRelationDirection: new FormControl<DropdownOption<APISystemRelationDirectionChoice> | undefined>({
+      value: undefined,
+      disabled: true,
+    }),
     frequency: new FormControl<APIIdentityNamePairResponseDTO | undefined>({ value: undefined, disabled: true }),
   });
 
@@ -101,6 +106,7 @@ export class CreateRelationDialogComponent extends SystemRelationDialogComponent
         ? interfacesValue.map((x) => ({
             toSystemUsageUuid: usage.uuid,
             relationInterfaceUuid: x.uuid,
+            systemRelationDirection: formValue.systemRelationDirection?.value,
             associatedContractUuid: formValue.contract?.uuid,
             relationFrequencyUuid: formValue.frequency?.uuid,
             description: formValue.description ?? undefined,
@@ -110,6 +116,7 @@ export class CreateRelationDialogComponent extends SystemRelationDialogComponent
             {
               toSystemUsageUuid: usage.uuid,
               relationInterfaceUuid: undefined,
+              systemRelationDirection: formValue.systemRelationDirection?.value,
               associatedContractUuid: formValue.contract?.uuid,
               relationFrequencyUuid: formValue.frequency?.uuid,
               description: formValue.description ?? undefined,

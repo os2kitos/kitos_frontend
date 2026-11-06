@@ -2,6 +2,12 @@ import moment from 'moment';
 
 const oneHourInMs = 60 * 60 * 1000;
 
+export function getMaximumFutureDate(): Date {
+  const maximumYearsAhead = 100;
+  const today = new Date();
+  return new Date(today.getFullYear() + maximumYearsAhead, today.getMonth(), today.getDate());
+}
+
 export const optionalNewDate = (date?: string): Date | undefined => {
   return date ? new Date(date) : undefined;
 };

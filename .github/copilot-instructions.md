@@ -103,6 +103,7 @@ Strict mode is fully enabled (`strict`, `noImplicitOverride`, `noImplicitReturns
 
 ### Testing
 
+- Follow the [testing skill](skills/testing/SKILL.md): for now, add Cypress tests only for the most crucial app flows, with minimal additions.
 - **E2E tests** live in `cypress/e2e/`.
 - **Component tests** live alongside the component under `src/app/component-tests/`.
 - No unit tests are generated or expected – Cypress covers both layers.

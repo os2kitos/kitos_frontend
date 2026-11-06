@@ -8,6 +8,32 @@
 
 mat-form-field {
   flex: 1;
+  min-width: 0;
+}
+
+.clear-button {
+  display: inline-flex;
+  align-items: center;
+  width: 17px;
+  height: var(--height);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.54);
+  font-family: inherit;
+
+  &:hover,
+  &:focus-visible {
+    color: rgba(0, 0, 0, 0.87);
+  }
+}
+
+.clear-icon {
+  display: inline-block;
+  font-size: 18px;
+  line-height: 1;
+  pointer-events: none;
 }
 
 @mixin mat-date-input-adjustment {
@@ -15,6 +41,11 @@ mat-form-field {
 }
 
 :host ::ng-deep mat-form-field {
+  .mat-mdc-form-field-icon-suffix {
+    display: flex;
+    align-items: center;
+  }
+
   &.medium {
     --height: 48px;
     --font-size: 14px;
@@ -35,7 +66,8 @@ mat-form-field {
   }
 
   .mat-mdc-icon-button.mat-mdc-button-base {
-    right: -13px;
+    width: var(--height);
+    right: 0;
   }
 
   .mat-mdc-icon-button-ripple,
@@ -46,6 +78,10 @@ mat-form-field {
 
   @include mat-date-input-adjustment;
   @include mixins.mat-input-adjustment;
+
+  .mat-mdc-form-field-icon-suffix {
+    padding-right: 0;
+  }
 }
 
 ::ng-deep {

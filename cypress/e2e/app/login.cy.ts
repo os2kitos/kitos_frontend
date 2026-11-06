@@ -107,6 +107,9 @@ describe('login', () => {
       fixture: './organizations/organization-units-hierarchy.json',
     });
     cy.intercept('/api/v2/business-types*', { fixture: './shared/business-types.json' });
+    cy.intercept('/api/v2/it-contracts?systemUsageUuid*', {
+      fixture: './it-contracts/it-contracts-by-it-system-usage-uuid.json',
+    });
     cy.intercept('/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' });
     cy.intercept('/api/v2/it-systems/*', { fixture: 'it-system.json' }); //gets the base system
     cy.intercept('/api/v2/it-system-usage-data-classification-types*', {

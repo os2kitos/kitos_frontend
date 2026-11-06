@@ -99,6 +99,7 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
   });
 
   private selectedRoles: APIOrganizationRoleChoice[] = [];
+  public initialRoleChoices: UserRoleChoice[] = [];
 
   constructor(
     private dialogRef: MatDialogRef<EditUserDialogComponent>,
@@ -159,15 +160,10 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
       }),
     );
 
-    const initialValues = this.getUserRoleChoices();
-    this.selectedRoles = initialValues.map((role) => role.value);
-  }
-
-  public getUserRoleChoices(): UserRoleChoice[] {
-    const initialValues = this.getSelectableRolesThatUserHas()
+    this.initialRoleChoices = this.getSelectableRolesThatUserHas()
       .map((role) => mapUserRoleChoice(role))
       .filter((role) => role !== undefined);
-    return initialValues;
+    this.selectedRoles = this.initialRoleChoices.map((role) => role.value);
   }
 
   public onSave(): void {

@@ -57,7 +57,7 @@ export class GdprBaseDateUrlSectionComponent extends BaseAccordionComponent impl
 
   @Output() patchGdprEvent = new EventEmitter();
 
-  public readonly yesNoDontKnowOptions = yesNoDontKnowOptions;
+  @Input() public choiceOptions = yesNoDontKnowOptions;
 
   constructor(private readonly store: Store) {
     super();

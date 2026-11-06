@@ -7,6 +7,7 @@ import {
   RoleAssignmentsMap,
 } from '../helpers/read-model-role-assignments';
 import { mapToYesNoEnum } from '../yes-no.model';
+import { formatInvoiceFrequency } from './invoice-frequency-choice';
 import { OverviewAuditModel } from './audit-model';
 import { mapYearSegmentChoice } from './year-segment-choice';
 
@@ -59,6 +60,11 @@ export interface ITContract {
   Roles: RoleAssignmentsMap;
   RoleEmails: RoleAssignmentEmailsMaps;
   Note: string;
+  InvoiceFrequency: string;
+  InvoiceDate1: Date;
+  InvoiceDate2: Date;
+  InvoiceDate3: Date;
+  InvoiceDate4: Date;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -137,5 +143,10 @@ export const adaptITContract = (value: any): ITContract | undefined => {
     Roles: mapRoleAssignmentsToUserFullNames(value.RoleAssignments),
     RoleEmails: mapRoleAssignmentsToEmails(value.RoleAssignments),
     Note: value.Note,
+    InvoiceFrequency: formatInvoiceFrequency(value.InvoiceFrequency),
+    InvoiceDate1: value.InvoiceDate1,
+    InvoiceDate2: value.InvoiceDate2,
+    InvoiceDate3: value.InvoiceDate3,
+    InvoiceDate4: value.InvoiceDate4,
   };
 };

@@ -3,12 +3,12 @@ kind: Deployment
 metadata:
   annotations:
     easyhosting.io/service-reference: Dockerfile
-    easyhosting.io/service-unique-id: bb461bb7-2424-411d-8f62-12edde1831f0
-    easyhosting.io/easy-hosting-domain-name: bb461bb7-2424-411d-8f62-12edde1831f0.kitos-dev.strongminds.easyhosting.strongminds.dev
+    easyhosting.io/service-unique-id: f7528dba-774b-4ecc-8627-ce14f8f3a7e8
+    easyhosting.io/easy-hosting-domain-name: f7528dba-774b-4ecc-8627-ce14f8f3a7e8.os2kitos-development.strongminds.easyhosting.strongminds.dev
   labels:
     app: kitos-frontend
   name: kitos-frontend
-  namespace: kitos
+  namespace: kitos-dev
 spec:
   replicas: 1
   revisionHistoryLimit: 1
@@ -19,14 +19,16 @@ spec:
     metadata:
       annotations:
         sidecar.opentelemetry.io/inject: monitoring/sidecar-otel-collector
+        easyhosting.io/otlp-logs: "true"
       labels:
         app: kitos-frontend
+        app.kubernetes.io/name: kitos-frontend
     spec:
       containers:
       - env:
         - name: BACKEND_URL
-          value: http://kitos-api.kitos
-        image: ghcr.io/strongminds/kitos_frontend-kitos-frontend:sha-8ba66bb1028a4a65efb86d8a3a528c5b3b73cf60
+          value: http://ktios-api.kitos-dev
+        image: ghcr.io/strongminds/kitos_frontend-kitos-frontend@sha256:6c94a1b8991c2a7d1909ddae9998c21ea0b0e7cb804d0dfefca7d22953258024
         name: kitos-frontend
         ports:
         - containerPort: 80
@@ -40,4 +42,4 @@ spec:
             memory: 128Mi
             cpu: 100m
       imagePullSecrets:
-      - name: 90d73529-a238-405b-a079-3eea2e8e36e6
+      - name: ac6379be-068d-4385-a6c6-6a13c7f5f2e6

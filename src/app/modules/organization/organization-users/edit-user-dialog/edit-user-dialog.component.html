@@ -61,7 +61,7 @@
           text="Roller"
           i18n-text
           [data]="roleOptions$ | async"
-          [initialSelectedValues]="getUserRoleChoices()"
+          [initialSelectedValues]="initialRoleChoices"
           (selectedEvent)="rolesChanged($event)"
           (cleared)="rolesCleared()"
           [clearable]="(canClearRoleDropdown$ | async) ?? false"

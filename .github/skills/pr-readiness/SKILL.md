@@ -8,6 +8,8 @@ allowed-tools: shell
 
 Run all automated checks from the KITOS PR checklist and report results clearly.
 
+When deciding whether to add Cypress coverage, follow the [testing skill](../testing/SKILL.md). PR readiness does not require new tests for every changed feature; reserve additions for the most crucial app flows.
+
 ## Steps to Execute
 
 Run these steps in order. Stop and report clearly if any step fails.

@@ -4,11 +4,12 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { compact, uniq } from 'lodash';
-import { catchError, map, mergeMap, of, switchMap } from 'rxjs';
+import { EMPTY, catchError, concat, defer, filter, groupBy, map, mergeMap, of, switchMap } from 'rxjs';
 import { APIBusinessRoleDTO, ItSystemUsageOptionsService } from 'src/app/api/v1';
 import {
   APIItSystemUsageResponseDTO,
   APIUpdateItSystemUsageRequestDTO,
+  ItContractV2Service,
   ItSystemUsageInternalV2Service,
   ItSystemUsageV2Service,
   OrganizationGridInternalV2Service,
@@ -29,9 +30,13 @@ import { GridDataCacheService } from 'src/app/shared/services/grid-data-cache.se
 import { getNewGridColumnsBasedOnConfig } from '../helpers/grid-config-helper';
 import { selectOrganizationUnits } from '../organization/organization-unit/selectors';
 import { selectOrganizationUuid } from '../user-store/selectors';
+import { ITContractActions } from '../it-contract/actions';
 import { ITSystemUsageActions } from './actions';
 import {
   selectItSystemUsageExternalReferences,
+  selectItSystemUsageHasAssociatedContracts,
+  selectAssociatedContractsByUsage,
+  selectAssociatedContractsLoadingByUsage,
   selectItSystemUsageLocallyAddedKleUuids,
   selectItSystemUsageLocallyRemovedKleUuids,
   selectItSystemUsageResponsibleUnit,
@@ -61,6 +66,8 @@ export class ITSystemUsageEffects {
     @Inject(OrganizationGridInternalV2Service)
     private apiV2organizationalGridInternalService: OrganizationGridInternalV2Service,
     private gridDataCacheService: GridDataCacheService,
+    @Inject(ItContractV2Service)
+    private apiV2ItContractService: ItContractV2Service,
   ) {}
 
   getItSystemUsages$ = createEffect(() => {
@@ -155,6 +162,53 @@ export class ITSystemUsageEffects {
           catchError(() => of(ITSystemUsageActions.getITSystemUsageError())),
         ),
       ),
+    );
+  });
+
+  getMissingAssociatedContracts$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.getITSystemUsageSuccess),
+      concatLatestFrom(() => this.store.select(selectItSystemUsageHasAssociatedContracts)),
+      switchMap(([{ itSystemUsage }, hasAssociatedContracts]) => {
+        if (!itSystemUsage || hasAssociatedContracts !== undefined) return EMPTY;
+
+        const systemUsageUuid = itSystemUsage.uuid;
+        return of(ITSystemUsageActions.getAssociatedContracts(systemUsageUuid));
+      }),
+    );
+  });
+
+  refreshAssociatedContracts$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITContractActions.createAndAssociateContractSuccess),
+      map(({ usageUuid }) => ITSystemUsageActions.getAssociatedContracts(usageUuid, true)),
+    );
+  });
+
+  getAssociatedContracts$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.getAssociatedContracts),
+      groupBy(({ systemUsageUuid }) => systemUsageUuid),
+      mergeMap((requests$) => requests$.pipe(
+        concatLatestFrom(() => [
+          this.store.select(selectAssociatedContractsByUsage),
+          this.store.select(selectAssociatedContractsLoadingByUsage),
+        ]),
+        filter(([{ systemUsageUuid, forceReload }, contracts, loading]) =>
+          forceReload || (contracts[systemUsageUuid] === undefined && loading[systemUsageUuid] !== true),
+        ),
+        switchMap(([{ systemUsageUuid }]) => concat(
+          of(ITSystemUsageActions.getAssociatedContractsStarted(systemUsageUuid)),
+          defer(() => this.apiV2ItContractService
+            .getManyItContractV2GetItContracts({ systemUsageUuid, orderByProperty: 'Name' })).pipe(
+            map((contracts) => ITSystemUsageActions.getAssociatedContractsSuccess(systemUsageUuid, contracts)),
+            catchError((error: unknown) => {
+              console.error(error);
+              return of(ITSystemUsageActions.getAssociatedContractsError(systemUsageUuid));
+            }),
+          ),
+        )),
+      )),
     );
   });
 
@@ -853,6 +907,7 @@ function applyQueryFixes(odataString: string, systemRoles: APIBusinessRoleDTO[] 
     .replace(/(\w+\()AssociatedContractsNamesCsv(.*\))/, 'AssociatedContracts/any(h: $1h/ItContractName$2)')
     .replace(/ItSystemBusinessTypeUuid eq '([\w-]+)'/, 'ItSystemBusinessTypeUuid eq $1')
     .replace(/SystemUsageCriticalityLevelUuid eq '([\w-]+)'/, 'SystemUsageCriticalityLevelUuid eq $1')
+    .replace(/PersonalDataDeletionDeadlineTypeUuid eq '([\w-]+)'/g, 'PersonalDataDeletionDeadlineTypeUuid eq $1')
     .replace(/TechnicalSystemTypeUuid eq '([\w-]+)'/, 'TechnicalSystemTypeUuid eq $1')
     .replace(/ItSystemCategoriesUuid eq '([\w-]+)'/, 'ItSystemCategoriesUuid eq $1')
     .replace(/LicensingAndCodeModels eq '([^']+)'/g, "LicensingAndCodeModels/any(l: l eq '$1')")

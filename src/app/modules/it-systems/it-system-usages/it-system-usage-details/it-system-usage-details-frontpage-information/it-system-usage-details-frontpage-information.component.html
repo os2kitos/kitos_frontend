@@ -45,6 +45,7 @@
         i18n-text
         [data]="technicalSystemTypeDropdownOptions$ | async"
         [initialSelectedValues]="initialSelectedTechnicalSystemTypes"
+        [showDescription]="true"
         [recommended]="(technicalSystemTypeRecommended$ | async) === true"
         [disabled]="!(hasModifyPermission$ | async)"
         (selectedEvent)="patchTechnicalSystemTypes($event)"

@@ -3,8 +3,8 @@
     <app-card-header
       title="Tilknyttede kontrakter"
       helpTextKey="it-system.usage.contracts"
-      [recommended]="(associatedContractsRecommended$ | async) === true"
-      [recommendedFilled]="(anyContracts$ | async) === true"
+      [recommended]="(associatedContractsBadge$ | async)?.visible ?? false"
+      [recommendedFilled]="(associatedContractsBadge$ | async)?.filled ?? false"
       i18n-title
     ></app-card-header>
     @if (isLoading$ | async) {

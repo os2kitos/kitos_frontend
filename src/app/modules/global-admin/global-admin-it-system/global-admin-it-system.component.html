@@ -1,6 +1,6 @@
 <app-segment [buttons]="segmentOptions" [(selected)]="selectedSegment"> </app-segment>
 
-<app-card>
+      <app-card>
   @if (selectedSegment === GlobalAdminModuleSegmentOptionType.RegularOptionTypes) {
     <app-standard-vertical-content-grid>
       <app-global-option-type-view
@@ -34,6 +34,13 @@
       <app-global-option-type-view
         optionType="it_system_usage-gdpr-sensitive-data-type"
         title="Følsomme persondata"
+        [showDescription]="false"
+        i18n-title
+        >
+      </app-global-option-type-view>
+<app-global-option-type-view
+        optionType="it-system-usage_personal-data-deletion-deadline-type"
+        title="Frister for sletning af persondata"
         [showDescription]="false"
         i18n-title
         >

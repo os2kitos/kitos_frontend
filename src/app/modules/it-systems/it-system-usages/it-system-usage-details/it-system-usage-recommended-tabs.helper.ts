@@ -1,18 +1,20 @@
 import { RegistrationRecommendedBadges, recommendedField, hasText, hasValue } from 'src/app/shared/helpers/registration-recommended-badges.helper';
 import { Selector, Store } from '@ngrx/store';
 import { Observable, combineLatest } from 'rxjs';
+import { APIPersonalDataDeletionCapabilityChoice, APIYesNoDontKnowChoice } from 'src/app/api/v2';
 import { map } from 'rxjs/operators';
 import {
-  ItContractV2Service,
-  APIYesNoDontKnowChoice,
-} from 'src/app/api/v2';
-import {
   RecommendedBadgeState,
-  recommendedCollectionFilled,
   combineRecommendedBadgeState,
   mapUIConfigStatusToRecommended,
 } from 'src/app/shared/helpers/observable-helpers';
-import { selectItSystemUsage, selectItSystemUsageArchiving, selectItSystemUsageGdpr, selectItSystemUsageGeneral } from 'src/app/store/it-system-usage/selectors';
+import {
+  selectItSystemUsage,
+  selectItSystemUsageArchiving,
+  selectItSystemUsageGdpr,
+  selectItSystemUsageGeneral,
+  selectItSystemUsageHasAssociatedContracts,
+} from 'src/app/store/it-system-usage/selectors';
 import { selectItSystem } from 'src/app/store/it-system/selectors';
 import {
   selectITSystemUsageEnableAndRecommendedActive,
@@ -38,6 +40,7 @@ import {
   selectITSystemUsageEnableAndRecommendedGdprDataTypes,
   selectITSystemUsageEnableAndRecommendedGdprDocumentation,
   selectITSystemUsageEnableAndRecommendedGdprDpiaConducted,
+  selectITSystemUsageEnableAndRecommendedGdprPersonalDataDeletion,
   selectITSystemUsageEnableAndRecommendedGdprIsDataProcessingAgreementRequired,
   selectITSystemUsageEnableAndRecommendedGdprPlannedRiskAssessmentDate,
   selectITSystemUsageEnableAndRecommendedGdprPurpose,
@@ -67,6 +70,10 @@ function hasDependentGdprValue(choice: string | null | undefined, filled: boolea
   return choice === APIYesNoDontKnowChoice.Yes ? filled : hasValue(choice);
 }
 
+function hasDependentDeletionValue(choice: APIPersonalDataDeletionCapabilityChoice | null | undefined, filled: boolean): boolean {
+  return choice === 'No' || (hasValue(choice) && filled);
+}
+
 function hasItems<T>(value: Array<T> | null | undefined): boolean {
   return !!value && value.length > 0;
 }
@@ -76,18 +83,18 @@ export interface ItSystemUsageRecommendedTabBadges extends RegistrationRecommend
   gdpr$: Observable<RecommendedBadgeState>;
   archiving$: Observable<RecommendedBadgeState>;
   contracts$: Observable<RecommendedBadgeState>;
+  associatedContracts$: Observable<RecommendedBadgeState>;
   relations$: Observable<RecommendedBadgeState>;
   localKle$: Observable<RecommendedBadgeState>;
 }
 
 /**
  * Combines module-specific tab rules with the shared roles, advis and references
- * streams. Badge state is available even before the user visits a tab; collections
- * absent from the loaded registration are fetched only when recommended.
+ * streams. Contract associations reuse overview data, detail initialization and
+ * the Contracts tab's normal table load; badge subscriptions never fetch contracts.
  */
 export function getItSystemUsageRecommendedTabBadges(
   store: Store,
-  contractsApi: ItContractV2Service,
   registrationBadges: RegistrationRecommendedBadges,
 ): ItSystemUsageRecommendedTabBadges {
   const usage$ = store.select(selectItSystemUsage);
@@ -181,6 +188,25 @@ export function getItSystemUsageRecommendedTabBadges(
     gdprField(selectITSystemUsageEnableAndRecommendedGdprRetentionPeriod, (g) =>
       hasDependentGdprValue(g?.retentionPeriodDefined, hasValue(g?.dataRetentionEvaluationFrequencyInMonths)),
     ),
+    gdprField(selectITSystemUsageEnableAndRecommendedGdprPersonalDataDeletion, (g) => hasValue(g?.personalDataDeletionCapability)),
+    gdprField(selectITSystemUsageEnableAndRecommendedGdprPersonalDataDeletion, (g) =>
+      hasDependentDeletionValue(g?.personalDataDeletionCapability, hasValue(g?.personalDataDeletionMethod)),
+    ),
+    gdprField(selectITSystemUsageEnableAndRecommendedGdprPersonalDataDeletion, (g) =>
+      hasDependentDeletionValue(g?.personalDataDeletionCapability, hasValue(g?.personalDataDeletionDeadlineType)),
+    ),
+    gdprField(selectITSystemUsageEnableAndRecommendedGdprPersonalDataDeletion, (g) =>
+      hasDependentDeletionValue(g?.personalDataDeletionCapability, hasValue(g?.personalDataDeletionProcedureDocumentation)),
+    ),
+    gdprField(selectITSystemUsageEnableAndRecommendedGdprPersonalDataDeletion, (g) =>
+      hasDependentDeletionValue(g?.personalDataDeletionCapability, hasValue(g?.personalDataDeletionResponsibleUser)),
+    ),
+    gdprField(selectITSystemUsageEnableAndRecommendedGdprPersonalDataDeletion, (g) =>
+      hasDependentDeletionValue(g?.personalDataDeletionCapability, hasValue(g?.personalDataDeletionVerifiedDate)),
+    ),
+    gdprField(selectITSystemUsageEnableAndRecommendedGdprPersonalDataDeletion, (g) =>
+      hasDependentDeletionValue(g?.personalDataDeletionCapability, hasValue(g?.personalDataDeletionVerificationDocumentation)),
+    ),
     gdprField(selectITSystemUsageEnableAndRecommendedGdprDpiaConducted, (g) => hasValue(g?.dpiaConducted)),
     gdprField(selectITSystemUsageEnableAndRecommendedGdprDpiaConducted, (g) => hasDependentGdprValue(g?.dpiaConducted, hasValue(g?.dpiaDate))),
     gdprField(selectITSystemUsageEnableAndRecommendedGdprDpiaConducted, (g) => hasDependentGdprValue(g?.dpiaConducted, hasValue(g?.dpiaDocumentation))),
@@ -202,12 +228,13 @@ export function getItSystemUsageRecommendedTabBadges(
   const recommended = (selector: Selector<object, { enabled: boolean; recommended: boolean }>) =>
     store.select(selector).pipe(mapUIConfigStatusToRecommended());
   const contractsRecommended$ = recommended(selectITSystemUsageEnableAndRecommendedAssociatedContracts);
+  const associatedContractsField = {
+    recommended$: contractsRecommended$,
+    filled$: store.select(selectItSystemUsageHasAssociatedContracts).pipe(map((hasContracts) => hasContracts === true)),
+  };
+  const associatedContracts$ = combineRecommendedBadgeState([associatedContractsField]);
   const contracts$ = combineRecommendedBadgeState([
-    {
-      recommended$: contractsRecommended$,
-      filled$: recommendedCollectionFilled(usage$, contractsRecommended$, (usage) =>
-        contractsApi.getManyItContractV2GetItContracts({ systemUsageUuid: usage.uuid, pageSize: 1 })),
-    },
+    associatedContractsField,
     generalField(selectITSystemUsageEnableAndRecommendedSelectContractToDetermineIfItSystemIsActive, (g) =>
       hasValue(g?.mainContract),
     ),
@@ -232,5 +259,5 @@ export function getItSystemUsageRecommendedTabBadges(
     },
   ]);
 
-  return { ...registrationBadges, frontpage$, gdpr$: gdprTab$, archiving$: archivingTab$, contracts$, relations$, localKle$ };
+  return { ...registrationBadges, frontpage$, gdpr$: gdprTab$, archiving$: archivingTab$, contracts$, associatedContracts$, relations$, localKle$ };
 }

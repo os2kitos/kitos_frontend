@@ -60,7 +60,7 @@ export interface APIGeneralDataUpdateRequestDTO {
     systemUsageCriticalityLevelUuid?: string | null;
     criticalityLevelDocumentation?: APISimpleLinkDTO;
     /**
-     * The general purpose of this system usage.
+     * The general purpose of this system usage.  Max length: 1000
      */
     purpose?: string | null;
     /**

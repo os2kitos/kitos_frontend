@@ -16,6 +16,8 @@ export function getOptionTypeName(optionType: RegularOptionType | RoleOptionType
       return $localize`Frekvenser`;
     case 'it-interface_interface-type':
       return $localize`Grænseflader`;
+    case 'it-system-usage_personal-data-deletion-deadline-type':
+      return $localize`Frister for sletning af persondata`;
     case 'it_system_usage-gdpr-sensitive-data-type':
       return $localize`Følsomme persondata`;
     case 'it_system_usage-gdpr-registered-data-category-type':

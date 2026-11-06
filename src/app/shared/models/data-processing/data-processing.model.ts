@@ -1,4 +1,5 @@
 import { formatNamesAndAttributesFromCsv } from '../../helpers/string.helpers';
+import { MainContractStatus, mapMainContractStatus } from './main-contract-status.model';
 import {
   mapRoleAssignmentsToEmails,
   mapRoleAssignmentsToUserFullNames,
@@ -18,7 +19,7 @@ export interface DataProcessingRegistration {
   Name: string;
   IsActive: boolean;
   LastChangedAt: string;
-  ActiveAccordingToMainContract: boolean;
+  ActiveAccordingToMainContract: MainContractStatus;
   MainReferenceTitle: string;
   MainReferenceUrl: string;
   MainReferenceUserAssignedId: string;
@@ -58,7 +59,7 @@ export const adaptDataProcessingRegistration = (value: any): DataProcessingRegis
     Name: value.Name,
     IsActive: value.IsActive,
     LastChangedAt: value.LastChangedAt,
-    ActiveAccordingToMainContract: value.ActiveAccordingToMainContract,
+    ActiveAccordingToMainContract: mapMainContractStatus(value.SourceEntity?.MainContractId, value.ActiveAccordingToMainContract),
     MainReferenceTitle: value.MainReferenceTitle,
     MainReferenceUrl: value.MainReferenceUrl,
     MainReferenceUserAssignedId: value.MainReferenceUserAssignedId,

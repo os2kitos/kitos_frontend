@@ -79,6 +79,7 @@ import { ItSystemGlobalDataTypesInternalV2Service } from './api/itSystemGlobalDa
 import { ItSystemGlobalFrequencyTypesInternalV2Service } from './api/itSystemGlobalFrequencyTypesInternalV2.service';
 import { ItSystemGlobalInterfaceTypesInternalV2Service } from './api/itSystemGlobalInterfaceTypesInternalV2.service';
 import { ItSystemGlobalItSystemCategoriesInternalV2Service } from './api/itSystemGlobalItSystemCategoriesInternalV2.service';
+import { ItSystemGlobalPersonalDataDeletionDeadlineTypesInternalV2Service } from './api/itSystemGlobalPersonalDataDeletionDeadlineTypesInternalV2.service';
 import { ItSystemGlobalRegisterTypesInternalV2Service } from './api/itSystemGlobalRegisterTypesInternalV2.service';
 import { ItSystemGlobalRoleOptionTypesInternalV2Service } from './api/itSystemGlobalRoleOptionTypesInternalV2.service';
 import { ItSystemGlobalSensitivePersonalDataTypesInternalV2Service } from './api/itSystemGlobalSensitivePersonalDataTypesInternalV2.service';
@@ -93,6 +94,7 @@ import { ItSystemLocalDataTypesInternalV2Service } from './api/itSystemLocalData
 import { ItSystemLocalFrequencyTypesInternalV2Service } from './api/itSystemLocalFrequencyTypesInternalV2.service';
 import { ItSystemLocalInterfaceTypesInternalV2Service } from './api/itSystemLocalInterfaceTypesInternalV2.service';
 import { ItSystemLocalItSystemCategoriesTypesInternalV2Service } from './api/itSystemLocalItSystemCategoriesTypesInternalV2.service';
+import { ItSystemLocalPersonalDataDeletionDeadlineTypesInternalV2Service } from './api/itSystemLocalPersonalDataDeletionDeadlineTypesInternalV2.service';
 import { ItSystemLocalRegisterTypesInternalV2Service } from './api/itSystemLocalRegisterTypesInternalV2.service';
 import { ItSystemLocalRoleOptionTypesInternalV2Service } from './api/itSystemLocalRoleOptionTypesInternalV2.service';
 import { ItSystemLocalSensitivePersonalDataTypesInternalV2Service } from './api/itSystemLocalSensitivePersonalDataTypesInternalV2.service';
@@ -106,6 +108,7 @@ import { ItSystemUsageCriticalityLevelTypeV2Service } from './api/itSystemUsageC
 import { ItSystemUsageDataClassificationTypeV2Service } from './api/itSystemUsageDataClassificationTypeV2.service';
 import { ItSystemUsageInternalV2Service } from './api/itSystemUsageInternalV2.service';
 import { ItSystemUsageMigrationV2Service } from './api/itSystemUsageMigrationV2.service';
+import { ItSystemUsagePersonalDataDeletionDeadlineTypeV2Service } from './api/itSystemUsagePersonalDataDeletionDeadlineTypeV2.service';
 import { ItSystemUsageRegisteredDataCategoryTypeV2Service } from './api/itSystemUsageRegisteredDataCategoryTypeV2.service';
 import { ItSystemUsageRelationFrequencyTypeV2Service } from './api/itSystemUsageRelationFrequencyTypeV2.service';
 import { ItSystemUsageRoleTypeV2Service } from './api/itSystemUsageRoleTypeV2.service';

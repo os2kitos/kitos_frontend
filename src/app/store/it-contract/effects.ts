@@ -96,7 +96,10 @@ export class ITContractEffects {
           return of(ITContractActions.getITContractsSuccess(cachedRange.data, cachedRange.total));
         }
 
-        const cacheableOdataString = this.gridDataCacheService.toChunkedODataString(gridState, { utcDates: true });
+        const cacheableOdataString = this.gridDataCacheService.toChunkedODataString(
+          gridState,
+          { utcDates: true },
+        );
         const fixedOdataString = applyQueryFixes(cacheableOdataString, contractRoles);
 
         return this.httpClient

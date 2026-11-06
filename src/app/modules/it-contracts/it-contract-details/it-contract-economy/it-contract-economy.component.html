@@ -1,52 +1,89 @@
-@if (paymentModelEnabled$ | async) {
+@if ((paymentModelEnabled$ | async) || (invoiceFrequencyEnabled$ | async)) {
   <app-card>
     <app-card-header title="Betalingsmodel" i18n-title helpTextKey="it-contract.edit.economy"></app-card-header>
     <app-form-grid [formGroup]="economyFormGroup">
-      <app-datepicker
-        text="Driftsvederlag påbegyndt"
-        i18n-text
-        data-cy="contract-operations-date"
-        [formGroup]="economyFormGroup"
-        formName="operationsRemunerationStartedAt"
-        [recommended]="(paymentModelRecommended$ | async) === true"
-        (valueChange)="patchEconomy({ paymentModel: { operationsRemunerationStartedAt: $event?.toDateString() } })"
-      ></app-datepicker>
-      <app-dropdown
-        text="Betalingsfrekvens"
-        i18n-text
-        data-cy="contract-payment-frequency"
-        valueField="uuid"
-        [formGroup]="economyFormGroup"
-        formName="paymentFrequency"
-        [data]="paymentFrequencyOptions$ | async"
-        [recommended]="(paymentModelRecommended$ | async) === true"
-        (valueChange)="patchEconomy({ paymentModel: { paymentFrequencyUuid: $event } })"
+      @if (paymentModelEnabled$ | async) {
+        <app-datepicker
+          text="Driftsvederlag påbegyndt"
+          i18n-text
+          data-cy="contract-operations-date"
+          [formGroup]="economyFormGroup"
+          formName="operationsRemunerationStartedAt"
+          [recommended]="(paymentModelRecommended$ | async) === true"
+          (valueChange)="patchEconomy({ paymentModel: { operationsRemunerationStartedAt: $event?.toDateString() } })"
+        ></app-datepicker>
+        <app-dropdown
+          text="Betalingsfrekvens"
+          i18n-text
+          data-cy="contract-payment-frequency"
+          valueField="uuid"
+          [formGroup]="economyFormGroup"
+          formName="paymentFrequency"
+          [data]="paymentFrequencyOptions$ | async"
+          [recommended]="(paymentModelRecommended$ | async) === true"
+          (valueChange)="patchEconomy({ paymentModel: { paymentFrequencyUuid: $event } })"
         >
-      </app-dropdown>
-      <app-dropdown
-        text="Betalingsmodel"
-        i18n-text
-        data-cy="contract-payment-model"
-        valueField="uuid"
-        [formGroup]="economyFormGroup"
-        formName="paymentModel"
-        [data]="paymentModelOptions$ | async"
-        [recommended]="(paymentModelRecommended$ | async) === true"
-        (valueChange)="patchEconomy({ paymentModel: { paymentModelUuid: $event } })"
+        </app-dropdown>
+        <app-dropdown
+          text="Betalingsmodel"
+          i18n-text
+          data-cy="contract-payment-model"
+          valueField="uuid"
+          [formGroup]="economyFormGroup"
+          formName="paymentModel"
+          [data]="paymentModelOptions$ | async"
+          [recommended]="(paymentModelRecommended$ | async) === true"
+          (valueChange)="patchEconomy({ paymentModel: { paymentModelUuid: $event } })"
         >
-      </app-dropdown>
-      <app-dropdown
-        text="Prisregulering"
-        i18n-text
-        data-cy="contract-price-regulation"
-        valueField="uuid"
-        [formGroup]="economyFormGroup"
-        formName="priceRegulation"
-        [data]="priceRegulationOptions$ | async"
-        [recommended]="(paymentModelRecommended$ | async) === true"
-        (valueChange)="patchEconomy({ paymentModel: { priceRegulationUuid: $event } })"
+        </app-dropdown>
+        <app-dropdown
+          text="Prisregulering"
+          i18n-text
+          data-cy="contract-price-regulation"
+          valueField="uuid"
+          [formGroup]="economyFormGroup"
+          formName="priceRegulation"
+          [data]="priceRegulationOptions$ | async"
+          [recommended]="(paymentModelRecommended$ | async) === true"
+          (valueChange)="patchEconomy({ paymentModel: { priceRegulationUuid: $event } })"
         >
-      </app-dropdown>
+        </app-dropdown>
+      }
+      @if (invoiceFrequencyEnabled$ | async) {
+        <app-dropdown
+          text="Faktureringsperiode"
+          i18n-text
+          data-cy="contract-invoice-frequency"
+          valueField="value"
+          [formGroup]="economyFormGroup"
+          formName="invoiceFrequency"
+          [data]="invoiceFrequencyOptions"
+          [recommended]="(invoiceFrequencyRecommended$ | async) === true"
+          (valueChange)="onInvoiceFrequencyChange($event)"
+        ></app-dropdown>
+        @for (period of invoicePeriods; track period.period) {
+          <div class="invoice-period-row">
+            <app-textbox
+              text="Periode"
+              i18n-text
+              [formGroup]="economyFormGroup"
+              [formName]="'invoicePeriod' + period.period"
+            ></app-textbox>
+            <app-datepicker
+              text="Startdato"
+              i18n-text
+              [formGroup]="economyFormGroup"
+              [formName]="'invoiceDate' + period.period"
+              [minDate]="getMinimumInvoiceDate(period.period)"
+              [maxDate]="getMaximumInvoiceDate(period.period)"
+              [recommended]="(invoiceFrequencyRecommended$ | async) === true"
+              [recommendedFilled]="(invoiceDatesFilled$ | async) === true"
+              [attr.data-cy]="'contract-invoice-date-' + period.period"
+              (valueChange)="onInvoiceDateChange(period.period, $event)"
+            ></app-datepicker>
+          </div>
+        }
+      }
     </app-form-grid>
   </app-card>
 }

@@ -3,6 +3,7 @@
 interface RelationRow {
   systemUsageName: string;
   relationInterfaceName: string;
+  systemRelationDirectionName?: string;
   associatedContractName: string;
   relationFrequencyName: string;
   isFrequencyObsolete: boolean;
@@ -60,6 +61,7 @@ describe('it-system-usage system-relations', () => {
       {
         systemUsageName: 'Aplanner',
         relationInterfaceName: 'Lorem ipsum',
+        systemRelationDirectionName: 'Udgående data',
         associatedContractName: 'Dolor sit',
         relationFrequencyName: 'Kvartal',
         isFrequencyObsolete: false,
@@ -69,6 +71,7 @@ describe('it-system-usage system-relations', () => {
       {
         systemUsageName: 'Vestibulum',
         relationInterfaceName: 'Quisque nec',
+        systemRelationDirectionName: 'Bidirektionel',
         associatedContractName: 'erat volutpat',
         relationFrequencyName: 'Kvartal2',
         isFrequencyObsolete: true,
@@ -82,6 +85,7 @@ describe('it-system-usage system-relations', () => {
       {
         systemUsageName: 'testUsage',
         relationInterfaceName: 'testInterface',
+        systemRelationDirectionName: 'Indgående data',
         associatedContractName: 'DefaultTestItContract',
         relationFrequencyName: 'Kvartal',
         isFrequencyObsolete: false,
@@ -129,16 +133,60 @@ describe('it-system-usage system-relations', () => {
     cy.get('app-system-relation-dialog').within(() => {
       cy.dropdown('Søg efter system', 'System 1', true);
       cy.dropdown('Søg efter snitflade', 'Interface 1 - ACTIVE', true);
+      cy.dropdown('Søg efter snitflade', 'Interface 2 - INACTIVE', true);
+      cy.dropdown('Dataretning', 'Udgående data', true);
       cy.contains('Reference').type('test');
       cy.contains('Beskrivelse').type('test');
       cy.dropdown('Søg efter kontrakt', 'The valid contract', true);
       cy.dropdown('Vælg frekvens', 'Ugentligt', true);
 
-      cy.intercept('POST', '**system-relations', {});
+      cy.intercept('POST', '**system-relations', {}).as('createRelations');
       cy.contains('Tilføj').click();
+    });
+    cy.wait('@createRelations').its('request.body').should((requests) => {
+      expect(requests).to.have.length(2);
+      for (const request of requests) {
+        expect(request.systemRelationDirection).to.equal('OutgoingData');
+        expect(request.relationInterfaceUuid).to.be.a('string');
+      }
     });
     cy.contains('Relationer tilføjet');
   });
+
+  for (const direction of [
+    { name: 'Indgående data', value: 'IncomingData' },
+    { name: 'Bidirektionel', value: 'BidirectionalData' },
+    { name: undefined, value: undefined },
+  ]) {
+    it(`can add Relation without an interface and direction ${direction.value ?? 'unset'}`, () => {
+      cy.intercept('/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' });
+      cy.contains('System 3').click();
+      cy.intercept('/api/v2/it-system-usages/*/incoming-system-relations', []);
+      cy.intercept('/api/v2/*it-system-usage-relation-frequency-types*', []);
+      cy.navigateToDetailsSubPage('Relationer');
+      cy.intercept('/api/v2/internal/it-system-usages/search?organizationUuid*', {
+        fixture: './it-system-usage/it-system-usages-internal.json',
+      });
+      cy.intercept('/api/v2/*it-contracts*', []);
+      cy.intercept('/api/v2/*it-interfaces*', []);
+      cy.intercept('POST', '**system-relations', {}).as('createRelations');
+
+      cy.contains('Opret relation').click();
+      cy.get('app-system-relation-dialog').within(() => {
+        cy.dropdown('Søg efter system', 'System 1', true);
+        if (direction.name) {
+          cy.dropdown('Dataretning', direction.name, true);
+        }
+        cy.contains('Tilføj').click();
+      });
+      cy.wait('@createRelations').its('request.body').should((requests) => {
+        expect(requests).to.have.length(1);
+        expect(requests[0].systemRelationDirection).to.equal(direction.value);
+        expect(requests[0]).not.to.have.property('relationInterfaceUuid');
+      });
+      cy.contains('Relationer tilføjet');
+    });
+  }
 
   it('can modify Relation', () => {
     cy.intercept('/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' });
@@ -161,18 +209,52 @@ describe('it-system-usage system-relations', () => {
     cy.getRowForElementContent('Aplanner').get('app-pencil-icon').first().click({ force: true });
 
     cy.get('app-system-relation-dialog').within(() => {
+      cy.get('app-dropdown[formName="systemRelationDirection"]').should('contain', 'Udgående data');
       cy.dropdown('Søg efter system', 'System 1', true);
       cy.dropdown('Søg efter snitflade', 'Interface 1 - ACTIVE', true);
+      cy.dropdown('Dataretning', 'Bidirektionel', true);
       cy.contains('Beskrivelse').type('test');
       cy.contains('Reference').type('test');
       cy.dropdown('Søg efter kontrakt', 'The valid contract', true);
       cy.dropdown('Vælg frekvens', 'Ugentligt', true);
 
-      cy.intercept('PUT', '**/system-relations/*', {});
+      cy.intercept('PUT', '**/system-relations/*', {}).as('modifyRelation');
       cy.contains('Gem').click();
     });
+    cy.wait('@modifyRelation').its('request.body.systemRelationDirection').should('equal', 'BidirectionalData');
     cy.contains('Relation ændret');
   });
+
+  for (const clearDirection of [false, true]) {
+    it(`can ${clearDirection ? 'clear' : 'preserve'} the direction when editing a Relation`, () => {
+      cy.intercept('/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' });
+      cy.contains('System 3').click();
+      cy.intercept('/api/v2/it-system-usages/*/incoming-system-relations', []);
+      cy.intercept('/api/v2/*it-system-usage-relation-frequency-types*', {
+        fixture: './it-system-usage/relations/relation-frequency-types.json',
+      });
+      cy.navigateToDetailsSubPage('Relationer');
+      cy.intercept('/api/v2/internal/it-system-usages/search?organizationUuid*', {
+        fixture: './it-system-usage/it-system-usages-internal.json',
+      });
+      cy.intercept('/api/v2/*it-contracts*', []);
+      cy.intercept('/api/v2/*it-interfaces*', []);
+      cy.intercept('PUT', '**/system-relations/*', {}).as('modifyRelation');
+      cy.getRowForElementContent('Aplanner').get('app-pencil-icon').first().click({ force: true });
+
+      cy.get('app-system-relation-dialog').within(() => {
+        cy.get('app-dropdown[formName="systemRelationDirection"]').should('contain', 'Udgående data');
+        if (clearDirection) {
+          cy.get('app-dropdown[formName="systemRelationDirection"] .ng-clear-wrapper').click();
+        }
+        cy.contains('Gem').click();
+      });
+      cy.wait('@modifyRelation').its('request.body').should((request) => {
+        expect(request.systemRelationDirection).to.equal(clearDirection ? undefined : 'OutgoingData');
+      });
+      cy.contains('Relation ændret');
+    });
+  }
 
   it('can delete Relation', () => {
     cy.intercept('/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' });
@@ -205,6 +287,11 @@ describe('it-system-usage system-relations', () => {
       for (const expectedRow of rows) {
         const row = () => cy.getRowForElementContent(expectedRow.systemUsageName);
         row().contains(expectedRow.relationInterfaceName);
+        if (expectedRow.systemRelationDirectionName) {
+          row().contains(expectedRow.systemRelationDirectionName);
+        } else {
+          row().find('td').eq(2).should('have.text', '');
+        }
         row().contains(expectedRow.associatedContractName);
         row().contains(expectedRow.description);
         const expectedFrequencyName = expectedRow.isFrequencyObsolete

@@ -17,6 +17,97 @@ describe('it-system-usage frontpage', () => {
     getKleRow(kleNumber).contains(name);
   }
 
+  it('shows technical system type descriptions, including saved selections loaded before the options', () => {
+    cy.intercept('GET', '/api/v2/it-system-usage-technical-system-types*', {
+      delay: 500,
+      body: [
+        {
+          uuid: '1a2b3c4d-0001-0001-0001-000000000001',
+          name: 'Fagsystem',
+          description: 'Description of Fagsystem',
+        },
+        {
+          uuid: '1a2b3c4d-0001-0001-0001-000000000002',
+          name: 'Infrastruktur',
+          description: 'Description of Infrastruktur',
+        },
+      ],
+    }).as('technicalTypes');
+    cy.contains('System 3').click();
+    cy.wait('@technicalTypes');
+    cy.contains('app-multi-select-dropdown', 'Tekniske systemtyper').within(() => {
+      cy.get('app-textbox-info').should('contain.text', 'Description of Fagsystem');
+      cy.get('.ng-select-container').click();
+      cy.get('.ng-option').should('contain.text', 'Description of Infrastruktur');
+    });
+  });
+
+  it('preserves newer technical system type selections when earlier PATCH responses arrive', () => {
+    const options = ['A', 'B', 'C', 'D'].map((name, index) => ({
+      uuid: `1a2b3c4d-0001-0001-0001-00000000000${index + 1}`,
+      name,
+      description: `Description of ${name}`,
+    }));
+    const releaseResponses: (() => void)[] = [];
+    const dropdown = () => cy.contains('app-multi-select-dropdown', 'Tekniske systemtyper');
+    const expectSelectedNames = (...names: string[]) =>
+      dropdown().find('.ng-value-label').should(($labels) => {
+        expect([...$labels].map((label) => label.textContent?.replace(/[,\s]+$/, ''))).to.deep.eq(names);
+      });
+
+    cy.fixture('it-system-usage/it-system-usage.json').then((usage) => {
+      cy.intercept('GET', '/api/v2/it-system-usage-technical-system-types*', { body: options });
+      cy.intercept('GET', '/api/v2/it-system-usages/*', {
+        body: { ...usage, general: { ...usage.general, technicalSystemTypes: [options[0]] } },
+      });
+      cy.intercept('PATCH', '/api/v2/it-system-usages/*', (req) => {
+        const ids: string[] = req.body.general.technicalSystemTypeUuids;
+        req.alias = `technicalPatch${releaseResponses.length + 1}`;
+        return new Cypress.Promise<void>((resolve) => {
+          releaseResponses.push(() => {
+            req.reply({
+              body: {
+                ...usage,
+                general: {
+                  ...usage.general,
+                  technicalSystemTypes: options.filter((option) => ids.includes(option.uuid)),
+                },
+              },
+            });
+            resolve();
+          });
+        });
+      });
+    });
+
+    cy.contains('System 3').click();
+    expectSelectedNames('A');
+    dropdown().find('.ng-select-container').click();
+    dropdown().find('.ng-option').contains('Description of B').click();
+    cy.wrap(releaseResponses).should('have.length', 1);
+    dropdown().find('.ng-option').contains('Description of C').click();
+    cy.wrap(releaseResponses).should('have.length', 2);
+    expectSelectedNames('A', 'B', 'C');
+
+    cy.then(() => releaseResponses[0]());
+    cy.wait('@technicalPatch1').its('request.body.general.technicalSystemTypeUuids')
+      .should('deep.eq', options.slice(0, 2).map((option) => option.uuid));
+    expectSelectedNames('A', 'B', 'C');
+    dropdown().find('app-textbox-info').should('contain.text', 'Description of C');
+
+    dropdown().find('.ng-option').contains('Description of D').click();
+    cy.wrap(releaseResponses).should('have.length', 3);
+    cy.then(() => releaseResponses[2]());
+    cy.wait('@technicalPatch3').its('request.body.general.technicalSystemTypeUuids')
+      .should('deep.eq', options.map((option) => option.uuid));
+    expectSelectedNames('A', 'B', 'C', 'D');
+
+    cy.then(() => releaseResponses[1]());
+    cy.wait('@technicalPatch2');
+    expectSelectedNames('A', 'B', 'C', 'D');
+    dropdown().find('app-textbox-info').should('contain.text', 'Description of D');
+  });
+
   it('can edit business critical status', () => {
     cy.intercept('/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' });
     cy.contains('System 3').click();

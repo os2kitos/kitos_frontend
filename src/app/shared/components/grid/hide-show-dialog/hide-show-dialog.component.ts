@@ -18,7 +18,6 @@ import { ButtonComponent } from '../../buttons/button/button.component';
 import { CheckboxComponent } from '../../checkbox/checkbox.component';
 import { DialogActionsComponent } from '../../dialogs/dialog-actions/dialog-actions.component';
 import { DialogComponent } from '../../dialogs/dialog/dialog.component';
-import { ParagraphComponent } from '../../paragraph/paragraph.component';
 import { StandardVerticalContentGridComponent } from '../../standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { ITContractSupplierActions } from 'src/app/store/it-contract/it-contract-supplier/actions';
 
@@ -31,7 +30,6 @@ import { ITContractSupplierActions } from 'src/app/store/it-contract/it-contract
     StandardVerticalContentGridComponent,
     CdkScrollable,
     MatDialogContent,
-    ParagraphComponent,
     CheckboxComponent,
     DialogActionsComponent,
     ButtonComponent

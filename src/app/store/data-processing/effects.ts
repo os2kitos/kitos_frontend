@@ -20,6 +20,7 @@ import { DATA_PROCESSING_COLUMNS_ID } from 'src/app/shared/constants/persistent-
 import { hasValidCache } from 'src/app/shared/helpers/date.helpers';
 import { addSecondaryContainsField } from 'src/app/shared/helpers/odata-query.helpers';
 import { adaptDataProcessingRegistration } from 'src/app/shared/models/data-processing/data-processing.model';
+import { applyMainContractStatusFilter } from 'src/app/shared/models/data-processing/main-contract-status.model';
 import { OData } from 'src/app/shared/models/odata.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ExternalReferencesApiService } from 'src/app/shared/services/external-references-api-service.service';
@@ -94,7 +95,7 @@ export class DataProcessingEffects {
 
         return this.httpClient
           .get<OData>(
-            `/odata/DataProcessingRegistrationReadModels?organizationUuid=${organizationUuid}&$expand=RoleAssignments&${fixedOdataString}&$count=true`,
+            `/odata/DataProcessingRegistrationReadModels?organizationUuid=${organizationUuid}&$expand=RoleAssignments,SourceEntity($select=MainContractId)&${fixedOdataString}&$count=true`,
           )
           .pipe(
             map((data) => {
@@ -680,7 +681,7 @@ function mapSubDataProcessors(
 }
 
 function applyQueryFixes(odataString: string, systemRoles: APIBusinessRoleDTO[] | undefined) {
-  let fixedOdataString = odataString;
+  let fixedOdataString = applyMainContractStatusFilter(odataString);
 
   systemRoles?.forEach((role) => {
     fixedOdataString = fixedOdataString

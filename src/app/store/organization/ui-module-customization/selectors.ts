@@ -596,6 +596,8 @@ const createItContractsEconomyFieldEnableAndRecommendedSelector = (fieldKey: str
 export const selectItContractsEnablePaymentModel = createItContractsEconomyFieldSelector('paymentModel');
 export const selectItContractsEnableAndRecommendedPaymentModel =
   createItContractsEconomyFieldEnableAndRecommendedSelector('paymentModel');
+export const selectItContractsEnableAndRecommendedInvoiceFrequency =
+  createItContractsEconomyFieldEnableAndRecommendedSelector('invoiceFrequency');
 export const selectItContractsEnableExternalPayment = createItContractsEconomyFieldSelector('extPayment');
 export const selectItContractsEnableAndRecommendedExternalPayment =
   createItContractsEconomyFieldEnableAndRecommendedSelector('extPayment');
@@ -676,3 +678,6 @@ function getTabViewModelFromModule(
   if (!moduleConfigChildren) return undefined;
   return moduleConfigChildren.find((vm) => vm.fullKey === tabFullKey);
 }
+
+export const selectITSystemUsageEnableAndRecommendedGdprPersonalDataDeletion =
+  createItSystemUsageGdprFieldEnableAndRecommendedSelector('personalDataDeletion');

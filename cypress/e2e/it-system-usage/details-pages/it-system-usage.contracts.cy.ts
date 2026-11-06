@@ -11,10 +11,10 @@ describe('it-system-usage contracts', () => {
     const testRunner = new TestRunner(setupTest);
 
     testRunner.runTestWithSetup('can show Contracts tab when no associated contracts', () => {
+      cy.intercept('/api/v2/it-contracts*', []);
       cy.contains('System 3').click();
 
       cy.intercept('/api/v2/it-contract-contract-types*', { fixture: './shared/contract-types.json' });
-      cy.intercept('/api/v2/it-contracts*', []);
 
       cy.navigateToDetailsSubPage('Kontrakter');
 
@@ -26,10 +26,12 @@ describe('it-system-usage contracts', () => {
         fixture: './it-system-usage/it-system-usage-no-main-contract.json',
       });
 
+      cy.intercept('/api/v2/it-contracts?systemUsageUuid*', {
+        fixture: './it-contracts/it-contracts-by-it-system-usage-uuid.json',
+      });
       cy.contains('System 3').click();
 
       cy.intercept('/api/v2/it-contract-contract-types*', { fixture: './shared/contract-types.json' });
-      cy.intercept('/api/v2/it-contracts*', { fixture: './it-contracts/it-contracts-by-it-system-usage-uuid.json' });
 
       cy.navigateToDetailsSubPage('Kontrakter');
 
@@ -81,10 +83,12 @@ describe('it-system-usage contracts', () => {
       cy.intercept('/api/v2/it-system-usages/*', {
         fixture: './it-system-usage/it-system-usage-no-main-contract.json',
       });
+      cy.intercept('/api/v2/it-contracts?systemUsageUuid*', {
+        fixture: './it-contracts/it-contracts-by-it-system-usage-uuid.json',
+      });
       cy.contains('System 3').click();
 
       cy.intercept('/api/v2/it-contract-contract-types*', { fixture: './shared/contract-types.json' });
-      cy.intercept('/api/v2/it-contracts?*', { fixture: './it-contracts/it-contracts-by-it-system-usage-uuid.json' });
 
       cy.navigateToDetailsSubPage('Kontrakter');
 
@@ -110,10 +114,10 @@ describe('it-system-usage contracts', () => {
 
     testRunner.runTestWithSetup('Can create and associate contract, if no associated contracts exist', () => {
       const usageUuid = '85cc6bd8-da66-4d4e-8e56-4dbc16e5c109'; //Comes from it-system-usage.json
+      cy.intercept('/api/v2/it-contracts*', []);
       cy.contains('System 3').click();
 
       cy.intercept('/api/v2/it-contract-contract-types*', { fixture: './shared/contract-types.json' });
-      cy.intercept('/api/v2/it-contracts*', []);
 
       cy.navigateToDetailsSubPage('Kontrakter');
 
@@ -139,10 +143,12 @@ describe('it-system-usage contracts', () => {
     });
 
     testRunner.runTestWithSetup('Can create and associate contract, if associated contracts exist', () => {
+      cy.intercept('/api/v2/it-contracts?systemUsageUuid*', {
+        fixture: './it-contracts/it-contracts-by-it-system-usage-uuid.json',
+      });
       cy.contains('System 3').click();
 
       cy.intercept('/api/v2/it-contract-contract-types*', { fixture: './shared/contract-types.json' });
-      cy.intercept('/api/v2/it-contracts*', { fixture: './it-contracts/it-contracts-by-it-system-usage-uuid.json' });
 
       cy.navigateToDetailsSubPage('Kontrakter');
 
@@ -150,10 +156,10 @@ describe('it-system-usage contracts', () => {
     });
 
     testRunner.runTestWithSetup('Can not create and associate contract, if no permission to create contract', () => {
+      cy.intercept('/api/v2/it-contracts*', []);
       cy.contains('System 3').click();
 
       cy.intercept('/api/v2/it-contract-contract-types*', { fixture: './shared/contract-types.json' });
-      cy.intercept('/api/v2/it-contracts*', []);
 
       cy.intercept('GET', '/api/v2/it-contracts/permissions*', { body: { create: false } });
 
@@ -163,10 +169,10 @@ describe('it-system-usage contracts', () => {
     });
 
     testRunner.runTestWithSetup('Can not create and associate contract, if name is empty or already exists', () => {
+      cy.intercept('/api/v2/it-contracts*', []);
       cy.contains('System 3').click();
 
       cy.intercept('/api/v2/it-contract-contract-types*', { fixture: './shared/contract-types.json' });
-      cy.intercept('/api/v2/it-contracts*', []);
 
       cy.navigateToDetailsSubPage('Kontrakter');
 

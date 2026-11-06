@@ -1,0 +1,102 @@
+<app-accordion
+  title="Sletning af persondata"
+  i18n-title
+  data-cy="personal-data-deletion-accordion"
+  [recommended]="(recommended$ | async) === true"
+  [recommendedFilled]="
+    !!formGroup.controls.capability.value &&
+    (formGroup.controls.capability.value.value === 'No' ||
+      (!!formGroup.controls.method.value &&
+        !!formGroup.controls.deadline.value &&
+        !!(procedure$ | async) &&
+        !!formGroup.controls.responsibleUser.value &&
+        !!formGroup.controls.verifiedDate.value &&
+        !!(verification$ | async)))
+  "
+  [isExpanded]="(isExpanded$ | async) ?? false"
+  (expandedChanged)="onExpandedChanged($event)"
+>
+  <form [formGroup]="formGroup">
+    <app-standard-vertical-content-grid>
+      <app-dropdown
+        text="Kan der slettes i systemet?"
+        i18n-text
+        [formGroup]="formGroup"
+        formName="capability"
+        [recommended]="(recommended$ | async) === true"
+        [data]="capabilityOptions"
+        (valueChange)="changeCapability($event)"
+        data-cy="deletion-capability"
+      />
+      <app-dropdown
+        text="Hvordan foregår sletning?"
+        i18n-text
+        [formGroup]="formGroup"
+        formName="method"
+        [recommended]="(recommended$ | async) === true"
+        [recommendedFilled]="formGroup.controls.capability.value?.value === 'No' ? true : undefined"
+        [data]="methodOptions"
+        (valueChange)="patchGdpr({ personalDataDeletionMethod: $event })"
+        data-cy="deletion-method"
+      />
+      <app-dropdown
+        text="Slettefrist for systemet"
+        i18n-text
+        [formGroup]="formGroup"
+        formName="deadline"
+        [recommended]="(recommended$ | async) === true"
+        [recommendedFilled]="formGroup.controls.capability.value?.value === 'No' ? true : undefined"
+        valueField="uuid"
+        [data]="deadlines$ | async"
+        (valueChange)="patchGdpr({ personalDataDeletionDeadlineTypeUuid: $event })"
+        data-cy="deletion-deadline"
+      />
+      <app-edit-url-section
+        title="Link til sletteprocedure"
+        i18n-title
+        [simpleLink$]="procedure$"
+        [recommended]="(recommended$ | async) === true"
+        [recommendedFilled]="formGroup.controls.capability.value?.value === 'No' ? true : undefined"
+        [isDisabled]="detailsDisabled"
+        (submitMethod)="patchGdpr({ personalDataDeletionProcedureDocumentation: $event })"
+        data-cy="deletion-procedure"
+      />
+      <app-dropdown
+        text="Hvem er ansvarlig for sletning i systemet"
+        i18n-text
+        [formGroup]="formGroup"
+        formName="responsibleUser"
+        [recommended]="(recommended$ | async) === true"
+        [recommendedFilled]="formGroup.controls.capability.value?.value === 'No' ? true : undefined"
+        valueField="uuid"
+        [considerCurrentValueObsoleteIfNotPresentInData]="false"
+        [data]="users$ | async"
+        [searchFn]="externalSearch"
+        (filterChange)="userSearch$.next($event)"
+        (valueChange)="patchGdpr({ personalDataDeletionResponsibleUserUuid: $event })"
+        data-cy="deletion-responsible-user"
+      />
+      <app-datepicker
+        text="Kontrol af at der er foretaget sletning"
+        i18n-text
+        [formGroup]="formGroup"
+        formName="verifiedDate"
+        [maxDate]="maximumVerifiedDate"
+        [recommended]="(recommended$ | async) === true"
+        [recommendedFilled]="formGroup.controls.capability.value?.value === 'No' ? true : undefined"
+        (valueChange)="patchGdpr({ personalDataDeletionVerifiedDate: $event?.toDateString() ?? null })"
+        data-cy="deletion-verified-date"
+      />
+      <app-edit-url-section
+        title="Link til kontrol af sletning"
+        i18n-title
+        [simpleLink$]="verification$"
+        [recommended]="(recommended$ | async) === true"
+        [recommendedFilled]="formGroup.controls.capability.value?.value === 'No' ? true : undefined"
+        [isDisabled]="detailsDisabled"
+        (submitMethod)="patchGdpr({ personalDataDeletionVerificationDocumentation: $event })"
+        data-cy="deletion-verification"
+      />
+    </app-standard-vertical-content-grid>
+  </form>
+</app-accordion>

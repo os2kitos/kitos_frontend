@@ -149,6 +149,10 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
     }
   }
 
+  public patchParentSystem(parentUuid: string | undefined) {
+    this.patchFrontPage({ parentUuid: parentUuid ?? null });
+  }
+
   public patchArchiveDutyComment(value: string | undefined, valueChange?: ValidatedValueChange<unknown>) {
     const archiveDutyRecommendationId = this.itSystemFrontpageFormGroup.controls.recommendedArchiveDuty.value?.value;
     this.patchFrontPage({ recommendedArchiveDuty: { id: archiveDutyRecommendationId, comment: value } }, valueChange);

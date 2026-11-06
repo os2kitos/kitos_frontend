@@ -9,10 +9,17 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIContractInvoiceDateDTO } from './contractInvoiceDateDTO';
+import { APIInvoiceFrequencyChoice } from './invoiceFrequencyChoice';
 import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 
 
 export interface APIContractPaymentModelDataResponseDTO { 
+    invoiceFrequency?: APIInvoiceFrequencyChoice;
+    /**
+     * Full invoice dates ordered by period; empty when no dates are assigned.
+     */
+    invoiceDates?: Array<APIContractInvoiceDateDTO> | null;
     /**
      * The data at which operations remuneration started
      */

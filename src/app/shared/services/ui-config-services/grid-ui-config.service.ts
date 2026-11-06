@@ -47,6 +47,7 @@ import {
   selectItContractsEnableAndRecommendedExternalPayment,
   selectItContractsEnableAndRecommendedExternalSigner,
   selectItContractsEnableAndRecommendedInternalPayment,
+  selectItContractsEnableAndRecommendedInvoiceFrequency,
   selectItContractsEnableAndRecommendedInternalSigner,
   selectItContractsEnableAndRecommendedIsActive,
   selectItContractsEnableAndRecommendedNotes,
@@ -75,6 +76,7 @@ import {
   selectITSystemUsageEnableAndRecommendedGdprDataTypes,
   selectITSystemUsageEnableAndRecommendedGdprDocumentation,
   selectITSystemUsageEnableAndRecommendedGdprDpiaConducted,
+  selectITSystemUsageEnableAndRecommendedGdprPersonalDataDeletion,
   selectITSystemUsageEnableAndRecommendedGdprIsDataProcessingAgreementRequired,
   selectITSystemUsageEnableAndRecommendedGdprPlannedRiskAssessmentDate,
   selectITSystemUsageEnableAndRecommendedGdprPurpose,
@@ -259,6 +261,18 @@ export class GridUIConfigService {
             ContractFields.PaymentFrequencyUuid,
           ]),
         ),
+      this.store
+        .select(selectItContractsEnableAndRecommendedInvoiceFrequency)
+        .pipe(
+          mapUIConfigStatusToEnabled(),
+          shouldEnable([
+            ContractFields.InvoiceFrequency,
+            ContractFields.InvoiceDate1,
+            ContractFields.InvoiceDate2,
+            ContractFields.InvoiceDate3,
+            ContractFields.InvoiceDate4,
+          ]),
+        ),
 
       //Contract Roles
       this.store.select(selectItContractEnableAndRecommendedContractRoles).pipe(mapUIConfigStatusToEnabled(), shouldEnable([], ['Roles.Role'])),
@@ -372,6 +386,20 @@ export class GridUIConfigService {
       this.store
         .select(selectITSystemUsageEnableAndRecommendedGdprDocumentation)
         .pipe(mapUIConfigStatusToEnabled(), shouldEnable([UsageFields.LinkToDirectoryName])),
+      this.store.select(selectITSystemUsageEnableAndRecommendedGdprPersonalDataDeletion).pipe(
+        mapUIConfigStatusToEnabled(),
+        shouldEnable([
+          UsageFields.PersonalDataDeletionCapability,
+          UsageFields.PersonalDataDeletionMethod,
+          UsageFields.PersonalDataDeletionDeadlineTypeUuid,
+          UsageFields.PersonalDataDeletionResponsibleUserName,
+          UsageFields.PersonalDataDeletionVerifiedDate,
+          UsageFields.PersonalDataDeletionProcedureDocumentationName,
+          UsageFields.PersonalDataDeletionVerificationDocumentationName,
+          UsageFields.PersonalDataDeletionProcedureDocumentationUrl,
+          UsageFields.PersonalDataDeletionVerificationDocumentationUrl,
+        ]),
+      ),
       this.store.select(selectITSystemUsageEnableAndRecommendedGdprDpiaConducted).pipe(mapUIConfigStatusToEnabled(), shouldEnable([UsageFields.DpiaConducted])),
       this.store
         .select(selectITSystemUsageEnableAndRecommendedSystemUsageCriticalityLevel)

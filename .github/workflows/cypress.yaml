@@ -17,6 +17,8 @@ jobs:
   cypress-run:
     if: github.event.pull_request == null || github.event.pull_request.draft == false
     runs-on: ubuntu-latest
+    env:
+      CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
     strategy:
       fail-fast: false
       matrix:
@@ -32,15 +34,14 @@ jobs:
           cache: "yarn"
 
       - name: Cypress run
-        uses: cypress-io/github-action@v6
+        if: matrix.containers == 1 || env.CYPRESS_RECORD_KEY != ''
+        uses: cypress-io/github-action@v7.4.6
         with:
           start: yarn start
           wait-on: "http://localhost:4200"
           wait-on-timeout: 300
-          record: true
-          parallel: true
-        env:
-          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          record: ${{ env.CYPRESS_RECORD_KEY != '' }}
+          parallel: ${{ env.CYPRESS_RECORD_KEY != '' }}
 
   cypress-component:
     if: github.event.pull_request == null || github.event.pull_request.draft == false
@@ -59,7 +60,7 @@ jobs:
           cache: "yarn"
 
       - name: Cypress Component Tests
-        uses: cypress-io/github-action@v6
+        uses: cypress-io/github-action@v7.4.6
         with:
           command: yarn cypress run --component
         env:

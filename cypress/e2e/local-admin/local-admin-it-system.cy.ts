@@ -8,6 +8,7 @@ describe('local-admin it system usage', () => {
       fixture: './local-admin/it-system/business-types.json',
     });
     cy.intercept('api/v2/internal/it-systems/*/local-option-types/archive-types', { body: [] });
+    cy.intercept('GET', '/api/v2/internal/it-systems/*/local-option-types/personal-data-deletion-deadline-types', { body: [] });
     cy.intercept('api/v2/internal/it-systems/*/local-option-types/archive-location-types', { body: [] });
     cy.intercept('api/v2/internal/it-systems/*/local-option-types/archive-test-location-types', { body: [] });
     cy.intercept('api/v2/internal/it-systems/*/local-option-types/data-types', { body: [] });

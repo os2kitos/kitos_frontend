@@ -3,11 +3,13 @@
 :host {
   display: flex;
   flex: 1;
+  min-width: 0;
   gap: theme.$padding-small;
 }
 
 app-datepicker {
-  max-width: 66%;
+  flex: 1;
+  min-width: 0;
 }
 
 :host ::ng-deep {

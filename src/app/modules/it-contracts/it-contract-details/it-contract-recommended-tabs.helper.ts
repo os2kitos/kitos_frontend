@@ -30,6 +30,7 @@ import {
   selectItContractsEnableAndRecommendedInternalSigner,
   selectItContractsEnableAndRecommendedNotes,
   selectItContractsEnableAndRecommendedPaymentModel,
+  selectItContractsEnableAndRecommendedInvoiceFrequency,
   selectItContractsEnableAndRecommendedProcurementPlan,
   selectItContractsEnableAndRecommendedProcurementStrategy,
   selectItContractsEnableAndRecommendedPurchaseForm,
@@ -103,6 +104,8 @@ export function getItContractRecommendedTabBadges(
     field(selectItContractsEnableAndRecommendedPaymentModel, (c) => hasValue(c?.paymentModel.operationsRemunerationStartedAt)),
     field(selectItContractsEnableAndRecommendedPaymentModel, (c) => hasValue(c?.paymentModel.paymentFrequency)),
     field(selectItContractsEnableAndRecommendedPaymentModel, (c) => hasValue(c?.paymentModel.paymentModel)),
+    field(selectItContractsEnableAndRecommendedInvoiceFrequency, (c) => hasValue(c?.paymentModel.invoiceFrequency)),
+    field(selectItContractsEnableAndRecommendedInvoiceFrequency, (c) => !!c?.paymentModel.invoiceDates?.length),
     field(selectItContractsEnableAndRecommendedPaymentModel, (c) => hasValue(c?.paymentModel.priceRegulation)),
   ]);
 

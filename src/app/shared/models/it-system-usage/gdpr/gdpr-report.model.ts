@@ -1,5 +1,6 @@
+import { DpiaConductedOption, mapToDpiaConductedEnum } from '../../dpia-conducted.model';
 import { APIGdprReportResponseDTO } from 'src/app/api/v2';
-import { mapToYesNoDontKnowIrrelevantEnum } from '../../yes-no-dont-know-irrelevant.model';
+import { mapToRiskAssessmentConductedEnum, RiskAssessmentConductedOption } from '../../risk-assessment-conducted.model';
 import { mapToYesNoDontKnowEnum, YesNoDontKnowOption } from '../../yes-no-dont-know.model';
 import { mapPreRiskAssessmentEnum, PreRiskAssessment } from './pre-risk-assessment.model';
 
@@ -13,7 +14,7 @@ export interface GdprReport {
   dataProcessingAgreementConcluded?: boolean;
   linkToDirectory?: boolean;
   sensitiveDataTypes: string;
-  riskAssessment?: YesNoDontKnowOption;
+  riskAssessment?: RiskAssessmentConductedOption;
   riskAssessmentDate?: string;
   plannedRiskAssessmentDate?: string;
   preRiskAssessment?: PreRiskAssessment;
@@ -21,7 +22,7 @@ export interface GdprReport {
   personalDataCpr?: boolean;
   personalDataSocialProblems?: boolean;
   personalDataSocialOtherPrivateMatters?: boolean;
-  dpia?: YesNoDontKnowOption;
+  dpia?: DpiaConductedOption;
   dpiaDate?: string;
   technicalSupervisionDocumentationUrl?: string;
   technicalSupervisionDocumentationUrlName?: string;
@@ -44,7 +45,7 @@ export function adaptGdprReport(dto: APIGdprReportResponseDTO): GdprReport {
     dataProcessingAgreementConcluded: dto.dataProcessingAgreementConcluded,
     linkToDirectory: dto.linkToDirectory,
     sensitiveDataTypes: dto.sensitiveDataTypes?.join(', ') ?? '',
-    riskAssessment: mapToYesNoDontKnowIrrelevantEnum(dto.riskAssessment),
+    riskAssessment: mapToRiskAssessmentConductedEnum(dto.riskAssessment),
     riskAssessmentDate: dto.riskAssessmentDate ?? undefined,
     plannedRiskAssessmentDate: dto.plannedRiskAssessmentDate ?? undefined,
     preRiskAssessment: mapPreRiskAssessmentEnum(dto.preRiskAssessment ?? undefined),
@@ -52,7 +53,7 @@ export function adaptGdprReport(dto: APIGdprReportResponseDTO): GdprReport {
     personalDataCpr: dto.personalDataCpr,
     personalDataSocialProblems: dto.personalDataSocialProblems,
     personalDataSocialOtherPrivateMatters: dto.personalDataSocialOtherPrivateMatters,
-    dpia: mapToYesNoDontKnowEnum(dto.dpia),
+    dpia: mapToDpiaConductedEnum(dto.dpia),
     dpiaDate: dto.dpiaDate ?? undefined,
     technicalSupervisionDocumentationUrl: dto.technicalSupervisionDocumentationUrl ?? undefined,
     technicalSupervisionDocumentationUrlName: dto.technicalSupervisionDocumentationUrlName ?? undefined,

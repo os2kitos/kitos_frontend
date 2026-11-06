@@ -17,6 +17,7 @@ function setupTest() {
   cy.intercept('api/v2/internal/it-systems/global-option-types/frequency-types', { body: [] });
   cy.intercept('api/v2/internal/it-systems/global-option-types/interface-types', { body: [] });
   cy.intercept('api/v2/internal/it-systems/global-option-types/sensitive-personal-data-types', { body: [] });
+  cy.intercept('api/v2/internal/it-systems/global-option-types/personal-data-deletion-deadline-types', { fixture: './global-admin/it-system/business-types.json' });
   cy.intercept('api/v2/internal/it-systems/global-option-types/it-system-categories', { body: [] });
   cy.intercept('api/v2/internal/it-systems/global-option-types/register-types', { body: [] });
 
@@ -26,6 +27,17 @@ function setupTest() {
 describe('global-admin-organizations', () => {
   it('Tests', () => {
     const testRunner = new TestRunner(setupTest);
+
+    testRunner.runTestWithSetup('Can create personal data deletion deadline', () => {
+      cy.intercept('POST', '/api/v2/internal/it-systems/global-option-types/personal-data-deletion-deadline-types', {}).as('createDeadline');
+      cy.contains('app-global-option-type-view', 'Frister for sletning af persondata').within(() => {
+        cy.contains('Frister for sletning af persondata').click();
+        cy.getByDataCy('create-button').click();
+      });
+      cy.replaceTextByDataCy('name-textbox', '30 dage');
+      cy.getByDataCy('save-button').click();
+      cy.wait('@createDeadline').its('request.body.name').should('eq', '30 dage');
+    });
 
     testRunner.runTestWithSetup('Can toggle business type enabled', () => {
       cy.intercept('PATCH', '/api/v2/internal/it-systems/global-option-types/business-types/*', {

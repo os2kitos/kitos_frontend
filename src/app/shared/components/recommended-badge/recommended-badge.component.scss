@@ -12,3 +12,7 @@
     font-size: 12px;
   }
 }
+
+:host ::ng-deep app-tooltip.recommended-badge-tooltip .match-content-width {
+  padding-right: 6px;
+}

@@ -29,6 +29,38 @@ function setupTest() {
 }
 
 describe('organization-users', () => {
+  for (const clearInitialRoles of [false, true]) {
+    it(`keeps successive role edits visible and saves them${clearInitialRoles ? ' after clearing' : ''}`, () => {
+      setupTest();
+      cy.contains('tr', 'local-local-admin-user@kitos.dk').find('[data-cy="grid-edit-button"]').click();
+
+      const labels = () => cy.getByDataCy('roles-dropdown').find('.ng-value-label');
+      labels().should('have.text', 'Lokal admin');
+
+      if (clearInitialRoles) {
+        cy.getByDataCy('roles-dropdown').find('.ng-clear-wrapper').click();
+        cy.getByDataCy('roles-dropdown').find('.ng-value-label').should('not.exist');
+      }
+
+      cy.getByDataCy('roles-dropdown').find('.ng-select-container').click();
+      cy.getByDataCy('system-admin-option').click();
+      labels().should('contain.text', 'System admin');
+      cy.getByDataCy('contract-admin-option').click();
+      labels().should('contain.text', 'System admin').and('contain.text', 'Kontrakt admin');
+      cy.getByDataCy('system-admin-option').click();
+      labels().should('not.contain.text', 'System admin').and('contain.text', 'Kontrakt admin');
+
+      if (!clearInitialRoles) {
+        cy.getByDataCy('local-admin-option').click();
+      }
+      labels().should('have.text', 'Kontrakt admin');
+
+      cy.intercept('PATCH', 'api/v2/internal/organization/*/users/*/patch', { body: {} }).as('saveRoles');
+      cy.getByDataCy('save-button').click({ scrollBehavior: 'center' });
+      cy.wait('@saveRoles').its('request.body.roles').should('have.members', ['ContractModuleAdmin', 'User']);
+    });
+  }
+
   const testRunner = new TestRunner(setupTest);
   it('organization-users', () => {
     testRunner.runTestWithSetup('Can send advis', () => {

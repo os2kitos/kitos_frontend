@@ -22,6 +22,9 @@ export const itSystemUsageInitialState: ITSystemUsageState = itSystemUsageAdapte
   systemRoles: resetCache(),
   itSystemUsage: undefined,
   itSystemUsageLoading: false,
+  associatedContractUuidsByUsage: {},
+  associatedContractsByUsage: {},
+  associatedContractsLoadingByUsage: {},
   permissions: undefined,
   collectionPermissions: undefined,
   isRemoving: false,
@@ -42,6 +45,15 @@ export const itSystemUsageFeature = createFeature({
       ITSystemUsageActions.getITSystemUsagesSuccess,
       (state, { itSystemUsages, total }): ITSystemUsageState => ({
         ...itSystemUsageAdapter.setAll(itSystemUsages, state),
+        associatedContractUuidsByUsage: {
+          ...state.associatedContractUuidsByUsage,
+          ...Object.fromEntries(
+            itSystemUsages.filter((usage) => usage.AssociatedContracts != null).map((usage) => [
+              usage.id,
+              usage.AssociatedContracts.map((contract) => contract.id),
+            ]),
+          ),
+        },
         total,
         isLoadingSystemUsagesQuery: false,
       }),
@@ -73,6 +85,39 @@ export const itSystemUsageFeature = createFeature({
     on(
       ITSystemUsageActions.getITSystemUsageError,
       (state): ITSystemUsageState => ({ ...state, itSystemUsageLoading: false }),
+    ),
+    on(
+      ITSystemUsageActions.getAssociatedContractsStarted,
+      (state, { systemUsageUuid }): ITSystemUsageState => ({
+        ...state,
+        associatedContractsLoadingByUsage: { ...state.associatedContractsLoadingByUsage, [systemUsageUuid]: true },
+      }),
+    ),
+    on(
+      ITSystemUsageActions.getAssociatedContractsSuccess,
+      (state, { systemUsageUuid, contracts }): ITSystemUsageState => ({
+        ...state,
+        associatedContractsByUsage: { ...state.associatedContractsByUsage, [systemUsageUuid]: contracts },
+        associatedContractUuidsByUsage: {
+          ...state.associatedContractUuidsByUsage,
+          [systemUsageUuid]: contracts.map(({ uuid }) => uuid),
+        },
+        associatedContractsLoadingByUsage: { ...state.associatedContractsLoadingByUsage, [systemUsageUuid]: false },
+      }),
+    ),
+    on(
+      ITSystemUsageActions.getAssociatedContractsError,
+      (state, { systemUsageUuid }): ITSystemUsageState => ({
+        ...state,
+        associatedContractsLoadingByUsage: { ...state.associatedContractsLoadingByUsage, [systemUsageUuid]: false },
+      }),
+    ),
+    on(
+      ITSystemUsageActions.associatedContractsLoaded,
+      (state, { systemUsageUuid, contractUuids }): ITSystemUsageState => ({
+        ...state,
+        associatedContractUuidsByUsage: { ...state.associatedContractUuidsByUsage, [systemUsageUuid]: contractUuids },
+      }),
     ),
 
     on(ITSystemUsageActions.removeITSystemUsage, (state): ITSystemUsageState => ({ ...state, isRemoving: true })),

@@ -6,8 +6,10 @@ import { GDPR_REPORT_FILE_PREEFIX } from 'src/app/shared/constants/constants';
 import * as GdprFields from 'src/app/shared/constants/gdpr-overview-grid-column-constants';
 import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
 import { mapDateToString } from 'src/app/shared/helpers/date.helpers';
+import { dpiaConductedOptions } from 'src/app/shared/models/dpia-conducted.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { riskAssessmentResultOptions } from 'src/app/shared/models/it-system-usage/gdpr/risk-assessment-result';
+import { riskAssessmentConductedOptions } from 'src/app/shared/models/risk-assessment-conducted.model';
 import { yesNoDontKnowOptions } from 'src/app/shared/models/yes-no-dont-know.model';
 import { GridUIConfigService } from 'src/app/shared/services/ui-config-services/grid-ui-config.service';
 import { GdprReportActions } from 'src/app/store/it-system-usage/gdpr-report/actions';
@@ -107,7 +109,7 @@ export class GdprOverviewComponent {
       field: GdprFields.RISK_ASSESSMENT_NAME,
       title: $localize`Foretaget risikovurdering`,
       hidden: false,
-      extraData: yesNoDontKnowOptions,
+      extraData: riskAssessmentConductedOptions,
       extraFilter: 'enum',
     },
     {
@@ -140,7 +142,7 @@ export class GdprOverviewComponent {
       field: GdprFields.DPIA_NAME,
       title: $localize`Gennemført DPIA / Konsekvensanalyse`,
       hidden: false,
-      extraData: yesNoDontKnowOptions,
+      extraData: dpiaConductedOptions,
       extraFilter: 'enum',
     },
     {

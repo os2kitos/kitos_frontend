@@ -43,7 +43,7 @@
           i18n-text
           [formGroup]="riskAssessmentFormGroup"
           formName="riskAssessmentConductedControl"
-          [data]="yesNoDontKnowIrrelevantOptions"
+          [data]="riskAssessmentConductedOptions"
           [recommended]="(conductedRiskAssessmentRecommended$ | async) === true"
           (valueChange)="patchGdpr({ riskAssessmentConducted: $event })"
           data-cy="risk-assessment-dropdown"

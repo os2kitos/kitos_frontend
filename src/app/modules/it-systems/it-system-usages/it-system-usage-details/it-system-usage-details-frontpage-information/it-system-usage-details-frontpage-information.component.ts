@@ -2,7 +2,7 @@ import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, filter, map } from 'rxjs';
+import { BehaviorSubject, combineLatest, filter, map, take } from 'rxjs';
 import {
   APIGeneralDataResponseDTO,
   APIGeneralDataUpdateRequestDTO,
@@ -128,7 +128,7 @@ import { EditUrlSectionComponent } from '../../../shared/edit-url-section/edit-u
 export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseComponent implements OnInit {
   public readonly itSystemInformationForm = new FormGroup(
     {
-      purpose: new FormControl('', Validators.maxLength(200)),
+      purpose: new FormControl('', Validators.maxLength(1000)),
       localCallName: new FormControl('', Validators.maxLength(100)),
       localSystemId: new FormControl('', Validators.maxLength(200)),
       systemVersion: new FormControl('', Validators.maxLength(100)),
@@ -461,11 +461,24 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
 
   private setupFormValueChangeSubscriptions() {
     this.subscriptions.add(
+      combineLatest([
+        // Later PATCH snapshots must not replace selections made while requests are pending.
+        this.store.select(selectItSystemUsageGeneral).pipe(filterNullish(), take(1)),
+        this.technicalSystemTypeDropdownOptions$,
+      ]).subscribe(([general]) => {
+        const control = this.itSystemInformationForm.controls.technicalSystemTypes;
+        const currentTypes = control.value?.map((item) => item.value) ?? general.technicalSystemTypes ?? [];
+        const items = this.mapTechnicalSystemTypeDropdownItems(currentTypes);
+        control.setValue(items);
+        this.setupTechnicalSystemTypesControl(items);
+      }),
+    );
+
+    this.subscriptions.add(
       this.store
         .select(selectItSystemUsageGeneral)
         .pipe(filterNullish())
         .subscribe((general) => {
-          const technicalSystemTypeItems = this.mapTechnicalSystemTypeDropdownItems(general.technicalSystemTypes ?? []);
           const licensingAndCodeModelItems = this.mapLicensingAndCodeModelDropdownItems(
             general.licensingAndCodeModels ?? [],
           );
@@ -475,7 +488,6 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
             localCallName: general.localCallName,
             localSystemId: general.localSystemId,
             systemVersion: general.systemVersion,
-            technicalSystemTypes: technicalSystemTypeItems,
             numberOfExpectedUsers: mapNumberOfExpectedUsers(general.numberOfExpectedUsers ?? undefined),
             dataClassification: general.dataClassification,
             notes: general.notes,
@@ -484,7 +496,6 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
             licensingAndCodeModels: licensingAndCodeModelItems,
           });
 
-          this.setupTechnicalSystemTypesControl(technicalSystemTypeItems);
           this.setupLicensingAndCodeModelsControl(licensingAndCodeModelItems);
 
           this.itSystemCriticalityForm.patchValue({
@@ -627,6 +638,9 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
   }
 
   public patchTechnicalSystemTypes(selectedOptions: APIRegularOptionResponseDTO[]) {
+    this.itSystemInformationForm.controls.technicalSystemTypes.setValue(
+      selectedOptions.map(mapRegularOptionToMultiSelectItem),
+    );
     const uuids = selectedOptions.map((option) => option.uuid);
     this.patchGeneral({ technicalSystemTypeUuids: uuids });
   }
@@ -649,7 +663,11 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
   ): MultiSelectDropdownItem<APIRegularOptionResponseDTO>[] {
     return types.map((type) => ({
       name: type.name,
-      value: { uuid: type.uuid, name: type.name, description: '' } as APIRegularOptionResponseDTO,
+      value: this.technicalSystemTypeDropdownOptions$.value.find((item) => item.value.uuid === type.uuid)?.value ?? {
+        uuid: type.uuid,
+        name: type.name,
+        description: '',
+      },
       selected: true,
     }));
   }

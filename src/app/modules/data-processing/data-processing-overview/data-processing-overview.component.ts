@@ -19,6 +19,7 @@ import {
 import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
 import { getColumnsToShow } from 'src/app/shared/helpers/grid-config-helper';
 import { isAgreementConcludedOptions } from 'src/app/shared/models/data-processing/is-agreement-concluded.model';
+import { mainContractStatusOptions } from 'src/app/shared/models/data-processing/main-contract-status.model';
 import { isOversightCompletedOptions } from 'src/app/shared/models/data-processing/is-oversight-completed.model';
 import { transferToInsecureThirdCountriesOptions } from 'src/app/shared/models/data-processing/transfer-to-insecure-third-countries.model';
 import { yearMonthIntervalOptions } from 'src/app/shared/models/data-processing/year-month-interval.model';
@@ -77,21 +78,6 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
     },
   ];
 
-  private readonly mainContractStatusData = [
-    {
-      name: $localize`Ingen kontrakt`,
-      value: 'NoContract',
-    },
-    {
-      name: $localize`Aktiv`,
-      value: 'Active',
-    },
-    {
-      name: $localize`Ikke aktiv`,
-      value: 'Inactive',
-    },
-  ];
-
   public readonly defaultGridColumns: GridColumn[] = [
     {
       field: GridFields.Name,
@@ -109,7 +95,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       filter: 'text',
       extraFilter: 'enum',
       entityType: 'data-processing-registration',
-      extraData: this.mainContractStatusData,
+      extraData: mainContractStatusOptions,
       style: 'contract-status-chip',
       width: 340,
       hidden: true,

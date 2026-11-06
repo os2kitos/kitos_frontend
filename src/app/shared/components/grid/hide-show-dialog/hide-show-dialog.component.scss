@@ -13,3 +13,10 @@
   display: flex;
   gap: theme.$padding-small;
 }
+
+:host ::ng-deep .title-container .mdc-label {
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 150%;
+  cursor: pointer;
+}

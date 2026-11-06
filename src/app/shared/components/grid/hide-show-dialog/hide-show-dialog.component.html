@@ -6,10 +6,11 @@
           <app-standard-vertical-content-grid>
             <div class="title-container">
               <app-checkbox
+                [text]="section"
+                labelPosition="after"
                 [value]="isAllSelectedOfSection(section)"
                 (valueChange)="toggleSection($event, section)"
               ></app-checkbox>
-              <app-paragraph paragraphSize="x-large" [bold]="true">{{ section }}</app-paragraph>
             </div>
             <div class="hide-show-grid">
               @for (column of columnsCopy; track column) {

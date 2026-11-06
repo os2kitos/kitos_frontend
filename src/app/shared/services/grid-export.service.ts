@@ -3,6 +3,7 @@ import { NO_TEXT, YES_TEXT } from '../constants/constants';
 import { toCommaSeparatedString } from '../helpers/array.helpers';
 import { validateHttpUrl } from '../helpers/link.helpers';
 import { GridColumn } from '../models/grid-column.model';
+import { mainContractStatusOptions } from '../models/data-processing/main-contract-status.model';
 import { OverviewAuditModel } from '../models/it-contract/audit-model';
 import { AppDatePipe } from '../pipes/app-date.pipe';
 
@@ -31,6 +32,12 @@ export class GridExportService {
       const field = column.field;
       if (field) {
         switch (column.style) {
+          case 'contract-status-chip':
+            transformedItem[field] =
+              mainContractStatusOptions.find((option) => option.value === transformedItem[field])?.name ??
+              transformedItem[field] ??
+              '';
+            break;
           case 'chip':
             if (typeof transformedItem[field] === 'boolean') {
               transformedItem[field] = this.handleChipField(column, transformedItem);

@@ -33,6 +33,7 @@ import {
   ItSystemLocalRegisterTypesInternalV2Service,
   ItSystemLocalRoleOptionTypesInternalV2Service,
   ItSystemLocalSensitivePersonalDataTypesInternalV2Service,
+  ItSystemLocalPersonalDataDeletionDeadlineTypesInternalV2Service,
   ItSystemLocalSystemUsageCriticalityLevelTypesInternalV2Service,
   ItSystemLocalTechnicalSystemTypesInternalV2Service,
   OrganizationUnitLocalRoleOptionTypesInternalV2Service,
@@ -63,6 +64,8 @@ export class LocalAdminOptionTypeService implements OnDestroy {
     private interfaceTypeService: ItSystemLocalInterfaceTypesInternalV2Service,
     @Inject(ItSystemLocalSensitivePersonalDataTypesInternalV2Service)
     private sensitivePersonalDataTypeService: ItSystemLocalSensitivePersonalDataTypesInternalV2Service,
+    @Inject(ItSystemLocalPersonalDataDeletionDeadlineTypesInternalV2Service)
+    private personalDataDeletionDeadlineTypeService: ItSystemLocalPersonalDataDeletionDeadlineTypesInternalV2Service,
     @Inject(ItSystemLocalItSystemCategoriesTypesInternalV2Service)
     private itSystemCategoryService: ItSystemLocalItSystemCategoriesTypesInternalV2Service,
     @Inject(ItSystemLocalRegisterTypesInternalV2Service)
@@ -204,6 +207,13 @@ export class LocalAdminOptionTypeService implements OnDestroy {
       case 'it_system_usage-gdpr-sensitive-data-type':
         return (organizationUuid) =>
           this.sensitivePersonalDataTypeService.getManyItSystemLocalSensitivePersonalDataTypesInternalV2GetLocalSensitivePersonalDataTypes(
+            {
+              organizationUuid,
+            },
+          );
+      case 'it-system-usage_personal-data-deletion-deadline-type':
+        return (organizationUuid) =>
+          this.personalDataDeletionDeadlineTypeService.getManyItSystemLocalPersonalDataDeletionDeadlineTypesInternalV2GetLocalPersonalDataDeletionDeadlineTypes(
             {
               organizationUuid,
             },
@@ -408,6 +418,15 @@ export class LocalAdminOptionTypeService implements OnDestroy {
       case 'it_system_usage-gdpr-sensitive-data-type':
         return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
           this.sensitivePersonalDataTypeService.patchSingleItSystemLocalSensitivePersonalDataTypesInternalV2PatchLocalSensitivePersonalDataType(
+            {
+              organizationUuid,
+              optionUuid,
+              aPILocalRegularOptionUpdateRequestDTO: request,
+            },
+          );
+      case 'it-system-usage_personal-data-deletion-deadline-type':
+        return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
+          this.personalDataDeletionDeadlineTypeService.patchSingleItSystemLocalPersonalDataDeletionDeadlineTypesInternalV2PatchPersonalDataDeletionDeadlineType(
             {
               organizationUuid,
               optionUuid,
@@ -709,6 +728,14 @@ export class LocalAdminOptionTypeService implements OnDestroy {
               aPILocalOptionCreateRequestDTO: { optionUuid },
             },
           );
+      case 'it-system-usage_personal-data-deletion-deadline-type':
+        return (organizationUuid, optionUuid) =>
+          this.personalDataDeletionDeadlineTypeService.postSingleItSystemLocalPersonalDataDeletionDeadlineTypesInternalV2CreatePersonalDataDeletionDeadlineType(
+            {
+              organizationUuid,
+              aPILocalOptionCreateRequestDTO: { optionUuid },
+            },
+          );
       case 'it-system_usage-data-classification-type':
         return (organizationUuid, optionUuid) =>
           this.itSystemCategoryService.postSingleItSystemLocalItSystemCategoriesTypesInternalV2CreateLocalItSystemCategoryType(
@@ -935,6 +962,14 @@ export class LocalAdminOptionTypeService implements OnDestroy {
       case 'it_system_usage-gdpr-sensitive-data-type':
         return (organizationUuid, optionUuid) =>
           this.sensitivePersonalDataTypeService.deleteSingleItSystemLocalSensitivePersonalDataTypesInternalV2DeleteLocalSensitivePersonalDataType(
+            {
+              organizationUuid,
+              optionUuid,
+            },
+          );
+      case 'it-system-usage_personal-data-deletion-deadline-type':
+        return (organizationUuid, optionUuid) =>
+          this.personalDataDeletionDeadlineTypeService.deleteSingleItSystemLocalPersonalDataDeletionDeadlineTypesInternalV2DeletePersonalDataDeletionDeadlineType(
             {
               organizationUuid,
               optionUuid,

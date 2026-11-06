@@ -44,6 +44,33 @@ export const selectItSystemUsageMainContract = createSelector(
   selectItSystemUsageGeneral,
   (general) => general?.mainContract,
 );
+export const selectAssociatedContractsByUsage = createSelector(
+  selectITSystemUsageState,
+  (state) => state.associatedContractsByUsage,
+);
+export const selectAssociatedContractsLoadingByUsage = createSelector(
+  selectITSystemUsageState,
+  (state) => state.associatedContractsLoadingByUsage,
+);
+export const selectItSystemUsageAssociatedContracts = createSelector(
+  selectAssociatedContractsByUsage,
+  selectItSystemUsageUuid,
+  (contracts, uuid) => uuid ? contracts[uuid] : undefined,
+);
+export const selectItSystemUsageAssociatedContractsIsLoading = createSelector(
+  selectAssociatedContractsLoadingByUsage,
+  selectItSystemUsageUuid,
+  (loading, uuid) => uuid ? loading[uuid] === true : false,
+);
+export const selectItSystemUsageHasAssociatedContracts = createSelector(
+  selectITSystemUsageState,
+  selectItSystemUsage,
+  (state, usage) => {
+    if (!usage) return undefined;
+    const contracts = state.associatedContractUuidsByUsage[usage.uuid];
+    return contracts !== undefined ? contracts.length > 0 : usage.general.mainContract ? true : undefined;
+  },
+);
 export const selectItSystemUsageValid = createSelector(
   selectItSystemUsage,
   (itSystemUsage) => itSystemUsage?.general.validity.valid,

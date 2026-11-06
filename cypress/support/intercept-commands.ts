@@ -85,6 +85,8 @@ Cypress.Commands.add('setupItSystemCatalogIntercepts', () => {
 });
 
 Cypress.Commands.add('setupItSystemUsageIntercepts', () => {
+  cy.intercept('/api/v2/it-system-usage-personal-data-deletion-deadline-types*', []);
+  cy.intercept('/api/v2/organizations/*/users', []);
   cy.intercept('/odata/ItSystemUsageOverviewReadModels*', { fixture: './it-system-usage/it-system-usages.json' });
   cy.intercept('/api/v1/itsystem-usage/options/overview/organizationUuid*', {
     fixture: './it-system-usage/options.json',
@@ -94,6 +96,9 @@ Cypress.Commands.add('setupItSystemUsageIntercepts', () => {
   });
   cy.intercept('/api/v2/business-types*', { fixture: './shared/business-types.json' });
   cy.intercept('/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' });
+  cy.intercept('/api/v2/it-contracts?systemUsageUuid*', {
+    fixture: './it-contracts/it-contracts-by-it-system-usage-uuid.json',
+  });
   cy.intercept('/api/v2/it-system-usage-data-classification-types*', {
     fixture: './it-system-usage/classification-types.json',
   });

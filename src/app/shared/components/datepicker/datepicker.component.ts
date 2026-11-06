@@ -12,7 +12,7 @@ import {
 } from '@angular/material/datepicker';
 import { MatIcon } from '@angular/material/icon';
 import { MatInput } from '@angular/material/input';
-import { MatFormField, MatLabel, MatSuffix } from '@angular/material/select';
+import { MatError, MatFormField, MatLabel, MatSuffix } from '@angular/material/form-field';
 import IMask from 'imask';
 import { BaseFormComponent } from '../../base/base-form.component';
 import { RecommendedBadgeComponent } from '../recommended-badge/recommended-badge.component';
@@ -25,6 +25,7 @@ import { RecommendedBadgeComponent } from '../recommended-badge/recommended-badg
     FormsModule,
     ReactiveFormsModule,
     MatFormField,
+    MatError,
     MatIcon,
     MatInput,
     MatLabel,
@@ -58,10 +59,31 @@ export class DatePickerComponent extends BaseFormComponent<Date | undefined> imp
   // Undefined preserves the badge state derived from this field.
   @Input() public recommendedFilled: boolean | undefined;
   @Input() public recommended = false;
+  @Input() public clearable = true;
+  @Input() public minDate?: Date;
+  @Input() public maxDate?: Date;
   @Input() public icon?: 'search';
   @Input() public size: 'medium' | 'large' = 'large';
   @Input() public pickerAlignmentY: 'above' | 'below' = 'above';
   @Input() override value: Date | undefined = undefined;
+
+  public override clear(): void {
+    if (this.formGroup && this.formName) {
+      this.clearFormDate();
+    } else {
+      super.clear();
+    }
+    this.mask?.updateValue();
+  }
+
+  private clearFormDate(): void {
+    const control = this.formGroup!.controls[this.formName!];
+    this.formValueChange(undefined);
+    control.setValue(undefined);
+    control.markAsDirty();
+    control.markAsTouched();
+    this.focus(false);
+  }
 
   public formDateInputValueChange(event: MatDatepickerInputEvent<moment.Moment, unknown>) {
     const newValue = this.extractDate(event);

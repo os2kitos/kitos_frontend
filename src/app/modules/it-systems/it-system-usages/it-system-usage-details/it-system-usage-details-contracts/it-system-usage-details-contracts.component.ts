@@ -1,12 +1,13 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { combineLatestWith, filter, first } from 'rxjs';
+import { combineLatest, combineLatestWith, filter, first, map } from 'rxjs';
 import { APIItContractResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { matchNonEmptyArray } from 'src/app/shared/pipes/match-non-empty-array';
 import { NotificationService } from 'src/app/shared/services/notification.service';
+import { RegistrationRecommendedBadgesService } from 'src/app/shared/services/registration-recommended-badges.service';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import {
   selectITSystemUsageHasModifyPermission,
@@ -23,7 +24,6 @@ import {
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateAndAssociateContractDialogComponent } from './create-and-associate-contract-dialog/create-and-associate-contract-dialog.component';
-import { Actions, ofType } from '@ngrx/effects';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { selectItContractHasCollectionCreatePermissions } from 'src/app/store/it-contract/selectors';
 import { AsyncPipe } from '@angular/common';
@@ -75,6 +75,7 @@ export class ITSystemUsageDetailsContractsComponent extends BaseComponent implem
     .select(selectRegularOptionTypesDictionary('it-contract_contract-type'))
     .pipe(filterNullish());
   public readonly isLoading$ = this.contractsStore.associatedContractsIsLoading$;
+  public readonly associatedContractsLoaded$ = this.contractsStore.associatedContractsLoaded$;
   public readonly contractRows$ = this.contractsStore.contractRows$;
   public readonly anyContracts$ = this.contractRows$.pipe(matchNonEmptyArray());
 
@@ -83,9 +84,11 @@ export class ITSystemUsageDetailsContractsComponent extends BaseComponent implem
   });
 
   public readonly associatedContractsEnabled$ = this.store.select(selectITSystemUsageEnableAndRecommendedAssociatedContracts).pipe(mapUIConfigStatusToEnabled());
-  public readonly associatedContractsRecommended$ = this.store
-    .select(selectITSystemUsageEnableAndRecommendedAssociatedContracts)
-    .pipe(mapUIConfigStatusToRecommended());
+  public readonly associatedContractsBadge$ = combineLatest([
+    this.recommendedBadgesService.usage.associatedContracts$,
+    this.isLoading$,
+    this.associatedContractsLoaded$,
+  ]).pipe(map(([badge, isLoading, loaded]) => ({ ...badge, visible: badge.visible && loaded && !isLoading })));
   public readonly contractToDetermineIsActiveEnabled$ = this.store
     .select(selectITSystemUsageEnableAndRecommendedSelectContractToDetermineIfItSystemIsActive)
     .pipe(mapUIConfigStatusToEnabled());
@@ -100,7 +103,7 @@ export class ITSystemUsageDetailsContractsComponent extends BaseComponent implem
     private readonly contractsStore: ItSystemUsageDetailsContractsComponentStore,
     private readonly notificationService: NotificationService,
     private readonly dialog: MatDialog,
-    private readonly actions$: Actions,
+    private readonly recommendedBadgesService: RegistrationRecommendedBadgesService,
   ) {
     super();
   }
@@ -134,12 +137,6 @@ export class ITSystemUsageDetailsContractsComponent extends BaseComponent implem
         .select(selectItSystemUsageUuid)
         .pipe(filterNullish())
         .subscribe((itSystemUsageUuid) => this.contractsStore.getAssociatedContracts(itSystemUsageUuid)),
-    );
-
-    this.subscriptions.add(
-      this.actions$.pipe(ofType(ITContractActions.createAndAssociateContractSuccess)).subscribe(({ usageUuid }) => {
-        this.contractsStore.getAssociatedContracts(usageUuid);
-      }),
     );
 
     // Disable forms if user does not have rights to modify

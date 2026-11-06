@@ -13,6 +13,8 @@
       placeholder="Dag-Måned-År (f.eks. 01-02-1980)"
       type="text"
       [matDatepicker]="picker"
+      [min]="minDate"
+      [max]="maxDate"
       [formControlName]="formName"
       (dateChange)="formDateInputValueChange($event)"
       class="{{ size }}"
@@ -20,6 +22,11 @@
       (blur)="focus(false)"
       #input
       />
+      @if (clearable && formName && !formGroup.controls[formName].disabled && formGroup.controls[formName].value) {
+        <button type="button" class="clear-button" matIconSuffix (click)="clear()" aria-label="Ryd dato" i18n-aria-label>
+          <span class="clear-icon" aria-hidden="true">×</span>
+        </button>
+      }
       @if ((formName !== null && formGroup.controls[formName].disabled) === false) {
         <mat-datepicker-toggle
           [disableRipple]="true"
@@ -31,6 +38,9 @@
         </mat-datepicker-toggle>
       }
       <mat-datepicker #picker (closed)="focus(false)" xPosition="end" [yPosition]="pickerAlignmentY"></mat-datepicker>
+      @if ((minDate || maxDate) && formName && formGroup.controls[formName].invalid) {
+        <mat-error i18n>Angiv en gyldig dato inden for den tilladte periode.</mat-error>
+      }
     </mat-form-field>
   }
 
@@ -47,11 +57,18 @@
         type="text"
         placeholder="Dag-Måned-År (f.eks. 01-02-1980)"
         [matDatepicker]="picker"
+        [min]="minDate"
+        [max]="maxDate"
         [disabled]="disabled"
         [value]="value"
         class="{{ size }}"
         (dateChange)="dateInputChanged($event)"
         />
+        @if (!disabled && clearable && value) {
+          <button type="button" class="clear-button" matIconSuffix (click)="clear()" aria-label="Ryd dato" i18n-aria-label>
+            <span class="clear-icon" aria-hidden="true">×</span>
+          </button>
+        }
         @if (!disabled) {
           <mat-datepicker-toggle [disableRipple]="true" matIconSuffix [for]="picker">
             <mat-icon svgIcon="custom-mat-calendar-toggle-icon" matDatepickerToggleIcon data-cy="datepicker-toggle"></mat-icon>

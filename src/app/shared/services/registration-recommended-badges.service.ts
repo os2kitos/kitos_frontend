@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { Observable, catchError, combineLatest, filter, map, of, startWith, switchMap } from 'rxjs';
-import { NotificationV2Service, ItContractV2Service, ItSystemUsageInternalV2Service } from 'src/app/api/v2';
+import { NotificationV2Service, ItSystemUsageInternalV2Service } from 'src/app/api/v2';
 import { getItSystemUsageRecommendedTabBadges } from 'src/app/modules/it-systems/it-system-usages/it-system-usage-details/it-system-usage-recommended-tabs.helper';
 import { getItContractRecommendedTabBadges } from 'src/app/modules/it-contracts/it-contract-details/it-contract-recommended-tabs.helper';
 import { getDataProcessingRecommendedTabBadges } from 'src/app/modules/data-processing/data-processing-details/data-processing-recommended-tabs.helper';
@@ -36,7 +36,6 @@ interface Registration {
 export class RegistrationRecommendedBadgesService {
   public readonly usage = getItSystemUsageRecommendedTabBadges(
     this.store,
-    this.contractsApi,
     this.create(
       this.store.select(selectItSystemUsage),
       'ItSystemUsage',
@@ -71,7 +70,6 @@ export class RegistrationRecommendedBadgesService {
     private readonly store: Store,
     private readonly api: NotificationV2Service,
     private readonly actions$: Actions,
-    private readonly contractsApi: ItContractV2Service,
     private readonly relationsApi: ItSystemUsageInternalV2Service,
   ) {}
 

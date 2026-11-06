@@ -3,6 +3,7 @@ import { APIBusinessRoleDTO } from 'src/app/api/v1';
 import {
   APIColumnConfigurationRequestDTO,
   APICombinedPermissionsResponseDTO,
+  APIItContractResponseDTO,
   APICreateItSystemUsageArchiveRequestDTO,
   APIItSystemUsageArchiveResponseDTO,
   APIItSystemUsageResponseDTO,
@@ -40,6 +41,17 @@ export const ITSystemUsageActions = createActionGroup({
     'Get IT System Usage': (systemUsageUuid: string) => ({ systemUsageUuid }),
     'Get IT System Usage Success ': (itSystemUsage?: APIItSystemUsageResponseDTO) => ({ itSystemUsage }),
     'Get IT System Usage Error': emptyProps(),
+    'Get Associated Contracts': (systemUsageUuid: string, forceReload: boolean = false) => ({ systemUsageUuid, forceReload }),
+    'Get Associated Contracts Started': (systemUsageUuid: string) => ({ systemUsageUuid }),
+    'Get Associated Contracts Success': (systemUsageUuid: string, contracts: APIItContractResponseDTO[]) => ({
+      systemUsageUuid,
+      contracts,
+    }),
+    'Get Associated Contracts Error': (systemUsageUuid: string) => ({ systemUsageUuid }),
+    'Associated Contracts Loaded': (systemUsageUuid: string, contractUuids: string[]) => ({
+      systemUsageUuid,
+      contractUuids,
+    }),
 
     'Remove IT System Usage': emptyProps(),
     'Remove IT System Usage Success ': emptyProps(),

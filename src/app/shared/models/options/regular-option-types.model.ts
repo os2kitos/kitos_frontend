@@ -7,6 +7,7 @@ export type RegularOptionType =
   | 'it-system_usage-data-classification-type'
   | 'it-system_usage-relation-frequency-type'
   | 'it_system_usage-gdpr-sensitive-data-type'
+  | 'it-system-usage_personal-data-deletion-deadline-type'
   | 'it-system_usage-archive-type'
   | 'it-system_usage-archive-location-type'
   | 'it-system_usage-archive-location-test-type'

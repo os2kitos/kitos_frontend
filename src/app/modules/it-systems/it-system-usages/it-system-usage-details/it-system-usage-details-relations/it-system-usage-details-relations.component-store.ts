@@ -10,6 +10,7 @@ import {
   ItSystemUsageV2Service,
 } from 'src/app/api/v2';
 import { BOUNDED_PAGINATION_QUERY_MAX_SIZE } from 'src/app/shared/constants/constants';
+import { mapSystemRelationDirection } from 'src/app/shared/models/it-system-usage/system-relation-direction.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { SystemRelationModel } from './relation-table/relation-grid.component';
 
@@ -69,6 +70,7 @@ export class ItSystemUsageDetailsRelationsComponentStore extends ComponentStore<
       uuid: relation.uuid,
       systemUsage: relationSystemUsage,
       relationInterface: relation.relationInterface ?? undefined,
+      systemRelationDirection: mapSystemRelationDirection(relation.systemRelationDirection),
       associatedContract: relation.associatedContract ?? undefined,
       relationFrequency: relation.relationFrequency ?? undefined,
       description: relation.description ?? undefined,

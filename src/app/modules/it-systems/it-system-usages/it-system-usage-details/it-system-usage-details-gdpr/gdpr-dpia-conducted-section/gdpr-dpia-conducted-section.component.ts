@@ -4,10 +4,10 @@ import { mapUIConfigStatusToRecommended } from 'src/app/shared/helpers/observabl
 import { selectITSystemUsageEnableAndRecommendedGdprDpiaConducted } from 'src/app/store/organization/ui-module-customization/selectors';
 import { Store } from '@ngrx/store';
 import { filter, map } from 'rxjs';
-import { APIYesNoDontKnowChoice } from 'src/app/api/v2';
+import { APIDpiaConductedChoice } from 'src/app/api/v2';
 import { BaseAccordionComponent } from 'src/app/shared/base/base-accordion.component';
 import { SimpleLink } from 'src/app/shared/models/SimpleLink.model';
-import { YesNoDontKnowOption, mapToYesNoDontKnowEnum } from 'src/app/shared/models/yes-no-dont-know.model';
+import { DpiaConductedOption, mapToDpiaConductedEnum, dpiaConductedOptions } from 'src/app/shared/models/dpia-conducted.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import {
   selectITSystemUsageHasModifyPermission,
@@ -28,7 +28,7 @@ export class GdprDpiaConductedSectionComponent extends BaseAccordionComponent im
   private readonly currentGdpr$ = this.store.select(selectItSystemUsageGdpr).pipe(filterNullish());
   public readonly dpiaConductedRecommended$ = this.store.select(selectITSystemUsageEnableAndRecommendedGdprDpiaConducted).pipe(mapUIConfigStatusToRecommended());
   public readonly isDpiaConductedFalse$ = this.currentGdpr$.pipe(
-    map((gdpr) => gdpr.dpiaConducted !== APIYesNoDontKnowChoice.Yes),
+    map((gdpr) => gdpr.dpiaConducted !== APIDpiaConductedChoice.Yes),
   );
   public readonly hasModifyPermissions$ = this.store.select(selectITSystemUsageHasModifyPermission);
 
@@ -39,11 +39,12 @@ export class GdprDpiaConductedSectionComponent extends BaseAccordionComponent im
         : undefined,
     ),
   );
+  public readonly dpiaConductedOptions = dpiaConductedOptions;
   public disableLinkControl = false;
 
   public readonly formGroup = new FormGroup(
     {
-      yesNoDontKnowControl: new FormControl<YesNoDontKnowOption | undefined>(undefined),
+      yesNoDontKnowControl: new FormControl<DpiaConductedOption | undefined>(undefined),
       dateControl: new FormControl<Date | undefined>(undefined),
     },
     { updateOn: 'blur' },
@@ -56,7 +57,7 @@ export class GdprDpiaConductedSectionComponent extends BaseAccordionComponent im
   ngOnInit(): void {
     this.currentGdpr$.subscribe((gdpr) => {
       this.formGroup.patchValue({
-        yesNoDontKnowControl: mapToYesNoDontKnowEnum(gdpr.dpiaConducted),
+        yesNoDontKnowControl: mapToDpiaConductedEnum(gdpr.dpiaConducted),
         dateControl: gdpr.dpiaDate ? new Date(gdpr.dpiaDate) : undefined,
       });
     });

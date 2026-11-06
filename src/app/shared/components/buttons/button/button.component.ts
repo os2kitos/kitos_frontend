@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { ThemePalette } from '@angular/material/core';
 import { ButtonStyle } from 'src/app/shared/models/buttons/button-style.model';
@@ -17,6 +17,15 @@ export declare type ExtendedThemePalette = ThemePalette | 'secondary';
   imports: [TooltipComponent, MatButton, CtrlClickDirective, CommonModule, IconComponent],
 })
 export class ButtonComponent {
+  @ViewChild(MatButton) private button?: MatButton;
+  @Input() public ariaExpanded?: boolean;
+  @Input() public ariaControls: string | null = null;
+  @Input() public ariaHasPopup?: 'dialog' | 'menu' | 'listbox' | 'tree' | 'grid';
+
+  public focus(): void {
+    this.button?.focus();
+  }
+
   @Input() public buttonStyle: ButtonStyle = 'primary';
   @Input() public color: ExtendedThemePalette = 'primary';
   @Input() public size: 'x-small' | 'small' | 'medium' | 'large' = 'medium';

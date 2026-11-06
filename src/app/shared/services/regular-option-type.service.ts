@@ -29,6 +29,7 @@ import {
   ItSystemUsageRelationFrequencyTypeV2Service,
   ItSystemUsageRoleTypeV2Service,
   ItSystemUsageSensitivePersonalDataTypeV2Service,
+  ItSystemUsagePersonalDataDeletionDeadlineTypeV2Service,
   ItSystemUsageTechnicalSystemTypeV2Service,
 } from 'src/app/api/v2';
 import { RegularOptionType } from '../models/options/regular-option-types.model';
@@ -50,6 +51,8 @@ export class RegularOptionTypeService {
     private readonly relationFrequencyTypesService: ItSystemUsageRelationFrequencyTypeV2Service,
     @Inject(ItSystemUsageSensitivePersonalDataTypeV2Service)
     private readonly sensitivePersonalDataTypesService: ItSystemUsageSensitivePersonalDataTypeV2Service,
+    @Inject(ItSystemUsagePersonalDataDeletionDeadlineTypeV2Service)
+    private readonly personalDataDeletionDeadlineTypesService: ItSystemUsagePersonalDataDeletionDeadlineTypeV2Service,
     @Inject(ItSystemUsageArchiveTypeV2Service)
     private readonly itSystemUsageArchiveTypesService: ItSystemUsageArchiveTypeV2Service,
     @Inject(ItSystemUsageArchiveLocationTypeV2Service)
@@ -122,6 +125,11 @@ export class RegularOptionTypeService {
       case 'it_system_usage-gdpr-sensitive-data-type':
         return (organizationUuid) =>
           this.sensitivePersonalDataTypesService.getManyItSystemUsageSensitivePersonalDataTypeV2Get({
+            organizationUuid,
+          });
+      case 'it-system-usage_personal-data-deletion-deadline-type':
+        return (organizationUuid) =>
+          this.personalDataDeletionDeadlineTypesService.getManyItSystemUsagePersonalDataDeletionDeadlineTypeV2Get({
             organizationUuid,
           });
       case 'it-system_usage-archive-type':

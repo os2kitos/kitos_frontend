@@ -33,6 +33,7 @@ import {
   ItSystemGlobalRegisterTypesInternalV2Service,
   ItSystemGlobalRoleOptionTypesInternalV2Service,
   ItSystemGlobalSensitivePersonalDataTypesInternalV2Service,
+  ItSystemGlobalPersonalDataDeletionDeadlineTypesInternalV2Service,
   ItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2Service,
   ItSystemGlobalTechnicalSystemTypesInternalV2Service,
   OrganizationGlobalCountryCodesInternalV2Service,
@@ -62,6 +63,8 @@ export class GlobalAdminOptionTypeService {
     private readonly interfaceTypeService: ItSystemGlobalInterfaceTypesInternalV2Service,
     @Inject(ItSystemGlobalSensitivePersonalDataTypesInternalV2Service)
     private readonly sensitivePersonalDataTypeService: ItSystemGlobalSensitivePersonalDataTypesInternalV2Service,
+    @Inject(ItSystemGlobalPersonalDataDeletionDeadlineTypesInternalV2Service)
+    private readonly personalDataDeletionDeadlineTypeService: ItSystemGlobalPersonalDataDeletionDeadlineTypesInternalV2Service,
     @Inject(ItSystemGlobalItSystemCategoriesInternalV2Service)
     private readonly itSystemCategoryService: ItSystemGlobalItSystemCategoriesInternalV2Service,
     @Inject(ItSystemGlobalRegisterTypesInternalV2Service)
@@ -162,6 +165,9 @@ export class GlobalAdminOptionTypeService {
       case 'it_system_usage-gdpr-sensitive-data-type':
         return () =>
           this.sensitivePersonalDataTypeService.getManyItSystemGlobalSensitivePersonalDataTypesInternalV2GetGlobalSensitivePersonalDatas();
+      case 'it-system-usage_personal-data-deletion-deadline-type':
+        return () =>
+          this.personalDataDeletionDeadlineTypeService.getManyItSystemGlobalPersonalDataDeletionDeadlineTypesInternalV2GetPersonalDataDeletionDeadlineTypes();
       case 'it-system_usage-data-classification-type':
         return () =>
           this.itSystemCategoryService.getManyItSystemGlobalItSystemCategoriesInternalV2GetGlobalItSystemCategoriess();
@@ -303,6 +309,14 @@ export class GlobalAdminOptionTypeService {
       case 'it_system_usage-gdpr-sensitive-data-type':
         return (optionUuid: string, dto: APIGlobalRoleOptionUpdateRequestDTO) =>
           this.sensitivePersonalDataTypeService.patchSingleItSystemGlobalSensitivePersonalDataTypesInternalV2PatchGlobalSensitivePersonalData(
+            {
+              optionUuid,
+              aPIGlobalRegularOptionUpdateRequestDTO: dto,
+            },
+          );
+      case 'it-system-usage_personal-data-deletion-deadline-type':
+        return (optionUuid: string, dto: APIGlobalRoleOptionUpdateRequestDTO) =>
+          this.personalDataDeletionDeadlineTypeService.patchSingleItSystemGlobalPersonalDataDeletionDeadlineTypesInternalV2PatchPersonalDataDeletionDeadlineType(
             {
               optionUuid,
               aPIGlobalRegularOptionUpdateRequestDTO: dto,
@@ -557,6 +571,13 @@ export class GlobalAdminOptionTypeService {
       case 'it_system_usage-gdpr-sensitive-data-type':
         return (request: APIGlobalRoleOptionCreateRequestDTO) =>
           this.sensitivePersonalDataTypeService.postSingleItSystemGlobalSensitivePersonalDataTypesInternalV2CreateGlobalSensitivePersonalData(
+            {
+              aPIGlobalRegularOptionCreateRequestDTO: request,
+            },
+          );
+      case 'it-system-usage_personal-data-deletion-deadline-type':
+        return (request: APIGlobalRoleOptionCreateRequestDTO) =>
+          this.personalDataDeletionDeadlineTypeService.postSingleItSystemGlobalPersonalDataDeletionDeadlineTypesInternalV2CreatePersonalDataDeletionDeadlineType(
             {
               aPIGlobalRegularOptionCreateRequestDTO: request,
             },

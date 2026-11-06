@@ -69,3 +69,15 @@ export const ItInterfaceIdsAsCsv = 'ItInterfaceIdsAsCsv';
 export const ItInterfaceVersionsAsCsv = 'ItInterfaceVersionsAsCsv';
 export const LicensingAndCodeModels = 'LicensingAndCodeModels';
 
+
+export const PersonalDataDeletionCapability = 'PersonalDataDeletionCapability';
+export const PersonalDataDeletionMethod = 'PersonalDataDeletionMethod';
+export const PersonalDataDeletionDeadlineTypeUuid = 'PersonalDataDeletionDeadlineTypeUuid';
+export const PersonalDataDeletionDeadlineTypeName = 'PersonalDataDeletionDeadlineTypeName';
+export const PersonalDataDeletionResponsibleUserUuid = 'PersonalDataDeletionResponsibleUserUuid';
+export const PersonalDataDeletionResponsibleUserName = 'PersonalDataDeletionResponsibleUserName';
+export const PersonalDataDeletionVerifiedDate = 'PersonalDataDeletionVerifiedDate';
+export const PersonalDataDeletionProcedureDocumentationName = 'PersonalDataDeletionProcedureDocumentationName';
+export const PersonalDataDeletionProcedureDocumentationUrl = 'PersonalDataDeletionProcedureDocumentationUrl';
+export const PersonalDataDeletionVerificationDocumentationName = 'PersonalDataDeletionVerificationDocumentationName';
+export const PersonalDataDeletionVerificationDocumentationUrl = 'PersonalDataDeletionVerificationDocumentationUrl';
