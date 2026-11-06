@@ -15,11 +15,6 @@ spec:
   selector:
     matchLabels:
       app: kitos-frontend
-  strategy:
-    rollingUpdate:
-      maxSurge: 25%
-      maxUnavailable: 25%
-    type: RollingUpdate
   template:
     metadata:
       annotations:
@@ -32,10 +27,7 @@ spec:
       containers:
       - env:
         - name: BACKEND_URL
-          valueFrom:
-            configMapKeyRef:
-              key: KitosApiBaseUrlInternal
-              name: user-variables
+          value: http://ktios-api.kitos-dev
         image: ghcr.io/strongminds/kitos_frontend-kitos-frontend@sha256:6c94a1b8991c2a7d1909ddae9998c21ea0b0e7cb804d0dfefca7d22953258024
         name: kitos-frontend
         ports:
@@ -47,7 +39,7 @@ spec:
             memory: 512Mi
             cpu: 1
           requests:
-            memory: 64Mi
+            memory: 128Mi
             cpu: 100m
       imagePullSecrets:
       - name: ac6379be-068d-4385-a6c6-6a13c7f5f2e6
