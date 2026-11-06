@@ -1,4 +1,5 @@
-FROM node:22.13.0-bookworm-slim AS build
+# syntax=docker/dockerfile:1
+FROM node:22.13.0-bookworm-slim AS dependencies
 
 RUN corepack enable
 WORKDIR /app
@@ -6,8 +7,13 @@ WORKDIR /app
 COPY package.json yarn.lock ./
 RUN yarn install --frozen-lockfile
 
+FROM dependencies AS build
+
 COPY . .
-RUN NODE_OPTIONS=--max_old_space_size=5048 yarn ng build --configuration production --base-href / --localize false
+RUN --mount=type=secret,id=KENDO_UI_LICENSE,env=KENDO_UI_LICENSE,required=true \
+    test -n "$KENDO_UI_LICENSE" && \
+    yarn run kendo-ui-license activate && \
+    NODE_OPTIONS=--max_old_space_size=5048 yarn ng build --configuration production --base-href / --localize false
 
 FROM nginx:1.27-alpine
 
